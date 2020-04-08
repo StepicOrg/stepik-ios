@@ -5,7 +5,7 @@ extension StepikSocialNetworksView {
     struct Appearance {
         let backgroundColor = UIColor.clear
 
-        let titleTextColor = UIColor.stepikAccent
+        let titleTextColor = UIColor.stepikSystemLabel
         let titleFont = UIFont.systemFont(ofSize: 14)
         let titleInsets = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
 
@@ -13,7 +13,7 @@ extension StepikSocialNetworksView {
         let stackViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 24, right: 16)
         let stackViewSpacing: CGFloat = 16
 
-        let socialNetworkButtonBackgroundColor = UIColor.white
+        let socialNetworkButtonBackgroundColor = UIColor.stepikTertiaryBackground
         let socialNetworkButtonCornerRadius: CGFloat = 6
         let socialNetworkButtonSize = CGSize(width: 44, height: 44)
     }

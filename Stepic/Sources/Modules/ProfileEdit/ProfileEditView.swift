@@ -1,10 +1,10 @@
 import SnapKit
 import UIKit
 
-protocol ProfileEditViewDelegate: SettingsTableViewDelegate { }
+protocol ProfileEditViewDelegate: SettingsTableViewDelegate {}
 
 extension ProfileEditView {
-    struct Appearance { }
+    struct Appearance {}
 }
 
 final class ProfileEditView: UIView {
@@ -15,7 +15,7 @@ final class ProfileEditView: UIView {
         }
     }
 
-    private lazy var tableView = SettingsTableView(appearance: .init(style: .insetGroupedFallbackGrouped))
+    private lazy var tableView = SettingsTableView(appearance: .init(style: .stepikInsetGrouped))
 
     init(
         frame: CGRect = .zero,

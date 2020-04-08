@@ -5,7 +5,7 @@ enum ContinueCourse {
 
     /// Load last course
     enum LastCourseLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let result: Course
@@ -18,12 +18,12 @@ enum ContinueCourse {
 
     /// Go to last step
     enum ContinueCourseAction {
-        struct Request { }
+        struct Request {}
     }
 
     /// Check for tooltip
     enum TooltipAvailabilityCheck {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let shouldShowTooltip: Bool

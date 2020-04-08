@@ -23,7 +23,7 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
     private lazy var submissionsView = self.view as? SubmissionsView
     private lazy var paginationView = PaginationView()
-    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+    private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.closeButtonClicked)
     )

@@ -12,14 +12,14 @@ protocol WriteCommentViewDelegate: AnyObject {
 
 extension WriteCommentView {
     struct Appearance {
-        let backgroundColor = UIColor.white
+        let backgroundColor = UIColor.stepikBackground
 
         let solutionControlHeight: CGFloat = 44
         let solutionControlInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         let textViewTextInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
-        let textViewTextColor = UIColor.stepikAccent
+        let textViewTextColor = UIColor.stepikPrimaryText
         let textViewPlaceholderColor = UIColor.stepikPlaceholderText
     }
 }

@@ -11,12 +11,14 @@ protocol CodeQuizFullscreenViewControllerProtocol: AnyObject {
 
 extension CodeQuizFullscreenViewController {
     enum Appearance {
+        static let backgroundColor = UIColor.stepikBackground
+
         static let barTintColor = UIColor.stepikAccent
-        static let barBackgroundColor = UIColor.stepikBackground
-        static let barSeparatorColor = UIColor.gray
+        static let barBackgroundColor = UIColor.stepikNavigationBar
+        static let barSeparatorColor = UIColor.stepikOpaqueSeparator
         static let barButtonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
         static let barButtonTitleFontSelected = UIFont.systemFont(ofSize: 15)
-        static let barButtonTitleColor = UIColor.stepikAccent
+        static let barButtonTitleColor = UIColor.stepikPrimaryText
 
         static let spacingBetweenPages: CGFloat = 16.0
 
@@ -70,9 +72,7 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
         return bar
     }()
 
-    private lazy var moreBarButton = UIBarButtonItem(
-        image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
-        style: .plain,
+    private lazy var moreBarButton = UIBarButtonItem.stepikMoreBarButtonItem(
         target: self,
         action: #selector(self.actionButtonClicked)
     )
@@ -121,6 +121,7 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = Appearance.backgroundColor
         self.navigationItem.rightBarButtonItem = self.moreBarButton
 
         self.dataSource = self

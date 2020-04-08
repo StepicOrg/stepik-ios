@@ -5,7 +5,7 @@ extension DownloadControlView {
     struct Appearance {
         let circleWidth: CGFloat = 2.8
 
-        let downloadingCircleColor = UIColor.stepikGreen
+        let downloadingCircleColor = UIColor.stepikGreenFixed
         let downloadingBackgroundColor = UIColor.stepikAccentAlpha25
 
         let pendingCircleColor = UIColor.stepikAccent

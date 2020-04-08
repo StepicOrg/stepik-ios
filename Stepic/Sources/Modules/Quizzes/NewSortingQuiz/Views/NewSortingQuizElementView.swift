@@ -17,14 +17,14 @@ extension NewSortingQuizElementView {
         var containerInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-        let shadowColor = UIColor(hex6: 0xEAECF0)
+        let shadowColor = UIColor.stepikGrey4Fixed
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
 
         let navigationButtonSize = CGSize(width: 24, height: 24)
         let navigationButtonImageSize = CGSize(width: 20, height: 20)
-        let navigationButtonTintColorActive = UIColor.stepikAccent
-        let navigationButtonTintColorInactive = UIColor(hex6: 0xCCCCCC)
+        let navigationButtonTintColorActive = UIColor.stepikPrimaryText
+        let navigationButtonTintColorInactive = UIColor.stepikSeparator
         let navigationButtonVerticalSpacing: CGFloat = 16
         let navigationButtonHorizontalSpacing: CGFloat = 8
     }
@@ -121,7 +121,7 @@ final class NewSortingQuizElementView: UIView {
 
     var isShadowVisible: Bool = true {
         didSet {
-            self.shadowView.isHidden = !self.isShadowVisible
+            self.updateShadowVisibility()
         }
     }
 
@@ -155,6 +155,14 @@ final class NewSortingQuizElementView: UIView {
         }
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateShadowVisibility()
+        }
+    }
+
     // MARK: - Public API
 
     func configure(viewModel: ViewModel) {
@@ -179,6 +187,14 @@ final class NewSortingQuizElementView: UIView {
     }
 
     // MARK: - Private API
+
+    private func updateShadowVisibility() {
+        if self.isDarkInterfaceStyle {
+            self.shadowView.isHidden = true
+        } else {
+            self.shadowView.isHidden = !self.isShadowVisible
+        }
+    }
 
     @objc
     private func topNavigationButtonClicked() {

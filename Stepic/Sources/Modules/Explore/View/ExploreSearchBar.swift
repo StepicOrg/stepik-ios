@@ -4,7 +4,7 @@ import UIKit
 final class ExploreSearchBar: UISearchBar {
     enum Appearance {
         static let searchFieldPositionAdjustment = UIOffset(horizontal: -6, vertical: 0)
-        static let textColor = UIColor.stepikAccent
+        static let textColor = UIColor.stepikPrimaryText
 
         // Height should be fixed and leq than 44pt (due to iOS 11+ strange nav bar)
         static let barHeight: CGFloat = 44.0

@@ -150,7 +150,7 @@ class DownloaderSpec: QuickSpec {
                     waitUntil { done in
                         task.failureReporter = { error in
                             expect(task.state) == .stopped
-                            if case DownloaderError.serverSide(_) = error { } else {
+                            if case DownloaderError.serverSide(_) = error {} else {
                                 fail("after server side error reported wrong error")
                             }
 

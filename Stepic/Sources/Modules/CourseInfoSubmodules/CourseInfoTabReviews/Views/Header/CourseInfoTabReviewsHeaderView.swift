@@ -5,16 +5,18 @@ extension CourseInfoTabReviewsHeaderView {
     struct Appearance {
         let buttonSpacing: CGFloat = 14.0
 
-        let buttonTintColor = UIColor.stepikAccent
+        let buttonTintColor = UIColor.stepikPrimaryText
         let buttonFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let buttonImageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 4)
         let buttonTitleInsets = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0)
         let buttonImageSize = CGSize(width: 15, height: 15)
 
         let labelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let labelTextColor = UIColor.stepikAccent
+        let labelTextColor = UIColor.stepikPrimaryText
 
         let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+
+        let separatorHeight: CGFloat = 0.5
     }
 }
 
@@ -170,7 +172,7 @@ extension CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProto
                 .equalTo(self.stackView.snp.bottom)
                 .offset(self.appearance.insets.bottom)
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(SeparatorView.Appearance().height)
+            make.height.equalTo(self.appearance.separatorHeight)
         }
     }
 }

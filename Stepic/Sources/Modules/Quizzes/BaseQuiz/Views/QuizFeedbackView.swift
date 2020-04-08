@@ -14,7 +14,7 @@ extension QuizFeedbackView {
         let titleInsets = LayoutInsets(top: 15, left: 56, bottom: 15, right: 16)
         let leftViewInsets = LayoutInsets(left: 16, right: 16)
 
-        let feedbackBackgroundColor = UIColor(hex6: 0xF6F6F6)
+        let feedbackBackgroundColor = UIColor.stepikLightSecondaryBackground
         let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }
@@ -160,22 +160,22 @@ final class QuizFeedbackView: UIView {
         var mainColor: UIColor {
             switch self {
             case .correct:
-                return UIColor(hex6: 0xE9F9E9)
+                return .quizElementCorrectBackgroundColor
             case .wrong:
-                return UIColor(hex6: 0xFF7965).withAlphaComponent(0.15)
+                return .quizElementWrongBackgroundColor
             default:
-                return UIColor(hex6: 0xE9EBFA)
+                return .quizElementEvaluationBackgroundColor
             }
         }
 
         var titleColor: UIColor {
             switch self {
             case .correct:
-                return UIColor(hex6: 0x66CC66)
+                return .stepikCallToActionText
             case .wrong:
-                return UIColor(hex6: 0xFF7965)
+                return .stepikLightRedFixed
             default:
-                return UIColor(hex6: 0x6C7BDF)
+                return .dynamic(light: .stepikViolet1Fixed, dark: .stepikViolet2Fixed)
             }
         }
 
@@ -196,7 +196,7 @@ final class QuizFeedbackView: UIView {
                 view.tintColor = self.titleColor
                 return view
             case .evaluation:
-                let indicatorView = UIActivityIndicatorView(style: .white)
+                let indicatorView = UIActivityIndicatorView(style: .stepikWhite)
                 indicatorView.startAnimating()
                 indicatorView.color = self.titleColor
                 return indicatorView

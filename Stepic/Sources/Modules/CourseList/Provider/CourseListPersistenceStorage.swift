@@ -28,8 +28,7 @@ final class PassiveCourseListPersistenceStorage: CourseListPersistenceStorage {
         self.list = cachedList
     }
 
-    func update(newCachedList: [Course.IdType]) {
-    }
+    func update(newCachedList: [Course.IdType]) {}
 
     func getCoursesList() -> [Course.IdType] { self.list }
 }

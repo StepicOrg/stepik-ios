@@ -8,9 +8,9 @@ extension CodeDetailsButton {
         let insets = LayoutInsets(left: 16, right: 16)
         let horizontalSpacing: CGFloat = 16
 
-        let mainColor = UIColor.stepikAccent
+        let mainColor = UIColor.stepikPrimaryText
         let textFont = UIFont.systemFont(ofSize: 16)
-        let backgroundColor = UIColor(hex6: 0xF6F6F6)
+        let backgroundColor = UIColor.stepikLightSecondaryBackground
     }
 
     enum Animation {

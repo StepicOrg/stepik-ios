@@ -12,7 +12,7 @@ enum Downloads {
 
     /// Show downloads
     enum DownloadsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let data: DownloadsData

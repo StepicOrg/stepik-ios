@@ -9,7 +9,7 @@ extension CourseInfoTabSyllabusCellView {
         let coverImageViewInsets = UIEdgeInsets(top: 20, left: 23, bottom: 20, right: 0)
         let coverImageViewSize = CGSize(width: 30, height: 30)
 
-        let titleTextColor = UIColor.stepikAccent
+        let titleTextColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 14)
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 16)
 
@@ -18,14 +18,14 @@ extension CourseInfoTabSyllabusCellView {
         let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
 
         let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let downloadedSizeLabelTextColor = UIColor.stepikAccent
+        let downloadedSizeLabelTextColor = UIColor.stepikPrimaryText
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 16)
         let statsViewHeight: CGFloat = 17.0
 
         let progressViewHeight: CGFloat = 3
-        let progressViewMainColor = UIColor.stepikGreen
+        let progressViewMainColor = UIColor.stepikGreenFixed
         let progressViewSecondaryColor = UIColor.clear
 
         let tapProxyViewSize = CGSize(width: 60, height: 60)
@@ -210,6 +210,10 @@ final class CourseInfoTabSyllabusCellView: UIView {
 // MARK: - CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.backgroundColor = .stepikBackground
+    }
+
     func addSubviews() {
         self.addSubview(self.downloadButton)
         self.addSubview(self.downloadedSizeLabel)

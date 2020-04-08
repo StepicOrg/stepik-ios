@@ -8,7 +8,7 @@ extension UIColor {
     ///   - dark: Color to use in dark mode.
     ///   - lightAccessibility: Color to use in light/unspecified mode and with a high contrast level.
     ///   - darkAccessibility: Color to use in dark mode and with a high contrast level.
-    static func dynamicColor(
+    static func dynamic(
         light: UIColor,
         dark: UIColor,
         lightAccessibility: UIColor? = nil,

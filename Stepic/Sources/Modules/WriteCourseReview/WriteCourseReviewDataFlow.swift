@@ -12,7 +12,7 @@ enum WriteCourseReview {
 
     /// Show course review
     enum CourseReviewLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let result: CourseReviewInfo
@@ -55,7 +55,7 @@ enum WriteCourseReview {
 
     /// Do review main action (screate or update)
     enum CourseReviewMainAction {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isSuccessful: Bool

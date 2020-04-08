@@ -56,11 +56,11 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
         self.presenter.presentAuthorization(response: .init())
     }
 
-    func presentError(sourceModule: CourseListInputProtocol) { }
-
-    func presentEmptyState(sourceModule: CourseListInputProtocol) { }
-
     func presentPaidCourseInfo(course: Course) {
         self.presenter.presentPaidCourseBuying(response: .init(course: course))
     }
+
+    func presentEmptyState(sourceModule: CourseListInputProtocol) {}
+
+    func presentError(sourceModule: CourseListInputProtocol) {}
 }

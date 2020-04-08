@@ -4,7 +4,7 @@ import Foundation
 import YandexMobileMetrica
 
 final class AnalyticsReporter {
-    private init() { }
+    private init() {}
 
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
         let params = parameters as? [String: NSObject]

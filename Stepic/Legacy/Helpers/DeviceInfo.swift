@@ -14,7 +14,7 @@ final class DeviceInfo {
 
     private var currentDevice: DeviceKit.Device = DeviceKit.Device.current
 
-    private init() { }
+    private init() {}
 
     var isPad: Bool { self.currentDevice.isPad }
 

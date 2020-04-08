@@ -5,19 +5,19 @@ import UIKit
 
 extension EditStepView {
     struct Appearance {
-        let backgroundColor = UIColor.white
+        let backgroundColor = UIColor.stepikBackground
 
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
         let messageFont = UIFont.systemFont(ofSize: 12)
-        let messageTextColor = UIColor(hex6: 0x8E8E93)
+        let messageTextColor = UIColor.stepikSecondaryText
         let messageLabelInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let separatorInsets = LayoutInsets(top: 8)
 
         let textViewTextInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
-        let textViewTextColor = UIColor.stepikAccent
+        let textViewTextColor = UIColor.stepikPrimaryText
         let textViewPlaceholderColor = UIColor.stepikPlaceholderText
     }
 }
@@ -68,7 +68,7 @@ final class EditStepView: UIView {
     }()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhiteLarge)
         loadingIndicatorView.color = self.appearance.loadingIndicatorColor
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()
@@ -143,8 +143,12 @@ extension EditStepView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.messageLabel.translatesAutoresizingMaskIntoConstraints = false
         self.messageLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(self.appearance.messageLabelInsets.left)
-            make.top.equalToSuperview().offset(self.appearance.messageLabelInsets.top)
+            make.leading
+                .equalTo(self.safeAreaLayoutGuide.snp.leading)
+                .offset(self.appearance.messageLabelInsets.left)
+            make.top
+                .equalToSuperview()
+                .offset(self.appearance.messageLabelInsets.top)
             make.trailing
                 .equalTo(self.safeAreaLayoutGuide.snp.trailing)
                 .offset(-self.appearance.messageLabelInsets.right)
@@ -153,7 +157,9 @@ extension EditStepView: ProgrammaticallyInitializableViewProtocol {
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.messageLabel.snp.bottom).offset(self.appearance.separatorInsets.top)
+            make.top
+                .equalTo(self.messageLabel.snp.bottom)
+                .offset(self.appearance.separatorInsets.top)
         }
 
         self.textView.translatesAutoresizingMaskIntoConstraints = false

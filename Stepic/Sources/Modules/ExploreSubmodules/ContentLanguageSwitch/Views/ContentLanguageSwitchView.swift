@@ -10,10 +10,10 @@ protocol ContentLanguageSwitchViewDelegate: AnyObject {
 
 extension ContentLanguageSwitchView {
     struct Appearance {
-        let headerTitleColor = UIColor.stepikAccentAlpha30
+        let headerTitleColor = UIColor.stepikTertiaryText
 
         let descriptionFont = UIFont.systemFont(ofSize: 14)
-        let descriptionTextColor = UIColor.lightGray
+        let descriptionTextColor = UIColor.stepikTertiaryText
         let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 20, bottom: 16, right: 20)
 
         let buttonsInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
@@ -139,7 +139,7 @@ final class ContentLanguageSwitchView: UIView {
 
 extension ContentLanguageSwitchView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
     }
 
     func addSubviews() {
@@ -163,7 +163,9 @@ extension ContentLanguageSwitchView: ProgrammaticallyInitializableViewProtocol {
 
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-self.appearance.descriptionLabelInsets.bottom)
+            make.bottom
+                .equalToSuperview()
+                .offset(-self.appearance.descriptionLabelInsets.bottom)
             make.top
                 .equalTo(self.buttonsStackView.snp.bottom)
                 .offset(self.appearance.descriptionLabelInsets.top)

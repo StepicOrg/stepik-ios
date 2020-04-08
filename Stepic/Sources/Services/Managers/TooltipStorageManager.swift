@@ -35,5 +35,5 @@ final class TooltipStorageManager: TooltipStorageManagerProtocol {
         }
     }
 
-    init() { }
+    init() {}
 }

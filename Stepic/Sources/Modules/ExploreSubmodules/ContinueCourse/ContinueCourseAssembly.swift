@@ -37,6 +37,7 @@ final class ContinueCourseAssembly: Assembly {
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput
+
         return viewController
     }
 }

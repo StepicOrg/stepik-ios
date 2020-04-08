@@ -9,7 +9,7 @@ extension StepNavigationButton {
         let borderWidth: CGFloat = 1
         let cornerRadius: CGFloat = 6
 
-        let backgroundColor = UIColor.white
+        let backgroundColor = UIColor.stepikBackground
         let mainColor = UIColor.stepikGreen
 
         let textColor = UIColor.stepikGreen

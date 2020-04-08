@@ -10,7 +10,7 @@ extension DownloadsCellView {
         let titleInsets = LayoutInsets(left: 8)
 
         let subtitleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-        let subtitleTextColor = UIColor(hex6: 0x8E8E93)
+        let subtitleTextColor = UIColor.stepikSecondaryText
         let subtitleMaxLinesCount = 1
     }
 }

@@ -4,7 +4,7 @@ import UIKit
 
 extension StepVideoPreviewView {
     struct Appearance {
-        let overlayColor = UIColor.stepikAccentAlpha40
+        let overlayColor = UIColor.stepikOverlay
 
         let introVideoHeightRatio: CGFloat = 9 / 16
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
@@ -96,7 +96,7 @@ final class StepVideoPreviewView: UIControl {
 
 extension StepVideoPreviewView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
 
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(self.gestureRecognizer)

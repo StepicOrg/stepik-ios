@@ -8,7 +8,7 @@ extension ContinueLastStepView {
         let cornerRadius: CGFloat = 8.0
 
         let progressHeight: CGFloat = 3.0
-        let progressFillColor = UIColor.stepikGreen
+        let progressFillColor = UIColor.stepikGreenFixed
         let progressBackgroundColor = UIColor.clear
 
         let lightModeBackgroundOverlayViewColor = UIColor.stepikAccentFixed.withAlphaComponent(0.85)
@@ -165,12 +165,9 @@ final class ContinueLastStepView: UIView {
 
     private func updateViewColor() {
         self.progressView.progressTintColor = self.appearance.progressFillColor
-
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.overlayView.backgroundColor = self.appearance.darkModeBackgroundOverlayViewColor
-        } else {
-            self.overlayView.backgroundColor = self.appearance.lightModeBackgroundOverlayViewColor
-        }
+        self.overlayView.backgroundColor = self.isDarkInterfaceStyle
+            ? self.appearance.darkModeBackgroundOverlayViewColor
+            : self.appearance.lightModeBackgroundOverlayViewColor
     }
 
     @objc

@@ -1,3 +1,5 @@
+import Foundation
+
 enum CourseList {
     // MARK: Common structs
 
@@ -24,7 +26,7 @@ enum CourseList {
 
     /// Load and show courses for given course list
     enum CoursesLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isAuthorized: Bool
@@ -37,7 +39,7 @@ enum CourseList {
     }
     /// Load and show next course page for given course list
     enum NextCoursesLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isAuthorized: Bool

@@ -7,7 +7,7 @@ extension CourseInfoTabInfoTextBlockView {
 
         let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
         let messageLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let messageLabelTextColor = UIColor.stepikAccent
+        let messageLabelTextColor = UIColor.stepikSecondaryText
 
         let messageLabelLineSpacing: CGFloat = 2.6
     }
@@ -64,7 +64,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
 extension CourseInfoTabInfoTextBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     func addSubviews() {

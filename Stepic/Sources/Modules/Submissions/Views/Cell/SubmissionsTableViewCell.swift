@@ -6,7 +6,7 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         static let separatorLeadingOffset: CGFloat = 16
     }
 
-    enum SeparatorIndentationType {
+    enum SeparatorIndentationStyle {
         case indented
         case edgeToEdge
 
@@ -25,9 +25,9 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
     private lazy var separatorView = SeparatorView()
     private var separatorLeadingConstraint: Constraint?
 
-    var separatorIndentation: SeparatorIndentationType = .indented {
+    var separatorIndentationStyle: SeparatorIndentationStyle = .indented {
         didSet {
-            self.separatorLeadingConstraint?.update(offset: self.separatorIndentation.offset)
+            self.separatorLeadingConstraint?.update(offset: self.separatorIndentationStyle.offset)
         }
     }
 
@@ -83,7 +83,7 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
             make.top.equalTo(self.cellView.snp.bottom)
             self.separatorLeadingConstraint = make.leading
                 .equalToSuperview()
-                .offset(self.separatorIndentation.offset)
+                .offset(self.separatorIndentationStyle.offset)
                 .constraint
             make.bottom.equalToSuperview().priority(999)
             make.trailing.equalToSuperview()

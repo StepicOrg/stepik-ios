@@ -13,7 +13,7 @@ extension SolutionView {
 
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
-        let actionButtonBackgroundColor = UIColor.stepikGreen
+        let actionButtonBackgroundColor = UIColor.dynamic(light: .stepikGreen, dark: .stepikDarkGreenFixed)
         let actionButtonHeight: CGFloat = 44
         let actionButtonTextColor = UIColor.white
         let actionButtonCornerRadius: CGFloat = 6
@@ -31,7 +31,7 @@ final class SolutionView: UIView {
     weak var delegate: SolutionViewDelegate?
 
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .white)
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhite)
         loadingIndicatorView.color = self.appearance.loadingIndicatorColor
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()
@@ -147,7 +147,7 @@ final class SolutionView: UIView {
 
 extension SolutionView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
     }
 
     func addSubviews() {

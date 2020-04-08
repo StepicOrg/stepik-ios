@@ -8,7 +8,7 @@ protocol WriteCourseReviewViewDelegate: AnyObject {
 
 extension WriteCourseReviewView {
     struct Appearance {
-        let backgroundColor = UIColor.white
+        let backgroundColor = UIColor.stepikBackground
 
         let starsViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
         let starsClearColor = UIColor.stepikAccent
@@ -17,13 +17,13 @@ extension WriteCourseReviewView {
 
         let starsHintLabelInsets = LayoutInsets(top: 8)
         let starsHintLabelFont = UIFont.systemFont(ofSize: 12)
-        let starsHintLabelTextColor = UIColor.stepikAccent
+        let starsHintLabelTextColor = UIColor.stepikPrimaryText
 
         let separatorViewInsets = LayoutInsets(top: 16, left: 16)
 
         let textViewInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
-        let textViewTextColor = UIColor.stepikAccent
+        let textViewTextColor = UIColor.stepikPrimaryText
         let textViewPlaceholderColor = UIColor.stepikPlaceholderText
     }
 }
@@ -35,7 +35,7 @@ final class WriteCourseReviewView: UIView {
 
     private lazy var starsView: CourseRatingView = {
         var appearance = CourseRatingView.Appearance()
-        appearance.statClearColor = self.appearance.starsClearColor
+        appearance.starClearColor = self.appearance.starsClearColor
         appearance.starsSpacing = self.appearance.starsSpacing
         appearance.starsSize = self.appearance.starsSize
         let view = CourseRatingView(appearance: appearance)

@@ -79,7 +79,7 @@ final class SocialAuthViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
 
-    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+    private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.onCloseClick(_:))
     )
@@ -342,7 +342,7 @@ final class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     override var itemSize: CGSize {
-        set { }
+        set {}
         get {
              CGSize(width: itemSizeHeight, height: itemSizeHeight)
         }

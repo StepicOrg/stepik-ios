@@ -22,8 +22,7 @@ final class ContinueCourseProvider: ContinueCourseProviderProtocol {
 
     func fetchLastCourse() -> Promise<Course?> {
         Promise { seal in
-            self.userCoursesAPI.retrieve(page: 1).then {
-                result -> Promise<[Course]> in
+            self.userCoursesAPI.retrieve(page: 1).then { result -> Promise<[Course]> in
                 let lastCourse = result.0
                     .sorted(by: { $0.lastViewed > $1.lastViewed })
                     .prefix(1)
@@ -32,9 +31,9 @@ final class ContinueCourseProvider: ContinueCourseProviderProtocol {
                 return self.coursesAPI.retrieve(ids: coursesIDs)
             }.then { courses -> Promise<(Course?, Progress?)> in
                 if let course = courses.first,
-                   let progressId = course.progressId {
+                   let progressID = course.progressId {
                     return self.progressesNetworkService
-                        .fetch(id: progressId)
+                        .fetch(id: progressID)
                         .map { (course, $0) }
                 } else {
                     return Promise.value((nil, nil))

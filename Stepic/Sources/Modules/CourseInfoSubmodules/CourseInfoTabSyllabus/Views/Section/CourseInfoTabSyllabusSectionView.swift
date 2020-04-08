@@ -3,27 +3,27 @@ import UIKit
 
 extension CourseInfoTabSyllabusSectionView {
     struct Appearance {
-        let backgroundColor = UIColor(hex6: 0xf6f6f6)
+        let backgroundColor = UIColor.stepikLightSecondaryBackground
 
-        let indexTextColor = UIColor.stepikAccent
+        let indexTextColor = UIColor.stepikPrimaryText
         let indexFont = UIFont.systemFont(ofSize: 15)
         let indexLabelInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
         // Width for two-digit indexes
         let indexLabelWidth: CGFloat = 16
 
-        let examTextColor = UIColor.stepikAccent
+        let examTextColor = UIColor.stepikPrimaryText
         let examFont = UIFont.systemFont(ofSize: 14, weight: .light)
 
         let textStackViewSpacing: CGFloat = 10
         let textStackViewInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
 
-        let titleTextColor = UIColor.stepikAccent
+        let titleTextColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 14)
 
-        let progressTextColor = UIColor.stepikAccent
+        let progressTextColor = UIColor.stepikPrimaryText
         let progressTextFont = UIFont.systemFont(ofSize: 14, weight: .light)
 
-        let requirementsTextColor = UIColor.stepikAccent
+        let requirementsTextColor = UIColor.stepikPrimaryText
         let requirementsTextFont = UIFont.systemFont(ofSize: 12)
 
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
@@ -31,13 +31,13 @@ extension CourseInfoTabSyllabusSectionView {
         let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
 
         let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let downloadedSizeLabelTextColor = UIColor.stepikAccent
+        let downloadedSizeLabelTextColor = UIColor.stepikPrimaryText
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let deadlinesInsets = UIEdgeInsets(top: 16, left: 0, bottom: 19, right: 0)
 
         let progressViewHeight: CGFloat = 3
-        let progressViewMainColor = UIColor.stepikGreen
+        let progressViewMainColor = UIColor.stepikGreenFixed
         let progressViewSecondaryColor = UIColor.clear
 
         let tapProxyViewSize = CGSize(width: 60, height: 60)

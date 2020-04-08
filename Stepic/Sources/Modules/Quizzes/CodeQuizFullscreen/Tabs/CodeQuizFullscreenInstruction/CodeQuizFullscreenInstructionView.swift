@@ -27,7 +27,7 @@ final class CodeQuizFullscreenInstructionView: UIView {
     weak var delegate: CodeQuizFullscreenInstructionViewDelegate?
 
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhiteLarge)
         loadingIndicatorView.color = self.appearance.loadingIndicatorColor
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()

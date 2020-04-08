@@ -3,17 +3,17 @@ import UIKit
 
 class StyledNavigationController: UINavigationController {
     enum Appearance {
-        static let backgroundColor = UIColor.stepikBackground
-        static let statusBarColor = UIColor.stepikBackground
+        static let backgroundColor = UIColor.stepikNavigationBar
+        static let statusBarColor = UIColor.stepikNavigationBar
         static let tintColor = UIColor.stepikAccent
         static let textColor = UIColor.stepikAccent
 
         static let titleFont = UIFont.systemFont(ofSize: 17, weight: .regular)
 
-        static let shadowViewColor = UIColor.lightGray
+        static let shadowViewColor = UIColor.stepikOpaqueSeparator
         static let shadowViewHeight: CGFloat = 0.5
 
-        static let statusBarStyle = UIStatusBarStyle.dark
+        static let statusBarStyle = UIStatusBarStyle.default
     }
 
     struct NavigationBarAppearanceState {

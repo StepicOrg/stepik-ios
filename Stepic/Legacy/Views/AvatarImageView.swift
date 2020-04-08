@@ -8,35 +8,35 @@
 
 import Alamofire
 import SVGKit
+import SnapKit
 import UIKit
 
 final class AvatarImageView: UIImageView {
-    enum Shape {
-        case rectangle(cornerRadius: CGFloat)
-        case circle
-    }
-
-    private let colors: [Int] = [0x69A1E5, 0xFFD19F, 0xE8B9B9, 0x85C096, 0xE1B3EA, 0xABE5D8]
+    private static let colorsLight: [UInt32] = [0x69A1E5, 0xFFD19F, 0xE8B9B9, 0x85C096, 0xE1B3EA, 0xABE5D8]
+    private static let colorsDark: [UInt32] = [0x184D8E, 0xCF6B00, 0x9C3333, 0x376B46, 0x8E2CA1, 0x2F9881]
 
     var shape: Shape = .circle {
         didSet {
-            updateShape()
+            self.updateShape()
         }
+    }
+
+    private var colors: [UInt32] {
+        self.isDarkInterfaceStyle ? Self.colorsDark : Self.colorsLight
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateShape()
+        self.updateShape()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        reset()
+        self.reset()
     }
 
     private func updateShape() {
-        switch shape {
+        switch self.shape {
         case .circle:
             self.setRoundedBounds(width: 0)
         case .rectangle(let radius):
@@ -45,7 +45,7 @@ final class AvatarImageView: UIImageView {
     }
 
     func reset() {
-        image = Constants.placeholderImage
+        self.image = UIImage(named: "lesson_cover_50")
     }
 
     func set(with url: URL) {
@@ -91,7 +91,7 @@ final class AvatarImageView: UIImageView {
         label.textColor = UIColor.white
         label.text = letters
         label.textAlignment = NSTextAlignment.center
-        label.backgroundColor = UIColor(hex6: UInt32(colors[letters.hash % colors.count]))
+        label.backgroundColor = UIColor(hex6: self.colors[letters.hash % self.colors.count])
 
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, scale)
@@ -111,5 +111,12 @@ final class AvatarImageView: UIImageView {
             return letters.count <= 2 ? letters : nil
         }
         return nil
+    }
+
+    // MARK: Inner Types
+
+    enum Shape {
+        case rectangle(cornerRadius: CGFloat)
+        case circle
     }
 }

@@ -3,7 +3,7 @@ import UIKit
 
 extension ExploreBlockContainerView {
     struct Appearance {
-        let separatorColor = UIColor.stepikOpaqueSeparator
+        let separatorColor = UIColor.stepikSeparator
         var backgroundColor = UIColor.stepikBackground
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)

@@ -7,8 +7,10 @@ extension StreakActivityView {
         let iconInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 5)
         let descriptionInsets = UIEdgeInsets(top: 12, left: 22, bottom: 12, right: 10)
 
-        let lightModeBackgroundColor = UIColor.stepikLightBlue.withAlphaComponent(0.08)
-        let darkModeBackgroundColor = UIColor.stepikSecondaryBackground
+        let backgroundColor = UIColor.dynamic(
+            light: UIColor.stepikLightBlue.withAlphaComponent(0.08),
+            dark: .stepikSecondaryBackground
+        )
         let cornerRadius: CGFloat = 8.0
 
         let streakIconColor = UIColor.stepikAccent
@@ -24,7 +26,7 @@ final class StreakActivityView: UIView {
 
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = self.appearance.lightModeBackgroundColor
+        view.backgroundColor = self.appearance.backgroundColor
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.cornerRadius
         return view
@@ -87,7 +89,6 @@ final class StreakActivityView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -101,29 +102,9 @@ final class StreakActivityView: UIView {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
     }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
-            self.updateViewColor()
-        }
-    }
-
-    private func updateViewColor() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.backgroundView.backgroundColor = self.appearance.darkModeBackgroundColor
-        } else {
-            self.backgroundView.backgroundColor = self.appearance.lightModeBackgroundColor
-        }
-    }
 }
 
 extension StreakActivityView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.updateViewColor()
-    }
-
     func addSubviews() {
         self.addSubview(self.backgroundView)
         self.backgroundView.addSubview(self.iconStackView)

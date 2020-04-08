@@ -37,8 +37,7 @@ final class BaseExploreView: UIView {
     }
 
     func insertBlockView(_ view: UIView, before previousView: UIView) {
-        for (index, subview) in self.scrollableStackView.arrangedSubviews.enumerated()
-            where subview === previousView {
+        for (index, subview) in self.scrollableStackView.arrangedSubviews.enumerated() where subview === previousView {
             self.scrollableStackView.insertArrangedView(view, at: index)
             return
         }

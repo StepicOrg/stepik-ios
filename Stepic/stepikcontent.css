@@ -1,10 +1,17 @@
 :root {
+    color-scheme: light dark;
     --textColor: #535366;
     --body-font-size: 12pt;
     --h1-font-size: 20pt;
     --h2-font-size: 17pt;
     --h3-font-size: 14pt;
     --blockquote-font-size: 16px;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --textColor: #D3D2E9;
+    }
 }
 
 html {

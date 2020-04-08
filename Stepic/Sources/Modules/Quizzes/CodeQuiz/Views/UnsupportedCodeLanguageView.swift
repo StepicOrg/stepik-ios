@@ -5,7 +5,7 @@ extension UnsupportedCodeLanguageView {
     struct Appearance {
         let height: CGFloat = 236
         let textFont = UIFont.systemFont(ofSize: 16)
-        let textColor = UIColor.lightGray
+        let textColor = UIColor.stepikSecondaryText
     }
 }
 

@@ -1,3 +1,3 @@
 import Foundation
 
-protocol CourseInfoTabInfoInputProtocol: CourseInfoSubmoduleProtocol { }
+protocol CourseInfoTabInfoInputProtocol: CourseInfoSubmoduleProtocol {}

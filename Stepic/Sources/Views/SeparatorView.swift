@@ -6,7 +6,7 @@ extension SeparatorView {
         /// UITableView's default separator height.
         let height: CGFloat = 1.0
         /// UITableView's default separator color.
-        let color = UIColor(hex6: 0xC8C7CC)
+        let color = UIColor.stepikSeparator
     }
 }
 

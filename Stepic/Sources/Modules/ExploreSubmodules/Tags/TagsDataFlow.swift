@@ -14,7 +14,7 @@ enum Tags {
 
     /// Show tag list
     enum TagsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let result: StepikResult<[(UniqueIdentifierType, Tag)]>

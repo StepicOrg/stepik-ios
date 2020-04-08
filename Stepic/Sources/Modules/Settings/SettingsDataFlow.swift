@@ -56,6 +56,27 @@ enum Settings {
         }
     }
 
+    /// Presents application theme setting screen.
+    enum ApplicationThemeSettingPresentation {
+        struct Request {}
+
+        struct Response {
+            let availableApplicationThemes: [ApplicationTheme]
+            let currentApplicationTheme: ApplicationTheme
+        }
+
+        struct ViewModel {
+            let settingDescription: SettingDescription
+        }
+    }
+
+    /// Updates application theme setting.
+    enum ApplicationThemeSettingUpdate {
+        struct Request {
+            let setting: SettingDescription.Setting
+        }
+    }
+
     /// Presents content language setting screen.
     enum ContentLanguageSettingPresentation {
         struct Request {}
@@ -153,6 +174,7 @@ enum Settings {
     struct SettingsData {
         let downloadVideoQuality: DownloadVideoQuality
         let streamVideoQuality: StreamVideoQuality
+        let applicationTheme: ApplicationTheme
         let contentLanguage: ContentLanguage
         let stepFontSize: StepFontSize
         let shouldUseCellularDataForDownloads: Bool

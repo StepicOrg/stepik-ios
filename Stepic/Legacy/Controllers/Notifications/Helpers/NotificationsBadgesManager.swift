@@ -33,7 +33,7 @@ final class NotificationsBadgesManager {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func setup() { }
+    func setup() {}
 
     @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,

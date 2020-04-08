@@ -8,7 +8,7 @@ extension PlayNextCircleControlView {
         let iconImageTintColor = UIColor.white
 
         let circleWidth: CGFloat = 4
-        let circleProgressColor = UIColor.stepikGreen
+        let circleProgressColor = UIColor.stepikGreenFixed
         let circleTrackColor = UIColor.white
     }
 }

@@ -6,7 +6,7 @@ final class FullscreenCourseListView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
     }
 
     func attachContentView(_ view: UIView) {

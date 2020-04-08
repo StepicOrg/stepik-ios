@@ -50,11 +50,11 @@ final class CourseListProvider: CourseListProviderProtocol {
         Promise { seal in
             self.networkService.fetch(page: page).then {
                 (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
-                let progressIDs = courses.compactMap { $0.progressId }
+                let progressesIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }
 
                 return when(
-                    fulfilled: self.progressesNetworkService.fetch(ids: progressIDs, page: 1),
+                    fulfilled: self.progressesNetworkService.fetch(ids: progressesIDs, page: 1),
                     self.reviewSummariesNetworkService.fetch(ids: summariesIDs, page: 1)
                 ).compactMap { (courses, meta, $0.0, $1.0) }
             }.then { (courses, meta, progresses, reviewSummaries) -> Guarantee<([Course], Meta)> in

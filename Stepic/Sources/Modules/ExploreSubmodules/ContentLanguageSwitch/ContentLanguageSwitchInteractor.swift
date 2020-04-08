@@ -21,12 +21,19 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
     }
 
     func doLanguagesListPresentation(request: ContentLanguageSwitch.LanguagesLoad.Request) {
+        let availableContentLanguagesGuarantee = self.provider.fetchAvailableLanguages()
+        let currentContentLanguageGuarantee = self.provider.fetchCurrentLanguage()
+
         when(
-            fulfilled: self.provider.fetchAvailableLanguages(),
-            self.provider.fetchCurrentLanguage()
-        ).done { (availableContentLanguages, currentContentLanguage) in
-            let languages = availableContentLanguages.map {
-                language -> (UniqueIdentifierType, ContentLanguage) in
+            availableContentLanguagesGuarantee.asVoid(),
+            currentContentLanguageGuarantee.asVoid()
+        ).done {
+            guard let availableContentLanguages = availableContentLanguagesGuarantee.value,
+                  let currentContentLanguage = currentContentLanguageGuarantee.value else {
+                return
+            }
+
+            let languages = availableContentLanguages.map { language -> (UniqueIdentifierType, ContentLanguage) in
                 (language.languageString, language)
             }
 
@@ -39,8 +46,6 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
                     )
                 )
             )
-        }.catch { _ in
-            fatalError("Unexpected error while extracting info about languages")
         }
     }
 
