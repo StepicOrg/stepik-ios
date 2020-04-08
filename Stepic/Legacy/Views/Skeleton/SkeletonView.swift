@@ -67,14 +67,9 @@ class SkeletonView: UIView {
 
     private func addGradient() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor.skeletonGradientFirst.cgColor,
-            UIColor.skeletonGradientSecond.cgColor,
-            UIColor.skeletonGradientThird.cgColor
-        ]
-
         self.layer.addSublayer(gradientLayer)
         self.gradientLayer = gradientLayer
+        self.updateGradientColors()
     }
 
     private func rebuild(cleanCache: Bool) {
@@ -154,8 +149,24 @@ class SkeletonView: UIView {
 
         self.setNeedsLayout()
 
-        rebuild(cleanCache: false)
-        gradientLayer?.frame = self.bounds
-        animate()
+        self.rebuild(cleanCache: false)
+        self.gradientLayer?.frame = self.bounds
+        self.animate()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateGradientColors()
+        }
+    }
+
+    private func updateGradientColors() {
+        self.gradientLayer?.colors = [
+            UIColor.skeletonGradientFirst.cgColor,
+            UIColor.skeletonGradientSecond.cgColor,
+            UIColor.skeletonGradientThird.cgColor
+        ]
     }
 }
