@@ -34,14 +34,13 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
     func registerDefaultTheme() {
         if #available(iOS 13.0, *) {
             guard self.remoteConfig.isDarkModeAvailable else {
-                self.theme = .light
-                return
+                return self.applyTheme(.light)
             }
 
             if let userSelectedApplicationTheme = self.getApplicationTheme() {
                 self.applyTheme(userSelectedApplicationTheme)
             } else {
-                self.theme = .default
+                self.applyTheme(.default)
             }
         }
     }

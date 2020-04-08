@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsBadgesManager.shared.setup()
 
         RemoteConfig.shared.setup()
+        RemoteConfig.shared.loadingDoneCallback = {
+            ApplicationThemeService().registerDefaultTheme()
+        }
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
