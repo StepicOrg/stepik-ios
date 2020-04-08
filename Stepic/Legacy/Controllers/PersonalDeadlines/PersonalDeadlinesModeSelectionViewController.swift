@@ -139,7 +139,7 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
     private func colorize() {
         self.view.backgroundColor = .stepikAlertBackground
-        self.questionLabel.textColor = .stepikSystemLabel
+        self.questionLabel.textColor = .stepikSystemPrimaryText
         self.cancelButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 

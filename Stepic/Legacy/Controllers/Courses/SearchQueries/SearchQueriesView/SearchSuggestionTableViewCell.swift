@@ -23,7 +23,7 @@ final class SearchSuggestionTableViewCell: UITableViewCell {
             string: suggestion,
             attributes: [
                 NSAttributedString.Key.font: regularFont,
-                NSAttributedString.Key.foregroundColor: UIColor.stepikSystemSecondaryLabel
+                NSAttributedString.Key.foregroundColor: UIColor.stepikSystemSecondaryText
             ]
         )
 

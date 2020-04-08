@@ -66,14 +66,14 @@ extension CourseListColorMode {
                 textColor: .stepikPrimaryText,
                 backgroundColor: .stepikLightSecondaryBackground,
                 callToActionTextColor: .stepikCallToActionText,
-                callToActionBackgroundColor: .stepikCallToActionBackgroundColor
+                callToActionBackgroundColor: .stepikCallToActionBackground
             )
         case .dark:
             return .init(
                 textColor: .white,
                 backgroundColor: UIColor.white.withAlphaComponent(0.1),
                 callToActionTextColor: .stepikCallToActionText,
-                callToActionBackgroundColor: .stepikCallToActionBackgroundColor
+                callToActionBackgroundColor: .stepikCallToActionBackground
             )
         }
     }

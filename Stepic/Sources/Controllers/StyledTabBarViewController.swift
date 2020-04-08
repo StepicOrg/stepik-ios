@@ -3,7 +3,7 @@ import UIKit
 
 final class StyledTabBarViewController: UITabBarController {
     enum Appearance {
-        static let barTintColor = UIColor.stepikTabBar
+        static let barTintColor = UIColor.stepikTabBarBackground
         static let tintColor = UIColor.stepikAccent
         static let unselectedItemTintColor = UIColor.dynamic(
             light: UIColor(hex6: 0xBABAC1),

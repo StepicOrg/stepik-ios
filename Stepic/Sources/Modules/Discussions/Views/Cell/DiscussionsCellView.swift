@@ -19,8 +19,8 @@ extension DiscussionsCellView {
         let badgeUserRoleLightBackgroundColor = UIColor.stepikGreenFixed
         let badgeUserRoleDarkBackgroundColor = UIColor.stepikDarkGreenFixed
 
-        let badgeIsPinnedLightBackgroundColor = UIColor.stepikViolet1Fixed
-        let badgeIsPinnedDarkBackgroundColor = UIColor.stepikViolet4Fixed
+        let badgeIsPinnedLightBackgroundColor = UIColor.stepikVioletFixed
+        let badgeIsPinnedDarkBackgroundColor = UIColor.stepikDarkVioletFixed
         let badgeIsPinnedImageSize = CGSize(width: 10, height: 10)
         let badgeIsPinnedImageInsets = UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 2)
         let badgeIsPinnedTitleInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
@@ -52,7 +52,7 @@ extension DiscussionsCellView {
         let dateLabelTextColor = UIColor.stepikPrimaryText
 
         let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let replyButtonTextColor = UIColor.stepikViolet4Fixed
+        let replyButtonTextColor = UIColor.stepikDarkVioletFixed
 
         // Like & dislike
         let voteImageSize = CGSize(width: 20, height: 20)

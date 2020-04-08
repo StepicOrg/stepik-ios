@@ -55,7 +55,7 @@ final class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
 
     private func colorize() {
         self.contentView.layer.borderColor = UIColor.stepikSeparator.cgColor
-        self.titleLabel.textColor = .stepikSystemLabel
-        self.loadLabel.textColor = .stepikSystemSecondaryLabel
+        self.titleLabel.textColor = .stepikSystemPrimaryText
+        self.loadLabel.textColor = .stepikSystemSecondaryText
     }
 }

@@ -4,7 +4,7 @@ import UIKit
 final class SettingsTableSectionHeaderView: UITableViewHeaderFooterView, Reusable {
     enum Appearance {
         static let font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        static let textColor = UIColor.stepikSystemLabel
+        static let textColor = UIColor.stepikSystemPrimaryText
         static let labelInsets = UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16)
     }
 

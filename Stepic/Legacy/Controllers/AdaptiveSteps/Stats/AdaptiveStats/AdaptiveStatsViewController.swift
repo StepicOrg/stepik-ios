@@ -120,13 +120,13 @@ final class AdaptiveStatsViewController: UIViewController {
             self.levelTitleLabel,
             self.streakTitleLabel,
             self.xpPer7DaysTitleLabel
-        ].forEach { $0?.textColor = .stepikGray }
+        ].forEach { $0?.textColor = .stepikSystemGray }
 
         [
             self.last7DaysTitleLabel,
             self.progressByWeeksTitleLabel,
             self.allCountLabel
-        ].forEach { $0?.textColor = .stepikGray2 }
+        ].forEach { $0?.textColor = .stepikSystemGray2 }
 
         [
             self.mainStatHorizontalSeparator,

@@ -87,7 +87,7 @@ final class TextStoryPart: StoryPart {
                 case .light:
                     return UIColor.white.withAlphaComponent(0.7)
                 case .dark:
-                    return UIColor.stepikAccentAlpha70
+                    return UIColor.stepikAccentFixed.withAlphaComponent(0.7)
                 default:
                     return .clear
                 }

@@ -7,7 +7,7 @@ extension DiscussionsTableViewCell {
     enum Appearance {
         static let separatorColor = UIColor.stepikSeparator
 
-        static let selectedLightBackgroundColor = UIColor.stepikViolet2Fixed
+        static let selectedLightBackgroundColor = UIColor.stepikExtraLightVioletFixed
         static let selectedDarkBackgroundColor = UIColor.stepikSecondaryBackground
         static let defaultBackgroundColor = UIColor.stepikBackground
 

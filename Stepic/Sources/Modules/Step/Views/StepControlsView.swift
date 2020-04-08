@@ -12,7 +12,7 @@ extension StepControlsView {
         let discussionThreadButtonHeight: CGFloat = 44
         let statisticsViewHeight: CGFloat = 44
 
-        let separatorColor = UIColor.dynamic(light: UIColor.stepikGrey4Fixed, dark: .stepikSeparator)
+        let separatorColor = UIColor.dynamic(light: UIColor.stepikShadowFixed, dark: .stepikSeparator)
         let separatorHeight: CGFloat = 1.0
     }
 }

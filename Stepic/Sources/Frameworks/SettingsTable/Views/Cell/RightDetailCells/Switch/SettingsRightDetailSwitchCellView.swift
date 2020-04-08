@@ -3,7 +3,7 @@ import UIKit
 
 extension SettingsRightDetailSwitchCellView {
     struct Appearance {
-        let titleTextColor = UIColor.stepikSystemLabel
+        let titleTextColor = UIColor.stepikSystemPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 17)
         let titleInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 8)
 
@@ -47,7 +47,7 @@ final class SettingsRightDetailSwitchCellView: UIView {
         }
     }
 
-    var textColor: UIColor = .stepikSystemLabel {
+    var textColor: UIColor = .stepikSystemPrimaryText {
         didSet {
             self.titleLabel.textColor = self.textColor
         }

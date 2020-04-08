@@ -37,7 +37,7 @@ final class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
         super.colorize()
 
         self.titleLabel.textColor = .stepikPrimaryText
-        self.actionButton.setTitleColor(.stepikSystemSecondaryLabel, for: .normal)
+        self.actionButton.setTitleColor(.stepikSystemSecondaryText, for: .normal)
     }
 
     @IBAction

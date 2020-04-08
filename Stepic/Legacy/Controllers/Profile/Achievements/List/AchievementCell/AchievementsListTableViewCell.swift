@@ -25,7 +25,7 @@ final class AchievementsListTableViewCell: UITableViewCell {
             : .stepikBackground
 
         self.achievementName.textColor = .stepikPrimaryText
-        self.achievementDescription.textColor = .stepikSystemSecondaryLabel
+        self.achievementDescription.textColor = .stepikSystemSecondaryText
     }
 
     func update(with viewData: AchievementViewData) {

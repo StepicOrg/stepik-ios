@@ -5,7 +5,7 @@ extension StepikSocialNetworksView {
     struct Appearance {
         let backgroundColor = UIColor.clear
 
-        let titleTextColor = UIColor.stepikSystemLabel
+        let titleTextColor = UIColor.stepikSystemPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 14)
         let titleInsets = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
 

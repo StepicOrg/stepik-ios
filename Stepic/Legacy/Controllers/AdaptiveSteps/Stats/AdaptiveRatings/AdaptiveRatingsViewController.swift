@@ -106,7 +106,7 @@ final class AdaptiveRatingsViewController: UIViewController {
         self.view.backgroundColor = .stepikBackground
         self.loadingIndicator.color = .stepikLoadingIndicator
         self.ratingSegmentedControl.tintColor = .stepikAccent
-        self.allCountLabel.textColor = .stepikGray2
+        self.allCountLabel.textColor = .stepikSystemGray2
     }
 
     private func localize() {

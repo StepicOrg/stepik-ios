@@ -15,7 +15,7 @@ extension CodeQuizFullscreenRunCodeView {
         let samplesButtonImageInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
         let samplesButtonInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 16)
 
-        let runCodeButtonBackgroundColor = UIColor.dynamic(light: .stepikViolet1Fixed, dark: .stepikViolet4Fixed)
+        let runCodeButtonBackgroundColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikDarkVioletFixed)
         let runCodeButtonHeight: CGFloat = 44
         let runCodeButtonTextColor = UIColor.white
         let runCodeButtonCornerRadius: CGFloat = 6
@@ -226,13 +226,13 @@ final class CodeQuizFullscreenRunCodeView: UIView {
                 return (
                     UIImage(named: "quiz-mark-wrong"),
                     UIColor.stepikLightRedFixed,
-                    UIColor.quizElementWrongBackgroundColor
+                    UIColor.quizElementWrongBackground
                 )
             } else if userCodeRunStatus == .success && isTestOutputMatchesSampleOutput {
                 return (
                     UIImage(named: "quiz-feedback-correct"),
                     UIColor.stepikCallToActionText,
-                    UIColor.quizElementCorrectBackgroundColor
+                    UIColor.quizElementCorrectBackground
                 )
             } else {
                 return (

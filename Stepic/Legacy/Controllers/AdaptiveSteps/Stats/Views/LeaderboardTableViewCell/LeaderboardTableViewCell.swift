@@ -85,8 +85,8 @@ final class LeaderboardTableViewCell: UITableViewCell {
     private func colorize() {
         self.backgroundColor = self.isMe ? .stepikYellow : .clear
         self.separatorImageView.tintColor = .stepikOpaqueSeparator
-        self.userLabel.textColor = .stepikGray
-        self.positionLabel.textColor = .stepikGray
-        self.expLabel.textColor = .stepikGray2
+        self.userLabel.textColor = .stepikSystemGray
+        self.positionLabel.textColor = .stepikSystemGray
+        self.expLabel.textColor = .stepikSystemGray2
     }
 }

@@ -10,7 +10,7 @@ extension CourseWidgetButton {
         var backgroundColor = UIColor.stepikLightSecondaryBackground
 
         var callToActionTextColor = UIColor.stepikCallToActionText
-        var callToActionBackgroundColor = UIColor.stepikCallToActionBackgroundColor
+        var callToActionBackgroundColor = UIColor.stepikCallToActionBackground
     }
 }
 

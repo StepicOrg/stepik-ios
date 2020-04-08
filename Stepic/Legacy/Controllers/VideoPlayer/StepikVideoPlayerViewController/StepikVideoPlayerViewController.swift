@@ -48,7 +48,7 @@ extension StepikVideoPlayerViewController {
         static let topContainerViewCornerRadius: CGFloat = 8
         static let bottomFullscreenControlsCornerRadius: CGFloat = 8
 
-        static let autoplayOverlayColor = UIColor.stepikAccentAlpha50
+        static let autoplayOverlayColor = UIColor.stepikOverlayBackground
         static let autoplayPlayNextCircleHeight: CGFloat = 72
 
         static let autoplayCancelTitleColor = UIColor.white

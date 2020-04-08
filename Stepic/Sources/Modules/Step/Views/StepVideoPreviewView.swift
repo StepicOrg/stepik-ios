@@ -4,7 +4,7 @@ import UIKit
 
 extension StepVideoPreviewView {
     struct Appearance {
-        let overlayColor = UIColor.stepikOverlay
+        let overlayColor = UIColor.stepikOverlayBackground
 
         let introVideoHeightRatio: CGFloat = 9 / 16
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
