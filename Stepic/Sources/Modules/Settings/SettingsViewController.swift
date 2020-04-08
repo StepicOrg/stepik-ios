@@ -7,6 +7,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
     func displaySettings(viewModel: Settings.SettingsLoad.ViewModel)
     func displayDownloadVideoQualitySetting(viewModel: Settings.DownloadVideoQualitySettingPresentation.ViewModel)
     func displayStreamVideoQualitySetting(viewModel: Settings.StreamVideoQualitySettingPresentation.ViewModel)
+    func displayApplicationThemeSetting(viewModel: Settings.ApplicationThemeSettingPresentation.ViewModel)
     func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel)
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
@@ -99,9 +100,10 @@ final class SettingsViewController: UIViewController {
         case downloadQuality
         case streamQuality
         case useCellularDataForDownloads
-        case contentLanguage
+        case theme
         case textSize
         case codeEditor
+        case contentLanguage
         case autoplayNextVideo
         case adaptiveMode
         case downloads
@@ -115,6 +117,8 @@ final class SettingsViewController: UIViewController {
                 return NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")
             case .streamQuality:
                 return NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")
+            case .theme:
+                return NSLocalizedString("SettingsCellTitleTheme", comment: "")
             case .useCellularDataForDownloads:
                 return NSLocalizedString("SettingsCellTitleUseCellularDataForDownloads", comment: "")
             case .contentLanguage:
@@ -173,6 +177,22 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             footerTitle: NSLocalizedString("SettingsStreamVideoQualityFooterTitle", comment: ""),
             onSettingSelected: { [weak self] selectedSetting in
                 self?.interactor.doStreamVideoQualitySettingUpdate(request: .init(setting: selectedSetting))
+            }
+        )
+    }
+
+    func displayApplicationThemeSetting(viewModel: Settings.ApplicationThemeSettingPresentation.ViewModel) {
+        self.displaySelectionList(
+            settingDescription: viewModel.settingDescription,
+            title: NSLocalizedString("SettingsThemeTitle", comment: ""),
+            onSettingSelected: { [weak self] selectedSetting in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    strongSelf.interactor.doApplicationThemeSettingUpdate(request: .init(setting: selectedSetting))
+                }
             }
         )
     }
@@ -292,19 +312,17 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
         )
 
-        // Language
-        let contentLanguageCellViewModel = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.contentLanguage.rawValue,
+        // Appearance
+        let themeCellViewModel = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.theme.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.contentLanguage.cellTitle),
-                    detailType: .label(text: settingsViewModel.contentLanguage),
+                    title: .init(text: Setting.theme.cellTitle),
+                    detailType: .label(text: settingsViewModel.applicationTheme),
                     accessoryType: .disclosureIndicator
                 )
             )
         )
-
-        // Learning
         let stepTextSizeCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.textSize.rawValue,
             type: .rightDetail(
@@ -324,6 +342,20 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 )
             )
         )
+
+        // Language
+        let contentLanguageCellViewModel = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.contentLanguage.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Setting.contentLanguage.cellTitle),
+                    detailType: .label(text: settingsViewModel.contentLanguage),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+
+        // Learning
         let autoplayNextVideoCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
             type: .rightDetail(
@@ -404,18 +436,22 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 footer: nil
             ),
             .init(
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleAppearance", comment: "")),
+                cells: [
+                    themeCellViewModel,
+                    stepTextSizeCellViewModel,
+                    codeEditorSettingsCellViewModel
+                ],
+                footer: nil
+            ),
+            .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLanguage", comment: "")),
                 cells: [contentLanguageCellViewModel],
                 footer: nil
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLearning", comment: "")),
-                cells: [
-                    stepTextSizeCellViewModel,
-                    codeEditorSettingsCellViewModel,
-                    autoplayNextVideoCellViewModel,
-                    adaptiveModeCellViewModel
-                ],
+                cells: [autoplayNextVideoCellViewModel, adaptiveModeCellViewModel],
                 footer: nil
             ),
             .init(
@@ -453,6 +489,8 @@ extension SettingsViewController: SettingsViewDelegate {
             self.interactor.doDownloadVideoQualitySettingPresentation(request: .init())
         case .streamQuality:
             self.interactor.doStreamVideoQualitySettingPresentation(request: .init())
+        case .theme:
+            self.interactor.doApplicationThemeSettingPresentation(request: .init())
         case .contentLanguage:
             self.interactor.doContentLanguageSettingPresentation(request: .init())
         case .textSize:

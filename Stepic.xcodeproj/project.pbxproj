@@ -511,6 +511,8 @@
 		2C8F3AE323CCBEAB004D113A /* StreamVideoQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
+		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
+		2C936D47243D3FCE00A4A4A9 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */; };
 		2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */; };
 		2C9776EA24222AED0097AEFC /* UIView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
@@ -1739,6 +1741,8 @@
 		2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQuality.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
+		2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationThemeService.swift; sourceTree = "<group>"; };
+		2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
 		2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DynamicColor.swift"; sourceTree = "<group>"; };
 		2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TraitCollection.swift"; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -2752,6 +2756,7 @@
 		2C8F3ADF23CCBD16004D113A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */,
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
@@ -5957,6 +5962,7 @@
 		62E98E0FB32DB9DAC0362672 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */,
 				2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */,
 				2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */,
 				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
@@ -7353,6 +7359,7 @@
 				62E98382AC35194D9C0CE966 /* UITableViewExtensions.swift in Sources */,
 				62E98C3B15ABFA56C29FEC3B /* UICollectionViewExtensions.swift in Sources */,
 				62E98116576B12451E5418F4 /* CourseCoverImageView.swift in Sources */,
+				2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */,
 				2C7F641C23B0F5B7006C7648 /* PlayNextCircleControlView.swift in Sources */,
 				62E98C3824298B04928351E5 /* FormatterHelper.swift in Sources */,
 				2CF10C8B238426B300F8CC95 /* StepSourcesNetworkService.swift in Sources */,
@@ -7792,6 +7799,7 @@
 				62E980B8758DEF7D06A56FB5 /* WriteCommentSolutionControl.swift in Sources */,
 				62E980D610A476A99FF7CAF4 /* WriteCourseReviewAssembly.swift in Sources */,
 				62E9852E9E2178B0917B73F6 /* WriteCourseReviewDataFlow.swift in Sources */,
+				2C936D47243D3FCE00A4A4A9 /* ApplicationTheme.swift in Sources */,
 				62E98D63AAEB2656634F9AF9 /* WriteCourseReviewInteractor.swift in Sources */,
 				62E98EC31C92264863CBA7AC /* WriteCourseReviewPresenter.swift in Sources */,
 				62E98E1B5B67C786076FD6E8 /* WriteCourseReviewProvider.swift in Sources */,

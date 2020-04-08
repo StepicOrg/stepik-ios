@@ -546,6 +546,7 @@ LoadStories = "Load stories";
 /* Settings */
 SettingsTitle = "Settings";
 SettingsHeaderTitleVideo = "Video";
+SettingsHeaderTitleAppearance = "Appearance";
 SettingsHeaderTitleLanguage = "Language";
 SettingsHeaderTitleLearning = "Learning";
 SettingsHeaderTitleDownloadedContent = "Downloaded content";
@@ -554,6 +555,7 @@ SettingsHeaderTitleOther = "Other";
 SettingsCellTitleDownloadQuality = "Download quality";
 SettingsCellTitleStreamQuality = "Stream quality";
 SettingsCellTitleUseCellularDataForDownloads = "Use cellular data for downloads";
+SettingsCellTitleTheme = "Theme";
 SettingsCellTitleContentLanguage = "Content language";
 SettingsCellTitleTextSizeInSteps = "Text size in steps";
 SettingsCellTitleCodeEditor = "Code editor settings";
@@ -580,6 +582,11 @@ SettingStreamVideoQualityVeryHigh = "Very high";
 
 SettingsContentLanguageTitle = "Content language";
 SettingsContentLanguageFooterTitle = "The language of displayed courses.";
+
+SettingsThemeTitle = "Theme";
+SettingsThemeItemSystem = "System";
+SettingsThemeItemDark = "Dark";
+SettingsThemeItemLight = "Light";
 
 SettingsStepFontSizeTitle = "Text size";
 SettingsStepFontSizeFooterTitle = "Text size changes affect only step text";

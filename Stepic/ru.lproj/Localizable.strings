@@ -547,6 +547,7 @@ LoadStories = "Загрузить истории";
 /* Settings */
 SettingsTitle = "Настройки";
 SettingsHeaderTitleVideo = "Видео";
+SettingsHeaderTitleAppearance = "Оформление";
 SettingsHeaderTitleLanguage = "Язык";
 SettingsHeaderTitleLearning = "Обучение";
 SettingsHeaderTitleDownloadedContent = "Загруженный контент";
@@ -555,6 +556,7 @@ SettingsHeaderTitleOther = "Другое";
 SettingsCellTitleDownloadQuality = "Качество загрузки";
 SettingsCellTitleStreamQuality = "Качество воспроизведения";
 SettingsCellTitleUseCellularDataForDownloads = "Использовать сотовые данные для загрузки";
+SettingsCellTitleTheme = "Тема";
 SettingsCellTitleContentLanguage = "Язык контента";
 SettingsCellTitleTextSizeInSteps = "Размер текста в шагах";
 SettingsCellTitleCodeEditor = "Настройки редактора кода";
@@ -581,6 +583,11 @@ SettingStreamVideoQualityVeryHigh = "Максимальное";
 
 SettingsContentLanguageTitle = "Язык контента";
 SettingsContentLanguageFooterTitle = "Выберите язык на котором вы будете видеть в приложении курсы.";
+
+SettingsThemeTitle = "Тема";
+SettingsThemeItemSystem = "Системная";
+SettingsThemeItemDark = "Тёмная";
+SettingsThemeItemLight = "Светлая";
 
 SettingsStepFontSizeTitle = "Размер текста";
 SettingsStepFontSizeFooterTitle = "Изменения размера текста влияют только на текст шага.";

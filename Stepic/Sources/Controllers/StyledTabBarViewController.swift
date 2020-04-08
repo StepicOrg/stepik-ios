@@ -1,3 +1,4 @@
+import SVProgressHUD
 import UIKit
 
 final class StyledTabBarViewController: UITabBarController {
@@ -61,6 +62,8 @@ final class StyledTabBarViewController: UITabBarController {
             name: UIDevice.orientationDidChangeNotification,
             object: nil
         )
+
+        self.updateSVProgressHUDDefaultStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -79,11 +82,24 @@ final class StyledTabBarViewController: UITabBarController {
         }
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateSVProgressHUDDefaultStyle()
+        }
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Private API
+
+    // FIXME: Create SVProgressHUD configurator.
+    private func updateSVProgressHUDDefaultStyle() {
+        SVProgressHUD.setDefaultStyle(self.view.isDarkInterfaceStyle ? .dark : .light)
+    }
 
     @objc
     private func didBadgeUpdate(systemNotification: Foundation.Notification) {

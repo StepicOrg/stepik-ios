@@ -51,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
-        // TODO: Set default style based on current user interface style.
         SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setHapticsEnabled(true)
 
@@ -118,9 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.branchService.setup(launchOptions: launchOptions)
 
-        if #available(iOS 13.0, *) {
-            self.window?.overrideUserInterfaceStyle = .light
-        }
+        ApplicationThemeService().registerDefaultTheme()
 
         return true
     }

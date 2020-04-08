@@ -15,6 +15,9 @@ protocol SettingsInteractorProtocol {
     // StepFontSize
     func doStepFontSizeSettingPresentation(request: Settings.StepFontSizeSettingPresentation.Request)
     func doStepFontSizeUpdate(request: Settings.StepFontSizeSettingUpdate.Request)
+    // ApplicationTheme
+    func doApplicationThemeSettingPresentation(request: Settings.ApplicationThemeSettingPresentation.Request)
+    func doApplicationThemeSettingUpdate(request: Settings.ApplicationThemeSettingUpdate.Request)
 
     func doUseCellularDataForDownloadsSettingUpdate(request: Settings.UseCellularDataForDownloadsSettingUpdate.Request)
     func doAutoplayNextVideoSettingUpdate(request: Settings.AutoplayNextVideoSettingUpdate.Request)
@@ -35,6 +38,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         .init(
             downloadVideoQuality: self.provider.globalDownloadVideoQuality,
             streamVideoQuality: self.provider.globalStreamVideoQuality,
+            applicationTheme: self.provider.globalApplicationTheme,
             contentLanguage: self.provider.globalContentLanguage,
             stepFontSize: self.provider.globalStepFontSize,
             shouldUseCellularDataForDownloads: self.provider.shouldUseCellularDataForDownloads,
@@ -113,6 +117,21 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
             AnalyticsEvent.stepFontSizeSelected(newStepFontSize).report()
             self.provider.globalStepFontSize = newStepFontSize
+        }
+    }
+
+    func doApplicationThemeSettingPresentation(request: Settings.ApplicationThemeSettingPresentation.Request) {
+        self.presenter.presentApplicationThemeSetting(
+            response: .init(
+                availableApplicationThemes: self.provider.availableApplicationThemes,
+                currentApplicationTheme: self.provider.globalApplicationTheme
+            )
+        )
+    }
+
+    func doApplicationThemeSettingUpdate(request: Settings.ApplicationThemeSettingUpdate.Request) {
+        if let newApplicationTheme = ApplicationTheme(uniqueIdentifier: request.setting.uniqueIdentifier) {
+            self.provider.globalApplicationTheme = newApplicationTheme
         }
     }
 

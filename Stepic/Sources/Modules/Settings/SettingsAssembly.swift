@@ -22,6 +22,7 @@ final class SettingsAssembly: Assembly {
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             autoplayStorageManager: AutoplayStorageManager(),
             adaptiveStorageManager: AdaptiveStorageManager.shared,
+            applicationThemeService: ApplicationThemeService(),
             downloadsProvider: DownloadsProvider(
                 coursesPersistenceService: CoursesPersistenceService(),
                 adaptiveStorageManager: AdaptiveStorageManager.shared,

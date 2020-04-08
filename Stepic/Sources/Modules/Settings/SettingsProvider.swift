@@ -14,6 +14,9 @@ protocol SettingsProviderProtocol: AnyObject {
     // StepFontSize
     var globalStepFontSize: StepFontSize { get set }
     var availableStepFontSizes: [StepFontSize] { get }
+    // ApplicationTheme
+    var globalApplicationTheme: ApplicationTheme { get set }
+    var availableApplicationThemes: [ApplicationTheme] { get }
 
     var shouldUseCellularDataForDownloads: Bool { get set }
 
@@ -31,6 +34,7 @@ final class SettingsProvider: SettingsProviderProtocol {
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     private let autoplayStorageManager: AutoplayStorageManagerProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    private let applicationThemeService: ApplicationThemeServiceProtocol
 
     private var downloadsProvider: DownloadsProviderProtocol
 
@@ -78,6 +82,17 @@ final class SettingsProvider: SettingsProviderProtocol {
 
     var availableStepFontSizes: [StepFontSize] { StepFontSize.allCases }
 
+    var globalApplicationTheme: ApplicationTheme {
+        get {
+            self.applicationThemeService.theme
+        }
+        set {
+            self.applicationThemeService.theme = newValue
+        }
+    }
+
+    var availableApplicationThemes: [ApplicationTheme] { ApplicationTheme.allCases }
+
     var shouldUseCellularDataForDownloads: Bool {
         get {
             self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads
@@ -113,6 +128,7 @@ final class SettingsProvider: SettingsProviderProtocol {
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         autoplayStorageManager: AutoplayStorageManagerProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
+        applicationThemeService: ApplicationThemeServiceProtocol,
         downloadsProvider: DownloadsProviderProtocol
     ) {
         self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
@@ -122,6 +138,7 @@ final class SettingsProvider: SettingsProviderProtocol {
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.autoplayStorageManager = autoplayStorageManager
         self.adaptiveStorageManager = adaptiveStorageManager
+        self.applicationThemeService = applicationThemeService
         self.downloadsProvider = downloadsProvider
     }
 

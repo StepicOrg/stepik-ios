@@ -13,7 +13,7 @@ class StyledNavigationController: UINavigationController {
         static let shadowViewColor = UIColor.stepikOpaqueSeparator
         static let shadowViewHeight: CGFloat = 0.5
 
-        static let statusBarStyle = UIStatusBarStyle.dark
+        static let statusBarStyle = UIStatusBarStyle.default
     }
 
     struct NavigationBarAppearanceState {
