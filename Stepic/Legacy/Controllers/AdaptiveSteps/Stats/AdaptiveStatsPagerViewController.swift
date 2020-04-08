@@ -30,10 +30,11 @@ final class AdaptiveStatsPagerViewController: PagerController {
         self.indicatorHeight = 1.5
         self.centerCurrentTab = true
         self.indicatorColor = .stepikAccent
-        self.selectedTabTextColor = .stepikAccent
-        self.tabsTextColor = .stepikAccent
-        self.tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        self.tabsViewBackgroundColor = .stepikBackground
+        self.selectedTabTextColor = .stepikPrimaryText
+        self.tabsTextColor = .stepikPrimaryText
+        self.tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: .light)
+        self.tabsViewBackgroundColor = .stepikNavigationBarBackground
+        self.contentViewBackgroundColor = .stepikBackground
     }
 
     internal func controllerForSection(_ section: AdaptiveStatsSection) -> UIViewController {

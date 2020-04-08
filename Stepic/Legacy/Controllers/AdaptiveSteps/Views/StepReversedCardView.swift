@@ -19,14 +19,8 @@ final class StepReversedCardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.backgroundColor = self.isDarkInterfaceStyle
-            ? .stepikSecondaryBackground
-            : .stepikBackground
-
+        self.backgroundColor = .dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
         self.layer.cornerRadius = 12
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.stepikOpaqueSeparator.cgColor
-
         self.whiteView.frame = self.bounds
     }
 }
