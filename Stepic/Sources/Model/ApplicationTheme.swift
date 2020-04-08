@@ -5,6 +5,8 @@ enum ApplicationTheme: String, CaseIterable, UniqueIdentifiable {
     case dark
     case light
 
+    static var `default`: ApplicationTheme { .system }
+
     var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
 
     var title: String {

@@ -11,13 +11,6 @@ import FirebaseInstanceID
 import FirebaseRemoteConfig
 import Foundation
 
-enum RemoteConfigKeys: String {
-    case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
-    case adaptiveBackendUrl = "adaptive_backend_url"
-    case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
-    case newLessonAvailable = "new_lesson_available_ios"
-}
-
 final class RemoteConfig {
     private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
     static let shared = RemoteConfig()
@@ -28,30 +21,26 @@ final class RemoteConfig {
     var fetchDuration: TimeInterval = 43200
 
     lazy var appDefaults: [String: NSObject] = [
-        RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
-        RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepikApplicationsInfo.adaptiveRatingURL as NSObject,
-        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
-        RemoteConfigKeys.newLessonAvailable.rawValue: true as NSObject
+        Key.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
+        Key.adaptiveBackendUrl.rawValue: StepikApplicationsInfo.adaptiveRatingURL as NSObject,
+        Key.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
+        Key.newLessonAvailable.rawValue: true as NSObject,
+        Key.darkModeAvailable.rawValue: false as NSObject
     ]
-
-    enum ShowStreaksNotificationTrigger: String {
-        case loginAndSubmission = "login_and_submission"
-        case submission = "submission"
-    }
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: RemoteConfigKeys.showStreaksNotificationTrigger.rawValue
+            forKey: Key.showStreaksNotificationTrigger.rawValue
         ).stringValue else {
-            return defaultShowStreaksNotificationTrigger
+            return self.defaultShowStreaksNotificationTrigger
         }
 
-        return ShowStreaksNotificationTrigger(rawValue: configValue) ?? defaultShowStreaksNotificationTrigger
+        return ShowStreaksNotificationTrigger(rawValue: configValue) ?? self.defaultShowStreaksNotificationTrigger
     }
 
-    var adaptiveBackendUrl: String {
+    var adaptiveBackendURL: String {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue
+            forKey: Key.adaptiveBackendUrl.rawValue
         ).stringValue else {
             return StepikApplicationsInfo.adaptiveRatingURL
         }
@@ -59,9 +48,9 @@ final class RemoteConfig {
         return configValue
     }
 
-    var supportedInAdaptiveModeCourses: [Int] {
+    var supportedInAdaptiveModeCourses: [Course.IdType] {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue
+            forKey: Key.supportedInAdaptiveModeCourses.rawValue
         ).stringValue else {
             return StepikApplicationsInfo.adaptiveSupportedCourses
         }
@@ -89,30 +78,44 @@ final class RemoteConfig {
         return supportedCourses.compactMap { Int($0) }
     }
 
+    var isDarkModeAvailable: Bool {
+        if DeviceInfo.current.OSVersion.major < 13 {
+            return false
+        }
+
+        return FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.darkModeAvailable.rawValue)
+            .boolValue
+    }
+
     init() {
-        loadDefaultValues()
-        fetchCloudValues()
+        self.loadDefaultValues()
+        self.fetchCloudValues()
     }
 
     func setup() {}
 
+    // MARK: Private API
+
     private func loadDefaultValues() {
-        FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(appDefaults)
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(self.appDefaults)
     }
 
     private func fetchCloudValues() {
         #if DEBUG
-            activateDebugMode()
+            self.activateDebugMode()
         #endif
-        FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
-            [weak self] _, error in
+
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(
+            withExpirationDuration: self.fetchDuration
+        ) { [weak self] _, error in
             guard error == nil else {
-                print("Got an error fetching remote values \(String(describing: error))")
-                return
+                return print("RemoteConfig :: Got an error fetching remote values \(String(describing: error))")
             }
 
             FirebaseRemoteConfig.RemoteConfig.remoteConfig().activate(completionHandler: { error in
-                print("remote config failed activate firebase remote config with error: \(error ??? "nil")")
+                print("RemoteConfig :: failed activate firebase remote config with error: \(error ??? "nil")")
             })
 
             self?.fetchComplete = true
@@ -121,13 +124,23 @@ final class RemoteConfig {
     }
 
     private func activateDebugMode() {
-        fetchDuration = 0
-        let debugSettings = RemoteConfigSettings()
-        debugSettings.minimumFetchInterval = 0
+        self.fetchDuration = 0
+        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
-    func string(forKey key: String) -> String? {
-        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key).stringValue
+    // MARK: Inner Types
+
+    enum ShowStreaksNotificationTrigger: String {
+        case loginAndSubmission = "login_and_submission"
+        case submission = "submission"
+    }
+
+    enum Key: String {
+        case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
+        case adaptiveBackendUrl = "adaptive_backend_url"
+        case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
+        case newLessonAvailable = "new_lesson_available_ios"
+        case darkModeAvailable = "is_dark_mode_available_ios"
     }
 }

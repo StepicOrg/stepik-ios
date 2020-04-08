@@ -9,4 +9,5 @@ struct SettingsViewModel {
     let shouldUseCellularDataForDownloads: Bool
     let isAutoplayEnabled: Bool
     let isAdaptiveModeEnabled: Bool
+    let isApplicationThemeSettingAvailable: Bool
 }

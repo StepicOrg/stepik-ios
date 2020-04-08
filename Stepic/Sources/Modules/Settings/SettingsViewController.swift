@@ -356,7 +356,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         )
 
         // Learning
-        let autoplayNextVideoCellViewModel = SettingsTableSectionViewModel.Cell(
+        let autoplayCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -425,7 +425,11 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
         )
 
-        let sectionsViewModels: [SettingsTableSectionViewModel] = [
+        let learningSectionCellsViewModels = settingsViewModel.isApplicationThemeSettingAvailable
+            ? [autoplayCellViewModel, adaptiveModeCellViewModel]
+            : [stepTextSizeCellViewModel, codeEditorSettingsCellViewModel, autoplayCellViewModel, adaptiveModeCellViewModel]
+
+        var sectionsViewModels: [SettingsTableSectionViewModel] = [
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleVideo", comment: "")),
                 cells: [
@@ -436,22 +440,13 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 footer: nil
             ),
             .init(
-                header: .init(title: NSLocalizedString("SettingsHeaderTitleAppearance", comment: "")),
-                cells: [
-                    themeCellViewModel,
-                    stepTextSizeCellViewModel,
-                    codeEditorSettingsCellViewModel
-                ],
-                footer: nil
-            ),
-            .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLanguage", comment: "")),
                 cells: [contentLanguageCellViewModel],
                 footer: nil
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLearning", comment: "")),
-                cells: [autoplayNextVideoCellViewModel, adaptiveModeCellViewModel],
+                cells: learningSectionCellsViewModels,
                 footer: nil
             ),
             .init(
@@ -466,6 +461,16 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             ),
             .init(header: nil, cells: [logOutCellViewModel], footer: nil)
         ]
+
+        if settingsViewModel.isApplicationThemeSettingAvailable {
+            let appearanceSectionViewModel = SettingsTableSectionViewModel(
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleAppearance", comment: "")),
+                cells: [themeCellViewModel, stepTextSizeCellViewModel, codeEditorSettingsCellViewModel],
+                footer: nil
+            )
+
+            sectionsViewModels.insert(appearanceSectionViewModel, at: 1)
+        }
 
         self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sectionsViewModels))
     }

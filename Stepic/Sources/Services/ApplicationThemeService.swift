@@ -8,14 +8,15 @@ protocol ApplicationThemeServiceProtocol: AnyObject {
 
 final class ApplicationThemeService: ApplicationThemeServiceProtocol {
     private static let applicationThemeKey = "applicationTheme"
-    private static let defaultApplicationTheme = ApplicationTheme.system
+
+    private let remoteConfig: RemoteConfig
 
     var theme: ApplicationTheme {
         get {
             if let applicationTheme = self.getApplicationTheme() {
                 return applicationTheme
             } else {
-                return Self.defaultApplicationTheme
+                return .default
             }
         }
         set {
@@ -26,12 +27,21 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
         }
     }
 
+    init(remoteConfig: RemoteConfig = .shared) {
+        self.remoteConfig = remoteConfig
+    }
+
     func registerDefaultTheme() {
         if #available(iOS 13.0, *) {
+            guard self.remoteConfig.isDarkModeAvailable else {
+                self.theme = .light
+                return
+            }
+
             if let userSelectedApplicationTheme = self.getApplicationTheme() {
                 self.applyTheme(userSelectedApplicationTheme)
             } else {
-                self.theme = Self.defaultApplicationTheme
+                self.theme = .default
             }
         }
     }
@@ -45,8 +55,10 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
 
     @available(iOS 13.0, *)
     private func applyTheme(_ theme: ApplicationTheme) {
-        if let keyWindow = UIApplication.shared.keyWindow {
-            keyWindow.overrideUserInterfaceStyle = theme.userInterfaceStyle
+        DispatchQueue.main.async {
+            if let keyWindow = UIApplication.shared.keyWindow {
+                keyWindow.overrideUserInterfaceStyle = theme.userInterfaceStyle
+            }
         }
     }
 }

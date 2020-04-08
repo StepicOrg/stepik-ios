@@ -180,6 +180,7 @@ enum Settings {
         let shouldUseCellularDataForDownloads: Bool
         let isAutoplayEnabled: Bool
         let isAdaptiveModeEnabled: Bool
+        let isDarkModeAvailable: Bool
     }
 
     struct SettingDescription {

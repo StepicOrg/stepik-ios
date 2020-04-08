@@ -113,7 +113,8 @@ final class SettingsPresenter: SettingsPresenterProtocol {
             stepFontSize: data.stepFontSize.title,
             shouldUseCellularDataForDownloads: data.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: data.isAutoplayEnabled,
-            isAdaptiveModeEnabled: data.isAdaptiveModeEnabled
+            isAdaptiveModeEnabled: data.isAdaptiveModeEnabled,
+            isApplicationThemeSettingAvailable: data.isDarkModeAvailable
         )
     }
 }

@@ -38,7 +38,8 @@ final class SettingsAssembly: Assembly {
         let interactor = SettingsInteractor(
             presenter: presenter,
             provider: provider,
-            userAccountService: UserAccountService()
+            userAccountService: UserAccountService(),
+            remoteConfig: .shared
         )
         let viewController = SettingsViewController(
             interactor: interactor,

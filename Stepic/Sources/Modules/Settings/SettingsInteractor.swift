@@ -33,6 +33,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     private let provider: SettingsProviderProtocol
 
     private let userAccountService: UserAccountServiceProtocol
+    private let remoteConfig: RemoteConfig
 
     private var settingsData: Settings.SettingsData {
         .init(
@@ -43,18 +44,21 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             stepFontSize: self.provider.globalStepFontSize,
             shouldUseCellularDataForDownloads: self.provider.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: self.provider.isAutoplayEnabled,
-            isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled
+            isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled,
+            isDarkModeAvailable: self.remoteConfig.isDarkModeAvailable
         )
     }
 
     init(
         presenter: SettingsPresenterProtocol,
         provider: SettingsProviderProtocol,
-        userAccountService: UserAccountServiceProtocol
+        userAccountService: UserAccountServiceProtocol,
+        remoteConfig: RemoteConfig
     ) {
         self.presenter = presenter
         self.provider = provider
         self.userAccountService = userAccountService
+        self.remoteConfig = remoteConfig
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
