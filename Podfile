@@ -5,7 +5,7 @@ inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
-    pod 'Alamofire', '5.0.5'
+    pod 'Alamofire', '5.1.0'
     pod 'Atributika', '4.9.5'
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.7.1'
