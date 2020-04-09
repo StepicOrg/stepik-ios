@@ -1,9 +1,7 @@
 import UIKit
 
 protocol BaseExploreViewControllerProtocol: AnyObject {
-    func displayFullscreenCourseList(
-        viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel
-    )
+    func displayFullscreenCourseList(viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel)
     func displayCourseInfo(viewModel: BaseExplore.CourseInfoPresentation.ViewModel)
     func displayCourseSyllabus(viewModel: BaseExplore.CourseSyllabusPresentation.ViewModel)
     func displayLastStep(viewModel: BaseExplore.LastStepPresentation.ViewModel)
@@ -104,11 +102,9 @@ class BaseExploreViewController: UIViewController {
         )
     }
 
-    func refreshContentAfterLanguageChange() {
-    }
+    func refreshContentAfterLanguageChange() {}
 
-    func refreshContentAfterLoginAndLogout() {
-    }
+    func refreshContentAfterLoginAndLogout() {}
 
     @objc
     private func handleRefreshContentAfterLoginAndLogout() {
@@ -130,28 +126,25 @@ class BaseExploreViewController: UIViewController {
     }
 }
 
+// MARK: - BaseExploreViewController: BaseExploreViewControllerProtocol -
+
 extension BaseExploreViewController: BaseExploreViewControllerProtocol {
-    func displayFullscreenCourseList(
-        viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel
-    ) {
+    func displayFullscreenCourseList(viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel) {
         let assembly = FullscreenCourseListAssembly(
             presentationDescription: viewModel.presentationDescription,
             courseListType: viewModel.courseListType
         )
-        let viewController = assembly.makeModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        self.push(module: assembly.makeModule())
     }
 
     func displayCourseInfo(viewModel: BaseExplore.CourseInfoPresentation.ViewModel) {
         let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
-        let viewController = assembly.makeModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        self.push(module: assembly.makeModule())
     }
 
     func displayCourseSyllabus(viewModel: BaseExplore.CourseSyllabusPresentation.ViewModel) {
         let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
-        let viewController = assembly.makeModule()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        self.push(module: assembly.makeModule())
     }
 
     func displayLastStep(viewModel: BaseExplore.LastStepPresentation.ViewModel) {

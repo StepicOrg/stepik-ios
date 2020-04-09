@@ -16,9 +16,11 @@ extension DiscussionsCellView {
         let badgeCornerRadius: CGFloat = 10
 
         let badgeUserRoleWidthDelta: CGFloat = 16
-        let badgeUserRoleBackgroundColor = UIColor.stepikGreen
+        let badgeUserRoleLightBackgroundColor = UIColor.stepikGreenFixed
+        let badgeUserRoleDarkBackgroundColor = UIColor.stepikDarkGreenFixed
 
-        let badgeIsPinnedBackgroundColor = UIColor(hex6: 0x6C7BDF)
+        let badgeIsPinnedLightBackgroundColor = UIColor.stepikVioletFixed
+        let badgeIsPinnedDarkBackgroundColor = UIColor.stepikDarkVioletFixed
         let badgeIsPinnedImageSize = CGSize(width: 10, height: 10)
         let badgeIsPinnedImageInsets = UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 2)
         let badgeIsPinnedTitleInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
@@ -29,14 +31,14 @@ extension DiscussionsCellView {
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
-        let nameLabelTextColor = UIColor.stepikAccent
+        let nameLabelTextColor = UIColor.stepikPrimaryText
         let nameLabelHeight: CGFloat = 18
 
         let textContentContainerViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
         let textContentWebBasedTextViewDefaultHeight: CGFloat = 5
         let textContentTextLabelFontSize: CGFloat = 14
         let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
-        let textContentTextLabelTextColor = UIColor.stepikAccent
+        let textContentTextLabelTextColor = UIColor.stepikPrimaryText
 
         let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
         let solutionControlInsets = LayoutInsets(top: 8)
@@ -47,10 +49,10 @@ extension DiscussionsCellView {
         let bottomControlsHeight: CGFloat = 20
 
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.stepikAccent
+        let dateLabelTextColor = UIColor.stepikPrimaryText
 
         let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let replyButtonTextColor = UIColor(hex6: 0x3E50CB)
+        let replyButtonTextColor = UIColor.stepikDarkVioletFixed
 
         // Like & dislike
         let voteImageSize = CGSize(width: 20, height: 20)
@@ -76,7 +78,7 @@ final class DiscussionsCellView: UIView {
 
     private lazy var avatarOverlayButton: UIButton = {
         let button = HighlightFakeButton()
-        button.highlightedBackgroundColor = UIColor.white.withAlphaComponent(0.5)
+        button.highlightedBackgroundColor = UIColor.stepikTertiaryBackground.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(self.avatarButtonClicked), for: .touchUpInside)
         return button
     }()
@@ -86,7 +88,7 @@ final class DiscussionsCellView: UIView {
         label.widthDelta = self.appearance.badgeUserRoleWidthDelta
         label.font = self.appearance.badgeLabelFont
         label.textColor = self.appearance.badgeTintColor
-        label.backgroundColor = self.appearance.badgeUserRoleBackgroundColor
+        label.backgroundColor = self.appearance.badgeUserRoleLightBackgroundColor
         label.textAlignment = .center
         label.numberOfLines = 1
         // Round corners
@@ -105,7 +107,7 @@ final class DiscussionsCellView: UIView {
         imageButton.font = self.appearance.badgeLabelFont
         imageButton.title = NSLocalizedString("DiscussionsIsPinnedBadgeTitle", comment: "")
         imageButton.image = UIImage(named: "discussions-pin")?.withRenderingMode(.alwaysTemplate)
-        imageButton.backgroundColor = self.appearance.badgeIsPinnedBackgroundColor
+        imageButton.backgroundColor = self.appearance.badgeIsPinnedLightBackgroundColor
         imageButton.disabledAlpha = 1.0
         imageButton.isEnabled = false
         // Round corners
@@ -289,6 +291,14 @@ final class DiscussionsCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateViewColor()
+        }
+    }
+
     // MARK: - Public API
 
     func configure(viewModel: DiscussionsCommentViewModel?) {
@@ -343,6 +353,16 @@ final class DiscussionsCellView: UIView {
     }
 
     // MARK: - Private API
+
+    private func updateViewColor() {
+        self.userRoleBadgeLabel.backgroundColor = self.isDarkInterfaceStyle
+            ? self.appearance.badgeUserRoleDarkBackgroundColor
+            : self.appearance.badgeUserRoleLightBackgroundColor
+
+        self.isPinnedImageButton.backgroundColor = self.isDarkInterfaceStyle
+            ? self.appearance.badgeIsPinnedDarkBackgroundColor
+            : self.appearance.badgeIsPinnedLightBackgroundColor
+    }
 
     private func resetViews() {
         self.nameLabel.text = nil
@@ -492,6 +512,10 @@ final class DiscussionsCellView: UIView {
 // MARK: - DiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
 
 extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.updateViewColor()
+    }
+
     func addSubviews() {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)

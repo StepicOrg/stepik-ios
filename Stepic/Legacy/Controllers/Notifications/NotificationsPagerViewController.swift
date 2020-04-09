@@ -56,7 +56,7 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
         self.selectedTabTextColor = .stepikAccent
         self.tabsTextColor = .stepikAccent
         self.tabsTextFont = .systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        self.tabsViewBackgroundColor = .stepikBackground
+        self.tabsViewBackgroundColor = .stepikNavigationBarBackground
         self.contentViewBackgroundColor = .stepikBackground
     }
 

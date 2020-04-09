@@ -36,7 +36,7 @@ final class NewChoiceQuizViewController: UIViewController {
 
 extension NewChoiceQuizViewController: NewChoiceQuizViewControllerProtocol {
     func displayReply(viewModel: NewChoiceQuiz.ReplyLoad.ViewModel) {
-        if self.lastChoiceDataset != viewModel.data.choices.map { $0.text } {
+        if self.lastChoiceDataset != viewModel.data.choices.map({ $0.text }) {
             self.lastChoiceDataset = viewModel.data.choices.map { $0.text }
             self.newChoiceQuizView?.set(
                 choices: viewModel.data.choices.map { (text: $0.text, isSelected: $0.isSelected) }
@@ -46,7 +46,7 @@ extension NewChoiceQuizViewController: NewChoiceQuizViewControllerProtocol {
         self.newChoiceQuizView?.title = viewModel.data.title
         self.newChoiceQuizView?.isSingleChoice = !viewModel.data.isMultipleChoice
 
-        if self.lastFeedback != viewModel.data.choices.map { $0.hint } {
+        if self.lastFeedback != viewModel.data.choices.map({ $0.hint }) {
             self.lastFeedback = viewModel.data.choices.map { $0.hint }
             self.newChoiceQuizView?.updateFeedback(text: viewModel.data.choices.map { $0.hint })
         }

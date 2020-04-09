@@ -11,7 +11,7 @@ final class GradientCoursesPlaceholderViewFactory {
         static let defaultLabelsInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 
-    init() { }
+    init() {}
 
     func makeCourseCollectionView(
         title: String,

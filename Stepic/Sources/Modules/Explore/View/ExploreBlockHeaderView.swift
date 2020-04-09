@@ -9,14 +9,14 @@ protocol ExploreBlockHeaderViewProtocol: AnyObject {
 
 extension ExploreBlockHeaderView {
     struct Appearance {
-        var titleLabelColor = UIColor.stepikAccent
+        var titleLabelColor = UIColor.stepikPrimaryText
         let titleLabelFont = UIFont.systemFont(ofSize: 20)
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
 
         let descriptionLabelFont = UIFont.systemFont(ofSize: 16)
-        let descriptionLabelColor = UIColor.stepikAccentAlpha30
+        let descriptionLabelColor = UIColor.stepikTertiaryText
 
-        var showAllButtonColor = UIColor.stepikAccentAlpha30
+        var showAllButtonColor = UIColor.stepikTertiaryText
         let showAllButtonFont = UIFont.systemFont(ofSize: 20)
         let showAllButtonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
@@ -24,11 +24,6 @@ extension ExploreBlockHeaderView {
 
 final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
-
-    private let splitTestingService = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -52,14 +47,7 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
         button.titleLabel?.font = self.appearance.showAllButtonFont
         button.contentHorizontalAlignment = .right
         button.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
-
-        var showAllTitle = NSLocalizedString("ShowAll", comment: "")
-        if CourseListSeeAllTextSplitTest.shouldParticipate {
-            let splitTest = self.splitTestingService.fetchSplitTest(CourseListSeeAllTextSplitTest.self)
-            showAllTitle = splitTest.currentGroup.seeAllTitle
-        }
-        button.setTitle(showAllTitle, for: .normal)
-
+        button.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         return button
     }()
 

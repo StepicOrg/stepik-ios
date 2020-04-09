@@ -8,7 +8,7 @@ extension CourseInfoTabInfoHeaderBlockView {
         var imageViewLeadingSpace: CGFloat = 0
 
         var titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let titleLabelTextColor = UIColor.stepikAccent
+        let titleLabelTextColor = UIColor.stepikPrimaryText
         var titleLabelInsets = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 0)
         var titleLabelNumberOfLines = 1
     }
@@ -67,7 +67,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
 
 extension CourseInfoTabInfoHeaderBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     func addSubviews() {

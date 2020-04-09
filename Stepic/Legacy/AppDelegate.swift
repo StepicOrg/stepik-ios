@@ -48,9 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsBadgesManager.shared.setup()
 
         RemoteConfig.shared.setup()
+        RemoteConfig.shared.loadingDoneCallback = {
+            ApplicationThemeService().registerDefaultTheme()
+        }
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
+        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setHapticsEnabled(true)
 
         ConnectionHelper.shared.instantiate()
@@ -116,9 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.branchService.setup(launchOptions: launchOptions)
 
-        if #available(iOS 13.0, *) {
-            self.window?.overrideUserInterfaceStyle = .light
-        }
+        ApplicationThemeService().registerDefaultTheme()
 
         return true
     }

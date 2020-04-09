@@ -20,11 +20,27 @@ final class OnboardingCardStepViewController: CardStepViewController {
 
         let step = self.loadOnboardingStep(from: "step\(self.stepIndex!)")
 
+        let styles = """
+<style>
+    :root {
+        color-scheme: light dark;
+    }
+
+    body {
+        font: -apple-system-body;
+        padding-top: 8px;
+    }
+
+    h4 {
+        font: -apple-system-headline;
+    }
+</style>
+"""
         // Add small top padding
         let processor = HTMLProcessor(html: step.text ?? "")
         let html = processor
             .injectDefault()
-            .inject(script: .customHead(head: "<style>\nbody{padding-top: 8px;}</style>"))
+            .inject(script: .customHead(head: styles))
             .html
 
         self.stepWebView.loadHTMLString(html, baseURL: step.baseURL)

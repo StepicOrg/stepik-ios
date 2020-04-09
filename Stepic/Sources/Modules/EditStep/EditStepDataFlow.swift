@@ -12,7 +12,7 @@ enum EditStep {
 
     /// Load step source content
     enum LoadStepSource {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let data: StepikResult<StepSourceData>
@@ -40,7 +40,7 @@ enum EditStep {
 
     /// Try to update remote step source via API
     enum RemoteStepSourceUpdate {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isSuccessful: Bool

@@ -12,7 +12,7 @@ extension NewMatchingQuizTitleView {
         var containerInsets = LayoutInsets(top: 12, left: 16, bottom: 10, right: 64)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-        let shadowColor = UIColor(hex6: 0xEAECF0)
+        let shadowColor = UIColor.stepikShadowFixed
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
     }
@@ -55,7 +55,7 @@ final class NewMatchingQuizTitleView: UIView {
 
     var isShadowVisible: Bool = true {
         didSet {
-            self.shadowView.isHidden = !self.isShadowVisible
+            self.updateShadowVisibility()
         }
     }
 
@@ -93,6 +93,22 @@ final class NewMatchingQuizTitleView: UIView {
                 roundedRect: self.shadowView.bounds,
                 cornerRadius: self.quizElementView.appearance.cornerRadius
             ).cgPath
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateShadowVisibility()
+        }
+    }
+
+    private func updateShadowVisibility() {
+        if self.isDarkInterfaceStyle {
+            self.shadowView.isHidden = true
+        } else {
+            self.shadowView.isHidden = !self.isShadowVisible
         }
     }
 }

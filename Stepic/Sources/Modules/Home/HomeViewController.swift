@@ -330,6 +330,8 @@ final class HomeViewController: BaseExploreViewController {
     }
 }
 
+// MARK: - HomeViewController: HomeViewControllerProtocol -
+
 extension HomeViewController: HomeViewControllerProtocol {
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
@@ -381,9 +383,7 @@ extension HomeViewController: HomeViewControllerProtocol {
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
 
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
-            strongSelf.refreshStateForEnrolledCourses(
-                state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal
-            )
+            strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }
     }

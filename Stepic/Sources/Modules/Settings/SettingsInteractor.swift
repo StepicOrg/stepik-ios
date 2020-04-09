@@ -15,6 +15,9 @@ protocol SettingsInteractorProtocol {
     // StepFontSize
     func doStepFontSizeSettingPresentation(request: Settings.StepFontSizeSettingPresentation.Request)
     func doStepFontSizeUpdate(request: Settings.StepFontSizeSettingUpdate.Request)
+    // ApplicationTheme
+    func doApplicationThemeSettingPresentation(request: Settings.ApplicationThemeSettingPresentation.Request)
+    func doApplicationThemeSettingUpdate(request: Settings.ApplicationThemeSettingUpdate.Request)
 
     func doUseCellularDataForDownloadsSettingUpdate(request: Settings.UseCellularDataForDownloadsSettingUpdate.Request)
     func doAutoplayNextVideoSettingUpdate(request: Settings.AutoplayNextVideoSettingUpdate.Request)
@@ -30,27 +33,32 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     private let provider: SettingsProviderProtocol
 
     private let userAccountService: UserAccountServiceProtocol
+    private let remoteConfig: RemoteConfig
 
     private var settingsData: Settings.SettingsData {
         .init(
             downloadVideoQuality: self.provider.globalDownloadVideoQuality,
             streamVideoQuality: self.provider.globalStreamVideoQuality,
+            applicationTheme: self.provider.globalApplicationTheme,
             contentLanguage: self.provider.globalContentLanguage,
             stepFontSize: self.provider.globalStepFontSize,
             shouldUseCellularDataForDownloads: self.provider.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: self.provider.isAutoplayEnabled,
-            isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled
+            isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled,
+            isDarkModeAvailable: self.remoteConfig.isDarkModeAvailable
         )
     }
 
     init(
         presenter: SettingsPresenterProtocol,
         provider: SettingsProviderProtocol,
-        userAccountService: UserAccountServiceProtocol
+        userAccountService: UserAccountServiceProtocol,
+        remoteConfig: RemoteConfig
     ) {
         self.presenter = presenter
         self.provider = provider
         self.userAccountService = userAccountService
+        self.remoteConfig = remoteConfig
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
@@ -113,6 +121,21 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
             AnalyticsEvent.stepFontSizeSelected(newStepFontSize).report()
             self.provider.globalStepFontSize = newStepFontSize
+        }
+    }
+
+    func doApplicationThemeSettingPresentation(request: Settings.ApplicationThemeSettingPresentation.Request) {
+        self.presenter.presentApplicationThemeSetting(
+            response: .init(
+                availableApplicationThemes: self.provider.availableApplicationThemes,
+                currentApplicationTheme: self.provider.globalApplicationTheme
+            )
+        )
+    }
+
+    func doApplicationThemeSettingUpdate(request: Settings.ApplicationThemeSettingUpdate.Request) {
+        if let newApplicationTheme = ApplicationTheme(uniqueIdentifier: request.setting.uniqueIdentifier) {
+            self.provider.globalApplicationTheme = newApplicationTheme
         }
     }
 

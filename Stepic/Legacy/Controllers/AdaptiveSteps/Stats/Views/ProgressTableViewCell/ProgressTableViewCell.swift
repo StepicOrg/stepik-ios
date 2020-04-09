@@ -53,7 +53,7 @@ final class ProgressTableViewCell: UITableViewCell {
             self.xpPerWeekTitleLabel,
             self.firstDateLabel,
             self.secondDateLabel
-        ].forEach { $0.textColor = .stepikGray }
+        ].forEach { $0.textColor = .stepikSystemGray }
 
         self.bracketLabel.textColor = .stepikAccent
     }

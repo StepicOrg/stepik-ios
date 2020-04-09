@@ -5,7 +5,7 @@ enum CourseListsCollection {
 
     /// Show course lists
     enum CourseListsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             var result: StepikResult<[CourseListModel]>

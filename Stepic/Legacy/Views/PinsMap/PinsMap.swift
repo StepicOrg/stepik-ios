@@ -26,7 +26,7 @@ final class PinsMap {
         var allowedPins: [Bool] = Array(repeating: false, count: 7)
         var pins: [Int] = Array(repeating: 0, count: 7)
 
-        init() { }
+        init() {}
 
         init(allowedPins: [Bool], pins: [Int]) {
             self.allowedPins = allowedPins

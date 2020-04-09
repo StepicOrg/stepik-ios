@@ -39,6 +39,7 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
             }
             return nil
         }()
+
         return ContinueCourseViewModel(
             title: course.title,
             coverImageURL: URL(string: course.coverURLString),

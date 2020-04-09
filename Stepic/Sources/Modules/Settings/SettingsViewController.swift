@@ -7,6 +7,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
     func displaySettings(viewModel: Settings.SettingsLoad.ViewModel)
     func displayDownloadVideoQualitySetting(viewModel: Settings.DownloadVideoQualitySettingPresentation.ViewModel)
     func displayStreamVideoQualitySetting(viewModel: Settings.StreamVideoQualitySettingPresentation.ViewModel)
+    func displayApplicationThemeSetting(viewModel: Settings.ApplicationThemeSettingPresentation.ViewModel)
     func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel)
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
@@ -31,7 +32,7 @@ final class SettingsViewController: UIViewController {
     lazy var settingsView = self.view as? SettingsView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
-    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+    private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.closeButtonClicked)
     )
@@ -99,9 +100,10 @@ final class SettingsViewController: UIViewController {
         case downloadQuality
         case streamQuality
         case useCellularDataForDownloads
-        case contentLanguage
+        case theme
         case textSize
         case codeEditor
+        case contentLanguage
         case autoplayNextVideo
         case adaptiveMode
         case downloads
@@ -115,6 +117,8 @@ final class SettingsViewController: UIViewController {
                 return NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")
             case .streamQuality:
                 return NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")
+            case .theme:
+                return NSLocalizedString("SettingsCellTitleTheme", comment: "")
             case .useCellularDataForDownloads:
                 return NSLocalizedString("SettingsCellTitleUseCellularDataForDownloads", comment: "")
             case .contentLanguage:
@@ -177,6 +181,22 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         )
     }
 
+    func displayApplicationThemeSetting(viewModel: Settings.ApplicationThemeSettingPresentation.ViewModel) {
+        self.displaySelectionList(
+            settingDescription: viewModel.settingDescription,
+            title: NSLocalizedString("SettingsThemeTitle", comment: ""),
+            onSettingSelected: { [weak self] selectedSetting in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    strongSelf.interactor.doApplicationThemeSettingUpdate(request: .init(setting: selectedSetting))
+                }
+            }
+        )
+    }
+
     func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel) {
         self.displaySelectionList(
             settingDescription: viewModel.settingDescription,
@@ -232,7 +252,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         }()
 
         let viewController = SelectItemTableViewController(
-            style: .insetGroupedFallbackGrouped,
+            style: .stepikInsetGrouped,
             viewModel: .init(
                 sections: [
                     .init(
@@ -292,19 +312,17 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
         )
 
-        // Language
-        let contentLanguageCellViewModel = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.contentLanguage.rawValue,
+        // Appearance
+        let themeCellViewModel = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.theme.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.contentLanguage.cellTitle),
-                    detailType: .label(text: settingsViewModel.contentLanguage),
+                    title: .init(text: Setting.theme.cellTitle),
+                    detailType: .label(text: settingsViewModel.applicationTheme),
                     accessoryType: .disclosureIndicator
                 )
             )
         )
-
-        // Learning
         let stepTextSizeCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.textSize.rawValue,
             type: .rightDetail(
@@ -324,7 +342,21 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 )
             )
         )
-        let autoplayNextVideoCellViewModel = SettingsTableSectionViewModel.Cell(
+
+        // Language
+        let contentLanguageCellViewModel = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.contentLanguage.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Setting.contentLanguage.cellTitle),
+                    detailType: .label(text: settingsViewModel.contentLanguage),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+
+        // Learning
+        let autoplayCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -393,7 +425,11 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
         )
 
-        let sectionsViewModels: [SettingsTableSectionViewModel] = [
+        let learningSectionCellsViewModels = settingsViewModel.isApplicationThemeSettingAvailable
+            ? [autoplayCellViewModel, adaptiveModeCellViewModel]
+            : [stepTextSizeCellViewModel, codeEditorSettingsCellViewModel, autoplayCellViewModel, adaptiveModeCellViewModel]
+
+        var sectionsViewModels: [SettingsTableSectionViewModel] = [
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleVideo", comment: "")),
                 cells: [
@@ -410,12 +446,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLearning", comment: "")),
-                cells: [
-                    stepTextSizeCellViewModel,
-                    codeEditorSettingsCellViewModel,
-                    autoplayNextVideoCellViewModel,
-                    adaptiveModeCellViewModel
-                ],
+                cells: learningSectionCellsViewModels,
                 footer: nil
             ),
             .init(
@@ -430,6 +461,16 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             ),
             .init(header: nil, cells: [logOutCellViewModel], footer: nil)
         ]
+
+        if settingsViewModel.isApplicationThemeSettingAvailable {
+            let appearanceSectionViewModel = SettingsTableSectionViewModel(
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleAppearance", comment: "")),
+                cells: [themeCellViewModel, stepTextSizeCellViewModel, codeEditorSettingsCellViewModel],
+                footer: nil
+            )
+
+            sectionsViewModels.insert(appearanceSectionViewModel, at: 1)
+        }
 
         self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sectionsViewModels))
     }
@@ -453,6 +494,8 @@ extension SettingsViewController: SettingsViewDelegate {
             self.interactor.doDownloadVideoQualitySettingPresentation(request: .init())
         case .streamQuality:
             self.interactor.doStreamVideoQualitySettingPresentation(request: .init())
+        case .theme:
+            self.interactor.doApplicationThemeSettingPresentation(request: .init())
         case .contentLanguage:
             self.interactor.doContentLanguageSettingPresentation(request: .init())
         case .textSize:

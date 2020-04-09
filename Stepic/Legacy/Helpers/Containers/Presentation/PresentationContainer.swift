@@ -14,5 +14,5 @@ import Foundation
 final class PresentationContainer {
     static let certificates = CertificatesPresentationContainer()
 
-    private init() { }
+    private init() {}
 }

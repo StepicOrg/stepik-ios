@@ -101,7 +101,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
         self.shadowViewHeight.constant = 0.5
 
         self.statusBarPad = UIView()
-        self.statusBarPad?.backgroundColor = .stepikBackground
+        self.statusBarPad?.backgroundColor = .stepikNavigationBarBackground
         if let padView = self.statusBarPad {
             self.view.insertSubview(padView, at: 0)
         }
@@ -138,14 +138,14 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
     }
 
     private func updateAppearance() {
-        self.view.backgroundColor = .stepikBackground
+        self.view.backgroundColor = .dynamic(light: .stepikLightSecondaryBackground, dark: .stepikBackground)
         self.kolodaView.backgroundColor = .clear
         self.progressBar.progressTintColor = .stepikGreen
-        self.shadowView.backgroundColor = .stepikOpaqueSeparator
-        self.trophyButton.tintColor = .stepikAccent
-        self.backButton.tintColor = .stepikAccent
-        self.expLabel.textColor = .stepikAccent
-        self.levelLabel.textColor = .stepikAccent
+        self.shadowView.backgroundColor = .dynamic(light: .stepikOpaqueSeparator, dark: .clear)
+        self.trophyButton.tintColor = .stepikPrimaryText
+        self.backButton.tintColor = .stepikPrimaryText
+        self.expLabel.textColor = .stepikPrimaryText
+        self.levelLabel.textColor = .stepikPrimaryText
     }
 
     @IBAction

@@ -12,8 +12,8 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                titleLabelColor: UIColor.stepikAccent,
-                showAllButtonColor: UIColor.stepikAccentAlpha30
+                titleLabelColor: .stepikPrimaryText,
+                showAllButtonColor: .stepikTertiaryText
             )
         case .dark:
             return .init(
@@ -63,41 +63,18 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                textColor: UIColor.stepikPrimaryText,
-                backgroundColor: self.courseWidgetButtonBackgroundColor,
-                callToActionTextColor: UIColor.stepikGreen,
-                callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
+                textColor: .stepikPrimaryText,
+                backgroundColor: .stepikLightSecondaryBackground,
+                callToActionTextColor: .stepikCallToActionText,
+                callToActionBackgroundColor: .stepikCallToActionBackground
             )
         case .dark:
             return .init(
-                textColor: UIColor.white,
-                backgroundColor: self.courseWidgetButtonBackgroundColor,
-                callToActionTextColor: UIColor.stepikGreen,
-                callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
+                textColor: .white,
+                backgroundColor: UIColor.white.withAlphaComponent(0.1),
+                callToActionTextColor: .stepikCallToActionText,
+                callToActionBackgroundColor: .stepikCallToActionBackground
             )
-        }
-    }
-
-    private var courseWidgetButtonBackgroundColor: UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
-                switch self {
-                case .light:
-                    if traitCollection.userInterfaceStyle == .dark {
-                        return .stepikSecondaryBackground
-                    }
-                    return .stepikAccentAlpha06
-                case .dark:
-                    return UIColor.white.withAlphaComponent(0.1)
-                }
-            }
-        } else {
-            switch self {
-            case .light:
-                return .stepikAccentAlpha06
-            case .dark:
-                return UIColor.white.withAlphaComponent(0.1)
-            }
         }
     }
 
@@ -105,17 +82,17 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                imagesRenderingBackgroundColor: UIColor.stepikAccent,
-                imagesRenderingTintColor: UIColor.stepikGreen,
-                itemTextColor: UIColor.stepikAccent,
-                itemImageTintColor: UIColor.stepikAccent
+                imagesRenderingBackgroundColor: .stepikAccent,
+                imagesRenderingTintColor: .stepikGreenFixed,
+                itemTextColor: .stepikPrimaryText,
+                itemImageTintColor: .stepikAccent
             )
         case .dark:
             return .init(
-                imagesRenderingBackgroundColor: UIColor.white,
-                imagesRenderingTintColor: UIColor.stepikGreen,
-                itemTextColor: UIColor.white,
-                itemImageTintColor: UIColor.white
+                imagesRenderingBackgroundColor: .white,
+                imagesRenderingTintColor: .stepikGreenFixed,
+                itemTextColor: .white,
+                itemImageTintColor: .white
             )
         }
     }
@@ -124,7 +101,7 @@ extension CourseListColorMode {
         switch self {
         case .light:
             var appearance = CourseWidgetLabel.Appearance()
-            appearance.textColor = .stepikAccent
+            appearance.textColor = .stepikPrimaryText
             return appearance
         case .dark:
             var appearance = CourseWidgetLabel.Appearance()

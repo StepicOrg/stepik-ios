@@ -38,7 +38,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     }
 
     private func updateWatched() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+        if self.isDarkInterfaceStyle {
             self.layer.borderColor = self.isWatched
                 ? UIColor.stepikSecondaryBackground.withAlphaComponent(0.5).cgColor
                 : UIColor.stepikTertiaryBackground.cgColor

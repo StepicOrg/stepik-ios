@@ -22,6 +22,7 @@ final class SettingsAssembly: Assembly {
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             autoplayStorageManager: AutoplayStorageManager(),
             adaptiveStorageManager: AdaptiveStorageManager.shared,
+            applicationThemeService: ApplicationThemeService(),
             downloadsProvider: DownloadsProvider(
                 coursesPersistenceService: CoursesPersistenceService(),
                 adaptiveStorageManager: AdaptiveStorageManager.shared,
@@ -37,7 +38,8 @@ final class SettingsAssembly: Assembly {
         let interactor = SettingsInteractor(
             presenter: presenter,
             provider: provider,
-            userAccountService: UserAccountService()
+            userAccountService: UserAccountService(),
+            remoteConfig: .shared
         )
         let viewController = SettingsViewController(
             interactor: interactor,

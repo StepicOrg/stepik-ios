@@ -70,9 +70,9 @@ enum BaseExplore {
     }
 
     enum AuthorizationPresentation {
-        struct Response { }
+        struct Response {}
 
-        struct ViewModel { }
+        struct ViewModel {}
     }
 
     /// Try to set online status for submodules

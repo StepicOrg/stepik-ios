@@ -15,8 +15,8 @@ protocol StepCardViewDelegate: AnyObject {
 }
 
 extension StepCardViewDelegate {
-    func onControlButtonClick() { }
-    func onTitleButtonClick() { }
+    func onControlButtonClick() {}
+    func onTitleButtonClick() {}
 }
 
 final class StepCardView: NibInitializableView {
@@ -167,7 +167,7 @@ final class StepCardView: NibInitializableView {
         }
 
         self.titlePadView.backgroundColor = .clear
-        self.titleLabel.textColor = .stepikSystemLabel
+        self.titleLabel.textColor = .stepikSystemPrimaryText
         self.titleButton.superview?.tintColor = .stepikAccent
         self.titleSeparatorView.backgroundColor = .stepikSeparator
 

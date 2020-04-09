@@ -10,14 +10,12 @@ extension UnsupportedQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
-        let titleColor = UIColor.stepikAccent
+        let titleColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let actionButtonCornerRadius: CGFloat = 8
-        let actionButtonBorderWidth: CGFloat = 8
-        let actionButtonBorderColor = UIColor.stepikAccent
-        let actionButtonBackgroundColor = UIColor.stepikAccent
-        let actionButtonTitleColor = UIColor.white
+        let actionButtonBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
+        let actionButtonTitleColor = UIColor.dynamic(light: .white, dark: .stepikPrimaryText)
         let actionButtonHeight: CGFloat = 44
     }
 }
@@ -41,8 +39,6 @@ final class UnsupportedQuizView: UIView {
         button.setTitleColor(self.appearance.actionButtonTitleColor, for: .normal)
         button.backgroundColor = self.appearance.actionButtonBackgroundColor
         button.layer.cornerRadius = self.appearance.actionButtonCornerRadius
-        button.layer.borderWidth = self.appearance.actionButtonBorderWidth
-        button.layer.borderColor = self.appearance.actionButtonBorderColor.cgColor
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         return button
@@ -67,7 +63,6 @@ final class UnsupportedQuizView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }

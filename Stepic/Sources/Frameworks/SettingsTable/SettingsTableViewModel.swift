@@ -100,7 +100,7 @@ struct RightDetailCellOptions {
 
         init(
             text: String,
-            appearance: Appearance = .init(textColor: .black, textAlignment: .natural)
+            appearance: Appearance = .init(textColor: .stepikSystemPrimaryText, textAlignment: .natural)
         ) {
             self.text = text
             self.appearance = appearance

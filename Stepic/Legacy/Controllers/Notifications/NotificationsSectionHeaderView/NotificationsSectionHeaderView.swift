@@ -28,9 +28,15 @@ final class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet var topSeparatorView: UIView!
     @IBOutlet var bottomSeparatorView: UIView!
+    @IBOutlet var topSeparatorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomSeparatorHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        self.topSeparatorHeightConstraint.constant = 0.5
+        self.bottomSeparatorHeightConstraint.constant = 0.5
+
         self.colorize()
     }
 
@@ -48,11 +54,9 @@ final class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
     }
 
     private func colorize() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.backgroundColorView.backgroundColor = .stepikSecondaryBackground
-        } else {
-            self.backgroundColorView.backgroundColor = .stepikBackground
-        }
+        self.backgroundColorView.backgroundColor = self.isDarkInterfaceStyle
+            ? .stepikSecondaryBackground
+            : .stepikBackground
 
         self.leftLabel.textColor = .stepikPrimaryText
         self.rightLabel.textColor = .stepikPrimaryText

@@ -13,7 +13,7 @@ extension GradientCoursesPlaceholderView {
 
         var labelsInsets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 30)
 
-        init() { }
+        init() {}
     }
 }
 
@@ -102,15 +102,15 @@ final class GradientCoursesPlaceholderView: UIView {
         var titleTextColor: UIColor {
             switch self {
             case .purple:
-                return UIColor.white
+                return .white
             case .blue:
-                return UIColor(hex6: 0x00484e)
+                return .stepikGradientCoursesBluePlaceholderText
             case .pink:
-                return UIColor(hex6: 0x18073d)
+                return .stepikGradientCoursesPinkPlaceholderText
             }
         }
 
-        var subtitleTextColor: UIColor { .stepikAccentAlpha30 }
+        var subtitleTextColor: UIColor { .stepikTertiaryText }
     }
 }
 

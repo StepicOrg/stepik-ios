@@ -11,7 +11,7 @@ extension CourseInfoTabSyllabusSectionDeadlinesView {
         let mainProgressColor = UIColor.stepikAccent
 
         let progressIndicatorHeight: CGFloat = 1.5
-        let labelTextColor = UIColor.stepikAccent
+        let labelTextColor = UIColor.stepikPrimaryText
         let labelFont = UIFont.systemFont(ofSize: 13, weight: .light)
 
         let circleIndicatorRadius: CGFloat = 6.5

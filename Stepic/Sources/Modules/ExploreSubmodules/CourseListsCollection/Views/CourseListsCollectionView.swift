@@ -11,7 +11,6 @@ final class CourseListsCollectionView: UIView {
         let view = ExploreBlockHeaderView(
             appearance: CourseListColorMode.light.exploreBlockHeaderViewAppearance
         )
-
         view.titleText = NSLocalizedString("RecommendationsExplore", comment: "")
         view.summaryText = NSLocalizedString("RecommendationsExploreDescription", comment: "")
         view.shouldShowAllButton = false
@@ -85,7 +84,7 @@ final class CourseListsCollectionView: UIView {
 
 extension CourseListsCollectionView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
     }
 
     func addSubviews() {

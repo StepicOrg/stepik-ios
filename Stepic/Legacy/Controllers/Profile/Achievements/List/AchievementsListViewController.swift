@@ -31,7 +31,7 @@ final class AchievementsListViewController: UIViewController, AchievementsListVi
             for: .connectionError
         )
 
-        self.tableView.backgroundColor = .stepikGroupTableViewBackground
+        self.tableView.backgroundColor = .stepikGroupedBackground
 
         self.tableView.skeleton.viewBuilder = { UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
         self.tableView.register(

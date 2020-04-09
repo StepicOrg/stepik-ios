@@ -9,6 +9,14 @@
 import UIKit
 
 final class SocialAuthCollectionViewCell: UICollectionViewCell {
+    enum Appearance {
+        static let shadowColor = UIColor.dynamic(light: UIColor(hex6: 0xBBBBBB), dark: .clear)
+        static let backgroundColor = UIColor.dynamic(
+            light: .stepikBackground,
+            dark: .stepikSecondaryBackground
+        )
+    }
+
     static let reuseId = "socialAuthCell"
 
     @IBOutlet weak var imageView: UIImageView!
@@ -34,7 +42,6 @@ final class SocialAuthCollectionViewCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = layer.cornerRadius
         self.contentView.layer.masksToBounds = true
 
-        self.layer.shadowColor = UIColor(hex6: 0xBBBBBB).cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 1.5)
         self.layer.shadowRadius = 1.7
         self.layer.shadowOpacity = 0.3
@@ -56,10 +63,7 @@ final class SocialAuthCollectionViewCell: UICollectionViewCell {
     }
 
     private func colorize() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.contentView.backgroundColor = UIColor.stepikSecondaryBackground.withAlphaComponent(0.1)
-        } else {
-            self.contentView.backgroundColor = .stepikBackground
-        }
+        self.layer.shadowColor = Appearance.shadowColor.cgColor
+        self.contentView.backgroundColor = Appearance.backgroundColor
     }
 }

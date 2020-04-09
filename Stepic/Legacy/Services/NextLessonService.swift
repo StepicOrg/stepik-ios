@@ -24,7 +24,7 @@ protocol NextLessonServiceSectionSourceProtocol: UniqueIdentifiable {
 }
 
 @available(*, deprecated, message: "Should use Unit model")
-protocol NextLessonServiceUnitSourceProtocol: UniqueIdentifiable { }
+protocol NextLessonServiceUnitSourceProtocol: UniqueIdentifiable {}
 
 final class NextLessonService: NextLessonServiceProtocol {
     private var sections: [NextLessonServiceSectionSourceProtocol] = []

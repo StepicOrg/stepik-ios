@@ -56,7 +56,7 @@ final class RegistrationViewController: UIViewController {
     @IBOutlet var separatorFirst: UIView!
     @IBOutlet var separatorSecond: UIView!
 
-    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+    private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.onCloseClick(_:))
     )

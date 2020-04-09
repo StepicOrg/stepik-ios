@@ -4,7 +4,7 @@ import UIKit
 extension CodeDetailsView {
     struct Appearance {
         let spacing: CGFloat = 1
-        let backgroundColor = UIColor.white
+        let backgroundColor = UIColor.stepikBackground
 
         let detailsButtonHeight: CGFloat = 44
     }

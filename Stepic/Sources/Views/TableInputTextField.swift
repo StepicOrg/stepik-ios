@@ -20,7 +20,7 @@ class TableInputTextField: UITextField {
         return 0
     }
 
-    var placeholderColor = UIColor.black.withAlphaComponent(0.4)
+    var placeholderColor = UIColor.stepikSystemPlaceholderText
 
     var textInsets = Appearance.textAreaInsets {
         didSet {

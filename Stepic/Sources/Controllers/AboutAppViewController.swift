@@ -4,7 +4,7 @@ import UIKit
 
 final class AboutAppViewController: UIViewController {
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGroupedFallbackGrouped)
+        let tableView = UITableView(frame: .zero, style: .stepikInsetGrouped)
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 200
         tableView.sectionFooterHeight = UITableView.automaticDimension
@@ -79,7 +79,7 @@ final class AboutAppViewController: UIViewController {
     // MARK: Inner Types
 
     private enum Appearance {
-        static var appVersionLabelTextColor = UIColor.stepikAccent
+        static var appVersionLabelTextColor = UIColor.stepikSystemSecondaryText
         static var appVersionLabelFont = UIFont.systemFont(ofSize: 14)
         static var appVersionLabelTextAlignment = NSTextAlignment.center
         static var appVersionLabelInsets = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)

@@ -1,3 +1,13 @@
+:root {
+    color-scheme: light dark;
+    --hljs-background-color: #FDF6E3;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --hljs-background-color: #161613;
+    }
+}
 
 .wysiwyg-color-red {
     color: #ff4363;
@@ -93,7 +103,7 @@
     display: block;
     overflow-x: auto;
     padding: .5em;
-    background: #FDF6E3;
+    background: var(--hljs-background-color);
     color: #657B83;
     -webkit-text-size-adjust: none;
     -webkit-font-smoothing: antialiased;

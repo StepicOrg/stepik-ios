@@ -12,15 +12,15 @@ extension NewStringQuizView {
 
         let textFieldPlaceholderFont = UIFont.systemFont(ofSize: 16)
         let textFieldPlaceholderColor = UIColor.stepikPlaceholderText
-        let textFieldTextColor = UIColor.stepikAccent
+        let textFieldTextColor = UIColor.stepikPrimaryText
         let textFieldHeight: CGFloat = 48
 
-        let titleColor = UIColor.stepikAccent
+        let titleColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let textFieldBorderCornerRadius: CGFloat = 6
         let textFieldBorderWidth: CGFloat = 1
-        let textFieldBorderColor = UIColor(hex6: 0xCCCCCC)
+        let textFieldBorderColor = UIColor.stepikSeparator
 
         let statusMarkInsets = LayoutInsets(right: 16)
         let statusMarkSize = CGSize(width: 20, height: 20)

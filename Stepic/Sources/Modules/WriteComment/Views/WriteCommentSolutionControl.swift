@@ -3,11 +3,12 @@ import UIKit
 
 extension WriteCommentSolutionControl {
     struct Appearance {
-        let textColor = UIColor.stepikAccent
+        let textColor = UIColor.stepikPrimaryText
         let textFont = UIFont.systemFont(ofSize: 17)
 
         let rightArrowImageSize = CGSize(width: 15, height: 15)
         let rightArrowImageInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        let rightArrowImageColor = UIColor.stepikSeparator
     }
 }
 
@@ -36,9 +37,11 @@ final class WriteCommentSolutionControl: UIControl {
     }()
 
     private lazy var rightArrowImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "menu_arrow_right"))
+        let image = UIImage(named: "menu_arrow_right")
+        let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = false
+        imageView.tintColor = self.appearance.rightArrowImageColor
         return imageView
     }()
 
@@ -52,7 +55,6 @@ final class WriteCommentSolutionControl: UIControl {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -86,8 +88,6 @@ final class WriteCommentSolutionControl: UIControl {
 }
 
 extension WriteCommentSolutionControl: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
-
     func addSubviews() {
         self.addSubview(self.solutionStackView)
         self.addSubview(self.rightArrowImageView)
@@ -101,7 +101,9 @@ extension WriteCommentSolutionControl: ProgrammaticallyInitializableViewProtocol
 
         self.rightArrowImageView.translatesAutoresizingMaskIntoConstraints = false
         self.rightArrowImageView.snp.makeConstraints { make in
-            make.leading.equalTo(self.solutionStackView.snp.trailing).offset(self.appearance.rightArrowImageInsets.left)
+            make.leading
+                .equalTo(self.solutionStackView.snp.trailing)
+                .offset(self.appearance.rightArrowImageInsets.left)
             make.trailing.equalToSuperview()
             make.size.equalTo(self.appearance.rightArrowImageSize)
             make.centerY.equalToSuperview()

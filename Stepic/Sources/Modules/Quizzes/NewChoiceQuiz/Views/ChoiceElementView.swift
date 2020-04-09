@@ -5,11 +5,11 @@ extension ChoiceElementView {
     struct Appearance {
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-        let shadowColor = UIColor(hex6: 0xEAECF0)
+        let shadowColor = UIColor.stepikShadowFixed
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
 
-        let feedbackBackgroundColor = UIColor(hex6: 0xF6F6F6)
+        let feedbackBackgroundColor = UIColor.stepikLightSecondaryBackground
         let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }
@@ -132,7 +132,23 @@ final class ChoiceElementView: UIView {
         }
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateShadowVisibility()
+        }
+    }
+
     // MARK: - Private API
+
+    private func updateShadowVisibility() {
+        if self.isDarkInterfaceStyle {
+            self.shadowView.isHidden = true
+        } else {
+            self.shadowView.isHidden = !self.isEnabled
+        }
+    }
 
     private func updateCornersForFeedback() {
         let path = UIBezierPath(
@@ -160,7 +176,7 @@ final class ChoiceElementView: UIView {
             self.quizElementView.state = .selected
         }
 
-        self.shadowView.isHidden = !self.isEnabled
+        self.updateShadowVisibility()
     }
 
     // MARK: - Enums

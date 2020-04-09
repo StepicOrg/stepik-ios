@@ -12,7 +12,7 @@ class BaseListFlowLayout: UICollectionViewFlowLayout {
 
         var count = 0
         for section in 0..<collectionView.numberOfSections {
-            for item in 0..<collectionView.numberOfItems(inSection: section) {
+            for _ in 0..<collectionView.numberOfItems(inSection: section) {
                 count += 1
             }
         }

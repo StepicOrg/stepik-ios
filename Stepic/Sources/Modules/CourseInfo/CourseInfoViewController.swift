@@ -129,6 +129,15 @@ final class CourseInfoViewController: UIViewController {
         self.view = view
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            // Update status bar style.
+            self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+        }
+    }
+
     private func updateTopBar(alpha: CGFloat) {
         self.view.performBlockUsingViewTraitCollection {
             self.styledNavigationController?.changeBackgroundColor(
@@ -147,9 +156,15 @@ final class CourseInfoViewController: UIViewController {
                 sender: self
             )
 
-            let statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
-                ? UIStatusBarStyle.dark
-                : UIStatusBarStyle.lightContent
+
+            let statusBarStyle: UIStatusBarStyle = {
+                if alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold) {
+                    return self.view.isDarkInterfaceStyle ? .lightContent : .dark
+                } else {
+                    return .lightContent
+                }
+            }()
+
             self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
         }
     }
@@ -341,20 +356,20 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
         willScrollToPageAt index: PageboyViewController.PageIndex,
         direction: PageboyViewController.NavigationDirection,
         animated: Bool
-    ) { }
+    ) {}
 
     func pageboyViewController(
         _ pageboyViewController: PageboyViewController,
         didScrollTo position: CGPoint,
         direction: PageboyViewController.NavigationDirection,
         animated: Bool
-    ) { }
+    ) {}
 
     func pageboyViewController(
         _ pageboyViewController: PageboyViewController,
         didReloadWith currentViewController: UIViewController,
         currentPageIndex: PageboyViewController.PageIndex
-    ) { }
+    ) {}
 }
 
 extension CourseInfoViewController: CourseInfoViewControllerProtocol {

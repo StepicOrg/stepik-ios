@@ -18,6 +18,12 @@ final class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorImageView: UIImageView!
 
     private var isMe: Bool = false
+    private var isMeBackgroundColor: UIColor {
+        .dynamic(
+            light: UIColor.stepikYellow.withAlphaComponent(0.4),
+            dark: UIColor.stepikYellow.withAlphaComponent(0.1)
+        )
+    }
 
     var isSeparator: Bool = false {
         didSet {
@@ -59,7 +65,7 @@ final class LeaderboardTableViewCell: UITableViewCell {
         self.isMe = isMe
 
         if isMe {
-            self.backgroundColor = .stepikYellow
+            self.backgroundColor = self.isMeBackgroundColor
             self.userLabel.text = NSLocalizedString("AdaptiveRatingYou", comment: "")
         }
     }
@@ -83,10 +89,10 @@ final class LeaderboardTableViewCell: UITableViewCell {
     }
 
     private func colorize() {
-        self.backgroundColor = self.isMe ? .stepikYellow : .clear
-        self.separatorImageView.tintColor = .stepikOpaqueSeparator
-        self.userLabel.textColor = .stepikGray
-        self.positionLabel.textColor = .stepikGray
-        self.expLabel.textColor = .stepikGray2
+        self.backgroundColor = self.isMe ? self.isMeBackgroundColor : .clear
+        self.separatorImageView.tintColor = .stepikSeparator
+        self.userLabel.textColor = .stepikSystemGray
+        self.positionLabel.textColor = .stepikSystemGray
+        self.expLabel.textColor = .stepikSystemGray2
     }
 }

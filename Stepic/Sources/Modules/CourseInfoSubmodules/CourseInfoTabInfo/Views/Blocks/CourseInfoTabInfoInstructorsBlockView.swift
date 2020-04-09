@@ -65,7 +65,7 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
 
 extension CourseInfoTabInfoInstructorsBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     func addSubviews() {

@@ -30,7 +30,13 @@ final class AdaptiveRatingsAPI: APIEndpoint {
         }
 
         return Promise { seal in
-            manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(name)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: nil).responseSwiftyJSON { response in
+            self.manager.request(
+                "\(RemoteConfig.shared.adaptiveBackendURL)/\(name)",
+                method: .put,
+                parameters: params,
+                encoding: JSONEncoding.default,
+                headers: nil
+            ).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(error)
@@ -61,7 +67,7 @@ final class AdaptiveRatingsAPI: APIEndpoint {
 
         return Promise { seal in
             self.manager.request(
-                "\(RemoteConfig.shared.adaptiveBackendUrl)/\(self.name)",
+                "\(RemoteConfig.shared.adaptiveBackendURL)/\(self.name)",
                 method: .get,
                 parameters: params,
                 encoding: URLEncoding.default,
@@ -102,7 +108,7 @@ final class AdaptiveRatingsAPI: APIEndpoint {
 
         return Promise { seal in
             self.manager.request(
-                "\(RemoteConfig.shared.adaptiveBackendUrl)/\(self.restoreName)",
+                "\(RemoteConfig.shared.adaptiveBackendURL)/\(self.restoreName)",
                 method: .get,
                 parameters: params,
                 encoding: URLEncoding.default,

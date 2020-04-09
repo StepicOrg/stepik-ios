@@ -16,10 +16,10 @@ protocol QuizControllerDelegate: AnyObject {
 }
 
 extension QuizControllerDelegate {
-    func submissionDidCorrect() { }
-    func submissionDidWrong() { }
-    func submissionDidRetry() { }
-    func didWarningPlaceholderShow() { }
+    func submissionDidCorrect() {}
+    func submissionDidWrong() {}
+    func submissionDidRetry() {}
+    func didWarningPlaceholderShow() {}
 }
 
 protocol QuizControllerDataSource: AnyObject {

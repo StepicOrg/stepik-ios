@@ -10,8 +10,7 @@ struct PopularCourseListType: CourseListType {
     let language: ContentLanguage
 }
 
-struct EnrolledCourseListType: CourseListType {
-}
+struct EnrolledCourseListType: CourseListType {}
 
 struct TagCourseListType: CourseListType {
     let id: Int

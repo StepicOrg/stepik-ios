@@ -9,7 +9,7 @@ extension CourseListView {
 
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.stepikAccentFixed
-        let darkModeDarkInterfaceStyleBackgroundColor = UIColor.stepikSecondaryBackground
+        let darkModeDarkInterfaceBackgroundColor = UIColor.stepikSecondaryBackground
 
         let horizontalLayoutNextPageWidth: CGFloat = 12.0
     }
@@ -104,11 +104,9 @@ class CourseListView: UIView {
         case .light:
             return self.appearance.lightModeBackgroundColor
         case .dark:
-            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-                return self.appearance.darkModeDarkInterfaceStyleBackgroundColor
-            } else {
-                return self.appearance.darkModeBackgroundColor
-            }
+            return self.isDarkInterfaceStyle
+                ? self.appearance.darkModeDarkInterfaceBackgroundColor
+                : self.appearance.darkModeBackgroundColor
         }
     }
 

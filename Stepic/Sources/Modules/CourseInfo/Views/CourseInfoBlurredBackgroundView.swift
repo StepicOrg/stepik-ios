@@ -22,8 +22,7 @@ final class CourseInfoBlurredBackgroundView: UIView {
     }()
 
     private lazy var blurView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
+        let blurView = UIVisualEffectView(effect: nil)
         return blurView
     }()
 
@@ -41,11 +40,21 @@ final class CourseInfoBlurredBackgroundView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
+
+        self.updateBlurEffect()
     }
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateBlurEffect()
+        }
     }
 
     func loadImage(url: URL?) {
@@ -61,6 +70,14 @@ final class CourseInfoBlurredBackgroundView: UIView {
             )
         } else {
             self.imageView.image = nil
+        }
+    }
+
+    private func updateBlurEffect() {
+        if #available(iOS 13.0, *), self.isDarkInterfaceStyle {
+            self.blurView.effect = UIBlurEffect(style: .systemThickMaterialDark)
+        } else {
+            self.blurView.effect = UIBlurEffect(style: .dark)
         }
     }
 }

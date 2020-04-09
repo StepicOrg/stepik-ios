@@ -4,6 +4,7 @@ protocol SettingsPresenterProtocol {
     func presentSettings(response: Settings.SettingsLoad.Response)
     func presentDownloadVideoQualitySetting(response: Settings.DownloadVideoQualitySettingPresentation.Response)
     func presentStreamVideoQualitySetting(response: Settings.StreamVideoQualitySettingPresentation.Response)
+    func presentApplicationThemeSetting(response: Settings.ApplicationThemeSettingPresentation.Response)
     func presentContentLanguageSetting(response: Settings.ContentLanguageSettingPresentation.Response)
     func presentStepFontSizeSetting(response: Settings.StepFontSizeSettingPresentation.Response)
     func presentDeleteAllContentResult(response: Settings.DeleteAllContent.Response)
@@ -51,6 +52,20 @@ final class SettingsPresenter: SettingsPresenterProtocol {
         self.viewController?.displayStreamVideoQualitySetting(viewModel: .init(settingDescription: settingDescription))
     }
 
+    func presentApplicationThemeSetting(response: Settings.ApplicationThemeSettingPresentation.Response) {
+        let settingDescription = Settings.SettingDescription(
+            settings: response.availableApplicationThemes.map {
+                .init(uniqueIdentifier: $0.uniqueIdentifier, title: $0.title)
+            },
+            currentSetting: .init(
+                uniqueIdentifier: response.currentApplicationTheme.uniqueIdentifier,
+                title: response.currentApplicationTheme.title
+            )
+        )
+
+        self.viewController?.displayApplicationThemeSetting(viewModel: .init(settingDescription: settingDescription))
+    }
+
     func presentContentLanguageSetting(response: Settings.ContentLanguageSettingPresentation.Response) {
         let settingDescription = Settings.SettingDescription(
             settings: response.availableContentLanguages.map {
@@ -93,11 +108,13 @@ final class SettingsPresenter: SettingsPresenterProtocol {
         SettingsViewModel(
             downloadVideoQuality: FormatterHelper.downloadVideoQualityInProgressiveScan(data.downloadVideoQuality),
             streamVideoQuality: FormatterHelper.streamVideoQualityInProgressiveScan(data.streamVideoQuality),
+            applicationTheme: data.applicationTheme.title,
             contentLanguage: data.contentLanguage.fullString,
             stepFontSize: data.stepFontSize.title,
             shouldUseCellularDataForDownloads: data.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: data.isAutoplayEnabled,
-            isAdaptiveModeEnabled: data.isAdaptiveModeEnabled
+            isAdaptiveModeEnabled: data.isAdaptiveModeEnabled,
+            isApplicationThemeSettingAvailable: data.isDarkModeAvailable
         )
     }
 }

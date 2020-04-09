@@ -28,7 +28,7 @@ enum CourseInfoTabSyllabus {
 
     /// Course syllabus
     enum SyllabusLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             var result: StepikResult<SyllabusData>
@@ -147,7 +147,7 @@ enum CourseInfoTabSyllabus {
 
     /// Update syllabus header (deadlines, download all)
     enum SyllabusHeaderUpdate {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isPersonalDeadlinesAvailable: Bool
@@ -164,7 +164,7 @@ enum CourseInfoTabSyllabus {
 
     /// Click on personal deadlines button
     enum PersonalDeadlinesButtonAction {
-        struct Request { }
+        struct Request {}
     }
 
     /// Handle HUD

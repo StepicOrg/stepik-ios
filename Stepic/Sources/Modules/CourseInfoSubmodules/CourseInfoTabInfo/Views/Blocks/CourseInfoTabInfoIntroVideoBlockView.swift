@@ -30,8 +30,7 @@ extension CourseInfoTabInfoIntroVideoBlockView {
         let playImageTintColor = UIColor.white
         let playImageViewSize = CGSize(width: 25, height: 31)
 
-        let overlayColor = UIColor.stepikAccent
-        let overlayOpacity: CGFloat = 0.4
+        let overlayColor = UIColor.stepikOverlayBackground
     }
 }
 
@@ -59,7 +58,6 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
     private lazy var overlayView: UIView = {
         let view = UIView()
         view.backgroundColor = self.appearance.overlayColor
-        view.alpha = self.appearance.overlayOpacity
         self.addPlayVideoGestureRecognizer(view: view)
         return view
     }()
@@ -139,7 +137,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
 extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     func addSubviews() {

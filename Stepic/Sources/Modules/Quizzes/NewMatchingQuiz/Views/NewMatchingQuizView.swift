@@ -24,7 +24,7 @@ extension NewMatchingQuizView {
         let defaultSortingTitleInsets = LayoutInsets(top: 12, left: 16, bottom: 10, right: 64)
         let firstSortingTitleInsets = LayoutInsets(top: 0, left: 16, bottom: 10, right: 64)
 
-        let titleColor = UIColor.stepikAccent
+        let titleColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
@@ -43,7 +43,7 @@ final class NewMatchingQuizView: UIView {
     weak var delegate: NewMatchingQuizViewDelegate?
 
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .white)
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhite)
         loadingIndicatorView.color = self.appearance.loadingIndicatorColor
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()

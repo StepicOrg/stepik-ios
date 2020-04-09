@@ -547,6 +547,7 @@ LoadStories = "Загрузить истории";
 /* Settings */
 SettingsTitle = "Настройки";
 SettingsHeaderTitleVideo = "Видео";
+SettingsHeaderTitleAppearance = "Оформление";
 SettingsHeaderTitleLanguage = "Язык";
 SettingsHeaderTitleLearning = "Обучение";
 SettingsHeaderTitleDownloadedContent = "Загруженный контент";
@@ -555,6 +556,7 @@ SettingsHeaderTitleOther = "Другое";
 SettingsCellTitleDownloadQuality = "Качество загрузки";
 SettingsCellTitleStreamQuality = "Качество воспроизведения";
 SettingsCellTitleUseCellularDataForDownloads = "Использовать сотовые данные для загрузки";
+SettingsCellTitleTheme = "Тема";
 SettingsCellTitleContentLanguage = "Язык контента";
 SettingsCellTitleTextSizeInSteps = "Размер текста в шагах";
 SettingsCellTitleCodeEditor = "Настройки редактора кода";
@@ -581,6 +583,11 @@ SettingStreamVideoQualityVeryHigh = "Максимальное";
 
 SettingsContentLanguageTitle = "Язык контента";
 SettingsContentLanguageFooterTitle = "Выберите язык на котором вы будете видеть в приложении курсы.";
+
+SettingsThemeTitle = "Тема";
+SettingsThemeItemSystem = "Системная";
+SettingsThemeItemDark = "Тёмная";
+SettingsThemeItemLight = "Светлая";
 
 SettingsStepFontSizeTitle = "Размер текста";
 SettingsStepFontSizeFooterTitle = "Изменения размера текста влияют только на текст шага.";
@@ -722,7 +729,7 @@ ProfileEditLastNamePlaceholder = "Фамилия";
 ProfileEditShortBioPlaceholder = "Краткая биография (до 255 символов)";
 ProfileEditDetailsPlaceholder = "Обо мне";
 ProfileEditGeneralTitle = "Общие данные";
-ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
+ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах.";
 ProfileEditAboutMeTitle = "О себе";
 ProfileEditEmailTitle = "Email";
 ProfileEditEmailPlaceholder = "Адрес";
@@ -903,7 +910,7 @@ DiscussionsAlertActionUnlikeTitle = "Больше не нравится";
 DiscussionsAlertActionAbuseTitle = "Пожаловаться";
 DiscussionsAlertActionUnabuseTitle = "Не жаловаться";
 DiscussionsAlertActionShowSolutionTitle = "Показать решение";
-DiscussionsSortTypeAlertTitle = "Сортировать по";
+DiscussionsSortTypeAlertTitle = "Сортировка:";
 DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
 DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";

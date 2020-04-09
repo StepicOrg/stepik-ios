@@ -23,8 +23,7 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
     }
 
     func doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request) {
-        self.provider.fetchCachedCourseLists().then {
-            cachedCourseLists -> Promise<[CourseListModel]> in
+        self.provider.fetchCachedCourseLists().then { cachedCourseLists -> Promise<[CourseListModel]> in
             // Pass cached data to presenter and start fetching from remote
             let response = StepikResult<[CourseListModel]>.success(cachedCourseLists)
             self.presenter.presentCourses(
@@ -48,8 +47,7 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
     func doFullscreenCourseListPresentation(
         request: CourseListsCollection.FullscreenCourseListModulePresentation.Request
     ) {
-        guard let collectionCourseListType = request.courseListType
-            as? CollectionCourseListType else {
+        guard let collectionCourseListType = request.courseListType as? CollectionCourseListType else {
             return
         }
 
@@ -81,13 +79,11 @@ extension CourseListsCollectionInteractor: CourseListOutputProtocol {
         self.moduleOutput?.presentAuthorization()
     }
 
-    func presentEmptyState(sourceModule: CourseListInputProtocol) {
-    }
-
-    func presentError(sourceModule: CourseListInputProtocol) {
-    }
-
     func presentPaidCourseInfo(course: Course) {
         self.moduleOutput?.presentPaidCourseInfo(course: course)
     }
+
+    func presentEmptyState(sourceModule: CourseListInputProtocol) {}
+
+    func presentError(sourceModule: CourseListInputProtocol) {}
 }

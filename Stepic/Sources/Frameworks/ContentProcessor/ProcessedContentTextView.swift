@@ -22,7 +22,7 @@ extension ProcessedContentTextViewDelegate {
 extension ProcessedContentTextView {
     struct Appearance {
         var insets = LayoutInsets(top: 10, left: 16, bottom: 4, right: 16)
-        var backgroundColor = UIColor.white
+        var backgroundColor = UIColor.stepikBackground
     }
 }
 

@@ -40,7 +40,7 @@ final class TableInputTextView: UITextView {
         }
     }
 
-    var placeholderColor = UIColor.black.withAlphaComponent(0.4) {
+    var placeholderColor = UIColor.stepikSystemPlaceholderText {
         didSet {
             self.placeholderLabel.textColor = self.placeholderColor
         }
@@ -95,6 +95,7 @@ final class TableInputTextView: UITextView {
 
         self.isScrollEnabled = false
 
+        self.backgroundColor = .clear
         self.font = Appearance.defaultFont
 
         if self.placeholderLabel.superview == nil {

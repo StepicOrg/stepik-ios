@@ -29,7 +29,7 @@ final class CodeInputAccessoryCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
 
         self.backgroundColor = .stepikTertiaryBackground
-        self.textLabel.textColor = .stepikSystemLabel
+        self.textLabel.textColor = .stepikSystemPrimaryText
     }
 
     func initialize(text: String, size: CodeInputAccessorySize) {

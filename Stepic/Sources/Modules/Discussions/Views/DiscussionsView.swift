@@ -9,8 +9,6 @@ protocol DiscussionsViewDelegate: AnyObject {
 
 extension DiscussionsView {
     struct Appearance {
-        let backgroundColor: UIColor = .white
-
         let paginationViewHeight: CGFloat = 52
         let skeletonCellHeight: CGFloat = 130
     }
@@ -29,7 +27,6 @@ final class DiscussionsView: UIView {
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
 
         tableView.refreshControl = self.refreshControl
@@ -63,7 +60,6 @@ final class DiscussionsView: UIView {
         self.tableViewDelegate = tableViewDelegate
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -152,10 +148,6 @@ final class DiscussionsView: UIView {
 // MARK: - DiscussionsView: ProgrammaticallyInitializableViewProtocol -
 
 extension DiscussionsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.backgroundColor = self.appearance.backgroundColor
-    }
-
     func addSubviews() {
         self.addSubview(self.tableView)
     }

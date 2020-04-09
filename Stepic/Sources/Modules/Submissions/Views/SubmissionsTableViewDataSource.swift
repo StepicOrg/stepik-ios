@@ -35,7 +35,7 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
         cell.configure(viewModel: viewModel)
 
         let isLastCell = indexPath.row == self.viewModels.count - 1
-        cell.separatorIndentation = isLastCell ? .edgeToEdge : .indented
+        cell.separatorIndentationStyle = isLastCell ? .edgeToEdge : .indented
 
         cell.onAvatarClick = { [weak self] in
             guard let strongSelf = self else {
