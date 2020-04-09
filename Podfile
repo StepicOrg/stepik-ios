@@ -12,7 +12,7 @@ def shared_pods
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric', '1.10.2'
     pod 'Crashlytics', '3.14.0'
-    pod 'DeviceKit', '3.0.0'
+    pod 'DeviceKit', '3.1.0'
     pod 'PromiseKit', '6.13.0'
     pod 'SwiftLint', '0.39.1'
     pod 'Reveal-SDK', :configurations => ['Debug']
