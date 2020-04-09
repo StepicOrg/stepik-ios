@@ -463,6 +463,15 @@ unowned_variable_capture:
 unused_enumerated:
   severity: error
 
+unused_import:
+  require_explicit_imports: true
+  allowed_transitive_imports:
+    - module: Foundation
+      allowed_transitive_imports:
+        - CoreFoundation
+        - Darwin
+        - ObjectiveC
+        
 unused_optional_binding:
   severity: error
 
