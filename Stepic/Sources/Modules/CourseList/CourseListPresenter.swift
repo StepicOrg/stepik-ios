@@ -87,10 +87,10 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         isAuthorized: Bool
     ) -> CourseWidgetViewModel {
         let summaryText: String = {
-            let text = course.summary.isEmpty
-                ? course.courseDescription
-                : course.summary
-            return text.trimmingCharacters(in: .whitespacesAndNewlines)
+            let summary = course.summary.trimmingCharacters(in: .whitespacesAndNewlines)
+            return summary.isEmpty
+                ? course.courseDescription.trimmingCharacters(in: .whitespacesAndNewlines)
+                : summary
         }()
 
         var progressViewModel: CourseWidgetProgressViewModel?
