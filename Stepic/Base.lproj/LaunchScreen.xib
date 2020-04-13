@@ -19,12 +19,6 @@
                         <constraint firstAttribute="width" secondItem="iJa-tg-pbs" secondAttribute="height" multiplier="1:1" id="L12-FO-K66"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#учитьсядома" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXR-fN-a27">
-                    <rect key="frame" x="180" y="361.5" width="120" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -32,8 +26,6 @@
                 <constraint firstItem="iJa-tg-pbs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="7v9-uo-AZb"/>
                 <constraint firstItem="iJa-tg-pbs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="H1J-Mp-IsU"/>
                 <constraint firstAttribute="trailing" secondItem="iJa-tg-pbs" secondAttribute="trailing" constant="20" symbolic="YES" id="HwE-qs-hKg"/>
-                <constraint firstItem="dXR-fN-a27" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="V6d-NR-bJi"/>
-                <constraint firstAttribute="bottom" secondItem="dXR-fN-a27" secondAttribute="bottom" constant="98" id="tHc-V1-ive"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
