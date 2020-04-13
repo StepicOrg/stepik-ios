@@ -10,7 +10,6 @@ protocol CourseListViewControllerProtocol: AnyObject {
 protocol CourseListViewControllerDelegate: AnyObject {
     func itemDidSelected(viewModel: CourseWidgetViewModel)
     func primaryButtonClicked(viewModel: CourseWidgetViewModel)
-    func secondaryButtonClicked(viewModel: CourseWidgetViewModel)
 }
 
 class CourseListViewController: UIViewController {
@@ -130,12 +129,6 @@ extension CourseListViewController: CourseListViewControllerDelegate {
 
     func primaryButtonClicked(viewModel: CourseWidgetViewModel) {
         self.interactor.doPrimaryAction(
-            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
-        )
-    }
-
-    func secondaryButtonClicked(viewModel: CourseWidgetViewModel) {
-        self.interactor.doSecondaryAction(
             request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
         )
     }

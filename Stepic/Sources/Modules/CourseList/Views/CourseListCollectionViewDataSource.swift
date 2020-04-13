@@ -47,12 +47,4 @@ extension CourseListCollectionViewDataSource: CourseListCollectionViewCellDelega
 
         self.delegate?.primaryButtonClicked(viewModel: viewModel)
     }
-
-    func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?) {
-        guard let viewModel = viewModel else {
-            return
-        }
-
-        self.delegate?.secondaryButtonClicked(viewModel: viewModel)
-    }
 }
