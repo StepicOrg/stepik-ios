@@ -58,13 +58,6 @@ enum CourseList {
         }
     }
 
-    /// Click on secondary button
-    enum SecondaryCourseAction {
-        struct Request {
-            let viewModelUniqueIdentifier: UniqueIdentifierType
-        }
-    }
-
     /// Click on course
     enum MainCourseAction {
         struct Request {

@@ -2,7 +2,13 @@ import UIKit
 
 protocol CourseListCollectionViewCellDelegate: AnyObject {
     func widgetPrimaryButtonClicked(viewModel: CourseWidgetViewModel?)
-    func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?)
+}
+
+extension CourseListCollectionViewCell {
+    enum Appearance {
+        static let borderWidth: CGFloat = 1.0
+        static let cornerRadius: CGFloat = 13.0
+    }
 }
 
 class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
@@ -14,19 +20,11 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
     private lazy var widgetView: CourseWidgetView = {
         let widget = CourseWidgetView(colorMode: self.colorMode)
         // Pass clicks from widget view to collection view delegate
-        widget.onPrimaryButtonClick = { [weak self] in
+        widget.onContinueLearningButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.delegate?.widgetPrimaryButtonClicked(
-                viewModel: strongSelf.configurationViewModel
-            )
-        }
-        widget.onSecondaryButtonClick = { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.delegate?.widgetSecondaryButtonClicked(
                 viewModel: strongSelf.configurationViewModel
             )
         }
@@ -49,6 +47,15 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
     // swiftlint:disable:next unavailable_function
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.layer.cornerRadius = Appearance.cornerRadius
+        self.layer.borderWidth = Appearance.borderWidth
+        self.layer.borderColor = self.colorMode.courseWidgetBorderColor.cgColor
+        self.layer.masksToBounds = true
     }
 
     func configure(viewModel: CourseWidgetViewModel) {

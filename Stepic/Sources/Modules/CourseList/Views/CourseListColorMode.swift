@@ -59,23 +59,8 @@ extension CourseListColorMode {
         }
     }
 
-    var courseWidgetButtonAppearance: CourseWidgetButton.Appearance {
-        switch self {
-        case .light:
-            return .init(
-                textColor: .stepikPrimaryText,
-                backgroundColor: .stepikLightSecondaryBackground,
-                callToActionTextColor: .stepikCallToActionText,
-                callToActionBackgroundColor: .stepikCallToActionBackground
-            )
-        case .dark:
-            return .init(
-                textColor: .white,
-                backgroundColor: UIColor.white.withAlphaComponent(0.1),
-                callToActionTextColor: .stepikCallToActionText,
-                callToActionBackgroundColor: .stepikCallToActionBackground
-            )
-        }
+    var courseWidgetLearnButtonAppearance: CourseWidgetContinueLearningButton.Appearance {
+        .init(iconTintColor: .stepikGreen, textColor: .stepikGreen)
     }
 
     var courseWidgetStatsViewAppearance: CourseWidgetStatsView.Appearance {
@@ -107,6 +92,34 @@ extension CourseListColorMode {
             var appearance = CourseWidgetLabel.Appearance()
             appearance.textColor = .white
             return appearance
+        }
+    }
+
+    var courseWidgetSummaryLabelAppearance: CourseWidgetLabel.Appearance {
+        var appearance = CourseWidgetLabel.Appearance(
+            maxLinesCount: 0,
+            font: .systemFont(ofSize: 12, weight: .regular)
+        )
+
+        switch self {
+        case .light:
+            appearance.textColor = .stepikSecondaryText
+        case .dark:
+            appearance.textColor = UIColor.dynamic(
+                light: UIColor.white.withAlphaComponent(0.6),
+                dark: .stepikSecondaryText
+            )
+        }
+
+        return appearance
+    }
+
+    var courseWidgetBorderColor: UIColor {
+        switch self {
+        case .light:
+            return .dynamic(light: .stepikGrey8Fixed, dark: .stepikSeparator)
+        case .dark:
+            return .stepikSeparator
         }
     }
 }

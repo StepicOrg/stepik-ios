@@ -86,6 +86,13 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         isAdaptive: Bool,
         isAuthorized: Bool
     ) -> CourseWidgetViewModel {
+        let summaryText: String = {
+            let text = course.summary.isEmpty
+                ? course.courseDescription
+                : course.summary
+            return text.trimmingCharacters(in: .whitespacesAndNewlines)
+        }()
+
         var progressViewModel: CourseWidgetProgressViewModel?
         if let progress = course.progress {
             progressViewModel = self.makeProgressViewModel(progress: progress)
@@ -98,60 +105,18 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             ratingLabelText = FormatterHelper.averageRating(averageRating)
         }
 
-        let primaryButtonText = self.makePrimaryButtonDescription(course: course)
-        let secondaryButtonText = self.makeSecondaryButtonDescription(
-            isEnrolled: course.enrolled,
-            isAdaptive: isAdaptive
-        )
+        let isContinueLearningAvailable = isAuthorized && course.enrolled
 
         return CourseWidgetViewModel(
             title: course.title,
+            summary: summaryText,
             coverImageURL: URL(string: course.coverURLString),
-            primaryButtonDescription: primaryButtonText,
-            secondaryButtonDescription: secondaryButtonText,
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
             ratingLabelText: ratingLabelText,
             isAdaptive: isAdaptive,
+            isContinueLearningAvailable: isContinueLearningAvailable,
             progress: progressViewModel,
             uniqueIdentifier: uniqueIdentifier
-        )
-    }
-
-    func makePrimaryButtonDescription(course: Course) -> CourseWidgetViewModel.ButtonDescription {
-        let isEnrolled = course.enrolled
-        let title: String = {
-            if isEnrolled {
-                return NSLocalizedString("WidgetButtonLearn", comment: "")
-            }
-
-            if course.isPaid, let displayPrice = course.displayPrice {
-                return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
-            }
-
-            return NSLocalizedString("WidgetButtonJoin", comment: "")
-        }()
-
-        return CourseWidgetViewModel.ButtonDescription(
-            title: title,
-            isCallToAction: !isEnrolled
-        )
-    }
-
-    private func makeSecondaryButtonDescription(
-        isEnrolled: Bool,
-        isAdaptive: Bool
-    ) -> CourseWidgetViewModel.ButtonDescription {
-        var title: String
-        if isAdaptive {
-            title = NSLocalizedString("WidgetButtonInfo", comment: "")
-        } else {
-            title = isEnrolled
-                ? NSLocalizedString("WidgetButtonSyllabus", comment: "")
-                : NSLocalizedString("WidgetButtonInfo", comment: "")
-        }
-        return CourseWidgetViewModel.ButtonDescription(
-            title: title,
-            isCallToAction: false
         )
     }
 }

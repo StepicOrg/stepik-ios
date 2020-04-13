@@ -6,15 +6,13 @@ struct CourseWidgetProgressViewModel {
 }
 
 struct CourseWidgetViewModel: UniqueIdentifiable {
-    typealias ButtonDescription = (title: String, isCallToAction: Bool)
-
     let title: String
+    let summary: String
     let coverImageURL: URL?
-    let primaryButtonDescription: ButtonDescription
-    let secondaryButtonDescription: ButtonDescription
     let learnersLabelText: String
     let ratingLabelText: String?
     let isAdaptive: Bool
+    let isContinueLearningAvailable: Bool
     let progress: CourseWidgetProgressViewModel?
     let uniqueIdentifier: UniqueIdentifierType
 }
