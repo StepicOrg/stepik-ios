@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Legacy class")
 final class CodeEditorPreferencesContainer {
     private let defaults = UserDefaults.standard
 
