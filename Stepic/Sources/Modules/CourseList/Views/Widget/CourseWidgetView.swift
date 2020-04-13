@@ -43,7 +43,9 @@ final class CourseWidgetView: UIView {
     )
 
     private lazy var continueLearningButton: CourseWidgetContinueLearningButton = {
-        let button = CourseWidgetContinueLearningButton(appearance: self.colorMode.courseWidgetLearnButtonAppearance)
+        let button = CourseWidgetContinueLearningButton(
+            appearance: self.colorMode.courseWidgetContinueLearningButtonAppearance
+        )
         button.addTarget(self, action: #selector(self.continueLearningButtonClicked), for: .touchUpInside)
         return button
     }()
@@ -74,9 +76,9 @@ final class CourseWidgetView: UIView {
         self.coverView.shouldShowAdaptiveMark = viewModel.isAdaptive
 
         self.summaryLabel.text = viewModel.summary
-        self.summaryLabel.isHidden = viewModel.isContinueLearningAvailable
-        self.separatorView.isHidden = !viewModel.isContinueLearningAvailable
-        self.continueLearningButton.isHidden = !viewModel.isContinueLearningAvailable
+        self.summaryLabel.isHidden = viewModel.isEnrolled
+        self.separatorView.isHidden = !viewModel.isEnrolled
+        self.continueLearningButton.isHidden = !viewModel.isEnrolled
 
         self.statsView.learnersLabelText = viewModel.learnersLabelText
         self.statsView.ratingLabelText = viewModel.ratingLabelText

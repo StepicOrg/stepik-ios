@@ -105,8 +105,6 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             ratingLabelText = FormatterHelper.averageRating(averageRating)
         }
 
-        let isContinueLearningAvailable = isAuthorized && course.enrolled
-
         return CourseWidgetViewModel(
             title: course.title,
             summary: summaryText,
@@ -114,7 +112,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
             ratingLabelText: ratingLabelText,
             isAdaptive: isAdaptive,
-            isContinueLearningAvailable: isContinueLearningAvailable,
+            isEnrolled: isAuthorized && course.enrolled,
             progress: progressViewModel,
             uniqueIdentifier: uniqueIdentifier
         )

@@ -12,7 +12,7 @@ struct CourseWidgetViewModel: UniqueIdentifiable {
     let learnersLabelText: String
     let ratingLabelText: String?
     let isAdaptive: Bool
-    let isContinueLearningAvailable: Bool
+    let isEnrolled: Bool
     let progress: CourseWidgetProgressViewModel?
     let uniqueIdentifier: UniqueIdentifierType
 }

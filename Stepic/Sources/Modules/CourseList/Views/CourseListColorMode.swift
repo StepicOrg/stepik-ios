@@ -59,7 +59,7 @@ extension CourseListColorMode {
         }
     }
 
-    var courseWidgetLearnButtonAppearance: CourseWidgetContinueLearningButton.Appearance {
+    var courseWidgetContinueLearningButtonAppearance: CourseWidgetContinueLearningButton.Appearance {
         .init(iconTintColor: .stepikGreen, textColor: .stepikGreen)
     }
 
