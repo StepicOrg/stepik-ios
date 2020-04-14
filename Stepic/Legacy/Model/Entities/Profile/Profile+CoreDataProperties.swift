@@ -23,6 +23,16 @@ extension Profile {
 
     @NSManaged var managedUser: User?
 
+    @NSManaged var managedUserActivity: UserActivityEntity?
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+
+    static func fetchRequest() -> NSFetchRequest<Profile> {
+        NSFetchRequest<Profile>(entityName: "Profile")
+    }
+
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Profile", in: CoreDataHelper.shared.context)!
     }
@@ -118,6 +128,15 @@ extension Profile {
         }
         set(value) {
             managedUser = value
+        }
+    }
+
+    var userActivity: UserActivityEntity? {
+        get {
+            self.managedUserActivity
+        }
+        set {
+            self.managedUserActivity = newValue
         }
     }
 }

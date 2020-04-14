@@ -22,7 +22,11 @@ final class ProfilesAPI: APIEndpoint {
         self.getObjectsByIds(ids: ids, updating: existing)
     }
 
-    func retrieve(id: Int, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
+    @available(*, deprecated, message: "Legacy: we want to pass existing")
+    func retrieve(
+        id: Int,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Profile]> {
         self.getObjectsByIds(ids: [id], updating: Profile.fetchById(id) ?? [])
     }
 

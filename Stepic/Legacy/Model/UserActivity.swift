@@ -13,9 +13,9 @@ final class UserActivity: JSONSerializable {
     var id: Int
     var pins: [Int]
 
-    init(id: Int) {
+    init(id: Int, pins: [Int] = UserActivity.emptyYearPins) {
         self.id = id
-        self.pins = UserActivity.emptyYearPins
+        self.pins = pins
     }
 
     func update(json: JSON) {
