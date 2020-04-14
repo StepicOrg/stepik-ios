@@ -16,7 +16,7 @@ final class UsersPersistenceService: UsersPersistenceServiceProtocol {
 
     func fetch(ids: [User.IdType]) -> Guarantee<[User]> {
         firstly {
-            self._fetch(ids: ids)
+            self.fetchUsers(ids: ids)
         }.map { users in
             Array(Set(users)).reordered(order: ids, transform: { $0.id })
         }
@@ -24,13 +24,13 @@ final class UsersPersistenceService: UsersPersistenceServiceProtocol {
 
     func fetch(id: User.IdType) -> Guarantee<User?> {
         firstly {
-            self._fetch(ids: [id])
+            self.fetchUsers(ids: [id])
         }.then { users in
             .value(users.first)
         }
     }
 
-    private func _fetch(ids: [User.IdType]) -> Guarantee<[User]> {
+    private func fetchUsers(ids: [User.IdType]) -> Guarantee<[User]> {
         Guarantee { seal in
             let idSubpredicates = ids.map { id in
                 NSPredicate(format: "%K == %@", #keyPath(User.managedId), NSNumber(value: id))

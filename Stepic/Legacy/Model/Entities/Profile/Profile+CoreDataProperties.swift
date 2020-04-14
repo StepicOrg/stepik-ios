@@ -23,6 +23,14 @@ extension Profile {
 
     @NSManaged var managedUser: User?
 
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+
+    static func fetchRequest() -> NSFetchRequest<Profile> {
+        NSFetchRequest<Profile>(entityName: "Profile")
+    }
+
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Profile", in: CoreDataHelper.shared.context)!
     }
