@@ -504,6 +504,7 @@
 		2C82D51721830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82D51621830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift */; };
 		2C82F22421D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */; };
 		2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */; };
+		2C87A7A12446502900933CA4 /* UsersPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
 		2C8F3ADB23CC8533004D113A /* SelectItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */; };
 		2C8F3ADD23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3ADC23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift */; };
@@ -1729,6 +1730,7 @@
 		2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellSkeletonView.swift; sourceTree = "<group>"; };
 		2C8345D123156D5E00E6CE91 /* Model_course_can_continue.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_can_continue.xcdatamodel; sourceTree = "<group>"; };
 		2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesNetworkService.swift; sourceTree = "<group>"; };
+		2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPersistenceService.swift; sourceTree = "<group>"; };
 		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		2C8B6E0323A27D2D0078A4B3 /* Model_required_section.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_required_section.xcdatamodel; sourceTree = "<group>"; };
@@ -4930,6 +4932,7 @@
 				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
 				2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */,
 				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
+				2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -7806,6 +7809,7 @@
 				62E9891F82F59F42D13A521E /* WriteCourseReviewView.swift in Sources */,
 				62E98DF5532AD32C87291E21 /* WriteCourseReviewViewController.swift in Sources */,
 				62E985AC1026224CD9117376 /* WriteCourseReviewViewModel.swift in Sources */,
+				2C87A7A12446502900933CA4 /* UsersPersistenceService.swift in Sources */,
 				62E98A894044493A1CDD1C77 /* WriteCourseReviewOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
