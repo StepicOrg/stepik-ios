@@ -2,6 +2,9 @@
     color-scheme: light dark;
     --textColor: #535366;
     --link-color: -webkit-link;
+    --table-background-color: #FFFFFF;
+    --table-background-color-even: #F9F9F9;
+    --table-border-color: #ddd;
     --body-font-size: 12pt;
     --h1-font-size: 20pt;
     --h2-font-size: 17pt;
@@ -13,6 +16,9 @@
     :root {
         --textColor: #D3D2E9;
         --link-color: #3366CC;
+        --table-background-color: #000000;
+        --table-background-color-even: #1C1C1E;
+        --table-border-color: #54545899;
     }
 }
 
@@ -78,12 +84,12 @@ body table {
     border-spacing: 0;
     margin: 0;
     padding: 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: var(--table-background-color);
+    border: 1px solid var(--table-border-color);
 }
 
 body table tr:nth-of-type(even) {
-    background-color: #f9f9f9;
+    background-color: var(--table-background-color-even);
 }
 
 body table tr td {
