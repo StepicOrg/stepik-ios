@@ -27,7 +27,10 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
             fatalError("Failed to initialize CodeEditorSettingsViewController")
         }
 
-        let presenter = CodeEditorSettingsPresenter(view: viewController)
+        let presenter = CodeEditorSettingsPresenter(
+            view: viewController,
+            codeEditorThemeService: CodeEditorThemeService()
+        )
         viewController.presenter = presenter
         viewController.previewLanguage = self.previewLanguage
 
@@ -66,7 +69,7 @@ final class CodeEditorSettingsViewController: MenuViewController {
 
         // TODO: Add injection for theme.
         self.previewView.setupPreview(
-            with: PreferencesContainer.codeEditor.theme,
+            with: CodeEditorThemeService().theme.name,
             fontSize: PreferencesContainer.codeEditor.fontSize,
             language: self.previewLanguage
         )

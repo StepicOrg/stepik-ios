@@ -177,6 +177,14 @@ final class CodeEditorView: UIView {
         )
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.theme = CodeEditorThemeService().theme
+        }
+    }
+
     private func setupAccessoryView(isEditable: Bool) {
         defer {
             self.codeTextView.reloadInputViews()

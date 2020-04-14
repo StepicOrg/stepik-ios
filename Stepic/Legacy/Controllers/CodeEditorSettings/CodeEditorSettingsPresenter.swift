@@ -20,18 +20,24 @@ protocol CodeEditorSettingsView: AnyObject {
 final class CodeEditorSettingsPresenter {
     weak var view: CodeEditorSettingsView?
 
+    private let codeEditorThemeService: CodeEditorThemeServiceProtocol
+
     var themeBlock: TransitionMenuBlock?
     var fontSizeBlock: TransitionMenuBlock?
     var menu = Menu(blocks: [])
 
-    init(view: CodeEditorSettingsView) {
+    init(
+        view: CodeEditorSettingsView,
+        codeEditorThemeService: CodeEditorThemeServiceProtocol
+    ) {
         self.view = view
+        self.codeEditorThemeService = codeEditorThemeService
         self.menu = buildSettingsMenu()
         view.setMenu(menu: self.menu)
     }
 
     func updateTheme(with newTheme: String) {
-        PreferencesContainer.codeEditor.theme = newTheme
+        self.codeEditorThemeService.update(name: newTheme)
         themeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentTheme", comment: ""), newTheme)
         view?.updatePreview(theme: newTheme)
 
@@ -66,15 +72,25 @@ final class CodeEditorSettingsPresenter {
     private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock { .init(id: id, title: title) }
 
     private func buildThemeBlock() -> TransitionMenuBlock {
-        themeBlock = TransitionMenuBlock(id: themeBlockId, title: NSLocalizedString("CodeEditorTheme", comment: ""))
-        themeBlock!.subtitle = String(format: NSLocalizedString("CodeEditorCurrentTheme", comment: ""), PreferencesContainer.codeEditor.theme)
+        let block = TransitionMenuBlock(
+            id: themeBlockId,
+            title: NSLocalizedString("CodeEditorTheme", comment: "")
+        )
+        block.subtitle = String(
+            format: NSLocalizedString("CodeEditorCurrentTheme", comment: ""),
+            self.codeEditorThemeService.theme.name
+        )
+        block.onTouch = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
 
-        themeBlock!.onTouch = {
-            [weak self] in
-            self?.view?.chooseEditorTheme(current: PreferencesContainer.codeEditor.theme)
+            strongSelf.view?.chooseEditorTheme(current: strongSelf.codeEditorThemeService.theme.name)
         }
 
-        return themeBlock!
+        self.themeBlock = block
+
+        return block
     }
 
     private func buildFontSizeBlock() -> TransitionMenuBlock {
