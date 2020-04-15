@@ -208,6 +208,7 @@ platform :ios do
 
         firebase_app_distribution(
             app: firebase_app_id,
+            release_notes_file: "fastlane/release-notes.txt",
             groups: "all-ios-testers"
         )
 
