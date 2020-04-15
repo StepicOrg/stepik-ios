@@ -83,12 +83,10 @@ final class RemoteConfig {
             return false
         }
 
-//        return FirebaseRemoteConfig.RemoteConfig
-//            .remoteConfig()
-//            .configValue(forKey: Key.darkModeAvailable.rawValue)
-//            .boolValue
-
-        return true
+        return FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.darkModeAvailable.rawValue)
+            .boolValue
     }
 
     init() {
