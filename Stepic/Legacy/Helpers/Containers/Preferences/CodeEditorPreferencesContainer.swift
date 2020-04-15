@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Legacy class")
 final class CodeEditorPreferencesContainer {
     private let defaults = UserDefaults.standard
 
@@ -34,7 +35,7 @@ final class CodeEditorPreferencesContainer {
             if let value = defaults.value(forKey: fontSizeKey) as? Int {
                 return value
             } else {
-                let value = DeviceInfo.current.isPad ? 17 : 13
+                let value = DeviceInfo.current.isPad ? 17 : 15
                 self.fontSize = value
                 return value
             }

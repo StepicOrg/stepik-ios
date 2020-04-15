@@ -138,6 +138,8 @@ extension UIColor {
 
     /// A non adaptable color with hex value #F6F6F6 (grey07).
     static let stepikGreyFixed = ColorPalette.grey100
+    /// A non adaptable color with hex value #EAEAEA (grey08).
+    static let stepikGrey8Fixed = ColorPalette.grey08
 
     // MARK: Violet
 
@@ -702,6 +704,7 @@ private enum ColorPalette {
     static let grey050 = UIColor(hex6: 0xFAFAFA)
 
     static let grey04 = UIColor(hex6: 0xEAECF0)
+    static let grey08 = UIColor(hex6: 0xEAEAEA)
 
     // MARK: - Violet -
 

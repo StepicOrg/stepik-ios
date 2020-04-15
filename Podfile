@@ -5,16 +5,16 @@ inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
-    pod 'Alamofire', '5.0.5'
+    pod 'Alamofire', '5.1.0'
     pod 'Atributika', '4.9.5'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.6.1'
+    pod 'SDWebImage', '5.7.1'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric', '1.10.2'
     pod 'Crashlytics', '3.14.0'
-    pod 'DeviceKit', '3.0.0'
+    pod 'DeviceKit', '3.1.0'
     pod 'PromiseKit', '6.13.0'
-    pod 'SwiftLint', '0.39.1'
+    pod 'SwiftLint', '0.39.2'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
@@ -29,10 +29,10 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.21.0'
-    pod 'Firebase/Messaging' , '6.21.0'
-    pod 'Firebase/Analytics' , '6.21.0'
-    pod 'Firebase/RemoteConfig', '6.21.0'
+    pod 'Firebase/Core', '6.22.0'
+    pod 'Firebase/Messaging' , '6.22.0'
+    pod 'Firebase/Analytics' , '6.22.0'
+    pod 'Firebase/RemoteConfig', '6.22.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.9.4'
     pod 'Amplitude-iOS', '4.9.3'
@@ -42,7 +42,7 @@ def all_pods
 
     pod 'IQKeyboardManagerSwift', '6.5.4'
 
-    pod 'Kanna', '5.0.0'
+    pod 'Kanna', '5.2.2'
     # Remove after NotificationsService refactoring
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
@@ -69,7 +69,7 @@ end
 
 def testing_pods
     pod 'Quick', '2.2.0'
-    pod 'Nimble', '8.0.5'
+    pod 'Nimble', '8.0.7'
     pod 'Mockingjay', '3.0.0-alpha.1'
 end
 

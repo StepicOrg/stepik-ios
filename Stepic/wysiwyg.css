@@ -5,7 +5,7 @@
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --hljs-background-color: #161613;
+        --hljs-background-color: #1E1E1E;
     }
 }
 

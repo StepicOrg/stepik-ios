@@ -5,11 +5,10 @@ extension CourseListView {
     struct Appearance {
         let layoutMinimumLineSpacing: CGFloat = 16.0
         let layoutMinimumInteritemSpacing: CGFloat = 16.0
-        let layoutItemHeight: CGFloat = 140.0
+        let layoutItemHeight: CGFloat = 160.0
 
         let lightModeBackgroundColor = UIColor.stepikBackground
-        let darkModeBackgroundColor = UIColor.stepikAccentFixed
-        let darkModeDarkInterfaceBackgroundColor = UIColor.stepikSecondaryBackground
+        let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
 
         let horizontalLayoutNextPageWidth: CGFloat = 12.0
     }
@@ -104,9 +103,7 @@ class CourseListView: UIView {
         case .light:
             return self.appearance.lightModeBackgroundColor
         case .dark:
-            return self.isDarkInterfaceStyle
-                ? self.appearance.darkModeDarkInterfaceBackgroundColor
-                : self.appearance.darkModeBackgroundColor
+            return self.appearance.darkModeBackgroundColor
         }
     }
 

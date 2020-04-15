@@ -318,7 +318,7 @@ AnonymousNotificationsTitle = "Anonymous users can't receive notifications";
 SignInToHaveNotifications = "Sign in to be able to receive notifications";
 BadConnectionAuth = "Check your internet connection";
 
-ContinueLearningWidgetButtonTitle = "Continue learning";
+ContinueLearningWidgetButtonTitle = "Continue Learning";
 ShowAll = "All";
 ShowAllTestDetailIndicator = "All ›";
 ShowAllTestText = "See All";
@@ -346,7 +346,7 @@ TrendingTopics = "Trending topics";
 WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
-WidgetButtonLearn = "Learn";
+WidgetButtonLearn = "Continue Learning";
 WidgetButtonBuy = "Buy with %@";
 WidgetAdaptiveLabel = "ADAPTIVE";
 

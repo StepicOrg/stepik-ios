@@ -347,7 +347,7 @@ TrendingTopics = "Категории";
 WidgetButtonJoin = "Поступить";
 WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
-WidgetButtonLearn = "Учиться";
+WidgetButtonLearn = "Продолжить учиться";
 WidgetAdaptiveLabel = "АДАПТИВНЫЙ";
 WidgetButtonBuy = "Купить за %@";
 

@@ -5,7 +5,6 @@ protocol CourseListInteractorProtocol: AnyObject {
     func doCoursesFetch(request: CourseList.CoursesLoad.Request)
     func doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request)
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)
-    func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request)
     func doMainAction(request: CourseList.MainCourseAction.Request)
 }
 
@@ -227,7 +226,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
-    func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request) {
+    func doMainAction(request: CourseList.MainCourseAction.Request) {
         guard let targetIndex = self.currentCourses.firstIndex(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
@@ -247,26 +246,6 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Unenrolled course
             // - adaptive -> info
             // - normal -> info
-            self.moduleOutput?.presentCourseInfo(course: targetCourse)
-        }
-    }
-
-    func doMainAction(request: CourseList.MainCourseAction.Request) {
-        guard let targetIndex = self.currentCourses.firstIndex(where: { $0.0 == request.viewModelUniqueIdentifier }),
-              let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
-            fatalError("Invalid module state")
-        }
-
-        if targetCourse.enrolled && self.userAccountService.isAuthorized {
-            // Enrolled course -> open last step
-            self.moduleOutput?.presentLastStep(
-                course: targetCourse,
-                isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
-                    courseId: targetCourse.id
-                )
-            )
-        } else {
-            // Unenrolled course -> info
             self.moduleOutput?.presentCourseInfo(course: targetCourse)
         }
     }
