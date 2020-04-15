@@ -13,9 +13,6 @@ extension CourseWidgetSkeletonView {
     struct Appearance {
         let coverViewWidthHeight: CGFloat = 80.0
 
-        let secondaryActionButtonInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 10)
-        let secondaryActionButtonSize = CGSize(width: 80, height: 48)
-
         let mainActionButtonHeight: CGFloat = 48.0
 
         let titleLabelHeight: CGFloat = 17
@@ -33,7 +30,6 @@ final class CourseWidgetSkeletonView: UIView {
     let appearance: Appearance
 
     private lazy var coverImageViewSkeleton = UIView()
-    private lazy var secondaryButtonSkeleton = UIView()
     private lazy var primaryButtonSkeleton = UIView()
     private lazy var titleLabelSkeleton = UIView()
     private lazy var statsViewSkeleton = UIView()
@@ -59,9 +55,6 @@ extension CourseWidgetSkeletonView: ProgrammaticallyInitializableViewProtocol {
         self.coverImageViewSkeleton.clipsToBounds = true
         self.coverImageViewSkeleton.layer.cornerRadius = self.appearance.coverViewCornerRadius
 
-        self.secondaryButtonSkeleton.clipsToBounds = true
-        self.secondaryButtonSkeleton.layer.cornerRadius = self.appearance.buttonsCornerRadius
-
         self.primaryButtonSkeleton.clipsToBounds = true
         self.primaryButtonSkeleton.layer.cornerRadius = self.appearance.buttonsCornerRadius
 
@@ -74,7 +67,6 @@ extension CourseWidgetSkeletonView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.coverImageViewSkeleton)
-        self.addSubview(self.secondaryButtonSkeleton)
         self.addSubview(self.primaryButtonSkeleton)
         self.addSubview(self.titleLabelSkeleton)
         self.addSubview(self.statsViewSkeleton)
@@ -87,22 +79,11 @@ extension CourseWidgetSkeletonView: ProgrammaticallyInitializableViewProtocol {
             make.top.leading.equalToSuperview()
         }
 
-        self.secondaryButtonSkeleton.translatesAutoresizingMaskIntoConstraints = false
-        self.secondaryButtonSkeleton.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview()
-            make.top
-                .equalTo(self.coverImageViewSkeleton.snp.bottom)
-                .offset(self.appearance.secondaryActionButtonInsets.top)
-            make.size.equalTo(self.appearance.secondaryActionButtonSize)
-        }
-
         self.primaryButtonSkeleton.translatesAutoresizingMaskIntoConstraints = false
         self.primaryButtonSkeleton.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.mainActionButtonHeight)
-            make.bottom.trailing.equalToSuperview()
-            make.leading
-                .equalTo(self.secondaryButtonSkeleton.snp.trailing)
-                .offset(self.appearance.secondaryActionButtonInsets.right)
+            make.leading.bottom.equalToSuperview()
+            make.trailing.equalTo(self.titleLabelSkeleton.snp.trailing)
         }
 
         self.titleLabelSkeleton.translatesAutoresizingMaskIntoConstraints = false
