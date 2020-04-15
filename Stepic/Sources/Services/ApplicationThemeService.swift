@@ -11,12 +11,19 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
 
     private let remoteConfig: RemoteConfig
 
+    private var userSelectedApplicationTheme: ApplicationTheme? {
+        if let stringValue = UserDefaults.standard.string(forKey: Self.applicationThemeKey) {
+            return ApplicationTheme(rawValue: stringValue)
+        }
+        return nil
+    }
+
     var theme: ApplicationTheme {
         get {
-            if let applicationTheme = self.getApplicationTheme() {
-                return applicationTheme
+            if let userSelectedApplicationTheme = self.userSelectedApplicationTheme {
+                return userSelectedApplicationTheme
             } else {
-                return .default
+                return self.remoteConfig.isDarkModeAvailable ? .default : .light
             }
         }
         set {
@@ -37,19 +44,12 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
                 return self.applyTheme(.light)
             }
 
-            if let userSelectedApplicationTheme = self.getApplicationTheme() {
+            if let userSelectedApplicationTheme = self.userSelectedApplicationTheme {
                 self.applyTheme(userSelectedApplicationTheme)
             } else {
                 self.applyTheme(.default)
             }
         }
-    }
-
-    private func getApplicationTheme() -> ApplicationTheme? {
-        if let stringValue = UserDefaults.standard.string(forKey: Self.applicationThemeKey) {
-            return ApplicationTheme(rawValue: stringValue)
-        }
-        return nil
     }
 
     @available(iOS 13.0, *)
