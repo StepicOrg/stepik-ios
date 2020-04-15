@@ -82,23 +82,26 @@ extension CourseListColorMode {
         }
     }
 
-    var courseWidgetLabelAppearance: CourseWidgetLabel.Appearance {
+    var courseWidgetTitleLabelAppearance: CourseWidgetLabel.Appearance {
+        var appearance = CourseWidgetLabel.Appearance(
+            maxLinesCount: 3,
+            font: .systemFont(ofSize: 16, weight: .medium)
+        )
+
         switch self {
         case .light:
-            var appearance = CourseWidgetLabel.Appearance()
             appearance.textColor = .stepikPrimaryText
-            return appearance
         case .dark:
-            var appearance = CourseWidgetLabel.Appearance()
             appearance.textColor = .white
-            return appearance
         }
+
+        return appearance
     }
 
     var courseWidgetSummaryLabelAppearance: CourseWidgetLabel.Appearance {
         var appearance = CourseWidgetLabel.Appearance(
             maxLinesCount: 0,
-            font: .systemFont(ofSize: 12, weight: .regular)
+            font: .systemFont(ofSize: 14, weight: .regular)
         )
 
         switch self {

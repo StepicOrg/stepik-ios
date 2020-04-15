@@ -7,7 +7,7 @@ extension CourseWidgetStatsItemView {
         var imageViewSize = CGSize(width: 12, height: 12)
         var imageTintColor = UIColor.black
 
-        var font = UIFont.systemFont(ofSize: 16, weight: .light)
+        var font = UIFont.systemFont(ofSize: 14, weight: .regular)
         var textColor = UIColor.white
     }
 }

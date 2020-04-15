@@ -11,7 +11,7 @@ extension CourseWidgetView {
         let statsViewHeight: CGFloat = 17
         let statsViewInsets = LayoutInsets(top: 8)
 
-        let summaryLabelInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
+        let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
 
         let continueLearningButtonInsets = LayoutInsets(top: 16)
 
@@ -26,7 +26,7 @@ final class CourseWidgetView: UIView {
     private lazy var coverView = CourseWidgetCoverView()
 
     private lazy var titleLabel = CourseWidgetLabel(
-        appearance: self.colorMode.courseWidgetLabelAppearance
+        appearance: self.colorMode.courseWidgetTitleLabelAppearance
     )
     private lazy var statsView = CourseWidgetStatsView(
         appearance: self.colorMode.courseWidgetStatsViewAppearance
