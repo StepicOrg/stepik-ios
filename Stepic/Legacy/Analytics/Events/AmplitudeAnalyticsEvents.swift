@@ -104,6 +104,21 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+
+        static func buyPressed(source: CourseBuyingSource, courseID: Int) -> AnalyticsEvent {
+            AnalyticsEvent(
+                name: "Buy course pressed",
+                parameters: [
+                    "source": source.rawValue,
+                    "course": courseID
+                ]
+            )
+        }
+
+        enum CourseBuyingSource: String {
+            case courseWidget = "course_widget"
+            case preview
+        }
     }
 
     // MARK: - Steps -
