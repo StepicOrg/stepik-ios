@@ -188,7 +188,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             // Paid course -> open web page
             if course.isPaid {
                 // FIXME: analytics dependency
-                AmplitudeAnalyticsEvents.Course.buyPressed(source: .preview, courseID: course.id).send()
+                AmplitudeAnalyticsEvents.Course.buyPressed(source: .courseScreen, courseID: course.id).send()
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.presenter.presentPaidCourseBuying(response: .init(course: course))
                 return

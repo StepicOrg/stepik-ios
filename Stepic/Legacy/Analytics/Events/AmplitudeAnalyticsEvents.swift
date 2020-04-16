@@ -117,7 +117,7 @@ struct AmplitudeAnalyticsEvents {
 
         enum CourseBuyingSource: String {
             case courseWidget = "course_widget"
-            case preview
+            case courseScreen = "course_screen"
         }
     }
 
