@@ -309,7 +309,7 @@ final class DiscussionsCellView: UIView {
         self.nameLabel.text = viewModel.username
         self.dateLabel.text = viewModel.formattedDate
 
-        self.updateBadges(userRole: viewModel.userRole, isPinned: viewModel.isPinned)
+        self.updateBadges(userRoleBadgeText: viewModel.userRoleBadgeText, isPinned: viewModel.isPinned)
         self.updateVotes(
             likesCount: viewModel.likesCount,
             dislikesCount: viewModel.dislikesCount,
@@ -368,23 +368,14 @@ final class DiscussionsCellView: UIView {
         self.nameLabel.text = nil
         self.dateLabel.text = nil
         self.avatarImageView.reset()
-        self.updateBadges(userRole: .student, isPinned: false)
+        self.updateBadges(userRoleBadgeText: nil, isPinned: false)
         self.updateVotes(likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
         self.updateTextContent(text: "", isWebViewSupportNeeded: false)
     }
 
-    private func updateBadges(userRole: UserRole, isPinned: Bool) {
-        switch userRole {
-        case .student:
-            self.userRoleBadgeLabel.text = ""
-            self.userRoleBadgeLabel.isHidden = true
-        case .teacher:
-            self.userRoleBadgeLabel.text = NSLocalizedString("CourseStaff", comment: "")
-            self.userRoleBadgeLabel.isHidden = false
-        case .staff:
-            self.userRoleBadgeLabel.text = NSLocalizedString("Staff", comment: "")
-            self.userRoleBadgeLabel.isHidden = false
-        }
+    private func updateBadges(userRoleBadgeText: String?, isPinned: Bool) {
+        self.userRoleBadgeLabel.text = userRoleBadgeText
+        self.userRoleBadgeLabel.isHidden = userRoleBadgeText?.isEmpty ?? true
 
         self.isPinnedImageButton.isHidden = !isPinned
 

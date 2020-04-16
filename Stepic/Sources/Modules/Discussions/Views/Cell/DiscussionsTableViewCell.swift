@@ -272,7 +272,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
                 case .small:
                     return 1.0 / UIScreen.main.scale
                 case .large:
-                    return 6.0 / UIScreen.main.scale
+                    return 8.0 / UIScreen.main.scale
                 case .none:
                     return 0.0
                 }

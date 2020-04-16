@@ -13,6 +13,8 @@ enum UserRole: String {
     case student
     case teacher
     case staff
+    case assistant
+    case moderator
 }
 
 final class Comment: JSONSerializable {

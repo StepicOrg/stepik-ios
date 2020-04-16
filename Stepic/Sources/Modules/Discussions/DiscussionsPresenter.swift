@@ -204,6 +204,19 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             return nil
         }()
 
+        let userRoleBadgeText: String? = {
+            switch comment.userRole {
+            case .student:
+                return nil
+            case .teacher, .assistant:
+                return NSLocalizedString("CourseStaff", comment: "")
+            case .staff:
+                return NSLocalizedString("Staff", comment: "")
+            case .moderator:
+                return NSLocalizedString("CourseModerator", comment: "")
+            }
+        }()
+
         let username: String = {
             let userIDString = "User \(comment.userID)"
             if let userInfo = comment.userInfo {
@@ -278,7 +291,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             id: comment.id,
             avatarImageURL: avatarImageURL,
             userID: comment.userID,
-            userRole: comment.userRole,
+            userRoleBadgeText: userRoleBadgeText,
             isPinned: comment.isPinned,
             isSelected: isSelected,
             username: username,
