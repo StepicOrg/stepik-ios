@@ -11,7 +11,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
     private var course: Course?
 
-    private var shouldOpenedAnalyticsEventSend = false
+    private var shouldOpenedAnalyticsEventSend: Bool = true
 
     init(presenter: CourseInfoTabInfoPresenterProtocol, provider: CourseInfoTabInfoProviderProtocol) {
         self.presenter = presenter
