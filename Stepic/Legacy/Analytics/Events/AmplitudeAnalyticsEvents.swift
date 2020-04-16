@@ -434,12 +434,13 @@ struct AmplitudeAnalyticsEvents {
     // MARK: - CoursePreview -
 
     struct CoursePreview {
-        static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+        static func opened(courseID: Int, courseTitle: String, isPaid: Bool) -> AnalyticsEvent {
             AnalyticsEvent(
                 name: "Course preview screen opened",
                 parameters: [
                     "course": courseID,
-                    "title": courseTitle
+                    "title": courseTitle,
+                    "is_paid": isPaid
                 ]
             )
         }
