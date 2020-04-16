@@ -233,6 +233,7 @@ SignInToHaveCertificates = "Войдите, чтобы иметь возможн
 EmptyCertificatesDescription = "Выберите курс и учитесь, чтобы получить сертификат";
 ChooseCourse = "Выбрать курс";
 CourseStaff = "Команда курса";
+CourseModerator = "Модератор курса";
 Staff = "Команда Stepik";
 AboutCourse = "О курсе";
 LoadingCourse = "Загружаем курс...";
