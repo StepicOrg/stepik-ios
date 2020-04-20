@@ -73,7 +73,7 @@ final class RemoveImageFixedHeightRule: BaseHTMLExtractionRule {
     }
 }
 
-final class ReplaceImageSourceWithBase64: BaseHTMLExtractionRule {
+final class ReplaceImageSourceWithBase64Rule: BaseHTMLExtractionRule {
     private let base64EncodedStringByImageURL: [URL: String]
 
     init(base64EncodedStringByImageURL: [URL: String], extractorType: HTMLExtractorProtocol.Type) {

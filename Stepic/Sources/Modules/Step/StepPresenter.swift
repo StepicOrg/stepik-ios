@@ -236,7 +236,7 @@ final class StepPresenter: StepPresenterProtocol {
 
         if !base64EncodedStringByImageURL.isEmpty {
             contentProcessingRules.append(
-                ReplaceImageSourceWithBase64(
+                ReplaceImageSourceWithBase64Rule(
                     base64EncodedStringByImageURL: base64EncodedStringByImageURL,
                     extractorType: HTMLExtractor.self
                 )
