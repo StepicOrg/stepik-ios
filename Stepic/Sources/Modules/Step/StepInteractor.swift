@@ -12,6 +12,7 @@ protocol StepInteractorProtocol {
     func doSolutionsButtonUpdate(request: StepDataFlow.SolutionsButtonUpdate.Request)
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request)
     func doSolutionsPresentation(request: StepDataFlow.SolutionsPresentation.Request)
+    func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request)
 }
 
 final class StepInteractor: StepInteractorProtocol {
@@ -219,6 +220,8 @@ final class StepInteractor: StepInteractorProtocol {
             print("new step interactor: error while presenting solutions = \(error)")
         }
     }
+
+    func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {}
 
     // MARK: Private API
 

@@ -153,6 +153,14 @@ enum StepDataFlow {
         }
     }
 
+    /// Present AR Quick Look
+    enum ARQuickLookPresentation {
+        struct Request {
+            /// USDZ remote file URL.
+            let url: URL
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

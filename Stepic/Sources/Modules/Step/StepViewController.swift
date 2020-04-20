@@ -351,6 +351,10 @@ extension StepViewController: StepViewDelegate {
         self.interactor.doSolutionsPresentation(request: .init())
     }
 
+    func stepView(_ view: StepView, didRequestOpenARQuickLook url: URL) {
+        self.interactor.doARQuickLookPresentation(request: .init(url: url))
+    }
+
     func stepView(_ view: StepView, didRequestOpenURL url: URL) {
         guard case .result(let viewModel) = self.state else {
             return
