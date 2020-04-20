@@ -232,10 +232,10 @@ final class StepPresenter: StepPresenterProtocol {
             uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
         )
 
-        var rules = ContentProcessor.defaultRules
+        var contentProcessingRules = ContentProcessor.defaultRules
 
         if !base64EncodedStringByImageURL.isEmpty {
-            rules.append(
+            contentProcessingRules.append(
                 ReplaceImageSourceWithBase64(
                     base64EncodedStringByImageURL: base64EncodedStringByImageURL,
                     extractorType: HTMLExtractor.self
@@ -243,12 +243,16 @@ final class StepPresenter: StepPresenterProtocol {
             )
         }
 
-        let injections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
+        if text.contains("<model-viewer") {
+            contentProcessingRules.append(ReplaceModelViewerWithARImageRule(extractorType: HTMLExtractor.self))
+        }
+
+        let contentProcessingInjections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
 
         let contentProcessor = ContentProcessor(
             content: text,
-            rules: rules,
-            injections: injections
+            rules: contentProcessingRules,
+            injections: contentProcessingInjections
         )
 
         return contentProcessor.processContent()

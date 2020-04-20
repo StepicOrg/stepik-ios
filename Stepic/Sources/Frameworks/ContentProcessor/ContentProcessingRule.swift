@@ -110,6 +110,43 @@ final class ReplaceImageSourceWithBase64: BaseHTMLExtractionRule {
     }
 }
 
+final class ReplaceModelViewerWithARImageRule: BaseHTMLExtractionRule {
+    override func process(content: String) -> String {
+        var content = content
+
+        let modelViewerTagName = "model-viewer"
+        let modelViewerTags = self.extractorType.extractAllTags(tag: modelViewerTagName, from: content)
+
+        for tag in modelViewerTags {
+            let thumbnailAttributes = self.extractorType.extractAllTagsAttribute(
+                tag: modelViewerTagName,
+                attribute: "thumbnail",
+                from: tag
+            )
+            let iOSSourceAttributes = self.extractorType.extractAllTagsAttribute(
+                tag: modelViewerTagName,
+                attribute: "ios-src",
+                from: tag
+            )
+
+            guard let thumbnailURLString = thumbnailAttributes.first,
+                  let usdzFileURLString = iOSSourceAttributes.first else {
+                continue
+            }
+
+            let clickableARImageTag = """
+            <a href="openar://\(usdzFileURLString)">
+                <img src="\(thumbnailURLString)" ar-thumbnail>
+            </a>
+            """
+
+            content = content.replacingOccurrences(of: tag, with: clickableARImageTag)
+        }
+
+        return content
+    }
+}
+
 private extension String {
     func condenseWhitespace() -> String {
         let components = self.components(separatedBy: .whitespacesAndNewlines)
