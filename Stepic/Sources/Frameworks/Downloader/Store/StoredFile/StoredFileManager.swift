@@ -81,6 +81,7 @@ enum StoredFileManagerFactory {
     enum `Type` {
         case video
         case image
+        case arQuickLook
     }
 
     static func makeStoredFileManager(type: Type) -> StoredFileManagerProtocol {
@@ -89,6 +90,8 @@ enum StoredFileManagerFactory {
             return VideoStoredFileManager(fileManager: .default)
         case .image:
             return ImageStoredFileManager(fileManager: .default)
+        case .arQuickLook:
+            return ARQuickLookStoredFileManager(fileManager: .default)
         }
     }
 }
