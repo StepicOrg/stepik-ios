@@ -10,6 +10,7 @@ protocol StepPresenterProtocol {
     func presentSolutionsButtonUpdate(response: StepDataFlow.SolutionsButtonUpdate.Response)
     func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response)
     func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
+    func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response)
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -122,6 +123,10 @@ final class StepPresenter: StepPresenterProtocol {
                 shouldEmbedInWriteComment: response.discussionThread.discussionsCount == 0
             )
         )
+    }
+
+    func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response) {
+        self.viewController?.displayDownloadARQuickLook(viewModel: .init(url: response.url))
     }
 
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {

@@ -8,15 +8,15 @@ protocol DownloadARQuickLookInteractorProtocol {
 final class DownloadARQuickLookInteractor: DownloadARQuickLookInteractorProtocol {
     weak var moduleOutput: DownloadARQuickLookOutputProtocol?
 
+    private let url: URL
     private let presenter: DownloadARQuickLookPresenterProtocol
-    private let provider: DownloadARQuickLookProviderProtocol
 
     init(
-        presenter: DownloadARQuickLookPresenterProtocol,
-        provider: DownloadARQuickLookProviderProtocol
+        url: URL,
+        presenter: DownloadARQuickLookPresenterProtocol
     ) {
+        self.url = url
         self.presenter = presenter
-        self.provider = provider
     }
 
     func doSomeAction(request: DownloadARQuickLook.SomeAction.Request) {}
@@ -25,5 +25,3 @@ final class DownloadARQuickLookInteractor: DownloadARQuickLookInteractorProtocol
         case something
     }
 }
-
-extension DownloadARQuickLookInteractor: DownloadARQuickLookInputProtocol {}

@@ -221,7 +221,9 @@ final class StepInteractor: StepInteractorProtocol {
         }
     }
 
-    func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {}
+    func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {
+        self.presenter.presentDownloadARQuickLook(response: .init(url: request.url))
+    }
 
     // MARK: Private API
 

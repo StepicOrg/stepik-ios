@@ -1,4 +1,5 @@
 import Agrume
+import Presentr
 import SVProgressHUD
 import UIKit
 
@@ -11,6 +12,7 @@ protocol StepViewControllerProtocol: AnyObject {
     func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel)
     func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel)
+    func displayDownloadARQuickLook(viewModel: StepDataFlow.DownloadARQuickLookPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -252,6 +254,23 @@ extension StepViewController: StepViewControllerProtocol {
             stepID: viewModel.stepID,
             shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
         )
+    }
+
+    func displayDownloadARQuickLook(viewModel: StepDataFlow.DownloadARQuickLookPresentation.ViewModel) {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: .dynamic(center: .center))
+            presenter.transitionType = .crossDissolve
+            presenter.dismissTransitionType = .crossDissolve
+            presenter.backgroundOpacity = 0.1
+            presenter.backgroundTap = .noAction
+            presenter.roundCorners = true
+            presenter.cornerRadius = 10
+            return presenter
+        }()
+
+        let assembly = DownloadARQuickLookAssembly(url: viewModel.url, output: nil)
+
+        self.customPresentViewController(presentr, viewController: assembly.makeModule(), animated: true)
     }
 
     func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {

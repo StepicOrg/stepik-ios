@@ -161,6 +161,17 @@ enum StepDataFlow {
         }
     }
 
+    /// Present download AR Quick Look usdz file module
+    enum DownloadARQuickLookPresentation {
+        struct Response {
+            let url: URL
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

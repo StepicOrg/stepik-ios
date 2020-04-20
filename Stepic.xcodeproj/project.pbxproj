@@ -668,7 +668,6 @@
 		2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
-		3A8EA0D3394CF774A1EC8E55 /* DownloadARQuickLookInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB85B1BFCB3A174A2BCF86D9 /* DownloadARQuickLookInputProtocol.swift */; };
 		62E980270B31473DE5E16CDD /* SubmissionsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C9C16C33663FD3D7021 /* SubmissionsAssembly.swift */; };
 		62E98034865DC79E2B5C5D67 /* BaseExploreDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9838546792D675BC7EA54 /* BaseExploreDataFlow.swift */; };
 		62E98042B4F232FCD9788187 /* CodeQuizFullscreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98398BC9BB107755305A1 /* CodeQuizFullscreenProvider.swift */; };
@@ -1145,7 +1144,6 @@
 		AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DCDAA39E6747A12CC239E3 /* DownloadARQuickLookPresenter.swift */; };
 		C2537B043956035AEFCABAB5 /* DownloadARQuickLookOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2CFBDE7B71C461F988B1B5 /* DownloadARQuickLookOutputProtocol.swift */; };
 		C95BEF69AB5100E263ED66F6 /* DownloadARQuickLookAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */; };
-		DA21B5F81C62A2EC085814DC /* DownloadARQuickLookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C9CCE585DE90F8DB2B6C1 /* DownloadARQuickLookProvider.swift */; };
 		E36410A645B2D9008B9FD40B /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */; };
 		F26EBB85670ECB562C65D84C /* DownloadARQuickLookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC129A0368739A641E6ED26A /* DownloadARQuickLookInteractor.swift */; };
 /* End PBXBuildFile section */
@@ -2390,9 +2388,7 @@
 		86BB7C05201953AF00063538 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		86BB7C06201953AF00063538 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
 		938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F6C9CCE585DE90F8DB2B6C1 /* DownloadARQuickLookProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookProvider.swift; sourceTree = "<group>"; };
 		9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB85B1BFCB3A174A2BCF86D9 /* DownloadARQuickLookInputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookInputProtocol.swift; sourceTree = "<group>"; };
 		B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookAssembly.swift; sourceTree = "<group>"; };
 		B3FDC926BE23A9131D45DFF0 /* DownloadARQuickLookView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookView.swift; sourceTree = "<group>"; };
 		CC129A0368739A641E6ED26A /* DownloadARQuickLookInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookInteractor.swift; sourceTree = "<group>"; };
@@ -6266,7 +6262,6 @@
 				1A65C1DFD5A2533C506D297B /* DownloadARQuickLookDataFlow.swift */,
 				CC129A0368739A641E6ED26A /* DownloadARQuickLookInteractor.swift */,
 				61DCDAA39E6747A12CC239E3 /* DownloadARQuickLookPresenter.swift */,
-				9F6C9CCE585DE90F8DB2B6C1 /* DownloadARQuickLookProvider.swift */,
 				B3FDC926BE23A9131D45DFF0 /* DownloadARQuickLookView.swift */,
 				3BCD8888462BD21ECF82C602 /* DownloadARQuickLookViewController.swift */,
 				9C37FBB4DB62F0DC3CDFFE7A /* InputOutput */,
@@ -6277,7 +6272,6 @@
 		9C37FBB4DB62F0DC3CDFFE7A /* InputOutput */ = {
 			isa = PBXGroup;
 			children = (
-				AB85B1BFCB3A174A2BCF86D9 /* DownloadARQuickLookInputProtocol.swift */,
 				CD2CFBDE7B71C461F988B1B5 /* DownloadARQuickLookOutputProtocol.swift */,
 			);
 			path = InputOutput;
@@ -7911,10 +7905,8 @@
 				2AFCCAAEBDBC4C05F4D5E5F0 /* DownloadARQuickLookDataFlow.swift in Sources */,
 				F26EBB85670ECB562C65D84C /* DownloadARQuickLookInteractor.swift in Sources */,
 				AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */,
-				DA21B5F81C62A2EC085814DC /* DownloadARQuickLookProvider.swift in Sources */,
 				245107514E8F81CF9A8C4C44 /* DownloadARQuickLookView.swift in Sources */,
 				008437078C67C7149BE6DE53 /* DownloadARQuickLookViewController.swift in Sources */,
-				3A8EA0D3394CF774A1EC8E55 /* DownloadARQuickLookInputProtocol.swift in Sources */,
 				C2537B043956035AEFCABAB5 /* DownloadARQuickLookOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,10 +19,17 @@ final class DownloadARQuickLookViewController: UIViewController {
 
     override func loadView() {
         let view = DownloadARQuickLookView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 }
 
 extension DownloadARQuickLookViewController: DownloadARQuickLookViewControllerProtocol {
     func displaySomeActionResult(viewModel: DownloadARQuickLook.SomeAction.ViewModel) {}
+}
+
+extension DownloadARQuickLookViewController: DownloadARQuickLookViewDelegate {
+    func downloadARQuickLookViewDidCancel(_ view: DownloadARQuickLookView) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

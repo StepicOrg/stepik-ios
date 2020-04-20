@@ -1,22 +1,21 @@
 import UIKit
 
 final class DownloadARQuickLookAssembly: Assembly {
-    var moduleInput: DownloadARQuickLookInputProtocol?
-
     private weak var moduleOutput: DownloadARQuickLookOutputProtocol?
 
-    init(output: DownloadARQuickLookOutputProtocol? = nil) {
+    private let url: URL
+
+    init(url: URL, output: DownloadARQuickLookOutputProtocol? = nil) {
+        self.url = url
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = DownloadARQuickLookProvider()
         let presenter = DownloadARQuickLookPresenter()
-        let interactor = DownloadARQuickLookInteractor(presenter: presenter, provider: provider)
+        let interactor = DownloadARQuickLookInteractor(url: self.url, presenter: presenter)
         let viewController = DownloadARQuickLookViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController
