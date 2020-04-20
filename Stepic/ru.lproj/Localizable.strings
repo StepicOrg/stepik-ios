@@ -817,6 +817,7 @@ StepStatisticsPassedByTitle = "Решило:";
 StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
 StepSubmissionsAlertActionTitle = "Показать решения";
+StepARThumbnailALTText = "3D модель.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";

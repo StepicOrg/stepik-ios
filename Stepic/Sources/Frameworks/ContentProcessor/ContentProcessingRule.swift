@@ -128,15 +128,27 @@ final class ReplaceModelViewerWithARImageRule: BaseHTMLExtractionRule {
                 attribute: "ios-src",
                 from: tag
             )
+            let altAttributes = self.extractorType.extractAllTagsAttribute(
+                tag: modelViewerTagName,
+                attribute: "alt",
+                from: tag
+            )
 
             guard let thumbnailURLString = thumbnailAttributes.first,
                   let usdzFileURLString = iOSSourceAttributes.first else {
                 continue
             }
 
+            let altAttributeValue: String = {
+                if let altAttribute = altAttributes.first {
+                    return altAttribute
+                }
+                return NSLocalizedString("StepARThumbnailALTText", comment: "")
+            }()
+
             let clickableARImageTag = """
             <a href="openar://\(usdzFileURLString)">
-                <img src="\(thumbnailURLString)" ar-thumbnail>
+                <img src="\(thumbnailURLString)" alt="\(altAttributeValue)" ar-thumbnail>
             </a>
             """
 
