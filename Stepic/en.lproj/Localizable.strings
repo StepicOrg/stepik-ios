@@ -819,6 +819,8 @@ StepSubmissionsAlertActionTitle = "Show Submissions";
 StepARThumbnailALTText = "A 3D model.";
 DownloadARQuickLookTitle = "Downloading AR-object";
 DownloadARQuickLookAlertFailedMessage = "Couldn't download AR-object. Please try again later.";
+StepARQuickLookUnsupportedAlertTitle = "AR Quick Look Not Supported";
+StepARQuickLookUnsupportedAlertMessage = "Your device is not supported by viewing the content in the augmented reality, the minimum requirement iOS 12.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

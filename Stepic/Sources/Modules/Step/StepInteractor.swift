@@ -222,12 +222,16 @@ final class StepInteractor: StepInteractorProtocol {
     }
 
     func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {
-        self.provider.fetchStoredARQuickLookFile(remoteURL: request.remoteURL).done { storedFile in
-            if let storedFile = storedFile {
-                self.presenter.presentARQuickLook(response: .init(result: .success(storedFile.localURL)))
-            } else {
-                self.presenter.presentDownloadARQuickLook(response: .init(url: request.remoteURL))
+        if #available(iOS 12.0, *) {
+            self.provider.fetchStoredARQuickLookFile(remoteURL: request.remoteURL).done { storedFile in
+                if let storedFile = storedFile {
+                    self.presenter.presentARQuickLook(response: .init(result: .success(storedFile.localURL)))
+                } else {
+                    self.presenter.presentDownloadARQuickLook(response: .init(url: request.remoteURL))
+                }
             }
+        } else {
+            self.presenter.presentARQuickLook(response: .init(result: .failure(Error.arQuickLookUnsupported)))
         }
     }
 
@@ -253,6 +257,7 @@ final class StepInteractor: StepInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case arQuickLookUnsupported
     }
 }
 

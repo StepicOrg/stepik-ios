@@ -25,7 +25,8 @@ final class RemoteConfig {
         Key.adaptiveBackendUrl.rawValue: StepikApplicationsInfo.adaptiveRatingURL as NSObject,
         Key.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
         Key.newLessonAvailable.rawValue: true as NSObject,
-        Key.darkModeAvailable.rawValue: true as NSObject
+        Key.darkModeAvailable.rawValue: true as NSObject,
+        Key.arQuickLookAvailable.rawValue: false as NSObject
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -89,6 +90,13 @@ final class RemoteConfig {
             .boolValue
     }
 
+    var isARQuickLookAvailable: Bool {
+        FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.arQuickLookAvailable.rawValue)
+            .boolValue
+    }
+
     init() {
         self.loadDefaultValues()
         self.fetchCloudValues()
@@ -142,5 +150,6 @@ final class RemoteConfig {
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
         case newLessonAvailable = "new_lesson_available_ios"
         case darkModeAvailable = "is_dark_mode_available_ios"
+        case arQuickLookAvailable = "is_ar_quick_look_available_ios"
     }
 }

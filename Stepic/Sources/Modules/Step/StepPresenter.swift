@@ -137,14 +137,21 @@ final class StepPresenter: StepPresenterProtocol {
                 .absoluteString
                 .replacingOccurrences(of: "file://", with: "")
             let fileURL = URL(fileURLWithPath: validPath)
+
             self.viewController?.displayARQuickLook(viewModel: .init(localURL: fileURL))
-        case .failure:
-            self.viewController?.displayOKAlert(
-                viewModel: .init(
-                    title: NSLocalizedString("Error", comment: ""),
-                    message: NSLocalizedString("DownloadARQuickLookAlertFailedMessage", comment: "")
-                )
-            )
+        case .failure(let error):
+            let title: String
+            let message: String
+
+            if case StepInteractor.Error.arQuickLookUnsupported = error {
+                title = NSLocalizedString("StepARQuickLookUnsupportedAlertTitle", comment: "")
+                message = NSLocalizedString("StepARQuickLookUnsupportedAlertMessage", comment: "")
+            } else {
+                title = NSLocalizedString("Error", comment: "")
+                message = NSLocalizedString("DownloadARQuickLookAlertFailedMessage", comment: "")
+            }
+
+            self.viewController?.displayOKAlert(viewModel: .init(title: title, message: message))
         }
     }
 
@@ -267,7 +274,8 @@ final class StepPresenter: StepPresenterProtocol {
             )
         }
 
-        if text.contains("<model-viewer") {
+        let shouldDisplayARThumbnails = text.contains("<model-viewer") && RemoteConfig.shared.isARQuickLookAvailable
+        if shouldDisplayARThumbnails {
             contentProcessingRules.append(ReplaceModelViewerWithARImageRule(extractorType: HTMLExtractor.self))
         }
 
