@@ -254,7 +254,7 @@ extension StepView: ProcessedContentTextViewDelegate {
         self.delegate?.stepView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenUSDZLink url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL) {
         self.delegate?.stepView(self, didRequestOpenARQuickLook: url)
     }
 

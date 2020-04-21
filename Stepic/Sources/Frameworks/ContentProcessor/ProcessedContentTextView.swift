@@ -11,12 +11,12 @@ protocol ProcessedContentTextViewDelegate: AnyObject {
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL)
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenUSDZLink url: URL)
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL)
 }
 
 extension ProcessedContentTextViewDelegate {
     func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {}
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenUSDZLink url: URL) {}
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL) {}
 }
 
 // MARK: - Appearance -
@@ -362,7 +362,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             validPath.replaceFirst(matching: "//", with: "://")
 
             if let usdzURL = URL(string: validPath) {
-                self.delegate?.processedContentTextView(self, didOpenUSDZLink: usdzURL)
+                self.delegate?.processedContentTextView(self, didOpenARKitLink: usdzURL)
             }
 
             return decisionHandler(.cancel)
