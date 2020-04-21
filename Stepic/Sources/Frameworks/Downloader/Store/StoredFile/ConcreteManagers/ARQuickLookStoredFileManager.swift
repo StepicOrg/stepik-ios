@@ -5,6 +5,7 @@ protocol ARQuickLookStoredFileManagerProtocol: AnyObject {
     /// - Parameter url: USDZ file remote url.
     func getARQuickLookStoredFile(url: URL) -> StoredFileProtocol?
     func removeARQuickLookStoredFile(url: URL) throws
+    func removeAllARQuickLookStoredFiles() throws
     func makeARQuickLookFilenameFromDownloadURL(_ url: URL) -> String
 }
 
@@ -39,6 +40,12 @@ final class ARQuickLookStoredFileManager: StoredFileManager, ARQuickLookStoredFi
         }
 
         return try self.removeLocalStoredFile(storedFile)
+    }
+
+    func removeAllARQuickLookStoredFiles() throws {
+        for storedFile in self.getAllStoredFiles() {
+            try self.removeLocalStoredFile(storedFile)
+        }
     }
 
     enum Error: Swift.Error {

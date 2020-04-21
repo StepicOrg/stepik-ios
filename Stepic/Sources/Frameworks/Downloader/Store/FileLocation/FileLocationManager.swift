@@ -1,6 +1,8 @@
 import Foundation
 
 protocol FileLocationManagerProtocol: AnyObject {
+    var filesDirectoryURL: URL { get }
+
     func getFullURLForFile(filename: String) -> URL
 }
 

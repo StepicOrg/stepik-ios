@@ -4,6 +4,8 @@ import Foundation
 protocol StoredFileManagerProtocol: AnyObject {
     /// Find & get file info if file exists otherwise return nil
     func getLocalStoredFile(filename: String) -> StoredFileProtocol?
+    /// Getting list of files in the documents directory
+    func getAllStoredFiles() -> [StoredFileProtocol]
     /// Remove local stored video; throw exception if error occurred
     func removeLocalStoredFile(_ file: StoredFileProtocol) throws
     /// Move file to current location and return info about new file
@@ -30,6 +32,23 @@ class StoredFileManager: StoredFileManagerProtocol {
             return StoredFile(localURL: url, size: size)
         }
         return nil
+    }
+
+    func getAllStoredFiles() -> [StoredFileProtocol] {
+        guard let items = try? self.fileManager.contentsOfDirectory(
+            at: self.fileLocationManager.filesDirectoryURL,
+            includingPropertiesForKeys: nil,
+            options: [.skipsHiddenFiles]
+        ) else {
+            return []
+        }
+
+        return items.compactMap { localURL in
+            if let fileSize = self.getFileSize(url: localURL) {
+                return StoredFile(localURL: localURL, size: fileSize)
+            }
+            return nil
+        }
     }
 
     func removeLocalStoredFile(_ file: StoredFileProtocol) throws {
