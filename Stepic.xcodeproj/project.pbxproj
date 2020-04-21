@@ -386,6 +386,7 @@
 		2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */; };
 		2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */; };
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
+		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */; };
 		2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778322BBA54800D44DC0 /* QuizStatus.swift */; };
@@ -1614,6 +1615,7 @@
 		2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailCellView.swift; sourceTree = "<group>"; };
 		2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingServiceFactory.swift; sourceTree = "<group>"; };
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
+		2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARKit-Badge-Glyph-Only.png"; sourceTree = "<group>"; };
 		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Promise.swift"; sourceTree = "<group>"; };
 		2C20778322BBA54800D44DC0 /* QuizStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatus.swift; sourceTree = "<group>"; };
@@ -2709,6 +2711,7 @@
 				2CBC4C051F1E4A1300FE96C4 /* Config.plist */,
 				08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */,
 				08DE94151B8C58AC00D278AB /* Info.plist */,
+				2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */,
 				0869F6D71CE3684000F8A6DB /* default_sound.wav */,
 				08DE941D1B8C58AC00D278AB /* Images.xcassets */,
 				2CA9D98B20122EAF007AA743 /* AdaptiveLeaderboardsNames */,
@@ -6499,6 +6502,7 @@
 				2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */,
 				082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */,
 				2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */,
+				2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */,
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */,

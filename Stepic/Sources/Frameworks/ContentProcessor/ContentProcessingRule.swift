@@ -148,7 +148,12 @@ final class ReplaceModelViewerWithARImageRule: BaseHTMLExtractionRule {
 
             let clickableARImageTag = """
             <a href="openar://\(usdzFileURLString)">
-                <img src="\(thumbnailURLString)" alt="\(altAttributeValue)" ar-thumbnail>
+                <div style="position:relative;">
+                    <img src="\(thumbnailURLString)" alt="\(altAttributeValue)" style="object-fit:cover;width:100%;" ar-thumbnail>
+                    <div style="position:absolute;top:16px;right:16px">
+                        <img src="ARKit-Badge-Glyph-Only.png" width="39" height="39">
+                    </div>
+                </div>
             </a>
             """
 
