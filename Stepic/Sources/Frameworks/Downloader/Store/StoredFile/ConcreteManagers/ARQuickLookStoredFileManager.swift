@@ -1,6 +1,8 @@
 import Foundation
 
 protocol ARQuickLookStoredFileManagerProtocol: AnyObject {
+    /// Returns AR Quick Look stored file by a remote URL if exists otherwise nil.
+    /// - Parameter url: USDZ file remote url.
     func getARQuickLookStoredFile(url: URL) -> StoredFileProtocol?
     func removeARQuickLookStoredFile(url: URL) throws
     func makeARQuickLookFilenameFromDownloadURL(_ url: URL) -> String

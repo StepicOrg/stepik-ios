@@ -222,7 +222,13 @@ final class StepInteractor: StepInteractorProtocol {
     }
 
     func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {
-        self.presenter.presentDownloadARQuickLook(response: .init(url: request.remoteURL))
+        self.provider.fetchStoredARQuickLookFile(remoteURL: request.remoteURL).done { storedFile in
+            if let storedFile = storedFile {
+                self.presenter.presentARQuickLook(response: .init(result: .success(storedFile.localURL)))
+            } else {
+                self.presenter.presentDownloadARQuickLook(response: .init(url: request.remoteURL))
+            }
+        }
     }
 
     // MARK: Private API
