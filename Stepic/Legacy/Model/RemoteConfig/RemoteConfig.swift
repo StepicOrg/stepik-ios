@@ -25,7 +25,7 @@ final class RemoteConfig {
         Key.adaptiveBackendUrl.rawValue: StepikApplicationsInfo.adaptiveRatingURL as NSObject,
         Key.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
         Key.newLessonAvailable.rawValue: true as NSObject,
-        Key.darkModeAvailable.rawValue: false as NSObject
+        Key.darkModeAvailable.rawValue: true as NSObject
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
