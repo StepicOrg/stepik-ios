@@ -49,18 +49,12 @@ final class DownloadARQuickLookView: UIView {
         label.textColor = self.appearance.messageLabelTextColor
         label.font = self.appearance.messageLabelFont
         label.textAlignment = .center
-
-        label.text = "48%"
-
         return label
     }()
 
     private lazy var progressView: UIProgressView = {
         let view = UIProgressView()
         view.progressViewStyle = .default
-
-        view.setProgress(0.48, animated: false)
-
         return view
     }()
 
@@ -79,6 +73,13 @@ final class DownloadARQuickLookView: UIView {
     }()
 
     private lazy var contentView = UIView()
+
+    var progress: Float = 0 {
+        didSet {
+            self.progressView.setProgress(self.progress, animated: true)
+            self.messageLabel.text = FormatterHelper.integerPercent(self.progress)
+        }
+    }
 
     init(
         frame: CGRect = .zero,
@@ -106,6 +107,7 @@ final class DownloadARQuickLookView: UIView {
 extension DownloadARQuickLookView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
+        self.progress = 0
     }
 
     func addSubviews() {

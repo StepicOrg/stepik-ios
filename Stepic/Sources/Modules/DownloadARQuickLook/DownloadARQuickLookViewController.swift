@@ -1,11 +1,13 @@
 import UIKit
 
 protocol DownloadARQuickLookViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: DownloadARQuickLook.SomeAction.ViewModel)
+    func displayDownloadProgressUpdate(viewModel: DownloadARQuickLook.DownloadProgressUpdate.ViewModel)
 }
 
 final class DownloadARQuickLookViewController: UIViewController {
     private let interactor: DownloadARQuickLookInteractorProtocol
+
+    lazy var downloadARQuickLookView = self.view as? DownloadARQuickLookView
 
     init(interactor: DownloadARQuickLookInteractorProtocol) {
         self.interactor = interactor
@@ -22,10 +24,17 @@ final class DownloadARQuickLookViewController: UIViewController {
         view.delegate = self
         self.view = view
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.interactor.doStartDownload(request: .init())
+    }
 }
 
 extension DownloadARQuickLookViewController: DownloadARQuickLookViewControllerProtocol {
-    func displaySomeActionResult(viewModel: DownloadARQuickLook.SomeAction.ViewModel) {}
+    func displayDownloadProgressUpdate(viewModel: DownloadARQuickLook.DownloadProgressUpdate.ViewModel) {
+        self.downloadARQuickLookView?.progress = viewModel.progress
+    }
 }
 
 extension DownloadARQuickLookViewController: DownloadARQuickLookViewDelegate {

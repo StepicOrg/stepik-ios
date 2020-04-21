@@ -268,7 +268,10 @@ extension StepViewController: StepViewControllerProtocol {
             return presenter
         }()
 
-        let assembly = DownloadARQuickLookAssembly(url: viewModel.url, output: nil)
+        let assembly = DownloadARQuickLookAssembly(
+            url: viewModel.url,
+            output: self.interactor as? DownloadARQuickLookOutputProtocol
+        )
 
         self.customPresentViewController(presentr, viewController: assembly.makeModule(), animated: true)
     }

@@ -1,11 +1,17 @@
 import Foundation
 
 enum DownloadARQuickLook {
-    enum SomeAction {
+    enum StartDownload {
         struct Request {}
+    }
 
-        struct Response {}
+    enum DownloadProgressUpdate {
+        struct Response {
+            let progress: Float
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let progress: Float
+        }
     }
 }

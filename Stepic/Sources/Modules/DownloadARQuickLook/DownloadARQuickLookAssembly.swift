@@ -12,7 +12,12 @@ final class DownloadARQuickLookAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let presenter = DownloadARQuickLookPresenter()
-        let interactor = DownloadARQuickLookInteractor(url: self.url, presenter: presenter)
+        let interactor = DownloadARQuickLookInteractor(
+            url: self.url,
+            presenter: presenter,
+            downloadingService: DownloadingServiceFactory.makeDownloadingService(type: .arQuickLook),
+            arQuickLookStoredFileManager: ARQuickLookStoredFileManager(fileManager: .default)
+        )
         let viewController = DownloadARQuickLookViewController(interactor: interactor)
 
         presenter.viewController = viewController

@@ -290,3 +290,11 @@ extension StepInteractor: StepInputProtocol {
         self.presenter.presentPlayStep(response: .init())
     }
 }
+
+// MARK: - StepInteractor: DownloadARQuickLookOutputProtocol -
+
+extension StepInteractor: DownloadARQuickLookOutputProtocol {
+    func handleDidDownloadARQuickLook(storedURL: URL) {}
+
+    func handleDidFailDownloadARQuickLook(error: Swift.Error) {}
+}
