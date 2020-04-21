@@ -73,7 +73,7 @@ final class RemoveImageFixedHeightRule: BaseHTMLExtractionRule {
     }
 }
 
-final class ReplaceImageSourceWithBase64: BaseHTMLExtractionRule {
+final class ReplaceImageSourceWithBase64Rule: BaseHTMLExtractionRule {
     private let base64EncodedStringByImageURL: [URL: String]
 
     init(base64EncodedStringByImageURL: [URL: String], extractorType: HTMLExtractorProtocol.Type) {
@@ -104,6 +104,60 @@ final class ReplaceImageSourceWithBase64: BaseHTMLExtractionRule {
             replacedImage = replacedImage.condenseWhitespace()
 
             content = content.replacingOccurrences(of: image, with: replacedImage)
+        }
+
+        return content
+    }
+}
+
+final class ReplaceModelViewerWithARImageRule: BaseHTMLExtractionRule {
+    override func process(content: String) -> String {
+        var content = content
+
+        let modelViewerTagName = "model-viewer"
+        let modelViewerTags = self.extractorType.extractAllTags(tag: modelViewerTagName, from: content)
+
+        for tag in modelViewerTags {
+            let thumbnailAttributes = self.extractorType.extractAllTagsAttribute(
+                tag: modelViewerTagName,
+                attribute: "thumbnail",
+                from: tag
+            )
+            let iOSSourceAttributes = self.extractorType.extractAllTagsAttribute(
+                tag: modelViewerTagName,
+                attribute: "ios-src",
+                from: tag
+            )
+            let altAttributes = self.extractorType.extractAllTagsAttribute(
+                tag: modelViewerTagName,
+                attribute: "alt",
+                from: tag
+            )
+
+            guard let thumbnailURLString = thumbnailAttributes.first,
+                  let usdzFileURLString = iOSSourceAttributes.first else {
+                continue
+            }
+
+            let altAttributeValue: String = {
+                if let altAttribute = altAttributes.first {
+                    return altAttribute
+                }
+                return NSLocalizedString("StepARThumbnailALTText", comment: "")
+            }()
+
+            let clickableARImageTag = """
+            <a href="openar://\(usdzFileURLString)">
+                <div style="position:relative;">
+                    <img src="\(thumbnailURLString)" alt="\(altAttributeValue)" style="object-fit:cover;width:100%;" ar-thumbnail>
+                    <div style="position:absolute;top:16px;right:16px">
+                        <img src="ARKit-Badge-Glyph-Only.png" width="39" height="39">
+                    </div>
+                </div>
+            </a>
+            """
+
+            content = content.replacingOccurrences(of: tag, with: clickableARImageTag)
         }
 
         return content

@@ -36,7 +36,8 @@ final class SettingsProvider: SettingsProviderProtocol {
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let applicationThemeService: ApplicationThemeServiceProtocol
 
-    private var downloadsProvider: DownloadsProviderProtocol
+    private let downloadsProvider: DownloadsProviderProtocol
+    private let arQuickLookStoredFileManager: ARQuickLookStoredFileManagerProtocol
 
     var globalDownloadVideoQuality: DownloadVideoQuality {
         get {
@@ -129,7 +130,8 @@ final class SettingsProvider: SettingsProviderProtocol {
         autoplayStorageManager: AutoplayStorageManagerProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         applicationThemeService: ApplicationThemeServiceProtocol,
-        downloadsProvider: DownloadsProviderProtocol
+        downloadsProvider: DownloadsProviderProtocol,
+        arQuickLookStoredFileManager: ARQuickLookStoredFileManagerProtocol
     ) {
         self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
         self.streamVideoQualityStorageManager = streamVideoQualityStorageManager
@@ -140,11 +142,17 @@ final class SettingsProvider: SettingsProviderProtocol {
         self.adaptiveStorageManager = adaptiveStorageManager
         self.applicationThemeService = applicationThemeService
         self.downloadsProvider = downloadsProvider
+        self.arQuickLookStoredFileManager = arQuickLookStoredFileManager
     }
 
     func deleteAllDownloadedContent() -> Promise<Void> {
-        self.downloadsProvider.fetchCachedCourses().then { cachedCourses in
+        firstly {
+            self.downloadsProvider.fetchCachedCourses()
+        }.then { cachedCourses in
             self.downloadsProvider.deleteCachedCourses(cachedCourses)
+        }.then { _ -> Promise<Void> in
+            try? self.arQuickLookStoredFileManager.removeAllARQuickLookStoredFiles()
+            return Promise.value(())
         }
     }
 }

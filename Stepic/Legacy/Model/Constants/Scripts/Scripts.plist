@@ -28,7 +28,9 @@ $(document).ready(function() {
         var src = &quot;openimg://&quot; + $this.attr(&apos;src&apos;);
         $this.addClass(&apos;image&apos;);
         var a = $(&apos;&lt;a/&gt;&apos;).attr(&apos;href&apos;, src);
-        $this.wrap(a);
+        if ($this.attr(&apos;ar-thumbnail&apos;) != &quot;&quot;) {
+        	$this.wrap(a);
+        }
     });
 });
 &lt;/script&gt;</string>

@@ -817,6 +817,11 @@ StepStatisticsPassedByTitle = "Решило:";
 StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
 StepSubmissionsAlertActionTitle = "Показать решения";
+StepARThumbnailALTText = "3D модель.";
+DownloadARQuickLookTitle = "Загрузка AR-объекта";
+DownloadARQuickLookAlertFailedMessage = "Не удалось загрузить AR-объект. Пожалуйста, попробуйте снова.";
+StepARQuickLookUnsupportedAlertTitle = "Дополненная реальность не поддерживается";
+StepARQuickLookUnsupportedAlertMessage = "Ваше устройство не поддерживает просмотр объектов в дополненной реальности. Требуется iOS 12.0 и новее.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";

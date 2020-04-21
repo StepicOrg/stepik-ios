@@ -1,4 +1,6 @@
 import Agrume
+import Presentr
+import QuickLook
 import SVProgressHUD
 import UIKit
 
@@ -11,6 +13,9 @@ protocol StepViewControllerProtocol: AnyObject {
     func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel)
     func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel)
+    func displayDownloadARQuickLook(viewModel: StepDataFlow.DownloadARQuickLookPresentation.ViewModel)
+    func displayARQuickLook(viewModel: StepDataFlow.ARQuickLookPresentation.ViewModel)
+    func displayOKAlert(viewModel: StepDataFlow.OKAlertPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -47,6 +52,8 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
     private var canNavigateToNextStep = false
     /// Keeps track of need to autoplay the step or not.
     private var shouldRequestAutoplay = false
+
+    private var arQuickLookPreviewDataSource: StepARQuickLookPreviewDataSource?
 
     init(interactor: StepInteractorProtocol) {
         self.interactor = interactor
@@ -254,6 +261,39 @@ extension StepViewController: StepViewControllerProtocol {
         )
     }
 
+    func displayDownloadARQuickLook(viewModel: StepDataFlow.DownloadARQuickLookPresentation.ViewModel) {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: .dynamic(center: .center))
+            presenter.transitionType = .crossDissolve
+            presenter.dismissTransitionType = .crossDissolve
+            presenter.backgroundOpacity = 0.1
+            presenter.backgroundTap = .noAction
+            presenter.roundCorners = true
+            presenter.cornerRadius = 10
+            return presenter
+        }()
+
+        let assembly = DownloadARQuickLookAssembly(
+            url: viewModel.url,
+            output: self.interactor as? DownloadARQuickLookOutputProtocol
+        )
+
+        self.customPresentViewController(presentr, viewController: assembly.makeModule(), animated: true)
+    }
+
+    func displayARQuickLook(viewModel: StepDataFlow.ARQuickLookPresentation.ViewModel) {
+        self.arQuickLookPreviewDataSource = StepARQuickLookPreviewDataSource(fileURL: viewModel.localURL)
+        let previewController = QLPreviewController()
+        previewController.dataSource = self.arQuickLookPreviewDataSource
+        self.present(previewController, animated: true, completion: nil)
+    }
+
+    func displayOKAlert(viewModel: StepDataFlow.OKAlertPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
@@ -349,6 +389,10 @@ extension StepViewController: StepViewDelegate {
 
     func stepViewDidRequestSolutions(_ view: StepView) {
         self.interactor.doSolutionsPresentation(request: .init())
+    }
+
+    func stepView(_ view: StepView, didRequestOpenARQuickLook url: URL) {
+        self.interactor.doARQuickLookPresentation(request: .init(remoteURL: url))
     }
 
     func stepView(_ view: StepView, didRequestOpenURL url: URL) {

@@ -10,6 +10,8 @@ protocol StepPresenterProtocol {
     func presentSolutionsButtonUpdate(response: StepDataFlow.SolutionsButtonUpdate.Response)
     func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response)
     func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
+    func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response)
+    func presentARQuickLook(response: StepDataFlow.ARQuickLookPresentation.Response)
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -124,6 +126,35 @@ final class StepPresenter: StepPresenterProtocol {
         )
     }
 
+    func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response) {
+        self.viewController?.displayDownloadARQuickLook(viewModel: .init(url: response.url))
+    }
+
+    func presentARQuickLook(response: StepDataFlow.ARQuickLookPresentation.Response) {
+        switch response.result {
+        case .success(let storedURL):
+            let validPath = storedURL
+                .absoluteString
+                .replacingOccurrences(of: "file://", with: "")
+            let fileURL = URL(fileURLWithPath: validPath)
+
+            self.viewController?.displayARQuickLook(viewModel: .init(localURL: fileURL))
+        case .failure(let error):
+            let title: String
+            let message: String
+
+            if case StepInteractor.Error.arQuickLookUnsupported = error {
+                title = NSLocalizedString("StepARQuickLookUnsupportedAlertTitle", comment: "")
+                message = NSLocalizedString("StepARQuickLookUnsupportedAlertMessage", comment: "")
+            } else {
+                title = NSLocalizedString("Error", comment: "")
+                message = NSLocalizedString("DownloadARQuickLookAlertFailedMessage", comment: "")
+            }
+
+            self.viewController?.displayOKAlert(viewModel: .init(title: title, message: message))
+        }
+    }
+
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
@@ -232,23 +263,28 @@ final class StepPresenter: StepPresenterProtocol {
             uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
         )
 
-        var rules = ContentProcessor.defaultRules
+        var contentProcessingRules = ContentProcessor.defaultRules
 
         if !base64EncodedStringByImageURL.isEmpty {
-            rules.append(
-                ReplaceImageSourceWithBase64(
+            contentProcessingRules.append(
+                ReplaceImageSourceWithBase64Rule(
                     base64EncodedStringByImageURL: base64EncodedStringByImageURL,
                     extractorType: HTMLExtractor.self
                 )
             )
         }
 
-        let injections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
+        let shouldDisplayARThumbnails = text.contains("<model-viewer") && RemoteConfig.shared.isARQuickLookAvailable
+        if shouldDisplayARThumbnails {
+            contentProcessingRules.append(ReplaceModelViewerWithARImageRule(extractorType: HTMLExtractor.self))
+        }
+
+        let contentProcessingInjections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
 
         let contentProcessor = ContentProcessor(
             content: text,
-            rules: rules,
-            injections: injections
+            rules: contentProcessingRules,
+            injections: contentProcessingInjections
         )
 
         return contentProcessor.processContent()

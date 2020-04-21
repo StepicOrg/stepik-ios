@@ -7,6 +7,7 @@ protocol StepProviderProtocol {
     func fetchRemoteStep(id: Step.IdType) -> Promise<Step?>
     func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
     func fetchCurrentFontSize() -> Guarantee<StepFontSize>
+    func fetchStoredARQuickLookFile(remoteURL: URL) -> Guarantee<StoredFileProtocol?>
     func fetchDiscussionThreads(stepID: Step.IdType) -> Promise<FetchResult<[DiscussionThread]>>
     func fetchRemoteDiscussionThreads(ids: [DiscussionThread.IdType]) -> Promise<[DiscussionThread]>
 }
@@ -16,6 +17,7 @@ final class StepProvider: StepProviderProtocol {
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     private let imageStoredFileManager: StoredFileManagerProtocol
+    private let arQuickLookStoredFileManager: ARQuickLookStoredFileManagerProtocol
     private let discussionThreadsNetworkService: DiscussionThreadsNetworkServiceProtocol
     private let discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
 
@@ -24,6 +26,7 @@ final class StepProvider: StepProviderProtocol {
         stepsNetworkService: StepsNetworkServiceProtocol,
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         imageStoredFileManager: StoredFileManagerProtocol,
+        arQuickLookStoredFileManager: ARQuickLookStoredFileManagerProtocol,
         discussionThreadsNetworkService: DiscussionThreadsNetworkServiceProtocol,
         discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
     ) {
@@ -31,6 +34,7 @@ final class StepProvider: StepProviderProtocol {
         self.stepsNetworkService = stepsNetworkService
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.imageStoredFileManager = imageStoredFileManager
+        self.arQuickLookStoredFileManager = arQuickLookStoredFileManager
         self.discussionThreadsNetworkService = discussionThreadsNetworkService
         self.discussionThreadsPersistenceService = discussionThreadsPersistenceService
     }
@@ -98,6 +102,12 @@ final class StepProvider: StepProviderProtocol {
     func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
         Guarantee { seal in
             seal(self.stepFontSizeStorageManager.globalStepFontSize)
+        }
+    }
+
+    func fetchStoredARQuickLookFile(remoteURL: URL) -> Guarantee<StoredFileProtocol?> {
+        Guarantee { seal in
+            seal(self.arQuickLookStoredFileManager.getARQuickLookStoredFile(url: remoteURL))
         }
     }
 

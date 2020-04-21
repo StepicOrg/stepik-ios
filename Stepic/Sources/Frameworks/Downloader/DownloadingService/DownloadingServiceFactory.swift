@@ -10,10 +10,16 @@ enum DownloadingServiceFactory {
         switch type {
         case .image:
             return self.sharedImageDownloadingService
+        case .arQuickLook:
+            return DownloadingService(
+                downloader: Downloader(session: .foreground),
+                fileManager: StoredFileManagerFactory.makeStoredFileManager(type: .arQuickLook)
+            )
         }
     }
 
     enum `Type` {
         case image
+        case arQuickLook
     }
 }
