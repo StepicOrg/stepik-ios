@@ -818,6 +818,8 @@ StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
 StepSubmissionsAlertActionTitle = "Показать решения";
 StepARThumbnailALTText = "3D модель.";
+DownloadARQuickLookTitle = "Загрузка AR-объекта";
+DownloadARQuickLookAlertFailedMessage = "Не удалось загрузить AR-объект. Пожалуйста, попробуйте снова.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";

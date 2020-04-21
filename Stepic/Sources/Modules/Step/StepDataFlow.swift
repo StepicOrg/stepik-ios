@@ -156,8 +156,15 @@ enum StepDataFlow {
     /// Present AR Quick Look
     enum ARQuickLookPresentation {
         struct Request {
-            /// USDZ remote file URL.
-            let url: URL
+            let remoteURL: URL
+        }
+
+        struct Response {
+            let result: Result<URL, Error>
+        }
+
+        struct ViewModel {
+            let localURL: URL
         }
     }
 
@@ -169,6 +176,14 @@ enum StepDataFlow {
 
         struct ViewModel {
             let url: URL
+        }
+    }
+
+    /// Present alert with title, message and OK action.
+    enum OKAlertPresentation {
+        struct ViewModel {
+            let title: String
+            let message: String?
         }
     }
 

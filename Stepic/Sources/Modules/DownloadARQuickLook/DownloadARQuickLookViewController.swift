@@ -2,6 +2,9 @@ import UIKit
 
 protocol DownloadARQuickLookViewControllerProtocol: AnyObject {
     func displayDownloadProgressUpdate(viewModel: DownloadARQuickLook.DownloadProgressUpdate.ViewModel)
+    func displayCancelDownloadResult(viewModel: DownloadARQuickLook.CancelDownload.ViewModel)
+    func displayCompleteDownloadResult(viewModel: DownloadARQuickLook.CompleteDownload.ViewModel)
+    func displayFailDownloadResult(viewModel: DownloadARQuickLook.FailDownload.ViewModel)
 }
 
 final class DownloadARQuickLookViewController: UIViewController {
@@ -35,10 +38,22 @@ extension DownloadARQuickLookViewController: DownloadARQuickLookViewControllerPr
     func displayDownloadProgressUpdate(viewModel: DownloadARQuickLook.DownloadProgressUpdate.ViewModel) {
         self.downloadARQuickLookView?.progress = viewModel.progress
     }
+
+    func displayCancelDownloadResult(viewModel: DownloadARQuickLook.CancelDownload.ViewModel) {
+        self.dismiss(animated: true)
+    }
+
+    func displayCompleteDownloadResult(viewModel: DownloadARQuickLook.CompleteDownload.ViewModel) {
+        self.dismiss(animated: true)
+    }
+
+    func displayFailDownloadResult(viewModel: DownloadARQuickLook.FailDownload.ViewModel) {
+        self.dismiss(animated: true)
+    }
 }
 
 extension DownloadARQuickLookViewController: DownloadARQuickLookViewDelegate {
     func downloadARQuickLookViewDidCancel(_ view: DownloadARQuickLookView) {
-        self.dismiss(animated: true, completion: nil)
+        self.interactor.doCancelDownload(request: .init())
     }
 }

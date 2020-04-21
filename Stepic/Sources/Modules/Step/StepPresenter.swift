@@ -11,6 +11,7 @@ protocol StepPresenterProtocol {
     func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response)
     func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
     func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response)
+    func presentARQuickLook(response: StepDataFlow.ARQuickLookPresentation.Response)
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -127,6 +128,24 @@ final class StepPresenter: StepPresenterProtocol {
 
     func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response) {
         self.viewController?.displayDownloadARQuickLook(viewModel: .init(url: response.url))
+    }
+
+    func presentARQuickLook(response: StepDataFlow.ARQuickLookPresentation.Response) {
+        switch response.result {
+        case .success(let storedURL):
+            let validPath = storedURL
+                .absoluteString
+                .replacingOccurrences(of: "file://", with: "")
+            let fileURL = URL(fileURLWithPath: validPath)
+            self.viewController?.displayARQuickLook(viewModel: .init(localURL: fileURL))
+        case .failure:
+            self.viewController?.displayOKAlert(
+                viewModel: .init(
+                    title: NSLocalizedString("Error", comment: ""),
+                    message: NSLocalizedString("DownloadARQuickLookAlertFailedMessage", comment: "")
+                )
+            )
+        }
     }
 
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {

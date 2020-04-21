@@ -38,9 +38,7 @@ final class DownloadARQuickLookView: UIView {
         label.textColor = self.appearance.titleLabelTextColor
         label.font = self.appearance.titleLabelFont
         label.textAlignment = .center
-
-        label.text = "Downloading"
-
+        label.text = NSLocalizedString("DownloadARQuickLookTitle", comment: "")
         return label
     }()
 

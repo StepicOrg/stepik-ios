@@ -5,6 +5,28 @@ enum DownloadARQuickLook {
         struct Request {}
     }
 
+    enum CancelDownload {
+        struct Request {}
+
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
+    enum CompleteDownload {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
+    enum FailDownload {
+        struct Response {
+            let error: Error
+        }
+
+        struct ViewModel {}
+    }
+
     enum DownloadProgressUpdate {
         struct Response {
             let progress: Float

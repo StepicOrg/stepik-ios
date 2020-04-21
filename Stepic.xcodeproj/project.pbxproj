@@ -651,6 +651,7 @@
 		2CEBEBF2242F8E9900DBFDF0 /* StepikRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEBF1242F8E9900DBFDF0 /* StepikRequestInterceptor.swift */; };
 		2CEBEBF4242F8F9900DBFDF0 /* StepikRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEBF3242F8F9900DBFDF0 /* StepikRequestAdapter.swift */; };
 		2CEBEBF6242F8FB200DBFDF0 /* StepikRequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEBF5242F8FB200DBFDF0 /* StepikRequestRetrier.swift */; };
+		2CF0848F244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
 		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
@@ -1890,6 +1891,7 @@
 		2CEBEBF3242F8F9900DBFDF0 /* StepikRequestAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikRequestAdapter.swift; sourceTree = "<group>"; };
 		2CEBEBF5242F8FB200DBFDF0 /* StepikRequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikRequestRetrier.swift; sourceTree = "<group>"; };
 		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
+		2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepARQuickLookPreviewDataSource.swift; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
 		2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikPlaceholder.swift; sourceTree = "<group>"; };
@@ -5745,6 +5747,7 @@
 		62E98A2E46635F7BB08691B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */,
 				62E98F3E31A16E980F342AEA /* StepControlsView.swift */,
 				62E98F2E537EDAB05257B354 /* StepDiscussionThreadButton.swift */,
 				62E9808364DB0C811F4E2B81 /* StepNavigationButton.swift */,
@@ -7152,6 +7155,7 @@
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				080F211B2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
 				2C5E90802333CF3B00288BE3 /* LastCodeLanguage.swift in Sources */,
+				2CF0848F244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift in Sources */,
 				86624A731FC76578008E7E6C /* NotificationStatusesAPI.swift in Sources */,
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,

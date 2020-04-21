@@ -222,7 +222,7 @@ final class StepInteractor: StepInteractorProtocol {
     }
 
     func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {
-        self.presenter.presentDownloadARQuickLook(response: .init(url: request.url))
+        self.presenter.presentDownloadARQuickLook(response: .init(url: request.remoteURL))
     }
 
     // MARK: Private API
@@ -294,7 +294,11 @@ extension StepInteractor: StepInputProtocol {
 // MARK: - StepInteractor: DownloadARQuickLookOutputProtocol -
 
 extension StepInteractor: DownloadARQuickLookOutputProtocol {
-    func handleDidDownloadARQuickLook(storedURL: URL) {}
+    func handleDidDownloadARQuickLook(storedURL: URL) {
+        self.presenter.presentARQuickLook(response: .init(result: .success(storedURL)))
+    }
 
-    func handleDidFailDownloadARQuickLook(error: Swift.Error) {}
+    func handleDidFailDownloadARQuickLook(error: Swift.Error) {
+        self.presenter.presentARQuickLook(response: .init(result: .failure(error)))
+    }
 }

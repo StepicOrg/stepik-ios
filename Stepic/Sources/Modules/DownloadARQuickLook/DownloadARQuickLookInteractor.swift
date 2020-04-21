@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol DownloadARQuickLookInteractorProtocol {
     func doStartDownload(request: DownloadARQuickLook.StartDownload.Request)
+    func doCancelDownload(request: DownloadARQuickLook.CancelDownload.Request)
 }
 
 final class DownloadARQuickLookInteractor: DownloadARQuickLookInteractorProtocol {
@@ -32,11 +33,19 @@ final class DownloadARQuickLookInteractor: DownloadARQuickLookInteractorProtocol
 
     func doStartDownload(request: DownloadARQuickLook.StartDownload.Request) {
         do {
-            let filename = self.arQuickLookStoredFileManager.makeARQuickLookFilenameFromDownloadURL(self.url)
-            self.activeTaskID = try self.downloadingService.download(url: self.url, destination: filename)
+            let destinationFilename = self.arQuickLookStoredFileManager.makeARQuickLookFilenameFromDownloadURL(self.url)
+            self.activeTaskID = try self.downloadingService.download(url: self.url, destination: destinationFilename)
         } catch {
             self.moduleOutput?.handleDidFailDownloadARQuickLook(error: error)
         }
+    }
+
+    func doCancelDownload(request: DownloadARQuickLook.CancelDownload.Request) {
+        if let activeTaskID = self.activeTaskID {
+            try? self.downloadingService.cancelDownload(taskID: activeTaskID)
+        }
+
+        self.presenter.presentCancelDownloadResult(response: .init())
     }
 
     private func subscribeOnDownloadEvents() {
@@ -54,8 +63,13 @@ final class DownloadARQuickLookInteractor: DownloadARQuickLookInteractorProtocol
             self.presenter.presentDownloadProgressUpdate(response: .init(progress: progress))
         case .completed(let storedURL):
             self.presenter.presentDownloadProgressUpdate(response: .init(progress: 1.0))
+            self.presenter.presentCompleteDownloadResult(response: .init())
             self.moduleOutput?.handleDidDownloadARQuickLook(storedURL: storedURL)
         case .error(let error):
+            if case DownloadingService.Error.downloadingStopped = error {
+                return
+            }
+            self.presenter.presentFailDownloadResult(response: .init(error: error))
             self.moduleOutput?.handleDidFailDownloadARQuickLook(error: error)
         }
     }
