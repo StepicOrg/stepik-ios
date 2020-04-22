@@ -196,6 +196,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         } else {
             // Paid course -> open web view
             if targetCourse.isPaid {
+                // FIXME: analytics dependency
+                AmplitudeAnalyticsEvents.Course.buyPressed(source: .courseWidget, courseID: targetCourse.id).send()
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentPaidCourseInfo(course: targetCourse)
                 return

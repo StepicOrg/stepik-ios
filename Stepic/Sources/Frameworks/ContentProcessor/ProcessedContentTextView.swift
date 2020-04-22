@@ -11,10 +11,12 @@ protocol ProcessedContentTextViewDelegate: AnyObject {
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL)
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL)
 }
 
 extension ProcessedContentTextViewDelegate {
     func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {}
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL) {}
 }
 
 // MARK: - Appearance -
@@ -295,6 +297,9 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
 // MARK: - ProcessedContentTextView: WKNavigationDelegate -
 
 extension ProcessedContentTextView: WKNavigationDelegate {
+    private static let imageLinkPrefix: String = "openimg://"
+    private static let arImageLinkPrefix: String = "openar://"
+
     // swiftlint:disable:next implicitly_unwrapped_optional
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.waitCompleteState().then {
@@ -329,9 +334,8 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             return decisionHandler(.cancel)
         }
 
-        let imageLinkPrefix = "openimg://"
-        if url.absoluteString.starts(with: imageLinkPrefix) {
-            var validPath = String(url.absoluteString.dropFirst(imageLinkPrefix.count))
+        if url.absoluteString.starts(with: Self.imageLinkPrefix) {
+            var validPath = String(url.absoluteString.dropFirst(Self.imageLinkPrefix.count))
 
             if validPath.starts(with: "data:image") {
                 let imageDataProvider = Base64ImageDataProvider(base64StringOrNot: validPath)
@@ -353,6 +357,15 @@ extension ProcessedContentTextView: WKNavigationDelegate {
 
                 return decisionHandler(.cancel)
             }
+        } else if url.absoluteString.starts(with: Self.arImageLinkPrefix) {
+            var validPath = String(url.absoluteString.dropFirst(Self.arImageLinkPrefix.count))
+            validPath.replaceFirst(matching: "//", with: "://")
+
+            if let usdzURL = URL(string: validPath) {
+                self.delegate?.processedContentTextView(self, didOpenARKitLink: usdzURL)
+            }
+
+            return decisionHandler(.cancel)
         }
 
         if self.isLoadingHTMLText && navigationAction.navigationType == .other {

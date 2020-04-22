@@ -1,6 +1,8 @@
 import Foundation
 
 protocol FileLocationManagerProtocol: AnyObject {
+    var filesDirectoryURL: URL { get }
+
     func getFullURLForFile(filename: String) -> URL
 }
 
@@ -38,12 +40,21 @@ final class ImageLocationManager: FileLocationManager {
     }
 }
 
+final class ARQuickLookLocationManager: FileLocationManager {
+    private static let arQuickLookDirectoryName: String = "ARQuickLook"
+
+    init(documentDirectoryURL: URL) {
+        super.init(filesDirectoryName: Self.arQuickLookDirectoryName, documentDirectoryURL: documentDirectoryURL)
+    }
+}
+
 // MARK: - FileLocationManagerFactory -
 
 enum FileLocationManagerFactory {
     enum `Type` {
         case video
         case image
+        case arQuickLook
     }
 
     static func makeLocationManager(type: Type) -> FileLocationManagerProtocol {
@@ -62,6 +73,8 @@ enum FileLocationManagerFactory {
             return VideoLocationManager(documentDirectoryURL: documentsDirectoryURL)
         case .image:
             return ImageLocationManager(documentDirectoryURL: documentsDirectoryURL)
+        case .arQuickLook:
+            return ARQuickLookLocationManager(documentDirectoryURL: documentsDirectoryURL)
         }
     }
 }

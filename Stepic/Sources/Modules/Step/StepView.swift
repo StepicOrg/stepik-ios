@@ -12,6 +12,7 @@ protocol StepViewDelegate: AnyObject {
     func stepView(_ view: StepView, didRequestFullscreenImage url: URL)
     func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage)
     func stepView(_ view: StepView, didRequestOpenURL url: URL)
+    func stepView(_ view: StepView, didRequestOpenARQuickLook url: URL)
 }
 
 extension StepView {
@@ -251,6 +252,10 @@ extension StepView: ProgrammaticallyInitializableViewProtocol {
 extension StepView: ProcessedContentTextViewDelegate {
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
         self.delegate?.stepView(self, didRequestOpenURL: url)
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL) {
+        self.delegate?.stepView(self, didRequestOpenARQuickLook: url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {

@@ -232,8 +232,9 @@ EmptyCertificatesTitle = "No certificates";
 SignInToHaveCertificates = "Sign in to be able to get a certificate";
 EmptyCertificatesDescription = "Choose a course and learn to get a certificate";
 ChooseCourse = "Choose course";
-CourseStaff = "Course staff";
-Staff = "Stepik staff";
+CourseStaff = "Course Staff";
+CourseModerator = "Course Moderator";
+Staff = "Stepik Staff";
 AboutCourse = "About course";
 LoadingCourse = "Loading course...";
 JoiningCourse = "Joining course...";
@@ -815,6 +816,11 @@ StepStatisticsPassedByTitle = "Passed:";
 StepStatisticsCorrectRatioTitle = "Successfully:";
 EditStepAlertActionTitle = "Edit";
 StepSubmissionsAlertActionTitle = "Show Submissions";
+StepARThumbnailALTText = "A 3D model.";
+DownloadARQuickLookTitle = "Downloading AR-object";
+DownloadARQuickLookAlertFailedMessage = "Couldn't download AR-object. Please try again later.";
+StepARQuickLookUnsupportedAlertTitle = "AR Quick Look Not Supported";
+StepARQuickLookUnsupportedAlertMessage = "Your device is not supported by viewing the content in the augmented reality, the minimum requirement iOS 12.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

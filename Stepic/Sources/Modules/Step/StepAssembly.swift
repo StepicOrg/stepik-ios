@@ -17,6 +17,7 @@ final class StepAssembly: Assembly {
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             imageStoredFileManager: StoredFileManagerFactory.makeStoredFileManager(type: .image),
+            arQuickLookStoredFileManager: ARQuickLookStoredFileManager(fileManager: .default),
             discussionThreadsNetworkService: DiscussionThreadsNetworkService(
                 discussionThreadsAPI: DiscussionThreadsAPI()
             ),

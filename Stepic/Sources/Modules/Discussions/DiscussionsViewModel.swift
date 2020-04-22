@@ -15,7 +15,7 @@ struct DiscussionsCommentViewModel {
     let id: Int
     let avatarImageURL: URL?
     let userID: User.IdType
-    let userRole: UserRole
+    let userRoleBadgeText: String?
     let isPinned: Bool
     let isSelected: Bool
     let username: String

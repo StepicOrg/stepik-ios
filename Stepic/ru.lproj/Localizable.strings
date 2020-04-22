@@ -233,6 +233,7 @@ SignInToHaveCertificates = "Войдите, чтобы иметь возможн
 EmptyCertificatesDescription = "Выберите курс и учитесь, чтобы получить сертификат";
 ChooseCourse = "Выбрать курс";
 CourseStaff = "Команда курса";
+CourseModerator = "Модератор курса";
 Staff = "Команда Stepik";
 AboutCourse = "О курсе";
 LoadingCourse = "Загружаем курс...";
@@ -816,6 +817,11 @@ StepStatisticsPassedByTitle = "Решило:";
 StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
 StepSubmissionsAlertActionTitle = "Показать решения";
+StepARThumbnailALTText = "3D модель.";
+DownloadARQuickLookTitle = "Загрузка AR-объекта";
+DownloadARQuickLookAlertFailedMessage = "Не удалось загрузить AR-объект. Пожалуйста, попробуйте снова.";
+StepARQuickLookUnsupportedAlertTitle = "Дополненная реальность не поддерживается";
+StepARQuickLookUnsupportedAlertMessage = "Ваше устройство не поддерживает просмотр объектов в дополненной реальности. Требуется iOS 12.0 и новее.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";

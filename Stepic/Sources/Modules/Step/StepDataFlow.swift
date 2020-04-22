@@ -153,6 +153,40 @@ enum StepDataFlow {
         }
     }
 
+    /// Present AR Quick Look
+    enum ARQuickLookPresentation {
+        struct Request {
+            let remoteURL: URL
+        }
+
+        struct Response {
+            let result: Result<URL, Error>
+        }
+
+        struct ViewModel {
+            let localURL: URL
+        }
+    }
+
+    /// Present download AR Quick Look usdz file module
+    enum DownloadARQuickLookPresentation {
+        struct Response {
+            let url: URL
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
+    /// Present alert with title, message and OK action.
+    enum OKAlertPresentation {
+        struct ViewModel {
+            let title: String
+            let message: String?
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

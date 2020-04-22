@@ -32,7 +32,8 @@ final class SettingsAssembly: Assembly {
                     videoFileManager: VideoStoredFileManager(fileManager: .default),
                     imageFileManager: ImageStoredFileManager(fileManager: .default)
                 )
-            )
+            ),
+            arQuickLookStoredFileManager: ARQuickLookStoredFileManager(fileManager: .default)
         )
         let presenter = SettingsPresenter()
         let interactor = SettingsInteractor(

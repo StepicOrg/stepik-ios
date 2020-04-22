@@ -12,6 +12,7 @@ protocol StepInteractorProtocol {
     func doSolutionsButtonUpdate(request: StepDataFlow.SolutionsButtonUpdate.Request)
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request)
     func doSolutionsPresentation(request: StepDataFlow.SolutionsPresentation.Request)
+    func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request)
 }
 
 final class StepInteractor: StepInteractorProtocol {
@@ -220,6 +221,20 @@ final class StepInteractor: StepInteractorProtocol {
         }
     }
 
+    func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request) {
+        if #available(iOS 12.0, *) {
+            self.provider.fetchStoredARQuickLookFile(remoteURL: request.remoteURL).done { storedFile in
+                if let storedFile = storedFile {
+                    self.presenter.presentARQuickLook(response: .init(result: .success(storedFile.localURL)))
+                } else {
+                    self.presenter.presentDownloadARQuickLook(response: .init(url: request.remoteURL))
+                }
+            }
+        } else {
+            self.presenter.presentARQuickLook(response: .init(result: .failure(Error.arQuickLookUnsupported)))
+        }
+    }
+
     // MARK: Private API
 
     private func tryToPresentCachedThenRemoteSolutionsDiscussionThread(step: Step) {
@@ -242,6 +257,7 @@ final class StepInteractor: StepInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case arQuickLookUnsupported
     }
 }
 
@@ -283,5 +299,17 @@ extension StepInteractor: StepInputProtocol {
 
     func play() {
         self.presenter.presentPlayStep(response: .init())
+    }
+}
+
+// MARK: - StepInteractor: DownloadARQuickLookOutputProtocol -
+
+extension StepInteractor: DownloadARQuickLookOutputProtocol {
+    func handleDidDownloadARQuickLook(storedURL: URL) {
+        self.presenter.presentARQuickLook(response: .init(result: .success(storedURL)))
+    }
+
+    func handleDidFailDownloadARQuickLook(error: Swift.Error) {
+        self.presenter.presentARQuickLook(response: .init(result: .failure(error)))
     }
 }

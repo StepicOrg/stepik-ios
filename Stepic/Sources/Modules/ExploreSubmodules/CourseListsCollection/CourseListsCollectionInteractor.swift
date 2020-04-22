@@ -14,34 +14,27 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
     private let presenter: CourseListsCollectionPresenterProtocol
     private let provider: CourseListsCollectionProviderProtocol
 
+    private let remoteConfig: RemoteConfig
+
     init(
         presenter: CourseListsCollectionPresenterProtocol,
-        provider: CourseListsCollectionProviderProtocol
+        provider: CourseListsCollectionProviderProtocol,
+        remoteConfig: RemoteConfig
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.remoteConfig = remoteConfig
     }
 
     func doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request) {
         self.provider.fetchCachedCourseLists().then { cachedCourseLists -> Promise<[CourseListModel]> in
             // Pass cached data to presenter and start fetching from remote
-            let response = StepikResult<[CourseListModel]>.success(cachedCourseLists)
-            self.presenter.presentCourses(
-                response: CourseListsCollection.CourseListsLoad.Response(result: response)
-            )
+            self.presentAvailableCourseLists(cachedCourseLists)
 
             return self.provider.fetchRemoteCourseLists()
         }.done { remoteCourseLists in
-            let response = StepikResult<[CourseListModel]>.success(remoteCourseLists)
-            self.presenter.presentCourses(
-                response: CourseListsCollection.CourseListsLoad.Response(result: response)
-            )
-
-            self.presenter.presentCourses(
-                response: CourseListsCollection.CourseListsLoad.Response(result: response)
-            )
-        }.catch { _ in
-        }
+            self.presentAvailableCourseLists(remoteCourseLists)
+        }.catch { _ in }
     }
 
     func doFullscreenCourseListPresentation(
@@ -55,6 +48,15 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
             presentationDescription: request.presentationDescription,
             type: collectionCourseListType
         )
+    }
+
+    private func presentAvailableCourseLists(_ courseLists: [CourseListModel]) {
+        let hiddenCourseListsIDs = Set(self.remoteConfig.hiddenCourseListsIDs)
+        let finalCourseLists = hiddenCourseListsIDs.isEmpty
+            ? courseLists
+            : courseLists.filter { !hiddenCourseListsIDs.contains($0.id) }
+
+        self.presenter.presentCourses(response: .init(result: .success(finalCourseLists)))
     }
 
     enum Error: Swift.Error {
