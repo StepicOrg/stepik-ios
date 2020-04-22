@@ -26,7 +26,8 @@ final class RemoteConfig {
         Key.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
         Key.newLessonAvailable.rawValue: true as NSObject,
         Key.darkModeAvailable.rawValue: true as NSObject,
-        Key.arQuickLookAvailable.rawValue: false as NSObject
+        Key.arQuickLookAvailable.rawValue: false as NSObject,
+        Key.hiddenCourseLists.rawValue: [Int]() as NSObject
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -97,6 +98,18 @@ final class RemoteConfig {
             .boolValue
     }
 
+    var hiddenCourseListsIDs: [CourseListModel.IdType] {
+        guard let configStringValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: Key.hiddenCourseLists.rawValue
+        ).stringValue else {
+            return []
+        }
+
+        return configStringValue
+            .components(separatedBy: ",")
+            .compactMap { Int($0) }
+    }
+
     init() {
         self.loadDefaultValues()
         self.fetchCloudValues()
@@ -151,5 +164,6 @@ final class RemoteConfig {
         case newLessonAvailable = "new_lesson_available_ios"
         case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
+        case hiddenCourseLists = "hidden_course_lists_ios"
     }
 }

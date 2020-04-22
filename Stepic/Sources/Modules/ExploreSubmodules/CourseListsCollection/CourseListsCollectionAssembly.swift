@@ -22,7 +22,11 @@ final class CourseListsCollectionAssembly: Assembly {
             )
         )
         let presenter = CourseListsCollectionPresenter()
-        let interactor = CourseListsCollectionInteractor(presenter: presenter, provider: provider)
+        let interactor = CourseListsCollectionInteractor(
+            presenter: presenter,
+            provider: provider,
+            remoteConfig: .shared
+        )
         let viewController = CourseListsCollectionViewController(interactor: interactor)
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput
