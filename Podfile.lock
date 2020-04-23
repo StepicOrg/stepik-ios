@@ -174,8 +174,8 @@ PODS:
   - SwiftLint (0.39.2)
   - SwiftyGif (5.2.0)
   - SwiftyJSON (5.0.0)
-  - Tabman (2.8.0):
-    - Pageboy (~> 3.5.0)
+  - Tabman (2.8.1):
+    - Pageboy (~> 3.5.1)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
   - TTTAttributedLabel (2.0.0)
@@ -230,7 +230,7 @@ DEPENDENCIES:
   - SwiftDate (= 6.1.0)
   - SwiftLint (= 0.39.2)
   - SwiftyJSON (= 5.0.0)
-  - Tabman (= 2.8.0)
+  - Tabman (= 2.8.1)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
@@ -379,7 +379,7 @@ SPEC CHECKSUMS:
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  Tabman: f62ad94ee54a7d96e3fbab34f677d9ea4d38ece6
+  Tabman: b1d349045017c25d558aef052c2d7eeac1273c0c
   TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
@@ -387,6 +387,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
 
-PODFILE CHECKSUM: 2691bfb9d8bb0250e328916e240b1c3fed6ab4e4
+PODFILE CHECKSUM: 1eacc3a0155e7a368f53c9439b5efa85f22aa3ee
 
 COCOAPODS: 1.9.1
