@@ -25,6 +25,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
 
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
+
     private let courseID: Course.IdType
     private var currentCourse: Course? {
         didSet {
@@ -78,7 +80,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
-        spotlightIndexingService: SpotlightIndexingServiceProtocol
+        spotlightIndexingService: SpotlightIndexingServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -89,6 +92,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
+        self.dataBackUpdateService = dataBackUpdateService
 
         self.courseID = courseID
     }
@@ -288,8 +292,14 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             return self.provider.updateUserCourse(userCourse: userCourse)
         }.done { userCourse in
             if let course = self.currentCourse {
-                course.isFavorite = userCourse.isFavorite
-                course.isArchived = userCourse.isArchived
+                if course.isFavorite != userCourse.isFavorite {
+                    course.isFavorite = userCourse.isFavorite
+                    self.dataBackUpdateService.triggerCourseIsFavoriteUpdate(retrievedCourse: course)
+                }
+                if course.isArchived != userCourse.isArchived {
+                    course.isArchived = userCourse.isArchived
+                    self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: course)
+                }
                 self.presenter.presentCourse(response: .init(result: .success(course)))
             }
             self.presenter.presentWaitingStatus(response: .init(isSuccessful: true))

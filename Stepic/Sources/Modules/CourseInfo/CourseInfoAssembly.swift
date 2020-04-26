@@ -34,6 +34,14 @@ final class CourseInfoAssembly: Assembly {
             presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
             analytics: .init(source: .courseSubscription)
         )
+
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+
         let interactor = CourseInfoInteractor(
             courseID: self.courseID,
             presenter: presenter,
@@ -44,7 +52,8 @@ final class CourseInfoAssembly: Assembly {
             adaptiveStorageManager: AdaptiveStorageManager(),
             notificationSuggestionManager: NotificationSuggestionManager(),
             notificationsRegistrationService: notificationsRegistrationService,
-            spotlightIndexingService: SpotlightIndexingService.shared
+            spotlightIndexingService: SpotlightIndexingService.shared,
+            dataBackUpdateService: dataBackUpdateService
         )
         notificationsRegistrationService.delegate = interactor
 

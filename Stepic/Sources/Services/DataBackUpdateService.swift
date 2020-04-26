@@ -20,6 +20,8 @@ struct DataBackUpdateDescription: OptionSet {
     static let profileLastName = DataBackUpdateDescription(rawValue: 4)
     static let profileShortBio = DataBackUpdateDescription(rawValue: 5)
     static let profileDetails = DataBackUpdateDescription(rawValue: 6)
+    static let courseIsFavorite = DataBackUpdateDescription(rawValue: 7)
+    static let courseIsArchived = DataBackUpdateDescription(rawValue: 8)
 }
 
 protocol DataBackUpdateServiceDelegate: AnyObject {
@@ -63,6 +65,10 @@ protocol DataBackUpdateServiceProtocol: AnyObject {
     func triggerEnrollmentUpdate(retrievedCourse: Course)
     /// Report about profile update
     func triggerProfileUpdate(updatedProfile: Profile)
+    /// Report about `isFavorite` state update with already retrieved course
+    func triggerCourseIsFavoriteUpdate(retrievedCourse: Course)
+    /// Report about `isArchived` state update with already retrieved course
+    func triggerCourseIsArchivedUpdate(retrievedCourse: Course)
 }
 
 final class DataBackUpdateService: DataBackUpdateServiceProtocol {
@@ -190,6 +196,16 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
             target: .profile(updatedProfile)
         )
         self.postNotification(target: .profile(updatedProfile))
+    }
+
+    func triggerCourseIsFavoriteUpdate(retrievedCourse: Course) {
+        self.postNotification(description: [.courseIsFavorite], target: .course(retrievedCourse))
+        self.postNotification(target: .course(retrievedCourse))
+    }
+
+    func triggerCourseIsArchivedUpdate(retrievedCourse: Course) {
+        self.postNotification(description: [.courseIsArchived], target: .course(retrievedCourse))
+        self.postNotification(target: .course(retrievedCourse))
     }
 
     // MARK: Private methods
