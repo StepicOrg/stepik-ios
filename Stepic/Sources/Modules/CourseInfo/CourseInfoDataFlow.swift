@@ -130,8 +130,29 @@ enum CourseInfo {
         }
     }
 
+    /// Handle HUD status update
+    enum BlockingWaitingIndicatorStatusUpdate {
+        struct Response {
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+        }
+    }
+
     /// Drop course
     enum CourseUnenrollmentAction {
+        struct Request {}
+    }
+
+    /// Add/remove course to/from favorites
+    enum CourseFavoriteAction {
+        struct Request {}
+    }
+
+    /// Move/remove course to/from archived
+    enum CourseArchiveAction {
         struct Request {}
     }
 

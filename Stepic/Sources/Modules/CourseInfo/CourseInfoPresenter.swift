@@ -8,8 +8,9 @@ protocol CourseInfoPresenterProtocol {
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response)
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
-    func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
+    func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
+    func presentWaitingStatus(response: CourseInfo.BlockingWaitingIndicatorStatusUpdate.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -55,10 +56,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayCourseSharing(viewModel: viewModel)
     }
 
-    func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
-        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
-    }
-
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response) {
         self.viewController?.displayLastStep(
             viewModel: .init(
@@ -75,6 +72,16 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
         let path = "https://stepik.org/course/\(response.course.id)"
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
+    }
+
+    func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentWaitingStatus(response: CourseInfo.BlockingWaitingIndicatorStatusUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicatorStatus(
+            viewModel: .init(isSuccessful: response.isSuccessful)
+        )
     }
 
     private func makeProgressViewModel(progress: Progress) -> CourseInfoProgressViewModel {
@@ -112,6 +119,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             progress: progress,
             isVerified: (course.readiness ?? 0) > 0.9,
             isEnrolled: course.enrolled,
+            isFavorite: course.isFavorite,
+            isArchived: course.isArchived,
             buttonDescription: self.makeButtonDescription(course: course)
         )
     }

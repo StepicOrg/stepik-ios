@@ -18,8 +18,9 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayCourseSharing(viewModel: CourseInfo.CourseShareAction.ViewModel)
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayBlockingLoadingIndicatorStatus(viewModel: CourseInfo.BlockingWaitingIndicatorStatusUpdate.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -49,7 +50,7 @@ final class CourseInfoViewController: UIViewController {
     // Element is nil when view controller was not initialized yet
     private var submodulesControllers: [UIViewController?] = []
 
-    private var shouldShowDropCourseAction = false
+    private var storedViewModel: CourseInfoHeaderViewModel?
     private let didJustSubscribe: Bool
 
     init(
@@ -217,7 +218,37 @@ final class CourseInfoViewController: UIViewController {
             )
         )
 
-        if self.shouldShowDropCourseAction {
+        if let viewModel = self.storedViewModel {
+            guard viewModel.isEnrolled else {
+                return
+            }
+
+            let favoriteActionTitle = viewModel.isFavorite
+                ? NSLocalizedString("CourseInfoCourseActionRemoveFromFavoritesAlertTitle", comment: "")
+                : NSLocalizedString("CourseInfoCourseActionAddToFavoritesAlertTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: favoriteActionTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCourseFavoriteAction(request: .init())
+                    }
+                )
+            )
+
+            let archivedActionTitle = viewModel.isArchived
+                ? NSLocalizedString("CourseInfoCourseActionRemoveFromArchivedAlertTitle", comment: "")
+                : NSLocalizedString("CourseInfoCourseActionMoveToArchivedAlertTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: archivedActionTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCourseArchiveAction(request: .init())
+                    }
+                )
+            )
+
             alert.addAction(
                 UIAlertAction(
                     title: NSLocalizedString("DropCourse", comment: ""),
@@ -416,8 +447,8 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayCourse(viewModel: CourseInfo.CourseLoad.ViewModel) {
         switch viewModel.state {
         case .result(let data):
+            self.storedViewModel = data
             self.courseInfoView?.configure(viewModel: data)
-            self.shouldShowDropCourseAction = data.isEnrolled
         case .loading:
             break
         }
@@ -467,6 +498,14 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             SVProgressHUD.dismiss()
         } else {
             SVProgressHUD.show()
+        }
+    }
+
+    func displayBlockingLoadingIndicatorStatus(viewModel: CourseInfo.BlockingWaitingIndicatorStatusUpdate.ViewModel) {
+        if viewModel.isSuccessful {
+            SVProgressHUD.showSuccess(withStatus: nil)
+        } else {
+            SVProgressHUD.showError(withStatus: nil)
         }
     }
 

@@ -25,7 +25,8 @@ final class CourseInfoAssembly: Assembly {
             reviewSummariesPersistenceService: CourseReviewSummariesPersistenceService(),
             reviewSummariesNetworkService: CourseReviewSummariesNetworkService(
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
-            )
+            ),
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI())
         )
         let presenter = CourseInfoPresenter()
 

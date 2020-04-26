@@ -445,6 +445,10 @@ ContinueCourseCourseCurrentProgressTitle = "Current progress: %@/%@ points";
 
 /* Course info */
 CourseInfoTitle = "About course";
+CourseInfoCourseActionAddToFavoritesAlertTitle = "Add to Favorites";
+CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Remove from Favorites";
+CourseInfoCourseActionMoveToArchivedAlertTitle = "Move to Archived";
+CourseInfoCourseActionRemoveFromArchivedAlertTitle = "Remove from Archived";
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
