@@ -218,11 +218,7 @@ final class CourseInfoViewController: UIViewController {
             )
         )
 
-        if let viewModel = self.storedViewModel {
-            guard viewModel.isEnrolled else {
-                return
-            }
-
+        if let viewModel = self.storedViewModel, viewModel.isEnrolled {
             let favoriteActionTitle = viewModel.isFavorite
                 ? NSLocalizedString("CourseInfoCourseActionRemoveFromFavoritesAlertTitle", comment: "")
                 : NSLocalizedString("CourseInfoCourseActionAddToFavoritesAlertTitle", comment: "")
