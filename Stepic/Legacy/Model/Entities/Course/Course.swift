@@ -96,6 +96,8 @@ final class Course: NSManagedObject, IDFetchable {
         self.enrolled = json[JSONKey.enrollment.rawValue].int != nil
         self.featured = json[JSONKey.isFeatured.rawValue].boolValue
         self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
+        self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
+        self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
         self.readiness = json[JSONKey.readiness.rawValue].float
 
         self.summary = json[JSONKey.summary.rawValue].stringValue
@@ -405,6 +407,8 @@ final class Course: NSManagedObject, IDFetchable {
         case enrollment
         case isFeatured = "is_featured"
         case isPublic = "is_public"
+        case isFavorite = "is_favorite"
+        case isArchived = "is_archived"
         case readiness
         case summary
         case workload

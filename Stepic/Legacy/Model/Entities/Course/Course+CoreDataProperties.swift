@@ -22,6 +22,8 @@ extension Course {
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
+    @NSManaged var managedIsFavorite: NSNumber?
+    @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
     @NSManaged var managedReadiness: NSNumber?
 
@@ -205,6 +207,24 @@ extension Course {
         }
         get {
              managedFeatured?.boolValue ?? false
+        }
+    }
+
+    var isFavorite: Bool {
+        get {
+            self.managedIsFavorite?.boolValue ?? false
+        }
+        set {
+            self.managedIsFavorite = NSNumber(value: newValue)
+        }
+    }
+
+    var isArchived: Bool {
+        get {
+            self.managedIsArchived?.boolValue ?? false
+        }
+        set {
+            self.managedIsArchived = NSNumber(value: newValue)
         }
     }
 
