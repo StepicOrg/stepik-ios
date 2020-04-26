@@ -41,11 +41,11 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService, Cour
                 }
 
                 return self.coursesAPI
-                    .retrieve(ids: userCoursesInfo.0.map { $0.courseId })
+                    .retrieve(ids: userCoursesInfo.0.map { $0.courseID })
                     .map { ($0, userCoursesInfo.0, userCoursesInfo.1) }
             }.done { courses, info, meta in
                 let orderedCourses = courses.reordered(
-                    order: info.map { $0.courseId },
+                    order: info.map { $0.courseID },
                     transform: { $0.id }
                 )
                 seal.fulfill((orderedCourses, meta))

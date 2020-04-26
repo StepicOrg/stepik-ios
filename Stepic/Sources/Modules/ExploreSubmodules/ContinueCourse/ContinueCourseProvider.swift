@@ -27,7 +27,7 @@ final class ContinueCourseProvider: ContinueCourseProviderProtocol {
                     .sorted(by: { $0.lastViewed > $1.lastViewed })
                     .prefix(1)
                 // [] or [id]
-                let coursesIDs = lastCourse.compactMap { $0.courseId }
+                let coursesIDs = lastCourse.compactMap { $0.courseID }
                 return self.coursesAPI.retrieve(ids: coursesIDs)
             }.then { courses -> Promise<(Course?, Progress?)> in
                 if let course = courses.first,

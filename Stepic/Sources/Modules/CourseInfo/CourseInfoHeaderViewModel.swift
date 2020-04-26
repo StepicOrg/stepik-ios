@@ -14,6 +14,8 @@ struct CourseInfoHeaderViewModel {
     let progress: CourseInfoProgressViewModel?
     let isVerified: Bool
     let isEnrolled: Bool
+    let isFavorite: Bool
+    let isArchived: Bool
     let buttonDescription: ButtonDescription
 
     struct ButtonDescription {

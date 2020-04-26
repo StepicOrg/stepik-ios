@@ -447,6 +447,10 @@ ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/
 
 /* Course info */
 CourseInfoTitle = "О курсе";
+CourseInfoCourseActionAddToFavoritesAlertTitle = "Добавить в избранное";
+CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Убрать из избранного";
+CourseInfoCourseActionMoveToArchivedAlertTitle = "Переместить в архив";
+CourseInfoCourseActionRemoveFromArchivedAlertTitle = "Убрать из архива";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
