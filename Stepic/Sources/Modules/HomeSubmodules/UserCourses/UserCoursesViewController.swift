@@ -128,13 +128,24 @@ final class UserCoursesViewController: TabmanViewController {
             return
         }
 
-        switch tab {
+        let assembly = FullscreenCourseListAssembly(
+            presentationDescription: nil,
+            courseListType: tab.courseListType
+        )
+
+        self.tabViewControllers[index] = assembly.makeModule()
+    }
+}
+
+private extension UserCourses.Tab {
+    var courseListType: CourseListType {
+        switch self {
         case .allCourses:
-            break
+            return EnrolledCourseListType()
         case .favorites:
-            break
+            return FavoriteCourseListType()
         case .archived:
-            break
+            return ArchivedCourseListType()
         }
     }
 }

@@ -478,9 +478,9 @@ CourseInfoTitleCertificateDetails = "Certificate details";
 
 /* User Courses */
 UserCoursesTitle = "My Courses";
-UserCoursesTabAllCoursesTitle = "All Courses";
-UserCoursesTabFavoritesTitle = "Favorites";
-UserCoursesTabArchivedTitle = "Archived";
+UserCoursesTabAllCoursesTitle = "All";
+UserCoursesTabFavoritesTitle = "Favorite";
+UserCoursesTabArchivedTitle = "Archive";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";

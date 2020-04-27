@@ -480,7 +480,7 @@ CourseInfoTitleCertificateDetails = "Подробнее о сертификат�
 
 /* User Courses */
 UserCoursesTitle = "Мои курсы";
-UserCoursesTabAllCoursesTitle = "Все курсы";
+UserCoursesTabAllCoursesTitle = "Все";
 UserCoursesTabFavoritesTitle = "Избранные";
 UserCoursesTabArchivedTitle = "Архив";
 
