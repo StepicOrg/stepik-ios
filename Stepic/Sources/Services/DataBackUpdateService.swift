@@ -39,19 +39,6 @@ protocol DataBackUpdateServiceDelegate: AnyObject {
     )
 }
 
-extension DataBackUpdateServiceDelegate {
-    func dataBackUpdateService(
-        _ dataBackUpdateService: DataBackUpdateService,
-        didReport update: DataBackUpdateDescription,
-        for target: DataBackUpdateTarget
-    ) {}
-
-    func dataBackUpdateService(
-        _ dataBackUpdateService: DataBackUpdateService,
-        didReport refreshedTarget: DataBackUpdateTarget
-    ) {}
-}
-
 protocol DataBackUpdateServiceProtocol: AnyObject {
     var delegate: DataBackUpdateServiceDelegate? { get set }
 
