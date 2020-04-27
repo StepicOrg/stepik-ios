@@ -216,8 +216,8 @@ final class NewSortingQuizElementView: UIView {
     struct Direction: OptionSet {
         let rawValue: Int
 
-        static let top = Direction(rawValue: 1)
-        static let bottom = Direction(rawValue: 2)
+        static let top = Direction(rawValue: 1 << 0)
+        static let bottom = Direction(rawValue: 1 << 1)
     }
 }
 

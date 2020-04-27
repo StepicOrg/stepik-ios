@@ -14,14 +14,14 @@ enum DataBackUpdateTarget {
 struct DataBackUpdateDescription: OptionSet {
     let rawValue: Int
 
-    static let progress = DataBackUpdateDescription(rawValue: 1)
-    static let enrollment = DataBackUpdateDescription(rawValue: 2)
-    static let profileFirstName = DataBackUpdateDescription(rawValue: 3)
-    static let profileLastName = DataBackUpdateDescription(rawValue: 4)
-    static let profileShortBio = DataBackUpdateDescription(rawValue: 5)
-    static let profileDetails = DataBackUpdateDescription(rawValue: 6)
-    static let courseIsFavorite = DataBackUpdateDescription(rawValue: 7)
-    static let courseIsArchived = DataBackUpdateDescription(rawValue: 8)
+    static let progress = DataBackUpdateDescription(rawValue: 1 << 0)
+    static let enrollment = DataBackUpdateDescription(rawValue: 1 << 1)
+    static let profileFirstName = DataBackUpdateDescription(rawValue: 1 << 2)
+    static let profileLastName = DataBackUpdateDescription(rawValue: 1 << 3)
+    static let profileShortBio = DataBackUpdateDescription(rawValue: 1 << 4)
+    static let profileDetails = DataBackUpdateDescription(rawValue: 1 << 5)
+    static let courseIsFavorite = DataBackUpdateDescription(rawValue: 1 << 6)
+    static let courseIsArchived = DataBackUpdateDescription(rawValue: 1 << 7)
 }
 
 protocol DataBackUpdateServiceDelegate: AnyObject {
