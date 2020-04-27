@@ -1138,7 +1138,6 @@
 		62E98FB9AFF029A44C3A1AAE /* CourseInfoTabSyllabusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C1FE5E4C87C3199EC01 /* CourseInfoTabSyllabusProvider.swift */; };
 		62E98FE1CE19810D6930DAE6 /* SubmissionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9845417AC50C4D61B42C6 /* SubmissionsProvider.swift */; };
 		62E98FFD1EEDB775EE381221 /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F968FBB3ED0E6309407 /* CourseListPresenter.swift */; };
-		63238340DA4DF15D0524AA05 /* UserCoursesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2046382E3DA2E3C30A3496D5 /* UserCoursesProvider.swift */; };
 		6670CEAE1D677A5EADD37531 /* UserCoursesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC26997F83B299C9E3FCC5D /* UserCoursesAssembly.swift */; };
 		7C948DD5EBB144CE0658E454 /* UserCoursesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4BED02A9D05CB0787EBE1 /* UserCoursesDataFlow.swift */; };
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
@@ -1585,7 +1584,6 @@
 		09AF7B8FAACF8A4D31AF7583 /* UserCoursesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesInteractor.swift; sourceTree = "<group>"; };
 		1A044A06FA4B2AA6C9F984A3 /* UserCoursesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesViewController.swift; sourceTree = "<group>"; };
 		1A65C1DFD5A2533C506D297B /* DownloadARQuickLookDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookDataFlow.swift; sourceTree = "<group>"; };
-		2046382E3DA2E3C30A3496D5 /* UserCoursesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesProvider.swift; sourceTree = "<group>"; };
 		2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertsAnalytics.swift; sourceTree = "<group>"; };
 		2C01BB67233CD92C00C8DCF0 /* Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Require.swift; sourceTree = "<group>"; };
 		2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
@@ -6328,7 +6326,6 @@
 				C1A4BED02A9D05CB0787EBE1 /* UserCoursesDataFlow.swift */,
 				09AF7B8FAACF8A4D31AF7583 /* UserCoursesInteractor.swift */,
 				582946156484A5655EF72E43 /* UserCoursesPresenter.swift */,
-				2046382E3DA2E3C30A3496D5 /* UserCoursesProvider.swift */,
 				BAF219462BE0AB704DED8077 /* UserCoursesView.swift */,
 				1A044A06FA4B2AA6C9F984A3 /* UserCoursesViewController.swift */,
 			);
@@ -7974,7 +7971,6 @@
 				7C948DD5EBB144CE0658E454 /* UserCoursesDataFlow.swift in Sources */,
 				39AB2324EB824124A83D7534 /* UserCoursesInteractor.swift in Sources */,
 				942F44578E193384B1E4DAD9 /* UserCoursesPresenter.swift in Sources */,
-				63238340DA4DF15D0524AA05 /* UserCoursesProvider.swift in Sources */,
 				86356B693AF04C13CE3C856F /* UserCoursesView.swift in Sources */,
 				2A7E1C8409B12A6CB09F0393 /* UserCoursesViewController.swift in Sources */,
 			);

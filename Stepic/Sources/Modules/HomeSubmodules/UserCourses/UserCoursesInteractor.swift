@@ -7,21 +7,12 @@ protocol UserCoursesInteractorProtocol {
 
 final class UserCoursesInteractor: UserCoursesInteractorProtocol {
     private let presenter: UserCoursesPresenterProtocol
-    private let provider: UserCoursesProviderProtocol
 
-    init(
-        presenter: UserCoursesPresenterProtocol,
-        provider: UserCoursesProviderProtocol
-    ) {
+    init(presenter: UserCoursesPresenterProtocol) {
         self.presenter = presenter
-        self.provider = provider
     }
 
     func doUserCoursesFetch(request: UserCourses.UserCoursesLoad.Request) {
         self.presenter.presentUserCourses(response: .init())
-    }
-
-    enum Error: Swift.Error {
-        case something
     }
 }
