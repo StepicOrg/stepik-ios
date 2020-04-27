@@ -23,7 +23,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     private let courseSubscriber: CourseSubscriberProtocol
     private let userAccountService: UserAccountServiceProtocol
     private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
-    private let dataBackUpdateService: DataBackUpdateServiceProtocol
+    private let courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -37,7 +37,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         courseSubscriber: CourseSubscriberProtocol,
         userAccountService: UserAccountServiceProtocol,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
-        dataBackUpdateService: DataBackUpdateServiceProtocol
+        courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -46,8 +46,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.userAccountService = userAccountService
         self.personalDeadlinesService = personalDeadlinesService
 
-        self.dataBackUpdateService = dataBackUpdateService
-        self.dataBackUpdateService.delegate = self
+        self.courseListDataBackUpdateService = courseListDataBackUpdateService
+        self.courseListDataBackUpdateService.delegate = self
     }
 
     // MARK: - Public methods
@@ -160,7 +160,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             self.presenter.presentNextCourses(response: response)
 
-            self.provider.cache(courses: self.currentCourses.map { $0.1 })
+            self.cacheCurrentCourses()
         }.catch { error in
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
@@ -269,6 +269,24 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.currentCourses[targetIndex] = (self.getUniqueIdentifierForCourse(course), course)
     }
 
+    private func deleteCourseInCurrentCourses(_ course: Course) {
+        self.currentCourses.removeAll { $0.0 == self.getUniqueIdentifierForCourse(course) }
+    }
+
+    private func insertCourseInCurrentCourses(_ course: Course) {
+        let newElement = (self.getUniqueIdentifierForCourse(course), course)
+
+        if let targetIndex = self.currentCourses.firstIndex(where: { $0.1 == course }) {
+            self.currentCourses[targetIndex] = newElement
+        } else {
+            self.currentCourses.insert(newElement, at: 0)
+        }
+    }
+
+    private func cacheCurrentCourses() {
+        self.provider.cache(courses: self.currentCourses.map { $0.1 })
+    }
+
     /// Just present current data again
     private func refreshCourseList() {
         let courses = CourseList.AvailableCourses(
@@ -310,25 +328,30 @@ extension CourseListInteractor: CourseListInputProtocol {
     }
 }
 
-extension CourseListInteractor: DataBackUpdateServiceDelegate {
-    func dataBackUpdateService(
-        _ dataBackUpdateService: DataBackUpdateService,
-        didReport update: DataBackUpdateDescription,
-        for target: DataBackUpdateTarget
+extension CourseListInteractor: CourseListDataBackUpdateServiceDelegate {
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didUpdateCourse course: Course
     ) {
-        guard case .course(let course) = target else {
-            return
-        }
-
-        // If progress or enrollment state was updated then refresh course with data
-        if update.contains(.progress) || update.contains(.enrollment) {
-            self.updateCourseInCurrentCourses(course)
-            self.refreshCourseList()
-        }
+        self.updateCourseInCurrentCourses(course)
+        self.refreshCourseList()
     }
 
-    func dataBackUpdateService(
-        _ dataBackUpdateService: DataBackUpdateService,
-        didReport refreshedTarget: DataBackUpdateTarget
-    ) {}
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didDeleteCourse course: Course
+    ) {
+        self.deleteCourseInCurrentCourses(course)
+        self.cacheCurrentCourses()
+        self.refreshCourseList()
+    }
+
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didInsertCourse course: Course
+    ) {
+        self.insertCourseInCurrentCourses(course)
+        self.cacheCurrentCourses()
+        self.refreshCourseList()
+    }
 }

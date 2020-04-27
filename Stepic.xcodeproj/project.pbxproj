@@ -427,6 +427,7 @@
 		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
 		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
+		2C30505B24574B1F005DCD81 /* CourseListDataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */; };
@@ -1665,6 +1666,7 @@
 		2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertPresenter.swift; sourceTree = "<group>"; };
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
+		2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataBackUpdateService.swift; sourceTree = "<group>"; };
 		2C331C5621734764007B0D01 /* NotificationService+Streak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+Streak.swift"; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
@@ -2669,6 +2671,15 @@
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		2C30505924574A82005DCD81 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */,
+				62E9846FAD1E23AB87024093 /* CourseListInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		2C37968421ABED9500BC7E62 /* ActiveTests */ = {
@@ -5206,11 +5217,11 @@
 			children = (
 				62E984D225AB3EB455A51F98 /* CourseListAssembly.swift */,
 				62E98A2F0861B457FAABF490 /* CourseListDataFlow.swift */,
-				62E9846FAD1E23AB87024093 /* CourseListInteractor.swift */,
 				62E98F968FBB3ED0E6309407 /* CourseListPresenter.swift */,
 				62E98C2D7CF9196EC220CE32 /* CourseListViewController.swift */,
 				62E98C3E78674AF597721978 /* CourseWidgetViewModel.swift */,
 				62E98E455B3841471584F9BC /* InputOutput */,
+				2C30505924574A82005DCD81 /* Interactor */,
 				62E98DCEFD7DB9F89C8D75AF /* Provider */,
 				62E980A63F3F8952B27F10D8 /* Views */,
 			);
@@ -7376,6 +7387,7 @@
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */,
+				2C30505B24574B1F005DCD81 /* CourseListDataBackUpdateService.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 				2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
