@@ -82,7 +82,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
 extension ContinueCourseInteractor: DataBackUpdateServiceDelegate {
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
-        reportsUpdate update: DataBackUpdateDescription,
+        didReport update: DataBackUpdateDescription,
         for target: DataBackUpdateTarget
     ) {
         guard case .course(let course) = target,
@@ -93,4 +93,9 @@ extension ContinueCourseInteractor: DataBackUpdateServiceDelegate {
         self.currentCourse = course
         self.presenter.presentLastCourse(response: .init(result: course))
     }
+
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport refreshedTarget: DataBackUpdateTarget
+    ) {}
 }

@@ -295,7 +295,16 @@ extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
 }
 
 extension ProfilePresenter: DataBackUpdateServiceDelegate {
-    func dataBackUpdateService(_ dataBackUpdateService: DataBackUpdateService, didReport refreshedTarget: DataBackUpdateTarget) {
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport update: DataBackUpdateDescription,
+        for target: DataBackUpdateTarget
+    ) {}
+    
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport refreshedTarget: DataBackUpdateTarget
+    ) {
         if case .profile(let profile) = refreshedTarget {
             self.headerInfoPresenter?.update(with: profile)
             self.descriptionPresenter?.update(with: profile)

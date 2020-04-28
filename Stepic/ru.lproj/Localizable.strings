@@ -478,6 +478,12 @@ CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
 
+/* User Courses */
+UserCoursesTitle = "Мои курсы";
+UserCoursesTabAllCoursesTitle = "Все";
+UserCoursesTabFavoritesTitle = "Избранные";
+UserCoursesTabArchivedTitle = "Архив";
+
 RetentionNotificationOnNextDayTitle = "Не сбавляем темп";
 RetentionNotificationOnNextDayText = "Удалось поучиться вчера - это хороший повод зайти сегодня и стать еще умнее! 🚀";
 RetentionNotificationOnThirdDayTitle = "Иссякла тяга к знаниям? 🤔";

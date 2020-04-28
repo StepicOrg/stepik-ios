@@ -13,10 +13,21 @@ import PromiseKit
 final class UserCoursesAPI: APIEndpoint {
     override var name: String { "user-courses" }
 
-    func retrieve(page: Int = 1) -> Promise<([UserCourse], Meta)> {
+    func retrieve(
+        page: Int = 1,
+        isArchived: Bool? = nil,
+        isFavorite: Bool? = nil
+    ) -> Promise<([UserCourse], Meta)> {
         Promise { seal in
             var params = Parameters()
             params["page"] = page
+
+            if let isArchived = isArchived {
+                params[UserCourse.JSONKey.isArchived.rawValue] = String(isArchived)
+            }
+            if let isFavorite = isFavorite {
+                params[UserCourse.JSONKey.isFavorite.rawValue] = String(isFavorite)
+            }
 
             self.retrieve.request(
                 requestEndpoint: self.name,

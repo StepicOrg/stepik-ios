@@ -124,12 +124,8 @@ final class HomeViewController: BaseExploreViewController {
     // MARK: - Fullscreen displaying
 
     private func displayFullscreenEnrolledCourseList() {
-        self.interactor.doFullscreenCourseListPresentation(
-            request: .init(
-                presentationDescription: nil,
-                courseListType: EnrolledCourseListType()
-            )
-        )
+        let assembly = UserCoursesAssembly()
+        self.push(module: assembly.makeModule())
     }
 
     private func displayFullscreenPopularCourseList(contentLanguage: ContentLanguage) {
