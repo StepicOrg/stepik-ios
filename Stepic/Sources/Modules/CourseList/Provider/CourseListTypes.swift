@@ -12,6 +12,10 @@ struct PopularCourseListType: CourseListType {
 
 struct EnrolledCourseListType: CourseListType {}
 
+struct FavoriteCourseListType: CourseListType {}
+
+struct ArchivedCourseListType: CourseListType {}
+
 struct TagCourseListType: CourseListType {
     let id: Int
     let language: ContentLanguage
@@ -53,6 +57,18 @@ final class CourseListServicesFactory {
                     cacheID: "MyCoursesInfo"
                 )
             )
+        } else if self.type is FavoriteCourseListType {
+            return CourseListPersistenceService(
+                storage: DefaultsCourseListPersistenceStorage(
+                    cacheID: "MyCoursesInfoFavorite"
+                )
+            )
+        } else if self.type is ArchivedCourseListType {
+            return CourseListPersistenceService(
+                storage: DefaultsCourseListPersistenceStorage(
+                    cacheID: "MyCoursesInfoArchived"
+                )
+            )
         } else if let type = self.type as? PopularCourseListType {
             return CourseListPersistenceService(
                 storage: DefaultsCourseListPersistenceStorage(
@@ -75,9 +91,11 @@ final class CourseListServicesFactory {
     }
 
     func makeNetworkService() -> CourseListNetworkServiceProtocol {
-        if let type = self.type as? EnrolledCourseListType {
-            return EnrolledCourseListNetworkService(
-                type: type,
+        if self.type is EnrolledCourseListType
+            || self.type is FavoriteCourseListType
+            || self.type is ArchivedCourseListType {
+            return UserCoursesCourseListNetworkService(
+                type: self.type,
                 coursesAPI: self.coursesAPI,
                 userCoursesAPI: self.userCoursesAPI
             )

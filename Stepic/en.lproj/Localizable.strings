@@ -445,6 +445,21 @@ ContinueCourseCourseCurrentProgressTitle = "Current progress: %@/%@ points";
 
 /* Course info */
 CourseInfoTitle = "About course";
+// Favorite
+CourseInfoCourseActionAddToFavoritesAlertTitle = "Add to Favorites";
+CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Remove from Favorites";
+CourseInfoCourseActionAddToFavoritesSuccessMessage = "Course Successfully Added to Favorites";
+CourseInfoCourseActionRemoveFromFavoritesSuccessMessage = "Course Successfully Removed from Favorites";
+CourseInfoCourseActionAddToFavoritesFailureMessage = "Failed to Add Course to Favorites";
+CourseInfoCourseActionRemoveFromFavoritesFailureMessage = "Failed to Remove Course from Favorites";
+// Archive
+CourseInfoCourseActionMoveToArchivedAlertTitle = "Move to Archived";
+CourseInfoCourseActionRemoveFromArchivedAlertTitle = "Remove from Archived";
+CourseInfoCourseActionMoveToArchivedSuccessMessage = "Course Successfully Moved to Archived";
+CourseInfoCourseActionRemoveFromArchivedSuccessMessage = "Course Successfully Removed from Archived";
+CourseInfoCourseActionMoveToArchivedFailureMessage = "Failed to Move Course to Archived";
+CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Failed to Remove Course from Archived";
+
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
@@ -471,6 +486,12 @@ CourseInfoTitleTimeToComplete = "Expected time to complete";
 CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
+
+/* User Courses */
+UserCoursesTitle = "My Courses";
+UserCoursesTabAllCoursesTitle = "All";
+UserCoursesTabFavoritesTitle = "Favorite";
+UserCoursesTabArchivedTitle = "Archive";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";

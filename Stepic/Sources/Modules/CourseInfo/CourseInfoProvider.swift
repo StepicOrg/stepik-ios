@@ -4,6 +4,9 @@ import PromiseKit
 protocol CourseInfoProviderProtocol {
     func fetchCached() -> Promise<Course?>
     func fetchRemote() -> Promise<Course?>
+
+    func fetchUserCourse(courseID: Course.IdType) -> Promise<UserCourse?>
+    func updateUserCourse(userCourse: UserCourse) -> Promise<UserCourse>
 }
 
 final class CourseInfoProvider: CourseInfoProviderProtocol {
@@ -18,6 +21,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     private let reviewSummariesPersistenceService: CourseReviewSummariesPersistenceServiceProtocol
     private let reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
 
+    private let userCoursesNetworkService: UserCoursesNetworkServiceProtocol
+
     init(
         courseID: Course.IdType,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
@@ -25,7 +30,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         progressesPersistenceService: ProgressesPersistenceServiceProtocol,
         progressesNetworkService: ProgressesNetworkServiceProtocol,
         reviewSummariesPersistenceService: CourseReviewSummariesPersistenceServiceProtocol,
-        reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
+        reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
+        userCoursesNetworkService: UserCoursesNetworkServiceProtocol
     ) {
         self.courseID = courseID
         self.coursesNetworkService = coursesNetworkService
@@ -34,6 +40,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.progressesPersistenceService = progressesPersistenceService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
         self.reviewSummariesPersistenceService = reviewSummariesPersistenceService
+        self.userCoursesNetworkService = userCoursesNetworkService
     }
 
     func fetchCached() -> Promise<Course?> {
@@ -58,6 +65,26 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
                 reviewSummaryFetchMethod: self.reviewSummariesNetworkService.fetch(id:)
             ).done { course in
                 seal.fulfill(course)
+            }.catch { _ in
+                seal.reject(Error.networkFetchFailed)
+            }
+        }
+    }
+
+    func fetchUserCourse(courseID: Course.IdType) -> Promise<UserCourse?> {
+        Promise { seal in
+            self.userCoursesNetworkService.fetch(courseID: courseID).done { userCourse in
+                seal.fulfill(userCourse)
+            }.catch { _ in
+                seal.reject(Error.networkFetchFailed)
+            }
+        }
+    }
+
+    func updateUserCourse(userCourse: UserCourse) -> Promise<UserCourse> {
+        Promise { seal in
+            self.userCoursesNetworkService.update(userCourse: userCourse).done { userCourse in
+                seal.fulfill(userCourse)
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
             }

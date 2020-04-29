@@ -5,6 +5,8 @@ protocol CourseInfoInteractorProtocol {
     func doCourseRefresh(request: CourseInfo.CourseLoad.Request)
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request)
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request)
+    func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request)
+    func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
     func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request)
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
@@ -22,6 +24,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
+
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private let courseID: Course.IdType
     private var currentCourse: Course? {
@@ -76,7 +80,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
-        spotlightIndexingService: SpotlightIndexingServiceProtocol
+        spotlightIndexingService: SpotlightIndexingServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -87,6 +92,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
+        self.dataBackUpdateService = dataBackUpdateService
 
         self.courseID = courseID
     }
@@ -157,6 +163,18 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
             print("course info interactor: drop course error = \(error)")
+        }
+    }
+
+    func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request) {
+        if let currentCourse = self.currentCourse, currentCourse.enrolled {
+            self.doUserCourseAction(currentCourse.isFavorite ? .favoriteRemove : .favoriteAdd)
+        }
+    }
+
+    func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request) {
+        if let currentCourse = self.currentCourse, currentCourse.enrolled {
+            self.doUserCourseAction(currentCourse.isArchived ? .archiveRemove : .archiveAdd)
         }
     }
 
@@ -259,6 +277,46 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private func pushCurrentCourseToSubmodules(submodules: [CourseInfoSubmoduleProtocol]) {
         if let course = self.currentCourse {
             submodules.forEach { $0.update(with: course, isOnline: self.isOnline) }
+        }
+    }
+
+    private func doUserCourseAction(_ action: CourseInfo.UserCourseAction) {
+        let currentCourse = self.currentCourse.require()
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        firstly {
+            self.provider
+                .fetchUserCourse(courseID: currentCourse.id)
+                .compactMap { $0 }
+        }.then { userCourse -> Promise<UserCourse> in
+            switch action {
+            case .favoriteAdd:
+                userCourse.isFavorite = true
+            case .favoriteRemove:
+                userCourse.isFavorite = false
+            case .archiveAdd:
+                userCourse.isArchived = true
+            case .archiveRemove:
+                userCourse.isArchived = false
+            }
+
+            return self.provider.updateUserCourse(userCourse: userCourse)
+        }.done { userCourse in
+            if currentCourse.isFavorite != userCourse.isFavorite {
+                currentCourse.isFavorite = userCourse.isFavorite
+                self.dataBackUpdateService.triggerCourseIsFavoriteUpdate(retrievedCourse: currentCourse)
+            }
+            if currentCourse.isArchived != userCourse.isArchived {
+                currentCourse.isArchived = userCourse.isArchived
+                self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: currentCourse)
+            }
+
+            self.presenter.presentCourse(response: .init(result: .success(currentCourse)))
+            self.presenter.presentUserCourseActionResult(response: .init(userCourseAction: action, isSuccessful: true))
+        }.catch { error in
+            print("course info interactor: user course action error = \(error)")
+            self.presenter.presentUserCourseActionResult(response: .init(userCourseAction: action, isSuccessful: false))
         }
     }
 

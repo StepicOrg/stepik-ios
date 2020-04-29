@@ -17,12 +17,24 @@ class BaseCourseListNetworkService {
     }
 }
 
-final class EnrolledCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
-    let type: EnrolledCourseListType
+final class UserCoursesCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: CourseListType
     private let userCoursesAPI: UserCoursesAPI
 
+    private var fetchParams: (isArchived: Bool?, isFavorite: Bool?) {
+        if self.type is EnrolledCourseListType {
+            return (false, nil)
+        } else if self.type is FavoriteCourseListType {
+            return (nil, true)
+        } else if self.type is ArchivedCourseListType {
+            return (true, nil)
+        } else {
+            fatalError("Unsupported course list type")
+        }
+    }
+
     init(
-        type: EnrolledCourseListType,
+        type: CourseListType,
         coursesAPI: CoursesAPI,
         userCoursesAPI: UserCoursesAPI
     ) {
@@ -33,7 +45,8 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService, Cour
 
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         Promise { seal in
-            self.userCoursesAPI.retrieve(page: page).then {
+            let (isArchived, isFavorite) = self.fetchParams
+            self.userCoursesAPI.retrieve(page: page, isArchived: isArchived, isFavorite: isFavorite).then {
                 userCoursesInfo -> Promise<([Course], [UserCourse], Meta)> in
                 // Cause we can't pass empty ids list to courses endpoint
                 if userCoursesInfo.0.isEmpty {
@@ -41,11 +54,11 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService, Cour
                 }
 
                 return self.coursesAPI
-                    .retrieve(ids: userCoursesInfo.0.map { $0.courseId })
+                    .retrieve(ids: userCoursesInfo.0.map { $0.courseID })
                     .map { ($0, userCoursesInfo.0, userCoursesInfo.1) }
             }.done { courses, info, meta in
                 let orderedCourses = courses.reordered(
-                    order: info.map { $0.courseId },
+                    order: info.map { $0.courseID },
                     transform: { $0.id }
                 )
                 seal.fulfill((orderedCourses, meta))

@@ -447,6 +447,21 @@ ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/
 
 /* Course info */
 CourseInfoTitle = "О курсе";
+// Favorite
+CourseInfoCourseActionAddToFavoritesAlertTitle = "Добавить в избранное";
+CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Убрать из избранного";
+CourseInfoCourseActionAddToFavoritesSuccessMessage = "Курс успешно добавлен в избранное";
+CourseInfoCourseActionRemoveFromFavoritesSuccessMessage = "Курс успешно убран из избранного";
+CourseInfoCourseActionAddToFavoritesFailureMessage = "Не удалось добавить курс в избранное";
+CourseInfoCourseActionRemoveFromFavoritesFailureMessage = "Не удалось убрать курс из избранного";
+// Archive
+CourseInfoCourseActionMoveToArchivedAlertTitle = "Переместить в архив";
+CourseInfoCourseActionRemoveFromArchivedAlertTitle = "Убрать из архива";
+CourseInfoCourseActionMoveToArchivedSuccessMessage = "Курс успешно перемещён в архив";
+CourseInfoCourseActionRemoveFromArchivedSuccessMessage = "Курс успешно убран из архива";
+CourseInfoCourseActionMoveToArchivedFailureMessage = "Не удалось переместить курс в архив";
+CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Не удалось убрать курс из архива";
+
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
@@ -473,6 +488,12 @@ CourseInfoTitleTimeToComplete = "Время прохождения курса";
 CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+
+/* User Courses */
+UserCoursesTitle = "Мои курсы";
+UserCoursesTabAllCoursesTitle = "Все";
+UserCoursesTabFavoritesTitle = "Избранные";
+UserCoursesTabArchivedTitle = "Архив";
 
 RetentionNotificationOnNextDayTitle = "Не сбавляем темп";
 RetentionNotificationOnNextDayText = "Удалось поучиться вчера - это хороший повод зайти сегодня и стать еще умнее! 🚀";
