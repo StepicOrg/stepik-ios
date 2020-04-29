@@ -167,11 +167,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request) {
-        self.doUserCourseUpdateAction { $0.isFavorite.toggle() }
+        if let currentCourse = self.currentCourse, currentCourse.enrolled {
+            self.doUserCourseAction(currentCourse.isFavorite ? .favoriteRemove : .favoriteAdd)
+        }
     }
 
     func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request) {
-        self.doUserCourseUpdateAction { $0.isArchived.toggle() }
+        if let currentCourse = self.currentCourse, currentCourse.enrolled {
+            self.doUserCourseAction(currentCourse.isArchived ? .archiveRemove : .archiveAdd)
+        }
     }
 
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request) {
@@ -276,36 +280,43 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
-    private func doUserCourseUpdateAction(_ updateBlock: @escaping (UserCourse) -> Void) {
-        guard let course = self.currentCourse, course.enrolled else {
-            return
-        }
+    private func doUserCourseAction(_ action: CourseInfo.UserCourseAction) {
+        let currentCourse = self.currentCourse.require()
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         firstly {
             self.provider
-                .fetchUserCourse(courseID: course.id)
+                .fetchUserCourse(courseID: currentCourse.id)
                 .compactMap { $0 }
         }.then { userCourse -> Promise<UserCourse> in
-            updateBlock(userCourse)
+            switch action {
+            case .favoriteAdd:
+                userCourse.isFavorite = true
+            case .favoriteRemove:
+                userCourse.isFavorite = false
+            case .archiveAdd:
+                userCourse.isArchived = true
+            case .archiveRemove:
+                userCourse.isArchived = false
+            }
+
             return self.provider.updateUserCourse(userCourse: userCourse)
         }.done { userCourse in
-            if let course = self.currentCourse {
-                if course.isFavorite != userCourse.isFavorite {
-                    course.isFavorite = userCourse.isFavorite
-                    self.dataBackUpdateService.triggerCourseIsFavoriteUpdate(retrievedCourse: course)
-                }
-                if course.isArchived != userCourse.isArchived {
-                    course.isArchived = userCourse.isArchived
-                    self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: course)
-                }
-                self.presenter.presentCourse(response: .init(result: .success(course)))
+            if currentCourse.isFavorite != userCourse.isFavorite {
+                currentCourse.isFavorite = userCourse.isFavorite
+                self.dataBackUpdateService.triggerCourseIsFavoriteUpdate(retrievedCourse: currentCourse)
             }
-            self.presenter.presentWaitingStatus(response: .init(isSuccessful: true))
+            if currentCourse.isArchived != userCourse.isArchived {
+                currentCourse.isArchived = userCourse.isArchived
+                self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: currentCourse)
+            }
+
+            self.presenter.presentCourse(response: .init(result: .success(currentCourse)))
+            self.presenter.presentUserCourseActionResult(response: .init(userCourseAction: action, isSuccessful: true))
         }.catch { error in
             print("course info interactor: user course action error = \(error)")
-            self.presenter.presentWaitingStatus(response: .init(isSuccessful: false))
+            self.presenter.presentUserCourseActionResult(response: .init(userCourseAction: action, isSuccessful: false))
         }
     }
 

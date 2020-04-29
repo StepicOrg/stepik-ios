@@ -18,6 +18,13 @@ enum CourseInfo {
         }
     }
 
+    enum UserCourseAction {
+        case favoriteAdd
+        case favoriteRemove
+        case archiveAdd
+        case archiveRemove
+    }
+
     // MARK: Use cases
 
     /// Load & show info about course
@@ -130,17 +137,6 @@ enum CourseInfo {
         }
     }
 
-    /// Handle HUD status update
-    enum BlockingWaitingIndicatorStatusUpdate {
-        struct Response {
-            let isSuccessful: Bool
-        }
-
-        struct ViewModel {
-            let isSuccessful: Bool
-        }
-    }
-
     /// Drop course
     enum CourseUnenrollmentAction {
         struct Request {}
@@ -154,6 +150,19 @@ enum CourseInfo {
     /// Move/remove course to/from archived
     enum CourseArchiveAction {
         struct Request {}
+    }
+
+    /// Present HUD with status and localized message
+    enum UserCourseActionPresentation {
+        struct Response {
+            let userCourseAction: UserCourseAction
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+            let message: String
+        }
     }
 
     /// Do main action (continue, enroll, etc)

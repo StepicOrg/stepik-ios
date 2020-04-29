@@ -20,7 +20,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
-    func displayBlockingLoadingIndicatorStatus(viewModel: CourseInfo.BlockingWaitingIndicatorStatusUpdate.ViewModel)
+    func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -497,11 +497,11 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         }
     }
 
-    func displayBlockingLoadingIndicatorStatus(viewModel: CourseInfo.BlockingWaitingIndicatorStatusUpdate.ViewModel) {
+    func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel) {
         if viewModel.isSuccessful {
-            SVProgressHUD.showSuccess(withStatus: nil)
+            SVProgressHUD.showSuccess(withStatus: viewModel.message)
         } else {
-            SVProgressHUD.showError(withStatus: nil)
+            SVProgressHUD.showError(withStatus: viewModel.message)
         }
     }
 

@@ -10,7 +10,7 @@ protocol CourseInfoPresenterProtocol {
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
-    func presentWaitingStatus(response: CourseInfo.BlockingWaitingIndicatorStatusUpdate.Response)
+    func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -78,9 +78,32 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
-    func presentWaitingStatus(response: CourseInfo.BlockingWaitingIndicatorStatusUpdate.Response) {
-        self.viewController?.displayBlockingLoadingIndicatorStatus(
-            viewModel: .init(isSuccessful: response.isSuccessful)
+    func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response) {
+        let isSuccessful = response.isSuccessful
+
+        let message: String = {
+            switch response.userCourseAction {
+            case .favoriteAdd:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoCourseActionAddToFavoritesSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoCourseActionAddToFavoritesFailureMessage", comment: "")
+            case .favoriteRemove:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoCourseActionRemoveFromFavoritesSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoCourseActionRemoveFromFavoritesFailureMessage", comment: "")
+            case .archiveAdd:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoCourseActionMoveToArchivedSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoCourseActionMoveToArchivedFailureMessage", comment: "")
+            case .archiveRemove:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoCourseActionRemoveFromArchivedSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoCourseActionRemoveFromArchivedFailureMessage", comment: "")
+            }
+        }()
+
+        self.viewController?.displayUserCourseActionResult(
+            viewModel: .init(isSuccessful: response.isSuccessful, message: message)
         )
     }
 
