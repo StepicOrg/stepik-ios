@@ -8,7 +8,9 @@
 
 import Amplitude_iOS
 import Crashlytics
+import FirebaseAnalytics
 import Foundation
+import YandexMobileMetrica
 
 final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     static let shared = AnalyticsUserProperties()
@@ -43,6 +45,12 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     func setUserID(to id: Int?) {
         setProperty(key: "stepik_id", value: id)
         setCrashlyticsProperty(key: "stepik_id", value: id)
+
+        let userProfileID: String? = id != nil ? String(id.require()) : nil
+        // Update AppMetrica user profile id.
+        YMMYandexMetrica.setUserProfileID(userProfileID)
+        // Update FirebaseAnalytics user profile id.
+        Analytics.setUserID(userProfileID)
     }
 
     func incrementSubmissionsCount() {
