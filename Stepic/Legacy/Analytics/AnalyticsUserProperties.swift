@@ -9,6 +9,7 @@
 import Amplitude_iOS
 import Crashlytics
 import Foundation
+import YandexMobileMetrica
 
 final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     static let shared = AnalyticsUserProperties()
@@ -43,6 +44,9 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     func setUserID(to id: Int?) {
         setProperty(key: "stepik_id", value: id)
         setCrashlyticsProperty(key: "stepik_id", value: id)
+        // Update AppMetrica user profile id.
+        let userProfileID: String? = id != nil ? String(id.require()) : nil
+        YMMYandexMetrica.setUserProfileID(userProfileID)
     }
 
     func incrementSubmissionsCount() {
