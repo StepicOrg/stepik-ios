@@ -33,6 +33,21 @@ enum NewProfile {
         struct Request {}
     }
 
+    /// Update navigation bar button items.
+    enum NavigationControlsPresentation {
+        struct Response {
+            let shoouldPresentSettings: Bool
+            let shoouldPresentEditProfile: Bool
+            let shoouldPresentShareProfile: Bool
+        }
+
+        struct ViewModel {
+            let isSettingsAvailable: Bool
+            let isEditProfileAvailable: Bool
+            let isShareProfileAvailable: Bool
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

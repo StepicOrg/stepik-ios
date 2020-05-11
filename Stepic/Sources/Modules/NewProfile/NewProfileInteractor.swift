@@ -26,6 +26,15 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         label: "com.AlexKarpov.Stepic.NewProfileInteractor.UserFetch"
     )
 
+    private var isCurrentUserProfile: Bool {
+        switch self.presentationDescription.profileType {
+        case .currentUser:
+            return true
+        case .otherUser:
+            return false
+        }
+    }
+
     init(
         presentationDescription: NewProfile.PresentationDescription,
         presenter: NewProfilePresenterProtocol,
@@ -50,6 +59,10 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
 
             strongSelf.fetchSemaphore.wait()
 
+            DispatchQueue.main.async {
+                strongSelf.updateNavigationControlsBasedOnCurrentState()
+            }
+
             firstly { () -> Promise<NewProfile.ProfileLoad.Response> in
                 switch strongSelf.presentationDescription.profileType {
                 case .currentUser:
@@ -68,6 +81,10 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                     break
                 }
             }.ensure {
+                DispatchQueue.main.async { [weak self] in
+                    self?.updateNavigationControlsBasedOnCurrentState()
+                }
+
                 strongSelf.fetchSemaphore.signal()
             }.catch { error in
                 print("NewProfileInteractor :: profile refresh error = \(error)")
@@ -147,9 +164,23 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
 
         self.provider.fetchProfile(profileID: currentUser.id).done { profile in
             self.currentProfile = profile
-        }.catch { _ in
-            // handle
+        }.ensure {
+            DispatchQueue.main.async {
+                self.updateNavigationControlsBasedOnCurrentState()
+            }
+        }.catch { error in
+            print("NewProfileInteractor :: current user profile load error = \(error)")
         }
+    }
+
+    private func updateNavigationControlsBasedOnCurrentState() {
+        self.presenter.presentNavigationControls(
+            response: .init(
+                shoouldPresentSettings: self.isCurrentUserProfile,
+                shoouldPresentEditProfile: self.isCurrentUserProfile && self.currentProfile != nil,
+                shoouldPresentShareProfile: self.currentUser != nil
+            )
+        )
     }
 
     // MARK: Enums

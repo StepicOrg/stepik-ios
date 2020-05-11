@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewProfilePresenterProtocol {
     func presentProfile(response: NewProfile.ProfileLoad.Response)
+    func presentNavigationControls(response: NewProfile.NavigationControlsPresentation.Response)
 }
 
 final class NewProfilePresenter: NewProfilePresenterProtocol {
@@ -21,6 +22,16 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
                 self.viewController?.displayProfile(viewModel: .init(state: .error))
             }
         }
+    }
+
+    func presentNavigationControls(response: NewProfile.NavigationControlsPresentation.Response) {
+        self.viewController?.displayNavigationControls(
+            viewModel: .init(
+                isSettingsAvailable: response.shoouldPresentSettings,
+                isEditProfileAvailable: response.shoouldPresentEditProfile,
+                isShareProfileAvailable: response.shoouldPresentShareProfile
+            )
+        )
     }
 
     private func makeViewModel(user: User) -> NewProfileViewModel {

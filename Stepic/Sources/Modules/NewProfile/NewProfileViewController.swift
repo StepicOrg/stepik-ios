@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel)
+    func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -10,6 +11,21 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     private let interactor: NewProfileInteractorProtocol
     private var state: NewProfile.ViewControllerState
+
+    private lazy var settingsButton = UIBarButtonItem.stepikSettingsBarButtonItem(
+        target: self,
+        action: #selector(self.settingsButtonClicked)
+    )
+    private lazy var shareButton = UIBarButtonItem(
+        barButtonSystemItem: .action,
+        target: self,
+        action: #selector(self.shareButtonClicked)
+    )
+    private lazy var profileEditButton = UIBarButtonItem(
+        barButtonSystemItem: .compose,
+        target: self,
+        action: #selector(self.profileEditButtonClicked)
+    )
 
     init(
         interactor: NewProfileInteractorProtocol,
@@ -80,6 +96,22 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         )
     }
 
+    @objc
+    private func settingsButtonClicked() {
+        let assembly = SettingsAssembly(moduleOutput: nil)
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, modalPresentationStyle: .pageSheet)
+    }
+
+    @objc
+    private func shareButtonClicked() {
+    }
+
+    @objc
+    private func profileEditButtonClicked() {
+    }
+
     private func updateState(newState: NewProfile.ViewControllerState) {
         defer {
             self.state = newState
@@ -112,5 +144,28 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 extension NewProfileViewController: NewProfileViewControllerProtocol {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel) {
+        var leftBarButtonItems = [UIBarButtonItem]()
+        var rightBarButtonItems = [UIBarButtonItem]()
+
+        if viewModel.isSettingsAvailable {
+            rightBarButtonItems.append(self.settingsButton)
+        }
+        if viewModel.isEditProfileAvailable {
+            rightBarButtonItems.append(self.profileEditButton)
+        }
+
+        if viewModel.isShareProfileAvailable {
+            if rightBarButtonItems.isEmpty {
+                rightBarButtonItems.append(self.shareButton)
+            } else {
+                leftBarButtonItems.append(self.shareButton)
+            }
+        }
+
+        self.navigationItem.leftBarButtonItems = leftBarButtonItems
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 }
