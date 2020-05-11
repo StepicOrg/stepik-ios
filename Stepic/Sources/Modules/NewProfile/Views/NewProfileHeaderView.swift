@@ -5,6 +5,8 @@ extension NewProfileHeaderView {
     struct Appearance {
         let avatarImageViewSize = CGSize(width: 64, height: 64)
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
+        let avatarImageViewBorderWidth: CGFloat = 0.5
+        let avatarImageViewBorderColor = UIColor.stepikSeparator
 
         let usernameLabelTextColor = UIColor.stepikSystemPrimaryText
         let usernameLabelFont = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -22,7 +24,14 @@ extension NewProfileHeaderView {
 final class NewProfileHeaderView: UIView {
     let appearance: Appearance
 
-    private lazy var avatarImageView = AvatarImageView()
+    private lazy var avatarImageView: AvatarImageView = {
+        let avatarImageView = AvatarImageView()
+        avatarImageView.shape = .circle(
+            borderWidth: self.appearance.avatarImageViewBorderWidth,
+            borderColor: self.appearance.avatarImageViewBorderColor
+        )
+        return avatarImageView
+    }()
 
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
@@ -85,6 +94,8 @@ final class NewProfileHeaderView: UIView {
     func configure(viewModel: NewProfileHeaderViewModel) {
         if let avatarURL = viewModel.avatarURL {
             self.avatarImageView.set(with: avatarURL)
+        } else {
+            self.avatarImageView.reset()
         }
 
         self.usernameLabel.text = viewModel.username
