@@ -16,6 +16,7 @@ extension User {
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedProfile: NSNumber?
     @NSManaged var managedPrivate: NSNumber?
+    @NSManaged var managedActive: NSNumber?
     @NSManaged var managedOrganization: NSNumber?
     @NSManaged var managedBio: String?
     @NSManaged var managedDetails: String?
@@ -23,7 +24,16 @@ extension User {
     @NSManaged var managedLastName: String?
     @NSManaged var managedAvatarURL: String?
     @NSManaged var managedLevel: NSNumber?
+    @NSManaged var managedKnowledge: NSNumber?
+    @NSManaged var managedKnowledgeRank: NSNumber?
+    @NSManaged var managedReputation: NSNumber?
+    @NSManaged var managedReputationRank: NSNumber?
     @NSManaged var managedJoinDate: Date?
+    @NSManaged var managedCreatedCoursesCount: NSNumber?
+    @NSManaged var managedSolvedStepsCount: NSNumber?
+    @NSManaged var managedCreatedLessonsCount: NSNumber?
+    @NSManaged var managedIssuedCertificatesCount: NSNumber?
+    @NSManaged var managedFollowersCount: NSNumber?
 
     @NSManaged var managedInstructedCourses: NSSet?
     @NSManaged var managedAuthoredCourses: NSSet?
@@ -76,10 +86,20 @@ extension User {
 
     var isPrivate: Bool {
         set(value) {
-            managedPrivate = value as NSNumber?
+            self.managedPrivate = value as NSNumber?
         }
         get {
-             managedPrivate?.boolValue ?? true
+            self.managedPrivate?.boolValue ?? false
+        }
+    }
+
+    /// Designates whether this user should be treated as active.
+    var isActive: Bool {
+        get {
+            self.managedActive?.boolValue ?? true
+        }
+        set {
+            self.managedActive = NSNumber(value: newValue)
         }
     }
 
@@ -147,6 +167,87 @@ extension User {
         }
         get {
              managedLevel?.intValue ?? 0
+        }
+    }
+
+    var knowledge: Int {
+        get {
+            self.managedKnowledge?.intValue ?? 0
+        }
+        set {
+            self.managedKnowledge = newValue as NSNumber?
+        }
+    }
+
+    var knowledgeRank: Int {
+        get {
+            self.managedKnowledgeRank?.intValue ?? 0
+        }
+        set {
+            self.managedKnowledgeRank = newValue as NSNumber?
+        }
+    }
+
+    var reputation: Int {
+        get {
+            self.managedReputation?.intValue ?? 0
+        }
+        set {
+            self.managedReputation = newValue as NSNumber?
+        }
+    }
+
+    var reputationRank: Int {
+        get {
+            self.managedReputationRank?.intValue ?? 0
+        }
+        set {
+            self.managedReputationRank = newValue as NSNumber?
+        }
+    }
+
+    var createdCoursesCount: Int {
+        get {
+            self.managedCreatedCoursesCount?.intValue ?? 0
+        }
+        set {
+            self.managedCreatedCoursesCount = newValue as NSNumber?
+        }
+    }
+
+    var solvedStepsCount: Int {
+        get {
+            self.managedSolvedStepsCount?.intValue ?? 0
+        }
+        set {
+            self.managedSolvedStepsCount = newValue as NSNumber?
+        }
+    }
+
+    var createdLessonsCount: Int {
+        get {
+            self.managedCreatedLessonsCount?.intValue ?? 0
+        }
+        set {
+            self.managedCreatedLessonsCount = newValue as NSNumber?
+        }
+    }
+
+    var issuedCertificatesCount: Int {
+        get {
+            self.managedIssuedCertificatesCount?.intValue ?? 0
+        }
+        set {
+            self.managedIssuedCertificatesCount = newValue as NSNumber?
+        }
+    }
+
+    var followersCount: Int {
+        get {
+            self.managedFollowersCount?.intValue ?? 0
+        }
+        set {
+            self.managedFollowersCount = newValue as NSNumber?
         }
     }
 
