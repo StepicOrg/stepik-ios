@@ -968,6 +968,16 @@ EditStepMessage = "You can only edit the step's text, and only using raw HTML. T
 EditStepRemoteUpdateSuccessfulTitle = "Updated";
 EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 
+/* New profile */
+NewProfileRatingReputation = "Reputation %@";
+NewProfileRatingKnowledge = "Knowledge %@";
+NewProfileRatingCertificates1 = "%@ Certificate";
+NewProfileRatingCertificates234 = "%@ Certificates";
+NewProfileRatingCertificates567890 = "%@ Certificates";
+NewProfileRatingCourses1 = "%@ Course";
+NewProfileRatingCourses234 = "%@ Courses";
+NewProfileRatingCourses567890 = "%@ Courses";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
