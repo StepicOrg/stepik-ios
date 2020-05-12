@@ -47,6 +47,12 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         self.provider = provider
         self.userAccountService = userAccountService
         self.networkReachabilityService = networkReachabilityService
+
+        self.addObservers()
+    }
+
+    deinit {
+        self.removeObservers()
     }
 
     // MARK: Public API
@@ -102,6 +108,8 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         if shouldSetOnlineMode {
             self.isOnline = true
             self.doProfileRefresh(request: .init())
+        } else if self.isCurrentUserProfile {
+            self.handleCurrentUserProfileStateCornerCases()
         }
     }
 
@@ -173,6 +181,20 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         }
     }
 
+    private func handleCurrentUserProfileStateCornerCases() {
+        // Check logout case.
+        if self.currentUser != nil && !self.userAccountService.isAuthorized {
+            return self.resetProfileStateToAnonymous()
+        }
+
+        // Check login case to another account.
+        if let currentUser = self.currentUser {
+            if self.userAccountService.isAuthorized && currentUser.id != self.userAccountService.currentUserID {
+                return self.doProfileRefresh(request: .init())
+            }
+        }
+    }
+
     private func updateNavigationControlsBasedOnCurrentState() {
         self.presenter.presentNavigationControls(
             response: .init(
@@ -189,5 +211,76 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         case unauthorized
         case networkFetchFailed
         case cachedFetchFailed
+    }
+}
+
+// MARK: - NewProfileInteractor (Observing Current User Profile) -
+
+extension NewProfileInteractor {
+    private func addObservers() {
+        guard self.isCurrentUserProfile else {
+            return
+        }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleUserLoggedOutNotification),
+            name: .didLogout,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleCurrentUserDidChangeNotification),
+            name: .didChangeCurrentUser,
+            object: nil
+        )
+    }
+
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    private func handleUserLoggedOutNotification() {
+        self.resetProfileStateToAnonymous()
+    }
+
+    @objc
+    private func handleCurrentUserDidChangeNotification() {
+        guard self.userAccountService.isAuthorized,
+              let currentUser = self.userAccountService.currentUser else {
+            return
+        }
+
+        self.currentUser = currentUser
+
+        // Present cached user profile and then fetch actual info from remote.
+        self.presenter.presentProfile(response: .init(result: .success(currentUser)))
+        self.doProfileRefresh(request: .init())
+    }
+}
+
+// MARK: - NewProfileInteractor: SettingsOutputProtocol -
+
+extension NewProfileInteractor: SettingsOutputProtocol {
+    func handleUserLoggedOut() {
+        guard self.isCurrentUserProfile else {
+            return
+        }
+
+        self.resetProfileStateToAnonymous()
+        self.presenter.presentAuthorization(response: .init())
+    }
+
+    // MARK: Private Helpers
+
+    private func resetProfileStateToAnonymous() {
+        self.currentUser = nil
+        self.currentProfile = nil
+
+        self.updateNavigationControlsBasedOnCurrentState()
+        // Present anonymous state.
+        self.presenter.presentProfile(response: .init(result: .failure(Error.unauthorized)))
     }
 }

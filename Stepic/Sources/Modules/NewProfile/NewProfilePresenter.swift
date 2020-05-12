@@ -3,6 +3,7 @@ import UIKit
 protocol NewProfilePresenterProtocol {
     func presentProfile(response: NewProfile.ProfileLoad.Response)
     func presentNavigationControls(response: NewProfile.NavigationControlsPresentation.Response)
+    func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response)
 }
 
 final class NewProfilePresenter: NewProfilePresenterProtocol {
@@ -33,6 +34,12 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
             )
         )
     }
+
+    func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response) {
+        self.viewController?.displayAuthorization(viewModel: .init())
+    }
+
+    // MARK: Private API
 
     private func makeViewModel(user: User) -> NewProfileViewModel {
         let headerViewModel = self.makeHeaderViewModel(user: user)

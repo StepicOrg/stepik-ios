@@ -3,6 +3,7 @@ import UIKit
 protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel)
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
+    func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -136,10 +137,13 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case .anonymous:
             self.showPlaceholder(for: .anonymous)
         case .result(let viewModel):
+            self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
         }
     }
 }
+
+// MARK: - NewProfileViewController: NewProfileViewControllerProtocol -
 
 extension NewProfileViewController: NewProfileViewControllerProtocol {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel) {
@@ -167,5 +171,9 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
 
         self.navigationItem.leftBarButtonItems = leftBarButtonItems
         self.navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+
+    func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel) {
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

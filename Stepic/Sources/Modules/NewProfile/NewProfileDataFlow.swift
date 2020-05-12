@@ -48,6 +48,13 @@ enum NewProfile {
         }
     }
 
+    /// Present authorization controller
+    enum AuthorizationPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {

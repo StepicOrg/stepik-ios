@@ -12,6 +12,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayDismiss(viewModel: Settings.DismissPresentation.ViewModel)
 }
 
 // MARK: - Appearance -
@@ -233,6 +234,10 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    func displayDismiss(viewModel: Settings.DismissPresentation.ViewModel) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: Private Helpers
