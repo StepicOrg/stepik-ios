@@ -40,7 +40,8 @@ final class BaseQuizAssembly: Assembly {
             provider: provider,
             notificationSuggestionManager: NotificationSuggestionManager(),
             rateAppManager: RateAppManager(),
-            userService: UserAccountService()
+            userService: UserAccountService(),
+            adaptiveStorageManager: AdaptiveStorageManager()
         )
         let viewController = BaseQuizViewController(
             interactor: interactor,

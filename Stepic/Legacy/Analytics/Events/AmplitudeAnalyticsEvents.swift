@@ -124,12 +124,20 @@ struct AmplitudeAnalyticsEvents {
     // MARK: - Steps -
 
     struct Steps {
-        static func submissionMade(step: Int, type: String, language: String? = nil) -> AnalyticsEvent {
+        static func submissionMade(
+            stepID: Int,
+            submissionID: Int,
+            type: String,
+            isAdaptive: Bool? = nil,
+            language: String? = nil
+        ) -> AnalyticsEvent {
             AnalyticsEvent(
                 name: "Submission made",
                 parameters: [
-                    "step": step,
+                    "step": stepID,
+                    "submission": submissionID,
                     "type": type,
+                    "is_adaptive": isAdaptive as Any,
                     "language": language as Any
                 ]
             )
