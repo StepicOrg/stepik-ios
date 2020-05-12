@@ -20,6 +20,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     // Legacy dependencies
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let rateAppManager: RateAppManager
+    private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
     let step: Step
     private let hasNextStep: Bool
@@ -40,7 +41,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         provider: BaseQuizProviderProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
         rateAppManager: RateAppManager,
-        userService: UserAccountServiceProtocol
+        userService: UserAccountServiceProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.step = step
         self.hasNextStep = hasNextStep
@@ -50,6 +52,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         self.notificationSuggestionManager = notificationSuggestionManager
         self.rateAppManager = rateAppManager
+        self.adaptiveStorageManager = adaptiveStorageManager
     }
 
     // MARK: Protocol Conforming
@@ -124,7 +127,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             }
 
             print("BaseQuizInteractor: submission created = \(submission.id), status = \(submission.statusString ??? "")")
-            AnalyticsEvent.submissionCreated(reply, self.step).report()
+            // FIXME: analytics dependency
+            let isAdaptive: Bool? = {
+                if let course = LastStepGlobalContext.context.course {
+                    return self.adaptiveStorageManager.supportedInAdaptiveModeCoursesIDs.contains(course.id)
+                }
+                return nil
+            }()
+            AnalyticsEvent.submissionCreated(reply, self.step, submission, isAdaptive: isAdaptive).report()
 
             self.submissionsCount += 1
             self.currentSubmission = submission
@@ -318,10 +328,11 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         case unknownUser
     }
 
+    // FIXME: analytics dependency
     private enum AnalyticsEvent {
         case newAttempt
         case submissionSubmit
-        case submissionCreated(Reply, Step)
+        case submissionCreated(Reply, Step, Submission, isAdaptive: Bool?)
 
         func report() {
             switch self {
@@ -329,26 +340,41 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
             case .submissionSubmit:
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
-            case .submissionCreated(let reply, let step):
+            case .submissionCreated(let reply, let step, let submission, let isAdaptive):
                 AnalyticsUserProperties.shared.incrementSubmissionsCount()
                 if let codeReply = reply as? CodeReply {
                     AnalyticsReporter.reportEvent(
                         AnalyticsEvents.Step.Submission.created,
-                        parameters: ["type": step.block.name, "language": codeReply.languageName]
+                        parameters: [
+                            "type": step.block.name,
+                            "language": codeReply.languageName,
+                            "step": step.id,
+                            "submission": submission.id,
+                            "is_adaptive": isAdaptive as Any
+                        ]
                     )
                     AmplitudeAnalyticsEvents.Steps.submissionMade(
-                        step: step.id,
+                        stepID: step.id,
+                        submissionID: submission.id,
                         type: step.block.name,
+                        isAdaptive: isAdaptive,
                         language: codeReply.languageName
                     ).send()
                 } else {
                     AnalyticsReporter.reportEvent(
                         AnalyticsEvents.Step.Submission.created,
-                        parameters: ["type": step.block.name]
+                        parameters: [
+                            "type": step.block.name,
+                            "step": step.id,
+                            "submission": submission.id,
+                            "is_adaptive": isAdaptive as Any
+                        ]
                     )
                     AmplitudeAnalyticsEvents.Steps.submissionMade(
-                        step: step.id,
-                        type: step.block.name
+                        stepID: step.id,
+                        submissionID: submission.id,
+                        type: step.block.name,
+                        isAdaptive: isAdaptive
                     ).send()
                 }
             }
