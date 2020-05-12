@@ -33,7 +33,7 @@ enum NewProfile {
         struct Request {}
     }
 
-    /// Update navigation bar button items.
+    /// Update navigation bar button items
     enum NavigationControlsPresentation {
         struct Response {
             let shoouldPresentSettings: Bool
@@ -53,6 +53,19 @@ enum NewProfile {
         struct Response {}
 
         struct ViewModel {}
+    }
+
+    /// Share profile
+    enum ProfileShareAction {
+        struct Request {}
+
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let urlPath: String
+        }
     }
 
     // MARK: States

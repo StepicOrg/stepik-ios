@@ -4,6 +4,7 @@ protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel)
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel)
+    func displayProfileSharing(viewModel: NewProfile.ProfileShareAction.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -107,6 +108,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     @objc
     private func shareButtonClicked() {
+        self.interactor.doProfileShareAction(request: .init())
     }
 
     @objc
@@ -175,5 +177,11 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
 
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
+
+    func displayProfileSharing(viewModel: NewProfile.ProfileShareAction.ViewModel) {
+        let sharingViewController = SharingHelper.getSharingController(viewModel.urlPath)
+        sharingViewController.popoverPresentationController?.barButtonItem = self.shareButton
+        self.present(module: sharingViewController)
     }
 }

@@ -4,6 +4,7 @@ protocol NewProfilePresenterProtocol {
     func presentProfile(response: NewProfile.ProfileLoad.Response)
     func presentNavigationControls(response: NewProfile.NavigationControlsPresentation.Response)
     func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response)
+    func presentProfileSharing(response: NewProfile.ProfileShareAction.Response)
 }
 
 final class NewProfilePresenter: NewProfilePresenterProtocol {
@@ -37,6 +38,11 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
     func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response) {
         self.viewController?.displayAuthorization(viewModel: .init())
+    }
+
+    func presentProfileSharing(response: NewProfile.ProfileShareAction.Response) {
+        let urlPath = "\(StepikApplicationsInfo.stepikURL)/users/\(response.userID)"
+        self.viewController?.displayProfileSharing(viewModel: .init(urlPath: urlPath))
     }
 
     // MARK: Private API

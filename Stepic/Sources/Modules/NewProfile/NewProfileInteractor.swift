@@ -4,6 +4,7 @@ import PromiseKit
 protocol NewProfileInteractorProtocol {
     func doProfileRefresh(request: NewProfile.ProfileLoad.Request)
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request)
+    func doProfileShareAction(request: NewProfile.ProfileShareAction.Request)
 }
 
 final class NewProfileInteractor: NewProfileInteractorProtocol {
@@ -111,6 +112,14 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         } else if self.isCurrentUserProfile {
             self.handleCurrentUserProfileStateCornerCases()
         }
+    }
+
+    func doProfileShareAction(request: NewProfile.ProfileShareAction.Request) {
+        guard let currentUser = self.currentUser else {
+            return
+        }
+
+        self.presenter.presentProfileSharing(response: .init(userID: currentUser.id))
     }
 
     // MARK: Private API
