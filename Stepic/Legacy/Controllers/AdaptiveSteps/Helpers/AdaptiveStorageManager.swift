@@ -11,6 +11,9 @@ import Foundation
 protocol AdaptiveStorageManagerProtocol: AnyObject {
     var isAdaptiveModeEnabled: Bool { get set }
     var isAdaptiveOnboardingPassed: Bool { get set }
+
+    var supportedInAdaptiveModeCoursesIDs: [Course.IdType] { get }
+
     func canOpenInAdaptiveMode(courseId: Int) -> Bool
 }
 
@@ -44,6 +47,8 @@ final class AdaptiveStorageManager: AdaptiveStorageManagerProtocol {
             defaults.set(newValue, forKey: adaptiveOnboardingPassedKey)
         }
     }
+
+    var supportedInAdaptiveModeCoursesIDs: [Course.IdType] { RemoteConfig.shared.supportedInAdaptiveModeCourses }
 
     func canOpenInAdaptiveMode(courseId: Int) -> Bool {
         let adaptiveSupportedCourses = self.isAdaptiveModeEnabled ? RemoteConfig.shared.supportedInAdaptiveModeCourses : []
