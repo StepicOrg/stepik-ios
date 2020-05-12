@@ -221,24 +221,11 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
     }
 
     func displaySelectSolution(viewModel: WriteComment.SelectSolution.ViewModel) {
-        let (modalPresentationStyle, navigationBarAppearance) = {
-            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
-            if #available(iOS 13.0, *) {
-                return (
-                    .automatic,
-                    .init(
-                        statusBarColor: .clear,
-                        statusBarStyle: .lightContent
-                    )
-                )
-            } else {
-                return (.fullScreen, .init())
-            }
-        }()
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
         let assembly = SubmissionsAssembly(
             stepID: viewModel.stepID,
-            navigationBarAppearance: navigationBarAppearance,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())

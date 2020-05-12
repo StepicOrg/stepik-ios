@@ -969,6 +969,16 @@ EditStepMessage = "Вы можете редактировать только т�
 EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
 EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 
+/* New profile */
+NewProfileRatingReputation = "Репутация %@";
+NewProfileRatingKnowledge = "Знания %@";
+NewProfileRatingCertificates1 = "%@ сертификат";
+NewProfileRatingCertificates234 = "%@ сертификата";
+NewProfileRatingCertificates567890 = "%@ сертификатов";
+NewProfileRatingCourses1 = "%@ курс";
+NewProfileRatingCourses234 = "%@ курса";
+NewProfileRatingCourses567890 = "%@ курсов";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";
