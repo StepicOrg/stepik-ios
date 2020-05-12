@@ -408,30 +408,15 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     }
 
     private func presentSubmissions(stepID: Step.IdType) {
-        // TODO: Find a better way for page sheet modal presentation.
-        let (modalPresentationStyle, navigationBarAppearance) = {
-            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
-            if #available(iOS 13.0, *) {
-                return (
-                    .automatic,
-                    .init(
-                        statusBarColor: .clear,
-                        statusBarStyle: .lightContent
-                    )
-                )
-            } else {
-                return (.fullScreen, .init())
-            }
-        }()
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
-        let assembly = SubmissionsAssembly(stepID: stepID, navigationBarAppearance: navigationBarAppearance)
-        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
-
-        self.present(
-            module: navigationController,
-            embedInNavigation: false,
-            modalPresentationStyle: modalPresentationStyle
+        let assembly = SubmissionsAssembly(
+            stepID: stepID,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
         )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 }
 
@@ -537,33 +522,16 @@ extension LessonViewController: LessonViewControllerProtocol {
     }
 
     func displayEditStep(viewModel: LessonDataFlow.EditStepPresentation.ViewModel) {
-        let (modalPresentationStyle, navigationBarAppearance) = {
-            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
-            if #available(iOS 13.0, *) {
-                return (
-                    .automatic,
-                    .init(
-                        statusBarColor: .clear,
-                        statusBarStyle: .lightContent
-                    )
-                )
-            } else {
-                return (.fullScreen, .init())
-            }
-        }()
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
         let assembly = EditStepAssembly(
             stepID: viewModel.stepID,
-            navigationBarAppearance: navigationBarAppearance,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? EditStepOutputProtocol
         )
-        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        self.present(
-            module: navigationController,
-            embedInNavigation: false,
-            modalPresentationStyle: modalPresentationStyle
-        )
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel) {

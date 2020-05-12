@@ -425,6 +425,7 @@
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		2C2B626821B1660600E22E88 /* NotificationAlertsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */; };
+		2C2C4D91246B485400CF759D /* UIModalPresentationStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */; };
 		2C2EA36B212D5FEF002116C9 /* StepikResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA36A212D5FEF002116C9 /* StepikResult.swift */; };
 		2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
@@ -1670,6 +1671,7 @@
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C26BF09240810A3000EE23C /* AttemptsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsRepository.swift; sourceTree = "<group>"; };
+		2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIModalPresentationStyle+Fallback.swift"; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
 		2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_can_edit.xcdatamodel; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
@@ -2622,6 +2624,7 @@
 				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
 				2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */,
 				08DE94381B8E3FCE00D278AB /* UIColor+Hex.swift */,
+				2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */,
 				62E980371A0458D70C61D357 /* UIStackView+RemoveAllArrangedSubviews.swift */,
 				2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */,
 				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
@@ -7240,6 +7243,7 @@
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				2CB37E6623902BB80050D85E /* StorageUsageService.swift in Sources */,
+				2C2C4D91246B485400CF759D /* UIModalPresentationStyle+Fallback.swift in Sources */,
 				2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */,

@@ -104,25 +104,12 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     }
 
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel) {
-        let (modalPresentationStyle, navigationBarAppearance) = {
-            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
-            if #available(iOS 13.0, *) {
-                return (
-                    .automatic,
-                    navigationBarAppearance: .init(
-                        statusBarColor: .clear,
-                        statusBarStyle: .lightContent
-                    )
-                )
-            } else {
-                return (.fullScreen, .init())
-            }
-        }()
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
         let assembly = WriteCourseReviewAssembly(
             courseID: viewModel.courseID,
             courseReview: viewModel.review,
-            navigationBarAppearance: navigationBarAppearance,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? WriteCourseReviewOutputProtocol
         )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())

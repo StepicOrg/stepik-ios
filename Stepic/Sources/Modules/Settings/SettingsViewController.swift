@@ -81,7 +81,7 @@ final class SettingsViewController: UIViewController {
 
     private func setupNavigationItem() {
         self.title = NSLocalizedString("SettingsTitle", comment: "")
-        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 

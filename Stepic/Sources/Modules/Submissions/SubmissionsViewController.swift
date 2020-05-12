@@ -78,7 +78,7 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
     private func setup() {
         self.title = NSLocalizedString("SubmissionsTitle", comment: "")
-        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
 
         self.tableDataSource.delegate = self
 

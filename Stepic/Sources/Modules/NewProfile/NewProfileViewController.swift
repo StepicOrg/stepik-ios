@@ -100,10 +100,15 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     @objc
     private func settingsButtonClicked() {
-        let assembly = SettingsAssembly(moduleOutput: nil)
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = SettingsAssembly(
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
+            moduleOutput: self.interactor as? SettingsOutputProtocol
+        )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        self.present(module: controller, modalPresentationStyle: .pageSheet)
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     @objc
