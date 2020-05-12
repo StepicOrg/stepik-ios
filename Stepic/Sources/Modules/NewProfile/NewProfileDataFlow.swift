@@ -68,6 +68,19 @@ enum NewProfile {
         }
     }
 
+    /// Edit profile
+    enum ProfileEditAction {
+        struct Request {}
+
+        struct Response {
+            let profile: Profile
+        }
+
+        struct ViewModel {
+            let profile: Profile
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

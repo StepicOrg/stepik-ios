@@ -5,6 +5,7 @@ protocol NewProfileInteractorProtocol {
     func doProfileRefresh(request: NewProfile.ProfileLoad.Request)
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request)
     func doProfileShareAction(request: NewProfile.ProfileShareAction.Request)
+    func doProfileEditAction(request: NewProfile.ProfileEditAction.Request)
 }
 
 final class NewProfileInteractor: NewProfileInteractorProtocol {
@@ -115,11 +116,15 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     }
 
     func doProfileShareAction(request: NewProfile.ProfileShareAction.Request) {
-        guard let currentUser = self.currentUser else {
-            return
+        if let currentUser = self.currentUser {
+            self.presenter.presentProfileSharing(response: .init(userID: currentUser.id))
         }
+    }
 
-        self.presenter.presentProfileSharing(response: .init(userID: currentUser.id))
+    func doProfileEditAction(request: NewProfile.ProfileEditAction.Request) {
+        if let currentProfile = self.currentProfile {
+            self.presenter.presentProfileEditing(response: .init(profile: currentProfile))
+        }
     }
 
     // MARK: Private API

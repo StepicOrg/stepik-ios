@@ -5,6 +5,7 @@ protocol NewProfileViewControllerProtocol: AnyObject {
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel)
     func displayProfileSharing(viewModel: NewProfile.ProfileShareAction.ViewModel)
+    func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -118,6 +119,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     @objc
     private func profileEditButtonClicked() {
+        self.interactor.doProfileEditAction(request: .init())
     }
 
     private func updateState(newState: NewProfile.ViewControllerState) {
@@ -188,5 +190,17 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
         let sharingViewController = SharingHelper.getSharingController(viewModel.urlPath)
         sharingViewController.popoverPresentationController?.barButtonItem = self.shareButton
         self.present(module: sharingViewController)
+    }
+
+    func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel) {
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = ProfileEditAssembly(
+            profile: viewModel.profile,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 }
