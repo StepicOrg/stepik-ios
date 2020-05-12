@@ -52,14 +52,18 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
     }
 
     private func makeHeaderViewModel(user: User) -> NewProfileHeaderViewModel {
+        let username = user.fullName.isEmpty ? "User \(user.id)" : user.fullName
         let shortBio = user.bio.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let reputationCount = user.reputation > 0 ? user.reputation : nil
+        let knowledgeCount = user.knowledge > 0 ? user.knowledge : nil
 
         return NewProfileHeaderViewModel(
             avatarURL: URL(string: user.avatarURL),
-            username: user.fullName,
+            username: username,
             shortBio: shortBio,
-            reputationCount: user.reputation,
-            knowledgeCount: user.knowledge
+            reputationCount: reputationCount,
+            knowledgeCount: knowledgeCount
         )
     }
 }

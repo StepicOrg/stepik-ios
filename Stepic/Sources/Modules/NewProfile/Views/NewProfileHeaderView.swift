@@ -99,7 +99,9 @@ final class NewProfileHeaderView: UIView {
         }
 
         self.usernameLabel.text = viewModel.username
+
         self.shortBioLabel.text = viewModel.shortBio
+        self.shortBioLabel.isHidden = viewModel.shortBio.isEmpty
 
         if let reputationCount = viewModel.reputationCount {
             self.reputationRatingView.number = reputationCount
@@ -150,7 +152,7 @@ extension NewProfileHeaderView: ProgrammaticallyInitializableViewProtocol {
             make.leading
                 .equalTo(self.avatarImageView.snp.trailing)
                 .offset(self.appearance.infoStackViewInsets.left)
-            make.bottom.equalToSuperview().offset(-self.appearance.infoStackViewInsets.bottom)
+            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.infoStackViewInsets.bottom)
             make.trailing.equalToSuperview().offset(-self.appearance.infoStackViewInsets.right)
         }
     }
