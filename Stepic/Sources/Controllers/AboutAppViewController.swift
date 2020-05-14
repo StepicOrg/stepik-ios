@@ -127,7 +127,7 @@ final class AboutAppViewController: UIViewController {
             switch self {
             case .socialNetworkClicked(let socialNetwork):
                 AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                    AnalyticsEvents.Settings.socialNetworkClick,
                     parameters: ["social": socialNetwork.rawValue]
                 )
             }

@@ -47,18 +47,6 @@ struct AnalyticsEvents {
         static let success = "success_login"
     }
 
-    // MARK: - Syllabus -
-
-    struct Syllabus {
-        static let shared = "share_syllabus_clicked"
-    }
-
-    // MARK: - Units -
-
-    struct Units {
-        static let shared = "share_units_clicked"
-    }
-
     // MARK: - Search -
 
     struct Search {
@@ -93,7 +81,7 @@ struct AnalyticsEvents {
 
     struct Course {
         static let shared = "share_course_clicked"
-        static let delete = "clicked_delete_cached_course"
+        static let delete = "clicked_delete_cached_course" // TODO: Duplicates AmplitudeAnalyticsEvents.Downloads.deleted
 
         struct JoinPressed {
             static let anonymous = "join_course_anonymous"
@@ -106,9 +94,10 @@ struct AnalyticsEvents {
         }
 
         struct Downloads {
-            static let deleted = "clicked_delete_cached_course"
+            static let deleted = "clicked_delete_cached_course" // TODO: Duplicates AmplitudeAnalyticsEvents.Downloads.deleted
         }
 
+        // TODO: Duplicates AmplitudeAnalyticsEvents.CourseReviews
         struct Reviews {
             static let opened = "course_reviews_screen_opened"
             static let clickedCreate = "create_course_review_pressed"
@@ -184,12 +173,9 @@ struct AnalyticsEvents {
 
     struct Tabs {
         static let myCoursesClicked = "main_choice_my_courses"
-        static let findCoursesClicked = "main_choice_find_courses"
-        static let downloadsClicked = "main_choice_downloads"
-        static let certificatesClicked = "main_choice_certificates"
+        static let catalogClicked = "main_choice_catalog"
         static let profileClicked = "main_choice_profile"
         static let notificationsClicked = "main_choice_notifications"
-        static let catalogClicked = "main_choice_catalog"
     }
 
     // MARK: - Streaks -
@@ -199,34 +185,21 @@ struct AnalyticsEvents {
         static let preferencesOff = "streak_notification_pref_off"
 
         static func notifySuggestionShown(source: String, trigger: String) -> String {
-            return "streak_suggestion_shown_source_\(source)_trigger_\(trigger)"
+            "streak_suggestion_shown_source_\(source)_trigger_\(trigger)"
         }
 
         static func notifySuggestionApproved(source: String, trigger: String) -> String {
-            return "streak_suggestion_approved_source_\(source)_trigger_\(trigger)"
+            "streak_suggestion_approved_source_\(source)_trigger_\(trigger)"
         }
 
         struct Suggestion {
             static func fail(_ index: Int) -> String {
-                return "streak_suggestion_\(index)_fail"
+                "streak_suggestion_\(index)_fail"
             }
 
             static func success(_ index: Int) -> String {
-                return "streak_suggestion_\(index)_success"
+                "streak_suggestion_\(index)_success"
             }
-        }
-
-        static let notificationOpened = "streak_notification_opened"
-
-        struct LocalNotification {
-            static let shown = "streak_local_notification_shown"
-            static let opened = "streak_local_notification_opened"
-        }
-
-        struct ImproveAlert {
-            static let notificationOffered = "streak_improve_alert_notifications_offered"
-            static let timeSelected = "streak_improve_alert_time_selected"
-            static let timeCancelled = "streak_improve_alert_time_cancelled"
         }
     }
 
@@ -283,28 +256,6 @@ struct AnalyticsEvents {
         static let shared = "certificates_pressed_share_certificate"
     }
 
-    // MARK: - PeekNPop -
-
-    struct PeekNPop {
-        struct Course {
-            static let peeked = "3dtouch_course_peeked"
-            static let popped = "3dtouch_course_popped"
-            static let shared = "3dtouch_course_shared"
-        }
-
-        struct Section {
-            static let peeked = "3dtouch_section_peeked"
-            static let popped = "3dtouch_section_popped"
-            static let shared = "3dtouch_section_shared"
-        }
-
-        struct Lesson {
-            static let peeked = "3dtouch_lesson_peeked"
-            static let popped = "3dtouch_lesson_popped"
-            static let shared = "3dtouch_lesson_shared"
-        }
-    }
-
     // MARK: - Code -
 
     struct Code {
@@ -321,10 +272,6 @@ struct AnalyticsEvents {
     struct Profile {
         static let clickSettings = "main_choice_settings"
         static let interactionWithPinsMap = "pins_map_interaction"
-
-        struct Settings {
-            static let socialNetworkClick = "settings_click_social_network"
-        }
     }
 
     // MARK: - Notifications -
@@ -338,15 +285,15 @@ struct AnalyticsEvents {
 
     struct NotificationRequest {
         static func shown(context: NotificationRequestAlertContext) -> String {
-            return "notification_alert_context_\(context.rawValue)_shown"
+            "notification_alert_context_\(context.rawValue)_shown"
         }
 
         static func accepted(context: NotificationRequestAlertContext) -> String {
-            return "notification_alert_context_\(context.rawValue)_accepted"
+            "notification_alert_context_\(context.rawValue)_accepted"
         }
 
         static func rejected(context: NotificationRequestAlertContext) -> String {
-            return "notification_alert_context_\(context.rawValue)_rejected"
+            "notification_alert_context_\(context.rawValue)_rejected"
         }
     }
 
@@ -380,12 +327,6 @@ struct AnalyticsEvents {
     // MARK: - PersonalDeadlines -
 
     struct PersonalDeadlines {
-        struct Widget {
-            static let shown = "personal_deadlines_widget_shown"
-            static let clicked = "personal_deadlines_widget_clicked"
-            static let hidden = "personal_deadlines_widget_hidden"
-        }
-
         struct Mode {
             static let opened = "personal_deadline_mode_opened"
             static let chosen = "personal_deadline_mode_chosen"
@@ -403,12 +344,12 @@ struct AnalyticsEvents {
         }
 
         static let deleted = "personal_deadline_deleted"
-        static let notSupportedNotification = "personal_deadline_not_supported_notification_scheduled"
     }
 
     // MARK: - Settings -
 
     struct Settings {
         static let stepFontSizeSelected = "font_size_selected"
+        static let socialNetworkClick = "settings_click_social_network"
     }
 }

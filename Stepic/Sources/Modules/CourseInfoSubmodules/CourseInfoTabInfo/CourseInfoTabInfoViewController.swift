@@ -116,6 +116,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
     func courseInfoTabInfoIntroVideoBlockViewPlayClicked(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Course.Video.clicked, parameters: nil)
         self.playerViewController.player?.play()
     }
 }

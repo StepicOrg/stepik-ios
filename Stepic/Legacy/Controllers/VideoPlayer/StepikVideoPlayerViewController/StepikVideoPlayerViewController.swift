@@ -230,6 +230,8 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.setupObservers()
         self.setupGestureRecognizers()
         self.addAccessibilitySupport()
+
+        AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

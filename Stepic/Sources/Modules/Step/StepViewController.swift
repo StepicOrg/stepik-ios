@@ -460,7 +460,6 @@ extension StepViewController: StepViewDelegate {
             self.present(alert, animated: true, completion: nil)
         } else if isVideoCached || isVideoPlayingReachable {
             let assembly = StepikVideoPlayerLegacyAssembly(video: video, delegate: self)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
             self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
         }
     }

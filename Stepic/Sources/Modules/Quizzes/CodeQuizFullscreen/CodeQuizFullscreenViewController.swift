@@ -132,6 +132,11 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.exitFullscreen, parameters: nil)
+    }
+
     // MARK: Private API
 
     private func loadTabViewControllerIfNeeded(at index: Int) {

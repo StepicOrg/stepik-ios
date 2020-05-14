@@ -373,15 +373,6 @@ struct AmplitudeAnalyticsEvents {
 
     struct CourseList {
         static var showAllClicked = AnalyticsEvent(name: "Course list show all clicked")
-
-        static func opened(ID: String) -> AnalyticsEvent {
-            AnalyticsEvent(
-                name: "Course list opened",
-                parameters: [
-                    "list_id": ID
-                ]
-            )
-        }
     }
 
     // MARK: - Profile -
@@ -478,19 +469,6 @@ struct AmplitudeAnalyticsEvents {
                 parameters: [
                     "course": courseID,
                     "title": courseTitle
-                ]
-            )
-        }
-    }
-
-    // MARK: - Lessons -
-
-    struct Lessons {
-        static func opened(sectionID: Int?) -> AnalyticsEvent {
-            AnalyticsEvent(
-                name: "Lessons screen opened",
-                parameters: [
-                    "section": sectionID as Any
                 ]
             )
         }
@@ -613,7 +591,9 @@ struct AmplitudeAnalyticsEvents {
         }
 
         enum StoryCloseType: String {
-            case cross, swipe, automatic
+            case cross
+            case swipe
+            case automatic
         }
 
         static func storyClosed(id: Int, type: StoryCloseType) -> AnalyticsEvent {

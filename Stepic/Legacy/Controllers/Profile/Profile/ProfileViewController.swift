@@ -257,6 +257,8 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
     @objc
     private func settingsButtonClicked() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.clickSettings, parameters: nil)
+
         let (modalPresentationStyle, navigationBarAppearance) = {
             () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
             if #available(iOS 13.0, *) {

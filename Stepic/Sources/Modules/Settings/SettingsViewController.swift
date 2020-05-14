@@ -536,8 +536,10 @@ extension SettingsViewController: SettingsViewDelegate {
     // MARK: Private Helpers
 
     private func handleDeleteAllContentAction() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.clear, parameters: nil)
         self.requestDeleteAllContent { [weak self] granted in
             if granted {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.acceptedClear, parameters: nil)
                 self?.interactor.doDeleteAllContent(request: .init())
             }
         }
@@ -573,6 +575,7 @@ extension SettingsViewController: SettingsViewDelegate {
     }
 
     private func handleLogOutAction() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
         self.requestLogOut { [weak self] granted in
             if granted {
                 self?.interactor.doAccountLogOut(request: .init())

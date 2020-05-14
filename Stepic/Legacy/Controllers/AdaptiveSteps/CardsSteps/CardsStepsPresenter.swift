@@ -211,6 +211,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 lastOnboardingStep = stepIndex + 1
                 return
             } else {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.onboardingFinished, parameters: nil)
                 storageManager.isAdaptiveOnboardingPassed = true
             }
         }

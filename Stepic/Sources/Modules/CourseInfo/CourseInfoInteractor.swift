@@ -143,10 +143,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
-        guard let urlPath = self.courseWebURLPath else {
-            return
+        if let urlPath = self.courseWebURLPath {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Course.shared, parameters: nil)
+            self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
         }
-        self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
     }
 
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request) {
@@ -186,6 +186,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         if !self.userAccountService.isAuthorized {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Course.JoinPressed.anonymous, parameters: nil)
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.presenter.presentAuthorization(response: .init())
             return
@@ -212,6 +213,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 return
             }
 
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Course.JoinPressed.signed, parameters: nil)
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course
