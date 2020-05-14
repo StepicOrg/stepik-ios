@@ -468,6 +468,7 @@
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
 		2C5BE9DC233C0A110098EB2F /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BE9DB233C0A100098EB2F /* katex */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
+		2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */; };
 		2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
 		2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */; };
 		2C5DF13F1FED26AC003B1177 /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */; };
@@ -1714,6 +1715,7 @@
 		2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_limits.xcdatamodel; sourceTree = "<group>"; };
 		2C5BE9DB233C0A100098EB2F /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
+		2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikLabelBarButton.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepViewController.swift; sourceTree = "<group>"; };
@@ -5534,6 +5536,7 @@
 				2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */,
 				62E988C4DC97F14EAC09BC41 /* TabSegmentedControlView.swift */,
 				2CFF8FFE242A22DF00FD7311 /* ContinueLastStepView */,
+				62E989892C62C2BC2B1A3741 /* TabBar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5767,6 +5770,7 @@
 		62E989892C62C2BC2B1A3741 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */,
 				62E98F27ECFF032C2EBEAB86 /* StepTabBarButton.swift */,
 			);
 			path = TabBar;
@@ -6026,7 +6030,6 @@
 			isa = PBXGroup;
 			children = (
 				62E981BEC2228F4ED6ED7283 /* LessonInfoTooltipView.swift */,
-				62E989892C62C2BC2B1A3741 /* TabBar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -7416,6 +7419,7 @@
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
 				088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
+				2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */,
 				08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
@@ -8325,7 +8329,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 207;
+				CURRENT_PROJECT_VERSION = 209;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -8355,7 +8359,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 207;
+				CURRENT_PROJECT_VERSION = 209;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;

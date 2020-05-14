@@ -14,9 +14,6 @@ final class UserCoursesViewController: TabmanViewController {
         static let barTintColor = UIColor.stepikAccent
         static let barBackgroundColor = UIColor.stepikNavigationBarBackground
         static let barSeparatorColor = UIColor.stepikOpaqueSeparator
-        static let barButtonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
-        static let barButtonTitleFontSelected = UIFont.systemFont(ofSize: 15)
-        static let barButtonTitleColor = UIColor.stepikPrimaryText
 
         static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
             .init(shadowViewAlpha: 0.0)
@@ -24,7 +21,7 @@ final class UserCoursesViewController: TabmanViewController {
     }
 
     private lazy var tabBarView: TMBar = {
-        let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMLineBarIndicator>()
+        let bar = TMBarView<TMHorizontalBarLayout, StepikLabelBarButton, TMLineBarIndicator>()
         bar.layout.transitionStyle = .snap
         bar.tintColor = Appearance.barTintColor
         bar.backgroundView.style = .flat(color: Appearance.barBackgroundColor)
@@ -32,13 +29,6 @@ final class UserCoursesViewController: TabmanViewController {
         bar.indicator.weight = .light
         bar.layout.interButtonSpacing = 0
         bar.layout.contentMode = .fit
-
-        bar.buttons.customize { labelBarButton in
-            labelBarButton.font = Appearance.barButtonTitleFontNormal
-            labelBarButton.selectedFont = Appearance.barButtonTitleFontSelected
-            labelBarButton.tintColor = Appearance.barButtonTitleColor
-            labelBarButton.selectedTintColor = Appearance.barButtonTitleColor
-        }
 
         let separatorView = UIView()
         separatorView.backgroundColor = Appearance.barSeparatorColor

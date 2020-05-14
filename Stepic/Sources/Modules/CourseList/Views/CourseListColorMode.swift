@@ -122,7 +122,11 @@ extension CourseListColorMode {
         case .light:
             return .dynamic(light: .stepikGrey8Fixed, dark: .stepikSeparator)
         case .dark:
-            return .stepikSeparator
+            if #available(iOS 13.0, *) {
+                return .stepikSeparator
+            } else {
+                return UIColor.stepikOpaqueSeparator.withAlphaComponent(0.6)
+            }
         }
     }
 }

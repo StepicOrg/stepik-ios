@@ -35,7 +35,7 @@ final class User: NSManagedObject, IDFetchable {
         self.isPrivate = json[JSONKey.isPrivate.rawValue].boolValue
         self.isOrganization = json[JSONKey.isOrganization.rawValue].boolValue
         self.bio = json[JSONKey.shortBio.rawValue].stringValue
-        self.details = json[JSONKey.shortBio.rawValue].stringValue
+        self.details = json[JSONKey.details.rawValue].stringValue
         self.firstName = json[JSONKey.firstName.rawValue].stringValue
         self.lastName = json[JSONKey.lastName.rawValue].stringValue
         self.avatarURL = json[JSONKey.avatar.rawValue].stringValue

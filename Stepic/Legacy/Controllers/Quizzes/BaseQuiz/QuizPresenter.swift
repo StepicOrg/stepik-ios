@@ -352,12 +352,47 @@ final class QuizPresenter {
                 AnalyticsUserProperties.shared.incrementSubmissionsCount()
                 strongSelf.submissionsCount = (strongSelf.submissionsCount ?? 0) + 1
 
+                let isAdaptive: Bool? = {
+                    if let course = LastStepGlobalContext.context.course {
+                        return AdaptiveStorageManager().supportedInAdaptiveModeCoursesIDs.contains(course.id)
+                    }
+                    return nil
+                }()
+
                 if let codeReply = reply as? CodeReply {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": strongSelf.step.block.name, "language": codeReply.languageName])
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: strongSelf.step.id, type: strongSelf.step.block.name, language: codeReply.languageName).send()
+                    AnalyticsReporter.reportEvent(
+                        AnalyticsEvents.Step.Submission.created,
+                        parameters: [
+                            "type": strongSelf.step.block.name,
+                            "language": codeReply.languageName,
+                            "step": strongSelf.step.id,
+                            "submission": submission.id,
+                            "is_adaptive": isAdaptive as Any
+                        ]
+                    )
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(
+                        stepID: strongSelf.step.id,
+                        submissionID: submission.id,
+                        type: strongSelf.step.block.name,
+                        isAdaptive: isAdaptive,
+                        language: codeReply.languageName
+                    ).send()
                 } else {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.created, parameters: ["type": strongSelf.step.block.name])
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(step: strongSelf.step.id, type: strongSelf.step.block.name).send()
+                    AnalyticsReporter.reportEvent(
+                        AnalyticsEvents.Step.Submission.created,
+                        parameters: [
+                            "type": strongSelf.step.block.name,
+                            "step": strongSelf.step.id,
+                            "submission": submission.id,
+                            "is_adaptive": isAdaptive as Any
+                        ]
+                    )
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(
+                        stepID: strongSelf.step.id,
+                        submissionID: submission.id,
+                        type: strongSelf.step.block.name,
+                        isAdaptive: isAdaptive
+                    ).send()
                 }
 
                 strongSelf.submission = submission
