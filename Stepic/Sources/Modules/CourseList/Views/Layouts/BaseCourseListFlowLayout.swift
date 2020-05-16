@@ -41,7 +41,6 @@ class BaseListFlowLayout: UICollectionViewFlowLayout {
         }
     }
 
-    // swiftlint:disable:next discouraged_optional_collection
     override func layoutAttributesForElements(
         in rect: CGRect
     ) -> [UICollectionViewLayoutAttributes]? {

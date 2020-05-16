@@ -2556,9 +2556,6 @@
 		2C0176C32188A49100DDB9D0 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				62E989FEFDC26A706157D1AB /* Analytics.swift */,
-				62E9862EB4009EE8C9EB98E8 /* AnalyticsEngine.swift */,
-				62E98BDA7FFECA95F0389E12 /* AnalyticsEvent.swift */,
 				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
 				089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */,
 				2C99D087238967FD00078D2B /* Events */,
@@ -4011,6 +4008,16 @@
 			path = ConcreteManagers;
 			sourceTree = "<group>";
 		};
+		2CE03CD12470B018004FBFEA /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				62E989FEFDC26A706157D1AB /* Analytics.swift */,
+				62E9862EB4009EE8C9EB98E8 /* AnalyticsEngine.swift */,
+				62E98BDA7FFECA95F0389E12 /* AnalyticsEvent.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		2CE61D81241295F500DA2CBA /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -5253,6 +5260,7 @@
 		62E9835CAD3FB794FCA9C3DE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2CE03CD12470B018004FBFEA /* Analytics */,
 				2CD462E8226F424A004E4725 /* Common */,
 				62E98438A4F73FAEFB2D581B /* Controllers */,
 				62E986D974D797A3BDF8DA59 /* Extensions */,

@@ -18,17 +18,21 @@ protocol StreakNotificationsControlView: AnyObject {
 
 final class StreakNotificationsControlPresenter {
     weak var view: StreakNotificationsControlView?
+
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    private let analytics: Analytics
 
     init(
         view: StreakNotificationsControlView,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
             presenter: NotificationsRequestOnlySettingsAlertPresenter(context: .streak),
             analytics: .init(source: .streakControl)
-        )
+        ),
+        analytics: Analytics = StepikAnalytics.shared
     ) {
         self.view = view
         self.notificationsRegistrationService = notificationsRegistrationService
+        self.analytics = analytics
 
         NotificationCenter.default.addObserver(
             self,
@@ -74,7 +78,7 @@ final class StreakNotificationsControlPresenter {
         NotificationsService().scheduleStreakLocalNotification(
             UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC
         )
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
+        self.analytics.send(.streaksPreferencesOn)
 
         completion?(true)
     }
@@ -82,7 +86,7 @@ final class StreakNotificationsControlPresenter {
     private func turnOffNotifications() {
         NotificationsService().cancelStreakLocalNotifications()
         PreferencesContainer.notifications.allowStreaksNotifications = false
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOff, parameters: nil)
+        self.analytics.send(.streaksPreferencesOff)
     }
 
     private func checkPermissionStatus() {

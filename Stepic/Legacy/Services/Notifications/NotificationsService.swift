@@ -16,6 +16,7 @@ final class NotificationsService {
 
     private let localNotificationsService: LocalNotificationsService
     private let deepLinkRoutingService: DeepLinkRoutingService
+    private let analytics: Analytics
 
     private var isInForeground: Bool {
         UIApplication.shared.applicationState == .active
@@ -23,10 +24,12 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
+        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService(),
+        analytics: Analytics = StepikAnalytics.shared
     ) {
         self.localNotificationsService = localNotificationsService
         self.deepLinkRoutingService = deepLinkRoutingService
+        self.analytics = analytics
         self.addObservers()
     }
 
@@ -59,10 +62,12 @@ final class NotificationsService {
     }
 
     private func reportSessionStart(userInfo: NotificationUserInfo?) {
-        AmplitudeAnalyticsEvents.Launch.sessionStart(
-            notificationType: self.extractNotificationType(from: userInfo),
-            sinceLastSession: self.timeIntervalSinceLastActive
-        ).send()
+        self.analytics.send(
+            .launchSessionStart(
+                notificationType: self.extractNotificationType(from: userInfo),
+                sinceLastSession: self.timeIntervalSinceLastActive
+            )
+        )
     }
 
     enum NotificationType: String {
@@ -149,13 +154,9 @@ extension NotificationsService {
         if let notificationType = notificationType {
             switch UIApplication.shared.applicationState {
             case .active:
-                AmplitudeAnalyticsEvents.Notifications.receivedForeground(
-                    notificationType: notificationType
-                ).send()
+                self.analytics.send(.notificationsForegroundNotificationReceived(notificationType: notificationType))
             case .inactive:
-                AmplitudeAnalyticsEvents.Notifications.receivedInactive(
-                    notificationType: notificationType
-                ).send()
+                self.analytics.send(.notificationsInactiveNotificationReceived(notificationType: notificationType))
             case .background:
                 break
             @unknown default:

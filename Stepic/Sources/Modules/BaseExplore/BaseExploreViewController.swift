@@ -15,11 +15,13 @@ protocol SubmoduleType: UniqueIdentifiable {
 
 class BaseExploreViewController: UIViewController {
     let interactor: BaseExploreInteractorProtocol
+    let analytics: Analytics
     private var submodules: [Submodule] = []
     lazy var exploreView = self.view as? BaseExploreView
 
-    init(interactor: BaseExploreInteractorProtocol) {
+    init(interactor: BaseExploreInteractorProtocol, analytics: Analytics) {
         self.interactor = interactor
+        self.analytics = analytics
 
         super.init(nibName: nil, bundle: nil)
         self.registerForNotifications()

@@ -57,10 +57,13 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
 
     var currentPosition: Int
 
-    init(view: OpenedStoriesViewProtocol, stories: [Story], startPosition: Int) {
+    private let analytics: Analytics
+
+    init(view: OpenedStoriesViewProtocol, stories: [Story], startPosition: Int, analytics: Analytics) {
         self.view = view
         self.stories = stories
         self.currentPosition = startPosition
+        self.analytics = analytics
 
         NotificationCenter.default.addObserver(
             self,
@@ -79,7 +82,9 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     }
 
     func onSwipeDismiss() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: stories[currentPosition].id, type: .swipe).send()
+        if let story = self.stories[safe: self.currentPosition] {
+            self.analytics.send(.storiesStoryClosed(id: story.id, type: .swipe))
+        }
     }
 
     private func getModule(story: Story) -> UIViewController {

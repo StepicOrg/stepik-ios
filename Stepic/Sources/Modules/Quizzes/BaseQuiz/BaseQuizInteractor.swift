@@ -13,9 +13,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     weak var moduleOutput: BaseQuizOutputProtocol?
 
-    private let userService: UserAccountServiceProtocol
+    private let userAccountService: UserAccountServiceProtocol
     private let presenter: BaseQuizPresenterProtocol
     private let provider: BaseQuizProviderProtocol
+    private let analytics: Analytics
 
     // Legacy dependencies
     private let notificationSuggestionManager: NotificationSuggestionManager
@@ -39,16 +40,18 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         hasNextStep: Bool,
         presenter: BaseQuizPresenterProtocol,
         provider: BaseQuizProviderProtocol,
+        analytics: Analytics,
         notificationSuggestionManager: NotificationSuggestionManager,
         rateAppManager: RateAppManager,
-        userService: UserAccountServiceProtocol,
+        userAccountService: UserAccountServiceProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.step = step
         self.hasNextStep = hasNextStep
         self.presenter = presenter
         self.provider = provider
-        self.userService = userService
+        self.userAccountService = userAccountService
+        self.analytics = analytics
 
         self.notificationSuggestionManager = notificationSuggestionManager
         self.rateAppManager = rateAppManager
@@ -117,7 +120,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.presentSubmission(attempt: attempt, submission: evaluationSubmission)
 
         print("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
-        AnalyticsEvent.submissionSubmit.report()
+        self.analytics.send(.stepSubmissionSubmitClicked(parameters: nil))
 
         firstly {
             self.provider.createSubmission(for: self.step, attempt: attempt, reply: reply)
@@ -134,7 +137,18 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 }
                 return nil
             }()
-            AnalyticsEvent.submissionCreated(reply, self.step, submission, isAdaptive: isAdaptive).report()
+            let codeLanguageName: String? = (reply as? CodeReply)?.languageName
+
+            self.analytics.send(
+                .stepsSubmissionMade(
+                    stepID: self.step.id,
+                    submissionID: submission.id,
+                    blockName: self.step.block.name,
+                    isAdaptive: isAdaptive,
+                    codeLanguageName: codeLanguageName
+                )
+            )
+            AnalyticsUserProperties.shared.incrementSubmissionsCount()
 
             self.submissionsCount += 1
             self.currentSubmission = submission
@@ -176,7 +190,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             return false
         }
 
-        guard let userID = self.userService.currentUser?.id else {
+        guard let userID = self.userAccountService.currentUser?.id else {
             return false
         }
 
@@ -214,13 +228,13 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     private func fetchAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
-        guard let userID = self.userService.currentUser?.id else {
+        guard let userID = self.userAccountService.currentUser?.id else {
             return Promise(error: Error.unknownUser)
         }
 
         return firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
-                AnalyticsEvent.newAttempt.report()
+                self.analytics.send(.stepSubmissionGenerateNewAttemptClicked)
                 return self.provider.createAttempt(for: self.step)
             } else {
                 return self.provider
@@ -326,58 +340,5 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         case attemptFetchFailed
         case submissionFetchFailed
         case unknownUser
-    }
-
-    // FIXME: analytics dependency
-    private enum AnalyticsEvent {
-        case newAttempt
-        case submissionSubmit
-        case submissionCreated(Reply, Step, Submission, isAdaptive: Bool?)
-
-        func report() {
-            switch self {
-            case .newAttempt:
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
-            case .submissionSubmit:
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
-            case .submissionCreated(let reply, let step, let submission, let isAdaptive):
-                AnalyticsUserProperties.shared.incrementSubmissionsCount()
-                if let codeReply = reply as? CodeReply {
-                    AnalyticsReporter.reportEvent(
-                        AnalyticsEvents.Step.Submission.created,
-                        parameters: [
-                            "type": step.block.name,
-                            "language": codeReply.languageName,
-                            "step": step.id,
-                            "submission": submission.id,
-                            "is_adaptive": isAdaptive as Any
-                        ]
-                    )
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(
-                        stepID: step.id,
-                        submissionID: submission.id,
-                        type: step.block.name,
-                        isAdaptive: isAdaptive,
-                        language: codeReply.languageName
-                    ).send()
-                } else {
-                    AnalyticsReporter.reportEvent(
-                        AnalyticsEvents.Step.Submission.created,
-                        parameters: [
-                            "type": step.block.name,
-                            "step": step.id,
-                            "submission": submission.id,
-                            "is_adaptive": isAdaptive as Any
-                        ]
-                    )
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(
-                        stepID: step.id,
-                        submissionID: submission.id,
-                        type: step.block.name,
-                        isAdaptive: isAdaptive
-                    ).send()
-                }
-            }
-        }
     }
 }

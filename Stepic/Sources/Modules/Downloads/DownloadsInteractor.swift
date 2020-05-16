@@ -11,15 +11,18 @@ protocol DownloadsInteractorProtocol {
 final class DownloadsInteractor: DownloadsInteractorProtocol {
     private let presenter: DownloadsPresenterProtocol
     private let provider: DownloadsProviderProtocol
+    private let analytics: Analytics
 
     private var currentCachedCourses: [Course] = []
 
     init(
         presenter: DownloadsPresenterProtocol,
-        provider: DownloadsProviderProtocol
+        provider: DownloadsProviderProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
     }
 
     // MARK: - DownloadsInteractorProtocol
@@ -38,8 +41,7 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
             )
         }
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Course.Downloads.deleted, parameters: ["source": "downloads"])
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: .course, source: .downloads).send()
+        self.analytics.send(.downloadsDownloadDeleted(content: .course, source: .downloads))
 
         self.provider.deleteCachedCourses([course]).then {
             self.provider.fetchCachedCourses()

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
     private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
+    private lazy var analytics: Analytics = { StepikAnalytics.shared }()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -94,8 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
-            AmplitudeAnalyticsEvents.Launch.firstTime.send()
+            self.analytics.send(.applicationDidLaunchFirstTime)
         }
 
         if StepikApplicationsInfo.inAppUpdatesAvailable {
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.App.opened, parameters: nil)
+        self.analytics.send(.applicationDidBecomeActive)
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         self.notificationsService.removeRetentionNotifications()
     }

@@ -53,7 +53,8 @@ final class CourseInfoAssembly: Assembly {
             notificationSuggestionManager: NotificationSuggestionManager(),
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
-            dataBackUpdateService: dataBackUpdateService
+            dataBackUpdateService: dataBackUpdateService,
+            analytics: StepikAnalytics.shared
         )
         notificationsRegistrationService.delegate = interactor
 

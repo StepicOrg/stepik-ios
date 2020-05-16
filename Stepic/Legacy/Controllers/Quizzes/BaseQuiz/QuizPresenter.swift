@@ -319,7 +319,7 @@ final class QuizPresenter {
     private func submit() {
         //To view!!!!!!!!
 //        submissionPressedBlock?()
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: self.view?.submissionAnalyticsParams)
+        StepikAnalytics.shared.send(.stepSubmissionSubmitClicked(parameters: self.view?.submissionAnalyticsParams))
         if let reply = self.dataSource?.getReply() {
             self.view?.showLoading(visible: true)
             submit(reply: reply, completion: { [weak self] in
@@ -360,39 +360,24 @@ final class QuizPresenter {
                 }()
 
                 if let codeReply = reply as? CodeReply {
-                    AnalyticsReporter.reportEvent(
-                        AnalyticsEvents.Step.Submission.created,
-                        parameters: [
-                            "type": strongSelf.step.block.name,
-                            "language": codeReply.languageName,
-                            "step": strongSelf.step.id,
-                            "submission": submission.id,
-                            "is_adaptive": isAdaptive as Any
-                        ]
+                    StepikAnalytics.shared.send(
+                        .stepsSubmissionMade(
+                            stepID: strongSelf.step.id,
+                            submissionID: submission.id,
+                            blockName: strongSelf.step.block.name,
+                            isAdaptive: isAdaptive,
+                            codeLanguageName: codeReply.languageName
+                        )
                     )
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(
-                        stepID: strongSelf.step.id,
-                        submissionID: submission.id,
-                        type: strongSelf.step.block.name,
-                        isAdaptive: isAdaptive,
-                        language: codeReply.languageName
-                    ).send()
                 } else {
-                    AnalyticsReporter.reportEvent(
-                        AnalyticsEvents.Step.Submission.created,
-                        parameters: [
-                            "type": strongSelf.step.block.name,
-                            "step": strongSelf.step.id,
-                            "submission": submission.id,
-                            "is_adaptive": isAdaptive as Any
-                        ]
+                    StepikAnalytics.shared.send(
+                        .stepsSubmissionMade(
+                            stepID: strongSelf.step.id,
+                            submissionID: submission.id,
+                            blockName: strongSelf.step.block.name,
+                            isAdaptive: isAdaptive
+                        )
                     )
-                    AmplitudeAnalyticsEvents.Steps.submissionMade(
-                        stepID: strongSelf.step.id,
-                        submissionID: submission.id,
-                        type: strongSelf.step.block.name,
-                        isAdaptive: isAdaptive
-                    ).send()
                 }
 
                 strongSelf.submission = submission
@@ -416,7 +401,7 @@ final class QuizPresenter {
     private func retrySubmission() {
         view?.showLoading(visible: true)
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+        StepikAnalytics.shared.send(.stepSubmissionGenerateNewAttemptClicked)
 
         self.delegate?.submissionDidRetry()
 

@@ -50,6 +50,8 @@ final class NotificationsPresenter {
     private var hasNextPage = true
     private var displayedNotifications: NotificationViewDataStruct = []
 
+    private let analytics: Analytics
+
     private var section: NotificationsSection = .all
 
     // Store unread notifications count to pass it to analytics
@@ -62,6 +64,7 @@ final class NotificationsPresenter {
         notificationsStatusAPI: NotificationStatusesAPI,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
+        analytics: Analytics,
         view: NotificationsView
     ) {
         self.section = section
@@ -70,6 +73,7 @@ final class NotificationsPresenter {
         self.notificationsStatusAPI = notificationsStatusAPI
         self.notificationsRegistrationService = notificationsRegistrationService
         self.notificationSuggestionManager = notificationSuggestionManager
+        self.analytics = analytics
         self.view = view
 
         self.notificationsRegistrationService.delegate = self
@@ -328,7 +332,7 @@ final class NotificationsPresenter {
 
         notificationsAPI.markAllAsRead().done { _ in
             Notification.markAllAsRead()
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAllAsRead, parameters: ["badge": self.badgeUnreadCount])
+            self.analytics.send(.notificationsMarkAllAsReadClicked(badgeUnreadCount: self.badgeUnreadCount))
 
             NotificationCenter.default.post(name: .allNotificationsMarkedAsRead, object: self, userInfo: ["section": self.section])
             self.view?.updateMarkAllAsReadButton(with: .normal)

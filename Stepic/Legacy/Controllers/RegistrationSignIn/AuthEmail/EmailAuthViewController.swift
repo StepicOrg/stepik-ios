@@ -112,7 +112,7 @@ final class EmailAuthViewController: UIViewController {
     @IBAction func onLogInClick(_ sender: Any) {
         view.endEditing(true)
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
+        StepikAnalytics.shared.send(.signInClicked(interactionType: .button))
 
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -127,21 +127,27 @@ final class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithSocialClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onEmailAuth, parameters: nil)
+        StepikAnalytics.shared.send(.clickedSignInOnEmailAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .email(email: nil), to: .social)
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onEmailAuth, parameters: nil)
+        StepikAnalytics.shared.send(.clickedSignUpOnEmailAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .email(email: nil), to: .registration)
         }
     }
 
     @IBAction func onRemindPasswordClick(_ sender: Any) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepikApplicationsInfo.stepikURL)/accounts/password/reset/", inController: self, withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.done)
+        WebControllerManager.sharedManager.presentWebControllerWithURLString(
+            "\(StepikApplicationsInfo.stepikURL)/accounts/password/reset/",
+            inController: self,
+            withKey: "reset password",
+            allowsSafari: true,
+            backButtonStyle: BackButtonStyle.done
+        )
     }
 
     override func viewDidLoad() {
@@ -199,7 +205,7 @@ final class EmailAuthViewController: UIViewController {
 
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
+        StepikAnalytics.shared.send(.typingTextFieldsLogin)
 
         state = .normal
 
@@ -267,7 +273,7 @@ final class EmailAuthViewController: UIViewController {
 
 extension EmailAuthViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
+        StepikAnalytics.shared.send(.tapOnFieldsLogin)
         // 24 - default value in app (see AppDelegate), 60 - offset with button
         IQKeyboardManager.shared.keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
@@ -281,8 +287,8 @@ extension EmailAuthViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
+            StepikAnalytics.shared.send(.clickedSignInNextSignInScreen)
+            StepikAnalytics.shared.send(.signInClicked(interactionType: .ime))
 
             if logInButton.isEnabled {
                 self.onLogInClick(logInButton!)

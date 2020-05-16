@@ -8,6 +8,7 @@ protocol CourseInfoTabInfoViewControllerProtocol: AnyObject {
 
 final class CourseInfoTabInfoViewController: UIViewController {
     private let interactor: CourseInfoTabInfoInteractorProtocol
+    private let analytics: Analytics
 
     private lazy var infoView = self.view as? CourseInfoTabInfoView
 
@@ -23,9 +24,11 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
     init(
         interactor: CourseInfoTabInfoInteractorProtocol,
+        analytics: Analytics,
         initialState: CourseInfoTabInfo.ViewControllerState = .loading
     ) {
         self.interactor = interactor
+        self.analytics = analytics
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
@@ -116,7 +119,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
     func courseInfoTabInfoIntroVideoBlockViewPlayClicked(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Course.Video.clicked, parameters: nil)
+        self.analytics.send(.courseDetailVideoClicked)
         self.playerViewController.player?.play()
     }
 }

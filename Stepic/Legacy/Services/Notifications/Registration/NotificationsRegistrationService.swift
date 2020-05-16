@@ -276,16 +276,10 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                 self.registerDevice(registrationToken, forceCreation: true)
             case DeviceError.other(_, _, let message):
                 print("NotificationsRegistrationService: device registration error, error = \(String(describing: message))")
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Errors.registerDevice,
-                    parameters: ["message": "\(String(describing: message))"]
-                )
+                StepikAnalytics.shared.send(.errorRegisterDevice(message: String(describing: message)))
             default:
                 print("NotificationsRegistrationService: device registration error, error = \(error)")
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Errors.registerDevice,
-                    parameters: ["message": "\(error.localizedDescription)"]
-                )
+                StepikAnalytics.shared.send(.errorRegisterDevice(message: error.localizedDescription))
             }
         }
     }
@@ -347,9 +341,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                             )
                         } else {
                             print("NotificationsRegistrationService: could not get current user ID or token to delete device")
-                            AnalyticsReporter.reportEvent(
-                                AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials
-                            )
+                            StepikAnalytics.shared.send(.errorUnregisterDeviceInvalidCredentials)
                         }
                     }
                     seal(())

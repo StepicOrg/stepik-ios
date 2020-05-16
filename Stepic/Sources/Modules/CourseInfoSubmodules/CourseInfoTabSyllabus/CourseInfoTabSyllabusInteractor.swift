@@ -21,6 +21,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private let tooltipStorageManager: TooltipStorageManagerProtocol
     private let useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol
     private let syllabusDownloadsService: SyllabusDownloadsServiceProtocol
+    private let analytics: Analytics
 
     private var currentCourse: Course?
     private var currentSections: [UniqueIdentifierType: Section] = [:] {
@@ -73,6 +74,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
         provider: CourseInfoTabSyllabusProviderProtocol,
+        analytics: Analytics,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
         nextLessonService: NextLessonServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
@@ -82,6 +84,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.personalDeadlinesService = personalDeadlinesService
         self.nextLessonService = nextLessonService
         self.networkReachabilityService = networkReachabilityService
@@ -181,16 +184,20 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 self.presenter.presentDeleteDownloadsConfirmationAlert(
                     response: .init(
                         type: .unit,
-                        cancelActionHandler: {
-                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                content: .lesson, isConfirmed: false
-                            ).send()
+                        cancelActionHandler: { [weak self] in
+                            self?.analytics.send(
+                                .downloadsDeleteDownloadsConfirmationInteracted(content: .lesson, isConfirmed: false)
+                            )
                         },
                         confirmedActionHandler: { [weak self] in
-                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                content: .lesson, isConfirmed: true
-                            ).send()
-                            self?.removeCached(unit: unit)
+                            guard let strongSelf = self else {
+                                return
+                            }
+
+                            strongSelf.analytics.send(
+                                .downloadsDeleteDownloadsConfirmationInteracted(content: .lesson, isConfirmed: true)
+                            )
+                            strongSelf.removeCached(unit: unit)
                         }
                     )
                 )
@@ -233,16 +240,20 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 self.presenter.presentDeleteDownloadsConfirmationAlert(
                     response: .init(
                         type: .section,
-                        cancelActionHandler: {
-                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                content: .section, isConfirmed: false
-                            ).send()
+                        cancelActionHandler: { [weak self] in
+                            self?.analytics.send(
+                                .downloadsDeleteDownloadsConfirmationInteracted(content: .section, isConfirmed: false)
+                            )
                         },
                         confirmedActionHandler: { [weak self] in
-                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                content: .section, isConfirmed: true
-                            ).send()
-                            self?.removeCached(section: section)
+                            guard let strongSelf = self else {
+                                return
+                            }
+
+                            strongSelf.analytics.send(
+                                .downloadsDeleteDownloadsConfirmationInteracted(content: .section, isConfirmed: true)
+                            )
+                            strongSelf.removeCached(section: section)
                         }
                     )
                 )
@@ -281,16 +292,20 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 self.presenter.presentDeleteDownloadsConfirmationAlert(
                     response: .init(
                         type: .course,
-                        cancelActionHandler: {
-                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                content: .course, isConfirmed: false
-                            ).send()
+                        cancelActionHandler: { [weak self] in
+                            self?.analytics.send(
+                                .downloadsDeleteDownloadsConfirmationInteracted(content: .course, isConfirmed: false)
+                            )
                         },
                         confirmedActionHandler: { [weak self] in
-                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                content: .course, isConfirmed: true
-                            ).send()
-                            self?.removeCachedCourse()
+                            guard let strongSelf = self else {
+                                return
+                            }
+
+                            strongSelf.analytics.send(
+                                .downloadsDeleteDownloadsConfirmationInteracted(content: .course, isConfirmed: true)
+                            )
+                            strongSelf.removeCachedCourse()
                         }
                     )
                 )
@@ -345,7 +360,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         if self.personalDeadlinesService.hasDeadlines(in: course) {
             self.moduleOutput?.presentPersonalDeadlinesSettings(for: course)
         } else {
-            AmplitudeAnalyticsEvents.PersonalDeadlines.buttonClicked.send()
+            self.analytics.send(.personalDeadlinesScheduleButtonClicked)
             self.moduleOutput?.presentPersonalDeadlinesCreation(for: course)
         }
     }
@@ -546,7 +561,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
     func handleControllerAppearance() {
         if let course = self.currentCourse {
-            AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
+            self.analytics.send(.sectionsScreenOpened(courseID: course.id, courseTitle: course.title))
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
@@ -561,7 +576,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
         self.doSectionsFetch(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
+            self.analytics.send(.sectionsScreenOpened(courseID: course.id, courseTitle: course.title))
             self.shouldOpenedAnalyticsEventSend = false
         }
     }
@@ -599,7 +614,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
     ) {
         if !self.reportedToAnalyticsVideoDownloadIDs.contains(videoID) {
             self.reportedToAnalyticsVideoDownloadIDs.insert(videoID)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.started)
+            self.analytics.send(.videoDownloadStarted)
         }
     }
 
@@ -643,9 +658,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         forVideoWithID videoID: Video.IdType
     ) {
         self.reportedToAnalyticsVideoDownloadIDs.remove(videoID)
-        AnalyticsReporter.reportEvent(
-            isCompleted ? AnalyticsEvents.VideoDownload.succeeded : AnalyticsEvents.VideoDownload.failed
-        )
+        self.analytics.send(isCompleted ? .videoDownloadSucceeded : .videoDownloadFailed)
     }
 
     func syllabusDownloadsService(
@@ -678,17 +691,16 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         _ service: SyllabusDownloadsServiceProtocol,
         didFailLoadVideoWithError error: Swift.Error
     ) {
-        func report(_ error: Swift.Error, reason: AnalyticsEvents.VideoDownload.Reason) {
+        func report(_ error: Swift.Error, reason: AnalyticsEvent.VideoDownloadFailReason) {
             let nsError = error as NSError
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.VideoDownload.failed,
-                parameters: [
-                    "description": nsError.localizedDescription,
-                    "name": String(describing: error),
-                    "code": nsError.code,
-                    "domain": nsError.domain,
-                    "reason": reason.rawValue
-                ]
+            self.analytics.send(
+                .videoDownloadFailed(
+                    description: nsError.localizedDescription,
+                    name: String(describing: error),
+                    code: nsError.code,
+                    domain: nsError.domain,
+                    reason: reason
+                )
             )
         }
 
@@ -730,8 +742,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
 
 extension CourseInfoTabSyllabusInteractor {
     private func startDownloading(unit: Unit) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache)
-        AmplitudeAnalyticsEvents.Downloads.started(content: .lesson).send()
+        self.analytics.send(.downloadsDownloadStarted(content: .lesson))
 
         let unitID = unit.id
         print("course info tab syllabus interactor: start downloading unit = \(unitID)")
@@ -756,8 +767,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func startDownloading(section: Section) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache)
-        AmplitudeAnalyticsEvents.Downloads.started(content: .section).send()
+        self.analytics.send(.downloadsDownloadStarted(content: .section))
 
         let sectionID = section.id
         print("course info tab syllabus interactor: start downloading section = \(sectionID)")
@@ -794,7 +804,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func startDownloadingCourse() {
-        AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
+        self.analytics.send(.downloadsDownloadStarted(content: .course))
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         self.shouldCheckUseOfCellularDataForDownloads = false
@@ -816,8 +826,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func cancelDownloading(unit: Unit) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel)
-        AmplitudeAnalyticsEvents.Downloads.cancelled(content: .lesson).send()
+        self.analytics.send(.downloadsDownloadCancelled(content: .lesson))
 
         let unitID = unit.id
         print("course info tab syllabus interactor: start cancelling unit = \(unitID)")
@@ -833,8 +842,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func cancelDownloading(section: Section) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel)
-        AmplitudeAnalyticsEvents.Downloads.cancelled(content: .section).send()
+        self.analytics.send(.downloadsDownloadCancelled(content: .section))
 
         let sectionID = section.id
         print("course info tab syllabus interactor: start cancelling section = \(sectionID)")
@@ -853,8 +861,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func removeCached(unit: Unit) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: ["source": "syllabus"])
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: .lesson, source: .syllabus).send()
+        self.analytics.send(.downloadsDownloadDeleted(content: .lesson, source: .syllabus))
 
         let unitID = unit.id
         print("course info tab syllabus interactor: start removing cached unit = \(unitID)")
@@ -870,8 +877,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func removeCached(section: Section) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: ["source": "syllabus"])
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: .section, source: .syllabus).send()
+        self.analytics.send(.downloadsDownloadDeleted(content: .section, source: .syllabus))
 
         let sectionID = section.id
         print("course info tab syllabus interactor: start removing cached section = \(sectionID)")
@@ -891,8 +897,7 @@ extension CourseInfoTabSyllabusInteractor {
             return
         }
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Course.delete, parameters: ["source": "syllabus"])
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: .course, source: .syllabus).send()
+        self.analytics.send(.downloadsDownloadDeleted(content: .course, source: .syllabus))
 
         let courseID = course.id
         print("course info tab syllabus interactor: start removing cached course = \(courseID)")

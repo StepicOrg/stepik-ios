@@ -85,7 +85,7 @@ final class LastStepRouter {
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
             navigationController.pushViewController(courseInfoController, animated: true)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
+            StepikAnalytics.shared.send(.continueLastStepSyllabusOpened)
             return
         }
 
@@ -147,7 +147,7 @@ final class LastStepRouter {
                 navigationController.pushViewController(lessonAssembly.makeModule(), animated: true)
 
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
+                StepikAnalytics.shared.send(.continueLastStepStepOpened)
             }.catch { _ in
                 openSyllabus()
             }

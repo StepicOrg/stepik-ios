@@ -111,7 +111,7 @@ final class RegistrationViewController: UIViewController {
     @IBAction func onRegisterClick(_ sender: Any) {
         view.endEditing(true)
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
+        StepikAnalytics.shared.send(.signUpClicked(interactionType: .button))
 
         let name = nameTextField.text ?? ""
         let email = emailTextField.text ?? ""
@@ -173,7 +173,7 @@ final class RegistrationViewController: UIViewController {
 
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+        StepikAnalytics.shared.send(.typingTextFieldsRegistration)
 
         state = .normal
 
@@ -269,7 +269,7 @@ extension RegistrationViewController: TTTAttributedLabelDelegate {
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
+        StepikAnalytics.shared.send(.tapOnFieldsRegistration)
         // 24 - default value in app (see AppDelegate), 64 - offset with button
         IQKeyboardManager.shared.keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
     }
@@ -288,8 +288,8 @@ extension RegistrationViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
+            StepikAnalytics.shared.send(.clickedRegistrationSendIme)
+            StepikAnalytics.shared.send(.signUpClicked(interactionType: .ime))
 
             if registerButton.isEnabled {
                 self.onRegisterClick(registerButton!)

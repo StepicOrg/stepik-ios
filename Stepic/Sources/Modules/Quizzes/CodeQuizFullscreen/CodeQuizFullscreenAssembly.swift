@@ -27,6 +27,7 @@ final class CodeQuizFullscreenAssembly: Assembly {
         let interactor = CodeQuizFullscreenInteractor(
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             tooltipStorageManager: TooltipStorageManager(),
             codeDetails: self.codeDetails,
             language: self.language
@@ -40,6 +41,7 @@ final class CodeQuizFullscreenAssembly: Assembly {
 
         let viewController = CodeQuizFullscreenViewController(
             interactor: interactor,
+            analytics: StepikAnalytics.shared,
             availableTabs: availableTabs,
             initialTab: .code
         )

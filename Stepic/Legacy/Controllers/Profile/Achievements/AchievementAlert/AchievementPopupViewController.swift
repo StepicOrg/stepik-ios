@@ -31,6 +31,8 @@ final class AchievementPopupViewController: UIViewController {
     var canShare: Bool = true
     var source: Source = .notification
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,9 +66,9 @@ final class AchievementPopupViewController: UIViewController {
             return
         }
 
-        AmplitudeAnalyticsEvents.Achievements.popupShared(
-            source: self.source.rawValue, kind: data.id, level: data.completedLevel
-        ).send()
+        self.analytics.send(
+            .achievementsPopupShared(source: self.source.rawValue, kind: data.id, level: data.completedLevel)
+        )
 
         let activityViewController = UIActivityViewController(
             activityItems: [

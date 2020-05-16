@@ -9,6 +9,7 @@ protocol DownloadsViewControllerProtocol: AnyObject {
 
 final class DownloadsViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: DownloadsInteractorProtocol
+    private let analytics: Analytics
 
     lazy var downloadsView = self.view as? DownloadsView
 
@@ -22,8 +23,9 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
 
     // MARK: UIViewController life cycle
 
-    init(interactor: DownloadsInteractorProtocol) {
+    init(interactor: DownloadsInteractorProtocol, analytics: Analytics) {
         self.interactor = interactor
+        self.analytics = analytics
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -51,7 +53,7 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AmplitudeAnalyticsEvents.Downloads.downloadsScreenOpened.send()
+        self.analytics.send(.downloadsScreenOpened)
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {

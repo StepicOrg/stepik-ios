@@ -71,7 +71,6 @@ final class NewChoiceQuizView: UIView {
     var isSingleChoice = true
     private var isSelectionEnabled = true
 
-    // swiftlint:disable:next discouraged_optional_collection
     private var selectionMask: [Bool]?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {

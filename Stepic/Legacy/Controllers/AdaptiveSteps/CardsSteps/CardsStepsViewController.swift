@@ -21,6 +21,8 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     private var topCard: StepCardView?
     private var currentStepViewController: CardStepViewController?
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     var state: CardsStepsViewState = .normal {
         didSet {
             switch self.state {
@@ -201,22 +203,24 @@ extension CardsStepsViewController: KolodaViewDataSource {
 
 extension CardsStepsViewController: CardStepDelegate {
     func stepSubmissionDidCorrect() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.submission)
+        self.analytics.send(.adaptiveStepCorrectAnswer)
+        self.analytics.send(.adaptiveStepSubmissionCreated)
+
         presenter?.sendReaction(.solved)
         presenter?.updateRatingWhenSuccess()
         topCard?.controlState = .successful
     }
 
     func stepSubmissionDidWrong() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.submission)
+        self.analytics.send(.adaptiveStepWrongAnswer)
+        self.analytics.send(.adaptiveStepSubmissionCreated)
+
         presenter?.updateRatingWhenFail()
         topCard?.controlState = .wrong
     }
 
     func stepSubmissionDidRetry() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
+        self.analytics.send(.adaptiveStepRetryAnswer)
         topCard?.controlState = .unsolved
     }
 

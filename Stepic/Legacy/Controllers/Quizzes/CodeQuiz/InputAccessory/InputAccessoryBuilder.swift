@@ -22,13 +22,7 @@ final class InputAccessoryBuilder {
 
         let tabButton = CodeInputAccessoryButtonData(title: "Tab", action: {
             tabAction()
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Code.toolbarSelected,
-                parameters: [
-                    "language": language.rawValue,
-                    "symbol": "Tab"
-                ]
-            )
+            StepikAnalytics.shared.send(.codeInputAccessoryButtonClicked(language: language.rawValue, symbol: "Tab"))
         })
 
         buttons += [tabButton]
@@ -36,11 +30,8 @@ final class InputAccessoryBuilder {
         for symbol in symbols {
             let symButton = CodeInputAccessoryButtonData(title: symbol, action: {
                 insertStringAction(symbol)
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Code.toolbarSelected,
-                    parameters: [
-                        "language": language.rawValue,
-                        "symbol": symbol]
+                StepikAnalytics.shared.send(
+                    .codeInputAccessoryButtonClicked(language: language.rawValue, symbol: symbol)
                 )
             })
             buttons += [symButton]
@@ -50,7 +41,7 @@ final class InputAccessoryBuilder {
         let frame = CGRect(origin: CGPoint.zero, size: viewSize)
         let accessoryView = CodeInputAccessoryView(frame: frame, buttons: buttons, size: size, hideKeyboardAction: {
             hideKeyboardAction()
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.hideKeyboard)
+            StepikAnalytics.shared.send(.codeInputAccessoryHideKeyboardClicked)
         })
 
         return accessoryView

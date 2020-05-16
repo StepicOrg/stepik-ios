@@ -29,6 +29,7 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
         videoPlayerViewController.streamVideoQualityStorageManager = StreamVideoQualityStorageManager()
         videoPlayerViewController.videoRateStorageManager = VideoRateStorageManager()
         videoPlayerViewController.autoplayStorageManager = AutoplayStorageManager()
+        videoPlayerViewController.analytics = StepikAnalytics.shared
         videoPlayerViewController.delegate = self.delegate
 
         return videoPlayerViewController
@@ -157,6 +158,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     fileprivate(set) var streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol!
     fileprivate(set) var videoRateStorageManager: VideoRateStorageManagerProtocol!
     fileprivate(set) var autoplayStorageManager: AutoplayStorageManagerProtocol?
+    fileprivate(set) var analytics: Analytics!
 
     var video: Video!
 
@@ -231,7 +233,7 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.setupGestureRecognizers()
         self.addAccessibilitySupport()
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
+        self.analytics.send(.videoPlayerOpened)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -494,14 +496,12 @@ final class StepikVideoPlayerViewController: UIViewController {
                         return
                     }
 
-                    AnalyticsReporter.reportEvent(
-                        AnalyticsEvents.VideoPlayer.rateChanged,
-                        parameters: ["rate": videoRate.uniqueIdentifier as NSObject]
+                    strongSelf.analytics.send(
+                        .videoChangedSpeed(
+                            source: strongSelf.currentVideoRate.uniqueIdentifier,
+                            target: videoRate.uniqueIdentifier
+                        )
                     )
-                    AmplitudeAnalyticsEvents.Video.changedSpeed(
-                        source: strongSelf.currentVideoRate.uniqueIdentifier,
-                        target: videoRate.uniqueIdentifier
-                    ).send()
 
                     strongSelf.currentVideoRate = videoRate
                     strongSelf.scheduleHidePlayerControlsTimer()
@@ -550,12 +550,11 @@ final class StepikVideoPlayerViewController: UIViewController {
                         return
                     }
 
-                    AnalyticsReporter.reportEvent(
-                        AnalyticsEvents.VideoPlayer.qualityChanged,
-                        parameters: [
-                            "quality": url.quality as NSObject,
-                            "device": DeviceInfo.current.deviceModelString as NSObject
-                        ]
+                    strongSelf.analytics.send(
+                        .videoPlayerVideoQualityChanged(
+                            quality: url.quality,
+                            deviceModel: DeviceInfo.current.deviceModelString
+                        )
                     )
 
                     strongSelf.currentVideoQuality = url.quality

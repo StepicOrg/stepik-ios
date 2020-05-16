@@ -38,10 +38,11 @@ final class ExploreViewController: BaseExploreViewController {
 
     init(
         interactor: ExploreInteractorProtocol,
+        analytics: Analytics,
         initialState: Explore.ViewControllerState = .loading
     ) {
         self.state = initialState
-        super.init(interactor: interactor)
+        super.init(interactor: interactor, analytics: analytics)
         self.searchBar.searchBarDelegate = self
     }
 
@@ -67,9 +68,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Catalog.opened.send()
+        self.analytics.send(.catalogScreenOpened)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -286,8 +285,7 @@ extension ExploreViewController: UISearchBarDelegate {
         // Strange hack to hide search results (courses)
         self.searchResultsModuleInput?.searchStarted()
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Search.started.send()
+        self.analytics.send(.searchCourseStarted)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -304,8 +302,7 @@ extension ExploreViewController: UISearchBarDelegate {
         self.hideSearchResults()
         self.searchResultsModuleInput?.searchCancelled()
 
-        // FIXME: analytics dependency
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled)
+        self.analytics.send(.searchCourseCancelled)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

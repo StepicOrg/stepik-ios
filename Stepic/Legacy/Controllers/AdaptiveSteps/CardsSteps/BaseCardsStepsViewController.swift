@@ -120,7 +120,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
                 unitsAPI: UnitsAPI(),
                 viewsAPI: ViewsAPI(),
                 ratingsAPI: AdaptiveRatingsAPI(),
-                ratingManager: AdaptiveRatingManager(courseId: self.course.id),
+                ratingManager: AdaptiveRatingManager(courseID: self.course.id),
                 statsManager: AdaptiveStatsManager(courseId: self.course.id),
                 storageManager: AdaptiveStorageManager(),
                 lastViewedUpdater: LocalProgressLastViewedUpdater(),
@@ -130,6 +130,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
                     analytics: .init(source: .courseSubscription)
                 ),
                 stepFontSizeStorageManager: StepFontSizeStorageManager(),
+                analytics: StepikAnalytics.shared,
                 course: self.course,
                 view: self
             )
@@ -169,7 +170,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
 
         self.shouldToggleNavigationBar = true
 
-        viewController.ratingsManager = AdaptiveRatingManager(courseId: course.id)
+        viewController.ratingsManager = AdaptiveRatingManager(courseID: course.id)
         viewController.statsManager = AdaptiveStatsManager(courseId: course.id)
 
         self.navigationController?.pushViewController(viewController, animated: true)

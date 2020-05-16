@@ -70,6 +70,7 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
     )
 
     private let interactor: CodeQuizFullscreenInteractorProtocol
+    private let analytics: Analytics
 
     private let availableTabs: [CodeQuizFullscreen.Tab]
     private let initialTabIndex: Int
@@ -83,10 +84,12 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
 
     init(
         interactor: CodeQuizFullscreenInteractorProtocol,
+        analytics: Analytics,
         availableTabs: [CodeQuizFullscreen.Tab] = [.instruction, .code],
         initialTab: CodeQuizFullscreen.Tab = .code
     ) {
         self.interactor = interactor
+        self.analytics = analytics
 
         self.availableTabs = availableTabs
         self.tabViewControllers = Array(repeating: nil, count: availableTabs.count)
@@ -134,7 +137,7 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.exitFullscreen, parameters: nil)
+        self.analytics.send(.codeExitFullscreenClicked)
     }
 
     // MARK: Private API

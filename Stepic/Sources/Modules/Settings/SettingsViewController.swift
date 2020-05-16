@@ -26,6 +26,7 @@ extension SettingsViewController {
 
 final class SettingsViewController: UIViewController {
     private let interactor: SettingsInteractorProtocol
+    private let analytics: Analytics
 
     let appearance: Appearance
 
@@ -37,11 +38,9 @@ final class SettingsViewController: UIViewController {
         action: #selector(self.closeButtonClicked)
     )
 
-    init(
-        interactor: SettingsInteractorProtocol,
-        appearance: Appearance = .init()
-    ) {
+    init(interactor: SettingsInteractorProtocol, analytics: Analytics, appearance: Appearance = .init()) {
         self.interactor = interactor
+        self.analytics = analytics
         self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
@@ -70,9 +69,7 @@ final class SettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Settings.opened.send()
-
+        self.analytics.send(.settingsScreenOpened)
         self.updateNavigationBarAppearance()
     }
 
@@ -536,16 +533,16 @@ extension SettingsViewController: SettingsViewDelegate {
     // MARK: Private Helpers
 
     private func handleDeleteAllContentAction() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.clear, parameters: nil)
-        self.requestDeleteAllContent { [weak self] granted in
-            if granted {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.acceptedClear, parameters: nil)
-                self?.interactor.doDeleteAllContent(request: .init())
+        self.analytics.send(.downloadsClearCacheClicked)
+        self.requestDeleteAllContent { [weak self] isGranted in
+            if let strongSelf = self, isGranted {
+                strongSelf.analytics.send(.downloadsAcceptedClearCacheClicked)
+                strongSelf.interactor.doDeleteAllContent(request: .init())
             }
         }
     }
 
-    private func requestDeleteAllContent(completionHandler: @escaping ((Bool) -> Void)) {
+    private func requestDeleteAllContent(completionHandler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(
             title: NSLocalizedString("DeleteAllContentConfirmationAlertTitle", comment: ""),
             message: NSLocalizedString("DeleteAllContentConfirmationAlertMessage", comment: ""),
@@ -575,7 +572,7 @@ extension SettingsViewController: SettingsViewDelegate {
     }
 
     private func handleLogOutAction() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
+        self.analytics.send(.clickedLogout)
         self.requestLogOut { [weak self] granted in
             if granted {
                 self?.interactor.doAccountLogOut(request: .init())
@@ -583,7 +580,7 @@ extension SettingsViewController: SettingsViewDelegate {
         }
     }
 
-    private func requestLogOut(completionHandler: @escaping ((Bool) -> Void)) {
+    private func requestLogOut(completionHandler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(
             title: NSLocalizedString("LogOutConfirmationAlertTitle", comment: ""),
             message: NSLocalizedString("LogOutConfirmationAlertMessage", comment: ""),

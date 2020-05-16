@@ -38,9 +38,10 @@ final class BaseQuizAssembly: Assembly {
             hasNextStep: self.hasNextStep,
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             notificationSuggestionManager: NotificationSuggestionManager(),
             rateAppManager: RateAppManager(),
-            userService: UserAccountService(),
+            userAccountService: UserAccountService(),
             adaptiveStorageManager: AdaptiveStorageManager()
         )
         let viewController = BaseQuizViewController(

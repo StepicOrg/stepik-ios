@@ -11,7 +11,6 @@ final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
 
     private var currentStatus: QuizStatus?
     private var currentDataset: MatchingDataset?
-    // swiftlint:disable:next discouraged_optional_collection
     private var currentItems: [NewMatchingQuiz.MatchItem]?
 
     private var isQuizTitleVisible = true

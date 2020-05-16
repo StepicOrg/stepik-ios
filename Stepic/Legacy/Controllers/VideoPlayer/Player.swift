@@ -567,7 +567,7 @@ extension Player {
     @objc internal func handleApplicationDidEnterBackground(_ aNotification: Notification) {
         // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
         playerView.player = nil
-        AmplitudeAnalyticsEvents.Video.continuedInBackground.send()
+        StepikAnalytics.shared.send(.videoContinuedInBackground)
     }
 }
 

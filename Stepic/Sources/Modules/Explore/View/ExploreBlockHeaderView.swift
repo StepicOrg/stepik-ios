@@ -25,6 +25,8 @@ extension ExploreBlockHeaderView {
 final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
 
+    private let analytics: Analytics
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.titleLabelFont
@@ -98,8 +100,13 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
         )
     }
 
-    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+    init(
+        frame: CGRect = .zero,
+        appearance: Appearance = Appearance(),
+        analytics: Analytics = StepikAnalytics.shared
+    ) {
         self.appearance = appearance
+        self.analytics = analytics
         super.init(frame: frame)
 
         self.addSubviews()
@@ -115,8 +122,7 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     @objc
     private func showAllButtonClicked() {
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.CourseList.showAllClicked.send()
+        self.analytics.send(.courseListShowAllClicked)
         self.onShowAllButtonClick?()
     }
 }

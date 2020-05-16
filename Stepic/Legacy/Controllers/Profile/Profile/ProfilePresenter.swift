@@ -284,7 +284,7 @@ final class ProfilePresenter {
     }
 
     func sendAppearanceEvent() {
-        AmplitudeAnalyticsEvents.Profile.opened(state: userSeed.analyticsString).send()
+        StepikAnalytics.shared.send(.profileScreenOpened(state: userSeed.analyticsString))
     }
 }
 

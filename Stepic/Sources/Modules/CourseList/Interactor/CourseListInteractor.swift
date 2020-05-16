@@ -24,6 +24,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     private let userAccountService: UserAccountServiceProtocol
     private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
     private let courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol
+    private let analytics: Analytics
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -37,7 +38,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         courseSubscriber: CourseSubscriberProtocol,
         userAccountService: UserAccountServiceProtocol,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
-        courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol
+        courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -45,6 +47,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
         self.personalDeadlinesService = personalDeadlinesService
+        self.analytics = analytics
 
         self.courseListDataBackUpdateService = courseListDataBackUpdateService
         self.courseListDataBackUpdateService.delegate = self
@@ -196,8 +199,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         } else {
             // Paid course -> open web view
             if targetCourse.isPaid {
-                // FIXME: analytics dependency
-                AmplitudeAnalyticsEvents.Course.buyPressed(source: .courseWidget, courseID: targetCourse.id).send()
+                self.analytics.send(.courseBuyPressed(source: .courseWidget, courseID: targetCourse.id))
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentPaidCourseInfo(course: targetCourse)
                 return
@@ -207,12 +209,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
 
-                // FIXME: analytics dependency
-                AmplitudeAnalyticsEvents.Course.continuePressed(
-                    source: "course_widget",
-                    courseID: course.id,
-                    courseTitle: course.title
-                ).send()
+                self.analytics.send(
+                    .courseContinuePressed(source: .courseWidget, courseID: course.id, courseTitle: course.title)
+                )
 
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentLastStep(

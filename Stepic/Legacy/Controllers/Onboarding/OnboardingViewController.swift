@@ -74,10 +74,10 @@ final class OnboardingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        reloadPages()
+        self.reloadPages()
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
-        AmplitudeAnalyticsEvents.Onboarding.screenOpened(screen: currentPageIndex + 1).send()
+        StepikAnalytics.shared.send(.onboardingScreenOpened(screenIndex: currentPageIndex + 1))
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.animatedView.start()
         }
@@ -107,11 +107,7 @@ final class OnboardingViewController: UIViewController {
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
         dismiss(animated: true) {
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Onboarding.onboardingClosed,
-                parameters: ["screen": self.currentPageIndex + 1]
-            )
-            AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
+            StepikAnalytics.shared.send(.onboardingClosed(screenIndex: self.currentPageIndex + 1))
             self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
@@ -184,14 +180,12 @@ final class OnboardingViewController: UIViewController {
     }
 
     private func nextButtonClick() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingAction, parameters: ["screen": currentPageIndex + 1])
-
         if currentPageIndex < pages.count - 1 {
             let newScrollViewContentOffsetX = CGFloat(currentPageIndex + 1) * scrollView.frame.width
             scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: scrollView.contentOffset.y), animated: true)
         } else {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
-            AmplitudeAnalyticsEvents.Onboarding.completed.send()
+            StepikAnalytics.shared.send(.onboardingCompleted)
+
             self.dismiss(animated: true, completion: {
                 self.notificationsRegistrationService.registerForRemoteNotifications()
             })
@@ -224,8 +218,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
 
         if page != currentPageIndex {
             currentPageIndex = page
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
-            AmplitudeAnalyticsEvents.Onboarding.screenOpened(screen: currentPageIndex + 1).send()
+            StepikAnalytics.shared.send(.onboardingScreenOpened(screenIndex: currentPageIndex + 1))
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
 

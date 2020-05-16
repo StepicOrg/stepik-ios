@@ -22,6 +22,8 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     private var imagePath: String = ""
     private var storyPart: TextStoryPart?
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.activityIndicator.isHidden = true
@@ -163,7 +165,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             return
         }
 
-        AmplitudeAnalyticsEvents.Stories.buttonPressed(id: part.storyID, position: part.position).send()
+        self.analytics.send(.storiesStoryButtonPressed(id: part.storyID, position: part.position))
         self.urlNavigationDelegate?.open(url: url)
     }
 }

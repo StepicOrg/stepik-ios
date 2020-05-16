@@ -13,6 +13,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
 
     private let presenter: CodeQuizFullscreenPresenterProtocol
     private let provider: CodeQuizFullscreenProviderProtocol
+    private let analytics: Analytics
     private let tooltipStorageManager: TooltipStorageManagerProtocol
 
     private let codeDetails: CodeDetails
@@ -23,12 +24,14 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
     init(
         presenter: CodeQuizFullscreenPresenterProtocol,
         provider: CodeQuizFullscreenProviderProtocol,
+        analytics: Analytics,
         tooltipStorageManager: TooltipStorageManagerProtocol,
         codeDetails: CodeDetails,
         language: CodeLanguage
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.tooltipStorageManager = tooltipStorageManager
         self.codeDetails = codeDetails
         self.language = language
@@ -57,12 +60,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
     }
 
     func doCodeReset(request: CodeQuizFullscreen.ResetCode.Request) {
-        AnalyticsReporter.reportEvent(
-            AnalyticsEvents.Code.resetPressed,
-            parameters: [
-                "size": "standard"
-            ]
-        )
+        self.analytics.send(.codeResetClicked)
 
         let stepID = self.codeDetails.stepID
         let language = self.language

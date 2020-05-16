@@ -189,30 +189,31 @@ final class DeepLinkRouter {
         }
 
         if components.count >= 3 && components[1].lowercased() == "course" {
-            guard let courseId = getID(components[2], reversed: true) else {
+            guard let courseID = getID(components[2], reversed: true) else {
                 completion([])
                 return
             }
 
             if components.count == 3 {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.course, parameters: ["id": courseId as NSObject])
-                routeToCourseWithId(courseId, completion: completion)
+                StepikAnalytics.shared.send(.deepLinkCourse(id: courseID))
+                routeToCourseWithId(courseID, completion: completion)
                 return
             }
 
             if components.count == 4 && components[3].lowercased().contains("syllabus") {
-                if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false), let queryItems = urlComponents.queryItems {
+                if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false),
+                   let queryItems = urlComponents.queryItems {
                     if let module = queryItems.filter({ item in item.name == "module" }).first?.value! {
                         if let moduleInt = Int(module) {
-                            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.section, parameters: ["course": courseId as NSObject, "module": module as NSObject])
-                            routeToSyllabusWithId(courseId, moduleId: moduleInt, completion: completion)
+                            StepikAnalytics.shared.send(.deepLinkSection(courseID: courseID, moduleID: moduleInt))
+                            routeToSyllabusWithId(courseID, moduleId: moduleInt, completion: completion)
                             return
                         }
                     }
                 }
 
-                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId as NSObject])
-                routeToSyllabusWithId(courseId, completion: completion)
+                StepikAnalytics.shared.send(.deepLinkSyllabus(courseID: courseID))
+                routeToSyllabusWithId(courseID, completion: completion)
                 return
             }
 
@@ -221,7 +222,7 @@ final class DeepLinkRouter {
         }
 
         if components.count >= 5 && components[1].lowercased() == "lesson" {
-            guard let lessonId = getID(components[2], reversed: true) else {
+            guard let lessonID = getID(components[2], reversed: true) else {
                 completion([])
                 return
             }
@@ -231,7 +232,7 @@ final class DeepLinkRouter {
                 return
             }
 
-            guard let stepId = getID(components[4], reversed: false) else {
+            guard let stepID = getID(components[4], reversed: false) else {
                 completion([])
                 return
             }
@@ -247,21 +248,16 @@ final class DeepLinkRouter {
                                 .flatMap(Int.init)
                             let threadValue = queryItems.first(where: { $0.name == "amp;thread" })?.value
 
-                            AnalyticsReporter.reportEvent(
-                                AnalyticsEvents.DeepLink.discussion,
-                                parameters: [
-                                    "lesson": lessonId,
-                                    "step": stepId,
-                                    "discussion": discussionID
-                                ]
+                            StepikAnalytics.shared.send(
+                                .deepLinkDiscussion(lessonID: lessonID, stepID: stepID, discussionID: discussionID)
                             )
 
                             self.routeToDiscussionWithID(
                                 discussionID: discussionID,
                                 replyID: replyID,
                                 thread: threadValue,
-                                lessonID: lessonId,
-                                stepID: stepId,
+                                lessonID: lessonID,
+                                stepID: stepID,
                                 unitID: nil,
                                 completion: completion
                             )
@@ -271,15 +267,9 @@ final class DeepLinkRouter {
                 }
             }
 
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.DeepLink.step,
-                parameters: [
-                    "lesson": lessonId,
-                    "step": stepId
-                ]
-            )
+            StepikAnalytics.shared.send(.deepLinkStep(lessonID: lessonID, stepID: stepID))
 
-            self.routeToStepWithId(stepId, lessonId: lessonId, unitID: nil, completion: completion)
+            self.routeToStepWithId(stepID, lessonId: lessonID, unitID: nil, completion: completion)
             return
         }
 
@@ -288,13 +278,16 @@ final class DeepLinkRouter {
     }
 
     static func routeToProfileWithId(_ userId: Int, completion: @escaping ([UIViewController]) -> Void) {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "ProfileViewController", storyboardName: "Profile") as? ProfileViewController else {
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "ProfileViewController",
+            storyboardName: "Profile"
+        ) as? ProfileViewController else {
             completion([])
             return
         }
 
-        vc.otherUserId = userId
-        completion([vc])
+        viewController.otherUserId = userId
+        completion([viewController])
     }
 
     static func routeToCertificates(userID: User.IdType, completion: @escaping ([UIViewController]) -> Void) {

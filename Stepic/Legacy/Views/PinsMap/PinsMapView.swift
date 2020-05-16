@@ -69,6 +69,7 @@ final class PinsMapView: UIView {
     private var cachedPins: [Int]?
     private var generatedMonths: [(PinsMap.Month, [CALayer])] = []
 
+    private let analytics: Analytics = StepikAnalytics.shared
     private var didAnalyticsReport = false
 
     func buildMonths(_ pins: [Int]) {
@@ -189,8 +190,8 @@ final class PinsMapView: UIView {
         // Binary search with fixed iterations count
         let condition: (CGFloat) -> Bool = { (x: CGFloat) -> Bool in
             (CGFloat(self.daysInWeek) * x <= rect.height) &&
-                   (CGFloat(self.weeksInMonth) * x <= rect.width) &&
-                   (CGFloat(self.daysInWeek * self.weeksInMonth) * x * x <= rectArea)
+                (CGFloat(self.weeksInMonth) * x <= rect.width) &&
+                (CGFloat(self.daysInWeek * self.weeksInMonth) * x * x <= rectArea)
         }
         var left: CGFloat = 1
         var right: CGFloat = rect.width / 2
@@ -346,9 +347,9 @@ extension PinsMapView: UIScrollViewDelegate {
         let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl?.currentPage = max(0, min(page, pageControl?.numberOfPages ?? monthsInYear))
 
-        if !didAnalyticsReport {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.interactionWithPinsMap)
-            didAnalyticsReport = true
+        if !self.didAnalyticsReport {
+            self.analytics.send(.profileInteractedWithPinsMap)
+            self.didAnalyticsReport = true
         }
     }
 }

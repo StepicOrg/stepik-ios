@@ -24,6 +24,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
+    private let analytics: Analytics
 
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
@@ -81,7 +82,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
-        dataBackUpdateService: DataBackUpdateServiceProtocol
+        dataBackUpdateService: DataBackUpdateServiceProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -93,6 +95,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.dataBackUpdateService = dataBackUpdateService
+        self.analytics = analytics
 
         self.courseID = courseID
     }
@@ -144,7 +147,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
         if let urlPath = self.courseWebURLPath {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Course.shared, parameters: nil)
+            self.analytics.send(.courseShareClicked)
             self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
         }
     }
@@ -186,7 +189,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         if !self.userAccountService.isAuthorized {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Course.JoinPressed.anonymous, parameters: nil)
+            self.analytics.send(.courseJoinAnonymousUserClicked)
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.presenter.presentAuthorization(response: .init())
             return
@@ -206,14 +209,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         } else {
             // Paid course -> open web page
             if course.isPaid {
-                // FIXME: analytics dependency
-                AmplitudeAnalyticsEvents.Course.buyPressed(source: .courseScreen, courseID: course.id).send()
+                self.analytics.send(.courseBuyPressed(source: .courseScreen, courseID: course.id))
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.presenter.presentPaidCourseBuying(response: .init(course: course))
                 return
             }
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Course.JoinPressed.signed, parameters: nil)
+            self.analytics.send(.courseJoinAuthorizedUserClicked)
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course

@@ -23,8 +23,13 @@ final class CodeQuizAssembly: QuizAssembly {
         )
 
         let presenter = CodeQuizPresenter()
-        let interactor = CodeQuizInteractor(presenter: presenter, provider: provider, language: self.language)
-        let viewController = CodeQuizViewController(interactor: interactor)
+        let interactor = CodeQuizInteractor(
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared,
+            language: self.language
+        )
+        let viewController = CodeQuizViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 
         presenter.viewController = viewController
         self.moduleInput = interactor

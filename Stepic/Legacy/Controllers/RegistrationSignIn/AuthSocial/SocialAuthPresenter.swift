@@ -36,9 +36,10 @@ enum SocialAuthState {
 final class SocialAuthPresenter {
     weak var view: SocialAuthView?
 
-    var stepicsAPI: StepicsAPI
-    var authAPI: AuthAPI
-    var notificationStatusesAPI: NotificationStatusesAPI
+    private let stepicsAPI: StepicsAPI
+    private let authAPI: AuthAPI
+    private let notificationStatusesAPI: NotificationStatusesAPI
+    private let analytics: Analytics
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
@@ -48,11 +49,13 @@ final class SocialAuthPresenter {
         authAPI: AuthAPI,
         stepicsAPI: StepicsAPI,
         notificationStatusesAPI: NotificationStatusesAPI,
+        analytics: Analytics,
         view: SocialAuthView
     ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
+        self.analytics = analytics
         self.view = view
 
         // TODO: create NSNotification.Name extension
@@ -108,12 +111,12 @@ final class SocialAuthPresenter {
             User.removeAllExcept(user)
 
             if user.didJustRegister {
-                AmplitudeAnalyticsEvents.SignUp.registered(source: provider.amplitudeName).send()
+                self.analytics.send(.signUpRegistered(source: provider.amplitudeName))
             } else {
-                AmplitudeAnalyticsEvents.SignIn.loggedIn(source: provider.amplitudeName).send()
+                self.analytics.send(.signInLoggedIn(source: provider.amplitudeName))
             }
+            self.analytics.send(.loginSucceeded(provider: .social))
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
             self.pendingAuthProviderInfo = nil
             self.view?.update(with: .success)
 
@@ -127,7 +130,7 @@ final class SocialAuthPresenter {
                 self.view?.update(with: .error)
             case is NetworkError:
                 print("social auth: successfully signed in, but could not get user")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+                self.analytics.send(.loginSucceeded(provider: .social))
                 self.view?.update(with: .success)
             case SignInError.existingEmail(_, let email):
                 self.view?.update(with: .existingEmail(email: email ?? ""))
@@ -145,7 +148,7 @@ final class SocialAuthPresenter {
         // TODO: async?
         view?.dismissWebController()
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.codeReceived, parameters: nil)
+        self.analytics.send(.signInSocialAuthCodeReceived)
         auth(with: notification.userInfo?["code"] as? String ?? "")
     }
 
@@ -163,12 +166,12 @@ final class SocialAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+            self.analytics.send(.loginSucceeded(provider: .social))
             if let name = self.pendingAuthProviderInfo?.amplitudeName {
                 if user.didJustRegister {
-                    AmplitudeAnalyticsEvents.SignUp.registered(source: name).send()
+                    self.analytics.send(.signUpRegistered(source: name))
                 } else {
-                    AmplitudeAnalyticsEvents.SignIn.loggedIn(source: name).send()
+                    self.analytics.send(.signInLoggedIn(source: name))
                 }
             }
             self.pendingAuthProviderInfo = nil
@@ -181,7 +184,7 @@ final class SocialAuthPresenter {
             switch error {
             case is NetworkError:
                 print("social auth: successfully signed in, but could not get user")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
+                self.analytics.send(.loginSucceeded(provider: .social))
                 self.view?.update(with: .success)
             case SignInError.badConnection:
                 self.view?.update(with: .badConnection)
