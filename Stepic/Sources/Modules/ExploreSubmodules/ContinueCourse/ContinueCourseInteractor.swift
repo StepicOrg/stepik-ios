@@ -56,7 +56,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         }
 
         self.analytics.send(
-            .courseContinuePressed(source: .homeWidget, courseID: currentCourse.id, courseTitle: currentCourse.title)
+            .courseContinuePressed(source: .homeWidget, id: currentCourse.id, title: currentCourse.title)
         )
 
         let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: currentCourse.id)

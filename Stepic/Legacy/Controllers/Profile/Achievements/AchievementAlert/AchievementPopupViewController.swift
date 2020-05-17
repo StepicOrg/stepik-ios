@@ -67,7 +67,7 @@ final class AchievementPopupViewController: UIViewController {
         }
 
         self.analytics.send(
-            .achievementsPopupShared(source: self.source.rawValue, kind: data.id, level: data.completedLevel)
+            .achievementPopupShared(source: self.source.rawValue, kind: data.id, level: data.completedLevel)
         )
 
         let activityViewController = UIActivityViewController(

@@ -348,7 +348,7 @@ extension PinsMapView: UIScrollViewDelegate {
         pageControl?.currentPage = max(0, min(page, pageControl?.numberOfPages ?? monthsInYear))
 
         if !self.didAnalyticsReport {
-            self.analytics.send(.profileInteractedWithPinsMap)
+            self.analytics.send(.profilePinsMapInteracted)
             self.didAnalyticsReport = true
         }
     }

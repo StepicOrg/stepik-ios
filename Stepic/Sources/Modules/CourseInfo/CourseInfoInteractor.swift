@@ -147,7 +147,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
         if let urlPath = self.courseWebURLPath {
-            self.analytics.send(.courseShareClicked)
+            self.analytics.send(.shareCourseTapped)
             self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
         }
     }
@@ -189,7 +189,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         if !self.userAccountService.isAuthorized {
-            self.analytics.send(.courseJoinAnonymousUserClicked)
+            self.analytics.send(.anonymousUserTappedJoinCourse)
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.presenter.presentAuthorization(response: .init())
             return
@@ -209,13 +209,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         } else {
             // Paid course -> open web page
             if course.isPaid {
-                self.analytics.send(.courseBuyPressed(source: .courseScreen, courseID: course.id))
+                self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.presenter.presentPaidCourseBuying(response: .init(course: course))
                 return
             }
 
-            self.analytics.send(.courseJoinAuthorizedUserClicked)
+            self.analytics.send(.authorizedUserTappedJoinCourse)
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course

@@ -18,32 +18,38 @@ struct NotificationAlertsAnalytics {
     }
 
     func reportDefaultAlertShown() {
-        self.analytics.send(.notificationsDefaultAlertShown(source: self.source.description))
+        self.analytics.send(.requestNotificationsAuthorizationDefaultAlertShown(source: self.source.description))
     }
 
     func reportDefaultAlertInteractionResult(_ result: InteractionResult) {
         self.analytics.send(
-            .notificationsDefaultAlertInteracted(source: self.source.description, result: result.rawValue)
+            .requestNotificationsAuthorizationDefaultAlertInteracted(
+                source: self.source.description,
+                result: result.rawValue
+            )
         )
     }
 
     func reportCustomAlertShown() {
-        self.analytics.send(.notificationsCustomAlertShown(source: self.source.description))
+        self.analytics.send(.requestNotificationsAuthorizationCustomAlertShown(source: self.source.description))
     }
 
     func reportCustomAlertInteractionResult(_ result: InteractionResult) {
         self.analytics.send(
-            .notificationsCustomAlertInteracted(source: self.source.description, result: result.rawValue)
+            .requestNotificationsAuthorizationCustomAlertInteracted(source: self.source.description, result: result.rawValue)
         )
     }
 
     func reportPreferencesAlertShown() {
-        self.analytics.send(.notificationsPreferencesAlertShown(source: self.source.description))
+        self.analytics.send(.requestNotificationsAuthorizationPreferencesAlertShown(source: self.source.description))
     }
 
     func reportPreferencesAlertInteractionResult(_ result: InteractionResult) {
         self.analytics.send(
-            .notificationsPreferencesAlertInteracted(source: self.source.description, result: result.rawValue)
+            .requestNotificationsAuthorizationPreferencesAlertInteracted(
+                source: self.source.description,
+                result: result.rawValue
+            )
         )
     }
 

@@ -60,7 +60,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
     }
 
     func doCodeReset(request: CodeQuizFullscreen.ResetCode.Request) {
-        self.analytics.send(.codeResetClicked)
+        self.analytics.send(.codeResetTapped)
 
         let stepID = self.codeDetails.stepID
         let language = self.language

@@ -64,9 +64,7 @@ final class RegistrationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            self.analytics.send(.signUpRegistered(source: "email"))
-            self.analytics.send(.loginSucceeded(provider: .registered))
-
+            self.analytics.send(.signUpSucceeded(source: .email))
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
@@ -81,7 +79,7 @@ final class RegistrationPresenter {
                 self.view?.update(with: .badConnection)
             case is NetworkError:
                 print("registration: successfully signed in, but could not get user")
-                self.analytics.send(.loginSucceeded(provider: .registered))
+                self.analytics.send(.signUpSucceeded(source: .email))
                 self.view?.update(with: .success)
             case SignUpError.validation(_, _, _, _):
                 if let message = (error as? SignUpError)?.firstError {

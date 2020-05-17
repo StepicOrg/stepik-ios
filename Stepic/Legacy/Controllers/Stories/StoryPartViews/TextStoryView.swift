@@ -165,7 +165,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             return
         }
 
-        self.analytics.send(.storiesStoryButtonPressed(id: part.storyID, position: part.position))
+        self.analytics.send(.storyButtonPressed(id: part.storyID, position: part.position))
         self.urlNavigationDelegate?.open(url: url)
     }
 }

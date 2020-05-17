@@ -83,7 +83,7 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
 
     func onSwipeDismiss() {
         if let story = self.stories[safe: self.currentPosition] {
-            self.analytics.send(.storiesStoryClosed(id: story.id, type: .swipe))
+            self.analytics.send(.storyClosed(id: story.id, type: .swipe))
         }
     }
 

@@ -78,12 +78,10 @@ final class StepInteractor: StepInteractorProtocol {
             }
 
             if !self.didAnalyticsSend {
-                self.analytics.send(
-                    .stepsStepOpened(stepID: step.id, blockName: step.block.name, number: step.position - 1)
-                )
+                self.analytics.send(.stepOpened(id: step.id, blockName: step.block.name, position: step.position - 1))
 
                 if step.hasSubmissionRestrictions {
-                    self.analytics.send(.stepOpenedSubmissionWithRestriction)
+                    self.analytics.send(.stepWithSubmissionRestrictionsOpened)
                 }
 
                 self.didAnalyticsSend = true

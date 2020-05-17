@@ -319,7 +319,7 @@ final class QuizPresenter {
     private func submit() {
         //To view!!!!!!!!
 //        submissionPressedBlock?()
-        StepikAnalytics.shared.send(.stepSubmissionSubmitClicked(parameters: self.view?.submissionAnalyticsParams))
+        StepikAnalytics.shared.send(.submitSubmissionTapped(parameters: self.view?.submissionAnalyticsParams))
         if let reply = self.dataSource?.getReply() {
             self.view?.showLoading(visible: true)
             submit(reply: reply, completion: { [weak self] in
@@ -336,15 +336,18 @@ final class QuizPresenter {
         }
     }
 
-    private func submit(reply: Reply, completion: @escaping (() -> Void), error errorHandler: @escaping ((Error) -> Void)) {
-        guard let id = attempt?.id else { return }
-        performRequest({
-            [weak self] in
-            guard let s = self else { return }
-            _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
-                [weak self]
-                submission in
+    private func submit(reply: Reply, completion: @escaping () -> Void, error errorHandler: @escaping (Error) -> Void) {
+        guard let id = attempt?.id else {
+            return
+        }
 
+        performRequest({ [weak self] in
+            guard let s = self else {
+                return
+            }
+
+            _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
+                [weak self] submission in
                 guard let strongSelf = self else {
                     return
                 }
@@ -358,27 +361,16 @@ final class QuizPresenter {
                     }
                     return nil
                 }()
-
-                if let codeReply = reply as? CodeReply {
-                    StepikAnalytics.shared.send(
-                        .stepsSubmissionMade(
-                            stepID: strongSelf.step.id,
-                            submissionID: submission.id,
-                            blockName: strongSelf.step.block.name,
-                            isAdaptive: isAdaptive,
-                            codeLanguageName: codeReply.languageName
-                        )
+                let codeLanguageName = (reply as? CodeReply)?.languageName
+                StepikAnalytics.shared.send(
+                    .submissionMade(
+                        stepID: strongSelf.step.id,
+                        submissionID: submission.id,
+                        blockName: strongSelf.step.block.name,
+                        isAdaptive: isAdaptive,
+                        codeLanguageName: codeLanguageName
                     )
-                } else {
-                    StepikAnalytics.shared.send(
-                        .stepsSubmissionMade(
-                            stepID: strongSelf.step.id,
-                            submissionID: submission.id,
-                            blockName: strongSelf.step.block.name,
-                            isAdaptive: isAdaptive
-                        )
-                    )
-                }
+                )
 
                 strongSelf.submission = submission
                 strongSelf.checkSubmission(submission.id, time: 0, completion: completion)
@@ -386,9 +378,7 @@ final class QuizPresenter {
                 errorHandler(error)
                 //TODO: test this
             })
-        }, error: {
-            [weak self]
-            error in
+        }, error: { [weak self] error in
             if error == PerformRequestError.noAccessToRefreshToken {
                 self?.view?.logout {
                     [weak self] in
@@ -401,7 +391,7 @@ final class QuizPresenter {
     private func retrySubmission() {
         view?.showLoading(visible: true)
 
-        StepikAnalytics.shared.send(.stepSubmissionGenerateNewAttemptClicked)
+        StepikAnalytics.shared.send(.generateNewAttemptTapped)
 
         self.delegate?.submissionDidRetry()
 
@@ -477,14 +467,14 @@ final class QuizPresenter {
                     s.submission = nil
                     completion?()
                 })
-                }, error: { [weak self] error in
-                    if error == PerformRequestError.noAccessToRefreshToken {
-                        self?.view?.logout {
-                            [weak self] in
-                            self?.refreshAttempt()
-                        }
+            }, error: { [weak self] error in
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    self?.view?.logout {
+                        [weak self] in
+                        self?.refreshAttempt()
                     }
                 }
+            }
             )
         }
     }

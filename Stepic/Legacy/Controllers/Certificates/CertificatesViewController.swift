@@ -133,7 +133,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         }
 
         StepikAnalytics.shared.send(
-            .certificatesPressedShareCertificate(grade: certificate.grade, courseName: certificate.courseName ?? "")
+            .shareCertificateTapped(grade: certificate.grade, courseName: certificate.courseName ?? "")
         )
 
         DispatchQueue.global(qos: .background).async {
@@ -229,7 +229,7 @@ extension CertificatesViewController: UITableViewDelegate {
         }
 
         StepikAnalytics.shared.send(
-            .certificatesOpenedCertificate(
+            .certificateOpened(
                 grade: certificates[indexPath.row].grade,
                 courseName: certificates[indexPath.row].courseName ?? ""
             )

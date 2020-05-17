@@ -95,7 +95,7 @@ final class CardStepPresenter {
         view?.updateQuiz(with: quizViewController)
 
         quizViewController.isSubmitButtonHidden = true
-        self.analytics.send(.stepsStepOpened(stepID: step.id, blockName: step.block.name))
+        self.analytics.send(.stepOpened(id: step.id, blockName: step.block.name))
     }
 
     func problemDidLoad() {

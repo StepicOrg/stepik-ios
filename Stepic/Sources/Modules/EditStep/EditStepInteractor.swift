@@ -109,11 +109,11 @@ final class EditStepInteractor: EditStepInteractorProtocol {
                 switch event {
                 case .opened:
                     self.analytics.send(
-                        .stepsStepEditOpened(stepID: step.id, blockName: step.block.name, position: step.position)
+                        .editStepOpened(stepID: step.id, blockName: step.block.name, position: step.position)
                     )
                 case .completed:
                     self.analytics.send(
-                        .stepsStepEditCompleted(stepID: step.id, blockName: step.block.name, position: step.position)
+                        .editStepCompleted(stepID: step.id, blockName: step.block.name, position: step.position)
                     )
                 }
             }

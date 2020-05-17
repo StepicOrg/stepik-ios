@@ -34,7 +34,7 @@ final class SpotlightContinueUserActivityService: SpotlightContinueUserActivityS
             }
         )
 
-        self.analytics.send(.continueUserActivitySpotlightItemTapped(deepLinkRoute: deepLinkRoute))
+        self.analytics.send(.spotlightUserActivityContinued(deepLinkRoute: deepLinkRoute))
 
         return true
     }

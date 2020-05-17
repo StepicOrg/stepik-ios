@@ -533,10 +533,10 @@ extension SettingsViewController: SettingsViewDelegate {
     // MARK: Private Helpers
 
     private func handleDeleteAllContentAction() {
-        self.analytics.send(.downloadsClearCacheClicked)
+        self.analytics.send(.downloadsClearCacheTapped)
         self.requestDeleteAllContent { [weak self] isGranted in
             if let strongSelf = self, isGranted {
-                strongSelf.analytics.send(.downloadsAcceptedClearCacheClicked)
+                strongSelf.analytics.send(.downloadsClearCacheAccepted)
                 strongSelf.interactor.doDeleteAllContent(request: .init())
             }
         }
@@ -572,7 +572,7 @@ extension SettingsViewController: SettingsViewDelegate {
     }
 
     private func handleLogOutAction() {
-        self.analytics.send(.clickedLogout)
+        self.analytics.send(.logoutTapped)
         self.requestLogOut { [weak self] granted in
             if granted {
                 self?.interactor.doAccountLogOut(request: .init())

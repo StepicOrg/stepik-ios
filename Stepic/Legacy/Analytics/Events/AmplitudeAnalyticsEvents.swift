@@ -5,97 +5,107 @@ extension AnalyticsEvent {
 
     static let applicationDidLaunchFirstTime = AmplitudeAnalyticsEvent(name: "Launch first time")
 
-    static func launchSessionStart(
+    static func applicationDidLaunchWithOptions(
         notificationType: String? = nil,
-        sinceLastSession: TimeInterval
+        secondsSinceLastSession: TimeInterval
     ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Session start",
             parameters: [
                 "notification_type": notificationType as Any,
-                "seconds_since_last_session": sinceLastSession
+                "seconds_since_last_session": secondsSinceLastSession
             ]
         )
     }
 
     // MARK: - Onboarding -
 
-    static func onboardingScreenOpened(screenIndex: Int) -> AmplitudeAnalyticsEvent {
+    static let onboardingCompleted = AmplitudeAnalyticsEvent(name: "Onboarding completed")
+
+    static func onboardingScreenOpened(index: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Onboarding screen opened",
             parameters: [
-                "screen": screenIndex
+                "screen": index
             ]
         )
     }
 
-    static func onboardingClosed(screenIndex: Int) -> AmplitudeAnalyticsEvent {
+    static func onboardingScreenClosed(index: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Onboarding closed",
             parameters: [
-                "screen": screenIndex
+                "screen": index
             ]
         )
     }
 
-    static let onboardingCompleted = AmplitudeAnalyticsEvent(name: "Onboarding completed")
-
     // MARK: - SignIn -
 
-    static func signInLoggedIn(source: String) -> AmplitudeAnalyticsEvent {
+    static func signInSucceeded(source: AuthenticationSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Logged in",
             parameters: [
-                "source": source
+                "source": source.description
             ]
         )
+    }
+
+    enum AuthenticationSource {
+        case email
+        case social(SocialProviderInfo)
+
+        fileprivate var description: String {
+            switch self {
+            case .email:
+                return "email"
+            case .social(let provider):
+                return provider.amplitudeName
+            }
+        }
     }
 
     // MARK: - SignUp -
 
-    static func signUpRegistered(source: String) -> AmplitudeAnalyticsEvent {
+    static func signUpSucceeded(source: AuthenticationSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Registered",
             parameters: [
-                "source": source
+                "source": source.description
             ]
         )
     }
 
     // MARK: - Course -
 
-    static func courseJoined(source: String, courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func courseJoined(source: CourseSubscriptionSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course joined",
             parameters: [
-                "source": source,
-                "course": courseID,
-                "title": courseTitle
+                "source": source.rawValue,
+                "course": id,
+                "title": title
             ]
         )
     }
 
-    static func courseUnsubscribed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func courseUnsubscribed(id: Int, title: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course unsubscribed",
             parameters: [
-                "course": courseID,
-                "title": courseTitle
+                "course": id,
+                "title": title
             ]
         )
     }
 
-    static func courseContinuePressed(
-        source: CourseContinueSource,
-        courseID: Int,
-        courseTitle: String
-    ) -> AmplitudeAnalyticsEvent {
+    static func courseContinuePressed(source: CourseContinueSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Continue course pressed",
             parameters: [
                 "source": source.rawValue,
-                "course": courseID,
-                "title": courseTitle
+                "course": id,
+                "title": title
             ]
         )
     }
@@ -103,26 +113,27 @@ extension AnalyticsEvent {
     enum CourseContinueSource: String {
         case courseWidget = "course_widget"
         case homeWidget = "home_widget"
+        case courseScreen = "course_screen"
     }
 
-    static func courseBuyPressed(source: CourseBuyingSource, courseID: Int) -> AmplitudeAnalyticsEvent {
+    static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Buy course pressed",
             parameters: [
                 "source": source.rawValue,
-                "course": courseID
+                "course": id
             ]
         )
     }
 
-    enum CourseBuyingSource: String {
+    enum CourseBuySource: String {
         case courseWidget = "course_widget"
         case courseScreen = "course_screen"
     }
 
     // MARK: - Steps -
 
-    static func stepsSubmissionMade(
+    static func submissionMade(
         stepID: Int,
         submissionID: Int,
         blockName: String,
@@ -146,18 +157,20 @@ extension AnalyticsEvent {
         return AmplitudeAnalyticsEvent(name: "Submission made", parameters: parameters)
     }
 
-    static func stepsStepOpened(stepID: Int, blockName: String, number: Int? = nil) -> AmplitudeAnalyticsEvent {
+    static func stepOpened(id: Int, blockName: String, position: Int? = nil) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Step opened",
             parameters: [
-                "step": stepID,
+                "step": id,
                 "type": blockName,
-                "number": number as Any
+                "number": position as Any
             ]
         )
     }
 
-    static func stepsStepEditOpened(stepID: Int, blockName: String, position: Int) -> AmplitudeAnalyticsEvent {
+    // MARK: - EditStep -
+
+    static func editStepOpened(stepID: Int, blockName: String, position: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Step edit opened",
             parameters: [
@@ -168,7 +181,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func stepsStepEditCompleted(stepID: Int, blockName: String, position: Int) -> AmplitudeAnalyticsEvent {
+    static func editStepCompleted(stepID: Int, blockName: String, position: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Step edit completed",
             parameters: [
@@ -181,28 +194,17 @@ extension AnalyticsEvent {
 
     // MARK: - Downloads -
 
-    static func downloadsDownloadStarted(content: DownloadsContent) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Download started",
-            parameters: [
-                "content": content.rawValue
-            ]
-        )
+    static let downloadsScreenOpened = AmplitudeAnalyticsEvent(name: "Downloads screen opened")
+
+    static func downloadStarted(content: DownloadContent) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(name: "Download started", parameters: ["content": content.rawValue])
     }
 
-    static func downloadsDownloadCancelled(content: DownloadsContent) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Download cancelled",
-            parameters: [
-                "content": content.rawValue
-            ]
-        )
+    static func downloadCancelled(content: DownloadContent) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(name: "Download cancelled", parameters: ["content": content.rawValue])
     }
 
-    static func downloadsDownloadDeleted(
-        content: DownloadsContent,
-        source: DownloadsDeleteDownloadSource
-    ) -> AmplitudeAnalyticsEvent {
+    static func downloadDeleted(content: DownloadContent, source: DeleteDownloadSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Download deleted",
             parameters: [
@@ -212,8 +214,8 @@ extension AnalyticsEvent {
         )
     }
 
-    static func downloadsDeleteDownloadsConfirmationInteracted(
-        content: DownloadsContent,
+    static func deleteDownloadConfirmationInteracted(
+        content: DownloadContent,
         isConfirmed: Bool
     ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
@@ -225,25 +227,23 @@ extension AnalyticsEvent {
         )
     }
 
-    static let downloadsScreenOpened = AmplitudeAnalyticsEvent(name: "Downloads screen opened")
-
-    enum DownloadsContent: String {
+    enum DownloadContent: String {
         case course
         case section
         case lesson
         case step
     }
 
-    enum DownloadsDeleteDownloadSource: String {
+    enum DeleteDownloadSource: String {
         case syllabus
         case downloads
     }
 
     // MARK: - Search -
 
-    static let searchCourseStarted = AmplitudeAnalyticsEvent(name: "Course search started")
+    static let courseSearchStarted = AmplitudeAnalyticsEvent(name: "Course search started")
 
-    static func searchCourseSearched(query: String, position: Int, suggestion: String) -> AmplitudeAnalyticsEvent {
+    static func courseSearched(query: String, position: Int, suggestion: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course searched",
             parameters: [
@@ -258,7 +258,7 @@ extension AnalyticsEvent {
 
     static let notificationsScreenOpened = AmplitudeAnalyticsEvent(name: "Notifications screen opened")
 
-    static func notificationsForegroundNotificationReceived(notificationType: String) -> AmplitudeAnalyticsEvent {
+    static func foregroundNotificationReceived(notificationType: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Foreground notification received",
             parameters: [
@@ -267,7 +267,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsInactiveNotificationReceived(notificationType: String) -> AmplitudeAnalyticsEvent {
+    static func inactiveNotificationReceived(notificationType: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Inactive notification received",
             parameters: [
@@ -276,7 +276,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsDefaultAlertShown(source: String) -> AmplitudeAnalyticsEvent {
+    static func requestNotificationsAuthorizationDefaultAlertShown(source: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Default notification alert shown",
             parameters: [
@@ -285,7 +285,10 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsDefaultAlertInteracted(source: String, result: String) -> AmplitudeAnalyticsEvent {
+    static func requestNotificationsAuthorizationDefaultAlertInteracted(
+        source: String,
+        result: String
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Default notification alert interacted",
             parameters: [
@@ -295,7 +298,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsCustomAlertShown(source: String) -> AmplitudeAnalyticsEvent {
+    static func requestNotificationsAuthorizationCustomAlertShown(source: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Custom notification alert shown",
             parameters: [
@@ -304,7 +307,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsCustomAlertInteracted(
+    static func requestNotificationsAuthorizationCustomAlertInteracted(
         source: String,
         result: String
     ) -> AmplitudeAnalyticsEvent {
@@ -317,7 +320,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsPreferencesAlertShown(source: String) -> AmplitudeAnalyticsEvent {
+    static func requestNotificationsAuthorizationPreferencesAlertShown(source: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Preferences notification alert shown",
             parameters: [
@@ -326,7 +329,10 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsPreferencesAlertInteracted(source: String, result: String) -> AmplitudeAnalyticsEvent {
+    static func requestNotificationsAuthorizationPreferencesAlertInteracted(
+        source: String,
+        result: String
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Preferences notification alert interacted",
             parameters: [
@@ -336,7 +342,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func notificationsPreferencesPushPermissionChanged(isRegistered: Bool) -> AmplitudeAnalyticsEvent {
+    static func notificationsPushPermissionPreferenceChanged(isRegistered: Bool) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Preferences push permission changed",
             parameters: [
@@ -355,7 +361,7 @@ extension AnalyticsEvent {
 
     static func catalogCategoryOpened(categoryID: Int, categoryNameEn: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
-            name: "Category opened ",
+            name: "Category opened",
             parameters: [
                 "category_id": categoryID,
                 "category_name_en": categoryNameEn
@@ -365,7 +371,7 @@ extension AnalyticsEvent {
 
     // MARK: - CourseList -
 
-    static let courseListShowAllClicked = AmplitudeAnalyticsEvent(name: "Course list show all clicked")
+    static let courseListShowAllTapped = AmplitudeAnalyticsEvent(name: "Course list show all clicked")
 
     // MARK: - Profile -
 
@@ -377,6 +383,8 @@ extension AnalyticsEvent {
             ]
         )
     }
+
+    // MARK: - Profile Edit -
 
     static let profileEditScreenOpened = AmplitudeAnalyticsEvent(name: "Profile edit screen opened")
 
@@ -397,11 +405,11 @@ extension AnalyticsEvent {
         )
     }
 
-    static func achievementsPopupOpened(source: String, kind: String, level: Int? = nil) -> AmplitudeAnalyticsEvent {
+    static func achievementPopupOpened(source: String, kind: String, level: Int? = nil) -> AmplitudeAnalyticsEvent {
         achievementsPopupEvent(name: "Achievement popup opened", source: source, kind: kind, level: level)
     }
 
-    static func achievementsPopupShared(source: String, kind: String, level: Int? = nil) -> AmplitudeAnalyticsEvent {
+    static func achievementPopupShared(source: String, kind: String, level: Int? = nil) -> AmplitudeAnalyticsEvent {
         achievementsPopupEvent(name: "Achievement share pressed", source: source, kind: kind, level: level)
     }
 
@@ -477,7 +485,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseReviewsWritePressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func writeCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Create course review pressed",
             parameters: [
@@ -487,7 +495,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseReviewsEditPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func editCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Edit course review pressed",
             parameters: [
@@ -497,7 +505,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseReviewsCreated(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewCreated(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review created",
             parameters: [
@@ -507,7 +515,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseReviewsUpdated(courseID: Int, fromRating: Int, toRating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewUpdated(courseID: Int, fromRating: Int, toRating: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review updated",
             parameters: [
@@ -518,7 +526,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseReviewsDeleted(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewDeleted(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review deleted",
             parameters: [
@@ -547,7 +555,7 @@ extension AnalyticsEvent {
 
     // MARK: - Stories -
 
-    static func storiesStoryOpened(id: Int) -> AmplitudeAnalyticsEvent {
+    static func storyOpened(id: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Story opened",
             parameters: [
@@ -556,7 +564,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func storiesStoryPartOpened(id: Int, position: Int) -> AmplitudeAnalyticsEvent {
+    static func storyPartOpened(id: Int, position: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Story part opened",
             parameters: [
@@ -566,7 +574,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func storiesStoryButtonPressed(id: Int, position: Int) -> AmplitudeAnalyticsEvent {
+    static func storyButtonPressed(id: Int, position: Int) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Story button pressed",
             parameters: [
@@ -576,7 +584,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func storiesStoryClosed(id: Int, type: StoriesStoryCloseType) -> AmplitudeAnalyticsEvent {
+    static func storyClosed(id: Int, type: StoryCloseType) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Story closed",
             parameters: [
@@ -586,7 +594,7 @@ extension AnalyticsEvent {
         )
     }
 
-    enum StoriesStoryCloseType: String {
+    enum StoryCloseType: String {
         case cross
         case swipe
         case automatic
@@ -594,20 +602,20 @@ extension AnalyticsEvent {
 
     // MARK: - PersonalDeadlines -
 
-    static let personalDeadlinesScheduleButtonClicked = AmplitudeAnalyticsEvent(
+    static let personalDeadlinesScheduleButtonTapped = AmplitudeAnalyticsEvent(
         name: "Personal deadline schedule button pressed"
     )
 
     // MARK: - Video -
 
-    static let videoContinuedInBackground = AmplitudeAnalyticsEvent(name: "Video played in background")
+    static let videoPlayerDidEnterBackground = AmplitudeAnalyticsEvent(name: "Video played in background")
 
-    static func videoChangedSpeed(source: String, target: String) -> AmplitudeAnalyticsEvent {
+    static func videoPlayerDidChangeSpeed(currentSpeed: String, targetSpeed: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Video rate changed",
             parameters: [
-                "source": source,
-                "target": target
+                "source": currentSpeed,
+                "target": targetSpeed
             ]
         )
     }
@@ -632,7 +640,7 @@ extension AnalyticsEvent {
 
     // MARK: - Continue User Activity -
 
-    static func continueUserActivitySpotlightItemTapped(deepLinkRoute: DeepLinkRoute) -> AmplitudeAnalyticsEvent {
+    static func spotlightUserActivityContinued(deepLinkRoute: DeepLinkRoute) -> AmplitudeAnalyticsEvent {
         let type: String = {
             switch deepLinkRoute {
             case .lesson:

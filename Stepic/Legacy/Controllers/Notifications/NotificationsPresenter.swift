@@ -332,7 +332,7 @@ final class NotificationsPresenter {
 
         notificationsAPI.markAllAsRead().done { _ in
             Notification.markAllAsRead()
-            self.analytics.send(.notificationsMarkAllAsReadClicked(badgeUnreadCount: self.badgeUnreadCount))
+            self.analytics.send(.markAllNotificationsAsReadTapped(badgeUnreadCount: self.badgeUnreadCount))
 
             NotificationCenter.default.post(name: .allNotificationsMarkedAsRead, object: self, userInfo: ["section": self.section])
             self.view?.updateMarkAllAsReadButton(with: .normal)

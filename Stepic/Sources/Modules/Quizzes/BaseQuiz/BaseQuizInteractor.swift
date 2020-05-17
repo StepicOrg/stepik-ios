@@ -120,7 +120,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.presentSubmission(attempt: attempt, submission: evaluationSubmission)
 
         print("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
-        self.analytics.send(.stepSubmissionSubmitClicked(parameters: nil))
+        self.analytics.send(.submitSubmissionTapped(parameters: nil))
 
         firstly {
             self.provider.createSubmission(for: self.step, attempt: attempt, reply: reply)
@@ -138,9 +138,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 return nil
             }()
             let codeLanguageName: String? = (reply as? CodeReply)?.languageName
-
             self.analytics.send(
-                .stepsSubmissionMade(
+                .submissionMade(
                     stepID: self.step.id,
                     submissionID: submission.id,
                     blockName: self.step.block.name,
@@ -234,7 +233,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         return firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
-                self.analytics.send(.stepSubmissionGenerateNewAttemptClicked)
+                self.analytics.send(.generateNewAttemptTapped)
                 return self.provider.createAttempt(for: self.step)
             } else {
                 return self.provider

@@ -122,7 +122,7 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     @objc
     private func showAllButtonClicked() {
-        self.analytics.send(.courseListShowAllClicked)
+        self.analytics.send(.courseListShowAllTapped)
         self.onShowAllButtonClick?()
     }
 }

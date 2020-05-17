@@ -203,7 +203,7 @@ extension CardsStepsViewController: KolodaViewDataSource {
 
 extension CardsStepsViewController: CardStepDelegate {
     func stepSubmissionDidCorrect() {
-        self.analytics.send(.adaptiveStepCorrectAnswer)
+        self.analytics.send(.adaptiveStepSubmissionDidCorrect)
         self.analytics.send(.adaptiveStepSubmissionCreated)
 
         presenter?.sendReaction(.solved)
@@ -212,7 +212,7 @@ extension CardsStepsViewController: CardStepDelegate {
     }
 
     func stepSubmissionDidWrong() {
-        self.analytics.send(.adaptiveStepWrongAnswer)
+        self.analytics.send(.adaptiveStepSubmissionDidWrong)
         self.analytics.send(.adaptiveStepSubmissionCreated)
 
         presenter?.updateRatingWhenFail()
@@ -220,7 +220,7 @@ extension CardsStepsViewController: CardStepDelegate {
     }
 
     func stepSubmissionDidRetry() {
-        self.analytics.send(.adaptiveStepRetryAnswer)
+        self.analytics.send(.adaptiveStepSubmissionDidRetry)
         topCard?.controlState = .unsolved
     }
 

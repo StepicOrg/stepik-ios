@@ -17,7 +17,7 @@ final class AboutAppViewController: UIViewController {
     private lazy var socialNetworksView: StepikSocialNetworksView = {
         let view = StepikSocialNetworksView()
         view.onSocialNetworkClick = { socialNetwork in
-            StepikAnalytics.shared.send(.settingsSocialNetworkClicked(socialNetwork))
+            StepikAnalytics.shared.send(.stepikSocialNetworkTapped(socialNetwork))
             if let url = socialNetwork.url {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

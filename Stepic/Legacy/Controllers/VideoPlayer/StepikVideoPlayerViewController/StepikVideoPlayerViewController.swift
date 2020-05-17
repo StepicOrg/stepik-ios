@@ -497,9 +497,9 @@ final class StepikVideoPlayerViewController: UIViewController {
                     }
 
                     strongSelf.analytics.send(
-                        .videoChangedSpeed(
-                            source: strongSelf.currentVideoRate.uniqueIdentifier,
-                            target: videoRate.uniqueIdentifier
+                        .videoPlayerDidChangeSpeed(
+                            currentSpeed: strongSelf.currentVideoRate.uniqueIdentifier,
+                            targetSpeed: videoRate.uniqueIdentifier
                         )
                     )
 
@@ -551,7 +551,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                     }
 
                     strongSelf.analytics.send(
-                        .videoPlayerVideoQualityChanged(
+                        .videoPlayerDidChangeQuality(
                             quality: url.quality,
                             deviceModel: DeviceInfo.current.deviceModelString
                         )

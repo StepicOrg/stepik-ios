@@ -41,7 +41,7 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
             )
         }
 
-        self.analytics.send(.downloadsDownloadDeleted(content: .course, source: .downloads))
+        self.analytics.send(.downloadDeleted(content: .course, source: .downloads))
 
         self.provider.deleteCachedCourses([course]).then {
             self.provider.fetchCachedCourses()

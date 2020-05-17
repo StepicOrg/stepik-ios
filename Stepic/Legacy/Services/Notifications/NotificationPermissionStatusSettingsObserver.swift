@@ -72,7 +72,7 @@ final class NotificationPermissionStatusSettingsObserver {
     }
 
     private func reportPreferencesPushPermissionStatusChange(_ permissionStatus: NotificationPermissionStatus) {
-        self.analytics.send(.notificationsPreferencesPushPermissionChanged(isRegistered: permissionStatus.isRegistered))
+        self.analytics.send(.notificationsPushPermissionPreferenceChanged(isRegistered: permissionStatus.isRegistered))
     }
 
     private func updateUserPushPermissionStatusIfNeeded(_ permissionStatus: NotificationPermissionStatus) {

@@ -8,11 +8,11 @@ extension AnalyticsEvent {
 
     // MARK: - Notifications -
 
-    static func notificationsMarkAllAsReadClicked(badgeUnreadCount: Int) -> AnalyticsEvent {
+    static func markAllNotificationsAsReadTapped(badgeUnreadCount: Int) -> AnalyticsEvent {
         AnalyticsEvent(name: "notifications_mark_all_as_read", parameters: ["badge": badgeUnreadCount])
     }
 
-    static func notificationsMarkAsReadClicked(source: NotificationsMarkAsReadActionSource) -> AnalyticsEvent {
+    static func markNotificationAsReadTapped(source: NotificationsMarkAsReadActionSource) -> AnalyticsEvent {
         AnalyticsEvent(name: "notifications_mark_as_read", parameters: ["action": source.rawValue])
     }
 
@@ -24,9 +24,9 @@ extension AnalyticsEvent {
     // MARK: - Adaptive -
 
     static let adaptiveStepSubmissionCreated = AnalyticsEvent(name: "adaptive_submission_created")
-    static let adaptiveStepCorrectAnswer = AnalyticsEvent(name: "adaptive_correct_answer")
-    static let adaptiveStepWrongAnswer = AnalyticsEvent(name: "adaptive_wrong_answer")
-    static let adaptiveStepRetryAnswer = AnalyticsEvent(name: "adaptive_retry_answer")
+    static let adaptiveStepSubmissionDidCorrect = AnalyticsEvent(name: "adaptive_correct_answer")
+    static let adaptiveStepSubmissionDidWrong = AnalyticsEvent(name: "adaptive_wrong_answer")
+    static let adaptiveStepSubmissionDidRetry = AnalyticsEvent(name: "adaptive_retry_answer")
 
     static let adaptiveOnboardingFinished = AnalyticsEvent(name: "adaptive_onboarding_finished")
 
@@ -47,7 +47,7 @@ extension AnalyticsEvent {
         AnalyticsEvent(name: "personal_deadline_mode_chosen", parameters: ["hours": weeklyLoadHours])
     }
 
-    static let personalDeadlineChangePressed = AnalyticsEvent(name: "personal_deadline_change_pressed")
+    static let personalDeadlineChangeTapped = AnalyticsEvent(name: "personal_deadline_change_pressed")
 
     static let personalDeadlineTimeOpened = AnalyticsEvent(name: "personal_deadline_time_opened")
     static let personalDeadlineTimeClosed = AnalyticsEvent(name: "personal_deadline_time_closed")
@@ -57,12 +57,12 @@ extension AnalyticsEvent {
 
     // MARK: - Code -
 
-    static let codeInputAccessoryHideKeyboardClicked = AnalyticsEvent(name: "code_hide_keyboard")
-    static let codeFullscreenClicked = AnalyticsEvent(name: "code_fullscreen_pressed")
-    static let codeResetClicked = AnalyticsEvent(name: "code_reset_pressed", parameters: ["size": "standard"])
-    static let codeExitFullscreenClicked = AnalyticsEvent(name: "code_exit_fullscreen")
+    static let codeInputAccessoryHideKeyboardTapped = AnalyticsEvent(name: "code_hide_keyboard")
+    static let codeResetTapped = AnalyticsEvent(name: "code_reset_pressed", parameters: ["size": "standard"])
+    static let codeOpenFullscreenTapped = AnalyticsEvent(name: "code_fullscreen_pressed")
+    static let codeExitFullscreenTapped = AnalyticsEvent(name: "code_exit_fullscreen")
 
-    static func codeInputAccessoryButtonClicked(language: String, symbol: String) -> AnalyticsEvent {
+    static func codeInputAccessoryButtonTapped(language: String, symbol: String) -> AnalyticsEvent {
         AnalyticsEvent(
             name: "code_toolbar_selected",
             parameters: [
@@ -84,8 +84,8 @@ extension AnalyticsEvent {
 
     // MARK: - Streaks -
 
-    static let streaksPreferencesOn = AnalyticsEvent(name: "streak_notification_pref_on")
-    static let streaksPreferencesOff = AnalyticsEvent(name: "streak_notification_pref_off")
+    static let streaksPreferenceOn = AnalyticsEvent(name: "streak_notification_pref_on")
+    static let streaksPreferenceOff = AnalyticsEvent(name: "streak_notification_pref_off")
 
     static func streaksNotifySuggestionShown(source: String, trigger: String) -> AnalyticsEvent {
         AnalyticsEvent(name: "streak_suggestion_shown_source_\(source)_trigger_\(trigger)")
@@ -105,57 +105,45 @@ extension AnalyticsEvent {
 
     // MARK: - Profile -
 
-    static let profileSettingsClicked = AnalyticsEvent(name: "main_choice_settings")
-    static let profileInteractedWithPinsMap = AnalyticsEvent(name: "pins_map_interaction")
+    static let profileOpenSettingsTapped = AnalyticsEvent(name: "main_choice_settings")
+    static let profilePinsMapInteracted = AnalyticsEvent(name: "pins_map_interaction")
 
     // MARK: - Step -
 
-    static let stepSubmissionGenerateNewAttemptClicked = AnalyticsEvent(name: "clicked_generate_new_attempt")
-    static let stepSubmissionSolveInWebClicked = AnalyticsEvent(name: "clicked_solve_in_web")
-    static let stepOpenedSubmissionWithRestriction = AnalyticsEvent(name: "step_with_submission_restriction")
+    static let generateNewAttemptTapped = AnalyticsEvent(name: "clicked_generate_new_attempt")
+    static let solveQuizInWebTapped = AnalyticsEvent(name: "clicked_solve_in_web")
+    static let stepWithSubmissionRestrictionsOpened = AnalyticsEvent(name: "step_with_submission_restriction")
 
-    static func stepSubmissionSubmitClicked(parameters: [String: Any]?) -> AnalyticsEvent {
+    static func submitSubmissionTapped(parameters: [String: Any]?) -> AnalyticsEvent {
         AnalyticsEvent(name: "clicked_submit", parameters: parameters)
     }
 
     // MARK: - Course -
 
-    static let courseShareClicked = AnalyticsEvent(name: "share_course_clicked")
+    static let shareCourseTapped = AnalyticsEvent(name: "share_course_clicked")
 
     // MARK: JoinPressed
 
-    static let courseJoinAnonymousUserClicked = AnalyticsEvent(name: "join_course_anonymous")
-    static let courseJoinAuthorizedUserClicked = AnalyticsEvent(name: "join_course_signed")
+    static let anonymousUserTappedJoinCourse = AnalyticsEvent(name: "join_course_anonymous")
+    static let authorizedUserTappedJoinCourse = AnalyticsEvent(name: "join_course_signed")
 
     // MARK: Video
 
-    static let courseDetailVideoClicked = AnalyticsEvent(name: "course_detail_video_clicked")
+    static let courseDetailVideoTapped = AnalyticsEvent(name: "course_detail_video_clicked")
     static let courseDetailVideoShown = AnalyticsEvent(name: "course_detail_video_shown")
-
-    // MARK: - Login -
-
-    static func loginSucceeded(provider: LoginProvider) -> AnalyticsEvent {
-        AnalyticsEvent(name: "success_login", parameters: ["provider": provider.rawValue])
-    }
-
-    enum LoginProvider: String {
-        case password
-        case social
-        case registered
-    }
 
     // MARK: - SignIn -
 
-    static func signInClicked(interactionType: LoginInteractionType) -> AnalyticsEvent {
+    static func signInTapped(interactionType: LoginInteractionType) -> AnalyticsEvent {
         AnalyticsEvent(
             name: "click_sign_in_with_interaction_type",
             parameters: ["LoginInteractionType": interactionType.rawValue]
         )
     }
 
-    static let clickedSignInOnEmailAuthScreen = AnalyticsEvent(name: "clicked_SignIn_on_email_auth_screen")
-    static let clickedSignInNextSignInScreen = AnalyticsEvent(name: "click_sign_in_next_sign_in_screen")
-    static let clickedSignInWithEmailOnSocialAuth = AnalyticsEvent(name: "clicked_SignIn_on_launch_screen")
+    static let tappedSignInOnEmailAuthScreen = AnalyticsEvent(name: "clicked_SignIn_on_email_auth_screen")
+    static let tappedSignInReturnKeyOnSignInScreen = AnalyticsEvent(name: "click_sign_in_next_sign_in_screen")
+    static let tappedSignInWithEmailOnSocialAuthScreen = AnalyticsEvent(name: "clicked_SignIn_on_launch_screen")
 
     enum LoginInteractionType: String {
         case button
@@ -164,24 +152,24 @@ extension AnalyticsEvent {
 
     // MARK: Fields
 
-    static let tapOnFieldsLogin = AnalyticsEvent(name: "tap_on_fields_login")
-    static let typingTextFieldsLogin = AnalyticsEvent(name: "typing_text_fields_login")
+    static let loginTextFieldTapped = AnalyticsEvent(name: "tap_on_fields_login")
+    static let loginTextFieldDidChange = AnalyticsEvent(name: "typing_text_fields_login")
 
     // MARK: Social
 
-    static let signInSocialAuthCodeReceived = AnalyticsEvent(name: "Api:auth with social account")
+    static let socialAuthDidReceiveCode = AnalyticsEvent(name: "Api:auth with social account")
 
-    static func clickedSignInWithSocialProvider(providerName: String) -> AnalyticsEvent {
+    static func socialAuthProviderTapped(providerName: String) -> AnalyticsEvent {
         AnalyticsEvent(name: "social_login", parameters: ["social": providerName])
     }
 
     // MARK: - SignUp -
 
-    static let clickedSignUpOnEmailAuthScreen = AnalyticsEvent(name: "clicked_SignUp_on_email_auth_screen")
-    static let clickedRegistrationSendIme = AnalyticsEvent(name: "click_registration_send_ime")
-    static let clickedSignUpOnSocialAuth = AnalyticsEvent(name: "clicked_SignUp_on_launch_screen")
+    static let tappedSignUpOnEmailAuthScreen = AnalyticsEvent(name: "clicked_SignUp_on_email_auth_screen")
+    static let tappedSignUpOnSocialAuthScreen = AnalyticsEvent(name: "clicked_SignUp_on_launch_screen")
+    static let tappedRegistrationSendIme = AnalyticsEvent(name: "click_registration_send_ime")
 
-    static func signUpClicked(interactionType: LoginInteractionType) -> AnalyticsEvent {
+    static func signUpTapped(interactionType: LoginInteractionType) -> AnalyticsEvent {
         AnalyticsEvent(
             name: "click_registration_with_interaction_type",
             parameters: ["LoginInteractionType": interactionType.rawValue]
@@ -190,32 +178,32 @@ extension AnalyticsEvent {
 
     // MARK: Fields
 
-    static let tapOnFieldsRegistration = AnalyticsEvent(name: "tap_on_fields_registration")
-    static let typingTextFieldsRegistration = AnalyticsEvent(name: "typing_text_fields_registration")
+    static let registrationTextFieldTapped = AnalyticsEvent(name: "tap_on_fields_registration")
+    static let registrationTextFieldDidChange = AnalyticsEvent(name: "typing_text_fields_registration")
 
     // MARK: - Rate -
 
-    static func rateAppClicked(parameters: [String: Any]?) -> AnalyticsEvent {
+    static func rateAppTapped(parameters: [String: Any]?) -> AnalyticsEvent {
         AnalyticsEvent(name: "app_rate", parameters: parameters)
     }
 
     // MARK: Positive
 
-    static func rateAppPositiveStateAppStoreClicked(parameters: [String: Any]?) -> AnalyticsEvent {
+    static func rateAppPositiveStateAppStoreTapped(parameters: [String: Any]?) -> AnalyticsEvent {
         AnalyticsEvent(name: "app_rate_positive_appstore", parameters: parameters)
     }
 
-    static func rateAppPositiveStateLaterClicked(parameters: [String: Any]?) -> AnalyticsEvent {
+    static func rateAppPositiveStateLaterTapped(parameters: [String: Any]?) -> AnalyticsEvent {
         AnalyticsEvent(name: "app_rate_positive_later", parameters: parameters)
     }
 
     // MARK: Negative
 
-    static func rateAppNegativeStateWriteEmailClicked(parameters: [String: Any]?) -> AnalyticsEvent {
+    static func rateAppNegativeStateWriteEmailTapped(parameters: [String: Any]?) -> AnalyticsEvent {
         AnalyticsEvent(name: "app_rate_negative_email", parameters: parameters)
     }
 
-    static func rateAppNegativeStateLaterClicked(parameters: [String: Any]?) -> AnalyticsEvent {
+    static func rateAppNegativeStateLaterTapped(parameters: [String: Any]?) -> AnalyticsEvent {
         AnalyticsEvent(name: "app_rate_negative_later", parameters: parameters)
     }
 
@@ -231,7 +219,7 @@ extension AnalyticsEvent {
 
     static let videoPlayerOpened = AnalyticsEvent(name: "video_player_opened")
 
-    static func videoPlayerVideoQualityChanged(quality: String, deviceModel: String) -> AnalyticsEvent {
+    static func videoPlayerDidChangeQuality(quality: String, deviceModel: String) -> AnalyticsEvent {
         AnalyticsEvent(
             name: "video_quality_changed",
             parameters: [
@@ -243,7 +231,7 @@ extension AnalyticsEvent {
 
     // MARK: - Certificates -
 
-    static func certificatesOpenedCertificate(grade: Int, courseName: String) -> AnalyticsEvent {
+    static func certificateOpened(grade: Int, courseName: String) -> AnalyticsEvent {
         AnalyticsEvent(
             name: "certificates_opened_certificate",
             parameters: [
@@ -253,7 +241,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func certificatesPressedShareCertificate(grade: Int, courseName: String) -> AnalyticsEvent {
+    static func shareCertificateTapped(grade: Int, courseName: String) -> AnalyticsEvent {
         AnalyticsEvent(
             name: "certificates_pressed_share_certificate",
             parameters: [
@@ -325,7 +313,7 @@ extension AnalyticsEvent {
 
     // MARK: - Settings -
 
-    static func settingsSocialNetworkClicked(_ socialNetwork: StepikSocialNetwork) -> AnalyticsEvent {
+    static func stepikSocialNetworkTapped(_ socialNetwork: StepikSocialNetwork) -> AnalyticsEvent {
         AnalyticsEvent(name: "settings_click_social_network", parameters: ["social": socialNetwork.rawValue])
     }
 
@@ -370,16 +358,16 @@ extension AnalyticsEvent {
 
     // MARK: - Search -
 
-    static let searchCourseCancelled = AnalyticsEvent(name: "search_cancelled")
+    static let courseSearchCancelled = AnalyticsEvent(name: "search_cancelled")
 
     // MARK: - Downloads -
 
-    static let downloadsClearCacheClicked = AnalyticsEvent(name: "clicked_clear_cache")
-    static let downloadsAcceptedClearCacheClicked = AnalyticsEvent(name: "clicked_accepted_clear_cache")
+    static let downloadsClearCacheTapped = AnalyticsEvent(name: "clicked_clear_cache")
+    static let downloadsClearCacheAccepted = AnalyticsEvent(name: "clicked_accepted_clear_cache")
 
     // MARK: - Logout -
 
-    static let clickedLogout = AnalyticsEvent(name: "clicked_logout")
+    static let logoutTapped = AnalyticsEvent(name: "clicked_logout")
 
     // MARK: - Errors -
 

@@ -78,7 +78,7 @@ final class StreakNotificationsControlPresenter {
         NotificationsService().scheduleStreakLocalNotification(
             UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC
         )
-        self.analytics.send(.streaksPreferencesOn)
+        self.analytics.send(.streaksPreferenceOn)
 
         completion?(true)
     }
@@ -86,7 +86,7 @@ final class StreakNotificationsControlPresenter {
     private func turnOffNotifications() {
         NotificationsService().cancelStreakLocalNotifications()
         PreferencesContainer.notifications.allowStreaksNotifications = false
-        self.analytics.send(.streaksPreferencesOff)
+        self.analytics.send(.streaksPreferenceOff)
     }
 
     private func checkPermissionStatus() {

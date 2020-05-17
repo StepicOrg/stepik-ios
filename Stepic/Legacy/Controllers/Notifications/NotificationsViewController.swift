@@ -201,7 +201,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
         self.presenter?.updateNotification(with: id, status: .read)
-        self.analytics.send(.notificationsMarkAsReadClicked(source: .button))
+        self.analytics.send(.markNotificationAsReadTapped(source: .button))
 
         cell.status = .read
     }
@@ -218,7 +218,7 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
         }
 
         self.presenter?.updateNotification(with: id, status: .read)
-        self.analytics.send(.notificationsMarkAsReadClicked(source: .link))
+        self.analytics.send(.markNotificationAsReadTapped(source: .link))
 
         cell.status = .read
     }

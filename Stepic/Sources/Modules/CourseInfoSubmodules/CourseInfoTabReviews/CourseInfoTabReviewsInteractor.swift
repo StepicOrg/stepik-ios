@@ -122,9 +122,9 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         self.presenter.presentWriteCourseReview(response: .init(course: course, review: self.currentUserReview))
 
         if self.currentUserReview == nil {
-            self.analytics.send(.courseReviewsWritePressed(courseID: course.id, courseTitle: course.title))
+            self.analytics.send(.writeCourseReviewPressed(courseID: course.id, courseTitle: course.title))
         } else {
-            self.analytics.send(.courseReviewsEditPressed(courseID: course.id, courseTitle: course.title))
+            self.analytics.send(.editCourseReviewPressed(courseID: course.id, courseTitle: course.title))
         }
     }
 
@@ -146,7 +146,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             }
 
             if let deletingScore = deletingScore {
-                self.analytics.send(.courseReviewsDeleted(courseID: course.id, rating: deletingScore))
+                self.analytics.send(.courseReviewDeleted(courseID: course.id, rating: deletingScore))
             }
 
             self.presenter.presentCourseReviewDelete(
@@ -255,7 +255,7 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
 
 extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
     func handleCourseReviewCreated(_ courseReview: CourseReview) {
-        self.analytics.send(.courseReviewsCreated(courseID: courseReview.courseID, rating: courseReview.score))
+        self.analytics.send(.courseReviewCreated(courseID: courseReview.courseID, rating: courseReview.score))
 
         self.currentUserReview = courseReview
         self.presenter.presentReviewCreated(response: .init(review: courseReview))
@@ -264,7 +264,7 @@ extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
     func handleCourseReviewUpdated(_ courseReview: CourseReview) {
         if let currentUserReviewScore = self.currentUserReviewScore {
             self.analytics.send(
-                .courseReviewsUpdated(
+                .courseReviewUpdated(
                     courseID: courseReview.courseID,
                     fromRating: currentUserReviewScore,
                     toRating: courseReview.score

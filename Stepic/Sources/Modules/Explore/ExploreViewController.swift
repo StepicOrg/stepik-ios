@@ -285,7 +285,7 @@ extension ExploreViewController: UISearchBarDelegate {
         // Strange hack to hide search results (courses)
         self.searchResultsModuleInput?.searchStarted()
 
-        self.analytics.send(.searchCourseStarted)
+        self.analytics.send(.courseSearchStarted)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -302,7 +302,7 @@ extension ExploreViewController: UISearchBarDelegate {
         self.hideSearchResults()
         self.searchResultsModuleInput?.searchCancelled()
 
-        self.analytics.send(.searchCourseCancelled)
+        self.analytics.send(.courseSearchCancelled)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

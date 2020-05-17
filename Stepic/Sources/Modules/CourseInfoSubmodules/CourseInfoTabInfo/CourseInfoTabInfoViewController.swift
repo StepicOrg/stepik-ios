@@ -119,7 +119,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
     func courseInfoTabInfoIntroVideoBlockViewPlayClicked(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
-        self.analytics.send(.courseDetailVideoClicked)
+        self.analytics.send(.courseDetailVideoTapped)
         self.playerViewController.player?.play()
     }
 }

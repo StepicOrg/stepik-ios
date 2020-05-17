@@ -93,14 +93,6 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
         self.interactor.doStepSourceLoad(request: .init())
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        assert(
-            self.navigationController != nil,
-            "\(EditStepViewController.self) must be presented in a \(UINavigationController.self)"
-        )
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 

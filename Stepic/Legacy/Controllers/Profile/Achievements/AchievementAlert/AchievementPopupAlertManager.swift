@@ -22,7 +22,7 @@ final class AchievementPopupAlertManager: AlertManager {
         if let achievementPopupViewController = alert as? AchievementPopupViewController,
            let data = achievementPopupViewController.data {
             self.analytics.send(
-                .achievementsPopupOpened(source: self.source.rawValue, kind: data.id, level: data.completedLevel)
+                .achievementPopupOpened(source: self.source.rawValue, kind: data.id, level: data.completedLevel)
             )
         }
 

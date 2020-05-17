@@ -186,7 +186,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                         type: .unit,
                         cancelActionHandler: { [weak self] in
                             self?.analytics.send(
-                                .downloadsDeleteDownloadsConfirmationInteracted(content: .lesson, isConfirmed: false)
+                                .deleteDownloadConfirmationInteracted(content: .lesson, isConfirmed: false)
                             )
                         },
                         confirmedActionHandler: { [weak self] in
@@ -195,7 +195,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                             }
 
                             strongSelf.analytics.send(
-                                .downloadsDeleteDownloadsConfirmationInteracted(content: .lesson, isConfirmed: true)
+                                .deleteDownloadConfirmationInteracted(content: .lesson, isConfirmed: true)
                             )
                             strongSelf.removeCached(unit: unit)
                         }
@@ -242,7 +242,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                         type: .section,
                         cancelActionHandler: { [weak self] in
                             self?.analytics.send(
-                                .downloadsDeleteDownloadsConfirmationInteracted(content: .section, isConfirmed: false)
+                                .deleteDownloadConfirmationInteracted(content: .section, isConfirmed: false)
                             )
                         },
                         confirmedActionHandler: { [weak self] in
@@ -251,7 +251,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                             }
 
                             strongSelf.analytics.send(
-                                .downloadsDeleteDownloadsConfirmationInteracted(content: .section, isConfirmed: true)
+                                .deleteDownloadConfirmationInteracted(content: .section, isConfirmed: true)
                             )
                             strongSelf.removeCached(section: section)
                         }
@@ -294,7 +294,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                         type: .course,
                         cancelActionHandler: { [weak self] in
                             self?.analytics.send(
-                                .downloadsDeleteDownloadsConfirmationInteracted(content: .course, isConfirmed: false)
+                                .deleteDownloadConfirmationInteracted(content: .course, isConfirmed: false)
                             )
                         },
                         confirmedActionHandler: { [weak self] in
@@ -303,7 +303,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                             }
 
                             strongSelf.analytics.send(
-                                .downloadsDeleteDownloadsConfirmationInteracted(content: .course, isConfirmed: true)
+                                .deleteDownloadConfirmationInteracted(content: .course, isConfirmed: true)
                             )
                             strongSelf.removeCachedCourse()
                         }
@@ -360,7 +360,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         if self.personalDeadlinesService.hasDeadlines(in: course) {
             self.moduleOutput?.presentPersonalDeadlinesSettings(for: course)
         } else {
-            self.analytics.send(.personalDeadlinesScheduleButtonClicked)
+            self.analytics.send(.personalDeadlinesScheduleButtonTapped)
             self.moduleOutput?.presentPersonalDeadlinesCreation(for: course)
         }
     }
@@ -742,7 +742,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
 
 extension CourseInfoTabSyllabusInteractor {
     private func startDownloading(unit: Unit) {
-        self.analytics.send(.downloadsDownloadStarted(content: .lesson))
+        self.analytics.send(.downloadStarted(content: .lesson))
 
         let unitID = unit.id
         print("course info tab syllabus interactor: start downloading unit = \(unitID)")
@@ -767,7 +767,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func startDownloading(section: Section) {
-        self.analytics.send(.downloadsDownloadStarted(content: .section))
+        self.analytics.send(.downloadStarted(content: .section))
 
         let sectionID = section.id
         print("course info tab syllabus interactor: start downloading section = \(sectionID)")
@@ -804,7 +804,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func startDownloadingCourse() {
-        self.analytics.send(.downloadsDownloadStarted(content: .course))
+        self.analytics.send(.downloadStarted(content: .course))
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         self.shouldCheckUseOfCellularDataForDownloads = false
@@ -826,7 +826,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func cancelDownloading(unit: Unit) {
-        self.analytics.send(.downloadsDownloadCancelled(content: .lesson))
+        self.analytics.send(.downloadCancelled(content: .lesson))
 
         let unitID = unit.id
         print("course info tab syllabus interactor: start cancelling unit = \(unitID)")
@@ -842,7 +842,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func cancelDownloading(section: Section) {
-        self.analytics.send(.downloadsDownloadCancelled(content: .section))
+        self.analytics.send(.downloadCancelled(content: .section))
 
         let sectionID = section.id
         print("course info tab syllabus interactor: start cancelling section = \(sectionID)")
@@ -861,7 +861,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func removeCached(unit: Unit) {
-        self.analytics.send(.downloadsDownloadDeleted(content: .lesson, source: .syllabus))
+        self.analytics.send(.downloadDeleted(content: .lesson, source: .syllabus))
 
         let unitID = unit.id
         print("course info tab syllabus interactor: start removing cached unit = \(unitID)")
@@ -877,7 +877,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func removeCached(section: Section) {
-        self.analytics.send(.downloadsDownloadDeleted(content: .section, source: .syllabus))
+        self.analytics.send(.downloadDeleted(content: .section, source: .syllabus))
 
         let sectionID = section.id
         print("course info tab syllabus interactor: start removing cached section = \(sectionID)")
@@ -897,7 +897,7 @@ extension CourseInfoTabSyllabusInteractor {
             return
         }
 
-        self.analytics.send(.downloadsDownloadDeleted(content: .course, source: .syllabus))
+        self.analytics.send(.downloadDeleted(content: .course, source: .syllabus))
 
         let courseID = course.id
         print("course info tab syllabus interactor: start removing cached course = \(courseID)")

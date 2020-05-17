@@ -22,7 +22,7 @@ final class UnsupportedQuizInteractor: UnsupportedQuizInteractorProtocol {
     }
 
     func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request) {
-        self.analytics.send(.stepSubmissionSolveInWebClicked)
+        self.analytics.send(.solveQuizInWebTapped)
         self.presenter.presentUnsupportedQuiz(response: .init(stepURLPath: self.stepURLPath))
     }
 }

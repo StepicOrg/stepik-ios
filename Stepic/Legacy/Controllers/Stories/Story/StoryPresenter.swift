@@ -111,11 +111,11 @@ final class StoryPresenter: StoryPresenterProtocol {
             self.view?.animate(view: viewToAnimate)
         }
 
-        self.analytics.send(.storiesStoryPartOpened(id: self.storyID, position: animatingStoryPart.position))
+        self.analytics.send(.storyPartOpened(id: self.storyID, position: animatingStoryPart.position))
     }
 
     func didAppear() {
-        self.analytics.send(.storiesStoryOpened(id: self.storyID))
+        self.analytics.send(.storyOpened(id: self.storyID))
         NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": self.storyID])
 
         if self.shouldRestartSegment {
@@ -125,7 +125,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     private func showPreviousStory() {
-        self.analytics.send(.storiesStoryClosed(id: self.storyID, type: .automatic))
+        self.analytics.send(.storyClosed(id: self.storyID, type: .automatic))
         self.navigationDelegate?.didFinishBack()
 
         self.partToAnimate = 0
@@ -133,7 +133,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     private func showNextStory() {
-        self.analytics.send(.storiesStoryClosed(id: self.storyID, type: .automatic))
+        self.analytics.send(.storyClosed(id: self.storyID, type: .automatic))
         self.navigationDelegate?.didFinishForward()
 
         self.partToAnimate = self.story.parts.count - 1
@@ -161,7 +161,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     func onClosePressed() {
-        self.analytics.send(.storiesStoryClosed(id: self.storyID, type: .cross))
+        self.analytics.send(.storyClosed(id: self.storyID, type: .cross))
         self.view?.close()
     }
 }

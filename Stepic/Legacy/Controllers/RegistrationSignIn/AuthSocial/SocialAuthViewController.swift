@@ -106,14 +106,14 @@ final class SocialAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithEmailClick(_ sender: Any) {
-        self.analytics.send(.clickedSignInWithEmailOnSocialAuth)
+        self.analytics.send(.tappedSignInWithEmailOnSocialAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .social, to: .email(email: nil))
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        self.analytics.send(.clickedSignUpOnSocialAuth)
+        self.analytics.send(.tappedSignUpOnSocialAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .social, to: .registration)
         }
@@ -244,7 +244,7 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
         }
 
         let provider = providers[providerIndex]
-        self.analytics.send(.clickedSignInWithSocialProvider(providerName: provider.name))
+        self.analytics.send(.socialAuthProviderTapped(providerName: provider.name))
 
         presenter?.logIn(with: provider.id)
     }

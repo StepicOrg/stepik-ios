@@ -70,7 +70,7 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
 extension SearchResultsPresenter: SearchQueriesViewControllerDelegate {
     func didSelectSuggestion(suggestion: String, position: Int) {
         StepikAnalytics.shared.send(
-            .searchCourseSearched(
+            .courseSearched(
                 query: self.query.lowercased(),
                 position: position,
                 suggestion: suggestion.lowercased()

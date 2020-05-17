@@ -59,7 +59,7 @@ final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
                         return
                     }
 
-                    strongSelf.analytics.send(.personalDeadlineChangePressed)
+                    strongSelf.analytics.send(.personalDeadlineChangeTapped)
 
                     let viewController = PersonalDeadlineEditScheduleLegacyAssembly(
                         course: strongSelf.course

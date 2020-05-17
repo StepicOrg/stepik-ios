@@ -63,9 +63,9 @@ final class NotificationsService {
 
     private func reportSessionStart(userInfo: NotificationUserInfo?) {
         self.analytics.send(
-            .launchSessionStart(
+            .applicationDidLaunchWithOptions(
                 notificationType: self.extractNotificationType(from: userInfo),
-                sinceLastSession: self.timeIntervalSinceLastActive
+                secondsSinceLastSession: self.timeIntervalSinceLastActive
             )
         )
     }
@@ -154,9 +154,9 @@ extension NotificationsService {
         if let notificationType = notificationType {
             switch UIApplication.shared.applicationState {
             case .active:
-                self.analytics.send(.notificationsForegroundNotificationReceived(notificationType: notificationType))
+                self.analytics.send(.foregroundNotificationReceived(notificationType: notificationType))
             case .inactive:
-                self.analytics.send(.notificationsInactiveNotificationReceived(notificationType: notificationType))
+                self.analytics.send(.inactiveNotificationReceived(notificationType: notificationType))
             case .background:
                 break
             @unknown default:

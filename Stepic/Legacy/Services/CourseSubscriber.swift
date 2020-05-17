@@ -10,7 +10,8 @@ import Foundation
 import PromiseKit
 
 enum CourseSubscriptionSource: String {
-    case widget, preview
+    case widget
+    case preview
 }
 
 protocol CourseSubscriberProtocol {
@@ -62,12 +63,10 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                 }
 
                 if unsubscribe {
-                    self?.analytics.send(.courseUnsubscribed(courseID: course.id, courseTitle: course.title))
+                    self?.analytics.send(.courseUnsubscribed(id: course.id, title: course.title))
                     AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
-                    self?.analytics.send(
-                        .courseJoined(source: source.rawValue, courseID: course.id, courseTitle: course.title)
-                    )
+                    self?.analytics.send(.courseJoined(source: source, id: course.id, title: course.title))
                     AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
 

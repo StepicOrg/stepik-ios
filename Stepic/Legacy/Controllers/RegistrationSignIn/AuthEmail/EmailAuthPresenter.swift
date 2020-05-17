@@ -60,9 +60,7 @@ final class EmailAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            self.analytics.send(.signInLoggedIn(source: "email"))
-            self.analytics.send(.loginSucceeded(provider: .password))
-
+            self.analytics.send(.signInSucceeded(source: .email))
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
@@ -72,7 +70,7 @@ final class EmailAuthPresenter {
             switch error {
             case is NetworkError:
                 print("email auth: successfully signed in, but could not get user")
-                self.analytics.send(.loginSucceeded(provider: .password))
+                self.analytics.send(.signInSucceeded(source: .email))
                 self.view?.update(with: .success)
             case SignInError.manyAttempts:
                 self.view?.update(with: EmailAuthResult.manyAttempts)

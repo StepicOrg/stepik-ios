@@ -58,7 +58,7 @@ extension CodeQuizViewController: CodeQuizViewDelegate {
     }
 
     func codeQuizViewDidRequestFullscreen(_ view: CodeQuizView) {
-        self.analytics.send(.codeFullscreenClicked)
+        self.analytics.send(.codeOpenFullscreenTapped)
         self.interactor.doFullscreenAction(request: .init())
     }
 

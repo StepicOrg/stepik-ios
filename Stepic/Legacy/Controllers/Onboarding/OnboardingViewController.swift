@@ -20,8 +20,6 @@ final class OnboardingViewController: UIViewController {
     @IBOutlet weak var rightParentViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightParentViewBottomConstraint: NSLayoutConstraint!
 
-    private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
-
     private var currentPageIndex = 0
 
     private var scrollView: UIScrollView!
@@ -44,6 +42,8 @@ final class OnboardingViewController: UIViewController {
         presenter: NotificationsRequestOnlySettingsAlertPresenter(),
         analytics: .init(source: .onboarding)
     )
+
+    private let analytics: Analytics = StepikAnalytics.shared
 
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
@@ -75,8 +75,7 @@ final class OnboardingViewController: UIViewController {
         super.viewDidAppear(animated)
 
         self.reloadPages()
-
-        StepikAnalytics.shared.send(.onboardingScreenOpened(screenIndex: currentPageIndex + 1))
+        self.analytics.send(.onboardingScreenOpened(index: currentPageIndex + 1))
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.animatedView.start()
@@ -106,8 +105,8 @@ final class OnboardingViewController: UIViewController {
     }
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
-        dismiss(animated: true) {
-            StepikAnalytics.shared.send(.onboardingClosed(screenIndex: self.currentPageIndex + 1))
+        self.dismiss(animated: true) {
+            self.analytics.send(.onboardingScreenClosed(index: self.currentPageIndex + 1))
             self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
@@ -184,7 +183,7 @@ final class OnboardingViewController: UIViewController {
             let newScrollViewContentOffsetX = CGFloat(currentPageIndex + 1) * scrollView.frame.width
             scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: scrollView.contentOffset.y), animated: true)
         } else {
-            StepikAnalytics.shared.send(.onboardingCompleted)
+            self.analytics.send(.onboardingCompleted)
 
             self.dismiss(animated: true, completion: {
                 self.notificationsRegistrationService.registerForRemoteNotifications()
@@ -218,7 +217,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
 
         if page != currentPageIndex {
             currentPageIndex = page
-            StepikAnalytics.shared.send(.onboardingScreenOpened(screenIndex: currentPageIndex + 1))
+            self.analytics.send(.onboardingScreenOpened(index: currentPageIndex + 1))
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
 

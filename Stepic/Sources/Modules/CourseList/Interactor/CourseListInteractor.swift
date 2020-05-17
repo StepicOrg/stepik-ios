@@ -199,7 +199,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         } else {
             // Paid course -> open web view
             if targetCourse.isPaid {
-                self.analytics.send(.courseBuyPressed(source: .courseWidget, courseID: targetCourse.id))
+                self.analytics.send(.courseBuyPressed(source: .courseWidget, id: targetCourse.id))
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentPaidCourseInfo(course: targetCourse)
                 return
@@ -209,9 +209,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
 
-                self.analytics.send(
-                    .courseContinuePressed(source: .courseWidget, courseID: course.id, courseTitle: course.title)
-                )
+                self.analytics.send(.courseContinuePressed(source: .courseWidget, id: course.id, title: course.title))
 
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentLastStep(

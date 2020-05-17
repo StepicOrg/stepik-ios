@@ -257,7 +257,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
     @objc
     private func settingsButtonClicked() {
-        StepikAnalytics.shared.send(.profileSettingsClicked)
+        StepikAnalytics.shared.send(.profileOpenSettingsTapped)
 
         let (modalPresentationStyle, navigationBarAppearance) = {
             () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in

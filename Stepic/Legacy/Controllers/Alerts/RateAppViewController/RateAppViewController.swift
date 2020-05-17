@@ -142,7 +142,7 @@ final class RateAppViewController: UIViewController {
 
         var params = defaultAnalyticsParams
         params["rating"] = rating
-        StepikAnalytics.shared.send(.rateAppClicked(parameters: params))
+        StepikAnalytics.shared.send(.rateAppTapped(parameters: params))
 
         if rating < 4 {
             self.buttonState = .email
@@ -169,7 +169,7 @@ final class RateAppViewController: UIViewController {
     }
 
     private func showEmail() {
-        StepikAnalytics.shared.send(.rateAppNegativeStateWriteEmailClicked(parameters: self.defaultAnalyticsParams))
+        StepikAnalytics.shared.send(.rateAppNegativeStateWriteEmailTapped(parameters: self.defaultAnalyticsParams))
 
         if !MFMailComposeViewController.canSendMail() {
             return self.dismiss(animated: true, completion: nil)
@@ -190,7 +190,7 @@ final class RateAppViewController: UIViewController {
     }
 
     private func showAppStore() {
-        StepikAnalytics.shared.send(.rateAppPositiveStateAppStoreClicked(parameters: self.defaultAnalyticsParams))
+        StepikAnalytics.shared.send(.rateAppPositiveStateAppStoreTapped(parameters: self.defaultAnalyticsParams))
         self.dismiss(animated: true, completion: {
             SKStoreReviewController.requestReview()
         })
@@ -207,9 +207,9 @@ final class RateAppViewController: UIViewController {
 
         switch self.buttonState! {
         case .appStore:
-            StepikAnalytics.shared.send(.rateAppPositiveStateLaterClicked(parameters: self.defaultAnalyticsParams))
+            StepikAnalytics.shared.send(.rateAppPositiveStateLaterTapped(parameters: self.defaultAnalyticsParams))
         case .email:
-            StepikAnalytics.shared.send(.rateAppNegativeStateLaterClicked(parameters: self.defaultAnalyticsParams))
+            StepikAnalytics.shared.send(.rateAppNegativeStateLaterTapped(parameters: self.defaultAnalyticsParams))
         }
     }
 

@@ -137,7 +137,7 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.analytics.send(.codeExitFullscreenClicked)
+        self.analytics.send(.codeExitFullscreenTapped)
     }
 
     // MARK: Private API

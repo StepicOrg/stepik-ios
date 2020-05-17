@@ -22,7 +22,7 @@ final class InputAccessoryBuilder {
 
         let tabButton = CodeInputAccessoryButtonData(title: "Tab", action: {
             tabAction()
-            StepikAnalytics.shared.send(.codeInputAccessoryButtonClicked(language: language.rawValue, symbol: "Tab"))
+            StepikAnalytics.shared.send(.codeInputAccessoryButtonTapped(language: language.rawValue, symbol: "Tab"))
         })
 
         buttons += [tabButton]
@@ -31,7 +31,7 @@ final class InputAccessoryBuilder {
             let symButton = CodeInputAccessoryButtonData(title: symbol, action: {
                 insertStringAction(symbol)
                 StepikAnalytics.shared.send(
-                    .codeInputAccessoryButtonClicked(language: language.rawValue, symbol: symbol)
+                    .codeInputAccessoryButtonTapped(language: language.rawValue, symbol: symbol)
                 )
             })
             buttons += [symButton]
@@ -41,7 +41,7 @@ final class InputAccessoryBuilder {
         let frame = CGRect(origin: CGPoint.zero, size: viewSize)
         let accessoryView = CodeInputAccessoryView(frame: frame, buttons: buttons, size: size, hideKeyboardAction: {
             hideKeyboardAction()
-            StepikAnalytics.shared.send(.codeInputAccessoryHideKeyboardClicked)
+            StepikAnalytics.shared.send(.codeInputAccessoryHideKeyboardTapped)
         })
 
         return accessoryView
