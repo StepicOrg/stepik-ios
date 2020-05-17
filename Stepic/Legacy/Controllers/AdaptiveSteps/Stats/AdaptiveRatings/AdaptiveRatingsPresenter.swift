@@ -31,9 +31,10 @@ struct ScoreboardViewData {
 final class AdaptiveRatingsPresenter {
     weak var view: AdaptiveRatingsView?
 
-    private var ratingsAPI: AdaptiveRatingsAPI
-    private var usersAPI: UsersAPI
-    private var ratingManager: AdaptiveRatingManager
+    private let ratingsAPI: AdaptiveRatingsAPI
+    private let usersAPI: UsersAPI
+    private let ratingManager: AdaptiveRatingManager
+    private let analytics: Analytics
 
     private var scoreboard: [Int: ScoreboardViewData] = [:]
 
@@ -41,19 +42,26 @@ final class AdaptiveRatingsPresenter {
     private var nouns: [(String, String)] = []
     private var adjs: [(String, String)] = []
 
-    init(ratingsAPI: AdaptiveRatingsAPI, usersAPI: UsersAPI, ratingManager: AdaptiveRatingManager, view: AdaptiveRatingsView) {
+    init(
+        ratingsAPI: AdaptiveRatingsAPI,
+        usersAPI: UsersAPI,
+        ratingManager: AdaptiveRatingManager,
+        analytics: Analytics = StepikAnalytics.shared,
+        view: AdaptiveRatingsView
+    ) {
         self.view = view
         self.ratingManager = ratingManager
         self.ratingsAPI = ratingsAPI
         self.usersAPI = usersAPI
+        self.analytics = analytics
 
-        loadNamesFromFiles()
+        self.loadNamesFromFiles()
     }
 
     func reloadData(days: Int? = nil, force: Bool = false) {
         // Send rating first, then get rating
         ratingsAPI.cancelAllTasks()
-        ratingsAPI.update(courseId: ratingManager.courseId, exp: ratingManager.rating).then { _ -> Promise<ScoreboardViewData> in
+        ratingsAPI.update(courseId: ratingManager.courseID, exp: ratingManager.rating).then { _ -> Promise<ScoreboardViewData> in
             print("adaptive ratings: remote rating updated -> reload rating")
             let downloadedScoreboard = self.scoreboard[days ?? 0] // 0 when 'days' == nil
             if downloadedScoreboard == nil || force {
@@ -69,7 +77,7 @@ final class AdaptiveRatingsPresenter {
             switch error {
             case RatingsAPIError.serverError:
                 print("adaptive ratings: remote rating update failed: server error")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
+                self.analytics.send(.errorAdaptiveRatingServer)
             default:
                 print("adaptive ratings: remote rating update failed: \(error)")
             }
@@ -78,7 +86,7 @@ final class AdaptiveRatingsPresenter {
     }
 
     func sendOpenedAnalytics() {
-        AmplitudeAnalyticsEvents.AdaptiveRating.opened(course: ratingManager.courseId).send()
+        self.analytics.send(.adaptiveRatingOpened(courseID: self.ratingManager.courseID))
     }
 
     private func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
@@ -88,7 +96,7 @@ final class AdaptiveRatingsPresenter {
             var loadedScoreboard: AdaptiveRatingsAPI.Scoreboard?
 
             ratingsAPI.cancelAllTasks()
-            ratingsAPI.retrieve(courseId: ratingManager.courseId, count: 10, days: days).then { scoreboard -> Guarantee<[User]> in
+            ratingsAPI.retrieve(courseId: ratingManager.courseID, count: 10, days: days).then { scoreboard -> Guarantee<[User]> in
                 loadedScoreboard = scoreboard
                 usersForDeanonIds = scoreboard.leaders.filter({ !$0.isFake }).map { $0.userId }
 
@@ -126,7 +134,7 @@ final class AdaptiveRatingsPresenter {
     private func loadNamesFromFiles() {
         func readFile(name: String) -> [String] {
             if let path = Bundle.main.path(forResource: name, ofType: "plist"),
-                let words = NSArray(contentsOfFile: path) as? [String] {
+               let words = NSArray(contentsOfFile: path) as? [String] {
                 return words
             }
             return []

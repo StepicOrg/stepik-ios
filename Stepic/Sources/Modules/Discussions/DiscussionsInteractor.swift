@@ -22,6 +22,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     private let presenter: DiscussionsPresenterProtocol
     private let provider: DiscussionsProviderProtocol
+    private let analytics: Analytics
     private let discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManagerProtocol
 
     private let discussionThreadType: DiscussionThread.ThreadType
@@ -74,6 +75,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         presentationContext: Discussions.PresentationContext,
         presenter: DiscussionsPresenterProtocol,
         provider: DiscussionsProviderProtocol,
+        analytics: Analytics,
         discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManagerProtocol
     ) {
         self.discussionThreadType = discussionThreadType
@@ -82,6 +84,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         self.presentationContext = presentationContext
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.discussionsSortTypeStorageManager = discussionsSortTypeStorageManager
 
         print("discussions interactor: did init with presentationContext: \(presentationContext)")
@@ -279,11 +282,11 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
                 switch voteValue {
                 case .abuse:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked)
+                    self.analytics.send(.discussionLiked)
                     comment.abuseCount -= 1
                     comment.epicCount += 1
                 case .epic:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unliked)
+                    self.analytics.send(.discussionUnliked)
                     comment.epicCount -= 1
                 }
             }.ensure {
@@ -298,7 +301,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             self.provider.updateVote(vote).done { vote in
                 print("discussions interactor: finish liking vote")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked)
+                self.analytics.send(.discussionLiked)
 
                 comment.vote = vote
                 comment.epicCount += 1
@@ -328,10 +331,10 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
                 switch voteValue {
                 case .abuse:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unabused)
+                    self.analytics.send(.discussionUnabused)
                     comment.abuseCount -= 1
                 case .epic:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused)
+                    self.analytics.send(.discussionAbused)
                     comment.epicCount -= 1
                     comment.abuseCount += 1
                 }
@@ -347,7 +350,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             self.provider.updateVote(vote).done { vote in
                 print("discussions interactor: finish abusing vote")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused)
+                self.analytics.send(.discussionAbused)
 
                 comment.vote = vote
                 comment.abuseCount += 1
@@ -686,7 +689,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     // MARK: Analytics
 
     private func reportOpenedEventToAnalytics() {
-        let source: AmplitudeAnalyticsEvents.Discussions.DiscussionsSource = {
+        let source: AnalyticsEvent.DiscussionsSource = {
             switch self.presentationContext {
             case .fromBeginning:
                 return .default
@@ -698,7 +701,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }
         }()
 
-        AmplitudeAnalyticsEvents.Discussions.opened(source: source).send()
+        self.analytics.send(.discussionsScreenOpened(source: source))
     }
 
     // MARK: - Types -

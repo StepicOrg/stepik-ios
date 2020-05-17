@@ -17,7 +17,7 @@ final class AboutAppViewController: UIViewController {
     private lazy var socialNetworksView: StepikSocialNetworksView = {
         let view = StepikSocialNetworksView()
         view.onSocialNetworkClick = { socialNetwork in
-            AnalyticsEvent.socialNetworkClicked(socialNetwork).report()
+            StepikAnalytics.shared.send(.stepikSocialNetworkTapped(socialNetwork))
             if let url = socialNetwork.url {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
@@ -116,20 +116,6 @@ final class AboutAppViewController: UIViewController {
                 return URL(string: NSLocalizedString("PrivacyPolicyLink", comment: ""))
             default:
                 return nil
-            }
-        }
-    }
-
-    private enum AnalyticsEvent {
-        case socialNetworkClicked(StepikSocialNetwork)
-
-        func report() {
-            switch self {
-            case .socialNetworkClicked(let socialNetwork):
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Profile.Settings.socialNetworkClick,
-                    parameters: ["social": socialNetwork.rawValue]
-                )
             }
         }
     }

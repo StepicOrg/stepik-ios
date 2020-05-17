@@ -29,11 +29,19 @@ final class RegistrationPresenter {
     var authAPI: AuthAPI
     var stepicsAPI: StepicsAPI
     var notificationStatusesAPI: NotificationStatusesAPI
+    private let analytics: Analytics
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: RegistrationView) {
+    init(
+        authAPI: AuthAPI,
+        stepicsAPI: StepicsAPI,
+        notificationStatusesAPI: NotificationStatusesAPI,
+        analytics: Analytics = StepikAnalytics.shared,
+        view: RegistrationView
+    ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
+        self.analytics = analytics
 
         self.view = view
     }
@@ -56,8 +64,7 @@ final class RegistrationPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            AmplitudeAnalyticsEvents.SignUp.registered(source: "email").send()
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
+            self.analytics.send(.signUpSucceeded(source: .email))
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
@@ -72,7 +79,7 @@ final class RegistrationPresenter {
                 self.view?.update(with: .badConnection)
             case is NetworkError:
                 print("registration: successfully signed in, but could not get user")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
+                self.analytics.send(.signUpSucceeded(source: .email))
                 self.view?.update(with: .success)
             case SignUpError.validation(_, _, _, _):
                 if let message = (error as? SignUpError)?.firstError {

@@ -27,7 +27,7 @@ final class AuthInfo: NSObject {
         if let id = userId {
             if let users = User.fetchById(id) {
                 if users.isEmpty {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.authInfoNoUserOnInit)
+                    StepikAnalytics.shared.send(.errorAuthInfoNoUserOnInit)
                 } else {
                     user = users.first
                 }
@@ -83,7 +83,7 @@ final class AuthInfo: NSObject {
                 })
             } else {
                 let oldToken = token
-                print("\nsetting new token -> \(newToken!.accessToken)\n")
+                print("\nsetting new token -> \(String(describing: newToken!.accessToken))\n")
                 didRefresh = true
                 setTokenValue(newToken)
                 StepikSession.delete()

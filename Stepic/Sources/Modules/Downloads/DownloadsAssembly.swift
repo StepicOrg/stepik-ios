@@ -13,8 +13,12 @@ final class DownloadsAssembly: Assembly {
             )
         )
         let presenter = DownloadsPresenter()
-        let interactor = DownloadsInteractor(presenter: presenter, provider: provider)
-        let viewController = DownloadsViewController(interactor: interactor)
+        let interactor = DownloadsInteractor(
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared
+        )
+        let viewController = DownloadsViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 
         presenter.viewController = viewController
 

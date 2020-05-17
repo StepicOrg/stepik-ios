@@ -1,414 +1,406 @@
 import Foundation
 
-/// Describes Firebase and AppMetrica analytics events.
-struct AnalyticsEvents {
-    // MARK: - Logout -
-
-    struct Logout {
-        static let clicked = "clicked_logout"
-    }
-
-    // MARK: - SignIn -
-
-    struct SignIn {
-        static let onSocialAuth = "clicked_SignIn_on_launch_screen"
-        static let onEmailAuth = "clicked_SignIn_on_email_auth_screen"
-        static let onSignInScreen = "click_sign_in_with_interaction_type"
-        static let nextButton = "click_sign_in_next_sign_in_screen"
-
-        struct Fields {
-            static let tap = "tap_on_fields_login"
-            static let typing = "typing_text_fields_login"
-        }
-
-        struct Social {
-            static let clicked = "social_login"
-            static let codeReceived = "Api:auth with social account"
-        }
-    }
-
-    // MARK: - SignUp -
-
-    struct SignUp {
-        static let onSocialAuth = "clicked_SignUp_on_launch_screen"
-        static let onEmailAuth = "clicked_SignUp_on_email_auth_screen"
-        static let onSignUpScreen = "click_registration_with_interaction_type"
-        static let nextButton = "click_registration_send_ime"
-
-        struct Fields {
-            static let tap = "tap_on_fields_registration"
-            static let typing = "typing_text_fields_registration"
-        }
-    }
-
-    // MARK: - Login -
-
-    struct Login {
-        static let success = "success_login"
-    }
-
-    // MARK: - Syllabus -
-
-    struct Syllabus {
-        static let shared = "share_syllabus_clicked"
-    }
-
-    // MARK: - Units -
-
-    struct Units {
-        static let shared = "share_units_clicked"
-    }
-
-    // MARK: - Search -
-
-    struct Search {
-        static let selected = "search_selected"
-        static let cancelled = "search_cancelled"
-    }
-
-    // MARK: - Section -
-
-    struct Section {
-        static let cache = "clicked_cache_section"
-        static let cancel = "clicked_cancel_section"
-        static let delete = "clicked_delete_cached_section"
-    }
-
-    // MARK: - Unit -
-
-    struct Unit {
-        static let cache = "clicked_cache_unit"
-        static let cancel = "clicked_cancel_unit"
-        static let delete = "clicked_delete_cached_unit"
-    }
-
-    // MARK: - Downloads -
-
-    struct Downloads {
-        static let clear = "clicked_clear_cache"
-        static let acceptedClear = "clicked_accepted_clear_cache"
-    }
-
-    // MARK: - Course -
-
-    struct Course {
-        static let shared = "share_course_clicked"
-        static let delete = "clicked_delete_cached_course"
-
-        struct JoinPressed {
-            static let anonymous = "join_course_anonymous"
-            static let signed = "join_course_signed"
-        }
-
-        struct Video {
-            static let clicked = "course_detail_video_clicked"
-            static let shown = "course_detail_video_shown"
-        }
-
-        struct Downloads {
-            static let deleted = "clicked_delete_cached_course"
-        }
-
-        struct Reviews {
-            static let opened = "course_reviews_screen_opened"
-            static let clickedCreate = "create_course_review_pressed"
-            static let clickedEdit = "edit_course_review_pressed"
-            static let created = "course_review_created"
-            static let updated = "course_review_updated"
-            static let deleted = "course_review_deleted"
-        }
-    }
-
-    // MARK: - Step -
-
-    struct Step {
-        struct Submission {
-            static let submit = "clicked_submit"
-            static let newAttempt = "clicked_generate_new_attempt"
-            static let solveInWebPressed = "clicked_solve_in_web"
-            static let created = "submission_created"
-        }
-
-        static let hasRestrictions = "step_with_submission_restriction"
-        static let opened = "step_type_opened"
-
-        struct Edit {
-            static let opened = "step_edit_opened"
-            static let completed = "step_edit_completed"
-        }
-    }
-
-    // MARK: - VideoPlayer -
-
-    struct VideoPlayer {
-        static let opened = "video_player_opened"
-        static let rateChanged = "video_rate_changed"
-        static let qualityChanged = "video_quality_changed"
-    }
-
-    // MARK: - VideoDownload -
-
-    struct VideoDownload {
-        static let started = "video_download_started"
-        static let succeeded = "video_download_succeeded"
-        static let failed = "video_download_failed"
-
-        enum Reason: String {
-            case cancelled
-            case offline
-            case protocolError = "protocol_error"
-            case other
-        }
-    }
-
-    // MARK: - Discussion -
-
-    struct Discussion {
-        static let liked = "discussion_liked"
-        static let unliked = "discussion_unliked"
-        static let abused = "discussion_abused"
-        static let unabused = "discussion_unabused"
-    }
-
-    // MARK: - DeepLink -
-
-    struct DeepLink {
-        static let step = "deeplink_step"
-        static let syllabus = "deeplink_syllabus"
-        static let course = "deeplink_course"
-        static let section = "deeplink_section"
-        static let discussion = "deeplink_discussion"
-    }
-
-    // MARK: - Tabs -
-
-    struct Tabs {
-        static let myCoursesClicked = "main_choice_my_courses"
-        static let findCoursesClicked = "main_choice_find_courses"
-        static let downloadsClicked = "main_choice_downloads"
-        static let certificatesClicked = "main_choice_certificates"
-        static let profileClicked = "main_choice_profile"
-        static let notificationsClicked = "main_choice_notifications"
-        static let catalogClicked = "main_choice_catalog"
-    }
-
-    // MARK: - Streaks -
-
-    struct Streaks {
-        static let preferencesOn = "streak_notification_pref_on"
-        static let preferencesOff = "streak_notification_pref_off"
-
-        static func notifySuggestionShown(source: String, trigger: String) -> String {
-            return "streak_suggestion_shown_source_\(source)_trigger_\(trigger)"
-        }
-
-        static func notifySuggestionApproved(source: String, trigger: String) -> String {
-            return "streak_suggestion_approved_source_\(source)_trigger_\(trigger)"
-        }
-
-        struct Suggestion {
-            static func fail(_ index: Int) -> String {
-                return "streak_suggestion_\(index)_fail"
-            }
-
-            static func success(_ index: Int) -> String {
-                return "streak_suggestion_\(index)_success"
-            }
-        }
-
-        static let notificationOpened = "streak_notification_opened"
-
-        struct LocalNotification {
-            static let shown = "streak_local_notification_shown"
-            static let opened = "streak_local_notification_opened"
-        }
-
-        struct ImproveAlert {
-            static let notificationOffered = "streak_improve_alert_notifications_offered"
-            static let timeSelected = "streak_improve_alert_time_selected"
-            static let timeCancelled = "streak_improve_alert_time_cancelled"
-        }
-    }
-
+// Describes Firebase and AppMetrica analytics events.
+extension AnalyticsEvent {
     // MARK: - App -
 
-    struct App {
-        static let opened = "app_opened"
-        static let firstLaunch = "first_launch_after_install"
-    }
-
-    // MARK: - Errors -
-
-    struct Errors {
-        static let tokenRefresh = "error_token_refresh"
-        static let unregisterDeviceInvalidCredentials = "error_unregister_device_credentials"
-        static let registerDevice = "error_register_device"
-        static let adaptiveRatingServer = "error_adaptive_rating_server"
-        static let authInfoNoUserOnInit = "error_AuthInfo_no_user_on_init"
-        static let unknownNetworkError = "unknown_network_error"
-    }
-
-    // MARK: - Continue -
-
-    struct Continue {
-        static let sectionsOpened = "continue_section_opened"
-        static let stepOpened = "continue_step_opened"
-    }
-
-    // MARK: - Rate -
-
-    struct Rate {
-        static let rated = "app_rate"
-
-        struct Positive {
-            static let later = "app_rate_positive_later"
-            static let appstore = "app_rate_positive_appstore"
-        }
-
-        struct Negative {
-            static let later = "app_rate_negative_later"
-            static let email = "app_rate_negative_email"
-
-            struct Email {
-                static let cancelled = "app_rate_negative_email_cancelled"
-                static let success = "app_rate_negative_email_success"
-            }
-        }
-    }
-
-    // MARK: - Certificates -
-
-    struct Certificates {
-        static let opened = "certificates_opened_certificate"
-        static let shared = "certificates_pressed_share_certificate"
-    }
-
-    // MARK: - PeekNPop -
-
-    struct PeekNPop {
-        struct Course {
-            static let peeked = "3dtouch_course_peeked"
-            static let popped = "3dtouch_course_popped"
-            static let shared = "3dtouch_course_shared"
-        }
-
-        struct Section {
-            static let peeked = "3dtouch_section_peeked"
-            static let popped = "3dtouch_section_popped"
-            static let shared = "3dtouch_section_shared"
-        }
-
-        struct Lesson {
-            static let peeked = "3dtouch_lesson_peeked"
-            static let popped = "3dtouch_lesson_popped"
-            static let shared = "3dtouch_lesson_shared"
-        }
-    }
-
-    // MARK: - Code -
-
-    struct Code {
-        static let languageChosen = "code_language_chosen"
-        static let fullscreenPressed = "code_fullscreen_pressed"
-        static let resetPressed = "code_reset_pressed"
-        static let exitFullscreen = "code_exit_fullscreen"
-        static let toolbarSelected = "code_toolbar_selected"
-        static let hideKeyboard = "code_hide_keyboard"
-    }
-
-    // MARK: - Profile -
-
-    struct Profile {
-        static let clickSettings = "main_choice_settings"
-        static let interactionWithPinsMap = "pins_map_interaction"
-
-        struct Settings {
-            static let socialNetworkClick = "settings_click_social_network"
-        }
-    }
+    static let applicationDidBecomeActive = AnalyticsEvent(name: "app_opened")
 
     // MARK: - Notifications -
 
-    struct Notifications {
-        static let markAllAsRead = "notifications_mark_all_as_read"
-        static let markAsRead = "notifications_mark_as_read"
+    static func markAllNotificationsAsReadTapped(badgeUnreadCount: Int) -> AnalyticsEvent {
+        AnalyticsEvent(name: "notifications_mark_all_as_read", parameters: ["badge": badgeUnreadCount])
     }
 
-    // MARK: - NotificationRequest -
-
-    struct NotificationRequest {
-        static func shown(context: NotificationRequestAlertContext) -> String {
-            return "notification_alert_context_\(context.rawValue)_shown"
-        }
-
-        static func accepted(context: NotificationRequestAlertContext) -> String {
-            return "notification_alert_context_\(context.rawValue)_accepted"
-        }
-
-        static func rejected(context: NotificationRequestAlertContext) -> String {
-            return "notification_alert_context_\(context.rawValue)_rejected"
-        }
+    static func markNotificationAsReadTapped(source: NotificationsMarkAsReadActionSource) -> AnalyticsEvent {
+        AnalyticsEvent(name: "notifications_mark_as_read", parameters: ["action": source.rawValue])
     }
 
-    // MARK: - Onboarding -
-
-    struct Onboarding {
-        static let onboardingClosed = "onboarding_closed"
-        static let onboardingScreenOpened = "onboarding_screen_opened"
-        static let onboardingAction = "onboarding_action"
-        static let onboardingComplete = "onboarding_complete"
+    enum NotificationsMarkAsReadActionSource: String {
+        case button
+        case link
     }
 
     // MARK: - Adaptive -
 
-    struct Adaptive {
-        static let onboardingFinished = "adaptive_onboarding_finished"
+    static let adaptiveStepSubmissionCreated = AnalyticsEvent(name: "adaptive_submission_created")
+    static let adaptiveStepSubmissionDidCorrect = AnalyticsEvent(name: "adaptive_correct_answer")
+    static let adaptiveStepSubmissionDidWrong = AnalyticsEvent(name: "adaptive_wrong_answer")
+    static let adaptiveStepSubmissionDidRetry = AnalyticsEvent(name: "adaptive_retry_answer")
 
-        struct Step {
-            static let submission = "adaptive_submission_created"
-            static let correctAnswer = "adaptive_correct_answer"
-            static let wrongAnswer = "adaptive_wrong_answer"
-            static let retry = "adaptive_retry_answer"
-        }
+    static let adaptiveOnboardingFinished = AnalyticsEvent(name: "adaptive_onboarding_finished")
 
-        struct Reaction {
-            static let easy = "adaptive_reaction_easy"
-            static let hard = "adaptive_reaction_hard"
-        }
+    static func adaptiveReactionEasy(status: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "adaptive_reaction_easy", parameters: ["status": status])
+    }
+
+    static func adaptiveReactionHard(status: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "adaptive_reaction_hard", parameters: ["status": status])
     }
 
     // MARK: - PersonalDeadlines -
 
-    struct PersonalDeadlines {
-        struct Widget {
-            static let shown = "personal_deadlines_widget_shown"
-            static let clicked = "personal_deadlines_widget_clicked"
-            static let hidden = "personal_deadlines_widget_hidden"
-        }
+    static let personalDeadlineModeOpened = AnalyticsEvent(name: "personal_deadline_mode_opened")
+    static let personalDeadlineModeClosed = AnalyticsEvent(name: "personal_deadline_mode_closed")
 
-        struct Mode {
-            static let opened = "personal_deadline_mode_opened"
-            static let chosen = "personal_deadline_mode_chosen"
-            static let closed = "personal_deadline_mode_closed"
-        }
+    static func personalDeadlineModeChosen(weeklyLoadHours: Int) -> AnalyticsEvent {
+        AnalyticsEvent(name: "personal_deadline_mode_chosen", parameters: ["hours": weeklyLoadHours])
+    }
 
-        struct EditSchedule {
-            static let changePressed = "personal_deadline_change_pressed"
+    static let personalDeadlineChangeTapped = AnalyticsEvent(name: "personal_deadline_change_pressed")
 
-            struct Time {
-                static let opened = "personal_deadline_time_opened"
-                static let closed = "personal_deadline_time_closed"
-                static let saved = "personal_deadline_time_saved"
-            }
-        }
+    static let personalDeadlineTimeOpened = AnalyticsEvent(name: "personal_deadline_time_opened")
+    static let personalDeadlineTimeClosed = AnalyticsEvent(name: "personal_deadline_time_closed")
+    static let personalDeadlineTimeSaved = AnalyticsEvent(name: "personal_deadline_time_saved")
 
-        static let deleted = "personal_deadline_deleted"
-        static let notSupportedNotification = "personal_deadline_not_supported_notification_scheduled"
+    static let personalDeadlineDeleted = AnalyticsEvent(name: "personal_deadline_deleted")
+
+    // MARK: - Code -
+
+    static let codeInputAccessoryHideKeyboardTapped = AnalyticsEvent(name: "code_hide_keyboard")
+    static let codeResetTapped = AnalyticsEvent(name: "code_reset_pressed", parameters: ["size": "standard"])
+    static let codeOpenFullscreenTapped = AnalyticsEvent(name: "code_fullscreen_pressed")
+    static let codeExitFullscreenTapped = AnalyticsEvent(name: "code_exit_fullscreen")
+
+    static func codeInputAccessoryButtonTapped(language: String, symbol: String) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "code_toolbar_selected",
+            parameters: [
+                "language": language,
+                "symbol": symbol
+            ]
+        )
+    }
+
+    static func codeLanguageChosen(language: CodeLanguage) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "code_language_chosen",
+            parameters: [
+                "size": "standard",
+                "language": language.rawValue
+            ]
+        )
+    }
+
+    // MARK: - Streaks -
+
+    static let streaksPreferenceOn = AnalyticsEvent(name: "streak_notification_pref_on")
+    static let streaksPreferenceOff = AnalyticsEvent(name: "streak_notification_pref_off")
+
+    static func streaksNotifySuggestionShown(source: String, trigger: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "streak_suggestion_shown_source_\(source)_trigger_\(trigger)")
+    }
+
+    static func streaksSuggestionSucceeded(index: Int) -> AnalyticsEvent {
+        AnalyticsEvent(name: "streak_suggestion_\(index)_success")
+    }
+
+    static func streaksSuggestionFailed(index: Int) -> AnalyticsEvent {
+        AnalyticsEvent(name: "streak_suggestion_\(index)_fail")
+    }
+
+    static func streaksNotifySuggestionApproved(source: String, trigger: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "streak_suggestion_approved_source_\(source)_trigger_\(trigger)")
+    }
+
+    // MARK: - Profile -
+
+    static let profileOpenSettingsTapped = AnalyticsEvent(name: "main_choice_settings")
+    static let profilePinsMapInteracted = AnalyticsEvent(name: "pins_map_interaction")
+
+    // MARK: - Step -
+
+    static let generateNewAttemptTapped = AnalyticsEvent(name: "clicked_generate_new_attempt")
+    static let solveQuizInWebTapped = AnalyticsEvent(name: "clicked_solve_in_web")
+    static let stepWithSubmissionRestrictionsOpened = AnalyticsEvent(name: "step_with_submission_restriction")
+
+    static func submitSubmissionTapped(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "clicked_submit", parameters: parameters)
+    }
+
+    // MARK: - Course -
+
+    static let shareCourseTapped = AnalyticsEvent(name: "share_course_clicked")
+
+    // MARK: JoinPressed
+
+    static let anonymousUserTappedJoinCourse = AnalyticsEvent(name: "join_course_anonymous")
+    static let authorizedUserTappedJoinCourse = AnalyticsEvent(name: "join_course_signed")
+
+    // MARK: Video
+
+    static let courseDetailVideoTapped = AnalyticsEvent(name: "course_detail_video_clicked")
+    static let courseDetailVideoShown = AnalyticsEvent(name: "course_detail_video_shown")
+
+    // MARK: - SignIn -
+
+    static func signInTapped(interactionType: LoginInteractionType) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "click_sign_in_with_interaction_type",
+            parameters: ["LoginInteractionType": interactionType.rawValue]
+        )
+    }
+
+    static let tappedSignInOnEmailAuthScreen = AnalyticsEvent(name: "clicked_SignIn_on_email_auth_screen")
+    static let tappedSignInReturnKeyOnSignInScreen = AnalyticsEvent(name: "click_sign_in_next_sign_in_screen")
+    static let tappedSignInWithEmailOnSocialAuthScreen = AnalyticsEvent(name: "clicked_SignIn_on_launch_screen")
+
+    enum LoginInteractionType: String {
+        case button
+        case ime
+    }
+
+    // MARK: Fields
+
+    static let loginTextFieldTapped = AnalyticsEvent(name: "tap_on_fields_login")
+    static let loginTextFieldDidChange = AnalyticsEvent(name: "typing_text_fields_login")
+
+    // MARK: Social
+
+    static let socialAuthDidReceiveCode = AnalyticsEvent(name: "Api:auth with social account")
+
+    static func socialAuthProviderTapped(providerName: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "social_login", parameters: ["social": providerName])
+    }
+
+    // MARK: - SignUp -
+
+    static let tappedSignUpOnEmailAuthScreen = AnalyticsEvent(name: "clicked_SignUp_on_email_auth_screen")
+    static let tappedSignUpOnSocialAuthScreen = AnalyticsEvent(name: "clicked_SignUp_on_launch_screen")
+    static let tappedRegistrationSendIme = AnalyticsEvent(name: "click_registration_send_ime")
+
+    static func signUpTapped(interactionType: LoginInteractionType) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "click_registration_with_interaction_type",
+            parameters: ["LoginInteractionType": interactionType.rawValue]
+        )
+    }
+
+    // MARK: Fields
+
+    static let registrationTextFieldTapped = AnalyticsEvent(name: "tap_on_fields_registration")
+    static let registrationTextFieldDidChange = AnalyticsEvent(name: "typing_text_fields_registration")
+
+    // MARK: - Rate -
+
+    static func rateAppTapped(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate", parameters: parameters)
+    }
+
+    // MARK: Positive
+
+    static func rateAppPositiveStateAppStoreTapped(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate_positive_appstore", parameters: parameters)
+    }
+
+    static func rateAppPositiveStateLaterTapped(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate_positive_later", parameters: parameters)
+    }
+
+    // MARK: Negative
+
+    static func rateAppNegativeStateWriteEmailTapped(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate_negative_email", parameters: parameters)
+    }
+
+    static func rateAppNegativeStateLaterTapped(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate_negative_later", parameters: parameters)
+    }
+
+    static func rateAppNegativeStateWriteEmailCancelled(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate_negative_email_cancelled", parameters: parameters)
+    }
+
+    static func rateAppNegativeStateWriteEmailSucceeded(parameters: [String: Any]?) -> AnalyticsEvent {
+        AnalyticsEvent(name: "app_rate_negative_email_success", parameters: parameters)
+    }
+
+    // MARK: - VideoPlayer -
+
+    static let videoPlayerOpened = AnalyticsEvent(name: "video_player_opened")
+
+    static func videoPlayerDidChangeQuality(quality: String, deviceModel: String) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "video_quality_changed",
+            parameters: [
+                "quality": quality,
+                "device": deviceModel
+            ]
+        )
+    }
+
+    // MARK: - Certificates -
+
+    static func certificateOpened(grade: Int, courseName: String) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "certificates_opened_certificate",
+            parameters: [
+                "grade": grade,
+                "course": courseName
+            ]
+        )
+    }
+
+    static func shareCertificateTapped(grade: Int, courseName: String) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "certificates_pressed_share_certificate",
+            parameters: [
+                "grade": grade,
+                "course": courseName
+            ]
+        )
+    }
+
+    // MARK: - DeepLink -
+
+    static func deepLinkCourse(id: Int) -> AnalyticsEvent {
+        AnalyticsEvent(name: "deeplink_course", parameters: ["id": id])
+    }
+
+    static func deepLinkSection(courseID: Int, moduleID: Int) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "deeplink_section",
+            parameters: [
+                "course": courseID,
+                "module": moduleID
+            ]
+        )
+    }
+
+    static func deepLinkSyllabus(courseID: Int) -> AnalyticsEvent {
+        AnalyticsEvent(name: "deeplink_syllabus", parameters: ["id": courseID])
+    }
+
+    static func deepLinkDiscussion(lessonID: Int, stepID: Int, discussionID: Int) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "deeplink_discussion",
+            parameters: [
+                "lesson": lessonID,
+                "step": stepID,
+                "discussion": discussionID
+            ]
+        )
+    }
+
+    static func deepLinkStep(lessonID: Int, stepID: Int) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "deeplink_step",
+            parameters: [
+                "lesson": lessonID,
+                "step": stepID
+            ]
+        )
+    }
+
+    // MARK: - Continue -
+
+    static let continueLastStepSyllabusOpened = AnalyticsEvent(name: "continue_section_opened")
+    static let continueLastStepStepOpened = AnalyticsEvent(name: "continue_step_opened")
+
+    // MARK: - NotificationRequest -
+
+    static func notificationRequestAlertShown(context: NotificationRequestAlertContext) -> AnalyticsEvent {
+        AnalyticsEvent(name: "notification_alert_context_\(context.rawValue)_shown")
+    }
+
+    static func notificationRequestAlertAccepted(context: NotificationRequestAlertContext) -> AnalyticsEvent {
+        AnalyticsEvent(name: "notification_alert_context_\(context.rawValue)_accepted")
+    }
+
+    static func notificationRequestAlertRejected(context: NotificationRequestAlertContext) -> AnalyticsEvent {
+        AnalyticsEvent(name: "notification_alert_context_\(context.rawValue)_rejected")
     }
 
     // MARK: - Settings -
 
-    struct Settings {
-        static let stepFontSizeSelected = "font_size_selected"
+    static func stepikSocialNetworkTapped(_ socialNetwork: StepikSocialNetwork) -> AnalyticsEvent {
+        AnalyticsEvent(name: "settings_click_social_network", parameters: ["social": socialNetwork.rawValue])
+    }
+
+    // MARK: - VideoDownload -
+
+    static let videoDownloadStarted = AnalyticsEvent(name: "video_download_started")
+    static let videoDownloadSucceeded = AnalyticsEvent(name: "video_download_succeeded")
+    static let videoDownloadFailed = AnalyticsEvent(name: "video_download_failed")
+
+    static func videoDownloadFailed(
+        description: String,
+        name: String,
+        code: Int,
+        domain: String,
+        reason: VideoDownloadFailReason
+    ) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "video_download_failed",
+            parameters: [
+                "description": description,
+                "name": name,
+                "code": code,
+                "domain": domain,
+                "reason": reason.rawValue
+            ]
+        )
+    }
+
+    enum VideoDownloadFailReason: String {
+        case other
+        case offline
+        case cancelled
+        case protocolError = "protocol_error"
+    }
+
+    // MARK: - Discussion -
+
+    static let discussionLiked = AnalyticsEvent(name: "discussion_liked")
+    static let discussionUnliked = AnalyticsEvent(name: "discussion_unliked")
+    static let discussionAbused = AnalyticsEvent(name: "discussion_abused")
+    static let discussionUnabused = AnalyticsEvent(name: "discussion_unabused")
+
+    // MARK: - Search -
+
+    static let courseSearchCancelled = AnalyticsEvent(name: "search_cancelled")
+
+    // MARK: - Downloads -
+
+    static let downloadsClearCacheTapped = AnalyticsEvent(name: "clicked_clear_cache")
+    static let downloadsClearCacheAccepted = AnalyticsEvent(name: "clicked_accepted_clear_cache")
+
+    // MARK: - Logout -
+
+    static let logoutTapped = AnalyticsEvent(name: "clicked_logout")
+
+    // MARK: - Errors -
+
+    static let errorAdaptiveRatingServer = AnalyticsEvent(name: "error_adaptive_rating_server")
+    static let errorAuthInfoNoUserOnInit = AnalyticsEvent(name: "error_AuthInfo_no_user_on_init")
+    static let errorUnregisterDeviceInvalidCredentials = AnalyticsEvent(name: "error_unregister_device_credentials")
+
+    static func errorRegisterDevice(message: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "error_register_device", parameters: ["message": message])
+    }
+
+    static func errorUnknownAlamofireNetworkError(message: String) -> AnalyticsEvent {
+        AnalyticsEvent(name: "unknown_network_error", parameters: ["aferror": message])
+    }
+
+    static func errorUnknownFoundationNetworkError(code: Int, description: String) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "unknown_network_error",
+            parameters: ["nserror": "code: \(code), description: \(description)"]
+        )
+    }
+
+    static func errorsTokenRefresh(message: String?, statusCode: Int?) -> AnalyticsEvent {
+        var parameters: [String: Any] = [:]
+
+        if let message = message {
+            parameters["message"] = message
+        }
+
+        if let statusCode = statusCode {
+            parameters["code"] = "\(statusCode)"
+        }
+
+        return AnalyticsEvent(name: "error_token_refresh", parameters: parameters)
     }
 }

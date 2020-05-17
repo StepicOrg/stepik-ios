@@ -21,6 +21,7 @@ final class CodeQuizFullscreenRunCodeAssembly: Assembly {
             language: self.language,
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             userAccountService: UserAccountService()
         )
         let viewController = CodeQuizFullscreenRunCodeViewController(interactor: interactor)

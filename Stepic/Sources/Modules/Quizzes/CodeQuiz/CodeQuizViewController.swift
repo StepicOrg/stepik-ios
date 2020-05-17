@@ -7,11 +7,13 @@ protocol CodeQuizViewControllerProtocol: AnyObject {
 
 final class CodeQuizViewController: UIViewController {
     private let interactor: CodeQuizInteractorProtocol
+    private let analytics: Analytics
 
     lazy var codeQuizView = self.view as? CodeQuizView
 
-    init(interactor: CodeQuizInteractorProtocol) {
+    init(interactor: CodeQuizInteractorProtocol, analytics: Analytics) {
         self.interactor = interactor
+        self.analytics = analytics
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,6 +58,7 @@ extension CodeQuizViewController: CodeQuizViewDelegate {
     }
 
     func codeQuizViewDidRequestFullscreen(_ view: CodeQuizView) {
+        self.analytics.send(.codeOpenFullscreenTapped)
         self.interactor.doFullscreenAction(request: .init())
     }
 

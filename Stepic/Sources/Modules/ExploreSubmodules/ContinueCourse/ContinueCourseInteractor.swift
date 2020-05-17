@@ -12,6 +12,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
 
     private let presenter: ContinueCoursePresenterProtocol
     private let provider: ContinueCourseProviderProtocol
+    private let analytics: Analytics
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let tooltipStorageManager: TooltipStorageManagerProtocol
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
@@ -21,12 +22,14 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     init(
         presenter: ContinueCoursePresenterProtocol,
         provider: ContinueCourseProviderProtocol,
+        analytics: Analytics,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         tooltipStorageManager: TooltipStorageManagerProtocol,
         dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.adaptiveStorageManager = adaptiveStorageManager
         self.tooltipStorageManager = tooltipStorageManager
 
@@ -52,21 +55,12 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             return
         }
 
-        let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(
-            courseId: currentCourse.id
+        self.analytics.send(
+            .courseContinuePressed(source: .homeWidget, id: currentCourse.id, title: currentCourse.title)
         )
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Course.continuePressed(
-            source: "home_widget",
-            courseID: currentCourse.id,
-            courseTitle: currentCourse.title
-        ).send()
-
-        self.moduleOutput?.presentLastStep(
-            course: currentCourse,
-            isAdaptive: isAdaptive
-        )
+        let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: currentCourse.id)
+        self.moduleOutput?.presentLastStep(course: currentCourse, isAdaptive: isAdaptive)
     }
 
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request) {

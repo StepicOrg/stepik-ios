@@ -26,14 +26,22 @@ enum EmailAuthState {
 final class EmailAuthPresenter {
     weak var view: EmailAuthView?
 
-    var authAPI: AuthAPI
-    var stepicsAPI: StepicsAPI
-    var notificationStatusesAPI: NotificationStatusesAPI
+    private let authAPI: AuthAPI
+    private let stepicsAPI: StepicsAPI
+    private let notificationStatusesAPI: NotificationStatusesAPI
+    private let analytics: Analytics
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, view: EmailAuthView) {
+    init(
+        authAPI: AuthAPI,
+        stepicsAPI: StepicsAPI,
+        notificationStatusesAPI: NotificationStatusesAPI,
+        analytics: Analytics = StepikAnalytics.shared,
+        view: EmailAuthView
+    ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
+        self.analytics = analytics
 
         self.view = view
     }
@@ -52,8 +60,7 @@ final class EmailAuthPresenter {
             AuthInfo.shared.user = user
             User.removeAllExcept(user)
 
-            AmplitudeAnalyticsEvents.SignIn.loggedIn(source: "email").send()
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
+            self.analytics.send(.signInSucceeded(source: .email))
             self.view?.update(with: .success)
 
             return self.notificationStatusesAPI.retrieve()
@@ -63,7 +70,7 @@ final class EmailAuthPresenter {
             switch error {
             case is NetworkError:
                 print("email auth: successfully signed in, but could not get user")
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
+                self.analytics.send(.signInSucceeded(source: .email))
                 self.view?.update(with: .success)
             case SignInError.manyAttempts:
                 self.view?.update(with: EmailAuthResult.manyAttempts)

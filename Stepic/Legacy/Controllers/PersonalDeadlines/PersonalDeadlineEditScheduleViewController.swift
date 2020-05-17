@@ -17,13 +17,17 @@ final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
     private let presentingViewController: UIViewController
     private let updateCompletion: (() -> Void)?
 
+    private let analytics: Analytics
+
     init(
         course: Course,
         presentingViewController: UIViewController,
+        analytics: Analytics = StepikAnalytics.shared,
         updateCompletion: (() -> Void)? = nil
     ) {
         self.course = course
         self.presentingViewController = presentingViewController
+        self.analytics = analytics
         self.updateCompletion = updateCompletion
     }
 
@@ -50,15 +54,24 @@ final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
             UIAlertAction(
                 title: NSLocalizedString("EditSchedule", comment: ""),
                 style: .default,
-                handler: { _ in
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.changePressed)
-                    let viewController = PersonalDeadlineEditScheduleLegacyAssembly(
-                        course: self.course
-                    ).makeModule()
-                    (viewController as? PersonalDeadlineEditScheduleViewController)?.onSavePressed = {
-                        self.updateCompletion?()
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
                     }
-                    self.presentingViewController.customPresentViewController(
+
+                    strongSelf.analytics.send(.personalDeadlineChangeTapped)
+
+                    let viewController = PersonalDeadlineEditScheduleLegacyAssembly(
+                        course: strongSelf.course
+                    ).makeModule()
+
+                    if let personalDeadlineController = viewController as? PersonalDeadlineEditScheduleViewController {
+                        personalDeadlineController.onSavePressed = { [weak self] in
+                            self?.updateCompletion?()
+                        }
+                    }
+
+                    strongSelf.presentingViewController.customPresentViewController(
                         presentr,
                         viewController: viewController,
                         animated: true
@@ -70,19 +83,25 @@ final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
             UIAlertAction(
                 title: NSLocalizedString("DeleteSchedule", comment: ""),
                 style: .destructive,
-                handler: { _ in
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.analytics.send(.personalDeadlineDeleted)
                     SVProgressHUD.show()
-                    PersonalDeadlinesService().deleteDeadline(for: self.course).done { _ in
+
+                    PersonalDeadlinesService().deleteDeadline(for: strongSelf.course).done { _ in
                         SVProgressHUD.dismiss()
                     }.ensure {
-                        self.updateCompletion?()
+                        strongSelf.updateCompletion?()
                     }.catch { _ in
                         SVProgressHUD.showError(withStatus: nil)
                     }
                 }
             )
         )
+
         return alert
     }
 }
@@ -118,6 +137,8 @@ final class PersonalDeadlineEditScheduleViewController: UIViewController {
     var course: Course?
     var sectionDeadlinesData: [SectionDeadlineData] = []
     var onSavePressed: (() -> Void)?
+
+    private let analytics: Analytics = StepikAnalytics.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,7 +199,9 @@ final class PersonalDeadlineEditScheduleViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             return
         }
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.saved)
+
+        self.analytics.send(.personalDeadlineTimeSaved)
+
         let newDeadlines = sectionDeadlinesData.map { $0.sectionDeadline }
         SVProgressHUD.show()
         PersonalDeadlinesService().changeDeadline(for: course, newDeadlines: newDeadlines).done { [weak self] _ in
@@ -198,23 +221,31 @@ final class PersonalDeadlineEditScheduleViewController: UIViewController {
 
 extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.opened)
+        self.analytics.send(.personalDeadlineTimeOpened)
+
         let approximateYearInSeconds: Double = 60 * 60 * 24 * 30 * 365
-        ActionSheetDatePicker.show(withTitle: NSLocalizedString("SelectTimeTitle", comment: ""), datePickerMode: UIDatePicker.Mode.dateAndTime, selectedDate: sectionDeadlinesData[indexPath.row].deadline, minimumDate: Date(), maximumDate: Date().addingTimeInterval(approximateYearInSeconds), doneBlock: {
-            [weak self]
-            _, value, _ in
-            guard let date = value as? Date else {
-                return
-            }
-            self?.tableView.deselectRow(at: indexPath, animated: true)
-            self?.sectionDeadlinesData[indexPath.row].deadline = date
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        }, cancel: {
-            [weak self]
-            _ in
-            AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.closed)
-            self?.tableView.deselectRow(at: indexPath, animated: true)
-        }, origin: tableView.cellForRow(at: indexPath))
+
+        ActionSheetDatePicker.show(
+            withTitle: NSLocalizedString("SelectTimeTitle", comment: ""),
+            datePickerMode: UIDatePicker.Mode.dateAndTime,
+            selectedDate: sectionDeadlinesData[indexPath.row].deadline,
+            minimumDate: Date(),
+            maximumDate: Date().addingTimeInterval(approximateYearInSeconds),
+            doneBlock: { [weak self] _, value, _ in
+                guard let date = value as? Date else {
+                    return
+                }
+
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+                self?.sectionDeadlinesData[indexPath.row].deadline = date
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            },
+            cancel: { [weak self] _ in
+                self?.analytics.send(.personalDeadlineTimeClosed)
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            },
+            origin: tableView.cellForRow(at: indexPath)
+        )
     }
 }
 

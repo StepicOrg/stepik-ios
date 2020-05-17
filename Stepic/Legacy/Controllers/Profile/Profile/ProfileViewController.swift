@@ -257,6 +257,8 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
     @objc
     private func settingsButtonClicked() {
+        StepikAnalytics.shared.send(.profileOpenSettingsTapped)
+
         let (modalPresentationStyle, navigationBarAppearance) = {
             () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
             if #available(iOS 13.0, *) {
@@ -480,7 +482,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
                     achievementProgressesAPI: AchievementProgressesAPI()
                 )
                 let presenter = AchievementsListPresenter(
-                    userId: userId,
+                    userID: userId,
                     view: viewController,
                     achievementsAPI: AchievementsAPI(),
                     achievementsRetriever: retriever

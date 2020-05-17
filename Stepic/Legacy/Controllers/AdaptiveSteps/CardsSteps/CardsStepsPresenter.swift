@@ -73,6 +73,8 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
 
+    private let analytics: Analytics
+
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
     // We can init this class w/o course (for adaptive app)
@@ -125,6 +127,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
+        analytics: Analytics,
         course: Course?,
         view: CardsStepsView
     ) {
@@ -141,6 +144,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
+        self.analytics = analytics
 
         self.course = course
         self.view = view
@@ -211,6 +215,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 lastOnboardingStep = stepIndex + 1
                 return
             } else {
+                self.analytics.send(.adaptiveOnboardingFinished)
                 storageManager.isAdaptiveOnboardingPassed = true
             }
         }
@@ -250,7 +255,8 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                     let cardStepPresenter = CardStepPresenter(
                         view: cardStepViewController,
                         step: step,
-                        stepFontSizeStorageManager: strongSelf.stepFontSizeStorageManager
+                        stepFontSizeStorageManager: strongSelf.stepFontSizeStorageManager,
+                        analytics: strongSelf.analytics
                     )
                     cardStepViewController.presenter = cardStepPresenter
                     strongSelf.currentStepPresenter = cardStepPresenter
@@ -419,24 +425,27 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
     private func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
         Promise { seal in
-            self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).done { _ in
-                if let curState = self.currentStepPresenter?.state {
+            self.recommendationsAPI.sendReaction(
+                user: user.id,
+                lesson: lesson.id,
+                reaction: reaction
+            ).done { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if let currentState = strongSelf.currentStepPresenter?.state {
                     switch reaction {
                     case .maybeLater:
-                        AnalyticsReporter.reportEvent(
-                            AnalyticsEvents.Adaptive.Reaction.hard,
-                            parameters: ["status": curState.rawValue]
-                        )
+                        strongSelf.analytics.send(.adaptiveReactionHard(status: currentState.rawValue))
                     case .neverAgain:
-                        AnalyticsReporter.reportEvent(
-                            AnalyticsEvents.Adaptive.Reaction.easy,
-                            parameters: ["status": curState.rawValue]
-                        )
+                        strongSelf.analytics.send(.adaptiveReactionEasy(status: currentState.rawValue))
                     default: break
                     }
                 }
 
                 print("cards steps: reaction sent, reaction = \(reaction), lesson = \(lesson.id)")
+
                 seal.fulfill(())
             }.catch { _ in
                 seal.reject(CardsStepsError.reactionNotSent)
@@ -483,7 +492,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 switch error {
                 case RatingsAPIError.serverError:
                     print("cards steps: remote rating update failed: server error")
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.adaptiveRatingServer)
+                    self.analytics.send(.errorAdaptiveRatingServer)
                 case RatingsAPIError.connectionError(let error):
                     print("cards steps: remote rating update failed: \(error)")
                 default:

@@ -69,8 +69,13 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
 
 extension SearchResultsPresenter: SearchQueriesViewControllerDelegate {
     func didSelectSuggestion(suggestion: String, position: Int) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.selected, parameters: ["query": self.query.lowercased(), "position": position, "suggestion": suggestion])
-        AmplitudeAnalyticsEvents.Search.searched(query: self.query.lowercased(), position: position, suggestion: suggestion.lowercased()).send()
+        StepikAnalytics.shared.send(
+            .courseSearched(
+                query: self.query.lowercased(),
+                position: position,
+                suggestion: suggestion.lowercased()
+            )
+        )
         search(query: suggestion)
         updateQueryBlock?(suggestion)
     }

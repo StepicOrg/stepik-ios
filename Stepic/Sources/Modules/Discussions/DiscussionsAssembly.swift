@@ -38,6 +38,7 @@ final class DiscussionsAssembly: Assembly {
             presentationContext: self.presentationContext,
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManager()
         )
         let viewController = DiscussionsViewController(interactor: interactor)

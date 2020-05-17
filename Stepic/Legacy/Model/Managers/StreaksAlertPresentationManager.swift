@@ -46,8 +46,8 @@ final class StreaksAlertPresentationManager {
             return
         }
 
-        AnalyticsReporter.reportEvent(
-            AnalyticsEvents.Streaks.notifySuggestionShown(
+        StepikAnalytics.shared.send(
+            .streaksNotifySuggestionShown(
                 source: self.source.rawValue,
                 trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
             )
@@ -62,10 +62,8 @@ final class StreaksAlertPresentationManager {
         presenter.onPositiveCallback = { [weak self] in
             PreferencesContainer.notifications.allowStreaksNotifications = true
 
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Streaks.Suggestion.success(
-                    NotificationSuggestionManager().streakAlertShownCnt
-                )
+            StepikAnalytics.shared.send(
+                .streaksSuggestionSucceeded(index: NotificationSuggestionManager().streakAlertShownCnt)
             )
             NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.yes)
 
@@ -82,10 +80,8 @@ final class StreaksAlertPresentationManager {
         presenter.onCancelCallback = {
             PreferencesContainer.notifications.allowStreaksNotifications = false
 
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Streaks.Suggestion.fail(
-                    NotificationSuggestionManager().streakAlertShownCnt
-                )
+            StepikAnalytics.shared.send(
+                .streaksSuggestionFailed(index: NotificationSuggestionManager().streakAlertShownCnt)
             )
             NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.no)
         }
@@ -127,8 +123,8 @@ final class StreaksAlertPresentationManager {
                 return
             }
 
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Streaks.notifySuggestionApproved(
+            StepikAnalytics.shared.send(
+                .streaksNotifySuggestionApproved(
                     source: strongSelf.source.rawValue,
                     trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
                 )
@@ -136,8 +132,7 @@ final class StreaksAlertPresentationManager {
 
             strongSelf.didChooseTime()
         }
-        vc.cancelAction = {
-        }
+        vc.cancelAction = {}
 
         controller.customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true)
     }

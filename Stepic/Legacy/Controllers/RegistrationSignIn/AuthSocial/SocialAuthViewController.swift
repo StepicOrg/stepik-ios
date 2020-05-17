@@ -84,6 +84,8 @@ final class SocialAuthViewController: UIViewController {
         action: #selector(self.onCloseClick(_:))
     )
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     private var providers: [SocialProviderViewData] = []
 
     var state: SocialAuthState = .normal {
@@ -104,14 +106,14 @@ final class SocialAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithEmailClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSocialAuth, parameters: nil)
+        self.analytics.send(.tappedSignInWithEmailOnSocialAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .social, to: .email(email: nil))
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSocialAuth, parameters: nil)
+        self.analytics.send(.tappedSignUpOnSocialAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .social, to: .registration)
         }
@@ -146,6 +148,7 @@ final class SocialAuthViewController: UIViewController {
             authAPI: ApiDataDownloader.auth,
             stepicsAPI: ApiDataDownloader.stepics,
             notificationStatusesAPI: NotificationStatusesAPI(),
+            analytics: self.analytics,
             view: self
         )
         self.presenter?.update()
@@ -241,7 +244,7 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
         }
 
         let provider = providers[providerIndex]
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": provider.name])
+        self.analytics.send(.socialAuthProviderTapped(providerName: provider.name))
 
         presenter?.logIn(with: provider.id)
     }
@@ -344,7 +347,7 @@ final class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override var itemSize: CGSize {
         set {}
         get {
-             CGSize(width: itemSizeHeight, height: itemSizeHeight)
+            CGSize(width: itemSizeHeight, height: itemSizeHeight)
         }
     }
 }

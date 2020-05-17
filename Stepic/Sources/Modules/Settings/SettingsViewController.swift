@@ -1,6 +1,7 @@
 import SVProgressHUD
 import UIKit
 
+// swiftlint:disable file_length
 // MARK: SettingsViewControllerProtocol: AnyObject -
 
 protocol SettingsViewControllerProtocol: AnyObject {
@@ -27,6 +28,7 @@ extension SettingsViewController {
 
 final class SettingsViewController: UIViewController {
     private let interactor: SettingsInteractorProtocol
+    private let analytics: Analytics
 
     let appearance: Appearance
 
@@ -40,9 +42,11 @@ final class SettingsViewController: UIViewController {
 
     init(
         interactor: SettingsInteractorProtocol,
+        analytics: Analytics,
         appearance: Appearance = .init()
     ) {
         self.interactor = interactor
+        self.analytics = analytics
         self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
@@ -71,9 +75,7 @@ final class SettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Settings.opened.send()
-
+        self.analytics.send(.settingsScreenOpened)
         self.updateNavigationBarAppearance()
     }
 
@@ -541,14 +543,20 @@ extension SettingsViewController: SettingsViewDelegate {
     // MARK: Private Helpers
 
     private func handleDeleteAllContentAction() {
+        self.analytics.send(.downloadsClearCacheTapped)
         self.requestDeleteAllContent { [weak self] granted in
+            guard let strongSelf = self else {
+                return
+            }
+
             if granted {
-                self?.interactor.doDeleteAllContent(request: .init())
+                strongSelf.analytics.send(.downloadsClearCacheAccepted)
+                strongSelf.interactor.doDeleteAllContent(request: .init())
             }
         }
     }
 
-    private func requestDeleteAllContent(completionHandler: @escaping ((Bool) -> Void)) {
+    private func requestDeleteAllContent(completionHandler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(
             title: NSLocalizedString("DeleteAllContentConfirmationAlertTitle", comment: ""),
             message: NSLocalizedString("DeleteAllContentConfirmationAlertMessage", comment: ""),
@@ -578,6 +586,7 @@ extension SettingsViewController: SettingsViewDelegate {
     }
 
     private func handleLogOutAction() {
+        self.analytics.send(.logoutTapped)
         self.requestLogOut { [weak self] granted in
             if granted {
                 self?.interactor.doAccountLogOut(request: .init())
@@ -585,7 +594,7 @@ extension SettingsViewController: SettingsViewDelegate {
         }
     }
 
-    private func requestLogOut(completionHandler: @escaping ((Bool) -> Void)) {
+    private func requestLogOut(completionHandler: @escaping (Bool) -> Void) {
         let alert = UIAlertController(
             title: NSLocalizedString("LogOutConfirmationAlertTitle", comment: ""),
             message: NSLocalizedString("LogOutConfirmationAlertMessage", comment: ""),

@@ -11,18 +11,19 @@ import Presentr
 
 final class AchievementPopupAlertManager: AlertManager {
     private let source: AchievementPopupViewController.Source
+    private let analytics: Analytics
 
-    init(source: AchievementPopupViewController.Source) {
+    init(source: AchievementPopupViewController.Source, analytics: Analytics = StepikAnalytics.shared) {
         self.source = source
+        self.analytics = analytics
     }
 
     func present(alert: UIViewController, inController controller: UIViewController) {
-        if let alert = alert as? AchievementPopupViewController, let data = alert.data {
-            AmplitudeAnalyticsEvents.Achievements.popupOpened(
-                source: self.source.rawValue,
-                kind: data.id,
-                level: data.completedLevel
-            ).send()
+        if let achievementPopupViewController = alert as? AchievementPopupViewController,
+           let data = achievementPopupViewController.data {
+            self.analytics.send(
+                .achievementPopupOpened(source: self.source.rawValue, kind: data.id, level: data.completedLevel)
+            )
         }
 
         controller.customPresentViewController(

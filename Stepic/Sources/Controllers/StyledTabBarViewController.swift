@@ -44,8 +44,6 @@ final class StyledTabBarViewController: UITabBarController {
         self.setViewControllers(tabBarViewControllers, animated: false)
         self.fixBadgePosition()
 
-        self.delegate = self
-
         if !AuthInfo.shared.isAuthorized {
             self.selectedIndex = TabController.explore.position
         }
@@ -141,21 +139,9 @@ final class StyledTabBarViewController: UITabBarController {
     }
 }
 
-extension StyledTabBarViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        guard let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController),
-              let eventName = self.items[safe: selectedIndex]?.clickEventName else {
-            return
-        }
-
-        AnalyticsReporter.reportEvent(eventName)
-    }
-}
-
 private struct TabBarItemInfo {
     var title: String
     var controller: UIViewController
-    var clickEventName: String
     var image: UIImage?
     var selectedImage: UIImage?
     var tag: Int
@@ -216,7 +202,6 @@ private enum TabController: String {
             return TabBarItemInfo(
                 title: NSLocalizedString("Profile", comment: ""),
                 controller: navigationViewController,
-                clickEventName: AnalyticsEvents.Tabs.profileClicked,
                 image: personImage,
                 selectedImage: personFillImage,
                 tag: self.tag
@@ -246,7 +231,6 @@ private enum TabController: String {
             return TabBarItemInfo(
                 title: NSLocalizedString("Home", comment: ""),
                 controller: navigationViewController,
-                clickEventName: AnalyticsEvents.Tabs.myCoursesClicked,
                 image: homeImage,
                 selectedImage: homeFillImage,
                 tag: self.tag
@@ -276,7 +260,6 @@ private enum TabController: String {
             return TabBarItemInfo(
                 title: NSLocalizedString("Notifications", comment: ""),
                 controller: viewController,
-                clickEventName: AnalyticsEvents.Tabs.notificationsClicked,
                 image: notificationsImage,
                 selectedImage: notificationsFillImage,
                 tag: self.tag
@@ -298,7 +281,6 @@ private enum TabController: String {
             return TabBarItemInfo(
                 title: NSLocalizedString("Catalog", comment: ""),
                 controller: navigationViewController,
-                clickEventName: AnalyticsEvents.Tabs.catalogClicked,
                 image: exploreImage,
                 selectedImage: exploreImage,
                 tag: self.tag

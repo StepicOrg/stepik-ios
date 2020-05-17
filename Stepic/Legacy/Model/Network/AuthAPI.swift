@@ -162,10 +162,7 @@ final class AuthAPI {
 
     func refreshToken(with refresh_token: String, authorizationType: AuthorizationType) -> Promise<StepikToken> {
         func logRefreshError(statusCode: Int?, message: String?) {
-            var parameters: [String: String] = [:]
-            if let code = statusCode { parameters["code"] = "\(code)" }
-            if let m = message { parameters["message"] = m }
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.tokenRefresh, parameters: parameters)
+            StepikAnalytics.shared.send(.errorsTokenRefresh(message: message, statusCode: statusCode))
         }
 
         return Promise { seal in

@@ -23,6 +23,7 @@ final class ProfileEditAssembly: Assembly {
             initialProfile: self.profile,
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             dataBackUpdateService: DataBackUpdateService(
                 unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
                 sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),

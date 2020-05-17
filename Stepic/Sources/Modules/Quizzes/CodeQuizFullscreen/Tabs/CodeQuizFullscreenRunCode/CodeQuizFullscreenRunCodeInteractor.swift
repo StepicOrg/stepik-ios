@@ -16,6 +16,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
 
     private let presenter: CodeQuizFullscreenRunCodePresenterProtocol
     private let provider: CodeQuizFullscreenRunCodeProviderProtocol
+    private let analytics: Analytics
     private let userAccountService: UserAccountServiceProtocol
 
     private var currentUserCodeRun: UserCodeRun
@@ -28,12 +29,14 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         language: CodeLanguage,
         presenter: CodeQuizFullscreenRunCodePresenterProtocol,
         provider: CodeQuizFullscreenRunCodeProviderProtocol,
+        analytics: Analytics,
         userAccountService: UserAccountServiceProtocol
     ) {
         self.stepID = stepID
         self.language = language
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.userAccountService = userAccountService
         self.currentUserCodeRun = UserCodeRun(
             userID: userAccountService.currentUser?.id ?? Self.invalidUserID,
@@ -67,8 +70,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         self.currentUserCodeRun.status = .evaluation
         self.presentUserCodeRun()
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.RunCode.launched(stepID: self.stepID).send()
+        self.analytics.send(.runCodeLaunched(stepID: self.stepID))
 
         firstly {
             self.provider.runCode(

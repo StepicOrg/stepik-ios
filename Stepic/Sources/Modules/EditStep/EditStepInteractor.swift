@@ -15,6 +15,7 @@ final class EditStepInteractor: EditStepInteractorProtocol {
     private let stepID: Step.IdType
     private let presenter: EditStepPresenterProtocol
     private let provider: EditStepProviderProtocol
+    private let analytics: Analytics
 
     private var currentStepSource: StepSource?
     private var currentText: String = ""
@@ -22,13 +23,15 @@ final class EditStepInteractor: EditStepInteractorProtocol {
     init(
         stepID: Step.IdType,
         presenter: EditStepPresenterProtocol,
-        provider: EditStepProviderProtocol
+        provider: EditStepProviderProtocol,
+        analytics: Analytics
     ) {
         self.stepID = stepID
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
 
-        self.reportAnalyticsEvent(.opened)
+        self.sendAnalyticsEvent(.opened)
     }
 
     // MARK: EditStepInteractorProtocol
@@ -73,7 +76,7 @@ final class EditStepInteractor: EditStepInteractorProtocol {
         self.provider.updateStepSource(updatingStepSource).done { stepSource in
             print("edit step interactor :: finish updating step source = \(stepSource.id)")
 
-            self.reportAnalyticsEvent(.completed)
+            self.sendAnalyticsEvent(.completed)
 
             self.currentStepSource = stepSource
             self.currentText = stepSource.text
@@ -98,35 +101,23 @@ final class EditStepInteractor: EditStepInteractorProtocol {
         )
     }
 
-    private func reportAnalyticsEvent(_ event: AnalyticsEvent) {
-        self.provider.fetchCachedStep(stepID: self.stepID).done { step in
-            guard let step = step else {
-                return
+    private func sendAnalyticsEvent(_ event: AnalyticsEvent) {
+        self.provider
+            .fetchCachedStep(stepID: self.stepID)
+            .compactMap { $0 }
+            .done { step in
+                switch event {
+                case .opened:
+                    self.analytics.send(
+                        .editStepOpened(stepID: step.id, blockName: step.block.name, position: step.position)
+                    )
+                case .completed:
+                    self.analytics.send(
+                        .editStepCompleted(stepID: step.id, blockName: step.block.name, position: step.position)
+                    )
+                }
             }
-
-            let params: [String: Any] = [
-                "step": step.id,
-                "type": step.block.name,
-                "number": step.position
-            ]
-
-            switch event {
-            case .opened:
-                AmplitudeAnalyticsEvents.Steps.stepEditOpened(
-                    stepID: step.id,
-                    type: step.block.name,
-                    position: step.position
-                ).send()
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Edit.opened, parameters: params)
-            case .completed:
-                AmplitudeAnalyticsEvents.Steps.stepEditCompleted(
-                    stepID: step.id,
-                    type: step.block.name,
-                    position: step.position
-                ).send()
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Edit.completed, parameters: params)
-            }
-        }.cauterize()
+            .cauterize()
     }
 
     // MARK: - Types

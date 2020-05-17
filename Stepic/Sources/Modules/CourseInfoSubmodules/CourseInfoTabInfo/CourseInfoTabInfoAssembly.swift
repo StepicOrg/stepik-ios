@@ -10,8 +10,12 @@ final class CourseInfoTabInfoAssembly: Assembly {
             streamVideoQualityStorageManager: StreamVideoQualityStorageManager()
         )
         let presenter = CourseInfoTabInfoPresenter()
-        let interactor = CourseInfoTabInfoInteractor(presenter: presenter, provider: provider)
-        let viewController = CourseInfoTabInfoViewController(interactor: interactor)
+        let interactor = CourseInfoTabInfoInteractor(
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared
+        )
+        let viewController = CourseInfoTabInfoViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 
         presenter.viewController = viewController
         self.moduleInput = interactor

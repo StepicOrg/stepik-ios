@@ -22,6 +22,8 @@ final class NotificationRequestAlertViewController: UIViewController {
     private var messageLabelWidth: Constraint?
     private let animationView = LOTAnimationView(name: "onboardingAnimation4")
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     var yesAction: (() -> Void)?
     var noAction: (() -> Void)?
 
@@ -79,7 +81,7 @@ final class NotificationRequestAlertViewController: UIViewController {
         self.animationView.isHidden = false
         self.animationView.play()
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.shown(context: self.context))
+        self.analytics.send(.notificationRequestAlertShown(context: self.context))
     }
 
     private func localize() {
@@ -103,14 +105,14 @@ final class NotificationRequestAlertViewController: UIViewController {
     @IBAction
     func noPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.rejected(context: self.context))
+        self.analytics.send(.notificationRequestAlertRejected(context: self.context))
         self.noAction?()
     }
 
     @IBAction
     func yesPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.accepted(context: self.context))
+        self.analytics.send(.notificationRequestAlertAccepted(context: self.context))
         self.yesAction?()
     }
 }
