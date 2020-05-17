@@ -32,6 +32,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     private let presenter: SettingsPresenterProtocol
     private let provider: SettingsProviderProtocol
 
+    private let analytics: Analytics
     private let userAccountService: UserAccountServiceProtocol
     private let remoteConfig: RemoteConfig
 
@@ -52,11 +53,13 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     init(
         presenter: SettingsPresenterProtocol,
         provider: SettingsProviderProtocol,
+        analytics: Analytics,
         userAccountService: UserAccountServiceProtocol,
         remoteConfig: RemoteConfig
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.userAccountService = userAccountService
         self.remoteConfig = remoteConfig
     }
@@ -119,7 +122,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
 
     func doStepFontSizeUpdate(request: Settings.StepFontSizeSettingUpdate.Request) {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
-            AnalyticsEvent.stepFontSizeSelected(newStepFontSize).report()
+            self.analytics.send(.settingsStepFontSizeSelected(newStepFontSize))
             self.provider.globalStepFontSize = newStepFontSize
         }
     }
@@ -172,34 +175,6 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         DispatchQueue.main.async {
             self.userAccountService.logOut()
             self.moduleOutput?.handleUserLoggedOut()
-        }
-    }
-
-    // MARK: Inner Types
-
-    // FIXME: analytics dependency
-    private enum AnalyticsEvent {
-        case stepFontSizeSelected(StepFontSize)
-
-        func report() {
-            switch self {
-            case .stepFontSizeSelected(let selectedStepFontSize):
-                let analyticsStringValue: String = {
-                    switch selectedStepFontSize {
-                    case .small:
-                        return "small"
-                    case .medium:
-                        return "medium"
-                    case .large:
-                        return "large"
-                    }
-                }()
-                AmplitudeAnalyticsEvents.Settings.stepFontSizeSelected(size: analyticsStringValue).send()
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Settings.stepFontSizeSelected,
-                    parameters: ["size": analyticsStringValue]
-                )
-            }
         }
     }
 }

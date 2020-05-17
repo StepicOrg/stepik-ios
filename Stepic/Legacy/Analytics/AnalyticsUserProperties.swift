@@ -50,7 +50,7 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         // Update AppMetrica user profile id.
         YMMYandexMetrica.setUserProfileID(userProfileID)
         // Update FirebaseAnalytics user profile id.
-        Analytics.setUserID(userProfileID)
+        FirebaseAnalytics.Analytics.setUserID(userProfileID)
     }
 
     func incrementSubmissionsCount() {

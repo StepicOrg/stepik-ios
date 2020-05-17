@@ -20,8 +20,6 @@ final class OnboardingViewController: UIViewController {
     @IBOutlet weak var rightParentViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightParentViewBottomConstraint: NSLayoutConstraint!
 
-    private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
-
     private var currentPageIndex = 0
 
     private var scrollView: UIScrollView!
@@ -44,6 +42,8 @@ final class OnboardingViewController: UIViewController {
         presenter: NotificationsRequestOnlySettingsAlertPresenter(),
         analytics: .init(source: .onboarding)
     )
+
+    private let analytics: Analytics = StepikAnalytics.shared
 
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
@@ -74,10 +74,9 @@ final class OnboardingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        reloadPages()
+        self.reloadPages()
+        self.analytics.send(.onboardingScreenOpened(index: currentPageIndex + 1))
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
-        AmplitudeAnalyticsEvents.Onboarding.screenOpened(screen: currentPageIndex + 1).send()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.animatedView.start()
         }
@@ -106,12 +105,8 @@ final class OnboardingViewController: UIViewController {
     }
 
     @IBAction func onCloseButtonClick(_ sender: Any) {
-        dismiss(animated: true) {
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Onboarding.onboardingClosed,
-                parameters: ["screen": self.currentPageIndex + 1]
-            )
-            AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
+        self.dismiss(animated: true) {
+            self.analytics.send(.onboardingScreenClosed(index: self.currentPageIndex + 1))
             self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
@@ -184,14 +179,12 @@ final class OnboardingViewController: UIViewController {
     }
 
     private func nextButtonClick() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingAction, parameters: ["screen": currentPageIndex + 1])
-
         if currentPageIndex < pages.count - 1 {
             let newScrollViewContentOffsetX = CGFloat(currentPageIndex + 1) * scrollView.frame.width
             scrollView.setContentOffset(CGPoint(x: newScrollViewContentOffsetX, y: scrollView.contentOffset.y), animated: true)
         } else {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
-            AmplitudeAnalyticsEvents.Onboarding.completed.send()
+            self.analytics.send(.onboardingCompleted)
+
             self.dismiss(animated: true, completion: {
                 self.notificationsRegistrationService.registerForRemoteNotifications()
             })
@@ -224,8 +217,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
 
         if page != currentPageIndex {
             currentPageIndex = page
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingScreenOpened, parameters: ["screen": currentPageIndex + 1])
-            AmplitudeAnalyticsEvents.Onboarding.screenOpened(screen: currentPageIndex + 1).send()
+            self.analytics.send(.onboardingScreenOpened(index: currentPageIndex + 1))
         }
         animatedView?.flip(percent: Double(offset), didInteractionFinished: false)
 

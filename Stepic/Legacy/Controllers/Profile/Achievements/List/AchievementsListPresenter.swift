@@ -18,19 +18,29 @@ protocol AchievementsListView: AnyObject {
 final class AchievementsListPresenter {
     weak var view: AchievementsListView?
 
-    private var achievementsAPI: AchievementsAPI
-    private var achievementsRetriever: AchievementsRetriever
-    private var userId: Int
+    private let achievementsAPI: AchievementsAPI
+    private let achievementsRetriever: AchievementsRetriever
+    private let userID: Int
+    private let analytics: Analytics
 
-    init(userId: Int, view: AchievementsListView, achievementsAPI: AchievementsAPI, achievementsRetriever: AchievementsRetriever) {
-        self.userId = userId
+    init(
+        userID: Int,
+        view: AchievementsListView,
+        achievementsAPI: AchievementsAPI,
+        achievementsRetriever: AchievementsRetriever,
+        analytics: Analytics = StepikAnalytics.shared
+    ) {
+        self.userID = userID
         self.view = view
         self.achievementsAPI = achievementsAPI
         self.achievementsRetriever = achievementsRetriever
+        self.analytics = analytics
     }
 
     func refresh() {
-        self.achievementsRetriever.loadAllAchievements(breakCondition: { _ in false }).then { achievements -> Promise<[AchievementProgressData]> in
+        self.achievementsRetriever.loadAllAchievements(
+            breakCondition: { _ in false }
+        ).then { achievements -> Promise<[AchievementProgressData]> in
             let kinds = Set<String>(achievements.map { $0.kind })
 
             var promises = [Promise<AchievementProgressData>]()
@@ -69,10 +79,11 @@ final class AchievementsListPresenter {
     }
 
     func achievementSelected(with viewData: AchievementViewData) {
-        view?.showAchievementInfo(viewData: viewData, canShare: userId == AuthInfo.shared.userId)
+        view?.showAchievementInfo(viewData: viewData, canShare: userID == AuthInfo.shared.userId)
     }
 
     func sendAppearanceEvent() {
-        AmplitudeAnalyticsEvents.Achievements.opened(isPersonal: AuthInfo.shared.userId == userId).send()
+        let isPersonal = AuthInfo.shared.userId == self.userID
+        self.analytics.send(.achievementsScreenOpened(isPersonal: isPersonal))
     }
 }

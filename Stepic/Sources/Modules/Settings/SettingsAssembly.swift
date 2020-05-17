@@ -39,11 +39,13 @@ final class SettingsAssembly: Assembly {
         let interactor = SettingsInteractor(
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             userAccountService: UserAccountService(),
             remoteConfig: .shared
         )
         let viewController = SettingsViewController(
             interactor: interactor,
+            analytics: StepikAnalytics.shared,
             appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
         )
 

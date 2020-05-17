@@ -115,7 +115,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AmplitudeAnalyticsEvents.Certificates.opened.send()
+        StepikAnalytics.shared.send(.certificatesScreenOpened)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -132,12 +132,8 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
             return
         }
 
-        AnalyticsReporter.reportEvent(
-            AnalyticsEvents.Certificates.shared,
-            parameters: [
-                "grade": certificate.grade,
-                "course": certificate.courseName ?? ""
-            ]
+        StepikAnalytics.shared.send(
+            .shareCertificateTapped(grade: certificate.grade, courseName: certificate.courseName ?? "")
         )
 
         DispatchQueue.global(qos: .background).async {
@@ -232,12 +228,11 @@ extension CertificatesViewController: UITableViewDelegate {
             return
         }
 
-        AnalyticsReporter.reportEvent(
-            AnalyticsEvents.Certificates.opened,
-            parameters: [
-                "grade": certificates[indexPath.row].grade,
-                "course": certificates[indexPath.row].courseName ?? ""
-            ]
+        StepikAnalytics.shared.send(
+            .certificateOpened(
+                grade: certificates[indexPath.row].grade,
+                courseName: certificates[indexPath.row].courseName ?? ""
+            )
         )
 
         WebControllerManager.sharedManager.presentWebControllerWithURL(

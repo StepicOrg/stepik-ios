@@ -7,23 +7,22 @@ protocol UnsupportedQuizInteractorProtocol {
 
 final class UnsupportedQuizInteractor: UnsupportedQuizInteractorProtocol {
     private let presenter: UnsupportedQuizPresenterProtocol
+    private let analytics: Analytics
 
     private let stepURLPath: String
 
     init(
         stepURLPath: String,
-        presenter: UnsupportedQuizPresenterProtocol
+        presenter: UnsupportedQuizPresenterProtocol,
+        analytics: Analytics
     ) {
         self.stepURLPath = stepURLPath
         self.presenter = presenter
+        self.analytics = analytics
     }
 
     func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request) {
-        // FIXME: analytics dependency
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.solveInWebPressed)
-
-        self.presenter.presentUnsupportedQuiz(
-            response: UnsupportedQuiz.UnsupportedQuizPresentation.Response(stepURLPath: self.stepURLPath)
-        )
+        self.analytics.send(.solveQuizInWebTapped)
+        self.presenter.presentUnsupportedQuiz(response: .init(stepURLPath: self.stepURLPath))
     }
 }

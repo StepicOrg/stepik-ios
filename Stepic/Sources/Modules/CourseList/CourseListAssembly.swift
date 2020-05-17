@@ -66,7 +66,8 @@ class CourseListAssembly: Assembly {
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
             personalDeadlinesService: PersonalDeadlinesService(),
-            courseListDataBackUpdateService: courseListDataBackUpdateService
+            courseListDataBackUpdateService: courseListDataBackUpdateService,
+            analytics: StepikAnalytics.shared
         )
         self.moduleInput = interactor
 

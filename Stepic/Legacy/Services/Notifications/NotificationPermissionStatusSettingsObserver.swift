@@ -10,7 +10,13 @@ import Foundation
 import PromiseKit
 
 final class NotificationPermissionStatusSettingsObserver {
+    private let analytics: Analytics
+
     private var didTransitionToBackground = false
+
+    init(analytics: Analytics = StepikAnalytics.shared) {
+        self.analytics = analytics
+    }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -66,9 +72,7 @@ final class NotificationPermissionStatusSettingsObserver {
     }
 
     private func reportPreferencesPushPermissionStatusChange(_ permissionStatus: NotificationPermissionStatus) {
-        AmplitudeAnalyticsEvents.Notifications.preferencesPushPermissionChanged(
-            result: permissionStatus.isRegistered ? .yes : .no
-        ).send()
+        self.analytics.send(.notificationsPushPermissionPreferenceChanged(isRegistered: permissionStatus.isRegistered))
     }
 
     private func updateUserPushPermissionStatusIfNeeded(_ permissionStatus: NotificationPermissionStatus) {

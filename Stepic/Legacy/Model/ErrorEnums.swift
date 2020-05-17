@@ -33,7 +33,7 @@ enum NetworkError: Error {
         }
 
         self = .other(error)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unknownNetworkError, parameters: ["aferror": "\(error.errorDescription ?? "")"])
+        StepikAnalytics.shared.send(.errorUnknownAlamofireNetworkError(message: error.errorDescription ?? ""))
     }
 
     private init(NSError error: NSError) {
@@ -44,7 +44,9 @@ enum NetworkError: Error {
         default:
             print("tried to construct unknown error")
             self = .other(error)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unknownNetworkError, parameters: ["nserror": " code: \(error.code), description: \(error.localizedDescription)"])
+            StepikAnalytics.shared.send(
+                .errorUnknownFoundationNetworkError(code: error.code, description: error.localizedDescription)
+            )
         }
     }
 

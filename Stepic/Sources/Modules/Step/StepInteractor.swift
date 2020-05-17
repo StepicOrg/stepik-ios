@@ -20,6 +20,7 @@ final class StepInteractor: StepInteractorProtocol {
 
     private let presenter: StepPresenterProtocol
     private let provider: StepProviderProtocol
+    private let analytics: Analytics
 
     private let stepID: Step.IdType
     private var didAnalyticsSend = false
@@ -30,10 +31,12 @@ final class StepInteractor: StepInteractorProtocol {
     init(
         stepID: Step.IdType,
         presenter: StepPresenterProtocol,
-        provider: StepProviderProtocol
+        provider: StepProviderProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
 
         self.stepID = stepID
     }
@@ -75,19 +78,10 @@ final class StepInteractor: StepInteractorProtocol {
             }
 
             if !self.didAnalyticsSend {
-                // Analytics
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Step.opened,
-                    parameters: ["item_name": step.block.name as NSObject, "stepId": step.id]
-                )
-                AmplitudeAnalyticsEvents.Steps.stepOpened(
-                    step: step.id,
-                    type: step.block.name,
-                    number: step.position - 1
-                ).send()
+                self.analytics.send(.stepOpened(id: step.id, blockName: step.block.name, position: step.position - 1))
 
                 if step.hasSubmissionRestrictions {
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
+                    self.analytics.send(.stepWithSubmissionRestrictionsOpened)
                 }
 
                 self.didAnalyticsSend = true

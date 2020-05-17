@@ -13,10 +13,8 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
     private var currentStatus: QuizStatus?
     private var currentDataset: ChoiceDataset?
 
-    // swiftlint:disable discouraged_optional_collection
     private var currentChoices: [Bool]?
     private var currentChoicesFeedback: [String?]?
-    // swiftlint:enable discouraged_optional_collection
 
     private var isQuizTitleVisible = true
 

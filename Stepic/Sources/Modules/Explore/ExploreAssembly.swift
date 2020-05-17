@@ -9,9 +9,7 @@ class ExploreAssembly: Assembly {
             networkReachabilityService: NetworkReachabilityService(),
             languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityService()
         )
-        let viewController = ExploreViewController(
-            interactor: interactor
-        )
+        let viewController = ExploreViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 
         presenter.viewController = viewController
         return viewController

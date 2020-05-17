@@ -26,8 +26,8 @@ final class HomeViewController: BaseExploreViewController {
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
-    init(interactor: HomeInteractorProtocol) {
-        super.init(interactor: interactor)
+    init(interactor: HomeInteractorProtocol, analytics: Analytics) {
+        super.init(interactor: interactor, analytics: analytics)
 
         self.title = NSLocalizedString("Home", comment: "")
     }
@@ -45,10 +45,9 @@ final class HomeViewController: BaseExploreViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.homeInteractor?.doStreakActivityLoad(request: .init())
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Home.opened.send()
+        self.analytics.send(.homeScreenOpened)
+        self.homeInteractor?.doStreakActivityLoad(request: .init())
     }
 
     // MARK: - Display submodules

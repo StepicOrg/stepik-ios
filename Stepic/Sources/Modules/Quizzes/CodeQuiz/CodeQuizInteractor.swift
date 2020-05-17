@@ -14,6 +14,7 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
 
     private let presenter: CodeQuizPresenterProtocol
     private let provider: CodeQuizProviderProtocol
+    private let analytics: Analytics
 
     private var codeDetails: CodeDetails?
     private var currentStatus: QuizStatus?
@@ -36,10 +37,12 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
     init(
         presenter: CodeQuizPresenterProtocol,
         provider: CodeQuizProviderProtocol,
+        analytics: Analytics,
         language: CodeLanguage?
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.languageName = language?.rawValue
     }
 
@@ -62,13 +65,7 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
     }
 
     func doLanguageSelect(request: CodeQuiz.LanguageSelect.Request) {
-        AnalyticsReporter.reportEvent(
-            AnalyticsEvents.Code.languageChosen,
-            parameters: [
-                "size": "standard",
-                "language": request.language.rawValue
-            ]
-        )
+        self.analytics.send(.codeLanguageChosen(language: request.language))
 
         self.languageName = request.language.rawValue
 

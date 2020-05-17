@@ -12,17 +12,20 @@ final class TagsInteractor: TagsInteractorProtocol {
     private let presenter: TagsPresenterProtocol
     private let provider: TagsProviderProtocol
     private let contentLanguage: ContentLanguage
+    private let analytics: Analytics
 
     private var currentTags: [(UniqueIdentifierType, Tags.Tag)] = []
 
     init(
         presenter: TagsPresenterProtocol,
         provider: TagsProviderProtocol,
-        contentLanguage: ContentLanguage
+        contentLanguage: ContentLanguage,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
         self.contentLanguage = contentLanguage
+        self.analytics = analytics
     }
 
     // MARK: Actions
@@ -49,11 +52,7 @@ final class TagsInteractor: TagsInteractorProtocol {
             return
         }
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Catalog.Category.opened(
-            categoryID: tag.id,
-            categoryNameEn: tag.analyticsTitle
-        ).send()
+        self.analytics.send(.catalogCategoryOpened(categoryID: tag.id, categoryNameEn: tag.analyticsTitle))
 
         self.moduleOutput?.presentCourseList(
             type: TagCourseListType(id: tag.id, language: self.contentLanguage)

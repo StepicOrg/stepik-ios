@@ -33,6 +33,7 @@ final class CardStepPresenter {
     weak var delegate: CardStepDelegate?
 
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
+    private let analytics: Analytics
 
     var step: Step!
     var state: CardStepState = .unsolved
@@ -43,11 +44,13 @@ final class CardStepPresenter {
     init(
         view: CardStepView,
         step: Step,
-        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
+        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
+        analytics: Analytics
     ) {
         self.step = step
         self.view = view
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
+        self.analytics = analytics
     }
 
     deinit {
@@ -92,7 +95,7 @@ final class CardStepPresenter {
         view?.updateQuiz(with: quizViewController)
 
         quizViewController.isSubmitButtonHidden = true
-        AmplitudeAnalyticsEvents.Steps.stepOpened(step: step.id, type: step.block.name).send()
+        self.analytics.send(.stepOpened(id: step.id, blockName: step.block.name))
     }
 
     func problemDidLoad() {

@@ -11,7 +11,6 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
 
     private var currentStatus: QuizStatus?
     private var currentDataset: SortingDataset?
-    // swiftlint:disable:next discouraged_optional_collection
     private var currentOptions: [NewSortingQuiz.Option]?
 
     private var isQuizTitleVisible = true
