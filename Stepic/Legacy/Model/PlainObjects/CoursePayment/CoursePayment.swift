@@ -101,3 +101,19 @@ final class CoursePayment: JSONSerializable {
         case paymentProvider = "payment_provider"
     }
 }
+
+extension CoursePayment: CustomStringConvertible {
+    var description: String {
+        """
+        CoursePayment(id: \(self.id), \
+        userID: \(self.userID), \
+        courseID: \(self.courseID), \
+        amount: \(self.amount), \
+        currencyCode: \(self.currencyCode), \
+        statusStringValue: \(self.statusStringValue), \
+        isPaid: \(self.isPaid), \
+        data: \(String(describing: self.data)), \
+        paymentProviderStringValue: \(self.paymentProviderStringValue))
+        """
+    }
+}
