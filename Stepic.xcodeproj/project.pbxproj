@@ -419,6 +419,7 @@
 		2C26BF0A240810A3000EE23C /* AttemptsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26BF09240810A3000EE23C /* AttemptsRepository.swift */; };
 		2C284DB92474418600669736 /* CoursePaymentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C284DB82474418600669736 /* CoursePaymentsAPI.swift */; };
 		2C284DBB247444DF00669736 /* CoursePaymentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */; };
+		2C284DBE2474986600669736 /* IAPProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C284DBD2474986600669736 /* IAPProductIDs.plist */; };
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		2C2EA36B212D5FEF002116C9 /* StepikResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA36A212D5FEF002116C9 /* StepikResult.swift */; };
@@ -1662,6 +1663,7 @@
 		2C26BF09240810A3000EE23C /* AttemptsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsRepository.swift; sourceTree = "<group>"; };
 		2C284DB82474418600669736 /* CoursePaymentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsAPI.swift; sourceTree = "<group>"; };
 		2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsNetworkService.swift; sourceTree = "<group>"; };
+		2C284DBD2474986600669736 /* IAPProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAPProductIDs.plist; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
 		2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_can_edit.xcdatamodel; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
@@ -2685,6 +2687,14 @@
 				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
 			);
 			path = CoursePayment;
+			sourceTree = "<group>";
+		};
+		2C284DBC2474907C00669736 /* InAppPurchases */ = {
+			isa = PBXGroup;
+			children = (
+				2C284DBD2474986600669736 /* IAPProductIDs.plist */,
+			);
+			path = InAppPurchases;
 			sourceTree = "<group>";
 		};
 		2C30505924574A82005DCD81 /* Interactor */ = {
@@ -6049,6 +6059,7 @@
 			children = (
 				2C48D5FF228F0C4800739477 /* ContentProcessor */,
 				2CF1505123D532D900915E5A /* Downloader */,
+				2C284DBC2474907C00669736 /* InAppPurchases */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
 			);
 			path = Frameworks;
@@ -6604,6 +6615,7 @@
 				2CA9D98A2011FBD5007AA743 /* LeaderboardTableViewCell.xib in Resources */,
 				2CB62BE52019FD8500B5E336 /* step1.html in Resources */,
 				08C6E31E1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib in Resources */,
+				2C284DBE2474986600669736 /* IAPProductIDs.plist in Resources */,
 				2C7FEE761FDAF9D600B2B4F1 /* onboardingAnimation2.json in Resources */,
 				2C5BE9DC233C0A110098EB2F /* katex in Resources */,
 				2CE8390920C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib in Resources */,
