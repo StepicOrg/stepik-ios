@@ -27,6 +27,7 @@ final class ContinueCourseAssembly: Assembly {
         let interactor = ContinueCourseInteractor(
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             adaptiveStorageManager: AdaptiveStorageManager(),
             tooltipStorageManager: TooltipStorageManager(),
             dataBackUpdateService: dataBackUpdateService

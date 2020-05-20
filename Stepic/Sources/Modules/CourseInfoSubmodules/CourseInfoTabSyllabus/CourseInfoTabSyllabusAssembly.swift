@@ -27,6 +27,7 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
         let interactor = CourseInfoTabSyllabusInteractor(
             presenter: presenter,
             provider: provider,
+            analytics: StepikAnalytics.shared,
             personalDeadlinesService: PersonalDeadlinesService(),
             nextLessonService: NextLessonService(),
             networkReachabilityService: NetworkReachabilityService(),

@@ -9,9 +9,14 @@ final class SpotlightContinueUserActivityService: SpotlightContinueUserActivityS
     private static let deepLinkRoutingDelay: TimeInterval = 0.3
 
     private let deepLinkRoutingService: DeepLinkRoutingService
+    private let analytics: Analytics
 
-    init(deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()) {
+    init(
+        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService(),
+        analytics: Analytics = StepikAnalytics.shared
+    ) {
         self.deepLinkRoutingService = deepLinkRoutingService
+        self.analytics = analytics
     }
 
     func continueUserActivity(_ userActivity: NSUserActivity) -> Bool {
@@ -29,7 +34,7 @@ final class SpotlightContinueUserActivityService: SpotlightContinueUserActivityS
             }
         )
 
-        AmplitudeAnalyticsEvents.ContinueUserActivity.spotlightItemTapped(deepLinkRoute: deepLinkRoute).send()
+        self.analytics.send(.spotlightUserActivityContinued(deepLinkRoute: deepLinkRoute))
 
         return true
     }

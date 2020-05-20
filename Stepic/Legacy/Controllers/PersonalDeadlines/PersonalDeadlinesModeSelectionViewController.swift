@@ -51,6 +51,8 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
     var course: Course?
     var onDeadlineSelected: (() -> Void)?
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     private var modeButtonSize: CGSize {
         let width = CGFloat(Int((collectionView.bounds.width - CGFloat(modes.count - 1) * 12) / CGFloat(modes.count)))
         let height = width + 44
@@ -72,7 +74,7 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
         self.colorize()
         self.localize()
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.opened)
+        self.analytics.send(.personalDeadlineModeOpened)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +101,7 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
     @IBAction
     func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.closed)
+        self.analytics.send(.personalDeadlineModeClosed)
     }
 
     func didSelectMode(mode: DeadlineMode) {
@@ -108,11 +110,7 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
             return
         }
 
-        AnalyticsReporter.reportEvent(
-            AnalyticsEvents.PersonalDeadlines.Mode.chosen,
-            parameters: ["hours": mode.getModeInfo().weeklyLoadHours]
-        )
-        AmplitudeAnalyticsEvents.PersonalDeadlines.created(weeklyLoadHours: mode.getModeInfo().weeklyLoadHours).send()
+        self.analytics.send(.personalDeadlineModeChosen(weeklyLoadHours: mode.getModeInfo().weeklyLoadHours))
 
         SVProgressHUD.show()
 

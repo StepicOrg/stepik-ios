@@ -28,7 +28,8 @@ final class OpenedStoriesAssembly: Assembly {
         )
         let presenter = OpenedStoriesPresenter(
             view: viewController,
-            stories: self.stories, startPosition: self.startPosition
+            stories: self.stories, startPosition: self.startPosition,
+            analytics: StepikAnalytics.shared
         )
 
         presenter.moduleOutput = self.moduleOutput

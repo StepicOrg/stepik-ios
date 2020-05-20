@@ -11,9 +11,7 @@ final class HomeAssembly: Assembly {
             networkReachabilityService: NetworkReachabilityService(),
             contentLanguageService: ContentLanguageService()
         )
-        let viewController = HomeViewController(
-            interactor: interactor
-        )
+        let viewController = HomeViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 
         presenter.viewController = viewController
         return viewController

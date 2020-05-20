@@ -8,14 +8,20 @@ protocol CourseInfoTabInfoInteractorProtocol {
 final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
     private let presenter: CourseInfoTabInfoPresenterProtocol
     private let provider: CourseInfoTabInfoProviderProtocol
+    private let analytics: Analytics
 
     private var course: Course?
 
     private var shouldOpenedAnalyticsEventSend: Bool = true
 
-    init(presenter: CourseInfoTabInfoPresenterProtocol, provider: CourseInfoTabInfoProviderProtocol) {
+    init(
+        presenter: CourseInfoTabInfoPresenterProtocol,
+        provider: CourseInfoTabInfoProviderProtocol,
+        analytics: Analytics
+    ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
     }
 
     // MARK: Get course info
@@ -52,9 +58,9 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
     func handleControllerAppearance() {
         if let course = self.course {
-            AmplitudeAnalyticsEvents.CoursePreview
-                .opened(courseID: course.id, courseTitle: course.title, isPaid: course.isPaid)
-                .send()
+            self.analytics.send(
+                .coursePreviewScreenOpened(courseID: course.id, courseTitle: course.title, isPaid: course.isPaid)
+            )
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
@@ -66,9 +72,9 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
         self.doCourseInfoRefresh(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.CoursePreview
-                .opened(courseID: course.id, courseTitle: course.title, isPaid: course.isPaid)
-                .send()
+            self.analytics.send(
+                .coursePreviewScreenOpened(courseID: course.id, courseTitle: course.title, isPaid: course.isPaid)
+            )
             self.shouldOpenedAnalyticsEventSend = false
         }
     }

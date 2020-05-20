@@ -53,6 +53,8 @@ final class NotificationsViewController: UIViewController, NotificationsView {
         return paginationView
     }()
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     // How can we incapsulate this?
     func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status) {
         markAllAsReadButton.update(with: status)
@@ -86,6 +88,7 @@ final class NotificationsViewController: UIViewController, NotificationsView {
                 analytics: .init(source: .notificationsTab)
             ),
             notificationSuggestionManager: NotificationSuggestionManager(),
+            analytics: StepikAnalytics.shared,
             view: self
         )
 
@@ -114,7 +117,7 @@ final class NotificationsViewController: UIViewController, NotificationsView {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        AmplitudeAnalyticsEvents.Notifications.screenOpened.send()
+        self.analytics.send(.notificationsScreenOpened)
         self.presenter?.didAppear()
 
         if self.data.isEmpty {
@@ -198,7 +201,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
         self.presenter?.updateNotification(with: id, status: .read)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "button"])
+        self.analytics.send(.markNotificationAsReadTapped(source: .button))
 
         cell.status = .read
     }
@@ -215,7 +218,7 @@ extension NotificationsViewController: NotificationsTableViewCellDelegate {
         }
 
         self.presenter?.updateNotification(with: id, status: .read)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "link"])
+        self.analytics.send(.markNotificationAsReadTapped(source: .link))
 
         cell.status = .read
     }

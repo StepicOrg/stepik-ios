@@ -30,7 +30,8 @@ final class StoryAssembly: Assembly {
             story: self.story,
             storyPartViewFactory: StoryPartViewFactory(urlNavigationDelegate: urlNavigator),
             urlNavigator: urlNavigator,
-            navigationDelegate: self.navigationDelegate
+            navigationDelegate: self.navigationDelegate,
+            analytics: StepikAnalytics.shared
         )
 
         viewController.presenter = presenter

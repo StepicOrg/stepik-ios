@@ -22,7 +22,12 @@ final class EditStepAssembly: Assembly {
             stepsPersistenceService: StepsPersistenceService()
         )
         let presenter = EditStepPresenter()
-        let interactor = EditStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
+        let interactor = EditStepInteractor(
+            stepID: self.stepID,
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared
+        )
         let viewController = EditStepViewController(
             interactor: interactor,
             appearance: .init(

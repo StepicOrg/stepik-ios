@@ -9,7 +9,11 @@ final class UnsupportedQuizAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let presenter = UnsupportedQuizPresenter()
-        let interactor = UnsupportedQuizInteractor(stepURLPath: self.stepURLPath, presenter: presenter)
+        let interactor = UnsupportedQuizInteractor(
+            stepURLPath: self.stepURLPath,
+            presenter: presenter,
+            analytics: StepikAnalytics.shared
+        )
         let viewController = UnsupportedQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController

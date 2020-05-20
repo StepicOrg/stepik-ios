@@ -44,6 +44,8 @@ final class StoryPresenter: StoryPresenterProtocol {
     private var urlNavigator: URLNavigator
     private var story: Story
 
+    private let analytics: Analytics
+
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
     private var shouldRestartSegment = false
@@ -62,13 +64,15 @@ final class StoryPresenter: StoryPresenterProtocol {
         story: Story,
         storyPartViewFactory: StoryPartViewFactory,
         urlNavigator: URLNavigator,
-        navigationDelegate: StoryNavigationDelegate?
+        navigationDelegate: StoryNavigationDelegate?,
+        analytics: Analytics
     ) {
         self.view = view
         self.story = story
         self.storyPartViewFactory = storyPartViewFactory
         self.navigationDelegate = navigationDelegate
         self.urlNavigator = urlNavigator
+        self.analytics = analytics
     }
 
     func animate() {
@@ -107,11 +111,11 @@ final class StoryPresenter: StoryPresenterProtocol {
             self.view?.animate(view: viewToAnimate)
         }
 
-        AmplitudeAnalyticsEvents.Stories.storyPartOpened(id: self.storyID, position: animatingStoryPart.position).send()
+        self.analytics.send(.storyPartOpened(id: self.storyID, position: animatingStoryPart.position))
     }
 
     func didAppear() {
-        AmplitudeAnalyticsEvents.Stories.storyOpened(id: self.storyID).send()
+        self.analytics.send(.storyOpened(id: self.storyID))
         NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": self.storyID])
 
         if self.shouldRestartSegment {
@@ -121,7 +125,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     private func showPreviousStory() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: self.storyID, type: .automatic).send()
+        self.analytics.send(.storyClosed(id: self.storyID, type: .automatic))
         self.navigationDelegate?.didFinishBack()
 
         self.partToAnimate = 0
@@ -129,7 +133,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     private func showNextStory() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: self.storyID, type: .automatic).send()
+        self.analytics.send(.storyClosed(id: self.storyID, type: .automatic))
         self.navigationDelegate?.didFinishForward()
 
         self.partToAnimate = self.story.parts.count - 1
@@ -157,7 +161,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     func onClosePressed() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: self.storyID, type: .cross).send()
+        self.analytics.send(.storyClosed(id: self.storyID, type: .cross))
         self.view?.close()
     }
 }

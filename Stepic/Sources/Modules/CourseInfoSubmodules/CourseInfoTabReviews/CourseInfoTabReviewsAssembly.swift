@@ -12,7 +12,11 @@ final class CourseInfoTabReviewsAssembly: Assembly {
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
             userAccountService: UserAccountService()
         )
-        let interactor = CourseInfoTabReviewsInteractor(presenter: presenter, provider: provider)
+        let interactor = CourseInfoTabReviewsInteractor(
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared
+        )
         let viewController = CourseInfoTabReviewsViewController(interactor: interactor)
 
         presenter.viewController = viewController

@@ -10,7 +10,8 @@ import Foundation
 import PromiseKit
 
 enum CourseSubscriptionSource: String {
-    case widget, preview
+    case widget
+    case preview
 }
 
 protocol CourseSubscriberProtocol {
@@ -35,6 +36,12 @@ final class CourseSubscriber: CourseSubscriberProtocol {
         return service
     }()
 
+    private let analytics: Analytics
+
+    init(analytics: Analytics = StepikAnalytics.shared) {
+        self.analytics = analytics
+    }
+
     func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
         self.performCourseJoinActions(course: course, unsubscribe: false, source: source)
     }
@@ -49,21 +56,17 @@ final class CourseSubscriber: CourseSubscriberProtocol {
         source: CourseSubscriptionSource
     ) -> Promise<Course> {
         Promise<Course> { seal in
-            _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: {
+            _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: { [weak self] in
                 guard let progressId = course.progressId else {
                     seal.reject(CourseSubscriptionError.badResponseFormat)
                     return
                 }
 
                 if unsubscribe {
-                    AmplitudeAnalyticsEvents.Course.unsubscribed(courseID: course.id, courseTitle: course.title).send()
+                    self?.analytics.send(.courseUnsubscribed(id: course.id, title: course.title))
                     AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
-                    AmplitudeAnalyticsEvents.Course.joined(
-                        source: source.rawValue,
-                        courseID: course.id,
-                        courseTitle: course.title
-                    ).send()
+                    self?.analytics.send(.courseJoined(source: source, id: course.id, title: course.title))
                     AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
 
@@ -71,7 +74,7 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                     course.enrolled = !unsubscribe
                     CoreDataHelper.shared.save()
 
-                    self.dataBackUpdateService.triggerEnrollmentUpdate(retrievedCourse: course)
+                    self?.dataBackUpdateService.triggerEnrollmentUpdate(retrievedCourse: course)
 
                     seal.fulfill(course)
                 }

@@ -9,6 +9,7 @@ protocol ProfileEditInteractorProtocol {
 final class ProfileEditInteractor: ProfileEditInteractorProtocol {
     private let presenter: ProfileEditPresenterProtocol
     private let provider: ProfileEditProviderProtocol
+    private let analytics: Analytics
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var currentProfile: Profile
@@ -17,16 +18,18 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
         initialProfile: Profile,
         presenter: ProfileEditPresenterProtocol,
         provider: ProfileEditProviderProtocol,
+        analytics: Analytics,
         dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
         self.currentProfile = initialProfile
         self.dataBackUpdateService = dataBackUpdateService
     }
 
     func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request) {
-        AmplitudeAnalyticsEvents.Profile.editOpened.send()
+        self.analytics.send(.profileEditScreenOpened)
 
         firstly {
             self.currentProfile.emailAddresses.isEmpty
@@ -48,7 +51,7 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
             self.dataBackUpdateService.triggerProfileUpdate(updatedProfile: updatedProfile)
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: true))
 
-            AmplitudeAnalyticsEvents.Profile.editSaved.send()
+            self.analytics.send(.profileEditSaved)
         }.catch { error in
             print("profile edit interactor: unable to update profile, error = \(error)")
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: false))

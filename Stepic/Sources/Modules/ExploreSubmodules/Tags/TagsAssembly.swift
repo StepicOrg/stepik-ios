@@ -19,7 +19,8 @@ final class TagsAssembly: Assembly {
         let interactor = TagsInteractor(
             presenter: presenter,
             provider: provider,
-            contentLanguage: self.contentLanguage
+            contentLanguage: self.contentLanguage,
+            analytics: StepikAnalytics.shared
         )
         let viewController = TagsViewController(
             interactor: interactor

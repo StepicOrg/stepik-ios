@@ -10,50 +10,47 @@ import Foundation
 
 struct NotificationAlertsAnalytics {
     let source: Source
+    private let analytics: Analytics
 
-    func reportDefaultAlertShown() {
-        AmplitudeAnalyticsEvents.Notifications.defaultAlertShown(
-            source: self.source.description
-        ).send()
+    init(source: Source, analytics: Analytics = StepikAnalytics.shared) {
+        self.source = source
+        self.analytics = analytics
     }
 
-    func reportDefaultAlertInteractionResult(
-        _ result: AmplitudeAnalyticsEvents.Notifications.InteractionResult
-    ) {
-        AmplitudeAnalyticsEvents.Notifications.defaultAlertInteracted(
-            source: self.source.description,
-            result: result
-        ).send()
+    func reportDefaultAlertShown() {
+        self.analytics.send(.requestNotificationsAuthorizationDefaultAlertShown(source: self.source.description))
+    }
+
+    func reportDefaultAlertInteractionResult(_ result: InteractionResult) {
+        self.analytics.send(
+            .requestNotificationsAuthorizationDefaultAlertInteracted(
+                source: self.source.description,
+                result: result.rawValue
+            )
+        )
     }
 
     func reportCustomAlertShown() {
-        AmplitudeAnalyticsEvents.Notifications.customAlertShown(
-            source: self.source.description
-        ).send()
+        self.analytics.send(.requestNotificationsAuthorizationCustomAlertShown(source: self.source.description))
     }
 
-    func reportCustomAlertInteractionResult(
-        _ result: AmplitudeAnalyticsEvents.Notifications.InteractionResult
-    ) {
-        AmplitudeAnalyticsEvents.Notifications.customAlertInteracted(
-            source: self.source.description,
-            result: result
-        ).send()
+    func reportCustomAlertInteractionResult(_ result: InteractionResult) {
+        self.analytics.send(
+            .requestNotificationsAuthorizationCustomAlertInteracted(source: self.source.description, result: result.rawValue)
+        )
     }
 
     func reportPreferencesAlertShown() {
-        AmplitudeAnalyticsEvents.Notifications.preferencesAlertShown(
-            source: self.source.description
-        ).send()
+        self.analytics.send(.requestNotificationsAuthorizationPreferencesAlertShown(source: self.source.description))
     }
 
-    func reportPreferencesAlertInteractionResult(
-        _ result: AmplitudeAnalyticsEvents.Notifications.InteractionResult
-    ) {
-        AmplitudeAnalyticsEvents.Notifications.preferencesAlertInteracted(
-            source: self.source.description,
-            result: result
-        ).send()
+    func reportPreferencesAlertInteractionResult(_ result: InteractionResult) {
+        self.analytics.send(
+            .requestNotificationsAuthorizationPreferencesAlertInteracted(
+                source: self.source.description,
+                result: result.rawValue
+            )
+        )
     }
 
     enum Source {
@@ -83,5 +80,10 @@ struct NotificationAlertsAnalytics {
                 return "onboarding"
             }
         }
+    }
+
+    enum InteractionResult: String {
+        case yes
+        case no
     }
 }

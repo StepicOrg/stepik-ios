@@ -35,8 +35,6 @@ whitelist_rules:
   - discarded_notification_center_observer
   - discouraged_direct_init
   - discouraged_object_literal
-  - discouraged_optional_boolean
-  - discouraged_optional_collection
   - duplicate_enum_cases
   - duplicate_imports
   - dynamic_inline

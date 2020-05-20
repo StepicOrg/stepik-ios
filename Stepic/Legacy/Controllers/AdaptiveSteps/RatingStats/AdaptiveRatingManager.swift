@@ -9,20 +9,20 @@
 import Foundation
 
 final class AdaptiveRatingManager {
-    let courseId: Int
+    let courseID: Int
 
     private lazy var ratingKey: String = {
-        "rating_\(self.courseId)"
+        "rating_\(self.courseID)"
     }()
 
     private lazy var streakKey: String = {
-        "streak_\(self.courseId)"
+        "streak_\(self.courseID)"
     }()
 
     let defaults = UserDefaults.standard
 
-    init(courseId: Int) {
-        self.courseId = courseId
+    init(courseID: Int) {
+        self.courseID = courseID
     }
 
     var rating: Int {

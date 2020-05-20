@@ -24,7 +24,12 @@ final class StepAssembly: Assembly {
             discussionThreadsPersistenceService: DiscussionThreadsPersistenceService()
         )
         let presenter = StepPresenter()
-        let interactor = StepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
+        let interactor = StepInteractor(
+            stepID: self.stepID,
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared
+        )
         let viewController = StepViewController(interactor: interactor)
 
         presenter.viewController = viewController

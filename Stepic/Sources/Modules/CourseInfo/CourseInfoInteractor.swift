@@ -24,6 +24,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
+    private let analytics: Analytics
 
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
@@ -81,7 +82,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
-        dataBackUpdateService: DataBackUpdateServiceProtocol
+        dataBackUpdateService: DataBackUpdateServiceProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -93,6 +95,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.dataBackUpdateService = dataBackUpdateService
+        self.analytics = analytics
 
         self.courseID = courseID
     }
@@ -143,10 +146,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
-        guard let urlPath = self.courseWebURLPath else {
-            return
+        if let urlPath = self.courseWebURLPath {
+            self.analytics.send(.shareCourseTapped)
+            self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
         }
-        self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
     }
 
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request) {
@@ -186,6 +189,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         if !self.userAccountService.isAuthorized {
+            self.analytics.send(.anonymousUserTappedJoinCourse)
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.presenter.presentAuthorization(response: .init())
             return
@@ -205,13 +209,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         } else {
             // Paid course -> open web page
             if course.isPaid {
-                // FIXME: analytics dependency
-                AmplitudeAnalyticsEvents.Course.buyPressed(source: .courseScreen, courseID: course.id).send()
+                self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.presenter.presentPaidCourseBuying(response: .init(course: course))
                 return
             }
 
+            self.analytics.send(.authorizedUserTappedJoinCourse)
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course

@@ -110,13 +110,11 @@ class StyledNavigationController: UINavigationController {
         return super.popViewController(animated: animated)
     }
 
-    // swiftlint:disable:next discouraged_optional_collection
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
         self.lastAction = .pop
         return super.popToRootViewController(animated: animated)
     }
 
-    // swiftlint:disable:next discouraged_optional_collection
     override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         self.lastAction = .pop
         return super.popToViewController(viewController, animated: animated)

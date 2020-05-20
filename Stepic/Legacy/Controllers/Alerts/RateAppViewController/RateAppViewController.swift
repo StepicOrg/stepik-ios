@@ -142,7 +142,7 @@ final class RateAppViewController: UIViewController {
 
         var params = defaultAnalyticsParams
         params["rating"] = rating
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.rated, parameters: params)
+        StepikAnalytics.shared.send(.rateAppTapped(parameters: params))
 
         if rating < 4 {
             self.buttonState = .email
@@ -169,7 +169,7 @@ final class RateAppViewController: UIViewController {
     }
 
     private func showEmail() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.email, parameters: defaultAnalyticsParams)
+        StepikAnalytics.shared.send(.rateAppNegativeStateWriteEmailTapped(parameters: self.defaultAnalyticsParams))
 
         if !MFMailComposeViewController.canSendMail() {
             return self.dismiss(animated: true, completion: nil)
@@ -190,7 +190,7 @@ final class RateAppViewController: UIViewController {
     }
 
     private func showAppStore() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: defaultAnalyticsParams)
+        StepikAnalytics.shared.send(.rateAppPositiveStateAppStoreTapped(parameters: self.defaultAnalyticsParams))
         self.dismiss(animated: true, completion: {
             SKStoreReviewController.requestReview()
         })
@@ -207,9 +207,9 @@ final class RateAppViewController: UIViewController {
 
         switch self.buttonState! {
         case .appStore:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.later, parameters: self.defaultAnalyticsParams)
+            StepikAnalytics.shared.send(.rateAppPositiveStateLaterTapped(parameters: self.defaultAnalyticsParams))
         case .email:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.later, parameters: self.defaultAnalyticsParams)
+            StepikAnalytics.shared.send(.rateAppNegativeStateLaterTapped(parameters: self.defaultAnalyticsParams))
         }
     }
 
@@ -238,15 +238,9 @@ extension RateAppViewController: MFMailComposeViewControllerDelegate {
     ) {
         switch result {
         case .cancelled, .failed, .saved:
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Rate.Negative.Email.cancelled,
-                parameters: defaultAnalyticsParams
-            )
+            StepikAnalytics.shared.send(.rateAppNegativeStateWriteEmailCancelled(parameters: self.defaultAnalyticsParams))
         case .sent:
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Rate.Negative.Email.success,
-                parameters: defaultAnalyticsParams
-            )
+            StepikAnalytics.shared.send(.rateAppNegativeStateWriteEmailSucceeded(parameters: self.defaultAnalyticsParams))
         @unknown default:
             break
         }
