@@ -420,6 +420,8 @@
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C26BF0A240810A3000EE23C /* AttemptsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26BF09240810A3000EE23C /* AttemptsRepository.swift */; };
+		2C284DB92474418600669736 /* CoursePaymentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C284DB82474418600669736 /* CoursePaymentsAPI.swift */; };
+		2C284DBB247444DF00669736 /* CoursePaymentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */; };
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		2C2C4D91246B485400CF759D /* UIModalPresentationStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */; };
@@ -925,6 +927,7 @@
 		62E988775E581205F08D9163 /* CourseInfoTabInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983B16120753F66A1A646 /* CourseInfoTabInfoViewController.swift */; };
 		62E9887FA8D78BE11EE4F470 /* BaseExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C200100F98B77BDA77E /* BaseExploreInteractor.swift */; };
 		62E98880A7BEE7F43E48325B /* PaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9803B15F1155BEDF36837 /* PaginationView.swift */; };
+		62E9888417EE1DD05B20491B /* CoursePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98321CB033D7736CD4DDB /* CoursePayment.swift */; };
 		62E988898D30EFB35E3050DC /* NewFreeAnswerQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987A1B39A52DCAFCE34B5 /* NewFreeAnswerQuizPresenter.swift */; };
 		62E9888B20E524751AEB87AC /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DCDA900DA7A3EB1E44B /* TagViewModel.swift */; };
 		62E9888C86E6F2C4C8E8B89D /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
@@ -1670,6 +1673,8 @@
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C26BF09240810A3000EE23C /* AttemptsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsRepository.swift; sourceTree = "<group>"; };
 		2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIModalPresentationStyle+Fallback.swift"; sourceTree = "<group>"; };
+		2C284DB82474418600669736 /* CoursePaymentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsAPI.swift; sourceTree = "<group>"; };
+		2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsNetworkService.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
 		2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_can_edit.xcdatamodel; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
@@ -2042,6 +2047,7 @@
 		62E982FE7BA988904638133C /* CodeDetailsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeDetailsContentView.swift; sourceTree = "<group>"; };
 		62E98315DDA05307C326E27C /* SeparatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		62E9831C047480B1080945C4 /* WriteCourseReviewAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewAssembly.swift; sourceTree = "<group>"; };
+		62E98321CB033D7736CD4DDB /* CoursePayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePayment.swift; sourceTree = "<group>"; };
 		62E9834875259AA9BB72EFE3 /* CodeQuizFullscreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeQuizFullscreenView.swift; sourceTree = "<group>"; };
 		62E983510CCCDA094D4780B8 /* StepViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepViewModel.swift; sourceTree = "<group>"; };
 		62E98351E02F89F112A8EDD2 /* TagsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsPresenter.swift; sourceTree = "<group>"; };
@@ -2695,6 +2701,14 @@
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		2C284DB7247438F900669736 /* CoursePayment */ = {
+			isa = PBXGroup;
+			children = (
+				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
+			);
+			path = CoursePayment;
 			sourceTree = "<group>";
 		};
 		2C30505924574A82005DCD81 /* Interactor */ = {
@@ -4904,6 +4918,7 @@
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
+				2C284DB82474418600669736 /* CoursePaymentsAPI.swift */,
 				2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */,
 				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
 				080CE1421E955D300089A27F /* CoursesAPI.swift */,
@@ -4974,6 +4989,7 @@
 		2CFF903F242A2AAA00FD7311 /* PlainObjects */ = {
 			isa = PBXGroup;
 			children = (
+				2C284DB7247438F900669736 /* CoursePayment */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
 				2CF10C872384240800F8CC95 /* StepSources */,
@@ -5371,6 +5387,7 @@
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
+				2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */,
 				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
@@ -6784,7 +6801,7 @@
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
@@ -6837,7 +6854,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
@@ -6900,7 +6917,7 @@
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
@@ -6949,7 +6966,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
@@ -7110,6 +7127,7 @@
 				2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */,
 				2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
+				2C284DBB247444DF00669736 /* CoursePaymentsNetworkService.swift in Sources */,
 				2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */,
 				2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
@@ -7250,6 +7268,7 @@
 				2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */,
 				086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
+				2C284DB92474418600669736 /* CoursePaymentsAPI.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				2CB37E6623902BB80050D85E /* StorageUsageService.swift in Sources */,
 				2C2C4D91246B485400CF759D /* UIModalPresentationStyle+Fallback.swift in Sources */,
@@ -8050,6 +8069,7 @@
 				62E9872A1319759E6A0A718F /* Analytics.swift in Sources */,
 				62E98DDC32C86496C6953A1E /* AnalyticsEngine.swift in Sources */,
 				62E98F1672B90358D7188D02 /* AnalyticsEvent.swift in Sources */,
+				62E9888417EE1DD05B20491B /* CoursePayment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8402,7 +8422,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 209;
+				CURRENT_PROJECT_VERSION = 211;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -8432,7 +8452,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 209;
+				CURRENT_PROJECT_VERSION = 211;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;

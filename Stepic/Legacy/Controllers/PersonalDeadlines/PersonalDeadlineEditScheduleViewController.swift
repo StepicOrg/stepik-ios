@@ -54,24 +54,18 @@ final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
             UIAlertAction(
                 title: NSLocalizedString("EditSchedule", comment: ""),
                 style: .default,
-                handler: { [weak self] _ in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.analytics.send(.personalDeadlineChangeTapped)
+                handler: { _ in // Keep a strong reference to self
+                    self.analytics.send(.personalDeadlineChangeTapped)
 
                     let viewController = PersonalDeadlineEditScheduleLegacyAssembly(
-                        course: strongSelf.course
+                        course: self.course
                     ).makeModule()
 
                     if let personalDeadlineController = viewController as? PersonalDeadlineEditScheduleViewController {
-                        personalDeadlineController.onSavePressed = { [weak self] in
-                            self?.updateCompletion?()
-                        }
+                        personalDeadlineController.onSavePressed = { self.updateCompletion?() }
                     }
 
-                    strongSelf.presentingViewController.customPresentViewController(
+                    self.presentingViewController.customPresentViewController(
                         presentr,
                         viewController: viewController,
                         animated: true
@@ -83,18 +77,14 @@ final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
             UIAlertAction(
                 title: NSLocalizedString("DeleteSchedule", comment: ""),
                 style: .destructive,
-                handler: { [weak self] _ in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.analytics.send(.personalDeadlineDeleted)
+                handler: { _ in // Keep a strong reference to self
+                    self.analytics.send(.personalDeadlineDeleted)
                     SVProgressHUD.show()
 
-                    PersonalDeadlinesService().deleteDeadline(for: strongSelf.course).done { _ in
+                    PersonalDeadlinesService().deleteDeadline(for: self.course).done { _ in
                         SVProgressHUD.dismiss()
                     }.ensure {
-                        strongSelf.updateCompletion?()
+                        self.updateCompletion?()
                     }.catch { _ in
                         SVProgressHUD.showError(withStatus: nil)
                     }

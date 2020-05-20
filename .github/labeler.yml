@@ -1,0 +1,13 @@
+a/b:
+  - Stepic/Legacy/Analytics/SplitTests/*
+  - Stepic/Legacy/Analytics/SplitTests/**/*
+
+dependencies:
+  - Gemfile
+  - Gemfile.lock
+  - Podfile
+  - Podfile.lock
+
+main:
+  - Stepic/*
+  - Stepic/**/*
