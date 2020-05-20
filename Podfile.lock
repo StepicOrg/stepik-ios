@@ -164,9 +164,9 @@ PODS:
   - Protobuf (3.12.0)
   - Quick (2.2.0)
   - Reveal-SDK (24)
-  - SDWebImage (5.7.3):
-    - SDWebImage/Core (= 5.7.3)
-  - SDWebImage/Core (5.7.3)
+  - SDWebImage (5.7.4):
+    - SDWebImage/Core (= 5.7.4)
+  - SDWebImage/Core (5.7.4)
   - SnapKit (5.0.1)
   - STRegex (2.1.1)
   - SVGKit (2.1.0):
@@ -224,7 +224,7 @@ DEPENDENCIES:
   - PromiseKit (= 6.13.0)
   - Quick (= 2.2.0)
   - Reveal-SDK
-  - SDWebImage (= 5.7.3)
+  - SDWebImage (= 5.7.4)
   - SnapKit (= 5.0.1)
   - STRegex (= 2.1.1)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
@@ -372,7 +372,7 @@ SPEC CHECKSUMS:
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
-  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   STRegex: d49e88d0fe58538d3175fdd989bc1243b9be2a07
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
@@ -389,6 +389,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
 
-PODFILE CHECKSUM: c8c1becda0112ec9f76e484a029a6586f9334d9d
+PODFILE CHECKSUM: 9520d611cb563844cf5e10a736a1df1c89a34d27
 
 COCOAPODS: 1.9.1
