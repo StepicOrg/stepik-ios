@@ -8,8 +8,11 @@ final class UnsupportedQuizPresenter: UnsupportedQuizPresenterProtocol {
     weak var viewController: UnsupportedQuizViewControllerProtocol?
 
     func presentUnsupportedQuiz(response: UnsupportedQuiz.UnsupportedQuizPresentation.Response) {
-        self.viewController?.displayUnsupportedQuiz(
-            viewModel: UnsupportedQuiz.UnsupportedQuizPresentation.ViewModel(stepURLPath: response.stepURLPath)
-        )
+        guard let encodedPath = response.stepURLPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let stepURL = URL(string: encodedPath) else {
+            return
+        }
+
+        self.viewController?.displayUnsupportedQuiz(viewModel: .init(stepURL: stepURL))
     }
 }

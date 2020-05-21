@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol UnsupportedQuizInteractorProtocol {
-    func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request)
+    func doUnsupportedQuizAction(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request)
 }
 
 final class UnsupportedQuizInteractor: UnsupportedQuizInteractorProtocol {
@@ -21,7 +21,7 @@ final class UnsupportedQuizInteractor: UnsupportedQuizInteractorProtocol {
         self.analytics = analytics
     }
 
-    func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request) {
+    func doUnsupportedQuizAction(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request) {
         self.analytics.send(.solveQuizInWebTapped)
         self.presenter.presentUnsupportedQuiz(response: .init(stepURLPath: self.stepURLPath))
     }
