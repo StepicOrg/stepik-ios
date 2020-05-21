@@ -279,10 +279,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             return
         }
 
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: "external link",
+            withKey: .peerReview,
             allowsSafari: true,
             backButtonStyle: .close
         )
@@ -482,10 +482,10 @@ extension QuizViewController: WKNavigationDelegate {
         if url.isFileURL {
             decisionHandler(.allow)
         } else {
-            WebControllerManager.sharedManager.presentWebControllerWithURL(
+            WebControllerManager.shared.presentWebControllerWithURL(
                 url,
                 inController: self,
-                withKey: "HintWebController",
+                withKey: .externalLink,
                 allowsSafari: true,
                 backButtonStyle: .close
             )

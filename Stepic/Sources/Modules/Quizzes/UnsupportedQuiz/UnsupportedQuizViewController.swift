@@ -28,10 +28,10 @@ final class UnsupportedQuizViewController: UIViewController {
 
 extension UnsupportedQuizViewController: UnsupportedQuizViewControllerProtocol {
     func displayUnsupportedQuiz(viewModel: UnsupportedQuiz.UnsupportedQuizPresentation.ViewModel) {
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             viewModel.stepURL,
             inController: self,
-            withKey: "external link",
+            withKey: .openQuizInWeb,
             allowsSafari: true,
             backButtonStyle: .close
         )

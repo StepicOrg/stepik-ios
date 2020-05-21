@@ -263,7 +263,13 @@ final class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString(url.absoluteString, inController: self, withKey: "tos", allowsSafari: true, backButtonStyle: BackButtonStyle.done)
+        WebControllerManager.shared.presentWebControllerWithURLString(
+            url.absoluteString,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
 

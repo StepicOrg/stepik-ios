@@ -123,10 +123,10 @@ final class DeepLinkRouter {
                     return
                 }
 
-                WebControllerManager.sharedManager.presentWebControllerWithURL(
+                WebControllerManager.shared.presentWebControllerWithURL(
                     urlWithAppendedQueryParams,
                     inController: sourceViewController,
-                    withKey: "external link",
+                    withKey: .externalLink,
                     allowsSafari: true,
                     backButtonStyle: .close
                 )

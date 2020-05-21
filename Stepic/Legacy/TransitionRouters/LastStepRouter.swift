@@ -249,10 +249,10 @@ final class LastStepRouter {
                         }
                     }()
 
-                    WebControllerManager.sharedManager.presentWebControllerWithURLString(
+                    WebControllerManager.shared.presentWebControllerWithURLString(
                         "\(courseWebURLPath)/syllabus?from_mobile_app=true",
                         inController: presentationController,
-                        withKey: "exam",
+                        withKey: .exam,
                         allowsSafari: true,
                         backButtonStyle: .close
                     )

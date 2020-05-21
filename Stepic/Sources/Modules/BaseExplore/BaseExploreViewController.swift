@@ -166,10 +166,10 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
     }
 
     func displayPaidCourseBuying(viewModel: BaseExplore.PaidCourseBuyingPresentation.ViewModel) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString(
+        WebControllerManager.shared.presentWebControllerWithURLString(
             viewModel.urlPath,
             inController: self,
-            withKey: "paid_course",
+            withKey: .paidCourse,
             allowsSafari: true,
             backButtonStyle: .done
         )

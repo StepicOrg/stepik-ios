@@ -174,10 +174,10 @@ extension SolutionViewController: SolutionViewDelegate {
     func solutionView(_ view: SolutionView, didRequestOpenURL url: URL) {
         let scheme = url.scheme?.lowercased() ?? ""
         if ["http", "https"].contains(scheme) {
-            WebControllerManager.sharedManager.presentWebControllerWithURL(
+            WebControllerManager.shared.presentWebControllerWithURL(
                 url,
                 inController: self,
-                withKey: "external link",
+                withKey: .externalLink,
                 allowsSafari: true,
                 backButtonStyle: .done
             )
@@ -189,10 +189,10 @@ extension SolutionViewController: SolutionViewDelegate {
             return
         }
 
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: "solution",
+            withKey: .solution,
             allowsSafari: true,
             backButtonStyle: .done
         )

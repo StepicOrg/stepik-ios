@@ -49,10 +49,10 @@ extension CodeQuizFullscreenInstructionViewController: CodeQuizFullscreenInstruc
     ) {
         let scheme = url.scheme?.lowercased() ?? ""
         if ["http", "https"].contains(scheme) {
-            WebControllerManager.sharedManager.presentWebControllerWithURL(
+            WebControllerManager.shared.presentWebControllerWithURL(
                 url,
                 inController: self,
-                withKey: "external link",
+                withKey: .externalLink,
                 allowsSafari: true,
                 backButtonStyle: .done
             )
