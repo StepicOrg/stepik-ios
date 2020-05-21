@@ -435,6 +435,8 @@
 		2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA9023D229C200E90439 /* Bundle+Version.swift */; };
 		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
+		2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */; };
+		2C42EFBA2476FADB00423695 /* MagicLinksNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
@@ -1685,6 +1687,8 @@
 		2C3ABA9023D229C200E90439 /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
 		2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFontSizeStorageManager.swift; sourceTree = "<group>"; };
 		2C3DAB90233D735D00453B1C /* StepFontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepFontSize.swift; sourceTree = "<group>"; };
+		2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksAPI.swift; sourceTree = "<group>"; };
+		2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksNetworkService.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
@@ -4898,6 +4902,7 @@
 				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
+				2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */,
 				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
 				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
@@ -5364,6 +5369,7 @@
 				2C4AD01823E304140049B7B0 /* DiscussionThreadsNetworkService.swift */,
 				2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */,
 				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
+				2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
@@ -7097,6 +7103,7 @@
 				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */,
+				2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */,
 				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				2C20C86222F8E1DE0052E9BF /* CodeTemplatePlainObject.swift in Sources */,
 				2CF6C4EB244DF619000FAAED /* ARQuickLookStoredFileManager.swift in Sources */,
@@ -7744,6 +7751,7 @@
 				62E98AC637D0CBBC48619134 /* EditStepViewController.swift in Sources */,
 				62E98F49D3CA846C2940B454 /* EditStepViewModel.swift in Sources */,
 				62E98E5288DA003FCF78566F /* EditStepOutputProtocol.swift in Sources */,
+				2C42EFBA2476FADB00423695 /* MagicLinksNetworkService.swift in Sources */,
 				62E987062AC5064918B27379 /* ContentLanguageSwitchAvailabilityService.swift in Sources */,
 				62E987998151D191C16B5E15 /* ExploreAssembly.swift in Sources */,
 				62E980E01C1500666CEDAA7D /* ExploreDataFlow.swift in Sources */,

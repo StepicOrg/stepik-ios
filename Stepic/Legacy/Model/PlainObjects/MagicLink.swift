@@ -34,3 +34,9 @@ final class MagicLink: JSONSerializable {
         case nextURL = "next_url"
     }
 }
+
+extension MagicLink: CustomStringConvertible {
+    var description: String {
+        "MagicLink(id: \(self.id), url: \(self.url), next_url: \(String(describing: self.nextURL)))"
+    }
+}
