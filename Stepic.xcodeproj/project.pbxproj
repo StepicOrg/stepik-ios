@@ -570,6 +570,7 @@
 		2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */; };
 		2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2394220BB53B200F0FE3B /* ProfileDescriptionContentView.swift */; };
 		2CB2740422C515050078CA2F /* QuizElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2740322C515050078CA2F /* QuizElementView.swift */; };
+		2CB3563E2476CB7B00E59A03 /* MagicLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3563D2476CB7B00E59A03 /* MagicLink.swift */; };
 		2CB37E6623902BB80050D85E /* StorageUsageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB37E6523902BB80050D85E /* StorageUsageService.swift */; };
 		2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F6A204FC6220008431C /* UserActivitySpec.swift */; };
 		2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */; };
@@ -1821,6 +1822,7 @@
 		2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDescriptionContentView.xib; sourceTree = "<group>"; };
 		2CB2394220BB53B200F0FE3B /* ProfileDescriptionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionContentView.swift; sourceTree = "<group>"; };
 		2CB2740322C515050078CA2F /* QuizElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizElementView.swift; sourceTree = "<group>"; };
+		2CB3563D2476CB7B00E59A03 /* MagicLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLink.swift; sourceTree = "<group>"; };
 		2CB37E6523902BB80050D85E /* StorageUsageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUsageService.swift; sourceTree = "<group>"; };
 		2CB51F6A204FC6220008431C /* UserActivitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitySpec.swift; sourceTree = "<group>"; };
 		2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardStepViewController.swift; sourceTree = "<group>"; };
@@ -4956,6 +4958,7 @@
 		2CFF903F242A2AAA00FD7311 /* PlainObjects */ = {
 			isa = PBXGroup;
 			children = (
+				2CB3563D2476CB7B00E59A03 /* MagicLink.swift */,
 				2C284DB7247438F900669736 /* CoursePayment */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
@@ -7863,6 +7866,7 @@
 				62E983AF85B0A9D1D21797DD /* CodeQuizFullscreenDataFlow.swift in Sources */,
 				62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */,
 				62E98AF7A4ADB3C60BCD2046 /* CodeQuizFullscreenOutputProtocol.swift in Sources */,
+				2CB3563E2476CB7B00E59A03 /* MagicLink.swift in Sources */,
 				62E9833E9BFB4229BFEB4DD5 /* CodeQuizFullscreenPresenter.swift in Sources */,
 				62E98042B4F232FCD9788187 /* CodeQuizFullscreenProvider.swift in Sources */,
 				62E983915F585672BB010B73 /* CodeQuizFullscreenView.swift in Sources */,
