@@ -354,6 +354,7 @@
 		2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01BB67233CD92C00C8DCF0 /* Require.swift */; };
 		2C01D3AA22DDB7EA00C84CEE /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */; };
 		2C01D3AC22DDB98900C84CEE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */; };
+		2C03F042247690BA00C63FE6 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03F041247690BA00C63FE6 /* Mutex.swift */; };
 		2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */; };
 		2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */; };
 		2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */; };
@@ -1593,6 +1594,7 @@
 		2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
 		2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		2C03F041247690BA00C63FE6 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntity.swift; sourceTree = "<group>"; };
 		2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntity.swift; sourceTree = "<group>"; };
 		2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_attempts_caching.xcdatamodel; sourceTree = "<group>"; };
@@ -2580,6 +2582,14 @@
 				C5254161C4484A82273DE3C7 /* UserCourses */,
 			);
 			path = HomeSubmodules;
+			sourceTree = "<group>";
+		};
+		2C03F0402476909E00C63FE6 /* Multithread */ = {
+			isa = PBXGroup;
+			children = (
+				2C03F041247690BA00C63FE6 /* Mutex.swift */,
+			);
+			path = Multithread;
 			sourceTree = "<group>";
 		};
 		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
@@ -6063,6 +6073,7 @@
 				2C48D5FF228F0C4800739477 /* ContentProcessor */,
 				2CF1505123D532D900915E5A /* Downloader */,
 				2C284DBC2474907C00669736 /* InAppPurchases */,
+				2C03F0402476909E00C63FE6 /* Multithread */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
 			);
 			path = Frameworks;
@@ -7483,6 +7494,7 @@
 				62E98B4E497E13CB040A5C2A /* PinsMapPresenter.swift in Sources */,
 				2CE42D4623CCC6500073F774 /* VideoRateStorageManager.swift in Sources */,
 				08484F01211AF4320006266F /* CachedValue.swift in Sources */,
+				2C03F042247690BA00C63FE6 /* Mutex.swift in Sources */,
 				2CD063E6242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift in Sources */,
 				62E981858E2E696693A1AB87 /* PinsMapBlockContentView.swift in Sources */,
 				62E9848BF3984E04C0061D6C /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,

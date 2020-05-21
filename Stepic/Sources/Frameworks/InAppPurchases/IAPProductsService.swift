@@ -21,8 +21,14 @@ final class IAPProductsService: IAPProductsServiceProtocol {
         var completionHandlers: [IAPProductRequest.CompletionHandler]
     }
 
+    private let mutex: PThreadMutex
+
     // Store requests in a dictionary by product ids.
     private var productRequests: [Set<IAPProductIdentifier>: ProductQuery] = [:]
+
+    init() {
+        self.mutex = PThreadMutex(type: .recursive)
+    }
 
     func getProductIdentifiers() -> Set<IAPProductIdentifier> {
         guard let url = Bundle.main.url(forResource: "IAPProductIDs", withExtension: "plist") else {
@@ -63,8 +69,14 @@ final class IAPProductsService: IAPProductsServiceProtocol {
         productIdentifiers: Set<IAPProductIdentifier>,
         completionHandler: @escaping IAPProductRequest.CompletionHandler
     ) {
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
+
         if self.productRequests[productIdentifiers] == nil {
             let request = IAPProductRequest(productIdentifiers: productIdentifiers) { result in
+                self.mutex.unbalancedLock()
+                defer { self.mutex.unbalancedUnlock() }
+
                 if let query = self.productRequests[productIdentifiers] {
                     for completionHandler in query.completionHandlers {
                         completionHandler(result)
