@@ -38,7 +38,7 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
     }
 
     func presentPaidCourseBuying(response: FullscreenCourseList.PaidCourseBuyingPresentation.Response) {
-        let path = "https://stepik.org/course/\(response.course.id)"
+        let path = "\(StepikApplicationsInfo.stepikURL)/course/\(response.course.id)/pay"
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
     }
 }
