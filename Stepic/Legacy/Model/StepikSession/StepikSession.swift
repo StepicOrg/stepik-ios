@@ -28,8 +28,8 @@ final class StepikSession {
     }
 
     static func refresh(
-        completion: @escaping (() -> Void),
-        error errorHandler: @escaping ((String) -> Void)
+        completion: @escaping () -> Void,
+        error errorHandler: @escaping (String) -> Void
     ) -> Request? {
         print("refreshing session")
 

@@ -156,10 +156,10 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
             return
         }
 
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: "peer review",
+            withKey: .peerReview,
             allowsSafari: true,
             backButtonStyle: .done
         )
@@ -173,10 +173,10 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
     func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL) {
         let scheme = url.scheme?.lowercased() ?? ""
         if ["http", "https"].contains(scheme) {
-            WebControllerManager.sharedManager.presentWebControllerWithURL(
+            WebControllerManager.shared.presentWebControllerWithURL(
                 url,
                 inController: self,
-                withKey: "external link",
+                withKey: .externalLink,
                 allowsSafari: true,
                 backButtonStyle: .done
             )

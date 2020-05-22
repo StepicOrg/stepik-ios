@@ -235,10 +235,10 @@ extension CertificatesViewController: UITableViewDelegate {
             )
         )
 
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: "certificate",
+            withKey: .certificate,
             allowsSafari: true,
             backButtonStyle: .close
         )

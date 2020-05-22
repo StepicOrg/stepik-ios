@@ -15,7 +15,7 @@ enum PerformRequestError: Error {
 }
 
 func checkToken() -> Promise<()> {
-    return Promise { seal in
+    Promise { seal in
         ApiRequestPerformer.performAPIRequest({
             seal.fulfill(())
         }, error: { error in
@@ -24,8 +24,8 @@ func checkToken() -> Promise<()> {
     }
 }
 
-//Should preferrably be called from a UIViewController subclass
-func performRequest(_ request: @escaping (() -> Void), error: ((PerformRequestError) -> Void)? = nil) {
+// Should preferably be called from a UIViewController subclass
+func performRequest(_ request: @escaping () -> Void, error: ((PerformRequestError) -> Void)? = nil) {
     ApiRequestPerformer.performAPIRequest(request, error: error)
 }
 
@@ -33,8 +33,11 @@ final class ApiRequestPerformer {
     static let semaphore = DispatchSemaphore(value: 1)
     static let queue = DispatchQueue(label: "perform_request_queue", qos: DispatchQoS.userInitiated)
 
-    static func performAPIRequest(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
-        let completionWithSemaphore : () -> Void = {
+    static func performAPIRequest(
+        _ completion: @escaping () -> Void,
+        error errorHandler: ((PerformRequestError) -> Void)? = nil
+    ) {
+        let completionWithSemaphore: () -> Void = {
             print("finished performing API Request")
             semaphore.signal()
             DispatchQueue.main.async {
@@ -42,8 +45,7 @@ final class ApiRequestPerformer {
             }
         }
 
-        let errorHandlerWithSemaphore: (PerformRequestError) -> Void = {
-            error in
+        let errorHandlerWithSemaphore: (PerformRequestError) -> Void = { error in
             print("finished performing API Request")
             semaphore.signal()
             DispatchQueue.main.async {
@@ -56,38 +58,42 @@ final class ApiRequestPerformer {
             print("performing API request")
             if !AuthInfo.shared.hasUser {
                 print("no user in AuthInfo, retrieving")
-                ApiDataDownloader.stepics.retrieveCurrentUser(success: {
-                    user in
-                    AuthInfo.shared.user = user
-                    User.removeAllExcept(user)
-                    print("retrieved current user")
-                    performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
-                }, error: { e in
-                    if let typedError = e as? URLError {
-                        switch typedError.code {
-                        case .notConnectedToInternet:
-                            errorHandlerWithSemaphore(.badConnection)
-                        default:
+                ApiDataDownloader.stepics.retrieveCurrentUser(
+                    success: { user in
+                        AuthInfo.shared.user = user
+                        User.removeAllExcept(user)
+                        print("retrieved current user")
+                        performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
+                    },
+                    error: { error in
+                        if let typedError = error as? URLError {
+                            switch typedError.code {
+                            case .notConnectedToInternet:
+                                errorHandlerWithSemaphore(.badConnection)
+                            default:
+                                errorHandlerWithSemaphore(.other)
+                            }
+                        } else {
                             errorHandlerWithSemaphore(.other)
                         }
-                    } else {
-                        errorHandlerWithSemaphore(.other)
                     }
-                })
+                )
             } else {
                 performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
             }
         }
     }
 
-    private static func performRequestWithAuthorizationCheck(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
-//        if let user = AuthInfo.shared.user {
-//            print("performing request with user \(user.id)")
+    private static func performRequestWithAuthorizationCheck(
+        _ completion: @escaping () -> Void,
+        error errorHandler: ((PerformRequestError) -> Void)? = nil
+    ) {
         if !AuthInfo.shared.isAuthorized && StepikSession.needsRefresh {
-            _ = StepikSession.refresh(completion: {
+            _ = StepikSession.refresh(
+                completion: {
                     completion()
-                }, error: {
-                    _ in
+                },
+                error: { _ in
                     errorHandler?(.other)
                 }
             )
@@ -96,12 +102,13 @@ final class ApiRequestPerformer {
 
         if AuthInfo.shared.isAuthorized && AuthInfo.shared.needsToRefreshToken {
             if let refreshToken = AuthInfo.shared.token?.refreshToken {
-                ApiDataDownloader.auth.refreshTokenWith(refreshToken, success: {
-                        t in
-                        AuthInfo.shared.token = t
+                ApiDataDownloader.auth.refreshTokenWith(
+                    refreshToken,
+                    success: { token in
+                        AuthInfo.shared.token = token
                         completion()
-                    }, failure: {
-                        error in
+                    },
+                    failure: { error in
                         print("error while auto refresh token")
                         if error == TokenRefreshError.noAccess {
                             errorHandler?(.noAccessToRefreshToken)
@@ -112,7 +119,7 @@ final class ApiRequestPerformer {
                 )
                 return
             } else {
-                    //No token to refresh with authorized user
+                // No token to refresh with authorized user
                 errorHandler?(.other)
                 return
             }
