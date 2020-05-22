@@ -103,13 +103,15 @@ final class WebControllerManager: NSObject {
             return
         }
 
-        let isStepikExternalLink = key == .externalLink
-            && url.absoluteString.starts(with: StepikApplicationsInfo.stepikURL)
-        let shouldCreateMagicLink = key.isRequiresAuthorizationToProceedURL || isStepikExternalLink
         // Creates an URL with authorization token if needed.
-        if shouldCreateMagicLink {
+        if self.shouldCreateMagicLinkForTargetURL(url, webControllerKey: key) {
             SVProgressHUD.show()
-            self.magicLinksNetworkService.create(nextURL: url).done { magicLink in
+
+            let nextURLPath = url
+                .absoluteString
+                .replacingOccurrences(of: "\(url.scheme ?? "")://\(url.host ?? "")", with: "")
+
+            self.magicLinksNetworkService.create(nextURLPath: nextURLPath).done { magicLink in
                 if let magicLinkURL = URL(string: magicLink.url) {
                     present(url: magicLinkURL)
                 } else {
@@ -149,6 +151,14 @@ final class WebControllerManager: NSObject {
 
     // MARK: Private API
 
+    private func shouldCreateMagicLinkForTargetURL(_ url: URL, webControllerKey: WebControllerKey) -> Bool {
+        let isPathComponentsValid = url.pathComponents.count > 1
+        let isStepikExternalLink = webControllerKey == .externalLink
+            && url.absoluteString.starts(with: StepikApplicationsInfo.stepikURL)
+        return webControllerKey.isRequiresAuthorizationToOpenURL
+            || (isStepikExternalLink && isPathComponentsValid)
+    }
+
     private func presentCustomWebController(
         _ url: URL,
         inController presentingViewController: UIViewController,
@@ -186,7 +196,7 @@ final class WebControllerManager: NSObject {
         case resetPassword
         case openQuizInWeb
 
-        fileprivate var isRequiresAuthorizationToProceedURL: Bool {
+        fileprivate var isRequiresAuthorizationToOpenURL: Bool {
             self.withAuthorizationKeys.contains(self)
         }
 

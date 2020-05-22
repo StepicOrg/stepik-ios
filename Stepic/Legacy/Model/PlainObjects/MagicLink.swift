@@ -7,11 +7,11 @@ final class MagicLink: JSONSerializable {
     var id: IdType = ""
     var url: String = ""
 
-    var nextURL: URL?
+    var nextURLPath: String?
 
     var json: JSON {
         [
-            JSONKey.nextURL.rawValue: self.nextURL?.absoluteString ?? ""
+            JSONKey.nextURL.rawValue: self.nextURLPath ?? ""
         ]
     }
 
@@ -19,8 +19,8 @@ final class MagicLink: JSONSerializable {
         self.update(json: json)
     }
 
-    init(nextURL: URL) {
-        self.nextURL = nextURL
+    init(nextURLPath: String) {
+        self.nextURLPath = nextURLPath
     }
 
     func update(json: JSON) {
@@ -37,6 +37,6 @@ final class MagicLink: JSONSerializable {
 
 extension MagicLink: CustomStringConvertible {
     var description: String {
-        "MagicLink(id: \(self.id), url: \(self.url), next_url: \(String(describing: self.nextURL)))"
+        "MagicLink(id: \(self.id), url: \(self.url), next_url: \(String(describing: self.nextURLPath)))"
     }
 }

@@ -6,8 +6,8 @@ protocol MagicLinksNetworkServiceProtocol: AnyObject {
 }
 
 extension MagicLinksNetworkServiceProtocol {
-    func create(nextURL: URL) -> Promise<MagicLink> {
-        self.create(magicLink: MagicLink(nextURL: nextURL))
+    func create(nextURLPath: String) -> Promise<MagicLink> {
+        self.create(magicLink: MagicLink(nextURLPath: nextURLPath))
     }
 }
 

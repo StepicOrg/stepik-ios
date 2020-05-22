@@ -7,12 +7,12 @@ final class MagicLinksAPI: APIEndpoint {
     override var name: String { "magic-links" }
 
     func create(magicLink: MagicLink) -> Promise<MagicLink> {
-        guard let nextURL = magicLink.nextURL else {
+        guard let nextURLPath = magicLink.nextURLPath else {
             return Promise(error: Error.nextURLNotFound)
         }
 
-        if nextURL.absoluteString.isEmpty {
-            return Promise(error: Error.badNextURL)
+        guard nextURLPath.starts(with: "/") else {
+            return Promise(error: Error.badNextURLPath)
         }
 
         return self.create.request(
@@ -25,6 +25,6 @@ final class MagicLinksAPI: APIEndpoint {
 
     enum Error: Swift.Error {
         case nextURLNotFound
-        case badNextURL
+        case badNextURLPath
     }
 }
