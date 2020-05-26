@@ -287,7 +287,7 @@ extension NotificationsService {
 
     private var lastActiveTimeInterval: TimeInterval {
         get {
-             UserDefaults.standard.value(
+            UserDefaults.standard.value(
                 forKey: NotificationsService.lastActiveTimeIntervalKey
             ) as? TimeInterval ?? Date().timeIntervalSince1970
         }

@@ -9,8 +9,14 @@
 import Foundation
 
 final class NotificationReactionHandler {
+    private let userAccountService: UserAccountServiceProtocol
+
+    init(userAccountService: UserAccountServiceProtocol = UserAccountService()) {
+        self.userAccountService = userAccountService
+    }
+
     func handle(with notification: Notification) {
-        if !AuthInfo.shared.isAuthorized {
+        guard self.userAccountService.isAuthorized else {
             return
         }
 
@@ -19,17 +25,19 @@ final class NotificationReactionHandler {
             return TabBarRouter(tab: .profile).route()
         }
 
+        let deepLinkRoutingService = DeepLinkRoutingService(courseViewSource: .notification)
+
         switch notification.type {
         case .comments:
-            DeepLinkRoutingService().route(.notifications(section: .comments))
+            deepLinkRoutingService.route(.notifications(section: .comments))
         case .learn:
-            DeepLinkRoutingService().route(.notifications(section: .learning))
+            deepLinkRoutingService.route(.notifications(section: .learning))
         case .default:
-            DeepLinkRoutingService().route(.notifications(section: .all))
+            deepLinkRoutingService.route(.notifications(section: .all))
         case .review:
-            DeepLinkRoutingService().route(.notifications(section: .reviews))
+            deepLinkRoutingService.route(.notifications(section: .reviews))
         case .teach:
-            DeepLinkRoutingService().route(.notifications(section: .teaching))
+            deepLinkRoutingService.route(.notifications(section: .teaching))
         }
     }
 }

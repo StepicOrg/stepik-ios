@@ -476,6 +476,7 @@ extension AnalyticsEvent {
         case query(courseListType: CourseListType)
         case story(id: Int)
         case deepLink(url: String)
+        case notification
         case unknown
 
         var name: String {
@@ -496,6 +497,8 @@ extension AnalyticsEvent {
                 return "story"
             case .deepLink:
                 return "deeplink"
+            case .notification:
+                return "notification"
             case .unknown:
                 return "unknown"
             }
@@ -503,7 +506,7 @@ extension AnalyticsEvent {
 
         var params: [String: Any]? {
             switch self {
-            case .myCourses, .downloads, .fastContinue, .unknown:
+            case .myCourses, .downloads, .fastContinue, .notification, .unknown:
                 return nil
             case .search(let query):
                 return ["query": query]
