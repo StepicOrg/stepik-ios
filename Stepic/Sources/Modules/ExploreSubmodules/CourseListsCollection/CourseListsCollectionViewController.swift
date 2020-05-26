@@ -52,6 +52,7 @@ final class CourseListsCollectionViewController: UIViewController {
                 let assembly = HorizontalCourseListAssembly(
                     type: courseListViewModel.courseList,
                     colorMode: .light,
+                    courseViewSource: .collection(id: courseListViewModel.collectionID),
                     output: self.interactor as? CourseListOutputProtocol
                 )
                 let viewController = assembly.makeModule()

@@ -151,7 +151,7 @@ enum DeepLinkRoute {
         case solutions
 
         var regex: Regex {
-            return try! Regex(string: self.pattern, options: [.ignoreCase])
+            try! Regex(string: self.pattern, options: [.ignoreCase])
         }
 
         private var pattern: String {

@@ -514,7 +514,8 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             for: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
-            skipSyllabus: true
+            skipSyllabus: true,
+            courseViewSource: .unknown
         )
     }
 

@@ -22,18 +22,23 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
     }
 
     func presentCourseInfo(response: BaseExplore.CourseInfoPresentation.Response) {
-        self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.course.id))
+        self.viewController?.displayCourseInfo(
+            viewModel: .init(courseID: response.course.id, courseViewSource: response.courseViewSource)
+        )
     }
 
     func presentCourseSyllabus(response: BaseExplore.CourseSyllabusPresentation.Response) {
-        self.viewController?.displayCourseSyllabus(viewModel: .init(courseID: response.course.id))
+        self.viewController?.displayCourseSyllabus(
+            viewModel: .init(courseID: response.course.id, courseViewSource: response.courseViewSource)
+        )
     }
 
     func presentLastStep(response: BaseExplore.LastStepPresentation.Response) {
         self.viewController?.displayLastStep(
             viewModel: .init(
                 course: response.course,
-                isAdaptive: response.isAdaptive
+                isAdaptive: response.isAdaptive,
+                courseViewSource: response.courseViewSource
             )
         )
     }

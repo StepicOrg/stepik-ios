@@ -22,7 +22,7 @@ final class StoryAssembly: Assembly {
 
         let urlNavigator = URLNavigator(
             presentingController: viewController,
-            deepLinkRoutingService: DeepLinkRoutingService()
+            deepLinkRoutingService: DeepLinkRoutingService(courseViewSource: .story(id: self.story.id))
         )
 
         let presenter = StoryPresenter(

@@ -9,11 +9,11 @@ protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel)
 }
 
-final class FullscreenCourseListViewController: UIViewController,
-                                                ControllerWithStepikPlaceholder {
+final class FullscreenCourseListViewController: UIViewController, ControllerWithStepikPlaceholder {
     let interactor: FullscreenCourseListInteractorProtocol
     private let courseListType: CourseListType
     private let presentationDescription: CourseList.PresentationDescription?
+    private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     lazy var fullscreenCourseListView = self.view as? FullscreenCourseListView
     private var submoduleViewController: UIViewController?
@@ -23,11 +23,13 @@ final class FullscreenCourseListViewController: UIViewController,
     init(
         interactor: FullscreenCourseListInteractorProtocol,
         courseListType: CourseListType,
-        presentationDescription: CourseList.PresentationDescription?
+        presentationDescription: CourseList.PresentationDescription?,
+        courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.interactor = interactor
         self.presentationDescription = presentationDescription
         self.courseListType = courseListType
+        self.courseViewSource = courseViewSource
 
         super.init(nibName: nil, bundle: nil)
 
@@ -80,6 +82,7 @@ final class FullscreenCourseListViewController: UIViewController,
         let courseListAssembly = VerticalCourseListAssembly(
             type: self.courseListType,
             colorMode: .light,
+            courseViewSource: self.courseViewSource,
             presentationDescription: self.presentationDescription,
             output: self.interactor
         )
@@ -109,13 +112,21 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     }
 
     func displayCourseInfo(viewModel: FullscreenCourseList.CourseInfoPresentation.ViewModel) {
-        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .info,
+            courseViewSource: viewModel.courseViewSource
+        )
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func displayCourseSyllabus(viewModel: FullscreenCourseList.CourseSyllabusPresentation.ViewModel) {
-        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .syllabus,
+            courseViewSource: viewModel.courseViewSource
+        )
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
@@ -128,7 +139,8 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
         LastStepRouter.continueLearning(
             for: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
-            using: navigationController
+            using: navigationController,
+            courseViewSource: viewModel.courseViewSource
         )
     }
 

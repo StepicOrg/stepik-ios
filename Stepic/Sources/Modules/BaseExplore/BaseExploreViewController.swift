@@ -140,12 +140,20 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
     }
 
     func displayCourseInfo(viewModel: BaseExplore.CourseInfoPresentation.ViewModel) {
-        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .info,
+            courseViewSource: viewModel.courseViewSource
+        )
         self.push(module: assembly.makeModule())
     }
 
     func displayCourseSyllabus(viewModel: BaseExplore.CourseSyllabusPresentation.ViewModel) {
-        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .syllabus,
+            courseViewSource: viewModel.courseViewSource
+        )
         self.push(module: assembly.makeModule())
     }
 
@@ -157,7 +165,8 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
         LastStepRouter.continueLearning(
             for: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
-            using: navigationController
+            using: navigationController,
+            courseViewSource: viewModel.courseViewSource
         )
     }
 

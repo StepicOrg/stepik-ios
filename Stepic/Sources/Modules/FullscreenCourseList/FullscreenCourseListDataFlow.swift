@@ -7,10 +7,12 @@ enum FullscreenCourseList {
     enum CourseSyllabusPresentation {
         struct Response {
             let course: Course
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
             let courseID: Course.IdType
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
     }
 
@@ -18,10 +20,12 @@ enum FullscreenCourseList {
     enum CourseInfoPresentation {
         struct Response {
             let course: Course
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
             let courseID: Course.IdType
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
     }
 
@@ -30,6 +34,7 @@ enum FullscreenCourseList {
         struct Response {
             let course: Course
             let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
@@ -37,6 +42,7 @@ enum FullscreenCourseList {
             let course: Course
             @available(*, deprecated, message: "Target modules can't be initialized w/o model")
             let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
     }
 

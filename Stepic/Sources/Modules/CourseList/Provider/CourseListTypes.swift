@@ -4,30 +4,45 @@ import Foundation
 
 protocol CourseListType {
     // It's just a marker
+    var analyticName: String { get }
 }
 
 struct PopularCourseListType: CourseListType {
     let language: ContentLanguage
+
+    var analyticName: String { "popular_course_list" }
 }
 
-struct EnrolledCourseListType: CourseListType {}
+struct EnrolledCourseListType: CourseListType {
+    var analyticName: String { "enrolled_course_list" }
+}
 
-struct FavoriteCourseListType: CourseListType {}
+struct FavoriteCourseListType: CourseListType {
+    var analyticName: String { "favorite_course_list" }
+}
 
-struct ArchivedCourseListType: CourseListType {}
+struct ArchivedCourseListType: CourseListType {
+    var analyticName: String { "archived_course_list" }
+}
 
 struct TagCourseListType: CourseListType {
     let id: Int
     let language: ContentLanguage
+
+    var analyticName: String { "tag_course_list" }
 }
 
 struct CollectionCourseListType: CourseListType {
     let ids: [Course.IdType]
+
+    var analyticName: String { "collection_course_list" }
 }
 
 struct SearchResultCourseListType: CourseListType {
     let query: String
     let language: ContentLanguage
+
+    var analyticName: String { "search_result_course_list" }
 }
 
 // MARK: - Services factory
@@ -92,8 +107,8 @@ final class CourseListServicesFactory {
 
     func makeNetworkService() -> CourseListNetworkServiceProtocol {
         if self.type is EnrolledCourseListType
-            || self.type is FavoriteCourseListType
-            || self.type is ArchivedCourseListType {
+               || self.type is FavoriteCourseListType
+               || self.type is ArchivedCourseListType {
             return UserCoursesCourseListNetworkService(
                 type: self.type,
                 coursesAPI: self.coursesAPI,

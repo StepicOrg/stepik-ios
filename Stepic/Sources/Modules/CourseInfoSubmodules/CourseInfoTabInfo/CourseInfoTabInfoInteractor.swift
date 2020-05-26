@@ -11,6 +11,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
     private let analytics: Analytics
 
     private var course: Course?
+    private var courseViewSource: AnalyticsEvent.CourseViewSource?
 
     private var shouldOpenedAnalyticsEventSend: Bool = true
 
@@ -57,24 +58,22 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
     func handleControllerAppearance() {
-        if let course = self.course {
-            self.analytics.send(
-                .coursePreviewScreenOpened(courseID: course.id, courseTitle: course.title, isPaid: course.isPaid)
-            )
+        if let course = self.course,
+           let courseViewSource = self.courseViewSource {
+            self.analytics.send(.coursePreviewScreenOpened(course: course, viewSource: courseViewSource))
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
         }
     }
 
-    func update(with course: Course, isOnline: Bool) {
+    func update(with course: Course, viewSource: AnalyticsEvent.CourseViewSource, isOnline: Bool) {
         self.course = course
+        self.courseViewSource = viewSource
         self.doCourseInfoRefresh(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            self.analytics.send(
-                .coursePreviewScreenOpened(courseID: course.id, courseTitle: course.title, isPaid: course.isPaid)
-            )
+            self.analytics.send(.coursePreviewScreenOpened(course: course, viewSource: viewSource))
             self.shouldOpenedAnalyticsEventSend = false
         }
     }

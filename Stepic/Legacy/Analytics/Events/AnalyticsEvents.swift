@@ -317,6 +317,23 @@ extension AnalyticsEvent {
         AnalyticsEvent(name: "settings_click_social_network", parameters: ["social": socialNetwork.rawValue])
     }
 
+    // MARK: - CoursePreview -
+
+    static func courseCardSeen(courseID: Int, viewSource: CourseViewSource) -> AnalyticsEvent {
+        var params: [String: Any] = [
+            "course": courseID,
+            "source": viewSource.name
+        ]
+
+        if let courseViewSourceParams = viewSource.params {
+            for (key, value) in courseViewSourceParams {
+                params["\(viewSource.name)_\(key)"] = value
+            }
+        }
+
+        return AnalyticsEvent(name: "Course card seen", parameters: params)
+    }
+
     // MARK: - VideoDownload -
 
     static let videoDownloadStarted = AnalyticsEvent(name: "video_download_started")

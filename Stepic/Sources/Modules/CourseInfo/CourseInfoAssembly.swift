@@ -4,15 +4,18 @@ final class CourseInfoAssembly: Assembly {
     private let courseID: Course.IdType
     private let initialTab: CourseInfo.Tab
     private let didJustSubscribe: Bool
+    private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     init(
         courseID: Course.IdType,
         initialTab: CourseInfo.Tab = .info,
-        didJustSubscribe: Bool = false
+        didJustSubscribe: Bool = false,
+        courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.courseID = courseID
         self.initialTab = initialTab
-        self.didJustSubscribe = false
+        self.didJustSubscribe = didJustSubscribe
+        self.courseViewSource = courseViewSource
     }
 
     func makeModule() -> UIViewController {
@@ -54,7 +57,8 @@ final class CourseInfoAssembly: Assembly {
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
             dataBackUpdateService: dataBackUpdateService,
-            analytics: StepikAnalytics.shared
+            analytics: StepikAnalytics.shared,
+            courseViewSource: self.courseViewSource
         )
         notificationsRegistrationService.delegate = interactor
 

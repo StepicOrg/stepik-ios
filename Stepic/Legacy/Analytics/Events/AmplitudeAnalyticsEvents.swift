@@ -450,15 +450,89 @@ extension AnalyticsEvent {
 
     // MARK: - CoursePreview -
 
-    static func coursePreviewScreenOpened(courseID: Int, courseTitle: String, isPaid: Bool) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course preview screen opened",
-            parameters: [
-                "course": courseID,
-                "title": courseTitle,
-                "is_paid": isPaid
-            ]
-        )
+    static func coursePreviewScreenOpened(course: Course, viewSource: CourseViewSource) -> AmplitudeAnalyticsEvent {
+        var params: [String: Any] = [
+            "course": course.id,
+            "title": course.title,
+            "is_paid": course.isPaid,
+            "source": viewSource.name
+        ]
+
+        if let courseViewSourceParams = viewSource.params {
+            for (key, value) in courseViewSourceParams {
+                params["\(viewSource.name)_\(key)"] = value
+            }
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course preview screen opened", parameters: params)
+    }
+
+    enum CourseViewSource {
+        case myCourses
+        case downloads
+        case fastContinue
+        case search(query: String)
+        case collection(id: Int)
+        case query(courseListType: CourseListType)
+        case story(id: Int)
+        case deepLink(url: String)
+        case unknown
+
+        var name: String {
+            switch self {
+            case .myCourses:
+                return "my_courses"
+            case .downloads:
+                return "downloads"
+            case .fastContinue:
+                return "fast_continue"
+            case .search:
+                return "search"
+            case .collection:
+                return "collection"
+            case .query:
+                return "query"
+            case .story:
+                return "story"
+            case .deepLink:
+                return "deeplink"
+            case .unknown:
+                return "unknown"
+            }
+        }
+
+        var params: [String: Any]? {
+            switch self {
+            case .myCourses, .downloads, .fastContinue, .unknown:
+                return nil
+            case .search(let query):
+                return ["query": query]
+            case .collection(let id):
+                return ["collection": id]
+            case .query(let courseListType):
+                var params: [String: Any] = [
+                    "type": courseListType.analyticName
+                ]
+
+                if let popularCourseListType = courseListType as? PopularCourseListType {
+                    params["language"] = popularCourseListType.language.languageString
+                } else if let tagCourseListType = courseListType as? TagCourseListType {
+                    params["id"] = tagCourseListType.id
+                    params["language"] = tagCourseListType.language.languageString
+                } else if let collectionCourseListType = courseListType as? CollectionCourseListType {
+                    params["ids"] = collectionCourseListType.ids
+                } else if let searchResultCourseListType = courseListType as? SearchResultCourseListType {
+                    params["query"] = searchResultCourseListType.query
+                    params["language"] = searchResultCourseListType.language.languageString
+                }
+
+                return params
+            case .story(let id):
+                return ["story": id]
+            case .deepLink(let url):
+                return ["url": url]
+            }
+        }
     }
 
     // MARK: - Sections -

@@ -568,7 +568,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
         }
     }
 
-    func update(with course: Course, isOnline: Bool) {
+    func update(with course: Course, viewSource: AnalyticsEvent.CourseViewSource, isOnline: Bool) {
         print("course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)")
 
         self.currentCourse = course
