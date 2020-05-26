@@ -13,6 +13,10 @@ extension IAPProductsServiceProtocol {
     func fetchProducts() -> Promise<[SKProduct]> {
         self.fetchProducts(productIdentifiers: self.getProductIdentifiers())
     }
+
+    func fetchProduct(productIdentifier: IAPProductIdentifier) -> Promise<SKProduct?> {
+        self.fetchProducts(productIdentifiers: [productIdentifier]).map { $0.first }
+    }
 }
 
 final class IAPProductsService: IAPProductsServiceProtocol {

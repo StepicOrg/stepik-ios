@@ -122,6 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         ApplicationThemeService().registerDefaultTheme()
 
+        IAPService.shared.startObservingPayments()
+
         return true
     }
 
@@ -139,6 +141,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        IAPService.shared.stopObservingPayments()
     }
 
     // MARK: - Downloading Data in the Background

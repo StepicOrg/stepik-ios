@@ -54,6 +54,7 @@ final class CourseInfoAssembly: Assembly {
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
             dataBackUpdateService: dataBackUpdateService,
+            iapService: IAPService.shared,
             analytics: StepikAnalytics.shared
         )
         notificationsRegistrationService.delegate = interactor

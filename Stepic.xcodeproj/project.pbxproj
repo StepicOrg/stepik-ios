@@ -890,6 +890,7 @@
 		62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */; };
 		62E987560B7A0EFE8D4753CB /* RetentionLocalNotificationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9863EA3DABDA4ACF78273 /* RetentionLocalNotificationProvider.swift */; };
 		62E98779C46941AA1F710191 /* ContinueCourseOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B7A07FDA68E6CA47ECB /* ContinueCourseOutputProtocol.swift */; };
+		62E98793126B566A300229C8 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9896F55E6BED87609B98A /* IAPService.swift */; };
 		62E98793982B530188C654BE /* UsersNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98407592112A22E967DE1 /* UsersNetworkService.swift */; };
 		62E987998151D191C16B5E15 /* ExploreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BE257BD24B6E46FD69D /* ExploreAssembly.swift */; };
 		62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C9C2AB31AEC2C3B53CE /* CodeQuizFullscreenInteractor.swift */; };
@@ -2216,6 +2217,7 @@
 		62E98944E66BAD1D86414E8B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		62E989554BE52EF9F83B9353 /* NewMatchingQuizTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMatchingQuizTitleView.swift; sourceTree = "<group>"; };
 		62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsPresenter.swift; sourceTree = "<group>"; };
+		62E9896F55E6BED87609B98A /* IAPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		62E98979BDC62D7A97272508 /* CodeQuizFullscreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeQuizFullscreenViewModel.swift; sourceTree = "<group>"; };
 		62E989904D7D41C57DFE3AAC /* ContentLanguageSwitchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchPresenter.swift; sourceTree = "<group>"; };
 		62E98992391271E40556BC0B /* SolutionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolutionViewModel.swift; sourceTree = "<group>"; };
@@ -2712,6 +2714,7 @@
 				62E98A9273B420FEEDE51A2E /* IAPPaymentsService.swift */,
 				62E988A858A4CE63EA182EA6 /* IAPProductsService.swift */,
 				2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */,
+				62E9896F55E6BED87609B98A /* IAPService.swift */,
 			);
 			path = InAppPurchases;
 			sourceTree = "<group>";
@@ -8044,6 +8047,7 @@
 				62E98F1672B90358D7188D02 /* AnalyticsEvent.swift in Sources */,
 				62E9888417EE1DD05B20491B /* CoursePayment.swift in Sources */,
 				62E98B63D1868C8DA5CB5523 /* IAPProductsService.swift in Sources */,
+				62E98793126B566A300229C8 /* IAPService.swift in Sources */,
 				62E9829CA7881BEF864A027E /* IAPPaymentsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

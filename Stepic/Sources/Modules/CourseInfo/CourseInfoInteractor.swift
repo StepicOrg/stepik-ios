@@ -26,6 +26,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let analytics: Analytics
 
+    private let iapService: IAPServiceProtocol
+
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private let courseID: Course.IdType
@@ -83,6 +85,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
+        iapService: IAPServiceProtocol,
         analytics: Analytics
     ) {
         self.presenter = presenter
@@ -95,6 +98,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.dataBackUpdateService = dataBackUpdateService
+        self.iapService = iapService
         self.analytics = analytics
 
         self.courseID = courseID
@@ -210,8 +214,16 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             // Paid course -> open web page
             if course.isPaid {
                 self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
-                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                //self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                //self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                self.iapService.buy(course: course).done {
+                    print("course info interactor: successfully bought a course")
+                    self.doCourseRefresh(request: .init())
+                }.ensure {
+                    self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                }.catch { error in
+                    print("course info interactor: failed buy a course with error: \(error)")
+                }
                 return
             }
 
