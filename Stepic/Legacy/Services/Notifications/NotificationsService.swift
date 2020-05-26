@@ -187,7 +187,7 @@ extension NotificationsService {
         case NotificationType.achievementProgresses.rawValue:
             self.resolveRemoteAchievementNotification(userInfo)
         default:
-            print("remote notification received: unsopported notification type: \(notificationType)")
+            print("remote notification received: unsupported notification type: \(notificationType)")
         }
     }
 
