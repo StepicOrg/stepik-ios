@@ -377,6 +377,7 @@
 		2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */; };
 		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
 		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
+		2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */; };
 		2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10100A239EFAD700440651 /* DiscountingPolicy.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
@@ -1620,6 +1621,7 @@
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
 		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
+		2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPReceiptValidationService.swift; sourceTree = "<group>"; };
 		2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_discount_policy.xcdatamodel; sourceTree = "<group>"; };
 		2C10100A239EFAD700440651 /* DiscountingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountingPolicy.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -2706,6 +2708,7 @@
 			children = (
 				2C284DBD2474986600669736 /* IAPProductIDs.plist */,
 				62E988A858A4CE63EA182EA6 /* IAPProductsService.swift */,
+				2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */,
 			);
 			path = InAppPurchases;
 			sourceTree = "<group>";
@@ -7730,6 +7733,7 @@
 				62E98EF8366F3A12CA5092BF /* VerticalCourseListFlowLayout.swift in Sources */,
 				62E98D14FE058C5D8D39D63F /* CourseWidgetContinueLearningButton.swift in Sources */,
 				62E98833651A7E6B4D42D01B /* CourseWidgetCoverView.swift in Sources */,
+				2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */,
 				62E989945806203AB464B5EF /* CourseWidgetLabel.swift in Sources */,
 				62E98E6F295E2C4799957DFB /* CourseWidgetStatsItemView.swift in Sources */,
 				62E982348800CA9D75D78064 /* CourseWidgetStatsView.swift in Sources */,

@@ -77,7 +77,7 @@ final class CoursePayment: JSONSerializable {
         static func generateDataForAppleProvider(
             receiptData: String,
             bundleID: String,
-            amount: Float,
+            amount: Double,
             currency: String
         ) -> Data {
             [
