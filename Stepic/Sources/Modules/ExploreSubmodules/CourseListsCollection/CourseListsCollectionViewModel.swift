@@ -1,9 +1,10 @@
 import Foundation
 
 struct CourseListsCollectionViewModel {
-    var title: String
-    var description: String
-    var summary: String?
-    var courseList: CollectionCourseListType
-    var color: GradientCoursesPlaceholderView.Color
+    let title: String
+    let description: String
+    let summary: String?
+    let courseList: CollectionCourseListType
+    let color: GradientCoursesPlaceholderView.Color
+    let collectionID: CourseListModel.IdType
 }

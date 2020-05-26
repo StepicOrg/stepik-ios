@@ -164,6 +164,7 @@ final class ExploreViewController: BaseExploreViewController {
         let popularAssembly = HorizontalCourseListAssembly(
             type: courseListType,
             colorMode: .dark,
+            courseViewSource: .query(courseListType: courseListType),
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()

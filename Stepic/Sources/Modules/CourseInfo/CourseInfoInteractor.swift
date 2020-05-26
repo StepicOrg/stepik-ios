@@ -25,6 +25,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let analytics: Analytics
+    private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
@@ -83,7 +84,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
-        analytics: Analytics
+        analytics: Analytics,
+        courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -98,6 +100,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.analytics = analytics
 
         self.courseID = courseID
+        self.courseViewSource = courseViewSource
     }
 
     func doCourseRefresh(request: CourseInfo.CourseLoad.Request) {
@@ -280,7 +283,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private func pushCurrentCourseToSubmodules(submodules: [CourseInfoSubmoduleProtocol]) {
         if let course = self.currentCourse {
-            submodules.forEach { $0.update(with: course, isOnline: self.isOnline) }
+            submodules.forEach { $0.update(with: course, viewSource: self.courseViewSource, isOnline: self.isOnline) }
         }
     }
 

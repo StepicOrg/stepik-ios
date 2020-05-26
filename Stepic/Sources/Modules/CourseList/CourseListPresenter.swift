@@ -15,7 +15,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         let courses = self.makeWidgetViewModels(
             courses: response.result.fetchedCourses.courses,
             availableInAdaptive: response.result.availableAdaptiveCourses,
-            isAuthorized: response.isAuthorized
+            isAuthorized: response.isAuthorized,
+            viewSource: response.viewSource
         )
 
         let data = CourseList.ListData(
@@ -35,7 +36,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             let courses = self.makeWidgetViewModels(
                 courses: data.fetchedCourses.courses,
                 availableInAdaptive: data.availableAdaptiveCourses,
-                isAuthorized: response.isAuthorized
+                isAuthorized: response.isAuthorized,
+                viewSource: response.viewSource
             )
             let listData = CourseList.ListData(
                 courses: courses,
@@ -53,7 +55,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     private func makeWidgetViewModels(
         courses: [(UniqueIdentifierType, Course)],
         availableInAdaptive: Set<Course>,
-        isAuthorized: Bool
+        isAuthorized: Bool,
+        viewSource: AnalyticsEvent.CourseViewSource
     ) -> [CourseWidgetViewModel] {
         var viewModels: [CourseWidgetViewModel] = []
         for (uid, course) in courses {
@@ -62,7 +65,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
                 uniqueIdentifier: uid,
                 course: course,
                 isAdaptive: isAdaptive,
-                isAuthorized: isAuthorized
+                isAuthorized: isAuthorized,
+                viewSource: viewSource
             )
 
             viewModels.append(viewModel)
@@ -84,7 +88,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         uniqueIdentifier: UniqueIdentifierType,
         course: Course,
         isAdaptive: Bool,
-        isAuthorized: Bool
+        isAuthorized: Bool,
+        viewSource: AnalyticsEvent.CourseViewSource
     ) -> CourseWidgetViewModel {
         let summaryText: String = {
             let summary = course.summary.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -114,7 +119,9 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             isAdaptive: isAdaptive,
             isEnrolled: isAuthorized && course.enrolled,
             progress: progressViewModel,
-            uniqueIdentifier: uniqueIdentifier
+            uniqueIdentifier: uniqueIdentifier,
+            courseID: course.id,
+            viewSource: viewSource
         )
     }
 }

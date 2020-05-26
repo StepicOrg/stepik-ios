@@ -16,9 +16,11 @@ final class DownloadsTableViewDataSource: NSObject {
     weak var delegate: DownloadsTableViewDataSourceDelegate?
 
     private(set) var viewModels: [DownloadsItemViewModel]
+    private let analytics: Analytics
 
-    init(viewModels: [DownloadsItemViewModel] = []) {
+    init(viewModels: [DownloadsItemViewModel] = [], analytics: Analytics = StepikAnalytics.shared) {
         self.viewModels = viewModels
+        self.analytics = analytics
         super.init()
     }
 
@@ -35,10 +37,13 @@ extension DownloadsTableViewDataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let viewModel = self.viewModels[indexPath.row]
+
         let cell: DownloadsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.updateConstraintsIfNeeded()
+        cell.configure(viewModel: viewModel)
 
-        cell.configure(viewModel: self.viewModels[indexPath.row])
+        self.analytics.send(.courseCardSeen(courseID: viewModel.id, viewSource: .downloads))
 
         return cell
     }

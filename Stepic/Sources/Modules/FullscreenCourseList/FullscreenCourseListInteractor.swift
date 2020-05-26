@@ -25,16 +25,18 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
 
     // MARK: - CourseListOutputProtocol
 
-    func presentCourseInfo(course: Course) {
-        self.presenter.presentCourseInfo(response: .init(course: course))
+    func presentCourseInfo(course: Course, viewSource: AnalyticsEvent.CourseViewSource) {
+        self.presenter.presentCourseInfo(response: .init(course: course, courseViewSource: viewSource))
     }
 
-    func presentCourseSyllabus(course: Course) {
-        self.presenter.presentCourseSyllabus(response: .init(course: course))
+    func presentCourseSyllabus(course: Course, viewSource: AnalyticsEvent.CourseViewSource) {
+        self.presenter.presentCourseSyllabus(response: .init(course: course, courseViewSource: viewSource))
     }
 
-    func presentLastStep(course: Course, isAdaptive: Bool) {
-        self.presenter.presentLastStep(response: .init(course: course, isAdaptive: isAdaptive))
+    func presentLastStep(course: Course, isAdaptive: Bool, viewSource: AnalyticsEvent.CourseViewSource) {
+        self.presenter.presentLastStep(
+            response: .init(course: course, isAdaptive: isAdaptive, courseViewSource: viewSource)
+        )
     }
 
     func presentAuthorization() {

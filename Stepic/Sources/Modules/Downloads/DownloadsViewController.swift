@@ -103,7 +103,11 @@ extension DownloadsViewController: DownloadsViewDelegate {
             return
         }
 
-        let assembly = CourseInfoAssembly(courseID: selectedViewModel.id, initialTab: .syllabus)
+        let assembly = CourseInfoAssembly(
+            courseID: selectedViewModel.id,
+            initialTab: .syllabus,
+            courseViewSource: .downloads
+        )
         self.present(module: assembly.makeModule(), embedInNavigation: true, modalPresentationStyle: .fullScreen)
     }
 }

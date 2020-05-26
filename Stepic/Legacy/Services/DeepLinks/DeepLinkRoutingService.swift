@@ -10,6 +10,8 @@ import Foundation
 import PromiseKit
 
 final class DeepLinkRoutingService {
+    private var courseViewSource: AnalyticsEvent.CourseViewSource?
+
     private var window: UIWindow? {
         (UIApplication.shared.delegate as? AppDelegate)?.window
     }
@@ -33,12 +35,16 @@ final class DeepLinkRoutingService {
         self.window?.rootViewController as? UITabBarController
     }
 
+    init(courseViewSource: AnalyticsEvent.CourseViewSource? = nil) {
+        self.courseViewSource = courseViewSource
+    }
+
     func route(path: String, from source: UIViewController? = nil) {
         self.route(DeepLinkRoute(path: path), fallbackPath: path, from: source)
     }
 
     func route(_ route: DeepLinkRoute?, fallbackPath: String = "", from source: UIViewController? = nil) {
-        self.getModuleStack(route: route).done { moduleStack in
+        self.getModuleStack(route: route, urlPath: fallbackPath).done { moduleStack in
             let router = self.makeRouter(
                 route: route,
                 from: source,
@@ -84,7 +90,7 @@ final class DeepLinkRoutingService {
         }
     }
 
-    private func getModuleStack(route: DeepLinkRoute?) -> Promise<[UIViewController]> {
+    private func getModuleStack(route: DeepLinkRoute?, urlPath: String) -> Promise<[UIViewController]> {
         Promise { seal in
             guard let route = route else {
                 seal.fulfill([])
@@ -97,14 +103,25 @@ final class DeepLinkRoutingService {
             case .profile(let userID):
                 seal.fulfill([ProfileAssembly(userID: userID).makeModule()])
             case .course(let courseID), .coursePromo(let courseID):
-                seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .info).makeModule()])
+                let assembly = CourseInfoAssembly(
+                    courseID: courseID,
+                    initialTab: .info,
+                    courseViewSource: self.courseViewSource ?? .deepLink(url: urlPath)
+                )
+                seal.fulfill([assembly.makeModule()])
             case .syllabus(let courseID):
-                seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .syllabus).makeModule()])
+                let assembly = CourseInfoAssembly(
+                    courseID: courseID,
+                    initialTab: .syllabus,
+                    courseViewSource: self.courseViewSource ?? .deepLink(url: urlPath)
+                )
+                seal.fulfill([assembly.makeModule()])
             case .lesson(let lessonID, let stepID, let unitID):
                 DeepLinkRouter.routeToStepWithId(
                     stepID,
-                    lessonId: lessonID,
+                    lessonID: lessonID,
                     unitID: unitID,
+                    urlPath: urlPath,
                     completion: { moduleStack in
                         seal.fulfill(moduleStack)
                     }
@@ -117,6 +134,7 @@ final class DeepLinkRoutingService {
                     lessonID: lessonID,
                     stepID: stepID,
                     unitID: unitID,
+                    urlPath: urlPath,
                     completion: { moduleStack in
                         seal.fulfill(moduleStack)
                     }
@@ -129,6 +147,7 @@ final class DeepLinkRoutingService {
                     lessonID: lessonID,
                     stepID: stepID,
                     unitID: unitID,
+                    urlPath: urlPath,
                     completion: { moduleStack in
                         seal.fulfill(moduleStack)
                     }
