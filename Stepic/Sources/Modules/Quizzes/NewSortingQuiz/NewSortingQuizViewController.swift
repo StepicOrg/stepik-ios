@@ -53,10 +53,10 @@ extension NewSortingQuizViewController: NewSortingQuizViewDelegate {
     func newSortingQuizView(_ view: NewSortingQuizView, didRequestOpenURL url: URL) {
         let scheme = url.scheme?.lowercased() ?? ""
         if ["http", "https"].contains(scheme) {
-            WebControllerManager.sharedManager.presentWebControllerWithURL(
+            WebControllerManager.shared.presentWebControllerWithURL(
                 url,
                 inController: self,
-                withKey: "external link",
+                withKey: .externalLink,
                 allowsSafari: true,
                 backButtonStyle: .done
             )

@@ -187,7 +187,7 @@ extension NotificationsService {
         case NotificationType.achievementProgresses.rawValue:
             self.resolveRemoteAchievementNotification(userInfo)
         default:
-            print("remote notification received: unsopported notification type: \(notificationType)")
+            print("remote notification received: unsupported notification type: \(notificationType)")
         }
     }
 
@@ -287,7 +287,7 @@ extension NotificationsService {
 
     private var lastActiveTimeInterval: TimeInterval {
         get {
-             UserDefaults.standard.value(
+            UserDefaults.standard.value(
                 forKey: NotificationsService.lastActiveTimeIntervalKey
             ) as? TimeInterval ?? Date().timeIntervalSince1970
         }

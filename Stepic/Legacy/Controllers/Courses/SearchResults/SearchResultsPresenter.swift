@@ -49,7 +49,8 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
                 courseListType: SearchResultCourseListType(
                     query: query,
                     language: ContentLanguageService().globalContentLanguage
-                )
+                ),
+                courseViewSource: .search(query: query)
             ).makeModule()
             self.resultsVC = resultsVC
             self.view?.set(controller: resultsVC, forState: .courses)

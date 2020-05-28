@@ -6,12 +6,16 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
     private var maxNumberOfDisplayedCourses: Int?
     var viewModels: [CourseWidgetViewModel]
 
+    private let analytics: Analytics
+
     init(
         viewModels: [CourseWidgetViewModel] = [],
-        maxNumberOfDisplayedCourses: Int? = nil
+        maxNumberOfDisplayedCourses: Int? = nil,
+        analytics: Analytics = StepikAnalytics.shared
     ) {
         self.viewModels = viewModels
         self.maxNumberOfDisplayedCourses = maxNumberOfDisplayedCourses
+        self.analytics = analytics
     }
 
     func collectionView(
@@ -28,12 +32,16 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
+        let viewModel = self.viewModels[indexPath.row]
+
         let cell: CourseListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.configure(viewModel: self.viewModels[indexPath.row])
+        cell.configure(viewModel: viewModel)
         cell.delegate = self
 
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
+
+        self.analytics.send(.courseCardSeen(courseID: viewModel.courseID, viewSource: viewModel.viewSource))
 
         return cell
     }

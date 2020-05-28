@@ -10,7 +10,7 @@ enum UnsupportedQuiz {
         }
 
         struct ViewModel {
-            let stepURLPath: String
+            let stepURL: URL
         }
     }
 }

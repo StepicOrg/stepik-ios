@@ -123,10 +123,10 @@ final class DeepLinkRouter {
                     return
                 }
 
-                WebControllerManager.sharedManager.presentWebControllerWithURL(
+                WebControllerManager.shared.presentWebControllerWithURL(
                     urlWithAppendedQueryParams,
                     inController: sourceViewController,
-                    withKey: "external link",
+                    withKey: .externalLink,
                     allowsSafari: true,
                     backButtonStyle: .close
                 )
@@ -196,7 +196,7 @@ final class DeepLinkRouter {
 
             if components.count == 3 {
                 StepikAnalytics.shared.send(.deepLinkCourse(id: courseID))
-                routeToCourseWithId(courseID, completion: completion)
+                routeToCourseWithID(courseID, urlPath: link.absoluteString, completion: completion)
                 return
             }
 
@@ -206,14 +206,19 @@ final class DeepLinkRouter {
                     if let module = queryItems.filter({ item in item.name == "module" }).first?.value! {
                         if let moduleInt = Int(module) {
                             StepikAnalytics.shared.send(.deepLinkSection(courseID: courseID, moduleID: moduleInt))
-                            routeToSyllabusWithId(courseID, moduleId: moduleInt, completion: completion)
+                            routeToSyllabusWithID(
+                                courseID,
+                                moduleID: moduleInt,
+                                urlPath: link.absoluteString,
+                                completion: completion
+                            )
                             return
                         }
                     }
                 }
 
                 StepikAnalytics.shared.send(.deepLinkSyllabus(courseID: courseID))
-                routeToSyllabusWithId(courseID, completion: completion)
+                routeToSyllabusWithID(courseID, urlPath: link.absoluteString, completion: completion)
                 return
             }
 
@@ -259,6 +264,7 @@ final class DeepLinkRouter {
                                 lessonID: lessonID,
                                 stepID: stepID,
                                 unitID: nil,
+                                urlPath: link.absoluteString,
                                 completion: completion
                             )
                             return
@@ -269,7 +275,14 @@ final class DeepLinkRouter {
 
             StepikAnalytics.shared.send(.deepLinkStep(lessonID: lessonID, stepID: stepID))
 
-            self.routeToStepWithId(stepID, lessonId: lessonID, unitID: nil, completion: completion)
+            self.routeToStepWithId(
+                stepID,
+                lessonID: lessonID,
+                unitID: nil,
+                urlPath: link.absoluteString,
+                completion: completion
+            )
+
             return
         }
 
@@ -294,19 +307,40 @@ final class DeepLinkRouter {
         completion([CertificatesLegacyAssembly(userID: userID).makeModule()])
     }
 
-    static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
-        completion([CourseInfoAssembly(courseID: courseId).makeModule()])
+    static func routeToCourseWithID(
+        _ courseID: Int,
+        urlPath: String,
+        completion: @escaping ([UIViewController]) -> Void
+    ) {
+        let assembly = CourseInfoAssembly(courseID: courseID, courseViewSource: .deepLink(url: urlPath))
+        completion([assembly.makeModule()])
     }
 
-    static func routeToSyllabusWithId(_ courseId: Int, moduleId: Int? = nil, completion: @escaping ([UIViewController]) -> Void) {
-        completion([CourseInfoAssembly(courseID: courseId, initialTab: .syllabus).makeModule()])
+    static func routeToSyllabusWithID(
+        _ courseID: Int,
+        moduleID: Int? = nil,
+        urlPath: String,
+        completion: @escaping ([UIViewController]) -> Void
+    ) {
+        let assembly = CourseInfoAssembly(
+            courseID: courseID,
+            initialTab: .syllabus,
+            courseViewSource: .deepLink(url: urlPath)
+        )
+        completion([assembly.makeModule()])
     }
 
-    static func routeToStepWithId(_ stepId: Int, lessonId: Int, unitID: Int?, completion: @escaping ([UIViewController]) -> Void) {
-        let router = StepsControllerDeepLinkRouter()
+    static func routeToStepWithId(
+        _ stepID: Int,
+        lessonID: Int,
+        unitID: Int?,
+        urlPath: String,
+        completion: @escaping ([UIViewController]) -> Void
+    ) {
+        let router = StepsControllerDeepLinkRouter(courseViewSource: .deepLink(url: urlPath))
         router.getStepsViewControllerFor(
-            step: stepId,
-            inLesson: lessonId,
+            step: stepID,
+            inLesson: lessonID,
             withUnit: unitID,
             success: { vcs in
                 completion(vcs)
@@ -325,9 +359,10 @@ final class DeepLinkRouter {
         lessonID: Int,
         stepID: Int,
         unitID: Int?,
+        urlPath: String,
         completion: @escaping ([UIViewController]) -> Void
     ) {
-        DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, unitID: unitID) { viewControllers in
+        Self.routeToStepWithId(stepID, lessonID: lessonID, unitID: unitID, urlPath: urlPath) { viewControllers in
             guard let _ = viewControllers.last as? LessonViewController else {
                 completion([])
                 return

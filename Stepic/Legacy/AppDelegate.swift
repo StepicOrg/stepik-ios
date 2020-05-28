@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private let notificationsService = NotificationsService()
-    private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let branchService = BranchService()
     private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private lazy var analytics: Analytics = { StepikAnalytics.shared }()

@@ -16,7 +16,8 @@ final class CourseListsCollectionPresenter: CourseListsCollectionPresenterProtoc
                     description: FormatterHelper.coursesCount(courseList.coursesArray.count),
                     summary: courseList.listDescription,
                     courseList: CollectionCourseListType(ids: courseList.coursesArray),
-                    color: self.getColorForCourseList(courseList)
+                    color: self.getColorForCourseList(courseList),
+                    collectionID: courseList.id
                 )
             }
             let viewModel = CourseListsCollection.CourseListsLoad.ViewModel(state: .result(data: courses))

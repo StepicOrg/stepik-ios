@@ -60,7 +60,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         )
 
         let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: currentCourse.id)
-        self.moduleOutput?.presentLastStep(course: currentCourse, isAdaptive: isAdaptive)
+        self.moduleOutput?.presentLastStep(course: currentCourse, isAdaptive: isAdaptive, viewSource: .fastContinue)
     }
 
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request) {

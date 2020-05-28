@@ -6,42 +6,157 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
+import SVProgressHUD
 import SafariServices
 import UIKit
 import WebKit
 
 final class WebControllerManager: NSObject {
-    static var sharedManager = WebControllerManager()
+    static let shared = WebControllerManager()
 
-    var currentWebControllerKey: String?
-    var currentWebController: UIViewController? {
-        willSet(newValue) {
+    private var currentWebControllerKey: WebControllerKey?
+    private var currentWebController: UIViewController? {
+        willSet {
             guard newValue != nil else {
                 return
             }
-            if let c = currentWebController {
-                c.dismiss(animated: false, completion: nil)
+
+            if let currentWebController = self.currentWebController {
+                currentWebController.dismiss(animated: false, completion: nil)
                 print("Web controllers conflict! Dismissed the underlying one.")
             }
         }
     }
 
+    private let magicLinksNetworkService: MagicLinksNetworkServiceProtocol
+
     override private init() {
+        self.magicLinksNetworkService = MagicLinksNetworkService(
+            magicLinksAPI: MagicLinksAPI(),
+            userAccountService: UserAccountService()
+        )
         super.init()
     }
 
-    func dismissWebControllerWithKey(_ key: String, animated: Bool, completion: (() -> Void)?, error: ((String) -> Void)?) {
-        if let c = currentWebController,
-           let k = currentWebControllerKey {
-            if k == key {
-                c.dismiss(animated: animated, completion: completion)
-                currentWebController = nil
-                currentWebControllerKey = nil
+    // MARK: Public API
+
+    func dismissWebControllerWithKey(
+        _ key: WebControllerKey,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil,
+        error: ((String) -> Void)? = nil
+    ) {
+        if let currentWebController = self.currentWebController,
+           let currentWebControllerKey = self.currentWebControllerKey {
+            if currentWebControllerKey == key {
+                currentWebController.dismiss(animated: animated, completion: completion)
+                self.currentWebController = nil
+                self.currentWebControllerKey = nil
                 return
             }
         }
-        print(currentWebController ?? "")
+
+        print(self.currentWebController ?? "")
         error?("Could not dismiss web controller with key \(key)")
+    }
+
+    func presentWebControllerWithURL(
+        _ url: URL,
+        inController controller: UIViewController,
+        withKey key: WebControllerKey,
+        allowsSafari: Bool,
+        backButtonStyle: BackButtonStyle,
+        animated: Bool = true,
+        forceCustom: Bool = false
+    ) {
+        func present(url: URL) {
+            if forceCustom {
+                self.currentWebControllerKey = key
+                self.presentCustomWebController(
+                    url,
+                    inController: controller,
+                    allowsSafari: allowsSafari,
+                    backButtonStyle: backButtonStyle,
+                    animated: animated
+                )
+            } else {
+                let safariViewController = SFSafariViewController(url: url)
+                safariViewController.modalPresentationStyle = .fullScreen
+
+                self.currentWebControllerKey = key
+                self.currentWebController = safariViewController
+
+                controller.present(safariViewController, animated: true)
+            }
+        }
+
+        guard ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
+            UIApplication.shared.open(
+                url,
+                options: [:],
+                completionHandler: nil
+            )
+            return
+        }
+
+        guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+            return
+        }
+
+        // Creates an URL with authorization token if needed.
+        if self.shouldCreateMagicLinkForTargetURL(url, webControllerKey: key) {
+            SVProgressHUD.show()
+
+            let nextURLPath = url
+                .absoluteString
+                .replacingOccurrences(of: "\(url.scheme ?? "")://\(url.host ?? "")", with: "")
+
+            self.magicLinksNetworkService.create(nextURLPath: nextURLPath).done { magicLink in
+                if let magicLinkURL = URL(string: magicLink.url) {
+                    present(url: magicLinkURL)
+                } else {
+                    present(url: url)
+                }
+            }.ensure {
+                SVProgressHUD.dismiss()
+            }.catch { error in
+                print("WebControllerManager failed create magic link with error: \(error)")
+                present(url: url)
+            }
+        } else {
+            present(url: url)
+        }
+    }
+
+    func presentWebControllerWithURLString(
+        _ urlString: String,
+        inController controller: UIViewController,
+        withKey key: WebControllerKey,
+        allowsSafari: Bool,
+        backButtonStyle: BackButtonStyle
+    ) {
+        guard let urlEncodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: urlEncodedString) else {
+            return print("Invalid url = \(urlString)")
+        }
+
+        self.presentWebControllerWithURL(
+            url,
+            inController: controller,
+            withKey: key,
+            allowsSafari: allowsSafari,
+            backButtonStyle: backButtonStyle
+        )
+    }
+
+    // MARK: Private API
+
+    private func shouldCreateMagicLinkForTargetURL(_ url: URL, webControllerKey: WebControllerKey) -> Bool {
+        let isPathComponentsValid = url.pathComponents.count > 1
+        let isStepikExternalLink = webControllerKey == .externalLink
+            && url.absoluteString.starts(with: StepikApplicationsInfo.stepikURL)
+        return webControllerKey.isRequiresAuthorizationToOpenURL
+            || (isStepikExternalLink && isPathComponentsValid)
     }
 
     private func presentCustomWebController(
@@ -70,133 +185,148 @@ final class WebControllerManager: NSObject {
         presentingViewController.present(navigationController, animated: animated, completion: nil)
     }
 
-    func presentWebControllerWithURL(
-        _ url: URL,
-        inController controller: UIViewController,
-        withKey key: String,
-        allowsSafari: Bool,
-        backButtonStyle: BackButtonStyle,
-        animated: Bool = true,
-        forceCustom: Bool = false
-    ) {
-        guard ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
-            UIApplication.shared.open(
-                url,
-                options: [:],
-                completionHandler: nil
-            )
-            return
+    enum WebControllerKey {
+        case exam
+        case solution
+        case socialAuth
+        case peerReview
+        case paidCourse
+        case certificate
+        case externalLink
+        case resetPassword
+        case openQuizInWeb
+
+        fileprivate var isRequiresAuthorizationToOpenURL: Bool {
+            self.withAuthorizationKeys.contains(self)
         }
 
-        guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
-            return
+        private var withAuthorizationKeys: [WebControllerKey] {
+            [.exam, .solution, .peerReview, .paidCourse, .openQuizInWeb]
         }
-
-        if forceCustom {
-            self.currentWebControllerKey = key
-            self.presentCustomWebController(
-                url,
-                inController: controller,
-                allowsSafari: allowsSafari,
-                backButtonStyle: backButtonStyle,
-                animated: animated
-            )
-        } else {
-            let safariViewController = SFSafariViewController(url: url)
-            safariViewController.modalPresentationStyle = .fullScreen
-
-            self.currentWebControllerKey = key
-            self.currentWebController = safariViewController
-
-            controller.present(safariViewController, animated: true)
-        }
-    }
-
-    func presentWebControllerWithURLString(
-        _ urlString: String,
-        inController controller: UIViewController,
-        withKey key: String,
-        allowsSafari: Bool,
-        backButtonStyle: BackButtonStyle
-    ) {
-        print(urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) ?? "")
-        if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) {
-            self.presentWebControllerWithURL(
-                url,
-                inController: controller,
-                withKey: key,
-                allowsSafari: allowsSafari,
-                backButtonStyle: backButtonStyle
-            )
-        } else {
-            print("Invalid url")
-        }
-    }
-
-    @objc
-    func defaultSelector() {
     }
 }
 
 enum BackButtonStyle {
-    case close, back, done
+    case close
+    case back
+    case done
 
-    //Do NOT forget to reset target and selector!!!
+    // Do NOT forget to reset target and selector!!!
     var barButtonItem: UIBarButtonItem {
         switch self {
         case .close:
-            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
+            let item = UIBarButtonItem(
+                image: Images.crossBarButtonItemImage,
+                style: .plain,
+                target: nil,
+                action: nil
+            )
             item.tintColor = UIColor.stepikAccent
             return item
         case .back:
-            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
+            let item = UIBarButtonItem(
+                image: Images.backBarButtonItemImage,
+                style: .plain,
+                target: nil,
+                action: nil
+            )
             item.tintColor = UIColor.stepikAccent
             return item
         case .done:
-            let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(WebControllerManager.defaultSelector))
+            let item = UIBarButtonItem(
+                barButtonSystemItem: .done,
+                target: nil,
+                action: nil
+            )
             item.tintColor = UIColor.stepikAccent
             return item
         }
     }
 }
 
-extension WebControllerManager: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.targetFrame != nil {
-            let rurl = navigationAction.request.url
+// MARK: - WebControllerManager: WKNavigationDelegate -
 
-            if let url = rurl {
-                if url.scheme == StepikApplicationsInfo.urlScheme {
-                    UIApplication.shared.openURL(url)
-                } else if url.absoluteString.contains("social_signup_with_existing_email") {
-                    if let url = URL(string: "\(StepikApplicationsInfo.social?.redirectUri ?? "")?\(url.query ?? "")") {
-                        self.dismissWebControllerWithKey("social auth", animated: false, completion: {
-                            UIApplication.shared.openURL(url)
-                        }, error: nil)
+extension WebControllerManager: WKNavigationDelegate {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        if navigationAction.targetFrame != nil {
+            if let requestURL = navigationAction.request.url {
+                if requestURL.scheme == StepikApplicationsInfo.urlScheme {
+                    UIApplication.shared.openURL(requestURL)
+                } else if requestURL.absoluteString.contains("social_signup_with_existing_email") {
+                    let socialURL = URL(
+                        string: "\(StepikApplicationsInfo.social?.redirectUri ?? "")?\(requestURL.query ?? "")"
+                    )
+                    if let socialURL = socialURL {
+                        self.dismissWebControllerWithKey(
+                            .socialAuth,
+                            animated: false,
+                            completion: {
+                                UIApplication.shared.openURL(socialURL)
+                            },
+                            error: nil
+                        )
                     }
                 }
             }
         }
-        decisionHandler(WKNavigationActionPolicy.allow)
+        decisionHandler(.allow)
     }
 }
 
+// MARK: - WebControllerManager: WKUIDelegate -
+
 extension WebControllerManager: WKUIDelegate {
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        if let currentVC = currentWebController {
-            WKWebViewPanelManager.presentAlert(on: currentVC, title: NSLocalizedString("Alert", comment: ""), message: message, handler: completionHandler)
+    func webView(
+        _ webView: WKWebView,
+        runJavaScriptAlertPanelWithMessage message: String,
+        initiatedByFrame frame: WKFrameInfo,
+        completionHandler: @escaping () -> Void
+    ) {
+        if let currentWebController = self.currentWebController {
+            WKWebViewPanelManager.presentAlert(
+                on: currentWebController,
+                title: NSLocalizedString("Alert", comment: ""),
+                message: message,
+                handler: completionHandler
+            )
         }
     }
 
-    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        if let currentVC = currentWebController {
-            WKWebViewPanelManager.presentConfirm(on: currentVC, title: NSLocalizedString("Confirm", comment: ""), message: message, handler: completionHandler)
+    func webView(
+        _ webView: WKWebView,
+        runJavaScriptConfirmPanelWithMessage message: String,
+        initiatedByFrame frame: WKFrameInfo,
+        completionHandler: @escaping (Bool) -> Void
+    ) {
+        if let currentWebController = self.currentWebController {
+            WKWebViewPanelManager.presentConfirm(
+                on: currentWebController,
+                title: NSLocalizedString("Confirm", comment: ""),
+                message: message,
+                handler: completionHandler
+            )
         }
     }
 
-    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
-        if let currentVC = currentWebController {
-            WKWebViewPanelManager.presentPrompt(on: currentVC, title: NSLocalizedString("Prompt", comment: ""), message: prompt, defaultText: defaultText, handler: completionHandler)
+    func webView(
+        _ webView: WKWebView,
+        runJavaScriptTextInputPanelWithPrompt prompt: String,
+        defaultText: String?,
+        initiatedByFrame frame: WKFrameInfo,
+        completionHandler: @escaping (String?) -> Void
+    ) {
+        if let currentWebController = self.currentWebController {
+            WKWebViewPanelManager.presentPrompt(
+                on: currentWebController,
+                title: NSLocalizedString("Prompt", comment: ""),
+                message: prompt,
+                defaultText: defaultText,
+                handler: completionHandler
+            )
         }
     }
 }
