@@ -22,18 +22,23 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
     }
 
     func presentCourseInfo(response: BaseExplore.CourseInfoPresentation.Response) {
-        self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.course.id))
+        self.viewController?.displayCourseInfo(
+            viewModel: .init(courseID: response.course.id, courseViewSource: response.courseViewSource)
+        )
     }
 
     func presentCourseSyllabus(response: BaseExplore.CourseSyllabusPresentation.Response) {
-        self.viewController?.displayCourseSyllabus(viewModel: .init(courseID: response.course.id))
+        self.viewController?.displayCourseSyllabus(
+            viewModel: .init(courseID: response.course.id, courseViewSource: response.courseViewSource)
+        )
     }
 
     func presentLastStep(response: BaseExplore.LastStepPresentation.Response) {
         self.viewController?.displayLastStep(
             viewModel: .init(
                 course: response.course,
-                isAdaptive: response.isAdaptive
+                isAdaptive: response.isAdaptive,
+                courseViewSource: response.courseViewSource
             )
         )
     }
@@ -43,7 +48,7 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
     }
 
     func presentPaidCourseBuying(response: BaseExplore.PaidCourseBuyingPresentation.Response) {
-        let path = "https://stepik.org/course/\(response.course.id)"
+        let path = "\(StepikApplicationsInfo.stepikURL)/course/\(response.course.id)/pay"
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
     }
 }

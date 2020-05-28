@@ -414,10 +414,10 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                     guard let strongSelf = self else {
                         return
                     }
-                    WebControllerManager.sharedManager.presentWebControllerWithURLString(
+                    WebControllerManager.shared.presentWebControllerWithURLString(
                         "\(viewModel.urlPath)?from_mobile_app=true",
                         inController: strongSelf,
-                        withKey: "exam",
+                        withKey: .exam,
                         allowsSafari: true,
                         backButtonStyle: .close
                     )
@@ -514,7 +514,8 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             for: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
-            skipSyllabus: true
+            skipSyllabus: true,
+            courseViewSource: .unknown
         )
     }
 
@@ -535,10 +536,10 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString(
+        WebControllerManager.shared.presentWebControllerWithURLString(
             viewModel.urlPath,
             inController: self,
-            withKey: "paid_course",
+            withKey: .paidCourse,
             allowsSafari: true,
             backButtonStyle: .done
         )

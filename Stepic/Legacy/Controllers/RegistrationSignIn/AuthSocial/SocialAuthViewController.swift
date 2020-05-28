@@ -41,10 +41,10 @@ extension SocialAuthViewController: SocialAuthView {
     }
 
     func presentWebController(with url: URL) {
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: webControllerKey,
+            withKey: .socialAuth,
             allowsSafari: false,
             backButtonStyle: .close,
             forceCustom: true
@@ -52,12 +52,7 @@ extension SocialAuthViewController: SocialAuthView {
     }
 
     func dismissWebController() {
-        WebControllerManager.sharedManager.dismissWebControllerWithKey(
-            webControllerKey,
-            animated: true,
-            completion: nil,
-            error: nil
-        )
+        WebControllerManager.shared.dismissWebControllerWithKey(.socialAuth)
     }
 }
 
@@ -67,8 +62,6 @@ final class SocialAuthViewController: UIViewController {
     private let numberOfColumns = 3
     private let numberOfRows = 2
     private let headerHeight: CGFloat = 47.0
-
-    private let webControllerKey = "social auth"
 
     var isExpanded = false
 
@@ -313,10 +306,10 @@ extension SocialAuthViewController: VKSocialSDKProviderDelegate {
     func presentAuthController(_ controller: UIViewController) {
         // FIXME: register URL
         let registerURL = SocialProvider.vk.info.registerURL
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             registerURL,
             inController: self,
-            withKey: "social auth",
+            withKey: .socialAuth,
             allowsSafari: false,
             backButtonStyle: .close,
             forceCustom: true

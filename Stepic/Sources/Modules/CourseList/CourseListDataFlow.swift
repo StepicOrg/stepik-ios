@@ -31,6 +31,7 @@ enum CourseList {
         struct Response {
             let isAuthorized: Bool
             let result: AvailableCourses
+            let viewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
@@ -44,6 +45,7 @@ enum CourseList {
         struct Response {
             let isAuthorized: Bool
             let result: StepikResult<AvailableCourses>
+            let viewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {

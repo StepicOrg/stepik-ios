@@ -16,6 +16,10 @@ final class BranchService {
         self.deepLinkRoutingService = deepLinkRoutingService
     }
 
+    convenience init() {
+        self.init(deepLinkRoutingService: DeepLinkRoutingService(courseViewSource: .deepLink(url: "branch")))
+    }
+
     func setup(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         Branch.getInstance().initSession(launchOptions: launchOptions) { params, _ in
             guard let data = params as? [String: AnyObject] else {
