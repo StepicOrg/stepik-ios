@@ -171,6 +171,7 @@ final class HomeViewController: BaseExploreViewController {
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
             colorMode: .light,
+            courseViewSource: .myCourses,
             output: self.interactor as? CourseListOutputProtocol
         )
         let enrolledViewController = enrolledCourseListAssembly.makeModule()
@@ -266,6 +267,7 @@ final class HomeViewController: BaseExploreViewController {
         let popularAssembly = HorizontalCourseListAssembly(
             type: courseListType,
             colorMode: .dark,
+            courseViewSource: .query(courseListType: courseListType),
             output: self.interactor as? CourseListOutputProtocol
         )
         let popularViewController = popularAssembly.makeModule()

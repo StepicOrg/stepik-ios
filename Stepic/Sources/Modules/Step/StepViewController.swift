@@ -401,10 +401,10 @@ extension StepViewController: StepViewDelegate {
             }
         }
 
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: "external link",
+            withKey: .externalLink,
             allowsSafari: true,
             backButtonStyle: .done
         )

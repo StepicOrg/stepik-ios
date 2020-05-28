@@ -11,12 +11,19 @@ import PromiseKit
 
 // Tip: Inherited from NSObject in order to be able to find a selector
 final class StepsControllerDeepLinkRouter: NSObject {
+    private let courseViewSource: AnalyticsEvent.CourseViewSource
+
+    init(courseViewSource: AnalyticsEvent.CourseViewSource) {
+        self.courseViewSource = courseViewSource
+        super.init()
+    }
+
     func getStepsViewControllerFor(
         step stepId: Int,
         inLesson lessonId: Int,
         withUnit unitID: Int?,
-        success successHandler: @escaping (([UIViewController]) -> Void),
-        error errorHandler: @escaping ((String) -> Void)
+        success successHandler: @escaping ([UIViewController]) -> Void,
+        error errorHandler: @escaping (String) -> Void
     ) {
         // Download lesson and pass stepId to StepsViewController
         if let lesson = Lesson.getLesson(lessonId) {
@@ -76,8 +83,8 @@ final class StepsControllerDeepLinkRouter: NSObject {
         _ lesson: Lesson,
         stepId: Int,
         includeUnit: Bool = false,
-        success successHandler: @escaping (([UIViewController]) -> Void),
-        error errorHandler: @escaping ((String) -> Void)
+        success successHandler: @escaping ([UIViewController]) -> Void,
+        error errorHandler: @escaping (String) -> Void
     ) {
         var currentUnit: Unit?
 
@@ -171,7 +178,11 @@ final class StepsControllerDeepLinkRouter: NSObject {
                 return errorHandler("No access")
             }
 
-            let courseInfoAssembly = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus)
+            let courseInfoAssembly = CourseInfoAssembly(
+                courseID: course.id,
+                initialTab: .syllabus,
+                courseViewSource: self.courseViewSource
+            )
             let lessonAssemblyWithoutUnit = LessonAssembly(
                 initialContext: .lesson(id: lesson.id),
                 startStep: .index(stepId - 1)

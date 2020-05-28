@@ -120,7 +120,8 @@ final class UserCoursesViewController: TabmanViewController {
 
         let assembly = FullscreenCourseListAssembly(
             presentationDescription: nil,
-            courseListType: tab.courseListType
+            courseListType: tab.courseListType,
+            courseViewSource: .myCourses
         )
 
         self.tabViewControllers[index] = assembly.makeModule()

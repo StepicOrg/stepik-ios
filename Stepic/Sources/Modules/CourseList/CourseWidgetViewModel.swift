@@ -15,4 +15,6 @@ struct CourseWidgetViewModel: UniqueIdentifiable {
     let isEnrolled: Bool
     let progress: CourseWidgetProgressViewModel?
     let uniqueIdentifier: UniqueIdentifierType
+    let courseID: Course.IdType
+    let viewSource: AnalyticsEvent.CourseViewSource
 }

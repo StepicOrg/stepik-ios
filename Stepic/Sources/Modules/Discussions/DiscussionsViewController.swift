@@ -424,10 +424,10 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didRequestOpenURL url: URL
     ) {
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
+        WebControllerManager.shared.presentWebControllerWithURL(
             url,
             inController: self,
-            withKey: "external link",
+            withKey: .externalLink,
             allowsSafari: true,
             backButtonStyle: .done
         )

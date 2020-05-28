@@ -4,6 +4,8 @@ class CourseListAssembly: Assembly {
     let type: CourseListType
     let colorMode: CourseListColorMode
 
+    private let courseViewSource: AnalyticsEvent.CourseViewSource
+
     // Input
     var moduleInput: CourseListInputProtocol?
 
@@ -20,10 +22,12 @@ class CourseListAssembly: Assembly {
     fileprivate init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        courseViewSource: AnalyticsEvent.CourseViewSource,
         output: CourseListOutputProtocol? = nil
     ) {
         self.type = type
         self.colorMode = colorMode
+        self.courseViewSource = courseViewSource
         self.moduleOutput = output
     }
 
@@ -67,7 +71,8 @@ class CourseListAssembly: Assembly {
             userAccountService: UserAccountService(),
             personalDeadlinesService: PersonalDeadlinesService(),
             courseListDataBackUpdateService: courseListDataBackUpdateService,
-            analytics: StepikAnalytics.shared
+            analytics: StepikAnalytics.shared,
+            courseViewSource: self.courseViewSource
         )
         self.moduleInput = interactor
 
@@ -96,6 +101,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
     init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        courseViewSource: AnalyticsEvent.CourseViewSource,
         maxNumberOfDisplayedCourses: Int? = HorizontalCourseListAssembly.defaultMaxNumberOfDisplayedCourses,
         output: CourseListOutputProtocol? = nil
     ) {
@@ -103,6 +109,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
         super.init(
             type: type,
             colorMode: colorMode,
+            courseViewSource: courseViewSource,
             output: output
         )
     }
@@ -124,6 +131,7 @@ final class VerticalCourseListAssembly: CourseListAssembly {
     init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        courseViewSource: AnalyticsEvent.CourseViewSource,
         presentationDescription: CourseList.PresentationDescription?,
         output: CourseListOutputProtocol? = nil
     ) {
@@ -131,6 +139,7 @@ final class VerticalCourseListAssembly: CourseListAssembly {
         super.init(
             type: type,
             colorMode: colorMode,
+            courseViewSource: courseViewSource,
             output: output
         )
     }

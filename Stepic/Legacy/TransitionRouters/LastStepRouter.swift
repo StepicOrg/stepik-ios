@@ -21,7 +21,8 @@ final class LastStepRouter {
         isAdaptive: Bool? = nil,
         didJustSubscribe: Bool = false,
         using navigationController: UINavigationController,
-        skipSyllabus: Bool = false
+        skipSyllabus: Bool = false,
+        courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         guard course.canContinue,
               let lastStepID = course.lastStepId else {
@@ -46,7 +47,8 @@ final class LastStepRouter {
                 isAdaptive: isAdaptive,
                 didJustSubscribe: didJustSubscribe,
                 using: navigationController,
-                skipSyllabus: skipSyllabus
+                skipSyllabus: skipSyllabus,
+                courseViewSource: courseViewSource
             )
         }.catch { error in
             print("error while updating lastStep: \(error)")
@@ -58,7 +60,8 @@ final class LastStepRouter {
         isAdaptive: Bool?,
         didJustSubscribe: Bool,
         using navigationController: UINavigationController,
-        skipSyllabus: Bool = false
+        skipSyllabus: Bool = false,
+        courseViewSource: AnalyticsEvent.CourseViewSource = .unknown
     ) {
         let shouldOpenInAdaptiveMode = isAdaptive
             ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
@@ -80,7 +83,11 @@ final class LastStepRouter {
             return
         }
 
-        let courseInfoController = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule()
+        let courseInfoController = CourseInfoAssembly(
+            courseID: course.id,
+            initialTab: .syllabus,
+            courseViewSource: courseViewSource
+        ).makeModule()
 
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
@@ -249,10 +256,10 @@ final class LastStepRouter {
                         }
                     }()
 
-                    WebControllerManager.sharedManager.presentWebControllerWithURLString(
+                    WebControllerManager.shared.presentWebControllerWithURLString(
                         "\(courseWebURLPath)/syllabus?from_mobile_app=true",
                         inController: presentationController,
-                        withKey: "exam",
+                        withKey: .exam,
                         allowsSafari: true,
                         backButtonStyle: .close
                     )

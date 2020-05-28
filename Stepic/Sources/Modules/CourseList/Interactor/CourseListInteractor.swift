@@ -25,6 +25,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
     private let courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol
     private let analytics: Analytics
+    private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -39,7 +40,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         userAccountService: UserAccountServiceProtocol,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
         courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol,
-        analytics: Analytics
+        analytics: Analytics,
+        courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -48,6 +50,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.userAccountService = userAccountService
         self.personalDeadlinesService = personalDeadlinesService
         self.analytics = analytics
+        self.courseViewSource = courseViewSource
 
         self.courseListDataBackUpdateService = courseListDataBackUpdateService
         self.courseListDataBackUpdateService.delegate = self
@@ -99,7 +102,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
                 let response = CourseList.CoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
-                    result: courses
+                    result: courses,
+                    viewSource: self.courseViewSource
                 )
                 self.presenter.presentCourses(response: response)
             }
@@ -135,7 +139,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: .success(result)
+                result: .success(result),
+                viewSource: self.courseViewSource
             )
             self.presenter.presentNextCourses(response: response)
             return
@@ -159,7 +164,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: .success(courses)
+                result: .success(courses),
+                viewSource: self.courseViewSource
             )
             self.presenter.presentNextCourses(response: response)
 
@@ -167,7 +173,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }.catch { error in
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: .failure(error)
+                result: .failure(error),
+                viewSource: self.courseViewSource
             )
             self.presenter.presentNextCourses(response: response)
         }
@@ -194,7 +201,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 course: targetCourse,
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                     courseId: targetCourse.id
-                )
+                ),
+                viewSource: self.courseViewSource
             )
         } else {
             // Paid course -> open web view
@@ -216,7 +224,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: targetCourse.id
-                    )
+                    ),
+                    viewSource: self.courseViewSource
                 )
             }.catch { _ in
                 // FIXME: use dismiss with error
@@ -237,15 +246,15 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // - normal -> syllabus
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             if self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: targetCourse.id) {
-                self.moduleOutput?.presentCourseInfo(course: targetCourse)
+                self.moduleOutput?.presentCourseInfo(course: targetCourse, viewSource: self.courseViewSource)
             } else {
-                self.moduleOutput?.presentCourseSyllabus(course: targetCourse)
+                self.moduleOutput?.presentCourseSyllabus(course: targetCourse, viewSource: self.courseViewSource)
             }
         } else {
             // Unenrolled course
             // - adaptive -> info
             // - normal -> info
-            self.moduleOutput?.presentCourseInfo(course: targetCourse)
+            self.moduleOutput?.presentCourseInfo(course: targetCourse, viewSource: self.courseViewSource)
         }
     }
 
@@ -297,7 +306,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         )
         let response = CourseList.CoursesLoad.Response(
             isAuthorized: self.userAccountService.isAuthorized,
-            result: courses
+            result: courses,
+            viewSource: self.courseViewSource
         )
         self.presenter.presentCourses(response: response)
     }

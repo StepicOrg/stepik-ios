@@ -28,15 +28,10 @@ final class UnsupportedQuizViewController: UIViewController {
 
 extension UnsupportedQuizViewController: UnsupportedQuizViewControllerProtocol {
     func displayUnsupportedQuiz(viewModel: UnsupportedQuiz.UnsupportedQuizPresentation.ViewModel) {
-        guard let encoededPath = viewModel.stepURLPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let stepURL = URL(string: encoededPath) else {
-            return
-        }
-
-        WebControllerManager.sharedManager.presentWebControllerWithURL(
-            stepURL,
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.stepURL,
             inController: self,
-            withKey: "external link",
+            withKey: .openQuizInWeb,
             allowsSafari: true,
             backButtonStyle: .close
         )
@@ -45,6 +40,6 @@ extension UnsupportedQuizViewController: UnsupportedQuizViewControllerProtocol {
 
 extension UnsupportedQuizViewController: UnsupportedQuizViewDelegate {
     func unsupportedQuizViewDidClickOnActionButton(_ view: UnsupportedQuizView) {
-        self.interactor.doUnsupportedQuizPresentation(request: .init())
+        self.interactor.doUnsupportedQuizAction(request: .init())
     }
 }

@@ -65,16 +65,16 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
 }
 
 extension CourseListsCollectionInteractor: CourseListOutputProtocol {
-    func presentCourseInfo(course: Course) {
-        self.moduleOutput?.presentCourseInfo(course: course)
+    func presentCourseInfo(course: Course, viewSource: AnalyticsEvent.CourseViewSource) {
+        self.moduleOutput?.presentCourseInfo(course: course, viewSource: viewSource)
     }
 
-    func presentCourseSyllabus(course: Course) {
-        self.moduleOutput?.presentCourseSyllabus(course: course)
+    func presentCourseSyllabus(course: Course, viewSource: AnalyticsEvent.CourseViewSource) {
+        self.moduleOutput?.presentCourseSyllabus(course: course, viewSource: viewSource)
     }
 
-    func presentLastStep(course: Course, isAdaptive: Bool) {
-        self.moduleOutput?.presentLastStep(course: course, isAdaptive: isAdaptive)
+    func presentLastStep(course: Course, isAdaptive: Bool, viewSource: AnalyticsEvent.CourseViewSource) {
+        self.moduleOutput?.presentLastStep(course: course, isAdaptive: isAdaptive, viewSource: viewSource)
     }
 
     func presentAuthorization() {
