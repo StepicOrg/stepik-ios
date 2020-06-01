@@ -195,7 +195,7 @@ final class VerticalCourseListViewController: CourseListViewController {
     override func loadView() {
         let view = VerticalCourseListView(
             frame: UIScreen.main.bounds,
-            columnsCount: 1,
+            columnsCount: VerticalCourseListView.adaptiveColumnsCount,
             colorMode: self.colorMode,
             delegate: self.listDelegate,
             dataSource: self.listDataSource,
