@@ -6,7 +6,9 @@ extension CourseListView {
         let layoutMinimumLineSpacing: CGFloat = 16.0
         let layoutMinimumInteritemSpacing: CGFloat = 16.0
         let layoutItemHeight: CGFloat = 160.0
-        let layoutMinimumItemWidth: CGFloat = 288
+
+        let verticalLayoutMinimumItemWidth: CGFloat = 288
+        let horizontalLayoutMinimumItemWidth: CGFloat = 276
 
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
@@ -99,6 +101,37 @@ class CourseListView: UIView {
         self.backgroundColor = self.getBackgroundColor(for: self.colorMode)
     }
 
+    fileprivate func calculateAdaptiveLayoutColumnAttributes(
+        minimumColumnWidth: CGFloat,
+        columnHorizontalInsets: CGFloat,
+        containerHorizontalInsets: CGFloat = 0
+    ) -> (columnsCount: Int, columnWidth: CGFloat) {
+        func calculateColumnWidth(columnsCount: Int) -> CGFloat {
+            let totalWidth = self.bounds.width
+                - columnHorizontalInsets * CGFloat(columnsCount + 1)
+                - containerHorizontalInsets
+            return (totalWidth / CGFloat(columnsCount)).rounded(.down)
+        }
+
+        var columnsCount = 0
+        var columnWidth = CGFloat.greatestFiniteMagnitude
+
+        while columnWidth >= minimumColumnWidth {
+            columnsCount += 1
+            columnWidth = calculateColumnWidth(columnsCount: columnsCount)
+        }
+
+        if columnWidth < minimumColumnWidth {
+            columnsCount -= 1
+            columnWidth = calculateColumnWidth(columnsCount: columnsCount)
+        }
+
+        columnsCount = max(1, columnsCount)
+        columnWidth = max(minimumColumnWidth, columnWidth)
+
+        return (columnsCount, columnWidth)
+    }
+
     // MARK: - ColorMode
 
     private func getBackgroundColor(for colorMode: CourseListColorMode) -> UIColor {
@@ -182,7 +215,7 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
             self.verticalCourseFlowLayout.columnsCount = self.columnsCount
         }
     }
-    private let isAdaptiveColumnsCountModeEnabled: Bool
+    private let isAdaptiveColumnsCount: Bool
 
     // We should use proxy cause we are using willDisplay method in delegate for pagination
     // and some methods to show footer/header in data source
@@ -225,25 +258,17 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
         isHeaderViewHidden: Bool,
         appearance: Appearance = CourseListView.Appearance()
     ) {
+        self.columnsCount = columnsCount == Self.adaptiveColumnsCount ? 1 : columnsCount
+        self.isAdaptiveColumnsCount = columnsCount == Self.adaptiveColumnsCount
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
         self.isHeaderViewHidden = isHeaderViewHidden
-
-        if columnsCount == Self.adaptiveColumnsCount {
-            self.columnsCount = 1
-            self.isAdaptiveColumnsCountModeEnabled = true
-        } else {
-            self.columnsCount = columnsCount
-            self.isAdaptiveColumnsCountModeEnabled = false
-        }
-
         super.init(
             frame: frame,
             colorMode: colorMode,
             viewDelegate: viewDelegate,
             appearance: appearance
         )
-
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
@@ -260,34 +285,18 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
     }
 
     override func calculateItemSize() -> CGSize {
-        func calculateItemWidth(columnsCount: CGFloat) -> CGFloat {
-            let totalWidth = self.bounds.width - self.appearance.layoutMinimumInteritemSpacing * (columnsCount + 1)
-            return (totalWidth / columnsCount).rounded(.down)
-        }
-
-        if self.isAdaptiveColumnsCountModeEnabled {
-            var numberOfColumns: CGFloat = 0
-            var itemWidth = CGFloat.greatestFiniteMagnitude
-
-            while itemWidth >= self.appearance.layoutMinimumItemWidth {
-                numberOfColumns += 1
-                itemWidth = calculateItemWidth(columnsCount: numberOfColumns)
-            }
-
-            if itemWidth < self.appearance.layoutMinimumItemWidth {
-                numberOfColumns -= 1
-                itemWidth = calculateItemWidth(columnsCount: numberOfColumns)
-            }
-
-            itemWidth = max(self.appearance.layoutMinimumItemWidth, itemWidth)
-            self.columnsCount = max(1, Int(numberOfColumns))
-
-            return CGSize(width: itemWidth, height: self.appearance.layoutItemHeight)
-        } else {
-            return CGSize(
-                width: calculateItemWidth(columnsCount: CGFloat(self.columnsCount)),
-                height: self.appearance.layoutItemHeight
+        if self.isAdaptiveColumnsCount {
+            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
+                minimumColumnWidth: self.appearance.verticalLayoutMinimumItemWidth,
+                columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing
             )
+            self.columnsCount = columnsCount
+
+            return CGSize(width: columnWidth, height: self.appearance.layoutItemHeight)
+        } else {
+            let width = self.bounds.width
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+            return CGSize(width: width / CGFloat(self.columnsCount), height: self.appearance.layoutItemHeight)
         }
     }
 
@@ -382,8 +391,15 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
 }
 
 final class HorizontalCourseListView: CourseListView {
-    private let columnsCount: Int
+    static let adaptiveColumnsCount: Int = -1
+
     private let rowsCount: Int
+    private var columnsCount: Int {
+        didSet {
+            self.horizontalCourseFlowLayout.columnsCount = self.columnsCount
+        }
+    }
+    private let isAdaptiveColumnsCount: Bool
 
     private lazy var horizontalCourseFlowLayout: HorizontalCourseListFlowLayout = {
         let layout = HorizontalCourseListFlowLayout(
@@ -409,8 +425,9 @@ final class HorizontalCourseListView: CourseListView {
         viewDelegate: CourseListViewDelegate,
         appearance: Appearance = CourseListView.Appearance()
     ) {
-        self.columnsCount = columnsCount
         self.rowsCount = rowsCount
+        self.columnsCount = columnsCount == Self.adaptiveColumnsCount ? 1 : columnsCount
+        self.isAdaptiveColumnsCount = columnsCount == Self.adaptiveColumnsCount
         super.init(
             frame: frame,
             colorMode: colorMode,
@@ -430,13 +447,24 @@ final class HorizontalCourseListView: CourseListView {
     }
 
     override func calculateItemSize() -> CGSize {
-        let width = self.bounds.width
-            - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
-            - self.appearance.horizontalLayoutNextPageWidth
-        return CGSize(
-            width: width / CGFloat(self.columnsCount),
-            height: self.appearance.layoutItemHeight
-        )
+        if self.isAdaptiveColumnsCount {
+            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
+                minimumColumnWidth: self.appearance.horizontalLayoutMinimumItemWidth,
+                columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing,
+                containerHorizontalInsets: self.appearance.horizontalLayoutNextPageWidth
+            )
+            self.columnsCount = columnsCount
+
+            return CGSize(width: columnWidth, height: self.appearance.layoutItemHeight)
+        } else {
+            let width = self.bounds.width
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+                - self.appearance.horizontalLayoutNextPageWidth
+            return CGSize(
+                width: width / CGFloat(self.columnsCount),
+                height: self.appearance.layoutItemHeight
+            )
+        }
     }
 }
 
