@@ -6,6 +6,7 @@ extension CourseListView {
         let layoutMinimumLineSpacing: CGFloat = 16.0
         let layoutMinimumInteritemSpacing: CGFloat = 16.0
         let layoutItemHeight: CGFloat = 160.0
+        let layoutMinimumItemWidth: CGFloat = 288
 
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
@@ -78,11 +79,13 @@ class CourseListView: UIView {
     }
 
     func updateItemSize(_ itemSize: CGSize) {
-        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
-           layout.itemSize != itemSize {
-            layout.itemSize = itemSize
-            self.collectionView.collectionViewLayout.invalidateLayout()
+        guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
+              layout.itemSize != itemSize else {
+            return
         }
+
+        layout.itemSize = itemSize
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
@@ -171,10 +174,16 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
 
 // Subclasses for two orientations
 
-final class VerticalCourseListView: CourseListView,
-                                    UICollectionViewDelegate,
-                                    UICollectionViewDataSource {
-    private let columnsCount: Int
+final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource {
+    static let adaptiveColumnsCount: Int = -1
+
+    private var columnsCount: Int {
+        didSet {
+            self.verticalCourseFlowLayout.columnsCount = self.columnsCount
+        }
+    }
+    private let isAdaptiveColumnsCountModeEnabled: Bool
+
     // We should use proxy cause we are using willDisplay method in delegate for pagination
     // and some methods to show footer/header in data source
     // swiftlint:disable weak_delegate
@@ -216,16 +225,25 @@ final class VerticalCourseListView: CourseListView,
         isHeaderViewHidden: Bool,
         appearance: Appearance = CourseListView.Appearance()
     ) {
-        self.columnsCount = columnsCount
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
         self.isHeaderViewHidden = isHeaderViewHidden
+
+        if columnsCount == Self.adaptiveColumnsCount {
+            self.columnsCount = 1
+            self.isAdaptiveColumnsCountModeEnabled = true
+        } else {
+            self.columnsCount = columnsCount
+            self.isAdaptiveColumnsCountModeEnabled = false
+        }
+
         super.init(
             frame: frame,
             colorMode: colorMode,
             viewDelegate: viewDelegate,
             appearance: appearance
         )
+
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
@@ -242,8 +260,35 @@ final class VerticalCourseListView: CourseListView,
     }
 
     override func calculateItemSize() -> CGSize {
-        let width = self.bounds.width - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
-        return CGSize(width: width / CGFloat(self.columnsCount), height: self.appearance.layoutItemHeight)
+        func calculateItemWidth(columnsCount: CGFloat) -> CGFloat {
+            let totalWidth = self.bounds.width - self.appearance.layoutMinimumInteritemSpacing * (columnsCount + 1)
+            return (totalWidth / columnsCount).rounded(.down)
+        }
+
+        if self.isAdaptiveColumnsCountModeEnabled {
+            var numberOfColumns: CGFloat = 0
+            var itemWidth = CGFloat.greatestFiniteMagnitude
+
+            while itemWidth >= self.appearance.layoutMinimumItemWidth {
+                numberOfColumns += 1
+                itemWidth = calculateItemWidth(columnsCount: numberOfColumns)
+            }
+
+            if itemWidth < self.appearance.layoutMinimumItemWidth {
+                numberOfColumns -= 1
+                itemWidth = calculateItemWidth(columnsCount: numberOfColumns)
+            }
+
+            itemWidth = max(self.appearance.layoutMinimumItemWidth, itemWidth)
+            self.columnsCount = max(1, Int(numberOfColumns))
+
+            return CGSize(width: itemWidth, height: self.appearance.layoutItemHeight)
+        } else {
+            return CGSize(
+                width: calculateItemWidth(columnsCount: CGFloat(self.columnsCount)),
+                height: self.appearance.layoutItemHeight
+            )
+        }
     }
 
     private func updatePagination() {
@@ -309,24 +354,26 @@ final class VerticalCourseListView: CourseListView,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let view: CollectionViewReusableView = collectionView
-                .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionFooter,
-                    for: indexPath
-                )
+            let view: CollectionViewReusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                for: indexPath
+            )
+
             if let footerView = self.paginationView {
                 view.attachView(footerView)
             }
+
             return view
         } else if kind == UICollectionView.elementKindSectionHeader {
-            let view: CollectionViewReusableView = collectionView
-                .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionHeader,
-                    for: indexPath
-                )
+            let view: CollectionViewReusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                for: indexPath
+            )
+
             if let headerView = self.headerView {
                 view.attachView(headerView)
             }
+
             return view
         }
 
