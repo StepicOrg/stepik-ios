@@ -157,7 +157,7 @@ final class HorizontalCourseListViewController: CourseListViewController {
     override func loadView() {
         let view = HorizontalCourseListView(
             frame: UIScreen.main.bounds,
-            columnsCount: 1,
+            columnsCount: HorizontalCourseListView.adaptiveColumnsCount,
             rowsCount: 2,
             colorMode: self.colorMode,
             delegate: self.listDelegate,
