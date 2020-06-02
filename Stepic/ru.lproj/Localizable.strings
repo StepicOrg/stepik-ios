@@ -979,6 +979,8 @@ NewProfileRatingCourses1 = "%@ курс";
 NewProfileRatingCourses234 = "%@ курса";
 NewProfileRatingCourses567890 = "%@ курсов";
 
+NewProfileBlockTitleDetails = "Обо мне";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";

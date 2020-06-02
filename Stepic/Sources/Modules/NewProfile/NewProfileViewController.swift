@@ -9,11 +9,21 @@ protocol NewProfileViewControllerProtocol: AnyObject {
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
+    enum Animation {
+        static let modulesRefreshDelay: TimeInterval = 0.3
+    }
+
+    fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
+        .details
+    ]
+
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var newProfileView: NewProfileView? { self.view as? NewProfileView }
 
     private let interactor: NewProfileInteractorProtocol
     private var state: NewProfile.ViewControllerState
+
+    private var submodules: [Submodule] = []
 
     private lazy var settingsButton = UIBarButtonItem.stepikSettingsBarButtonItem(
         target: self,
@@ -68,7 +78,6 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     private func setup() {
         self.title = NSLocalizedString("Profile", comment: "")
-        // For placeholer to be layouted correctly.
         self.edgesForExtendedLayout = []
 
         self.registerPlaceholders()
@@ -148,6 +157,99 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case .result(let viewModel):
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
+
+            let shouldShowProfileDetails = !viewModel.userAboutText.isEmpty
+            self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
+        }
+    }
+
+    // MARK: - Submodules
+
+    private func registerSubmodule(_ submodule: Submodule) {
+        self.submodules.append(submodule)
+
+        if let viewController = submodule.viewController {
+            self.addChild(viewController)
+        }
+
+        guard let insertingSubmoduleView = submodule.view else {
+            return print("NewProfileViewController :: failed insert submodule view")
+        }
+
+        // Subviews has same position as in corresponding Submodule object
+        for module in self.submodules where module.type.position >= submodule.type.position {
+            if let nextSubmoduleView = module.view {
+                self.newProfileView?.insertBlockView(insertingSubmoduleView, before: nextSubmoduleView)
+            }
+            return
+        }
+    }
+
+    private func removeSubmodule(_ submodule: Submodule) {
+        if let submoduleView = submodule.view {
+            self.newProfileView?.removeBlockView(submoduleView)
+        }
+        submodule.viewController?.removeFromParent()
+        self.submodules = self.submodules.filter { submodule.view != $0.view }
+    }
+
+    private func getSubmodule(type: SubmoduleType) -> Submodule? {
+        self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
+    }
+
+    // MARK: Profile Details
+
+    private enum ProfileDetailsState {
+        case visible(viewModel: NewProfileViewModel)
+        case hidden
+    }
+
+    private func refreshProfileDetailsState(_ state: ProfileDetailsState) {
+        switch state {
+        case .visible(let viewModel):
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
+               let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
+                profileDetailsViewController.newProfileDetailsView?.text = viewModel.userAboutText
+            } else {
+                let profileDetailsAssembly = NewProfileDetailsAssembly()
+                let profileDetailsViewController = profileDetailsAssembly.makeModule()
+
+                let headerView = NewProfileBlockHeaderView()
+                headerView.titleText = NSLocalizedString("NewProfileBlockTitleDetails", comment: "")
+                headerView.isShowAllButtonHidden = true
+
+                let containerView = NewProfileBlockContainerView(
+                    headerView: headerView,
+                    contentView: profileDetailsViewController.view
+                )
+
+                self.registerSubmodule(
+                    .init(
+                        viewController: profileDetailsViewController,
+                        view: containerView,
+                        type: NewProfile.Submodule.details
+                    )
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.details) {
+                self.removeSubmodule(submodule)
+            }
+        }
+    }
+
+    // MARK: Inner Types
+
+    private final class Submodule {
+        weak var viewController: UIViewController?
+        weak var view: UIView?
+
+        let type: SubmoduleType
+
+        init(viewController: UIViewController?, view: UIView?, type: SubmoduleType) {
+            self.viewController = viewController
+            self.view = view
+            self.type = type
         }
     }
 }
@@ -156,7 +258,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
 extension NewProfileViewController: NewProfileViewControllerProtocol {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel) {
-        self.updateState(newState: viewModel.state)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+            self?.updateState(newState: viewModel.state)
+        }
     }
 
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel) {
@@ -202,5 +306,16 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
         self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
+    }
+}
+
+// MARK: - NewProfile.Submodule: SubmoduleType -
+
+extension NewProfile.Submodule: SubmoduleType {
+    var position: Int {
+        guard let position = NewProfileViewController.submodulesOrder.firstIndex(of: self) else {
+            fatalError("Given submodule type has unknown position")
+        }
+        return position
     }
 }

@@ -1,7 +1,13 @@
 import Foundation
 
 enum NewProfile {
-    // MARK: Common structs
+    // MARK: Common types
+
+    enum Submodule: String, UniqueIdentifiable {
+        case details
+
+        var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
+    }
 
     // Use it for module initializing
     struct PresentationDescription {

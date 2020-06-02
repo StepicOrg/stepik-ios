@@ -25,6 +25,15 @@ final class NewProfileBlockContainerView: UIView {
         return view
     }()
 
+    var titleText: String? {
+        get {
+            self.headerView.titleText
+        }
+        set {
+            self.headerView.titleText = newValue
+        }
+    }
+
     var onShowAllButtonClick: (() -> Void)? {
         didSet {
             self.headerView.onShowAllButtonClick = self.onShowAllButtonClick
@@ -45,7 +54,7 @@ final class NewProfileBlockContainerView: UIView {
 
     init(
         frame: CGRect = .zero,
-        headerView: UIView & NewProfileBlockHeaderViewProtocol,
+        headerView: UIView & NewProfileBlockHeaderViewProtocol = NewProfileBlockHeaderView(),
         contentView: UIView,
         shouldShowSeparator: Bool = false,
         appearance: Appearance = Appearance()

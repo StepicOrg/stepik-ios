@@ -40,6 +40,12 @@ final class NewProfileBlockHeaderView: UIControl, NewProfileBlockHeaderViewProto
         }
     }
 
+    var isShowAllButtonHidden: Bool = false {
+        didSet {
+            self.showAllButton.isHidden = self.isShowAllButtonHidden
+        }
+    }
+
     var onShowAllButtonClick: (() -> Void)?
 
     override var isHighlighted: Bool {
@@ -50,9 +56,10 @@ final class NewProfileBlockHeaderView: UIControl, NewProfileBlockHeaderViewProto
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(
+        let showAllButtonHeight = self.isShowAllButtonHidden ? 0 : self.showAllButton.intrinsicContentSize.height
+        return CGSize(
             width: UIView.noIntrinsicMetric,
-            height: max(self.titleLabel.intrinsicContentSize.height, self.showAllButton.intrinsicContentSize.height)
+            height: max(self.titleLabel.intrinsicContentSize.height, showAllButtonHeight)
         )
     }
 

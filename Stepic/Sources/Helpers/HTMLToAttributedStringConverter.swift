@@ -2,7 +2,8 @@ import Atributika
 import Foundation
 
 protocol HTMLToAttributedStringConverterProtocol {
-    func convert(htmlString: String) -> NSAttributedString
+    func convertToAttributedText(htmlString: String) -> AttributedTextProtocol
+    func convertToAttributedString(htmlString: String) -> NSAttributedString
 }
 
 final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProtocol {
@@ -12,6 +13,10 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
         TagTransformer(tagName: "p", tagType: .end, replaceValue: "\n")
     ]
 
+    static let defaultLinkStyle = Style("a")
+        .foregroundColor(.blue, .normal)
+        .foregroundColor(.stepikPrimaryText, .highlighted)
+
     static func defaultTagStyles(fontSize: CGFloat) -> [Style] {
         [
             Style("b").font(.boldSystemFont(ofSize: fontSize)),
@@ -19,7 +24,8 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
             Style("i").font(.italicSystemFont(ofSize: fontSize)),
             Style("em").font(.italicSystemFont(ofSize: fontSize)),
             Style("strike").strikethroughStyle(NSUnderlineStyle.single),
-            Style("p").font(.systemFont(ofSize: fontSize))
+            Style("p").font(.systemFont(ofSize: fontSize)),
+            Self.defaultLinkStyle
         ]
     }
 
@@ -28,12 +34,6 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
     private let tagTransformers: [TagTransformer]
 
     private var allStyle: Style { Style.font(self.font) }
-
-    private var linkStyle: Style {
-        Style("a")
-            .foregroundColor(.blue, .normal)
-            .foregroundColor(.stepikPrimaryText, .highlighted)
-    }
 
     init(
         font: UIFont,
@@ -54,11 +54,19 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
         self.tagTransformers = tagTransformers
     }
 
-    func convert(htmlString: String) -> NSAttributedString {
+    func convertToAttributedText(htmlString: String) -> AttributedTextProtocol {
         htmlString
             .style(tags: self.tagStyles, transformers: self.tagTransformers)
-            .styleLinks(self.linkStyle)
+            .styleLinks(Self.defaultLinkStyle)
             .styleAll(self.allStyle)
+    }
+
+    func convertToAttributedString(htmlString: String) -> NSAttributedString {
+        guard let attributedText = self.convertToAttributedText(htmlString: htmlString) as? AttributedText else {
+            return NSAttributedString()
+        }
+
+        return attributedText
             .attributedString
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }

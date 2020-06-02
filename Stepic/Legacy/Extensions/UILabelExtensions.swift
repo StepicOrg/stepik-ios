@@ -12,7 +12,7 @@ import UIKit
 extension UILabel {
     func setTextWithHTMLString(_ htmlText: String, lineSpacing: CGFloat? = nil) {
         let converter = HTMLToAttributedStringConverter(font: self.font)
-        let attributedString = converter.convert(htmlString: htmlText)
+        let attributedString = converter.convertToAttributedString(htmlString: htmlText)
 
         if let lineSpacing = lineSpacing {
             let paragraphStyle = NSMutableParagraphStyle()
