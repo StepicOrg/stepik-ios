@@ -122,11 +122,11 @@ extension User {
     }
 
     var details: String {
-        set(value) {
-            managedDetails = value
-        }
         get {
-             managedDetails ?? "No details"
+            self.managedDetails ?? ""
+        }
+        set {
+            self.managedDetails = newValue
         }
     }
 

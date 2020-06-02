@@ -30,9 +30,9 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
     func presentNavigationControls(response: NewProfile.NavigationControlsPresentation.Response) {
         self.viewController?.displayNavigationControls(
             viewModel: .init(
-                isSettingsAvailable: response.shoouldPresentSettings,
-                isEditProfileAvailable: response.shoouldPresentEditProfile,
-                isShareProfileAvailable: response.shoouldPresentShareProfile
+                isSettingsAvailable: response.shouldPresentSettings,
+                isEditProfileAvailable: response.shouldPresentEditProfile,
+                isShareProfileAvailable: response.shouldPresentShareProfile
             )
         )
     }
@@ -58,6 +58,7 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
         return NewProfileViewModel(
             headerViewModel: headerViewModel,
+            userDetails: user.details,
             formattedUserID: formattedUserID
         )
     }

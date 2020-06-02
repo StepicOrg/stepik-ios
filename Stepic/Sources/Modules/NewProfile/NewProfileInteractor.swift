@@ -6,6 +6,7 @@ protocol NewProfileInteractorProtocol {
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request)
     func doProfileShareAction(request: NewProfile.ProfileShareAction.Request)
     func doProfileEditAction(request: NewProfile.ProfileEditAction.Request)
+    func doSubmodulesRegistration(request: NewProfile.SubmoduleRegistration.Request)
 }
 
 final class NewProfileInteractor: NewProfileInteractorProtocol {
@@ -15,9 +16,16 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private let provider: NewProfileProviderProtocol
     private let userAccountService: UserAccountServiceProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
-    private var currentUser: User?
+    private var currentUser: User? {
+        didSet {
+            self.pushCurrentUserToSubmodules(Array(self.submodules.values))
+        }
+    }
     private var currentProfile: Profile?
+
+    private var submodules: [UniqueIdentifierType: NewProfileSubmoduleProtocol] = [:]
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -42,13 +50,17 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         presenter: NewProfilePresenterProtocol,
         provider: NewProfileProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
-        networkReachabilityService: NetworkReachabilityServiceProtocol
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presentationDescription = presentationDescription
         self.presenter = presenter
         self.provider = provider
         self.userAccountService = userAccountService
         self.networkReachabilityService = networkReachabilityService
+
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
 
         self.addObservers()
     }
@@ -127,6 +139,13 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         }
     }
 
+    func doSubmodulesRegistration(request: NewProfile.SubmoduleRegistration.Request) {
+        for (uniqueIdentifier, submodule) in request.submodules {
+            self.submodules[uniqueIdentifier] = submodule
+        }
+        self.pushCurrentUserToSubmodules(Array(self.submodules.values))
+    }
+
     // MARK: Private API
 
     private func fetchCurrentUser() -> Promise<NewProfile.ProfileLoad.Response> {
@@ -168,8 +187,8 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                 }
             }.catch { error in
                 if case NewProfileProvider.Error.networkFetchFailed = error,
-                    self.didLoadFromCache,
-                    self.currentUser != nil {
+                   self.didLoadFromCache,
+                   self.currentUser != nil {
                     // Offline mode: we already presented cached profile, but network request failed
                     seal.fulfill(.init(result: .failure(Error.networkFetchFailed)))
                 } else {
@@ -212,11 +231,19 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private func updateNavigationControlsBasedOnCurrentState() {
         self.presenter.presentNavigationControls(
             response: .init(
-                shoouldPresentSettings: self.isCurrentUserProfile,
-                shoouldPresentEditProfile: self.isCurrentUserProfile && self.currentProfile != nil,
-                shoouldPresentShareProfile: self.currentUser != nil
+                shouldPresentSettings: self.isCurrentUserProfile,
+                shouldPresentEditProfile: self.isCurrentUserProfile && self.currentProfile != nil,
+                shouldPresentShareProfile: self.currentUser != nil
             )
         )
+    }
+
+    private func pushCurrentUserToSubmodules(_ submodules: [NewProfileSubmoduleProtocol]) {
+        if let currentUser = self.currentUser {
+            for submodule in submodules {
+                submodule.update(with: currentUser, isOnline: self.isOnline)
+            }
+        }
     }
 
     // MARK: Enums
@@ -296,5 +323,35 @@ extension NewProfileInteractor: SettingsOutputProtocol {
         self.updateNavigationControlsBasedOnCurrentState()
         // Present anonymous state.
         self.presenter.presentProfile(response: .init(result: .failure(Error.unauthorized)))
+    }
+}
+
+// MARK: - NewProfileInteractor: DataBackUpdateServiceDelegate -
+
+extension NewProfileInteractor: DataBackUpdateServiceDelegate {
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport update: DataBackUpdateDescription,
+        for target: DataBackUpdateTarget
+    ) {}
+
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport refreshedTarget: DataBackUpdateTarget
+    ) {
+        if case .profile(let profile) = refreshedTarget {
+            guard self.isCurrentUserProfile, let currentUser = self.currentUser else {
+                return
+            }
+
+            self.currentProfile = profile
+
+            currentUser.firstName = profile.firstName
+            currentUser.lastName = profile.lastName
+            currentUser.bio = profile.shortBio
+            currentUser.details = profile.details
+
+            self.presenter.presentProfile(response: .init(result: .success(currentUser)))
+        }
     }
 }

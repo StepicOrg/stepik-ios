@@ -1,7 +1,13 @@
 import Foundation
 
 enum NewProfile {
-    // MARK: Common structs
+    // MARK: Common types
+
+    enum Submodule: String, UniqueIdentifiable {
+        case details
+
+        var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
+    }
 
     // Use it for module initializing
     struct PresentationDescription {
@@ -28,6 +34,13 @@ enum NewProfile {
         }
     }
 
+    /// Register submodules
+    enum SubmoduleRegistration {
+        struct Request {
+            var submodules: [UniqueIdentifierType: NewProfileSubmoduleProtocol]
+        }
+    }
+
     /// Try to set online mode
     enum OnlineModeReset {
         struct Request {}
@@ -36,9 +49,9 @@ enum NewProfile {
     /// Update navigation bar button items
     enum NavigationControlsPresentation {
         struct Response {
-            let shoouldPresentSettings: Bool
-            let shoouldPresentEditProfile: Bool
-            let shoouldPresentShareProfile: Bool
+            let shouldPresentSettings: Bool
+            let shouldPresentEditProfile: Bool
+            let shouldPresentShareProfile: Bool
         }
 
         struct ViewModel {

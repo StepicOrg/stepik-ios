@@ -978,6 +978,8 @@ NewProfileRatingCourses1 = "%@ Course";
 NewProfileRatingCourses234 = "%@ Courses";
 NewProfileRatingCourses567890 = "%@ Courses";
 
+NewProfileBlockTitleDetails = "Details";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
