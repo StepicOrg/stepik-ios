@@ -158,7 +158,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
-            let shouldShowProfileDetails = !viewModel.userAboutText.isEmpty
+            let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
             self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
         }
     }
@@ -209,7 +209,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case .visible(let viewModel):
             if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
                let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
-                profileDetailsViewController.newProfileDetailsView?.text = viewModel.userAboutText
+                profileDetailsViewController.newProfileDetailsView?.text = viewModel.userDetails
             } else {
                 let profileDetailsAssembly = NewProfileDetailsAssembly()
                 let profileDetailsViewController = profileDetailsAssembly.makeModule()

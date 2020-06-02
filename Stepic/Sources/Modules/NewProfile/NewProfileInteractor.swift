@@ -16,6 +16,7 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private let provider: NewProfileProviderProtocol
     private let userAccountService: UserAccountServiceProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var currentUser: User? {
         didSet {
@@ -49,13 +50,17 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         presenter: NewProfilePresenterProtocol,
         provider: NewProfileProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
-        networkReachabilityService: NetworkReachabilityServiceProtocol
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presentationDescription = presentationDescription
         self.presenter = presenter
         self.provider = provider
         self.userAccountService = userAccountService
         self.networkReachabilityService = networkReachabilityService
+
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
 
         self.addObservers()
     }
@@ -318,5 +323,35 @@ extension NewProfileInteractor: SettingsOutputProtocol {
         self.updateNavigationControlsBasedOnCurrentState()
         // Present anonymous state.
         self.presenter.presentProfile(response: .init(result: .failure(Error.unauthorized)))
+    }
+}
+
+// MARK: - NewProfileInteractor: DataBackUpdateServiceDelegate -
+
+extension NewProfileInteractor: DataBackUpdateServiceDelegate {
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport update: DataBackUpdateDescription,
+        for target: DataBackUpdateTarget
+    ) {}
+
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport refreshedTarget: DataBackUpdateTarget
+    ) {
+        if case .profile(let profile) = refreshedTarget {
+            guard self.isCurrentUserProfile, let currentUser = self.currentUser else {
+                return
+            }
+
+            self.currentProfile = profile
+
+            currentUser.firstName = profile.firstName
+            currentUser.lastName = profile.lastName
+            currentUser.bio = profile.shortBio
+            currentUser.details = profile.details
+
+            self.presenter.presentProfile(response: .init(result: .success(currentUser)))
+        }
     }
 }

@@ -11,6 +11,6 @@ struct NewProfileHeaderViewModel {
 struct NewProfileViewModel {
     let headerViewModel: NewProfileHeaderViewModel
 
-    let userAboutText: String
+    let userDetails: String
     let formattedUserID: String
 }

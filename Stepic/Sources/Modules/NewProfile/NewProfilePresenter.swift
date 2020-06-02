@@ -58,7 +58,7 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
         return NewProfileViewModel(
             headerViewModel: headerViewModel,
-            userAboutText: user.managedDetails ?? "",
+            userDetails: user.details,
             formattedUserID: formattedUserID
         )
     }

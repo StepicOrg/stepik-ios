@@ -19,12 +19,21 @@ final class NewProfileAssembly: Assembly {
             profilesNetworkService: ProfilesNetworkService(profilesAPI: ProfilesAPI())
         )
         let presenter = NewProfilePresenter()
+
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+
         let interactor = NewProfileInteractor(
             presentationDescription: self.presentationDescription,
             presenter: presenter,
             provider: provider,
             userAccountService: UserAccountService(),
-            networkReachabilityService: NetworkReachabilityService()
+            networkReachabilityService: NetworkReachabilityService(),
+            dataBackUpdateService: dataBackUpdateService
         )
         let viewController = NewProfileViewController(interactor: interactor)
 
