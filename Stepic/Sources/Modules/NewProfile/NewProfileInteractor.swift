@@ -168,8 +168,8 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                 }
             }.catch { error in
                 if case NewProfileProvider.Error.networkFetchFailed = error,
-                    self.didLoadFromCache,
-                    self.currentUser != nil {
+                   self.didLoadFromCache,
+                   self.currentUser != nil {
                     // Offline mode: we already presented cached profile, but network request failed
                     seal.fulfill(.init(result: .failure(Error.networkFetchFailed)))
                 } else {
@@ -212,9 +212,9 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private func updateNavigationControlsBasedOnCurrentState() {
         self.presenter.presentNavigationControls(
             response: .init(
-                shoouldPresentSettings: self.isCurrentUserProfile,
-                shoouldPresentEditProfile: self.isCurrentUserProfile && self.currentProfile != nil,
-                shoouldPresentShareProfile: self.currentUser != nil
+                shouldPresentSettings: self.isCurrentUserProfile,
+                shouldPresentEditProfile: self.isCurrentUserProfile && self.currentProfile != nil,
+                shouldPresentShareProfile: self.currentUser != nil
             )
         )
     }

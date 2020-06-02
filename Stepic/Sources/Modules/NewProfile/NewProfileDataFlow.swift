@@ -36,9 +36,9 @@ enum NewProfile {
     /// Update navigation bar button items
     enum NavigationControlsPresentation {
         struct Response {
-            let shoouldPresentSettings: Bool
-            let shoouldPresentEditProfile: Bool
-            let shoouldPresentShareProfile: Bool
+            let shouldPresentSettings: Bool
+            let shouldPresentEditProfile: Bool
+            let shouldPresentShareProfile: Bool
         }
 
         struct ViewModel {
