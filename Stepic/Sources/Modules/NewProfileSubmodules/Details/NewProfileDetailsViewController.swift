@@ -1,8 +1,12 @@
 import UIKit
 
 final class NewProfileDetailsAssembly: Assembly {
+    var moduleInput: NewProfileSubmoduleProtocol?
+
     func makeModule() -> UIViewController {
-        NewProfileDetailsViewController()
+        let viewController = NewProfileDetailsViewController()
+        self.moduleInput = viewController
+        return viewController
     }
 }
 

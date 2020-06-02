@@ -7,7 +7,7 @@ extension NewProfileBlockContainerView {
         var backgroundColor = UIColor.stepikBackground
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        var contentViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         let separatorViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
 }

@@ -34,6 +34,13 @@ enum NewProfile {
         }
     }
 
+    /// Register submodules
+    enum SubmoduleRegistration {
+        struct Request {
+            var submodules: [UniqueIdentifierType: NewProfileSubmoduleProtocol]
+        }
+    }
+
     /// Try to set online mode
     enum OnlineModeReset {
         struct Request {}

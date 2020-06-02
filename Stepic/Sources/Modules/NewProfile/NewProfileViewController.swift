@@ -230,6 +230,12 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
                         type: NewProfile.Submodule.details
                     )
                 )
+
+                if let moduleInput = profileDetailsAssembly.moduleInput {
+                    self.interactor.doSubmodulesRegistration(
+                        request: .init(submodules: [NewProfile.Submodule.details.uniqueIdentifier: moduleInput])
+                    )
+                }
             }
         case .hidden:
             if let submodule = self.getSubmodule(type: NewProfile.Submodule.details) {

@@ -4,13 +4,19 @@ import UIKit
 extension NewProfileView {
     struct Appearance {
         let backgroundColor = UIColor.stepikGroupedBackground
+
+        let stackViewSpacing: CGFloat = 20
     }
 }
 
 final class NewProfileView: UIView {
     let appearance: Appearance
 
-    private lazy var scrollableStackView = ScrollableStackView(orientation: .vertical)
+    private lazy var scrollableStackView: ScrollableStackView = {
+        let stackView = ScrollableStackView(orientation: .vertical)
+        stackView.spacing = self.appearance.stackViewSpacing
+        return stackView
+    }()
 
     private lazy var headerView = NewProfileHeaderView()
 

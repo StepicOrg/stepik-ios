@@ -6,6 +6,7 @@ protocol NewProfileInteractorProtocol {
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request)
     func doProfileShareAction(request: NewProfile.ProfileShareAction.Request)
     func doProfileEditAction(request: NewProfile.ProfileEditAction.Request)
+    func doSubmodulesRegistration(request: NewProfile.SubmoduleRegistration.Request)
 }
 
 final class NewProfileInteractor: NewProfileInteractorProtocol {
@@ -16,8 +17,14 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private let userAccountService: UserAccountServiceProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
 
-    private var currentUser: User?
+    private var currentUser: User? {
+        didSet {
+            self.pushCurrentUserToSubmodules(Array(self.submodules.values))
+        }
+    }
     private var currentProfile: Profile?
+
+    private var submodules: [UniqueIdentifierType: NewProfileSubmoduleProtocol] = [:]
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -127,6 +134,13 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         }
     }
 
+    func doSubmodulesRegistration(request: NewProfile.SubmoduleRegistration.Request) {
+        for (uniqueIdentifier, submodule) in request.submodules {
+            self.submodules[uniqueIdentifier] = submodule
+        }
+        self.pushCurrentUserToSubmodules(Array(self.submodules.values))
+    }
+
     // MARK: Private API
 
     private func fetchCurrentUser() -> Promise<NewProfile.ProfileLoad.Response> {
@@ -217,6 +231,14 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                 shouldPresentShareProfile: self.currentUser != nil
             )
         )
+    }
+
+    private func pushCurrentUserToSubmodules(_ submodules: [NewProfileSubmoduleProtocol]) {
+        if let currentUser = self.currentUser {
+            for submodule in submodules {
+                submodule.update(with: currentUser, isOnline: self.isOnline)
+            }
+        }
     }
 
     // MARK: Enums
