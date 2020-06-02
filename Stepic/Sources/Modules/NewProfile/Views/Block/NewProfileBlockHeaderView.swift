@@ -1,6 +1,11 @@
 import SnapKit
 import UIKit
 
+protocol NewProfileBlockHeaderViewProtocol: AnyObject {
+    var titleText: String? { get set }
+    var onShowAllButtonClick: (() -> Void)? { get set }
+}
+
 extension NewProfileBlockHeaderView {
     struct Appearance {
         let titleLabelColor = UIColor.stepikSystemPrimaryText
@@ -10,7 +15,7 @@ extension NewProfileBlockHeaderView {
     }
 }
 
-final class NewProfileBlockHeaderView: UIControl {
+final class NewProfileBlockHeaderView: UIControl, NewProfileBlockHeaderViewProtocol {
     let appearance: Appearance
 
     private lazy var titleLabel: UILabel = {
