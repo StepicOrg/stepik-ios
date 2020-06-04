@@ -7,9 +7,7 @@
 //
 
 import Amplitude_iOS
-import Crashlytics
-import Fabric
-import FirebaseCore
+import Firebase
 import UIKit
 import YandexMobileMetrica
 
@@ -18,8 +16,6 @@ final class AnalyticsHelper {
 
     func setupAnalytics() {
         FirebaseApp.configure()
-
-        Fabric.with([Crashlytics.self])
 
         if let config = YMMYandexMetricaConfiguration(apiKey: Tokens.shared.appMetricaToken) {
             YMMYandexMetrica.activate(with: config)

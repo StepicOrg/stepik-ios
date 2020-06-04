@@ -7,8 +7,8 @@
 //
 
 import Amplitude_iOS
-import Crashlytics
 import FirebaseAnalytics
+import FirebaseCrashlytics
 import Foundation
 import YandexMobileMetrica
 
@@ -29,7 +29,9 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     }
 
     private func setCrashlyticsProperty(key: String, value: Any?) {
-        Crashlytics.sharedInstance().setObjectValue(value, forKey: key)
+        if let value = value {
+            Crashlytics.crashlytics().setCustomValue(value, forKey: key)
+        }
     }
 
     private func incrementAmplitudeProperty(key: String, value: Int = 1) {
