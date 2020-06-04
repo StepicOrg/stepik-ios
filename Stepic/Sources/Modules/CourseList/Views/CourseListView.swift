@@ -7,6 +7,9 @@ extension CourseListView {
         let layoutMinimumInteritemSpacing: CGFloat = 16.0
         let layoutItemHeight: CGFloat = 160.0
 
+        let verticalLayoutMinimumItemWidth: CGFloat = 288
+        let horizontalLayoutMinimumItemWidth: CGFloat = 276
+
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
 
@@ -78,11 +81,13 @@ class CourseListView: UIView {
     }
 
     func updateItemSize(_ itemSize: CGSize) {
-        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
-           layout.itemSize != itemSize {
-            layout.itemSize = itemSize
-            self.collectionView.collectionViewLayout.invalidateLayout()
+        guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
+              layout.itemSize != itemSize else {
+            return
         }
+
+        layout.itemSize = itemSize
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
@@ -94,6 +99,37 @@ class CourseListView: UIView {
 
     private func updateViewColor() {
         self.backgroundColor = self.getBackgroundColor(for: self.colorMode)
+    }
+
+    fileprivate func calculateAdaptiveLayoutColumnAttributes(
+        minimumColumnWidth: CGFloat,
+        columnHorizontalInsets: CGFloat,
+        containerHorizontalInsets: CGFloat = 0
+    ) -> (columnsCount: Int, columnWidth: CGFloat) {
+        func calculateColumnWidth(columnsCount: Int) -> CGFloat {
+            let totalWidth = self.bounds.width
+                - columnHorizontalInsets * CGFloat(columnsCount + 1)
+                - containerHorizontalInsets
+            return (totalWidth / CGFloat(columnsCount)).rounded(.down)
+        }
+
+        var columnsCount = 0
+        var columnWidth = CGFloat.greatestFiniteMagnitude
+
+        while columnWidth >= minimumColumnWidth {
+            columnsCount += 1
+            columnWidth = calculateColumnWidth(columnsCount: columnsCount)
+        }
+
+        if columnWidth < minimumColumnWidth {
+            columnsCount -= 1
+            columnWidth = calculateColumnWidth(columnsCount: columnsCount)
+        }
+
+        columnsCount = max(1, columnsCount)
+        columnWidth = max(minimumColumnWidth, columnWidth)
+
+        return (columnsCount, columnWidth)
     }
 
     // MARK: - ColorMode
@@ -171,10 +207,16 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
 
 // Subclasses for two orientations
 
-final class VerticalCourseListView: CourseListView,
-                                    UICollectionViewDelegate,
-                                    UICollectionViewDataSource {
-    private let columnsCount: Int
+final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource {
+    static let adaptiveColumnsCount: Int = -1
+
+    private var columnsCount: Int {
+        didSet {
+            self.verticalCourseFlowLayout.columnsCount = self.columnsCount
+        }
+    }
+    private let isAdaptiveColumnsCount: Bool
+
     // We should use proxy cause we are using willDisplay method in delegate for pagination
     // and some methods to show footer/header in data source
     // swiftlint:disable weak_delegate
@@ -216,7 +258,8 @@ final class VerticalCourseListView: CourseListView,
         isHeaderViewHidden: Bool,
         appearance: Appearance = CourseListView.Appearance()
     ) {
-        self.columnsCount = columnsCount
+        self.columnsCount = columnsCount == Self.adaptiveColumnsCount ? 1 : columnsCount
+        self.isAdaptiveColumnsCount = columnsCount == Self.adaptiveColumnsCount
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
         self.isHeaderViewHidden = isHeaderViewHidden
@@ -242,8 +285,19 @@ final class VerticalCourseListView: CourseListView,
     }
 
     override func calculateItemSize() -> CGSize {
-        let width = self.bounds.width - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
-        return CGSize(width: width / CGFloat(self.columnsCount), height: self.appearance.layoutItemHeight)
+        if self.isAdaptiveColumnsCount {
+            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
+                minimumColumnWidth: self.appearance.verticalLayoutMinimumItemWidth,
+                columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing
+            )
+            self.columnsCount = columnsCount
+
+            return CGSize(width: columnWidth, height: self.appearance.layoutItemHeight)
+        } else {
+            let width = self.bounds.width
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+            return CGSize(width: width / CGFloat(self.columnsCount), height: self.appearance.layoutItemHeight)
+        }
     }
 
     private func updatePagination() {
@@ -309,24 +363,26 @@ final class VerticalCourseListView: CourseListView,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            let view: CollectionViewReusableView = collectionView
-                .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionFooter,
-                    for: indexPath
-                )
+            let view: CollectionViewReusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                for: indexPath
+            )
+
             if let footerView = self.paginationView {
                 view.attachView(footerView)
             }
+
             return view
         } else if kind == UICollectionView.elementKindSectionHeader {
-            let view: CollectionViewReusableView = collectionView
-                .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionHeader,
-                    for: indexPath
-                )
+            let view: CollectionViewReusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                for: indexPath
+            )
+
             if let headerView = self.headerView {
                 view.attachView(headerView)
             }
+
             return view
         }
 
@@ -335,8 +391,15 @@ final class VerticalCourseListView: CourseListView,
 }
 
 final class HorizontalCourseListView: CourseListView {
-    private let columnsCount: Int
+    static let adaptiveColumnsCount: Int = -1
+
     private let rowsCount: Int
+    private var columnsCount: Int {
+        didSet {
+            self.horizontalCourseFlowLayout.columnsCount = self.columnsCount
+        }
+    }
+    private let isAdaptiveColumnsCount: Bool
 
     private lazy var horizontalCourseFlowLayout: HorizontalCourseListFlowLayout = {
         let layout = HorizontalCourseListFlowLayout(
@@ -362,8 +425,9 @@ final class HorizontalCourseListView: CourseListView {
         viewDelegate: CourseListViewDelegate,
         appearance: Appearance = CourseListView.Appearance()
     ) {
-        self.columnsCount = columnsCount
         self.rowsCount = rowsCount
+        self.columnsCount = columnsCount == Self.adaptiveColumnsCount ? 1 : columnsCount
+        self.isAdaptiveColumnsCount = columnsCount == Self.adaptiveColumnsCount
         super.init(
             frame: frame,
             colorMode: colorMode,
@@ -383,13 +447,24 @@ final class HorizontalCourseListView: CourseListView {
     }
 
     override func calculateItemSize() -> CGSize {
-        let width = self.bounds.width
-            - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
-            - self.appearance.horizontalLayoutNextPageWidth
-        return CGSize(
-            width: width / CGFloat(self.columnsCount),
-            height: self.appearance.layoutItemHeight
-        )
+        if self.isAdaptiveColumnsCount {
+            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
+                minimumColumnWidth: self.appearance.horizontalLayoutMinimumItemWidth,
+                columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing,
+                containerHorizontalInsets: self.appearance.horizontalLayoutNextPageWidth
+            )
+            self.columnsCount = columnsCount
+
+            return CGSize(width: columnWidth, height: self.appearance.layoutItemHeight)
+        } else {
+            let width = self.bounds.width
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+                - self.appearance.horizontalLayoutNextPageWidth
+            return CGSize(
+                width: width / CGFloat(self.columnsCount),
+                height: self.appearance.layoutItemHeight
+            )
+        }
     }
 }
 
