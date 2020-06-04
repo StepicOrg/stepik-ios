@@ -280,7 +280,6 @@
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
 		08D1EF741BB5636700BE84E6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
-		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
 		08D2F72D2122E4B5009BA052 /* StoryNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */; };
 		08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
@@ -567,6 +566,7 @@
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
+		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
 		2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */; };
 		2CB1C3AF24008D4A001DA83E /* UserCodeRunsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */; };
 		2CB1C3B124009339001DA83E /* UserCodeRunsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3B024009339001DA83E /* UserCodeRunsNetworkService.swift */; };
@@ -1514,7 +1514,6 @@
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D1EF721BB5636700BE84E6 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryNavigationDelegate.swift; sourceTree = "<group>"; };
 		08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_code_quiz_v17.xcdatamodel; sourceTree = "<group>"; };
@@ -1825,6 +1824,7 @@
 		2CAB3718219EF332007A524A /* Model_course_time_to_complete_v26.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_time_to_complete_v26.xcdatamodel; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
+		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeRun.swift; sourceTree = "<group>"; };
 		2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeRunsAPI.swift; sourceTree = "<group>"; };
@@ -2797,7 +2797,7 @@
 				08A7B0E71EB340F500C1BA71 /* Auth.plist */,
 				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
 				2CBC4C051F1E4A1300FE96C4 /* Config.plist */,
-				08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */,
+				2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */,
 				08DE94151B8C58AC00D278AB /* Info.plist */,
 				2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */,
 				0869F6D71CE3684000F8A6DB /* default_sound.wav */,
@@ -6465,10 +6465,10 @@
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
-				08343B1A1BF5EC7F00370FC1 /* Fabric Script */,
 				08983F241F3E4112008199B1 /* SwiftLint Script */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				D25EB23E484464AD999FE2C5 /* [CP] Embed Pods Frameworks */,
+				08343B1A1BF5EC7F00370FC1 /* FirebaseCrashlytics Script */,
 			);
 			buildRules = (
 			);
@@ -6586,7 +6586,6 @@
 				2CD99DD622DCE4D500628224 /* overlay_hard.png in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
-				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */,
 				08CBA31D1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */,
@@ -6664,6 +6663,7 @@
 				087D96B91EBB7C7700059408 /* Tokens.plist in Resources */,
 				2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
+				2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */,
 				0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */,
 				62E9815A6AAC6C12E9B9D862 /* ProfileHeaderInfoView.xib in Resources */,
@@ -6699,19 +6699,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		08343B1A1BF5EC7F00370FC1 /* Fabric Script */ = {
+		08343B1A1BF5EC7F00370FC1 /* FirebaseCrashlytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
-			name = "Fabric Script";
+			name = "FirebaseCrashlytics Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		08983F241F3E4112008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8413,7 +8415,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 212;
+				CURRENT_PROJECT_VERSION = 216;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -8443,7 +8445,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 212;
+				CURRENT_PROJECT_VERSION = 216;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;

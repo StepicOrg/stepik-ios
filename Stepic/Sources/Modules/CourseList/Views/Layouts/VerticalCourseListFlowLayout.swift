@@ -12,9 +12,13 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
     var columnsCount: Int
 
     override var contentWidth: CGFloat {
-        let allItemsWidth = self.itemSize.width * CGFloat(self.columnsCount)
-        let flowInsets = 2 * self.minimumInteritemSpacing
-        return allItemsWidth + flowInsets
+        guard let collectionView = self.collectionView else {
+            return 0
+        }
+
+        let contentInsets = collectionView.contentInset.left + collectionView.contentInset.right
+
+        return collectionView.bounds.width - contentInsets
     }
 
     private var _contentHeight: CGFloat = 0
