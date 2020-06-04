@@ -105,11 +105,11 @@ final class NukeImageDataProvider: ImageDataProvider {
     }
 
     var data: Data? {
-        guard let image = self.imageCache[self.imageRequest] else {
+        guard let imageContainer = self.imageCache[self.imageRequest] else {
             return nil
         }
 
-        return image.jpegData(compressionQuality: self.compressionQuality)
+        return imageContainer.image.jpegData(compressionQuality: self.compressionQuality)
     }
 
     var contentURL: URL? { self.imageRequest.urlRequest.url }
