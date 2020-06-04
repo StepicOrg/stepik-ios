@@ -1,5 +1,5 @@
 # This is the minimum version number required.
-fastlane_version "2.148.1"
+fastlane_version "2.149.1"
 
 default_platform :ios
 
