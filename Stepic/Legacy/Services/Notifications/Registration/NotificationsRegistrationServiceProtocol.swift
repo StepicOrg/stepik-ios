@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 /// The centralized point for registration with Apple Push Notifications service (APNs).
 protocol NotificationsRegistrationServiceProtocol: AnyObject {
@@ -53,6 +54,9 @@ protocol NotificationsRegistrationServiceProtocol: AnyObject {
     ///   - registrationToken: An Firebase Messaging scoped token for the firebase app.
     ///   - forceCreation: Controls whether to create a new device instance or get cached one.
     func registerDevice(_ registrationToken: String, forceCreation: Bool)
+
+    /// Unregister for all remote notifications received via Apple Push Notification service.
+    func unregisterForRemoteNotifications() -> Guarantee<Void>
 }
 
 extension NotificationsRegistrationServiceProtocol {

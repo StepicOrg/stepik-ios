@@ -12,6 +12,7 @@ extension NSNotification.Name {
     static let badgeUpdated = NSNotification.Name("badgeUpdated")
 }
 
+@available(*, deprecated, message: "Legacy class")
 final class NotificationsBadgesManager {
     static let shared = NotificationsBadgesManager()
 
