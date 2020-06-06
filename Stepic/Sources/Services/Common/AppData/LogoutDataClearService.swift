@@ -6,6 +6,7 @@ protocol LogoutDataClearServiceProtocol: AnyObject {
 }
 
 final class LogoutDataClearService: LogoutDataClearServiceProtocol {
+    private let downloadsDeletionService: DownloadsDeletionServiceProtocol
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let notificationsService: NotificationsService
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
@@ -21,6 +22,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let semaphore = DispatchSemaphore(value: 1)
 
     init(
+        downloadsDeletionService: DownloadsDeletionServiceProtocol = DownloadsDeletionService(),
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(),
         notificationsService: NotificationsService = NotificationsService(),
         spotlightIndexingService: SpotlightIndexingServiceProtocol = SpotlightIndexingService.shared,
@@ -29,6 +31,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         coreDataHelper: CoreDataHelper = .shared,
         deviceDefaults: DeviceDefaults = .sharedDefaults
     ) {
+        self.downloadsDeletionService = downloadsDeletionService
         self.notificationsRegistrationService = notificationsRegistrationService
         self.notificationsService = notificationsService
         self.spotlightIndexingService = spotlightIndexingService
@@ -57,7 +60,11 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     }
 
     private func clearData() -> Guarantee<Void> {
-        self.notificationsRegistrationService.unregisterForRemoteNotifications().done {
+        firstly { () -> Guarantee<Void> in
+            self.notificationsRegistrationService.unregisterForRemoteNotifications()
+        }.then { () -> Guarantee<Void> in
+            self.downloadsDeletionService.deleteAllDownloads()
+        }.done {
             self.clearDatabase()
 
             self.analyticsUserProperties.clearUserDependentProperties()

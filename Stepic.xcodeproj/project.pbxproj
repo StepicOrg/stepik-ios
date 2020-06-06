@@ -416,6 +416,7 @@
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C26BF0A240810A3000EE23C /* AttemptsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26BF09240810A3000EE23C /* AttemptsRepository.swift */; };
+		2C273266248BB60500BD065F /* DownloadsDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C273265248BB60500BD065F /* DownloadsDeletionService.swift */; };
 		2C284DB92474418600669736 /* CoursePaymentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C284DB82474418600669736 /* CoursePaymentsAPI.swift */; };
 		2C284DBB247444DF00669736 /* CoursePaymentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */; };
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
@@ -1663,6 +1664,7 @@
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C26BF09240810A3000EE23C /* AttemptsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsRepository.swift; sourceTree = "<group>"; };
+		2C273265248BB60500BD065F /* DownloadsDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsDeletionService.swift; sourceTree = "<group>"; };
 		2C284DB82474418600669736 /* CoursePaymentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsAPI.swift; sourceTree = "<group>"; };
 		2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsNetworkService.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
@@ -2685,6 +2687,52 @@
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		2C273261248BB3FB00BD065F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */,
+				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
+				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
+				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
+				2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */,
+				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
+				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
+				2C273264248BB4CC00BD065F /* AppData */,
+				2C273263248BB49500BD065F /* CodeEditor */,
+				2C273262248BB46300BD065F /* ContentLanguage */,
+				2CDB95872412C04A00F676A7 /* Spotlight */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2C273262248BB46300BD065F /* ContentLanguage */ = {
+			isa = PBXGroup;
+			children = (
+				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
+				62E9847B46C78DACD9B3EE72 /* ContentLanguageSwitchAvailabilityService.swift */,
+			);
+			path = ContentLanguage;
+			sourceTree = "<group>";
+		};
+		2C273263248BB49500BD065F /* CodeEditor */ = {
+			isa = PBXGroup;
+			children = (
+				2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */,
+				2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */,
+			);
+			path = CodeEditor;
+			sourceTree = "<group>";
+		};
+		2C273264248BB4CC00BD065F /* AppData */ = {
+			isa = PBXGroup;
+			children = (
+				2C273265248BB60500BD065F /* DownloadsDeletionService.swift */,
+				2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */,
+				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
+			);
+			path = AppData;
 			sourceTree = "<group>";
 		};
 		2C284DB7247438F900669736 /* CoursePayment */ = {
@@ -6112,22 +6160,9 @@
 		62E98E0FB32DB9DAC0362672 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */,
-				2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */,
-				2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */,
-				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
-				62E9847B46C78DACD9B3EE72 /* ContentLanguageSwitchAvailabilityService.swift */,
-				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
-				2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */,
-				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
-				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
-				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
-				2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */,
-				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
-				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
+				2C273261248BB3FB00BD065F /* Common */,
 				62E986D1988A3445F3416404 /* Managers */,
 				62E98A358EF538D7F89D10F1 /* Models */,
-				2CDB95872412C04A00F676A7 /* Spotlight */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -7061,6 +7096,7 @@
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */,
 				08FA62242121BF1200F00275 /* ShrinkDismissAnimationController.swift in Sources */,
+				2C273266248BB60500BD065F /* DownloadsDeletionService.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */,
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
