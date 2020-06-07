@@ -21,6 +21,10 @@ extension VideoURL {
         NSEntityDescription.entity(forEntityName: "VideoURL", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<VideoURL> {
+        NSFetchRequest<VideoURL>(entityName: "VideoURL")
+    }
+
     convenience init() {
         self.init(entity: VideoURL.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

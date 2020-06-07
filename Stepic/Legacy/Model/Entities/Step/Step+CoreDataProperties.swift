@@ -38,6 +38,10 @@ extension Step {
         NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Step> {
+        NSFetchRequest<Step>(entityName: "Step")
+    }
+
     convenience init() {
         self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

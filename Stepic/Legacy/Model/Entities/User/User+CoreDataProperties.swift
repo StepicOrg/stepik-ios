@@ -35,7 +35,7 @@ extension User {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
 
-    static func fetchRequest() -> NSFetchRequest<User> {
+    static var fetchRequest: NSFetchRequest<User> {
         NSFetchRequest<User>(entityName: "User")
     }
 

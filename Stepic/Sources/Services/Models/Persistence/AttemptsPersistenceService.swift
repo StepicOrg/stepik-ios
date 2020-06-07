@@ -5,7 +5,10 @@ import PromiseKit
 protocol AttemptsPersistenceServiceProtocol: AnyObject {
     func fetchStepAttempts(stepID: Step.IdType) -> Guarantee<[AttemptEntity]>
     func fetch(ids: [Attempt.IdType]) -> Guarantee<[AttemptEntity]>
+
     func save(attempts: [Attempt]) -> Guarantee<Void>
+
+    func deleteAll() -> Promise<Void>
 }
 
 final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
@@ -13,8 +16,8 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
     init(
-        managedObjectContext: NSManagedObjectContext,
-        stepsPersistenceService: StepsPersistenceServiceProtocol
+        managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context,
+        stepsPersistenceService: StepsPersistenceServiceProtocol = StepsPersistenceService()
     ) {
         self.managedObjectContext = managedObjectContext
         self.stepsPersistenceService = stepsPersistenceService
@@ -101,6 +104,27 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
         }
     }
 
+    func deleteAll() -> Promise<Void> {
+        Promise { seal in
+            let request: NSFetchRequest<AttemptEntity> = AttemptEntity.fetchRequest
+            self.managedObjectContext.performAndWait {
+                do {
+                    let attempts = try self.managedObjectContext.fetch(request)
+                    for attempt in attempts {
+                        self.managedObjectContext.delete(attempt)
+                    }
+
+                    try? self.managedObjectContext.save()
+
+                    seal.fulfill(())
+                } catch {
+                    print("AttemptsPersistenceService :: failed delete all attempts with error = \(error)")
+                    seal.reject(Error.deleteFailed)
+                }
+            }
+        }
+    }
+
     // MARK: Private API
 
     private func fetchStep(id: Step.IdType) -> Guarantee<Step?> {
@@ -147,5 +171,9 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
                 }
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case deleteFailed
     }
 }

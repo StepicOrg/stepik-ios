@@ -25,6 +25,10 @@ extension Certificate {
         NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Certificate> {
+        NSFetchRequest<Certificate>(entityName: "Certificate")
+    }
+
     convenience init() {
         self.init(entity: Certificate.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

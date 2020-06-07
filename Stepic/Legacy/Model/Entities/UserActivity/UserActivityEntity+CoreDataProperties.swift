@@ -11,7 +11,7 @@ extension UserActivityEntity {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
 
-    static func fetchRequest() -> NSFetchRequest<UserActivityEntity> {
+    static var fetchRequest: NSFetchRequest<UserActivityEntity> {
         NSFetchRequest<UserActivityEntity>(entityName: "UserActivityEntity")
     }
 

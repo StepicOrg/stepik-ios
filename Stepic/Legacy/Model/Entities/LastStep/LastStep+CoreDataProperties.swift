@@ -20,6 +20,10 @@ extension LastStep {
         NSEntityDescription.entity(forEntityName: "LastStep", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<LastStep> {
+        NSFetchRequest<LastStep>(entityName: "LastStep")
+    }
+
     convenience init() {
         self.init(entity: LastStep.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

@@ -49,17 +49,4 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
             ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps) * 100
             : 100.0
     }
-
-    static func deleteAllStoredProgresses() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Progress")
-
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request) as? [Progress]
-            for obj in results ?? [] {
-                CoreDataHelper.shared.deleteFromStore(obj)
-            }
-        } catch {
-            print("\n\n\nCould nnot delete progresses! \n\n\n")
-        }
-    }
 }

@@ -24,6 +24,10 @@ extension Block {
         NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Block> {
+        NSFetchRequest<Block>(entityName: "Block")
+    }
+
     convenience init() {
         self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

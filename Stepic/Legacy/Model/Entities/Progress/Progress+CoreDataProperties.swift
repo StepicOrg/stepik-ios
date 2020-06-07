@@ -30,6 +30,10 @@ extension Progress {
         NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Progress> {
+        NSFetchRequest<Progress>(entityName: "Progress")
+    }
+
     convenience init() {
         self.init(entity: Progress.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
