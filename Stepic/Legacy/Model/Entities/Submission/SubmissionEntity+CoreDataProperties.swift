@@ -19,7 +19,7 @@ extension SubmissionEntity {
         [NSSortDescriptor(key: #keyPath(managedID), ascending: false)]
     }
 
-    static func fetchRequest() -> NSFetchRequest<SubmissionEntity> {
+    static var fetchRequest: NSFetchRequest<SubmissionEntity> {
         NSFetchRequest<SubmissionEntity>(entityName: "SubmissionEntity")
     }
 }

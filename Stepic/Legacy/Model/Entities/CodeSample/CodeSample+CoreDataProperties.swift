@@ -19,6 +19,10 @@ extension CodeSample {
         NSEntityDescription.entity(forEntityName: "CodeSample", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<CodeSample> {
+        NSFetchRequest<CodeSample>(entityName: "CodeSample")
+    }
+
     convenience init() {
         self.init(entity: CodeSample.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

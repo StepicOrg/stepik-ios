@@ -56,18 +56,6 @@ extension Notification {
         }
     }
 
-    static func deleteAll() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request) as? [Notification]
-            for obj in results ?? [] {
-                CoreDataHelper.shared.deleteFromStore(obj)
-            }
-        } catch {
-            print("notification: couldn't delete all notifications!")
-        }
-    }
-
     static func markAllAsRead() {
         let request = NSBatchUpdateRequest(entityName: "Notification")
         request.predicate = NSPredicate(value: true)

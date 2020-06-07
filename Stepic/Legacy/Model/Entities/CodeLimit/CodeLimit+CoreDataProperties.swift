@@ -20,6 +20,10 @@ extension CodeLimit {
         NSEntityDescription.entity(forEntityName: "CodeLimit", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<CodeLimit> {
+        NSFetchRequest<CodeLimit>(entityName: "CodeLimit")
+    }
+
     convenience init() {
         self.init(entity: CodeLimit.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
