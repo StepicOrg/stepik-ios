@@ -1,21 +1,9 @@
-//
-//  UserCourse.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
+import CoreData
 import Foundation
 import SwiftyJSON
 
-final class UserCourse: JSONSerializable {
-    var id: Int = 0
-    var userID: Int = 0
-    var courseID: Int = 0
-    var isFavorite: Bool = false
-    var isArchived: Bool = false
-    var lastViewed: Date = Date()
+final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
+    typealias IdType = Int
 
     var json: JSON {
         [
@@ -25,7 +13,8 @@ final class UserCourse: JSONSerializable {
         ]
     }
 
-    required init(json: JSON) {
+    required convenience init(json: JSON) {
+        self.init()
         self.update(json: json)
     }
 
@@ -36,6 +25,10 @@ final class UserCourse: JSONSerializable {
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
         self.lastViewed = Parser.shared.dateFromTimedateJSON(json[JSONKey.lastViewed.rawValue]) ?? Date()
+    }
+
+    func hasEqualId(json: JSON) -> Bool {
+        self.id == json[JSONKey.id.rawValue].int
     }
 
     enum JSONKey: String {

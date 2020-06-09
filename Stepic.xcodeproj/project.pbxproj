@@ -382,6 +382,7 @@
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */; };
+		2C16A88F248F98C9001E5CBD /* UserCoursePersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16A88E248F98C9001E5CBD /* UserCoursePersistenceService.swift */; };
 		2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */; };
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
 		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
@@ -527,6 +528,7 @@
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
 		2C936D47243D3FCE00A4A4A9 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */; };
+		2C94C7FA248F86C900E4104E /* UserCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */; };
 		2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */; };
 		2C9776EA24222AED0097AEFC /* UIView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
@@ -1638,6 +1640,7 @@
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesNetworkService.swift; sourceTree = "<group>"; };
+		2C16A88E248F98C9001E5CBD /* UserCoursePersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursePersistenceService.swift; sourceTree = "<group>"; };
 		2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailCellView.swift; sourceTree = "<group>"; };
 		2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingServiceFactory.swift; sourceTree = "<group>"; };
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
@@ -1801,6 +1804,8 @@
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationThemeService.swift; sourceTree = "<group>"; };
 		2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
+		2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_v52.xcdatamodel; sourceTree = "<group>"; };
+		2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DynamicColor.swift"; sourceTree = "<group>"; };
 		2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TraitCollection.swift"; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -2929,6 +2934,15 @@
 				085DF8D71C99C49E006809D9 /* VideoRate.swift */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		2C94C7F8248F816400E4104E /* UserCourse */ = {
+			isa = PBXGroup;
+			children = (
+				62E98BB94C146AA2D8A9C2FF /* UserCourse.swift */,
+				2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */,
+			);
+			path = UserCourse;
 			sourceTree = "<group>";
 		};
 		2C99D087238967FD00078D2B /* Events */ = {
@@ -4402,7 +4416,6 @@
 				080DCF161C4518BC00DE3E2E /* SearchResult.swift */,
 				088E73F32061BDAA00D458E3 /* StepikModelView.swift */,
 				08E6BB6A1DC8EB45006622EC /* UserActivity.swift */,
-				62E98BB94C146AA2D8A9C2FF /* UserCourse.swift */,
 				2CFF900B242A248800FD7311 /* Alerts */,
 				2CFF900E242A24C100FD7311 /* AttemptsSumbissions */,
 				2CFF9012242A250C00FD7311 /* Constants */,
@@ -4562,6 +4575,7 @@
 				2CFF902C242A26AB00FD7311 /* Unit */,
 				2CFF902D242A26B600FD7311 /* User */,
 				2C87A7A62446644700933CA4 /* UserActivity */,
+				2C94C7F8248F816400E4104E /* UserCourse */,
 				2CFF902E242A26C200FD7311 /* Video */,
 				2CFF902F242A26CE00FD7311 /* VideoURL */,
 			);
@@ -5129,6 +5143,7 @@
 				2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */,
 				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
 				2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */,
+				2C16A88E248F98C9001E5CBD /* UserCoursePersistenceService.swift */,
 				2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */,
 				2CB510ED248C226A00DB8344 /* VideosPersistenceService.swift */,
 				2CE9BF4B248D0EC5004F6659 /* VideoURLsPersistenceService.swift */,
@@ -7652,6 +7667,7 @@
 				2C20C86C22F988030052E9BF /* CodeEditorTheme.swift in Sources */,
 				62E98B337D0BA97FB0796C2C /* CoursesNetworkService.swift in Sources */,
 				62E98793982B530188C654BE /* UsersNetworkService.swift in Sources */,
+				2C16A88F248F98C9001E5CBD /* UserCoursePersistenceService.swift in Sources */,
 				62E981F21F0275F8547E0658 /* ProgressesPersistenceService.swift in Sources */,
 				62E984F71594AA4CD19696EC /* CoursesPersistenceService.swift in Sources */,
 				62E98E58E7BC6B6AF4881084 /* CourseReviewSummariesPersistenceService.swift in Sources */,
@@ -7938,6 +7954,7 @@
 				62E98C3F01034400CAABD717 /* CodeTextViewLayoutManager.swift in Sources */,
 				62E98EEB59DAF1D0700A7DB9 /* CodeLanguagePickerView.swift in Sources */,
 				62E98A2B85DD1D883B5BFEC7 /* CodeToolbarLanguagePickerButton.swift in Sources */,
+				2C94C7FA248F86C900E4104E /* UserCourse+CoreDataProperties.swift in Sources */,
 				2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */,
 				62E98F91C1E401E5C9855DB1 /* CodeToolbarView.swift in Sources */,
 				62E9817AE10960C05029CA37 /* CodeQuizFullscreenAssembly.swift in Sources */,
@@ -8539,6 +8556,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */,
 				2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */,
 				2C87A7A52446635E00933CA4 /* Model_user_activity_v50.xcdatamodel */,
 				2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */,
@@ -8592,7 +8610,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */;
+			currentVersion = 2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
