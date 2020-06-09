@@ -103,6 +103,14 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             progressViewModel = self.makeProgressViewModel(progress: progress)
         }
 
+        var userCourseViewModel: CourseWidgetUserCourseViewModel?
+        if let userCourse = course.userCourse {
+            userCourseViewModel = CourseWidgetUserCourseViewModel(
+                isFavorite: userCourse.isFavorite,
+                isArchived: userCourse.isArchived
+            )
+        }
+
         var ratingLabelText: String?
         if let reviewsCount = course.reviewSummary?.count,
            let averageRating = course.reviewSummary?.average,
@@ -110,15 +118,19 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             ratingLabelText = FormatterHelper.averageRating(averageRating)
         }
 
+        let certificateLabelText = course.hasCertificate ? NSLocalizedString("Certificate", comment: "") : nil
+
         return CourseWidgetViewModel(
             title: course.title,
             summary: summaryText,
             coverImageURL: URL(string: course.coverURLString),
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
             ratingLabelText: ratingLabelText,
+            certificateLabelText: certificateLabelText,
             isAdaptive: isAdaptive,
             isEnrolled: isAuthorized && course.enrolled,
             progress: progressViewModel,
+            userCourse: userCourseViewModel,
             uniqueIdentifier: uniqueIdentifier,
             courseID: course.id,
             viewSource: viewSource
