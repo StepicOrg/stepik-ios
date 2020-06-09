@@ -61,6 +61,15 @@ final class UserCoursesCourseListNetworkService: BaseCourseListNetworkService, C
                     order: info.map { $0.courseID },
                     transform: { $0.id }
                 )
+
+                let userCourseByCourseID: [Course.IdType: UserCourse] = info.reduce(into: [:], { $0[$1.courseID] = $1 })
+                for course in orderedCourses {
+                    if let userCourse = userCourseByCourseID[course.id] {
+                        userCourse.course = course
+                    }
+                }
+                CoreDataHelper.shared.save()
+
                 seal.fulfill((orderedCourses, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

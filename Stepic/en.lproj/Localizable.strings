@@ -968,6 +968,9 @@ EditStepMessage = "You can only edit the step's text, and only using raw HTML. T
 EditStepRemoteUpdateSuccessfulTitle = "Updated";
 EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 
+/* Course List */
+CourseWidgetArchived = "Archived";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
