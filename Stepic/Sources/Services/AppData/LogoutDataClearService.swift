@@ -31,7 +31,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let submissionsPersistenceService: SubmissionsPersistenceServiceProtocol
     private let unitsPersistenceService: UnitsPersistenceServiceProtocol
     private let userActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol
-    private let userCoursePersistenceService: UserCoursePersistenceServiceProtocol
+    private let userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol
     private let videosPersistenceService: VideosPersistenceServiceProtocol
     private let videoURLsPersistenceService: VideoURLsPersistenceServiceProtocol
     // Notifications
@@ -75,7 +75,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         submissionsPersistenceService: SubmissionsPersistenceServiceProtocol = SubmissionsPersistenceService(),
         unitsPersistenceService: UnitsPersistenceServiceProtocol = UnitsPersistenceService(),
         userActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol = UserActivitiesPersistenceService(),
-        userCoursePersistenceService: UserCoursePersistenceServiceProtocol = UserCoursePersistenceService(),
+        userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol = UserCoursesPersistenceService(),
         videosPersistenceService: VideosPersistenceServiceProtocol = VideosPersistenceService(),
         videoURLsPersistenceService: VideoURLsPersistenceServiceProtocol = VideoURLsPersistenceService(),
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(),
@@ -109,7 +109,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.submissionsPersistenceService = submissionsPersistenceService
         self.unitsPersistenceService = unitsPersistenceService
         self.userActivitiesPersistenceService = userActivitiesPersistenceService
-        self.userCoursePersistenceService = userCoursePersistenceService
+        self.userCoursesPersistenceService = userCoursesPersistenceService
         self.videosPersistenceService = videosPersistenceService
         self.videoURLsPersistenceService = videoURLsPersistenceService
         self.notificationsRegistrationService = notificationsRegistrationService
@@ -189,7 +189,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                         self.submissionsPersistenceService.deleteAll(),
                         self.unitsPersistenceService.deleteAll(),
                         self.userActivitiesPersistenceService.deleteAll(),
-                        self.userCoursePersistenceService.deleteAll(),
+                        self.userCoursesPersistenceService.deleteAll(),
                         self.videosPersistenceService.deleteAll(),
                         self.videoURLsPersistenceService.deleteAll()
                     ]

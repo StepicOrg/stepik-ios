@@ -2,7 +2,7 @@ import CoreData
 import Foundation
 import PromiseKit
 
-protocol UserCoursePersistenceServiceProtocol: AnyObject {
+protocol UserCoursesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [UserCourse.IdType]) -> Guarantee<[UserCourse]>
     func fetch(courseID: Course.IdType) -> Guarantee<[UserCourse]>
     func fetchAll() -> Guarantee<[UserCourse]>
@@ -10,7 +10,7 @@ protocol UserCoursePersistenceServiceProtocol: AnyObject {
     func deleteAll() -> Promise<Void>
 }
 
-final class UserCoursePersistenceService: UserCoursePersistenceServiceProtocol {
+final class UserCoursesPersistenceService: UserCoursesPersistenceServiceProtocol {
     private let managedObjectContext: NSManagedObjectContext
 
     init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
@@ -34,7 +34,7 @@ final class UserCoursePersistenceService: UserCoursePersistenceServiceProtocol {
                     let userCourses = try self.managedObjectContext.fetch(request)
                     seal(userCourses)
                 } catch {
-                    print("UserCoursePersistenceService :: failed fetch ids = \(ids)")
+                    print("UserCoursesPersistenceService :: failed fetch ids = \(ids)")
                     seal([])
                 }
             }
@@ -56,7 +56,7 @@ final class UserCoursePersistenceService: UserCoursePersistenceServiceProtocol {
                     let userCourses = try self.managedObjectContext.fetch(request)
                     seal(userCourses)
                 } catch {
-                    print("UserCoursePersistenceService :: failed fetch by course id = \(courseID)")
+                    print("UserCoursesPersistenceService :: failed fetch by course id = \(courseID)")
                     seal([])
                 }
             }
@@ -73,7 +73,7 @@ final class UserCoursePersistenceService: UserCoursePersistenceServiceProtocol {
                     let userCourses = try self.managedObjectContext.fetch(request)
                     seal(userCourses)
                 } catch {
-                    print("UserCoursePersistenceService :: failed fetch all")
+                    print("UserCoursesPersistenceService :: failed fetch all")
                     seal([])
                 }
             }
@@ -94,7 +94,7 @@ final class UserCoursePersistenceService: UserCoursePersistenceServiceProtocol {
 
                     seal.fulfill(())
                 } catch {
-                    print("UserCoursePersistenceService :: failed delete all user courses with error = \(error)")
+                    print("UserCoursesPersistenceService :: failed delete all user courses with error = \(error)")
                     seal.reject(Error.deleteFailed)
                 }
             }

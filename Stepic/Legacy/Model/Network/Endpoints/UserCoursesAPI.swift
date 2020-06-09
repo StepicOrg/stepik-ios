@@ -14,12 +14,12 @@ import SwiftyJSON
 final class UserCoursesAPI: APIEndpoint {
     override var name: String { "user-courses" }
 
-    private let userCoursePersistenceService: UserCoursePersistenceServiceProtocol
+    private let userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol
 
     init(
-        userCoursePersistenceService: UserCoursePersistenceServiceProtocol = UserCoursePersistenceService()
+        userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol = UserCoursesPersistenceService()
     ) {
-        self.userCoursePersistenceService = userCoursePersistenceService
+        self.userCoursesPersistenceService = userCoursesPersistenceService
         super.init()
     }
 
@@ -40,7 +40,7 @@ final class UserCoursesAPI: APIEndpoint {
             }
 
             firstly { () -> Guarantee<[UserCourse]> in
-                self.userCoursePersistenceService.fetchAll()
+                self.userCoursesPersistenceService.fetchAll()
             }.then { cachedUserCourses -> Promise<([UserCourse], Meta, JSON)> in
                 self.retrieve.request(
                     requestEndpoint: self.name,
@@ -63,7 +63,7 @@ final class UserCoursesAPI: APIEndpoint {
             params["course"] = courseID
 
             firstly { () -> Guarantee<[UserCourse]> in
-                self.userCoursePersistenceService.fetch(courseID: courseID)
+                self.userCoursesPersistenceService.fetch(courseID: courseID)
             }.then { cachedUserCourses -> Promise<([UserCourse], Meta, JSON)> in
                 self.retrieve.request(
                     requestEndpoint: self.name,
