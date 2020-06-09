@@ -25,6 +25,8 @@ extension UserCourse {
         NSFetchRequest<UserCourse>(entityName: "UserCourse")
     }
 
+    static var observableKeys: Set<String> = ["managedIsFavorite", "managedIsArchived", "managedCourse"]
+
     convenience init() {
         self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

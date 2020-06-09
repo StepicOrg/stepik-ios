@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let branchService = BranchService()
     private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
+    private let userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
     private lazy var analytics: Analytics = { StepikAnalytics.shared }()
 
     deinit {
@@ -135,10 +136,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.analytics.send(.applicationDidBecomeActive)
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         self.notificationsService.removeRetentionNotifications()
+        self.userCoursesObserver.startObserving()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
+        self.userCoursesObserver.stopObserving()
     }
 
     // MARK: - Downloading Data in the Background

@@ -16,6 +16,7 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
     required convenience init(json: JSON) {
         self.init()
         self.update(json: json)
+        NotificationCenter.default.post(name: .userCourseDidCreateNotification, object: self)
     }
 
     func update(json: JSON) {
@@ -31,6 +32,19 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
         self.id == json[JSONKey.id.rawValue].int
     }
 
+    override func prepareForDeletion() {
+        super.prepareForDeletion()
+        NotificationCenter.default.post(name: .userCourseDidDeleteNotification, object: self)
+    }
+
+    override func didChangeValue(forKey key: String) {
+        super.didChangeValue(forKey: key)
+
+        if Self.observableKeys.contains(key) {
+            NotificationCenter.default.post(name: .userCourseDidChangeNotification, object: self)
+        }
+    }
+
     enum JSONKey: String {
         case id
         case user
@@ -39,4 +53,10 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
         case isArchived = "is_archived"
         case lastViewed = "last_viewed"
     }
+}
+
+extension Foundation.Notification.Name {
+    static let userCourseDidChangeNotification = NSNotification.Name("userCourseDidChangeNotification")
+    static let userCourseDidCreateNotification = NSNotification.Name("userCourseDidCreateNotification")
+    static let userCourseDidDeleteNotification = NSNotification.Name("userCourseDidDeleteNotification")
 }
