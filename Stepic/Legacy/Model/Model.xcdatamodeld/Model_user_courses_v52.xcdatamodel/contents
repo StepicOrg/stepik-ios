@@ -303,12 +303,12 @@
         <relationship name="managedProfileEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="managedUser" inverseEntity="Profile" syncable="YES"/>
         <relationship name="managedUserCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCourse" inverseName="managedUser" inverseEntity="UserCourse" syncable="YES"/>
     </entity>
-    <entity name="UserActivityEntity" syncable="YES">
+    <entity name="UserActivityEntity" representedClassName=".UserActivityEntity" syncable="YES">
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedPinsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="managedProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="managedUserActivity" inverseEntity="Profile" syncable="YES"/>
     </entity>
-    <entity name="UserCourse" syncable="YES">
+    <entity name="UserCourse" representedClassName=".UserCourse" syncable="YES">
         <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsArchived" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
