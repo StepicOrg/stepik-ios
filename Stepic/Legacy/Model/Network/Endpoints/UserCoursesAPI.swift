@@ -9,9 +9,19 @@
 import Alamofire
 import Foundation
 import PromiseKit
+import SwiftyJSON
 
 final class UserCoursesAPI: APIEndpoint {
     override var name: String { "user-courses" }
+
+    private let userCoursePersistenceService: UserCoursePersistenceServiceProtocol
+
+    init(
+        userCoursePersistenceService: UserCoursePersistenceServiceProtocol = UserCoursePersistenceService()
+    ) {
+        self.userCoursePersistenceService = userCoursePersistenceService
+        super.init()
+    }
 
     func retrieve(
         page: Int = 1,
@@ -29,13 +39,17 @@ final class UserCoursesAPI: APIEndpoint {
                 params[UserCourse.JSONKey.isFavorite.rawValue] = String(isFavorite)
             }
 
-            self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
-                params: params,
-                updatingObjects: [UserCourse](),
-                withManager: self.manager
-            ).done { userCourses, meta, _ in
+            firstly { () -> Guarantee<[UserCourse]> in
+                self.userCoursePersistenceService.fetchAll()
+            }.then { cachedUserCourses -> Promise<([UserCourse], Meta, JSON)> in
+                self.retrieve.request(
+                    requestEndpoint: self.name,
+                    paramName: self.name,
+                    params: params,
+                    updatingObjects: cachedUserCourses,
+                    withManager: self.manager
+                )
+            }.done { userCourses, meta, _ in
                 seal.fulfill((userCourses, meta))
             }.catch { error in
                 seal.reject(error)
@@ -48,12 +62,17 @@ final class UserCoursesAPI: APIEndpoint {
             var params = Parameters()
             params["course"] = courseID
 
-            self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
-                params: params,
-                withManager: self.manager
-            ).done { userCourses, meta, _ in
+            firstly { () -> Guarantee<[UserCourse]> in
+                self.userCoursePersistenceService.fetch(courseID: courseID)
+            }.then { cachedUserCourses -> Promise<([UserCourse], Meta, JSON)> in
+                self.retrieve.request(
+                    requestEndpoint: self.name,
+                    paramName: self.name,
+                    params: params,
+                    updatingObjects: cachedUserCourses,
+                    withManager: self.manager
+                )
+            }.done { userCourses, meta, _ in
                 seal.fulfill((userCourses, meta))
             }.catch { error in
                 seal.reject(error)
