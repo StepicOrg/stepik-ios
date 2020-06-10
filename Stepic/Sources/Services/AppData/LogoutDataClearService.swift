@@ -145,6 +145,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
             self.downloadsDeletionService.deleteAllDownloads()
         }.then { () -> Guarantee<Void> in
             self.clearDatabase()
+        }.then { () -> Guarantee<Void> in
+            self.clearCourseListPersistenceStorages()
         }.done {
             self.analyticsUserProperties.clearUserDependentProperties()
             self.notificationsBadgesManager.set(number: 0)
@@ -198,6 +200,23 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                 CoreDataHelper.shared.save()
                 seal(())
             }
+        }
+    }
+
+    private func clearCourseListPersistenceStorages() -> Guarantee<Void> {
+        Guarantee { seal in
+            let courseListTypes: [CourseListType] = [
+                EnrolledCourseListType(),
+                FavoriteCourseListType(),
+                ArchivedCourseListType()
+            ]
+
+            for courseListType in courseListTypes {
+                let persistenceService = CourseListServicesFactory(type: courseListType).makePersistenceService()
+                persistenceService?.update(newCachedList: [])
+            }
+
+            seal(())
         }
     }
 }
