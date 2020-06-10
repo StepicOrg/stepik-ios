@@ -20,6 +20,10 @@ extension CodeTemplate {
         NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<CodeTemplate> {
+        NSFetchRequest<CodeTemplate>(entityName: "CodeTemplate")
+    }
+
     convenience init() {
         self.init(entity: CodeTemplate.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

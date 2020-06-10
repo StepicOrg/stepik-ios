@@ -53,17 +53,4 @@ final class Certificate: NSManagedObject, IDFetchable {
             return []
         }
     }
-
-    //TODO: Refactor this action to protocol extension when refactoring CoreData
-    static func deleteAll() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request) as? [Certificate]
-            for obj in results ?? [] {
-                CoreDataHelper.shared.deleteFromStore(obj)
-            }
-        } catch {
-            print("certificate: couldn't delete all certificates!")
-        }
-    }
 }

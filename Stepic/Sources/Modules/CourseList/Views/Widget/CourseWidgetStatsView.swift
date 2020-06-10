@@ -8,6 +8,8 @@ extension CourseWidgetStatsView {
 
         let learnersViewImageViewSize = CGSize(width: 8, height: 10)
         let ratingViewImageViewSize = CGSize(width: 8, height: 12)
+        let certificatesViewImageViewSize = CGSize(width: 12, height: 12)
+        let archiveViewImageViewSize = CGSize(width: 14, height: 13)
         let progressViewImageViewSize = CGSize(width: 12, height: 12)
 
         let imagesRenderingSize = CGSize(width: 30, height: 30)
@@ -25,14 +27,28 @@ final class CourseWidgetStatsView: UIView {
 
     var learnersLabelText: String? {
         didSet {
+            self.learnersView.isHidden = self.learnersLabelText?.isEmpty ?? true
             self.learnersView.text = self.learnersLabelText
+        }
+    }
+
+    var certificatesLabelText: String? {
+        didSet {
+            self.certificatesView.isHidden = self.certificatesLabelText?.isEmpty ?? true
+            self.certificatesView.text = self.certificatesLabelText
         }
     }
 
     var ratingLabelText: String? {
         didSet {
-            self.ratingView.isHidden = self.ratingLabelText == nil
+            self.ratingView.isHidden = self.ratingLabelText?.isEmpty ?? true
             self.ratingView.text = self.ratingLabelText
+        }
+    }
+
+    var isArchived: Bool = false {
+        didSet {
+            self.archiveView.isHidden = !self.isArchived
         }
     }
 
@@ -54,6 +70,27 @@ final class CourseWidgetStatsView: UIView {
         appearance.textColor = self.appearance.itemTextColor
         let view = CourseWidgetStatsItemView(appearance: appearance)
         view.image = UIImage(named: "course-widget-user")?.withRenderingMode(.alwaysTemplate)
+        return view
+    }()
+
+    private lazy var certificatesView: CourseWidgetStatsItemView = {
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.certificatesViewImageViewSize
+        appearance.imageTintColor = self.appearance.itemImageTintColor
+        appearance.textColor = self.appearance.itemTextColor
+        let view = CourseWidgetStatsItemView(appearance: appearance)
+        view.image = UIImage(named: "course-widget-certificate")?.withRenderingMode(.alwaysTemplate)
+        return view
+    }()
+
+    private lazy var archiveView: CourseWidgetStatsItemView = {
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.archiveViewImageViewSize
+        appearance.imageTintColor = self.appearance.itemImageTintColor
+        appearance.textColor = self.appearance.itemTextColor
+        let view = CourseWidgetStatsItemView(appearance: appearance)
+        view.image = UIImage(named: "course-widget-archive")?.withRenderingMode(.alwaysTemplate)
+        view.text = NSLocalizedString("CourseWidgetArchived", comment: "")
         return view
     }()
 
@@ -116,6 +153,7 @@ final class CourseWidgetStatsView: UIView {
 
 extension CourseWidgetStatsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
+        self.archiveView.isHidden = true
         self.ratingView.isHidden = false
         self.progressView.isHidden = false
     }
@@ -125,6 +163,8 @@ extension CourseWidgetStatsView: ProgrammaticallyInitializableViewProtocol {
 
         self.stackView.addArrangedSubview(self.learnersView)
         self.stackView.addArrangedSubview(self.ratingView)
+        self.stackView.addArrangedSubview(self.certificatesView)
+        self.stackView.addArrangedSubview(self.archiveView)
         self.stackView.addArrangedSubview(self.progressView)
     }
 

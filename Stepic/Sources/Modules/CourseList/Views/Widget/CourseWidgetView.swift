@@ -6,7 +6,11 @@ extension CourseWidgetView {
         let coverViewInsets = LayoutInsets(top: 16, left: 16)
         let coverViewWidthHeight: CGFloat = 80.0
 
-        let titleLabelInsets = LayoutInsets(left: 8, right: 16)
+        let titleLabelInsets = LayoutInsets(left: 8, right: 8)
+
+        let badgeImageViewInsets = LayoutInsets(right: 16)
+        let badgeImageViewTintColor = UIColor.stepikAccent
+        let badgeImageViewSize = CGSize(width: 18, height: 18)
 
         let statsViewHeight: CGFloat = 17
         let statsViewInsets = LayoutInsets(top: 8)
@@ -28,6 +32,14 @@ final class CourseWidgetView: UIView {
     private lazy var titleLabel = CourseWidgetLabel(
         appearance: self.colorMode.courseWidgetTitleLabelAppearance
     )
+
+    private lazy var badgeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = self.appearance.badgeImageViewTintColor
+        return imageView
+    }()
+
     private lazy var statsView = CourseWidgetStatsView(
         appearance: self.colorMode.courseWidgetStatsViewAppearance
     )
@@ -49,6 +61,8 @@ final class CourseWidgetView: UIView {
         button.addTarget(self, action: #selector(self.continueLearningButtonClicked), for: .touchUpInside)
         return button
     }()
+
+    private var badgeImageViewWidthConstraint: Constraint?
 
     var onContinueLearningButtonClick: (() -> Void)?
 
@@ -80,9 +94,20 @@ final class CourseWidgetView: UIView {
         self.separatorView.isHidden = !viewModel.isEnrolled
         self.continueLearningButton.isHidden = !viewModel.isEnrolled
 
-        self.statsView.learnersLabelText = viewModel.learnersLabelText
-        self.statsView.ratingLabelText = viewModel.ratingLabelText
-        self.statsView.progress = viewModel.progress
+        self.statsView.learnersLabelText = viewModel.isEnrolled ? nil : viewModel.learnersLabelText
+        self.statsView.certificatesLabelText = viewModel.isEnrolled ? nil : viewModel.certificateLabelText
+        self.statsView.ratingLabelText = viewModel.isEnrolled ? nil : viewModel.ratingLabelText
+
+        let isArchived = viewModel.userCourse?.isArchived ?? false
+        self.statsView.isArchived = isArchived
+        self.statsView.progress = isArchived ? nil : viewModel.progress
+
+        let isFavorite = viewModel.userCourse?.isFavorite ?? false
+        self.badgeImageView.image = isFavorite
+            ? UIImage(named: "course-widget-favorite")?.withRenderingMode(.alwaysTemplate)
+            : nil
+        self.badgeImageViewWidthConstraint?.update(offset: isFavorite ? self.appearance.badgeImageViewSize.width : 0)
+        self.badgeImageView.isHidden = !isFavorite
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
@@ -101,6 +126,7 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.coverView)
         self.addSubview(self.titleLabel)
+        self.addSubview(self.badgeImageView)
         self.addSubview(self.statsView)
         self.addSubview(self.summaryLabel)
         self.addSubview(self.continueLearningButton)
@@ -129,8 +155,21 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.coverView.snp.trailing)
                 .offset(self.appearance.titleLabelInsets.left)
             make.trailing
-                .equalToSuperview()
+                .equalTo(self.badgeImageView.snp.leading)
                 .offset(-self.appearance.titleLabelInsets.right)
+        }
+
+        self.badgeImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.badgeImageView.snp.makeConstraints { make in
+            make.top
+                .equalTo(self.coverView.snp.top)
+            make.trailing
+                .equalToSuperview()
+                .offset(-self.appearance.badgeImageViewInsets.right)
+            self.badgeImageViewWidthConstraint = make.width
+                .equalTo(self.appearance.badgeImageViewSize.width)
+                .constraint
+            make.height.equalTo(self.appearance.badgeImageViewSize.height)
         }
 
         self.statsView.translatesAutoresizingMaskIntoConstraints = false

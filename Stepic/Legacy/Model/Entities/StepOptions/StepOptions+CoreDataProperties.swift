@@ -22,6 +22,10 @@ extension StepOptions {
         NSEntityDescription.entity(forEntityName: "StepOptions", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<StepOptions> {
+        NSFetchRequest<StepOptions>(entityName: "StepOptions")
+    }
+
     convenience init() {
         self.init(entity: StepOptions.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

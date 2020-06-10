@@ -21,6 +21,10 @@ extension Assignment {
         NSEntityDescription.entity(forEntityName: "Assignment", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Assignment> {
+        NSFetchRequest<Assignment>(entityName: "Assignment")
+    }
+
     convenience init() {
         self.init(entity: Assignment.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

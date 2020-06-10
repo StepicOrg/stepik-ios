@@ -9,6 +9,7 @@
 import CoreData
 import UIKit
 
+@available(*, deprecated, message: "Legacy class")
 final class CoreDataHelper: NSObject {
     static var shared = CoreDataHelper()
 

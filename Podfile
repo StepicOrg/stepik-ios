@@ -5,7 +5,7 @@ inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
-    pod 'Alamofire', '5.2.0'
+    pod 'Alamofire', '5.2.1'
     pod 'Atributika', '4.9.7'
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.7.4'
@@ -60,7 +60,7 @@ def all_pods
     pod 'Charts', '3.4.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.4.0'
-    pod 'Nuke', '8.4.1'
+    pod 'Nuke', '9.1.0'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
     pod 'SwiftDate', '6.1.0'

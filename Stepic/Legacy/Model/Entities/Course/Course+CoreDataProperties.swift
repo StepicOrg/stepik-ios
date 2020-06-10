@@ -65,6 +65,7 @@ extension Course {
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedReviewSummary: CourseReviewSummary?
     @NSManaged var managedSections: NSOrderedSet?
+    @NSManaged var managedUserCourse: UserCourse?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
@@ -486,6 +487,15 @@ extension Course {
         }
         set(value) {
             managedReviewSummary = value
+        }
+    }
+
+    var userCourse: UserCourse? {
+        get {
+            self.managedUserCourse
+        }
+        set {
+            self.managedUserCourse = newValue
         }
     }
 

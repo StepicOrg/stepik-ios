@@ -122,11 +122,10 @@ class CourseListView: UIView {
         }
 
         if columnWidth < minimumColumnWidth {
-            columnsCount -= 1
+            columnsCount = max(1, columnsCount - 1)
             columnWidth = calculateColumnWidth(columnsCount: columnsCount)
         }
 
-        columnsCount = max(1, columnsCount)
         columnWidth = max(minimumColumnWidth, columnWidth)
 
         return (columnsCount, columnWidth)

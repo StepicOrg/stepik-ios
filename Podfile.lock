@@ -2,7 +2,7 @@ PODS:
   - ActionSheetPicker-3.0 (2.4.0)
   - Agrume (5.6.8):
     - SwiftyGif
-  - Alamofire (5.2.0)
+  - Alamofire (5.2.1)
   - Amplitude-iOS (4.9.3)
   - Atributika (4.9.7)
   - BEMCheckBox (1.4.1)
@@ -154,7 +154,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - Nimble (8.0.9)
-  - Nuke (8.4.1)
+  - Nuke (9.1.0)
   - Pageboy (3.5.1)
   - pop (1.0.12)
   - Presentr (1.9)
@@ -201,7 +201,7 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.4.0)
   - Agrume (= 5.6.8)
-  - Alamofire (= 5.2.0)
+  - Alamofire (= 5.2.1)
   - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.7)
   - BEMCheckBox (= 1.4.1)
@@ -225,7 +225,7 @@ DEPENDENCIES:
   - lottie-ios (= 2.5.3)
   - Mockingjay (= 3.0.0-alpha.1)
   - Nimble (= 8.0.9)
-  - Nuke (= 8.4.1)
+  - Nuke (= 9.1.0)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.0)
   - Quick (= 2.2.0)
@@ -329,7 +329,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: c68e1f8355828b4e1c823fa87185aacfef5e6fe3
   Agrume: 53c2be9b06caef4b4996a2886a56b9e901bcc6c0
-  Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   Atributika: 6428744f0405ebe79220397a3cb4a9c9d19d5c46
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
@@ -367,7 +367,7 @@ SPEC CHECKSUMS:
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   Nimble: 98b888285a615fd34f20e61753cf58ea1402bde4
-  Nuke: d780e3507a86b86c589ab3cc5cd302d5456f06fb
+  Nuke: c97bf6006d31687cfa7c28507305143de27a4aa1
   Pageboy: 288353d4cc848c24deec2f7542f325089247c136
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
@@ -393,6 +393,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
 
-PODFILE CHECKSUM: 589e7730aaf5f88b6eb827b904adee58229b0540
+PODFILE CHECKSUM: 96d90dd536d857d0a4b714653fdb527c9a657d38
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

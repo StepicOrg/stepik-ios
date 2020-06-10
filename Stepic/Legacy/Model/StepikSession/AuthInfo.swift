@@ -14,10 +14,13 @@ extension Foundation.Notification.Name {
     static let didLogin = Foundation.Notification.Name("didLogin")
 }
 
+@available(*, deprecated, message: "Legacy class")
 final class AuthInfo: NSObject {
     static var shared = AuthInfo()
 
     private let defaults = UserDefaults.standard
+
+    private lazy var logoutDataClearService: LogoutDataClearServiceProtocol = LogoutDataClearService()
 
     override private init() {
         super.init()
@@ -46,43 +49,14 @@ final class AuthInfo: NSObject {
         set(newToken) {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
-
-                let performLogoutActions = { [weak self] in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    DispatchQueue.main.async {
-                        //Delete enrolled information
-                        let c = Course.getAllCourses(enrolled: true)
-                        for course in c {
-                            course.enrolled = false
-                        }
-
-                        Certificate.deleteAll()
-                        Progress.deleteAllStoredProgresses()
-                        Notification.deleteAll()
-                        AnalyticsUserProperties.shared.clearUserDependentProperties()
-                        NotificationsBadgesManager.shared.set(number: 0)
-                        CoreDataHelper.shared.save()
-
-                        AuthInfo.shared.user = nil
-                        DeviceDefaults.sharedDefaults.deviceId = nil
-
-                        NotificationsService().removeAllLocalNotifications()
-                        SpotlightIndexingService.shared.deleteAllSearchableItems()
-
-                        strongSelf.setTokenValue(nil)
-                        NotificationCenter.default.post(name: .didLogout, object: nil)
-                    }
+                self.logoutDataClearService.clearCurrentUserData().done {
+                    self.user = nil
+                    self.setTokenValue(nil)
+                    NotificationCenter.default.post(name: .didLogout, object: nil)
                 }
-                // Unregister from notifications.
-                NotificationsRegistrationService().unregisterFromNotifications(completion: {
-                    performLogoutActions()
-                })
             } else {
                 let oldToken = token
-                print("\nsetting new token -> \(newToken!.accessToken)\n")
+                print("\nsetting new token -> \(String(describing: newToken?.accessToken))\n")
                 didRefresh = true
                 setTokenValue(newToken)
                 StepikSession.delete()

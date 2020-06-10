@@ -25,13 +25,17 @@ extension Notification {
         NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Notification> {
+        NSFetchRequest<Notification>(entityName: "Notification")
+    }
+
     convenience init() {
         self.init(entity: Notification.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
         set {
             managedId = newValue as NSNumber?
@@ -40,7 +44,7 @@ extension Notification {
 
     var htmlText: String? {
         get {
-             managedHtmlText
+            managedHtmlText
         }
         set {
             managedHtmlText = newValue
@@ -49,7 +53,7 @@ extension Notification {
 
     var time: Date? {
         get {
-             managedTime
+            managedTime
         }
         set {
             managedTime = newValue
@@ -70,7 +74,7 @@ extension Notification {
 
     var isMuted: Bool {
         get {
-             managedIsMuted?.boolValue ?? false
+            managedIsMuted?.boolValue ?? false
         }
         set {
             managedIsMuted = newValue as NSNumber?
@@ -79,7 +83,7 @@ extension Notification {
 
     var isFavorite: Bool {
         get {
-             managedIsFavorite?.boolValue ?? false
+            managedIsFavorite?.boolValue ?? false
         }
         set {
             managedIsFavorite = newValue as NSNumber?
@@ -113,7 +117,7 @@ extension Notification {
     // Maybe it will be helpful in the future
     var priority: String? {
         get {
-             managedPriority
+            managedPriority
         }
         set {
             managedPriority = newValue
@@ -123,7 +127,7 @@ extension Notification {
     // Maybe it will be helpful in the future
     var level: String? {
         get {
-             managedLevel
+            managedLevel
         }
         set {
             managedLevel = newValue

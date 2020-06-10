@@ -55,9 +55,9 @@ final class CourseListServicesFactory {
 
     init(
         type: CourseListType,
-        coursesAPI: CoursesAPI,
-        userCoursesAPI: UserCoursesAPI,
-        searchResultsAPI: SearchResultsAPI
+        coursesAPI: CoursesAPI = CoursesAPI(),
+        userCoursesAPI: UserCoursesAPI = UserCoursesAPI(),
+        searchResultsAPI: SearchResultsAPI = SearchResultsAPI()
     ) {
         self.type = type
         self.coursesAPI = coursesAPI
