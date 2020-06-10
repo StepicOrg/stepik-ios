@@ -5,6 +5,8 @@ import PromiseKit
 protocol ProfilesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [Profile.IdType]) -> Guarantee<[Profile]>
     func fetch(id: Profile.IdType) -> Guarantee<Profile?>
+
+    func deleteAll() -> Promise<Void>
 }
 
 final class ProfilesPersistenceService: ProfilesPersistenceServiceProtocol {
@@ -30,6 +32,27 @@ final class ProfilesPersistenceService: ProfilesPersistenceServiceProtocol {
         }
     }
 
+    func deleteAll() -> Promise<Void> {
+        Promise { seal in
+            let request: NSFetchRequest<Profile> = Profile.fetchRequest
+            self.managedObjectContext.performAndWait {
+                do {
+                    let profiles = try self.managedObjectContext.fetch(request)
+                    for profile in profiles {
+                        self.managedObjectContext.delete(profile)
+                    }
+
+                    try? self.managedObjectContext.save()
+
+                    seal.fulfill(())
+                } catch {
+                    print("ProfilesPersistenceService :: failed delete all profiles with error = \(error)")
+                    seal.reject(Error.deleteFailed)
+                }
+            }
+        }
+    }
+
     private func fetchProfiles(ids: [Profile.IdType]) -> Guarantee<[Profile]> {
         Guarantee { seal in
             let idSubpredicates = ids.map { id in
@@ -37,7 +60,7 @@ final class ProfilesPersistenceService: ProfilesPersistenceServiceProtocol {
             }
             let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
 
-            let request: NSFetchRequest<Profile> = Profile.fetchRequest()
+            let request: NSFetchRequest<Profile> = Profile.fetchRequest
             request.predicate = compoundPredicate
             request.sortDescriptors = Profile.defaultSortDescriptors
             request.returnsObjectsAsFaults = false
@@ -52,5 +75,9 @@ final class ProfilesPersistenceService: ProfilesPersistenceServiceProtocol {
                 }
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case deleteFailed
     }
 }

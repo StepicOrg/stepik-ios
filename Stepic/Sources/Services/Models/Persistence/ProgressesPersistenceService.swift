@@ -1,19 +1,22 @@
+import CoreData
 import Foundation
 import PromiseKit
 
 protocol ProgressesPersistenceServiceProtocol: AnyObject {
-    func fetch(
-        ids: [Progress.IdType],
-        page: Int
-    ) -> Promise<([Progress], Meta)>
+    func fetch(ids: [Progress.IdType], page: Int) -> Promise<([Progress], Meta)>
     func fetch(id: Progress.IdType) -> Promise<Progress?>
+
+    func deleteAll() -> Promise<Void>
 }
 
 final class ProgressesPersistenceService: ProgressesPersistenceServiceProtocol {
-    func fetch(
-        ids: [Progress.IdType],
-        page: Int = 1
-    ) -> Promise<([Progress], Meta)> {
+    private let managedObjectContext: NSManagedObjectContext
+
+    init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
+        self.managedObjectContext = managedObjectContext
+    }
+
+    func fetch(ids: [Progress.IdType], page: Int = 1) -> Promise<([Progress], Meta)> {
         Promise { seal in
             Progress.fetchAsync(ids: ids).done { progresses in
                 seal.fulfill((progresses, Meta.oneAndOnlyPage))
@@ -33,7 +36,29 @@ final class ProgressesPersistenceService: ProgressesPersistenceServiceProtocol {
         }
     }
 
+    func deleteAll() -> Promise<Void> {
+        Promise { seal in
+            let request: NSFetchRequest<Progress> = Progress.fetchRequest
+            self.managedObjectContext.performAndWait {
+                do {
+                    let progresses = try self.managedObjectContext.fetch(request)
+                    for progress in progresses {
+                        self.managedObjectContext.delete(progress)
+                    }
+
+                    try? self.managedObjectContext.save()
+
+                    seal.fulfill(())
+                } catch {
+                    print("ProgressesPersistenceService :: failed delete all progresses with error = \(error)")
+                    seal.reject(Error.deleteFailed)
+                }
+            }
+        }
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
+        case deleteFailed
     }
 }

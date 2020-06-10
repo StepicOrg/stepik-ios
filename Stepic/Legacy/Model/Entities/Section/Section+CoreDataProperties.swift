@@ -40,6 +40,10 @@ extension Section {
         NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Section> {
+        NSFetchRequest<Section>(entityName: "Section")
+    }
+
     convenience init() {
         self.init(entity: Section.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

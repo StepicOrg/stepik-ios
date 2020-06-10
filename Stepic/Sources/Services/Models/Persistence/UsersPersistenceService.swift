@@ -37,7 +37,7 @@ final class UsersPersistenceService: UsersPersistenceServiceProtocol {
             }
             let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
 
-            let request: NSFetchRequest<User> = User.fetchRequest()
+            let request: NSFetchRequest<User> = User.fetchRequest
             request.predicate = compoundPredicate
             request.sortDescriptors = User.defaultSortDescriptors
             request.returnsObjectsAsFaults = false

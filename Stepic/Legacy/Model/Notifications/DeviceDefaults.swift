@@ -11,6 +11,7 @@ import Foundation
 /*
  Stores and manages information about device defaults
  */
+@available(*, deprecated, message: "Legacy class")
 final class DeviceDefaults {
     private init() {}
     static let sharedDefaults = DeviceDefaults()

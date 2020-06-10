@@ -9,6 +9,10 @@ extension LastCodeLanguage {
         NSEntityDescription.entity(forEntityName: "LastCodeLanguage", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<LastCodeLanguage> {
+        NSFetchRequest<LastCodeLanguage>(entityName: "LastCodeLanguage")
+    }
+
     convenience init() {
         self.init(entity: LastCodeLanguage.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
