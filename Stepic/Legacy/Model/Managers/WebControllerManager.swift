@@ -99,7 +99,10 @@ final class WebControllerManager: NSObject {
             return
         }
 
-        guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+        let queryParameters = key == .externalLink
+            ? ["from_mobile_app": "true", "mobile_internal_deeplink": "true"]
+            : ["from_mobile_app": "true"]
+        guard let url = url.appendingQueryParameters(queryParameters) else {
             return
         }
 
