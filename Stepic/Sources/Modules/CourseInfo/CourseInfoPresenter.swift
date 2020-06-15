@@ -156,7 +156,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
             }
 
-            if course.isPaid, let displayPrice = course.displayPrice {
+            if course.isPaid && !course.isPurchased, let displayPrice = course.displayPrice {
                 return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
             }
 

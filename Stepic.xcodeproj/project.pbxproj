@@ -389,6 +389,11 @@
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
 		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
+		2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429724977EAC009F4C69 /* CoursePurchase.swift */; };
+		2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */; };
+		2C1E429C2497830F009F4C69 /* CoursePurchasesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */; };
+		2C1E42A02497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */; };
+		2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */; };
 		2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778322BBA54800D44DC0 /* QuizStatus.swift */; };
 		2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */; };
@@ -908,8 +913,8 @@
 		62E987560B7A0EFE8D4753CB /* RetentionLocalNotificationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9863EA3DABDA4ACF78273 /* RetentionLocalNotificationProvider.swift */; };
 		62E98778B1320381E97A0E1F /* LastStepPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AC352F76C23F60E12A6 /* LastStepPersistenceService.swift */; };
 		62E98779C46941AA1F710191 /* ContinueCourseOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B7A07FDA68E6CA47ECB /* ContinueCourseOutputProtocol.swift */; };
-		62E98793126B566A300229C8 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9896F55E6BED87609B98A /* IAPService.swift */; };
 		62E9877F4784A8C707B4B712 /* CertificatesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983871207544AF21C27C6 /* CertificatesPersistenceService.swift */; };
+		62E98793126B566A300229C8 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9896F55E6BED87609B98A /* IAPService.swift */; };
 		62E98793982B530188C654BE /* UsersNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98407592112A22E967DE1 /* UsersNetworkService.swift */; };
 		62E987998151D191C16B5E15 /* ExploreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BE257BD24B6E46FD69D /* ExploreAssembly.swift */; };
 		62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C9C2AB31AEC2C3B53CE /* CodeQuizFullscreenInteractor.swift */; };
@@ -1656,6 +1661,12 @@
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
 		2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARKit-Badge-Glyph-Only.png"; sourceTree = "<group>"; };
 		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
+		2C1E429724977EAC009F4C69 /* CoursePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchase.swift; sourceTree = "<group>"; };
+		2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesAPI.swift; sourceTree = "<group>"; };
+		2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesNetworkService.swift; sourceTree = "<group>"; };
+		2C1E429D2497BCA4009F4C69 /* Model_course_purchases_v53.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_purchases_v53.xcdatamodel; sourceTree = "<group>"; };
+		2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoursePurchase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesPersistenceService.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Promise.swift"; sourceTree = "<group>"; };
 		2C20778322BBA54800D44DC0 /* QuizStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatus.swift; sourceTree = "<group>"; };
 		2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOptionsPersistenceService.swift; sourceTree = "<group>"; };
@@ -2629,14 +2640,6 @@
 			path = HomeSubmodules;
 			sourceTree = "<group>";
 		};
-		2C03F0402476909E00C63FE6 /* Multithread */ = {
-			isa = PBXGroup;
-			children = (
-				2C03F041247690BA00C63FE6 /* Mutex.swift */,
-			);
-			path = Multithread;
-			sourceTree = "<group>";
-		};
 		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
 			isa = PBXGroup;
 			children = (
@@ -2729,6 +2732,15 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		2C1E429E2497BDC0009F4C69 /* CoursePurchase */ = {
+			isa = PBXGroup;
+			children = (
+				2C1E429724977EAC009F4C69 /* CoursePurchase.swift */,
+				2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */,
+			);
+			path = CoursePurchase;
+			sourceTree = "<group>";
+		};
 		2C26BF0824081080000EE23C /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -2764,14 +2776,6 @@
 				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
 			);
 			path = AppData;
-			sourceTree = "<group>";
-		};
-		2C284DB7247438F900669736 /* CoursePayment */ = {
-			isa = PBXGroup;
-			children = (
-				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
-			);
-			path = CoursePayment;
 			sourceTree = "<group>";
 		};
 		2C284DBC2474907C00669736 /* InAppPurchases */ = {
@@ -3982,14 +3986,6 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		2CB1C3AB240050DD001DA83E /* UserCodeRuns */ = {
-			isa = PBXGroup;
-			children = (
-				2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */,
-			);
-			path = UserCodeRuns;
-			sourceTree = "<group>";
-		};
 		2CB62BF02019FDB300B5E336 /* AdaptiveOnboardingContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -4033,6 +4029,7 @@
 				62E98CF5FA317BCAFAE433A9 /* ImageDataProvider.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
+				2C03F041247690BA00C63FE6 /* Mutex.swift */,
 				2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */,
 				2C2EA36A212D5FEF002116C9 /* StepikResult.swift */,
 				2CBBCB9923980ED6006D6C15 /* WeakBox.swift */,
@@ -4166,14 +4163,6 @@
 				2C6DECE223D02E4E00E542B9 /* Switch */,
 			);
 			path = RightDetailCells;
-			sourceTree = "<group>";
-		};
-		2CF10C872384240800F8CC95 /* StepSources */ = {
-			isa = PBXGroup;
-			children = (
-				2CF10C882384243100F8CC95 /* StepSource.swift */,
-			);
-			path = StepSources;
 			sourceTree = "<group>";
 		};
 		2CF1505123D532D900915E5A /* Downloader */ = {
@@ -4595,6 +4584,7 @@
 				2CFF901B242A25B000FD7311 /* CodeTemplates */,
 				2CFF901C242A25C900FD7311 /* Course */,
 				2CFF901D242A25E200FD7311 /* CourseList */,
+				2C1E429E2497BDC0009F4C69 /* CoursePurchase */,
 				2CFF901E242A25EE00FD7311 /* CourseReview */,
 				2CFF901F242A25FF00FD7311 /* CourseReviewSummary */,
 				2CFF9020242A260A00FD7311 /* DiscussionThread */,
@@ -4995,6 +4985,7 @@
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
 				2C284DB82474418600669736 /* CoursePaymentsAPI.swift */,
+				2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */,
 				2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */,
 				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
 				080CE1421E955D300089A27F /* CoursesAPI.swift */,
@@ -5066,12 +5057,12 @@
 		2CFF903F242A2AAA00FD7311 /* PlainObjects */ = {
 			isa = PBXGroup;
 			children = (
+				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
 				2CB3563D2476CB7B00E59A03 /* MagicLink.swift */,
-				2C284DB7247438F900669736 /* CoursePayment */,
+				2CF10C882384243100F8CC95 /* StepSource.swift */,
+				2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
-				2CF10C872384240800F8CC95 /* StepSources */,
-				2CB1C3AB240050DD001DA83E /* UserCodeRuns */,
 			);
 			path = PlainObjects;
 			sourceTree = "<group>";
@@ -5163,6 +5154,7 @@
 				2CE9BF45248D08A8004F6659 /* CodeSamplesPersistenceService.swift */,
 				2CE9BF43248D07D0004F6659 /* CodeTemplatesPersistenceService.swift */,
 				62E98C9F5E7C0823E94A4527 /* CourseListsCollectionPersistenceService.swift */,
+				2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */,
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
 				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
@@ -5476,6 +5468,7 @@
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
 				2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */,
+				2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */,
 				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
@@ -6173,7 +6166,6 @@
 				2C48D5FF228F0C4800739477 /* ContentProcessor */,
 				2CF1505123D532D900915E5A /* Downloader */,
 				2C284DBC2474907C00669736 /* InAppPurchases */,
-				2C03F0402476909E00C63FE6 /* Multithread */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
 			);
 			path = Frameworks;
@@ -7431,6 +7423,7 @@
 				089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				08883AC2214C52EC00898BBE /* ModalOrPushStackRouter.swift in Sources */,
+				2C1E42A02497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift in Sources */,
 				2C87A7AB2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
@@ -7555,6 +7548,7 @@
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B3B80620F3909400F64D20 /* HTMLProcessor.swift in Sources */,
+				2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
@@ -7743,6 +7737,7 @@
 				62E981A7B87D4281EBBB5184 /* DiscussionProxiesNetworkService.swift in Sources */,
 				2C6DECE123D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift in Sources */,
 				2C8F3AE323CCBEAB004D113A /* StreamVideoQuality.swift in Sources */,
+				2C1E429C2497830F009F4C69 /* CoursePurchasesNetworkService.swift in Sources */,
 				2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */,
 				2CF10C892384243100F8CC95 /* StepSource.swift in Sources */,
 				62E98FAFD474DA53CC09FE9C /* ImageDataProvider.swift in Sources */,
@@ -7796,6 +7791,7 @@
 				62E9852254F2E43ABB6B072F /* CourseInfoTabReviewsInputProtocol.swift in Sources */,
 				62E98D482238B33F4B4B0B24 /* CourseInfoTabReviewsTableViewDataSource.swift in Sources */,
 				62E9849DCCBF7E25989CB1B3 /* CourseInfoTabReviewsView.swift in Sources */,
+				2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */,
 				62E98995ECE79D901A170481 /* CourseInfoTabReviewsCellView.swift in Sources */,
 				62E987BAA1982DF27CBC2203 /* CourseInfoTabReviewsTableViewCell.swift in Sources */,
 				62E9811CC53B2D9F413188C1 /* CourseInfoTabReviewsHeaderView.swift in Sources */,
@@ -7823,6 +7819,7 @@
 				62E980CA62D838858F0FA556 /* CourseListInteractor.swift in Sources */,
 				62E98FFD1EEDB775EE381221 /* CourseListPresenter.swift in Sources */,
 				62E984B78E5B07D231883FAF /* CourseListViewController.swift in Sources */,
+				2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */,
 				62E987B33AA5C4B607FC3D1D /* CourseWidgetViewModel.swift in Sources */,
 				62E98652FAF20DE91530C26A /* CourseListInputProtocol.swift in Sources */,
 				62E988582A8C0349C27B6670 /* CourseListOutputProtocol.swift in Sources */,
@@ -8604,6 +8601,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C1E429D2497BCA4009F4C69 /* Model_course_purchases_v53.xcdatamodel */,
 				2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */,
 				2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */,
 				2C87A7A52446635E00933CA4 /* Model_user_activity_v50.xcdatamodel */,
@@ -8658,7 +8656,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */;
+			currentVersion = 2C1E429D2497BCA4009F4C69 /* Model_course_purchases_v53.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
