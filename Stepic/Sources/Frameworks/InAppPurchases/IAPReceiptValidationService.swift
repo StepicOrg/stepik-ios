@@ -3,7 +3,7 @@ import PromiseKit
 import StoreKit
 
 protocol IAPReceiptValidationServiceProtocol: AnyObject {
-    func validateCoursePayment(courseID: Course.IdType, product: SKProduct) -> Promise<CoursePayment>
+    func validateCoursePayment(courseID: Course.IdType, price: Double, currencyCode: String?) -> Promise<CoursePayment>
 }
 
 final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
@@ -13,20 +13,24 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
         self.coursePaymentsNetworkService = coursePaymentsNetworkService
     }
 
-    func validateCoursePayment(courseID: Course.IdType, product: SKProduct) -> Promise<CoursePayment> {
+    func validateCoursePayment(
+        courseID: Course.IdType,
+        price: Double,
+        currencyCode: String?
+    ) -> Promise<CoursePayment> {
         guard let receiptString = self.getAppStoreReceiptBase64EncodedString() else {
             return Promise(error: Error.noAppStoreReceiptPresent)
         }
 
-        guard let bundleIdentifier = Bundle.main.bundleIdentifier,
-              let currencyCode = product.priceLocale.currencyCode else {
+        guard let currencyCode = currencyCode,
+              let bundleIdentifier = Bundle.main.bundleIdentifier else {
             return Promise(error: Error.invalidPaymentData)
         }
 
         let paymentData = CoursePayment.DataFactory.generateDataForAppleProvider(
             receiptData: receiptString,
             bundleID: bundleIdentifier,
-            amount: product.price.doubleValue,
+            amount: price,
             currency: currencyCode
         )
         let payment = CoursePayment(courseID: courseID, data: paymentData)

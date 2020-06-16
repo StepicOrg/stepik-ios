@@ -80,8 +80,9 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
             switch transaction.transactionState {
             case .purchased:
                 self.receiptValidationService.validateCoursePayment(
-                    courseID: self.courseID.require(),
-                    product: self.product.require()
+                    courseID: courseID,
+                    price: product.price.doubleValue,
+                    currencyCode: product.priceLocale.currencyCode
                 ).done { _ in
                     self.onBuyProductCompletionHandler?(.success(true))
                     self.paymentQueue.finishTransaction(transaction)
