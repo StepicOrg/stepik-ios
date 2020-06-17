@@ -394,6 +394,7 @@
 		2C1E429C2497830F009F4C69 /* CoursePurchasesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */; };
 		2C1E42A02497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */; };
 		2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */; };
+		2C1E42A424991CA3009F4C69 /* IAPPaymentsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E42A324991CA3009F4C69 /* IAPPaymentsCache.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */; };
 		2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778322BBA54800D44DC0 /* QuizStatus.swift */; };
 		2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */; };
@@ -1667,6 +1668,7 @@
 		2C1E429D2497BCA4009F4C69 /* Model_course_purchases_v53.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_purchases_v53.xcdatamodel; sourceTree = "<group>"; };
 		2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoursePurchase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesPersistenceService.swift; sourceTree = "<group>"; };
+		2C1E42A324991CA3009F4C69 /* IAPPaymentsCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPPaymentsCache.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Promise.swift"; sourceTree = "<group>"; };
 		2C20778322BBA54800D44DC0 /* QuizStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatus.swift; sourceTree = "<group>"; };
 		2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOptionsPersistenceService.swift; sourceTree = "<group>"; };
@@ -2782,6 +2784,7 @@
 			isa = PBXGroup;
 			children = (
 				2C284DBD2474986600669736 /* IAPProductIDs.plist */,
+				2C1E42A324991CA3009F4C69 /* IAPPaymentsCache.swift */,
 				62E98A9273B420FEEDE51A2E /* IAPPaymentsService.swift */,
 				62E988A858A4CE63EA182EA6 /* IAPProductsService.swift */,
 				2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */,
@@ -7665,6 +7668,7 @@
 				62E9824265673F973F160C0A /* ProgressCircleImage.swift in Sources */,
 				62E981DD043FB3AEC3BDB669 /* PaddingLabel.swift in Sources */,
 				2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */,
+				2C1E42A424991CA3009F4C69 /* IAPPaymentsCache.swift in Sources */,
 				62E989403A2025381E5B308B /* BounceButton.swift in Sources */,
 				62E98382AC35194D9C0CE966 /* UITableViewExtensions.swift in Sources */,
 				62E98C3B15ABFA56C29FEC3B /* UICollectionViewExtensions.swift in Sources */,

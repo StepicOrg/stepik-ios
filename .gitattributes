@@ -5,6 +5,7 @@ Stepic/Auth.plist filter=git-crypt diff=git-crypt
 Stepic/GoogleService-Info.plist filter=git-crypt diff=git-crypt
 Stepic/Legacy/Model/Tokens/Tokens.plist filter=git-crypt diff=git-crypt
 Stepic/Sources/Frameworks/InAppPurchases/IAPProductIDs.plist filter=git-crypt diff=git-crypt
+Stepic/Sources/Frameworks/InAppPurchases/IAPPaymentsCache.swift filter=git-crypt diff=git-crypt
 fastlane/metadata/**/review_information/** filter=git-crypt diff=git-crypt
 fastlane/Deliverfile filter=git-crypt diff=git-crypt
 fastlane/Appfile filter=git-crypt diff=git-crypt
