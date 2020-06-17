@@ -2,34 +2,51 @@ import Foundation
 import PromiseKit
 import StoreKit
 
+protocol IAPPaymentsServiceDelegate: AnyObject {
+    func iapPaymentsService(_ service: IAPPaymentsServiceProtocol, didPurchaseCourse courseID: Course.IdType)
+    func iapPaymentsService(
+        _ service: IAPPaymentsServiceProtocol,
+        didFailPurchaseCourse courseID: Course.IdType,
+        withError error: Swift.Error
+    )
+}
+
 protocol IAPPaymentsServiceProtocol: AnyObject {
+    var delegate: IAPPaymentsServiceDelegate? { get set }
+
     func startObserving()
     func stopObserving()
 
     func canMakePayments() -> Bool
 
-    func buy(courseID: Course.IdType, product: SKProduct) -> Promise<Void>
+    func buy(courseID: Course.IdType, product: SKProduct)
 }
 
+// MARK: - IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol -
+
 final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
+    weak var delegate: IAPPaymentsServiceDelegate?
+
     private let paymentQueue: SKPaymentQueue
+    private let paymentsCache: IAPPaymentsCacheProtocol
     private let receiptValidationService: IAPReceiptValidationServiceProtocol
 
-    private var courseID: Course.IdType?
-    private var product: SKProduct?
-
-    private var onBuyProductCompletionHandler: ((Swift.Result<Bool, Error>) -> Void)?
+    private let userAccountService: UserAccountServiceProtocol
 
     init(
         paymentQueue: SKPaymentQueue = SKPaymentQueue.default(),
+        paymentsCache: IAPPaymentsCacheProtocol = IAPPaymentsCache(userAccountService: UserAccountService()),
         receiptValidationService: IAPReceiptValidationServiceProtocol = IAPReceiptValidationService(
             coursePaymentsNetworkService: CoursePaymentsNetworkService(
                 coursePaymentsAPI: CoursePaymentsAPI()
             )
-        )
+        ),
+        userAccountService: UserAccountServiceProtocol = UserAccountService()
     ) {
         self.paymentQueue = paymentQueue
+        self.paymentsCache = paymentsCache
         self.receiptValidationService = receiptValidationService
+        self.userAccountService = userAccountService
         super.init()
     }
 
@@ -49,65 +66,104 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
         SKPaymentQueue.canMakePayments()
     }
 
-    func buy(courseID: Course.IdType, product: SKProduct) -> Promise<Void> {
-        self.courseID = courseID
-        self.product = product
-
-        return Promise { seal in
-            let payment = SKPayment(product: product)
-            self.paymentQueue.add(payment)
-
-            self.onBuyProductCompletionHandler = { result in
-                switch result {
-                case .success:
-                    seal.fulfill(())
-                case .failure(let error):
-                    seal.reject(error)
-                }
-            }
+    func buy(courseID: Course.IdType, product: SKProduct) {
+        guard self.canMakePayments() else {
+            self.delegate?.iapPaymentsService(self, didFailPurchaseCourse: courseID, withError: Error.paymentNotAllowed)
+            return
         }
+
+        self.paymentsCache.insertCoursePayment(courseID: courseID, product: product)
+        self.paymentQueue.add(SKPayment(product: product))
     }
 
     enum Error: Swift.Error {
+        case paymentNotAllowed
         case paymentCancelled
         case paymentFailed
+        case paymentUserChanged
     }
 }
+
+// MARK: - IAPPaymentsService: SKPaymentTransactionObserver -
 
 extension IAPPaymentsService: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
-            switch transaction.transactionState {
-            case .purchased:
-                self.receiptValidationService.validateCoursePayment(
-                    courseID: courseID,
-                    price: product.price.doubleValue,
-                    currencyCode: product.priceLocale.currencyCode
-                ).done { _ in
-                    self.onBuyProductCompletionHandler?(.success(true))
-                    self.paymentQueue.finishTransaction(transaction)
-                }.catch { error in
-                    print("IAPPaymentsService :: failed validate payment with error: \(error)")
-                    self.onBuyProductCompletionHandler?(.failure(Error.paymentFailed))
-                }
-            case .failed:
-                if let skError = transaction.error as? SKError {
-                    if skError.code != .paymentCancelled {
-                        self.onBuyProductCompletionHandler?(.failure(Error.paymentFailed))
-                    } else {
-                        self.onBuyProductCompletionHandler?(.failure(Error.paymentCancelled))
-                    }
-                    print("IAPPaymentsService :: payment failed with error: \(skError)")
-                } else {
-                    print("IAPPaymentsService :: payment failed with unknown error")
-                    self.onBuyProductCompletionHandler?(.failure(Error.paymentFailed))
-                }
-                self.paymentQueue.finishTransaction(transaction)
-            case .purchasing, .deferred, .restored:
-                break
-            @unknown default:
-                break
+            self.processTransaction(transaction)
+        }
+    }
+
+    // MARK: Private Helpers
+
+    private func processTransaction(_ transaction: SKPaymentTransaction) {
+        guard let payload = self.paymentsCache.getCoursePayment(for: transaction) else {
+            return print("IAPPaymentsService :: payment failed missing payload data")
+        }
+
+        switch transaction.transactionState {
+        case .purchased:
+            guard let currentUserID = self.userAccountService.currentUser?.id,
+                  currentUserID == payload.userID else {
+                self.delegate?.iapPaymentsService(
+                    self,
+                    didFailPurchaseCourse: payload.courseID,
+                    withError: Error.paymentUserChanged
+                )
+                return print("IAPPaymentsService :: payment failed invalid user")
             }
+
+            self.validateReceipt(transaction: transaction, payload: payload)
+        case .failed:
+            if let skError = transaction.error as? SKError {
+                if skError.code != .paymentCancelled {
+                    self.delegate?.iapPaymentsService(
+                        self,
+                        didFailPurchaseCourse: payload.courseID,
+                        withError: Error.paymentFailed
+                    )
+                } else {
+                    self.delegate?.iapPaymentsService(
+                        self,
+                        didFailPurchaseCourse: payload.courseID,
+                        withError: Error.paymentCancelled
+                    )
+                }
+                print("IAPPaymentsService :: payment failed with error: \(skError)")
+            } else {
+                print("IAPPaymentsService :: payment failed with unknown error")
+                self.delegate?.iapPaymentsService(
+                    self,
+                    didFailPurchaseCourse: payload.courseID,
+                    withError: Error.paymentFailed
+                )
+            }
+
+            self.paymentsCache.removeCoursePayment(for: transaction)
+            self.paymentQueue.finishTransaction(transaction)
+        case .purchasing, .deferred, .restored:
+            break
+        @unknown default:
+            break
+        }
+    }
+
+    private func validateReceipt(transaction: SKPaymentTransaction, payload: CoursePaymentPayload) {
+        self.receiptValidationService.validateCoursePayment(
+            courseID: payload.courseID,
+            price: payload.price,
+            currencyCode: payload.currencyCode
+        ).done { _ in
+            self.delegate?.iapPaymentsService(self, didPurchaseCourse: payload.courseID)
+
+            self.paymentsCache.removeCoursePayment(for: transaction)
+            self.paymentQueue.finishTransaction(transaction)
+        }.catch { error in
+            print("IAPPaymentsService :: failed validate payment with error: \(error)")
+            self.delegate?.iapPaymentsService(
+                self,
+                didFailPurchaseCourse: payload.courseID,
+                withError: Error.paymentFailed
+            )
         }
     }
 }
