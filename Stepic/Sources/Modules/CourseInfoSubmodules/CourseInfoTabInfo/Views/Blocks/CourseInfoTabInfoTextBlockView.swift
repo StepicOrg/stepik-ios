@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -18,13 +19,33 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     private lazy var headerView = CourseInfoTabInfoHeaderBlockView()
 
-    private lazy var messageLabel: UILabel = {
-        let label = UILabel()
+    private lazy var messageLabel: AttributedLabel = {
+        let label = AttributedLabel()
         label.numberOfLines = 0
         label.font = self.appearance.messageLabelFont
         label.textColor = self.appearance.messageLabelTextColor
+        label.onClick = { [weak self] label, detection in
+            guard let strongSelf = self else {
+                return
+            }
+
+            switch detection.type {
+            case .link(let url):
+                strongSelf.onOpenURL?(url)
+            case .tag(let tag):
+                if tag.name == "a",
+                    let href = tag.attributes["href"],
+                    let url = URL(string: href) {
+                    strongSelf.onOpenURL?(url)
+                }
+            default:
+                break
+            }
+        }
         return label
     }()
+
+    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
 
     var icon: UIImage? {
         didSet {
@@ -40,15 +61,21 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     var message: String? {
         didSet {
-            self.messageLabel.setTextWithHTMLString(
-                self.message ?? "",
-                lineSpacing: self.appearance.messageLabelLineSpacing
-            )
+            if let trimmedMessage = self.message?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                self.messageLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
+                    htmlString: trimmedMessage
+                ) as? AttributedText
+            } else {
+                self.messageLabel.attributedText = nil
+            }
         }
     }
 
+    var onOpenURL: ((URL) -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
+        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(font: appearance.messageLabelFont)
         super.init(frame: frame)
 
         self.setupView()

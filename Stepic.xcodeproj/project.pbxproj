@@ -588,6 +588,7 @@
 		2CB62BE72019FD8500B5E336 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
 		2CB62BEE2019FDB100B5E336 /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BEC2019FDB000B5E336 /* arrow_right.svg */; };
 		2CB62BEF2019FDB100B5E336 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BED2019FDB100B5E336 /* arrow_left.svg */; };
+		2CB718DC249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB718DB249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift */; };
 		2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */; };
 		2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */; };
 		2CB9E56223D54BE10050A7F3 /* FileLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */; };
@@ -1862,6 +1863,7 @@
 		2CB62BEA2019FD9300B5E336 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step3.html; sourceTree = "<group>"; };
 		2CB62BEC2019FDB000B5E336 /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = arrow_right.svg; sourceTree = "<group>"; };
 		2CB62BED2019FDB100B5E336 /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = arrow_left.svg; sourceTree = "<group>"; };
+		2CB718DB249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLToAttributedStringConverter.swift; sourceTree = "<group>"; };
 		2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsNetworkService.swift; sourceTree = "<group>"; };
 		2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsPersistenceService.swift; sourceTree = "<group>"; };
 		2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationManager.swift; sourceTree = "<group>"; };
@@ -5705,6 +5707,7 @@
 			isa = PBXGroup;
 			children = (
 				62E981CAF11255059CB09BF1 /* FormatterHelper.swift */,
+				2CB718DB249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift */,
 				2C01BB67233CD92C00C8DCF0 /* Require.swift */,
 			);
 			path = Helpers;
@@ -7861,6 +7864,7 @@
 				62E983D50569783CDB719D65 /* ContentLanguageSwitchInteractor.swift in Sources */,
 				62E98F674E6B10451E7397F9 /* ContentLanguageSwitchPresenter.swift in Sources */,
 				62E98273401D1360B07BAD0A /* ContentLanguageSwitchProvider.swift in Sources */,
+				2CB718DC249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift in Sources */,
 				62E9889E935597A0ED849B0C /* ContentLanguageSwitchViewController.swift in Sources */,
 				62E982DE03DC1E9967B8B43B /* ContentLanguageSwitchViewModel.swift in Sources */,
 				62E98561DFB8CBB54B0CA2F7 /* ContentLanguageSwitchButton.swift in Sources */,
@@ -8472,7 +8476,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 219;
+				CURRENT_PROJECT_VERSION = 220;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -8502,7 +8506,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 219;
+				CURRENT_PROJECT_VERSION = 220;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
