@@ -9,6 +9,9 @@ protocol CourseInfoPresenterProtocol {
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
+    func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
+    func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response)
+    func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
 }
@@ -70,8 +73,36 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
-        let path = "\(StepikApplicationsInfo.stepikURL)/course/\(response.course.id)/pay"
+        let path = self.makeCousePayWebURLPath(courseID: response.course.id)
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
+    }
+
+    func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
+        self.viewController?.displayIAPNotAllowed(
+            viewModel: .init(
+                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                message: self.makeIAPErrorMessage(course: response.course, error: response.error),
+                urlPath: self.makeCousePayWebURLPath(courseID: response.course.id)
+            )
+        )
+    }
+
+    func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response) {
+        self.viewController?.displayIAPReceiptValidationFailed(
+            viewModel: .init(
+                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                message: self.makeIAPErrorMessage(course: response.course, error: response.error)
+            )
+        )
+    }
+
+    func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response) {
+        self.viewController?.displayIAPPaymentFailed(
+            viewModel: .init(
+                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                message: self.makeIAPErrorMessage(course: response.course, error: response.error)
+            )
+        )
     }
 
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
@@ -104,6 +135,20 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
         self.viewController?.displayUserCourseActionResult(
             viewModel: .init(isSuccessful: response.isSuccessful, message: message)
+        )
+    }
+
+    private func makeCousePayWebURLPath(courseID: Course.IdType) -> String {
+        "\(StepikApplicationsInfo.stepikURL)/course/\(courseID)/pay"
+    }
+
+    private func makeIAPErrorMessage(course: Course, error: Error) -> String {
+        String(
+            format: NSLocalizedString("IAPPurchaseFailedMessage", comment: ""),
+            arguments: [
+                course.title,
+                error.localizedDescription
+            ]
         )
     }
 

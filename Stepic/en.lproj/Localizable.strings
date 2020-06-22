@@ -983,6 +983,8 @@ IAPPurchaseErrorPaymentUserChanged = "The current user changed during payment, p
 IAPPurchaseErrorPaymentReceiptValidationFailed = "Failed to validate receipt.";
 IAPPurchaseErrorPaymentFailed = "An error was occurred during processing your purchase.";
 
+IAPPurchaseBuyInWeb = "Buy in Web";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";

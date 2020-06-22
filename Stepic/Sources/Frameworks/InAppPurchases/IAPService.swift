@@ -16,6 +16,7 @@ protocol IAPServiceProtocol: AnyObject {
     func canBuyCourse(_ course: Course) -> Bool
 
     func buy(course: Course, delegate: IAPServiceDelegate?)
+    func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
 }
 
 final class IAPService: IAPServiceProtocol {
@@ -171,6 +172,18 @@ final class IAPService: IAPServiceProtocol {
         }
     }
 
+    func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?) {
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
+
+        let request = CoursePaymentRequest(courseID: course.id, delegate: delegate)
+        self.coursePaymentRequests.insert(request)
+
+        let productIdentifier = self.productsService.makeProductIdentifier(priceTier: course.priceTier.require())
+
+        self.paymentsService.retryValidateReceipt(courseID: course.id, productIdentifier: productIdentifier)
+    }
+
     // MARK: Types
 
     private final class CoursePaymentRequest: Hashable {
@@ -264,7 +277,7 @@ extension IAPService: IAPPaymentsServiceDelegate {
                 )
             }
         } else {
-            requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: error)
+            requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentFailed)
         }
 
         self.coursePaymentRequests.remove(CoursePaymentRequest(courseID: courseID, delegate: nil))

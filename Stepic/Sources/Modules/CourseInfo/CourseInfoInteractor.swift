@@ -12,6 +12,7 @@ protocol CourseInfoInteractorProtocol {
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
     func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request)
+    func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request)
 }
 
 final class CourseInfoInteractor: CourseInfoInteractorProtocol {
@@ -217,15 +218,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
-                //self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                //self.presenter.presentPaidCourseBuying(response: .init(course: course))
-                self.iapService.buy(course: course).done {
-                    print("course info interactor: successfully bought a course")
-                    self.doCourseRefresh(request: .init())
-                }.ensure {
+
+                if self.iapService.canBuyCourse(course) {
+                    self.iapService.buy(course: course, delegate: self)
+                } else {
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                }.catch { error in
-                    print("course info interactor: failed buy a course with error: \(error)")
+                    self.presenter.presentPaidCourseBuying(response: .init(course: course))
                 }
                 return
             }
@@ -251,6 +249,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.catch { error in
                 print("course info interactor: join course error = \(error)")
             }
+        }
+    }
+
+    func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request) {
+        if let course = self.currentCourse {
+            self.iapService.retryValidateReceipt(course: course, delegate: self)
         }
     }
 
@@ -345,6 +349,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 }
 
+// MARK: - CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol -
+
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     func presentLesson(in unit: Unit) {
         self.presenter.presentLesson(
@@ -375,6 +381,8 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     }
 }
 
+// MARK: - CourseInfoInteractor: NotificationsRegistrationServiceDelegate -
+
 extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
     func notificationsRegistrationService(
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
@@ -389,6 +397,44 @@ extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
     ) {
         if alertType == .permission {
             self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+        }
+    }
+}
+
+// MARK: - CourseInfoInteractor: IAPServiceDelegate -
+
+extension CourseInfoInteractor: IAPServiceDelegate {
+    func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+        self.doCourseRefresh(request: .init())
+    }
+
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didFailPurchaseCourse courseID: Course.IdType,
+        withError error: Swift.Error
+    ) {
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        if let iapServiceError = error as? IAPService.Error {
+            switch iapServiceError {
+            case .unsupportedCourse, .noProductIDsFound, .noProductsFound, .productsRequestFailed:
+                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+            case .paymentWasCancelled:
+                break
+            case .paymentFailed, .paymentUserChanged:
+                self.presenter.presentIAPPaymentFailed(response: .init(error: error, course: course))
+            case .paymentNotAllowed:
+                self.presenter.presentIAPNotAllowed(response: .init(error: error, course: course))
+            case .paymentReceiptValidationFailed:
+                self.presenter.presentIAPReceiptValidationFailed(response: .init(error: error, course: course))
+            }
+        } else {
+            self.presenter.presentIAPPaymentFailed(response: .init(error: error, course: course))
         }
     }
 }

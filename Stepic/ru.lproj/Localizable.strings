@@ -984,6 +984,8 @@ IAPPurchaseErrorPaymentUserChanged = "Текущий пользователь и
 IAPPurchaseErrorPaymentReceiptValidationFailed = "Не удалось верифицировать покупку.";
 IAPPurchaseErrorPaymentFailed = "При обработке платежа произошла ошибка.";
 
+IAPPurchaseBuyInWeb = "Купить в веб-версии";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";

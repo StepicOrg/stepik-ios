@@ -22,6 +22,7 @@ protocol IAPPaymentsServiceProtocol: AnyObject {
     func canMakePayments() -> Bool
 
     func buy(courseID: Course.IdType, product: SKProduct)
+    func retryValidateReceipt(courseID: Course.IdType, productIdentifier: IAPProductIdentifier)
 }
 
 final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
@@ -73,6 +74,21 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
         } else {
             self.delegate?.iapPaymentsService(self, didFailPurchaseCourse: courseID, withError: Error.paymentNotAllowed)
         }
+    }
+
+    func retryValidateReceipt(courseID: Course.IdType, productIdentifier: IAPProductIdentifier) {
+        guard let transaction = self.paymentQueue.transactions.first(
+            where: { $0.payment.productIdentifier == productIdentifier }
+        ), transaction.transactionState == .purchased else {
+            return
+        }
+
+        guard let payload = self.paymentsCache.getCoursePayment(for: transaction),
+              payload.courseID == courseID else {
+            return
+        }
+
+        self.validateReceipt(transaction: transaction, payload: payload)
     }
 
     enum Error: Swift.Error {

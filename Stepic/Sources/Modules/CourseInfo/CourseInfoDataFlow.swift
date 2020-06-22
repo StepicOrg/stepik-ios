@@ -198,6 +198,51 @@ enum CourseInfo {
         }
     }
 
+    /// Present in-app purchases are not allowed alert
+    enum IAPNotAllowedPresentation {
+        struct Response {
+            let error: Error
+            let course: Course
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+            let urlPath: String
+        }
+    }
+
+    /// Present in-app purchases receipt validation error alert
+    enum IAPReceiptValidationFailedPresentation {
+        struct Response {
+            let error: Error
+            let course: Course
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Retry validate receipt
+    enum IAPReceiptValidationRetry {
+        struct Request {}
+    }
+
+    /// Present in-app purchases payment failed alert
+    enum IAPPaymentFailedPresentation {
+        struct Response {
+            let error: Error
+            let course: Course
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
