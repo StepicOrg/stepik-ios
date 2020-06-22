@@ -139,6 +139,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         self.notificationsService.removeRetentionNotifications()
         self.userCoursesObserver.startObserving()
+        // Prefetch available products.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            IAPService.shared.fetchProducts().cauterize()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
