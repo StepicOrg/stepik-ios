@@ -43,6 +43,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
         }
     }
+    private var currentCourseIAPLocalizedPrice: String?
 
     private var courseWebURLPath: String? {
         guard let course = self.currentCourse else {
@@ -169,7 +170,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.courseSubscriber.leave(course: course, source: .preview).done { course in
             // Refresh course
             self.currentCourse = course
-            self.presenter.presentCourse(response: .init(result: .success(course)))
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
         }.ensure {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
@@ -233,7 +234,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course
                 self.currentCourse = course
-                self.presenter.presentCourse(response: .init(result: .success(course)))
+                self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
 
                 // Present step
                 self.presenter.presentLastStep(
@@ -260,6 +261,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     // MARK: Private methods
 
+    private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
+        .init(course: self.currentCourse.require(), iapLocalizedPrice: self.currentCourseIAPLocalizedPrice)
+    }
+
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.CourseLoad.Response> {
         Promise { seal in
             firstly {
@@ -269,14 +274,24 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.done { course in
                 self.currentCourse = course
 
-                if let targetCourse = self.currentCourse {
-                    seal.fulfill(.init(result: .success(targetCourse)))
+                if self.currentCourse != nil {
+                    seal.fulfill(.init(result: .success(self.makeCourseData())))
                 } else {
                     // Offline mode: present empty state only if get nil from network
                     if self.isOnline && self.didLoadFromCache {
                         seal.reject(Error.networkFetchFailed)
                     } else {
                         seal.fulfill(.init(result: .failure(Error.cachedFetchFailed)))
+                    }
+                }
+
+                if let course = course,
+                   course.isPaid && self.iapService.canBuyCourse(course) && self.currentCourseIAPLocalizedPrice == nil {
+                    self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
+                        self.currentCourseIAPLocalizedPrice = localizedPrice
+                        DispatchQueue.main.async {
+                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                        }
                     }
                 }
 
@@ -335,7 +350,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: currentCourse)
             }
 
-            self.presenter.presentCourse(response: .init(result: .success(currentCourse)))
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
             self.presenter.presentUserCourseActionResult(response: .init(userCourseAction: action, isSuccessful: true))
         }.catch { error in
             print("course info interactor: user course action error = \(error)")

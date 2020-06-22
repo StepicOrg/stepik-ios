@@ -21,11 +21,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentCourse(response: CourseInfo.CourseLoad.Response) {
         switch response.result {
-        case .success(let result):
-            let viewModel = CourseInfo.CourseLoad.ViewModel(
-                state: .result(data: self.makeHeaderViewModel(course: result))
+        case .success(let data):
+            let headerViewModel = self.makeHeaderViewModel(
+                course: data.course,
+                iapLocalizedPrice: data.iapLocalizedPrice
             )
-            self.viewController?.displayCourse(viewModel: viewModel)
+            self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         default:
             break
         }
@@ -162,7 +163,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
-    private func makeHeaderViewModel(course: Course) -> CourseInfoHeaderViewModel {
+    private func makeHeaderViewModel(course: Course, iapLocalizedPrice: String?) -> CourseInfoHeaderViewModel {
         let rating: Int = {
             if let reviewsCount = course.reviewSummary?.count,
                let averageRating = course.reviewSummary?.average,
@@ -189,11 +190,14 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
-            buttonDescription: self.makeButtonDescription(course: course)
+            buttonDescription: self.makeButtonDescription(course: course, iapLocalizedPrice: iapLocalizedPrice)
         )
     }
 
-    private func makeButtonDescription(course: Course) -> CourseInfoHeaderViewModel.ButtonDescription {
+    private func makeButtonDescription(
+        course: Course,
+        iapLocalizedPrice: String?
+    ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
         let isEnabled = isEnrolled ? course.canContinue : true
         let title: String = {
@@ -201,8 +205,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
             }
 
-            if course.isPaid && !course.isPurchased, let displayPrice = course.displayPrice {
-                return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+            if course.isPaid && !course.isPurchased {
+                let displayPrice = iapLocalizedPrice ?? course.displayPrice
+                if let displayPrice = displayPrice {
+                    return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+                }
             }
 
             return NSLocalizedString("WidgetButtonJoin", comment: "")

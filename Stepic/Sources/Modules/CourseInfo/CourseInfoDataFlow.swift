@@ -32,7 +32,12 @@ enum CourseInfo {
         struct Request {}
 
         struct Response {
-            var result: StepikResult<Course>
+            struct Data {
+                let course: Course
+                let iapLocalizedPrice: String?
+            }
+
+            var result: Swift.Result<Data, Swift.Error>
         }
 
         struct ViewModel {
