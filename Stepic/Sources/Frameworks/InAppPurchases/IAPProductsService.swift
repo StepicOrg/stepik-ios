@@ -5,6 +5,8 @@ import StoreKit
 typealias IAPProductIdentifier = String
 
 protocol IAPProductsServiceProtocol: AnyObject {
+    func makeProductIdentifier(priceTier: Int) -> IAPProductIdentifier
+    func canFetchProduct(with identifier: IAPProductIdentifier) -> Bool
     func getProductIdentifiers() -> Set<IAPProductIdentifier>
     func fetchProducts(productIdentifiers: Set<IAPProductIdentifier>) -> Promise<[SKProduct]>
 }
@@ -19,7 +21,11 @@ extension IAPProductsServiceProtocol {
     }
 }
 
+// MARK: - IAPProductsService: IAPProductsServiceProtocol -
+
 final class IAPProductsService: IAPProductsServiceProtocol {
+    private static let productIdentifierPrefix = "course_tier_"
+
     private struct ProductQuery {
         let request: IAPProductRequest
         var completionHandlers: [IAPProductRequest.CompletionHandler]
@@ -30,8 +36,22 @@ final class IAPProductsService: IAPProductsServiceProtocol {
     // Store requests in a dictionary by product ids.
     private var productRequests: [Set<IAPProductIdentifier>: ProductQuery] = [:]
 
+    private lazy var productIdentifiers: Set<IAPProductIdentifier> = {
+        self.getProductIdentifiers()
+    }()
+
     init() {
         self.mutex = PThreadMutex(type: .recursive)
+    }
+
+    // MARK: Protocol Conforming
+
+    func makeProductIdentifier(priceTier: Int) -> IAPProductIdentifier {
+        "\(Self.productIdentifierPrefix)\(priceTier)"
+    }
+
+    func canFetchProduct(with identifier: IAPProductIdentifier) -> Bool {
+        self.productIdentifiers.contains(identifier)
     }
 
     func getProductIdentifiers() -> Set<IAPProductIdentifier> {
@@ -107,6 +127,8 @@ final class IAPProductsService: IAPProductsServiceProtocol {
         case noProductIDsFound
     }
 }
+
+// MARK: - IAPProductRequest: NSObject, SKProductsRequestDelegate -
 
 fileprivate final class IAPProductRequest: NSObject, SKProductsRequestDelegate {
     typealias CompletionHandler = (Swift.Result<[SKProduct], Swift.Error>) -> Void

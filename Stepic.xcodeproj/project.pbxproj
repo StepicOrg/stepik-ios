@@ -414,6 +414,7 @@
 		2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */; };
 		2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */; };
 		2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */; };
+		2C223A1524A0CC91002E4F02 /* IAPServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */; };
 		2C2365E421078CEF00C99742 /* StoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* StoredFileManager.swift */; };
 		2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12621AD8907001DCF89 /* NextLessonService.swift */; };
 		2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */; };
@@ -1688,6 +1689,7 @@
 		2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementListSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileAchievementsContentView.xib; sourceTree = "<group>"; };
+		2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPServiceDelegate.swift; sourceTree = "<group>"; };
 		2C22F3E2226E2A7100467F54 /* Model_course_paid.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_paid.xcdatamodel; sourceTree = "<group>"; };
 		2C2365E321078CEF00C99742 /* StoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFileManager.swift; sourceTree = "<group>"; };
 		2C23C12621AD8907001DCF89 /* NextLessonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonService.swift; sourceTree = "<group>"; };
@@ -2789,6 +2791,7 @@
 				62E988A858A4CE63EA182EA6 /* IAPProductsService.swift */,
 				2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */,
 				62E9896F55E6BED87609B98A /* IAPService.swift */,
+				2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */,
 			);
 			path = InAppPurchases;
 			sourceTree = "<group>";
@@ -8041,6 +8044,7 @@
 				62E98D9A7B541ACE9D6CF480 /* NewFreeAnswerQuizView.swift in Sources */,
 				2CEBEBF6242F8FB200DBFDF0 /* StepikRequestRetrier.swift in Sources */,
 				62E98D7DEA0DB85F22C353CC /* NewFreeAnswerQuizViewController.swift in Sources */,
+				2C223A1524A0CC91002E4F02 /* IAPServiceDelegate.swift in Sources */,
 				62E98377FC4206342B5DEAD9 /* NewFreeAnswerQuizViewModel.swift in Sources */,
 				62E9867E94A2DD00EEE119E0 /* NewMatchingQuizAssembly.swift in Sources */,
 				62E9894A942372F5B1786756 /* NewMatchingQuizDataFlow.swift in Sources */,

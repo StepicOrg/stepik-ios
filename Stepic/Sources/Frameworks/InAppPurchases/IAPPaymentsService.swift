@@ -11,6 +11,8 @@ protocol IAPPaymentsServiceDelegate: AnyObject {
     )
 }
 
+// MARK: - IAPPaymentsService -
+
 protocol IAPPaymentsServiceProtocol: AnyObject {
     var delegate: IAPPaymentsServiceDelegate? { get set }
 
@@ -21,8 +23,6 @@ protocol IAPPaymentsServiceProtocol: AnyObject {
 
     func buy(courseID: Course.IdType, product: SKProduct)
 }
-
-// MARK: - IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol -
 
 final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
     weak var delegate: IAPPaymentsServiceDelegate?
@@ -67,13 +67,12 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
     }
 
     func buy(courseID: Course.IdType, product: SKProduct) {
-        guard self.canMakePayments() else {
+        if self.canMakePayments() {
+            self.paymentsCache.insertCoursePayment(courseID: courseID, product: product)
+            self.paymentQueue.add(SKPayment(product: product))
+        } else {
             self.delegate?.iapPaymentsService(self, didFailPurchaseCourse: courseID, withError: Error.paymentNotAllowed)
-            return
         }
-
-        self.paymentsCache.insertCoursePayment(courseID: courseID, product: product)
-        self.paymentQueue.add(SKPayment(product: product))
     }
 
     enum Error: Swift.Error {

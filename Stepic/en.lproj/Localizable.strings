@@ -971,6 +971,13 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 /* Course List */
 CourseWidgetArchived = "Archived";
 
+/* In-App Purchases */
+IAPPurchaseSucceededTitle = "Purchase Succeeded";
+IAPPurchaseFailedTitle = "Purchase Failed";
+
+IAPPurchaseSucceededMessage = "Course \"%@\" successfully purchased.";
+IAPPurchaseFailedMessage = "Failed to buy a course \"%@\". %@";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";

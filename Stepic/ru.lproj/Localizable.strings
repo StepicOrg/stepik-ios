@@ -972,6 +972,13 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 /* Course List */
 CourseWidgetArchived = "В архиве";
 
+/* In-App Purchases */
+IAPPurchaseSucceededTitle = "Покупка удалась";
+IAPPurchaseFailedTitle = "Покупка не удалась";
+
+IAPPurchaseSucceededMessage = "Курс \"%@\" успешно куплен.";
+IAPPurchaseFailedMessage = "Не удалось купить курс \"%@\". %@";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";

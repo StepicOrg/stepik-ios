@@ -54,6 +54,7 @@ extension Course {
 
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
+    @NSManaged var managedPriceTier: NSNumber?
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -254,6 +255,15 @@ extension Course {
         }
         get {
              managedDisplayPrice
+        }
+    }
+
+    var priceTier: Int? {
+        get {
+            self.managedPriceTier?.intValue
+        }
+        set {
+            self.managedPriceTier = newValue as NSNumber?
         }
     }
 
