@@ -35,7 +35,7 @@ final class DefaultIAPServiceDelegate: IAPServiceDelegate {
             return
         }
 
-        self.coursesPersistenceService.fetch(id: courseID).done { course in
+        self.fetchCourse(courseID: courseID).done { course in
             let isSuccess = error == nil
             let courseTitle = course?.title ?? "\(courseID)"
 
@@ -61,6 +61,16 @@ final class DefaultIAPServiceDelegate: IAPServiceDelegate {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
 
             rootViewController.present(alert, animated: true, completion: nil)
-        }.cauterize()
+        }
+    }
+
+    private func fetchCourse(courseID: Course.IdType) -> Guarantee<Course?> {
+        Guarantee { seal in
+            self.coursesPersistenceService.fetch(id: courseID).done { course in
+                seal(course)
+            }.catch { _ in
+                seal(nil)
+            }
+        }
     }
 }
