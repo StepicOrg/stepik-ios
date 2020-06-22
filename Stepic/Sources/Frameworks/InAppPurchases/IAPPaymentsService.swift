@@ -80,6 +80,7 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
         case paymentCancelled
         case paymentFailed
         case paymentUserChanged
+        case paymentReceiptValidationFailed
     }
 }
 
@@ -161,7 +162,7 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
             self.delegate?.iapPaymentsService(
                 self,
                 didFailPurchaseCourse: payload.courseID,
-                withError: Error.paymentFailed
+                withError: Error.paymentReceiptValidationFailed
             )
         }
     }

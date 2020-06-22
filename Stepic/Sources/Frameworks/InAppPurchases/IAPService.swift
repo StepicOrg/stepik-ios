@@ -204,6 +204,12 @@ final class IAPService: IAPServiceProtocol {
         case paymentWasCancelled
         /// Indicates that the course payment failed.
         case paymentFailed
+        /// The IAP is not allowed on this device.
+        case paymentNotAllowed
+        /// Indicates that the current user changed during payment.
+        case paymentUserChanged
+        /// The receipt validation failed
+        case paymentReceiptValidationFailed
     }
 }
 
@@ -242,10 +248,20 @@ extension IAPService: IAPPaymentsServiceDelegate {
 
         if let paymentsServiceError = error as? IAPPaymentsService.Error {
             switch paymentsServiceError {
-            case .paymentNotAllowed, .paymentFailed, .paymentUserChanged:
+            case .paymentFailed:
                 requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentFailed)
+            case .paymentNotAllowed:
+                requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentNotAllowed)
+            case .paymentUserChanged:
+                requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentUserChanged)
             case .paymentCancelled:
                 requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentWasCancelled)
+            case .paymentReceiptValidationFailed:
+                requestDelegate.iapService(
+                    self,
+                    didFailPurchaseCourse: courseID,
+                    withError: Error.paymentReceiptValidationFailed
+                )
             }
         } else {
             requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: error)
@@ -270,8 +286,14 @@ extension IAPService.Error: LocalizedError {
         switch self {
         case .unsupportedCourse, .noProductIDsFound, .noProductsFound, .productsRequestFailed, .paymentWasCancelled:
             return nil
+        case .paymentNotAllowed:
+            return NSLocalizedString("IAPPurchaseErrorPaymentNotAllowed", comment: "")
+        case .paymentUserChanged:
+            return NSLocalizedString("IAPPurchaseErrorPaymentUserChanged", comment: "")
+        case .paymentReceiptValidationFailed:
+            return NSLocalizedString("IAPPurchaseErrorPaymentReceiptValidationFailed", comment: "")
         case .paymentFailed:
-            return ""
+            return NSLocalizedString("IAPPurchaseErrorPaymentFailed", comment: "")
         }
     }
 }

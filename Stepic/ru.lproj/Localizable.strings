@@ -979,6 +979,11 @@ IAPPurchaseFailedTitle = "Покупка не удалась";
 IAPPurchaseSucceededMessage = "Курс \"%@\" успешно куплен.";
 IAPPurchaseFailedMessage = "Не удалось купить курс \"%@\". %@";
 
+IAPPurchaseErrorPaymentNotAllowed = "Встроенные покупки не разрешены на данном устройстве.";
+IAPPurchaseErrorPaymentUserChanged = "Текущий пользователь изменился во время оплаты, пожалуйста, войдите в свою предыдущую учетную запись пользователя.";
+IAPPurchaseErrorPaymentReceiptValidationFailed = "Не удалось верифицировать покупку.";
+IAPPurchaseErrorPaymentFailed = "При обработке платежа произошла ошибка.";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";
