@@ -19,6 +19,14 @@ protocol IAPServiceProtocol: AnyObject {
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
 }
 
+extension IAPServiceProtocol {
+    func prefetchProducts(delay: DispatchTimeInterval = .seconds(3)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.fetchProducts().cauterize()
+        }
+    }
+}
+
 final class IAPService: IAPServiceProtocol {
     static let shared = IAPService()
 
