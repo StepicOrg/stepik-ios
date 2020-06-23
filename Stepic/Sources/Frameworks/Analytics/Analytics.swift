@@ -10,15 +10,18 @@ final class StepikAnalytics: Analytics {
     private let amplitudeAnalyticsEngine: AnalyticsEngine
     private let firebaseAnalyticsEngine: AnalyticsEngine
     private let appMetricaAnalyticsEngine: AnalyticsEngine
+    private let stepikAnalyticsEngine: AnalyticsEngine
 
     private init(
         amplitudeAnalyticsEngine: AnalyticsEngine = AmplitudeAnalyticsEngine(),
         firebaseAnalyticsEngine: AnalyticsEngine = FirebaseAnalyticsEngine(),
-        appMetricaAnalyticsEngine: AnalyticsEngine = AppMetricaAnalyticsEngine()
+        appMetricaAnalyticsEngine: AnalyticsEngine = AppMetricaAnalyticsEngine(),
+        stepikAnalyticsEngine: AnalyticsEngine = StepikAnalyticsEngine()
     ) {
         self.amplitudeAnalyticsEngine = amplitudeAnalyticsEngine
         self.firebaseAnalyticsEngine = firebaseAnalyticsEngine
         self.appMetricaAnalyticsEngine = appMetricaAnalyticsEngine
+        self.stepikAnalyticsEngine = stepikAnalyticsEngine
     }
 
     func send(_ event: AnalyticsEvent) {
@@ -27,6 +30,8 @@ final class StepikAnalytics: Analytics {
         if event is AmplitudeAnalyticsEvent {
             self.amplitudeAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
             self.appMetricaAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
+        } else if event is StepikAnalyticsEvent {
+            self.stepikAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
         } else {
             self.firebaseAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
             self.appMetricaAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
