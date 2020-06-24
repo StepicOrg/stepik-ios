@@ -56,6 +56,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     private static let batchSize = 30
 
     private let stepikMetricsNetworkService: StepikMetricsNetworkServiceProtocol
+    private let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     private var queue = Queue<AnalyticsEvent>()
 
@@ -68,8 +69,14 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
 
     private let requestSemaphore = DispatchSemaphore(value: 1)
 
-    init(stepikMetricsNetworkService: StepikMetricsNetworkServiceProtocol = StepikMetricsNetworkService()) {
+    init(
+        stepikMetricsNetworkService: StepikMetricsNetworkServiceProtocol = StepikMetricsNetworkService(),
+        networkReachabilityService: NetworkReachabilityServiceProtocol = NetworkReachabilityService()
+    ) {
         self.stepikMetricsNetworkService = stepikMetricsNetworkService
+        self.networkReachabilityService = networkReachabilityService
+
+        self.listenForChangesInNetworkReachabilityStatus()
     }
 
     // MARK: Protocol Conforming
@@ -139,6 +146,16 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
             self.requestSemaphore.signal()
         }.catch { _ in
             print("StepikAnalyticsEngine :: failed send batch metrics")
+        }
+    }
+
+    private func listenForChangesInNetworkReachabilityStatus() {
+        self.networkReachabilityService.startListening { networkReachabilityStatus in
+            self.synchronizationQueue.async {
+                if networkReachabilityStatus == .reachable {
+                    self.sendEventsIfNeeded()
+                }
+            }
         }
     }
 }
