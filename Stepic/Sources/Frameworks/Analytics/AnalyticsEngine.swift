@@ -58,7 +58,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     private let stepikMetricsNetworkService: StepikMetricsNetworkServiceProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
 
-    private var queue = Queue<AnalyticsEvent>()
+    private var queue = Queue<JSONDictionary>()
 
     private let synchronizationQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.StepikAnalyticsEngine",
@@ -91,15 +91,14 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     // MARK: Private API
 
     private func handleEvent(name: String, parameters: [String: Any]?, forceSend: Bool) {
-        guard let parameters = parameters else {
+        guard let eventParameters = parameters else {
             return
         }
 
         self.lock.lock()
         defer { self.lock.unlock() }
 
-        let event = AnalyticsEvent(name: name, parameters: parameters)
-        self.queue.enqueue(event)
+        self.queue.enqueue(eventParameters)
 
         self.serializeQueueState()
         self.sendEventsIfNeeded(forceSend: forceSend)
@@ -119,7 +118,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
             }
 
             var queueCopy = self.queue
-            var events = [AnalyticsEvent]()
+            var events = [JSONDictionary]()
 
             for _ in 0..<Self.batchSize {
                 if let event = queueCopy.dequeue() {
@@ -133,14 +132,12 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
         }
     }
 
-    private func sendEvents(_ events: [AnalyticsEvent]) {
-        let batchMetrics = events.map { $0.parameters.require() }
-
-        self.stepikMetricsNetworkService.sendBatchMetrics(batchMetrics).done {
+    private func sendEvents(_ events: [JSONDictionary]) {
+        self.stepikMetricsNetworkService.sendBatchMetrics(events).done {
             self.lock.lock()
             defer { self.lock.unlock() }
 
-            for _ in 0..<batchMetrics.count {
+            for _ in 0..<events.count {
                 _ = self.queue.dequeue()
             }
 
@@ -167,12 +164,9 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
 
     private func serializeQueueState() {
         self.synchronizationQueue.async {
-            self.lock.lock()
-            defer { self.lock.unlock() }
-
             do {
                 var queueCopy = self.queue
-                var events = [AnalyticsEvent]()
+                var events = [JSONDictionary]()
 
                 for _ in 0..<queueCopy.count {
                     if let event = queueCopy.dequeue() {
@@ -182,7 +176,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
                     }
                 }
 
-                let encodedData = try JSONEncoder().encode(events)
+                let encodedData = try JSONSerialization.data(withJSONObject: events, options: [])
                 let fileURL = self.getQueueFileURL()
 
                 try encodedData.write(to: fileURL, options: .atomic)
@@ -200,7 +194,10 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
         }
 
         do {
-            let events = try JSONDecoder().decode([AnalyticsEvent].self, from: data)
+            guard let events = try JSONSerialization.jsonObject(with: data, options: []) as? [JSONDictionary] else {
+                return print("StepikAnalyticsEngine :: failed deserialize queue state")
+            }
+
             for event in events {
                 self.queue.enqueue(event)
             }
