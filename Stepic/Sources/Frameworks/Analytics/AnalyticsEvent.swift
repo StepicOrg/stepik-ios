@@ -1,6 +1,6 @@
 import Foundation
 
-class AnalyticsEvent {
+class AnalyticsEvent: Codable {
     let name: String
     let parameters: [String: Any]?
 

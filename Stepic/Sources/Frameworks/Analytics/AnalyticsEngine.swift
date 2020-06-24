@@ -76,6 +76,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
         self.stepikMetricsNetworkService = stepikMetricsNetworkService
         self.networkReachabilityService = networkReachabilityService
 
+        self.deserializeQueueState()
         self.listenForChangesInNetworkReachabilityStatus()
     }
 
@@ -100,6 +101,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
         let event = AnalyticsEvent(name: name, parameters: parameters)
         self.queue.enqueue(event)
 
+        self.serializeQueueState()
         self.sendEventsIfNeeded(forceSend: forceSend)
     }
 
@@ -142,6 +144,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
                 _ = self.queue.dequeue()
             }
 
+            self.serializeQueueState()
             self.sendEventsIfNeeded()
         }.ensure {
             self.requestSemaphore.signal()
@@ -158,5 +161,57 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
                 }
             }
         }
+    }
+
+    // MARK: Persistence
+
+    private func serializeQueueState() {
+        self.synchronizationQueue.async {
+            self.lock.lock()
+            defer { self.lock.unlock() }
+
+            do {
+                var queueCopy = self.queue
+                var events = [AnalyticsEvent]()
+
+                for _ in 0..<queueCopy.count {
+                    if let event = queueCopy.dequeue() {
+                        events.append(event)
+                    } else {
+                        break
+                    }
+                }
+
+                let encodedData = try JSONEncoder().encode(events)
+                let fileURL = self.getQueueFileURL()
+
+                try encodedData.write(to: fileURL, options: .atomic)
+            } catch {
+                print("StepikAnalyticsEngine :: failed serialize queue state with error = \(error)")
+            }
+        }
+    }
+
+    private func deserializeQueueState() {
+        let fileURL = self.getQueueFileURL()
+
+        guard let data = try? Data(contentsOf: fileURL) else {
+            return
+        }
+
+        do {
+            let events = try JSONDecoder().decode([AnalyticsEvent].self, from: data)
+            for event in events {
+                self.queue.enqueue(event)
+            }
+        } catch {
+            print("StepikAnalyticsEngine :: failed deserialize queue state with error = \(error)")
+        }
+    }
+
+    private func getQueueFileURL() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory.appendingPathComponent("StepikAnalyticsEngineQueueState.txt")
     }
 }
