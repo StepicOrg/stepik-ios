@@ -7,7 +7,7 @@ final class MetricsAPI: APIEndpoint {
     override var name: String { "metrics" }
 
     func createBatchMetrics(_ metrics: [JSONDictionary]) -> Promise<Void> {
-        self.create.reques(
+        self.create.request(
             requestEndpoint: "\(self.name)/batch",
             bodyJSONObject: metrics,
             withManager: self.manager

@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CreateRequestMaker {
-    func reques(
+    func request(
         requestEndpoint: String,
         bodyJSONObject body: Any,
         withManager manager: Alamofire.Session
