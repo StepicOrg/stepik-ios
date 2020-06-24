@@ -66,7 +66,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     // TODO: Replace with pthread_mutex_t
     private let lock = NSLock()
 
-    private var hasOngoingRequest = false
+    private let requestSemaphore = DispatchSemaphore(value: 1)
 
     init(stepikMetricsNetworkService: StepikMetricsNetworkServiceProtocol = StepikMetricsNetworkService()) {
         self.stepikMetricsNetworkService = stepikMetricsNetworkService
@@ -97,51 +97,47 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     }
 
     private func sendEventsIfNeeded() {
-        if self.hasOngoingRequest {
-            return
-        }
+        self.synchronizationQueue.async {
+            self.requestSemaphore.wait()
 
-        self.lock.lock()
-        defer { self.lock.unlock() }
-
-        guard self.queue.count >= Self.batchSize else {
-            return
-        }
-
-        var queueCopy = self.queue
-        var events = [AnalyticsEvent]()
-
-        for _ in 0..<Self.batchSize {
-            if let event = queueCopy.dequeue() {
-                events.append(event)
-            } else {
-                break
-            }
-        }
-
-        self.sendEvents(events)
-    }
-
-    private func sendEvents(_ events: [AnalyticsEvent]) {
-        if self.hasOngoingRequest {
-            return
-        }
-
-        self.hasOngoingRequest = true
-        let metrics = events.map { $0.parameters.require() }
-
-        self.stepikMetricsNetworkService.sendBatchMetrics(metrics).done {
             self.lock.lock()
             defer { self.lock.unlock() }
 
-            for _ in 0..<metrics.count {
+            guard self.queue.count >= Self.batchSize else {
+                self.requestSemaphore.signal()
+                return
+            }
+
+            var queueCopy = self.queue
+            var events = [AnalyticsEvent]()
+
+            for _ in 0..<Self.batchSize {
+                if let event = queueCopy.dequeue() {
+                    events.append(event)
+                } else {
+                    break
+                }
+            }
+
+            self.sendEvents(events)
+        }
+    }
+
+    private func sendEvents(_ events: [AnalyticsEvent]) {
+        let batchMetrics = events.map { $0.parameters.require() }
+
+        self.stepikMetricsNetworkService.sendBatchMetrics(batchMetrics).done {
+            self.lock.lock()
+            defer { self.lock.unlock() }
+
+            for _ in 0..<batchMetrics.count {
                 _ = self.queue.dequeue()
             }
 
-            self.hasOngoingRequest = false
             self.sendEventsIfNeeded()
+        }.ensure {
+            self.requestSemaphore.signal()
         }.catch { _ in
-            self.hasOngoingRequest = false
             print("StepikAnalyticsEngine :: failed send batch metrics")
         }
     }
