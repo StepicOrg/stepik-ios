@@ -1,7 +1,13 @@
 import Foundation
 
 protocol Analytics {
-    func send(_ event: AnalyticsEvent)
+    func send(_ event: AnalyticsEvent, forceSend: Bool)
+}
+
+extension Analytics {
+    func send(_ event: AnalyticsEvent) {
+        self.send(event, forceSend: false)
+    }
 }
 
 final class StepikAnalytics: Analytics {
@@ -24,17 +30,37 @@ final class StepikAnalytics: Analytics {
         self.stepikAnalyticsEngine = stepikAnalyticsEngine
     }
 
-    func send(_ event: AnalyticsEvent) {
+    func send(_ event: AnalyticsEvent, forceSend: Bool) {
         // Sends Amplitude events to Amplitude backend and also mirrors these events to AppMetrica.
         // Otherwise, sends the current event to AppMetrica and FirebaseAnalytics backends.
         if event is AmplitudeAnalyticsEvent {
-            self.amplitudeAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
-            self.appMetricaAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
+            self.amplitudeAnalyticsEngine.sendAnalyticsEvent(
+                named: event.name,
+                parameters: event.parameters,
+                forceSend: forceSend
+            )
+            self.appMetricaAnalyticsEngine.sendAnalyticsEvent(
+                named: event.name,
+                parameters: event.parameters,
+                forceSend: forceSend
+            )
         } else if event is StepikAnalyticsEvent {
-            self.stepikAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
+            self.stepikAnalyticsEngine.sendAnalyticsEvent(
+                named: event.name,
+                parameters: event.parameters,
+                forceSend: forceSend
+            )
         } else {
-            self.firebaseAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
-            self.appMetricaAnalyticsEngine.sendAnalyticsEvent(named: event.name, parameters: event.parameters)
+            self.firebaseAnalyticsEngine.sendAnalyticsEvent(
+                named: event.name,
+                parameters: event.parameters,
+                forceSend: forceSend
+            )
+            self.appMetricaAnalyticsEngine.sendAnalyticsEvent(
+                named: event.name,
+                parameters: event.parameters,
+                forceSend: forceSend
+            )
         }
     }
 }

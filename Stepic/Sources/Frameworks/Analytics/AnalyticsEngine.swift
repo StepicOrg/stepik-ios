@@ -4,12 +4,12 @@ import Foundation
 import YandexMobileMetrica
 
 protocol AnalyticsEngine: AnyObject {
-    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?)
+    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool)
 }
 
 extension AnalyticsEngine {
     func sendAnalyticsEvent(named name: String) {
-        self.sendAnalyticsEvent(named: name, parameters: nil)
+        self.sendAnalyticsEvent(named: name, parameters: nil, forceSend: false)
     }
 }
 
@@ -22,7 +22,7 @@ final class AmplitudeAnalyticsEngine: AnalyticsEngine {
         self.instance = instance
     }
 
-    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?) {
+    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         self.instance.logEvent(name, withEventProperties: parameters)
         print("Logging Amplitude event: \(name), parameters: \(String(describing: parameters)))")
     }
@@ -33,7 +33,7 @@ final class AmplitudeAnalyticsEngine: AnalyticsEngine {
 final class FirebaseAnalyticsEngine: AnalyticsEngine {
     init() {}
 
-    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?) {
+    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters)
         print("Logging Firebase event: \(name), parameters: \(String(describing: parameters))")
     }
@@ -44,7 +44,7 @@ final class FirebaseAnalyticsEngine: AnalyticsEngine {
 final class AppMetricaAnalyticsEngine: AnalyticsEngine {
     init() {}
 
-    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?) {
+    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         YMMYandexMetrica.reportEvent(name, parameters: parameters)
         print("Logging AppMetrica event: \(name), parameters: \(String(describing: parameters))")
     }
@@ -81,15 +81,15 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
 
     // MARK: Protocol Conforming
 
-    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?) {
+    func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         self.synchronizationQueue.async {
-            self.handleEvent(name: name, parameters: parameters)
+            self.handleEvent(name: name, parameters: parameters, forceSend: forceSend)
         }
     }
 
     // MARK: Private API
 
-    private func handleEvent(name: String, parameters: [String: Any]?) {
+    private func handleEvent(name: String, parameters: [String: Any]?, forceSend: Bool) {
         guard let parameters = parameters else {
             return
         }
@@ -100,17 +100,18 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
         let event = AnalyticsEvent(name: name, parameters: parameters)
         self.queue.enqueue(event)
 
-        self.sendEventsIfNeeded()
+        self.sendEventsIfNeeded(forceSend: forceSend)
     }
 
-    private func sendEventsIfNeeded() {
+    private func sendEventsIfNeeded(forceSend: Bool = false) {
         self.synchronizationQueue.async {
             self.requestSemaphore.wait()
 
             self.lock.lock()
             defer { self.lock.unlock() }
 
-            guard self.queue.count >= Self.batchSize else {
+            let shouldSendEvents = self.queue.count >= Self.batchSize || forceSend
+            guard shouldSendEvents else {
                 self.requestSemaphore.signal()
                 return
             }
