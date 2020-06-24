@@ -12,6 +12,41 @@ import PromiseKit
 import SwiftyJSON
 
 final class CreateRequestMaker {
+    func request(
+        requestEndpoint: String,
+        bodyJSONObject body: Any,
+        withManager manager: Alamofire.Session
+    ) -> Promise<JSON> {
+        guard let url = URL(string: "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)") else {
+            return Promise(error: Error.badRequest)
+        }
+
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            return Promise(error: Error.badRequest)
+        }
+
+        return Promise { seal in
+            checkToken().done {
+                manager.request(request).validate().responseSwiftyJSON { response in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let json):
+                        seal.fulfill(json)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func request<T: JSONSerializable>(
         requestEndpoint: String,
         paramName: String,
@@ -82,5 +117,9 @@ final class CreateRequestMaker {
                 seal.reject(error)
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case badRequest
     }
 }

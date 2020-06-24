@@ -11,3 +11,5 @@ class AnalyticsEvent {
 }
 
 final class AmplitudeAnalyticsEvent: AnalyticsEvent {}
+
+final class StepikAnalyticsEvent: AnalyticsEvent {}

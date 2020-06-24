@@ -5,6 +5,9 @@ protocol NetworkReachabilityServiceProtocol: AnyObject {
     var networkStatus: NetworkReachabilityStatus { get }
     var connectionType: NetworkReachabilityConnectionType { get }
     var isReachable: Bool { get }
+
+    func stopListening()
+    func startListening(onUpdatePerforming listener: @escaping (NetworkReachabilityStatus) -> Void)
 }
 
 final class NetworkReachabilityService: NetworkReachabilityServiceProtocol {
@@ -39,12 +42,37 @@ final class NetworkReachabilityService: NetworkReachabilityServiceProtocol {
     var isReachable: Bool { self.networkStatus == .reachable }
 
     init() {}
+
+    deinit {
+        self.stopListening()
+    }
+
+    func stopListening() {
+        self.reachabilityManager?.stopListening()
+    }
+
+    func startListening(onUpdatePerforming listener: @escaping (NetworkReachabilityStatus) -> Void) {
+        self.reachabilityManager?.startListening { networkReachabilityStatus in
+            listener(NetworkReachabilityStatus(networkReachabilityStatus: networkReachabilityStatus))
+        }
+    }
 }
 
 enum NetworkReachabilityStatus {
     case unknown
     case reachable
     case unreachable
+
+    fileprivate init(networkReachabilityStatus: NetworkReachabilityManager.NetworkReachabilityStatus) {
+        switch networkReachabilityStatus {
+        case .unknown:
+            self = .unknown
+        case .notReachable:
+            self = .unreachable
+        case .reachable:
+            self = .reachable
+        }
+    }
 }
 
 /// Defines the various connection types detected by reachability flags.
