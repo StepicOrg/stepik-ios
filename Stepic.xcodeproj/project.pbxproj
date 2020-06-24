@@ -428,6 +428,7 @@
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
 		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
 		2C30505B24574B1F005DCD81 /* CourseListDataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */; };
+		2C30A6A024A29B6D0074693D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30A69F24A29B6D0074693D /* Queue.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */; };
@@ -462,6 +463,8 @@
 		2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */; };
 		2C4F3B0A2432693D002ADB53 /* jquery-3.4.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */; };
 		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
+		2C5418CA24A28ECF00B2DCE2 /* MetricsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */; };
+		2C5418CC24A2903700B2DCE2 /* StepikMetricsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */; };
 		2C546C1323DA02AB00352F27 /* String+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */; };
 		2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
@@ -1690,6 +1693,7 @@
 		2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertPresenter.swift; sourceTree = "<group>"; };
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataBackUpdateService.swift; sourceTree = "<group>"; };
+		2C30A69F24A29B6D0074693D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		2C331C5621734764007B0D01 /* NotificationService+Streak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+Streak.swift"; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
@@ -1732,6 +1736,8 @@
 		2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "kotlin-playground-1.21.1.min.js"; sourceTree = "<group>"; };
 		2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.4.1.min.js"; sourceTree = "<group>"; };
 		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
+		2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsAPI.swift; sourceTree = "<group>"; };
+		2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikMetricsNetworkService.swift; sourceTree = "<group>"; };
 		2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SafeSubscript.swift"; sourceTree = "<group>"; };
 		2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
@@ -4003,6 +4009,7 @@
 				62E98CF5FA317BCAFAE433A9 /* ImageDataProvider.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
+				2C30A69F24A29B6D0074693D /* Queue.swift */,
 				2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */,
 				2C2EA36A212D5FEF002116C9 /* StepikResult.swift */,
 				2CBBCB9923980ED6006D6C15 /* WeakBox.swift */,
@@ -4976,6 +4983,7 @@
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
 				2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */,
+				2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */,
 				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
 				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
@@ -5368,7 +5376,6 @@
 		62E9835CAD3FB794FCA9C3DE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2CE03CD12470B018004FBFEA /* Analytics */,
 				2CD462E8226F424A004E4725 /* Common */,
 				62E98438A4F73FAEFB2D581B /* Controllers */,
 				62E986D974D797A3BDF8DA59 /* Extensions */,
@@ -5457,6 +5464,7 @@
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
+				2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */,
 				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
 				2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */,
 				2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */,
@@ -6141,6 +6149,7 @@
 		62E98CC94E832628B12543D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CE03CD12470B018004FBFEA /* Analytics */,
 				2C48D5FF228F0C4800739477 /* ContentProcessor */,
 				2CF1505123D532D900915E5A /* Downloader */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
@@ -7353,6 +7362,7 @@
 				2CB9E56523D54CE70050A7F3 /* StoredFile.swift in Sources */,
 				2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
+				2C5418CA24A28ECF00B2DCE2 /* MetricsAPI.swift in Sources */,
 				089200742199E01D00083627 /* DeepLinkRoute.swift in Sources */,
 				0863B9672069A41A0023A182 /* RetrieveRequestMaker.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
@@ -7619,6 +7629,7 @@
 				62E982F9CF826D3E99B7EE08 /* NotificationPermissionStatusSettingsObserver.swift in Sources */,
 				62E987560B7A0EFE8D4753CB /* RetentionLocalNotificationProvider.swift in Sources */,
 				62E985181538017E088C38D9 /* DataBackUpdateService.swift in Sources */,
+				2C30A6A024A29B6D0074693D /* Queue.swift in Sources */,
 				62E980E2B82515489059C986 /* UnitNavigationService.swift in Sources */,
 				2C4AD01523E301C50049B7B0 /* DiscussionThreadsAPI.swift in Sources */,
 				62E98F49F6018A67DEB616C5 /* CourseReviewsNetworkService.swift in Sources */,
@@ -7813,6 +7824,7 @@
 				62E98E6F295E2C4799957DFB /* CourseWidgetStatsItemView.swift in Sources */,
 				62E982348800CA9D75D78064 /* CourseWidgetStatsView.swift in Sources */,
 				62E9873C5D78AED0DDF82C0A /* CourseWidgetView.swift in Sources */,
+				2C5418CC24A2903700B2DCE2 /* StepikMetricsNetworkService.swift in Sources */,
 				62E986F50E795C4019AD833D /* DiscussionsAssembly.swift in Sources */,
 				62E98CAC634CA489E79DBAB7 /* DiscussionsDataFlow.swift in Sources */,
 				62E98B2B62393917B34F16C5 /* DiscussionsInteractor.swift in Sources */,
@@ -8476,7 +8488,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 220;
+				CURRENT_PROJECT_VERSION = 222;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -8506,7 +8518,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 220;
+				CURRENT_PROJECT_VERSION = 222;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
