@@ -72,8 +72,12 @@ final class SocialAuthPresenter {
     }
 
     func update() {
-        let providersInfo = SocialProvider.allCases.map {
-            SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
+        let providersInfo: [SocialProviderViewData] = SocialProvider.allCases.compactMap {
+            if #available(iOS 13.0, *) {
+            } else if $0 == .apple {
+                return nil
+            }
+            return SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
         }
         view?.set(providers: providersInfo)
     }
