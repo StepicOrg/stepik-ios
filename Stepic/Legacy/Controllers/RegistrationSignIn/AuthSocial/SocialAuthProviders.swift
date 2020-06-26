@@ -19,11 +19,20 @@ enum SocialProvider: Int, CaseIterable {
     var info: SocialProviderInfo {
         switch self {
         case .apple:
+            let appleIDSocialSDKProvider: SocialSDKProvider? = {
+                if #available(iOS 13.0, *) {
+                    return AppleIDSocialSDKProvider()
+                } else {
+                    return nil
+                }
+            }()
+
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
                 image: UIImage(named: "siwa"),
-                registerURL: URL(string: StepikApplicationsInfo.stepikURL)!
+                registerURL: URL(string: StepikApplicationsInfo.stepikURL)!,
+                socialSDKProvider: appleIDSocialSDKProvider
             )
         case .vk:
             return SocialProviderInfo(

@@ -605,6 +605,7 @@
 		2CB9E8CB1F8397960004E17F /* NotificationsSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */; };
 		2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */; };
 		2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */; };
+		2CBB21D924A60D7500B57F2D /* AppleIDSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBB21D824A60D7500B57F2D /* AppleIDSocialSDKProvider.swift */; };
 		2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */; };
 		2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBCB9923980ED6006D6C15 /* WeakBox.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
@@ -1883,6 +1884,7 @@
 		2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSectionHeaderView.xib; sourceTree = "<group>"; };
 		2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsTableViewCell.xib; sourceTree = "<group>"; };
+		2CBB21D824A60D7500B57F2D /* AppleIDSocialSDKProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIDSocialSDKProvider.swift; sourceTree = "<group>"; };
 		2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		2CBBCB9923980ED6006D6C15 /* WeakBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakBox.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -5023,6 +5025,7 @@
 		2CFF903D242A2A7900FD7311 /* SocialSDKProviders */ = {
 			isa = PBXGroup;
 			children = (
+				2CBB21D824A60D7500B57F2D /* AppleIDSocialSDKProvider.swift */,
 				08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */,
 				088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */,
 				088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */,
@@ -8008,6 +8011,7 @@
 				62E987E02A516366BADB152C /* NewChoiceQuizDataFlow.swift in Sources */,
 				62E98120BD0CAC63FFBAD181 /* NewChoiceQuizInteractor.swift in Sources */,
 				62E984AF1A9CF200A909A364 /* NewChoiceQuizPresenter.swift in Sources */,
+				2CBB21D924A60D7500B57F2D /* AppleIDSocialSDKProvider.swift in Sources */,
 				62E989C639A6F7D5455AD230 /* NewChoiceQuizViewController.swift in Sources */,
 				62E9827C16A8925D41C5BD53 /* NewChoiceQuizViewModel.swift in Sources */,
 				62E98961F7A3F44BF56A5B0D /* ChoiceElementView.swift in Sources */,
