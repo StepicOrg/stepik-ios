@@ -229,7 +229,6 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
             for: indexPath
         ) as! SocialAuthCollectionViewCell
 
-        cell.socialProviderName = provider.name
         cell.imageView.image = provider.image
 
         return cell

@@ -11,22 +11,12 @@ import UIKit
 final class SocialAuthCollectionViewCell: UICollectionViewCell {
     enum Appearance {
         static let shadowColor = UIColor.dynamic(light: UIColor(hex6: 0xBBBBBB), dark: .clear)
-        static let backgroundColor = UIColor.dynamic(
-            light: .stepikBackground,
-            dark: .stepikSecondaryBackground
-        )
-        static let appleBackgroundColor = UIColor.dynamic(light: .black, dark: .white)
+        static let backgroundColor = UIColor.dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
     }
 
     static let reuseId = "socialAuthCell"
 
     @IBOutlet weak var imageView: UIImageView!
-
-    var socialProviderName: String? {
-        didSet {
-            self.colorize()
-        }
-    }
 
     override var isHighlighted: Bool {
         didSet {
@@ -71,8 +61,6 @@ final class SocialAuthCollectionViewCell: UICollectionViewCell {
 
     private func colorize() {
         self.layer.shadowColor = Appearance.shadowColor.cgColor
-        self.contentView.backgroundColor = self.socialProviderName?.lowercased() == "apple"
-            ? Appearance.appleBackgroundColor
-            : Appearance.backgroundColor
+        self.contentView.backgroundColor = Appearance.backgroundColor
     }
 }
