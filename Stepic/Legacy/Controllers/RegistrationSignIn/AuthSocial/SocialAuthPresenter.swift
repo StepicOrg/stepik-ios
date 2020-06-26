@@ -73,11 +73,11 @@ final class SocialAuthPresenter {
 
     func update() {
         let providersInfo: [SocialProviderViewData] = SocialProvider.allCases.compactMap {
-            if #available(iOS 13.0, *) {
-            } else if $0 == .apple {
+            if $0 == .apple && !StepikApplicationsInfo.SocialInfo.isSignInWithAppleAvailable {
                 return nil
+            } else {
+                return SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
             }
-            return SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
         }
         view?.set(providers: providersInfo)
     }
