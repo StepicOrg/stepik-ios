@@ -9,6 +9,7 @@
 import Foundation
 
 enum SocialProvider: Int, CaseIterable {
+    case apple
     case vk
     case google
     case facebook
@@ -17,6 +18,22 @@ enum SocialProvider: Int, CaseIterable {
 
     var info: SocialProviderInfo {
         switch self {
+        case .apple:
+            let appleIDSocialSDKProvider: SocialSDKProvider? = {
+                if #available(iOS 13.0, *) {
+                    return AppleIDSocialSDKProvider()
+                } else {
+                    return nil
+                }
+            }()
+
+            return SocialProviderInfo(
+                name: self.name,
+                amplitudeName: self.amplitudeName,
+                image: UIImage(named: "siwa"),
+                registerURL: URL(string: StepikApplicationsInfo.stepikURL)!,
+                socialSDKProvider: appleIDSocialSDKProvider
+            )
         case .vk:
             return SocialProviderInfo(
                 name: self.name,
@@ -59,6 +76,8 @@ enum SocialProvider: Int, CaseIterable {
 
     var name: String {
         switch self {
+        case .apple:
+            return "Apple"
         case .vk:
             return "VK"
         case .google:
@@ -74,6 +93,8 @@ enum SocialProvider: Int, CaseIterable {
 
     var amplitudeName: String {
         switch self {
+        case .apple:
+            return "apple"
         case .vk:
             return "vk"
         case .google:

@@ -19,7 +19,7 @@ final class FBSocialSDKProvider: NSObject, SocialSDKProvider {
         super.init()
     }
 
-    func getAccessInfo() -> Promise<(token: String, email: String?)> {
+    func getAccessInfo() -> Promise<SocialSDKCredential> {
         Promise { seal in
             let loginManager = LoginManager()
             loginManager.logIn(permissions: ["email"], from: nil, handler: { result, error in
@@ -39,7 +39,7 @@ final class FBSocialSDKProvider: NSObject, SocialSDKProvider {
                 }
 
                 if let token = result.token?.tokenString {
-                    seal.fulfill((token: token, email: nil))
+                    seal.fulfill(SocialSDKCredential(token: token))
                     return
                 }
             })
