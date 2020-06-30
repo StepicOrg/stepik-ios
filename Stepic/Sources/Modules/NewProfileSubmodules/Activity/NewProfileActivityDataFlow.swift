@@ -10,7 +10,14 @@ enum NewProfileActivity {
         }
 
         struct ViewModel {
-            let viewModel: NewProfileActivityViewModel
+            let state: ViewControllerState
         }
+    }
+
+    // MARK: States
+
+    enum ViewControllerState {
+        case error
+        case result(data: NewProfileActivityViewModel)
     }
 }

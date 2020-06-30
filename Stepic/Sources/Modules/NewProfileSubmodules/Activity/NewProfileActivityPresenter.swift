@@ -11,9 +11,9 @@ final class NewProfileActivityPresenter: NewProfileActivityPresenterProtocol {
         switch response.result {
         case .success(let userActivity):
             let viewModel = self.makeViewModel(userActivity: userActivity)
-            self.viewController?.displayUserActivity(viewModel: .init(viewModel: viewModel))
-        case .failure(let error):
-            print(error)
+            self.viewController?.displayUserActivity(viewModel: .init(state: .result(data: viewModel)))
+        case .failure:
+            self.viewController?.displayUserActivity(viewModel: .init(state: .error))
         }
     }
 
