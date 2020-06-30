@@ -1,11 +1,13 @@
 import UIKit
 
 protocol NewProfileActivityViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: NewProfileActivity.ActivityLoad.ViewModel)
+    func displayUserActivity(viewModel: NewProfileActivity.ActivityLoad.ViewModel)
 }
 
 final class NewProfileActivityViewController: UIViewController {
     private let interactor: NewProfileActivityInteractorProtocol
+
+    var newProfileActivityView: NewProfileActivityView? { self.view as? NewProfileActivityView }
 
     init(interactor: NewProfileActivityInteractorProtocol) {
         self.interactor = interactor
@@ -24,5 +26,7 @@ final class NewProfileActivityViewController: UIViewController {
 }
 
 extension NewProfileActivityViewController: NewProfileActivityViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewProfileActivity.ActivityLoad.ViewModel) {}
+    func displayUserActivity(viewModel: NewProfileActivity.ActivityLoad.ViewModel) {
+        self.newProfileActivityView?.configure(viewModel: viewModel.viewModel)
+    }
 }

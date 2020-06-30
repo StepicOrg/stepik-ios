@@ -9,6 +9,8 @@ enum NewProfileActivity {
             let result: Result<UserActivity, Error>
         }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let viewModel: NewProfileActivityViewModel
+        }
     }
 }

@@ -979,6 +979,7 @@ NewProfileRatingCourses1 = "%@ курс";
 NewProfileRatingCourses234 = "%@ курса";
 NewProfileRatingCourses567890 = "%@ курсов";
 
+NewProfileBlockTitleActivity = "Активность";
 NewProfileBlockTitleDetails = "Обо мне";
 
 /* Accessibility */

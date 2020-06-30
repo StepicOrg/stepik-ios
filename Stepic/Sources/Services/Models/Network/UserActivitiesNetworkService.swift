@@ -30,7 +30,7 @@ final class UserActivitiesNetworkService: UserActivitiesNetworkServiceProtocol {
     }
 
     private func insertOrReplace(userActivity: UserActivity) -> Guarantee<Void> {
-        Guarantee { _ in
+        Guarantee { seal in
             self.userActivitiesPersistenceService.fetch(id: userActivity.id).then {
                 cachedUserActivityEntityOrNil -> Guarantee<UserActivityEntity> in
                 if let cachedUserActivityEntity = cachedUserActivityEntityOrNil {
@@ -40,6 +40,7 @@ final class UserActivitiesNetworkService: UserActivitiesNetworkServiceProtocol {
                 }
             }.done { userActivityEntity in
                 userActivityEntity.pins = userActivity.pins
+                seal(())
             }
         }
     }

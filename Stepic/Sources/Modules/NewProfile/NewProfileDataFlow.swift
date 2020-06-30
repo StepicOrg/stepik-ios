@@ -4,6 +4,7 @@ enum NewProfile {
     // MARK: Common types
 
     enum Submodule: String, UniqueIdentifiable {
+        case userActivity
         case details
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
