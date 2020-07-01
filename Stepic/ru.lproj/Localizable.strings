@@ -984,6 +984,7 @@ NewProfileBlockTitleDetails = "Обо мне";
 
 NewProfileUserActivityNoCurrentStreak = "Начните учиться сегодня";
 NewProfileUserActivityCurrentStreak = "%@ без перерыва";
+NewProfileUserActivityLongestStreak = "Максимальная серия %@";
 
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";

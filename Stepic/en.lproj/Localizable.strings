@@ -983,6 +983,7 @@ NewProfileBlockTitleDetails = "Details";
 
 NewProfileUserActivityNoCurrentStreak = "Start learning today";
 NewProfileUserActivityCurrentStreak = "%@ in a row";
+NewProfileUserActivityLongestStreak = "Longest streak %@";
 
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
