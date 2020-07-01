@@ -1,13 +1,13 @@
 import UIKit
 
-protocol NewProfileActivityPresenterProtocol {
-    func presentUserActivity(response: NewProfileActivity.ActivityLoad.Response)
+protocol NewProfileUserActivityPresenterProtocol {
+    func presentUserActivity(response: NewProfileUserActivity.ActivityLoad.Response)
 }
 
-final class NewProfileActivityPresenter: NewProfileActivityPresenterProtocol {
-    weak var viewController: NewProfileActivityViewControllerProtocol?
+final class NewProfileUserActivityPresenter: NewProfileUserActivityPresenterProtocol {
+    weak var viewController: NewProfileUserActivityViewControllerProtocol?
 
-    func presentUserActivity(response: NewProfileActivity.ActivityLoad.Response) {
+    func presentUserActivity(response: NewProfileUserActivity.ActivityLoad.Response) {
         switch response.result {
         case .success(let userActivity):
             let viewModel = self.makeViewModel(userActivity: userActivity)
@@ -17,7 +17,7 @@ final class NewProfileActivityPresenter: NewProfileActivityPresenterProtocol {
         }
     }
 
-    private func makeViewModel(userActivity: UserActivity) -> NewProfileActivityViewModel {
+    private func makeViewModel(userActivity: UserActivity) -> NewProfileUserActivityViewModel {
         let currentStreakText = userActivity.currentStreak > 0
             ? String(
                 format: NSLocalizedString("NewProfileUserActivityCurrentStreak", comment: ""),
@@ -32,7 +32,7 @@ final class NewProfileActivityPresenter: NewProfileActivityPresenterProtocol {
               )
             : ""
 
-        return NewProfileActivityViewModel(
+        return NewProfileUserActivityViewModel(
             didSolveToday: userActivity.didSolveToday,
             currentStreakText: currentStreakText,
             longestStreakText: longestStreakText,

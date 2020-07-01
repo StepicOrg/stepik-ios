@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension NewProfileActivityView {
+extension NewProfileUserActivityView {
     struct Appearance {
         let longestStreakLabelFont = UIFont.systemFont(ofSize: 14, weight: .regular)
         let longestStreakLabelTextColor = UIColor.stepikSystemSecondaryText
@@ -12,10 +12,10 @@ extension NewProfileActivityView {
     }
 }
 
-final class NewProfileActivityView: UIView {
+final class NewProfileUserActivityView: UIView {
     let appearance: Appearance
 
-    private lazy var currentStreakView = NewProfileActivityCurrentStreakView()
+    private lazy var currentStreakView = NewProfileUserActivityCurrentStreakView()
     private lazy var longestStreakLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.longestStreakLabelFont
@@ -58,7 +58,7 @@ final class NewProfileActivityView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: NewProfileActivityViewModel) {
+    func configure(viewModel: NewProfileUserActivityViewModel) {
         self.currentStreakView.didSolveToday = viewModel.didSolveToday
         self.currentStreakView.text = viewModel.currentStreakText
 
@@ -69,7 +69,7 @@ final class NewProfileActivityView: UIView {
     }
 }
 
-extension NewProfileActivityView: ProgrammaticallyInitializableViewProtocol {
+extension NewProfileUserActivityView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }

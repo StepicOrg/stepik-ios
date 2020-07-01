@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension NewProfileActivityCurrentStreakView {
+extension NewProfileUserActivityCurrentStreakView {
     struct Appearance {
         let imageViewSize = CGSize(width: 13, height: 20)
         let imageViewColorStreak = UIColor.stepikGreen
@@ -13,7 +13,7 @@ extension NewProfileActivityCurrentStreakView {
     }
 }
 
-final class NewProfileActivityCurrentStreakView: UIView {
+final class NewProfileUserActivityCurrentStreakView: UIView {
     let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
@@ -74,7 +74,7 @@ final class NewProfileActivityCurrentStreakView: UIView {
     }
 }
 
-extension NewProfileActivityCurrentStreakView: ProgrammaticallyInitializableViewProtocol {
+extension NewProfileUserActivityCurrentStreakView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.label)

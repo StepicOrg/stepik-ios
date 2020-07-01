@@ -1,6 +1,6 @@
 import Foundation
 
-struct NewProfileActivityViewModel {
+struct NewProfileUserActivityViewModel {
     let didSolveToday: Bool
     let currentStreakText: String
     let longestStreakText: String

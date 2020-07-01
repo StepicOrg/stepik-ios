@@ -1,16 +1,16 @@
 import UIKit
 
-final class NewProfileActivityAssembly: Assembly {
+final class NewProfileUserActivityAssembly: Assembly {
     var moduleInput: NewProfileSubmoduleProtocol?
 
     func makeModule() -> UIViewController {
-        let provider = NewProfileActivityProvider(
+        let provider = NewProfileUserActivityProvider(
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI()),
             userActivitiesPersistenceService: UserActivitiesPersistenceService()
         )
-        let presenter = NewProfileActivityPresenter()
-        let interactor = NewProfileActivityInteractor(presenter: presenter, provider: provider)
-        let viewController = NewProfileActivityViewController(interactor: interactor)
+        let presenter = NewProfileUserActivityPresenter()
+        let interactor = NewProfileUserActivityInteractor(presenter: presenter, provider: provider)
+        let viewController = NewProfileUserActivityViewController(interactor: interactor)
 
         presenter.viewController = viewController
         self.moduleInput = interactor

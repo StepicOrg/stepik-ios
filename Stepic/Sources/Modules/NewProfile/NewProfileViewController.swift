@@ -206,7 +206,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             return
         }
 
-        let newProfileActivityAssembly = NewProfileActivityAssembly()
+        let newProfileActivityAssembly = NewProfileUserActivityAssembly()
         let newProfileActivityViewController = newProfileActivityAssembly.makeModule()
 
         let headerView = NewProfileBlockHeaderView()

@@ -1,12 +1,12 @@
 import Foundation
 import PromiseKit
 
-protocol NewProfileActivityProviderProtocol {
+protocol NewProfileUserActivityProviderProtocol {
     func fetchRemote(user: User) -> Promise<UserActivity>
     func fetchCached(user: User) -> Promise<UserActivity>
 }
 
-final class NewProfileActivityProvider: NewProfileActivityProviderProtocol {
+final class NewProfileUserActivityProvider: NewProfileUserActivityProviderProtocol {
     private let userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
     private let userActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol
 

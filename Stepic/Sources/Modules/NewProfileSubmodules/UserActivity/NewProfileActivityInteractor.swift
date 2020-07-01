@@ -1,11 +1,11 @@
 import Foundation
 import PromiseKit
 
-protocol NewProfileActivityInteractorProtocol {
-    func doUserActivityFetch(request: NewProfileActivity.ActivityLoad.Request)
+protocol NewProfileUserActivityInteractorProtocol {
+    func doUserActivityFetch(request: NewProfileUserActivity.ActivityLoad.Request)
 }
 
-final class NewProfileActivityInteractor: NewProfileActivityInteractorProtocol {
+final class NewProfileUserActivityInteractor: NewProfileUserActivityInteractorProtocol {
     private let presenter: NewProfileActivityPresenterProtocol
     private let provider: NewProfileActivityProviderProtocol
 
@@ -15,10 +15,10 @@ final class NewProfileActivityInteractor: NewProfileActivityInteractorProtocol {
     private var isOnline = false
     private var didLoadFromCache = false
 
-    // To fetch only one user concurrently
+    // To fetch only one user activity concurrently
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     private lazy var fetchBackgroundQueue = DispatchQueue(
-        label: "com.AlexKarpov.Stepic.NewProfileActivityInteractor.UserActivityFetch"
+        label: "com.AlexKarpov.Stepic.NewProfileUserActivityInteractor.UserActivityFetch"
     )
 
     init(
@@ -29,7 +29,7 @@ final class NewProfileActivityInteractor: NewProfileActivityInteractorProtocol {
         self.provider = provider
     }
 
-    func doUserActivityFetch(request: NewProfileActivity.ActivityLoad.Request) {
+    func doUserActivityFetch(request: NewProfileUserActivity.ActivityLoad.Request) {
         guard let user = self.currentUser else {
             return
         }
@@ -42,11 +42,11 @@ final class NewProfileActivityInteractor: NewProfileActivityInteractorProtocol {
             strongSelf.fetchSemaphore.wait()
 
             let isOnline = strongSelf.isOnline
-            print("NewProfileActivityInteractor :: start fetching user activity, isOnline = \(isOnline)")
+            print("NewProfileUserActivityInteractor :: start fetching user activity, isOnline = \(isOnline)")
 
             strongSelf.fetchUserActivityInAppropriateMode(user: user, isOnline: isOnline).done { response in
                 DispatchQueue.main.async {
-                    print("NewProfileActivityInteractor :: finish fetching activity, isOnline = \(isOnline)")
+                    print("NewProfileUserActivityInteractor :: finish fetching activity, isOnline = \(isOnline)")
                     switch response.result {
                     case .success:
                         strongSelf.presenter.presentUserActivity(response: response)
@@ -71,7 +71,7 @@ final class NewProfileActivityInteractor: NewProfileActivityInteractorProtocol {
     private func fetchUserActivityInAppropriateMode(
         user: User,
         isOnline: Bool
-    ) -> Promise<NewProfileActivity.ActivityLoad.Response> {
+    ) -> Promise<NewProfileUserActivity.ActivityLoad.Response> {
         Promise { seal in
             firstly {
                 isOnline && self.didLoadFromCache
@@ -104,7 +104,7 @@ final class NewProfileActivityInteractor: NewProfileActivityInteractorProtocol {
     }
 }
 
-extension NewProfileActivityInteractor: NewProfileSubmoduleProtocol {
+extension NewProfileUserActivityInteractor: NewProfileSubmoduleProtocol {
     func update(with user: User, isOnline: Bool) {
         self.currentUser = user
         self.isOnline = isOnline

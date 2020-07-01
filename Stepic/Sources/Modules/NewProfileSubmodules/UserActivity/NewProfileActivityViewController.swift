@@ -1,16 +1,16 @@
 import UIKit
 
-protocol NewProfileActivityViewControllerProtocol: AnyObject {
-    func displayUserActivity(viewModel: NewProfileActivity.ActivityLoad.ViewModel)
+protocol NewProfileUserActivityViewControllerProtocol: AnyObject {
+    func displayUserActivity(viewModel: NewProfileUserActivity.ActivityLoad.ViewModel)
 }
 
-final class NewProfileActivityViewController: UIViewController, ControllerWithStepikPlaceholder {
-    private let interactor: NewProfileActivityInteractorProtocol
+final class NewProfileUserActivityViewController: UIViewController, ControllerWithStepikPlaceholder {
+    private let interactor: NewProfileUserActivityInteractorProtocol
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
-    var newProfileActivityView: NewProfileActivityView? { self.view as? NewProfileActivityView }
+    var newProfileUserActivityView: NewProfileUserActivityView? { self.view as? NewProfileUserActivityView }
 
-    init(interactor: NewProfileActivityInteractorProtocol) {
+    init(interactor: NewProfileUserActivityInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,7 +21,7 @@ final class NewProfileActivityViewController: UIViewController, ControllerWithSt
     }
 
     override func loadView() {
-        let view = NewProfileActivityView(frame: UIScreen.main.bounds)
+        let view = NewProfileUserActivityView(frame: UIScreen.main.bounds)
         self.view = view
     }
 
@@ -39,19 +39,19 @@ final class NewProfileActivityViewController: UIViewController, ControllerWithSt
         )
     }
 
-    private func updateState(newState: NewProfileActivity.ViewControllerState) {
+    private func updateState(newState: NewProfileUserActivity.ViewControllerState) {
         switch newState {
         case .error:
             self.showPlaceholder(for: .connectionError)
         case .result(data: let viewModel):
             self.isPlaceholderShown = false
-            self.newProfileActivityView?.configure(viewModel: viewModel)
+            self.newProfileUserActivityView?.configure(viewModel: viewModel)
         }
     }
 }
 
-extension NewProfileActivityViewController: NewProfileActivityViewControllerProtocol {
-    func displayUserActivity(viewModel: NewProfileActivity.ActivityLoad.ViewModel) {
+extension NewProfileUserActivityViewController: NewProfileUserActivityViewControllerProtocol {
+    func displayUserActivity(viewModel: NewProfileUserActivity.ActivityLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-enum NewProfileActivity {
+enum NewProfileUserActivity {
     /// Show user activity
     enum ActivityLoad {
         struct Request {}
@@ -18,6 +18,6 @@ enum NewProfileActivity {
 
     enum ViewControllerState {
         case error
-        case result(data: NewProfileActivityViewModel)
+        case result(data: NewProfileUserActivityViewModel)
     }
 }
