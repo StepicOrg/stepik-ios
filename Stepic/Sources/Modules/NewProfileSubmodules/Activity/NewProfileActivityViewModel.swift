@@ -1,6 +1,7 @@
 import Foundation
 
 struct NewProfileActivityViewModel {
-    let currentStreak: Int
+    let didSolveToday: Bool
+    let streakText: String
     let pins: [Int]
 }

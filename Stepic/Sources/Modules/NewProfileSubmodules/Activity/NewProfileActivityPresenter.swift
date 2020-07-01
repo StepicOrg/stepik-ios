@@ -18,6 +18,21 @@ final class NewProfileActivityPresenter: NewProfileActivityPresenterProtocol {
     }
 
     private func makeViewModel(userActivity: UserActivity) -> NewProfileActivityViewModel {
-        NewProfileActivityViewModel(currentStreak: userActivity.currentStreak, pins: userActivity.pins)
+        let streakText: String = {
+            if userActivity.currentStreak > 0 {
+                return String(
+                    format: NSLocalizedString("NewProfileUserActivityCurrentStreak", comment: ""),
+                    arguments: [FormatterHelper.daysCount(userActivity.currentStreak)]
+                )
+            } else {
+                return NSLocalizedString("NewProfileUserActivityNoCurrentStreak", comment: "")
+            }
+        }()
+
+        return NewProfileActivityViewModel(
+            didSolveToday: userActivity.didSolveToday,
+            streakText: streakText,
+            pins: userActivity.pins
+        )
     }
 }

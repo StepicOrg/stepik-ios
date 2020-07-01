@@ -11,12 +11,14 @@ extension NewProfileActivityView {
 final class NewProfileActivityView: UIView {
     let appearance: Appearance
 
+    private lazy var currentStreakView = NewProfileActivityCurrentStreakView()
+
     private lazy var pinsMapView = PinsMapView()
 
     override var intrinsicContentSize: CGSize {
         CGSize(
             width: UIView.noIntrinsicMetric,
-            height: self.appearance.pinsMapViewHeight
+            height: self.currentStreakView.intrinsicContentSize.height + self.appearance.pinsMapViewHeight
         )
     }
 
@@ -40,6 +42,8 @@ final class NewProfileActivityView: UIView {
     }
 
     func configure(viewModel: NewProfileActivityViewModel) {
+        self.currentStreakView.didSolveToday = viewModel.didSolveToday
+        self.currentStreakView.text = viewModel.streakText
         self.pinsMapView.buildMonths(viewModel.pins)
     }
 }
@@ -50,13 +54,20 @@ extension NewProfileActivityView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
+        self.addSubview(self.currentStreakView)
         self.addSubview(self.pinsMapView)
     }
 
     func makeConstraints() {
+        self.currentStreakView.translatesAutoresizingMaskIntoConstraints = false
+        self.currentStreakView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+
         self.pinsMapView.translatesAutoresizingMaskIntoConstraints = false
         self.pinsMapView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(self.currentStreakView.snp.bottom)
+            make.leading.bottom.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.pinsMapViewHeight)
         }
     }
