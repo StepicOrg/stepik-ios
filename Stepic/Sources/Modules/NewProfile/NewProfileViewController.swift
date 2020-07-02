@@ -158,7 +158,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
-            self.refreshProfileUserActivityState()
+            self.refreshUserActivityState()
 
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
             self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
@@ -201,7 +201,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     // MARK: User Activity
 
-    private func refreshProfileUserActivityState() {
+    private func refreshUserActivityState() {
         guard self.getSubmodule(type: NewProfile.Submodule.userActivity) == nil else {
             return
         }
