@@ -350,6 +350,8 @@
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		097807181FEAD22C2DE65676 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E0D8A3998163442A02FB0 /* NewProfileView.swift */; };
 		0BCE34E8356EA252F3F2CD34 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */; };
+		12CB070461601452E35A6334 /* NewProfileUserActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */; };
+		1403FF0C9A5259CF2D63D98C /* NewProfileUserActivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E46A7B951582DFB9DA8130 /* NewProfileUserActivityProvider.swift */; };
 		245107514E8F81CF9A8C4C44 /* DownloadARQuickLookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FDC926BE23A9131D45DFF0 /* DownloadARQuickLookView.swift */; };
 		2A7E1C8409B12A6CB09F0393 /* UserCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A044A06FA4B2AA6C9F984A3 /* UserCoursesViewController.swift */; };
 		2AFCCAAEBDBC4C05F4D5E5F0 /* DownloadARQuickLookDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A65C1DFD5A2533C506D297B /* DownloadARQuickLookDataFlow.swift */; };
@@ -493,6 +495,7 @@
 		2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */; };
 		2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */; };
 		2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */; };
+		2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */; };
 		2C6DECE123D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DECE023D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift */; };
 		2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */; };
 		2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
@@ -560,6 +563,7 @@
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
 		2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */; };
 		2CA3DAA32179C71500F43888 /* NotificationPermissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */; };
+		2CA51BB024AB9B4300A400AE /* NewProfileUserActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
@@ -692,6 +696,7 @@
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
 		39AB2324EB824124A83D7534 /* UserCoursesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AF7B8FAACF8A4D31AF7583 /* UserCoursesInteractor.swift */; };
+		46115BB4590732AAB387046D /* NewProfileUserActivityAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C03F8E163838C4E026CAE5 /* NewProfileUserActivityAssembly.swift */; };
 		53973CE3C780CC9E39EA65A5 /* NewProfileDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A67C6A3908851371ABC4C8 /* NewProfileDataFlow.swift */; };
 		5E5D029C495513662075EC03 /* NewProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF71A3DD5EA47EA1BD4084 /* NewProfileAssembly.swift */; };
 		62E980270B31473DE5E16CDD /* SubmissionsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C9C16C33663FD3D7021 /* SubmissionsAssembly.swift */; };
@@ -1163,6 +1168,7 @@
 		62E98FE1CE19810D6930DAE6 /* SubmissionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9845417AC50C4D61B42C6 /* SubmissionsProvider.swift */; };
 		62E98FFD1EEDB775EE381221 /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F968FBB3ED0E6309407 /* CourseListPresenter.swift */; };
 		6670CEAE1D677A5EADD37531 /* UserCoursesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC26997F83B299C9E3FCC5D /* UserCoursesAssembly.swift */; };
+		79A20D8F6931BCF4BDD7656E /* NewProfileUserActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */; };
 		7C948DD5EBB144CE0658E454 /* UserCoursesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4BED02A9D05CB0787EBE1 /* UserCoursesDataFlow.swift */; };
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
@@ -1174,7 +1180,10 @@
 		86BB7C022019538100063538 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C012019538000063538 /* CongratsView.swift */; };
 		86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */; };
 		86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BB7C06201953AF00063538 /* CongratulationViewController.xib */; };
+		8A248387CF216CCCFFC39E76 /* NewProfileUserActivityDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD58CADEE08103A32F03B4D /* NewProfileUserActivityDataFlow.swift */; };
 		942F44578E193384B1E4DAD9 /* UserCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582946156484A5655EF72E43 /* UserCoursesPresenter.swift */; };
+		96A3827B7E57E4B055221311 /* NewProfileUserActivityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217C4CCCAFEF3BDE7DD27A5 /* NewProfileUserActivityPresenter.swift */; };
+		9FAD76150240B4F8C13ADFA2 /* NewProfileUserActivityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */; };
 		AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DCDAA39E6747A12CC239E3 /* DownloadARQuickLookPresenter.swift */; };
 		C2537B043956035AEFCABAB5 /* DownloadARQuickLookOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2CFBDE7B71C461F988B1B5 /* DownloadARQuickLookOutputProtocol.swift */; };
 		C95BEF69AB5100E263ED66F6 /* DownloadARQuickLookAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */; };
@@ -1608,6 +1617,7 @@
 		0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		1A044A06FA4B2AA6C9F984A3 /* UserCoursesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesViewController.swift; sourceTree = "<group>"; };
 		1A65C1DFD5A2533C506D297B /* DownloadARQuickLookDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookDataFlow.swift; sourceTree = "<group>"; };
+		27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewController.swift; sourceTree = "<group>"; };
 		2C01BB67233CD92C00C8DCF0 /* Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Require.swift; sourceTree = "<group>"; };
 		2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
 		2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
@@ -1765,6 +1775,7 @@
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
 		2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsNetworkService.swift; sourceTree = "<group>"; };
 		2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsNetworkService.swift; sourceTree = "<group>"; };
+		2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityCurrentStreakView.swift; sourceTree = "<group>"; };
 		2C6DECE023D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailTableViewCell.swift; sourceTree = "<group>"; };
 		2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Adaptive.storyboard; sourceTree = "<group>"; };
 		2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStorageManager.swift; sourceTree = "<group>"; };
@@ -1831,6 +1842,7 @@
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationService.swift; sourceTree = "<group>"; };
 		2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionStatus.swift; sourceTree = "<group>"; };
+		2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewModel.swift; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -1972,7 +1984,9 @@
 		3BCD8888462BD21ECF82C602 /* DownloadARQuickLookViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookViewController.swift; sourceTree = "<group>"; };
 		3C1049108DA5FB2370275330 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		49B8797DC84D64C5BAA84E76 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
+		53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityInteractor.swift; sourceTree = "<group>"; };
 		582946156484A5655EF72E43 /* UserCoursesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesPresenter.swift; sourceTree = "<group>"; };
+		61C03F8E163838C4E026CAE5 /* NewProfileUserActivityAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityAssembly.swift; sourceTree = "<group>"; };
 		61DCDAA39E6747A12CC239E3 /* DownloadARQuickLookPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookPresenter.swift; sourceTree = "<group>"; };
 		62E9800E79AB72A13F894B73 /* CourseInfoTabSyllabusInputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusInputProtocol.swift; sourceTree = "<group>"; };
 		62E98021576A447517397409 /* ContinueCourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueCourseView.swift; sourceTree = "<group>"; };
@@ -2443,6 +2457,7 @@
 		62E98FD93BED7AFCD27CC1CD /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
 		62E98FEB6C1841DD9CFE9D1F /* CourseInfoTabReviewsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsViewModel.swift; sourceTree = "<group>"; };
 		69DE4213EB9F9BB5C2C25E78 /* NewProfileInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileInteractor.swift; sourceTree = "<group>"; };
+		72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityView.swift; sourceTree = "<group>"; };
 		861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Init.swift"; sourceTree = "<group>"; };
 		8622056A2055561F00F14255 /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
 		86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusesAPI.swift; sourceTree = "<group>"; };
@@ -2454,10 +2469,12 @@
 		86BB7C05201953AF00063538 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		86BB7C06201953AF00063538 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
 		8F8FAC809538C9222DD6ABC9 /* NewProfilePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfilePresenter.swift; sourceTree = "<group>"; };
+		9217C4CCCAFEF3BDE7DD27A5 /* NewProfileUserActivityPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityPresenter.swift; sourceTree = "<group>"; };
 		938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC26997F83B299C9E3FCC5D /* UserCoursesAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesAssembly.swift; sourceTree = "<group>"; };
 		9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1A67C6A3908851371ABC4C8 /* NewProfileDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileDataFlow.swift; sourceTree = "<group>"; };
+		AFD58CADEE08103A32F03B4D /* NewProfileUserActivityDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityDataFlow.swift; sourceTree = "<group>"; };
 		B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookAssembly.swift; sourceTree = "<group>"; };
 		B3FDC926BE23A9131D45DFF0 /* DownloadARQuickLookView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookView.swift; sourceTree = "<group>"; };
 		BAF219462BE0AB704DED8077 /* UserCoursesView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesView.swift; sourceTree = "<group>"; };
@@ -2469,6 +2486,7 @@
 		D109E72D69B31373C97237F8 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		D6FF71A3DD5EA47EA1BD4084 /* NewProfileAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAssembly.swift; sourceTree = "<group>"; };
 		ECD9168AF529D0D527B1DCDB /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F4E46A7B951582DFB9DA8130 /* NewProfileUserActivityProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2848,6 +2866,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2C6CA82124ABB2F400E2EB2F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2C6DECE223D02E4E00E542B9 /* Switch */ = {
 			isa = PBXGroup;
 			children = (
@@ -2891,6 +2917,7 @@
 			isa = PBXGroup;
 			children = (
 				2C8BCC2424869A1100DFB009 /* Details */,
+				E7DABB29D2991EED361BCE28 /* UserActivity */,
 			);
 			path = NewProfileSubmodules;
 			sourceTree = "<group>";
@@ -6478,6 +6505,22 @@
 			path = NewProfile;
 			sourceTree = "<group>";
 		};
+		E7DABB29D2991EED361BCE28 /* UserActivity */ = {
+			isa = PBXGroup;
+			children = (
+				61C03F8E163838C4E026CAE5 /* NewProfileUserActivityAssembly.swift */,
+				AFD58CADEE08103A32F03B4D /* NewProfileUserActivityDataFlow.swift */,
+				53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */,
+				9217C4CCCAFEF3BDE7DD27A5 /* NewProfileUserActivityPresenter.swift */,
+				F4E46A7B951582DFB9DA8130 /* NewProfileUserActivityProvider.swift */,
+				72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */,
+				27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */,
+				2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */,
+				2C6CA82124ABB2F400E2EB2F /* Views */,
+			);
+			path = UserActivity;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -7112,6 +7155,7 @@
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */,
+				2CA51BB024AB9B4300A400AE /* NewProfileUserActivityViewModel.swift in Sources */,
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				2C8BCC1F248647E800DFB009 /* NewProfileBlockContainerView.swift in Sources */,
 				2C82F22421D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift in Sources */,
@@ -7127,6 +7171,7 @@
 				2CB695332465C9A20037BF0D /* NewProfileViewModel.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
+				2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */,
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
@@ -8136,6 +8181,13 @@
 				62E98DDC32C86496C6953A1E /* AnalyticsEngine.swift in Sources */,
 				62E98F1672B90358D7188D02 /* AnalyticsEvent.swift in Sources */,
 				62E9888417EE1DD05B20491B /* CoursePayment.swift in Sources */,
+				46115BB4590732AAB387046D /* NewProfileUserActivityAssembly.swift in Sources */,
+				8A248387CF216CCCFFC39E76 /* NewProfileUserActivityDataFlow.swift in Sources */,
+				9FAD76150240B4F8C13ADFA2 /* NewProfileUserActivityInteractor.swift in Sources */,
+				96A3827B7E57E4B055221311 /* NewProfileUserActivityPresenter.swift in Sources */,
+				1403FF0C9A5259CF2D63D98C /* NewProfileUserActivityProvider.swift in Sources */,
+				79A20D8F6931BCF4BDD7656E /* NewProfileUserActivityView.swift in Sources */,
+				12CB070461601452E35A6334 /* NewProfileUserActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     }
 
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
-        .details
+        .userActivity, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -158,6 +158,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
+            self.refreshUserActivityState()
+
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
             self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
         }
@@ -195,6 +197,40 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     private func getSubmodule(type: SubmoduleType) -> Submodule? {
         self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
+    }
+
+    // MARK: User Activity
+
+    private func refreshUserActivityState() {
+        guard self.getSubmodule(type: NewProfile.Submodule.userActivity) == nil else {
+            return
+        }
+
+        let newProfileActivityAssembly = NewProfileUserActivityAssembly()
+        let newProfileActivityViewController = newProfileActivityAssembly.makeModule()
+
+        let headerView = NewProfileBlockHeaderView()
+        headerView.titleText = NSLocalizedString("NewProfileBlockTitleActivity", comment: "")
+        headerView.isShowAllButtonHidden = true
+
+        let containerView = NewProfileBlockContainerView(
+            headerView: headerView,
+            contentView: newProfileActivityViewController.view
+        )
+
+        self.registerSubmodule(
+            .init(
+                viewController: newProfileActivityViewController,
+                view: containerView,
+                type: NewProfile.Submodule.userActivity
+            )
+        )
+
+        if let moduleInput = newProfileActivityAssembly.moduleInput {
+            self.interactor.doSubmodulesRegistration(
+                request: .init(submodules: [NewProfile.Submodule.userActivity.uniqueIdentifier: moduleInput])
+            )
+        }
     }
 
     // MARK: Profile Details

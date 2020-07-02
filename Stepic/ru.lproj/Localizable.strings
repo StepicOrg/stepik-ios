@@ -979,7 +979,12 @@ NewProfileRatingCourses1 = "%@ курс";
 NewProfileRatingCourses234 = "%@ курса";
 NewProfileRatingCourses567890 = "%@ курсов";
 
+NewProfileBlockTitleActivity = "Активность";
 NewProfileBlockTitleDetails = "Обо мне";
+
+NewProfileUserActivityNoCurrentStreak = "Начните учиться сегодня";
+NewProfileUserActivityCurrentStreak = "%@ без перерыва";
+NewProfileUserActivityLongestStreak = "Максимальная серия %@";
 
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";

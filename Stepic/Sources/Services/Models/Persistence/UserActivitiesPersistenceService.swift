@@ -5,6 +5,7 @@ import PromiseKit
 protocol UserActivitiesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [UserActivityEntity.IdType]) -> Guarantee<[UserActivityEntity]>
     func fetch(id: UserActivityEntity.IdType) -> Guarantee<UserActivityEntity?>
+    func create(userActivity: UserActivity) -> Guarantee<UserActivityEntity>
 }
 
 final class UserActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol {
@@ -27,6 +28,20 @@ final class UserActivitiesPersistenceService: UserActivitiesPersistenceServicePr
             self.fetchUserActivities(ids: [id])
         }.then { userActivities in
             .value(userActivities.first)
+        }
+    }
+
+    func create(userActivity: UserActivity) -> Guarantee<UserActivityEntity> {
+        Guarantee { seal in
+            self.managedObjectContext.performAndWait {
+                let entity = UserActivityEntity()
+                entity.id = userActivity.id
+                entity.pins = userActivity.pins
+
+                try? self.managedObjectContext.save()
+
+                seal(entity)
+            }
         }
     }
 
