@@ -47,9 +47,9 @@ final class NewProfileStreakNotificationsTimeSelectionView: UIControl {
         return imageView
     }()
 
-    var subtitle: String? {
+    var detailText: String? {
         didSet {
-            self.detailLabel.text = self.subtitle
+            self.detailLabel.text = self.detailText
         }
     }
 

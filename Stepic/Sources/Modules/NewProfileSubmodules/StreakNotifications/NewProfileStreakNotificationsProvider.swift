@@ -1,6 +1,0 @@
-import Foundation
-import PromiseKit
-
-protocol NewProfileStreakNotificationsProviderProtocol {}
-
-final class NewProfileStreakNotificationsProvider: NewProfileStreakNotificationsProviderProtocol {}

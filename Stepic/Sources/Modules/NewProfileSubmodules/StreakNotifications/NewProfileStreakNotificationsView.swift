@@ -1,6 +1,16 @@
 import SnapKit
 import UIKit
 
+protocol NewProfileStreakNotificationsViewDelegate: AnyObject {
+    func newProfileStreakNotificationsView(
+        _ view: NewProfileStreakNotificationsView,
+        didChangeStreakNotificationsPreference isOn: Bool
+    )
+    func newProfileStreakNotificationsViewDidTouchChangeNotificationsTime(
+        _ view: NewProfileStreakNotificationsView
+    )
+}
+
 extension NewProfileStreakNotificationsView {
     struct Appearance {
         let arrangedSubviewHeight: CGFloat = 44
@@ -9,6 +19,8 @@ extension NewProfileStreakNotificationsView {
 }
 
 final class NewProfileStreakNotificationsView: UIView {
+    weak var delegate: NewProfileStreakNotificationsViewDelegate?
+
     let appearance: Appearance
 
     private lazy var stackView: UIStackView = {
@@ -19,8 +31,15 @@ final class NewProfileStreakNotificationsView: UIView {
 
     private lazy var streakNotificationsSwitchView: NewProfileStreakNotificationsSwitchView = {
         let view = NewProfileStreakNotificationsSwitchView()
-        view.onSwitchValueChanged = { isOn in
-            print("SwitchValueChanged isOn=\(isOn)")
+        view.onSwitchValueChanged = { [weak self] isOn in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.newProfileStreakNotificationsView(
+                strongSelf,
+                didChangeStreakNotificationsPreference: isOn
+            )
         }
         return view
     }()
@@ -53,8 +72,13 @@ final class NewProfileStreakNotificationsView: UIView {
         self.addSubviews()
         self.makeConstraints()
 
-        self.streakNotificationsTimeSelectionView.subtitle = "8:00PM – 9:00 PM"
-        self.streakNotificationsFooterView.text = "Рекорды обновляются в 3:00 AM"
+        self.configure(
+            viewModel: .init(
+                isStreakNotificationsEnabled: false,
+                formattedStreakNotificationsTime: nil,
+                formattedStreakNotificationsUpdatingTime: nil
+            )
+        )
     }
 
     @available(*, unavailable)
@@ -62,9 +86,20 @@ final class NewProfileStreakNotificationsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configure(viewModel: NewProfileStreakNotificationsViewModel) {
+        self.streakNotificationsSwitchView.isOn = viewModel.isStreakNotificationsEnabled
+        self.streakNotificationsSwitchView.isSeparatorHidden = !viewModel.isStreakNotificationsEnabled
+
+        self.streakNotificationsTimeSelectionView.detailText = viewModel.formattedStreakNotificationsTime
+        self.streakNotificationsTimeSelectionView.isHidden = !viewModel.isStreakNotificationsEnabled
+
+        self.streakNotificationsFooterView.text = viewModel.formattedStreakNotificationsUpdatingTime
+        self.streakNotificationsFooterView.isHidden = !viewModel.isStreakNotificationsEnabled
+    }
+
     @objc
     private func didTouchTimeSelection() {
-        print(#function)
+        self.delegate?.newProfileStreakNotificationsViewDidTouchChangeNotificationsTime(self)
     }
 }
 

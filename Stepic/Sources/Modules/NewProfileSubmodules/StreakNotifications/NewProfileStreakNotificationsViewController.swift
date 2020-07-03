@@ -1,11 +1,15 @@
 import UIKit
 
 protocol NewProfileStreakNotificationsViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: NewProfileStreakNotifications.SomeAction.ViewModel)
+    func displayStreakNotifications(viewModel: NewProfileStreakNotifications.StreakNotificationsLoad.ViewModel)
 }
 
 final class NewProfileStreakNotificationsViewController: UIViewController {
     private let interactor: NewProfileStreakNotificationsInteractorProtocol
+
+    var newProfileStreakNotificationsView: NewProfileStreakNotificationsView? {
+        self.view as? NewProfileStreakNotificationsView
+    }
 
     init(interactor: NewProfileStreakNotificationsInteractorProtocol) {
         self.interactor = interactor
@@ -19,10 +23,29 @@ final class NewProfileStreakNotificationsViewController: UIViewController {
 
     override func loadView() {
         let view = NewProfileStreakNotificationsView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.interactor.doStreakNotificationsLoad(request: .init())
     }
 }
 
 extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificationsViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewProfileStreakNotifications.SomeAction.ViewModel) {}
+    func displayStreakNotifications(viewModel: NewProfileStreakNotifications.StreakNotificationsLoad.ViewModel) {
+        self.newProfileStreakNotificationsView?.configure(viewModel: viewModel.viewModel)
+    }
+}
+
+extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificationsViewDelegate {
+    func newProfileStreakNotificationsView(
+        _ view: NewProfileStreakNotificationsView,
+        didChangeStreakNotificationsPreference isOn: Bool
+    ) {
+        self.interactor.doStreakNotificationsPreferenceUpdate(request: .init(isOn: isOn))
+    }
+
+    func newProfileStreakNotificationsViewDidTouchChangeNotificationsTime(_ view: NewProfileStreakNotificationsView) {}
 }

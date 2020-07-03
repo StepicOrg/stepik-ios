@@ -530,6 +530,8 @@
 		2C87A7AD2446696D00933CA4 /* UserActivitiesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
 		2C89FF8424AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8324AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift */; };
+		2C89FF8624AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */; };
+		2C89FF8824AEE90500168F1B /* StreakNotificationsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8724AEE90500168F1B /* StreakNotificationsStorageManager.swift */; };
 		2C8BCC1D248647B400DFB009 /* NewProfileBlockHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BCC1C248647B400DFB009 /* NewProfileBlockHeaderView.swift */; };
 		2C8BCC1F248647E800DFB009 /* NewProfileBlockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BCC1E248647E800DFB009 /* NewProfileBlockContainerView.swift */; };
 		2C8BCC222486540F00DFB009 /* ShowAllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BCC212486540F00DFB009 /* ShowAllButton.swift */; };
@@ -1192,7 +1194,6 @@
 		9FAD76150240B4F8C13ADFA2 /* NewProfileUserActivityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */; };
 		AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DCDAA39E6747A12CC239E3 /* DownloadARQuickLookPresenter.swift */; };
 		C2537B043956035AEFCABAB5 /* DownloadARQuickLookOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2CFBDE7B71C461F988B1B5 /* DownloadARQuickLookOutputProtocol.swift */; };
-		C928A46FC85C35D0778DD401 /* NewProfileStreakNotificationsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005ABC272E37D97F9FF286D /* NewProfileStreakNotificationsProvider.swift */; };
 		C95BEF69AB5100E263ED66F6 /* DownloadARQuickLookAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */; };
 		CB429BDBAF7772B836FCA675 /* NewProfileStreakNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */; };
 		D47D53DD6227E614E1DFCB9F /* NewProfileStreakNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4026ACBBA0C3F084DA6D5A6E /* NewProfileStreakNotificationsView.swift */; };
@@ -1822,6 +1823,8 @@
 		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		2C89FF8324AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsFooterView.swift; sourceTree = "<group>"; };
+		2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsViewModel.swift; sourceTree = "<group>"; };
+		2C89FF8724AEE90500168F1B /* StreakNotificationsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsStorageManager.swift; sourceTree = "<group>"; };
 		2C8B6E0323A27D2D0078A4B3 /* Model_required_section.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_required_section.xcdatamodel; sourceTree = "<group>"; };
 		2C8BCC1C248647B400DFB009 /* NewProfileBlockHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileBlockHeaderView.swift; sourceTree = "<group>"; };
 		2C8BCC1E248647E800DFB009 /* NewProfileBlockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileBlockContainerView.swift; sourceTree = "<group>"; };
@@ -2505,7 +2508,6 @@
 		D109E72D69B31373C97237F8 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		D6FF71A3DD5EA47EA1BD4084 /* NewProfileAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAssembly.swift; sourceTree = "<group>"; };
 		ECD9168AF529D0D527B1DCDB /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F005ABC272E37D97F9FF286D /* NewProfileStreakNotificationsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsProvider.swift; sourceTree = "<group>"; };
 		F4E46A7B951582DFB9DA8130 /* NewProfileUserActivityProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -5770,6 +5772,7 @@
 				2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */,
 				62E981C57D5BCF81714F344C /* DiscussionsSortTypeStorageManager.swift */,
 				2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */,
+				2C89FF8724AEE90500168F1B /* StreakNotificationsStorageManager.swift */,
 				62E9881CFD7892350EA31213 /* TooltipStorageManager.swift */,
 				2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */,
 				2C8F3ADE23CCAB88004D113A /* Video */,
@@ -6502,9 +6505,9 @@
 				0135D703CAD3B1C16BC95B63 /* NewProfileStreakNotificationsDataFlow.swift */,
 				7B9DB0A6C0B38CE13676ED50 /* NewProfileStreakNotificationsInteractor.swift */,
 				58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */,
-				F005ABC272E37D97F9FF286D /* NewProfileStreakNotificationsProvider.swift */,
 				4026ACBBA0C3F084DA6D5A6E /* NewProfileStreakNotificationsView.swift */,
 				B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */,
+				2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */,
 				2C3A035724AE3DD4007D28F7 /* Views */,
 			);
 			path = StreakNotifications;
@@ -8001,6 +8004,7 @@
 				62E98C3CA2749DA6E0C98BC9 /* TagsAssembly.swift in Sources */,
 				62E98351301E9DA3680C2C26 /* TagsDataFlow.swift in Sources */,
 				62E98E31EA5F2A44904790CB /* TagsInteractor.swift in Sources */,
+				2C89FF8824AEE90500168F1B /* StreakNotificationsStorageManager.swift in Sources */,
 				62E9842946672C411A25649A /* TagsOutputProtocol.swift in Sources */,
 				62E9866A0079204B9AD0AFEA /* TagsPresenter.swift in Sources */,
 				62E980E8CEFAB9093D886DBA /* TagsProvider.swift in Sources */,
@@ -8183,6 +8187,7 @@
 				62E987A7A6162716ABF323CF /* SubmissionsOutputProtocol.swift in Sources */,
 				62E98DE228BB533D1A9001C8 /* SubmissionsTableViewDataSource.swift in Sources */,
 				62E9830597D4F90EBB4282F1 /* SubmissionsCellView.swift in Sources */,
+				2C89FF8624AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift in Sources */,
 				62E98525A1D993E12505CDEB /* SubmissionsTableViewCell.swift in Sources */,
 				62E98B04BDA99434B78901BC /* WriteCommentAssembly.swift in Sources */,
 				2C8BCC2824869A6000DFB009 /* NewProfileSubmoduleProtocol.swift in Sources */,
@@ -8241,7 +8246,6 @@
 				209E27FAF79E14028BA3E27E /* NewProfileStreakNotificationsDataFlow.swift in Sources */,
 				2431A273489AF7D40AB21348 /* NewProfileStreakNotificationsInteractor.swift in Sources */,
 				CB429BDBAF7772B836FCA675 /* NewProfileStreakNotificationsPresenter.swift in Sources */,
-				C928A46FC85C35D0778DD401 /* NewProfileStreakNotificationsProvider.swift in Sources */,
 				D47D53DD6227E614E1DFCB9F /* NewProfileStreakNotificationsView.swift in Sources */,
 				375F2EB161DE5DAAED3FEA98 /* NewProfileStreakNotificationsViewController.swift in Sources */,
 			);

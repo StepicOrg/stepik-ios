@@ -1,11 +1,24 @@
 import Foundation
 
 enum NewProfileStreakNotifications {
-    enum SomeAction {
+    /// Show streak notifications
+    enum StreakNotificationsLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let isStreakNotificationsEnabled: Bool
+            let streaksNotificationsStartHour: Int
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let viewModel: NewProfileStreakNotificationsViewModel
+        }
+    }
+
+    /// Set streak notifications on or off
+    enum StreakNotificationsPreferenceUpdate {
+        struct Request {
+            let isOn: Bool
+        }
     }
 }
