@@ -7,7 +7,8 @@ final class NewProfileStreakNotificationsAssembly: Assembly {
         let presenter = NewProfileStreakNotificationsPresenter()
         let interactor = NewProfileStreakNotificationsInteractor(
             presenter: presenter,
-            streakNotificationsStorageManager: StreakNotificationsStorageManager()
+            streakNotificationsStorageManager: StreakNotificationsStorageManager(),
+            notificationsService: NotificationsService()
         )
         let viewController = NewProfileStreakNotificationsViewController(interactor: interactor)
 
