@@ -232,7 +232,7 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         _ dataSource: SubmissionsTableViewDataSource,
         didSelectAvatar viewModel: SubmissionsViewModel
     ) {
-        let assembly = ProfileAssembly(userID: viewModel.userID)
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
         self.push(module: assembly.makeModule())
     }
 

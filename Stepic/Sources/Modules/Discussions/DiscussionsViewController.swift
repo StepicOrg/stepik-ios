@@ -409,7 +409,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didSelectAvatar comment: DiscussionsCommentViewModel
     ) {
-        let assembly = ProfileAssembly(userID: comment.userID)
+        let assembly = NewProfileAssembly(otherUserID: comment.userID)
         self.push(module: assembly.makeModule())
     }
 

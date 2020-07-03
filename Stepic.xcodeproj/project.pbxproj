@@ -194,7 +194,7 @@
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
 		08883AC2214C52EC00898BBE /* ModalOrPushStackRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08883AC1214C52EC00898BBE /* ModalOrPushStackRouter.swift */; };
-		08883AC4214C6AF200898BBE /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08883AC3214C6AF200898BBE /* ProfileAssembly.swift */; };
+		08883AC4214C6AF200898BBE /* ProfileLegacyAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08883AC3214C6AF200898BBE /* ProfileLegacyAssembly.swift */; };
 		0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
 		0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
@@ -1452,7 +1452,7 @@
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0885F8571BAAD43300F2A188 /* AuthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthInfo.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08883AC1214C52EC00898BBE /* ModalOrPushStackRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOrPushStackRouter.swift; sourceTree = "<group>"; };
-		08883AC3214C6AF200898BBE /* ProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
+		08883AC3214C6AF200898BBE /* ProfileLegacyAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLegacyAssembly.swift; sourceTree = "<group>"; };
 		0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryView.xib; sourceTree = "<group>"; };
 		0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryView.swift; sourceTree = "<group>"; };
 		0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -3415,7 +3415,7 @@
 			children = (
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
-				08883AC3214C6AF200898BBE /* ProfileAssembly.swift */,
+				08883AC3214C6AF200898BBE /* ProfileLegacyAssembly.swift */,
 				2CA4CF6C242A13D7008BC4E8 /* Achievements */,
 				2CA4CF72242A1518008BC4E8 /* Menu */,
 				2CA4CF7B242A15B8008BC4E8 /* PinsMap */,
@@ -7619,7 +7619,7 @@
 				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C8BCC1D248647B400DFB009 /* NewProfileBlockHeaderView.swift in Sources */,
 				2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */,
-				08883AC4214C6AF200898BBE /* ProfileAssembly.swift in Sources */,
+				08883AC4214C6AF200898BBE /* ProfileLegacyAssembly.swift in Sources */,
 				2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
