@@ -3,6 +3,7 @@ import Foundation
 protocol StreakNotificationsStorageManagerProtocol: AnyObject {
     var isStreakNotificationsEnabled: Bool { get set }
     var streakNotificationsStartHourUTC: Int { get set }
+    var streakNotificationsStartHourLocal: Int { get }
 }
 
 final class StreakNotificationsStorageManager: StreakNotificationsStorageManagerProtocol {
@@ -28,6 +29,11 @@ final class StreakNotificationsStorageManager: StreakNotificationsStorageManager
         set {
             UserDefaults.standard.set(newValue, forKey: Key.streaksNotificationStartHourUTCKey.rawValue)
         }
+    }
+
+    var streakNotificationsStartHourLocal: Int {
+        let time = (self.streakNotificationsStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        return time < 0 ? 24 + time : time
     }
 
     private var defaultUTCStartHour: Int {

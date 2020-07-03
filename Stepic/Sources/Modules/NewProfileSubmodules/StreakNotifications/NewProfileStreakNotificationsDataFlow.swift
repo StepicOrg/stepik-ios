@@ -21,4 +21,17 @@ enum NewProfileStreakNotifications {
             let isOn: Bool
         }
     }
+
+    /// Show change streak notifications time controller
+    enum SelectStreakNotificationsTimePresentation {
+        struct Request {}
+
+        struct Response {
+            let startHour: Int
+        }
+
+        struct ViewModel {
+            let startHour: Int
+        }
+    }
 }

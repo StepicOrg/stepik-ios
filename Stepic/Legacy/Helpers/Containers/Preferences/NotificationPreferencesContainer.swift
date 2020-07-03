@@ -31,7 +31,6 @@ final class NotificationPreferencesContainer {
     }
 
     var streaksNotificationStartHourLocal: Int {
-        let time = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
-        return time < 0 ? 24 + time : time
+        self.streakNotificationsStorageManager.streakNotificationsStartHourLocal
     }
 }

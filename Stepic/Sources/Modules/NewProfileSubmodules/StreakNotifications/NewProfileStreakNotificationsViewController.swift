@@ -1,7 +1,11 @@
+import Presentr
 import UIKit
 
 protocol NewProfileStreakNotificationsViewControllerProtocol: AnyObject {
     func displayStreakNotifications(viewModel: NewProfileStreakNotifications.StreakNotificationsLoad.ViewModel)
+    func displaySelectStreakNotificationsTime(
+        viewModel: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.ViewModel
+    )
 }
 
 final class NewProfileStreakNotificationsViewController: UIViewController {
@@ -37,6 +41,21 @@ extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificat
     func displayStreakNotifications(viewModel: NewProfileStreakNotifications.StreakNotificationsLoad.ViewModel) {
         self.newProfileStreakNotificationsView?.configure(viewModel: viewModel.viewModel)
     }
+
+    func displaySelectStreakNotificationsTime(
+        viewModel: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.ViewModel
+    ) {
+        let viewController = NotificationTimePickerViewController(
+            nibName: "PickerViewController", bundle: nil
+        ) as NotificationTimePickerViewController
+        viewController.startHour = viewModel.startHour
+        viewController.selectedBlock = { [weak self] in
+            self?.interactor.doStreakNotificationsLoad(request: .init())
+        }
+
+        let presentr = Presentr(presentationType: .bottomHalf)
+        self.customPresentViewController(presentr, viewController: viewController, animated: true, completion: nil)
+    }
 }
 
 extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificationsViewDelegate {
@@ -47,5 +66,7 @@ extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificat
         self.interactor.doStreakNotificationsPreferenceUpdate(request: .init(isOn: isOn))
     }
 
-    func newProfileStreakNotificationsViewDidTouchChangeNotificationsTime(_ view: NewProfileStreakNotificationsView) {}
+    func newProfileStreakNotificationsViewDidTouchChangeNotificationsTime(_ view: NewProfileStreakNotificationsView) {
+        self.interactor.doSelectStreakNotificationsTimePresentation(request: .init())
+    }
 }

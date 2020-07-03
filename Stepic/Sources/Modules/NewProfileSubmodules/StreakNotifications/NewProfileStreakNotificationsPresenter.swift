@@ -2,6 +2,9 @@ import UIKit
 
 protocol NewProfileStreakNotificationsPresenterProtocol {
     func presentStreakNotifications(response: NewProfileStreakNotifications.StreakNotificationsLoad.Response)
+    func presentSelectStreakNotificationsTime(
+        response: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.Response
+    )
 }
 
 final class NewProfileStreakNotificationsPresenter: NewProfileStreakNotificationsPresenterProtocol {
@@ -13,6 +16,12 @@ final class NewProfileStreakNotificationsPresenter: NewProfileStreakNotification
             streaksNotificationsStartHour: response.streaksNotificationsStartHour
         )
         self.viewController?.displayStreakNotifications(viewModel: .init(viewModel: viewModel))
+    }
+
+    func presentSelectStreakNotificationsTime(
+        response: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.Response
+    ) {
+        self.viewController?.displaySelectStreakNotificationsTime(viewModel: .init(startHour: response.startHour))
     }
 
     private func makeViewModel(

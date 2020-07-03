@@ -6,6 +6,9 @@ protocol NewProfileStreakNotificationsInteractorProtocol {
     func doStreakNotificationsPreferenceUpdate(
         request: NewProfileStreakNotifications.StreakNotificationsPreferenceUpdate.Request
     )
+    func doSelectStreakNotificationsTimePresentation(
+        request: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.Request
+    )
 }
 
 final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificationsInteractorProtocol {
@@ -33,6 +36,13 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
             self.streakNotificationsStorageManager.isStreakNotificationsEnabled = request.isOn
             self.presentStreakNotifications()
         }
+    }
+
+    func doSelectStreakNotificationsTimePresentation(
+        request: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.Request
+    ) {
+        let startHour = self.streakNotificationsStorageManager.streakNotificationsStartHourLocal
+        self.presenter.presentSelectStreakNotificationsTime(response: .init(startHour: startHour))
     }
 
     private func presentStreakNotifications() {
