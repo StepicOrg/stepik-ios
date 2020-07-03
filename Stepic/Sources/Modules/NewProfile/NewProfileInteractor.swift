@@ -6,6 +6,8 @@ protocol NewProfileInteractorProtocol {
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request)
     func doProfileShareAction(request: NewProfile.ProfileShareAction.Request)
     func doProfileEditAction(request: NewProfile.ProfileEditAction.Request)
+    func doAchievementsListPresentation(request: NewProfile.AchievementsListPresentation.Request)
+    func doCertificatesListPresentation(request: NewProfile.CertificatesListPresentation.Request)
     func doSubmodulesRegistration(request: NewProfile.SubmoduleRegistration.Request)
 }
 
@@ -136,6 +138,18 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     func doProfileEditAction(request: NewProfile.ProfileEditAction.Request) {
         if let currentProfile = self.currentProfile {
             self.presenter.presentProfileEditing(response: .init(profile: currentProfile))
+        }
+    }
+
+    func doAchievementsListPresentation(request: NewProfile.AchievementsListPresentation.Request) {
+        if let currentUserID = self.currentUser?.id {
+            self.presenter.presentAchievementsList(response: .init(userID: currentUserID))
+        }
+    }
+
+    func doCertificatesListPresentation(request: NewProfile.CertificatesListPresentation.Request) {
+        if let currentUserID = self.currentUser?.id {
+            self.presenter.presentCertificatesList(response: .init(userID: currentUserID))
         }
     }
 

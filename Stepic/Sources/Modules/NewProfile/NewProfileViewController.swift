@@ -6,6 +6,8 @@ protocol NewProfileViewControllerProtocol: AnyObject {
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel)
     func displayProfileSharing(viewModel: NewProfile.ProfileShareAction.ViewModel)
     func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel)
+    func displayAchievementsList(viewModel: NewProfile.AchievementsListPresentation.ViewModel)
+    func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -14,7 +16,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     }
 
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
-        .streakNotifications, .userActivity, .details
+        .streakNotifications, .userActivity, .achievements, .certificates, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -162,6 +164,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.refreshStreakNotificationsState(shouldShowStreakNotifications ? .visible : .hidden)
 
             self.refreshUserActivityState()
+            self.refreshAchievementsState()
+            self.refreshCertificatesState()
 
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
             self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
@@ -271,6 +275,60 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
                 request: .init(submodules: [NewProfile.Submodule.userActivity.uniqueIdentifier: moduleInput])
             )
         }
+    }
+
+    // MARK: Achievements
+
+    private func refreshAchievementsState() {
+        guard self.getSubmodule(type: NewProfile.Submodule.achievements) == nil else {
+            return
+        }
+
+        let headerView = NewProfileBlockHeaderView()
+        headerView.titleText = NSLocalizedString("NewProfileBlockTitleAchievements", comment: "")
+        headerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.doAchievementsListPresentation(request: .init())
+        }
+
+        let containerView = NewProfileBlockContainerView(
+            headerView: headerView,
+            contentView: nil
+        )
+
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                type: NewProfile.Submodule.achievements
+            )
+        )
+    }
+
+    // MARK: Certificates
+
+    private func refreshCertificatesState() {
+        guard self.getSubmodule(type: NewProfile.Submodule.certificates) == nil else {
+            return
+        }
+
+        let headerView = NewProfileBlockHeaderView()
+        headerView.titleText = NSLocalizedString("NewProfileBlockTitleCertificates", comment: "")
+        headerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.doCertificatesListPresentation(request: .init())
+        }
+
+        let containerView = NewProfileBlockContainerView(
+            headerView: headerView,
+            contentView: nil
+        )
+
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                type: NewProfile.Submodule.certificates
+            )
+        )
     }
 
     // MARK: Profile Details
@@ -388,6 +446,16 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
         self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
+    }
+
+    func displayAchievementsList(viewModel: NewProfile.AchievementsListPresentation.ViewModel) {
+        let assembly = AchievementsListLegacyAssembly(userID: viewModel.userID)
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel) {
+        let assembly = CertificatesLegacyAssembly(userID: viewModel.userID)
+        self.push(module: assembly.makeModule())
     }
 }
 

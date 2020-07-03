@@ -979,6 +979,8 @@ NewProfileRatingCourses234 = "%@ Courses";
 NewProfileRatingCourses567890 = "%@ Courses";
 
 NewProfileBlockTitleActivity = "Activity";
+NewProfileBlockTitleAchievements = "Achievements";
+NewProfileBlockTitleCertificates = "Certificates";
 NewProfileBlockTitleDetails = "Details";
 
 NewProfileUserActivityNoCurrentStreak = "Solve today to start a streak";

@@ -6,6 +6,8 @@ protocol NewProfilePresenterProtocol {
     func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response)
     func presentProfileSharing(response: NewProfile.ProfileShareAction.Response)
     func presentProfileEditing(response: NewProfile.ProfileEditAction.Response)
+    func presentAchievementsList(response: NewProfile.AchievementsListPresentation.Response)
+    func presentCertificatesList(response: NewProfile.CertificatesListPresentation.Response)
 }
 
 final class NewProfilePresenter: NewProfilePresenterProtocol {
@@ -46,6 +48,14 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
     func presentProfileEditing(response: NewProfile.ProfileEditAction.Response) {
         self.viewController?.displayProfileEditing(viewModel: .init(profile: response.profile))
+    }
+
+    func presentAchievementsList(response: NewProfile.AchievementsListPresentation.Response) {
+        self.viewController?.displayAchievementsList(viewModel: .init(userID: response.userID))
+    }
+
+    func presentCertificatesList(response: NewProfile.CertificatesListPresentation.Response) {
+        self.viewController?.displayCertificatesList(viewModel: .init(userID: response.userID))
     }
 
     // MARK: Private API

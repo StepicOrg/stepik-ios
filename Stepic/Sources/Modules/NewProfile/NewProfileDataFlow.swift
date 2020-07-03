@@ -6,6 +6,8 @@ enum NewProfile {
     enum Submodule: String, UniqueIdentifiable {
         case streakNotifications
         case userActivity
+        case achievements
+        case certificates
         case details
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
@@ -98,6 +100,32 @@ enum NewProfile {
 
         struct ViewModel {
             let profile: Profile
+        }
+    }
+
+    /// Show all achievements in a details list controller
+    enum AchievementsListPresentation {
+        struct Request {}
+
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
+        }
+    }
+
+    /// Show all certificates in a details list controller
+    enum CertificatesListPresentation {
+        struct Request {}
+
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
         }
     }
 

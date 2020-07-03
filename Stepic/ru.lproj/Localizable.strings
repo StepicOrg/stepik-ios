@@ -980,6 +980,8 @@ NewProfileRatingCourses234 = "%@ курса";
 NewProfileRatingCourses567890 = "%@ курсов";
 
 NewProfileBlockTitleActivity = "Активность";
+NewProfileBlockTitleAchievements = "Достижения";
+NewProfileBlockTitleCertificates = "Сертификаты";
 NewProfileBlockTitleDetails = "Обо мне";
 
 NewProfileUserActivityNoCurrentStreak = "Начните учиться сегодня";

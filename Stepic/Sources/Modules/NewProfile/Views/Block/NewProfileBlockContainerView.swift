@@ -19,6 +19,8 @@ final class NewProfileBlockContainerView: UIView {
     private let contentView: UIView
     private let shouldShowSeparator: Bool
 
+    private let hasContentView: Bool
+
     private lazy var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = self.appearance.separatorColor
@@ -55,13 +57,14 @@ final class NewProfileBlockContainerView: UIView {
     init(
         frame: CGRect = .zero,
         headerView: UIView & NewProfileBlockHeaderViewProtocol = NewProfileBlockHeaderView(),
-        contentView: UIView,
+        contentView: UIView?,
         shouldShowSeparator: Bool = false,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         self.headerView = headerView
-        self.contentView = contentView
+        self.contentView = contentView ?? UIView()
+        self.hasContentView = contentView != nil
         self.shouldShowSeparator = shouldShowSeparator
         super.init(frame: frame)
 
@@ -125,7 +128,7 @@ extension NewProfileBlockContainerView: ProgrammaticallyInitializableViewProtoco
             make.trailing.equalToSuperview().offset(-self.appearance.contentViewInsets.right)
             make.bottom
                 .equalTo(self.separatorView.snp.top)
-                .offset(-self.appearance.contentViewInsets.bottom)
+                .offset(self.hasContentView ? -self.appearance.contentViewInsets.bottom : 0)
         }
     }
 }
