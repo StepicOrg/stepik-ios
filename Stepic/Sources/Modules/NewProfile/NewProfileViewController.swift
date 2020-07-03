@@ -14,7 +14,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     }
 
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
-        .userActivity, .details
+        .streakNotifications, .userActivity, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -158,6 +158,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
+            self.refreshStreakNotificationsState()
             self.refreshUserActivityState()
 
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
@@ -197,6 +198,31 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     private func getSubmodule(type: SubmoduleType) -> Submodule? {
         self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
+    }
+
+    // MARK: Streak Notifications
+
+    private func refreshStreakNotificationsState() {
+        guard self.getSubmodule(type: NewProfile.Submodule.streakNotifications) == nil else {
+            return
+        }
+
+        let assembly = NewProfileStreakNotificationsAssembly()
+        let viewController = assembly.makeModule()
+
+        self.registerSubmodule(
+            .init(
+                viewController: viewController,
+                view: viewController.view,
+                type: NewProfile.Submodule.streakNotifications
+            )
+        )
+
+        if let moduleInput = assembly.moduleInput {
+            self.interactor.doSubmodulesRegistration(
+                request: .init(submodules: [NewProfile.Submodule.streakNotifications.uniqueIdentifier: moduleInput])
+            )
+        }
     }
 
     // MARK: User Activity

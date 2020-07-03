@@ -985,6 +985,9 @@ NewProfileUserActivityNoCurrentStreak = "Solve today to start a streak";
 NewProfileUserActivityCurrentStreak = "%@ in a row";
 NewProfileUserActivityLongestStreak = "Max streak %@";
 
+NewProfileStreakNotificationsNotifyPreference = "Notify About Streaks";
+NewProfileStreakNotificationsTimeSelection = "Notification Time";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";

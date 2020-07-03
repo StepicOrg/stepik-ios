@@ -4,6 +4,7 @@ enum NewProfile {
     // MARK: Common types
 
     enum Submodule: String, UniqueIdentifiable {
+        case streakNotifications
         case userActivity
         case details
 
