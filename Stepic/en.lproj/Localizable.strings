@@ -981,9 +981,12 @@ NewProfileRatingCourses567890 = "%@ Courses";
 NewProfileBlockTitleActivity = "Activity";
 NewProfileBlockTitleDetails = "Details";
 
-NewProfileUserActivityNoCurrentStreak = "Solve today to start a streak";
-NewProfileUserActivityCurrentStreak = "%@ in a row";
+NewProfileUserActivityNoCurrentStreak = "Solve Today To Start a Streak";
+NewProfileUserActivityCurrentStreak = "%@ In a Row";
 NewProfileUserActivityLongestStreak = "Max streak %@";
+
+NewProfileStreakNotificationsNotifyPreference = "Notify About Streaks";
+NewProfileStreakNotificationsTimeSelection = "Notification Time";
 
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";

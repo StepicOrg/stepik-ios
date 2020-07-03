@@ -986,6 +986,9 @@ NewProfileUserActivityNoCurrentStreak = "Начните учиться сего�
 NewProfileUserActivityCurrentStreak = "%@ без перерыва";
 NewProfileUserActivityLongestStreak = "Максимальная серия %@";
 
+NewProfileStreakNotificationsNotifyPreference = "Уведомления о занятиях";
+NewProfileStreakNotificationsTimeSelection = "Время напоминания";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";
