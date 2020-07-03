@@ -5,7 +5,7 @@ extension NewProfileStreakNotificationsFooterView {
     struct Appearance {
         let textLabelFont = UIFont.systemFont(ofSize: 15, weight: .regular)
         let textLabelTextColor = UIColor.stepikSystemSecondaryText
-        let textLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        let textLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 0, right: 16)
     }
 }
 
