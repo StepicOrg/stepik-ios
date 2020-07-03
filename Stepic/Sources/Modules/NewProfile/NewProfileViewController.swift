@@ -344,7 +344,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case .visible(let viewModel):
             if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
                let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
-                profileDetailsViewController.newProfileDetailsView?.text = viewModel.userDetails
+                profileDetailsViewController.newProfileDetailsView?.configure(
+                    viewModel: .init(userID: viewModel.userID, profileDetailsText: viewModel.userDetails)
+                )
             } else {
                 let profileDetailsAssembly = NewProfileDetailsAssembly()
                 let profileDetailsViewController = profileDetailsAssembly.makeModule()
@@ -356,7 +358,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
                 let containerView = NewProfileBlockContainerView(
                     headerView: headerView,
-                    contentView: profileDetailsViewController.view
+                    contentView: profileDetailsViewController.view,
+                    appearance: .init(contentViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
                 )
 
                 self.registerSubmodule(

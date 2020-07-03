@@ -1,3 +1,4 @@
+import SVProgressHUD
 import UIKit
 
 final class NewProfileDetailsAssembly: Assembly {
@@ -31,7 +32,7 @@ final class NewProfileDetailsViewController: UIViewController {
 
 extension NewProfileDetailsViewController: NewProfileSubmoduleProtocol {
     func update(with user: User, isOnline: Bool) {
-        self.newProfileDetailsView?.text = user.details
+        self.newProfileDetailsView?.configure(viewModel: .init(userID: user.id, profileDetailsText: user.details))
     }
 }
 
@@ -44,5 +45,13 @@ extension NewProfileDetailsViewController: NewProfileDetailsViewDelegate {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func newProfileDetailsView(_ view: NewProfileDetailsView, didSelectUserID userID: User.IdType) {
+        DispatchQueue.main.async {
+            let sharingURLString = "\(StepikApplicationsInfo.stepikURL)/users/\(userID)"
+            UIPasteboard.general.string = sharingURLString
+            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("Copied", comment: ""))
+        }
     }
 }

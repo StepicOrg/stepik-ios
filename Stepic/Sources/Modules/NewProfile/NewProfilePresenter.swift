@@ -61,13 +61,10 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
     // MARK: Private API
 
     private func makeViewModel(user: User, isCurrentUserProfile: Bool) -> NewProfileViewModel {
-        let headerViewModel = self.makeHeaderViewModel(user: user)
-        let formattedUserID = "User ID: \(user.id)"
-
-        return NewProfileViewModel(
-            headerViewModel: headerViewModel,
+        NewProfileViewModel(
+            headerViewModel: self.makeHeaderViewModel(user: user),
+            userID: user.id,
             userDetails: user.details,
-            formattedUserID: formattedUserID,
             isCurrentUserProfile: isCurrentUserProfile
         )
     }
