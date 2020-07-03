@@ -256,6 +256,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         let headerView = NewProfileBlockHeaderView()
         headerView.titleText = NSLocalizedString("NewProfileBlockTitleActivity", comment: "")
         headerView.isShowAllButtonHidden = true
+        headerView.isUserInteractionEnabled = false
 
         let containerView = NewProfileBlockContainerView(
             headerView: headerView,
@@ -351,6 +352,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
                 let headerView = NewProfileBlockHeaderView()
                 headerView.titleText = NSLocalizedString("NewProfileBlockTitleDetails", comment: "")
                 headerView.isShowAllButtonHidden = true
+                headerView.isUserInteractionEnabled = false
 
                 let containerView = NewProfileBlockContainerView(
                     headerView: headerView,
