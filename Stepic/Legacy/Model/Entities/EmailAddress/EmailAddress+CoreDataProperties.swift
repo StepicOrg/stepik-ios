@@ -22,6 +22,10 @@ extension EmailAddress {
         NSEntityDescription.entity(forEntityName: "EmailAddress", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<EmailAddress> {
+        NSFetchRequest<EmailAddress>(entityName: "EmailAddress")
+    }
+
     convenience init() {
         self.init(entity: EmailAddress.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

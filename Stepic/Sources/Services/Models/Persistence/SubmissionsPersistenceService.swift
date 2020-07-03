@@ -8,6 +8,8 @@ protocol SubmissionsPersistenceServiceProtocol: AnyObject {
 
     func fetchAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<[SubmissionEntity]>
     func deleteAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<Void>
+
+    func deleteAll() -> Promise<Void>
 }
 
 final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol {
@@ -15,8 +17,8 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
     private let attemptsPersistenceService: AttemptsPersistenceServiceProtocol
 
     init(
-        managedObjectContext: NSManagedObjectContext,
-        attemptsPersistenceService: AttemptsPersistenceServiceProtocol
+        managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context,
+        attemptsPersistenceService: AttemptsPersistenceServiceProtocol = AttemptsPersistenceService()
     ) {
         self.managedObjectContext = managedObjectContext
         self.attemptsPersistenceService = attemptsPersistenceService
@@ -123,6 +125,27 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
         }
     }
 
+    func deleteAll() -> Promise<Void> {
+        Promise { seal in
+            let request: NSFetchRequest<SubmissionEntity> = SubmissionEntity.fetchRequest
+            self.managedObjectContext.performAndWait {
+                do {
+                    let submissions = try self.managedObjectContext.fetch(request)
+                    for submission in submissions {
+                        self.managedObjectContext.delete(submission)
+                    }
+
+                    try? self.managedObjectContext.save()
+
+                    seal.fulfill(())
+                } catch {
+                    print("SubmissionsPersistenceService :: failed delete all submissions with error = \(error)")
+                    seal.reject(Error.deleteFailed)
+                }
+            }
+        }
+    }
+
     // MARK: Private API
 
     private func fetchAttempt(id: Attempt.IdType) -> Guarantee<AttemptEntity?> {
@@ -167,5 +190,9 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                 }
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case deleteFailed
     }
 }

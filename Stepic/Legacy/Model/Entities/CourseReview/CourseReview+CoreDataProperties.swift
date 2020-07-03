@@ -24,6 +24,10 @@ extension CourseReview {
         NSEntityDescription.entity(forEntityName: "CourseReview", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<CourseReview> {
+        NSFetchRequest<CourseReview>(entityName: "CourseReview")
+    }
+
     convenience init() {
         self.init(entity: CourseReview.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

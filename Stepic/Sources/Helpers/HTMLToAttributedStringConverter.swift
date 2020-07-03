@@ -14,7 +14,7 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
     ]
 
     static let defaultLinkStyle = Style("a")
-        .foregroundColor(.blue, .normal)
+        .foregroundColor(.stepikLightBlue, .normal)
         .foregroundColor(.stepikPrimaryText, .highlighted)
 
     static func defaultTagStyles(fontSize: CGFloat) -> [Style] {
@@ -44,9 +44,9 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
         let finalStyles = tagStyles.isEmpty
             ? defaultStyles
             : (
-            tagStyles + defaultStyles.filter { defaultStyle in
-                !tagStyles.contains { $0.name == defaultStyle.name }
-            }
+                tagStyles + defaultStyles.filter { defaultStyle in
+                    !tagStyles.contains { $0.name == defaultStyle.name }
+                }
         )
 
         self.font = font

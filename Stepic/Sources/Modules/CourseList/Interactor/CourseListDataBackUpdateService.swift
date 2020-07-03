@@ -16,6 +16,11 @@ protocol CourseListDataBackUpdateServiceDelegate: AnyObject {
         _ service: CourseListDataBackUpdateServiceProtocol,
         didInsertCourse course: Course
     )
+    /// Tells the delegate that the specified user course is updated.
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didUpdateUserCourse userCourse: UserCourse
+    )
 }
 
 protocol CourseListDataBackUpdateServiceProtocol: AnyObject {
@@ -27,6 +32,12 @@ final class CourseListDataBackUpdateService: CourseListDataBackUpdateServiceProt
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     weak var delegate: CourseListDataBackUpdateServiceDelegate?
+
+    private var isUserCoursesCourseListType: Bool {
+        self.courseListType is EnrolledCourseListType
+            || self.courseListType is FavoriteCourseListType
+            || self.courseListType is ArchivedCourseListType
+    }
 
     init(
         courseListType: CourseListType,
@@ -48,27 +59,48 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
             return
         }
 
-        // If progress or enrollment state was updated then refresh course with data
-        if update.contains(.progress) || update.contains(.enrollment) {
+        // If progress state was updated then refresh course with data
+        if update.contains(.progress) {
             self.delegate?.courseListDataBackUpdateService(self, didUpdateCourse: course)
+        }
+
+        if update.contains(.enrollment) {
+            self.handleCourse(course, didUpdateEnrollment: update)
         }
 
         // If isArchived or isFavorite state was updated then handle specified update and refresh course list
         if update.contains(.courseIsArchived) || update.contains(.courseIsFavorite) {
-            self.handleUserCoursesCourseUpdate(update: update, course: course)
+            self.handleCourse(course, didUpdateUserCourses: update)
         }
     }
 
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
         didReport refreshedTarget: DataBackUpdateTarget
-    ) {}
+    ) {
+        guard case .userCourse(let userCourse) = refreshedTarget else {
+            return
+        }
 
-    private func handleUserCoursesCourseUpdate(update: DataBackUpdateDescription, course: Course) {
-        let isUserCoursesCourseListType = self.courseListType is EnrolledCourseListType
-            || self.courseListType is FavoriteCourseListType
-            || self.courseListType is ArchivedCourseListType
-        guard isUserCoursesCourseListType else {
+        self.delegate?.courseListDataBackUpdateService(self, didUpdateUserCourse: userCourse)
+    }
+
+    // MARK: Private Helpers
+
+    private func handleCourse(_ course: Course, didUpdateEnrollment update: DataBackUpdateDescription) {
+        if self.isUserCoursesCourseListType {
+            if course.enrolled && self.courseListType is EnrolledCourseListType {
+                self.delegate?.courseListDataBackUpdateService(self, didInsertCourse: course)
+            } else {
+                self.delegate?.courseListDataBackUpdateService(self, didDeleteCourse: course)
+            }
+        } else {
+            self.delegate?.courseListDataBackUpdateService(self, didUpdateCourse: course)
+        }
+    }
+
+    private func handleCourse(_ course: Course, didUpdateUserCourses update: DataBackUpdateDescription) {
+        guard course.enrolled, self.isUserCoursesCourseListType else {
             return
         }
 

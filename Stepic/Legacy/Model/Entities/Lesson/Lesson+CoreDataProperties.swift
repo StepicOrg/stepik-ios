@@ -32,6 +32,10 @@ extension Lesson {
         NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Lesson> {
+        NSFetchRequest<Lesson>(entityName: "Lesson")
+    }
+
     convenience init() {
         self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

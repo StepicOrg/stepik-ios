@@ -6,6 +6,8 @@ protocol UserActivitiesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [UserActivityEntity.IdType]) -> Guarantee<[UserActivityEntity]>
     func fetch(id: UserActivityEntity.IdType) -> Guarantee<UserActivityEntity?>
     func create(userActivity: UserActivity) -> Guarantee<UserActivityEntity>
+
+    func deleteAll() -> Promise<Void>
 }
 
 final class UserActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol {
@@ -45,6 +47,27 @@ final class UserActivitiesPersistenceService: UserActivitiesPersistenceServicePr
         }
     }
 
+    func deleteAll() -> Promise<Void> {
+        Promise { seal in
+            let request: NSFetchRequest<UserActivityEntity> = UserActivityEntity.fetchRequest
+            self.managedObjectContext.performAndWait {
+                do {
+                    let userActivities = try self.managedObjectContext.fetch(request)
+                    for userActivity in userActivities {
+                        self.managedObjectContext.delete(userActivity)
+                    }
+
+                    try? self.managedObjectContext.save()
+
+                    seal.fulfill(())
+                } catch {
+                    print("UserActivitiesPersistenceService :: failed delete all user activities = \(error)")
+                    seal.reject(Error.deleteFailed)
+                }
+            }
+        }
+    }
+
     private func fetchUserActivities(ids: [UserActivityEntity.IdType]) -> Guarantee<[UserActivityEntity]> {
         Guarantee { seal in
             let idSubpredicates = ids.map { id in
@@ -52,7 +75,7 @@ final class UserActivitiesPersistenceService: UserActivitiesPersistenceServicePr
             }
             let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
 
-            let request: NSFetchRequest<UserActivityEntity> = UserActivityEntity.fetchRequest()
+            let request: NSFetchRequest<UserActivityEntity> = UserActivityEntity.fetchRequest
             request.predicate = compoundPredicate
             request.sortDescriptors = UserActivityEntity.defaultSortDescriptors
             request.returnsObjectsAsFaults = false
@@ -62,10 +85,14 @@ final class UserActivitiesPersistenceService: UserActivitiesPersistenceServicePr
                     let userActivities = try self.managedObjectContext.fetch(request)
                     seal(userActivities)
                 } catch {
-                    print("Error while fetching user activities = \(ids)")
+                    print("UserActivitiesPersistenceService :: failed fetch user activities = \(ids)")
                     seal([])
                 }
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case deleteFailed
     }
 }

@@ -72,8 +72,12 @@ final class SocialAuthPresenter {
     }
 
     func update() {
-        let providersInfo = SocialProvider.allCases.map {
-            SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
+        let providersInfo: [SocialProviderViewData] = SocialProvider.allCases.compactMap {
+            if $0 == .apple && !StepikApplicationsInfo.SocialInfo.isSignInWithAppleAvailable {
+                return nil
+            } else {
+                return SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
+            }
         }
         view?.set(providers: providersInfo)
     }
@@ -87,18 +91,18 @@ final class SocialAuthPresenter {
 
         self.pendingAuthProviderInfo = providerInfo
 
-        guard let SDKProvider = providerInfo.socialSDKProvider else {
-            view?.presentWebController(with: providerInfo.registerURL)
+        guard let sdkProvider = providerInfo.socialSDKProvider else {
+            self.view?.presentWebController(with: providerInfo.registerURL)
             return
         }
 
-        if let SDKProvider = SDKProvider as? VKSocialSDKProvider,
-           let viewDelegate = view as? VKSocialSDKProviderDelegate {
-            SDKProvider.delegate = viewDelegate
+        if let sdkProvider = sdkProvider as? VKSocialSDKProvider,
+           let vkViewDelegate = self.view as? VKSocialSDKProviderDelegate {
+            sdkProvider.delegate = vkViewDelegate
         }
 
-        SDKProvider.getAccessInfo().then { socialToken, email -> Promise<(StepikToken, AuthorizationType)> in
-            self.authAPI.signUpWithToken(socialToken: socialToken, email: email, provider: SDKProvider.name)
+        sdkProvider.getAccessInfo().then { credential -> Promise<(StepikToken, AuthorizationType)> in
+            self.authAPI.signUpWithSocialCredential(credential: credential, provider: sdkProvider.name)
         }.then { token, authorizationType -> Promise<User> in
             AuthInfo.shared.token = token
             AuthInfo.shared.authorizationType = authorizationType

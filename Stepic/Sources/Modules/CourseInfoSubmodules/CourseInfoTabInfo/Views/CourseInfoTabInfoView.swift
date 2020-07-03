@@ -3,10 +3,11 @@ import SnapKit
 import UIKit
 
 protocol CourseInfoTabInfoViewDelegate: AnyObject {
-    func courseInfoTabInfoViewDidClickInstructor(
-        _ courseInfoTabInfoView: CourseInfoTabInfoView,
-        instructor: CourseInfoTabInfoInstructorViewModel
+    func courseInfoTabInfoView(
+        _ view: CourseInfoTabInfoView,
+        didClickInstructor instructor: CourseInfoTabInfoInstructorViewModel
     )
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenURL url: URL)
 }
 
 extension CourseInfoTabInfoView {
@@ -149,6 +150,13 @@ final class CourseInfoTabInfoView: UIView {
         textBlockView.icon = block.icon
         textBlockView.title = block.title
         textBlockView.message = message
+        textBlockView.onOpenURL = { [weak self] url in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didOpenURL: url)
+        }
 
         self.scrollableStackView.addArrangedView(textBlockView)
     }
@@ -160,12 +168,12 @@ final class CourseInfoTabInfoView: UIView {
 
         let instructorsView = CourseInfoTabInfoInstructorsBlockView()
         instructorsView.configure(instructors: instructors)
-        instructorsView.onInstructorClick = { [weak self] in
+        instructorsView.onInstructorClick = { [weak self] instructor in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.courseInfoTabInfoViewDidClickInstructor(strongSelf, instructor: $0)
+            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didClickInstructor: instructor)
         }
 
         self.scrollableStackView.addArrangedView(instructorsView)

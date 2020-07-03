@@ -29,7 +29,7 @@ extension Profile {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
 
-    static func fetchRequest() -> NSFetchRequest<Profile> {
+    static var fetchRequest: NSFetchRequest<Profile> {
         NSFetchRequest<Profile>(entityName: "Profile")
     }
 

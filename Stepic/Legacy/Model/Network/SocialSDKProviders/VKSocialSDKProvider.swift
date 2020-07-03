@@ -15,72 +15,73 @@ protocol VKSocialSDKProviderDelegate: AnyObject {
 }
 
 final class VKSocialSDKProvider: NSObject, SocialSDKProvider {
-    weak var delegate: VKSocialSDKProviderDelegate?
+    static let instance = VKSocialSDKProvider()
 
-    public static let instance = VKSocialSDKProvider()
+    weak var delegate: VKSocialSDKProviderDelegate?
 
     let name = "vk"
 
     private var sdkInstance: VKSdk
 
+    private var successHandler: ((String, String?) -> Void)?
+    private var errorHandler: ((SocialSDKError) -> Void)?
+
     override private init() {
-        sdkInstance = VKSdk.initialize(withAppId: StepikApplicationsInfo.SocialInfo.AppIds.vk)
+        self.sdkInstance = VKSdk.initialize(withAppId: StepikApplicationsInfo.SocialInfo.AppIds.vk)
         super.init()
-        sdkInstance.register(self)
-        sdkInstance.uiDelegate = self
+        self.sdkInstance.register(self)
+        self.sdkInstance.uiDelegate = self
     }
 
-    func getAccessInfo() -> Promise<(token: String, email: String?)> {
+    func getAccessInfo() -> Promise<SocialSDKCredential> {
         Promise { seal in
-            getAccessInfo(success: { token, email in
-                seal.fulfill((token: token, email: email))
-            }, error: { error in
-                seal.reject(error)
-            })
+            self.getAccessInfo(
+                success: { (token, emailOrNil) in
+                    seal.fulfill(SocialSDKCredential(token: token, email: emailOrNil))
+                },
+                error: { error in
+                    seal.reject(error)
+                }
+            )
         }
     }
 
-    private func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
+    private func getAccessInfo(
+        success successHandler: @escaping (String, String?) -> Void,
+        error errorHandler: @escaping (SocialSDKError) -> Void
+    ) {
         self.successHandler = successHandler
         self.errorHandler = errorHandler
 
         if VKSdk.isLoggedIn() {
             VKSdk.forceLogout()
         }
+
         VKSdk.authorize(["email"])
     }
-
-    private var successHandler: ((String, String?) -> Void)?
-    private var errorHandler: ((SocialSDKError) -> Void)?
 }
 
 extension VKSocialSDKProvider: VKSdkDelegate {
-    /**
-     Notifies about access error. For example, this may occurs when user rejected app permissions through VK.com
-     */
-    public func vkSdkUserAuthorizationFailed() {
-        print()
-        errorHandler?(SocialSDKError.accessDenied)
+    /// Notifies about access error. For example, this may occurs when user rejected app permissions through VK.com
+    func vkSdkUserAuthorizationFailed() {
+        self.errorHandler?(SocialSDKError.accessDenied)
     }
 
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        if result.error != nil {
-            print(result.error)
-            errorHandler?(SocialSDKError.connectionError)
-            return
-        }
-        if let token = result.token.accessToken {
-            successHandler?(token, result.token.email)
-            return
+        if let error = result.error {
+            print(error)
+            self.errorHandler?(SocialSDKError.connectionError)
+        } else if let accessToken = result.token.accessToken {
+            self.successHandler?(accessToken, result.token.email)
         }
     }
 }
 
 extension VKSocialSDKProvider: VKSdkUIDelegate {
-    public func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
+    func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
     }
 
     func vkSdkShouldPresent(_ controller: UIViewController) {
-        delegate?.presentAuthController(controller)
+        self.delegate?.presentAuthController(controller)
     }
 }

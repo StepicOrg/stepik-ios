@@ -361,4 +361,14 @@ extension CourseListInteractor: CourseListDataBackUpdateServiceDelegate {
         self.cacheCurrentCourses()
         self.refreshCourseList()
     }
+
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didUpdateUserCourse userCourse: UserCourse
+    ) {
+        if let course = self.currentCourses.first(where: { $0.1.id == userCourse.courseID })?.1 {
+            self.updateCourseInCurrentCourses(course)
+            self.refreshCourseList()
+        }
+    }
 }

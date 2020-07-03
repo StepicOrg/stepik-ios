@@ -969,6 +969,9 @@ EditStepMessage = "Вы можете редактировать только т�
 EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
 EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 
+/* Course List */
+CourseWidgetArchived = "В архиве";
+
 /* New profile */
 NewProfileRatingReputation = "Репутация %@";
 NewProfileRatingKnowledge = "Знания %@";

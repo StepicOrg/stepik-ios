@@ -79,6 +79,14 @@ struct StepikApplicationsInfo {
             static let vk = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.SocialProviders.vkId) as? String ?? ""
             static let facebook = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.SocialProviders.facebookId) as? String ?? ""
         }
+
+        static var isSignInWithAppleAvailable: Bool {
+            if #available(iOS 13.0, *) {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 
     // Section: Modules

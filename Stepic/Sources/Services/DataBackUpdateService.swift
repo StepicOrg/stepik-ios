@@ -3,11 +3,12 @@ import PromiseKit
 
 /// Which object was updated
 enum DataBackUpdateTarget {
-    case course(_: Course)
-    case section(_: Section)
-    case unit(_: Unit)
-    case progress(_: Progress)
-    case profile(_: Profile)
+    case course(Course)
+    case section(Section)
+    case unit(Unit)
+    case progress(Progress)
+    case profile(Profile)
+    case userCourse(UserCourse)
 }
 
 /// Affected fields in updated object
@@ -56,6 +57,8 @@ protocol DataBackUpdateServiceProtocol: AnyObject {
     func triggerCourseIsFavoriteUpdate(retrievedCourse: Course)
     /// Report about `isArchived` state update with already retrieved course
     func triggerCourseIsArchivedUpdate(retrievedCourse: Course)
+    /// Report about user course update
+    func triggerUserCourseUpdate(updatedUserCourse: UserCourse)
 }
 
 final class DataBackUpdateService: DataBackUpdateServiceProtocol {
@@ -193,6 +196,10 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
     func triggerCourseIsArchivedUpdate(retrievedCourse: Course) {
         self.postNotification(description: [.courseIsArchived], target: .course(retrievedCourse))
         self.postNotification(target: .course(retrievedCourse))
+    }
+
+    func triggerUserCourseUpdate(updatedUserCourse: UserCourse) {
+        self.postNotification(target: .userCourse(updatedUserCourse))
     }
 
     // MARK: Private methods

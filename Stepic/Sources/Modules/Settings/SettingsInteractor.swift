@@ -36,6 +36,8 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     private let userAccountService: UserAccountServiceProtocol
     private let remoteConfig: RemoteConfig
 
+    private let downloadsDeletionService: DownloadsDeletionServiceProtocol
+
     private var settingsData: Settings.SettingsData {
         .init(
             downloadVideoQuality: self.provider.globalDownloadVideoQuality,
@@ -55,13 +57,15 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         provider: SettingsProviderProtocol,
         analytics: Analytics,
         userAccountService: UserAccountServiceProtocol,
-        remoteConfig: RemoteConfig
+        remoteConfig: RemoteConfig,
+        downloadsDeletionService: DownloadsDeletionServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.analytics = analytics
         self.userAccountService = userAccountService
         self.remoteConfig = remoteConfig
+        self.downloadsDeletionService = downloadsDeletionService
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
@@ -163,7 +167,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             // For better waiting animation.
             after(.seconds(1))
         }.then {
-            self.provider.deleteAllDownloadedContent()
+            self.downloadsDeletionService.deleteAllDownloads()
         }.done {
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: true))
         }.catch { _ in

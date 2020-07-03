@@ -40,12 +40,13 @@ extension User {
     @NSManaged var managedAttempts: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
+    @NSManaged var managedUserCourse: UserCourse?
 
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
 
-    static func fetchRequest() -> NSFetchRequest<User> {
+    static var fetchRequest: NSFetchRequest<User> {
         NSFetchRequest<User>(entityName: "User")
     }
 
@@ -272,6 +273,15 @@ extension User {
         }
         set(value) {
             managedProfileEntity = value
+        }
+    }
+
+    var userCourse: UserCourse? {
+        get {
+            self.managedUserCourse
+        }
+        set {
+            self.managedUserCourse = newValue
         }
     }
 

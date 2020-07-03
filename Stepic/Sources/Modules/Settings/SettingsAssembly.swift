@@ -22,18 +22,7 @@ final class SettingsAssembly: Assembly {
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             autoplayStorageManager: AutoplayStorageManager(),
             adaptiveStorageManager: AdaptiveStorageManager.shared,
-            applicationThemeService: ApplicationThemeService(),
-            downloadsProvider: DownloadsProvider(
-                coursesPersistenceService: CoursesPersistenceService(),
-                adaptiveStorageManager: AdaptiveStorageManager.shared,
-                videoFileManager: VideoStoredFileManager(fileManager: .default),
-                imageFileManager: ImageStoredFileManager(fileManager: .default),
-                storageUsageService: StorageUsageService(
-                    videoFileManager: VideoStoredFileManager(fileManager: .default),
-                    imageFileManager: ImageStoredFileManager(fileManager: .default)
-                )
-            ),
-            arQuickLookStoredFileManager: ARQuickLookStoredFileManager(fileManager: .default)
+            applicationThemeService: ApplicationThemeService()
         )
         let presenter = SettingsPresenter()
         let interactor = SettingsInteractor(
@@ -41,7 +30,8 @@ final class SettingsAssembly: Assembly {
             provider: provider,
             analytics: StepikAnalytics.shared,
             userAccountService: UserAccountService(),
-            remoteConfig: .shared
+            remoteConfig: .shared,
+            downloadsDeletionService: DownloadsDeletionService()
         )
         let viewController = SettingsViewController(
             interactor: interactor,

@@ -302,40 +302,32 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     // MARK: - Unregister -
 
-    @available(*, deprecated, message: "Legacy method with callbacks")
-    func unregisterFromNotifications(completion: @escaping (() -> Void)) {
-        self.unregisterFromNotifications().done {
-            completion()
-        }.catch { _ in
-        }
-    }
-
-    func unregisterFromNotifications() -> Guarantee<Void> {
+    func unregisterForRemoteNotifications() -> Guarantee<Void> {
         Guarantee { seal in
             UIApplication.shared.unregisterForRemoteNotifications()
 
-            if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
-                ApiDataDownloader.devices.delete(deviceId).done { () in
-                    print("NotificationsRegistrationService: successfully delete device, id = \(deviceId)")
+            if let deviceID = DeviceDefaults.sharedDefaults.deviceId {
+                ApiDataDownloader.devices.delete(deviceID).done { () in
+                    print("NotificationsRegistrationService: successfully delete device, id = \(deviceID)")
                     seal(())
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
-                        print("NotificationsRegistrationService: device not found on deletion, id = \(deviceId)")
+                        print("NotificationsRegistrationService: device not found on deletion, id = \(deviceID)")
                     default:
-                        if let userId = AuthInfo.shared.userId,
+                        if let userID = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
-                            let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
+                            let deleteTask = DeleteDeviceExecutableTask(userId: userID, deviceId: deviceID)
                             ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
 
-                            let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
-                            userPersistencyManager.writeStepicToken(token, userId: userId)
+                            let userPersistenceManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                            userPersistenceManager.writeStepicToken(token, userId: userID)
 
-                            let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
-                            taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
+                            let taskPersistenceManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                            taskPersistenceManager.writeTask(deleteTask, name: deleteTask.id)
 
-                            let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
-                            queuePersistencyManager.writeQueue(
+                            let queuePersistenceManager = PersistentQueueRecoveryManager(baseName: "Queues")
+                            queuePersistenceManager.writeQueue(
                                 ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue,
                                 key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey
                             )
@@ -362,7 +354,7 @@ extension NotificationsRegistrationService {
 
     private var didShowDefaultPermissionAlert: Bool {
         get {
-             UserDefaults.standard.bool(
+            UserDefaults.standard.bool(
                 forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
             )
         }
@@ -376,7 +368,7 @@ extension NotificationsRegistrationService {
 
     private var isFirstRegistrationIsInProgress: Bool {
         get {
-             UserDefaults.standard.bool(
+            UserDefaults.standard.bool(
                 forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
             )
         }

@@ -35,6 +35,10 @@ extension Unit {
         NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.shared.context)!
     }
 
+    static var fetchRequest: NSFetchRequest<Unit> {
+        NSFetchRequest<Unit>(entityName: "Unit")
+    }
+
     convenience init() {
         self.init(entity: Unit.oldEntity, insertInto: CoreDataHelper.shared.context)
     }

@@ -127,11 +127,21 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
-    func courseInfoTabInfoViewDidClickInstructor(
-        _ courseInfoTabInfoView: CourseInfoTabInfoView,
-        instructor: CourseInfoTabInfoInstructorViewModel
+    func courseInfoTabInfoView(
+        _ view: CourseInfoTabInfoView,
+        didClickInstructor instructor: CourseInfoTabInfoInstructorViewModel
     ) {
         let assembly = NewProfileAssembly(otherUserID: instructor.id)
         self.push(module: assembly.makeModule())
+    }
+
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenURL url: URL) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
