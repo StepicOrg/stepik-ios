@@ -13,4 +13,5 @@ struct NewProfileViewModel {
 
     let userDetails: String
     let formattedUserID: String
+    let isCurrentUserProfile: Bool
 }

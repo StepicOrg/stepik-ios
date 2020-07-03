@@ -172,7 +172,11 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                 self.currentUser = user
 
                 if let currentUser = self.currentUser {
-                    seal.fulfill(.init(result: .success(currentUser)))
+                    seal.fulfill(
+                        .init(result: .success(
+                            .init(user: currentUser, isCurrentUserProfile: self.isCurrentUserProfile))
+                        )
+                    )
                 } else {
                     // Offline mode: present empty state only if get nil from network
                     if self.isOnline && self.didLoadFromCache {
@@ -297,7 +301,9 @@ extension NewProfileInteractor {
         self.currentUser = currentUser
 
         // Present cached user profile and then fetch actual info from remote.
-        self.presenter.presentProfile(response: .init(result: .success(currentUser)))
+        self.presenter.presentProfile(
+            response: .init(result: .success(.init(user: currentUser, isCurrentUserProfile: self.isCurrentUserProfile)))
+        )
         self.doProfileRefresh(request: .init())
     }
 }
@@ -351,7 +357,9 @@ extension NewProfileInteractor: DataBackUpdateServiceDelegate {
             currentUser.bio = profile.shortBio
             currentUser.details = profile.details
 
-            self.presenter.presentProfile(response: .init(result: .success(currentUser)))
+            self.presenter.presentProfile(
+                response: .init(result: .success(.init(user: currentUser, isCurrentUserProfile: true)))
+            )
         }
     }
 }

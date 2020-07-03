@@ -27,8 +27,13 @@ enum NewProfile {
     enum ProfileLoad {
         struct Request {}
 
+        struct Data {
+            let user: User
+            let isCurrentUserProfile: Bool
+        }
+
         struct Response {
-            let result: Result<User, Error>
+            let result: Result<Data, Error>
         }
 
         struct ViewModel {

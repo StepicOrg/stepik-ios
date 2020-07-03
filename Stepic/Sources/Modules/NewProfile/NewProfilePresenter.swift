@@ -13,11 +13,9 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
     func presentProfile(response: NewProfile.ProfileLoad.Response) {
         switch response.result {
-        case .success(let user):
-            let viewModel = NewProfile.ProfileLoad.ViewModel(
-                state: .result(data: self.makeViewModel(user: user))
-            )
-            self.viewController?.displayProfile(viewModel: viewModel)
+        case .success(let data):
+            let viewModel = self.makeViewModel(user: data.user, isCurrentUserProfile: data.isCurrentUserProfile)
+            self.viewController?.displayProfile(viewModel: .init(state: .result(data: viewModel)))
         case .failure(let error):
             if case NewProfileInteractor.Error.unauthorized = error {
                 self.viewController?.displayProfile(viewModel: .init(state: .anonymous))
@@ -52,14 +50,15 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(user: User) -> NewProfileViewModel {
+    private func makeViewModel(user: User, isCurrentUserProfile: Bool) -> NewProfileViewModel {
         let headerViewModel = self.makeHeaderViewModel(user: user)
         let formattedUserID = "User ID: \(user.id)"
 
         return NewProfileViewModel(
             headerViewModel: headerViewModel,
             userDetails: user.details,
-            formattedUserID: formattedUserID
+            formattedUserID: formattedUserID,
+            isCurrentUserProfile: isCurrentUserProfile
         )
     }
 

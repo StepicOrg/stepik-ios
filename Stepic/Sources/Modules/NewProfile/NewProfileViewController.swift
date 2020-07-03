@@ -158,7 +158,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
-            self.refreshStreakNotificationsState()
+            let shouldShowStreakNotifications = viewModel.isCurrentUserProfile
+            self.refreshStreakNotificationsState(shouldShowStreakNotifications ? .visible : .hidden)
+
             self.refreshUserActivityState()
 
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
@@ -202,26 +204,38 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     // MARK: Streak Notifications
 
-    private func refreshStreakNotificationsState() {
-        guard self.getSubmodule(type: NewProfile.Submodule.streakNotifications) == nil else {
-            return
-        }
+    private enum StreakNotificationsState {
+        case visible
+        case hidden
+    }
 
-        let assembly = NewProfileStreakNotificationsAssembly()
-        let viewController = assembly.makeModule()
+    private func refreshStreakNotificationsState(_ state: StreakNotificationsState) {
+        switch state {
+        case .visible:
+            guard self.getSubmodule(type: NewProfile.Submodule.streakNotifications) == nil else {
+                return
+            }
 
-        self.registerSubmodule(
-            .init(
-                viewController: viewController,
-                view: viewController.view,
-                type: NewProfile.Submodule.streakNotifications
+            let assembly = NewProfileStreakNotificationsAssembly()
+            let viewController = assembly.makeModule()
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: viewController.view,
+                    type: NewProfile.Submodule.streakNotifications
+                )
             )
-        )
 
-        if let moduleInput = assembly.moduleInput {
-            self.interactor.doSubmodulesRegistration(
-                request: .init(submodules: [NewProfile.Submodule.streakNotifications.uniqueIdentifier: moduleInput])
-            )
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.streakNotifications.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.streakNotifications) {
+                self.removeSubmodule(submodule)
+            }
         }
     }
 
