@@ -70,6 +70,7 @@ final class NewProfileBlockHeaderView: UIControl, NewProfileBlockHeaderViewProto
         self.appearance = appearance
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -86,6 +87,10 @@ final class NewProfileBlockHeaderView: UIControl, NewProfileBlockHeaderViewProto
 }
 
 extension NewProfileBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
+    }
+
     func addSubviews() {
         self.addSubview(self.titleLabel)
         self.addSubview(self.showAllButton)
