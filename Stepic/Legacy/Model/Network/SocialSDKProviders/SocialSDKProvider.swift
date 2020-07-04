@@ -11,7 +11,29 @@ import PromiseKit
 
 protocol SocialSDKProvider {
     var name: String { get }
-    func getAccessInfo() -> Promise<(token: String, email: String?)>
+    func getAccessInfo() -> Promise<SocialSDKCredential>
+}
+
+struct SocialSDKCredential {
+    let token: String
+    let identityToken: String?
+    let email: String?
+    let firstName: String?
+    let lastName: String?
+
+    init(
+        token: String,
+        identityToken: String? = nil,
+        email: String? = nil,
+        firstName: String? = nil,
+        lastName: String? = nil
+    ) {
+        self.token = token
+        self.identityToken = identityToken
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+    }
 }
 
 enum SocialSDKError: Error {

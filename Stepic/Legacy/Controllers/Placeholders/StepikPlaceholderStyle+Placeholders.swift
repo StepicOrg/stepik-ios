@@ -39,6 +39,12 @@ extension StepikPlaceholder.Style {
         text: "",
         buttonTitle: NSLocalizedString("LoadStories", comment: "")
     )
+    static let tryAgain = StepikPlaceholderStyle(
+        id: "tryAgain",
+        image: nil,
+        text: "",
+        buttonTitle: NSLocalizedString("TryAgain", comment: "")
+    )
 
     // MARK: - Empty styles -
 

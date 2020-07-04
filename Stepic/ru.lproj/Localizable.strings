@@ -972,6 +972,28 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 /* Course List */
 CourseWidgetArchived = "В архиве";
 
+/* New profile */
+NewProfileRatingReputation = "Репутация %@";
+NewProfileRatingKnowledge = "Знания %@";
+NewProfileRatingCertificates1 = "%@ сертификат";
+NewProfileRatingCertificates234 = "%@ сертификата";
+NewProfileRatingCertificates567890 = "%@ сертификатов";
+NewProfileRatingCourses1 = "%@ курс";
+NewProfileRatingCourses234 = "%@ курса";
+NewProfileRatingCourses567890 = "%@ курсов";
+
+NewProfileBlockTitleActivity = "Активность";
+NewProfileBlockTitleAchievements = "Достижения";
+NewProfileBlockTitleCertificates = "Сертификаты";
+NewProfileBlockTitleDetails = "Обо мне";
+
+NewProfileUserActivityNoCurrentStreak = "Начните учиться сегодня";
+NewProfileUserActivityCurrentStreak = "%@ без перерыва";
+NewProfileUserActivityLongestStreak = "Максимальная серия %@";
+
+NewProfileStreakNotificationsNotifyPreference = "Уведомления о занятиях";
+NewProfileStreakNotificationsTimeSelection = "Время напоминания";
+
 /* In-App Purchases */
 IAPPurchaseSucceededTitle = "Покупка удалась";
 IAPPurchaseFailedTitle = "Покупка не удалась";

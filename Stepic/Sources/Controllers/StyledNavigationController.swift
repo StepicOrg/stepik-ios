@@ -39,6 +39,10 @@ class StyledNavigationController: UINavigationController {
             self.tintColor = tintColor
             self.statusBarStyle = statusBarStyle
         }
+
+        static func pageSheetAppearance() -> NavigationBarAppearanceState {
+            .init(statusBarColor: .clear)
+        }
     }
 
     override var delegate: UINavigationControllerDelegate? {

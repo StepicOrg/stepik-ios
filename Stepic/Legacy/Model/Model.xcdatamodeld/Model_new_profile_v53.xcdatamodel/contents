@@ -79,7 +79,6 @@
         <attribute name="managedLanguageCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedLastStepId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedLearnersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedPriceTier" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedPublic" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedReadiness" optional="YES" attributeType="Float" usesScalarValueType="NO" syncable="YES"/>
@@ -95,7 +94,6 @@
         <attribute name="managedWorkload" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="managedAuthors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedAuthoredCourses" inverseEntity="User" syncable="YES"/>
         <relationship name="managedCertificateEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Certificate" inverseName="managedCourse" inverseEntity="Certificate" syncable="YES"/>
-        <relationship name="managedCoursePurchases" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CoursePurchase" inverseName="managedCourse" inverseEntity="CoursePurchase" syncable="YES"/>
         <relationship name="managedInstructors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedInstructedCourses" inverseEntity="User" syncable="YES"/>
         <relationship name="managedIntroVideo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" syncable="YES"/>
         <relationship name="managedLastCodeLanguage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LastCodeLanguage" inverseName="managedCourse" inverseEntity="LastCodeLanguage" syncable="YES"/>
@@ -112,14 +110,6 @@
         <attribute name="managedLanguage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="CoursePurchase" representedClassName=".CoursePurchase" syncable="YES">
-        <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedIsActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedPaymentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedCoursePurchases" inverseEntity="Course" syncable="YES"/>
     </entity>
     <entity name="CourseReview" representedClassName=".CourseReview" syncable="YES">
         <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -296,17 +286,27 @@
         <relationship name="managedSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="managedUnits" inverseEntity="Section" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="managedActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedAvatarURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedBio" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedCreatedCoursesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedCreatedLessonsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedFirstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedFollowersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedIssuedCertificatesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedJoinDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedKnowledge" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedKnowledgeRank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedLastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedLevel" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedOrganization" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedPrivate" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedProfile" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedReputation" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedReputationRank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedSolvedStepsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedAttempts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AttemptEntity" inverseName="managedUser" inverseEntity="AttemptEntity" syncable="YES"/>
         <relationship name="managedAuthoredCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedAuthors" inverseEntity="Course" syncable="YES"/>
         <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
@@ -352,9 +352,8 @@
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
-        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="778"/>
+        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="748"/>
         <element name="CourseList" positionX="-14.1953125" positionY="793.859375" width="128" height="135"/>
-        <element name="CoursePurchase" positionX="-441" positionY="-225" width="128" height="133"/>
         <element name="CourseReview" positionX="-441" positionY="-234" width="128" height="165"/>
         <element name="CourseReviewSummary" positionX="-389.45703125" positionY="795.01171875" width="128" height="120"/>
         <element name="DiscussionThread" positionX="-450" positionY="-234" width="128" height="118"/>
@@ -370,7 +369,7 @@
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
         <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="178"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="255"/>
-        <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="283"/>
+        <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="433"/>
         <element name="UserActivityEntity" positionX="-450" positionY="-234" width="128" height="88"/>
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="178"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>

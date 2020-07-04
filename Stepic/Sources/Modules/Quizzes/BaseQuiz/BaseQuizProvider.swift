@@ -96,6 +96,6 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
     }
 
     func fetchActivity(for user: User.IdType) -> Promise<UserActivity> {
-        self.userActivitiesNetworkService.retrieve(for: user)
+        self.userActivitiesNetworkService.fetch(userID: user)
     }
 }
