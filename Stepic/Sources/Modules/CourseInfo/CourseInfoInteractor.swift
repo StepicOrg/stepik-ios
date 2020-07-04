@@ -12,6 +12,7 @@ protocol CourseInfoInteractorProtocol {
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
     func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request)
+    func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request)
 }
 
 final class CourseInfoInteractor: CourseInfoInteractorProtocol {
@@ -27,6 +28,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
+    private let iapService: IAPServiceProtocol
+
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private let courseID: Course.IdType
@@ -40,6 +43,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
         }
     }
+    private var currentCourseIAPLocalizedPrice: String?
 
     private var courseWebURLPath: String? {
         guard let course = self.currentCourse else {
@@ -84,6 +88,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
+        iapService: IAPServiceProtocol,
         analytics: Analytics,
         courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
@@ -97,6 +102,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.dataBackUpdateService = dataBackUpdateService
+        self.iapService = iapService
         self.analytics = analytics
 
         self.courseID = courseID
@@ -164,7 +170,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.courseSubscriber.leave(course: course, source: .preview).done { course in
             // Refresh course
             self.currentCourse = course
-            self.presenter.presentCourse(response: .init(result: .success(course)))
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
         }.ensure {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
@@ -211,10 +217,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             )
         } else {
             // Paid course -> open web page
-            if course.isPaid {
+            if course.isPaid && !course.isPurchased {
                 self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
-                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+
+                if self.iapService.canBuyCourse(course) {
+                    self.iapService.buy(course: course, delegate: self)
+                } else {
+                    self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                    self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                }
                 return
             }
 
@@ -223,7 +234,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course
                 self.currentCourse = course
-                self.presenter.presentCourse(response: .init(result: .success(course)))
+                self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
 
                 // Present step
                 self.presenter.presentLastStep(
@@ -242,7 +253,17 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request) {
+        if let course = self.currentCourse {
+            self.iapService.retryValidateReceipt(course: course, delegate: self)
+        }
+    }
+
     // MARK: Private methods
+
+    private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
+        .init(course: self.currentCourse.require(), iapLocalizedPrice: self.currentCourseIAPLocalizedPrice)
+    }
 
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.CourseLoad.Response> {
         Promise { seal in
@@ -253,14 +274,24 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.done { course in
                 self.currentCourse = course
 
-                if let targetCourse = self.currentCourse {
-                    seal.fulfill(.init(result: .success(targetCourse)))
+                if self.currentCourse != nil {
+                    seal.fulfill(.init(result: .success(self.makeCourseData())))
                 } else {
                     // Offline mode: present empty state only if get nil from network
                     if self.isOnline && self.didLoadFromCache {
                         seal.reject(Error.networkFetchFailed)
                     } else {
                         seal.fulfill(.init(result: .failure(Error.cachedFetchFailed)))
+                    }
+                }
+
+                if let course = course,
+                   course.isPaid && self.iapService.canBuyCourse(course) && self.currentCourseIAPLocalizedPrice == nil {
+                    self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
+                        self.currentCourseIAPLocalizedPrice = localizedPrice
+                        DispatchQueue.main.async {
+                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                        }
                     }
                 }
 
@@ -319,7 +350,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: currentCourse)
             }
 
-            self.presenter.presentCourse(response: .init(result: .success(currentCourse)))
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
             self.presenter.presentUserCourseActionResult(response: .init(userCourseAction: action, isSuccessful: true))
         }.catch { error in
             print("course info interactor: user course action error = \(error)")
@@ -332,6 +363,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         case networkFetchFailed
     }
 }
+
+// MARK: - CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol -
 
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     func presentLesson(in unit: Unit) {
@@ -363,6 +396,8 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     }
 }
 
+// MARK: - CourseInfoInteractor: NotificationsRegistrationServiceDelegate -
+
 extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
     func notificationsRegistrationService(
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
@@ -377,6 +412,44 @@ extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
     ) {
         if alertType == .permission {
             self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+        }
+    }
+}
+
+// MARK: - CourseInfoInteractor: IAPServiceDelegate -
+
+extension CourseInfoInteractor: IAPServiceDelegate {
+    func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+        self.doCourseRefresh(request: .init())
+    }
+
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didFailPurchaseCourse courseID: Course.IdType,
+        withError error: Swift.Error
+    ) {
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        if let iapServiceError = error as? IAPService.Error {
+            switch iapServiceError {
+            case .unsupportedCourse, .noProductIDsFound, .noProductsFound, .productsRequestFailed:
+                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+            case .paymentWasCancelled:
+                break
+            case .paymentFailed, .paymentUserChanged:
+                self.presenter.presentIAPPaymentFailed(response: .init(error: error, course: course))
+            case .paymentNotAllowed:
+                self.presenter.presentIAPNotAllowed(response: .init(error: error, course: course))
+            case .paymentReceiptValidationFailed:
+                self.presenter.presentIAPReceiptValidationFailed(response: .init(error: error, course: course))
+            }
+        } else {
+            self.presenter.presentIAPPaymentFailed(response: .init(error: error, course: course))
         }
     }
 }

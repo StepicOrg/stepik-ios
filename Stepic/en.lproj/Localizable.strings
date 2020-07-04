@@ -971,6 +971,42 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 /* Course List */
 CourseWidgetArchived = "Archived";
 
+/* New profile */
+NewProfileRatingReputation = "Reputation %@";
+NewProfileRatingKnowledge = "Knowledge %@";
+NewProfileRatingCertificates1 = "%@ Certificate";
+NewProfileRatingCertificates234 = "%@ Certificates";
+NewProfileRatingCertificates567890 = "%@ Certificates";
+NewProfileRatingCourses1 = "%@ Course";
+NewProfileRatingCourses234 = "%@ Courses";
+NewProfileRatingCourses567890 = "%@ Courses";
+
+NewProfileBlockTitleActivity = "Activity";
+NewProfileBlockTitleAchievements = "Achievements";
+NewProfileBlockTitleCertificates = "Certificates";
+NewProfileBlockTitleDetails = "Details";
+
+NewProfileUserActivityNoCurrentStreak = "Solve today to start a streak";
+NewProfileUserActivityCurrentStreak = "%@ in a row";
+NewProfileUserActivityLongestStreak = "Max streak %@";
+
+NewProfileStreakNotificationsNotifyPreference = "Notify About Streaks";
+NewProfileStreakNotificationsTimeSelection = "Notification Time";
+
+/* In-App Purchases */
+IAPPurchaseSucceededTitle = "Purchase Succeeded";
+IAPPurchaseFailedTitle = "Purchase Failed";
+
+IAPPurchaseSucceededMessage = "Course \"%@\" successfully purchased.";
+IAPPurchaseFailedMessage = "Failed to buy a course \"%@\". %@";
+
+IAPPurchaseErrorPaymentNotAllowed = "In-app purchases are not allowed.";
+IAPPurchaseErrorPaymentUserChanged = "The current user changed during payment, please log in into your previous user account.";
+IAPPurchaseErrorPaymentReceiptValidationFailed = "Failed to validate receipt.";
+IAPPurchaseErrorPaymentFailed = "An error was occurred during processing your purchase.";
+
+IAPPurchaseBuyInWeb = "Buy in Web";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";

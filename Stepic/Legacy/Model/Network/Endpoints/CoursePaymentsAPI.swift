@@ -23,7 +23,7 @@ final class CoursePaymentsAPI: APIEndpoint {
     func create(_ coursePayment: CoursePayment) -> Promise<CoursePayment> {
         self.create.request(
             requestEndpoint: self.name,
-            paramName: self.name,
+            paramName: "course-payment",
             creatingObject: coursePayment,
             withManager: self.manager
         )

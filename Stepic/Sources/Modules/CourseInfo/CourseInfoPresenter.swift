@@ -9,6 +9,9 @@ protocol CourseInfoPresenterProtocol {
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
+    func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
+    func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response)
+    func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
 }
@@ -18,11 +21,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentCourse(response: CourseInfo.CourseLoad.Response) {
         switch response.result {
-        case .success(let result):
-            let viewModel = CourseInfo.CourseLoad.ViewModel(
-                state: .result(data: self.makeHeaderViewModel(course: result))
+        case .success(let data):
+            let headerViewModel = self.makeHeaderViewModel(
+                course: data.course,
+                iapLocalizedPrice: data.iapLocalizedPrice
             )
-            self.viewController?.displayCourse(viewModel: viewModel)
+            self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         default:
             break
         }
@@ -70,8 +74,36 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
-        let path = "\(StepikApplicationsInfo.stepikURL)/course/\(response.course.id)/pay"
+        let path = self.makeCousePayWebURLPath(courseID: response.course.id)
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
+    }
+
+    func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
+        self.viewController?.displayIAPNotAllowed(
+            viewModel: .init(
+                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                message: self.makeIAPErrorMessage(course: response.course, error: response.error),
+                urlPath: self.makeCousePayWebURLPath(courseID: response.course.id)
+            )
+        )
+    }
+
+    func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response) {
+        self.viewController?.displayIAPReceiptValidationFailed(
+            viewModel: .init(
+                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                message: self.makeIAPErrorMessage(course: response.course, error: response.error)
+            )
+        )
+    }
+
+    func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response) {
+        self.viewController?.displayIAPPaymentFailed(
+            viewModel: .init(
+                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                message: self.makeIAPErrorMessage(course: response.course, error: response.error)
+            )
+        )
     }
 
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
@@ -107,6 +139,20 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
+    private func makeCousePayWebURLPath(courseID: Course.IdType) -> String {
+        "\(StepikApplicationsInfo.stepikURL)/course/\(courseID)/pay"
+    }
+
+    private func makeIAPErrorMessage(course: Course, error: Error) -> String {
+        String(
+            format: NSLocalizedString("IAPPurchaseFailedMessage", comment: ""),
+            arguments: [
+                course.title,
+                error.localizedDescription
+            ]
+        )
+    }
+
     private func makeProgressViewModel(progress: Progress) -> CourseInfoProgressViewModel {
         var normalizedPercent = progress.percentPassed
         normalizedPercent.round(.up)
@@ -117,7 +163,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
-    private func makeHeaderViewModel(course: Course) -> CourseInfoHeaderViewModel {
+    private func makeHeaderViewModel(course: Course, iapLocalizedPrice: String?) -> CourseInfoHeaderViewModel {
         let rating: Int = {
             if let reviewsCount = course.reviewSummary?.count,
                let averageRating = course.reviewSummary?.average,
@@ -144,11 +190,14 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
-            buttonDescription: self.makeButtonDescription(course: course)
+            buttonDescription: self.makeButtonDescription(course: course, iapLocalizedPrice: iapLocalizedPrice)
         )
     }
 
-    private func makeButtonDescription(course: Course) -> CourseInfoHeaderViewModel.ButtonDescription {
+    private func makeButtonDescription(
+        course: Course,
+        iapLocalizedPrice: String?
+    ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
         let isEnabled = isEnrolled ? course.canContinue : true
         let title: String = {
@@ -156,8 +205,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
             }
 
-            if course.isPaid, let displayPrice = course.displayPrice {
-                return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+            if course.isPaid && !course.isPurchased {
+                let displayPrice = iapLocalizedPrice ?? course.displayPrice
+                if let displayPrice = displayPrice {
+                    return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+                }
             }
 
             return NSLocalizedString("WidgetButtonJoin", comment: "")

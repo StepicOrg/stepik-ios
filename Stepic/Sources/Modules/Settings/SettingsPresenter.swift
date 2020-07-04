@@ -9,6 +9,7 @@ protocol SettingsPresenterProtocol {
     func presentStepFontSizeSetting(response: Settings.StepFontSizeSettingPresentation.Response)
     func presentDeleteAllContentResult(response: Settings.DeleteAllContent.Response)
     func presentWaitingState(response: Settings.BlockingWaitingIndicatorUpdate.Response)
+    func presentDismiss(response: Settings.DismissPresentation.Response)
 }
 
 final class SettingsPresenter: SettingsPresenterProtocol {
@@ -100,6 +101,10 @@ final class SettingsPresenter: SettingsPresenterProtocol {
 
     func presentWaitingState(response: Settings.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentDismiss(response: Settings.DismissPresentation.Response) {
+        self.viewController?.displayDismiss(viewModel: .init())
     }
 
     // MARK: Private API

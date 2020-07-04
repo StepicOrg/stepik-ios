@@ -131,8 +131,8 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
         _ view: CourseInfoTabInfoView,
         didClickInstructor instructor: CourseInfoTabInfoInstructorViewModel
     ) {
-        let assembly = ProfileAssembly(userID: instructor.id)
-        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
+        let assembly = NewProfileAssembly(otherUserID: instructor.id)
+        self.push(module: assembly.makeModule())
     }
 
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenURL url: URL) {

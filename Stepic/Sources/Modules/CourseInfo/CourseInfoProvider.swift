@@ -21,6 +21,9 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     private let reviewSummariesPersistenceService: CourseReviewSummariesPersistenceServiceProtocol
     private let reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
 
+    private let coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol
+    private let coursePurchasesNetworkService: CoursePurchasesNetworkServiceProtocol
+
     private let userCoursesNetworkService: UserCoursesNetworkServiceProtocol
 
     init(
@@ -31,6 +34,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         progressesNetworkService: ProgressesNetworkServiceProtocol,
         reviewSummariesPersistenceService: CourseReviewSummariesPersistenceServiceProtocol,
         reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
+        coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol,
+        coursePurchasesNetworkService: CoursePurchasesNetworkServiceProtocol,
         userCoursesNetworkService: UserCoursesNetworkServiceProtocol
     ) {
         self.courseID = courseID
@@ -40,6 +45,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.progressesPersistenceService = progressesPersistenceService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
         self.reviewSummariesPersistenceService = reviewSummariesPersistenceService
+        self.coursePurchasesPersistenceService = coursePurchasesPersistenceService
+        self.coursePurchasesNetworkService = coursePurchasesNetworkService
         self.userCoursesNetworkService = userCoursesNetworkService
     }
 
@@ -48,7 +55,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesPersistenceService.fetch(id:),
                 progressFetchMethod: self.progressesPersistenceService.fetch(id:),
-                reviewSummaryFetchMethod: self.reviewSummariesPersistenceService.fetch(id:)
+                reviewSummaryFetchMethod: self.reviewSummariesPersistenceService.fetch(id:),
+                purchasesFetchMethod: self.fetchCachedPurchases(courseID:)
             ).done { course in
                 seal.fulfill(course)
             }.catch { _ in
@@ -62,7 +70,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesNetworkService.fetch(id:),
                 progressFetchMethod: self.progressesNetworkService.fetch(id:),
-                reviewSummaryFetchMethod: self.reviewSummariesNetworkService.fetch(id:)
+                reviewSummaryFetchMethod: self.reviewSummariesNetworkService.fetch(id:),
+                purchasesFetchMethod: self.coursePurchasesNetworkService.fetch(courseID:)
             ).done { course in
                 seal.fulfill(course)
             }.catch { _ in
@@ -94,11 +103,12 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     private func fetchAndMergeCourse(
         courseFetchMethod: @escaping (Course.IdType) -> Promise<Course?>,
         progressFetchMethod: @escaping (Progress.IdType) -> Promise<Progress?>,
-        reviewSummaryFetchMethod: @escaping (CourseReviewSummary.IdType) -> Promise<CourseReviewSummary?>
+        reviewSummaryFetchMethod: @escaping (CourseReviewSummary.IdType) -> Promise<CourseReviewSummary?>,
+        purchasesFetchMethod: @escaping (Course.IdType) -> Promise<[CoursePurchase]>
     ) -> Promise<Course?> {
         Promise { seal in
             courseFetchMethod(self.courseID).then {
-                course -> Promise<(Course?, Progress?, CourseReviewSummary?)> in
+                course -> Promise<(Course?, Progress?, CourseReviewSummary?, [CoursePurchase])> in
                 let progressFetch: Promise<Progress?> = {
                     if let result = course?.progressId {
                         return progressFetchMethod(result)
@@ -113,8 +123,20 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
                     return .value(nil)
                 }()
 
-                return when(fulfilled: Promise.value(course), progressFetch, reviewSummaryFetch)
-            }.done { course, progress, reviewSummary in
+                let purchasesFetch: Promise<[CoursePurchase]> = {
+                    guard let course = course else {
+                        return .value([])
+                    }
+
+                    if course.isPaid && !course.enrolled {
+                        return purchasesFetchMethod(course.id)
+                    }
+
+                    return .value([])
+                }()
+
+                return when(fulfilled: Promise.value(course), progressFetch, reviewSummaryFetch, purchasesFetch)
+            }.done { course, progress, reviewSummary, coursePurchases in
                 guard let course = course else {
                     seal.fulfill(nil)
                     return
@@ -122,6 +144,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
                 course.progress = progress
                 course.reviewSummary = reviewSummary
+                course.purchases = coursePurchases
 
                 CoreDataHelper.shared.save()
 
@@ -129,6 +152,12 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
             }.catch { error in
                 seal.reject(error)
             }
+        }
+    }
+
+    private func fetchCachedPurchases(courseID: Course.IdType) -> Promise<[CoursePurchase]> {
+        Promise { seal in
+            self.coursePurchasesPersistenceService.fetch(courseID: courseID).done { seal.fulfill($0) }
         }
     }
 

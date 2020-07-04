@@ -318,20 +318,7 @@ extension StepViewController: StepViewControllerProtocol {
         let discussionsViewController = discussionsAssembly.makeModule()
 
         if shouldEmbedInWriteComment {
-            let (modalPresentationStyle, navigationBarAppearance) = {
-                () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
-                if #available(iOS 13.0, *) {
-                    return (
-                        .automatic,
-                        .init(
-                            statusBarColor: .clear,
-                            statusBarStyle: .lightContent
-                        )
-                    )
-                } else {
-                    return (.fullScreen, .init())
-                }
-            }()
+            let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
             let writeCommentAssembly = WriteCommentAssembly(
                 targetID: stepID,
@@ -339,7 +326,7 @@ extension StepViewController: StepViewControllerProtocol {
                 comment: nil,
                 submission: nil,
                 discussionThreadType: discussionThreadType,
-                navigationBarAppearance: navigationBarAppearance,
+                navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
                 output: discussionsAssembly.moduleInput
             )
             let writeCommentNavigationController = StyledNavigationController(

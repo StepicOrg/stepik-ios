@@ -1,5 +1,5 @@
 //
-//  ProfileAssembly.swift
+//  ProfileLegacyAssembly.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 15.09.2018.
@@ -9,7 +9,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Legacy assembly")
-final class ProfileAssembly: Assembly {
+final class ProfileLegacyAssembly: Assembly {
     private let userID: User.IdType
 
     init(userID: User.IdType) {

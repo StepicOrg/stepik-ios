@@ -37,4 +37,15 @@ extension UIBarButtonItem {
             action: action
         )
     }
+
+    static func stepikSettingsBarButtonItem(target: Any?, action: Selector?) -> UIBarButtonItem {
+        let image: UIImage?
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "gear")
+        } else {
+            image = UIImage(named: "icon-settings-profile")
+        }
+
+        return UIBarButtonItem(image: image, style: .plain, target: target, action: action)
+    }
 }

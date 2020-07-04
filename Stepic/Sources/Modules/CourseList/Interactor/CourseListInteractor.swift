@@ -207,9 +207,11 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         } else {
             // Paid course -> open web view
             if targetCourse.isPaid {
-                self.analytics.send(.courseBuyPressed(source: .courseWidget, id: targetCourse.id))
+                //self.analytics.send(.courseBuyPressed(source: .courseWidget, id: targetCourse.id))
+                //self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                //self.moduleOutput?.presentPaidCourseInfo(course: targetCourse)
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                self.moduleOutput?.presentPaidCourseInfo(course: targetCourse)
+                self.moduleOutput?.presentCourseInfo(course: targetCourse, viewSource: self.courseViewSource)
                 return
             }
 

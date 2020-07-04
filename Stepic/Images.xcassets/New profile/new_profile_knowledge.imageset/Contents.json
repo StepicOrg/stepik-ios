@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "new_profile_knowledge.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
