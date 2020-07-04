@@ -14,7 +14,7 @@ extension NewProfileDetailsView {
 
         let separatorHeight: CGFloat = 0.5
         let separatorColor = UIColor.stepikSeparator
-        let separatorInsets = LayoutInsets(top: 16, right: 16)
+        let separatorInsets = LayoutInsets(top: 16, right: 20)
 
         let userIDButtonFont = UIFont.systemFont(ofSize: 15, weight: .regular)
         let userIDButtonTextColor = UIColor.stepikSystemSecondaryText
