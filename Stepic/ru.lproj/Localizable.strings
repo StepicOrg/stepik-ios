@@ -994,6 +994,20 @@ NewProfileUserActivityLongestStreak = "Максимальная серия %@";
 NewProfileStreakNotificationsNotifyPreference = "Уведомления о занятиях";
 NewProfileStreakNotificationsTimeSelection = "Время напоминания";
 
+/* In-App Purchases */
+IAPPurchaseSucceededTitle = "Покупка удалась";
+IAPPurchaseFailedTitle = "Покупка не удалась";
+
+IAPPurchaseSucceededMessage = "Курс \"%@\" успешно куплен.";
+IAPPurchaseFailedMessage = "Не удалось купить курс \"%@\". %@";
+
+IAPPurchaseErrorPaymentNotAllowed = "Встроенные покупки не разрешены на данном устройстве.";
+IAPPurchaseErrorPaymentUserChanged = "Текущий пользователь изменился во время оплаты, пожалуйста, войдите в свою предыдущую учетную запись пользователя.";
+IAPPurchaseErrorPaymentReceiptValidationFailed = "Не удалось верифицировать покупку.";
+IAPPurchaseErrorPaymentFailed = "При обработке платежа произошла ошибка.";
+
+IAPPurchaseBuyInWeb = "Купить в веб-версии";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";

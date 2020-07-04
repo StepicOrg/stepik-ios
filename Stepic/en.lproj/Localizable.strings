@@ -993,6 +993,20 @@ NewProfileUserActivityLongestStreak = "Max streak %@";
 NewProfileStreakNotificationsNotifyPreference = "Notify About Streaks";
 NewProfileStreakNotificationsTimeSelection = "Notification Time";
 
+/* In-App Purchases */
+IAPPurchaseSucceededTitle = "Purchase Succeeded";
+IAPPurchaseFailedTitle = "Purchase Failed";
+
+IAPPurchaseSucceededMessage = "Course \"%@\" successfully purchased.";
+IAPPurchaseFailedMessage = "Failed to buy a course \"%@\". %@";
+
+IAPPurchaseErrorPaymentNotAllowed = "In-app purchases are not allowed.";
+IAPPurchaseErrorPaymentUserChanged = "The current user changed during payment, please log in into your previous user account.";
+IAPPurchaseErrorPaymentReceiptValidationFailed = "Failed to validate receipt.";
+IAPPurchaseErrorPaymentFailed = "An error was occurred during processing your purchase.";
+
+IAPPurchaseBuyInWeb = "Buy in Web";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";

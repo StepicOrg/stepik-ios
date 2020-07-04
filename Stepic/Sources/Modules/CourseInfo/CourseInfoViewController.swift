@@ -19,6 +19,9 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
+    func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
+    func displayIAPReceiptValidationFailed(viewModel: CourseInfo.IAPReceiptValidationFailedPresentation.ViewModel)
+    func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel)
 }
@@ -543,6 +546,42 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("IAPPurchaseBuyInWeb", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.displayPaidCourseBuying(viewModel: .init(urlPath: viewModel.urlPath))
+                }
+            )
+        )
+        self.present(module: alert)
+    }
+
+    func displayIAPReceiptValidationFailed(viewModel: CourseInfo.IAPReceiptValidationFailedPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("PlaceholderNoConnectionButton", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doIAPReceiptValidation(request: .init())
+                }
+            )
+        )
+        self.present(module: alert)
+    }
+
+    func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        self.present(module: alert)
     }
 }
 

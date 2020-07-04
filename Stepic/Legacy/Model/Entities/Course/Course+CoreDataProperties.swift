@@ -54,6 +54,7 @@ extension Course {
 
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
+    @NSManaged var managedPriceTier: NSNumber?
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -66,6 +67,7 @@ extension Course {
     @NSManaged var managedReviewSummary: CourseReviewSummary?
     @NSManaged var managedSections: NSOrderedSet?
     @NSManaged var managedUserCourse: UserCourse?
+    @NSManaged var managedCoursePurchases: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
@@ -253,6 +255,15 @@ extension Course {
         }
         get {
              managedDisplayPrice
+        }
+    }
+
+    var priceTier: Int? {
+        get {
+            self.managedPriceTier?.intValue
+        }
+        set {
+            self.managedPriceTier = newValue as NSNumber?
         }
     }
 
@@ -488,6 +499,19 @@ extension Course {
         set(value) {
             managedReviewSummary = value
         }
+    }
+
+    var purchases: [CoursePurchase] {
+        get {
+            (self.managedCoursePurchases?.array as? [CoursePurchase]) ?? []
+        }
+        set {
+            self.managedCoursePurchases = NSOrderedSet(array: newValue)
+        }
+    }
+
+    var isPurchased: Bool {
+        self.purchases.contains(where: { $0.isActive })
     }
 
     var userCourse: UserCourse? {

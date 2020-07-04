@@ -32,7 +32,12 @@ enum CourseInfo {
         struct Request {}
 
         struct Response {
-            var result: StepikResult<Course>
+            struct Data {
+                let course: Course
+                let iapLocalizedPrice: String?
+            }
+
+            var result: Swift.Result<Data, Swift.Error>
         }
 
         struct ViewModel {
@@ -195,6 +200,51 @@ enum CourseInfo {
 
         struct ViewModel {
             let urlPath: String
+        }
+    }
+
+    /// Present in-app purchases are not allowed alert
+    enum IAPNotAllowedPresentation {
+        struct Response {
+            let error: Error
+            let course: Course
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+            let urlPath: String
+        }
+    }
+
+    /// Present in-app purchases receipt validation error alert
+    enum IAPReceiptValidationFailedPresentation {
+        struct Response {
+            let error: Error
+            let course: Course
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Retry validate receipt
+    enum IAPReceiptValidationRetry {
+        struct Request {}
+    }
+
+    /// Present in-app purchases payment failed alert
+    enum IAPPaymentFailedPresentation {
+        struct Response {
+            let error: Error
+            let course: Course
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
         }
     }
 
