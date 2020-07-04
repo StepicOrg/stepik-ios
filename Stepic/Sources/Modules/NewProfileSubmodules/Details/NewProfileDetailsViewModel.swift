@@ -1,6 +1,6 @@
 import Foundation
 
-struct NewProfileDetailViewModel {
+struct NewProfileDetailsViewModel {
     let userID: User.IdType
     let profileDetailsText: String?
 }

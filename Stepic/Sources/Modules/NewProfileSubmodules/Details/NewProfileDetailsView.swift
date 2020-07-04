@@ -84,7 +84,7 @@ final class NewProfileDetailsView: UIView {
         )
     }
 
-    private var lastViewModel: NewProfileDetailViewModel?
+    private var lastViewModel: NewProfileDetailsViewModel?
 
     init(
         frame: CGRect = .zero,
@@ -104,7 +104,7 @@ final class NewProfileDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: NewProfileDetailViewModel) {
+    func configure(viewModel: NewProfileDetailsViewModel) {
         self.setText(viewModel.profileDetailsText)
         self.userIDButton.setTitle("User ID: \(viewModel.userID)", for: .normal)
 
