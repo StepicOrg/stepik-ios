@@ -8,6 +8,40 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Class to initialize certificates w/o storyboards logic")
+final class AchievementsListLegacyAssembly: Assembly {
+    private let userID: User.IdType
+
+    init(userID: User.IdType) {
+        self.userID = userID
+    }
+
+    func makeModule() -> UIViewController {
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "AchievementsListViewController",
+            storyboardName: "Profile"
+        ) as? AchievementsListViewController else {
+            fatalError("Unable to initialize CertificatesViewController via storyboard")
+        }
+
+        let retriever = AchievementsRetriever(
+            userId: self.userID,
+            achievementsAPI: AchievementsAPI(),
+            achievementProgressesAPI: AchievementProgressesAPI()
+        )
+        let presenter = AchievementsListPresenter(
+            userID: self.userID,
+            view: viewController,
+            achievementsAPI: AchievementsAPI(),
+            achievementsRetriever: retriever
+        )
+
+        viewController.presenter = presenter
+
+        return viewController
+    }
+}
+
 final class AchievementsListViewController: UIViewController, AchievementsListView, ControllerWithStepikPlaceholder {
     @IBOutlet weak var tableView: UITableView!
 

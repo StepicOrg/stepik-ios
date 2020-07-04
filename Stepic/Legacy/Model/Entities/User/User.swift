@@ -33,6 +33,7 @@ final class User: NSManagedObject, IDFetchable {
         self.id = json[JSONKey.id.rawValue].intValue
         self.profile = json[JSONKey.profile.rawValue].intValue
         self.isPrivate = json[JSONKey.isPrivate.rawValue].boolValue
+        self.isActive = json[JSONKey.isActive.rawValue].boolValue
         self.isOrganization = json[JSONKey.isOrganization.rawValue].boolValue
         self.bio = json[JSONKey.shortBio.rawValue].stringValue
         self.details = json[JSONKey.details.rawValue].stringValue
@@ -40,7 +41,16 @@ final class User: NSManagedObject, IDFetchable {
         self.lastName = json[JSONKey.lastName.rawValue].stringValue
         self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
         self.level = json[JSONKey.level.rawValue].intValue
+        self.knowledge = json[JSONKey.knowledge.rawValue].intValue
+        self.knowledgeRank = json[JSONKey.knowledgeRank.rawValue].intValue
+        self.reputation = json[JSONKey.reputation.rawValue].intValue
+        self.reputationRank = json[JSONKey.reputationRank.rawValue].intValue
         self.joinDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.joinDate.rawValue])
+        self.solvedStepsCount = json[JSONKey.solvedStepsCount.rawValue].intValue
+        self.createdCoursesCount = json[JSONKey.createdCoursesCount.rawValue].intValue
+        self.createdLessonsCount = json[JSONKey.createdLessonsCount.rawValue].intValue
+        self.issuedCertificatesCount = json[JSONKey.issuedCertificatesCount.rawValue].intValue
+        self.followersCount = json[JSONKey.followersCount.rawValue].intValue
     }
 
     func update(json: JSON) {
@@ -102,6 +112,16 @@ final class User: NSManagedObject, IDFetchable {
         case avatar
         case level
         case joinDate = "join_date"
+        case isActive = "is_active"
+        case knowledge
+        case knowledgeRank = "knowledge_rank"
+        case reputation
+        case reputationRank = "reputation_rank"
+        case solvedStepsCount = "solved_steps_count"
+        case createdCoursesCount = "created_courses_count"
+        case createdLessonsCount = "created_lessons_count"
+        case issuedCertificatesCount = "issued_certificates_count"
+        case followersCount = "followers_count"
     }
 }
 

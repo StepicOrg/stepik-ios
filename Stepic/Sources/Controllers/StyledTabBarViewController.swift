@@ -177,9 +177,10 @@ private enum TabController: String {
     var itemInfo: TabBarItemInfo {
         switch self {
         case .profile:
-            let viewController = ControllerHelper.instantiateViewController(
-                identifier: "ProfileNavigation",
-                storyboardName: "Main"
+            let assembly = NewProfileAssembly(presentationDescription: .init(profileType: .currentUser))
+            let viewController = assembly.makeModule()
+            let navigationViewController = StyledNavigationController(
+                rootViewController: viewController
             )
 
             let personImage: UIImage? = {
@@ -200,7 +201,7 @@ private enum TabController: String {
 
             return TabBarItemInfo(
                 title: NSLocalizedString("Profile", comment: ""),
-                controller: viewController,
+                controller: navigationViewController,
                 image: personImage,
                 selectedImage: personFillImage,
                 tag: self.tag

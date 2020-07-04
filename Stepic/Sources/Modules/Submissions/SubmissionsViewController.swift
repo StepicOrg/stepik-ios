@@ -78,7 +78,7 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
     private func setup() {
         self.title = NSLocalizedString("SubmissionsTitle", comment: "")
-        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
 
         self.tableDataSource.delegate = self
 
@@ -232,7 +232,7 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         _ dataSource: SubmissionsTableViewDataSource,
         didSelectAvatar viewModel: SubmissionsViewModel
     ) {
-        let assembly = ProfileAssembly(userID: viewModel.userID)
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
         self.push(module: assembly.makeModule())
     }
 

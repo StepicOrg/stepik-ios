@@ -101,7 +101,7 @@ final class DeepLinkRoutingService {
             case .catalog, .notifications, .home:
                 seal.fulfill([])
             case .profile(let userID):
-                seal.fulfill([ProfileAssembly(userID: userID).makeModule()])
+                seal.fulfill([NewProfileAssembly(otherUserID: userID).makeModule()])
             case .course(let courseID), .coursePromo(let courseID):
                 let assembly = CourseInfoAssembly(
                     courseID: courseID,

@@ -179,6 +179,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         DispatchQueue.main.async {
             self.userAccountService.logOut()
             self.moduleOutput?.handleUserLoggedOut()
+            self.presenter.presentDismiss(response: .init())
         }
     }
 }

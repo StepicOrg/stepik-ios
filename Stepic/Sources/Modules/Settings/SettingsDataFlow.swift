@@ -169,6 +169,13 @@ enum Settings {
         }
     }
 
+    /// Dismiss settings module
+    enum DismissPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     // MARK: - Common Types
 
     struct SettingsData {
