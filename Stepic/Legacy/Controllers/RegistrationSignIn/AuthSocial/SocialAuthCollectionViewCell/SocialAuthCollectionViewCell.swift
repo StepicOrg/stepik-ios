@@ -11,10 +11,7 @@ import UIKit
 final class SocialAuthCollectionViewCell: UICollectionViewCell {
     enum Appearance {
         static let shadowColor = UIColor.dynamic(light: UIColor(hex6: 0xBBBBBB), dark: .clear)
-        static let backgroundColor = UIColor.dynamic(
-            light: .stepikBackground,
-            dark: .stepikSecondaryBackground
-        )
+        static let backgroundColor = UIColor.dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
     }
 
     static let reuseId = "socialAuthCell"

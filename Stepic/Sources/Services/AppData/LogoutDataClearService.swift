@@ -16,6 +16,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol
     private let codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
+    private let coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol
     private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
     private let discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
     private let emailAddressesPersistenceService: EmailAddressesPersistenceServiceProtocol
@@ -60,6 +61,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol = CodeSamplesPersistenceService(),
         codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol = CodeTemplatesPersistenceService(),
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
+        coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol = CoursePurchasesPersistenceService(),
         courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol = CourseReviewsPersistenceService(),
         discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol = DiscussionThreadsPersistenceService(),
         emailAddressesPersistenceService: EmailAddressesPersistenceServiceProtocol = EmailAddressesPersistenceService(),
@@ -94,6 +96,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.codeSamplesPersistenceService = codeSamplesPersistenceService
         self.codeTemplatePersistenceService = codeTemplatePersistenceService
         self.coursesPersistenceService = coursesPersistenceService
+        self.coursePurchasesPersistenceService = coursePurchasesPersistenceService
         self.courseReviewsPersistenceService = courseReviewsPersistenceService
         self.discussionThreadsPersistenceService = discussionThreadsPersistenceService
         self.emailAddressesPersistenceService = emailAddressesPersistenceService
@@ -176,6 +179,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                         self.codeLimitsPersistenceService.deleteAll(),
                         self.codeSamplesPersistenceService.deleteAll(),
                         self.codeTemplatePersistenceService.deleteAll(),
+                        self.coursePurchasesPersistenceService.deleteAll(),
                         self.courseReviewsPersistenceService.deleteAll(),
                         self.discussionThreadsPersistenceService.deleteAll(),
                         self.emailAddressesPersistenceService.deleteAll(),

@@ -15,7 +15,7 @@ final class AvatarImageView: UIImageView {
     private static let colorsLight: [UInt32] = [0x69A1E5, 0xFFD19F, 0xE8B9B9, 0x85C096, 0xE1B3EA, 0xABE5D8]
     private static let colorsDark: [UInt32] = [0x184D8E, 0xCF6B00, 0x9C3333, 0x376B46, 0x8E2CA1, 0x2F9881]
 
-    var shape: Shape = .circle {
+    var shape: Shape = .circle() {
         didSet {
             self.updateShape()
         }
@@ -37,8 +37,8 @@ final class AvatarImageView: UIImageView {
 
     private func updateShape() {
         switch self.shape {
-        case .circle:
-            self.setRoundedBounds(width: 0)
+        case .circle(let borderWidth, let borderColor):
+            self.setRoundedBounds(width: borderWidth, color: borderColor)
         case .rectangle(let radius):
             self.setRoundedCorners(cornerRadius: radius, borderWidth: 0)
         }
@@ -117,6 +117,6 @@ final class AvatarImageView: UIImageView {
 
     enum Shape {
         case rectangle(cornerRadius: CGFloat)
-        case circle
+        case circle(borderWidth: CGFloat = 0, borderColor: UIColor = .white)
     }
 }

@@ -267,20 +267,7 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     }
 
     func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel) {
-        let (modalPresentationStyle, navigationBarAppearance) = {
-            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
-            if #available(iOS 13.0, *) {
-                return (
-                    .automatic,
-                    .init(
-                        statusBarColor: .clear,
-                        statusBarStyle: .lightContent
-                    )
-                )
-            } else {
-                return (.fullScreen, .init())
-            }
-        }()
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
@@ -288,16 +275,12 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
             comment: viewModel.comment,
             submission: viewModel.comment?.submission,
             discussionThreadType: viewModel.discussionThreadType,
-            navigationBarAppearance: navigationBarAppearance,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? WriteCommentOutputProtocol
         )
-        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        self.present(
-            module: navigationController,
-            embedInNavigation: false,
-            modalPresentationStyle: modalPresentationStyle
-        )
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel) {
@@ -426,7 +409,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didSelectAvatar comment: DiscussionsCommentViewModel
     ) {
-        let assembly = ProfileAssembly(userID: comment.userID)
+        let assembly = NewProfileAssembly(otherUserID: comment.userID)
         self.push(module: assembly.makeModule())
     }
 

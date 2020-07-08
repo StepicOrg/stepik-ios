@@ -280,9 +280,9 @@ final class AuthAPI {
         }
     }
 
-    func signUpWithToken(
-        socialToken: String,
-        email: String?, provider: String
+    func signUpWithSocialCredential(
+        credential: SocialSDKCredential,
+        provider: String
     ) -> Promise<(StepikToken, AuthorizationType)> {
         Promise { seal in
             guard let socialInfo = StepikApplicationsInfo.social else {
@@ -291,13 +291,35 @@ final class AuthAPI {
 
             var params: Parameters = [
                 "provider": provider,
-                "code": socialToken,
+                "code": credential.token,
                 "grant_type": "authorization_code",
                 "redirect_uri": "\(socialInfo.redirectUri)",
                 "code_type": "access_token"
             ]
 
-            if let email = email {
+            if provider == "apple" {
+                params["id_token"] = credential.identityToken.require()
+
+                var userDict: JSONDictionary = [:]
+                var nameDict: JSONDictionary = [:]
+
+                if let firstName = credential.firstName {
+                    nameDict["firstName"] = firstName
+                }
+                if let lastName = credential.lastName {
+                    nameDict["lastName"] = lastName
+                }
+
+                if !nameDict.isEmpty {
+                    userDict["name"] = nameDict
+                }
+
+                if let email = credential.email {
+                    userDict["email"] = email
+                }
+
+                params["user"] = userDict
+            } else if let email = credential.email {
                 params["email"] = email
             }
 

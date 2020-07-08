@@ -12,6 +12,7 @@ import Foundation
 extension Foundation.Notification.Name {
     static let didLogout = Foundation.Notification.Name("didLogout")
     static let didLogin = Foundation.Notification.Name("didLogin")
+    static let didChangeCurrentUser = Foundation.Notification.Name("didChangeCurrentUser")
 }
 
 @available(*, deprecated, message: "Legacy class")
@@ -147,6 +148,7 @@ final class AuthInfo: NSObject {
         didSet {
             print("\n\ndid set user with id \(String(describing: user?.id))\n\n")
             userId = user?.id
+            NotificationCenter.default.post(name: .didChangeCurrentUser, object: nil)
         }
     }
 

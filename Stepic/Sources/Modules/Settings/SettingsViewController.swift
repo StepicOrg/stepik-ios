@@ -1,6 +1,7 @@
 import SVProgressHUD
 import UIKit
 
+// swiftlint:disable file_length
 // MARK: SettingsViewControllerProtocol: AnyObject -
 
 protocol SettingsViewControllerProtocol: AnyObject {
@@ -12,6 +13,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayDismiss(viewModel: Settings.DismissPresentation.ViewModel)
 }
 
 // MARK: - Appearance -
@@ -38,7 +40,11 @@ final class SettingsViewController: UIViewController {
         action: #selector(self.closeButtonClicked)
     )
 
-    init(interactor: SettingsInteractorProtocol, analytics: Analytics, appearance: Appearance = .init()) {
+    init(
+        interactor: SettingsInteractorProtocol,
+        analytics: Analytics,
+        appearance: Appearance = .init()
+    ) {
         self.interactor = interactor
         self.analytics = analytics
         self.appearance = appearance
@@ -77,7 +83,7 @@ final class SettingsViewController: UIViewController {
 
     private func setupNavigationItem() {
         self.title = NSLocalizedString("SettingsTitle", comment: "")
-        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
@@ -230,6 +236,10 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    func displayDismiss(viewModel: Settings.DismissPresentation.ViewModel) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: Private Helpers
@@ -534,8 +544,12 @@ extension SettingsViewController: SettingsViewDelegate {
 
     private func handleDeleteAllContentAction() {
         self.analytics.send(.downloadsClearCacheTapped)
-        self.requestDeleteAllContent { [weak self] isGranted in
-            if let strongSelf = self, isGranted {
+        self.requestDeleteAllContent { [weak self] granted in
+            guard let strongSelf = self else {
+                return
+            }
+
+            if granted {
                 strongSelf.analytics.send(.downloadsClearCacheAccepted)
                 strongSelf.interactor.doDeleteAllContent(request: .init())
             }

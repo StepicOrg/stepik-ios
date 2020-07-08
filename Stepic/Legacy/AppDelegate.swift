@@ -123,6 +123,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         ApplicationThemeService().registerDefaultTheme()
 
+        IAPService.shared.startObservingPayments()
+
         return true
     }
 
@@ -137,11 +139,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         self.notificationsService.removeRetentionNotifications()
         self.userCoursesObserver.startObserving()
+        IAPService.shared.prefetchProducts()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
         self.userCoursesObserver.stopObserving()
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        IAPService.shared.stopObservingPayments()
     }
 
     // MARK: - Downloading Data in the Background
