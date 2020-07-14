@@ -47,8 +47,8 @@ def all_pods
     pod 'TUSafariActivity', '1.0.4'
     
     pod 'VK-ios-sdk', '1.5.1'
-    pod 'FBSDKCoreKit', '5.13.0'
-    pod 'FBSDKLoginKit', '5.13.0'
+    pod 'FBSDKCoreKit', '7.1.0'
+    pod 'FBSDKLoginKit', '7.1.0'
     
     pod 'Presentr', '1.9'
     

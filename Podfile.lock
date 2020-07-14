@@ -19,16 +19,16 @@ PODS:
   - DeviceKit (3.2.0)
   - DownloadButton (0.1.0)
   - EasyTipView (2.0.4)
-  - FBSDKCoreKit (5.13.0):
-    - FBSDKCoreKit/Basics (= 5.13.0)
-    - FBSDKCoreKit/Core (= 5.13.0)
-  - FBSDKCoreKit/Basics (5.13.0)
-  - FBSDKCoreKit/Core (5.13.0):
+  - FBSDKCoreKit (7.1.0):
+    - FBSDKCoreKit/Basics (= 7.1.0)
+    - FBSDKCoreKit/Core (= 7.1.0)
+  - FBSDKCoreKit/Basics (7.1.0)
+  - FBSDKCoreKit/Core (7.1.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.13.0):
-    - FBSDKLoginKit/Login (= 5.13.0)
-  - FBSDKLoginKit/Login (5.13.0):
-    - FBSDKCoreKit (~> 5.0)
+  - FBSDKLoginKit (7.1.0):
+    - FBSDKLoginKit/Login (= 7.1.0)
+  - FBSDKLoginKit/Login (7.1.0):
+    - FBSDKCoreKit (~> 7.1.0)
   - Firebase/Analytics (6.27.1):
     - Firebase/Core
   - Firebase/Core (6.27.1):
@@ -203,8 +203,8 @@ DEPENDENCIES:
   - DeviceKit (= 3.2.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.0.4)
-  - FBSDKCoreKit (= 5.13.0)
-  - FBSDKLoginKit (= 5.13.0)
+  - FBSDKCoreKit (= 7.1.0)
+  - FBSDKLoginKit (= 7.1.0)
   - Firebase/Analytics (= 6.27.1)
   - Firebase/Core (= 6.27.1)
   - Firebase/Crashlytics (= 6.27.1)
@@ -330,8 +330,8 @@ SPEC CHECKSUMS:
   DeviceKit: d081659419cce07c0b5239dbc9fb39ed7413c7fe
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
-  FBSDKCoreKit: b1645dba3dfdba6102f2d4026fdbfca8114dc229
-  FBSDKLoginKit: 4aca55e93a63b1ff0cb9446208d49e32c13ab24a
+  FBSDKCoreKit: 78929d105d244f8fddfe03c44afc55d97ec12e9f
+  FBSDKLoginKit: 5536004bb84805391e7d089508386c3dba02128d
   Firebase: 919186c8e119dd9372a45fd1dd17a8a942bc1892
   FirebaseABTesting: b7f8b6c8c9398e98bb30c4195f697b5b73a330d0
   FirebaseAnalytics: 5fa308e1b13f838d0f6dc74719ac2a72e8c5afc4
@@ -381,6 +381,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: 594f9093f904734cadf83ecf4f777864e28d94f6
+PODFILE CHECKSUM: 3bdc3a061975f621aeb15d659b5818fc87f83eaa
 
 COCOAPODS: 1.9.3
