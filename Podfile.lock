@@ -141,7 +141,7 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - Nimble (8.0.9)
+  - Nimble (8.1.1)
   - Nuke (9.1.1)
   - Pageboy (3.5.1)
   - pop (1.0.12)
@@ -212,7 +212,7 @@ DEPENDENCIES:
   - Koloda (= 5.0)
   - lottie-ios (= 2.5.3)
   - Mockingjay (= 3.0.0-alpha.1)
-  - Nimble (= 8.0.9)
+  - Nimble (= 8.1.1)
   - Nuke (= 9.1.1)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.1)
@@ -348,7 +348,7 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  Nimble: 98b888285a615fd34f20e61753cf58ea1402bde4
+  Nimble: 5f8a2fb6fa343a7242dfdd9d42f7267419d464b2
   Nuke: af4301b154d3afd8a3b045a5194a9a773a00b7a8
   Pageboy: 288353d4cc848c24deec2f7542f325089247c136
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
@@ -375,6 +375,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: 366e80b29328a8dbae52063257a66330bce5be6b
+PODFILE CHECKSUM: ba9bd63cb6e604a6c75e6674b0a065532395a3b7
 
 COCOAPODS: 1.9.3
