@@ -6,12 +6,12 @@ use_frameworks!
 
 def shared_pods
     pod 'Alamofire', '5.2.1'
-    pod 'Atributika', '4.9.7'
+    pod 'Atributika', '4.9.8'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.7.4'
+    pod 'SDWebImage', '5.8.3'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'DeviceKit', '3.2.0'
-    pod 'PromiseKit', '6.13.0'
+    pod 'PromiseKit', '6.13.1'
     pod 'SwiftLint', '0.39.2'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
@@ -27,13 +27,13 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.26.0'
-    pod 'Firebase/Messaging', '6.26.0'
-    pod 'Firebase/Analytics', '6.26.0'
-    pod 'Firebase/Crashlytics', '6.26.0'
-    pod 'Firebase/RemoteConfig', '6.26.0'
+    pod 'Firebase/Core', '6.28.0'
+    pod 'Firebase/Messaging', '6.28.0'
+    pod 'Firebase/Analytics', '6.28.0'
+    pod 'Firebase/Crashlytics', '6.28.0'
+    pod 'Firebase/RemoteConfig', '6.28.0'
 
-    pod 'YandexMobileMetrica/Dynamic', '3.9.4'
+    pod 'YandexMobileMetrica/Dynamic', '3.11.1'
     pod 'Amplitude-iOS', '4.9.3'
     pod 'Branch', '0.31.0'
         
@@ -47,8 +47,8 @@ def all_pods
     pod 'TUSafariActivity', '1.0.4'
     
     pod 'VK-ios-sdk', '1.5.1'
-    pod 'FBSDKCoreKit', '5.13.0'
-    pod 'FBSDKLoginKit', '5.13.0'
+    pod 'FBSDKCoreKit', '7.1.0'
+    pod 'FBSDKLoginKit', '7.1.0'
     
     pod 'Presentr', '1.9'
     
@@ -60,15 +60,15 @@ def all_pods
     pod 'Charts', '3.4.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.4.0'
-    pod 'Nuke', '9.1.0'
+    pod 'Nuke', '9.1.1'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
     pod 'SwiftDate', '6.1.0'
 end
 
 def testing_pods
-    pod 'Quick', '2.2.0'
-    pod 'Nimble', '8.0.9'
+    pod 'Quick', '3.0.0'
+    pod 'Nimble', '8.1.1'
     pod 'Mockingjay', '3.0.0-alpha.1'
 end
 
