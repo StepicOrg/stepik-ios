@@ -89,10 +89,8 @@ final class PopularCourseListNetworkService: BaseCourseListNetworkService, Cours
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.coursesAPI.retrieve(
-                excludeEnded: true,
-                isPublic: true,
-                isPopular: true,
-                order: "-activity",
+                isCataloged: true,
+                order: .activityDescending,
                 language: self.type.language.popularCoursesParameter,
                 page: page
             ).done { result in
@@ -116,7 +114,7 @@ final class TagCourseListNetworkService: BaseCourseListNetworkService, CourseLis
         Promise { seal in
             self.coursesAPI.retrieve(
                 tag: self.type.id,
-                order: "-activity",
+                order: .activityDescending,
                 language: self.type.language.languageString,
                 page: page
             ).done { result in
