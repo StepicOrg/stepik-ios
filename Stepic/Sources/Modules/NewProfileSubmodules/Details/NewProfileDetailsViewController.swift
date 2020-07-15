@@ -31,7 +31,7 @@ final class NewProfileDetailsViewController: UIViewController {
 }
 
 extension NewProfileDetailsViewController: NewProfileSubmoduleProtocol {
-    func update(with user: User, isOnline: Bool) {
+    func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
         self.newProfileDetailsView?.configure(viewModel: .init(userID: user.id, profileDetailsText: user.details))
     }
 }

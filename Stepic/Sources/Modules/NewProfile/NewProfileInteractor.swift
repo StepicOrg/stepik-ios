@@ -259,7 +259,11 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private func pushCurrentUserToSubmodules(_ submodules: [NewProfileSubmoduleProtocol]) {
         if let currentUser = self.currentUser {
             for submodule in submodules {
-                submodule.update(with: currentUser, isOnline: self.isOnline)
+                submodule.update(
+                    with: currentUser,
+                    isCurrentUserProfile: self.isCurrentUserProfile,
+                    isOnline: self.isOnline
+                )
             }
         }
     }

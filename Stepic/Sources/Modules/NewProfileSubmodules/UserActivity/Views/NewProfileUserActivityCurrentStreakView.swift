@@ -51,10 +51,10 @@ final class NewProfileUserActivityCurrentStreakView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: max(self.label.intrinsicContentSize.height, self.appearance.imageViewSize.height)
-        )
+        let height = (text?.isEmpty ?? true)
+            ? 0
+            : max(self.label.intrinsicContentSize.height, self.appearance.imageViewSize.height)
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
     init(
