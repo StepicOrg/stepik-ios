@@ -5,8 +5,13 @@ enum NewProfileUserActivity {
     enum ActivityLoad {
         struct Request {}
 
+        struct Data {
+            let userActivity: UserActivity
+            let isCurrentUserProfile: Bool
+        }
+
         struct Response {
-            let result: Result<UserActivity, Error>
+            let result: Result<Data, Error>
         }
 
         struct ViewModel {

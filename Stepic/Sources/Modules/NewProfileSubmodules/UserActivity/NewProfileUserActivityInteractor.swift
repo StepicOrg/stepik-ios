@@ -11,6 +11,7 @@ final class NewProfileUserActivityInteractor: NewProfileUserActivityInteractorPr
 
     private var currentUser: User?
     private var currentUserActivity: UserActivity?
+    private var isCurrentUserProfile = false
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -79,7 +80,13 @@ final class NewProfileUserActivityInteractor: NewProfileUserActivityInteractorPr
                     : self.provider.fetchCached(user: user)
             }.done { userActivity in
                 self.currentUserActivity = userActivity
-                seal.fulfill(.init(result: .success(userActivity)))
+
+                let data = NewProfileUserActivity.ActivityLoad.Data(
+                    userActivity: userActivity,
+                    isCurrentUserProfile: self.isCurrentUserProfile
+                )
+
+                seal.fulfill(.init(result: .success(data)))
             }.catch { error in
                 if self.currentUserActivity == nil {
                     if self.isOnline && self.didLoadFromCache {
@@ -105,8 +112,9 @@ final class NewProfileUserActivityInteractor: NewProfileUserActivityInteractorPr
 }
 
 extension NewProfileUserActivityInteractor: NewProfileSubmoduleProtocol {
-    func update(with user: User, isOnline: Bool) {
+    func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
         self.currentUser = user
+        self.isCurrentUserProfile = isCurrentUserProfile
         self.isOnline = isOnline
 
         self.doUserActivityFetch(request: .init())
