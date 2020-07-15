@@ -146,14 +146,14 @@ PODS:
   - Pageboy (3.5.1)
   - pop (1.0.12)
   - Presentr (1.9)
-  - PromiseKit (6.13.0):
-    - PromiseKit/CorePromise (= 6.13.0)
-    - PromiseKit/Foundation (= 6.13.0)
-    - PromiseKit/UIKit (= 6.13.0)
-  - PromiseKit/CorePromise (6.13.0)
-  - PromiseKit/Foundation (6.13.0):
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.13.0):
+  - PromiseKit/UIKit (6.13.1):
     - PromiseKit/CorePromise
   - PromisesObjC (1.2.9)
   - Protobuf (3.12.0)
@@ -215,7 +215,7 @@ DEPENDENCIES:
   - Nimble (= 8.0.9)
   - Nuke (= 9.1.0)
   - Presentr (= 1.9)
-  - PromiseKit (= 6.13.0)
+  - PromiseKit (= 6.13.1)
   - Quick (= 2.2.0)
   - Reveal-SDK
   - SDWebImage (= 5.8.3)
@@ -353,7 +353,7 @@ SPEC CHECKSUMS:
   Pageboy: 288353d4cc848c24deec2f7542f325089247c136
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
-  PromiseKit: c8668a559f26c98277a543192c51bc38dd2dfc76
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
@@ -375,6 +375,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: b24d869a5657219b7c6921246c25e42d5ed1f45a
+PODFILE CHECKSUM: c8709bb1c5c7bd2cf509142b8582ca1836cf4a2c
 
 COCOAPODS: 1.9.3

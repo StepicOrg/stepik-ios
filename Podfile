@@ -11,7 +11,7 @@ def shared_pods
     pod 'SDWebImage', '5.8.3'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'DeviceKit', '3.2.0'
-    pod 'PromiseKit', '6.13.0'
+    pod 'PromiseKit', '6.13.1'
     pod 'SwiftLint', '0.39.2'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
