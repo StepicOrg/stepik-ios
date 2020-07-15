@@ -157,7 +157,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromisesObjC (1.2.9)
   - Protobuf (3.12.0)
-  - Quick (2.2.0)
+  - Quick (3.0.0)
   - Reveal-SDK (26)
   - SDWebImage (5.8.3):
     - SDWebImage/Core (= 5.8.3)
@@ -216,7 +216,7 @@ DEPENDENCIES:
   - Nuke (= 9.1.1)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.1)
-  - Quick (= 2.2.0)
+  - Quick (= 3.0.0)
   - Reveal-SDK
   - SDWebImage (= 5.8.3)
   - SnapKit (= 5.0.1)
@@ -356,7 +356,7 @@ SPEC CHECKSUMS:
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
-  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
   Reveal-SDK: 5f94f14aff3d5f2a49f246edcd266fa4472679e9
   SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -375,6 +375,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: ba9bd63cb6e604a6c75e6674b0a065532395a3b7
+PODFILE CHECKSUM: 4319d9a581953e98bed11ed02133f60b99001f34
 
 COCOAPODS: 1.9.3
