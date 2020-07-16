@@ -1,11 +1,24 @@
 import Foundation
 
 enum NewProfileAchievements {
-    enum SomeAction {
+    /// Show achievements
+    enum AchievementsLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let result: Result<[AchievementProgressData], Error>
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: - States
+
+    enum ViewControllerState {
+        case loading
+        case error
+        case result(data: NewProfileAchievementsViewModel)
     }
 }

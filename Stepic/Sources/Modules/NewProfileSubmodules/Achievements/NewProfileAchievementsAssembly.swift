@@ -4,7 +4,13 @@ final class NewProfileAchievementsAssembly: Assembly {
     var moduleInput: NewProfileSubmoduleProtocol?
 
     func makeModule() -> UIViewController {
-        let provider = NewProfileAchievementsProvider()
+        let achievementsRepository = AchievementsRepository(
+            achievementsNetworkService: AchievementsNetworkService(achievementsAPI: AchievementsAPI()),
+            achievementProgressesNetworkService: AchievementProgressesNetworkService(
+                achievementProgressesAPI: AchievementProgressesAPI()
+            )
+        )
+        let provider = NewProfileAchievementsProvider(achievementsRepository: achievementsRepository)
         let presenter = NewProfileAchievementsPresenter()
         let interactor = NewProfileAchievementsInteractor(presenter: presenter, provider: provider)
         let viewController = NewProfileAchievementsViewController(interactor: interactor)

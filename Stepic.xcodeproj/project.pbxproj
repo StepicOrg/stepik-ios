@@ -523,6 +523,10 @@
 		2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */; };
 		2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */; };
 		2C746642245613E900BB0800 /* UserCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */; };
+		2C7545A624C019CE004F9074 /* AchievementsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */; };
+		2C7545A824C01C00004F9074 /* AchievementProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */; };
+		2C7545AA24C01F06004F9074 /* AchievementsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A924C01F06004F9074 /* AchievementsRepository.swift */; };
+		2C7545AC24C034CB004F9074 /* NewProfileAchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */; };
 		2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */; };
 		2C7F641C23B0F5B7006C7648 /* PlayNextCircleControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */; };
 		2C7F641E23B12208006C7648 /* AutoplayStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */; };
@@ -1856,6 +1860,10 @@
 		2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchCellView.swift; sourceTree = "<group>"; };
 		2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_actions_v51.xcdatamodel; sourceTree = "<group>"; };
 		2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesNetworkService.swift; sourceTree = "<group>"; };
+		2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsNetworkService.swift; sourceTree = "<group>"; };
+		2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementProgressesNetworkService.swift; sourceTree = "<group>"; };
+		2C7545A924C01F06004F9074 /* AchievementsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsRepository.swift; sourceTree = "<group>"; };
+		2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsViewModel.swift; sourceTree = "<group>"; };
 		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
 		2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayNextCircleControlView.swift; sourceTree = "<group>"; };
 		2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoplayStorageManager.swift; sourceTree = "<group>"; };
@@ -2850,6 +2858,7 @@
 		2C26BF0824081080000EE23C /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				2C7545A924C01F06004F9074 /* AchievementsRepository.swift */,
 				2C26BF09240810A3000EE23C /* AttemptsRepository.swift */,
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
@@ -5273,6 +5282,7 @@
 				A726EBAA61AAE8C3D81F0506 /* NewProfileAchievementsProvider.swift */,
 				E4A0BB5098635CCE7F5825B0 /* NewProfileAchievementsView.swift */,
 				EF17244B78AAAC345805C0DA /* NewProfileAchievementsViewController.swift */,
+				2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */,
 			);
 			path = Achievements;
 			sourceTree = "<group>";
@@ -5647,6 +5657,8 @@
 		62E984335766CF35B18ED73E /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */,
+				2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
@@ -7951,6 +7963,7 @@
 				2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */,
 				2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */,
 				2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */,
+				2C7545A824C01C00004F9074 /* AchievementProgressesNetworkService.swift in Sources */,
 				62E982132F6F132B7B228D1D /* UserAccountService.swift in Sources */,
 				2C04BA502407369E00D74D4B /* SubmissionStatus.swift in Sources */,
 				2CC2770023EB9E2200E88D6E /* SubmissionsSkeletonView.swift in Sources */,
@@ -8004,6 +8017,7 @@
 				62E9887FA8D78BE11EE4F470 /* BaseExploreInteractor.swift in Sources */,
 				62E98208853EC07B1F71D5CB /* BaseExplorePresenter.swift in Sources */,
 				62E98CC55AA2E50ED1FABF32 /* BaseExploreView.swift in Sources */,
+				2C7545AC24C034CB004F9074 /* NewProfileAchievementsViewModel.swift in Sources */,
 				62E98B04C8A3F4DFE7F8B00F /* BaseExploreViewController.swift in Sources */,
 				62E9888D488FC62B6F16A332 /* CourseInfoAssembly.swift in Sources */,
 				62E9826776831EAD02AA9A18 /* CourseInfoDataFlow.swift in Sources */,
@@ -8043,6 +8057,7 @@
 				62E9892C98A98F4BA0091292 /* CourseInfoTabReviewsViewController.swift in Sources */,
 				62E9821A67345F87FDB1314D /* CourseInfoTabReviewsViewModel.swift in Sources */,
 				62E9852254F2E43ABB6B072F /* CourseInfoTabReviewsInputProtocol.swift in Sources */,
+				2C7545AA24C01F06004F9074 /* AchievementsRepository.swift in Sources */,
 				62E98D482238B33F4B4B0B24 /* CourseInfoTabReviewsTableViewDataSource.swift in Sources */,
 				62E9849DCCBF7E25989CB1B3 /* CourseInfoTabReviewsView.swift in Sources */,
 				2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */,
@@ -8315,6 +8330,7 @@
 				62E980BD19AD05F7E7BE10A9 /* NewSortingQuizElementView.swift in Sources */,
 				62E981262E15287F6DD169A5 /* NewSortingQuizView.swift in Sources */,
 				62E985699E2070D3CFC4B42D /* NewStringQuizAssembly.swift in Sources */,
+				2C7545A624C019CE004F9074 /* AchievementsNetworkService.swift in Sources */,
 				62E98C34004760F9527BC4A2 /* NewStringQuizDataFlow.swift in Sources */,
 				62E98E0CD4B1ED07DA15ED82 /* NewStringQuizInteractor.swift in Sources */,
 				62E989FA1FEC604ACCD3DC48 /* NewStringQuizPresenter.swift in Sources */,

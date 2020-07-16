@@ -25,7 +25,7 @@ final class AchievementsListLegacyAssembly: Assembly {
         }
 
         let retriever = AchievementsRetriever(
-            userId: self.userID,
+            userID: self.userID,
             achievementsAPI: AchievementsAPI(),
             achievementProgressesAPI: AchievementProgressesAPI()
         )

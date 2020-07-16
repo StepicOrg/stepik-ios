@@ -21,7 +21,13 @@ final class AchievementsAPI: APIEndpoint {
             }
             params["page"] = page
 
-            retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).done { achievements, meta in
+            self.retrieve.request(
+                requestEndpoint: self.name,
+                paramName: self.name,
+                params: params,
+                updatingObjects: [],
+                withManager: self.manager
+            ).done { achievements, meta in
                 seal.fulfill((achievements, meta))
             }.catch { error in
                 seal.reject(error)

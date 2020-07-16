@@ -477,7 +477,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
                ) as? AchievementsListViewController {
                 // FIXME: API injection :((
                 let retriever = AchievementsRetriever(
-                    userId: userId,
+                    userID: userId,
                     achievementsAPI: AchievementsAPI(),
                     achievementProgressesAPI: AchievementProgressesAPI()
                 )

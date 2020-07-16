@@ -41,7 +41,7 @@ final class ProfileAchievementsPresenter {
         self.achievementsAPI = achievementsAPI
         self.achievementProgressesAPI = achievementProgressesAPI
         self.achievementsRetriever = AchievementsRetriever(
-            userId: userId,
+            userID: userId,
             achievementsAPI: achievementsAPI,
             achievementProgressesAPI: achievementProgressesAPI
         )
@@ -78,7 +78,9 @@ final class ProfileAchievementsPresenter {
         }
 
         func extractMoreKinds() -> Promise<[String]> {
-            return self.achievementsRetriever.loadAllAchievements(breakCondition: achievementsBreakCondition).then { allAchievements -> Promise<[String]> in
+            self.achievementsRetriever.loadAllAchievements(
+                breakCondition: achievementsBreakCondition
+            ).then { allAchievements -> Promise<[String]> in
                 for a in allAchievements {
                     allUniqueKinds[a.kind] = false
                     if allUniqueKinds.count >= ProfileAchievementsPresenter.maxProfileAchievementsCount {
@@ -91,7 +93,9 @@ final class ProfileAchievementsPresenter {
             }
         }
 
-        self.achievementsRetriever.loadAllAchievementProgresses(breakCondition: progressesBreakCondition).then { allProgresses -> Promise<[String]> in
+        self.achievementsRetriever.loadAllAchievementProgresses(
+            breakCondition: progressesBreakCondition
+        ).then { allProgresses -> Promise<[String]> in
             for p in allProgresses {
                 allUniqueKinds[p.kind] = (allUniqueKinds[p.kind] ?? false) || (p.obtainDate != nil)
             }

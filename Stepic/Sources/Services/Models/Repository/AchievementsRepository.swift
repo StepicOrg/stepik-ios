@@ -1,40 +1,50 @@
-//
-//  AchievementsRetriever.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 08.06.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
-struct AchievementProgressData {
-    let currentScore: Int
-    let maxScore: Int
-    let currentLevel: Int
-    let maxLevel: Int
-    let kind: String
+protocol AchievementsRepositoryProtocol: AnyObject {
+    typealias AchievementsBreakCondition = ([Achievement]) -> Bool
+    typealias AchievementProgressesBreakCondition = ([AchievementProgress]) -> Bool
+
+    func fetchAllAchievements(breakCondition: @escaping AchievementsBreakCondition) -> Promise<[Achievement]>
+    func fetchAllAchievementProgresses(
+        userID: User.IdType,
+        withBreakCondition breakCondition: @escaping AchievementProgressesBreakCondition
+    ) -> Promise<[AchievementProgress]>
+    func fetchAchievementProgress(userID: User.IdType, kind: String) -> Promise<AchievementProgressData>
 }
 
-final class AchievementsRetriever {
-    private let userID: User.IdType
-
-    private let achievementsAPI: AchievementsAPI
-    private let achievementProgressesAPI: AchievementProgressesAPI
-
-    init(userID: User.IdType, achievementsAPI: AchievementsAPI, achievementProgressesAPI: AchievementProgressesAPI) {
-        self.userID = userID
-        self.achievementsAPI = achievementsAPI
-        self.achievementProgressesAPI = achievementProgressesAPI
+extension AchievementsRepositoryProtocol {
+    func fetchAllAchievements() -> Promise<[Achievement]> {
+        self.fetchAllAchievements(breakCondition: { _ in false })
     }
 
-    func loadAllAchievements(breakCondition: @escaping ([Achievement]) -> Bool) -> Promise<[Achievement]> {
+    func fetchAllAchievementProgresses(userID: User.IdType) -> Promise<[AchievementProgress]> {
+        self.fetchAllAchievementProgresses(userID: userID, withBreakCondition: { _ in false })
+    }
+
+    func fetchAchievementProgress(userID: User.IdType, achievement: Achievement) -> Promise<AchievementProgressData> {
+        self.fetchAchievementProgress(userID: userID, kind: achievement.kind)
+    }
+}
+
+final class AchievementsRepository: AchievementsRepositoryProtocol {
+    private let achievementsNetworkService: AchievementsNetworkServiceProtocol
+    private let achievementProgressesNetworkService: AchievementProgressesNetworkServiceProtocol
+
+    init(
+        achievementsNetworkService: AchievementsNetworkServiceProtocol,
+        achievementProgressesNetworkService: AchievementProgressesNetworkServiceProtocol
+    ) {
+        self.achievementsNetworkService = achievementsNetworkService
+        self.achievementProgressesNetworkService = achievementProgressesNetworkService
+    }
+
+    func fetchAllAchievements(breakCondition: @escaping AchievementsBreakCondition) -> Promise<[Achievement]> {
         var allAchievements = [Achievement]()
 
         func load(page: Int) -> Guarantee<Bool> {
             Guarantee { seal in
-                self.achievementsAPI.retrieve(page: page).done { (achievements, meta) in
+                self.achievementsNetworkService.fetch(page: page).done { (achievements, meta) in
                     allAchievements.append(contentsOf: achievements)
                     seal(meta.hasNext)
                 }.catch { _ in
@@ -56,16 +66,17 @@ final class AchievementsRetriever {
         return collect(page: 1)
     }
 
-    func loadAllAchievementProgresses(
-        breakCondition: @escaping ([AchievementProgress]) -> Bool
+    func fetchAllAchievementProgresses(
+        userID: User.IdType,
+        withBreakCondition breakCondition: @escaping AchievementProgressesBreakCondition
     ) -> Promise<[AchievementProgress]> {
         var allProgresses = [AchievementProgress]()
 
         func load(page: Int) -> Guarantee<Bool> {
             Guarantee { seal in
-                self.achievementProgressesAPI.retrieve(
-                    userID: self.userID,
-                    order: .obtainDateDesc,
+                self.achievementProgressesNetworkService.fetchWithSortingByObtainDateDesc(
+                    userID: userID,
+                    kind: nil,
                     page: page
                 ).done { (progresses, meta) in
                     allProgresses.append(contentsOf: progresses)
@@ -89,21 +100,18 @@ final class AchievementsRetriever {
         return collect(page: 1)
     }
 
-    func loadAchievementProgress(for achievement: Achievement) -> Promise<AchievementProgressData> {
-        self.loadAchievementProgress(for: achievement.kind)
-    }
-
-    func loadAchievementProgress(for kind: String) -> Promise<AchievementProgressData> {
+    func fetchAchievementProgress(userID: User.IdType, kind: String) -> Promise<AchievementProgressData> {
         Promise { seal in
             let allAchievementsWithKind: Promise<[Achievement]> = Promise { seal in
-                self.achievementsAPI.retrieve(kind: kind).done { achievements, _ in
+                self.achievementsNetworkService.fetch(kind: kind, page: 1).done { achievements, _ in
                     seal.fulfill(achievements)
                 }.catch { error in
                     seal.reject(error)
                 }
             }
             let allProgressesWithKind: Promise<[AchievementProgress]> = Promise { seal in
-                self.achievementProgressesAPI.retrieve(userID: self.userID, kind: kind).done { progresses, _ in
+                self.achievementProgressesNetworkService.fetch(userID: userID, kind: kind, page: 1).done {
+                    progresses, _ in
                     seal.fulfill(progresses)
                 }.catch { error in
                     seal.reject(error)
@@ -118,11 +126,11 @@ final class AchievementsRetriever {
                 }
 
                 var levelCount = 0
-                let progressesSortedByMaxScore = progresses.sorted(by: { a, b in
-                    let lhs = idToTargetScore[a.achievement] ?? 0
-                    let rhs = idToTargetScore[b.achievement] ?? 0
-                    return lhs < rhs
-                })
+                let progressesSortedByMaxScore = progresses.sorted { lhs, rhs in
+                    let lhsScore = idToTargetScore[lhs.achievement] ?? 0
+                    let rhsScore = idToTargetScore[rhs.achievement] ?? 0
+                    return lhsScore < rhsScore
+                }
 
                 // Sort achievements by progress and find first non-obtained
                 for progress in progressesSortedByMaxScore {

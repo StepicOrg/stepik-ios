@@ -1,14 +1,20 @@
 import UIKit
 
 protocol NewProfileAchievementsViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: NewProfileAchievements.SomeAction.ViewModel)
+    func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel)
 }
 
 final class NewProfileAchievementsViewController: UIViewController {
     private let interactor: NewProfileAchievementsInteractorProtocol
 
-    init(interactor: NewProfileAchievementsInteractorProtocol) {
+    private var state: NewProfileAchievements.ViewControllerState
+
+    init(
+        interactor: NewProfileAchievementsInteractorProtocol,
+        initialState: NewProfileAchievements.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
+        self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -24,5 +30,5 @@ final class NewProfileAchievementsViewController: UIViewController {
 }
 
 extension NewProfileAchievementsViewController: NewProfileAchievementsViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewProfileAchievements.SomeAction.ViewModel) {}
+    func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel) {}
 }
