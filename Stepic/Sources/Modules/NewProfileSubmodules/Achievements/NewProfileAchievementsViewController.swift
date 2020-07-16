@@ -40,7 +40,12 @@ final class NewProfileAchievementsViewController: UIViewController, ControllerWi
             placeholder: StepikPlaceholder(
                 .tryAgain,
                 action: { [weak self] in
-                    self?.interactor.doAchievementsLoad(request: .init())
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.updateState(newState: .loading)
+                    strongSelf.interactor.doAchievementsLoad(request: .init())
                 }
             ),
             for: .connectionError
