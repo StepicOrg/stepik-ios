@@ -11,13 +11,14 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
     private let presenter: NewProfileAchievementsPresenterProtocol
     private let provider: NewProfileAchievementsProviderProtocol
 
-    private var currentUser: User?
+    private var currentUserID: User.IdType?
     private var didLoadAchievements = false
 
+    private let debouncer: DebouncerProtocol = Debouncer()
+
     private let fetchSemaphore = DispatchSemaphore(value: 1)
-    private lazy var fetchQueue = DispatchQueue(
-        label: "com.AlexKarpov.Stepic.NewProfileAchievementsInteractor.AchievementsFetch",
-        qos: .userInitiated
+    private lazy var fetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.NewProfileAchievementsInteractor.AchievementsFetch"
     )
 
     init(
@@ -29,11 +30,11 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
     }
 
     func doAchievementsLoad(request: NewProfileAchievements.AchievementsLoad.Request) {
-        guard let currentUserID = self.currentUser?.id else {
+        guard let currentUserID = self.currentUserID else {
             return
         }
 
-        self.fetchQueue.async { [weak self] in
+        self.fetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -53,6 +54,7 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
                     }
                 }
             }.ensure {
+                strongSelf.debouncer.action = nil
                 strongSelf.fetchSemaphore.signal()
             }.catch { error in
                 print("NewProfileAchievementsInteractor :: failed fetch achievements, error = \(error)")
@@ -92,7 +94,7 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
         }
 
         func fetchMoreAchievementKinds() -> Promise<[String]> {
-            self.provider.fetchAchievements(breakCondition: achievementsBreakCondition).then(on: self.fetchQueue) {
+            self.provider.fetchAchievements(breakCondition: achievementsBreakCondition).then {
                 allAchievements -> Promise<[String]> in
                 for achievement in allAchievements {
                     allUniqueKinds[achievement.kind] = false
@@ -110,7 +112,7 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
             self.provider.fetchAchievementProgresses(
                 userID: userID,
                 withBreakCondition: progressesBreakCondition
-            ).then(on: self.fetchQueue) { allProgresses -> Promise<[String]> in
+            ).then(on: .global(qos: .userInitiated)) { allProgresses -> Promise<[String]> in
                 for progress in allProgresses {
                     let isObtained = (allUniqueKinds[progress.kind] ?? false) || (progress.obtainDate != nil)
                     allUniqueKinds[progress.kind] = isObtained
@@ -123,12 +125,12 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
                     let kinds = allUniqueKinds.map { key, value in (key, value) }
                     return .value(kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
                 }
-            }.then(on: self.fetchQueue) { kinds -> Promise<[AchievementProgressData]> in
+            }.then(on: .global(qos: .userInitiated)) { kinds -> Promise<[AchievementProgressData]> in
                 let fetchAchievementProgressPromises = kinds.compactMap { [weak self] kind in
                     self?.provider.fetchAchievementProgress(userID: userID, kind: kind)
                 }
                 return when(fulfilled: fetchAchievementProgressPromises)
-            }.done(on: self.fetchQueue) { achievementProgressData in
+            }.done { achievementProgressData in
                 seal.fulfill(.init(result: .success(achievementProgressData)))
             }.catch { error in
                 if self.didLoadAchievements {
@@ -148,7 +150,12 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
 
 extension NewProfileAchievementsInteractor: NewProfileSubmoduleProtocol {
     func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
-        self.currentUser = user
-        self.doAchievementsLoad(request: .init())
+        self.currentUserID = user.id
+
+        if self.debouncer.action == nil {
+            self.debouncer.action = { [weak self] in
+                self?.doAchievementsLoad(request: .init())
+            }
+        }
     }
 }

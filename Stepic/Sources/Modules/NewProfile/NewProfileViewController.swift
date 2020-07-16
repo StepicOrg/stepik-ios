@@ -250,8 +250,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             return
         }
 
-        let newProfileActivityAssembly = NewProfileUserActivityAssembly()
-        let newProfileActivityViewController = newProfileActivityAssembly.makeModule()
+        let assembly = NewProfileUserActivityAssembly()
+        let viewController = assembly.makeModule()
 
         let headerView = NewProfileBlockHeaderView()
         headerView.titleText = NSLocalizedString("NewProfileBlockTitleActivity", comment: "")
@@ -260,18 +260,18 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
         let containerView = NewProfileBlockContainerView(
             headerView: headerView,
-            contentView: newProfileActivityViewController.view
+            contentView: viewController.view
         )
 
         self.registerSubmodule(
             .init(
-                viewController: newProfileActivityViewController,
+                viewController: viewController,
                 view: containerView,
                 type: NewProfile.Submodule.userActivity
             )
         )
 
-        if let moduleInput = newProfileActivityAssembly.moduleInput {
+        if let moduleInput = assembly.moduleInput {
             self.interactor.doSubmodulesRegistration(
                 request: .init(submodules: [NewProfile.Submodule.userActivity.uniqueIdentifier: moduleInput])
             )
@@ -285,6 +285,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             return
         }
 
+        let assembly = NewProfileAchievementsAssembly()
+        let viewController = assembly.makeModule()
+
         let headerView = NewProfileBlockHeaderView()
         headerView.titleText = NSLocalizedString("NewProfileBlockTitleAchievements", comment: "")
         headerView.onShowAllButtonClick = { [weak self] in
@@ -293,16 +296,22 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
         let containerView = NewProfileBlockContainerView(
             headerView: headerView,
-            contentView: nil
+            contentView: viewController.view
         )
 
         self.registerSubmodule(
             .init(
-                viewController: nil,
+                viewController: viewController,
                 view: containerView,
                 type: NewProfile.Submodule.achievements
             )
         )
+
+        if let moduleInput = assembly.moduleInput {
+            self.interactor.doSubmodulesRegistration(
+                request: .init(submodules: [NewProfile.Submodule.achievements.uniqueIdentifier: moduleInput])
+            )
+        }
     }
 
     // MARK: Certificates

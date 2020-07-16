@@ -4,8 +4,11 @@ protocol NewProfileAchievementsViewControllerProtocol: AnyObject {
     func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel)
 }
 
-final class NewProfileAchievementsViewController: UIViewController {
+final class NewProfileAchievementsViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: NewProfileAchievementsInteractorProtocol
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
+    var newProfileAchievementsView: NewProfileAchievementsView? { self.view as? NewProfileAchievementsView }
 
     private var state: NewProfileAchievements.ViewControllerState
 
@@ -27,8 +30,52 @@ final class NewProfileAchievementsViewController: UIViewController {
         let view = NewProfileAchievementsView(frame: UIScreen.main.bounds)
         self.view = view
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .tryAgain,
+                action: { [weak self] in
+                    self?.interactor.doAchievementsLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
+
+        self.updateState(newState: self.state)
+    }
+
+    private func updateState(newState: NewProfileAchievements.ViewControllerState) {
+        defer {
+            self.state = newState
+        }
+
+        if case .loading = newState {
+            self.isPlaceholderShown = false
+            self.newProfileAchievementsView?.showLoading()
+            return
+        }
+
+        if case .loading = self.state {
+            self.isPlaceholderShown = false
+            self.newProfileAchievementsView?.hideLoading()
+        }
+
+        switch newState {
+        case .result(let viewModel):
+            self.newProfileAchievementsView?.configure(viewModel: viewModel)
+        case .error:
+            self.showPlaceholder(for: .connectionError)
+        case .loading:
+            break
+        }
+    }
 }
 
 extension NewProfileAchievementsViewController: NewProfileAchievementsViewControllerProtocol {
-    func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel) {}
+    func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
 }
