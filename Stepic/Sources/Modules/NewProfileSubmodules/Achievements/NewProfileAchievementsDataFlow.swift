@@ -14,6 +14,23 @@ enum NewProfileAchievements {
         }
     }
 
+    /// Show detail achievement alert
+    enum AchievementPresentation {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let achievementProgressData: AchievementProgressData
+            let isShareable: Bool
+        }
+
+        struct ViewModel {
+            let achievement: AchievementViewData
+            let isShareable: Bool
+        }
+    }
+
     // MARK: - States
 
     enum ViewControllerState {

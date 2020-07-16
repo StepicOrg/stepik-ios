@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewProfileAchievementsInteractorProtocol {
     func doAchievementsLoad(request: NewProfileAchievements.AchievementsLoad.Request)
+    func doAchievementPresentation(request: NewProfileAchievements.AchievementPresentation.Request)
 }
 
 final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorProtocol {
@@ -12,6 +13,8 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
     private let provider: NewProfileAchievementsProviderProtocol
 
     private var currentUserID: User.IdType?
+    private var isCurrentUserProfile = false
+    private var currentAchievements = [AchievementProgressData]()
     private var didLoadAchievements = false
 
     private let debouncer: DebouncerProtocol = Debouncer()
@@ -46,7 +49,8 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
                 DispatchQueue.main.async {
                     print("NewProfileAchievementsInteractor :: finish fetching achievements")
                     switch response.result {
-                    case .success:
+                    case .success(let achievements):
+                        strongSelf.currentAchievements = achievements
                         strongSelf.didLoadAchievements = true
                         strongSelf.presenter.presentAchievements(response: response)
                     case .failure:
@@ -65,7 +69,17 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
         }
     }
 
-    func fetchUserAchievements(userID: User.IdType) -> Promise<NewProfileAchievements.AchievementsLoad.Response> {
+    func doAchievementPresentation(request: NewProfileAchievements.AchievementPresentation.Request) {
+        if let achievement = self.currentAchievements.first(where: { $0.kind == request.uniqueIdentifier }) {
+            self.presenter.presentAchievement(
+                response: .init(achievementProgressData: achievement, isShareable: self.isCurrentUserProfile)
+            )
+        }
+    }
+
+    private func fetchUserAchievements(
+        userID: User.IdType
+    ) -> Promise<NewProfileAchievements.AchievementsLoad.Response> {
         // kind -> isObtained
         var allUniqueKinds = [String: Bool]()
 
@@ -151,6 +165,7 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
 extension NewProfileAchievementsInteractor: NewProfileSubmoduleProtocol {
     func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
         self.currentUserID = user.id
+        self.isCurrentUserProfile = isCurrentUserProfile
 
         if self.debouncer.action == nil {
             self.debouncer.action = { [weak self] in

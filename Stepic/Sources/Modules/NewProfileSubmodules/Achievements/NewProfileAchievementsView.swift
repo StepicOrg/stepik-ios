@@ -1,6 +1,13 @@
 import SnapKit
 import UIKit
 
+protocol NewProfileAchievementsViewDelegate: AnyObject {
+    func newProfileAchievementsView(
+        _ view: NewProfileAchievementsView,
+        didSelectAchievementWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType
+    )
+}
+
 extension NewProfileAchievementsView {
     struct Appearance {
         let stackViewHeight: CGFloat = 80
@@ -12,6 +19,8 @@ extension NewProfileAchievementsView {
 
 final class NewProfileAchievementsView: UIView {
     let appearance: Appearance
+
+    weak var delegate: NewProfileAchievementsViewDelegate?
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -74,13 +83,20 @@ final class NewProfileAchievementsView: UIView {
         let achievements = viewModel.achievements
 
         for i in 0..<min(achievements.count, self.achievementsCountInRow) {
-            let data = achievements[i]
+            let achievementData = achievements[i]
 
             let achievementView = AchievementBadgeView.fromNib() as AchievementBadgeView
             achievementView.translatesAutoresizingMaskIntoConstraints = false
-            achievementView.data = data
-            achievementView.onTap = {
-                print("Tapped")
+            achievementView.data = achievementData
+            achievementView.onTap = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.delegate?.newProfileAchievementsView(
+                    strongSelf,
+                    didSelectAchievementWithUniqueIdentifier: achievementData.id
+                )
             }
 
             self.stackView.addArrangedSubview(achievementView)

@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewProfileAchievementsViewControllerProtocol: AnyObject {
     func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel)
+    func displayAchievement(viewModel: NewProfileAchievements.AchievementPresentation.ViewModel)
 }
 
 final class NewProfileAchievementsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -29,6 +30,7 @@ final class NewProfileAchievementsViewController: UIViewController, ControllerWi
     override func loadView() {
         let view = NewProfileAchievementsView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -77,5 +79,20 @@ final class NewProfileAchievementsViewController: UIViewController, ControllerWi
 extension NewProfileAchievementsViewController: NewProfileAchievementsViewControllerProtocol {
     func displayAchievements(viewModel: NewProfileAchievements.AchievementsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayAchievement(viewModel: NewProfileAchievements.AchievementPresentation.ViewModel) {
+        let alertManager = AchievementPopupAlertManager(source: .profile)
+        let alert = alertManager.construct(with: viewModel.achievement, canShare: viewModel.isShareable)
+        alertManager.present(alert: alert, inController: self)
+    }
+}
+
+extension NewProfileAchievementsViewController: NewProfileAchievementsViewDelegate {
+    func newProfileAchievementsView(
+        _ view: NewProfileAchievementsView,
+        didSelectAchievementWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType
+    ) {
+        self.interactor.doAchievementPresentation(request: .init(uniqueIdentifier: uniqueIdentifier))
     }
 }

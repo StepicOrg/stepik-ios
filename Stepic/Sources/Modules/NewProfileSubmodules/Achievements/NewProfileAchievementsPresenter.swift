@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewProfileAchievementsPresenterProtocol {
     func presentAchievements(response: NewProfileAchievements.AchievementsLoad.Response)
+    func presentAchievement(response: NewProfileAchievements.AchievementPresentation.Response)
 }
 
 final class NewProfileAchievementsPresenter: NewProfileAchievementsPresenterProtocol {
@@ -14,6 +15,16 @@ final class NewProfileAchievementsPresenter: NewProfileAchievementsPresenterProt
             self.viewController?.displayAchievements(viewModel: .init(state: .result(data: viewModel)))
         case .failure:
             self.viewController?.displayAchievements(viewModel: .init(state: .error))
+        }
+    }
+
+    func presentAchievement(response: NewProfileAchievements.AchievementPresentation.Response) {
+        let viewModel = self.makeViewModel(achievementProgressesData: [response.achievementProgressData])
+
+        if let achievement = viewModel.achievements.first {
+            self.viewController?.displayAchievement(
+                viewModel: .init(achievement: achievement, isShareable: response.isShareable)
+            )
         }
     }
 
