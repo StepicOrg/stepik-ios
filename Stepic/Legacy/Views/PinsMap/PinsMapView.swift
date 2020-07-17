@@ -153,7 +153,7 @@ final class PinsMapView: UIView {
         addSubview(pageControl)
 
         pageControl.snp.makeConstraints { make -> Void in
-            make.bottom.equalTo(self).offset(-8)
+            make.bottom.equalTo(self)
             make.leading.trailing.equalTo(self)
             make.centerX.equalTo(self)
             make.height.equalTo(8)
