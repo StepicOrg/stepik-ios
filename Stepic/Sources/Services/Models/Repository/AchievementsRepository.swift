@@ -164,8 +164,7 @@ final class AchievementsRepository: AchievementsRepositoryProtocol {
                     )
                 } else {
                     let maxScoreForFirstLevel = achievements
-                        .sorted(by: { $0.targetScore < $1.targetScore })
-                        .first?
+                        .min(by: { $0.targetScore < $1.targetScore })?
                         .targetScore
                     // Non-completed achievement, empty progress
                     seal.fulfill(

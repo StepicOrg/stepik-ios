@@ -3,11 +3,11 @@ import SnapKit
 import UIKit
 
 protocol CourseInfoTabInfoViewDelegate: AnyObject {
-    func courseInfoTabInfoView(
-        _ view: CourseInfoTabInfoView,
-        didClickInstructor instructor: CourseInfoTabInfoInstructorViewModel
-    )
+    func courseInfoTabInfoViewDidLoadContent(_ view: CourseInfoTabInfoView)
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenURL url: URL)
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenImageURL url: URL)
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenImage image: UIImage)
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenUserProfileWithID userID: User.IdType)
 }
 
 extension CourseInfoTabInfoView {
@@ -16,7 +16,6 @@ extension CourseInfoTabInfoView {
         let stackViewInsets = LayoutInsets(top: 20)
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let authorTitleHighlightColor = UIColor.stepikLightBlue
         let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
         let authorTitleLabelNumberOfLines = 0
         let authorIconLeadingSpace: CGFloat = 20
@@ -80,13 +79,16 @@ final class CourseInfoTabInfoView: UIView {
             self.scrollableStackView.removeAllArrangedViews()
         }
 
-        self.addAuthorView(authorName: viewModel.author)
+        self.addAuthorView(authors: viewModel.authors)
         self.addIntroVideoView(
             introVideoURL: viewModel.introVideoURL,
             introVideoThumbnailURL: viewModel.introVideoThumbnailURL
         )
 
-        self.addTextBlockView(block: .about, message: viewModel.aboutText)
+        self.addAboutBlockView(
+            aboutText: viewModel.aboutText,
+            isWebViewSupportNeeded: viewModel.isWebViewSupportNeededForAboutText
+        )
         self.addTextBlockView(block: .requirements, message: viewModel.requirementsText)
         self.addTextBlockView(block: .targetAudience, message: viewModel.targetAudienceText)
 
@@ -104,14 +106,26 @@ final class CourseInfoTabInfoView: UIView {
         // Redraw self cause geometry & sizes can be changed
         self.setNeedsLayout()
         self.layoutIfNeeded()
+
+        if !viewModel.isWebViewSupportNeededForAboutText {
+            self.delegate?.courseInfoTabInfoViewDidLoadContent(self)
+        }
     }
 
     // MARK: Private API
 
-    private func addAuthorView(authorName: String) {
-        if authorName.isEmpty {
+    private func addAuthorView(authors: [CourseInfoTabInfoAuthorViewModel]) {
+        if authors.isEmpty {
             return
         }
+
+        var formattedAuthorsString = authors.reduce(into: "") { result, author in
+            result += "<a href=\"\(author.id)\">\(author.name)</a>, "
+        }.trimmingCharacters(in: .whitespaces)
+        formattedAuthorsString.removeLast()
+
+        let attributedText = "\(Block.author.title) \(formattedAuthorsString)"
+            .style(tags: [HTMLToAttributedStringConverter.defaultLinkStyle])
 
         let authorView = CourseInfoTabInfoHeaderBlockView(
             appearance: .init(
@@ -121,13 +135,16 @@ final class CourseInfoTabInfoView: UIView {
                 titleLabelNumberOfLines: self.appearance.authorTitleLabelNumberOfLines
             )
         )
-
-        let attributedTitle = "\(Block.author.title) <a>\(authorName)</a>".style(
-            tags: [Style("a").foregroundColor(self.appearance.authorTitleHighlightColor)]
-        ).attributedString
-
         authorView.icon = Block.author.icon
-        authorView.attributedTitle = attributedTitle
+        authorView.attributedText = attributedText
+        authorView.onTagClick = { [weak self] href in
+            guard let strongSelf = self,
+                  let userID = Int(href) else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didOpenUserProfileWithID: userID)
+        }
 
         self.scrollableStackView.addArrangedView(authorView)
     }
@@ -141,6 +158,17 @@ final class CourseInfoTabInfoView: UIView {
         }
     }
 
+    private func addAboutBlockView(aboutText: String, isWebViewSupportNeeded: Bool) {
+        if aboutText.isEmpty {
+            return
+        }
+
+        let aboutBlockView = CourseInfoTabInfoAboutBlockView(isWebViewSupportNeeded: isWebViewSupportNeeded)
+        aboutBlockView.delegate = self
+        self.scrollableStackView.addArrangedView(aboutBlockView)
+        aboutBlockView.text = aboutText
+    }
+
     private func addTextBlockView(block: Block, message: String) {
         if message.isEmpty {
             return
@@ -150,13 +178,6 @@ final class CourseInfoTabInfoView: UIView {
         textBlockView.icon = block.icon
         textBlockView.title = block.title
         textBlockView.message = message
-        textBlockView.onOpenURL = { [weak self] url in
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didOpenURL: url)
-        }
 
         self.scrollableStackView.addArrangedView(textBlockView)
     }
@@ -173,7 +194,7 @@ final class CourseInfoTabInfoView: UIView {
                 return
             }
 
-            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didClickInstructor: instructor)
+            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didOpenUserProfileWithID: instructor.id)
         }
 
         self.scrollableStackView.addArrangedView(instructorsView)
@@ -212,7 +233,7 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
 extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
-             self.scrollableStackView.scrollDelegate
+            self.scrollableStackView.scrollDelegate
         }
         set {
             self.scrollableStackView.scrollDelegate = newValue
@@ -221,7 +242,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsets: UIEdgeInsets {
         get {
-             self.scrollableStackView.contentInsets
+            self.scrollableStackView.contentInsets
         }
         set {
             self.loadingIndicator.snp.updateConstraints { make in
@@ -239,7 +260,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
     var contentOffset: CGPoint {
         get {
-             self.scrollableStackView.contentOffset
+            self.scrollableStackView.contentOffset
         }
         set {
             self.scrollableStackView.contentOffset = newValue
@@ -248,11 +269,31 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-             self.scrollableStackView.contentInsetAdjustmentBehavior
+            self.scrollableStackView.contentInsetAdjustmentBehavior
         }
         set {
             self.scrollableStackView.contentInsetAdjustmentBehavior = newValue
         }
+    }
+}
+
+// MARK: - CourseInfoTabInfoView: CourseInfoTabInfoAboutBlockViewDelegate -
+
+extension CourseInfoTabInfoView: CourseInfoTabInfoAboutBlockViewDelegate {
+    func courseInfoTabInfoAboutBlockViewDidLoadContent(_ view: CourseInfoTabInfoAboutBlockView) {
+        self.delegate?.courseInfoTabInfoViewDidLoadContent(self)
+    }
+
+    func courseInfoTabInfoAboutBlockView(_ view: CourseInfoTabInfoAboutBlockView, didOpenURL url: URL) {
+        self.delegate?.courseInfoTabInfoView(self, didOpenURL: url)
+    }
+
+    func courseInfoTabInfoAboutBlockView(_ view: CourseInfoTabInfoAboutBlockView, didOpenImageURL url: URL) {
+        self.delegate?.courseInfoTabInfoView(self, didOpenImageURL: url)
+    }
+
+    func courseInfoTabInfoAboutBlockView(_ view: CourseInfoTabInfoAboutBlockView, didOpenImage image: UIImage) {
+        self.delegate?.courseInfoTabInfoView(self, didOpenImage: image)
     }
 }
 

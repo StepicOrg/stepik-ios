@@ -21,6 +21,7 @@ struct Scripts {
     private static let audioTagWrapperInitKey = "AudioTagWrapperInit"
     private static let wysiwygStylesKey = "wysiwygCSSWrapper"
     private static let commonStylesKey = "contentCSSWrapper"
+    private static let courseInfoStylesKey = "courseInfoCSSWrapper"
     private static let textColorScriptKey = "textColorScript"
     private static let highlightJSKey = "highlightJS"
     private static let webkitCalloutDisableKey = "WebkitTouchCalloutDisable"
@@ -60,6 +61,10 @@ struct Scripts {
 
     static var styles: String {
          "\(self.loadScriptWithKey(self.wysiwygStylesKey))\(self.loadScriptWithKey(self.commonStylesKey))"
+    }
+
+    static var courseInfoStyles: String {
+        self.loadScriptWithKey(self.courseInfoStylesKey)
     }
 
     static var highlightJS: String {

@@ -8,7 +8,7 @@ extension CourseInfoTabInfoTextBlockView {
 
         let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
         let messageLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let messageLabelTextColor = UIColor.stepikSecondaryText
+        let messageLabelTextColor = UIColor.stepikSystemSecondaryText
 
         let messageLabelLineSpacing: CGFloat = 2.6
     }
@@ -19,33 +19,13 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     private lazy var headerView = CourseInfoTabInfoHeaderBlockView()
 
-    private lazy var messageLabel: AttributedLabel = {
-        let label = AttributedLabel()
+    private lazy var messageLabel: UILabel = {
+        let label = UILabel()
         label.numberOfLines = 0
         label.font = self.appearance.messageLabelFont
         label.textColor = self.appearance.messageLabelTextColor
-        label.onClick = { [weak self] label, detection in
-            guard let strongSelf = self else {
-                return
-            }
-
-            switch detection.type {
-            case .link(let url):
-                strongSelf.onOpenURL?(url)
-            case .tag(let tag):
-                if tag.name == "a",
-                    let href = tag.attributes["href"],
-                    let url = URL(string: href) {
-                    strongSelf.onOpenURL?(url)
-                }
-            default:
-                break
-            }
-        }
         return label
     }()
-
-    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
 
     var icon: UIImage? {
         didSet {
@@ -61,21 +41,15 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     var message: String? {
         didSet {
-            if let trimmedMessage = self.message?.trimmingCharacters(in: .whitespacesAndNewlines) {
-                self.messageLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
-                    htmlString: trimmedMessage
-                ) as? AttributedText
-            } else {
-                self.messageLabel.attributedText = nil
-            }
+            self.messageLabel.setTextWithHTMLString(
+                self.message ?? "",
+                lineSpacing: self.appearance.messageLabelLineSpacing
+            )
         }
     }
 
-    var onOpenURL: ((URL) -> Void)?
-
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(font: appearance.messageLabelFont)
         super.init(frame: frame)
 
         self.setupView()
