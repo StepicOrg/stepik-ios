@@ -27,6 +27,13 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
+        let authorsViewModel = course.authors.map { author in
+            CourseInfoTabInfoAuthorViewModel(
+                id: author.id,
+                name: "\(author.firstName) \(author.lastName)".trimmingCharacters(in: .whitespaces)
+            )
+        }
+
         let instructorsViewModel = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
                 id: user.id,
@@ -52,7 +59,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }()
 
         return CourseInfoTabInfoViewModel(
-            author: self.makeFormattedAuthorText(authors: course.authors),
+            authors: authorsViewModel,
             introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
             aboutText: aboutText,
@@ -71,19 +78,6 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             return introVideo.getUrlForQuality(streamVideoQuality.uniqueIdentifier)
         } else {
             return URL(string: course.introURL)
-        }
-    }
-
-    private func makeFormattedAuthorText(authors: [User]) -> String {
-        if authors.isEmpty {
-            return ""
-        } else {
-            var authorString = authors.reduce(into: "") { result, user in
-                result += "\(user.firstName) \(user.lastName), "
-            }.trimmingCharacters(in: .whitespaces)
-            authorString.removeLast()
-
-            return authorString
         }
     }
 

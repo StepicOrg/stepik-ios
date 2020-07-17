@@ -1,7 +1,19 @@
 import UIKit
 
+struct CourseInfoTabInfoAuthorViewModel {
+    let id: User.IdType
+    let name: String
+}
+
+struct CourseInfoTabInfoInstructorViewModel {
+    let id: User.IdType
+    let avatarImageURL: URL?
+    let title: String
+    let description: String
+}
+
 struct CourseInfoTabInfoViewModel {
-    let author: String
+    let authors: [CourseInfoTabInfoAuthorViewModel]
 
     let introVideoURL: URL?
     let introVideoThumbnailURL: URL?
@@ -16,11 +28,4 @@ struct CourseInfoTabInfoViewModel {
     let certificateDetailsText: String?
 
     let instructors: [CourseInfoTabInfoInstructorViewModel]
-}
-
-struct CourseInfoTabInfoInstructorViewModel {
-    let id: User.IdType
-    let avatarImageURL: URL?
-    let title: String
-    let description: String
 }

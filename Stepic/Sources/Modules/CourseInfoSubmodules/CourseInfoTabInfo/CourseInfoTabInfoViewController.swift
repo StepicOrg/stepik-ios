@@ -127,11 +127,8 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
-    func courseInfoTabInfoView(
-        _ view: CourseInfoTabInfoView,
-        didClickInstructor instructor: CourseInfoTabInfoInstructorViewModel
-    ) {
-        let assembly = NewProfileAssembly(otherUserID: instructor.id)
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenUserProfileWithID userID: User.IdType) {
+        let assembly = NewProfileAssembly(otherUserID: userID)
         self.push(module: assembly.makeModule())
     }
 

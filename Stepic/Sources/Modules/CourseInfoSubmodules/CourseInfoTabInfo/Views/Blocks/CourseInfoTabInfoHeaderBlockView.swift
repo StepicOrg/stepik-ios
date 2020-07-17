@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -17,6 +18,36 @@ extension CourseInfoTabInfoHeaderBlockView {
 final class CourseInfoTabInfoHeaderBlockView: UIView {
     let appearance: Appearance
 
+    private lazy var iconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = self.appearance.imageViewTintColor
+        return imageView
+    }()
+
+    private lazy var titleLabel: AttributedLabel = {
+        let label = AttributedLabel()
+        label.font = self.appearance.titleLabelFont
+        label.textColor = self.appearance.titleLabelTextColor
+        label.numberOfLines = self.appearance.titleLabelNumberOfLines
+        label.onClick = { [weak self] label, detection in
+            guard let strongSelf = self else {
+                return
+            }
+
+            switch detection.type {
+            case .tag(let tag):
+                if tag.name == "a",
+                   let href = tag.attributes["href"] {
+                    strongSelf.onTagClick?(href)
+                }
+            default:
+                break
+            }
+        }
+        return label
+    }()
+
     var icon: UIImage? {
         didSet {
             self.iconImageView.image = self.icon?.withRenderingMode(.alwaysTemplate)
@@ -25,30 +56,17 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
 
     var title: String? {
         didSet {
-            self.titleLabel.text = self.title
+            self.titleLabel.attributedText = self.title?.styleAll(Style())
         }
     }
 
-    var attributedTitle: NSAttributedString? {
+    var attributedText: AttributedText? {
         didSet {
-            self.titleLabel.attributedText = self.attributedTitle
+            self.titleLabel.attributedText = self.attributedText
         }
     }
 
-    private lazy var iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = self.appearance.imageViewTintColor
-        return imageView
-    }()
-
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.titleLabelFont
-        label.textColor = self.appearance.titleLabelTextColor
-        label.numberOfLines = self.appearance.titleLabelNumberOfLines
-        return label
-    }()
+    var onTagClick: ((String) -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
