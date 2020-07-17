@@ -34,14 +34,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
         }
 
-        let instructorsViewModel = course.instructors.map { user in
-            CourseInfoTabInfoInstructorViewModel(
-                id: user.id,
-                avatarImageURL: URL(string: user.avatarURL),
-                title: "\(user.firstName) \(user.lastName)",
-                description: user.bio
-            )
-        }
+        let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
+        let (processedAboutText, isWebViewSupportNeeded) = self.makeProcessedAboutText(aboutText)
 
         let certificateText = self.makeFormattedCertificateText(course: course)
         let certificateDetailsText = course.hasCertificate
@@ -51,26 +45,65 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
             : nil
 
-        let aboutText: String = {
-            let text = course.courseDescription.isEmpty
-                ? course.summary
-                : course.courseDescription
-            return text.trimmingCharacters(in: .whitespaces)
-        }()
+        let instructorsViewModel = course.instructors.map { user in
+            CourseInfoTabInfoInstructorViewModel(
+                id: user.id,
+                avatarImageURL: URL(string: user.avatarURL),
+                title: "\(user.firstName) \(user.lastName)",
+                description: user.bio
+            )
+        }
 
         return CourseInfoTabInfoViewModel(
             authors: authorsViewModel,
             introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
-            aboutText: aboutText,
-            requirementsText: course.requirements.trimmingCharacters(in: .whitespaces),
-            targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
+            aboutText: processedAboutText,
+            isWebViewSupportNeededForAboutText: isWebViewSupportNeeded,
+            requirementsText: course.requirements.trimmingCharacters(in: .whitespacesAndNewlines),
+            targetAudienceText: course.audience.trimmingCharacters(in: .whitespacesAndNewlines),
             timeToCompleteText: self.makeFormattedTimeToCompleteText(timeToComplete: course.timeToComplete),
             languageText: self.makeLocalizedLanguageText(code: course.languageCode),
             certificateText: certificateText,
             certificateDetailsText: certificateDetailsText,
             instructors: instructorsViewModel
         )
+    }
+
+    private func makeProcessedAboutText(_ aboutText: String) -> (String, Bool) {
+        let trimmedText = aboutText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmedText.isEmpty {
+            return (trimmedText, false)
+        }
+
+        let isWebViewSupportNeeded = TagDetectionUtil.isWebViewSupportNeeded(trimmedText)
+
+        guard isWebViewSupportNeeded else {
+            return (trimmedText, false)
+        }
+
+        let injections: [ContentProcessingInjection] = [
+            MathJaxInjection(),
+            CommonStylesInjection(),
+            MetaViewportInjection(),
+            WebkitImagesCalloutDisableInjection(),
+            CustomFontSizeInjection(
+                bodyFontSize: 11,
+                h1FontSize: 19,
+                h2FontSize: 16,
+                h3FontSize: 13,
+                blockquoteFontSize: 15
+            )
+        ]
+
+        let contentProcessor = ContentProcessor(
+            content: trimmedText,
+            rules: ContentProcessor.defaultRules,
+            injections: injections
+        )
+
+        return (contentProcessor.processContent(), true)
     }
 
     private func makeIntroVideoURL(course: Course, streamVideoQuality: StreamVideoQuality) -> URL? {

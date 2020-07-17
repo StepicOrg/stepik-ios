@@ -1,3 +1,4 @@
+import Agrume
 import AVFoundation
 import AVKit
 import UIKit
@@ -7,6 +8,10 @@ protocol CourseInfoTabInfoViewControllerProtocol: AnyObject {
 }
 
 final class CourseInfoTabInfoViewController: UIViewController {
+    enum Animation {
+        static let refreshDelay: TimeInterval = 0.33
+    }
+
     private let interactor: CourseInfoTabInfoInteractorProtocol
     private let analytics: Analytics
 
@@ -19,6 +24,8 @@ final class CourseInfoTabInfoViewController: UIViewController {
     }
 
     private lazy var playerViewController = AVPlayerViewController()
+
+    private var didLoadContent = false
 
     // MARK: Init
 
@@ -69,7 +76,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     private func updateState() {
         if case .loading = self.state {
             self.infoView?.showLoading()
-        } else {
+        } else if self.didLoadContent {
             self.infoView?.hideLoading()
         }
     }
@@ -84,6 +91,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtoc
 
     private func display(newState: CourseInfoTabInfo.ViewControllerState) {
         if case .result(let viewModel) = newState {
+            self.didLoadContent = false
             self.infoView?.configure(viewModel: viewModel)
         }
 
@@ -127,18 +135,39 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
-    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenUserProfileWithID userID: User.IdType) {
-        let assembly = NewProfileAssembly(otherUserID: userID)
-        self.push(module: assembly.makeModule())
+    func courseInfoTabInfoViewDidLoadContent(_ view: CourseInfoTabInfoView) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) {
+            self.didLoadContent = true
+            self.infoView?.hideLoading()
+        }
     }
 
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenURL url: URL) {
-        WebControllerManager.shared.presentWebControllerWithURL(
-            url,
-            inController: self,
-            withKey: .externalLink,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+        if let deepLinkRoute = DeepLinkRoute(path: url.absoluteString) {
+            DeepLinkRoutingService().route(deepLinkRoute, fallbackPath: url.absoluteString, from: self)
+        } else {
+            WebControllerManager.shared.presentWebControllerWithURL(
+                url,
+                inController: self,
+                withKey: .externalLink,
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
+        }
+    }
+
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenImageURL url: URL) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
+    }
+
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenImage image: UIImage) {
+        let agrume = Agrume(image: image)
+        agrume.show(from: self)
+    }
+
+    func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenUserProfileWithID userID: User.IdType) {
+        let assembly = NewProfileAssembly(otherUserID: userID)
+        self.push(module: assembly.makeModule())
     }
 }
