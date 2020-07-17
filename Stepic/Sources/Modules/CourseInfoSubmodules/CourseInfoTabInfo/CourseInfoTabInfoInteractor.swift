@@ -13,7 +13,8 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
     private var course: Course?
     private var courseViewSource: AnalyticsEvent.CourseViewSource?
 
-    private var shouldOpenedAnalyticsEventSend: Bool = true
+    private var didShowCourseInfo = false
+    private var shouldOpenedAnalyticsEventSend = true
 
     init(
         presenter: CourseInfoTabInfoPresenterProtocol,
@@ -32,25 +33,32 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             return
         }
 
-        // Firstly present cached course info, then present remote course info only on success response.
+        let shouldPerformFetch = course.instructorsArray.count != course.instructors.count
+            || course.authorsArray.count != course.authors.count
+
+        if shouldPerformFetch {
+            self.provider.fetchUsersForCourse(course).done { course in
+                self.course = course
+                self.presentCourseInfoUsingCurrentData()
+            }.catch { error in
+                print("Failed get course info with error: \(error)")
+                if !self.didShowCourseInfo {
+                    self.presentCourseInfoUsingCurrentData()
+                }
+            }
+        } else if !self.didShowCourseInfo {
+            self.presentCourseInfoUsingCurrentData()
+        }
+    }
+
+    private func presentCourseInfoUsingCurrentData() {
+        self.didShowCourseInfo = true
         self.presenter.presentCourseInfo(
             response: .init(
                 course: self.course,
                 streamVideoQuality: self.provider.globalStreamVideoQuality
             )
         )
-
-        self.provider.fetchUsersForCourse(course).done { course in
-            self.course = course
-            self.presenter.presentCourseInfo(
-                response: .init(
-                    course: self.course,
-                    streamVideoQuality: self.provider.globalStreamVideoQuality
-                )
-            )
-        }.catch { error in
-            print("Failed get course info with error: \(error)")
-        }
     }
 }
 
