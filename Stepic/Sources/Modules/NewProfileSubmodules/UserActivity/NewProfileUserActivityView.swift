@@ -8,7 +8,7 @@ extension NewProfileUserActivityView {
         let longestStreakLabelInsets = LayoutInsets(top: 8)
 
         let pinsMapViewHeight: CGFloat = 166
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 

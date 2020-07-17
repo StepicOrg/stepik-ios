@@ -57,7 +57,7 @@ final class ProfilePresenter {
     private var streakNotificationsPresenter: StreakNotificationsControlPresenter?
     private var descriptionPresenter: ProfileDescriptionPresenter?
     private var pinsMapPresenter: PinsMapPresenter?
-    private var achievementsPresenter: ProfileAchievementsPresenter?
+    //private var achievementsPresenter: ProfileAchievementsPresenter?
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
@@ -122,18 +122,18 @@ final class ProfilePresenter {
         }
 
         // Achievements
-        if let attachedView = view?.getView(for: .achievements) as? ProfileAchievementsView,
-           let userId = userSeed.userId {
-            achievementsPresenter = ProfileAchievementsPresenter(userId: userId,
-                                                                 view: attachedView,
-                                                                 achievementsAPI: AchievementsAPI(),
-                                                                 achievementProgressesAPI: AchievementProgressesAPI())
-            if let achievementsPresenter = achievementsPresenter {
-                attachedView.attachPresenter(achievementsPresenter)
-                achievementsPresenter.delegate = self
-                achievementsPresenter.loadLastAchievements()
-            }
-        }
+//        if let attachedView = view?.getView(for: .achievements) as? ProfileAchievementsView,
+//           let userId = userSeed.userId {
+//            achievementsPresenter = ProfileAchievementsPresenter(userId: userId,
+//                                                                 view: attachedView,
+//                                                                 achievementsAPI: AchievementsAPI(),
+//                                                                 achievementProgressesAPI: AchievementProgressesAPI())
+//            if let achievementsPresenter = achievementsPresenter {
+//                attachedView.attachPresenter(achievementsPresenter)
+//                achievementsPresenter.delegate = self
+//                achievementsPresenter.loadLastAchievements()
+//            }
+//        }
 
         refreshUser(with: user)
         refreshStreak(with: activity)
@@ -288,11 +288,11 @@ final class ProfilePresenter {
     }
 }
 
-extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
-    func achievementInfoShouldPresent(viewData: AchievementViewData) {
-        view?.showAchievementInfo(viewData: viewData, canShare: userSeed.isMe)
-    }
-}
+//extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
+//    func achievementInfoShouldPresent(viewData: AchievementViewData) {
+//        view?.showAchievementInfo(viewData: viewData, canShare: userSeed.isMe)
+//    }
+//}
 
 extension ProfilePresenter: DataBackUpdateServiceDelegate {
     func dataBackUpdateService(

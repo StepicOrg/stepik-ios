@@ -18,34 +18,29 @@ protocol AchievementsListView: AnyObject {
 final class AchievementsListPresenter {
     weak var view: AchievementsListView?
 
-    private let achievementsAPI: AchievementsAPI
-    private let achievementsRetriever: AchievementsRetriever
     private let userID: Int
+    private let achievementsRepository: AchievementsRepositoryProtocol
     private let analytics: Analytics
 
     init(
         userID: Int,
         view: AchievementsListView,
-        achievementsAPI: AchievementsAPI,
-        achievementsRetriever: AchievementsRetriever,
+        achievementsRepository: AchievementsRepositoryProtocol,
         analytics: Analytics = StepikAnalytics.shared
     ) {
         self.userID = userID
         self.view = view
-        self.achievementsAPI = achievementsAPI
-        self.achievementsRetriever = achievementsRetriever
+        self.achievementsRepository = achievementsRepository
         self.analytics = analytics
     }
 
     func refresh() {
-        self.achievementsRetriever.loadAllAchievements(
-            breakCondition: { _ in false }
-        ).then { achievements -> Promise<[AchievementProgressData]> in
+        self.achievementsRepository.fetchAllAchievements().then { achievements -> Promise<[AchievementProgressData]> in
             let kinds = Set<String>(achievements.map { $0.kind })
 
             var promises = [Promise<AchievementProgressData>]()
             for kind in Array(kinds) {
-                promises.append(self.achievementsRetriever.loadAchievementProgress(for: kind))
+                promises.append(self.achievementsRepository.fetchAchievementProgress(userID: self.userID, kind: kind))
             }
 
             return when(fulfilled: promises)

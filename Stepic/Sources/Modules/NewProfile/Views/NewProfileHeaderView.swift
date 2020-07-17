@@ -17,7 +17,7 @@ extension NewProfileHeaderView {
         let infoStackViewSpacing: CGFloat = 8
         let infoStackViewInsets = LayoutInsets(left: 16, bottom: 16, right: 16)
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 

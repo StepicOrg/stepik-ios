@@ -22,7 +22,7 @@ final class Debouncer: DebouncerProtocol {
         self.delay = delay
     }
 
-    convenience init(delay: Double = Debouncer.defaultDelay, action: @escaping (() -> Void)) {
+    convenience init(delay: Double = Debouncer.defaultDelay, action: @escaping () -> Void) {
         self.init(delay: delay)
         self.action = action
     }
