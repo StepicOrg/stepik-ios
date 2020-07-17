@@ -13,7 +13,7 @@ extension NewProfileAchievementsView {
         let stackViewHeight: CGFloat = 80
         let stackViewSpacing: CGFloat = 8
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 

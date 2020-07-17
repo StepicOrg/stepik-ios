@@ -21,7 +21,7 @@ extension NewProfileDetailsView {
         let userIDButtonInsets = LayoutInsets(top: 16, bottom: 16)
         let userIDButtonHeight: CGFloat = 18
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 

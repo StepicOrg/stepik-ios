@@ -12,7 +12,7 @@ extension NewProfileStreakNotificationsSwitchView {
         let separatorHeight: CGFloat = 0.5
         let separatorColor = UIColor.stepikSeparator
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 

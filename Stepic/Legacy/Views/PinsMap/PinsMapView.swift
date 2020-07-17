@@ -26,7 +26,7 @@ final class PinsMapView: UIView {
                 case let x where x > 0:
                     return UIColor(hex6: 0xB8E0B8)
                 default:
-                    return UIColor.stepikLightSecondaryBackground
+                    return UIColor.dynamic(light: .stepikGreyFixed, dark: .stepikTertiaryBackground)
                 }
             }
         }
