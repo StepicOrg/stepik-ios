@@ -24,16 +24,16 @@ final class AchievementsListLegacyAssembly: Assembly {
             fatalError("Unable to initialize CertificatesViewController via storyboard")
         }
 
-        let retriever = AchievementsRetriever(
-            userID: self.userID,
-            achievementsAPI: AchievementsAPI(),
-            achievementProgressesAPI: AchievementProgressesAPI()
+        let achievementsRepository = AchievementsRepository(
+            achievementsNetworkService: AchievementsNetworkService(achievementsAPI: AchievementsAPI()),
+            achievementProgressesNetworkService: AchievementProgressesNetworkService(
+                achievementProgressesAPI: AchievementProgressesAPI()
+            )
         )
         let presenter = AchievementsListPresenter(
             userID: self.userID,
             view: viewController,
-            achievementsAPI: AchievementsAPI(),
-            achievementsRetriever: retriever
+            achievementsRepository: achievementsRepository
         )
 
         viewController.presenter = presenter

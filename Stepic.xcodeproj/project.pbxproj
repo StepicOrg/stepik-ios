@@ -422,7 +422,6 @@
 		2C22043020E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */; };
 		2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */; };
 		2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */; };
-		2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */; };
 		2C223A1524A0CC91002E4F02 /* IAPServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */; };
 		2C2365E421078CEF00C99742 /* StoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* StoredFileManager.swift */; };
 		2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12621AD8907001DCF89 /* NextLessonService.swift */; };
@@ -610,6 +609,7 @@
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
+		2CADFEF424C1325F00008C65 /* AchievementProgressData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */; };
 		2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */; };
 		2CB1C3AF24008D4A001DA83E /* UserCodeRunsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */; };
 		2CB1C3B124009339001DA83E /* UserCodeRunsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3B024009339001DA83E /* UserCodeRunsNetworkService.swift */; };
@@ -704,8 +704,6 @@
 		2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */; };
 		2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */; };
 		2CE8390920C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */; };
-		2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */; };
-		2CE8390E20C8096400FE3672 /* ProfileAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */; };
 		2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */; };
 		2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */; };
 		2CE8BA9B23D631E500C2EED9 /* ImageStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8BA9A23D631E500C2EED9 /* ImageStoredFileManager.swift */; };
@@ -1056,7 +1054,6 @@
 		62E98A8799E57B0E5E67AF34 /* SubmissionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987B486D2D28DD640291E /* SubmissionsViewModel.swift */; };
 		62E98A894044493A1CDD1C77 /* WriteCourseReviewOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983A333706F94E8A1302D /* WriteCourseReviewOutputProtocol.swift */; };
 		62E98A8995F788BC30168D28 /* WriteCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982EF753347C2F2370E3D /* WriteCommentView.swift */; };
-		62E98A973A47105C195530CD /* AchievementsRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */; };
 		62E98A9A1DDD414A6896FB5A /* CourseInfoTabInfoInstructorsBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986D03D06D1DE96F5B16B /* CourseInfoTabInfoInstructorsBlockView.swift */; };
 		62E98A9DF433C986B49F7980 /* CodeQuizFullscreenCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D7FC0DD638068C209A6 /* CodeQuizFullscreenCodeViewController.swift */; };
 		62E98A9E1A49C52FD2916085 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CC68B482B9687E28B8F /* DiscussionsViewController.swift */; };
@@ -1746,7 +1743,6 @@
 		2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCellSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
 		2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementListSkeletonPlaceholderView.xib; sourceTree = "<group>"; };
-		2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileAchievementsContentView.xib; sourceTree = "<group>"; };
 		2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPServiceDelegate.swift; sourceTree = "<group>"; };
 		2C22F3E2226E2A7100467F54 /* Model_course_paid.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_paid.xcdatamodel; sourceTree = "<group>"; };
 		2C2365E321078CEF00C99742 /* StoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFileManager.swift; sourceTree = "<group>"; };
@@ -1944,6 +1940,7 @@
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementProgressData.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeRun.swift; sourceTree = "<group>"; };
 		2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeRunsAPI.swift; sourceTree = "<group>"; };
@@ -2044,8 +2041,6 @@
 		2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderProtocol.swift; sourceTree = "<group>"; };
 		2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
-		2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAchievementsContentView.swift; sourceTree = "<group>"; };
-		2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementBadgeView.xib; sourceTree = "<group>"; };
 		2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementBadgeView.swift; sourceTree = "<group>"; };
 		2CE8BA9A23D631E500C2EED9 /* ImageStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStoredFileManager.swift; sourceTree = "<group>"; };
@@ -2296,7 +2291,6 @@
 		62E986AC65867C28C93D475E /* TableInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableInputTextField.swift; sourceTree = "<group>"; };
 		62E986AFDD619AB21C4C0A51 /* VerticalCourseListFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalCourseListFlowLayout.swift; sourceTree = "<group>"; };
 		62E986B68558033E8B3DDF6A /* CourseWidgetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetLabel.swift; sourceTree = "<group>"; };
-		62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsRetriever.swift; sourceTree = "<group>"; };
 		62E986D03D06D1DE96F5B16B /* CourseInfoTabInfoInstructorsBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoInstructorsBlockView.swift; sourceTree = "<group>"; };
 		62E986D38DE1E4890415F9F7 /* StreakActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakActivityView.swift; sourceTree = "<group>"; };
 		62E986DB2768602666465180 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -3575,10 +3569,7 @@
 			isa = PBXGroup;
 			children = (
 				62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */,
-				62E986C77C97CA8353D93E25 /* AchievementsRetriever.swift */,
-				2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */,
-				2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */,
-				2C22043520E2A0860060117A /* ProfileAchievementsContentView.xib */,
+				2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */,
 				2CA4CF6D242A13E4008BC4E8 /* AchievementAlert */,
 				2CA4CF6E242A13F3008BC4E8 /* List */,
 			);
@@ -6978,7 +6969,6 @@
 				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepikVideoPlayerViewController.xib in Resources */,
-				2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */,
 				2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */,
@@ -7688,7 +7678,6 @@
 				2C87A7AB2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
-				2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				2C5E90842333DF2100288BE3 /* CodeLanguageSuggestionsService.swift in Sources */,
@@ -7848,8 +7837,8 @@
 				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */,
 				62E98B94B2E3FE4ABB80AE41 /* ProfileHeaderInfoView.swift in Sources */,
-				2CE8390E20C8096400FE3672 /* ProfileAchievementsPresenter.swift in Sources */,
 				2C4AD01B23E305FA0049B7B0 /* DiscussionThreadsPersistenceService.swift in Sources */,
+				2CADFEF424C1325F00008C65 /* AchievementProgressData.swift in Sources */,
 				62E983C7E7B1194D9C809522 /* ProfileInfoPresenter.swift in Sources */,
 				62E983397736699787D8DD35 /* UIView+FromNib.swift in Sources */,
 				2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */,
@@ -7869,7 +7858,6 @@
 				62E986991E9352C3266CAE49 /* AchievementProgress.swift in Sources */,
 				62E98C73672CAA20DEB33CAC /* AchievementsAPI.swift in Sources */,
 				62E98E72EB42F2A772BF9760 /* AchievementProgressesAPI.swift in Sources */,
-				62E98A973A47105C195530CD /* AchievementsRetriever.swift in Sources */,
 				62E98622F3B03F7282DC06D8 /* AchievementDescription.swift in Sources */,
 				62E98381EC6AD8DD7613C32D /* AchievementsListViewController.swift in Sources */,
 				2C5E90822333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift in Sources */,
