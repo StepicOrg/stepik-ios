@@ -84,17 +84,9 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
 
         let injections: [ContentProcessingInjection] = [
-            MathJaxInjection(),
-            CommonStylesInjection(),
+            CourseInfoStylesInjection(),
             MetaViewportInjection(),
-            WebkitImagesCalloutDisableInjection(),
-            CustomFontSizeInjection(
-                bodyFontSize: 11,
-                h1FontSize: 19,
-                h2FontSize: 16,
-                h3FontSize: 13,
-                blockquoteFontSize: 15
-            )
+            WebkitImagesCalloutDisableInjection()
         ]
 
         let contentProcessor = ContentProcessor(

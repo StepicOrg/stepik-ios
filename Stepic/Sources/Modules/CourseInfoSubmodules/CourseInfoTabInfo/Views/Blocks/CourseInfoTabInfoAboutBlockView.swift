@@ -14,7 +14,7 @@ extension CourseInfoTabInfoAboutBlockView {
 
         let contentTextViewInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
         let contentTextViewFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let contentTextViewTextColor = UIColor.stepikSecondaryText
+        let contentTextViewTextColor = UIColor.stepikSystemSecondaryText
         let contentTextViewLineSpacing: CGFloat = 2.6
 
         let backgroundColor = UIColor.stepikBackground
