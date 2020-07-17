@@ -155,7 +155,7 @@ enum DeepLinkRoute {
         }
 
         private var pattern: String {
-            let stepik = #"https:\/\/stepik.org\/"#
+            let stepik = #"(?:http|https):\/\/stepik.org\/"#
             let course = #"(?:course\/|course\/[a-zа-я-]+|)(\d+)\/?"#
             let lesson = #"(?:lesson\/|lesson\/[a-zа-я-]+)(\d+)\/?"#
             let queryComponents = "(?:(?=[?])[a-zA-Zа-яА-Я0-9=?&._-]+)?"
