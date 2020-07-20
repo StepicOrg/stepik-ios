@@ -3,6 +3,7 @@ import UIKit
 protocol NewProfilePresenterProtocol {
     func presentProfile(response: NewProfile.ProfileLoad.Response)
     func presentNavigationControls(response: NewProfile.NavigationControlsPresentation.Response)
+    func presentSubmoduleEmptyState(response: NewProfile.SubmoduleEmptyStatePresentation.Response)
     func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response)
     func presentProfileSharing(response: NewProfile.ProfileShareAction.Response)
     func presentProfileEditing(response: NewProfile.ProfileEditAction.Response)
@@ -35,6 +36,10 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
                 isShareProfileAvailable: response.shouldPresentShareProfile
             )
         )
+    }
+
+    func presentSubmoduleEmptyState(response: NewProfile.SubmoduleEmptyStatePresentation.Response) {
+        self.viewController?.displaySubmoduleEmptyState(viewModel: .init(module: response.module))
     }
 
     func presentAuthorization(response: NewProfile.AuthorizationPresentation.Response) {

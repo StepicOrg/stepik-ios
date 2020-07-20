@@ -3,6 +3,7 @@ import UIKit
 protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel)
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
+    func displaySubmoduleEmptyState(viewModel: NewProfile.SubmoduleEmptyStatePresentation.ViewModel)
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel)
     func displayProfileSharing(viewModel: NewProfile.ProfileShareAction.ViewModel)
     func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel)
@@ -165,7 +166,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
             self.refreshUserActivityState()
             self.refreshAchievementsState()
-            self.refreshCertificatesState()
+
+            let shouldShowCertificates = self.currentCertificatesState != .hidden
+            self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
 
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
             self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
@@ -316,29 +319,54 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     // MARK: Certificates
 
-    private func refreshCertificatesState() {
-        guard self.getSubmodule(type: NewProfile.Submodule.certificates) == nil else {
-            return
-        }
+    private enum CertificatesState {
+        case visible
+        case hidden
+    }
 
-        let headerView = NewProfileBlockHeaderView()
-        headerView.titleText = NSLocalizedString("NewProfileBlockTitleCertificates", comment: "")
-        headerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.doCertificatesListPresentation(request: .init())
-        }
+    private var currentCertificatesState = CertificatesState.visible
 
-        let containerView = NewProfileBlockContainerView(
-            headerView: headerView,
-            contentView: nil
-        )
+    private func refreshCertificatesState(_ state: CertificatesState) {
+        switch state {
+        case .visible:
+            guard self.getSubmodule(type: NewProfile.Submodule.certificates) == nil else {
+                return
+            }
 
-        self.registerSubmodule(
-            .init(
-                viewController: nil,
-                view: containerView,
-                type: NewProfile.Submodule.certificates
+            let assembly = NewProfileCertificatesAssembly(
+                output: self.interactor as? NewProfileCertificatesOutputProtocol
             )
-        )
+            let viewController = assembly.makeModule()
+
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = NSLocalizedString("NewProfileBlockTitleCertificates", comment: "")
+            headerView.onShowAllButtonClick = { [weak self] in
+                self?.interactor.doCertificatesListPresentation(request: .init())
+            }
+
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: viewController.view
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.certificates
+                )
+            )
+
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.certificates.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.certificates) {
+                self.removeSubmodule(submodule)
+            }
+        }
     }
 
     // MARK: Profile Details
@@ -438,6 +466,16 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
 
         self.navigationItem.leftBarButtonItems = leftBarButtonItems
         self.navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+
+    func displaySubmoduleEmptyState(viewModel: NewProfile.SubmoduleEmptyStatePresentation.ViewModel) {
+        switch viewModel.module {
+        case .certificates:
+            self.currentCertificatesState = .hidden
+            self.refreshCertificatesState(self.currentCertificatesState)
+        default:
+            assertionFailure("Unsupported module type")
+        }
     }
 
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel) {

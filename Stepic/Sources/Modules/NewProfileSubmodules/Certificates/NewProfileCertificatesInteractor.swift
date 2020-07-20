@@ -6,6 +6,8 @@ protocol NewProfileCertificatesInteractorProtocol {
 }
 
 final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorProtocol {
+    weak var moduleOutput: NewProfileCertificatesOutputProtocol?
+
     private let presenter: NewProfileCertificatesPresenterProtocol
     private let provider: NewProfileCertificatesProviderProtocol
 
@@ -50,7 +52,7 @@ final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorPr
                     case .success:
                         if strongSelf.currentCertificatesIDs.isEmpty {
                             if strongSelf.isOnline && strongSelf.didLoadFromCache {
-                                //self.moduleOutput?.presentEmptyState(sourceModule: self)
+                                strongSelf.moduleOutput?.handleEmptyCertificatesState()
                             }
                         } else {
                             strongSelf.presenter.presentCertificates(response: response)

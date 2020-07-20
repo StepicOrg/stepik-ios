@@ -487,6 +487,7 @@
 		2C4DDADF242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */; };
 		2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */; };
 		2C4F3B0A2432693D002ADB53 /* jquery-3.4.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */; };
+		2C52310924C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */; };
 		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
 		2C5418CA24A28ECF00B2DCE2 /* MetricsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */; };
 		2C5418CC24A2903700B2DCE2 /* StepikMetricsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */; };
@@ -1827,6 +1828,7 @@
 		2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPHeader+Stepik.swift"; sourceTree = "<group>"; };
 		2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "kotlin-playground-1.21.1.min.js"; sourceTree = "<group>"; };
 		2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.4.1.min.js"; sourceTree = "<group>"; };
+		2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesOutputProtocol.swift; sourceTree = "<group>"; };
 		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
 		2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsAPI.swift; sourceTree = "<group>"; };
 		2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikMetricsNetworkService.swift; sourceTree = "<group>"; };
@@ -2741,6 +2743,7 @@
 				9E4F5E8235E0245E5D5CB6BC /* NewProfileCertificatesProvider.swift */,
 				D43830C1F0B97682B9CC38DB /* NewProfileCertificatesView.swift */,
 				BC88362446F322F9B299287F /* NewProfileCertificatesViewController.swift */,
+				2C52310A24C5807700DC1474 /* InputOutput */,
 			);
 			path = Certificates;
 			sourceTree = "<group>";
@@ -2982,6 +2985,14 @@
 				2C4BBF10203DC668000A4250 /* plyr.js */,
 			);
 			path = Plyr;
+			sourceTree = "<group>";
+		};
+		2C52310A24C5807700DC1474 /* InputOutput */ = {
+			isa = PBXGroup;
+			children = (
+				2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */,
+			);
+			path = InputOutput;
 			sourceTree = "<group>";
 		};
 		2C546C1623DA0E6100352F27 /* ExtensionsTests */ = {
@@ -7557,6 +7568,7 @@
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
 				081A14FF20D963090016364E /* AmplitudeAnalyticsEvents.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* UIButtonExtensions.swift in Sources */,
+				2C52310924C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift in Sources */,
 				2C04BA4E24072ED900D74D4B /* StringSubmissionFeedback.swift in Sources */,
 				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
