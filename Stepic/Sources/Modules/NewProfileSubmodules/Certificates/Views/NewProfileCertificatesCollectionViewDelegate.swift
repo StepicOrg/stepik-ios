@@ -1,6 +1,8 @@
 import UIKit
 
 final class NewProfileCertificatesCollectionViewDelegate: NSObject, UICollectionViewDelegate {
+    weak var delegate: NewProfileCertificatesViewControllerDelegate?
+
     var viewModels = [NewProfileCertificatesCertificateViewModel]()
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -12,8 +14,6 @@ final class NewProfileCertificatesCollectionViewDelegate: NSObject, UICollection
             return
         }
 
-        print(#function)
-        print(viewModel)
-        //self.delegate?.itemDidSelected(viewModel: viewModel)
+        self.delegate?.itemDidSelected(viewModel: viewModel)
     }
 }

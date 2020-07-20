@@ -18,7 +18,10 @@ final class NewProfileCertificatesAssembly: Assembly {
         )
         let presenter = NewProfileCertificatesPresenter()
         let interactor = NewProfileCertificatesInteractor(presenter: presenter, provider: provider)
-        let viewController = NewProfileCertificatesViewController(interactor: interactor)
+        let viewController = NewProfileCertificatesViewController(
+            interactor: interactor,
+            analytics: StepikAnalytics.shared
+        )
 
         presenter.viewController = viewController
         self.moduleInput = interactor

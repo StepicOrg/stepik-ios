@@ -4,8 +4,13 @@ protocol NewProfileCertificatesViewControllerProtocol: AnyObject {
     func displayCertificates(viewModel: NewProfileCertificates.CertificatesLoad.ViewModel)
 }
 
+protocol NewProfileCertificatesViewControllerDelegate: AnyObject {
+    func itemDidSelected(viewModel: NewProfileCertificatesCertificateViewModel)
+}
+
 final class NewProfileCertificatesViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: NewProfileCertificatesInteractorProtocol
+    private let analytics: StepikAnalytics
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var newProfileCertificatesView: NewProfileCertificatesView? { self.view as? NewProfileCertificatesView }
@@ -19,11 +24,16 @@ final class NewProfileCertificatesViewController: UIViewController, ControllerWi
 
     init(
         interactor: NewProfileCertificatesInteractorProtocol,
+        analytics: StepikAnalytics,
         initialState: NewProfileCertificates.ViewControllerState = .loading
     ) {
         self.interactor = interactor
+        self.analytics = analytics
         self.state = initialState
+
         super.init(nibName: nil, bundle: nil)
+
+        self.collectionViewDelegate.delegate = self
     }
 
     @available(*, unavailable)
@@ -92,5 +102,25 @@ final class NewProfileCertificatesViewController: UIViewController, ControllerWi
 extension NewProfileCertificatesViewController: NewProfileCertificatesViewControllerProtocol {
     func displayCertificates(viewModel: NewProfileCertificates.CertificatesLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+}
+
+extension NewProfileCertificatesViewController: NewProfileCertificatesViewControllerDelegate {
+    func itemDidSelected(viewModel: NewProfileCertificatesCertificateViewModel) {
+        guard let certificateURL = viewModel.certificateURL else {
+            return
+        }
+
+        self.analytics.send(
+            .certificateOpened(grade: viewModel.certificateGrade ?? 0, courseName: viewModel.courseTitle)
+        )
+
+        WebControllerManager.shared.presentWebControllerWithURL(
+            certificateURL,
+            inController: self,
+            withKey: .certificate,
+            allowsSafari: true,
+            backButtonStyle: .close
+        )
     }
 }

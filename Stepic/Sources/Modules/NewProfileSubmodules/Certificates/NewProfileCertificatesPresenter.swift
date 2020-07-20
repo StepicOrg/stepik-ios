@@ -30,10 +30,16 @@ final class NewProfileCertificatesPresenter: NewProfileCertificatesPresenterProt
 
             let certificateGrade = certificate.isWithScore ? certificate.grade : nil
 
+            var certificateURL: URL?
+            if let certificateURLString = certificate.urlString {
+                certificateURL = URL(string: certificateURLString)
+            }
+
             return .init(
                 courseTitle: course.title,
                 courseImageURL: courseImageURL,
                 certificateGrade: certificateGrade,
+                certificateURL: certificateURL,
                 certificateType: certificate.type
             )
         }
