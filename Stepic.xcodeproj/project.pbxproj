@@ -1715,6 +1715,7 @@
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
 		2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesNetworkService.swift; sourceTree = "<group>"; };
+		2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_certificates_v55.xcdatamodel; sourceTree = "<group>"; };
 		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPReceiptValidationService.swift; sourceTree = "<group>"; };
@@ -8942,6 +8943,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */,
 				2C32664224B00BEF0013C473 /* Model_course_purchases_v54.xcdatamodel */,
 				2C84D42B24AFFCD300A77EF1 /* Model_new_profile_v53.xcdatamodel */,
 				2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */,
@@ -8998,7 +9000,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C32664224B00BEF0013C473 /* Model_course_purchases_v54.xcdatamodel */;
+			currentVersion = 2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

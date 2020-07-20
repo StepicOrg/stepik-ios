@@ -19,6 +19,7 @@ extension Certificate {
     @NSManaged var managedGrade: NSNumber?
     @NSManaged var managedURL: String?
     @NSManaged var managedisPublic: NSNumber?
+    @NSManaged var managedIsWithScore: NSNumber?
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
@@ -115,6 +116,15 @@ extension Certificate {
         }
         set(value) {
             self.managedisPublic = value as NSNumber?
+        }
+    }
+
+    var isWithScore: Bool {
+        get {
+            self.managedIsWithScore?.boolValue ?? false
+        }
+        set {
+            self.managedIsWithScore = NSNumber(value: newValue)
         }
     }
 
