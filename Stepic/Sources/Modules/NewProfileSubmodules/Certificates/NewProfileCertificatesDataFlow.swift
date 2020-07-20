@@ -9,6 +9,16 @@ enum NewProfileCertificates {
             let result: Result<[Certificate], Error>
         }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: - States
+
+    enum ViewControllerState {
+        case loading
+        case error
+        case result(data: NewProfileCertificatesViewModel)
     }
 }

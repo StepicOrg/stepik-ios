@@ -487,6 +487,12 @@
 		2C4DDADF242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */; };
 		2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */; };
 		2C4F3B0A2432693D002ADB53 /* jquery-3.4.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */; };
+		2C50363B24C58A43001FAE04 /* NewProfileCertificatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50363A24C58A43001FAE04 /* NewProfileCertificatesViewModel.swift */; };
+		2C50363E24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50363D24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift */; };
+		2C50364024C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50363F24C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift */; };
+		2C50364224C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */; };
+		2C50364524C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50364424C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift */; };
+		2C50364724C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50364624C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift */; };
 		2C52310924C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */; };
 		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
 		2C5418CA24A28ECF00B2DCE2 /* MetricsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */; };
@@ -1828,6 +1834,12 @@
 		2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPHeader+Stepik.swift"; sourceTree = "<group>"; };
 		2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "kotlin-playground-1.21.1.min.js"; sourceTree = "<group>"; };
 		2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.4.1.min.js"; sourceTree = "<group>"; };
+		2C50363A24C58A43001FAE04 /* NewProfileCertificatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesViewModel.swift; sourceTree = "<group>"; };
+		2C50363D24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesHorizontalFlowLayout.swift; sourceTree = "<group>"; };
+		2C50363F24C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCertificateCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCertificateWidgetView.swift; sourceTree = "<group>"; };
+		2C50364424C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		2C50364624C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesOutputProtocol.swift; sourceTree = "<group>"; };
 		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
 		2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsAPI.swift; sourceTree = "<group>"; };
@@ -2741,9 +2753,10 @@
 				75A30D817521E42507A608B3 /* NewProfileCertificatesInteractor.swift */,
 				0BCAF185A5BB14E3BFB36948 /* NewProfileCertificatesPresenter.swift */,
 				9E4F5E8235E0245E5D5CB6BC /* NewProfileCertificatesProvider.swift */,
-				D43830C1F0B97682B9CC38DB /* NewProfileCertificatesView.swift */,
 				BC88362446F322F9B299287F /* NewProfileCertificatesViewController.swift */,
+				2C50363A24C58A43001FAE04 /* NewProfileCertificatesViewModel.swift */,
 				2C52310A24C5807700DC1474 /* InputOutput */,
+				2C50363C24C59349001FAE04 /* Views */,
 			);
 			path = Certificates;
 			sourceTree = "<group>";
@@ -2985,6 +2998,19 @@
 				2C4BBF10203DC668000A4250 /* plyr.js */,
 			);
 			path = Plyr;
+			sourceTree = "<group>";
+		};
+		2C50363C24C59349001FAE04 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C50363F24C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift */,
+				2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */,
+				2C50364424C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift */,
+				2C50364624C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift */,
+				2C50363D24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift */,
+				D43830C1F0B97682B9CC38DB /* NewProfileCertificatesView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2C52310A24C5807700DC1474 /* InputOutput */ = {
@@ -7423,6 +7449,7 @@
 				08CBA34B1F57734900302154 /* ProfileViewController.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
+				2C50364524C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift in Sources */,
 				08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
@@ -7446,6 +7473,7 @@
 				2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
+				2C50364024C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift in Sources */,
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
@@ -7520,6 +7548,7 @@
 				080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
 				2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */,
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
+				2C50363B24C58A43001FAE04 /* NewProfileCertificatesViewModel.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */,
@@ -7590,6 +7619,7 @@
 				080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				0846B1071EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */,
+				2C50363E24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift in Sources */,
 				2C22042C20E277F70060117A /* Skeletonable+UIView.swift in Sources */,
 				082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
@@ -7763,6 +7793,7 @@
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */,
 				082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */,
+				2C50364224C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift in Sources */,
 				2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
@@ -8314,6 +8345,7 @@
 				2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */,
 				62E98F91C1E401E5C9855DB1 /* CodeToolbarView.swift in Sources */,
 				62E9817AE10960C05029CA37 /* CodeQuizFullscreenAssembly.swift in Sources */,
+				2C50364724C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift in Sources */,
 				62E983AF85B0A9D1D21797DD /* CodeQuizFullscreenDataFlow.swift in Sources */,
 				62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */,
 				62E98AF7A4ADB3C60BCD2046 /* CodeQuizFullscreenOutputProtocol.swift in Sources */,
