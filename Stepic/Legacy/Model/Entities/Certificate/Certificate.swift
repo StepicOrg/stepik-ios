@@ -36,19 +36,17 @@ final class Certificate: NSManagedObject, IDFetchable {
     }
 
     static func fetch(_ ids: [Int], user userId: Int) -> [Certificate] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
+        let request: NSFetchRequest<Certificate> = Certificate.fetchRequest
 
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
+        let idCompoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
         let userPredicate = NSPredicate(format: "managedUserId == %@", userId as NSNumber)
 
-        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, userPredicate])
+        request.predicate = NSCompoundPredicate(type: .and, subpredicates: [idCompoundPredicate, userPredicate])
 
         do {
             let results = try CoreDataHelper.shared.context.fetch(request)
-            return results as! [Certificate]
+            return results
         } catch {
             return []
         }

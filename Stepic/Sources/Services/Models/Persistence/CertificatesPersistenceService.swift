@@ -3,6 +3,7 @@ import Foundation
 import PromiseKit
 
 protocol CertificatesPersistenceServiceProtocol: AnyObject {
+    func fetch(ids: [Certificate.IdType], userID: User.IdType) -> Guarantee<[Certificate]>
     func deleteAll() -> Promise<Void>
 }
 
@@ -11,6 +12,15 @@ final class CertificatesPersistenceService: CertificatesPersistenceServiceProtoc
 
     init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
         self.managedObjectContext = managedObjectContext
+    }
+
+    func fetch(ids: [Certificate.IdType], userID: User.IdType) -> Guarantee<[Certificate]> {
+        Guarantee { seal in
+            self.managedObjectContext.performAndWait {
+                let certificates = Certificate.fetch(ids, user: userID)
+                seal(certificates)
+            }
+        }
     }
 
     func deleteAll() -> Promise<Void> {

@@ -386,6 +386,7 @@
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
 		2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */; };
+		2C0A7D4F24C535D2000A66B5 /* CertificatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */; };
 		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
 		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
 		2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */; };
@@ -1713,6 +1714,7 @@
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
+		2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesNetworkService.swift; sourceTree = "<group>"; };
 		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPReceiptValidationService.swift; sourceTree = "<group>"; };
@@ -5686,6 +5688,7 @@
 				2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
+				2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
 				2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */,
@@ -7998,6 +8001,7 @@
 				62E98793982B530188C654BE /* UsersNetworkService.swift in Sources */,
 				2C16A88F248F98C9001E5CBD /* UserCoursesPersistenceService.swift in Sources */,
 				62E981F21F0275F8547E0658 /* ProgressesPersistenceService.swift in Sources */,
+				2C0A7D4F24C535D2000A66B5 /* CertificatesNetworkService.swift in Sources */,
 				62E984F71594AA4CD19696EC /* CoursesPersistenceService.swift in Sources */,
 				62E98E58E7BC6B6AF4881084 /* CourseReviewSummariesPersistenceService.swift in Sources */,
 				2CF10C8D238426DC00F8CC95 /* StepSourcesAPI.swift in Sources */,
