@@ -3,7 +3,7 @@ import PromiseKit
 
 protocol NewProfileCertificatesProviderProtocol {
     func fetchRemote(userID: User.IdType) -> Promise<[Certificate]>
-    func fetchCached(userID: User.IdType) -> Guarantee<[Certificate]>
+    func fetchCached(userID: User.IdType) -> Promise<[Certificate]>
 }
 
 final class NewProfileCertificatesProvider: NewProfileCertificatesProviderProtocol {
@@ -40,8 +40,12 @@ final class NewProfileCertificatesProvider: NewProfileCertificatesProviderProtoc
         }
     }
 
-    func fetchCached(userID: User.IdType) -> Guarantee<[Certificate]> {
-        self.certificatesPersistenceService.fetch(userID: userID)
+    func fetchCached(userID: User.IdType) -> Promise<[Certificate]> {
+        Promise { seal in
+            self.certificatesPersistenceService.fetch(userID: userID).done { certificates in
+                seal.fulfill(certificates)
+            }
+        }
     }
 
     private func fetchCourses(for certificates: [Certificate]) -> Promise<Void> {

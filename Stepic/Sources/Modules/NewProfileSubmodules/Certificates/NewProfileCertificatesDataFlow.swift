@@ -5,7 +5,9 @@ enum NewProfileCertificates {
     enum CertificatesLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let result: Result<[Certificate], Error>
+        }
 
         struct ViewModel {}
     }
