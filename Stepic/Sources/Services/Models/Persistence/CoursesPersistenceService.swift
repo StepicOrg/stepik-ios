@@ -8,8 +8,14 @@ protocol CoursesPersistenceServiceProtocol: AnyObject {
     func fetchAll() -> Guarantee<[Course]>
 }
 
+extension CoursesPersistenceServiceProtocol {
+    func fetch(ids: [Course.IdType]) -> Promise<([Course], Meta)> {
+        self.fetch(ids: ids, page: 1)
+    }
+}
+
 final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
-    func fetch(ids: [Course.IdType], page: Int = 1) -> Promise<([Course], Meta)> {
+    func fetch(ids: [Course.IdType], page: Int) -> Promise<([Course], Meta)> {
         Promise { seal in
             Course.fetchAsync(ids: ids).done { courses in
                 seal.fulfill((courses, Meta.oneAndOnlyPage))

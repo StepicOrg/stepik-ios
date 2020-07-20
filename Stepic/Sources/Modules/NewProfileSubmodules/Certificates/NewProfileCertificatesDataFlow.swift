@@ -1,7 +1,8 @@
 import Foundation
 
 enum NewProfileCertificates {
-    enum SomeAction {
+    /// Show certificates
+    enum CertificatesLoad {
         struct Request {}
 
         struct Response {}

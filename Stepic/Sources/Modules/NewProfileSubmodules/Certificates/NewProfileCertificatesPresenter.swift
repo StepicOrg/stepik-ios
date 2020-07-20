@@ -1,11 +1,11 @@
 import UIKit
 
 protocol NewProfileCertificatesPresenterProtocol {
-    func presentSomeActionResult(response: NewProfileCertificates.SomeAction.Response)
+    func presentCertificates(response: NewProfileCertificates.CertificatesLoad.Response)
 }
 
 final class NewProfileCertificatesPresenter: NewProfileCertificatesPresenterProtocol {
     weak var viewController: NewProfileCertificatesViewControllerProtocol?
 
-    func presentSomeActionResult(response: NewProfileCertificates.SomeAction.Response) {}
+    func presentCertificates(response: NewProfileCertificates.CertificatesLoad.Response) {}
 }

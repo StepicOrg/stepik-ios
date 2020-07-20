@@ -26,6 +26,10 @@ extension Certificate {
         NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.shared.context)!
     }
 
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+
     static var fetchRequest: NSFetchRequest<Certificate> {
         NSFetchRequest<Certificate>(entityName: "Certificate")
     }

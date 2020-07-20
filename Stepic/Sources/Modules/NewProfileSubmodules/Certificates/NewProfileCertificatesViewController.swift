@@ -1,7 +1,7 @@
 import UIKit
 
 protocol NewProfileCertificatesViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: NewProfileCertificates.SomeAction.ViewModel)
+    func displayCertificates(viewModel: NewProfileCertificates.CertificatesLoad.ViewModel)
 }
 
 final class NewProfileCertificatesViewController: UIViewController {
@@ -24,5 +24,5 @@ final class NewProfileCertificatesViewController: UIViewController {
 }
 
 extension NewProfileCertificatesViewController: NewProfileCertificatesViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewProfileCertificates.SomeAction.ViewModel) {}
+    func displayCertificates(viewModel: NewProfileCertificates.CertificatesLoad.ViewModel) {}
 }

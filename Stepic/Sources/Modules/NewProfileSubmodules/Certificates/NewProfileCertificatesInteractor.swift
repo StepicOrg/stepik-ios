@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol NewProfileCertificatesInteractorProtocol {
-    func doSomeAction(request: NewProfileCertificates.SomeAction.Request)
+    func doCertificatesLoad(request: NewProfileCertificates.CertificatesLoad.Request)
 }
 
 final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorProtocol {
@@ -17,7 +17,7 @@ final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorPr
         self.provider = provider
     }
 
-    func doSomeAction(request: NewProfileCertificates.SomeAction.Request) {}
+    func doCertificatesLoad(request: NewProfileCertificates.CertificatesLoad.Request) {}
 
     enum Error: Swift.Error {
         case something
