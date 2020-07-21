@@ -17,7 +17,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     }
 
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
-        .streakNotifications, .userActivity, .achievements, .certificates, .details
+        .streakNotifications, .createdCourses, .userActivity, .achievements, .certificates, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -161,6 +161,16 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
+            let shouldShowCreatedCourses: Bool = {
+                switch self.currentCreatedCoursesState {
+                case .visible:
+                    return true
+                case .hidden:
+                    return false
+                }
+            }()
+            self.refreshCreatedCoursesState(shouldShowCreatedCourses ? .visible(teacherID: viewModel.userID) : .hidden)
+
             let shouldShowStreakNotifications = viewModel.isCurrentUserProfile
             self.refreshStreakNotificationsState(shouldShowStreakNotifications ? .visible : .hidden)
 
@@ -241,6 +251,64 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             }
         case .hidden:
             if let submodule = self.getSubmodule(type: NewProfile.Submodule.streakNotifications) {
+                self.removeSubmodule(submodule)
+            }
+        }
+    }
+
+    // MARK: Created Courses
+
+    private enum CreatedCoursesState {
+        case visible(teacherID: User.IdType)
+        case hidden
+    }
+
+    private var currentCreatedCoursesState = CreatedCoursesState.visible(teacherID: 0)
+
+    private func refreshCreatedCoursesState(_ state: CreatedCoursesState) {
+        switch state {
+        case .visible(let teacherID):
+            guard self.getSubmodule(type: NewProfile.Submodule.createdCourses) == nil else {
+                return
+            }
+
+            let assembly = NewProfileCreatedCoursesAssembly(
+                output: self.interactor as? NewProfileCreatedCoursesOutputProtocol
+            )
+            let viewController = assembly.makeModule()
+
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = NSLocalizedString("NewProfileBlockTitleCreatedCourses", comment: "")
+            headerView.onShowAllButtonClick = { [weak self] in
+                let assembly = FullscreenCourseListAssembly(courseListType: TeacherCourseListType(teacherID: teacherID))
+                self?.push(module: assembly.makeModule())
+            }
+
+            let appearance = NewProfileBlockContainerView.Appearance(
+                backgroundColor: .clear,
+                contentViewInsets: .zero
+            )
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: viewController.view,
+                appearance: appearance
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.createdCourses
+                )
+            )
+
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.createdCourses.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.createdCourses) {
                 self.removeSubmodule(submodule)
             }
         }
@@ -470,6 +538,9 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
 
     func displaySubmoduleEmptyState(viewModel: NewProfile.SubmoduleEmptyStatePresentation.ViewModel) {
         switch viewModel.module {
+        case .createdCourses:
+            self.currentCreatedCoursesState = .hidden
+            self.refreshCreatedCoursesState(self.currentCreatedCoursesState)
         case .certificates:
             self.currentCertificatesState = .hidden
             self.refreshCertificatesState(self.currentCertificatesState)

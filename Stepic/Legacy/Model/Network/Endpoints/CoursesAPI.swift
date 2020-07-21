@@ -45,6 +45,7 @@ final class CoursesAPI: APIEndpoint {
 
     func retrieve(
         tag: Int? = nil,
+        teacher: Int? = nil,
         featured: Bool? = nil,
         enrolled: Bool? = nil,
         excludeEnded: Bool? = nil,
@@ -93,6 +94,10 @@ final class CoursesAPI: APIEndpoint {
             params["tag"] = tag
         }
 
+        if let teacher = teacher {
+            params["teacher"] = teacher
+        }
+
         params["page"] = page
 
         return self.retrieve.requestWithFetching(
@@ -134,7 +139,8 @@ final class CoursesAPI: APIEndpoint {
     }
 
     enum Order: String {
-        case activityDescending = "-activity"
+        case activityDesc = "-activity"
+        case popularityDesc = "-popularity"
     }
 }
 

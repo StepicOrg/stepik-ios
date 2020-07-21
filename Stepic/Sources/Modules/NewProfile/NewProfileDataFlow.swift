@@ -5,6 +5,7 @@ enum NewProfile {
 
     enum Submodule: String, UniqueIdentifiable {
         case streakNotifications
+        case createdCourses
         case userActivity
         case achievements
         case certificates
