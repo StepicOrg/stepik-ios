@@ -452,6 +452,18 @@ final class HorizontalCourseListView: CourseListView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        if dataSource.collectionView(self.collectionView, numberOfItemsInSection: 0) == 1 {
+            self.horizontalCourseFlowLayout.rowsCount = 1
+        } else {
+            self.horizontalCourseFlowLayout.rowsCount = self.rowsCount
+        }
+
+        super.updateCollectionViewData(delegate: delegate, dataSource: dataSource)
+
+        self.invalidateIntrinsicContentSize()
+    }
+
     override func calculateItemSize() -> CGSize {
         if self.isAdaptiveColumnsCount {
             let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
