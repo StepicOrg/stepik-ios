@@ -4,7 +4,7 @@ import UIKit
 extension NewProfileCertificatesView {
     struct Appearance {
         let layoutMinimumInteritemSpacing: CGFloat = 16
-        let layoutItemHeight: CGFloat = 104
+        let layoutItemHeight: CGFloat = 116
         let layoutMinimumItemWidth: CGFloat = 144
         let layoutNextPageWidth: CGFloat = 12.0
 

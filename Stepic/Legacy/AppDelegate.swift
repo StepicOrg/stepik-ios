@@ -125,6 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IAPService.shared.startObservingPayments()
 
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DeepLinkRoutingService().route(DeepLinkRoute.profile(userID: 36845214))
+        }
+
         return true
     }
 

@@ -366,6 +366,7 @@
 		2C01D3AA22DDB7EA00C84CEE /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */; };
 		2C01D3AC22DDB98900C84CEE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */; };
 		2C03F042247690BA00C63FE6 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03F041247690BA00C63FE6 /* Mutex.swift */; };
+		2C04846224C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */; };
 		2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */; };
 		2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */; };
 		2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */; };
@@ -1698,6 +1699,7 @@
 		2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C03F041247690BA00C63FE6 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
+		2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCertificateWidgetProgressView.swift; sourceTree = "<group>"; };
 		2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntity.swift; sourceTree = "<group>"; };
 		2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntity.swift; sourceTree = "<group>"; };
 		2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_attempts_caching.xcdatamodel; sourceTree = "<group>"; };
@@ -2798,6 +2800,15 @@
 			path = HomeSubmodules;
 			sourceTree = "<group>";
 		};
+		2C04846324C663C900B3DAC8 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */,
+				2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
 		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
 			isa = PBXGroup;
 			children = (
@@ -3004,11 +3015,11 @@
 			isa = PBXGroup;
 			children = (
 				2C50363F24C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift */,
-				2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */,
 				2C50364424C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift */,
 				2C50364624C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift */,
 				2C50363D24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift */,
 				D43830C1F0B97682B9CC38DB /* NewProfileCertificatesView.swift */,
+				2C04846324C663C900B3DAC8 /* Widget */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -7473,6 +7484,7 @@
 				2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
+				2C04846224C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift in Sources */,
 				2C50364024C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift in Sources */,
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */,

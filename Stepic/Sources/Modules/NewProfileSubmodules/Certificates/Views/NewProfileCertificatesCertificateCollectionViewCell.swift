@@ -10,6 +10,8 @@ extension NewProfileCertificatesCertificateCollectionViewCell {
 final class NewProfileCertificatesCertificateCollectionViewCell: UICollectionViewCell, Reusable {
     private lazy var widgetView = NewProfileCertificatesCertificateWidgetView()
 
+    private var certificateType = Certificate.CertificateType.regular
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -24,15 +26,29 @@ final class NewProfileCertificatesCertificateCollectionViewCell: UICollectionVie
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        self.layer.cornerRadius = Appearance.cornerRadius
-        self.layer.borderWidth = Appearance.borderWidth
-        self.layer.borderColor = UIColor.stepikGreen.cgColor
-        self.layer.masksToBounds = true
+        self.updateBorder()
     }
 
     func configure(viewModel: NewProfileCertificatesCertificateViewModel) {
+        self.certificateType = viewModel.certificateType
         self.widgetView.configure(viewModel: viewModel)
+        self.updateBorder()
+    }
+
+    private func updateBorder() {
+        let borderColor: UIColor = {
+            switch self.certificateType {
+            case .distinction:
+                return .stepikOrange
+            case .regular:
+                return .stepikGreen
+            }
+        }()
+
+        self.layer.cornerRadius = Appearance.cornerRadius
+        self.layer.borderWidth = Appearance.borderWidth
+        self.layer.borderColor = borderColor.cgColor
+        self.layer.masksToBounds = true
     }
 }
 
