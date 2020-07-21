@@ -24,6 +24,17 @@ final class NewProfileCertificatesView: UIView {
         return layout
     }()
 
+    private var columnsCount: Int {
+        let currentDeviceInfo = DeviceInfo.current
+        let (_, interfaceOrientation) = currentDeviceInfo.orientation
+
+        if interfaceOrientation.isPortrait {
+            return currentDeviceInfo.isPad ? 3 : 2
+        } else {
+            return currentDeviceInfo.isPad ? 4 : 3
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         self.collectionView.collectionViewLayout.collectionViewContentSize
     }
@@ -84,42 +95,11 @@ final class NewProfileCertificatesView: UIView {
     }
 
     private func calculateItemSize() -> CGSize {
-        let layoutItemWidth = self.calculateLayoutItemWidth(
-            minimumColumnWidth: self.appearance.layoutMinimumItemWidth,
-            columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing,
-            containerHorizontalInsets: self.appearance.layoutNextPageWidth
-        )
+        let width = self.bounds.width
+            - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount)
+            - self.appearance.layoutNextPageWidth
+        let layoutItemWidth = (width / CGFloat(self.columnsCount)).rounded(.down)
         return CGSize(width: layoutItemWidth, height: self.appearance.layoutItemHeight)
-    }
-
-    fileprivate func calculateLayoutItemWidth(
-        minimumColumnWidth: CGFloat,
-        columnHorizontalInsets: CGFloat,
-        containerHorizontalInsets: CGFloat
-    ) -> CGFloat {
-        func calculateColumnWidth(columnsCount: Int) -> CGFloat {
-            let totalWidth = self.bounds.width
-                - columnHorizontalInsets * CGFloat(columnsCount)
-                - containerHorizontalInsets
-            return (totalWidth / CGFloat(columnsCount)).rounded(.down)
-        }
-
-        var columnsCount = 0
-        var columnWidth = CGFloat.greatestFiniteMagnitude
-
-        while columnWidth >= minimumColumnWidth {
-            columnsCount += 1
-            columnWidth = calculateColumnWidth(columnsCount: columnsCount)
-        }
-
-        if columnWidth < minimumColumnWidth {
-            columnsCount = max(1, columnsCount - 1)
-            columnWidth = calculateColumnWidth(columnsCount: columnsCount)
-        }
-
-        columnWidth = max(minimumColumnWidth, columnWidth)
-
-        return columnWidth
     }
 }
 
