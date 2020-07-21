@@ -3,6 +3,7 @@ import Foundation
 enum CourseListColorMode {
     case light
     case dark
+    case clear
 
     static var `default`: CourseListColorMode { .light }
 }
@@ -10,7 +11,7 @@ enum CourseListColorMode {
 extension CourseListColorMode {
     var exploreBlockHeaderViewAppearance: ExploreBlockHeaderView.Appearance {
         switch self {
-        case .light:
+        case .light, .clear:
             return .init(
                 titleLabelColor: .stepikPrimaryText,
                 showAllButtonColor: .stepikTertiaryText
@@ -24,23 +25,16 @@ extension CourseListColorMode {
     }
 
     var exploreBlockContainerViewAppearance: ExploreBlockContainerView.Appearance {
-        switch self {
-        case .light:
-            var appearance = ExploreBlockContainerView.Appearance()
-            appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
-            return appearance
-        case .dark:
-            var appearance = ExploreBlockContainerView.Appearance()
-            appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
-            return appearance
-        }
+        var appearance = ExploreBlockContainerView.Appearance()
+        appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
+        return appearance
     }
 
     private var exploreBlockContainerViewBackgroundColor: UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { (traitCollection: UITraitCollection) -> UIColor in
                 switch self {
-                case .light:
+                case .light, .clear:
                     return .stepikBackground
                 case .dark:
                     if traitCollection.userInterfaceStyle == .dark {
@@ -51,7 +45,7 @@ extension CourseListColorMode {
             }
         } else {
             switch self {
-            case .light:
+            case .light, .clear:
                 return .white
             case .dark:
                 return .stepikAccentFixed
@@ -65,7 +59,7 @@ extension CourseListColorMode {
 
     var courseWidgetStatsViewAppearance: CourseWidgetStatsView.Appearance {
         switch self {
-        case .light:
+        case .light, .clear:
             return .init(
                 imagesRenderingBackgroundColor: .stepikAccent,
                 imagesRenderingTintColor: .stepikGreenFixed,
@@ -89,7 +83,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light:
+        case .light, .clear:
             appearance.textColor = .stepikPrimaryText
         case .dark:
             appearance.textColor = .white
@@ -105,7 +99,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light:
+        case .light, .clear:
             appearance.textColor = .stepikSecondaryText
         case .dark:
             appearance.textColor = UIColor.dynamic(
@@ -119,7 +113,7 @@ extension CourseListColorMode {
 
     var courseWidgetBorderColor: UIColor {
         switch self {
-        case .light:
+        case .light, .clear:
             return .dynamic(light: .stepikGrey8Fixed, dark: .stepikSeparator)
         case .dark:
             if #available(iOS 13.0, *) {

@@ -139,6 +139,8 @@ class CourseListView: UIView {
             return self.appearance.lightModeBackgroundColor
         case .dark:
             return self.appearance.darkModeBackgroundColor
+        case .clear:
+            return .clear
         }
     }
 
@@ -185,6 +187,11 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
             self.collectionView.register(
                 DarkCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: DarkCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        case .clear:
+            self.collectionView.register(
+                ClearCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: ClearCourseListCollectionViewCell.defaultReuseIdentifier
             )
         }
 
@@ -508,6 +515,21 @@ private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
 private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame, colorMode: .dark)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class ClearCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .clear)
     }
 
     @available(*, unavailable)

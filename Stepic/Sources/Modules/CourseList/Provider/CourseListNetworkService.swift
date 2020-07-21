@@ -90,7 +90,7 @@ final class PopularCourseListNetworkService: BaseCourseListNetworkService, Cours
         Promise { seal in
             self.coursesAPI.retrieve(
                 isCataloged: true,
-                order: .activityDescending,
+                order: .activityDesc,
                 language: self.type.language.popularCoursesParameter,
                 page: page
             ).done { result in
@@ -114,7 +114,7 @@ final class TagCourseListNetworkService: BaseCourseListNetworkService, CourseLis
         Promise { seal in
             self.coursesAPI.retrieve(
                 tag: self.type.id,
-                order: .activityDescending,
+                order: .activityDesc,
                 language: self.type.language.languageString,
                 page: page
             ).done { result in
@@ -177,6 +177,29 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
             }.done { ids, meta, courses in
                 let resultCourses = courses.reordered(order: ids, transform: { $0.id })
                 seal.fulfill((resultCourses, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+}
+
+final class TeacherCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: TeacherCourseListType
+
+    init(type: TeacherCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int) -> Promise<([Course], Meta)> {
+        Promise { seal in
+            self.coursesAPI.retrieve(
+                teacher: self.type.teacherID,
+                order: .popularityDesc,
+                page: page
+            ).done { result in
+                seal.fulfill(result)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

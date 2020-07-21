@@ -10,9 +10,11 @@ final class NewProfileCreatedCoursesAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewProfileCreatedCoursesProvider()
         let presenter = NewProfileCreatedCoursesPresenter()
-        let interactor = NewProfileCreatedCoursesInteractor(presenter: presenter, provider: provider)
+        let interactor = NewProfileCreatedCoursesInteractor(
+            presenter: presenter,
+            networkReachabilityService: NetworkReachabilityService()
+        )
         let viewController = NewProfileCreatedCoursesViewController(interactor: interactor)
 
         presenter.viewController = viewController

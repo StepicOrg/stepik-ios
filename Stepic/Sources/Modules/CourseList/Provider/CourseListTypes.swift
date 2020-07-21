@@ -45,6 +45,12 @@ struct SearchResultCourseListType: CourseListType {
     var analyticName: String { "search_result_course_list" }
 }
 
+struct TeacherCourseListType: CourseListType {
+    let teacherID: User.IdType
+
+    var analyticName: String { "teacher_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -100,6 +106,8 @@ final class CourseListServicesFactory {
             )
         } else if self.type is SearchResultCourseListType {
             return nil
+        } else if self.type is TeacherCourseListType {
+            return nil
         } else {
             fatalError("Unsupported course list type")
         }
@@ -126,6 +134,8 @@ final class CourseListServicesFactory {
                 coursesAPI: self.coursesAPI,
                 searchResultsAPI: self.searchResultsAPI
             )
+        } else if let type = self.type as? TeacherCourseListType {
+            return TeacherCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
         } else {
             fatalError("Unsupported course list type")
         }
