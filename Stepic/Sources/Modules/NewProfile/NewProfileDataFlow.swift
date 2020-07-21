@@ -70,6 +70,17 @@ enum NewProfile {
         }
     }
 
+    /// Present empty state for submodule
+    enum SubmoduleEmptyStatePresentation {
+        struct Response {
+            let module: Submodule
+        }
+
+        struct ViewModel {
+            let module: Submodule
+        }
+    }
+
     /// Present authorization controller
     enum AuthorizationPresentation {
         struct Response {}

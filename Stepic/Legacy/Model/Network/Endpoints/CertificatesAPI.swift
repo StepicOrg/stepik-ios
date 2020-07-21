@@ -14,25 +14,43 @@ import SwiftyJSON
 final class CertificatesAPI: APIEndpoint {
     override var name: String { "certificates" }
 
-    func retrieve(userId: Int, page: Int = 1) -> Promise<([Certificate], Meta)> {
-        let params: Parameters = [
+    func retrieve(userId: Int, page: Int = 1, order: Order? = nil) -> Promise<([Certificate], Meta)> {
+        var params: Parameters = [
             "user": userId,
             "page": page
         ]
 
-        return retrieve.requestWithFetching(requestEndpoint: "certificates", paramName: "certificates", params: params, withManager: manager)
+        if let order = order {
+            params["order"] = order.rawValue
+        }
+
+        return self.retrieve.requestWithFetching(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: params,
+            withManager: manager
+        )
     }
 
     //Cannot move it to extension cause it is used in tests
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(userId: Int, page: Int = 1, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Meta, [Certificate]) -> Void, error errorHandler: @escaping (NetworkError) -> Void) -> Request? {
-        retrieve(userId: userId, page: page).done {
-            certificates, meta in
+    @discardableResult
+    func retrieve(
+        userId: Int,
+        page: Int = 1,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (Meta, [Certificate]) -> Void,
+        error errorHandler: @escaping (NetworkError) -> Void
+    ) -> Request? {
+        self.retrieve(userId: userId, page: page).done { certificates, meta in
             success(meta, certificates)
-        }.catch {
-            error in
+        }.catch { error in
             errorHandler(NetworkError(error: error))
         }
         return nil
+    }
+
+    enum Order: String {
+        case idDesc = "-id"
     }
 }
