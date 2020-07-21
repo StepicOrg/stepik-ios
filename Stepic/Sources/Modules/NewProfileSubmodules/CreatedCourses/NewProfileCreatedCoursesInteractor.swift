@@ -67,7 +67,11 @@ extension NewProfileCreatedCoursesInteractor: CourseListOutputProtocol {
         self.presentCourseInfo(course: course, viewSource: .profile(id: self.currentUserID.require()))
     }
 
-    func presentEmptyState(sourceModule: CourseListInputProtocol) {}
+    func presentEmptyState(sourceModule: CourseListInputProtocol) {
+        self.moduleOutput?.handleCreatedCoursesEmptyState()
+    }
 
-    func presentError(sourceModule: CourseListInputProtocol) {}
+    func presentError(sourceModule: CourseListInputProtocol) {
+        self.presenter.presentError(response: .init())
+    }
 }

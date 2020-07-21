@@ -6,13 +6,16 @@ protocol NewProfileCreatedCoursesViewControllerProtocol: AnyObject {
     func displayCourseSyllabus(viewModel: NewProfileCreatedCourses.CourseSyllabusPresentation.ViewModel)
     func displayLastStep(viewModel: NewProfileCreatedCourses.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: NewProfileCreatedCourses.PresentAuthorization.ViewModel)
+    func displayError(viewModel: NewProfileCreatedCourses.PresentError.ViewModel)
 }
 
-final class NewProfileCreatedCoursesViewController: UIViewController {
+final class NewProfileCreatedCoursesViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: NewProfileCreatedCoursesInteractorProtocol
 
     private var teacherID: User.IdType?
     private var submoduleViewController: UIViewController?
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     init(interactor: NewProfileCreatedCoursesInteractorProtocol) {
         self.interactor = interactor
@@ -27,6 +30,25 @@ final class NewProfileCreatedCoursesViewController: UIViewController {
     override func loadView() {
         let view = NewProfileCreatedCoursesView(frame: UIScreen.main.bounds)
         self.view = view
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.isPlaceholderShown = false
+                    strongSelf.refreshSubmodule()
+                }
+            ),
+            for: .connectionError
+        )
     }
 
     private func refreshSubmodule() {
@@ -98,5 +120,9 @@ extension NewProfileCreatedCoursesViewController: NewProfileCreatedCoursesViewCo
 
     func displayAuthorization(viewModel: NewProfileCreatedCourses.PresentAuthorization.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
+
+    func displayError(viewModel: NewProfileCreatedCourses.PresentError.ViewModel) {
+        self.showPlaceholder(for: .connectionError)
     }
 }

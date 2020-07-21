@@ -1,3 +1,5 @@
 import Foundation
 
-protocol NewProfileCreatedCoursesOutputProtocol: AnyObject {}
+protocol NewProfileCreatedCoursesOutputProtocol: AnyObject {
+    func handleCreatedCoursesEmptyState()
+}

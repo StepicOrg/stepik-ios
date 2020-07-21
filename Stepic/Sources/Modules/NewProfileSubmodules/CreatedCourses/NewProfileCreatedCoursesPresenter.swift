@@ -6,6 +6,7 @@ protocol NewProfileCreatedCoursesPresenterProtocol {
     func presentCourseSyllabus(response: NewProfileCreatedCourses.CourseSyllabusPresentation.Response)
     func presentLastStep(response: NewProfileCreatedCourses.LastStepPresentation.Response)
     func presentAuthorization(response: NewProfileCreatedCourses.PresentAuthorization.Response)
+    func presentError(response: NewProfileCreatedCourses.PresentError.Response)
 }
 
 final class NewProfileCreatedCoursesPresenter: NewProfileCreatedCoursesPresenterProtocol {
@@ -39,5 +40,9 @@ final class NewProfileCreatedCoursesPresenter: NewProfileCreatedCoursesPresenter
 
     func presentAuthorization(response: NewProfileCreatedCourses.PresentAuthorization.Response) {
         self.viewController?.displayAuthorization(viewModel: .init())
+    }
+
+    func presentError(response: NewProfileCreatedCourses.PresentError.Response) {
+        self.viewController?.displayError(viewModel: .init())
     }
 }

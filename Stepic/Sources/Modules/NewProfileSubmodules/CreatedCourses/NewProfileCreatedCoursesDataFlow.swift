@@ -70,4 +70,11 @@ enum NewProfileCreatedCourses {
 
         struct ViewModel {}
     }
+
+    /// Present error
+    enum PresentError {
+        struct Response {}
+
+        struct ViewModel {}
+    }
 }

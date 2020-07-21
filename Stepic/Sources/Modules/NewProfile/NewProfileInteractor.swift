@@ -334,6 +334,14 @@ extension NewProfileInteractor: NewProfileCertificatesOutputProtocol {
     }
 }
 
+// MARK: - NewProfileInteractor: NewProfileCreatedCoursesOutputProtocol -
+
+extension NewProfileInteractor: NewProfileCreatedCoursesOutputProtocol {
+    func handleCreatedCoursesEmptyState() {
+        self.presenter.presentSubmoduleEmptyState(response: .init(module: .createdCourses))
+    }
+}
+
 // MARK: - NewProfileInteractor: SettingsOutputProtocol -
 
 extension NewProfileInteractor: SettingsOutputProtocol {
