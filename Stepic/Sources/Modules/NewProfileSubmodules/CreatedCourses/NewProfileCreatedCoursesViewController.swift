@@ -2,6 +2,10 @@ import UIKit
 
 protocol NewProfileCreatedCoursesViewControllerProtocol: AnyObject {
     func displayCourses(viewModel: NewProfileCreatedCourses.CoursesLoad.ViewModel)
+    func displayCourseInfo(viewModel: NewProfileCreatedCourses.CourseInfoPresentation.ViewModel)
+    func displayCourseSyllabus(viewModel: NewProfileCreatedCourses.CourseSyllabusPresentation.ViewModel)
+    func displayLastStep(viewModel: NewProfileCreatedCourses.LastStepPresentation.ViewModel)
+    func displayAuthorization(viewModel: NewProfileCreatedCourses.PresentAuthorization.ViewModel)
 }
 
 final class NewProfileCreatedCoursesViewController: UIViewController {
@@ -23,13 +27,6 @@ final class NewProfileCreatedCoursesViewController: UIViewController {
     override func loadView() {
         let view = NewProfileCreatedCoursesView(frame: UIScreen.main.bounds)
         self.view = view
-    }
-}
-
-extension NewProfileCreatedCoursesViewController: NewProfileCreatedCoursesViewControllerProtocol {
-    func displayCourses(viewModel: NewProfileCreatedCourses.CoursesLoad.ViewModel) {
-        self.teacherID = viewModel.teacherID
-        self.refreshSubmodule()
     }
 
     private func refreshSubmodule() {
@@ -57,5 +54,49 @@ extension NewProfileCreatedCoursesViewController: NewProfileCreatedCoursesViewCo
         if let moduleInput = courseListAssembly.moduleInput {
             self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
         }
+    }
+}
+
+extension NewProfileCreatedCoursesViewController: NewProfileCreatedCoursesViewControllerProtocol {
+    func displayCourses(viewModel: NewProfileCreatedCourses.CoursesLoad.ViewModel) {
+        self.teacherID = viewModel.teacherID
+        self.refreshSubmodule()
+    }
+
+    func displayCourseInfo(viewModel: NewProfileCreatedCourses.CourseInfoPresentation.ViewModel) {
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .info,
+            courseViewSource: viewModel.courseViewSource
+        )
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func displayCourseSyllabus(viewModel: NewProfileCreatedCourses.CourseSyllabusPresentation.ViewModel) {
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .syllabus,
+            courseViewSource: viewModel.courseViewSource
+        )
+        let viewController = assembly.makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    func displayLastStep(viewModel: NewProfileCreatedCourses.LastStepPresentation.ViewModel) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+
+        LastStepRouter.continueLearning(
+            for: viewModel.course,
+            isAdaptive: viewModel.isAdaptive,
+            using: navigationController,
+            courseViewSource: viewModel.courseViewSource
+        )
+    }
+
+    func displayAuthorization(viewModel: NewProfileCreatedCourses.PresentAuthorization.ViewModel) {
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

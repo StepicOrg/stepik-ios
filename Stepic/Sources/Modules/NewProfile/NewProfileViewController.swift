@@ -161,7 +161,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
-            self.refreshCreatedCoursesState()
+            self.refreshCreatedCoursesState(.visible(teacherID: viewModel.userID))
 
             let shouldShowStreakNotifications = viewModel.isCurrentUserProfile
             self.refreshStreakNotificationsState(shouldShowStreakNotifications ? .visible : .hidden)
@@ -250,42 +250,55 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     // MARK: Created Courses
 
-    private func refreshCreatedCoursesState() {
-        guard self.getSubmodule(type: NewProfile.Submodule.createdCourses) == nil else {
-            return
-        }
+    private enum CreatedCoursesState {
+        case visible(teacherID: User.IdType)
+        case hidden
+    }
 
-        let assembly = NewProfileCreatedCoursesAssembly(output: nil)
-        let viewController = assembly.makeModule()
+    private func refreshCreatedCoursesState(_ state: CreatedCoursesState) {
+        switch state {
+        case .visible(let teacherID):
+            guard self.getSubmodule(type: NewProfile.Submodule.createdCourses) == nil else {
+                return
+            }
 
-        let headerView = NewProfileBlockHeaderView()
-        headerView.titleText = NSLocalizedString("NewProfileBlockTitleCreatedCourses", comment: "")
-//        headerView.onShowAllButtonClick = { [weak self] in
-//            self?.interactor.doAchievementsListPresentation(request: .init())
-//        }
+            let assembly = NewProfileCreatedCoursesAssembly(output: nil)
+            let viewController = assembly.makeModule()
 
-        let appearance = NewProfileBlockContainerView.Appearance(
-            backgroundColor: .clear,
-            contentViewInsets: .zero
-        )
-        let containerView = NewProfileBlockContainerView(
-            headerView: headerView,
-            contentView: viewController.view,
-            appearance: appearance
-        )
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = NSLocalizedString("NewProfileBlockTitleCreatedCourses", comment: "")
+            headerView.onShowAllButtonClick = { [weak self] in
+                let assembly = FullscreenCourseListAssembly(courseListType: TeacherCourseListType(teacherID: teacherID))
+                self?.push(module: assembly.makeModule())
+            }
 
-        self.registerSubmodule(
-            .init(
-                viewController: viewController,
-                view: containerView,
-                type: NewProfile.Submodule.createdCourses
+            let appearance = NewProfileBlockContainerView.Appearance(
+                backgroundColor: .clear,
+                contentViewInsets: .zero
             )
-        )
-
-        if let moduleInput = assembly.moduleInput {
-            self.interactor.doSubmodulesRegistration(
-                request: .init(submodules: [NewProfile.Submodule.createdCourses.uniqueIdentifier: moduleInput])
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: viewController.view,
+                appearance: appearance
             )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.createdCourses
+                )
+            )
+
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.createdCourses.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.createdCourses) {
+                self.removeSubmodule(submodule)
+            }
         }
     }
 
