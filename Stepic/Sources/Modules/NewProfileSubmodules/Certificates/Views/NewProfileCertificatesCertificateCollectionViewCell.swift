@@ -24,6 +24,12 @@ final class NewProfileCertificatesCertificateCollectionViewCell: UICollectionVie
         fatalError("init(coder:) has not been implemented")
     }
 
+    override var isHighlighted: Bool {
+        didSet {
+            self.widgetView.alpha = self.isHighlighted ? 0.5 : 1.0
+        }
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         self.updateBorder()
