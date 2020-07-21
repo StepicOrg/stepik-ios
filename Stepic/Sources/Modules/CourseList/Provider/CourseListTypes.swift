@@ -106,8 +106,10 @@ final class CourseListServicesFactory {
             )
         } else if self.type is SearchResultCourseListType {
             return nil
-        } else if self.type is TeacherCourseListType {
-            return nil
+        } else if let type = self.type as? TeacherCourseListType {
+            return CourseListPersistenceService(
+                storage: CreatedCoursesCourseListPersistenceStorage(teacherID: type.teacherID)
+            )
         } else {
             fatalError("Unsupported course list type")
         }

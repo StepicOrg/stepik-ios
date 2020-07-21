@@ -1702,6 +1702,7 @@
 		1A044A06FA4B2AA6C9F984A3 /* UserCoursesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesViewController.swift; sourceTree = "<group>"; };
 		1A65C1DFD5A2533C506D297B /* DownloadARQuickLookDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookDataFlow.swift; sourceTree = "<group>"; };
 		27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewController.swift; sourceTree = "<group>"; };
+		2C00186524C71404006C5094 /* Model_new_profile_created_courses_v56.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_created_courses_v56.xcdatamodel; sourceTree = "<group>"; };
 		2C01BB67233CD92C00C8DCF0 /* Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Require.swift; sourceTree = "<group>"; };
 		2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
 		2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
@@ -9055,6 +9056,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C00186524C71404006C5094 /* Model_new_profile_created_courses_v56.xcdatamodel */,
 				2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */,
 				2C32664224B00BEF0013C473 /* Model_course_purchases_v54.xcdatamodel */,
 				2C84D42B24AFFCD300A77EF1 /* Model_new_profile_v53.xcdatamodel */,
@@ -9112,7 +9114,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */;
+			currentVersion = 2C00186524C71404006C5094 /* Model_new_profile_created_courses_v56.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
