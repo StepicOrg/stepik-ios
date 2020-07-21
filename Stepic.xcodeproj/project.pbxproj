@@ -367,6 +367,7 @@
 		2C01D3AC22DDB98900C84CEE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */; };
 		2C03F042247690BA00C63FE6 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03F041247690BA00C63FE6 /* Mutex.swift */; };
 		2C04846224C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */; };
+		2C04846524C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */; };
 		2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */; };
 		2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */; };
 		2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */; };
@@ -1700,6 +1701,7 @@
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C03F041247690BA00C63FE6 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCertificateWidgetProgressView.swift; sourceTree = "<group>"; };
+		2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCellSkeletonView.swift; sourceTree = "<group>"; };
 		2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntity.swift; sourceTree = "<group>"; };
 		2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntity.swift; sourceTree = "<group>"; };
 		2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_attempts_caching.xcdatamodel; sourceTree = "<group>"; };
@@ -2807,6 +2809,15 @@
 				2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		2C04846624C6845800B3DAC8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */,
+				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
@@ -4628,11 +4639,11 @@
 			children = (
 				2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */,
 				2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */,
-				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
 				08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */,
 				2CFF9006242A23AF00FD7311 /* Achievements */,
 				2CFF9005242A236900FD7311 /* CourseInfo */,
 				2CFF9007242A23E700FD7311 /* CourseList */,
+				2C04846624C6845800B3DAC8 /* Profile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -7652,6 +7663,7 @@
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */,
+				2C04846524C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				08484F05211AF4320006266F /* StoryAssembly.swift in Sources */,
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,

@@ -63,7 +63,7 @@ final class NewProfileCertificatesView: UIView {
     // MARK: Loading state
 
     func showLoading() {
-        self.collectionView.skeleton.viewBuilder = { CourseWidgetSkeletonView() }
+        self.collectionView.skeleton.viewBuilder = { NewProfileCertificatesCellSkeletonView() }
         self.collectionView.skeleton.show()
     }
 
