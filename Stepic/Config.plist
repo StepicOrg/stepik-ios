@@ -25,8 +25,12 @@
 		<string>http://52.174.33.220</string>
 		<key>scheme</key>
 		<string>stepic</string>
-		<key>api</key>
+		<key>apiProduction</key>
 		<string>https://stepik.org/api</string>
+		<key>apiDevelop</key>
+		<string>https://dev.stepik.org/api</string>
+		<key>apiRelease</key>
+		<string>https://release.stepik.org/api</string>
 		<key>oauth</key>
 		<string>https://stepik.org/oauth2</string>
 		<key>stepik</key>
