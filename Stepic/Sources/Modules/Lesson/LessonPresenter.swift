@@ -101,7 +101,13 @@ final class LessonPresenter: LessonPresenterProtocol {
         startStepIndex: Int,
         canEdit: Bool
     ) -> LessonViewModel {
-        let lessonTitle = lesson.title
+        let lessonTitle: String = {
+            if let unit = lesson.unit, let section = unit.section {
+                return "\(section.position).\(unit.position) \(lesson.title)"
+            }
+            return lesson.title
+        }()
+
         let steps: [LessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
                 if step.hasReview {
@@ -126,6 +132,7 @@ final class LessonPresenter: LessonPresenterProtocol {
                 canEdit: canEdit && step.block.type != .video
             )
         }
+
         return LessonViewModel(
             lessonTitle: lessonTitle,
             steps: steps,
