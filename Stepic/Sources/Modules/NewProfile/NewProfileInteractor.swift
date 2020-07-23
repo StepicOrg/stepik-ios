@@ -259,7 +259,11 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     private func pushCurrentUserToSubmodules(_ submodules: [NewProfileSubmoduleProtocol]) {
         if let currentUser = self.currentUser {
             for submodule in submodules {
-                submodule.update(with: currentUser, isOnline: self.isOnline)
+                submodule.update(
+                    with: currentUser,
+                    isCurrentUserProfile: self.isCurrentUserProfile,
+                    isOnline: self.isOnline
+                )
             }
         }
     }
@@ -319,6 +323,22 @@ extension NewProfileInteractor {
             response: .init(result: .success(.init(user: currentUser, isCurrentUserProfile: self.isCurrentUserProfile)))
         )
         self.doProfileRefresh(request: .init())
+    }
+}
+
+// MARK: - NewProfileInteractor: NewProfileCertificatesOutputProtocol -
+
+extension NewProfileInteractor: NewProfileCertificatesOutputProtocol {
+    func handleEmptyCertificatesState() {
+        self.presenter.presentSubmoduleEmptyState(response: .init(module: .certificates))
+    }
+}
+
+// MARK: - NewProfileInteractor: NewProfileCreatedCoursesOutputProtocol -
+
+extension NewProfileInteractor: NewProfileCreatedCoursesOutputProtocol {
+    func handleCreatedCoursesEmptyState() {
+        self.presenter.presentSubmoduleEmptyState(response: .init(module: .createdCourses))
     }
 }
 

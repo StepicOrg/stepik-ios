@@ -29,6 +29,7 @@ extension User {
     @NSManaged var managedReputation: NSNumber?
     @NSManaged var managedReputationRank: NSNumber?
     @NSManaged var managedJoinDate: Date?
+    @NSManaged var managedCreatedCoursesArray: NSObject?
     @NSManaged var managedCreatedCoursesCount: NSNumber?
     @NSManaged var managedSolvedStepsCount: NSNumber?
     @NSManaged var managedCreatedLessonsCount: NSNumber?
@@ -204,6 +205,15 @@ extension User {
         }
         set {
             self.managedReputationRank = newValue as NSNumber?
+        }
+    }
+
+    var createdCoursesArray: [Course.IdType] {
+        get {
+            (self.managedCreatedCoursesArray as? [Int]) ?? []
+        }
+        set {
+            self.managedCreatedCoursesArray = newValue as NSObject?
         }
     }
 

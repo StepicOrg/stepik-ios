@@ -2,8 +2,8 @@ import SnapKit
 import UIKit
 
 extension CourseWidgetCoverView {
-    class Appearance {
-        let cornerRadius: CGFloat = 10
+    struct Appearance {
+        var cornerRadius: CGFloat = 10
 
         let adaptiveMarkTextColor = UIColor.stepikAccentFixed
         let adaptiveMarkBackgroundColor = UIColor(hex6: 0xEBF2FF)

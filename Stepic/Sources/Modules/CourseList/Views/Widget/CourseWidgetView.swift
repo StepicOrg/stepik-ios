@@ -75,6 +75,7 @@ final class CourseWidgetView: UIView {
         self.colorMode = colorMode
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -123,6 +124,12 @@ final class CourseWidgetView: UIView {
 }
 
 extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        if self.colorMode == .clear {
+            self.backgroundColor = .stepikBackground
+        }
+    }
+
     func addSubviews() {
         self.addSubview(self.coverView)
         self.addSubview(self.titleLabel)

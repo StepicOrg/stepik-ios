@@ -19,10 +19,15 @@ extension Certificate {
     @NSManaged var managedGrade: NSNumber?
     @NSManaged var managedURL: String?
     @NSManaged var managedisPublic: NSNumber?
+    @NSManaged var managedIsWithScore: NSNumber?
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.shared.context)!
+    }
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
 
     static var fetchRequest: NSFetchRequest<Certificate> {
@@ -115,6 +120,15 @@ extension Certificate {
         }
         set(value) {
             self.managedisPublic = value as NSNumber?
+        }
+    }
+
+    var isWithScore: Bool {
+        get {
+            self.managedIsWithScore?.boolValue ?? false
+        }
+        set {
+            self.managedIsWithScore = NSNumber(value: newValue)
         }
     }
 

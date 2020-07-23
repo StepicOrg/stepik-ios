@@ -130,7 +130,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
 }
 
 extension NewProfileStreakNotificationsInteractor: NewProfileSubmoduleProtocol {
-    func update(with user: User, isOnline: Bool) {
+    func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
         self.doStreakNotificationsLoad(request: .init())
     }
 }

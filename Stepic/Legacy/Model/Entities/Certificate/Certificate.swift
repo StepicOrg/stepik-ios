@@ -20,15 +20,16 @@ final class Certificate: NSManagedObject, IDFetchable {
     }
 
     func initialize(_ json: JSON) {
-        self.id = json["id"].intValue
-        self.userId = json["user"].intValue
-        self.courseId = json["course"].intValue
-        self.issueDate = Parser.shared.dateFromTimedateJSON(json["issue_date"])
-        self.updateDate = Parser.shared.dateFromTimedateJSON(json["update_date"])
-        self.grade = json["grade"].intValue
-        self.type = CertificateType(rawValue: json["type"].stringValue) ?? .regular
-        self.urlString = json["url"].string
-        self.isPublic = json["is_public"].bool
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.userId = json[JSONKey.user.rawValue].intValue
+        self.courseId = json[JSONKey.course.rawValue].intValue
+        self.issueDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.issueDate.rawValue])
+        self.updateDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.updateDate.rawValue])
+        self.grade = json[JSONKey.grade.rawValue].intValue
+        self.type = CertificateType(rawValue: json[JSONKey.type.rawValue].stringValue) ?? .regular
+        self.urlString = json[JSONKey.url.rawValue].string
+        self.isPublic = json[JSONKey.isPublic.rawValue].bool
+        self.isWithScore = json[JSONKey.isWithScore.rawValue].boolValue
     }
 
     func update(json: JSON) {
@@ -36,21 +37,32 @@ final class Certificate: NSManagedObject, IDFetchable {
     }
 
     static func fetch(_ ids: [Int], user userId: Int) -> [Certificate] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
+        let request: NSFetchRequest<Certificate> = Certificate.fetchRequest
 
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
+        let idCompoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
         let userPredicate = NSPredicate(format: "managedUserId == %@", userId as NSNumber)
 
-        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, userPredicate])
+        request.predicate = NSCompoundPredicate(type: .and, subpredicates: [idCompoundPredicate, userPredicate])
 
         do {
             let results = try CoreDataHelper.shared.context.fetch(request)
-            return results as! [Certificate]
+            return results
         } catch {
             return []
         }
+    }
+
+    enum JSONKey: String {
+        case id
+        case user
+        case course
+        case issueDate = "issue_date"
+        case updateDate = "update_date"
+        case grade
+        case type
+        case url
+        case isPublic = "is_public"
+        case isWithScore = "is_with_score"
     }
 }

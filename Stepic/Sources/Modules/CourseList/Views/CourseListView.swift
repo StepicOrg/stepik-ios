@@ -139,6 +139,8 @@ class CourseListView: UIView {
             return self.appearance.lightModeBackgroundColor
         case .dark:
             return self.appearance.darkModeBackgroundColor
+        case .clear:
+            return .clear
         }
     }
 
@@ -185,6 +187,11 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
             self.collectionView.register(
                 DarkCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: DarkCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        case .clear:
+            self.collectionView.register(
+                ClearCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: ClearCourseListCollectionViewCell.defaultReuseIdentifier
             )
         }
 
@@ -445,6 +452,18 @@ final class HorizontalCourseListView: CourseListView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        if dataSource.collectionView(self.collectionView, numberOfItemsInSection: 0) == 1 {
+            self.horizontalCourseFlowLayout.rowsCount = 1
+        } else {
+            self.horizontalCourseFlowLayout.rowsCount = self.rowsCount
+        }
+
+        super.updateCollectionViewData(delegate: delegate, dataSource: dataSource)
+
+        self.invalidateIntrinsicContentSize()
+    }
+
     override func calculateItemSize() -> CGSize {
         if self.isAdaptiveColumnsCount {
             let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
@@ -508,6 +527,21 @@ private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
 private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame, colorMode: .dark)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class ClearCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .clear)
     }
 
     @available(*, unavailable)

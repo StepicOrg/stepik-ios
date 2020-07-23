@@ -12,7 +12,7 @@ extension HorizontalCourseListFlowLayout {
 
 final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
     let appearance: Appearance
-    let rowsCount: Int
+    var rowsCount: Int
     var columnsCount: Int
 
     private var _contentWidth: CGFloat = 0

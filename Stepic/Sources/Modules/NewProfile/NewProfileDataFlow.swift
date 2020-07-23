@@ -5,6 +5,7 @@ enum NewProfile {
 
     enum Submodule: String, UniqueIdentifiable {
         case streakNotifications
+        case createdCourses
         case userActivity
         case achievements
         case certificates
@@ -67,6 +68,17 @@ enum NewProfile {
             let isSettingsAvailable: Bool
             let isEditProfileAvailable: Bool
             let isShareProfileAvailable: Bool
+        }
+    }
+
+    /// Present empty state for submodule
+    enum SubmoduleEmptyStatePresentation {
+        struct Response {
+            let module: Submodule
+        }
+
+        struct ViewModel {
+            let module: Submodule
         }
     }
 

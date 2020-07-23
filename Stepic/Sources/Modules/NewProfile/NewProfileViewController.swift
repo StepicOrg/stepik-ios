@@ -3,6 +3,7 @@ import UIKit
 protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel)
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
+    func displaySubmoduleEmptyState(viewModel: NewProfile.SubmoduleEmptyStatePresentation.ViewModel)
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel)
     func displayProfileSharing(viewModel: NewProfile.ProfileShareAction.ViewModel)
     func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel)
@@ -16,7 +17,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     }
 
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
-        .streakNotifications, .userActivity, .achievements, .certificates, .details
+        .streakNotifications, .createdCourses, .userActivity, .achievements, .certificates, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -160,12 +161,24 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
 
+            let shouldShowCreatedCourses: Bool = {
+                switch self.currentCreatedCoursesState {
+                case .visible:
+                    return true
+                case .hidden:
+                    return false
+                }
+            }()
+            self.refreshCreatedCoursesState(shouldShowCreatedCourses ? .visible(teacherID: viewModel.userID) : .hidden)
+
             let shouldShowStreakNotifications = viewModel.isCurrentUserProfile
             self.refreshStreakNotificationsState(shouldShowStreakNotifications ? .visible : .hidden)
 
             self.refreshUserActivityState()
             self.refreshAchievementsState()
-            self.refreshCertificatesState()
+
+            let shouldShowCertificates = self.currentCertificatesState != .hidden
+            self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
 
             let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
             self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
@@ -243,6 +256,64 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         }
     }
 
+    // MARK: Created Courses
+
+    private enum CreatedCoursesState {
+        case visible(teacherID: User.IdType)
+        case hidden
+    }
+
+    private var currentCreatedCoursesState = CreatedCoursesState.visible(teacherID: 0)
+
+    private func refreshCreatedCoursesState(_ state: CreatedCoursesState) {
+        switch state {
+        case .visible(let teacherID):
+            guard self.getSubmodule(type: NewProfile.Submodule.createdCourses) == nil else {
+                return
+            }
+
+            let assembly = NewProfileCreatedCoursesAssembly(
+                output: self.interactor as? NewProfileCreatedCoursesOutputProtocol
+            )
+            let viewController = assembly.makeModule()
+
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = NSLocalizedString("NewProfileBlockTitleCreatedCourses", comment: "")
+            headerView.onShowAllButtonClick = { [weak self] in
+                let assembly = FullscreenCourseListAssembly(courseListType: TeacherCourseListType(teacherID: teacherID))
+                self?.push(module: assembly.makeModule())
+            }
+
+            let appearance = NewProfileBlockContainerView.Appearance(
+                backgroundColor: .clear,
+                contentViewInsets: .zero
+            )
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: viewController.view,
+                appearance: appearance
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.createdCourses
+                )
+            )
+
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.createdCourses.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.createdCourses) {
+                self.removeSubmodule(submodule)
+            }
+        }
+    }
+
     // MARK: User Activity
 
     private func refreshUserActivityState() {
@@ -250,8 +321,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             return
         }
 
-        let newProfileActivityAssembly = NewProfileUserActivityAssembly()
-        let newProfileActivityViewController = newProfileActivityAssembly.makeModule()
+        let assembly = NewProfileUserActivityAssembly()
+        let viewController = assembly.makeModule()
 
         let headerView = NewProfileBlockHeaderView()
         headerView.titleText = NSLocalizedString("NewProfileBlockTitleActivity", comment: "")
@@ -260,18 +331,18 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
         let containerView = NewProfileBlockContainerView(
             headerView: headerView,
-            contentView: newProfileActivityViewController.view
+            contentView: viewController.view
         )
 
         self.registerSubmodule(
             .init(
-                viewController: newProfileActivityViewController,
+                viewController: viewController,
                 view: containerView,
                 type: NewProfile.Submodule.userActivity
             )
         )
 
-        if let moduleInput = newProfileActivityAssembly.moduleInput {
+        if let moduleInput = assembly.moduleInput {
             self.interactor.doSubmodulesRegistration(
                 request: .init(submodules: [NewProfile.Submodule.userActivity.uniqueIdentifier: moduleInput])
             )
@@ -285,6 +356,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             return
         }
 
+        let assembly = NewProfileAchievementsAssembly()
+        let viewController = assembly.makeModule()
+
         let headerView = NewProfileBlockHeaderView()
         headerView.titleText = NSLocalizedString("NewProfileBlockTitleAchievements", comment: "")
         headerView.onShowAllButtonClick = { [weak self] in
@@ -293,43 +367,74 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
         let containerView = NewProfileBlockContainerView(
             headerView: headerView,
-            contentView: nil
+            contentView: viewController.view
         )
 
         self.registerSubmodule(
             .init(
-                viewController: nil,
+                viewController: viewController,
                 view: containerView,
                 type: NewProfile.Submodule.achievements
             )
         )
+
+        if let moduleInput = assembly.moduleInput {
+            self.interactor.doSubmodulesRegistration(
+                request: .init(submodules: [NewProfile.Submodule.achievements.uniqueIdentifier: moduleInput])
+            )
+        }
     }
 
     // MARK: Certificates
 
-    private func refreshCertificatesState() {
-        guard self.getSubmodule(type: NewProfile.Submodule.certificates) == nil else {
-            return
-        }
+    private enum CertificatesState {
+        case visible
+        case hidden
+    }
 
-        let headerView = NewProfileBlockHeaderView()
-        headerView.titleText = NSLocalizedString("NewProfileBlockTitleCertificates", comment: "")
-        headerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.doCertificatesListPresentation(request: .init())
-        }
+    private var currentCertificatesState = CertificatesState.visible
 
-        let containerView = NewProfileBlockContainerView(
-            headerView: headerView,
-            contentView: nil
-        )
+    private func refreshCertificatesState(_ state: CertificatesState) {
+        switch state {
+        case .visible:
+            guard self.getSubmodule(type: NewProfile.Submodule.certificates) == nil else {
+                return
+            }
 
-        self.registerSubmodule(
-            .init(
-                viewController: nil,
-                view: containerView,
-                type: NewProfile.Submodule.certificates
+            let assembly = NewProfileCertificatesAssembly(
+                output: self.interactor as? NewProfileCertificatesOutputProtocol
             )
-        )
+            let viewController = assembly.makeModule()
+
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = NSLocalizedString("NewProfileBlockTitleCertificates", comment: "")
+            headerView.onShowAllButtonClick = { [weak self] in
+                self?.interactor.doCertificatesListPresentation(request: .init())
+            }
+
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: viewController.view
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.certificates
+                )
+            )
+
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.certificates.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.certificates) {
+                self.removeSubmodule(submodule)
+            }
+        }
     }
 
     // MARK: Profile Details
@@ -429,6 +534,19 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
 
         self.navigationItem.leftBarButtonItems = leftBarButtonItems
         self.navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+
+    func displaySubmoduleEmptyState(viewModel: NewProfile.SubmoduleEmptyStatePresentation.ViewModel) {
+        switch viewModel.module {
+        case .createdCourses:
+            self.currentCreatedCoursesState = .hidden
+            self.refreshCreatedCoursesState(self.currentCreatedCoursesState)
+        case .certificates:
+            self.currentCertificatesState = .hidden
+            self.refreshCertificatesState(self.currentCertificatesState)
+        default:
+            assertionFailure("Unsupported module type")
+        }
     }
 
     func displayAuthorization(viewModel: NewProfile.AuthorizationPresentation.ViewModel) {

@@ -23,7 +23,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
     var profileStreaksView: ProfileHeaderInfoView?
     var profileDescriptionView: ProfileDescriptionContentView?
     var pinsMapContentView: PinsMapBlockContentView?
-    var profileAchievementsView: ProfileAchievementsContentView?
+    //var profileAchievementsView: ProfileAchievementsContentView?
 
     // Implementation of StreakNotificationsControlView in extension
     var presenterNotifications: StreakNotificationsControlPresenter?
@@ -170,7 +170,8 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             case .pinsMap:
                 menuBlocks.append(self.buildPinsMapExpandableBlock())
             case .achievements:
-                menuBlocks.append(self.buildAchievementsBlock())
+                //menuBlocks.append(self.buildAchievementsBlock())
+                break
             case .userID(let id):
                 menuBlocks.append(self.buildUserIDBlock(userID: id))
             default:
@@ -216,7 +217,8 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         case .pinsMap:
             return self.pinsMapContentView
         case .achievements:
-            return self.profileAchievementsView
+            //return self.profileAchievementsView
+            return nil
         }
     }
 
@@ -467,41 +469,41 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         return block
     }
 
-    private func buildAchievementsBlock() -> ContentMenuBlock? {
-        profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView.fromNib()
-        let onButtonClick = { [weak self] in
-            if let userId = self?.otherUserId ?? AuthInfo.shared.userId,
-               let viewController = ControllerHelper.instantiateViewController(
-                   identifier: "AchievementsListViewController",
-                   storyboardName: "Profile"
-               ) as? AchievementsListViewController {
-                // FIXME: API injection :((
-                let retriever = AchievementsRetriever(
-                    userId: userId,
-                    achievementsAPI: AchievementsAPI(),
-                    achievementProgressesAPI: AchievementProgressesAPI()
-                )
-                let presenter = AchievementsListPresenter(
-                    userID: userId,
-                    view: viewController,
-                    achievementsAPI: AchievementsAPI(),
-                    achievementsRetriever: retriever
-                )
-                viewController.presenter = presenter
-                self?.navigationController?.pushViewController(viewController, animated: true)
-            }
-        }
-
-        let block = ContentMenuBlock(
-            id: ProfileMenuBlock.achievements.rawValue,
-            title: NSLocalizedString("Achievements", comment: ""),
-            contentView: profileAchievementsView,
-            buttonTitle: NSLocalizedString("ShowAll", comment: ""),
-            onButtonClick: onButtonClick
-        )
-
-        return block
-    }
+//    private func buildAchievementsBlock() -> ContentMenuBlock? {
+//        profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView.fromNib()
+//        let onButtonClick = { [weak self] in
+//            if let userId = self?.otherUserId ?? AuthInfo.shared.userId,
+//               let viewController = ControllerHelper.instantiateViewController(
+//                   identifier: "AchievementsListViewController",
+//                   storyboardName: "Profile"
+//               ) as? AchievementsListViewController {
+//                // FIXME: API injection :((
+//                let retriever = AchievementsRetriever(
+//                    userID: userId,
+//                    achievementsAPI: AchievementsAPI(),
+//                    achievementProgressesAPI: AchievementProgressesAPI()
+//                )
+//                let presenter = AchievementsListPresenter(
+//                    userID: userId,
+//                    view: viewController,
+//                    achievementsAPI: AchievementsAPI(),
+//                    achievementsRetriever: retriever
+//                )
+//                viewController.presenter = presenter
+//                self?.navigationController?.pushViewController(viewController, animated: true)
+//            }
+//        }
+//
+//        let block = ContentMenuBlock(
+//            id: ProfileMenuBlock.achievements.rawValue,
+//            title: NSLocalizedString("Achievements", comment: ""),
+//            contentView: profileAchievementsView,
+//            buttonTitle: NSLocalizedString("ShowAll", comment: ""),
+//            onButtonClick: onButtonClick
+//        )
+//
+//        return block
+//    }
 
     private func buildUserIDBlock(userID: User.IdType) -> CustomMenuBlock {
         let label: UILabel = {

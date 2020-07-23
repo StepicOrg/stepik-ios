@@ -27,14 +27,15 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
-        let instructorsViewModel = course.instructors.map { user in
-            CourseInfoTabInfoInstructorViewModel(
-                id: user.id,
-                avatarImageURL: URL(string: user.avatarURL),
-                title: "\(user.firstName) \(user.lastName)",
-                description: user.bio
+        let authorsViewModel = course.authors.map { author in
+            CourseInfoTabInfoAuthorViewModel(
+                id: author.id,
+                name: "\(author.firstName) \(author.lastName)".trimmingCharacters(in: .whitespaces)
             )
         }
+
+        let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
+        let (processedAboutText, isWebViewSupportNeeded) = self.makeProcessedAboutText(aboutText)
 
         let certificateText = self.makeFormattedCertificateText(course: course)
         let certificateDetailsText = course.hasCertificate
@@ -44,20 +45,23 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
             : nil
 
-        let aboutText: String = {
-            let text = course.courseDescription.isEmpty
-                ? course.summary
-                : course.courseDescription
-            return text.trimmingCharacters(in: .whitespaces)
-        }()
+        let instructorsViewModel = course.instructors.map { user in
+            CourseInfoTabInfoInstructorViewModel(
+                id: user.id,
+                avatarImageURL: URL(string: user.avatarURL),
+                title: "\(user.firstName) \(user.lastName)",
+                description: user.bio
+            )
+        }
 
         return CourseInfoTabInfoViewModel(
-            author: self.makeFormattedAuthorText(authors: course.authors),
+            authors: authorsViewModel,
             introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
-            aboutText: aboutText,
-            requirementsText: course.requirements.trimmingCharacters(in: .whitespaces),
-            targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
+            aboutText: processedAboutText,
+            isWebViewSupportNeededForAboutText: isWebViewSupportNeeded,
+            requirementsText: course.requirements.trimmingCharacters(in: .whitespacesAndNewlines),
+            targetAudienceText: course.audience.trimmingCharacters(in: .whitespacesAndNewlines),
             timeToCompleteText: self.makeFormattedTimeToCompleteText(timeToComplete: course.timeToComplete),
             languageText: self.makeLocalizedLanguageText(code: course.languageCode),
             certificateText: certificateText,
@@ -66,24 +70,39 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         )
     }
 
+    private func makeProcessedAboutText(_ aboutText: String) -> (String, Bool) {
+        let trimmedText = aboutText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmedText.isEmpty {
+            return (trimmedText, false)
+        }
+
+        let isWebViewSupportNeeded = TagDetectionUtil.isWebViewSupportNeeded(trimmedText)
+
+        guard isWebViewSupportNeeded else {
+            return (trimmedText, false)
+        }
+
+        let injections: [ContentProcessingInjection] = [
+            CourseInfoStylesInjection(),
+            MetaViewportInjection(),
+            WebkitImagesCalloutDisableInjection()
+        ]
+
+        let contentProcessor = ContentProcessor(
+            content: trimmedText,
+            rules: ContentProcessor.defaultRules,
+            injections: injections
+        )
+
+        return (contentProcessor.processContent(), true)
+    }
+
     private func makeIntroVideoURL(course: Course, streamVideoQuality: StreamVideoQuality) -> URL? {
         if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
             return introVideo.getUrlForQuality(streamVideoQuality.uniqueIdentifier)
         } else {
             return URL(string: course.introURL)
-        }
-    }
-
-    private func makeFormattedAuthorText(authors: [User]) -> String {
-        if authors.isEmpty {
-            return ""
-        } else {
-            var authorString = authors.reduce(into: "") { result, user in
-                result += "\(user.firstName) \(user.lastName), "
-            }.trimmingCharacters(in: .whitespaces)
-            authorString.removeLast()
-
-            return authorString
         }
     }
 

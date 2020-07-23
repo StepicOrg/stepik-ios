@@ -152,6 +152,18 @@ extension UIColor {
     /// A non adaptable color with hex value #3E50CB (violet04).
     static let stepikDarkVioletFixed = ColorPalette.violet04
 
+    // MARK: Orange
+
+    /// Adaptable color with base hex value #FFA861.
+    static var stepikOrange: UIColor {
+        .dynamic(
+            light: ColorPalette.orange800,
+            dark: ColorPalette.orange500,
+            lightAccessibility: ColorPalette.orange900,
+            darkAccessibility: ColorPalette.orange400
+        )
+    }
+
     // MARK: Accent (grey06)
 
     /// Adaptable color with base hex value #535366 (grey06).
@@ -712,6 +724,17 @@ private enum ColorPalette {
     static let violet02 = UIColor(hex6: 0xE9EBFA)
     static let violet03 = UIColor(hex6: 0x9CA6E6)
     static let violet04 = UIColor(hex6: 0x3E50CB)
+
+    // MARK: - Orange -
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let orange900 = UIColor(hex6: 0xF7905C)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let orange800 = UIColor(hex6: 0xFFA961)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let orange500 = UIColor(hex6: 0xFFD370)
+    /// Color to use in dark mode and with a high contrast level.
+    static let orange400 = UIColor(hex6: 0xFFDA73)
 
     // MARK: - Gradient Courses -
 

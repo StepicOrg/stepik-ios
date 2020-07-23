@@ -12,6 +12,8 @@
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;stepikcontent.css&quot;&gt;</string>
 	<key>wysiwygCSSWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;wysiwyg.css&quot;&gt;</string>
+	<key>courseInfoCSSWrapper</key>
+	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;course-info.css&quot;&gt;</string>
 	<key>AudioTagWrapperInit</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;plyr.setup({loadSprite: false})&lt;/script&gt;</string>
 	<key>AudioTagWrapper</key>

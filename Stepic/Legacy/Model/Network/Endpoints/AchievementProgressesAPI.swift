@@ -13,23 +13,41 @@ import PromiseKit
 final class AchievementProgressesAPI: APIEndpoint {
     override var name: String { "achievement-progresses" }
 
-    func retrieve(user: Int, kind: String? = nil, sortByObtainDateDesc: Bool = false, page: Int = 1) -> Promise<([AchievementProgress], Meta)> {
+    func retrieve(
+        userID: Int,
+        kind: String? = nil,
+        order: Order? = nil,
+        page: Int = 1
+    ) -> Promise<([AchievementProgress], Meta)> {
         Promise { seal in
             var params = Parameters()
+
+            params["user"] = userID
+            params["page"] = page
+
             if let kind = kind {
                 params["kind"] = kind
             }
-            params["user"] = user
-            params["page"] = page
-            if sortByObtainDateDesc {
-                params["order"] = "-obtain_date"
+
+            if let order = order {
+                params["order"] = order.rawValue
             }
 
-            retrieve.request(requestEndpoint: name, paramName: name, params: params, updatingObjects: [], withManager: manager).done { progresses, meta in
+            self.retrieve.request(
+                requestEndpoint: self.name,
+                paramName: self.name,
+                params: params,
+                updatingObjects: [],
+                withManager: self.manager
+            ).done { progresses, meta in
                 seal.fulfill((progresses, meta))
             }.catch { error in
                 seal.reject(error)
             }
         }
+    }
+
+    enum Order: String {
+        case obtainDateDesc = "-obtain_date"
     }
 }

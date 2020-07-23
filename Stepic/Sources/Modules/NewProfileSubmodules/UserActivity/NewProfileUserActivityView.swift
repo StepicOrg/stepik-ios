@@ -8,7 +8,7 @@ extension NewProfileUserActivityView {
         let longestStreakLabelInsets = LayoutInsets(top: 8)
 
         let pinsMapViewHeight: CGFloat = 166
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 
@@ -27,15 +27,19 @@ final class NewProfileUserActivityView: UIView {
 
     private lazy var pinsMapView = PinsMapView()
 
+    private var longestStreakLabelTopToBottomOfCurrentStreakViewConstraint: Constraint?
+    private var longestStreakLabelTopToSuperview: Constraint?
+
     override var intrinsicContentSize: CGSize {
+        let currentStreakViewHeight = self.currentStreakView.isHidden
+            ? 0
+            : self.currentStreakView.intrinsicContentSize.height
         let longestStreakLabelHeightWithInsets = self.longestStreakLabel.isHidden
             ? 0
             : (self.appearance.longestStreakLabelInsets.top + self.longestStreakLabel.intrinsicContentSize.height)
         return CGSize(
             width: UIView.noIntrinsicMetric,
-            height: self.currentStreakView.intrinsicContentSize.height
-                + longestStreakLabelHeightWithInsets
-                + self.appearance.pinsMapViewHeight
+            height: currentStreakViewHeight + longestStreakLabelHeightWithInsets + self.appearance.pinsMapViewHeight
         )
     }
 
@@ -61,9 +65,18 @@ final class NewProfileUserActivityView: UIView {
     func configure(viewModel: NewProfileUserActivityViewModel) {
         self.currentStreakView.didSolveToday = viewModel.didSolveToday
         self.currentStreakView.text = viewModel.currentStreakText
+        self.currentStreakView.isHidden = self.currentStreakView.text?.isEmpty ?? true
 
         self.longestStreakLabel.text = viewModel.longestStreakText
         self.longestStreakLabel.isHidden = self.longestStreakLabel.text?.isEmpty ?? true
+
+        if self.currentStreakView.isHidden {
+            self.longestStreakLabelTopToSuperview?.activate()
+            self.longestStreakLabelTopToBottomOfCurrentStreakViewConstraint?.deactivate()
+        } else {
+            self.longestStreakLabelTopToBottomOfCurrentStreakViewConstraint?.activate()
+            self.longestStreakLabelTopToSuperview?.deactivate()
+        }
 
         self.pinsMapView.buildMonths(viewModel.pins)
     }
@@ -88,9 +101,12 @@ extension NewProfileUserActivityView: ProgrammaticallyInitializableViewProtocol 
 
         self.longestStreakLabel.translatesAutoresizingMaskIntoConstraints = false
         self.longestStreakLabel.snp.makeConstraints { make in
-            make.top
+            self.longestStreakLabelTopToBottomOfCurrentStreakViewConstraint = make.top
                 .equalTo(self.currentStreakView.snp.bottom)
                 .offset(self.appearance.longestStreakLabelInsets.top)
+                .constraint
+            self.longestStreakLabelTopToSuperview = make.top.equalToSuperview().constraint
+            self.longestStreakLabelTopToSuperview?.deactivate()
             make.leading.trailing.equalToSuperview()
         }
 

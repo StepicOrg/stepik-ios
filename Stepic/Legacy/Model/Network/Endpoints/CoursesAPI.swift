@@ -45,39 +45,45 @@ final class CoursesAPI: APIEndpoint {
 
     func retrieve(
         tag: Int? = nil,
+        teacher: Int? = nil,
         featured: Bool? = nil,
         enrolled: Bool? = nil,
         excludeEnded: Bool? = nil,
         isPublic: Bool? = nil,
         isPopular: Bool? = nil,
-        order: String? = nil,
+        isCataloged: Bool? = nil,
+        order: Order? = nil,
         language: String? = nil,
         page: Int = 1
     ) -> Promise<([Course], Meta)> {
         var params = Parameters()
 
         if let isFeatured = featured {
-            params["is_featured"] = isFeatured ? "true" : "false"
+            params["is_featured"] = String(describing: isFeatured)
         }
 
         if let isEnrolled = enrolled {
-            params["enrolled"] = isEnrolled ? "true" : "false"
+            params["enrolled"] = String(describing: isEnrolled)
         }
 
         if let excludeEnded = excludeEnded {
-            params["exclude_ended"] = excludeEnded ? "true" : "false"
+            params["exclude_ended"] = String(describing: excludeEnded)
         }
 
         if let isPublic = isPublic {
-            params["is_public"] = isPublic ? "true" : "false"
+            params["is_public"] = String(describing: isPublic)
         }
 
         if let isPopular = isPopular {
-            params["is_popular"] = isPopular ? "true" : "false"
+            params["is_popular"] = String(describing: isPopular)
+        }
+
+        if let isCataloged = isCataloged {
+            params["is_cataloged"] = String(describing: isCataloged)
         }
 
         if let order = order {
-            params["order"] = order
+            params["order"] = order.rawValue
         }
 
         if let language = language {
@@ -86,6 +92,10 @@ final class CoursesAPI: APIEndpoint {
 
         if let tag = tag {
             params["tag"] = tag
+        }
+
+        if let teacher = teacher {
+            params["teacher"] = teacher
         }
 
         params["page"] = page
@@ -127,6 +137,11 @@ final class CoursesAPI: APIEndpoint {
         SpotlightIndexingService.shared.indexCourses(courses)
         return .value(courses)
     }
+
+    enum Order: String {
+        case activityDesc = "-activity"
+        case popularityDesc = "-popularity"
+    }
 }
 
 extension CoursesAPI {
@@ -138,7 +153,7 @@ extension CoursesAPI {
         enrolled: Bool? = nil,
         excludeEnded: Bool? = nil,
         isPublic: Bool? = nil,
-        order: String? = nil,
+        order: Order? = nil,
         language: String? = nil,
         page: Int = 1,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,

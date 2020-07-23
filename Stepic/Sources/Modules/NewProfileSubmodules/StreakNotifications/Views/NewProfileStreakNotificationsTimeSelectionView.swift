@@ -15,7 +15,7 @@ extension NewProfileStreakNotificationsTimeSelectionView {
         let detailDisclosureImageTintColor = UIColor.stepikSystemTertiaryText
         let detailDisclosureImageInsets = LayoutInsets(left: 8, right: 16)
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.stepikSecondaryGroupedBackground
     }
 }
 
