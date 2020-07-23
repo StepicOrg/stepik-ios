@@ -10,6 +10,7 @@ import FBSDKCoreKit
 import FirebaseCore
 import FirebaseInstanceID
 import FirebaseMessaging
+import GoogleSignIn
 import IQKeyboardManagerSwift
 import MediaPlayer
 import Presentr
@@ -255,6 +256,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
+            return true
+        }
+        if GIDSignIn.sharedInstance().handle(url) {
             return true
         }
         if url.scheme == "vk\(StepikApplicationsInfo.SocialInfo.AppIds.vk)"
