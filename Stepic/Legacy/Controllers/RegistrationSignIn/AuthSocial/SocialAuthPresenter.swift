@@ -101,6 +101,11 @@ final class SocialAuthPresenter {
             sdkProvider.delegate = vkViewDelegate
         }
 
+        if let googleSDKProvider = sdkProvider as? GoogleIDSocialSDKProvider,
+           let googleIDSocialSDKDelegate = self.view as? GoogleIDSocialSDKProviderDelegate {
+            googleSDKProvider.delegate = googleIDSocialSDKDelegate
+        }
+
         sdkProvider.getAccessInfo().then { credential -> Promise<(StepikToken, AuthorizationType)> in
             self.authAPI.signUpWithSocialCredential(credential: credential, provider: sdkProvider.name)
         }.then { token, authorizationType -> Promise<User> in

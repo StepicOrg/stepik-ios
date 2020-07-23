@@ -46,9 +46,11 @@ def all_pods
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
     
+    # Social SDKs
     pod 'VK-ios-sdk', '1.5.1'
     pod 'FBSDKCoreKit', '7.1.0'
     pod 'FBSDKLoginKit', '7.1.0'
+    pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
     
