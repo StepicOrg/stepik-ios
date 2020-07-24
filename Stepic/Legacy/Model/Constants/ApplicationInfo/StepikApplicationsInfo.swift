@@ -76,6 +76,7 @@ struct StepikApplicationsInfo {
         struct AppIds {
             static let vk = StepikApplicationsInfo.stepikConfigInfo?.get(for: Root.SocialProviders.vkId) as? String ?? ""
             static let facebook = StepikApplicationsInfo.stepikConfigInfo?.get(for: Root.SocialProviders.facebookId) as? String ?? ""
+            static let google = StepikApplicationsInfo.stepikConfigInfo?.get(for: Root.SocialProviders.googleId) as? String ?? ""
         }
 
         static var isSignInWithAppleAvailable: Bool {

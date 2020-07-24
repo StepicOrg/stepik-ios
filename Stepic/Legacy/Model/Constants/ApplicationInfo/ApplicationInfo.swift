@@ -41,6 +41,7 @@ final class ApplicationInfo {
         enum SocialProviders {
             static let vkId = "socialProviders.vk"
             static let facebookId = "socialProviders.facebook"
+            static let googleId = "socialProviders.google"
         }
         enum AuthType {
             static let social = "social"

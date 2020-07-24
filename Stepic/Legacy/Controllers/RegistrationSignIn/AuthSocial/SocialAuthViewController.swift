@@ -321,6 +321,10 @@ extension SocialAuthViewController: VKSocialSDKProviderDelegate {
     }
 }
 
+extension SocialAuthViewController: GoogleIDSocialSDKProviderDelegate {
+    var googleSignInPresentingViewController: UIViewController? { self }
+}
+
 final class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var numberOfColumns: Int = 3
     var itemSizeHeight: CGFloat = 51.0

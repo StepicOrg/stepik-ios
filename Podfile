@@ -7,10 +7,10 @@ use_frameworks!
 project 'Stepic', 'Production Debug' => :debug, 'Production Release' => :release, 'Release Debug' => :debug, 'Release Release' => :release, 'Develop Debug' => :debug, 'Develop Release' => :release
 
 def shared_pods
-    pod 'Alamofire', '5.2.1'
-    pod 'Atributika', '4.9.8'
+    pod 'Alamofire', '5.2.2'
+    pod 'Atributika', '4.9.9'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.8.3'
+    pod 'SDWebImage', '5.8.4'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'DeviceKit', '3.2.0'
     pod 'PromiseKit', '6.13.1'
@@ -29,11 +29,11 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.28.0'
-    pod 'Firebase/Messaging', '6.28.0'
-    pod 'Firebase/Analytics', '6.28.0'
-    pod 'Firebase/Crashlytics', '6.28.0'
-    pod 'Firebase/RemoteConfig', '6.28.0'
+    pod 'Firebase/Core', '6.28.1'
+    pod 'Firebase/Messaging', '6.28.1'
+    pod 'Firebase/Analytics', '6.28.1'
+    pod 'Firebase/Crashlytics', '6.28.1'
+    pod 'Firebase/RemoteConfig', '6.28.1'
 
     pod 'YandexMobileMetrica/Dynamic', '3.11.1'
     pod 'Amplitude-iOS', '4.9.3'
@@ -48,9 +48,11 @@ def all_pods
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
     
+    # Social SDKs
     pod 'VK-ios-sdk', '1.5.1'
     pod 'FBSDKCoreKit', '7.1.0'
     pod 'FBSDKLoginKit', '7.1.0'
+    pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
     
