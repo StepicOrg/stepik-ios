@@ -23,6 +23,7 @@ extension User {
     @NSManaged var managedFirstName: String?
     @NSManaged var managedLastName: String?
     @NSManaged var managedAvatarURL: String?
+    @NSManaged var managedCover: String?
     @NSManaged var managedLevel: NSNumber?
     @NSManaged var managedKnowledge: NSNumber?
     @NSManaged var managedKnowledgeRank: NSNumber?
@@ -160,6 +161,15 @@ extension User {
         }
         get {
              managedAvatarURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+        }
+    }
+
+    var cover: String? {
+        get {
+            self.managedCover
+        }
+        set {
+            self.managedCover = newValue
         }
     }
 
