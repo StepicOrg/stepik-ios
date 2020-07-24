@@ -13,9 +13,7 @@ final class ApplicationInfo {
         enum URL {
             static let appId = "url.appId"
             static let scheme = "url.scheme"
-            static let apiProduction = "url.apiProduction"
-            static let apiDevelop = "url.apiDevelop"
-            static let apiRelease = "url.apiRelease"
+            static let api = "url.api"
             static let oauth = "url.oauth"
             static let stepik = "url.stepik"
             static let version = "url.version"

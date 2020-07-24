@@ -239,7 +239,7 @@
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
 		08A500501F2B73C000140D25 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
-		08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* Auth.plist */; };
+		08A7B0E81EB340F500C1BA71 /* Auth-Production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* Auth-Production.plist */; };
 		08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		08AB82381D74C44100FDEADE /* StepikSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* StepikSession.swift */; };
 		08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB823A1D75AA9300FDEADE /* CookieTests.swift */; };
@@ -515,6 +515,10 @@
 		2C5BE9DC233C0A110098EB2F /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BE9DB233C0A100098EB2F /* katex */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */; };
+		2C5D963B24C9B251004E9FD1 /* Auth-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963924C9B251004E9FD1 /* Auth-Release.plist */; };
+		2C5D963C24C9B251004E9FD1 /* Auth-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963A24C9B251004E9FD1 /* Auth-Develop.plist */; };
+		2C5D964124C9B4DD004E9FD1 /* Config-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963F24C9B4DD004E9FD1 /* Config-Develop.plist */; };
+		2C5D964224C9B4DD004E9FD1 /* Config-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D964024C9B4DD004E9FD1 /* Config-Release.plist */; };
 		2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
 		2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */; };
 		2C5DF13F1FED26AC003B1177 /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */; };
@@ -670,7 +674,7 @@
 		2CBB21D924A60D7500B57F2D /* AppleIDSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBB21D824A60D7500B57F2D /* AppleIDSocialSDKProvider.swift */; };
 		2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */; };
 		2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBCB9923980ED6006D6C15 /* WeakBox.swift */; };
-		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
+		2CBC4C061F1E4A1300FE96C4 /* Config-Production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config-Production.plist */; };
 		2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4820D1AAFC000B5732 /* AchievementsListTableViewCell.swift */; };
 		2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */; };
 		2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
@@ -1574,7 +1578,7 @@
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullHeightWebView.swift; sourceTree = "<group>"; };
-		08A7B0E71EB340F500C1BA71 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth.plist; sourceTree = "<group>"; };
+		08A7B0E71EB340F500C1BA71 /* Auth-Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Auth-Production.plist"; sourceTree = "<group>"; };
 		08A9F71D1FC38C9E00640F1F /* CourseTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTag.swift; sourceTree = "<group>"; };
 		08AB82341D74926F00FDEADE /* StepicsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicsAPI.swift; sourceTree = "<group>"; };
 		08AB82371D74C44100FDEADE /* StepikSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikSession.swift; sourceTree = "<group>"; };
@@ -1881,6 +1885,10 @@
 		2C5BE9DB233C0A100098EB2F /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikLabelBarButton.swift; sourceTree = "<group>"; };
+		2C5D963924C9B251004E9FD1 /* Auth-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Auth-Release.plist"; sourceTree = "<group>"; };
+		2C5D963A24C9B251004E9FD1 /* Auth-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Auth-Develop.plist"; sourceTree = "<group>"; };
+		2C5D963F24C9B4DD004E9FD1 /* Config-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Develop.plist"; sourceTree = "<group>"; };
+		2C5D964024C9B4DD004E9FD1 /* Config-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Release.plist"; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepViewController.swift; sourceTree = "<group>"; };
@@ -2041,7 +2049,7 @@
 		2CBB21D824A60D7500B57F2D /* AppleIDSocialSDKProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleIDSocialSDKProvider.swift; sourceTree = "<group>"; };
 		2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		2CBBCB9923980ED6006D6C15 /* WeakBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakBox.swift; sourceTree = "<group>"; };
-		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		2CBC4C051F1E4A1300FE96C4 /* Config-Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Production.plist"; sourceTree = "<group>"; };
 		2CBCBD4820D1AAFC000B5732 /* AchievementsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsListTableViewCell.swift; sourceTree = "<group>"; };
 		2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsListTableViewCell.xib; sourceTree = "<group>"; };
 		2CBCD3A7213583EB005D10FF /* Model_CourseListRename_v25.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_CourseListRename_v25.xcdatamodel; sourceTree = "<group>"; };
@@ -3114,6 +3122,36 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2C5D963D24C9B259004E9FD1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2C5D963A24C9B251004E9FD1 /* Auth-Develop.plist */,
+				08A7B0E71EB340F500C1BA71 /* Auth-Production.plist */,
+				2C5D963924C9B251004E9FD1 /* Auth-Release.plist */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		2C5D963E24C9B277004E9FD1 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				2C3D00B824C7FF0D00441053 /* Info-Develop.plist */,
+				08DE94151B8C58AC00D278AB /* Info-Production.plist */,
+				2C3D00B924C7FF0D00441053 /* Info-Release.plist */,
+			);
+			name = Info;
+			sourceTree = "<group>";
+		};
+		2C5D964324C9B4F4004E9FD1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				2C5D963F24C9B4DD004E9FD1 /* Config-Develop.plist */,
+				2CBC4C051F1E4A1300FE96C4 /* Config-Production.plist */,
+				2C5D964024C9B4DD004E9FD1 /* Config-Release.plist */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		2C5FCFF42357437500AE47C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -3126,18 +3164,16 @@
 				2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */,
 				2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */,
 				08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */,
-				08A7B0E71EB340F500C1BA71 /* Auth.plist */,
 				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
-				2CBC4C051F1E4A1300FE96C4 /* Config.plist */,
 				2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */,
-				2C3D00B824C7FF0D00441053 /* Info-Develop.plist */,
-				2C3D00B924C7FF0D00441053 /* Info-Release.plist */,
-				08DE94151B8C58AC00D278AB /* Info-Production.plist */,
 				2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */,
 				0869F6D71CE3684000F8A6DB /* default_sound.wav */,
 				08DE941D1B8C58AC00D278AB /* Images.xcassets */,
 				2CA9D98B20122EAF007AA743 /* AdaptiveLeaderboardsNames */,
 				2CB62BF02019FDB300B5E336 /* AdaptiveOnboardingContent */,
+				2C5D963D24C9B259004E9FD1 /* Auth */,
+				2C5D964324C9B4F4004E9FD1 /* Config */,
+				2C5D963E24C9B277004E9FD1 /* Info */,
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08A1257B1BDEBCC90066B2B2 /* Localizable.strings */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
@@ -7080,6 +7116,7 @@
 				2C97E010215E5246005684A1 /* Explore.storyboard in Resources */,
 				2CD99DD622DCE4D500628224 /* overlay_hard.png in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
+				2C5D964224C9B4DD004E9FD1 /* Config-Release.plist in Resources */,
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
 				2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */,
 				08CBA31D1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
@@ -7090,12 +7127,13 @@
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
 				2C97E00E215E480F005684A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */,
-				2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */,
+				2CBC4C061F1E4A1300FE96C4 /* Config-Production.plist in Resources */,
 				08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */,
 				08484F06211AF4320006266F /* StoryCollectionViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */,
+				2C5D963C24C9B251004E9FD1 /* Auth-Develop.plist in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
 				2CB2393F20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib in Resources */,
@@ -7115,6 +7153,7 @@
 				2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */,
 				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */,
 				2C5DF1461FED2B36003B1177 /* StepCardView.xib in Resources */,
+				2C5D963B24C9B251004E9FD1 /* Auth-Release.plist in Resources */,
 				2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */,
 				2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */,
 				082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */,
@@ -7150,11 +7189,12 @@
 				2CB62BE42019FD8500B5E336 /* step3.html in Resources */,
 				2CB62BEF2019FDB100B5E336 /* arrow_left.svg in Resources */,
 				2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */,
-				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
+				08A7B0E81EB340F500C1BA71 /* Auth-Production.plist in Resources */,
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				2C6F78B324C1A43400F12D30 /* course-info.css in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepikVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
+				2C5D964124C9B4DD004E9FD1 /* Config-Develop.plist in Resources */,
 				2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */,
 				2C7FEE771FDAF9D600B2B4F1 /* onboardingAnimation3.json in Resources */,
 				087D96B91EBB7C7700059408 /* Tokens.plist in Resources */,

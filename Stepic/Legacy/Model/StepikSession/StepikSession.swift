@@ -66,12 +66,14 @@ final class StepikSession {
 
                 StepikSession.cookieDict = cookieDict
 
-                if let csrftoken = cookieDict["\(StepikApplicationsInfo.cookiePrefix)csrftoken"],
-                   let sessionId = cookieDict["\(StepikApplicationsInfo.cookiePrefix)sessionid"] {
+                let cookiePrefix = StepikApplicationsInfo.cookiePrefix
+
+                if let csrftoken = cookieDict["\(cookiePrefix)csrftoken"],
+                   let sessionId = cookieDict["\(cookiePrefix)sessionid"] {
                     self.cookieHeaders = [
                         "Referer": "\(StepikApplicationsInfo.stepikURL)/",
                         "X-CSRFToken": csrftoken,
-                        "Cookie": "csrftoken=\(csrftoken); sessionid=\(sessionId)"
+                        "Cookie": "\(cookiePrefix)csrftoken=\(csrftoken); \(cookiePrefix)sessionid=\(sessionId)"
                     ]
                     completion()
                 } else {
