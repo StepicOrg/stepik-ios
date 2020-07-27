@@ -40,6 +40,7 @@ final class User: NSManagedObject, IDFetchable {
         self.firstName = json[JSONKey.firstName.rawValue].stringValue
         self.lastName = json[JSONKey.lastName.rawValue].stringValue
         self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
+        self.cover = json[JSONKey.cover.rawValue].string
         self.level = json[JSONKey.level.rawValue].intValue
         self.knowledge = json[JSONKey.knowledge.rawValue].intValue
         self.knowledgeRank = json[JSONKey.knowledgeRank.rawValue].intValue
@@ -110,6 +111,7 @@ final class User: NSManagedObject, IDFetchable {
         case firstName = "first_name"
         case lastName = "last_name"
         case avatar
+        case cover
         case level
         case joinDate = "join_date"
         case isActive = "is_active"

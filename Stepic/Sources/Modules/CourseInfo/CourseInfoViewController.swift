@@ -160,7 +160,6 @@ final class CourseInfoViewController: UIViewController {
                 sender: self
             )
 
-
             let statusBarStyle: UIStatusBarStyle = {
                 if alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold) {
                     return self.view.isDarkInterfaceStyle ? .lightContent : .dark

@@ -142,6 +142,7 @@ LoadingVideoQualityPreference = "Downloading video quality";
 WatchingVideoQualityPreference = "Streaming video quality";
 SignOut = "Sign out";
 Profile = "Profile";
+Organization = "Organization";
 Preferences = "Preferences";
 CurrentStreak = "Current streak";
 LongestStreak = "Longest streak";
@@ -986,6 +987,7 @@ NewProfileBlockTitleActivity = "Activity";
 NewProfileBlockTitleAchievements = "Achievements";
 NewProfileBlockTitleCertificates = "Certificates";
 NewProfileBlockTitleDetails = "Details";
+NewProfileBlockTitleDetailsOrganization = "About Organization";
 
 NewProfileUserActivityNoCurrentStreak = "Solve today to start a streak";
 NewProfileUserActivityCurrentStreak = "%@ in a row";

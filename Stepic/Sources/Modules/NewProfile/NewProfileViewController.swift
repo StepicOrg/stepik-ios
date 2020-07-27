@@ -1,5 +1,6 @@
 import UIKit
 
+// swiftlint:disable file_length
 protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: NewProfile.ProfileLoad.ViewModel)
     func displayNavigationControls(viewModel: NewProfile.NavigationControlsPresentation.ViewModel)
@@ -16,12 +17,17 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
+    private static let topBarAlphaStatusBarThreshold = 0.85
+
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
         .streakNotifications, .createdCourses, .userActivity, .achievements, .certificates, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var newProfileView: NewProfileView? { self.view as? NewProfileView }
+    var styledNavigationController: StyledNavigationController? {
+        self.navigationController as? StyledNavigationController
+    }
 
     private let interactor: NewProfileInteractorProtocol
     private var state: NewProfile.ViewControllerState
@@ -43,6 +49,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         action: #selector(self.profileEditButtonClicked)
     )
 
+    private var isStretchyHeaderAvailable = false
+    private var lastKnownScrollOffset: CGFloat = 0
+
     init(
         interactor: NewProfileInteractorProtocol,
         initialState: NewProfile.ViewControllerState = .loading
@@ -60,6 +69,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     override func loadView() {
         let view = NewProfileView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -77,12 +87,19 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         self.interactor.doOnlineModeReset(request: .init())
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+        }
+    }
+
     // MARK: Private API
 
     private func setup() {
-        self.title = NSLocalizedString("Profile", comment: "")
-        self.edgesForExtendedLayout = []
-
+        self.styledNavigationController?.removeBackButtonTitleForTopController()
+        self.updateContentInsets()
         self.registerPlaceholders()
     }
 
@@ -158,8 +175,18 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case .anonymous:
             self.showPlaceholder(for: .anonymous)
         case .result(let viewModel):
+            if (self.title?.isEmpty ?? true) && !viewModel.headerViewModel.isOrganization {
+                self.title = NSLocalizedString("Profile", comment: "")
+            }
+
             self.isPlaceholderShown = false
             self.newProfileView?.configure(viewModel: viewModel)
+
+            if !self.isStretchyHeaderAvailable {
+                self.isStretchyHeaderAvailable = viewModel.headerViewModel.isStretchyHeaderAvailable
+            }
+            self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+            self.updateContentInsets()
 
             let shouldShowCreatedCourses: Bool = {
                 switch self.currentCreatedCoursesState {
@@ -180,8 +207,71 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             let shouldShowCertificates = self.currentCertificatesState != .hidden
             self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
 
-            let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
-            self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
+            self.refreshProfileDetailsState(viewModel: viewModel)
+        }
+    }
+
+    private func getTopBarHeight() -> CGFloat {
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
+        let statusBarHeight = min(
+            UIApplication.shared.statusBarFrame.size.width,
+            UIApplication.shared.statusBarFrame.size.height
+        )
+        return (navigationBarHeight ?? 0) + statusBarHeight
+    }
+
+    private func updateContentOffset(scrollOffset: CGFloat) {
+        guard self.isStretchyHeaderAvailable else {
+            return
+        }
+
+        if scrollOffset > 0 {
+            self.title = NSLocalizedString("Organization", comment: "")
+
+            let topPadding = self.getTopBarHeight()
+            let scrollingProgress = min(1, scrollOffset / topPadding)
+
+            self.updateTopBar(alpha: scrollingProgress)
+        } else {
+            self.updateTopBar(alpha: 0)
+        }
+    }
+
+    private func updateContentInsets() {
+        let contentInsets = self.isStretchyHeaderAvailable
+            ? .zero
+            : UIEdgeInsets(top: self.getTopBarHeight(), left: 0, bottom: 0, right: 0)
+        self.newProfileView?.contentInsets = contentInsets
+    }
+
+    private func updateTopBar(alpha: CGFloat) {
+        self.view.performBlockUsingViewTraitCollection {
+            self.styledNavigationController?.changeBackgroundColor(
+                StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(alpha),
+                sender: self
+            )
+
+            let transitionColor = ColorTransitionHelper.makeTransitionColor(
+                from: .white,
+                to: StyledNavigationController.Appearance.tintColor,
+                transitionProgress: alpha
+            )
+            self.styledNavigationController?.changeTintColor(transitionColor, sender: self)
+            self.styledNavigationController?.changeTextColor(
+                StyledNavigationController.Appearance.tintColor.withAlphaComponent(alpha),
+                sender: self
+            )
+
+            let statusBarStyle: UIStatusBarStyle = {
+                if alpha > CGFloat(Self.topBarAlphaStatusBarThreshold) {
+                    return self.view.isDarkInterfaceStyle ? .lightContent : .dark
+                } else {
+                    return .lightContent
+                }
+            }()
+
+            self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
+            self.styledNavigationController?.changeShadowViewAlpha(alpha, sender: self)
         }
     }
 
@@ -439,51 +529,45 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     // MARK: Profile Details
 
-    private enum ProfileDetailsState {
-        case visible(viewModel: NewProfileViewModel)
-        case hidden
-    }
-
-    private func refreshProfileDetailsState(_ state: ProfileDetailsState) {
-        switch state {
-        case .visible(let viewModel):
-            if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
-               let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
-                profileDetailsViewController.newProfileDetailsView?.configure(
-                    viewModel: .init(userID: viewModel.userID, profileDetailsText: viewModel.userDetails)
+    private func refreshProfileDetailsState(viewModel: NewProfileViewModel) {
+        if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
+            let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
+            profileDetailsViewController.newProfileDetailsView?.configure(
+                viewModel: .init(
+                    userID: viewModel.userID,
+                    profileDetailsText: viewModel.userDetails,
+                    isOrganization: viewModel.headerViewModel.isOrganization
                 )
-            } else {
-                let profileDetailsAssembly = NewProfileDetailsAssembly()
-                let profileDetailsViewController = profileDetailsAssembly.makeModule()
+            )
+        } else {
+            let profileDetailsAssembly = NewProfileDetailsAssembly()
+            let profileDetailsViewController = profileDetailsAssembly.makeModule()
 
-                let headerView = NewProfileBlockHeaderView()
-                headerView.titleText = NSLocalizedString("NewProfileBlockTitleDetails", comment: "")
-                headerView.isShowAllButtonHidden = true
-                headerView.isUserInteractionEnabled = false
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = viewModel.headerViewModel.isOrganization
+                ? NSLocalizedString("NewProfileBlockTitleDetailsOrganization", comment: "")
+                : NSLocalizedString("NewProfileBlockTitleDetails", comment: "")
+            headerView.isShowAllButtonHidden = true
+            headerView.isUserInteractionEnabled = false
 
-                let containerView = NewProfileBlockContainerView(
-                    headerView: headerView,
-                    contentView: profileDetailsViewController.view,
-                    appearance: .init(contentViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: profileDetailsViewController.view,
+                appearance: .init(contentViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: profileDetailsViewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.details
                 )
+            )
 
-                self.registerSubmodule(
-                    .init(
-                        viewController: profileDetailsViewController,
-                        view: containerView,
-                        type: NewProfile.Submodule.details
-                    )
+            if let moduleInput = profileDetailsAssembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.details.uniqueIdentifier: moduleInput])
                 )
-
-                if let moduleInput = profileDetailsAssembly.moduleInput {
-                    self.interactor.doSubmodulesRegistration(
-                        request: .init(submodules: [NewProfile.Submodule.details.uniqueIdentifier: moduleInput])
-                    )
-                }
-            }
-        case .hidden:
-            if let submodule = self.getSubmodule(type: NewProfile.Submodule.details) {
-                self.removeSubmodule(submodule)
             }
         }
     }
@@ -501,6 +585,15 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.view = view
             self.type = type
         }
+    }
+}
+
+// MARK: - NewProfileViewController: NewProfileViewDelegate -
+
+extension NewProfileViewController: NewProfileViewDelegate {
+    func newProfileView(_ view: NewProfileView, didScroll scrollView: UIScrollView) {
+        self.lastKnownScrollOffset = scrollView.contentOffset.y
+        self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
     }
 }
 
