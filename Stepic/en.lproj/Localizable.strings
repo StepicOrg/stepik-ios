@@ -987,6 +987,7 @@ NewProfileBlockTitleActivity = "Activity";
 NewProfileBlockTitleAchievements = "Achievements";
 NewProfileBlockTitleCertificates = "Certificates";
 NewProfileBlockTitleDetails = "Details";
+NewProfileBlockTitleDetailsOrganization = "About Organization";
 
 NewProfileUserActivityNoCurrentStreak = "Solve today to start a streak";
 NewProfileUserActivityCurrentStreak = "%@ in a row";

@@ -988,6 +988,7 @@ NewProfileBlockTitleActivity = "Активность";
 NewProfileBlockTitleAchievements = "Достижения";
 NewProfileBlockTitleCertificates = "Сертификаты";
 NewProfileBlockTitleDetails = "Обо мне";
+NewProfileBlockTitleDetailsOrganization = "Об организации";
 
 NewProfileUserActivityNoCurrentStreak = "Начните учиться сегодня";
 NewProfileUserActivityCurrentStreak = "%@ без перерыва";

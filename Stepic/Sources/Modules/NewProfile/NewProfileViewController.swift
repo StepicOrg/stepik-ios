@@ -207,8 +207,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             let shouldShowCertificates = self.currentCertificatesState != .hidden
             self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
 
-            let shouldShowProfileDetails = !viewModel.userDetails.isEmpty
-            self.refreshProfileDetailsState(shouldShowProfileDetails ? .visible(viewModel: viewModel) : .hidden)
+            self.refreshProfileDetailsState(viewModel: viewModel)
         }
     }
 
@@ -530,51 +529,45 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     // MARK: Profile Details
 
-    private enum ProfileDetailsState {
-        case visible(viewModel: NewProfileViewModel)
-        case hidden
-    }
-
-    private func refreshProfileDetailsState(_ state: ProfileDetailsState) {
-        switch state {
-        case .visible(let viewModel):
-            if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
-               let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
-                profileDetailsViewController.newProfileDetailsView?.configure(
-                    viewModel: .init(userID: viewModel.userID, profileDetailsText: viewModel.userDetails)
+    private func refreshProfileDetailsState(viewModel: NewProfileViewModel) {
+        if let submodule = self.getSubmodule(type: NewProfile.Submodule.details),
+            let profileDetailsViewController = submodule.viewController as? NewProfileDetailsViewController {
+            profileDetailsViewController.newProfileDetailsView?.configure(
+                viewModel: .init(
+                    userID: viewModel.userID,
+                    profileDetailsText: viewModel.userDetails,
+                    isOrganization: viewModel.headerViewModel.isOrganization
                 )
-            } else {
-                let profileDetailsAssembly = NewProfileDetailsAssembly()
-                let profileDetailsViewController = profileDetailsAssembly.makeModule()
+            )
+        } else {
+            let profileDetailsAssembly = NewProfileDetailsAssembly()
+            let profileDetailsViewController = profileDetailsAssembly.makeModule()
 
-                let headerView = NewProfileBlockHeaderView()
-                headerView.titleText = NSLocalizedString("NewProfileBlockTitleDetails", comment: "")
-                headerView.isShowAllButtonHidden = true
-                headerView.isUserInteractionEnabled = false
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = viewModel.headerViewModel.isOrganization
+                ? NSLocalizedString("NewProfileBlockTitleDetailsOrganization", comment: "")
+                : NSLocalizedString("NewProfileBlockTitleDetails", comment: "")
+            headerView.isShowAllButtonHidden = true
+            headerView.isUserInteractionEnabled = false
 
-                let containerView = NewProfileBlockContainerView(
-                    headerView: headerView,
-                    contentView: profileDetailsViewController.view,
-                    appearance: .init(contentViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: profileDetailsViewController.view,
+                appearance: .init(contentViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20))
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: profileDetailsViewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.details
                 )
+            )
 
-                self.registerSubmodule(
-                    .init(
-                        viewController: profileDetailsViewController,
-                        view: containerView,
-                        type: NewProfile.Submodule.details
-                    )
+            if let moduleInput = profileDetailsAssembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.details.uniqueIdentifier: moduleInput])
                 )
-
-                if let moduleInput = profileDetailsAssembly.moduleInput {
-                    self.interactor.doSubmodulesRegistration(
-                        request: .init(submodules: [NewProfile.Submodule.details.uniqueIdentifier: moduleInput])
-                    )
-                }
-            }
-        case .hidden:
-            if let submodule = self.getSubmodule(type: NewProfile.Submodule.details) {
-                self.removeSubmodule(submodule)
             }
         }
     }
