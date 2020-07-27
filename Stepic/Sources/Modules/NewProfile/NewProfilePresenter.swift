@@ -75,18 +75,33 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
     }
 
     private func makeHeaderViewModel(user: User) -> NewProfileHeaderViewModel {
-        let username = user.fullName.isEmpty ? "User \(user.id)" : user.fullName
-        let shortBio = user.bio.trimmingCharacters(in: .whitespacesAndNewlines)
+        let coverURL: URL? = {
+            if let cover = user.cover {
+                let urlString = "\(StepikApplicationsInfo.stepikURL)\(cover)"
+                return URL(string: urlString)
+            }
+            return nil
+        }()
 
-        let reputationCount = user.reputation > 0 ? user.reputation : nil
-        let knowledgeCount = user.knowledge > 0 ? user.knowledge : nil
+        let username: String = {
+            if user.fullName.isEmpty {
+                return user.isOrganization ? "Organization \(user.id)" : "User \(user.id)"
+            }
+            return user.fullName
+        }()
+
+        let shortBio = user.bio.trimmingCharacters(in: .whitespacesAndNewlines)
 
         return NewProfileHeaderViewModel(
             avatarURL: URL(string: user.avatarURL),
+            coverURL: coverURL,
             username: username,
             shortBio: shortBio,
-            reputationCount: reputationCount,
-            knowledgeCount: knowledgeCount
+            reputationCount: user.reputation,
+            knowledgeCount: user.knowledge,
+            issuedCertificatesCount: user.issuedCertificatesCount,
+            createdCoursesCount: user.createdCoursesCount,
+            isOrganization: user.isOrganization
         )
     }
 }

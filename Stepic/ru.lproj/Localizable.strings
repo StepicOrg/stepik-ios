@@ -142,6 +142,7 @@ LoadingVideoQualityPreference = "Качество загружаемого ви�
 WatchingVideoQualityPreference = "Качество видео онлайн";
 SignOut = "Выйти";
 Profile = "Профиль";
+Organization = "Организация";
 Preferences = "Настройки";
 CurrentStreak = "Текущий рекорд";
 LongestStreak = "Личный рекорд";
