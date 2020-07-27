@@ -7,8 +7,7 @@ extension NewProfileCoverView {
         let imageFadeInDuration: TimeInterval = 0.15
         let placeholderImage = UIImage(named: "lesson_cover_50")
         let overlayColor = UIColor.stepikAccentFixed
-        let overlayAlpha: CGFloat = 0.25
-        let activityIndicatorColor = UIColor.stepikLoadingIndicator
+        let overlayAlpha: CGFloat = 0.2
     }
 }
 
@@ -27,13 +26,6 @@ final class NewProfileCoverView: UIView {
         view.backgroundColor = self.appearance.overlayColor
         view.alpha = self.appearance.overlayAlpha
         return view
-    }()
-
-    private lazy var activityIndicatorView: UIActivityIndicatorView = {
-        let activityIndicatorView = UIActivityIndicatorView(style: .stepikGray)
-        activityIndicatorView.color = self.appearance.activityIndicatorColor
-        activityIndicatorView.hidesWhenStopped = true
-        return activityIndicatorView
     }()
 
     var imageURL: URL? {
@@ -63,12 +55,6 @@ final class NewProfileCoverView: UIView {
     }
 
     private func loadImage(_ url: URL) {
-        DispatchQueue.main.async {
-            if self.imageView.image == nil {
-                self.activityIndicatorView.startAnimating()
-            }
-        }
-
         Nuke.loadImage(
             with: url,
             options: ImageLoadingOptions(
@@ -77,10 +63,7 @@ final class NewProfileCoverView: UIView {
                 ),
                 failureImage: self.appearance.placeholderImage
             ),
-            into: self.imageView,
-            completion: { [weak self] _ in
-                self?.activityIndicatorView.stopAnimating()
-            }
+            into: self.imageView
         )
     }
 }
@@ -89,7 +72,6 @@ extension NewProfileCoverView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.overlayView)
-        self.addSubview(self.activityIndicatorView)
     }
 
     func makeConstraints() {
@@ -101,11 +83,6 @@ extension NewProfileCoverView: ProgrammaticallyInitializableViewProtocol {
         self.overlayView.translatesAutoresizingMaskIntoConstraints = false
         self.overlayView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-
-        self.activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.activityIndicatorView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
         }
     }
 }
