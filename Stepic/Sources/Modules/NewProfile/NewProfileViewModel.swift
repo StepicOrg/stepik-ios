@@ -22,4 +22,5 @@ struct NewProfileViewModel {
     let userID: User.IdType
     let userDetails: String
     let isCurrentUserProfile: Bool
+    let socialProfilesCount: Int
 }

@@ -988,6 +988,7 @@ NewProfileBlockTitleCreatedCourses = "Созданные курсы";
 NewProfileBlockTitleActivity = "Активность";
 NewProfileBlockTitleAchievements = "Достижения";
 NewProfileBlockTitleCertificates = "Сертификаты";
+NewProfileBlockTitleSocialProfiles = "Ссылки";
 NewProfileBlockTitleDetails = "Обо мне";
 NewProfileBlockTitleDetailsOrganization = "Об организации";
 

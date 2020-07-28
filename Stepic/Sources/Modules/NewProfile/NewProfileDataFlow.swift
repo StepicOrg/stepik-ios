@@ -9,6 +9,7 @@ enum NewProfile {
         case userActivity
         case achievements
         case certificates
+        case socialProfiles
         case details
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }

@@ -7,5 +7,5 @@ struct NewProfileSocialProfilesViewModel {
         let url: URL?
     }
 
-    let items: [Item]
+    let socialProfiles: [Item]
 }

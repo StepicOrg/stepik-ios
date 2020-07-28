@@ -20,7 +20,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     private static let topBarAlphaStatusBarThreshold = 0.85
 
     fileprivate static let submodulesOrder: [NewProfile.Submodule] = [
-        .streakNotifications, .createdCourses, .userActivity, .achievements, .certificates, .details
+        .streakNotifications, .createdCourses, .userActivity, .achievements, .certificates, .socialProfiles, .details
     ]
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -206,6 +206,10 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
             let shouldShowCertificates = self.currentCertificatesState != .hidden
             self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
+
+            //let shouldShowSocialProfiles = viewModel.socialProfilesCount > 0 && viewModel.headerViewModel.isOrganization
+            let shouldShowSocialProfiles = viewModel.socialProfilesCount > 0
+            self.refreshSocialProfilesState(shouldShowSocialProfiles ? .visible : .hidden)
 
             self.refreshProfileDetailsState(viewModel: viewModel)
         }
@@ -522,6 +526,56 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             }
         case .hidden:
             if let submodule = self.getSubmodule(type: NewProfile.Submodule.certificates) {
+                self.removeSubmodule(submodule)
+            }
+        }
+    }
+
+    // MARK: Social Profiles
+
+    private enum SocialProfilesState {
+        case visible
+        case hidden
+    }
+
+    private func refreshSocialProfilesState(_ state: SocialProfilesState) {
+        switch state {
+        case .visible:
+            guard self.getSubmodule(type: NewProfile.Submodule.socialProfiles) == nil else {
+                return
+            }
+
+            let assembly = NewProfileSocialProfilesAssembly()
+            let viewController = assembly.makeModule()
+
+            let headerView = NewProfileBlockHeaderView()
+            headerView.titleText = NSLocalizedString("NewProfileBlockTitleSocialProfiles", comment: "")
+            headerView.isShowAllButtonHidden = true
+            headerView.isUserInteractionEnabled = false
+
+            var appearance = NewProfileBlockContainerView.Appearance()
+            appearance.contentViewInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 0)
+            let containerView = NewProfileBlockContainerView(
+                headerView: headerView,
+                contentView: viewController.view,
+                appearance: appearance
+            )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: viewController,
+                    view: containerView,
+                    type: NewProfile.Submodule.socialProfiles
+                )
+            )
+
+            if let moduleInput = assembly.moduleInput {
+                self.interactor.doSubmodulesRegistration(
+                    request: .init(submodules: [NewProfile.Submodule.socialProfiles.uniqueIdentifier: moduleInput])
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: NewProfile.Submodule.socialProfiles) {
                 self.removeSubmodule(submodule)
             }
         }

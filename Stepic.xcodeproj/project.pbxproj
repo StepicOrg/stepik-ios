@@ -557,6 +557,7 @@
 		2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */; };
 		2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */; };
 		2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */; };
+		2C73E24624D029F900340052 /* NewProfileSocialProfilesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */; };
 		2C746642245613E900BB0800 /* UserCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */; };
 		2C7545A624C019CE004F9074 /* AchievementsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */; };
 		2C7545A824C01C00004F9074 /* AchievementProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */; };
@@ -1946,6 +1947,7 @@
 		2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchCellView.swift; sourceTree = "<group>"; };
 		2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewModel.swift; sourceTree = "<group>"; };
+		2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesItemView.swift; sourceTree = "<group>"; };
 		2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_actions_v51.xcdatamodel; sourceTree = "<group>"; };
 		2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesNetworkService.swift; sourceTree = "<group>"; };
 		2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsNetworkService.swift; sourceTree = "<group>"; };
@@ -2877,9 +2879,9 @@
 				E358732932D647EFD60F96E8 /* NewProfileSocialProfilesInteractor.swift */,
 				18044FE3F18268E484D32CE6 /* NewProfileSocialProfilesPresenter.swift */,
 				E9B98DD75AFD25B4028D8A48 /* NewProfileSocialProfilesProvider.swift */,
-				3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */,
 				BC0BA4BBDDD434836B383B7A /* NewProfileSocialProfilesViewController.swift */,
 				2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */,
+				2C73E24224D029BB00340052 /* Views */,
 			);
 			path = SocialProfiles;
 			sourceTree = "<group>";
@@ -3286,6 +3288,15 @@
 				2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */,
 			);
 			path = Switch;
+			sourceTree = "<group>";
+		};
+		2C73E24224D029BB00340052 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */,
+				3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2C87A7A62446644700933CA4 /* UserActivity */ = {
@@ -8775,6 +8786,7 @@
 				86356B693AF04C13CE3C856F /* UserCoursesView.swift in Sources */,
 				2A7E1C8409B12A6CB09F0393 /* UserCoursesViewController.swift in Sources */,
 				5E5D029C495513662075EC03 /* NewProfileAssembly.swift in Sources */,
+				2C73E24624D029F900340052 /* NewProfileSocialProfilesItemView.swift in Sources */,
 				53973CE3C780CC9E39EA65A5 /* NewProfileDataFlow.swift in Sources */,
 				062AB834A48F37524A84D976 /* NewProfileInteractor.swift in Sources */,
 				F7B2524CCF4BE272FB48CECF /* NewProfilePresenter.swift in Sources */,

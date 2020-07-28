@@ -987,6 +987,7 @@ NewProfileBlockTitleCreatedCourses = "Created Courses";
 NewProfileBlockTitleActivity = "Activity";
 NewProfileBlockTitleAchievements = "Achievements";
 NewProfileBlockTitleCertificates = "Certificates";
+NewProfileBlockTitleSocialProfiles = "External Links";
 NewProfileBlockTitleDetails = "Details";
 NewProfileBlockTitleDetailsOrganization = "About Organization";
 
