@@ -564,6 +564,8 @@
 		2C7545AA24C01F06004F9074 /* AchievementsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A924C01F06004F9074 /* AchievementsRepository.swift */; };
 		2C7545AC24C034CB004F9074 /* NewProfileAchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */; };
 		2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */; };
+		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
+		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
 		2C7F641C23B0F5B7006C7648 /* PlayNextCircleControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */; };
 		2C7F641E23B12208006C7648 /* AutoplayStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */; };
 		2C7F783A2271D5480089FDD7 /* LayoutInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F78392271D5480089FDD7 /* LayoutInsets.swift */; };
@@ -1955,6 +1957,8 @@
 		2C7545A924C01F06004F9074 /* AchievementsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsRepository.swift; sourceTree = "<group>"; };
 		2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsViewModel.swift; sourceTree = "<group>"; };
 		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
+		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
+		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
 		2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayNextCircleControlView.swift; sourceTree = "<group>"; };
 		2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoplayStorageManager.swift; sourceTree = "<group>"; };
 		2C7F78392271D5480089FDD7 /* LayoutInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInsets.swift; sourceTree = "<group>"; };
@@ -2927,6 +2931,7 @@
 			children = (
 				2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */,
 				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
+				2C7EFCF024D08D8E003A4E93 /* SocialProfiles */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -3297,6 +3302,15 @@
 				3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2C7EFCF024D08D8E003A4E93 /* SocialProfiles */ = {
+			isa = PBXGroup;
+			children = (
+				2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */,
+				2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */,
+			);
+			path = SocialProfiles;
 			sourceTree = "<group>";
 		};
 		2C87A7A62446644700933CA4 /* UserActivity */ = {
@@ -8071,6 +8085,7 @@
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08AB82381D74C44100FDEADE /* StepikSession.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
+				2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */,
 				2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */,
 				082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */,
 				2C50364224C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift in Sources */,
@@ -8607,6 +8622,7 @@
 				62E981171A8030E938221E36 /* BaseQuizOutputProtocol.swift in Sources */,
 				62E981ADC3D9DC9BF5CA3F38 /* QuizFeedbackView.swift in Sources */,
 				62E98C3B0A3CDBD055C8D2BF /* CodeQuizAssembly.swift in Sources */,
+				2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */,
 				62E98291FE763CC1E639E497 /* CodeQuizDataFlow.swift in Sources */,
 				62E98F2598146750666AC334 /* CodeQuizInteractor.swift in Sources */,
 				62E98450FB31F2092BA6DC08 /* CodeQuizPresenter.swift in Sources */,

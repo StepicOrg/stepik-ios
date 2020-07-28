@@ -50,9 +50,16 @@ final class NewProfileSocialProfilesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func showLoading() {}
+    func showLoading() {
+        self.skeleton.viewBuilder = {
+            NewProfileSocialProfilesSkeletonView()
+        }
+        self.skeleton.show()
+    }
 
-    func hideLoading() {}
+    func hideLoading() {
+        self.skeleton.hide()
+    }
 
     func configure(viewModel: NewProfileSocialProfilesViewModel) {
         for subview in self.stackView.subviews {

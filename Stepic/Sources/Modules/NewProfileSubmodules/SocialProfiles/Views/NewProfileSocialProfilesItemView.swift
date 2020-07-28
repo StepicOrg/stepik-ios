@@ -3,7 +3,7 @@ import UIKit
 
 extension NewProfileSocialProfilesItemView {
     struct Appearance {
-        let imageViewSize = CGSize(width: 30, height: 30)
+        let imageViewSize = CGSize(width: 32, height: 32)
 
         let textLabelFont = UIFont.systemFont(ofSize: 17, weight: .regular)
         let textLabelTextColor = UIColor.stepikSystemPrimaryText

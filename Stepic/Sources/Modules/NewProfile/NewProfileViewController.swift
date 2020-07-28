@@ -207,8 +207,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             let shouldShowCertificates = self.currentCertificatesState != .hidden
             self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
 
-            //let shouldShowSocialProfiles = viewModel.socialProfilesCount > 0 && viewModel.headerViewModel.isOrganization
-            let shouldShowSocialProfiles = viewModel.socialProfilesCount > 0
+            let shouldShowSocialProfiles = viewModel.socialProfilesCount > 0 && viewModel.headerViewModel.isOrganization
             self.refreshSocialProfilesState(shouldShowSocialProfiles ? .visible : .hidden)
 
             self.refreshProfileDetailsState(viewModel: viewModel)
