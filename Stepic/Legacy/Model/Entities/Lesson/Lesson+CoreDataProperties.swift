@@ -23,6 +23,7 @@ extension Lesson {
     @NSManaged var managedVoteDelta: NSNumber?
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCanEdit: NSNumber?
+    @NSManaged var managedCanLearnLesson: NSNumber?
 
     @NSManaged var managedStepsArray: NSObject?
     @NSManaged var managedSteps: NSOrderedSet?
@@ -100,6 +101,15 @@ extension Lesson {
         }
         set {
             self.managedCanEdit = newValue as NSNumber?
+        }
+    }
+
+    var canLearnLesson: Bool {
+        get {
+            self.managedCanLearnLesson?.boolValue ?? false
+        }
+        set {
+            self.managedCanLearnLesson = newValue as NSNumber?
         }
     }
 

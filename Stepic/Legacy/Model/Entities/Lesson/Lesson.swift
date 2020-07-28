@@ -45,7 +45,11 @@ final class Lesson: NSManagedObject, IDFetchable {
         self.voteDelta = json[JSONKey.voteDelta.rawValue].intValue
 
         if let actionsDictionary = json[JSONKey.actions.rawValue].dictionary {
-            self.canEdit = actionsDictionary[JSONKey.editLesson.rawValue]?.stringValue == JSONKey.actionStatusGranted
+            self.canEdit = actionsDictionary[JSONKey.editLesson.rawValue]?.string != nil
+            self.canLearnLesson = actionsDictionary[JSONKey.learnLesson.rawValue]?.string != nil
+        } else {
+            self.canEdit = false
+            self.canLearnLesson = false
         }
     }
 
@@ -167,8 +171,6 @@ final class Lesson: NSManagedObject, IDFetchable {
     // MARK: - Types
 
     enum JSONKey: String {
-        static let actionStatusGranted = "#"
-
         case id
         case title
         case isFeatured = "is_featured"
@@ -181,5 +183,6 @@ final class Lesson: NSManagedObject, IDFetchable {
         case voteDelta = "vote_delta"
         case actions
         case editLesson = "edit_lesson"
+        case learnLesson = "learn_lesson"
     }
 }
