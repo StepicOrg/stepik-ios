@@ -297,7 +297,7 @@ generic_type_name:
 
 identifier_name:
   severity: error
-  excluded: ["i", "j", "x", "y", "z", "id", "to"]
+  excluded: ["i", "j", "x", "y", "z", "id", "to", "vk", "h1", "h2", "h3", "r", "g", "b", "no"]
   max_length: 64
 
 implicit_getter:

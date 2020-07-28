@@ -70,7 +70,8 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
             headerViewModel: self.makeHeaderViewModel(user: user),
             userID: user.id,
             userDetails: user.details,
-            isCurrentUserProfile: isCurrentUserProfile
+            isCurrentUserProfile: isCurrentUserProfile,
+            socialProfilesCount: user.socialProfilesArray.count
         )
     }
 
