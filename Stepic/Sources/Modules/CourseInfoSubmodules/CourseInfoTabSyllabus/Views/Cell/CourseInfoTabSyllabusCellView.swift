@@ -21,7 +21,10 @@ extension CourseInfoTabSyllabusCellView {
         let downloadedSizeLabelTextColor = UIColor.stepikPrimaryText
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
-        let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 16)
+        let demoAccessLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let demoAccessLabelTextColor = UIColor.stepikVioletFixed
+
+        let statsInsets = UIEdgeInsets(top: 10, left: 8, bottom: 20, right: 16)
         let statsViewHeight: CGFloat = 17.0
 
         let progressViewHeight: CGFloat = 3
@@ -74,6 +77,17 @@ final class CourseInfoTabSyllabusCellView: UIView {
         return label
     }()
 
+    private lazy var demoAccessLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("CourseInfoTabSyllabusUnitDemoAccessTitle", comment: "")
+        label.font = self.appearance.demoAccessLabelFont
+        label.textColor = self.appearance.demoAccessLabelTextColor
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.isHidden = true
+        return label
+    }()
+
     private lazy var statsView = CourseInfoTabSyllabusCellStatsView()
 
     private lazy var progressIndicatorView: UIProgressView = {
@@ -89,6 +103,9 @@ final class CourseInfoTabSyllabusCellView: UIView {
     private lazy var progressIndicatorViewContainerView = UIView()
     // To properly center when downloaded size visible
     private var downloadButtonCenterYConstraint: Constraint?
+
+    private var statsViewLeadingToLeadingOfTitleLabel: Constraint?
+    private var statsViewLeadingToTrailingOfDemoAccessLabel: Constraint?
 
     var onDownloadButtonClick: (() -> Void)?
 
@@ -117,6 +134,16 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.titleLabel.text = viewModel.title
         self.progressIndicatorView.progress = viewModel.progress
         self.coverImageView.loadImage(url: viewModel.coverImageURL)
+
+        if viewModel.access == .demo {
+            self.demoAccessLabel.isHidden = false
+            self.statsViewLeadingToLeadingOfTitleLabel?.deactivate()
+            self.statsViewLeadingToTrailingOfDemoAccessLabel?.activate()
+        } else {
+            self.demoAccessLabel.isHidden = true
+            self.statsViewLeadingToLeadingOfTitleLabel?.activate()
+            self.statsViewLeadingToTrailingOfDemoAccessLabel?.deactivate()
+        }
 
         self.statsView.progressLabelText = viewModel.progressLabelText
         self.statsView.learnersLabelText = viewModel.learnersLabelText
@@ -182,6 +209,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
             self.downloadButton,
             self.downloadedSizeLabel,
             self.progressIndicatorView,
+            self.demoAccessLabel,
             self.statsView
         ].forEach { $0.alpha = 0.0 }
 
@@ -197,6 +225,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
             self.downloadButton,
             self.downloadedSizeLabel,
             self.progressIndicatorView,
+            self.demoAccessLabel,
             self.statsView
         ].forEach { $0.alpha = 1.0 }
     }
@@ -219,6 +248,7 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
         self.addSubview(self.downloadedSizeLabel)
         self.addSubview(self.coverImageView)
         self.addSubview(self.titleLabel)
+        self.addSubview(self.demoAccessLabel)
         self.addSubview(self.statsView)
         self.addSubview(self.downloadButtonTapProxyView)
 
@@ -266,11 +296,23 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
             make.top.equalTo(self.coverImageView.snp.top)
         }
 
+        self.demoAccessLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.demoAccessLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        self.demoAccessLabel.snp.makeConstraints { make in
+            make.leading.equalTo(self.titleLabel.snp.leading)
+            make.centerY.equalTo(self.statsView.snp.centerY)
+        }
+
         self.statsView.translatesAutoresizingMaskIntoConstraints = false
         self.statsView.setContentCompressionResistancePriority(.required, for: .vertical)
         self.statsView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.statsViewHeight)
-            make.leading.equalTo(self.titleLabel.snp.leading)
+            self.statsViewLeadingToLeadingOfTitleLabel = make.leading.equalTo(self.titleLabel.snp.leading).constraint
+            self.statsViewLeadingToTrailingOfDemoAccessLabel = make.leading
+                .equalTo(self.demoAccessLabel.snp.trailing)
+                .offset(self.appearance.statsInsets.left)
+                .constraint
+            self.statsViewLeadingToTrailingOfDemoAccessLabel?.deactivate()
             make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.statsInsets.right)
             make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.statsInsets.top)
             make.bottom.equalToSuperview().offset(-self.appearance.statsInsets.bottom)

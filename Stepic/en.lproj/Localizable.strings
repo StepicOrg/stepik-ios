@@ -465,6 +465,7 @@ CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ points";
+CourseInfoTabSyllabusUnitDemoAccessTitle = "Demo access";
 CourseInfoTabSyllabusFailedDownloadAlertMessage = "Sorry, but something went wrong, please retry the download.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Delete course";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Are you sure you want to delete downloaded course?";

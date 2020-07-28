@@ -467,6 +467,7 @@ CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ баллов";
+CourseInfoTabSyllabusUnitDemoAccessTitle = "Демо-доступ";
 CourseInfoTabSyllabusFailedDownloadAlertMessage = "Не удалось выполнить загрузку, повторите позже.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Удалить курс";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный курс?";
