@@ -1,7 +1,7 @@
 import UIKit
 
 protocol NewProfileSocialProfilesViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: NewProfileSocialProfiles.SomeAction.ViewModel)
+    func displaySocialProfiles(viewModel: NewProfileSocialProfiles.SocialProfilesLoad.ViewModel)
 }
 
 final class NewProfileSocialProfilesViewController: UIViewController {
@@ -24,5 +24,5 @@ final class NewProfileSocialProfilesViewController: UIViewController {
 }
 
 extension NewProfileSocialProfilesViewController: NewProfileSocialProfilesViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewProfileSocialProfiles.SomeAction.ViewModel) {}
+    func displaySocialProfiles(viewModel: NewProfileSocialProfiles.SocialProfilesLoad.ViewModel) {}
 }

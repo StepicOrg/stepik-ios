@@ -52,6 +52,7 @@ final class User: NSManagedObject, IDFetchable {
         self.createdLessonsCount = json[JSONKey.createdLessonsCount.rawValue].intValue
         self.issuedCertificatesCount = json[JSONKey.issuedCertificatesCount.rawValue].intValue
         self.followersCount = json[JSONKey.followersCount.rawValue].intValue
+        self.socialProfilesArray = json[JSONKey.socialProfiles.rawValue].arrayObject as? [Int] ?? []
     }
 
     func update(json: JSON) {
@@ -124,6 +125,7 @@ final class User: NSManagedObject, IDFetchable {
         case createdLessonsCount = "created_lessons_count"
         case issuedCertificatesCount = "issued_certificates_count"
         case followersCount = "followers_count"
+        case socialProfiles = "social_profiles"
     }
 }
 

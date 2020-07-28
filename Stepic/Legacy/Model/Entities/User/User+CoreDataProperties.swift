@@ -36,6 +36,7 @@ extension User {
     @NSManaged var managedCreatedLessonsCount: NSNumber?
     @NSManaged var managedIssuedCertificatesCount: NSNumber?
     @NSManaged var managedFollowersCount: NSNumber?
+    @NSManaged var managedSocialProfilesArray: NSObject?
 
     @NSManaged var managedInstructedCourses: NSSet?
     @NSManaged var managedAuthoredCourses: NSSet?
@@ -216,6 +217,16 @@ extension User {
         }
         set {
             self.managedReputationRank = newValue as NSNumber?
+        }
+    }
+
+
+    var socialProfilesArray: [SocialProfile.IdType] {
+        get {
+            (self.managedSocialProfilesArray as? [Int]) ?? []
+        }
+        set {
+            self.managedSocialProfilesArray = newValue as NSObject?
         }
     }
 

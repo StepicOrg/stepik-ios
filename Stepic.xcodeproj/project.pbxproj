@@ -556,6 +556,7 @@
 		2C6F78B324C1A43400F12D30 /* course-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C6F78B224C1A43400F12D30 /* course-info.css */; };
 		2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */; };
 		2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */; };
+		2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */; };
 		2C746642245613E900BB0800 /* UserCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */; };
 		2C7545A624C019CE004F9074 /* AchievementsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */; };
 		2C7545A824C01C00004F9074 /* AchievementProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */; };
@@ -1944,6 +1945,7 @@
 		2C6F78B224C1A43400F12D30 /* course-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "course-info.css"; sourceTree = "<group>"; };
 		2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchCellView.swift; sourceTree = "<group>"; };
+		2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewModel.swift; sourceTree = "<group>"; };
 		2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_actions_v51.xcdatamodel; sourceTree = "<group>"; };
 		2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesNetworkService.swift; sourceTree = "<group>"; };
 		2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsNetworkService.swift; sourceTree = "<group>"; };
@@ -2877,6 +2879,7 @@
 				E9B98DD75AFD25B4028D8A48 /* NewProfileSocialProfilesProvider.swift */,
 				3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */,
 				BC0BA4BBDDD434836B383B7A /* NewProfileSocialProfilesViewController.swift */,
+				2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */,
 			);
 			path = SocialProfiles;
 			sourceTree = "<group>";
@@ -8211,6 +8214,7 @@
 				62E98622F3B03F7282DC06D8 /* AchievementDescription.swift in Sources */,
 				62E98381EC6AD8DD7613C32D /* AchievementsListViewController.swift in Sources */,
 				2C5E90822333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift in Sources */,
+				2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */,
 				62E98DE7FA0EE5EB23136B52 /* AchievementsListPresenter.swift in Sources */,
 				2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */,
 				62E98B8919D18CD0F8238F97 /* Collection+SafeSubscript.swift in Sources */,
