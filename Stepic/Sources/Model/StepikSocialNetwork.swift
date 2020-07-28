@@ -1,7 +1,6 @@
 import Foundation
 
 enum StepikSocialNetwork: String, CaseIterable, UniqueIdentifiable {
-    // swiftlint:disable:next identifier_name
     case vk
     case facebook
     case instagram

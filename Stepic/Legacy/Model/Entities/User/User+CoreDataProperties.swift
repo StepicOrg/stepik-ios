@@ -40,6 +40,7 @@ extension User {
     @NSManaged var managedInstructedCourses: NSSet?
     @NSManaged var managedAuthoredCourses: NSSet?
     @NSManaged var managedAttempts: NSSet?
+    @NSManaged var managedSocialProfiles: NSOrderedSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
@@ -284,6 +285,15 @@ extension User {
     var instructedCourses: [Course] {
         get {
              managedInstructedCourses?.allObjects as! [Course]
+        }
+    }
+
+    var socialProfiles: [SocialProfile] {
+        get {
+            (self.managedSocialProfiles?.array as? [SocialProfile]) ?? []
+        }
+        set {
+            self.managedSocialProfiles = NSOrderedSet(array: newValue)
         }
     }
 

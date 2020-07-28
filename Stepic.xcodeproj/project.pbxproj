@@ -535,6 +535,12 @@
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
 		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
 		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C619A7724CFF954007D3529 /* SocialProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7624CFF954007D3529 /* SocialProfilesAPI.swift */; };
+		2C619A7B24CFFB95007D3529 /* SocialProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7A24CFFB95007D3529 /* SocialProfile.swift */; };
+		2C619A7D24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7C24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift */; };
+		2C619A7F24D0004B007D3529 /* SocialProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */; };
+		2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */; };
+		2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
 		2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C698C9424CEA90100979661 /* NewProfileCoverView.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
@@ -1910,6 +1916,13 @@
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
 		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
+		2C619A7624CFF954007D3529 /* SocialProfilesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesAPI.swift; sourceTree = "<group>"; };
+		2C619A7824CFF9DC007D3529 /* Model_social_profiles_v59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_social_profiles_v59.xcdatamodel; sourceTree = "<group>"; };
+		2C619A7A24CFFB95007D3529 /* SocialProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfile.swift; sourceTree = "<group>"; };
+		2C619A7C24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfileProvider.swift; sourceTree = "<group>"; };
+		2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesNetworkService.swift; sourceTree = "<group>"; };
+		2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
 		2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupViewController.swift; sourceTree = "<group>"; };
@@ -3197,6 +3210,15 @@
 			path = Tokens;
 			sourceTree = "<group>";
 		};
+		2C619A7924CFFB80007D3529 /* SocialProfile */ = {
+			isa = PBXGroup;
+			children = (
+				2C619A7A24CFFB95007D3529 /* SocialProfile.swift */,
+				2C619A7C24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift */,
+			);
+			path = SocialProfile;
+			sourceTree = "<group>";
+		};
 		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3308,6 +3330,7 @@
 				08A9F71D1FC38C9E00640F1F /* CourseTag.swift */,
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
+				2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */,
 				2C3DAB90233D735D00453B1C /* StepFontSize.swift */,
 				2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */,
 				2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */,
@@ -4957,6 +4980,7 @@
 				2CFF9026242A265F00FD7311 /* Profile */,
 				2CFF9027242A266A00FD7311 /* Progress */,
 				2CFF9028242A267700FD7311 /* Section */,
+				2C619A7924CFFB80007D3529 /* SocialProfile */,
 				2CFF9029242A268300FD7311 /* Step */,
 				2CFF902A242A268F00FD7311 /* StepOptions */,
 				2CFF902B242A269E00FD7311 /* Submission */,
@@ -5367,6 +5391,7 @@
 				2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */,
 				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
 				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
+				2C619A7624CFF954007D3529 /* SocialProfilesAPI.swift */,
 				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
 				080CE14E1E9562F30089A27F /* StepsAPI.swift */,
 				2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */,
@@ -5546,6 +5571,7 @@
 				2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */,
 				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
 				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
+				2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */,
 				2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */,
 				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
 				2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */,
@@ -5863,6 +5889,7 @@
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
+				2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */,
 				2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */,
 				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
 				2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */,
@@ -7708,6 +7735,7 @@
 				0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
+				2C619A7724CFF954007D3529 /* SocialProfilesAPI.swift in Sources */,
 				083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */,
 				08CBA3271F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */,
@@ -7885,6 +7913,7 @@
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */,
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
+				2C619A7B24CFFB95007D3529 /* SocialProfile.swift in Sources */,
 				2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */,
 				2C8BCC2C2486C54400DFB009 /* NewProfileDetailsViewController.swift in Sources */,
 				2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */,
@@ -8197,6 +8226,7 @@
 				2CB695382465D4030037BF0D /* NewProfileHeaderView.swift in Sources */,
 				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
+				2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */,
 				62E98AA93C41892F0F141FDF /* ImageButton.swift in Sources */,
 				62E989EE75A8D4A31D8FAA57 /* DownloadControlView.swift in Sources */,
 				62E98570B05049B3A8619283 /* CourseRatingView.swift in Sources */,
@@ -8270,6 +8300,7 @@
 				62E985D6A85E24E493C064E9 /* SettingsTableView.swift in Sources */,
 				62E98CB2C2F2B7AE44023FEA /* SettingsTableViewModel.swift in Sources */,
 				62E989CCBB953CEF37E17013 /* SettingsTableSectionFooterView.swift in Sources */,
+				2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */,
 				62E98524AB7850FA81448B4A /* SeparatorView.swift in Sources */,
 				62E98E8F09C3C24A98858518 /* SettingsTableSectionHeaderView.swift in Sources */,
 				62E9851D236EC702791E1776 /* TableInputTextField.swift in Sources */,
@@ -8517,6 +8548,7 @@
 				62E98B9B4B1A1427483116E3 /* ProfileEditView.swift in Sources */,
 				62E98A3CF9B84A8A53C38DC3 /* ProfileEditViewController.swift in Sources */,
 				62E989DDE40B4B41ADFE0541 /* ProfileEditViewModel.swift in Sources */,
+				2C619A7F24D0004B007D3529 /* SocialProfileProvider.swift in Sources */,
 				62E98923F2E261298316A588 /* BaseQuizAssembly.swift in Sources */,
 				62E98D0458F64EA380FC2B2F /* BaseQuizDataFlow.swift in Sources */,
 				62E9829D1E346C70A44B4B5E /* BaseQuizInteractor.swift in Sources */,
@@ -8537,6 +8569,7 @@
 				62E98F8F4EBA0B11BB101A1C /* CodeQuizProvider.swift in Sources */,
 				62E988C4572F2A9C97348C83 /* CodeQuizView.swift in Sources */,
 				62E98707AF0BEE9807661F4A /* CodeQuizViewController.swift in Sources */,
+				2C619A7D24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift in Sources */,
 				62E98866B15E76B9FE106E1B /* CodeQuizViewModel.swift in Sources */,
 				2CB510EE248C226A00DB8344 /* VideosPersistenceService.swift in Sources */,
 				62E98856B2540336E5867457 /* UnsupportedCodeLanguageView.swift in Sources */,
@@ -9757,6 +9790,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C619A7824CFF9DC007D3529 /* Model_social_profiles_v59.xcdatamodel */,
 				2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */,
 				2CC8683624CAD452004845AB /* Model_new_profile_organization_v57.xcdatamodel */,
 				2C00186524C71404006C5094 /* Model_new_profile_created_courses_v56.xcdatamodel */,
@@ -9817,7 +9851,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */;
+			currentVersion = 2C619A7824CFF9DC007D3529 /* Model_social_profiles_v59.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
