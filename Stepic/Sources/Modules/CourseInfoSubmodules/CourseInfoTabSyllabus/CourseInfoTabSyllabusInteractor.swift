@@ -527,7 +527,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 }
                 .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
             sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
-            isEnrolled: self.currentCourse?.enrolled ?? false
+            course: self.currentCourse.require()
         )
     }
 

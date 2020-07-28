@@ -13,7 +13,7 @@ enum CourseInfoTabSyllabus {
         let sections: [Record<Section>]
         let units: [Record<Unit?>]
         let sectionsDeadlines: [SectionDeadline]
-        let isEnrolled: Bool
+        let course: Course
     }
 
     enum DownloadState {

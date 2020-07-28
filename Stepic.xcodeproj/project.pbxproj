@@ -1846,6 +1846,7 @@
 		2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksNetworkService.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
+		2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lessons_demo_access_v58.xcdatamodel; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
 		2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContentTextView.swift; sourceTree = "<group>"; };
 		2C48D5FB228D865E00739477 /* Guarantee+ThenableWithFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guarantee+ThenableWithFallback.swift"; sourceTree = "<group>"; };
@@ -9756,6 +9757,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */,
 				2CC8683624CAD452004845AB /* Model_new_profile_organization_v57.xcdatamodel */,
 				2C00186524C71404006C5094 /* Model_new_profile_created_courses_v56.xcdatamodel */,
 				2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */,
@@ -9815,7 +9817,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CC8683624CAD452004845AB /* Model_new_profile_organization_v57.xcdatamodel */;
+			currentVersion = 2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
