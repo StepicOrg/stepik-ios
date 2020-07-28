@@ -350,11 +350,13 @@
 		08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		097807181FEAD22C2DE65676 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E0D8A3998163442A02FB0 /* NewProfileView.swift */; };
+		09ACDC74180F4250D7E8573D /* NewProfileSocialProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */; };
 		0BCE34E8356EA252F3F2CD34 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */; };
 		10EE105C3899569C32A7E24C /* NewProfileAchievementsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA42C58C967F7FED2305306 /* NewProfileAchievementsAssembly.swift */; };
 		12CB070461601452E35A6334 /* NewProfileUserActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */; };
 		1403FF0C9A5259CF2D63D98C /* NewProfileUserActivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E46A7B951582DFB9DA8130 /* NewProfileUserActivityProvider.swift */; };
 		19BCC6AE85FA7F15895BFDD0 /* NewProfileCertificatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43830C1F0B97682B9CC38DB /* NewProfileCertificatesView.swift */; };
+		1C748C5B088908FB323176B6 /* NewProfileSocialProfilesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B98DD75AFD25B4028D8A48 /* NewProfileSocialProfilesProvider.swift */; };
 		209E27FAF79E14028BA3E27E /* NewProfileStreakNotificationsDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135D703CAD3B1C16BC95B63 /* NewProfileStreakNotificationsDataFlow.swift */; };
 		224F80151254989529458041 /* NewProfileCreatedCoursesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5A3AC14BE54DE59AD0C0DE /* NewProfileCreatedCoursesAssembly.swift */; };
 		2431A273489AF7D40AB21348 /* NewProfileStreakNotificationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9DB0A6C0B38CE13676ED50 /* NewProfileStreakNotificationsInteractor.swift */; };
@@ -1270,18 +1272,23 @@
 		8710B445F698A4ED27153C72 /* NewProfileAchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A0BB5098635CCE7F5825B0 /* NewProfileAchievementsView.swift */; };
 		8A248387CF216CCCFFC39E76 /* NewProfileUserActivityDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD58CADEE08103A32F03B4D /* NewProfileUserActivityDataFlow.swift */; };
 		942F44578E193384B1E4DAD9 /* UserCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582946156484A5655EF72E43 /* UserCoursesPresenter.swift */; };
+		9501A244263B1A63587A4111 /* NewProfileSocialProfilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0BA4BBDDD434836B383B7A /* NewProfileSocialProfilesViewController.swift */; };
 		96A3827B7E57E4B055221311 /* NewProfileUserActivityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217C4CCCAFEF3BDE7DD27A5 /* NewProfileUserActivityPresenter.swift */; };
 		9FAD76150240B4F8C13ADFA2 /* NewProfileUserActivityInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */; };
+		A4ED8B7CACFF7AB41B163E79 /* NewProfileSocialProfilesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E358732932D647EFD60F96E8 /* NewProfileSocialProfilesInteractor.swift */; };
 		AA4038BFF0FB9031371EBB38 /* NewProfileCreatedCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5DD451A3D87D0E23671D3 /* NewProfileCreatedCoursesViewController.swift */; };
 		AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DCDAA39E6747A12CC239E3 /* DownloadARQuickLookPresenter.swift */; };
+		ADDBDEC3E1355186610E10B2 /* NewProfileSocialProfilesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18044FE3F18268E484D32CE6 /* NewProfileSocialProfilesPresenter.swift */; };
 		B2FE12ABF98ED99EAF727405 /* NewProfileCreatedCoursesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099C818F5A180372348FC30 /* NewProfileCreatedCoursesDataFlow.swift */; };
 		C0DD3AD5A7FEEA4555312455 /* NewProfileAchievementsDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF3FBAFFE1578394C476293 /* NewProfileAchievementsDataFlow.swift */; };
 		C2537B043956035AEFCABAB5 /* DownloadARQuickLookOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2CFBDE7B71C461F988B1B5 /* DownloadARQuickLookOutputProtocol.swift */; };
 		C95BEF69AB5100E263ED66F6 /* DownloadARQuickLookAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */; };
 		CB429BDBAF7772B836FCA675 /* NewProfileStreakNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */; };
+		D0EC355329C93B41463C75F9 /* NewProfileSocialProfilesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A061513F473CC4D8745A02 /* NewProfileSocialProfilesAssembly.swift */; };
 		D47D53DD6227E614E1DFCB9F /* NewProfileStreakNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4026ACBBA0C3F084DA6D5A6E /* NewProfileStreakNotificationsView.swift */; };
 		D734AED171DF596EA2D282D2 /* NewProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028A8EC5C5E5E2E6ED03075 /* NewProfileProvider.swift */; };
 		DA1ACE98741C42B9DCBBFB02 /* NewProfileCertificatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F5E8235E0245E5D5CB6BC /* NewProfileCertificatesProvider.swift */; };
+		E25A7DCBFC93A1B63789122B /* NewProfileSocialProfilesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4B39C167DC6CF26170396 /* NewProfileSocialProfilesDataFlow.swift */; };
 		E36410A645B2D9008B9FD40B /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */; };
 		E68D5D39475BA651C54FD4C9 /* NewProfileStreakNotificationsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F0E49F1F2245F037EE6305 /* NewProfileStreakNotificationsAssembly.swift */; };
 		ECD21878641B360C12E8C585 /* NewProfileCreatedCoursesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4A385A37C2127557150147 /* NewProfileCreatedCoursesOutputProtocol.swift */; };
@@ -1719,6 +1726,7 @@
 		0BCAF185A5BB14E3BFB36948 /* NewProfileCertificatesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesPresenter.swift; sourceTree = "<group>"; };
 		0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		1038AA3C9EB0B9938E4026FC /* Pods-StepicTests.develop release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.develop release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.develop release.xcconfig"; sourceTree = "<group>"; };
+		18044FE3F18268E484D32CE6 /* NewProfileSocialProfilesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesPresenter.swift; sourceTree = "<group>"; };
 		1A044A06FA4B2AA6C9F984A3 /* UserCoursesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesViewController.swift; sourceTree = "<group>"; };
 		1A65C1DFD5A2533C506D297B /* DownloadARQuickLookDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookDataFlow.swift; sourceTree = "<group>"; };
 		1F870E016B8AB15AD3033816 /* Pods-StepicTests.release release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release release.xcconfig"; sourceTree = "<group>"; };
@@ -2162,6 +2170,7 @@
 		383E389EDEA545B7F09F70EF /* Pods-StepicTests.production release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.production release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.production release.xcconfig"; sourceTree = "<group>"; };
 		3BCD8888462BD21ECF82C602 /* DownloadARQuickLookViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookViewController.swift; sourceTree = "<group>"; };
 		3C1049108DA5FB2370275330 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesView.swift; sourceTree = "<group>"; };
 		4026ACBBA0C3F084DA6D5A6E /* NewProfileStreakNotificationsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsView.swift; sourceTree = "<group>"; };
 		489380E1AE5474348FB1450D /* Pods-Stepic.production debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.production debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.production debug.xcconfig"; sourceTree = "<group>"; };
 		49B8797DC84D64C5BAA84E76 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2650,6 +2659,7 @@
 		6A5A3AC14BE54DE59AD0C0DE /* NewProfileCreatedCoursesAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesAssembly.swift; sourceTree = "<group>"; };
 		72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityView.swift; sourceTree = "<group>"; };
 		75A30D817521E42507A608B3 /* NewProfileCertificatesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesInteractor.swift; sourceTree = "<group>"; };
+		77A061513F473CC4D8745A02 /* NewProfileSocialProfilesAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesAssembly.swift; sourceTree = "<group>"; };
 		7B9DB0A6C0B38CE13676ED50 /* NewProfileStreakNotificationsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsInteractor.swift; sourceTree = "<group>"; };
 		7F15948AB9342436A2D3423A /* Pods-Stepic.develop release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.develop release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.develop release.xcconfig"; sourceTree = "<group>"; };
 		861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Init.swift"; sourceTree = "<group>"; };
@@ -2663,6 +2673,7 @@
 		86BB7C05201953AF00063538 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		86BB7C06201953AF00063538 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
 		87A856DC00D7AE881FE38841 /* Pods-Stepic.production release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.production release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.production release.xcconfig"; sourceTree = "<group>"; };
+		89A4B39C167DC6CF26170396 /* NewProfileSocialProfilesDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesDataFlow.swift; sourceTree = "<group>"; };
 		8F8FAC809538C9222DD6ABC9 /* NewProfilePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfilePresenter.swift; sourceTree = "<group>"; };
 		9217C4CCCAFEF3BDE7DD27A5 /* NewProfileUserActivityPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityPresenter.swift; sourceTree = "<group>"; };
 		938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2678,6 +2689,7 @@
 		B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsViewController.swift; sourceTree = "<group>"; };
 		B3FDC926BE23A9131D45DFF0 /* DownloadARQuickLookView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookView.swift; sourceTree = "<group>"; };
 		BAF219462BE0AB704DED8077 /* UserCoursesView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesView.swift; sourceTree = "<group>"; };
+		BC0BA4BBDDD434836B383B7A /* NewProfileSocialProfilesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewController.swift; sourceTree = "<group>"; };
 		BC88362446F322F9B299287F /* NewProfileCertificatesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesViewController.swift; sourceTree = "<group>"; };
 		C028A8EC5C5E5E2E6ED03075 /* NewProfileProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileProvider.swift; sourceTree = "<group>"; };
 		C02E0D8A3998163442A02FB0 /* NewProfileView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
@@ -2694,7 +2706,9 @@
 		D7FDCEA2CEBE8396085B5648 /* NewProfileCreatedCoursesView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesView.swift; sourceTree = "<group>"; };
 		D82EBE189B9B826DA622520E /* Pods-Stepic.develop debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.develop debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.develop debug.xcconfig"; sourceTree = "<group>"; };
 		DD4A385A37C2127557150147 /* NewProfileCreatedCoursesOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesOutputProtocol.swift; sourceTree = "<group>"; };
+		E358732932D647EFD60F96E8 /* NewProfileSocialProfilesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesInteractor.swift; sourceTree = "<group>"; };
 		E4A0BB5098635CCE7F5825B0 /* NewProfileAchievementsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsView.swift; sourceTree = "<group>"; };
+		E9B98DD75AFD25B4028D8A48 /* NewProfileSocialProfilesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesProvider.swift; sourceTree = "<group>"; };
 		ECD9168AF529D0D527B1DCDB /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EF17244B78AAAC345805C0DA /* NewProfileAchievementsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsViewController.swift; sourceTree = "<group>"; };
 		F4B98B071C1C8E3FB13F9717 /* NewProfileAchievementsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsInteractor.swift; sourceTree = "<group>"; };
@@ -2851,6 +2865,20 @@
 				08E16F201BDBA495004822E1 /* Reachability */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		270FB930C009531FD0CB3F85 /* SocialProfiles */ = {
+			isa = PBXGroup;
+			children = (
+				77A061513F473CC4D8745A02 /* NewProfileSocialProfilesAssembly.swift */,
+				89A4B39C167DC6CF26170396 /* NewProfileSocialProfilesDataFlow.swift */,
+				E358732932D647EFD60F96E8 /* NewProfileSocialProfilesInteractor.swift */,
+				18044FE3F18268E484D32CE6 /* NewProfileSocialProfilesPresenter.swift */,
+				E9B98DD75AFD25B4028D8A48 /* NewProfileSocialProfilesProvider.swift */,
+				3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */,
+				BC0BA4BBDDD434836B383B7A /* NewProfileSocialProfilesViewController.swift */,
+			);
+			path = SocialProfiles;
 			sourceTree = "<group>";
 		};
 		2A75C1500270B3ADADDC4ADC /* InputOutput */ = {
@@ -3294,6 +3322,7 @@
 				0E839B9EC258A7A3342CE5FA /* Certificates */,
 				BCB55E0AE9D5E53C3E063901 /* CreatedCourses */,
 				2C8BCC2424869A1100DFB009 /* Details */,
+				270FB930C009531FD0CB3F85 /* SocialProfiles */,
 				B0EC82D3DB3A11DA382B3D42 /* StreakNotifications */,
 				E7DABB29D2991EED361BCE28 /* UserActivity */,
 			);
@@ -8793,6 +8822,13 @@
 				5D239816094AD2C3575E81CC /* NewProfileCreatedCoursesView.swift in Sources */,
 				AA4038BFF0FB9031371EBB38 /* NewProfileCreatedCoursesViewController.swift in Sources */,
 				ECD21878641B360C12E8C585 /* NewProfileCreatedCoursesOutputProtocol.swift in Sources */,
+				D0EC355329C93B41463C75F9 /* NewProfileSocialProfilesAssembly.swift in Sources */,
+				E25A7DCBFC93A1B63789122B /* NewProfileSocialProfilesDataFlow.swift in Sources */,
+				A4ED8B7CACFF7AB41B163E79 /* NewProfileSocialProfilesInteractor.swift in Sources */,
+				ADDBDEC3E1355186610E10B2 /* NewProfileSocialProfilesPresenter.swift in Sources */,
+				1C748C5B088908FB323176B6 /* NewProfileSocialProfilesProvider.swift in Sources */,
+				09ACDC74180F4250D7E8573D /* NewProfileSocialProfilesView.swift in Sources */,
+				9501A244263B1A63587A4111 /* NewProfileSocialProfilesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
