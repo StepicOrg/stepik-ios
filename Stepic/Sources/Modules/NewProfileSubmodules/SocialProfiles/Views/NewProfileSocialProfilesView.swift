@@ -50,6 +50,10 @@ final class NewProfileSocialProfilesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func showLoading() {}
+
+    func hideLoading() {}
+
     func configure(viewModel: NewProfileSocialProfilesViewModel) {
         for subview in self.stackView.subviews {
             self.stackView.removeArrangedSubview(subview)

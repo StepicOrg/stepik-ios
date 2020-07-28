@@ -42,7 +42,7 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
             strongSelf.fetchSemaphore.wait()
 
             let hasEqualIDs = Set(user.socialProfilesArray) == strongSelf.currentSocialProfilesIDs
-            if strongSelf.didLoadFromRemote && hasEqualIDs {
+            if !request.forceUpdate && strongSelf.didLoadFromRemote && hasEqualIDs {
                 strongSelf.fetchSemaphore.signal()
                 return
             }

@@ -4,9 +4,10 @@ protocol NewProfileSocialProfilesViewControllerProtocol: AnyObject {
     func displaySocialProfiles(viewModel: NewProfileSocialProfiles.SocialProfilesLoad.ViewModel)
 }
 
-final class NewProfileSocialProfilesViewController: UIViewController {
+final class NewProfileSocialProfilesViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: NewProfileSocialProfilesInteractorProtocol
 
+    var placeholderContainer = StepikPlaceholderControllerContainer()
     var socialProfilesView: NewProfileSocialProfilesView? { self.view as? NewProfileSocialProfilesView }
 
     private var state: NewProfileSocialProfiles.ViewControllerState
@@ -34,6 +35,21 @@ final class NewProfileSocialProfilesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .tryAgain,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.updateState(newState: .loading)
+                    strongSelf.interactor.doSocialProfilesLoad(request: .init(forceUpdate: true))
+                }
+            ),
+            for: .connectionError
+        )
+
         self.updateState(newState: self.state)
     }
 
@@ -43,22 +59,21 @@ final class NewProfileSocialProfilesViewController: UIViewController {
         }
 
         if case .loading = newState {
-            //self.isPlaceholderShown = false
-            //self.newProfileCertificatesView?.showLoading()
+            self.isPlaceholderShown = false
+            self.socialProfilesView?.showLoading()
             return
         }
 
         if case .loading = self.state {
-            //self.isPlaceholderShown = false
-            //self.newProfileCertificatesView?.hideLoading()
+            self.isPlaceholderShown = false
+            self.socialProfilesView?.hideLoading()
         }
 
         switch newState {
         case .result(let viewModel):
             self.socialProfilesView?.configure(viewModel: viewModel)
         case .error:
-            //self.showPlaceholder(for: .connectionError)
-            break
+            self.showPlaceholder(for: .connectionError)
         case .loading:
             break
         }
