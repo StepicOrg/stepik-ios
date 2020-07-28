@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol NewProfileSocialProfilesViewDelegate: AnyObject {
+    func newProfileSocialProfilesView(_ view: NewProfileSocialProfilesView, didOpenExternalLink url: URL)
+}
+
 extension NewProfileSocialProfilesView {
     struct Appearance {
         let itemHeight: CGFloat = 44
@@ -11,6 +15,8 @@ extension NewProfileSocialProfilesView {
 
 final class NewProfileSocialProfilesView: UIView {
     let appearance: Appearance
+
+    weak var delegate: NewProfileSocialProfilesViewDelegate?
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -54,6 +60,7 @@ final class NewProfileSocialProfilesView: UIView {
             let itemView = NewProfileSocialProfilesItemView()
             itemView.image = UIImage(named: socialProfile.iconName)
             itemView.text = socialProfile.title
+            itemView.link = socialProfile.url
             itemView.isSeparatorHidden = idx == (viewModel.socialProfiles.count - 1)
             itemView.addTarget(self, action: #selector(self.socialProfilesViewTouched(_:)), for: .touchUpInside)
 
@@ -68,8 +75,9 @@ final class NewProfileSocialProfilesView: UIView {
 
     @objc
     private func socialProfilesViewTouched(_ view: NewProfileSocialProfilesItemView) {
-        print(#function)
-        print(view)
+        if let link = view.link {
+            self.delegate?.newProfileSocialProfilesView(self, didOpenExternalLink: link)
+        }
     }
 }
 

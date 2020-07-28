@@ -3,14 +3,15 @@ import UIKit
 
 extension NewProfileSocialProfilesItemView {
     struct Appearance {
-        let imageViewSize = CGSize(width: 28, height: 28)
+        let imageViewSize = CGSize(width: 30, height: 30)
 
         let textLabelFont = UIFont.systemFont(ofSize: 17, weight: .regular)
         let textLabelTextColor = UIColor.stepikSystemPrimaryText
         let textLabelInsets = LayoutInsets(top: 0, left: 16, bottom: 0, right: 8)
 
-        let accessoryViewSize = CGSize(width: 24, height: 24)
+        let accessoryViewSize = CGSize(width: 26, height: 26)
         let accessoryViewInsets = LayoutInsets(right: 20)
+        let accessoryViewTintColor = UIColor.stepikSystemTertiaryText
 
         let separatorHeight: CGFloat = 0.5
         let separatorColor = UIColor.stepikSeparator
@@ -35,12 +36,10 @@ final class NewProfileSocialProfilesItemView: UIControl {
     }()
 
     private lazy var accessoryImageView: UIImageView = {
-        var image: UIImage?
-        if #available(iOS 13.0, *) {
-            image = UIImage(systemName: "link")
-        }
-        let imageView = UIImageView(image: image)
+        let image = UIImage(named: "external-link")
+        let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = self.appearance.accessoryViewTintColor
         return imageView
     }()
 
@@ -61,6 +60,8 @@ final class NewProfileSocialProfilesItemView: UIControl {
             self.textLabel.text = self.text
         }
     }
+
+    var link: URL?
 
     var isSeparatorHidden: Bool = false {
         didSet {

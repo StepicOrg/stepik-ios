@@ -18,20 +18,15 @@ final class NewProfileSocialProfilesPresenter: NewProfileSocialProfilesPresenter
     }
 
     private func makeViewModel(socialProfiles: [SocialProfile]) -> NewProfileSocialProfilesViewModel {
-        let sortedSocialProfiles = socialProfiles.sorted { lhs, rhs in
-            self.orderValue(for: lhs.provider) > self.orderValue(for: rhs.provider)
-        }
-
-        let itemsViewModels = sortedSocialProfiles.map { socialProfile in
-            NewProfileSocialProfilesViewModel.Item(
-                iconName: "vk",
-                title: socialProfile.name,
-                url: URL(string: socialProfile.urlString)
-            )
-        }
-
+        let itemsViewModels = socialProfiles
+            .sorted { $0.providerString < $1.providerString }
+            .map {
+                NewProfileSocialProfilesViewModel.Item(
+                    iconName: $0.provider?.iconName ?? "social-profile-provider-website",
+                    title: $0.name,
+                    url: URL(string: $0.urlString)
+                )
+            }
         return NewProfileSocialProfilesViewModel(socialProfiles: itemsViewModels)
     }
-
-    private func orderValue(for provider: SocialProfileProvider?) -> Int { provider?.importanceValue ?? -1 }
 }

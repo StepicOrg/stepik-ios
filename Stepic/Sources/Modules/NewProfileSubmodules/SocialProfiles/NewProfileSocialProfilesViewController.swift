@@ -28,6 +28,7 @@ final class NewProfileSocialProfilesViewController: UIViewController {
     override func loadView() {
         let view = NewProfileSocialProfilesView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -67,5 +68,17 @@ final class NewProfileSocialProfilesViewController: UIViewController {
 extension NewProfileSocialProfilesViewController: NewProfileSocialProfilesViewControllerProtocol {
     func displaySocialProfiles(viewModel: NewProfileSocialProfiles.SocialProfilesLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+}
+
+extension NewProfileSocialProfilesViewController: NewProfileSocialProfilesViewDelegate {
+    func newProfileSocialProfilesView(_ view: NewProfileSocialProfilesView, didOpenExternalLink url: URL) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }

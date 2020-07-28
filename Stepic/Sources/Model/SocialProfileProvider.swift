@@ -2,23 +2,20 @@ import Foundation
 
 enum SocialProfileProvider: String {
     case facebook
-    case instagram
-    case twitter
+    case github
     case vk
+    case twitter
+    case instagram
+    case skype
+    case telegram
     case website
 
-    var importanceValue: Int {
+    var iconName: String {
         switch self {
-        case .facebook:
-            return 4
-        case .instagram:
-            return 3
-        case .twitter:
-            return 2
-        case .vk:
-            return 1
-        case .website:
-            return 0
+        case .github:
+            return "github"
+        default:
+            return "social-profile-provider-\(self.rawValue)"
         }
     }
 }
