@@ -16,7 +16,15 @@ platform :ios do
     project_metapath = "./fastlane/metadata"
 
     schemes = {
-        "Stepic" => [
+        "Stepic Production" => [
+            "Stepic",
+            "StickerPackExtension"
+        ],
+        "Stepic Develop" => [
+            "Stepic",
+            "StickerPackExtension"
+        ],
+        "Stepic Release" => [
             "Stepic",
             "StickerPackExtension"
         ]
@@ -177,7 +185,7 @@ platform :ios do
 
         unlock_keychain(password: keychain_password)
 
-        sync_device_info()
+        # sync_device_info()
         match_adhoc(scheme: scheme)
 
         # Disable automatic code signing -> build -> enable again
@@ -215,7 +223,7 @@ platform :ios do
         dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
 
         vs = version_string(
-            version_number: get_version_number(target: scheme),
+            version_number: get_version_number(target: "Stepic"),
             build_number: get_build_number
         )
 
