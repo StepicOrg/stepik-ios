@@ -360,15 +360,18 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                 }
             )
         )
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("StepSubmissionsAlertActionTitle", comment: ""),
-                style: .default,
-                handler: { [weak self] _ in
-                    self?.presentSubmissions(stepID: step.id)
-                }
+
+        if step.isQuiz {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("StepSubmissionsAlertActionTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.presentSubmissions(stepID: step.id)
+                    }
+                )
             )
-        )
+        }
 
         if step.canEdit {
             alert.addAction(
