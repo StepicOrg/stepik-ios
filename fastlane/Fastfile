@@ -185,7 +185,7 @@ platform :ios do
 
         unlock_keychain(password: keychain_password)
 
-        # sync_device_info()
+        sync_device_info()
         match_adhoc(scheme: scheme)
 
         # Disable automatic code signing -> build -> enable again
