@@ -30,6 +30,12 @@ platform :ios do
         ]
     }
 
+    configurations = {
+        "Stepic Production" => "Production Release",
+        "Stepic Develop" => "Develop Release",
+        "Stepic Release" => "Release Release"
+    }
+
     # Helpers
 
     def version_string(options)
@@ -223,7 +229,7 @@ platform :ios do
         dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
 
         vs = version_string(
-            version_number: get_version_number(target: "Stepic"),
+            version_number: get_version_number(target: "Stepic", configuration: configurations[scheme]),
             build_number: get_build_number
         )
 
