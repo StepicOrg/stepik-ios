@@ -88,12 +88,16 @@ extension NewProfileSocialProfilesViewController: NewProfileSocialProfilesViewCo
 
 extension NewProfileSocialProfilesViewController: NewProfileSocialProfilesViewDelegate {
     func newProfileSocialProfilesView(_ view: NewProfileSocialProfilesView, didOpenExternalLink url: URL) {
-        WebControllerManager.shared.presentWebControllerWithURL(
-            url,
-            inController: self,
-            withKey: .externalLink,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+        UIApplication.shared.open(url, options: [:]) { success in
+            if !success {
+                WebControllerManager.shared.presentWebControllerWithURL(
+                    url,
+                    inController: self,
+                    withKey: .externalLink,
+                    allowsSafari: true,
+                    backButtonStyle: .done
+                )
+            }
+        }
     }
 }
