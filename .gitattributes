@@ -1,7 +1,7 @@
 Sb/** filter=git-crypt diff=git-crypt
 cert/** filter=git-crypt diff=git-crypt
 StepicTests/TestInfo.plist filter=git-crypt diff=git-crypt
-Stepic/Auth.plist filter=git-crypt diff=git-crypt
+Stepic/Auth*.plist filter=git-crypt diff=git-crypt
 Stepic/GoogleService-Info.plist filter=git-crypt diff=git-crypt
 Stepic/Legacy/Model/Tokens/Tokens.plist filter=git-crypt diff=git-crypt
 Stepic/Sources/Frameworks/InAppPurchases/IAPProductIDs.plist filter=git-crypt diff=git-crypt

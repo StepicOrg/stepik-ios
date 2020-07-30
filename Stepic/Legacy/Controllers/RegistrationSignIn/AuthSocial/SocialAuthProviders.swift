@@ -47,7 +47,8 @@ enum SocialProvider: Int, CaseIterable {
                 name: self.name,
                 amplitudeName: self.amplitudeName,
                 image: UIImage(named: "google"),
-                registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!
+                registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
+                socialSDKProvider: GoogleIDSocialSDKProvider.instance
             )
         case .facebook:
             return SocialProviderInfo(

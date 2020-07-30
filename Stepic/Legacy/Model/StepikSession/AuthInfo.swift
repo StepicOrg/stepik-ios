@@ -154,9 +154,13 @@ final class AuthInfo: NSObject {
 
     var initialHTTPHeaders: HTTPHeaders {
         if !AuthInfo.shared.isAuthorized {
-            return HTTPHeaders(StepikSession.cookieHeaders)
+            var headers = HTTPHeaders(StepikSession.cookieHeaders)
+            headers.add(.stepikUserAgent)
+            return headers
         } else {
-            return APIDefaults.Headers.bearer
+            var headers = APIDefaults.Headers.bearer
+            headers.add(.stepikUserAgent)
+            return headers
         }
     }
 }

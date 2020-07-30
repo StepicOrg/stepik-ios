@@ -32,6 +32,12 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
 }
 
 struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
+    enum Access {
+        case no
+        case full
+        case demo
+    }
+
     let uniqueIdentifier: UniqueIdentifierType
 
     let title: String
@@ -44,7 +50,11 @@ struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
     let timeToCompleteLabelText: String?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
-    let isSelectable: Bool
+    let access: Access
+
+    var isSelectable: Bool {
+        access == .full || access == .demo
+    }
 }
 
 struct CourseInfoTabSyllabusSectionDeadlinesViewModel {

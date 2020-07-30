@@ -4,6 +4,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 use_frameworks!
 
+project 'Stepic', 'Production Debug' => :debug, 'Production Release' => :release, 'Release Debug' => :debug, 'Release Release' => :release, 'Develop Debug' => :debug, 'Develop Release' => :release
+
 def shared_pods
     pod 'Alamofire', '5.2.2'
     pod 'Atributika', '4.9.9'
@@ -13,7 +15,7 @@ def shared_pods
     pod 'DeviceKit', '3.2.0'
     pod 'PromiseKit', '6.13.1'
     pod 'SwiftLint', '0.39.2'
-    pod 'Reveal-SDK', :configurations => ['Debug']
+    pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
 end
 
 def all_pods
@@ -46,9 +48,11 @@ def all_pods
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
     
+    # Social SDKs
     pod 'VK-ios-sdk', '1.5.1'
     pod 'FBSDKCoreKit', '7.1.0'
     pod 'FBSDKLoginKit', '7.1.0'
+    pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
     

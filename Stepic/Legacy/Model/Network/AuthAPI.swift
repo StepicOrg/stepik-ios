@@ -42,9 +42,9 @@ final class AuthAPI {
     let manager: Alamofire.Session
 
     init() {
-        let configuration = URLSessionConfiguration.default
+        let configuration = StepikURLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15
-        manager = Alamofire.Session(configuration: configuration)
+        self.manager = Alamofire.Session(configuration: configuration)
     }
 
     func signInWithCode(_ code: String) -> Promise<(StepikToken, AuthorizationType)> {
@@ -55,6 +55,7 @@ final class AuthAPI {
 
             let headers: HTTPHeaders = [
                 .stepikAuthContentType,
+                .stepikUserAgent,
                 .authorization("Basic \(socialInfo.credentials)")
             ]
 
@@ -102,6 +103,7 @@ final class AuthAPI {
 
             let headers: HTTPHeaders = [
                 .stepikAuthContentType,
+                .stepikUserAgent,
                 .authorization("Basic \(passwordInfo.credentials)")
             ]
 
@@ -184,6 +186,7 @@ final class AuthAPI {
 
             let headers: HTTPHeaders = [
                 .stepikAuthContentType,
+                .stepikUserAgent,
                 .authorization("Basic \(credentials)")
             ]
 
@@ -324,6 +327,7 @@ final class AuthAPI {
             }
 
             let headers: HTTPHeaders = [
+                .stepikUserAgent,
                 .authorization("Basic \(socialInfo.credentials)")
             ]
 

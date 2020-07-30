@@ -18,7 +18,6 @@ enum StepFontSize: Int, CaseIterable, UniqueIdentifiable {
         }
     }
 
-    // swiftlint:disable:next identifier_name
     var h1: String {
         switch self {
         case .small:
@@ -30,7 +29,6 @@ enum StepFontSize: Int, CaseIterable, UniqueIdentifiable {
         }
     }
 
-    // swiftlint:disable:next identifier_name
     var h2: String {
         switch self {
         case .small:
@@ -42,7 +40,6 @@ enum StepFontSize: Int, CaseIterable, UniqueIdentifiable {
         }
     }
 
-    // swiftlint:disable:next identifier_name
     var h3: String {
         switch self {
         case .small:

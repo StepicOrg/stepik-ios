@@ -4,423 +4,447 @@ fastlane_version "2.152.0"
 default_platform :ios
 
 platform :ios do
-    # Config variables
+  # Config variables
 
-    team_id = ENV["FASTLANE_TEAM_ID"]
-    keychain_password = ENV["KEYCHAIN_PASSWORD"]
+  team_id = ENV["FASTLANE_TEAM_ID"]
+  keychain_password = ENV["KEYCHAIN_PASSWORD"]
 
-    # Constants
+  # Constants
 
-    slack_mentions_beta = ['<!channel>']
-    slack_mentions_release = ['<!channel>']
-    project_metapath = "./fastlane/metadata"
+  slack_mentions_beta = ["<!channel>"]
+  slack_mentions_release = ["<!channel>"]
+  project_metapath = "./fastlane/metadata"
 
-    schemes = {
-        "Stepic" => [
-            "Stepic",
-            "StickerPackExtension"
-        ]
+  schemes = {
+    "Stepic Production" => [
+      "Stepic",
+      "StickerPackExtension",
+    ],
+    "Stepic Develop" => [
+      "Stepic",
+      "StickerPackExtension",
+    ],
+    "Stepic Release" => [
+      "Stepic",
+      "StickerPackExtension",
+    ],
+  }
+
+  configurations = {
+    "Stepic Production" => "Production Release",
+    "Stepic Develop" => "Develop Release",
+    "Stepic Release" => "Release Release",
+  }
+
+  # Helpers
+
+  def version_string(options)
+    version = options[:version_number]
+    build = options[:build_number]
+
+    UI.user_error!("Wrong version parameter") if version.nil?
+    UI.user_error!("Wrong build parameter") if build.nil?
+
+    "v. #{version} (#{build})"
+  end
+
+  def get_version_number_string(options)
+    target = options[:target] || "Stepic"
+    scheme = options[:scheme]
+    configurations = options[:configurations]
+
+    UI.user_error!("Wrong scheme parameter") if scheme.nil?
+    UI.user_error!("Wrong configurations parameter") if configurations.nil?
+
+    get_version_number(target: target, configuration: configurations[scheme])
+  end
+
+  def get_bundle_id(options)
+    project_path = options[:xcodeproj] ? File.join(options[:xcodeproj], "..") : Dir.glob("../*.xcodeproj").first
+    target = options[:target]
+
+    if project_path
+      project = Xcodeproj::Project.open(project_path)
+    else
+      UI.user_error!("Unable to find xcodeproj file")
+    end
+
+    native_target = project.native_targets.find { |native_target| native_target.name == target }
+    build_configuration = native_target.build_configurations.first
+
+    UI.user_error!("Unable to find build configuration") if build_configuration.nil?
+
+    build_configuration.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]
+  end
+
+  def build_bundle_id_to_scheme_mapping(options)
+    schemes = options[:schemes]
+    scheme = options[:scheme]
+    provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+    if schemes.nil? || scheme.nil? || provisioning_profile_mapping.nil?
+      UI.user_error!("Wrong parameters")
+    end
+
+    bundle_id_to_scheme = {}
+    dependent_targets = schemes[scheme]
+    for target in dependent_targets
+      bundle_id_to_scheme[get_bundle_id(target: target)] = target
+    end
+
+    bundle_id_to_scheme
+  end
+
+  # Private lanes
+
+  private_lane :match_scheme do |options|
+    scheme = options[:scheme]
+    type = options[:type]
+
+    UI.user_error!("Wrong parameters") if scheme.nil? || type.nil?
+
+    read_only = options.key?(:read_only) ? options[:read_only] : true
+    dependent_targets = schemes[scheme]
+    identifiers = dependent_targets.map { |target| get_bundle_id(target: target) }
+
+    match(
+      type: type,
+      storage_mode: "google_cloud",
+      google_cloud_bucket_name: "stepik-ios-cert",
+      force_for_new_devices: true,
+      readonly: read_only,
+      app_identifier: identifiers,
+    )
+  end
+
+  private_lane :set_manual_code_signing do |options|
+    UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
+
+    scheme = options[:scheme]
+    provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+    UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
+
+    bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
+      schemes: schemes,
+      scheme: scheme,
+      provisioning_profile_mapping: provisioning_profile_mapping,
+    )
+
+    provisioning_profile_mapping.each do |key, value|
+      automatic_code_signing(
+        use_automatic_signing: false,
+        targets: [bundle_id_to_scheme[key]],
+        profile_name: value,
+        team_id: team_id,
+        code_sign_identity: "iPhone Distribution",
+      )
+    end
+  end
+
+  private_lane :set_auto_code_signing do |options|
+    UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
+
+    scheme = options[:scheme]
+    provisioning_profile_mapping = options[:provisioning_profile_mapping]
+
+    UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
+
+    bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
+      schemes: schemes,
+      scheme: scheme,
+      provisioning_profile_mapping: provisioning_profile_mapping,
+    )
+
+    provisioning_profile_mapping.each do |key, value|
+      automatic_code_signing(
+        use_automatic_signing: true,
+        targets: [bundle_id_to_scheme[key]],
+        profile_name: "",
+        team_id: team_id,
+        code_sign_identity: "iPhone Developer",
+      )
+    end
+  end
+
+  # Lanes
+
+  desc "Run all tests for scheme."
+  desc "Options: scheme"
+  lane :test do |options|
+    clear_derived_data
+
+    ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
+    scheme = options[:scheme]
+
+    UI.user_error!("Wrong scheme parameter") if scheme.nil?
+
+    cocoapods(try_repo_update_on_error: true)
+
+    scan(
+      scheme: scheme,
+      slack_only_on_failure: true,
+    )
+  end
+
+  desc "Submit a new Beta Build to Firebase."
+  desc "This will also make sure the profile is up to date."
+  desc "Options: scheme"
+  lane :beta do |options|
+    scheme = options[:scheme]
+    firebase_app_id = ENV["FIREBASE_APP_ID"]
+
+    UI.user_error!("Wrong scheme parameter") if scheme.nil?
+    UI.user_error!("Firebase App ID is required") if firebase_app_id.nil?
+
+    clear_derived_data
+    cocoapods(repo_update: true)
+
+    unlock_keychain(password: keychain_password)
+
+    sync_device_info()
+    match_adhoc(scheme: scheme)
+
+    # Disable automatic code signing -> build -> enable again
+    set_manual_code_signing(
+      provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+      scheme: scheme,
+    )
+    begin
+      gym(
+        scheme: scheme,
+        clean: true,
+        output_directory: "artifacts",
+        output_name: "#{scheme}.ipa",
+        include_bitcode: true,
+        skip_profile_detection: true,
+        export_method: "ad-hoc",
+        export_options: {
+          # use only provisioning profiles from match
+          provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+        },
+      )
+    ensure
+      set_auto_code_signing(
+        provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+        scheme: scheme,
+      )
+    end
+
+    firebase_app_distribution(
+      app: firebase_app_id,
+      release_notes_file: "fastlane/release-notes.txt",
+      groups: "all-ios-testers",
+    )
+
+    dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+
+    vs = version_string(
+      version_number: get_version_number_string(scheme: scheme, configurations: configurations),
+      build_number: get_build_number,
+    )
+
+    slack(
+      message: "Successfully released iOS BETA #{scheme} #{vs}\n#{slack_mentions_beta.join(" ")}",
+      channel: "#ios-ci",
+      link_names: true,
+    )
+  end
+
+  desc "Match all certificates for scheme."
+  desc "Options: scheme, read_only"
+  lane :match_all do |options|
+    params = {
+      :scheme => options[:scheme],
+      :read_only => options.key?(:read_only) ? options[:read_only] : true,
     }
 
-    # Helpers
+    match_dev(params)
+    match_adhoc(params)
+    match_release(params)
+  end
 
-    def version_string(options)
-        version = options[:version_number]
-        build = options[:build_number]
+  desc "Match development certificates for scheme."
+  desc "Options: scheme, read_only"
+  lane :match_dev do |options|
+    match_scheme(
+      type: "development",
+      scheme: options[:scheme],
+      read_only: options.key?(:read_only) ? options[:read_only] : true,
+    )
+  end
 
-        UI.user_error!("Wrong version parameter") if version.nil?
-        UI.user_error!("Wrong build parameter") if build.nil?
+  desc "Match adhoc certificates for scheme."
+  desc "Options: scheme, read_only"
+  lane :match_adhoc do |options|
+    match_scheme(
+      type: "adhoc",
+      scheme: options[:scheme],
+      read_only: options.key?(:read_only) ? options[:read_only] : true,
+    )
+  end
 
-        "v. #{version} (#{build})"
+  desc "Match appstore certificates for scheme."
+  desc "Options: scheme, read_only"
+  lane :match_release do |options|
+    match_scheme(
+      type: "appstore",
+      scheme: options[:scheme],
+      read_only: options.key?(:read_only) ? options[:read_only] : true,
+    )
+  end
+
+  desc "Update iOS UDID's on the Developer Portal."
+  lane :sync_device_info do
+    register_devices(devices_file: "fastlane/Devicefile")
+  end
+
+  desc "Increment build number in project"
+  lane :increment_build do
+    increment_build_number
+  end
+
+  desc "Set version."
+  desc "Options: version"
+  lane :set_version do |options|
+    version = options[:version]
+
+    UI.user_error!("Wrong version parameter") if version.nil?
+
+    increment_version_number(version_number: version)
+  end
+
+  desc "Increment minor version"
+  lane :increment_minor_version do
+    increment_version_number(bump_type: "minor")
+  end
+
+  desc "Download all dSYM files from App Store and upload to the Crashlytics."
+  desc "Options: target, version and build"
+  lane :refresh_dsyms do |options|
+    target = options[:target]
+    UI.user_error!("Wrong target parameter") if target.nil?
+
+    app_identifier = get_bundle_id(target: target)
+
+    params = {
+      :app_identifier => app_identifier,
+    }
+
+    if options[:version]
+      version = options[:version]
+      params[:version] = options[:version]
+
+      if version != "latest" && options[:build]
+        params[:build] = options[:build]
+      end
     end
 
-    def get_bundle_id(options)
-        project_path = options[:xcodeproj] ? File.join(options[:xcodeproj], '..') : Dir.glob("../*.xcodeproj").first
-        scheme = options[:scheme]
+    download_dsyms(params)
+    upload_symbols_to_crashlytics
+  end
 
-        if project_path
-            project = Xcodeproj::Project.open(project_path)
-        else 
-            UI.user_error!("Unable to find xcodeproj file")
-        end
+  desc "Download dDSYMs for latest version."
+  desc "Options: target"
+  lane :refresh_dsyms_for_latest_version do |options|
+    target = options[:target]
 
-        scheme = project.native_targets.find { |target| target.name == scheme }
-        build_configuration = scheme.build_configurations.first
+    UI.user_error!("Wrong target parameter") if target.nil?
 
-        UI.user_error!("Unable to find build configuration") if build_configuration.nil?
+    refresh_dsyms(
+      target: target,
+      version: "latest",
+    )
+  end
 
-        build_configuration.build_settings['PRODUCT_BUNDLE_IDENTIFIER']
+  desc "Deploy a new version to the App Store."
+  desc "Options: scheme, target, should_submit"
+  lane :release do |options|
+    scheme = options[:scheme]
+    target = options[:target]
+
+    UI.user_error!("Wrong scheme parameter") if scheme.nil?
+    UI.user_error!("Wrong target parameter") if target.nil?
+
+    app_identifier = get_bundle_id(target: target)
+    metapath = "#{project_metapath}/#{scheme}"
+    should_submit = options.key?(:should_submit) ? options[:should_submit] : false
+
+    clear_derived_data
+    cocoapods(repo_update: true)
+
+    unlock_keychain(password: keychain_password)
+
+    match_release(scheme: scheme)
+
+    # Disable automatic code signing -> build -> enable again
+    set_manual_code_signing(
+      provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+      scheme: scheme,
+    )
+    begin
+      gym(
+        scheme: "#{scheme}",
+        clean: true,
+        output_directory: "artifacts",
+        output_name: "#{scheme}.ipa",
+        include_bitcode: true,
+        skip_profile_detection: true,
+        export_method: "app-store",
+        export_options: {
+          # use only provisioning profiles from match
+          provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+        },
+      )
+    ensure
+      set_auto_code_signing(
+        provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
+        scheme: scheme,
+      )
     end
 
-    def build_bundle_id_to_scheme_mapping(options)
-        schemes = options[:schemes]
-        scheme = options[:scheme]
-        provisioning_profile_mapping = options[:provisioning_profile_mapping]
-
-        if schemes.nil? || scheme.nil? || provisioning_profile_mapping.nil?
-            UI.user_error!("Wrong parameters")
-        end
-        
-        bundle_id_to_scheme = {}
-        dependent_schemes = schemes[scheme]
-        for i in dependent_schemes
-            bundle_id_to_scheme[get_bundle_id(scheme: i)] = i
-        end
-
-        bundle_id_to_scheme
-    end
-
-    # Private lanes
-
-    private_lane :match_scheme do |options|
-        scheme = options[:scheme]
-        type = options[:type]
-
-        UI.user_error!("Wrong parameters") if scheme.nil? || type.nil?
-
-        read_only = options.key?(:read_only) ? options[:read_only] : true
-        dependent_schemes = schemes[scheme]
-        identifiers = dependent_schemes.map { |scheme| get_bundle_id(scheme: scheme) }
-
-        match(
-            type: type,
-            storage_mode: "google_cloud",
-            google_cloud_bucket_name: "stepik-ios-cert",
-            force_for_new_devices: true,
-            readonly: read_only,
-            app_identifier: identifiers
-        )
-    end
-
-    private_lane :set_manual_code_signing do |options|
-        UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
-
-        scheme = options[:scheme]
-        provisioning_profile_mapping = options[:provisioning_profile_mapping]
-
-        UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
-
-        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
-            schemes: schemes, 
-            scheme: scheme, 
-            provisioning_profile_mapping: provisioning_profile_mapping
-        )
-
-        provisioning_profile_mapping.each do |key, value|
-            automatic_code_signing(
-                use_automatic_signing: false,
-                targets: [bundle_id_to_scheme[key]],
-                profile_name: value,
-                team_id: team_id,
-                code_sign_identity: "iPhone Distribution"
-            )
-        end
-    end
-
-    private_lane :set_auto_code_signing do |options|
-        UI.user_error!("Team ID can not be empty!") if team_id.nil? || team_id.empty?
-
-        scheme = options[:scheme]
-        provisioning_profile_mapping = options[:provisioning_profile_mapping]
-
-        UI.user_error!("Wrong parameters") if scheme.nil? || provisioning_profile_mapping.nil?
-
-        bundle_id_to_scheme = build_bundle_id_to_scheme_mapping(
-            schemes: schemes, 
-            scheme: scheme, 
-            provisioning_profile_mapping: provisioning_profile_mapping
-        )
-
-        provisioning_profile_mapping.each do |key, value|
-            automatic_code_signing(
-                use_automatic_signing: true,
-                targets: [bundle_id_to_scheme[key]],
-                profile_name: "",
-                team_id: team_id,
-                code_sign_identity: "iPhone Developer"
-            )
-        end
-    end
-
-    # Lanes
-
-    desc "Run all tests for scheme."
-    desc "Options: scheme"
-    lane :test do |options|
-        clear_derived_data
-
-        ENV["FASTLANE_EXPLICIT_OPEN_SIMULATOR"] = "0"
-        scheme = options[:scheme]
-
-        UI.user_error!("Wrong scheme parameter") if scheme.nil?
-
-        cocoapods(try_repo_update_on_error: true)
-
-        scan(
-            scheme: scheme,
-            slack_only_on_failure: true
-        )
-    end
-
-    desc "Submit a new Beta Build to Firebase."
-    desc "This will also make sure the profile is up to date."
-    desc "Options: scheme"
-    lane :beta do |options|
-        scheme = options[:scheme]
-        firebase_app_id = ENV["FIREBASE_APP_ID"]
-
-        UI.user_error!("Wrong scheme parameter") if scheme.nil?
-        UI.user_error!("Firebase App ID is required") if firebase_app_id.nil?
-
-        clear_derived_data
-        cocoapods(repo_update: true)
-
-        unlock_keychain(password: keychain_password)
-
-        sync_device_info()
-        match_adhoc(scheme: scheme)
-
-        # Disable automatic code signing -> build -> enable again
-        set_manual_code_signing(
-            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
-            scheme: scheme
-        )
-        begin
-            gym(
-                scheme: scheme,
-                clean: true,
-                output_directory: "artifacts",
-                output_name: "#{scheme}.ipa",
-                include_bitcode: true,
-                skip_profile_detection: true,
-                export_method: "ad-hoc",
-                export_options: {
-                    # use only provisioning profiles from match
-                    provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
-                }
-            )
-        ensure
-            set_auto_code_signing(
-                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
-                scheme: scheme
-            )
-        end
-
-        firebase_app_distribution(
-            app: firebase_app_id,
-            release_notes_file: "fastlane/release-notes.txt",
-            groups: "all-ios-testers"
-        )
-
-        dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
-
-        vs = version_string(
-            version_number: get_version_number(target: scheme),
-            build_number: get_build_number
-        )
-
-        slack(
-            message: "Successfully released iOS BETA #{scheme} #{vs}\n#{slack_mentions_beta.join(' ')}",
-            channel: "#ios-ci",
-            link_names: true
-        )
-    end
-
-    desc "Match all certificates for scheme."
-    desc "Options: scheme, read_only"
-    lane :match_all do |options|
-        params = {
-            :scheme => options[:scheme],
-            :read_only => options.key?(:read_only) ? options[:read_only] : true
-        }
-
-        match_dev(params)
-        match_adhoc(params)
-        match_release(params)
-    end
-
-    desc "Match development certificates for scheme."
-    desc "Options: scheme, read_only"
-    lane :match_dev do |options|
-        match_scheme(
-            type: "development",
-            scheme: options[:scheme],
-            read_only: options.key?(:read_only) ? options[:read_only] : true
-        )
-    end
-
-    desc "Match adhoc certificates for scheme."
-    desc "Options: scheme, read_only"
-    lane :match_adhoc do |options|
-        match_scheme(
-            type: "adhoc",
-            scheme: options[:scheme],
-            read_only: options.key?(:read_only) ? options[:read_only] : true
-        )
-    end
-
-    desc "Match appstore certificates for scheme."
-    desc "Options: scheme, read_only"
-    lane :match_release do |options|
-        match_scheme(
-            type: "appstore",
-            scheme: options[:scheme],
-            read_only: options.key?(:read_only) ? options[:read_only] : true
-        )
-    end
-
-    desc "Update iOS UDID's on the Developer Portal."
-    lane :sync_device_info do
-        register_devices(devices_file: "fastlane/Devicefile")
-    end
-
-    desc "Increment build number in project"
-    lane :increment_build do
-        increment_build_number
-    end
-
-    desc "Set version."
-    desc "Options: version"
-    lane :set_version do |options|
-        version = options[:version]
-
-        UI.user_error!("Wrong version parameter") if version.nil?
-
-        increment_version_number(version_number: version)
-    end
-
-    desc "Increment minor version"
-    lane :increment_minor_version do
-        increment_version_number(bump_type: "minor")
-    end
-
-    desc "Download all dSYM files from App Store and upload to the Crashlytics."
-    desc "Options: scheme, version and build"
-    lane :refresh_dsyms do |options|
-        scheme = options[:scheme]
-        UI.user_error!("Wrong scheme parameter") if scheme.nil?
-
-        app_identifier = get_bundle_id(scheme: scheme)
-
-        params = {
-            :app_identifier => app_identifier
-        }
-
-        if options[:version]
-            version = options[:version]
-            params[:version] = options[:version]
-
-            if version != "latest" && options[:build]
-                params[:build] = options[:build]
-            end
-        end
-
-        download_dsyms(params)
-        upload_symbols_to_crashlytics
-    end
-
-    desc "Download dDSYMs for latest version."
-    desc "Options: scheme"
-    lane :refresh_dsyms_for_latest_version do |options|
-        scheme = options[:scheme]
-
-        UI.user_error!("Wrong scheme parameter") if scheme.nil?
-
-        refresh_dsyms(
-            scheme: scheme,
-            version: "latest"
-        )
-    end
-
-    desc "Deploy a new version to the App Store."
-    desc "Options: scheme, should_submit"
-    lane :release do |options|
-        scheme = options[:scheme]
-        UI.user_error!("Wrong scheme parameter") if scheme.nil?
-
-        # Workaround because the traditional transporter broke on 1st March 2018
-        # More information https://github.com/fastlane/fastlane/issues/11958
-        ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
-
-        app_identifier = get_bundle_id(scheme: scheme)
-        metapath = "#{project_metapath}/#{scheme}"
-        should_submit = options.key?(:should_submit) ? options[:should_submit] : false
-
-        clear_derived_data
-        cocoapods(repo_update: true)
-
-        unlock_keychain(password: keychain_password)
-
-        match_release(scheme: scheme)
-
-        # Disable automatic code signing -> build -> enable again
-        set_manual_code_signing(
-            provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
-            scheme: scheme
-        )
-        begin
-            gym(
-                scheme: "#{scheme}",
-                clean: true,
-                output_directory: "artifacts",
-                output_name: "#{scheme}.ipa",
-                include_bitcode: true,
-                skip_profile_detection: true,
-                export_method: "app-store",
-                export_options: {
-                    # use only provisioning profiles from match
-                    provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING]
-                }
-            )
-        ensure
-            set_auto_code_signing(
-                provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
-                scheme: scheme
-            )
-        end
-
-        deliver(
-            force: true,
-            metadata_path: metapath,
-            app_identifier: app_identifier,
-
-            # submit options 
-            submit_for_review: should_submit,
-            phased_release: true,
-            automatic_release: true,
-            submission_information: {
-                export_compliance_encryption_updated: false,
-                add_id_info_uses_idfa: true,
-                add_id_info_serves_ads: false,
-                add_id_info_tracks_action: true,
-                add_id_info_tracks_install: false
-            }
-        )
-
-        dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
-
-        vs = version_string(
-            version_number: get_version_number(target: scheme),
-            build_number: get_build_number
-        )
-
-        slack(
-            message: "Successfully released iOS RELEASE #{scheme} #{vs}\n#{slack_mentions_release.join(' ')}",
-            channel: "#ios-ci",
-            link_names: true
-        )
-    end
-
-    after_all do |lane, options|
-        clean_build_artifacts
-    end
-
-    error do |lane, exception|
-        clean_build_artifacts
-
-        slack(
-            message: exception.message,
-            success: false
-        )
-    end
+    deliver(
+      force: true,
+      metadata_path: metapath,
+      app_identifier: app_identifier,
+
+      # submit options
+      submit_for_review: should_submit,
+      phased_release: true,
+      automatic_release: true,
+      submission_information: {
+        export_compliance_encryption_updated: false,
+        add_id_info_uses_idfa: true,
+        add_id_info_serves_ads: false,
+        add_id_info_tracks_action: true,
+        add_id_info_tracks_install: false,
+      },
+    )
+
+    dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+
+    vs = version_string(
+      version_number: get_version_number_string(scheme: scheme, configurations: configurations),
+      build_number: get_build_number,
+    )
+
+    slack(
+      message: "Successfully released iOS RELEASE #{scheme} #{vs}\n#{slack_mentions_release.join(" ")}",
+      channel: "#ios-ci",
+      link_names: true,
+    )
+  end
+
+  after_all do |lane, options|
+    clean_build_artifacts
+  end
+
+  error do |lane, exception|
+    clean_build_artifacts
+
+    slack(
+      message: exception.message,
+      success: false,
+    )
+  end
 end

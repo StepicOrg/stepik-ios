@@ -106,7 +106,11 @@ final class NewProfileDetailsView: UIView {
 
     func configure(viewModel: NewProfileDetailsViewModel) {
         self.setText(viewModel.profileDetailsText)
-        self.userIDButton.setTitle("User ID: \(viewModel.userID)", for: .normal)
+
+        let formattedUserID = viewModel.isOrganization
+            ? "Organization ID: \(viewModel.userID)"
+            : "User ID: \(viewModel.userID)"
+        self.userIDButton.setTitle(formattedUserID, for: .normal)
 
         self.lastViewModel = viewModel
         self.invalidateIntrinsicContentSize()

@@ -35,15 +35,15 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 for (unitIndex, unitID) in sectionData.element.entity.unitsArray.enumerated() {
                     if let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID }),
                        let unit = matchedUnitRecord.entity {
-                        let isSectionReachable = sectionData.element.entity.isReachable
                         currentSectionUnitViewModels.append(
                             self.makeUnitViewModel(
                                 sectionIndex: sectionData.offset,
                                 unitIndex: unitIndex,
                                 uid: matchedUnitRecord.uniqueIdentifier,
                                 unit: unit,
-                                downloadState: matchedUnitRecord.downloadState,
-                                isAvailable: result.isEnrolled && isSectionReachable
+                                course: result.course,
+                                isSectionReachable: sectionData.element.entity.isReachable,
+                                downloadState: matchedUnitRecord.downloadState
                             )
                         )
                     } else {
@@ -74,7 +74,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     section: sectionData.element.entity,
                     requiredSection: requiredSection,
                     units: currentSectionUnitViewModels,
-                    downloadState: hasPlaceholderUnits || !result.isEnrolled
+                    downloadState: hasPlaceholderUnits || !result.course.enrolled
                         ? .notAvailable
                         : sectionData.element.downloadState,
                     personalDeadlineDate: sectionDeadline
@@ -295,8 +295,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         unitIndex: Int,
         uid: UniqueIdentifierType,
         unit: Unit,
-        downloadState: CourseInfoTabSyllabus.DownloadState,
-        isAvailable: Bool
+        course: Course,
+        isSectionReachable: Bool,
+        downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
         guard let lesson = unit.lesson else {
             return .placeholder
@@ -337,6 +338,13 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             }
         }()
 
+        let access: CourseInfoTabSyllabusUnitViewModel.Access = {
+            if !course.enrolled && course.isPaid && lesson.canLearnLesson {
+                return .demo
+            }
+            return isSectionReachable ? .full : .no
+        }()
+
         let viewModel = CourseInfoTabSyllabusUnitViewModel(
             uniqueIdentifier: uid,
             title: "\(sectionIndex + 1).\(unitIndex + 1) \(lesson.title)",
@@ -346,8 +354,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             learnersLabelText: FormatterHelper.longNumber(lesson.passedBy),
             progressLabelText: progressLabelText,
             timeToCompleteLabelText: timeToCompleteLabelText,
-            downloadState: isAvailable ? downloadState : .notAvailable,
-            isSelectable: isAvailable
+            downloadState: access == .full ? downloadState : .notAvailable,
+            access: access
         )
 
         self.cachedUnitViewModels[unit.id] = viewModel

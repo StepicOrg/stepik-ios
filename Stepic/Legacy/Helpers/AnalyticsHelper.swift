@@ -8,6 +8,7 @@
 
 import Amplitude_iOS
 import Firebase
+import FirebaseCore
 import UIKit
 import YandexMobileMetrica
 

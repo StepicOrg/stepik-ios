@@ -191,11 +191,9 @@ final class CodeTextView: UITextView {
     }
 
     private func invertColor(_ color: UIColor) -> UIColor {
-        // swiftlint:disable identifier_name
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
-        // swiftlint:enable identifier_name
 
         color.getRed(&r, green: &g, blue: &b, alpha: nil)
 
