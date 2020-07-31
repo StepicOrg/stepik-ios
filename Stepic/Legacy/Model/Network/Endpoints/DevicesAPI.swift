@@ -221,10 +221,18 @@ extension DevicesAPI {
     func delete(
         _ deviceId: Int,
         headers: HTTPHeaders = APIDefaults.Headers.bearer,
-        success: @escaping (() -> Void),
-        error errorHandler: @escaping ((DeviceError) -> Void)
+        success: @escaping () -> Void,
+        error errorHandler: @escaping (DeviceError) -> Void
     ) -> Request? {
-        self.delete(deviceId, headers: headers).done { success() }.catch { errorHandler($0 as! DeviceError) }
+        self.delete(deviceId, headers: headers).done {
+            success()
+        }.catch { error in
+            if let deviceError = error as? DeviceError {
+                errorHandler(deviceError)
+            } else {
+                errorHandler(.other(error: error, code: nil, message: nil))
+            }
+        }
         return nil
     }
 
