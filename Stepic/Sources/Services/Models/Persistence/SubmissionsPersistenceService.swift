@@ -178,8 +178,20 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                         managedObjectContext: self.managedObjectContext
                     )
 
+                    try? self.managedObjectContext.save()
+
                     if let attempt = cachedAttemptOrNil {
-                        newSubmission.attempt = attempt
+                        if newSubmission.managedObjectContext != attempt.managedObjectContext {
+                            guard let attemptCopy = newSubmission.managedObjectContext?.object(
+                                with: attempt.objectID
+                            ) as? AttemptEntity else {
+                                return seal(())
+                            }
+
+                            newSubmission.attempt = attemptCopy
+                        } else {
+                            newSubmission.attempt = attempt
+                        }
                     }
 
                     if self.managedObjectContext.hasChanges {
