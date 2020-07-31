@@ -159,6 +159,8 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
                         managedObjectContext: self.managedObjectContext
                     )
 
+                    try? self.managedObjectContext.save()
+
                     if let step = cachedStepOrNil {
                         newAttempt.step = step
                     }
