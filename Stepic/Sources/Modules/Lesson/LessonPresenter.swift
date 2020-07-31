@@ -129,7 +129,8 @@ final class LessonPresenter: LessonPresenterProtocol {
                 id: step.id,
                 iconImage: iconImage ?? UIImage(),
                 isPassed: progresses[safe: index]?.isPassed ?? false,
-                canEdit: canEdit && step.block.type != .video
+                canEdit: canEdit && step.block.type != .video,
+                isQuiz: !(step.block.type?.isTheory ?? false)
             )
         }
 

@@ -6,6 +6,7 @@ struct LessonViewModel {
         let iconImage: UIImage
         let isPassed: Bool
         let canEdit: Bool
+        let isQuiz: Bool
     }
 
     let lessonTitle: String
