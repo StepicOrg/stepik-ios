@@ -41,9 +41,9 @@ final class DevicesAPI: APIEndpoint {
                     seal.reject(NetworkError(error: error))
                 case .success(let json):
                     if let r = response.response,
-                        !(200...299 ~= r.statusCode) {
+                       !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
-                        // when we pass wrong (but existing) device id we get 403 with error presented in field "detail"
+                            // when we pass wrong (but existing) device id we get 403 with error presented in field "detail"
                         case 403, 404:
                             return seal.reject(DeviceError.notFound)
                         default:
@@ -81,7 +81,7 @@ final class DevicesAPI: APIEndpoint {
                     seal.reject(error)
                 case .success(let json):
                     if let r = response.response,
-                        !(200...299 ~= r.statusCode) {
+                       !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 404:
                             return seal.reject(DeviceError.notFound)
@@ -114,7 +114,7 @@ final class DevicesAPI: APIEndpoint {
                     seal.reject(error)
                 case .success(let json):
                     if let r = response.response,
-                        !(200...299 ~= r.statusCode) {
+                       !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 404:
                             return seal.reject(DeviceError.notFound)
@@ -147,7 +147,7 @@ final class DevicesAPI: APIEndpoint {
                     seal.reject(error)
                 case .success(let json):
                     if let r = response.response,
-                        !(200...299 ~= r.statusCode) {
+                       !(200...299 ~= r.statusCode) {
                         switch r.statusCode {
                         case 404:
                             return seal.reject(DeviceError.notFound)
@@ -210,8 +210,8 @@ extension DevicesAPI {
     func create(
         _ device: Device,
         headers: HTTPHeaders = APIDefaults.Headers.bearer,
-        success: @escaping ((Device) -> Void),
-        error errorHandler: @escaping ((String) -> Void)
+        success: @escaping (Device) -> Void,
+        error errorHandler: @escaping (String) -> Void
     ) -> Request? {
         self.create(device, headers: headers).done { success($0) }.catch { errorHandler($0.localizedDescription) }
         return nil
@@ -240,8 +240,8 @@ extension DevicesAPI {
     func retrieve(
         _ deviceId: Int,
         headers: HTTPHeaders = APIDefaults.Headers.bearer,
-        success: @escaping ((Device) -> Void),
-        error errorHandler: @escaping ((String) -> Void)
+        success: @escaping (Device) -> Void,
+        error errorHandler: @escaping (String) -> Void
     ) -> Request? {
         self.retrieve(deviceId: deviceId, headers: headers)
             .done { success($0) }
