@@ -68,8 +68,18 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                     do {
                         let submissions = try self.managedObjectContext.fetch(request)
 
-                        if let attempt = cachedAttemptOrNil {
-                            submissions.forEach { $0.attempt = attempt }
+                        guard let attempt = cachedAttemptOrNil else {
+                            return seal(submissions)
+                        }
+
+                        for submission in submissions {
+                            if submission.managedObjectContext != nil
+                                   && submission.managedObjectContext == attempt.managedObjectContext {
+                                submission.attempt = attempt
+                            }
+                        }
+
+                        if self.managedObjectContext.hasChanges {
                             try? self.managedObjectContext.save()
                         }
 
