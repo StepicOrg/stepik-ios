@@ -52,7 +52,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
     func fetchAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<[SubmissionEntity]> {
         Guarantee { seal in
-            firstly {
+            firstly { () -> Guarantee<AttemptEntity?> in
                 self.fetchAttempt(id: attemptID)
             }.done { cachedAttemptOrNil in
                 let request = NSFetchRequest<SubmissionEntity>(entityName: "SubmissionEntity")
@@ -95,7 +95,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
     func deleteAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<Void> {
         Guarantee { seal in
-            firstly {
+            firstly { () -> Guarantee<[SubmissionEntity]> in
                 self.fetchAttemptSubmissions(attemptID: attemptID)
             }.done { submissions in
                 self.managedObjectContext.performAndWait {
@@ -166,7 +166,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
     private func insertOrReplace(submission: Submission) -> Guarantee<Void> {
         Guarantee { seal in
-            firstly {
+            DispatchQueue.main.promise { () -> Guarantee<AttemptEntity?> in
                 self.fetchAttempt(id: submission.attemptID)
             }.then { cachedAttemptOrNil -> Guarantee<(AttemptEntity?, [SubmissionEntity])> in
                 self.fetchAttemptSubmissions(attemptID: submission.attemptID)
@@ -210,6 +210,8 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
                     seal(())
                 }
+            }.catch { _ in
+                seal(())
             }
         }
     }
