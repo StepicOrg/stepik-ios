@@ -86,21 +86,6 @@ final class Step: NSManagedObject, IDFetchable {
         }
     }
 
-    static func fetch(_ ids: [IdType]) -> [Step] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
-        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
-        request.predicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
-
-        do {
-            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Step] else {
-                return []
-            }
-            return results
-        } catch {
-            return []
-        }
-    }
-
     enum JSONKey: String {
         case id
         case block

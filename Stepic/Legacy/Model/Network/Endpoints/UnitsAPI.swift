@@ -12,7 +12,14 @@ import PromiseKit
 import SwiftyJSON
 
 final class UnitsAPI: APIEndpoint {
+    private let unitsPersistenceService: UnitsPersistenceServiceProtocol
+
     override var name: String { "units" }
+
+    init(unitsPersistenceService: UnitsPersistenceServiceProtocol = UnitsPersistenceService()) {
+        self.unitsPersistenceService = unitsPersistenceService
+        super.init()
+    }
 
     //TODO: Seems like a bug. Fix this when fixing CoreData duplicates
     func retrieve(lesson lessonId: Int) -> Promise<Unit> {
@@ -44,7 +51,9 @@ final class UnitsAPI: APIEndpoint {
             return .value([])
         }
 
-        return self.getObjectsByIds(ids: ids, updating: Unit.fetch(ids))
+        return self.unitsPersistenceService.fetch(ids: ids).then { cachedUnits in
+            self.getObjectsByIds(ids: ids, updating: cachedUnits)
+        }
     }
 
     @discardableResult
@@ -53,8 +62,8 @@ final class UnitsAPI: APIEndpoint {
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Unit],
         refreshMode: RefreshMode,
-        success: @escaping (([Unit]) -> Void),
-        error errorHandler: @escaping ((NetworkError) -> Void)
+        success: @escaping ([Unit]) -> Void,
+        error errorHandler: @escaping (NetworkError) -> Void
     ) -> Request? {
         self.getObjectsByIds(
             requestString: self.name,
@@ -74,8 +83,8 @@ extension UnitsAPI {
     func retrieve(
         lesson lessonId: Int,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
-        success: @escaping ((Unit) -> Void),
-        error errorHandler: @escaping ((Error) -> Void)
+        success: @escaping (Unit) -> Void,
+        error errorHandler: @escaping (Error) -> Void
     ) -> Request? {
         self.retrieve(lesson: lessonId).done { unit in
             success(unit)

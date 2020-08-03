@@ -12,7 +12,14 @@ import PromiseKit
 import SwiftyJSON
 
 final class StepsAPI: APIEndpoint {
+    private let stepsPersistenceService: StepsPersistenceServiceProtocol
+
     override var name: String { "steps" }
+
+    init(stepsPersistenceService: StepsPersistenceServiceProtocol = StepsPersistenceService()) {
+        self.stepsPersistenceService = stepsPersistenceService
+        super.init()
+    }
 
     func retrieve(
         ids: [Int],
@@ -28,7 +35,9 @@ final class StepsAPI: APIEndpoint {
             return .value([])
         }
 
-        return self.getObjectsByIds(ids: ids, updating: Step.fetch(ids))
+        return self.stepsPersistenceService.fetch(ids: ids).then { cachedSteps in
+            self.getObjectsByIds(ids: ids, updating: cachedSteps)
+        }
     }
 }
 
@@ -40,8 +49,8 @@ extension StepsAPI {
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Step],
         refreshMode: RefreshMode,
-        success: @escaping (([Step]) -> Void),
-        error errorHandler: @escaping ((NetworkError) -> Void)
+        success: @escaping ([Step]) -> Void,
+        error errorHandler: @escaping (NetworkError) -> Void
     ) -> Request? {
         self.retrieve(ids: ids, existing: existing, headers: headers)
             .done { success($0) }

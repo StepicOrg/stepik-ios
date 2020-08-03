@@ -11,9 +11,14 @@ import PromiseKit
 
 // Tip: Inherited from NSObject in order to be able to find a selector
 final class StepsControllerDeepLinkRouter: NSObject {
+    private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
-    init(courseViewSource: AnalyticsEvent.CourseViewSource) {
+    init(
+        coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
+        courseViewSource: AnalyticsEvent.CourseViewSource
+    ) {
+        self.coursesPersistenceService = coursesPersistenceService
         self.courseViewSource = courseViewSource
         super.init()
     }
@@ -141,29 +146,36 @@ final class StepsControllerDeepLinkRouter: NSObject {
 
         func fetchOrLoadCourse(for section: Section) -> Promise<Course> {
             Promise { seal in
-                if let course = Course.getCourses([section.courseId]).first {
-                    seal.fulfill(course)
-                    return
-                }
-
-                ApiDataDownloader.courses.retrieve(
-                    ids: [section.courseId],
-                    existing: [],
-                    refreshMode: .update,
-                    success: { courses in
-                        if let course = courses.first {
-                            section.course = course
-                            CoreDataHelper.shared.save()
-
-                            seal.fulfill(course)
-                        } else {
-                            seal.reject(NSError(domain: "", code: -1, userInfo: nil))
-                        }
-                    },
-                    error: { err in
-                        seal.reject(err)
+                self.coursesPersistenceService.fetch(
+                    id: section.courseId
+                ).then { cachedCourseOrNil -> Promise<Course> in
+                    if let course = cachedCourseOrNil {
+                        return Promise.value(course)
                     }
-                )
+                    return Promise { seal in
+                        ApiDataDownloader.courses.retrieve(
+                            ids: [section.courseId],
+                            existing: [],
+                            refreshMode: .update,
+                            success: { courses in
+                                if let course = courses.first {
+                                    section.course = course
+                                    CoreDataHelper.shared.save()
+                                    seal.fulfill(course)
+                                } else {
+                                    seal.reject(NSError(domain: "", code: -1, userInfo: nil))
+                                }
+                            },
+                            error: { error in
+                                seal.reject(error)
+                            }
+                        )
+                    }
+                }.done { course in
+                    seal.fulfill(course)
+                }.catch { error in
+                    seal.reject(error)
+                }
             }
         }
 
