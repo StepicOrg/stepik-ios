@@ -11,6 +11,7 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
+@available(*, deprecated, message: "Legacy class, should be refactored")
 final class DatabaseFetchService {
     static func fetchAsync<T: IDFetchable>(entityName: String, ids: [T.IdType]) -> Guarantee<[T]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -23,14 +24,17 @@ final class DatabaseFetchService {
         request.sortDescriptors = [descriptor]
 
         return Guarantee<[T]> { seal in
-            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: { results in
-                guard let courses = results.finalResult as? [T] else {
-                    seal([])
-                    return
+            DispatchQueue.doWorkOnMain {
+                let context = CoreDataHelper.shared.context
+                context.performAndWait {
+                    do {
+                        let finalResult = try context.fetch(request) as? [T]
+                        seal(finalResult ?? [])
+                    } catch {
+                        seal([])
+                    }
                 }
-                seal(courses)
-            })
-            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
+            }
         }
     }
 }
