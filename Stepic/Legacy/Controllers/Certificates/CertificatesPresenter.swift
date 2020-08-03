@@ -93,7 +93,7 @@ final class CertificatesPresenter {
 
         let courseIds = certificates.map { $0.courseId }
 
-        let localCourses = Course.getCourses(courseIds)
+        let localCourses = [Course]()
         matchCoursesToCertificates(courses: localCourses)
 
         self.coursesAPI.retrieve(ids: courseIds, existing: localCourses, refreshMode: .update, success: { courses in

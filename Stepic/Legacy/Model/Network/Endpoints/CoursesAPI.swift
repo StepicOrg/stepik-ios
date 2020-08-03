@@ -12,7 +12,14 @@ import PromiseKit
 import SwiftyJSON
 
 final class CoursesAPI: APIEndpoint {
+    private let coursesPersistenceService: CoursesPersistenceServiceProtocol
+
     override var name: String { "courses" }
+
+    init(coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService()) {
+        self.coursesPersistenceService = coursesPersistenceService
+        super.init()
+    }
 
     @discardableResult
     func retrieve(
@@ -37,10 +44,9 @@ final class CoursesAPI: APIEndpoint {
             return .value([])
         }
 
-        return self.getObjectsByIds(
-            ids: ids,
-            updating: Course.getCourses(ids)
-        ).then { self.indexCoursesInSpotlight($0) }
+        return self.coursesPersistenceService.fetch(ids: ids).then { cachedCourses, _ in
+            self.getObjectsByIds(ids: ids, updating: cachedCourses)
+        }.then { self.indexCoursesInSpotlight($0) }
     }
 
     func retrieve(
@@ -118,8 +124,8 @@ final class CoursesAPI: APIEndpoint {
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Course],
         refreshMode: RefreshMode,
-        success: @escaping (([Course]) -> Void),
-        error errorHandler: @escaping ((NetworkError) -> Void)
+        success: @escaping ([Course]) -> Void,
+        error errorHandler: @escaping (NetworkError) -> Void
     ) -> Request? {
         self.getObjectsByIds(
             requestString: self.name,

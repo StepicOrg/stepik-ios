@@ -315,47 +315,6 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    static func getCourses(
-        _ ids: [Int],
-        featured: Bool? = nil,
-        enrolled: Bool? = nil,
-        isPublic: Bool? = nil
-    ) -> [Course] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
-        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
-
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
-
-        var nonIdPredicates = [NSPredicate]()
-        if let f = featured {
-            nonIdPredicates += [NSPredicate(format: "managedFeatured == %@", f as NSNumber)]
-        }
-
-        if let e = enrolled {
-            nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
-        }
-
-        if let p = isPublic {
-            nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
-        }
-
-        let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: nonIdPredicates)
-
-        let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
-        request.predicate = predicate
-        request.sortDescriptors = [descriptor]
-
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request)
-            return results as? [Course] ?? []
-        } catch {
-            return []
-        }
-    }
-
     static func getAllCourses(enrolled: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
