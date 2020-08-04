@@ -175,8 +175,12 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case .anonymous:
             self.showPlaceholder(for: .anonymous)
         case .result(let viewModel):
-            if (self.title?.isEmpty ?? true) && !viewModel.headerViewModel.isOrganization {
-                self.title = NSLocalizedString("Profile", comment: "")
+            if self.title?.isEmpty ?? true {
+                if !viewModel.isOrganization {
+                    self.title = NSLocalizedString("Profile", comment: "")
+                } else if viewModel.headerViewModel.coverURL == nil {
+                    self.title = NSLocalizedString("Organization", comment: "")
+                }
             }
 
             self.isPlaceholderShown = false
