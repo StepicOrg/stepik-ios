@@ -23,4 +23,6 @@ struct NewProfileViewModel {
     let userDetails: String
     let isCurrentUserProfile: Bool
     let socialProfilesCount: Int
+
+    var isOrganization: Bool { self.headerViewModel.isOrganization }
 }
