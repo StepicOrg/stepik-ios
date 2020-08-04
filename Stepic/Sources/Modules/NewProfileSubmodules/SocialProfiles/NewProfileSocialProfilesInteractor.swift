@@ -14,7 +14,7 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
 
     private var isOnline = false
     private var didLoadFromCache = false
-    private var didLoadFromRemote = false
+    private var didLoadFromNetwork = false
 
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     private lazy var fetchBackgroundQueue = DispatchQueue(
@@ -42,12 +42,12 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
             strongSelf.fetchSemaphore.wait()
 
             let hasEqualIDs = Set(user.socialProfilesArray) == strongSelf.currentSocialProfilesIDs
-            if !request.forceUpdate && strongSelf.didLoadFromRemote && hasEqualIDs {
+            if !request.forceUpdate && strongSelf.didLoadFromNetwork && hasEqualIDs {
                 strongSelf.fetchSemaphore.signal()
                 return
             }
 
-            let isOnline = strongSelf.isOnline
+            let isOnline = request.forceUpdate ? true : strongSelf.isOnline
             print("NewProfileSocialProfilesInteractor :: start fetching social profile, isOnline = \(isOnline)")
 
             strongSelf.fetchSocialProfilesInAppropriateMode(
@@ -57,7 +57,12 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
             ).done { response in
                 DispatchQueue.main.async {
                     print("NewProfileSocialProfilesInteractor :: finish fetching, isOnline = \(isOnline)")
-                    strongSelf.presenter.presentSocialProfiles(response: response)
+                    switch response.result {
+                    case .success:
+                        strongSelf.presenter.presentSocialProfiles(response: response)
+                    case .failure:
+                        break
+                    }
                 }
             }.ensure {
                 if !strongSelf.didLoadFromCache {
@@ -79,18 +84,29 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
         isOnline: Bool
     ) -> Promise<NewProfileSocialProfiles.SocialProfilesLoad.Response> {
         Promise { seal in
+            let shouldFetchRemote = isOnline && self.didLoadFromCache
             firstly {
-                isOnline && self.didLoadFromCache
+                shouldFetchRemote
                     ? self.provider.fetchRemote(ids: ids, userID: userID)
                     : self.provider.fetchCached(ids: ids, userID: userID)
             }.done { socialProfiles in
-                if isOnline && self.didLoadFromCache && !self.didLoadFromRemote {
-                    self.didLoadFromRemote = true
+                if shouldFetchRemote && !self.didLoadFromNetwork {
+                    self.didLoadFromNetwork = true
                 }
 
                 self.currentSocialProfilesIDs = Set(socialProfiles.map(\.id))
 
-                seal.fulfill(.init(result: .success(socialProfiles)))
+                // There are no social profiles in cache.
+                if self.currentSocialProfilesIDs.isEmpty && !shouldFetchRemote {
+                    // Wait for network response.
+                    if self.isOnline {
+                        seal.fulfill(.init(result: .failure(Error.emptyCache)))
+                    } else {
+                        seal.reject(Error.fetchFailed)
+                    }
+                } else {
+                    seal.fulfill(.init(result: .success(socialProfiles)))
+                }
             }.catch { error in
                 if case NewProfileSocialProfilesProvider.Error.networkFetchFailed = error,
                     self.didLoadFromCache,
@@ -107,6 +123,8 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
 
     enum Error: Swift.Error {
         case networkFetchFailed
+        case fetchFailed
+        case emptyCache
     }
 }
 
