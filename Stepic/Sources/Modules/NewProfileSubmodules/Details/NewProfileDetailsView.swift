@@ -72,6 +72,9 @@ final class NewProfileDetailsView: UIView {
         return button
     }()
 
+    private var userIDTopToSuperviewConstraint: Constraint?
+    private var userIDTopToBottomOfSeparatorConstraint: Constraint?
+
     private var currentViewModel: NewProfileDetailsViewModel?
 
     override var intrinsicContentSize: CGSize {
@@ -121,6 +124,16 @@ final class NewProfileDetailsView: UIView {
             : "User ID: \(viewModel.userID)"
         self.userIDButton.setTitle(formattedUserID, for: .normal)
 
+        if self.attributedLabel.attributedText?.string.isEmpty ?? true {
+            self.userIDTopToBottomOfSeparatorConstraint?.deactivate()
+            self.userIDTopToSuperviewConstraint?.activate()
+            self.separatorView.isHidden = true
+        } else {
+            self.userIDTopToBottomOfSeparatorConstraint?.activate()
+            self.userIDTopToSuperviewConstraint?.deactivate()
+            self.separatorView.isHidden = false
+        }
+
         self.currentViewModel = viewModel
         self.invalidateIntrinsicContentSize()
     }
@@ -164,9 +177,14 @@ extension NewProfileDetailsView: ProgrammaticallyInitializableViewProtocol {
 
         self.userIDButton.translatesAutoresizingMaskIntoConstraints = false
         self.userIDButton.snp.makeConstraints { make in
-            make.top
+            self.userIDTopToBottomOfSeparatorConstraint = make.top
                 .equalTo(self.separatorView.snp.bottom)
                 .offset(self.appearance.userIDButtonInsets.top)
+                .constraint
+
+            self.userIDTopToSuperviewConstraint = make.top.equalToSuperview().constraint
+            self.userIDTopToSuperviewConstraint?.deactivate()
+
             make.bottom
                 .equalToSuperview()
                 .offset(-self.appearance.userIDButtonInsets.bottom)
