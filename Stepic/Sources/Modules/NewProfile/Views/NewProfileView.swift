@@ -49,9 +49,17 @@ final class NewProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func showLoading() {}
+    func showLoading() {
+        let topContentInset = self.scrollableStackView.contentInsets.top
+        self.skeleton.viewBuilder = {
+            NewProfileHeaderViewSkeleton(topContentInset: topContentInset)
+        }
+        self.skeleton.show()
+    }
 
-    func hideLoading() {}
+    func hideLoading() {
+        self.skeleton.hide()
+    }
 
     func configure(viewModel: NewProfileViewModel) {
         self.storedViewModel = viewModel
@@ -60,16 +68,8 @@ final class NewProfileView: UIView {
 
     // MARK: Blocks
 
-    func addBlockView(_ view: UIView) {
-        self.scrollableStackView.addArrangedView(view)
-    }
-
     func removeBlockView(_ view: UIView) {
         self.scrollableStackView.removeArrangedView(view)
-    }
-
-    func insertBlockView(_ view: UIView, at position: Int) {
-        self.scrollableStackView.insertArrangedView(view, at: position)
     }
 
     func insertBlockView(_ view: UIView, before previousView: UIView) {

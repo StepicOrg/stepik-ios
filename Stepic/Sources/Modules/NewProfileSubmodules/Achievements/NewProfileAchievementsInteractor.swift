@@ -17,8 +17,6 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
     private var currentAchievements = [AchievementProgressData]()
     private var didLoadAchievements = false
 
-    private let debouncer: DebouncerProtocol = Debouncer()
-
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     private lazy var fetchBackgroundQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.NewProfileAchievementsInteractor.AchievementsFetch"
@@ -58,7 +56,6 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
                     }
                 }
             }.ensure {
-                strongSelf.debouncer.action = nil
                 strongSelf.fetchSemaphore.signal()
             }.catch { error in
                 print("NewProfileAchievementsInteractor :: failed fetch achievements, error = \(error)")
@@ -140,9 +137,14 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
                     return .value(kinds.sorted(by: { $0.1 && !$1.1 }).map { $0.0 })
                 }
             }.then(on: .global(qos: .userInitiated)) { kinds -> Promise<[AchievementProgressData]> in
+                if kinds.isEmpty {
+                    throw Error.emptyAchievementKinds
+                }
+
                 let fetchAchievementProgressPromises = kinds.compactMap { [weak self] kind in
                     self?.provider.fetchAchievementProgress(userID: userID, kind: kind)
                 }
+
                 return when(fulfilled: fetchAchievementProgressPromises)
             }.done { achievementsProgressesData in
                 seal.fulfill(.init(result: .success(achievementsProgressesData)))
@@ -159,6 +161,7 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
 
     enum Error: Swift.Error {
         case networkFetchFailed
+        case emptyAchievementKinds
     }
 }
 
@@ -167,10 +170,6 @@ extension NewProfileAchievementsInteractor: NewProfileSubmoduleProtocol {
         self.currentUserID = user.id
         self.isCurrentUserProfile = isCurrentUserProfile
 
-        if self.debouncer.action == nil {
-            self.debouncer.action = { [weak self] in
-                self?.doAchievementsLoad(request: .init())
-            }
-        }
+        self.doAchievementsLoad(request: .init())
     }
 }

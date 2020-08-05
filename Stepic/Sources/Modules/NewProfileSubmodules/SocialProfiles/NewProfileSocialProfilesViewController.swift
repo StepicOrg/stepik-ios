@@ -71,6 +71,7 @@ final class NewProfileSocialProfilesViewController: UIViewController, Controller
 
         switch newState {
         case .result(let viewModel):
+            self.isPlaceholderShown = false
             self.socialProfilesView?.configure(viewModel: viewModel)
         case .error:
             self.showPlaceholder(for: .connectionError)

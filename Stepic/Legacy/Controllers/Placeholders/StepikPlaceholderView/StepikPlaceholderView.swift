@@ -12,6 +12,15 @@ protocol StepikPlaceholderViewDelegate: AnyObject {
     func buttonDidClick(_ button: UIButton)
 }
 
+extension StepikPlaceholderView {
+    struct Appearance {
+        var backgroundColor = UIColor.stepikBackground
+        let textColor = UIColor.stepikSystemSecondaryText
+        let actionButtonBorderColor = UIColor.stepikOpaqueSeparator
+        let actionButtonTitleColor = UIColor.stepikPrimaryText
+    }
+}
+
 final class StepikPlaceholderView: NibInitializableView {
     struct maxHeight {
         static let horizontal = CGFloat(500)
@@ -44,6 +53,12 @@ final class StepikPlaceholderView: NibInitializableView {
 
     weak var delegate: StepikPlaceholderViewDelegate?
 
+    var appearance = Appearance() {
+        didSet {
+            self.colorize()
+        }
+    }
+
     override var nibName: String { "StepikPlaceholderView" }
 
     convenience init(placeholder: StepikPlaceholderStyle) {
@@ -75,10 +90,10 @@ final class StepikPlaceholderView: NibInitializableView {
     }
 
     private func colorize() {
-        self.view.backgroundColor = .stepikBackground
-        self.textLabel.textColor = .stepikSystemSecondaryText
-        self.actionButton.layer.borderColor = UIColor.stepikOpaqueSeparator.cgColor
-        self.actionButton.setTitleColor(.stepikPrimaryText, for: .normal)
+        self.view.backgroundColor = self.appearance.backgroundColor
+        self.textLabel.textColor = self.appearance.textColor
+        self.actionButton.layer.borderColor = self.appearance.actionButtonBorderColor.cgColor
+        self.actionButton.setTitleColor(self.appearance.actionButtonTitleColor, for: .normal)
     }
 
     private func rebuildConstraints(for placeholder: StepikPlaceholderStyle) {
