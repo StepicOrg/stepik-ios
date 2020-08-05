@@ -15,7 +15,9 @@ final class NewProfileCreatedCoursesViewController: UIViewController, Controller
     private var teacherID: User.IdType?
     private var submoduleViewController: UIViewController?
 
-    var placeholderContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer(
+        appearance: .init(placeholderAppearance: .init(backgroundColor: .stepikGroupedBackground))
+    )
 
     init(interactor: NewProfileCreatedCoursesInteractorProtocol) {
         self.interactor = interactor
