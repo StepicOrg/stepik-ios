@@ -67,6 +67,7 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
             }.ensure {
                 if !strongSelf.didLoadFromCache {
                     strongSelf.didLoadFromCache = true
+                    strongSelf.isOnline = true
                     strongSelf.doSocialProfilesLoad(request: .init())
                 }
                 strongSelf.fetchSemaphore.signal()
@@ -96,21 +97,16 @@ final class NewProfileSocialProfilesInteractor: NewProfileSocialProfilesInteract
 
                 self.currentSocialProfilesIDs = Set(socialProfiles.map(\.id))
 
-                // There are no social profiles in cache.
+                // There are no social profiles in cache, ignore and wait for network response.
                 if self.currentSocialProfilesIDs.isEmpty && !shouldFetchRemote {
-                    // Wait for network response.
-                    if self.isOnline {
-                        seal.fulfill(.init(result: .failure(Error.emptyCache)))
-                    } else {
-                        seal.reject(Error.fetchFailed)
-                    }
+                    seal.fulfill(.init(result: .failure(Error.emptyCache)))
                 } else {
                     seal.fulfill(.init(result: .success(socialProfiles)))
                 }
             }.catch { error in
                 if case NewProfileSocialProfilesProvider.Error.networkFetchFailed = error,
-                    self.didLoadFromCache,
-                    !self.currentSocialProfilesIDs.isEmpty {
+                   self.didLoadFromCache,
+                   !self.currentSocialProfilesIDs.isEmpty {
                     // Offline mode: we already presented cached social profiles, but network request failed
                     // so let's ignore it and show only cached
                     seal.fulfill(.init(result: .failure(Error.networkFetchFailed)))
