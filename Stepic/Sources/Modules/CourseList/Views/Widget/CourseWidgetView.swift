@@ -125,8 +125,8 @@ final class CourseWidgetView: UIView {
 
 extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        if self.colorMode == .clear {
-            self.backgroundColor = .stepikBackground
+        if self.colorMode == .grouped {
+            self.backgroundColor = .stepikSecondaryGroupedBackground
         }
     }
 

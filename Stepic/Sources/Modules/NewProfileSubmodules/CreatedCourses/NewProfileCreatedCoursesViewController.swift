@@ -60,7 +60,7 @@ final class NewProfileCreatedCoursesViewController: UIViewController, Controller
 
         let courseListAssembly = HorizontalCourseListAssembly(
             type: TeacherCourseListType(teacherID: teacherID),
-            colorMode: .clear,
+            colorMode: .grouped,
             courseViewSource: .profile(id: teacherID),
             output: self.interactor as? CourseListOutputProtocol
         )

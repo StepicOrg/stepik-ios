@@ -12,6 +12,7 @@ extension CourseListView {
 
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
+        let groupedModeBackgroundColor = UIColor.stepikGroupedBackground
 
         let horizontalLayoutNextPageWidth: CGFloat = 12.0
     }
@@ -139,8 +140,8 @@ class CourseListView: UIView {
             return self.appearance.lightModeBackgroundColor
         case .dark:
             return self.appearance.darkModeBackgroundColor
-        case .clear:
-            return .clear
+        case .grouped:
+            return self.appearance.groupedModeBackgroundColor
         }
     }
 
@@ -188,10 +189,10 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
                 DarkCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: DarkCourseListCollectionViewCell.defaultReuseIdentifier
             )
-        case .clear:
+        case .grouped:
             self.collectionView.register(
-                ClearCourseListCollectionViewCell.self,
-                forCellWithReuseIdentifier: ClearCourseListCollectionViewCell.defaultReuseIdentifier
+                GroupedCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: GroupedCourseListCollectionViewCell.defaultReuseIdentifier
             )
         }
 
@@ -539,9 +540,9 @@ private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
     }
 }
 
-private class ClearCourseListCollectionViewCell: CourseListCollectionViewCell {
+private class GroupedCourseListCollectionViewCell: CourseListCollectionViewCell {
     override init(frame: CGRect) {
-        super.init(frame: frame, colorMode: .clear)
+        super.init(frame: frame, colorMode: .grouped)
     }
 
     @available(*, unavailable)
