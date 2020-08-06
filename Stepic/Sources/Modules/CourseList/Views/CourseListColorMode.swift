@@ -3,7 +3,7 @@ import Foundation
 enum CourseListColorMode {
     case light
     case dark
-    case clear
+    case grouped
 
     static var `default`: CourseListColorMode { .light }
 }
@@ -11,7 +11,7 @@ enum CourseListColorMode {
 extension CourseListColorMode {
     var exploreBlockHeaderViewAppearance: ExploreBlockHeaderView.Appearance {
         switch self {
-        case .light, .clear:
+        case .light, .grouped:
             return .init(
                 titleLabelColor: .stepikPrimaryText,
                 showAllButtonColor: .stepikTertiaryText
@@ -34,7 +34,7 @@ extension CourseListColorMode {
         if #available(iOS 13.0, *) {
             return UIColor { (traitCollection: UITraitCollection) -> UIColor in
                 switch self {
-                case .light, .clear:
+                case .light, .grouped:
                     return .stepikBackground
                 case .dark:
                     if traitCollection.userInterfaceStyle == .dark {
@@ -45,7 +45,7 @@ extension CourseListColorMode {
             }
         } else {
             switch self {
-            case .light, .clear:
+            case .light, .grouped:
                 return .white
             case .dark:
                 return .stepikAccentFixed
@@ -59,7 +59,7 @@ extension CourseListColorMode {
 
     var courseWidgetStatsViewAppearance: CourseWidgetStatsView.Appearance {
         switch self {
-        case .light, .clear:
+        case .light, .grouped:
             return .init(
                 imagesRenderingBackgroundColor: .stepikAccent,
                 imagesRenderingTintColor: .stepikGreenFixed,
@@ -83,7 +83,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light, .clear:
+        case .light, .grouped:
             appearance.textColor = .stepikPrimaryText
         case .dark:
             appearance.textColor = .white
@@ -99,7 +99,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light, .clear:
+        case .light, .grouped:
             appearance.textColor = .stepikSecondaryText
         case .dark:
             appearance.textColor = UIColor.dynamic(
@@ -113,7 +113,7 @@ extension CourseListColorMode {
 
     var courseWidgetBorderColor: UIColor {
         switch self {
-        case .light, .clear:
+        case .light, .grouped:
             return .dynamic(light: .stepikGrey8Fixed, dark: .stepikSeparator)
         case .dark:
             if #available(iOS 13.0, *) {

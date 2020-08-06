@@ -15,17 +15,22 @@ import YandexMobileMetrica
 final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     static let shared = AnalyticsUserProperties()
 
-    func setProperty(key: String, value: Any?) {
-        if let v = value {
-            Amplitude.instance().setUserProperties([key: v])
+    func setGroup(test: String, group: String) {
+        self.setAmplitudeProperty(key: test, value: group)
+        // AppMetrica
+        let userProfile = YMMMutableUserProfile()
+        let groupAttribute = YMMProfileAttribute.customString(test)
+        userProfile.apply(groupAttribute.withValue(group))
+        YMMYandexMetrica.report(userProfile, onFailure: nil)
+    }
+
+    func setAmplitudeProperty(key: String, value: Any?) {
+        if let value = value {
+            Amplitude.instance().setUserProperties([key: value])
         } else {
             let identify = AMPIdentify().unset(key)
             Amplitude.instance().identify(identify)
         }
-    }
-
-    func setGroup(test: String, group: String) {
-        self.setProperty(key: test, value: group)
     }
 
     private func setCrashlyticsProperty(key: String, value: Any?) {
@@ -40,13 +45,13 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     }
 
     func clearUserDependentProperties() {
-        setUserID(to: nil)
-        setCoursesCount(count: nil)
+        self.setUserID(to: nil)
+        self.setCoursesCount(count: nil)
     }
 
     func setUserID(to id: Int?) {
-        setProperty(key: "stepik_id", value: id)
-        setCrashlyticsProperty(key: "stepik_id", value: id)
+        self.setAmplitudeProperty(key: "stepik_id", value: id)
+        self.setCrashlyticsProperty(key: "stepik_id", value: id)
 
         let userProfileID: String? = id != nil ? String(id.require()) : nil
         // Update AppMetrica user profile id.
@@ -56,19 +61,19 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     }
 
     func incrementSubmissionsCount() {
-        incrementAmplitudeProperty(key: "submissions_count")
+        self.incrementAmplitudeProperty(key: "submissions_count")
     }
 
     func decrementCoursesCount() {
-        incrementAmplitudeProperty(key: "courses_count", value: -1)
+        self.incrementAmplitudeProperty(key: "courses_count", value: -1)
     }
 
     func incrementCoursesCount() {
-        incrementAmplitudeProperty(key: "courses_count")
+        self.incrementAmplitudeProperty(key: "courses_count")
     }
 
     func setCoursesCount(count: Int?) {
-        setProperty(key: "courses_count", value: count)
+        self.setAmplitudeProperty(key: "courses_count", value: count)
     }
 
     func setPushPermissionStatus(_ status: NotificationPermissionStatus) {
@@ -76,24 +81,24 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
 
         switch status {
         case .authorized:
-            self.setProperty(key: key, value: "granted")
+            self.setAmplitudeProperty(key: key, value: "granted")
         case .denied:
-            self.setProperty(key: key, value: "not_granted")
+            self.setAmplitudeProperty(key: key, value: "not_granted")
         case .notDetermined:
-            self.setProperty(key: key, value: "not_determined")
+            self.setAmplitudeProperty(key: key, value: "not_determined")
         }
     }
 
     func setStreaksNotificationsEnabled(_ enabled: Bool) {
-        self.setProperty(key: "streaks_notifications_enabled", value: enabled ? "enabled" : "disabled")
+        self.setAmplitudeProperty(key: "streaks_notifications_enabled", value: enabled ? "enabled" : "disabled")
     }
 
     func setScreenOrientation(isPortrait: Bool) {
-        setProperty(key: "screen_orientation", value: isPortrait ? "portrait" : "landscape")
+        self.setAmplitudeProperty(key: "screen_orientation", value: isPortrait ? "portrait" : "landscape")
     }
 
     func setApplicationID(id: String) {
-        setProperty(key: "application_id", value: id)
+        self.setAmplitudeProperty(key: "application_id", value: id)
     }
 
     func updateUserID() {
@@ -110,6 +115,6 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
             return false
         }()
 
-        self.setProperty(key: "is_night_mode_enabled", value: "\(isEnabled)")
+        self.setAmplitudeProperty(key: "is_night_mode_enabled", value: "\(isEnabled)")
     }
 }

@@ -339,8 +339,8 @@ class DownloaderSpec: QuickSpec {
                 }
 
                 it("not throws any error") {
-                    DispatchQueue.concurrentPerform(iterations: 10) { iteration in
-                        DispatchQueue.concurrentPerform(iterations: 10) { _ in
+                    DispatchQueue.concurrentPerform(iterations: 100) { iteration in
+                        DispatchQueue.concurrentPerform(iterations: 100) { _ in
                             let task = DownloaderTaskMock(url: URL(string: DownloaderSpec.okFileLink)!)
                             expect { try self.downloader.add(task: task) }.notTo(throwError())
                             expect { try self.downloader.resume(task: task) }.notTo(throwError())

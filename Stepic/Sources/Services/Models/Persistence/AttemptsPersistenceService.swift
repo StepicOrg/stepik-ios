@@ -27,7 +27,7 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
 
     func fetchStepAttempts(stepID: Step.IdType) -> Guarantee<[AttemptEntity]> {
         Guarantee { seal in
-            firstly {
+            firstly { () -> Guarantee<Step?> in
                 self.fetchStep(id: stepID)
             }.done { step in
                 let request = NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")
@@ -139,7 +139,7 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
 
     private func insertOrReplace(attempt: Attempt) -> Guarantee<Void> {
         Guarantee { seal in
-            firstly {
+            DispatchQueue.main.promise { () -> Guarantee<Step?> in
                 self.fetchStep(id: attempt.stepID)
             }.then { cachedStepOrNil -> Guarantee<(Step?, [AttemptEntity])> in
                 self.fetchStepAttempts(stepID: attempt.stepID)
@@ -159,6 +159,8 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
                         managedObjectContext: self.managedObjectContext
                     )
 
+                    try? self.managedObjectContext.save()
+
                     if let step = cachedStepOrNil {
                         newAttempt.step = step
                     }
@@ -169,6 +171,8 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
 
                     seal(())
                 }
+            }.catch { _ in
+                seal(())
             }
         }
     }

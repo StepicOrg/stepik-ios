@@ -15,7 +15,7 @@ protocol Executable {
     var type: ExecutableTaskType { get }
     var id: String { get }
 
-    func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void))
+    func execute(success: @escaping () -> Void, failure: @escaping (ExecutionError) -> Void)
 }
 
 enum ExecutionError: Error {

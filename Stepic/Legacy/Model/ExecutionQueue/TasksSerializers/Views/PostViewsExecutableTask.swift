@@ -61,7 +61,7 @@ final class PostViewsExecutableTask: Executable, DictionarySerializable {
         "\(type.rawValue) \(userId) \(stepId) \(String(describing: assignmentId))"
     }
 
-    func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void)) {
+    func execute(success: @escaping () -> Void, failure: @escaping (ExecutionError) -> Void) {
         let recoveryManager = PersistentUserTokenRecoveryManager(baseName: "Users")
 
         guard let token = recoveryManager.recoverStepicToken(userId: userId) else {

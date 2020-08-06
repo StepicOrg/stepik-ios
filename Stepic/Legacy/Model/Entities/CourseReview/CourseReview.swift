@@ -51,15 +51,17 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         request.sortDescriptors = [descriptor]
 
         return Guarantee { seal in
-            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
-                results in
-                guard let results = results.finalResult as? [CourseReview] else {
-                    seal([])
-                    return
+            DispatchQueue.doWorkOnMain {
+                let context = CoreDataHelper.shared.context
+                context.performAndWait {
+                    do {
+                        let courseReviews = try context.fetch(request) as? [CourseReview]
+                        seal(courseReviews ?? [])
+                    } catch {
+                        seal([])
+                    }
                 }
-                seal(results)
-            })
-            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
+            }
         }
     }
 
@@ -75,14 +77,17 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         request.sortDescriptors = [descriptor]
 
         return Guarantee { seal in
-            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: { results in
-                if let results = results.finalResult as? [CourseReview] {
-                    seal(results)
-                } else {
-                    seal([])
+            DispatchQueue.doWorkOnMain {
+                let context = CoreDataHelper.shared.context
+                context.performAndWait {
+                    do {
+                        let courseReviews = try context.fetch(request) as? [CourseReview]
+                        seal(courseReviews ?? [])
+                    } catch {
+                        seal([])
+                    }
                 }
-            })
-            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
+            }
         }
     }
 

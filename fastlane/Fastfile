@@ -1,5 +1,5 @@
 # This is the minimum version number required.
-fastlane_version "2.152.0"
+fastlane_version "2.154.0"
 
 default_platform :ios
 
@@ -367,7 +367,7 @@ platform :ios do
     UI.user_error!("Wrong target parameter") if target.nil?
 
     app_identifier = get_bundle_id(target: target)
-    metapath = "#{project_metapath}/#{scheme}"
+    metapath = "#{project_metapath}/#{target}"
     should_submit = options.key?(:should_submit) ? options[:should_submit] : false
 
     clear_derived_data

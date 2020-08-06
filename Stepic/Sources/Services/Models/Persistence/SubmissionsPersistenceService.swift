@@ -52,7 +52,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
     func fetchAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<[SubmissionEntity]> {
         Guarantee { seal in
-            firstly {
+            firstly { () -> Guarantee<AttemptEntity?> in
                 self.fetchAttempt(id: attemptID)
             }.done { cachedAttemptOrNil in
                 let request = NSFetchRequest<SubmissionEntity>(entityName: "SubmissionEntity")
@@ -68,8 +68,18 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                     do {
                         let submissions = try self.managedObjectContext.fetch(request)
 
-                        if let attempt = cachedAttemptOrNil {
-                            submissions.forEach { $0.attempt = attempt }
+                        guard let attempt = cachedAttemptOrNil else {
+                            return seal(submissions)
+                        }
+
+                        for submission in submissions {
+                            if submission.managedObjectContext != nil
+                                   && submission.managedObjectContext == attempt.managedObjectContext {
+                                submission.attempt = attempt
+                            }
+                        }
+
+                        if self.managedObjectContext.hasChanges {
                             try? self.managedObjectContext.save()
                         }
 
@@ -85,7 +95,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
     func deleteAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<Void> {
         Guarantee { seal in
-            firstly {
+            firstly { () -> Guarantee<[SubmissionEntity]> in
                 self.fetchAttemptSubmissions(attemptID: attemptID)
             }.done { submissions in
                 self.managedObjectContext.performAndWait {
@@ -156,7 +166,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
     private func insertOrReplace(submission: Submission) -> Guarantee<Void> {
         Guarantee { seal in
-            firstly {
+            DispatchQueue.main.promise { () -> Guarantee<AttemptEntity?> in
                 self.fetchAttempt(id: submission.attemptID)
             }.then { cachedAttemptOrNil -> Guarantee<(AttemptEntity?, [SubmissionEntity])> in
                 self.fetchAttemptSubmissions(attemptID: submission.attemptID)
@@ -178,8 +188,20 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                         managedObjectContext: self.managedObjectContext
                     )
 
+                    try? self.managedObjectContext.save()
+
                     if let attempt = cachedAttemptOrNil {
-                        newSubmission.attempt = attempt
+                        if newSubmission.managedObjectContext != attempt.managedObjectContext {
+                            guard let attemptCopy = newSubmission.managedObjectContext?.object(
+                                with: attempt.objectID
+                            ) as? AttemptEntity else {
+                                return seal(())
+                            }
+
+                            newSubmission.attempt = attemptCopy
+                        } else {
+                            newSubmission.attempt = attempt
+                        }
                     }
 
                     if self.managedObjectContext.hasChanges {
@@ -188,6 +210,8 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
                     seal(())
                 }
+            }.catch { _ in
+                seal(())
             }
         }
     }

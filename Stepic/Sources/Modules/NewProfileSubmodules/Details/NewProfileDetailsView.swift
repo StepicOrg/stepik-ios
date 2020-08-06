@@ -72,6 +72,11 @@ final class NewProfileDetailsView: UIView {
         return button
     }()
 
+    private var userIDTopToSuperviewConstraint: Constraint?
+    private var userIDTopToBottomOfSeparatorConstraint: Constraint?
+
+    private var currentViewModel: NewProfileDetailsViewModel?
+
     override var intrinsicContentSize: CGSize {
         let attributedLabelHeight = self.attributedLabel.intrinsicContentSize.height
         let separatorHeightWithInsets = self.appearance.separatorInsets.top + self.appearance.separatorHeight
@@ -84,14 +89,15 @@ final class NewProfileDetailsView: UIView {
         )
     }
 
-    private var lastViewModel: NewProfileDetailsViewModel?
-
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
-        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(font: appearance.labelFont)
+        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(
+            font: appearance.labelFont,
+            tagTransformers: []
+        )
         super.init(frame: frame)
 
         self.setupView()
@@ -105,31 +111,36 @@ final class NewProfileDetailsView: UIView {
     }
 
     func configure(viewModel: NewProfileDetailsViewModel) {
-        self.setText(viewModel.profileDetailsText)
+        if let text = viewModel.profileDetailsText {
+            self.attributedLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
+                htmlString: text.trimmed()
+            ) as? AttributedText
+        } else {
+            self.attributedLabel.attributedText = nil
+        }
 
         let formattedUserID = viewModel.isOrganization
             ? "Organization ID: \(viewModel.userID)"
             : "User ID: \(viewModel.userID)"
         self.userIDButton.setTitle(formattedUserID, for: .normal)
 
-        self.lastViewModel = viewModel
-        self.invalidateIntrinsicContentSize()
-    }
-
-    private func setText(_ text: String?) {
-        if let text = text {
-            let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.attributedLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
-                htmlString: trimmedText
-            ) as? AttributedText
+        if self.attributedLabel.attributedText?.string.isEmpty ?? true {
+            self.userIDTopToBottomOfSeparatorConstraint?.deactivate()
+            self.userIDTopToSuperviewConstraint?.activate()
+            self.separatorView.isHidden = true
         } else {
-            self.attributedLabel.attributedText = nil
+            self.userIDTopToBottomOfSeparatorConstraint?.activate()
+            self.userIDTopToSuperviewConstraint?.deactivate()
+            self.separatorView.isHidden = false
         }
+
+        self.currentViewModel = viewModel
+        self.invalidateIntrinsicContentSize()
     }
 
     @objc
     private func userIDButtonClicked() {
-        if let lastViewModel = self.lastViewModel {
+        if let lastViewModel = self.currentViewModel {
             self.delegate?.newProfileDetailsView(self, didSelectUserID: lastViewModel.userID)
         }
     }
@@ -166,9 +177,14 @@ extension NewProfileDetailsView: ProgrammaticallyInitializableViewProtocol {
 
         self.userIDButton.translatesAutoresizingMaskIntoConstraints = false
         self.userIDButton.snp.makeConstraints { make in
-            make.top
+            self.userIDTopToBottomOfSeparatorConstraint = make.top
                 .equalTo(self.separatorView.snp.bottom)
                 .offset(self.appearance.userIDButtonInsets.top)
+                .constraint
+
+            self.userIDTopToSuperviewConstraint = make.top.equalToSuperview().constraint
+            self.userIDTopToSuperviewConstraint?.deactivate()
+
             make.bottom
                 .equalToSuperview()
                 .offset(-self.appearance.userIDButtonInsets.bottom)

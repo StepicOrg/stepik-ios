@@ -157,7 +157,7 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
         for (uniqueIdentifier, submodule) in request.submodules {
             self.submodules[uniqueIdentifier] = submodule
         }
-        self.pushCurrentUserToSubmodules(Array(self.submodules.values))
+        self.pushCurrentUserToSubmodules(Array(request.submodules.values))
     }
 
     // MARK: Private API

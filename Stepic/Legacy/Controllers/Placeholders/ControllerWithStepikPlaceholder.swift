@@ -11,21 +11,21 @@ import UIKit
 
 typealias StepikPlaceholderControllerState = StepikPlaceholderControllerContainer.PlaceholderState
 
-class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
-    static let shared = StepikPlaceholderControllerContainer()
+extension StepikPlaceholderControllerContainer {
+    struct Appearance {
+        var placeholderAppearance = StepikPlaceholderView.Appearance()
+    }
+}
 
-    open class PlaceholderState: Equatable, Hashable {
-        var id: String
-
-        init(id: String) {
-            self.id = id
-        }
-
+final class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
+    final class PlaceholderState: Equatable, Hashable {
         static let anonymous = PlaceholderState(id: "anonymous")
         static let connectionError = PlaceholderState(id: "connectionError")
         static let refreshing = PlaceholderState(id: "refreshing")
         static let empty = PlaceholderState(id: "empty")
         static let adaptiveCoursePassed = PlaceholderState(id: "adaptiveCoursePassed")
+
+        var id: String
 
         var hashValue: Int {
             get {
@@ -33,22 +33,33 @@ class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
             }
         }
 
-        public static func == (lhs: PlaceholderState, rhs: PlaceholderState) -> Bool {
+        static func == (lhs: PlaceholderState, rhs: PlaceholderState) -> Bool {
             return lhs.id == rhs.id
+        }
+
+        init(id: String) {
+            self.id = id
         }
     }
 
-    var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
-    var currentPlaceholderButtonAction: (() -> Void)?
-    var isPlaceholderShown: Bool = false
+    let appearance: Appearance
 
     lazy var placeholderView: StepikPlaceholderView = {
         let view = StepikPlaceholderView()
+        view.appearance = self.appearance.placeholderAppearance
         return view
     }()
 
+    fileprivate var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
+    fileprivate var currentPlaceholderButtonAction: (() -> Void)?
+    fileprivate var isPlaceholderShown: Bool = false
+
     func buttonDidClick(_ button: UIButton) {
         currentPlaceholderButtonAction?()
+    }
+
+    init(appearance: Appearance = Appearance()) {
+        self.appearance = appearance
     }
 }
 

@@ -15,7 +15,9 @@ final class NewProfileCreatedCoursesViewController: UIViewController, Controller
     private var teacherID: User.IdType?
     private var submoduleViewController: UIViewController?
 
-    var placeholderContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer(
+        appearance: .init(placeholderAppearance: .init(backgroundColor: .stepikGroupedBackground))
+    )
 
     init(interactor: NewProfileCreatedCoursesInteractorProtocol) {
         self.interactor = interactor
@@ -60,7 +62,7 @@ final class NewProfileCreatedCoursesViewController: UIViewController, Controller
 
         let courseListAssembly = HorizontalCourseListAssembly(
             type: TeacherCourseListType(teacherID: teacherID),
-            colorMode: .clear,
+            colorMode: .grouped,
             courseViewSource: .profile(id: teacherID),
             output: self.interactor as? CourseListOutputProtocol
         )
