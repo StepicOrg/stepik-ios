@@ -192,15 +192,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
             self.updateContentInsets()
 
-            let shouldShowCreatedCourses: Bool = {
-                switch self.currentCreatedCoursesState {
-                case .visible:
-                    return true
-                case .hidden:
-                    return false
-                }
-            }()
-            self.refreshCreatedCoursesState(shouldShowCreatedCourses ? .visible(teacherID: viewModel.userID) : .hidden)
+            self.refreshCreatedCoursesState(.visible(teacherID: viewModel.userID))
 
             let shouldShowStreakNotifications = viewModel.isCurrentUserProfile
             self.refreshStreakNotificationsState(shouldShowStreakNotifications ? .visible : .hidden)
@@ -211,7 +203,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             let shouldShowAchievements = !viewModel.isOrganization
             self.refreshAchievementsState(shouldShowAchievements ? .visible : .hidden)
 
-            let shouldShowCertificates = !viewModel.isOrganization && self.currentCertificatesState != .hidden
+            let shouldShowCertificates = !viewModel.isOrganization
             self.refreshCertificatesState(shouldShowCertificates ? .visible : .hidden)
 
             let shouldShowSocialProfiles = viewModel.isOrganization && viewModel.socialProfilesCount > 0
@@ -363,8 +355,6 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case hidden
     }
 
-    private var currentCreatedCoursesState = CreatedCoursesState.visible(teacherID: 0)
-
     private func refreshCreatedCoursesState(_ state: CreatedCoursesState) {
         switch state {
         case .visible(let teacherID):
@@ -515,8 +505,6 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         case visible
         case hidden
     }
-
-    private var currentCertificatesState = CertificatesState.visible
 
     private func refreshCertificatesState(_ state: CertificatesState) {
         switch state {
@@ -716,11 +704,9 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
     func displaySubmoduleEmptyState(viewModel: NewProfile.SubmoduleEmptyStatePresentation.ViewModel) {
         switch viewModel.module {
         case .createdCourses:
-            self.currentCreatedCoursesState = .hidden
-            self.refreshCreatedCoursesState(self.currentCreatedCoursesState)
+            self.refreshCreatedCoursesState(.hidden)
         case .certificates:
-            self.currentCertificatesState = .hidden
-            self.refreshCertificatesState(self.currentCertificatesState)
+            self.refreshCertificatesState(.hidden)
         default:
             assertionFailure("Unsupported module type")
         }
