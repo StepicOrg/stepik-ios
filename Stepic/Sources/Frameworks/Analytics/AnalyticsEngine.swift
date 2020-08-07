@@ -85,6 +85,7 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         self.synchronizationQueue.async {
             self.handleEvent(name: name, parameters: parameters, forceSend: forceSend)
+            print("Logging Stepik event: \(name), parameters: \(String(describing: parameters))")
         }
     }
 
@@ -143,6 +144,8 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
 
             self.serializeQueueState()
             self.sendEventsIfNeeded()
+
+            print("StepikAnalyticsEngine :: done send batch metrics")
         }.ensure {
             self.requestSemaphore.signal()
         }.catch { _ in
