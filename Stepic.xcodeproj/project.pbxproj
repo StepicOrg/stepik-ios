@@ -456,6 +456,7 @@
 		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
 		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
+		2C2F6E6024DD3E69000E8844 /* StepikAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */; };
 		2C30505B24574B1F005DCD81 /* CourseListDataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */; };
 		2C30A6A024A29B6D0074693D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30A69F24A29B6D0074693D /* Queue.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
@@ -1838,6 +1839,7 @@
 		2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertPresenter.swift; sourceTree = "<group>"; };
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
+		2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAnalyticsEvents.swift; sourceTree = "<group>"; };
 		2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataBackUpdateService.swift; sourceTree = "<group>"; };
 		2C30A69F24A29B6D0074693D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		2C32664224B00BEF0013C473 /* Model_course_purchases_v54.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_purchases_v54.xcdatamodel; sourceTree = "<group>"; };
@@ -3433,6 +3435,7 @@
 				081A14FE20D963090016364E /* AmplitudeAnalyticsEvents.swift */,
 				08D035201D65A252003515C6 /* AnalyticsEvents.swift */,
 				2C998ACF246EC83800AAFDE4 /* NotificationAlertsAnalytics.swift */,
+				2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -8473,6 +8476,7 @@
 				2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */,
 				62E9870EF451D397B27AB075 /* CourseInfoTabSyllabusCellStatsView.swift in Sources */,
 				62E9893B98E774DA8141AD0F /* CourseInfoTabSyllabusCellView.swift in Sources */,
+				2C2F6E6024DD3E69000E8844 /* StepikAnalyticsEvents.swift in Sources */,
 				62E98C92B0827BEB4E28A8D9 /* CourseInfoTabSyllabusTableViewCell.swift in Sources */,
 				62E98212665FE6C08C3736DA /* CourseInfoTabSyllabusHeaderView.swift in Sources */,
 				62E988C6B635993C63C66666 /* CourseInfoTabSyllabusSectionDeadlinesView.swift in Sources */,

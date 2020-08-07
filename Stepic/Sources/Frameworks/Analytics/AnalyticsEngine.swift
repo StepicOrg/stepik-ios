@@ -152,10 +152,8 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
 
     private func listenForChangesInNetworkReachabilityStatus() {
         self.networkReachabilityService.startListening { networkReachabilityStatus in
-            self.synchronizationQueue.async {
-                if networkReachabilityStatus == .reachable {
-                    self.sendEventsIfNeeded()
-                }
+            if networkReachabilityStatus == .reachable {
+                self.sendEventsIfNeeded()
             }
         }
     }
