@@ -16,6 +16,7 @@ extension Profile {
     @NSManaged var managedShortBio: String?
     @NSManaged var managedDetails: String?
     @NSManaged var managedSubscribedForMail: NSNumber?
+    @NSManaged var managedIsVoteNotificationsEnabled: NSNumber?
     @NSManaged var managedIsStaff: NSNumber?
 
     @NSManaged var managedEmailAddressesArray: NSObject?
@@ -92,6 +93,15 @@ extension Profile {
         }
         get {
              managedSubscribedForMail?.boolValue ?? true
+        }
+    }
+
+    var isVoteNotificationsEnabled: Bool {
+        get {
+            self.managedIsVoteNotificationsEnabled?.boolValue ?? true
+        }
+        set {
+            self.managedIsVoteNotificationsEnabled = NSNumber(value: newValue)
         }
     }
 

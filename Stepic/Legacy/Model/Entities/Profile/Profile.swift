@@ -13,35 +13,37 @@ import SwiftyJSON
 final class Profile: NSManagedObject, JSONSerializable {
     typealias IdType = Int
 
+    var json: JSON {
+        [
+            JSONKey.id.rawValue: self.id,
+            JSONKey.firstName.rawValue: self.firstName,
+            JSONKey.lastName.rawValue: self.lastName,
+            JSONKey.subscribedForMail.rawValue: self.subscribedForMail,
+            JSONKey.shortBio.rawValue: self.shortBio,
+            JSONKey.details.rawValue: self.details,
+            JSONKey.isVoteNotificationsEnabled.rawValue: self.isVoteNotificationsEnabled
+        ]
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        self.id = json["id"].intValue
-        self.firstName = json["first_name"].stringValue
-        self.lastName = json["last_name"].stringValue
-        self.subscribedForMail = json["subscribed_for_mail"].boolValue
-        self.isStaff = json["is_staff"].boolValue
-        self.shortBio = json["short_bio"].stringValue
-        self.details = json["details"].stringValue
-        self.emailAddressesArray = json["email_addresses"].arrayObject as? [Int] ?? []
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.firstName = json[JSONKey.firstName.rawValue].stringValue
+        self.lastName = json[JSONKey.lastName.rawValue].stringValue
+        self.subscribedForMail = json[JSONKey.subscribedForMail.rawValue].boolValue
+        self.isVoteNotificationsEnabled = json[JSONKey.isVoteNotificationsEnabled.rawValue].boolValue
+        self.isStaff = json[JSONKey.isStaff.rawValue].boolValue
+        self.shortBio = json[JSONKey.shortBio.rawValue].stringValue
+        self.details = json[JSONKey.details.rawValue].stringValue
+        self.emailAddressesArray = json[JSONKey.emailAddresses.rawValue].arrayObject as? [Int] ?? []
     }
 
     func update(json: JSON) {
         self.initialize(json)
-    }
-
-    var json: JSON {
-        [
-            "id": self.id as AnyObject,
-            "first_name": self.firstName as AnyObject,
-            "last_name": self.lastName as AnyObject,
-            "subscribed_for_mail": self.subscribedForMail as AnyObject,
-            "short_bio": self.shortBio as AnyObject,
-            "details": self.details as AnyObject
-        ]
     }
 
     static func fetchById(_ id: Int) -> [Profile]? {
@@ -54,5 +56,17 @@ final class Profile: NSManagedObject, JSONSerializable {
         } catch {
             return nil
         }
+    }
+
+    enum JSONKey: String {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case subscribedForMail = "subscribed_for_mail"
+        case isStaff = "is_staff"
+        case shortBio = "short_bio"
+        case details
+        case emailAddresses = "email_addresses"
+        case isVoteNotificationsEnabled = "is_vote_notifications_enabled"
     }
 }
