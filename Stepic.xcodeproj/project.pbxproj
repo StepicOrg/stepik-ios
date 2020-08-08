@@ -1964,6 +1964,7 @@
 		2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementProgressesNetworkService.swift; sourceTree = "<group>"; };
 		2C7545A924C01F06004F9074 /* AchievementsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsRepository.swift; sourceTree = "<group>"; };
 		2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsViewModel.swift; sourceTree = "<group>"; };
+		2C78573B24DE1EC40042AD2C /* Model_is_vote_notifications_enabled_v60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_is_vote_notifications_enabled_v60.xcdatamodel; sourceTree = "<group>"; };
 		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
@@ -9880,6 +9881,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C78573B24DE1EC40042AD2C /* Model_is_vote_notifications_enabled_v60.xcdatamodel */,
 				2C619A7824CFF9DC007D3529 /* Model_social_profiles_v59.xcdatamodel */,
 				2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */,
 				2CC8683624CAD452004845AB /* Model_new_profile_organization_v57.xcdatamodel */,
@@ -9941,7 +9943,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C619A7824CFF9DC007D3529 /* Model_social_profiles_v59.xcdatamodel */;
+			currentVersion = 2C78573B24DE1EC40042AD2C /* Model_is_vote_notifications_enabled_v60.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
