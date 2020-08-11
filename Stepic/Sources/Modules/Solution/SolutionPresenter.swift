@@ -26,16 +26,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         submission: Submission,
         submissionURL: URL?
     ) -> SolutionViewModel {
-        let quizStatus: QuizStatus = {
-            switch submission.statusString {
-            case "wrong":
-                return .wrong
-            case "correct":
-                return .correct
-            default:
-                return .evaluation
-            }
-        }()
+        let quizStatus = QuizStatus(submission: submission) ?? .wrong
 
         let feedbackTitle = self.makeFeedbackTitle(status: quizStatus)
 
