@@ -215,7 +215,7 @@ final class QuizFeedbackView: UIView {
             }
         }
 
-        init?(quizStatus: QuizStatus) {
+        init(quizStatus: QuizStatus) {
             switch quizStatus {
             case .wrong:
                 self = .wrong

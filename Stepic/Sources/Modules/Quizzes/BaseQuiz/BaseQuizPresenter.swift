@@ -41,18 +41,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         submissionsCount: Int,
         hasNextStep: Bool
     ) -> BaseQuizViewModel {
-        let quizStatus: QuizStatus? = {
-            switch submission.status {
-            case .wrong:
-                return .wrong
-            case .correct:
-                return submission.isPartiallyCorrect ? .partiallyCorrect : .correct
-            case .evaluation:
-                return .evaluation
-            case .none:
-                return nil
-            }
-        }()
+        let quizStatus = QuizStatus(submission: submission)
 
         // The following quizzes can be retried w/o new attempt
         let isQuizNotNeededNewAttempt = [
