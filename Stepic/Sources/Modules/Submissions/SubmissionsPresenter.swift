@@ -73,7 +73,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             formattedUsername: username,
             formattedDate: relativeDateString,
             submissionTitle: submissionTitle,
-            isSubmissionCorrect: submission.isCorrect
+            quizStatus: QuizStatus(submission: submission) ?? .wrong
         )
     }
 }

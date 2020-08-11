@@ -7,5 +7,5 @@ struct SubmissionsViewModel: UniqueIdentifiable {
     let formattedUsername: String
     let formattedDate: String
     let submissionTitle: String
-    let isSubmissionCorrect: Bool
+    let quizStatus: QuizStatus
 }
