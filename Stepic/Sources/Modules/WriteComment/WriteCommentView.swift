@@ -109,7 +109,7 @@ final class WriteCommentView: UIView {
             self.solutionControl.configure(
                 viewModel: .init(
                     title: viewModel.solutionTitle,
-                    isCorrect: viewModel.isSolutionCorrect,
+                    status: viewModel.solutionStatus,
                     isSelected: viewModel.isSolutionSelected
                 )
             )

@@ -102,13 +102,20 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
 
         let isSolutionHidden = isReply || data.discussionThreadType != .solutions
 
+        let solutionStatus: QuizStatus = {
+            if let submission = data.submission, let quizStatus = QuizStatus(submission: submission) {
+                return quizStatus
+            }
+            return .wrong
+        }()
+
         return .init(
             text: data.text,
             doneButtonTitle: doneButtonTitle,
             isFilled: isFilled,
             isSolutionHidden: isSolutionHidden,
             isSolutionSelected: data.submission != nil,
-            isSolutionCorrect: data.submission?.isCorrect ?? false,
+            solutionStatus: solutionStatus,
             solutionTitle: solutionTitle
         )
     }

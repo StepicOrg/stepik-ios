@@ -6,6 +6,6 @@ struct WriteCommentViewModel {
     let isFilled: Bool
     let isSolutionHidden: Bool
     let isSolutionSelected: Bool
-    let isSolutionCorrect: Bool
+    let solutionStatus: QuizStatus
     let solutionTitle: String?
 }
