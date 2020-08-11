@@ -35,6 +35,6 @@ struct DiscussionsCommentViewModel {
     struct Solution {
         let id: Submission.IdType
         let title: String
-        let isCorrect: Bool
+        let status: QuizStatus
     }
 }

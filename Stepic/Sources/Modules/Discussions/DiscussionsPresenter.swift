@@ -283,7 +283,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                     format: NSLocalizedString("DiscussionThreadCommentSolutionTitle", comment: ""),
                     arguments: ["\(submission.id)"]
                 ),
-                isCorrect: submission.isCorrect
+                status: QuizStatus(submission: submission) ?? .wrong
             )
         }()
 
