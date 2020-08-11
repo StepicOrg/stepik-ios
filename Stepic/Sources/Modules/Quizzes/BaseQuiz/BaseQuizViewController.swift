@@ -101,15 +101,12 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.baseQuizView?.isDiscountPolicyAvailable = data.isDiscountingPolicyVisible
         self.baseQuizView?.discountPolicyTitle = data.discountingPolicyTitle
 
-        if let status = data.quizStatus {
-            switch status {
-            case .correct:
-                self.baseQuizView?.showFeedback(state: .correct, title: data.feedbackTitle, hint: data.hintContent)
-            case .wrong:
-                self.baseQuizView?.showFeedback(state: .wrong, title: data.feedbackTitle, hint: data.hintContent)
-            case .evaluation:
-                self.baseQuizView?.showFeedback(state: .evaluation, title: data.feedbackTitle, hint: data.hintContent)
-            }
+        if let quizStatus = data.quizStatus {
+            self.baseQuizView?.showFeedback(
+                state: .init(quizStatus: quizStatus),
+                title: data.feedbackTitle,
+                hint: data.hintContent
+            )
         } else {
             self.baseQuizView?.hideFeedback()
         }

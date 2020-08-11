@@ -24,7 +24,7 @@ final class CodeQuizPresenter: CodeQuizPresenterProtocol {
             }
 
             switch status {
-            case .correct:
+            case .correct, .partiallyCorrect:
                 return .correct
             case .wrong:
                 return .wrong

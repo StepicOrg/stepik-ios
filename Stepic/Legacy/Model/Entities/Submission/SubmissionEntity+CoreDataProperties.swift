@@ -6,6 +6,7 @@ extension SubmissionEntity {
     @NSManaged var managedAttemptID: NSNumber
     @NSManaged var managedReply: Reply?
     @NSManaged var managedLocal: NSNumber
+    @NSManaged var managedScore: NSNumber
 
     @NSManaged var managedHint: String?
     @NSManaged var managedStatus: String?

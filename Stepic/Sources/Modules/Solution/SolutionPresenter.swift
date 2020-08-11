@@ -26,16 +26,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         submission: Submission,
         submissionURL: URL?
     ) -> SolutionViewModel {
-        let quizStatus: QuizStatus = {
-            switch submission.statusString {
-            case "wrong":
-                return .wrong
-            case "correct":
-                return .correct
-            default:
-                return .evaluation
-            }
-        }()
+        let quizStatus = QuizStatus(submission: submission) ?? .wrong
 
         let feedbackTitle = self.makeFeedbackTitle(status: quizStatus)
 
@@ -82,6 +73,8 @@ final class SolutionPresenter: SolutionPresenterProtocol {
             ]
 
             return correctTitles.randomElement() ?? NSLocalizedString("Correct", comment: "")
+        case .partiallyCorrect:
+            return NSLocalizedString("PartiallyCorrectFeedbackTitle1", comment: "")
         case .wrong:
             return NSLocalizedString("WrongFeedbackTitleLastTry", comment: "")
         case .evaluation:

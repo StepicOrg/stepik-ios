@@ -103,23 +103,37 @@ final class DiscussionsSolutionControl: UIControl {
 
     enum SolutionState {
         case correct
+        case partiallyCorrect
         case wrong
 
         var tintColor: UIColor {
             switch self {
             case .correct:
-                return UIColor.stepikGreen
+                return .stepikGreen
+            case .partiallyCorrect:
+                return .stepikDarkYellow
             case .wrong:
-                return UIColor.stepikLightRed
+                return .stepikLightRed
             }
         }
 
         var icon: UIImage? {
             switch self {
-            case .correct:
+            case .correct, .partiallyCorrect:
                 return UIImage(named: "quiz-mark-correct")
             case .wrong:
                 return UIImage(named: "quiz-mark-wrong")
+            }
+        }
+
+        init(quizStatus: QuizStatus) {
+            switch quizStatus {
+            case .wrong, .evaluation:
+                self = .wrong
+            case .correct:
+                self = .correct
+            case .partiallyCorrect:
+                self = .partiallyCorrect
             }
         }
     }
