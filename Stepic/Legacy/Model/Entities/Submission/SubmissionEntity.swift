@@ -44,6 +44,15 @@ final class SubmissionEntity: NSManagedObject {
         }
     }
 
+    var score: Float {
+        get {
+            self.managedScore.floatValue
+        }
+        set {
+            self.managedScore = NSNumber(value: newValue)
+        }
+    }
+
     var hint: String? {
         get {
             self.managedHint
@@ -111,6 +120,7 @@ extension SubmissionEntity {
         Submission(
             id: self.id,
             status: self.status,
+            score: self.score,
             hint: self.hint,
             feedback: self.feedback,
             time: self.time,
@@ -134,6 +144,7 @@ extension SubmissionEntity {
         self.attemptID = submission.attemptID
         self.reply = submission.reply
         self.isLocal = submission.isLocal
+        self.score = submission.score
         self.hint = submission.hint
         self.statusString = submission.statusString
         self.feedback = submission.feedback
