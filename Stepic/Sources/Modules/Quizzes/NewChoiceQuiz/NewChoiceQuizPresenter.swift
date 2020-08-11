@@ -14,7 +14,7 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
             }
 
             switch status {
-            case .correct:
+            case .correct, .partiallyCorrect:
                 return .correct
             case .wrong:
                 return .wrong

@@ -153,6 +153,7 @@ final class QuizFeedbackView: UIView {
 
     enum State {
         case correct
+        case partiallyCorrect
         case wrong
         case evaluation
         case validation
@@ -161,6 +162,8 @@ final class QuizFeedbackView: UIView {
             switch self {
             case .correct:
                 return .quizElementCorrectBackground
+            case .partiallyCorrect:
+                return .quizElementPartiallyCorrectBackground
             case .wrong:
                 return .quizElementWrongBackground
             default:
@@ -172,6 +175,8 @@ final class QuizFeedbackView: UIView {
             switch self {
             case .correct:
                 return .stepikCallToActionText
+            case .partiallyCorrect:
+                return .stepikDarkYellow
             case .wrong:
                 return .stepikLightRedFixed
             default:
@@ -181,7 +186,7 @@ final class QuizFeedbackView: UIView {
 
         var leftView: UIView {
             switch self {
-            case .correct:
+            case .correct, .partiallyCorrect:
                 let view = UIImageView(
                     image: UIImage(named: "quiz-feedback-correct")?.withRenderingMode(.alwaysTemplate)
                 )
@@ -207,6 +212,19 @@ final class QuizFeedbackView: UIView {
                 view.contentMode = .scaleAspectFit
                 view.tintColor = self.titleColor
                 return view
+            }
+        }
+
+        init?(quizStatus: QuizStatus) {
+            switch quizStatus {
+            case .wrong:
+                self = .wrong
+            case .correct:
+                self = .correct
+            case .partiallyCorrect:
+                self = .partiallyCorrect
+            case .evaluation:
+                self = .evaluation
             }
         }
     }

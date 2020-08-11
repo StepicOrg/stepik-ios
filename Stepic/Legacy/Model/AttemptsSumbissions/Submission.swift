@@ -37,6 +37,8 @@ final class Submission: JSONSerializable {
 
     var isCorrect: Bool { self.status == .correct }
 
+    var isPartiallyCorrect: Bool { self.isCorrect && self.score < 1.0 }
+
     var json: JSON {
         [
             JSONKey.attempt.rawValue: attemptID,

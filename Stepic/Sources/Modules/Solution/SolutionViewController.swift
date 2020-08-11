@@ -115,13 +115,8 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
             self.addChild(quizController)
             self.solutionView?.addQuiz(view: quizController.view)
 
-            switch data.quizStatus {
-            case .correct:
-                self.solutionView?.showFeedback(state: .correct, title: data.feedbackTitle, hint: data.hintContent)
-            case .wrong:
-                self.solutionView?.showFeedback(state: .wrong, title: data.feedbackTitle, hint: data.hintContent)
-            case .evaluation:
-                self.solutionView?.showFeedback(state: .evaluation, title: data.feedbackTitle, hint: data.hintContent)
+            if let feedbackState = QuizFeedbackView.State(quizStatus: data.quizStatus) {
+                self.solutionView?.showFeedback(state: feedbackState, title: data.feedbackTitle, hint: data.hintContent)
             }
 
             self.solutionView?.actionIsHidden = true

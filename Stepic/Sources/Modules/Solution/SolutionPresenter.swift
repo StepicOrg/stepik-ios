@@ -82,6 +82,8 @@ final class SolutionPresenter: SolutionPresenterProtocol {
             ]
 
             return correctTitles.randomElement() ?? NSLocalizedString("Correct", comment: "")
+        case .partiallyCorrect:
+            return NSLocalizedString("PartiallyCorrectFeedbackTitle1", comment: "")
         case .wrong:
             return NSLocalizedString("WrongFeedbackTitleLastTry", comment: "")
         case .evaluation:

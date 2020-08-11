@@ -122,8 +122,32 @@ extension UIColor {
         )
     }
 
+    /// Adaptable color with base hex value #FFF6E5 (yellow03).
+    static var stepikLightYellow: UIColor {
+        .dynamic(
+            light: ColorPalette.lightYellow50,
+            dark: ColorPalette.lightYellow300,
+            lightAccessibility: ColorPalette.lightYellow100,
+            darkAccessibility: ColorPalette.lightYellow200
+        )
+    }
+
+    /// Adaptable color with base hex value #FEA832 (yellow01).
+    static var stepikDarkYellow: UIColor {
+        .dynamic(
+            light: ColorPalette.darkYellow400,
+            dark: ColorPalette.darkYellow300,
+            lightAccessibility: ColorPalette.darkYellow500,
+            darkAccessibility: ColorPalette.darkYellow200
+        )
+    }
+
     /// A non adaptable color with hex value #FEDB41 (yellow02).
     static let stepikYellowFixed = ColorPalette.yellow600
+    /// A non adaptable color with hex value #FEDB41 (yellow03).
+    static let stepikLightYellowFixed = ColorPalette.lightYellow50
+    /// A non adaptable color with hex value #FEDB41 (yellow01).
+    static let stepikDarkYellowFixed = ColorPalette.darkYellow400
 
     // MARK: Grey
 
@@ -504,6 +528,13 @@ extension UIColor {
         .dynamic(light: .stepikLightGreen, dark: .stepikCallToActionBackground)
     }
 
+    static var quizElementPartiallyCorrectBackground: UIColor {
+        .dynamic(
+            light: .stepikLightYellow,
+            dark: UIColor.stepikLightYellow.withAlphaComponent(0.1)
+        )
+    }
+
     static var quizElementWrongBackground: UIColor {
         .dynamic(
             light: UIColor.stepikLightRed.withAlphaComponent(0.15),
@@ -697,6 +728,8 @@ private enum ColorPalette {
 
     // MARK: - Yellow -
 
+    // MARK: Normal
+
     /// Color to use in light/unspecified mode and with a high contrast level.
     static let yellow700 = UIColor(hex6: 0xFCC439)
     /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
@@ -705,6 +738,28 @@ private enum ColorPalette {
     static let yellow300 = UIColor(hex6: 0xFDF17A)
     /// Color to use in dark mode and with a high contrast level.
     static let yellow200 = UIColor(hex6: 0xFEF5A0)
+
+    // MARK: Light
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let lightYellow100 = UIColor(hex6: 0xFFE7BB)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let lightYellow50 = UIColor(hex6: 0xFFF6E5)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let lightYellow300 = UIColor(hex6: 0xFFC75C)
+    /// Color to use in dark mode and with a high contrast level.
+    static let lightYellow200 = UIColor(hex6: 0xFFD88C)
+
+    // MARK: Dark
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let darkYellow500 = UIColor(hex6: 0xFE9B1B)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let darkYellow400 = UIColor(hex6: 0xFEA832)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let darkYellow300 = UIColor(hex6: 0xFEB954)
+    /// Color to use in dark mode and with a high contrast level.
+    static let darkYellow200 = UIColor(hex6: 0xFECD84)
 
     // MARK: - Grey -
 

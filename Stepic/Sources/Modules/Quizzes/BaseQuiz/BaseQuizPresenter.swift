@@ -46,7 +46,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             case .wrong:
                 return .wrong
             case .correct:
-                return .correct
+                return submission.isPartiallyCorrect ? .partiallyCorrect : .correct
             case .evaluation:
                 return .evaluation
             case .none:
@@ -65,10 +65,11 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             StepDataFlow.QuizType.matching
         ].contains(StepDataFlow.QuizType(blockName: step.block.name))
 
+        let isQuizCorrect = quizStatus?.isCorrect ?? false
         // 1. if quiz is not needed new attempt and status == wrong
         //    => retry not needed (by quiz design or we've clean attempt)
-        // 2. if status == correct we always need to create new attempt
-        let retryWithNewAttempt = (!isQuizNotNeededNewAttempt && quizStatus == .wrong) || quizStatus == .correct
+        // 2. if status == correct or partiallyCorrect we always need to create new attempt
+        let retryWithNewAttempt = (!isQuizNotNeededNewAttempt && quizStatus == .wrong) || isQuizCorrect
 
         var submissionsLeft: Int?
         if step.hasSubmissionRestrictions, let maxSubmissionsCount = step.maxSubmissionsCount {
@@ -88,9 +89,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         )
 
         let isSubmitButtonDisabled = quizStatus == .evaluation || submissionsLeft == 0
-        let shouldPassPeerReview = quizStatus == .correct && step.hasReview
-        let canNavigateToNextStep = quizStatus == .correct && hasNextStep
-        let canRetry = quizStatus == .correct && !(submissionsLeft == 0)
+        let shouldPassPeerReview = isQuizCorrect && step.hasReview
+        let canNavigateToNextStep = isQuizCorrect && hasNextStep
+        let canRetry = isQuizCorrect && !(submissionsLeft == 0)
 
         let hintContent: String? = {
             if let text = submission.hint, !text.isEmpty {
@@ -182,9 +183,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     }
 
     private func makeFeedbackTitle(status: QuizStatus, step: Step, submissionsLeft: Int) -> String {
-        // swiftlint:disable:next nslocalizedstring_key
-        let correctTitles = (1...14).map { NSLocalizedString("CorrectFeedbackTitle\($0)", comment: "") }
-
+        // swiftlint:disable nslocalizedstring_key
         switch status {
         case .correct:
             if step.hasReview {
@@ -193,19 +192,27 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             if case .freeAnswer = StepDataFlow.QuizType(blockName: step.block.name) {
                 return NSLocalizedString("CorrectFeedbackTitleFreeAnswer", comment: "")
             }
-            return correctTitles.randomElement() ?? NSLocalizedString("Correct", comment: "")
+            return (1...14)
+                .map { NSLocalizedString("CorrectFeedbackTitle\($0)", comment: "") }
+                .randomElement()
+                .require()
+        case .partiallyCorrect:
+            return (1...6)
+                .map { NSLocalizedString("PartiallyCorrectFeedbackTitle\($0)", comment: "") }
+                .randomElement()
+                .require()
         case .wrong:
             if submissionsLeft == 0 {
                 return NSLocalizedString("WrongFeedbackTitleLastTry", comment: "")
             }
             return (1...3)
-                // swiftlint:disable:next nslocalizedstring_key
                 .map { NSLocalizedString("WrongFeedbackTitleNotLastTry\($0)", comment: "") }
                 .randomElement()
                 .require()
         case .evaluation:
             return NSLocalizedString("EvaluationFeedbackTitle", comment: "")
         }
+        // swiftlint:enable nslocalizedstring_key
     }
 
     private func makeURL(for step: Step) -> URL {
