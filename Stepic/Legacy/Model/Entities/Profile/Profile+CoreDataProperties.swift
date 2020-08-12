@@ -16,6 +16,11 @@ extension Profile {
     @NSManaged var managedShortBio: String?
     @NSManaged var managedDetails: String?
     @NSManaged var managedSubscribedForMail: NSNumber?
+    @NSManaged var managedSubscribedForMarketing: NSNumber?
+    @NSManaged var managedSubscribedForPartners: NSNumber?
+    @NSManaged var managedSubscribedForNewsEn: NSNumber?
+    @NSManaged var managedSubscribedForNewsRu: NSNumber?
+    @NSManaged var managedIsWebPushEnabled: NSNumber?
     @NSManaged var managedIsVoteNotificationsEnabled: NSNumber?
     @NSManaged var managedIsStaff: NSNumber?
 
@@ -93,6 +98,51 @@ extension Profile {
         }
         get {
              managedSubscribedForMail?.boolValue ?? true
+        }
+    }
+
+    var subscribedForMarketing: Bool {
+        get {
+            self.managedSubscribedForMarketing?.boolValue ?? false
+        }
+        set {
+            self.managedSubscribedForMarketing = NSNumber(value: newValue)
+        }
+    }
+
+    var subscribedForPartners: Bool {
+        get {
+            self.managedSubscribedForPartners?.boolValue ?? false
+        }
+        set {
+            self.managedSubscribedForPartners = NSNumber(value: newValue)
+        }
+    }
+
+    var subscribedForNewsEn: Bool {
+        get {
+            self.managedSubscribedForNewsEn?.boolValue ?? true
+        }
+        set {
+            self.managedSubscribedForNewsEn = NSNumber(value: newValue)
+        }
+    }
+
+    var subscribedForNewsRu: Bool {
+        get {
+            self.managedSubscribedForNewsRu?.boolValue ?? false
+        }
+        set {
+            self.managedSubscribedForNewsRu = NSNumber(value: newValue)
+        }
+    }
+
+    var isWebPushEnabled: Bool {
+        get {
+            self.managedIsWebPushEnabled?.boolValue ?? true
+        }
+        set {
+            self.managedIsWebPushEnabled = NSNumber(value: newValue)
         }
     }
 

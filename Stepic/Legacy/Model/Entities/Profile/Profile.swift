@@ -19,9 +19,14 @@ final class Profile: NSManagedObject, JSONSerializable {
             JSONKey.firstName.rawValue: self.firstName,
             JSONKey.lastName.rawValue: self.lastName,
             JSONKey.subscribedForMail.rawValue: self.subscribedForMail,
+            JSONKey.subscribedForMarketing.rawValue: self.subscribedForMarketing,
+            JSONKey.subscribedForPartners.rawValue: self.subscribedForPartners,
+            JSONKey.subscribedForNewsEn.rawValue: self.subscribedForNewsEn,
+            JSONKey.subscribedForNewsRu.rawValue: self.subscribedForNewsRu,
+            JSONKey.isWebPushEnabled.rawValue: self.isWebPushEnabled,
+            JSONKey.isVoteNotificationsEnabled.rawValue: self.isVoteNotificationsEnabled,
             JSONKey.shortBio.rawValue: self.shortBio,
-            JSONKey.details.rawValue: self.details,
-            JSONKey.isVoteNotificationsEnabled.rawValue: self.isVoteNotificationsEnabled
+            JSONKey.details.rawValue: self.details
         ]
     }
 
@@ -35,6 +40,11 @@ final class Profile: NSManagedObject, JSONSerializable {
         self.firstName = json[JSONKey.firstName.rawValue].stringValue
         self.lastName = json[JSONKey.lastName.rawValue].stringValue
         self.subscribedForMail = json[JSONKey.subscribedForMail.rawValue].boolValue
+        self.subscribedForMarketing = json[JSONKey.subscribedForMarketing.rawValue].boolValue
+        self.subscribedForPartners = json[JSONKey.subscribedForPartners.rawValue].boolValue
+        self.subscribedForNewsEn = json[JSONKey.subscribedForNewsEn.rawValue].bool ?? true
+        self.subscribedForNewsRu = json[JSONKey.subscribedForNewsRu.rawValue].boolValue
+        self.isWebPushEnabled = json[JSONKey.isWebPushEnabled.rawValue].bool ?? true
         self.isVoteNotificationsEnabled = json[JSONKey.isVoteNotificationsEnabled.rawValue].boolValue
         self.isStaff = json[JSONKey.isStaff.rawValue].boolValue
         self.shortBio = json[JSONKey.shortBio.rawValue].stringValue
@@ -63,10 +73,15 @@ final class Profile: NSManagedObject, JSONSerializable {
         case firstName = "first_name"
         case lastName = "last_name"
         case subscribedForMail = "subscribed_for_mail"
+        case subscribedForMarketing = "subscribed_for_marketing"
+        case subscribedForPartners = "subscribed_for_partners"
+        case subscribedForNewsEn = "subscribed_for_news_en"
+        case subscribedForNewsRu = "subscribed_for_news_ru"
+        case isWebPushEnabled = "is_web_push_enabled"
+        case isVoteNotificationsEnabled = "is_vote_notifications_enabled"
         case isStaff = "is_staff"
         case shortBio = "short_bio"
         case details
         case emailAddresses = "email_addresses"
-        case isVoteNotificationsEnabled = "is_vote_notifications_enabled"
     }
 }
