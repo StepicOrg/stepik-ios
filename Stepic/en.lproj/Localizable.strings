@@ -360,6 +360,10 @@ Close = "Close";
 RecommendationsExplore = "Recommendations";
 RecommendationsExploreDescription = "Check out categories that matching your interests";
 
+FullscreenImageViewerErrorMessage = "Failed to load the image. Try again or close?";
+FullscreenImageViewerErrorActionRetry = "Try Again";
+FullscreenImageViewerErrorActionClose = "Close";
+
 /* Onboarding */
 OnboardingTitle1 = "Choose";
 OnboardingTitle2 = "Download";

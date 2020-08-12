@@ -363,6 +363,10 @@ Close = "Закрыть";
 RecommendationsExplore = "Рекомендации";
 RecommendationsExploreDescription = "Выбери курс из подборок по интересам";
 
+FullscreenImageViewerErrorMessage = "Не удалось загрузить изображение. Повторить загрузку или закрыть?";
+FullscreenImageViewerErrorActionRetry = "Повторить";
+FullscreenImageViewerErrorActionClose = "Закрыть";
+
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
 OnboardingTitle2 = "Сохраняйте";
