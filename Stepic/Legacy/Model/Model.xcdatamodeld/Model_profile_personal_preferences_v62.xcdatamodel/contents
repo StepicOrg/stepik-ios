@@ -193,13 +193,16 @@
         <attribute name="managedType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Profile" representedClassName=".Profile" syncable="YES">
+        <attribute name="managedCityId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedEmailAddressesArray" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="managedFirstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedIsPrivate" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsStaff" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsVoteNotificationsEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsWebPushEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedLanguage" attributeType="String" defaultValueString="en" syncable="YES"/>
         <attribute name="managedLastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedShortBio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedSubscribedForMail" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -394,7 +397,7 @@
         <element name="LastStep" positionX="-361.27734375" positionY="646.40625" width="128" height="105"/>
         <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="253"/>
         <element name="Notification" positionX="-208.453125" positionY="793.484375" width="128" height="195"/>
-        <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="28"/>
+        <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="343"/>
         <element name="Progress" positionX="210.40234375" positionY="32.89453125" width="128" height="210"/>
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="28"/>
         <element name="SocialProfile" positionX="-450" positionY="-234" width="128" height="133"/>

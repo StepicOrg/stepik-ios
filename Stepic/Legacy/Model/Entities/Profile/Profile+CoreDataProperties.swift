@@ -15,6 +15,7 @@ extension Profile {
     @NSManaged var managedLastName: String?
     @NSManaged var managedShortBio: String?
     @NSManaged var managedDetails: String?
+    @NSManaged var managedLanguage: String
     @NSManaged var managedSubscribedForMail: NSNumber?
     @NSManaged var managedSubscribedForMarketing: NSNumber?
     @NSManaged var managedSubscribedForPartners: NSNumber?
@@ -23,6 +24,8 @@ extension Profile {
     @NSManaged var managedIsWebPushEnabled: NSNumber?
     @NSManaged var managedIsVoteNotificationsEnabled: NSNumber?
     @NSManaged var managedIsStaff: NSNumber?
+    @NSManaged var managedIsPrivate: NSNumber?
+    @NSManaged var managedCityId: NSNumber?
 
     @NSManaged var managedEmailAddressesArray: NSObject?
     @NSManaged var managedEmailAddresses: NSOrderedSet?
@@ -89,6 +92,15 @@ extension Profile {
         }
         get {
              managedDetails ?? ""
+        }
+    }
+
+    var language: String {
+        get {
+            self.managedLanguage
+        }
+        set {
+            self.managedLanguage = newValue
         }
     }
 
@@ -161,6 +173,28 @@ extension Profile {
         }
         get {
              managedIsStaff?.boolValue ?? false
+        }
+    }
+
+    var isPrivate: Bool {
+        get {
+            self.managedIsPrivate?.boolValue ?? false
+        }
+        set {
+            self.managedIsPrivate = NSNumber(value: newValue)
+        }
+    }
+
+    var cityID: Int? {
+        get {
+            self.managedCityId?.intValue
+        }
+        set {
+            if let newValue = newValue {
+                self.managedCityId = NSNumber(value: newValue)
+            } else {
+                self.managedCityId = nil
+            }
         }
     }
 

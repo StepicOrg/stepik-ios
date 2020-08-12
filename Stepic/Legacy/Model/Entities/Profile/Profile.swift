@@ -25,8 +25,11 @@ final class Profile: NSManagedObject, JSONSerializable {
             JSONKey.subscribedForNewsRu.rawValue: self.subscribedForNewsRu,
             JSONKey.isWebPushEnabled.rawValue: self.isWebPushEnabled,
             JSONKey.isVoteNotificationsEnabled.rawValue: self.isVoteNotificationsEnabled,
+            JSONKey.isPrivate.rawValue: self.isPrivate,
             JSONKey.shortBio.rawValue: self.shortBio,
-            JSONKey.details.rawValue: self.details
+            JSONKey.details.rawValue: self.details,
+            JSONKey.language.rawValue: self.language,
+            JSONKey.city.rawValue: self.cityID as AnyObject
         ]
     }
 
@@ -47,8 +50,11 @@ final class Profile: NSManagedObject, JSONSerializable {
         self.isWebPushEnabled = json[JSONKey.isWebPushEnabled.rawValue].bool ?? true
         self.isVoteNotificationsEnabled = json[JSONKey.isVoteNotificationsEnabled.rawValue].boolValue
         self.isStaff = json[JSONKey.isStaff.rawValue].boolValue
+        self.isPrivate = json[JSONKey.isPrivate.rawValue].boolValue
         self.shortBio = json[JSONKey.shortBio.rawValue].stringValue
         self.details = json[JSONKey.details.rawValue].stringValue
+        self.language = json[JSONKey.language.rawValue].stringValue
+        self.cityID = json[JSONKey.city.rawValue].int
         self.emailAddressesArray = json[JSONKey.emailAddresses.rawValue].arrayObject as? [Int] ?? []
     }
 
@@ -80,8 +86,11 @@ final class Profile: NSManagedObject, JSONSerializable {
         case isWebPushEnabled = "is_web_push_enabled"
         case isVoteNotificationsEnabled = "is_vote_notifications_enabled"
         case isStaff = "is_staff"
+        case isPrivate = "is_private"
         case shortBio = "short_bio"
         case details
+        case language
+        case city
         case emailAddresses = "email_addresses"
     }
 }
