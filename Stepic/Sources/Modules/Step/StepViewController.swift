@@ -1,4 +1,3 @@
-import Agrume
 import Presentr
 import QuickLook
 import SVProgressHUD
@@ -411,13 +410,11 @@ extension StepViewController: StepViewDelegate {
     }
 
     func stepView(_ view: StepView, didRequestFullscreenImage url: URL) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(url: url, from: self)
     }
 
     func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage) {
-        let agrume = Agrume(image: image)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(image: image, from: self)
     }
 
     func stepViewDidLoadContent(_ view: StepView) {

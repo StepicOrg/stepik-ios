@@ -1,4 +1,3 @@
-import Agrume
 import UIKit
 
 protocol NewMatchingQuizViewControllerProtocol: AnyObject {
@@ -64,7 +63,6 @@ extension NewMatchingQuizViewController: NewMatchingQuizViewDelegate {
     }
 
     func newMatchingQuizView(_ view: NewMatchingQuizView, didRequestFullscreenImage url: URL) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(url: url, from: self)
     }
 }

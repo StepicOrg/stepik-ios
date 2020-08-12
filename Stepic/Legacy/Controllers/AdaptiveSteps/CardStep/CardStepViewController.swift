@@ -6,7 +6,6 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Agrume
 import Foundation
 import PromiseKit
 import SnapKit
@@ -247,8 +246,7 @@ extension CardStepViewController: WKNavigationDelegate {
             if let offset = urlString.indexOf("//") {
                 urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
                 if let newUrl = URL(string: urlString) {
-                    let agrume = Agrume(url: newUrl)
-                    agrume.show(from: self)
+                    FullscreenImageViewer.show(url: newUrl, from: self)
                 }
             }
             return decisionHandler(.cancel)
