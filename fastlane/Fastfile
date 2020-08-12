@@ -409,6 +409,7 @@ platform :ios do
 
       # submit options
       submit_for_review: should_submit,
+      skip_screenshots: true,
       phased_release: true,
       automatic_release: true,
       submission_information: {
