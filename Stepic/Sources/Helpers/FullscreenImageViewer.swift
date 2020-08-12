@@ -5,6 +5,11 @@ import UIKit
 final class FullscreenImageViewer {
     private init() {}
 
+    static func show(image: UIImage, from presentingViewController: UIViewController) {
+        let agrume = Agrume(image: image)
+        agrume.show(from: presentingViewController)
+    }
+
     static func show(url: URL, from presentingViewController: UIViewController) {
         let agrume = Agrume(url: url)
         agrume.download = { [weak agrume] (url, downloadCompletion) in
