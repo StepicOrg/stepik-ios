@@ -1,4 +1,3 @@
-import Agrume
 import UIKit
 
 protocol BaseQuizViewControllerProtocol: AnyObject {
@@ -163,8 +162,7 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
     }
 
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(url: url, from: self)
     }
 
     func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL) {

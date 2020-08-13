@@ -1,4 +1,3 @@
-import Agrume
 import SVProgressHUD
 import UIKit
 
@@ -437,8 +436,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didRequestOpenImage url: URL
     ) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(url: url, from: self)
     }
 
     func discussionsTableViewDataSource(
