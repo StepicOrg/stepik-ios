@@ -44,6 +44,7 @@ extension DownloadsTableViewDataSource: UITableViewDataSource {
         cell.configure(viewModel: viewModel)
 
         self.analytics.send(.courseCardSeen(courseID: viewModel.id, viewSource: .downloads))
+        self.analytics.send(.catalogDisplay(courseID: viewModel.id, viewSource: .downloads))
 
         return cell
     }

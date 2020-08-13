@@ -323,10 +323,7 @@ final class DiscussionsCellView: UIView {
         }
 
         if let solution = viewModel.solution {
-            self.solutionControl.update(
-                state: solution.isCorrect ? .correct : .wrong,
-                title: solution.title
-            )
+            self.solutionControl.update(state: .init(quizStatus: solution.status), title: solution.title)
             self.solutionContainerView.isHidden = false
         } else {
             self.solutionContainerView.isHidden = true

@@ -87,10 +87,7 @@ final class SubmissionsCellView: UIView {
         self.nameLabel.text = viewModel.formattedUsername
         self.dateLabel.text = viewModel.formattedDate
 
-        self.solutionControl.update(
-            state: viewModel.isSubmissionCorrect ? .correct : .wrong,
-            title: viewModel.submissionTitle
-        )
+        self.solutionControl.update(state: .init(quizStatus: viewModel.quizStatus), title: viewModel.submissionTitle)
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)

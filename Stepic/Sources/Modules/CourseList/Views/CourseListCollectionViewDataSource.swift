@@ -42,6 +42,7 @@ final class CourseListCollectionViewDataSource: NSObject, UICollectionViewDataSo
         cell.layer.rasterizationScale = UIScreen.main.scale
 
         self.analytics.send(.courseCardSeen(courseID: viewModel.courseID, viewSource: viewModel.viewSource))
+        self.analytics.send(.catalogDisplay(courseID: viewModel.courseID, viewSource: viewModel.viewSource))
 
         return cell
     }

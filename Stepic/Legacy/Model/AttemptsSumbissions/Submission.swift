@@ -14,6 +14,7 @@ final class Submission: JSONSerializable {
 
     var id: IdType = 0
     var statusString: String?
+    var score: Float = 0
     var hint: String?
     var feedback: SubmissionFeedback?
     var time = Date()
@@ -36,6 +37,8 @@ final class Submission: JSONSerializable {
 
     var isCorrect: Bool { self.status == .correct }
 
+    var isPartiallyCorrect: Bool { self.isCorrect && self.score < 1.0 }
+
     var json: JSON {
         [
             JSONKey.attempt.rawValue: attemptID,
@@ -46,6 +49,7 @@ final class Submission: JSONSerializable {
     init(
         id: IdType,
         status: SubmissionStatus? = nil,
+        score: Float? = 0,
         hint: String? = nil,
         feedback: SubmissionFeedback? = nil,
         time: Date = Date(),
@@ -56,6 +60,7 @@ final class Submission: JSONSerializable {
     ) {
         self.id = id
         self.statusString = status?.rawValue
+        self.score = score ?? 0
         self.hint = hint
         self.feedback = feedback
         self.time = time
@@ -85,6 +90,7 @@ final class Submission: JSONSerializable {
         self.init(
             id: submission?.id ?? 0,
             status: submission?.status,
+            score: submission?.score,
             hint: submission?.hint,
             feedback: submission?.feedback,
             time: submission?.time ?? Date(),
@@ -97,6 +103,7 @@ final class Submission: JSONSerializable {
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.statusString = json[JSONKey.status.rawValue].string
+        self.score = json[JSONKey.score.rawValue].floatValue
         self.hint = json[JSONKey.hint.rawValue].string
         self.feedback = self.getFeedbackFromJSON(json[JSONKey.feedback.rawValue])
         self.attemptID = json[JSONKey.attempt.rawValue].intValue
@@ -151,6 +158,7 @@ final class Submission: JSONSerializable {
     enum JSONKey: String {
         case id
         case status
+        case score
         case hint
         case attempt
         case reply
@@ -169,6 +177,7 @@ extension Submission: CustomDebugStringConvertible {
         """
         Submission(id: \(id), \
         status: \(statusString ?? "nil"), \
+        score: \(score), \
         hint: \(hint ?? "nil"), \
         feedback: \(feedback ??? "nil"), \
         reply: \(reply ??? "nil"), \

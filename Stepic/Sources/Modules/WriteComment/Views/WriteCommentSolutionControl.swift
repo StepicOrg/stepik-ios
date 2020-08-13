@@ -69,7 +69,7 @@ final class WriteCommentSolutionControl: UIControl {
             self.solutionControl.isHidden = false
             self.titleLabel.isHidden = true
 
-            self.solutionControl.update(state: viewModel.isCorrect ? .correct : .wrong, title: viewModel.title)
+            self.solutionControl.update(state: .init(quizStatus: viewModel.status), title: viewModel.title)
             self.titleLabel.text = nil
         } else {
             self.solutionControl.isHidden = true
@@ -82,7 +82,7 @@ final class WriteCommentSolutionControl: UIControl {
 
     struct ViewModel {
         let title: String?
-        let isCorrect: Bool
+        let status: QuizStatus
         let isSelected: Bool
     }
 }

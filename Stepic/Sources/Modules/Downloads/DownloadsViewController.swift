@@ -109,6 +109,8 @@ extension DownloadsViewController: DownloadsViewDelegate {
             courseViewSource: .downloads
         )
         self.present(module: assembly.makeModule(), embedInNavigation: true, modalPresentationStyle: .fullScreen)
+
+        self.analytics.send(.catalogClick(courseID: selectedViewModel.id, viewSource: .downloads))
     }
 }
 
