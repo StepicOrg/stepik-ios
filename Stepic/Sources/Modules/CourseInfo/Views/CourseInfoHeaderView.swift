@@ -48,6 +48,7 @@ final class CourseInfoHeaderView: UIView {
 
     private lazy var tryForFreeButton: CourseInfoTryForFreeButton = {
         let button = CourseInfoTryForFreeButton()
+        button.isHidden = true
         button.addTarget(self, action: #selector(self.tryForFreeButtonClicked), for: .touchUpInside)
         return button
     }()
@@ -159,6 +160,8 @@ final class CourseInfoHeaderView: UIView {
             : .default
         self.actionButton.setTitle(viewModel.buttonDescription.title, for: .normal)
         self.actionButton.isEnabled = viewModel.buttonDescription.isEnabled
+
+        self.tryForFreeButton.isHidden = !viewModel.isTryForFreeAvailable
     }
 
     // MARK: Private methods

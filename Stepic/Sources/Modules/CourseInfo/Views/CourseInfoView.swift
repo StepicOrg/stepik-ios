@@ -6,6 +6,7 @@ protocol CourseInfoViewDelegate: AnyObject {
     func courseInfoView(_ courseInfoView: CourseInfoView, didRequestScrollToPage index: Int)
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int
     func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView)
+    func courseInfoViewDidTryForFreeAction(_ courseInfoView: CourseInfoView)
 }
 
 extension CourseInfoView {
@@ -35,6 +36,12 @@ final class CourseInfoView: UIView {
                 return
             }
             strongSelf.delegate?.courseInfoViewDidMainAction(strongSelf)
+        }
+        view.onTryForFreeButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.courseInfoViewDidTryForFreeAction(strongSelf)
         }
         return view
     }()
@@ -84,13 +91,13 @@ final class CourseInfoView: UIView {
     }
 
     func configure(viewModel: CourseInfoHeaderViewModel) {
+        // Update data in header
+        self.headerView.configure(viewModel: viewModel)
+
         // Update header height
         self.calculatedHeaderHeight = self.headerView.calculateHeight(
             hasVerifiedMark: viewModel.isVerified
         )
-
-        // Update data in header
-        self.headerView.configure(viewModel: viewModel)
 
         self.delegate?.courseInfoView(
             self,

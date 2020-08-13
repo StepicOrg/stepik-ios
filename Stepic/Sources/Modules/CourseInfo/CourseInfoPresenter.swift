@@ -7,6 +7,7 @@ protocol CourseInfoPresenterProtocol {
     func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response)
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response)
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
+    func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
@@ -67,6 +68,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 isAdaptive: response.isAdaptive
             )
         )
+    }
+
+    func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
+        self.viewController?.displayPreviewLesson(viewModel: .init(previewLessonID: response.previewLessonID))
     }
 
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response) {
@@ -180,6 +185,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             return nil
         }()
 
+        let isTryForFreeAvailable = course.previewLessonID != nil && !course.enrolled
+            && (course.isPaid && !course.isPurchased)
+
         return CourseInfoHeaderViewModel(
             title: course.title,
             coverImageURL: URL(string: course.coverURLString),
@@ -190,6 +198,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
+            isTryForFreeAvailable: isTryForFreeAvailable,
             buttonDescription: self.makeButtonDescription(course: course, iapLocalizedPrice: iapLocalizedPrice)
         )
     }
