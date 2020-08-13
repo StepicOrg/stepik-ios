@@ -25,6 +25,7 @@ extension Course {
     @NSManaged var managedIsFavorite: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
+    @NSManaged var managedPreviewLessonId: NSNumber?
     @NSManaged var managedReadiness: NSNumber?
 
     @NSManaged var managedScheduleType: String?
@@ -92,6 +93,19 @@ extension Course {
         }
         get {
              managedLearnersCount?.intValue
+        }
+    }
+
+    var previewLessonID: Lesson.IdType? {
+        get {
+            self.managedPreviewLessonId?.intValue
+        }
+        set {
+            if let newValue = newValue {
+                self.managedPreviewLessonId = NSNumber(value: newValue)
+            } else {
+                self.managedPreviewLessonId = nil
+            }
         }
     }
 

@@ -175,6 +175,19 @@ enum CourseInfo {
         struct Request {}
     }
 
+    /// Do try for free action -> open preview lesson by id
+    enum PreviewLessonPresentation {
+        struct Request {}
+
+        struct Response {
+            let previewLessonID: Lesson.IdType
+        }
+
+        struct ViewModel {
+            let previewLessonID: Lesson.IdType
+        }
+    }
+
     /// Try to set online mode
     enum OnlineModeReset {
         struct Request {}

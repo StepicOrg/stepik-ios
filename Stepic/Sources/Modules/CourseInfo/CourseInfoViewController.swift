@@ -3,6 +3,7 @@ import Presentr
 import SVProgressHUD
 import UIKit
 
+// swiftlint:disable file_length
 protocol CourseInfoScrollablePageViewProtocol: AnyObject {
     var scrollViewDelegate: UIScrollViewDelegate? { get set }
     var contentInsets: UIEdgeInsets { get set }
@@ -17,6 +18,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayExamLesson(viewModel: CourseInfo.ExamLessonPresentation.ViewModel)
     func displayCourseSharing(viewModel: CourseInfo.CourseShareAction.ViewModel)
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
+    func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
@@ -351,6 +353,8 @@ final class CourseInfoViewController: UIViewController {
     }
 }
 
+// MARK: - CourseInfoViewController: PageboyViewControllerDataSource, PageboyViewControllerDelegate -
+
 extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyViewControllerDelegate {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         self.availableTabs.count
@@ -400,6 +404,8 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
         currentPageIndex: PageboyViewController.PageIndex
     ) {}
 }
+
+// MARK: - CourseInfoViewController: CourseInfoViewControllerProtocol -
 
 extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayExamLesson(viewModel: CourseInfo.ExamLessonPresentation.ViewModel) {
@@ -521,6 +527,11 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         )
     }
 
+    func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel) {
+        let assembly = LessonAssembly(initialContext: .lesson(id: viewModel.previewLessonID))
+        self.push(module: assembly.makeModule())
+    }
+
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel) {
         RoutingManager.auth.routeFrom(
             controller: self,
@@ -584,25 +595,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 }
 
-extension CourseInfoViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.lastKnownScrollOffset = scrollView.contentOffset.y
-        self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
-    }
-}
-
-extension CourseInfoViewController: StyledNavigationControllerPresentable {
-    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        .init(
-            shadowViewAlpha: 0.0,
-            backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
-            statusBarColor: StyledNavigationController.Appearance.statusBarColor.withAlphaComponent(0.0),
-            textColor: StyledNavigationController.Appearance.tintColor.withAlphaComponent(0.0),
-            tintColor: .white,
-            statusBarStyle: .lightContent
-        )
-    }
-}
+// MARK: - CourseInfoViewController: CourseInfoViewDelegate -
 
 extension CourseInfoViewController: CourseInfoViewDelegate {
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int {
@@ -620,5 +613,33 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
 
     func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView) {
         self.interactor.doMainCourseAction(request: .init())
+    }
+
+    func courseInfoViewDidTryForFreeAction(_ courseInfoView: CourseInfoView) {
+        self.interactor.doPreviewLessonPresentation(request: .init())
+    }
+}
+
+// MARK: - CourseInfoViewController: UIScrollViewDelegate -
+
+extension CourseInfoViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.lastKnownScrollOffset = scrollView.contentOffset.y
+        self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+    }
+}
+
+// MARK: - CourseInfoViewController: StyledNavigationControllerPresentable -
+
+extension CourseInfoViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        .init(
+            shadowViewAlpha: 0.0,
+            backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
+            statusBarColor: StyledNavigationController.Appearance.statusBarColor.withAlphaComponent(0.0),
+            textColor: StyledNavigationController.Appearance.tintColor.withAlphaComponent(0.0),
+            tintColor: .white,
+            statusBarStyle: .lightContent
+        )
     }
 }

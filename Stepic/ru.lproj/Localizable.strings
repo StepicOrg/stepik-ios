@@ -452,6 +452,7 @@ ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/
 
 /* Course info */
 CourseInfoTitle = "О курсе";
+CourseInfoTryForFreeButtonTitle = "Попробовать бесплатно";
 // Favorite
 CourseInfoCourseActionAddToFavoritesAlertTitle = "Добавить в избранное";
 CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Убрать из избранного";

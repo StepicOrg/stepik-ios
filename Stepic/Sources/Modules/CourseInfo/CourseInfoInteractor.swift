@@ -8,6 +8,7 @@ protocol CourseInfoInteractorProtocol {
     func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request)
     func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
+    func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request)
     func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request)
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
@@ -250,6 +251,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.catch { error in
                 print("course info interactor: join course error = \(error)")
             }
+        }
+    }
+
+    func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request) {
+        if let previewLessonID = self.currentCourse?.previewLessonID {
+            self.presenter.presentPreviewLesson(response: .init(previewLessonID: previewLessonID))
         }
     }
 
