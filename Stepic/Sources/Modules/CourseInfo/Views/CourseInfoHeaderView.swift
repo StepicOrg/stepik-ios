@@ -59,7 +59,6 @@ final class CourseInfoHeaderView: UIView {
         stackView.spacing = self.appearance.actionButtonsStackViewSpacing
         stackView.axis = .vertical
         stackView.alignment = .center
-        //stackView.isUserInteractionEnabled = false
         return stackView
     }()
 
