@@ -22,8 +22,7 @@ final class NotificationReactionHandler {
 
         if notification.action == .issuedCertificate,
            let currentUserID = self.userAccountService.currentUserID {
-            let route = DeepLinkRoute.certificates(userID: currentUserID)
-            DeepLinkRoutingService().route(route, fallbackPath: route.path)
+            DeepLinkRoutingService().route(.certificates(userID: currentUserID))
         } else {
             let deepLinkRoutingService = DeepLinkRoutingService(courseViewSource: .notification)
 
