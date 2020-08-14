@@ -20,24 +20,24 @@ final class NotificationReactionHandler {
             return
         }
 
-        if notification.action == .issuedCertificate {
-            // TODO: Route to certificates.
-            return TabBarRouter(tab: .profile).route()
-        }
+        if notification.action == .issuedCertificate,
+           let currentUserID = self.userAccountService.currentUserID {
+            DeepLinkRoutingService().route(.certificates(userID: currentUserID))
+        } else {
+            let deepLinkRoutingService = DeepLinkRoutingService(courseViewSource: .notification)
 
-        let deepLinkRoutingService = DeepLinkRoutingService(courseViewSource: .notification)
-
-        switch notification.type {
-        case .comments:
-            deepLinkRoutingService.route(.notifications(section: .comments))
-        case .learn:
-            deepLinkRoutingService.route(.notifications(section: .learning))
-        case .default:
-            deepLinkRoutingService.route(.notifications(section: .all))
-        case .review:
-            deepLinkRoutingService.route(.notifications(section: .reviews))
-        case .teach:
-            deepLinkRoutingService.route(.notifications(section: .teaching))
+            switch notification.type {
+            case .comments:
+                deepLinkRoutingService.route(.notifications(section: .comments))
+            case .learn:
+                deepLinkRoutingService.route(.notifications(section: .learning))
+            case .default:
+                deepLinkRoutingService.route(.notifications(section: .all))
+            case .review:
+                deepLinkRoutingService.route(.notifications(section: .reviews))
+            case .teach:
+                deepLinkRoutingService.route(.notifications(section: .teaching))
+            }
         }
     }
 }
