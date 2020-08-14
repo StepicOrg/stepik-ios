@@ -9,16 +9,6 @@ final class ContentLanguageService: ContentLanguageServiceProtocol {
 
     // TODO: Replace with cache driver
     var globalContentLanguage: ContentLanguage {
-        set {
-            let oldValue = self.globalContentLanguage
-            self.setInDefaults(newLanguage: newValue)
-            if newValue != oldValue {
-                NotificationCenter.default.post(
-                    name: .contentLanguageDidChange,
-                    object: ["newContentLanguage": newValue]
-                )
-            }
-        }
         get {
             guard let cachedValue = UserDefaults.standard.value(
                 forKey: ContentLanguageService.sharedContentLanguageKey
@@ -28,6 +18,16 @@ final class ContentLanguageService: ContentLanguageServiceProtocol {
             }
 
             return ContentLanguage(languageString: cachedValue)
+        }
+        set {
+            let oldValue = self.globalContentLanguage
+            self.setInDefaults(newLanguage: newValue)
+            if newValue != oldValue {
+                NotificationCenter.default.post(
+                    name: .contentLanguageDidChange,
+                    object: ["newContentLanguage": newValue]
+                )
+            }
         }
     }
 
