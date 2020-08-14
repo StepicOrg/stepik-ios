@@ -262,7 +262,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
             return String(
                 format: NSLocalizedString("CourseInfoTabSyllabusSectionProgressTitle", comment: ""),
-                arguments: ["\(progress.score)", "\(progress.cost)"]
+                arguments: ["\(FormatterHelper.progressScore(progress.score))", "\(progress.cost)"]
             )
         }()
 
@@ -320,7 +320,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
             return String(
                 format: NSLocalizedString("CourseInfoTabSyllabusUnitProgressTitle", comment: ""),
-                arguments: ["\(progress.score)", "\(progress.cost)"]
+                arguments: ["\(FormatterHelper.progressScore(progress.score))", "\(progress.cost)"]
             )
         }()
 

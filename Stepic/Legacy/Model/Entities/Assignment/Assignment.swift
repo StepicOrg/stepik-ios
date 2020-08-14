@@ -16,16 +16,24 @@ final class Assignment: NSManagedObject, IDFetchable {
 
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
+        self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        stepId = json["step"].intValue
-        unitId = json["unit"].intValue
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.unitId = json[JSONKey.unit.rawValue].intValue
+        self.stepId = json[JSONKey.step.rawValue].intValue
+        self.progressId = json[JSONKey.progress.rawValue].stringValue
     }
 
     func update(json: JSON) {
-        initialize(json)
+        self.initialize(json)
+    }
+
+    enum JSONKey: String {
+        case id
+        case unit
+        case step
+        case progress
     }
 }

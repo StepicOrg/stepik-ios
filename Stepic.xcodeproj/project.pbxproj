@@ -1743,6 +1743,7 @@
 		1F870E016B8AB15AD3033816 /* Pods-StepicTests.release release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release release.xcconfig"; sourceTree = "<group>"; };
 		27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewController.swift; sourceTree = "<group>"; };
 		2C00186524C71404006C5094 /* Model_new_profile_created_courses_v56.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_created_courses_v56.xcdatamodel; sourceTree = "<group>"; };
+		2C00396424E61B3000EBC7FF /* Model_assignment_progress_id_v64.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_assignment_progress_id_v64.xcdatamodel; sourceTree = "<group>"; };
 		2C01BB67233CD92C00C8DCF0 /* Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Require.swift; sourceTree = "<group>"; };
 		2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
 		2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
@@ -9892,6 +9893,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C00396424E61B3000EBC7FF /* Model_assignment_progress_id_v64.xcdatamodel */,
 				2CDC9EFB24E516F800916BAE /* Model_course_preview_lesson_id_v63.xcdatamodel */,
 				2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */,
 				2C0FBEB224E25A4D002CA67F /* Model_quiz_is_partially_correct_v61.xcdatamodel */,
@@ -9957,7 +9959,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CDC9EFB24E516F800916BAE /* Model_course_preview_lesson_id_v63.xcdatamodel */;
+			currentVersion = 2C00396424E61B3000EBC7FF /* Model_assignment_progress_id_v64.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
