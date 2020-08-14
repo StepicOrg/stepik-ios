@@ -188,12 +188,6 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
                 strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didRequestOpenImage: url)
             }
         }
-        cell.onTextContentClick = { [weak tableView] in
-            if let strongTableView = tableView {
-                strongTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-                strongTableView.delegate?.tableView?(strongTableView, didSelectRowAt: indexPath)
-            }
-        }
         cell.onSolutionClick = { [weak self] in
             if let strongSelf = self {
                 strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectSolution: commentViewModel)
