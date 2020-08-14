@@ -153,6 +153,7 @@ class DeepLinkRouteSpec: QuickSpec {
                 it("matches lesson deep link paths with unit id") {
                     let paths = [
                         "https://stepik.org/lesson/172508/step/1?unit=148015",
+                        "https://stepik.org/lesson/172508/step/1?unit=148015&from_mobile_app=true",
                         "https://stepik.org/lesson/172508/step/1?unit=148015/",
                         "http://stepik.org/lesson/172508/step/1?unit=148015/"
                     ]
@@ -165,7 +166,8 @@ class DeepLinkRouteSpec: QuickSpec {
                     let paths = [
                         "https://stepik.org/lesson/172508/step/1",
                         "https://stepik.org/lesson/172508/step/1/",
-                        "http://stepik.org/lesson/172508/step/1/"
+                        "http://stepik.org/lesson/172508/step/1/",
+                        "https://stepik.org/lesson/172508/step/1?from_mobile_app=true"
                     ]
                     self.checkPaths(paths) { route in
                         checkRoute(route, expectedUnitID: nil)

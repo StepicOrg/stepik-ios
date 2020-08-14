@@ -174,7 +174,7 @@ enum DeepLinkRoute {
             case .syllabus:
                 return #"\#(stepik)\#(course)syllabus\/?\#(queryComponents)"#
             case .lesson:
-                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?unit=(\d+))?\/?"#
+                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?unit=(\d+))?\/?(?:(?!\?discussion).*)?"#
             case .discussions:
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?\/?\#(queryComponents)"#
             case .solutions:
