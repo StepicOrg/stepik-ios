@@ -80,7 +80,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
 
         return CourseWidgetProgressViewModel(
             progress: normalizedPercent / 100.0,
-            progressLabelText: "\(progress.score)/\(progress.cost)"
+            progressLabelText: "\(FormatterHelper.progressScore(progress.score))/\(progress.cost)"
         )
     }
 

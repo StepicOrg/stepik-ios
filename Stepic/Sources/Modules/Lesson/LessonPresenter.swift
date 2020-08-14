@@ -148,11 +148,18 @@ final class LessonPresenter: LessonPresenterProtocol {
         var viewModel: [LessonDataFlow.TooltipInfo] = []
 
         if progress.score > 0 {
-            let text = String(
-                format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
-                FormatterHelper.pointsCount(progress.score),
-                "\(progress.cost)"
-            )
+            let hasDecimals = progress.score.truncatingRemainder(dividingBy: 1) != 0
+            let text = hasDecimals
+                ? String(
+                    format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
+                    "\(FormatterHelper.progressScore(progress.score)) \(NSLocalizedString("points234", comment: ""))",
+                    "\(progress.cost)"
+                  )
+                : String(
+                    format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
+                    FormatterHelper.pointsCount(Int(progress.score)),
+                    "\(progress.cost)"
+                  )
             viewModel.append(.init(iconImage: UIImage(named: "lesson-tooltip-check"), text: text))
         } else if progress.cost > 0 {
             let text = String(

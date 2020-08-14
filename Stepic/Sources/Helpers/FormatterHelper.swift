@@ -24,6 +24,12 @@ enum FormatterHelper {
         String(format: "%.2f", number)
     }
 
+    /// Format Progress's score value with 2 decimal points if has decimals; 0.123456 -> "0.12", 1.0 -> "1"
+    static func progressScore(_ score: Float) -> String {
+        let hasDecimals = score.truncatingRemainder(dividingBy: 1) != 0
+        return hasDecimals ? String(format: "%.2f", score) : "\(Int(score))"
+    }
+
     static func megabytesInBytes(_ bytes: UInt64, checkForLessThanOne: Bool = true) -> String {
         let megabytesTotal = bytes / 1024 / 1024
 
