@@ -20,6 +20,7 @@ enum DeepLinkRoute {
     case home
     case course(courseID: Int)
     case coursePromo(courseID: Int)
+    case certificates(userID: Int)
 
     var path: String {
         let path: String
@@ -58,6 +59,8 @@ enum DeepLinkRoute {
             path = "course/\(courseID)"
         case .coursePromo(let courseID):
             path = "course/\(courseID)/promo"
+        case .certificates(let userID):
+            path = "users/\(userID)/certificates"
         }
 
         return "\(StepikApplicationsInfo.stepikURL)/\(path)"
@@ -136,6 +139,13 @@ enum DeepLinkRoute {
             return
         }
 
+        if let match = Pattern.certificates.regex.firstMatch(in: path),
+           let userIDString = match.captures[0], let userID = Int(userIDString),
+           match.matchedString == path {
+            self = .certificates(userID: userID)
+            return
+        }
+
         return nil
     }
 
@@ -149,6 +159,7 @@ enum DeepLinkRoute {
         case lesson
         case discussions
         case solutions
+        case certificates
 
         var regex: Regex {
             try! Regex(string: self.pattern, options: [.ignoreCase])
@@ -179,6 +190,8 @@ enum DeepLinkRoute {
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?\/?\#(queryComponents)"#
             case .solutions:
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?&amp;thread=solutions.*"#
+            case .certificates:
+                return #"\#(stepik)users\/(\d+)\/certificates\/?\#(queryComponents)"#
             }
         }
     }

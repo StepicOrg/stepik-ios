@@ -80,7 +80,7 @@ final class DeepLinkRoutingService {
             return TabBarRouter(tab: .catalog)
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
-        case .course, .coursePromo, .discussions, .solutions, .lesson, .profile, .syllabus:
+        case .course, .coursePromo, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
             return ModalOrPushStackRouter(
                 source: source,
                 destinationStack: moduleStack,
@@ -152,6 +152,8 @@ final class DeepLinkRoutingService {
                         seal.fulfill(moduleStack)
                     }
                 )
+            case .certificates(let userID):
+                seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
             }
         }
     }

@@ -258,6 +258,23 @@ class DeepLinkRouteSpec: QuickSpec {
                     }
                 }
             }
+
+            context("certificates") {
+                it("matches certificates deep link with given paths") {
+                    let paths = [
+                        "http://stepik.org/users/21612976/certificates",
+                        "https://stepik.org/users/21612976/certificates",
+                        "https://stepik.org/users/21612976/certificates/",
+                        "https://stepik.org/users/21612976/certificates?from_mobile_app=true"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .certificates(userID) = route else {
+                            return .failed(reason: "wrong enum case, expected `certificates`, got \(route)")
+                        }
+                        return userID == 21612976 ? .succeeded : .failed(reason: "wrong user id")
+                    }
+                }
+            }
         }
     }
 }
