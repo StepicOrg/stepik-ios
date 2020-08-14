@@ -138,18 +138,9 @@ final class DiscussionsCellView: UIView {
         var appearance = ProcessedContentTextView.Appearance()
         appearance.insets = LayoutInsets(insets: .zero)
         appearance.backgroundColor = .clear
-
         let view = ProcessedContentTextView(appearance: appearance)
         view.delegate = self
         view.isHidden = true
-
-        let tapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.textContentWebBasedTextViewClicked(_:))
-        )
-        tapGestureRecognizer.delegate = self
-        view.addGestureRecognizer(tapGestureRecognizer)
-
         return view
     }()
 
@@ -255,16 +246,12 @@ final class DiscussionsCellView: UIView {
     private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
     private var currentText: String?
 
-    private var didClickOnLinkOrImage = false
-    private var pendingTextViewClickWorkItem: DispatchWorkItem?
-
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
     var onAvatarClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
     var onImageClick: ((URL) -> Void)?
-    var onTextContentClick: (() -> Void)?
     var onSolutionClick: (() -> Void)?
     // Content height updates callbacks
     var onContentLoaded: (() -> Void)?
@@ -472,27 +459,6 @@ final class DiscussionsCellView: UIView {
     private func solutionControlClicked() {
         self.onSolutionClick?()
     }
-
-    @objc
-    private func textContentWebBasedTextViewClicked(_ sender: UITapGestureRecognizer) {
-        let workItem = DispatchWorkItem { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-
-            if !strongSelf.didClickOnLinkOrImage {
-                strongSelf.onTextContentClick?()
-            }
-        }
-
-        self.pendingTextViewClickWorkItem?.cancel()
-        self.pendingTextViewClickWorkItem = workItem
-
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + Self.processedContentTextViewClickDelay,
-            execute: workItem
-        )
-    }
 }
 
 // MARK: - DiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
@@ -585,9 +551,6 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 // MARK: - DiscussionsCellView: ProcessedContentTextViewDelegate -
 
 extension DiscussionsCellView: ProcessedContentTextViewDelegate {
-    private static let processedContentTextViewClickDelay = DispatchTimeInterval.milliseconds(5)
-    private static let resetClickOnLinkOrImageDelay = DispatchTimeInterval.milliseconds(10)
-
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         if self.textContentWebBasedTextView.isHidden {
             return
@@ -611,35 +574,12 @@ extension DiscussionsCellView: ProcessedContentTextViewDelegate {
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
-        self.didClickOnLinkOrImage = true
-        self.asyncResetClickOnLinkOrImage()
-
         self.onImageClick?(url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
-        self.didClickOnLinkOrImage = true
-        self.asyncResetClickOnLinkOrImage()
-
         self.onLinkClick?(url)
-    }
-
-    private func asyncResetClickOnLinkOrImage() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Self.resetClickOnLinkOrImageDelay) {
-            self.didClickOnLinkOrImage = false
-        }
-    }
-}
-
-// MARK: - DiscussionsCellView: UIGestureRecognizerDelegate -
-
-extension DiscussionsCellView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(
-        _ gestureRecognizer: UIGestureRecognizer,
-        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
-    ) -> Bool {
-        true
     }
 }
