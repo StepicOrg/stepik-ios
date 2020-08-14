@@ -64,7 +64,7 @@ class CourseListViewController: UIViewController {
     }
 
     private func updateState(newState: CourseList.ViewControllerState) {
-        if case .result(_) = newState {
+        if case .result = newState {
             self.courseListView?.hideLoading()
             self.courseListView?.updateCollectionViewData(
                 delegate: self.listDelegate,

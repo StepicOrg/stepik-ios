@@ -101,7 +101,7 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
         let delegate = Delegate(downloader: self)
         self.session = URLSession(configuration: session.configuration, delegate: delegate, delegateQueue: nil)
 
-        if case .background(_) = session {
+        if case .background = session {
             self.cache = Cache(downloader: self)
 
             // Decrement here, increment in resumeRestoredTasks
