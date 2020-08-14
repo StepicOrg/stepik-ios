@@ -16,6 +16,10 @@ extension Assignment {
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedStepId: NSNumber?
     @NSManaged var managedUnitId: NSNumber?
+    @NSManaged var managedProgressId: String?
+
+    @NSManaged var managedUnit: Unit?
+    @NSManaged var managedProgress: Progress?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Assignment", in: CoreDataHelper.shared.context)!
@@ -53,6 +57,33 @@ extension Assignment {
         }
         get {
              managedUnitId?.intValue ?? -1
+        }
+    }
+
+    var progressId: String {
+        get {
+            self.managedProgressId ?? ""
+        }
+        set {
+            self.managedProgressId = newValue
+        }
+    }
+
+    var unit: Unit? {
+        get {
+            self.managedUnit
+        }
+        set {
+            self.managedUnit = newValue
+        }
+    }
+
+    var progress: Progress? {
+        get {
+            self.managedProgress
+        }
+        set {
+            self.managedProgress = newValue
         }
     }
 }

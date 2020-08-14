@@ -21,6 +21,7 @@ extension Progress {
     @NSManaged var managedCost: NSNumber?
     @NSManaged var managedLastViewed: NSNumber?
 
+    @NSManaged var managedAssignment: Assignment?
     @NSManaged var managedStep: Step?
     @NSManaged var managedSection: Section?
     @NSManaged var managedUnit: Unit?
@@ -65,12 +66,12 @@ extension Progress {
         }
     }
 
-    var score: Int {
+    var score: Float {
         get {
-             managedScore?.intValue ?? 0
+            self.managedScore?.floatValue ?? 0
         }
-        set(value) {
-            managedScore = value as NSNumber?
+        set {
+            self.managedScore = NSNumber(value: newValue)
         }
     }
 
@@ -98,6 +99,51 @@ extension Progress {
         }
         set(value) {
             managedCost = value as NSNumber?
+        }
+    }
+
+    var assignment: Assignment? {
+        get {
+            self.managedAssignment
+        }
+        set {
+            self.managedAssignment = newValue
+        }
+    }
+
+    var step: Step? {
+        get {
+            self.managedStep
+        }
+        set {
+            self.managedStep = newValue
+        }
+    }
+
+    var section: Section? {
+        get {
+            self.managedSection
+        }
+        set {
+            self.managedSection = newValue
+        }
+    }
+
+    var unit: Unit? {
+        get {
+            self.managedUnit
+        }
+        set {
+            self.managedUnit = newValue
+        }
+    }
+
+    var course: Course? {
+        get {
+            self.managedCourse
+        }
+        set {
+            self.managedCourse = newValue
         }
     }
 }
