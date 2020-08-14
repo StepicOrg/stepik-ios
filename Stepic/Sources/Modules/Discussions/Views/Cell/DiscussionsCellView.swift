@@ -27,7 +27,7 @@ extension DiscussionsCellView {
 
         let badgesStackViewHeight: CGFloat = 20
         let badgesStackViewSpacing: CGFloat = 8
-        let badgeStackViewInsets = LayoutInsets(left: 16)
+        let badgesStackViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -122,6 +122,7 @@ final class DiscussionsCellView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.spacing = self.appearance.badgesStackViewSpacing
+        stackView.isHidden = true
         return stackView
     }()
 
@@ -130,8 +131,6 @@ final class DiscussionsCellView: UIView {
         label.font = self.appearance.nameLabelFont
         label.textColor = self.appearance.nameLabelTextColor
         label.numberOfLines = 1
-        label.setContentHuggingPriority(.defaultLow, for: .vertical)
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return label
     }()
 
@@ -171,8 +170,6 @@ final class DiscussionsCellView: UIView {
             ]
         )
         stackView.axis = .vertical
-        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        stackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return stackView
     }()
 
@@ -250,17 +247,13 @@ final class DiscussionsCellView: UIView {
         return containerStackView
     }()
 
-    // Dynamically show/hide badge
-    private var badgesStackViewHeightConstraint: Constraint?
-    private var nameLabelTopConstraint: Constraint?
+    // Dynamically position nameLabel on based on badges visibility
+    private var nameLabelTopToBottomOfBadgesConstraint: Constraint?
+    private var nameLabelTopToTopOfAvatarConstraint: Constraint?
 
     // Keeps track of web content text view height
     private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
     private var currentText: String?
-
-    private var isBadgesHidden: Bool {
-        self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
-    }
 
     private var didClickOnLinkOrImage = false
     private var pendingTextViewClickWorkItem: DispatchWorkItem?
@@ -331,8 +324,8 @@ final class DiscussionsCellView: UIView {
     }
 
     func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let userInfoHeight = (self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight)
-            + (self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
+        let userInfoHeight = (self.badgesStackView.isHidden ? 0 : self.appearance.badgesStackViewHeight)
+            + (self.badgesStackView.isHidden ? 0 : self.appearance.nameLabelInsets.top)
             + self.appearance.nameLabelHeight
 
         let solutionHeight = self.solutionContainerView.isHidden
@@ -376,10 +369,15 @@ final class DiscussionsCellView: UIView {
 
         self.isPinnedImageButton.isHidden = !isPinned
 
-        self.badgesStackViewHeightConstraint?.update(
-            offset: self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight
-        )
-        self.nameLabelTopConstraint?.update(offset: self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
+        self.badgesStackView.isHidden = self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
+
+        if self.badgesStackView.isHidden {
+            self.nameLabelTopToBottomOfBadgesConstraint?.deactivate()
+            self.nameLabelTopToTopOfAvatarConstraint?.activate()
+        } else {
+            self.nameLabelTopToTopOfAvatarConstraint?.deactivate()
+            self.nameLabelTopToBottomOfBadgesConstraint?.activate()
+        }
     }
 
     private func updateVotes(likesCount: Int, dislikesCount: Int, canVote: Bool, voteValue: VoteValue?) {
@@ -529,25 +527,37 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 
         self.badgesStackView.translatesAutoresizingMaskIntoConstraints = false
         self.badgesStackView.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeStackViewInsets.left)
-            make.top.equalTo(self.avatarImageView.snp.top)
-            self.badgesStackViewHeightConstraint = make.height.equalTo(self.appearance.badgesStackViewHeight).constraint
+            make.top.equalToSuperview().offset(self.appearance.badgesStackViewInsets.top)
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgesStackViewInsets.left)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.badgesStackViewInsets.right)
+            make.height.equalTo(self.appearance.badgesStackViewHeight)
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.nameLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        self.nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         self.nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            self.nameLabelTopConstraint = make.top
-                .equalTo(self.userRoleBadgeLabel.snp.bottom)
+            self.nameLabelTopToBottomOfBadgesConstraint = make
+                .top
+                .equalTo(self.badgesStackView.snp.bottom)
                 .offset(self.appearance.nameLabelInsets.top)
                 .constraint
+            self.nameLabelTopToBottomOfBadgesConstraint?.deactivate()
+
+            self.nameLabelTopToTopOfAvatarConstraint = make.top.equalTo(self.avatarImageView.snp.top).constraint
+
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
             make.height.equalTo(self.appearance.nameLabelHeight)
         }
 
         self.textContentStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.textContentStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        self.textContentStackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         self.textContentStackView.snp.makeConstraints { make in
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textContentContainerViewInsets.top)
+            make.top
+                .greaterThanOrEqualTo(self.nameLabel.snp.bottom)
+                .offset(self.appearance.textContentContainerViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
             make.bottom
