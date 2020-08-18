@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		008437078C67C7149BE6DE53 /* DownloadARQuickLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD8888462BD21ECF82C602 /* DownloadARQuickLookViewController.swift */; };
 		062AB834A48F37524A84D976 /* NewProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE4213EB9F9BB5C2C25E78 /* NewProfileInteractor.swift */; };
+		0791DFE4B73F0C765044006C /* FillBlanksQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D07472E32C2DC0EE070CE /* FillBlanksQuizInteractor.swift */; };
 		07D41EBCF7EE589FF01C3457 /* NewProfileCertificatesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009A8D41353D2ECAACAB303D /* NewProfileCertificatesDataFlow.swift */; };
 		0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
 		0800B81B1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
@@ -352,6 +353,7 @@
 		097807181FEAD22C2DE65676 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E0D8A3998163442A02FB0 /* NewProfileView.swift */; };
 		09ACDC74180F4250D7E8573D /* NewProfileSocialProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */; };
 		0BCE34E8356EA252F3F2CD34 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */; };
+		101D4F9FA505413E820316A3 /* FillBlanksQuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06455AE519D17C1948944F0E /* FillBlanksQuizAssembly.swift */; };
 		10EE105C3899569C32A7E24C /* NewProfileAchievementsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA42C58C967F7FED2305306 /* NewProfileAchievementsAssembly.swift */; };
 		12CB070461601452E35A6334 /* NewProfileUserActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF7A377B4C8BC247ECBD29 /* NewProfileUserActivityViewController.swift */; };
 		1403FF0C9A5259CF2D63D98C /* NewProfileUserActivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E46A7B951582DFB9DA8130 /* NewProfileUserActivityProvider.swift */; };
@@ -781,7 +783,9 @@
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
 		375F2EB161DE5DAAED3FEA98 /* NewProfileStreakNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */; };
+		38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */; };
 		39AB2324EB824124A83D7534 /* UserCoursesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AF7B8FAACF8A4D31AF7583 /* UserCoursesInteractor.swift */; };
+		3E467D12F5BA4AE24B7BB030 /* FillBlanksQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B41CD0EE056CA3361EEB /* FillBlanksQuizPresenter.swift */; };
 		46115BB4590732AAB387046D /* NewProfileUserActivityAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C03F8E163838C4E026CAE5 /* NewProfileUserActivityAssembly.swift */; };
 		53973CE3C780CC9E39EA65A5 /* NewProfileDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A67C6A3908851371ABC4C8 /* NewProfileDataFlow.swift */; };
 		5469EC1AD797F38AC790B9E7 /* NewProfileCreatedCoursesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D375711B0841DF75C1D6C6D /* NewProfileCreatedCoursesInteractor.swift */; };
@@ -1268,6 +1272,7 @@
 		7356E585097D33A455C5D212 /* NewProfileAchievementsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B98B071C1C8E3FB13F9717 /* NewProfileAchievementsInteractor.swift */; };
 		79A20D8F6931BCF4BDD7656E /* NewProfileUserActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */; };
 		7C948DD5EBB144CE0658E454 /* UserCoursesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4BED02A9D05CB0787EBE1 /* UserCoursesDataFlow.swift */; };
+		7D2D216B61E159903EAF1282 /* FillBlanksQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70D0220ABA60A77FC65411 /* FillBlanksQuizDataFlow.swift */; };
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
 		86356B693AF04C13CE3C856F /* UserCoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF219462BE0AB704DED8077 /* UserCoursesView.swift */; };
@@ -1304,6 +1309,7 @@
 		E68D5D39475BA651C54FD4C9 /* NewProfileStreakNotificationsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F0E49F1F2245F037EE6305 /* NewProfileStreakNotificationsAssembly.swift */; };
 		ECD21878641B360C12E8C585 /* NewProfileCreatedCoursesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4A385A37C2127557150147 /* NewProfileCreatedCoursesOutputProtocol.swift */; };
 		F26EBB85670ECB562C65D84C /* DownloadARQuickLookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC129A0368739A641E6ED26A /* DownloadARQuickLookInteractor.swift */; };
+		F3E3754E1307F57F39624528 /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DE5FD0F368D7B48B0E3B5E /* FillBlanksQuizViewController.swift */; };
 		F7B2524CCF4BE272FB48CECF /* NewProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8FAC809538C9222DD6ABC9 /* NewProfilePresenter.swift */; };
 		FBB6AC66F23F6493B8F5E225 /* NewProfileAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BB507BCF6F48523222D6D3 /* NewProfileAchievementsPresenter.swift */; };
 /* End PBXBuildFile section */
@@ -1344,6 +1350,8 @@
 		0135D703CAD3B1C16BC95B63 /* NewProfileStreakNotificationsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsDataFlow.swift; sourceTree = "<group>"; };
 		052EBB6A9C3BB54E11625E38 /* Pods-Stepic.release release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.release release.xcconfig"; sourceTree = "<group>"; };
 		05F0E49F1F2245F037EE6305 /* NewProfileStreakNotificationsAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsAssembly.swift; sourceTree = "<group>"; };
+		06455AE519D17C1948944F0E /* FillBlanksQuizAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizAssembly.swift; sourceTree = "<group>"; };
+		079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizView.swift; sourceTree = "<group>"; };
 		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
 		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
@@ -2198,10 +2206,13 @@
 		3BCD8888462BD21ECF82C602 /* DownloadARQuickLookViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookViewController.swift; sourceTree = "<group>"; };
 		3C1049108DA5FB2370275330 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesView.swift; sourceTree = "<group>"; };
+		3F6D07472E32C2DC0EE070CE /* FillBlanksQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizInteractor.swift; sourceTree = "<group>"; };
 		4026ACBBA0C3F084DA6D5A6E /* NewProfileStreakNotificationsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsView.swift; sourceTree = "<group>"; };
+		40D8B41CD0EE056CA3361EEB /* FillBlanksQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizPresenter.swift; sourceTree = "<group>"; };
 		489380E1AE5474348FB1450D /* Pods-Stepic.production debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.production debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.production debug.xcconfig"; sourceTree = "<group>"; };
 		49B8797DC84D64C5BAA84E76 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		5099C818F5A180372348FC30 /* NewProfileCreatedCoursesDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesDataFlow.swift; sourceTree = "<group>"; };
+		52DE5FD0F368D7B48B0E3B5E /* FillBlanksQuizViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizViewController.swift; sourceTree = "<group>"; };
 		53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityInteractor.swift; sourceTree = "<group>"; };
 		582946156484A5655EF72E43 /* UserCoursesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesPresenter.swift; sourceTree = "<group>"; };
 		58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsPresenter.swift; sourceTree = "<group>"; };
@@ -2710,6 +2721,7 @@
 		9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1A67C6A3908851371ABC4C8 /* NewProfileDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileDataFlow.swift; sourceTree = "<group>"; };
 		A726EBAA61AAE8C3D81F0506 /* NewProfileAchievementsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsProvider.swift; sourceTree = "<group>"; };
+		AC70D0220ABA60A77FC65411 /* FillBlanksQuizDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizDataFlow.swift; sourceTree = "<group>"; };
 		AD0054F69D610FEA28F620F8 /* Pods-StepicTests.production debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.production debug.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.production debug.xcconfig"; sourceTree = "<group>"; };
 		AFD58CADEE08103A32F03B4D /* NewProfileUserActivityDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityDataFlow.swift; sourceTree = "<group>"; };
 		B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookAssembly.swift; sourceTree = "<group>"; };
@@ -5572,6 +5584,19 @@
 			path = StorageRecords;
 			sourceTree = "<group>";
 		};
+		50B94B8395147B090A0D897C /* FillBlanksQuiz */ = {
+			isa = PBXGroup;
+			children = (
+				06455AE519D17C1948944F0E /* FillBlanksQuizAssembly.swift */,
+				AC70D0220ABA60A77FC65411 /* FillBlanksQuizDataFlow.swift */,
+				3F6D07472E32C2DC0EE070CE /* FillBlanksQuizInteractor.swift */,
+				40D8B41CD0EE056CA3361EEB /* FillBlanksQuizPresenter.swift */,
+				079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */,
+				52DE5FD0F368D7B48B0E3B5E /* FillBlanksQuizViewController.swift */,
+			);
+			path = FillBlanksQuiz;
+			sourceTree = "<group>";
+		};
 		5F48944D8F8DBE3A61FECCAA /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
@@ -6807,6 +6832,7 @@
 				62E98046111E52E821DAAEDF /* BaseQuiz */,
 				62E98826694D9988626F0F60 /* CodeQuiz */,
 				62E98B7DB3FB5B9878B8B529 /* CodeQuizFullscreen */,
+				50B94B8395147B090A0D897C /* FillBlanksQuiz */,
 				62E98120E9A7864A9E48BC03 /* NewChoiceQuiz */,
 				62E986EE1B934F0996DDA584 /* NewFreeAnswerQuiz */,
 				62E98FAF068094E65743A62D /* NewMatchingQuiz */,
@@ -8902,6 +8928,12 @@
 				1C748C5B088908FB323176B6 /* NewProfileSocialProfilesProvider.swift in Sources */,
 				09ACDC74180F4250D7E8573D /* NewProfileSocialProfilesView.swift in Sources */,
 				9501A244263B1A63587A4111 /* NewProfileSocialProfilesViewController.swift in Sources */,
+				101D4F9FA505413E820316A3 /* FillBlanksQuizAssembly.swift in Sources */,
+				7D2D216B61E159903EAF1282 /* FillBlanksQuizDataFlow.swift in Sources */,
+				0791DFE4B73F0C765044006C /* FillBlanksQuizInteractor.swift in Sources */,
+				3E467D12F5BA4AE24B7BB030 /* FillBlanksQuizPresenter.swift in Sources */,
+				38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */,
+				F3E3754E1307F57F39624528 /* FillBlanksQuizViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
