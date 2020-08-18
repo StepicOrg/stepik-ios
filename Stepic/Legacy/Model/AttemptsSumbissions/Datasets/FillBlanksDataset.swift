@@ -153,6 +153,10 @@ final class FillBlanksComponent: NSObject, NSCoding {
         case text
         case input
         case select
+
+        var isBlankFillable: Bool {
+            self == .input || self == .select
+        }
     }
 
     enum JSONKey: String {

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol FillBlanksQuizViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: FillBlanksQuiz.SomeAction.ViewModel)
+    func displayReply(viewModel: FillBlanksQuiz.ReplyLoad.ViewModel)
 }
 
 final class FillBlanksQuizViewController: UIViewController {
@@ -24,5 +24,5 @@ final class FillBlanksQuizViewController: UIViewController {
 }
 
 extension FillBlanksQuizViewController: FillBlanksQuizViewControllerProtocol {
-    func displaySomeActionResult(viewModel: FillBlanksQuiz.SomeAction.ViewModel) {}
+    func displayReply(viewModel: FillBlanksQuiz.ReplyLoad.ViewModel) {}
 }

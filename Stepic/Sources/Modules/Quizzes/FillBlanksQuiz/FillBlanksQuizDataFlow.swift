@@ -1,11 +1,31 @@
 import Foundation
 
 enum FillBlanksQuiz {
-    enum SomeAction {
-        struct Request {}
+    /// Show quiz state
+    enum ReplyLoad {
+        struct Response {
+            let components: [Component]
+            let status: QuizStatus?
+        }
 
-        struct Response {}
+        struct ViewModel {
+            let data: FillBlanksQuizViewModel
+        }
+    }
 
-        struct ViewModel {}
+    /// Convert data to reply
+    enum ReplyConvert {
+        struct Request {
+            let blanks: [String]
+        }
+    }
+
+    // MARK: - Common structs
+
+    struct Component {
+        let text: String
+        let options: [String]
+        let blank: String?
+        let isBlankFillable: Bool
     }
 }

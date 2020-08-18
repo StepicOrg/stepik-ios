@@ -1,6 +1,6 @@
 import UIKit
 
-final class FillBlanksQuizAssembly: Assembly {
+final class FillBlanksQuizAssembly: QuizAssembly {
     var moduleInput: QuizInputProtocol?
 
     weak var moduleOutput: QuizOutputProtocol?

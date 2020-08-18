@@ -563,6 +563,7 @@
 		2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */; };
 		2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */; };
 		2C73718D24EB6D9100ED24C3 /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73718C24EB6D9100ED24C3 /* FillBlanksDataset.swift */; };
+		2C73718F24EB9F1800ED24C3 /* FillBlanksQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73718E24EB9F1800ED24C3 /* FillBlanksQuizViewModel.swift */; };
 		2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */; };
 		2C73E24624D029F900340052 /* NewProfileSocialProfilesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */; };
 		2C746642245613E900BB0800 /* UserCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */; };
@@ -1973,6 +1974,7 @@
 		2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchCellView.swift; sourceTree = "<group>"; };
 		2C73718C24EB6D9100ED24C3 /* FillBlanksDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksDataset.swift; sourceTree = "<group>"; };
+		2C73718E24EB9F1800ED24C3 /* FillBlanksQuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizViewModel.swift; sourceTree = "<group>"; };
 		2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewModel.swift; sourceTree = "<group>"; };
 		2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesItemView.swift; sourceTree = "<group>"; };
 		2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_actions_v51.xcdatamodel; sourceTree = "<group>"; };
@@ -3331,6 +3333,14 @@
 				2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */,
 			);
 			path = Switch;
+			sourceTree = "<group>";
+		};
+		2C73719024EBA7E000ED24C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2C73E24224D029BB00340052 /* Views */ = {
@@ -5597,8 +5607,9 @@
 				AC70D0220ABA60A77FC65411 /* FillBlanksQuizDataFlow.swift */,
 				3F6D07472E32C2DC0EE070CE /* FillBlanksQuizInteractor.swift */,
 				40D8B41CD0EE056CA3361EEB /* FillBlanksQuizPresenter.swift */,
-				079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */,
 				52DE5FD0F368D7B48B0E3B5E /* FillBlanksQuizViewController.swift */,
+				2C73718E24EB9F1800ED24C3 /* FillBlanksQuizViewModel.swift */,
+				2C73719024EBA7E000ED24C3 /* Views */,
 			);
 			path = FillBlanksQuiz;
 			sourceTree = "<group>";
@@ -8699,6 +8710,7 @@
 				62E98291FE763CC1E639E497 /* CodeQuizDataFlow.swift in Sources */,
 				62E98F2598146750666AC334 /* CodeQuizInteractor.swift in Sources */,
 				62E98450FB31F2092BA6DC08 /* CodeQuizPresenter.swift in Sources */,
+				2C73718F24EB9F1800ED24C3 /* FillBlanksQuizViewModel.swift in Sources */,
 				62E98F8F4EBA0B11BB101A1C /* CodeQuizProvider.swift in Sources */,
 				62E988C4572F2A9C97348C83 /* CodeQuizView.swift in Sources */,
 				62E98707AF0BEE9807661F4A /* CodeQuizViewController.swift in Sources */,

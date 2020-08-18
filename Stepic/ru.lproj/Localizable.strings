@@ -908,6 +908,7 @@ MatchingQuizTitle = "Сопоставьте значения из двух сп�
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 UnsupportedQuizTitle = "Неподдерживаемый тип шага";
 FreeAnswerQuizTitle = "Напишите эссе";
+FillBlanksQuizTitle = "Заполните пробелы";
 
 UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 
