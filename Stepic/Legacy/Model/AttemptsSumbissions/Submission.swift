@@ -119,24 +119,30 @@ final class Submission: JSONSerializable {
     }
 
     private func getReplyFromJSON(_ json: JSON, stepBlockName: String) -> Reply? {
-        switch stepBlockName {
-        case "choice":
+        guard let blockType = Block.BlockType(rawValue: stepBlockName) else {
+            return nil
+        }
+
+        switch blockType {
+        case .choice:
             return ChoiceReply(json: json)
-        case "string":
+        case .string:
             return TextReply(json: json)
-        case "number":
+        case .number:
             return NumberReply(json: json)
-        case "free-answer":
+        case .fillBlanks:
+            return FillBlanksReply(json: json)
+        case .freeAnswer:
             return FreeAnswerReply(json: json)
-        case "math":
+        case .math:
             return MathReply(json: json)
-        case "sorting":
+        case .sorting:
             return SortingReply(json: json)
-        case "matching":
+        case .matching:
             return MatchingReply(json: json)
-        case "code":
+        case .code:
             return CodeReply(json: json)
-        case "sql":
+        case .sql:
             return SQLReply(json: json)
         default:
             return nil
