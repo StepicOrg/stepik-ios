@@ -7,6 +7,8 @@ protocol FillBlanksQuizViewControllerProtocol: AnyObject {
 final class FillBlanksQuizViewController: UIViewController {
     private let interactor: FillBlanksQuizInteractorProtocol
 
+    var fillBlanksQuizView: FillBlanksQuizView? { self.view as? FillBlanksQuizView }
+
     init(interactor: FillBlanksQuizInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -24,5 +26,7 @@ final class FillBlanksQuizViewController: UIViewController {
 }
 
 extension FillBlanksQuizViewController: FillBlanksQuizViewControllerProtocol {
-    func displayReply(viewModel: FillBlanksQuiz.ReplyLoad.ViewModel) {}
+    func displayReply(viewModel: FillBlanksQuiz.ReplyLoad.ViewModel) {
+        self.fillBlanksQuizView?.configure(viewModel: viewModel.data)
+    }
 }
