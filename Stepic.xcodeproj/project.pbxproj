@@ -562,6 +562,7 @@
 		2C6F78B324C1A43400F12D30 /* course-info.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C6F78B224C1A43400F12D30 /* course-info.css */; };
 		2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */; };
 		2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */; };
+		2C73718D24EB6D9100ED24C3 /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73718C24EB6D9100ED24C3 /* FillBlanksDataset.swift */; };
 		2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */; };
 		2C73E24624D029F900340052 /* NewProfileSocialProfilesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */; };
 		2C746642245613E900BB0800 /* UserCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */; };
@@ -1970,6 +1971,7 @@
 		2C6F78B224C1A43400F12D30 /* course-info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "course-info.css"; sourceTree = "<group>"; };
 		2C7024B923D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		2C7024BB23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailSwitchCellView.swift; sourceTree = "<group>"; };
+		2C73718C24EB6D9100ED24C3 /* FillBlanksDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksDataset.swift; sourceTree = "<group>"; };
 		2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewModel.swift; sourceTree = "<group>"; };
 		2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesItemView.swift; sourceTree = "<group>"; };
 		2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_actions_v51.xcdatamodel; sourceTree = "<group>"; };
@@ -4993,6 +4995,7 @@
 			children = (
 				08F555531C4F97C100C877E8 /* ChoiceDataset.swift */,
 				08F5554F1C4F93B700C877E8 /* Dataset.swift */,
+				2C73718C24EB6D9100ED24C3 /* FillBlanksDataset.swift */,
 				088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */,
 				0834C4681E2CE469002F8516 /* MatchingDataset.swift */,
 				08F485AE1C58E946000165AA /* SortingDataset.swift */,
@@ -8918,6 +8921,7 @@
 				B2FE12ABF98ED99EAF727405 /* NewProfileCreatedCoursesDataFlow.swift in Sources */,
 				5469EC1AD797F38AC790B9E7 /* NewProfileCreatedCoursesInteractor.swift in Sources */,
 				64AF865C5174A2A525C5FB8A /* NewProfileCreatedCoursesPresenter.swift in Sources */,
+				2C73718D24EB6D9100ED24C3 /* FillBlanksDataset.swift in Sources */,
 				5D239816094AD2C3575E81CC /* NewProfileCreatedCoursesView.swift in Sources */,
 				AA4038BFF0FB9031371EBB38 /* NewProfileCreatedCoursesViewController.swift in Sources */,
 				ECD21878641B360C12E8C585 /* NewProfileCreatedCoursesOutputProtocol.swift in Sources */,
