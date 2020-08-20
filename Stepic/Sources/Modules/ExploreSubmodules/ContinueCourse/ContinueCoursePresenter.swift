@@ -32,7 +32,7 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
 
                 let progressText = String(
                     format: NSLocalizedString("ContinueCourseCourseCurrentProgressTitle", comment: ""),
-                    arguments: ["\(progress.score)", "\(progress.cost)"]
+                    arguments: ["\(FormatterHelper.progressScore(progress.score))", "\(progress.cost)"]
                 )
 
                 return (description: progressText, value: normalizedPercent / 100)

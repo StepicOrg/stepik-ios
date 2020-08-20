@@ -153,6 +153,7 @@ class DeepLinkRouteSpec: QuickSpec {
                 it("matches lesson deep link paths with unit id") {
                     let paths = [
                         "https://stepik.org/lesson/172508/step/1?unit=148015",
+                        "https://stepik.org/lesson/172508/step/1?unit=148015&from_mobile_app=true",
                         "https://stepik.org/lesson/172508/step/1?unit=148015/",
                         "http://stepik.org/lesson/172508/step/1?unit=148015/"
                     ]
@@ -165,7 +166,8 @@ class DeepLinkRouteSpec: QuickSpec {
                     let paths = [
                         "https://stepik.org/lesson/172508/step/1",
                         "https://stepik.org/lesson/172508/step/1/",
-                        "http://stepik.org/lesson/172508/step/1/"
+                        "http://stepik.org/lesson/172508/step/1/",
+                        "https://stepik.org/lesson/172508/step/1?from_mobile_app=true"
                     ]
                     self.checkPaths(paths) { route in
                         checkRoute(route, expectedUnitID: nil)
@@ -253,6 +255,23 @@ class DeepLinkRouteSpec: QuickSpec {
                     ]
                     self.checkPaths(paths) { route in
                         checkRoute(route, expectedUnitID: nil)
+                    }
+                }
+            }
+
+            context("certificates") {
+                it("matches certificates deep link with given paths") {
+                    let paths = [
+                        "http://stepik.org/users/21612976/certificates",
+                        "https://stepik.org/users/21612976/certificates",
+                        "https://stepik.org/users/21612976/certificates/",
+                        "https://stepik.org/users/21612976/certificates?from_mobile_app=true"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .certificates(userID) = route else {
+                            return .failed(reason: "wrong enum case, expected `certificates`, got \(route)")
+                        }
+                        return userID == 21612976 ? .succeeded : .failed(reason: "wrong user id")
                     }
                 }
             }

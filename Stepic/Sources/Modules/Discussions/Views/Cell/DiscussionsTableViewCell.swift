@@ -102,14 +102,6 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
             self.cellView.onImageClick = newValue
         }
     }
-    var onTextContentClick: (() -> Void)? {
-        get {
-            self.cellView.onTextContentClick
-        }
-        set {
-            self.cellView.onTextContentClick = newValue
-        }
-    }
     var onSolutionClick: (() -> Void)? {
         get {
             self.cellView.onSolutionClick

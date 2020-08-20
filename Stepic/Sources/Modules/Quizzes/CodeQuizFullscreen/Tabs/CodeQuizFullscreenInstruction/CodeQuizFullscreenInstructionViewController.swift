@@ -1,4 +1,3 @@
-import Agrume
 import UIKit
 
 final class CodeQuizFullscreenInstructionViewController: UIViewController {
@@ -63,7 +62,6 @@ extension CodeQuizFullscreenInstructionViewController: CodeQuizFullscreenInstruc
         _ view: CodeQuizFullscreenInstructionView,
         didRequestFullscreenImage url: URL
     ) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(url: url, from: self)
     }
 }

@@ -133,6 +133,15 @@ final class Course: NSManagedObject, IDFetchable {
         } else {
             self.introVideo = Video(json: json[JSONKey.introVideo.rawValue])
         }
+
+        var previewLessonID: Lesson.IdType?
+        if let optionsDictionary = json[JSONKey.options.rawValue].dictionary {
+            if let coursePreviewDictionary = optionsDictionary[JSONKey.coursePreview.rawValue]?.dictionary {
+                previewLessonID = coursePreviewDictionary[JSONKey.previewLessonID.rawValue]?.int
+            }
+        }
+
+        self.previewLessonID = previewLessonID
     }
 
     func update(json: JSON) {
@@ -397,5 +406,8 @@ final class Course: NSManagedObject, IDFetchable {
         case displayPrice = "display_price"
         case introVideo = "intro_video"
         case priceTier = "price_tier"
+        case options
+        case coursePreview = "course_preview"
+        case previewLessonID = "preview_lesson_id"
     }
 }

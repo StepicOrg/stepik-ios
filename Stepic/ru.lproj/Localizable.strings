@@ -363,6 +363,10 @@ Close = "Закрыть";
 RecommendationsExplore = "Рекомендации";
 RecommendationsExploreDescription = "Выбери курс из подборок по интересам";
 
+FullscreenImageViewerErrorMessage = "Не удалось загрузить изображение. Повторить загрузку или закрыть?";
+FullscreenImageViewerErrorActionRetry = "Повторить";
+FullscreenImageViewerErrorActionClose = "Закрыть";
+
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
 OnboardingTitle2 = "Сохраняйте";
@@ -448,6 +452,7 @@ ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/
 
 /* Course info */
 CourseInfoTitle = "О курсе";
+CourseInfoTryForFreeButtonTitle = "Попробовать бесплатно";
 // Favorite
 CourseInfoCourseActionAddToFavoritesAlertTitle = "Добавить в избранное";
 CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Убрать из избранного";

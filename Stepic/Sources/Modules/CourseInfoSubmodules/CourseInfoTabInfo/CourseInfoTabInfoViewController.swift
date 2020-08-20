@@ -1,4 +1,3 @@
-import Agrume
 import AVFoundation
 import AVKit
 import UIKit
@@ -157,13 +156,11 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
     }
 
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenImageURL url: URL) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(url: url, from: self)
     }
 
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenImage image: UIImage) {
-        let agrume = Agrume(image: image)
-        agrume.show(from: self)
+        FullscreenImageViewer.show(image: image, from: self)
     }
 
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenUserProfileWithID userID: User.IdType) {

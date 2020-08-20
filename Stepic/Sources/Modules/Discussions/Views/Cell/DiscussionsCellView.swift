@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -27,7 +28,7 @@ extension DiscussionsCellView {
 
         let badgesStackViewHeight: CGFloat = 20
         let badgesStackViewSpacing: CGFloat = 8
-        let badgeStackViewInsets = LayoutInsets(left: 16)
+        let badgesStackViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -122,6 +123,7 @@ final class DiscussionsCellView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.spacing = self.appearance.badgesStackViewSpacing
+        stackView.isHidden = true
         return stackView
     }()
 
@@ -130,8 +132,6 @@ final class DiscussionsCellView: UIView {
         label.font = self.appearance.nameLabelFont
         label.textColor = self.appearance.nameLabelTextColor
         label.numberOfLines = 1
-        label.setContentHuggingPriority(.defaultLow, for: .vertical)
-        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return label
     }()
 
@@ -139,26 +139,22 @@ final class DiscussionsCellView: UIView {
         var appearance = ProcessedContentTextView.Appearance()
         appearance.insets = LayoutInsets(insets: .zero)
         appearance.backgroundColor = .clear
-
         let view = ProcessedContentTextView(appearance: appearance)
         view.delegate = self
         view.isHidden = true
-
-        let tapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.textContentWebBasedTextViewClicked(_:))
-        )
-        tapGestureRecognizer.delegate = self
-        view.addGestureRecognizer(tapGestureRecognizer)
-
         return view
     }()
 
-    private lazy var textContentTextLabel: UILabel = {
-        let label = UILabel()
+    private lazy var textContentTextLabel: AttributedLabel = {
+        let label = AttributedLabel()
+        label.numberOfLines = 0
         label.font = self.appearance.textContentTextLabelFont
         label.textColor = self.appearance.textContentTextLabelTextColor
-        label.numberOfLines = 0
+        label.onClick = { [weak self] _, detection in
+            if case .link(let url) = detection.type {
+                self?.onLinkClick?(url)
+            }
+        }
         return label
     }()
 
@@ -171,8 +167,6 @@ final class DiscussionsCellView: UIView {
             ]
         )
         stackView.axis = .vertical
-        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        stackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return stackView
     }()
 
@@ -250,20 +244,15 @@ final class DiscussionsCellView: UIView {
         return containerStackView
     }()
 
-    // Dynamically show/hide badge
-    private var badgesStackViewHeightConstraint: Constraint?
-    private var nameLabelTopConstraint: Constraint?
+    // Dynamically position nameLabel on based on badges visibility
+    private var nameLabelTopToBottomOfBadgesConstraint: Constraint?
+    private var nameLabelTopToTopOfAvatarConstraint: Constraint?
 
     // Keeps track of web content text view height
     private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
     private var currentText: String?
 
-    private var isBadgesHidden: Bool {
-        self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
-    }
-
-    private var didClickOnLinkOrImage = false
-    private var pendingTextViewClickWorkItem: DispatchWorkItem?
+    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
 
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
@@ -271,7 +260,6 @@ final class DiscussionsCellView: UIView {
     var onAvatarClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
     var onImageClick: ((URL) -> Void)?
-    var onTextContentClick: (() -> Void)?
     var onSolutionClick: (() -> Void)?
     // Content height updates callbacks
     var onContentLoaded: (() -> Void)?
@@ -279,6 +267,11 @@ final class DiscussionsCellView: UIView {
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
+        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(
+            font: appearance.textContentTextLabelFont,
+            tagTransformers: []
+        )
+
         super.init(frame: frame)
 
         self.setupView()
@@ -331,8 +324,8 @@ final class DiscussionsCellView: UIView {
     }
 
     func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let userInfoHeight = (self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight)
-            + (self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
+        let userInfoHeight = (self.badgesStackView.isHidden ? 0 : self.appearance.badgesStackViewHeight)
+            + (self.badgesStackView.isHidden ? 0 : self.appearance.nameLabelInsets.top)
             + self.appearance.nameLabelHeight
 
         let solutionHeight = self.solutionContainerView.isHidden
@@ -376,10 +369,15 @@ final class DiscussionsCellView: UIView {
 
         self.isPinnedImageButton.isHidden = !isPinned
 
-        self.badgesStackViewHeightConstraint?.update(
-            offset: self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight
-        )
-        self.nameLabelTopConstraint?.update(offset: self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
+        self.badgesStackView.isHidden = self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
+
+        if self.badgesStackView.isHidden {
+            self.nameLabelTopToBottomOfBadgesConstraint?.deactivate()
+            self.nameLabelTopToTopOfAvatarConstraint?.activate()
+        } else {
+            self.nameLabelTopToTopOfAvatarConstraint?.deactivate()
+            self.nameLabelTopToBottomOfBadgesConstraint?.activate()
+        }
     }
 
     private func updateVotes(likesCount: Int, dislikesCount: Int, canVote: Bool, voteValue: VoteValue?) {
@@ -410,7 +408,7 @@ final class DiscussionsCellView: UIView {
         self.currentText = text
 
         if isWebViewSupportNeeded {
-            self.textContentTextLabel.text = nil
+            self.textContentTextLabel.attributedText = nil
             self.textContentTextLabel.isHidden = true
 
             self.textContentWebBasedTextView.alpha = 0
@@ -423,7 +421,9 @@ final class DiscussionsCellView: UIView {
             self.textContentWebBasedTextView.reset()
 
             self.textContentTextLabel.isHidden = false
-            self.textContentTextLabel.setTextWithHTMLString(text)
+            self.textContentTextLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
+                htmlString: text.trimmed()
+            ) as? AttributedText
         }
     }
 
@@ -474,27 +474,6 @@ final class DiscussionsCellView: UIView {
     private func solutionControlClicked() {
         self.onSolutionClick?()
     }
-
-    @objc
-    private func textContentWebBasedTextViewClicked(_ sender: UITapGestureRecognizer) {
-        let workItem = DispatchWorkItem { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-
-            if !strongSelf.didClickOnLinkOrImage {
-                strongSelf.onTextContentClick?()
-            }
-        }
-
-        self.pendingTextViewClickWorkItem?.cancel()
-        self.pendingTextViewClickWorkItem = workItem
-
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + Self.processedContentTextViewClickDelay,
-            execute: workItem
-        )
-    }
 }
 
 // MARK: - DiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
@@ -529,25 +508,37 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 
         self.badgesStackView.translatesAutoresizingMaskIntoConstraints = false
         self.badgesStackView.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeStackViewInsets.left)
-            make.top.equalTo(self.avatarImageView.snp.top)
-            self.badgesStackViewHeightConstraint = make.height.equalTo(self.appearance.badgesStackViewHeight).constraint
+            make.top.equalToSuperview().offset(self.appearance.badgesStackViewInsets.top)
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgesStackViewInsets.left)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.badgesStackViewInsets.right)
+            make.height.equalTo(self.appearance.badgesStackViewHeight)
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.nameLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        self.nameLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         self.nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            self.nameLabelTopConstraint = make.top
-                .equalTo(self.userRoleBadgeLabel.snp.bottom)
+            self.nameLabelTopToBottomOfBadgesConstraint = make
+                .top
+                .equalTo(self.badgesStackView.snp.bottom)
                 .offset(self.appearance.nameLabelInsets.top)
                 .constraint
+            self.nameLabelTopToBottomOfBadgesConstraint?.deactivate()
+
+            self.nameLabelTopToTopOfAvatarConstraint = make.top.equalTo(self.avatarImageView.snp.top).constraint
+
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
             make.height.equalTo(self.appearance.nameLabelHeight)
         }
 
         self.textContentStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.textContentStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        self.textContentStackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         self.textContentStackView.snp.makeConstraints { make in
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textContentContainerViewInsets.top)
+            make.top
+                .greaterThanOrEqualTo(self.nameLabel.snp.bottom)
+                .offset(self.appearance.textContentContainerViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
             make.bottom
@@ -575,9 +566,6 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 // MARK: - DiscussionsCellView: ProcessedContentTextViewDelegate -
 
 extension DiscussionsCellView: ProcessedContentTextViewDelegate {
-    private static let processedContentTextViewClickDelay = DispatchTimeInterval.milliseconds(5)
-    private static let resetClickOnLinkOrImageDelay = DispatchTimeInterval.milliseconds(10)
-
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         if self.textContentWebBasedTextView.isHidden {
             return
@@ -601,35 +589,12 @@ extension DiscussionsCellView: ProcessedContentTextViewDelegate {
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
-        self.didClickOnLinkOrImage = true
-        self.asyncResetClickOnLinkOrImage()
-
         self.onImageClick?(url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
-        self.didClickOnLinkOrImage = true
-        self.asyncResetClickOnLinkOrImage()
-
         self.onLinkClick?(url)
-    }
-
-    private func asyncResetClickOnLinkOrImage() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Self.resetClickOnLinkOrImageDelay) {
-            self.didClickOnLinkOrImage = false
-        }
-    }
-}
-
-// MARK: - DiscussionsCellView: UIGestureRecognizerDelegate -
-
-extension DiscussionsCellView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(
-        _ gestureRecognizer: UIGestureRecognizer,
-        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
-    ) -> Bool {
-        true
     }
 }
