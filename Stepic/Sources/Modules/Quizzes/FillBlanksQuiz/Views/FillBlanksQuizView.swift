@@ -8,6 +8,7 @@ extension FillBlanksQuizView {
         let titleLabelInsets = LayoutInsets(left: 16, right: 16)
 
         let collectionViewMinHeight: CGFloat = 44
+        let collectionViewMinLineSpacing: CGFloat = 4
         let collectionViewMinInteritemSpacing: CGFloat = 8
         let collectionViewSectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
 
@@ -78,7 +79,6 @@ final class FillBlanksQuizView: UIView {
         self.collectionView.reloadData()
 
         DispatchQueue.main.async {
-            self.collectionView.invalidateIntrinsicContentSize()
             self.invalidateIntrinsicContentSize()
         }
     }
@@ -86,7 +86,7 @@ final class FillBlanksQuizView: UIView {
     private func makeCollectionViewLayout() -> UICollectionViewLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumLineSpacing = self.appearance.collectionViewMinLineSpacing
         flowLayout.minimumInteritemSpacing = self.appearance.collectionViewMinInteritemSpacing
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         flowLayout.sectionInset = self.appearance.collectionViewSectionInset
@@ -138,16 +138,40 @@ extension FillBlanksQuizView: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(
-            for: indexPath
-        )
-
-        if let component = self.viewModel?.components[indexPath.row] {
-            cell.text = component.text
-            cell.maxWidth = collectionView.bounds.width
-                - self.appearance.collectionViewSectionInset.left
-                - self.appearance.collectionViewSectionInset.right
+        guard let component = self.viewModel?.components[safe: indexPath.row] else {
+            return UICollectionViewCell()
         }
+
+        let maxWidth = collectionView.bounds.width
+            - self.appearance.collectionViewSectionInset.left
+            - self.appearance.collectionViewSectionInset.right
+
+        if component.isBlankFillable {
+            if component.options.isEmpty {
+                let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.maxWidth = maxWidth
+                cell.onInputChanged = { [weak self] text in
+                    print("textInput = \(text)")
+
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    DispatchQueue.main.async {
+                        UIView.performWithoutAnimation {
+                            strongSelf.collectionView.collectionViewLayout.invalidateLayout()
+                            strongSelf.layoutIfNeeded()
+                            strongSelf.invalidateIntrinsicContentSize()
+                        }
+                    }
+                }
+                return cell
+            }
+        }
+
+        let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.text = component.text
+        cell.maxWidth = maxWidth
 
         return cell
     }

@@ -3,7 +3,7 @@ import UIKit
 
 extension FillBlanksTextCollectionViewCell {
     struct Appearance {
-        let textLabelInsets = LayoutInsets(top: 8, bottom: 8)
+        let minHeight: CGFloat = 18
         let backgroundColor = UIColor.stepikBackground
     }
 }
@@ -40,15 +40,6 @@ final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
-    override var intrinsicContentSize: CGSize {
-        CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: self.appearance.textLabelInsets.top
-                + self.textLabel.intrinsicContentSize.height
-                + self.appearance.textLabelInsets.bottom
-        )
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -60,12 +51,6 @@ final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override var isHighlighted: Bool {
-        didSet {
-            self.contentView.alpha = self.isHighlighted ? 0.5 : 1.0
-        }
     }
 }
 
@@ -86,12 +71,11 @@ extension FillBlanksTextCollectionViewCell: ProgrammaticallyInitializableViewPro
 
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.snp.makeConstraints { make in
-            self.textLabelMaxWidthConstraint = make.width.lessThanOrEqualTo(0).constraint
-            self.textLabelMaxWidthConstraint?.deactivate()
+            make.edges.equalToSuperview()
+            make.height.greaterThanOrEqualTo(self.appearance.minHeight)
 
-            make.top.equalToSuperview().offset(self.appearance.textLabelInsets.top)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-self.appearance.textLabelInsets.bottom)
+            self.textLabelMaxWidthConstraint = make.width.lessThanOrEqualTo(Int.max).constraint
+            self.textLabelMaxWidthConstraint?.deactivate()
         }
     }
 }
