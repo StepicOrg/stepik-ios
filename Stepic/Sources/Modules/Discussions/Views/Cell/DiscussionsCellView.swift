@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -144,11 +145,16 @@ final class DiscussionsCellView: UIView {
         return view
     }()
 
-    private lazy var textContentTextLabel: UILabel = {
-        let label = UILabel()
+    private lazy var textContentTextLabel: AttributedLabel = {
+        let label = AttributedLabel()
+        label.numberOfLines = 0
         label.font = self.appearance.textContentTextLabelFont
         label.textColor = self.appearance.textContentTextLabelTextColor
-        label.numberOfLines = 0
+        label.onClick = { [weak self] _, detection in
+            if case .link(let url) = detection.type {
+                self?.onLinkClick?(url)
+            }
+        }
         return label
     }()
 
@@ -246,6 +252,8 @@ final class DiscussionsCellView: UIView {
     private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
     private var currentText: String?
 
+    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
+
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
@@ -259,6 +267,11 @@ final class DiscussionsCellView: UIView {
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
+        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(
+            font: appearance.textContentTextLabelFont,
+            tagTransformers: []
+        )
+
         super.init(frame: frame)
 
         self.setupView()
@@ -395,7 +408,7 @@ final class DiscussionsCellView: UIView {
         self.currentText = text
 
         if isWebViewSupportNeeded {
-            self.textContentTextLabel.text = nil
+            self.textContentTextLabel.attributedText = nil
             self.textContentTextLabel.isHidden = true
 
             self.textContentWebBasedTextView.alpha = 0
@@ -408,7 +421,9 @@ final class DiscussionsCellView: UIView {
             self.textContentWebBasedTextView.reset()
 
             self.textContentTextLabel.isHidden = false
-            self.textContentTextLabel.setTextWithHTMLString(text)
+            self.textContentTextLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
+                htmlString: text.trimmed()
+            ) as? AttributedText
         }
     }
 
