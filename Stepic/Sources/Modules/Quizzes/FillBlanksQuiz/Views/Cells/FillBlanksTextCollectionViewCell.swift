@@ -3,21 +3,16 @@ import UIKit
 
 extension FillBlanksTextCollectionViewCell {
     struct Appearance {
-        let minHeight: CGFloat = 18
-        let backgroundColor = UIColor.stepikBackground
+        let font = UIFont.systemFont(ofSize: 16)
     }
 }
 
 final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
-    private lazy var textLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = self.appearance.backgroundColor
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
+    private static var prototypeTextLabel: UILabel?
 
-    private var textLabelMaxWidthConstraint: Constraint?
+    private lazy var textLabel: UILabel = {
+        Self.makeTextLabel(appearance: self.appearance)
+    }()
 
     var appearance = Appearance()
 
@@ -31,19 +26,9 @@ final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
-    var maxWidth: CGFloat? {
-        didSet {
-            if let maxWidth = self.maxWidth {
-                self.textLabelMaxWidthConstraint?.activate()
-                self.textLabelMaxWidthConstraint?.update(offset: maxWidth)
-            }
-        }
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -52,30 +37,46 @@ final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    deinit {
+        Self.prototypeTextLabel = nil
+    }
+
+    static func calculatePreferredContentSize(text: String, maxWidth: CGFloat) -> CGSize {
+        if Self.prototypeTextLabel == nil {
+            Self.prototypeTextLabel = Self.makeTextLabel()
+        }
+
+        guard let label = Self.prototypeTextLabel else {
+            return .zero
+        }
+
+        label.frame = CGRect(x: 0, y: 0, width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+
+        label.setTextWithHTMLString(text)
+        label.sizeToFit()
+
+        return label.bounds.size
+    }
+
+    private static func makeTextLabel(appearance: Appearance = Appearance()) -> UILabel {
+        let label = UILabel()
+        label.font = appearance.font
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        return label
+    }
 }
 
 extension FillBlanksTextCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.contentView.isOpaque = true
-    }
-
     func addSubviews() {
         self.contentView.addSubview(self.textLabel)
     }
 
     func makeConstraints() {
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
         self.textLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.greaterThanOrEqualTo(self.appearance.minHeight)
-
-            self.textLabelMaxWidthConstraint = make.width.lessThanOrEqualTo(Int.max).constraint
-            self.textLabelMaxWidthConstraint?.deactivate()
         }
     }
 }

@@ -25,7 +25,7 @@ enum FillBlanksQuiz {
     struct Component {
         let text: String
         let options: [String]
-        let blank: String?
+        var blank: String?
         let isBlankFillable: Bool
     }
 }
