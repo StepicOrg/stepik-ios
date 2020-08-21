@@ -6,16 +6,25 @@ extension FillBlanksInputCollectionViewCell {
         let height: CGFloat = 36
         let minWidth: CGFloat = 102
         let cornerRadius: CGFloat = 18
+        let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
     }
 }
 
 final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
     var appearance = Appearance()
 
-    private lazy var cellView: FillBlanksInputCellView = {
-        let view = FillBlanksInputCellView()
-        view.backgroundColor = .stepikVioletFixed
+    private lazy var inputContainerView: FillBlanksQuizInputContainerView = {
+        let view = FillBlanksQuizInputContainerView(
+            appearance: .init(contentInset: self.appearance.insets, cornerRadius: self.appearance.cornerRadius),
+            contentView: self.textField
+        )
         return view
+    }()
+
+    private lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        return textField
     }()
 
     private var cellViewMaxWidthConstraint: Constraint?
@@ -29,14 +38,7 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
-    var onInputChanged: ((String) -> Void)? {
-        get {
-            self.cellView.onInputChanged
-        }
-        set {
-            self.cellView.onInputChanged = newValue
-        }
-    }
+    var onInputChanged: ((String) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,14 +53,9 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.updateBorder()
-    }
-
-    private func updateBorder() {
-        self.layer.cornerRadius = self.appearance.cornerRadius
-        self.layer.masksToBounds = true
+    @objc
+    private func textFieldDidChange(_ sender: UITextField) {
+        self.onInputChanged?(sender.text ?? "")
     }
 }
 
@@ -68,7 +65,7 @@ extension FillBlanksInputCollectionViewCell: ProgrammaticallyInitializableViewPr
     }
 
     func addSubviews() {
-        self.contentView.addSubview(self.cellView)
+        self.contentView.addSubview(self.inputContainerView)
     }
 
     func makeConstraints() {
@@ -77,10 +74,10 @@ extension FillBlanksInputCollectionViewCell: ProgrammaticallyInitializableViewPr
             make.edges.equalToSuperview()
         }
 
-        self.cellView.translatesAutoresizingMaskIntoConstraints = false
-        self.cellView.snp.makeConstraints { make in
+        self.inputContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.inputContainerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.greaterThanOrEqualTo(self.appearance.height)
+            make.height.equalTo(self.appearance.height)
             make.width.greaterThanOrEqualTo(self.appearance.minWidth)
 
             self.cellViewMaxWidthConstraint = make.width.lessThanOrEqualTo(Int.max).constraint
