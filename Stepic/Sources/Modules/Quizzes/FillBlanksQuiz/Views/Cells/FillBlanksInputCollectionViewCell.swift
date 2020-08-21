@@ -4,9 +4,9 @@ import UIKit
 extension FillBlanksInputCollectionViewCell {
     struct Appearance {
         let height: CGFloat = 36
-        let minWidth: CGFloat = 102
+        let minWidth: CGFloat = 90
         let cornerRadius: CGFloat = 18
-        let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+        let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         let font = UIFont.systemFont(ofSize: 16)
     }
 }
@@ -16,8 +16,7 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
 
     private lazy var inputContainerView: FillBlanksQuizInputContainerView = {
         let view = FillBlanksQuizInputContainerView(
-            appearance: .init(contentInset: self.appearance.insets, cornerRadius: self.appearance.cornerRadius),
-            contentView: self.textField
+            appearance: .init(cornerRadius: self.appearance.cornerRadius)
         )
         return view
     }()
@@ -25,16 +24,22 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.font = self.appearance.font
+        textField.textAlignment = .center
         textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
+
+    var text: String? {
+        didSet {
+            self.textField.text = self.text
+        }
+    }
 
     var onInputChanged: ((String) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -62,18 +67,20 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
 }
 
 extension FillBlanksInputCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.contentView.isOpaque = true
-    }
-
     func addSubviews() {
         self.contentView.addSubview(self.inputContainerView)
+        self.inputContainerView.addSubview(self.textField)
     }
 
     func makeConstraints() {
         self.inputContainerView.translatesAutoresizingMaskIntoConstraints = false
         self.inputContainerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.textField.translatesAutoresizingMaskIntoConstraints = false
+        self.textField.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.insets)
         }
     }
 }

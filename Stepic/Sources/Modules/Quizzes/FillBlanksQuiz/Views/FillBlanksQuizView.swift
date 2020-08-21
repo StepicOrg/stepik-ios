@@ -145,6 +145,7 @@ extension FillBlanksQuizView: UICollectionViewDataSource, UICollectionViewDelega
         if component.isBlankFillable {
             if component.options.isEmpty {
                 let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.text = component.blank
                 cell.onInputChanged = { [weak self] text in
                     guard let strongSelf = self else {
                         return
@@ -161,13 +162,16 @@ extension FillBlanksQuizView: UICollectionViewDataSource, UICollectionViewDelega
                     }
                 }
                 return cell
+            } else {
+                let cell: FillBlanksSelectCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.text = component.blank
+                return cell
             }
+        } else {
+            let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.text = component.text
+            return cell
         }
-
-        let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.text = component.text
-
-        return cell
     }
 
     func collectionView(
@@ -191,15 +195,21 @@ extension FillBlanksQuizView: UICollectionViewDataSource, UICollectionViewDelega
                 )
                 print("FillBlanksInputCollectionViewCell size = \(size)")
                 return size
+            } else {
+                let size = FillBlanksSelectCollectionViewCell.calculatePreferredContentSize(
+                    string: component.blank ?? "",
+                    maxWidth: maxWidth
+                )
+                print("FillBlanksSelectCollectionViewCell size = \(size)")
+                return size
             }
+        } else {
+            let size = FillBlanksTextCollectionViewCell.calculatePreferredContentSize(
+                text: component.text,
+                maxWidth: maxWidth
+            )
+            print("FillBlanksTextCollectionViewCell size = \(size)")
+            return size
         }
-
-        let size = FillBlanksTextCollectionViewCell.calculatePreferredContentSize(
-            text: component.text,
-            maxWidth: maxWidth
-        )
-        print("FillBlanksTextCollectionViewCell size = \(size)")
-
-        return size
     }
 }

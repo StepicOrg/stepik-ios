@@ -3,7 +3,6 @@ import UIKit
 
 extension FillBlanksQuizInputContainerView {
     struct Appearance {
-        var contentInset = UIEdgeInsets.zero
         var cornerRadius: CGFloat = 18
         let borderWidth: CGFloat = 1
     }
@@ -20,21 +19,13 @@ final class FillBlanksQuizInputContainerView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        contentView: UIView
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         super.init(frame: frame)
 
         self.clipsToBounds = true
         self.layer.cornerRadius = self.appearance.cornerRadius
-
-        self.addSubview(contentView)
-
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(self.appearance.contentInset)
-        }
 
         self.updateState()
     }
