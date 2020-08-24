@@ -49,6 +49,10 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func becomeFirstResponder() -> Bool {
+        self.textField.becomeFirstResponder()
+    }
+
     @objc
     private func textFieldDidChange(_ sender: UITextField) {
         self.onInputChanged?(sender.text ?? "")
@@ -58,7 +62,7 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         let appearance = Appearance()
 
         let sizeOfString = appearance.font.sizeOfString(string: text, constrainedToWidth: Double(maxWidth))
-        let widthOfStringWithInsets = appearance.insets.left + sizeOfString.width + appearance.insets.right
+        let widthOfStringWithInsets = appearance.insets.left + sizeOfString.width.rounded(.up) + appearance.insets.right
 
         let width = max(appearance.minWidth, min(maxWidth, widthOfStringWithInsets))
 

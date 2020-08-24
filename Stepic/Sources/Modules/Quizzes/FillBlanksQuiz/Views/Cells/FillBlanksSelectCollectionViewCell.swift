@@ -47,6 +47,13 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
+    override var isHighlighted: Bool {
+        didSet {
+            self.textLabel.alpha = self.isHighlighted ? 0.5 : 1.0
+            self.imageView.alpha = self.isHighlighted ? 0.5 : 1.0
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -68,7 +75,7 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
             string: text,
             constrainedToWidth: Double(maxWidth)
         )
-        let widthOfStringWithInsets = appearance.textLabelInsets.left + round(sizeOfString.width)
+        let widthOfStringWithInsets = appearance.textLabelInsets.left + sizeOfString.width.rounded(.up)
 
         let width = max(appearance.minWidth, min(maxWidth, (widthOfStringWithInsets + widthOfIconWithInsets)))
 

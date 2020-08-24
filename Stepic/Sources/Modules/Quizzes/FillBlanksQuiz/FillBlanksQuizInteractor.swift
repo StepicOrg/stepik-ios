@@ -77,7 +77,9 @@ extension FillBlanksQuizInteractor: QuizInputProtocol {
         }
 
         guard let reply = reply else {
-            return self.initBlanks()
+            self.initBlanks()
+            self.updateReplyFromCurrentData()
+            return
         }
 
         self.moduleOutput?.update(reply: reply)

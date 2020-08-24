@@ -1,3 +1,4 @@
+import Presentr
 import UIKit
 
 protocol FillBlanksQuizViewControllerProtocol: AnyObject {
@@ -39,5 +40,31 @@ extension FillBlanksQuizViewController: FillBlanksQuizViewDelegate {
         forComponentWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType
     ) {
         self.interactor.doBlankUpdate(request: .init(uniqueIdentifier: uniqueIdentifier, blank: text))
+    }
+
+    func fillBlanksQuizViewDidRequestSelectOption(
+        _ view: FillBlanksQuizView,
+        currentOption: String,
+        availableOptions options: [String],
+        forComponentWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType
+    ) {
+        let pickerViewController = PickerViewController()
+        pickerViewController.data = options
+        pickerViewController.pickerTitle = NSLocalizedString("FillBlankOptionTitle", comment: "")
+        pickerViewController.initialSelectedData = currentOption
+        pickerViewController.selectedBlock = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            let option = pickerViewController.selectedData
+
+            strongSelf.interactor.doBlankUpdate(request: .init(uniqueIdentifier: uniqueIdentifier, blank: option))
+            strongSelf.fillBlanksQuizView?.selectOption(option, forComponentWithUniqueIdentifier: uniqueIdentifier)
+        }
+
+        let presentr = Presentr(presentationType: .bottomHalf)
+
+        self.customPresentViewController(presentr, viewController: pickerViewController, animated: true)
     }
 }

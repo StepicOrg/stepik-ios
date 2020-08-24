@@ -56,7 +56,11 @@ final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
         label.setTextWithHTMLString(text)
         label.sizeToFit()
 
-        return label.bounds.size
+        var size = label.bounds.size
+        size.width = size.width.rounded(.up)
+        size.height = size.height.rounded(.up)
+
+        return size
     }
 
     private static func makeTextLabel(appearance: Appearance = Appearance()) -> UILabel {
