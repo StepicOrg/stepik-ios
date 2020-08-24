@@ -468,6 +468,7 @@
 		2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2C3A035624AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035524AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift */; };
 		2C3A035924AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */; };
+		2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */; };
 		2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */; };
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
 		2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */; };
@@ -1878,6 +1879,7 @@
 		2C35C4D41F4DA471002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_m.plist; sourceTree = "<group>"; };
 		2C3A035524AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsSwitchView.swift; sourceTree = "<group>"; };
 		2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsTimeSelectionView.swift; sourceTree = "<group>"; };
+		2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksFeedback.swift; sourceTree = "<group>"; };
 		2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetworksView.swift; sourceTree = "<group>"; };
 		2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetwork.swift; sourceTree = "<group>"; };
@@ -5053,6 +5055,7 @@
 			isa = PBXGroup;
 			children = (
 				2C04BA4924072EA600D74D4B /* ChoiceSubmissionFeedback.swift */,
+				2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */,
 				2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */,
 				2C04BA4B24072EB600D74D4B /* SubmissionFeedback.swift */,
 			);
@@ -7901,6 +7904,7 @@
 				2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */,
 				2CCBDBE524AF93B8001A5A83 /* NewProfileDetailsViewModel.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
+				2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */,
 				0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,

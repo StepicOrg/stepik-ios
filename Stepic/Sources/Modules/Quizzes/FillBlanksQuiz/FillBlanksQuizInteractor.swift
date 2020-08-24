@@ -14,6 +14,24 @@ final class FillBlanksQuizInteractor: FillBlanksQuizInteractorProtocol {
     private var currentDataset: FillBlanksDataset?
 
     private var currentBlanks = [UniqueIdentifierType: String]()
+    private var currentFillBlanksFeedback = [UniqueIdentifierType: Bool]()
+
+    private var currentComponentsByUIDs: [UniqueIdentifierType: FillBlanksComponent] {
+        guard let currentDataset = self.currentDataset else {
+            return [:]
+        }
+
+        let componentsMap = currentDataset.components.enumerated()
+            .map { (self.getUIDByComponentIndex($0), $1) }
+
+        return Dictionary(uniqueKeysWithValues: componentsMap)
+    }
+    private var currentBlanksUIDs: [UniqueIdentifierType] {
+        self.currentComponentsByUIDs
+            .filter { $0.value.componentType.isBlankFillable }
+            .keys
+            .sorted { self.getIndexByComponentUID($0) < self.getIndexByComponentUID($1) }
+    }
 
     init(presenter: FillBlanksQuizPresenterProtocol) {
         self.presenter = presenter
@@ -33,11 +51,12 @@ final class FillBlanksQuizInteractor: FillBlanksQuizInteractorProtocol {
 
         let components = currentDataset.components.enumerated().map { index, component -> FillBlanksQuiz.Component in
             .init(
-                uniqueIdentifier: self.getUniqueIdentifierByComponentIndex(index),
+                uniqueIdentifier: self.getUIDByComponentIndex(index),
                 text: component.text,
                 options: component.options,
-                blank: self.currentBlanks[self.getUniqueIdentifierByComponentIndex(index)],
-                isBlankFillable: component.componentType.isBlankFillable
+                blank: self.currentBlanks[self.getUIDByComponentIndex(index)],
+                isBlankFillable: component.componentType.isBlankFillable,
+                isCorrect: self.currentFillBlanksFeedback[self.getUIDByComponentIndex(index)]
             )
         }
 
@@ -45,16 +64,15 @@ final class FillBlanksQuizInteractor: FillBlanksQuizInteractorProtocol {
     }
 
     private func updateReplyFromCurrentData() {
-        let blanks = self.currentBlanks.sorted {
-            self.getIndexByComponentUniqueIdentifier($0.key) < self.getIndexByComponentUniqueIdentifier($1.key)
-        }.map { $0.value }
-
+        let blanks = self.currentBlanks
+            .sorted { self.getIndexByComponentUID($0.key) < self.getIndexByComponentUID($1.key) }
+            .map { $0.value }
         self.moduleOutput?.update(reply: FillBlanksReply(blanks: blanks))
     }
 
-    private func getUniqueIdentifierByComponentIndex(_ index: Int) -> UniqueIdentifierType { "\(index)" }
+    private func getUIDByComponentIndex(_ index: Int) -> UniqueIdentifierType { "\(index)" }
 
-    private func getIndexByComponentUniqueIdentifier(_ uniqueIdentifier: UniqueIdentifierType) -> Int {
+    private func getIndexByComponentUID(_ uniqueIdentifier: UniqueIdentifierType) -> Int {
         Int(uniqueIdentifier).require()
     }
 }
@@ -69,7 +87,16 @@ extension FillBlanksQuizInteractor: QuizInputProtocol {
         self.initBlanks()
     }
 
-    func update(feedback: SubmissionFeedback?) {}
+    func update(feedback: SubmissionFeedback?) {
+        guard let fillBlanksFeedback = feedback as? FillBlanksFeedback else {
+            self.currentFillBlanksFeedback = [:]
+            return
+        }
+
+        for (feedback, uid) in zip(fillBlanksFeedback.blanksCorrectness, self.currentBlanksUIDs) {
+            self.currentFillBlanksFeedback[uid] = feedback
+        }
+    }
 
     func update(reply: Reply?) {
         defer {
@@ -88,16 +115,8 @@ extension FillBlanksQuizInteractor: QuizInputProtocol {
             fatalError("Unexpected reply type")
         }
 
-        guard let currentDataset = self.currentDataset else {
-            return
-        }
-
-        var blankIndex = 0
-
-        for (index, component) in currentDataset.components.enumerated() where component.componentType.isBlankFillable {
-            let blank = fillBlanksReply.blanks[safe: blankIndex] ?? ""
-            self.currentBlanks[self.getUniqueIdentifierByComponentIndex(index)] = blank
-            blankIndex += 1
+        for (blank, uid) in zip(fillBlanksReply.blanks, self.currentBlanksUIDs) {
+            self.currentBlanks[uid] = blank
         }
     }
 
@@ -110,13 +129,6 @@ extension FillBlanksQuizInteractor: QuizInputProtocol {
 
     private func initBlanks() {
         self.currentBlanks = [:]
-
-        guard let currentDataset = self.currentDataset else {
-            return
-        }
-
-        for (index, component) in currentDataset.components.enumerated() where component.componentType.isBlankFillable {
-            self.currentBlanks[self.getUniqueIdentifierByComponentIndex(index)] = ""
-        }
+        self.currentBlanksUIDs.forEach { self.currentBlanks[$0] = "" }
     }
 }

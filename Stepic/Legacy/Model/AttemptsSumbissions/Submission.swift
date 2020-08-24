@@ -153,6 +153,9 @@ final class Submission: JSONSerializable {
         if let _ = json[JSONKey.optionsFeedback.rawValue].arrayObject as? [String] {
             return ChoiceSubmissionFeedback(json: json)
         }
+        if let _ = json[JSONKey.blanksFeedback.rawValue].arrayObject as? [Bool] {
+            return FillBlanksFeedback(json: json)
+        }
         if let _ = json.string {
             return StringSubmissionFeedback(json: json)
         }
@@ -171,6 +174,7 @@ final class Submission: JSONSerializable {
         case feedback
         case time
         case optionsFeedback = "options_feedback"
+        case blanksFeedback = "blanks_feedback"
     }
 }
 

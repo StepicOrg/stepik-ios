@@ -43,6 +43,15 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
+    var state: FillBlanksQuizInputContainerView.State {
+        get {
+            self.inputContainerView.state
+        }
+        set {
+            self.inputContainerView.state = newValue
+        }
+    }
+
     var onInputChanged: ((String) -> Void)?
 
     override init(frame: CGRect) {

@@ -29,5 +29,6 @@ enum FillBlanksQuiz {
         let options: [String]
         var blank: String?
         let isBlankFillable: Bool
+        let isCorrect: Bool?
     }
 }

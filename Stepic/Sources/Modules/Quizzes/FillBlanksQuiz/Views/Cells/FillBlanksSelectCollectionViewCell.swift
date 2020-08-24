@@ -56,6 +56,15 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
+    var state: FillBlanksQuizInputContainerView.State {
+        get {
+            self.inputContainerView.state
+        }
+        set {
+            self.inputContainerView.state = newValue
+        }
+    }
+
     override var isHighlighted: Bool {
         didSet {
             self.textLabel.alpha = self.isHighlighted ? 0.5 : 1.0

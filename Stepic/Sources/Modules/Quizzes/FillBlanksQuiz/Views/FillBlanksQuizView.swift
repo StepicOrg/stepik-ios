@@ -66,8 +66,7 @@ final class FillBlanksQuizView: UIView {
         return collectionView
     }()
 
-    private var rows = [Row]()
-    private var quizState: FillBlanksQuizViewModel.State?
+    private var viewModel: FillBlanksQuizViewModel?
 
     override var intrinsicContentSize: CGSize {
         let collectionViewHeight = max(
@@ -98,22 +97,7 @@ final class FillBlanksQuizView: UIView {
     }
 
     func configure(viewModel: FillBlanksQuizViewModel) {
-        self.quizState = viewModel.finalState
-        self.rows = viewModel.components.map { component -> Row in
-            if component.isBlankFillable {
-                if component.options.isEmpty {
-                    return .input(text: component.blank ?? "", uniqueIdentifier: component.uniqueIdentifier)
-                } else {
-                    return .select(
-                        text: component.blank ?? "",
-                        options: component.options,
-                        uniqueIdentifier: component.uniqueIdentifier
-                    )
-                }
-            } else {
-                return .text(text: component.text)
-            }
-        }
+        self.viewModel = viewModel
 
         self.collectionView.dataSource = self
         self.collectionView.reloadData()
@@ -124,20 +108,13 @@ final class FillBlanksQuizView: UIView {
     }
 
     func selectOption(_ option: String, forComponentWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType) {
-        let selectedRowIndex = self.rows.firstIndex { row in
-            if case .select(_, _, let rowUniqueIdentifier) = row {
-                return rowUniqueIdentifier == uniqueIdentifier
-            }
-            return false
-        }
-
-        guard let index = selectedRowIndex else {
+        guard let index = self.viewModel?.components.firstIndex(
+            where: { $0.uniqueIdentifier == uniqueIdentifier }
+        ) else {
             return
         }
 
-        if case .select(_, let options, _) = self.rows[index] {
-            self.rows[index] = .select(text: option, options: options, uniqueIdentifier: uniqueIdentifier)
-        }
+        self.viewModel?.components[index].blank = option
 
         let indexPath = IndexPath(item: index, section: 0)
         if let cell = self.collectionView.cellForItem(at: indexPath) as? FillBlanksSelectCollectionViewCell {
@@ -159,10 +136,23 @@ final class FillBlanksQuizView: UIView {
         }
     }
 
+    private func componentForItemAt(_ indexPath: IndexPath) -> FillBlanksQuiz.Component {
+        self.viewModel.require().components[indexPath.row]
+    }
+
+    private func rowTypeForItemAt(_ indexPath: IndexPath) -> Row {
+        let component = self.viewModel.require().components[indexPath.row]
+        if component.isBlankFillable {
+            return component.options.isEmpty ? .input : .select
+        } else {
+            return .text
+        }
+    }
+
     private enum Row {
-        case text(text: String)
-        case input(text: String, uniqueIdentifier: UniqueIdentifierType)
-        case select(text: String, options: [String], uniqueIdentifier: UniqueIdentifierType)
+        case text
+        case input
+        case select
     }
 }
 
@@ -198,11 +188,11 @@ extension FillBlanksQuizView: ProgrammaticallyInitializableViewProtocol {
 
 extension FillBlanksQuizView: UICollectionViewDataSource {
     private var isInteractionsEnabled: Bool {
-        guard let quizState = self.quizState else {
+        guard let finalState = self.viewModel?.finalState else {
             return true
         }
 
-        if quizState == .correct || quizState == .evaluation {
+        if finalState == .correct || finalState == .evaluation {
             return false
         }
 
@@ -210,41 +200,53 @@ extension FillBlanksQuizView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.rows.count
+        self.viewModel?.components.count ?? 0
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        switch self.rows[indexPath.row] {
-        case .text(let text):
+        let component = self.componentForItemAt(indexPath)
+
+        let cellState: FillBlanksQuizInputContainerView.State = {
+            guard let isCorrect = component.isCorrect else {
+                return .default
+            }
+
+            return isCorrect ? .correct : .wrong
+        }()
+
+        switch self.rowTypeForItemAt(indexPath) {
+        case .text:
             let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.text = text
+            cell.text = component.text
             return cell
-        case .input(let text, let uniqueIdentifier):
+        case .input:
             let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.text = text
+            cell.text = component.blank ?? ""
             cell.isEnabled = self.isInteractionsEnabled
+            cell.state = cellState
             cell.onInputChanged = { [weak self] text in
                 guard let strongSelf = self else {
                     return
                 }
 
-                strongSelf.rows[indexPath.row] = .input(text: text, uniqueIdentifier: uniqueIdentifier)
+                strongSelf.viewModel?.components[indexPath.row].blank = text
                 strongSelf.invalidateLayout()
 
                 strongSelf.delegate?.fillBlanksQuizView(
                     strongSelf,
                     inputDidChange: text,
-                    forComponentWithUniqueIdentifier: uniqueIdentifier
+                    forComponentWithUniqueIdentifier: component.uniqueIdentifier
                 )
             }
             return cell
-        case .select(let text, _, _):
+        case .select:
             let cell: FillBlanksSelectCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.text = text
+            cell.text = component.blank ?? ""
             cell.isEnabled = self.isInteractionsEnabled
+            cell.state = cellState
             return cell
         }
     }
@@ -262,16 +264,24 @@ extension FillBlanksQuizView: UICollectionViewDelegateFlowLayout {
             - self.appearance.collectionViewSectionInset.left
             - self.appearance.collectionViewSectionInset.right
 
-        switch self.rows[indexPath.row] {
-        case .text(let text):
-            let size = FillBlanksTextCollectionViewCell.calculatePreferredContentSize(text: text, maxWidth: maxWidth)
-            return size
-        case .input(let text, _):
-            let size = FillBlanksInputCollectionViewCell.calculatePreferredContentSize(text: text, maxWidth: maxWidth)
-            return size
-        case .select(let text, _, _):
-            let size = FillBlanksSelectCollectionViewCell.calculatePreferredContentSize(text: text, maxWidth: maxWidth)
-            return size
+        let component = self.componentForItemAt(indexPath)
+
+        switch self.rowTypeForItemAt(indexPath) {
+        case .text:
+            return FillBlanksTextCollectionViewCell.calculatePreferredContentSize(
+                text: component.text,
+                maxWidth: maxWidth
+            )
+        case .input:
+            return FillBlanksInputCollectionViewCell.calculatePreferredContentSize(
+                text: component.blank ?? "",
+                maxWidth: maxWidth
+            )
+        case .select:
+            return FillBlanksSelectCollectionViewCell.calculatePreferredContentSize(
+                text: component.blank ?? "",
+                maxWidth: maxWidth
+            )
         }
     }
 
@@ -280,7 +290,7 @@ extension FillBlanksQuizView: UICollectionViewDelegateFlowLayout {
             return false
         }
 
-        switch self.rows[indexPath.row] {
+        switch self.rowTypeForItemAt(indexPath) {
         case .text:
             return false
         case .input, .select:
@@ -289,19 +299,20 @@ extension FillBlanksQuizView: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch self.rows[indexPath.row] {
+        switch self.rowTypeForItemAt(indexPath) {
         case .text:
             break
         case .input:
             if let cell = collectionView.cellForItem(at: indexPath) as? FillBlanksInputCollectionViewCell {
                 _ = cell.becomeFirstResponder()
             }
-        case .select(let text, let options, let uniqueIdentifier):
+        case .select:
+            let component = self.componentForItemAt(indexPath)
             self.delegate?.fillBlanksQuizViewDidRequestSelectOption(
                 self,
-                currentOption: text,
-                availableOptions: options,
-                forComponentWithUniqueIdentifier: uniqueIdentifier
+                currentOption: component.blank ?? "",
+                availableOptions: component.options,
+                forComponentWithUniqueIdentifier: component.uniqueIdentifier
             )
         }
     }
