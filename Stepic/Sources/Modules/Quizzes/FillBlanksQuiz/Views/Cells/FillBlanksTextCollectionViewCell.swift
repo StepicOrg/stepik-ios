@@ -4,6 +4,7 @@ import UIKit
 extension FillBlanksTextCollectionViewCell {
     struct Appearance {
         let font = UIFont.systemFont(ofSize: 16)
+        let textColor = UIColor.stepikPrimaryText
     }
 }
 
@@ -66,6 +67,7 @@ final class FillBlanksTextCollectionViewCell: UICollectionViewCell, Reusable {
     private static func makeTextLabel(appearance: Appearance = Appearance()) -> UILabel {
         let label = UILabel()
         label.font = appearance.font
+        label.textColor = appearance.textColor
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label

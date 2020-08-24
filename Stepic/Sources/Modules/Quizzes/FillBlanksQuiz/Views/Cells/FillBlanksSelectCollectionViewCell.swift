@@ -8,6 +8,7 @@ extension FillBlanksSelectCollectionViewCell {
 
         let textLabelInsets = LayoutInsets(left: 10, right: 8)
         let textLabelFont = UIFont.systemFont(ofSize: 16)
+        let textLabelTextColor = UIColor.stepikPrimaryText
 
         let iconSize = CGSize(width: 14, height: 8)
         let iconTintColor = UIColor.quizElementSelectedBorder
@@ -27,7 +28,8 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
 
     private lazy var textLabel: UILabel = {
         let label = UILabel()
-        label.font = appearance.textLabelFont
+        label.font = self.appearance.textLabelFont
+        label.textColor = self.appearance.textLabelTextColor
         label.numberOfLines = 1
         label.textAlignment = .center
         return label
@@ -44,6 +46,13 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
     var text: String? {
         didSet {
             self.textLabel.text = self.text
+        }
+    }
+
+    var isEnabled: Bool = true {
+        didSet {
+            self.isUserInteractionEnabled = self.isEnabled
+            self.imageView.alpha = self.isEnabled ? 1.0 : 0.5
         }
     }
 

@@ -67,6 +67,7 @@ final class FillBlanksQuizView: UIView {
     }()
 
     private var rows = [Row]()
+    private var quizState: FillBlanksQuizViewModel.State?
 
     override var intrinsicContentSize: CGSize {
         let collectionViewHeight = max(
@@ -97,6 +98,7 @@ final class FillBlanksQuizView: UIView {
     }
 
     func configure(viewModel: FillBlanksQuizViewModel) {
+        self.quizState = viewModel.finalState
         self.rows = viewModel.components.map { component -> Row in
             if component.isBlankFillable {
                 if component.options.isEmpty {
@@ -195,6 +197,18 @@ extension FillBlanksQuizView: ProgrammaticallyInitializableViewProtocol {
 // MARK: - FillBlanksQuizView: UICollectionViewDataSource -
 
 extension FillBlanksQuizView: UICollectionViewDataSource {
+    private var isInteractionsEnabled: Bool {
+        guard let quizState = self.quizState else {
+            return true
+        }
+
+        if quizState == .correct || quizState == .evaluation {
+            return false
+        }
+
+        return true
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.rows.count
     }
@@ -211,6 +225,7 @@ extension FillBlanksQuizView: UICollectionViewDataSource {
         case .input(let text, let uniqueIdentifier):
             let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.text = text
+            cell.isEnabled = self.isInteractionsEnabled
             cell.onInputChanged = { [weak self] text in
                 guard let strongSelf = self else {
                     return
@@ -229,6 +244,7 @@ extension FillBlanksQuizView: UICollectionViewDataSource {
         case .select(let text, _, _):
             let cell: FillBlanksSelectCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.text = text
+            cell.isEnabled = self.isInteractionsEnabled
             return cell
         }
     }
@@ -260,6 +276,10 @@ extension FillBlanksQuizView: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if !self.isInteractionsEnabled {
+            return false
+        }
+
         switch self.rows[indexPath.row] {
         case .text:
             return false

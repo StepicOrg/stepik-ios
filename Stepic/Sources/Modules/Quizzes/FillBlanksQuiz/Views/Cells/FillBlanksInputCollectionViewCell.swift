@@ -8,6 +8,7 @@ extension FillBlanksInputCollectionViewCell {
         let cornerRadius: CGFloat = 18
         let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         let font = UIFont.systemFont(ofSize: 16)
+        let textColor = UIColor.stepikPrimaryText
     }
 }
 
@@ -24,6 +25,7 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.font = self.appearance.font
+        textField.textColor = self.appearance.textColor
         textField.textAlignment = .center
         textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         return textField
@@ -32,6 +34,12 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
     var text: String? {
         didSet {
             self.textField.text = self.text
+        }
+    }
+
+    var isEnabled: Bool = true {
+        didSet {
+            self.isUserInteractionEnabled = self.isEnabled
         }
     }
 
