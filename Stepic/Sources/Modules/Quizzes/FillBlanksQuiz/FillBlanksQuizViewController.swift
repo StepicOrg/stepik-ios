@@ -22,11 +22,22 @@ final class FillBlanksQuizViewController: UIViewController {
     override func loadView() {
         let view = FillBlanksQuizView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 }
 
 extension FillBlanksQuizViewController: FillBlanksQuizViewControllerProtocol {
     func displayReply(viewModel: FillBlanksQuiz.ReplyLoad.ViewModel) {
         self.fillBlanksQuizView?.configure(viewModel: viewModel.data)
+    }
+}
+
+extension FillBlanksQuizViewController: FillBlanksQuizViewDelegate {
+    func fillBlanksQuizView(
+        _ view: FillBlanksQuizView,
+        inputDidChange text: String,
+        forComponentWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType
+    ) {
+        self.interactor.doBlankUpdate(request: .init(uniqueIdentifier: uniqueIdentifier, blank: text))
     }
 }

@@ -13,16 +13,18 @@ enum FillBlanksQuiz {
         }
     }
 
-    /// Convert data to reply
-    enum ReplyConvert {
+    /// Update reply by blank uniqueIdentifier
+    enum BlankUpdate {
         struct Request {
-            let blanks: [String]
+            let uniqueIdentifier: UniqueIdentifierType
+            var blank: String
         }
     }
 
     // MARK: - Common structs
 
-    struct Component {
+    struct Component: UniqueIdentifiable {
+        let uniqueIdentifier: UniqueIdentifierType
         let text: String
         let options: [String]
         var blank: String?

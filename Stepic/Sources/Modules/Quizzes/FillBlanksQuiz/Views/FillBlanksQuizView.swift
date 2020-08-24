@@ -1,6 +1,14 @@
 import SnapKit
 import UIKit
 
+protocol FillBlanksQuizViewDelegate: AnyObject {
+    func fillBlanksQuizView(
+        _ view: FillBlanksQuizView,
+        inputDidChange text: String,
+        forComponentWithUniqueIdentifier uniqueIdentifier: UniqueIdentifierType
+    )
+}
+
 extension FillBlanksQuizView {
     struct Appearance {
         let titleColor = UIColor.stepikPrimaryText
@@ -17,6 +25,8 @@ extension FillBlanksQuizView {
 }
 
 final class FillBlanksQuizView: UIView {
+    weak var delegate: FillBlanksQuizViewDelegate?
+
     let appearance: Appearance
 
     private lazy var titleLabel: UILabel = {
@@ -30,9 +40,15 @@ final class FillBlanksQuizView: UIView {
     }()
 
     private lazy var collectionView: UICollectionView = {
+        let collectionViewLayout = LeftAlignedCollectionViewFlowLayout()
+        collectionViewLayout.scrollDirection = .vertical
+        collectionViewLayout.minimumLineSpacing = self.appearance.collectionViewMinLineSpacing
+        collectionViewLayout.minimumInteritemSpacing = self.appearance.collectionViewMinInteritemSpacing
+        collectionViewLayout.sectionInset = self.appearance.collectionViewSectionInset
+
         let collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: self.makeCollectionViewLayout()
+            collectionViewLayout: collectionViewLayout
         )
         collectionView.delegate = self
         collectionView.backgroundColor = self.appearance.backgroundColor
@@ -40,10 +56,11 @@ final class FillBlanksQuizView: UIView {
         collectionView.register(cellClass: FillBlanksInputCollectionViewCell.self)
         collectionView.register(cellClass: FillBlanksSelectCollectionViewCell.self)
         collectionView.register(cellClass: FillBlanksTextCollectionViewCell.self)
+
         return collectionView
     }()
 
-    private var viewModel: FillBlanksQuizViewModel?
+    private var rows = [Row]()
 
     override var intrinsicContentSize: CGSize {
         let collectionViewHeight = max(
@@ -74,7 +91,17 @@ final class FillBlanksQuizView: UIView {
     }
 
     func configure(viewModel: FillBlanksQuizViewModel) {
-        self.viewModel = viewModel
+        self.rows = viewModel.components.map { component -> Row in
+            if component.isBlankFillable {
+                if component.options.isEmpty {
+                    return .input(text: component.blank ?? "", uniqueIdentifier: component.uniqueIdentifier)
+                } else {
+                    return .select(text: component.blank ?? "", options: component.options)
+                }
+            } else {
+                return .text(text: component.text)
+            }
+        }
 
         self.collectionView.dataSource = self
         self.collectionView.reloadData()
@@ -84,15 +111,14 @@ final class FillBlanksQuizView: UIView {
         }
     }
 
-    private func makeCollectionViewLayout() -> UICollectionViewLayout {
-        let flowLayout = LeftAlignedCollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = self.appearance.collectionViewMinLineSpacing
-        flowLayout.minimumInteritemSpacing = self.appearance.collectionViewMinInteritemSpacing
-        flowLayout.sectionInset = self.appearance.collectionViewSectionInset
-        return flowLayout
+    private enum Row {
+        case text(text: String)
+        case input(text: String, uniqueIdentifier: UniqueIdentifierType)
+        case select(text: String, options: [String])
     }
 }
+
+// MARK: - FillBlanksQuizView: ProgrammaticallyInitializableViewProtocol -
 
 extension FillBlanksQuizView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
@@ -117,59 +143,55 @@ extension FillBlanksQuizView: ProgrammaticallyInitializableViewProtocol {
             make.top.equalTo(self.titleLabel.snp.bottom)
             make.leading.bottom.trailing.equalToSuperview()
         }
-
-        let separatorView = UIView()
-        separatorView.backgroundColor = .stepikOpaqueSeparator
-        self.addSubview(separatorView)
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        separatorView.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(0.5)
-        }
     }
 }
 
+// MARK: - FillBlanksQuizView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout -
+
 extension FillBlanksQuizView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.viewModel?.components.count ?? 0
+        self.rows.count
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let component = self.viewModel?.components[safe: indexPath.row] else {
-            return UICollectionViewCell()
-        }
+        let row = self.rows[indexPath.row]
 
-        if component.isBlankFillable {
-            if component.options.isEmpty {
-                let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                cell.text = component.blank
-                cell.onInputChanged = { [weak self] text in
-                    guard let strongSelf = self else {
-                        return
-                    }
+        switch row {
+        case .text(let text):
+            let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.text = text
+            return cell
+        case .input(let text, let uniqueIdentifier):
+            let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.text = text
+            cell.onInputChanged = { [weak self] text in
+                guard let strongSelf = self else {
+                    return
+                }
 
-                    strongSelf.viewModel?.components[indexPath.row].blank = text
+                strongSelf.rows[indexPath.row] = .input(text: text, uniqueIdentifier: uniqueIdentifier)
 
-                    DispatchQueue.main.async {
-                        UIView.performWithoutAnimation {
-                            strongSelf.collectionView.collectionViewLayout.invalidateLayout()
-                            strongSelf.layoutIfNeeded()
-                            strongSelf.invalidateIntrinsicContentSize()
-                        }
+                DispatchQueue.main.async {
+                    UIView.performWithoutAnimation {
+                        strongSelf.collectionView.collectionViewLayout.invalidateLayout()
+                        strongSelf.layoutIfNeeded()
+                        strongSelf.invalidateIntrinsicContentSize()
                     }
                 }
-                return cell
-            } else {
-                let cell: FillBlanksSelectCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                cell.text = component.blank
-                return cell
+
+                strongSelf.delegate?.fillBlanksQuizView(
+                    strongSelf,
+                    inputDidChange: text,
+                    forComponentWithUniqueIdentifier: uniqueIdentifier
+                )
             }
-        } else {
-            let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-            cell.text = component.text
+            return cell
+        case .select(let text, _):
+            let cell: FillBlanksSelectCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+            cell.text = text
             return cell
         }
     }
@@ -179,36 +201,21 @@ extension FillBlanksQuizView: UICollectionViewDataSource, UICollectionViewDelega
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        guard let component = self.viewModel?.components[safe: indexPath.row] else {
-            return .zero
-        }
+        let row = self.rows[indexPath.row]
 
         let maxWidth = collectionView.bounds.width
             - self.appearance.collectionViewSectionInset.left
             - self.appearance.collectionViewSectionInset.right
 
-        if component.isBlankFillable {
-            if component.options.isEmpty {
-                let size = FillBlanksInputCollectionViewCell.calculatePreferredContentSize(
-                    string: component.blank ?? "",
-                    maxWidth: maxWidth
-                )
-                print("FillBlanksInputCollectionViewCell size = \(size)")
-                return size
-            } else {
-                let size = FillBlanksSelectCollectionViewCell.calculatePreferredContentSize(
-                    string: component.blank ?? "",
-                    maxWidth: maxWidth
-                )
-                print("FillBlanksSelectCollectionViewCell size = \(size)")
-                return size
-            }
-        } else {
-            let size = FillBlanksTextCollectionViewCell.calculatePreferredContentSize(
-                text: component.text,
-                maxWidth: maxWidth
-            )
-            print("FillBlanksTextCollectionViewCell size = \(size)")
+        switch row {
+        case .text(let text):
+            let size = FillBlanksTextCollectionViewCell.calculatePreferredContentSize(text: text, maxWidth: maxWidth)
+            return size
+        case .input(let text, _):
+            let size = FillBlanksInputCollectionViewCell.calculatePreferredContentSize(text: text, maxWidth: maxWidth)
+            return size
+        case .select(let text, _):
+            let size = FillBlanksSelectCollectionViewCell.calculatePreferredContentSize(text: text, maxWidth: maxWidth)
             return size
         }
     }

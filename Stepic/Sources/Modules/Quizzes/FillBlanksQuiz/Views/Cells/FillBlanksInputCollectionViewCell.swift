@@ -54,10 +54,10 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         self.onInputChanged?(sender.text ?? "")
     }
 
-    static func calculatePreferredContentSize(string: String, maxWidth: CGFloat) -> CGSize {
+    static func calculatePreferredContentSize(text: String, maxWidth: CGFloat) -> CGSize {
         let appearance = Appearance()
 
-        let sizeOfString = appearance.font.sizeOfString(string: string, constrainedToWidth: Double(maxWidth))
+        let sizeOfString = appearance.font.sizeOfString(string: text, constrainedToWidth: Double(maxWidth))
         let widthOfStringWithInsets = appearance.insets.left + sizeOfString.width + appearance.insets.right
 
         let width = max(appearance.minWidth, min(maxWidth, widthOfStringWithInsets))

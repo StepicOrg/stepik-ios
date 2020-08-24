@@ -59,13 +59,13 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    static func calculatePreferredContentSize(string: String, maxWidth: CGFloat) -> CGSize {
+    static func calculatePreferredContentSize(text: String, maxWidth: CGFloat) -> CGSize {
         let appearance = Appearance()
 
         let widthOfIconWithInsets = appearance.iconInsets.left + appearance.iconSize.width + appearance.iconInsets.right
 
         let sizeOfString = appearance.textLabelFont.sizeOfString(
-            string: string,
+            string: text,
             constrainedToWidth: Double(maxWidth)
         )
         let widthOfStringWithInsets = appearance.textLabelInsets.left + round(sizeOfString.width)
