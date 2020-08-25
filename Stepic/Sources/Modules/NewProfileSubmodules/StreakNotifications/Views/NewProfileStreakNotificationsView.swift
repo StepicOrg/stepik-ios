@@ -52,6 +52,10 @@ final class NewProfileStreakNotificationsView: UIView {
 
     private lazy var streakNotificationsFooterView = NewProfileStreakNotificationsFooterView()
 
+    var streakNotificationsSwitchTooltipAnchorView: UIView {
+        self.streakNotificationsSwitchView.streakNotificationsSwitchTooltipAnchorView
+    }
+
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)

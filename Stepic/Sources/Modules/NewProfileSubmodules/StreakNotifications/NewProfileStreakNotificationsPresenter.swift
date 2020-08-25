@@ -5,6 +5,7 @@ protocol NewProfileStreakNotificationsPresenterProtocol {
     func presentSelectStreakNotificationsTime(
         response: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.Response
     )
+    func presentTooltip(response: NewProfileStreakNotifications.TooltipAvailabilityCheck.Response)
 }
 
 final class NewProfileStreakNotificationsPresenter: NewProfileStreakNotificationsPresenterProtocol {
@@ -24,6 +25,12 @@ final class NewProfileStreakNotificationsPresenter: NewProfileStreakNotification
         self.viewController?.displaySelectStreakNotificationsTime(viewModel: .init(startHour: response.startHour))
     }
 
+    func presentTooltip(response: NewProfileStreakNotifications.TooltipAvailabilityCheck.Response) {
+        self.viewController?.displayTooltip(viewModel: .init(shouldShowTooltip: response.shouldShowTooltip))
+    }
+
+    // MARK: Private API
+    
     private func makeViewModel(
         isStreakNotificationsEnabled: Bool,
         streaksNotificationsStartHour: Int
