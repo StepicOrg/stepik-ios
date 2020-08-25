@@ -51,7 +51,8 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             StepDataFlow.QuizType.freeAnswer,
             StepDataFlow.QuizType.code,
             StepDataFlow.QuizType.sorting,
-            StepDataFlow.QuizType.matching
+            StepDataFlow.QuizType.matching,
+            StepDataFlow.QuizType.fillBlanks
         ].contains(StepDataFlow.QuizType(blockName: step.block.name))
 
         let isQuizCorrect = quizStatus?.isCorrect ?? false

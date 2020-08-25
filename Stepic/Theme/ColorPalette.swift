@@ -520,6 +520,8 @@ extension UIColor {
 
     // MARK: - Quizzes -
 
+    // MARK: Fill
+
     static var quizElementDefaultBackground: UIColor {
         .dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
     }
@@ -542,10 +544,25 @@ extension UIColor {
         )
     }
 
-    static var quizElementEvaluationBackground: UIColor {
+    static var quizElementSelectedBackground: UIColor {
         .dynamic(
             light: .stepikExtraLightVioletFixed,
             dark: UIColor.stepikExtraLightVioletFixed.withAlphaComponent(0.1)
+        )
+    }
+
+    // MARK: Border
+
+    static var quizElementDefaultBorder: UIColor { .stepikSeparator }
+
+    static var quizElementCorrectBorder: UIColor { UIColor.stepikGreen.withAlphaComponent(0.5) }
+
+    static var quizElementWrongBorder: UIColor { UIColor.stepikLightRed.withAlphaComponent(0.5) }
+
+    static var quizElementSelectedBorder: UIColor {
+        .dynamic(
+            light: UIColor.stepikVioletFixed.withAlphaComponent(0.5),
+            dark: UIColor.stepikExtraLightVioletFixed.withAlphaComponent(0.5)
         )
     }
 }

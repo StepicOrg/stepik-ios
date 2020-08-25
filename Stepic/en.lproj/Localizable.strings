@@ -907,6 +907,7 @@ MatchingQuizTitle = "Match two lists";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
 FreeAnswerQuizTitle = "Write an essay";
+FillBlanksQuizTitle = "Fill in the blanks";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 

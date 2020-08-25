@@ -130,6 +130,19 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.attempt).to(beNil())
                     expect(submission.feedback) == StringSubmissionFeedback(string: "Affected rows: 1")
                 }
+
+                it("successfully parses with fill blanks reply") {
+                    let json = JSON(parseJSON: ReplyType.fillBlanks.submissionJSONString)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.fillBlanks.rawValue)
+
+                    expect(submission.id) == 276062563
+                    expect(submission.statusString) == "wrong"
+                    expect(submission.hint) == ""
+                    expect(submission.reply as? FillBlanksReply) == FillBlanksReply(blanks: ["4", "5"])
+                    expect(submission.attemptID) == 264183878
+                    expect(submission.attempt).to(beNil())
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
+                }
             }
         }
     }
@@ -144,6 +157,7 @@ class SubmissionSpec: QuickSpec {
         case matching
         case code
         case sql
+        case fillBlanks
 
         var submissionJSONString: String {
             switch self {
@@ -292,6 +306,27 @@ class SubmissionSpec: QuickSpec {
                 return #"{"id": 163968205, "status": "correct", "score": 1.0, "hint": "", "feedback": {"message": "", "code_style": {"errors": [{"code": "W293", "text": "blank line contains whitespace", "line": "    ", "line_number": 1, "column_number": 0}, {"code": "W292", "text": "no newline at end of file", "line": "    main()", "line_number": 8, "column_number": 10}]}}, "time": "2020-01-28T08:27:44Z", "reply": {"code": "def main():\n    \n    a, b = map(int, input().split())\n    res = a + b\n    print(res)\n\n\nif __name__ == \"__main__\":\n    main()", "language": "python3"}, "reply_url": null, "attempt": 129167799, "session": null, "eta": 0}"#
             case .sql:
                 return #"{"id": 163702543, "status": "correct", "score": 1.0, "hint": "Affected rows: 1", "feedback": "Affected rows: 1", "time": "2020-01-27T10:00:50Z", "reply": {"solve_sql": "INSERT INTO users (name) VALUES ('Fluttershy');\n"}, "reply_url": null, "attempt": 145794719, "session": null, "eta": 0}"#
+            case .fillBlanks:
+                return """
+                {
+                  "id": 276062563,
+                  "status": "wrong",
+                  "score": 0.0,
+                  "hint": "",
+                  "feedback": "",
+                  "time": "2020-08-17T04:05:45Z",
+                  "reply": {
+                  "blanks": [
+                      "4",
+                      "5"
+                    ]
+                  },
+                  "reply_url": null,
+                  "attempt": 264183878,
+                  "session": null,
+                  "eta": 0
+                }
+                """
             }
         }
     }

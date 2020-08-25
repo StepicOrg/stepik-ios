@@ -31,6 +31,53 @@ class DatasetSpec: QuickSpec {
                     expect(unarchivedChoiceDataset.options) == ["502","5002","520","52"]
                 }
 
+                it("fill blanks dataset encoded and decoded") {
+                    // Given
+                    let jsonString = #"""
+      {
+        "components": [
+          {
+            "type": "text",
+            "text": "<strong>2 + 2</strong> =",
+            "options": []
+          },
+          {
+            "type": "input",
+            "text": "",
+            "options": []
+          },
+          {
+            "type": "text",
+            "text": "3 + 3 =",
+            "options": []
+          },
+          {
+            "type": "select",
+            "text": "",
+            "options": [
+              "4",
+              "5",
+              "6"
+            ]
+          }
+        ]
+      }
+"""#
+                    let json = JSON(parseJSON: jsonString)
+                    let fillBlanksDataset = FillBlanksDataset(json: json)
+
+                    let path = makeTemporaryPath(name: "fill-blanks-dataset")
+
+                    // When
+                    NSKeyedArchiver.archiveRootObject(fillBlanksDataset, toFile: path)
+
+                    let unarchivedDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FillBlanksDataset
+
+                    // Then
+                    expect(unarchivedDataset) == fillBlanksDataset
+                    expect(unarchivedDataset.components.count) == 4
+                }
+
                 it("string dataset encoded and decoded") {
                     // Given
                     let json = JSON(parseJSON: #"{"dataset": "string value"}"#)

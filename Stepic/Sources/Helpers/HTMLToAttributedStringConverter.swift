@@ -38,7 +38,7 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
     init(
         font: UIFont,
         tagStyles: [Style] = [],
-        tagTransformers: [TagTransformer] = HTMLToAttributedStringConverter.defaultTagTransformers
+        tagTransformers: [TagTransformer] = []
     ) {
         let defaultStyles = Self.defaultTagStyles(fontSize: font.pointSize)
         let finalStyles = tagStyles.isEmpty

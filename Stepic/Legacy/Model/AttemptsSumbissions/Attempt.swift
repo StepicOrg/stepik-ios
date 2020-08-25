@@ -82,16 +82,22 @@ final class Attempt: JSONSerializable {
     }
 
     private func getDatasetFromJSON(_ json: JSON, stepBlockName: String) -> Dataset? {
-        switch stepBlockName {
-        case "choice":
+        guard let blockType = Block.BlockType(rawValue: stepBlockName) else {
+            return nil
+        }
+
+        switch blockType {
+        case .choice:
             return ChoiceDataset(json: json)
-        case "math", "string", "number", "code", "sql":
+        case .math, .string, .number, .code, .sql:
             return StringDataset(json: json)
-        case "sorting":
+        case .sorting:
             return SortingDataset(json: json)
-        case "free-answer":
+        case .fillBlanks:
+            return FillBlanksDataset(json: json)
+        case .freeAnswer:
             return FreeAnswerDataset(json: json)
-        case "matching":
+        case .matching:
             return MatchingDataset(json: json)
         default:
             return nil

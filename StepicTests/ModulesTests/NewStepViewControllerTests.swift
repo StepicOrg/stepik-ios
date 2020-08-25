@@ -169,6 +169,7 @@ class NewStepViewControllerSpec: QuickSpec {
                 ("sorting", .sorting),
                 ("sql", .sql),
                 ("string", .string),
+                ("fill-blanks", .fillBlanks),
                 ("animation", .unknown(blockName: "animation")),
                 ("chemical", .unknown(blockName: "chemical")),
                 ("dataset", .unknown(blockName: "dataset")),
@@ -178,7 +179,6 @@ class NewStepViewControllerSpec: QuickSpec {
                 ("admin", .unknown(blockName: "admin")),
                 ("table", .unknown(blockName: "table")),
                 ("html", .unknown(blockName: "html")),
-                ("fill-blanks", .unknown(blockName: "fill-blanks")),
                 ("random-tasks", .unknown(blockName: "random-tasks")),
                 ("schulte", .unknown(blockName: "schulte")),
                 ("manual-score", .unknown(blockName: "manual-score"))

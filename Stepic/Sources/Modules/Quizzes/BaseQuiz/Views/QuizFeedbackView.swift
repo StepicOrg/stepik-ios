@@ -167,7 +167,7 @@ final class QuizFeedbackView: UIView {
             case .wrong:
                 return .quizElementWrongBackground
             default:
-                return .quizElementEvaluationBackground
+                return .quizElementSelectedBackground
             }
         }
 
