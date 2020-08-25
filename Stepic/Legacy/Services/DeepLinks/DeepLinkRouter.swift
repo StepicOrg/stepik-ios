@@ -291,16 +291,8 @@ final class DeepLinkRouter {
     }
 
     static func routeToProfileWithId(_ userId: Int, completion: @escaping ([UIViewController]) -> Void) {
-        guard let viewController = ControllerHelper.instantiateViewController(
-            identifier: "ProfileViewController",
-            storyboardName: "Profile"
-        ) as? ProfileViewController else {
-            completion([])
-            return
-        }
-
-        viewController.otherUserId = userId
-        completion([viewController])
+        let assembly = NewProfileAssembly(otherUserID: userId)
+        completion([assembly.makeModule()])
     }
 
     static func routeToCertificates(userID: User.IdType, completion: @escaping ([UIViewController]) -> Void) {

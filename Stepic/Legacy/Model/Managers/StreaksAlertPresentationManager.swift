@@ -101,11 +101,7 @@ final class StreaksAlertPresentationManager {
         }
     }
 
-    private func didChooseTime() {
-        if let controller = controller as? ProfileViewController {
-            controller.onAppear()
-        }
-    }
+    private func didChooseTime() {}
 
     private func selectStreakNotificationTime() {
         guard let controller = controller else {
