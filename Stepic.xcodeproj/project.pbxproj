@@ -988,6 +988,7 @@
 		62E9869C4E9F0A5B30173F4C /* DiscussionsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981FA0CC263C026776706 /* DiscussionsTableViewDataSource.swift */; };
 		62E986AB8C08F56B64F290B4 /* EditStepProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CDB6EC3F8439489BB46 /* EditStepProvider.swift */; };
 		62E986AC29BB70A1DDBDBCC0 /* WriteCommentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B7734831A4731CF7E23 /* WriteCommentProvider.swift */; };
+		62E986C7853C6DB8193E436D /* FillBlanksQuizCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987BF5BF6A1D2ADE3CD64 /* FillBlanksQuizCollectionViewAdapter.swift */; };
 		62E986C9651DF1D7C368A0C0 /* DownloadsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986EE34876E81E6B0B651 /* DownloadsCellView.swift */; };
 		62E986D61FF5B6B4692F3D7F /* StepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983510CCCDA094D4780B8 /* StepViewModel.swift */; };
 		62E986E5921381881E25B9BD /* SettingsDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9824107A9DDA9A94CCC1B /* SettingsDataFlow.swift */; };
@@ -2475,6 +2476,7 @@
 		62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
 		62E987BE70EFAEF1B4888948 /* CourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		62E987BF2C51E1DD4C703310 /* CourseInfoTabInfoInstructorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoInstructorView.swift; sourceTree = "<group>"; };
+		62E987BF5BF6A1D2ADE3CD64 /* FillBlanksQuizCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		62E987EB7E481DC45B5C409E /* CourseListOutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListOutputProtocol.swift; sourceTree = "<group>"; };
 		62E987EE9197B2974C990D4A /* ContentLanguageSwitchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchViewModel.swift; sourceTree = "<group>"; };
 		62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderInfoView.xib; sourceTree = "<group>"; };
@@ -3361,6 +3363,7 @@
 		2C73719024EBA7E000ED24C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				62E987BF5BF6A1D2ADE3CD64 /* FillBlanksQuizCollectionViewAdapter.swift */,
 				2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */,
 				079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */,
 				2C73719724EBFFB200ED24C3 /* Cells */,
@@ -8998,6 +9001,7 @@
 				38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */,
 				F3E3754E1307F57F39624528 /* FillBlanksQuizViewController.swift in Sources */,
 				62E98841F5904735D7F003CA /* FillBlanksReply.swift in Sources */,
+				62E986C7853C6DB8193E436D /* FillBlanksQuizCollectionViewAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
