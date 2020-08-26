@@ -4,6 +4,7 @@ protocol TooltipStorageManagerProtocol: AnyObject {
     var didShowOnHomeContinueLearning: Bool { get set }
     var didShowOnPersonalDeadlinesButton: Bool { get set }
     var didShowOnFullscreenCodeQuizTabRun: Bool { get set }
+    var didShowOnProfileStreakNotificationsSwitch: Bool { get set }
 }
 
 @available(*, deprecated, message: "Code for backward compatibility")
@@ -32,6 +33,15 @@ final class TooltipStorageManager: TooltipStorageManagerProtocol {
         }
         set {
             TooltipDefaultsManager.shared.didShowOnFullscreenCodeQuizTabRun = newValue
+        }
+    }
+
+    var didShowOnProfileStreakNotificationsSwitch: Bool {
+        get {
+            TooltipDefaultsManager.shared.didShowOnStreaksSwitchInProfile
+        }
+        set {
+            TooltipDefaultsManager.shared.didShowOnStreaksSwitchInProfile = newValue
         }
     }
 

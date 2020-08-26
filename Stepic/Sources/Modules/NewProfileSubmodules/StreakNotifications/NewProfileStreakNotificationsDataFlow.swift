@@ -34,4 +34,17 @@ enum NewProfileStreakNotifications {
             let startHour: Int
         }
     }
+
+    /// Check for tooltip
+    enum TooltipAvailabilityCheck {
+        struct Request {}
+
+        struct Response {
+            let shouldShowTooltip: Bool
+        }
+
+        struct ViewModel {
+            let shouldShowTooltip: Bool
+        }
+    }
 }

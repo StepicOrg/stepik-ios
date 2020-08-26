@@ -173,7 +173,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
         let quizController: UIViewController? = {
             switch quizType {
-            case .string, .number, .math, .freeAnswer, .choice, .code, .sql, .sorting, .matching:
+            case .string, .number, .math, .fillBlanks, .freeAnswer, .choice, .code, .sql, .sorting, .matching:
                 let assembly = BaseQuizAssembly(
                     step: viewModel.step,
                     hasNextStep: self.canNavigateToNextStep,

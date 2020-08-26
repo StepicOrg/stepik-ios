@@ -14,6 +14,8 @@ final class QuizAssemblyFactory {
             return NewStringQuizAssembly(type: .number)
         case .math:
             return NewStringQuizAssembly(type: .math)
+        case .fillBlanks:
+            return FillBlanksQuizAssembly()
         case .freeAnswer:
             return NewFreeAnswerQuizAssembly()
         case .choice:

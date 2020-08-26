@@ -6,6 +6,7 @@ protocol NewProfileStreakNotificationsViewControllerProtocol: AnyObject {
     func displaySelectStreakNotificationsTime(
         viewModel: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.ViewModel
     )
+    func displayTooltip(viewModel: NewProfileStreakNotifications.TooltipAvailabilityCheck.ViewModel)
 }
 
 final class NewProfileStreakNotificationsViewController: UIViewController {
@@ -14,6 +15,7 @@ final class NewProfileStreakNotificationsViewController: UIViewController {
     var newProfileStreakNotificationsView: NewProfileStreakNotificationsView? {
         self.view as? NewProfileStreakNotificationsView
     }
+    private lazy var streaksTooltip = TooltipFactory.streaksTooltip
 
     init(interactor: NewProfileStreakNotificationsInteractorProtocol) {
         self.interactor = interactor
@@ -35,11 +37,17 @@ final class NewProfileStreakNotificationsViewController: UIViewController {
         super.viewDidLoad()
         self.interactor.doStreakNotificationsLoad(request: .init())
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.streaksTooltip.dismiss()
+    }
 }
 
 extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificationsViewControllerProtocol {
     func displayStreakNotifications(viewModel: NewProfileStreakNotifications.StreakNotificationsLoad.ViewModel) {
         self.newProfileStreakNotificationsView?.configure(viewModel: viewModel.viewModel)
+        self.interactor.doTooltipAvailabilityCheck(request: .init())
     }
 
     func displaySelectStreakNotificationsTime(
@@ -56,6 +64,29 @@ extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificat
         let presentr = Presentr(presentationType: .bottomHalf)
         self.customPresentViewController(presentr, viewController: viewController, animated: true, completion: nil)
     }
+
+    func displayTooltip(viewModel: NewProfileStreakNotifications.TooltipAvailabilityCheck.ViewModel) {
+        guard viewModel.shouldShowTooltip else {
+            return
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self,
+                  let streakNotificationsView = strongSelf.newProfileStreakNotificationsView else {
+                return
+            }
+
+            // Cause anchor should be in true position
+            streakNotificationsView.setNeedsLayout()
+            streakNotificationsView.layoutIfNeeded()
+
+            strongSelf.streaksTooltip.show(
+                direction: .up,
+                in: streakNotificationsView,
+                from: streakNotificationsView.streakNotificationsSwitchTooltipAnchorView
+            )
+        }
+    }
 }
 
 extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificationsViewDelegate {
@@ -63,6 +94,7 @@ extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificat
         _ view: NewProfileStreakNotificationsView,
         didChangeStreakNotificationsPreference isOn: Bool
     ) {
+        self.streaksTooltip.dismiss()
         self.interactor.doStreakNotificationsPreferenceUpdate(request: .init(isOn: isOn))
     }
 

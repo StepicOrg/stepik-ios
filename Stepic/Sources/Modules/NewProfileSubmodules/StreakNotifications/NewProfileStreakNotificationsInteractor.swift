@@ -9,6 +9,7 @@ protocol NewProfileStreakNotificationsInteractorProtocol {
     func doSelectStreakNotificationsTimePresentation(
         request: NewProfileStreakNotifications.SelectStreakNotificationsTimePresentation.Request
     )
+    func doTooltipAvailabilityCheck(request: NewProfileStreakNotifications.TooltipAvailabilityCheck.Request)
 }
 
 final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificationsInteractorProtocol {
@@ -16,6 +17,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
     private let streakNotificationsStorageManager: StreakNotificationsStorageManagerProtocol
     private let notificationsService: NotificationsService
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    private let tooltipStorageManager: TooltipStorageManagerProtocol
     private let analyticsUserProperties: AnalyticsUserProperties
     private let analytics: Analytics
 
@@ -27,6 +29,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
             presenter: NotificationsRequestOnlySettingsAlertPresenter(context: .streak),
             analytics: .init(source: .streakControl)
         ),
+        tooltipStorageManager: TooltipStorageManagerProtocol,
         analyticsUserProperties: AnalyticsUserProperties = AnalyticsUserProperties.shared,
         analytics: Analytics = StepikAnalytics.shared
     ) {
@@ -34,6 +37,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
         self.streakNotificationsStorageManager = streakNotificationsStorageManager
         self.notificationsService = notificationsService
         self.notificationsRegistrationService = notificationsRegistrationService
+        self.tooltipStorageManager = tooltipStorageManager
         self.analyticsUserProperties = analyticsUserProperties
         self.analytics = analytics
 
@@ -73,6 +77,13 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
         self.presenter.presentSelectStreakNotificationsTime(response: .init(startHour: startHour))
     }
 
+    func doTooltipAvailabilityCheck(request: NewProfileStreakNotifications.TooltipAvailabilityCheck.Request) {
+        let shouldShowTooltip = !self.tooltipStorageManager.didShowOnProfileStreakNotificationsSwitch
+            && !self.streakNotificationsStorageManager.isStreakNotificationsEnabled
+        self.tooltipStorageManager.didShowOnProfileStreakNotificationsSwitch = true
+        self.presenter.presentTooltip(response: .init(shouldShowTooltip: shouldShowTooltip))
+    }
+    
     // MARK: Private API
 
     private func presentStreakNotifications(isStreakNotificationsEnabled: Bool? = nil) {

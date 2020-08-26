@@ -22,8 +22,13 @@ class PickerViewController: UIViewController {
 
     var data: [String] = []
 
+    var initialSelectedData: String?
     var selectedData: String {
         self.data[self.picker.selectedRow(inComponent: 0)]
+    }
+
+    convenience init() {
+        self.init(nibName: "PickerViewController", bundle: nil)
     }
 
     override func viewDidLoad() {
@@ -31,6 +36,11 @@ class PickerViewController: UIViewController {
 
         self.picker.dataSource = self
         self.picker.delegate = self
+
+        if let initialSelectedData = self.initialSelectedData,
+           let rowIndex = self.data.firstIndex(of: initialSelectedData) {
+            self.picker.selectRow(rowIndex, inComponent: 0, animated: false)
+        }
 
         self.titleLabel.text = pickerTitle
 

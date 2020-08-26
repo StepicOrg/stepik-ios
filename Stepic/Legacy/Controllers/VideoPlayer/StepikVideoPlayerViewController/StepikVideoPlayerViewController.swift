@@ -241,7 +241,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
         self.scheduleHidePlayerControlsTimer()
 
-        if TooltipDefaultsManager.shared.shouldShowInVideoPlayer {
+        if !TooltipDefaultsManager.shared.didShowInVideoPlayer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.videoInBackgroundTooltip = TooltipFactory.videoInBackground
                 self.videoInBackgroundTooltip?.show(

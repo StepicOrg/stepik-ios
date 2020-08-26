@@ -91,24 +91,4 @@ final class TooltipDefaultsManager {
              defaults.value(forKey: didShowOnFullscreenCodeQuizTabRunKey) as? Bool ?? false
         }
     }
-
-    var shouldShowOnHomeContinueLearning: Bool {
-        !self.didShowOnHomeContinueLearning
-    }
-
-    var shouldShowLessonDownloadsTooltip: Bool {
-        !self.didShowOnLessonDownloads
-    }
-
-    var shouldShowOnStreaksSwitchInProfile: Bool {
-        !self.didShowOnStreaksSwitchInProfile
-    }
-
-    var shouldShowInVideoPlayer: Bool {
-        !self.didShowInVideoPlayer
-    }
-
-    var shouldShowForCodeEditor: Bool {
-        !self.didShowForCodeEditor
-    }
 }

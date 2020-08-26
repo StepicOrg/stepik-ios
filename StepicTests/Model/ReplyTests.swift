@@ -166,6 +166,23 @@ class ReplySpec: QuickSpec {
                     expect(unarchivedSQLReply) == sqlReply
                     expect(unarchivedSQLReply.code) == "INSERT INTO users (name) VALUES ('Fluttershy');\n"
                 }
+
+                it("fill blanks reply encoded and decoded") {
+                    // Given
+                    let json = JSON(parseJSON: #"{"blanks": ["4", "5"]}"#)
+                    let fillBlanksReply = FillBlanksReply(json: json)
+
+                    let path = makeTemporaryPath(name: "fill-blanks-reply")
+
+                    // When
+                    NSKeyedArchiver.archiveRootObject(fillBlanksReply, toFile: path)
+
+                    let unarchivedReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FillBlanksReply
+
+                    // Then
+                    expect(unarchivedReply) == fillBlanksReply
+                    expect(unarchivedReply.blanks) == ["4", "5"]
+                }
             }
         }
     }

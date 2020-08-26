@@ -32,6 +32,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
     private let interactor: NewProfileInteractorProtocol
     private var state: NewProfile.ViewControllerState
 
+    private let analytics: Analytics
+
     private var submodules: [Submodule] = []
 
     private lazy var settingsButton = UIBarButtonItem.stepikSettingsBarButtonItem(
@@ -54,10 +56,12 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     init(
         interactor: NewProfileInteractorProtocol,
-        initialState: NewProfile.ViewControllerState = .loading
+        initialState: NewProfile.ViewControllerState = .loading,
+        analytics: Analytics
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.analytics = analytics
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -85,6 +89,15 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         super.viewDidAppear(animated)
 
         self.interactor.doOnlineModeReset(request: .init())
+
+        switch self.state {
+        case .loading, .error:
+            break
+        case .anonymous:
+            self.analytics.send(.profileScreenOpened(state: .anonymous))
+        case .result(let data):
+            self.analytics.send(.profileScreenOpened(state: data.isCurrentUserProfile ? .`self` : .other))
+        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -130,6 +143,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     @objc
     private func settingsButtonClicked() {
+        self.analytics.send(.profileOpenSettingsTapped)
+
         let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
         let assembly = SettingsAssembly(

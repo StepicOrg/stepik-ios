@@ -119,24 +119,30 @@ final class Submission: JSONSerializable {
     }
 
     private func getReplyFromJSON(_ json: JSON, stepBlockName: String) -> Reply? {
-        switch stepBlockName {
-        case "choice":
+        guard let blockType = Block.BlockType(rawValue: stepBlockName) else {
+            return nil
+        }
+
+        switch blockType {
+        case .choice:
             return ChoiceReply(json: json)
-        case "string":
+        case .string:
             return TextReply(json: json)
-        case "number":
+        case .number:
             return NumberReply(json: json)
-        case "free-answer":
+        case .fillBlanks:
+            return FillBlanksReply(json: json)
+        case .freeAnswer:
             return FreeAnswerReply(json: json)
-        case "math":
+        case .math:
             return MathReply(json: json)
-        case "sorting":
+        case .sorting:
             return SortingReply(json: json)
-        case "matching":
+        case .matching:
             return MatchingReply(json: json)
-        case "code":
+        case .code:
             return CodeReply(json: json)
-        case "sql":
+        case .sql:
             return SQLReply(json: json)
         default:
             return nil
@@ -146,6 +152,9 @@ final class Submission: JSONSerializable {
     private func getFeedbackFromJSON(_ json: JSON) -> SubmissionFeedback? {
         if let _ = json[JSONKey.optionsFeedback.rawValue].arrayObject as? [String] {
             return ChoiceSubmissionFeedback(json: json)
+        }
+        if let _ = json[JSONKey.blanksFeedback.rawValue].arrayObject as? [Bool] {
+            return FillBlanksFeedback(json: json)
         }
         if let _ = json.string {
             return StringSubmissionFeedback(json: json)
@@ -165,6 +174,7 @@ final class Submission: JSONSerializable {
         case feedback
         case time
         case optionsFeedback = "options_feedback"
+        case blanksFeedback = "blanks_feedback"
     }
 }
 

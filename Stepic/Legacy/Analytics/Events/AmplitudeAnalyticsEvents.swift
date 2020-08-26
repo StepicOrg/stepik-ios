@@ -375,13 +375,19 @@ extension AnalyticsEvent {
 
     // MARK: - Profile -
 
-    static func profileScreenOpened(state: String) -> AmplitudeAnalyticsEvent {
+    static func profileScreenOpened(state: ProfileScreenOpenState) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Profile screen opened",
             parameters: [
-                "state": state
+                "state": state.rawValue
             ]
         )
+    }
+
+    enum ProfileScreenOpenState: String {
+        case anonymous
+        case `self`
+        case other
     }
 
     // MARK: - Profile Edit -

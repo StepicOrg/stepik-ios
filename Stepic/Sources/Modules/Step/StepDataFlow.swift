@@ -217,6 +217,7 @@ enum StepDataFlow {
         case choice
         case string
         case number
+        case fillBlanks
         case freeAnswer
         case math
         case sorting
@@ -233,6 +234,8 @@ enum StepDataFlow {
                 self = .string
             case "number":
                 self = .number
+            case "fill-blanks":
+                self = .fillBlanks
             case "free-answer":
                 self = .freeAnswer
             case "math":
@@ -258,6 +261,8 @@ enum StepDataFlow {
                 return "string"
             case .number:
                 return "number"
+            case .fillBlanks:
+                return "fill-blanks"
             case .freeAnswer:
                 return "free-answer"
             case .math:
@@ -277,8 +282,8 @@ enum StepDataFlow {
 
         static func == (lhs: QuizType, rhs: QuizType) -> Bool {
             switch (lhs, rhs) {
-            case (.choice, .choice), (.string, .string), (.number, .number), (.math, .math), (.freeAnswer, .freeAnswer),
-                 (.sorting, .sorting), (.matching, .matching), (.code, .code), (.sql, .sql):
+            case (.choice, .choice), (.string, .string), (.number, .number), (.math, .math), (.fillBlanks, .fillBlanks),
+                 (.freeAnswer, .freeAnswer), (.sorting, .sorting), (.matching, .matching), (.code, .code), (.sql, .sql):
                 return true
             case (.unknown(let lhsName), .unknown(let rhsName)):
                 return lhsName == rhsName
