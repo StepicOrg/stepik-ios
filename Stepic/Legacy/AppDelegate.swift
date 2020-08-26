@@ -325,7 +325,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func checkNotificationsCount() {
         guard AuthInfo.shared.isAuthorized else {
-            return
+            return NotificationsBadgesManager.shared.set(number: 0)
         }
 
         ApiDataDownloader.notificationsStatusAPI.retrieve().done { result in
