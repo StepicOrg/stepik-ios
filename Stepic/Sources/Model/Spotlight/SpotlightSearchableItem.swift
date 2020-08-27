@@ -21,6 +21,7 @@ extension SpotlightSearchableItem {
 
 final class CourseSpotlightSearchableItem: SpotlightSearchableItem {
     private let course: Course
+    private let urlFactory: StepikURLFactory
 
     var uniqueIdentifier: UniqueIdentifierType {
         DeepLinkRoute.course(courseID: self.course.id).path
@@ -34,7 +35,7 @@ final class CourseSpotlightSearchableItem: SpotlightSearchableItem {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContent as String)
         attributeSet.title = self.course.title
         attributeSet.contentDescription = self.course.summary
-        attributeSet.url = URL(string: "\(StepikApplicationsInfo.stepikURL)/\(self.course.id)")
+        attributeSet.url = self.urlFactory.makeCourse(id: self.course.id)
 
         // Load cached course cover image data
         if let coverURL = URL(string: self.course.coverURLString) {
@@ -45,7 +46,8 @@ final class CourseSpotlightSearchableItem: SpotlightSearchableItem {
         return attributeSet
     }
 
-    init(course: Course) {
+    init(course: Course, urlFactory: StepikURLFactory = StepikURLFactory()) {
         self.course = course
+        self.urlFactory = urlFactory
     }
 }

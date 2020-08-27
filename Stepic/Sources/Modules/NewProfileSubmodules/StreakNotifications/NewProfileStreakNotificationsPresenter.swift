@@ -30,7 +30,7 @@ final class NewProfileStreakNotificationsPresenter: NewProfileStreakNotification
     }
 
     // MARK: Private API
-    
+
     private func makeViewModel(
         isStreakNotificationsEnabled: Bool,
         streaksNotificationsStartHour: Int

@@ -21,14 +21,12 @@ final class QuizPresenter {
     private let userActivitiesAPI: UserActivitiesAPI
     private var streaksNotificationSuggestionManager: NotificationSuggestionManager?
 
+    private let urlFactory: StepikURLFactory
+
     var state: QuizState = .nothing {
         didSet {
             view?.set(state: state)
         }
-    }
-
-    var stepUrl: String {
-        "\(StepikApplicationsInfo.stepikURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
     }
 
     init(
@@ -38,7 +36,8 @@ final class QuizPresenter {
         alwaysCreateNewAttemptOnRefresh: Bool,
         submissionsAPI: SubmissionsAPI,
         attemptsAPI: AttemptsAPI,
-        userActivitiesAPI: UserActivitiesAPI
+        userActivitiesAPI: UserActivitiesAPI,
+        urlFactory: StepikURLFactory
     ) {
         self.view = view
         self.step = step
@@ -47,6 +46,7 @@ final class QuizPresenter {
         self.attemptsAPI = attemptsAPI
         self.userActivitiesAPI = userActivitiesAPI
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
+        self.urlFactory = urlFactory
     }
 
     convenience init(
@@ -57,6 +57,7 @@ final class QuizPresenter {
         submissionsAPI: SubmissionsAPI,
         attemptsAPI: AttemptsAPI,
         userActivitiesAPI: UserActivitiesAPI,
+        urlFactory: StepikURLFactory,
         streaksNotificationSuggestionManager: NotificationSuggestionManager
     ) {
         self.init(
@@ -66,7 +67,8 @@ final class QuizPresenter {
             alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh,
             submissionsAPI: submissionsAPI,
             attemptsAPI: attemptsAPI,
-            userActivitiesAPI: userActivitiesAPI
+            userActivitiesAPI: userActivitiesAPI,
+            urlFactory: urlFactory
         )
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
@@ -502,7 +504,9 @@ final class QuizPresenter {
     }
 
     func peerReviewPressed() {
-        view?.showPeerReview(urlString: stepUrl)
+        if let stepURL = self.urlFactory.makeStep(lessonID: step.lessonID, stepPosition: step.position, fromMobile: true) {
+            view?.showPeerReview(urlString: stepURL.absoluteString)
+        }
     }
 
     func onDisappear() {

@@ -406,6 +406,8 @@
 		2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */; };
 		2C16A88F248F98C9001E5CBD /* UserCoursesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16A88E248F98C9001E5CBD /* UserCoursesPersistenceService.swift */; };
 		2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */; };
+		2C1864C924F6350F004AFFD1 /* StepikURLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1864C824F6350F004AFFD1 /* StepikURLFactory.swift */; };
+		2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */; };
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
 		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
@@ -1795,6 +1797,8 @@
 		2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesNetworkService.swift; sourceTree = "<group>"; };
 		2C16A88E248F98C9001E5CBD /* UserCoursesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesPersistenceService.swift; sourceTree = "<group>"; };
 		2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailCellView.swift; sourceTree = "<group>"; };
+		2C1864C824F6350F004AFFD1 /* StepikURLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikURLFactory.swift; sourceTree = "<group>"; };
+		2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikURLFactoryTests.swift; sourceTree = "<group>"; };
 		2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingServiceFactory.swift; sourceTree = "<group>"; };
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
 		2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARKit-Badge-Glyph-Only.png"; sourceTree = "<group>"; };
@@ -3210,6 +3214,7 @@
 			children = (
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
+				2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */,
 				2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
 				2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */,
@@ -3449,6 +3454,7 @@
 				2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */,
 				2C3DAB90233D735D00453B1C /* StepFontSize.swift */,
 				2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */,
+				2C1864C824F6350F004AFFD1 /* StepikURLFactory.swift */,
 				2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */,
 				2CE61D81241295F500DA2CBA /* Spotlight */,
 				2C8F3AE423CCBEB9004D113A /* Video */,
@@ -7719,6 +7725,7 @@
 				2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */,
 				2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
+				2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */,
 				2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */,
 				2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */,
 				2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */,
@@ -8079,6 +8086,7 @@
 				2C4BE7DE221325FB00AEAC34 /* CourseReview.swift in Sources */,
 				2CE9BF48248D0950004F6659 /* CodeLimitsPersistenceService.swift in Sources */,
 				2C48D604228F0EF700739477 /* ContentProcessingRule.swift in Sources */,
+				2C1864C924F6350F004AFFD1 /* StepikURLFactory.swift in Sources */,
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				2C22042520E277B40060117A /* Skeletonable.swift in Sources */,

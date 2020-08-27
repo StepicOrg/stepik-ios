@@ -32,7 +32,7 @@ final class BaseQuizAssembly: Assembly {
             ),
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
-        let presenter = BaseQuizPresenter()
+        let presenter = BaseQuizPresenter(urlFactory: StepikURLFactory())
         let interactor = BaseQuizInteractor(
             step: self.step,
             hasNextStep: self.hasNextStep,

@@ -26,6 +26,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
+    private let urlFactory: StepikURLFactory
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
@@ -52,9 +53,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
 
         if let slug = course.slug {
-            return "\(StepikApplicationsInfo.stepikURL)/course/\(slug)"
+            return self.urlFactory.makeCourse(slug: slug)?.absoluteString
         } else {
-            return "\(StepikApplicationsInfo.stepikURL)/\(course.id)"
+            return self.urlFactory.makeCourse(id: course.id)?.absoluteString
         }
     }
 
@@ -88,6 +89,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
+        urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
         analytics: Analytics,
@@ -102,6 +104,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
+        self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
         self.analytics = analytics

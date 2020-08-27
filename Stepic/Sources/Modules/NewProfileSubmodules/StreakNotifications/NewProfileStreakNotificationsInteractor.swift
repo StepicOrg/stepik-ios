@@ -83,7 +83,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
         self.tooltipStorageManager.didShowOnProfileStreakNotificationsSwitch = true
         self.presenter.presentTooltip(response: .init(shouldShowTooltip: shouldShowTooltip))
     }
-    
+
     // MARK: Private API
 
     private func presentStreakNotifications(isStreakNotificationsEnabled: Bool? = nil) {

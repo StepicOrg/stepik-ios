@@ -264,16 +264,20 @@ final class LastStepRouter {
                 title: NSLocalizedString("Open", comment: ""),
                 style: .default,
                 handler: { _ in
-                    let courseWebURLPath: String = {
+                    let courseSyllabusURL: URL? = {
                         if let slug = course.slug {
-                            return "\(StepikApplicationsInfo.stepikURL)/course/\(slug)"
+                            return StepikURLFactory().makeCourseSyllabus(slug: slug, fromMobile: true)
                         } else {
-                            return "\(StepikApplicationsInfo.stepikURL)/\(course.id)"
+                            return StepikURLFactory().makeCourseSyllabus(id: course.id, fromMobile: true)
                         }
                     }()
 
+                    guard let urlPath = courseSyllabusURL?.absoluteString else {
+                        return
+                    }
+
                     WebControllerManager.shared.presentWebControllerWithURLString(
-                        "\(courseWebURLPath)/syllabus?from_mobile_app=true",
+                        urlPath,
                         inController: presentationController,
                         withKey: .exam,
                         allowsSafari: true,

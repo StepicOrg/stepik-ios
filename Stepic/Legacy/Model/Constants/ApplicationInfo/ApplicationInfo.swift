@@ -16,6 +16,7 @@ final class ApplicationInfo {
             static let api = "url.api"
             static let oauth = "url.oauth"
             static let stepik = "url.stepik"
+            static let host = "url.host"
             static let version = "url.version"
             static let adaptiveRating = "url.adaptiveRating"
         }

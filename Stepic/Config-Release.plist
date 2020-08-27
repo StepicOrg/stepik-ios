@@ -31,6 +31,8 @@
 		<string>https://release.stepik.org/oauth2</string>
 		<key>stepik</key>
 		<string>https://release.stepik.org</string>
+		<key>host</key>
+		<string>release.stepik.org</string>
 		<key>version</key>
 		<string>https://stepik.org/media/attachments/lesson/26869/version.json</string>
 	</dict>

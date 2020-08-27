@@ -10,6 +10,12 @@ protocol BaseQuizPresenterProtocol {
 final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     weak var viewController: BaseQuizViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentSubmission(response: BaseQuiz.SubmissionLoad.Response) {
         switch response.result {
         case .failure:
@@ -206,12 +212,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     }
 
     private func makeURL(for step: Step) -> URL {
-        let link = "\(StepikApplicationsInfo.stepikURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
-        guard let url = URL(string: link) else {
-            fatalError("Invalid step link")
-        }
-
-        return url
+        self.urlFactory.makeStep(lessonID: step.lessonID, stepPosition: step.position, fromMobile: true).require()
     }
 
     private func makeDiscountingPolicyTitle(step: Step, submissionsCount: Int) -> String? {

@@ -18,7 +18,7 @@ final class NewProfileAssembly: Assembly {
             profilesPersistenceService: ProfilesPersistenceService(),
             profilesNetworkService: ProfilesNetworkService(profilesAPI: ProfilesAPI())
         )
-        let presenter = NewProfilePresenter()
+        let presenter = NewProfilePresenter(urlFactory: StepikURLFactory())
 
         let dataBackUpdateService = DataBackUpdateService(
             unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),

@@ -33,7 +33,7 @@ final class CourseInfoAssembly: Assembly {
             coursePurchasesNetworkService: CoursePurchasesNetworkService(coursePurchasesAPI: CoursePurchasesAPI()),
             userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI())
         )
-        let presenter = CourseInfoPresenter()
+        let presenter = CourseInfoPresenter(urlFactory: StepikURLFactory())
 
         let notificationsRegistrationService = NotificationsRegistrationService(
             presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
@@ -58,6 +58,7 @@ final class CourseInfoAssembly: Assembly {
             notificationSuggestionManager: NotificationSuggestionManager(),
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
+            urlFactory: StepikURLFactory(),
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,
             analytics: StepikAnalytics.shared,
