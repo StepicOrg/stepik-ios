@@ -12,6 +12,12 @@ protocol FullscreenCourseListPresenterProtocol {
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
     weak var viewController: FullscreenCourseListViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentCourseInfo(response: FullscreenCourseList.CourseInfoPresentation.Response) {
         self.viewController?.displayCourseInfo(
             viewModel: .init(courseID: response.course.id, courseViewSource: response.courseViewSource)
@@ -43,7 +49,8 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
     }
 
     func presentPaidCourseBuying(response: FullscreenCourseList.PaidCourseBuyingPresentation.Response) {
-        let path = "\(StepikApplicationsInfo.stepikURL)/course/\(response.course.id)/pay"
-        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
+        if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
+            self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
+        }
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 
 class ExploreAssembly: Assembly {
     func makeModule() -> UIViewController {
-        let presenter = ExplorePresenter()
+        let presenter = ExplorePresenter(urlFactory: StepikURLFactory())
         let interactor = ExploreInteractor(
             presenter: presenter,
             contentLanguageService: ContentLanguageService(),

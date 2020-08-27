@@ -41,7 +41,7 @@ final class NewProfileStreakNotificationsSwitchView: UIView {
     }()
 
     var streakNotificationsSwitchTooltipAnchorView: UIView { self.switchControl }
-    
+
     var isOn: Bool = false {
         didSet {
             self.switchControl.isOn = isOn

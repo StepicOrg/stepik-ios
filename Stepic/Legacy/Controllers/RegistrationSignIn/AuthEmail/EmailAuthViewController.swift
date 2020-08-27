@@ -38,6 +38,8 @@ final class EmailAuthViewController: UIViewController {
 
     var prefilledEmail: String?
 
+    private let urlFactory = StepikURLFactory()
+
     @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
@@ -141,8 +143,12 @@ final class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onRemindPasswordClick(_ sender: Any) {
+        guard let resetPasswordURL = self.urlFactory.makeResetAccountPassword() else {
+            return
+        }
+
         WebControllerManager.shared.presentWebControllerWithURLString(
-            "\(StepikApplicationsInfo.stepikURL)/accounts/password/reset/",
+            resetPasswordURL.absoluteString,
             inController: self,
             withKey: .resetPassword,
             allowsSafari: true,

@@ -5,7 +5,7 @@ final class NewProfileDetailsAssembly: Assembly {
     var moduleInput: NewProfileSubmoduleProtocol?
 
     func makeModule() -> UIViewController {
-        let viewController = NewProfileDetailsViewController()
+        let viewController = NewProfileDetailsViewController(urlFactory: StepikURLFactory())
         self.moduleInput = viewController
         return viewController
     }
@@ -14,7 +14,10 @@ final class NewProfileDetailsAssembly: Assembly {
 final class NewProfileDetailsViewController: UIViewController {
     lazy var newProfileDetailsView = self.view as? NewProfileDetailsView
 
-    init() {
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -50,9 +53,12 @@ extension NewProfileDetailsViewController: NewProfileDetailsViewDelegate {
     }
 
     func newProfileDetailsView(_ view: NewProfileDetailsView, didSelectUserID userID: User.IdType) {
+        guard let userURL = self.urlFactory.makeUser(id: userID) else {
+            return
+        }
+
         DispatchQueue.main.async {
-            let sharingURLString = "\(StepikApplicationsInfo.stepikURL)/users/\(userID)"
-            UIPasteboard.general.string = sharingURLString
+            UIPasteboard.general.string = userURL.absoluteString
             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("Copied", comment: ""))
         }
     }

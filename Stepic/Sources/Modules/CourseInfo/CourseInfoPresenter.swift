@@ -20,6 +20,12 @@ protocol CourseInfoPresenterProtocol {
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     weak var viewController: CourseInfoViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentCourse(response: CourseInfo.CourseLoad.Response) {
         switch response.result {
         case .success(let data):
@@ -79,18 +85,21 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
-        let path = self.makeCousePayWebURLPath(courseID: response.course.id)
-        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
+        if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
+            self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
+        }
     }
 
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
-        self.viewController?.displayIAPNotAllowed(
-            viewModel: .init(
-                title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
-                message: self.makeIAPErrorMessage(course: response.course, error: response.error),
-                urlPath: self.makeCousePayWebURLPath(courseID: response.course.id)
+        if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
+            self.viewController?.displayIAPNotAllowed(
+                viewModel: .init(
+                    title: NSLocalizedString("IAPPurchaseFailedTitle", comment: ""),
+                    message: self.makeIAPErrorMessage(course: response.course, error: response.error),
+                    urlPath: payForCourseURL.absoluteString
+                )
             )
-        )
+        }
     }
 
     func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response) {
@@ -142,10 +151,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayUserCourseActionResult(
             viewModel: .init(isSuccessful: response.isSuccessful, message: message)
         )
-    }
-
-    private func makeCousePayWebURLPath(courseID: Course.IdType) -> String {
-        "\(StepikApplicationsInfo.stepikURL)/course/\(courseID)/pay"
     }
 
     private func makeIAPErrorMessage(course: Course, error: Error) -> String {

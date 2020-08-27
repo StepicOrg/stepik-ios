@@ -18,6 +18,12 @@ protocol StepPresenterProtocol {
 final class StepPresenter: StepPresenterProtocol {
     weak var viewController: StepViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentStep(response: StepDataFlow.StepLoad.Response) {
         if case .success(let data) = response.result {
             self.makeViewModel(
@@ -207,7 +213,11 @@ final class StepPresenter: StepPresenterProtocol {
             }()
 
             let discussionsLabelTitle = self.makeDiscussionsButtonTitle(step: step)
-            let urlPath = "\(StepikApplicationsInfo.stepikURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+            let stepURLPath = self.urlFactory.makeStep(
+                lessonID: step.lessonID,
+                stepPosition: step.position,
+                fromMobile: true
+            )?.absoluteString ?? ""
 
             let viewModel = StepViewModel(
                 content: contentType,
@@ -215,7 +225,7 @@ final class StepPresenter: StepPresenterProtocol {
                 discussionsLabelTitle: discussionsLabelTitle,
                 isDiscussionsEnabled: step.discussionProxyID != nil,
                 discussionProxyID: step.discussionProxyID,
-                stepURLPath: urlPath,
+                stepURLPath: stepURLPath,
                 lessonID: step.lessonID,
                 passedByCount: shouldShowStepStatistics ? step.passedByCount : nil,
                 correctRatio: shouldShowStepStatistics ? step.correctRatio : nil,

@@ -3,7 +3,7 @@ import UIKit
 final class HomeAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = HomeProvider(userActivitiesAPI: UserActivitiesAPI())
-        let presenter = HomePresenter()
+        let presenter = HomePresenter(urlFactory: StepikURLFactory())
         let interactor = HomeInteractor(
             presenter: presenter,
             provider: provider,

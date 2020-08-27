@@ -189,7 +189,8 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
             submission: viewModel.submission,
             submissionURLProvider: StepSubmissionsSubmissionURLProvider(
                 stepID: viewModel.stepID,
-                submissionID: viewModel.submission.id
+                submissionID: viewModel.submission.id,
+                urlFactory: StepikURLFactory()
             )
         )
         self.push(module: assembly.makeModule())

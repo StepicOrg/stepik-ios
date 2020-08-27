@@ -14,6 +14,12 @@ protocol NewProfilePresenterProtocol {
 final class NewProfilePresenter: NewProfilePresenterProtocol {
     weak var viewController: NewProfileViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentProfile(response: NewProfile.ProfileLoad.Response) {
         switch response.result {
         case .success(let data):
@@ -47,8 +53,9 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
     }
 
     func presentProfileSharing(response: NewProfile.ProfileShareAction.Response) {
-        let urlPath = "\(StepikApplicationsInfo.stepikURL)/users/\(response.userID)"
-        self.viewController?.displayProfileSharing(viewModel: .init(urlPath: urlPath))
+        if let userURL = self.urlFactory.makeUser(id: response.userID) {
+            self.viewController?.displayProfileSharing(viewModel: .init(urlPath: userURL.absoluteString))
+        }
     }
 
     func presentProfileEditing(response: NewProfile.ProfileEditAction.Response) {

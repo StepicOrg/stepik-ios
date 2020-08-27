@@ -155,6 +155,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             submissionsAPI: ApiDataDownloader.submissions,
             attemptsAPI: ApiDataDownloader.attempts,
             userActivitiesAPI: ApiDataDownloader.userActivities,
+            urlFactory: StepikURLFactory(),
             streaksNotificationSuggestionManager: NotificationSuggestionManager()
         )
         presenter?.delegate = self.delegate
