@@ -65,6 +65,11 @@ enum Explore {
         }
     }
 
+    /// Start search for courses
+    enum SearchCourses {
+        struct ViewModel {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {

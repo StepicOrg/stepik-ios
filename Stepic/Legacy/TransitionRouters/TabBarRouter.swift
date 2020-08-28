@@ -23,16 +23,40 @@ final class TabBarRouter: SourcelessRouter, RouterProtocol {
     }
 
     func route() {
-        self.currentTabBarController?.selectedIndex = self.tab.rawValue
+        self.currentTabBarController?.selectedIndex = self.tab.index
 
-        if self.tab == .notifications {
+        switch self.tab {
+        case .home, .profile:
+            break
+        case .catalog(let searchCourses):
+            if searchCourses {
+                self.displaySearchCourses()
+            }
+        case .notifications:
             self.selectNotificationsSection()
+        }
+    }
+
+    private func displaySearchCourses() {
+        guard let currentViewControllers = self.currentTabBarController?.viewControllers,
+              let navigationController = currentViewControllers[safe: self.tab.index] as? UINavigationController,
+              let exploreViewController = navigationController.topViewController as? ExploreViewController else {
+            return
+        }
+
+        if exploreViewController.isViewLoaded {
+            exploreViewController.displaySearchCourses(viewModel: .init())
+        } else {
+            _ = exploreViewController.view
+            DispatchQueue.main.async {
+                exploreViewController.displaySearchCourses(viewModel: .init())
+            }
         }
     }
 
     private func selectNotificationsSection() {
         guard let currentViewControllers = self.currentTabBarController?.viewControllers,
-              let navigationController = currentViewControllers[safe: self.tab.rawValue] as? UINavigationController,
+              let navigationController = currentViewControllers[safe: self.tab.index] as? UINavigationController,
               let pager = navigationController.topViewController as? NotificationsPagerViewController else {
             return
         }
@@ -45,10 +69,23 @@ final class TabBarRouter: SourcelessRouter, RouterProtocol {
         }
     }
 
-    enum Tab: Int {
+    enum Tab: Equatable {
         case home
-        case catalog
+        case catalog(searchCourses: Bool = false)
         case profile
         case notifications
+
+        var index: Int {
+            switch self {
+            case .home:
+                return 0
+            case .catalog:
+                return 1
+            case .profile:
+                return 2
+            case .notifications:
+                return 3
+            }
+        }
     }
 }

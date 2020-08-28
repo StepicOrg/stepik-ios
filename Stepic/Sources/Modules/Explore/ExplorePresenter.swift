@@ -29,6 +29,6 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
     }
 
     func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response) {
-        self.exploreViewController?.displayStatusBarStyle(response: .init(statusBarStyle: response.statusBarStyle))
+        self.exploreViewController?.displayStatusBarStyle(viewModel: .init(statusBarStyle: response.statusBarStyle))
     }
 }

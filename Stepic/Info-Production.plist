@@ -137,6 +137,19 @@
 				<string>1</string>
 			</dict>
 		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).SearchCourses</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleSearchCourses</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -17,10 +17,6 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
 
     private let sourcelessRouter: SourcelessRouter
 
-    private var currentNavigationController: UINavigationController? {
-        self.sourcelessRouter.currentNavigation
-    }
-
     init(
         userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol = UserCoursesPersistenceService(),
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
@@ -71,6 +67,8 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
         switch shortcutIdentifier {
         case .continueLearning:
             self.performContinueLearning()
+        case .searchCourses:
+            self.performSearchCourses()
         }
     }
 
@@ -98,7 +96,7 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
             return self.continueCourseProvider.fetchLastCourse()
         }.done { lastCourse in
             guard let lastCourse = lastCourse,
-                  let currentNavigationController = self.currentNavigationController else {
+                  let currentNavigationController = self.sourcelessRouter.currentNavigation else {
                 throw Error.noLastCourse
             }
 
@@ -114,6 +112,11 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
                 withStatus: NSLocalizedString("QuickActionContinueLearningErrorMessage", comment: "")
             )
         }
+    }
+
+    private func performSearchCourses() {
+        let tabBarRouter = TabBarRouter(tab: .catalog(searchCourses: true))
+        tabBarRouter.route()
     }
 
     // MARK: Enum
