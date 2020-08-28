@@ -68,7 +68,11 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
         case .continueLearning:
             self.performContinueLearning()
         case .searchCourses:
-            self.performSearchCourses()
+            TabBarRouter(tab: .catalog(searchCourses: true)).route()
+        case .profile:
+            TabBarRouter(tab: .profile).route()
+        case .notifications:
+            TabBarRouter(tab: .notifications).route()
         }
     }
 
@@ -112,11 +116,6 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
                 withStatus: NSLocalizedString("QuickActionContinueLearningErrorMessage", comment: "")
             )
         }
-    }
-
-    private func performSearchCourses() {
-        let tabBarRouter = TabBarRouter(tab: .catalog(searchCourses: true))
-        tabBarRouter.route()
     }
 
     // MARK: Enum

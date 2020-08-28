@@ -150,6 +150,32 @@
 				<string>1</string>
 			</dict>
 		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Profile</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeContact</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleProfile</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Notifications</string>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>shortcut-item-notifications</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleNotifications</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

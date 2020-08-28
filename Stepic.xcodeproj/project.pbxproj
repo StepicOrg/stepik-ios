@@ -472,8 +472,6 @@
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
 		2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */; };
 		2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA9023D229C200E90439 /* Bundle+Version.swift */; };
-		2C3D00BA24C7FF0D00441053 /* Info-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00B824C7FF0D00441053 /* Info-Develop.plist */; };
-		2C3D00BB24C7FF0D00441053 /* Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00B924C7FF0D00441053 /* Info-Release.plist */; };
 		2C3D00BE24C8076A00441053 /* Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00BC24C8076A00441053 /* Info-Release.plist */; };
 		2C3D00BF24C8076A00441053 /* Info-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00BD24C8076A00441053 /* Info-Develop.plist */; };
 		2C3D00C224C8080F00441053 /* Info-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00C024C8080F00441053 /* Info-Develop.plist */; };
@@ -7312,7 +7310,6 @@
 				2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */,
-				2C3D00BA24C7FF0D00441053 /* Info-Develop.plist in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */,
 				2C4BBF13203DC668000A4250 /* plyr.js in Resources */,
@@ -7320,7 +7317,6 @@
 				2CA9D98C20123343007AA743 /* adjectives_f.plist in Resources */,
 				08484F04211AF4320006266F /* TextStoryView.xib in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
-				2C3D00BB24C7FF0D00441053 /* Info-Release.plist in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				2CB62BEE2019FDB100B5E336 /* arrow_right.svg in Resources */,
