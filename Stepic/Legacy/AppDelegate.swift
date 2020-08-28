@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationsService = NotificationsService()
     private let branchService = BranchService()
     private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
+    private let applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private let userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
     private lazy var analytics: Analytics = { StepikAnalytics.shared }()
@@ -125,6 +126,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationThemeService().registerDefaultTheme()
 
         IAPService.shared.startObservingPayments()
+
+        // If app launched using a quick action, perform the requested quick action and return a value of false
+        // to prevent call the application:performActionForShortcutItem:completionHandler: method.
+        if self.applicationShortcutService.handleLaunchOptions(launchOptions) {
+            return false
+        }
 
         return true
     }
@@ -239,6 +246,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return false
+    }
+
+    func application(
+        _ application: UIApplication,
+        performActionFor shortcutItem: UIApplicationShortcutItem,
+        completionHandler: @escaping (Bool) -> Void
+    ) {
+        completionHandler(self.applicationShortcutService.handleShortcutItem(shortcutItem))
     }
 
     // MARK: - Opening a URL-Specified Resource -

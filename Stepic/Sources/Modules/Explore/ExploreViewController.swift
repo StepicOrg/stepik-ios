@@ -5,7 +5,8 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayContent(viewModel: Explore.ContentLoad.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel)
     func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel)
-    func displayStatusBarStyle(response: Explore.StatusBarStyleUpdate.ViewModel)
+    func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel)
+    func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -269,10 +270,15 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         }
     }
 
-    func displayStatusBarStyle(response: Explore.StatusBarStyleUpdate.ViewModel) {
+    func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel) {
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarStyle(response.statusBarStyle, sender: self)
+            styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
         }
+    }
+
+    func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel) {
+        self.searchBar.becomeFirstResponder()
+        self.searchBarTextDidBeginEditing(self.searchBar)
     }
 }
 

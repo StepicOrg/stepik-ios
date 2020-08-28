@@ -1025,6 +1025,10 @@ IAPPurchaseErrorPaymentFailed = "При обработке платежа про
 
 IAPPurchaseBuyInWeb = "Купить в веб-версии";
 
+/* Quick Actions */
+QuickActionContinueLearningErrorMessage = "Не удалось продолжить учиться";
+QuickActionContinueLearningErrorUnauthorizedMessage = "Войдите, чтобы продолжить учиться";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";
