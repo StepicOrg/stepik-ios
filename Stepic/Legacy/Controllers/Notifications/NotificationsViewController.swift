@@ -139,6 +139,8 @@ final class NotificationsViewController: UIViewController, NotificationsView {
         if withReload {
             self.tableView.reloadData()
         }
+
+        self.markAllAsReadButton.isEnabled = !self.data.isEmpty
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

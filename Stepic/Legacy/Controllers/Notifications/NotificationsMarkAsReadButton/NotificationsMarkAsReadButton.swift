@@ -18,6 +18,12 @@ final class NotificationsMarkAsReadButton: StepikButton {
 
     var status: Status = .normal
 
+    override var isEnabled: Bool {
+        didSet {
+            self.alpha = self.isEnabled ? 1.0 : 0.75
+        }
+    }
+
     func update(with status: Status) {
         switch status {
         case .normal:
