@@ -766,7 +766,7 @@ extension AnalyticsEvent {
 
     static func shortcutItemTriggered(type: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
-            name: "Home screen quick actions triggered",
+            name: "Home screen quick action triggered",
             parameters: ["type": type]
         )
     }
