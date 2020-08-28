@@ -17,6 +17,8 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
 
     private let sourcelessRouter: SourcelessRouter
 
+    private let analytics: Analytics
+
     init(
         userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol = UserCoursesPersistenceService(),
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
@@ -27,7 +29,8 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
         ),
         userAccountService: UserAccountServiceProtocol = UserAccountService(),
-        sourcelessRouter: SourcelessRouter = SourcelessRouter()
+        sourcelessRouter: SourcelessRouter = SourcelessRouter(),
+        analytics: Analytics = StepikAnalytics.shared
     ) {
         self.userCoursesPersistenceService = userCoursesPersistenceService
         self.coursesPersistenceService = coursesPersistenceService
@@ -35,6 +38,7 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
         self.continueCourseProvider = continueCourseProvider
         self.userAccountService = userAccountService
         self.sourcelessRouter = sourcelessRouter
+        self.analytics = analytics
     }
 
     // MARK: Protocol Conforming
@@ -49,6 +53,8 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
 
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         let shortcutType = shortcutItem.type
+
+        self.analytics.send(.shortcutItemTriggered(type: shortcutType))
 
         guard let shortcutIdentifier = ApplicationShortcutIdentifier(fullIdentifier: shortcutType) else {
             return false
