@@ -1,4 +1,5 @@
 import PromiseKit
+import SVProgressHUD
 import UIKit
 
 protocol ApplicationShortcutServiceProtocol: AnyObject {
@@ -11,6 +12,8 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let continueCourseProvider: ContinueCourseProviderProtocol
+
+    private let userAccountService: UserAccountServiceProtocol
 
     private let sourcelessRouter: SourcelessRouter
 
@@ -27,12 +30,14 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
             coursesAPI: CoursesAPI(),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
         ),
+        userAccountService: UserAccountServiceProtocol = UserAccountService(),
         sourcelessRouter: SourcelessRouter = SourcelessRouter()
     ) {
         self.userCoursesPersistenceService = userCoursesPersistenceService
         self.coursesPersistenceService = coursesPersistenceService
         self.adaptiveStorageManager = adaptiveStorageManager
         self.continueCourseProvider = continueCourseProvider
+        self.userAccountService = userAccountService
         self.sourcelessRouter = sourcelessRouter
     }
 
@@ -70,6 +75,12 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
     }
 
     private func performContinueLearning() {
+        guard self.userAccountService.isAuthorized else {
+            return SVProgressHUD.showError(
+                withStatus: NSLocalizedString("QuickActionContinueLearningErrorUnauthorizedMessage", comment: "")
+            )
+        }
+
         self.userCoursesPersistenceService.fetchAll().then { userCourses -> Promise<([UserCourse], [Course])> in
             self.coursesPersistenceService
                 .fetch(ids: userCourses.map(\.courseID))
@@ -88,7 +99,7 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
         }.done { lastCourse in
             guard let lastCourse = lastCourse,
                   let currentNavigationController = self.currentNavigationController else {
-                return
+                throw Error.noLastCourse
             }
 
             LastStepRouter.continueLearning(
@@ -99,6 +110,15 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
             )
         }.catch { error in
             print("ApplicationShortcutService :: failed perform continue learning with error = \(error)")
+            SVProgressHUD.showError(
+                withStatus: NSLocalizedString("QuickActionContinueLearningErrorMessage", comment: "")
+            )
         }
+    }
+
+    // MARK: Enum
+
+    enum Error: Swift.Error {
+        case noLastCourse
     }
 }

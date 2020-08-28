@@ -1024,6 +1024,10 @@ IAPPurchaseErrorPaymentFailed = "An error was occurred during processing your pu
 
 IAPPurchaseBuyInWeb = "Buy in Web";
 
+/* Quick Actions */
+QuickActionContinueLearningErrorMessage = "Failed to continue learning";
+QuickActionContinueLearningErrorUnauthorizedMessage = "Sign in to continue learning";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
