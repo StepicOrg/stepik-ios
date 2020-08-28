@@ -122,5 +122,21 @@
 		<key>test</key>
 		<string>key_test_gjtWCOSjnAMKMtV9qJ4YyeelFzced092</string>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).ContinueLearning</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypePlay</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleContinueLearning</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
