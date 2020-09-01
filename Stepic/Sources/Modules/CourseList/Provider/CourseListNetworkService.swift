@@ -206,3 +206,20 @@ final class TeacherCourseListNetworkService: BaseCourseListNetworkService, Cours
         }
     }
 }
+
+final class VisitedCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: VisitedCourseListType
+
+    init(type: VisitedCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int) -> Promise<([Course], Meta)> {
+        Promise(error: Error.notImplemented)
+    }
+
+    enum Error: Swift.Error {
+        case notImplemented
+    }
+}
