@@ -9,6 +9,7 @@ enum Home {
         case streakActivity
         case continueCourse
         case enrolledCourses
+        case visitedCourses
         case popularCourses
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }

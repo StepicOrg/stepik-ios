@@ -17,6 +17,7 @@ final class HomeViewController: BaseExploreViewController {
         .streakActivity,
         .continueCourse,
         .enrolledCourses,
+        .visitedCourses,
         .popularCourses
     ]
 
@@ -127,6 +128,15 @@ final class HomeViewController: BaseExploreViewController {
         self.push(module: assembly.makeModule())
     }
 
+    private func displayFullscreenVisitedCourseList() {
+        self.interactor.doFullscreenCourseListPresentation(
+            request: .init(
+                presentationDescription: nil,
+                courseListType: VisitedCourseListType()
+            )
+        )
+    }
+
     private func displayFullscreenPopularCourseList(contentLanguage: ContentLanguage) {
         self.interactor.doFullscreenCourseListPresentation(
             request: .init(
@@ -235,6 +245,86 @@ final class HomeViewController: BaseExploreViewController {
         )
     }
 
+    // MARK: - Visited courses submodule
+
+    private enum VisitedCourseListState {
+        case normal
+        case empty
+
+        var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
+            CourseListContainerViewFactory.HorizontalHeaderDescription(
+                title: NSLocalizedString("VisitedCourses", comment: ""),
+                summary: nil,
+                shouldShowAllButton: self == .normal
+            )
+        }
+
+        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+            switch self {
+            case .empty:
+                return .visitedEmpty
+            default:
+                fatalError("State not supported placeholder")
+            }
+        }
+    }
+
+    private func makeVisitedCourseListSubmodule() -> (UIView, UIViewController?) {
+        let courseListType = VisitedCourseListType()
+        let visitedCourseListAssembly = HorizontalCourseListAssembly(
+            type: courseListType,
+            colorMode: .light,
+            cardStyle: .small,
+            gridSize: CourseListGridSize(rows: 1),
+            courseViewSource: .visitedCourses,
+            output: self.interactor as? CourseListOutputProtocol
+        )
+        let visitedViewController = visitedCourseListAssembly.makeModule()
+        visitedCourseListAssembly.moduleInput?.moduleIdentifier = Home.Submodule
+            .visitedCourses
+            .uniqueIdentifier
+        visitedCourseListAssembly.moduleInput?.setOnlineStatus()
+        return (visitedViewController.view, visitedViewController)
+    }
+
+    private func refreshStateForVisitedCourses(state: VisitedCourseListState) {
+        // Remove previous module. It's easiest way to refresh module
+        if let module = self.getSubmodule(type: Home.Submodule.visitedCourses) {
+            self.removeSubmodule(module)
+        }
+
+        // Build new module
+        // Each module should has view and attached view controller (if module is active submodule)
+        var viewController: UIViewController?
+        var view: UIView
+
+        if case .normal = state {
+            // Build course list submodule
+            (view, viewController) = self.makeVisitedCourseListSubmodule()
+        } else {
+            // Build placeholder
+            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
+            (view, viewController) = (placeholderView, nil)
+        }
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(for: view, headerDescription: state.headerDescription)
+
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.displayFullscreenVisitedCourseList()
+        }
+
+        // Register module
+        self.registerSubmodule(
+            .init(
+                viewController: viewController,
+                view: containerView,
+                isLanguageDependent: false,
+                type: Home.Submodule.visitedCourses
+            )
+        )
+    }
+
     // MARK: - Popular courses module
 
     private enum PopularCourseListState {
@@ -332,6 +422,11 @@ final class HomeViewController: BaseExploreViewController {
 extension HomeViewController: HomeViewControllerProtocol {
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
+        case .continueCourse:
+            switch viewModel.result {
+            default:
+                self.refreshContinueCourse(state: .hidden)
+            }
         case .enrolledCourses:
             switch viewModel.result {
             case .empty:
@@ -339,17 +434,14 @@ extension HomeViewController: HomeViewControllerProtocol {
             case .error:
                 self.refreshStateForEnrolledCourses(state: .error)
             }
+        case .visitedCourses:
+            self.refreshStateForVisitedCourses(state: .empty)
         case .popularCourses:
             switch viewModel.result {
             case .empty:
                 self.refreshStateForPopularCourses(state: .empty)
             case .error:
                 self.refreshStateForPopularCourses(state: .error)
-            }
-        case .continueCourse:
-            switch viewModel.result {
-            default:
-                self.refreshContinueCourse(state: .hidden)
             }
         default:
             break
@@ -381,6 +473,7 @@ extension HomeViewController: HomeViewControllerProtocol {
 
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
+            strongSelf.refreshStateForVisitedCourses(state: .normal)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }
     }
