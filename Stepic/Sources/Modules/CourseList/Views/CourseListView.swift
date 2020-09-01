@@ -5,10 +5,12 @@ extension CourseListView {
     struct Appearance {
         let layoutMinimumLineSpacing: CGFloat = 16.0
         let layoutMinimumInteritemSpacing: CGFloat = 16.0
-        let layoutItemHeight: CGFloat = 160.0
 
         let verticalLayoutMinimumItemWidth: CGFloat = 288
         let horizontalLayoutMinimumItemWidth: CGFloat = 276
+
+        let smallVerticalLayoutMinimumItemWidth: CGFloat = 168
+        let smallHorizontalLayoutMinimumItemWidth: CGFloat = 156
 
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
@@ -21,6 +23,7 @@ extension CourseListView {
 class CourseListView: UIView {
     let appearance: Appearance
     let colorMode: CourseListColorMode
+    let cardStyle: CourseListCardStyle
 
     // swiftlint:disable:next implicitly_unwrapped_optional
     fileprivate var collectionView: UICollectionView!
@@ -37,11 +40,13 @@ class CourseListView: UIView {
     init(
         frame: CGRect = .zero,
         colorMode: CourseListColorMode = .default,
+        cardStyle: CourseListCardStyle = .default,
         viewDelegate: CourseListViewDelegate,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         self.colorMode = colorMode
+        self.cardStyle = cardStyle
 
         self.delegate = viewDelegate
 
@@ -178,21 +183,36 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
     private func setupCollectionView() {
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
 
-        switch self.colorMode {
-        case .light:
+        switch (self.colorMode, self.cardStyle) {
+        case (.light, .normal):
             self.collectionView.register(
                 LightCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: LightCourseListCollectionViewCell.defaultReuseIdentifier
             )
-        case .dark:
+        case (.dark, .normal):
             self.collectionView.register(
                 DarkCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: DarkCourseListCollectionViewCell.defaultReuseIdentifier
             )
-        case .grouped:
+        case (.grouped, .normal):
             self.collectionView.register(
                 GroupedCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: GroupedCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        case (.light, .small):
+            self.collectionView.register(
+                SmallLightCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: SmallLightCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        case (.dark, .small):
+            self.collectionView.register(
+                SmallDarkCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: SmallDarkCourseListCollectionViewCell.defaultReuseIdentifier
+            )
+        case (.grouped, .small):
+            self.collectionView.register(
+                SmallGroupedCourseListCollectionViewCell.self,
+                forCellWithReuseIdentifier: SmallGroupedCourseListCollectionViewCell.defaultReuseIdentifier
             )
         }
 
@@ -215,14 +235,11 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
 // Subclasses for two orientations
 
 final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource {
-    static let adaptiveColumnsCount: Int = -1
-
-    private var columnsCount: Int {
+    private var gridSize: CourseListGridSize {
         didSet {
-            self.verticalCourseFlowLayout.columnsCount = self.columnsCount
+            self.verticalCourseFlowLayout.columnsCount = self.gridSize.columns
         }
     }
-    private let isAdaptiveColumnsCount: Bool
 
     // We should use proxy cause we are using willDisplay method in delegate for pagination
     // and some methods to show footer/header in data source
@@ -233,13 +250,22 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
 
     private lazy var verticalCourseFlowLayout: VerticalCourseListFlowLayout = {
         let layout = VerticalCourseListFlowLayout(
-            columnsCount: self.columnsCount,
+            columnsCount: self.gridSize.columns,
             isHeaderHidden: self.isHeaderViewHidden
         )
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
         layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
         return layout
     }()
+
+    private var minimumItemWidth: CGFloat {
+        switch self.cardStyle {
+        case .small:
+            return self.appearance.smallVerticalLayoutMinimumItemWidth
+        case .normal:
+            return self.appearance.verticalLayoutMinimumItemWidth
+        }
+    }
 
     override var flowLayout: UICollectionViewFlowLayout {
         self.verticalCourseFlowLayout
@@ -257,22 +283,23 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
 
     init(
         frame: CGRect,
-        columnsCount: Int,
         colorMode: CourseListColorMode,
+        cardStyle: CourseListCardStyle,
+        gridSize: CourseListGridSize,
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource,
         viewDelegate: CourseListViewDelegate,
         isHeaderViewHidden: Bool,
         appearance: Appearance = CourseListView.Appearance()
     ) {
-        self.columnsCount = columnsCount == Self.adaptiveColumnsCount ? 1 : columnsCount
-        self.isAdaptiveColumnsCount = columnsCount == Self.adaptiveColumnsCount
+        self.gridSize = gridSize
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
         self.isHeaderViewHidden = isHeaderViewHidden
         super.init(
             frame: frame,
             colorMode: colorMode,
+            cardStyle: cardStyle,
             viewDelegate: viewDelegate,
             appearance: appearance
         )
@@ -292,18 +319,18 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
     }
 
     override func calculateItemSize() -> CGSize {
-        if self.isAdaptiveColumnsCount {
+        if self.gridSize.isAutoColumns {
             let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
-                minimumColumnWidth: self.appearance.verticalLayoutMinimumItemWidth,
+                minimumColumnWidth: self.minimumItemWidth,
                 columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing
             )
-            self.columnsCount = columnsCount
+            self.gridSize.columns = columnsCount
 
-            return CGSize(width: columnWidth, height: self.appearance.layoutItemHeight)
+            return CGSize(width: columnWidth, height: self.cardStyle.height)
         } else {
             let width = self.bounds.width
-                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
-            return CGSize(width: width / CGFloat(self.columnsCount), height: self.appearance.layoutItemHeight)
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.gridSize.columns + 1)
+            return CGSize(width: width / CGFloat(self.gridSize.columns), height: self.cardStyle.height)
         }
     }
 
@@ -398,20 +425,25 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
 }
 
 final class HorizontalCourseListView: CourseListView {
-    static let adaptiveColumnsCount: Int = -1
-
-    private let rowsCount: Int
-    private var columnsCount: Int {
+    private var gridSize: CourseListGridSize {
         didSet {
-            self.horizontalCourseFlowLayout.columnsCount = self.columnsCount
+            self.horizontalCourseFlowLayout.columnsCount = self.gridSize.columns
         }
     }
-    private let isAdaptiveColumnsCount: Bool
+
+    private var minimumItemWidth: CGFloat {
+        switch self.cardStyle {
+        case .small:
+            return self.appearance.smallHorizontalLayoutMinimumItemWidth
+        case .normal:
+            return self.appearance.horizontalLayoutMinimumItemWidth
+        }
+    }
 
     private lazy var horizontalCourseFlowLayout: HorizontalCourseListFlowLayout = {
         let layout = HorizontalCourseListFlowLayout(
-            rowsCount: self.rowsCount,
-            columnsCount: self.columnsCount
+            rowsCount: self.gridSize.rows,
+            columnsCount: self.gridSize.columns
         )
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
         layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
@@ -424,20 +456,19 @@ final class HorizontalCourseListView: CourseListView {
 
     init(
         frame: CGRect,
-        columnsCount: Int,
-        rowsCount: Int,
+        gridSize: CourseListGridSize,
         colorMode: CourseListColorMode,
+        cardStyle: CourseListCardStyle,
         delegate: UICollectionViewDelegate,
         dataSource: UICollectionViewDataSource,
         viewDelegate: CourseListViewDelegate,
         appearance: Appearance = CourseListView.Appearance()
     ) {
-        self.rowsCount = rowsCount
-        self.columnsCount = columnsCount == Self.adaptiveColumnsCount ? 1 : columnsCount
-        self.isAdaptiveColumnsCount = columnsCount == Self.adaptiveColumnsCount
+        self.gridSize = gridSize
         super.init(
             frame: frame,
             colorMode: colorMode,
+            cardStyle: cardStyle,
             viewDelegate: viewDelegate,
             appearance: appearance
         )
@@ -457,7 +488,7 @@ final class HorizontalCourseListView: CourseListView {
         if dataSource.collectionView(self.collectionView, numberOfItemsInSection: 0) == 1 {
             self.horizontalCourseFlowLayout.rowsCount = 1
         } else {
-            self.horizontalCourseFlowLayout.rowsCount = self.rowsCount
+            self.horizontalCourseFlowLayout.rowsCount = self.gridSize.rows
         }
 
         super.updateCollectionViewData(delegate: delegate, dataSource: dataSource)
@@ -466,22 +497,22 @@ final class HorizontalCourseListView: CourseListView {
     }
 
     override func calculateItemSize() -> CGSize {
-        if self.isAdaptiveColumnsCount {
+        if self.gridSize.isAutoColumns {
             let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
-                minimumColumnWidth: self.appearance.horizontalLayoutMinimumItemWidth,
+                minimumColumnWidth: self.minimumItemWidth,
                 columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing,
                 containerHorizontalInsets: self.appearance.horizontalLayoutNextPageWidth
             )
-            self.columnsCount = columnsCount
+            self.gridSize.columns = columnsCount
 
-            return CGSize(width: columnWidth, height: self.appearance.layoutItemHeight)
+            return CGSize(width: columnWidth, height: self.cardStyle.height)
         } else {
             let width = self.bounds.width
-                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.gridSize.columns + 1)
                 - self.appearance.horizontalLayoutNextPageWidth
             return CGSize(
-                width: width / CGFloat(self.columnsCount),
-                height: self.appearance.layoutItemHeight
+                width: width / CGFloat(self.gridSize.columns),
+                height: self.cardStyle.height
             )
         }
     }
@@ -512,7 +543,7 @@ final class CollectionViewReusableView: UICollectionReusableView, Reusable {
 
 private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
     override init(frame: CGRect) {
-        super.init(frame: frame, colorMode: .light)
+        super.init(frame: frame, colorMode: .light, cardStyle: .normal)
     }
 
     @available(*, unavailable)
@@ -527,7 +558,7 @@ private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
 
 private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
     override init(frame: CGRect) {
-        super.init(frame: frame, colorMode: .dark)
+        super.init(frame: frame, colorMode: .dark, cardStyle: .normal)
     }
 
     @available(*, unavailable)
@@ -542,7 +573,52 @@ private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
 
 private class GroupedCourseListCollectionViewCell: CourseListCollectionViewCell {
     override init(frame: CGRect) {
-        super.init(frame: frame, colorMode: .grouped)
+        super.init(frame: frame, colorMode: .grouped, cardStyle: .normal)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class SmallLightCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .light, cardStyle: .small)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class SmallDarkCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .dark, cardStyle: .small)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    static var defaultReuseIdentifier: String {
+        String(describing: CourseListCollectionViewCell.self)
+    }
+}
+
+private class SmallGroupedCourseListCollectionViewCell: CourseListCollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame, colorMode: .grouped, cardStyle: .small)
     }
 
     @available(*, unavailable)

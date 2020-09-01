@@ -26,6 +26,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
+    private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
     private let urlFactory: StepikURLFactory
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
@@ -89,6 +90,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
+        visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol,
         urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
@@ -104,6 +106,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
+        self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
         self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
@@ -284,7 +287,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.done { course in
                 self.currentCourse = course
 
-                if self.currentCourse != nil {
+                if let currentCourse = self.currentCourse {
+                    DispatchQueue.main.async {
+                        self.visitedCourseListPersistenceService.insert(course: currentCourse)
+                        self.dataBackUpdateService.triggerVisitedCourseListUpdate()
+                    }
+
                     seal.fulfill(.init(result: .success(self.makeCourseData())))
                 } else {
                     // Offline mode: present empty state only if get nil from network

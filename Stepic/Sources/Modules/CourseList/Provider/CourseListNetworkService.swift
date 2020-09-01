@@ -206,3 +206,20 @@ final class TeacherCourseListNetworkService: BaseCourseListNetworkService, Cours
         }
     }
 }
+
+final class VisitedCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
+
+    init(visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol, coursesAPI: CoursesAPI) {
+        self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int) -> Promise<([Course], Meta)> {
+        self.visitedCourseListPersistenceService.fetch().map { ($0, Meta.oneAndOnlyPage) }
+    }
+
+    enum Error: Swift.Error {
+        case notImplemented
+    }
+}

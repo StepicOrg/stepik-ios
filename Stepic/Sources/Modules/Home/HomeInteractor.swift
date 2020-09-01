@@ -78,6 +78,8 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     private func determineModule(sourceModule: CourseListInputProtocol) -> Home.Submodule {
         if sourceModule.moduleIdentifier == Home.Submodule.enrolledCourses.uniqueIdentifier {
             return .enrolledCourses
+        } else if sourceModule.moduleIdentifier == Home.Submodule.visitedCourses.uniqueIdentifier {
+            return .visitedCourses
         } else if sourceModule.moduleIdentifier == Home.Submodule.popularCourses.uniqueIdentifier {
             return .popularCourses
         } else {

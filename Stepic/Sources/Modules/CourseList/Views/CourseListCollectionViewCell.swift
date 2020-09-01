@@ -15,29 +15,37 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
     weak var delegate: CourseListCollectionViewCellDelegate?
 
     private let colorMode: CourseListColorMode
+    private let cardStyle: CourseListCardStyle
     private var configurationViewModel: CourseWidgetViewModel?
 
-    private lazy var widgetView: CourseWidgetView = {
-        let widget = CourseWidgetView(colorMode: self.colorMode)
-        // Pass clicks from widget view to collection view delegate
-        widget.onContinueLearningButtonClick = { [weak self] in
-            guard let strongSelf = self else {
-                return
+    private lazy var widgetView: CourseWidgetViewProtocol = {
+        switch self.cardStyle {
+        case .small:
+            return SmallCourseWidgetView(colorMode: self.colorMode)
+        case .normal:
+            let widget = CourseWidgetView(colorMode: self.colorMode)
+            // Pass clicks from widget view to collection view delegate
+            widget.onContinueLearningButtonClick = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.widgetPrimaryButtonClicked(
+                    viewModel: strongSelf.configurationViewModel
+                )
             }
-            strongSelf.delegate?.widgetPrimaryButtonClicked(
-                viewModel: strongSelf.configurationViewModel
-            )
+            return widget
         }
-        return widget
     }()
 
     override init(frame: CGRect) {
         self.colorMode = .default
+        self.cardStyle = .default
         super.init(frame: frame)
     }
 
-    init(frame: CGRect, colorMode: CourseListColorMode) {
+    init(frame: CGRect, colorMode: CourseListColorMode, cardStyle: CourseListCardStyle) {
         self.colorMode = colorMode
+        self.cardStyle = cardStyle
         super.init(frame: frame)
 
         self.addSubviews()

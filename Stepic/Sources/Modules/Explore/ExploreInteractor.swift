@@ -39,6 +39,39 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         )
         self.contentLanguageSwitchAvailabilityService.shouldShowLanguageSwitchOnExplore = false
     }
+
+    override func presentEmptyState(sourceModule: CourseListInputProtocol) {
+        guard let exploreSubmodule = self.determineModule(sourceModule: sourceModule) else {
+            return
+        }
+
+        self.explorePresenter?.presentCourseListState(
+            response: .init(
+                module: exploreSubmodule,
+                result: .empty
+            )
+        )
+    }
+
+    override func presentError(sourceModule: CourseListInputProtocol) {
+        guard let exploreSubmodule = self.determineModule(sourceModule: sourceModule) else {
+            return
+        }
+
+        self.explorePresenter?.presentCourseListState(
+            response: .init(
+                module: exploreSubmodule,
+                result: .error
+            )
+        )
+    }
+
+    private func determineModule(sourceModule: CourseListInputProtocol) -> Explore.Submodule? {
+        if sourceModule.moduleIdentifier == Explore.Submodule.visitedCourses.uniqueIdentifier {
+            return .visitedCourses
+        }
+        return nil
+    }
 }
 
 extension ExploreInteractor: StoriesOutputProtocol {

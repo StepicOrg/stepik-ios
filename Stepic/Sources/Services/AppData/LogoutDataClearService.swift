@@ -216,7 +216,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
             let courseListTypes: [CourseListType] = [
                 EnrolledCourseListType(),
                 FavoriteCourseListType(),
-                ArchivedCourseListType()
+                ArchivedCourseListType(),
+                VisitedCourseListType()
             ]
 
             for courseListType in courseListTypes {

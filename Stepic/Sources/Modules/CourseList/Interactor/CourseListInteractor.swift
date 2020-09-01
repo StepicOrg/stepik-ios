@@ -373,4 +373,8 @@ extension CourseListInteractor: CourseListDataBackUpdateServiceDelegate {
             self.refreshCourseList()
         }
     }
+
+    func courseListDataBackUpdateServiceDidUpdateCourseList(_ service: CourseListDataBackUpdateServiceProtocol) {
+        self.doCoursesFetch(request: .init())
+    }
 }

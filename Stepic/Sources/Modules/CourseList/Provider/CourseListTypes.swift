@@ -51,6 +51,10 @@ struct TeacherCourseListType: CourseListType {
     var analyticName: String { "teacher_course_list" }
 }
 
+struct VisitedCourseListType: CourseListType {
+    var analyticName: String { "visited_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -110,6 +114,10 @@ final class CourseListServicesFactory {
             return CourseListPersistenceService(
                 storage: CreatedCoursesCourseListPersistenceStorage(teacherID: type.teacherID)
             )
+        } else if self.type is VisitedCourseListType {
+            return VisitedCourseListPersistenceService(
+                storage: DefaultsCourseListPersistenceStorage(cacheID: "VisitedCoursesInfo")
+            )
         } else {
             fatalError("Unsupported course list type")
         }
@@ -138,6 +146,12 @@ final class CourseListServicesFactory {
             )
         } else if let type = self.type as? TeacherCourseListType {
             return TeacherCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if self.type is VisitedCourseListType {
+            let persistenceService = self.makePersistenceService() as? VisitedCourseListPersistenceServiceProtocol
+            return VisitedCourseListNetworkService(
+                visitedCourseListPersistenceService: persistenceService.require(),
+                coursesAPI: self.coursesAPI
+            )
         } else {
             fatalError("Unsupported course list type")
         }
