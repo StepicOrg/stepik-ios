@@ -146,8 +146,12 @@ final class CourseListServicesFactory {
             )
         } else if let type = self.type as? TeacherCourseListType {
             return TeacherCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
-        } else if let type = self.type as? VisitedCourseListType {
-            return VisitedCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if self.type is VisitedCourseListType {
+            let persistenceService = self.makePersistenceService() as? VisitedCourseListPersistenceServiceProtocol
+            return VisitedCourseListNetworkService(
+                visitedCourseListPersistenceService: persistenceService.require(),
+                coursesAPI: self.coursesAPI
+            )
         } else {
             fatalError("Unsupported course list type")
         }

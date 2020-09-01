@@ -8,6 +8,7 @@ enum Explore {
         case languageSwitch
         case tags
         case collection
+        case visitedCourses
         case popularCourses
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
@@ -51,6 +52,26 @@ enum Explore {
         @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
         struct ViewModel {
             let isHidden: Bool
+        }
+    }
+
+    // Refresh course block
+    enum CourseListStateUpdate {
+        enum State {
+            case empty
+            case error
+        }
+
+        struct Request {}
+
+        struct Response {
+            let module: Submodule
+            let result: State
+        }
+
+        struct ViewModel {
+            let module: Submodule
+            let result: State
         }
     }
 

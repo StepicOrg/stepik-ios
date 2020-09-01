@@ -49,6 +49,14 @@ final class HomeViewController: BaseExploreViewController {
 
         self.analytics.send(.homeScreenOpened)
         self.homeInteractor?.doStreakActivityLoad(request: .init())
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.refreshStateForVisitedCourses(state: .normal)
+        }
     }
 
     // MARK: - Display submodules

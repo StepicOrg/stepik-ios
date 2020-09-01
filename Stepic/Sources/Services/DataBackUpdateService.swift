@@ -9,6 +9,7 @@ enum DataBackUpdateTarget {
     case progress(Progress)
     case profile(Profile)
     case userCourse(UserCourse)
+    case visitedCourse
 }
 
 /// Affected fields in updated object
@@ -59,6 +60,8 @@ protocol DataBackUpdateServiceProtocol: AnyObject {
     func triggerCourseIsArchivedUpdate(retrievedCourse: Course)
     /// Report about user course update
     func triggerUserCourseUpdate(updatedUserCourse: UserCourse)
+    /// Report about visited course list update
+    func triggerVisitedCourseListUpdate()
 }
 
 final class DataBackUpdateService: DataBackUpdateServiceProtocol {
@@ -200,6 +203,10 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
 
     func triggerUserCourseUpdate(updatedUserCourse: UserCourse) {
         self.postNotification(target: .userCourse(updatedUserCourse))
+    }
+
+    func triggerVisitedCourseListUpdate() {
+        self.postNotification(target: .visitedCourse)
     }
 
     // MARK: Private methods

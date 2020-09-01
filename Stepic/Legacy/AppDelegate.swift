@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private let userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
+    private let visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
     private lazy var analytics: Analytics = { StepikAnalytics.shared }()
 
     deinit {
@@ -147,12 +148,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         self.notificationsService.removeRetentionNotifications()
         self.userCoursesObserver.startObserving()
+        self.visitedCoursesCleaner.addObserves()
         IAPService.shared.prefetchProducts()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
         self.userCoursesObserver.stopObserving()
+        self.visitedCoursesCleaner.removeObservers()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

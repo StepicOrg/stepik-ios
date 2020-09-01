@@ -41,7 +41,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             if let course = self.currentCourse {
                 LastStepGlobalContext.context.course = course
                 self.spotlightIndexingService.indexCourses([course])
-                self.visitedCourseListPersistenceService.insert(course: course)
             }
 
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
@@ -288,7 +287,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.done { course in
                 self.currentCourse = course
 
-                if self.currentCourse != nil {
+                if let currentCourse = self.currentCourse {
+                    DispatchQueue.main.async {
+                        self.visitedCourseListPersistenceService.insert(course: currentCourse)
+                        self.dataBackUpdateService.triggerVisitedCourseListUpdate()
+                    }
+
                     seal.fulfill(.init(result: .success(self.makeCourseData())))
                 } else {
                     // Offline mode: present empty state only if get nil from network
