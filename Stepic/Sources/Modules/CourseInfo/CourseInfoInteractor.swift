@@ -26,6 +26,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
+    private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
     private let urlFactory: StepikURLFactory
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
@@ -40,6 +41,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             if let course = self.currentCourse {
                 LastStepGlobalContext.context.course = course
                 self.spotlightIndexingService.indexCourses([course])
+                self.visitedCourseListPersistenceService.insert(course: course)
             }
 
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
@@ -89,6 +91,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
+        visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol,
         urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
@@ -104,6 +107,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
+        self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
         self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
