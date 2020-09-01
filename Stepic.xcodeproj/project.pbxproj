@@ -455,6 +455,9 @@
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		2C2C4D91246B485400CF759D /* UIModalPresentationStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */; };
+		2C2E44CF24FE331F006B7303 /* CourseListCardStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E44CE24FE331F006B7303 /* CourseListCardStyle.swift */; };
+		2C2E44D124FE3FBF006B7303 /* SmallCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */; };
+		2C2E44D324FE474F006B7303 /* CourseListGridSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E44D224FE474F006B7303 /* CourseListGridSize.swift */; };
 		2C2EA36B212D5FEF002116C9 /* StepikResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA36A212D5FEF002116C9 /* StepikResult.swift */; };
 		2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
@@ -1847,6 +1850,9 @@
 		2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePaymentsNetworkService.swift; sourceTree = "<group>"; };
 		2C284DBD2474986600669736 /* IAPProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAPProductIDs.plist; sourceTree = "<group>"; };
 		2C2C4D90246B485400CF759D /* UIModalPresentationStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIModalPresentationStyle+Fallback.swift"; sourceTree = "<group>"; };
+		2C2E44CE24FE331F006B7303 /* CourseListCardStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCardStyle.swift; sourceTree = "<group>"; };
+		2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCourseWidgetView.swift; sourceTree = "<group>"; };
+		2C2E44D224FE474F006B7303 /* CourseListGridSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListGridSize.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
 		2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_can_edit.xcdatamodel; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
@@ -5714,10 +5720,12 @@
 		62E980A63F3F8952B27F10D8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C2E44CE24FE331F006B7303 /* CourseListCardStyle.swift */,
 				62E981EC390D038A96C5E2A7 /* CourseListCollectionViewCell.swift */,
 				62E9899FE9E7080CA1F99A45 /* CourseListCollectionViewDataSource.swift */,
 				62E987BE70EFAEF1B4888948 /* CourseListCollectionViewDelegate.swift */,
 				62E9814234BD471886A53A3F /* CourseListColorMode.swift */,
+				2C2E44D224FE474F006B7303 /* CourseListGridSize.swift */,
 				62E989D0C0B39B62D2EF9A05 /* CourseListView.swift */,
 				62E980F30C9CD714BC60ED0D /* CourseListViewDelegate.swift */,
 				62E98B6E6A8A4A321441115A /* Layouts */,
@@ -6596,6 +6604,7 @@
 				62E98E718321FFBD61C5A671 /* CourseWidgetStatsItemView.swift */,
 				62E98C0BB290D5BFB0F69A2E /* CourseWidgetStatsView.swift */,
 				62E981558CAEBFB426F04DD2 /* CourseWidgetView.swift */,
+				2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -8354,6 +8363,7 @@
 				2CF10C8B238426B300F8CC95 /* StepSourcesNetworkService.swift in Sources */,
 				2C04BA47240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift in Sources */,
 				2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */,
+				2C2E44D124FE3FBF006B7303 /* SmallCourseWidgetView.swift in Sources */,
 				62E9862FEEA0320F590E1C3D /* UniqueIdentifiable.swift in Sources */,
 				2CC276FE23EB98CE00E88D6E /* UIBarButtonItem+StepikBarButtonItems.swift in Sources */,
 				62E98D1BBD212BF163DCAF48 /* SectionsPersistenceService.swift in Sources */,
@@ -8586,6 +8596,7 @@
 				62E98F674E6B10451E7397F9 /* ContentLanguageSwitchPresenter.swift in Sources */,
 				62E98273401D1360B07BAD0A /* ContentLanguageSwitchProvider.swift in Sources */,
 				2CB718DC249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift in Sources */,
+				2C2E44D324FE474F006B7303 /* CourseListGridSize.swift in Sources */,
 				62E9889E935597A0ED849B0C /* ContentLanguageSwitchViewController.swift in Sources */,
 				62E982DE03DC1E9967B8B43B /* ContentLanguageSwitchViewModel.swift in Sources */,
 				62E98561DFB8CBB54B0CA2F7 /* ContentLanguageSwitchButton.swift in Sources */,
@@ -8604,6 +8615,7 @@
 				62E982D4C94E14388A291624 /* CourseListsCollectionAssembly.swift in Sources */,
 				62E983D1190F2A5B3A400598 /* CourseListsCollectionDataFlow.swift in Sources */,
 				62E984F88D4253FDA7C8D7BA /* CourseListsCollectionInteractor.swift in Sources */,
+				2C2E44CF24FE331F006B7303 /* CourseListCardStyle.swift in Sources */,
 				62E984EF97B59BCBB5FE7401 /* CourseListsCollectionPresenter.swift in Sources */,
 				62E98434178EA051C7B20A56 /* CourseListsCollectionViewController.swift in Sources */,
 				62E9871AD527F876580625C3 /* CourseListsCollectionViewModel.swift in Sources */,

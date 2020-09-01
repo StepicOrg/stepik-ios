@@ -3,6 +3,8 @@ import UIKit
 class CourseListAssembly: Assembly {
     let type: CourseListType
     let colorMode: CourseListColorMode
+    let cardStyle: CourseListCardStyle
+    let gridSize: CourseListGridSize
 
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
@@ -22,11 +24,15 @@ class CourseListAssembly: Assembly {
     fileprivate init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        cardStyle: CourseListCardStyle,
+        gridSize: CourseListGridSize,
         courseViewSource: AnalyticsEvent.CourseViewSource,
         output: CourseListOutputProtocol? = nil
     ) {
         self.type = type
         self.colorMode = colorMode
+        self.cardStyle = cardStyle
+        self.gridSize = gridSize
         self.courseViewSource = courseViewSource
         self.moduleOutput = output
     }
@@ -94,6 +100,8 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
         HorizontalCourseListViewController(
             interactor: interactor,
             colorMode: self.colorMode,
+            cardStyle: self.cardStyle,
+            gridSize: self.gridSize,
             maxNumberOfDisplayedCourses: self.maxNumberOfDisplayedCourses
         )
     }
@@ -101,6 +109,8 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
     init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        cardStyle: CourseListCardStyle = .default,
+        gridSize: CourseListGridSize = .default,
         courseViewSource: AnalyticsEvent.CourseViewSource,
         maxNumberOfDisplayedCourses: Int? = HorizontalCourseListAssembly.defaultMaxNumberOfDisplayedCourses,
         output: CourseListOutputProtocol? = nil
@@ -109,6 +119,8 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
         super.init(
             type: type,
             colorMode: colorMode,
+            cardStyle: cardStyle,
+            gridSize: gridSize,
             courseViewSource: courseViewSource,
             output: output
         )
@@ -124,6 +136,8 @@ final class VerticalCourseListAssembly: CourseListAssembly {
         VerticalCourseListViewController(
             interactor: interactor,
             colorMode: self.colorMode,
+            cardStyle: self.cardStyle,
+            gridSize: self.gridSize,
             presentationDescription: self.presentationDescription
         )
     }
@@ -131,6 +145,8 @@ final class VerticalCourseListAssembly: CourseListAssembly {
     init(
         type: CourseListType,
         colorMode: CourseListColorMode,
+        cardStyle: CourseListCardStyle = .default,
+        gridSize: CourseListGridSize = .default,
         courseViewSource: AnalyticsEvent.CourseViewSource,
         presentationDescription: CourseList.PresentationDescription?,
         output: CourseListOutputProtocol? = nil
@@ -139,6 +155,8 @@ final class VerticalCourseListAssembly: CourseListAssembly {
         super.init(
             type: type,
             colorMode: colorMode,
+            cardStyle: cardStyle,
+            gridSize: gridSize,
             courseViewSource: courseViewSource,
             output: output
         )

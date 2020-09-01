@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol CourseWidgetViewProtocol: UIView {
+    func configure(viewModel: CourseWidgetViewModel)
+}
+
 extension CourseWidgetView {
     struct Appearance {
         let coverViewInsets = LayoutInsets(top: 16, left: 16)
@@ -23,7 +27,7 @@ extension CourseWidgetView {
     }
 }
 
-final class CourseWidgetView: UIView {
+final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
     let appearance: Appearance
     let colorMode: CourseListColorMode
 
