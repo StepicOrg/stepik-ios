@@ -62,8 +62,6 @@ enum Explore {
             case error
         }
 
-        struct Request {}
-
         struct Response {
             let module: Submodule
             let result: State

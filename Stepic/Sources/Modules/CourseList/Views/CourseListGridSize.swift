@@ -19,7 +19,7 @@ struct CourseListGridSize {
 
     init(rows: Int) {
         self.rows = rows
-        self.columns = CourseListGridSize.defaultColumnsCount
+        self.columns = Self.defaultColumnsCount
         self.isAutoColumns = true
     }
 }
