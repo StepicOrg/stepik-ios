@@ -65,12 +65,19 @@ final class VisitedCourseListPersistenceService: CourseListPersistenceService {
 }
 
 extension VisitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol {
+    private static let maxCount = 20
+
     func insert(course: Course) {
         if self.orderedSet.contains(course.id) {
             self.orderedSet.remove(course.id)
         }
 
         self.orderedSet.insert(course.id, at: 0)
+
+        if self.orderedSet.count > Self.maxCount {
+            let lastIndex = self.orderedSet.count - 1
+            self.orderedSet.removeObject(at: lastIndex)
+        }
 
         self.updateStorageUsingCurrentData()
     }
