@@ -135,7 +135,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             placeholder: StepikPlaceholder(
                 .noConnection,
                 action: { [weak self] in
-                    self?.interactor.doProfileRefresh(request: .init())
+                    self?.interactor.doProfileRefresh(request: .init(forceUpdate: true))
                 }
             ),
             for: .connectionError
@@ -688,7 +688,7 @@ extension NewProfileViewController: NewProfileViewDelegate {
 
     func newProfileViewRefreshControlDidRefresh(_ view: NewProfileView) {
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
-            self?.interactor.doProfileRefresh(request: .init())
+            self?.interactor.doProfileRefresh(request: .init(forceUpdate: true))
         }
     }
 }

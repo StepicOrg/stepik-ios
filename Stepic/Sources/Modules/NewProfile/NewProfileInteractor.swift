@@ -88,9 +88,12 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
             firstly { () -> Promise<NewProfile.ProfileLoad.Response> in
                 switch strongSelf.presentationDescription.profileType {
                 case .currentUser:
-                    return strongSelf.fetchCurrentUser()
+                    return strongSelf.fetchCurrentUser(forceUpdate: request.forceUpdate)
                 case .otherUser(let profileUserID):
-                    return strongSelf.fetchUserInAppropriateMode(userID: profileUserID)
+                    return strongSelf.fetchUserInAppropriateMode(
+                        userID: profileUserID,
+                        forceUpdate: request.forceUpdate
+                    )
                 }
             }.done { response in
                 // Ignore fulfilled errors, present only rejected ones.
@@ -162,24 +165,27 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
 
     // MARK: Private API
 
-    private func fetchCurrentUser() -> Promise<NewProfile.ProfileLoad.Response> {
+    private func fetchCurrentUser(forceUpdate: Bool) -> Promise<NewProfile.ProfileLoad.Response> {
         guard self.userAccountService.isAuthorized,
               let currentUserID = self.userAccountService.currentUserID else {
             return Promise(error: Error.unauthorized)
         }
 
         return firstly {
-            self.fetchUserInAppropriateMode(userID: currentUserID)
+            self.fetchUserInAppropriateMode(userID: currentUserID, forceUpdate: forceUpdate)
         }.then { response -> Promise<NewProfile.ProfileLoad.Response> in
             self.fetchCurrentUserProfile()
             return .value(response)
         }
     }
 
-    private func fetchUserInAppropriateMode(userID: User.IdType) -> Promise<NewProfile.ProfileLoad.Response> {
+    private func fetchUserInAppropriateMode(
+        userID: User.IdType,
+        forceUpdate: Bool
+    ) -> Promise<NewProfile.ProfileLoad.Response> {
         Promise { seal in
             firstly {
-                self.isOnline && self.didLoadFromCache
+                (self.isOnline && self.didLoadFromCache) || forceUpdate
                     ? self.provider.fetchRemoteUser(userID: userID)
                     : self.provider.fetchCachedUser(userID: userID)
             }.done { user in

@@ -37,10 +37,8 @@ final class NewProfileCreatedCoursesInteractor: NewProfileCreatedCoursesInteract
 
 extension NewProfileCreatedCoursesInteractor: NewProfileSubmoduleProtocol {
     func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
-        if self.currentUserID != user.id {
-            self.currentUserID = user.id
-            self.doCoursesLoad(request: .init())
-        }
+        self.currentUserID = user.id
+        self.doCoursesLoad(request: .init())
     }
 }
 

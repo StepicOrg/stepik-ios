@@ -29,7 +29,9 @@ enum NewProfile {
 
     /// Load & show info about profile
     enum ProfileLoad {
-        struct Request {}
+        struct Request {
+            var forceUpdate = false
+        }
 
         struct Data {
             let user: User
