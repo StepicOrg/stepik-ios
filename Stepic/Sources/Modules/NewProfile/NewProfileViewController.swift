@@ -14,6 +14,7 @@ protocol NewProfileViewControllerProtocol: AnyObject {
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
     enum Animation {
+        static let startRefreshDelay: TimeInterval = 1.0
         static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
@@ -134,7 +135,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             placeholder: StepikPlaceholder(
                 .noConnection,
                 action: { [weak self] in
-                    self?.interactor.doProfileRefresh(request: .init())
+                    self?.interactor.doProfileRefresh(request: .init(forceUpdate: true))
                 }
             ),
             for: .connectionError
@@ -181,6 +182,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.hideLoading()
         }
+
+        self.newProfileView?.endRefreshing()
 
         switch newState {
         case .loading:
@@ -681,6 +684,12 @@ extension NewProfileViewController: NewProfileViewDelegate {
     func newProfileView(_ view: NewProfileView, didScroll scrollView: UIScrollView) {
         self.lastKnownScrollOffset = scrollView.contentOffset.y
         self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+    }
+
+    func newProfileViewRefreshControlDidRefresh(_ view: NewProfileView) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
+            self?.interactor.doProfileRefresh(request: .init(forceUpdate: true))
+        }
     }
 }
 

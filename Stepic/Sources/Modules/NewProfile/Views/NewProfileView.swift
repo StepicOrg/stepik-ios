@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewProfileViewDelegate: AnyObject {
     func newProfileView(_ view: NewProfileView, didScroll scrollView: UIScrollView)
+    func newProfileViewRefreshControlDidRefresh(_ view: NewProfileView)
 }
 
 extension NewProfileView {
@@ -21,6 +22,7 @@ final class NewProfileView: UIView {
         let stackView = ScrollableStackView(orientation: .vertical)
         stackView.spacing = self.appearance.stackViewSpacing
         stackView.contentInsetAdjustmentBehavior = .never
+        stackView.delegate = self
         stackView.scrollDelegate = self
         if #available(iOS 13.0, *) {
             stackView.automaticallyAdjustsScrollIndicatorInsets = false
@@ -61,9 +63,15 @@ final class NewProfileView: UIView {
         self.skeleton.hide()
     }
 
+    func endRefreshing() {
+        self.scrollableStackView.endRefreshing()
+    }
+
     func configure(viewModel: NewProfileViewModel) {
         self.storedViewModel = viewModel
         self.headerView.configure(viewModel: viewModel.headerViewModel)
+
+        self.scrollableStackView.isRefreshControlEnabled = !viewModel.headerViewModel.isStretchyHeaderAvailable
     }
 
     // MARK: Blocks
@@ -101,6 +109,8 @@ extension NewProfileView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
+// MARK: - NewProfileView: UIScrollViewDelegate -
+
 extension NewProfileView: UIScrollViewDelegate {
     var contentInsets: UIEdgeInsets {
         get {
@@ -122,5 +132,13 @@ extension NewProfileView: UIScrollViewDelegate {
         }
 
         self.delegate?.newProfileView(self, didScroll: scrollView)
+    }
+}
+
+// MARK: - NewProfileView: ScrollableStackViewDelegate -
+
+extension NewProfileView: ScrollableStackViewDelegate {
+    func scrollableStackViewRefreshControlDidRefresh(_ scrollableStackView: ScrollableStackView) {
+        self.delegate?.newProfileViewRefreshControlDidRefresh(self)
     }
 }
