@@ -107,7 +107,12 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                 }
             }.ensure {
                 DispatchQueue.main.async { [weak self] in
-                    self?.updateNavigationControlsBasedOnCurrentState()
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.presenter.presentRefreshControlState(response: .init(shouldEndRefreshing: true))
+                    strongSelf.updateNavigationControlsBasedOnCurrentState()
                 }
 
                 strongSelf.fetchSemaphore.signal()

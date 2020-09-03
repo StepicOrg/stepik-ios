@@ -144,6 +144,17 @@ enum NewProfile {
         }
     }
 
+    // Handle UIRefreshControl
+    enum RefreshControlUpdate {
+        struct Response {
+            let shouldEndRefreshing: Bool
+        }
+
+        struct ViewModel {
+            let shouldEndRefreshing: Bool
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

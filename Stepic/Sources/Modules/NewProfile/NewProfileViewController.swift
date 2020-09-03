@@ -10,6 +10,7 @@ protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel)
     func displayAchievementsList(viewModel: NewProfile.AchievementsListPresentation.ViewModel)
     func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel)
+    func displayRefreshControl(response: NewProfile.RefreshControlUpdate.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -766,6 +767,12 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
     func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel) {
         let assembly = CertificatesLegacyAssembly(userID: viewModel.userID)
         self.push(module: assembly.makeModule())
+    }
+
+    func displayRefreshControl(response: NewProfile.RefreshControlUpdate.ViewModel) {
+        if response.shouldEndRefreshing {
+            self.newProfileView?.endRefreshing()
+        }
     }
 }
 

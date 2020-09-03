@@ -9,6 +9,7 @@ protocol NewProfilePresenterProtocol {
     func presentProfileEditing(response: NewProfile.ProfileEditAction.Response)
     func presentAchievementsList(response: NewProfile.AchievementsListPresentation.Response)
     func presentCertificatesList(response: NewProfile.CertificatesListPresentation.Response)
+    func presentRefreshControlState(response: NewProfile.RefreshControlUpdate.Response)
 }
 
 final class NewProfilePresenter: NewProfilePresenterProtocol {
@@ -68,6 +69,10 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
 
     func presentCertificatesList(response: NewProfile.CertificatesListPresentation.Response) {
         self.viewController?.displayCertificatesList(viewModel: .init(userID: response.userID))
+    }
+
+    func presentRefreshControlState(response: NewProfile.RefreshControlUpdate.Response) {
+        self.viewController?.displayRefreshControl(response: .init(shouldEndRefreshing: response.shouldEndRefreshing))
     }
 
     // MARK: Private API
