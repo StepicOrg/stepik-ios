@@ -95,7 +95,7 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
                 .map { (userCourses, $0.0) }
         }.then { cachedUserCourses, cachedCourses -> Promise<Course?> in
             let lastUserCourse = cachedUserCourses.filter { userCourse in
-                cachedCourses.contains(where: { $0.id == userCourse.courseID })
+                cachedCourses.contains(where: { $0.id == userCourse.courseID && $0.enrolled })
             }.max(by: { $0.lastViewed < $1.lastViewed })
 
             if let lastUserCourse = lastUserCourse,
