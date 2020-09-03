@@ -16,6 +16,12 @@ protocol LessonPresenterProtocol {
 final class LessonPresenter: LessonPresenterProtocol {
     weak var viewController: LessonViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentLesson(response: LessonDataFlow.LessonLoad.Response) {
         let viewModel: LessonDataFlow.LessonLoad.ViewModel
 
@@ -137,9 +143,7 @@ final class LessonPresenter: LessonPresenterProtocol {
         return LessonViewModel(
             lessonTitle: lessonTitle,
             steps: steps,
-            stepLinkMaker: {
-                "\(StepikApplicationsInfo.stepikURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
-            },
+            stepLinkMaker: { self.urlFactory.makeStep(lessonID: lesson.id, stepPosition: $0, fromMobile: true) },
             startStepIndex: startStepIndex
         )
     }

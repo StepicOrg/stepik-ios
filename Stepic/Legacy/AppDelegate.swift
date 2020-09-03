@@ -29,8 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationsService = NotificationsService()
     private let branchService = BranchService()
     private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
+    private let applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private let userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
+    private let visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
     private lazy var analytics: Analytics = { StepikAnalytics.shared }()
 
     deinit {
@@ -126,6 +128,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IAPService.shared.startObservingPayments()
 
+        // If app launched using a quick action, perform the requested quick action and return a value of false
+        // to prevent call the application:performActionForShortcutItem:completionHandler: method.
+        if self.applicationShortcutService.handleLaunchOptions(launchOptions) {
+            return false
+        }
+
         return true
     }
 
@@ -140,12 +148,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         self.notificationsService.removeRetentionNotifications()
         self.userCoursesObserver.startObserving()
+        self.visitedCoursesCleaner.addObserves()
         IAPService.shared.prefetchProducts()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
         self.userCoursesObserver.stopObserving()
+        self.visitedCoursesCleaner.removeObservers()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -239,6 +249,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return false
+    }
+
+    func application(
+        _ application: UIApplication,
+        performActionFor shortcutItem: UIApplicationShortcutItem,
+        completionHandler: @escaping (Bool) -> Void
+    ) {
+        completionHandler(self.applicationShortcutService.handleShortcutItem(shortcutItem))
     }
 
     // MARK: - Opening a URL-Specified Resource -

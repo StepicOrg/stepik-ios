@@ -8,6 +8,7 @@ enum Explore {
         case languageSwitch
         case tags
         case collection
+        case visitedCourses
         case popularCourses
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
@@ -54,6 +55,24 @@ enum Explore {
         }
     }
 
+    // Refresh course block
+    enum CourseListStateUpdate {
+        enum State {
+            case empty
+            case error
+        }
+
+        struct Response {
+            let module: Submodule
+            let result: State
+        }
+
+        struct ViewModel {
+            let module: Submodule
+            let result: State
+        }
+    }
+
     /// Update status bar style (called by stories module)
     enum StatusBarStyleUpdate {
         struct Response {
@@ -63,6 +82,11 @@ enum Explore {
         struct ViewModel {
             let statusBarStyle: UIStatusBarStyle
         }
+    }
+
+    /// Start search for courses
+    enum SearchCourses {
+        struct ViewModel {}
     }
 
     // MARK: States

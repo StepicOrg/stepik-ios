@@ -396,13 +396,13 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     }
 
     private func presentShareStep() {
-        guard case .result(let data) = self.state else {
+        guard case .result(let data) = self.state,
+              let stepURL = data.stepLinkMaker((self.currentIndex ?? 0) + 1) else {
             return
         }
 
         DispatchQueue.global().async {
-            let link = data.stepLinkMaker("\((self.currentIndex ?? 0) + 1)")
-            let sharingViewController = SharingHelper.getSharingController(link)
+            let sharingViewController = SharingHelper.getSharingController(stepURL.absoluteString)
             DispatchQueue.main.async {
                 sharingViewController.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
                 self.present(sharingViewController, animated: true, completion: nil)

@@ -78,7 +78,7 @@ final class DeepLinkRoutingService {
         case .home:
             return TabBarRouter(tab: .home)
         case .catalog:
-            return TabBarRouter(tab: .catalog)
+            return TabBarRouter(tab: .catalog())
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
         case .course, .coursePromo, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:

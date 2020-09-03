@@ -39,7 +39,7 @@ final class LessonAssembly: Assembly {
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
             viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI())
         )
-        let presenter = LessonPresenter()
+        let presenter = LessonPresenter(urlFactory: StepikURLFactory())
         let interactor = LessonInteractor(
             initialContext: self.initialContext,
             startStep: self.startStep,

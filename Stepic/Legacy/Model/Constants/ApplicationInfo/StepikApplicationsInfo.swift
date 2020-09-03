@@ -48,6 +48,7 @@ struct StepikApplicationsInfo {
     static var apiURL = Self.stepikConfigInfo?.get(for: Root.URL.api) as? String ?? ""
     static let oauthURL = Self.stepikConfigInfo?.get(for: Root.URL.oauth) as? String ?? ""
     static let stepikURL = Self.stepikConfigInfo?.get(for: Root.URL.stepik) as? String ?? ""
+    static let stepikHost = Self.stepikConfigInfo?.get(for: Root.URL.host) as? String ?? ""
     static let versionInfoURL = Self.stepikConfigInfo?.get(for: Root.URL.version) as? String ?? ""
     static let adaptiveRatingURL = Self.stepikConfigInfo?.get(for: Root.URL.adaptiveRating) as? String ?? ""
 

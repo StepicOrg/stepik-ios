@@ -21,6 +21,10 @@ protocol CourseListDataBackUpdateServiceDelegate: AnyObject {
         _ service: CourseListDataBackUpdateServiceProtocol,
         didUpdateUserCourse userCourse: UserCourse
     )
+    /// Tells the delegate that the course list is updated.
+    func courseListDataBackUpdateServiceDidUpdateCourseList(
+        _ service: CourseListDataBackUpdateServiceProtocol
+    )
 }
 
 protocol CourseListDataBackUpdateServiceProtocol: AnyObject {
@@ -78,11 +82,14 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
         _ dataBackUpdateService: DataBackUpdateService,
         didReport refreshedTarget: DataBackUpdateTarget
     ) {
-        guard case .userCourse(let userCourse) = refreshedTarget else {
-            return
+        switch refreshedTarget {
+        case .userCourse(let userCourse):
+            self.delegate?.courseListDataBackUpdateService(self, didUpdateUserCourse: userCourse)
+        case .visitedCourse:
+            self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+        default:
+            break
         }
-
-        self.delegate?.courseListDataBackUpdateService(self, didUpdateUserCourse: userCourse)
     }
 
     // MARK: Private Helpers

@@ -44,7 +44,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
         beforeEach {
             viewController = NewStepViewControllerMock()
-            let newStepPresenter = StepPresenter()
+            let newStepPresenter = StepPresenter(urlFactory: StepikURLFactory())
             newStepPresenter.viewController = viewController
             presenter = newStepPresenter
         }

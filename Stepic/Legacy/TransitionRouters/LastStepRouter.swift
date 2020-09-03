@@ -24,6 +24,15 @@ final class LastStepRouter {
         skipSyllabus: Bool = false,
         courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
+        guard course.enrolled else {
+            return self.fallbackToCourseInfo(
+                courseID: course.id,
+                initialTab: .info,
+                courseViewSource: courseViewSource,
+                navigationController: navigationController
+            )
+        }
+
         guard course.canContinue,
               let lastStepID = course.lastStepId else {
             return self.fallbackToSyllabus(
@@ -264,16 +273,20 @@ final class LastStepRouter {
                 title: NSLocalizedString("Open", comment: ""),
                 style: .default,
                 handler: { _ in
-                    let courseWebURLPath: String = {
+                    let courseSyllabusURL: URL? = {
                         if let slug = course.slug {
-                            return "\(StepikApplicationsInfo.stepikURL)/course/\(slug)"
+                            return StepikURLFactory().makeCourseSyllabus(slug: slug, fromMobile: true)
                         } else {
-                            return "\(StepikApplicationsInfo.stepikURL)/\(course.id)"
+                            return StepikURLFactory().makeCourseSyllabus(id: course.id, fromMobile: true)
                         }
                     }()
 
+                    guard let urlPath = courseSyllabusURL?.absoluteString else {
+                        return
+                    }
+
                     WebControllerManager.shared.presentWebControllerWithURLString(
-                        "\(courseWebURLPath)/syllabus?from_mobile_app=true",
+                        urlPath,
                         inController: presentationController,
                         withKey: .exam,
                         allowsSafari: true,
@@ -298,15 +311,30 @@ final class LastStepRouter {
         courseViewSource: AnalyticsEvent.CourseViewSource,
         navigationController: UINavigationController
     ) {
+        self.fallbackToCourseInfo(
+            courseID: courseID,
+            initialTab: .syllabus,
+            courseViewSource: courseViewSource,
+            navigationController: navigationController
+        )
+        StepikAnalytics.shared.send(.continueLastStepSyllabusOpened)
+    }
+
+    private static func fallbackToCourseInfo(
+        courseID: Course.IdType,
+        initialTab: CourseInfo.Tab,
+        courseViewSource: AnalyticsEvent.CourseViewSource,
+        navigationController: UINavigationController
+    ) {
         SVProgressHUD.dismiss()
 
         let assembly = CourseInfoAssembly(
             courseID: courseID,
-            initialTab: .syllabus,
+            initialTab: initialTab,
             courseViewSource: courseViewSource
         )
-        navigationController.pushViewController(assembly.makeModule(), animated: true)
+        let viewController = assembly.makeModule()
 
-        StepikAnalytics.shared.send(.continueLastStepSyllabusOpened)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

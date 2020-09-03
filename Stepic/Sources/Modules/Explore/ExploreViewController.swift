@@ -5,7 +5,9 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayContent(viewModel: Explore.ContentLoad.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel)
     func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel)
-    func displayStatusBarStyle(response: Explore.StatusBarStyleUpdate.ViewModel)
+    func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel)
+    func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel)
+    func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -19,6 +21,7 @@ final class ExploreViewController: BaseExploreViewController {
         .languageSwitch,
         .tags,
         .collection,
+        .visitedCourses,
         .popularCourses
     ]
 
@@ -68,7 +71,16 @@ final class ExploreViewController: BaseExploreViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         self.analytics.send(.catalogScreenOpened)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.refreshStateForVisitedCourses(state: .normal)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -94,6 +106,8 @@ final class ExploreViewController: BaseExploreViewController {
 
                 strongSelf.removeLanguageDependentSubmodules()
                 strongSelf.initLanguageDependentSubmodules(contentLanguage: language)
+
+                strongSelf.refreshStateForVisitedCourses(state: .normal)
             }
         case .loading:
             break
@@ -195,6 +209,91 @@ final class ExploreViewController: BaseExploreViewController {
         }
     }
 
+    // MARK: - Visited courses submodule
+
+    private enum VisitedCourseListState {
+        case normal
+        case empty
+
+        var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
+            CourseListContainerViewFactory.HorizontalHeaderDescription(
+                title: NSLocalizedString("VisitedCourses", comment: ""),
+                summary: nil,
+                shouldShowAllButton: self == .normal
+            )
+        }
+
+        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+            switch self {
+            case .empty:
+                return .visitedEmpty
+            default:
+                fatalError("State not supported placeholder")
+            }
+        }
+    }
+
+    private func makeVisitedCourseListSubmodule() -> (UIView, UIViewController?) {
+        let courseListType = VisitedCourseListType()
+        let visitedCourseListAssembly = HorizontalCourseListAssembly(
+            type: courseListType,
+            colorMode: .light,
+            cardStyle: .small,
+            gridSize: CourseListGridSize(rows: 1),
+            courseViewSource: .visitedCourses,
+            output: self.interactor as? CourseListOutputProtocol
+        )
+        let visitedViewController = visitedCourseListAssembly.makeModule()
+        visitedCourseListAssembly.moduleInput?.moduleIdentifier = Explore.Submodule
+            .visitedCourses
+            .uniqueIdentifier
+        visitedCourseListAssembly.moduleInput?.setOnlineStatus()
+        return (visitedViewController.view, visitedViewController)
+    }
+
+    private func refreshStateForVisitedCourses(state: VisitedCourseListState) {
+        // Remove previous module. It's easiest way to refresh module
+        if let module = self.getSubmodule(type: Explore.Submodule.visitedCourses) {
+            self.removeSubmodule(module)
+        }
+
+        // Build new module
+        // Each module should has view and attached view controller (if module is active submodule)
+        var viewController: UIViewController?
+        var view: UIView
+
+        if case .normal = state {
+            // Build course list submodule
+            (view, viewController) = self.makeVisitedCourseListSubmodule()
+        } else {
+            // Build placeholder
+            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
+            (view, viewController) = (placeholderView, nil)
+        }
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(for: view, headerDescription: state.headerDescription)
+
+        containerView.onShowAllButtonClick = { [weak self] in
+            self?.interactor.doFullscreenCourseListPresentation(
+                request: .init(
+                    presentationDescription: nil,
+                    courseListType: VisitedCourseListType()
+                )
+            )
+        }
+
+        // Register module
+        self.registerSubmodule(
+            .init(
+                viewController: viewController,
+                view: containerView,
+                isLanguageDependent: false,
+                type: Explore.Submodule.visitedCourses
+            )
+        )
+    }
+
     // MARK: - Search
 
     private func initSearchResults() {
@@ -269,10 +368,24 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         }
     }
 
-    func displayStatusBarStyle(response: Explore.StatusBarStyleUpdate.ViewModel) {
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarStyle(response.statusBarStyle, sender: self)
+    func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel) {
+        switch viewModel.module {
+        case .visitedCourses:
+            self.refreshStateForVisitedCourses(state: .empty)
+        default:
+            break
         }
+    }
+
+    func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel) {
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
+        }
+    }
+
+    func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel) {
+        self.searchBar.becomeFirstResponder()
+        self.searchBarTextDidBeginEditing(self.searchBar)
     }
 }
 

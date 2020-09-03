@@ -23,7 +23,7 @@ final class StepAssembly: Assembly {
             ),
             discussionThreadsPersistenceService: DiscussionThreadsPersistenceService()
         )
-        let presenter = StepPresenter()
+        let presenter = StepPresenter(urlFactory: StepikURLFactory())
         let interactor = StepInteractor(
             stepID: self.stepID,
             presenter: presenter,

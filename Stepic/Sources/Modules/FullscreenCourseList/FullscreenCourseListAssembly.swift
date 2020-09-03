@@ -16,7 +16,7 @@ final class FullscreenCourseListAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let presenter = FullscreenCourseListPresenter()
+        let presenter = FullscreenCourseListPresenter(urlFactory: StepikURLFactory())
         let interactor = FullscreenCourseListInteractor(
             presenter: presenter,
             networkReachabilityService: NetworkReachabilityService()

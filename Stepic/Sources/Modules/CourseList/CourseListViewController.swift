@@ -25,17 +25,23 @@ class CourseListViewController: UIViewController {
     lazy var courseListView = self.view as? CourseListView
 
     let colorMode: CourseListColorMode
+    let cardStyle: CourseListCardStyle
+    let gridSize: CourseListGridSize
     fileprivate var canTriggerPagination = true
 
     fileprivate init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
         colorMode: CourseListColorMode = .default,
+        cardStyle: CourseListCardStyle = .default,
+        gridSize: CourseListGridSize = .default,
         maxNumberOfDisplayedCourses: Int? = nil
     ) {
         self.interactor = interactor
         self.state = initialState
         self.colorMode = colorMode
+        self.cardStyle = cardStyle
+        self.gridSize = gridSize
 
         self.listDelegate = CourseListCollectionViewDelegate()
         self.listDataSource = CourseListCollectionViewDataSource(
@@ -139,12 +145,16 @@ final class HorizontalCourseListViewController: CourseListViewController {
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
         colorMode: CourseListColorMode = .default,
+        cardStyle: CourseListCardStyle = .default,
+        gridSize: CourseListGridSize = .default,
         maxNumberOfDisplayedCourses: Int? = nil
     ) {
         super.init(
             interactor: interactor,
             initialState: initialState,
             colorMode: colorMode,
+            cardStyle: cardStyle,
+            gridSize: gridSize,
             maxNumberOfDisplayedCourses: maxNumberOfDisplayedCourses
         )
     }
@@ -157,9 +167,9 @@ final class HorizontalCourseListViewController: CourseListViewController {
     override func loadView() {
         let view = HorizontalCourseListView(
             frame: UIScreen.main.bounds,
-            columnsCount: HorizontalCourseListView.adaptiveColumnsCount,
-            rowsCount: 2,
+            gridSize: self.gridSize,
             colorMode: self.colorMode,
+            cardStyle: self.cardStyle,
             delegate: self.listDelegate,
             dataSource: self.listDataSource,
             viewDelegate: self
@@ -176,6 +186,8 @@ final class VerticalCourseListViewController: CourseListViewController {
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
         colorMode: CourseListColorMode = .default,
+        cardStyle: CourseListCardStyle = .default,
+        gridSize: CourseListGridSize = .default,
         presentationDescription: CourseList.PresentationDescription?
     ) {
         self.presentationDescription = presentationDescription
@@ -183,6 +195,8 @@ final class VerticalCourseListViewController: CourseListViewController {
             interactor: interactor,
             initialState: initialState,
             colorMode: colorMode,
+            cardStyle: cardStyle,
+            gridSize: gridSize,
             maxNumberOfDisplayedCourses: nil
         )
     }
@@ -195,8 +209,9 @@ final class VerticalCourseListViewController: CourseListViewController {
     override func loadView() {
         let view = VerticalCourseListView(
             frame: UIScreen.main.bounds,
-            columnsCount: VerticalCourseListView.adaptiveColumnsCount,
             colorMode: self.colorMode,
+            cardStyle: self.cardStyle,
+            gridSize: self.gridSize,
             delegate: self.listDelegate,
             dataSource: self.listDataSource,
             viewDelegate: self,

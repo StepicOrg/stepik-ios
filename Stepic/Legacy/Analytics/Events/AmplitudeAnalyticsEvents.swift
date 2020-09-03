@@ -475,6 +475,7 @@ extension AnalyticsEvent {
 
     enum CourseViewSource {
         case myCourses
+        case visitedCourses
         case downloads
         case fastContinue
         case search(query: String)
@@ -490,6 +491,8 @@ extension AnalyticsEvent {
             switch self {
             case .myCourses:
                 return "my_courses"
+            case .visitedCourses:
+                return "visited_courses"
             case .downloads:
                 return "downloads"
             case .fastContinue:
@@ -515,7 +518,7 @@ extension AnalyticsEvent {
 
         var params: [String: Any]? {
             switch self {
-            case .myCourses, .downloads, .fastContinue, .notification, .unknown:
+            case .myCourses, .visitedCourses, .downloads, .fastContinue, .notification, .unknown:
                 return nil
             case .search(let query):
                 return ["query": query]
@@ -758,6 +761,15 @@ extension AnalyticsEvent {
 
         return AmplitudeAnalyticsEvent(
             name: "Spotlight item tapped",
+            parameters: ["type": type]
+        )
+    }
+
+    // MARK: - Home Screen Quick Actions -
+
+    static func shortcutItemTriggered(type: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Home screen quick action triggered",
             parameters: ["type": type]
         )
     }

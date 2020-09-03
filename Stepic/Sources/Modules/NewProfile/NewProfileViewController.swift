@@ -10,10 +10,12 @@ protocol NewProfileViewControllerProtocol: AnyObject {
     func displayProfileEditing(viewModel: NewProfile.ProfileEditAction.ViewModel)
     func displayAchievementsList(viewModel: NewProfile.AchievementsListPresentation.ViewModel)
     func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel)
+    func displayRefreshControl(response: NewProfile.RefreshControlUpdate.ViewModel)
 }
 
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
     enum Animation {
+        static let startRefreshDelay: TimeInterval = 1.0
         static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
@@ -134,7 +136,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             placeholder: StepikPlaceholder(
                 .noConnection,
                 action: { [weak self] in
-                    self?.interactor.doProfileRefresh(request: .init())
+                    self?.interactor.doProfileRefresh(request: .init(forceUpdate: true))
                 }
             ),
             for: .connectionError
@@ -181,6 +183,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             self.isPlaceholderShown = false
             self.newProfileView?.hideLoading()
         }
+
+        self.newProfileView?.endRefreshing()
 
         switch newState {
         case .loading:
@@ -682,6 +686,12 @@ extension NewProfileViewController: NewProfileViewDelegate {
         self.lastKnownScrollOffset = scrollView.contentOffset.y
         self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
     }
+
+    func newProfileViewRefreshControlDidRefresh(_ view: NewProfileView) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
+            self?.interactor.doProfileRefresh(request: .init(forceUpdate: true))
+        }
+    }
 }
 
 // MARK: - NewProfileViewController: NewProfileViewControllerProtocol -
@@ -757,6 +767,12 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
     func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel) {
         let assembly = CertificatesLegacyAssembly(userID: viewModel.userID)
         self.push(module: assembly.makeModule())
+    }
+
+    func displayRefreshControl(response: NewProfile.RefreshControlUpdate.ViewModel) {
+        if response.shouldEndRefreshing {
+            self.newProfileView?.endRefreshing()
+        }
     }
 }
 

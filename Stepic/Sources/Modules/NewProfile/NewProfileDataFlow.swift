@@ -29,7 +29,9 @@ enum NewProfile {
 
     /// Load & show info about profile
     enum ProfileLoad {
-        struct Request {}
+        struct Request {
+            var forceUpdate = false
+        }
 
         struct Data {
             let user: User
@@ -139,6 +141,17 @@ enum NewProfile {
 
         struct ViewModel {
             let userID: User.IdType
+        }
+    }
+
+    // Handle UIRefreshControl
+    enum RefreshControlUpdate {
+        struct Response {
+            let shouldEndRefreshing: Bool
+        }
+
+        struct ViewModel {
+            let shouldEndRefreshing: Bool
         }
     }
 

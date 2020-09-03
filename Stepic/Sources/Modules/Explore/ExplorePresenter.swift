@@ -4,6 +4,7 @@ protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
     func presentContent(response: Explore.ContentLoad.Response)
     func presentLanguageSwitchBlock(response: Explore.LanguageSwitchAvailabilityCheck.Response)
     func presentStoriesBlock(response: Explore.StoriesVisibilityUpdate.Response)
+    func presentCourseListState(response: Explore.CourseListStateUpdate.Response)
     func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response)
 }
 
@@ -28,7 +29,16 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
         )
     }
 
+    func presentCourseListState(response: Explore.CourseListStateUpdate.Response) {
+        self.exploreViewController?.displayModuleErrorState(
+            viewModel: .init(
+                module: response.module,
+                result: response.result
+            )
+        )
+    }
+
     func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response) {
-        self.exploreViewController?.displayStatusBarStyle(response: .init(statusBarStyle: response.statusBarStyle))
+        self.exploreViewController?.displayStatusBarStyle(viewModel: .init(statusBarStyle: response.statusBarStyle))
     }
 }
