@@ -140,7 +140,10 @@ final class NotificationsViewController: UIViewController, NotificationsView {
             self.tableView.reloadData()
         }
 
-        self.markAllAsReadButton.isEnabled = !self.data.isEmpty
+        let containsUnreadNotification = self.data.contains { (_, notifications) -> Bool in
+            notifications.first(where: { $0.status == .unread }) != nil
+        }
+        self.markAllAsReadButton.isEnabled = containsUnreadNotification
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

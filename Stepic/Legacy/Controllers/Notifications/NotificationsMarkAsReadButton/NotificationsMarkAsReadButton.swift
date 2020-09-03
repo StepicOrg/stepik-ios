@@ -20,7 +20,7 @@ final class NotificationsMarkAsReadButton: StepikButton {
 
     override var isEnabled: Bool {
         didSet {
-            self.alpha = self.isEnabled ? 1.0 : 0.75
+            self.alpha = self.isEnabled ? 1.0 : 0.5
         }
     }
 
