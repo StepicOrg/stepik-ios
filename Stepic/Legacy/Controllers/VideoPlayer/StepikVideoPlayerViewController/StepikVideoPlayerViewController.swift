@@ -39,7 +39,7 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
 // MARK: - StepikVideoPlayerViewControllerDelegate: AnyObject -
 
 protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
-    func stepikVideoPlayerViewControllerDidRequestAutoplay()
+    func stepikVideoPlayerViewControllerDidRequestAutoplay(_ viewController: StepikVideoPlayerViewController)
 }
 
 // MARK: - Appearance & Animation -
@@ -276,9 +276,10 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     deinit {
+        print("StepikVideoPlayerViewController :: deinit")
+        self.stopPlayback()
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         NotificationCenter.default.removeObserver(self)
-        print("StepikVideoPlayerViewController :: did deinit")
         self.hidePlayerControlsTimer?.invalidate()
     }
 
@@ -464,6 +465,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private func dismissPlayer() {
         self.saveCurrentPlayerTime()
+        self.stopPlayback()
         self.dismiss(animated: true)
     }
 
@@ -609,6 +611,16 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     // MARK: Controlling the playback state
+
+    func stopPlayback() {
+        self.player.stop()
+
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("StepikVideoPlayerViewController :: failed deactivate app’s audio session with error = \(error)")
+        }
+    }
 
     private func getInitialVideoQualityURL() -> URL {
         if self.video.state == .cached {
@@ -787,7 +799,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                 return
             }
 
-            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(strongSelf)
         }
     }
 
@@ -798,7 +810,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @objc
     private func didClickPlayNext() {
-        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(self)
     }
 
     @objc
@@ -880,8 +892,6 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         if player.playbackState == .playing {
             self.playerStartTime = max(0, player.currentTime)
         }
-
-        print("StepikVideoPlayerViewController :: player current time changed to \(player.currentTime)")
     }
 
     func playerPlaybackDidEnd(_ player: Player) {
