@@ -17,6 +17,7 @@ extension User {
     @NSManaged var managedProfile: NSNumber?
     @NSManaged var managedPrivate: NSNumber?
     @NSManaged var managedActive: NSNumber?
+    @NSManaged var managedGuest: NSNumber?
     @NSManaged var managedOrganization: NSNumber?
     @NSManaged var managedBio: String?
     @NSManaged var managedDetails: String?
@@ -24,7 +25,6 @@ extension User {
     @NSManaged var managedLastName: String?
     @NSManaged var managedAvatarURL: String?
     @NSManaged var managedCover: String?
-    @NSManaged var managedLevel: NSNumber?
     @NSManaged var managedKnowledge: NSNumber?
     @NSManaged var managedKnowledgeRank: NSNumber?
     @NSManaged var managedReputation: NSNumber?
@@ -108,6 +108,15 @@ extension User {
         }
     }
 
+    var isGuest: Bool {
+        get {
+            self.managedGuest?.boolValue ?? false
+        }
+        set {
+            self.managedGuest = NSNumber(value: newValue)
+        }
+    }
+
     var isOrganization: Bool {
         get {
              self.managedOrganization?.boolValue ?? false
@@ -172,15 +181,6 @@ extension User {
         }
         set {
             self.managedCover = newValue
-        }
-    }
-
-    var level: Int {
-        set(value) {
-            managedLevel = value as NSNumber?
-        }
-        get {
-             managedLevel?.intValue ?? 0
         }
     }
 
