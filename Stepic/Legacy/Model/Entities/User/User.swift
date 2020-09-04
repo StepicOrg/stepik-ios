@@ -14,8 +14,6 @@ import SwiftyJSON
 final class User: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    var isGuest: Bool { self.level == 0 }
-
     /// Returns true if joinDate is less than in 5 minutes from now.
     var didJustRegister: Bool {
         if let joinDate = self.joinDate {
@@ -33,6 +31,7 @@ final class User: NSManagedObject, IDFetchable {
         self.id = json[JSONKey.id.rawValue].intValue
         self.profile = json[JSONKey.profile.rawValue].intValue
         self.isPrivate = json[JSONKey.isPrivate.rawValue].boolValue
+        self.isGuest = json[JSONKey.isGuest.rawValue].boolValue
         self.isActive = json[JSONKey.isActive.rawValue].boolValue
         self.isOrganization = json[JSONKey.isOrganization.rawValue].boolValue
         self.bio = json[JSONKey.shortBio.rawValue].stringValue
@@ -41,7 +40,6 @@ final class User: NSManagedObject, IDFetchable {
         self.lastName = json[JSONKey.lastName.rawValue].stringValue
         self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
         self.cover = json[JSONKey.cover.rawValue].string
-        self.level = json[JSONKey.level.rawValue].intValue
         self.knowledge = json[JSONKey.knowledge.rawValue].intValue
         self.knowledgeRank = json[JSONKey.knowledgeRank.rawValue].intValue
         self.reputation = json[JSONKey.reputation.rawValue].intValue
@@ -106,6 +104,7 @@ final class User: NSManagedObject, IDFetchable {
         case id
         case profile
         case isPrivate = "is_private"
+        case isGuest = "is_guest"
         case isOrganization = "is_organization"
         case shortBio = "short_bio"
         case details
@@ -113,7 +112,6 @@ final class User: NSManagedObject, IDFetchable {
         case lastName = "last_name"
         case avatar
         case cover
-        case level
         case joinDate = "join_date"
         case isActive = "is_active"
         case knowledge

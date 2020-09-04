@@ -58,3 +58,15 @@ final class StepikToken: DictionarySerializable {
         return res
     }
 }
+
+extension StepikToken: CustomStringConvertible {
+    var description: String {
+        """
+        StepikToken(accessToken: \(String(describing: self.accessToken)), \
+        refreshToken: \(String(describing: self.refreshToken)), \
+        tokenType: \(String(describing: self.tokenType)), \
+        expireDate: \(String(describing: self.expireDate)), \
+        expireDelta: \(self.expireDelta))
+        """
+    }
+}
