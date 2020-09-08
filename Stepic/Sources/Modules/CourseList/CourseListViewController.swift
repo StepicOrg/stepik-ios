@@ -65,7 +65,7 @@ class CourseListViewController: UIViewController {
         self.interactor.doCoursesFetch(request: .init())
     }
 
-    func updatePagination(hasNextPage: Bool, hasError: Bool) {
+    func updatePagination(hasNextPage: Bool) {
         self.canTriggerPagination = hasNextPage
     }
 
@@ -89,7 +89,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
             self.listDataSource.viewModels = data.courses
             self.listDelegate.viewModels = data.courses
             self.updateState(newState: viewModel.state)
-            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
+            self.updatePagination(hasNextPage: data.hasNextPage)
         }
     }
 
@@ -99,10 +99,9 @@ extension CourseListViewController: CourseListViewControllerProtocol {
             self.listDataSource.viewModels.append(contentsOf: data.courses)
             self.listDelegate.viewModels.append(contentsOf: data.courses)
             self.updateState(newState: self.state)
-            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
+            self.updatePagination(hasNextPage: data.hasNextPage)
         case .error:
-            self.updateState(newState: self.state)
-            self.updatePagination(hasNextPage: true, hasError: true)
+            self.updatePagination(hasNextPage: true)
         }
     }
 
@@ -181,6 +180,7 @@ final class HorizontalCourseListViewController: CourseListViewController {
 final class VerticalCourseListViewController: CourseListViewController {
     private let presentationDescription: CourseList.PresentationDescription?
     lazy var verticalCourseListView = self.courseListView as? VerticalCourseListView
+    lazy var paginationView = self.verticalCourseListView?.paginationView as? PaginationView
 
     init(
         interactor: CourseListInteractorProtocol,
@@ -227,39 +227,15 @@ final class VerticalCourseListViewController: CourseListViewController {
             view.headerView = headerView
         }
 
-        let paginationView = PaginationView()
-        paginationView.onRefreshButtonClick = { [weak self] in
-            guard let strongSelf = self,
-                  let paginationView = strongSelf.verticalCourseListView?.paginationView as? PaginationView else {
-                return
-            }
-
-            paginationView.setLoading()
-            strongSelf.interactor.doNextCoursesFetch(request: .init())
-        }
-        view.paginationView = paginationView
+        view.paginationView = PaginationView()
 
         self.view = view
     }
 
-    override func updatePagination(hasNextPage: Bool, hasError: Bool) {
-        super.updatePagination(hasNextPage: hasNextPage, hasError: hasError)
-
-        // Block pagination requests on scroll until we have error.
-        if hasError {
-            self.canTriggerPagination = false
-        }
+    override func updatePagination(hasNextPage: Bool) {
+        super.updatePagination(hasNextPage: hasNextPage)
 
         self.verticalCourseListView?.isPaginationViewHidden = !hasNextPage
-
-        guard let paginationView = self.verticalCourseListView?.paginationView as? PaginationView else {
-            return
-        }
-
-        if hasError {
-            paginationView.setError()
-        } else {
-            paginationView.setLoading()
-        }
+        self.paginationView?.setLoading()
     }
 }
