@@ -73,7 +73,7 @@ enum BaseQuiz {
 
         enum ErrorDomain {
             case networkConnection
-            case submissionEvaluation
+            case evaluateSubmission
         }
     }
 }

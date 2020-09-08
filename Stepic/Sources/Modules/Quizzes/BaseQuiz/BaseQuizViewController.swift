@@ -93,7 +93,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
             switch domain {
             case .networkConnection:
                 self.showPlaceholder(for: .connectionError)
-            case .submissionEvaluation:
+            case .evaluateSubmission:
                 self.showPlaceholder(for: .connectionErrorPollQuiz)
             }
         }

@@ -21,7 +21,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         case .failure(let error):
             switch error {
             case BaseQuizInteractor.Error.submissionPollFailed:
-                self.viewController?.displaySubmission(viewModel: .init(state: .error(domain: .submissionEvaluation)))
+                self.viewController?.displaySubmission(viewModel: .init(state: .error(domain: .evaluateSubmission)))
             default:
                 self.viewController?.displaySubmission(viewModel: .init(state: .error(domain: .networkConnection)))
             }
