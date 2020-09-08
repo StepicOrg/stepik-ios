@@ -1,6 +1,7 @@
 import SnapKit
 import UIKit
 
+// swiftlint:disable file_length
 extension CourseListView {
     struct Appearance {
         let layoutMinimumLineSpacing: CGFloat = 16.0
@@ -424,7 +425,7 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
     }
 }
 
-final class HorizontalCourseListView: CourseListView {
+final class HorizontalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource {
     private var gridSize: CourseListGridSize {
         didSet {
             self.horizontalCourseFlowLayout.columnsCount = self.gridSize.columns
@@ -450,6 +451,20 @@ final class HorizontalCourseListView: CourseListView {
         return layout
     }()
 
+    // We should use proxy cause we are using willDisplay method in delegate for pagination
+    // and some methods to show footer/header in data source
+    // swiftlint:disable weak_delegate
+    private var storedCollectionViewDelegate: UICollectionViewDelegate
+    private var storedCollectionViewDataSource: UICollectionViewDataSource
+    // swiftlint:enable weak_delegate
+
+    var paginationView: UIView?
+    var isPaginationViewHidden = true {
+        didSet {
+            self.updatePagination()
+        }
+    }
+
     override var flowLayout: UICollectionViewFlowLayout {
         self.horizontalCourseFlowLayout
     }
@@ -465,6 +480,9 @@ final class HorizontalCourseListView: CourseListView {
         appearance: Appearance = CourseListView.Appearance()
     ) {
         self.gridSize = gridSize
+        self.storedCollectionViewDelegate = delegate
+        self.storedCollectionViewDataSource = dataSource
+
         super.init(
             frame: frame,
             colorMode: colorMode,
@@ -472,8 +490,9 @@ final class HorizontalCourseListView: CourseListView {
             viewDelegate: viewDelegate,
             appearance: appearance
         )
-        self.collectionView.delegate = delegate
-        self.collectionView.dataSource = dataSource
+
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
 
         // Make scroll faster
         self.collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
@@ -485,14 +504,18 @@ final class HorizontalCourseListView: CourseListView {
     }
 
     override func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        self.storedCollectionViewDelegate = delegate
+        self.storedCollectionViewDataSource = dataSource
+
         if dataSource.collectionView(self.collectionView, numberOfItemsInSection: 0) == 1 {
             self.horizontalCourseFlowLayout.rowsCount = 1
         } else {
             self.horizontalCourseFlowLayout.rowsCount = self.gridSize.rows
         }
 
-        super.updateCollectionViewData(delegate: delegate, dataSource: dataSource)
+        super.updateCollectionViewData(delegate: self, dataSource: self)
 
+        self.layoutIfNeeded()
         self.invalidateIntrinsicContentSize()
     }
 
@@ -515,6 +538,84 @@ final class HorizontalCourseListView: CourseListView {
                 height: self.cardStyle.height
             )
         }
+    }
+
+    private func updatePagination() {
+        self.collectionView.performBatchUpdates(
+            _: { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.horizontalCourseFlowLayout.isPaginationHidden = strongSelf.isPaginationViewHidden
+            }
+        )
+    }
+
+    // MARK: UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.storedCollectionViewDelegate.collectionView?(collectionView, didSelectItemAt: indexPath)
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        self.storedCollectionViewDelegate.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
+
+        // Pagination working only when collection has one section
+        guard indexPath.section == 0 else {
+            return
+        }
+
+        // Handle pagination
+        let itemsCount = collectionView.numberOfItems(inSection: indexPath.section)
+        if indexPath.row + 1 == itemsCount {
+            self.delegate?.courseListViewDidPaginationRequesting(self)
+        }
+    }
+
+    // MARK: UICollectionViewDataSource
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.storedCollectionViewDataSource.collectionView(
+            collectionView,
+            numberOfItemsInSection: section
+        )
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        self.storedCollectionViewDataSource.collectionView(
+            collectionView,
+            cellForItemAt: indexPath
+        )
+    }
+
+    // Crash if present here
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let view: CollectionViewReusableView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                for: indexPath
+            )
+
+            if let footerView = self.paginationView {
+                view.attachView(footerView)
+            }
+
+            return view
+        }
+
+        fatalError("Kind is not supported")
     }
 }
 
