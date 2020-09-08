@@ -88,6 +88,7 @@ Correct = "Correct!";
 Wrong = "Wrong. Please, try again.";
 CorrectFreeResponse = "Your answer was saved.";
 ConnectionErrorText = "Could not connect to the internet";
+EvaluateSubmissionErrorText = "Failed to evaluate submission";
 PeerReviewText = "This is a task with peer review. Tap to open in web to get points.";
 ConnectionErrorPullToRefresh = "Enable connection and pull to refresh";
 EmptyFindCoursesTitle = "Refresh courses";

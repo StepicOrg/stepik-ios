@@ -57,6 +57,15 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
             ),
             for: .connectionError
         )
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnectionPollQuiz,
+                action: { [weak self] in
+                    self?.state = .loading
+                }
+            ),
+            for: .connectionErrorPollQuiz
+        )
         self.updateState()
 
         self.quizAssembly.moduleOutput = self
@@ -203,4 +212,10 @@ extension BaseQuizViewController: QuizOutputProtocol {
         self.update(reply: reply)
         self.submitCurrentReply()
     }
+}
+
+private extension StepikPlaceholderControllerContainer.PlaceholderState {
+    static let connectionErrorPollQuiz = StepikPlaceholderControllerContainer.PlaceholderState(
+        id: "connectionErrorPollQuiz"
+    )
 }

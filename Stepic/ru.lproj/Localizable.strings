@@ -88,6 +88,7 @@ Correct = "Верно!";
 Wrong = "Неправильно. Пожалуйста, попробуйте еще раз.";
 CorrectFreeResponse = "Ваше решение сохранено.";
 ConnectionErrorText = "Не удалось подключиться к сети";
+EvaluateSubmissionErrorText = "Не удалось проверить решение";
 PeerReviewText = "Это задание с рецензией. Нажмите, чтобы закончить задание в web и получить баллы.";
 ConnectionErrorPullToRefresh = "Включите соединение и потяните вниз";
 EmptyFindCoursesTitle = "Обновите курсы";
