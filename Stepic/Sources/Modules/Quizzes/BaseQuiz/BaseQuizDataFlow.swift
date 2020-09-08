@@ -32,7 +32,7 @@ enum BaseQuiz {
     }
 
     /// Retry submission polling
-    enum RetrySubmissionPoll {
+    enum RetryPollSubmission {
         struct Request {}
     }
 

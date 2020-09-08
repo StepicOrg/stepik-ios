@@ -62,7 +62,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
                 .noConnectionPollQuiz,
                 action: { [weak self] in
                     self?.state = .loading
-                    self?.interactor.doRetrySubmissionPoll(request: .init())
+                    self?.interactor.doRetryPollSubmission(request: .init())
                 }
             ),
             for: .connectionErrorPollQuiz

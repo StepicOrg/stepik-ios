@@ -4,7 +4,7 @@ import PromiseKit
 protocol BaseQuizInteractorProtocol {
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request)
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request)
-    func doRetrySubmissionPoll(request: BaseQuiz.RetrySubmissionPoll.Request)
+    func doRetryPollSubmission(request: BaseQuiz.RetryPollSubmission.Request)
     func doReplyCache(request: BaseQuiz.ReplyCache.Request)
     func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request)
 }
@@ -165,7 +165,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    func doRetrySubmissionPoll(request: BaseQuiz.RetrySubmissionPoll.Request) {
+    func doRetryPollSubmission(request: BaseQuiz.RetryPollSubmission.Request) {
         guard let attempt = self.currentAttempt,
               let submission = self.currentSubmission else {
             return
