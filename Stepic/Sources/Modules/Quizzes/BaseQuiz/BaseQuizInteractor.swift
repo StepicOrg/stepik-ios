@@ -4,6 +4,7 @@ import PromiseKit
 protocol BaseQuizInteractorProtocol {
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request)
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request)
+    func doRetrySubmissionPoll(request: BaseQuiz.RetrySubmissionPoll.Request)
     func doReplyCache(request: BaseQuiz.ReplyCache.Request)
     func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request)
 }
@@ -130,7 +131,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             }
 
             print("BaseQuizInteractor: submission created = \(submission.id), status = \(submission.statusString ??? "")")
-            // FIXME: analytics dependency
+
             let isAdaptive: Bool? = {
                 if let course = LastStepGlobalContext.context.course {
                     return self.adaptiveStorageManager.supportedInAdaptiveModeCoursesIDs.contains(course.id)
@@ -157,22 +158,24 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             return self.pollSubmission(submission)
         }.done { submission in
             print("BaseQuizInteractor: submission \(submission.id) completely evaluated")
-
-            self.currentSubmission = submission
-            self.presentSubmission(attempt: attempt, submission: submission)
-            self.moduleOutput?.handleSubmissionEvaluated()
-
-            if submission.isCorrect {
-                self.moduleOutput?.handleCorrectSubmission()
-
-                if self.suggestRateAppIfNeeded() {
-                    return
-                }
-
-                self.suggestStreakIfNeeded()
-            }
+            self.handleSubmissionEvaluated(attempt: attempt, submission: submission)
         }.catch { error in
-            print("BaseQuizInteractor: error while submission = \(error)")
+            print("BaseQuizInteractor: error while evaluating submission = \(error)")
+            self.presenter.presentSubmission(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doRetrySubmissionPoll(request: BaseQuiz.RetrySubmissionPoll.Request) {
+        guard let attempt = self.currentAttempt,
+              let submission = self.currentSubmission else {
+            return
+        }
+
+        self.pollSubmission(submission).done { submission in
+            print("BaseQuizInteractor: submission \(submission.id) completely evaluated")
+            self.handleSubmissionEvaluated(attempt: attempt, submission: submission)
+        }.catch { error in
+            print("BaseQuizInteractor: error while evaluating submission = \(error)")
             self.presenter.presentSubmission(response: .init(result: .failure(error)))
         }
     }
@@ -314,7 +317,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                     self.provider.fetchSubmission(id: submission.id, step: self.step)
                 }.done { submission in
                     guard let submission = submission else {
-                        throw Error.submissionFetchFailed
+                        throw Error.submissionPollFailed
                     }
 
                     if submission.status == .evaluation {
@@ -324,11 +327,29 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                     }
                 }.catch { error in
                     print("BaseQuizInteractor: error while polling submission = \(error)")
-                    seal.reject(Error.submissionFetchFailed)
+                    seal.reject(Error.submissionPollFailed)
                 }
             }
 
             poll(retryCount: 1)
+        }
+    }
+
+    private func handleSubmissionEvaluated(attempt: Attempt, submission: Submission) {
+        print("BaseQuizInteractor: submission \(submission.id) completely evaluated")
+
+        self.currentSubmission = submission
+        self.presentSubmission(attempt: attempt, submission: submission)
+        self.moduleOutput?.handleSubmissionEvaluated()
+
+        if submission.isCorrect {
+            self.moduleOutput?.handleCorrectSubmission()
+
+            if self.suggestRateAppIfNeeded() {
+                return
+            }
+
+            self.suggestStreakIfNeeded()
         }
     }
 
@@ -338,6 +359,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         case unknownAttempt
         case attemptFetchFailed
         case submissionFetchFailed
+        case submissionPollFailed
         case unknownUser
     }
 }

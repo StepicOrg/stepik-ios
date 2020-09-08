@@ -31,6 +31,11 @@ enum BaseQuiz {
         }
     }
 
+    /// Retry submission polling
+    enum RetrySubmissionPoll {
+        struct Request {}
+    }
+
     /// Cache reply
     enum ReplyCache {
         struct Request {
@@ -64,6 +69,11 @@ enum BaseQuiz {
     enum ViewControllerState {
         case loading
         case result(data: BaseQuizViewModel)
-        case error
+        case error(domain: ErrorDomain)
+
+        enum ErrorDomain {
+            case networkConnection
+            case submissionEvaluation
+        }
     }
 }

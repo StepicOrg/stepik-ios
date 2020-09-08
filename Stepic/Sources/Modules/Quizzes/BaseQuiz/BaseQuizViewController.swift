@@ -62,6 +62,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
                 .noConnectionPollQuiz,
                 action: { [weak self] in
                     self?.state = .loading
+                    self?.interactor.doRetrySubmissionPoll(request: .init())
                 }
             ),
             for: .connectionErrorPollQuiz
@@ -88,8 +89,13 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         case .loading:
             self.isPlaceholderShown = false
             self.baseQuizView?.startLoading()
-        case .error:
-            self.showPlaceholder(for: .connectionError)
+        case .error(let domain):
+            switch domain {
+            case .networkConnection:
+                self.showPlaceholder(for: .connectionError)
+            case .submissionEvaluation:
+                self.showPlaceholder(for: .connectionErrorPollQuiz)
+            }
         }
     }
 
