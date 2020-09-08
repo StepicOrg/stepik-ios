@@ -7,6 +7,7 @@ extension HorizontalCourseListFlowLayout {
 
     struct Appearance {
         let insets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let paginationViewWidth: CGFloat = 100
     }
 }
 
@@ -22,6 +23,23 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
         let allItemsHeight = self.itemSize.height * CGFloat(self.rowsCount)
         let allSpacing = CGFloat(self.rowsCount + 1) * self.minimumLineSpacing
         return allItemsHeight + allSpacing
+    }
+
+    var isPaginationHidden = true {
+        didSet {
+            if oldValue != self.isPaginationHidden {
+                self.cache.removeAll(keepingCapacity: true)
+                self.invalidateLayout()
+            }
+        }
+    }
+
+    private var paginationSize: CGSize {
+        let viewSize = CGSize(
+            width: self.appearance.paginationViewWidth,
+            height: self.collectionView?.bounds.height ?? 0
+        )
+        return self.isPaginationHidden ? .zero : viewSize
     }
 
     init(
@@ -89,9 +107,29 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
             xOffset += self.itemSize.width + self.minimumInteritemSpacing
         }
 
+        // Footer
+        let paginationSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            with: IndexPath(
+                item: 0,
+                section: collectionView.numberOfSections - 1
+            )
+        )
+
+        paginationSupplementaryViewAttributes.frame = CGRect(
+            x: xOffset,
+            y: 0,
+            width: self.paginationSize.width,
+            height: self.paginationSize.height
+        )
+
+        self.cache.append(paginationSupplementaryViewAttributes)
+
         xOffset += self.appearance.insets.right - self.minimumInteritemSpacing
 
         self._contentWidth = xOffset
+            + self.paginationSize.width
+            + (self.paginationSize.width > 0 ? self.minimumInteritemSpacing : 0)
     }
 
     override func targetContentOffset(

@@ -27,7 +27,7 @@ class CourseListViewController: UIViewController {
     let colorMode: CourseListColorMode
     let cardStyle: CourseListCardStyle
     let gridSize: CourseListGridSize
-    fileprivate var canTriggerPagination = true
+    fileprivate var canTriggerPagination = false
 
     fileprivate init(
         interactor: CourseListInteractorProtocol,
@@ -140,6 +140,9 @@ extension CourseListViewController: CourseListViewControllerDelegate {
 }
 
 final class HorizontalCourseListViewController: CourseListViewController {
+    lazy var horizontalCourseListView = self.courseListView as? HorizontalCourseListView
+    lazy var paginationView = self.horizontalCourseListView?.paginationView as? PaginationView
+
     override init(
         interactor: CourseListInteractorProtocol,
         initialState: CourseList.ViewControllerState = .loading,
@@ -173,7 +176,15 @@ final class HorizontalCourseListViewController: CourseListViewController {
             dataSource: self.listDataSource,
             viewDelegate: self
         )
+        view.paginationView = PaginationView()
         self.view = view
+    }
+
+    override func updatePagination(hasNextPage: Bool) {
+        super.updatePagination(hasNextPage: hasNextPage)
+
+        self.horizontalCourseListView?.isPaginationViewHidden = !hasNextPage
+        self.paginationView?.setLoading()
     }
 }
 
