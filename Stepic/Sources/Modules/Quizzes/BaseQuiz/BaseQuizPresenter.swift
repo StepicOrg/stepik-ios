@@ -18,8 +18,13 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
 
     func presentSubmission(response: BaseQuiz.SubmissionLoad.Response) {
         switch response.result {
-        case .failure:
-            self.viewController?.displaySubmission(viewModel: .init(state: .error))
+        case .failure(let error):
+            switch error {
+            case BaseQuizInteractor.Error.submissionPollFailed:
+                self.viewController?.displaySubmission(viewModel: .init(state: .error(domain: .evaluateSubmission)))
+            default:
+                self.viewController?.displaySubmission(viewModel: .init(state: .error(domain: .networkConnection)))
+            }
         case .success(let data):
             let viewModel = self.makeViewModel(
                 step: data.step,
