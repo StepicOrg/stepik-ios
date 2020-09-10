@@ -468,7 +468,8 @@ extension StepViewController: BaseQuizOutputProtocol {
 // MARK: - StepViewController: StepikVideoPlayerViewControllerDelegate -
 
 extension StepViewController: StepikVideoPlayerViewControllerDelegate {
-    func stepikVideoPlayerViewControllerDidRequestAutoplay() {
+    func stepikVideoPlayerViewControllerDidRequestAutoplay(_ viewController: StepikVideoPlayerViewController) {
+        viewController.stopPlayback()
         self.dismiss(
             animated: true,
             completion: { [weak self] in

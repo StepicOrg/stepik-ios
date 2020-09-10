@@ -26,30 +26,32 @@ final class AuthInfo: NSObject {
     override private init() {
         super.init()
 
-        print("initializing AuthInfo with userId \(String(describing: userId))")
-        if let id = userId {
+        print("AuthInfo :: initializing AuthInfo with userId \(String(describing: self.userId))")
+        if let id = self.userId {
             if let users = User.fetchById(id) {
+                print("AuthInfo :: initializing fetched users = \(users)")
                 if users.isEmpty {
                     StepikAnalytics.shared.send(.errorAuthInfoNoUserOnInit)
                 } else {
-                    user = users.first
+                    self.user = users.first
                 }
             }
         }
     }
 
     private func setTokenValue(_ newToken: StepikToken?) {
-        defaults.setValue(newToken?.accessToken, forKey: "access_token")
-        defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
-        defaults.setValue(newToken?.tokenType, forKey: "token_type")
-        defaults.setValue(newToken?.expireDate.timeIntervalSince1970, forKey: "expire_date")
-        defaults.synchronize()
+        print("AuthInfo :: setting token value = \(String(describing: newToken))")
+        self.defaults.setValue(newToken?.accessToken, forKey: "access_token")
+        self.defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
+        self.defaults.setValue(newToken?.tokenType, forKey: "token_type")
+        self.defaults.setValue(newToken?.expireDate.timeIntervalSince1970, forKey: "expire_date")
+        self.defaults.synchronize()
     }
 
     var token: StepikToken? {
         set(newToken) {
             if newToken == nil || newToken?.accessToken == "" {
-                print("\nsetting new token to nil\n")
+                print("AuthInfo :: setting new token to nil")
                 self.logoutDataClearService.clearCurrentUserData().done {
                     self.user = nil
                     self.setTokenValue(nil)
@@ -57,7 +59,7 @@ final class AuthInfo: NSObject {
                 }
             } else {
                 let oldToken = token
-                print("\nsetting new token -> \(String(describing: newToken?.accessToken))\n")
+                print("AuthInfo :: setting new token -> \(String(describing: newToken?.accessToken))")
                 didRefresh = true
                 setTokenValue(newToken)
                 StepikSession.delete()
@@ -67,12 +69,11 @@ final class AuthInfo: NSObject {
                 }
             }
         }
-
         get {
             if let accessToken = defaults.value(forKey: "access_token") as? String,
                let refreshToken = defaults.value(forKey: "refresh_token") as? String,
                let tokenType = defaults.value(forKey: "token_type") as? String {
-//                print("got accessToken \(accessToken)")
+                //print("AuthInfo :: got accessToken \(accessToken)")
                 let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
                 return StepikToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
@@ -102,7 +103,6 @@ final class AuthInfo: NSObject {
                 return AuthorizationType.none
             }
         }
-
         set(type) {
             defaults.setValue(type.rawValue, forKey: "authorization_type")
             defaults.synchronize()
@@ -117,28 +117,28 @@ final class AuthInfo: NSObject {
         set(id) {
             if let user = user {
                 if user.isGuest {
-                    print("setting anonymous user id \(String(describing: id))")
+                    print("AuthInfo :: setting anonymous user id \(String(describing: id))")
                     anonymousUserId = id
                     AnalyticsUserProperties.shared.setUserID(to: nil)
                     return
                 }
             }
             AnalyticsUserProperties.shared.setUserID(to: user?.id)
-            print("setting user id \(String(describing: id))")
+            print("AuthInfo :: setting user id \(String(describing: id))")
             defaults.setValue(id, forKey: "user_id")
             defaults.synchronize()
         }
         get {
             if let user = user {
                 if user.isGuest {
-                    print("returning anonymous user id \(String(describing: anonymousUserId))")
+                    print("AuthInfo :: returning anonymous user id \(String(describing: anonymousUserId))")
                     return anonymousUserId
                 } else {
-                    print("returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
+                    print("AuthInfo :: returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
                     return defaults.value(forKey: "user_id") as? Int
                 }
             } else {
-                print("returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
+                print("AuthInfo :: returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
                 return defaults.value(forKey: "user_id") as? Int
             }
         }
@@ -146,7 +146,7 @@ final class AuthInfo: NSObject {
 
     var user: User? {
         didSet {
-            print("\n\ndid set user with id \(String(describing: user?.id))\n\n")
+            print("AuthInfo :: did set user with id \(String(describing: user?.id))")
             userId = user?.id
             NotificationCenter.default.post(name: .didChangeCurrentUser, object: nil)
         }

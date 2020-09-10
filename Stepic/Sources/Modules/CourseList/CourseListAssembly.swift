@@ -90,8 +90,6 @@ class CourseListAssembly: Assembly {
 }
 
 final class HorizontalCourseListAssembly: CourseListAssembly {
-    static let defaultMaxNumberOfDisplayedCourses = 14
-
     private let maxNumberOfDisplayedCourses: Int?
 
     override fileprivate func makeViewController(
@@ -112,7 +110,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
         cardStyle: CourseListCardStyle = .default,
         gridSize: CourseListGridSize = .default,
         courseViewSource: AnalyticsEvent.CourseViewSource,
-        maxNumberOfDisplayedCourses: Int? = HorizontalCourseListAssembly.defaultMaxNumberOfDisplayedCourses,
+        maxNumberOfDisplayedCourses: Int? = nil,
         output: CourseListOutputProtocol? = nil
     ) {
         self.maxNumberOfDisplayedCourses = maxNumberOfDisplayedCourses
