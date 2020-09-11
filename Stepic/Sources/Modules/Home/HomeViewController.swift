@@ -55,7 +55,7 @@ final class HomeViewController: BaseExploreViewController {
                 return
             }
 
-            strongSelf.refreshStateForVisitedCourses(state: .normal)
+            strongSelf.refreshStateForVisitedCourses(state: .shown)
         }
     }
 
@@ -256,24 +256,15 @@ final class HomeViewController: BaseExploreViewController {
     // MARK: - Visited courses submodule
 
     private enum VisitedCourseListState {
-        case normal
-        case empty
+        case shown
+        case hidden
 
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("VisitedCourses", comment: ""),
                 summary: nil,
-                shouldShowAllButton: self == .normal
+                shouldShowAllButton: self == .shown
             )
-        }
-
-        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
-            switch self {
-            case .empty:
-                return .visitedEmpty
-            default:
-                fatalError("State not supported placeholder")
-            }
         }
     }
 
@@ -301,19 +292,17 @@ final class HomeViewController: BaseExploreViewController {
             self.removeSubmodule(module)
         }
 
+        guard case .shown = state else {
+            return
+        }
+
         // Build new module
         // Each module should has view and attached view controller (if module is active submodule)
         var viewController: UIViewController?
         var view: UIView
 
-        if case .normal = state {
-            // Build course list submodule
-            (view, viewController) = self.makeVisitedCourseListSubmodule()
-        } else {
-            // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
-            (view, viewController) = (placeholderView, nil)
-        }
+        // Build course list submodule
+        (view, viewController) = self.makeVisitedCourseListSubmodule()
 
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(for: view, headerDescription: state.headerDescription)
@@ -443,7 +432,7 @@ extension HomeViewController: HomeViewControllerProtocol {
                 self.refreshStateForEnrolledCourses(state: .error)
             }
         case .visitedCourses:
-            self.refreshStateForVisitedCourses(state: .empty)
+            self.refreshStateForVisitedCourses(state: .hidden)
         case .popularCourses:
             switch viewModel.result {
             case .empty:
@@ -481,7 +470,7 @@ extension HomeViewController: HomeViewControllerProtocol {
 
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
-            strongSelf.refreshStateForVisitedCourses(state: .normal)
+            strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }
     }

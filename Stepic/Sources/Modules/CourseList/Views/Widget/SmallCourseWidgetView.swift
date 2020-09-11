@@ -6,7 +6,7 @@ extension SmallCourseWidgetView {
         let coverViewInsets = LayoutInsets(top: 16, left: 16)
         let coverViewWidthHeight: CGFloat = 80.0
 
-        let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
+        let titleLabelInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }
 
@@ -16,8 +16,8 @@ final class SmallCourseWidgetView: UIView, CourseWidgetViewProtocol {
 
     private lazy var coverView = CourseWidgetCoverView()
 
-    private lazy var summaryLabel = CourseWidgetLabel(
-        appearance: self.colorMode.courseWidgetSummaryLabelAppearance
+    private lazy var titleLabel = CourseWidgetLabel(
+        appearance: self.colorMode.courseWidgetTitleLabelAppearance
     )
 
     init(
@@ -43,7 +43,7 @@ final class SmallCourseWidgetView: UIView, CourseWidgetViewProtocol {
         self.coverView.coverImageURL = viewModel.coverImageURL
         self.coverView.shouldShowAdaptiveMark = viewModel.isAdaptive
 
-        self.summaryLabel.text = viewModel.summary
+        self.titleLabel.text = viewModel.title
     }
 }
 
@@ -56,7 +56,7 @@ extension SmallCourseWidgetView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.coverView)
-        self.addSubview(self.summaryLabel)
+        self.addSubview(self.titleLabel)
     }
 
     func makeConstraints() {
@@ -73,20 +73,20 @@ extension SmallCourseWidgetView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.appearance.coverViewWidthHeight)
         }
 
-        self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.summaryLabel.snp.makeConstraints { make in
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
             make.top
                 .equalTo(self.coverView.snp.bottom)
-                .offset(self.appearance.summaryLabelInsets.top)
+                .offset(self.appearance.titleLabelInsets.top)
             make.leading
                 .equalToSuperview()
-                .offset(self.appearance.summaryLabelInsets.left)
+                .offset(self.appearance.titleLabelInsets.left)
             make.bottom
-                .equalToSuperview()
-                .offset(-self.appearance.summaryLabelInsets.bottom)
+                .lessThanOrEqualToSuperview()
+                .offset(-self.appearance.titleLabelInsets.bottom)
             make.trailing
                 .equalToSuperview()
-                .offset(-self.appearance.summaryLabelInsets.right)
+                .offset(-self.appearance.titleLabelInsets.right)
         }
     }
 }

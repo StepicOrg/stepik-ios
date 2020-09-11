@@ -79,7 +79,7 @@ final class ExploreViewController: BaseExploreViewController {
                 return
             }
 
-            strongSelf.refreshStateForVisitedCourses(state: .normal)
+            strongSelf.refreshStateForVisitedCourses(state: .shown)
         }
     }
 
@@ -107,7 +107,7 @@ final class ExploreViewController: BaseExploreViewController {
                 strongSelf.removeLanguageDependentSubmodules()
                 strongSelf.initLanguageDependentSubmodules(contentLanguage: language)
 
-                strongSelf.refreshStateForVisitedCourses(state: .normal)
+                strongSelf.refreshStateForVisitedCourses(state: .shown)
             }
         case .loading:
             break
@@ -212,24 +212,15 @@ final class ExploreViewController: BaseExploreViewController {
     // MARK: - Visited courses submodule
 
     private enum VisitedCourseListState {
-        case normal
-        case empty
+        case shown
+        case hidden
 
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("VisitedCourses", comment: ""),
                 summary: nil,
-                shouldShowAllButton: self == .normal
+                shouldShowAllButton: self == .shown
             )
-        }
-
-        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
-            switch self {
-            case .empty:
-                return .visitedEmpty
-            default:
-                fatalError("State not supported placeholder")
-            }
         }
     }
 
@@ -257,19 +248,17 @@ final class ExploreViewController: BaseExploreViewController {
             self.removeSubmodule(module)
         }
 
+        guard case .shown = state else {
+            return
+        }
+
         // Build new module
         // Each module should has view and attached view controller (if module is active submodule)
         var viewController: UIViewController?
         var view: UIView
 
-        if case .normal = state {
-            // Build course list submodule
-            (view, viewController) = self.makeVisitedCourseListSubmodule()
-        } else {
-            // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
-            (view, viewController) = (placeholderView, nil)
-        }
+        // Build course list submodule
+        (view, viewController) = self.makeVisitedCourseListSubmodule()
 
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(for: view, headerDescription: state.headerDescription)
@@ -371,7 +360,7 @@ extension ExploreViewController: ExploreViewControllerProtocol {
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
         case .visitedCourses:
-            self.refreshStateForVisitedCourses(state: .empty)
+            self.refreshStateForVisitedCourses(state: .hidden)
         default:
             break
         }
