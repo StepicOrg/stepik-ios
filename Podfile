@@ -10,11 +10,11 @@ def shared_pods
     pod 'Alamofire', '5.2.2'
     pod 'Atributika', '4.9.9'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.8.4'
+    pod 'SDWebImage', '5.9.0'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-    pod 'DeviceKit', '3.2.0'
+    pod 'DeviceKit', '4.0.0'
     pod 'PromiseKit', '6.13.1'
-    pod 'SwiftLint', '0.40.0'
+    pod 'SwiftLint', '0.40.2'
     pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
 end
 
@@ -29,11 +29,11 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.30.0'
-    pod 'Firebase/Messaging', '6.30.0'
-    pod 'Firebase/Analytics', '6.30.0'
-    pod 'Firebase/Crashlytics', '6.30.0'
-    pod 'Firebase/RemoteConfig', '6.30.0'
+    pod 'Firebase/Core', '6.32.0'
+    pod 'Firebase/Messaging', '6.32.0'
+    pod 'Firebase/Analytics', '6.32.0'
+    pod 'Firebase/Crashlytics', '6.32.0'
+    pod 'Firebase/RemoteConfig', '6.32.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.11.1'
     pod 'Amplitude-iOS', '4.9.3'
@@ -56,7 +56,7 @@ def all_pods
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.6.8'
+    pod 'Agrume', '5.6.9'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'
@@ -64,7 +64,7 @@ def all_pods
     pod 'Charts', '3.4.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.4.0'
-    pod 'Nuke', '9.1.1'
+    pod 'Nuke', '9.1.2'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
     pod 'SwiftDate', '6.1.0'
@@ -72,7 +72,7 @@ end
 
 def testing_pods
     pod 'Quick', '3.0.0'
-    pod 'Nimble', '8.1.1'
+    pod 'Nimble', '8.1.2'
     pod 'Mockingjay', '3.0.0-alpha.1'
 end
 
