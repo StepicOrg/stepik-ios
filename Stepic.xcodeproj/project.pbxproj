@@ -476,10 +476,6 @@
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
 		2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */; };
 		2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA9023D229C200E90439 /* Bundle+Version.swift */; };
-		2C3D00BE24C8076A00441053 /* Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00BC24C8076A00441053 /* Info-Release.plist */; };
-		2C3D00BF24C8076A00441053 /* Info-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00BD24C8076A00441053 /* Info-Develop.plist */; };
-		2C3D00C224C8080F00441053 /* Info-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00C024C8080F00441053 /* Info-Develop.plist */; };
-		2C3D00C324C8080F00441053 /* Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D00C124C8080F00441053 /* Info-Release.plist */; };
 		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
 		2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */; };
@@ -7171,7 +7167,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
 					085D5CD81D007F2100092060 = {
@@ -7242,8 +7238,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C3D00BE24C8076A00441053 /* Info-Release.plist in Resources */,
-				2C3D00BF24C8076A00441053 /* Info-Develop.plist in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7252,9 +7246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C3D00C224C8080F00441053 /* Info-Develop.plist in Resources */,
 				086538381EB02716003A8415 /* Stickers.xcassets in Resources */,
-				2C3D00C324C8080F00441053 /* Info-Release.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9200,6 +9192,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -9261,6 +9254,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -9374,6 +9368,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -9511,6 +9506,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -9638,6 +9634,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -9670,6 +9667,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "36c8d11a-0c7a-4ff0-b0f9-646505f7806e";
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -9775,6 +9773,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
