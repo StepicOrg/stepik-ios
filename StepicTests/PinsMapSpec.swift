@@ -115,9 +115,15 @@ class PinsMapSpec: QuickSpec {
                 let checkIsGivenEqualToReal: (Int, Int, Date?, Int, [Bool], [Bool]) -> Void = { year, month, lastDay, realWeekCount, firstWeek, lastWeek -> Void in
                     var m: PinsMap.Month!
                     if let lastDay = lastDay {
-                        expect { m = try map.buildMonth(year: year, month: month, lastDay: lastDay) }.toNot(throwError())
+                        expect(expression: {
+                            m = try map.buildMonth(year: year, month: month, lastDay: lastDay)
+                        }).toNot(throwError())
+                        //expect { m = try map.buildMonth(year: year, month: month, lastDay: lastDay) }.toNot(throwError())
                     } else {
-                        expect { m = try map.buildMonth(year: year, month: month) }.toNot(throwError())
+                        expect(expression: {
+                            m = try map.buildMonth(year: year, month: month)
+                        }).toNot(throwError())
+                        //expect { m = try map.buildMonth(year: year, month: month) }.toNot(throwError())
                     }
                     expect(m.weeks.count) == realWeekCount
                     expect(m.weeks.first?.allowedPins) == firstWeek
@@ -196,7 +202,10 @@ class PinsMapSpec: QuickSpec {
                 context("with empty pins list") {
                     it("is not throw exception and has empty result") {
                         var result: [[Int]]!
-                        expect { result = try map.splitPinsIntoMonths(pins: []) }.toNot(throwError())
+                        expect(expression: {
+                            result = try map.splitPinsIntoMonths(pins: [])
+                        }).toNot(throwError())
+                        //expect { result = try map.splitPinsIntoMonths(pins: []) }.toNot(throwError())
                         expect(result.count) == 0
                     }
                 }
@@ -205,7 +214,10 @@ class PinsMapSpec: QuickSpec {
                     it("is not throw exception and has correct result") {
                         let date = formatter.date(from: "2018/02/02")!
                         var result: [[Int]]!
-                        expect { result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date) }.toNot(throwError())
+                        expect(expression: {
+                            result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date)
+                        }).toNot(throwError())
+                        //expect { result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date) }.toNot(throwError())
                         expect(result.count) == 2
                         expect(result[0]) == [1, 2]
                         expect(result[1]) == [3, 4, 5, 6, 7]
@@ -216,7 +228,10 @@ class PinsMapSpec: QuickSpec {
                     it("is not throw exception and has correct result") {
                         let date = formatter.date(from: "2018/01/07")!
                         var result: [[Int]]!
-                        expect { result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date) }.toNot(throwError())
+                        expect(expression: {
+                            result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date)
+                        }).toNot(throwError())
+                        //expect { result = try map.splitPinsIntoMonths(pins: [1, 2, 3, 4, 5, 6, 7], today: date) }.toNot(throwError())
                         expect(result.count) == 1
                         expect(result[0]) == [1, 2, 3, 4, 5, 6, 7]
                     }
@@ -226,12 +241,17 @@ class PinsMapSpec: QuickSpec {
                     it("is not throw exception and has correct result") {
                         let date = formatter.date(from: "2018/01/01")!
                         var result: [[Int]]!
-                        expect { result = try map.splitPinsIntoMonths(pins: [1, 2], today: date) }.toNot(throwError())
+                        expect(expression: {
+                            result = try map.splitPinsIntoMonths(pins: [1, 2], today: date)
+                        }).toNot(throwError())
+                        //expect { result = try map.splitPinsIntoMonths(pins: [1, 2], today: date) }.toNot(throwError())
                         expect(result.count) == 2
                         expect(result[0]) == [1]
                         expect(result[1]) == [2]
-
-                        expect { result = try map.splitPinsIntoMonths(pins: [1], today: date) }.toNot(throwError())
+                        expect(expression: {
+                            result = try map.splitPinsIntoMonths(pins: [1], today: date)
+                        }).toNot(throwError())
+                        //expect { result = try map.splitPinsIntoMonths(pins: [1], today: date) }.toNot(throwError())
                         expect(result.count) == 1
                         expect(result[0]) == [1]
                     }

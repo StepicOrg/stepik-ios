@@ -72,8 +72,8 @@ class DownloaderSpec: QuickSpec {
     }
 
     private func setUpNetworkStub() {
-        Nimble.AsyncDefaults.Timeout = 60
-        Nimble.AsyncDefaults.PollInterval = 0.05
+        Nimble.AsyncDefaults.timeout = .seconds(60)
+        Nimble.AsyncDefaults.pollInterval = .milliseconds(10)
 
         self.stub(uri(DownloaderSpec.okFileLink), self.jsonDataWithEmptySizeHeader(
             data: Data(count: Int(DownloaderSpec.fileSizeInBytes)),
@@ -113,8 +113,14 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.add(task: task)
+                        }).notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.resume(task: task)
+                        }).notTo(throwError())
+                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
 
@@ -132,8 +138,14 @@ class DownloaderSpec: QuickSpec {
 
                         task.completionReporter = { _ in done() }
 
-                        expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.add(task: task)
+                        }).notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.resume(task: task)
+                        }).notTo(throwError())
+                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
             }
@@ -163,8 +175,14 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.add(task: task)
+                        }).notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.resume(task: task)
+                        }).notTo(throwError())
+                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
             }
@@ -200,8 +218,14 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.add(task: task)
+                        }).notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.resume(task: task)
+                        }).notTo(throwError())
+                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
 
@@ -218,7 +242,10 @@ class DownloaderSpec: QuickSpec {
                         task.progressReporter = { progress in
                             // Some trick: pause task from first call of progress reporter
                             if !didPauseCall {
-                                expect { try self.downloader.pause(task: task) }.notTo(throwError())
+                                expect(expression: {
+                                    try self.downloader.pause(task: task)
+                                }).notTo(throwError())
+                                //expect { try self.downloader.pause(task: task) }.notTo(throwError())
                                 didPauseCall = true
                                 lock.unlock()
                             }
@@ -239,10 +266,19 @@ class DownloaderSpec: QuickSpec {
                             }
 
                             lock.lock()
-                            expect { try self.downloader.add(task: task) }.notTo(throwError())
-                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.add(task: task)
+                            }).notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.resume(task: task)
+                            }).notTo(throwError())
+                            //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                             lock.lock()
-                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.resume(task: task)
+                            }).notTo(throwError())
+                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
                 }
@@ -268,7 +304,10 @@ class DownloaderSpec: QuickSpec {
                             var didCancelCall = false
                             task.progressReporter = { progress in
                                 if !didCancelCall {
-                                    expect { try self.downloader.cancel(task: task) }.notTo(throwError())
+                                    expect(expression: {
+                                        try self.downloader.cancel(task: task)
+                                    }).notTo(throwError())
+                                    //expect { try self.downloader.cancel(task: task) }.notTo(throwError())
                                     didCancelCall = true
                                 }
                             }
@@ -285,8 +324,14 @@ class DownloaderSpec: QuickSpec {
                                 done()
                             }
 
-                            expect { try self.downloader.add(task: task) }.notTo(throwError())
-                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.add(task: task)
+                            }).notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.resume(task: task)
+                            }).notTo(throwError())
+                            //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
                 }
@@ -314,8 +359,14 @@ class DownloaderSpec: QuickSpec {
                         }
 
                         group.enter()
-                        expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.add(task: task)
+                        }).notTo(throwError())
+                        expect(expression: {
+                            try self.downloader.resume(task: task)
+                        }).notTo(throwError())
+                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
 
                     waitUntil { done in
@@ -342,8 +393,14 @@ class DownloaderSpec: QuickSpec {
                     DispatchQueue.concurrentPerform(iterations: 100) { iteration in
                         DispatchQueue.concurrentPerform(iterations: 100) { _ in
                             let task = DownloaderTaskMock(url: URL(string: DownloaderSpec.okFileLink)!)
-                            expect { try self.downloader.add(task: task) }.notTo(throwError())
-                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.add(task: task)
+                            }).notTo(throwError())
+                            expect(expression: {
+                                try self.downloader.resume(task: task)
+                            }).notTo(throwError())
+                            //expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
                 }
@@ -359,7 +416,10 @@ class DownloaderSpec: QuickSpec {
                 }
 
                 it("throws error") {
-                    expect { try self.downloader.resume(task: task) }.to(throwError())
+                    expect(expression: {
+                        try self.downloader.resume(task: task)
+                    }).to(throwError())
+                    //expect { try self.downloader.resume(task: task) }.to(throwError())
                 }
             }
         }
