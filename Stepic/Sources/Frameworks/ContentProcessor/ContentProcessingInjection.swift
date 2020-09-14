@@ -40,6 +40,10 @@ final class MetaViewportInjection: ContentProcessingInjection {
 /// Clickable images
 final class ClickableImagesInjection: ContentProcessingInjection {
     var headScript: String { Scripts.clickableImages }
+
+    func shouldInject(to code: String) -> Bool {
+        code.contains("<img")
+    }
 }
 
 /// Disable images callout on long tap
@@ -49,7 +53,32 @@ final class WebkitImagesCalloutDisableInjection: ContentProcessingInjection {
 
 /// MathJax init script
 final class MathJaxInjection: ContentProcessingInjection {
-    var headScript: String { Scripts.localTex }
+    var headScript: String { Scripts.localMathJax }
+
+    func shouldInject(to code: String) -> Bool {
+        code.filter { $0 == "$" }.count >= 2
+            || (code.contains("\\[") && code.contains("\\]"))
+            || (code.contains("math-tex"))
+    }
+}
+
+/// Detect web scripts
+final class WebScriptInjection: ContentProcessingInjection {
+    func shouldInject(to code: String) -> Bool {
+        code.contains("wysiwyg-") ||
+        code.contains("<h1") ||
+        code.contains("<h2") ||
+        code.contains("<h3") ||
+        code.contains("<h4") ||
+        code.contains("<h5") ||
+        code.contains("<h6") ||
+        code.contains("<img") ||
+        code.contains("<iframe") ||
+        code.contains("<audio") ||
+        code.contains("<table") ||
+        code.contains("<div") ||
+        code.contains("<blockquote")
+    }
 }
 
 /// Kotlin runnable code playground

@@ -38,7 +38,7 @@ final class HTMLProcessor {
             case .metaViewport:
                 return Scripts.metaViewport
             case .localTex:
-                return Scripts.localTex
+                return Scripts.localMathJax
             case .clickableImages:
                 return Scripts.clickableImages
             case .styles:

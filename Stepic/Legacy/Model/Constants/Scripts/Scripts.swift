@@ -10,7 +10,7 @@ import Foundation
 
 @available(*, deprecated, message: "Use ContentProcessor instead")
 struct Scripts {
-    private static let localTexScriptKey = "LocalTexScript"
+    private static let localMathJaxScriptKey = "LocalTexScript"
     private static let localKaTeXScriptKey = "LocalKaTeXScript"
     private static let metaViewportKey = "MetaViewport"
     private static let mathJaxFinishedScriptKey = "MathJaxFinishScript"
@@ -35,8 +35,8 @@ struct Scripts {
         self.loadScriptWithKey(self.localKotlinPlaygroundScript)
     }
 
-    static var localTex: String {
-        "\(self.loadScriptWithKey(self.localTexScriptKey))\(self.mathJaxLocalPathScript)"
+    static var localMathJax: String {
+        "\(self.loadScriptWithKey(self.localMathJaxScriptKey))\(self.mathJaxLocalPathScript)"
     }
 
     static var metaViewport: String {
