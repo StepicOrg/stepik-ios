@@ -730,6 +730,7 @@
 		2CCDD80024F8A59B006644A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CCDD80224F8A59B006644A8 /* InfoPlist.strings */; };
 		2CCDD80524F8A695006644A8 /* ApplicationShortcutIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDD80424F8A695006644A8 /* ApplicationShortcutIdentifier.swift */; };
 		2CCDD80724F8A7D7006644A8 /* ApplicationShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDD80624F8A7D7006644A8 /* ApplicationShortcutService.swift */; };
+		2CD04084250F67D0004D284F /* ProcessedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD04083250F67D0004D284F /* ProcessedContent.swift */; };
 		2CD063E6242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */; };
@@ -2154,6 +2155,7 @@
 		2CCDD80324F8A604006644A8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CCDD80424F8A695006644A8 /* ApplicationShortcutIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationShortcutIdentifier.swift; sourceTree = "<group>"; };
 		2CCDD80624F8A7D7006644A8 /* ApplicationShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationShortcutService.swift; sourceTree = "<group>"; };
+		2CD04083250F67D0004D284F /* ProcessedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContent.swift; sourceTree = "<group>"; };
 		2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorViewStyle+Fallback.swift"; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_email_addresses.xcdatamodel; sourceTree = "<group>"; };
@@ -3180,6 +3182,7 @@
 				2C48D603228F0EF700739477 /* ContentProcessingRule.swift */,
 				2C48D600228F0C5F00739477 /* ContentProcessor.swift */,
 				2C48D605228F114400739477 /* HTMLExtractor.swift */,
+				2CD04083250F67D0004D284F /* ProcessedContent.swift */,
 				2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */,
 			);
 			path = ContentProcessor;
@@ -7960,6 +7963,7 @@
 				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
 				2CDC9EFA24E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
+				2CD04084250F67D0004D284F /* ProcessedContent.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */,
 				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
