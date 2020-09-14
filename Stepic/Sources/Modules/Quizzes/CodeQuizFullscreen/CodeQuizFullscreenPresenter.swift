@@ -60,7 +60,7 @@ final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
                 rules: ContentProcessor.defaultRules,
                 injections: ContentProcessor.defaultInjections
             )
-            let content = contentProcessor.processContent()
+            let content: String = contentProcessor.processContent()
             seal(content)
         }
     }
