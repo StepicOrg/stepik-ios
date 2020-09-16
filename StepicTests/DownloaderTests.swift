@@ -37,6 +37,8 @@ class DownloaderTaskMock: DownloaderTask {
     override var state: DownloaderTaskState { _state }
 }
 
+// TODO: Fix the ambiguous use of `expect` after Nimble update.
+
 class DownloaderSpec: QuickSpec {
     private static let okFileLink = "https://fake.fake/ok.json"
     private static let fileWithExpectedSizeLink = "https://fake.fake/size.json"

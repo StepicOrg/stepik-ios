@@ -11,6 +11,8 @@ import Nimble
 
 @testable import Stepic
 
+// TODO: Fix the ambiguous use of `expect` after Nimble update.
+
 class PinsMapSpec: QuickSpec {
     override func spec() {
         // sampleWeeks => sampleDays
