@@ -18,7 +18,7 @@ extension StepikPlaceholderControllerContainer {
 }
 
 final class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
-    final class PlaceholderState: Equatable, Hashable {
+    final class PlaceholderState: Hashable {
         static let anonymous = PlaceholderState(id: "anonymous")
         static let connectionError = PlaceholderState(id: "connectionError")
         static let refreshing = PlaceholderState(id: "refreshing")
@@ -27,18 +27,19 @@ final class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate 
 
         var id: String
 
-        var hashValue: Int {
-            get {
-                return id.hashValue
-            }
+        init(id: String) {
+            self.id = id
+        }
+
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(self.id)
         }
 
         static func == (lhs: PlaceholderState, rhs: PlaceholderState) -> Bool {
-            return lhs.id == rhs.id
-        }
-
-        init(id: String) {
-            self.id = id
+            if lhs === rhs { return true }
+            if type(of: lhs) != type(of: rhs) { return false }
+            if lhs.id != rhs.id { return false }
+            return true
         }
     }
 
@@ -78,7 +79,7 @@ extension ControllerWithStepikPlaceholder where Self: UIViewController {
             placeholderContainer.isPlaceholderShown = newValue
         }
         get {
-             placeholderContainer.isPlaceholderShown
+            placeholderContainer.isPlaceholderShown
         }
     }
 
