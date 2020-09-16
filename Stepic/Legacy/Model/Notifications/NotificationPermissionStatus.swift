@@ -46,6 +46,8 @@ enum NotificationPermissionStatus: String {
             self = .notDetermined
         case .provisional:
             self = .authorized
+        case .ephemeral:
+            self = .notDetermined
         @unknown default:
             self = .notDetermined
         }

@@ -29,9 +29,13 @@ final class SpotlightIndexingService: SpotlightIndexingServiceProtocol {
                 searchableItems,
                 completionHandler: { errorOrNil in
                     if let error = errorOrNil {
-                        print("SpotlightIndexingService: error indexing items = \(identifiers), error = \(error)")
+                        if LaunchArguments.spotlightIndexingDebugEnabled {
+                            print("SpotlightIndexingService: error indexing items = \(identifiers), error = \(error)")
+                        }
                     } else {
-                        print("SpotlightIndexingService: indexed items = \(identifiers)")
+                        if LaunchArguments.spotlightIndexingDebugEnabled {
+                            print("SpotlightIndexingService: done indexing items = \(identifiers)")
+                        }
                     }
                 }
             )
