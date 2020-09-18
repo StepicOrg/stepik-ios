@@ -2992,6 +2992,27 @@
 			path = Attempt;
 			sourceTree = "<group>";
 		};
+		2C084AC32514A1E9000561F7 /* Processing */ = {
+			isa = PBXGroup;
+			children = (
+				2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */,
+				2C48D603228F0EF700739477 /* ContentProcessingRule.swift */,
+				2C48D600228F0C5F00739477 /* ContentProcessor.swift */,
+				2C48D605228F114400739477 /* HTMLExtractor.swift */,
+				2CD04083250F67D0004D284F /* ProcessedContent.swift */,
+			);
+			path = Processing;
+			sourceTree = "<group>";
+		};
+		2C084ACA2514A1FA000561F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */,
+				2CD04081250F669F004D284F /* ProcessedContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		2C096584236C56AE005B771A /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3178,13 +3199,8 @@
 		2C48D5FF228F0C4800739477 /* ContentProcessor */ = {
 			isa = PBXGroup;
 			children = (
-				2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */,
-				2C48D603228F0EF700739477 /* ContentProcessingRule.swift */,
-				2C48D600228F0C5F00739477 /* ContentProcessor.swift */,
-				2C48D605228F114400739477 /* HTMLExtractor.swift */,
-				2CD04083250F67D0004D284F /* ProcessedContent.swift */,
-				2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */,
-				2CD04081250F669F004D284F /* ProcessedContentView.swift */,
+				2C084AC32514A1E9000561F7 /* Processing */,
+				2C084ACA2514A1FA000561F7 /* View */,
 			);
 			path = ContentProcessor;
 			sourceTree = "<group>";
