@@ -423,7 +423,7 @@ final class DiscussionsCellView: UIView {
             self.textContentTextLabel.isHidden = false
             self.textContentTextLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
                 htmlString: text.trimmed()
-            ) as? AttributedText
+            )
         }
     }
 

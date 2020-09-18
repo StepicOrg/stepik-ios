@@ -114,7 +114,7 @@ final class NewProfileDetailsView: UIView {
         if let text = viewModel.profileDetailsText {
             self.attributedLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
                 htmlString: text.trimmed()
-            ) as? AttributedText
+            )
         } else {
             self.attributedLabel.attributedText = nil
         }

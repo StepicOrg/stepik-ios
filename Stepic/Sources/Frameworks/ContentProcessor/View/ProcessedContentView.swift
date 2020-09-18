@@ -6,6 +6,9 @@ extension ProcessedContentView {
     struct Appearance {
         let labelFont = UIFont.systemFont(ofSize: 17, weight: .regular)
         let labelTextColor = UIColor.stepikSystemPrimaryText
+
+        var insets = LayoutInsets(insets: .zero)
+        var backgroundColor = UIColor.stepikBackground
     }
 }
 
@@ -40,7 +43,20 @@ final class ProcessedContentView: UIView {
         return label
     }()
 
+    private lazy var webView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance(
+            insets: .init(insets: .zero),
+            backgroundColor: .clear
+        )
+        let view = ProcessedContentWebView(appearance: appearance)
+        return view
+    }()
+
+    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
     private let contentProcessorBuilder: ContentProcessorBuilder
+
+    private var didSetupAttributedLabel = false
+    private var didSetupWebView = false
 
     var processedContent: ProcessedContent? = nil {
         didSet {
@@ -49,14 +65,14 @@ final class ProcessedContentView: UIView {
             }
 
             guard let processedContent = self.processedContent else {
-                return
+                return self.clearContent(oldProcessedContent: oldValue)
             }
 
             switch processedContent {
             case .text(let textValue):
-                print(textValue)
+                self.setAttributedLabelText(textValue)
             case .html(let textValue):
-                print(textValue)
+                self.setWebViewText(textValue)
             }
         }
     }
@@ -64,16 +80,16 @@ final class ProcessedContentView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
+        htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol,
         contentProcessorBuilder: @escaping ContentProcessorBuilder
     ) {
         self.appearance = appearance
+        self.htmlToAttributedStringConverter = htmlToAttributedStringConverter
         self.contentProcessorBuilder = contentProcessorBuilder
 
         super.init(frame: frame)
 
         self.setupView()
-        self.addSubviews()
-        self.makeConstraints()
     }
 
     @available(*, unavailable)
@@ -89,12 +105,74 @@ final class ProcessedContentView: UIView {
             self.processedContent = contentProcessor.processContent()
         }
     }
+
+    private func clearContent(oldProcessedContent: ProcessedContent?) {
+        guard let oldProcessedContent = oldProcessedContent else {
+            return
+        }
+
+        switch oldProcessedContent {
+        case .text:
+            self.attributedLabel.attributedText = nil
+        case .html:
+            self.webView.clearContent()
+        }
+    }
+
+    private func setAttributedLabelText(_ text: String) {
+        if !self.didSetupAttributedLabel {
+            self.didSetupAttributedLabel = true
+            self.setupAttributedLabel()
+        }
+
+        if self.didSetupWebView {
+            self.webView.isHidden = true
+        }
+        self.attributedLabel.isHidden = false
+
+        let attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(htmlString: text)
+        self.attributedLabel.attributedText = attributedText
+    }
+
+    private func setWebViewText(_ text: String) {
+        if !self.didSetupWebView {
+            self.didSetupWebView = true
+            self.setupWebView()
+        }
+
+        if self.didSetupAttributedLabel {
+            self.attributedLabel.isHidden = true
+        }
+        self.webView.isHidden = false
+
+        self.webView.loadHTMLText(text)
+    }
 }
 
 extension ProcessedContentView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
+    func setupView() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 
-    func addSubviews() {}
+    private func setupAttributedLabel() {
+        self.addSubview(self.attributedLabel)
+        self.attributedLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.attributedLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
+        }
+    }
 
-    func makeConstraints() {}
+    private func setupWebView() {
+        self.addSubview(self.webView)
+        self.webView.translatesAutoresizingMaskIntoConstraints = false
+        self.webView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
+        }
+    }
 }
