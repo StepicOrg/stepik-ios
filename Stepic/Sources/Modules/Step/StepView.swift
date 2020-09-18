@@ -46,8 +46,8 @@ final class StepView: UIView {
         return view
     }()
 
-    private lazy var stepTextView: ProcessedContentTextView = {
-        let view = ProcessedContentTextView()
+    private lazy var stepTextView: ProcessedContentWebView = {
+        let view = ProcessedContentWebView()
         view.delegate = self
         return view
     }()
@@ -249,24 +249,24 @@ extension StepView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension StepView: ProcessedContentTextViewDelegate {
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+extension StepView: ProcessedContentWebViewDelegate {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.delegate?.stepView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenARKitLink url: URL) {
         self.delegate?.stepView(self, didRequestOpenARQuickLook: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
         self.delegate?.stepView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {
         self.delegate?.stepView(self, didRequestFullscreenImage: image)
     }
 
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         self.delegate?.stepViewDidLoadContent(self)
     }
 }

@@ -3,34 +3,34 @@ import SnapKit
 import UIKit
 import WebKit
 
-// MARK: ProcessedContentTextViewDelegate: class -
+// MARK: ProcessedContentWebViewDelegate: class -
 
-protocol ProcessedContentTextViewDelegate: AnyObject {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView)
-    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int)
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL)
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage)
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL)
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL)
+protocol ProcessedContentWebViewDelegate: AnyObject {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView)
+    func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int)
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL)
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage)
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL)
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenARKitLink url: URL)
 }
 
-extension ProcessedContentTextViewDelegate {
-    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {}
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenARKitLink url: URL) {}
+extension ProcessedContentWebViewDelegate {
+    func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenARKitLink url: URL) {}
 }
 
 // MARK: - Appearance -
 
-extension ProcessedContentTextView {
+extension ProcessedContentWebView {
     struct Appearance {
         var insets = LayoutInsets(top: 10, left: 16, bottom: 4, right: 16)
         var backgroundColor = UIColor.stepikBackground
     }
 }
 
-// MARK: - ProcessedContentTextView: UIView -
+// MARK: - ProcessedContentWebView: UIView -
 
-final class ProcessedContentTextView: UIView {
+final class ProcessedContentWebView: UIView {
     private static let pollDocumentReadyStateInterval: TimeInterval = 0.5
     private static let reloadTimeStandardInterval: TimeInterval = 0.5
     private static let reloadTimeout: TimeInterval = 10.0
@@ -38,7 +38,7 @@ final class ProcessedContentTextView: UIView {
     private static let clearWebViewContentURL = URL(string: "about:blank").require()
 
     let appearance: Appearance
-    weak var delegate: ProcessedContentTextViewDelegate?
+    weak var delegate: ProcessedContentWebViewDelegate?
 
     private lazy var webViewConfiguration: WKWebViewConfiguration = {
         let userContentController = WKUserContentController()
@@ -129,7 +129,7 @@ final class ProcessedContentTextView: UIView {
     }
 
     /// Keeps track of current web view height.
-    private(set) var currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+    private(set) var currentWebViewHeight = Int(ProcessedContentWebView.defaultWebViewHeight)
     private var isLoadingHTMLText = false
     private var isClearingContent = false
     private var htmlTextToLoadAfterClearing: String?
@@ -275,9 +275,9 @@ final class ProcessedContentTextView: UIView {
     }
 }
 
-// MARK: - ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol -
+// MARK: - ProcessedContentWebView: ProgrammaticallyInitializableViewProtocol -
 
-extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
+extension ProcessedContentWebView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.webView)
     }
@@ -294,9 +294,9 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - ProcessedContentTextView: WKNavigationDelegate -
+// MARK: - ProcessedContentWebView: WKNavigationDelegate -
 
-extension ProcessedContentTextView: WKNavigationDelegate {
+extension ProcessedContentWebView: WKNavigationDelegate {
     private static let imageLinkPrefix: String = "openimg://"
     private static let arImageLinkPrefix: String = "openar://"
 
@@ -372,7 +372,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             return decisionHandler(.allow)
         }
 
-        if url.absoluteString == ProcessedContentTextView.clearWebViewContentURL.absoluteString {
+        if url.absoluteString == ProcessedContentWebView.clearWebViewContentURL.absoluteString {
             return decisionHandler(.allow)
         }
 
@@ -382,9 +382,9 @@ extension ProcessedContentTextView: WKNavigationDelegate {
     }
 }
 
-// MARK: - ProcessedContentTextView: UIScrollViewDelegate -
+// MARK: - ProcessedContentWebView: UIScrollViewDelegate -
 
-extension ProcessedContentTextView: UIScrollViewDelegate {
+extension ProcessedContentWebView: UIScrollViewDelegate {
     // swiftlint:disable:next identifier_name
     func viewForZooming(in: UIScrollView) -> UIView? { nil }
 

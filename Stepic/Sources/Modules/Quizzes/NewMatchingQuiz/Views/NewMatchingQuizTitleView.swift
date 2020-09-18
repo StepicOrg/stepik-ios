@@ -23,12 +23,12 @@ final class NewMatchingQuizTitleView: UIView {
     weak var delegate: NewMatchingQuizTitleViewDelegate?
 
     private lazy var quizElementView = QuizElementView()
-    private lazy var contentTextView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance(
+    private lazy var contentTextView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance(
             insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
-        let view = ProcessedContentTextView(appearance: appearance)
+        let view = ProcessedContentWebView(appearance: appearance)
         view.isScrollEnabled = false
         view.delegate = self
         return view
@@ -150,20 +150,20 @@ extension NewMatchingQuizTitleView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension NewMatchingQuizTitleView: ProcessedContentTextViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+extension NewMatchingQuizTitleView: ProcessedContentWebViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         self.invalidateIntrinsicContentSize()
         self.layoutIfNeeded()
         self.delegate?.newMatchingQuizTitleViewDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.delegate?.newMatchingQuizTitleView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
         self.delegate?.newMatchingQuizTitleView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
 }

@@ -18,12 +18,12 @@ final class ChoiceElementView: UIView {
     let appearance: Appearance
 
     private lazy var quizElementView = QuizElementView()
-    private lazy var contentView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance(
+    private lazy var contentView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance(
             insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
-        let view = ProcessedContentTextView(appearance: appearance)
+        let view = ProcessedContentWebView(appearance: appearance)
         view.isScrollEnabled = true
         view.delegate = self
         return view
@@ -40,12 +40,12 @@ final class ChoiceElementView: UIView {
         return view
     }()
 
-    private lazy var feedbackView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance()
+    private lazy var feedbackView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance()
         appearance.insets = LayoutInsets(insets: .zero)
         appearance.backgroundColor = .clear
 
-        let view = ProcessedContentTextView(appearance: appearance)
+        let view = ProcessedContentWebView(appearance: appearance)
         return view
     }()
 
@@ -234,15 +234,15 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension ChoiceElementView: ProcessedContentTextViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+extension ChoiceElementView: ProcessedContentWebViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         self.invalidateIntrinsicContentSize()
         self.onContentLoad?()
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {}
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {}
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
 }

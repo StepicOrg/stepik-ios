@@ -33,12 +33,12 @@ final class CourseInfoTabInfoAboutBlockView: UIView {
         return view
     }()
 
-    private lazy var processedContentTextView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance(
+    private lazy var processedContentTextView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance(
             insets: LayoutInsets(insets: .zero),
             backgroundColor: self.appearance.backgroundColor
         )
-        let view = ProcessedContentTextView(appearance: appearance)
+        let view = ProcessedContentWebView(appearance: appearance)
         view.delegate = self
         return view
     }()
@@ -121,20 +121,20 @@ extension CourseInfoTabInfoAboutBlockView: ProgrammaticallyInitializableViewProt
     }
 }
 
-extension CourseInfoTabInfoAboutBlockView: ProcessedContentTextViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+extension CourseInfoTabInfoAboutBlockView: ProcessedContentWebViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         self.delegate?.courseInfoTabInfoAboutBlockViewDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenImageURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenImage: image)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenURL: url)
     }
 }

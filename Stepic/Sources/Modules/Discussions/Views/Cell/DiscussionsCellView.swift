@@ -135,11 +135,11 @@ final class DiscussionsCellView: UIView {
         return label
     }()
 
-    private lazy var textContentWebBasedTextView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance()
+    private lazy var textContentWebBasedTextView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance()
         appearance.insets = LayoutInsets(insets: .zero)
         appearance.backgroundColor = .clear
-        let view = ProcessedContentTextView(appearance: appearance)
+        let view = ProcessedContentWebView(appearance: appearance)
         view.delegate = self
         view.isHidden = true
         return view
@@ -563,10 +563,10 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - DiscussionsCellView: ProcessedContentTextViewDelegate -
+// MARK: - DiscussionsCellView: ProcessedContentWebViewDelegate -
 
-extension DiscussionsCellView: ProcessedContentTextViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+extension DiscussionsCellView: ProcessedContentWebViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         if self.textContentWebBasedTextView.isHidden {
             return
         }
@@ -576,7 +576,7 @@ extension DiscussionsCellView: ProcessedContentTextViewDelegate {
         self.onContentLoaded?()
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int) {
         if self.textContentWebBasedTextView.isHidden {
             return
         }
@@ -588,13 +588,13 @@ extension DiscussionsCellView: ProcessedContentTextViewDelegate {
         }
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
         self.onImageClick?(url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.onLinkClick?(url)
     }
 }

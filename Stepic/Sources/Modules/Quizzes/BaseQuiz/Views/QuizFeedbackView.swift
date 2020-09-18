@@ -32,12 +32,12 @@ final class QuizFeedbackView: UIView {
 
     private lazy var leftView = UIView()
 
-    private lazy var feedbackView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance()
+    private lazy var feedbackView: ProcessedContentWebView = {
+        var appearance = ProcessedContentWebView.Appearance()
         appearance.insets = LayoutInsets(insets: .zero)
         appearance.backgroundColor = .clear
 
-        let view = ProcessedContentTextView(appearance: appearance)
+        let view = ProcessedContentWebView(appearance: appearance)
         view.delegate = self
 
         return view
@@ -272,17 +272,17 @@ extension QuizFeedbackView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension QuizFeedbackView: ProcessedContentTextViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+extension QuizFeedbackView: ProcessedContentWebViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestOpenURL: url)
     }
 }

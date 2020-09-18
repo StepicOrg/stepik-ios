@@ -77,7 +77,7 @@ final class CodeQuizFullscreenInstructionView: UIView {
     func configure(htmlString: String, samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
         self.scrollableStackView.removeAllArrangedViews()
 
-        let stepTextView = ProcessedContentTextView()
+        let stepTextView = ProcessedContentWebView()
         stepTextView.delegate = self
         self.scrollableStackView.addArrangedView(stepTextView)
         stepTextView.loadHTMLText(htmlString)
@@ -111,18 +111,18 @@ extension CodeQuizFullscreenInstructionView: ProgrammaticallyInitializableViewPr
     }
 }
 
-extension CodeQuizFullscreenInstructionView: ProcessedContentTextViewDelegate {
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+extension CodeQuizFullscreenInstructionView: ProcessedContentWebViewDelegate {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.delegate?.codeQuizFullscreenInstructionView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
         self.delegate?.codeQuizFullscreenInstructionView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
 
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         self.delegate?.codeQuizFullscreenInstructionViewDidLoadContent(self)
     }
 }
