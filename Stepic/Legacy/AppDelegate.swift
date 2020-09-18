@@ -24,20 +24,16 @@ import YandexMobileMetrica
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
-    private let notificationsService = NotificationsService()
-    private let branchService = BranchService()
-    private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
-    private let applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
-    private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
-    private let userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
-    private let visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
-    private lazy var analytics: Analytics = { StepikAnalytics.shared }()
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    private lazy var userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
+    private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
+    private lazy var notificationsService = NotificationsService()
+    private lazy var branchService = BranchService()
+    private lazy var spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
+    private lazy var applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
+    private lazy var notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
+    private lazy var userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
+    private lazy var visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
+    private lazy var analytics: Analytics = StepikAnalytics.shared
 
     // MARK: - Initializing the App
 

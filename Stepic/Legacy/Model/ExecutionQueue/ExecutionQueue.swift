@@ -22,8 +22,8 @@ final class ExecutionQueue: DictionarySerializable {
 
     func executeAll(_ completion : @escaping ((ExecutionQueue) -> Void)) {
         print("executing all count -> \(count)")
-        var notCompletedExecutionQueue = ExecutionQueue()
-        var executedCount = 0
+        let notCompletedExecutionQueue = ExecutionQueue()
+        let executedCount = 0
 
         func didExecuteAll() -> Bool {
             return notCompletedExecutionQueue.count + executedCount == queue.count

@@ -9,7 +9,7 @@ enum CourseListCardStyle {
     var height: CGFloat {
         switch self {
         case .small:
-            return 200
+            return 186
         case .normal:
             return 160
         }
