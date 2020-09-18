@@ -145,7 +145,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             return
         }
 
-        Nuke.loadImage(with: url, options: .shared, into: self.imageView) { [weak self] _ in
+        Nuke.loadImage(with: url, options: .shared, into: self.imageView, completion:  { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }
@@ -154,7 +154,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             strongSelf.activityIndicator.isHidden = true
             strongSelf.elementsStackView?.isHidden = false
             strongSelf.completion?()
-        }
+        })
     }
 
     @objc

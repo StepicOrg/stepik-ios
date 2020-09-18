@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,7 +60,6 @@
                                                         <color key="currentPageIndicatorTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </pageControl>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,6 +73,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="y1Z-Jg-MVB"/>
                         <color key="backgroundColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="y1Z-Jg-MVB" firstAttribute="trailing" secondItem="5g3-nB-MMj" secondAttribute="trailing" constant="16" id="1zG-dx-Acc"/>
@@ -81,7 +81,6 @@
                             <constraint firstItem="5g3-nB-MMj" firstAttribute="leading" secondItem="y1Z-Jg-MVB" secondAttribute="leading" constant="16" id="nDo-2T-E4J"/>
                             <constraint firstItem="5g3-nB-MMj" firstAttribute="top" secondItem="y1Z-Jg-MVB" secondAttribute="top" constant="16" id="vl7-zi-Daq"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="y1Z-Jg-MVB"/>
                     </view>
                     <navigationItem key="navigationItem" id="o1s-iX-7hl">
                         <barButtonItem key="leftBarButtonItem" image="onboarding-close" style="plain" id="rgL-TT-6ic">

@@ -24,7 +24,10 @@ final class AmplitudeAnalyticsEngine: AnalyticsEngine {
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         self.instance.logEvent(name, withEventProperties: parameters)
-        print("Logging Amplitude event: \(name), parameters: \(String(describing: parameters)))")
+
+        if LaunchArguments.analyticsDebugEnabled {
+            print("Logging Amplitude event: \(name), parameters: \(String(describing: parameters)))")
+        }
     }
 }
 
@@ -35,7 +38,10 @@ final class FirebaseAnalyticsEngine: AnalyticsEngine {
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters)
-        print("Logging Firebase event: \(name), parameters: \(String(describing: parameters))")
+
+        if LaunchArguments.analyticsDebugEnabled {
+            print("Logging Firebase event: \(name), parameters: \(String(describing: parameters))")
+        }
     }
 }
 
@@ -46,7 +52,10 @@ final class AppMetricaAnalyticsEngine: AnalyticsEngine {
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         YMMYandexMetrica.reportEvent(name, parameters: parameters)
-        print("Logging AppMetrica event: \(name), parameters: \(String(describing: parameters))")
+
+        if LaunchArguments.analyticsDebugEnabled {
+            print("Logging AppMetrica event: \(name), parameters: \(String(describing: parameters))")
+        }
     }
 }
 
@@ -85,7 +94,10 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
         self.synchronizationQueue.async {
             self.handleEvent(name: name, parameters: parameters, forceSend: forceSend)
-            print("Logging Stepik event: \(name), parameters: \(String(describing: parameters))")
+
+            if LaunchArguments.analyticsDebugEnabled {
+                print("Logging Stepik event: \(name), parameters: \(String(describing: parameters))")
+            }
         }
     }
 
@@ -145,11 +157,15 @@ final class StepikAnalyticsEngine: AnalyticsEngine {
             self.serializeQueueState()
             self.sendEventsIfNeeded()
 
-            print("StepikAnalyticsEngine :: done send batch metrics")
+            if LaunchArguments.analyticsDebugEnabled {
+                print("StepikAnalyticsEngine :: done send batch metrics")
+            }
         }.ensure {
             self.requestSemaphore.signal()
-        }.catch { _ in
-            print("StepikAnalyticsEngine :: failed send batch metrics")
+        }.catch { error in
+            if LaunchArguments.analyticsDebugEnabled {
+                print("StepikAnalyticsEngine :: failed send batch metrics with error = \(error)")
+            }
         }
     }
 
