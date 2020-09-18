@@ -730,6 +730,7 @@
 		2CCDD80024F8A59B006644A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CCDD80224F8A59B006644A8 /* InfoPlist.strings */; };
 		2CCDD80524F8A695006644A8 /* ApplicationShortcutIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDD80424F8A695006644A8 /* ApplicationShortcutIdentifier.swift */; };
 		2CCDD80724F8A7D7006644A8 /* ApplicationShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDD80624F8A7D7006644A8 /* ApplicationShortcutService.swift */; };
+		2CD04082250F669F004D284F /* ProcessedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD04081250F669F004D284F /* ProcessedContentView.swift */; };
 		2CD04084250F67D0004D284F /* ProcessedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD04083250F67D0004D284F /* ProcessedContent.swift */; };
 		2CD063E6242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
@@ -2155,6 +2156,7 @@
 		2CCDD80324F8A604006644A8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CCDD80424F8A695006644A8 /* ApplicationShortcutIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationShortcutIdentifier.swift; sourceTree = "<group>"; };
 		2CCDD80624F8A7D7006644A8 /* ApplicationShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationShortcutService.swift; sourceTree = "<group>"; };
+		2CD04081250F669F004D284F /* ProcessedContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContentView.swift; sourceTree = "<group>"; };
 		2CD04083250F67D0004D284F /* ProcessedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContent.swift; sourceTree = "<group>"; };
 		2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorViewStyle+Fallback.swift"; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
@@ -3184,6 +3186,7 @@
 				2C48D605228F114400739477 /* HTMLExtractor.swift */,
 				2CD04083250F67D0004D284F /* ProcessedContent.swift */,
 				2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */,
+				2CD04081250F669F004D284F /* ProcessedContentView.swift */,
 			);
 			path = ContentProcessor;
 			sourceTree = "<group>";
@@ -8604,6 +8607,7 @@
 				62E983D50569783CDB719D65 /* ContentLanguageSwitchInteractor.swift in Sources */,
 				62E98F674E6B10451E7397F9 /* ContentLanguageSwitchPresenter.swift in Sources */,
 				62E98273401D1360B07BAD0A /* ContentLanguageSwitchProvider.swift in Sources */,
+				2CD04082250F669F004D284F /* ProcessedContentView.swift in Sources */,
 				2CB718DC249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift in Sources */,
 				2C2E44D324FE474F006B7303 /* CourseListGridSize.swift in Sources */,
 				62E9889E935597A0ED849B0C /* ContentLanguageSwitchViewController.swift in Sources */,
