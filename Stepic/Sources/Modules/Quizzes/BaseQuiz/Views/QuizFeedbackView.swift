@@ -280,7 +280,7 @@ extension QuizFeedbackView: ProcessedContentWebViewDelegate {
         self.delegate?.quizFeedbackView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
 
     func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestOpenURL: url)

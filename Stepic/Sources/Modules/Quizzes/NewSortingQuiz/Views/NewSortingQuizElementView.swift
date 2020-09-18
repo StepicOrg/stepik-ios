@@ -313,5 +313,5 @@ extension NewSortingQuizElementView: ProcessedContentWebViewDelegate {
         self.delegate?.newSortingQuizElementView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
 }

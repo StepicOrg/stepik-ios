@@ -244,5 +244,5 @@ extension ChoiceElementView: ProcessedContentWebViewDelegate {
 
     func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {}
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
 }

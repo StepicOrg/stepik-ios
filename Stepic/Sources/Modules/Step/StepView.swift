@@ -181,7 +181,7 @@ final class StepView: UIView {
 
     func updateText(_ htmlText: String) {
         if self.stepTextView.superview != nil {
-            self.stepTextView.reset()
+            self.stepTextView.clearContent()
             self.stepTextView.loadHTMLText(htmlText)
         }
     }
@@ -262,7 +262,7 @@ extension StepView: ProcessedContentWebViewDelegate {
         self.delegate?.stepView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {
         self.delegate?.stepView(self, didRequestFullscreenImage: image)
     }
 

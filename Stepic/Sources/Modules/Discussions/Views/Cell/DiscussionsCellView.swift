@@ -418,7 +418,7 @@ final class DiscussionsCellView: UIView {
         } else {
             self.textContentWebBasedTextView.isHidden = true
             self.currentWebBasedTextViewHeight = self.appearance.textContentWebBasedTextViewDefaultHeight
-            self.textContentWebBasedTextView.reset()
+            self.textContentWebBasedTextView.clearContent()
 
             self.textContentTextLabel.isHidden = false
             self.textContentTextLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
@@ -571,7 +571,7 @@ extension DiscussionsCellView: ProcessedContentWebViewDelegate {
             return
         }
 
-        self.currentWebBasedTextViewHeight = CGFloat(self.textContentWebBasedTextView.currentWebViewHeight)
+        self.currentWebBasedTextViewHeight = CGFloat(self.textContentWebBasedTextView.height)
         self.textContentWebBasedTextView.alpha = 1
         self.onContentLoaded?()
     }
@@ -592,7 +592,7 @@ extension DiscussionsCellView: ProcessedContentWebViewDelegate {
         self.onImageClick?(url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
 
     func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
         self.onLinkClick?(url)

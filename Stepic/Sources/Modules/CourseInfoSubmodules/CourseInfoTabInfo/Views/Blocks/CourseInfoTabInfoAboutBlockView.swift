@@ -130,7 +130,7 @@ extension CourseInfoTabInfoAboutBlockView: ProcessedContentWebViewDelegate {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenImageURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenImage: image)
     }
 

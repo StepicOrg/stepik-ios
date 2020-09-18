@@ -120,7 +120,7 @@ extension CodeQuizFullscreenInstructionView: ProcessedContentWebViewDelegate {
         self.delegate?.codeQuizFullscreenInstructionView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImage image: UIImage) {}
+    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
 
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
         self.delegate?.codeQuizFullscreenInstructionViewDidLoadContent(self)
