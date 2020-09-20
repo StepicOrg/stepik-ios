@@ -1,22 +1,32 @@
-//
-//  SocialAuthCollectionViewCell.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 12.09.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
+import SnapKit
 import UIKit
 
-final class SocialAuthCollectionViewCell: UICollectionViewCell {
-    enum Appearance {
-        static let shadowColor = UIColor.dynamic(light: UIColor(hex6: 0xBBBBBB), dark: .clear)
-        static let backgroundColor = UIColor.dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
+extension SocialAuthCollectionViewCell {
+    struct Appearance {
+        let borderColor = UIColor.black
+        let borderWidth: CGFloat = 0.5
+        let cornerRadius: CGFloat = 8
+
+        let backgroundColor = UIColor.white
+
+        let imageViewWidthHeight: CGFloat = 48
     }
+}
 
-    static let reuseId = "socialAuthCell"
+final class SocialAuthCollectionViewCell: UICollectionViewCell, Reusable {
+    var appearance = Appearance()
 
-    @IBOutlet weak var imageView: UIImageView!
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .center
+        return imageView
+    }()
+
+    var image: UIImage? {
+        didSet {
+            self.imageView.image = self.image
+        }
+    }
 
     override var isHighlighted: Bool {
         didSet {
@@ -30,37 +40,52 @@ final class SocialAuthCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
+        self.setupView()
+        self.addSubviews()
+        self.makeConstraints()
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if self.isDarkInterfaceStyle {
+            self.layer.borderColor = nil
+            self.layer.borderWidth = 0
+        } else {
+            self.layer.borderColor = self.appearance.borderColor.cgColor
+            self.layer.borderWidth = self.appearance.borderWidth
+        }
+    }
+}
+
+extension SocialAuthCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
         self.isUserInteractionEnabled = true
         self.contentView.isUserInteractionEnabled = false
 
-        self.contentView.layer.cornerRadius = layer.cornerRadius
-        self.contentView.layer.masksToBounds = true
+        self.layer.cornerRadius = self.appearance.cornerRadius
+        self.layer.masksToBounds = true
 
-        self.layer.shadowOffset = CGSize(width: 0, height: 1.5)
-        self.layer.shadowRadius = 1.7
-        self.layer.shadowOpacity = 0.3
-        self.layer.masksToBounds = false
-        self.layer.shadowPath = UIBezierPath(
-            roundedRect: self.bounds,
-            cornerRadius: self.contentView.layer.cornerRadius
-        ).cgPath
-
-        self.colorize()
+        self.contentView.backgroundColor = self.appearance.backgroundColor
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
+    func addSubviews() {
+        self.contentView.addSubview(self.imageView)
+    }
 
-        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
-            self.colorize()
+    func makeConstraints() {
+        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.imageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.height.equalTo(self.appearance.imageViewWidthHeight)
         }
-    }
-
-    private func colorize() {
-        self.layer.shadowColor = Appearance.shadowColor.cgColor
-        self.contentView.backgroundColor = Appearance.backgroundColor
     }
 }

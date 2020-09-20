@@ -69,7 +69,7 @@ enum SocialProvider: Int, CaseIterable {
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
-                image: UIImage(named: "github"),
+                image: UIImage(named: "github-light"),
                 registerURL: URL(string: "https://stepik.org/accounts/github/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!
             )
         }

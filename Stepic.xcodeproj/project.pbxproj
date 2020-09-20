@@ -708,7 +708,6 @@
 		2CC276FE23EB98CE00E88D6E /* UIBarButtonItem+StepikBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+StepikBarButtonItems.swift */; };
 		2CC2770023EB9E2200E88D6E /* SubmissionsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */; };
 		2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
-		2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */; };
 		2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3518E1F682B6C004255B6 /* SocialAuthHeaderView.swift */; };
 		2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351901F682D47004255B6 /* SocialAuthViewController.swift */; };
 		2CC351971F683140004255B6 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
@@ -2131,7 +2130,6 @@
 		2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsSkeletonView.swift; sourceTree = "<group>"; };
 		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthCollectionViewCell.swift; sourceTree = "<group>"; };
-		2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialAuthCollectionViewCell.xib; sourceTree = "<group>"; };
 		2CC3518E1F682B6C004255B6 /* SocialAuthHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthHeaderView.swift; sourceTree = "<group>"; };
 		2CC351901F682D47004255B6 /* SocialAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthViewController.swift; sourceTree = "<group>"; };
 		2CC351961F683140004255B6 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
@@ -4250,19 +4248,10 @@
 				2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */,
 				2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */,
 				2CC351901F682D47004255B6 /* SocialAuthViewController.swift */,
-				2CA4CF94242A17C6008BC4E8 /* SocialAuthCollectionViewCell */,
+				2CD3F5222515D548008F7E51 /* SocialAuthCollectionViewCell */,
 				2CA4CF95242A17D1008BC4E8 /* SocialAuthHeaderView */,
 			);
 			path = AuthSocial;
-			sourceTree = "<group>";
-		};
-		2CA4CF94242A17C6008BC4E8 /* SocialAuthCollectionViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */,
-				2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */,
-			);
-			path = SocialAuthCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		2CA4CF95242A17D1008BC4E8 /* SocialAuthHeaderView */ = {
@@ -4493,6 +4482,14 @@
 				2CCDD1FD24DBB35700A48EE0 /* Protected.swift */,
 			);
 			path = Concurrency;
+			sourceTree = "<group>";
+		};
+		2CD3F5222515D548008F7E51 /* SocialAuthCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */,
+			);
+			path = SocialAuthCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		2CD462E8226F424A004E4725 /* Common */ = {
@@ -7280,7 +7277,6 @@
 				08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				2CBC4C061F1E4A1300FE96C4 /* Config-Production.plist in Resources */,
 				08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */,
-				2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */,
 				08484F06211AF4320006266F /* StoryCollectionViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */,
@@ -9134,7 +9130,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -9159,7 +9155,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9301,7 +9297,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -9331,7 +9327,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -9421,7 +9417,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -9472,7 +9468,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -9553,7 +9549,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -9601,7 +9597,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9688,7 +9684,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -9739,7 +9735,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -9820,7 +9816,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -9868,7 +9864,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 244;
+				CURRENT_PROJECT_VERSION = 245;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
