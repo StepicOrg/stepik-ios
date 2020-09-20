@@ -148,10 +148,7 @@ final class SocialAuthViewController: UIViewController {
 
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.register(
-            UINib(nibName: "SocialAuthCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: SocialAuthCollectionViewCell.reuseId
-        )
+        self.collectionView.register(cellClass: SocialAuthCollectionViewCell.self)
 
         let collectionViewLayout = SocialCollectionViewFlowLayout()
         collectionViewLayout.numberOfColumns = self.numberOfColumns
@@ -224,12 +221,8 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
         }
 
         let provider = providers[providerIndex]
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: SocialAuthCollectionViewCell.reuseId,
-            for: indexPath
-        ) as! SocialAuthCollectionViewCell
-
-        cell.imageView.image = provider.image
+        let cell: SocialAuthCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.image = provider.image
 
         return cell
     }

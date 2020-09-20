@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Black Logo Square@1x.png",
+      "filename" : "GitHub-Mark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Black Logo Square@2x.png",
+      "filename" : "GitHub-Mark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Black Logo Square@3x.png",
+      "filename" : "GitHub-Mark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
