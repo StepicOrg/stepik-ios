@@ -387,6 +387,7 @@
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
 		2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */; };
 		2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */; };
+		2C084AD82514ED3A000561F7 /* ProcessedContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C084AD72514ED3A000561F7 /* ProcessedContentTextView.swift */; };
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
 		2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */; };
@@ -1778,6 +1779,7 @@
 		2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLargeInputTableViewCell.swift; sourceTree = "<group>"; };
 		2C06E09E2241434100AF4DA2 /* Model_profile_fields_v33.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_fields_v33.xcdatamodel; sourceTree = "<group>"; };
 		2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSkeletonView.swift; sourceTree = "<group>"; };
+		2C084AD72514ED3A000561F7 /* ProcessedContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContentTextView.swift; sourceTree = "<group>"; };
 		2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_lesson_fields_v31.xcdatamodel; sourceTree = "<group>"; };
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
@@ -3007,6 +3009,7 @@
 		2C084ACA2514A1FA000561F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C084AD72514ED3A000561F7 /* ProcessedContentTextView.swift */,
 				2CD04081250F669F004D284F /* ProcessedContentView.swift */,
 				2C48D5F9228D7D2C00739477 /* ProcessedContentWebView.swift */,
 			);
@@ -8445,6 +8448,7 @@
 				62E98AF1D0D810811FAC3CCA /* SettingsInputTableViewCell.swift in Sources */,
 				2C8F3ADD23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift in Sources */,
 				2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */,
+				2C084AD82514ED3A000561F7 /* ProcessedContentTextView.swift in Sources */,
 				2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */,
 				2C9A8D2E22D348A5009434DB /* String+HTMLEscape.swift in Sources */,
 				2CE61D852412961500DA2CBA /* SpotlightDomainIdentifier.swift in Sources */,
