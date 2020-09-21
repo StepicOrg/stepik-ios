@@ -1,10 +1,9 @@
 import Foundation
 
 protocol ContentProcessorProtocol {
-    init(content: String, rules: [ContentProcessingRule], injections: [ContentProcessingInjection])
+    init(rules: [ContentProcessingRule], injections: [ContentProcessingInjection])
 
-    func processContent() -> String
-    func processContent() -> ProcessedContent
+    func processContent(_ content: String) -> ProcessedContent
 }
 
 final class ContentProcessor: ContentProcessorProtocol {
@@ -26,24 +25,19 @@ final class ContentProcessor: ContentProcessorProtocol {
         RemoveImageFixedHeightRule(extractorType: HTMLExtractor.self)
     ]
 
-    private let content: String
     private let rules: [ContentProcessingRule]
     private let injections: [ContentProcessingInjection]
 
     init(
-        content: String,
         rules: [ContentProcessingRule] = ContentProcessor.defaultRules,
         injections: [ContentProcessingInjection] = ContentProcessor.defaultInjections
     ) {
-        self.content = content
         self.rules = rules
         self.injections = injections
     }
 
-    func processContent() -> String { "" }
-
-    func processContent() -> ProcessedContent {
-        var content = self.content
+    func processContent(_ content: String) -> ProcessedContent {
+        var content = content
 
         for rule in self.rules {
             content = rule.process(content: content)
