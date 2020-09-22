@@ -3,8 +3,6 @@ import SnapKit
 import UIKit
 import WebKit
 
-// MARK: ProcessedContentWebViewDelegate: class -
-
 protocol ProcessedContentWebViewDelegate: AnyObject {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView)
     func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int)
@@ -19,16 +17,12 @@ extension ProcessedContentWebViewDelegate {
     func processedContentTextView(_ view: ProcessedContentWebView, didOpenARKitLink url: URL) {}
 }
 
-// MARK: - Appearance -
-
 extension ProcessedContentWebView {
     struct Appearance {
         var insets = LayoutInsets(top: 10, left: 16, bottom: 4, right: 16)
         var backgroundColor = UIColor.stepikBackground
     }
 }
-
-// MARK: - ProcessedContentWebView: UIView -
 
 final class ProcessedContentWebView: UIView {
     private static let pollDocumentReadyStateInterval: TimeInterval = 0.5
@@ -91,6 +85,8 @@ final class ProcessedContentWebView: UIView {
         return webView
     }()
 
+    private var webViewHeightConstraint: Constraint?
+
     /// Keeps track of current web view height.
     private var currentWebViewHeight = Int(ProcessedContentWebView.defaultWebViewHeight)
     private var isLoadHTMLStringInProgress = false
@@ -132,7 +128,7 @@ final class ProcessedContentWebView: UIView {
         set {
             if self.currentWebViewHeight != newValue {
                 self.currentWebViewHeight = newValue
-                self.webView.snp.updateConstraints { $0.height.equalTo(newValue) }
+                self.webViewHeightConstraint?.update(offset: newValue)
             }
         }
     }
@@ -140,7 +136,7 @@ final class ProcessedContentWebView: UIView {
     override var intrinsicContentSize: CGSize {
         CGSize(
             width: UIView.noIntrinsicMetric,
-            height: self.webView.intrinsicContentSize.height
+            height: CGFloat(self.height)
                 + self.appearance.insets.top
                 + self.appearance.insets.bottom
         )
@@ -277,7 +273,7 @@ extension ProcessedContentWebView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
-            make.height.equalTo(Self.defaultWebViewHeight)
+            self.webViewHeightConstraint = make.height.equalTo(Self.defaultWebViewHeight).priority(.low).constraint
         }
     }
 }
