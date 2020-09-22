@@ -2,6 +2,10 @@ import Atributika
 import SnapKit
 import UIKit
 
+protocol ProcessedContentTextViewDelegate: AnyObject {
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: CGFloat)
+}
+
 extension ProcessedContentTextView {
     struct Appearance {
         var font = UIFont.systemFont(ofSize: 17, weight: .regular)
@@ -11,6 +15,8 @@ extension ProcessedContentTextView {
 
 final class ProcessedContentTextView: UIView {
     let appearance: Appearance
+
+    weak var delegate: ProcessedContentTextViewDelegate?
 
     private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
 
