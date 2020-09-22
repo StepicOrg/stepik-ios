@@ -40,6 +40,14 @@ final class ProcessedContentTextView: UIView {
     private var didSetupLabel = false
     private var didSetupAttributedLabel = false
 
+    private var currentIntrinsicContentHeight: CGFloat = UIView.noIntrinsicMetric {
+        didSet {
+            if oldValue != self.currentIntrinsicContentHeight {
+                self.delegate?.processedContentTextView(self, didReportNewHeight: self.currentIntrinsicContentHeight)
+            }
+        }
+    }
+
     var onLinkClick: ((URL) -> Void)?
 
     var text: String? {
@@ -67,10 +75,12 @@ final class ProcessedContentTextView: UIView {
         if self.didSetupLabel && !self.label.isHidden {
             height = self.label.intrinsicContentSize.height
         } else if self.didSetupAttributedLabel {
-            height = self.attributedLabel.intrinsicContentSize.height
+            height = self.attributedLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
         } else {
-            height = 0
+            height = UIView.noIntrinsicMetric
         }
+
+        self.currentIntrinsicContentHeight = height
 
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
