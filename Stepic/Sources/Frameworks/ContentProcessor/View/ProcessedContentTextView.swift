@@ -46,7 +46,7 @@ final class ProcessedContentTextView: UIView {
                 return self.clearText()
             }
 
-            if self.hasAnyHTMLTagStartEndSymbol(text) {
+            if self.isAttributedLabelSupportNeeded(text: text) {
                 self.setAttributedLabelText(text)
             } else {
                 self.setLabelText(text)
@@ -92,8 +92,10 @@ final class ProcessedContentTextView: UIView {
         }
     }
 
-    private func hasAnyHTMLTagStartEndSymbol(_ string: String) -> Bool {
-        string.contains("<") || string.contains(">") || string.contains("</")
+    private func isAttributedLabelSupportNeeded(text: String) -> Bool {
+        let hasAnyURLScheme = text.contains("http://") || text.contains("https://")
+        let hasAnyHTMLTagStartEndSymbol = text.contains("<") || text.contains(">") || text.contains("</")
+        return hasAnyURLScheme || hasAnyHTMLTagStartEndSymbol
     }
 
     private func setLabelText(_ text: String) {
