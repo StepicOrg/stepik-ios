@@ -501,9 +501,9 @@ UserCoursesTabFavoritesTitle = "Избранные";
 UserCoursesTabArchivedTitle = "Архив";
 
 RetentionNotificationOnNextDayTitle = "Не сбавляем темп";
-RetentionNotificationOnNextDayText = "Удалось поучиться вчера - это хороший повод зайти сегодня и стать еще умнее! 🚀";
-RetentionNotificationOnThirdDayTitle = "Иссякла тяга к знаниям? 🤔";
-RetentionNotificationOnThirdDayText = "Тебя подозрительно давно не было. Заходи и становись умнее! 💡";
+RetentionNotificationOnNextDayText = "Вы проделали отличную работу вчера - это хороший повод зайти сегодня и продолжить учиться! 🚀";
+RetentionNotificationOnThirdDayTitle = "Время учиться";
+RetentionNotificationOnThirdDayText = "Вас давно не было. Заходите и учитесь новому! 💡";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
