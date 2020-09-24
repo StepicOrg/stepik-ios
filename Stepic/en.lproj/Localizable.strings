@@ -278,10 +278,6 @@ AchievementUnlocked = "unlocked";
 TapToShareAchievement = "Tap to share achievement";
 AchievementCongratulationShareText = "I've unlocked achievement \"%@\" in %@ app. Join and beat my record!";
 AchievementCongratulationText = "Achievement \"%@\" unlocked";
-RetentionNotificationYesterday = "You scored %@ XP yesterday. Go back and improve your score!";
-RetentionNotificationYesterdayZero = "You didn't score any points for yesterday. Improve your score today!";
-RetentionNotificationYesterdayStreak = "You have been learning %@ in a row. Go back and keep learning!";
-RetentionNotificationWeekly = "You haven't done it for a long time. Go back and keep learning!";
 NotSupportedLanguage = "The language is not supported in the application yet";
 StreaksAreUpdated = "Streaks are updated at";
 Settings = "Settings";
@@ -503,9 +499,9 @@ UserCoursesTabFavoritesTitle = "Favorite";
 UserCoursesTabArchivedTitle = "Archive";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
-RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";
-RetentionNotificationOnThirdDayTitle = "Lost your thirst to knowledge? 🤔";
-RetentionNotificationOnThirdDayText = "You haven't been here for a suspiciously long time. Come back and become smarter! 💡";
+RetentionNotificationOnNextDayText = "You've done a great job learning so far. Come back and get even smarter! 🚀";
+RetentionNotificationOnThirdDayTitle = "Time to study";
+RetentionNotificationOnThirdDayText = "You haven't been here for a while. Come back and continue study! 💡";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
