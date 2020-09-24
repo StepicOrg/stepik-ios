@@ -27,11 +27,6 @@ final class CommonStylesInjection: ContentProcessingInjection {
     var headScript: String { Scripts.styles }
 }
 
-/// Injects CSS file for course info screen
-final class CourseInfoStylesInjection: ContentProcessingInjection {
-    var headScript: String { Scripts.courseInfoStyles }
-}
-
 /// Injects meta-viewport
 final class MetaViewportInjection: ContentProcessingInjection {
     var headScript: String { Scripts.metaViewport }
