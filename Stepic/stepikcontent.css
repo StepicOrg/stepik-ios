@@ -1,6 +1,6 @@
 :root {
     color-scheme: light dark;
-    --textColor: #535366;
+    --text-color: #535366;
     --link-color: -webkit-link;
     --table-background-color: #FFFFFF;
     --table-background-color-even: #F9F9F9;
@@ -14,7 +14,7 @@
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --textColor: #D3D2E9;
+        --text-color: #D3D2E9;
         --link-color: #3366CC;
         --table-background-color: #000000;
         --table-background-color-even: #1C1C1E;
@@ -28,7 +28,7 @@ html {
 
 body {
     font-size: var(--body-font-size);
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-color);
     line-height: 1.6em;
     color: var(--textColor);
 }
@@ -38,7 +38,6 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     text-align: center;
-    color: var(--textColor);
 }
 
 h2 {
@@ -46,7 +45,6 @@ h2 {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     text-align: center;
-    color: var(--textColor);
 }
 
 h3 {
@@ -54,7 +52,6 @@ h3 {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     text-align: center;
-    color: var(--textColor);
 }
 
 blockquote {
@@ -65,6 +62,7 @@ blockquote {
     border-left: 4px solid #ccc;
     padding-left: 8px;
     color: var(--textColor);
+    color: var(--text-color);
 }
 
 a {
