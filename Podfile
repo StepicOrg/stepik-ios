@@ -63,7 +63,7 @@ def all_pods
     pod 'Koloda', '5.0'
     pod 'Charts', '3.4.0'
     pod 'EasyTipView', '2.0.4'
-    pod 'ActionSheetPicker-3.0', '2.4.0'
+    pod 'ActionSheetPicker-3.0', '2.6.0'
     pod 'Nuke', '9.1.2'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
