@@ -107,48 +107,82 @@ final class CustomAudioControlInjection: ContentProcessingInjection {
 
 /// Injects script that assigns font sizes.
 final class FontSizeInjection: ContentProcessingInjection {
-    private let fontSize: StepFontSize
+    private static let defaultBodyFontSize = 17
+    private static let defaultH1FontSize = 28
+    private static let defaultH2FontSize = 22
+    private static let defaultH3FontSize = 20
+    private static let defaultBlockquoteFontSize = 17
 
-    init(fontSize: StepFontSize) {
-        self.fontSize = fontSize
+    private let bodyFontSizeStringValue: String
+    private let h1FontSizeStringValue: String
+    private let h2FontSizeStringValue: String
+    private let h3FontSizeStringValue: String
+    private let blockquoteFontSizeStringValue: String
+
+    var bodyHeadScript: String {
+        """
+        <script type="text/javascript">
+            document.documentElement.style.setProperty('--body-font-size', '\(self.bodyFontSizeStringValue)');
+            document.documentElement.style.setProperty('--h1-font-size', '\(self.h1FontSizeStringValue)');
+            document.documentElement.style.setProperty('--h2-font-size', '\(self.h2FontSizeStringValue)');
+            document.documentElement.style.setProperty('--h3-font-size', '\(self.h3FontSizeStringValue)');
+            document.documentElement.style.setProperty('--blockquote-font-size', '\(self.blockquoteFontSizeStringValue)');
+        </script>
+        """
     }
-
-    var headScript: String { Scripts.fontSize(self.fontSize) }
-}
-
-/// Injects script that assigns custom font sizes.
-final class CustomFontSizeInjection: ContentProcessingInjection {
-    private let bodyFontSize: Int
-    private let h1FontSize: Int
-    private let h2FontSize: Int
-    private let h3FontSize: Int
-    private let blockquoteFontSize: Int
 
     init(
-        bodyFontSize: Int,
-        h1FontSize: Int,
-        h2FontSize: Int,
-        h3FontSize: Int,
-        blockquoteFontSize: Int
+        bodyFontSizeStringValue: String,
+        h1FontSizeStringValue: String,
+        h2FontSizeStringValue: String,
+        h3FontSizeStringValue: String,
+        blockquoteFontSizeStringValue: String
     ) {
-        self.bodyFontSize = bodyFontSize
-        self.h1FontSize = h1FontSize
-        self.h2FontSize = h2FontSize
-        self.h3FontSize = h3FontSize
-        self.blockquoteFontSize = blockquoteFontSize
+        self.bodyFontSizeStringValue = bodyFontSizeStringValue
+        self.h1FontSizeStringValue = h1FontSizeStringValue
+        self.h2FontSizeStringValue = h2FontSizeStringValue
+        self.h3FontSizeStringValue = h3FontSizeStringValue
+        self.blockquoteFontSizeStringValue = blockquoteFontSizeStringValue
     }
 
-    var headScript: String {
-        Scripts.fontSizeScript(
-            bodyFontSizeString: "\(self.bodyFontSize)pt",
-            h1FontSizeString: "\(self.h1FontSize)pt",
-            h2FontSizeString: "\(self.h2FontSize)pt",
-            h3FontSizeString: "\(self.h3FontSize)pt",
-            blockquoteFontSizeString: "\(self.blockquoteFontSize)px"
+    convenience init(
+        bodyFontSize: Int = FontSizeInjection.defaultBodyFontSize,
+        h1FontSize: Int = FontSizeInjection.defaultH1FontSize,
+        h2FontSize: Int = FontSizeInjection.defaultH2FontSize,
+        h3FontSize: Int = FontSizeInjection.defaultH3FontSize,
+        blockquoteFontSize: Int = FontSizeInjection.defaultBlockquoteFontSize
+    ) {
+        self.init(
+            bodyFontSizeStringValue: String(bodyFontSize),
+            h1FontSizeStringValue: String(h1FontSize),
+            h2FontSizeStringValue: String(h2FontSize),
+            h3FontSizeStringValue: String(h3FontSize),
+            blockquoteFontSizeStringValue: String(blockquoteFontSize)
+        )
+    }
+
+    convenience init(baseFontSize: Int) {
+        self.init(
+            bodyFontSize: baseFontSize,
+            h1FontSize: Int((Float(baseFontSize) * 1.65).rounded()),
+            h2FontSize: Int((Float(baseFontSize) * 1.3).rounded()),
+            h3FontSize: Int((Float(baseFontSize) * 1.2).rounded()),
+            blockquoteFontSize: baseFontSize
+        )
+    }
+
+    convenience init(stepFontSize: StepFontSize) {
+        self.init(
+            bodyFontSizeStringValue: stepFontSize.body,
+            h1FontSizeStringValue: stepFontSize.h1,
+            h2FontSizeStringValue: stepFontSize.h2,
+            h3FontSizeStringValue: stepFontSize.h3,
+            blockquoteFontSizeStringValue: stepFontSize.blockquote
         )
     }
 }
 
+/// Injects script that assigns text color for light and dark mode.
 final class TextColorInjection: ContentProcessingInjection {
     private let lightColorHexString: String
     private let darkColorHexString: String
@@ -184,20 +218,4 @@ final class TextColorInjection: ContentProcessingInjection {
             self.init(lightColor: dynamicColor, darkColor: dynamicColor)
         }
     }
-
-    static func stepikPrimaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikPrimaryText) }
-
-    static func stepikSecondaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikSecondaryText) }
-
-    static func stepikTertiaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikTertiaryText) }
-
-    static func stepikQuaternaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikQuaternaryText) }
-
-    static func systemPrimaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikSystemPrimaryText) }
-
-    static func systemSecondaryText() -> TextColorInjection { .init(dynamicColor: .stepikSystemSecondaryText) }
-
-    static func systemTertiaryText() -> TextColorInjection { .init(dynamicColor: .stepikSystemTertiaryText) }
-
-    static func systemQuaternaryText() -> TextColorInjection { .init(dynamicColor: .stepikSystemQuaternaryText) }
 }

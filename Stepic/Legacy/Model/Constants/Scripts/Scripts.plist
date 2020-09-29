@@ -64,13 +64,5 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
 &lt;/script&gt;</string>
-	<key>FontSizeScript</key>
-	<string>&lt;script type=&quot;text/javascript&quot;&gt;
-	document.documentElement.style.setProperty(&apos;--body-font-size&apos;, &apos;##--body-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--h1-font-size&apos;, &apos;##--h1-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--h2-font-size&apos;, &apos;##--h2-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--h3-font-size&apos;, &apos;##--h3-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--blockquote-font-size&apos;, &apos;##--blockquote-font-size##&apos;);
-&lt;/script&gt;</string>
 </dict>
 </plist>

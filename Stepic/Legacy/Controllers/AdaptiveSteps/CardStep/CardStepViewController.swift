@@ -70,7 +70,7 @@ class CardStepViewController: UIViewController, CardStepView {
         let processor = HTMLProcessor(html: viewModel.htmlText)
         let html = processor
             .injectDefault()
-            .inject(script: .fontSize(fontSize: viewModel.fontSize))
+            .inject(script: .fontSize(stepFontSize: viewModel.fontSize))
             .html
         self.stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
