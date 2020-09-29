@@ -21,7 +21,6 @@ struct Scripts {
     private static let audioTagWrapperInitKey = "AudioTagWrapperInit"
     private static let wysiwygStylesKey = "wysiwygCSSWrapper"
     private static let commonStylesKey = "contentCSSWrapper"
-    private static let textColorScriptKey = "textColorScript"
     private static let highlightJSKey = "highlightJS"
     private static let webkitCalloutDisableKey = "WebkitTouchCalloutDisable"
     private static let fontSizeScriptKey = "FontSizeScript"
@@ -68,11 +67,6 @@ struct Scripts {
 
     static var webkitCalloutDisable: String {
          "\(self.loadScriptWithKey(self.webkitCalloutDisableKey))"
-    }
-
-    static func textColor(color: UIColor) -> String {
-        let script = self.loadScriptWithKey(self.textColorScriptKey)
-        return script.replacingOccurrences(of: "######", with: "#\(color.hexString)")
     }
 
     /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.

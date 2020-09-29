@@ -1,68 +1,99 @@
 :root {
     color-scheme: light dark;
-    --text-color: #535366;
-    --link-color: -webkit-link;
+    --link-color: #56A4FF;
     --table-background-color: #FFFFFF;
     --table-background-color-even: #F9F9F9;
     --table-border-color: #ddd;
-    --body-font-size: 12pt;
-    --h1-font-size: 20pt;
-    --h2-font-size: 17pt;
-    --h3-font-size: 14pt;
-    --blockquote-font-size: 16px;
+    --body-font-size: 17;
+    --h1-font-size: 28;
+    --h2-font-size: 22;
+    --h3-font-size: 20;
+    --blockquote-font-size: 17;
+}
+
+@media screen and (prefers-color-scheme: light) {
+    body {
+        color: var(--text-color-light);
+    }
+
+    h1 {
+        color: var(--text-color-light);
+    }
+
+    h2 {
+        color: var(--text-color-light);
+    }
+
+    h3 {
+        color: var(--text-color-light);
+    }
+
+    blockquote {
+        color: var(--text-color-light);
+    }
 }
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --text-color: #D3D2E9;
-        --link-color: #3366CC;
+        --link-color: #70B5FF;
         --table-background-color: #000000;
         --table-background-color-even: #1C1C1E;
         --table-border-color: #54545899;
     }
+
+    body {
+        color: var(--text-color-dark);
+    }
+
+    h1 {
+        color: var(--text-color-dark);
+    }
+
+    h2 {
+        color: var(--text-color-dark);
+    }
+
+    h3 {
+        color: var(--text-color-dark);
+    }
+
+    blockquote {
+        color: var(--text-color-dark);
+    }
 }
 
 html {
+    font-family: -apple-system, Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    line-height: 1.3em;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
     font-size: var(--body-font-size);
-    color: var(--text-color);
-    line-height: 1.6em;
-    color: var(--textColor);
 }
 
 h1 {
-    font-size: var(--h1-font-size);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6em;
     text-align: center;
+    font-size: var(--h1-font-size);
 }
 
 h2 {
-    font-size: var(--h2-font-size);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6em;
     text-align: center;
+    font-size: var(--h2-font-size);
 }
 
 h3 {
-    font-size: var(--h3-font-size);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6em;
     text-align: center;
+    font-size: var(--h3-font-size);
 }
 
 blockquote {
     font-style: italic;
-    font-size: var(--blockquote-font-size);
     margin-left: 32px;
-    font-family: Arial, Helvetica, sans-serif;
     border-left: 4px solid #ccc;
     padding-left: 8px;
-    color: var(--textColor);
-    color: var(--text-color);
+    font-size: var(--blockquote-font-size);
 }
 
 a {

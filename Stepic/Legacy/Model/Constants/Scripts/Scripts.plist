@@ -6,8 +6,6 @@
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;document.documentElement.style.webkitTouchCallout=&apos;none&apos;;&lt;/script&gt;</string>
 	<key>highlightJS</key>
 	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;highlight.js&quot;&gt;&lt;/script&gt;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;</string>
-	<key>textColorScript</key>
-	<string>&lt;script type=&quot;text/javascript&quot;&gt;document.body.style.setProperty(&apos;--text-color&apos;, &apos;######&apos;)&lt;/script&gt;</string>
 	<key>contentCSSWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;stepikcontent.css&quot;&gt;</string>
 	<key>wysiwygCSSWrapper</key>

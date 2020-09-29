@@ -65,7 +65,7 @@ final class HTMLProcessor {
             case .audio:
                 return Scripts.audioTagWrapperInit
             case .textColor(let color):
-                return Scripts.textColor(color: color)
+                return TextColorInjection(lightColor: color, darkColor: color).headScript
             case .customBody(let customBody):
                 return customBody
             default:

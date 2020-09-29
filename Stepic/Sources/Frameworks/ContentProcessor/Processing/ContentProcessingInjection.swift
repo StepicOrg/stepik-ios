@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import WebKit
 
 protocol ContentProcessingInjection: AnyObject {
@@ -147,4 +147,57 @@ final class CustomFontSizeInjection: ContentProcessingInjection {
             blockquoteFontSizeString: "\(self.blockquoteFontSize)px"
         )
     }
+}
+
+final class TextColorInjection: ContentProcessingInjection {
+    private let lightColorHexString: String
+    private let darkColorHexString: String
+
+    var bodyHeadScript: String {
+        """
+        <script type="text/javascript">
+            document.body.style.setProperty('--text-color-light', '#\(self.lightColorHexString)');
+            document.body.style.setProperty('--text-color-dark', '#\(self.darkColorHexString)');
+        </script>
+        """
+    }
+
+    init(lightColorHexString: String, darkColorHexString: String) {
+        self.lightColorHexString = lightColorHexString
+        self.darkColorHexString = darkColorHexString
+    }
+
+    convenience init(lightColor: UIColor, darkColor: UIColor) {
+        self.init(lightColorHexString: lightColor.hexString, darkColorHexString: darkColor.hexString)
+    }
+
+    convenience init(dynamicColor: UIColor) {
+        if #available(iOS 13.0, *) {
+            let lightTraitCollection = UITraitCollection(traitsFrom: [.current, .init(userInterfaceStyle: .light)])
+            let darkTraitCollection = UITraitCollection(traitsFrom: [.current, .init(userInterfaceStyle: .dark)])
+
+            let lightColor = dynamicColor.resolvedColor(with: lightTraitCollection)
+            let darkColor = dynamicColor.resolvedColor(with: darkTraitCollection)
+
+            self.init(lightColor: lightColor, darkColor: darkColor)
+        } else {
+            self.init(lightColor: dynamicColor, darkColor: dynamicColor)
+        }
+    }
+
+    static func stepikPrimaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikPrimaryText) }
+
+    static func stepikSecondaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikSecondaryText) }
+
+    static func stepikTertiaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikTertiaryText) }
+
+    static func stepikQuaternaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikQuaternaryText) }
+
+    static func systemPrimaryTextColor() -> TextColorInjection { .init(dynamicColor: .stepikSystemPrimaryText) }
+
+    static func systemSecondaryText() -> TextColorInjection { .init(dynamicColor: .stepikSystemSecondaryText) }
+
+    static func systemTertiaryText() -> TextColorInjection { .init(dynamicColor: .stepikSystemTertiaryText) }
+
+    static func systemQuaternaryText() -> TextColorInjection { .init(dynamicColor: .stepikSystemQuaternaryText) }
 }
