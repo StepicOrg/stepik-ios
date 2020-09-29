@@ -203,6 +203,31 @@ final class FontWeightInjection: ContentProcessingInjection {
     }
 }
 
+/// Injects script that assigns font size and weight.
+final class FontInjection: ContentProcessingInjection {
+    private let font: UIFont
+
+    var bodyHeadScript: String {
+        guard let size = self.font.fontDescriptor.object(forKey: .size) as? NSNumber,
+              let face = self.font.fontDescriptor.object(forKey: .face) as? String else {
+            return ""
+        }
+
+        let fontSizeScript = FontSizeInjection(baseFontSize: size.intValue).bodyHeadScript
+
+        var fontWeightScript = ""
+        if let fontWeightNameMapping = FontWeightNameMapping(fontFace: face) {
+            fontWeightScript = FontWeightInjection(fontWeightNameMapping: fontWeightNameMapping).bodyHeadScript
+        }
+
+        return "\(fontSizeScript)\(fontWeightScript)"
+    }
+
+    init(font: UIFont) {
+        self.font = font
+    }
+}
+
 /// Injects script that assigns text color for light and dark mode.
 final class TextColorInjection: ContentProcessingInjection {
     private let lightColorHexString: String
