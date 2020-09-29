@@ -9,6 +9,7 @@
     --h2-font-size: 22;
     --h3-font-size: 20;
     --blockquote-font-size: 17;
+    --font-weight: 400;
 }
 
 @media screen and (prefers-color-scheme: light) {
@@ -64,13 +65,13 @@
 
 html {
     font-family: -apple-system, Arial, Helvetica, sans-serif;
-    font-weight: 400;
     line-height: 1.3em;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
     font-size: var(--body-font-size);
+    font-weight: var(--font-weight);
 }
 
 h1 {

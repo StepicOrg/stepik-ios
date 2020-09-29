@@ -383,6 +383,7 @@
 		2C04BA502407369E00D74D4B /* SubmissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */; };
 		2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */; };
 		2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */; };
+		2C05FBDD2523B21E004FD313 /* FontWeightNameMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */; };
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
 		2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */; };
@@ -1773,6 +1774,7 @@
 		2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionStatus.swift; sourceTree = "<group>"; };
 		2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionFeedbackTests.swift; sourceTree = "<group>"; };
 		2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsPersistenceService.swift; sourceTree = "<group>"; };
+		2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeightNameMapping.swift; sourceTree = "<group>"; };
 		2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
 		2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLargeInputTableViewCell.swift; sourceTree = "<group>"; };
@@ -3486,6 +3488,7 @@
 				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
 				08A9F71D1FC38C9E00640F1F /* CourseTag.swift */,
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
+				2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */,
 				2C130E3B2512402B00389AEB /* LaunchArguments.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
 				2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */,
@@ -8443,6 +8446,7 @@
 				62E9852B2621211F8DEA7CBE /* SettingsTableViewCell.swift in Sources */,
 				62E98AF1D0D810811FAC3CCA /* SettingsInputTableViewCell.swift in Sources */,
 				2C8F3ADD23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift in Sources */,
+				2C05FBDD2523B21E004FD313 /* FontWeightNameMapping.swift in Sources */,
 				2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */,
 				2C084AD82514ED3A000561F7 /* ProcessedContentTextView.swift in Sources */,
 				2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */,

@@ -182,6 +182,27 @@ final class FontSizeInjection: ContentProcessingInjection {
     }
 }
 
+/// Injects script that assigns font weight.
+final class FontWeightInjection: ContentProcessingInjection {
+    private let fontWeight: Int
+
+    var bodyHeadScript: String {
+        """
+        <script type="text/javascript">
+            document.body.style.setProperty('--font-weight', \(self.fontWeight));
+        </script>
+        """
+    }
+
+    init(fontWeight: Int) {
+        self.fontWeight = fontWeight
+    }
+
+    convenience init(fontWeightNameMapping: FontWeightNameMapping = .regular) {
+        self.init(fontWeight: fontWeightNameMapping.rawValue)
+    }
+}
+
 /// Injects script that assigns text color for light and dark mode.
 final class TextColorInjection: ContentProcessingInjection {
     private let lightColorHexString: String
