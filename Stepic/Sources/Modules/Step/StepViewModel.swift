@@ -15,7 +15,7 @@ struct StepViewModel {
     let step: Step
 
     enum ContentType {
-        case text(htmlString: String)
+        case text(processedContent: ProcessedContent)
         case video(viewModel: StepVideoViewModel?)
     }
 }

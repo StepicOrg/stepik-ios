@@ -28,7 +28,7 @@ final class StepPresenter: StepPresenterProtocol {
         if case .success(let data) = response.result {
             self.makeViewModel(
                 step: data.step,
-                fontSize: data.fontSize,
+                stepFontSize: data.fontSize,
                 storedImages: data.storedImages
             ).done(on: .global(qos: .userInitiated)) { viewModel in
                 DispatchQueue.main.async { [weak self] in
@@ -47,13 +47,12 @@ final class StepPresenter: StepPresenterProtocol {
     }
 
     func presentStepTextUpdate(response: StepDataFlow.StepTextUpdate.Response) {
-        let htmlString = self.makeProcessedContentHTMLString(
+        let processedContent = self.makeProcessedContent(
             response.text,
-            fontSize: response.fontSize,
+            stepFontSize: response.fontSize,
             storedImages: response.storedImages
         )
-
-        self.viewController?.displayStepTextUpdate(viewModel: .init(htmlText: htmlString))
+        self.viewController?.displayStepTextUpdate(viewModel: .init(processedContent: processedContent))
     }
 
     func presentPlayStep(response: StepDataFlow.PlayStep.Response) {
@@ -66,7 +65,6 @@ final class StepPresenter: StepPresenterProtocol {
             canNavigateToNextUnit: response.canNavigateToNextUnit,
             canNavigateToNextStep: response.canNavigateToNextStep
         )
-
         self.viewController?.displayControlsUpdate(viewModel: viewModel)
     }
 
@@ -169,7 +167,7 @@ final class StepPresenter: StepPresenterProtocol {
 
     private func makeViewModel(
         step: Step,
-        fontSize: StepFontSize,
+        stepFontSize: StepFontSize,
         storedImages: [StepDataFlow.StoredImage]
     ) -> Guarantee<StepViewModel> {
         Guarantee { seal in
@@ -185,12 +183,12 @@ final class StepPresenter: StepPresenterProtocol {
                     }
                     return .video(viewModel: nil)
                 default:
-                    let htmlString = self.makeProcessedContentHTMLString(
+                    let processedContent = self.makeProcessedContent(
                         step.block.text ?? "",
-                        fontSize: fontSize,
+                        stepFontSize: stepFontSize,
                         storedImages: storedImages
                     )
-                    return .text(htmlString: htmlString)
+                    return .text(processedContent: processedContent)
                 }
             }()
 
@@ -264,11 +262,11 @@ final class StepPresenter: StepPresenterProtocol {
         return NSLocalizedString("NoSolutionsButtonTitle", comment: "")
     }
 
-    private func makeProcessedContentHTMLString(
+    private func makeProcessedContent(
         _ text: String,
-        fontSize: StepFontSize,
+        stepFontSize: StepFontSize,
         storedImages: [StepDataFlow.StoredImage]
-    ) -> String {
+    ) -> ProcessedContent {
         let base64EncodedStringByImageURL = Dictionary(
             uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
         )
@@ -289,14 +287,17 @@ final class StepPresenter: StepPresenterProtocol {
             contentProcessingRules.append(ReplaceModelViewerWithARImageRule(extractorType: HTMLExtractor.self))
         }
 
-        let contentProcessingInjections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
+        let contentProcessingInjections = ContentProcessor.defaultInjections + [
+            FontSizeInjection(stepFontSize: stepFontSize),
+            TextColorInjection(dynamicColor: .stepikPrimaryText)
+        ]
 
         let contentProcessor = ContentProcessor(
-            content: text,
             rules: contentProcessingRules,
             injections: contentProcessingInjections
         )
+        let processedContent = contentProcessor.processContent(text)
 
-        return contentProcessor.processContent()
+        return .html(processedContent.stringValue)
     }
 }

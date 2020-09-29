@@ -218,7 +218,7 @@ extension StepViewController: StepViewControllerProtocol {
     }
 
     func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) {
-        self.stepView?.updateText(viewModel.htmlText)
+        self.stepView?.updateTextContent(viewModel.processedContent)
     }
 
     func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {

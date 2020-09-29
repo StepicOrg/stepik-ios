@@ -17,6 +17,7 @@ protocol StepViewDelegate: AnyObject {
 
 extension StepView {
     struct Appearance {
+        let stepTextViewInsets = LayoutInsets(top: 16, left: 16, bottom: 4, right: 16)
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
     }
 
@@ -46,10 +47,15 @@ final class StepView: UIView {
         return view
     }()
 
-    private lazy var stepTextView: ProcessedContentWebView = {
-        let view = ProcessedContentWebView()
-        view.delegate = self
-        return view
+    private lazy var stepTextView: ProcessedContentView = {
+        var appearance = ProcessedContentView.Appearance()
+        appearance.insets = self.appearance.stepTextViewInsets
+        appearance.activityIndicatorViewColor = self.appearance.loadingIndicatorColor
+
+        let processedContentView = ProcessedContentView(appearance: appearance)
+        processedContentView.delegate = self
+
+        return processedContentView
     }()
 
     private lazy var stepVideoPreviewView: StepVideoPreviewView = {
@@ -145,9 +151,9 @@ final class StepView: UIView {
             self.scrollableStackView.insertArrangedView(self.stepVideoPreviewContainerView, at: 0)
             self.stepVideoPreviewView.thumbnailImageURL = viewModel?.videoThumbnailImageURL
             self.delegate?.stepViewDidLoadContent(self)
-        case .text(let htmlString):
+        case .text(let processedContent):
             self.scrollableStackView.insertArrangedView(self.stepTextView, at: 0)
-            self.stepTextView.loadHTMLText(htmlString)
+            self.stepTextView.processedContent = processedContent
         }
 
         self.stepControlsView.passedByCount = viewModel.passedByCount
@@ -179,10 +185,9 @@ final class StepView: UIView {
         }
     }
 
-    func updateText(_ htmlText: String) {
+    func updateTextContent(_ processedContent: ProcessedContent) {
         if self.stepTextView.superview != nil {
-            self.stepTextView.clearContent()
-            self.stepTextView.loadHTMLText(htmlText)
+            self.stepTextView.processedContent = processedContent
         }
     }
 
@@ -249,24 +254,29 @@ extension StepView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension StepView: ProcessedContentWebViewDelegate {
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
-        self.delegate?.stepView(self, didRequestOpenURL: url)
+extension StepView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
+        self.delegate?.stepViewDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenARKitLink url: URL) {
-        self.delegate?.stepView(self, didRequestOpenARQuickLook: url)
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.delegate?.stepView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {
+    func processedContentView(_ view: ProcessedContentView, didOpenNativeImage image: UIImage) {
         self.delegate?.stepView(self, didRequestFullscreenImage: image)
     }
 
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
-        self.delegate?.stepViewDidLoadContent(self)
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
+        self.delegate?.stepView(self, didRequestOpenURL: url)
+    }
+
+    func processedContentView(_ view: ProcessedContentView, didOpenARKitLink url: URL) {
+        self.delegate?.stepView(self, didRequestOpenARQuickLook: url)
     }
 }

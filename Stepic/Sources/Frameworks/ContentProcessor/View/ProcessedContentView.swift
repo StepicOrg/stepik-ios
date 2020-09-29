@@ -100,7 +100,7 @@ final class ProcessedContentView: UIView {
     private var didSetupTextView = false
     private var didSetupWebView = false
 
-    private var processedContent: ProcessedContent? = nil {
+    var processedContent: ProcessedContent? = nil {
         didSet {
             if oldValue == self.processedContent {
                 return
@@ -237,6 +237,10 @@ final class ProcessedContentView: UIView {
     }
 
     private func setWebViewText(_ text: String) {
+        if !self.activityIndicatorView.isAnimating {
+            self.activityIndicatorView.startAnimating()
+        }
+
         if !self.didSetupWebView {
             self.didSetupWebView = true
             self.setupWebView()
