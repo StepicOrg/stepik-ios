@@ -40,10 +40,18 @@ final class NewProfileDetailsView: UIView {
             backgroundColor: self.appearance.backgroundColor
         )
 
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.labelFont),
+                TextColorInjection(dynamicColor: self.appearance.labelTextColor)
+            ]
+        )
+
         let processedContentView = ProcessedContentView(
             frame: .zero,
             appearance: appearance,
-            contentProcessor: ContentProcessor(),
+            contentProcessor: contentProcessor,
             htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.labelFont)
         )
         processedContentView.delegate = self
