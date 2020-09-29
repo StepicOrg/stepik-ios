@@ -855,6 +855,8 @@ VideoQuality = "Video quality";
 Downloaded = "Downloaded";
 VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
 VideoPlayerAutoplayCancelTitle = "Stay on this step";
+VideoPlayerInvalidVideoAlertTitle = "Playback error";
+VideoPlayerInvalidVideoAlertMessage = "Video has not been uploaded or processed yet. Please, try again later.";
 
 StepikSocialNetworksTitle = "Our social networks";
 

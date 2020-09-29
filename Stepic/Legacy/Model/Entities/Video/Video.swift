@@ -66,7 +66,11 @@ final class Video: NSManagedObject, JSONSerializable {
         return res
     }
 
-    func getUrlForQuality(_ quality: String) -> URL {
+    func getUrlForQuality(_ quality: String) -> URL? {
+        if self.urls.isEmpty {
+            return nil
+        }
+
         var urlToReturn: VideoURL?
         var minDifference = 10000
         for url in urls {
@@ -77,9 +81,9 @@ final class Video: NSManagedObject, JSONSerializable {
         }
 
         if let url = urlToReturn {
-            return URL(string: url.url)!
+            return URL(string: url.url)
         } else {
-            return URL(string: urls[0].url)!
+            return URL(string: self.urls[0].url)
         }
     }
 
