@@ -262,22 +262,29 @@ public class Player: UIViewController {
             self.avplayer.removeTimeObserver(obs)
         }
 
-        self.avplayer.removeTimeObserver(timeObserver!)
+        if self.timeObserver != nil {
+            self.avplayer.removeTimeObserver(timeObserver!)
+        }
         self.delegate = nil
 
         NotificationCenter.default.removeObserver(self)
 
-        self.playerView.layer.removeObserver(
-            self,
-            forKeyPath: PlayerReadyForDisplayKey,
-            context: &PlayerLayerObserverContext
-        )
-        self.playerView.player = nil
+        if self.playerView != nil {
+            self.playerView.layer.removeObserver(
+                self,
+                forKeyPath: PlayerReadyForDisplayKey,
+                context: &PlayerLayerObserverContext
+            )
+            self.playerView.player = nil
+        }
 
-        self.avplayer.removeObserver(self, forKeyPath: PlayerRateKey, context: &PlayerObserverContext)
+        if self.avplayer.observationInfo != nil {
+            self.avplayer.removeObserver(self, forKeyPath: PlayerRateKey, context: &PlayerObserverContext)
+        }
 
         self.avplayer.pause()
         self.setupPlayerItem(nil)
+
         print("player is deinitialized")
     }
 

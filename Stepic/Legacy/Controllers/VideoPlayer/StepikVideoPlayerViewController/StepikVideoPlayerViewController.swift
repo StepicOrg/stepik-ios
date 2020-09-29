@@ -227,11 +227,9 @@ final class StepikVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setupPlayer()
-        self.setupAppearance()
-        self.setupObservers()
-        self.setupGestureRecognizers()
-        self.addAccessibilitySupport()
+        if self.isVideoValid() {
+            self.setup()
+        }
 
         self.analytics.send(.videoPlayerOpened)
     }
@@ -239,19 +237,25 @@ final class StepikVideoPlayerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.scheduleHidePlayerControlsTimer()
+        if self.isVideoValid() {
+            self.scheduleHidePlayerControlsTimer()
 
-        if !TooltipDefaultsManager.shared.didShowInVideoPlayer {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.videoInBackgroundTooltip = TooltipFactory.videoInBackground
-                self.videoInBackgroundTooltip?.show(
-                    direction: .down,
-                    in: self.view,
-                    from: self.fullscreenPlayButton,
-                    isArrowVisible: false
-                )
-                TooltipDefaultsManager.shared.didShowInVideoPlayer = true
+            if !TooltipDefaultsManager.shared.didShowInVideoPlayer {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.videoInBackgroundTooltip = TooltipFactory.videoInBackground
+                    self.videoInBackgroundTooltip?.show(
+                        direction: .down,
+                        in: self.view,
+                        from: self.fullscreenPlayButton,
+                        isArrowVisible: false
+                    )
+                    TooltipDefaultsManager.shared.didShowInVideoPlayer = true
+                }
             }
+        } else {
+            self.activityIndicator.isHidden = true
+            self.setPlayerBarControlsVisibleAnimated(visible: false)
+            self.displayInvalidVideoAlert()
         }
     }
 
@@ -283,7 +287,38 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.hidePlayerControlsTimer?.invalidate()
     }
 
-    // MARK: Setup player
+    // MARK: Player Setup
+
+    private func isVideoValid() -> Bool {
+        self.video != nil && !self.video.urls.isEmpty && self.getInitialVideoQualityURL() != nil
+    }
+
+    private func displayInvalidVideoAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("VideoPlayerInvalidVideoAlertTitle", comment: ""),
+            message: NSLocalizedString("VideoPlayerInvalidVideoAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.dismissPlayer()
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+
+    private func setup() {
+        self.setupPlayer()
+        self.setupAppearance()
+        self.setupObservers()
+        self.setupGestureRecognizers()
+        self.addAccessibilitySupport()
+    }
 
     private func setupAppearance() {
         // Always adopt a light interface style.
@@ -622,11 +657,11 @@ final class StepikVideoPlayerViewController: UIViewController {
         }
     }
 
-    private func getInitialVideoQualityURL() -> URL {
+    private func getInitialVideoQualityURL() -> URL? {
         if self.video.state == .cached {
             return VideoStoredFileManager(
                 fileManager: FileManager.default
-            ).getVideoStoredFile(videoID: video.id).require().localURL
+            ).getVideoStoredFile(videoID: self.video.id)?.localURL
         } else {
             return self.video.getUrlForQuality(
                 self.streamVideoQualityStorageManager.globalStreamVideoQuality.uniqueIdentifier

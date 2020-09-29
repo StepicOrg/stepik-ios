@@ -856,6 +856,8 @@ VideoRate = "Скорость воспроизведения";
 VideoQuality = "Качество видео";
 VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
 VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
+VideoPlayerInvalidVideoAlertTitle = "Ошибка воспроизведения";
+VideoPlayerInvalidVideoAlertMessage = "Видео ещё не было загружено преподавателем или обработано. Пожалуйста, попробуйте воспроизвести видео позже.";
 
 StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
