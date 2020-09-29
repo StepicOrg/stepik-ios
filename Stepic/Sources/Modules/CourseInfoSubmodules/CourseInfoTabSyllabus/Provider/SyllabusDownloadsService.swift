@@ -150,7 +150,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private func startDownloading(section: Section? = nil, unit: Unit, steps: [Step]) throws {
         let uncachedVideos = steps.compactMap { step -> Video? in
             guard step.block.type == .video,
-                  let video = step.block.video else {
+                  let video = step.block.video,
+                  !video.urls.isEmpty else {
                 return nil
             }
             return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
@@ -471,7 +472,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Iterate through steps and determine final state
         let stepsWithVideoCount = steps
-            .filter { $0.block.type == .video }
+            .filter { $0.block.type == .video && !($0.block.video?.urls.isEmpty ?? true) }
             .count
         let stepsWithImagesCount = steps
             .filter { !$0.block.imageSourceURLs.isEmpty }
