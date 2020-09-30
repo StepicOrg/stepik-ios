@@ -27,6 +27,9 @@ extension NewSortingQuizElementView {
         let navigationButtonTintColorInactive = UIColor.stepikSeparator
         let navigationButtonVerticalSpacing: CGFloat = 16
         let navigationButtonHorizontalSpacing: CGFloat = 8
+
+        let contentTextViewFont = UIFont.systemFont(ofSize: 17, weight: .regular)
+        let contentTextViewTextColor = UIColor.stepikPrimaryText
     }
 
     enum Animation {
@@ -39,15 +42,34 @@ final class NewSortingQuizElementView: UIView {
     weak var delegate: NewSortingQuizElementViewDelegate?
 
     private lazy var quizElementView = QuizElementView()
-    private lazy var contentTextView: ProcessedContentWebView = {
-        var appearance = ProcessedContentWebView.Appearance(
+
+    private lazy var contentTextView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.contentTextViewFont,
+            labelTextColor: self.appearance.contentTextViewTextColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
             insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
-        let view = ProcessedContentWebView(appearance: appearance)
-        view.isScrollEnabled = false
-        view.delegate = self
-        return view
+
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.contentTextViewFont),
+                TextColorInjection(dynamicColor: self.appearance.contentTextViewTextColor)
+            ]
+        )
+
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.contentTextViewFont)
+        )
+        processedContentView.delegate = self
+
+        return processedContentView
     }()
 
     private lazy var shadowView: UIView = {
@@ -166,7 +188,7 @@ final class NewSortingQuizElementView: UIView {
     // MARK: - Public API
 
     func configure(viewModel: ViewModel) {
-        self.contentTextView.loadHTMLText(viewModel.option)
+        self.contentTextView.setText(viewModel.option)
         self.updateNavigation(viewModel.direction)
         self.invalidateIntrinsicContentSize()
     }
@@ -244,6 +266,7 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
             make.bottom.equalToSuperview().offset(-self.appearance.containerInsets.bottom)
             make.leading.equalToSuperview().offset(self.appearance.containerInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.containerInsets.right)
+            make.height.greaterThanOrEqualTo(self.navigationControlsContainerViewHeight).priority(.high)
         }
 
         self.shadowView.translatesAutoresizingMaskIntoConstraints = false
@@ -254,12 +277,13 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
 
         self.contentTextView.translatesAutoresizingMaskIntoConstraints = false
         self.contentTextView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.contentInsets.top)
-            make.bottom.equalToSuperview().offset(-self.appearance.contentInsets.bottom)
+            make.top.greaterThanOrEqualToSuperview().offset(self.appearance.contentInsets.top)
+            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.contentInsets.bottom)
             make.leading.equalToSuperview().offset(self.appearance.contentInsets.left)
             make.trailing
                 .equalTo(self.navigationControlsContainerView.snp.leading)
                 .offset(-self.appearance.navigationButtonHorizontalSpacing)
+            make.centerY.equalToSuperview()
         }
 
         self.navigationControlsContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -287,31 +311,24 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension NewSortingQuizElementView: ProcessedContentWebViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
+extension NewSortingQuizElementView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
         self.invalidateIntrinsicContentSize()
         self.layoutIfNeeded()
+
         self.delegate?.newSortingQuizElementViewDidLoadContent(self)
     }
 
-    // TODO: Fix problem with contentTextView height contraint (should not be less that navigation buttons height)
-    // and remove manual insets adjustment.
-    func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int) {
-        if height < Int(self.navigationControlsContainerViewHeight) {
-            let verticalInset = (self.navigationControlsContainerViewHeight - CGFloat(height)) / 2.0
-            self.contentTextView.insets = LayoutInsets(top: verticalInset, left: 0, bottom: verticalInset, right: 0)
-            self.invalidateIntrinsicContentSize()
-            self.layoutIfNeeded()
-        }
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.invalidateIntrinsicContentSize()
+        self.layoutIfNeeded()
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
-        self.delegate?.newSortingQuizElementView(self, didRequestOpenURL: url)
-    }
-
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.delegate?.newSortingQuizElementView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
+        self.delegate?.newSortingQuizElementView(self, didRequestOpenURL: url)
+    }
 }
