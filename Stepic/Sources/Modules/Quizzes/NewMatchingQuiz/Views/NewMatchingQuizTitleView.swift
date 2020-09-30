@@ -15,6 +15,9 @@ extension NewMatchingQuizTitleView {
         let shadowColor = UIColor.stepikShadowFixed
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
+
+        let contentTextViewFont = UIFont.systemFont(ofSize: 17, weight: .regular)
+        let contentTextViewTextColor = UIColor.stepikPrimaryText
     }
 }
 
@@ -23,15 +26,34 @@ final class NewMatchingQuizTitleView: UIView {
     weak var delegate: NewMatchingQuizTitleViewDelegate?
 
     private lazy var quizElementView = QuizElementView()
-    private lazy var contentTextView: ProcessedContentWebView = {
-        var appearance = ProcessedContentWebView.Appearance(
+
+    private lazy var contentTextView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.contentTextViewFont,
+            labelTextColor: self.appearance.contentTextViewTextColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
             insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
-        let view = ProcessedContentWebView(appearance: appearance)
-        view.isScrollEnabled = false
-        view.delegate = self
-        return view
+
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.contentTextViewFont),
+                TextColorInjection(dynamicColor: self.appearance.contentTextViewTextColor)
+            ]
+        )
+
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.contentTextViewFont)
+        )
+        processedContentView.delegate = self
+
+        return processedContentView
     }()
 
     private lazy var shadowView: UIView = {
@@ -61,7 +83,7 @@ final class NewMatchingQuizTitleView: UIView {
 
     var title: String? {
         didSet {
-            self.contentTextView.loadHTMLText(self.title ?? "")
+            self.contentTextView.setText(self.title)
             self.invalidateIntrinsicContentSize()
         }
     }
@@ -150,20 +172,24 @@ extension NewMatchingQuizTitleView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension NewMatchingQuizTitleView: ProcessedContentWebViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
+extension NewMatchingQuizTitleView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
         self.invalidateIntrinsicContentSize()
         self.layoutIfNeeded()
+
         self.delegate?.newMatchingQuizTitleViewDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
-        self.delegate?.newMatchingQuizTitleView(self, didRequestOpenURL: url)
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.invalidateIntrinsicContentSize()
+        self.layoutIfNeeded()
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.delegate?.newMatchingQuizTitleView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
+        self.delegate?.newMatchingQuizTitleView(self, didRequestOpenURL: url)
+    }
 }
