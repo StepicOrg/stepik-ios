@@ -31,14 +31,14 @@ final class HTMLProcessor {
         case highlightJS
         case customHead(head: String)
         case customBody(body: String)
-        case fontSize(fontSize: StepFontSize)
+        case fontSize(stepFontSize: StepFontSize)
 
         var headInjectionString: String {
             switch self {
             case .metaViewport:
                 return Scripts.metaViewport
             case .localTex:
-                return Scripts.localTex
+                return Scripts.localMathJax
             case .clickableImages:
                 return Scripts.clickableImages
             case .styles:
@@ -53,8 +53,6 @@ final class HTMLProcessor {
                 return Scripts.highlightJS
             case .customHead(let customHead):
                 return customHead
-            case .fontSize(fontSize: let fontSize):
-                return Scripts.fontSize(fontSize)
             default:
                 return ""
             }
@@ -65,7 +63,9 @@ final class HTMLProcessor {
             case .audio:
                 return Scripts.audioTagWrapperInit
             case .textColor(let color):
-                return Scripts.textColor(color: color)
+                return TextColorInjection(lightColor: color, darkColor: color).bodyHeadScript
+            case .fontSize(let stepFontSize):
+                return FontSizeInjection(stepFontSize: stepFontSize).bodyHeadScript
             case .customBody(let customBody):
                 return customBody
             default:

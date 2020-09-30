@@ -20,8 +20,7 @@ struct DiscussionsCommentViewModel {
     let isSelected: Bool
     let username: String
     let strippedText: String
-    let processedText: String
-    let isWebViewSupportNeeded: Bool
+    let processedContent: ProcessedContent
     let formattedDate: String
     let likesCount: Int
     let dislikesCount: Int
@@ -31,6 +30,13 @@ struct DiscussionsCommentViewModel {
     let canVote: Bool
     let hasReplies: Bool
     let solution: Solution?
+
+    var isWebViewSupportNeeded: Bool {
+        if case .html = self.processedContent {
+            return true
+        }
+        return false
+    }
 
     struct Solution {
         let id: Submission.IdType

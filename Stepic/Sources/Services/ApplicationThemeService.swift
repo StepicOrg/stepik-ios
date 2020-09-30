@@ -55,8 +55,21 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
     @available(iOS 13.0, *)
     private func applyTheme(_ theme: ApplicationTheme) {
         DispatchQueue.main.async {
-            if let keyWindow = UIApplication.shared.keyWindow {
-                keyWindow.overrideUserInterfaceStyle = theme.userInterfaceStyle
+            let application = UIApplication.shared
+            let userInterfaceStyle = theme.userInterfaceStyle
+
+            if application.supportsMultipleScenes {
+                for connectedScene in application.connectedScenes {
+                    if let windowScene = connectedScene as? UIWindowScene {
+                        for window in windowScene.windows {
+                            window.overrideUserInterfaceStyle = userInterfaceStyle
+                        }
+                    }
+                }
+            } else {
+                for window in application.windows {
+                    window.overrideUserInterfaceStyle = userInterfaceStyle
+                }
             }
         }
     }

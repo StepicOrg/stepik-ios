@@ -30,32 +30,33 @@ final class NewProfileDetailsView: UIView {
 
     weak var delegate: NewProfileDetailsViewDelegate?
 
-    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
+    private lazy var processedContentView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.labelFont,
+            labelTextColor: self.appearance.labelTextColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
+            insets: LayoutInsets(insets: .zero),
+            backgroundColor: self.appearance.backgroundColor
+        )
 
-    private lazy var attributedLabel: AttributedLabel = {
-        let label = AttributedLabel()
-        label.numberOfLines = 0
-        label.font = self.appearance.labelFont
-        label.textColor = self.appearance.labelTextColor
-        label.onClick = { [weak self] label, detection in
-            guard let strongSelf = self else {
-                return
-            }
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.labelFont),
+                TextColorInjection(dynamicColor: self.appearance.labelTextColor)
+            ]
+        )
 
-            switch detection.type {
-            case .link(let url):
-                strongSelf.delegate?.newProfileDetailsView(strongSelf, didOpenURL: url)
-            case .tag(let tag):
-                if tag.name == "a",
-                   let href = tag.attributes["href"],
-                   let url = URL(string: href) {
-                    strongSelf.delegate?.newProfileDetailsView(strongSelf, didOpenURL: url)
-                }
-            default:
-                break
-            }
-        }
-        return label
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.labelFont)
+        )
+        processedContentView.delegate = self
+
+        return processedContentView
     }()
 
     private lazy var separatorView: UIView = {
@@ -78,14 +79,14 @@ final class NewProfileDetailsView: UIView {
     private var currentViewModel: NewProfileDetailsViewModel?
 
     override var intrinsicContentSize: CGSize {
-        let attributedLabelHeight = self.attributedLabel.intrinsicContentSize.height
+        let textContentHeight = self.processedContentView.intrinsicContentSize.height
         let separatorHeightWithInsets = self.appearance.separatorInsets.top + self.appearance.separatorHeight
         let userIDButtonHeightWithInsets = self.appearance.userIDButtonInsets.top
             + self.appearance.userIDButtonHeight + self.appearance.userIDButtonInsets.bottom
 
         return CGSize(
             width: UIView.noIntrinsicMetric,
-            height: attributedLabelHeight + separatorHeightWithInsets + userIDButtonHeightWithInsets
+            height: textContentHeight + separatorHeightWithInsets + userIDButtonHeightWithInsets
         )
     }
 
@@ -94,10 +95,7 @@ final class NewProfileDetailsView: UIView {
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
-        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(
-            font: appearance.labelFont,
-            tagTransformers: []
-        )
+
         super.init(frame: frame)
 
         self.setupView()
@@ -111,20 +109,14 @@ final class NewProfileDetailsView: UIView {
     }
 
     func configure(viewModel: NewProfileDetailsViewModel) {
-        if let text = viewModel.profileDetailsText {
-            self.attributedLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
-                htmlString: text.trimmed()
-            ) as? AttributedText
-        } else {
-            self.attributedLabel.attributedText = nil
-        }
+        self.processedContentView.setText(viewModel.profileDetailsText)
 
         let formattedUserID = viewModel.isOrganization
             ? "Organization ID: \(viewModel.userID)"
             : "User ID: \(viewModel.userID)"
         self.userIDButton.setTitle(formattedUserID, for: .normal)
 
-        if self.attributedLabel.attributedText?.string.isEmpty ?? true {
+        if viewModel.profileDetailsText?.isEmpty ?? true {
             self.userIDTopToBottomOfSeparatorConstraint?.deactivate()
             self.userIDTopToSuperviewConstraint?.activate()
             self.separatorView.isHidden = true
@@ -135,7 +127,6 @@ final class NewProfileDetailsView: UIView {
         }
 
         self.currentViewModel = viewModel
-        self.invalidateIntrinsicContentSize()
     }
 
     @objc
@@ -152,21 +143,21 @@ extension NewProfileDetailsView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
-        self.addSubview(self.attributedLabel)
+        self.addSubview(self.processedContentView)
         self.addSubview(self.separatorView)
         self.addSubview(self.userIDButton)
     }
 
     func makeConstraints() {
-        self.attributedLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.attributedLabel.snp.makeConstraints { make in
+        self.processedContentView.translatesAutoresizingMaskIntoConstraints = false
+        self.processedContentView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
             make.top
-                .equalTo(self.attributedLabel.snp.bottom)
+                .equalTo(self.processedContentView.snp.bottom)
                 .offset(self.appearance.separatorInsets.top)
             make.leading.equalToSuperview()
             make.trailing
@@ -190,6 +181,29 @@ extension NewProfileDetailsView: ProgrammaticallyInitializableViewProtocol {
                 .offset(-self.appearance.userIDButtonInsets.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.userIDButtonHeight)
+        }
+    }
+}
+
+// MARK: - NewProfileDetailsView: ProcessedContentViewDelegate -
+
+extension NewProfileDetailsView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
+        self.invalidateLayout()
+    }
+
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.invalidateLayout()
+    }
+
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
+        self.delegate?.newProfileDetailsView(self, didOpenURL: url)
+    }
+
+    private func invalidateLayout() {
+        DispatchQueue.main.async {
+            self.layoutIfNeeded()
+            self.invalidateIntrinsicContentSize()
         }
     }
 }

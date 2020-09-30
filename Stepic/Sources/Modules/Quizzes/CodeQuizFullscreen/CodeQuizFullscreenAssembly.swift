@@ -29,6 +29,7 @@ final class CodeQuizFullscreenAssembly: Assembly {
             provider: provider,
             analytics: StepikAnalytics.shared,
             tooltipStorageManager: TooltipStorageManager(),
+            stepFontSizeStorageManager: StepFontSizeStorageManager(),
             codeDetails: self.codeDetails,
             language: self.language
         )

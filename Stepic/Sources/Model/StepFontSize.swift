@@ -21,55 +21,55 @@ enum StepFontSize: Int, CaseIterable, UniqueIdentifiable {
     var h1: String {
         switch self {
         case .small:
-            return "20pt"
+            return "28"
         case .medium:
-            return "22pt"
+            return "33"
         case .large:
-            return "24pt"
+            return "36"
         }
     }
 
     var h2: String {
         switch self {
         case .small:
-            return "17pt"
+            return "22"
         case .medium:
-            return "19pt"
+            return "26"
         case .large:
-            return "21pt"
+            return "29"
         }
     }
 
     var h3: String {
         switch self {
         case .small:
-            return "14pt"
+            return "20"
         case .medium:
-            return "16pt"
+            return "24"
         case .large:
-            return "18pt"
+            return "26"
         }
     }
 
     var body: String {
         switch self {
         case .small:
-            return "12pt"
+            return "17"
         case .medium:
-            return "14pt"
+            return "20"
         case .large:
-            return "16pt"
+            return "22"
         }
     }
 
     var blockquote: String {
         switch self {
         case .small:
-            return "16px"
+            return "17"
         case .medium:
-            return "18px"
+            return "20"
         case .large:
-            return "20px"
+            return "22"
         }
     }
 

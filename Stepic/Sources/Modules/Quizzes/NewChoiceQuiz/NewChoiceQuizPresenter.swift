@@ -34,36 +34,17 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
 
         let viewModel = NewChoiceQuizViewModel(
             title: title,
-            choices: response.choices.map { self.processChoice($0) },
+            choices: response.choices.map {
+                NewChoiceQuiz.Choice(
+                    text: $0.text,
+                    isSelected: $0.isSelected,
+                    hint: $0.hint
+                )
+            },
             finalState: state,
             isMultipleChoice: response.isMultipleChoice
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
-    }
-
-    private func processChoice(_ choice: NewChoiceQuiz.Choice) -> NewChoiceQuiz.Choice {
-        func processText(_ text: String) -> String {
-            let processor = ContentProcessor(
-                content: text,
-                rules: [
-                    FixRelativeProtocolURLsRule(),
-                    AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)
-                ],
-                injections: [
-                    MathJaxInjection(),
-                    CommonStylesInjection(),
-                    MetaViewportInjection(),
-                    WebkitImagesCalloutDisableInjection()
-                ]
-            )
-            return processor.processContent()
-        }
-
-        return NewChoiceQuiz.Choice(
-            text: processText(choice.text),
-            isSelected: choice.isSelected,
-            hint: (choice.hint?.isEmpty ?? true) ? nil : processText(choice.hint ?? "")
-        )
     }
 }
