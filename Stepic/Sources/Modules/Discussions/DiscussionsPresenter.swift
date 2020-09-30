@@ -226,31 +226,19 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             return userIDString
         }()
 
-        let isWebViewSupportNeeded = TagDetectionUtil.isWebViewSupportNeeded(comment.text)
+        let processedContent: ProcessedContent = {
+            let contentProcessingInjections = ContentProcessor.defaultInjections + [
+                FontSizeInjection(baseFontSize: 14),
+                TextColorInjection(dynamicColor: .stepikPrimaryText)
+            ]
 
-        let text: String = {
-            let trimmedText = comment.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            if isWebViewSupportNeeded {
-                var injections = ContentProcessor.defaultInjections
-                injections.append(
-                    CustomFontSizeInjection(
-                        bodyFontSize: 11,
-                        h1FontSize: 19,
-                        h2FontSize: 16,
-                        h3FontSize: 13,
-                        blockquoteFontSize: 15
-                    )
-                )
+            let contentProcessor = ContentProcessor(
+                rules: ContentProcessor.defaultRules,
+                injections: contentProcessingInjections
+            )
+            let processedContent = contentProcessor.processContent(comment.text)
 
-                let contentProcessor = ContentProcessor(
-                    content: trimmedText,
-                    rules: ContentProcessor.defaultRules,
-                    injections: injections
-                )
-
-                return contentProcessor.processContent()
-            }
-            return trimmedText
+            return processedContent
         }()
 
         let formattedDate = FormatterHelper.dateToRelativeString(comment.time)
@@ -296,8 +284,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             isSelected: isSelected,
             username: username,
             strippedText: strippedAndTrimmedText,
-            processedText: text,
-            isWebViewSupportNeeded: isWebViewSupportNeeded,
+            processedContent: processedContent,
             formattedDate: formattedDate,
             likesCount: comment.epicCount,
             dislikesCount: comment.abuseCount,

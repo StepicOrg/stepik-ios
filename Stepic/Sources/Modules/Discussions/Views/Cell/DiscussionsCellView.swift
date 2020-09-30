@@ -36,7 +36,6 @@ extension DiscussionsCellView {
         let nameLabelHeight: CGFloat = 18
 
         let textContentContainerViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
-        let textContentWebBasedTextViewDefaultHeight: CGFloat = 5
         let textContentTextLabelFontSize: CGFloat = 14
         let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
         let textContentTextLabelTextColor = UIColor.stepikPrimaryText
@@ -135,34 +134,41 @@ final class DiscussionsCellView: UIView {
         return label
     }()
 
-    private lazy var textContentWebBasedTextView: ProcessedContentWebView = {
-        var appearance = ProcessedContentWebView.Appearance()
-        appearance.insets = LayoutInsets(insets: .zero)
-        appearance.backgroundColor = .clear
-        let view = ProcessedContentWebView(appearance: appearance)
-        view.delegate = self
-        view.isHidden = true
-        return view
-    }()
+    private lazy var textContentView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.textContentTextLabelFont,
+            labelTextColor: self.appearance.textContentTextLabelTextColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
+            insets: LayoutInsets(insets: .zero),
+            backgroundColor: .clear
+        )
 
-    private lazy var textContentTextLabel: AttributedLabel = {
-        let label = AttributedLabel()
-        label.numberOfLines = 0
-        label.font = self.appearance.textContentTextLabelFont
-        label.textColor = self.appearance.textContentTextLabelTextColor
-        label.onClick = { [weak self] _, detection in
-            if case .link(let url) = detection.type {
-                self?.onLinkClick?(url)
-            }
-        }
-        return label
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.textContentTextLabelFont),
+                TextColorInjection(dynamicColor: self.appearance.textContentTextLabelTextColor)
+            ]
+        )
+
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(
+                font: self.appearance.textContentTextLabelFont
+            )
+        )
+        processedContentView.delegate = self
+
+        return processedContentView
     }()
 
     private lazy var textContentStackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
-                self.textContentWebBasedTextView,
-                self.textContentTextLabel,
+                self.textContentView,
                 self.solutionContainerView
             ]
         )
@@ -248,12 +254,6 @@ final class DiscussionsCellView: UIView {
     private var nameLabelTopToBottomOfBadgesConstraint: Constraint?
     private var nameLabelTopToTopOfAvatarConstraint: Constraint?
 
-    // Keeps track of web content text view height
-    private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
-    private var currentText: String?
-
-    private let htmlToAttributedStringConverter: HTMLToAttributedStringConverterProtocol
-
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
@@ -267,11 +267,6 @@ final class DiscussionsCellView: UIView {
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.htmlToAttributedStringConverter = HTMLToAttributedStringConverter(
-            font: appearance.textContentTextLabelFont,
-            tagTransformers: []
-        )
-
         super.init(frame: frame)
 
         self.setupView()
@@ -309,7 +304,7 @@ final class DiscussionsCellView: UIView {
             canVote: viewModel.canVote,
             voteValue: viewModel.voteValue
         )
-        self.updateTextContent(text: viewModel.processedText, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
+        self.textContentView.processedContent = viewModel.processedContent
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
@@ -335,7 +330,7 @@ final class DiscussionsCellView: UIView {
         return self.appearance.avatarImageViewInsets.top
             + userInfoHeight
             + self.appearance.textContentContainerViewInsets.top
-            + self.getTextContentHeight(maxPreferredWidth: maxPreferredWidth)
+            + self.textContentView.intrinsicContentSize.height
             + solutionHeight
             + self.appearance.bottomControlsInsets.top
             + self.appearance.bottomControlsHeight
@@ -360,7 +355,7 @@ final class DiscussionsCellView: UIView {
         self.avatarImageView.reset()
         self.updateBadges(userRoleBadgeText: nil, isPinned: false)
         self.updateVotes(likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
-        self.updateTextContent(text: "", isWebViewSupportNeeded: false)
+        self.textContentView.setText(nil)
     }
 
     private func updateBadges(userRoleBadgeText: String?, isPinned: Bool) {
@@ -402,50 +397,6 @@ final class DiscussionsCellView: UIView {
 
         self.likeImageButton.isEnabled = canVote
         self.dislikeImageButton.isEnabled = canVote
-    }
-
-    private func updateTextContent(text: String, isWebViewSupportNeeded: Bool) {
-        self.currentText = text
-
-        if isWebViewSupportNeeded {
-            self.textContentTextLabel.attributedText = nil
-            self.textContentTextLabel.isHidden = true
-
-            self.textContentWebBasedTextView.alpha = 0
-            self.textContentWebBasedTextView.isHidden = false
-            self.currentWebBasedTextViewHeight = self.appearance.textContentWebBasedTextViewDefaultHeight
-            self.textContentWebBasedTextView.loadHTMLText(text)
-        } else {
-            self.textContentWebBasedTextView.isHidden = true
-            self.currentWebBasedTextViewHeight = self.appearance.textContentWebBasedTextViewDefaultHeight
-            self.textContentWebBasedTextView.clearContent()
-
-            self.textContentTextLabel.isHidden = false
-            self.textContentTextLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
-                htmlString: text.trimmed()
-            )
-        }
-    }
-
-    private func getTextContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        if self.textContentWebBasedTextView.isHidden {
-            let remainingTextContentWidth = maxPreferredWidth
-                - self.appearance.avatarImageViewInsets.left
-                - self.appearance.avatarImageViewSize.width
-                - self.appearance.nameLabelInsets.left
-                - self.appearance.textContentContainerViewInsets.right
-
-            return UILabel.heightForLabelWithText(
-                self.currentText ?? "",
-                lines: self.textContentTextLabel.numberOfLines,
-                standardFontOfSize: self.appearance.textContentTextLabelFontSize,
-                width: remainingTextContentWidth,
-                html: true,
-                alignment: self.textContentTextLabel.textAlignment
-            )
-        }
-
-        return self.currentWebBasedTextViewHeight
     }
 
     // MARK: Actions
@@ -542,7 +493,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
             make.bottom
-                .equalTo(self.bottomControlsStackView.snp.top)
+                .lessThanOrEqualTo(self.bottomControlsStackView.snp.top)
                 .offset(-self.appearance.textContentContainerViewInsets.bottom)
         }
 
@@ -565,36 +516,20 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 
 // MARK: - DiscussionsCellView: ProcessedContentWebViewDelegate -
 
-extension DiscussionsCellView: ProcessedContentWebViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
-        if self.textContentWebBasedTextView.isHidden {
-            return
-        }
-
-        self.currentWebBasedTextViewHeight = CGFloat(self.textContentWebBasedTextView.height)
-        self.textContentWebBasedTextView.alpha = 1
+extension DiscussionsCellView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
         self.onContentLoaded?()
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int) {
-        if self.textContentWebBasedTextView.isHidden {
-            return
-        }
-
-        let newHeight = CGFloat(height)
-        if newHeight != self.currentWebBasedTextViewHeight {
-            self.currentWebBasedTextViewHeight = newHeight
-            self.onNewHeightUpdate?()
-        }
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.onNewHeightUpdate?()
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.onImageClick?(url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
-
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
         self.onLinkClick?(url)
     }
 }
