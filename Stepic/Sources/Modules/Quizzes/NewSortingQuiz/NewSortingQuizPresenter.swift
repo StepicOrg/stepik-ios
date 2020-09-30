@@ -25,28 +25,10 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
 
         let viewModel = NewSortingQuizViewModel(
             title: response.isQuizTitleVisible ? NSLocalizedString("SortingQuizTitle", comment: "") : nil,
-            options: response.options.map { .init(id: $0.id, text: self.processText($0.text)) },
+            options: response.options.map { .init(id: $0.id, text: $0.text) },
             finalState: state
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
-    }
-
-    private func processText(_ text: String) -> String {
-        let processor = ContentProcessor(
-            content: text,
-            rules: [
-                FixRelativeProtocolURLsRule(),
-                AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)
-            ],
-            injections: [
-                MathJaxInjection(),
-                CommonStylesInjection(),
-                MetaViewportInjection(),
-                WebkitImagesCalloutDisableInjection()
-            ]
-        )
-
-        return processor.processContent()
     }
 }

@@ -14,7 +14,9 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
     private let presenter: CodeQuizFullscreenPresenterProtocol
     private let provider: CodeQuizFullscreenProviderProtocol
     private let analytics: Analytics
+
     private let tooltipStorageManager: TooltipStorageManagerProtocol
+    private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
 
     private let codeDetails: CodeDetails
     private let language: CodeLanguage
@@ -26,6 +28,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
         provider: CodeQuizFullscreenProviderProtocol,
         analytics: Analytics,
         tooltipStorageManager: TooltipStorageManagerProtocol,
+        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         codeDetails: CodeDetails,
         language: CodeLanguage
     ) {
@@ -33,6 +36,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
         self.provider = provider
         self.analytics = analytics
         self.tooltipStorageManager = tooltipStorageManager
+        self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.codeDetails = codeDetails
         self.language = language
 
@@ -96,7 +100,8 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
                 response: .init(
                     code: self.currentCode,
                     language: self.language,
-                    codeDetails: self.codeDetails
+                    codeDetails: self.codeDetails,
+                    stepFontSize: self.stepFontSizeStorageManager.globalStepFontSize
                 )
             )
         }.catch { error in

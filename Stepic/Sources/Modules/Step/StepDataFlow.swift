@@ -29,7 +29,7 @@ enum StepDataFlow {
         }
 
         struct ViewModel {
-            let htmlText: String
+            let processedContent: ProcessedContent
         }
     }
 

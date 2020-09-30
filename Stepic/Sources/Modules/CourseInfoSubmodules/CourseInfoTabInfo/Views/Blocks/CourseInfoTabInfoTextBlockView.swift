@@ -9,8 +9,6 @@ extension CourseInfoTabInfoTextBlockView {
         let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
         let messageLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let messageLabelTextColor = UIColor.stepikSystemSecondaryText
-
-        let messageLabelLineSpacing: CGFloat = 2.6
     }
 }
 
@@ -41,10 +39,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     var message: String? {
         didSet {
-            self.messageLabel.setTextWithHTMLString(
-                self.message ?? "",
-                lineSpacing: self.appearance.messageLabelLineSpacing
-            )
+            self.messageLabel.setTextWithHTMLString(self.message ?? "")
         }
     }
 

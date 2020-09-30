@@ -78,8 +78,8 @@ class NewStepViewControllerSpec: QuickSpec {
                     expect(viewModel.quizType).to(beNil())
 
                     switch viewModel.content {
-                    case .text(let htmlString):
-                        expect(htmlString.contains("---some very important text ---")).to(beTrue())
+                    case .text(let processedContent):
+                        expect(processedContent.stringValue.contains("---some very important text ---")).to(beTrue())
                     case .video:
                         XCTFail()
                     }
@@ -217,8 +217,10 @@ class NewStepViewControllerSpec: QuickSpec {
                         expect(viewModel.quizType) == blockNameWithQuizTypePairs[index].1
 
                         switch viewModel.content {
-                        case .text(let htmlString):
-                            expect(htmlString.contains("---some very important text ---")).to(beTrue())
+                        case .text(let processedContent):
+                            expect(
+                                processedContent.stringValue.contains("---some very important text ---")
+                            ).to(beTrue())
                         case .video:
                             XCTFail()
                         }

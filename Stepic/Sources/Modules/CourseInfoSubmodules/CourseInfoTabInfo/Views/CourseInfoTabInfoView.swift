@@ -85,10 +85,7 @@ final class CourseInfoTabInfoView: UIView {
             introVideoThumbnailURL: viewModel.introVideoThumbnailURL
         )
 
-        self.addAboutBlockView(
-            aboutText: viewModel.aboutText,
-            isWebViewSupportNeeded: viewModel.isWebViewSupportNeededForAboutText
-        )
+        self.addAboutBlockView(aboutText: viewModel.aboutText)
         self.addTextBlockView(block: .requirements, message: viewModel.requirementsText)
         self.addTextBlockView(block: .targetAudience, message: viewModel.targetAudienceText)
 
@@ -106,10 +103,6 @@ final class CourseInfoTabInfoView: UIView {
         // Redraw self cause geometry & sizes can be changed
         self.setNeedsLayout()
         self.layoutIfNeeded()
-
-        if !viewModel.isWebViewSupportNeededForAboutText {
-            self.delegate?.courseInfoTabInfoViewDidLoadContent(self)
-        }
     }
 
     // MARK: Private API
@@ -158,12 +151,12 @@ final class CourseInfoTabInfoView: UIView {
         }
     }
 
-    private func addAboutBlockView(aboutText: String, isWebViewSupportNeeded: Bool) {
+    private func addAboutBlockView(aboutText: String) {
         if aboutText.isEmpty {
             return
         }
 
-        let aboutBlockView = CourseInfoTabInfoAboutBlockView(isWebViewSupportNeeded: isWebViewSupportNeeded)
+        let aboutBlockView = CourseInfoTabInfoAboutBlockView()
         aboutBlockView.delegate = self
         self.scrollableStackView.addArrangedView(aboutBlockView)
         aboutBlockView.text = aboutText

@@ -402,9 +402,11 @@ extension NewProfileInteractor: DataBackUpdateServiceDelegate {
             currentUser.bio = profile.shortBio
             currentUser.details = profile.details
 
-            self.presenter.presentProfile(
-                response: .init(result: .success(.init(user: currentUser, isCurrentUserProfile: true)))
-            )
+            DispatchQueue.main.async {
+                self.presenter.presentProfile(
+                    response: .init(result: .success(.init(user: currentUser, isCurrentUserProfile: true)))
+                )
+            }
         }
     }
 }
