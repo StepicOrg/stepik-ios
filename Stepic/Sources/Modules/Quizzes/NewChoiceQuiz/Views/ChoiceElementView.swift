@@ -11,6 +11,9 @@ extension ChoiceElementView {
 
         let feedbackBackgroundColor = UIColor.stepikLightSecondaryBackground
         let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
+
+        let font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        let textColor = UIColor.stepikPrimaryText
     }
 }
 
@@ -18,15 +21,33 @@ final class ChoiceElementView: UIView {
     let appearance: Appearance
 
     private lazy var quizElementView = QuizElementView()
-    private lazy var contentView: ProcessedContentWebView = {
-        var appearance = ProcessedContentWebView.Appearance(
+    private lazy var contentView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.font,
+            labelTextColor: self.appearance.textColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
             insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
-        let view = ProcessedContentWebView(appearance: appearance)
-        view.isScrollEnabled = true
-        view.delegate = self
-        return view
+
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.font),
+                TextColorInjection(dynamicColor: self.appearance.textColor)
+            ]
+        )
+
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.font)
+        )
+        processedContentView.delegate = self
+
+        return processedContentView
     }()
 
     private lazy var shadowView: UIView = {
@@ -40,13 +61,32 @@ final class ChoiceElementView: UIView {
         return view
     }()
 
-    private lazy var feedbackView: ProcessedContentWebView = {
-        var appearance = ProcessedContentWebView.Appearance()
-        appearance.insets = LayoutInsets(insets: .zero)
-        appearance.backgroundColor = .clear
+    private lazy var feedbackView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.font,
+            labelTextColor: self.appearance.textColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
+            insets: LayoutInsets(insets: .zero),
+            backgroundColor: .clear
+        )
 
-        let view = ProcessedContentWebView(appearance: appearance)
-        return view
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.font),
+                TextColorInjection(dynamicColor: self.appearance.textColor)
+            ]
+        )
+
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.font)
+        )
+
+        return processedContentView
     }()
 
     private lazy var feedbackContainerView: UIView = {
@@ -77,7 +117,7 @@ final class ChoiceElementView: UIView {
 
     var text: String? {
         didSet {
-            self.contentView.loadHTMLText(self.text ?? "")
+            self.contentView.setText(self.text)
         }
     }
 
@@ -99,7 +139,7 @@ final class ChoiceElementView: UIView {
             self.feedbackContainerView.isHidden = self.hint == nil
             self.quizElementView.useCornersOnlyOnTop = self.hint != nil
 
-            self.feedbackView.loadHTMLText(self.hint ?? "")
+            self.feedbackView.setText(self.hint)
         }
     }
 
@@ -234,15 +274,9 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension ChoiceElementView: ProcessedContentWebViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
+extension ChoiceElementView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
         self.invalidateIntrinsicContentSize()
         self.onContentLoad?()
     }
-
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {}
-
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {}
-
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
 }
