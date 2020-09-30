@@ -32,12 +32,12 @@ final class QuizFeedbackView: UIView {
 
     private lazy var leftView = UIView()
 
-    private lazy var feedbackView: ProcessedContentWebView = {
-        var appearance = ProcessedContentWebView.Appearance()
-        appearance.insets = LayoutInsets(insets: .zero)
+    private lazy var feedbackView: ProcessedContentView = {
+        var appearance = ProcessedContentView.Appearance()
+        appearance.activityIndicatorViewStyle = .stepikGray
         appearance.backgroundColor = .clear
 
-        let view = ProcessedContentWebView(appearance: appearance)
+        let view = ProcessedContentView(appearance: appearance)
         view.delegate = self
 
         return view
@@ -111,7 +111,7 @@ final class QuizFeedbackView: UIView {
         }
 
         if let hint = hint {
-            self.feedbackView.loadHTMLText(hint)
+            self.feedbackView.processedContent = .html(hint)
         }
 
         self.animateFeedbackAppearance(showFeedback: hint != nil)
@@ -272,17 +272,17 @@ extension QuizFeedbackView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension QuizFeedbackView: ProcessedContentWebViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentWebView) {
+extension QuizFeedbackView: ProcessedContentViewDelegate {
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenNativeImage image: UIImage) {}
-
-    func processedContentTextView(_ view: ProcessedContentWebView, didOpenLink url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestOpenURL: url)
     }
 }

@@ -83,24 +83,20 @@ final class SolutionPresenter: SolutionPresenterProtocol {
     }
 
     private func makeHintContent(text: String) -> String {
-        var text = text
-
         /// Use <pre> tag with text wrapping for feedback
-        if text.contains("\n") {
-            text = "<div style=\"white-space: pre-wrap;\">\(text)</div>"
-        }
+        let text = "<div style=\"white-space: pre-wrap;\">\(text)</div>"
 
-        let processor = ContentProcessor(
-            content: text,
-            rules: [FixRelativeProtocolURLsRule(), AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)],
-            injections: [
-                MathJaxInjection(),
-                CommonStylesInjection(),
-                MetaViewportInjection(),
-                WebkitImagesCalloutDisableInjection()
-            ]
+        let injections = ContentProcessor.defaultInjections + [
+            TextColorInjection(dynamicColor: .stepikPrimaryText)
+        ]
+
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: injections
         )
 
-        return processor.processContent()
+        let processedContent = contentProcessor.processContent(text)
+
+        return processedContent.stringValue
     }
 }
