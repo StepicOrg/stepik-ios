@@ -55,6 +55,9 @@ final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
 
     private func processStepContent(_ content: String, stepFontSize: StepFontSize) -> Guarantee<String> {
         Guarantee { seal in
+            // TODO: Force to use HTML processing explicitly.
+            let content = "<div>\(content)</div>"
+
             let contentProcessingInjections = ContentProcessor.defaultInjections + [
                 FontSizeInjection(stepFontSize: stepFontSize),
                 TextColorInjection(dynamicColor: .stepikPrimaryText)

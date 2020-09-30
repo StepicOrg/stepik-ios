@@ -267,6 +267,9 @@ final class StepPresenter: StepPresenterProtocol {
         stepFontSize: StepFontSize,
         storedImages: [StepDataFlow.StoredImage]
     ) -> ProcessedContent {
+        // TODO: Force to use HTML processing explicitly.
+        let text = "<div>\(text)</div>"
+
         let base64EncodedStringByImageURL = Dictionary(
             uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
         )
