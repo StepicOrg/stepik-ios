@@ -7,6 +7,7 @@ enum CodeQuizFullscreen {
             let code: String?
             let language: CodeLanguage
             let codeDetails: CodeDetails
+            let stepFontSize: StepFontSize
         }
 
         struct ViewModel {

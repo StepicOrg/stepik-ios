@@ -14,7 +14,7 @@ final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
 
     func presentContent(response: CodeQuizFullscreen.ContentLoad.Response) {
         DispatchQueue.global(qos: .userInitiated).promise {
-            self.processStepContent(response.codeDetails.stepContent)
+            self.processStepContent(response.codeDetails.stepContent, stepFontSize: response.stepFontSize)
         }.done { content in
             let stepOptions = response.codeDetails.stepOptions
 
@@ -53,15 +53,21 @@ final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
 
     // MARK: Private API
 
-    private func processStepContent(_ content: String) -> Guarantee<String> {
+    private func processStepContent(_ content: String, stepFontSize: StepFontSize) -> Guarantee<String> {
         Guarantee { seal in
+            let contentProcessingInjections = ContentProcessor.defaultInjections + [
+                FontSizeInjection(stepFontSize: stepFontSize),
+                TextColorInjection(dynamicColor: .stepikPrimaryText)
+            ]
+
             let contentProcessor = ContentProcessor(
-                content: content,
                 rules: ContentProcessor.defaultRules,
-                injections: ContentProcessor.defaultInjections
+                injections: contentProcessingInjections
             )
-            let content: String = contentProcessor.processContent()
-            seal(content)
+
+            let processedContent = contentProcessor.processContent(content)
+
+            seal(processedContent.stringValue)
         }
     }
 
