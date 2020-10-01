@@ -51,9 +51,10 @@ final class MathJaxInjection: ContentProcessingInjection {
     var headScript: String { Scripts.localMathJax }
 
     func shouldInject(to code: String) -> Bool {
-        code.filter { $0 == "$" }.count >= 2
-            || (code.contains("\\[") && code.contains("\\]"))
-            || (code.contains("math-tex"))
+        code.contains("math-tex") ||
+        code.contains("\\[") ||
+        code.contains("\\(") ||
+        code.contains("$")
     }
 }
 
