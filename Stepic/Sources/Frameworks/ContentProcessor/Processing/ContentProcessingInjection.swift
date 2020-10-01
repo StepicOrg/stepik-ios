@@ -61,7 +61,16 @@ final class MathJaxInjection: ContentProcessingInjection {
 /// Detect web scripts
 final class WebScriptInjection: ContentProcessingInjection {
     func shouldInject(to code: String) -> Bool {
-        code.contains("wysiwyg-") ||
+        code.contains("&lt;") ||
+        code.contains("&gt;") ||
+        code.contains("wysiwyg") ||
+        code.contains("<strong") ||
+        code.contains("<em") ||
+        code.contains("<u") ||
+        code.contains("<strike") ||
+        code.contains("<samp") ||
+        code.contains("<sub") ||
+        code.contains("<sup") ||
         code.contains("<h1") ||
         code.contains("<h2") ||
         code.contains("<h3") ||
@@ -73,7 +82,10 @@ final class WebScriptInjection: ContentProcessingInjection {
         code.contains("<audio") ||
         code.contains("<table") ||
         code.contains("<div") ||
-        code.contains("<blockquote")
+        code.contains("<blockquote") ||
+        code.contains("<ol") ||
+        code.contains("<ul") ||
+        code.contains("<span")
     }
 }
 
