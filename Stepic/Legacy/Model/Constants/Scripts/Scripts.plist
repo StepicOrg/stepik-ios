@@ -6,14 +6,10 @@
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;document.documentElement.style.webkitTouchCallout=&apos;none&apos;;&lt;/script&gt;</string>
 	<key>highlightJS</key>
 	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;highlight.js&quot;&gt;&lt;/script&gt;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;</string>
-	<key>textColorScript</key>
-	<string>&lt;script type=&quot;text/javascript&quot;&gt;document.body.style.setProperty(&apos;--textColor&apos;, &apos;######&apos;)&lt;/script&gt;</string>
 	<key>contentCSSWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;stepikcontent.css&quot;&gt;</string>
 	<key>wysiwygCSSWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;wysiwyg.css&quot;&gt;</string>
-	<key>courseInfoCSSWrapper</key>
-	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;course-info.css&quot;&gt;</string>
 	<key>AudioTagWrapperInit</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;plyr.setup({loadSprite: false})&lt;/script&gt;</string>
 	<key>AudioTagWrapper</key>
@@ -67,14 +63,6 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
 	<key>TexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
-&lt;/script&gt;</string>
-	<key>FontSizeScript</key>
-	<string>&lt;script type=&quot;text/javascript&quot;&gt;
-	document.documentElement.style.setProperty(&apos;--body-font-size&apos;, &apos;##--body-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--h1-font-size&apos;, &apos;##--h1-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--h2-font-size&apos;, &apos;##--h2-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--h3-font-size&apos;, &apos;##--h3-font-size##&apos;);
-	document.documentElement.style.setProperty(&apos;--blockquote-font-size&apos;, &apos;##--blockquote-font-size##&apos;);
 &lt;/script&gt;</string>
 </dict>
 </plist>

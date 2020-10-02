@@ -89,7 +89,11 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 
         let globalDownloadVideoQuality = self.downloadVideoQualityStorageManager.globalDownloadVideoQuality
         let nearestQuality = video.getNearestQualityToDefault(globalDownloadVideoQuality.uniqueIdentifier)
-        let url = video.getUrlForQuality(nearestQuality)
+
+        guard let url = video.getUrlForQuality(nearestQuality) else {
+            throw Error.videoURLNotFound
+        }
+
         let task = DownloaderTask(url: url)
 
         self.setupReporters(for: task)
@@ -266,6 +270,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         case videoNotFound
         case videoTemporaryFileNotSavedAsVideoFile
         case videoDownloadingStopped
+        case videoURLNotFound
         case alreadyDownloading
     }
 }

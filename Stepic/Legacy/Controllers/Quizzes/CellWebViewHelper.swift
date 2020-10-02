@@ -34,7 +34,7 @@ final class CellWebViewHelper: NSObject {
             .injectDefault()
             .inject(script: .mathJaxCompletion)
             .inject(script: .textColor(color: color))
-            .inject(script: .fontSize(fontSize: self.fontSize))
+            .inject(script: .fontSize(stepFontSize: self.fontSize))
             .html
 
         webView?.navigationDelegate = self

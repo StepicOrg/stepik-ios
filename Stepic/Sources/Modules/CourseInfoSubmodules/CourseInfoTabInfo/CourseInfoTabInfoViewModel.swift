@@ -19,7 +19,6 @@ struct CourseInfoTabInfoViewModel {
     let introVideoThumbnailURL: URL?
 
     let aboutText: String
-    let isWebViewSupportNeededForAboutText: Bool
     let requirementsText: String
     let targetAudienceText: String
 

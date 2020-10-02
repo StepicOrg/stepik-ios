@@ -15,7 +15,6 @@ extension CourseInfoTabInfoAboutBlockView {
         let contentTextViewInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
         let contentTextViewFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let contentTextViewTextColor = UIColor.stepikSystemSecondaryText
-        let contentTextViewLineSpacing: CGFloat = 2.6
 
         let backgroundColor = UIColor.stepikBackground
     }
@@ -33,47 +32,46 @@ final class CourseInfoTabInfoAboutBlockView: UIView {
         return view
     }()
 
-    private lazy var processedContentTextView: ProcessedContentTextView = {
-        var appearance = ProcessedContentTextView.Appearance(
+    private lazy var processedContentView: ProcessedContentView = {
+        let appearance = ProcessedContentView.Appearance(
+            labelFont: self.appearance.contentTextViewFont,
+            labelTextColor: self.appearance.contentTextViewTextColor,
+            activityIndicatorViewStyle: .stepikGray,
+            activityIndicatorViewColor: nil,
             insets: LayoutInsets(insets: .zero),
             backgroundColor: self.appearance.backgroundColor
         )
-        let view = ProcessedContentTextView(appearance: appearance)
-        view.delegate = self
-        return view
-    }()
 
-    private lazy var contentTextLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = self.appearance.contentTextViewFont
-        label.textColor = self.appearance.contentTextViewTextColor
-        return label
-    }()
+        let contentProcessor = ContentProcessor(
+            rules: ContentProcessor.defaultRules,
+            injections: ContentProcessor.defaultInjections + [
+                FontInjection(font: self.appearance.contentTextViewFont),
+                TextColorInjection(dynamicColor: self.appearance.contentTextViewTextColor)
+            ]
+        )
 
-    private let isWebViewSupportNeeded: Bool
+        let processedContentView = ProcessedContentView(
+            frame: .zero,
+            appearance: appearance,
+            contentProcessor: contentProcessor,
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.contentTextViewFont)
+        )
+        processedContentView.delegate = self
+
+        return processedContentView
+    }()
 
     var text: String? {
         didSet {
-            if self.isWebViewSupportNeeded {
-                self.processedContentTextView.loadHTMLText(self.text ?? "")
-            } else {
-                self.contentTextLabel.setTextWithHTMLString(
-                    self.text ?? "",
-                    lineSpacing: self.appearance.contentTextViewLineSpacing
-                )
-                self.delegate?.courseInfoTabInfoAboutBlockViewDidLoadContent(self)
-            }
+            self.processedContentView.setText(self.text)
         }
     }
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        isWebViewSupportNeeded: Bool
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
-        self.isWebViewSupportNeeded = isWebViewSupportNeeded
         super.init(frame: frame)
 
         self.setupView()
@@ -94,12 +92,7 @@ extension CourseInfoTabInfoAboutBlockView: ProgrammaticallyInitializableViewProt
 
     func addSubviews() {
         self.addSubview(self.headerView)
-
-        if self.isWebViewSupportNeeded {
-            self.addSubview(self.processedContentTextView)
-        } else {
-            self.addSubview(self.contentTextLabel)
-        }
+        self.addSubview(self.processedContentView)
     }
 
     func makeConstraints() {
@@ -110,9 +103,8 @@ extension CourseInfoTabInfoAboutBlockView: ProgrammaticallyInitializableViewProt
             make.trailing.equalToSuperview().offset(-self.appearance.headerViewInsets.right).priority(999)
         }
 
-        let contentTextView = self.isWebViewSupportNeeded ? self.processedContentTextView : self.contentTextLabel
-        contentTextView.translatesAutoresizingMaskIntoConstraints = false
-        contentTextView.snp.makeConstraints { make in
+        self.processedContentView.translatesAutoresizingMaskIntoConstraints = false
+        self.processedContentView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.contentTextViewInsets.left)
             make.bottom.equalToSuperview().offset(-self.appearance.contentTextViewInsets.bottom)
             make.trailing.equalTo(self.headerView).priority(999)
@@ -121,20 +113,25 @@ extension CourseInfoTabInfoAboutBlockView: ProgrammaticallyInitializableViewProt
     }
 }
 
-extension CourseInfoTabInfoAboutBlockView: ProcessedContentTextViewDelegate {
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+extension CourseInfoTabInfoAboutBlockView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
         self.delegate?.courseInfoTabInfoAboutBlockViewDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
+    }
+
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenImageURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {
+    func processedContentView(_ view: ProcessedContentView, didOpenNativeImage image: UIImage) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenImage: image)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
         self.delegate?.courseInfoTabInfoAboutBlockView(self, didOpenURL: url)
     }
 }

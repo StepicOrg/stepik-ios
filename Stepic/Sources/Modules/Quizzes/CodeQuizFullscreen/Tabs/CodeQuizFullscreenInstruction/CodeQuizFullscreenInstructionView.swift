@@ -14,6 +14,8 @@ extension CodeQuizFullscreenInstructionView {
     struct Appearance {
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
         let spacing: CGFloat = 16
+
+        let stepTextViewInsets = LayoutInsets(top: 16, left: 16, bottom: 4, right: 16)
     }
 
     enum Animation {
@@ -77,10 +79,12 @@ final class CodeQuizFullscreenInstructionView: UIView {
     func configure(htmlString: String, samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
         self.scrollableStackView.removeAllArrangedViews()
 
-        let stepTextView = ProcessedContentTextView()
+        var stepTextViewAppearance = ProcessedContentView.Appearance()
+        stepTextViewAppearance.insets = self.appearance.stepTextViewInsets
+        let stepTextView = ProcessedContentView(appearance: stepTextViewAppearance)
         stepTextView.delegate = self
         self.scrollableStackView.addArrangedView(stepTextView)
-        stepTextView.loadHTMLText(htmlString)
+        stepTextView.processedContent = .html(htmlString)
 
         let isEmptyDetails = samples.isEmpty && limit.memory == 0 && limit.time == 0
         if !isEmptyDetails {
@@ -111,18 +115,21 @@ extension CodeQuizFullscreenInstructionView: ProgrammaticallyInitializableViewPr
     }
 }
 
-extension CodeQuizFullscreenInstructionView: ProcessedContentTextViewDelegate {
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
-        self.delegate?.codeQuizFullscreenInstructionView(self, didRequestOpenURL: url)
+extension CodeQuizFullscreenInstructionView: ProcessedContentViewDelegate {
+    func processedContentViewDidLoadContent(_ view: ProcessedContentView) {
+        self.delegate?.codeQuizFullscreenInstructionViewDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
+    func processedContentView(_ view: ProcessedContentView, didReportNewHeight height: Int) {
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
+    }
+
+    func processedContentView(_ view: ProcessedContentView, didOpenImageURL url: URL) {
         self.delegate?.codeQuizFullscreenInstructionView(self, didRequestFullscreenImage: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
-
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
-        self.delegate?.codeQuizFullscreenInstructionViewDidLoadContent(self)
+    func processedContentView(_ view: ProcessedContentView, didOpenLink url: URL) {
+        self.delegate?.codeQuizFullscreenInstructionView(self, didRequestOpenURL: url)
     }
 }

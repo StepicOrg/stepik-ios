@@ -35,7 +35,6 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
 
         let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
-        let (processedAboutText, isWebViewSupportNeeded) = self.makeProcessedAboutText(aboutText)
 
         let certificateText = self.makeFormattedCertificateText(course: course)
         let certificateDetailsText = course.hasCertificate
@@ -58,8 +57,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             authors: authorsViewModel,
             introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
-            aboutText: processedAboutText,
-            isWebViewSupportNeededForAboutText: isWebViewSupportNeeded,
+            aboutText: aboutText,
             requirementsText: course.requirements.trimmingCharacters(in: .whitespacesAndNewlines),
             targetAudienceText: course.audience.trimmingCharacters(in: .whitespacesAndNewlines),
             timeToCompleteText: self.makeFormattedTimeToCompleteText(timeToComplete: course.timeToComplete),
@@ -68,34 +66,6 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             certificateDetailsText: certificateDetailsText,
             instructors: instructorsViewModel
         )
-    }
-
-    private func makeProcessedAboutText(_ aboutText: String) -> (String, Bool) {
-        let trimmedText = aboutText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        if trimmedText.isEmpty {
-            return (trimmedText, false)
-        }
-
-        let isWebViewSupportNeeded = TagDetectionUtil.isWebViewSupportNeeded(trimmedText)
-
-        guard isWebViewSupportNeeded else {
-            return (trimmedText, false)
-        }
-
-        let injections: [ContentProcessingInjection] = [
-            CourseInfoStylesInjection(),
-            MetaViewportInjection(),
-            WebkitImagesCalloutDisableInjection()
-        ]
-
-        let contentProcessor = ContentProcessor(
-            content: trimmedText,
-            rules: ContentProcessor.defaultRules,
-            injections: injections
-        )
-
-        return (contentProcessor.processContent(), true)
     }
 
     private func makeIntroVideoURL(course: Course, streamVideoQuality: StreamVideoQuality) -> URL? {

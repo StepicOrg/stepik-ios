@@ -2,7 +2,7 @@ import Atributika
 import Foundation
 
 protocol HTMLToAttributedStringConverterProtocol {
-    func convertToAttributedText(htmlString: String) -> AttributedTextProtocol
+    func convertToAttributedText(htmlString: String) -> AttributedText
     func convertToAttributedString(htmlString: String) -> NSAttributedString
 }
 
@@ -54,7 +54,7 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
         self.tagTransformers = tagTransformers
     }
 
-    func convertToAttributedText(htmlString: String) -> AttributedTextProtocol {
+    func convertToAttributedText(htmlString: String) -> AttributedText {
         htmlString
             .style(tags: self.tagStyles, transformers: self.tagTransformers)
             .styleLinks(Self.defaultLinkStyle)
@@ -62,11 +62,7 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
     }
 
     func convertToAttributedString(htmlString: String) -> NSAttributedString {
-        guard let attributedText = self.convertToAttributedText(htmlString: htmlString) as? AttributedText else {
-            return NSAttributedString()
-        }
-
-        return attributedText
+        self.convertToAttributedText(htmlString: htmlString)
             .attributedString
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }

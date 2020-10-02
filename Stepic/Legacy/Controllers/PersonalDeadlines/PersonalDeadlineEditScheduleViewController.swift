@@ -214,28 +214,45 @@ extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
         self.analytics.send(.personalDeadlineTimeOpened)
 
         let approximateYearInSeconds: Double = 60 * 60 * 24 * 30 * 365
+        let windowOrSelfOrigin = self.view.superview?.superview ?? self.view
 
-        ActionSheetDatePicker.show(
-            withTitle: NSLocalizedString("SelectTimeTitle", comment: ""),
-            datePickerMode: UIDatePicker.Mode.dateAndTime,
-            selectedDate: sectionDeadlinesData[indexPath.row].deadline,
+        let datePicker = ActionSheetDatePicker(
+            title: NSLocalizedString("SelectTimeTitle", comment: ""),
+            datePickerMode: .dateAndTime,
+            selectedDate: self.sectionDeadlinesData[indexPath.row].deadline,
             minimumDate: Date(),
             maximumDate: Date().addingTimeInterval(approximateYearInSeconds),
-            doneBlock: { [weak self] _, value, _ in
-                guard let date = value as? Date else {
-                    return
-                }
-
-                self?.tableView.deselectRow(at: indexPath, animated: true)
-                self?.sectionDeadlinesData[indexPath.row].deadline = date
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            },
-            cancel: { [weak self] _ in
-                self?.analytics.send(.personalDeadlineTimeClosed)
-                self?.tableView.deselectRow(at: indexPath, animated: true)
-            },
-            origin: tableView.cellForRow(at: indexPath)
+            target: self,
+            action: #selector(self.actionSheetDatePickerDidPick(_:)),
+            cancelAction: #selector(self.actionSheetDatePickerDidCancel),
+            origin: windowOrSelfOrigin
         )
+
+        if #available(iOS 13.4, *) {
+            datePicker?.datePickerStyle = .wheels
+        }
+
+        datePicker?.show()
+    }
+
+    @objc
+    private func actionSheetDatePickerDidPick(_ date: Date) {
+        guard let selectedRowIndexPath = self.tableView.indexPathForSelectedRow else {
+            return
+        }
+
+        self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
+        self.sectionDeadlinesData[selectedRowIndexPath.row].deadline = date
+        self.tableView.reloadRows(at: [selectedRowIndexPath], with: .automatic)
+    }
+
+    @objc
+    private func actionSheetDatePickerDidCancel() {
+        self.analytics.send(.personalDeadlineTimeClosed)
+
+        if let selectedRowIndexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
+        }
     }
 }
 
