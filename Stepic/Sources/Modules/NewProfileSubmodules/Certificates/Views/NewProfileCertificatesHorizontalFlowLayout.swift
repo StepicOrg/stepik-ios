@@ -36,7 +36,8 @@ final class NewProfileCertificatesHorizontalFlowLayout: UICollectionViewFlowLayo
     private var contentWidth: CGFloat = 0
 
     override var collectionViewContentSize: CGSize {
-        CGSize(width: self.contentWidth, height: self.itemSize.height)
+        let verticalSectionInsets = self.sectionInset.top + self.sectionInset.bottom
+        return CGSize(width: self.contentWidth, height: self.itemSize.height + verticalSectionInsets)
     }
 
     init(appearance: Appearance = Appearance()) {
@@ -64,8 +65,8 @@ final class NewProfileCertificatesHorizontalFlowLayout: UICollectionViewFlowLayo
             return
         }
 
-        var yOffset: CGFloat = self.minimumLineSpacing
-        var xOffset: CGFloat = 0
+        var yOffset: CGFloat = self.minimumLineSpacing + self.sectionInset.top
+        var xOffset: CGFloat = self.sectionInset.left
 
         for item in 0..<collectionView.numberOfItems(inSection: 0) {
             let frame = CGRect(
@@ -79,11 +80,11 @@ final class NewProfileCertificatesHorizontalFlowLayout: UICollectionViewFlowLayo
             attributes.frame = frame
             self.cache.append(attributes)
 
-            yOffset = self.minimumLineSpacing
+            yOffset = self.minimumLineSpacing + self.sectionInset.top
             xOffset += self.itemSize.width + self.minimumInteritemSpacing
         }
 
-        xOffset += self.appearance.insets.right - self.minimumInteritemSpacing
+        xOffset += self.appearance.insets.right - self.minimumInteritemSpacing + self.sectionInset.right
 
         self.contentWidth = xOffset
     }

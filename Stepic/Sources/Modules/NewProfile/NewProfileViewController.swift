@@ -544,9 +544,12 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
                 self?.interactor.doCertificatesListPresentation(request: .init())
             }
 
+            var containerViewAppearance = NewProfileBlockContainerView.Appearance()
+            containerViewAppearance.contentViewInsets = .zero
             let containerView = NewProfileBlockContainerView(
                 headerView: headerView,
-                contentView: viewController.view
+                contentView: viewController.view,
+                appearance: containerViewAppearance
             )
 
             self.registerSubmodule(
