@@ -10,11 +10,11 @@ def shared_pods
     pod 'Alamofire', '5.2.2'
     pod 'Atributika', '4.9.9'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.9.0'
+    pod 'SDWebImage', '5.9.2'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-    pod 'DeviceKit', '4.0.0'
+    pod 'DeviceKit', '4.1.0'
     pod 'PromiseKit', '6.13.1'
-    pod 'SwiftLint', '0.40.2'
+    pod 'SwiftLint', '0.40.3'
     pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
 end
 
@@ -29,11 +29,11 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.32.0'
-    pod 'Firebase/Messaging', '6.32.0'
-    pod 'Firebase/Analytics', '6.32.0'
-    pod 'Firebase/Crashlytics', '6.32.0'
-    pod 'Firebase/RemoteConfig', '6.32.0'
+    pod 'Firebase/Core', '6.33.0'
+    pod 'Firebase/Messaging', '6.33.0'
+    pod 'Firebase/Analytics', '6.33.0'
+    pod 'Firebase/Crashlytics', '6.33.0'
+    pod 'Firebase/RemoteConfig', '6.33.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.11.1'
     pod 'Amplitude-iOS', '4.9.3'
@@ -50,29 +50,29 @@ def all_pods
     
     # Social SDKs
     pod 'VK-ios-sdk', '1.5.1'
-    pod 'FBSDKCoreKit', '7.1.0'
-    pod 'FBSDKLoginKit', '7.1.0'
+    pod 'FBSDKCoreKit', '8.0.0'
+    pod 'FBSDKLoginKit', '8.0.0'
     pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.6.9'
+    pod 'Agrume', '5.6.10'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'
     pod 'Koloda', '5.0'
-    pod 'Charts', '3.4.0'
+    pod 'Charts', '3.6.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.6.0'
     pod 'Nuke', '9.1.2'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
-    pod 'SwiftDate', '6.1.0'
+    pod 'SwiftDate', '6.2.0'
 end
 
 def testing_pods
     pod 'Quick', '3.0.0'
-    pod 'Nimble', '9.0.0-rc.2'
+    pod 'Nimble', '9.0.0-rc.3'
     pod 'Mockingjay', '3.0.0-alpha.1'
 end
 
