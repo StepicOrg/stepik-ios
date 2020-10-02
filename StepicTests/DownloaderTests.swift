@@ -115,14 +115,8 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        expect(expression: {
-                            try self.downloader.add(task: task)
-                        }).notTo(throwError())
-                        expect(expression: {
-                            try self.downloader.resume(task: task)
-                        }).notTo(throwError())
-                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
 
@@ -140,14 +134,8 @@ class DownloaderSpec: QuickSpec {
 
                         task.completionReporter = { _ in done() }
 
-                        expect(expression: {
-                            try self.downloader.add(task: task)
-                        }).notTo(throwError())
-                        expect(expression: {
-                            try self.downloader.resume(task: task)
-                        }).notTo(throwError())
-                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
             }
@@ -177,14 +165,8 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        expect(expression: {
-                            try self.downloader.add(task: task)
-                        }).notTo(throwError())
-                        expect(expression: {
-                            try self.downloader.resume(task: task)
-                        }).notTo(throwError())
-                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
             }
@@ -220,14 +202,8 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        expect(expression: {
-                            try self.downloader.add(task: task)
-                        }).notTo(throwError())
-                        expect(expression: {
-                            try self.downloader.resume(task: task)
-                        }).notTo(throwError())
-                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
                 }
 
@@ -244,10 +220,7 @@ class DownloaderSpec: QuickSpec {
                         task.progressReporter = { progress in
                             // Some trick: pause task from first call of progress reporter
                             if !didPauseCall {
-                                expect(expression: {
-                                    try self.downloader.pause(task: task)
-                                }).notTo(throwError())
-                                //expect { try self.downloader.pause(task: task) }.notTo(throwError())
+                                expect { try self.downloader.pause(task: task) }.notTo(throwError())
                                 didPauseCall = true
                                 lock.unlock()
                             }
@@ -263,24 +236,15 @@ class DownloaderSpec: QuickSpec {
                         waitUntil { done in
                             task.completionReporter = { url in
                                 // Check states history
-                                expect(states) == [DownloaderTaskState.attached, DownloaderTaskState.active, DownloaderTaskState.paused, DownloaderTaskState.active]
+                                expect(states) == [.attached, .active, .paused, .active]
                                 done()
                             }
 
                             lock.lock()
-                            expect(expression: {
-                                try self.downloader.add(task: task)
-                            }).notTo(throwError())
-                            expect(expression: {
-                                try self.downloader.resume(task: task)
-                            }).notTo(throwError())
-                            //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
                             lock.lock()
-                            expect(expression: {
-                                try self.downloader.resume(task: task)
-                            }).notTo(throwError())
-                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
                 }
@@ -298,7 +262,7 @@ class DownloaderSpec: QuickSpec {
                                 states += [state]
                                 if state == .detached {
                                     // Task should have state == .detached (not .stopped)
-                                    expect(states) == [DownloaderTaskState.attached, DownloaderTaskState.active, DownloaderTaskState.stopped, DownloaderTaskState.detached]
+                                    expect(states) == [.attached, .active, .stopped, .detached]
                                     done()
                                 }
                             }
@@ -306,10 +270,7 @@ class DownloaderSpec: QuickSpec {
                             var didCancelCall = false
                             task.progressReporter = { progress in
                                 if !didCancelCall {
-                                    expect(expression: {
-                                        try self.downloader.cancel(task: task)
-                                    }).notTo(throwError())
-                                    //expect { try self.downloader.cancel(task: task) }.notTo(throwError())
+                                    expect { try self.downloader.cancel(task: task) }.notTo(throwError())
                                     didCancelCall = true
                                 }
                             }
@@ -326,14 +287,8 @@ class DownloaderSpec: QuickSpec {
                                 done()
                             }
 
-                            expect(expression: {
-                                try self.downloader.add(task: task)
-                            }).notTo(throwError())
-                            expect(expression: {
-                                try self.downloader.resume(task: task)
-                            }).notTo(throwError())
-                            //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
                 }
@@ -361,14 +316,8 @@ class DownloaderSpec: QuickSpec {
                         }
 
                         group.enter()
-                        expect(expression: {
-                            try self.downloader.add(task: task)
-                        }).notTo(throwError())
-                        expect(expression: {
-                            try self.downloader.resume(task: task)
-                        }).notTo(throwError())
-                        //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                        //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        expect { try self.downloader.add(task: task) }.notTo(throwError())
+                        expect { try self.downloader.resume(task: task) }.notTo(throwError())
                     }
 
                     waitUntil { done in
@@ -395,14 +344,8 @@ class DownloaderSpec: QuickSpec {
                     DispatchQueue.concurrentPerform(iterations: 100) { iteration in
                         DispatchQueue.concurrentPerform(iterations: 100) { _ in
                             let task = DownloaderTaskMock(url: URL(string: DownloaderSpec.okFileLink)!)
-                            expect(expression: {
-                                try self.downloader.add(task: task)
-                            }).notTo(throwError())
-                            expect(expression: {
-                                try self.downloader.resume(task: task)
-                            }).notTo(throwError())
-                            //expect { try self.downloader.add(task: task) }.notTo(throwError())
-                            //expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                            expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
                         }
                     }
                 }
@@ -418,10 +361,7 @@ class DownloaderSpec: QuickSpec {
                 }
 
                 it("throws error") {
-                    expect(expression: {
-                        try self.downloader.resume(task: task)
-                    }).to(throwError())
-                    //expect { try self.downloader.resume(task: task) }.to(throwError())
+                    expect { try self.downloader.resume(task: task) }.to(throwError())
                 }
             }
         }
