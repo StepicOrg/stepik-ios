@@ -47,6 +47,11 @@ enum NewProfile {
         }
     }
 
+    /// Fetch user profile updates in the background
+    enum ProfileFetchUpdates {
+        struct Request {}
+    }
+
     /// Register submodules
     enum SubmoduleRegistration {
         struct Request {

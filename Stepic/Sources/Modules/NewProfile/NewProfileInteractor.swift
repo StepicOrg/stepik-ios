@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewProfileInteractorProtocol {
     func doProfileRefresh(request: NewProfile.ProfileLoad.Request)
+    func doProfileFetchUpdate(request: NewProfile.ProfileFetchUpdates.Request)
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request)
     func doProfileShareAction(request: NewProfile.ProfileShareAction.Request)
     func doProfileEditAction(request: NewProfile.ProfileEditAction.Request)
@@ -124,6 +125,14 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
                 }
             }
         }
+    }
+
+    func doProfileFetchUpdate(request: NewProfile.ProfileFetchUpdates.Request) {
+        guard self.isCurrentUserProfile, self.currentUser != nil, self.isOnline else {
+            return
+        }
+
+        self.doProfileRefresh(request: .init())
     }
 
     func doOnlineModeReset(request: NewProfile.OnlineModeReset.Request) {

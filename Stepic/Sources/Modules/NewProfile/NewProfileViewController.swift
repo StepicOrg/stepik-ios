@@ -91,6 +91,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         super.viewDidAppear(animated)
 
         self.interactor.doOnlineModeReset(request: .init())
+        self.interactor.doProfileFetchUpdate(request: .init())
 
         switch self.state {
         case .loading, .error:
