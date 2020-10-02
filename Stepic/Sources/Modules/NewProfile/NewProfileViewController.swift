@@ -91,6 +91,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         super.viewDidAppear(animated)
 
         self.interactor.doOnlineModeReset(request: .init())
+        self.interactor.doProfileFetchUpdate(request: .init())
 
         switch self.state {
         case .loading, .error:
@@ -543,9 +544,12 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
                 self?.interactor.doCertificatesListPresentation(request: .init())
             }
 
+            var containerViewAppearance = NewProfileBlockContainerView.Appearance()
+            containerViewAppearance.contentViewInsets = .zero
             let containerView = NewProfileBlockContainerView(
                 headerView: headerView,
-                contentView: viewController.view
+                contentView: viewController.view,
+                appearance: containerViewAppearance
             )
 
             self.registerSubmodule(
