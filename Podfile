@@ -14,7 +14,7 @@ def shared_pods
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'DeviceKit', '4.0.0'
     pod 'PromiseKit', '6.13.1'
-    pod 'SwiftLint', '0.40.2'
+    pod 'SwiftLint', '0.40.3'
     pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
 end
 
