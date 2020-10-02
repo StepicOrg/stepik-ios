@@ -128,7 +128,7 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
     }
 
     func doProfileFetchUpdate(request: NewProfile.ProfileFetchUpdates.Request) {
-        guard self.isCurrentUserProfile, self.currentUser != nil, self.isOnline else {
+        guard self.isCurrentUserProfile, self.currentUser != nil, self.networkReachabilityService.isReachable else {
             return
         }
 
