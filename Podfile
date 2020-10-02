@@ -12,7 +12,7 @@ def shared_pods
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.9.2'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-    pod 'DeviceKit', '4.0.0'
+    pod 'DeviceKit', '4.1.0'
     pod 'PromiseKit', '6.13.1'
     pod 'SwiftLint', '0.40.3'
     pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
