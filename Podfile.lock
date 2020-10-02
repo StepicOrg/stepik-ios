@@ -14,9 +14,9 @@ PODS:
   - Branch (0.31.0):
     - Branch/Core (= 0.31.0)
   - Branch/Core (0.31.0)
-  - Charts (3.4.0):
-    - Charts/Core (= 3.4.0)
-  - Charts/Core (3.4.0)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - CocoaLumberjack (3.6.1):
     - CocoaLumberjack/Core (= 3.6.1)
   - CocoaLumberjack/Core (3.6.1)
@@ -211,7 +211,7 @@ DEPENDENCIES:
   - Atributika (= 4.9.9)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 0.31.0)
-  - Charts (= 3.4.0)
+  - Charts (= 3.6.0)
   - CRToast (= 0.0.9)
   - DeviceKit (= 4.1.0)
   - DownloadButton (= 0.1.0)
@@ -342,7 +342,7 @@ SPEC CHECKSUMS:
   Atributika: 1389b58ecf923217f66be693ae25f94a4f7ba077
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
-  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   DeviceKit: aaa4743a15ef1e2021fe654dffa32a3ed15672aa
@@ -401,6 +401,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: ef4befac18fe019ddf60411596a80e3916fc80e1
+PODFILE CHECKSUM: 068d0e99e338fd2910a6bdf14078b189e1fcb6d1
 
 COCOAPODS: 1.9.3
