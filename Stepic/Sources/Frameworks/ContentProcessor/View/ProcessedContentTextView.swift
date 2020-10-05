@@ -100,6 +100,11 @@ final class ProcessedContentTextView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+    }
+
     private func clearText() {
         if self.didSetupLabel && !self.label.isHidden {
             self.label.text = nil
