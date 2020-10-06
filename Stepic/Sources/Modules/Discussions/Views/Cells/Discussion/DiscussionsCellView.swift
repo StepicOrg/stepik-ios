@@ -12,23 +12,8 @@ extension DiscussionsCellView {
         let avatarImageViewSize = CGSize(width: 36, height: 36)
         let avatarImageViewCornerRadius: CGFloat = 4.0
 
-        let badgeLabelFont = UIFont.systemFont(ofSize: 10, weight: .medium)
-        let badgeTintColor = UIColor.white
-        let badgeCornerRadius: CGFloat = 10
-
-        let badgeUserRoleWidthDelta: CGFloat = 16
-        let badgeUserRoleLightBackgroundColor = UIColor.stepikGreenFixed
-        let badgeUserRoleDarkBackgroundColor = UIColor.stepikDarkGreenFixed
-
-        let badgeIsPinnedLightBackgroundColor = UIColor.stepikVioletFixed
-        let badgeIsPinnedDarkBackgroundColor = UIColor.stepikDarkVioletFixed
-        let badgeIsPinnedImageSize = CGSize(width: 10, height: 10)
-        let badgeIsPinnedImageInsets = UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 2)
-        let badgeIsPinnedTitleInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-
-        let badgesStackViewHeight: CGFloat = 20
-        let badgesStackViewSpacing: CGFloat = 8
-        let badgesStackViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
+        let badgesViewHeight: CGFloat = 20
+        let badgesViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -83,48 +68,8 @@ final class DiscussionsCellView: UIView {
         return button
     }()
 
-    private lazy var userRoleBadgeLabel: UILabel = {
-        let label = WiderLabel()
-        label.widthDelta = self.appearance.badgeUserRoleWidthDelta
-        label.font = self.appearance.badgeLabelFont
-        label.textColor = self.appearance.badgeTintColor
-        label.backgroundColor = self.appearance.badgeUserRoleLightBackgroundColor
-        label.textAlignment = .center
-        label.numberOfLines = 1
-        // Round corners
-        label.layer.cornerRadius = self.appearance.badgeCornerRadius
-        label.layer.masksToBounds = true
-        label.clipsToBounds = true
-        return label
-    }()
 
-    private lazy var isPinnedImageButton: ImageButton = {
-        let imageButton = ImageButton()
-        imageButton.imageSize = self.appearance.badgeIsPinnedImageSize
-        imageButton.imageInsets = self.appearance.badgeIsPinnedImageInsets
-        imageButton.titleInsets = self.appearance.badgeIsPinnedTitleInsets
-        imageButton.tintColor = self.appearance.badgeTintColor
-        imageButton.font = self.appearance.badgeLabelFont
-        imageButton.title = NSLocalizedString("DiscussionsIsPinnedBadgeTitle", comment: "")
-        imageButton.image = UIImage(named: "discussions-pin")?.withRenderingMode(.alwaysTemplate)
-        imageButton.backgroundColor = self.appearance.badgeIsPinnedLightBackgroundColor
-        imageButton.disabledAlpha = 1.0
-        imageButton.isEnabled = false
-        // Round corners
-        imageButton.layer.cornerRadius = self.appearance.badgeCornerRadius
-        imageButton.layer.masksToBounds = true
-        imageButton.clipsToBounds = true
-        return imageButton
-    }()
-
-    private lazy var badgesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.userRoleBadgeLabel, self.isPinnedImageButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.spacing = self.appearance.badgesStackViewSpacing
-        stackView.isHidden = true
-        return stackView
-    }()
+    private lazy var badgesView = DiscussionsBadgesView()
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -279,14 +224,6 @@ final class DiscussionsCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
-            self.updateViewColor()
-        }
-    }
-
     // MARK: - Public API
 
     func configure(viewModel: DiscussionsCommentViewModel?) {
@@ -319,8 +256,8 @@ final class DiscussionsCellView: UIView {
     }
 
     func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let userInfoHeight = (self.badgesStackView.isHidden ? 0 : self.appearance.badgesStackViewHeight)
-            + (self.badgesStackView.isHidden ? 0 : self.appearance.nameLabelInsets.top)
+        let userInfoHeight = (self.badgesView.isHidden ? 0 : self.appearance.badgesViewHeight)
+            + (self.badgesView.isHidden ? 0 : self.appearance.nameLabelInsets.top)
             + self.appearance.nameLabelHeight
 
         let solutionHeight = self.solutionContainerView.isHidden
@@ -339,16 +276,6 @@ final class DiscussionsCellView: UIView {
 
     // MARK: - Private API
 
-    private func updateViewColor() {
-        self.userRoleBadgeLabel.backgroundColor = self.isDarkInterfaceStyle
-            ? self.appearance.badgeUserRoleDarkBackgroundColor
-            : self.appearance.badgeUserRoleLightBackgroundColor
-
-        self.isPinnedImageButton.backgroundColor = self.isDarkInterfaceStyle
-            ? self.appearance.badgeIsPinnedDarkBackgroundColor
-            : self.appearance.badgeIsPinnedLightBackgroundColor
-    }
-
     private func resetViews() {
         self.nameLabel.text = nil
         self.dateLabel.text = nil
@@ -359,14 +286,12 @@ final class DiscussionsCellView: UIView {
     }
 
     private func updateBadges(userRoleBadgeText: String?, isPinned: Bool) {
-        self.userRoleBadgeLabel.text = userRoleBadgeText
-        self.userRoleBadgeLabel.isHidden = userRoleBadgeText?.isEmpty ?? true
+        self.badgesView.userRoleText = userRoleBadgeText
+        self.badgesView.isPinned = isPinned
 
-        self.isPinnedImageButton.isHidden = !isPinned
+        self.badgesView.isHidden = self.badgesView.isAllBadgesHidden
 
-        self.badgesStackView.isHidden = self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
-
-        if self.badgesStackView.isHidden {
+        if self.badgesView.isHidden {
             self.nameLabelTopToBottomOfBadgesConstraint?.deactivate()
             self.nameLabelTopToTopOfAvatarConstraint?.activate()
         } else {
@@ -431,13 +356,13 @@ final class DiscussionsCellView: UIView {
 
 extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.updateViewColor()
+        self.badgesView.isHidden = true
     }
 
     func addSubviews() {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)
-        self.addSubview(self.badgesStackView)
+        self.addSubview(self.badgesView)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textContentStackView)
         self.solutionContainerView.addSubview(self.solutionControl)
@@ -457,12 +382,12 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.edges.equalTo(self.avatarImageView)
         }
 
-        self.badgesStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.badgesStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.badgesStackViewInsets.top)
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgesStackViewInsets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.badgesStackViewInsets.right)
-            make.height.equalTo(self.appearance.badgesStackViewHeight)
+        self.badgesView.translatesAutoresizingMaskIntoConstraints = false
+        self.badgesView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.badgesViewInsets.top)
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgesViewInsets.left)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.badgesViewInsets.right)
+            make.height.equalTo(self.appearance.badgesViewHeight)
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -471,7 +396,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.nameLabel.snp.makeConstraints { make in
             self.nameLabelTopToBottomOfBadgesConstraint = make
                 .top
-                .equalTo(self.badgesStackView.snp.bottom)
+                .equalTo(self.badgesView.snp.bottom)
                 .offset(self.appearance.nameLabelInsets.top)
                 .constraint
             self.nameLabelTopToBottomOfBadgesConstraint?.deactivate()

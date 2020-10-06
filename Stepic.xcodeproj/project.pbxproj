@@ -518,6 +518,7 @@
 		2C546C1323DA02AB00352F27 /* String+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */; };
 		2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
+		2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */; };
 		2C57B29F24092868008284F0 /* SubmissionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */; };
 		2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */; };
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
@@ -1932,6 +1933,7 @@
 		2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SafeSubscript.swift"; sourceTree = "<group>"; };
 		2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
+		2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBadgesView.swift; sourceTree = "<group>"; };
 		2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsPersistenceService.swift; sourceTree = "<group>"; };
 		2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsRepository.swift; sourceTree = "<group>"; };
 		2C5967EA23E7828800072800 /* SubmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionTests.swift; sourceTree = "<group>"; };
@@ -4541,6 +4543,7 @@
 		2CD4E0F7252C708F000D9328 /* Discussion */ = {
 			isa = PBXGroup;
 			children = (
+				2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */,
 				62E987675DB3715DA52FD632 /* DiscussionsCellView.swift */,
 				62E9868D877E7305BF47AA42 /* DiscussionsTableViewCell.swift */,
 			);
@@ -8507,6 +8510,7 @@
 				62E984A5B0B216EF4C06E037 /* CourseInfoTabInfoPresenter.swift in Sources */,
 				62E98E8B19788BBE5859D696 /* CourseInfoTabInfoProvider.swift in Sources */,
 				62E988775E581205F08D9163 /* CourseInfoTabInfoViewController.swift in Sources */,
+				2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */,
 				62E9841CE54BD9A985D64460 /* CourseInfoTabInfoViewModel.swift in Sources */,
 				2C87A7A424465B5900933CA4 /* ProfilesPersistenceService.swift in Sources */,
 				62E985AF6CAE757A348EFED2 /* CourseInfoTabInfoInputProtocol.swift in Sources */,
