@@ -715,11 +715,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
 // MARK: - DiscussionsInteractor: DiscussionsInputProtocol -
 
-extension DiscussionsInteractor: DiscussionsInputProtocol {}
-
-// MARK: - DiscussionsInteractor: WriteCommentOutputProtocol -
-
-extension DiscussionsInteractor: WriteCommentOutputProtocol {
+extension DiscussionsInteractor: DiscussionsInputProtocol {
     func handleCommentCreated(_ comment: Comment) {
         if let parentID = comment.parentID,
            let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {

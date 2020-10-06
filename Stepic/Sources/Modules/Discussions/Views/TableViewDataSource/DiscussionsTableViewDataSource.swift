@@ -1,48 +1,5 @@
 import UIKit
 
-// MARK: DiscussionsTableViewDataSourceDelegate: class -
-
-protocol DiscussionsTableViewDataSourceDelegate: AnyObject {
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didReplyForComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didLikeComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didDislikeComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectAvatar comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectSolution comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectLoadMoreRepliesForDiscussion discussion: DiscussionsDiscussionViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectComment comment: DiscussionsCommentViewModel,
-        at indexPath: IndexPath,
-        cell: UITableViewCell
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didRequestOpenURL url: URL
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didRequestOpenImage url: URL
-    )
-}
-
 // MARK: - DiscussionsTableViewDataSource: NSObject -
 
 final class DiscussionsTableViewDataSource: NSObject {
@@ -67,7 +24,7 @@ final class DiscussionsTableViewDataSource: NSObject {
         self.viewModels = viewModels
     }
 
-    func indexPath(of commentID: Comment.IdType) -> IndexPath? {
+    func indexPath(for commentID: Comment.IdType) -> IndexPath? {
         // Expected to have discussion id here
         if let discussionIndex = self.viewModels.firstIndex(where: { $0.id == commentID }) {
             return IndexPath(row: 0, section: discussionIndex)
@@ -332,13 +289,11 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
             return discussionPrototypeCell
         }
 
-        let reusableCell = tableView.dequeueReusableCell(
-            withIdentifier: DiscussionsTableViewCell.defaultReuseIdentifier
-        ) as? DiscussionsTableViewCell
-        reusableCell?.updateConstraintsIfNeeded()
+        let prototypeCell = DiscussionsTableViewCell()
+        prototypeCell.updateConstraintsIfNeeded()
 
-        self.discussionPrototypeCell = reusableCell
+        self.discussionPrototypeCell = prototypeCell
 
-        return self.discussionPrototypeCell.require()
+        return prototypeCell
     }
 }
