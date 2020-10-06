@@ -165,7 +165,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         }
     }
 
-    private func updateDiscussionsData(newData data: Discussions.DiscussionsViewData) {
+    private func updateDiscussionsData(newData data: Discussions.ViewData) {
         if data.discussions.isEmpty {
             self.showPlaceholder(for: .empty)
         } else {

@@ -9,7 +9,7 @@ enum Discussions {
     }
 
     /// Interactor -> presenter
-    struct DiscussionsResponseData {
+    struct ResponseData {
         let discussionProxy: DiscussionProxy
         let discussions: [Comment]
         let discussionsIDsFetchingMore: Set<Comment.IdType>
@@ -21,7 +21,7 @@ enum Discussions {
     }
 
     /// Presenter -> ViewController
-    struct DiscussionsViewData {
+    struct ViewData {
         let discussions: [DiscussionsDiscussionViewModel]
         let hasPreviousPage: Bool
         let hasNextPage: Bool
@@ -57,7 +57,7 @@ enum Discussions {
         struct Request {}
 
         struct Response {
-            let result: StepikResult<DiscussionsResponseData>
+            let result: StepikResult<ResponseData>
         }
 
         struct ViewModel {
@@ -72,7 +72,7 @@ enum Discussions {
         }
 
         struct Response {
-            let result: StepikResult<DiscussionsResponseData>
+            let result: StepikResult<ResponseData>
             let direction: PaginationDirection
         }
 
@@ -89,11 +89,11 @@ enum Discussions {
         }
 
         struct Response {
-            let result: DiscussionsResponseData
+            let result: ResponseData
         }
 
         struct ViewModel {
-            let data: DiscussionsViewData
+            let data: ViewData
         }
     }
 
@@ -140,22 +140,22 @@ enum Discussions {
     /// Show newly created comment
     enum CommentCreated {
         struct Response {
-            let result: DiscussionsResponseData
+            let result: ResponseData
         }
 
         struct ViewModel {
-            let data: DiscussionsViewData
+            let data: ViewData
         }
     }
 
     /// Show updated comment
     enum CommentUpdated {
         struct Response {
-            let result: DiscussionsResponseData
+            let result: ResponseData
         }
 
         struct ViewModel {
-            let data: DiscussionsViewData
+            let data: ViewData
         }
     }
 
@@ -166,7 +166,7 @@ enum Discussions {
         }
 
         struct Response {
-            let result: StepikResult<DiscussionsResponseData>
+            let result: StepikResult<ResponseData>
         }
 
         struct ViewModel {
@@ -181,11 +181,11 @@ enum Discussions {
         }
 
         struct Response {
-            let result: DiscussionsResponseData
+            let result: ResponseData
         }
 
         struct ViewModel {
-            let data: DiscussionsViewData
+            let data: ViewData
         }
     }
 
@@ -196,11 +196,11 @@ enum Discussions {
         }
 
         struct Response {
-            let result: DiscussionsResponseData
+            let result: ResponseData
         }
 
         struct ViewModel {
-            let data: DiscussionsViewData
+            let data: ViewData
         }
     }
 
@@ -252,11 +252,11 @@ enum Discussions {
         }
 
         struct Response {
-            let result: DiscussionsResponseData
+            let result: ResponseData
         }
 
         struct ViewModel {
-            let data: DiscussionsViewData
+            let data: ViewData
         }
     }
 
@@ -278,7 +278,7 @@ enum Discussions {
     enum ViewControllerState {
         case loading
         case error
-        case result(data: DiscussionsViewData)
+        case result(data: ViewData)
     }
 
     enum PaginationDirection {
@@ -287,7 +287,7 @@ enum Discussions {
     }
 
     enum PaginationState {
-        case result(data: DiscussionsViewData)
+        case result(data: ViewData)
         case error
     }
 }

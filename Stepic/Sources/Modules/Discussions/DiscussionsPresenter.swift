@@ -168,8 +168,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     // MARK: - Private API -
 
     private func makeDiscussionsData(
-        _ data: Discussions.DiscussionsResponseData
-    ) -> Discussions.DiscussionsViewData {
+        _ data: Discussions.ResponseData
+    ) -> Discussions.ViewData {
         let discussions = self.sortedDiscussions(
             data.discussions,
             discussionProxy: data.discussionProxy,
