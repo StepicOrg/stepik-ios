@@ -519,6 +519,8 @@
 		2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
 		2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */; };
+		2C572768252C7C2200C4C7C0 /* DiscussionsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */; };
+		2C57276D252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */; };
 		2C57B29F24092868008284F0 /* SubmissionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */; };
 		2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */; };
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
@@ -1934,6 +1936,8 @@
 		2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
 		2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBadgesView.swift; sourceTree = "<group>"; };
+		2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsVotesView.swift; sourceTree = "<group>"; };
+		2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBottomControlsView.swift; sourceTree = "<group>"; };
 		2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsPersistenceService.swift; sourceTree = "<group>"; };
 		2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsRepository.swift; sourceTree = "<group>"; };
 		2C5967EA23E7828800072800 /* SubmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionTests.swift; sourceTree = "<group>"; };
@@ -4544,8 +4548,10 @@
 			isa = PBXGroup;
 			children = (
 				2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */,
+				2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */,
 				62E987675DB3715DA52FD632 /* DiscussionsCellView.swift */,
 				62E9868D877E7305BF47AA42 /* DiscussionsTableViewCell.swift */,
+				2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */,
 			);
 			path = Discussion;
 			sourceTree = "<group>";
@@ -7981,6 +7987,7 @@
 				0805FE441F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
 				2CA3DAA32179C71500F43888 /* NotificationPermissionStatus.swift in Sources */,
 				2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */,
+				2C572768252C7C2200C4C7C0 /* DiscussionsVotesView.swift in Sources */,
 				08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
 				084F7AA71E76EF690088368A /* LastStep.swift in Sources */,
 				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
@@ -8657,6 +8664,7 @@
 				62E98779C46941AA1F710191 /* ContinueCourseOutputProtocol.swift in Sources */,
 				62E984E7020CA7E523C824EA /* ContinueCoursePresenter.swift in Sources */,
 				62E983C5C87C83700311EFCC /* ContinueCourseProvider.swift in Sources */,
+				2C57276D252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift in Sources */,
 				62E9808095F1F7BE4C6837DE /* ContinueCourseView.swift in Sources */,
 				62E98EF6C22D39234F586361 /* ContinueCourseViewController.swift in Sources */,
 				62E98E3CCD79D477A0088C73 /* ContinueCourseViewModel.swift in Sources */,

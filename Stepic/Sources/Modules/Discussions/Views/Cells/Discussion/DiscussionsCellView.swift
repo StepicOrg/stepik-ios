@@ -2,8 +2,6 @@ import Atributika
 import SnapKit
 import UIKit
 
-// swiftlint:disable file_length
-
 // MARK: Appearance -
 
 extension DiscussionsCellView {
@@ -28,25 +26,8 @@ extension DiscussionsCellView {
         let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
         let solutionControlInsets = LayoutInsets(top: 8)
 
-        let bottomControlsSpacing: CGFloat = 16
-        let bottomControlsSubgroupSpacing: CGFloat = 8
-        let bottomControlsInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
-        let bottomControlsHeight: CGFloat = 20
-
-        let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.stepikPrimaryText
-
-        let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let replyButtonTextColor = UIColor.stepikDarkVioletFixed
-
-        // Like & dislike
-        let voteImageSize = CGSize(width: 20, height: 20)
-        let voteImageFilledTintColor = UIColor.stepikAccent
-        let voteImageNormalTintColor = UIColor.stepikAccentAlpha50
-        let voteImageDisabledTintColor = UIColor.stepikAccentAlpha25
-        let voteButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let voteLikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
-        let voteDislikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
+        let bottomControlsViewInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
+        let bottomControlsViewHeight: CGFloat = 20
     }
 }
 
@@ -111,12 +92,7 @@ final class DiscussionsCellView: UIView {
     }()
 
     private lazy var textContentStackView: UIStackView = {
-        let stackView = UIStackView(
-            arrangedSubviews: [
-                self.textContentView,
-                self.solutionContainerView
-            ]
-        )
+        let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
     }()
@@ -127,81 +103,41 @@ final class DiscussionsCellView: UIView {
         return control
     }()
 
-    private lazy var solutionContainerView: UIView = {
-        let view = UIView()
-        view.isHidden = true
-        return view
-    }()
+    private lazy var solutionContainerView = UIView()
 
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.dateLabelFont
-        label.textColor = self.appearance.dateLabelTextColor
-        label.numberOfLines = 1
-        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        return label
-    }()
-
-    private lazy var replyButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.titleLabel?.font = self.appearance.replyButtonFont
-        button.setTitleColor(self.appearance.replyButtonTextColor, for: .normal)
-        button.setTitle(NSLocalizedString("Reply", comment: ""), for: .normal)
-        button.addTarget(self, action: #selector(self.replyButtonClicked), for: .touchUpInside)
-        return button
-    }()
-
-    private lazy var likeImageButton: ImageButton = {
-        let imageButton = ImageButton()
-        imageButton.imageSize = self.appearance.voteImageSize
-        imageButton.tintColor = self.appearance.voteImageNormalTintColor
-        imageButton.font = self.appearance.voteButtonFont
-        imageButton.title = "0"
-        imageButton.image = UIImage(named: "discussions-thumb-up")?.withRenderingMode(.alwaysTemplate)
-        imageButton.titleInsets = self.appearance.voteLikeButtonTitleInsets
-        imageButton.addTarget(self, action: #selector(self.likeImageButtonClicked), for: .touchUpInside)
-        return imageButton
-    }()
-
-    private lazy var dislikeImageButton: ImageButton = {
-        let imageButton = ImageButton()
-        imageButton.imageSize = self.appearance.voteImageSize
-        imageButton.tintColor = self.appearance.voteImageNormalTintColor
-        imageButton.font = self.appearance.voteButtonFont
-        imageButton.title = "0"
-        imageButton.image = UIImage(named: "discussions-thumb-down")?.withRenderingMode(.alwaysTemplate)
-        imageButton.titleInsets = self.appearance.voteDislikeButtonTitleInsets
-        imageButton.addTarget(self, action: #selector(self.dislikeImageButtonClicked), for: .touchUpInside)
-        return imageButton
-    }()
-
-    private lazy var bottomControlsStackView: UIStackView = {
-        let dateAndReplyStackView = UIStackView(arrangedSubviews: [self.dateLabel, self.replyButton])
-        dateAndReplyStackView.axis = .horizontal
-        dateAndReplyStackView.distribution = .fill
-        dateAndReplyStackView.spacing = self.appearance.bottomControlsSubgroupSpacing
-        dateAndReplyStackView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-
-        let votesStackView = UIStackView(arrangedSubviews: [self.likeImageButton, self.dislikeImageButton])
-        votesStackView.axis = .horizontal
-        votesStackView.distribution = .fill
-        votesStackView.spacing = self.appearance.bottomControlsSubgroupSpacing * 2
-
-        let containerStackView = UIStackView(arrangedSubviews: [dateAndReplyStackView, votesStackView])
-        containerStackView.axis = .horizontal
-        containerStackView.distribution = .equalSpacing
-        containerStackView.spacing = self.appearance.bottomControlsSpacing
-
-        return containerStackView
-    }()
+    private lazy var bottomControlsView = DiscussionsBottomControlsView()
 
     // Dynamically position nameLabel on based on badges visibility
     private var nameLabelTopToBottomOfBadgesConstraint: Constraint?
     private var nameLabelTopToTopOfAvatarConstraint: Constraint?
 
-    var onReplyClick: (() -> Void)?
-    var onLikeClick: (() -> Void)?
-    var onDislikeClick: (() -> Void)?
+    var onReplyClick: (() -> Void)? {
+        get {
+            self.bottomControlsView.onReplyClick
+        }
+        set {
+            self.bottomControlsView.onReplyClick = newValue
+        }
+    }
+
+    var onLikeClick: (() -> Void)? {
+        get {
+            self.bottomControlsView.onLikeClick
+        }
+        set {
+            self.bottomControlsView.onLikeClick = newValue
+        }
+    }
+
+    var onDislikeClick: (() -> Void)? {
+        get {
+            self.bottomControlsView.onDislikeClick
+        }
+        set {
+            self.bottomControlsView.onDislikeClick = newValue
+        }
+    }
+
     var onAvatarClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
     var onImageClick: ((URL) -> Void)?
@@ -231,21 +167,25 @@ final class DiscussionsCellView: UIView {
             return self.resetViews()
         }
 
-        self.nameLabel.text = viewModel.username
-        self.dateLabel.text = viewModel.formattedDate
-
-        self.updateBadges(userRoleBadgeText: viewModel.userRoleBadgeText, isPinned: viewModel.isPinned)
-        self.updateVotes(
-            likesCount: viewModel.likesCount,
-            dislikesCount: viewModel.dislikesCount,
-            canVote: viewModel.canVote,
-            voteValue: viewModel.voteValue
-        )
-        self.textContentView.processedContent = viewModel.processedContent
-
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
         }
+
+        self.updateBadges(userRoleBadgeText: viewModel.userRoleBadgeText, isPinned: viewModel.isPinned)
+
+        self.nameLabel.text = viewModel.username
+
+        self.textContentView.processedContent = viewModel.processedContent
+
+        self.bottomControlsView.configure(
+            .init(
+                formattedDateText: viewModel.formattedDate,
+                likesCount: viewModel.likesCount,
+                dislikesCount: viewModel.dislikesCount,
+                canVote: viewModel.canVote,
+                voteValue: viewModel.voteValue
+            )
+        )
 
         if let solution = viewModel.solution {
             self.solutionControl.update(state: .init(quizStatus: solution.status), title: solution.title)
@@ -269,19 +209,20 @@ final class DiscussionsCellView: UIView {
             + self.appearance.textContentContainerViewInsets.top
             + self.textContentView.intrinsicContentSize.height
             + solutionHeight
-            + self.appearance.bottomControlsInsets.top
-            + self.appearance.bottomControlsHeight
-            + self.appearance.bottomControlsInsets.bottom
+            + self.appearance.bottomControlsViewInsets.top
+            + self.appearance.bottomControlsViewHeight
+            + self.appearance.bottomControlsViewInsets.bottom
     }
 
     // MARK: - Private API
 
     private func resetViews() {
         self.nameLabel.text = nil
-        self.dateLabel.text = nil
         self.avatarImageView.reset()
         self.updateBadges(userRoleBadgeText: nil, isPinned: false)
-        self.updateVotes(likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
+        self.bottomControlsView.configure(
+            .init(formattedDateText: nil, likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
+        )
         self.textContentView.setText(nil)
     }
 
@@ -300,46 +241,7 @@ final class DiscussionsCellView: UIView {
         }
     }
 
-    private func updateVotes(likesCount: Int, dislikesCount: Int, canVote: Bool, voteValue: VoteValue?) {
-        self.likeImageButton.title = "\(likesCount)"
-        self.dislikeImageButton.title = "\(dislikesCount)"
-
-        if let voteValue = voteValue {
-            if voteValue == .epic {
-                self.likeImageButton.tintColor = self.appearance.voteImageFilledTintColor
-                self.dislikeImageButton.tintColor = self.appearance.voteImageNormalTintColor
-            } else {
-                self.dislikeImageButton.tintColor = self.appearance.voteImageFilledTintColor
-                self.likeImageButton.tintColor = self.appearance.voteImageNormalTintColor
-            }
-        } else if canVote {
-            self.likeImageButton.tintColor = self.appearance.voteImageNormalTintColor
-            self.dislikeImageButton.tintColor = self.appearance.voteImageNormalTintColor
-        } else {
-            self.likeImageButton.tintColor = self.appearance.voteImageDisabledTintColor
-            self.dislikeImageButton.tintColor = self.appearance.voteImageDisabledTintColor
-        }
-
-        self.likeImageButton.isEnabled = canVote
-        self.dislikeImageButton.isEnabled = canVote
-    }
-
     // MARK: Actions
-
-    @objc
-    private func replyButtonClicked() {
-        self.onReplyClick?()
-    }
-
-    @objc
-    private func likeImageButtonClicked() {
-        self.onLikeClick?()
-    }
-
-    @objc
-    private func dislikeImageButtonClicked() {
-        self.onDislikeClick?()
-    }
 
     @objc
     private func avatarButtonClicked() {
@@ -357,6 +259,7 @@ final class DiscussionsCellView: UIView {
 extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.badgesView.isHidden = true
+        self.solutionContainerView.isHidden = true
     }
 
     func addSubviews() {
@@ -364,9 +267,13 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.avatarOverlayButton)
         self.addSubview(self.badgesView)
         self.addSubview(self.nameLabel)
+
         self.addSubview(self.textContentStackView)
+        self.textContentStackView.addArrangedSubview(self.textContentView)
+        self.textContentStackView.addArrangedSubview(self.solutionContainerView)
         self.solutionContainerView.addSubview(self.solutionControl)
-        self.addSubview(self.bottomControlsStackView)
+
+        self.addSubview(self.bottomControlsView)
     }
 
     func makeConstraints() {
@@ -418,7 +325,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
             make.bottom
-                .lessThanOrEqualTo(self.bottomControlsStackView.snp.top)
+                .lessThanOrEqualTo(self.bottomControlsView.snp.top)
                 .offset(-self.appearance.textContentContainerViewInsets.bottom)
         }
 
@@ -429,12 +336,12 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.solutionControlHeight)
         }
 
-        self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.bottomControlsStackView.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsInsets.right)
-            make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsInsets.bottom)
-            make.height.equalTo(self.appearance.bottomControlsHeight)
+        self.bottomControlsView.translatesAutoresizingMaskIntoConstraints = false
+        self.bottomControlsView.snp.makeConstraints { make in
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsViewInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsViewInsets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsViewInsets.bottom)
+            make.height.equalTo(self.appearance.bottomControlsViewHeight)
         }
     }
 }
