@@ -165,7 +165,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         }
     }
 
-    private func updateDiscussionsData(newData data: Discussions.DiscussionsViewData) {
+    private func updateDiscussionsData(newData data: Discussions.ViewData) {
         if data.discussions.isEmpty {
             self.showPlaceholder(for: .empty)
         } else {
@@ -240,7 +240,7 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
 
             guard viewModel.direction == .top,
                   let commentID = lastVisibleCommentID,
-                  let indexPath = self.discussionsTableDelegate.indexPath(of: commentID) else {
+                  let indexPath = self.discussionsTableDelegate.indexPath(for: commentID) else {
                 return
             }
 
@@ -260,7 +260,7 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     }
 
     func displaySelectComment(viewModel: Discussions.SelectComment.ViewModel) {
-        if let indexPath = self.discussionsTableDelegate.indexPath(of: viewModel.commentID) {
+        if let indexPath = self.discussionsTableDelegate.indexPath(for: viewModel.commentID) {
             self.discussionsView?.scrollToRow(at: indexPath, at: .middle, animated: false)
         }
     }
@@ -384,28 +384,28 @@ extension DiscussionsViewController: DiscussionsViewDelegate {
 
 extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didReplyForComment comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doWriteCommentPresentation(request: .init(commentID: comment.id, presentationContext: .create))
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didLikeComment comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doCommentLike(request: .init(commentID: comment.id))
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didDislikeComment comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doCommentAbuse(request: .init(commentID: comment.id))
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didSelectAvatar comment: DiscussionsCommentViewModel
     ) {
         let assembly = NewProfileAssembly(otherUserID: comment.userID)
@@ -413,14 +413,14 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didSelectSolution comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doSolutionPresentation(request: .init(commentID: comment.id))
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didRequestOpenURL url: URL
     ) {
         WebControllerManager.shared.presentWebControllerWithURL(
@@ -433,21 +433,21 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didRequestOpenImage url: URL
     ) {
         FullscreenImageViewer.show(url: url, from: self)
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didSelectLoadMoreRepliesForDiscussion discussion: DiscussionsDiscussionViewModel
     ) {
         self.interactor.doNextRepliesLoad(request: .init(discussionID: discussion.id))
     }
 
     func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        _ dataSource: DiscussionsTableViewDataSource,
         didSelectComment comment: DiscussionsCommentViewModel,
         at indexPath: IndexPath,
         cell: UITableViewCell

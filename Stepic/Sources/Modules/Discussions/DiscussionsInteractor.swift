@@ -403,7 +403,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     private func fetchDiscussions(
         discussionProxyID: DiscussionProxy.IdType
-    ) -> Promise<Discussions.DiscussionsResponseData> {
+    ) -> Promise<Discussions.ResponseData> {
         // Reset data
         self.currentDiscussions = []
         self.currentReplies = [:]
@@ -451,7 +451,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         }
     }
 
-    private func makeDiscussionsData() -> Discussions.DiscussionsResponseData {
+    private func makeDiscussionsData() -> Discussions.ResponseData {
         let selectedDiscussionID: Comment.IdType? = {
             if case .scrollTo(let discussionID, _) = self.presentationContext {
                 return discussionID
@@ -459,7 +459,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             return nil
         }()
 
-        return Discussions.DiscussionsResponseData(
+        return Discussions.ResponseData(
             discussionProxy: self.currentDiscussionProxy.require(),
             discussions: self.currentDiscussions,
             discussionsIDsFetchingMore: self.discussionsIDsFetchingReplies,
@@ -715,11 +715,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
 // MARK: - DiscussionsInteractor: DiscussionsInputProtocol -
 
-extension DiscussionsInteractor: DiscussionsInputProtocol {}
-
-// MARK: - DiscussionsInteractor: WriteCommentOutputProtocol -
-
-extension DiscussionsInteractor: WriteCommentOutputProtocol {
+extension DiscussionsInteractor: DiscussionsInputProtocol {
     func handleCommentCreated(_ comment: Comment) {
         if let parentID = comment.parentID,
            let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {

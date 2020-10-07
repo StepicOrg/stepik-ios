@@ -1,48 +1,5 @@
 import UIKit
 
-// MARK: DiscussionsTableViewDataSourceDelegate: class -
-
-protocol DiscussionsTableViewDataSourceDelegate: AnyObject {
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didReplyForComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didLikeComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didDislikeComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectAvatar comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectSolution comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectLoadMoreRepliesForDiscussion discussion: DiscussionsDiscussionViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectComment comment: DiscussionsCommentViewModel,
-        at indexPath: IndexPath,
-        cell: UITableViewCell
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didRequestOpenURL url: URL
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didRequestOpenImage url: URL
-    )
-}
-
 // MARK: - DiscussionsTableViewDataSource: NSObject -
 
 final class DiscussionsTableViewDataSource: NSObject {
@@ -50,7 +7,7 @@ final class DiscussionsTableViewDataSource: NSObject {
 
     private var viewModels: [DiscussionsDiscussionViewModel]
     /// Caches cells heights
-    private var cellHeightByCommentID: [Comment.IdType: CGFloat] = [:]
+    private static var cellHeightCache: [Comment.IdType: CGFloat] = [:]
     /// Need for dynamic cell layouts & variable row heights where web view support not needed
     private var discussionPrototypeCell: DiscussionsTableViewCell?
     /// Accumulates multiple table view updates into one invocation
@@ -67,7 +24,7 @@ final class DiscussionsTableViewDataSource: NSObject {
         self.viewModels = viewModels
     }
 
-    func indexPath(of commentID: Comment.IdType) -> IndexPath? {
+    func indexPath(for commentID: Comment.IdType) -> IndexPath? {
         // Expected to have discussion id here
         if let discussionIndex = self.viewModels.firstIndex(where: { $0.id == commentID }) {
             return IndexPath(row: 0, section: discussionIndex)
@@ -149,7 +106,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
 
         cell.onContentLoaded = { [weak self, weak cell, weak tableView] in
             if let strongSelf = self, let strongCell = cell, let strongTableView = tableView {
-                let cellHeight = strongCell.calculateCellHeight(maxPreferredWidth: strongTableView.bounds.width)
+                let cellHeight = strongCell.calculateCellHeight(width: strongTableView.bounds.width)
                 strongSelf.updateCellHeight(cellHeight, commentID: commentID, tableView: strongTableView)
             }
         }
@@ -219,24 +176,26 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         )
 
         if !commentViewModel.isWebViewSupportNeeded {
-            self.cellHeightByCommentID[commentID] = cell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+            Self.cellHeightCache[commentID] = cell.calculateCellHeight(width: tableView.bounds.width)
         }
     }
 
     private func updateCellHeight(_ newHeight: CGFloat, commentID id: Int, tableView: UITableView) {
-        guard self.cellHeightByCommentID[id] != newHeight else {
+        guard Self.cellHeightCache[id, default: 0] < newHeight else {
             return
         }
 
-        self.cellHeightByCommentID[id] = newHeight
+        Self.cellHeightCache[id] = newHeight
 
         let workItem = DispatchWorkItem { [weak tableView] in
             guard let strongTableView = tableView else {
                 return
             }
 
-            strongTableView.beginUpdates()
-            strongTableView.endUpdates()
+            UIView.performWithoutAnimation {
+                strongTableView.beginUpdates()
+                strongTableView.endUpdates()
+            }
         }
 
         self.pendingTableViewUpdateWorkItem?.cancel()
@@ -261,11 +220,9 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                     + DiscussionsLoadMoreTableViewCell.Appearance.separatorHeight
             }
 
-            guard let comment = self.getCommentViewModel(at: indexPath) else {
-                return Self.estimatedRowHeight
-            }
+            let comment = self.getCommentViewModel(at: indexPath)
 
-            if let cellHeight = self.cellHeightByCommentID[comment.id] {
+            if let cellHeight = Self.cellHeightCache[comment.id] {
                 return cellHeight
             }
 
@@ -274,8 +231,8 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 self.configureDiscussionCell(prototypeCell, at: indexPath, tableView: tableView)
                 prototypeCell.layoutIfNeeded()
 
-                let cellHeight = prototypeCell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
-                self.cellHeightByCommentID[comment.id] = cellHeight
+                let cellHeight = prototypeCell.calculateCellHeight(width: tableView.bounds.width)
+                Self.cellHeightCache[comment.id] = cellHeight
 
                 return cellHeight
             }
@@ -300,10 +257,10 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 self,
                 didSelectLoadMoreRepliesForDiscussion: self.viewModels[indexPath.section]
             )
-        } else if let selectedComment = self.getCommentViewModel(at: indexPath) {
+        } else {
             self.delegate?.discussionsTableViewDataSource(
                 self,
-                didSelectComment: selectedComment,
+                didSelectComment: self.getCommentViewModel(at: indexPath),
                 at: indexPath,
                 cell: selectedCell
             )
@@ -312,19 +269,17 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is DiscussionsTableViewCell {
-            self.lastVisibleCommentID = self.getCommentViewModel(at: indexPath)?.id
+            self.lastVisibleCommentID = self.getCommentViewModel(at: indexPath).id
         }
     }
 
     // MARK: Private helpers
 
-    private func getCommentViewModel(at indexPath: IndexPath) -> DiscussionsCommentViewModel? {
+    private func getCommentViewModel(at indexPath: IndexPath) -> DiscussionsCommentViewModel {
         if indexPath.row == Self.parentDiscussionRowIndex {
-            return self.viewModels[safe: indexPath.section]?.comment
+            return self.viewModels[indexPath.section].comment
         }
-
-        return self.viewModels[safe: indexPath.section]?
-            .replies[safe: indexPath.row - Self.parentDiscussionInset]
+        return self.viewModels[indexPath.section].replies[indexPath.row - Self.parentDiscussionInset]
     }
 
     private func getDiscussionPrototypeCell(tableView: UITableView) -> DiscussionsTableViewCell {
@@ -332,13 +287,11 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
             return discussionPrototypeCell
         }
 
-        let reusableCell = tableView.dequeueReusableCell(
-            withIdentifier: DiscussionsTableViewCell.defaultReuseIdentifier
-        ) as? DiscussionsTableViewCell
-        reusableCell?.updateConstraintsIfNeeded()
+        let prototypeCell = DiscussionsTableViewCell()
+        prototypeCell.updateConstraintsIfNeeded()
 
-        self.discussionPrototypeCell = reusableCell
+        self.discussionPrototypeCell = prototypeCell
 
-        return self.discussionPrototypeCell.require()
+        return prototypeCell
     }
 }
