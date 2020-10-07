@@ -153,8 +153,13 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
             separatorFollowsDepth: viewModel.separatorFollowsDepth
         )
         self.updateSeparator(newStyle: viewModel.separatorStyle)
+
         self.shouldHighlightBackground = viewModel.isSelected
         self.cellView.configure(viewModel: viewModel.comment)
+
+        if case .text = viewModel.comment.processedContent {
+            self.onContentLoaded?()
+        }
     }
 
     func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
