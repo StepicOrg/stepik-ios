@@ -7,8 +7,10 @@ extension DiscussionsTableViewCell {
     enum Appearance {
         static let separatorColor = UIColor.stepikSeparator
 
-        static let selectedLightBackgroundColor = UIColor.stepikExtraLightVioletFixed
-        static let selectedDarkBackgroundColor = UIColor.stepikSecondaryBackground
+        static let selectedBackgroundColor = UIColor.dynamic(
+            light: .stepikExtraLightVioletFixed,
+            dark: .stepikSecondaryBackground
+        )
         static let defaultBackgroundColor = UIColor.stepikBackground
 
         static let leadingOffsetDiscussion: CGFloat = 0
@@ -232,9 +234,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
 
     private func getBackgroundColor() -> UIColor {
         if self.shouldHighlightBackground {
-            return self.isDarkInterfaceStyle
-                ? Appearance.selectedDarkBackgroundColor
-                : Appearance.selectedLightBackgroundColor
+            return Appearance.selectedBackgroundColor
         } else {
             return Appearance.defaultBackgroundColor
         }

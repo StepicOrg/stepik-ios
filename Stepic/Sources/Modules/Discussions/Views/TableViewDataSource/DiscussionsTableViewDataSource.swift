@@ -181,7 +181,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
     }
 
     private func updateCellHeight(_ newHeight: CGFloat, commentID id: Int, tableView: UITableView) {
-        guard self.cellHeightByCommentID[id] != newHeight else {
+        guard self.cellHeightByCommentID[id, default: 0] < newHeight else {
             return
         }
 
@@ -192,8 +192,10 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
                 return
             }
 
-            strongTableView.beginUpdates()
-            strongTableView.endUpdates()
+            UIView.performWithoutAnimation {
+                strongTableView.beginUpdates()
+                strongTableView.endUpdates()
+            }
         }
 
         self.pendingTableViewUpdateWorkItem?.cancel()
@@ -218,21 +220,21 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                     + DiscussionsLoadMoreTableViewCell.Appearance.separatorHeight
             }
 
-            guard let comment = self.getCommentViewModel(at: indexPath) else {
-                return Self.estimatedRowHeight
-            }
+            let commentViewModel = self.getCommentViewModel(at: indexPath)
 
-            if let cellHeight = self.cellHeightByCommentID[comment.id] {
+            if let cellHeight = self.cellHeightByCommentID[commentViewModel.id] {
                 return cellHeight
             }
 
-            if !comment.isWebViewSupportNeeded {
+            if !commentViewModel.isWebViewSupportNeeded {
                 let prototypeCell = self.getDiscussionPrototypeCell(tableView: tableView)
                 self.configureDiscussionCell(prototypeCell, at: indexPath, tableView: tableView)
-                prototypeCell.layoutIfNeeded()
 
-                let cellHeight = prototypeCell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
-                self.cellHeightByCommentID[comment.id] = cellHeight
+                prototypeCell.layoutIfNeeded()
+                prototypeCell.invalidateIntrinsicContentSize()
+
+                let cellHeight = prototypeCell.intrinsicContentSize.height
+                self.cellHeightByCommentID[commentViewModel.id] = cellHeight
 
                 return cellHeight
             }
@@ -257,10 +259,10 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 self,
                 didSelectLoadMoreRepliesForDiscussion: self.viewModels[indexPath.section]
             )
-        } else if let selectedComment = self.getCommentViewModel(at: indexPath) {
+        } else {
             self.delegate?.discussionsTableViewDataSource(
                 self,
-                didSelectComment: selectedComment,
+                didSelectComment: self.getCommentViewModel(at: indexPath),
                 at: indexPath,
                 cell: selectedCell
             )
@@ -269,19 +271,17 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell is DiscussionsTableViewCell {
-            self.lastVisibleCommentID = self.getCommentViewModel(at: indexPath)?.id
+            self.lastVisibleCommentID = self.getCommentViewModel(at: indexPath).id
         }
     }
 
     // MARK: Private helpers
 
-    private func getCommentViewModel(at indexPath: IndexPath) -> DiscussionsCommentViewModel? {
+    private func getCommentViewModel(at indexPath: IndexPath) -> DiscussionsCommentViewModel {
         if indexPath.row == Self.parentDiscussionRowIndex {
-            return self.viewModels[safe: indexPath.section]?.comment
+            return self.viewModels[indexPath.section].comment
         }
-
-        return self.viewModels[safe: indexPath.section]?
-            .replies[safe: indexPath.row - Self.parentDiscussionInset]
+        return self.viewModels[indexPath.section].replies[indexPath.row - Self.parentDiscussionInset]
     }
 
     private func getDiscussionPrototypeCell(tableView: UITableView) -> DiscussionsTableViewCell {

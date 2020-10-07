@@ -18,10 +18,9 @@ extension DiscussionsCellView {
         let nameLabelTextColor = UIColor.stepikPrimaryText
         let nameLabelHeight: CGFloat = 18
 
-        let textContentContainerViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
-        let textContentTextLabelFontSize: CGFloat = 14
-        let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
-        let textContentTextLabelTextColor = UIColor.stepikPrimaryText
+        let processedContentViewLabelFont = UIFont.systemFont(ofSize: 14)
+        let processedContentViewLabelTextColor = UIColor.stepikPrimaryText
+        let textContentStackViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
 
         let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
         let solutionControlInsets = LayoutInsets(top: 8)
@@ -49,7 +48,6 @@ final class DiscussionsCellView: UIView {
         return button
     }()
 
-
     private lazy var badgesView = DiscussionsBadgesView()
 
     private lazy var nameLabel: UILabel = {
@@ -60,10 +58,10 @@ final class DiscussionsCellView: UIView {
         return label
     }()
 
-    private lazy var textContentView: ProcessedContentView = {
+    private lazy var processedContentView: ProcessedContentView = {
         let appearance = ProcessedContentView.Appearance(
-            labelFont: self.appearance.textContentTextLabelFont,
-            labelTextColor: self.appearance.textContentTextLabelTextColor,
+            labelFont: self.appearance.processedContentViewLabelFont,
+            labelTextColor: self.appearance.processedContentViewLabelTextColor,
             activityIndicatorViewStyle: .stepikGray,
             activityIndicatorViewColor: nil,
             insets: LayoutInsets(insets: .zero),
@@ -73,8 +71,8 @@ final class DiscussionsCellView: UIView {
         let contentProcessor = ContentProcessor(
             rules: ContentProcessor.defaultRules,
             injections: ContentProcessor.defaultInjections + [
-                FontInjection(font: self.appearance.textContentTextLabelFont),
-                TextColorInjection(dynamicColor: self.appearance.textContentTextLabelTextColor)
+                FontInjection(font: self.appearance.processedContentViewLabelFont),
+                TextColorInjection(dynamicColor: self.appearance.processedContentViewLabelTextColor)
             ]
         )
 
@@ -83,7 +81,7 @@ final class DiscussionsCellView: UIView {
             appearance: appearance,
             contentProcessor: contentProcessor,
             htmlToAttributedStringConverter: HTMLToAttributedStringConverter(
-                font: self.appearance.textContentTextLabelFont
+                font: self.appearance.processedContentViewLabelFont
             )
         )
         processedContentView.delegate = self
@@ -175,7 +173,7 @@ final class DiscussionsCellView: UIView {
 
         self.nameLabel.text = viewModel.username
 
-        self.textContentView.processedContent = viewModel.processedContent
+        self.processedContentView.processedContent = viewModel.processedContent
 
         self.bottomControlsView.configure(
             .init(
@@ -223,7 +221,7 @@ final class DiscussionsCellView: UIView {
         self.bottomControlsView.configure(
             .init(formattedDateText: nil, likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
         )
-        self.textContentView.setText(nil)
+        self.processedContentView.setText(nil)
     }
 
     private func updateBadges(userRoleBadgeText: String?, isPinned: Bool) {
@@ -269,7 +267,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.nameLabel)
 
         self.addSubview(self.textContentStackView)
-        self.textContentStackView.addArrangedSubview(self.textContentView)
+        self.textContentStackView.addArrangedSubview(self.processedContentView)
         self.textContentStackView.addArrangedSubview(self.solutionContainerView)
         self.solutionContainerView.addSubview(self.solutionControl)
 
@@ -321,12 +319,12 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.textContentStackView.snp.makeConstraints { make in
             make.top
                 .greaterThanOrEqualTo(self.nameLabel.snp.bottom)
-                .offset(self.appearance.textContentContainerViewInsets.top)
+                .offset(self.appearance.textContentStackViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.textContentStackViewInsets.right)
             make.bottom
                 .lessThanOrEqualTo(self.bottomControlsView.snp.top)
-                .offset(-self.appearance.textContentContainerViewInsets.bottom)
+                .offset(-self.appearance.textContentStackViewInsets.bottom)
         }
 
         self.solutionControl.translatesAutoresizingMaskIntoConstraints = false
@@ -338,7 +336,9 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 
         self.bottomControlsView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomControlsView.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsViewInsets.left)
+            make.leading
+                .equalTo(self.avatarImageView.snp.trailing)
+                .offset(self.appearance.bottomControlsViewInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsViewInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsViewInsets.bottom)
             make.height.equalTo(self.appearance.bottomControlsViewHeight)
