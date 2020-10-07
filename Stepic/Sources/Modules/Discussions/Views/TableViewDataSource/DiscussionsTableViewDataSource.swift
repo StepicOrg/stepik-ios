@@ -106,7 +106,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
 
         cell.onContentLoaded = { [weak self, weak cell, weak tableView] in
             if let strongSelf = self, let strongCell = cell, let strongTableView = tableView {
-                let cellHeight = strongCell.calculateCellHeight(maxPreferredWidth: strongTableView.bounds.width)
+                let cellHeight = strongCell.calculateCellHeight(width: strongTableView.bounds.width)
                 strongSelf.updateCellHeight(cellHeight, commentID: commentID, tableView: strongTableView)
             }
         }
@@ -176,7 +176,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         )
 
         if !commentViewModel.isWebViewSupportNeeded {
-            Self.cellHeightCache[commentID] = cell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+            Self.cellHeightCache[commentID] = cell.calculateCellHeight(width: tableView.bounds.width)
         }
     }
 
@@ -231,7 +231,7 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 self.configureDiscussionCell(prototypeCell, at: indexPath, tableView: tableView)
                 prototypeCell.layoutIfNeeded()
 
-                let cellHeight = prototypeCell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+                let cellHeight = prototypeCell.calculateCellHeight(width: tableView.bounds.width)
                 Self.cellHeightCache[comment.id] = cellHeight
 
                 return cellHeight

@@ -29,7 +29,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
                 return
             }
 
-            let newHeight = strongSelf.calculateCellHeight(maxPreferredWidth: strongSelf.cellView.bounds.width)
+            let newHeight = strongSelf.calculateCellHeight(width: strongSelf.cellView.bounds.width)
             strongSelf.onNewHeightUpdate?(newHeight)
         }
         return cellView
@@ -156,19 +156,15 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
 
         self.shouldHighlightBackground = viewModel.isSelected
         self.cellView.configure(viewModel: viewModel.comment)
-
-        if case .text = viewModel.comment.processedContent {
-            self.onContentLoaded?()
-        }
     }
 
-    func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let leadingOffset = self.cellViewLeadingConstraint?.layoutConstraints.first?.constant ?? 0
+    func calculateCellHeight(width: CGFloat) -> CGFloat {
+        let leadingOffsetValue = self.cellViewLeadingConstraint?.layoutConstraints.first?.constant ?? 0
 
-        let cellViewWidth = maxPreferredWidth - leadingOffset
-        let cellViewHeight = self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth)
+        let cellViewWidth = width - leadingOffsetValue
+        let cellViewSize = self.cellView.sizeThatFits(CGSize(width: cellViewWidth, height: .infinity))
 
-        return cellViewHeight + self.separatorStyle.height
+        return ceil(cellViewSize.height + self.separatorStyle.height)
     }
 
     // MARK: - Private API

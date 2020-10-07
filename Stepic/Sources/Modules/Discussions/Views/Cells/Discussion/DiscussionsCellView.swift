@@ -158,6 +158,40 @@ final class DiscussionsCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let userInfoHeight = (self.badgesView.isHidden ? 0 : self.appearance.badgesViewHeight)
+            + (self.badgesView.isHidden ? 0 : self.appearance.nameLabelInsets.top)
+            + self.appearance.nameLabelHeight
+
+        let solutionHeight = self.solutionContainerView.isHidden
+            ? 0
+            : self.appearance.solutionControlInsets.top + self.appearance.solutionControlHeight
+
+        let textContentHeight: CGFloat = {
+            let textContentWidth = size.width
+                - self.appearance.avatarImageViewInsets.left
+                - self.appearance.avatarImageViewSize.width
+                - self.appearance.nameLabelInsets.left
+                - self.appearance.textContentStackViewInsets.right
+
+            let specifiedSize = CGSize(width: textContentWidth, height: size.height)
+            let bestFitsSize = self.processedContentView.sizeThatFits(specifiedSize)
+
+            return bestFitsSize.height
+        }()
+
+        let height = self.appearance.avatarImageViewInsets.top
+            + userInfoHeight
+            + self.appearance.textContentStackViewInsets.top
+            + textContentHeight
+            + solutionHeight
+            + self.appearance.bottomControlsViewInsets.top
+            + self.appearance.bottomControlsViewHeight
+            + self.appearance.bottomControlsViewInsets.bottom
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: ceil(height))
+    }
+
     // MARK: - Public API
 
     func configure(viewModel: DiscussionsCommentViewModel?) {
@@ -193,25 +227,6 @@ final class DiscussionsCellView: UIView {
         }
     }
 
-    func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let userInfoHeight = (self.badgesView.isHidden ? 0 : self.appearance.badgesViewHeight)
-            + (self.badgesView.isHidden ? 0 : self.appearance.nameLabelInsets.top)
-            + self.appearance.nameLabelHeight
-
-        let solutionHeight = self.solutionContainerView.isHidden
-            ? 0
-            : self.appearance.solutionControlInsets.top + self.appearance.solutionControlHeight
-
-        return self.appearance.avatarImageViewInsets.top
-            + userInfoHeight
-            + self.appearance.textContentStackViewInsets.top
-            + self.getTextContentHeight(maxPreferredWidth: maxPreferredWidth)
-            + solutionHeight
-            + self.appearance.bottomControlsViewInsets.top
-            + self.appearance.bottomControlsViewHeight
-            + self.appearance.bottomControlsViewInsets.bottom
-    }
-
     // MARK: - Private API
 
     private func resetViews() {
@@ -237,22 +252,6 @@ final class DiscussionsCellView: UIView {
             self.nameLabelTopToTopOfAvatarConstraint?.deactivate()
             self.nameLabelTopToBottomOfBadgesConstraint?.activate()
         }
-    }
-
-    private func getTextContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        if case .text = self.processedContentView.processedContent {
-            let remainingTextContentWidth = maxPreferredWidth
-                - self.appearance.avatarImageViewInsets.left
-                - self.appearance.avatarImageViewSize.width
-                - self.appearance.nameLabelInsets.left
-                - self.appearance.textContentStackViewInsets.right
-
-            let specifiedSize = CGSize(width: remainingTextContentWidth, height: .infinity)
-            let bestFitsSize = self.processedContentView.sizeThatFits(specifiedSize)
-
-            return bestFitsSize.height
-        }
-        return self.processedContentView.intrinsicContentSize.height
     }
 
     // MARK: Actions
