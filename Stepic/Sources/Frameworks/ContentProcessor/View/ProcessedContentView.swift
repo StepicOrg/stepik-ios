@@ -189,6 +189,12 @@ final class ProcessedContentView: UIView {
         return CGSize(width: width, height: height)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+        self.updateContentViewHeightConstraintOffset()
+    }
+
     // MARK: Public API
 
     func setText(_ text: String?) {
