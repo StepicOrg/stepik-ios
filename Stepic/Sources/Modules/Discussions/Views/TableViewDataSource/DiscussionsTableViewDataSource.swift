@@ -7,7 +7,7 @@ final class DiscussionsTableViewDataSource: NSObject {
 
     private var viewModels: [DiscussionsDiscussionViewModel]
     /// Caches cells heights
-    private var cellHeightByCommentID: [Comment.IdType: CGFloat] = [:]
+    private static var cellHeightCache: [Comment.IdType: CGFloat] = [:]
     /// Need for dynamic cell layouts & variable row heights where web view support not needed
     private var discussionPrototypeCell: DiscussionsTableViewCell?
     /// Accumulates multiple table view updates into one invocation
@@ -176,16 +176,16 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         )
 
         if !commentViewModel.isWebViewSupportNeeded {
-            self.cellHeightByCommentID[commentID] = cell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+            Self.cellHeightCache[commentID] = cell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
         }
     }
 
     private func updateCellHeight(_ newHeight: CGFloat, commentID id: Int, tableView: UITableView) {
-        guard self.cellHeightByCommentID[id, default: 0] < newHeight else {
+        guard Self.cellHeightCache[id, default: 0] < newHeight else {
             return
         }
 
-        self.cellHeightByCommentID[id] = newHeight
+        Self.cellHeightCache[id] = newHeight
 
         let workItem = DispatchWorkItem { [weak tableView] in
             guard let strongTableView = tableView else {
@@ -222,7 +222,7 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
 
             let comment = self.getCommentViewModel(at: indexPath)
 
-            if let cellHeight = self.cellHeightByCommentID[comment.id] {
+            if let cellHeight = Self.cellHeightCache[comment.id] {
                 return cellHeight
             }
 
@@ -232,7 +232,7 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 prototypeCell.layoutIfNeeded()
 
                 let cellHeight = prototypeCell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
-                self.cellHeightByCommentID[comment.id] = cellHeight
+                Self.cellHeightCache[comment.id] = cellHeight
 
                 return cellHeight
             }
