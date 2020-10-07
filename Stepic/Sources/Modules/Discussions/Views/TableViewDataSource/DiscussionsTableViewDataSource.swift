@@ -220,21 +220,19 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                     + DiscussionsLoadMoreTableViewCell.Appearance.separatorHeight
             }
 
-            let commentViewModel = self.getCommentViewModel(at: indexPath)
+            let comment = self.getCommentViewModel(at: indexPath)
 
-            if let cellHeight = self.cellHeightByCommentID[commentViewModel.id] {
+            if let cellHeight = self.cellHeightByCommentID[comment.id] {
                 return cellHeight
             }
 
-            if !commentViewModel.isWebViewSupportNeeded {
+            if !comment.isWebViewSupportNeeded {
                 let prototypeCell = self.getDiscussionPrototypeCell(tableView: tableView)
                 self.configureDiscussionCell(prototypeCell, at: indexPath, tableView: tableView)
-
                 prototypeCell.layoutIfNeeded()
-                prototypeCell.invalidateIntrinsicContentSize()
 
-                let cellHeight = prototypeCell.intrinsicContentSize.height
-                self.cellHeightByCommentID[commentViewModel.id] = cellHeight
+                let cellHeight = prototypeCell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+                self.cellHeightByCommentID[comment.id] = cellHeight
 
                 return cellHeight
             }

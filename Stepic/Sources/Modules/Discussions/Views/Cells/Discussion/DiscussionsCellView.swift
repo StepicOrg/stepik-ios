@@ -204,8 +204,8 @@ final class DiscussionsCellView: UIView {
 
         return self.appearance.avatarImageViewInsets.top
             + userInfoHeight
-            + self.appearance.textContentContainerViewInsets.top
-            + self.textContentView.intrinsicContentSize.height
+            + self.appearance.textContentStackViewInsets.top
+            + self.getTextContentHeight(maxPreferredWidth: maxPreferredWidth)
             + solutionHeight
             + self.appearance.bottomControlsViewInsets.top
             + self.appearance.bottomControlsViewHeight
@@ -237,6 +237,22 @@ final class DiscussionsCellView: UIView {
             self.nameLabelTopToTopOfAvatarConstraint?.deactivate()
             self.nameLabelTopToBottomOfBadgesConstraint?.activate()
         }
+    }
+
+    private func getTextContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
+        if case .text = self.processedContentView.processedContent {
+            let remainingTextContentWidth = maxPreferredWidth
+                - self.appearance.avatarImageViewInsets.left
+                - self.appearance.avatarImageViewSize.width
+                - self.appearance.nameLabelInsets.left
+                - self.appearance.textContentStackViewInsets.right
+
+            let specifiedSize = CGSize(width: remainingTextContentWidth, height: .infinity)
+            let bestFitsSize = self.processedContentView.sizeThatFits(specifiedSize)
+
+            return bestFitsSize.height
+        }
+        return self.processedContentView.intrinsicContentSize.height
     }
 
     // MARK: Actions
