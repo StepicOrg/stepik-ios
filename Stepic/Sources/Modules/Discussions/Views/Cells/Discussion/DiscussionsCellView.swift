@@ -81,7 +81,8 @@ final class DiscussionsCellView: UIView {
             appearance: appearance,
             contentProcessor: contentProcessor,
             htmlToAttributedStringConverter: HTMLToAttributedStringConverter(
-                font: self.appearance.processedContentViewLabelFont
+                font: self.appearance.processedContentViewLabelFont,
+                tagTransformers: [.brTransformer]
             )
         )
         processedContentView.delegate = self
