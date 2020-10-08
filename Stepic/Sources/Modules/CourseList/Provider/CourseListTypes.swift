@@ -62,17 +62,20 @@ final class CourseListServicesFactory {
     private let coursesAPI: CoursesAPI
     private let userCoursesAPI: UserCoursesAPI
     private let searchResultsAPI: SearchResultsAPI
+    private let visitedCoursesAPI: VisitedCoursesAPI
 
     init(
         type: CourseListType,
         coursesAPI: CoursesAPI = CoursesAPI(),
         userCoursesAPI: UserCoursesAPI = UserCoursesAPI(),
-        searchResultsAPI: SearchResultsAPI = SearchResultsAPI()
+        searchResultsAPI: SearchResultsAPI = SearchResultsAPI(),
+        visitedCoursesAPI: VisitedCoursesAPI = VisitedCoursesAPI()
     ) {
         self.type = type
         self.coursesAPI = coursesAPI
         self.userCoursesAPI = userCoursesAPI
         self.searchResultsAPI = searchResultsAPI
+        self.visitedCoursesAPI = visitedCoursesAPI
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
@@ -146,11 +149,11 @@ final class CourseListServicesFactory {
             )
         } else if let type = self.type as? TeacherCourseListType {
             return TeacherCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
-        } else if self.type is VisitedCourseListType {
-            let persistenceService = self.makePersistenceService() as? VisitedCourseListPersistenceServiceProtocol
+        } else if let type = self.type as? VisitedCourseListType {
             return VisitedCourseListNetworkService(
-                visitedCourseListPersistenceService: persistenceService.require(),
-                coursesAPI: self.coursesAPI
+                type: type,
+                coursesAPI: self.coursesAPI,
+                visitedCoursesAPI: self.visitedCoursesAPI
             )
         } else {
             fatalError("Unsupported course list type")
