@@ -14,12 +14,16 @@ import UIKit
 extension TextStoryView {
     struct Appearance {
         let titleLabelFont = Typography.largeTitleFont
-        let titleLabelInsets = LayoutInsets(left: 16, bottom: 8, right: 16)
 
         let textLabelFont = Typography.title2Font
-        let textLabelInsets = LayoutInsets(left: 16, bottom: 16, right: 16)
 
         let buttonFont = Typography.bodyFont
+        let buttonHeight: CGFloat = 44
+
+        let elementsStackViewInsets = LayoutInsets(top: 68, left: 16, bottom: 60, right: 16)
+        let elementsStackViewSpacing: CGFloat = 16
+
+        let contentStackViewSpacing: CGFloat = 36
     }
 }
 
@@ -32,11 +36,19 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     var completion: (() -> Void)?
     weak var urlNavigationDelegate: StoryURLNavigationDelegate?
 
-    private var elementsStackView: UIStackView?
     private var imagePath: String = ""
     private var storyPart: TextStoryPart?
 
     private let analytics: Analytics = StepikAnalytics.shared
+
+    private lazy var elementsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.elementsStackViewSpacing
+        return stackView
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,105 +59,97 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         self.imagePath = storyPart.imagePath
         self.urlNavigationDelegate = urlNavigationDelegate
 
-        var storyContentViews: [UIView] = []
-        if let text = storyPart.text {
-            storyContentViews += [self.makeTextContainerView(text: text)]
+        self.setupElementsStackView()
+
+        let topStackView = self.makeContentStackView()
+        let bottomStackView = self.makeContentStackView()
+
+        if let textModel = storyPart.text {
+            if textModel.title != nil {
+                let storyTitleView = self.makeTitleView(textModel: textModel)
+                topStackView.addArrangedSubview(storyTitleView)
+            }
+
+            if textModel.text != nil {
+                let storyTextView = self.makeTextView(textModel: textModel)
+                bottomStackView.addArrangedSubview(storyTextView)
+            }
         }
+
         if let button = storyPart.button {
-            storyContentViews += [self.makeButtonView(button: button)]
+            let storyButtonView = self.makeButtonView(button: button)
+            bottomStackView.addArrangedSubview(storyButtonView)
         }
 
-        let stackView = UIStackView(arrangedSubviews: storyContentViews)
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.axis = .vertical
-        stackView.spacing = 16
-
-        self.addSubview(stackView)
-        // TODO: Check for translatesAutoresizingMaskIntoConstraints
-        stackView.snp.makeConstraints { make in
-            make.leadingMargin.trailingMargin.equalTo(self)
-            make.bottomMargin.equalTo(self).offset(-12)
-        }
-
-        self.elementsStackView = stackView
-        self.elementsStackView?.isHidden = true
+        self.elementsStackView.addArrangedSubview(topStackView)
+        self.elementsStackView.addArrangedSubview(bottomStackView)
+        self.elementsStackView.isHidden = true
 
         self.storyPart = storyPart
     }
 
-    private func makeTextContainerView(text textModel: TextStoryPart.Text) -> UIView {
-        let containerView = UIView()
-        var views: [UIView] = []
-
-        if let text = textModel.text {
-            let label = UILabel()
-            label.text = text
-            label.textColor = textModel.textColor
-            label.font = self.appearance.textLabelFont
-            label.numberOfLines = 0
-
-            containerView.addSubview(label)
-            // TODO: Check for translatesAutoresizingMaskIntoConstraints
-            label.snp.makeConstraints { make in
-                make.leading.equalTo(containerView).offset(self.appearance.textLabelInsets.left)
-                make.bottom.equalTo(containerView).offset(-self.appearance.textLabelInsets.bottom)
-                make.trailing.equalTo(containerView).offset(-self.appearance.textLabelInsets.right)
-            }
-
-            views += [label]
+    private func setupElementsStackView() {
+        self.addSubview(self.elementsStackView)
+        self.elementsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.elementsStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(self.appearance.elementsStackViewInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.elementsStackViewInsets.left)
+            make.bottom.equalToSuperview().offset(-self.appearance.elementsStackViewInsets.bottom)
+            make.trailing.equalToSuperview().offset(-self.appearance.elementsStackViewInsets.right)
         }
+    }
 
-        if let title = textModel.title {
-            let label = UILabel()
-            label.text = title
-            label.textColor = textModel.textColor
-            label.font = self.appearance.titleLabelFont
-            label.numberOfLines = 0
+    private func makeContentStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.contentStackViewSpacing
+        return stackView
+    }
 
-            containerView.addSubview(label)
-            // TODO: Check for translatesAutoresizingMaskIntoConstraints
-            label.snp.makeConstraints { make in
-                make.leading.equalTo(containerView).offset(self.appearance.titleLabelInsets.left)
-                make.trailing.equalTo(containerView).offset(-self.appearance.titleLabelInsets.right)
-                if let lastView = views.last {
-                    make.bottom.equalTo(lastView.snp.top).offset(-self.appearance.titleLabelInsets.bottom)
-                }
-            }
+    private func makeTitleView(textModel: TextStoryPart.Text) -> UIView {
+        let label = UILabel()
+        label.text = textModel.title
+        label.textColor = textModel.textColor
+        label.font = self.appearance.titleLabelFont
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }
 
-            views += [label]
-        }
-
-        containerView.backgroundColor = textModel.backgroundStyle.backgroundColor
-        containerView.setRoundedCorners(cornerRadius: 8)
-
-        views.last?.snp.makeConstraints { make in
-            make.top.equalTo(containerView).offset(16)
-        }
-
-        return containerView
+    private func makeTextView(textModel: TextStoryPart.Text) -> UIView {
+        let label = UILabel()
+        label.text = textModel.text
+        label.textColor = textModel.textColor
+        label.font = self.appearance.textLabelFont
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
     }
 
     private func makeButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
         let containerView = UIView()
         containerView.backgroundColor = .clear
 
-        let storyButton = StepikButton(type: .system)
+        let storyButton = WiderStepikButton(type: .system)
         storyButton.backgroundColor = buttonModel.backgroundColor
         storyButton.titleLabel?.font = self.appearance.buttonFont
         storyButton.setTitleColor(buttonModel.titleColor, for: .normal)
         storyButton.setTitle(buttonModel.title, for: .normal)
 
+        let cornerRadius = self.appearance.buttonHeight / 2.0
+        storyButton.setRoundedCorners(cornerRadius: cornerRadius)
+        storyButton.widthDelta = cornerRadius * 2
+
         containerView.addSubview(storyButton)
         storyButton.translatesAutoresizingMaskIntoConstraints = false
         storyButton.snp.makeConstraints { make in
-            make.bottom.top.equalTo(containerView)
-            make.centerX.equalTo(containerView)
-            make.width.equalTo(180)
-            make.height.equalTo(48)
+            make.edges.equalToSuperview()
+            make.height.equalTo(self.appearance.buttonHeight)
         }
 
-        storyButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        storyButton.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
 
         return containerView
     }
@@ -153,7 +157,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     func startLoad() {
         if self.activityIndicator.isHidden != false {
             self.activityIndicator.isHidden = false
-            self.elementsStackView?.isHidden = true
+            self.elementsStackView.isHidden = true
             self.activityIndicator.startAnimating()
         }
 
@@ -168,7 +172,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
             strongSelf.activityIndicator.stopAnimating()
             strongSelf.activityIndicator.isHidden = true
-            strongSelf.elementsStackView?.isHidden = false
+            strongSelf.elementsStackView.isHidden = false
             strongSelf.completion?()
         })
     }
@@ -183,6 +187,18 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
         self.analytics.send(.storyButtonPressed(id: part.storyID, position: part.position))
         self.urlNavigationDelegate?.open(url: url)
+    }
+}
+
+private class WiderStepikButton: StepikButton {
+    var widthDelta: CGFloat = 8 {
+        didSet {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        super.intrinsicContentSize.sizeByDelta(dw: self.widthDelta, dh: 0)
     }
 }
 
