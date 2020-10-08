@@ -91,6 +91,11 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         self.styledNavigationController?.changeShadowViewAlpha(1.0, sender: self)
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        self.discussionsTableDelegate.clearCellHeightCache()
+    }
+
     // MARK: - Private API
 
     private func registerPlaceholders(for discussionThreadType: DiscussionThread.ThreadType) {

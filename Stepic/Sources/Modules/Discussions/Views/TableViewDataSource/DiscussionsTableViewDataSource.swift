@@ -31,6 +31,10 @@ final class DiscussionsTableViewDataSource: NSObject {
         }
         return nil
     }
+
+    func clearCellHeightCache() {
+        Self.cellHeightCache.removeAll(keepingCapacity: false)
+    }
 }
 
 // MARK: - DiscussionsTableViewDataSource: UITableViewDataSource -
