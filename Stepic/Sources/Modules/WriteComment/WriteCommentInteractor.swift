@@ -60,12 +60,9 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     }
 
     func doCommentMainAction(request: WriteComment.CommentMainAction.Request) {
-        let htmlText = self.currentText
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacingOccurrences(of: "\n", with: "<br>")
         let currentComment = Comment(
             targetID: self.targetID,
-            text: htmlText,
+            text: self.currentText.trimmed(),
             parentID: self.parentID,
             submissionID: self.submission?.id,
             threadType: self.discussionThreadType
@@ -84,7 +81,7 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
         }
 
         actionPromise.done { comment in
-            self.currentText = comment.text.replacingOccurrences(of: "<br>", with: "\n")
+            self.currentText = comment.text
             self.presenter.presentCommentMainActionResult(response: .init(data: .success(self.makeCommentData())))
             moduleOutputHandler?(comment)
         }.catch { error in
