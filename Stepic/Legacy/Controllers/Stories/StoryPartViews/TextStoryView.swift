@@ -11,9 +11,23 @@ import Nuke
 import SnapKit
 import UIKit
 
+extension TextStoryView {
+    struct Appearance {
+        let titleLabelFont = Typography.largeTitleFont
+        let titleLabelInsets = LayoutInsets(left: 16, bottom: 8, right: 16)
+
+        let textLabelFont = Typography.title2Font
+        let textLabelInsets = LayoutInsets(left: 16, bottom: 16, right: 16)
+
+        let buttonFont = Typography.bodyFont
+    }
+}
+
 final class TextStoryView: UIView, UIStoryPartViewProtocol {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+
+    var appearance = Appearance()
 
     var completion: (() -> Void)?
     weak var urlNavigationDelegate: StoryURLNavigationDelegate?
@@ -35,10 +49,10 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
         var storyContentViews: [UIView] = []
         if let text = storyPart.text {
-            storyContentViews += [buildTextContainerView(text: text)]
+            storyContentViews += [self.makeTextContainerView(text: text)]
         }
         if let button = storyPart.button {
-            storyContentViews += [buildButtonView(button: button)]
+            storyContentViews += [self.makeButtonView(button: button)]
         }
 
         let stackView = UIStackView(arrangedSubviews: storyContentViews)
@@ -60,7 +74,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         self.storyPart = storyPart
     }
 
-    private func buildTextContainerView(text textModel: TextStoryPart.Text) -> UIView {
+    private func makeTextContainerView(text textModel: TextStoryPart.Text) -> UIView {
         let containerView = UIView()
         var views: [UIView] = []
 
@@ -68,14 +82,15 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             let label = UILabel()
             label.text = text
             label.textColor = textModel.textColor
-            label.font = UIFont.systemFont(ofSize: 16, weight: .light)
+            label.font = self.appearance.textLabelFont
             label.numberOfLines = 0
 
             containerView.addSubview(label)
             // TODO: Check for translatesAutoresizingMaskIntoConstraints
             label.snp.makeConstraints { make in
-                make.leading.equalTo(containerView).offset(16)
-                make.bottom.trailing.equalTo(containerView).offset(-16)
+                make.leading.equalTo(containerView).offset(self.appearance.textLabelInsets.left)
+                make.bottom.equalTo(containerView).offset(-self.appearance.textLabelInsets.bottom)
+                make.trailing.equalTo(containerView).offset(-self.appearance.textLabelInsets.right)
             }
 
             views += [label]
@@ -85,16 +100,16 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             let label = UILabel()
             label.text = title
             label.textColor = textModel.textColor
-            label.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+            label.font = self.appearance.titleLabelFont
             label.numberOfLines = 0
 
             containerView.addSubview(label)
             // TODO: Check for translatesAutoresizingMaskIntoConstraints
             label.snp.makeConstraints { make in
-                make.leading.equalTo(containerView).offset(16)
-                make.trailing.equalTo(containerView).offset(-16)
+                make.leading.equalTo(containerView).offset(self.appearance.titleLabelInsets.left)
+                make.trailing.equalTo(containerView).offset(-self.appearance.titleLabelInsets.right)
                 if let lastView = views.last {
-                    make.bottom.equalTo(lastView.snp.top).offset(-8)
+                    make.bottom.equalTo(lastView.snp.top).offset(-self.appearance.titleLabelInsets.bottom)
                 }
             }
 
@@ -111,12 +126,13 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         return containerView
     }
 
-    private func buildButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
+    private func makeButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
         let containerView = UIView()
-        containerView.backgroundColor = UIColor.clear
+        containerView.backgroundColor = .clear
 
         let storyButton = StepikButton(type: .system)
         storyButton.backgroundColor = buttonModel.backgroundColor
+        storyButton.titleLabel?.font = self.appearance.buttonFont
         storyButton.setTitleColor(buttonModel.titleColor, for: .normal)
         storyButton.setTitle(buttonModel.title, for: .normal)
 
