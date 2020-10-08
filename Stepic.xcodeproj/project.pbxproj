@@ -776,7 +776,9 @@
 		2CEBEBF2242F8E9900DBFDF0 /* StepikRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEBF1242F8E9900DBFDF0 /* StepikRequestInterceptor.swift */; };
 		2CEBEBF4242F8F9900DBFDF0 /* StepikRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEBF3242F8F9900DBFDF0 /* StepikRequestAdapter.swift */; };
 		2CEBEBF6242F8FB200DBFDF0 /* StepikRequestRetrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEBF5242F8FB200DBFDF0 /* StepikRequestRetrier.swift */; };
+		2CECFEE9252F1EDD006BA883 /* VisitedCoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEE8252F1EDD006BA883 /* VisitedCoursesAPI.swift */; };
 		2CECFEF1252F1F4C006BA883 /* VisitedCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */; };
+		2CECFEF9252F235A006BA883 /* VisitedCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */; };
 		2CF0848F244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -2208,7 +2210,9 @@
 		2CEBEBF1242F8E9900DBFDF0 /* StepikRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikRequestInterceptor.swift; sourceTree = "<group>"; };
 		2CEBEBF3242F8F9900DBFDF0 /* StepikRequestAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikRequestAdapter.swift; sourceTree = "<group>"; };
 		2CEBEBF5242F8FB200DBFDF0 /* StepikRequestRetrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikRequestRetrier.swift; sourceTree = "<group>"; };
+		2CECFEE8252F1EDD006BA883 /* VisitedCoursesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesAPI.swift; sourceTree = "<group>"; };
 		2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCourse.swift; sourceTree = "<group>"; };
+		2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesNetworkService.swift; sourceTree = "<group>"; };
 		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
 		2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepARQuickLookPreviewDataSource.swift; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
@@ -5553,6 +5557,7 @@
 				62E98FD3186BA23C6E8B4DB5 /* UserCoursesAPI.swift */,
 				080CE14B1E9562BF0089A27F /* UsersAPI.swift */,
 				080CE1571E9566220089A27F /* ViewsAPI.swift */,
+				2CECFEE8252F1EDD006BA883 /* VisitedCoursesAPI.swift */,
 				086A8B271D21796800F45C45 /* VotesAPI.swift */,
 			);
 			path = Endpoints;
@@ -6066,6 +6071,7 @@
 				2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */,
 				62E98407592112A22E967DE1 /* UsersNetworkService.swift */,
 				2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */,
+				2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */,
 				2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */,
 			);
 			path = Network;
@@ -8362,6 +8368,7 @@
 				2C7F641E23B12208006C7648 /* AutoplayStorageManager.swift in Sources */,
 				62E98905245F33B16D020586 /* ContinueActionButton.swift in Sources */,
 				62E98736DE8178FA36A565B6 /* UserCoursesAPI.swift in Sources */,
+				2CECFEF9252F235A006BA883 /* VisitedCoursesNetworkService.swift in Sources */,
 				62E98FAF7FFEFCAB3196CF16 /* UserCourse.swift in Sources */,
 				2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */,
 				2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */,
@@ -8546,6 +8553,7 @@
 				2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */,
 				62E98995ECE79D901A170481 /* CourseInfoTabReviewsCellView.swift in Sources */,
 				62E987BAA1982DF27CBC2203 /* CourseInfoTabReviewsTableViewCell.swift in Sources */,
+				2CECFEE9252F1EDD006BA883 /* VisitedCoursesAPI.swift in Sources */,
 				62E9811CC53B2D9F413188C1 /* CourseInfoTabReviewsHeaderView.swift in Sources */,
 				62E98718346E0B1718291A4A /* CourseInfoTabSyllabusAssembly.swift in Sources */,
 				62E98286ED5C495881DA0C55 /* CourseInfoTabSyllabusDataFlow.swift in Sources */,
