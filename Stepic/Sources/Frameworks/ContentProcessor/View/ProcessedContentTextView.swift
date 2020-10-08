@@ -100,6 +100,35 @@ final class ProcessedContentTextView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let resSize: CGSize
+
+        if self.didSetupLabel && !self.label.isHidden {
+            let nsText = (self.label.text ?? "") as NSString
+            let boundingRect = nsText.boundingRect(
+                with: size,
+                options: .usesLineFragmentOrigin,
+                attributes: [.font: self.appearance.font],
+                context: nil
+            )
+            resSize = boundingRect.size
+        } else if self.didSetupAttributedLabel {
+            resSize = self.attributedLabel.sizeThatFits(size)
+        } else {
+            return CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+        }
+
+        return CGSize(
+            width: ceil(resSize.width),
+            height: ceil(resSize.height)
+        )
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+    }
+
     private func clearText() {
         if self.didSetupLabel && !self.label.isHidden {
             self.label.text = nil

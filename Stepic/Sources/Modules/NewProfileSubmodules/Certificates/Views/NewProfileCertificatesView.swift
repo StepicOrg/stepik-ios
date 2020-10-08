@@ -3,7 +3,9 @@ import UIKit
 
 extension NewProfileCertificatesView {
     struct Appearance {
+        let layoutSectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         let layoutMinimumInteritemSpacing: CGFloat = 16
+        let layoutMinimumLineSpacing: CGFloat = 0
         let layoutItemHeight: CGFloat = 116
         let layoutMinimumItemWidth: CGFloat = 144
         let layoutNextPageWidth: CGFloat = 12.0
@@ -19,8 +21,9 @@ final class NewProfileCertificatesView: UIView {
 
     private lazy var flowLayout: NewProfileCertificatesHorizontalFlowLayout = {
         let layout = NewProfileCertificatesHorizontalFlowLayout()
+        layout.sectionInset = self.appearance.layoutSectionInset
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
         return layout
     }()
 

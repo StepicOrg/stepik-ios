@@ -168,8 +168,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     // MARK: - Private API -
 
     private func makeDiscussionsData(
-        _ data: Discussions.DiscussionsResponseData
-    ) -> Discussions.DiscussionsViewData {
+        _ data: Discussions.ResponseData
+    ) -> Discussions.ViewData {
         let discussions = self.sortedDiscussions(
             data.discussions,
             discussionProxy: data.discussionProxy,
@@ -286,8 +286,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             strippedText: strippedAndTrimmedText,
             processedContent: processedContent,
             formattedDate: formattedDate,
-            likesCount: comment.epicCount,
-            dislikesCount: comment.abuseCount,
+            likesCount: max(0, comment.epicCount),
+            dislikesCount: max(0, comment.abuseCount),
             voteValue: voteValue,
             canEdit: comment.actions.contains(.edit),
             canDelete: comment.actions.contains(.delete),

@@ -166,6 +166,35 @@ final class ProcessedContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let resSize: CGSize
+
+        if self.didSetupTextView && !self.textView.isHidden {
+            resSize = self.textView.sizeThatFits(size)
+        } else if self.didSetupWebView {
+            resSize = CGSize(width: UIView.noIntrinsicMetric, height: self.webView.intrinsicContentSize.height)
+        } else {
+            resSize = CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+        }
+
+        let insetsHeight = self.appearance.insets.top + self.appearance.insets.bottom
+        let height = resSize.height == UIView.noIntrinsicMetric
+            ? UIView.noIntrinsicMetric
+            : ceil(resSize.height + insetsHeight)
+
+        let width = resSize.width == UIView.noIntrinsicMetric
+            ? UIView.noIntrinsicMetric
+            : ceil(resSize.width)
+
+        return CGSize(width: width, height: height)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+        self.updateContentViewHeightConstraintOffset()
+    }
+
     // MARK: Public API
 
     func setText(_ text: String?) {

@@ -462,7 +462,6 @@
 		2C2E44D124FE3FBF006B7303 /* SmallCourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */; };
 		2C2E44D324FE474F006B7303 /* CourseListGridSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E44D224FE474F006B7303 /* CourseListGridSize.swift */; };
 		2C2E44D524FE5FEA006B7303 /* VisitedCoursesCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E44D424FE5FEA006B7303 /* VisitedCoursesCleaner.swift */; };
-		2C2EA36B212D5FEF002116C9 /* StepikResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA36A212D5FEF002116C9 /* StepikResult.swift */; };
 		2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
@@ -519,6 +518,9 @@
 		2C546C1323DA02AB00352F27 /* String+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */; };
 		2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
+		2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */; };
+		2C572768252C7C2200C4C7C0 /* DiscussionsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */; };
+		2C57276D252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */; };
 		2C57B29F24092868008284F0 /* SubmissionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */; };
 		2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */; };
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
@@ -791,6 +793,8 @@
 		2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */; };
 		2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */; };
+		2CFED66E252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFED66D252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
 		375F2EB161DE5DAAED3FEA98 /* NewProfileStreakNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */; };
 		38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */; };
@@ -1857,7 +1861,6 @@
 		2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCourseWidgetView.swift; sourceTree = "<group>"; };
 		2C2E44D224FE474F006B7303 /* CourseListGridSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListGridSize.swift; sourceTree = "<group>"; };
 		2C2E44D424FE5FEA006B7303 /* VisitedCoursesCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesCleaner.swift; sourceTree = "<group>"; };
-		2C2EA36A212D5FEF002116C9 /* StepikResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikResult.swift; sourceTree = "<group>"; };
 		2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_can_edit.xcdatamodel; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
@@ -1932,6 +1935,9 @@
 		2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SafeSubscript.swift"; sourceTree = "<group>"; };
 		2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
+		2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBadgesView.swift; sourceTree = "<group>"; };
+		2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsVotesView.swift; sourceTree = "<group>"; };
+		2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBottomControlsView.swift; sourceTree = "<group>"; };
 		2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsPersistenceService.swift; sourceTree = "<group>"; };
 		2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsRepository.swift; sourceTree = "<group>"; };
 		2C5967EA23E7828800072800 /* SubmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionTests.swift; sourceTree = "<group>"; };
@@ -2222,6 +2228,8 @@
 		2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsPersistenceService.swift; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Stepik.swift"; sourceTree = "<group>"; };
+		2CFED66D252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsTableViewDataSourceDelegate.swift; sourceTree = "<group>"; };
 		2FA5E1D17883366854D97EDB /* NewProfileCreatedCoursesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesPresenter.swift; sourceTree = "<group>"; };
 		383E389EDEA545B7F09F70EF /* Pods-StepicTests.production release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.production release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.production release.xcconfig"; sourceTree = "<group>"; };
 		3BCD8888462BD21ECF82C602 /* DownloadARQuickLookViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookViewController.swift; sourceTree = "<group>"; };
@@ -3055,6 +3063,7 @@
 		2C096587236C5706005B771A /* SwiftStdlib */ = {
 			isa = PBXGroup;
 			children = (
+				2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */,
 				2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */,
 				2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */,
 				2C6D61AD24D93E4500D019F2 /* String+Whitespaces.swift */,
@@ -4529,11 +4538,22 @@
 				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
 				2C30A69F24A29B6D0074693D /* Queue.swift */,
 				2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */,
-				2C2EA36A212D5FEF002116C9 /* StepikResult.swift */,
 				2CBBCB9923980ED6006D6C15 /* WeakBox.swift */,
 				2CCDD1FF24DBB39100A48EE0 /* Concurrency */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2CD4E0F7252C708F000D9328 /* Discussion */ = {
+			isa = PBXGroup;
+			children = (
+				2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */,
+				2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */,
+				62E987675DB3715DA52FD632 /* DiscussionsCellView.swift */,
+				62E9868D877E7305BF47AA42 /* DiscussionsTableViewCell.swift */,
+				2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */,
+			);
+			path = Discussion;
 			sourceTree = "<group>";
 		};
 		2CD80B2F24281CA300633662 /* PersonalDeadlineTableViewCell */ = {
@@ -4684,6 +4704,15 @@
 				2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */,
 			);
 			path = ModulesTests;
+			sourceTree = "<group>";
+		};
+		2CFED669252C647900FCAD41 /* TableViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				62E981FA0CC263C026776706 /* DiscussionsTableViewDataSource.swift */,
+				2CFED66D252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift */,
+			);
+			path = TableViewDataSource;
 			sourceTree = "<group>";
 		};
 		2CFF8FF4242A1E7F00FD7311 /* Helpers */ = {
@@ -6071,9 +6100,9 @@
 			isa = PBXGroup;
 			children = (
 				62E9864A1B7282B75D69C04F /* DiscussionsSolutionControl.swift */,
-				62E981FA0CC263C026776706 /* DiscussionsTableViewDataSource.swift */,
 				62E98544D233C7423C1E5933 /* DiscussionsView.swift */,
-				62E9881B260100D451E9DBE1 /* Cell */,
+				62E9881B260100D451E9DBE1 /* Cells */,
+				2CFED669252C647900FCAD41 /* TableViewDataSource */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -6358,14 +6387,13 @@
 			path = InputOutput;
 			sourceTree = "<group>";
 		};
-		62E9881B260100D451E9DBE1 /* Cell */ = {
+		62E9881B260100D451E9DBE1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				62E987675DB3715DA52FD632 /* DiscussionsCellView.swift */,
 				62E9858E52F8D298C7237479 /* DiscussionsLoadMoreTableViewCell.swift */,
-				62E9868D877E7305BF47AA42 /* DiscussionsTableViewCell.swift */,
+				2CD4E0F7252C708F000D9328 /* Discussion */,
 			);
-			path = Cell;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		62E98826694D9988626F0F60 /* CodeQuiz */ = {
@@ -7959,6 +7987,7 @@
 				0805FE441F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
 				2CA3DAA32179C71500F43888 /* NotificationPermissionStatus.swift in Sources */,
 				2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */,
+				2C572768252C7C2200C4C7C0 /* DiscussionsVotesView.swift in Sources */,
 				08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
 				084F7AA71E76EF690088368A /* LastStep.swift in Sources */,
 				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
@@ -8029,6 +8058,7 @@
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
+				2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */,
 				2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */,
 				083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
@@ -8280,7 +8310,6 @@
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				8622056B2055561F00F14255 /* PinsMapView.swift in Sources */,
 				08E43EA9214C2F7F00E3CB50 /* TabBarRouter.swift in Sources */,
-				2C2EA36B212D5FEF002116C9 /* StepikResult.swift in Sources */,
 				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
@@ -8356,6 +8385,7 @@
 				2C4AD01523E301C50049B7B0 /* DiscussionThreadsAPI.swift in Sources */,
 				62E98F49F6018A67DEB616C5 /* CourseReviewsNetworkService.swift in Sources */,
 				62E9852B56E55E5C79AEC91A /* CourseReviewsPersistenceService.swift in Sources */,
+				2CFED66E252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift in Sources */,
 				2CB695382465D4030037BF0D /* NewProfileHeaderView.swift in Sources */,
 				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
@@ -8487,6 +8517,7 @@
 				62E984A5B0B216EF4C06E037 /* CourseInfoTabInfoPresenter.swift in Sources */,
 				62E98E8B19788BBE5859D696 /* CourseInfoTabInfoProvider.swift in Sources */,
 				62E988775E581205F08D9163 /* CourseInfoTabInfoViewController.swift in Sources */,
+				2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */,
 				62E9841CE54BD9A985D64460 /* CourseInfoTabInfoViewModel.swift in Sources */,
 				2C87A7A424465B5900933CA4 /* ProfilesPersistenceService.swift in Sources */,
 				62E985AF6CAE757A348EFED2 /* CourseInfoTabInfoInputProtocol.swift in Sources */,
@@ -8633,6 +8664,7 @@
 				62E98779C46941AA1F710191 /* ContinueCourseOutputProtocol.swift in Sources */,
 				62E984E7020CA7E523C824EA /* ContinueCoursePresenter.swift in Sources */,
 				62E983C5C87C83700311EFCC /* ContinueCourseProvider.swift in Sources */,
+				2C57276D252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift in Sources */,
 				62E9808095F1F7BE4C6837DE /* ContinueCourseView.swift in Sources */,
 				62E98EF6C22D39234F586361 /* ContinueCourseViewController.swift in Sources */,
 				62E98E3CCD79D477A0088C73 /* ContinueCourseViewModel.swift in Sources */,
@@ -9158,7 +9190,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -9183,7 +9215,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9325,7 +9357,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -9355,7 +9387,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -9445,7 +9477,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -9496,7 +9528,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -9577,7 +9609,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -9625,7 +9657,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9712,7 +9744,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -9763,7 +9795,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -9844,7 +9876,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -9892,7 +9924,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 249;
+				CURRENT_PROJECT_VERSION = 251;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
