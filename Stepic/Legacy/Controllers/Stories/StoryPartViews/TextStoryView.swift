@@ -41,6 +41,24 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
     private let analytics: Analytics = StepikAnalytics.shared
 
+    private lazy var topGradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer(
+            colors: [UIColor.black.withAlphaComponent(0.87), UIColor.clear],
+            rotationAngle: 0
+        )
+        return layer
+    }()
+
+    private lazy var bottomGradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer(
+            colors: [UIColor.black.withAlphaComponent(0.87), UIColor.clear],
+            rotationAngle: 0
+        )
+        layer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        layer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        return layer
+    }()
+    
     private lazy var elementsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
@@ -52,7 +70,29 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         self.activityIndicator.isHidden = true
+
+        self.layer.addSublayer(self.topGradientLayer)
+        self.layer.addSublayer(self.bottomGradientLayer)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.topGradientLayer.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.frame.width,
+            height: self.frame.height / 2
+        )
+
+        self.bottomGradientLayer.frame = CGRect(
+            x: 0,
+            y: self.center.y,
+            width: self.frame.width,
+            height: self.frame.height / 2
+        )
     }
 
     func setup(storyPart: TextStoryPart, urlNavigationDelegate: StoryURLNavigationDelegate?) {
