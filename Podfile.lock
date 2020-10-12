@@ -1,5 +1,5 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.6.0)
+  - ActionSheetPicker-3.0 (2.6.1)
   - Agrume (5.6.10):
     - SwiftyGif
   - Alamofire (5.2.2)
@@ -204,7 +204,7 @@ PODS:
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0 (= 2.6.0)
+  - ActionSheetPicker-3.0 (= 2.6.1)
   - Agrume (= 5.6.10)
   - Alamofire (= 5.2.2)
   - Amplitude-iOS (= 4.9.3)
@@ -334,7 +334,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: f47ea288343f6fb86285f1cca1f849bd2a40a54e
+  ActionSheetPicker-3.0: d7a91adbc3aa8126aadc070f1276b14216bfadd4
   Agrume: bed8984d8644d9f9228e65ca22cfc5f6ab95947f
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
@@ -401,6 +401,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: 29ca009767a298a3fd8103d04058b4518eb5efe0
+PODFILE CHECKSUM: a864ba1ed94e28ea6c7a7110961912f3a2f0239e
 
 COCOAPODS: 1.9.3
