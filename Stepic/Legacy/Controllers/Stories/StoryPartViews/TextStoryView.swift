@@ -13,9 +13,9 @@ import UIKit
 
 extension TextStoryView {
     struct Appearance {
-        let titleLabelFont = Typography.largeTitleFont
+        let titleLabelFont = UIFont.systemFont(ofSize: 26, weight: .bold)
 
-        let textLabelFont = Typography.title2Font
+        let textLabelFont = UIFont.systemFont(ofSize: 20, weight: .bold)
 
         let buttonFont = Typography.bodyFont
         let buttonHeight: CGFloat = 44
