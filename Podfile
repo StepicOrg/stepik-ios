@@ -29,11 +29,11 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.33.0'
-    pod 'Firebase/Messaging', '6.33.0'
-    pod 'Firebase/Analytics', '6.33.0'
-    pod 'Firebase/Crashlytics', '6.33.0'
-    pod 'Firebase/RemoteConfig', '6.33.0'
+    pod 'Firebase/Core', '6.34.0'
+    pod 'Firebase/Messaging', '6.34.0'
+    pod 'Firebase/Analytics', '6.34.0'
+    pod 'Firebase/Crashlytics', '6.34.0'
+    pod 'Firebase/RemoteConfig', '6.34.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.11.1'
     pod 'Amplitude-iOS', '4.9.3'
@@ -43,7 +43,7 @@ def all_pods
 
     pod 'IQKeyboardManagerSwift', '6.5.4'
 
-    pod 'Kanna', '5.2.2'
+    pod 'Kanna', '5.2.3'
     # Remove after NotificationsService refactoring
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
@@ -63,7 +63,7 @@ def all_pods
     pod 'Koloda', '5.0'
     pod 'Charts', '3.6.0'
     pod 'EasyTipView', '2.0.4'
-    pod 'ActionSheetPicker-3.0', '2.6.0'
+    pod 'ActionSheetPicker-3.0', '2.6.1'
     pod 'Nuke', '9.1.2'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
@@ -72,7 +72,7 @@ end
 
 def testing_pods
     pod 'Quick', '3.0.0'
-    pod 'Nimble', '9.0.0-rc.3'
+    pod 'Nimble', '9.0.0'
     pod 'Mockingjay', '3.0.0-alpha.1'
 end
 
