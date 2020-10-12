@@ -52,13 +52,11 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         self.gradientImageView.clipsToBounds = true
         self.gradientImageView.layer.masksToBounds = true
 
-        self.backgroundContentView.layer.cornerRadius = self.appearance.backgroundContentViewCornerRadius
-        self.backgroundContentView.clipsToBounds = true
-        self.backgroundContentView.layer.masksToBounds = true
-
-        self.contentContainerView.layer.cornerRadius = self.appearance.backgroundContentViewCornerRadius
-        self.contentContainerView.clipsToBounds = true
-        self.contentContainerView.layer.masksToBounds = true
+        [self.backgroundContentView, self.contentContainerView].forEach { view in
+            view?.layer.cornerRadius = self.appearance.backgroundContentViewCornerRadius
+            view?.clipsToBounds = true
+            view?.layer.masksToBounds = true
+        }
 
         self.backgroundContentView.backgroundColor = self.appearance.backgroundContentViewBackgroundColor
         self.overlayView.backgroundColor = self.appearance.overlayViewBackgroundColor
