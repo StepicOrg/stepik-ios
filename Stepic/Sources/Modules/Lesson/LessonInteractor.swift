@@ -26,6 +26,8 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     private var lastLoadState: (context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep?)
 
+    private var didLoadFromCache = false
+
     init(
         initialContext: LessonDataFlow.Context,
         startStep: LessonDataFlow.StartStep?,
@@ -82,17 +84,47 @@ final class LessonInteractor: LessonInteractorProtocol {
             let startStep = startStep ?? .index(0)
             self.lastLoadState = (context, startStep)
 
-            self.loadData(context: context, startStep: startStep).done {
-                seal.fulfill(())
-            }.catch { error in
-                print("new lesson interactor: error while loading lesson = \(error)")
-                self.presenter.presentLesson(response: .init(state: .failure(error)))
-                seal.reject(error)
+            if self.didLoadFromCache {
+                self.loadRemote(context: context, startStep: startStep).done {
+                    seal.fulfill(())
+                }.catch { error in
+                    print("new lesson interactor: error while loading remote lesson = \(error)")
+                    if self.currentLesson != nil {
+                        seal.fulfill(())
+                    } else {
+                        self.presenter.presentLesson(response: .init(state: .failure(error)))
+                        seal.reject(error)
+                    }
+                }
+            } else {
+                self.loadCached(context: context, startStep: startStep).done {
+                    self.didLoadFromCache = true
+                    self.loadRemote(context: context, startStep: startStep).cauterize()
+                    seal.fulfill(())
+                }.catch { _ in
+                    self.loadRemote(context: context, startStep: startStep).done {
+                        seal.fulfill(())
+                    }.catch { error in
+                        print("new lesson interactor: error while loading remote lesson = \(error)")
+                        self.presenter.presentLesson(response: .init(state: .failure(error)))
+                        seal.reject(error)
+                    }
+                }
             }
         }
     }
 
-    private func loadData(context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep) -> Promise<Void> {
+    private func loadCached(
+        context: LessonDataFlow.Context,
+        startStep: LessonDataFlow.StartStep
+    ) -> Promise<Void> {
+        .value(())
+    }
+
+    private func loadRemote(
+        context: LessonDataFlow.Context,
+        startStep: LessonDataFlow.StartStep
+    ) -> Promise<Void> {
         firstly { () -> Promise<(Lesson?, Unit?)> in
             switch context {
             case .lesson(let lessonID):
@@ -255,6 +287,7 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.didLoadFromCache = false
         self.refreshLesson(context: .unit(id: unit.id)).cauterize()
     }
 
@@ -288,6 +321,7 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.didLoadFromCache = false
         self.refreshLesson(context: .unit(id: unit.id)).done {
             if autoplayNext {
                 self.autoplayCurrentStep()
