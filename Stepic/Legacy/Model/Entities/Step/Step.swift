@@ -62,6 +62,38 @@ final class Step: NSManagedObject, IDFetchable {
         self.block.update(json: json["block"])
     }
 
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? Step else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.id != object.id { return false }
+        if self.position != object.position { return false }
+        if self.status != object.status { return false }
+        if self.progressID != object.progressID { return false }
+        if self.hasSubmissionRestrictions != object.hasSubmissionRestrictions { return false }
+        if self.hasReview != object.hasReview { return false }
+        if self.discussionsCount != object.discussionsCount { return false }
+        if self.discussionProxyID != object.discussionProxyID { return false }
+        if self.discussionThreadsArray != object.discussionThreadsArray { return false }
+        if self.maxSubmissionsCount != object.maxSubmissionsCount { return false }
+        if self.lessonID != object.lessonID { return false }
+        if self.passedByCount != object.passedByCount { return false }
+        if self.correctRatio != object.correctRatio { return false }
+        if self.canEdit != object.canEdit { return false }
+
+        if let options = self.options {
+            if !options.equals(object.options) { return false }
+        } else if object.options != nil {
+            return false
+        }
+
+        return true
+    }
+
     static func getStepWithID(_ id: IdType, unitID: Unit.IdType? = nil) -> Step? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)

@@ -20,26 +20,41 @@ final class CodeTemplate: NSManagedObject {
     required convenience init(language: CodeLanguage, template: String) {
         self.init()
         let lan = language.rawValue
-        initialize(language: lan, template: template)
+        self.initialize(language: lan, template: template)
     }
 
     required convenience init(language: String, template: String) {
         self.init()
-        initialize(language: language, template: template)
+        self.initialize(language: language, template: template)
     }
 
     required convenience init(language: String, template: String, isUserGenerated: Bool) {
         self.init()
-        initialize(language: language, template: template)
+        self.initialize(language: language, template: template)
         self.isUserGenerated = isUserGenerated
     }
 
     func initialize(language: String, template: String) {
-        languageString = language
-        templateString = template
+        self.languageString = language
+        self.templateString = template
     }
 
     func update(language: String, template: String) {
-        initialize(language: language, template: template)
+        self.initialize(language: language, template: template)
+    }
+
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? CodeTemplate else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.languageString != object.languageString { return false }
+        if self.templateString != object.templateString { return false }
+        if self.isUserGenerated != object.isUserGenerated { return false }
+
+        return true
     }
 }
