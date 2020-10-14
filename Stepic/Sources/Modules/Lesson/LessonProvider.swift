@@ -5,8 +5,10 @@ protocol LessonProviderProtocol {
     func fetchLesson(id: Lesson.IdType, dataSourceType: DataSourceType) -> Promise<Lesson?>
     func fetchLessonAndUnit(unitID: Unit.IdType, dataSourceType: DataSourceType) -> Promise<(Unit?, Lesson?)>
     func fetchSteps(ids: [Step.IdType], dataSourceType: DataSourceType) -> Promise<[Step]>
+    func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>>
     func fetchAssignments(ids: [Assignment.IdType], dataSourceType: DataSourceType) -> Promise<[Assignment]>
     func fetchProgresses(ids: [Progress.IdType], dataSourceType: DataSourceType) -> Promise<[Progress]>
+    func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>>
 
     func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void>
 }
@@ -112,6 +114,30 @@ final class LessonProvider: LessonProviderProtocol {
         }
     }
 
+    func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>> {
+        let persistenceServicePromise = Guarantee(self.stepsPersistenceService.fetch(ids: ids), fallback: nil)
+        let networkServicePromise = Guarantee(self.stepsNetworkService.fetch(ids: ids), fallback: nil)
+
+        return Promise { seal in
+            when(
+                fulfilled: persistenceServicePromise,
+                networkServicePromise
+            ).then { cachedSteps, remoteSteps -> Promise<FetchResult<[Step]?>> in
+                if let remoteSteps = remoteSteps {
+                    let result = FetchResult<[Step]?>(value: remoteSteps, source: .remote)
+                    return Promise.value(result)
+                }
+
+                let result = FetchResult<[Step]?>(value: cachedSteps, source: .cache)
+                return Promise.value(result)
+            }.done { result in
+                seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
     func fetchAssignments(ids: [Assignment.IdType], dataSourceType: DataSourceType) -> Promise<[Assignment]> {
         Promise { seal in
             firstly { () -> Promise<[Assignment]> in
@@ -140,6 +166,36 @@ final class LessonProvider: LessonProviderProtocol {
                 }
             }.done { progresses, _ in
                 seal.fulfill(progresses)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>> {
+        let persistenceServicePromise = Guarantee(
+            self.progressesPersistenceService.fetch(ids: ids, page: 1),
+            fallback: nil
+        )
+        let networkServicePromise = Guarantee(
+            self.progressesNetworkService.fetch(ids: ids, page: 1),
+            fallback: nil
+        )
+
+        return Promise { seal in
+            when(
+                fulfilled: persistenceServicePromise,
+                networkServicePromise
+            ).then { cachedProgresses, remoteProgresses -> Promise<FetchResult<[Progress]?>> in
+                if let remoteProgresses = remoteProgresses?.0 {
+                    let result = FetchResult<[Progress]?>(value: remoteProgresses, source: .remote)
+                    return Promise.value(result)
+                }
+
+                let result = FetchResult<[Progress]?>(value: cachedProgresses?.0, source: .cache)
+                return Promise.value(result)
+            }.done { result in
+                seal.fulfill(result)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

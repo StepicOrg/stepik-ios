@@ -85,11 +85,11 @@ final class LessonInteractor: LessonInteractorProtocol {
             self.lastLoadState = (context, startStep)
 
             if self.didLoadFromCache {
-                self.loadRemote(context: context, startStep: startStep).done {
+                self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
                     seal.fulfill(())
                 }.catch { error in
                     print("new lesson interactor: error while loading remote lesson = \(error)")
-                    if self.currentLesson != nil {
+                    if let currentLesson = self.currentLesson, !currentLesson.steps.isEmpty {
                         seal.fulfill(())
                     } else {
                         self.presenter.presentLesson(response: .init(state: .failure(error)))
@@ -97,12 +97,12 @@ final class LessonInteractor: LessonInteractorProtocol {
                     }
                 }
             } else {
-                self.loadCached(context: context, startStep: startStep).done {
+                self.loadData(context: context, startStep: startStep, dataSourceType: .cache).done {
                     self.didLoadFromCache = true
-                    self.loadRemote(context: context, startStep: startStep).cauterize()
+                    self.loadData(context: context, startStep: startStep, dataSourceType: .remote).cauterize()
                     seal.fulfill(())
                 }.catch { _ in
-                    self.loadRemote(context: context, startStep: startStep).done {
+                    self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
                         seal.fulfill(())
                     }.catch { error in
                         print("new lesson interactor: error while loading remote lesson = \(error)")
@@ -114,23 +114,21 @@ final class LessonInteractor: LessonInteractorProtocol {
         }
     }
 
-    private func loadCached(
+    private func loadData(
         context: LessonDataFlow.Context,
-        startStep: LessonDataFlow.StartStep
-    ) -> Promise<Void> {
-        .value(())
-    }
-
-    private func loadRemote(
-        context: LessonDataFlow.Context,
-        startStep: LessonDataFlow.StartStep
+        startStep: LessonDataFlow.StartStep,
+        dataSourceType: DataSourceType
     ) -> Promise<Void> {
         firstly { () -> Promise<(Lesson?, Unit?)> in
             switch context {
             case .lesson(let lessonID):
-                return self.provider.fetchLesson(id: lessonID).map { ($0.value, nil) }
+                return self.provider
+                    .fetchLesson(id: lessonID, dataSourceType: dataSourceType)
+                    .map { ($0, nil) }
             case .unit(let unitID):
-                return self.provider.fetchLessonAndUnit(unitID: unitID).map { ($0.1.value, $0.0.value) }
+                return self.provider
+                    .fetchLessonAndUnit(unitID: unitID, dataSourceType: dataSourceType)
+                    .map { ($0.1, $0.0) }
             }
         }.then(on: .global(qos: .userInitiated)) { lesson, unit -> Promise<([Assignment], Lesson)> in
             self.currentUnit = unit
@@ -144,7 +142,10 @@ final class LessonInteractor: LessonInteractorProtocol {
             let assignmentsPromise: Promise<[Assignment]>
             if let unit = unit {
                 unit.lesson = lesson
-                assignmentsPromise = self.provider.fetchAssignments(ids: unit.assignmentsArray).map { $0.value ?? [] }
+                assignmentsPromise = self.provider.fetchAssignments(
+                    ids: unit.assignmentsArray,
+                    dataSourceType: dataSourceType
+                )
             } else {
                 assignmentsPromise = .value([])
             }
@@ -157,14 +158,15 @@ final class LessonInteractor: LessonInteractorProtocol {
                 self.assignmentsForCurrentSteps[stepID] = assignments[index].id
             }
 
-            return self.provider.fetchSteps(ids: lesson.stepsArray).map { ($0.value, lesson) }
+            return self.provider.fetchSteps(ids: lesson.stepsArray, dataSourceType: dataSourceType).map { ($0, lesson) }
         }.then(on: .global(qos: .userInitiated)) { steps, lesson -> Promise<([Step], Lesson, [Progress])> in
             guard let steps = steps, !steps.isEmpty else {
                 throw Error.fetchFailed
             }
 
-            return self.provider.fetchProgresses(ids: steps.compactMap { $0.progressID })
-                .map { (steps, lesson, $0.value ?? []) }
+            return self.provider
+                .fetchProgresses(ids: steps.compactMap(\.progressID), dataSourceType: dataSourceType)
+                .map { (steps, lesson, $0) }
         }.done { steps, lesson, progresses in
             let startStepIndex: Int = {
                 switch startStep {
@@ -230,18 +232,20 @@ final class LessonInteractor: LessonInteractorProtocol {
         self.provider.fetchSteps(ids: [stepID]).map {
             $0.value
         }.then { steps -> Promise<(Step, Progress.IdType)> in
-            guard let step = steps?.first,
-                  let progressID = step.progressID else {
-                throw Error.fetchFailed
+            if let step = steps?.first, let progressID = step.progressID {
+                return .value((step, progressID))
             }
-            return .value((step, progressID))
+            throw Error.fetchFailed
         }.then { step, progressID -> Promise<([Progress]?, Step)> in
             self.provider.fetchProgresses(ids: [progressID]).map { ($0.value, step) }
         }.done { progresses, step in
-            guard let progress = progresses?.first else {
+            if let progress = progresses?.first {
+                self.presenter.presentStepTooltipInfoUpdate(
+                    response: .init(lesson: lesson, step: step, progress: progress)
+                )
+            } else {
                 throw Error.fetchFailed
             }
-            self.presenter.presentStepTooltipInfoUpdate(response: .init(lesson: lesson, step: step, progress: progress))
         }.cauterize()
     }
 
