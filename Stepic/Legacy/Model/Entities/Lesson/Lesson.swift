@@ -57,40 +57,77 @@ final class Lesson: NSManagedObject, IDFetchable {
         self.initialize(json)
     }
 
-    func loadSteps(completion: @escaping (() -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {
-        _ = ApiDataDownloader.steps.retrieve(ids: self.stepsArray, existing: self.steps, refreshMode: .update, success: {
-            newSteps in
-            self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
-            self.loadProgressesForSteps({
-                if !onlyLesson {
-                    if let u = self.unit {
-                        _ = ApiDataDownloader.assignments.retrieve(ids: u.assignmentsArray, existing: u.assignments, refreshMode: .update, success: {
-                            newAssignments in
-                            u.assignments = Sorter.sort(newAssignments, steps: self.steps)
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? Lesson else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.id != object.id { return false }
+        if self.title != object.title { return false }
+        if self.isFeatured != object.isFeatured { return false }
+        if self.isPublic != object.isPublic { return false }
+        if self.slug != object.slug { return false }
+        if self.coverURL != object.coverURL { return false }
+        if self.timeToComplete != object.timeToComplete { return false }
+        if self.stepsArray != object.stepsArray { return false }
+        if self.passedBy != object.passedBy { return false }
+        if self.voteDelta != object.voteDelta { return false }
+        if self.canEdit != object.canEdit { return false }
+        if self.canLearnLesson != object.canLearnLesson { return false }
+
+        return true
+    }
+
+    func loadSteps(
+        completion: @escaping () -> Void,
+        error errorHandler: ((String) -> Void)? = nil,
+        onlyLesson: Bool = false
+    ) {
+        _ = ApiDataDownloader.steps.retrieve(
+            ids: self.stepsArray,
+            existing: self.steps,
+            refreshMode: .update,
+            success: { newSteps in
+                self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
+                self.loadProgressesForSteps({
+                    if !onlyLesson {
+                        if let unit = self.unit {
+                            _ = ApiDataDownloader.assignments.retrieve(
+                                ids: unit.assignmentsArray,
+                                existing: unit.assignments,
+                                refreshMode: .update,
+                                success: { newAssignments in
+                                    unit.assignments = Sorter.sort(newAssignments, steps: self.steps)
+                                    completion()
+                                },
+                                error: { _ in
+                                    print("Error while downloading assignments")
+                                    errorHandler?("Error while downloading assignments")
+                                }
+                            )
+                        } else {
                             completion()
-                            }, error: {
-                                _ in
-                                print("Error while downloading assignments")
-                                errorHandler?("Error while downloading assignments")
-                        })
+                        }
                     } else {
                         completion()
                     }
-                } else {
-                    completion()
-                }
-            })
-            CoreDataHelper.shared.save()
-            }, error: {
-                _ in
+                })
+                CoreDataHelper.shared.save()
+            },
+            error: { _ in
                 print("Error while downloading steps")
                 errorHandler?("Error while downloading steps")
-        })
+            }
+        )
     }
 
-    func loadProgressesForSteps(_ completion: @escaping (() -> Void)) {
+    func loadProgressesForSteps(_ completion: @escaping () -> Void) {
         var progressIds: [String] = []
         var progresses: [Progress] = []
+
         for step in steps {
             if let progressId = step.progressID {
                 progressIds += [progressId]
@@ -100,20 +137,25 @@ final class Lesson: NSManagedObject, IDFetchable {
             }
         }
 
-        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-            newProgresses -> Void in
-            progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            for i in 0 ..< min(self.steps.count, progresses.count) {
-                self.steps[i].progress = progresses[i]
-            }
+        _ = ApiDataDownloader.progresses.retrieve(
+            ids: progressIds,
+            existing: progresses,
+            refreshMode: .update,
+            success: { newProgresses -> Void in
+                progresses = Sorter.sort(newProgresses, byIds: progressIds)
+                for i in 0..<min(self.steps.count, progresses.count) {
+                    self.steps[i].progress = progresses[i]
+                }
 
-            CoreDataHelper.shared.save()
+                CoreDataHelper.shared.save()
 
-            completion()
-            }, error: {
+                completion()
+            },
+            error: {
                 (_) -> Void in
                 print("Error while downloading progresses")
-        })
+            }
+        )
     }
 
     func getVideoURLs() -> [String] {

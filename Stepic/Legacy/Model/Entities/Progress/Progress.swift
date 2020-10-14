@@ -44,6 +44,25 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         self.initialize(json)
     }
 
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? Progress else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.id != object.id { return false }
+        if self.isPassed != object.isPassed { return false }
+        if self.score != object.score { return false }
+        if self.cost != object.cost { return false }
+        if self.numberOfSteps != object.numberOfSteps { return false }
+        if self.numberOfStepsPassed != object.numberOfStepsPassed { return false }
+        if self.lastViewed != object.lastViewed { return false }
+
+        return true
+    }
+
     var percentPassed: Float {
         self.numberOfSteps != 0
             ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps) * 100
