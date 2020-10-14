@@ -31,7 +31,6 @@ whitelist_rules:
   - contains_over_range_nil_comparison
   - control_statement
   - convenience_type
-  - cyclomatic_complexity
   - deployment_target
   - discarded_notification_center_observer
   - discouraged_direct_init

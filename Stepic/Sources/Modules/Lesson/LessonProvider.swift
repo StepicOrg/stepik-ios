@@ -165,7 +165,8 @@ final class LessonProvider: LessonProviderProtocol {
                     return self.progressesPersistenceService.fetch(ids: ids, page: 1)
                 }
             }.done { progresses, _ in
-                seal.fulfill(progresses)
+                let result = progresses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill(result)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

@@ -14,6 +14,7 @@ final class LessonInteractor: LessonInteractorProtocol {
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var currentLesson: Lesson?
+    private var currentData: LessonDataFlow.LessonLoad.Data?
 
     private var previousUnit: Unit?
     private var currentUnit: Unit? {
@@ -74,6 +75,7 @@ final class LessonInteractor: LessonInteractorProtocol {
             self.nextUnit = nil
             self.currentLesson = nil
             self.currentUnit = nil
+            self.currentData = nil
             self.assignmentsForCurrentSteps.removeAll()
 
             // FIXME: singleton
@@ -177,7 +179,15 @@ final class LessonInteractor: LessonInteractorProtocol {
                 }
             }()
 
-            steps.forEach { $0.lesson = lesson }
+            steps.forEach { step in
+                step.lesson = lesson
+
+                if let progress = progresses.first(where: { $0.id == step.progressID }) {
+                    step.progress = progress
+                }
+            }
+
+            CoreDataHelper.shared.save()
 
             let data = LessonDataFlow.LessonLoad.Data(
                 lesson: lesson,
@@ -187,7 +197,16 @@ final class LessonInteractor: LessonInteractorProtocol {
                 canEdit: lesson.canEdit
             )
 
-            self.presenter.presentLesson(response: .init(state: .success(data)))
+            if self.didLoadFromCache {
+                if self.currentData != data {
+                    self.presenter.presentLesson(response: .init(state: .success(data)))
+                }
+            } else {
+                self.presenter.presentLesson(response: .init(state: .success(data)))
+            }
+
+            self.currentData = data
+
             self.presenter.presentLessonTooltipInfo(
                 response: .init(lesson: lesson, steps: steps, progresses: progresses)
             )

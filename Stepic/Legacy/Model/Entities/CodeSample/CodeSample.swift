@@ -17,7 +17,7 @@ final class CodeSample: NSManagedObject {
 
     required convenience init(input: String, output: String) {
         self.init()
-        initialize(input: input, output: output)
+        self.initialize(input: input, output: output)
     }
 
     func initialize(input: String, output: String) {
@@ -26,6 +26,20 @@ final class CodeSample: NSManagedObject {
     }
 
     func update(input: String, output: String) {
-        initialize(input: input, output: output)
+        self.initialize(input: input, output: output)
+    }
+
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? CodeSample else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.input != object.input { return false }
+        if self.output != object.output { return false }
+
+        return true
     }
 }

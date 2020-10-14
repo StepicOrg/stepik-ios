@@ -19,16 +19,31 @@ final class CodeLimit: NSManagedObject {
 
     required convenience init(language: String, json: JSON) {
         self.init()
-        initialize(language: language, json: json)
+        self.initialize(language: language, json: json)
     }
 
     func initialize(language: String, json: JSON) {
-        languageString = language
-        time = json["time"].doubleValue
-        memory = json["memory"].doubleValue
+        self.languageString = language
+        self.time = json["time"].doubleValue
+        self.memory = json["memory"].doubleValue
     }
 
     func update(language: String, json: JSON) {
-        initialize(language: language, json: json)
+        self.initialize(language: language, json: json)
+    }
+
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? CodeLimit else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.languageString != object.languageString { return false }
+        if self.time != object.time { return false }
+        if self.memory != object.memory { return false }
+
+        return true
     }
 }
