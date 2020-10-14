@@ -142,7 +142,6 @@ extension Step {
         }
         set {
             self.managedProgress = newValue
-            self.progressID = newValue?.id
         }
     }
 

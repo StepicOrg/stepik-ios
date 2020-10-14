@@ -24,8 +24,8 @@ final class CodeLimit: NSManagedObject {
 
     func initialize(language: String, json: JSON) {
         self.languageString = language
-        self.time = json["time"].doubleValue
-        self.memory = json["memory"].doubleValue
+        self.time = json[JSONKey.time.rawValue].doubleValue
+        self.memory = json[JSONKey.memory.rawValue].doubleValue
     }
 
     func update(language: String, json: JSON) {
@@ -45,5 +45,10 @@ final class CodeLimit: NSManagedObject {
         if self.memory != object.memory { return false }
 
         return true
+    }
+
+    enum JSONKey: String {
+        case time
+        case memory
     }
 }
