@@ -28,7 +28,7 @@ final class StepPresenter: StepPresenterProtocol {
         if case .success(let data) = response.result {
             self.makeViewModel(
                 step: data.step,
-                stepFontSize: data.fontSize,
+                stepFontSize: data.stepFontSize,
                 storedImages: data.storedImages
             ).done(on: .global(qos: .userInitiated)) { viewModel in
                 DispatchQueue.main.async { [weak self] in

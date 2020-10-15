@@ -7,7 +7,7 @@ enum StepDataFlow {
 
         struct Data {
             let step: Step
-            let fontSize: StepFontSize
+            let stepFontSize: StepFontSize
             let storedImages: [StoredImage]
         }
 

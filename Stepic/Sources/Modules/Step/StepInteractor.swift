@@ -25,7 +25,7 @@ final class StepInteractor: StepInteractorProtocol {
     private let stepID: Step.IdType
     private var didAnalyticsSend = false
 
-    /// Current step index inside lesson.
+    /// Current step-index inside of the lesson.
     private var currentStepIndex: Int?
 
     init(
@@ -54,7 +54,7 @@ final class StepInteractor: StepInteractorProtocol {
                 fulfilled: self.provider.fetchStepFontSize(),
                 self.provider.fetchStoredImages(id: step.id)
             ).map { ($0, $1, step) }
-        }.done(on: .global(qos: .userInitiated)) { fontSize, storedImages, step in
+        }.done(on: .global(qos: .userInitiated)) { stepFontSize, storedImages, step in
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
@@ -64,7 +64,7 @@ final class StepInteractor: StepInteractorProtocol {
 
                 let data = StepDataFlow.StepLoad.Data(
                     step: step,
-                    fontSize: fontSize,
+                    stepFontSize: stepFontSize,
                     storedImages: storedImages.compactMap { imageURL, storedFile in
                         if let imageData = storedFile.data {
                             return StepDataFlow.StoredImage(url: imageURL, data: imageData)
@@ -88,20 +88,9 @@ final class StepInteractor: StepInteractorProtocol {
             }
 
             // FIXME: Legacy
-            LastStepGlobalContext.context.stepId = self.stepID
-            LocalProgressLastViewedUpdater.shared.updateView(for: step)
-
-            //Update LastStep locally from the context
-            if let course = LastStepGlobalContext.context.course,
-               let unitID = LastStepGlobalContext.context.unitId,
-               let stepID = LastStepGlobalContext.context.stepId {
-                DispatchQueue.main.sync {
-                    if let lastStep = course.lastStep {
-                        lastStep.update(unitId: unitID, stepId: stepID)
-                    } else {
-                        course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
-                    }
-                }
+            DispatchQueue.main.sync {
+                LocalProgressLastViewedUpdater.shared.updateView(for: step)
+                self.updateLastStepGlobalContext(step: step)
             }
         }.catch { error in
             print("new step interactor: error while loading step = \(error)")
@@ -230,6 +219,26 @@ final class StepInteractor: StepInteractorProtocol {
     }
 
     // MARK: Private API
+
+    // FIXME: Legacy
+    private func updateLastStepGlobalContext(step: Step) {
+        let lastStepGlobalContext = LastStepGlobalContext.context
+
+        lastStepGlobalContext.stepID = self.stepID
+
+        // Update LastStep locally from the context
+        guard let course = lastStepGlobalContext.course,
+              let unitID = lastStepGlobalContext.unitID,
+              let stepID = lastStepGlobalContext.stepID else {
+            return
+        }
+
+        if let lastStep = course.lastStep {
+            lastStep.update(unitId: unitID, stepId: stepID)
+        } else {
+            course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
+        }
+    }
 
     private func tryToPresentCachedThenRemoteSolutionsDiscussionThread(step: Step) {
         defer {

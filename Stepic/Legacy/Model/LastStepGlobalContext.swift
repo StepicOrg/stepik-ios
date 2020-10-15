@@ -14,6 +14,6 @@ final class LastStepGlobalContext {
     static let context = LastStepGlobalContext()
 
     var course: Course?
-    var unitId: Int?
-    var stepId: Int?
+    var unitID: Unit.IdType?
+    var stepID: Step.IdType?
 }

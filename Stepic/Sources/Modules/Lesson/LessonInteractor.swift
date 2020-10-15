@@ -80,7 +80,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
             // FIXME: singleton
             if case .unit(let unitID) = context {
-                LastStepGlobalContext.context.unitId = unitID
+                LastStepGlobalContext.context.unitID = unitID
             }
 
             let startStep = startStep ?? .index(0)
