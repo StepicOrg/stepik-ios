@@ -101,7 +101,11 @@ final class LessonInteractor: LessonInteractorProtocol {
             } else {
                 self.loadData(context: context, startStep: startStep, dataSourceType: .cache).done {
                     self.didLoadFromCache = true
-                    self.loadData(context: context, startStep: startStep, dataSourceType: .remote).cauterize()
+
+                    attempt(retryLimit: 3) { () -> Promise<Void> in
+                        self.loadData(context: context, startStep: startStep, dataSourceType: .remote)
+                    }.cauterize()
+
                     seal.fulfill(())
                 }.catch { _ in
                     self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
