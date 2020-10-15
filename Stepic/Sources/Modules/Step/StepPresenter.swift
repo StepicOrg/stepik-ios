@@ -4,7 +4,7 @@ import UIKit
 protocol StepPresenterProtocol {
     func presentStep(response: StepDataFlow.StepLoad.Response)
     func presentStepTextUpdate(response: StepDataFlow.StepTextUpdate.Response)
-    func presentPlayStep(response: StepDataFlow.PlayStep.Response)
+    func presentStepAutoplay(response: StepDataFlow.PlayStep.Response)
     func presentControlsUpdate(response: StepDataFlow.ControlsUpdate.Response)
     func presentDiscussionsButtonUpdate(response: StepDataFlow.DiscussionsButtonUpdate.Response)
     func presentSolutionsButtonUpdate(response: StepDataFlow.SolutionsButtonUpdate.Response)
@@ -55,8 +55,8 @@ final class StepPresenter: StepPresenterProtocol {
         self.viewController?.displayStepTextUpdate(viewModel: .init(processedContent: processedContent))
     }
 
-    func presentPlayStep(response: StepDataFlow.PlayStep.Response) {
-        self.viewController?.displayPlayStep(viewModel: .init())
+    func presentStepAutoplay(response: StepDataFlow.PlayStep.Response) {
+        self.viewController?.displayStepAutoplay(viewModel: .init())
     }
 
     func presentControlsUpdate(response: StepDataFlow.ControlsUpdate.Response) {

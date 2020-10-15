@@ -51,7 +51,7 @@ final class StepInteractor: StepInteractorProtocol {
             }
 
             return when(
-                fulfilled: self.provider.fetchCurrentFontSize(),
+                fulfilled: self.provider.fetchStepFontSize(),
                 self.provider.fetchStoredImages(id: step.id)
             ).map { ($0, $1, step) }
         }.done(on: .global(qos: .userInitiated)) { fontSize, storedImages, step in
@@ -274,7 +274,7 @@ extension StepInteractor: StepInputProtocol {
 
     func updateStepText(_ text: String) {
         when(
-            fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(id: self.stepID)
+            fulfilled: self.provider.fetchStepFontSize(), self.provider.fetchStoredImages(id: self.stepID)
         ).done { fetchResult in
             self.presenter.presentStepTextUpdate(
                 response: .init(
@@ -291,8 +291,8 @@ extension StepInteractor: StepInputProtocol {
         }.cauterize()
     }
 
-    func play() {
-        self.presenter.presentPlayStep(response: .init())
+    func autoplayStep() {
+        self.presenter.presentStepAutoplay(response: .init())
     }
 }
 

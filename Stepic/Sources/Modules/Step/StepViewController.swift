@@ -6,7 +6,7 @@ import UIKit
 protocol StepViewControllerProtocol: AnyObject {
     func displayStep(viewModel: StepDataFlow.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel)
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel)
+    func displayStepAutoplay(viewModel: StepDataFlow.PlayStep.ViewModel)
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel)
     func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel)
     func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
@@ -221,7 +221,7 @@ extension StepViewController: StepViewControllerProtocol {
         self.stepView?.updateTextContent(viewModel.processedContent)
     }
 
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {
+    func displayStepAutoplay(viewModel: StepDataFlow.PlayStep.ViewModel) {
         self.shouldRequestAutoplay = true
         self.requestAutoplayIfNeeded()
     }

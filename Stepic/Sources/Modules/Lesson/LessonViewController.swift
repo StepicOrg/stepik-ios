@@ -521,7 +521,7 @@ extension LessonViewController: LessonViewControllerProtocol {
             return
         }
 
-        stepModuleInput?.play()
+        stepModuleInput?.autoplayStep()
     }
 
     func displayEditStep(viewModel: LessonDataFlow.EditStepPresentation.ViewModel) {

@@ -5,8 +5,8 @@ protocol StepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
     func fetchRemoteStep(id: Step.IdType) -> Promise<Step?>
+    func fetchStepFontSize() -> Guarantee<StepFontSize>
     func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
-    func fetchCurrentFontSize() -> Guarantee<StepFontSize>
     func fetchStoredARQuickLookFile(remoteURL: URL) -> Guarantee<StoredFileProtocol?>
     func fetchDiscussionThreads(stepID: Step.IdType) -> Promise<FetchResult<[DiscussionThread]>>
     func fetchRemoteDiscussionThreads(ids: [DiscussionThread.IdType]) -> Promise<[DiscussionThread]>
@@ -99,7 +99,7 @@ final class StepProvider: StepProviderProtocol {
         }
     }
 
-    func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
+    func fetchStepFontSize() -> Guarantee<StepFontSize> {
         Guarantee { seal in
             seal(self.stepFontSizeStorageManager.globalStepFontSize)
         }

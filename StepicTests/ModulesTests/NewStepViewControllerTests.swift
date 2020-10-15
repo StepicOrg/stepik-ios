@@ -16,7 +16,7 @@ private final class NewStepViewControllerMock: StepViewControllerProtocol {
 
     func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) {}
 
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {}
+    func displayStepAutoplay(viewModel: StepDataFlow.PlayStep.ViewModel) {}
 
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) {}
 
