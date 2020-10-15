@@ -7,12 +7,46 @@ enum LessonDataFlow {
     enum LessonLoad {
         struct Request {}
 
-        struct Data {
+        struct Data: Equatable {
             let lesson: Lesson
             let steps: [Step]
             let progresses: [Progress]
             let startStepIndex: Int
             let canEdit: Bool
+
+            static func == (lhs: Data, rhs: Data) -> Bool {
+                if !lhs.lesson.equals(rhs.lesson) {
+                    return false
+                }
+
+                if lhs.steps.count != rhs.steps.count {
+                    return false
+                }
+                for (lhsStep, rhsStep) in zip(lhs.steps, rhs.steps) {
+                    if !lhsStep.equals(rhsStep) {
+                        return false
+                    }
+                }
+
+                if lhs.progresses.count != rhs.progresses.count {
+                    return false
+                }
+                for (lhsProgress, rhsProgress) in zip(lhs.progresses, rhs.progresses) {
+                    if !lhsProgress.equals(rhsProgress) {
+                        return false
+                    }
+                }
+
+                if lhs.startStepIndex != rhs.startStepIndex {
+                    return false
+                }
+
+                if lhs.canEdit != rhs.canEdit {
+                    return false
+                }
+
+                return true
+            }
         }
 
         struct Response {

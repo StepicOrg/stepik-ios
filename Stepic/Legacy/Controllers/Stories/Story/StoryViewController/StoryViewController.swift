@@ -15,14 +15,6 @@ final class StoryViewController: UIViewController {
     @IBOutlet weak var progressView: SegmentedProgressView!
     @IBOutlet weak var partsContainerView: UIView!
 
-    private lazy var topGradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer(
-            colors: [UIColor.black.withAlphaComponent(0.5), UIColor.clear],
-            rotationAngle: 0
-        )
-        return layer
-    }()
-
     var presenter: StoryPresenterProtocol?
 
     private var didAppear: Bool = false
@@ -56,7 +48,6 @@ final class StoryViewController: UIViewController {
 
         self.closeButtonTapProxyView.targetView = self.closeButton
 
-        self.view.layer.insertSublayer(self.topGradientLayer, below: self.progressView.layer)
         self.presenter?.animate()
     }
 
@@ -75,13 +66,6 @@ final class StoryViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        self.topGradientLayer.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: self.view.frame.width,
-            height: 2 * self.closeButton.frame.maxY
-        )
 
         self.didLayout = true
 

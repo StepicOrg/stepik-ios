@@ -74,6 +74,42 @@ final class StepOptions: NSManagedObject {
         }
     }
 
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? StepOptions else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.executionTimeLimit != object.executionTimeLimit { return false }
+        if self.executionMemoryLimit != object.executionMemoryLimit { return false }
+        if self.isRunUserCodeAllowed != object.isRunUserCodeAllowed { return false }
+
+        if self.limits.count != object.limits.count { return false }
+        for (lhsLimit, rhsLimit) in zip(self.limits, object.limits) {
+            if !lhsLimit.equals(rhsLimit) {
+                return false
+            }
+        }
+
+        if self.templates.count != object.templates.count { return false }
+        for (lhsTemplate, rhsTemplate) in zip(self.templates, object.templates) {
+            if !lhsTemplate.equals(rhsTemplate) {
+                return false
+            }
+        }
+
+        if self.samples.count != object.samples.count { return false }
+        for (lhsSample, rhsSample) in zip(self.samples, object.samples) {
+            if !lhsSample.equals(rhsSample) {
+                return false
+            }
+        }
+
+        return true
+    }
+
     func limit(language: CodeLanguage) -> CodeLimit? {
         self.limit(language: language.rawValue)
     }

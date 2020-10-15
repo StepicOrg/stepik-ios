@@ -100,6 +100,10 @@ final class CourseInfoTabInfoView: UIView {
             self.addTextBlockView(block: .certificateDetails, message: certificateDetailsText)
         }
 
+        if viewModel.aboutText.isEmpty {
+            self.delegate?.courseInfoTabInfoViewDidLoadContent(self)
+        }
+
         // Redraw self cause geometry & sizes can be changed
         self.setNeedsLayout()
         self.layoutIfNeeded()

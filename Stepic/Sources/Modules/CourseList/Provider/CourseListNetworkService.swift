@@ -208,18 +208,34 @@ final class TeacherCourseListNetworkService: BaseCourseListNetworkService, Cours
 }
 
 final class VisitedCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
-    private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
+    let type: VisitedCourseListType
+    private let visitedCoursesAPI: VisitedCoursesAPI
 
-    init(visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol, coursesAPI: CoursesAPI) {
-        self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
+    init(
+        type: VisitedCourseListType,
+        coursesAPI: CoursesAPI,
+        visitedCoursesAPI: VisitedCoursesAPI
+    ) {
+        self.type = type
+        self.visitedCoursesAPI = visitedCoursesAPI
         super.init(coursesAPI: coursesAPI)
     }
 
     func fetch(page: Int) -> Promise<([Course], Meta)> {
-        self.visitedCourseListPersistenceService.fetch().map { ($0, Meta.oneAndOnlyPage) }
-    }
-
-    enum Error: Swift.Error {
-        case notImplemented
+        Promise { seal in
+            self.visitedCoursesAPI.retrieve(
+                page: page
+            ).then { visitedCourses, meta -> Promise<([Course.IdType], Meta, [Course])> in
+                let ids = visitedCourses.map(\.courseID)
+                return self.coursesAPI
+                    .retrieve(ids: ids)
+                    .map { (ids, meta, $0) }
+            }.done { ids, _, courses in
+                let resultCourses = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((resultCourses, Meta.oneAndOnlyPage))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
     }
 }
