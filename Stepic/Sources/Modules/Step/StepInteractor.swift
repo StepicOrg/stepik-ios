@@ -23,6 +23,9 @@ final class StepInteractor: StepInteractorProtocol {
     private let analytics: Analytics
 
     private let stepID: Step.IdType
+    private var currentData: StepDataFlow.StepLoad.Data?
+
+    private var didLoadFromCache = false
     private var didAnalyticsSend = false
 
     /// Current step-index inside of the lesson.
@@ -42,54 +45,7 @@ final class StepInteractor: StepInteractorProtocol {
     }
 
     func doStepLoad(request: StepDataFlow.StepLoad.Request) {
-        firstly {
-            self.provider.fetchStep(id: self.stepID)
-        }.then(on: .global(qos: .userInitiated)) {
-            fetchResult -> Promise<(StepFontSize, [(imageURL: URL, storedFile: StoredFileProtocol)], Step)> in
-            guard let step = fetchResult.value else {
-                throw Error.fetchFailed
-            }
-
-            return when(
-                fulfilled: self.provider.fetchStepFontSize(),
-                self.provider.fetchStoredImages(id: step.id)
-            ).map { ($0, $1, step) }
-        }.done(on: .global(qos: .userInitiated)) { stepFontSize, storedImages, step in
-            self.currentStepIndex = step.position - 1
-
-            let storedImages = storedImages.compactMap { imageURL, storedFile -> StepDataFlow.StoredImage? in
-                if let imageData = storedFile.data {
-                    return StepDataFlow.StoredImage(url: imageURL, data: imageData)
-                }
-                return nil
-            }
-
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                let data = StepDataFlow.StepLoad.Data(
-                    step: step,
-                    stepFontSize: stepFontSize,
-                    storedImages: storedImages
-                )
-
-                strongSelf.presenter.presentStep(response: .init(result: .success(data)))
-                strongSelf.tryToPresentSolutionsButtonUpdate(step: step)
-            }
-
-            self.sendAnalyticsEventsIfNeeded(step: step)
-
-            // FIXME: Legacy
-            DispatchQueue.main.sync {
-                LocalProgressLastViewedUpdater.shared.updateView(for: step)
-                self.updateLastStepGlobalContext(step: step)
-            }
-        }.catch { error in
-            print("new step interactor: error while loading step = \(error)")
-            self.presenter.presentStep(response: .init(result: .failure(Error.fetchFailed)))
-        }
+        self.loadStepData().cauterize()
     }
 
     func doStepNavigationRequest(request: StepDataFlow.StepNavigationRequest.Request) {
@@ -214,6 +170,127 @@ final class StepInteractor: StepInteractorProtocol {
 
     // MARK: Private API
 
+    private func loadStepData() -> Promise<Void> {
+        Promise { seal in
+            self.fetchStepInAppropriateMode(stepID: self.stepID).done { fetchResult in
+                let step = fetchResult.value.step
+                self.currentStepIndex = step.position - 1
+                self.currentData = fetchResult.value
+
+                switch fetchResult.source {
+                case .cache:
+                    self.didLoadFromCache = true
+                    self.presenter.presentStep(response: .init(result: .success(fetchResult.value)))
+                    // Fetch remote step data with retry.
+                    attempt(retryLimit: 3) { () -> Promise<Void> in
+                        self.loadStepData()
+                    }.cauterize()
+                case .remote:
+                    // TODO: Reload if needed.
+                    self.presenter.presentStep(response: .init(result: .success(fetchResult.value)))
+                }
+
+                self.tryToPresentSolutionsButtonUpdate(step: step)
+                self.sendAnalyticsEventsIfNeeded(step: step)
+
+                // FIXME: Legacy
+                DispatchQueue.main.async {
+                    LocalProgressLastViewedUpdater.shared.updateView(for: step)
+                    self.updateLastStepGlobalContext(step: step)
+                }
+
+                seal.fulfill(())
+            }.catch { error in
+                print("StepInteractor :: error while loading step data = \(error)")
+
+                let shouldPresentStepErrorState: Bool
+
+                if let interactorError = error as? Error {
+                    switch interactorError {
+                    case .fetchFromCacheFailed:
+                        self.didLoadFromCache = true
+                        self.doStepLoad(request: .init())
+                        shouldPresentStepErrorState = false
+                    case .fetchFromRemoteFailed:
+                        shouldPresentStepErrorState = !self.didLoadFromCache || self.currentData == nil
+                    default:
+                        shouldPresentStepErrorState = true
+                    }
+                } else {
+                    shouldPresentStepErrorState = true
+                }
+
+                if shouldPresentStepErrorState {
+                    self.presenter.presentStep(response: .init(result: .failure(error)))
+                }
+
+                seal.reject(error)
+            }
+        }
+    }
+
+    private func fetchStepInAppropriateMode(stepID: Step.IdType) -> Promise<FetchResult<StepDataFlow.StepLoad.Data>> {
+        Promise { seal in
+            let dataSourceType: DataSourceType = self.didLoadFromCache ? .remote : .cache
+
+            firstly { () -> Promise<Step?> in
+                switch dataSourceType {
+                case .remote:
+                    return self.provider.fetchRemoteStep(id: stepID)
+                case .cache:
+                    return self.provider.fetchCachedStep(id: stepID)
+                }
+            }.then(on: .global(qos: .userInitiated)) { stepOrNil -> Promise<Step> in
+                if let step = stepOrNil {
+                    return .value(step)
+                }
+
+                switch dataSourceType {
+                case .remote:
+                    throw Error.fetchFromRemoteFailed
+                case .cache:
+                    throw Error.fetchFromCacheFailed
+                }
+            }.then(on: .global(qos: .userInitiated)) {
+                step -> Promise<(StepFontSize, [(imageURL: URL, storedFile: StoredFileProtocol)], Step)> in
+                when(
+                    fulfilled: self.provider.fetchStepFontSize(),
+                    self.provider.fetchStoredImages(id: stepID)
+                ).map { ($0, $1, step) }
+            }.then(on: .global(qos: .userInitiated)) {
+                stepFontSize, storedImages, step -> Promise<StepDataFlow.StepLoad.Data> in
+                let storedImages = storedImages.compactMap { imageURL, storedFile -> StepDataFlow.StoredImage? in
+                    if let imageData = storedFile.data {
+                        return StepDataFlow.StoredImage(url: imageURL, data: imageData)
+                    }
+                    return nil
+                }
+
+                let data = StepDataFlow.StepLoad.Data(
+                    step: step,
+                    stepFontSize: stepFontSize,
+                    storedImages: storedImages
+                )
+
+                return .value(data)
+            }.done { data in
+                switch dataSourceType {
+                case .remote:
+                    seal.fulfill(FetchResult(value: data, source: .remote))
+                case .cache:
+                    seal.fulfill(FetchResult(value: data, source: .cache))
+                }
+            }.catch { _ in
+                switch dataSourceType {
+                case .remote:
+                    seal.reject(Error.fetchFromRemoteFailed)
+                case .cache:
+                    seal.reject(Error.fetchFromCacheFailed)
+                }
+            }
+        }
+    }
+
     private func sendAnalyticsEventsIfNeeded(step: Step) {
         if !self.didAnalyticsSend {
             self.didAnalyticsSend = true
@@ -266,6 +343,8 @@ final class StepInteractor: StepInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case fetchFromCacheFailed
+        case fetchFromRemoteFailed
         case arQuickLookUnsupported
     }
 }
