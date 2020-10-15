@@ -795,6 +795,7 @@
 		2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */; };
 		2CF6C4EB244DF619000FAAED /* ARQuickLookStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6C4EA244DF619000FAAED /* ARQuickLookStoredFileManager.swift */; };
 		2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */; };
+		2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */; };
 		2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */; };
@@ -2233,6 +2234,7 @@
 		2CF6649122F307A500F2A899 /* Model_user_ is_organization.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_user_ is_organization.xcdatamodel"; sourceTree = "<group>"; };
 		2CF6C4EA244DF619000FAAED /* ARQuickLookStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQuickLookStoredFileManager.swift; sourceTree = "<group>"; };
 		2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCellularDataForDownloadsStorageManager.swift; sourceTree = "<group>"; };
+		2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromiseKit+Retry.swift"; sourceTree = "<group>"; };
 		2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsPersistenceService.swift; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
@@ -3082,8 +3084,8 @@
 		2C096588236C5727005B771A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				2C48D5FB228D865E00739477 /* Guarantee+ThenableWithFallback.swift */,
-				2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */,
+				2CF9BD372538504D00C2AFD2 /* Alamofire */,
+				2CF9BD332538503C00C2AFD2 /* PromiseKit */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -4713,6 +4715,23 @@
 				2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */,
 			);
 			path = ModulesTests;
+			sourceTree = "<group>";
+		};
+		2CF9BD332538503C00C2AFD2 /* PromiseKit */ = {
+			isa = PBXGroup;
+			children = (
+				2C48D5FB228D865E00739477 /* Guarantee+ThenableWithFallback.swift */,
+				2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */,
+			);
+			path = PromiseKit;
+			sourceTree = "<group>";
+		};
+		2CF9BD372538504D00C2AFD2 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */,
+			);
+			path = Alamofire;
 			sourceTree = "<group>";
 		};
 		2CFED669252C647900FCAD41 /* TableViewDataSource */ = {
@@ -7968,6 +7987,7 @@
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */,
+				2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */,
 				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
