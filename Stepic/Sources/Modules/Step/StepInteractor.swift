@@ -57,6 +57,13 @@ final class StepInteractor: StepInteractorProtocol {
         }.done(on: .global(qos: .userInitiated)) { stepFontSize, storedImages, step in
             self.currentStepIndex = step.position - 1
 
+            let storedImages = storedImages.compactMap { imageURL, storedFile -> StepDataFlow.StoredImage? in
+                if let imageData = storedFile.data {
+                    return StepDataFlow.StoredImage(url: imageURL, data: imageData)
+                }
+                return nil
+            }
+
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else {
                     return
@@ -65,27 +72,14 @@ final class StepInteractor: StepInteractorProtocol {
                 let data = StepDataFlow.StepLoad.Data(
                     step: step,
                     stepFontSize: stepFontSize,
-                    storedImages: storedImages.compactMap { imageURL, storedFile in
-                        if let imageData = storedFile.data {
-                            return StepDataFlow.StoredImage(url: imageURL, data: imageData)
-                        }
-                        return nil
-                    }
+                    storedImages: storedImages
                 )
+
                 strongSelf.presenter.presentStep(response: .init(result: .success(data)))
-
-                strongSelf.tryToPresentCachedThenRemoteSolutionsDiscussionThread(step: step)
+                strongSelf.tryToPresentSolutionsButtonUpdate(step: step)
             }
 
-            if !self.didAnalyticsSend {
-                self.analytics.send(.stepOpened(id: step.id, blockName: step.block.name, position: step.position - 1))
-
-                if step.hasSubmissionRestrictions {
-                    self.analytics.send(.stepWithSubmissionRestrictionsOpened)
-                }
-
-                self.didAnalyticsSend = true
-            }
+            self.sendAnalyticsEventsIfNeeded(step: step)
 
             // FIXME: Legacy
             DispatchQueue.main.sync {
@@ -220,6 +214,18 @@ final class StepInteractor: StepInteractorProtocol {
 
     // MARK: Private API
 
+    private func sendAnalyticsEventsIfNeeded(step: Step) {
+        if !self.didAnalyticsSend {
+            self.didAnalyticsSend = true
+
+            self.analytics.send(.stepOpened(id: step.id, blockName: step.block.name, position: step.position - 1))
+
+            if step.hasSubmissionRestrictions {
+                self.analytics.send(.stepWithSubmissionRestrictionsOpened)
+            }
+        }
+    }
+
     // FIXME: Legacy
     private func updateLastStepGlobalContext(step: Step) {
         let lastStepGlobalContext = LastStepGlobalContext.context
@@ -240,7 +246,7 @@ final class StepInteractor: StepInteractorProtocol {
         }
     }
 
-    private func tryToPresentCachedThenRemoteSolutionsDiscussionThread(step: Step) {
+    private func tryToPresentSolutionsButtonUpdate(step: Step) {
         defer {
             self.doSolutionsButtonUpdate(request: .init())
         }

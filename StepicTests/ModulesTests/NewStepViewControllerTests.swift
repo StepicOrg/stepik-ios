@@ -70,7 +70,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                 presenter.presentStep(
                     response: .init(
-                        result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                        result: .success(StepDataFlow.StepLoad.Data(step: step, stepFontSize: .small, storedImages: []))
                     )
                 )
 
@@ -139,7 +139,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                 presenter.presentStep(
                     response: .init(
-                        result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                        result: .success(StepDataFlow.StepLoad.Data(step: step, stepFontSize: .small, storedImages: []))
                     )
                 )
 
@@ -208,7 +208,7 @@ class NewStepViewControllerSpec: QuickSpec {
                 waitUntil { done in
                     presenter.presentStep(
                         response: .init(
-                            result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                            result: .success(StepDataFlow.StepLoad.Data(step: step, stepFontSize: .small, storedImages: []))
                         )
                     )
 
