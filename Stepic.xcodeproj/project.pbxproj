@@ -650,6 +650,13 @@
 		2CA3E8AF24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */; };
 		2CA47D4A248ABF0E00925335 /* LogoutDataClearService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */; };
 		2CA51BB024AB9B4300A400AE /* NewProfileUserActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */; };
+		2CA9307B253C691F007B717A /* StepPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9307A253C691F007B717A /* StepPlainObject.swift */; };
+		2CA93080253C6B03007B717A /* DiscussionThreadPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9307F253C6B03007B717A /* DiscussionThreadPlainObject.swift */; };
+		2CA93088253C79C9007B717A /* AttemptPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA93087253C79C9007B717A /* AttemptPlainObject.swift */; };
+		2CA93091253C86D0007B717A /* VideoURLPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA93090253C86D0007B717A /* VideoURLPlainObject.swift */; };
+		2CA93099253C8760007B717A /* VideoPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA93098253C8760007B717A /* VideoPlainObject.swift */; };
+		2CA930A4253C884F007B717A /* BlockPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA930A3253C884F007B717A /* BlockPlainObject.swift */; };
+		2CA930B7253C8A65007B717A /* ProgressPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
@@ -2079,6 +2086,13 @@
 		2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAboutBlockView.swift; sourceTree = "<group>"; };
 		2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutDataClearService.swift; sourceTree = "<group>"; };
 		2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewModel.swift; sourceTree = "<group>"; };
+		2CA9307A253C691F007B717A /* StepPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepPlainObject.swift; sourceTree = "<group>"; };
+		2CA9307F253C6B03007B717A /* DiscussionThreadPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadPlainObject.swift; sourceTree = "<group>"; };
+		2CA93087253C79C9007B717A /* AttemptPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptPlainObject.swift; sourceTree = "<group>"; };
+		2CA93090253C86D0007B717A /* VideoURLPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoURLPlainObject.swift; sourceTree = "<group>"; };
+		2CA93098253C8760007B717A /* VideoPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlainObject.swift; sourceTree = "<group>"; };
+		2CA930A3253C884F007B717A /* BlockPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlainObject.swift; sourceTree = "<group>"; };
+		2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPlainObject.swift; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -3564,6 +3578,7 @@
 			children = (
 				0800B81A1D06DC1B006C987E /* Comment.swift */,
 				0800B8171D06D961006C987E /* DiscussionProxy.swift */,
+				2CA9307F253C6B03007B717A /* DiscussionThreadPlainObject.swift */,
 				086A8B241D21434B00F45C45 /* Vote.swift */,
 			);
 			path = Discussions;
@@ -4449,6 +4464,15 @@
 				08EF9A071C91D0F800433E4A /* StepikVideoPlayerViewController.xib */,
 			);
 			path = StepikVideoPlayerViewController;
+			sourceTree = "<group>";
+		};
+		2CA9308F253C86BD007B717A /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				2CA93098253C8760007B717A /* VideoPlainObject.swift */,
+				2CA93090253C86D0007B717A /* VideoURLPlainObject.swift */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		2CA9D98B20122EAF007AA743 /* AdaptiveLeaderboardsNames */ = {
@@ -5622,13 +5646,18 @@
 		2CFF903F242A2AAA00FD7311 /* PlainObjects */ = {
 			isa = PBXGroup;
 			children = (
+				2CA93087253C79C9007B717A /* AttemptPlainObject.swift */,
+				2CA930A3253C884F007B717A /* BlockPlainObject.swift */,
 				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
 				2CB3563D2476CB7B00E59A03 /* MagicLink.swift */,
+				2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */,
+				2CA9307A253C691F007B717A /* StepPlainObject.swift */,
 				2CF10C882384243100F8CC95 /* StepSource.swift */,
 				2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */,
 				2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
+				2CA9308F253C86BD007B717A /* Video */,
 			);
 			path = PlainObjects;
 			sourceTree = "<group>";
@@ -7859,6 +7888,7 @@
 				2C97E00A215E47EC005684A1 /* SearchQueriesPresenter.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* UILabelExtensions.swift in Sources */,
 				08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */,
+				2CA93091253C86D0007B717A /* VideoURLPlainObject.swift in Sources */,
 				08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
@@ -8066,6 +8096,7 @@
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
+				2CA930B7253C8A65007B717A /* ProgressPlainObject.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
@@ -8224,6 +8255,7 @@
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */,
+				2CA930A4253C884F007B717A /* BlockPlainObject.swift in Sources */,
 				2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */,
 				2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
@@ -8280,6 +8312,7 @@
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */,
 				2CC5AA6C242A34C500C09F94 /* RecommendationsAPI.swift in Sources */,
+				2CA93099253C8760007B717A /* VideoPlainObject.swift in Sources */,
 				2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepikToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
@@ -8459,6 +8492,7 @@
 				62E9860632B3BB21E24DF368 /* SectionsNetworkService.swift in Sources */,
 				62E9851C596D4146AC811EAE /* UnitsNetworkService.swift in Sources */,
 				62E983B402214CA82BF050E8 /* LessonsNetworkService.swift in Sources */,
+				2CA93080253C6B03007B717A /* DiscussionThreadPlainObject.swift in Sources */,
 				2CE9BF44248D07D0004F6659 /* CodeTemplatesPersistenceService.swift in Sources */,
 				2C8F3AE123CCBD26004D113A /* DownloadVideoQuality.swift in Sources */,
 				2CDB95892412C08100F676A7 /* SpotlightContinueUserActivityService.swift in Sources */,
@@ -8533,6 +8567,7 @@
 				62E98B04C8A3F4DFE7F8B00F /* BaseExploreViewController.swift in Sources */,
 				62E9888D488FC62B6F16A332 /* CourseInfoAssembly.swift in Sources */,
 				62E9826776831EAD02AA9A18 /* CourseInfoDataFlow.swift in Sources */,
+				2CA93088253C79C9007B717A /* AttemptPlainObject.swift in Sources */,
 				62E98CBA3A377097538AB3D2 /* CourseInfoHeaderViewModel.swift in Sources */,
 				62E98CE13AF85515F639F07D /* CourseInfoInteractor.swift in Sources */,
 				62E98C6E8D9F16F809760722 /* CourseInfoPresenter.swift in Sources */,
@@ -8811,6 +8846,7 @@
 				62E9833E9BFB4229BFEB4DD5 /* CodeQuizFullscreenPresenter.swift in Sources */,
 				62E98042B4F232FCD9788187 /* CodeQuizFullscreenProvider.swift in Sources */,
 				62E983915F585672BB010B73 /* CodeQuizFullscreenView.swift in Sources */,
+				2CA9307B253C691F007B717A /* StepPlainObject.swift in Sources */,
 				62E98BE715996F6FF7C93EF1 /* CodeQuizFullscreenViewController.swift in Sources */,
 				62E98ED854756E2499392186 /* CodeQuizFullscreenViewModel.swift in Sources */,
 				62E98A9DF433C986B49F7980 /* CodeQuizFullscreenCodeViewController.swift in Sources */,

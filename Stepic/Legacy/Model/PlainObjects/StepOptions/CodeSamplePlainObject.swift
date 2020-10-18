@@ -1,6 +1,6 @@
 import Foundation
 
-struct CodeSamplePlainObject {
+struct CodeSamplePlainObject: Equatable {
     let input: String
     let output: String
 }

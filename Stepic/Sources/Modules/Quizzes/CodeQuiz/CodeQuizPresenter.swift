@@ -68,7 +68,7 @@ final class CodeQuizPresenter: CodeQuizPresenterProtocol {
             code: response.code,
             codeTemplate: codeTemplate,
             language: response.language,
-            languages: stepOptions.languages,
+            languages: stepOptions.getLanguages(),
             samples: stepOptions.samples.map { processCodeSample($0) },
             limit: codeLimit,
             codeEditorTheme: self.codeEditorThemeService.theme,

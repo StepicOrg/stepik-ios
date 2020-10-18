@@ -23,7 +23,7 @@ final class StepInteractor: StepInteractorProtocol {
     private let analytics: Analytics
 
     private let stepID: Step.IdType
-    private var currentData: StepDataFlow.StepLoad.Data?
+    private var currentStepPlainObject: StepPlainObject?
 
     private var didLoadFromCache = false
     private var didAnalyticsSend = false
@@ -173,32 +173,34 @@ final class StepInteractor: StepInteractorProtocol {
     private func loadStepData() -> Promise<Void> {
         Promise { seal in
             self.fetchStepInAppropriateMode(stepID: self.stepID).done { fetchResult in
-                let step = fetchResult.value.step
-                self.currentStepIndex = step.position - 1
+                let newStep = fetchResult.value.step
+                let newStepPlainObject = StepPlainObject(step: newStep)
+
+                self.currentStepIndex = newStep.position - 1
 
                 switch fetchResult.source {
                 case .cache:
                     self.didLoadFromCache = true
                     self.presenter.presentStep(response: .init(result: .success(fetchResult.value)))
                     // Fetch remote step data with retry.
-                    attempt(retryLimit: 3) { () -> Promise<Void> in
+                    attempt(retryLimit: 2) { () -> Promise<Void> in
                         self.loadStepData()
                     }.cauterize()
                 case .remote:
-                    if self.currentData != fetchResult.value {
+                    if self.currentStepPlainObject != newStepPlainObject {
                         self.presenter.presentStep(response: .init(result: .success(fetchResult.value)))
                     }
                 }
 
-                self.currentData = fetchResult.value
+                self.currentStepPlainObject = newStepPlainObject
 
-                self.tryToPresentSolutionsButtonUpdate(step: step)
-                self.sendAnalyticsEventsIfNeeded(step: step)
+                self.tryToPresentSolutionsButtonUpdate(step: newStep)
+                self.sendAnalyticsEventsIfNeeded(step: newStep)
 
                 // FIXME: Legacy
                 DispatchQueue.main.async {
-                    LocalProgressLastViewedUpdater.shared.updateView(for: step)
-                    self.updateLastStepGlobalContext(step: step)
+                    LocalProgressLastViewedUpdater.shared.updateView(for: newStep)
+                    self.updateLastStepGlobalContext(step: newStep)
                 }
 
                 seal.fulfill(())
@@ -214,7 +216,7 @@ final class StepInteractor: StepInteractorProtocol {
                         self.doStepLoad(request: .init())
                         shouldPresentStepErrorState = false
                     case .fetchFromRemoteFailed:
-                        shouldPresentStepErrorState = !self.didLoadFromCache || self.currentData == nil
+                        shouldPresentStepErrorState = !self.didLoadFromCache || self.currentStepPlainObject == nil
                     default:
                         shouldPresentStepErrorState = true
                     }

@@ -57,6 +57,11 @@ final class FillBlanksDataset: Dataset {
         super.init(coder: coder)
     }
 
+    private override init() {
+        self.components = []
+        super.init()
+    }
+
     override func encode(with coder: NSCoder) {
         coder.encode(self.components, forKey: JSONKey.components.rawValue)
     }
@@ -71,12 +76,18 @@ final class FillBlanksDataset: Dataset {
         return true
     }
 
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = FillBlanksDataset()
+        copy.components = self.components.map { $0.copy() as! FillBlanksComponent }
+        return copy
+    }
+
     enum JSONKey: String {
         case components
     }
 }
 
-final class FillBlanksComponent: NSObject, NSCoding {
+final class FillBlanksComponent: NSObject, NSCoding, NSCopying {
     var componentType: ComponentType
     var text: String
     var options: [String]
@@ -118,6 +129,14 @@ final class FillBlanksComponent: NSObject, NSCoding {
         super.init()
     }
 
+    private override init() {
+        self.componentType = .text
+        self.text = ""
+        self.options = []
+
+        super.init()
+    }
+
     func encode(with coder: NSCoder) {
         coder.encode(self.componentType.rawValue, forKey: JSONKey.type.rawValue)
         coder.encode(self.text, forKey: JSONKey.text.rawValue)
@@ -134,6 +153,14 @@ final class FillBlanksComponent: NSObject, NSCoding {
         if self.text != object.text { return false }
         if self.options != object.options { return false }
         return true
+    }
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = FillBlanksComponent()
+        copy.componentType = self.componentType
+        copy.text = self.text
+        copy.options = self.options
+        return copy
     }
 
     private static func sanitizeText(_ text: String) -> String {

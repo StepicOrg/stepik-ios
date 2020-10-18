@@ -5,26 +5,10 @@ enum StepDataFlow {
     enum StepLoad {
         struct Request {}
 
-        struct Data: Equatable {
+        struct Data {
             let step: Step
             let stepFontSize: StepFontSize
             let storedImages: [StoredImage]
-
-            static func == (lhs: Data, rhs: Data) -> Bool {
-                if !lhs.step.equals(rhs.step) {
-                    return false
-                }
-
-                if lhs.stepFontSize != rhs.stepFontSize {
-                    return false
-                }
-
-                if lhs.storedImages != rhs.storedImages {
-                    return false
-                }
-
-                return false
-            }
         }
 
         struct Response {

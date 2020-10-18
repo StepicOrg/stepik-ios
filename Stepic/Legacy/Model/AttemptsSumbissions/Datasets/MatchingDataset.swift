@@ -57,6 +57,11 @@ final class MatchingDataset: Dataset {
         super.init(coder: coder)
     }
 
+    private override init() {
+        self.pairs = []
+        super.init()
+    }
+
     override func encode(with coder: NSCoder) {
         coder.encode(self.firstValues, forKey: JSONKey.first.rawValue)
         coder.encode(self.secondValues, forKey: JSONKey.second.rawValue)
@@ -71,6 +76,12 @@ final class MatchingDataset: Dataset {
         if self.firstValues != object.firstValues { return false }
         if self.secondValues != object.secondValues { return false }
         return true
+    }
+
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = MatchingDataset()
+        copy.pairs = self.pairs
+        return copy
     }
 
     enum JSONKey: String {

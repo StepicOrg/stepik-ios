@@ -44,6 +44,13 @@ final class ChoiceDataset: Dataset {
         super.init(coder: coder)
     }
 
+    private override init() {
+        self.isMultipleChoice = false
+        self.options = []
+
+        super.init()
+    }
+
     override func encode(with coder: NSCoder) {
         coder.encode(self.isMultipleChoice, forKey: JSONKey.isMultipleChoice.rawValue)
         coder.encode(self.options, forKey: JSONKey.options.rawValue)
@@ -58,6 +65,13 @@ final class ChoiceDataset: Dataset {
         if self.isMultipleChoice != object.isMultipleChoice { return false }
         if self.options != object.options { return false }
         return true
+    }
+
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = ChoiceDataset()
+        copy.isMultipleChoice = self.isMultipleChoice
+        copy.options = self.options
+        return copy
     }
 
     enum JSONKey: String {
