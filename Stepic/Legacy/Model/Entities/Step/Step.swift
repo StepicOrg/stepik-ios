@@ -13,9 +13,6 @@ import SwiftyJSON
 final class Step: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    var canEdit = false
-    var hasReview = false
-
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
@@ -84,6 +81,8 @@ final class Step: NSManagedObject, IDFetchable {
         if self.passedByCount != object.passedByCount { return false }
         if self.correctRatio != object.correctRatio { return false }
         if self.canEdit != object.canEdit { return false }
+
+        if !self.block.equals(object.block) { return false }
 
         if let options = self.options {
             if !options.equals(object.options) { return false }

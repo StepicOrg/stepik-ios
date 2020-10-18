@@ -35,6 +35,13 @@ final class FreeAnswerDataset: Dataset {
         super.init(coder: coder)
     }
 
+    private override init() {
+        self.isHTMLEnabled = false
+        self.isAttachmentsEnabled = false
+
+        super.init()
+    }
+
     override func encode(with coder: NSCoder) {
         coder.encode(self.isHTMLEnabled, forKey: JSONKey.isHTMLEnabled.rawValue)
         coder.encode(self.isAttachmentsEnabled, forKey: JSONKey.isAttachmentsEnabled.rawValue)
@@ -49,6 +56,13 @@ final class FreeAnswerDataset: Dataset {
         if self.isHTMLEnabled != object.isHTMLEnabled { return false }
         if self.isAttachmentsEnabled != object.isAttachmentsEnabled { return false }
         return true
+    }
+
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = FreeAnswerDataset()
+        copy.isHTMLEnabled = self.isHTMLEnabled
+        copy.isAttachmentsEnabled = self.isAttachmentsEnabled
+        return copy
     }
 
     enum JSONKey: String {

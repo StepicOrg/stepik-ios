@@ -56,6 +56,23 @@ final class Block: NSManagedObject {
         }
     }
 
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? Block else {
+            return false
+        }
+
+        if self === object { return true }
+
+        if self.name != object.name { return false }
+        if self.text != object.text { return false }
+
+        if let video = self.video {
+            if !video.equals(object.video) { return false }
+        } else if object.video != nil { return false }
+
+        return true
+    }
+
     // MARK: - Types -
 
     enum BlockType: String {

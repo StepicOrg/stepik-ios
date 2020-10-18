@@ -1,6 +1,6 @@
 import Foundation
 
-struct CodeTemplatePlainObject {
+struct CodeTemplatePlainObject: Equatable {
     let language: String
     let template: String
     let isUserGenerated: Bool

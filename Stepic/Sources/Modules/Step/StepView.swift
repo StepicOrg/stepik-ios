@@ -172,6 +172,13 @@ final class StepView: UIView {
         }
     }
 
+    func clear() {
+        self.scrollableStackView.removeArrangedView(self.stepVideoPreviewContainerView)
+        self.scrollableStackView.removeArrangedView(self.stepTextView)
+
+        self.quizContainerView.subviews.forEach { $0.removeFromSuperview() }
+    }
+
     func updateNavigationButtons(hasPreviousButton: Bool, hasNextButton: Bool) {
         switch (hasPreviousButton, hasNextButton) {
         case (true, true):

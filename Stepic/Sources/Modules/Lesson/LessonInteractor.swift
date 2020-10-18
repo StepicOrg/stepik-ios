@@ -80,7 +80,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
             // FIXME: singleton
             if case .unit(let unitID) = context {
-                LastStepGlobalContext.context.unitId = unitID
+                LastStepGlobalContext.context.unitID = unitID
             }
 
             let startStep = startStep ?? .index(0)
@@ -101,7 +101,11 @@ final class LessonInteractor: LessonInteractorProtocol {
             } else {
                 self.loadData(context: context, startStep: startStep, dataSourceType: .cache).done {
                     self.didLoadFromCache = true
-                    self.loadData(context: context, startStep: startStep, dataSourceType: .remote).cauterize()
+
+                    attempt(retryLimit: 2) { () -> Promise<Void> in
+                        self.loadData(context: context, startStep: startStep, dataSourceType: .remote)
+                    }.cauterize()
+
                     seal.fulfill(())
                 }.catch { _ in
                     self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
