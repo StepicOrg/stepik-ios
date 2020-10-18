@@ -263,10 +263,12 @@
         <relationship name="managedUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedSocialProfiles" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Step" representedClassName=".Step" syncable="YES">
+        <attribute name="managedCanEdit" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCorrectRatio" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDiscussionProxy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedDiscussionsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDiscussionThreadsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="managedHasReview" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedHasSubmissionRestrictions" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedLessonId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -405,7 +407,7 @@
         <element name="Progress" positionX="210.40234375" positionY="32.89453125" width="128" height="223"/>
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="28"/>
         <element name="SocialProfile" positionX="-450" positionY="-234" width="128" height="133"/>
-        <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="28"/>
+        <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="343"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
         <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="193"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="255"/>

@@ -2093,6 +2093,7 @@
 		2CA93098253C8760007B717A /* VideoPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlainObject.swift; sourceTree = "<group>"; };
 		2CA930A3253C884F007B717A /* BlockPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPlainObject.swift; sourceTree = "<group>"; };
 		2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPlainObject.swift; sourceTree = "<group>"; };
+		2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_actions_v66.xcdatamodel; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -10071,6 +10072,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */,
 				2C36E4772501F28E00D63C41 /* Model_user_remove_level_v65.xcdatamodel */,
 				2C00396424E61B3000EBC7FF /* Model_assignment_progress_id_v64.xcdatamodel */,
 				2CDC9EFB24E516F800916BAE /* Model_course_preview_lesson_id_v63.xcdatamodel */,
@@ -10138,7 +10140,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C36E4772501F28E00D63C41 /* Model_user_remove_level_v65.xcdatamodel */;
+			currentVersion = 2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

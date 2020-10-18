@@ -7,7 +7,6 @@ struct ProgressPlainObject: Equatable {
     let cost: Int
     let numberOfSteps: Int
     let numberOfStepsPassed: Int
-    let lastViewed: Double
 }
 
 extension ProgressPlainObject {
@@ -18,6 +17,5 @@ extension ProgressPlainObject {
         self.cost = progress.cost
         self.numberOfSteps = progress.numberOfSteps
         self.numberOfStepsPassed = progress.numberOfStepsPassed
-        self.lastViewed = progress.lastViewed
     }
 }

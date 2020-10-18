@@ -20,30 +20,6 @@ struct StepPlainObject: Equatable {
     let block: BlockPlainObject
     let progress: ProgressPlainObject?
     let options: StepOptionsPlainObject?
-
-    static func == (lhs: StepPlainObject, rhs: StepPlainObject) -> Bool {
-        if lhs.id != rhs.id { return false }
-        if lhs.position != rhs.position { return false }
-        if lhs.status != rhs.status { return false }
-        if lhs.progressID != rhs.progressID { return false }
-        if lhs.lessonID != rhs.lessonID { return false }
-        if lhs.hasReview != rhs.hasReview { return false }
-        if lhs.canEdit != rhs.canEdit { return false }
-        if lhs.hasSubmissionRestrictions != rhs.hasSubmissionRestrictions { return false }
-        if lhs.maxSubmissionsCount != rhs.maxSubmissionsCount { return false }
-        if lhs.passedByCount != rhs.passedByCount { return false }
-        if lhs.correctRatio != rhs.correctRatio { return false }
-        if lhs.discussionsCount != rhs.discussionsCount { return false }
-        if lhs.discussionProxyID != rhs.discussionProxyID { return false }
-        if lhs.discussionThreadsArray != rhs.discussionThreadsArray { return false }
-        if lhs.discussionThreads != rhs.discussionThreads { return false }
-        if lhs.attempt != rhs.attempt { return false }
-        if lhs.block != rhs.block { return false }
-        if lhs.progress != rhs.progress { return false }
-        if lhs.options != rhs.options { return false }
-
-        return true
-    }
 }
 
 extension StepPlainObject {

@@ -20,6 +20,8 @@ extension Step {
     @NSManaged var managedLessonId: NSNumber?
     @NSManaged var managedHasSubmissionRestrictions: NSNumber?
     @NSManaged var managedMaxSubmissionsCount: NSNumber?
+    @NSManaged var managedCanEdit: NSNumber?
+    @NSManaged var managedHasReview: NSNumber?
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
 
@@ -97,6 +99,24 @@ extension Step {
         }
         set {
             self.managedHasSubmissionRestrictions = newValue as NSNumber?
+        }
+    }
+
+    var canEdit: Bool {
+        get {
+            self.managedCanEdit?.boolValue ?? false
+        }
+        set {
+            self.managedCanEdit = NSNumber(value: newValue)
+        }
+    }
+
+    var hasReview: Bool {
+        get {
+            self.managedHasReview?.boolValue ?? false
+        }
+        set {
+            self.managedHasReview = NSNumber(value: newValue)
         }
     }
 

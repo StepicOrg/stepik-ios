@@ -13,9 +13,6 @@ import SwiftyJSON
 final class Step: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    var canEdit = false
-    var hasReview = false
-
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
