@@ -20,4 +20,18 @@ final class VideoURL: NSManagedObject {
         self.quality = json["quality"].stringValue
         self.url = json["url"].stringValue
     }
+
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? VideoURL else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.quality != object.quality { return false }
+        if self.url != object.url { return false }
+
+        return true
+    }
 }

@@ -85,6 +85,8 @@ final class Step: NSManagedObject, IDFetchable {
         if self.correctRatio != object.correctRatio { return false }
         if self.canEdit != object.canEdit { return false }
 
+        if !self.block.equals(object.block) { return false }
+
         if let options = self.options {
             if !options.equals(object.options) { return false }
         } else if object.options != nil {

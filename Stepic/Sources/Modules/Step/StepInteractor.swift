@@ -175,7 +175,6 @@ final class StepInteractor: StepInteractorProtocol {
             self.fetchStepInAppropriateMode(stepID: self.stepID).done { fetchResult in
                 let step = fetchResult.value.step
                 self.currentStepIndex = step.position - 1
-                self.currentData = fetchResult.value
 
                 switch fetchResult.source {
                 case .cache:
@@ -186,9 +185,12 @@ final class StepInteractor: StepInteractorProtocol {
                         self.loadStepData()
                     }.cauterize()
                 case .remote:
-                    // TODO: Reload if needed.
-                    self.presenter.presentStep(response: .init(result: .success(fetchResult.value)))
+                    if self.currentData != fetchResult.value {
+                        self.presenter.presentStep(response: .init(result: .success(fetchResult.value)))
+                    }
                 }
+
+                self.currentData = fetchResult.value
 
                 self.tryToPresentSolutionsButtonUpdate(step: step)
                 self.sendAnalyticsEventsIfNeeded(step: step)

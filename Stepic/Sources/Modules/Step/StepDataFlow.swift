@@ -5,10 +5,26 @@ enum StepDataFlow {
     enum StepLoad {
         struct Request {}
 
-        struct Data {
+        struct Data: Equatable {
             let step: Step
             let stepFontSize: StepFontSize
             let storedImages: [StoredImage]
+
+            static func == (lhs: Data, rhs: Data) -> Bool {
+                if !lhs.step.equals(rhs.step) {
+                    return false
+                }
+
+                if lhs.stepFontSize != rhs.stepFontSize {
+                    return false
+                }
+
+                if lhs.storedImages != rhs.storedImages {
+                    return false
+                }
+
+                return false
+            }
         }
 
         struct Response {
@@ -200,11 +216,23 @@ enum StepDataFlow {
 
     // MARK: Types
 
-    struct StoredImage {
+    struct StoredImage: Equatable {
         /// Specifies the URL of an image, not local.
         let url: URL
         /// Image data.
         let data: Data
+
+        static func == (lhs: StoredImage, rhs: StoredImage) -> Bool {
+            if lhs.url != rhs.url {
+                return false
+            }
+
+            if lhs.data != rhs.data {
+                return false
+            }
+
+            return true
+        }
     }
 
     enum ViewControllerState {
