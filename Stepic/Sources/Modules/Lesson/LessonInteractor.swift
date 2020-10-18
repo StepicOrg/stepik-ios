@@ -102,7 +102,7 @@ final class LessonInteractor: LessonInteractorProtocol {
                 self.loadData(context: context, startStep: startStep, dataSourceType: .cache).done {
                     self.didLoadFromCache = true
 
-                    attempt(retryLimit: 3) { () -> Promise<Void> in
+                    attempt(retryLimit: 2) { () -> Promise<Void> in
                         self.loadData(context: context, startStep: startStep, dataSourceType: .remote)
                     }.cauterize()
 
