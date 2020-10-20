@@ -1,7 +1,7 @@
 import UIKit
 
 protocol TableQuizViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: TableQuiz.SomeAction.ViewModel)
+    func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel)
 }
 
 final class TableQuizViewController: UIViewController {
@@ -24,5 +24,5 @@ final class TableQuizViewController: UIViewController {
 }
 
 extension TableQuizViewController: TableQuizViewControllerProtocol {
-    func displaySomeActionResult(viewModel: TableQuiz.SomeAction.ViewModel) {}
+    func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel) {}
 }

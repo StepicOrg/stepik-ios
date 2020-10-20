@@ -2,7 +2,6 @@ import Foundation
 import PromiseKit
 
 protocol TableQuizInteractorProtocol {
-    func doSomeAction(request: TableQuiz.SomeAction.Request)
 }
 
 final class TableQuizInteractor: TableQuizInteractorProtocol {
@@ -10,25 +9,114 @@ final class TableQuizInteractor: TableQuizInteractorProtocol {
 
     private let presenter: TableQuizPresenterProtocol
 
-    init(
-        presenter: TableQuizPresenterProtocol
-    ) {
+    private var currentStatus: QuizStatus?
+    private var currentDataset: TableDataset?
+    private var currentRows = [TableQuiz.Row]()
+
+    init(presenter: TableQuizPresenterProtocol) {
         self.presenter = presenter
     }
 
-    func doSomeAction(request: TableQuiz.SomeAction.Request) {}
+    private func updateReplyFromCurrentData() {
+        guard let currentDataset = self.currentDataset else {
+            return
+        }
 
-    enum Error: Swift.Error {
-        case something
+        let choices = self.currentRows.map { row in
+            TableReplyChoice(
+                rowName: row.text,
+                columns: currentDataset.columns.map { column in
+                    TableReplyChoice.Column(
+                        name: column,
+                        answer: row.answers.contains(where: { $0.text == column })
+                    )
+                }
+            )
+        }
+        let reply = TableReply(choices: choices)
+
+        self.moduleOutput?.update(reply: reply)
     }
 }
 
 extension TableQuizInteractor: QuizInputProtocol {
-    func update(reply: Reply?) {}
+    func update(dataset: Dataset?) {
+        guard let tableDataset = dataset as? TableDataset else {
+            return
+        }
 
-    func update(status: QuizStatus?) {}
+        self.currentDataset = tableDataset
+        self.initRows()
+    }
 
-    func update(dataset: Dataset?) {}
+    func update(feedback: SubmissionFeedback?) {
+        print("TableQuizInteractor :: \(String(describing: feedback))")
+    }
 
-    func update(feedback: SubmissionFeedback?) {}
+    func update(reply: Reply?) {
+//        defer {
+//            self.presentNewData()
+//        }
+
+        guard let reply = reply else {
+            self.initRows()
+            self.updateReplyFromCurrentData()
+            return
+        }
+
+        self.moduleOutput?.update(reply: reply)
+
+        guard let tableReply = reply as? TableReply else {
+            fatalError("Unexpected reply type")
+        }
+
+        for choice in tableReply.choices {
+            guard let rowIndex = self.currentRows.firstIndex(
+                    where: { $0.uniqueIdentifier == self.getUniqueIdentifierByRow(choice.rowName) }
+            ) else {
+                continue
+            }
+
+            var answers = [TableQuiz.Column]()
+            for column in choice.columns where column.answer == true {
+                answers.append(
+                    TableQuiz.Column(
+                        text: column.name,
+                        uniqueIdentifier: self.getUniqueIdentifierByColumn(column.name)
+                    )
+                )
+            }
+
+            let oldRow = self.currentRows[rowIndex]
+            let newRow = TableQuiz.Row(
+                text: oldRow.text,
+                answers: answers,
+                uniqueIdentifier: oldRow.uniqueIdentifier
+            )
+
+            self.currentRows[rowIndex] = newRow
+        }
+    }
+
+    func update(status: QuizStatus?) {
+        self.currentStatus = status
+    }
+
+    // MARK: Private Helpers
+
+    private func initRows() {
+        self.currentRows = []
+
+        guard let currentDataset = self.currentDataset else {
+            return
+        }
+
+        self.currentRows = currentDataset.rows.map { row in
+            TableQuiz.Row(text: row, answers: [], uniqueIdentifier: self.getUniqueIdentifierByRow(row))
+        }
+    }
+
+    private func getUniqueIdentifierByRow(_ row: String) -> UniqueIdentifierType { "\(row.hashValue)" }
+
+    private func getUniqueIdentifierByColumn(_ column: String) -> UniqueIdentifierType { "\(column.hashValue)" }
 }
