@@ -7,6 +7,125 @@ import SwiftyJSON
 class DatasetSpec: QuickSpec {
     override func spec() {
         describe("Dataset") {
+            describe("NSCopying") {
+                it("copies dataset") {
+                    // Given
+                    let dataset = Dataset()
+
+                    // When
+                    let datasetCopy = dataset.copy() as! Dataset
+
+                    // Then
+                    expect(dataset !== datasetCopy).to(beTrue())
+                }
+
+                it("copies choice dataset") {
+                    // Given
+                    let choiceDataset = ChoiceDataset(json: JSON({}))
+                    choiceDataset.isMultipleChoice = true
+                    choiceDataset.options = ["502", "5002", "520", "52"]
+
+                    // When
+                    let choiceDatasetCopy = choiceDataset.copy() as! ChoiceDataset
+
+                    // Then
+                    expect(choiceDataset !== choiceDatasetCopy).to(beTrue())
+                    expect(choiceDataset.isEqual(choiceDatasetCopy)).to(beTrue())
+                }
+
+                it("copies fill blanks dataset") {
+                    // Given
+                    let textComponent = FillBlanksComponent(json: JSON({}))
+                    textComponent.componentType = .text
+                    textComponent.text = "<strong>2 + 2</strong> ="
+                    textComponent.options = []
+
+                    let selectComponent = FillBlanksComponent(json: JSON({}))
+                    selectComponent.componentType = .select
+                    selectComponent.text = ""
+                    selectComponent.options = ["4", "5", "6"]
+
+                    let fillBlanksDataset = FillBlanksDataset(json: JSON({}))
+                    fillBlanksDataset.components = [textComponent, selectComponent]
+
+                    // When
+                    let fillBlanksDatasetCopy = fillBlanksDataset.copy() as! FillBlanksDataset
+
+                    // Then
+                    expect(fillBlanksDataset !== fillBlanksDatasetCopy).to(beTrue())
+                    expect(fillBlanksDataset.isEqual(fillBlanksDatasetCopy)).to(beTrue())
+                }
+
+                it("copies free answer dataset") {
+                    // Given
+                    let freeAnswerDataset = FreeAnswerDataset(json: JSON({}))
+                    freeAnswerDataset.isHTMLEnabled = true
+                    freeAnswerDataset.isAttachmentsEnabled = true
+
+                    // When
+                    let freeAnswerDatasetCopy = freeAnswerDataset.copy() as! FreeAnswerDataset
+
+                    // Then
+                    expect(freeAnswerDataset !== freeAnswerDatasetCopy).to(beTrue())
+                    expect(freeAnswerDataset.isEqual(freeAnswerDatasetCopy)).to(beTrue())
+                }
+
+                it("copies matching dataset") {
+                    // Given
+                    let matchingDataset = MatchingDataset(json: JSON({}))
+                    matchingDataset.pairs = [("Sky", "Blue")]
+
+                    // When
+                    let matchingDatasetCopy = matchingDataset.copy() as! MatchingDataset
+
+                    // Then
+                    expect(matchingDataset !== matchingDatasetCopy).to(beTrue())
+                    expect(matchingDataset.isEqual(matchingDatasetCopy)).to(beTrue())
+                }
+
+                it("copies sorting dataset") {
+                    // Given
+                    let sortingDataset = SortingDataset(json: JSON({}))
+                    sortingDataset.options = ["Four", "Three", "One", "Two"]
+
+                    // When
+                    let sortingDatasetCopy = sortingDataset.copy() as! SortingDataset
+
+                    // Then
+                    expect(sortingDataset !== sortingDatasetCopy).to(beTrue())
+                    expect(sortingDataset.isEqual(sortingDatasetCopy)).to(beTrue())
+                }
+
+                it("copies string dataset") {
+                    // Given
+                    let stringDataset = StringDataset(json: JSON({}))
+                    stringDataset.string = "string"
+
+                    // When
+                    let stringDatasetCopy = stringDataset.copy() as! StringDataset
+
+                    // Then
+                    expect(stringDataset !== stringDatasetCopy).to(beTrue())
+                    expect(stringDataset.isEqual(stringDatasetCopy)).to(beTrue())
+                }
+
+                it("copies table dataset") {
+                    // Given
+                    let tableDataset = TableDataset(json: JSON({}))
+                    tableDataset.datasetDescription = "description"
+                    tableDataset.rows = ["Traffic lights", "Women's dress", "Sun", "Grass"]
+                    tableDataset.columns = ["Red", "Blue", "Green"]
+                    tableDataset.isCheckbox = true
+
+                    // When
+                    let tableDatasetCopy = tableDataset.copy() as! TableDataset
+
+                    // Then
+                    expect(tableDataset !== tableDatasetCopy).to(beTrue())
+                    expect(tableDataset.isEqual(tableDatasetCopy)).to(beTrue())
+                }
+            }
+
             describe("NSCoding") {
                 func makeTemporaryPath(name: String) -> String {
                     let temporaryDirectoryPath = NSTemporaryDirectory() as NSString
