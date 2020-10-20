@@ -183,6 +183,150 @@ class ReplySpec: QuickSpec {
                     expect(unarchivedReply) == fillBlanksReply
                     expect(unarchivedReply.blanks) == ["4", "5"]
                 }
+
+                it("table reply encoded and decoded") {
+                    // Given
+                    let jsonString = #"""
+{
+  "choices": [
+    {
+      "name_row": "United States",
+      "columns": [
+        {
+          "name": "New York",
+          "answer": false
+        },
+        {
+          "name": "Moscow",
+          "answer": false
+        },
+        {
+          "name": "Minsk",
+          "answer": false
+        },
+        {
+          "name": "Washington",
+          "answer": true
+        },
+        {
+          "name": "London",
+          "answer": false
+        }
+      ]
+    },
+    {
+      "name_row": "England",
+      "columns": [
+        {
+          "name": "New York",
+          "answer": false
+        },
+        {
+          "name": "Moscow",
+          "answer": false
+        },
+        {
+          "name": "Minsk",
+          "answer": false
+        },
+        {
+          "name": "Washington",
+          "answer": false
+        },
+        {
+          "name": "London",
+          "answer": true
+        }
+      ]
+    },
+    {
+      "name_row": "Belarus",
+      "columns": [
+        {
+          "name": "New York",
+          "answer": false
+        },
+        {
+          "name": "Moscow",
+          "answer": false
+        },
+        {
+          "name": "Minsk",
+          "answer": true
+        },
+        {
+          "name": "Washington",
+          "answer": false
+        },
+        {
+          "name": "London",
+          "answer": false
+        }
+      ]
+    },
+    {
+      "name_row": "Russia",
+      "columns": [
+        {
+          "name": "New York",
+          "answer": false
+        },
+        {
+          "name": "Moscow",
+          "answer": true
+        },
+        {
+          "name": "Minsk",
+          "answer": false
+        },
+        {
+          "name": "Washington",
+          "answer": false
+        },
+        {
+          "name": "London",
+          "answer": false
+        }
+      ]
+    }
+  ]
+}
+"""#
+                    let json = JSON(parseJSON: jsonString)
+                    let tableReply = TableReply(json: json)
+
+                    let rows = ["United States", "England", "Belarus", "Russia"]
+                    let columns = ["New York", "Moscow", "Minsk", "Washington", "London"]
+                    let answers = [
+                        "United States": "Washington",
+                        "England": "London",
+                        "Belarus": "Minsk",
+                        "Russia": "Moscow"
+                    ]
+
+                    var choices: [TableReplyChoice] = []
+
+                    for row in rows {
+                        let choice = TableReplyChoice(
+                            rowName: row,
+                            columns: columns.map { column in
+                                .init(name: column, answer: answers[row] == column)
+                            }
+                        )
+                        choices.append(choice)
+                    }
+
+                    let path = makeTemporaryPath(name: "table-reply")
+
+                    // When
+                    NSKeyedArchiver.archiveRootObject(tableReply, toFile: path)
+
+                    let unarchivedTableReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! TableReply
+
+                    // Then
+                    expect(unarchivedTableReply) == tableReply
+                    expect(unarchivedTableReply.choices) == choices
+                }
             }
         }
     }

@@ -144,6 +144,8 @@ final class Submission: JSONSerializable {
             return CodeReply(json: json)
         case .sql:
             return SQLReply(json: json)
+        case .table:
+            return TableReply(json: json)
         default:
             return nil
         }

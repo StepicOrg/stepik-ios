@@ -421,6 +421,7 @@
 		2C1E42A02497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */; };
 		2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */; };
 		2C1E42A424991CA3009F4C69 /* IAPPaymentsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E42A324991CA3009F4C69 /* IAPPaymentsCache.swift */; };
+		2C203B2D253F0FC0000683E6 /* TableReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C203B2C253F0FC0000683E6 /* TableReply.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */; };
 		2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778322BBA54800D44DC0 /* QuizStatus.swift */; };
 		2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */; };
@@ -1841,6 +1842,7 @@
 		2C1E429F2497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoursePurchase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesPersistenceService.swift; sourceTree = "<group>"; };
 		2C1E42A324991CA3009F4C69 /* IAPPaymentsCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPPaymentsCache.swift; sourceTree = "<group>"; };
+		2C203B2C253F0FC0000683E6 /* TableReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReply.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Promise.swift"; sourceTree = "<group>"; };
 		2C20778322BBA54800D44DC0 /* QuizStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatus.swift; sourceTree = "<group>"; };
 		2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOptionsPersistenceService.swift; sourceTree = "<group>"; };
@@ -5153,6 +5155,7 @@
 				08F555591C4FB0A300C877E8 /* Reply.swift */,
 				08F485B01C58EB0D000165AA /* SortingReply.swift */,
 				2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */,
+				2C203B2C253F0FC0000683E6 /* TableReply.swift */,
 				08F485991C57868E000165AA /* TextReply.swift */,
 			);
 			path = Replies;
@@ -7901,6 +7904,7 @@
 				2CB9E56D23D57AE80050A7F3 /* DownloadingService.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
+				2C203B2D253F0FC0000683E6 /* TableReply.swift in Sources */,
 				08E43EAB214C307500E3CB50 /* SourcelessRouter.swift in Sources */,
 				08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */,
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
