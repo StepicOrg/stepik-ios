@@ -685,6 +685,7 @@
 		2CB2740422C515050078CA2F /* QuizElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2740322C515050078CA2F /* QuizElementView.swift */; };
 		2CB3563E2476CB7B00E59A03 /* MagicLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB3563D2476CB7B00E59A03 /* MagicLink.swift */; };
 		2CB37E6623902BB80050D85E /* StorageUsageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB37E6523902BB80050D85E /* StorageUsageService.swift */; };
+		2CB43B22253F796500D9FEE0 /* TableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB43B21253F796500D9FEE0 /* TableRowView.swift */; };
 		2CB510EE248C226A00DB8344 /* VideosPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB510ED248C226A00DB8344 /* VideosPersistenceService.swift */; };
 		2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F6A204FC6220008431C /* UserActivitySpec.swift */; };
 		2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */; };
@@ -2130,6 +2131,7 @@
 		2CB2740322C515050078CA2F /* QuizElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizElementView.swift; sourceTree = "<group>"; };
 		2CB3563D2476CB7B00E59A03 /* MagicLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLink.swift; sourceTree = "<group>"; };
 		2CB37E6523902BB80050D85E /* StorageUsageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUsageService.swift; sourceTree = "<group>"; };
+		2CB43B21253F796500D9FEE0 /* TableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowView.swift; sourceTree = "<group>"; };
 		2CB510ED248C226A00DB8344 /* VideosPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosPersistenceService.swift; sourceTree = "<group>"; };
 		2CB51F6A204FC6220008431C /* UserActivitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitySpec.swift; sourceTree = "<group>"; };
 		2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardStepViewController.swift; sourceTree = "<group>"; };
@@ -2961,9 +2963,9 @@
 				A3F263ADE90D66C1622121F5 /* TableQuizDataFlow.swift */,
 				8FE204B976936C0DE5174D02 /* TableQuizInteractor.swift */,
 				967064C7E1C6298407D71A40 /* TableQuizPresenter.swift */,
-				896F6AE51B2B7F26C576A308 /* TableQuizView.swift */,
 				51520BD9E09C97D14794CC7F /* TableQuizViewController.swift */,
 				2C2CBF07253EFC8800799344 /* TableQuizViewModel.swift */,
+				2CB43B20253F792D00D9FEE0 /* Views */,
 			);
 			path = TableQuiz;
 			sourceTree = "<group>";
@@ -4529,6 +4531,15 @@
 				2C10AFE8217E04780019966D /* Registration */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		2CB43B20253F792D00D9FEE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				896F6AE51B2B7F26C576A308 /* TableQuizView.swift */,
+				2CB43B21253F796500D9FEE0 /* TableRowView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2CB62BF02019FDB300B5E336 /* AdaptiveOnboardingContent */ = {
@@ -8689,6 +8700,7 @@
 				2C73719224EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift in Sources */,
 				62E9894FD7F3558CF9DAAD9A /* CourseListTypes.swift in Sources */,
 				62E98D9D35E87EADDA78E3DE /* CourseListCollectionViewCell.swift in Sources */,
+				2CB43B22253F796500D9FEE0 /* TableRowView.swift in Sources */,
 				62E98B5E1705E2F3274D19EC /* CourseListCollectionViewDataSource.swift in Sources */,
 				62E98A68DC04104ACC599EDD /* CourseListCollectionViewDelegate.swift in Sources */,
 				62E987E3FA0C01DA74F90B91 /* CourseListColorMode.swift in Sources */,
