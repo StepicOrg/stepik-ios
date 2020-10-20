@@ -53,6 +53,18 @@ final class TableRowView: UIControl {
 
     private lazy var separatorView = SeparatorView()
 
+    var title: String? {
+        didSet {
+            self.titleProcessedContentView.setText(self.title)
+        }
+    }
+
+    var subtitle: String? {
+        didSet {
+            self.subtitleProcessedContentView.setText(self.subtitle)
+        }
+    }
+
     var shouldShowSeparator: Bool = true {
         didSet {
             self.separatorView.isHidden = !self.shouldShowSeparator

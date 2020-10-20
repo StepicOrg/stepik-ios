@@ -3,7 +3,13 @@ import Foundation
 enum TableQuiz {
     /// Show quiz state
     enum ReplyLoad {
-        struct Response {}
+        struct Response {
+            let description: String
+            let rows: [Row]
+            let columns: [Column]
+            let isCheckbox: Bool
+            let status: QuizStatus?
+        }
 
         struct ViewModel {
             let data: TableQuizViewModel
@@ -18,7 +24,7 @@ enum TableQuiz {
         let uniqueIdentifier: UniqueIdentifierType
     }
 
-    struct Column: UniqueIdentifiable {
+    struct Column: UniqueIdentifiable, Equatable {
         let text: String
         let uniqueIdentifier: UniqueIdentifierType
     }

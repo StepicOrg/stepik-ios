@@ -17,6 +17,26 @@ final class TableQuizInteractor: TableQuizInteractorProtocol {
         self.presenter = presenter
     }
 
+    // MARK: Private API
+
+    private func presentNewData() {
+        guard let currentDataset = self.currentDataset else {
+            return
+        }
+
+        self.presenter.presentReply(
+            response: .init(
+                description: currentDataset.description,
+                rows: self.currentRows,
+                columns: currentDataset.columns.map {
+                    TableQuiz.Column(text: $0, uniqueIdentifier: self.getUniqueIdentifierByColumn($0))
+                },
+                isCheckbox: currentDataset.isCheckbox,
+                status: self.currentStatus
+            )
+        )
+    }
+
     private func updateReplyFromCurrentData() {
         guard let currentDataset = self.currentDataset else {
             return
@@ -54,9 +74,9 @@ extension TableQuizInteractor: QuizInputProtocol {
     }
 
     func update(reply: Reply?) {
-//        defer {
-//            self.presentNewData()
-//        }
+        defer {
+            self.presentNewData()
+        }
 
         guard let reply = reply else {
             self.initRows()
@@ -100,6 +120,7 @@ extension TableQuizInteractor: QuizInputProtocol {
 
     func update(status: QuizStatus?) {
         self.currentStatus = status
+        self.presentNewData()
     }
 
     // MARK: Private Helpers

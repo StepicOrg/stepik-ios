@@ -7,6 +7,8 @@ protocol TableQuizViewControllerProtocol: AnyObject {
 final class TableQuizViewController: UIViewController {
     private let interactor: TableQuizInteractorProtocol
 
+    var tableQuizView: TableQuizView? { self.view as? TableQuizView }
+
     init(interactor: TableQuizInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -24,5 +26,7 @@ final class TableQuizViewController: UIViewController {
 }
 
 extension TableQuizViewController: TableQuizViewControllerProtocol {
-    func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel) {}
+    func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel) {
+        self.tableQuizView?.set(rows: viewModel.data.rows)
+    }
 }
