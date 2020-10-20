@@ -554,6 +554,7 @@
 		2C619A7F24D0004B007D3529 /* SocialProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */; };
 		2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */; };
 		2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */; };
+		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
 		2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C698C9424CEA90100979661 /* NewProfileCoverView.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
@@ -1994,6 +1995,7 @@
 		2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfileProvider.swift; sourceTree = "<group>"; };
 		2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesPersistenceService.swift; sourceTree = "<group>"; };
+		2C63C776253EFE2300B20195 /* TableDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataset.swift; sourceTree = "<group>"; };
 		2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_personal_preferences_v62.xcdatamodel; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
@@ -5122,6 +5124,7 @@
 				0834C4681E2CE469002F8516 /* MatchingDataset.swift */,
 				08F485AE1C58E946000165AA /* SortingDataset.swift */,
 				08F555551C4F9FAB00C877E8 /* StringDataset.swift */,
+				2C63C776253EFE2300B20195 /* TableDataset.swift */,
 			);
 			path = Datasets;
 			sourceTree = "<group>";
@@ -8144,6 +8147,7 @@
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
+				2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */,
 				2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */,
 				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				2CE9BF4A248D09FC004F6659 /* BlocksPersistenceService.swift in Sources */,

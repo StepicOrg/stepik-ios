@@ -147,6 +147,26 @@ class DatasetSpec: QuickSpec {
                     expect(unarchivedMatchingDataset.firstValues) == ["Sky", "Sun", "Grass"]
                     expect(unarchivedMatchingDataset.secondValues) == ["Green", "Orange", "Blue"]
                 }
+
+                it("table dataset encoded and decoded") {
+                    // Given
+                    let json = JSON(parseJSON: #"{"description":"Table:","rows":["Traffic lights","Women's dress","Sun","Grass"],"columns":["Red","Blue","Green"],"is_checkbox":true}"#)
+                    let tableDataset = TableDataset(json: json)
+
+                    let path = makeTemporaryPath(name: "table-dataset")
+
+                    // When
+                    NSKeyedArchiver.archiveRootObject(tableDataset, toFile: path)
+
+                    let unarchivedTableDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! TableDataset
+
+                    // Then
+                    expect(unarchivedTableDataset) == tableDataset
+                    expect(unarchivedTableDataset.datasetDescription) == "Table:"
+                    expect(unarchivedTableDataset.rows) == ["Traffic lights", "Women's dress", "Sun", "Grass"]
+                    expect(unarchivedTableDataset.columns) == ["Red", "Blue", "Green"]
+                    expect(unarchivedTableDataset.isCheckbox) == true
+                }
             }
         }
     }
