@@ -55,6 +55,7 @@ def all_pods
     pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
+    pod 'PanModal', '1.2.7'
     
     pod 'Agrume', '5.6.10'
     pod 'Highlightr', '2.1.0'
