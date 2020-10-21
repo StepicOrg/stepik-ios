@@ -1,10 +1,10 @@
 import Foundation
 
 struct TableQuizViewModel {
-    let description: String
+    let title: String
     let rows: [TableQuiz.Row]
     let columns: [TableQuiz.Column]
-    let isCheckbox: Bool
+    let isMultipleChoice: Bool
     let finalState: State?
 
     enum State {

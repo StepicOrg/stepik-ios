@@ -24,10 +24,10 @@ final class TableQuizPresenter: TableQuizPresenterProtocol {
         }()
 
         let viewModel = TableQuizViewModel(
-            description: response.description,
+            title: NSLocalizedString("TableQuizTitle", comment: ""),
             rows: response.rows,
             columns: response.columns,
-            isCheckbox: response.isCheckbox,
+            isMultipleChoice: response.isMultipleChoice,
             finalState: state
         )
 

@@ -4,10 +4,9 @@ enum TableQuiz {
     /// Show quiz state
     enum ReplyLoad {
         struct Response {
-            let description: String
             let rows: [Row]
             let columns: [Column]
-            let isCheckbox: Bool
+            let isMultipleChoice: Bool
             let status: QuizStatus?
         }
 

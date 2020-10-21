@@ -26,12 +26,11 @@ final class TableQuizInteractor: TableQuizInteractorProtocol {
 
         self.presenter.presentReply(
             response: .init(
-                description: currentDataset.description,
                 rows: self.currentRows,
                 columns: currentDataset.columns.map {
                     TableQuiz.Column(text: $0, uniqueIdentifier: self.getUniqueIdentifierByColumn($0))
                 },
-                isCheckbox: currentDataset.isCheckbox,
+                isMultipleChoice: currentDataset.isCheckbox,
                 status: self.currentStatus
             )
         )

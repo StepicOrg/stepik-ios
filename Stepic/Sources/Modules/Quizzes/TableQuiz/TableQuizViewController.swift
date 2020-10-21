@@ -32,6 +32,8 @@ final class TableQuizViewController: UIViewController {
 extension TableQuizViewController: TableQuizViewControllerProtocol {
     func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel) {
         self.storedViewModel = viewModel.data
+
+        self.tableQuizView?.title = viewModel.data.title
         self.tableQuizView?.set(rows: viewModel.data.rows)
     }
 }
@@ -45,7 +47,7 @@ extension TableQuizViewController: TableQuizViewDelegate {
         let assembly = TableQuizSelectColumnsAssembly(
             columns: storedViewModel.columns,
             selectedColumnsIDs: Set(row.answers.map(\.uniqueIdentifier)),
-            isMultipleChoice: storedViewModel.isCheckbox
+            isMultipleChoice: storedViewModel.isMultipleChoice
         )
         let viewController = assembly.makeModule()
 

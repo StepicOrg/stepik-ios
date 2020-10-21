@@ -9,6 +9,10 @@ extension TableQuizView {
     struct Appearance {
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
         let titleTextColor = UIColor.stepikPrimaryText
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+
+        let separatorColor = UIColor.stepikSeparator
+        let separatorHeight: CGFloat = 0.5
     }
 }
 
@@ -23,6 +27,13 @@ final class TableQuizView: UIView {
         label.textColor = self.appearance.titleTextColor
         return label
     }()
+    private lazy var titleLabelContainerView = UIView()
+
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        return view
+    }()
 
     private lazy var rowsStackView: UIStackView = {
         let stackView = UIStackView()
@@ -30,12 +41,24 @@ final class TableQuizView: UIView {
         return stackView
     }()
 
+    private lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+
     private var rows = [TableQuiz.Row]()
 
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
-        let rowsStackViewIntrinsicContentSize = self.rowsStackView
+        let contentStackViewIntrinsicContentSize = self.contentStackView
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        return CGSize(width: UIView.noIntrinsicMetric, height: rowsStackViewIntrinsicContentSize.height)
+        return CGSize(width: UIView.noIntrinsicMetric, height: contentStackViewIntrinsicContentSize.height)
     }
 
     init(
@@ -71,9 +94,8 @@ final class TableQuizView: UIView {
             self.rowsStackView.removeAllArrangedSubviews()
         }
 
-        for (index, row) in rows.enumerated() {
+        for row in rows {
             let rowView = TableRowView()
-            rowView.shouldShowSeparator = index != rows.count - 1
             rowView.onTouchUpInside = { [weak self] in
                 guard let strongSelf = self else {
                     return
@@ -95,12 +117,28 @@ extension TableQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
-        self.addSubview(self.rowsStackView)
+        self.addSubview(self.contentStackView)
+
+        self.contentStackView.addArrangedSubview(self.titleLabelContainerView)
+        self.titleLabelContainerView.addSubview(self.titleLabel)
+
+        self.contentStackView.addArrangedSubview(self.separatorView)
+        self.contentStackView.addArrangedSubview(self.rowsStackView)
     }
 
     func makeConstraints() {
-        self.rowsStackView.snp.makeConstraints { make in
+        self.contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.titleLabelInsets)
+        }
+
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
         }
     }
 }

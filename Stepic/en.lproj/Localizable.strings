@@ -908,6 +908,7 @@ SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
 FreeAnswerQuizTitle = "Write an essay";
 FillBlanksQuizTitle = "Fill in the blanks";
+TableQuizTitle = "Select the right cells";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 

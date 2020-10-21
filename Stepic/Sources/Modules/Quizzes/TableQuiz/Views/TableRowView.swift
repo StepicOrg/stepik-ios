@@ -51,8 +51,6 @@ final class TableRowView: UIControl {
         return button
     }()
 
-    private lazy var separatorView = SeparatorView()
-
     var title: String? {
         didSet {
             self.titleProcessedContentView.setText(self.title)
@@ -62,12 +60,6 @@ final class TableRowView: UIControl {
     var subtitle: String? {
         didSet {
             self.subtitleProcessedContentView.setText(self.subtitle)
-        }
-    }
-
-    var shouldShowSeparator: Bool = true {
-        didSet {
-            self.separatorView.isHidden = !self.shouldShowSeparator
         }
     }
 
@@ -153,7 +145,6 @@ extension TableRowView: ProgrammaticallyInitializableViewProtocol {
         self.labelsStackView.addArrangedSubview(self.subtitleProcessedContentView)
 
         self.addSubview(self.showAllButton)
-        self.addSubview(self.separatorView)
     }
 
     func makeConstraints() {
@@ -170,11 +161,6 @@ extension TableRowView: ProgrammaticallyInitializableViewProtocol {
                 .offset(self.appearance.showAllButtonInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.showAllButtonInsets.right)
             make.centerY.equalToSuperview()
-        }
-
-        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.separatorView.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalToSuperview()
         }
     }
 }

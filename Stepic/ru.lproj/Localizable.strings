@@ -909,6 +909,7 @@ SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 UnsupportedQuizTitle = "Неподдерживаемый тип шага";
 FreeAnswerQuizTitle = "Напишите эссе";
 FillBlanksQuizTitle = "Заполните пробелы";
+TableQuizTitle = "Выберите верные ячейки";
 
 UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 
