@@ -18,7 +18,7 @@ enum TableQuiz {
 
     // MARK: - Common structs
 
-    struct Row: UniqueIdentifiable {
+    struct Row: UniqueIdentifiable, Equatable {
         let text: String
         let answers: [Column]
         let uniqueIdentifier: UniqueIdentifierType

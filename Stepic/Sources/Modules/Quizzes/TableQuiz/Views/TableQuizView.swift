@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol TableQuizViewDelegate: AnyObject {
+    func tableQuizView(_ view: TableQuizView, didSelectRow row: TableQuiz.Row)
+}
+
 extension TableQuizView {
     struct Appearance {
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
@@ -10,6 +14,8 @@ extension TableQuizView {
 
 final class TableQuizView: UIView {
     let appearance: Appearance
+
+    weak var delegate: TableQuizViewDelegate?
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +61,7 @@ final class TableQuizView: UIView {
     }
 
     func set(rows: [TableQuiz.Row]) {
-        if self.rows.map(\.text) == rows.map(\.text) && self.rows.map(\.answers) == rows.map(\.answers) {
+        if self.rows == rows {
             return
         }
 
@@ -68,6 +74,13 @@ final class TableQuizView: UIView {
         for (index, row) in rows.enumerated() {
             let rowView = TableRowView()
             rowView.shouldShowSeparator = index != rows.count - 1
+            rowView.onTouchUpInside = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.delegate?.tableQuizView(strongSelf, didSelectRow: row)
+            }
 
             self.rowsStackView.addArrangedSubview(rowView)
 

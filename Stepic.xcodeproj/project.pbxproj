@@ -804,6 +804,10 @@
 		2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
 		2CF24F642390040F002DBD0F /* BlockTypeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF24F632390040E002DBD0F /* BlockTypeSpec.swift */; };
 		2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */; };
+		2CF4661525402077002415AF /* TableQuizSelectColumnsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4661425402077002415AF /* TableQuizSelectColumnsViewController.swift */; };
+		2CF4661D25402227002415AF /* TableQuizSelectColumnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4661C25402227002415AF /* TableQuizSelectColumnsView.swift */; };
+		2CF46628254022A5002415AF /* TableQuizSelectColumnsColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF46627254022A5002415AF /* TableQuizSelectColumnsColumnView.swift */; };
+		2CF4663125403145002415AF /* TableQuizSelectColumnsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4663025403145002415AF /* TableQuizSelectColumnsAssembly.swift */; };
 		2CF6C4EB244DF619000FAAED /* ARQuickLookStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6C4EA244DF619000FAAED /* ARQuickLookStoredFileManager.swift */; };
 		2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */; };
 		2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */; };
@@ -2260,6 +2264,10 @@
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF4252F2024C111002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF425302024C114002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_simple.png; sourceTree = "<group>"; };
+		2CF4661425402077002415AF /* TableQuizSelectColumnsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsViewController.swift; sourceTree = "<group>"; };
+		2CF4661C25402227002415AF /* TableQuizSelectColumnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsView.swift; sourceTree = "<group>"; };
+		2CF46627254022A5002415AF /* TableQuizSelectColumnsColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsColumnView.swift; sourceTree = "<group>"; };
+		2CF4663025403145002415AF /* TableQuizSelectColumnsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsAssembly.swift; sourceTree = "<group>"; };
 		2CF6649122F307A500F2A899 /* Model_user_ is_organization.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_user_ is_organization.xcdatamodel"; sourceTree = "<group>"; };
 		2CF6C4EA244DF619000FAAED /* ARQuickLookStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQuickLookStoredFileManager.swift; sourceTree = "<group>"; };
 		2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCellularDataForDownloadsStorageManager.swift; sourceTree = "<group>"; };
@@ -2965,6 +2973,7 @@
 				967064C7E1C6298407D71A40 /* TableQuizPresenter.swift */,
 				51520BD9E09C97D14794CC7F /* TableQuizViewController.swift */,
 				2C2CBF07253EFC8800799344 /* TableQuizViewModel.swift */,
+				2CF4661325402052002415AF /* TableQuizSelectColumns */,
 				2CB43B20253F792D00D9FEE0 /* Views */,
 			);
 			path = TableQuiz;
@@ -4783,6 +4792,25 @@
 				2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */,
 			);
 			path = ModulesTests;
+			sourceTree = "<group>";
+		};
+		2CF4661325402052002415AF /* TableQuizSelectColumns */ = {
+			isa = PBXGroup;
+			children = (
+				2CF4663025403145002415AF /* TableQuizSelectColumnsAssembly.swift */,
+				2CF4661425402077002415AF /* TableQuizSelectColumnsViewController.swift */,
+				2CF4662C254022AB002415AF /* Views */,
+			);
+			path = TableQuizSelectColumns;
+			sourceTree = "<group>";
+		};
+		2CF4662C254022AB002415AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CF46627254022A5002415AF /* TableQuizSelectColumnsColumnView.swift */,
+				2CF4661C25402227002415AF /* TableQuizSelectColumnsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2CF9BD332538503C00C2AFD2 /* PromiseKit */ = {
@@ -8261,6 +8289,7 @@
 				08E43E99214C279700E3CB50 /* PushRouterSourceProtocol.swift in Sources */,
 				2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */,
 				2C9BBE4124903AB500FFED49 /* UserCoursesObserver.swift in Sources */,
+				2CF4661D25402227002415AF /* TableQuizSelectColumnsView.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
 				2C2972052147F5FD001502BD /* CourseTag.swift in Sources */,
@@ -8509,6 +8538,7 @@
 				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
 				2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */,
+				2CF4663125403145002415AF /* TableQuizSelectColumnsAssembly.swift in Sources */,
 				62E98AA93C41892F0F141FDF /* ImageButton.swift in Sources */,
 				62E989EE75A8D4A31D8FAA57 /* DownloadControlView.swift in Sources */,
 				62E98570B05049B3A8619283 /* CourseRatingView.swift in Sources */,
@@ -8736,6 +8766,7 @@
 				62E982C1E3391BF739E8A215 /* DiscussionsView.swift in Sources */,
 				62E981E3990C9BF7DFFD3A93 /* DiscussionsCellView.swift in Sources */,
 				62E981260E846E172FAAA065 /* DiscussionsLoadMoreTableViewCell.swift in Sources */,
+				2CF4661525402077002415AF /* TableQuizSelectColumnsViewController.swift in Sources */,
 				62E985B65951147A86D63FD4 /* DiscussionsTableViewCell.swift in Sources */,
 				62E98D8C47E3B4A08EE1B392 /* DownloadsAssembly.swift in Sources */,
 				62E9823089CDCEB82765F6C2 /* DownloadsDataFlow.swift in Sources */,
@@ -8966,6 +8997,7 @@
 				62E9838C3D134A36C923D33E /* UnsupportedQuizView.swift in Sources */,
 				2CA3E8AF24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift in Sources */,
 				62E985E615BDA43945D23CB7 /* UnsupportedQuizViewController.swift in Sources */,
+				2CF46628254022A5002415AF /* TableQuizSelectColumnsColumnView.swift in Sources */,
 				62E98E6772AA1720F2A9180E /* SettingsAssembly.swift in Sources */,
 				62E986E5921381881E25B9BD /* SettingsDataFlow.swift in Sources */,
 				62E9834C67D261607573C5AB /* SettingsInteractor.swift in Sources */,
