@@ -4,6 +4,7 @@ import UIKit
 protocol TableQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel)
     func displayRowChoiceUpdateResult(viewModel: TableQuiz.RowChoiceUpdate.ViewModel)
+    func displayQuizStatusUpdateResult(viewModel: TableQuiz.QuizStatusUpdate.ViewModel)
 }
 
 final class TableQuizViewController: UIViewController {
@@ -36,10 +37,15 @@ extension TableQuizViewController: TableQuizViewControllerProtocol {
 
         self.tableQuizView?.title = viewModel.data.title
         self.tableQuizView?.set(rows: viewModel.data.rows)
+        self.tableQuizView?.isEnabled = viewModel.data.finalState == nil
     }
 
     func displayRowChoiceUpdateResult(viewModel: TableQuiz.RowChoiceUpdate.ViewModel) {
         self.tableQuizView?.updateRowAnswers(row: viewModel.row)
+    }
+
+    func displayQuizStatusUpdateResult(viewModel: TableQuiz.QuizStatusUpdate.ViewModel) {
+        self.tableQuizView?.isEnabled = viewModel.state == nil
     }
 }
 

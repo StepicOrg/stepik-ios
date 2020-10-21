@@ -119,7 +119,7 @@ extension TableQuizInteractor: QuizInputProtocol {
 
     func update(status: QuizStatus?) {
         self.currentStatus = status
-        self.presentNewData()
+        self.presenter.presentQuizStatusUpdateResult(response: .init(status: self.currentStatus))
     }
 
     // MARK: Private Helpers

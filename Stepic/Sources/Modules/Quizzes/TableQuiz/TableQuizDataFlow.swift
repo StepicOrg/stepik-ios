@@ -15,6 +15,17 @@ enum TableQuiz {
         }
     }
 
+    /// Show quiz status update
+    enum QuizStatusUpdate {
+        struct Response {
+            let status: QuizStatus?
+        }
+
+        struct ViewModel {
+            let state: TableQuizViewModel.State?
+        }
+    }
+
     /// Show row choice update
     enum RowChoiceUpdate {
         struct Response {

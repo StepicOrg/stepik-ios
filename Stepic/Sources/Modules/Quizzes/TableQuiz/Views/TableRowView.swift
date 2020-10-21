@@ -67,11 +67,15 @@ final class TableRowView: UIControl {
 
     var onClick: (() -> Void)?
 
+    override var isEnabled: Bool {
+        didSet {
+            self.updateContentSubviewsAlpha(self.isEnabled ? 1.0 : 0.5)
+        }
+    }
+
     override var isHighlighted: Bool {
         didSet {
-            self.titleProcessedContentView.alpha = self.isHighlighted ? 0.5 : 1.0
-            self.subtitleProcessedContentView.alpha = self.isHighlighted ? 0.5 : 1.0
-            self.showAllButton.alpha = self.isHighlighted ? 0.5 : 1.0
+            self.updateContentSubviewsAlpha(self.isHighlighted ? 0.5 : 1.0)
         }
     }
 
@@ -107,6 +111,12 @@ final class TableRowView: UIControl {
     @objc
     private func clicked() {
         self.onClick?()
+    }
+
+    private func updateContentSubviewsAlpha(_ alpha: CGFloat) {
+        self.titleProcessedContentView.alpha = alpha
+        self.subtitleProcessedContentView.alpha = alpha
+        self.showAllButton.alpha = alpha
     }
 
     private func makeProcessedContentView(font: UIFont, textColor: UIColor) -> ProcessedContentView {

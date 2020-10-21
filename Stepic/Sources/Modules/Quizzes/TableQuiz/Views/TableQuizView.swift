@@ -56,6 +56,17 @@ final class TableQuizView: UIView {
         }
     }
 
+    var isEnabled = true {
+        didSet {
+            self.rowsStackView.isUserInteractionEnabled = self.isEnabled
+            for arrangedSubview in self.rowsStackView.arrangedSubviews {
+                if let rowView = arrangedSubview as? TableRowView {
+                    rowView.isEnabled = self.isEnabled
+                }
+            }
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let contentStackViewIntrinsicContentSize = self.contentStackView
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -114,6 +125,10 @@ final class TableQuizView: UIView {
     }
 
     func updateRowAnswers(row: TableQuiz.Row) {
+        if let rowIndex = self.rows.firstIndex(where: { $0.uniqueIdentifier == row.uniqueIdentifier }) {
+            self.rows[rowIndex] = row
+        }
+
         for arrangedSubview in self.rowsStackView.arrangedSubviews {
             guard let rowView = arrangedSubview as? TableRowView else {
                 continue
