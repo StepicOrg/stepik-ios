@@ -161,6 +161,7 @@ PODS:
   - Nimble (9.0.0)
   - Nuke (9.1.2)
   - Pageboy (3.5.1)
+  - PanModal (1.2.7)
   - pop (1.0.12)
   - Presentr (1.9)
   - PromiseKit (6.13.1):
@@ -232,6 +233,7 @@ DEPENDENCIES:
   - Mockingjay (= 3.0.0-alpha.1)
   - Nimble (= 9.0.0)
   - Nuke (= 9.1.2)
+  - PanModal (= 1.2.7)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.1)
   - Quick (= 3.0.0)
@@ -296,6 +298,7 @@ SPEC REPOS:
     - Nimble
     - Nuke
     - Pageboy
+    - PanModal
     - pop
     - Presentr
     - PromiseKit
@@ -377,6 +380,7 @@ SPEC CHECKSUMS:
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
   Nuke: dd2e6be6a34c042a7861e190632781d11f253026
   Pageboy: 288353d4cc848c24deec2f7542f325089247c136
+  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
@@ -401,6 +405,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: b8001335110580b613b061dc8ece823d667333de
+PODFILE CHECKSUM: c903bbc880cef178bfea6d44632b1cce105a159e
 
 COCOAPODS: 1.9.3

@@ -175,23 +175,23 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
         }
 
         let quizController: UIViewController? = {
-            switch quizType {
-            case .string, .number, .math, .fillBlanks, .freeAnswer, .choice, .code, .sql, .sorting, .matching:
-                let assembly = BaseQuizAssembly(
-                    step: viewModel.step,
-                    hasNextStep: self.canNavigateToNextStep,
-                    output: self
-                )
-                return assembly.makeModule()
-            default:
+            if case .unknown = quizType {
                 return nil
             }
+
+            let assembly = BaseQuizAssembly(
+                step: viewModel.step,
+                hasNextStep: self.canNavigateToNextStep,
+                output: self
+            )
+
+            return assembly.makeModule()
         }()
 
-        if let controller = quizController {
-            self.addChild(controller)
-            self.stepView?.configure(viewModel: viewModel, quizView: controller.view)
-            self.quizChildViewController = controller
+        if let quizController = quizController {
+            self.addChild(quizController)
+            self.stepView?.configure(viewModel: viewModel, quizView: quizController.view)
+            self.quizChildViewController = quizController
         } else {
             let assembly = UnsupportedQuizAssembly(stepURLPath: viewModel.stepURLPath)
             let viewController = assembly.makeModule()

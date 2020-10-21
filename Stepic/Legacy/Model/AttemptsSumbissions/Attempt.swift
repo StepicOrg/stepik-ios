@@ -99,6 +99,8 @@ final class Attempt: JSONSerializable {
             return FreeAnswerDataset(json: json)
         case .matching:
             return MatchingDataset(json: json)
+        case .table:
+            return TableDataset(json: json)
         default:
             return nil
         }

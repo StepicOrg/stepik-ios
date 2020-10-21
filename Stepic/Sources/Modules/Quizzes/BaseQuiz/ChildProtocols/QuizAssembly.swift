@@ -28,6 +28,8 @@ final class QuizAssemblyFactory {
             return NewSortingQuizAssembly()
         case .matching:
             return NewMatchingQuizAssembly()
+        case .table:
+            return TableQuizAssembly()
         default:
             fatalError("Unsupported quiz")
         }
