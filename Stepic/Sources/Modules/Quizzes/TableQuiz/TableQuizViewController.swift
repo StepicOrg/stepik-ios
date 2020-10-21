@@ -45,6 +45,7 @@ extension TableQuizViewController: TableQuizViewDelegate {
         }
 
         let assembly = TableQuizSelectColumnsAssembly(
+            row: row,
             columns: storedViewModel.columns,
             selectedColumnsIDs: Set(row.answers.map(\.uniqueIdentifier)),
             isMultipleChoice: storedViewModel.isMultipleChoice

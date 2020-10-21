@@ -808,6 +808,7 @@
 		2CF4661D25402227002415AF /* TableQuizSelectColumnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4661C25402227002415AF /* TableQuizSelectColumnsView.swift */; };
 		2CF46628254022A5002415AF /* TableQuizSelectColumnsColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF46627254022A5002415AF /* TableQuizSelectColumnsColumnView.swift */; };
 		2CF4663125403145002415AF /* TableQuizSelectColumnsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4663025403145002415AF /* TableQuizSelectColumnsAssembly.swift */; };
+		2CF4663C25405F4C002415AF /* TableQuizSelectColumnsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4663B25405F4C002415AF /* TableQuizSelectColumnsHeaderView.swift */; };
 		2CF6C4EB244DF619000FAAED /* ARQuickLookStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6C4EA244DF619000FAAED /* ARQuickLookStoredFileManager.swift */; };
 		2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */; };
 		2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */; };
@@ -2268,6 +2269,7 @@
 		2CF4661C25402227002415AF /* TableQuizSelectColumnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsView.swift; sourceTree = "<group>"; };
 		2CF46627254022A5002415AF /* TableQuizSelectColumnsColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsColumnView.swift; sourceTree = "<group>"; };
 		2CF4663025403145002415AF /* TableQuizSelectColumnsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsAssembly.swift; sourceTree = "<group>"; };
+		2CF4663B25405F4C002415AF /* TableQuizSelectColumnsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsHeaderView.swift; sourceTree = "<group>"; };
 		2CF6649122F307A500F2A899 /* Model_user_ is_organization.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_user_ is_organization.xcdatamodel"; sourceTree = "<group>"; };
 		2CF6C4EA244DF619000FAAED /* ARQuickLookStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQuickLookStoredFileManager.swift; sourceTree = "<group>"; };
 		2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCellularDataForDownloadsStorageManager.swift; sourceTree = "<group>"; };
@@ -4808,6 +4810,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF46627254022A5002415AF /* TableQuizSelectColumnsColumnView.swift */,
+				2CF4663B25405F4C002415AF /* TableQuizSelectColumnsHeaderView.swift */,
 				2CF4661C25402227002415AF /* TableQuizSelectColumnsView.swift */,
 			);
 			path = Views;
@@ -8509,6 +8512,7 @@
 				2CECFEF9252F235A006BA883 /* VisitedCoursesNetworkService.swift in Sources */,
 				62E98FAF7FFEFCAB3196CF16 /* UserCourse.swift in Sources */,
 				2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */,
+				2CF4663C25405F4C002415AF /* TableQuizSelectColumnsHeaderView.swift in Sources */,
 				2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */,
 				2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */,
 				62E98236342BF7C367FB6F36 /* Array+Reordering.swift in Sources */,

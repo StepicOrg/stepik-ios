@@ -9,6 +9,7 @@ protocol TableQuizSelectColumnsViewControllerDelegate: AnyObject {
 }
 
 final class TableQuizSelectColumnsViewController: UIViewController {
+    private let row: TableQuiz.Row
     private let columns: [TableQuiz.Column]
     private var selectedColumnsIDs: Set<UniqueIdentifierType>
     private let isMultipleChoice: Bool
@@ -17,11 +18,15 @@ final class TableQuizSelectColumnsViewController: UIViewController {
 
     var tableQuizSelectColumnsView: TableQuizSelectColumnsView? { self.view as? TableQuizSelectColumnsView }
 
+    private var isShortFormEnabled = true
+
     init(
+        row: TableQuiz.Row,
         columns: [TableQuiz.Column],
         selectedColumnsIDs: Set<UniqueIdentifierType>,
         isMultipleChoice: Bool
     ) {
+        self.row = row
         self.columns = columns
         self.selectedColumnsIDs = selectedColumnsIDs
         self.isMultipleChoice = isMultipleChoice
@@ -45,6 +50,10 @@ final class TableQuizSelectColumnsViewController: UIViewController {
     }
 
     private func setupView() {
+        self.tableQuizSelectColumnsView?.prompt = self.isMultipleChoice
+            ? NSLocalizedString("MultipleChoiceTableQuizPrompt", comment: "")
+            : NSLocalizedString("SingleChoiceTableQuizPrompt", comment: "")
+        self.tableQuizSelectColumnsView?.title = self.row.text
         self.tableQuizSelectColumnsView?.set(columns: self.columns, selectedColumnsIDs: self.selectedColumnsIDs)
     }
 }
@@ -52,29 +61,20 @@ final class TableQuizSelectColumnsViewController: UIViewController {
 extension TableQuizSelectColumnsViewController: PanModalPresentable {
     var panScrollable: UIScrollView? { nil }
 
-//    var shortFormHeight: PanModalHeight {
-//        return isShortFormEnabled ? .contentHeight(300.0) : longFormHeight
-//    }
-//
-//    var scrollIndicatorInsets: UIEdgeInsets {
-//        let bottomOffset = presentingViewController?.bottomLayoutGuide.length ?? 0
-//        return UIEdgeInsets(top: headerView.frame.size.height, left: 0, bottom: bottomOffset, right: 0)
-//    }
-//
-//    var anchorModalToLongForm: Bool {
-//        return false
-//    }
-//
-//    func shouldPrioritize(panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
-//        let location = panModalGestureRecognizer.location(in: view)
-//        return headerView.frame.contains(location)
-//    }
-//
-//    func willTransition(to state: PanModalPresentationController.PresentationState) {
-//        guard isShortFormEnabled, case .longForm = state
-//        else { return }
-//
-//        isShortFormEnabled = false
-//        panModalSetNeedsLayoutUpdate()
-//    }
+    var shortFormHeight: PanModalHeight {
+        self.isShortFormEnabled
+            ? .contentHeight(floor(UIScreen.main.bounds.height / 3))
+            : self.longFormHeight
+    }
+
+    var anchorModalToLongForm: Bool { false }
+
+    func willTransition(to state: PanModalPresentationController.PresentationState) {
+        guard self.isShortFormEnabled, case .longForm = state else {
+            return
+        }
+
+        self.isShortFormEnabled = false
+        self.panModalSetNeedsLayoutUpdate()
+    }
 }

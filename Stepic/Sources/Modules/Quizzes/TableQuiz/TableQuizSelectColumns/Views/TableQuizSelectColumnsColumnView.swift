@@ -15,7 +15,7 @@ extension TableQuizSelectColumnsColumnView {
 
         let titleFont = Typography.bodyFont
         let titleTextColor = UIColor.stepikPrimaryText
-        let titleInsets = LayoutInsets(top: 16, left: 8, bottom: 16, right: 16)
+        let titleInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
 
         let contentViewMinHeight: CGFloat = 44
 
@@ -37,6 +37,7 @@ final class TableQuizSelectColumnsColumnView: UIView {
         checkBox.onTintColor = self.appearance.checkBoxOnTintColor
         checkBox.animationDuration = self.appearance.checkBoxAnimationDuration
         checkBox.onAnimationType = .fill
+        checkBox.offAnimationType = .fill
         return checkBox
     }()
 

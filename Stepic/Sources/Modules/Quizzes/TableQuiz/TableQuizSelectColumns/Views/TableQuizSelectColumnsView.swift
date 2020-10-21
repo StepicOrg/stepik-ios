@@ -10,7 +10,15 @@ extension TableQuizSelectColumnsView {
 final class TableQuizSelectColumnsView: UIView {
     let appearance: Appearance
 
+    private lazy var headerView = TableQuizSelectColumnsHeaderView()
+
     private lazy var columnsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
@@ -20,10 +28,22 @@ final class TableQuizSelectColumnsView: UIView {
     private var columns = [TableQuiz.Column]()
     private var selectedColumnsIDs = Set<UniqueIdentifierType>()
 
+    var prompt: String? {
+        didSet {
+            self.headerView.prompt = self.prompt
+        }
+    }
+
+    var title: String? {
+        didSet {
+            self.headerView.title = self.title
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
-        let columnsStackViewIntrinsicContentSize = self.columnsStackView
+        let contentStackViewIntrinsicContentSize = self.contentStackView
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        return CGSize(width: UIView.noIntrinsicMetric, height: columnsStackViewIntrinsicContentSize.height)
+        return CGSize(width: UIView.noIntrinsicMetric, height: contentStackViewIntrinsicContentSize.height)
     }
 
     init(
@@ -77,11 +97,14 @@ extension TableQuizSelectColumnsView: ProgrammaticallyInitializableViewProtocol 
     }
 
     func addSubviews() {
-        self.addSubview(self.columnsStackView)
+        self.addSubview(self.contentStackView)
+
+        self.contentStackView.addArrangedSubview(self.headerView)
+        self.contentStackView.addArrangedSubview(self.columnsStackView)
     }
 
     func makeConstraints() {
-        self.columnsStackView.snp.makeConstraints { make in
+        self.contentStackView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
