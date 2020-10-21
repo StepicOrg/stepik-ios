@@ -47,9 +47,10 @@ final class TableRowView: UIControl {
     private lazy var showAllButton: ShowAllButton = {
         let button = ShowAllButton()
         button.title = nil
-        button.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
         return button
     }()
+
+    private lazy var tapProxyView = TapProxyView(targetView: self)
 
     var title: String? {
         didSet {
@@ -60,10 +61,11 @@ final class TableRowView: UIControl {
     var subtitle: String? {
         didSet {
             self.subtitleProcessedContentView.setText(self.subtitle)
+            self.subtitleProcessedContentView.isHidden = self.subtitle?.isEmpty ?? true
         }
     }
 
-    var onTouchUpInside: (() -> Void)?
+    var onClick: (() -> Void)?
 
     override var isHighlighted: Bool {
         didSet {
@@ -103,8 +105,8 @@ final class TableRowView: UIControl {
     }
 
     @objc
-    private func showAllButtonClicked() {
-        self.onTouchUpInside?()
+    private func clicked() {
+        self.onClick?()
     }
 
     private func makeProcessedContentView(font: UIFont, textColor: UIColor) -> ProcessedContentView {
@@ -136,7 +138,7 @@ final class TableRowView: UIControl {
 
 extension TableRowView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
+        self.addTarget(self, action: #selector(self.clicked), for: .touchUpInside)
     }
 
     func addSubviews() {
@@ -145,6 +147,7 @@ extension TableRowView: ProgrammaticallyInitializableViewProtocol {
         self.labelsStackView.addArrangedSubview(self.subtitleProcessedContentView)
 
         self.addSubview(self.showAllButton)
+        self.addSubview(self.tapProxyView)
     }
 
     func makeConstraints() {
@@ -161,6 +164,11 @@ extension TableRowView: ProgrammaticallyInitializableViewProtocol {
                 .offset(self.appearance.showAllButtonInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.showAllButtonInsets.right)
             make.centerY.equalToSuperview()
+        }
+
+        self.tapProxyView.translatesAutoresizingMaskIntoConstraints = false
+        self.tapProxyView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

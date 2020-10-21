@@ -96,7 +96,7 @@ final class TableQuizView: UIView {
 
         for row in rows {
             let rowView = TableRowView()
-            rowView.onTouchUpInside = { [weak self] in
+            rowView.onClick = { [weak self] in
                 guard let strongSelf = self else {
                     return
                 }
