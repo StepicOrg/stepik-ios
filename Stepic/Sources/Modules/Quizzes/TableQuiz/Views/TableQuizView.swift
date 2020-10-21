@@ -113,7 +113,9 @@ final class TableQuizView: UIView {
                     return
                 }
 
-                strongSelf.delegate?.tableQuizView(strongSelf, didSelectRow: row)
+                if let row = strongSelf.rows.first(where: { $0.uniqueIdentifier == row.uniqueIdentifier }) {
+                    strongSelf.delegate?.tableQuizView(strongSelf, didSelectRow: row)
+                }
             }
             rowView.tag = row.uniqueIdentifier.hashValue
 
