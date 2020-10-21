@@ -1,6 +1,14 @@
 import SnapKit
 import UIKit
 
+protocol TableQuizSelectColumnsViewDelegate: AnyObject {
+    func tableQuizSelectColumnsView(
+        _ view: TableQuizSelectColumnsView,
+        didSelectColumn column: TableQuiz.Column,
+        isOn: Bool
+    )
+}
+
 extension TableQuizSelectColumnsView {
     struct Appearance {
         let backgroundColor = UIColor.stepikBackground
@@ -9,6 +17,8 @@ extension TableQuizSelectColumnsView {
 
 final class TableQuizSelectColumnsView: UIView {
     let appearance: Appearance
+
+    weak var delegate: TableQuizSelectColumnsViewDelegate?
 
     private lazy var headerView = TableQuizSelectColumnsHeaderView()
 
@@ -82,11 +92,36 @@ final class TableQuizSelectColumnsView: UIView {
 
         for column in columns {
             let columnView = TableQuizSelectColumnsColumnView()
+            columnView.onValueChanged = { [weak self] isOn in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.delegate?.tableQuizSelectColumnsView(strongSelf, didSelectColumn: column, isOn: isOn)
+            }
+            columnView.tag = column.uniqueIdentifier.hashValue
 
             self.columnsStackView.addArrangedSubview(columnView)
 
             columnView.setOn(self.selectedColumnsIDs.contains(column.uniqueIdentifier), animated: false)
             columnView.setTitle(column.text)
+        }
+    }
+
+    func update(selectedColumnsIDs: Set<UniqueIdentifierType>) {
+        self.selectedColumnsIDs = selectedColumnsIDs
+
+        for arrangedSubview in self.columnsStackView.arrangedSubviews {
+            guard let columnView = arrangedSubview as? TableQuizSelectColumnsColumnView else {
+                continue
+            }
+
+            let hashValue = columnView.tag
+            let isOn = self.selectedColumnsIDs.contains(where: { $0.hashValue == hashValue })
+
+            let animated = columnView.isOn != isOn
+
+            columnView.setOn(isOn, animated: animated)
         }
     }
 }

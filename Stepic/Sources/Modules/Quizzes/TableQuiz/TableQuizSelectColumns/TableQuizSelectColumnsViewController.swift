@@ -42,6 +42,7 @@ final class TableQuizSelectColumnsViewController: UIViewController {
     override func loadView() {
         let view = TableQuizSelectColumnsView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -55,6 +56,31 @@ final class TableQuizSelectColumnsViewController: UIViewController {
             : NSLocalizedString("SingleChoiceTableQuizPrompt", comment: "")
         self.tableQuizSelectColumnsView?.title = self.row.text
         self.tableQuizSelectColumnsView?.set(columns: self.columns, selectedColumnsIDs: self.selectedColumnsIDs)
+    }
+}
+
+extension TableQuizSelectColumnsViewController: TableQuizSelectColumnsViewDelegate {
+    func tableQuizSelectColumnsView(
+        _ view: TableQuizSelectColumnsView,
+        didSelectColumn column: TableQuiz.Column,
+        isOn: Bool
+    ) {
+        if self.isMultipleChoice {
+            if isOn {
+                self.selectedColumnsIDs.insert(column.uniqueIdentifier)
+            } else {
+                self.selectedColumnsIDs.remove(column.uniqueIdentifier)
+            }
+        } else {
+            assert(self.selectedColumnsIDs.count <= 1, "Sigle choice")
+            self.selectedColumnsIDs.removeAll()
+
+            if isOn {
+                self.selectedColumnsIDs.insert(column.uniqueIdentifier)
+            }
+        }
+
+        self.tableQuizSelectColumnsView?.update(selectedColumnsIDs: self.selectedColumnsIDs)
     }
 }
 

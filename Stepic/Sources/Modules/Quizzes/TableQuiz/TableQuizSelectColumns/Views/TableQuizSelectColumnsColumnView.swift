@@ -23,7 +23,7 @@ extension TableQuizSelectColumnsColumnView {
     }
 }
 
-final class TableQuizSelectColumnsColumnView: UIView {
+final class TableQuizSelectColumnsColumnView: UIControl {
     let appearance: Appearance
 
     private lazy var checkBox: BEMCheckBox = {
@@ -72,6 +72,18 @@ final class TableQuizSelectColumnsColumnView: UIView {
 
     private lazy var contentView = UIView()
 
+    private lazy var tapProxyView = TapProxyView(targetView: self)
+
+    var isOn: Bool { self.checkBox.on }
+
+    var onValueChanged: ((Bool) -> Void)?
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.titleProcessedContentView.alpha = self.isHighlighted ? 0.5 : 1.0
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let titleProcessedContentViewIntrinsicContentSize = self.titleProcessedContentView.intrinsicContentSize
         let titleProcessedContentViewHeightWithInsets = titleProcessedContentViewIntrinsicContentSize.height
@@ -112,18 +124,28 @@ final class TableQuizSelectColumnsColumnView: UIView {
     func setTitle(_ title: String) {
         self.titleProcessedContentView.setText(title)
     }
+
+    @objc
+    private func clicked() {
+        let newValue = !self.checkBox.on
+        self.onValueChanged?(newValue)
+    }
 }
 
 extension TableQuizSelectColumnsColumnView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
         self.contentView.backgroundColor = self.appearance.backgroundColor
+
+        self.addTarget(self, action: #selector(self.clicked), for: .touchUpInside)
     }
 
     func addSubviews() {
         self.addSubview(self.contentView)
         self.contentView.addSubview(self.checkBox)
         self.contentView.addSubview(self.titleProcessedContentView)
+
+        self.addSubview(self.tapProxyView)
     }
 
     func makeConstraints() {
@@ -147,6 +169,11 @@ extension TableQuizSelectColumnsColumnView: ProgrammaticallyInitializableViewPro
             make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.titleInsets.bottom)
             make.trailing.equalToSuperview().offset(-self.appearance.titleInsets.right)
             make.centerY.equalToSuperview()
+        }
+
+        self.tapProxyView.translatesAutoresizingMaskIntoConstraints = false
+        self.tapProxyView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
