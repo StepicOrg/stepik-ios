@@ -1,8 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol TableQuizInteractorProtocol {
-}
+protocol TableQuizInteractorProtocol {}
 
 final class TableQuizInteractor: TableQuizInteractorProtocol {
     weak var moduleOutput: QuizOutputProtocol?
@@ -66,10 +65,6 @@ extension TableQuizInteractor: QuizInputProtocol {
 
         self.currentDataset = tableDataset
         self.initRows()
-    }
-
-    func update(feedback: SubmissionFeedback?) {
-        print("TableQuizInteractor :: \(String(describing: feedback))")
     }
 
     func update(reply: Reply?) {
