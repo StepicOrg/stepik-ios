@@ -15,6 +15,17 @@ enum TableQuiz {
         }
     }
 
+    /// Show row choice update
+    enum RowChoiceUpdate {
+        struct Response {
+            let row: Row
+        }
+
+        struct ViewModel {
+            let row: Row
+        }
+    }
+
     // MARK: - Common structs
 
     struct Row: UniqueIdentifiable, Equatable {

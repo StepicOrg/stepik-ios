@@ -44,6 +44,7 @@ final class TableQuizView: UIView {
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
         return stackView
     }()
 
@@ -103,12 +104,29 @@ final class TableQuizView: UIView {
 
                 strongSelf.delegate?.tableQuizView(strongSelf, didSelectRow: row)
             }
+            rowView.tag = row.uniqueIdentifier.hashValue
 
             self.rowsStackView.addArrangedSubview(rowView)
 
             rowView.title = row.text
-            rowView.subtitle = row.answers.map(\.text).joined(separator: ", ")
+            rowView.subtitle = self.makeFormattedSubtitleText(row: row)
         }
+    }
+
+    func updateRowAnswers(row: TableQuiz.Row) {
+        for arrangedSubview in self.rowsStackView.arrangedSubviews {
+            guard let rowView = arrangedSubview as? TableRowView else {
+                continue
+            }
+
+            if rowView.tag == row.uniqueIdentifier.hashValue {
+                rowView.subtitle = self.makeFormattedSubtitleText(row: row)
+            }
+        }
+    }
+
+    private func makeFormattedSubtitleText(row: TableQuiz.Row) -> String {
+        row.answers.map(\.text).joined(separator: ", ")
     }
 }
 

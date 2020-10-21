@@ -3,6 +3,7 @@ import UIKit
 
 protocol TableQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: TableQuiz.ReplyLoad.ViewModel)
+    func displayRowChoiceUpdateResult(viewModel: TableQuiz.RowChoiceUpdate.ViewModel)
 }
 
 final class TableQuizViewController: UIViewController {
@@ -36,6 +37,10 @@ extension TableQuizViewController: TableQuizViewControllerProtocol {
         self.tableQuizView?.title = viewModel.data.title
         self.tableQuizView?.set(rows: viewModel.data.rows)
     }
+
+    func displayRowChoiceUpdateResult(viewModel: TableQuiz.RowChoiceUpdate.ViewModel) {
+        self.tableQuizView?.updateRowAnswers(row: viewModel.row)
+    }
 }
 
 extension TableQuizViewController: TableQuizViewDelegate {
@@ -48,7 +53,8 @@ extension TableQuizViewController: TableQuizViewDelegate {
             row: row,
             columns: storedViewModel.columns,
             selectedColumnsIDs: Set(row.answers.map(\.uniqueIdentifier)),
-            isMultipleChoice: storedViewModel.isMultipleChoice
+            isMultipleChoice: storedViewModel.isMultipleChoice,
+            output: self.interactor as? TableQuizSelectColumnsOutputProtocol
         )
         let viewController = assembly.makeModule()
 

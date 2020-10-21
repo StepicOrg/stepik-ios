@@ -140,3 +140,31 @@ extension TableQuizInteractor: QuizInputProtocol {
 
     private func getUniqueIdentifierByColumn(_ column: String) -> UniqueIdentifierType { "\(column.hashValue)" }
 }
+
+extension TableQuizInteractor: TableQuizSelectColumnsOutputProtocol {
+    func handleSelectedColumnsUpdated(for row: TableQuiz.Row, selectedColumnsIDs: Set<UniqueIdentifierType>) {
+        guard let currentDataset = self.currentDataset else {
+            return
+        }
+
+        guard let rowIndex = self.currentRows.firstIndex(where: { $0.uniqueIdentifier == row.uniqueIdentifier }) else {
+            return
+        }
+
+        let answers = currentDataset.columns
+            .filter { selectedColumnsIDs.contains(self.getUniqueIdentifierByColumn($0)) }
+            .map { TableQuiz.Column(text: $0, uniqueIdentifier: self.getUniqueIdentifierByColumn($0)) }
+
+        let oldRow = self.currentRows[rowIndex]
+        let newRow = TableQuiz.Row(
+            text: oldRow.text,
+            answers: answers,
+            uniqueIdentifier: oldRow.uniqueIdentifier
+        )
+
+        self.currentRows[rowIndex] = newRow
+
+        self.updateReplyFromCurrentData()
+        self.presenter.presentRowChoiceUpdateResult(response: .init(row: newRow))
+    }
+}

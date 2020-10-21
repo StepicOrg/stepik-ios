@@ -9,6 +9,8 @@ protocol TableQuizSelectColumnsViewControllerDelegate: AnyObject {
 }
 
 final class TableQuizSelectColumnsViewController: UIViewController {
+    weak var moduleOutput: TableQuizSelectColumnsOutputProtocol?
+
     private let row: TableQuiz.Row
     private let columns: [TableQuiz.Column]
     private var selectedColumnsIDs: Set<UniqueIdentifierType>
@@ -81,6 +83,7 @@ extension TableQuizSelectColumnsViewController: TableQuizSelectColumnsViewDelega
         }
 
         self.tableQuizSelectColumnsView?.update(selectedColumnsIDs: self.selectedColumnsIDs)
+        self.moduleOutput?.handleSelectedColumnsUpdated(for: self.row, selectedColumnsIDs: self.selectedColumnsIDs)
     }
 }
 

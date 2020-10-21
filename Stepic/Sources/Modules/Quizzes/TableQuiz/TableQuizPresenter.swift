@@ -2,6 +2,7 @@ import UIKit
 
 protocol TableQuizPresenterProtocol {
     func presentReply(response: TableQuiz.ReplyLoad.Response)
+    func presentRowChoiceUpdateResult(response: TableQuiz.RowChoiceUpdate.Response)
 }
 
 final class TableQuizPresenter: TableQuizPresenterProtocol {
@@ -32,5 +33,9 @@ final class TableQuizPresenter: TableQuizPresenterProtocol {
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
+    }
+
+    func presentRowChoiceUpdateResult(response: TableQuiz.RowChoiceUpdate.Response) {
+        self.viewController?.displayRowChoiceUpdateResult(viewModel: .init(row: response.row))
     }
 }
