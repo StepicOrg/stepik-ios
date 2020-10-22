@@ -1,6 +1,6 @@
 import Foundation
 
-struct CodeLimitPlainObject {
+struct CodeLimitPlainObject: Equatable {
     let language: String?
     let memory: Double
     let time: TimeInterval

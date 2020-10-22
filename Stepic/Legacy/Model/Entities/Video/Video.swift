@@ -41,6 +41,28 @@ final class Video: NSManagedObject, JSONSerializable {
         initialize(json)
     }
 
+    func equals(_ object: Any?) -> Bool {
+        guard let object = object as? Video else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        if self.id != object.id { return false }
+        if self.thumbnailURL != object.thumbnailURL { return false }
+        if self.status != object.status { return false }
+
+        if self.urls.count != object.urls.count { return false }
+        for (lhsVideoURL, rhsVideoURL) in zip(self.urls, object.urls) {
+            if !lhsVideoURL.equals(rhsVideoURL) {
+                return false
+            }
+        }
+
+        return true
+    }
+
     static func getNearestDefault(to quality: String) -> String {
         let qualities = ["270", "360", "720", "1080"]
         var minDifference = 10000

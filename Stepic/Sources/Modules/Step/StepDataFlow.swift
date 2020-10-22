@@ -7,7 +7,7 @@ enum StepDataFlow {
 
         struct Data {
             let step: Step
-            let fontSize: StepFontSize
+            let stepFontSize: StepFontSize
             let storedImages: [StoredImage]
         }
 
@@ -200,11 +200,23 @@ enum StepDataFlow {
 
     // MARK: Types
 
-    struct StoredImage {
+    struct StoredImage: Equatable {
         /// Specifies the URL of an image, not local.
         let url: URL
         /// Image data.
         let data: Data
+
+        static func == (lhs: StoredImage, rhs: StoredImage) -> Bool {
+            if lhs.url != rhs.url {
+                return false
+            }
+
+            if lhs.data != rhs.data {
+                return false
+            }
+
+            return true
+        }
     }
 
     enum ViewControllerState {
@@ -224,6 +236,7 @@ enum StepDataFlow {
         case matching
         case code
         case sql
+        case table
         case unknown(blockName: String)
 
         init(blockName: String) {
@@ -248,6 +261,8 @@ enum StepDataFlow {
                 self = .code
             case "sql":
                 self = .sql
+            case "table":
+                self = .table
             default:
                 self = .unknown(blockName: blockName)
             }
@@ -275,6 +290,8 @@ enum StepDataFlow {
                 return "code"
             case .sql:
                 return "sql"
+            case .table:
+                return "table"
             case .unknown(let blockName):
                 return blockName
             }
@@ -283,7 +300,8 @@ enum StepDataFlow {
         static func == (lhs: QuizType, rhs: QuizType) -> Bool {
             switch (lhs, rhs) {
             case (.choice, .choice), (.string, .string), (.number, .number), (.math, .math), (.fillBlanks, .fillBlanks),
-                 (.freeAnswer, .freeAnswer), (.sorting, .sorting), (.matching, .matching), (.code, .code), (.sql, .sql):
+                 (.freeAnswer, .freeAnswer), (.sorting, .sorting), (.matching, .matching), (.code, .code), (.sql, .sql),
+                 (.table, .table):
                 return true
             case (.unknown(let lhsName), .unknown(let rhsName)):
                 return lhsName == rhsName

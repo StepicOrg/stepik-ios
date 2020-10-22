@@ -1,6 +1,6 @@
 import Foundation
 
-struct StepOptionsPlainObject {
+struct StepOptionsPlainObject: Equatable {
     let executionTimeLimit: Double
     let executionMemoryLimit: Double
     let isRunUserCodeAllowed: Bool
@@ -9,7 +9,7 @@ struct StepOptionsPlainObject {
     let templates: [CodeTemplatePlainObject]
     let samples: [CodeSamplePlainObject]
 
-    var languages: [CodeLanguage] {
+    func getLanguages() -> [CodeLanguage] {
         self.limits.compactMap { CodeLanguage(rawValue: $0.language ?? "") }
     }
 

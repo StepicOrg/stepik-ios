@@ -16,7 +16,7 @@ private final class NewStepViewControllerMock: StepViewControllerProtocol {
 
     func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) {}
 
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {}
+    func displayStepAutoplay(viewModel: StepDataFlow.PlayStep.ViewModel) {}
 
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) {}
 
@@ -70,7 +70,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                 presenter.presentStep(
                     response: .init(
-                        result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                        result: .success(StepDataFlow.StepLoad.Data(step: step, stepFontSize: .small, storedImages: []))
                     )
                 )
 
@@ -139,7 +139,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                 presenter.presentStep(
                     response: .init(
-                        result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                        result: .success(StepDataFlow.StepLoad.Data(step: step, stepFontSize: .small, storedImages: []))
                     )
                 )
 
@@ -170,6 +170,7 @@ class NewStepViewControllerSpec: QuickSpec {
                 ("sql", .sql),
                 ("string", .string),
                 ("fill-blanks", .fillBlanks),
+                ("table", .table),
                 ("animation", .unknown(blockName: "animation")),
                 ("chemical", .unknown(blockName: "chemical")),
                 ("dataset", .unknown(blockName: "dataset")),
@@ -177,7 +178,6 @@ class NewStepViewControllerSpec: QuickSpec {
                 ("puzzle", .unknown(blockName: "puzzle")),
                 ("pycharm", .unknown(blockName: "pycharm")),
                 ("admin", .unknown(blockName: "admin")),
-                ("table", .unknown(blockName: "table")),
                 ("html", .unknown(blockName: "html")),
                 ("random-tasks", .unknown(blockName: "random-tasks")),
                 ("schulte", .unknown(blockName: "schulte")),
@@ -208,7 +208,7 @@ class NewStepViewControllerSpec: QuickSpec {
                 waitUntil { done in
                     presenter.presentStep(
                         response: .init(
-                            result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                            result: .success(StepDataFlow.StepLoad.Data(step: step, stepFontSize: .small, storedImages: []))
                         )
                     )
 

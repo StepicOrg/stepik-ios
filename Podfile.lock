@@ -142,7 +142,7 @@ PODS:
   - HexColors (2.3.0)
   - Highlightr (2.1.0)
   - IQKeyboardManagerSwift (6.5.4)
-  - Kanna (5.2.3)
+  - Kanna (5.2.2)
   - Koloda (5.0):
     - pop (~> 1.0)
   - lottie-ios (2.5.3)
@@ -161,6 +161,7 @@ PODS:
   - Nimble (9.0.0)
   - Nuke (9.1.2)
   - Pageboy (3.5.1)
+  - PanModal (1.2.7)
   - pop (1.0.12)
   - Presentr (1.9)
   - PromiseKit (6.13.1):
@@ -226,12 +227,13 @@ DEPENDENCIES:
   - GoogleSignIn (= 5.0.2)
   - Highlightr (= 2.1.0)
   - IQKeyboardManagerSwift (= 6.5.4)
-  - Kanna (= 5.2.3)
+  - Kanna (= 5.2.2)
   - Koloda (= 5.0)
   - lottie-ios (= 2.5.3)
   - Mockingjay (= 3.0.0-alpha.1)
   - Nimble (= 9.0.0)
   - Nuke (= 9.1.2)
+  - PanModal (= 1.2.7)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.1)
   - Quick (= 3.0.0)
@@ -296,6 +298,7 @@ SPEC REPOS:
     - Nimble
     - Nuke
     - Pageboy
+    - PanModal
     - pop
     - Presentr
     - PromiseKit
@@ -369,7 +372,7 @@ SPEC CHECKSUMS:
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
-  Kanna: 113d111e95d7e903efe0c3eb7221f7635716084c
+  Kanna: 2c4eddaaa4bfb9a1ed19e53c0b3d42ef02838046
   Koloda: 75302d21882cc3e274c1561b1155805ea5919dab
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
@@ -377,6 +380,7 @@ SPEC CHECKSUMS:
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
   Nuke: dd2e6be6a34c042a7861e190632781d11f253026
   Pageboy: 288353d4cc848c24deec2f7542f325089247c136
+  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
@@ -401,6 +405,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: b8001335110580b613b061dc8ece823d667333de
+PODFILE CHECKSUM: 8919f8b23c441a13089beb05b8f6e2ee30192039
 
 COCOAPODS: 1.9.3

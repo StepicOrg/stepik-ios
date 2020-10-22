@@ -37,6 +37,11 @@ final class SortingDataset: Dataset {
         super.init(coder: coder)
     }
 
+    private override init() {
+        self.options = []
+        super.init()
+    }
+
     override func encode(with coder: NSCoder) {
         coder.encode(self.options, forKey: JSONKey.options.rawValue)
     }
@@ -49,6 +54,12 @@ final class SortingDataset: Dataset {
         if type(of: self) != type(of: object) { return false }
         if self.options != object.options { return false }
         return true
+    }
+
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = SortingDataset()
+        copy.options = self.options
+        return copy
     }
 
     enum JSONKey: String {

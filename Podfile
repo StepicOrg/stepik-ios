@@ -43,7 +43,7 @@ def all_pods
 
     pod 'IQKeyboardManagerSwift', '6.5.4'
 
-    pod 'Kanna', '5.2.3'
+    pod 'Kanna', '5.2.2'
     # Remove after NotificationsService refactoring
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
@@ -55,6 +55,7 @@ def all_pods
     pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
+    pod 'PanModal', '1.2.7'
     
     pod 'Agrume', '5.6.10'
     pod 'Highlightr', '2.1.0'

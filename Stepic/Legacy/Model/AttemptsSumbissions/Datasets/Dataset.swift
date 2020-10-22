@@ -1,7 +1,7 @@
 import SwiftyJSON
 import Foundation
 
-class Dataset: NSObject, NSCoding {
+class Dataset: NSObject, NSCoding, NSCopying {
     required init(json: JSON) {
         super.init()
     }
@@ -10,5 +10,11 @@ class Dataset: NSObject, NSCoding {
         super.init()
     }
 
+    override init() {
+        super.init()
+    }
+
     func encode(with coder: NSCoder) {}
+
+    func copy(with zone: NSZone? = nil) -> Any { Dataset() }
 }

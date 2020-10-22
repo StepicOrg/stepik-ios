@@ -6,7 +6,7 @@ import UIKit
 protocol StepViewControllerProtocol: AnyObject {
     func displayStep(viewModel: StepDataFlow.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel)
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel)
+    func displayStepAutoplay(viewModel: StepDataFlow.PlayStep.ViewModel)
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel)
     func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel)
     func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
@@ -42,6 +42,8 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
             self.updateState()
         }
     }
+
+    private var quizChildViewController: UIViewController?
 
     private var didInitRequestsSend = false
     private var sendStepDidPassedGroup: DispatchGroup? = DispatchGroup()
@@ -129,6 +131,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
         switch self.state {
         case .result:
             self.isPlaceholderShown = false
+            self.removeContent()
             self.showContent()
         case .loading:
             self.isPlaceholderShown = false
@@ -172,28 +175,46 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
         }
 
         let quizController: UIViewController? = {
-            switch quizType {
-            case .string, .number, .math, .fillBlanks, .freeAnswer, .choice, .code, .sql, .sorting, .matching:
-                let assembly = BaseQuizAssembly(
-                    step: viewModel.step,
-                    hasNextStep: self.canNavigateToNextStep,
-                    output: self
-                )
-                return assembly.makeModule()
-            default:
+            if case .unknown = quizType {
                 return nil
             }
+
+            let assembly = BaseQuizAssembly(
+                step: viewModel.step,
+                hasNextStep: self.canNavigateToNextStep,
+                output: self
+            )
+
+            return assembly.makeModule()
         }()
 
-        if let controller = quizController {
-            self.addChild(controller)
-            self.stepView?.configure(viewModel: viewModel, quizView: controller.view)
+        if let quizController = quizController {
+            self.addChild(quizController)
+            self.stepView?.configure(viewModel: viewModel, quizView: quizController.view)
+            self.quizChildViewController = quizController
         } else {
             let assembly = UnsupportedQuizAssembly(stepURLPath: viewModel.stepURLPath)
             let viewController = assembly.makeModule()
             self.addChild(viewController)
             self.stepView?.configure(viewModel: viewModel, quizView: viewController.view)
+            self.quizChildViewController = viewController
         }
+    }
+
+    private func removeContent() {
+        defer {
+            self.stepView?.clear()
+        }
+
+        guard let quizChildViewController = self.quizChildViewController else {
+            return
+        }
+
+        quizChildViewController.willMove(toParent: nil)
+        quizChildViewController.removeFromParent()
+        quizChildViewController.view.removeFromSuperview()
+
+        self.quizChildViewController = nil
     }
 
     private func requestAutoplayIfNeeded() {
@@ -221,7 +242,7 @@ extension StepViewController: StepViewControllerProtocol {
         self.stepView?.updateTextContent(viewModel.processedContent)
     }
 
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {
+    func displayStepAutoplay(viewModel: StepDataFlow.PlayStep.ViewModel) {
         self.shouldRequestAutoplay = true
         self.requestAutoplayIfNeeded()
     }

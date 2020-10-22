@@ -221,8 +221,8 @@ extension CodeQuizInteractor: QuizInputProtocol {
         if isCurrentLanguageUnsupported {
             self.languageName = nil
             self.currentCode = nil
-        } else if self.codeDetails?.stepOptions.languages.count == 1,
-                  let language = self.codeDetails?.stepOptions.languages.first {
+        } else if self.codeDetails?.stepOptions.getLanguages().count == 1,
+                  let language = self.codeDetails?.stepOptions.getLanguages().first {
             self.doLanguageSelect(request: .init(language: language))
         } else if let stepID = self.codeDetails?.stepID {
             self.provider.fetchAutoSuggestedCodeLanguage(by: stepID).done { language in

@@ -30,6 +30,11 @@ final class StringDataset: Dataset {
         super.init(coder: coder)
     }
 
+    private override init() {
+        self.string = ""
+        super.init()
+    }
+
     override func encode(with coder: NSCoder) {
         coder.encode(self.string, forKey: CoderKey.string.rawValue)
     }
@@ -42,6 +47,12 @@ final class StringDataset: Dataset {
         if type(of: self) != type(of: object) { return false }
         if self.string != object.string { return false }
         return true
+    }
+
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = StringDataset()
+        copy.string = self.string
+        return copy
     }
 
     enum CoderKey: String {
