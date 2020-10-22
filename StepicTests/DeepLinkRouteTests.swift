@@ -219,13 +219,13 @@ class DeepLinkRouteSpec: QuickSpec {
 
             context("solutions") {
                 func checkRoute(_ route: DeepLinkRoute, expectedUnitID: Int?) -> ToSucceedResult {
-                    guard case let .solutions(lessonID, stepID, discussionID, unitID) = route else {
+                    guard case let .solutions(lessonID, stepPosition, discussionID, unitID) = route else {
                         return .failed(reason: "wrong enum case")
                     }
                     guard lessonID == 172508 else {
                         return .failed(reason: "wrong lesson id")
                     }
-                    guard stepID == 1 else {
+                    guard stepPosition == 1 else {
                         return .failed(reason: "wrong step id")
                     }
                     guard discussionID == 803115 else {
@@ -241,7 +241,10 @@ class DeepLinkRouteSpec: QuickSpec {
                     let paths = [
                         "https://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions",
                         "https://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions/",
-                        "http://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions/"
+                        "http://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions/",
+                        "https://stepik.org/lesson/172508/step/1?discussion=803115&thread=solutions&unit=148015",
+                        "https://stepik.org/lesson/172508/step/1?discussion=803115&thread=solutions&unit=148015&from_mobile_app=true",
+                        "http://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&thread=solutions&from_mobile_app=true",
                     ]
                     self.checkPaths(paths) { route in
                         checkRoute(route, expectedUnitID: 148015)
@@ -251,7 +254,9 @@ class DeepLinkRouteSpec: QuickSpec {
                 it("matches discussions deep link without unit id") {
                     let paths = [
                         "https://stepik.org/lesson/172508/step/1?discussion=803115&amp;thread=solutions",
-                        "http://stepik.org/lesson/172508/step/1?discussion=803115&amp;thread=solutions"
+                        "http://stepik.org/lesson/172508/step/1?discussion=803115&amp;thread=solutions",
+                        "http://stepik.org/lesson/172508/step/1?discussion=803115&thread=solutions",
+                        "http://stepik.org/lesson/172508/step/1?discussion=803115&thread=solutionsfrom_mobile_app=true"
                     ]
                     self.checkPaths(paths) { route in
                         checkRoute(route, expectedUnitID: nil)

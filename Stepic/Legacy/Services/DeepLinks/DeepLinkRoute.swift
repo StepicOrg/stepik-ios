@@ -42,9 +42,9 @@ enum DeepLinkRoute {
             }
         case .solutions(let lessonID, let stepID, let discussionID, let unitID):
             if let unitID = unitID {
-                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&unit=\(unitID)&amp;thread=solutions"
+                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&unit=\(unitID)&thread=solutions"
             } else {
-                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&amp;thread=solutions"
+                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&thread=solutions"
             }
         case .profile(let userID):
             path = "users/\(userID)"
@@ -67,6 +67,8 @@ enum DeepLinkRoute {
     }
 
     init?(path: String) {
+        let path = path.replacingOccurrences(of: "&amp;", with: "&")
+
         if let match = Pattern.catalog.regex.firstMatch(in: path),
            match.matchedString == path {
             self = .catalog
@@ -132,9 +134,12 @@ enum DeepLinkRoute {
         if let match = Pattern.solutions.regex.firstMatch(in: path),
            let lessonIDString = match.captures[0], let lessonID = Int(lessonIDString),
            let stepIDString = match.captures[1], let stepID = Int(stepIDString),
-           let discussionIDString = match.captures[2], let discussionID = Int(discussionIDString),
+           let url = URL(string: path), let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+           let queryItems = urlComponents.queryItems,
+           let discussionQueryItem = queryItems.first(where: { $0.name == "discussion" }),
+           let discussionIDString = discussionQueryItem.value, let discussionID = Int(discussionIDString),
            match.matchedString == path {
-            let unitID = match.captures[3].flatMap { Int($0) }
+            let unitID = queryItems.first(where: { $0.name == "unit" })?.value.flatMap { Int($0) }
             self = .solutions(lessonID: lessonID, stepID: stepID, discussionID: discussionID, unitID: unitID)
             return
         }
@@ -189,7 +194,7 @@ enum DeepLinkRoute {
             case .discussions:
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?\/?\#(queryComponents)"#
             case .solutions:
-                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?&amp;thread=solutions.*"#
+                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?&thread=solutions.*"#
             case .certificates:
                 return #"\#(stepik)users\/(\d+)\/certificates\/?\#(queryComponents)"#
             }
