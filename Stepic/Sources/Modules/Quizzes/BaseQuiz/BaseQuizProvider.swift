@@ -4,6 +4,7 @@ import PromiseKit
 protocol BaseQuizProviderProtocol {
     func createAttempt(for step: Step) -> Promise<Attempt?>
     func fetchAttempts(for step: Step, userID: User.IdType) -> Promise<([Attempt], Meta)>
+    func fetchCachedStepAttempts(stepID: Step.IdType) -> Promise<([Attempt], Meta)>
 
     func fetchSubmissionsForAttempt(
         attemptID: Attempt.IdType,
@@ -21,15 +22,18 @@ protocol BaseQuizProviderProtocol {
 final class BaseQuizProvider: BaseQuizProviderProtocol {
     private let attemptsRepository: AttemptsRepositoryProtocol
     private let submissionsRepository: SubmissionsRepositoryProtocol
+    private let attemptsPersistenceService: AttemptsPersistenceServiceProtocol
     private let userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
 
     init(
         attemptsRepository: AttemptsRepositoryProtocol,
         submissionsRepository: SubmissionsRepositoryProtocol,
+        attemptsPersistenceService: AttemptsPersistenceServiceProtocol,
         userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
     ) {
         self.attemptsRepository = attemptsRepository
         self.submissionsRepository = submissionsRepository
+        self.attemptsPersistenceService = attemptsPersistenceService
         self.userActivitiesNetworkService = userActivitiesNetworkService
     }
 
@@ -45,6 +49,17 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
 
     func fetchAttempts(for step: Step, userID: User.IdType) -> Promise<([Attempt], Meta)> {
         self.attemptsRepository.fetch(stepID: step.id, userID: userID, blockName: step.block.name)
+    }
+
+    func fetchCachedStepAttempts(stepID: Step.IdType) -> Promise<([Attempt], Meta)> {
+        Promise { seal in
+            self.attemptsPersistenceService.fetchStepAttempts(stepID: stepID).done { attempts in
+                let resultAttempts = attempts.map(\.plainObject)
+                seal.fulfill((resultAttempts, Meta.oneAndOnlyPage))
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
     }
 
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)> {

@@ -16,20 +16,18 @@ final class BaseQuizAssembly: Assembly {
             attemptsRepository: AttemptsRepository(
                 attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
                 attemptsPersistenceService: AttemptsPersistenceService(
-                    managedObjectContext: CoreDataHelper.shared.context,
                     stepsPersistenceService: StepsPersistenceService()
                 )
             ),
             submissionsRepository: SubmissionsRepository(
                 submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
                 submissionsPersistenceService: SubmissionsPersistenceService(
-                    managedObjectContext: CoreDataHelper.shared.context,
                     attemptsPersistenceService: AttemptsPersistenceService(
-                        managedObjectContext: CoreDataHelper.shared.context,
                         stepsPersistenceService: StepsPersistenceService()
                     )
                 )
             ),
+            attemptsPersistenceService: AttemptsPersistenceService(stepsPersistenceService: StepsPersistenceService()),
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
         let presenter = BaseQuizPresenter(urlFactory: StepikURLFactory())
