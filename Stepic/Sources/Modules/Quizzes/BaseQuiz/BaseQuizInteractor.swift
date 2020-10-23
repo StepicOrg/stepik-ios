@@ -91,16 +91,21 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.isFirstSubmissionLoad = false
 
         if isFirstSubmissionLoad && !request.shouldRefreshAttempt {
-            self.fetchSubmissionDataFromCache().done { cachedAttempt, cachedSubmission in
+            self.fetchSubmissionDataFromCache().done { cachedAttempt, cachedSubmission, cachedSubmissionsCount in
                 self.presentSubmission(attempt: cachedAttempt, submission: cachedSubmission)
 
-                self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { remoteAttempt, remoteSubmission in
-                    if cachedAttempt != remoteAttempt || cachedSubmission != remoteSubmission {
+                self.fetchSubmissionDataFromRemote(
+                    forceRefreshAttempt: false
+                ).done { remoteAttempt, remoteSubmission, remoteSubmissionsCount in
+                    let shouldReload = cachedAttempt != remoteAttempt
+                        || cachedSubmission != remoteSubmission
+                        || cachedSubmissionsCount != remoteSubmissionsCount
+                    if shouldReload {
                         self.presentSubmission(attempt: remoteAttempt, submission: remoteSubmission)
                     }
                 }.cauterize()
             }.catch { _ in
-                self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { attempt, submission in
+                self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { attempt, submission, _ in
                     self.presentSubmission(attempt: attempt, submission: submission)
                 }.catch { error in
                     self.presenter.presentSubmission(response: .init(result: .failure(error)))
@@ -109,7 +114,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         } else {
             self.fetchSubmissionDataFromRemote(
                 forceRefreshAttempt: request.shouldRefreshAttempt
-            ).done { attempt, submission in
+            ).done { attempt, submission, _ in
                 self.presentSubmission(attempt: attempt, submission: submission)
             }.catch { error in
                 self.presenter.presentSubmission(response: .init(result: .failure(error)))
@@ -209,7 +214,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.presenter.presentSubmission(response: .init(result: .success(response)))
     }
 
-    private func fetchSubmissionDataFromCache() -> Promise<(Attempt, Submission)> {
+    private func fetchSubmissionDataFromCache() -> Promise<(Attempt, Submission, Int)> {
         Promise { seal in
             firstly { () -> Promise<([Attempt], Meta)> in
                 self.provider.fetchCachedStepAttempts(stepID: self.step.id)
@@ -232,12 +237,15 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                         .createLocalSubmission(Submission(id: 0, attemptID: attempt.id, isLocal: true))
                         .map { (attempt, $0) }
                 }
-            }.done { attempt, submission in
-                self.submissionsCount = 0
+            }.then { attempt, submission -> Guarantee<(Attempt, Submission, Int)> in
+                self.countSubmissions(dataSourceType: .cache)
+                    .map { (attempt, submission, $0) }
+            }.done { attempt, submission, submissionLimit in
+                self.submissionsCount = submissionLimit
                 self.currentAttempt = attempt
                 self.currentSubmission = submission
 
-                seal.fulfill((attempt, submission))
+                seal.fulfill((attempt, submission, submissionLimit))
             }.catch { error in
                 print("BaseQuizInteractor: error while load cached submission = \(error)")
                 seal.reject(error)
@@ -245,7 +253,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    private func fetchSubmissionDataFromRemote(forceRefreshAttempt: Bool) -> Promise<(Attempt, Submission)> {
+    private func fetchSubmissionDataFromRemote(forceRefreshAttempt: Bool) -> Promise<(Attempt, Submission, Int)> {
         Promise { seal in
             firstly {
                 self.fetchAttempt(forceRefreshAttempt: forceRefreshAttempt)
@@ -254,7 +262,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 self.fetchSubmission(attemptID: attempt.id)
                     .map { (attempt, $0) }
             }.then { attempt, submission -> Guarantee<(Attempt, Submission, Int)> in
-                self.countSubmissions()
+                self.countSubmissions(dataSourceType: .remote)
                     .map { (attempt, submission, $0) }
             }.done { attempt, submission, submissionLimit in
                 submission.attempt = attempt
@@ -263,7 +271,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 self.currentAttempt = attempt
                 self.currentSubmission = submission
 
-                seal.fulfill((attempt, submission))
+                seal.fulfill((attempt, submission, submissionLimit))
             }.catch { error in
                 print("BaseQuizInteractor: error while load submission = \(error)")
                 seal.reject(error)
@@ -342,10 +350,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    private func countSubmissions() -> Guarantee<Int> {
+    private func countSubmissions(dataSourceType: DataSourceType) -> Guarantee<Int> {
         Guarantee { seal in
             self.provider
-                .fetchSubmissions(for: self.step, page: 1)
+                .fetchSubmissions(for: self.step, page: 1, dataSourceType: dataSourceType)
                 .map { $0.0.count }
                 .done { seal($0) }
                 .catch { _ in seal(0) }

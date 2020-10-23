@@ -28,6 +28,7 @@ final class BaseQuizAssembly: Assembly {
                 )
             ),
             attemptsPersistenceService: AttemptsPersistenceService(stepsPersistenceService: StepsPersistenceService()),
+            submissionsPersistenceService: SubmissionsPersistenceService(),
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
         let presenter = BaseQuizPresenter(urlFactory: StepikURLFactory())
