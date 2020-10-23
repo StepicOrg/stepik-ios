@@ -95,7 +95,9 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 self.presentSubmission(attempt: cachedAttempt, submission: cachedSubmission)
 
                 self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { remoteAttempt, remoteSubmission in
-                    self.presentSubmission(attempt: remoteAttempt, submission: remoteSubmission)
+                    if cachedAttempt != remoteAttempt || cachedSubmission != remoteSubmission {
+                        self.presentSubmission(attempt: remoteAttempt, submission: remoteSubmission)
+                    }
                 }.cauterize()
             }.catch { _ in
                 self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { attempt, submission in
@@ -255,6 +257,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 self.countSubmissions()
                     .map { (attempt, submission, $0) }
             }.done { attempt, submission, submissionLimit in
+                submission.attempt = attempt
+
                 self.submissionsCount = submissionLimit
                 self.currentAttempt = attempt
                 self.currentSubmission = submission
