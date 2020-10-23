@@ -9,7 +9,7 @@
 import SwiftyJSON
 import UIKit
 
-final class Submission: JSONSerializable {
+final class Submission: JSONSerializable, Hashable {
     typealias IdType = Int
 
     var id: IdType = 0
@@ -117,6 +117,50 @@ final class Submission: JSONSerializable {
     func hasEqualId(json: JSON) -> Bool {
         self.id == json[JSONKey.id.rawValue].int
     }
+
+    // MARK: Hashable
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+        hasher.combine(self.statusString)
+        hasher.combine(self.score)
+        hasher.combine(self.hint)
+        hasher.combine(self.feedback)
+        hasher.combine(self.time)
+        hasher.combine(self.reply)
+        hasher.combine(self.attemptID)
+        hasher.combine(self.attempt)
+        hasher.combine(self.isLocal)
+    }
+
+    static func == (lhs: Submission, rhs: Submission) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+
+        if lhs.id != rhs.id { return false }
+        if lhs.statusString != rhs.statusString { return false }
+        if lhs.score != rhs.score { return false }
+        if lhs.hint != rhs.hint { return false }
+        if lhs.time != rhs.time { return false }
+        if lhs.attemptID != rhs.attemptID { return false }
+        if lhs.attempt != rhs.attempt { return false }
+
+        if let lhsFeedback = lhs.feedback {
+            if !lhsFeedback.isEqual(rhs.feedback) { return false }
+        } else if rhs.feedback != nil {
+            return false
+        }
+
+        if let lhsReply = lhs.reply {
+            if !lhsReply.isEqual(rhs.reply) { return false }
+        } else if rhs.reply != nil {
+            return false
+        }
+
+        return true
+    }
+
+    // MARK: Private API
 
     private func getReplyFromJSON(_ json: JSON, stepBlockName: String) -> Reply? {
         guard let blockType = Block.BlockType(rawValue: stepBlockName) else {

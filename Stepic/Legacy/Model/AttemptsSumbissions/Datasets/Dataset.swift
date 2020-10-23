@@ -14,6 +14,17 @@ class Dataset: NSObject, NSCoding, NSCopying {
         super.init()
     }
 
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? Dataset else {
+            return false
+        }
+
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+
+        return true
+    }
+
     func encode(with coder: NSCoder) {}
 
     func copy(with zone: NSZone? = nil) -> Any { Dataset() }
