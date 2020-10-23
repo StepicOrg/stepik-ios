@@ -27,10 +27,14 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         }
     }
 
-    init(interactor: BaseQuizInteractorProtocol, quizAssembly: QuizAssembly) {
+    init(
+        interactor: BaseQuizInteractorProtocol,
+        quizAssembly: QuizAssembly,
+        initialState: BaseQuiz.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
         self.quizAssembly = quizAssembly
-        self.state = .loading
+        self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -163,12 +167,12 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
     }
 
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {
-        guard let url = self.stepURL else {
+        guard let stepURL = self.stepURL else {
             return
         }
 
         WebControllerManager.shared.presentWebControllerWithURL(
-            url,
+            stepURL,
             inController: self,
             withKey: .peerReview,
             allowsSafari: true,
