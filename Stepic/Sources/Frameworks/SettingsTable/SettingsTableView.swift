@@ -111,6 +111,7 @@ final class SettingsTableView: UIView {
         options: InputCellOptions
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
         cell.elementView.placeholder = options.placeholderText
         cell.elementView.text = options.valueText
         cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
@@ -124,6 +125,7 @@ final class SettingsTableView: UIView {
         viewModel: SettingsTableSectionViewModel.Cell,
         options: LargeInputCellOptions
     ) {
+        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
         cell.elementView.placeholder = options.placeholderText
         cell.elementView.text = options.valueText
         cell.elementView.maxTextLength = options.maxLength
@@ -141,6 +143,7 @@ final class SettingsTableView: UIView {
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.accessoryType = options.accessoryType
+        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
 
         cell.elementView.title = options.title.text
         cell.elementView.titleTextColor = options.title.appearance.textColor
@@ -158,6 +161,7 @@ final class SettingsTableView: UIView {
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.accessoryType = options.accessoryType
+        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
         cell.delegate = self.delegate
 
         cell.elementView.title = options.title.text

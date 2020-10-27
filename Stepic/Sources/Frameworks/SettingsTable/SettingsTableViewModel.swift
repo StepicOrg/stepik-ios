@@ -10,19 +10,22 @@ struct SettingsTableSectionViewModel {
     }
 
     struct Cell: UniqueIdentifiable {
-        struct Options {
-            let topPadding: CGFloat = 0
-            let bottomPadding: CGFloat = 0
+        struct Appearance {
+            var backgroundColor = UIColor.stepikBackground
         }
 
         let uniqueIdentifier: UniqueIdentifierType
         let type: SettingsTableSectionCellType
-        let options: Options
+        let appearance: Appearance
 
-        init(uniqueIdentifier: UniqueIdentifierType, type: SettingsTableSectionCellType, options: Options = .init()) {
+        init(
+            uniqueIdentifier: UniqueIdentifierType,
+            type: SettingsTableSectionCellType,
+            appearance: Appearance = .init()
+        ) {
             self.uniqueIdentifier = uniqueIdentifier
             self.type = type
-            self.options = options
+            self.appearance = appearance
         }
     }
 
