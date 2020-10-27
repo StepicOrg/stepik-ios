@@ -11,7 +11,7 @@ struct SettingsTableSectionViewModel {
 
     struct Cell: UniqueIdentifiable {
         struct Appearance {
-            var backgroundColor = UIColor.stepikBackground
+            var backgroundColor = UIColor.stepikSecondaryGroupedBackground
         }
 
         let uniqueIdentifier: UniqueIdentifierType
@@ -115,8 +115,25 @@ struct RightDetailCellOptions {
         }
     }
 
+    struct Switch {
+        let isOn: Bool
+        let appearance: Appearance
+
+        init(
+            isOn: Bool,
+            appearance: Appearance = .init(onTintColor: .stepikSwitchOnTint)
+        ) {
+            self.isOn = isOn
+            self.appearance = appearance
+        }
+
+        struct Appearance {
+            var onTintColor: UIColor
+        }
+    }
+
     enum DetailType {
         case label(text: String?)
-        case `switch`(isOn: Bool)
+        case `switch`(Switch)
     }
 }

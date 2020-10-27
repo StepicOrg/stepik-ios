@@ -313,7 +313,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.useCellularDataForDownloads.cellTitle),
-                    detailType: .switch(isOn: settingsViewModel.shouldUseCellularDataForDownloads),
+                    detailType: .switch(.init(isOn: settingsViewModel.shouldUseCellularDataForDownloads)),
                     accessoryType: .none
                 )
             )
@@ -368,7 +368,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.autoplayNextVideo.cellTitle),
-                    detailType: .switch(isOn: settingsViewModel.isAutoplayEnabled),
+                    detailType: .switch(.init(isOn: settingsViewModel.isAutoplayEnabled)),
                     accessoryType: .none
                 )
             )
@@ -378,7 +378,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.adaptiveMode.cellTitle),
-                    detailType: .switch(isOn: settingsViewModel.isAdaptiveModeEnabled),
+                    detailType: .switch(.init(isOn: settingsViewModel.isAdaptiveModeEnabled)),
                     accessoryType: .none
                 )
             )

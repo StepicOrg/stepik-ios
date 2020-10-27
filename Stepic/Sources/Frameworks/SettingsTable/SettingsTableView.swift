@@ -168,8 +168,9 @@ final class SettingsTableView: UIView {
         cell.elementView.textColor = options.title.appearance.textColor
         cell.elementView.textAlignment = options.title.appearance.textAlignment
 
-        if case .switch(let isOn) = options.detailType {
-            cell.elementView.switchIsOn = isOn
+        if case .switch(let switchModel) = options.detailType {
+            cell.elementView.switchOnTintColor = switchModel.appearance.onTintColor
+            cell.elementView.switchIsOn = switchModel.isOn
         }
     }
 
