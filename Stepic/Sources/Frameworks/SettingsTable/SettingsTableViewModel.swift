@@ -11,7 +11,8 @@ struct SettingsTableSectionViewModel {
 
     struct Cell: UniqueIdentifiable {
         struct Appearance {
-            var backgroundColor = UIColor.stepikSecondaryGroupedBackground
+            var backgroundColor: UIColor?
+            var selectedBackgroundColor: UIColor?
         }
 
         let uniqueIdentifier: UniqueIdentifierType

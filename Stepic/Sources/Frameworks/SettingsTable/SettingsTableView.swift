@@ -111,7 +111,6 @@ final class SettingsTableView: UIView {
         options: InputCellOptions
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
-        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
         cell.elementView.placeholder = options.placeholderText
         cell.elementView.text = options.valueText
         cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
@@ -125,7 +124,6 @@ final class SettingsTableView: UIView {
         viewModel: SettingsTableSectionViewModel.Cell,
         options: LargeInputCellOptions
     ) {
-        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
         cell.elementView.placeholder = options.placeholderText
         cell.elementView.text = options.valueText
         cell.elementView.maxTextLength = options.maxLength
@@ -143,7 +141,6 @@ final class SettingsTableView: UIView {
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.accessoryType = options.accessoryType
-        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
 
         cell.elementView.title = options.title.text
         cell.elementView.titleTextColor = options.title.appearance.textColor
@@ -161,7 +158,6 @@ final class SettingsTableView: UIView {
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.accessoryType = options.accessoryType
-        cell.contentView.backgroundColor = viewModel.appearance.backgroundColor
         cell.delegate = self.delegate
 
         cell.elementView.title = options.title.text
@@ -222,22 +218,38 @@ extension SettingsTableView: UITableViewDataSource {
         case .input(let options):
             let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(for: indexPath)
             self.updateInputCell(cell, viewModel: cellViewModel, options: options)
+            cell.appearance = .init(
+                unselectedBackgroundColor: cellViewModel.appearance.backgroundColor,
+                selectedBackgroundColor: cellViewModel.appearance.selectedBackgroundColor
+            )
             return cell
         case .largeInput(let options):
             let cell: SettingsLargeInputTableViewCell<TableInputTextView> = tableView.dequeueReusableCell(
                 for: indexPath
             )
             self.updateLargeInputCell(cell, viewModel: cellViewModel, options: options)
+            cell.appearance = .init(
+                unselectedBackgroundColor: cellViewModel.appearance.backgroundColor,
+                selectedBackgroundColor: cellViewModel.appearance.selectedBackgroundColor
+            )
             return cell
         case .rightDetail(let options):
             switch options.detailType {
             case .label:
                 let cell: SettingsRightDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 self.updateRightDetailCell(cell, viewModel: cellViewModel, options: options)
+                cell.appearance = .init(
+                    unselectedBackgroundColor: cellViewModel.appearance.backgroundColor,
+                    selectedBackgroundColor: cellViewModel.appearance.selectedBackgroundColor
+                )
                 return cell
             case .switch:
                 let cell: SettingsRightDetailSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 self.updateRightDetailSwitchCell(cell, viewModel: cellViewModel, options: options)
+                cell.appearance = .init(
+                    unselectedBackgroundColor: cellViewModel.appearance.backgroundColor,
+                    selectedBackgroundColor: cellViewModel.appearance.selectedBackgroundColor
+                )
                 return cell
             }
         }
