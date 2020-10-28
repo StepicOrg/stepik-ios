@@ -71,7 +71,7 @@ final class CourseListFilterViewController: UIViewController {
 
     // MARK: Types
 
-    private enum Section {
+    private enum Section: String {
         case courseLanguage
         case courseDetails
 
@@ -116,7 +116,13 @@ extension CourseListFilterViewController: CourseListFilterViewControllerProtocol
                     type: .rightDetail(
                         options: RightDetailCellOptions(
                             title: .init(text: language.title),
-                            detailType: .checkBox(.init(isOn: courseLanguage == language)),
+                            detailType: .checkBox(
+                                .init(
+                                    isOn: courseLanguage == language,
+                                    checkBoxGroup: Section.courseLanguage.rawValue,
+                                    checkBoxGroupMustHaveSelection: true
+                                )
+                            ),
                             accessoryType: .none
                         )
                     )

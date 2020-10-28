@@ -34,7 +34,7 @@ final class SettingsRightDetailCheckboxCellView: UIView {
         return label
     }()
 
-    private lazy var detailCheckBox: BEMCheckBox = {
+    private(set) lazy var checkBox: BEMCheckBox = {
         let checkBox = BEMCheckBox()
         checkBox.lineWidth = self.appearance.checkBoxLineWidth
         checkBox.hideBox = false
@@ -76,7 +76,7 @@ final class SettingsRightDetailCheckboxCellView: UIView {
 
     var checkBoxIsOn: Bool = false {
         didSet {
-            self.detailCheckBox.setOn(self.checkBoxIsOn, animated: false)
+            self.checkBox.setOn(self.checkBoxIsOn, animated: false)
         }
     }
 
@@ -94,7 +94,7 @@ final class SettingsRightDetailCheckboxCellView: UIView {
     }
 
     func setCheckBoxOn(_ isOn: Bool, animated: Bool) {
-        self.detailCheckBox.setOn(isOn, animated: animated)
+        self.checkBox.setOn(isOn, animated: animated)
     }
 
     func handleAccessoryTypeUpdate(_ accessoryType: UITableViewCell.AccessoryType) {
@@ -111,7 +111,7 @@ extension SettingsRightDetailCheckboxCellView: ProgrammaticallyInitializableView
     func addSubviews() {
         self.addSubview(self.containerView)
         self.containerView.addSubview(self.titleLabel)
-        self.containerView.addSubview(self.detailCheckBox)
+        self.containerView.addSubview(self.checkBox)
     }
 
     func makeConstraints() {
@@ -121,12 +121,12 @@ extension SettingsRightDetailCheckboxCellView: ProgrammaticallyInitializableView
             make.height.greaterThanOrEqualTo(self.appearance.containerMinHeight)
         }
 
-        self.detailCheckBox.translatesAutoresizingMaskIntoConstraints = false
-        self.detailCheckBox.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        self.detailCheckBox.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        self.detailCheckBox.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        self.detailCheckBox.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        self.detailCheckBox.snp.makeConstraints { make in
+        self.checkBox.translatesAutoresizingMaskIntoConstraints = false
+        self.checkBox.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        self.checkBox.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        self.checkBox.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        self.checkBox.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        self.checkBox.snp.makeConstraints { make in
             make.width.height.equalTo(self.appearance.checkBoxWidthHeight)
             make.centerY.equalToSuperview()
             self.detailCheckBoxTrailingConstraint = make.trailing
@@ -142,7 +142,7 @@ extension SettingsRightDetailCheckboxCellView: ProgrammaticallyInitializableView
         self.titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         self.titleLabel.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview().inset(self.appearance.titleInsets)
-            make.trailing.equalTo(self.detailCheckBox.snp.leading).offset(-self.appearance.titleInsets.right)
+            make.trailing.equalTo(self.checkBox.snp.leading).offset(-self.appearance.titleInsets.right)
         }
     }
 }

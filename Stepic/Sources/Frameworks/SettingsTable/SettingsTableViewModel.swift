@@ -135,10 +135,19 @@ struct RightDetailCellOptions {
 
     struct CheckBox {
         let isOn: Bool
+        let checkBoxGroup: UniqueIdentifierType?
+        let checkBoxGroupMustHaveSelection: Bool
         let appearance: Appearance
 
-        init(isOn: Bool, appearance: Appearance = .init()) {
+        init(
+            isOn: Bool,
+            checkBoxGroup: UniqueIdentifierType? = nil,
+            checkBoxGroupMustHaveSelection: Bool = false,
+            appearance: Appearance = .init()
+        ) {
             self.isOn = isOn
+            self.checkBoxGroup = checkBoxGroup
+            self.checkBoxGroupMustHaveSelection = checkBoxGroupMustHaveSelection
             self.appearance = appearance
         }
 

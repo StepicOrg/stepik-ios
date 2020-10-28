@@ -71,6 +71,7 @@ final class SettingsTableView: UIView {
     }()
 
     private lazy var inputCellGroups: [SettingsInputCellGroup] = []
+    private lazy var checkBoxCellGroups: [SettingsCheckBoxCellGroup] = []
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -89,19 +90,7 @@ final class SettingsTableView: UIView {
         self.viewModel = viewModel
         self.tableView.reloadData()
 
-        // Create input groups for each input type
-        self.inputCellGroups.removeAll()
-        let flattenInputCellGroups: [String] = viewModel.sections
-            .flatMap { $0.cells }
-            .compactMap { cell in
-                if case .input(let options) = cell.type {
-                    return options.inputGroup
-                }
-                return nil
-            }
-        for group in Array(Set(flattenInputCellGroups)) {
-            self.inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
-        }
+        self.makeCellGroups(viewModel: viewModel)
 
         // Section footers heights not being calculated properly APPS-2586.
         self.performTableViewUpdates()
@@ -189,10 +178,53 @@ final class SettingsTableView: UIView {
 
         if case .checkBox(let checkBoxModel) = options.detailType {
             cell.elementView.checkBoxIsOn = checkBoxModel.isOn
+
+            if let checkBoxGroup = self.checkBoxCellGroups.first(
+                where: { $0.uniqueIdentifier == checkBoxModel.checkBoxGroup }
+            ) {
+                checkBoxGroup.addCheckBoxCell(cell)
+
+                if checkBoxModel.isOn {
+                    checkBoxGroup.setCheckBoxCellSelected(cell)
+                }
+
+                checkBoxGroup.mustHaveSelection = checkBoxModel.checkBoxGroupMustHaveSelection
+            }
         }
     }
 
     // MARK: Private API
+
+    private func makeCellGroups(viewModel: SettingsTableViewModel) {
+        // Create input groups for each input type
+        self.inputCellGroups.removeAll()
+        let flattenInputCellGroups: [UniqueIdentifierType] = viewModel.sections
+            .flatMap { $0.cells }
+            .compactMap { cell in
+                if case .input(let options) = cell.type {
+                    return options.inputGroup
+                }
+                return nil
+            }
+        for group in Array(Set(flattenInputCellGroups)) {
+            self.inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
+        }
+
+        // Create input groups for each checkBox type
+        self.checkBoxCellGroups.removeAll()
+        let flattenCheckBoxCellGroups: [UniqueIdentifierType] = viewModel.sections
+            .flatMap { $0.cells }
+            .compactMap { cell in
+                if case .rightDetail(let options) = cell.type,
+                   case .checkBox(let checkBoxModel) = options.detailType {
+                    return checkBoxModel.checkBoxGroup
+                }
+                return nil
+            }
+        for group in Array(Set(flattenCheckBoxCellGroups)) {
+            self.checkBoxCellGroups.append(SettingsCheckBoxCellGroup(uniqueIdentifier: group))
+        }
+    }
 
     private func performTableViewUpdates() {
         DispatchQueue.main.async {
@@ -298,9 +330,16 @@ extension SettingsTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if let cellViewModel = self.cellViewModel(at: indexPath) {
-            self.delegate?.settingsTableView(self, didSelectCell: cellViewModel, at: indexPath)
+        guard let cellViewModel = self.cellViewModel(at: indexPath) else {
+            return
         }
+
+        if case .rightDetail(let options) = cellViewModel.type,
+           case .checkBox = options.detailType {
+            self.handleTableView(tableView, didSelectCheckboxCellAt: indexPath)
+        }
+
+        self.delegate?.settingsTableView(self, didSelectCell: cellViewModel, at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -343,5 +382,26 @@ extension SettingsTableView: UITableViewDelegate {
         self.viewModel?.sections[safe: section]?.header?.title != nil
             ? 53.0
             : UITableView.automaticDimension
+    }
+
+    // MARK: Private Helpers
+
+    private func handleTableView(_ tableView: UITableView, didSelectCheckboxCellAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SettingsRightDetailCheckboxTableViewCell else {
+            return
+        }
+
+        let oldValue = cell.elementView.checkBox.on
+        let newValue = !oldValue
+
+        if let group = self.checkBoxCellGroups.first(where: { $0.containsCheckBoxCell(cell) }) {
+            if group.mustHaveSelection || newValue {
+                group.setCheckBoxCellSelected(cell)
+            } else {
+                cell.elementView.setCheckBoxOn(newValue, animated: true)
+            }
+        } else {
+            cell.elementView.setCheckBoxOn(newValue, animated: true)
+        }
     }
 }
