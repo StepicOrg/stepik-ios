@@ -133,8 +133,21 @@ struct RightDetailCellOptions {
         }
     }
 
+    struct CheckBox {
+        let isOn: Bool
+        let appearance: Appearance
+
+        init(isOn: Bool, appearance: Appearance = .init()) {
+            self.isOn = isOn
+            self.appearance = appearance
+        }
+
+        struct Appearance {}
+    }
+
     enum DetailType {
         case label(text: String?)
         case `switch`(Switch)
+        case checkBox(CheckBox)
     }
 }

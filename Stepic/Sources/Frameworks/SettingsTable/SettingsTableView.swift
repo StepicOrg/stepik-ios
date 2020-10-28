@@ -5,7 +5,8 @@ import UIKit
 protocol SettingsTableViewDelegate:
     SettingsInputCellDelegate,
     SettingsLargeInputCellDelegate,
-    SettingsRightDetailSwitchCellDelegate {
+    SettingsRightDetailSwitchCellDelegate,
+    SettingsRightDetailCheckboxCellDelegate {
     func settingsTableView(
         _ tableView: SettingsTableView,
         didSelectCell cell: SettingsTableSectionViewModel.Cell,
@@ -33,6 +34,8 @@ extension SettingsTableViewDelegate {
     ) {}
 
     func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {}
+
+    func settingsCell(_ cell: SettingsRightDetailCheckboxTableViewCell, checkboxValueChanged isOn: Bool) {}
 }
 
 extension SettingsTableView {
@@ -59,6 +62,7 @@ final class SettingsTableView: UIView {
         tableView.register(cellClass: SettingsLargeInputTableViewCell<TableInputTextView>.self)
         tableView.register(cellClass: SettingsRightDetailTableViewCell.self)
         tableView.register(cellClass: SettingsRightDetailSwitchTableViewCell.self)
+        tableView.register(cellClass: SettingsRightDetailCheckboxTableViewCell.self)
 
         tableView.register(headerFooterViewClass: SettingsTableSectionHeaderView.self)
         tableView.register(headerFooterViewClass: SettingsTableSectionFooterView.self)
@@ -170,6 +174,24 @@ final class SettingsTableView: UIView {
         }
     }
 
+    func updateRightDetailCheckBoxCell(
+        _ cell: SettingsRightDetailCheckboxTableViewCell,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: RightDetailCellOptions
+    ) {
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.accessoryType = options.accessoryType
+        cell.delegate = self.delegate
+
+        cell.elementView.title = options.title.text
+        cell.elementView.textColor = options.title.appearance.textColor
+        cell.elementView.textAlignment = options.title.appearance.textAlignment
+
+        if case .checkBox(let checkBoxModel) = options.detailType {
+            cell.elementView.checkBoxIsOn = checkBoxModel.isOn
+        }
+    }
+
     // MARK: Private API
 
     private func performTableViewUpdates() {
@@ -246,6 +268,14 @@ extension SettingsTableView: UITableViewDataSource {
             case .switch:
                 let cell: SettingsRightDetailSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 self.updateRightDetailSwitchCell(cell, viewModel: cellViewModel, options: options)
+                cell.appearance = .init(
+                    unselectedBackgroundColor: cellViewModel.appearance.backgroundColor,
+                    selectedBackgroundColor: cellViewModel.appearance.selectedBackgroundColor
+                )
+                return cell
+            case .checkBox:
+                let cell: SettingsRightDetailCheckboxTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                self.updateRightDetailCheckBoxCell(cell, viewModel: cellViewModel, options: options)
                 cell.appearance = .init(
                     unselectedBackgroundColor: cellViewModel.appearance.backgroundColor,
                     selectedBackgroundColor: cellViewModel.appearance.selectedBackgroundColor

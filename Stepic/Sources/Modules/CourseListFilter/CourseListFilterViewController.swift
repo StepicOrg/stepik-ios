@@ -116,12 +116,7 @@ extension CourseListFilterViewController: CourseListFilterViewControllerProtocol
                     type: .rightDetail(
                         options: RightDetailCellOptions(
                             title: .init(text: language.title),
-                            detailType: .switch(
-                                .init(
-                                    isOn: courseLanguage == language,
-                                    appearance: .init(onTintColor: self.appearance.switchOnTintColor)
-                                )
-                            ),
+                            detailType: .checkBox(.init(isOn: courseLanguage == language)),
                             accessoryType: .none
                         )
                     )
