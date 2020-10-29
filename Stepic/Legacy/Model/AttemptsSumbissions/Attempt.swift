@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-final class Attempt: JSONSerializable {
+final class Attempt: JSONSerializable, Hashable, CustomStringConvertible {
     typealias IdType = Int
 
     var id: Int = 0
@@ -22,6 +22,19 @@ final class Attempt: JSONSerializable {
     var userID: User.IdType?
 
     var json: JSON { [JSONKey.step.rawValue: stepID] }
+
+    var description: String {
+        """
+        Attempt(id: \(self.id), \
+        dataset: \(String(describing: self.dataset)), \
+        datasetURL: \(String(describing: self.datasetURL)), \
+        time: \(String(describing: self.time)), \
+        status: \(String(describing: self.status)), \
+        stepID: \(self.stepID), \
+        timeLeft: \(String(describing: self.timeLeft)), \
+        userID: \(String(describing: self.userID)))
+        """
+    }
 
     init(stepID: Step.IdType) {
         self.stepID = stepID
@@ -81,6 +94,41 @@ final class Attempt: JSONSerializable {
         self.dataset = self.getDatasetFromJSON(json, stepBlockName: stepBlockName)
     }
 
+    // MARK: Hashable
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+        hasher.combine(self.dataset)
+        hasher.combine(self.datasetURL)
+        hasher.combine(self.time)
+        hasher.combine(self.status)
+        hasher.combine(self.stepID)
+        hasher.combine(self.timeLeft)
+        hasher.combine(self.userID)
+    }
+
+    static func == (lhs: Attempt, rhs: Attempt) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+
+        if let lhsDataset = lhs.dataset {
+            if !lhsDataset.isEqual(rhs.dataset) { return false }
+        } else if rhs.dataset != nil {
+            return false
+        }
+        if lhs.id != rhs.id { return false }
+        if lhs.datasetURL != rhs.datasetURL { return false }
+        if lhs.time != rhs.time { return false }
+        if lhs.status != rhs.status { return false }
+        if lhs.stepID != rhs.stepID { return false }
+        if lhs.timeLeft != rhs.timeLeft { return false }
+        if lhs.userID != rhs.userID { return false }
+
+        return true
+    }
+
+    // MARK: Private API
+
     private func getDatasetFromJSON(_ json: JSON, stepBlockName: String) -> Dataset? {
         guard let blockType = Block.BlockType(rawValue: stepBlockName) else {
             return nil
@@ -105,6 +153,8 @@ final class Attempt: JSONSerializable {
             return nil
         }
     }
+
+    // MARK: Types
 
     enum JSONKey: String {
         case id

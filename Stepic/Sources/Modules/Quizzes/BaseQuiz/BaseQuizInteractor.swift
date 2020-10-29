@@ -31,6 +31,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private var currentAttempt: Attempt?
     private var currentSubmission: Submission?
 
+    private var isFirstSubmissionLoad = true
+
     private var cacheReplyQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.BaseQuizInteractor.CacheReply",
         qos: .userInitiated
@@ -85,24 +87,38 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request) {
-        firstly {
-            self.fetchAttempt(forceRefreshAttempt: request.shouldRefreshAttempt)
-                .compactMap { $0 }
-        }.then { attempt -> Promise<(Attempt, Submission)> in
-            self.fetchSubmission(attemptID: attempt.id)
-                .map { (attempt, $0) }
-        }.then { attempt, submission -> Guarantee<(Attempt, Submission, Int)> in
-            self.countSubmissions()
-                .map { (attempt, submission, $0) }
-        }.done { attempt, submission, submissionLimit in
-            self.submissionsCount = submissionLimit
-            self.currentAttempt = attempt
-            self.currentSubmission = submission
+        let isFirstSubmissionLoad = self.isFirstSubmissionLoad
+        self.isFirstSubmissionLoad = false
 
-            self.presentSubmission(attempt: attempt, submission: submission)
-        }.catch { error in
-            print("BaseQuizInteractor: error while load submission = \(error)")
-            self.presenter.presentSubmission(response: .init(result: .failure(error)))
+        if isFirstSubmissionLoad && !request.shouldRefreshAttempt {
+            self.fetchSubmissionDataFromCache().done { cachedAttempt, cachedSubmission, cachedSubmissionsCount in
+                self.presentSubmission(attempt: cachedAttempt, submission: cachedSubmission)
+
+                self.fetchSubmissionDataFromRemote(
+                    forceRefreshAttempt: false
+                ).done { remoteAttempt, remoteSubmission, remoteSubmissionsCount in
+                    let shouldReload = cachedAttempt != remoteAttempt
+                        || cachedSubmission != remoteSubmission
+                        || cachedSubmissionsCount != remoteSubmissionsCount
+                    if shouldReload {
+                        self.presentSubmission(attempt: remoteAttempt, submission: remoteSubmission)
+                    }
+                }.cauterize()
+            }.catch { _ in
+                self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { attempt, submission, _ in
+                    self.presentSubmission(attempt: attempt, submission: submission)
+                }.catch { error in
+                    self.presenter.presentSubmission(response: .init(result: .failure(error)))
+                }
+            }
+        } else {
+            self.fetchSubmissionDataFromRemote(
+                forceRefreshAttempt: request.shouldRefreshAttempt
+            ).done { attempt, submission, _ in
+                self.presentSubmission(attempt: attempt, submission: submission)
+            }.catch { error in
+                self.presenter.presentSubmission(response: .init(result: .failure(error)))
+            }
         }
     }
 
@@ -186,37 +202,6 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     // MARK: Private API
 
-    @discardableResult
-    private func suggestStreakIfNeeded() -> Bool {
-        guard self.notificationSuggestionManager.canShowAlert(context: .streak, after: .submission) else {
-            return false
-        }
-
-        guard let userID = self.userAccountService.currentUser?.id else {
-            return false
-        }
-
-        DispatchQueue.global(qos: .userInitiated).promise {
-            self.provider.fetchActivity(for: userID)
-        }.done { userActivity in
-            if userActivity.currentStreak > 0 {
-                self.presenter.presentStreakAlert(response: .init(streak: userActivity.currentStreak))
-            }
-        }.cauterize()
-
-        return true
-    }
-
-    @discardableResult
-    private func suggestRateAppIfNeeded() -> Bool {
-        if self.rateAppManager.submittedCorrect() {
-            self.presenter.presentRateAppAlert(response: .init())
-            return true
-        }
-
-        return false
-    }
-
     private func presentSubmission(attempt: Attempt, submission: Submission) {
         let response = BaseQuiz.SubmissionLoad.Data(
             step: self.step,
@@ -227,6 +212,71 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         )
 
         self.presenter.presentSubmission(response: .init(result: .success(response)))
+    }
+
+    private func fetchSubmissionDataFromCache() -> Promise<(Attempt, Submission, Int)> {
+        Promise { seal in
+            firstly { () -> Promise<([Attempt], Meta)> in
+                self.provider.fetchCachedStepAttempts(stepID: self.step.id)
+            }.then { attempts, _ -> Promise<Attempt> in
+                if let activeAttempt = attempts.first(where: { $0.status == "active" }) {
+                    return .value(activeAttempt)
+                }
+                throw Error.noCachedAttempt
+            }.then { attempt -> Promise<(Attempt, [Submission])> in
+                self.provider.fetchSubmissionsForAttempt(
+                    attemptID: attempt.id,
+                    stepBlockName: self.step.block.name,
+                    dataSourceType: .cache
+                ).map { (attempt, $0) }
+            }.then { attempt, submissions -> Promise<(Attempt, Submission)> in
+                if let cachedSubmission = submissions.first {
+                    return .value((attempt, cachedSubmission))
+                } else {
+                    return self.provider
+                        .createLocalSubmission(Submission(id: 0, attemptID: attempt.id, isLocal: true))
+                        .map { (attempt, $0) }
+                }
+            }.then { attempt, submission -> Guarantee<(Attempt, Submission, Int)> in
+                self.countSubmissions(dataSourceType: .cache)
+                    .map { (attempt, submission, $0) }
+            }.done { attempt, submission, submissionLimit in
+                self.submissionsCount = submissionLimit
+                self.currentAttempt = attempt
+                self.currentSubmission = submission
+
+                seal.fulfill((attempt, submission, submissionLimit))
+            }.catch { error in
+                print("BaseQuizInteractor: error while load cached submission = \(error)")
+                seal.reject(error)
+            }
+        }
+    }
+
+    private func fetchSubmissionDataFromRemote(forceRefreshAttempt: Bool) -> Promise<(Attempt, Submission, Int)> {
+        Promise { seal in
+            firstly {
+                self.fetchAttempt(forceRefreshAttempt: forceRefreshAttempt)
+                    .compactMap { $0 }
+            }.then { attempt -> Promise<(Attempt, Submission)> in
+                self.fetchSubmission(attemptID: attempt.id)
+                    .map { (attempt, $0) }
+            }.then { attempt, submission -> Guarantee<(Attempt, Submission, Int)> in
+                self.countSubmissions(dataSourceType: .remote)
+                    .map { (attempt, submission, $0) }
+            }.done { attempt, submission, submissionLimit in
+                submission.attempt = attempt
+
+                self.submissionsCount = submissionLimit
+                self.currentAttempt = attempt
+                self.currentSubmission = submission
+
+                seal.fulfill((attempt, submission, submissionLimit))
+            }.catch { error in
+                print("BaseQuizInteractor: error while load submission = \(error)")
+                seal.reject(error)
+            }
+        }
     }
 
     private func fetchAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
@@ -300,10 +350,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    private func countSubmissions() -> Guarantee<Int> {
+    private func countSubmissions(dataSourceType: DataSourceType) -> Guarantee<Int> {
         Guarantee { seal in
             self.provider
-                .fetchSubmissions(for: self.step, page: 1)
+                .fetchSubmissions(for: self.step, page: 1, dataSourceType: dataSourceType)
                 .map { $0.0.count }
                 .done { seal($0) }
                 .catch { _ in seal(0) }
@@ -353,11 +403,43 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
+    @discardableResult
+    private func suggestStreakIfNeeded() -> Bool {
+        guard self.notificationSuggestionManager.canShowAlert(context: .streak, after: .submission) else {
+            return false
+        }
+
+        guard let userID = self.userAccountService.currentUser?.id else {
+            return false
+        }
+
+        DispatchQueue.global(qos: .userInitiated).promise {
+            self.provider.fetchActivity(for: userID)
+        }.done { userActivity in
+            if userActivity.currentStreak > 0 {
+                self.presenter.presentStreakAlert(response: .init(streak: userActivity.currentStreak))
+            }
+        }.cauterize()
+
+        return true
+    }
+
+    @discardableResult
+    private func suggestRateAppIfNeeded() -> Bool {
+        if self.rateAppManager.submittedCorrect() {
+            self.presenter.presentRateAppAlert(response: .init())
+            return true
+        }
+
+        return false
+    }
+
     // MARK: Inner Types
 
     enum Error: Swift.Error {
         case unknownAttempt
         case attemptFetchFailed
+        case noCachedAttempt
         case submissionFetchFailed
         case submissionPollFailed
         case unknownUser
