@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CourseListFilterInteractorProtocol {
     func doCourseListFilterLoad(request: CourseListFilter.CourseListFilterLoad.Request)
+    func doCourseListFilterApply(request: CourseListFilter.CourseListFilterApply.Request)
 }
 
 final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
@@ -29,6 +30,14 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
 
     func doCourseListFilterLoad(request: CourseListFilter.CourseListFilterLoad.Request) {
         self.presentCourseListFiltersFromCurrentState()
+    }
+
+    func doCourseListFilterApply(request: CourseListFilter.CourseListFilterApply.Request) {
+        self.mutableState.courseLanguage = request.courseLanguage
+        self.mutableState.isFree = request.isFree
+        self.mutableState.withCertificate = request.withCertificate
+
+        self.moduleOutput?.handleCourseListFilterDidFinishWithFilters(self.mutableState.filters)
     }
 
     // MARK: Private API
@@ -90,7 +99,25 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
 
     private struct MutableState {
         var courseLanguage: CourseListFilter.Filter.CourseLanguage?
-        var isFree: Bool?
         var withCertificate: Bool?
+        var isFree: Bool?
+
+        var filters: [CourseListFilter.Filter] {
+            var result = [CourseListFilter.Filter]()
+
+            if let courseLanguage = self.courseLanguage {
+                result.append(.courseLanguage(courseLanguage))
+            }
+
+            if let withCertificate = self.withCertificate {
+                result.append(.withCertificate(withCertificate))
+            }
+
+            if let isFree = self.isFree {
+                result.append(.isPaid(!isFree))
+            }
+
+            return result
+        }
     }
 }

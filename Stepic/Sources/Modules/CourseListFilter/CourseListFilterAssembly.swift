@@ -7,7 +7,7 @@ final class CourseListFilterAssembly: Assembly {
 
     init(
         presentationDescription: CourseListFilter.PresentationDescription = .init(
-            availableFilters: .allOptions,
+            availableFilters: .all,
             prefilledFilters: []
         ),
         output: CourseListFilterOutputProtocol? = nil

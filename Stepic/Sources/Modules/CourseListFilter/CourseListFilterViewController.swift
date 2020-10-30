@@ -253,6 +253,8 @@ extension CourseListFilterViewController: CourseListFilterViewDelegate {
         guard case .showResult = row else {
             return
         }
+
+        self.handleShowResultClicked()
     }
 
     func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {
@@ -281,6 +283,26 @@ extension CourseListFilterViewController: CourseListFilterViewDelegate {
 
         if let selectedCourseLanguage = courseLanguages.first(where: { $0.uniqueIdentifier == uniqueIdentifier }) {
             self.formState?.courseLanguage = selectedCourseLanguage
+        }
+    }
+
+    // MARK: Private Helpers
+
+    private func handleShowResultClicked() {
+        guard let formState = self.formState else {
+            return
+        }
+
+        self.interactor.doCourseListFilterApply(
+            request: .init(
+                courseLanguage: formState.courseLanguage,
+                isFree: formState.isFree,
+                withCertificate: formState.withCertificate
+            )
+        )
+
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

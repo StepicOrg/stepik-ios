@@ -20,6 +20,15 @@ enum CourseListFilter {
         }
     }
 
+    /// Applu filter to course list
+    enum CourseListFilterApply {
+        struct Request {
+            let courseLanguage: CourseListFilter.Filter.CourseLanguage?
+            let isFree: Bool?
+            let withCertificate: Bool?
+        }
+    }
+
     // MARK: Inner Types
 
     // Use it for module initializing
@@ -34,7 +43,7 @@ enum CourseListFilter {
             static let isPaid = FilterOptionSet(rawValue: 1 << 1)
             static let withCertificate = FilterOptionSet(rawValue: 1 << 2)
 
-            static let allOptions: FilterOptionSet = [.courseLanguage, .withCertificate, .isPaid]
+            static let all: FilterOptionSet = [.courseLanguage, .withCertificate, .isPaid]
         }
     }
 
