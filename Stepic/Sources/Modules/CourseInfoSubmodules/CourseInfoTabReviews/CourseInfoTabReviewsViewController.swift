@@ -31,11 +31,6 @@ final class CourseInfoTabReviewsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.updateState(newState: self.state)
-    }
-
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,6 +43,13 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 
         self.view = view
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.updateState(newState: self.state)
+    }
+
+    // MARK: Private API
 
     private func updatePagination(hasNextPage: Bool, hasError: Bool) {
         self.canTriggerPagination = hasNextPage

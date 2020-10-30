@@ -17,6 +17,8 @@ protocol CourseInfoTabReviewsViewDelegate: AnyObject {
 
 extension CourseInfoTabReviewsView {
     struct Appearance {
+        let loadingIndicatorInsets = LayoutInsets(top: 20)
+
         let headerViewHeight: CGFloat = 60
 
         let paginationViewHeight: CGFloat = 52
@@ -30,6 +32,13 @@ extension CourseInfoTabReviewsView {
 final class CourseInfoTabReviewsView: UIView {
     let appearance: Appearance
     weak var delegate: CourseInfoTabReviewsViewDelegate?
+
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .stepikGray)
+        view.hidesWhenStopped = true
+        return view
+    }()
+    private var loadingIndicatorTopConstraint: Constraint?
 
     private lazy var headerView: CourseInfoTabReviewsHeaderView = {
         let headerView = CourseInfoTabReviewsHeaderView()
@@ -155,14 +164,15 @@ final class CourseInfoTabReviewsView: UIView {
     }
 
     func showLoading() {
-        self.tableView.skeleton.viewBuilder = {
-            CourseInfoTabReviewsSkeletonView()
-        }
-        self.tableView.skeleton.show()
+        self.tableView.isHidden = true
+        self.emptyStateLabel.isHidden = true
+        self.loadingIndicator.startAnimating()
     }
 
     func hideLoading() {
-        self.tableView.skeleton.hide()
+        self.tableView.isHidden = false
+        self.emptyStateLabel.isHidden = false
+        self.loadingIndicator.stopAnimating()
     }
 
     func popoverPresentationAnchorPoint(at indexPath: IndexPath) -> (UIView, CGRect) {
@@ -181,6 +191,7 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
         self.addSubview(self.emptyStateLabel)
+        self.addSubview(self.loadingIndicator)
     }
 
     func makeConstraints() {
@@ -202,6 +213,14 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
                 .offset(-self.appearance.emptyStateLabelInsets.right)
                 .priority(999)
             make.width.lessThanOrEqualTo(600)
+        }
+
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicator.snp.makeConstraints { make in
+            self.loadingIndicatorTopConstraint = make.top
+                .equalToSuperview()
+                .offset(self.appearance.loadingIndicatorInsets.top).constraint
+            make.centerX.equalToSuperview()
         }
     }
 }
@@ -252,10 +271,14 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
              self.tableView.contentInset
         }
         set {
+            self.tableView.contentInset = newValue
+
             self.emptyStateLabel.snp.updateConstraints { make in
                 make.centerY.equalToSuperview().offset(newValue.top / 2)
             }
-            self.tableView.contentInset = newValue
+
+            let loadingIndicatorTopOffset = newValue.top + self.appearance.loadingIndicatorInsets.top
+            self.loadingIndicatorTopConstraint?.update(offset: loadingIndicatorTopOffset)
         }
     }
 
