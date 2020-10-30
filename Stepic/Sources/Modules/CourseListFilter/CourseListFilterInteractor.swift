@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseListFilterInteractorProtocol {
     func doCourseListFilterLoad(request: CourseListFilter.CourseListFilterLoad.Request)
     func doCourseListFilterApply(request: CourseListFilter.CourseListFilterApply.Request)
+    func doCourseListFilterReset(request: CourseListFilter.CourseListFilterReset.Request)
 }
 
 final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
@@ -15,6 +16,7 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
     private let contentLanguageService: ContentLanguageServiceProtocol
 
     private var mutableState = MutableState()
+    private var defaultState = MutableState()
 
     init(
         presenter: CourseListFilterPresenterProtocol,
@@ -33,11 +35,16 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
     }
 
     func doCourseListFilterApply(request: CourseListFilter.CourseListFilterApply.Request) {
-        self.mutableState.courseLanguage = request.courseLanguage
-        self.mutableState.isFree = request.isFree
-        self.mutableState.withCertificate = request.withCertificate
+        self.mutableState.courseLanguage = request.data.courseLanguage
+        self.mutableState.isFree = request.data.isFree
+        self.mutableState.withCertificate = request.data.withCertificate
 
         self.moduleOutput?.handleCourseListFilterDidFinishWithFilters(self.mutableState.filters)
+    }
+
+    func doCourseListFilterReset(request: CourseListFilter.CourseListFilterReset.Request) {
+        self.mutableState = self.defaultState
+        self.presentCourseListFiltersFromCurrentState()
     }
 
     // MARK: Private API
@@ -60,6 +67,8 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
                 let globalContentLanguage = self.contentLanguageService.globalContentLanguage
                 self.mutableState.courseLanguage = .init(contentLanguage: globalContentLanguage)
             }
+
+            self.defaultState.courseLanguage = .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         }
         if availableFilters.contains(.isPaid) {
             let isPaidOrNil = prefilledFilters.compactMap { filter -> Bool? in
@@ -70,6 +79,7 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
             }.first
 
             self.mutableState.isFree = isPaidOrNil == false ? true : false
+            self.defaultState.isFree = false
         }
         if availableFilters.contains(.withCertificate) {
             let withCertificateOrNil = prefilledFilters.compactMap { filter -> Bool? in
@@ -80,6 +90,7 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
             }.first
 
             self.mutableState.withCertificate = withCertificateOrNil ?? false
+            self.defaultState.withCertificate = false
         }
     }
 

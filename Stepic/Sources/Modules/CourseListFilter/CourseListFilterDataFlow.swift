@@ -1,18 +1,18 @@
 import Foundation
 
 enum CourseListFilter {
+    struct FilterData {
+        let courseLanguage: CourseListFilter.Filter.CourseLanguage?
+        let isFree: Bool?
+        let withCertificate: Bool?
+    }
+
     /// Present filters
     enum CourseListFilterLoad {
         struct Request {}
 
-        struct Data {
-            let courseLanguage: CourseListFilter.Filter.CourseLanguage?
-            let isFree: Bool?
-            let withCertificate: Bool?
-        }
-
         struct Response {
-            let data: Data
+            let data: FilterData
         }
 
         struct ViewModel {
@@ -20,13 +20,16 @@ enum CourseListFilter {
         }
     }
 
-    /// Applu filter to course list
+    /// Apply filters to course list
     enum CourseListFilterApply {
         struct Request {
-            let courseLanguage: CourseListFilter.Filter.CourseLanguage?
-            let isFree: Bool?
-            let withCertificate: Bool?
+            let data: FilterData
         }
+    }
+
+    /// Reset filters state
+    enum CourseListFilterReset {
+        struct Request {}
     }
 
     // MARK: Inner Types

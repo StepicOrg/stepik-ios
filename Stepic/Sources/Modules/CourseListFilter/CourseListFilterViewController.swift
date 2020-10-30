@@ -63,13 +63,18 @@ final class CourseListFilterViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("CourseListFilterResetButtonTitle", comment: ""),
             style: .plain,
-            target: nil,
+            target: self,
             action: #selector(self.resetClicked)
         )
     }
 
     @objc
     private func resetClicked() {
+        guard self.formState != nil else {
+            return
+        }
+
+        self.interactor.doCourseListFilterReset(request: .init())
     }
 
     // MARK: Types
@@ -295,9 +300,11 @@ extension CourseListFilterViewController: CourseListFilterViewDelegate {
 
         self.interactor.doCourseListFilterApply(
             request: .init(
-                courseLanguage: formState.courseLanguage,
-                isFree: formState.isFree,
-                withCertificate: formState.withCertificate
+                data: .init(
+                    courseLanguage: formState.courseLanguage,
+                    isFree: formState.isFree,
+                    withCertificate: formState.withCertificate
+                )
             )
         )
 
