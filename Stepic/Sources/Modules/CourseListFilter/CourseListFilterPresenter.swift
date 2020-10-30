@@ -12,7 +12,7 @@ final class CourseListFilterPresenter: CourseListFilterPresenterProtocol {
             viewModel: .init(
                 viewModel: CourseListFilterViewModel(
                     courseLanguage: response.data.courseLanguage,
-                    isPaid: response.data.isPaid,
+                    isFree: response.data.isFree,
                     withCertificate: response.data.withCertificate
                 )
             )

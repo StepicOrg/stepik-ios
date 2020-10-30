@@ -60,7 +60,7 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
                 return nil
             }.first
 
-            self.mutableState.isPaid = isPaidOrNil ?? false
+            self.mutableState.isFree = isPaidOrNil == false ? true : false
         }
         if availableFilters.contains(.withCertificate) {
             let withCertificateOrNil = prefilledFilters.compactMap { filter -> Bool? in
@@ -79,7 +79,7 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
             response: .init(
                 data: .init(
                     courseLanguage: self.mutableState.courseLanguage,
-                    isPaid: self.mutableState.isPaid,
+                    isFree: self.mutableState.isFree,
                     withCertificate: self.mutableState.withCertificate
                 )
             )
@@ -90,7 +90,7 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
 
     private struct MutableState {
         var courseLanguage: CourseListFilter.Filter.CourseLanguage?
-        var isPaid: Bool?
+        var isFree: Bool?
         var withCertificate: Bool?
     }
 }

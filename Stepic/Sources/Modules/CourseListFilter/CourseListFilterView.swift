@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+protocol CourseListFilterViewDelegate: SettingsTableViewDelegate {}
+
 extension CourseListFilterView {
     struct Appearance {
         let backgroundColor = UIColor.stepikBackground
@@ -9,6 +11,12 @@ extension CourseListFilterView {
 
 final class CourseListFilterView: UIView {
     let appearance: Appearance
+
+    weak var delegate: CourseListFilterViewDelegate? {
+        didSet {
+            self.tableView.delegate = self.delegate
+        }
+    }
 
     private lazy var tableView = SettingsTableView(appearance: .init(style: .stepikInsetGrouped))
 

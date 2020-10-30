@@ -391,7 +391,7 @@ extension SettingsTableView: UITableViewDelegate {
             return
         }
 
-        let oldValue = cell.elementView.checkBox.on
+        let oldValue = cell.elementView.checkBoxIsOn
         let newValue = !oldValue
 
         if let group = self.checkBoxCellGroups.first(where: { $0.containsCheckBoxCell(cell) }) {
@@ -402,6 +402,12 @@ extension SettingsTableView: UITableViewDelegate {
             }
         } else {
             cell.elementView.setCheckBoxOn(newValue, animated: true)
+        }
+
+        let currentValue = cell.elementView.checkBoxIsOn
+
+        if oldValue != currentValue {
+            self.delegate?.settingsCell(cell, checkboxValueChanged: currentValue)
         }
     }
 }

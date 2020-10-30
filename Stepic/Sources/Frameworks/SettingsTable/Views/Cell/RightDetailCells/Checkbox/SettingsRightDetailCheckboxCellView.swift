@@ -74,9 +74,12 @@ final class SettingsRightDetailCheckboxCellView: UIView {
         }
     }
 
-    var checkBoxIsOn: Bool = false {
-        didSet {
-            self.checkBox.setOn(self.checkBoxIsOn, animated: false)
+    var checkBoxIsOn: Bool {
+        get {
+            self.checkBox.on
+        }
+        set {
+            self.checkBox.setOn(newValue, animated: false)
         }
     }
 

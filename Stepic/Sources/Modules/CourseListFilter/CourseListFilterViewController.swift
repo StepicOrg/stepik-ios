@@ -22,6 +22,8 @@ final class CourseListFilterViewController: UIViewController {
 
     var courseListFilterView: CourseListFilterView? { self.view as? CourseListFilterView }
 
+    private var formState: FormState?
+
     init(interactor: CourseListFilterInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +37,7 @@ final class CourseListFilterViewController: UIViewController {
     override func loadView() {
         let view = CourseListFilterView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -103,22 +106,42 @@ final class CourseListFilterViewController: UIViewController {
             }
         }
     }
+
+    private struct FormState {
+        var courseLanguage: CourseListFilter.Filter.CourseLanguage?
+        var isFree: Bool?
+        var withCertificate: Bool?
+    }
 }
+
+// MARK: - CourseListFilterViewController: CourseListFilterViewControllerProtocol -
 
 extension CourseListFilterViewController: CourseListFilterViewControllerProtocol {
     func displayCourseListFilters(viewModel: CourseListFilter.CourseListFilterLoad.ViewModel) {
+        self.formState = .init(
+            courseLanguage: viewModel.viewModel.courseLanguage,
+            isFree: viewModel.viewModel.isFree,
+            withCertificate: viewModel.viewModel.withCertificate
+        )
+
+        self.display(newViewModel: viewModel.viewModel)
+    }
+
+    // MARK: Private Helpers
+
+    private func display(newViewModel viewModel: CourseListFilterViewModel) {
         var sections = [SettingsTableSectionViewModel]()
 
-        if let courseLanguage = viewModel.viewModel.courseLanguage {
-            let courseLanguageCells = CourseListFilter.Filter.CourseLanguage.allCases.map { language in
+        if let selectedCourseLanguage = viewModel.courseLanguage {
+            let courseLanguageCells = CourseListFilter.Filter.CourseLanguage.allCases.map { anCourseLanguage in
                 SettingsTableSectionViewModel.Cell(
-                    uniqueIdentifier: courseLanguage.uniqueIdentifier,
+                    uniqueIdentifier: anCourseLanguage.uniqueIdentifier,
                     type: .rightDetail(
                         options: RightDetailCellOptions(
-                            title: .init(text: language.title),
+                            title: .init(text: anCourseLanguage.title),
                             detailType: .checkBox(
                                 .init(
-                                    isOn: courseLanguage == language,
+                                    isOn: selectedCourseLanguage == anCourseLanguage,
                                     checkBoxGroup: Section.courseLanguage.rawValue,
                                     checkBoxGroupMustHaveSelection: true
                                 )
@@ -138,10 +161,10 @@ extension CourseListFilterViewController: CourseListFilterViewControllerProtocol
             )
         }
 
-        if viewModel.viewModel.withCertificate != nil || viewModel.viewModel.isPaid != nil {
+        if viewModel.withCertificate != nil || viewModel.isFree != nil {
             var courseDetailsCells = [SettingsTableSectionViewModel.Cell]()
 
-            if let withCertificate = viewModel.viewModel.withCertificate {
+            if let withCertificate = viewModel.withCertificate {
                 courseDetailsCells.append(
                     SettingsTableSectionViewModel.Cell(
                         uniqueIdentifier: Row.withCertificate.uniqueIdentifier,
@@ -161,7 +184,7 @@ extension CourseListFilterViewController: CourseListFilterViewControllerProtocol
                 )
             }
 
-            if let isPaid = viewModel.viewModel.isPaid {
+            if let isPaid = viewModel.isFree {
                 courseDetailsCells.append(
                     SettingsTableSectionViewModel.Cell(
                         uniqueIdentifier: Row.isFree.uniqueIdentifier,
@@ -212,6 +235,53 @@ extension CourseListFilterViewController: CourseListFilterViewControllerProtocol
         sections.append(.init(header: nil, cells: [showResultCell], footer: nil))
 
         self.courseListFilterView?.configure(viewModel: SettingsTableViewModel(sections: sections))
+    }
+}
+
+// MARK: CourseListFilterViewController: CourseListFilterViewDelegate
+
+extension CourseListFilterViewController: CourseListFilterViewDelegate {
+    func settingsTableView(
+        _ tableView: SettingsTableView,
+        didSelectCell cell: SettingsTableSectionViewModel.Cell,
+        at indexPath: IndexPath
+    ) {
+        guard let row = Row(rawValue: cell.uniqueIdentifier) else {
+            return
+        }
+
+        guard case .showResult = row else {
+            return
+        }
+    }
+
+    func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {
+        guard let uniqueIdentifier = cell.uniqueIdentifier,
+              let row = Row(rawValue: uniqueIdentifier) else {
+            return
+        }
+
+        switch row {
+        case .withCertificate:
+            self.formState?.withCertificate = isOn
+        case .isFree:
+            self.formState?.isFree = isOn
+        default:
+            break
+        }
+    }
+
+    func settingsCell(_ cell: SettingsRightDetailCheckboxTableViewCell, checkboxValueChanged isOn: Bool) {
+        let courseLanguages = CourseListFilter.Filter.CourseLanguage.allCases
+
+        guard let uniqueIdentifier = cell.uniqueIdentifier,
+              courseLanguages.map(\.uniqueIdentifier).contains(uniqueIdentifier) else {
+            return
+        }
+
+        if let selectedCourseLanguage = courseLanguages.first(where: { $0.uniqueIdentifier == uniqueIdentifier }) {
+            self.formState?.courseLanguage = selectedCourseLanguage
+        }
     }
 }
 

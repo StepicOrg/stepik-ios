@@ -7,7 +7,7 @@ enum CourseListFilter {
 
         struct Data {
             let courseLanguage: CourseListFilter.Filter.CourseLanguage?
-            let isPaid: Bool?
+            let isFree: Bool?
             let withCertificate: Bool?
         }
 
