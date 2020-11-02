@@ -18,6 +18,13 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
     lazy var fullscreenCourseListView = self.view as? FullscreenCourseListView
     private var submoduleViewController: UIViewController?
 
+    private lazy var courseListFilterBarButtonItem = UIBarButtonItem(
+        image: UIImage(named: "course-list-filter-slider")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: #selector(self.courseListFilterBarButtonItemClicked)
+    )
+
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     init(
@@ -33,10 +40,14 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
         super.init(nibName: nil, bundle: nil)
 
-        if self.presentationDescription != nil {
+        if self.presentationDescription?.headerViewDescription != nil {
             self.title = NSLocalizedString("RecommendedCategory", comment: "")
         } else {
             self.title = NSLocalizedString("AllCourses", comment: "")
+        }
+
+        if self.presentationDescription?.courseListFilterDescription != nil {
+            self.navigationItem.rightBarButtonItem = self.courseListFilterBarButtonItem
         }
     }
 
@@ -76,6 +87,8 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         )
     }
 
+    // MARK: Private API
+
     private func refreshSubmodule() {
         self.submoduleViewController?.removeFromParent()
 
@@ -98,6 +111,21 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         if let moduleInput = courseListAssembly.moduleInput {
             self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
         }
+    }
+
+    @objc
+    private func courseListFilterBarButtonItemClicked() {
+        guard let presentationDescription = self.presentationDescription?.courseListFilterDescription else {
+            return
+        }
+
+        let assembly = CourseListFilterAssembly(
+            presentationDescription: presentationDescription,
+            output: nil
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
     }
 }
 
