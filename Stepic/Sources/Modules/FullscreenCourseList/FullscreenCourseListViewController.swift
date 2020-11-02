@@ -17,6 +17,9 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
     lazy var fullscreenCourseListView = self.view as? FullscreenCourseListView
     private var submoduleViewController: UIViewController?
+    private var submoduleInput: CourseListInputProtocol?
+
+    private var currentFilters = [CourseListFilter.Filter]()
 
     private lazy var courseListFilterBarButtonItem = UIBarButtonItem(
         image: UIImage(named: "course-list-filter-slider")?.withRenderingMode(.alwaysTemplate),
@@ -111,6 +114,9 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         if let moduleInput = courseListAssembly.moduleInput {
             self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
         }
+
+        self.submoduleInput = courseListAssembly.moduleInput
+        self.currentFilters = self.presentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
     }
 
     @objc
@@ -120,8 +126,11 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         }
 
         let assembly = CourseListFilterAssembly(
-            presentationDescription: presentationDescription,
-            output: nil
+            presentationDescription: .init(
+                availableFilters: presentationDescription.availableFilters,
+                prefilledFilters: self.currentFilters
+            ),
+            output: self
         )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
@@ -183,6 +192,18 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             withKey: .paidCourse,
             allowsSafari: true,
             backButtonStyle: .done
+        )
+    }
+}
+
+extension FullscreenCourseListViewController: CourseListFilterOutputProtocol {
+    func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
+        self.currentFilters = filters
+
+        self.submoduleInput?.applyFilters(
+            filters == self.presentationDescription?.courseListFilterDescription?.prefilledFilters
+                ? []
+                : filters
         )
     }
 }

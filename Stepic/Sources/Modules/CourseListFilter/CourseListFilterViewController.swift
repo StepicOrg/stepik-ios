@@ -22,7 +22,7 @@ final class CourseListFilterViewController: UIViewController {
 
     var courseListFilterView: CourseListFilterView? { self.view as? CourseListFilterView }
 
-    private var formState: FormState?
+    private var formState = FormState()
 
     init(interactor: CourseListFilterInteractorProtocol) {
         self.interactor = interactor
@@ -70,10 +70,6 @@ final class CourseListFilterViewController: UIViewController {
 
     @objc
     private func resetClicked() {
-        guard self.formState != nil else {
-            return
-        }
-
         self.interactor.doCourseListFilterReset(request: .init())
     }
 
@@ -116,6 +112,14 @@ final class CourseListFilterViewController: UIViewController {
         var courseLanguage: CourseListFilter.Filter.CourseLanguage?
         var isFree: Bool?
         var withCertificate: Bool?
+
+        var data: CourseListFilter.FilterData {
+            .init(
+                courseLanguage: self.courseLanguage,
+                isFree: self.isFree,
+                withCertificate: self.withCertificate
+            )
+        }
     }
 }
 
@@ -270,9 +274,9 @@ extension CourseListFilterViewController: CourseListFilterViewDelegate {
 
         switch row {
         case .withCertificate:
-            self.formState?.withCertificate = isOn
+            self.formState.withCertificate = isOn
         case .isFree:
-            self.formState?.isFree = isOn
+            self.formState.isFree = isOn
         default:
             break
         }
@@ -287,26 +291,14 @@ extension CourseListFilterViewController: CourseListFilterViewDelegate {
         }
 
         if let selectedCourseLanguage = courseLanguages.first(where: { $0.uniqueIdentifier == uniqueIdentifier }) {
-            self.formState?.courseLanguage = selectedCourseLanguage
+            self.formState.courseLanguage = selectedCourseLanguage
         }
     }
 
     // MARK: Private Helpers
 
     private func handleShowResultClicked() {
-        guard let formState = self.formState else {
-            return
-        }
-
-        self.interactor.doCourseListFilterApply(
-            request: .init(
-                data: .init(
-                    courseLanguage: formState.courseLanguage,
-                    isFree: formState.isFree,
-                    withCertificate: formState.withCertificate
-                )
-            )
-        )
+        self.interactor.doCourseListFilterApply(request: .init(data: self.formState.data))
 
         DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)

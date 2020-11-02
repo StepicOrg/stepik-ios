@@ -50,7 +50,7 @@ enum CourseListFilter {
         }
     }
 
-    enum Filter {
+    enum Filter: Equatable {
         case courseLanguage(CourseLanguage)
         case isPaid(Bool)
         case withCertificate(Bool)
@@ -66,7 +66,7 @@ enum CourseListFilter {
             }
         }
 
-        enum CourseLanguage: String, CaseIterable, UniqueIdentifiable {
+        enum CourseLanguage: String, CaseIterable, Equatable, UniqueIdentifiable {
             case any
             case russian
             case english

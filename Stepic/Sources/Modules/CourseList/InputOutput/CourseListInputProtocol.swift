@@ -5,4 +5,6 @@ protocol CourseListInputProtocol: AnyObject {
 
     /// Course list will be use data from network
     func setOnlineStatus()
+
+    func applyFilters(_ filters: [CourseListFilter.Filter])
 }

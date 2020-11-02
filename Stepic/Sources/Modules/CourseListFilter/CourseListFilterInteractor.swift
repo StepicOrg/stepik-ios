@@ -39,7 +39,15 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
         self.mutableState.isFree = request.data.isFree
         self.mutableState.withCertificate = request.data.withCertificate
 
-        self.moduleOutput?.handleCourseListFilterDidFinishWithFilters(self.mutableState.filters)
+        var finalState = MutableState(courseLanguage: self.mutableState.courseLanguage)
+        if self.mutableState.isFree ?? false {
+            finalState.isFree = true
+        }
+        if self.mutableState.withCertificate ?? false {
+            finalState.withCertificate = true
+        }
+
+        self.moduleOutput?.handleCourseListFilterDidFinishWithFilters(finalState.filters)
     }
 
     func doCourseListFilterReset(request: CourseListFilter.CourseListFilterReset.Request) {
