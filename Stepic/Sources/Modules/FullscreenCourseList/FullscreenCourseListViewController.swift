@@ -21,9 +21,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
     private var currentFilters = [CourseListFilter.Filter]()
 
-    private lazy var courseListFilterBarButtonItem = UIBarButtonItem(
-        image: UIImage(named: "course-list-filter-slider")?.withRenderingMode(.alwaysTemplate),
-        style: .plain,
+    private lazy var courseListFilterBarButtonItem = CourseListFilterBarButtonItem(
         target: self,
         action: #selector(self.courseListFilterBarButtonItemClicked)
     )
@@ -200,10 +198,9 @@ extension FullscreenCourseListViewController: CourseListFilterOutputProtocol {
     func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
         self.currentFilters = filters
 
-        self.submoduleInput?.applyFilters(
-            filters == self.presentationDescription?.courseListFilterDescription?.prefilledFilters
-                ? []
-                : filters
-        )
+        let hasChanges = filters != self.presentationDescription?.courseListFilterDescription?.prefilledFilters
+
+        self.courseListFilterBarButtonItem.setActive(hasChanges)
+        self.submoduleInput?.applyFilters(hasChanges ? filters : [])
     }
 }
