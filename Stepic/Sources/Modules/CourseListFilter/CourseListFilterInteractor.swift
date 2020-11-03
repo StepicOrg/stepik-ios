@@ -72,11 +72,18 @@ final class CourseListFilterInteractor: CourseListFilterInteractorProtocol {
             if let courseLanguage = courseLanguageOrNil {
                 self.mutableState.courseLanguage = courseLanguage
             } else {
-                let globalContentLanguage = self.contentLanguageService.globalContentLanguage
-                self.mutableState.courseLanguage = .init(contentLanguage: globalContentLanguage)
+                self.mutableState.courseLanguage = .init(
+                    contentLanguage: self.contentLanguageService.globalContentLanguage
+                )
             }
 
-            self.defaultState.courseLanguage = .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
+            if let defaultCourseLanguage = self.presentationDescription.defaultCourseLanguage {
+                self.defaultState.courseLanguage = defaultCourseLanguage
+            } else {
+                self.defaultState.courseLanguage = .init(
+                    contentLanguage: self.contentLanguageService.globalContentLanguage
+                )
+            }
         }
         if availableFilters.contains(.isPaid) {
             let isPaidOrNil = prefilledFilters.compactMap { filter -> Bool? in

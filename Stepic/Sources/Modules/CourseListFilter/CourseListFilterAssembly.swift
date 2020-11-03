@@ -8,7 +8,8 @@ final class CourseListFilterAssembly: Assembly {
     init(
         presentationDescription: CourseListFilter.PresentationDescription = .init(
             availableFilters: .all,
-            prefilledFilters: []
+            prefilledFilters: [],
+            defaultCourseLanguage: nil
         ),
         output: CourseListFilterOutputProtocol? = nil
     ) {

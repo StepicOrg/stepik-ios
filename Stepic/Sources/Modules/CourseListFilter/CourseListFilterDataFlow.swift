@@ -38,6 +38,7 @@ enum CourseListFilter {
     struct PresentationDescription {
         let availableFilters: FilterOptionSet
         let prefilledFilters: [Filter]
+        let defaultCourseLanguage: Filter.CourseLanguage?
 
         struct FilterOptionSet: OptionSet {
             let rawValue: Int

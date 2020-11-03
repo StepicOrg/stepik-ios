@@ -127,7 +127,8 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         let assembly = CourseListFilterAssembly(
             presentationDescription: .init(
                 availableFilters: presentationDescription.availableFilters,
-                prefilledFilters: self.currentFilters
+                prefilledFilters: self.currentFilters,
+                defaultCourseLanguage: presentationDescription.defaultCourseLanguage
             ),
             output: self
         )

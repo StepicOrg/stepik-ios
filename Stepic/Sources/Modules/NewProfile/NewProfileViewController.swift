@@ -394,7 +394,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
                     presentationDescription: .init(
                         courseListFilterDescription: .init(
                             availableFilters: .all,
-                            prefilledFilters: [.courseLanguage(.any)]
+                            prefilledFilters: [.courseLanguage(.any)],
+                            defaultCourseLanguage: .any
                         )
                     ),
                     courseListType: TeacherCourseListType(teacherID: teacherID)
