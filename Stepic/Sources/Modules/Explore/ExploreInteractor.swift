@@ -4,11 +4,15 @@ import PromiseKit
 protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
     func doContentLoad(request: Explore.ContentLoad.Request)
     func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request)
+    func doSearchResultsCourseListFiltersUpdate(request: Explore.SearchResultsCourseListFiltersUpdate.Request)
+    func doCourseListFilterPresentation(request: Explore.CourseListFilterPresentation.Request)
 }
 
 final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol {
     private lazy var explorePresenter = self.presenter as? ExplorePresenterProtocol
     let contentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
+
+    private lazy var currentSearchResultsCourseListFilters = self.getDefaultSearchResultsCourseListFilters()
 
     init(
         presenter: ExplorePresenterProtocol,
@@ -39,6 +43,26 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         )
         self.contentLanguageSwitchAvailabilityService.shouldShowLanguageSwitchOnExplore = false
     }
+
+    func doSearchResultsCourseListFiltersUpdate(request: Explore.SearchResultsCourseListFiltersUpdate.Request) {
+        self.currentSearchResultsCourseListFilters = request.filters.isEmpty
+            ? self.getDefaultSearchResultsCourseListFilters()
+            : request.filters
+        self.explorePresenter?.presentSearchResultsCourseListFilters(
+            response: .init(filters: self.currentSearchResultsCourseListFilters)
+        )
+    }
+
+    func doCourseListFilterPresentation(request: Explore.CourseListFilterPresentation.Request) {
+        self.explorePresenter?.presentCourseListFilter(
+            response: .init(
+                currentFilters: self.currentSearchResultsCourseListFilters,
+                defaultCourseLanguage: self.getDefaultSearchResultsCourseListFilterLanguage()
+            )
+        )
+    }
+
+    // MARK: Override BaseExploreInteractor
 
     override func presentEmptyState(sourceModule: CourseListInputProtocol) {
         guard let exploreSubmodule = self.determineModule(sourceModule: sourceModule) else {
@@ -106,5 +130,21 @@ extension ExploreInteractor: CourseListCollectionOutputProtocol {
                 courseListType: type
             )
         )
+    }
+}
+
+extension ExploreInteractor: CourseListFilterOutputProtocol {
+    func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
+        self.doSearchResultsCourseListFiltersUpdate(request: .init(filters: filters))
+    }
+
+    // MARK: Private Helpers
+
+    private func getDefaultSearchResultsCourseListFilters() -> [CourseListFilter.Filter] {
+        [.courseLanguage(self.getDefaultSearchResultsCourseListFilterLanguage())]
+    }
+
+    private func getDefaultSearchResultsCourseListFilterLanguage() -> CourseListFilter.Filter.CourseLanguage {
+        self.contentLanguageService.globalContentLanguage == .russian ? .any : .english
     }
 }

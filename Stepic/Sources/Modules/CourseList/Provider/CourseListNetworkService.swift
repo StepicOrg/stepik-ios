@@ -175,7 +175,8 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
             self.searchResultsAPI.searchCourse(
                 query: self.type.query,
                 language: self.type.language,
-                page: page
+                page: page,
+                filterQuery: self.type.filterQuery
             ).then { result, meta -> Promise<([Course.IdType], Meta, [Course])> in
                 let ids = result.compactMap { $0.courseId }
                 return self.coursesAPI

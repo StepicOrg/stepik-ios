@@ -1,6 +1,6 @@
 import Foundation
 
-struct CourseListFilterQuery {
+struct CourseListFilterQuery: Equatable {
     let language: String?
     let isPaid: Bool?
     let withCertificate: Bool?

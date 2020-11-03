@@ -21,6 +21,7 @@ final class SearchResultsAPI: APIEndpoint {
         type: String?,
         language: ContentLanguage,
         page: Int?,
+        filterQuery: CourseListFilterQuery? = nil,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([SearchResult], Meta) -> Void,
         error errorHandler: @escaping (Error) -> Void
@@ -38,6 +39,16 @@ final class SearchResultsAPI: APIEndpoint {
         }
         if let type = type {
             params["type"] = type
+        }
+
+        if let filterQuery = filterQuery {
+            filterQuery.dictValue.forEach { key, value in
+                params[key] = String(describing: value)
+            }
+
+            if filterQuery.language == nil {
+                params["language"] = nil
+            }
         }
 
         return self.manager.request(
@@ -64,6 +75,7 @@ final class SearchResultsAPI: APIEndpoint {
         query: String,
         language: ContentLanguage,
         page: Int,
+        filterQuery: CourseListFilterQuery? = nil,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<([SearchResult], Meta)> {
         Promise<([SearchResult], Meta)> { seal in
@@ -72,6 +84,7 @@ final class SearchResultsAPI: APIEndpoint {
                 type: "course",
                 language: language,
                 page: page,
+                filterQuery: filterQuery,
                 headers: headers,
                 success: { searchResults, meta in
                     seal.fulfill((searchResults, meta))
