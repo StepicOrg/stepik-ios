@@ -54,4 +54,8 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
     func presentPaidCourseInfo(course: Course) {
         self.presenter.presentPaidCourseBuying(response: .init(course: course))
     }
+
+    func presentLoadedState(sourceModule: CourseListInputProtocol) {
+        self.presenter.presentHidePlaceholder(response: .init())
+    }
 }

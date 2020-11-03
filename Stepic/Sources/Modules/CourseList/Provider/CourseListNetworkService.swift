@@ -204,7 +204,8 @@ final class TeacherCourseListNetworkService: BaseCourseListNetworkService, Cours
             self.coursesAPI.retrieve(
                 teacher: self.type.teacherID,
                 order: .popularityDesc,
-                page: page
+                page: page,
+                courseListFilterQuery: filterQuery
             ).done { result in
                 seal.fulfill(result)
             }.catch { _ in

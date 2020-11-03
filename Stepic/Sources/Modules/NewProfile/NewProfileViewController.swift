@@ -390,7 +390,15 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             let headerView = NewProfileBlockHeaderView()
             headerView.titleText = NSLocalizedString("NewProfileBlockTitleCreatedCourses", comment: "")
             headerView.onShowAllButtonClick = { [weak self] in
-                let assembly = FullscreenCourseListAssembly(courseListType: TeacherCourseListType(teacherID: teacherID))
+                let assembly = FullscreenCourseListAssembly(
+                    presentationDescription: .init(
+                        courseListFilterDescription: .init(
+                            availableFilters: .all,
+                            prefilledFilters: [.courseLanguage(.any)]
+                        )
+                    ),
+                    courseListType: TeacherCourseListType(teacherID: teacherID)
+                )
                 self?.push(module: assembly.makeModule())
             }
 

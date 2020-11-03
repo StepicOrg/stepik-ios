@@ -111,6 +111,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     viewSource: self.courseViewSource
                 )
                 self.presenter.presentCourses(response: response)
+
+                self.moduleOutput?.presentLoadedState(sourceModule: self)
             }
 
             // Retry if successfully

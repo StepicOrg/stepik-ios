@@ -6,6 +6,7 @@ protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayLastStep(viewModel: FullscreenCourseList.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: FullscreenCourseList.PresentAuthorization.ViewModel)
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel)
+    func displayHidePlaceholder(viewModel: FullscreenCourseList.HidePlaceholder.ViewModel)
     func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel)
 }
 
@@ -144,6 +145,10 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
         case .empty:
             self.showPlaceholder(for: .empty)
         }
+    }
+
+    func displayHidePlaceholder(viewModel: FullscreenCourseList.HidePlaceholder.ViewModel) {
+        self.isPlaceholderShown = false
     }
 
     func displayCourseInfo(viewModel: FullscreenCourseList.CourseInfoPresentation.ViewModel) {

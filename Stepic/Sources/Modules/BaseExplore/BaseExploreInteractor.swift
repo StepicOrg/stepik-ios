@@ -65,4 +65,6 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
     func presentEmptyState(sourceModule: CourseListInputProtocol) {}
 
     func presentError(sourceModule: CourseListInputProtocol) {}
+
+    func presentLoadedState(sourceModule: CourseListInputProtocol) {}
 }
