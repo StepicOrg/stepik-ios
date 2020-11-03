@@ -73,9 +73,11 @@ final class CourseListsCollectionViewController: UIViewController {
                     self?.interactor.doFullscreenCourseListPresentation(
                         request: .init(
                             presentationDescription: .init(
-                                title: courseListViewModel.title,
-                                subtitle: courseListViewModel.description,
-                                color: courseListViewModel.color
+                                headerViewDescription: .init(
+                                    title: courseListViewModel.title,
+                                    subtitle: courseListViewModel.description,
+                                    color: courseListViewModel.color
+                                )
                             ),
                             courseListType: courseListViewModel.courseList
                         )

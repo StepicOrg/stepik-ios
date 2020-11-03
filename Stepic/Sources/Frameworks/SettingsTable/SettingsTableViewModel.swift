@@ -10,19 +10,23 @@ struct SettingsTableSectionViewModel {
     }
 
     struct Cell: UniqueIdentifiable {
-        struct Options {
-            let topPadding: CGFloat = 0
-            let bottomPadding: CGFloat = 0
+        struct Appearance {
+            var backgroundColor: UIColor?
+            var selectedBackgroundColor: UIColor?
         }
 
         let uniqueIdentifier: UniqueIdentifierType
         let type: SettingsTableSectionCellType
-        let options: Options
+        let appearance: Appearance
 
-        init(uniqueIdentifier: UniqueIdentifierType, type: SettingsTableSectionCellType, options: Options = .init()) {
+        init(
+            uniqueIdentifier: UniqueIdentifierType,
+            type: SettingsTableSectionCellType,
+            appearance: Appearance = .init()
+        ) {
             self.uniqueIdentifier = uniqueIdentifier
             self.type = type
-            self.options = options
+            self.appearance = appearance
         }
     }
 
@@ -112,8 +116,47 @@ struct RightDetailCellOptions {
         }
     }
 
+    struct Switch {
+        let isOn: Bool
+        let appearance: Appearance
+
+        init(
+            isOn: Bool,
+            appearance: Appearance = .init(onTintColor: .stepikSwitchOnTint)
+        ) {
+            self.isOn = isOn
+            self.appearance = appearance
+        }
+
+        struct Appearance {
+            var onTintColor: UIColor
+        }
+    }
+
+    struct CheckBox {
+        let isOn: Bool
+        let checkBoxGroup: UniqueIdentifierType?
+        let checkBoxGroupMustHaveSelection: Bool
+        let appearance: Appearance
+
+        init(
+            isOn: Bool,
+            checkBoxGroup: UniqueIdentifierType? = nil,
+            checkBoxGroupMustHaveSelection: Bool = false,
+            appearance: Appearance = .init()
+        ) {
+            self.isOn = isOn
+            self.checkBoxGroup = checkBoxGroup
+            self.checkBoxGroupMustHaveSelection = checkBoxGroupMustHaveSelection
+            self.appearance = appearance
+        }
+
+        struct Appearance {}
+    }
+
     enum DetailType {
         case label(text: String?)
-        case `switch`(isOn: Bool)
+        case `switch`(Switch)
+        case checkBox(CheckBox)
     }
 }

@@ -65,6 +65,12 @@ final class SettingsRightDetailSwitchCellView: UIView {
         }
     }
 
+    var switchOnTintColor: UIColor = .stepikSwitchOnTint {
+        didSet {
+            self.detailSwitch.onTintColor = self.switchOnTintColor
+        }
+    }
+
     override init(frame: CGRect) {
         self.appearance = .init()
         super.init(frame: frame)

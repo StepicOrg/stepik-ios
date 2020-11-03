@@ -72,4 +72,6 @@ extension NewProfileCreatedCoursesInteractor: CourseListOutputProtocol {
     func presentError(sourceModule: CourseListInputProtocol) {
         self.presenter.presentError(response: .init())
     }
+
+    func presentLoadedState(sourceModule: CourseListInputProtocol) {}
 }

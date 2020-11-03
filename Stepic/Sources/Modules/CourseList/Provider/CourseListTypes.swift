@@ -40,6 +40,7 @@ struct CollectionCourseListType: CourseListType {
 
 struct SearchResultCourseListType: CourseListType {
     let query: String
+    let filterQuery: CourseListFilterQuery?
     let language: ContentLanguage
 
     var analyticName: String { "search_result_course_list" }

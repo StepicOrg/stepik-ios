@@ -23,6 +23,7 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
     private var resultsVC: UIViewController?
 
     var query: String = ""
+    private var currentCourseListFilterQuery: CourseListFilterQuery?
 
     init(view: SearchResultsView) {
         self.view = view
@@ -41,6 +42,19 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
         resultsVC = nil
     }
 
+    func filterQueryChanged(to query: CourseListFilterQuery?) {
+        if self.currentCourseListFilterQuery == query {
+            return
+        }
+        
+        self.currentCourseListFilterQuery = query
+
+        if self.resultsVC != nil {
+            self.resultsVC = nil
+            self.search(query: self.query)
+        }
+    }
+
     func search(query: String) {
         self.query = query
         if resultsVC == nil {
@@ -48,6 +62,7 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
                 presentationDescription: nil,
                 courseListType: SearchResultCourseListType(
                     query: query,
+                    filterQuery: self.currentCourseListFilterQuery,
                     language: ContentLanguageService().globalContentLanguage
                 ),
                 courseViewSource: .search(query: query)

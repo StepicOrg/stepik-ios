@@ -6,6 +6,7 @@ protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayLastStep(viewModel: FullscreenCourseList.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: FullscreenCourseList.PresentAuthorization.ViewModel)
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel)
+    func displayHidePlaceholder(viewModel: FullscreenCourseList.HidePlaceholder.ViewModel)
     func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel)
 }
 
@@ -17,6 +18,14 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
     lazy var fullscreenCourseListView = self.view as? FullscreenCourseListView
     private var submoduleViewController: UIViewController?
+    private var submoduleInput: CourseListInputProtocol?
+
+    private var currentFilters = [CourseListFilter.Filter]()
+
+    private lazy var courseListFilterBarButtonItem = CourseListFilterBarButtonItem(
+        target: self,
+        action: #selector(self.courseListFilterBarButtonItemClicked)
+    )
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
@@ -33,10 +42,14 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
         super.init(nibName: nil, bundle: nil)
 
-        if self.presentationDescription != nil {
+        if self.presentationDescription?.headerViewDescription != nil {
             self.title = NSLocalizedString("RecommendedCategory", comment: "")
         } else {
             self.title = NSLocalizedString("AllCourses", comment: "")
+        }
+
+        if self.presentationDescription?.courseListFilterDescription != nil {
+            self.navigationItem.rightBarButtonItem = self.courseListFilterBarButtonItem
         }
     }
 
@@ -76,6 +89,8 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         )
     }
 
+    // MARK: Private API
+
     private func refreshSubmodule() {
         self.submoduleViewController?.removeFromParent()
 
@@ -98,6 +113,28 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         if let moduleInput = courseListAssembly.moduleInput {
             self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
         }
+
+        self.submoduleInput = courseListAssembly.moduleInput
+        self.currentFilters = self.presentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
+    }
+
+    @objc
+    private func courseListFilterBarButtonItemClicked() {
+        guard let presentationDescription = self.presentationDescription?.courseListFilterDescription else {
+            return
+        }
+
+        let assembly = CourseListFilterAssembly(
+            presentationDescription: .init(
+                availableFilters: presentationDescription.availableFilters,
+                prefilledFilters: self.currentFilters,
+                defaultCourseLanguage: presentationDescription.defaultCourseLanguage
+            ),
+            output: self
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
     }
 }
 
@@ -109,6 +146,10 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
         case .empty:
             self.showPlaceholder(for: .empty)
         }
+    }
+
+    func displayHidePlaceholder(viewModel: FullscreenCourseList.HidePlaceholder.ViewModel) {
+        self.isPlaceholderShown = false
     }
 
     func displayCourseInfo(viewModel: FullscreenCourseList.CourseInfoPresentation.ViewModel) {
@@ -156,5 +197,16 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+}
+
+extension FullscreenCourseListViewController: CourseListFilterOutputProtocol {
+    func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
+        self.currentFilters = filters
+
+        let hasChanges = filters != self.presentationDescription?.courseListFilterDescription?.prefilledFilters
+
+        self.courseListFilterBarButtonItem.setActive(hasChanges)
+        self.submoduleInput?.applyFilters(hasChanges ? filters : [])
     }
 }

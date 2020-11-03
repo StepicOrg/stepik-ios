@@ -17,9 +17,14 @@ enum CourseList {
 
     // Use it for module initializing
     struct PresentationDescription {
-        var title: String
-        var subtitle: String?
-        var color: GradientCoursesPlaceholderView.Color
+        var headerViewDescription: HeaderViewPresentationDescription?
+        var courseListFilterDescription: CourseListFilter.PresentationDescription?
+
+        struct HeaderViewPresentationDescription {
+            var title: String
+            var subtitle: String?
+            var color: GradientCoursesPlaceholderView.Color
+        }
     }
 
     // MARK: Use cases

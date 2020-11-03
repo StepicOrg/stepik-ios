@@ -32,6 +32,11 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var currentCourses: [(UniqueIdentifierType, Course)] = []
 
+    private var currentFilters: [CourseListFilter.Filter] = []
+    private var currentFilterQuery: CourseListFilterQuery {
+        CourseListFilterQuery(courseListFilters: self.currentFilters)
+    }
+
     init(
         presenter: CourseListPresenterProtocol,
         provider: CourseListProviderProtocol,
@@ -66,7 +71,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         // - !isOnline && !didLoadFromCache: we should load cached courses, but can't load from network (first fetch after init)
         firstly {
             self.didLoadFromCache
-                ? self.provider.fetchRemote(page: 1)
+                ? self.provider.fetchRemote(page: 1, filterQuery: self.currentFilterQuery)
                 : self.provider.fetchCached()
         }.done { courses, meta in
             self.paginationState = PaginationState(
@@ -77,7 +82,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
 
             // Cache new courses fetched from remote.
-            if self.didLoadFromCache {
+            if self.didLoadFromCache && self.currentFilters.isEmpty {
                 self.provider.cache(courses: courses)
             }
 
@@ -106,6 +111,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     viewSource: self.courseViewSource
                 )
                 self.presenter.presentCourses(response: response)
+
+                self.moduleOutput?.presentLoadedState(sourceModule: self)
             }
 
             // Retry if successfully
@@ -147,7 +154,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
 
         let nextPageNumber = self.paginationState.page + 1
-        self.provider.fetchRemote(page: nextPageNumber).done { courses, meta in
+        self.provider.fetchRemote(
+            page: nextPageNumber,
+            filterQuery: self.currentFilterQuery
+        ).done { courses, meta in
             self.paginationState = PaginationState(
                 page: meta.page,
                 hasNext: meta.hasNext
@@ -292,7 +302,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     }
 
     private func cacheCurrentCourses() {
-        self.provider.cache(courses: self.currentCourses.map { $0.1 })
+        if self.currentFilters.isEmpty {
+            self.provider.cache(courses: self.currentCourses.map { $0.1 })
+        }
     }
 
     /// Just present current data again
@@ -334,6 +346,15 @@ extension CourseListInteractor: CourseListInputProtocol {
             let fakeRequest = CourseList.CoursesLoad.Request()
             self.doCoursesFetch(request: fakeRequest)
         }
+    }
+
+    func applyFilters(_ filters: [CourseListFilter.Filter]) {
+        if self.currentFilters == filters {
+            return
+        }
+
+        self.currentFilters = filters
+        self.doCoursesFetch(request: .init())
     }
 }
 

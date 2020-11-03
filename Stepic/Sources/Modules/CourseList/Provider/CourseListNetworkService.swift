@@ -2,7 +2,13 @@ import Foundation
 import PromiseKit
 
 protocol CourseListNetworkServiceProtocol: AnyObject {
-    func fetch(page: Int) -> Promise<([Course], Meta)>
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)>
+}
+
+extension CourseListNetworkServiceProtocol {
+    func fetch(page: Int) -> Promise<([Course], Meta)> {
+        self.fetch(page: page, filterQuery: nil)
+    }
 }
 
 class BaseCourseListNetworkService {
@@ -43,7 +49,7 @@ final class UserCoursesCourseListNetworkService: BaseCourseListNetworkService, C
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             let (isArchived, isFavorite) = self.fetchParams
             self.userCoursesAPI.retrieve(page: page, isArchived: isArchived, isFavorite: isFavorite).then {
@@ -86,13 +92,14 @@ final class PopularCourseListNetworkService: BaseCourseListNetworkService, Cours
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.coursesAPI.retrieve(
                 isCataloged: true,
                 order: .activityDesc,
                 language: self.type.language.popularCoursesParameter,
-                page: page
+                page: page,
+                courseListFilterQuery: filterQuery
             ).done { result in
                 seal.fulfill(result)
             }.catch { _ in
@@ -110,7 +117,7 @@ final class TagCourseListNetworkService: BaseCourseListNetworkService, CourseLis
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.coursesAPI.retrieve(
                 tag: self.type.id,
@@ -134,7 +141,7 @@ final class CollectionCourseListNetworkService: BaseCourseListNetworkService, Co
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         let finalMeta = Meta.oneAndOnlyPage
         return Promise { seal in
             self.coursesAPI.retrieve(
@@ -163,12 +170,13 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.searchResultsAPI.searchCourse(
                 query: self.type.query,
                 language: self.type.language,
-                page: page
+                page: page,
+                filterQuery: self.type.filterQuery
             ).then { result, meta -> Promise<([Course.IdType], Meta, [Course])> in
                 let ids = result.compactMap { $0.courseId }
                 return self.coursesAPI
@@ -192,12 +200,13 @@ final class TeacherCourseListNetworkService: BaseCourseListNetworkService, Cours
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.coursesAPI.retrieve(
                 teacher: self.type.teacherID,
                 order: .popularityDesc,
-                page: page
+                page: page,
+                courseListFilterQuery: filterQuery
             ).done { result in
                 seal.fulfill(result)
             }.catch { _ in
@@ -221,7 +230,7 @@ final class VisitedCourseListNetworkService: BaseCourseListNetworkService, Cours
         super.init(coursesAPI: coursesAPI)
     }
 
-    func fetch(page: Int) -> Promise<([Course], Meta)> {
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.visitedCoursesAPI.retrieve(
                 page: page

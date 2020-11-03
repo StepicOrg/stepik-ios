@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol ExploreSearchBarDelegate: UISearchBarDelegate {
+    func exploreSearchBarFilterButtonClicked(_ searchBar: ExploreSearchBar)
+}
+
 final class ExploreSearchBar: UISearchBar {
     enum Appearance {
         static let searchFieldPositionAdjustment = UIOffset(horizontal: -6, vertical: 0)
@@ -12,7 +16,23 @@ final class ExploreSearchBar: UISearchBar {
         static let placeholderText = NSLocalizedString("SearchCourses", comment: "")
     }
 
-    weak var searchBarDelegate: UISearchBarDelegate?
+    weak var searchBarDelegate: ExploreSearchBarDelegate?
+
+    var showsFilterButton: Bool {
+        get {
+            self.showsBookmarkButton
+        }
+        set {
+            if newValue {
+                self.setImage(
+                    UIImage(named: "course-list-filter-slider")?.withRenderingMode(.alwaysTemplate),
+                    for: .bookmark,
+                    state: .normal
+                )
+            }
+            self.showsBookmarkButton = newValue
+        }
+    }
 
     override var delegate: UISearchBarDelegate? {
         willSet {
@@ -83,5 +103,11 @@ extension ExploreSearchBar: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         self.searchBarDelegate?.searchBarSearchButtonClicked?(searchBar)
+    }
+
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        if self.showsFilterButton {
+            self.searchBarDelegate?.exploreSearchBarFilterButtonClicked(self)
+        }
     }
 }

@@ -991,6 +991,16 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 /* Course List */
 CourseWidgetArchived = "В архиве";
 
+/* Course List Filter */
+CourseListFilterTitle = "Фильтры";
+CourseListFilterResetButtonTitle = "Сбросить";
+CourseListFilterSectionCourseLanguageTitle = "Язык курса";
+CourseListFilterSectionCourseDetailsTitle = "Детали курса";
+CourseListFilterRowWithCertificateTitle = "Только с сертификатом";
+CourseListFilterRowIsFreeTitle = "Только бесплатные";
+CourseListFilterRowShowResultTitle = "Показать результат";
+CourseListFilterCourseLanguageAnyTitle = "Любой";
+
 /* New profile */
 NewProfileRatingReputation = "Репутация %@";
 NewProfileRatingKnowledge = "Знания %@";

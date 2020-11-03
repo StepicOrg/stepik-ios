@@ -6,6 +6,8 @@ protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStoriesBlock(response: Explore.StoriesVisibilityUpdate.Response)
     func presentCourseListState(response: Explore.CourseListStateUpdate.Response)
     func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response)
+    func presentCourseListFilter(response: Explore.CourseListFilterPresentation.Response)
+    func presentSearchResultsCourseListFilters(response: Explore.SearchResultsCourseListFiltersUpdate.Response)
 }
 
 final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
@@ -40,5 +42,20 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
 
     func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response) {
         self.exploreViewController?.displayStatusBarStyle(viewModel: .init(statusBarStyle: response.statusBarStyle))
+    }
+
+    func presentCourseListFilter(response: Explore.CourseListFilterPresentation.Response) {
+        let presentationDescription = CourseListFilter.PresentationDescription(
+            availableFilters: .all,
+            prefilledFilters: response.currentFilters,
+            defaultCourseLanguage: response.defaultCourseLanguage
+        )
+        self.exploreViewController?.displayCourseListFilter(
+            viewModel: .init(presentationDescription: presentationDescription)
+        )
+    }
+
+    func presentSearchResultsCourseListFilters(response: Explore.SearchResultsCourseListFiltersUpdate.Response) {
+        self.exploreViewController?.displaySearchResultsCourseListFilters(viewModel: .init(filters: response.filters))
     }
 }
