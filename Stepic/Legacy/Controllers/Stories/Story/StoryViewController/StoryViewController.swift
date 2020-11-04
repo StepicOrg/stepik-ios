@@ -37,6 +37,7 @@ final class StoryViewController: UIViewController {
             target: self,
             action: #selector(StoryViewController.didTap(recognizer:))
         )
+        gestureRecognizer.delegate = self
         self.view.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.cancelsTouchesInView = false
 
@@ -113,11 +114,11 @@ final class StoryViewController: UIViewController {
         }
     }
 
-    func rewind() {
+    private func rewind() {
         self.presenter?.rewind()
     }
 
-    func skip() {
+    private func skip() {
         self.presenter?.skip()
     }
 
@@ -135,9 +136,12 @@ final class StoryViewController: UIViewController {
         super.touchesCancelled(touches, with: event)
         self.presenter?.resume()
     }
+}
 
-    func close() {
-        self.dismiss(animated: true, completion: nil)
+extension StoryViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let isControllTapped = touch.view is UIControl
+        return !isControllTapped
     }
 }
 
@@ -182,5 +186,9 @@ extension StoryViewController: StoryViewProtocol {
 
     func resume(segment: Int) {
         self.progressView.resume(segment: segment)
+    }
+
+    func close() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
