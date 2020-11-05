@@ -990,6 +990,16 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 /* Course List */
 CourseWidgetArchived = "Archived";
 
+/* Course List Filter */
+CourseListFilterTitle = "Filters";
+CourseListFilterResetButtonTitle = "Reset";
+CourseListFilterSectionCourseLanguageTitle = "Course Language";
+CourseListFilterSectionCourseDetailsTitle = "Course Details";
+CourseListFilterRowWithCertificateTitle = "With Certificate";
+CourseListFilterRowIsFreeTitle = "Free";
+CourseListFilterRowShowResultTitle = "Show Result";
+CourseListFilterCourseLanguageAnyTitle = "Any";
+
 /* New profile */
 NewProfileRatingReputation = "Reputation %@";
 NewProfileRatingKnowledge = "Knowledge %@";

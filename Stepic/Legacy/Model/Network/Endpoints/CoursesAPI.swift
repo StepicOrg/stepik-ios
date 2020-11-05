@@ -60,7 +60,8 @@ final class CoursesAPI: APIEndpoint {
         isCataloged: Bool? = nil,
         order: Order? = nil,
         language: String? = nil,
-        page: Int = 1
+        page: Int = 1,
+        courseListFilterQuery: CourseListFilterQuery? = nil
     ) -> Promise<([Course], Meta)> {
         var params = Parameters()
 
@@ -102,6 +103,16 @@ final class CoursesAPI: APIEndpoint {
 
         if let teacher = teacher {
             params["teacher"] = teacher
+        }
+
+        if let courseListFilterQuery = courseListFilterQuery {
+            courseListFilterQuery.dictValue.forEach { key, value in
+                params[key] = String(describing: value)
+            }
+
+            if courseListFilterQuery.language == nil {
+                params["language"] = nil
+            }
         }
 
         params["page"] = page

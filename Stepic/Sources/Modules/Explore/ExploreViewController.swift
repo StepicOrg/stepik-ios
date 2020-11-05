@@ -8,6 +8,8 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel)
     func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel)
     func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel)
+    func displayCourseListFilter(viewModel: Explore.CourseListFilterPresentation.ViewModel)
+    func displaySearchResultsCourseListFilters(viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -192,7 +194,16 @@ final class ExploreViewController: BaseExploreViewController {
             )
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.doFullscreenCourseListPresentation(
-                request: .init(presentationDescription: nil, courseListType: courseListType)
+                request: .init(
+                    presentationDescription: .init(
+                        courseListFilterDescription: .init(
+                            availableFilters: .all,
+                            prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
+                            defaultCourseLanguage: .init(contentLanguage: contentLanguage)
+                        )
+                    ),
+                    courseListType: courseListType
+                )
             )
         }
         self.registerSubmodule(
@@ -307,10 +318,13 @@ final class ExploreViewController: BaseExploreViewController {
 
     private func hideSearchResults() {
         self.searchResultsController?.view.isHidden = true
+        self.searchBar.showsFilterButton = false
+        self.exploreInteractor?.doSearchResultsCourseListFiltersUpdate(request: .init(filters: []))
     }
 
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
+        self.searchBar.showsFilterButton = true
     }
 
     @objc
@@ -327,6 +341,8 @@ extension Explore.Submodule: SubmoduleType {
         return position
     }
 }
+
+// MARK: - ExploreViewController: ExploreViewControllerProtocol -
 
 extension ExploreViewController: ExploreViewControllerProtocol {
     func displayContent(viewModel: Explore.ContentLoad.ViewModel) {
@@ -376,9 +392,26 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         self.searchBar.becomeFirstResponder()
         self.searchBarTextDidBeginEditing(self.searchBar)
     }
+
+    func displayCourseListFilter(viewModel: Explore.CourseListFilterPresentation.ViewModel) {
+        let assembly = CourseListFilterAssembly(
+            presentationDescription: viewModel.presentationDescription,
+            output: self.interactor as? CourseListFilterOutputProtocol
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
+    }
+
+    func displaySearchResultsCourseListFilters(viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel) {
+        let newFilterQuery = CourseListFilterQuery(courseListFilters: viewModel.filters)
+        self.searchResultsModuleInput?.filterQueryChanged(to: newFilterQuery)
+    }
 }
 
-extension ExploreViewController: UISearchBarDelegate {
+// MARK: - ExploreViewController: ExploreSearchBarDelegate -
+
+extension ExploreViewController: ExploreSearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if DeviceInfo.current.isPad {
             self.navigationItem.setRightBarButton(self.ipadCancelSearchBarButtonItem, animated: true)
@@ -419,6 +452,10 @@ extension ExploreViewController: UISearchBarDelegate {
         } else {
             self.searchResultsModuleInput?.queryChanged(to: "")
         }
+    }
+
+    func exploreSearchBarFilterButtonClicked(_ searchBar: ExploreSearchBar) {
+        self.exploreInteractor?.doCourseListFilterPresentation(request: .init())
     }
 }
 

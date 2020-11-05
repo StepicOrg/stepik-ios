@@ -3,8 +3,14 @@ import PromiseKit
 
 protocol CourseListProviderProtocol: AnyObject {
     func fetchCached() -> Promise<([Course], Meta)>
-    func fetchRemote(page: Int) -> Promise<([Course], Meta)>
+    func fetchRemote(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)>
     func cache(courses: [Course])
+}
+
+extension CourseListProviderProtocol {
+    func fetchRemote(page: Int) -> Promise<([Course], Meta)> {
+        self.fetchRemote(page: page, filterQuery: nil)
+    }
 }
 
 final class CourseListProvider: CourseListProviderProtocol {
@@ -46,9 +52,9 @@ final class CourseListProvider: CourseListProviderProtocol {
         }
     }
 
-    func fetchRemote(page: Int) -> Promise<([Course], Meta)> {
+    func fetchRemote(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
-            self.networkService.fetch(page: page).then {
+            self.networkService.fetch(page: page, filterQuery: filterQuery).then {
                 (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
                 let progressesIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }

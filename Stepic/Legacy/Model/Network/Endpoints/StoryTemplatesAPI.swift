@@ -23,7 +23,8 @@ final class StoryTemplatesAPI: APIEndpoint {
             var params: Parameters = [
                 "page": page,
                 "language": language.languageString,
-                "max_version": maxVersion
+                "max_version": maxVersion,
+                "platform": "mobile,ios"
             ]
 
             if let isPublished = isPublished {

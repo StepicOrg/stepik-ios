@@ -84,4 +84,10 @@ enum FullscreenCourseList {
             let state: PlaceholderState
         }
     }
+
+    enum HidePlaceholder {
+        struct Response {}
+
+        struct ViewModel {}
+    }
 }

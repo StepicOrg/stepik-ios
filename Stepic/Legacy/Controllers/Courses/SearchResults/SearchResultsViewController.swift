@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchResultsModuleInputProtocol: AnyObject {
     func queryChanged(to query: String)
+    func filterQueryChanged(to query: CourseListFilterQuery?)
     func search(query: String)
     func searchStarted()
     func searchCancelled()

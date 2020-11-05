@@ -55,11 +55,45 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
         view.delegate = self
         self.view = view
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.updateState(newState: self.state)
+    }
+
+    // MARK: Private API
+
+    private func updateState(newState: CourseInfoTabSyllabus.ViewControllerState) {
+        defer {
+            self.state = newState
+        }
+
+        if case .loading = newState {
+            self.courseInfoTabSyllabusView?.showLoading()
+            return
+        }
+
+        if case .loading = self.state {
+            self.courseInfoTabSyllabusView?.hideLoading()
+        }
+
+        switch newState {
+        case .loading:
+            break
+        case .result(let data):
+            self.syllabusTableDelegate.update(viewModels: data)
+            self.courseInfoTabSyllabusView?.updateTableViewData(delegate: self.syllabusTableDelegate)
+        }
+    }
 }
 
 // MARK: - CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol -
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol {
+    func displaySyllabus(viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel) {
         guard let courseInfoTabSyllabusView = self.courseInfoTabSyllabusView else {
             return
@@ -79,16 +113,6 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         }
 
         self.courseInfoTabSyllabusView?.configure(headerViewModel: viewModel.data)
-    }
-
-    func displaySyllabus(viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel) {
-        switch viewModel.state {
-        case .loading:
-            break
-        case .result(let data):
-            self.syllabusTableDelegate.update(viewModels: data)
-            self.courseInfoTabSyllabusView?.updateTableViewData(delegate: self.syllabusTableDelegate)
-        }
     }
 
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel) {
@@ -159,27 +183,19 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerDelegate {
     func sectionWillDisplay(_ section: CourseInfoTabSyllabusSectionViewModel) {
-        self.interactor.doSectionFetch(
-            request: .init(uniqueIdentifier: section.uniqueIdentifier)
-        )
+        self.interactor.doSectionFetch(request: .init(uniqueIdentifier: section.uniqueIdentifier))
     }
 
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusUnitViewModel) {
-        self.interactor.doDownloadButtonAction(
-            request: .init(type: .unit(uniqueIdentifier: cell.uniqueIdentifier))
-        )
+        self.interactor.doDownloadButtonAction(request: .init(type: .unit(uniqueIdentifier: cell.uniqueIdentifier)))
     }
 
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel) {
-        self.interactor.doDownloadButtonAction(
-            request: .init(type: .section(uniqueIdentifier: cell.uniqueIdentifier))
-        )
+        self.interactor.doDownloadButtonAction(request: .init(type: .section(uniqueIdentifier: cell.uniqueIdentifier)))
     }
 
     func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel) {
-        self.interactor.doUnitSelection(
-            request: .init(uniqueIdentifier: cell.uniqueIdentifier)
-        )
+        self.interactor.doUnitSelection(request: .init(uniqueIdentifier: cell.uniqueIdentifier))
     }
 }
 
@@ -191,8 +207,6 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate
     }
 
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
-        self.interactor.doDownloadButtonAction(
-            request: .init(type: .all)
-        )
+        self.interactor.doDownloadButtonAction(request: .init(type: .all))
     }
 }

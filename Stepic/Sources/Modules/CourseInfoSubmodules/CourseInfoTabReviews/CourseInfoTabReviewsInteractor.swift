@@ -61,10 +61,17 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             print("course info tab reviews interactor: start fetching reviews, isOnline = \(isOnline)")
 
             strongSelf.fetchReviewsInAppropriateMode(course: course, isOnline: isOnline).done { response in
+                let isCacheEmpty = !strongSelf.didLoadFromCache && response.reviews.isEmpty
+
                 strongSelf.paginationState = PaginationState(page: 1, hasNext: response.hasNextPage)
                 DispatchQueue.main.async {
                     print("course info tab reviews interactor: finish fetching reviews, isOnline = \(isOnline)")
-                    strongSelf.presenter.presentCourseReviews(response: response)
+
+                    if isCacheEmpty {
+                        // Wait for remote fetch result.
+                    } else {
+                        strongSelf.presenter.presentCourseReviews(response: response)
+                    }
                 }
 
                 if !strongSelf.didLoadFromCache {

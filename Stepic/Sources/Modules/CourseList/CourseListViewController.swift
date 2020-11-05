@@ -226,14 +226,14 @@ final class VerticalCourseListViewController: CourseListViewController {
             delegate: self.listDelegate,
             dataSource: self.listDataSource,
             viewDelegate: self,
-            isHeaderViewHidden: self.presentationDescription == nil
+            isHeaderViewHidden: self.presentationDescription?.headerViewDescription == nil
         )
 
-        if let presentationDescription = self.presentationDescription {
+        if let headerViewPresentationDescription = self.presentationDescription?.headerViewDescription {
             let headerView = GradientCoursesPlaceholderViewFactory().makeFullscreenView(
-                title: presentationDescription.title,
-                subtitle: presentationDescription.subtitle,
-                color: presentationDescription.color
+                title: headerViewPresentationDescription.title,
+                subtitle: headerViewPresentationDescription.subtitle,
+                color: headerViewPresentationDescription.color
             )
             view.headerView = headerView
         }

@@ -148,7 +148,13 @@ final class HomeViewController: BaseExploreViewController {
     private func displayFullscreenPopularCourseList(contentLanguage: ContentLanguage) {
         self.interactor.doFullscreenCourseListPresentation(
             request: .init(
-                presentationDescription: nil,
+                presentationDescription: .init(
+                    courseListFilterDescription: .init(
+                        availableFilters: .all,
+                        prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
+                        defaultCourseLanguage: .init(contentLanguage: contentLanguage)
+                    )
+                ),
                 courseListType: PopularCourseListType(language: contentLanguage)
             )
         )

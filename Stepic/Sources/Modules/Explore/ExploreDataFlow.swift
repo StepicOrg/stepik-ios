@@ -89,6 +89,35 @@ enum Explore {
         struct ViewModel {}
     }
 
+    /// Present course list filter
+    enum CourseListFilterPresentation {
+        struct Request {}
+
+        struct Response {
+            let currentFilters: [CourseListFilter.Filter]
+            let defaultCourseLanguage: CourseListFilter.Filter.CourseLanguage
+        }
+
+        struct ViewModel {
+            let presentationDescription: CourseListFilter.PresentationDescription
+        }
+    }
+
+    /// Update search results CourseListFilterQuery
+    enum SearchResultsCourseListFiltersUpdate {
+        struct Request {
+            let filters: [CourseListFilter.Filter]
+        }
+
+        struct Response {
+            let filters: [CourseListFilter.Filter]
+        }
+
+        struct ViewModel {
+            let filters: [CourseListFilter.Filter]
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
