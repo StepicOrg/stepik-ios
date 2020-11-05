@@ -188,7 +188,9 @@ final class SettingsTableView: UIView {
                     checkBoxGroup.setCheckBoxCellSelected(cell)
                 }
 
-                checkBoxGroup.mustHaveSelection = checkBoxModel.checkBoxGroupMustHaveSelection
+                DispatchQueue.main.async {
+                    checkBoxGroup.mustHaveSelection = checkBoxModel.checkBoxGroupMustHaveSelection
+                }
             }
         }
     }
