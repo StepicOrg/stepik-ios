@@ -194,7 +194,16 @@ final class ExploreViewController: BaseExploreViewController {
             )
         containerView.onShowAllButtonClick = { [weak self] in
             self?.interactor.doFullscreenCourseListPresentation(
-                request: .init(presentationDescription: nil, courseListType: courseListType)
+                request: .init(
+                    presentationDescription: .init(
+                        courseListFilterDescription: .init(
+                            availableFilters: .all,
+                            prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
+                            defaultCourseLanguage: .init(contentLanguage: contentLanguage)
+                        )
+                    ),
+                    courseListType: courseListType
+                )
             )
         }
         self.registerSubmodule(
