@@ -60,12 +60,21 @@ final class CourseListFilterViewController: UIViewController {
     private func setup() {
         self.title = NSLocalizedString("CourseListFilterTitle", comment: "")
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("CourseListFilterResetButtonTitle", comment: ""),
             style: .plain,
             target: self,
             action: #selector(self.resetClicked)
         )
+        self.navigationItem.rightBarButtonItem = .stepikCloseBarButtonItem(
+            target: self,
+            action: #selector(self.closeClicked)
+        )
+    }
+
+    @objc
+    private func closeClicked() {
+        self.dismiss(animated: true)
     }
 
     @objc
