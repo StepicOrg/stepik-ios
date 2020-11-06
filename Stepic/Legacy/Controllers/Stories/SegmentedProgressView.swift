@@ -326,8 +326,9 @@ private class SegmentAnimatedProgressView: UIView {
         let newTimer = Timer(
             timeInterval: self.progressTimerTimeInterval,
             repeats: true,
-            block: { [weak self] _ in
+            block: { [weak self] timer in
                 guard let strongSelf = self else {
+                    timer.invalidate()
                     return
                 }
 
