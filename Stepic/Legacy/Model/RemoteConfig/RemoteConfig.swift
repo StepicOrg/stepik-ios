@@ -122,9 +122,13 @@ final class RemoteConfig {
                 return print("RemoteConfig :: Got an error fetching remote values \(String(describing: error))")
             }
 
-            FirebaseRemoteConfig.RemoteConfig.remoteConfig().activate(completionHandler: { error in
-                print("RemoteConfig :: failed activate firebase remote config with error: \(error ??? "nil")")
-            })
+            FirebaseRemoteConfig.RemoteConfig.remoteConfig().activate { changed, error in
+                if let error = error {
+                    print("RemoteConfig :: failed activate remote config with error: \(error)")
+                } else {
+                    print("RemoteConfig :: activated remote config, changed: \(changed)")
+                }
+            }
 
             self?.fetchComplete = true
             self?.loadingDoneCallback?()
@@ -133,7 +137,8 @@ final class RemoteConfig {
 
     private func activateDebugMode() {
         self.fetchDuration = 0
-        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
+        let debugSettings = RemoteConfigSettings()
+        debugSettings.minimumFetchInterval = 0
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
