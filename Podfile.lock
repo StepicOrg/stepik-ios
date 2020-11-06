@@ -24,16 +24,16 @@ PODS:
   - DeviceKit (4.1.0)
   - DownloadButton (0.1.0)
   - EasyTipView (2.0.4)
-  - FBSDKCoreKit (8.0.0):
-    - FBSDKCoreKit/Basics (= 8.0.0)
-    - FBSDKCoreKit/Core (= 8.0.0)
-  - FBSDKCoreKit/Basics (8.0.0)
-  - FBSDKCoreKit/Core (8.0.0):
+  - FBSDKCoreKit (8.1.0):
+    - FBSDKCoreKit/Basics (= 8.1.0)
+    - FBSDKCoreKit/Core (= 8.1.0)
+  - FBSDKCoreKit/Basics (8.1.0)
+  - FBSDKCoreKit/Core (8.1.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (8.0.0):
-    - FBSDKLoginKit/Login (= 8.0.0)
-  - FBSDKLoginKit/Login (8.0.0):
-    - FBSDKCoreKit (~> 8.0.0)
+  - FBSDKLoginKit (8.1.0):
+    - FBSDKLoginKit/Login (= 8.1.0)
+  - FBSDKLoginKit/Login (8.1.0):
+    - FBSDKCoreKit (~> 8.1.0)
   - Firebase/Analytics (6.34.0):
     - Firebase/Core
   - Firebase/Core (6.34.0):
@@ -217,8 +217,8 @@ DEPENDENCIES:
   - DeviceKit (= 4.1.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.0.4)
-  - FBSDKCoreKit (= 8.0.0)
-  - FBSDKLoginKit (= 8.0.0)
+  - FBSDKCoreKit (= 8.1.0)
+  - FBSDKLoginKit (= 8.1.0)
   - Firebase/Analytics (= 6.34.0)
   - Firebase/Core (= 6.34.0)
   - Firebase/Crashlytics (= 6.34.0)
@@ -351,8 +351,8 @@ SPEC CHECKSUMS:
   DeviceKit: aaa4743a15ef1e2021fe654dffa32a3ed15672aa
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
-  FBSDKCoreKit: 9d27fe97a2fa2abe5eeefea8240e837623ab88e0
-  FBSDKLoginKit: 2cbaf5405379731b22f2ebc224f7c30f62378171
+  FBSDKCoreKit: b3ca27e124dae67122d3bb47c8f96800b39986a6
+  FBSDKLoginKit: a3a92ba9380759cd0c1aa8319465fb5f2857c602
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
   FirebaseABTesting: 8a9d8df3acc2b43f4a22014ddf9f601bca6af699
   FirebaseAnalytics: 3bb096873ee0d7fa4b6c70f5e9166b6da413cc7f
@@ -405,6 +405,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
-PODFILE CHECKSUM: 6dab1c1f7aedcfdefae79504b9f675b38741ac4d
+PODFILE CHECKSUM: 5c707f8b162d250e7bf93d05a5d4ee0d76f01a70
 
 COCOAPODS: 1.9.3
