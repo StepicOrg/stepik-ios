@@ -415,6 +415,15 @@
 		2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */; };
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
 		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
+		2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */; };
+		2C1AC2DF255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */; };
+		2C1AC2E7255B249800E6ECA9 /* CatalogBlocksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */; };
+		2C1AC2F6255B2C5500E6ECA9 /* CatalogBlockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */; };
+		2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */; };
+		2C1AC306255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */; };
+		2C1AC30E255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC30D255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift */; };
+		2C1AC313255B466100E6ECA9 /* CatalogBlocksNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */; };
+		2C1AC31E255B476A00E6ECA9 /* CatalogBlocksRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
 		2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429724977EAC009F4C69 /* CoursePurchase.swift */; };
 		2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */; };
@@ -606,6 +615,9 @@
 		2C83E20C2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E20B2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift */; };
 		2C83E215254975B200D0C1F3 /* SettingsRightDetailCheckboxCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E214254975B200D0C1F3 /* SettingsRightDetailCheckboxCellView.swift */; };
 		2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */; };
+		2C85EC0925599AD10059EF97 /* CatalogBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC0825599AD10059EF97 /* CatalogBlock.swift */; };
+		2C85EC0E25599E9C0059EF97 /* CatalogBlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */; };
+		2C85EC162559A57D0059EF97 /* CatalogBlockAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */; };
 		2C87A7A12446502900933CA4 /* UsersPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */; };
 		2C87A7A424465B5900933CA4 /* ProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */; };
 		2C87A7A82446646600933CA4 /* UserActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A72446646600933CA4 /* UserActivityEntity.swift */; };
@@ -772,6 +784,10 @@
 		2CDC9EFA24E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC9EF924E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift */; };
 		2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE82E1221D5CCB00C41887 /* highlight.js */; };
 		2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */; };
+		2CE0CAC7255A8824009C6574 /* CatalogBlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CAC6255A8824009C6574 /* CatalogBlockTests.swift */; };
+		2CE0CACF255A8CCD009C6574 /* CatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CACE255A8CCD009C6574 /* CatalogBlockContentItem.swift */; };
+		2CE0CAD8255A8D36009C6574 /* CatalogBlockContentItemParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */; };
+		2CE0CADD255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */; };
 		2CE42D4623CCC6500073F774 /* VideoRateStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */; };
@@ -821,6 +837,7 @@
 		2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */; };
 		2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		2CFE6A84255AA6DE00A43952 /* CatalogBlockContentItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE6A83255AA6DE00A43952 /* CatalogBlockContentItemTests.swift */; };
 		2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */; };
 		2CFED66E252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFED66D252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
@@ -1858,6 +1875,16 @@
 		2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingServiceFactory.swift; sourceTree = "<group>"; };
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
 		2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARKit-Badge-Glyph-Only.png"; sourceTree = "<group>"; };
+		2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCourseListsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
+		2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
+		2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksAPI.swift; sourceTree = "<group>"; };
+		2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_catalog_blocks_v67.xcdatamodel; sourceTree = "<group>"; };
+		2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockEntity.swift; sourceTree = "<group>"; };
+		2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalogBlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockEntityTests.swift; sourceTree = "<group>"; };
+		2C1AC30D255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksPersistenceService.swift; sourceTree = "<group>"; };
+		2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksNetworkService.swift; sourceTree = "<group>"; };
+		2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksRepository.swift; sourceTree = "<group>"; };
 		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
 		2C1E429724977EAC009F4C69 /* CoursePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchase.swift; sourceTree = "<group>"; };
 		2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesAPI.swift; sourceTree = "<group>"; };
@@ -2073,6 +2100,9 @@
 		2C83E214254975B200D0C1F3 /* SettingsRightDetailCheckboxCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailCheckboxCellView.swift; sourceTree = "<group>"; };
 		2C84D42B24AFFCD300A77EF1 /* Model_new_profile_v53.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_v53.xcdatamodel; sourceTree = "<group>"; };
 		2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesNetworkService.swift; sourceTree = "<group>"; };
+		2C85EC0825599AD10059EF97 /* CatalogBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlock.swift; sourceTree = "<group>"; };
+		2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockKind.swift; sourceTree = "<group>"; };
+		2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockAppearance.swift; sourceTree = "<group>"; };
 		2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPersistenceService.swift; sourceTree = "<group>"; };
 		2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C87A7A52446635E00933CA4 /* Model_user_activity_v50.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_activity_v50.xcdatamodel; sourceTree = "<group>"; };
@@ -2247,6 +2277,10 @@
 		2CDC9EFB24E516F800916BAE /* Model_course_preview_lesson_id_v63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_preview_lesson_id_v63.xcdatamodel; sourceTree = "<group>"; };
 		2CDE82E1221D5CCB00C41887 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsCenterDelegate.swift; sourceTree = "<group>"; };
+		2CE0CAC6255A8824009C6574 /* CatalogBlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockTests.swift; sourceTree = "<group>"; };
+		2CE0CACE255A8CCD009C6574 /* CatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentItem.swift; sourceTree = "<group>"; };
+		2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentItemParser.swift; sourceTree = "<group>"; };
+		2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCourseListsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQualityStorageManager.swift; sourceTree = "<group>"; };
 		2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRateStorageManager.swift; sourceTree = "<group>"; };
@@ -2300,6 +2334,7 @@
 		2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsPersistenceService.swift; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		2CFE6A83255AA6DE00A43952 /* CatalogBlockContentItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentItemTests.swift; sourceTree = "<group>"; };
 		2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Stepik.swift"; sourceTree = "<group>"; };
 		2CFED66D252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsTableViewDataSourceDelegate.swift; sourceTree = "<group>"; };
 		2FA5E1D17883366854D97EDB /* NewProfileCreatedCoursesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesPresenter.swift; sourceTree = "<group>"; };
@@ -3224,6 +3259,15 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		2C1AC2F4255B2C3F00E6ECA9 /* CatalogBlock */ = {
+			isa = PBXGroup;
+			children = (
+				2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */,
+				2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */,
+			);
+			path = CatalogBlock;
+			sourceTree = "<group>";
+		};
 		2C1E429E2497BDC0009F4C69 /* CoursePurchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -3238,6 +3282,7 @@
 			children = (
 				2C7545A924C01F06004F9074 /* AchievementsRepository.swift */,
 				2C26BF09240810A3000EE23C /* AttemptsRepository.swift */,
+				2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */,
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
 			path = Repository;
@@ -3363,6 +3408,9 @@
 		2C5967EC23E7828E00072800 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2CFE6A83255AA6DE00A43952 /* CatalogBlockContentItemTests.swift */,
+				2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */,
+				2CE0CAC6255A8824009C6574 /* CatalogBlockTests.swift */,
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
 				2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */,
@@ -3535,6 +3583,17 @@
 				2C83E20B2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift */,
 			);
 			path = Checkbox;
+			sourceTree = "<group>";
+		};
+		2C85EC04255999C80059EF97 /* CatalogBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				2C85EC0825599AD10059EF97 /* CatalogBlock.swift */,
+				2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */,
+				2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */,
+				2CE0CAD3255A8D1E009C6574 /* Content */,
+			);
+			path = CatalogBlocks;
 			sourceTree = "<group>";
 		};
 		2C87A7A62446644700933CA4 /* UserActivity */ = {
@@ -4793,6 +4852,18 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		2CE0CAD3255A8D1E009C6574 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */,
+				2CE0CACE255A8CCD009C6574 /* CatalogBlockContentItem.swift */,
+				2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */,
+				2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */,
+				2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
 		2CE61D81241295F500DA2CBA /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -5147,6 +5218,7 @@
 				08E6BB6A1DC8EB45006622EC /* UserActivity.swift */,
 				2CFF900B242A248800FD7311 /* Alerts */,
 				2CFF900E242A24C100FD7311 /* AttemptsSumbissions */,
+				2C85EC04255999C80059EF97 /* CatalogBlocks */,
 				2CFF9012242A250C00FD7311 /* Constants */,
 				2CFF9015242A255000FD7311 /* Entities */,
 				2CFF9030242A26F800FD7311 /* ExecutionQueue */,
@@ -5286,6 +5358,7 @@
 				2CFF9016242A255D00FD7311 /* Assignment */,
 				2C04BA2E24058A4B00D74D4B /* Attempt */,
 				2CFF9017242A257900FD7311 /* Block */,
+				2C1AC2F4255B2C3F00E6ECA9 /* CatalogBlock */,
 				2CFF9018242A258800FD7311 /* Certificate */,
 				2CFF9019242A259500FD7311 /* CodeLimit */,
 				2CFF901A242A25A300FD7311 /* CodeSample */,
@@ -5691,6 +5764,7 @@
 				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
 				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
 				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
+				2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */,
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
@@ -5899,6 +5973,7 @@
 				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
 				2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */,
 				2CE9BF49248D09FC004F6659 /* BlocksPersistenceService.swift */,
+				2C1AC30D255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift */,
 				62E983871207544AF21C27C6 /* CertificatesPersistenceService.swift */,
 				2CE9BF47248D0950004F6659 /* CodeLimitsPersistenceService.swift */,
 				2CE9BF45248D08A8004F6659 /* CodeSamplesPersistenceService.swift */,
@@ -6222,6 +6297,7 @@
 				2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
+				2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */,
 				2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
@@ -8017,7 +8093,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
+				2CE0CAC7255A8824009C6574 /* CatalogBlockTests.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
+				2CFE6A84255AA6DE00A43952 /* CatalogBlockContentItemTests.swift in Sources */,
 				2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */,
 				2CF24F642390040F002DBD0F /* BlockTypeSpec.swift in Sources */,
 				2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */,
@@ -8036,6 +8114,7 @@
 				2CCDD20124DBB61100A48EE0 /* ProtectedTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
 				62E98CA7BEE2A5954DD4FB4C /* DeepLinkRouteTests.swift in Sources */,
+				2C1AC306255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift in Sources */,
 				2C45C6EF254160A100AF24BF /* HTMLExtractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8051,6 +8130,7 @@
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				2C203B2D253F0FC0000683E6 /* TableReply.swift in Sources */,
 				08E43EAB214C307500E3CB50 /* SourcelessRouter.swift in Sources */,
+				2C1AC30E255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift in Sources */,
 				08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */,
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
@@ -8098,6 +8178,7 @@
 				2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */,
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				2C1AC2F6255B2C5500E6ECA9 /* CatalogBlockEntity.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
@@ -8106,6 +8187,7 @@
 				86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */,
 				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
 				2CA9D9882011FB4E007AA743 /* LeaderboardTableViewCell.swift in Sources */,
+				2CE0CAD8255A8D36009C6574 /* CatalogBlockContentItemParser.swift in Sources */,
 				2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
@@ -8374,6 +8456,7 @@
 				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
+				2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
@@ -8395,8 +8478,10 @@
 				2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */,
 				2C9BBE4124903AB500FFED49 /* UserCoursesObserver.swift in Sources */,
 				2CF4661D25402227002415AF /* TableQuizSelectColumnsView.swift in Sources */,
+				2C1AC2E7255B249800E6ECA9 /* CatalogBlocksAPI.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
+				2C1AC31E255B476A00E6ECA9 /* CatalogBlocksRepository.swift in Sources */,
 				2C2972052147F5FD001502BD /* CourseTag.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepikVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDataset.swift in Sources */,
@@ -8427,6 +8512,7 @@
 				2C48D601228F0C6000739477 /* ContentProcessor.swift in Sources */,
 				2C97E00B215E47F3005684A1 /* SearchQueriesPersistentManager.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
+				2CE0CADD255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift in Sources */,
 				2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C04BA4A24072EA600D74D4B /* ChoiceSubmissionFeedback.swift in Sources */,
 				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
@@ -8473,6 +8559,7 @@
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				08E43E9D214C27B200E3CB50 /* ModalRouterSourceProtocol.swift in Sources */,
+				2CE0CACF255A8CCD009C6574 /* CatalogBlockContentItem.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
 				2CEBEBF2242F8E9900DBFDF0 /* StepikRequestInterceptor.swift in Sources */,
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
@@ -8518,6 +8605,7 @@
 				08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */,
 				2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */,
 				2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */,
+				2C85EC0E25599E9C0059EF97 /* CatalogBlockKind.swift in Sources */,
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				08E43EA7214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
@@ -8856,8 +8944,10 @@
 				62E98D14FE058C5D8D39D63F /* CourseWidgetContinueLearningButton.swift in Sources */,
 				62E98833651A7E6B4D42D01B /* CourseWidgetCoverView.swift in Sources */,
 				2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */,
+				2C85EC162559A57D0059EF97 /* CatalogBlockAppearance.swift in Sources */,
 				62E989945806203AB464B5EF /* CourseWidgetLabel.swift in Sources */,
 				62E98E6F295E2C4799957DFB /* CourseWidgetStatsItemView.swift in Sources */,
+				2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */,
 				62E982348800CA9D75D78064 /* CourseWidgetStatsView.swift in Sources */,
 				62E9873C5D78AED0DDF82C0A /* CourseWidgetView.swift in Sources */,
 				2C5418CC24A2903700B2DCE2 /* StepikMetricsNetworkService.swift in Sources */,
@@ -8961,6 +9051,7 @@
 				62E9888B20E524751AEB87AC /* TagViewModel.swift in Sources */,
 				62E98E17CA922F1D87F6DA96 /* FullscreenCourseListAssembly.swift in Sources */,
 				62E98AF6A9BDB9A4102F56F3 /* FullscreenCourseListDataFlow.swift in Sources */,
+				2C1AC2DF255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift in Sources */,
 				62E9881A9FF61D408A09160F /* FullscreenCourseListInteractor.swift in Sources */,
 				2C11C9F224EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				62E98C9B39B425AB8FC29110 /* FullscreenCourseListPresenter.swift in Sources */,
@@ -9013,6 +9104,7 @@
 				62E98F8F4EBA0B11BB101A1C /* CodeQuizProvider.swift in Sources */,
 				62E988C4572F2A9C97348C83 /* CodeQuizView.swift in Sources */,
 				62E98707AF0BEE9807661F4A /* CodeQuizViewController.swift in Sources */,
+				2C85EC0925599AD10059EF97 /* CatalogBlock.swift in Sources */,
 				2C619A7D24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift in Sources */,
 				62E98866B15E76B9FE106E1B /* CodeQuizViewModel.swift in Sources */,
 				2CB510EE248C226A00DB8344 /* VideosPersistenceService.swift in Sources */,
@@ -9036,6 +9128,7 @@
 				62E983AF85B0A9D1D21797DD /* CodeQuizFullscreenDataFlow.swift in Sources */,
 				62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */,
 				62E98AF7A4ADB3C60BCD2046 /* CodeQuizFullscreenOutputProtocol.swift in Sources */,
+				2C1AC313255B466100E6ECA9 /* CatalogBlocksNetworkService.swift in Sources */,
 				2CB3563E2476CB7B00E59A03 /* MagicLink.swift in Sources */,
 				62E9833E9BFB4229BFEB4DD5 /* CodeQuizFullscreenPresenter.swift in Sources */,
 				62E98042B4F232FCD9788187 /* CodeQuizFullscreenProvider.swift in Sources */,
@@ -10280,6 +10373,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */,
 				2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */,
 				2C36E4772501F28E00D63C41 /* Model_user_remove_level_v65.xcdatamodel */,
 				2C00396424E61B3000EBC7FF /* Model_assignment_progress_id_v64.xcdatamodel */,
@@ -10348,7 +10442,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */;
+			currentVersion = 2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
