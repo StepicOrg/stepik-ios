@@ -1,0 +1,27 @@
+import Alamofire
+import Foundation
+import PromiseKit
+import SwiftyJSON
+
+final class CatalogBlocksAPI: APIEndpoint {
+    override var name: String { "catalog-blocks" }
+
+    func retrieve(language: ContentLanguage, page: Int = 1) -> Promise<([CatalogBlock], Meta)> {
+        self.retrieve(language: language.languageString, page: page)
+    }
+
+    func retrieve(language: String, page: Int = 1) -> Promise<([CatalogBlock], Meta)> {
+        let params: Parameters = [
+            "platform": "web",
+            "language": language,
+            "page": page
+        ]
+
+        return self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: params,
+            withManager: self.manager
+        )
+    }
+}
