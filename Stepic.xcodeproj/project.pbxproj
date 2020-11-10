@@ -421,6 +421,9 @@
 		2C1AC2F6255B2C5500E6ECA9 /* CatalogBlockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */; };
 		2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */; };
 		2C1AC306255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */; };
+		2C1AC30E255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC30D255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift */; };
+		2C1AC313255B466100E6ECA9 /* CatalogBlocksNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */; };
+		2C1AC31E255B476A00E6ECA9 /* CatalogBlocksRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
 		2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429724977EAC009F4C69 /* CoursePurchase.swift */; };
 		2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */; };
@@ -1879,6 +1882,9 @@
 		2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockEntity.swift; sourceTree = "<group>"; };
 		2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalogBlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockEntityTests.swift; sourceTree = "<group>"; };
+		2C1AC30D255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksPersistenceService.swift; sourceTree = "<group>"; };
+		2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksNetworkService.swift; sourceTree = "<group>"; };
+		2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksRepository.swift; sourceTree = "<group>"; };
 		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
 		2C1E429724977EAC009F4C69 /* CoursePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchase.swift; sourceTree = "<group>"; };
 		2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesAPI.swift; sourceTree = "<group>"; };
@@ -3276,6 +3282,7 @@
 			children = (
 				2C7545A924C01F06004F9074 /* AchievementsRepository.swift */,
 				2C26BF09240810A3000EE23C /* AttemptsRepository.swift */,
+				2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */,
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
 			path = Repository;
@@ -5966,6 +5973,7 @@
 				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
 				2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */,
 				2CE9BF49248D09FC004F6659 /* BlocksPersistenceService.swift */,
+				2C1AC30D255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift */,
 				62E983871207544AF21C27C6 /* CertificatesPersistenceService.swift */,
 				2CE9BF47248D0950004F6659 /* CodeLimitsPersistenceService.swift */,
 				2CE9BF45248D08A8004F6659 /* CodeSamplesPersistenceService.swift */,
@@ -6289,6 +6297,7 @@
 				2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
+				2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */,
 				2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
@@ -8121,6 +8130,7 @@
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				2C203B2D253F0FC0000683E6 /* TableReply.swift in Sources */,
 				08E43EAB214C307500E3CB50 /* SourcelessRouter.swift in Sources */,
+				2C1AC30E255B3D5900E6ECA9 /* CatalogBlocksPersistenceService.swift in Sources */,
 				08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */,
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
@@ -8471,6 +8481,7 @@
 				2C1AC2E7255B249800E6ECA9 /* CatalogBlocksAPI.swift in Sources */,
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
+				2C1AC31E255B476A00E6ECA9 /* CatalogBlocksRepository.swift in Sources */,
 				2C2972052147F5FD001502BD /* CourseTag.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepikVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDataset.swift in Sources */,
@@ -9117,6 +9128,7 @@
 				62E983AF85B0A9D1D21797DD /* CodeQuizFullscreenDataFlow.swift in Sources */,
 				62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */,
 				62E98AF7A4ADB3C60BCD2046 /* CodeQuizFullscreenOutputProtocol.swift in Sources */,
+				2C1AC313255B466100E6ECA9 /* CatalogBlocksNetworkService.swift in Sources */,
 				2CB3563E2476CB7B00E59A03 /* MagicLink.swift in Sources */,
 				62E9833E9BFB4229BFEB4DD5 /* CodeQuizFullscreenPresenter.swift in Sources */,
 				62E98042B4F232FCD9788187 /* CodeQuizFullscreenProvider.swift in Sources */,
