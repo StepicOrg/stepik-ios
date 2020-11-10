@@ -418,6 +418,9 @@
 		2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */; };
 		2C1AC2DF255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */; };
 		2C1AC2E7255B249800E6ECA9 /* CatalogBlocksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */; };
+		2C1AC2F6255B2C5500E6ECA9 /* CatalogBlockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */; };
+		2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */; };
+		2C1AC306255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
 		2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429724977EAC009F4C69 /* CoursePurchase.swift */; };
 		2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */; };
@@ -1872,6 +1875,10 @@
 		2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCourseListsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
 		2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
 		2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksAPI.swift; sourceTree = "<group>"; };
+		2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_catalog_blocks_v67.xcdatamodel; sourceTree = "<group>"; };
+		2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockEntity.swift; sourceTree = "<group>"; };
+		2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalogBlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockEntityTests.swift; sourceTree = "<group>"; };
 		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
 		2C1E429724977EAC009F4C69 /* CoursePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchase.swift; sourceTree = "<group>"; };
 		2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesAPI.swift; sourceTree = "<group>"; };
@@ -3246,6 +3253,15 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		2C1AC2F4255B2C3F00E6ECA9 /* CatalogBlock */ = {
+			isa = PBXGroup;
+			children = (
+				2C1AC2F5255B2C5500E6ECA9 /* CatalogBlockEntity.swift */,
+				2C1AC2FD255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift */,
+			);
+			path = CatalogBlock;
+			sourceTree = "<group>";
+		};
 		2C1E429E2497BDC0009F4C69 /* CoursePurchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -3386,6 +3402,7 @@
 			isa = PBXGroup;
 			children = (
 				2CFE6A83255AA6DE00A43952 /* CatalogBlockContentItemTests.swift */,
+				2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */,
 				2CE0CAC6255A8824009C6574 /* CatalogBlockTests.swift */,
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
@@ -5334,6 +5351,7 @@
 				2CFF9016242A255D00FD7311 /* Assignment */,
 				2C04BA2E24058A4B00D74D4B /* Attempt */,
 				2CFF9017242A257900FD7311 /* Block */,
+				2C1AC2F4255B2C3F00E6ECA9 /* CatalogBlock */,
 				2CFF9018242A258800FD7311 /* Certificate */,
 				2CFF9019242A259500FD7311 /* CodeLimit */,
 				2CFF901A242A25A300FD7311 /* CodeSample */,
@@ -8087,6 +8105,7 @@
 				2CCDD20124DBB61100A48EE0 /* ProtectedTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
 				62E98CA7BEE2A5954DD4FB4C /* DeepLinkRouteTests.swift in Sources */,
+				2C1AC306255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift in Sources */,
 				2C45C6EF254160A100AF24BF /* HTMLExtractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8149,6 +8168,7 @@
 				2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */,
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				2C1AC2F6255B2C5500E6ECA9 /* CatalogBlockEntity.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
@@ -8426,6 +8446,7 @@
 				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
+				2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
@@ -10340,6 +10361,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */,
 				2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */,
 				2C36E4772501F28E00D63C41 /* Model_user_remove_level_v65.xcdatamodel */,
 				2C00396424E61B3000EBC7FF /* Model_assignment_progress_id_v64.xcdatamodel */,
@@ -10408,7 +10430,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */;
+			currentVersion = 2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

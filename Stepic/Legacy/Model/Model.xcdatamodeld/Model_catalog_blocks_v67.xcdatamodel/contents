@@ -27,6 +27,17 @@
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedBlock" inverseEntity="Step" syncable="YES"/>
         <relationship name="managedVideo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Video" inverseName="managedBlock" inverseEntity="Video" syncable="YES"/>
     </entity>
+    <entity name="CatalogBlockEntity" representedClassName=".CatalogBlockEntity" syncable="YES">
+        <attribute name="managedAppearance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedContent" optional="YES" attributeType="Transformable" customClassName="." syncable="YES"/>
+        <attribute name="managedDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedIsTitleVisible" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedKind" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedLanguage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Certificate" representedClassName=".Certificate" syncable="YES">
         <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedGrade" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -416,5 +427,6 @@
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="178"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
+        <element name="CatalogBlockEntity" positionX="-450" positionY="-234" width="128" height="178"/>
     </elements>
 </model>

@@ -33,6 +33,28 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible {
         """
     }
 
+    init(
+        id: Int,
+        position: Int,
+        title: String,
+        language: String,
+        descriptionString: String,
+        kindString: String,
+        appearanceString: String,
+        isTitleVisible: Bool,
+        content: [CatalogBlockContentItem]
+    ) {
+        self.id = id
+        self.position = position
+        self.title = title
+        self.language = language
+        self.descriptionString = descriptionString
+        self.kindString = kindString
+        self.appearanceString = appearanceString
+        self.isTitleVisible = isTitleVisible
+        self.content = content
+    }
+
     init(json: JSON) {
         self.update(json: json)
     }
