@@ -7,12 +7,12 @@ use_frameworks!
 project 'Stepic', 'Production Debug' => :debug, 'Production Release' => :release, 'Release Debug' => :debug, 'Release Release' => :release, 'Develop Debug' => :debug, 'Develop Release' => :release
 
 def shared_pods
-    pod 'Alamofire', '5.2.2'
-    pod 'Atributika', '4.9.9'
+    pod 'Alamofire', '5.4.0'
+    pod 'Atributika', '4.9.10'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.9.2'
+    pod 'SDWebImage', '5.9.4'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-    pod 'DeviceKit', '4.1.0'
+    pod 'DeviceKit', '4.2.1'
     pod 'PromiseKit', '6.13.1'
     pod 'SwiftLint', '0.40.3'
     pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
@@ -29,11 +29,11 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.34.0'
-    pod 'Firebase/Messaging', '6.34.0'
-    pod 'Firebase/Analytics', '6.34.0'
-    pod 'Firebase/Crashlytics', '6.34.0'
-    pod 'Firebase/RemoteConfig', '6.34.0'
+    pod 'Firebase/Core', '7.0.0'
+    pod 'Firebase/Messaging', '7.0.0'
+    pod 'Firebase/Analytics', '7.0.0'
+    pod 'Firebase/Crashlytics', '7.0.0'
+    pod 'Firebase/RemoteConfig', '7.0.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.11.1'
     pod 'Amplitude-iOS', '4.9.3'
@@ -50,8 +50,8 @@ def all_pods
     
     # Social SDKs
     pod 'VK-ios-sdk', '1.5.1'
-    pod 'FBSDKCoreKit', '8.0.0'
-    pod 'FBSDKLoginKit', '8.0.0'
+    pod 'FBSDKCoreKit', '8.1.0'
+    pod 'FBSDKLoginKit', '8.1.0'
     pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
@@ -64,7 +64,7 @@ def all_pods
     pod 'Koloda', '5.0'
     pod 'Charts', '3.6.0'
     pod 'EasyTipView', '2.0.4'
-    pod 'ActionSheetPicker-3.0', '2.6.1'
+    pod 'ActionSheetPicker-3.0', '2.7.1'
     pod 'Nuke', '9.1.2'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
