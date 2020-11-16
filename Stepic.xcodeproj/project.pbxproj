@@ -587,6 +587,7 @@
 		2C73719224EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73719124EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift */; };
 		2C73719424EBFF9100ED24C3 /* FillBlanksInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73719324EBFF9100ED24C3 /* FillBlanksInputCollectionViewCell.swift */; };
 		2C73719624EBFFA700ED24C3 /* FillBlanksSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73719524EBFFA700ED24C3 /* FillBlanksSelectCollectionViewCell.swift */; };
+		2C73B0EB25628FE600EA217D /* NewExploreBlockHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B0EA25628FE600EA217D /* NewExploreBlockHeaderView.swift */; };
 		2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */; };
 		2C73E24624D029F900340052 /* NewProfileSocialProfilesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */; };
 		2C746642245613E900BB0800 /* UserCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C746641245613E900BB0800 /* UserCoursesNetworkService.swift */; };
@@ -2070,6 +2071,7 @@
 		2C73719124EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C73719324EBFF9100ED24C3 /* FillBlanksInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C73719524EBFFA700ED24C3 /* FillBlanksSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksSelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C73B0EA25628FE600EA217D /* NewExploreBlockHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExploreBlockHeaderView.swift; sourceTree = "<group>"; };
 		2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewModel.swift; sourceTree = "<group>"; };
 		2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesItemView.swift; sourceTree = "<group>"; };
 		2C7466402456065F00BB0800 /* Model_user_courses_actions_v51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_actions_v51.xcdatamodel; sourceTree = "<group>"; };
@@ -3556,6 +3558,15 @@
 				2C73719124EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		2C73B0E625628FD300EA217D /* ExploreBlockHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				62E98AA14C7255A86152B53B /* ExploreBlockHeaderView.swift */,
+				2C73B0EA25628FE600EA217D /* NewExploreBlockHeaderView.swift */,
+			);
+			path = ExploreBlockHeaderView;
 			sourceTree = "<group>";
 		};
 		2C73E24224D029BB00340052 /* Views */ = {
@@ -7238,10 +7249,10 @@
 			isa = PBXGroup;
 			children = (
 				62E984A1DC4A18EBC5E68559 /* CourseListContainerViewFactory.swift */,
-				62E98AA14C7255A86152B53B /* ExploreBlockHeaderView.swift */,
 				62E9892AAAD4FAA927DCFC57 /* ExploreBlockPlaceholderView.swift */,
-				62E98664A22248D073D6BAE2 /* ExploreStoriesContainerView.swift */,
 				62E98101487588BB70A5C1A7 /* ExploreSearchBar.swift */,
+				62E98664A22248D073D6BAE2 /* ExploreStoriesContainerView.swift */,
+				2C73B0E625628FD300EA217D /* ExploreBlockHeaderView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8901,6 +8912,7 @@
 				62E98573951C2334AD8C7A63 /* CourseInfoTabSyllabusOutputProtocol.swift in Sources */,
 				62E98FB9AFF029A44C3A1AAE /* CourseInfoTabSyllabusProvider.swift in Sources */,
 				62E9845D5434AFA93E756A34 /* SyllabusDownloadsService.swift in Sources */,
+				2C73B0EB25628FE600EA217D /* NewExploreBlockHeaderView.swift in Sources */,
 				2C2CBF08253EFC8800799344 /* TableQuizViewModel.swift in Sources */,
 				62E98085679CBCEB8A59042A /* SyllabusDownloadsServiceDelegate.swift in Sources */,
 				62E98A140CF77BBA4BD65407 /* CourseInfoTabSyllabusTableViewDataSource.swift in Sources */,
