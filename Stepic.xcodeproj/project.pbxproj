@@ -587,6 +587,7 @@
 		2C73719224EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73719124EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift */; };
 		2C73719424EBFF9100ED24C3 /* FillBlanksInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73719324EBFF9100ED24C3 /* FillBlanksInputCollectionViewCell.swift */; };
 		2C73719624EBFFA700ED24C3 /* FillBlanksSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73719524EBFFA700ED24C3 /* FillBlanksSelectCollectionViewCell.swift */; };
+		2C73B0DF25628EF500EA217D /* NewExploreBlockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B0DE25628EF500EA217D /* NewExploreBlockContainerView.swift */; };
 		2C73B0EB25628FE600EA217D /* NewExploreBlockHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73B0EA25628FE600EA217D /* NewExploreBlockHeaderView.swift */; };
 		2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */; };
 		2C73E24624D029F900340052 /* NewProfileSocialProfilesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */; };
@@ -2071,6 +2072,7 @@
 		2C73719124EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C73719324EBFF9100ED24C3 /* FillBlanksInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C73719524EBFFA700ED24C3 /* FillBlanksSelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksSelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C73B0DE25628EF500EA217D /* NewExploreBlockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExploreBlockContainerView.swift; sourceTree = "<group>"; };
 		2C73B0EA25628FE600EA217D /* NewExploreBlockHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExploreBlockHeaderView.swift; sourceTree = "<group>"; };
 		2C73E24024D0117400340052 /* NewProfileSocialProfilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesViewModel.swift; sourceTree = "<group>"; };
 		2C73E24524D029F900340052 /* NewProfileSocialProfilesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesItemView.swift; sourceTree = "<group>"; };
@@ -3558,6 +3560,15 @@
 				2C73719124EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		2C73B0D725628ECD00EA217D /* ExploreBlockContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				62E984D999BE6BB5F6A64AE1 /* ExploreBlockContainerView.swift */,
+				2C73B0DE25628EF500EA217D /* NewExploreBlockContainerView.swift */,
+			);
+			path = ExploreBlockContainerView;
 			sourceTree = "<group>";
 		};
 		2C73B0E625628FD300EA217D /* ExploreBlockHeaderView */ = {
@@ -6514,7 +6525,6 @@
 				2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */,
 				62E9856B0B8FB44A5492EF67 /* CourseRatingView.swift */,
 				62E983C44270B73F5F3508F2 /* DownloadControlView.swift */,
-				62E984D999BE6BB5F6A64AE1 /* ExploreBlockContainerView.swift */,
 				62E9802EAA7E12A5C9B4F800 /* HighlightFakeButton.swift */,
 				62E9869C9474DB9208F1E5FC /* ImageButton.swift */,
 				62E98CA36176671DDF744499 /* PaddingLabel.swift */,
@@ -6530,6 +6540,7 @@
 				2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */,
 				62E988C4DC97F14EAC09BC41 /* TabSegmentedControlView.swift */,
 				2CFF8FFE242A22DF00FD7311 /* ContinueLastStepView */,
+				2C73B0D725628ECD00EA217D /* ExploreBlockContainerView */,
 				2C11C9F024EFC80400A4647B /* Layouts */,
 				62E989892C62C2BC2B1A3741 /* TabBar */,
 			);
@@ -8938,6 +8949,7 @@
 				62E98DB7B229DDCA1A904C07 /* CourseListNetworkService.swift in Sources */,
 				62E98D98F89C2FFE4BF2884F /* CourseListPersistenceService.swift in Sources */,
 				62E986FC9E7027C70B69D572 /* CourseListPersistenceStorage.swift in Sources */,
+				2C73B0DF25628EF500EA217D /* NewExploreBlockContainerView.swift in Sources */,
 				62E9845BF91D84AC7ECF7B12 /* CourseListProvider.swift in Sources */,
 				2C73719224EBFF6C00ED24C3 /* FillBlanksTextCollectionViewCell.swift in Sources */,
 				62E9894FD7F3558CF9DAAD9A /* CourseListTypes.swift in Sources */,
