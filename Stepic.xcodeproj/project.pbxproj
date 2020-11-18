@@ -566,6 +566,7 @@
 		2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */; };
 		2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */; };
 		2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */; };
+		2C6C6F5125656DC1003B8CF1 /* SystemCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */; };
 		2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */; };
 		2C6D61AE24D93E4500D019F2 /* String+Whitespaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D61AD24D93E4500D019F2 /* String+Whitespaces.swift */; };
 		2C6D61B024D9729D00D019F2 /* NewProfileHeaderViewSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D61AF24D9729D00D019F2 /* NewProfileHeaderViewSkeleton.swift */; };
@@ -2032,6 +2033,7 @@
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
 		2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsNetworkService.swift; sourceTree = "<group>"; };
 		2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsNetworkService.swift; sourceTree = "<group>"; };
+		2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemCloseButton.swift; sourceTree = "<group>"; };
 		2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityCurrentStreakView.swift; sourceTree = "<group>"; };
 		2C6D61AD24D93E4500D019F2 /* String+Whitespaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Whitespaces.swift"; sourceTree = "<group>"; };
 		2C6D61AF24D9729D00D019F2 /* NewProfileHeaderViewSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileHeaderViewSkeleton.swift; sourceTree = "<group>"; };
@@ -6450,6 +6452,7 @@
 				2C8BCC212486540F00DFB009 /* ShowAllButton.swift */,
 				2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */,
 				62E986D38DE1E4890415F9F7 /* StreakActivityView.swift */,
+				2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */,
 				62E986AC65867C28C93D475E /* TableInputTextField.swift */,
 				2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */,
 				62E988C4DC97F14EAC09BC41 /* TabSegmentedControlView.swift */,
@@ -8769,6 +8772,7 @@
 				62E98B04C8A3F4DFE7F8B00F /* BaseExploreViewController.swift in Sources */,
 				62E9888D488FC62B6F16A332 /* CourseInfoAssembly.swift in Sources */,
 				62E9826776831EAD02AA9A18 /* CourseInfoDataFlow.swift in Sources */,
+				2C6C6F5125656DC1003B8CF1 /* SystemCloseButton.swift in Sources */,
 				2CA93088253C79C9007B717A /* AttemptPlainObject.swift in Sources */,
 				62E98CBA3A377097538AB3D2 /* CourseInfoHeaderViewModel.swift in Sources */,
 				62E98CE13AF85515F639F07D /* CourseInfoInteractor.swift in Sources */,
