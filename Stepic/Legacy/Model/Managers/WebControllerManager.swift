@@ -99,9 +99,14 @@ final class WebControllerManager: NSObject {
             return
         }
 
-        let queryParameters = key == .externalLink
-            ? ["from_mobile_app": "true", "mobile_internal_deeplink": "true"]
-            : ["from_mobile_app": "true"]
+        var queryParameters = ["from_mobile_app": "true"]
+        if key == .externalLink {
+            queryParameters["mobile_internal_deeplink"] = "true"
+        }
+        if key.isRequiresEmbeddedModeToOpenURL {
+            queryParameters["embedded"] = "true"
+        }
+
         guard let url = url.appendingQueryParameters(queryParameters) else {
             return
         }
@@ -203,7 +208,15 @@ final class WebControllerManager: NSObject {
             self.withAuthorizationKeys.contains(self)
         }
 
+        fileprivate var isRequiresEmbeddedModeToOpenURL: Bool {
+            self.withEmbeddedModeKeys.contains(self)
+        }
+
         private var withAuthorizationKeys: [WebControllerKey] {
+            [.exam, .solution, .peerReview, .paidCourse, .openQuizInWeb]
+        }
+
+        private var withEmbeddedModeKeys: [WebControllerKey] {
             [.exam, .solution, .peerReview, .paidCourse, .openQuizInWeb]
         }
     }
