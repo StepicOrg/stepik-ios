@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -21,10 +22,13 @@ extension QuizFeedbackView {
 
 final class QuizFeedbackView: UIView {
     let appearance: Appearance
+
     weak var delegate: QuizFeedbackViewDelegate?
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
+    private lazy var htmlToAttributedStringConverter = HTMLToAttributedStringConverter(font: self.appearance.titleFont)
+
+    private lazy var titleLabel: AttributedLabel = {
+        let label = AttributedLabel()
         label.font = self.appearance.titleFont
         label.numberOfLines = 0
         return label
@@ -59,11 +63,12 @@ final class QuizFeedbackView: UIView {
     }()
 
     override var intrinsicContentSize: CGSize {
-        CGSize(
+        let titleLabelHeight = self.titleLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
+        return CGSize(
             width: UIView.noIntrinsicMetric,
             height: self.appearance.titleInsets.top
                 + self.appearance.titleInsets.bottom
-                + max(self.appearance.titleMinHeight, self.titleLabel.intrinsicContentSize.height)
+                + max(self.appearance.titleMinHeight, titleLabelHeight)
         )
     }
 
@@ -94,7 +99,7 @@ final class QuizFeedbackView: UIView {
     // MARK: Public API
 
     func update(state: State, title: String, hint: String? = nil) {
-        self.titleLabel.text = title
+        self.titleLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(htmlString: title)
         self.titleLabel.textColor = state.titleColor
         self.titleContainerView.backgroundColor = state.mainColor
 
