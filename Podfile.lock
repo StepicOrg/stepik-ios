@@ -24,16 +24,16 @@ PODS:
   - DeviceKit (4.2.1)
   - DownloadButton (0.1.0)
   - EasyTipView (2.0.4)
-  - FBSDKCoreKit (8.1.0):
-    - FBSDKCoreKit/Basics (= 8.1.0)
-    - FBSDKCoreKit/Core (= 8.1.0)
-  - FBSDKCoreKit/Basics (8.1.0)
-  - FBSDKCoreKit/Core (8.1.0):
+  - FBSDKCoreKit (8.2.0):
+    - FBSDKCoreKit/Basics (= 8.2.0)
+    - FBSDKCoreKit/Core (= 8.2.0)
+  - FBSDKCoreKit/Basics (8.2.0)
+  - FBSDKCoreKit/Core (8.2.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (8.1.0):
-    - FBSDKLoginKit/Login (= 8.1.0)
-  - FBSDKLoginKit/Login (8.1.0):
-    - FBSDKCoreKit (~> 8.1.0)
+  - FBSDKLoginKit (8.2.0):
+    - FBSDKLoginKit/Login (= 8.2.0)
+  - FBSDKLoginKit/Login (8.2.0):
+    - FBSDKCoreKit (~> 8.2.0)
   - Firebase/Analytics (7.1.0):
     - Firebase/Core
   - Firebase/Core (7.1.0):
@@ -215,8 +215,8 @@ DEPENDENCIES:
   - DeviceKit (= 4.2.1)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.0.4)
-  - FBSDKCoreKit (= 8.1.0)
-  - FBSDKLoginKit (= 8.1.0)
+  - FBSDKCoreKit (= 8.2.0)
+  - FBSDKLoginKit (= 8.2.0)
   - Firebase/Analytics (= 7.1.0)
   - Firebase/Core (= 7.1.0)
   - Firebase/Crashlytics (= 7.1.0)
@@ -348,8 +348,8 @@ SPEC CHECKSUMS:
   DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
-  FBSDKCoreKit: b3ca27e124dae67122d3bb47c8f96800b39986a6
-  FBSDKLoginKit: a3a92ba9380759cd0c1aa8319465fb5f2857c602
+  FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
+  FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
   FirebaseABTesting: aaea04ea67858a4a9dce0d22ef645477dff50146
   FirebaseAnalytics: 7f165a56dea86ddd5b8ce02af3bee982c683405c
@@ -401,6 +401,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: 2f3b041e40afd5f2c142b4bc382fe66ee3066914
+PODFILE CHECKSUM: 3dfac899b2fe20652c36f162f48e8e3bed3bb00e
 
 COCOAPODS: 1.10.0

@@ -50,8 +50,8 @@ def all_pods
     
     # Social SDKs
     pod 'VK-ios-sdk', '1.5.1'
-    pod 'FBSDKCoreKit', '8.1.0'
-    pod 'FBSDKLoginKit', '8.1.0'
+    pod 'FBSDKCoreKit', '8.2.0'
+    pod 'FBSDKLoginKit', '8.2.0'
     pod 'GoogleSignIn', '5.0.2'
     
     pod 'Presentr', '1.9'
