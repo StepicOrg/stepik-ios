@@ -35,7 +35,7 @@ def all_pods
     pod 'Firebase/Crashlytics', '7.0.0'
     pod 'Firebase/RemoteConfig', '7.0.0'
 
-    pod 'YandexMobileMetrica/Dynamic', '3.11.1'
+    pod 'YandexMobileMetrica/Dynamic', '3.12.0'
     pod 'Amplitude-iOS', '4.9.3'
     pod 'Branch', '0.31.0'
         
