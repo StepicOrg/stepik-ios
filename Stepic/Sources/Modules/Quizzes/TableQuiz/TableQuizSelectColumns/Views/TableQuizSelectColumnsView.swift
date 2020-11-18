@@ -7,6 +7,7 @@ protocol TableQuizSelectColumnsViewDelegate: AnyObject {
         didSelectColumn column: TableQuiz.Column,
         isOn: Bool
     )
+    func tableQuizSelectColumnsViewDidClickClose(_ view: TableQuizSelectColumnsView)
 }
 
 extension TableQuizSelectColumnsView {
@@ -20,7 +21,17 @@ final class TableQuizSelectColumnsView: UIView {
 
     weak var delegate: TableQuizSelectColumnsViewDelegate?
 
-    private lazy var headerView = TableQuizSelectColumnsHeaderView()
+    private lazy var headerView: TableQuizSelectColumnsHeaderView = {
+        let view = TableQuizSelectColumnsHeaderView()
+        view.onCloseClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.tableQuizSelectColumnsViewDidClickClose(strongSelf)
+        }
+        return view
+    }()
 
     private lazy var columnsStackView: UIStackView = {
         let stackView = UIStackView()

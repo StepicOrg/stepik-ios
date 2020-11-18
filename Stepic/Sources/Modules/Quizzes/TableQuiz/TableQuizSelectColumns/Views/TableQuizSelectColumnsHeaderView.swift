@@ -3,6 +3,10 @@ import UIKit
 
 extension TableQuizSelectColumnsHeaderView {
     struct Appearance {
+        let closeButtonWidthHeight: CGFloat = 32
+        let closeButtonImageSize = CGSize(width: 24, height: 24)
+        let closeButtonInsets = LayoutInsets(top: 8, right: 8)
+
         let promptFont = Typography.caption1Font
         let promptTextColor = UIColor.stepikSecondaryText
 
@@ -18,6 +22,13 @@ extension TableQuizSelectColumnsHeaderView {
 
 final class TableQuizSelectColumnsHeaderView: UIView {
     let appearance: Appearance
+
+    private lazy var closeButton: SystemCloseButton = {
+        let appearance = SystemCloseButton.Appearance(imageSize: self.appearance.closeButtonImageSize)
+        let button = SystemCloseButton(appearance: appearance)
+        button.addTarget(self, action: #selector(self.closeButtonClicked), for: .touchUpInside)
+        return button
+    }()
 
     private lazy var promptLabel: UILabel = {
         let label = UILabel()
@@ -66,6 +77,8 @@ final class TableQuizSelectColumnsHeaderView: UIView {
 
     private lazy var separatorView = SeparatorView()
 
+    var onCloseClick: (() -> Void)?
+
     var prompt: String? {
         didSet {
             self.promptLabel.text = self.prompt
@@ -112,6 +125,11 @@ final class TableQuizSelectColumnsHeaderView: UIView {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
     }
+
+    @objc
+    private func closeButtonClicked() {
+        self.onCloseClick?()
+    }
 }
 
 extension TableQuizSelectColumnsHeaderView: ProgrammaticallyInitializableViewProtocol {
@@ -121,10 +139,10 @@ extension TableQuizSelectColumnsHeaderView: ProgrammaticallyInitializableViewPro
 
     func addSubviews() {
         self.addSubview(self.contentStackView)
-
         self.contentStackView.addArrangedSubview(self.promptLabel)
         self.contentStackView.addArrangedSubview(self.titleProcessedContentView)
 
+        self.addSubview(self.closeButton)
         self.addSubview(self.separatorView)
     }
 
@@ -132,6 +150,13 @@ extension TableQuizSelectColumnsHeaderView: ProgrammaticallyInitializableViewPro
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(self.appearance.contentStackViewInsets)
+        }
+
+        self.closeButton.translatesAutoresizingMaskIntoConstraints = false
+        self.closeButton.snp.makeConstraints { make in
+            make.width.height.equalTo(self.appearance.closeButtonWidthHeight)
+            make.top.equalToSuperview().offset(self.appearance.closeButtonInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.closeButtonInsets.right)
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
