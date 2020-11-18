@@ -65,7 +65,7 @@ extension TableQuizViewController: TableQuizViewDelegate {
         let viewController = assembly.makeModule()
 
         if let panModalPresentableViewController = viewController as? UIViewController & PanModalPresentable {
-            self.presentPanModal(panModalPresentableViewController)
+            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
         }
     }
 }
