@@ -406,6 +406,7 @@
 		2C11C9F224EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11C9F124EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		2C11C9F424EFCB2600A4647B /* UIFont+SizeOfString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11C9F324EFCB2600A4647B /* UIFont+SizeOfString.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
+		2C12E4722565668000DC52CB /* UIViewController+PresentPadPanModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12E4712565668000DC52CB /* UIViewController+PresentPadPanModal.swift */; };
 		2C130E3C2512402B00389AEB /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E3B2512402B00389AEB /* LaunchArguments.swift */; };
 		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */; };
@@ -1848,6 +1849,7 @@
 		2C11C9F124EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		2C11C9F324EFCB2600A4647B /* UIFont+SizeOfString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SizeOfString.swift"; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
+		2C12E4712565668000DC52CB /* UIViewController+PresentPadPanModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentPadPanModal.swift"; sourceTree = "<group>"; };
 		2C130E3B2512402B00389AEB /* LaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArguments.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesNetworkService.swift; sourceTree = "<group>"; };
@@ -3182,6 +3184,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF9BD372538504D00C2AFD2 /* Alamofire */,
+				2C12E4702565663100DC52CB /* PanModal */,
 				2CF9BD332538503C00C2AFD2 /* PromiseKit */,
 			);
 			path = ThirdParty;
@@ -3202,6 +3205,14 @@
 				2C11C9F124EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		2C12E4702565663100DC52CB /* PanModal */ = {
+			isa = PBXGroup;
+			children = (
+				2C12E4712565668000DC52CB /* UIViewController+PresentPadPanModal.swift */,
+			);
+			path = PanModal;
 			sourceTree = "<group>";
 		};
 		2C1661012358D3290020B7F4 /* StepOptions */ = {
@@ -8290,6 +8301,7 @@
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				08484F05211AF4320006266F /* StoryAssembly.swift in Sources */,
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
+				2C12E4722565668000DC52CB /* UIViewController+PresentPadPanModal.swift in Sources */,
 				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
 				2C83E20C2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift in Sources */,
