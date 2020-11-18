@@ -1,6 +1,6 @@
 PODS:
   - ActionSheetPicker-3.0 (2.7.1)
-  - Agrume (5.6.10):
+  - Agrume (5.6.11):
     - SwiftyGif
   - Alamofire (5.4.0)
   - Amplitude-iOS (4.9.3)
@@ -204,7 +204,7 @@ PODS:
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.7.1)
-  - Agrume (= 5.6.10)
+  - Agrume (= 5.6.11)
   - Alamofire (= 5.4.0)
   - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.10)
@@ -335,7 +335,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
-  Agrume: bed8984d8644d9f9228e65ca22cfc5f6ab95947f
+  Agrume: 085e64c6884fae11d3f3650fad3ebcb2c3df7597
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
@@ -401,6 +401,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: 0193ddc5e33023d04d4547f978e0fbbd072e5334
+PODFILE CHECKSUM: 7ee61c9dd2ddc25b44d3bc609aae158c44a989b5
 
 COCOAPODS: 1.10.0
