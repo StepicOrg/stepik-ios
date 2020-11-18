@@ -8,7 +8,7 @@ extension SystemCloseButton {
     }
 }
 
-/// A close button, similar to the scrollable UIBarButtonItem.SystemItem.close
+/// A close button, similar to the UIBarButtonItem.SystemItem.close
 final class SystemCloseButton: UIControl {
     let appearance: Appearance
 
