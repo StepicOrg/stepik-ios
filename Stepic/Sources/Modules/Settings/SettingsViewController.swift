@@ -434,7 +434,10 @@ extension SettingsViewController: SettingsViewControllerProtocol {
 
         let learningSectionCellsViewModels = settingsViewModel.isApplicationThemeSettingAvailable
             ? [autoplayCellViewModel, adaptiveModeCellViewModel]
-            : [stepTextSizeCellViewModel, codeEditorSettingsCellViewModel, autoplayCellViewModel, adaptiveModeCellViewModel]
+            : [
+                stepTextSizeCellViewModel, codeEditorSettingsCellViewModel, autoplayCellViewModel,
+                adaptiveModeCellViewModel
+            ]
 
         var sectionsViewModels: [SettingsTableSectionViewModel] = [
             .init(
