@@ -16,7 +16,7 @@ enum DeepLinkRoute {
     case solutions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
     case profile(userID: Int)
     case syllabus(courseID: Int)
-    case catalog
+    case catalog(courseListID: Int?)
     case home
     case course(courseID: Int)
     case coursePromo(courseID: Int)
@@ -50,8 +50,12 @@ enum DeepLinkRoute {
             path = "users/\(userID)"
         case .syllabus(let courseID):
             path = "course/\(courseID)/syllabus"
-        case .catalog:
-            path = "catalog"
+        case .catalog(let courseListIDOrNil):
+            if let courseListID = courseListIDOrNil {
+                path = "catalog/\(courseListID)"
+            } else {
+                path = "catalog"
+            }
         case .home:
             // TODO: Add regex pattern
             path = "home"
@@ -71,7 +75,8 @@ enum DeepLinkRoute {
 
         if let match = Pattern.catalog.regex.firstMatch(in: path),
            match.matchedString == path {
-            self = .catalog
+            let courseListIDOrNil = match.captures.first?.flatMap { Int($0) }
+            self = .catalog(courseListID: courseListIDOrNil)
             return
         }
 
@@ -178,7 +183,7 @@ enum DeepLinkRoute {
 
             switch self {
             case .catalog:
-                return #"\#(stepik)catalog\/?\#(queryComponents)"#
+                return #"\#(stepik)catalog\/?(?:(\d+))?\/?\#(queryComponents)"#
             case .course:
                 return "\(stepik)\(course)\(queryComponents)"
             case .coursePromo:
