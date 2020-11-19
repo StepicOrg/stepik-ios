@@ -29,6 +29,16 @@ final class StepikURLFactory {
         self.makeURL(path: .coursePay(id))
     }
 
+    // MARK: Catalog
+
+    func makeCatalog() -> URL? {
+        self.makeURL(path: .catalog(nil))
+    }
+
+    func makeCatalog(id: CourseListModel.IdType) -> URL? {
+        self.makeURL(path: .catalog(id))
+    }
+
     // MARK: Lesson
 
     func makeStep(lessonID: Lesson.IdType, stepPosition position: Int, fromMobile: Bool = true) -> URL? {
@@ -105,6 +115,7 @@ final class StepikURLFactory {
         case lessonIDStepPosition(lessonID: Lesson.IdType, stepPosition: Int)
         case submissionsStepIDSubmissionID(stepID: Step.IdType, submissionID: Submission.IdType)
         case resetAccountPassword
+        case catalog(CourseListModel.IdType?)
 
         var formattedPath: String {
             switch self {
@@ -126,6 +137,11 @@ final class StepikURLFactory {
                 return "/submissions/\(stepID)/\(submissionID)"
             case .resetAccountPassword:
                 return "/accounts/password/reset"
+            case .catalog(let courseListIDOrNil):
+                if let courseListID = courseListIDOrNil {
+                    return "/catalog/\(courseListID)"
+                }
+                return "/catalog"
             }
         }
     }

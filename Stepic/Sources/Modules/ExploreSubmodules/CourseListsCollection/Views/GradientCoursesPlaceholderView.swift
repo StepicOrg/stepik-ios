@@ -83,7 +83,7 @@ final class GradientCoursesPlaceholderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    enum Color {
+    enum Color: CaseIterable {
         case purple
         case blue
         case pink

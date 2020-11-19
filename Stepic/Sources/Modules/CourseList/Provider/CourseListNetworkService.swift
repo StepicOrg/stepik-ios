@@ -156,6 +156,29 @@ final class CollectionCourseListNetworkService: BaseCourseListNetworkService, Co
     }
 }
 
+final class DeepLinkCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: DeepLinkCourseListType
+
+    init(type: DeepLinkCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
+        let finalMeta = Meta.oneAndOnlyPage
+        return Promise { seal in
+            self.coursesAPI.retrieve(
+                ids: self.type.ids
+            ).done { courses in
+                let courses = courses.reordered(order: self.type.ids, transform: { $0.id })
+                seal.fulfill((courses, finalMeta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+}
+
 final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
     let type: SearchResultCourseListType
     private let searchResultsAPI: SearchResultsAPI
