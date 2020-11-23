@@ -22,6 +22,7 @@ final class ExploreViewController: BaseExploreViewController {
         .stories,
         .languageSwitch,
         .tags,
+        .catalogBlocks,
         .collection,
         .visitedCourses,
         .popularCourses
@@ -157,6 +158,21 @@ final class ExploreViewController: BaseExploreViewController {
                 view: tagsViewController.view,
                 isLanguageDependent: true,
                 type: Explore.Submodule.tags
+            )
+        )
+
+        // Catalog blcoks
+        let catalogBlocksAssembly = CatalogBlocksAssembly(
+            contentLanguage: contentLanguage,
+            output: self.interactor as? CatalogBlocksOutputProtocol
+        )
+        let catalogBlocksViewController = catalogBlocksAssembly.makeModule()
+        self.registerSubmodule(
+            .init(
+                viewController: catalogBlocksViewController,
+                view: catalogBlocksViewController.view,
+                isLanguageDependent: true,
+                type: Explore.Submodule.catalogBlocks
             )
         )
 

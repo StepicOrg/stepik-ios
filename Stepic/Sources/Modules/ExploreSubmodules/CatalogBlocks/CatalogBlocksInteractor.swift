@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol CatalogBlocksInteractorProtocol {
-    func doSomeAction(request: CatalogBlocks.SomeAction.Request)
+    func doCatalogBlocksLoad(request: CatalogBlocks.CatalogBlocksLoad.Request)
 }
 
 final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
@@ -19,11 +19,12 @@ final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
         self.provider = provider
     }
 
-    func doSomeAction(request: CatalogBlocks.SomeAction.Request) {}
-
-    enum Error: Swift.Error {
-        case something
+    func doCatalogBlocksLoad(request: CatalogBlocks.CatalogBlocksLoad.Request) {
+        self.provider.fetchCachedCatalogBlocks().then { cachedCatalogBlocks -> Promise<[CatalogBlock]> in
+            self.presenter.presentCatalogBlocks(response: .init(result: .success(cachedCatalogBlocks)))
+            return self.provider.fetchRemoteCatalogBlocks()
+        }.done { remoteCatalogBlocks in
+            self.presenter.presentCatalogBlocks(response: .init(result: .success(remoteCatalogBlocks)))
+        }.catch { _ in }
     }
 }
-
-extension CatalogBlocksInteractor: CatalogBlocksInputProtocol {}

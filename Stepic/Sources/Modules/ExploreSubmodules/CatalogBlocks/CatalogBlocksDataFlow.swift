@@ -1,11 +1,25 @@
 import Foundation
 
 enum CatalogBlocks {
-    enum SomeAction {
+    // MARK: Use Cases
+
+    /// Show catalog blocks
+    enum CatalogBlocksLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let result: StepikResult<[CatalogBlock]>
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: States
+
+    enum ViewControllerState {
+        case loading
+        case result(data: [CatalogBlock])
     }
 }

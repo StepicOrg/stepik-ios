@@ -1,3 +1,3 @@
 import Foundation
 
-protocol CatalogBlocksOutputProtocol: AnyObject {}
+protocol CatalogBlocksOutputProtocol: CourseListOutputProtocol {}
