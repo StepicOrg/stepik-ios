@@ -56,6 +56,12 @@ struct VisitedCourseListType: CourseListType {
     var analyticName: String { "visited_course_list" }
 }
 
+struct CatalogBlockFullCourseListType: CourseListType {
+    let catalogBlockContentItem: FullCourseListsCatalogBlockContentItem
+
+    var analyticName: String { "catalog_block_full_course_lists" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -64,19 +70,22 @@ final class CourseListServicesFactory {
     private let userCoursesAPI: UserCoursesAPI
     private let searchResultsAPI: SearchResultsAPI
     private let visitedCoursesAPI: VisitedCoursesAPI
+    private let courseListsAPI: CourseListsAPI
 
     init(
         type: CourseListType,
         coursesAPI: CoursesAPI = CoursesAPI(),
         userCoursesAPI: UserCoursesAPI = UserCoursesAPI(),
         searchResultsAPI: SearchResultsAPI = SearchResultsAPI(),
-        visitedCoursesAPI: VisitedCoursesAPI = VisitedCoursesAPI()
+        visitedCoursesAPI: VisitedCoursesAPI = VisitedCoursesAPI(),
+        courseListsAPI: CourseListsAPI = CourseListsAPI()
     ) {
         self.type = type
         self.coursesAPI = coursesAPI
         self.userCoursesAPI = userCoursesAPI
         self.searchResultsAPI = searchResultsAPI
         self.visitedCoursesAPI = visitedCoursesAPI
+        self.courseListsAPI = courseListsAPI
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
@@ -122,6 +131,12 @@ final class CourseListServicesFactory {
             return VisitedCourseListPersistenceService(
                 storage: DefaultsCourseListPersistenceStorage(cacheID: "VisitedCoursesInfo")
             )
+        } else if let type = self.type as? CatalogBlockFullCourseListType {
+            return CourseListPersistenceService(
+                storage: PassiveCourseListPersistenceStorage(
+                    cachedList: type.catalogBlockContentItem.courses
+                )
+            )
         } else {
             fatalError("Unsupported course list type")
         }
@@ -155,6 +170,12 @@ final class CourseListServicesFactory {
                 type: type,
                 coursesAPI: self.coursesAPI,
                 visitedCoursesAPI: self.visitedCoursesAPI
+            )
+        } else if let type = self.type as? CatalogBlockFullCourseListType {
+            return CatalogBlockFullCourseListNetworkService(
+                type: type,
+                coursesAPI: self.coursesAPI,
+                courseListsAPI: self.courseListsAPI
             )
         } else {
             fatalError("Unsupported course list type")

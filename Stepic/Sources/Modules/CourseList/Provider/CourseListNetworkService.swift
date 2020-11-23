@@ -248,3 +248,43 @@ final class VisitedCourseListNetworkService: BaseCourseListNetworkService, Cours
         }
     }
 }
+
+final class CatalogBlockFullCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: CatalogBlockFullCourseListType
+    private let courseListsAPI: CourseListsAPI
+
+    init(
+        type: CatalogBlockFullCourseListType,
+        coursesAPI: CoursesAPI,
+        courseListsAPI: CourseListsAPI
+    ) {
+        self.type = type
+        self.courseListsAPI = courseListsAPI
+
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
+        Promise { seal in
+            self.courseListsAPI.retrieve(
+                id: self.type.catalogBlockContentItem.id,
+                page: page
+            ).then { courseLists, meta -> Promise<([Course.IdType], Meta, [Course])> in
+                guard let courseList = courseLists.first else {
+                    throw Error.fetchFailed
+                }
+
+                let ids = courseList.coursesArray
+
+                return self.coursesAPI
+                    .retrieve(ids: ids)
+                    .map { (ids, meta, $0) }
+            }.done { ids, meta, courses in
+                let resultCourses = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((resultCourses, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+}

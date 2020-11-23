@@ -29,7 +29,7 @@ final class CatalogBlocksPersistenceService: CatalogBlocksPersistenceServiceProt
                 #keyPath(CatalogBlockEntity.managedLanguage),
                 "\(language.languageString)"
             )
-            request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+            request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
             request.returnsObjectsAsFaults = false
 
             self.managedObjectContext.performAndWait {
@@ -128,7 +128,7 @@ final class CatalogBlocksPersistenceService: CatalogBlocksPersistenceServiceProt
                 #keyPath(CatalogBlockEntity.managedId),
                 NSNumber(value: id)
             )
-            request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+            request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
             request.returnsObjectsAsFaults = false
 
             self.managedObjectContext.performAndWait {
