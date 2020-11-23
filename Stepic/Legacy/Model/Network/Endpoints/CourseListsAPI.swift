@@ -28,4 +28,17 @@ final class CourseListsAPI: APIEndpoint {
             withManager: self.manager
         )
     }
+
+    func retrieve(id: Int, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
+        let params: Parameters = [
+            "page": page
+        ]
+
+        return self.retrieve.requestWithFetching(
+            requestEndpoint: "\(self.name)/\(id)",
+            paramName: self.name,
+            params: params,
+            withManager: self.manager
+        )
+    }
 }

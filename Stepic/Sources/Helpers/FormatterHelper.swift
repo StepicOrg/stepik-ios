@@ -56,6 +56,27 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format courses count with localized and pluralized suffix.
+    ///
+    /// 1 -> "1 course", 5 -> "5 courses"
+    /// 100 -> "99+ courses"
+    static func catalogBlockCoursesCount(_ count: Int) -> String {
+        if count > 99 {
+            return "99+ \(NSLocalizedString("courses567890", comment: ""))"
+        }
+
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("courses1", comment: ""),
+                NSLocalizedString("courses234", comment: ""),
+                NSLocalizedString("courses567890", comment: "")
+            ]
+        )
+
+        return "\(count) \(pluralizedCountString)"
+    }
+
     /// Format points count with localized and pluralized suffix; 1 -> "1 point", 5 -> "5 points"
     static func pointsCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(

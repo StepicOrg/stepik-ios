@@ -45,10 +45,56 @@ final class CatalogBlocksViewController: UIViewController {
             self.catalogBlocksView?.showLoading()
         case .result(let data):
             self.catalogBlocksView?.hideLoading()
-            print(data)
+
+            for block in data {
+                guard let kind = block.kind else {
+                    continue
+                }
+
+                switch kind {
+                case .fullCourseLists:
+                    guard let contentItem = block.content.first as? FullCourseListsCatalogBlockContentItem else {
+                        continue
+                    }
+
+                    let type = CatalogBlockFullCourseListType(catalogBlockContentItem: contentItem)
+
+                    let assembly = HorizontalCourseListAssembly(
+                        type: type,
+                        colorMode: .light,
+                        courseViewSource: .catalogBlock(id: block.id),
+                        output: self.interactor as? CourseListOutputProtocol
+                    )
+                    let viewController = assembly.makeModule()
+                    assembly.moduleInput?.setOnlineStatus()
+                    self.addChild(viewController)
+
+                    let containerView = CourseListContainerViewFactory()
+                        .makeHorizontalCatalogBlocksContainerView(
+                            for: viewController.view,
+                            headerDescription: .init(
+                                title: block.title,
+                                subtitle: FormatterHelper.catalogBlockCoursesCount(contentItem.coursesCount),
+                                description: block.descriptionString,
+                                isTitleVisible: block.isTitleVisible,
+                                shouldShowAllButton: true
+                            )
+                        )
+                    containerView.onShowAllButtonClick = { [weak self] in
+                        self?.interactor.doFullCourseListPresentation(request: .init(courseListType: type))
+                    }
+                    self.catalogBlocksView?.addBlockView(containerView)
+                case .simpleCourseLists:
+                    continue
+                case .authors:
+                    continue
+                }
+            }
         }
     }
 }
+
+// MARK: - CatalogBlocksViewController: CatalogBlocksViewControllerProtocol -
 
 extension CatalogBlocksViewController: CatalogBlocksViewControllerProtocol {
     func displayCatalogBlocks(viewModel: CatalogBlocks.CatalogBlocksLoad.ViewModel) {

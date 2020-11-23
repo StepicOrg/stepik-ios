@@ -148,3 +148,9 @@ extension ExploreInteractor: CourseListFilterOutputProtocol {
         self.contentLanguageService.globalContentLanguage == .russian ? .any : .english
     }
 }
+
+extension ExploreInteractor: CatalogBlocksOutputProtocol {
+    func presentCourseList(type: CatalogBlockFullCourseListType) {
+        self.doFullscreenCourseListPresentation(request: .init(presentationDescription: nil, courseListType: type))
+    }
+}
