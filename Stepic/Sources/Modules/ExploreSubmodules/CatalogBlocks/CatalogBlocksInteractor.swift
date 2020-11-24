@@ -65,3 +65,9 @@ extension CatalogBlocksInteractor: CourseListOutputProtocol {
 
     func presentLoadedState(sourceModule: CourseListInputProtocol) {}
 }
+
+extension CatalogBlocksInteractor: SimpleCourseListOutputProtocol {
+    func presentSimpleCourseList(type: CatalogBlockCourseListType) {
+        self.moduleOutput?.presentCourseList(type: type)
+    }
+}

@@ -272,12 +272,12 @@ final class VisitedCourseListNetworkService: BaseCourseListNetworkService, Cours
     }
 }
 
-final class CatalogBlockFullCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
-    let type: CatalogBlockFullCourseListType
+final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: CatalogBlockCourseListType
     private let courseListsAPI: CourseListsAPI
 
     init(
-        type: CatalogBlockFullCourseListType,
+        type: CatalogBlockCourseListType,
         coursesAPI: CoursesAPI,
         courseListsAPI: CourseListsAPI
     ) {
@@ -290,7 +290,7 @@ final class CatalogBlockFullCourseListNetworkService: BaseCourseListNetworkServi
     func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
             self.courseListsAPI.retrieve(
-                id: self.type.catalogBlockContentItem.id,
+                id: self.type.courseListID,
                 page: page
             ).then { courseLists, meta -> Promise<([Course.IdType], Meta, [Course])> in
                 guard let courseList = courseLists.first else {

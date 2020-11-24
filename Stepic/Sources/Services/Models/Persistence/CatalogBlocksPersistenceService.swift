@@ -3,10 +3,20 @@ import Foundation
 import PromiseKit
 
 protocol CatalogBlocksPersistenceServiceProtocol: AnyObject {
+    func fetch(ids: [CatalogBlock.IdType]) -> Guarantee<[CatalogBlockEntity]>
     func fetch(language: ContentLanguage) -> Guarantee<[CatalogBlockEntity]>
+
     func save(catalogBlocks: [CatalogBlock]) -> Guarantee<Void>
 
     func deleteAll() -> Promise<Void>
+}
+
+extension CatalogBlocksPersistenceServiceProtocol {
+    func fetch(id: CatalogBlock.IdType) -> Guarantee<CatalogBlockEntity?> {
+        self.fetch(ids: [id]).then { catalogBlocks in
+            .value(catalogBlocks.first)
+        }
+    }
 }
 
 final class CatalogBlocksPersistenceService: CatalogBlocksPersistenceServiceProtocol {
@@ -19,6 +29,30 @@ final class CatalogBlocksPersistenceService: CatalogBlocksPersistenceServiceProt
     }
 
     // MARK: Public API
+
+    func fetch(ids: [CatalogBlock.IdType]) -> Guarantee<[CatalogBlockEntity]> {
+        Guarantee { seal in
+            let request = CatalogBlockEntity.fetchRequest
+
+            let idSubpredicates = ids.map { id in
+                NSPredicate(format: "%K == %@", #keyPath(CatalogBlockEntity.managedId), NSNumber(value: id))
+            }
+            let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
+
+            request.predicate = compoundPredicate
+            request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+
+            self.managedObjectContext.performAndWait {
+                do {
+                    let catalogBlocks = try self.managedObjectContext.fetch(request)
+                    seal(catalogBlocks)
+                } catch {
+                    print("Error while fetching catalog blocks = \(ids)")
+                    seal([])
+                }
+            }
+        }
+    }
 
     func fetch(language: ContentLanguage) -> Guarantee<[CatalogBlockEntity]> {
         Guarantee { seal in

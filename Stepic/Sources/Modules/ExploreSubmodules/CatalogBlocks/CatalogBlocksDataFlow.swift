@@ -19,7 +19,7 @@ enum CatalogBlocks {
     /// Present catalog block content item of type full_course_lists in fullscreen
     enum FullCourseListModulePresentation {
         struct Request {
-            let courseListType: CatalogBlockFullCourseListType
+            let courseListType: CatalogBlockCourseListType
         }
     }
 

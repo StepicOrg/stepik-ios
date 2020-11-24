@@ -57,7 +57,10 @@ final class CatalogBlocksViewController: UIViewController {
                         continue
                     }
 
-                    let type = CatalogBlockFullCourseListType(catalogBlockContentItem: contentItem)
+                    let type = CatalogBlockCourseListType(
+                        courseListID: contentItem.id,
+                        coursesIDs: contentItem.courses
+                    )
 
                     let assembly = HorizontalCourseListAssembly(
                         type: type,
@@ -85,7 +88,29 @@ final class CatalogBlocksViewController: UIViewController {
                     }
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .simpleCourseLists:
-                    continue
+                    guard block.appearance == .default else {
+                        continue
+                    }
+
+                    let assembly = SimpleCourseListAssembly(
+                        catalogBlockID: block.id,
+                        output: self.interactor as? SimpleCourseListOutputProtocol
+                    )
+                    let viewController = assembly.makeModule()
+                    self.addChild(viewController)
+
+                    let containerView = CourseListContainerViewFactory()
+                        .makeHorizontalCatalogBlocksContainerView(
+                            for: viewController.view,
+                            headerDescription: .init(
+                                title: block.title,
+                                subtitle: nil,
+                                description: block.descriptionString,
+                                isTitleVisible: block.isTitleVisible,
+                                shouldShowAllButton: false
+                            )
+                        )
+                    self.catalogBlocksView?.addBlockView(containerView)
                 case .authors:
                     continue
                 }

@@ -62,10 +62,11 @@ struct DeepLinkCourseListType: CourseListType {
     var analyticName: String { "deep_link_course_list" }
 }
 
-struct CatalogBlockFullCourseListType: CourseListType {
-    let catalogBlockContentItem: FullCourseListsCatalogBlockContentItem
+struct CatalogBlockCourseListType: CourseListType {
+    let courseListID: CourseListModel.IdType
+    let coursesIDs: [Course.IdType]
 
-    var analyticName: String { "catalog_block_full_course_lists" }
+    var analyticName: String { "catalog_block_course_list" }
 }
 
 // MARK: - Services factory
@@ -143,10 +144,10 @@ final class CourseListServicesFactory {
                     cachedList: type.ids
                 )
             )
-        } else if let type = self.type as? CatalogBlockFullCourseListType {
+        } else if let type = self.type as? CatalogBlockCourseListType {
             return CourseListPersistenceService(
                 storage: PassiveCourseListPersistenceStorage(
-                    cachedList: type.catalogBlockContentItem.courses
+                    cachedList: type.coursesIDs
                 )
             )
         } else {
@@ -185,8 +186,8 @@ final class CourseListServicesFactory {
             )
         } else if let type = self.type as? DeepLinkCourseListType {
             return DeepLinkCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
-        } else if let type = self.type as? CatalogBlockFullCourseListType {
-            return CatalogBlockFullCourseListNetworkService(
+        } else if let type = self.type as? CatalogBlockCourseListType {
+            return CatalogBlockCourseListNetworkService(
                 type: type,
                 coursesAPI: self.coursesAPI,
                 courseListsAPI: self.courseListsAPI
