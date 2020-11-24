@@ -14,6 +14,19 @@ import SwiftyJSON
 final class CourseListsAPI: APIEndpoint {
     override var name: String { "course-lists" }
 
+    func retrieve(id: CourseListModel.IdType, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
+        let params: Parameters = [
+            "page": page
+        ]
+
+        return self.retrieve.requestWithFetching(
+            requestEndpoint: "\(self.name)/\(id)",
+            paramName: self.name,
+            params: params,
+            withManager: self.manager
+        )
+    }
+
     func retrieve(language: ContentLanguage, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
         let params: Parameters = [
             "platform": "mobile,ios",
@@ -23,19 +36,6 @@ final class CourseListsAPI: APIEndpoint {
 
         return self.retrieve.requestWithFetching(
             requestEndpoint: self.name,
-            paramName: self.name,
-            params: params,
-            withManager: self.manager
-        )
-    }
-
-    func retrieve(id: Int, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
-        let params: Parameters = [
-            "page": page
-        ]
-
-        return self.retrieve.requestWithFetching(
-            requestEndpoint: "\(self.name)/\(id)",
             paramName: self.name,
             params: params,
             withManager: self.manager
