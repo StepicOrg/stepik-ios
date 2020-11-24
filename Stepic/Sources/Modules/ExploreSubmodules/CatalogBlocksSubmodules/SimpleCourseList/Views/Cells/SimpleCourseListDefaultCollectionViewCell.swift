@@ -17,8 +17,6 @@ final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reu
 
         self.layer.cornerRadius = Appearance.cornerRadius
         self.layer.masksToBounds = true
-
-        self.contentView.backgroundColor = .stepikYellow
     }
 
     @available(*, unavailable)
@@ -32,8 +30,33 @@ final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reu
         }
     }
 
-    func configure(viewModel: SimpleCourseListWidgetViewModel) {
+    func configure(viewModel: SimpleCourseListWidgetViewModel, colorMode: ColorMode) {
         self.widgetView.configure(viewModel: viewModel)
+
+        self.widgetView.titleLabelTextColor = colorMode.textColor
+        self.widgetView.subtitleLabelTextColor = colorMode.textColor
+        self.widgetView.backgroundColor = colorMode.backgroundColor
+    }
+
+    enum ColorMode: Int, CaseIterable {
+        case green
+        case blue
+        case violet
+
+        fileprivate var textColor: UIColor {
+            switch self {
+            case .green:
+                return .stepikGreen
+            case .blue:
+                return UIColor(hex6: 0x2F80ED)
+            case .violet:
+                return .stepikVioletFixed
+            }
+        }
+
+        fileprivate var backgroundColor: UIColor {
+            self.textColor.withAlphaComponent(0.12)
+        }
     }
 }
 
