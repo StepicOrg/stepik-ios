@@ -224,6 +224,31 @@ class StepikURLFactorySpec: QuickSpec {
                     expect(constructedURL.absoluteString) == staticURLString
                 }
             }
+
+            context("catalog") {
+                it("returns correct URL for catalog with course list id") {
+                    // Given
+                    let courseListID = 11
+                    let staticURLString = "\(stepikURL)/catalog/\(courseListID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeCatalog(id: courseListID)!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+
+                it("returns correct URL for catalog without course list id") {
+                    // Given
+                    let staticURLString = "\(stepikURL)/catalog"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeCatalog()!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+            }
         }
     }
 }

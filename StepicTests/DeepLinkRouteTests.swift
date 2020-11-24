@@ -30,14 +30,33 @@ class DeepLinkRouteSpec: QuickSpec {
     override func spec() {
         describe("DeepLinkRoute") {
             context("catalog") {
-                it("matches catalog deep link with given paths") {
+                it("matches catalog deep link without course list id") {
                     let paths = [
                         "https://stepik.org/catalog",
                         "https://stepik.org/catalog/",
-                        "http://stepik.org/catalog/"
+                        "http://stepik.org/catalog/",
+                        "http://stepik.org/catalog?from_mobile_app=true"
                     ]
                     self.checkPaths(paths) { route in
-                        guard case .catalog = route else {
+                        guard case .catalog(let courseListIDOrNil) = route,
+                              courseListIDOrNil == nil else {
+                            return .failed(reason: "wrong enum case, expected `catalog`, got \(route)")
+                        }
+                        return .succeeded
+                    }
+                }
+
+                it("matches catalog deep link with course list id") {
+                    let paths = [
+                        "https://stepik.org/catalog/11",
+                        "http://stepik.org/catalog/11",
+                        "http://stepik.org/catalog/11/",
+                        "https://stepik.org/catalog/11?from_mobile_app=true",
+                        "https://stepik.org/catalog/11/?from_mobile_app=true"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case .catalog(let courseListIDOrNil) = route,
+                              courseListIDOrNil == 11 else {
                             return .failed(reason: "wrong enum case, expected `catalog`, got \(route)")
                         }
                         return .succeeded

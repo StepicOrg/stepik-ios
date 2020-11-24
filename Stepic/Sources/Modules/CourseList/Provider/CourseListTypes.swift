@@ -56,6 +56,12 @@ struct VisitedCourseListType: CourseListType {
     var analyticName: String { "visited_course_list" }
 }
 
+struct DeepLinkCourseListType: CourseListType {
+    let ids: [Course.IdType]
+
+    var analyticName: String { "deep_link_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -122,6 +128,12 @@ final class CourseListServicesFactory {
             return VisitedCourseListPersistenceService(
                 storage: DefaultsCourseListPersistenceStorage(cacheID: "VisitedCoursesInfo")
             )
+        } else if let type = self.type as? DeepLinkCourseListType {
+            return CourseListPersistenceService(
+                storage: PassiveCourseListPersistenceStorage(
+                    cachedList: type.ids
+                )
+            )
         } else {
             fatalError("Unsupported course list type")
         }
@@ -156,6 +168,8 @@ final class CourseListServicesFactory {
                 coursesAPI: self.coursesAPI,
                 visitedCoursesAPI: self.visitedCoursesAPI
             )
+        } else if let type = self.type as? DeepLinkCourseListType {
+            return DeepLinkCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
         } else {
             fatalError("Unsupported course list type")
         }
