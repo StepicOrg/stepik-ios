@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SimpleCourseListViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: SimpleCourseList.SomeAction.ViewModel)
+    func displayCourseList(viewModel: SimpleCourseList.CourseListLoad.ViewModel)
 }
 
 final class SimpleCourseListViewController: UIViewController {
@@ -24,5 +24,5 @@ final class SimpleCourseListViewController: UIViewController {
 }
 
 extension SimpleCourseListViewController: SimpleCourseListViewControllerProtocol {
-    func displaySomeActionResult(viewModel: SimpleCourseList.SomeAction.ViewModel) {}
+    func displayCourseList(viewModel: SimpleCourseList.CourseListLoad.ViewModel) {}
 }

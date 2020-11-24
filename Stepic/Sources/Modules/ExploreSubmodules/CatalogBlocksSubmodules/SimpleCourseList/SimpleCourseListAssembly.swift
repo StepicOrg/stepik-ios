@@ -5,14 +5,29 @@ final class SimpleCourseListAssembly: Assembly {
 
     private weak var moduleOutput: SimpleCourseListOutputProtocol?
 
-    init(output: SimpleCourseListOutputProtocol? = nil) {
+    private let catalogBlockID: CatalogBlock.IdType
+
+    init(
+        catalogBlockID: CatalogBlock.IdType,
+        output: SimpleCourseListOutputProtocol? = nil
+    ) {
+        self.catalogBlockID = catalogBlockID
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = SimpleCourseListProvider()
+        let provider = SimpleCourseListProvider(
+            catalogBlocksRepository: CatalogBlocksRepository(
+                catalogBlocksNetworkService: CatalogBlocksNetworkService(catalogBlocksAPI: CatalogBlocksAPI()),
+                catalogBlocksPersistenceService: CatalogBlocksPersistenceService()
+            )
+        )
         let presenter = SimpleCourseListPresenter()
-        let interactor = SimpleCourseListInteractor(presenter: presenter, provider: provider)
+        let interactor = SimpleCourseListInteractor(
+            catalogBlockID: self.catalogBlockID,
+            presenter: presenter,
+            provider: provider
+        )
         let viewController = SimpleCourseListViewController(interactor: interactor)
 
         presenter.viewController = viewController
