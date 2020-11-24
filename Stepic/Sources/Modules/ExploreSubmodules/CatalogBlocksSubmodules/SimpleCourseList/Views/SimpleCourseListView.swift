@@ -3,12 +3,12 @@ import UIKit
 
 extension SimpleCourseListView {
     struct Appearance {
-        let layoutSectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        let layoutSectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         let layoutMinimumInteritemSpacing: CGFloat = 16
         let layoutMinimumLineSpacing: CGFloat = 16
-        let layoutItemHeight: CGFloat = 116
-        let layoutMinimumItemWidth: CGFloat = 144
         let layoutNextPageWidth: CGFloat = 12.0
+        let layoutDefaultItemHeight: CGFloat = 96
+        let layoutIncreasedItemHeight: CGFloat = 112
 
         let backgroundColor = UIColor.stepikBackground
     }
@@ -54,6 +54,12 @@ final class SimpleCourseListView: UIView {
         } else {
             return currentDeviceInfo.isPad ? 4 : 3
         }
+    }
+
+    private var layoutItemHeight: CGFloat {
+        DeviceInfo.current.diagonal <= 4.7
+            ? self.appearance.layoutIncreasedItemHeight
+            : self.appearance.layoutDefaultItemHeight
     }
 
     override var intrinsicContentSize: CGSize {
@@ -117,13 +123,14 @@ final class SimpleCourseListView: UIView {
 
     private func calculateItemSize() -> CGSize {
         let width = self.bounds.width
+            - self.appearance.layoutSectionInset.left
             - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount)
             - self.appearance.layoutNextPageWidth
         let layoutItemWidth = (width / CGFloat(self.columnsCount)).rounded(.down)
 
         self.flowLayout.columnsCount = self.columnsCount
 
-        return CGSize(width: layoutItemWidth, height: self.appearance.layoutItemHeight)
+        return CGSize(width: layoutItemWidth, height: self.layoutItemHeight)
     }
 }
 

@@ -80,7 +80,7 @@ final class SimpleCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
             return
         }
 
-        var yOffset: CGFloat = self.minimumLineSpacing + self.sectionInset.top
+        var yOffset: CGFloat = self.sectionInset.top
         var xOffset: CGFloat = self.sectionInset.left
         var rowIndex = 0
 
@@ -101,7 +101,7 @@ final class SimpleCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
                 rowIndex += 1
             } else {
                 rowIndex = 0
-                yOffset = self.minimumLineSpacing + self.sectionInset.top
+                yOffset = self.sectionInset.top
                 xOffset += self.itemSize.width + self.minimumInteritemSpacing
             }
         }
