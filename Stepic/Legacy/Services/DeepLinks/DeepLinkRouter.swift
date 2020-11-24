@@ -291,8 +291,29 @@ final class DeepLinkRouter {
     }
 
     static func routeToCatalogWithID(_ id: CourseListModel.IdType, completion: @escaping ([UIViewController]) -> Void) {
-        ApiDataDownloader.courseLists.retrieve(courseListID: id).done { courseLists, _ in
-            guard let courseList = courseLists.first else {
+        let persistenceService = CourseListsPersistenceService()
+        let networkService = CourseListsNetworkService(courseListsAPI: CourseListsAPI())
+
+        let persistenceGuarantee = persistenceService.fetch(id: id)
+        let networkGuarantee = Guarantee { seal in
+            networkService.fetch(id: id).done { courseLists, _ in
+                seal(courseLists.first)
+            }.catch { _ in
+                seal(nil)
+            }
+        }
+
+        when(
+            fulfilled: persistenceGuarantee,
+            networkGuarantee
+        ).then { cachedCourseList, remoteCourseList -> Promise<CourseListModel?> in
+            if let remoteCourseList = remoteCourseList {
+                return .value(remoteCourseList)
+            } else {
+                return .value(cachedCourseList)
+            }
+        }.done { courseListOrNil in
+            guard let courseList = courseListOrNil else {
                 completion([])
                 return
             }
