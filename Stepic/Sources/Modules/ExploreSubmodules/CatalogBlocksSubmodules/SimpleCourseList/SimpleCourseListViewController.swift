@@ -76,6 +76,6 @@ extension SimpleCourseListViewController: SimpleCourseListViewControllerProtocol
 
 extension SimpleCourseListViewController: SimpleCourseListViewControllerDelegate {
     func itemDidSelected(viewModel: SimpleCourseListWidgetViewModel) {
-        print(#function)
+        self.interactor.doCourseListPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
     }
 }

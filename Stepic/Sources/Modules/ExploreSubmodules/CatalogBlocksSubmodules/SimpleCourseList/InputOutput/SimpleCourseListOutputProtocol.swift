@@ -1,3 +1,5 @@
 import Foundation
 
-protocol SimpleCourseListOutputProtocol: AnyObject {}
+protocol SimpleCourseListOutputProtocol: AnyObject {
+    func presentSimpleCourseList(type: CatalogBlockCourseListType)
+}

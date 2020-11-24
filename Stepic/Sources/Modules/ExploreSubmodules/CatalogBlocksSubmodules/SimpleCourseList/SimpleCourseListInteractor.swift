@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol SimpleCourseListInteractorProtocol {
     func doCourseListLoad(request: SimpleCourseList.CourseListLoad.Request)
+    func doCourseListPresentation(request: SimpleCourseList.CourseListModulePresentation.Request)
 }
 
 final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
@@ -12,6 +13,7 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
     private let provider: SimpleCourseListProviderProtocol
 
     private let catalogBlockID: CatalogBlock.IdType
+    private var currentCatalogBlock: CatalogBlock?
 
     init(
         catalogBlockID: CatalogBlock.IdType,
@@ -25,6 +27,8 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
 
     func doCourseListLoad(request: SimpleCourseList.CourseListLoad.Request) {
         self.fetchCatalogBlock().done { catalogBlockOrNil in
+            self.currentCatalogBlock = catalogBlockOrNil
+
             guard let catalogBlock = catalogBlockOrNil,
                   let contentItems = catalogBlock.content as? [SimpleCourseListsCatalogBlockContentItem] else {
                 throw Error.fetchFailed
@@ -45,6 +49,20 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
         }
     }
 
+    func doCourseListPresentation(request: SimpleCourseList.CourseListModulePresentation.Request) {
+        guard let contentItems = self.currentCatalogBlock?.content as? [SimpleCourseListsCatalogBlockContentItem],
+              let selectedItem = contentItems.first(where: { "\($0.id)" == request.uniqueIdentifier }) else {
+            return
+        }
+
+        let courseListType = CatalogBlockCourseListType(
+            courseListID: selectedItem.id,
+            coursesIDs: selectedItem.courses
+        )
+
+        self.moduleOutput?.presentSimpleCourseList(type: courseListType)
+    }
+
     private func fetchCatalogBlock() -> Promise<CatalogBlock?> {
         self.provider.fetchCachedCatalogBlock(
             id: self.catalogBlockID
@@ -62,5 +80,3 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
         case unsupportedAppearance
     }
 }
-
-extension SimpleCourseListInteractor: SimpleCourseListInputProtocol {}

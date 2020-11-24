@@ -57,7 +57,10 @@ final class CatalogBlocksViewController: UIViewController {
                         continue
                     }
 
-                    let type = CatalogBlockFullCourseListType(catalogBlockContentItem: contentItem)
+                    let type = CatalogBlockCourseListType(
+                        courseListID: contentItem.id,
+                        coursesIDs: contentItem.courses
+                    )
 
                     let assembly = HorizontalCourseListAssembly(
                         type: type,
@@ -91,7 +94,7 @@ final class CatalogBlocksViewController: UIViewController {
 
                     let assembly = SimpleCourseListAssembly(
                         catalogBlockID: block.id,
-                        output: nil
+                        output: self.interactor as? SimpleCourseListOutputProtocol
                     )
                     let viewController = assembly.makeModule()
                     self.addChild(viewController)

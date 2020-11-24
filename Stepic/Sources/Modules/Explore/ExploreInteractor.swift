@@ -150,7 +150,7 @@ extension ExploreInteractor: CourseListFilterOutputProtocol {
 }
 
 extension ExploreInteractor: CatalogBlocksOutputProtocol {
-    func presentCourseList(type: CatalogBlockFullCourseListType) {
+    func presentCourseList(type: CatalogBlockCourseListType) {
         self.doFullscreenCourseListPresentation(request: .init(presentationDescription: nil, courseListType: type))
     }
 }

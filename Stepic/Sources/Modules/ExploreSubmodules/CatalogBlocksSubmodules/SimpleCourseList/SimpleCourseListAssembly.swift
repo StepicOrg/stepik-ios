@@ -1,8 +1,6 @@
 import UIKit
 
 final class SimpleCourseListAssembly: Assembly {
-    var moduleInput: SimpleCourseListInputProtocol?
-
     private weak var moduleOutput: SimpleCourseListOutputProtocol?
 
     private let catalogBlockID: CatalogBlock.IdType
@@ -31,7 +29,6 @@ final class SimpleCourseListAssembly: Assembly {
         let viewController = SimpleCourseListViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

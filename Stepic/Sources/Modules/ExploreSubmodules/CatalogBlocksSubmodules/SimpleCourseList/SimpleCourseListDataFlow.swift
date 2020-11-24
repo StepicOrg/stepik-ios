@@ -16,6 +16,13 @@ enum SimpleCourseList {
         }
     }
 
+    /// Present course list in fullscreen
+    enum CourseListModulePresentation {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
