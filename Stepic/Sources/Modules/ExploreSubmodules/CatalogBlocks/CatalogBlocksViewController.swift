@@ -85,7 +85,29 @@ final class CatalogBlocksViewController: UIViewController {
                     }
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .simpleCourseLists:
-                    continue
+                    guard block.appearance == .default else {
+                        continue
+                    }
+
+                    let assembly = SimpleCourseListAssembly(
+                        catalogBlockID: block.id,
+                        output: nil
+                    )
+                    let viewController = assembly.makeModule()
+                    self.addChild(viewController)
+
+                    let containerView = CourseListContainerViewFactory()
+                        .makeHorizontalCatalogBlocksContainerView(
+                            for: viewController.view,
+                            headerDescription: .init(
+                                title: block.title,
+                                subtitle: nil,
+                                description: block.descriptionString,
+                                isTitleVisible: block.isTitleVisible,
+                                shouldShowAllButton: false
+                            )
+                        )
+                    self.catalogBlocksView?.addBlockView(containerView)
                 case .authors:
                     continue
                 }
