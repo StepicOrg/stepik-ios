@@ -14,13 +14,13 @@ import SwiftyJSON
 final class CourseListsAPI: APIEndpoint {
     override var name: String { "course-lists" }
 
-    func retrieve(courseListID: CourseListModel.IdType, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
+    func retrieve(id: CourseListModel.IdType, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
         let params: Parameters = [
             "page": page
         ]
 
         return self.retrieve.requestWithFetching(
-            requestEndpoint: "\(self.name)/\(courseListID)",
+            requestEndpoint: "\(self.name)/\(id)",
             paramName: self.name,
             params: params,
             withManager: self.manager
