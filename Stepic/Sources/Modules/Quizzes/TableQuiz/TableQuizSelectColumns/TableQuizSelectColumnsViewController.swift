@@ -85,6 +85,10 @@ extension TableQuizSelectColumnsViewController: TableQuizSelectColumnsViewDelega
         self.tableQuizSelectColumnsView?.update(selectedColumnsIDs: self.selectedColumnsIDs)
         self.moduleOutput?.handleSelectedColumnsUpdated(for: self.row, selectedColumnsIDs: self.selectedColumnsIDs)
     }
+
+    func tableQuizSelectColumnsViewDidClickClose(_ view: TableQuizSelectColumnsView) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension TableQuizSelectColumnsViewController: PanModalPresentable {

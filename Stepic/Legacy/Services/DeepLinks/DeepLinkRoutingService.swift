@@ -77,8 +77,15 @@ final class DeepLinkRoutingService {
         switch route {
         case .home:
             return TabBarRouter(tab: .home)
-        case .catalog:
-            return TabBarRouter(tab: .catalog())
+        case .catalog(let courseListIDOrNil):
+            return courseListIDOrNil == nil
+                ? TabBarRouter(tab: .catalog())
+                : ModalOrPushStackRouter(
+                    source: source,
+                    destinationStack: moduleStack,
+                    embedInNavigation: true,
+                    fallbackPath: fallbackPath
+                )
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
         case .course, .coursePromo, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
@@ -99,7 +106,15 @@ final class DeepLinkRoutingService {
             }
 
             switch route {
-            case .catalog, .notifications, .home:
+            case .catalog(let courseListIDOrNil):
+                if let courseListID = courseListIDOrNil {
+                    DeepLinkRouter.routeToCatalogWithID(courseListID) { moduleStack in
+                        seal.fulfill(moduleStack)
+                    }
+                } else {
+                    seal.fulfill([])
+                }
+            case .notifications, .home:
                 seal.fulfill([])
             case .profile(let userID):
                 seal.fulfill([NewProfileAssembly(otherUserID: userID).makeModule()])

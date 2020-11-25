@@ -30,7 +30,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
         label.font = self.appearance.titleLabelFont
         label.textColor = self.appearance.titleLabelTextColor
         label.numberOfLines = self.appearance.titleLabelNumberOfLines
-        label.onClick = { [weak self] label, detection in
+        label.onClick = { [weak self] _, detection in
             guard let strongSelf = self else {
                 return
             }

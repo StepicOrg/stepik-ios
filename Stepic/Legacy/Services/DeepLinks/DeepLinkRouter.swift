@@ -37,7 +37,7 @@ final class DeepLinkRouter {
         }
 
         DispatchQueue.main.async {
-            tabController.selectedIndex = 1
+            tabController.selectedIndex = TabBarRouter.Tab.catalog(searchCourses: false).index
         }
     }
 
@@ -47,7 +47,7 @@ final class DeepLinkRouter {
         }
 
         DispatchQueue.main.async {
-            tabController.selectedIndex = 4
+            tabController.selectedIndex = TabBarRouter.Tab.notifications.index
         }
     }
 
@@ -288,6 +288,75 @@ final class DeepLinkRouter {
 
         completion([])
         return
+    }
+
+    static func routeToCatalogWithID(_ id: CourseListModel.IdType, completion: @escaping ([UIViewController]) -> Void) {
+        struct Holder {
+            static var persistenceService = CourseListsPersistenceService()
+            static var networkService = CourseListsNetworkService(courseListsAPI: CourseListsAPI())
+        }
+
+        let persistenceGuarantee = Holder.persistenceService.fetch(id: id)
+        let networkGuarantee = Guarantee { seal in
+            Holder.networkService.fetch(id: id).done { courseLists, _ in
+                seal(courseLists.first)
+            }.catch { _ in
+                seal(nil)
+            }
+        }
+
+        when(
+            fulfilled: persistenceGuarantee,
+            networkGuarantee
+        ).then { cachedCourseList, remoteCourseList -> Promise<CourseListModel?> in
+            if let remoteCourseList = remoteCourseList {
+                return .value(remoteCourseList)
+            } else {
+                return .value(cachedCourseList)
+            }
+        }.done { courseListOrNil in
+            guard let courseList = courseListOrNil else {
+                completion([])
+                return
+            }
+
+            let presentationDescription: CourseList.PresentationDescription? = {
+                let title = courseList.title
+                let subtitle = courseList.listDescription.isEmpty
+                    ? FormatterHelper.coursesCount(courseList.coursesArray.count)
+                    : courseList.listDescription
+                let color = GradientCoursesPlaceholderView.Color.allCases.randomElement() ?? .blue
+
+                if title.isEmpty && subtitle.isEmpty {
+                    return nil
+                }
+
+                return CourseList.PresentationDescription(
+                    headerViewDescription: .init(
+                        title: title,
+                        subtitle: subtitle,
+                        color: color
+                    )
+                )
+            }()
+
+            let courseViewSource: AnalyticsEvent.CourseViewSource? = {
+                let catalogURLOrNil = StepikURLFactory().makeCatalog(id: id)
+                if let catalogURL = catalogURLOrNil {
+                    return .deepLink(url: catalogURL.absoluteString)
+                }
+                return nil
+            }()
+
+            let assembly = FullscreenCourseListAssembly(
+                presentationDescription: presentationDescription,
+                courseListType: DeepLinkCourseListType(ids: courseList.coursesArray),
+                courseViewSource: courseViewSource
+            )
+            completion([assembly.makeModule()])
+        }.catch { _ in
+            completion([])
+        }
     }
 
     static func routeToProfileWithId(_ userId: Int, completion: @escaping ([UIViewController]) -> Void) {
