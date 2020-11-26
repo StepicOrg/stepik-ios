@@ -1,2 +1,4 @@
 Что тестировать:
-- Поддержка embedded режима APPS-3097
+- Поддержка deeplink на course-list APPS-3099
+- В table problem содержимое всплывашки прилипло к левому краю APPS-3101
+- Кнопка Подтвердить в диалог в Table problem APPS-3105

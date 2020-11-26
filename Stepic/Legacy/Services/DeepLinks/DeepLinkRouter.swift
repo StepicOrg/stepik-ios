@@ -291,12 +291,14 @@ final class DeepLinkRouter {
     }
 
     static func routeToCatalogWithID(_ id: CourseListModel.IdType, completion: @escaping ([UIViewController]) -> Void) {
-        let persistenceService = CourseListsPersistenceService()
-        let networkService = CourseListsNetworkService(courseListsAPI: CourseListsAPI())
+        struct Holder {
+            static var persistenceService = CourseListsPersistenceService()
+            static var networkService = CourseListsNetworkService(courseListsAPI: CourseListsAPI())
+        }
 
-        let persistenceGuarantee = persistenceService.fetch(id: id)
+        let persistenceGuarantee = Holder.persistenceService.fetch(id: id)
         let networkGuarantee = Guarantee { seal in
-            networkService.fetch(id: id).done { courseLists, _ in
+            Holder.networkService.fetch(id: id).done { courseLists, _ in
                 seal(courseLists.first)
             }.catch { _ in
                 seal(nil)

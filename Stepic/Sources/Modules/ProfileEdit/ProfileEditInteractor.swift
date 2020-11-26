@@ -41,12 +41,23 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
     }
 
     func doRemoteProfileUpdate(request: ProfileEdit.RemoteProfileUpdate.Request) {
-        self.currentProfile.firstName = request.firstName
-        self.currentProfile.lastName = request.lastName
-        self.currentProfile.shortBio = request.shortBio
-        self.currentProfile.details = request.details
+        // Retrieve latest profile settings and only after that perform update APPS-3046.
+        self.provider.fetch(id: self.currentProfile.id).then { profileOrNil -> Promise<Profile> in
+            guard let profile = profileOrNil else {
+                throw Error.remoteProfileUpdateFailed
+            }
 
-        self.provider.update(profile: self.currentProfile).done { updatedProfile in
+            profile.firstName = request.firstName
+            profile.lastName = request.lastName
+            profile.shortBio = request.shortBio
+            profile.details = request.details
+            profile.emailAddresses = self.currentProfile.emailAddresses
+            self.currentProfile = profile
+
+            return .value(profile)
+        }.then { profile in
+            self.provider.update(profile: profile)
+        }.done { updatedProfile in
             self.currentProfile = updatedProfile
             self.dataBackUpdateService.triggerProfileUpdate(updatedProfile: updatedProfile)
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: true))
@@ -71,5 +82,9 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
                 seal(())
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case remoteProfileUpdateFailed
     }
 }

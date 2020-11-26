@@ -119,7 +119,10 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
                 recommendationsAPI: RecommendationsAPI(),
                 unitsAPI: UnitsAPI(),
                 viewsAPI: ViewsAPI(),
-                ratingsAPI: AdaptiveRatingsAPI(),
+                adaptiveRatingsNetworkService: AdaptiveRatingsNetworkService(adaptiveRatingsAPI: AdaptiveRatingsAPI()),
+                adaptiveRatingsRestoreNetworkService: AdaptiveRatingsRestoreNetworkService(
+                    adaptiveRatingsRestoreAPI: AdaptiveRatingsRestoreAPI()
+                ),
                 ratingManager: AdaptiveRatingManager(courseID: self.course.id),
                 statsManager: AdaptiveStatsManager(courseId: self.course.id),
                 storageManager: AdaptiveStorageManager(),

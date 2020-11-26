@@ -94,7 +94,7 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         self.coverView.coverImageURL = viewModel.coverImageURL
         self.coverView.shouldShowAdaptiveMark = viewModel.isAdaptive
 
-        self.summaryLabel.text = viewModel.summary
+        self.summaryLabel.setTextWithHTMLString(viewModel.summary)
         self.summaryLabel.isHidden = viewModel.isEnrolled
         self.separatorView.isHidden = !viewModel.isEnrolled
         self.continueLearningButton.isHidden = !viewModel.isEnrolled

@@ -67,7 +67,8 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     private let ratingManager: AdaptiveRatingManager
     private let statsManager: AdaptiveStatsManager
     private let storageManager: AdaptiveStorageManager
-    private let ratingsAPI: AdaptiveRatingsAPI
+    private let adaptiveRatingsNetworkService: AdaptiveRatingsNetworkServiceProtocol
+    private let adaptiveRatingsRestoreNetworkService: AdaptiveRatingsRestoreNetworkServiceProtocol
     private let lastViewedUpdater: LocalProgressLastViewedUpdater
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
@@ -119,7 +120,8 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         recommendationsAPI: RecommendationsAPI,
         unitsAPI: UnitsAPI,
         viewsAPI: ViewsAPI,
-        ratingsAPI: AdaptiveRatingsAPI,
+        adaptiveRatingsNetworkService: AdaptiveRatingsNetworkServiceProtocol,
+        adaptiveRatingsRestoreNetworkService: AdaptiveRatingsRestoreNetworkServiceProtocol,
         ratingManager: AdaptiveRatingManager,
         statsManager: AdaptiveStatsManager,
         storageManager: AdaptiveStorageManager,
@@ -136,7 +138,8 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.recommendationsAPI = recommendationsAPI
         self.unitsAPI = unitsAPI
         self.viewsAPI = viewsAPI
-        self.ratingsAPI = ratingsAPI
+        self.adaptiveRatingsNetworkService = adaptiveRatingsNetworkService
+        self.adaptiveRatingsRestoreNetworkService = adaptiveRatingsRestoreNetworkService
         self.ratingManager = ratingManager
         self.statsManager = statsManager
         self.storageManager = storageManager
@@ -455,7 +458,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
     private func syncRatingAndStreak(for course: Course) -> Guarantee<Void> {
         Guarantee { seal in
-            self.ratingsAPI.restore(courseId: course.id).done { exp, streak in
+            self.adaptiveRatingsRestoreNetworkService.restore(courseID: course.id).done { exp, streak in
                 self.rating = max(self.rating, exp)
                 self.streak = max(self.streak, streak)
 
@@ -486,7 +489,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
         // Send rating
         if let course = course {
-            ratingsAPI.update(courseId: course.id, exp: newRating).done {
+            self.adaptiveRatingsNetworkService.update(courseID: course.id, exp: newRating).done {
                 print("cards steps: remote rating updated")
             }.catch { error in
                 switch error {
