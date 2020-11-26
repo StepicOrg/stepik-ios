@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol ProfileEditProviderProtocol {
     func update(profile: Profile) -> Promise<Profile>
+    func fetch(id: Profile.IdType) -> Promise<Profile?>
     func fetchEmailAddresses(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]>
 }
 
@@ -23,6 +24,16 @@ final class ProfileEditProvider: ProfileEditProviderProtocol {
             self.profilesNetworkService.update(profile: profile)
                 .done { seal.fulfill($0) }
                 .catch { _ in seal.reject(Error.networkUpdateFailed) }
+        }
+    }
+
+    func fetch(id: Profile.IdType) -> Promise<Profile?> {
+        Promise { seal in
+            self.profilesNetworkService.fetch(id: id).done { profileOrNil in
+                seal.fulfill(profileOrNil)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
         }
     }
 

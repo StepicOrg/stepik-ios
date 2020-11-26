@@ -96,8 +96,10 @@ final class ProfileEditViewController: UIViewController {
             details: state.details
         )
 
+        self.view.endEditing(true)
         // Show HUD here, hide in displayProfileEditResult(viewModel:)
         SVProgressHUD.show()
+
         self.interactor.doRemoteProfileUpdate(request: request)
     }
 
