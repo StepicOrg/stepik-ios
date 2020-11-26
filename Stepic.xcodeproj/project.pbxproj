@@ -632,6 +632,9 @@
 		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
 		2C936D47243D3FCE00A4A4A9 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */; };
 		2C94C7FA248F86C900E4104E /* UserCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */; };
+		2C964109257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C964108257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift */; };
+		2C96410E257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96410D257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift */; };
+		2C964116257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C964115257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift */; };
 		2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */; };
 		2C9776EA24222AED0097AEFC /* UIView+TraitCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
@@ -2110,6 +2113,9 @@
 		2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
 		2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_v52.xcdatamodel; sourceTree = "<group>"; };
 		2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C964108257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsRestoreAPI.swift; sourceTree = "<group>"; };
+		2C96410D257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsNetworkService.swift; sourceTree = "<group>"; };
+		2C964115257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsRestoreNetworkService.swift; sourceTree = "<group>"; };
 		2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DynamicColor.swift"; sourceTree = "<group>"; };
 		2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TraitCollection.swift"; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -5705,6 +5711,7 @@
 				62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */,
 				62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */,
 				2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */,
+				2C964108257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift */,
 				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
 				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
 				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
@@ -6238,6 +6245,8 @@
 			children = (
 				2C7545A724C01C00004F9074 /* AchievementProgressesNetworkService.swift */,
 				2C7545A524C019CE004F9074 /* AchievementsNetworkService.swift */,
+				2C96410D257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift */,
+				2C964115257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
 				2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */,
@@ -8650,6 +8659,7 @@
 				2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */,
 				62E98A53567525055BCCA089 /* AppDelegate.swift in Sources */,
 				2C20C85E22F8E19F0052E9BF /* StepOptionsPlainObject.swift in Sources */,
+				2C964116257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift in Sources */,
 				2CC16BA923875DE30000EF36 /* DiscussionsSkeletonView.swift in Sources */,
 				2CCC505E21E8EA88004D9FC1 /* PersonalDeadlinesTimeService.swift in Sources */,
 				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
@@ -8760,6 +8770,7 @@
 				2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */,
 				2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */,
 				62E981A7B87D4281EBBB5184 /* DiscussionProxiesNetworkService.swift in Sources */,
+				2C96410E257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift in Sources */,
 				2C6DECE123D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift in Sources */,
 				2C8F3AE323CCBEAB004D113A /* StreamVideoQuality.swift in Sources */,
 				2C1E429C2497830F009F4C69 /* CoursePurchasesNetworkService.swift in Sources */,
@@ -8992,6 +9003,7 @@
 				62E983ECCBE3D953011C43CC /* HomeAssembly.swift in Sources */,
 				62E98E58E0DCD428FF8E227D /* HomeDataFlow.swift in Sources */,
 				62E9896B01385B351AFDBF81 /* HomeInteractor.swift in Sources */,
+				2C964109257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift in Sources */,
 				62E98FB0A51CD19BC06A80D6 /* HomePresenter.swift in Sources */,
 				62E98161245192EB1D36B243 /* HomeProvider.swift in Sources */,
 				62E98C02FBB15B0394A8E7F5 /* HomeViewController.swift in Sources */,
