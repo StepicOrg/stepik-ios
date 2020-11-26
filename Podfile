@@ -68,7 +68,7 @@ def all_pods
     pod 'Nuke', '9.1.3'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
-    pod 'SwiftDate', '6.3.0'
+    pod 'SwiftDate', '6.3.1'
 end
 
 def testing_pods
