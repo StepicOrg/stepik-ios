@@ -1,22 +1,34 @@
 import UIKit
 
 final class AuthorsCourseListAssembly: Assembly {
-    var moduleInput: AuthorsCourseListInputProtocol?
-
     private weak var moduleOutput: AuthorsCourseListOutputProtocol?
 
-    init(output: AuthorsCourseListOutputProtocol? = nil) {
+    private let catalogBlockID: CatalogBlock.IdType
+
+    init(
+        catalogBlockID: CatalogBlock.IdType,
+        output: AuthorsCourseListOutputProtocol? = nil
+    ) {
+        self.catalogBlockID = catalogBlockID
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = AuthorsCourseListProvider()
+        let provider = AuthorsCourseListProvider(
+            catalogBlocksRepository: CatalogBlocksRepository(
+                catalogBlocksNetworkService: CatalogBlocksNetworkService(catalogBlocksAPI: CatalogBlocksAPI()),
+                catalogBlocksPersistenceService: CatalogBlocksPersistenceService()
+            )
+        )
         let presenter = AuthorsCourseListPresenter()
-        let interactor = AuthorsCourseListInteractor(presenter: presenter, provider: provider)
+        let interactor = AuthorsCourseListInteractor(
+            catalogBlockID: self.catalogBlockID,
+            presenter: presenter,
+            provider: provider
+        )
         let viewController = AuthorsCourseListViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController
