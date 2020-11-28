@@ -96,6 +96,8 @@ enum FormatterHelper {
     static func longFollowersCount(_ count: Int) -> String {
         let formattedNumber = Self.longNumber(count)
 
+        // TODO: 1.0K followers
+        // TODO: 1.2K follower
         let pluralizedCountString = StringHelper.pluralize(
             number: count,
             forms: [

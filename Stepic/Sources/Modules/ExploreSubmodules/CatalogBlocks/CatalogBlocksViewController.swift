@@ -124,7 +124,7 @@ final class CatalogBlocksViewController: UIViewController {
                             for: viewController.view,
                             headerDescription: .init(
                                 title: block.title,
-                                subtitle: nil,
+                                subtitle: nil, // TODO: formatted authors count
                                 description: block.descriptionString,
                                 isTitleVisible: block.isTitleVisible,
                                 shouldShowAllButton: false

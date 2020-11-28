@@ -4,10 +4,19 @@ protocol AuthorsCourseListViewControllerProtocol: AnyObject {
     func displayCourseList(viewModel: AuthorsCourseList.CourseListLoad.ViewModel)
 }
 
+protocol AuthorsCourseListViewControllerDelegate: AnyObject {
+    func itemDidSelected(viewModel: AuthorsCourseListWidgetViewModel)
+}
+
 final class AuthorsCourseListViewController: UIViewController {
     private let interactor: AuthorsCourseListInteractorProtocol
 
     var authorsCourseListView: AuthorsCourseListView? { self.view as? AuthorsCourseListView }
+
+    // swiftlint:disable weak_delegate
+    private let collectionViewDelegate = AuthorsCourseListCollectionViewDelegate()
+    private let collectionViewDataSource = AuthorsCourseListCollectionViewDataSource()
+    // swiftlint:enable weak_delegate
 
     private var state: AuthorsCourseList.ViewControllerState
 
@@ -19,6 +28,8 @@ final class AuthorsCourseListViewController: UIViewController {
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
+
+        self.collectionViewDelegate.delegate = self
     }
 
     @available(*, unavailable)
@@ -43,18 +54,16 @@ final class AuthorsCourseListViewController: UIViewController {
 
         switch self.state {
         case .loading:
-            break
-            //self.authorsCourseListView?.showLoading()
+            self.authorsCourseListView?.showLoading()
         case .result(let viewModels):
-            break
-            //self.authorsCourseListView?.hideLoading()
+            self.authorsCourseListView?.hideLoading()
 
-//            self.collectionViewDelegate.viewModels = viewModels
-//            self.collectionViewDataSource.viewModels = viewModels
-//            self.authorsCourseListView?.updateCollectionViewData(
-//                delegate: self.collectionViewDelegate,
-//                dataSource: self.collectionViewDataSource
-//            )
+            self.collectionViewDelegate.viewModels = viewModels
+            self.collectionViewDataSource.viewModels = viewModels
+            self.authorsCourseListView?.updateCollectionViewData(
+                delegate: self.collectionViewDelegate,
+                dataSource: self.collectionViewDataSource
+            )
         }
     }
 }
@@ -62,5 +71,11 @@ final class AuthorsCourseListViewController: UIViewController {
 extension AuthorsCourseListViewController: AuthorsCourseListViewControllerProtocol {
     func displayCourseList(viewModel: AuthorsCourseList.CourseListLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+}
+
+extension AuthorsCourseListViewController: AuthorsCourseListViewControllerDelegate {
+    func itemDidSelected(viewModel: AuthorsCourseListWidgetViewModel) {
+        print(#function)
     }
 }
