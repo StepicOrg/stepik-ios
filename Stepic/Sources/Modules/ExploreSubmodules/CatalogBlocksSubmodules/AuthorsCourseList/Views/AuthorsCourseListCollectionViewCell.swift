@@ -2,7 +2,13 @@ import UIKit
 
 extension AuthorsCourseListCollectionViewCell {
     enum Appearance {
+        static let backgroundColor = UIColor.stepikTertiaryBackground
         static let cornerRadius: CGFloat = 13.0
+
+        static let shadowColor = UIColor.black
+        static let shadowOffset = CGSize(width: 0, height: 1)
+        static let shadowRadius: CGFloat = 4.0
+        static let shadowOpacity: Float = 0.1
     }
 }
 
@@ -14,9 +20,6 @@ final class AuthorsCourseListCollectionViewCell: UICollectionViewCell, Reusable 
 
         self.addSubviews()
         self.makeConstraints()
-
-        self.layer.cornerRadius = Appearance.cornerRadius
-        self.layer.masksToBounds = true
     }
 
     @available(*, unavailable)
@@ -32,6 +35,24 @@ final class AuthorsCourseListCollectionViewCell: UICollectionViewCell, Reusable 
 
     func configure(viewModel: AuthorsCourseListWidgetViewModel) {
         self.widgetView.configure(viewModel: viewModel)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.contentView.backgroundColor = Appearance.backgroundColor
+        self.contentView.layer.cornerRadius = Appearance.cornerRadius
+        self.contentView.layer.masksToBounds = true
+
+        self.layer.shadowColor = Appearance.shadowColor.cgColor
+        self.layer.shadowOffset = Appearance.shadowOffset
+        self.layer.shadowRadius = Appearance.shadowRadius
+        self.layer.shadowOpacity = Appearance.shadowOpacity
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(
+            roundedRect: self.bounds,
+            cornerRadius: self.contentView.layer.cornerRadius
+        ).cgPath
     }
 }
 

@@ -128,7 +128,8 @@ final class CatalogBlocksViewController: UIViewController {
                                 description: block.descriptionString,
                                 isTitleVisible: block.isTitleVisible,
                                 shouldShowAllButton: false
-                            )
+                            ),
+                            contentViewInsets: .zero
                         )
                     self.catalogBlocksView?.addBlockView(containerView)
                 }

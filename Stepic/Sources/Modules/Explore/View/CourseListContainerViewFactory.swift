@@ -94,7 +94,8 @@ final class CourseListContainerViewFactory {
 
     func makeHorizontalCatalogBlocksContainerView(
         for contentView: UIView,
-        headerDescription: HorizontalCatalogBlocksHeaderDescription
+        headerDescription: HorizontalCatalogBlocksHeaderDescription,
+        contentViewInsets: UIEdgeInsets? = nil
     ) -> NewExploreBlockContainerView {
         let headerView = headerDescription.isTitleVisible ? NewExploreBlockHeaderView() : nil
         headerView?.titleText = headerDescription.title
@@ -102,7 +103,11 @@ final class CourseListContainerViewFactory {
         headerView?.descriptionText = headerDescription.description
         headerView?.shouldShowAllButton = headerDescription.shouldShowAllButton
 
-        return self.makeNewHorizontalContainerView(headerView: headerView, contentView: contentView)
+        return self.makeNewHorizontalContainerView(
+            headerView: headerView,
+            contentView: contentView,
+            contentViewInsets: contentViewInsets
+        )
     }
 
     // MARK: Private API
@@ -125,9 +130,14 @@ final class CourseListContainerViewFactory {
 
     private func makeNewHorizontalContainerView(
         headerView: (UIView & NewExploreBlockHeaderViewProtocol)?,
-        contentView: UIView
+        contentView: UIView,
+        contentViewInsets: UIEdgeInsets?
     ) -> NewExploreBlockContainerView {
-        let appearance = self.colorMode.newExploreBlockContainerViewAppearance
+        var appearance = self.colorMode.newExploreBlockContainerViewAppearance
+
+        if let contentViewInsets = contentViewInsets {
+            appearance.contentViewInsets = contentViewInsets
+        }
 
         return NewExploreBlockContainerView(
             headerView: headerView,
