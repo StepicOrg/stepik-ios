@@ -107,20 +107,26 @@ enum FormatterHelper {
     ///
     /// 1 -> "1 follower", 5 -> "5 followers", 1000 -> "1K followers"
     static func longFollowersCount(_ count: Int) -> String {
-        let formattedNumber = Self.longNumber(count)
+        if count >= 1000 {
+            let thousands = Float(count) / 1000.0
+            let fractionalPart = thousands.truncatingRemainder(dividingBy: 1)
 
-        // TODO: 1.0K followers
-        // TODO: 1.2K follower
-        let pluralizedCountString = StringHelper.pluralize(
-            number: count,
-            forms: [
-                NSLocalizedString("followers1", comment: ""),
-                NSLocalizedString("followers234", comment: ""),
-                NSLocalizedString("followers567890", comment: "")
-            ]
-        )
-
-        return "\(formattedNumber) \(pluralizedCountString)"
+            if fractionalPart >= 0.1 {
+                return "\(String(format: "%.1f", thousands))K \(NSLocalizedString("followers567890", comment: ""))"
+            } else {
+                return "\(Int(thousands))K \(NSLocalizedString("followers567890", comment: ""))"
+            }
+        } else {
+            let pluralizedCountString = StringHelper.pluralize(
+                number: count,
+                forms: [
+                    NSLocalizedString("followers1", comment: ""),
+                    NSLocalizedString("followers234", comment: ""),
+                    NSLocalizedString("followers567890", comment: "")
+                ]
+            )
+            return "\(count) \(pluralizedCountString)"
+        }
     }
 
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"
