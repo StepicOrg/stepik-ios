@@ -16,6 +16,13 @@ enum AuthorsCourseList {
         }
     }
 
+    /// Present author profile
+    enum AuthorPresentation {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

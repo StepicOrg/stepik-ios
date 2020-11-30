@@ -114,7 +114,7 @@ final class CatalogBlocksViewController: UIViewController {
                 case .authors:
                     let assembly = AuthorsCourseListAssembly(
                         catalogBlockID: block.id,
-                        output: nil
+                        output: self.interactor as? AuthorsCourseListOutputProtocol
                     )
                     let viewController = assembly.makeModule()
                     self.addChild(viewController)

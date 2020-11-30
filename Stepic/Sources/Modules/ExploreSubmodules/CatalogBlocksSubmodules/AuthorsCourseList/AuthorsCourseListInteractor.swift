@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol AuthorsCourseListInteractorProtocol {
     func doCourseListLoad(request: AuthorsCourseList.CourseListLoad.Request)
+    func doAuthorPresentation(request: AuthorsCourseList.AuthorPresentation.Request)
 }
 
 final class AuthorsCourseListInteractor: AuthorsCourseListInteractorProtocol {
@@ -42,6 +43,15 @@ final class AuthorsCourseListInteractor: AuthorsCourseListInteractorProtocol {
             print("AuthorsCourseListInteractor :: failed fetch catalog block with error = \(error)")
             self.presenter.presentCourseList(response: .init(result: .failure(error)))
         }
+    }
+
+    func doAuthorPresentation(request: AuthorsCourseList.AuthorPresentation.Request) {
+        guard let contentItems = self.currentCatalogBlock?.content as? [AuthorsCatalogBlockContentItem],
+              let selectedItem = contentItems.first(where: { "\($0.id)" == request.uniqueIdentifier })  else {
+            return
+        }
+
+        self.moduleOutput?.presentAuthor(id: selectedItem.id)
     }
 
     private func fetchCatalogBlock() -> Promise<CatalogBlock?> {

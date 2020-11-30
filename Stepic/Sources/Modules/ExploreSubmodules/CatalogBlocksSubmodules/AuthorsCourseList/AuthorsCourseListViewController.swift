@@ -76,6 +76,6 @@ extension AuthorsCourseListViewController: AuthorsCourseListViewControllerProtoc
 
 extension AuthorsCourseListViewController: AuthorsCourseListViewControllerDelegate {
     func itemDidSelected(viewModel: AuthorsCourseListWidgetViewModel) {
-        print(#function)
+        self.interactor.doAuthorPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
     }
 }

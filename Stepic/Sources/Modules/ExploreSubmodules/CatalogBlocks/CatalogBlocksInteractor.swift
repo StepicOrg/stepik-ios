@@ -71,3 +71,9 @@ extension CatalogBlocksInteractor: SimpleCourseListOutputProtocol {
         self.moduleOutput?.presentCourseList(type: type)
     }
 }
+
+extension CatalogBlocksInteractor: AuthorsCourseListOutputProtocol {
+    func presentAuthor(id: User.IdType) {
+        self.moduleOutput?.presentProfile(id: id)
+    }
+}

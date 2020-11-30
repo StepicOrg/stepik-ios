@@ -7,6 +7,7 @@ protocol BaseExploreViewControllerProtocol: AnyObject {
     func displayLastStep(viewModel: BaseExplore.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: BaseExplore.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: BaseExplore.PaidCourseBuyingPresentation.ViewModel)
+    func displayProfile(viewModel: BaseExplore.ProfilePresentation.ViewModel)
 }
 
 protocol SubmoduleType: UniqueIdentifiable {
@@ -182,5 +183,10 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func displayProfile(viewModel: BaseExplore.ProfilePresentation.ViewModel) {
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
+        self.push(module: assembly.makeModule())
     }
 }

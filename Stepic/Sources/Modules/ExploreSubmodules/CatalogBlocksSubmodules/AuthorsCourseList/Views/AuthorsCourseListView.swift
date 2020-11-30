@@ -6,7 +6,7 @@ extension AuthorsCourseListView {
         let layoutSectionInset = UIEdgeInsets(top: 16, left: 20, bottom: 0, right: 20)
         let layoutMinimumInteritemSpacing: CGFloat = 12
         let layoutMinimumLineSpacing: CGFloat = 12
-        let layoutNextPageWidth: CGFloat = 12.0
+        let layoutNextPageWidth: CGFloat = 12
         let layoutDefaultItemHeight: CGFloat = 96
         let layoutIncreasedItemHeight: CGFloat = 114
 
