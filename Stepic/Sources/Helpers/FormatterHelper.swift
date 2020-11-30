@@ -90,6 +90,45 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format authors count with localized and pluralized suffix; 1 -> "1 author", 5 -> "5 authors"
+    static func authorsCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("authors1", comment: ""),
+                NSLocalizedString("authors234", comment: ""),
+                NSLocalizedString("authors567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format followers count with localized and pluralized suffix.
+    ///
+    /// 1 -> "1 follower", 5 -> "5 followers", 1000 -> "1K followers"
+    static func longFollowersCount(_ count: Int) -> String {
+        if count >= 1000 {
+            let thousands = Float(count) / 1000.0
+            let fractionalPart = thousands.truncatingRemainder(dividingBy: 1)
+
+            if fractionalPart >= 0.1 {
+                return "\(String(format: "%.1f", thousands))K \(NSLocalizedString("followers567890", comment: ""))"
+            } else {
+                return "\(Int(thousands))K \(NSLocalizedString("followers567890", comment: ""))"
+            }
+        } else {
+            let pluralizedCountString = StringHelper.pluralize(
+                number: count,
+                forms: [
+                    NSLocalizedString("followers1", comment: ""),
+                    NSLocalizedString("followers234", comment: ""),
+                    NSLocalizedString("followers567890", comment: "")
+                ]
+            )
+            return "\(count) \(pluralizedCountString)"
+        }
+    }
+
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"
     static func daysCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(

@@ -1,21 +1,21 @@
 import SnapKit
 import UIKit
 
-extension SimpleCourseListView {
+extension AuthorsCourseListView {
     struct Appearance {
-        let layoutSectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        let layoutMinimumInteritemSpacing: CGFloat = 16
-        let layoutMinimumLineSpacing: CGFloat = 16
-        let layoutNextPageWidth: CGFloat = 12.0
+        let layoutSectionInset = UIEdgeInsets(top: 16, left: 20, bottom: 0, right: 20)
+        let layoutMinimumInteritemSpacing: CGFloat = 12
+        let layoutMinimumLineSpacing: CGFloat = 12
+        let layoutNextPageWidth: CGFloat = 12
         let layoutDefaultItemHeight: CGFloat = 96
-        let layoutIncreasedItemHeight: CGFloat = 112
+        let layoutIncreasedItemHeight: CGFloat = 114
 
         let backgroundColor = UIColor.stepikBackground
     }
 }
 
-final class SimpleCourseListView: UIView {
-    private static let layoutRowsCount = 2
+final class AuthorsCourseListView: UIView {
+    private static let layoutRowsCount = 3
 
     let appearance: Appearance
 
@@ -29,13 +29,13 @@ final class SimpleCourseListView: UIView {
         collectionView.backgroundColor = .clear
         collectionView.decelerationRate = .fast
 
-        collectionView.register(cellClass: SimpleCourseListDefaultCollectionViewCell.self)
+        collectionView.register(cellClass: AuthorsCourseListCollectionViewCell.self)
 
         return collectionView
     }()
 
-    private lazy var flowLayout: SimpleCourseListHorizontalFlowLayout = {
-        let layout = SimpleCourseListHorizontalFlowLayout(
+    private lazy var flowLayout: AuthorsCourseListHorizontalFlowLayout = {
+        let layout = AuthorsCourseListHorizontalFlowLayout(
             rowsCount: Self.layoutRowsCount,
             columnsCount: self.columnsCount
         )
@@ -50,9 +50,9 @@ final class SimpleCourseListView: UIView {
         let (_, interfaceOrientation) = currentDeviceInfo.orientation
 
         if interfaceOrientation.isPortrait {
-            return currentDeviceInfo.isPad ? 3 : 2
+            return currentDeviceInfo.isPad ? 2 : 1
         } else {
-            return currentDeviceInfo.isPad ? 4 : 3
+            return currentDeviceInfo.isPad ? 3 : 2
         }
     }
 
@@ -101,7 +101,7 @@ final class SimpleCourseListView: UIView {
     // MARK: Loading state
 
     func showLoading() {
-        self.collectionView.skeleton.viewBuilder = { SimpleCourseListCellSkeletonView() }
+        self.collectionView.skeleton.viewBuilder = { AuthorsCourseListCellSkeletonView() }
         self.collectionView.skeleton.show()
     }
 
@@ -134,7 +134,7 @@ final class SimpleCourseListView: UIView {
     }
 }
 
-extension SimpleCourseListView: ProgrammaticallyInitializableViewProtocol {
+extension AuthorsCourseListView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }

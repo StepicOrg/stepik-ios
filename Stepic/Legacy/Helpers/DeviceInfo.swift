@@ -38,6 +38,8 @@ final class DeviceInfo {
 
     var diagonal: Double { self.currentDevice.diagonal }
 
+    var isSmallDiagonal: Bool { self.diagonal <= 4.7 }
+
     var deviceInfoString: String {
         "\(self.deviceModelString) \(self.deviceNameString) \(self.systemNameString) \(self.systemVersionString)"
     }

@@ -112,7 +112,26 @@ final class CatalogBlocksViewController: UIViewController {
                         )
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .authors:
-                    continue
+                    let assembly = AuthorsCourseListAssembly(
+                        catalogBlockID: block.id,
+                        output: self.interactor as? AuthorsCourseListOutputProtocol
+                    )
+                    let viewController = assembly.makeModule()
+                    self.addChild(viewController)
+
+                    let containerView = CourseListContainerViewFactory()
+                        .makeHorizontalCatalogBlocksContainerView(
+                            for: viewController.view,
+                            headerDescription: .init(
+                                title: block.title,
+                                subtitle: FormatterHelper.authorsCount(block.content.count),
+                                description: block.descriptionString,
+                                isTitleVisible: block.isTitleVisible,
+                                shouldShowAllButton: false
+                            ),
+                            contentViewInsets: .zero
+                        )
+                    self.catalogBlocksView?.addBlockView(containerView)
                 }
             }
         }

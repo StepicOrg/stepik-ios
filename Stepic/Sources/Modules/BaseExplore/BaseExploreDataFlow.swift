@@ -81,6 +81,17 @@ enum BaseExplore {
         struct ViewModel {}
     }
 
+    /// Present profile
+    enum ProfilePresentation {
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
+        }
+    }
+
     /// Try to set online status for submodules
     enum TryToSetOnline {
         struct Request {

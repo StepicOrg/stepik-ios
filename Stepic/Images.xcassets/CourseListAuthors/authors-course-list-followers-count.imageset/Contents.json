@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "authors-course-list-followers-count.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

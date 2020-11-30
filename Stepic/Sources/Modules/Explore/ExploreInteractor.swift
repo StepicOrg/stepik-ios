@@ -153,4 +153,8 @@ extension ExploreInteractor: CatalogBlocksOutputProtocol {
     func presentCourseList(type: CatalogBlockCourseListType) {
         self.doFullscreenCourseListPresentation(request: .init(presentationDescription: nil, courseListType: type))
     }
+
+    func presentProfile(id: User.IdType) {
+        self.explorePresenter?.presentProfile(response: .init(userID: id))
+    }
 }
