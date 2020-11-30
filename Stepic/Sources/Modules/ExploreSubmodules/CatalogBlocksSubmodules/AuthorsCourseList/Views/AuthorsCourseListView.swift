@@ -101,7 +101,7 @@ final class AuthorsCourseListView: UIView {
     // MARK: Loading state
 
     func showLoading() {
-        self.collectionView.skeleton.viewBuilder = { SimpleCourseListCellSkeletonView() }
+        self.collectionView.skeleton.viewBuilder = { AuthorsCourseListCellSkeletonView() }
         self.collectionView.skeleton.show()
     }
 
