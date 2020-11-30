@@ -9,6 +9,11 @@ extension AuthorsCourseListWidgetView {
         let titleLabelFont = Typography.subheadlineFont
         let titleLabelTextColor = UIColor.stepikSystemPrimaryText
         let titleLabelInsets = LayoutInsets(left: 16, right: 16)
+
+        let createdCoursesRatingViewImage = UIImage(named: "authors-course-list-created-courses")
+        let followersRatingViewImage = UIImage(named: "authors-course-list-followers-count")
+        let ratingsSpacing: CGFloat = 8
+        let ratingsInsets = LayoutInsets(bottom: 16)
     }
 }
 
@@ -23,6 +28,18 @@ final class AuthorsCourseListWidgetView: UIView {
         label.textColor = self.appearance.titleLabelTextColor
         label.numberOfLines = 2
         return label
+    }()
+
+    private lazy var createdCoursesRatingView: AuthorsCourseListWidgetRatingView = {
+        let view = AuthorsCourseListWidgetRatingView()
+        view.image = self.appearance.createdCoursesRatingViewImage?.withRenderingMode(.alwaysTemplate)
+        return view
+    }()
+
+    private lazy var followersRatingView: AuthorsCourseListWidgetRatingView = {
+        let view = AuthorsCourseListWidgetRatingView()
+        view.image = self.appearance.followersRatingViewImage?.withRenderingMode(.alwaysTemplate)
+        return view
     }()
 
     init(
@@ -44,6 +61,8 @@ final class AuthorsCourseListWidgetView: UIView {
     func configure(viewModel: AuthorsCourseListWidgetViewModel) {
         self.coverView.coverImageURL = viewModel.avatarURL
         self.titleLabel.text = viewModel.title
+        self.createdCoursesRatingView.text = viewModel.formattedCreatedCoursesCountString
+        self.followersRatingView.text = viewModel.formattedFollowersCountString
     }
 }
 
@@ -51,6 +70,8 @@ extension AuthorsCourseListWidgetView: ProgrammaticallyInitializableViewProtocol
     func addSubviews() {
         self.addSubview(self.coverView)
         self.addSubview(self.titleLabel)
+        self.addSubview(self.createdCoursesRatingView)
+        self.addSubview(self.followersRatingView)
     }
 
     func makeConstraints() {
@@ -66,6 +87,37 @@ extension AuthorsCourseListWidgetView: ProgrammaticallyInitializableViewProtocol
             make.top.equalTo(self.coverView.snp.top)
             make.leading.equalTo(self.coverView.snp.trailing).offset(self.appearance.titleLabelInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.titleLabelInsets.right)
+        }
+
+        if DeviceInfo.current.isSmallDiagonal {
+            self.createdCoursesRatingView.translatesAutoresizingMaskIntoConstraints = false
+            self.createdCoursesRatingView.snp.makeConstraints { make in
+                make.top.greaterThanOrEqualTo(self.titleLabel.snp.bottom).offset(self.appearance.ratingsSpacing)
+                make.leading.equalTo(self.titleLabel.snp.leading)
+                make.trailing.equalTo(self.titleLabel.snp.trailing)
+            }
+
+            self.followersRatingView.translatesAutoresizingMaskIntoConstraints = false
+            self.followersRatingView.snp.makeConstraints { make in
+                make.top.equalTo(self.createdCoursesRatingView.snp.bottom).offset(self.appearance.ratingsSpacing)
+                make.leading.equalTo(self.titleLabel.snp.leading)
+                make.bottom.equalToSuperview().offset(-self.appearance.ratingsInsets.bottom)
+                make.trailing.equalTo(self.titleLabel.snp.trailing)
+            }
+        } else {
+            self.createdCoursesRatingView.translatesAutoresizingMaskIntoConstraints = false
+            self.createdCoursesRatingView.snp.makeConstraints { make in
+                make.top.greaterThanOrEqualTo(self.titleLabel.snp.bottom).offset(self.appearance.ratingsSpacing)
+                make.leading.equalTo(self.titleLabel.snp.leading)
+                make.bottom.equalToSuperview().offset(-self.appearance.ratingsInsets.bottom)
+            }
+
+            self.followersRatingView.translatesAutoresizingMaskIntoConstraints = false
+            self.followersRatingView.snp.makeConstraints { make in
+                make.leading.equalTo(self.createdCoursesRatingView.snp.trailing).offset(self.appearance.ratingsSpacing)
+                make.bottom.equalToSuperview().offset(-self.appearance.ratingsInsets.bottom)
+                make.trailing.lessThanOrEqualTo(self.titleLabel.snp.trailing)
+            }
         }
     }
 }

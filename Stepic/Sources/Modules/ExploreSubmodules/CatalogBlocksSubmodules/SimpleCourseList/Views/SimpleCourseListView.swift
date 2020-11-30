@@ -57,7 +57,7 @@ final class SimpleCourseListView: UIView {
     }
 
     private var layoutItemHeight: CGFloat {
-        DeviceInfo.current.diagonal <= 4.7
+        DeviceInfo.current.isSmallDiagonal
             ? self.appearance.layoutIncreasedItemHeight
             : self.appearance.layoutDefaultItemHeight
     }

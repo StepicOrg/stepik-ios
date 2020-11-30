@@ -15,7 +15,7 @@ extension AuthorsCourseListView {
 }
 
 final class AuthorsCourseListView: UIView {
-    private static let layoutRowsCount = 1
+    private static let layoutRowsCount = 3
 
     let appearance: Appearance
 
@@ -57,7 +57,7 @@ final class AuthorsCourseListView: UIView {
     }
 
     private var layoutItemHeight: CGFloat {
-        DeviceInfo.current.diagonal <= 4.7
+        DeviceInfo.current.isSmallDiagonal
             ? self.appearance.layoutIncreasedItemHeight
             : self.appearance.layoutDefaultItemHeight
     }
