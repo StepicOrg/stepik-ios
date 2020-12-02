@@ -108,31 +108,6 @@ extension ExploreInteractor: StoriesOutputProtocol {
     }
 }
 
-extension ExploreInteractor: TagsOutputProtocol {
-    func presentCourseList(type: TagCourseListType) {
-        self.doFullscreenCourseListPresentation(
-            request: .init(
-                presentationDescription: nil,
-                courseListType: type
-            )
-        )
-    }
-}
-
-extension ExploreInteractor: CourseListCollectionOutputProtocol {
-    func presentCourseList(
-        presentationDescription: CourseList.PresentationDescription,
-        type: CollectionCourseListType
-    ) {
-        self.doFullscreenCourseListPresentation(
-            request: .init(
-                presentationDescription: presentationDescription,
-                courseListType: type
-            )
-        )
-    }
-}
-
 extension ExploreInteractor: CourseListFilterOutputProtocol {
     func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
         self.doSearchResultsCourseListFiltersUpdate(request: .init(filters: filters))
