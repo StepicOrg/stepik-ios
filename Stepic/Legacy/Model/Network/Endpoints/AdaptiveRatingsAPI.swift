@@ -11,10 +11,8 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-//TODO: Better refactor this to two classes
 final class AdaptiveRatingsAPI: APIEndpoint {
     override var name: String { "rating" }
-    var restoreName: String { "rating-restore" }
 
     typealias RatingRecord = (userId: Int, exp: Int, rank: Int, isFake: Bool)
     typealias Scoreboard = (allCount: Int, leaders: [RatingRecord])
@@ -92,35 +90,6 @@ final class AdaptiveRatingsAPI: APIEndpoint {
                         leaders: leaders
                     )
                     seal.fulfill(scoreboard)
-                }
-            }
-        }
-    }
-
-    func restore(courseId: Int) -> Promise<(exp: Int, streak: Int)> {
-        var params: Parameters = [
-            "course": courseId
-        ]
-
-        if let token = AuthInfo.shared.token?.accessToken {
-            params["token"] = token
-        }
-
-        return Promise { seal in
-            self.manager.request(
-                "\(RemoteConfig.shared.adaptiveBackendURL)/\(self.restoreName)",
-                method: .get,
-                parameters: params,
-                encoding: URLEncoding.default,
-                headers: nil
-            ).validate().responseSwiftyJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    seal.reject(error)
-                case .success(let json):
-                    let exp = json["exp"].intValue
-                    let streak = json["streak"].intValue
-                    seal.fulfill((exp: exp, streak: streak))
                 }
             }
         }
