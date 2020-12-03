@@ -15,11 +15,15 @@ enum CourseInfoTabReviews {
     enum ReviewsLoad {
         struct Request {}
 
-        struct Response {
+        struct Data {
             let course: Course
             let reviews: [CourseReview]
             let hasNextPage: Bool
             let currentUserReview: CourseReview?
+        }
+
+        struct Response {
+            let result: StepikResult<Data>
         }
 
         struct ViewModel {
@@ -107,6 +111,7 @@ enum CourseInfoTabReviews {
 
     enum ViewControllerState {
         case loading
+        case error
         case result(data: ReviewsResult)
     }
 
