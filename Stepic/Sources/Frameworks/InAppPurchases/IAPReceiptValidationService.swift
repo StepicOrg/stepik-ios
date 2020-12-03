@@ -74,3 +74,70 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
         case requestFailed
     }
 }
+
+fileprivate final class IAPReceiptRefreshRequest: NSObject, SKRequestDelegate {
+    typealias CompletionHandler = (ResultType) -> Void
+
+    private let request: SKReceiptRefreshRequest
+    private let completionHandler: CompletionHandler?
+
+    init(receiptProperties: [String: Any]?, completionHandler: CompletionHandler?) {
+        self.request = SKReceiptRefreshRequest(receiptProperties: receiptProperties)
+        self.completionHandler = completionHandler
+
+        super.init()
+
+        self.request.delegate = self
+    }
+
+    deinit {
+        self.request.delegate = nil
+    }
+
+    // MARK: Public API
+
+    func start() {
+        self.request.start()
+    }
+
+    func cancel() {
+        self.request.cancel()
+    }
+
+    // MARK: SKRequestDelegate
+
+    func requestDidFinish(_ request: SKRequest) {
+        #if DEBUG
+        print("IAPReceiptRefreshRequest :: requestDidFinish")
+
+        if let receiptRefreshRequest = request as? SKReceiptRefreshRequest {
+            let receiptProperties = receiptRefreshRequest.receiptProperties ?? [:]
+
+            print("IAPReceiptRefreshRequest :: printing receipt properties")
+
+            for (key, value) in receiptProperties {
+                print("\(key): \(value)")
+            }
+        }
+        #endif
+
+        DispatchQueue.main.async {
+            self.completionHandler?(.success)
+        }
+    }
+
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        #if DEBUG
+        print("IAPReceiptRefreshRequest :: request did fail with error = \(error)")
+        #endif
+
+        DispatchQueue.main.async {
+            self.completionHandler?(.error(error))
+        }
+    }
+
+    enum ResultType {
+        case success
+        case error(Error)
+    }
+}
