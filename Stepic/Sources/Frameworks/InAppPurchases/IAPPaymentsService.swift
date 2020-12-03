@@ -88,7 +88,7 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
             return
         }
 
-        self.validateReceipt(transaction: transaction, payload: payload)
+        self.validateReceipt(transaction: transaction, payload: payload, forceRefreshReceipt: true)
     }
 
     enum Error: Swift.Error {
@@ -163,11 +163,16 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
         }
     }
 
-    private func validateReceipt(transaction: SKPaymentTransaction, payload: CoursePaymentPayload) {
+    private func validateReceipt(
+        transaction: SKPaymentTransaction,
+        payload: CoursePaymentPayload,
+        forceRefreshReceipt: Bool = false
+    ) {
         self.receiptValidationService.validateCoursePayment(
             courseID: payload.courseID,
             price: payload.price,
-            currencyCode: payload.currencyCode
+            currencyCode: payload.currencyCode,
+            forceRefreshReceipt: forceRefreshReceipt
         ).done { _ in
             self.delegate?.iapPaymentsService(self, didPurchaseCourse: payload.courseID)
 

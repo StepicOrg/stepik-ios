@@ -3,11 +3,33 @@ import PromiseKit
 import StoreKit
 
 protocol IAPReceiptValidationServiceProtocol: AnyObject {
-    func validateCoursePayment(courseID: Course.IdType, price: Double, currencyCode: String?) -> Promise<CoursePayment>
+    func validateCoursePayment(
+        courseID: Course.IdType,
+        price: Double,
+        currencyCode: String?,
+        forceRefreshReceipt: Bool
+    ) -> Promise<CoursePayment>
+}
+
+extension IAPReceiptValidationServiceProtocol {
+    func validateCoursePayment(
+        courseID: Course.IdType,
+        price: Double,
+        currencyCode: String?
+    ) -> Promise<CoursePayment> {
+        self.validateCoursePayment(
+            courseID: courseID,
+            price: price,
+            currencyCode: currencyCode,
+            forceRefreshReceipt: false
+        )
+    }
 }
 
 final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
     private let coursePaymentsNetworkService: CoursePaymentsNetworkServiceProtocol
+
+    private var receiptRefreshRequest: IAPReceiptRefreshRequest?
 
     init(coursePaymentsNetworkService: CoursePaymentsNetworkServiceProtocol) {
         self.coursePaymentsNetworkService = coursePaymentsNetworkService
@@ -16,27 +38,34 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
     func validateCoursePayment(
         courseID: Course.IdType,
         price: Double,
-        currencyCode: String?
+        currencyCode: String?,
+        forceRefreshReceipt: Bool
     ) -> Promise<CoursePayment> {
-        guard let receiptString = self.getAppStoreReceiptBase64EncodedString() else {
-            return Promise(error: Error.noAppStoreReceiptPresent)
-        }
+        Promise { seal in
+            firstly {
+                self.fetchReceipt(forceRefresh: forceRefreshReceipt)
+            }.then { receiptStringOrNil -> Promise<CoursePayment> in
+                guard let receiptString = receiptStringOrNil else {
+                    return Promise(error: Error.noAppStoreReceiptPresent)
+                }
 
-        guard let currencyCode = currencyCode,
-              let bundleIdentifier = Bundle.main.bundleIdentifier else {
-            return Promise(error: Error.invalidPaymentData)
-        }
+                guard let currencyCode = currencyCode,
+                      let bundleIdentifier = Bundle.main.bundleIdentifier else {
+                    return Promise(error: Error.invalidPaymentData)
+                }
 
-        let paymentData = CoursePayment.DataFactory.generateDataForAppleProvider(
-            receiptData: receiptString,
-            bundleID: bundleIdentifier,
-            amount: price,
-            currency: currencyCode
-        )
-        let payment = CoursePayment(courseID: courseID, data: paymentData)
+                let paymentData = CoursePayment.DataFactory.generateDataForAppleProvider(
+                    receiptData: receiptString,
+                    bundleID: bundleIdentifier,
+                    amount: price,
+                    currency: currencyCode
+                )
+                let payment = CoursePayment(courseID: courseID, data: paymentData)
 
-        return Promise { seal in
-            self.coursePaymentsNetworkService.create(coursePayment: payment).done { coursePayment in
+                return .value(payment)
+            }.then { payment in
+                self.coursePaymentsNetworkService.create(coursePayment: payment)
+            }.done { coursePayment in
                 if coursePayment.status == .success {
                     print("IAPReceiptValidationService :: successfully verified course payment for course: \(courseID)")
                     seal.fulfill(coursePayment)
@@ -48,6 +77,23 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
                 print("IAPReceiptValidationService :: failed create course payment with error: \(error)")
                 seal.reject(Error.requestFailed)
             }
+        }
+    }
+
+    private func fetchReceipt(forceRefresh: Bool) -> Guarantee<String?> {
+        if forceRefresh {
+            return Guarantee { seal in
+                self.receiptRefreshRequest = IAPReceiptRefreshRequest(
+                    receiptProperties: nil,
+                    completionHandler: { _ in
+                        self.receiptRefreshRequest = nil
+                        seal(self.getAppStoreReceiptBase64EncodedString())
+                    }
+                )
+                self.receiptRefreshRequest?.start()
+            }
+        } else {
+            return .value(self.getAppStoreReceiptBase64EncodedString())
         }
     }
 
