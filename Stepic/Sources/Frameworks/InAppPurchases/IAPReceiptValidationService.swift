@@ -43,7 +43,7 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
     ) -> Promise<CoursePayment> {
         Promise { seal in
             firstly {
-                self.fetchReceipt(forceRefresh: forceRefreshReceipt)
+                self.fetchReceiptBase64EncodedString(forceRefresh: forceRefreshReceipt)
             }.then { receiptStringOrNil -> Promise<CoursePayment> in
                 guard let receiptString = receiptStringOrNil else {
                     return Promise(error: Error.noAppStoreReceiptPresent)
@@ -80,7 +80,7 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
         }
     }
 
-    private func fetchReceipt(forceRefresh: Bool) -> Guarantee<String?> {
+    private func fetchReceiptBase64EncodedString(forceRefresh: Bool) -> Guarantee<String?> {
         if forceRefresh {
             return Guarantee { seal in
                 self.receiptRefreshRequest = IAPReceiptRefreshRequest(
