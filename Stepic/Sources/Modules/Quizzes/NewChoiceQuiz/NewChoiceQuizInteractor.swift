@@ -101,4 +101,19 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
     func update(quizTitleVisibility isVisible: Bool) {
         self.isQuizTitleVisible = isVisible
     }
+
+    func isReplyValid(_ reply: Reply) -> ReplyValidationResultType {
+        let errorMessage = NSLocalizedString("ChoiceQuizEmptyReplyMessage", comment: "")
+
+        guard let reply = reply as? ChoiceReply,
+              let dataset = self.currentDataset else {
+            return .error(message: errorMessage)
+        }
+
+        if reply.choices.contains(true) || dataset.isMultipleChoice {
+            return .success
+        } else {
+            return .error(message: errorMessage)
+        }
+    }
 }
