@@ -912,6 +912,9 @@ TableQuizTitle = "Select the right cells";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 
+/* ChoiceQuiz */
+ChoiceQuizEmptyReplyMessage = "Choose an option";
+
 /* Table Quiz */
 MultipleChoiceTableQuizPrompt = "Select one or more options";
 SingleChoiceTableQuizPrompt = "Select one option";

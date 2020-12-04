@@ -197,6 +197,8 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
         }
     }
 
+    // MARK: Private Helpers
+
     private func submitCurrentReply() {
         guard let reply = self.currentReply else {
             return
@@ -206,9 +208,20 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
 
         if self.shouldRetryWithNewAttempt {
             self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: true))
-        } else {
-            self.interactor.doSubmissionSubmit(request: .init(reply: reply))
+        } else if let replyValidationResult = self.childQuizModuleInput?.isReplyValid(reply) {
+            switch replyValidationResult {
+            case .success:
+                self.interactor.doSubmissionSubmit(request: .init(reply: reply))
+            case .error(let message):
+                self.presentReplyValidationErrorAlert(message: message)
+            }
         }
+    }
+
+    private func presentReplyValidationErrorAlert(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
