@@ -18,6 +18,26 @@ class BaseCourseListNetworkService {
         self.coursesAPI = coursesAPI
     }
 
+    fileprivate func getCoursesIDsSlice(
+        at page: Int,
+        ids: [Course.IdType],
+        pageSize: Int = 20
+    ) -> ([Course.IdType], Meta) {
+        if ids.count <= pageSize {
+            return (ids, Meta.oneAndOnlyPage)
+        }
+
+        guard let slices = ids.group(by: pageSize) else {
+            return (ids, Meta.oneAndOnlyPage)
+        }
+
+        let pageIndex = max(0, page - 1)
+        let hasNext = slices.indices.contains(pageIndex + 1)
+        let hasPrev = slices.indices.contains(pageIndex - 1)
+
+        return (slices[pageIndex], Meta(hasNext: hasNext, hasPrev: hasPrev, page: page))
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
     }
@@ -165,16 +185,17 @@ final class DeepLinkCourseListNetworkService: BaseCourseListNetworkService, Cour
     }
 
     func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
-        let finalMeta = Meta.oneAndOnlyPage
-        return Promise { seal in
-            self.coursesAPI.retrieve(
-                ids: self.type.ids
-            ).done { courses in
-                let courses = courses.reordered(order: self.type.ids, transform: { $0.id })
-                seal.fulfill((courses, finalMeta))
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
+        Promise { seal in
+            let (coursesIDs, meta) = self.getCoursesIDsSlice(at: page, ids: self.type.ids)
+            self.coursesAPI
+                .retrieve(ids: coursesIDs)
+                .map { (coursesIDs, meta, $0) }
+                .done { coursesIDs, meta, courses in
+                    let finalCourses = courses.reordered(order: coursesIDs, transform: { $0.id })
+                    seal.fulfill((finalCourses, meta))
+                }.catch { _ in
+                    seal.reject(Error.fetchFailed)
+                }
         }
     }
 }
@@ -273,8 +294,6 @@ final class VisitedCourseListNetworkService: BaseCourseListNetworkService, Cours
 }
 
 final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
-    private static let pageSize = 20
-
     let type: CatalogBlockCourseListType
     private let courseListsAPI: CourseListsAPI
 
@@ -299,21 +318,7 @@ final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, 
                     throw Error.fetchFailed
                 }
 
-                let (coursesIDs, meta): ([Course.IdType], Meta) = {
-                    if courseList.coursesArray.count <= Self.pageSize {
-                        return (courseList.coursesArray, Meta.oneAndOnlyPage)
-                    }
-
-                    guard let slices = courseList.coursesArray.group(by: Self.pageSize) else {
-                        return (courseList.coursesArray, Meta.oneAndOnlyPage)
-                    }
-
-                    let pageIndex = max(0, page - 1)
-                    let hasNext = slices.indices.contains(pageIndex + 1)
-                    let hasPrev = slices.indices.contains(pageIndex - 1)
-
-                    return (slices[pageIndex], Meta(hasNext: hasNext, hasPrev: hasPrev, page: page))
-                }()
+                let (coursesIDs, meta) = self.getCoursesIDsSlice(at: page, ids: courseList.coursesArray)
 
                 return self.coursesAPI
                     .retrieve(ids: coursesIDs)
