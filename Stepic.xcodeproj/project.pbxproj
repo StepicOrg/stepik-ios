@@ -1236,7 +1236,7 @@
 		62E98B5E61502FC4FA3ECFD0 /* CourseListDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A2F0861B457FAABF490 /* CourseListDataFlow.swift */; };
 		62E98B63D1868C8DA5CB5523 /* IAPProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E988A858A4CE63EA182EA6 /* IAPProductsService.swift */; };
 		62E98B783CD4FFFD562A3340 /* CourseInfoSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9809834661AB109B65859 /* CourseInfoSubmoduleProtocol.swift */; };
-		62E98B8919D18CD0F8238F97 /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */; };
+		62E98B8919D18CD0F8238F97 /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E4C4AECA5B066006DE7 /* CollectionExtensions.swift */; };
 		62E98B9B4B1A1427483116E3 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CC548CA885CEA0EDEC2 /* ProfileEditView.swift */; };
 		62E98BA429FB13408B1961B7 /* NewMatchingQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AA5B57A1D9799E79B0B /* NewMatchingQuizViewModel.swift */; };
 		62E98BB34B2B0C1B988F2A24 /* CourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989D0C0B39B62D2EF9A05 /* CourseListView.swift */; };
@@ -2855,7 +2855,7 @@
 		62E98E2ECCF25CB6DCEC8F94 /* CodeQuizFullscreenInstructionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeQuizFullscreenInstructionView.swift; sourceTree = "<group>"; };
 		62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsNetworkService.swift; sourceTree = "<group>"; };
 		62E98E49937F0B5D6EA37108 /* CourseInfoTabSyllabusOutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusOutputProtocol.swift; sourceTree = "<group>"; };
-		62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+SafeSubscript.swift"; sourceTree = "<group>"; };
+		62E98E4C4AECA5B066006DE7 /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
 		62E98E4D4741666669A686DC /* CourseInfoTabSyllabusCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellView.swift; sourceTree = "<group>"; };
 		62E98E5CA4710BE490DE7E6D /* ContentLanguageSwitchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchProvider.swift; sourceTree = "<group>"; };
 		62E98E5D6E662E9B3CFE47DE /* CourseInfoTabReviewsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsAssembly.swift; sourceTree = "<group>"; };
@@ -3269,7 +3269,7 @@
 			children = (
 				62E98BC02EC89CF78E0FC7A6 /* Array+Reordering.swift */,
 				2C3ABA9023D229C200E90439 /* Bundle+Version.swift */,
-				62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */,
+				62E98E4C4AECA5B066006DE7 /* CollectionExtensions.swift */,
 				2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */,
 				62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */,
 			);
@@ -8954,7 +8954,7 @@
 				2C73E24124D0117400340052 /* NewProfileSocialProfilesViewModel.swift in Sources */,
 				62E98DE7FA0EE5EB23136B52 /* AchievementsListPresenter.swift in Sources */,
 				2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */,
-				62E98B8919D18CD0F8238F97 /* Collection+SafeSubscript.swift in Sources */,
+				62E98B8919D18CD0F8238F97 /* CollectionExtensions.swift in Sources */,
 				2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */,
 				62E987CB113F6D20B108D070 /* AchievementPopupAlertManager.swift in Sources */,
 				08484F0A211AF4320006266F /* Story.swift in Sources */,
