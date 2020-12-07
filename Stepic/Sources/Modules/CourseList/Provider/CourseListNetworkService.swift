@@ -273,6 +273,8 @@ final class VisitedCourseListNetworkService: BaseCourseListNetworkService, Cours
 }
 
 final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    private static let pageSize = 20
+
     let type: CatalogBlockCourseListType
     private let courseListsAPI: CourseListsAPI
 
@@ -291,17 +293,31 @@ final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, 
         Promise { seal in
             self.courseListsAPI.retrieve(
                 id: self.type.courseListID,
-                page: page
-            ).then { courseLists, meta -> Promise<([Course.IdType], Meta, [Course])> in
+                page: 1
+            ).then { courseLists, _ -> Promise<([Course.IdType], Meta, [Course])> in
                 guard let courseList = courseLists.first else {
                     throw Error.fetchFailed
                 }
 
-                let ids = courseList.coursesArray
+                let (coursesIDs, meta): ([Course.IdType], Meta) = {
+                    if courseList.coursesArray.count <= Self.pageSize {
+                        return (courseList.coursesArray, Meta.oneAndOnlyPage)
+                    }
+
+                    guard let slices = courseList.coursesArray.group(by: Self.pageSize) else {
+                        return (courseList.coursesArray, Meta.oneAndOnlyPage)
+                    }
+
+                    let pageIndex = max(0, page - 1)
+                    let hasNext = slices.indices.contains(pageIndex + 1)
+                    let hasPrev = slices.indices.contains(pageIndex - 1)
+
+                    return (slices[pageIndex], Meta(hasNext: hasNext, hasPrev: hasPrev, page: page))
+                }()
 
                 return self.coursesAPI
-                    .retrieve(ids: ids)
-                    .map { (ids, meta, $0) }
+                    .retrieve(ids: coursesIDs)
+                    .map { (coursesIDs, meta, $0) }
             }.done { ids, meta, courses in
                 let resultCourses = courses.reordered(order: ids, transform: { $0.id })
                 seal.fulfill((resultCourses, meta))
