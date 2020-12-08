@@ -131,6 +131,16 @@ extension AnalyticsEvent {
         case courseScreen = "course_screen"
     }
 
+    static func courseBuyReceiptRefreshed(id: Int, successfully: Bool) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course receipt refreshed",
+            parameters: [
+                "course": id,
+                "result": successfully ? "success" : "error"
+            ]
+        )
+    }
+
     // MARK: - Steps -
 
     static func submissionMade(
