@@ -33,6 +33,11 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
     private let receiptValidationService: IAPReceiptValidationServiceProtocol
 
     private let userAccountService: UserAccountServiceProtocol
+    private let analytics: Analytics
+
+    /// Protected `MutableState` value that provides thread-safe access to state values.
+    @Protected
+    private var mutableState = MutableState()
 
     init(
         paymentQueue: SKPaymentQueue = SKPaymentQueue.default(),
@@ -42,12 +47,14 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
                 coursePaymentsAPI: CoursePaymentsAPI()
             )
         ),
-        userAccountService: UserAccountServiceProtocol = UserAccountService()
+        userAccountService: UserAccountServiceProtocol = UserAccountService(),
+        analytics: Analytics = StepikAnalytics.shared
     ) {
         self.paymentQueue = paymentQueue
         self.paymentsCache = paymentsCache
         self.receiptValidationService = receiptValidationService
         self.userAccountService = userAccountService
+        self.analytics = analytics
         super.init()
     }
 
@@ -88,7 +95,20 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
             return
         }
 
-        self.validateReceipt(transaction: transaction, payload: payload)
+        self.validateReceipt(transaction: transaction, payload: payload, forceRefreshReceipt: true)
+    }
+
+    // MARK: Inner Types
+
+    private struct MutableState {
+        var courseIDByValidateReceiptFailedCount: [Course.IdType: Int] = [:]
+        var courseIDByValidateReceiptWithRefresh: [Course.IdType: Bool] = [:]
+
+        func isAutoRetryValidateReceiptOngoing(courseID: Course.IdType) -> Bool {
+            let validateReceiptFailedCount = self.courseIDByValidateReceiptFailedCount[courseID, default: 0]
+            let validateReceiptWithRefresh = self.courseIDByValidateReceiptWithRefresh[courseID, default: false]
+            return validateReceiptFailedCount == 1 && validateReceiptWithRefresh
+        }
     }
 
     enum Error: Swift.Error {
@@ -163,23 +183,54 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
         }
     }
 
-    private func validateReceipt(transaction: SKPaymentTransaction, payload: CoursePaymentPayload) {
+    private func validateReceipt(
+        transaction: SKPaymentTransaction,
+        payload: CoursePaymentPayload,
+        forceRefreshReceipt: Bool = false
+    ) {
+        let courseID = payload.courseID
+
         self.receiptValidationService.validateCoursePayment(
             courseID: payload.courseID,
             price: payload.price,
-            currencyCode: payload.currencyCode
+            currencyCode: payload.currencyCode,
+            forceRefreshReceipt: forceRefreshReceipt
         ).done { _ in
+            if self.mutableState.isAutoRetryValidateReceiptOngoing(courseID: courseID) {
+                self.$mutableState.write { $0.courseIDByValidateReceiptWithRefresh[courseID] = false }
+                self.analytics.send(.courseBuyReceiptRefreshed(id: courseID, successfully: true))
+            }
+
             self.delegate?.iapPaymentsService(self, didPurchaseCourse: payload.courseID)
 
             self.paymentsCache.removeCoursePayment(for: transaction)
             self.paymentQueue.finishTransaction(transaction)
         }.catch { error in
             print("IAPPaymentsService :: failed validate payment with error: \(error)")
-            self.delegate?.iapPaymentsService(
-                self,
-                didFailPurchaseCourse: payload.courseID,
-                withError: Error.paymentReceiptValidationFailed
-            )
+
+            if self.mutableState.isAutoRetryValidateReceiptOngoing(courseID: courseID) {
+                self.$mutableState.write { $0.courseIDByValidateReceiptWithRefresh[courseID] = false }
+                self.analytics.send(.courseBuyReceiptRefreshed(id: courseID, successfully: false))
+            }
+
+            self.$mutableState.write { $0.courseIDByValidateReceiptFailedCount[courseID, default: 0] += 1 }
+
+            if self.$mutableState.read({ $0.courseIDByValidateReceiptFailedCount[courseID] }) == 1 {
+                self.$mutableState.write { $0.courseIDByValidateReceiptWithRefresh[courseID] = true }
+
+                self.retryValidateReceipt(
+                    courseID: courseID,
+                    productIdentifier: transaction.payment.productIdentifier
+                )
+            } else {
+                self.$mutableState.write { $0.courseIDByValidateReceiptWithRefresh[courseID] = false }
+
+                self.delegate?.iapPaymentsService(
+                    self,
+                    didFailPurchaseCourse: courseID,
+                    withError: Error.paymentReceiptValidationFailed
+                )
+            }
         }
     }
 }
