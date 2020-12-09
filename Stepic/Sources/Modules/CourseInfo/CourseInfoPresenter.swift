@@ -61,10 +61,13 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response) {
-        let viewModel = CourseInfo.CourseShareAction.ViewModel(
-            urlPath: response.urlPath
-        )
-        self.viewController?.displayCourseSharing(viewModel: viewModel)
+        var url = response.url
+
+        if let deepLinkQueryParameters = self.getDeepLinkQueryParameters(courseViewSource: response.courseViewSource) {
+            url.appendQueryParameters(deepLinkQueryParameters)
+        }
+
+        self.viewController?.displayCourseSharing(viewModel: .init(urlPath: url.absoluteString))
     }
 
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response) {

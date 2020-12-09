@@ -101,7 +101,8 @@ enum CourseInfo {
         struct Request {}
 
         struct Response {
-            let urlPath: String
+            let url: URL
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
