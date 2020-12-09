@@ -231,7 +231,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     self.iapService.buy(course: course, delegate: self)
                 } else {
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                    self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                    self.presenter.presentPaidCourseBuying(
+                        response: .init(course: course, courseViewSource: self.courseViewSource)
+                    )
                 }
                 return
             }
@@ -456,7 +458,9 @@ extension CourseInfoInteractor: IAPServiceDelegate {
         if let iapServiceError = error as? IAPService.Error {
             switch iapServiceError {
             case .unsupportedCourse, .noProductIDsFound, .noProductsFound, .productsRequestFailed:
-                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                self.presenter.presentPaidCourseBuying(
+                    response: .init(course: course, courseViewSource: self.courseViewSource)
+                )
             case .paymentWasCancelled:
                 break
             case .paymentFailed, .paymentUserChanged:

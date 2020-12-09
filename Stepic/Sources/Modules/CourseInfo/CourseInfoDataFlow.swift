@@ -209,6 +209,7 @@ enum CourseInfo {
     enum PaidCourseBuyingPresentation {
         struct Response {
             let course: Course
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
