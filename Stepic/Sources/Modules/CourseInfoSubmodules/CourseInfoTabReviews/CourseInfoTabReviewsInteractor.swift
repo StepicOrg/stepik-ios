@@ -23,6 +23,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     }
     private var isOnline = false
     private var didLoadFromCache = false
+    private var didPresentCourseReviews = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
 
@@ -60,17 +61,18 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             let isOnline = strongSelf.isOnline
             print("course info tab reviews interactor: start fetching reviews, isOnline = \(isOnline)")
 
-            strongSelf.fetchReviewsInAppropriateMode(course: course, isOnline: isOnline).done { response in
-                let isCacheEmpty = !strongSelf.didLoadFromCache && response.reviews.isEmpty
+            strongSelf.fetchReviewsInAppropriateMode(course: course, isOnline: isOnline).done { data in
+                let isCacheEmpty = !strongSelf.didLoadFromCache && data.reviews.isEmpty
 
-                strongSelf.paginationState = PaginationState(page: 1, hasNext: response.hasNextPage)
+                strongSelf.paginationState = PaginationState(page: 1, hasNext: data.hasNextPage)
                 DispatchQueue.main.async {
                     print("course info tab reviews interactor: finish fetching reviews, isOnline = \(isOnline)")
 
                     if isCacheEmpty {
                         // Wait for remote fetch result.
                     } else {
-                        strongSelf.presenter.presentCourseReviews(response: response)
+                        strongSelf.didPresentCourseReviews = true
+                        strongSelf.presenter.presentCourseReviews(response: .init(result: .success(data)))
                     }
                 }
 
@@ -78,8 +80,15 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                     strongSelf.didLoadFromCache = true
                     strongSelf.doCourseReviewsFetch(request: .init())
                 }
-            }.catch { _ in
-                // TODO: handle
+            }.catch { error in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if case Error.remoteFetchFailed = error,
+                   strongSelf.didLoadFromCache && !strongSelf.didPresentCourseReviews {
+                    strongSelf.presenter.presentCourseReviews(response: .init(result: .failure(error)))
+                }
             }.finally {
                 strongSelf.fetchSemaphore.signal()
             }
@@ -179,7 +188,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     private func fetchReviewsInAppropriateMode(
         course: Course,
         isOnline: Bool
-    ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
+    ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Data> {
         Promise { seal in
             firstly {
                 isOnline && self.didLoadFromCache
@@ -194,7 +203,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 self.currentUserReview = currentUserReview
 
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
-                let response = CourseInfoTabReviews.ReviewsLoad.Response(
+                let response = CourseInfoTabReviews.ReviewsLoad.Data(
                     course: course,
                     reviews: sortedReviews,
                     hasNextPage: meta.hasNext,
@@ -202,8 +211,17 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 )
 
                 seal.fulfill(response)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
+            }.catch { error in
+                if let providerError = error as? CourseInfoTabReviewsProvider.Error {
+                    switch providerError {
+                    case .persistenceFetchFailed:
+                        seal.reject(Error.cacheFetchFailed)
+                    case .networkFetchFailed:
+                        seal.reject(Error.remoteFetchFailed)
+                    }
+                } else {
+                    seal.reject(Error.fetchFailed)
+                }
             }
         }
     }
@@ -230,6 +248,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     enum Error: Swift.Error {
         case undefinedCourse
         case fetchFailed
+        case cacheFetchFailed
+        case remoteFetchFailed
     }
 }
 

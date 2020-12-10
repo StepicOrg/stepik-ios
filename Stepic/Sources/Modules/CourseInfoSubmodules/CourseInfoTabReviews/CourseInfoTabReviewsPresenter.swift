@@ -13,24 +13,29 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
     weak var viewController: CourseInfoTabReviewsViewControllerProtocol?
 
     func presentCourseReviews(response: CourseInfoTabReviews.ReviewsLoad.Response) {
-        let viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel = .init(
-            state: CourseInfoTabReviews.ViewControllerState.result(
-                data: .init(
-                    reviews: response.reviews.compactMap {
-                        self.makeViewModel(
-                            courseReview: $0,
-                            isCurrentUserReview: $0.id == response.currentUserReview?.id
+        switch response.result {
+        case .success(let data):
+            let viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel = .init(
+                state: CourseInfoTabReviews.ViewControllerState.result(
+                    data: .init(
+                        reviews: data.reviews.compactMap {
+                            self.makeViewModel(
+                                courseReview: $0,
+                                isCurrentUserReview: $0.id == data.currentUserReview?.id
+                            )
+                        },
+                        hasNextPage: data.hasNextPage,
+                        writeCourseReviewState: self.getWriteCourseReviewState(
+                            course: data.course,
+                            currentUserReview: data.currentUserReview
                         )
-                    },
-                    hasNextPage: response.hasNextPage,
-                    writeCourseReviewState: self.getWriteCourseReviewState(
-                        course: response.course,
-                        currentUserReview: response.currentUserReview
                     )
                 )
             )
-        )
-        self.viewController?.displayCourseReviews(viewModel: viewModel)
+            self.viewController?.displayCourseReviews(viewModel: viewModel)
+        case .failure:
+            self.viewController?.displayCourseReviews(viewModel: .init(state: .error))
+        }
     }
 
     func presentNextCourseReviews(response: CourseInfoTabReviews.NextReviewsLoad.Response) {

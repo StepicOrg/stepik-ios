@@ -913,6 +913,9 @@ TableQuizTitle = "Выберите верные ячейки";
 
 UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 
+/* ChoiceQuiz */
+ChoiceQuizEmptyReplyMessage = "Выберите вариант";
+
 /* Table Quiz */
 MultipleChoiceTableQuizPrompt = "Выберите один или несколько вариантов";
 SingleChoiceTableQuizPrompt = "Выберите один вариант";

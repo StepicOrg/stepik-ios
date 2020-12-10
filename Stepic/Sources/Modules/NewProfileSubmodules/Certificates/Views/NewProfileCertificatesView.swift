@@ -99,6 +99,7 @@ final class NewProfileCertificatesView: UIView {
 
     private func calculateItemSize() -> CGSize {
         let width = self.bounds.width
+            - self.appearance.layoutSectionInset.left
             - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount)
             - self.appearance.layoutNextPageWidth
         let layoutItemWidth = (width / CGFloat(self.columnsCount)).rounded(.down)

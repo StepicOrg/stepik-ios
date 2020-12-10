@@ -2,17 +2,12 @@ import SnapKit
 import UIKit
 
 protocol CourseInfoTabReviewsViewDelegate: AnyObject {
-    func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
-    func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
-    func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
-    func courseInfoTabReviewsView(
-        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        willSelectRowAt indexPath: IndexPath
-    ) -> Bool
-    func courseInfoTabReviewsView(
-        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        didSelectRowAt indexPath: IndexPath
-    )
+    func courseInfoTabReviewsViewDidPaginationRequesting(_ view: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidRequestWriteReview(_ view: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidRequestEditReview(_ view: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidClickPlaceholderViewActionButton(_ view: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsView(_ view: CourseInfoTabReviewsView, willSelectRowAt indexPath: IndexPath) -> Bool
+    func courseInfoTabReviewsView(_ view: CourseInfoTabReviewsView, didSelectRowAt indexPath: IndexPath)
 }
 
 extension CourseInfoTabReviewsView {
@@ -26,6 +21,8 @@ extension CourseInfoTabReviewsView {
         let emptyStateLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
         let emptyStateLabelColor = UIColor.stepikPlaceholderText
         let emptyStateLabelInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
+
+        let errorPlaceholderViewBackgroundColor = UIColor.white
     }
 }
 
@@ -91,6 +88,21 @@ final class CourseInfoTabReviewsView: UIView {
         label.isHidden = true
         return label
     }()
+
+    private lazy var errorPlaceholderView: StepikPlaceholderView = {
+        let appearance = StepikPlaceholderView.Appearance(
+            backgroundColor: self.appearance.errorPlaceholderViewBackgroundColor
+        )
+
+        let view = StepikPlaceholderView()
+        view.appearance = appearance
+        view.delegate = self
+        view.isHidden = true
+
+        return view
+    }()
+
+    private var errorPlaceholderViewTopConstraint: Constraint?
 
     // Proxify delegates
     private weak var pageScrollViewDelegate: UIScrollViewDelegate?
@@ -166,13 +178,25 @@ final class CourseInfoTabReviewsView: UIView {
     func showLoading() {
         self.tableView.isHidden = true
         self.emptyStateLabel.isHidden = true
+        self.errorPlaceholderView.isHidden = true
         self.loadingIndicator.startAnimating()
     }
 
     func hideLoading() {
         self.tableView.isHidden = false
         self.emptyStateLabel.isHidden = false
+        self.errorPlaceholderView.isHidden = true
         self.loadingIndicator.stopAnimating()
+    }
+
+    func showErrorPlaceholder() {
+        self.errorPlaceholderView.set(placeholder: .noConnection)
+        self.errorPlaceholderView.delegate = self
+        self.errorPlaceholderView.isHidden = false
+    }
+
+    func hideErrorPlaceholder() {
+        self.errorPlaceholderView.isHidden = true
     }
 
     func popoverPresentationAnchorPoint(at indexPath: IndexPath) -> (UIView, CGRect) {
@@ -191,6 +215,7 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
         self.addSubview(self.emptyStateLabel)
+        self.addSubview(self.errorPlaceholderView)
         self.addSubview(self.loadingIndicator)
     }
 
@@ -213,6 +238,12 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
                 .offset(-self.appearance.emptyStateLabelInsets.right)
                 .priority(999)
             make.width.lessThanOrEqualTo(600)
+        }
+
+        self.errorPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.errorPlaceholderView.snp.makeConstraints { make in
+            self.errorPlaceholderViewTopConstraint = make.top.equalToSuperview().constraint
+            make.centerX.leading.bottom.trailing.equalToSuperview()
         }
 
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -279,6 +310,8 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
             let loadingIndicatorTopOffset = newValue.top + self.appearance.loadingIndicatorInsets.top
             self.loadingIndicatorTopConstraint?.update(offset: loadingIndicatorTopOffset)
+
+            self.errorPlaceholderViewTopConstraint?.update(offset: newValue.top)
         }
     }
 
@@ -298,5 +331,13 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue
         }
+    }
+}
+
+// MARK: - CourseInfoTabReviewsView: StepikPlaceholderViewDelegate -
+
+extension CourseInfoTabReviewsView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.courseInfoTabReviewsViewDidClickPlaceholderViewActionButton(self)
     }
 }

@@ -67,17 +67,29 @@ final class CourseInfoTabReviewsViewController: UIViewController {
         }
 
         if case .loading = newState {
+            self.courseInfoTabReviewsView?.hideErrorPlaceholder()
             self.courseInfoTabReviewsView?.showLoading()
             return
         }
 
         if case .loading = self.state {
+            self.courseInfoTabReviewsView?.hideErrorPlaceholder()
             self.courseInfoTabReviewsView?.hideLoading()
         }
 
-        if case .result(let data) = newState {
+        switch newState {
+        case .loading:
+            break
+        case .error:
+            self.courseInfoTabReviewsView?.showErrorPlaceholder()
+        case .result(let data):
+            self.courseInfoTabReviewsView?.hideErrorPlaceholder()
+
+            self.tableDataSource.viewModels = data.reviews
             self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
             self.courseInfoTabReviewsView?.writeCourseReviewState = data.writeCourseReviewState
+
+            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         }
     }
 }
@@ -86,11 +98,7 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel) {
-        if case .result(let data) = viewModel.state {
-            self.tableDataSource.viewModels = data.reviews
-            self.updateState(newState: viewModel.state)
-            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
-        }
+        self.updateState(newState: viewModel.state)
     }
 
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel) {
@@ -150,7 +158,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
 // MARK: - CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate -
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
-    func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+    func courseInfoTabReviewsViewDidPaginationRequesting(_ view: CourseInfoTabReviewsView) {
         guard self.canTriggerPagination else {
             return
         }
@@ -159,25 +167,25 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
         self.interactor.doNextCourseReviewsFetch(request: .init())
     }
 
-    func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+    func courseInfoTabReviewsViewDidRequestWriteReview(_ view: CourseInfoTabReviewsView) {
         self.interactor.doWriteCourseReviewPresentation(request: .init())
     }
 
-    func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+    func courseInfoTabReviewsViewDidRequestEditReview(_ view: CourseInfoTabReviewsView) {
         self.interactor.doWriteCourseReviewPresentation(request: .init())
     }
 
-    func courseInfoTabReviewsView(
-        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        willSelectRowAt indexPath: IndexPath
-    ) -> Bool {
+    func courseInfoTabReviewsViewDidClickPlaceholderViewActionButton(_ view: CourseInfoTabReviewsView) {
+        self.state = .loading
+        self.updateState(newState: self.state)
+        self.interactor.doCourseReviewsFetch(request: .init())
+    }
+
+    func courseInfoTabReviewsView(_ view: CourseInfoTabReviewsView, willSelectRowAt indexPath: IndexPath) -> Bool {
         self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
     }
 
-    func courseInfoTabReviewsView(
-        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        didSelectRowAt indexPath: IndexPath
-    ) {
+    func courseInfoTabReviewsView(_ view: CourseInfoTabReviewsView, didSelectRowAt indexPath: IndexPath) {
         guard let review = self.tableDataSource.viewModels[safe: indexPath.row],
               review.isCurrentUserReview else {
             return

@@ -42,7 +42,7 @@ window.location= &quot;mathjaxfinish://finished&quot;;
 &lt;/script&gt;</string>
 	<key>LocalTexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
+  MathJax.Hub.Config({messageStyle: &quot;none&quot;, TeX: {Macros: {R: &apos;{\\mathbb R}&apos;, N: &apos;{\\mathbb N}&apos;, Z: &apos;{\\mathbb Z}&apos; }}, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
 &lt;/script&gt;</string>
 	<key>LocalKaTeXScript</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;katex/katex.min.css&quot;&gt;
