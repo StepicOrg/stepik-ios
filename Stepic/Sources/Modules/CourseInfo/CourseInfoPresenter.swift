@@ -61,10 +61,13 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response) {
-        let viewModel = CourseInfo.CourseShareAction.ViewModel(
-            urlPath: response.urlPath
-        )
-        self.viewController?.displayCourseSharing(viewModel: viewModel)
+        var url = response.url
+
+        if let deepLinkQueryParameters = self.getDeepLinkQueryParameters(courseViewSource: response.courseViewSource) {
+            url.appendQueryParameters(deepLinkQueryParameters)
+        }
+
+        self.viewController?.displayCourseSharing(viewModel: .init(urlPath: url.absoluteString))
     }
 
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response) {
@@ -85,9 +88,15 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
-        if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
-            self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
+        guard var payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) else {
+            return
         }
+
+        if let deepLinkQueryParameters = self.getDeepLinkQueryParameters(courseViewSource: response.courseViewSource) {
+            payForCourseURL.appendQueryParameters(deepLinkQueryParameters)
+        }
+
+        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
     }
 
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
@@ -161,6 +170,22 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 error.localizedDescription
             ]
         )
+    }
+
+    private func getDeepLinkQueryParameters(courseViewSource: AnalyticsEvent.CourseViewSource) -> [String: String]? {
+        guard case .deepLink(let urlString) = courseViewSource,
+              let queryItems = URLComponents(string: urlString)?.queryItems else {
+            return nil
+        }
+
+        let keysWithValues = queryItems.compactMap { queryItem -> (String, String)? in
+            if let value = queryItem.value {
+                return (queryItem.name, value)
+            }
+            return nil
+        }
+
+        return Dictionary(uniqueKeysWithValues: keysWithValues)
     }
 
     private func makeProgressViewModel(progress: Progress) -> CourseInfoProgressViewModel {
