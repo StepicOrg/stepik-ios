@@ -24,6 +24,8 @@ final class HomeViewController: BaseExploreViewController {
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag: Bool = false
 
+    private var currentEnrolledCourseListState: EnrolledCourseListState?
+
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
@@ -53,6 +55,10 @@ final class HomeViewController: BaseExploreViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
             guard let strongSelf = self else {
                 return
+            }
+
+            if strongSelf.currentEnrolledCourseListState == .empty {
+                strongSelf.refreshStateForEnrolledCourses(state: .normal)
             }
 
             strongSelf.refreshStateForVisitedCourses(state: .shown)
@@ -257,6 +263,8 @@ final class HomeViewController: BaseExploreViewController {
                 type: Home.Submodule.enrolledCourses
             )
         )
+
+        self.currentEnrolledCourseListState = state
     }
 
     // MARK: - Visited courses submodule
