@@ -7,7 +7,7 @@ extension SimpleCourseListDefaultWidgetView {
         let titleLabelInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let subtitleLabelFont = UIFont.systemFont(ofSize: 15, weight: .regular)
-        let subtitleLabelInsets = LayoutInsets(left: 16, bottom: 16, right: 16)
+        let subtitleLabelInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
     }
 }
 
@@ -75,12 +75,15 @@ extension SimpleCourseListDefaultWidgetView: ProgrammaticallyInitializableViewPr
             make.leading.equalToSuperview().offset(self.appearance.titleLabelInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.titleLabelInsets.right)
         }
+        self.titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.subtitleLabel.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(self.titleLabel.snp.bottom).offset(self.appearance.subtitleLabelInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.subtitleLabelInsets.left)
             make.bottom.equalToSuperview().offset(-self.appearance.subtitleLabelInsets.bottom)
             make.trailing.equalToSuperview().offset(-self.appearance.subtitleLabelInsets.right)
         }
+        self.subtitleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
     }
 }
