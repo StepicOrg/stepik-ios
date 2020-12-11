@@ -2302,6 +2302,7 @@
 		2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsListTableViewCell.xib; sourceTree = "<group>"; };
 		2CBCD3A7213583EB005D10FF /* Model_CourseListRename_v25.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_CourseListRename_v25.xcdatamodel; sourceTree = "<group>"; };
 		2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsViewController.swift; sourceTree = "<group>"; };
+		2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_list_similar_v68.xcdatamodel; sourceTree = "<group>"; };
 		2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_is_certificate_issued.xcdatamodel; sourceTree = "<group>"; };
 		2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsSkeletonView.swift; sourceTree = "<group>"; };
@@ -10685,6 +10686,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */,
 				2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */,
 				2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */,
 				2C36E4772501F28E00D63C41 /* Model_user_remove_level_v65.xcdatamodel */,
@@ -10754,7 +10756,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */;
+			currentVersion = 2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -16,6 +16,8 @@ extension CourseListModel {
     @NSManaged var managedLanguage: String?
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedCoursesArray: NSObject?
+    @NSManaged var managedSimilarAuthorsArray: NSObject?
+    @NSManaged var managedSimilarCourseListsArray: NSObject?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.shared.context)!
@@ -76,6 +78,24 @@ extension CourseListModel {
         }
         get {
              (self.managedCoursesArray as? [Int]) ?? []
+        }
+    }
+
+    var similarAuthorsArray: [Int] {
+        get {
+            self.managedSimilarAuthorsArray as? [Int] ?? []
+        }
+        set {
+            self.managedSimilarAuthorsArray = NSArray(array: newValue)
+        }
+    }
+
+    var similarCourseListsArray: [Int] {
+        get {
+            self.managedSimilarCourseListsArray as? [Int] ?? []
+        }
+        set {
+            self.managedSimilarCourseListsArray = NSArray(array: newValue)
         }
     }
 }
