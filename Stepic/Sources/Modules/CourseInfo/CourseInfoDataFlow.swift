@@ -101,7 +101,8 @@ enum CourseInfo {
         struct Request {}
 
         struct Response {
-            let urlPath: String
+            let url: URL
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
@@ -209,6 +210,7 @@ enum CourseInfo {
     enum PaidCourseBuyingPresentation {
         struct Response {
             let course: Course
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {

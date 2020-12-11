@@ -48,23 +48,23 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
     private var currentCourseIAPLocalizedPrice: String?
 
-    private var courseWebURLPath: String? {
+    private var courseWebURL: URL? {
         guard let course = self.currentCourse else {
             return nil
         }
 
         if let slug = course.slug {
-            return self.urlFactory.makeCourse(slug: slug)?.absoluteString
+            return self.urlFactory.makeCourse(slug: slug)
         } else {
-            return self.urlFactory.makeCourse(id: course.id)?.absoluteString
+            return self.urlFactory.makeCourse(id: course.id)
         }
     }
 
     private var courseWebSyllabusURLPath: String? {
-        guard let path = self.courseWebURLPath else {
+        guard let courseWebURLPath = self.courseWebURL?.absoluteString else {
             return nil
         }
-        return "\(path)/syllabus"
+        return "\(courseWebURLPath)/syllabus"
     }
 
     // Tab index -> Submodule
@@ -162,10 +162,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
-        if let urlPath = self.courseWebURLPath {
-            self.analytics.send(.shareCourseTapped)
-            self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
+        guard let courseWebURL = self.courseWebURL else {
+            return
         }
+
+        self.analytics.send(.shareCourseTapped)
+        self.presenter.presentCourseSharing(response: .init(url: courseWebURL, courseViewSource: self.courseViewSource))
     }
 
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request) {
@@ -231,7 +233,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     self.iapService.buy(course: course, delegate: self)
                 } else {
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                    self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                    self.presenter.presentPaidCourseBuying(
+                        response: .init(course: course, courseViewSource: self.courseViewSource)
+                    )
                 }
                 return
             }
@@ -456,7 +460,9 @@ extension CourseInfoInteractor: IAPServiceDelegate {
         if let iapServiceError = error as? IAPService.Error {
             switch iapServiceError {
             case .unsupportedCourse, .noProductIDsFound, .noProductsFound, .productsRequestFailed:
-                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                self.presenter.presentPaidCourseBuying(
+                    response: .init(course: course, courseViewSource: self.courseViewSource)
+                )
             case .paymentWasCancelled:
                 break
             case .paymentFailed, .paymentUserChanged:
