@@ -3,14 +3,28 @@ import UIKit
 final class AuthorsCourseListAssembly: Assembly {
     private weak var moduleOutput: AuthorsCourseListOutputProtocol?
 
-    private let catalogBlockID: CatalogBlock.IdType
+    private let initialContext: AuthorsCourseList.Context
 
     init(
+        initialContext: AuthorsCourseList.Context,
+        output: AuthorsCourseListOutputProtocol? = nil
+    ) {
+        self.initialContext = initialContext
+        self.moduleOutput = output
+    }
+
+    convenience init(
         catalogBlockID: CatalogBlock.IdType,
         output: AuthorsCourseListOutputProtocol? = nil
     ) {
-        self.catalogBlockID = catalogBlockID
-        self.moduleOutput = output
+        self.init(initialContext: .catalogBlock(id: catalogBlockID), output: output)
+    }
+
+    convenience init(
+        authors: [User.IdType],
+        output: AuthorsCourseListOutputProtocol? = nil
+    ) {
+        self.init(initialContext: .authors(ids: authors), output: output)
     }
 
     func makeModule() -> UIViewController {
@@ -18,11 +32,13 @@ final class AuthorsCourseListAssembly: Assembly {
             catalogBlocksRepository: CatalogBlocksRepository(
                 catalogBlocksNetworkService: CatalogBlocksNetworkService(catalogBlocksAPI: CatalogBlocksAPI()),
                 catalogBlocksPersistenceService: CatalogBlocksPersistenceService()
-            )
+            ),
+            usersPersistenceService: UsersPersistenceService(),
+            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI())
         )
         let presenter = AuthorsCourseListPresenter()
         let interactor = AuthorsCourseListInteractor(
-            catalogBlockID: self.catalogBlockID,
+            initialContext: self.initialContext,
             presenter: presenter,
             provider: provider
         )

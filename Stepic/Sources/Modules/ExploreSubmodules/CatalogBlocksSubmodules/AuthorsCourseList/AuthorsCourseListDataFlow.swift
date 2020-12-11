@@ -3,12 +3,17 @@ import Foundation
 enum AuthorsCourseList {
     // MARK: Use Cases
 
+    enum CourseListData {
+        case catalogBlockContentItems([AuthorsCatalogBlockContentItem])
+        case users([User])
+    }
+
     /// Show catalog block
     enum CourseListLoad {
         struct Request {}
 
         struct Response {
-            let result: StepikResult<[AuthorsCatalogBlockContentItem]>
+            let result: StepikResult<CourseListData>
         }
 
         struct ViewModel {
@@ -23,7 +28,13 @@ enum AuthorsCourseList {
         }
     }
 
-    // MARK: States
+    // MARK: Enums
+
+    /// Module can be presented with catalogBlockID or authors ids array.
+    enum Context {
+        case catalogBlock(id: CatalogBlock.IdType)
+        case authors(ids: [User.IdType])
+    }
 
     enum ViewControllerState {
         case loading
