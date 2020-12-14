@@ -2,6 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseListsNetworkServiceProtocol: AnyObject {
+    func fetch(ids: [CourseListModel.IdType]) -> Promise<([CourseListModel], Meta)>
     func fetch(id: CourseListModel.IdType, page: Int) -> Promise<([CourseListModel], Meta)>
     func fetch(language: ContentLanguage, page: Int) -> Promise<([CourseListModel], Meta)>
 }
@@ -21,6 +22,16 @@ final class CourseListsNetworkService: CourseListsNetworkServiceProtocol {
 
     init(courseListsAPI: CourseListsAPI) {
         self.courseListsAPI = courseListsAPI
+    }
+
+    func fetch(ids: [CourseListModel.IdType]) -> Promise<([CourseListModel], Meta)> {
+        Promise { seal in
+            self.courseListsAPI.retrieve(ids: ids).done { courseLists, meta in
+                seal.fulfill((courseLists, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
     }
 
     func fetch(id: CourseListModel.IdType, page: Int) -> Promise<([CourseListModel], Meta)> {

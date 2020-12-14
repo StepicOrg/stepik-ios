@@ -12,65 +12,102 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
     private let presenter: SimpleCourseListPresenterProtocol
     private let provider: SimpleCourseListProviderProtocol
 
-    private let catalogBlockID: CatalogBlock.IdType
-    private var currentCatalogBlock: CatalogBlock?
+    private let initialContext: SimpleCourseList.Context
+    private var currentCourseListData: SimpleCourseList.CourseListData?
 
     init(
-        catalogBlockID: CatalogBlock.IdType,
+        initialContext: SimpleCourseList.Context,
         presenter: SimpleCourseListPresenterProtocol,
         provider: SimpleCourseListProviderProtocol
     ) {
-        self.catalogBlockID = catalogBlockID
+        self.initialContext = initialContext
         self.presenter = presenter
         self.provider = provider
     }
 
     func doCourseListLoad(request: SimpleCourseList.CourseListLoad.Request) {
-        self.fetchCatalogBlock().done { catalogBlockOrNil in
-            self.currentCatalogBlock = catalogBlockOrNil
-
-            guard let catalogBlock = catalogBlockOrNil,
-                  let contentItems = catalogBlock.content as? [SimpleCourseListsCatalogBlockContentItem] else {
-                throw Error.fetchFailed
-            }
-
-            guard catalogBlock.kind == .simpleCourseLists else {
-                throw Error.invalidKind
-            }
-
-            guard catalogBlock.appearance == .default else {
-                throw Error.unsupportedAppearance
-            }
-
-            self.presenter.presentCourseList(response: .init(result: .success(contentItems)))
-        }.catch { error in
-            print("SimpleCourseListInteractor :: failed fetch catalog block with error = \(error)")
-            self.presenter.presentCourseList(response: .init(result: .failure(error)))
-        }
+        self.refreshCourseList()
     }
 
     func doCourseListPresentation(request: SimpleCourseList.CourseListModulePresentation.Request) {
-        guard let contentItems = self.currentCatalogBlock?.content as? [SimpleCourseListsCatalogBlockContentItem],
-              let selectedItem = contentItems.first(where: { "\($0.id)" == request.uniqueIdentifier }) else {
+        guard let courseListData = self.currentCourseListData else {
             return
         }
 
-        let courseListType = CatalogBlockCourseListType(
-            courseListID: selectedItem.id,
-            coursesIDs: selectedItem.courses
-        )
+        switch courseListData {
+        case .catalogBlockContentItems(let contentItems):
+            guard let selectedItem = contentItems.first(where: { "\($0.id)" == request.uniqueIdentifier }) else {
+                return
+            }
 
-        self.moduleOutput?.presentSimpleCourseList(type: courseListType)
+            let courseListType = CatalogBlockCourseListType(
+                courseListID: selectedItem.id,
+                coursesIDs: selectedItem.courses
+            )
+
+            self.moduleOutput?.presentSimpleCourseList(type: courseListType)
+        case .courseLists(let courseLists):
+            guard let selectedCourseList = courseLists.first(where: { "\($0.id)" == request.uniqueIdentifier }) else {
+                return
+            }
+
+            let courseListType = CatalogBlockCourseListType(
+                courseListID: selectedCourseList.id,
+                coursesIDs: selectedCourseList.coursesArray
+            )
+
+            self.moduleOutput?.presentSimpleCourseList(type: courseListType)
+        }
     }
 
-    private func fetchCatalogBlock() -> Promise<CatalogBlock?> {
+    // MARK: Private API
+
+    private func refreshCourseList() {
+        switch self.initialContext {
+        case .catalogBlock(let catalogBlockID):
+            self.fetchCatalogBlock(id: catalogBlockID).done { catalogBlockOrNil in
+                guard let catalogBlock = catalogBlockOrNil,
+                      let contentItems = catalogBlock.content as? [SimpleCourseListsCatalogBlockContentItem] else {
+                    throw Error.fetchFailed
+                }
+
+                guard catalogBlock.kind == .simpleCourseLists else {
+                    throw Error.invalidKind
+                }
+
+                guard catalogBlock.appearance == .default else {
+                    throw Error.unsupportedAppearance
+                }
+
+                let courseListData: SimpleCourseList.CourseListData = .catalogBlockContentItems(contentItems)
+                self.currentCourseListData = courseListData
+
+                self.presenter.presentCourseList(response: .init(result: .success(courseListData)))
+            }.catch { error in
+                print("SimpleCourseListInteractor :: failed fetch catalog block with error = \(error)")
+                self.presenter.presentCourseList(response: .init(result: .failure(error)))
+            }
+        case .courseLists(let ids):
+            self.provider.fetchCourseLists(ids: ids).done { fetchResult in
+                let courseListData: SimpleCourseList.CourseListData = .courseLists(fetchResult.value)
+                self.currentCourseListData = courseListData
+
+                self.presenter.presentCourseList(response: .init(result: .success(courseListData)))
+            }.catch { error in
+                print("SimpleCourseListInteractor :: failed fetch course lists with error = \(error)")
+                self.presenter.presentCourseList(response: .init(result: .failure(error)))
+            }
+        }
+    }
+
+    private func fetchCatalogBlock(id: CatalogBlock.IdType) -> Promise<CatalogBlock?> {
         self.provider.fetchCachedCatalogBlock(
-            id: self.catalogBlockID
+            id: id
         ).then { cachedCatalogBlockOrNil -> Promise<CatalogBlock?> in
             if let cachedCatalogBlock = cachedCatalogBlockOrNil {
                 return .value(cachedCatalogBlock)
             }
-            return self.provider.fetchRemoteCatalogBlock(id: self.catalogBlockID)
+            return self.provider.fetchRemoteCatalogBlock(id: id)
         }
     }
 

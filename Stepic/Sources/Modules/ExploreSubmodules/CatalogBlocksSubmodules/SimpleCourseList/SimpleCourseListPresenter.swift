@@ -9,8 +9,16 @@ final class SimpleCourseListPresenter: SimpleCourseListPresenterProtocol {
 
     func presentCourseList(response: SimpleCourseList.CourseListLoad.Response) {
         switch response.result {
-        case .success(let data):
-            let viewModels = data.map { self.makeViewModel($0) }
+        case .success(let result):
+            let viewModels: [SimpleCourseListWidgetViewModel]
+
+            switch result {
+            case .catalogBlockContentItems(let contentItems):
+                viewModels = contentItems.map { self.makeViewModel(contentItem: $0) }
+            case .courseLists(let courseLists):
+                viewModels = courseLists.map { self.makeViewModel(courseList: $0) }
+            }
+
             self.viewController?.displayCourseList(viewModel: .init(state: .result(data: viewModels)))
         case .failure:
             break
@@ -18,12 +26,20 @@ final class SimpleCourseListPresenter: SimpleCourseListPresenterProtocol {
     }
 
     private func makeViewModel(
-        _ contentItem: SimpleCourseListsCatalogBlockContentItem
+        contentItem: SimpleCourseListsCatalogBlockContentItem
     ) -> SimpleCourseListWidgetViewModel {
+        self.makeViewModel(id: contentItem.id, title: contentItem.title, coursesCount: contentItem.coursesCount)
+    }
+
+    private func makeViewModel(courseList: CourseListModel) -> SimpleCourseListWidgetViewModel {
+        self.makeViewModel(id: courseList.id, title: courseList.title, coursesCount: courseList.coursesArray.count)
+    }
+
+    private func makeViewModel(id: Int, title: String, coursesCount: Int) -> SimpleCourseListWidgetViewModel {
         SimpleCourseListWidgetViewModel(
-            uniqueIdentifier: "\(contentItem.id)",
-            title: contentItem.title,
-            subtitle: FormatterHelper.catalogBlockCoursesCount(contentItem.coursesCount)
+            uniqueIdentifier: "\(id)",
+            title: title,
+            subtitle: FormatterHelper.catalogBlockCoursesCount(coursesCount)
         )
     }
 }

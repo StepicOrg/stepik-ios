@@ -76,7 +76,7 @@ final class AuthorsCourseListProvider: AuthorsCourseListProviderProtocol {
                     let result = FetchResult(value: remoteUsers, source: .remote)
                     return .value(result)
                 } else {
-                    let result = FetchResult(value: cachedUsers, source: .remote)
+                    let result = FetchResult(value: cachedUsers, source: .cache)
                     return .value(result)
                 }
             }.done { result in
