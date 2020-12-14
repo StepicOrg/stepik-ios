@@ -115,6 +115,9 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 self.moduleOutput?.presentLoadedState(sourceModule: self)
             }
 
+            // Fetch & present similar course lists
+            self.refreshSimilarCourseLists()
+
             // Retry if successfully
             let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
             if shouldRetryAfterFetching {
@@ -324,6 +327,22 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             viewSource: self.courseViewSource
         )
         self.presenter.presentCourses(response: response)
+    }
+
+    private func refreshSimilarCourseLists() {
+        self.provider.fetchCachedCourseList().done { courseListOrNil in
+            guard let courseList = courseListOrNil else {
+                return
+            }
+
+            if !courseList.similarAuthorsArray.isEmpty {
+                self.moduleOutput?.presentSimilarAuthors(courseList.similarAuthorsArray)
+            }
+
+            if !courseList.similarCourseListsArray.isEmpty {
+                self.moduleOutput?.presentSimilarCourseLists(courseList.similarCourseListsArray)
+            }
+        }
     }
 
     // MARK: - Enums
