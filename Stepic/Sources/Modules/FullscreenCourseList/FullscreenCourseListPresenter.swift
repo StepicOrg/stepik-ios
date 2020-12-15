@@ -8,6 +8,8 @@ protocol FullscreenCourseListPresenterProtocol {
     func presentPlaceholder(response: FullscreenCourseList.PresentPlaceholder.Response)
     func presentHidePlaceholder(response: FullscreenCourseList.HidePlaceholder.Response)
     func presentPaidCourseBuying(response: FullscreenCourseList.PaidCourseBuyingPresentation.Response)
+    func presentSimilarAuthors(response: FullscreenCourseList.SimilarAuthorsPresentation.Response)
+    func presentSimilarCourseLists(response: FullscreenCourseList.SimilarCourseListsPresentation.Response)
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
@@ -57,5 +59,13 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
         if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
             self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
         }
+    }
+
+    func presentSimilarAuthors(response: FullscreenCourseList.SimilarAuthorsPresentation.Response) {
+        self.viewController?.displaySimilarAuthors(viewModel: .init(ids: response.ids))
+    }
+
+    func presentSimilarCourseLists(response: FullscreenCourseList.SimilarCourseListsPresentation.Response) {
+        self.viewController?.displaySimilarCourseLists(viewModel: .init(ids: response.ids))
     }
 }

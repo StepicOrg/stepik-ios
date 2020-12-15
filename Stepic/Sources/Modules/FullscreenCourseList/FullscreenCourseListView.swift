@@ -1,30 +1,68 @@
 import SnapKit
 import UIKit
 
-final class FullscreenCourseListView: UIView {
-    private var contentView: UIView?
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .stepikBackground
+extension FullscreenCourseListView {
+    struct Appearance {
+        let backgroundColor = UIColor.stepikBackground
     }
+}
 
-    func attachContentView(_ view: UIView) {
-        self.contentView?.removeFromSuperview()
+final class FullscreenCourseListView: UIView {
+    let appearance: Appearance
 
-        self.addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(self.safeAreaLayoutGuide.snp.width)
-        }
+    private lazy var scrollableStackView: ScrollableStackView = {
+        let stackView = ScrollableStackView(orientation: .vertical)
+        stackView.showsVerticalScrollIndicator = true
+        stackView.showsHorizontalScrollIndicator = false
+        return stackView
+    }()
 
-        self.contentView = view
+    init(
+        frame: CGRect = .zero,
+        appearance: Appearance = Appearance()
+    ) {
+        self.appearance = appearance
+        super.init(frame: frame)
+
+        self.setupView()
+        self.addSubviews()
+        self.makeConstraints()
     }
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private var observation: NSKeyValueObservation?
+
+    func insertBlockView(_ view: UIView, before previousView: UIView) {
+        for (index, subview) in self.scrollableStackView.arrangedSubviews.enumerated() where subview === previousView {
+            self.scrollableStackView.insertArrangedView(view, at: index)
+            return
+        }
+        self.scrollableStackView.addArrangedView(view)
+    }
+
+    func removeBlockView(_ view: UIView) {
+        self.scrollableStackView.removeArrangedView(view)
+    }
+}
+
+extension FullscreenCourseListView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
+
+    func addSubviews() {
+        self.addSubview(self.scrollableStackView)
+    }
+
+    func makeConstraints() {
+        self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollableStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+        }
     }
 }

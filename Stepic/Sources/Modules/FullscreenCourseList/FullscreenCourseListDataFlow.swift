@@ -57,6 +57,28 @@ enum FullscreenCourseList {
         }
     }
 
+    /// Present AuthorsCourseList module
+    enum SimilarAuthorsPresentation {
+        struct Response {
+            let ids: [User.IdType]
+        }
+
+        struct ViewModel {
+            let ids: [User.IdType]
+        }
+    }
+
+    /// Present SimpleCourseList module
+    enum SimilarCourseListsPresentation {
+        struct Response {
+            let ids: [CourseListModel.IdType]
+        }
+
+        struct ViewModel {
+            let ids: [CourseListModel.IdType]
+        }
+    }
+
     /// Try to set online status
     enum OnlineModeReset {
         struct Request {
