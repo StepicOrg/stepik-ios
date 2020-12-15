@@ -22,6 +22,17 @@ final class GridSimpleCourseListCollectionViewDelegate: NSObject,
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        CGSize(
+            width: collectionView.bounds.width,
+            height: GridSimpleCourseListView.Appearance.layoutHeaderHeight
+        )
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         .zero

@@ -9,6 +9,12 @@ extension DefaultSimpleCourseListCollectionViewCell {
 final class DefaultSimpleCourseListCollectionViewCell: UICollectionViewCell, Reusable {
     private lazy var widgetView = DefaultSimpleCourseListWidgetView()
 
+    override var isHighlighted: Bool {
+        didSet {
+            self.widgetView.alpha = self.isHighlighted ? 0.5 : 1.0
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -22,12 +28,6 @@ final class DefaultSimpleCourseListCollectionViewCell: UICollectionViewCell, Reu
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override var isHighlighted: Bool {
-        didSet {
-            self.widgetView.alpha = self.isHighlighted ? 0.5 : 1.0
-        }
     }
 
     func configure(viewModel: SimpleCourseListWidgetViewModel, colorMode: ColorMode) {

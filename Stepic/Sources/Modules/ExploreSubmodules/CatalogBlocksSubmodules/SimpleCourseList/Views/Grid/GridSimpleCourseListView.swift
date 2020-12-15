@@ -3,11 +3,12 @@ import UIKit
 
 extension GridSimpleCourseListView {
     struct Appearance {
+        static let layoutHeaderHeight: CGFloat = 150
+
         let layoutMinimumLineSpacing: CGFloat = 16
         let layoutMinimumInteritemSpacing: CGFloat = 16
         let layoutEstimatedItemSize = CGSize(width: 107, height: 56)
         let layoutSectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        let layoutHeaderReferenceSize = CGSize(width: 372, height: 86)
 
         let backgroundColor = UIColor.stepikBackground
     }
@@ -26,7 +27,10 @@ final class GridSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = false
 
-        collectionView.register(cellClass: DefaultSimpleCourseListCollectionViewCell.self)
+        collectionView.register(
+            viewClass: GridSimpleCourseListCollectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
+        )
 
         return collectionView
     }()
@@ -38,7 +42,6 @@ final class GridSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
         layout.estimatedItemSize = self.appearance.layoutEstimatedItemSize
         layout.sectionInset = self.appearance.layoutSectionInset
-        layout.headerReferenceSize = self.appearance.layoutHeaderReferenceSize
         return layout
     }()
 
