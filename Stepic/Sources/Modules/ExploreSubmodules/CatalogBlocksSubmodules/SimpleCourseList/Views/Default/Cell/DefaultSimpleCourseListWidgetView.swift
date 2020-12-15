@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension SimpleCourseListDefaultWidgetView {
+extension DefaultSimpleCourseListWidgetView {
     struct Appearance {
         let titleLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         let titleLabelInsets = LayoutInsets(top: 16, left: 16, right: 16)
@@ -11,7 +11,7 @@ extension SimpleCourseListDefaultWidgetView {
     }
 }
 
-final class SimpleCourseListDefaultWidgetView: UIView {
+final class DefaultSimpleCourseListWidgetView: UIView {
     let appearance: Appearance
 
     private lazy var titleLabel: UILabel = {
@@ -62,7 +62,7 @@ final class SimpleCourseListDefaultWidgetView: UIView {
     }
 }
 
-extension SimpleCourseListDefaultWidgetView: ProgrammaticallyInitializableViewProtocol {
+extension DefaultSimpleCourseListWidgetView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.titleLabel)
         self.addSubview(self.subtitleLabel)

@@ -1,6 +1,6 @@
 import UIKit
 
-extension SimpleCourseListHorizontalFlowLayout {
+extension DefaultSimpleCourseListHorizontalFlowLayout {
     enum Paging {
         static let velocityThreshold: CGFloat = 0.6
     }
@@ -10,7 +10,7 @@ extension SimpleCourseListHorizontalFlowLayout {
     }
 }
 
-final class SimpleCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
+final class DefaultSimpleCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
     let appearance: Appearance
 
     var rowsCount: Int

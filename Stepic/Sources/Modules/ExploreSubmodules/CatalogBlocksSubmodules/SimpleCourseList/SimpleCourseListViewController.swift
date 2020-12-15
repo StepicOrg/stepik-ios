@@ -10,26 +10,39 @@ protocol SimpleCourseListViewControllerDelegate: AnyObject {
 
 final class SimpleCourseListViewController: UIViewController {
     private let interactor: SimpleCourseListInteractorProtocol
+    private let layoutType: SimpleCourseList.LayoutType
 
-    var simpleCourseListView: SimpleCourseListView? { self.view as? SimpleCourseListView }
+    var simpleCourseListView: SimpleCourseListViewProtocol? { self.view as? SimpleCourseListViewProtocol }
 
     // swiftlint:disable weak_delegate
-    private let collectionViewDelegate = SimpleCourseListCollectionViewDelegate()
-    private let collectionViewDataSource = SimpleCourseListCollectionViewDataSource()
+    private let collectionViewDelegate: SimpleCourseListCollectionViewDelegateProtocol
+    private let collectionViewDataSource: SimpleCourseListCollectionViewDataSourceProtocol
     // swiftlint:enable weak_delegate
 
     private var state: SimpleCourseList.ViewControllerState
 
     init(
         interactor: SimpleCourseListInteractorProtocol,
+        layoutType: SimpleCourseList.LayoutType = .default,
         initialState: SimpleCourseList.ViewControllerState = .loading
     ) {
         self.interactor = interactor
+        self.layoutType = layoutType
         self.state = initialState
+
+        switch layoutType {
+        case .default:
+            self.collectionViewDelegate = DefaultSimpleCourseListCollectionViewDelegate()
+            self.collectionViewDataSource = DefaultSimpleCourseListCollectionViewDataSource()
+        case .grid:
+            self.collectionViewDelegate = GridSimpleCourseListCollectionViewDelegate()
+            self.collectionViewDataSource = GridSimpleCourseListCollectionViewDataSource()
+        }
 
         super.init(nibName: nil, bundle: nil)
 
         self.collectionViewDelegate.delegate = self
+        self.collectionViewDataSource.delegate = self
     }
 
     @available(*, unavailable)
@@ -38,8 +51,12 @@ final class SimpleCourseListViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = SimpleCourseListView(frame: UIScreen.main.bounds)
-        self.view = view
+        switch self.layoutType {
+        case .default:
+            self.view = DefaultSimpleCourseListView()
+        case .grid:
+            self.view = GridSimpleCourseListView()
+        }
     }
 
     override func viewDidLoad() {
@@ -47,6 +64,20 @@ final class SimpleCourseListViewController: UIViewController {
 
         self.updateState(newState: self.state)
         self.interactor.doCourseListLoad(request: .init())
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        self.simpleCourseListView?.prepareForInterfaceRotation()
+
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.simpleCourseListView?.invalidateCollectionViewLayout()
+        }
     }
 
     private func updateState(newState: SimpleCourseList.ViewControllerState) {
