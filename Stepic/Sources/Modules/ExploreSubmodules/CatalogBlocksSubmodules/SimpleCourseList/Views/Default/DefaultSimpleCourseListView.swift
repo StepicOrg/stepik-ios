@@ -107,6 +107,11 @@ final class DefaultSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         self.collectionView.skeleton.hide()
     }
 
+    func invalidateCollectionViewLayout() {
+        self.collectionView.collectionViewLayout.invalidateLayout()
+        self.invalidateIntrinsicContentSize()
+    }
+
     // MARK: - Private API
 
     private func updateItemSize(_ itemSize: CGSize) {

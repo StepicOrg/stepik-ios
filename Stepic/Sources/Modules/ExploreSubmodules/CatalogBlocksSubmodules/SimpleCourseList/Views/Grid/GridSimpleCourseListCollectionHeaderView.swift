@@ -15,6 +15,7 @@ extension GridSimpleCourseListCollectionHeaderView {
         let subtitleLabelTextColor = UIColor.stepikSystemSecondaryText
         let subtitleLabelInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
 
+        let containerInsets = LayoutInsets(left: 20, right: 20)
         let cornerRadius: CGFloat = 13
     }
 }
@@ -22,8 +23,9 @@ extension GridSimpleCourseListCollectionHeaderView {
 final class GridSimpleCourseListCollectionHeaderView: UICollectionReusableView, Reusable {
     let appearance = Appearance()
 
-    private lazy var placeholderImageView: UIImageView = {
-        let image = UIImage(named: "course-list-simple-grid-placeholder")?.withRenderingMode(.alwaysTemplate)
+    private lazy var backgroundImageView: UIImageView = {
+        //let image = UIImage(named: "course-list-simple-grid-placeholder")
+        let image = UIImage(named: "placeholder_gradient_blue")
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
         return imageView
@@ -53,6 +55,8 @@ final class GridSimpleCourseListCollectionHeaderView: UICollectionReusableView, 
         return label
     }()
 
+    private lazy var containerView = UIView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -81,20 +85,28 @@ final class GridSimpleCourseListCollectionHeaderView: UICollectionReusableView, 
 
 extension GridSimpleCourseListCollectionHeaderView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.layer.cornerRadius = self.appearance.cornerRadius
-        self.layer.masksToBounds = true
+        self.containerView.layer.cornerRadius = self.appearance.cornerRadius
+        self.containerView.layer.masksToBounds = true
     }
 
     func addSubviews() {
-        self.addSubview(self.placeholderImageView)
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.subtitleLabel)
-        self.addSubview(self.rightDetailImageView)
+        self.addSubview(self.containerView)
+        self.containerView.addSubview(self.backgroundImageView)
+        self.containerView.addSubview(self.titleLabel)
+        self.containerView.addSubview(self.subtitleLabel)
+        self.containerView.addSubview(self.rightDetailImageView)
     }
 
     func makeConstraints() {
-        self.placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.placeholderImageView.snp.makeConstraints { make in
+        self.containerView.translatesAutoresizingMaskIntoConstraints = false
+        self.containerView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.containerInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.containerInsets.right)
+        }
+
+        self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 

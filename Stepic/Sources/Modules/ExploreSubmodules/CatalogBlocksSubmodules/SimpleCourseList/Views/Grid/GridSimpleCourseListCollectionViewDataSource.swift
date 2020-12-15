@@ -1,15 +1,16 @@
 import UIKit
 
 final class GridSimpleCourseListCollectionViewDataSource: NSObject, SimpleCourseListCollectionViewDataSourceProtocol {
-    var viewModels = [SimpleCourseListWidgetViewModel]()
-
-    private var sectionHeaderViewModel: SimpleCourseListWidgetViewModel? {
-        self.viewModels.first
+    var viewModels = [SimpleCourseListWidgetViewModel]() {
+        didSet {
+            self.sectionHeaderViewModel = self.viewModels.first
+            self.itemsInSectionViewModels = Array(self.viewModels.suffix(from: 1))
+        }
     }
+    private var sectionHeaderViewModel: SimpleCourseListWidgetViewModel?
+    private var itemsInSectionViewModels = [SimpleCourseListWidgetViewModel]()
 
-    private var itemsInSectionViewModels: [SimpleCourseListWidgetViewModel] {
-        Array(self.viewModels.suffix(from: 1))
-    }
+    // MARK: UICollectionViewDataSource
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         self.sectionHeaderViewModel != nil ? 1 : 0
@@ -44,6 +45,11 @@ final class GridSimpleCourseListCollectionViewDataSource: NSObject, SimpleCourse
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        UICollectionViewCell()
+        let viewModel = self.itemsInSectionViewModels[indexPath.row]
+
+        let cell: GridSimpleCourseListCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.configure(viewModel: viewModel)
+
+        return cell
     }
 }

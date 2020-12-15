@@ -65,6 +65,20 @@ final class SimpleCourseListViewController: UIViewController {
         self.interactor.doCourseListLoad(request: .init())
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        self.simpleCourseListView?.prepareForInterfaceOrientationRotation()
+
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.simpleCourseListView?.invalidateCollectionViewLayout()
+        }
+    }
+
     private func updateState(newState: SimpleCourseList.ViewControllerState) {
         self.state = newState
 
