@@ -29,13 +29,13 @@ final class DefaultSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         collectionView.backgroundColor = .clear
         collectionView.decelerationRate = .fast
 
-        collectionView.register(cellClass: SimpleCourseListDefaultCollectionViewCell.self)
+        collectionView.register(cellClass: DefaultSimpleCourseListCollectionViewCell.self)
 
         return collectionView
     }()
 
-    private lazy var flowLayout: SimpleCourseListHorizontalFlowLayout = {
-        let layout = SimpleCourseListHorizontalFlowLayout(
+    private lazy var flowLayout: DefaultSimpleCourseListHorizontalFlowLayout = {
+        let layout = DefaultSimpleCourseListHorizontalFlowLayout(
             rowsCount: Self.layoutRowsCount,
             columnsCount: self.columnsCount
         )

@@ -15,8 +15,8 @@ final class SimpleCourseListViewController: UIViewController {
     var simpleCourseListView: SimpleCourseListViewProtocol? { self.view as? SimpleCourseListViewProtocol }
 
     // swiftlint:disable weak_delegate
-    private let collectionViewDelegate = SimpleCourseListCollectionViewDelegate()
-    private let collectionViewDataSource = SimpleCourseListCollectionViewDataSource()
+    private let collectionViewDelegate: SimpleCourseListCollectionViewDelegateProtocol
+    private let collectionViewDataSource: SimpleCourseListCollectionViewDataSourceProtocol
     // swiftlint:enable weak_delegate
 
     private var state: SimpleCourseList.ViewControllerState
@@ -29,6 +29,15 @@ final class SimpleCourseListViewController: UIViewController {
         self.interactor = interactor
         self.layoutType = layoutType
         self.state = initialState
+
+        switch layoutType {
+        case .default:
+            self.collectionViewDelegate = DefaultSimpleCourseListCollectionViewDelegate()
+            self.collectionViewDataSource = DefaultSimpleCourseListCollectionViewDataSource()
+        case .grid:
+            self.collectionViewDelegate = GridSimpleCourseListCollectionViewDelegate()
+            self.collectionViewDataSource = GridSimpleCourseListCollectionViewDataSource()
+        }
 
         super.init(nibName: nil, bundle: nil)
 

@@ -1,13 +1,13 @@
 import UIKit
 
-extension SimpleCourseListDefaultCollectionViewCell {
+extension DefaultSimpleCourseListCollectionViewCell {
     enum Appearance {
         static let cornerRadius: CGFloat = 13.0
     }
 }
 
-final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reusable {
-    private lazy var widgetView = SimpleCourseListDefaultWidgetView()
+final class DefaultSimpleCourseListCollectionViewCell: UICollectionViewCell, Reusable {
+    private lazy var widgetView = DefaultSimpleCourseListWidgetView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +60,7 @@ final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reu
     }
 }
 
-extension SimpleCourseListDefaultCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
+extension DefaultSimpleCourseListCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.contentView.addSubview(self.widgetView)
     }
