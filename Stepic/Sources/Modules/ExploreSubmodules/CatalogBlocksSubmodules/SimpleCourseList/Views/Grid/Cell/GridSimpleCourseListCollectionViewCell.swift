@@ -53,7 +53,7 @@ final class GridSimpleCourseListCollectionViewCell: UICollectionViewCell, Reusab
         label.sizeToFit()
 
         var size = label.bounds.size
-        size.width = (size.width).rounded(.up)
+        size.width = size.width.rounded(.up)
         size.height = size.height.rounded(.up)
 
         return size
