@@ -21,8 +21,7 @@ final class GridSimpleCourseListCollectionHeaderContentView: UIControl {
     let appearance: Appearance
 
     private lazy var backgroundImageView: UIImageView = {
-        //let image = UIImage(named: "course-list-simple-grid-placeholder")
-        let image = UIImage(named: "placeholder_gradient_blue")
+        let image = UIImage(named: "course-list-simple-grid-placeholder")
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
         return imageView
