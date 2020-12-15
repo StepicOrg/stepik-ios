@@ -4,12 +4,15 @@ final class SimpleCourseListAssembly: Assembly {
     private weak var moduleOutput: SimpleCourseListOutputProtocol?
 
     private let catalogBlockID: CatalogBlock.IdType
+    private let layoutType: SimpleCourseList.LayoutType
 
     init(
         catalogBlockID: CatalogBlock.IdType,
+        layoutType: SimpleCourseList.LayoutType,
         output: SimpleCourseListOutputProtocol? = nil
     ) {
         self.catalogBlockID = catalogBlockID
+        self.layoutType = layoutType
         self.moduleOutput = output
     }
 
@@ -26,7 +29,10 @@ final class SimpleCourseListAssembly: Assembly {
             presenter: presenter,
             provider: provider
         )
-        let viewController = SimpleCourseListViewController(interactor: interactor)
+        let viewController = SimpleCourseListViewController(
+            interactor: interactor,
+            layoutType: self.layoutType
+        )
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput

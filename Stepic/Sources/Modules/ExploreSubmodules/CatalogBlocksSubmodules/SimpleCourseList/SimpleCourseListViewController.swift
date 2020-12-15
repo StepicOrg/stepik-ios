@@ -10,8 +10,9 @@ protocol SimpleCourseListViewControllerDelegate: AnyObject {
 
 final class SimpleCourseListViewController: UIViewController {
     private let interactor: SimpleCourseListInteractorProtocol
+    private let layoutType: SimpleCourseList.LayoutType
 
-    var simpleCourseListView: SimpleCourseListView? { self.view as? SimpleCourseListView }
+    var simpleCourseListView: SimpleCourseListViewProtocol? { self.view as? SimpleCourseListViewProtocol }
 
     // swiftlint:disable weak_delegate
     private let collectionViewDelegate = SimpleCourseListCollectionViewDelegate()
@@ -22,9 +23,11 @@ final class SimpleCourseListViewController: UIViewController {
 
     init(
         interactor: SimpleCourseListInteractorProtocol,
+        layoutType: SimpleCourseList.LayoutType = .default,
         initialState: SimpleCourseList.ViewControllerState = .loading
     ) {
         self.interactor = interactor
+        self.layoutType = layoutType
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
@@ -38,8 +41,12 @@ final class SimpleCourseListViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = SimpleCourseListView(frame: UIScreen.main.bounds)
-        self.view = view
+        switch self.layoutType {
+        case .default:
+            self.view = DefaultSimpleCourseListView()
+        case .grid:
+            self.view = GridSimpleCourseListView()
+        }
     }
 
     override func viewDidLoad() {

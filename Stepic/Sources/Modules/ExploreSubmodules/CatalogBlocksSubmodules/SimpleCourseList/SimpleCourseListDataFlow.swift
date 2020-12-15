@@ -23,7 +23,21 @@ enum SimpleCourseList {
         }
     }
 
-    // MARK: States
+    // MARK: Enums
+
+    enum LayoutType {
+        case `default`
+        case grid
+
+        init(catalogBlockAppearance: CatalogBlockAppearance) {
+            switch catalogBlockAppearance {
+            case .default:
+                self = .default
+            case .simpleCourseListsGrid:
+                self = .grid
+            }
+        }
+    }
 
     enum ViewControllerState {
         case loading
