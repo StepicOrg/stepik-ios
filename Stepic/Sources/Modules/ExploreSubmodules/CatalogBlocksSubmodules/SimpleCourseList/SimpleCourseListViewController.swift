@@ -42,6 +42,7 @@ final class SimpleCourseListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         self.collectionViewDelegate.delegate = self
+        self.collectionViewDataSource.delegate = self
     }
 
     @available(*, unavailable)
@@ -68,7 +69,7 @@ final class SimpleCourseListViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        self.simpleCourseListView?.prepareForInterfaceOrientationRotation()
+        self.simpleCourseListView?.prepareForInterfaceRotation()
 
         coordinator.animate(alongsideTransition: nil) { [weak self] _ in
             guard let strongSelf = self else {

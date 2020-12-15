@@ -1,6 +1,8 @@
 import UIKit
 
 final class GridSimpleCourseListCollectionViewDataSource: NSObject, SimpleCourseListCollectionViewDataSourceProtocol {
+    weak var delegate: SimpleCourseListViewControllerDelegate?
+
     var viewModels = [SimpleCourseListWidgetViewModel]() {
         didSet {
             self.sectionHeaderViewModel = self.viewModels.first
@@ -36,6 +38,14 @@ final class GridSimpleCourseListCollectionViewDataSource: NSObject, SimpleCourse
 
         if let sectionHeaderViewModel = self.sectionHeaderViewModel {
             headerView.configure(viewModel: sectionHeaderViewModel)
+
+            headerView.onTapCallback = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.delegate?.itemDidSelected(viewModel: sectionHeaderViewModel)
+            }
         }
 
         return headerView

@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension GridSimpleCourseListCollectionHeaderView {
+extension GridSimpleCourseListCollectionHeaderContentView {
     struct Appearance {
         let rightDetailImageViewSize = CGSize(width: 6, height: 12)
         let rightDetailImageViewTintColor = UIColor.stepikSystemSecondaryText
@@ -14,14 +14,11 @@ extension GridSimpleCourseListCollectionHeaderView {
         let subtitleLabelFont = Typography.calloutFont
         let subtitleLabelTextColor = UIColor.stepikSystemSecondaryText
         let subtitleLabelInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
-
-        let containerInsets = LayoutInsets(left: 20, right: 20)
-        let cornerRadius: CGFloat = 13
     }
 }
 
-final class GridSimpleCourseListCollectionHeaderView: UICollectionReusableView, Reusable {
-    let appearance = Appearance()
+final class GridSimpleCourseListCollectionHeaderContentView: UIControl {
+    let appearance: Appearance
 
     private lazy var backgroundImageView: UIImageView = {
         //let image = UIImage(named: "course-list-simple-grid-placeholder")
@@ -55,12 +52,32 @@ final class GridSimpleCourseListCollectionHeaderView: UICollectionReusableView, 
         return label
     }()
 
-    private lazy var containerView = UIView()
+    var titleText: String? {
+        didSet {
+            self.titleLabel.text = self.titleText
+        }
+    }
 
-    override init(frame: CGRect) {
+    var subtitleText: String? {
+        didSet {
+            self.subtitleLabel.text = self.subtitleText
+        }
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            let alpha: CGFloat = self.isHighlighted ? 0.5 : 1.0
+            self.subviews.forEach { $0.alpha = alpha }
+        }
+    }
+
+    init(
+        frame: CGRect = .zero,
+        appearance: Appearance = Appearance()
+    ) {
+        self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -69,42 +86,17 @@ final class GridSimpleCourseListCollectionHeaderView: UICollectionReusableView, 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        self.titleLabel.text = nil
-        self.subtitleLabel.text = nil
-    }
-
-    func configure(viewModel: SimpleCourseListWidgetViewModel) {
-        self.titleLabel.text = viewModel.title
-        self.subtitleLabel.text = viewModel.subtitle
-    }
 }
 
-extension GridSimpleCourseListCollectionHeaderView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.containerView.layer.cornerRadius = self.appearance.cornerRadius
-        self.containerView.layer.masksToBounds = true
-    }
-
+extension GridSimpleCourseListCollectionHeaderContentView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.addSubview(self.containerView)
-        self.containerView.addSubview(self.backgroundImageView)
-        self.containerView.addSubview(self.titleLabel)
-        self.containerView.addSubview(self.subtitleLabel)
-        self.containerView.addSubview(self.rightDetailImageView)
+        self.addSubview(self.backgroundImageView)
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.subtitleLabel)
+        self.addSubview(self.rightDetailImageView)
     }
 
     func makeConstraints() {
-        self.containerView.translatesAutoresizingMaskIntoConstraints = false
-        self.containerView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.appearance.containerInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.containerInsets.right)
-        }
-
         self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

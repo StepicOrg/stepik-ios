@@ -2,6 +2,8 @@ import UIKit
 
 final class DefaultSimpleCourseListCollectionViewDataSource: NSObject,
                                                              SimpleCourseListCollectionViewDataSourceProtocol {
+    weak var delegate: SimpleCourseListViewControllerDelegate?
+
     var viewModels = [SimpleCourseListWidgetViewModel]()
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
