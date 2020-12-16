@@ -64,10 +64,18 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
     override func loadView() {
         let view = FullscreenCourseListView(frame: UIScreen.main.bounds)
         self.view = view
-        self.refreshCourseListState()
+    }
 
-        // Register placeholders
-        // Error
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.registerPlaceholders()
+        self.refreshCourseListState()
+    }
+
+    // MARK: - Private API
+
+    private func registerPlaceholders() {
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .noConnection,
@@ -78,7 +86,6 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
             for: .connectionError
         )
 
-        // Empty
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .emptySearch,
@@ -89,8 +96,6 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
             for: .empty
         )
     }
-
-    // MARK: - Private API
 
     @objc
     private func courseListFilterBarButtonItemClicked() {
@@ -143,7 +148,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         self.currentFilters = self.presentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
     }
 
-    // MARK: AuthorsCourseList
+    // MARK: SimilarAuthorsCourseList
 
     private enum SimilarAuthorsCourseListState {
         case visible(ids: [User.IdType])
@@ -190,7 +195,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         }
     }
 
-    // MARK: SimpleCourseList
+    // MARK: SimilarCourseLists
 
     private enum SimilarCourseListsState {
         case visible(ids: [CourseListModel.IdType])
@@ -369,11 +374,36 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     }
 
     func displaySimilarAuthors(viewModel: FullscreenCourseList.SimilarAuthorsPresentation.ViewModel) {
+        self.disableScrollForCourseListModule()
         self.refreshSimilarAuthorsCourseListState(.visible(ids: viewModel.ids))
     }
 
     func displaySimilarCourseLists(viewModel: FullscreenCourseList.SimilarCourseListsPresentation.ViewModel) {
+        self.disableScrollForCourseListModule()
         self.refreshSimilarCourseListsState(.visible(ids: viewModel.ids))
+    }
+
+    // MARK: Private Helpers
+
+    private func disableScrollForCourseListModule() {
+        guard let submodule = self.getSubmodule(type: .courseList),
+              let courseListView = submodule.view else {
+            return
+        }
+
+        for subview in courseListView.subviews {
+            guard let collectionView = subview as? UICollectionView else {
+                continue
+            }
+
+            collectionView.isScrollEnabled = false
+            self.fullscreenCourseListView?.observeCourseListCollectionViewContentSize(
+                courseListView: courseListView,
+                collectionView: collectionView
+            )
+
+            return
+        }
     }
 }
 
