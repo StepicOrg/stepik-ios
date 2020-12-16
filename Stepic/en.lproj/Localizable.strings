@@ -1009,6 +1009,10 @@ CourseListFilterRowIsFreeTitle = "Free";
 CourseListFilterRowShowResultTitle = "Show Result";
 CourseListFilterCourseLanguageAnyTitle = "Any";
 
+/* Similar Course Lists */
+SimilarCourseListHeaderTitle = "Similar themes";
+SimilarCourseListAuthorsHeaderTitle = "Courses authors";
+
 /* New profile */
 NewProfileRatingReputation = "Reputation %@";
 NewProfileRatingKnowledge = "Knowledge %@";

@@ -172,7 +172,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
                 .makeHorizontalCatalogBlocksContainerView(
                     for: authorsViewController.view,
                     headerDescription: .init(
-                        title: "Авторы курсов",
+                        title: NSLocalizedString("SimilarCourseListAuthorsHeaderTitle", comment: ""),
                         subtitle: nil,
                         description: nil,
                         isTitleVisible: true,
@@ -219,7 +219,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
                 .makeHorizontalCatalogBlocksContainerView(
                     for: simpleCourseListViewController.view,
                     headerDescription: .init(
-                        title: "Похожие темы",
+                        title: NSLocalizedString("SimilarCourseListHeaderTitle", comment: ""),
                         subtitle: nil,
                         description: nil,
                         isTitleVisible: true,
