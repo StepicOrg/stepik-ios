@@ -10,6 +10,8 @@ protocol FullscreenCourseListPresenterProtocol {
     func presentPaidCourseBuying(response: FullscreenCourseList.PaidCourseBuyingPresentation.Response)
     func presentSimilarAuthors(response: FullscreenCourseList.SimilarAuthorsPresentation.Response)
     func presentSimilarCourseLists(response: FullscreenCourseList.SimilarCourseListsPresentation.Response)
+    func presentProfile(response: FullscreenCourseList.ProfilePresentation.Response)
+    func presentFullscreenCourseList(response: FullscreenCourseList.FullscreenCourseListModulePresentation.Response)
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
@@ -67,5 +69,13 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
 
     func presentSimilarCourseLists(response: FullscreenCourseList.SimilarCourseListsPresentation.Response) {
         self.viewController?.displaySimilarCourseLists(viewModel: .init(ids: response.ids))
+    }
+
+    func presentProfile(response: FullscreenCourseList.ProfilePresentation.Response) {
+        self.viewController?.displayProfile(viewModel: .init(userID: response.userID))
+    }
+
+    func presentFullscreenCourseList(response: FullscreenCourseList.FullscreenCourseListModulePresentation.Response) {
+        self.viewController?.displayFullscreenCourseList(viewModel: .init(courseListType: response.courseListType))
     }
 }

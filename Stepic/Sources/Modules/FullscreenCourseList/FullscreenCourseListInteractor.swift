@@ -67,3 +67,15 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
         self.presenter.presentSimilarCourseLists(response: .init(ids: ids))
     }
 }
+
+extension FullscreenCourseListInteractor: AuthorsCourseListOutputProtocol {
+    func presentAuthor(id: User.IdType) {
+        self.presenter.presentProfile(response: .init(userID: id))
+    }
+}
+
+extension FullscreenCourseListInteractor: SimpleCourseListOutputProtocol {
+    func presentSimpleCourseList(type: CatalogBlockCourseListType) {
+        self.presenter.presentFullscreenCourseList(response: .init(courseListType: type))
+    }
+}

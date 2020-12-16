@@ -10,6 +10,8 @@ protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel)
     func displaySimilarAuthors(viewModel: FullscreenCourseList.SimilarAuthorsPresentation.ViewModel)
     func displaySimilarCourseLists(viewModel: FullscreenCourseList.SimilarCourseListsPresentation.ViewModel)
+    func displayProfile(viewModel: FullscreenCourseList.ProfilePresentation.ViewModel)
+    func displayFullscreenCourseList(viewModel: FullscreenCourseList.FullscreenCourseListModulePresentation.ViewModel)
 }
 
 final class FullscreenCourseListViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -164,7 +166,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
             let authorsCourseListAssembly = AuthorsCourseListAssembly(
                 authors: ids,
-                output: nil
+                output: self.interactor as? AuthorsCourseListOutputProtocol
             )
             let authorsViewController = authorsCourseListAssembly.makeModule()
 
@@ -211,7 +213,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
             let simpleCourseListAssembly = SimpleCourseListAssembly(
                 courseLists: ids,
-                output: nil
+                output: self.interactor as? SimpleCourseListOutputProtocol
             )
             let simpleCourseListViewController = simpleCourseListAssembly.makeModule()
 
@@ -371,6 +373,16 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func displayProfile(viewModel: FullscreenCourseList.ProfilePresentation.ViewModel) {
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayFullscreenCourseList(viewModel: FullscreenCourseList.FullscreenCourseListModulePresentation.ViewModel) {
+        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
+        self.push(module: assembly.makeModule())
     }
 
     func displaySimilarAuthors(viewModel: FullscreenCourseList.SimilarAuthorsPresentation.ViewModel) {

@@ -79,6 +79,28 @@ enum FullscreenCourseList {
         }
     }
 
+    /// Present profile
+    enum ProfilePresentation {
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
+        }
+    }
+
+    /// Present fullscreen module
+    enum FullscreenCourseListModulePresentation {
+        struct Response {
+            let courseListType: CourseListType
+        }
+
+        struct ViewModel {
+            let courseListType: CourseListType
+        }
+    }
+
     /// Try to set online status
     enum OnlineModeReset {
         struct Request {
