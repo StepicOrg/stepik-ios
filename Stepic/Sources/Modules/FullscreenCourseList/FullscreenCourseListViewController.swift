@@ -386,16 +386,21 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     }
 
     func displaySimilarAuthors(viewModel: FullscreenCourseList.SimilarAuthorsPresentation.ViewModel) {
-        self.disableScrollForCourseListModule()
+        self.prepareCourseListModuleForSimilarCourseListsPresentation()
         self.refreshSimilarAuthorsCourseListState(.visible(ids: viewModel.ids))
     }
 
     func displaySimilarCourseLists(viewModel: FullscreenCourseList.SimilarCourseListsPresentation.ViewModel) {
-        self.disableScrollForCourseListModule()
+        self.prepareCourseListModuleForSimilarCourseListsPresentation()
         self.refreshSimilarCourseListsState(.visible(ids: viewModel.ids))
     }
 
     // MARK: Private Helpers
+
+    private func prepareCourseListModuleForSimilarCourseListsPresentation() {
+        self.disableScrollForCourseListModule()
+        self.loadAllCoursesInCourseListModule()
+    }
 
     private func disableScrollForCourseListModule() {
         guard let submodule = self.getSubmodule(type: .courseList),
@@ -415,6 +420,12 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             )
 
             return
+        }
+    }
+
+    private func loadAllCoursesInCourseListModule() {
+        if let courseListSubmodule = self.getSubmodule(type: .courseList) {
+            courseListSubmodule.courseListModuleInput?.loadAllCourses()
         }
     }
 }

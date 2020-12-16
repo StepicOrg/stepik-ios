@@ -37,6 +37,11 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         CourseListFilterQuery(courseListFilters: self.currentFilters)
     }
 
+    private let fetchSemaphore = DispatchSemaphore(value: 1)
+    private lazy var fetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseListInteractor.CoursesFetch"
+    )
+
     init(
         presenter: CourseListPresenterProtocol,
         provider: CourseListProviderProtocol,
@@ -64,132 +69,120 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     // MARK: - Public methods
 
     func doCoursesFetch(request: CourseList.CoursesLoad.Request) {
-        // Check for state and
-        // - isOnline && didLoadFromCache: we loaded cached courses (and not only cached courses), load from remote
-        // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
-        // - isOnline && !didLoadFromCache: we should load cached courses and then load from network (recursive execute fetchCourses)
-        // - !isOnline && !didLoadFromCache: we should load cached courses, but can't load from network (first fetch after init)
-        firstly {
-            self.didLoadFromCache
-                ? self.provider.fetchRemote(page: 1, filterQuery: self.currentFilterQuery)
-                : self.provider.fetchCached()
-        }.done { courses, meta in
-            self.paginationState = PaginationState(
-                page: meta.page,
-                hasNext: meta.hasNext
-            )
-
-            self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
-
-            // Cache new courses fetched from remote.
-            if self.didLoadFromCache && self.currentFilters.isEmpty {
-                self.provider.cache(courses: courses)
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
             }
 
-            // Fetch personal deadlines
-            if let userID = self.userAccountService.currentUser?.id, self.isOnline {
-                self.personalDeadlinesService.syncDeadlines(for: courses, userID: userID).cauterize()
-            }
+            strongSelf.fetchSemaphore.wait()
 
-            if self.currentCourses.isEmpty {
-                // Offline mode: present empty state only if get empty courses from network
-                if self.isOnline && self.didLoadFromCache {
-                    self.moduleOutput?.presentEmptyState(sourceModule: self)
+            // Check for state and
+            // - isOnline && didLoadFromCache: we loaded cached courses (and not only cached courses), load from remote
+            // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
+            // - isOnline && !didLoadFromCache: we should load cached courses and then load from network (recursive execute fetchCourses)
+            // - !isOnline && !didLoadFromCache: we should load cached courses, but can't load from network (first fetch after init)
+            firstly {
+                strongSelf.didLoadFromCache
+                    ? strongSelf.provider.fetchRemote(page: 1, filterQuery: strongSelf.currentFilterQuery)
+                    : strongSelf.provider.fetchCached()
+            }.done { courses, meta in
+                strongSelf.paginationState = PaginationState(
+                    page: meta.page,
+                    hasNext: meta.hasNext
+                )
+
+                strongSelf.currentCourses = courses.map { (strongSelf.getUniqueIdentifierForCourse($0), $0) }
+
+                // Cache new courses fetched from remote.
+                if strongSelf.didLoadFromCache && strongSelf.currentFilters.isEmpty {
+                    strongSelf.provider.cache(courses: courses)
                 }
-            } else {
-                let courses = CourseList.AvailableCourses(
-                    fetchedCourses: CourseList.ListData(
-                        courses: self.currentCourses,
-                        hasNextPage: meta.hasNext
-                    ),
-                    availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
-                )
 
-                let response = CourseList.CoursesLoad.Response(
-                    isAuthorized: self.userAccountService.isAuthorized,
-                    result: courses,
-                    viewSource: self.courseViewSource
-                )
-                self.presenter.presentCourses(response: response)
+                // Fetch personal deadlines
+                if let userID = strongSelf.userAccountService.currentUser?.id, strongSelf.isOnline {
+                    strongSelf.personalDeadlinesService.syncDeadlines(for: courses, userID: userID).cauterize()
+                }
 
-                self.moduleOutput?.presentLoadedState(sourceModule: self)
-            }
+                if strongSelf.currentCourses.isEmpty {
+                    // Offline mode: present empty state only if get empty courses from network
+                    if strongSelf.isOnline && strongSelf.didLoadFromCache {
+                        DispatchQueue.main.async {
+                            strongSelf.moduleOutput?.presentEmptyState(sourceModule: strongSelf)
+                        }
+                    }
+                } else {
+                    let courses = CourseList.AvailableCourses(
+                        fetchedCourses: CourseList.ListData(
+                            courses: strongSelf.currentCourses,
+                            hasNextPage: meta.hasNext
+                        ),
+                        availableAdaptiveCourses: strongSelf.getAvailableAdaptiveCourses(from: courses)
+                    )
 
-            // Fetch & present similar course lists
-            self.refreshSimilarCourseLists()
+                    let response = CourseList.CoursesLoad.Response(
+                        isAuthorized: strongSelf.userAccountService.isAuthorized,
+                        result: courses,
+                        viewSource: strongSelf.courseViewSource
+                    )
 
-            // Retry if successfully
-            let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
-            if shouldRetryAfterFetching {
-                // End of recursion cause shouldRetryAfterFetching will be false on next call
-                self.didLoadFromCache = true
-                self.doCoursesFetch(request: request)
-            }
-        }.catch { error in
-            if case CourseListProvider.Error.networkFetchFailed = error,
-               self.didLoadFromCache,
-               !self.currentCourses.isEmpty {
-                // Offline mode: we already presented cached courses, but network request failed
-                // so let's ignore it and show only cached
-            } else {
-                self.moduleOutput?.presentError(sourceModule: self)
+                    DispatchQueue.main.async {
+                        strongSelf.presenter.presentCourses(response: response)
+                        strongSelf.moduleOutput?.presentLoadedState(sourceModule: strongSelf)
+                    }
+                }
+
+                // Fetch & present similar course lists
+                strongSelf.refreshSimilarCourseLists()
+
+                // Retry if successfully
+                let shouldRetryAfterFetching = strongSelf.isOnline && !strongSelf.didLoadFromCache
+                if shouldRetryAfterFetching {
+                    // End of recursion cause shouldRetryAfterFetching will be false on next call
+                    strongSelf.didLoadFromCache = true
+                    strongSelf.doCoursesFetch(request: request)
+                }
+            }.ensure {
+                strongSelf.fetchSemaphore.signal()
+            }.catch { error in
+                if case CourseListProvider.Error.networkFetchFailed = error,
+                   strongSelf.didLoadFromCache,
+                   !strongSelf.currentCourses.isEmpty {
+                    // Offline mode: we already presented cached courses, but network request failed
+                    // so let's ignore it and show only cached
+                } else {
+                    DispatchQueue.main.async {
+                        strongSelf.moduleOutput?.presentError(sourceModule: strongSelf)
+                    }
+                }
             }
         }
     }
 
     func doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request) {
-        // If we are
-        // - in offline mode
-        // - have no more courses
-        // then ignore request and pass empty list to presenter
-        if !self.isOnline || !self.paginationState.hasNext {
-            let result = CourseList.AvailableCourses(
-                fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
-                availableAdaptiveCourses: Set<Course>()
-            )
-            let response = CourseList.NextCoursesLoad.Response(
-                isAuthorized: self.userAccountService.isAuthorized,
-                result: .success(result),
-                viewSource: self.courseViewSource
-            )
-            self.presenter.presentNextCourses(response: response)
-            return
-        }
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
 
-        let nextPageNumber = self.paginationState.page + 1
-        self.provider.fetchRemote(
-            page: nextPageNumber,
-            filterQuery: self.currentFilterQuery
-        ).done { courses, meta in
-            self.paginationState = PaginationState(
-                page: meta.page,
-                hasNext: meta.hasNext
-            )
+            strongSelf.fetchSemaphore.wait()
 
-            let appendedCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
-            self.currentCourses.append(contentsOf: appendedCourses)
-            let courses = CourseList.AvailableCourses(
-                fetchedCourses: CourseList.ListData(
-                    courses: appendedCourses,
-                    hasNextPage: meta.hasNext
-                ),
-                availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
-            )
-            let response = CourseList.NextCoursesLoad.Response(
-                isAuthorized: self.userAccountService.isAuthorized,
-                result: .success(courses),
-                viewSource: self.courseViewSource
-            )
-            self.presenter.presentNextCourses(response: response)
+            strongSelf.loadNextCourses().done { response in
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentNextCourses(response: response)
+                }
+            }.ensure {
+                strongSelf.fetchSemaphore.signal()
+            }.catch { error in
+                let response = CourseList.NextCoursesLoad.Response(
+                    isAuthorized: strongSelf.userAccountService.isAuthorized,
+                    result: .failure(error),
+                    viewSource: strongSelf.courseViewSource
+                )
 
-            self.cacheCurrentCourses()
-        }.catch { error in
-            let response = CourseList.NextCoursesLoad.Response(
-                isAuthorized: self.userAccountService.isAuthorized,
-                result: .failure(error),
-                viewSource: self.courseViewSource
-            )
-            self.presenter.presentNextCourses(response: response)
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentNextCourses(response: response)
+                }
+            }
         }
     }
 
@@ -273,7 +266,62 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
-    // MARK: - Private methods
+    // MARK: - Private API
+
+    private func loadNextCourses() -> Promise<CourseList.NextCoursesLoad.Response> {
+        Promise { seal in
+            // If we are
+            // - in offline mode
+            // - have no more courses
+            // then ignore request and pass empty list to presenter
+            if !self.isOnline || !self.paginationState.hasNext {
+                let result = CourseList.AvailableCourses(
+                    fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
+                    availableAdaptiveCourses: Set<Course>()
+                )
+                let response = CourseList.NextCoursesLoad.Response(
+                    isAuthorized: self.userAccountService.isAuthorized,
+                    result: .success(result),
+                    viewSource: self.courseViewSource
+                )
+
+                seal.fulfill(response)
+                return
+            }
+
+            let nextPageNumber = self.paginationState.page + 1
+            self.provider.fetchRemote(
+                page: nextPageNumber,
+                filterQuery: self.currentFilterQuery
+            ).done { courses, meta in
+                self.paginationState = PaginationState(
+                    page: meta.page,
+                    hasNext: meta.hasNext
+                )
+
+                let appendedCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
+                self.currentCourses.append(contentsOf: appendedCourses)
+                let courses = CourseList.AvailableCourses(
+                    fetchedCourses: CourseList.ListData(
+                        courses: appendedCourses,
+                        hasNextPage: meta.hasNext
+                    ),
+                    availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
+                )
+                let response = CourseList.NextCoursesLoad.Response(
+                    isAuthorized: self.userAccountService.isAuthorized,
+                    result: .success(courses),
+                    viewSource: self.courseViewSource
+                )
+
+                self.cacheCurrentCourses()
+
+                seal.fulfill(response)
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
 
     private func getAvailableAdaptiveCourses(from courses: [Course]) -> Set<Course> {
         let availableInAdaptiveMode = courses
@@ -374,6 +422,48 @@ extension CourseListInteractor: CourseListInputProtocol {
 
         self.currentFilters = filters
         self.doCoursesFetch(request: .init())
+    }
+
+    func loadAllCourses() {
+        func load() -> Guarantee<Bool> {
+            Guarantee { seal in
+                self.loadNextCourses().done { response in
+                    if case .success = response.result, self.paginationState.hasNext {
+                        seal(true)
+                    } else {
+                        seal(false)
+                    }
+                }.catch { _ in
+                    seal(false)
+                }
+            }
+        }
+
+        func collect() -> Guarantee<Void> {
+            load().then { hasNext -> Guarantee<Void> in
+                if hasNext {
+                    return collect()
+                } else {
+                    return .value(())
+                }
+            }
+        }
+
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchSemaphore.wait()
+
+            collect().done {
+                strongSelf.fetchSemaphore.signal()
+
+                DispatchQueue.main.async {
+                    strongSelf.refreshCourseList()
+                }
+            }
+        }
     }
 }
 
