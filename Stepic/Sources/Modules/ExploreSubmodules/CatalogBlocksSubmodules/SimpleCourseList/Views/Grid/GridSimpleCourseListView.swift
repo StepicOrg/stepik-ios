@@ -91,7 +91,7 @@ final class GridSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         self.collectionView.skeleton.hide()
     }
 
-    func prepareForInterfaceRotation() {
+    func prepareForInterfaceOrientationChange() {
         self.collectionViewContentSizeObservation = nil
     }
 

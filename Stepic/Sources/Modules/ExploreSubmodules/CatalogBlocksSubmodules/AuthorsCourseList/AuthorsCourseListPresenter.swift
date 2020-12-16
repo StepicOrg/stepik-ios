@@ -9,28 +9,62 @@ final class AuthorsCourseListPresenter: AuthorsCourseListPresenterProtocol {
 
     func presentCourseList(response: AuthorsCourseList.CourseListLoad.Response) {
         switch response.result {
-        case .success(let data):
-            let viewModels = data.map { self.makeViewModel($0) }
+        case .success(let result):
+            let viewModels: [AuthorsCourseListWidgetViewModel]
+
+            switch result {
+            case .catalogBlockContentItems(let contentItems):
+                viewModels = contentItems.map { self.makeViewModel(contentItem: $0) }
+            case .users(let users):
+                viewModels = users.map { self.makeViewModel(user: $0) }
+            }
+
             self.viewController?.displayCourseList(viewModel: .init(state: .result(data: viewModels)))
         case .failure:
             break
         }
     }
 
+    // MARK: Private API
+
+    private func makeViewModel(contentItem: AuthorsCatalogBlockContentItem) -> AuthorsCourseListWidgetViewModel {
+        self.makeViewModel(
+            id: contentItem.id,
+            fullName: contentItem.fullName,
+            avatar: contentItem.avatar,
+            createdCoursesCount: contentItem.createdCoursesCount,
+            followersCount: contentItem.followersCount
+        )
+    }
+
+    private func makeViewModel(user: User) -> AuthorsCourseListWidgetViewModel {
+        self.makeViewModel(
+            id: user.id,
+            fullName: user.fullName,
+            avatar: user.avatarURL,
+            createdCoursesCount: user.createdCoursesCount,
+            followersCount: user.followersCount
+        )
+    }
+
     private func makeViewModel(
-        _ contentItem: AuthorsCatalogBlockContentItem
+        id: Int,
+        fullName: String,
+        avatar: String,
+        createdCoursesCount: Int,
+        followersCount: Int
     ) -> AuthorsCourseListWidgetViewModel {
-        let formattedCreatedCoursesCountString = contentItem.createdCoursesCount > 0
-            ? FormatterHelper.coursesCount(contentItem.createdCoursesCount)
+        let formattedCreatedCoursesCountString = createdCoursesCount > 0
+            ? FormatterHelper.coursesCount(createdCoursesCount)
             : ""
-        let formattedFollowersCountString = contentItem.followersCount > 0
-            ? FormatterHelper.longFollowersCount(contentItem.followersCount)
+        let formattedFollowersCountString = followersCount > 0
+            ? FormatterHelper.longFollowersCount(followersCount)
             : ""
 
         return AuthorsCourseListWidgetViewModel(
-            uniqueIdentifier: "\(contentItem.id)",
-            title: contentItem.fullName,
-            avatarURLString: contentItem.avatar,
+            uniqueIdentifier: "\(id)",
+            title: fullName,
+            avatarURLString: avatar,
             formattedCreatedCoursesCountString: formattedCreatedCoursesCountString,
             formattedFollowersCountString: formattedFollowersCountString
         )

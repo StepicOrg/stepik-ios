@@ -1010,6 +1010,10 @@ CourseListFilterRowIsFreeTitle = "Только бесплатные";
 CourseListFilterRowShowResultTitle = "Показать результат";
 CourseListFilterCourseLanguageAnyTitle = "Любой";
 
+/* Similar Course Lists */
+SimilarCourseListHeaderTitle = "Похожие темы";
+SimilarCourseListAuthorsHeaderTitle = "Авторы курсов";
+
 /* New profile */
 NewProfileRatingReputation = "Репутация %@";
 NewProfileRatingKnowledge = "Знания %@";

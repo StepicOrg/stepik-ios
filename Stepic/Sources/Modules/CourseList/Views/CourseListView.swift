@@ -102,6 +102,7 @@ class CourseListView: UIView {
         self.collectionView.dataSource = dataSource
         self.collectionView.reloadData()
         self.collectionView.collectionViewLayout.invalidateLayout()
+        self.invalidateIntrinsicContentSize()
     }
 
     private func updateViewColor() {

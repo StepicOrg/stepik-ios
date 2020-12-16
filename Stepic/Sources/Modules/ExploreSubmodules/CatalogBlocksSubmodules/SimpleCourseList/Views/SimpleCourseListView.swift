@@ -4,10 +4,10 @@ protocol SimpleCourseListViewProtocol: AnyObject {
     func showLoading()
     func hideLoading()
     func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource)
-    func prepareForInterfaceRotation()
+    func prepareForInterfaceOrientationChange()
     func invalidateCollectionViewLayout()
 }
 
 extension SimpleCourseListViewProtocol {
-    func prepareForInterfaceRotation() {}
+    func prepareForInterfaceOrientationChange() {}
 }

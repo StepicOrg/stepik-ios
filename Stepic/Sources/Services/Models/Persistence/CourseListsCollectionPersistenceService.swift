@@ -2,22 +2,25 @@ import Foundation
 import PromiseKit
 
 protocol CourseListsCollectionPersistenceServiceProtocol: AnyObject {
-    func fetch(forLanguage language: ContentLanguage) -> Promise<[CourseListModel]>
+    func fetch(forLanguage language: ContentLanguage) -> Guarantee<[CourseListModel]>
     func update(courseLists: [CourseListModel], forLanguage language: ContentLanguage)
 }
 
 final class CourseListsCollectionPersistenceService: CourseListsCollectionPersistenceServiceProtocol {
-    func fetch(forLanguage language: ContentLanguage) -> Promise<[CourseListModel]> {
+    private let courseListsPersistenceService: CourseListsPersistenceServiceProtocol
+
+    init(courseListsPersistenceService: CourseListsPersistenceServiceProtocol = CourseListsPersistenceService()) {
+        self.courseListsPersistenceService = courseListsPersistenceService
+    }
+
+    func fetch(forLanguage language: ContentLanguage) -> Guarantee<[CourseListModel]> {
         let ids = UserDefaults.standard.value(
             forKey: self.getKey(forLanguage: language)
         ) as? [CourseListModel.IdType] ?? []
-        return Promise { seal in
-            CourseListModel.recoverAsync(ids: ids).done { courseLists in
-                let courseLists = Sorter.sort(courseLists, byIds: ids)
-                seal.fulfill(courseLists)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
+
+        return self.courseListsPersistenceService.fetch(ids: ids).then { courseLists in
+            let sortedCourseLists = courseLists.reordered(order: ids, transform: { $0.id })
+            return .value(sortedCourseLists)
         }
     }
 
@@ -28,9 +31,5 @@ final class CourseListsCollectionPersistenceService: CourseListsCollectionPersis
 
     private func getKey(forLanguage language: ContentLanguage) -> String {
         "ListIds_\(language.languageString)"
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
     }
 }

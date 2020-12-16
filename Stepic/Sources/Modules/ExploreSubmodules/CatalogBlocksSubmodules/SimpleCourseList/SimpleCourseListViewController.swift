@@ -69,7 +69,7 @@ final class SimpleCourseListViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        self.simpleCourseListView?.prepareForInterfaceRotation()
+        self.simpleCourseListView?.prepareForInterfaceOrientationChange()
 
         coordinator.animate(alongsideTransition: nil) { [weak self] _ in
             guard let strongSelf = self else {

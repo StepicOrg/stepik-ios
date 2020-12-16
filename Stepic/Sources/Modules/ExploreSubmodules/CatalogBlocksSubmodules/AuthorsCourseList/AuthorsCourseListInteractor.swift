@@ -12,56 +12,69 @@ final class AuthorsCourseListInteractor: AuthorsCourseListInteractorProtocol {
     private let presenter: AuthorsCourseListPresenterProtocol
     private let provider: AuthorsCourseListProviderProtocol
 
-    private let catalogBlockID: CatalogBlock.IdType
-    private var currentCatalogBlock: CatalogBlock?
+    private let initialContext: AuthorsCourseList.Context
 
     init(
-        catalogBlockID: CatalogBlock.IdType,
+        initialContext: AuthorsCourseList.Context,
         presenter: AuthorsCourseListPresenterProtocol,
         provider: AuthorsCourseListProviderProtocol
     ) {
-        self.catalogBlockID = catalogBlockID
+        self.initialContext = initialContext
         self.presenter = presenter
         self.provider = provider
     }
 
     func doCourseListLoad(request: AuthorsCourseList.CourseListLoad.Request) {
-        self.fetchCatalogBlock().done { catalogBlockOrNil in
-            self.currentCatalogBlock = catalogBlockOrNil
-
-            guard let catalogBlock = catalogBlockOrNil,
-                  let contentItems = catalogBlock.content as? [AuthorsCatalogBlockContentItem] else {
-                throw Error.fetchFailed
-            }
-
-            guard catalogBlock.kind == .authors else {
-                throw Error.invalidKind
-            }
-
-            self.presenter.presentCourseList(response: .init(result: .success(contentItems)))
-        }.catch { error in
-            print("AuthorsCourseListInteractor :: failed fetch catalog block with error = \(error)")
-            self.presenter.presentCourseList(response: .init(result: .failure(error)))
-        }
+        self.refreshCourseList()
     }
 
     func doAuthorPresentation(request: AuthorsCourseList.AuthorPresentation.Request) {
-        guard let contentItems = self.currentCatalogBlock?.content as? [AuthorsCatalogBlockContentItem],
-              let selectedItem = contentItems.first(where: { "\($0.id)" == request.uniqueIdentifier })  else {
-            return
+        if let authorID = Int(request.uniqueIdentifier) {
+            self.moduleOutput?.presentAuthor(id: authorID)
         }
-
-        self.moduleOutput?.presentAuthor(id: selectedItem.id)
     }
 
-    private func fetchCatalogBlock() -> Promise<CatalogBlock?> {
+    // MARK: Private API
+
+    private func refreshCourseList() {
+        switch self.initialContext {
+        case .catalogBlock(let catalogBlockID):
+            self.fetchCatalogBlock(id: catalogBlockID).done { catalogBlockOrNil in
+                guard let catalogBlock = catalogBlockOrNil,
+                      let contentItems = catalogBlock.content as? [AuthorsCatalogBlockContentItem] else {
+                    throw Error.fetchFailed
+                }
+
+                guard catalogBlock.kind == .authors else {
+                    throw Error.invalidKind
+                }
+
+                self.presenter.presentCourseList(
+                    response: .init(result: .success(.catalogBlockContentItems(contentItems)))
+                )
+            }.catch { error in
+                print("AuthorsCourseListInteractor :: failed fetch catalog block with error = \(error)")
+                self.presenter.presentCourseList(response: .init(result: .failure(error)))
+            }
+        case .authors(let authorsIDs):
+            self.provider.fetchUsers(ids: authorsIDs).done { fetchResult in
+                let users = fetchResult.value
+                self.presenter.presentCourseList(response: .init(result: .success(.users(users))))
+            }.catch { error in
+                print("AuthorsCourseListInteractor :: failed fetch authors with error = \(error)")
+                self.presenter.presentCourseList(response: .init(result: .failure(error)))
+            }
+        }
+    }
+
+    private func fetchCatalogBlock(id: CatalogBlock.IdType) -> Promise<CatalogBlock?> {
         self.provider.fetchCachedCatalogBlock(
-            id: self.catalogBlockID
+            id: id
         ).then { cachedCatalogBlockOrNil -> Promise<CatalogBlock?> in
             if let cachedCatalogBlock = cachedCatalogBlockOrNil {
                 return .value(cachedCatalogBlock)
             }
-            return self.provider.fetchRemoteCatalogBlock(id: self.catalogBlockID)
+            return self.provider.fetchRemoteCatalogBlock(id: id)
         }
     }
 
