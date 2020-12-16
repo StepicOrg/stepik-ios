@@ -175,6 +175,8 @@ extension UIColor {
     static let stepikExtraLightVioletFixed = ColorPalette.violet02
     /// A non adaptable color with hex value #3E50CB (violet04).
     static let stepikDarkVioletFixed = ColorPalette.violet04
+    /// A non adaptable color with hex value #98A0E8 (violet05).
+    static let stepikViolet05 = ColorPalette.violet05
 
     // MARK: Orange
 
@@ -504,6 +506,14 @@ extension UIColor {
         .dynamic(light: .stepikAccentAlpha40, dark: UIColor.stepikSecondaryBackground.withAlphaComponent(0.4))
     }
 
+    /// The color to use for the content overlay with violet.
+    static var stepikOverlayViolet: UIColor {
+        .dynamic(
+            light: UIColor.stepikVioletFixed.withAlphaComponent(0.12),
+            dark: ColorPalette.violet05.withAlphaComponent(0.12)
+        )
+    }
+
     // MARK: - Skeleton Gradient -
 
     static var skeletonGradientFirst: UIColor {
@@ -796,6 +806,7 @@ private enum ColorPalette {
     static let violet02 = UIColor(hex6: 0xE9EBFA)
     static let violet03 = UIColor(hex6: 0x9CA6E6)
     static let violet04 = UIColor(hex6: 0x3E50CB)
+    static let violet05 = UIColor(hex6: 0x98A0E8)
 
     // MARK: - Orange -
 

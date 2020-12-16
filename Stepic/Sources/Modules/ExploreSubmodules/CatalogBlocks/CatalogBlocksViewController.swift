@@ -88,12 +88,13 @@ final class CatalogBlocksViewController: UIViewController {
                     }
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .simpleCourseLists:
-                    guard block.appearance == .default else {
+                    guard let blockAppearance = block.appearance else {
                         continue
                     }
 
                     let assembly = SimpleCourseListAssembly(
                         catalogBlockID: block.id,
+                        layoutType: .init(catalogBlockAppearance: blockAppearance),
                         output: self.interactor as? SimpleCourseListOutputProtocol
                     )
                     let viewController = assembly.makeModule()

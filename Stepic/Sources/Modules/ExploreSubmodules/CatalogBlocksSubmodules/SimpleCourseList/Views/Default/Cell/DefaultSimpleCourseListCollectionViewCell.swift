@@ -1,13 +1,19 @@
 import UIKit
 
-extension SimpleCourseListDefaultCollectionViewCell {
+extension DefaultSimpleCourseListCollectionViewCell {
     enum Appearance {
         static let cornerRadius: CGFloat = 13.0
     }
 }
 
-final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reusable {
-    private lazy var widgetView = SimpleCourseListDefaultWidgetView()
+final class DefaultSimpleCourseListCollectionViewCell: UICollectionViewCell, Reusable {
+    private lazy var widgetView = DefaultSimpleCourseListWidgetView()
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.widgetView.alpha = self.isHighlighted ? 0.5 : 1.0
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,12 +28,6 @@ final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reu
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override var isHighlighted: Bool {
-        didSet {
-            self.widgetView.alpha = self.isHighlighted ? 0.5 : 1.0
-        }
     }
 
     func configure(viewModel: SimpleCourseListWidgetViewModel, colorMode: ColorMode) {
@@ -60,7 +60,7 @@ final class SimpleCourseListDefaultCollectionViewCell: UICollectionViewCell, Reu
     }
 }
 
-extension SimpleCourseListDefaultCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
+extension DefaultSimpleCourseListCollectionViewCell: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.contentView.addSubview(self.widgetView)
     }

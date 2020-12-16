@@ -38,6 +38,20 @@ enum SimpleCourseList {
         case courseLists(ids: [CourseListModel.IdType])
     }
 
+    enum LayoutType {
+        case `default`
+        case grid
+
+        init(catalogBlockAppearance: CatalogBlockAppearance) {
+            switch catalogBlockAppearance {
+            case .default:
+                self = .default
+            case .simpleCourseListsGrid:
+                self = .grid
+            }
+        }
+    }
+
     enum ViewControllerState {
         case loading
         case result(data: [SimpleCourseListWidgetViewModel])

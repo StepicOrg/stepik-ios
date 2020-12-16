@@ -213,6 +213,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
             let simpleCourseListAssembly = SimpleCourseListAssembly(
                 courseLists: ids,
+                layoutType: .default,
                 output: self.interactor as? SimpleCourseListOutputProtocol
             )
             let simpleCourseListViewController = simpleCourseListAssembly.makeModule()

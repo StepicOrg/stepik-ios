@@ -75,10 +75,6 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
                     throw Error.invalidKind
                 }
 
-                guard catalogBlock.appearance == .default else {
-                    throw Error.unsupportedAppearance
-                }
-
                 let courseListData: SimpleCourseList.CourseListData = .catalogBlockContentItems(contentItems)
                 self.currentCourseListData = courseListData
 
@@ -114,6 +110,5 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
     enum Error: Swift.Error {
         case fetchFailed
         case invalidKind
-        case unsupportedAppearance
     }
 }

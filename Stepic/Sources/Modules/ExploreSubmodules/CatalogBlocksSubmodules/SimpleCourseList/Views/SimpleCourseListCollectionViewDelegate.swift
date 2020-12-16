@@ -1,19 +1,7 @@
 import UIKit
 
-final class SimpleCourseListCollectionViewDelegate: NSObject, UICollectionViewDelegate {
-    weak var delegate: SimpleCourseListViewControllerDelegate?
+protocol SimpleCourseListCollectionViewDelegateProtocol: UICollectionViewDelegate {
+    var delegate: SimpleCourseListViewControllerDelegate? { get set }
 
-    var viewModels = [SimpleCourseListWidgetViewModel]()
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        defer {
-            collectionView.deselectItem(at: indexPath, animated: true)
-        }
-
-        guard let viewModel = self.viewModels[safe: indexPath.row] else {
-            return
-        }
-
-        self.delegate?.itemDidSelected(viewModel: viewModel)
-    }
+    var viewModels: [SimpleCourseListWidgetViewModel] { get set }
 }
