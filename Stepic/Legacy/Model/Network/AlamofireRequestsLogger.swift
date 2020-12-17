@@ -2,8 +2,6 @@ import Alamofire
 import Foundation
 
 final class AlamofireRequestsLogger: EventMonitor {
-    let queue = DispatchQueue(label: "AlamofireRequestsLogger", qos: .background)
-
     func requestDidResume(_ request: Request) {
         guard let task = request.task,
               let request = task.originalRequest,
