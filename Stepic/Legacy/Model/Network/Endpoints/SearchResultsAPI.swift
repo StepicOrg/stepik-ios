@@ -32,7 +32,7 @@ final class SearchResultsAPI: APIEndpoint {
             "language": language.searchCoursesParameter ?? "",
             "is_popular": "true",
             "is_public": "true",
-            "readiness_gte": 0.7,
+            "readiness__gte": 0.7,
             "has_logo": "true",
             "is_idea_compatible": "false"
         ]
