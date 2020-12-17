@@ -16,7 +16,7 @@ final class SearchResultsAPI: APIEndpoint {
 
     @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
     @discardableResult
-    func search(
+    private func search(
         query: String,
         type: String?,
         language: ContentLanguage,
@@ -27,11 +27,14 @@ final class SearchResultsAPI: APIEndpoint {
         error errorHandler: @escaping (Error) -> Void
     ) -> Request? {
         var params: Parameters = [
-           "query": query.lowercased(),
-           "access_token": AuthInfo.shared.token?.accessToken ?? "",
-           "language": language.searchCoursesParameter ?? "",
-           "is_popular": "true",
-           "is_public": "true"
+            "query": query.lowercased(),
+            "access_token": AuthInfo.shared.token?.accessToken ?? "",
+            "language": language.searchCoursesParameter ?? "",
+            "is_popular": "true",
+            "is_public": "true",
+            "readiness__gte": 0.7,
+            "has_logo": "true",
+            "is_idea_compatible": "false"
         ]
 
         if let page = page {
