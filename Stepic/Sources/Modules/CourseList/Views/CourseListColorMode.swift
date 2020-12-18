@@ -30,8 +30,8 @@ extension CourseListColorMode {
         return appearance
     }
 
-    var newExploreBlockContainerViewAppearance: NewExploreBlockContainerView.Appearance {
-        var appearance = NewExploreBlockContainerView.Appearance()
+    var exploreCatalogBlockContainerViewAppearance: ExploreCatalogBlockContainerView.Appearance {
+        var appearance = ExploreCatalogBlockContainerView.Appearance()
         appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
         return appearance
     }

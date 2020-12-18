@@ -40,7 +40,7 @@ final class AuthorsCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
     private var contentHeight: CGFloat {
         let verticalSectionInsets = self.sectionInset.top + self.sectionInset.bottom
         let allItemsHeight = self.itemSize.height * CGFloat(self.rowsCount)
-        let allSpacing = CGFloat(self.rowsCount + 1) * self.minimumLineSpacing
+        let allSpacing = CGFloat(self.rowsCount) * self.minimumLineSpacing
         return verticalSectionInsets + allItemsHeight + allSpacing
     }
 

@@ -1,19 +1,19 @@
 import SnapKit
 import UIKit
 
-extension NewExploreBlockContainerView {
+extension ExploreCatalogBlockContainerView {
     struct Appearance {
         var backgroundColor = UIColor.stepikBackground
 
-        let headerViewInsets = UIEdgeInsets(top: 32, left: 20, bottom: 16, right: 20)
+        let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
         var contentViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
     }
 }
 
-final class NewExploreBlockContainerView: UIView {
+final class ExploreCatalogBlockContainerView: UIView {
     let appearance: Appearance
 
-    private let headerView: (UIView & NewExploreBlockHeaderViewProtocol)?
+    private let headerView: (UIView & ExploreCatalogBlockHeaderViewProtocol)?
     private let contentView: UIView
 
     var onShowAllButtonClick: (() -> Void)? {
@@ -40,7 +40,7 @@ final class NewExploreBlockContainerView: UIView {
 
     init(
         frame: CGRect = .zero,
-        headerView: (UIView & NewExploreBlockHeaderViewProtocol)?,
+        headerView: (UIView & ExploreCatalogBlockHeaderViewProtocol)?,
         contentView: UIView,
         appearance: Appearance = Appearance()
     ) {
@@ -66,7 +66,7 @@ final class NewExploreBlockContainerView: UIView {
     }
 }
 
-extension NewExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
+extension ExploreCatalogBlockContainerView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
         self.contentView.clipsToBounds = false

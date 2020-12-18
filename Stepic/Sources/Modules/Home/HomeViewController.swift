@@ -247,7 +247,8 @@ final class HomeViewController: BaseExploreViewController {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
-                headerDescription: state.headerDescription
+                headerDescription: state.headerDescription,
+                contentViewInsets: .zero
             )
 
         containerView.onShowAllButtonClick = { [weak self] in
@@ -319,7 +320,10 @@ final class HomeViewController: BaseExploreViewController {
         (view, viewController) = self.makeVisitedCourseListSubmodule()
 
         let containerView = CourseListContainerViewFactory(colorMode: .light)
-            .makeHorizontalContainerView(for: view, headerDescription: state.headerDescription)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: state.headerDescription
+            )
 
         containerView.onShowAllButtonClick = { [weak self] in
             self?.displayFullscreenVisitedCourseList()

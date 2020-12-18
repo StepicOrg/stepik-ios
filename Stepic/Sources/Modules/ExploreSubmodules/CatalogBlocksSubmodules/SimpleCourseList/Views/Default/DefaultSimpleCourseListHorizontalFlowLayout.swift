@@ -40,7 +40,7 @@ final class DefaultSimpleCourseListHorizontalFlowLayout: UICollectionViewFlowLay
     private var contentHeight: CGFloat {
         let verticalSectionInsets = self.sectionInset.top + self.sectionInset.bottom
         let allItemsHeight = self.itemSize.height * CGFloat(self.rowsCount)
-        let allSpacing = CGFloat(self.rowsCount + 1) * self.minimumLineSpacing
+        let allSpacing = self.minimumLineSpacing * CGFloat(max(1, self.rowsCount - 1))
         return verticalSectionInsets + allItemsHeight + allSpacing
     }
 
