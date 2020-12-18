@@ -129,4 +129,26 @@ extension CourseListColorMode {
             }
         }
     }
+
+    var courseWidgetBackgroundColor: UIColor {
+        switch self {
+        case .light:
+            return .dynamic(light: .white, dark: .stepikSecondaryBackground)
+        case .grouped:
+            return .stepikSecondaryGroupedBackground
+        case .dark:
+            let lightUserInterfaceStyleColor = UIColor(hex6: 0x49495C)
+
+            if #available(iOS 13.0, *) {
+                return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                    if traitCollection.userInterfaceStyle == .dark {
+                        return .stepikTertiaryBackground
+                    }
+                    return lightUserInterfaceStyleColor
+                }
+            } else {
+                return lightUserInterfaceStyleColor
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@ import UIKit
 
 extension AuthorsCourseListCollectionViewCell {
     enum Appearance {
-        static let backgroundColor = UIColor.stepikTertiaryBackground
+        static let backgroundColor = UIColor.dynamic(light: .white, dark: .stepikSecondaryBackground)
         static let cornerRadius: CGFloat = 13.0
 
         static let shadowColor = UIColor.black
