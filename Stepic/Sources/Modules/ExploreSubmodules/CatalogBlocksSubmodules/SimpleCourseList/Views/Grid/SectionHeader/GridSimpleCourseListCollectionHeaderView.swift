@@ -3,7 +3,6 @@ import UIKit
 
 extension GridSimpleCourseListCollectionHeaderView {
     struct Appearance {
-        let contentViewInsets = LayoutInsets(left: 20, right: 20)
         let cornerRadius: CGFloat = 13
     }
 }
@@ -63,9 +62,7 @@ extension GridSimpleCourseListCollectionHeaderView: ProgrammaticallyInitializabl
     func makeConstraints() {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.appearance.contentViewInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.contentViewInsets.right)
+            make.edges.equalToSuperview()
         }
     }
 }

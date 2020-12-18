@@ -36,7 +36,7 @@ final class GridSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
     }()
 
     private lazy var flowLayout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedCollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
