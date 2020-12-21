@@ -1,11 +1,11 @@
 import SnapKit
 import UIKit
 
-protocol NewExploreBlockHeaderViewProtocol: ExploreBlockHeaderViewProtocol {
+protocol ExploreCatalogBlockHeaderViewProtocol: ExploreBlockHeaderViewProtocol {
     var descriptionText: String? { get set }
 }
 
-extension NewExploreBlockHeaderView {
+extension ExploreCatalogBlockHeaderView {
     struct Appearance {
         var titleLabelColor = UIColor.stepikSystemPrimaryText
         let titleLabelFont = Typography.title3Font
@@ -24,7 +24,7 @@ extension NewExploreBlockHeaderView {
     }
 }
 
-final class NewExploreBlockHeaderView: UIView, NewExploreBlockHeaderViewProtocol {
+final class ExploreCatalogBlockHeaderView: UIView, ExploreCatalogBlockHeaderViewProtocol {
     let appearance: Appearance
 
     private let analytics: Analytics
@@ -142,7 +142,7 @@ final class NewExploreBlockHeaderView: UIView, NewExploreBlockHeaderViewProtocol
     }
 }
 
-extension NewExploreBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
+extension ExploreCatalogBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.labelsStackView)
         self.labelsStackView.addArrangedSubview(self.titleLabel)

@@ -10,10 +10,10 @@ protocol ContentLanguageSwitchViewDelegate: AnyObject {
 
 extension ContentLanguageSwitchView {
     struct Appearance {
-        let headerTitleColor = UIColor.stepikTertiaryText
+        let headerTitleColor = UIColor.stepikSystemSecondaryText
 
         let descriptionFont = UIFont.systemFont(ofSize: 14)
-        let descriptionTextColor = UIColor.stepikTertiaryText
+        let descriptionTextColor = UIColor.stepikSystemSecondaryText
         let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 20, bottom: 16, right: 20)
 
         let buttonsInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)

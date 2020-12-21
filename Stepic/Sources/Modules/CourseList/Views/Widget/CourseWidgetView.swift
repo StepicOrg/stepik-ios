@@ -13,7 +13,7 @@ extension CourseWidgetView {
         let titleLabelInsets = LayoutInsets(left: 8, right: 8)
 
         let badgeImageViewInsets = LayoutInsets(right: 16)
-        let badgeImageViewTintColor = UIColor.stepikAccent
+        let badgeImageViewTintColor = UIColor.stepikSystemSecondaryText
         let badgeImageViewSize = CGSize(width: 18, height: 18)
 
         let statsViewHeight: CGFloat = 17
@@ -129,9 +129,7 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
 
 extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        if self.colorMode == .grouped {
-            self.backgroundColor = .stepikSecondaryGroupedBackground
-        }
+        self.backgroundColor = self.colorMode.courseWidgetBackgroundColor
     }
 
     func addSubviews() {

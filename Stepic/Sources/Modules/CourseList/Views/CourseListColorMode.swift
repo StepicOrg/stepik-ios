@@ -13,12 +13,12 @@ extension CourseListColorMode {
         switch self {
         case .light, .grouped:
             return .init(
-                titleLabelColor: .stepikPrimaryText,
-                showAllButtonColor: .stepikTertiaryText
+                titleLabelColor: .stepikSystemPrimaryText,
+                showAllButtonColor: .stepikSystemSecondaryText
             )
         case .dark:
             return .init(
-                titleLabelColor: UIColor.white,
+                titleLabelColor: .white,
                 showAllButtonColor: UIColor.white.withAlphaComponent(0.3)
             )
         }
@@ -30,8 +30,8 @@ extension CourseListColorMode {
         return appearance
     }
 
-    var newExploreBlockContainerViewAppearance: NewExploreBlockContainerView.Appearance {
-        var appearance = NewExploreBlockContainerView.Appearance()
+    var exploreCatalogBlockContainerViewAppearance: ExploreCatalogBlockContainerView.Appearance {
+        var appearance = ExploreCatalogBlockContainerView.Appearance()
         appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
         return appearance
     }
@@ -67,10 +67,10 @@ extension CourseListColorMode {
         switch self {
         case .light, .grouped:
             return .init(
-                imagesRenderingBackgroundColor: .stepikAccent,
+                imagesRenderingBackgroundColor: .stepikSystemSecondaryText,
                 imagesRenderingTintColor: .stepikGreenFixed,
-                itemTextColor: .stepikPrimaryText,
-                itemImageTintColor: .stepikAccent
+                itemTextColor: .stepikSystemSecondaryText,
+                itemImageTintColor: .stepikSystemSecondaryText
             )
         case .dark:
             return .init(
@@ -90,7 +90,7 @@ extension CourseListColorMode {
 
         switch self {
         case .light, .grouped:
-            appearance.textColor = .stepikPrimaryText
+            appearance.textColor = .stepikSystemPrimaryText
         case .dark:
             appearance.textColor = .white
         }
@@ -106,11 +106,11 @@ extension CourseListColorMode {
 
         switch self {
         case .light, .grouped:
-            appearance.textColor = .stepikSecondaryText
+            appearance.textColor = .stepikSystemSecondaryText
         case .dark:
             appearance.textColor = UIColor.dynamic(
                 light: UIColor.white.withAlphaComponent(0.6),
-                dark: .stepikSecondaryText
+                dark: .stepikSystemSecondaryText
             )
         }
 
@@ -126,6 +126,28 @@ extension CourseListColorMode {
                 return .stepikSeparator
             } else {
                 return UIColor.stepikOpaqueSeparator.withAlphaComponent(0.6)
+            }
+        }
+    }
+
+    var courseWidgetBackgroundColor: UIColor {
+        switch self {
+        case .light:
+            return .dynamic(light: .white, dark: .stepikSecondaryBackground)
+        case .grouped:
+            return .stepikSecondaryGroupedBackground
+        case .dark:
+            let lightUserInterfaceStyleColor = UIColor(hex6: 0x49495C)
+
+            if #available(iOS 13.0, *) {
+                return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                    if traitCollection.userInterfaceStyle == .dark {
+                        return .stepikTertiaryBackground
+                    }
+                    return lightUserInterfaceStyleColor
+                }
+            } else {
+                return lightUserInterfaceStyleColor
             }
         }
     }

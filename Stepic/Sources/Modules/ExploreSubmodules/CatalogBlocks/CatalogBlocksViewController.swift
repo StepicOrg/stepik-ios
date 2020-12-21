@@ -81,7 +81,8 @@ final class CatalogBlocksViewController: UIViewController {
                                 description: block.descriptionString,
                                 isTitleVisible: block.isTitleVisible,
                                 shouldShowAllButton: true
-                            )
+                            ),
+                            contentViewInsets: .zero
                         )
                     containerView.onShowAllButtonClick = { [weak self] in
                         self?.interactor.doFullCourseListPresentation(request: .init(courseListType: type))
@@ -100,6 +101,12 @@ final class CatalogBlocksViewController: UIViewController {
                     let viewController = assembly.makeModule()
                     self.addChild(viewController)
 
+                    var contentViewInsets = CourseListContainerViewFactory.Appearance
+                        .horizontalCatalogBlocksContentInsets
+                    if !block.isTitleVisible {
+                        contentViewInsets.top = 0
+                    }
+
                     let containerView = CourseListContainerViewFactory()
                         .makeHorizontalCatalogBlocksContainerView(
                             for: viewController.view,
@@ -109,7 +116,8 @@ final class CatalogBlocksViewController: UIViewController {
                                 description: block.descriptionString,
                                 isTitleVisible: block.isTitleVisible,
                                 shouldShowAllButton: false
-                            )
+                            ),
+                            contentViewInsets: contentViewInsets
                         )
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .authors:

@@ -4,8 +4,8 @@ import UIKit
 extension AuthorsCourseListView {
     struct Appearance {
         let layoutSectionInset = UIEdgeInsets(top: 16, left: 20, bottom: 0, right: 20)
-        let layoutMinimumInteritemSpacing: CGFloat = 12
-        let layoutMinimumLineSpacing: CGFloat = 12
+        let layoutMinimumInteritemSpacing: CGFloat = 16
+        let layoutMinimumLineSpacing: CGFloat = 16
         let layoutNextPageWidth: CGFloat = 12
         let layoutDefaultItemHeight: CGFloat = 96
         let layoutIncreasedItemHeight: CGFloat = 114
