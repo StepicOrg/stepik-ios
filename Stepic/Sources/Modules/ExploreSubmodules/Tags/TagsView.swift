@@ -7,7 +7,7 @@ protocol TagsViewDelegate: AnyObject {
 
 extension TagsView {
     struct Appearance {
-        let headerTitleColor = UIColor.stepikTertiaryText
+        let headerTitleColor = UIColor.stepikSystemTertiaryText
 
         let tagsHeight: CGFloat = 40
         let tagsSpacing: CGFloat = 15
@@ -15,7 +15,7 @@ extension TagsView {
 
         let tagBackgroundColor = UIColor.stepikLightSecondaryBackground
         let tagFont = UIFont.systemFont(ofSize: 16, weight: .light)
-        let tagTextColor = UIColor.stepikPrimaryText
+        let tagTextColor = UIColor.stepikSystemPrimaryText
         let tagTitleInsets = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 20)
         let tagCornerRadius: CGFloat = 20
     }

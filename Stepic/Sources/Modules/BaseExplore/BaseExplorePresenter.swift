@@ -7,6 +7,7 @@ protocol BaseExplorePresenterProtocol {
     func presentLastStep(response: BaseExplore.LastStepPresentation.Response)
     func presentAuthorization(response: BaseExplore.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: BaseExplore.PaidCourseBuyingPresentation.Response)
+    func presentProfile(response: BaseExplore.ProfilePresentation.Response)
 }
 
 class BaseExplorePresenter: BaseExplorePresenterProtocol {
@@ -57,5 +58,9 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
         if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
             self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
         }
+    }
+
+    func presentProfile(response: BaseExplore.ProfilePresentation.Response) {
+        self.viewController?.displayProfile(viewModel: .init(userID: response.userID))
     }
 }

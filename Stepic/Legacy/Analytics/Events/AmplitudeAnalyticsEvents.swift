@@ -489,6 +489,7 @@ extension AnalyticsEvent {
         case downloads
         case fastContinue
         case search(query: String)
+        case catalogBlock(id: Int)
         case collection(id: Int)
         case query(courseListType: CourseListType)
         case story(id: Int)
@@ -509,6 +510,8 @@ extension AnalyticsEvent {
                 return "fast_continue"
             case .search:
                 return "search"
+            case .catalogBlock:
+                return "catalog_block"
             case .collection:
                 return "collection"
             case .query:
@@ -532,6 +535,8 @@ extension AnalyticsEvent {
                 return nil
             case .search(let query):
                 return ["query": query]
+            case .catalogBlock(let id):
+                return ["id": id]
             case .collection(let id):
                 return ["collection": id]
             case .profile(let id):

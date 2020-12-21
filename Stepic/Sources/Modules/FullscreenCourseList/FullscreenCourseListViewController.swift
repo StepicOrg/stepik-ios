@@ -8,6 +8,10 @@ protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel)
     func displayHidePlaceholder(viewModel: FullscreenCourseList.HidePlaceholder.ViewModel)
     func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel)
+    func displaySimilarAuthors(viewModel: FullscreenCourseList.SimilarAuthorsPresentation.ViewModel)
+    func displaySimilarCourseLists(viewModel: FullscreenCourseList.SimilarCourseListsPresentation.ViewModel)
+    func displayProfile(viewModel: FullscreenCourseList.ProfilePresentation.ViewModel)
+    func displayFullscreenCourseList(viewModel: FullscreenCourseList.FullscreenCourseListModulePresentation.ViewModel)
 }
 
 final class FullscreenCourseListViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -17,9 +21,8 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     lazy var fullscreenCourseListView = self.view as? FullscreenCourseListView
-    private var submoduleViewController: UIViewController?
-    private var submoduleInput: CourseListInputProtocol?
 
+    private var submodules: [Submodule] = []
     private var currentFilters = [CourseListFilter.Filter]()
 
     private lazy var courseListFilterBarButtonItem = CourseListFilterBarButtonItem(
@@ -63,59 +66,37 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
     override func loadView() {
         let view = FullscreenCourseListView(frame: UIScreen.main.bounds)
         self.view = view
-        self.refreshSubmodule()
+    }
 
-        // Register placeholders
-        // Error
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.registerPlaceholders()
+        self.refreshCourseListState()
+    }
+
+    // MARK: - Private API
+
+    private func registerPlaceholders() {
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .noConnection,
                 action: { [weak self] in
-                    self?.refreshSubmodule()
+                    self?.refreshCourseListState()
                 }
             ),
             for: .connectionError
         )
 
-        // Empty
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .emptySearch,
                 action: { [weak self] in
-                    self?.refreshSubmodule()
+                    self?.refreshCourseListState()
                 }
             ),
             for: .empty
         )
-    }
-
-    // MARK: Private API
-
-    private func refreshSubmodule() {
-        self.submoduleViewController?.removeFromParent()
-
-        let courseListAssembly = VerticalCourseListAssembly(
-            type: self.courseListType,
-            colorMode: .light,
-            courseViewSource: self.courseViewSource,
-            presentationDescription: self.presentationDescription,
-            output: self.interactor
-        )
-        let courseListViewController = courseListAssembly.makeModule()
-        self.addChild(courseListViewController)
-
-        self.submoduleViewController = courseListViewController
-
-        self.fullscreenCourseListView?.attachContentView(
-            courseListViewController.view
-        )
-
-        if let moduleInput = courseListAssembly.moduleInput {
-            self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
-        }
-
-        self.submoduleInput = courseListAssembly.moduleInput
-        self.currentFilters = self.presentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
     }
 
     @objc
@@ -136,7 +117,203 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
         self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
     }
+
+    // MARK: CourseList
+
+    private func refreshCourseListState() {
+        if let submodule = self.getSubmodule(type: .courseList) {
+            self.removeSubmodule(submodule)
+        }
+
+        let courseListAssembly = VerticalCourseListAssembly(
+            type: self.courseListType,
+            colorMode: .light,
+            courseViewSource: self.courseViewSource,
+            presentationDescription: self.presentationDescription,
+            output: self.interactor
+        )
+        let courseListViewController = courseListAssembly.makeModule()
+
+        self.registerSubmodule(
+            .init(
+                viewController: courseListViewController,
+                view: courseListViewController.view,
+                type: .courseList,
+                moduleInput: courseListAssembly.moduleInput
+            )
+        )
+
+        if let moduleInput = courseListAssembly.moduleInput {
+            self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
+        }
+
+        self.currentFilters = self.presentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
+    }
+
+    // MARK: SimilarAuthorsCourseList
+
+    private enum SimilarAuthorsCourseListState {
+        case visible(ids: [User.IdType])
+        case hidden
+    }
+
+    private func refreshSimilarAuthorsCourseListState(_ state: SimilarAuthorsCourseListState) {
+        switch state {
+        case .visible(let ids):
+            guard self.getSubmodule(type: .similarAuthors) == nil else {
+                return
+            }
+
+            let authorsCourseListAssembly = AuthorsCourseListAssembly(
+                authors: ids,
+                output: self.interactor as? AuthorsCourseListOutputProtocol
+            )
+            let authorsViewController = authorsCourseListAssembly.makeModule()
+
+            let containerView = CourseListContainerViewFactory()
+                .makeHorizontalCatalogBlocksContainerView(
+                    for: authorsViewController.view,
+                    headerDescription: .init(
+                        title: NSLocalizedString("SimilarCourseListAuthorsHeaderTitle", comment: ""),
+                        subtitle: nil,
+                        description: nil,
+                        isTitleVisible: true,
+                        shouldShowAllButton: false
+                    ),
+                    contentViewInsets: .zero
+                )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: authorsViewController,
+                    view: containerView,
+                    type: .similarAuthors
+                )
+            )
+        case .hidden:
+            if let submodule = self.getSubmodule(type: .similarAuthors) {
+                self.removeSubmodule(submodule)
+            }
+        }
+    }
+
+    // MARK: SimilarCourseLists
+
+    private enum SimilarCourseListsState {
+        case visible(ids: [CourseListModel.IdType])
+        case hidden
+    }
+
+    private func refreshSimilarCourseListsState(_ state: SimilarCourseListsState) {
+        switch state {
+        case .visible(let ids):
+            guard self.getSubmodule(type: .similarCourseLists) == nil else {
+                return
+            }
+
+            let simpleCourseListAssembly = SimpleCourseListAssembly(
+                courseLists: ids,
+                layoutType: .default,
+                output: self.interactor as? SimpleCourseListOutputProtocol
+            )
+            let simpleCourseListViewController = simpleCourseListAssembly.makeModule()
+
+            let containerView = CourseListContainerViewFactory()
+                .makeHorizontalCatalogBlocksContainerView(
+                    for: simpleCourseListViewController.view,
+                    headerDescription: .init(
+                        title: NSLocalizedString("SimilarCourseListHeaderTitle", comment: ""),
+                        subtitle: nil,
+                        description: nil,
+                        isTitleVisible: true,
+                        shouldShowAllButton: false
+                    )
+                )
+
+            self.registerSubmodule(
+                .init(
+                    viewController: simpleCourseListViewController,
+                    view: containerView,
+                    type: .similarCourseLists
+                )
+            )
+        case .hidden:
+            if let submodule = self.getSubmodule(type: .similarCourseLists) {
+                self.removeSubmodule(submodule)
+            }
+        }
+    }
+
+    // MARK: Manage Submodules
+
+    private func registerSubmodule(_ submodule: Submodule) {
+        self.submodules.append(submodule)
+
+        if let viewController = submodule.viewController {
+            self.addChild(viewController)
+        }
+
+        guard let insertingSubmoduleView = submodule.view else {
+            return print("FullscreenCourseListViewController :: failed insert submodule view")
+        }
+
+        // Subviews has same position as in corresponding Submodule object
+        for module in self.submodules where module.type.position >= submodule.type.position {
+            if let nextSubmoduleView = module.view {
+                self.fullscreenCourseListView?.insertBlockView(insertingSubmoduleView, before: nextSubmoduleView)
+            }
+            return
+        }
+    }
+
+    private func removeSubmodule(_ submodule: Submodule) {
+        if let submoduleView = submodule.view {
+            self.fullscreenCourseListView?.removeBlockView(submoduleView)
+        }
+        submodule.viewController?.removeFromParent()
+        self.submodules = self.submodules.filter { submodule.view != $0.view }
+    }
+
+    private func getSubmodule(type: Submodule.SubmoduleType) -> Submodule? {
+        self.submodules.first(where: { $0.type == type })
+    }
+
+    // MARK: - Inner Types
+
+    private final class Submodule {
+        weak var viewController: UIViewController?
+        weak var view: UIView?
+
+        let type: SubmoduleType
+        private let moduleInput: AnyObject?
+
+        var courseListModuleInput: CourseListInputProtocol? {
+            self.moduleInput as? CourseListInputProtocol
+        }
+
+        init(viewController: UIViewController?, view: UIView?, type: SubmoduleType, moduleInput: AnyObject? = nil) {
+            self.viewController = viewController
+            self.view = view
+            self.type = type
+            self.moduleInput = moduleInput
+        }
+
+        enum SubmoduleType: CaseIterable {
+            case courseList
+            case similarAuthors
+            case similarCourseLists
+
+            var position: Int {
+                for (index, type) in Self.allCases.enumerated() where self == type {
+                    return index
+                }
+                fatalError("Invalid type")
+            }
+        }
+    }
 }
+
+// MARK: - FullscreenCourseListViewController: FullscreenCourseListViewControllerProtocol -
 
 extension FullscreenCourseListViewController: FullscreenCourseListViewControllerProtocol {
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel) {
@@ -198,15 +375,75 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             backButtonStyle: .done
         )
     }
+
+    func displayProfile(viewModel: FullscreenCourseList.ProfilePresentation.ViewModel) {
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayFullscreenCourseList(viewModel: FullscreenCourseList.FullscreenCourseListModulePresentation.ViewModel) {
+        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
+        self.push(module: assembly.makeModule())
+    }
+
+    func displaySimilarAuthors(viewModel: FullscreenCourseList.SimilarAuthorsPresentation.ViewModel) {
+        self.prepareCourseListModuleForSimilarCourseListsPresentation()
+        self.refreshSimilarAuthorsCourseListState(.visible(ids: viewModel.ids))
+    }
+
+    func displaySimilarCourseLists(viewModel: FullscreenCourseList.SimilarCourseListsPresentation.ViewModel) {
+        self.prepareCourseListModuleForSimilarCourseListsPresentation()
+        self.refreshSimilarCourseListsState(.visible(ids: viewModel.ids))
+    }
+
+    // MARK: Private Helpers
+
+    private func prepareCourseListModuleForSimilarCourseListsPresentation() {
+        self.disableScrollForCourseListModule()
+        self.loadAllCoursesInCourseListModule()
+    }
+
+    private func disableScrollForCourseListModule() {
+        guard let submodule = self.getSubmodule(type: .courseList),
+              let courseListView = submodule.view else {
+            return
+        }
+
+        for subview in courseListView.subviews {
+            guard let collectionView = subview as? UICollectionView else {
+                continue
+            }
+
+            collectionView.isScrollEnabled = false
+            self.fullscreenCourseListView?.observeCourseListCollectionViewContentSize(
+                courseListView: courseListView,
+                collectionView: collectionView
+            )
+
+            return
+        }
+    }
+
+    private func loadAllCoursesInCourseListModule() {
+        if let courseListSubmodule = self.getSubmodule(type: .courseList) {
+            courseListSubmodule.courseListModuleInput?.loadAllCourses()
+        }
+    }
 }
+
+// MARK: - FullscreenCourseListViewController: CourseListFilterOutputProtocol -
 
 extension FullscreenCourseListViewController: CourseListFilterOutputProtocol {
     func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
+        guard let courseListSubmodule = self.getSubmodule(type: .courseList) else {
+            return
+        }
+
         self.currentFilters = filters
 
         let hasChanges = filters != self.presentationDescription?.courseListFilterDescription?.prefilledFilters
 
         self.courseListFilterBarButtonItem.setActive(hasChanges)
-        self.submoduleInput?.applyFilters(hasChanges ? filters : [])
+        courseListSubmodule.courseListModuleInput?.applyFilters(hasChanges ? filters : [])
     }
 }

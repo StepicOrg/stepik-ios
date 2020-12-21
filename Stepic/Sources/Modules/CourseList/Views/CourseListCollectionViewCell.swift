@@ -6,8 +6,12 @@ protocol CourseListCollectionViewCellDelegate: AnyObject {
 
 extension CourseListCollectionViewCell {
     enum Appearance {
-        static let borderWidth: CGFloat = 1.0
         static let cornerRadius: CGFloat = 13.0
+
+        static let shadowColor = UIColor.black
+        static let shadowOffset = CGSize(width: 0, height: 1)
+        static let shadowRadius: CGFloat = 4.0
+        static let shadowOpacity: Float = 0.1
     }
 }
 
@@ -60,10 +64,18 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.layer.cornerRadius = Appearance.cornerRadius
-        self.layer.borderWidth = Appearance.borderWidth
-        self.layer.borderColor = self.colorMode.courseWidgetBorderColor.cgColor
-        self.layer.masksToBounds = true
+        self.widgetView.layer.cornerRadius = Appearance.cornerRadius
+        self.widgetView.layer.masksToBounds = true
+
+        self.layer.shadowColor = Appearance.shadowColor.cgColor
+        self.layer.shadowOffset = Appearance.shadowOffset
+        self.layer.shadowRadius = Appearance.shadowRadius
+        self.layer.shadowOpacity = Appearance.shadowOpacity
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(
+            roundedRect: self.bounds,
+            cornerRadius: self.contentView.layer.cornerRadius
+        ).cgPath
     }
 
     func configure(viewModel: CourseWidgetViewModel) {

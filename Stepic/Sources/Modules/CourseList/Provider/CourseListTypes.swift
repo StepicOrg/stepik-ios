@@ -62,6 +62,13 @@ struct DeepLinkCourseListType: CourseListType {
     var analyticName: String { "deep_link_course_list" }
 }
 
+struct CatalogBlockCourseListType: CourseListType {
+    let courseListID: CourseListModel.IdType
+    let coursesIDs: [Course.IdType]
+
+    var analyticName: String { "catalog_block_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -70,19 +77,22 @@ final class CourseListServicesFactory {
     private let userCoursesAPI: UserCoursesAPI
     private let searchResultsAPI: SearchResultsAPI
     private let visitedCoursesAPI: VisitedCoursesAPI
+    private let courseListsAPI: CourseListsAPI
 
     init(
         type: CourseListType,
         coursesAPI: CoursesAPI = CoursesAPI(),
         userCoursesAPI: UserCoursesAPI = UserCoursesAPI(),
         searchResultsAPI: SearchResultsAPI = SearchResultsAPI(),
-        visitedCoursesAPI: VisitedCoursesAPI = VisitedCoursesAPI()
+        visitedCoursesAPI: VisitedCoursesAPI = VisitedCoursesAPI(),
+        courseListsAPI: CourseListsAPI = CourseListsAPI()
     ) {
         self.type = type
         self.coursesAPI = coursesAPI
         self.userCoursesAPI = userCoursesAPI
         self.searchResultsAPI = searchResultsAPI
         self.visitedCoursesAPI = visitedCoursesAPI
+        self.courseListsAPI = courseListsAPI
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
@@ -134,6 +144,12 @@ final class CourseListServicesFactory {
                     cachedList: type.ids
                 )
             )
+        } else if let type = self.type as? CatalogBlockCourseListType {
+            return CourseListPersistenceService(
+                storage: PassiveCourseListPersistenceStorage(
+                    cachedList: type.coursesIDs
+                )
+            )
         } else {
             fatalError("Unsupported course list type")
         }
@@ -170,6 +186,12 @@ final class CourseListServicesFactory {
             )
         } else if let type = self.type as? DeepLinkCourseListType {
             return DeepLinkCourseListNetworkService(type: type, coursesAPI: self.coursesAPI)
+        } else if let type = self.type as? CatalogBlockCourseListType {
+            return CatalogBlockCourseListNetworkService(
+                type: type,
+                coursesAPI: self.coursesAPI,
+                courseListsAPI: self.courseListsAPI
+            )
         } else {
             fatalError("Unsupported course list type")
         }

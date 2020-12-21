@@ -9,6 +9,11 @@ class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var maxY: CGFloat = -1.0
 
         attributes?.forEach { layoutAttribute in
+            if layoutAttribute.representedElementKind == UICollectionView.elementKindSectionHeader {
+                leftMargin = self.sectionInset.left
+                layoutAttribute.frame.size.width -= self.sectionInset.left + self.sectionInset.right
+            }
+
             // Detect a new line
             if layoutAttribute.frame.origin.y >= maxY {
                 leftMargin = self.sectionInset.left

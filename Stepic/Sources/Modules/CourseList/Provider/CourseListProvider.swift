@@ -5,6 +5,7 @@ protocol CourseListProviderProtocol: AnyObject {
     func fetchCached() -> Promise<([Course], Meta)>
     func fetchRemote(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)>
     func cache(courses: [Course])
+    func fetchCachedCourseList() -> Guarantee<CourseListModel?>
 }
 
 extension CourseListProviderProtocol {
@@ -20,19 +21,22 @@ final class CourseListProvider: CourseListProviderProtocol {
     private let networkService: CourseListNetworkServiceProtocol
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
     private let reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
+    private let courseListsPersistenceService: CourseListsPersistenceServiceProtocol
 
     init(
         type: CourseListType,
         networkService: CourseListNetworkServiceProtocol,
         persistenceService: CourseListPersistenceServiceProtocol? = nil,
         progressesNetworkService: ProgressesNetworkServiceProtocol,
-        reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
+        reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
+        courseListsPersistenceService: CourseListsPersistenceServiceProtocol
     ) {
         self.type = type
         self.persistenceService = persistenceService
         self.networkService = networkService
         self.progressesNetworkService = progressesNetworkService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
+        self.courseListsPersistenceService = courseListsPersistenceService
     }
 
     // MARK: - CourseListProviderProtocol
@@ -80,6 +84,14 @@ final class CourseListProvider: CourseListProviderProtocol {
 
     func cache(courses: [Course]) {
         self.persistenceService?.update(newCachedList: courses)
+    }
+
+    func fetchCachedCourseList() -> Guarantee<CourseListModel?> {
+        guard let catalogBlockCourseList = self.type as? CatalogBlockCourseListType else {
+            return .value(nil)
+        }
+
+        return self.courseListsPersistenceService.fetch(id: catalogBlockCourseList.courseListID)
     }
 
     // MARK: - Private API

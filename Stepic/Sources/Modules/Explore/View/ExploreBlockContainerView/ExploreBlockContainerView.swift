@@ -6,8 +6,8 @@ extension ExploreBlockContainerView {
         let separatorColor = UIColor.stepikSeparator
         var backgroundColor = UIColor.stepikBackground
 
-        let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        var headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+        var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let separatorViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
 }

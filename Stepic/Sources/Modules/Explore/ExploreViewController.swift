@@ -21,10 +21,8 @@ final class ExploreViewController: BaseExploreViewController {
     static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
-        .tags,
-        .collection,
-        .visitedCourses,
-        .popularCourses
+        .catalogBlocks,
+        .visitedCourses
     ]
 
     private var state: Explore.ViewControllerState
@@ -145,79 +143,20 @@ final class ExploreViewController: BaseExploreViewController {
             )
         }
 
-        // Tags
-        let tagsAssembly = TagsAssembly(
+        // Catalog blocks
+        let catalogBlocksAssembly = CatalogBlocksAssembly(
             contentLanguage: contentLanguage,
-            output: self.interactor as? TagsOutputProtocol
+            output: self.interactor as? CatalogBlocksOutputProtocol
         )
-        let tagsViewController = tagsAssembly.makeModule()
+        let catalogBlocksViewController = catalogBlocksAssembly.makeModule()
         self.registerSubmodule(
             .init(
-                viewController: tagsViewController,
-                view: tagsViewController.view,
+                viewController: catalogBlocksViewController,
+                view: catalogBlocksViewController.view,
                 isLanguageDependent: true,
-                type: Explore.Submodule.tags
+                type: Explore.Submodule.catalogBlocks
             )
         )
-
-        // Collection
-        let collectionAssembly = CourseListsCollectionAssembly(
-            contentLanguage: contentLanguage,
-            output: self.interactor as? (CourseListCollectionOutputProtocol & CourseListOutputProtocol)
-        )
-        let collectionViewController = collectionAssembly.makeModule()
-        self.registerSubmodule(
-            .init(
-                viewController: collectionViewController,
-                view: collectionViewController.view,
-                isLanguageDependent: true,
-                type: Explore.Submodule.collection
-            )
-        )
-
-        // Popular courses
-        let courseListType = PopularCourseListType(language: contentLanguage)
-        let popularAssembly = HorizontalCourseListAssembly(
-            type: courseListType,
-            colorMode: .dark,
-            courseViewSource: .query(courseListType: courseListType),
-            output: self.interactor as? CourseListOutputProtocol
-        )
-        let popularViewController = popularAssembly.makeModule()
-        let containerView = CourseListContainerViewFactory(colorMode: .dark)
-            .makeHorizontalContainerView(
-                for: popularViewController.view,
-                headerDescription: .init(
-                    title: NSLocalizedString("Popular", comment: ""),
-                    summary: nil
-                )
-            )
-        containerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.doFullscreenCourseListPresentation(
-                request: .init(
-                    presentationDescription: .init(
-                        courseListFilterDescription: .init(
-                            availableFilters: .all,
-                            prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
-                            defaultCourseLanguage: .init(contentLanguage: contentLanguage)
-                        )
-                    ),
-                    courseListType: courseListType
-                )
-            )
-        }
-        self.registerSubmodule(
-            .init(
-                viewController: popularViewController,
-                view: containerView,
-                isLanguageDependent: true,
-                type: Explore.Submodule.popularCourses
-            )
-        )
-
-        if let moduleInput = popularAssembly.moduleInput {
-            self.tryToSetOnlineState(moduleInput: moduleInput)
-        }
     }
 
     // MARK: - Visited courses submodule
@@ -377,6 +316,10 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         switch viewModel.module {
         case .visitedCourses:
             self.refreshStateForVisitedCourses(state: .hidden)
+        case .catalogBlocks:
+            if let module = self.getSubmodule(type: Explore.Submodule.catalogBlocks) {
+                self.removeSubmodule(module)
+            }
         default:
             break
         }

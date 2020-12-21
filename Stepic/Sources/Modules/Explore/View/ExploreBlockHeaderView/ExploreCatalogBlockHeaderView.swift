@@ -1,28 +1,30 @@
 import SnapKit
 import UIKit
 
-protocol ExploreBlockHeaderViewProtocol: AnyObject {
-    var onShowAllButtonClick: (() -> Void)? { get set }
-    var titleText: String? { get set }
-    var summaryText: String? { get set }
+protocol ExploreCatalogBlockHeaderViewProtocol: ExploreBlockHeaderViewProtocol {
+    var descriptionText: String? { get set }
 }
 
-extension ExploreBlockHeaderView {
+extension ExploreCatalogBlockHeaderView {
     struct Appearance {
-        var titleLabelColor = UIColor.stepikPrimaryText
-        let titleLabelFont = UIFont.systemFont(ofSize: 20)
-        let titleLabelInsets = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+        var titleLabelColor = UIColor.stepikSystemPrimaryText
+        let titleLabelFont = Typography.title3Font
 
-        let descriptionLabelFont = UIFont.systemFont(ofSize: 16)
-        let descriptionLabelColor = UIColor.stepikTertiaryText
+        let subtitleLabelFont = Typography.calloutFont
+        let subtitleLabelColor = UIColor.stepikSystemSecondaryText
 
-        var showAllButtonColor = UIColor.stepikTertiaryText
-        let showAllButtonFont = UIFont.systemFont(ofSize: 20)
-        let showAllButtonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        let descriptionLabelFont = Typography.calloutFont
+        let descriptionLabelColor = UIColor.stepikSystemSecondaryText
+
+        let labelsSpacing: CGFloat = 8
+
+        var showAllButtonColor = UIColor.stepikSystemSecondaryText
+        let showAllButtonFont = Typography.title3Font
+        let showAllButtonInsets = LayoutInsets(left: 16)
     }
 }
 
-final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
+final class ExploreCatalogBlockHeaderView: UIView, ExploreCatalogBlockHeaderViewProtocol {
     let appearance: Appearance
 
     private let analytics: Analytics
@@ -31,6 +33,14 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
         let label = UILabel()
         label.font = self.appearance.titleLabelFont
         label.textColor = self.appearance.titleLabelColor
+        label.numberOfLines = 1
+        return label
+    }()
+
+    private lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.subtitleLabelFont
+        label.textColor = self.appearance.subtitleLabelColor
         label.numberOfLines = 1
         return label
     }()
@@ -55,23 +65,30 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     private lazy var labelsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = self.appearance.titleLabelInsets.bottom
+        stackView.spacing = self.appearance.labelsSpacing
         return stackView
     }()
 
     var titleText: String? {
         didSet {
-            self.titleLabel.isHidden = self.titleText == nil
             self.titleLabel.text = self.titleText
+            self.titleLabel.isHidden = self.titleText?.isEmpty ?? true
         }
     }
 
+    // TODO: Refactor rename to subtitleText
     var summaryText: String? {
         didSet {
-            self.descriptionLabel.isHidden = self.summaryText == nil
-            self.descriptionLabel.text = self.summaryText
+            self.subtitleLabel.text = self.summaryText
+            self.subtitleLabel.isHidden = self.summaryText?.isEmpty ?? true
+        }
+    }
+
+    var descriptionText: String? {
+        didSet {
+            self.descriptionLabel.text = self.descriptionText
+            self.descriptionLabel.isHidden = self.descriptionText?.isEmpty ?? true
         }
     }
 
@@ -118,8 +135,6 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: Button selector
-
     @objc
     private func showAllButtonClicked() {
         self.analytics.send(.courseListShowAllTapped)
@@ -127,10 +142,11 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     }
 }
 
-extension ExploreBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
+extension ExploreCatalogBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.labelsStackView)
         self.labelsStackView.addArrangedSubview(self.titleLabel)
+        self.labelsStackView.addArrangedSubview(self.subtitleLabel)
         self.labelsStackView.addArrangedSubview(self.descriptionLabel)
 
         self.addSubview(self.showAllButton)
@@ -139,15 +155,15 @@ extension ExploreBlockHeaderView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.labelsStackView.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
+            make.top.left.bottom.equalToSuperview()
         }
 
         self.showAllButton.translatesAutoresizingMaskIntoConstraints = false
         self.showAllButton.snp.makeConstraints { make in
-            make.right.equalToSuperview()
             make.leading
                 .equalTo(self.labelsStackView.snp.trailing)
                 .offset(self.appearance.showAllButtonInsets.left)
+            make.right.equalToSuperview()
             make.centerY.equalTo(self.titleLabel.snp.centerY)
         }
     }

@@ -45,6 +45,12 @@ extension StepikPlaceholder.Style {
         text: "",
         buttonTitle: NSLocalizedString("LoadStories", comment: "")
     )
+    static let refreshCatalogBlocks = StepikPlaceholderStyle(
+        id: "refreshCatalogBlocks",
+        image: nil,
+        text: "",
+        buttonTitle: NSLocalizedString("LoadCatalogBlocks", comment: "")
+    )
     static let tryAgain = StepikPlaceholderStyle(
         id: "tryAgain",
         image: nil,
