@@ -13,12 +13,12 @@ extension CourseListColorMode {
         switch self {
         case .light, .grouped:
             return .init(
-                titleLabelColor: .stepikPrimaryText,
-                showAllButtonColor: .stepikTertiaryText
+                titleLabelColor: .stepikSystemPrimaryText,
+                showAllButtonColor: .stepikSystemSecondaryText
             )
         case .dark:
             return .init(
-                titleLabelColor: UIColor.white,
+                titleLabelColor: .white,
                 showAllButtonColor: UIColor.white.withAlphaComponent(0.3)
             )
         }
@@ -67,10 +67,10 @@ extension CourseListColorMode {
         switch self {
         case .light, .grouped:
             return .init(
-                imagesRenderingBackgroundColor: .stepikAccent,
+                imagesRenderingBackgroundColor: .stepikSystemSecondaryText,
                 imagesRenderingTintColor: .stepikGreenFixed,
-                itemTextColor: .stepikPrimaryText,
-                itemImageTintColor: .stepikAccent
+                itemTextColor: .stepikSystemSecondaryText,
+                itemImageTintColor: .stepikSystemSecondaryText
             )
         case .dark:
             return .init(
@@ -90,7 +90,7 @@ extension CourseListColorMode {
 
         switch self {
         case .light, .grouped:
-            appearance.textColor = .stepikPrimaryText
+            appearance.textColor = .stepikSystemPrimaryText
         case .dark:
             appearance.textColor = .white
         }
@@ -106,11 +106,11 @@ extension CourseListColorMode {
 
         switch self {
         case .light, .grouped:
-            appearance.textColor = .stepikSecondaryText
+            appearance.textColor = .stepikSystemSecondaryText
         case .dark:
             appearance.textColor = UIColor.dynamic(
                 light: UIColor.white.withAlphaComponent(0.6),
-                dark: .stepikSecondaryText
+                dark: .stepikSystemSecondaryText
             )
         }
 

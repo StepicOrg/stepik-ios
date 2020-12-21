@@ -7,7 +7,7 @@ final class ContentLanguageSwitchButton: BounceButton {
         static let unselectedBackgroundColor = UIColor.stepikLightSecondaryBackground
 
         static let selectedTextColor = UIColor.white
-        static let unselectedTextColor = UIColor.stepikSecondaryText
+        static let unselectedTextColor = UIColor.stepikSystemSecondaryText
 
         static let font = UIFont.systemFont(ofSize: 16, weight: .light)
     }
