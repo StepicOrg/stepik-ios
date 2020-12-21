@@ -316,6 +316,10 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         switch viewModel.module {
         case .visitedCourses:
             self.refreshStateForVisitedCourses(state: .hidden)
+        case .catalogBlocks:
+            if let module = self.getSubmodule(type: Explore.Submodule.catalogBlocks) {
+                self.removeSubmodule(module)
+            }
         default:
             break
         }

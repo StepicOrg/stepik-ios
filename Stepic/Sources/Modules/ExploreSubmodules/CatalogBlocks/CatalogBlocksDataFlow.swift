@@ -27,6 +27,7 @@ enum CatalogBlocks {
 
     enum ViewControllerState {
         case loading
+        case error
         case result(data: [CatalogBlock])
     }
 }

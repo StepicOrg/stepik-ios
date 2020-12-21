@@ -576,6 +576,7 @@ PlaceholderEmptyNotificationsButton = "Перейти в каталог";
 PlaceholderEmptySearchText = "Ничего не найдено";
 PlaceholderEmptySearchButton = "Перейти в каталог";
 LoadStories = "Загрузить истории";
+LoadCatalogBlocks = "Загрузить каталог";
 
 /* Settings */
 SettingsTitle = "Настройки";

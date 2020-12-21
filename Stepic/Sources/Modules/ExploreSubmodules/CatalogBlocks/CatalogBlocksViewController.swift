@@ -4,7 +4,9 @@ protocol CatalogBlocksViewControllerProtocol: AnyObject {
     func displayCatalogBlocks(viewModel: CatalogBlocks.CatalogBlocksLoad.ViewModel)
 }
 
-final class CatalogBlocksViewController: UIViewController {
+final class CatalogBlocksViewController: UIViewController, ControllerWithStepikPlaceholder {
+    var placeholderContainer = StepikPlaceholderControllerContainer()
+
     private let interactor: CatalogBlocksInteractorProtocol
     private var state: CatalogBlocks.ViewControllerState
 
@@ -33,7 +35,9 @@ final class CatalogBlocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.registerPlaceholders()
         self.updateState(newState: self.state)
+
         self.interactor.doCatalogBlocksLoad(request: .init())
     }
 
@@ -43,8 +47,13 @@ final class CatalogBlocksViewController: UIViewController {
         switch self.state {
         case .loading:
             self.catalogBlocksView?.showLoading()
+            self.isPlaceholderShown = false
+        case .error:
+            self.catalogBlocksView?.hideLoading()
+            self.showPlaceholder(for: .connectionError)
         case .result(let data):
             self.catalogBlocksView?.hideLoading()
+            self.isPlaceholderShown = false
 
             for block in data {
                 guard let kind = block.kind else {
@@ -144,6 +153,23 @@ final class CatalogBlocksViewController: UIViewController {
                 }
             }
         }
+    }
+
+    private func registerPlaceholders() {
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .refreshCatalogBlocks,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.updateState(newState: .loading)
+                    strongSelf.interactor.doCatalogBlocksLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
     }
 }
 

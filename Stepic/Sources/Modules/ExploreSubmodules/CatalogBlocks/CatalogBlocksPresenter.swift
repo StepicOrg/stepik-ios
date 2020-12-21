@@ -12,7 +12,7 @@ final class CatalogBlocksPresenter: CatalogBlocksPresenterProtocol {
         case .success(let result):
             self.viewController?.displayCatalogBlocks(viewModel: .init(state: .result(data: result)))
         case .failure:
-            break
+            self.viewController?.displayCatalogBlocks(viewModel: .init(state: .error))
         }
     }
 }

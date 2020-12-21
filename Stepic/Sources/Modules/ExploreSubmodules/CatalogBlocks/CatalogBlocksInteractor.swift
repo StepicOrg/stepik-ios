@@ -14,6 +14,8 @@ final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
     private let presenter: CatalogBlocksPresenterProtocol
     private let provider: CatalogBlocksProviderProtocol
 
+    private var didPresentCatalogBlocks = false
+
     init(
         presenter: CatalogBlocksPresenterProtocol,
         provider: CatalogBlocksProviderProtocol
@@ -24,11 +26,25 @@ final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
 
     func doCatalogBlocksLoad(request: CatalogBlocks.CatalogBlocksLoad.Request) {
         self.provider.fetchCachedCatalogBlocks().then { cachedCatalogBlocks -> Promise<[CatalogBlock]> in
-            self.presenter.presentCatalogBlocks(response: .init(result: .success(cachedCatalogBlocks)))
+            if !cachedCatalogBlocks.isEmpty {
+                self.didPresentCatalogBlocks = true
+                self.presenter.presentCatalogBlocks(response: .init(result: .success(cachedCatalogBlocks)))
+            }
+
             return self.provider.fetchRemoteCatalogBlocks()
         }.done { remoteCatalogBlocks in
-            self.presenter.presentCatalogBlocks(response: .init(result: .success(remoteCatalogBlocks)))
-        }.catch { _ in }
+            if remoteCatalogBlocks.isEmpty {
+                self.moduleOutput?.hideCatalogBlocks()
+            } else {
+                self.didPresentCatalogBlocks = true
+                self.presenter.presentCatalogBlocks(response: .init(result: .success(remoteCatalogBlocks)))
+            }
+        }.catch { error in
+            if case CatalogBlocksProvider.Error.networkFetchFailed = error,
+               !self.didPresentCatalogBlocks {
+                self.presenter.presentCatalogBlocks(response: .init(result: .failure(error)))
+            }
+        }
     }
 
     func doFullCourseListPresentation(request: CatalogBlocks.FullCourseListModulePresentation.Request) {

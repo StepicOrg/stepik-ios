@@ -132,4 +132,13 @@ extension ExploreInteractor: CatalogBlocksOutputProtocol {
     func presentProfile(id: User.IdType) {
         self.explorePresenter?.presentProfile(response: .init(userID: id))
     }
+
+    func hideCatalogBlocks() {
+        self.explorePresenter?.presentCourseListState(
+            response: .init(
+                module: Explore.Submodule.catalogBlocks,
+                result: .empty
+            )
+        )
+    }
 }
