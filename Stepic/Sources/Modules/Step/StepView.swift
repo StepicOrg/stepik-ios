@@ -103,6 +103,8 @@ final class StepView: UIView {
 
     private lazy var quizContainerView = UIView()
 
+    private lazy var stepDisabledView = StepDisabledView()
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -208,6 +210,22 @@ final class StepView: UIView {
         self.stepControlsView.isSolutionsButtonEnabled = isEnabled
     }
 
+    func showDisabledView() {
+        if self.stepDisabledView.superview == nil {
+            self.insertSubview(self.stepDisabledView, at: Int.max)
+            self.stepDisabledView.translatesAutoresizingMaskIntoConstraints = false
+            self.stepDisabledView.snp.makeConstraints { make in
+                make.edges.equalTo(self.safeAreaLayoutGuide)
+            }
+        }
+
+        self.setStepDisabledViewVisible(true)
+    }
+
+    func hideDisabledView() {
+        self.setStepDisabledViewVisible(false)
+    }
+
     // MARK: Private API
 
     private func positionVideoPreview() {
@@ -229,6 +247,11 @@ final class StepView: UIView {
             make.top.equalToSuperview().offset(previewContainerHeight * 0.5)
             make.bottom.equalToSuperview().offset(-previewContainerHeight * 0.5 - controlsDiffHeight)
         }
+    }
+
+    private func setStepDisabledViewVisible(_ isVisible: Bool) {
+        self.stepDisabledView.isHidden = !isVisible
+        self.stepDisabledView.alpha = isVisible ? 1 : 0
     }
 }
 

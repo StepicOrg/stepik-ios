@@ -22,6 +22,8 @@ final class StepInteractor: StepInteractorProtocol {
     private let provider: StepProviderProtocol
     private let analytics: Analytics
 
+    private let remoteConfig: RemoteConfig
+
     private let stepID: Step.IdType
     private var currentStepPlainObject: StepPlainObject?
 
@@ -35,11 +37,13 @@ final class StepInteractor: StepInteractorProtocol {
         stepID: Step.IdType,
         presenter: StepPresenterProtocol,
         provider: StepProviderProtocol,
-        analytics: Analytics
+        analytics: Analytics,
+        remoteConfig: RemoteConfig
     ) {
         self.presenter = presenter
         self.provider = provider
         self.analytics = analytics
+        self.remoteConfig = remoteConfig
 
         self.stepID = stepID
     }
@@ -273,7 +277,8 @@ final class StepInteractor: StepInteractorProtocol {
                 let data = StepDataFlow.StepLoad.Data(
                     step: step,
                     stepFontSize: stepFontSize,
-                    storedImages: storedImages
+                    storedImages: storedImages,
+                    isDisabledStepsSupported: self.remoteConfig.isDisabledStepsSupported
                 )
 
                 return .value(data)

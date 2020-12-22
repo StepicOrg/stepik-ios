@@ -28,7 +28,8 @@ final class StepAssembly: Assembly {
             stepID: self.stepID,
             presenter: presenter,
             provider: provider,
-            analytics: StepikAnalytics.shared
+            analytics: StepikAnalytics.shared,
+            remoteConfig: RemoteConfig.shared
         )
         let viewController = StepViewController(interactor: interactor)
 

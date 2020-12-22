@@ -25,24 +25,21 @@ final class StepPresenter: StepPresenterProtocol {
     }
 
     func presentStep(response: StepDataFlow.StepLoad.Response) {
-        if case .success(let data) = response.result {
-            self.makeViewModel(
-                step: data.step,
-                stepFontSize: data.stepFontSize,
-                storedImages: data.storedImages
-            ).done(on: .global(qos: .userInitiated)) { viewModel in
-                DispatchQueue.main.async { [weak self] in
-                    self?.viewController?.displayStep(
-                        viewModel: StepDataFlow.StepLoad.ViewModel(state: .result(data: viewModel))
-                    )
-                }
+        switch response.result {
+        case .success(let data):
+            if !data.step.isEnabled && data.isDisabledStepsSupported {
+                self.viewController?.displayStep(viewModel: .init(state: .disabled))
+            } else {
+                let viewModel = self.makeViewModel(
+                    step: data.step,
+                    stepFontSize: data.stepFontSize,
+                    storedImages: data.storedImages
+                )
+
+                self.viewController?.displayStep(viewModel: .init(state: .result(data: viewModel)))
             }
-
-            return
-        }
-
-        if case .failure = response.result {
-            self.viewController?.displayStep(viewModel: StepDataFlow.StepLoad.ViewModel(state: .error))
+        case .failure:
+            self.viewController?.displayStep(viewModel: .init(state: .error))
         }
     }
 
@@ -169,69 +166,67 @@ final class StepPresenter: StepPresenterProtocol {
         step: Step,
         stepFontSize: StepFontSize,
         storedImages: [StepDataFlow.StoredImage]
-    ) -> Guarantee<StepViewModel> {
-        Guarantee { seal in
-            let contentType: StepViewModel.ContentType = {
-                switch step.block.type {
-                case .video:
-                    if let video = step.block.video {
-                        let viewModel = StepVideoViewModel(
-                            video: video,
-                            videoThumbnailImageURL: URL(string: video.thumbnailURL)
-                        )
-                        return .video(viewModel: viewModel)
-                    }
-                    return .video(viewModel: nil)
-                default:
-                    let processedContent = self.makeProcessedContent(
-                        step.block.text ?? "",
-                        stepFontSize: stepFontSize,
-                        storedImages: storedImages
-                    )
-                    return .text(processedContent: processedContent)
-                }
-            }()
-
-            let quizType: StepDataFlow.QuizType?
+    ) -> StepViewModel {
+        let contentType: StepViewModel.ContentType = {
             switch step.block.type {
-            case .text, .video:
-                quizType = nil
+            case .video:
+                if let video = step.block.video {
+                    let viewModel = StepVideoViewModel(
+                        video: video,
+                        videoThumbnailImageURL: URL(string: video.thumbnailURL)
+                    )
+                    return .video(viewModel: viewModel)
+                }
+                return .video(viewModel: nil)
             default:
-                quizType = StepDataFlow.QuizType(blockName: step.block.name)
+                let processedContent = self.makeProcessedContent(
+                    step.block.text ?? "",
+                    stepFontSize: stepFontSize,
+                    storedImages: storedImages
+                )
+                return .text(processedContent: processedContent)
             }
+        }()
 
-            let shouldShowStepStatistics: Bool = {
-                if quizType == nil {
-                    return false
-                }
-                if case .unknown = quizType {
-                    return false
-                }
-                return true
-            }()
-
-            let discussionsLabelTitle = self.makeDiscussionsButtonTitle(step: step)
-            let stepURLPath = self.urlFactory.makeStep(
-                lessonID: step.lessonID,
-                stepPosition: step.position,
-                fromMobile: true
-            )?.absoluteString ?? ""
-
-            let viewModel = StepViewModel(
-                content: contentType,
-                quizType: quizType,
-                discussionsLabelTitle: discussionsLabelTitle,
-                isDiscussionsEnabled: step.discussionProxyID != nil,
-                discussionProxyID: step.discussionProxyID,
-                stepURLPath: stepURLPath,
-                lessonID: step.lessonID,
-                passedByCount: shouldShowStepStatistics ? step.passedByCount : nil,
-                correctRatio: shouldShowStepStatistics ? step.correctRatio : nil,
-                step: step
-            )
-
-            seal(viewModel)
+        let quizType: StepDataFlow.QuizType?
+        switch step.block.type {
+        case .text, .video:
+            quizType = nil
+        default:
+            quizType = StepDataFlow.QuizType(blockName: step.block.name)
         }
+
+        let shouldShowStepStatistics: Bool = {
+            if quizType == nil {
+                return false
+            }
+            if case .unknown = quizType {
+                return false
+            }
+            return true
+        }()
+
+        let discussionsLabelTitle = self.makeDiscussionsButtonTitle(step: step)
+        let stepURLPath = self.urlFactory.makeStep(
+            lessonID: step.lessonID,
+            stepPosition: step.position,
+            fromMobile: true
+        )?.absoluteString ?? ""
+
+        let viewModel = StepViewModel(
+            content: contentType,
+            quizType: quizType,
+            discussionsLabelTitle: discussionsLabelTitle,
+            isDiscussionsEnabled: step.discussionProxyID != nil,
+            discussionProxyID: step.discussionProxyID,
+            stepURLPath: stepURLPath,
+            lessonID: step.lessonID,
+            passedByCount: shouldShowStepStatistics ? step.passedByCount : nil,
+            correctRatio: shouldShowStepStatistics ? step.correctRatio : nil,
+            step: step
+        )
+
+        return viewModel
     }
 
     private func makeDiscussionsButtonTitle(step: Step) -> String {
