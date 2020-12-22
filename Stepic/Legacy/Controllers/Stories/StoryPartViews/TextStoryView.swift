@@ -20,7 +20,10 @@ extension TextStoryView {
         let buttonFont = Typography.bodyFont
         let buttonHeight: CGFloat = 44
 
-        let elementsStackViewInsets = LayoutInsets(top: 68, left: 16, bottom: 60, right: 16)
+        let reactionsViewHeight: CGFloat = 48
+        let reactionsViewInsets = LayoutInsets(bottom: 24)
+
+        let elementsStackViewInsets = LayoutInsets(top: 68, left: 16, bottom: 24, right: 16)
         let elementsStackViewSpacing: CGFloat = 16
 
         let contentStackViewSpacing: CGFloat = 36
@@ -68,6 +71,17 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         return stackView
     }()
 
+    private lazy var reactionsView: StoryReactionsView = {
+        let view = StoryReactionsView()
+        view.onLikeClick = { [weak self] in
+            self?.reportStoryReaction(.like)
+        }
+        view.onDislikeClick = { [weak self] in
+            self?.reportStoryReaction(.dislike)
+        }
+        return view
+    }()
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -99,6 +113,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         self.imagePath = storyPart.imagePath
         self.urlNavigationDelegate = urlNavigationDelegate
 
+        self.setupReactionsView()
         self.setupElementsStackView()
 
         let topStackView = self.makeContentStackView()
@@ -117,7 +132,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         }
 
         if let button = storyPart.button {
-            let storyButtonView = self.makeButtonView(button: button)
+            let storyButtonView = self.makeActionButtonView(button: button)
             bottomStackView.addArrangedSubview(storyButtonView)
         }
 
@@ -128,13 +143,23 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         self.storyPart = storyPart
     }
 
+    private func setupReactionsView() {
+        self.addSubview(self.reactionsView)
+        self.reactionsView.translatesAutoresizingMaskIntoConstraints = false
+        self.reactionsView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-self.appearance.reactionsViewInsets.bottom)
+            make.height.equalTo(self.appearance.reactionsViewHeight)
+        }
+    }
+
     private func setupElementsStackView() {
         self.addSubview(self.elementsStackView)
         self.elementsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.elementsStackView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(self.appearance.elementsStackViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.elementsStackViewInsets.left)
-            make.bottom.equalToSuperview().offset(-self.appearance.elementsStackViewInsets.bottom)
+            make.bottom.equalTo(self.reactionsView.snp.top).offset(-self.appearance.elementsStackViewInsets.bottom)
             make.trailing.equalToSuperview().offset(-self.appearance.elementsStackViewInsets.right)
         }
     }
@@ -168,7 +193,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         return label
     }
 
-    private func makeButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
+    private func makeActionButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
         let containerView = UIView()
         containerView.backgroundColor = .clear
 
@@ -189,7 +214,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             make.height.equalTo(self.appearance.buttonHeight)
         }
 
-        storyButton.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        storyButton.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
 
         return containerView
     }
@@ -217,8 +242,16 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         })
     }
 
+    private func reportStoryReaction(_ reaction: AnalyticsEvent.StoryReaction) {
+        guard let part = self.storyPart else {
+            return
+        }
+
+        self.analytics.send(.storyReactionPressed(id: part.storyID, position: part.position, reaction: reaction))
+    }
+
     @objc
-    func buttonClicked() {
+    func actionButtonClicked() {
         guard let part = self.storyPart,
               let path = part.button?.urlPath,
               let url = URL(string: path) else {
