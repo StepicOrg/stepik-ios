@@ -9,6 +9,7 @@ enum StepDataFlow {
             let step: Step
             let stepFontSize: StepFontSize
             let storedImages: [StoredImage]
+            let isDisabledStepsSupported: Bool
         }
 
         struct Response {
@@ -222,6 +223,7 @@ enum StepDataFlow {
     enum ViewControllerState {
         case loading
         case error
+        case disabled
         case result(data: StepViewModel)
     }
 

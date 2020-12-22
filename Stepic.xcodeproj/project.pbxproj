@@ -704,6 +704,7 @@
 		2CA3E8AF24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */; };
 		2CA47D4A248ABF0E00925335 /* LogoutDataClearService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */; };
 		2CA51BB024AB9B4300A400AE /* NewProfileUserActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */; };
+		2CA785F32592689400873CB3 /* StepDisabledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA785F22592689400873CB3 /* StepDisabledView.swift */; };
 		2CA867C12588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA867C02588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift */; };
 		2CA867C925892AE70006576E /* GridSimpleCourseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA867C825892AE70006576E /* GridSimpleCourseListCollectionViewCell.swift */; };
 		2CA867D225892B050006576E /* GridSimpleCourseListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA867D125892B050006576E /* GridSimpleCourseListWidgetView.swift */; };
@@ -2253,6 +2254,8 @@
 		2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAboutBlockView.swift; sourceTree = "<group>"; };
 		2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutDataClearService.swift; sourceTree = "<group>"; };
 		2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewModel.swift; sourceTree = "<group>"; };
+		2CA785EE2592238F00873CB3 /* Model_steps_is_enabled_v70.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_steps_is_enabled_v70.xcdatamodel; sourceTree = "<group>"; };
+		2CA785F22592689400873CB3 /* StepDisabledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDisabledView.swift; sourceTree = "<group>"; };
 		2CA867C02588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListCollectionHeaderView.swift; sourceTree = "<group>"; };
 		2CA867C825892AE70006576E /* GridSimpleCourseListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CA867D125892B050006576E /* GridSimpleCourseListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListWidgetView.swift; sourceTree = "<group>"; };
@@ -7063,6 +7066,7 @@
 			children = (
 				2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */,
 				62E98F3E31A16E980F342AEA /* StepControlsView.swift */,
+				2CA785F22592689400873CB3 /* StepDisabledView.swift */,
 				62E98F2E537EDAB05257B354 /* StepDiscussionThreadButton.swift */,
 				62E9808364DB0C811F4E2B81 /* StepNavigationButton.swift */,
 				62E98561BE6C35F9C6B9EDB9 /* StepStatisticsView.swift */,
@@ -8576,6 +8580,7 @@
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				2C619A7724CFF954007D3529 /* SocialProfilesAPI.swift in Sources */,
+				2CA785F32592689400873CB3 /* StepDisabledView.swift in Sources */,
 				083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */,
 				08CBA3271F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */,
@@ -10787,6 +10792,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CA785EE2592238F00873CB3 /* Model_steps_is_enabled_v70.xcdatamodel */,
 				2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */,
 				2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */,
 				2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */,
@@ -10858,7 +10864,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */;
+			currentVersion = 2CA785EE2592238F00873CB3 /* Model_steps_is_enabled_v70.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

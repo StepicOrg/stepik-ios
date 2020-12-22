@@ -131,13 +131,19 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
         switch self.state {
         case .result:
             self.isPlaceholderShown = false
+            self.stepView?.hideDisabledView()
             self.removeContent()
             self.showContent()
         case .loading:
             self.isPlaceholderShown = false
+            self.stepView?.hideDisabledView()
             self.stepView?.startLoading()
         case .error:
+            self.stepView?.hideDisabledView()
             self.showPlaceholder(for: .connectionError)
+        case .disabled:
+            self.isPlaceholderShown = false
+            self.stepView?.showDisabledView()
         }
     }
 
