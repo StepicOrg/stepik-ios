@@ -731,6 +731,11 @@
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
 		2CADFEF424C1325F00008C65 /* AchievementProgressData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */; };
+		2CB1139C2591F5F60093B572 /* StoryReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1139B2591F5F60093B572 /* StoryReactionsView.swift */; };
+		2CB113A6259203C90093B572 /* StoryPartReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113A5259203C90093B572 /* StoryPartReaction.swift */; };
+		2CB113AB259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */; };
+		2CB113B0259205D60093B572 /* StoryPartsReactionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */; };
+		2CB113C425920EC20093B572 /* StoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113C325920EC20093B572 /* StoryProtocols.swift */; };
 		2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */; };
 		2CB1C3AF24008D4A001DA83E /* UserCodeRunsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */; };
 		2CB1C3B124009339001DA83E /* UserCodeRunsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3B024009339001DA83E /* UserCodeRunsNetworkService.swift */; };
@@ -2273,6 +2278,12 @@
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementProgressData.swift; sourceTree = "<group>"; };
+		2CB1139B2591F5F60093B572 /* StoryReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryReactionsView.swift; sourceTree = "<group>"; };
+		2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_stories_reactions_v69.xcdatamodel; sourceTree = "<group>"; };
+		2CB113A5259203C90093B572 /* StoryPartReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartReaction.swift; sourceTree = "<group>"; };
+		2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoryPartReaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartsReactionsPersistenceService.swift; sourceTree = "<group>"; };
+		2CB113C325920EC20093B572 /* StoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryProtocols.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeRun.swift; sourceTree = "<group>"; };
 		2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeRunsAPI.swift; sourceTree = "<group>"; };
@@ -4775,6 +4786,7 @@
 			children = (
 				08484EE8211AF42F0006266F /* StoryAssembly.swift */,
 				08484EEA211AF42F0006266F /* StoryPresenter.swift */,
+				2CB113C325920EC20093B572 /* StoryProtocols.swift */,
 				2CA4CF9E242A187B008BC4E8 /* StoryViewController */,
 			);
 			path = Story;
@@ -4792,6 +4804,7 @@
 		2CA4CF9F242A1889008BC4E8 /* StoryPartViews */ = {
 			isa = PBXGroup;
 			children = (
+				2CB1139B2591F5F60093B572 /* StoryReactionsView.swift */,
 				08484EFD211AF4320006266F /* TextStoryView.swift */,
 				08484EE7211AF42F0006266F /* TextStoryView.xib */,
 			);
@@ -4881,6 +4894,15 @@
 				2C10AFE8217E04780019966D /* Registration */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		2CB113A42592039F0093B572 /* StoryPartReaction */ = {
+			isa = PBXGroup;
+			children = (
+				2CB113A5259203C90093B572 /* StoryPartReaction.swift */,
+				2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */,
+			);
+			path = StoryPartReaction;
 			sourceTree = "<group>";
 		};
 		2CB43B20253F792D00D9FEE0 /* Views */ = {
@@ -5626,6 +5648,7 @@
 				2C619A7924CFFB80007D3529 /* SocialProfile */,
 				2CFF9029242A268300FD7311 /* Step */,
 				2CFF902A242A268F00FD7311 /* StepOptions */,
+				2CB113A42592039F0093B572 /* StoryPartReaction */,
 				2CFF902B242A269E00FD7311 /* Submission */,
 				2CFF902C242A26AB00FD7311 /* Unit */,
 				2CFF902D242A26B600FD7311 /* User */,
@@ -6251,6 +6274,7 @@
 				2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */,
 				2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */,
 				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
+				2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */,
 				2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */,
 				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
 				2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */,
@@ -8511,6 +8535,7 @@
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				08484F18211AF4320006266F /* TextStoryView.swift in Sources */,
+				2CB1139C2591F5F60093B572 /* StoryReactionsView.swift in Sources */,
 				86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */,
 				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
 				2CA9D9882011FB4E007AA743 /* LeaderboardTableViewCell.swift in Sources */,
@@ -9121,6 +9146,7 @@
 				62E984E8EC57F9A62E5650D6 /* NetworkReachabilityService.swift in Sources */,
 				2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */,
 				2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */,
+				2CB113A6259203C90093B572 /* StoryPartReaction.swift in Sources */,
 				62E980F97C42FABD40DC27D6 /* TooltipStorageManager.swift in Sources */,
 				2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */,
 				2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */,
@@ -9264,8 +9290,10 @@
 				2C9A2DB525501B3C003AAD2E /* CourseListFilterQuery.swift in Sources */,
 				62E9871420FDD64DCD4E4311 /* CourseInfoTabSyllabusSectionView.swift in Sources */,
 				62E981A7F5DDECC573671FDE /* CourseListAssembly.swift in Sources */,
+				2CB113B0259205D60093B572 /* StoryPartsReactionsPersistenceService.swift in Sources */,
 				62E98B5E61502FC4FA3ECFD0 /* CourseListDataFlow.swift in Sources */,
 				62E980CA62D838858F0FA556 /* CourseListInteractor.swift in Sources */,
+				2CB113C425920EC20093B572 /* StoryProtocols.swift in Sources */,
 				62E98FFD1EEDB775EE381221 /* CourseListPresenter.swift in Sources */,
 				62E984B78E5B07D231883FAF /* CourseListViewController.swift in Sources */,
 				2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */,
@@ -9422,6 +9450,7 @@
 				62E985E5BCA977133322B878 /* LessonDataFlow.swift in Sources */,
 				62E98A1C58B16CCC449A7A85 /* LessonInteractor.swift in Sources */,
 				62E98FB2F229252A3B732197 /* LessonPresenter.swift in Sources */,
+				2CB113AB259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift in Sources */,
 				62E9868F7C399B35356DD6E8 /* LessonProvider.swift in Sources */,
 				62E988B9C5AE71A1CC86A209 /* LessonViewController.swift in Sources */,
 				62E98DC07618437F1A72C1B1 /* LessonViewModel.swift in Sources */,
@@ -10758,6 +10787,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */,
 				2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */,
 				2C1AC2EB255B26D100E6ECA9 /* Model_catalog_blocks_v67.xcdatamodel */,
 				2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */,
@@ -10828,7 +10858,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */;
+			currentVersion = 2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

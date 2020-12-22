@@ -706,6 +706,17 @@ extension AnalyticsEvent {
         case automatic
     }
 
+    static func storyReactionPressed(id: Int, position: Int, reaction: StoryReaction) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Story reaction pressed",
+            parameters: [
+                "id": id,
+                "position": position,
+                "reaction": reaction.rawValue
+            ]
+        )
+    }
+
     // MARK: - PersonalDeadlines -
 
     static let personalDeadlinesScheduleButtonTapped = AmplitudeAnalyticsEvent(
