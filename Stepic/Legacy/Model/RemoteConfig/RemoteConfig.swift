@@ -12,7 +12,7 @@ import FirebaseRemoteConfig
 import Foundation
 
 final class RemoteConfig {
-    private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
+    private static let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -21,22 +21,23 @@ final class RemoteConfig {
     var fetchDuration: TimeInterval = 43200
 
     lazy var appDefaults: [String: NSObject] = [
-        Key.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
-        Key.adaptiveBackendUrl.rawValue: StepikApplicationsInfo.adaptiveRatingURL as NSObject,
-        Key.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
-        Key.newLessonAvailable.rawValue: true as NSObject,
-        Key.darkModeAvailable.rawValue: true as NSObject,
-        Key.arQuickLookAvailable.rawValue: false as NSObject
+        Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
+        Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
+        Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
+        Key.newLessonAvailable.rawValue: NSNumber(value: true),
+        Key.darkModeAvailable.rawValue: NSNumber(value: true),
+        Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
+        Key.isDisabledStepsSupported.rawValue: NSNumber(value: false)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
             forKey: Key.showStreaksNotificationTrigger.rawValue
         ).stringValue else {
-            return self.defaultShowStreaksNotificationTrigger
+            return Self.defaultShowStreaksNotificationTrigger
         }
 
-        return ShowStreaksNotificationTrigger(rawValue: configValue) ?? self.defaultShowStreaksNotificationTrigger
+        return ShowStreaksNotificationTrigger(rawValue: configValue) ?? Self.defaultShowStreaksNotificationTrigger
     }
 
     var adaptiveBackendURL: String {
@@ -94,6 +95,13 @@ final class RemoteConfig {
         FirebaseRemoteConfig.RemoteConfig
             .remoteConfig()
             .configValue(forKey: Key.arQuickLookAvailable.rawValue)
+            .boolValue
+    }
+
+    var isDisabledStepsSupported: Bool {
+        FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.isDisabledStepsSupported.rawValue)
             .boolValue
     }
 
@@ -156,5 +164,6 @@ final class RemoteConfig {
         case newLessonAvailable = "new_lesson_available_ios"
         case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
+        case isDisabledStepsSupported = "is_disabled_steps_supported"
     }
 }
