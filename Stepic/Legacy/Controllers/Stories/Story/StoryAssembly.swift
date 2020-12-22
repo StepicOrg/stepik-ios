@@ -31,6 +31,7 @@ final class StoryAssembly: Assembly {
             storyPartViewFactory: StoryPartViewFactory(urlNavigationDelegate: urlNavigator),
             urlNavigator: urlNavigator,
             navigationDelegate: self.navigationDelegate,
+            storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceService(),
             analytics: StepikAnalytics.shared
         )
 

@@ -30,6 +30,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let socialProfilesPersistenceService: SocialProfilesPersistenceServiceProtocol
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
+    private let storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol
     private let submissionsPersistenceService: SubmissionsPersistenceServiceProtocol
     private let unitsPersistenceService: UnitsPersistenceServiceProtocol
     private let userActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol
@@ -74,8 +75,9 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         progressesPersistenceService: ProgressesPersistenceServiceProtocol = ProgressesPersistenceService(),
         sectionsPersistenceService: SectionsPersistenceServiceProtocol = SectionsPersistenceService(),
         socialProfilesPersistenceService: SocialProfilesPersistenceServiceProtocol = SocialProfilesPersistenceService(),
-        stepsPersistenceService: StepsPersistenceServiceProtocol = StepsPersistenceService(),
         stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol = StepOptionsPersistenceService(),
+        stepsPersistenceService: StepsPersistenceServiceProtocol = StepsPersistenceService(),
+        storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol = StoryPartsReactionsPersistenceService(),
         submissionsPersistenceService: SubmissionsPersistenceServiceProtocol = SubmissionsPersistenceService(),
         unitsPersistenceService: UnitsPersistenceServiceProtocol = UnitsPersistenceService(),
         userActivitiesPersistenceService: UserActivitiesPersistenceServiceProtocol = UserActivitiesPersistenceService(),
@@ -110,8 +112,9 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.progressesPersistenceService = progressesPersistenceService
         self.sectionsPersistenceService = sectionsPersistenceService
         self.socialProfilesPersistenceService = socialProfilesPersistenceService
-        self.stepsPersistenceService = stepsPersistenceService
         self.stepOptionsPersistenceService = stepOptionsPersistenceService
+        self.stepsPersistenceService = stepsPersistenceService
+        self.storyPartsReactionsPersistenceService = storyPartsReactionsPersistenceService
         self.submissionsPersistenceService = submissionsPersistenceService
         self.unitsPersistenceService = unitsPersistenceService
         self.userActivitiesPersistenceService = userActivitiesPersistenceService
@@ -196,6 +199,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                         self.socialProfilesPersistenceService.deleteAll(),
                         self.stepsPersistenceService.deleteAll(),
                         self.stepOptionsPersistenceService.deleteAll(),
+                        self.storyPartsReactionsPersistenceService.deleteAll(),
                         self.submissionsPersistenceService.deleteAll(),
                         self.unitsPersistenceService.deleteAll(),
                         self.userActivitiesPersistenceService.deleteAll(),

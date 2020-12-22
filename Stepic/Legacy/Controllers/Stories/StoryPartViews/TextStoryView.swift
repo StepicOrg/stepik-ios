@@ -37,6 +37,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     var appearance = Appearance()
 
     var completion: (() -> Void)?
+    var onDidChangeReaction: ((StoryReaction) -> Void)?
     weak var urlNavigationDelegate: StoryURLNavigationDelegate?
 
     private var imagePath: String = ""
@@ -74,10 +75,10 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     private lazy var reactionsView: StoryReactionsView = {
         let view = StoryReactionsView()
         view.onLikeClick = { [weak self] in
-            self?.reportStoryReaction(.like)
+            self?.onDidChangeReaction?(.like)
         }
         view.onDislikeClick = { [weak self] in
-            self?.reportStoryReaction(.dislike)
+            self?.onDidChangeReaction?(.dislike)
         }
         return view
     }()
@@ -242,12 +243,17 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         })
     }
 
-    private func reportStoryReaction(_ reaction: AnalyticsEvent.StoryReaction) {
-        guard let part = self.storyPart else {
-            return
+    func setReaction(_ reaction: StoryReaction?) {
+        if let reaction = reaction {
+            switch reaction {
+            case .like:
+                self.reactionsView.state = .liked
+            case .dislike:
+                self.reactionsView.state = .disliked
+            }
+        } else {
+            self.reactionsView.state = .normal
         }
-
-        self.analytics.send(.storyReactionPressed(id: part.storyID, position: part.position, reaction: reaction))
     }
 
     @objc
@@ -273,13 +279,4 @@ private class WiderStepikButton: StepikButton {
     override var intrinsicContentSize: CGSize {
         super.intrinsicContentSize.sizeByDelta(dw: self.widthDelta, dh: 0)
     }
-}
-
-protocol StoryURLNavigationDelegate: AnyObject {
-    func open(url: URL)
-}
-
-protocol UIStoryPartViewProtocol {
-    var completion: (() -> Void)? { get set }
-    func startLoad()
 }

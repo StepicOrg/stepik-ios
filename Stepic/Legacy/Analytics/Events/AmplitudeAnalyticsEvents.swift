@@ -717,11 +717,6 @@ extension AnalyticsEvent {
         )
     }
 
-    enum StoryReaction: String {
-        case like
-        case dislike
-    }
-
     // MARK: - PersonalDeadlines -
 
     static let personalDeadlinesScheduleButtonTapped = AmplitudeAnalyticsEvent(
