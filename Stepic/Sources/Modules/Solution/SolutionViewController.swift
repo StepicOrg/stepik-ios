@@ -132,7 +132,6 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
                 codeQuizViewController.codeQuizView?.setCodeEditorActionControlsEnabled(false)
             }
 
-            quizModuleInput?.update(quizTitleVisibility: false)
             quizModuleInput?.update(dataset: data.dataset)
             quizModuleInput?.update(feedback: data.feedback)
             quizModuleInput?.update(codeDetails: data.codeDetails)
@@ -140,6 +139,10 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
             quizModuleInput?.update(status: data.quizStatus)
 
             quizController.view.isUserInteractionEnabled = quizType == .code
+
+            if let titlePresentableView = quizController.view as? TitlePresentable {
+                titlePresentableView.title = nil
+            }
         }
 
         self.solutionView?.endLoading()

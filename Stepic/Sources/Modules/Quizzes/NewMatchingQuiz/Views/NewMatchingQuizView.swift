@@ -38,7 +38,7 @@ extension NewMatchingQuizView {
     }
 }
 
-final class NewMatchingQuizView: UIView {
+final class NewMatchingQuizView: UIView, TitlePresentable {
     let appearance: Appearance
     weak var delegate: NewMatchingQuizViewDelegate?
 
@@ -106,8 +106,12 @@ final class NewMatchingQuizView: UIView {
     }
 
     var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
         }
     }
 

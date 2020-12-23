@@ -41,9 +41,12 @@ final class SolutionView: UIView {
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView(orientation: .vertical)
         view.spacing = self.appearance.spacing
+        view.contentInsets = .init(top: self.appearance.spacing, left: 0, bottom: 0, right: 0)
+
         if #available(iOS 13.0, *) {
             view.automaticallyAdjustsScrollIndicatorInsets = false
         }
+
         return view
     }()
 

@@ -13,8 +13,6 @@ final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
     private var currentDataset: MatchingDataset?
     private var currentItems: [NewMatchingQuiz.MatchItem]?
 
-    private var isQuizTitleVisible = true
-
     init(presenter: NewMatchingQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -32,8 +30,7 @@ final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 items: items,
-                status: self.currentStatus,
-                isQuizTitleVisible: self.isQuizTitleVisible
+                status: self.currentStatus
             )
         )
     }
@@ -90,10 +87,6 @@ extension NewMatchingQuizInteractor: QuizInputProtocol {
 
         self.currentDataset = dataset
         self.currentItems = self.makeMatchItems(dataset: dataset)
-    }
-
-    func update(quizTitleVisibility isVisible: Bool) {
-        self.isQuizTitleVisible = isVisible
     }
 
     private func makeMatchItems(dataset: MatchingDataset) -> [NewMatchingQuiz.MatchItem] {

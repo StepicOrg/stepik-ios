@@ -19,7 +19,7 @@ extension CodeQuizView {
     }
 }
 
-final class CodeQuizView: UIView {
+final class CodeQuizView: UIView, TitlePresentable {
     let appearance: Appearance
     weak var delegate: CodeQuizViewDelegate?
 
@@ -100,6 +100,16 @@ final class CodeQuizView: UIView {
 
     private lazy var titleLabelContainerView = UIView()
 
+    var title: String? {
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
+        }
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -153,8 +163,7 @@ final class CodeQuizView: UIView {
 
         // Hide toolbar and show title for sql quiz.
         if viewModel.language == .sql {
-            self.titleLabel.text = viewModel.title
-            self.titleLabelContainerView.isHidden = viewModel.title?.isEmpty ?? true
+            self.title = viewModel.title
             self.toolbarView.isHidden = !self.titleLabelContainerView.isHidden
         } else {
             self.titleLabelContainerView.isHidden = true

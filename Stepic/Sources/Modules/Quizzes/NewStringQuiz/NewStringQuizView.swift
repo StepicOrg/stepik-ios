@@ -31,7 +31,7 @@ extension NewStringQuizView {
     }
 }
 
-final class NewStringQuizView: UIView {
+final class NewStringQuizView: UIView, TitlePresentable {
     let appearance: Appearance
     weak var delegate: NewStringQuizViewDelegate?
 
@@ -87,8 +87,12 @@ final class NewStringQuizView: UIView {
     private lazy var titleLabelContainerView = UIView()
 
     var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
         }
     }
 

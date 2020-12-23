@@ -32,7 +32,7 @@ extension NewSortingQuizView {
     }
 }
 
-final class NewSortingQuizView: UIView {
+final class NewSortingQuizView: UIView, TitlePresentable {
     let appearance: Appearance
     weak var delegate: NewSortingQuizViewDelegate?
 
@@ -94,8 +94,12 @@ final class NewSortingQuizView: UIView {
     }
 
     var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
         }
     }
 

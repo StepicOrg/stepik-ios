@@ -11,8 +11,6 @@ enum CodeQuiz {
             let languageName: String?
             let codeDetails: CodeDetails
             let status: QuizStatus?
-            // FIXME: Extract to protocol `TitlePresentable`
-            let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {

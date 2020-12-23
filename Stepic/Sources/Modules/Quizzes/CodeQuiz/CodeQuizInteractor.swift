@@ -30,8 +30,6 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
         }
     }
 
-    private var isQuizTitleVisible = true
-
     var isCurrentUserCodeTemplateUpdateEnabled: Bool = true
 
     init(
@@ -108,8 +106,7 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
                 language: self.language,
                 languageName: self.languageName,
                 codeDetails: codeDetails,
-                status: self.currentStatus,
-                isQuizTitleVisible: self.isQuizTitleVisible
+                status: self.currentStatus
             )
         )
     }
@@ -202,10 +199,6 @@ extension CodeQuizInteractor: QuizInputProtocol {
 
     func update(codeDetails: CodeDetails?) {
         self.codeDetails = codeDetails
-    }
-
-    func update(quizTitleVisibility isVisible: Bool) {
-        self.isQuizTitleVisible = isVisible
     }
 
     private func handleEmptyReply() {

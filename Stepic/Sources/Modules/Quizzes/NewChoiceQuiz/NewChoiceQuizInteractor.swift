@@ -16,8 +16,6 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
     private var currentChoices: [Bool]?
     private var currentChoicesFeedback: [String?]?
 
-    private var isQuizTitleVisible = true
-
     init(presenter: NewChoiceQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -47,8 +45,7 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
                     let (text, (isSelected, hint)) = result
                     return NewChoiceQuiz.Choice(text: text, isSelected: isSelected, hint: hint)
                 },
-                status: self.currentStatus,
-                isQuizTitleVisible: self.isQuizTitleVisible
+                status: self.currentStatus
             )
         )
     }
@@ -96,10 +93,6 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
         if let choiceFeedback = feedback as? ChoiceSubmissionFeedback {
             self.currentChoicesFeedback = choiceFeedback.options
         }
-    }
-
-    func update(quizTitleVisibility isVisible: Bool) {
-        self.isQuizTitleVisible = isVisible
     }
 
     func isReplyValid(_ reply: Reply) -> ReplyValidationResultType {

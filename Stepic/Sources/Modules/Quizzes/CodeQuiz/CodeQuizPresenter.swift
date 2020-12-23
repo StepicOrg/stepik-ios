@@ -54,14 +54,9 @@ final class CodeQuizPresenter: CodeQuizPresenterProtocol {
             )
         }()
 
-        let title: String? = {
-            if response.isQuizTitleVisible {
-                return response.language == .sql
-                    ? NSLocalizedString("SQLQuizTitle", comment: "")
-                    : nil
-            }
-            return nil
-        }()
+        let title = response.language == .sql
+            ? NSLocalizedString("SQLQuizTitle", comment: "")
+            : nil
 
         let viewModel = CodeQuizViewModel(
             title: title,
