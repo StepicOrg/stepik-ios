@@ -247,8 +247,7 @@ final class HomeViewController: BaseExploreViewController {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
-                headerDescription: state.headerDescription,
-                contentViewInsets: .zero
+                headerDescription: state.headerDescription
             )
 
         containerView.onShowAllButtonClick = { [weak self] in
