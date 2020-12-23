@@ -123,6 +123,12 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
 
             self.solutionView?.actionIsHidden = true
 
+            if quizType == .code || quizType == .sql || quizType == .table || quizType == .fillBlanks {
+                self.solutionView?.contentInsets = .zero
+            }
+
+            quizController.view.isUserInteractionEnabled = quizType == .code
+
             let quizModuleInput = quizAssembly.moduleInput
             // Disable code quiz features
             if let codeQuizInteractor = quizModuleInput as? CodeQuizInteractor {
@@ -137,8 +143,6 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
             quizModuleInput?.update(codeDetails: data.codeDetails)
             quizModuleInput?.update(reply: data.reply)
             quizModuleInput?.update(status: data.quizStatus)
-
-            quizController.view.isUserInteractionEnabled = quizType == .code
 
             if let titlePresentableView = quizController.view as? TitlePresentable {
                 titlePresentableView.title = nil

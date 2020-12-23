@@ -84,6 +84,15 @@ final class SolutionView: UIView {
         }
     }
 
+    var contentInsets: UIEdgeInsets {
+        get {
+            self.scrollableStackView.contentInsets
+        }
+        set {
+            self.scrollableStackView.contentInsets = newValue
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
