@@ -27,7 +27,7 @@ final class CatalogBlocksAPI: APIEndpoint {
 
     func retrieve(language: String, page: Int = 1) -> Promise<([CatalogBlock], Meta)> {
         let params: Parameters = [
-            "platform": "mobile,ios",
+            "platform": "web",
             "language": language,
             "page": page
         ]
