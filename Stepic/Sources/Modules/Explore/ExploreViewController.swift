@@ -28,6 +28,9 @@ final class ExploreViewController: BaseExploreViewController {
     private var state: Explore.ViewControllerState
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
+    private var currentContentLanguage: ContentLanguage?
+    private var currentStoriesSubmoduleState = StoriesState.shown
+    // SearchResults
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar()
@@ -36,8 +39,6 @@ final class ExploreViewController: BaseExploreViewController {
         target: self,
         action: #selector(self.ipadCancelSearchButtonClicked)
     )
-
-    private var isStoriesHidden: Bool = false
 
     init(
         interactor: ExploreInteractorProtocol,
@@ -125,22 +126,10 @@ final class ExploreViewController: BaseExploreViewController {
 
     private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
-        if !self.isStoriesHidden {
-            let storiesAssembly = StoriesAssembly(
-                output: self.exploreInteractor as? StoriesOutputProtocol
-            )
-            let storiesViewController = storiesAssembly.makeModule()
-            let storiesContainerView = ExploreStoriesContainerView(
-                contentView: storiesViewController.view
-            )
-            self.registerSubmodule(
-                .init(
-                    viewController: storiesViewController,
-                    view: storiesContainerView,
-                    isLanguageDependent: true,
-                    type: Explore.Submodule.stories
-                )
-            )
+        let shouldRefreshStories = self.currentStoriesSubmoduleState == .shown
+            || (self.currentStoriesSubmoduleState == .hidden && self.currentContentLanguage != contentLanguage)
+        if shouldRefreshStories {
+            self.refreshStateForStories(state: .shown)
         }
 
         // Catalog blocks
@@ -157,6 +146,42 @@ final class ExploreViewController: BaseExploreViewController {
                 type: Explore.Submodule.catalogBlocks
             )
         )
+
+        self.currentContentLanguage = contentLanguage
+    }
+
+    // MARK: Stories
+
+    private enum StoriesState {
+        case shown
+        case hidden
+    }
+
+    private func refreshStateForStories(state: StoriesState) {
+        switch state {
+        case .shown:
+            let storiesAssembly = StoriesAssembly(
+                output: self.exploreInteractor as? StoriesOutputProtocol
+            )
+            let storiesViewController = storiesAssembly.makeModule()
+            let storiesContainerView = ExploreStoriesContainerView(
+                contentView: storiesViewController.view
+            )
+            self.registerSubmodule(
+                .init(
+                    viewController: storiesViewController,
+                    view: storiesContainerView,
+                    isLanguageDependent: true,
+                    type: Explore.Submodule.stories
+                )
+            )
+        case .hidden:
+            if let submodule = self.getSubmodule(type: Explore.Submodule.stories) {
+                self.removeSubmodule(submodule)
+            }
+        }
+
+        self.currentStoriesSubmoduleState = state
     }
 
     // MARK: - Visited courses submodule
@@ -306,10 +331,7 @@ extension ExploreViewController: ExploreViewControllerProtocol {
     }
 
     func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel) {
-        self.isStoriesHidden = true
-        if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
-            self.removeSubmodule(storiesBlock)
-        }
+        self.refreshStateForStories(state: viewModel.isHidden ? .hidden : .shown)
     }
 
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel) {
