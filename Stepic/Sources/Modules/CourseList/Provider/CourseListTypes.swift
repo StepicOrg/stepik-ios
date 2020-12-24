@@ -146,8 +146,9 @@ final class CourseListServicesFactory {
             )
         } else if let type = self.type as? CatalogBlockCourseListType {
             return CourseListPersistenceService(
-                storage: PassiveCourseListPersistenceStorage(
-                    cachedList: type.coursesIDs
+                storage: DefaultsCourseListPersistenceStorage(
+                    cacheID: "CatalogBlockInfo_\(type.courseListID)",
+                    defaultCoursesList: type.coursesIDs
                 )
             )
         } else {
