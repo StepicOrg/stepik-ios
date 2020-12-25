@@ -22,7 +22,7 @@ extension NewChoiceQuizView {
     }
 }
 
-final class NewChoiceQuizView: UIView {
+final class NewChoiceQuizView: UIView, TitlePresentable {
     let appearance: Appearance
     weak var delegate: NewChoiceQuizViewDelegate?
 
@@ -63,8 +63,12 @@ final class NewChoiceQuizView: UIView {
     private var loadGroup: DispatchGroup?
 
     var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
         }
     }
 
@@ -90,8 +94,6 @@ final class NewChoiceQuizView: UIView {
     // MARK: - Public API
 
     func updateFeedback(text: [String?]) {
-        assert(self.choicesStackView.arrangedSubviews.count == text.count)
-
         for (index, hint) in text.enumerated() {
             guard let choiceView = self.choicesStackView.arrangedSubviews[safe: index] as? ChoiceElementView else {
                 continue
@@ -187,8 +189,6 @@ final class NewChoiceQuizView: UIView {
         guard let selectionMask = self.selectionMask else {
             return
         }
-
-        assert(self.choicesStackView.arrangedSubviews.count == selectionMask.count)
 
         for (isSelected, view) in zip(selectionMask, self.choicesStackView.arrangedSubviews) {
             if let elementView = view as? ChoiceElementView, isSelected {

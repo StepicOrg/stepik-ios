@@ -16,7 +16,7 @@ extension TableQuizView {
     }
 }
 
-final class TableQuizView: UIView {
+final class TableQuizView: UIView, TitlePresentable {
     let appearance: Appearance
 
     weak var delegate: TableQuizViewDelegate?
@@ -51,8 +51,13 @@ final class TableQuizView: UIView {
     private var rows = [TableQuiz.Row]()
 
     var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
+            self.separatorView.isHidden = self.titleLabelContainerView.isHidden
         }
     }
 

@@ -23,14 +23,9 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
             }
         }()
 
-        let title: String? = {
-            if response.isQuizTitleVisible {
-                return response.isMultipleChoice
-                    ? NSLocalizedString("MultipleChoiceQuizTitle", comment: "")
-                    : NSLocalizedString("SingleChoiceQuizTitle", comment: "")
-            }
-            return nil
-        }()
+        let title = response.isMultipleChoice
+            ? NSLocalizedString("MultipleChoiceQuizTitle", comment: "")
+            : NSLocalizedString("SingleChoiceQuizTitle", comment: "")
 
         let viewModel = NewChoiceQuizViewModel(
             title: title,

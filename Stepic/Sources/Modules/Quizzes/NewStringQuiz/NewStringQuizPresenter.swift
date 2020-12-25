@@ -43,7 +43,7 @@ final class NewStringQuizPresenter: NewStringQuizPresenterProtocol {
         }()
 
         let viewModel = NewStringQuizViewModel(
-            title: response.isQuizTitleVisible ? self.quizTitle : nil,
+            title: self.quizTitle,
             text: response.text,
             placeholderText: self.quizPlaceholder,
             finalState: state,

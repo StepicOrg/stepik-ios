@@ -31,7 +31,7 @@ final class NewMatchingQuizPresenter: NewMatchingQuizPresenterProtocol {
         }
 
         let viewModel = NewMatchingQuizViewModel(
-            title: response.isQuizTitleVisible ? NSLocalizedString("MatchingQuizTitle", comment: "") : nil,
+            title: NSLocalizedString("MatchingQuizTitle", comment: ""),
             items: items,
             finalState: state
         )
