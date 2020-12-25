@@ -7,6 +7,7 @@ protocol CatalogBlocksPersistenceServiceProtocol: AnyObject {
     func fetch(language: ContentLanguage) -> Guarantee<[CatalogBlockEntity]>
 
     func save(catalogBlocks: [CatalogBlock]) -> Guarantee<Void>
+    func save(catalogBlocks: [CatalogBlock], forLanguage language: ContentLanguage) -> Guarantee<Void>
 
     func deleteAll() -> Promise<Void>
 }
@@ -94,6 +95,29 @@ final class CatalogBlocksPersistenceService: CatalogBlocksPersistenceServiceProt
             when(fulfilled: insertGuaranteesIterator, concurrently: 1).done { _ in
                 seal(())
             }.catch { _ in
+                seal(())
+            }
+        }
+    }
+
+    func save(catalogBlocks: [CatalogBlock], forLanguage language: ContentLanguage) -> Guarantee<Void> {
+        Guarantee { seal in
+            self.fetch(language: language).then { cachedCatalogBlocks -> Guarantee<Void> in
+                let newIDs = Set(catalogBlocks.map(\.id))
+                let cachedIDsToDelete = Set(cachedCatalogBlocks.map(\.id)).subtracting(newIDs)
+
+                self.managedObjectContext.performAndWait {
+                    for catalogBlock in cachedCatalogBlocks where cachedIDsToDelete.contains(catalogBlock.id) {
+                        self.managedObjectContext.delete(catalogBlock)
+                    }
+
+                    if self.managedObjectContext.hasChanges {
+                        try? self.managedObjectContext.save()
+                    }
+                }
+
+                return self.save(catalogBlocks: catalogBlocks)
+            }.done {
                 seal(())
             }
         }

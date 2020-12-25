@@ -48,7 +48,7 @@ final class CatalogBlocksRepository: CatalogBlocksRepositoryProtocol {
                 .fetch(language: language)
                 .then { remoteCatalogBlocks, meta in
                     self.catalogBlocksPersistenceService
-                        .save(catalogBlocks: remoteCatalogBlocks)
+                        .save(catalogBlocks: remoteCatalogBlocks, forLanguage: language)
                         .map { (remoteCatalogBlocks, meta) }
                 }
         }
