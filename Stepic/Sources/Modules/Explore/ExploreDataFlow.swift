@@ -6,10 +6,8 @@ enum Explore {
     enum Submodule: String, UniqueIdentifiable {
         case stories
         case languageSwitch
-        case tags
-        case collection
+        case catalogBlocks
         case visitedCourses
-        case popularCourses
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
     }

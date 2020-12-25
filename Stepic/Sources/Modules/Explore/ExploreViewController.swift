@@ -21,15 +21,16 @@ final class ExploreViewController: BaseExploreViewController {
     static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
-        .tags,
-        .collection,
-        .visitedCourses,
-        .popularCourses
+        .catalogBlocks,
+        .visitedCourses
     ]
 
     private var state: Explore.ViewControllerState
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
+    private var currentContentLanguage: ContentLanguage?
+    private var currentStoriesSubmoduleState = StoriesState.shown
+    // SearchResults
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar()
@@ -38,8 +39,6 @@ final class ExploreViewController: BaseExploreViewController {
         target: self,
         action: #selector(self.ipadCancelSearchButtonClicked)
     )
-
-    private var isStoriesHidden: Bool = false
 
     init(
         interactor: ExploreInteractorProtocol,
@@ -127,7 +126,40 @@ final class ExploreViewController: BaseExploreViewController {
 
     private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
-        if !self.isStoriesHidden {
+        let shouldRefreshStories = self.currentStoriesSubmoduleState == .shown
+            || (self.currentStoriesSubmoduleState == .hidden && self.currentContentLanguage != contentLanguage)
+        if shouldRefreshStories {
+            self.refreshStateForStories(state: .shown)
+        }
+
+        // Catalog blocks
+        let catalogBlocksAssembly = CatalogBlocksAssembly(
+            contentLanguage: contentLanguage,
+            output: self.interactor as? CatalogBlocksOutputProtocol
+        )
+        let catalogBlocksViewController = catalogBlocksAssembly.makeModule()
+        self.registerSubmodule(
+            .init(
+                viewController: catalogBlocksViewController,
+                view: catalogBlocksViewController.view,
+                isLanguageDependent: true,
+                type: Explore.Submodule.catalogBlocks
+            )
+        )
+
+        self.currentContentLanguage = contentLanguage
+    }
+
+    // MARK: Stories
+
+    private enum StoriesState {
+        case shown
+        case hidden
+    }
+
+    private func refreshStateForStories(state: StoriesState) {
+        switch state {
+        case .shown:
             let storiesAssembly = StoriesAssembly(
                 output: self.exploreInteractor as? StoriesOutputProtocol
             )
@@ -143,81 +175,13 @@ final class ExploreViewController: BaseExploreViewController {
                     type: Explore.Submodule.stories
                 )
             )
+        case .hidden:
+            if let submodule = self.getSubmodule(type: Explore.Submodule.stories) {
+                self.removeSubmodule(submodule)
+            }
         }
 
-        // Tags
-        let tagsAssembly = TagsAssembly(
-            contentLanguage: contentLanguage,
-            output: self.interactor as? TagsOutputProtocol
-        )
-        let tagsViewController = tagsAssembly.makeModule()
-        self.registerSubmodule(
-            .init(
-                viewController: tagsViewController,
-                view: tagsViewController.view,
-                isLanguageDependent: true,
-                type: Explore.Submodule.tags
-            )
-        )
-
-        // Collection
-        let collectionAssembly = CourseListsCollectionAssembly(
-            contentLanguage: contentLanguage,
-            output: self.interactor as? (CourseListCollectionOutputProtocol & CourseListOutputProtocol)
-        )
-        let collectionViewController = collectionAssembly.makeModule()
-        self.registerSubmodule(
-            .init(
-                viewController: collectionViewController,
-                view: collectionViewController.view,
-                isLanguageDependent: true,
-                type: Explore.Submodule.collection
-            )
-        )
-
-        // Popular courses
-        let courseListType = PopularCourseListType(language: contentLanguage)
-        let popularAssembly = HorizontalCourseListAssembly(
-            type: courseListType,
-            colorMode: .dark,
-            courseViewSource: .query(courseListType: courseListType),
-            output: self.interactor as? CourseListOutputProtocol
-        )
-        let popularViewController = popularAssembly.makeModule()
-        let containerView = CourseListContainerViewFactory(colorMode: .dark)
-            .makeHorizontalContainerView(
-                for: popularViewController.view,
-                headerDescription: .init(
-                    title: NSLocalizedString("Popular", comment: ""),
-                    summary: nil
-                )
-            )
-        containerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.doFullscreenCourseListPresentation(
-                request: .init(
-                    presentationDescription: .init(
-                        courseListFilterDescription: .init(
-                            availableFilters: .all,
-                            prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
-                            defaultCourseLanguage: .init(contentLanguage: contentLanguage)
-                        )
-                    ),
-                    courseListType: courseListType
-                )
-            )
-        }
-        self.registerSubmodule(
-            .init(
-                viewController: popularViewController,
-                view: containerView,
-                isLanguageDependent: true,
-                type: Explore.Submodule.popularCourses
-            )
-        )
-
-        if let moduleInput = popularAssembly.moduleInput {
-            self.tryToSetOnlineState(moduleInput: moduleInput)
-        }
+        self.currentStoriesSubmoduleState = state
     }
 
     // MARK: - Visited courses submodule
@@ -367,16 +331,17 @@ extension ExploreViewController: ExploreViewControllerProtocol {
     }
 
     func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel) {
-        self.isStoriesHidden = true
-        if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
-            self.removeSubmodule(storiesBlock)
-        }
+        self.refreshStateForStories(state: viewModel.isHidden ? .hidden : .shown)
     }
 
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
         case .visitedCourses:
             self.refreshStateForVisitedCourses(state: .hidden)
+        case .catalogBlocks:
+            if let module = self.getSubmodule(type: Explore.Submodule.catalogBlocks) {
+                self.removeSubmodule(module)
+            }
         default:
             break
         }

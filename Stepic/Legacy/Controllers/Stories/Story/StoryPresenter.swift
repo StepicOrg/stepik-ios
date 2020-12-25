@@ -44,6 +44,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     private var urlNavigator: URLNavigator
     private var story: Story
 
+    private let storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol
     private let analytics: Analytics
 
     private var partToAnimate: Int = 0
@@ -65,6 +66,7 @@ final class StoryPresenter: StoryPresenterProtocol {
         storyPartViewFactory: StoryPartViewFactory,
         urlNavigator: URLNavigator,
         navigationDelegate: StoryNavigationDelegate?,
+        storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol,
         analytics: Analytics
     ) {
         self.view = view
@@ -72,6 +74,7 @@ final class StoryPresenter: StoryPresenterProtocol {
         self.storyPartViewFactory = storyPartViewFactory
         self.navigationDelegate = navigationDelegate
         self.urlNavigator = urlNavigator
+        self.storyPartsReactionsPersistenceService = storyPartsReactionsPersistenceService
         self.analytics = analytics
     }
 
@@ -106,6 +109,26 @@ final class StoryPresenter: StoryPresenterProtocol {
                         duration: animatingStoryPart.duration
                     )
                 }
+            }
+            viewToAnimate.onDidChangeReaction = { [weak self] reaction in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if strongSelf.partToAnimate == animatingStoryPart.position {
+                    strongSelf.saveStoryPartReaction(reaction: reaction, storyPart: animatingStoryPart).done { _ in }
+                    strongSelf.analytics.send(
+                        .storyReactionPressed(
+                            id: animatingStoryPart.storyID,
+                            position: animatingStoryPart.position,
+                            reaction: reaction
+                        )
+                    )
+                }
+            }
+
+            self.fetchStoryPartReaction(animatingStoryPart).done { [weak viewToAnimate] reaction in
+                viewToAnimate?.setReaction(reaction?.storyReaction)
             }
 
             self.view?.animate(view: viewToAnimate)
@@ -163,5 +186,18 @@ final class StoryPresenter: StoryPresenterProtocol {
     func onClosePressed() {
         self.analytics.send(.storyClosed(id: self.storyID, type: .cross))
         self.view?.close()
+    }
+
+    private func fetchStoryPartReaction(_ storyPart: StoryPart) -> Guarantee<StoryPartReaction?> {
+        Guarantee { seal in
+            self.storyPartsReactionsPersistenceService.fetch(storyID: storyPart.storyID).done { reactions in
+                let reactionOrNil = reactions.first(where: { $0.position == storyPart.position })
+                seal(reactionOrNil)
+            }
+        }
+    }
+
+    private func saveStoryPartReaction(reaction: StoryReaction, storyPart: StoryPart) -> Guarantee<Void> {
+        self.storyPartsReactionsPersistenceService.save(reaction: reaction, for: storyPart).asVoid()
     }
 }

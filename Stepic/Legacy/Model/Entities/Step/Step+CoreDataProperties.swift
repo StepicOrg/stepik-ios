@@ -24,6 +24,7 @@ extension Step {
     @NSManaged var managedHasReview: NSNumber?
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
+    @NSManaged var managedIsEnabled: NSNumber?
 
     @NSManaged var managedAttempt: AttemptEntity?
     @NSManaged var managedBlock: Block?
@@ -229,6 +230,15 @@ extension Step {
         }
         set {
             self.managedMaxSubmissionsCount = newValue as NSNumber?
+        }
+    }
+
+    var isEnabled: Bool {
+        get {
+            self.managedIsEnabled?.boolValue ?? true
+        }
+        set {
+            self.managedIsEnabled = NSNumber(value: newValue)
         }
     }
 }

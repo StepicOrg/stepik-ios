@@ -49,9 +49,7 @@ final class SmallCourseWidgetView: UIView, CourseWidgetViewProtocol {
 
 extension SmallCourseWidgetView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        if self.colorMode == .grouped {
-            self.backgroundColor = .stepikSecondaryGroupedBackground
-        }
+        self.backgroundColor = self.colorMode.courseWidgetBackgroundColor
     }
 
     func addSubviews() {

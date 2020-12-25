@@ -1,6 +1,6 @@
 PODS:
   - ActionSheetPicker-3.0 (2.7.1)
-  - Agrume (5.6.11):
+  - Agrume (5.6.12):
     - SwiftyGif
   - Alamofire (5.4.0)
   - Amplitude-iOS (4.9.3)
@@ -184,7 +184,7 @@ PODS:
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.3.1)
-  - SwiftLint (0.41.0)
+  - SwiftLint (0.42.0)
   - SwiftyGif (5.3.0)
   - SwiftyJSON (5.0.0)
   - Tabman (2.8.0):
@@ -204,7 +204,7 @@ PODS:
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.7.1)
-  - Agrume (= 5.6.11)
+  - Agrume (= 5.6.12)
   - Alamofire (= 5.4.0)
   - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.10)
@@ -242,7 +242,7 @@ DEPENDENCIES:
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - SVProgressHUD (= 2.2.5)
   - SwiftDate (= 6.3.1)
-  - SwiftLint (= 0.41.0)
+  - SwiftLint (= 0.42.0)
   - SwiftyJSON (= 5.0.0)
   - Tabman (= 2.8.0)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
@@ -335,7 +335,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
-  Agrume: 085e64c6884fae11d3f3650fad3ebcb2c3df7597
+  Agrume: d60f7ead4aad9720564148f7e9cbe0b225b1d814
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
@@ -390,7 +390,7 @@ SPEC CHECKSUMS:
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
-  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: f62ad94ee54a7d96e3fbab34f677d9ea4d38ece6
@@ -401,6 +401,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: 5bbf168bcc23036bb20aef68b204d57cf9b515ae
+PODFILE CHECKSUM: e5490632d3eb965788b7b0a0eecfe162a3c181e2
 
 COCOAPODS: 1.10.0

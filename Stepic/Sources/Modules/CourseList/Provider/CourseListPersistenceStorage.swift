@@ -7,13 +7,15 @@ protocol CourseListPersistenceStorage: AnyObject {
 
 final class DefaultsCourseListPersistenceStorage: CourseListPersistenceStorage {
     private let cacheID: String
+    private let defaultCoursesList: [Course.IdType]
 
-    init(cacheID: String) {
+    init(cacheID: String, defaultCoursesList: [Course.IdType] = []) {
         self.cacheID = cacheID
+        self.defaultCoursesList = defaultCoursesList
     }
 
     func getCoursesList() -> [Course.IdType] {
-        UserDefaults.standard.object(forKey: self.cacheID) as? [Course.IdType] ?? []
+        UserDefaults.standard.object(forKey: self.cacheID) as? [Course.IdType] ?? self.defaultCoursesList
     }
 
     func update(newCachedList: [Course.IdType]) {

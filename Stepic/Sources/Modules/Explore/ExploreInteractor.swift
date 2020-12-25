@@ -108,31 +108,6 @@ extension ExploreInteractor: StoriesOutputProtocol {
     }
 }
 
-extension ExploreInteractor: TagsOutputProtocol {
-    func presentCourseList(type: TagCourseListType) {
-        self.doFullscreenCourseListPresentation(
-            request: .init(
-                presentationDescription: nil,
-                courseListType: type
-            )
-        )
-    }
-}
-
-extension ExploreInteractor: CourseListCollectionOutputProtocol {
-    func presentCourseList(
-        presentationDescription: CourseList.PresentationDescription,
-        type: CollectionCourseListType
-    ) {
-        self.doFullscreenCourseListPresentation(
-            request: .init(
-                presentationDescription: presentationDescription,
-                courseListType: type
-            )
-        )
-    }
-}
-
 extension ExploreInteractor: CourseListFilterOutputProtocol {
     func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
         self.doSearchResultsCourseListFiltersUpdate(request: .init(filters: filters))
@@ -146,5 +121,24 @@ extension ExploreInteractor: CourseListFilterOutputProtocol {
 
     private func getDefaultSearchResultsCourseListFilterLanguage() -> CourseListFilter.Filter.CourseLanguage {
         self.contentLanguageService.globalContentLanguage == .russian ? .any : .english
+    }
+}
+
+extension ExploreInteractor: CatalogBlocksOutputProtocol {
+    func presentCourseList(type: CatalogBlockCourseListType) {
+        self.doFullscreenCourseListPresentation(request: .init(presentationDescription: nil, courseListType: type))
+    }
+
+    func presentProfile(id: User.IdType) {
+        self.explorePresenter?.presentProfile(response: .init(userID: id))
+    }
+
+    func hideCatalogBlocks() {
+        self.explorePresenter?.presentCourseListState(
+            response: .init(
+                module: Explore.Submodule.catalogBlocks,
+                result: .empty
+            )
+        )
     }
 }

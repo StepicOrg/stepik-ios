@@ -27,6 +27,30 @@ final class CourseListsAPI: APIEndpoint {
         )
     }
 
+    func retrieve(ids: [CourseListModel.IdType], page: Int = 1) -> Promise<([CourseListModel], Meta)> {
+        Promise { seal in
+            let params: Parameters = [
+                "ids": ids,
+                "page": page
+            ]
+
+            CourseListModel.fetchAsync(ids: ids).then {
+                cachedCourseLists -> Promise<([CourseListModel], Meta)> in
+                self.retrieve.request(
+                    requestEndpoint: self.name,
+                    paramName: self.name,
+                    params: params,
+                    updatingObjects: cachedCourseLists,
+                    withManager: self.manager
+                )
+            }.done { courseLists, meta in
+                seal.fulfill((courseLists, meta))
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func retrieve(language: ContentLanguage, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
         let params: Parameters = [
             "platform": "mobile,ios",

@@ -4,7 +4,7 @@ extension CourseWidgetLabel {
     struct Appearance {
         var maxLinesCount = 3
         var font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        var textColor = UIColor.stepikPrimaryText
+        var textColor = UIColor.stepikSystemPrimaryText
     }
 }
 

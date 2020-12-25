@@ -56,6 +56,27 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format courses count with localized and pluralized suffix.
+    ///
+    /// 1 -> "1 course", 5 -> "5 courses"
+    /// 100 -> "99+ courses"
+    static func catalogBlockCoursesCount(_ count: Int) -> String {
+        if count > 99 {
+            return "99+ \(NSLocalizedString("courses567890", comment: ""))"
+        }
+
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("courses1", comment: ""),
+                NSLocalizedString("courses234", comment: ""),
+                NSLocalizedString("courses567890", comment: "")
+            ]
+        )
+
+        return "\(count) \(pluralizedCountString)"
+    }
+
     /// Format points count with localized and pluralized suffix; 1 -> "1 point", 5 -> "5 points"
     static func pointsCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(
@@ -67,6 +88,45 @@ enum FormatterHelper {
             ]
         )
         return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format authors count with localized and pluralized suffix; 1 -> "1 author", 5 -> "5 authors"
+    static func authorsCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("authors1", comment: ""),
+                NSLocalizedString("authors234", comment: ""),
+                NSLocalizedString("authors567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format followers count with localized and pluralized suffix.
+    ///
+    /// 1 -> "1 follower", 5 -> "5 followers", 1000 -> "1K followers"
+    static func longFollowersCount(_ count: Int) -> String {
+        if count >= 1000 {
+            let thousands = Float(count) / 1000.0
+            let fractionalPart = thousands.truncatingRemainder(dividingBy: 1)
+
+            if fractionalPart >= 0.1 {
+                return "\(String(format: "%.1f", thousands))K \(NSLocalizedString("followers567890", comment: ""))"
+            } else {
+                return "\(Int(thousands))K \(NSLocalizedString("followers567890", comment: ""))"
+            }
+        } else {
+            let pluralizedCountString = StringHelper.pluralize(
+                number: count,
+                forms: [
+                    NSLocalizedString("followers1", comment: ""),
+                    NSLocalizedString("followers234", comment: ""),
+                    NSLocalizedString("followers567890", comment: "")
+                ]
+            )
+            return "\(count) \(pluralizedCountString)"
+        }
     }
 
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"

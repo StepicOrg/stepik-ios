@@ -335,6 +335,12 @@ HomePlaceholderErrorPopular = "Looks like we failed loading popular courses. <b>
 courses1 = "course";
 courses234 = "courses";
 courses567890 = "courses";
+followers1 = "follower";
+followers234 = "followers";
+followers567890 = "followers";
+authors1 = "author";
+authors234 = "authors";
+authors567890 = "authors";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 TagPlaceholderError = "Error while loading courses. <b>Press</b> to try again";
@@ -569,6 +575,7 @@ PlaceholderEmptyNotificationsButton = "Go to Catalog";
 PlaceholderEmptySearchText = "There are no courses";
 PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
+LoadCatalogBlocks = "Load catalog";
 
 /* Settings */
 SettingsTitle = "Settings";
@@ -847,6 +854,8 @@ DownloadARQuickLookTitle = "Downloading AR-object";
 DownloadARQuickLookAlertFailedMessage = "Couldn't download AR-object. Please try again later.";
 StepARQuickLookUnsupportedAlertTitle = "AR Quick Look Not Supported";
 StepARQuickLookUnsupportedAlertMessage = "Your device is not supported by viewing the content in the augmented reality, the minimum requirement iOS 12.";
+StepDisabledTitle = "You can't see the quiz yet";
+StepDisabledMessage = "Write to the course authors so that they pay attention to the settings.\nAccess may be restored after some time.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
@@ -1002,6 +1011,10 @@ CourseListFilterRowWithCertificateTitle = "With Certificate";
 CourseListFilterRowIsFreeTitle = "Free";
 CourseListFilterRowShowResultTitle = "Show Result";
 CourseListFilterCourseLanguageAnyTitle = "Any";
+
+/* Similar Course Lists */
+SimilarCourseListHeaderTitle = "Similar themes";
+SimilarCourseListAuthorsHeaderTitle = "Courses authors";
 
 /* New profile */
 NewProfileRatingReputation = "Reputation %@";

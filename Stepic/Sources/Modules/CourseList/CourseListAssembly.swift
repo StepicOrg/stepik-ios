@@ -55,7 +55,8 @@ class CourseListAssembly: Assembly {
             ),
             reviewSummariesNetworkService: CourseReviewSummariesNetworkService(
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
-            )
+            ),
+            courseListsPersistenceService: CourseListsPersistenceService()
         )
 
         let dataBackUpdateService = DataBackUpdateService(
