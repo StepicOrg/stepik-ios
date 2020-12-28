@@ -180,8 +180,15 @@ enum CourseInfoTabSyllabus {
 
     /// Present alert when video/image download failed
     enum FailedDownloadAlertPresentation {
+        enum FailReason {
+            case other
+            case noSpaceLeftOnDevice
+        }
+
         struct Response {
             let error: Error
+            var reason: FailReason = .other
+            var forcePresentation: Bool = false
         }
 
         struct ViewModel {

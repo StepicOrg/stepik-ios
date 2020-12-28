@@ -225,17 +225,28 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     func presentFailedDownloadAlert(
         response: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.Response
     ) {
-        guard self.shouldPresentFailedAlert else {
+        guard self.shouldPresentFailedAlert || response.forcePresentation else {
             return
         }
 
         self.lastDateFailedAlertShown = Date()
-        self.viewController?.displayFailedDownloadAlert(
-            viewModel: .init(
-                title: NSLocalizedString("Error", comment: ""),
-                message: NSLocalizedString("CourseInfoTabSyllabusFailedDownloadAlertMessage", comment: "")
+
+        switch response.reason {
+        case .other:
+            self.viewController?.displayFailedDownloadAlert(
+                viewModel: .init(
+                    title: NSLocalizedString("CourseInfoTabSyllabusFailedDownloadAlertTitle", comment: ""),
+                    message: NSLocalizedString("CourseInfoTabSyllabusFailedDownloadAlertMessage", comment: "")
+                )
             )
-        )
+        case .noSpaceLeftOnDevice:
+            self.viewController?.displayFailedDownloadAlert(
+                viewModel: .init(
+                    title: NSLocalizedString("CourseInfoTabSyllabusFailedDownloadAlertTitle", comment: ""),
+                    message: NSLocalizedString("CourseInfoTabSyllabusFailedDownloadENOSPCAlertMessage", comment: "")
+                )
+            )
+        }
     }
 
     // MARK: - Private API
