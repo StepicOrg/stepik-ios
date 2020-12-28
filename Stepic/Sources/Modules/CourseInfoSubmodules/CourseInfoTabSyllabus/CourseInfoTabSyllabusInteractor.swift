@@ -706,6 +706,16 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
 
         if case VideoDownloadingService.Error.videoDownloadingStopped = error {
             report(error, reason: .cancelled)
+        } else if case DownloaderError.clientSide(let nsError) = error {
+            // No space left on device
+            if nsError.domain == NSPOSIXErrorDomain && nsError.code == ENOSPC {
+                report(nsError, reason: .noSpaceLeftOnDevice)
+                self.presenter.presentFailedDownloadAlert(
+                    response: .init(error: nsError, reason: .noSpaceLeftOnDevice, forcePresentation: true)
+                )
+            } else {
+                self.presenter.presentFailedDownloadAlert(response: .init(error: error))
+            }
         } else {
             let nsError = error as NSError
             if nsError.domain == NSPOSIXErrorDomain && nsError.code == 100 {
