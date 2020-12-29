@@ -52,6 +52,17 @@ final class TableQuizSelectColumnsViewController: UIViewController {
         self.setupView()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { _ in
+                self.additionalSafeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets ?? .zero
+            },
+            completion: nil
+        )
+    }
+
     private func setupView() {
         self.tableQuizSelectColumnsView?.prompt = self.isMultipleChoice
             ? NSLocalizedString("MultipleChoiceTableQuizPrompt", comment: "")
