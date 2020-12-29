@@ -151,7 +151,8 @@ extension TableQuizSelectColumnsView: ProgrammaticallyInitializableViewProtocol 
 
     func makeConstraints() {
         self.contentStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             make.bottom.lessThanOrEqualToSuperview()
         }
     }
