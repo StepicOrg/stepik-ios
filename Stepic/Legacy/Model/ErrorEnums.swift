@@ -64,11 +64,6 @@ enum ParsingError: Error {
     case badData
 }
 
-//Is used for handling unwrapping errors. Mostly useful in promises
-enum UnwrappingError: Error {
-    case optionalError
-}
-
 //Is used for handling
 enum DatabaseError: Error {
     case fetchFailed

@@ -26,30 +26,37 @@ final class PersonalDeadlinesTimeService: PersonalDeadlinesTimeServiceProtocol {
             for section in course.sections {
                 sectionCounters += [countTimeToComplete(section: section)]
             }
-            when(fulfilled: sectionCounters).done { [weak self] timeTuples in
-                guard let strongSelf = self else {
-                    seal.reject(UnwrappingError.optionalError)
-                    return
-                }
+
+            when(fulfilled: sectionCounters).done { timeTuples in
                 var timeForSection: [Int: TimeInterval] = [:]
                 for timeTuple in timeTuples {
-                    timeForSection[timeTuple.0] = timeTuple.1 * strongSelf.sectionTimeMultiplier
+                    timeForSection[timeTuple.0] = timeTuple.1 * self.sectionTimeMultiplier
                 }
+
                 var sectionDeadlines: [SectionDeadline] = []
                 var previousDeadline = Date()
-                for sectionId in course.sectionsArray {
-                    guard let secondsToCompleteSection = timeForSection[sectionId] else {
+
+                for sectionID in course.sectionsArray {
+                    guard let secondsToCompleteSection = timeForSection[sectionID] else {
                         seal.reject(DeadlineCountError.noSectionInfo)
                         return
                     }
-                    let daysToCompleteSection = Int(ceil(secondsToCompleteSection / Double(mode.getModeInfo().dailyLoadSeconds)))
 
-                    sectionDeadlines += [SectionDeadline(section: sectionId, deadlineDate: strongSelf.getDeadlineDateForSection(since: previousDeadline, daysToComplete: daysToCompleteSection))]
+                    let daysToCompleteSection = Int(
+                        ceil(secondsToCompleteSection / Double(mode.getModeInfo().dailyLoadSeconds))
+                    )
+
+                    let deadlineDate = self.getDeadlineDateForSection(
+                        since: previousDeadline,
+                        daysToComplete: daysToCompleteSection
+                    )
+                    sectionDeadlines.append(SectionDeadline(section: sectionID, deadlineDate: deadlineDate))
+
                     previousDeadline = sectionDeadlines.last?.deadlineDate ?? Date()
                 }
                 seal.fulfill(sectionDeadlines)
             }.catch { error in
-                print("\(#file) \(#function) \(error)")
+                seal.reject(error)
             }
         }
     }

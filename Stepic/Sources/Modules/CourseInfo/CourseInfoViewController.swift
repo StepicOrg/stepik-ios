@@ -464,14 +464,13 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettingsPresentation.ViewModel) {
-        if viewModel.action == .create {
-            // Show popup
+        switch viewModel.action {
+        case .create:
             let presentr: Presentr = {
                 let presenter = Presentr(presentationType: .dynamic(center: .center))
                 presenter.roundCorners = true
                 return presenter
             }()
-
             let viewController = PersonalDeadlinesModeSelectionLegacyAssembly(
                 course: viewModel.course,
                 updateCompletion: { [weak self] in
@@ -483,8 +482,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                 viewController: viewController,
                 animated: true
             )
-        } else {
-            // Show action sheet
+        case .edit:
             let viewController = PersonalDeadlineEditDeleteAlertLegacyAssembly(
                 course: viewModel.course,
                 presentingViewController: self,
