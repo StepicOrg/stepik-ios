@@ -84,7 +84,7 @@ final class StoriesPresenter: StoriesPresenterProtocol {
             isPublished: isPublished,
             language: ContentLanguageService().globalContentLanguage,
             maxVersion: StepikApplicationsInfo.Versions.stories ?? 0
-        ).done { [weak self] stories, _ in
+        ).done { [weak self] stories in
             guard let strongSelf = self else {
                 return
             }
