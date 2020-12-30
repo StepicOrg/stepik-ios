@@ -104,6 +104,49 @@ final class RetrieveRequestMaker {
         }
     }
 
+    func requestWithCollectAllPages<T: JSONSerializable>(
+        requestEndpoint: String,
+        paramName: String,
+        params: Parameters,
+        withManager manager: Alamofire.Session
+    ) -> Promise<[T]> {
+        var allObjects = [T]()
+
+        func load(page: Int) -> Promise<Bool> {
+            Promise { seal in
+                firstly { () -> Promise<([T], Meta)> in
+                    var currentPageParams = params
+                    currentPageParams["page"] = page
+
+                    return self.request(
+                        requestEndpoint: requestEndpoint,
+                        paramName: paramName,
+                        params: currentPageParams,
+                        updatingObjects: [],
+                        withManager: manager
+                    )
+                }.done { objects, meta in
+                    allObjects.append(contentsOf: objects)
+                    seal.fulfill(meta.hasNext)
+                }.catch { error in
+                    seal.reject(error)
+                }
+            }
+        }
+
+        func collect(page: Int) -> Promise<[T]> {
+            load(page: page).then { hasNext -> Promise<[T]> in
+                if hasNext {
+                    return collect(page: page + 1)
+                } else {
+                    return .value(allObjects)
+                }
+            }
+        }
+
+        return collect(page: 1)
+    }
+
     func requestWithFetching<T: IDFetchable>(
         requestEndpoint: String,
         paramName: String,
