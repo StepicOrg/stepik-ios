@@ -19,7 +19,7 @@ extension TableQuizSelectColumnsColumnView {
 
         let contentViewMinHeight: CGFloat = 44
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.clear
     }
 }
 
