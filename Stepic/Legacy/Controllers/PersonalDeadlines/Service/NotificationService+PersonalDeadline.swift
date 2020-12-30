@@ -12,8 +12,24 @@ extension NotificationsService {
     private static let hoursBeforePersonalDeadlineNotification = [12, 36]
 
     func updatePersonalDeadlineNotifications(for course: Course) {
+        let contentProviders = self.getLocalNotificationContentProviders(course: course)
+        for contentProvider in contentProviders {
+            self.scheduleLocalNotification(with: contentProvider, removeIdentical: true)
+        }
+    }
+
+    func removePersonalDeadlineNotifications(for course: Course) {
+        let identifiers = self.getLocalNotificationContentProviders(course: course).map(\.identifier)
+        self.removeLocalNotifications(withIdentifiers: identifiers)
+    }
+
+    private func getLocalNotificationContentProviders(
+        course: Course
+    ) -> [PersonalDeadlineLocalNotificationContentProvider] {
+        var result = [PersonalDeadlineLocalNotificationContentProvider]()
+
         guard let deadlines = course.sectionDeadlines else {
-            return
+            return []
         }
 
         for deadline in deadlines {
@@ -21,7 +37,7 @@ extension NotificationsService {
                 continue
             }
 
-            NotificationsService.hoursBeforePersonalDeadlineNotification.forEach { hoursBeforeDeadline in
+            Self.hoursBeforePersonalDeadlineNotification.forEach { hoursBeforeDeadline in
                 let numberOfSeconds = Double(hoursBeforeDeadline) * 60.0 * 60.0
                 let fireDate = deadline.deadlineDate.addingTimeInterval(-numberOfSeconds)
                 let contentProvider = PersonalDeadlineLocalNotificationContentProvider(
@@ -31,8 +47,10 @@ extension NotificationsService {
                     hoursBeforeDeadline: hoursBeforeDeadline
                 )
 
-                self.scheduleLocalNotification(with: contentProvider, removeIdentical: true)
+                result.append(contentProvider)
             }
         }
+
+        return result
     }
 }
