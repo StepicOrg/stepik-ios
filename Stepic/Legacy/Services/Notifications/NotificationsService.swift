@@ -113,6 +113,7 @@ extension NotificationsService {
         self.reportReceivedNotificationWithType(self.extractNotificationType(from: userInfo))
 
         if #available(iOS 10.0, *) {
+            self.routeLocalNotification(with: userInfo)
         } else if self.isInForeground {
             guard let title = userInfo?[LocalNotificationsService.PayloadKey.title.rawValue] as? String,
                   let body = userInfo?[LocalNotificationsService.PayloadKey.body.rawValue] as? String else {
