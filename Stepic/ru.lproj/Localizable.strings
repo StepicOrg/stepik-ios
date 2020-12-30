@@ -750,6 +750,8 @@ PersonalDeadlineNotificationBody = "Дедлайн для модуля %@ нас
 Save = "Сохранить";
 PersonalDeadline = "Персональный дедлайн";
 DeadlineModeQuestion = "Сколько времени вы готовы тратить на изучение этого курса?";
+PersonalDeadlinesModeCreationSuccessMessage = "Персональное расписание успешно составлено";
+PersonalDeadlinesModeCreationFailureMessage = "Не удалось составить персональное расписание";
 
 /* Course info */
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
