@@ -39,11 +39,7 @@ final class TableQuizSelectColumnsView: UIView {
         return stackView
     }()
 
-    private lazy var scrollableContentStackView: ScrollableStackView = {
-        let stackView = ScrollableStackView(orientation: .vertical)
-        stackView.contentInsetAdjustmentBehavior = .never
-        return stackView
-    }()
+    private lazy var scrollableContentStackView = ScrollableStackView(orientation: .vertical)
 
     private var columns = [TableQuiz.Column]()
     private var selectedColumnsIDs = Set<UniqueIdentifierType>()
