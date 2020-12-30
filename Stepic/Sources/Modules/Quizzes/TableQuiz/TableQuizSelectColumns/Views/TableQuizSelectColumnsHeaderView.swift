@@ -16,7 +16,7 @@ extension TableQuizSelectColumnsHeaderView {
         let contentStackViewSpacing: CGFloat = 16
         let contentStackViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-        let backgroundColor = UIColor.stepikBackground
+        let backgroundColor = UIColor.clear
     }
 }
 
