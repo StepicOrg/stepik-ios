@@ -111,6 +111,17 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         }
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { _ in
+                self.updateContentInsets()
+            },
+            completion: nil
+        )
+    }
+
     // MARK: Private API
 
     private func setup() {
