@@ -27,7 +27,8 @@ final class RemoteConfig {
         Key.newLessonAvailable.rawValue: NSNumber(value: true),
         Key.darkModeAvailable.rawValue: NSNumber(value: true),
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
-        Key.isDisabledStepsSupported.rawValue: NSNumber(value: false)
+        Key.isDisabledStepsSupported.rawValue: NSNumber(value: false),
+        Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"])
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -105,20 +106,30 @@ final class RemoteConfig {
             .boolValue
     }
 
+    var searchResultsQueryParams: JSONDictionary {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: Key.searchResultsQueryParams.rawValue
+        ).jsonValue, let params = configValue as? JSONDictionary else {
+            return self.appDefaults[Key.searchResultsQueryParams.rawValue] as? JSONDictionary ?? [:]
+        }
+
+        return params
+    }
+
     init() {
-        self.loadDefaultValues()
-        self.fetchCloudValues()
+        self.setConfigDefaults()
+        self.fetchRemoteConfigData()
     }
 
     func setup() {}
 
     // MARK: Private API
 
-    private func loadDefaultValues() {
+    private func setConfigDefaults() {
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(self.appDefaults)
     }
 
-    private func fetchCloudValues() {
+    private func fetchRemoteConfigData() {
         #if DEBUG
             self.activateDebugMode()
         #endif
@@ -165,5 +176,6 @@ final class RemoteConfig {
         case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
         case isDisabledStepsSupported = "is_disabled_steps_supported"
+        case searchResultsQueryParams = "search_query_params_ios"
     }
 }
