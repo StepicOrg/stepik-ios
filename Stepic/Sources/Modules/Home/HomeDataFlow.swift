@@ -78,12 +78,10 @@ enum Home {
 
     /// Update stories visibility
     enum StoriesVisibilityUpdate {
-        @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
         struct Response {
             let isHidden: Bool
         }
 
-        @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
         struct ViewModel {
             let isHidden: Bool
         }
