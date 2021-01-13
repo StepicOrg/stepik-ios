@@ -88,6 +88,16 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     }
 }
 
+extension HomeInteractor: StoriesOutputProtocol {
+    func hideStories() {
+        self.homePresenter?.presentStoriesBlock(response: .init(isHidden: true))
+    }
+
+    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
+        self.homePresenter?.presentStatusBarStyle(response: .init(statusBarStyle: statusBarStyle))
+    }
+}
+
 extension HomeInteractor: ContinueCourseOutputProtocol {
     func hideContinueCourse() {
         self.homePresenter?.presentCourseListState(

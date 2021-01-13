@@ -5,6 +5,8 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
     func displayContent(viewModel: Home.ContentLoad.ViewModel)
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel)
+    func displayStoriesBlock(viewModel: Home.StoriesVisibilityUpdate.ViewModel)
+    func displayStatusBarStyle(viewModel: Home.StatusBarStyleUpdate.ViewModel)
 }
 
 final class HomeViewController: BaseExploreViewController {
@@ -14,6 +16,7 @@ final class HomeViewController: BaseExploreViewController {
     }
 
     fileprivate static let submodulesOrder: [Home.Submodule] = [
+        .stories,
         .streakActivity,
         .continueCourse,
         .enrolledCourses,
@@ -24,6 +27,7 @@ final class HomeViewController: BaseExploreViewController {
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag: Bool = false
 
+    private var currentStoriesSubmoduleState = StoriesState.shown
     private var currentEnrolledCourseListState: EnrolledCourseListState?
 
     private lazy var streakView = StreakActivityView()
@@ -73,6 +77,43 @@ final class HomeViewController: BaseExploreViewController {
 
     override func refreshContentAfterLoginAndLogout() {
         self.homeInteractor?.doContentLoad(request: .init())
+    }
+
+    // MARK: - Stories
+
+    private enum StoriesState {
+        case shown
+        case hidden
+    }
+
+    private func refreshStateForStories(state: StoriesState) {
+        defer {
+            self.currentStoriesSubmoduleState = state
+        }
+
+        if let submodule = self.getSubmodule(type: Home.Submodule.stories) {
+            self.removeSubmodule(submodule)
+        }
+
+        guard case .shown = state else {
+            return
+        }
+
+        let storiesAssembly = StoriesAssembly(
+            output: self.homeInteractor as? StoriesOutputProtocol
+        )
+        let storiesViewController = storiesAssembly.makeModule()
+        let storiesContainerView = ExploreStoriesContainerView(
+            contentView: storiesViewController.view
+        )
+        self.registerSubmodule(
+            .init(
+                viewController: storiesViewController,
+                view: storiesContainerView,
+                isLanguageDependent: true,
+                type: Home.Submodule.stories
+            )
+        )
     }
 
     // MARK: - Streak activity
@@ -479,16 +520,30 @@ extension HomeViewController: HomeViewControllerProtocol {
                 return
             }
 
-            strongSelf.lastContentLanguage = viewModel.contentLanguage
-            strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
-
+            let shouldDisplayStories = strongSelf.currentStoriesSubmoduleState == .shown
+                || (strongSelf.currentStoriesSubmoduleState == .hidden
+                        && strongSelf.lastContentLanguage != viewModel.contentLanguage)
             let shouldDisplayContinueCourse = viewModel.isAuthorized
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
 
+            strongSelf.lastContentLanguage = viewModel.contentLanguage
+            strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
+
+            strongSelf.refreshStateForStories(state: shouldDisplayStories ? .shown : .hidden)
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
+        }
+    }
+
+    func displayStoriesBlock(viewModel: Home.StoriesVisibilityUpdate.ViewModel) {
+        self.refreshStateForStories(state: viewModel.isHidden ? .hidden : .shown)
+    }
+
+    func displayStatusBarStyle(viewModel: Home.StatusBarStyleUpdate.ViewModel) {
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
         }
     }
 }

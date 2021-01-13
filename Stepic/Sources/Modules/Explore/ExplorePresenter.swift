@@ -3,9 +3,7 @@ import UIKit
 protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
     func presentContent(response: Explore.ContentLoad.Response)
     func presentLanguageSwitchBlock(response: Explore.LanguageSwitchAvailabilityCheck.Response)
-    func presentStoriesBlock(response: Explore.StoriesVisibilityUpdate.Response)
     func presentCourseListState(response: Explore.CourseListStateUpdate.Response)
-    func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response)
     func presentCourseListFilter(response: Explore.CourseListFilterPresentation.Response)
     func presentSearchResultsCourseListFilters(response: Explore.SearchResultsCourseListFiltersUpdate.Response)
 }
@@ -25,12 +23,6 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
         )
     }
 
-    func presentStoriesBlock(response: Explore.StoriesVisibilityUpdate.Response) {
-        self.exploreViewController?.displayStoriesBlock(
-            viewModel: .init(isHidden: response.isHidden)
-        )
-    }
-
     func presentCourseListState(response: Explore.CourseListStateUpdate.Response) {
         self.exploreViewController?.displayModuleErrorState(
             viewModel: .init(
@@ -38,10 +30,6 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
                 result: response.result
             )
         )
-    }
-
-    func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response) {
-        self.exploreViewController?.displayStatusBarStyle(viewModel: .init(statusBarStyle: response.statusBarStyle))
     }
 
     func presentCourseListFilter(response: Explore.CourseListFilterPresentation.Response) {

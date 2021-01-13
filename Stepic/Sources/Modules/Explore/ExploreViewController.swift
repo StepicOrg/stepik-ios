@@ -4,9 +4,7 @@ import UIKit
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayContent(viewModel: Explore.ContentLoad.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel)
-    func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel)
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel)
-    func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel)
     func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel)
     func displayCourseListFilter(viewModel: Explore.CourseListFilterPresentation.ViewModel)
     func displaySearchResultsCourseListFilters(viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel)
@@ -19,7 +17,6 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     static let submodulesOrder: [Explore.Submodule] = [
-        .stories,
         .languageSwitch,
         .catalogBlocks,
         .visitedCourses
@@ -29,7 +26,6 @@ final class ExploreViewController: BaseExploreViewController {
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var currentContentLanguage: ContentLanguage?
-    private var currentStoriesSubmoduleState = StoriesState.shown
     // SearchResults
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
@@ -125,13 +121,6 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
-        // Stories
-        let shouldRefreshStories = self.currentStoriesSubmoduleState == .shown
-            || (self.currentStoriesSubmoduleState == .hidden && self.currentContentLanguage != contentLanguage)
-        if shouldRefreshStories {
-            self.refreshStateForStories(state: .shown)
-        }
-
         // Catalog blocks
         let catalogBlocksAssembly = CatalogBlocksAssembly(
             contentLanguage: contentLanguage,
@@ -148,40 +137,6 @@ final class ExploreViewController: BaseExploreViewController {
         )
 
         self.currentContentLanguage = contentLanguage
-    }
-
-    // MARK: Stories
-
-    private enum StoriesState {
-        case shown
-        case hidden
-    }
-
-    private func refreshStateForStories(state: StoriesState) {
-        switch state {
-        case .shown:
-            let storiesAssembly = StoriesAssembly(
-                output: self.exploreInteractor as? StoriesOutputProtocol
-            )
-            let storiesViewController = storiesAssembly.makeModule()
-            let storiesContainerView = ExploreStoriesContainerView(
-                contentView: storiesViewController.view
-            )
-            self.registerSubmodule(
-                .init(
-                    viewController: storiesViewController,
-                    view: storiesContainerView,
-                    isLanguageDependent: true,
-                    type: Explore.Submodule.stories
-                )
-            )
-        case .hidden:
-            if let submodule = self.getSubmodule(type: Explore.Submodule.stories) {
-                self.removeSubmodule(submodule)
-            }
-        }
-
-        self.currentStoriesSubmoduleState = state
     }
 
     // MARK: - Visited courses submodule
@@ -330,10 +285,6 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         )
     }
 
-    func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel) {
-        self.refreshStateForStories(state: viewModel.isHidden ? .hidden : .shown)
-    }
-
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
         case .visitedCourses:
@@ -344,12 +295,6 @@ extension ExploreViewController: ExploreViewControllerProtocol {
             }
         default:
             break
-        }
-    }
-
-    func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel) {
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
         }
     }
 

@@ -98,16 +98,6 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
     }
 }
 
-extension ExploreInteractor: StoriesOutputProtocol {
-    func hideStories() {
-        self.explorePresenter?.presentStoriesBlock(response: .init(isHidden: true))
-    }
-
-    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
-        self.explorePresenter?.presentStatusBarStyle(response: .init(statusBarStyle: statusBarStyle))
-    }
-}
-
 extension ExploreInteractor: CourseListFilterOutputProtocol {
     func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
         self.doSearchResultsCourseListFiltersUpdate(request: .init(filters: filters))
