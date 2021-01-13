@@ -52,12 +52,30 @@ final class TableQuizSelectColumnsViewController: UIViewController {
         self.setupView()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { _ in
+                self.updateAdditionalSafeAreaInsets()
+            },
+            completion: nil
+        )
+    }
+
     private func setupView() {
         self.tableQuizSelectColumnsView?.prompt = self.isMultipleChoice
             ? NSLocalizedString("MultipleChoiceTableQuizPrompt", comment: "")
             : NSLocalizedString("SingleChoiceTableQuizPrompt", comment: "")
         self.tableQuizSelectColumnsView?.title = self.row.text
         self.tableQuizSelectColumnsView?.set(columns: self.columns, selectedColumnsIDs: self.selectedColumnsIDs)
+
+        self.updateAdditionalSafeAreaInsets()
+        self.panModalSetNeedsLayoutUpdate()
+    }
+
+    private func updateAdditionalSafeAreaInsets() {
+        self.additionalSafeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets ?? .zero
     }
 }
 
@@ -92,7 +110,7 @@ extension TableQuizSelectColumnsViewController: TableQuizSelectColumnsViewDelega
 }
 
 extension TableQuizSelectColumnsViewController: PanModalPresentable {
-    var panScrollable: UIScrollView? { nil }
+    var panScrollable: UIScrollView? { self.tableQuizSelectColumnsView?.panScrollable }
 
     var shortFormHeight: PanModalHeight {
         self.isShortFormEnabled

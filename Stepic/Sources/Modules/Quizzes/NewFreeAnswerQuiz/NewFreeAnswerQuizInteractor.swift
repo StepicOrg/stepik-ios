@@ -13,8 +13,6 @@ final class NewFreeAnswerQuizInteractor: NewFreeAnswerQuizInteractorProtocol {
     private var currentText: String?
     private var currentStatus: QuizStatus?
 
-    private var isQuizTitleVisible = true
-
     init(presenter: NewFreeAnswerQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -29,8 +27,7 @@ final class NewFreeAnswerQuizInteractor: NewFreeAnswerQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 text: self.currentText,
-                status: self.currentStatus,
-                isQuizTitleVisible: self.isQuizTitleVisible
+                status: self.currentStatus
             )
         )
     }
@@ -60,9 +57,5 @@ extension NewFreeAnswerQuizInteractor: QuizInputProtocol {
     func update(status: QuizStatus?) {
         self.currentStatus = status
         self.presentNewData()
-    }
-
-    func update(quizTitleVisibility isVisible: Bool) {
-        self.isQuizTitleVisible = isVisible
     }
 }

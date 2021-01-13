@@ -475,7 +475,9 @@ CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ points";
 CourseInfoTabSyllabusUnitDemoAccessTitle = "Demo access";
+CourseInfoTabSyllabusFailedDownloadAlertTitle = "Download Error";
 CourseInfoTabSyllabusFailedDownloadAlertMessage = "Sorry, but something went wrong, please retry the download.";
+CourseInfoTabSyllabusFailedDownloadENOSPCAlertMessage = "You do not have enough storage to download. Free up space and try again later.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Delete course";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Are you sure you want to delete downloaded course?";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Delete unit";
@@ -734,9 +736,9 @@ AchievementsShareText = "I've unlocked achievement «%@» at Stepik.org. Join an
 
 /* Personal deadlines */
 CourseInfo = "Course Info";
-EditSchedule = "Edit schedule";
-DeleteSchedule = "Delete schedule";
-CreateSchedule = "Create schedule";
+EditSchedule = "Edit Schedule";
+DeleteSchedule = "Delete Schedule";
+CreateSchedule = "Create Schedule";
 PersonalDeadlineWidgetYesButtonTitle = "Create";
 PersonalDeadlineWidgetNoButtonTitle = "No, thanks";
 HrsPerWeek = "hrs/week";
@@ -745,8 +747,10 @@ StandardDeadlineMode = "Standard";
 ExtremeDeadlineMode = "Extreme";
 PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't miss it!";
 Save = "Save";
-PersonalDeadline = "Personal deadline";
+PersonalDeadline = "Personal Deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
+PersonalDeadlinesModeCreationSuccessMessage = "Personal Schedule Created Successfully";
+PersonalDeadlinesModeCreationFailureMessage = "Failed to Create a Personal Schedule";
 
 /* Course info */
 CourseMeetsRecommendations = "Meets the recommendations of Stepik";

@@ -141,8 +141,8 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                 return
             }
             storageRecordsAPI.delete(id: record.id).done { _ in
+                self.notificationsService.removePersonalDeadlineNotifications(for: course)
                 self.localStorageManager.deleteRecord(for: course)
-                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                 seal.fulfill(())
             }.catch {
                 error in

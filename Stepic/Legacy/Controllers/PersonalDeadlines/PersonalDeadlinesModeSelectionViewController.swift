@@ -115,7 +115,9 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
         SVProgressHUD.show()
 
         PersonalDeadlinesService().countDeadlines(for: course, mode: mode).done {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.showSuccess(
+                withStatus: NSLocalizedString("PersonalDeadlinesModeCreationSuccessMessage", comment: "")
+            )
             self.onDeadlineSelected?()
 
             NotificationsRegistrationService(
@@ -124,9 +126,10 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
             ).registerForRemoteNotifications()
 
             self.dismiss(animated: true, completion: nil)
-        }.catch { error in
-            SVProgressHUD.showError(withStatus: "")
-            print("\(#file) \(#function) \(error)")
+        }.catch { _ in
+            SVProgressHUD.showError(
+                withStatus: NSLocalizedString("PersonalDeadlinesModeCreationFailureMessage", comment: "")
+            )
         }
     }
 

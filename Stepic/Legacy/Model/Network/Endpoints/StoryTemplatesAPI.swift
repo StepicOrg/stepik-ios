@@ -16,29 +16,26 @@ final class StoryTemplatesAPI: APIEndpoint {
     func retrieve(
         isPublished: Bool?,
         language: ContentLanguage,
-        maxVersion: Int,
-        page: Int = 1
-    ) -> Promise<([Story], Meta)> {
+        maxVersion: Int
+    ) -> Promise<[Story]> {
         Promise { seal in
             var params: Parameters = [
-                "page": page,
                 "language": language.languageString,
                 "max_version": maxVersion,
                 "platform": "mobile,ios"
             ]
 
             if let isPublished = isPublished {
-                params["is_published"] = isPublished ? "true" : "false"
+                params["is_published"] = String(isPublished)
             }
 
-            self.retrieve.request(
+            self.retrieve.requestWithCollectAllPages(
                 requestEndpoint: self.name,
                 paramName: self.name,
                 params: params,
-                updatingObjects: [],
                 withManager: self.manager
-            ).done { stories, meta in
-                seal.fulfill((stories, meta))
+            ).done { stories in
+                seal.fulfill(stories)
             }.catch { error in
                 seal.reject(error)
             }

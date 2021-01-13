@@ -364,6 +364,7 @@ extension AnalyticsEvent {
         case offline
         case cancelled
         case protocolError = "protocol_error"
+        case noSpaceLeftOnDevice = "no_space_left_on_device"
     }
 
     // MARK: - Discussion -

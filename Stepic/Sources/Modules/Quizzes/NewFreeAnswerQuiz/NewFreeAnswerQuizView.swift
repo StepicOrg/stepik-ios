@@ -25,7 +25,7 @@ extension NewFreeAnswerQuizView {
     }
 }
 
-final class NewFreeAnswerQuizView: UIView {
+final class NewFreeAnswerQuizView: UIView, TitlePresentable {
     let appearance: Appearance
     weak var delegate: NewFreeAnswerQuizViewDelegate?
 
@@ -72,8 +72,12 @@ final class NewFreeAnswerQuizView: UIView {
     private lazy var textFieldContainerView = UIView()
 
     var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabelContainerView.isHidden = newValue?.isEmpty ?? true
         }
     }
 

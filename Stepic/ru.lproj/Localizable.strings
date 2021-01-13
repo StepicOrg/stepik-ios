@@ -477,7 +477,9 @@ CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusUnitDemoAccessTitle = "Демо-доступ";
+CourseInfoTabSyllabusFailedDownloadAlertTitle = "Ошибка загрузки";
 CourseInfoTabSyllabusFailedDownloadAlertMessage = "Не удалось выполнить загрузку, повторите позже.";
+CourseInfoTabSyllabusFailedDownloadENOSPCAlertMessage = "Вы не располагаете достаточным количеством места для загрузки. Освободите место в хранилище и повторите попытку позже.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Удалить курс";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный курс?";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Удалить урок";
@@ -748,6 +750,8 @@ PersonalDeadlineNotificationBody = "Дедлайн для модуля %@ нас
 Save = "Сохранить";
 PersonalDeadline = "Персональный дедлайн";
 DeadlineModeQuestion = "Сколько времени вы готовы тратить на изучение этого курса?";
+PersonalDeadlinesModeCreationSuccessMessage = "Персональное расписание успешно составлено";
+PersonalDeadlinesModeCreationFailureMessage = "Не удалось составить персональное расписание";
 
 /* Course info */
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";

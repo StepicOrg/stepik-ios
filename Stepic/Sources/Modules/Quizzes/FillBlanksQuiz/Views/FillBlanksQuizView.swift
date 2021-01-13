@@ -16,7 +16,7 @@ extension FillBlanksQuizView {
     }
 }
 
-final class FillBlanksQuizView: UIView {
+final class FillBlanksQuizView: UIView, TitlePresentable {
     let appearance: Appearance
 
     private lazy var titleLabel: UILabel = {
@@ -49,15 +49,27 @@ final class FillBlanksQuizView: UIView {
         return collectionView
     }()
 
+    var title: String? {
+        get {
+            self.titleLabel.text
+        }
+        set {
+            self.titleLabel.text = newValue
+            self.titleLabel.isHidden = newValue?.isEmpty ?? true
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
+        let titleLabelHeight = self.titleLabel.isHidden
+            ? 0
+            : self.titleLabel.intrinsicContentSize.height
         let collectionViewHeight = max(
             self.appearance.collectionViewMinHeight,
             self.collectionView.collectionViewLayout.collectionViewContentSize.height
         )
-        return CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: self.titleLabel.intrinsicContentSize.height + collectionViewHeight
-        )
+        let height = titleLabelHeight + collectionViewHeight
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
     init(

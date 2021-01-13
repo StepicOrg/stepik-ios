@@ -1,7 +1,7 @@
 import Foundation
 
 struct NewSortingQuizViewModel {
-    let title: String?
+    let title: String
     let options: [NewSortingQuiz.Option]
     let finalState: State?
 

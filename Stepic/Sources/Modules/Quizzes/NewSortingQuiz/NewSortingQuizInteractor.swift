@@ -13,8 +13,6 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
     private var currentDataset: SortingDataset?
     private var currentOptions: [NewSortingQuiz.Option]?
 
-    private var isQuizTitleVisible = true
-
     init(presenter: NewSortingQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -32,8 +30,7 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 options: options,
-                status: self.currentStatus,
-                isQuizTitleVisible: self.isQuizTitleVisible
+                status: self.currentStatus
             )
         )
     }
@@ -84,9 +81,5 @@ extension NewSortingQuizInteractor: QuizInputProtocol {
 
         self.currentDataset = dataset
         self.currentOptions = dataset.options.enumerated().map { .init(id: $0, text: $1) }
-    }
-
-    func update(quizTitleVisibility isVisible: Bool) {
-        self.isQuizTitleVisible = isVisible
     }
 }

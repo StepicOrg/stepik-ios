@@ -302,3 +302,13 @@ extension ScrollableStackView: ProgrammaticallyInitializableViewProtocol {
         }
     }
 }
+
+// MARK: - PanModalScrollable -
+
+protocol PanModalScrollable: AnyObject {
+    var panScrollable: UIScrollView? { get }
+}
+
+extension ScrollableStackView: PanModalScrollable {
+    var panScrollable: UIScrollView? { self.scrollView }
+}

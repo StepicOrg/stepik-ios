@@ -39,12 +39,7 @@ final class TableQuizSelectColumnsView: UIView {
         return stackView
     }()
 
-    private lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    private lazy var scrollableContentStackView = ScrollableStackView(orientation: .vertical)
 
     private var columns = [TableQuiz.Column]()
     private var selectedColumnsIDs = Set<UniqueIdentifierType>()
@@ -59,12 +54,6 @@ final class TableQuizSelectColumnsView: UIView {
         didSet {
             self.headerView.title = self.title
         }
-    }
-
-    override var intrinsicContentSize: CGSize {
-        let contentStackViewIntrinsicContentSize = self.contentStackView
-            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        return CGSize(width: UIView.noIntrinsicMetric, height: contentStackViewIntrinsicContentSize.height)
     }
 
     init(
@@ -82,11 +71,6 @@ final class TableQuizSelectColumnsView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.invalidateIntrinsicContentSize()
     }
 
     func set(columns: [TableQuiz.Column], selectedColumnsIDs: Set<UniqueIdentifierType>) {
@@ -143,16 +127,20 @@ extension TableQuizSelectColumnsView: ProgrammaticallyInitializableViewProtocol 
     }
 
     func addSubviews() {
-        self.addSubview(self.contentStackView)
+        self.addSubview(self.scrollableContentStackView)
 
-        self.contentStackView.addArrangedSubview(self.headerView)
-        self.contentStackView.addArrangedSubview(self.columnsStackView)
+        self.scrollableContentStackView.addArrangedView(self.headerView)
+        self.scrollableContentStackView.addArrangedView(self.columnsStackView)
     }
 
     func makeConstraints() {
-        self.contentStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.lessThanOrEqualToSuperview()
+        self.scrollableContentStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
         }
     }
+}
+
+extension TableQuizSelectColumnsView: PanModalScrollable {
+    var panScrollable: UIScrollView? { self.scrollableContentStackView.panScrollable }
 }
