@@ -10,7 +10,7 @@ def shared_pods
     pod 'Alamofire', '5.4.1'
     pod 'Atributika', '4.9.10'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.10.0'
+    pod 'SDWebImage', '5.10.2'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'DeviceKit', '4.2.1'
     pod 'PromiseKit', '6.13.1'
