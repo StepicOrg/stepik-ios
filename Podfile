@@ -65,7 +65,7 @@ def all_pods
     pod 'Charts', '3.6.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.7.1'
-    pod 'Nuke', '9.2.0'
+    pod 'Nuke', '9.2.3'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
     pod 'SwiftDate', '6.3.1'
