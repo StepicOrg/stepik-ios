@@ -30,17 +30,23 @@ struct UserCourseEntryView: View {
 
             HStack {
                 Spacer()
-                Text("\(entry.progress, specifier: "%.2f")%")
+                Text("\(formattedProgress())")
                     .font(.caption2)
                     .fontWeight(.semibold)
             }.padding(.bottom, 2)
 
-            ProgressBar(value: entry.progress)
+            ProgressBar(value: entry.progress / 100.0)
                 .frame(height: 4)
         }
         .padding()
         .foregroundColor(Color.white)
         .background(Color.backgroundColor)
+    }
+
+    private func formattedProgress() -> String {
+        let hasDecimals = entry.progress.truncatingRemainder(dividingBy: 1) != 0
+        let stringValue = hasDecimals ? String(format: "%.2f", entry.progress) : "\(Int(entry.progress))"
+        return "\(stringValue)%"
     }
 }
 

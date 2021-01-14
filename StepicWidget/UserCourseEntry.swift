@@ -12,7 +12,7 @@ extension UserCourseEntry {
     static let snapshotEntry = UserCourseEntry(
         title: "Creating a course on Stepik",
         subtitle: "by Stepik Team",
-        progress: 0.76,
+        progress: 76.0,
         thumbnailData: nil
     )
 }
