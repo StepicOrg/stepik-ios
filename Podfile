@@ -7,7 +7,7 @@ use_frameworks!
 project 'Stepic', 'Production Debug' => :debug, 'Production Release' => :release, 'Release Debug' => :debug, 'Release Release' => :release, 'Develop Debug' => :debug, 'Develop Release' => :release
 
 def shared_pods
-    pod 'Alamofire', '5.4.0'
+    pod 'Alamofire', '5.4.1'
     pod 'Atributika', '4.9.10'
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.10.0'
