@@ -1,4 +1,4 @@
-fastlane_version "2.170.0"
+fastlane_version "2.171.0"
 
 default_platform :ios
 
