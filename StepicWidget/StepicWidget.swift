@@ -2,40 +2,28 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+    func placeholder(in context: Context) -> UserCourseEntry {
+        .snapshotEntry
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+    func getSnapshot(in context: Context, completion: @escaping (UserCourseEntry) -> ()) {
+        let entry = UserCourseEntry.snapshotEntry
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        let entries: [UserCourseEntry] = [UserCourseEntry.snapshotEntry]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
-        }
+//        let currentDate = Date()
+//        for hourOffset in 0 ..< 5 {
+//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+//            let entry = SimpleEntry(date: entryDate)
+//            entries.append(entry)
+//        }
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
-    }
-}
-
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-}
-
-struct StepicWidgetEntryView : View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        Text(entry.date, style: .time)
     }
 }
 
@@ -45,7 +33,7 @@ struct StepicWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            StepicWidgetEntryView(entry: entry)
+            UserCourseEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
@@ -54,7 +42,7 @@ struct StepicWidget: Widget {
 
 struct StepicWidget_Previews: PreviewProvider {
     static var previews: some View {
-        StepicWidgetEntryView(entry: SimpleEntry(date: Date()))
+        UserCourseEntryView(entry: .snapshotEntry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
