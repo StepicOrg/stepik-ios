@@ -37,6 +37,7 @@ struct StepicWidget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
@@ -44,5 +45,8 @@ struct StepicWidget_Previews: PreviewProvider {
     static var previews: some View {
         UserCourseEntryView(entry: .snapshotEntry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+
+        UserCourseEntryView(entry: .snapshotEntry)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
