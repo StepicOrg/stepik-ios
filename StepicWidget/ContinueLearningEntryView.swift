@@ -10,9 +10,9 @@ struct ContinueLearningEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            SmallContinueLearningView(entry: entry.userCourses.first)
+            SmallContinueLearningView(course: entry.userCourses.first)
         default:
-            MediumContinueLearningView(entries: entry.userCourses)
+            MediumContinueLearningView(courses: entry.userCourses)
         }
     }
 }

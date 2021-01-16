@@ -4,29 +4,29 @@ import WidgetKit
 struct MediumContinueLearningView: View {
     private static let maxSecondaryEntriesCount = 5
 
-    let entries: [WidgetUserCourse]
+    let courses: [WidgetUserCourse]
 
-    private var primaryEntry: WidgetUserCourse { self.entries[0] }
+    private var primaryCourse: WidgetUserCourse { self.courses[0] }
 
-    private var secondaryEntries: [WidgetUserCourse] {
-        Array(self.entries.prefix(Self.maxSecondaryEntriesCount + 1).dropFirst())
+    private var secondaryCourses: [WidgetUserCourse] {
+        Array(self.courses.prefix(Self.maxSecondaryEntriesCount + 1).dropFirst())
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if entries.isEmpty {
-                primaryEntryEmptyView
+            if courses.isEmpty {
+                primaryCourseEmptyView
                     .padding()
             } else {
-                primaryEntryView
+                primaryCourseView
                     .padding()
             }
 
             HStack {
-                if secondaryEntries.isEmpty {
-                    emptySecondaryEntriesView
+                if secondaryCourses.isEmpty {
+                    secondaryCoursesEmptyView
                 } else {
-                    secondaryEntriesListView
+                    secondaryCoursesListView
                 }
             }
             .padding()
@@ -37,25 +37,25 @@ struct MediumContinueLearningView: View {
         .background(Color.backgroundColor)
     }
 
-    private var primaryEntryView: some View {
+    private var primaryCourseView: some View {
         HStack(alignment: .center) {
-            CourseThumbnailView(thumbnailData: primaryEntry.thumbnailData)
+            CourseThumbnailView(thumbnailData: primaryCourse.thumbnailData)
                 .frame(width: 48, height: 48)
 
             VStack(alignment: .leading, spacing: 0) {
-                Text(primaryEntry.title)
+                Text(primaryCourse.title)
                     .font(.headline)
                     .lineLimit(1)
-                Text(primaryEntry.subtitle)
+                Text(primaryCourse.subtitle)
                     .font(.caption2)
                     .lineLimit(1)
 
-                HStack(alignment: VerticalAlignment.firstTextBaseline) {
-                    ProgressBar(value: primaryEntry.progress / 100.0)
+                HStack(alignment: .firstTextBaseline) {
+                    ProgressBar(value: primaryCourse.progress / 100.0)
                         .frame(height: 4)
                         .background(Color.white.opacity(0.12))
                         .cornerRadius(2)
-                    Text("\(Formatter.progress(primaryEntry.progress))")
+                    Text("\(Formatter.progress(primaryCourse.progress))")
                         .font(.caption2)
                         .fontWeight(.semibold)
                         .lineLimit(1)
@@ -70,7 +70,7 @@ struct MediumContinueLearningView: View {
         }
     }
 
-    private var primaryEntryEmptyView: some View {
+    private var primaryCourseEmptyView: some View {
         HStack(alignment: .top) {
             Button(action: {
                 print("Edit button was tapped")
@@ -97,14 +97,14 @@ struct MediumContinueLearningView: View {
         }
     }
 
-    private var secondaryEntriesListView: some View {
+    private var secondaryCoursesListView: some View {
         HStack(spacing: 16) {
-            ForEach(secondaryEntries, id: \.id) { entry in
+            ForEach(secondaryCourses, id: \.id) { entry in
                 CourseThumbnailView(thumbnailData: entry.thumbnailData)
                     .frame(width: 48, height: 48)
             }
 
-            if secondaryEntries.count < Self.maxSecondaryEntriesCount {
+            if secondaryCourses.count < Self.maxSecondaryEntriesCount {
                 Button(action: {
                     print("Edit button was tapped")
                 }) {
@@ -121,7 +121,7 @@ struct MediumContinueLearningView: View {
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var emptySecondaryEntriesView: some View {
+    private var secondaryCoursesEmptyView: some View {
         Button(action: {
             print("Edit button was tapped")
         }) {
@@ -147,26 +147,26 @@ struct MediumContinueLearningView: View {
 struct MediumUserCourseView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MediumContinueLearningView(entries: [.snapshotEntry])
+            MediumContinueLearningView(courses: [.snapshotEntry])
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            MediumContinueLearningView(entries: [.snapshotEntry])
+            MediumContinueLearningView(courses: [.snapshotEntry])
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
                 .environment(\.colorScheme, .dark)
 
-            MediumContinueLearningView(entries: [])
+            MediumContinueLearningView(courses: [])
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
             MediumContinueLearningView(
-                entries: [.snapshotEntry, .snapshotEntry]
+                courses: [.snapshotEntry, .snapshotEntry]
             ).previewContext(WidgetPreviewContext(family: .systemMedium))
 
             MediumContinueLearningView(
-                entries: [.snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry]
+                courses: [.snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry]
             ).previewContext(WidgetPreviewContext(family: .systemMedium))
 
             MediumContinueLearningView(
-                entries: [.snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry]
+                courses: [.snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry]
             )
             .previewContext(WidgetPreviewContext(family: .systemMedium))
             .environment(\.colorScheme, .dark)

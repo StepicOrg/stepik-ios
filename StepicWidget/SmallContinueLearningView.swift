@@ -2,22 +2,22 @@ import SwiftUI
 import WidgetKit
 
 struct SmallContinueLearningView: View {
-    let entry: WidgetUserCourse?
+    let course: WidgetUserCourse?
 
     @ViewBuilder
     var body: some View {
-        if let entry = self.entry {
-            makeContentView(entry: entry)
+        if let course = self.course {
+            makeContentView(course)
         } else {
             emptyView
         }
     }
 
     @ViewBuilder
-    private func makeContentView(entry: WidgetUserCourse) -> some View {
+    private func makeContentView(_ course: WidgetUserCourse) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
-                CourseThumbnailView(thumbnailData: entry.thumbnailData)
+                CourseThumbnailView(thumbnailData: course.thumbnailData)
                     .frame(width: 44, height: 44)
                 Spacer()
                 Image(systemName: "arrow.right")
@@ -26,12 +26,12 @@ struct SmallContinueLearningView: View {
                     .frame(width: 20, height: 20)
             }
 
-            Text(entry.title)
+            Text(course.title)
                 .font(Font.system(size: 15, weight: .semibold))
                 .lineLimit(2)
                 .padding(.top, 8)
 
-            Text(entry.subtitle)
+            Text(course.subtitle)
                 .font(.caption2)
                 .lineLimit(1)
                 .padding(.top, 2)
@@ -40,12 +40,12 @@ struct SmallContinueLearningView: View {
 
             HStack {
                 Spacer()
-                Text("\(Formatter.progress(entry.progress))")
+                Text("\(Formatter.progress(course.progress))")
                     .font(.caption2)
                     .fontWeight(.semibold)
             }.padding(.bottom, 2)
 
-            ProgressBar(value: entry.progress / 100.0)
+            ProgressBar(value: course.progress / 100.0)
                 .frame(height: 4)
                 .background(Color.white.opacity(0.12))
                 .cornerRadius(2)
@@ -93,17 +93,17 @@ struct SmallContinueLearningView: View {
 struct SmallUserCourseView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SmallContinueLearningView(entry: .snapshotEntry)
+            SmallContinueLearningView(course: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-            SmallContinueLearningView(entry: .snapshotEntry)
+            SmallContinueLearningView(course: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .environment(\.colorScheme, .dark)
 
-            SmallContinueLearningView(entry: nil)
+            SmallContinueLearningView(course: nil)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-            SmallContinueLearningView(entry: nil)
+            SmallContinueLearningView(course: nil)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .environment(\.colorScheme, .dark)
         }
