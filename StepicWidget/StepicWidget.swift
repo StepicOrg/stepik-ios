@@ -33,7 +33,7 @@ struct StepicWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            UserCourseEntryView(entry: entry)
+            ContinueLearningEntryView(entries: [entry])
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
@@ -43,10 +43,10 @@ struct StepicWidget: Widget {
 
 struct StepicWidget_Previews: PreviewProvider {
     static var previews: some View {
-        UserCourseEntryView(entry: .snapshotEntry)
+        ContinueLearningEntryView(entries: [.snapshotEntry])
             .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-        UserCourseEntryView(entry: .snapshotEntry)
+        ContinueLearningEntryView(entries: [.snapshotEntry])
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
