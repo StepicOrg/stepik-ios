@@ -2,17 +2,19 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> UserCourseEntry {
+    typealias Entry = WidgetContent
+
+    func placeholder(in context: Context) -> WidgetContent {
         .snapshotEntry
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (UserCourseEntry) -> ()) {
-        let entry = UserCourseEntry.snapshotEntry
+    func getSnapshot(in context: Context, completion: @escaping (WidgetContent) -> Void) {
+        let entry = WidgetContent.snapshotEntry
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let entries: [UserCourseEntry] = [UserCourseEntry.snapshotEntry]
+        let entries: [WidgetContent] = [WidgetContent.snapshotEntry]
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
 //        let currentDate = Date()
@@ -33,7 +35,7 @@ struct StepicWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            ContinueLearningEntryView(entries: [entry])
+            ContinueLearningEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
@@ -43,10 +45,10 @@ struct StepicWidget: Widget {
 
 struct StepicWidget_Previews: PreviewProvider {
     static var previews: some View {
-        ContinueLearningEntryView(entries: [.snapshotEntry])
+        ContinueLearningEntryView(entry: .snapshotEntry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-        ContinueLearningEntryView(entries: [.snapshotEntry])
+        ContinueLearningEntryView(entry: .snapshotEntry)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

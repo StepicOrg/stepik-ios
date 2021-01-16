@@ -2,7 +2,7 @@ import SwiftUI
 import WidgetKit
 
 struct SmallContinueLearningView: View {
-    let entry: UserCourseEntry?
+    let entry: WidgetUserCourse?
 
     @ViewBuilder
     var body: some View {
@@ -14,7 +14,7 @@ struct SmallContinueLearningView: View {
     }
 
     @ViewBuilder
-    private func makeContentView(entry: UserCourseEntry) -> some View {
+    private func makeContentView(entry: WidgetUserCourse) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
                 CourseThumbnailView(thumbnailData: entry.thumbnailData)

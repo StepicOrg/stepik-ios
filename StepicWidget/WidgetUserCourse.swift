@@ -1,7 +1,6 @@
-import WidgetKit
+import Foundation
 
-struct WidgetUserCourse: Codable, TimelineEntry, Identifiable {
-    var date: Date = Date()
+struct WidgetUserCourse: Codable {
     let id: Int
     let title: String
     let subtitle: String

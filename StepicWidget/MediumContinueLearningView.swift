@@ -4,11 +4,11 @@ import WidgetKit
 struct MediumContinueLearningView: View {
     private static let maxSecondaryEntriesCount = 5
 
-    let entries: [UserCourseEntry]
+    let entries: [WidgetUserCourse]
 
-    private var primaryEntry: UserCourseEntry { self.entries[0] }
+    private var primaryEntry: WidgetUserCourse { self.entries[0] }
 
-    private var secondaryEntries: [UserCourseEntry] {
+    private var secondaryEntries: [WidgetUserCourse] {
         Array(self.entries.prefix(Self.maxSecondaryEntriesCount + 1).dropFirst())
     }
 

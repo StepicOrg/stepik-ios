@@ -2,7 +2,7 @@ import SwiftUI
 import WidgetKit
 
 struct ContinueLearningEntryView: View {
-    let entries: [UserCourseEntry]
+    let entry: WidgetContent
 
     @Environment(\.widgetFamily) var family
 
@@ -10,9 +10,9 @@ struct ContinueLearningEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            SmallContinueLearningView(entry: entries.first)
+            SmallContinueLearningView(entry: entry.userCourses.first)
         default:
-            MediumContinueLearningView(entries: entries)
+            MediumContinueLearningView(entries: entry.userCourses)
         }
     }
 }
@@ -20,17 +20,17 @@ struct ContinueLearningEntryView: View {
 struct UserCourseEntryView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContinueLearningEntryView(entries: [.snapshotEntry])
+            ContinueLearningEntryView(entry: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-            ContinueLearningEntryView(entries: [.snapshotEntry])
+            ContinueLearningEntryView(entry: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .environment(\.colorScheme, .dark)
 
-            ContinueLearningEntryView(entries: [.snapshotEntry])
+            ContinueLearningEntryView(entry: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            ContinueLearningEntryView(entries: [.snapshotEntry])
+            ContinueLearningEntryView(entry: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
                 .environment(\.colorScheme, .dark)
         }
