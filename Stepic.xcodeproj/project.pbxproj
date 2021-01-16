@@ -631,6 +631,9 @@
 		2C7AC44B25B1A6200024D4D2 /* MediumContinueLearningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC44A25B1A6200024D4D2 /* MediumContinueLearningView.swift */; };
 		2C7AC46F25B374F60024D4D2 /* WidgetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */; };
 		2C7AC48525B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */; };
+		2C7AC49925B37ACA0024D4D2 /* FileManager+SharedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */; };
+		2C7AC4A225B37CF10024D4D2 /* FileManager+SharedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */; };
+		2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01BB67233CD92C00C8DCF0 /* Require.swift */; };
 		2C7C874AB06B7AFA9B3E0DEF /* SimpleCourseListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1D1FD9DEC7FEAC0642FCC /* SimpleCourseListAssembly.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
 		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
@@ -2206,6 +2209,7 @@
 		2C7AC44A25B1A6200024D4D2 /* MediumContinueLearningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumContinueLearningView.swift; sourceTree = "<group>"; };
 		2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContent.swift; sourceTree = "<group>"; };
 		2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetUserCourse+WidgetKit.swift"; sourceTree = "<group>"; };
+		2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+SharedContainer.swift"; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
 		2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayNextCircleControlView.swift; sourceTree = "<group>"; };
@@ -3360,6 +3364,7 @@
 				62E98BC02EC89CF78E0FC7A6 /* Array+Reordering.swift */,
 				2C3ABA9023D229C200E90439 /* Bundle+Version.swift */,
 				62E98E4C4AECA5B066006DE7 /* CollectionExtensions.swift */,
+				2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */,
 				2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */,
 				62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */,
 			);
@@ -8652,6 +8657,7 @@
 				0846B10C1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
 				2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */,
 				2C97E009215E47E7005684A1 /* SearchQueriesViewController.swift in Sources */,
+				2C7AC49925B37ACA0024D4D2 /* FileManager+SharedContainer.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */,
 				08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
@@ -9954,6 +9960,8 @@
 				2C7AC3DD25B0AFF30024D4D2 /* WidgetUserCourse.swift in Sources */,
 				2C7AC48525B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift in Sources */,
 				2C7AC3E825B0B60F0024D4D2 /* ContinueLearningEntryView.swift in Sources */,
+				2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */,
+				2C7AC4A225B37CF10024D4D2 /* FileManager+SharedContainer.swift in Sources */,
 				2CF6E62C25ADB92A00B5A703 /* StepicWidget.swift in Sources */,
 				2C7AC43A25B19E8A0024D4D2 /* Formatter.swift in Sources */,
 				2C7AC42625B0CD620024D4D2 /* CourseThumbnailView.swift in Sources */,
