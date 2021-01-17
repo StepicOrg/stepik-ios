@@ -27,12 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private lazy var notificationsService = NotificationsService()
+    private lazy var notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private lazy var branchService = BranchService()
     private lazy var spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private lazy var applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
-    private lazy var notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private lazy var userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
     private lazy var visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
+    private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
 
     // MARK: - Initializing the App
@@ -145,6 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.removeRetentionNotifications()
         self.userCoursesObserver.startObserving()
         self.visitedCoursesCleaner.addObserves()
+        self.widgetContentIndexingService.startIndexing()
         IAPService.shared.prefetchProducts()
     }
 
@@ -152,6 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.scheduleRetentionNotifications()
         self.userCoursesObserver.stopObserving()
         self.visitedCoursesCleaner.removeObservers()
+        self.widgetContentIndexingService.stopIndexing()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

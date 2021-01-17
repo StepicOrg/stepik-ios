@@ -637,6 +637,7 @@
 		2C7AC4AE25B44E930024D4D2 /* WidgetContentFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC4AD25B44E930024D4D2 /* WidgetContentFileManager.swift */; };
 		2C7AC4B425B452540024D4D2 /* WidgetContentFileManager+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC4B325B452540024D4D2 /* WidgetContentFileManager+Promise.swift */; };
 		2C7AC4BD25B453400024D4D2 /* WidgetContentFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC4AD25B44E930024D4D2 /* WidgetContentFileManager.swift */; };
+		2C7AC4C325B457220024D4D2 /* WidgetContentIndexingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC4C225B457220024D4D2 /* WidgetContentIndexingService.swift */; };
 		2C7AC4D625B462BC0024D4D2 /* ImagePreheater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC4D525B462BC0024D4D2 /* ImagePreheater.swift */; };
 		2C7C874AB06B7AFA9B3E0DEF /* SimpleCourseListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1D1FD9DEC7FEAC0642FCC /* SimpleCourseListAssembly.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
@@ -718,6 +719,8 @@
 		2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */; };
 		2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
+		2CA3B7D325B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */; };
+		2CA3B7D425B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */; };
 		2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */; };
 		2CA3DAA32179C71500F43888 /* NotificationPermissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */; };
 		2CA3E8AF24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */; };
@@ -2216,6 +2219,7 @@
 		2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+SharedContainer.swift"; sourceTree = "<group>"; };
 		2C7AC4AD25B44E930024D4D2 /* WidgetContentFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentFileManager.swift; sourceTree = "<group>"; };
 		2C7AC4B325B452540024D4D2 /* WidgetContentFileManager+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetContentFileManager+Promise.swift"; sourceTree = "<group>"; };
+		2C7AC4C225B457220024D4D2 /* WidgetContentIndexingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentIndexingService.swift; sourceTree = "<group>"; };
 		2C7AC4D525B462BC0024D4D2 /* ImagePreheater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreheater.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
@@ -2296,6 +2300,7 @@
 		2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakLocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_block_remove_animation.xcdatamodel; sourceTree = "<group>"; };
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
+		2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSpec.swift; sourceTree = "<group>"; };
 		2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationService.swift; sourceTree = "<group>"; };
 		2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionStatus.swift; sourceTree = "<group>"; };
 		2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAboutBlockView.swift; sourceTree = "<group>"; };
@@ -3847,6 +3852,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF6E62B25ADB92A00B5A703 /* StepicWidget.swift */,
+				2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */,
 				2C7AC49325B378680024D4D2 /* Helpers */,
 				2C7AC48E25B3770D0024D4D2 /* Model */,
 				2C7AC42425B0CD4E0024D4D2 /* Views */,
@@ -3895,6 +3901,7 @@
 		2C7AC4AC25B44E6B0024D4D2 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				2C7AC4C225B457220024D4D2 /* WidgetContentIndexingService.swift */,
 				2C7AC4CC25B457300024D4D2 /* WidgetContentFileManager */,
 			);
 			path = Widget;
@@ -8778,6 +8785,7 @@
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
+				2C7AC4C325B457220024D4D2 /* WidgetContentIndexingService.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
@@ -9187,6 +9195,7 @@
 				2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
+				2CA3B7D325B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */,
 				08B3B80620F3909400F64D20 /* HTMLProcessor.swift in Sources */,
 				2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
@@ -9988,6 +9997,7 @@
 				2C7AC44025B19F2A0024D4D2 /* SmallContinueLearningView.swift in Sources */,
 				2C7AC3DD25B0AFF30024D4D2 /* WidgetUserCourse.swift in Sources */,
 				2C7AC48525B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift in Sources */,
+				2CA3B7D425B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */,
 				2C7AC3E825B0B60F0024D4D2 /* ContinueLearningEntryView.swift in Sources */,
 				2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */,
 				2C7AC4BD25B453400024D4D2 /* WidgetContentFileManager.swift in Sources */,

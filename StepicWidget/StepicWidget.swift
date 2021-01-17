@@ -4,6 +4,8 @@ import SwiftUI
 struct Provider: TimelineProvider {
     typealias Entry = WidgetContent
 
+    let contentFileManager: WidgetContentFileManagerProtocol
+
     func placeholder(in context: Context) -> WidgetContent {
         .snapshotEntry
     }
@@ -14,18 +16,22 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let entries: [WidgetContent] = [WidgetContent.snapshotEntry]
+        var entries = [self.readContent()]
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-//        let currentDate = Date()
-//        for hourOffset in 0 ..< 5 {
-//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-//            let entry = SimpleEntry(date: entryDate)
-//            entries.append(entry)
-//        }
+        let currentDate = Date()
+        let interval = 5
+
+        for index in 0 ..< entries.count {
+            entries[index].date = Calendar.current.date(byAdding: .minute, value: index * interval, to: currentDate)!
+        }
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
+    }
+
+    private func readContent() -> WidgetContent {
+        let userCourses = self.contentFileManager.readUserCourses()
+        return WidgetContent(userCourses: userCourses)
     }
 }
 
@@ -33,8 +39,12 @@ struct Provider: TimelineProvider {
 struct StepicWidget: Widget {
     let kind: String = "StepicWidget"
 
+    let contentFileManager: WidgetContentFileManagerProtocol = WidgetContentFileManager(
+        containerURL: FileManager.widgetContainerURL
+    )
+
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(contentFileManager: contentFileManager)) { entry in
             ContinueLearningEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
