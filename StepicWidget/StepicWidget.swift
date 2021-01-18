@@ -36,9 +36,7 @@ struct WidgetContentProvider: TimelineProvider {
 struct StepicWidget: Widget {
     let kind: String = "StepicWidget"
 
-    let contentFileManager: WidgetContentFileManagerProtocol = WidgetContentFileManager(
-        containerURL: FileManager.widgetContainerURL
-    )
+    let contentFileManager: WidgetContentFileManagerProtocol = WidgetContentFileManager.default
 
     var body: some WidgetConfiguration {
         StaticConfiguration(

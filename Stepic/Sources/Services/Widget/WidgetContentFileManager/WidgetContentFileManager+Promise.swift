@@ -1,6 +1,7 @@
 import Foundation
 import PromiseKit
 
+@available(iOS 14.0, *)
 extension WidgetContentFileManagerProtocol {
     func writeUserCourses(_ courses: [WidgetUserCourse]) -> Promise<Void> {
         Promise { seal in

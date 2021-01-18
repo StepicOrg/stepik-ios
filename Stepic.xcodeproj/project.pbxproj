@@ -684,6 +684,8 @@
 		2C8F3ADD23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3ADC23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift */; };
 		2C8F3AE123CCBD26004D113A /* DownloadVideoQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3AE023CCBD26004D113A /* DownloadVideoQuality.swift */; };
 		2C8F3AE323CCBEAB004D113A /* StreamVideoQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */; };
+		2C8FA6CF25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */; };
+		2C8FA6E225B6097D006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
@@ -782,6 +784,8 @@
 		2CB695382465D4030037BF0D /* NewProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB695372465D4030037BF0D /* NewProfileHeaderView.swift */; };
 		2CB6953A2466A9580037BF0D /* NewProfileRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB695392466A9580037BF0D /* NewProfileRatingView.swift */; };
 		2CB718DC249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB718DB249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift */; };
+		2CB7D89125B5F0AF0033D7B8 /* StepikWidgetToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7D89025B5F0AF0033D7B8 /* StepikWidgetToken.swift */; };
+		2CB7D89225B5F0AF0033D7B8 /* StepikWidgetToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7D89025B5F0AF0033D7B8 /* StepikWidgetToken.swift */; };
 		2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */; };
 		2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */; };
 		2CB9E56223D54BE10050A7F3 /* FileLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */; };
@@ -2271,6 +2275,7 @@
 		2C8F3ADC23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadVideoQualityStorageManager.swift; sourceTree = "<group>"; };
 		2C8F3AE023CCBD26004D113A /* DownloadVideoQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadVideoQuality.swift; sourceTree = "<group>"; };
 		2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQuality.swift; sourceTree = "<group>"; };
+		2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikWidgetTokenFileManager.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationThemeService.swift; sourceTree = "<group>"; };
@@ -2367,6 +2372,7 @@
 		2CB695372465D4030037BF0D /* NewProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileHeaderView.swift; sourceTree = "<group>"; };
 		2CB695392466A9580037BF0D /* NewProfileRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileRatingView.swift; sourceTree = "<group>"; };
 		2CB718DB249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLToAttributedStringConverter.swift; sourceTree = "<group>"; };
+		2CB7D89025B5F0AF0033D7B8 /* StepikWidgetToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikWidgetToken.swift; sourceTree = "<group>"; };
 		2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsNetworkService.swift; sourceTree = "<group>"; };
 		2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsPersistenceService.swift; sourceTree = "<group>"; };
 		2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationManager.swift; sourceTree = "<group>"; };
@@ -3903,6 +3909,7 @@
 			children = (
 				2C7AC4C225B457220024D4D2 /* WidgetContentIndexingService.swift */,
 				2C7AC4CC25B457300024D4D2 /* WidgetContentFileManager */,
+				2C8FA6C125B60096006BF4B6 /* WidgetToken */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -4050,6 +4057,15 @@
 				085DF8D71C99C49E006809D9 /* VideoRate.swift */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		2C8FA6C125B60096006BF4B6 /* WidgetToken */ = {
+			isa = PBXGroup;
+			children = (
+				2CB7D89025B5F0AF0033D7B8 /* StepikWidgetToken.swift */,
+				2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */,
+			);
+			path = WidgetToken;
 			sourceTree = "<group>";
 		};
 		2C9414F8256D7B540010B9A6 /* Views */ = {
@@ -8922,6 +8938,7 @@
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				2CA930B7253C8A65007B717A /* ProgressPlainObject.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
+				2C8FA6CF25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */,
 				2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
@@ -9283,6 +9300,7 @@
 				2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */,
 				2C20C86422F8E1EE0052E9BF /* CodeSamplePlainObject.swift in Sources */,
 				62E98880A7BEE7F43E48325B /* PaginationView.swift in Sources */,
+				2CB7D89125B5F0AF0033D7B8 /* StepikWidgetToken.swift in Sources */,
 				62E985DD90444821A835C02F /* CourseListsCollectionSkeletonView.swift in Sources */,
 				2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */,
 				62E98A53567525055BCCA089 /* AppDelegate.swift in Sources */,
@@ -10001,7 +10019,9 @@
 				2C7AC3E825B0B60F0024D4D2 /* ContinueLearningEntryView.swift in Sources */,
 				2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */,
 				2C7AC4BD25B453400024D4D2 /* WidgetContentFileManager.swift in Sources */,
+				2CB7D89225B5F0AF0033D7B8 /* StepikWidgetToken.swift in Sources */,
 				2C7AC4A225B37CF10024D4D2 /* FileManager+SharedContainer.swift in Sources */,
+				2C8FA6E225B6097D006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */,
 				2CF6E62C25ADB92A00B5A703 /* StepicWidget.swift in Sources */,
 				2C7AC43A25B19E8A0024D4D2 /* Formatter.swift in Sources */,
 				2C7AC42625B0CD620024D4D2 /* CourseThumbnailView.swift in Sources */,
@@ -10375,7 +10395,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 489380E1AE5474348FB1450D /* Pods-Stepic.production debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
@@ -10406,7 +10425,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 87A856DC00D7AE881FE38841 /* Pods-Stepic.production release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
@@ -10498,7 +10516,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D82EBE189B9B826DA622520E /* Pods-Stepic.develop debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
@@ -10632,7 +10649,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F15948AB9342436A2D3423A /* Pods-Stepic.develop release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
@@ -11178,7 +11194,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CA31F479AD773151414AAAD4 /* Pods-Stepic.release debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
@@ -11312,7 +11327,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 052EBB6A9C3BB54E11625E38 /* Pods-Stepic.release release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;

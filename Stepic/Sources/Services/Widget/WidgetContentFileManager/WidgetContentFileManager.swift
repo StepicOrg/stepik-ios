@@ -1,11 +1,15 @@
 import Foundation
 
+@available(iOS 14.0, *)
 protocol WidgetContentFileManagerProtocol: AnyObject {
     func writeUserCourses(_ courses: [WidgetUserCourse]) throws
     func readUserCourses() -> [WidgetUserCourse]
 }
 
+@available(iOS 14.0, *)
 final class WidgetContentFileManager: WidgetContentFileManagerProtocol {
+    static let `default` = WidgetContentFileManager(containerURL: FileManager.widgetContainerURL)
+
     private static let fileName = "user-courses.json"
 
     private let containerURL: URL
@@ -33,7 +37,7 @@ final class WidgetContentFileManager: WidgetContentFileManagerProtocol {
 
             return courses
         } catch {
-            print("WidgetContentFileManager: failed readUserCourses with error = \(error)")
+            print("WidgetContentFileManager :: failed readUserCourses with error = \(error)")
         }
 
         return []

@@ -2,12 +2,14 @@ import Foundation
 import PromiseKit
 import WidgetKit
 
+@available(iOS 14.0, *)
 protocol WidgetContentIndexingServiceProtocol: AnyObject {
     func startIndexing(force: Bool)
     func stopIndexing()
     func indexUserCourses() -> Promise<Void>
 }
 
+@available(iOS 14.0, *)
 extension WidgetContentIndexingServiceProtocol {
     func startIndexing() {
         self.startIndexing(force: false)
@@ -316,7 +318,7 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
 @available(iOS 14.0, *)
 extension WidgetContentIndexingService {
     static let `default` = WidgetContentIndexingService(
-        widgetContentFileManager: WidgetContentFileManager(containerURL: FileManager.widgetContainerURL),
+        widgetContentFileManager: WidgetContentFileManager.default,
         userAccountService: UserAccountService(),
         userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
         userCoursesPersistenceService: UserCoursesPersistenceService(),
