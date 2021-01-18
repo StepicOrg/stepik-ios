@@ -33,8 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
     private lazy var userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
     private lazy var visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
-    private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
+
+    @available(iOS 14.0, *)
+    private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
+
+    private var applicationDidBecomeActiveAfterLaunch = true
 
     // MARK: - Initializing the App
 
@@ -146,15 +150,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.removeRetentionNotifications()
         self.userCoursesObserver.startObserving()
         self.visitedCoursesCleaner.addObserves()
-        self.widgetContentIndexingService.startIndexing()
         IAPService.shared.prefetchProducts()
+
+        if #available(iOS 14.0, *) {
+            self.widgetContentIndexingService.startIndexing(force: self.applicationDidBecomeActiveAfterLaunch)
+        }
+
+        self.applicationDidBecomeActiveAfterLaunch = false
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
         self.userCoursesObserver.stopObserving()
         self.visitedCoursesCleaner.removeObservers()
-        self.widgetContentIndexingService.stopIndexing()
+
+        if #available(iOS 14.0, *) {
+            self.widgetContentIndexingService.stopIndexing()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

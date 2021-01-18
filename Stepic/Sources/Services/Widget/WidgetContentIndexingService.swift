@@ -3,32 +3,40 @@ import PromiseKit
 import WidgetKit
 
 protocol WidgetContentIndexingServiceProtocol: AnyObject {
-    func startIndexing()
+    func startIndexing(force: Bool)
     func stopIndexing()
     func indexUserCourses() -> Promise<Void>
 }
 
+extension WidgetContentIndexingServiceProtocol {
+    func startIndexing() {
+        self.startIndexing(force: false)
+    }
+}
+
+@available(iOS 14.0, *)
 final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
+    private static let startIndexingDelay: TimeInterval = 1.5
+
     private typealias UserCoursesData = (courses: [Course], progresses: [Progress], coversData: [Data?])
 
     private let widgetContentFileManager: WidgetContentFileManagerProtocol
-
     private let userAccountService: UserAccountServiceProtocol
-    // UserCourses
     private let userCoursesNetworkService: UserCoursesNetworkServiceProtocol
     private let userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol
-    // Courses
     private let coursesNetworkService: CoursesNetworkServiceProtocol
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
-    // Progresses
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
-    // Users
     private let usersNetworkService: UsersNetworkServiceProtocol
-    // CourseCover
     private let courseCoverPreheater: ImagePreheaterProtocol
     private let courseCoverImageDataProviderFactory: (URL) -> ImageDataProvider
-
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
     private let coreDataHelper: CoreDataHelper
+
+    private weak var indexingTimer: Timer?
+    private let courseProgressUpdatedDebouncer = Debouncer(
+        delay: WidgetContentIndexingService.courseProgressUpdateDebounceInterval
+    )
 
     init(
         widgetContentFileManager: WidgetContentFileManagerProtocol,
@@ -41,6 +49,7 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
         usersNetworkService: UsersNetworkServiceProtocol,
         courseCoverPreheater: ImagePreheaterProtocol = NukeImagePreheater(),
         courseCoverImageDataProviderFactory: @escaping (URL) -> ImageDataProvider = { NukeImageDataProvider(url: $0) },
+        dataBackUpdateService: DataBackUpdateServiceProtocol,
         coreDataHelper: CoreDataHelper = .shared
     ) {
         self.widgetContentFileManager = widgetContentFileManager
@@ -54,23 +63,25 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
         self.courseCoverPreheater = courseCoverPreheater
         self.courseCoverImageDataProviderFactory = courseCoverImageDataProviderFactory
         self.coreDataHelper = coreDataHelper
+
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
     }
 
-    func startIndexing() {
-        firstly {
-            after(seconds: 1.5)
-        }.then {
-            self.indexUserCourses()
-        }.done {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }.catch { error in
-            print(error)
-        }
+    deinit {
+        self.removeObservers()
+        self.stopIndexingTimer()
+    }
+
+    func startIndexing(force: Bool) {
+        self.addObservers()
+        self.scheduleIndexingTimer()
+        self.indexContent(forceIndex: force)
     }
 
     func stopIndexing() {
+        self.removeObservers()
+        self.stopIndexingTimer()
     }
 
     func indexUserCourses() -> Promise<Void> {
@@ -82,6 +93,28 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
             self.writeUserCoursesData(courses: courses, progresses: progresses, coversData: coversData)
         }
     }
+
+    // MARK: - Private API
+
+    @objc
+    private func indexContent(forceIndex: Bool = false) {
+        guard forceIndex || self.shouldIndexContent else {
+            return
+        }
+
+        firstly {
+            after(seconds: Self.startIndexingDelay)
+        }.then {
+            self.indexUserCourses()
+        }.done {
+            self.lastDateIndexCompleted = Date()
+            WidgetCenter.shared.reloadAllTimelines()
+        }.catch { error in
+            print("WidgetContentIndexingService :: failed index with error = \(error)")
+        }
+    }
+
+    // MARK: Fetch Data
 
     private func fetchRemoteUserCoursesData() -> Promise<UserCoursesData> {
         Promise { seal in
@@ -233,8 +266,54 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
 
         return self.widgetContentFileManager.writeUserCourses(widgetUserCourses)
     }
+
+    // MARK: NotificationCenter
+
+    private func addObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleUserAccountDidChange),
+            name: .didLogout,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleUserAccountDidChange),
+            name: .didChangeCurrentUser,
+            object: nil
+        )
+    }
+
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    private func handleUserAccountDidChange() {
+        self.indexContent(forceIndex: true)
+    }
+
+    // MARK: Timer
+
+    private func scheduleIndexingTimer() {
+        self.indexingTimer?.invalidate()
+        self.indexingTimer = Timer.scheduledTimer(
+            timeInterval: Self.fiveMinutesInterval,
+            target: self,
+            selector: #selector(self.indexContent),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    private func stopIndexingTimer() {
+        self.indexingTimer?.invalidate()
+        self.indexingTimer = nil
+    }
 }
 
+@available(iOS 14.0, *)
 extension WidgetContentIndexingService {
     static let `default` = WidgetContentIndexingService(
         widgetContentFileManager: WidgetContentFileManager(containerURL: FileManager.widgetContainerURL),
@@ -244,6 +323,65 @@ extension WidgetContentIndexingService {
         coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
         coursesPersistenceService: CoursesPersistenceService(),
         progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
-        usersNetworkService: UsersNetworkService(usersAPI: UsersAPI())
+        usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
+        dataBackUpdateService: DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
     )
+}
+
+// MARK: - WidgetContentIndexingService: DataBackUpdateServiceDelegate -
+
+@available(iOS 14.0, *)
+extension WidgetContentIndexingService: DataBackUpdateServiceDelegate {
+    private static let courseProgressUpdateDebounceInterval: TimeInterval = 15
+
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport update: DataBackUpdateDescription,
+        for target: DataBackUpdateTarget
+    ) {
+        guard case .course = target,
+              update.contains(.progress) else {
+            return
+        }
+
+        self.courseProgressUpdatedDebouncer.action = { [weak self] in
+            self?.indexContent(forceIndex: true)
+        }
+    }
+
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport refreshedTarget: DataBackUpdateTarget
+    ) {}
+}
+
+
+// MARK: - WidgetContentIndexingService (UserDefaults) -
+
+@available(iOS 14.0, *)
+extension WidgetContentIndexingService {
+    private static let fiveMinutesInterval: TimeInterval = 300
+    private static let lastDateIndexCompletedKey = "lastDateWidgetContentIndexCompletedKey"
+
+    private var shouldIndexContent: Bool {
+        Date().timeIntervalSince(self.lastDateIndexCompleted) >= Self.fiveMinutesInterval
+    }
+
+    fileprivate var lastDateIndexCompleted: Date {
+        get {
+            if let userDefaultsDate = UserDefaults.standard.object(forKey: Self.lastDateIndexCompletedKey) as? Date {
+                return userDefaultsDate
+            } else {
+                return Date(timeIntervalSince1970: 0)
+            }
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Self.lastDateIndexCompletedKey)
+        }
+    }
 }
