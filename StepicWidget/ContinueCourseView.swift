@@ -1,20 +1,20 @@
 import SwiftUI
 import WidgetKit
 
-struct SmallContinueLearningView: View {
+struct ContinueCourseView: View {
     let course: WidgetUserCourse?
 
     @ViewBuilder
     var body: some View {
         if let course = self.course {
-            makeContentView(course)
+            buildContentView(for: course)
         } else {
             emptyView
         }
     }
 
     @ViewBuilder
-    private func makeContentView(_ course: WidgetUserCourse) -> some View {
+    private func buildContentView(for course: WidgetUserCourse) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
                 CourseThumbnailView(thumbnailData: course.thumbnailData)
@@ -90,20 +90,20 @@ struct SmallContinueLearningView: View {
     }
 }
 
-struct SmallUserCourseView_Previews: PreviewProvider {
+struct ContinueCourseView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SmallContinueLearningView(course: .snapshotEntry)
+            ContinueCourseView(course: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-            SmallContinueLearningView(course: .snapshotEntry)
+            ContinueCourseView(course: .snapshotEntry)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .environment(\.colorScheme, .dark)
 
-            SmallContinueLearningView(course: nil)
+            ContinueCourseView(course: nil)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-            SmallContinueLearningView(course: nil)
+            ContinueCourseView(course: nil)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .environment(\.colorScheme, .dark)
         }

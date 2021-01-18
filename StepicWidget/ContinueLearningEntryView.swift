@@ -10,14 +10,14 @@ struct ContinueLearningEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            SmallContinueLearningView(course: entry.userCourses.first)
+            ContinueCourseView(course: entry.userCourses.first)
         default:
-            MediumContinueLearningView(courses: entry.userCourses)
+            ContinueCourseWithCourseListView(courses: entry.userCourses)
         }
     }
 }
 
-struct UserCourseEntryView_Previews: PreviewProvider {
+struct ContinueLearningEntryView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContinueLearningEntryView(entry: .snapshotEntry)

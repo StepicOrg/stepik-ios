@@ -1,7 +1,7 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
+struct WidgetContentProvider: TimelineProvider {
     typealias Entry = WidgetContent
 
     let contentFileManager: WidgetContentFileManagerProtocol
@@ -11,21 +11,18 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetContent) -> Void) {
-        let entry = WidgetContent.snapshotEntry
-        completion(entry)
+        completion(.snapshotEntry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries = [self.readContent()]
+        let entry = self.readContent()
+        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: entry.date)!
 
-        let currentDate = Date()
-        let interval = 5
+        let timeline = Timeline(
+            entries: [entry],
+            policy: .after(nextUpdateDate)
+        )
 
-        for index in 0 ..< entries.count {
-            entries[index].date = Calendar.current.date(byAdding: .minute, value: index * interval, to: currentDate)!
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
 
@@ -44,7 +41,10 @@ struct StepicWidget: Widget {
     )
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider(contentFileManager: contentFileManager)) { entry in
+        StaticConfiguration(
+            kind: kind,
+            provider: WidgetContentProvider(contentFileManager: contentFileManager)
+        ) { entry in
             ContinueLearningEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")

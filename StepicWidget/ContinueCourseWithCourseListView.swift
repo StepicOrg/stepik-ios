@@ -1,25 +1,23 @@
 import SwiftUI
 import WidgetKit
 
-struct MediumContinueLearningView: View {
-    private static let maxSecondaryEntriesCount = 5
+struct ContinueCourseWithCourseListView: View {
+    private static let maxSecondaryCoursesCount = WidgetSpec.maxUserCoursesCount - 1
 
     let courses: [WidgetUserCourse]
 
     private var primaryCourse: WidgetUserCourse { self.courses[0] }
 
     private var secondaryCourses: [WidgetUserCourse] {
-        Array(self.courses.prefix(Self.maxSecondaryEntriesCount + 1).dropFirst())
+        Array(self.courses.prefix(Self.maxSecondaryCoursesCount + 1).dropFirst())
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if courses.isEmpty {
-                primaryCourseEmptyView
-                    .padding()
+                primaryCourseEmptyView.padding()
             } else {
-                primaryCourseView
-                    .padding()
+                primaryCourseView.padding()
             }
 
             HStack {
@@ -104,7 +102,7 @@ struct MediumContinueLearningView: View {
                     .frame(width: 48, height: 48)
             }
 
-            if secondaryCourses.count < Self.maxSecondaryEntriesCount {
+            if secondaryCourses.count < Self.maxSecondaryCoursesCount {
                 Button(action: {
                     print("Edit button was tapped")
                 }) {
@@ -144,28 +142,28 @@ struct MediumContinueLearningView: View {
     }
 }
 
-struct MediumUserCourseView_Previews: PreviewProvider {
+struct ContinueCourseWithCourseList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MediumContinueLearningView(courses: [.snapshotEntry])
+            ContinueCourseWithCourseListView(courses: [.snapshotEntry])
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            MediumContinueLearningView(courses: [.snapshotEntry])
+            ContinueCourseWithCourseListView(courses: [.snapshotEntry])
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
                 .environment(\.colorScheme, .dark)
 
-            MediumContinueLearningView(courses: [])
+            ContinueCourseWithCourseListView(courses: [])
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            MediumContinueLearningView(
+            ContinueCourseWithCourseListView(
                 courses: [.snapshotEntry, .snapshotEntry]
             ).previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            MediumContinueLearningView(
+            ContinueCourseWithCourseListView(
                 courses: [.snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry]
             ).previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            MediumContinueLearningView(
+            ContinueCourseWithCourseListView(
                 courses: [.snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry, .snapshotEntry]
             )
             .previewContext(WidgetPreviewContext(family: .systemMedium))
