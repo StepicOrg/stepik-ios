@@ -3,7 +3,7 @@ import WidgetKit
 extension WidgetUserCourse: Identifiable {}
 
 extension WidgetUserCourse {
-    var url: URL? {
+    var url: URL {
         WidgetURL.course(id: self.id).url
     }
 }
