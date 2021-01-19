@@ -28,10 +28,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
         let authorsViewModel = course.authors.map { author in
-            CourseInfoTabInfoAuthorViewModel(
-                id: author.id,
-                name: "\(author.firstName) \(author.lastName)".trimmingCharacters(in: .whitespaces)
-            )
+            CourseInfoTabInfoAuthorViewModel(id: author.id, name: author.fullName)
         }
 
         let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
