@@ -1,6 +1,7 @@
 import Foundation
 
 @available(iOS 14.0, *)
+@objc(StepikWidgetToken)
 final class StepikWidgetToken: NSObject, NSSecureCoding {
     private static let accessTokenCoderKey = "accessToken"
 

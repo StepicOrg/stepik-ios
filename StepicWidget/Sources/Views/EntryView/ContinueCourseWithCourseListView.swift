@@ -2,7 +2,7 @@ import SwiftUI
 import WidgetKit
 
 struct ContinueCourseWithCourseListView: View {
-    private static let maxSecondaryCoursesCount = WidgetSpec.maxUserCoursesCount - 1
+    private static let maxSecondaryCoursesCount = WidgetConstants.maxUserCoursesCount - 1
 
     let courses: [WidgetUserCourse]
 

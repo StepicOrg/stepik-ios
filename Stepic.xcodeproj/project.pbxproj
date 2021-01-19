@@ -503,6 +503,11 @@
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
 		2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */; };
 		2C42EFBA2476FADB00423695 /* MagicLinksNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */; };
+		2C434D2C25B6F0C400854D6F /* StepikNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C434D2B25B6F0C400854D6F /* StepikNetworkService.swift */; };
+		2C434D3225B6FC7300854D6F /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C434D3125B6FC7300854D6F /* Responses.swift */; };
+		2C434D3725B6FD8200854D6F /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
+		2C434D4525B7367500854D6F /* WidgetContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C434D4425B7367500854D6F /* WidgetContentProvider.swift */; };
+		2C434D4E25B74D1A00854D6F /* Array+Reordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BC02EC89CF78E0FC7A6 /* Array+Reordering.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
@@ -721,8 +726,8 @@
 		2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */; };
 		2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
-		2CA3B7D325B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */; };
-		2CA3B7D425B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */; };
+		2CA3B7D325B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */; };
+		2CA3B7D425B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */; };
 		2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */; };
 		2CA3DAA32179C71500F43888 /* NotificationPermissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */; };
 		2CA3E8AF24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */; };
@@ -2084,6 +2089,9 @@
 		2C3DAB90233D735D00453B1C /* StepFontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepFontSize.swift; sourceTree = "<group>"; };
 		2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksAPI.swift; sourceTree = "<group>"; };
 		2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksNetworkService.swift; sourceTree = "<group>"; };
+		2C434D2B25B6F0C400854D6F /* StepikNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikNetworkService.swift; sourceTree = "<group>"; };
+		2C434D3125B6FC7300854D6F /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
+		2C434D4425B7367500854D6F /* WidgetContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentProvider.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractorTests.swift; sourceTree = "<group>"; };
@@ -2305,7 +2313,7 @@
 		2CA1001E2174BE49003775CB /* StreakLocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakLocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_block_remove_animation.xcdatamodel; sourceTree = "<group>"; };
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
-		2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSpec.swift; sourceTree = "<group>"; };
+		2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConstants.swift; sourceTree = "<group>"; };
 		2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationService.swift; sourceTree = "<group>"; };
 		2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionStatus.swift; sourceTree = "<group>"; };
 		2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAboutBlockView.swift; sourceTree = "<group>"; };
@@ -3854,56 +3862,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		2C7AC42325B0CD310024D4D2 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				2CF6E62B25ADB92A00B5A703 /* StepicWidget.swift */,
-				2CA3B7D225B4ADDF003AC2C1 /* WidgetSpec.swift */,
-				2C7AC49325B378680024D4D2 /* Helpers */,
-				2C7AC48E25B3770D0024D4D2 /* Model */,
-				2C7AC42425B0CD4E0024D4D2 /* Views */,
-			);
-			name = Sources;
-			sourceTree = "<group>";
-		};
-		2C7AC42425B0CD4E0024D4D2 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				2C7AC42525B0CD620024D4D2 /* CourseThumbnailView.swift */,
-				2C7AC42B25B0CE010024D4D2 /* ProgressBar.swift */,
-				2C7AC44525B19F890024D4D2 /* EntryView */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		2C7AC44525B19F890024D4D2 /* EntryView */ = {
-			isa = PBXGroup;
-			children = (
-				2C7AC43F25B19F2A0024D4D2 /* ContinueCourseView.swift */,
-				2C7AC44A25B1A6200024D4D2 /* ContinueCourseWithCourseListView.swift */,
-				2C7AC3E725B0B60F0024D4D2 /* ContinueLearningEntryView.swift */,
-			);
-			name = EntryView;
-			sourceTree = "<group>";
-		};
-		2C7AC48E25B3770D0024D4D2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */,
-				2C7AC3DB25B0AFF30024D4D2 /* WidgetUserCourse.swift */,
-				2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		2C7AC49325B378680024D4D2 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				2C7AC43925B19E8A0024D4D2 /* Formatter.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
 		2C7AC4AC25B44E6B0024D4D2 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -4066,6 +4024,67 @@
 				2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */,
 			);
 			path = WidgetToken;
+			sourceTree = "<group>";
+		};
+		2C91B55E25B6EF68002F2B3E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				2CF6E62B25ADB92A00B5A703 /* StepicWidget.swift */,
+				2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */,
+				2C434D4425B7367500854D6F /* WidgetContentProvider.swift */,
+				2C91B55F25B6EF81002F2B3E /* Helpers */,
+				2C91B56025B6EF90002F2B3E /* Model */,
+				2C91B56125B6EFA4002F2B3E /* Services */,
+				2C91B56225B6EFB3002F2B3E /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		2C91B55F25B6EF81002F2B3E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2C7AC43925B19E8A0024D4D2 /* Formatter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2C91B56025B6EF90002F2B3E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */,
+				2C7AC3DB25B0AFF30024D4D2 /* WidgetUserCourse.swift */,
+				2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C91B56125B6EFA4002F2B3E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2C434D3125B6FC7300854D6F /* Responses.swift */,
+				2C434D2B25B6F0C400854D6F /* StepikNetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2C91B56225B6EFB3002F2B3E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C7AC42525B0CD620024D4D2 /* CourseThumbnailView.swift */,
+				2C7AC42B25B0CE010024D4D2 /* ProgressBar.swift */,
+				2C91B56325B6EFBF002F2B3E /* EntryView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C91B56325B6EFBF002F2B3E /* EntryView */ = {
+			isa = PBXGroup;
+			children = (
+				2C7AC43F25B19F2A0024D4D2 /* ContinueCourseView.swift */,
+				2C7AC44A25B1A6200024D4D2 /* ContinueCourseWithCourseListView.swift */,
+				2C7AC3E725B0B60F0024D4D2 /* ContinueLearningEntryView.swift */,
+			);
+			path = EntryView;
 			sourceTree = "<group>";
 		};
 		2C9414F8256D7B540010B9A6 /* Views */ = {
@@ -5373,7 +5392,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7AC42225B0CD180024D4D2 /* Resources */,
-				2C7AC42325B0CD310024D4D2 /* Sources */,
+				2C91B55E25B6EF68002F2B3E /* Sources */,
 			);
 			path = StepicWidget;
 			sourceTree = "<group>";
@@ -9212,7 +9231,7 @@
 				2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
-				2CA3B7D325B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */,
+				2CA3B7D325B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */,
 				08B3B80620F3909400F64D20 /* HTMLProcessor.swift in Sources */,
 				2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
@@ -10012,19 +10031,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C434D3225B6FC7300854D6F /* Responses.swift in Sources */,
+				2C434D4525B7367500854D6F /* WidgetContentProvider.swift in Sources */,
 				2C7AC44025B19F2A0024D4D2 /* ContinueCourseView.swift in Sources */,
 				2C7AC3DD25B0AFF30024D4D2 /* WidgetUserCourse.swift in Sources */,
 				2C7AC48525B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift in Sources */,
-				2CA3B7D425B4ADDF003AC2C1 /* WidgetSpec.swift in Sources */,
+				2CA3B7D425B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */,
 				2C7AC3E825B0B60F0024D4D2 /* ContinueLearningEntryView.swift in Sources */,
 				2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */,
 				2C7AC4BD25B453400024D4D2 /* WidgetContentFileManager.swift in Sources */,
+				2C434D3725B6FD8200854D6F /* NSDateExtensions.swift in Sources */,
+				2C434D4E25B74D1A00854D6F /* Array+Reordering.swift in Sources */,
 				2CB7D89225B5F0AF0033D7B8 /* StepikWidgetToken.swift in Sources */,
 				2C7AC4A225B37CF10024D4D2 /* FileManager+SharedContainer.swift in Sources */,
 				2C8FA6E225B6097D006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */,
 				2CF6E62C25ADB92A00B5A703 /* StepicWidget.swift in Sources */,
 				2C7AC43A25B19E8A0024D4D2 /* Formatter.swift in Sources */,
 				2C7AC42625B0CD620024D4D2 /* CourseThumbnailView.swift in Sources */,
+				2C434D2C25B6F0C400854D6F /* StepikNetworkService.swift in Sources */,
 				2C7AC42C25B0CE010024D4D2 /* ProgressBar.swift in Sources */,
 				2C7AC46F25B374F60024D4D2 /* WidgetContent.swift in Sources */,
 				2C7AC44B25B1A6200024D4D2 /* ContinueCourseWithCourseListView.swift in Sources */,

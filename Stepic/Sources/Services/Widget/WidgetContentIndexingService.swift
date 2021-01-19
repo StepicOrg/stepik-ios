@@ -125,7 +125,7 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
                     userCourses
                         .sorted(by: { $0.lastViewed > $1.lastViewed })
                         .map(\.courseID)
-                        .prefix(WidgetSpec.maxUserCoursesCount)
+                        .prefix(WidgetConstants.maxUserCoursesCount)
                 )
 
                 return self.coursesNetworkService.fetch(ids: coursesIDs)
