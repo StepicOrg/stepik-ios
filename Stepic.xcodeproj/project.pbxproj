@@ -3873,8 +3873,9 @@
 			isa = PBXGroup;
 			children = (
 				2CB73C7625B79A1100FCA236 /* StepicWidgetExtension.entitlements */,
-				2C7AC3F825B0C9670024D4D2 /* Color+Extensions.swift */,
 				2CF6E62F25ADB92B00B5A703 /* Info.plist */,
+				2C7AC3F825B0C9670024D4D2 /* Color+Extensions.swift */,
+				2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */,
 				2C3A056425B780A80007FBCA /* Localizable.strings */,
 			);
 			name = Resources;

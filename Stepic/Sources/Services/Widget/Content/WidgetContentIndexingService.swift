@@ -341,7 +341,7 @@ extension WidgetContentIndexingService {
 
 @available(iOS 14.0, *)
 extension WidgetContentIndexingService: DataBackUpdateServiceDelegate {
-    private static let courseProgressUpdateDebounceInterval: TimeInterval = 10
+    private static let courseProgressUpdateDebounceInterval: TimeInterval = 1
 
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
@@ -349,7 +349,7 @@ extension WidgetContentIndexingService: DataBackUpdateServiceDelegate {
         for target: DataBackUpdateTarget
     ) {
         guard case .course = target,
-              update.contains([.progress, .enrollment]) else {
+              update.contains([.progress]) || update.contains([.enrollment]) else {
             return
         }
 
