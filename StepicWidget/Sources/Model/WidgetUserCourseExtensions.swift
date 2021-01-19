@@ -1,3 +1,4 @@
+import UIKit
 import WidgetKit
 
 extension WidgetUserCourse: Identifiable {}
@@ -9,11 +10,13 @@ extension WidgetUserCourse {
 }
 
 extension WidgetUserCourse {
-    static let snapshotEntry = WidgetUserCourse(
-        id: 5207,
-        title: "Creating a course on Stepik",
-        subtitle: "by Stepik Team",
-        progress: 76.0,
-        thumbnailData: nil
-    )
+    static var snapshotEntry: WidgetUserCourse {
+        WidgetUserCourse(
+            id: 5207,
+            title: NSLocalizedString("SnapshotUserCourseTitle", comment: ""),
+            subtitle: NSLocalizedString("SnapshotUserCourseSubtitle", comment: ""),
+            progress: 76.0,
+            thumbnailData: UIImage(named: "cover-5207")?.jpegData(compressionQuality: 0.9)
+        )
+    }
 }
