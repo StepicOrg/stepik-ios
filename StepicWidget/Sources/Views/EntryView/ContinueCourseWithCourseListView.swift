@@ -15,14 +15,20 @@ struct ContinueCourseWithCourseListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if courses.isEmpty {
-                primaryCourseEmptyView.padding()
+                Link(destination: WidgetURL.catalog.url) {
+                    primaryCourseEmptyView.padding()
+                }
             } else {
-                primaryCourseView.padding()
+                Link(destination: WidgetURL.course(id: primaryCourse.id).url) {
+                    primaryCourseView.padding()
+                }
             }
 
             HStack {
                 if secondaryCourses.isEmpty {
-                    secondaryCoursesEmptyView
+                    Link(destination: WidgetURL.catalog.url) {
+                        secondaryCoursesEmptyView
+                    }
                 } else {
                     secondaryCoursesListView
                 }
@@ -98,23 +104,27 @@ struct ContinueCourseWithCourseListView: View {
     private var secondaryCoursesListView: some View {
         HStack(spacing: 16) {
             ForEach(secondaryCourses, id: \.id) { entry in
-                CourseThumbnailView(thumbnailData: entry.thumbnailData)
-                    .frame(width: 48, height: 48)
+                Link(destination: WidgetURL.course(id: entry.id).url) {
+                    CourseThumbnailView(thumbnailData: entry.thumbnailData)
+                        .frame(width: 48, height: 48)
+                }
             }
 
             if secondaryCourses.count < Self.maxSecondaryCoursesCount {
-                Button(action: {
-                    print("Edit button was tapped")
-                }) {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 22, height: 22)
-                        .padding()
+                Link(destination: WidgetURL.catalog.url) {
+                    Button(action: {
+                        print("Edit button was tapped")
+                    }) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 22, height: 22)
+                            .padding()
+                    }
+                    .frame(width: 48, height: 48)
+                    .background(Color.white.opacity(0.12))
+                    .cornerRadius(8)
                 }
-                .frame(width: 48, height: 48)
-                .background(Color.white.opacity(0.12))
-                .cornerRadius(8)
             }
         }.frame(maxWidth: .infinity, alignment: .leading)
     }

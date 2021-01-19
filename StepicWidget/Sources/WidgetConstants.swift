@@ -8,5 +8,8 @@ enum WidgetConstants {
         static let scheme = "https"
         static let host = "stepik.org"
         static let stepikURL = "\(Self.scheme)://\(Self.host)"
+
+        static let widgetHost = "stepik.widget.link"
+        static let widgetURL = "\(Self.scheme)://\(Self.widgetHost)"
     }
 }

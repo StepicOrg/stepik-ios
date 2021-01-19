@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @available(iOS 14.0, *)
     private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
+    @available(iOS 14.0, *)
+    private lazy var widgetRoutingService: WidgetRoutingServiceProtocol = WidgetRoutingService.default
 
     private var applicationDidBecomeActiveAfterLaunch = true
 
@@ -310,8 +312,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topViewController.route(from: .social, to: .email(email: email))
             }
         } else {
-            if branchService.canOpenWithBranch(url: url) {
-                branchService.openURL(app: app, open: url, options: options)
+            if self.branchService.canOpenWithBranch(url: url) {
+                self.branchService.openURL(app: app, open: url, options: options)
+            } else if #available(iOS 14.0, *),
+                      self.widgetRoutingService.canOpen(url: url) {
+                self.widgetRoutingService.open(url: url)
             } else {
                 // Other actions
                 self.handleOpenedFromDeepLink(url)

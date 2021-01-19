@@ -8,8 +8,10 @@ struct ContinueCourseView: View {
     var body: some View {
         if let course = self.course {
             buildContentView(for: course)
+                .widgetURL(course.url)
         } else {
             emptyView
+                .widgetURL(WidgetURL.catalog.url)
         }
     }
 

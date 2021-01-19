@@ -109,7 +109,7 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
         }.then {
             self.indexUserCourses()
         }.done {
-            self.lastDateIndexCompleted = Date()
+            self.lastDateIndexingCompleted = Date()
             WidgetCenter.shared.reloadAllTimelines()
         }.catch { error in
             print("WidgetContentIndexingService :: failed index with error = \(error)")
@@ -373,10 +373,10 @@ extension WidgetContentIndexingService {
     private static let lastDateIndexCompletedKey = "lastDateWidgetContentIndexCompletedKey"
 
     private var shouldIndexContent: Bool {
-        Date().timeIntervalSince(self.lastDateIndexCompleted) >= Self.fiveMinutesInterval
+        Date().timeIntervalSince(self.lastDateIndexingCompleted) >= Self.fiveMinutesInterval
     }
 
-    fileprivate var lastDateIndexCompleted: Date {
+    fileprivate var lastDateIndexingCompleted: Date {
         get {
             if let userDefaultsDate = UserDefaults.standard.object(forKey: Self.lastDateIndexCompletedKey) as? Date {
                 return userDefaultsDate

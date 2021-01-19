@@ -494,6 +494,8 @@
 		2C381BEF25505EC90084AD90 /* CourseListFilterBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */; };
 		2C3A035624AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035524AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift */; };
 		2C3A035924AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */; };
+		2C3A052025B763370007FBCA /* WidgetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A051F25B763370007FBCA /* WidgetURL.swift */; };
+		2C3A053F25B7693B0007FBCA /* WidgetRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */; };
 		2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */; };
 		2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */; };
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
@@ -635,7 +637,7 @@
 		2C7AC44025B19F2A0024D4D2 /* ContinueCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC43F25B19F2A0024D4D2 /* ContinueCourseView.swift */; };
 		2C7AC44B25B1A6200024D4D2 /* ContinueCourseWithCourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC44A25B1A6200024D4D2 /* ContinueCourseWithCourseListView.swift */; };
 		2C7AC46F25B374F60024D4D2 /* WidgetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */; };
-		2C7AC48525B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */; };
+		2C7AC48525B3764E0024D4D2 /* WidgetUserCourseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC48425B3764E0024D4D2 /* WidgetUserCourseExtensions.swift */; };
 		2C7AC49925B37ACA0024D4D2 /* FileManager+SharedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */; };
 		2C7AC4A225B37CF10024D4D2 /* FileManager+SharedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */; };
 		2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01BB67233CD92C00C8DCF0 /* Require.swift */; };
@@ -2074,6 +2076,8 @@
 		2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterBarButtonItem.swift; sourceTree = "<group>"; };
 		2C3A035524AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsSwitchView.swift; sourceTree = "<group>"; };
 		2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsTimeSelectionView.swift; sourceTree = "<group>"; };
+		2C3A051F25B763370007FBCA /* WidgetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetURL.swift; sourceTree = "<group>"; };
+		2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRoutingService.swift; sourceTree = "<group>"; };
 		2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksFeedback.swift; sourceTree = "<group>"; };
 		2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetworksView.swift; sourceTree = "<group>"; };
@@ -2227,7 +2231,7 @@
 		2C7AC43F25B19F2A0024D4D2 /* ContinueCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCourseView.swift; sourceTree = "<group>"; };
 		2C7AC44A25B1A6200024D4D2 /* ContinueCourseWithCourseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCourseWithCourseListView.swift; sourceTree = "<group>"; };
 		2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContent.swift; sourceTree = "<group>"; };
-		2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetUserCourse+WidgetKit.swift"; sourceTree = "<group>"; };
+		2C7AC48425B3764E0024D4D2 /* WidgetUserCourseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUserCourseExtensions.swift; sourceTree = "<group>"; };
 		2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+SharedContainer.swift"; sourceTree = "<group>"; };
 		2C7AC4AD25B44E930024D4D2 /* WidgetContentFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentFileManager.swift; sourceTree = "<group>"; };
 		2C7AC4B325B452540024D4D2 /* WidgetContentFileManager+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetContentFileManager+Promise.swift"; sourceTree = "<group>"; };
@@ -3588,6 +3592,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		2C3A052D25B768810007FBCA /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C7AC4AD25B44E930024D4D2 /* WidgetContentFileManager.swift */,
+				2C7AC4B325B452540024D4D2 /* WidgetContentFileManager+Promise.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
 		2C48BA02257277DD009103B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -3865,20 +3878,20 @@
 		2C7AC4AC25B44E6B0024D4D2 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				2C7AC4C225B457220024D4D2 /* WidgetContentIndexingService.swift */,
-				2C7AC4CC25B457300024D4D2 /* WidgetContentFileManager */,
-				2C8FA6C125B60096006BF4B6 /* WidgetToken */,
+				2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */,
+				2C7AC4CC25B457300024D4D2 /* Content */,
+				2C8FA6C125B60096006BF4B6 /* Token */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
 		};
-		2C7AC4CC25B457300024D4D2 /* WidgetContentFileManager */ = {
+		2C7AC4CC25B457300024D4D2 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				2C7AC4AD25B44E930024D4D2 /* WidgetContentFileManager.swift */,
-				2C7AC4B325B452540024D4D2 /* WidgetContentFileManager+Promise.swift */,
+				2C7AC4C225B457220024D4D2 /* WidgetContentIndexingService.swift */,
+				2C3A052D25B768810007FBCA /* FileManager */,
 			);
-			path = WidgetContentFileManager;
+			path = Content;
 			sourceTree = "<group>";
 		};
 		2C7EFCF024D08D8E003A4E93 /* SocialProfiles */ = {
@@ -4017,13 +4030,13 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
-		2C8FA6C125B60096006BF4B6 /* WidgetToken */ = {
+		2C8FA6C125B60096006BF4B6 /* Token */ = {
 			isa = PBXGroup;
 			children = (
 				2CB7D89025B5F0AF0033D7B8 /* StepikWidgetToken.swift */,
 				2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */,
 			);
-			path = WidgetToken;
+			path = Token;
 			sourceTree = "<group>";
 		};
 		2C91B55E25B6EF68002F2B3E /* Sources */ = {
@@ -4044,6 +4057,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7AC43925B19E8A0024D4D2 /* Formatter.swift */,
+				2C3A051F25B763370007FBCA /* WidgetURL.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -4053,7 +4067,7 @@
 			children = (
 				2C7AC46E25B374F60024D4D2 /* WidgetContent.swift */,
 				2C7AC3DB25B0AFF30024D4D2 /* WidgetUserCourse.swift */,
-				2C7AC48425B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift */,
+				2C7AC48425B3764E0024D4D2 /* WidgetUserCourseExtensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9803,6 +9817,7 @@
 				62E980B320BE6BBF3D7CAF97 /* NewMatchingQuizViewController.swift in Sources */,
 				62E98BA429FB13408B1961B7 /* NewMatchingQuizViewModel.swift in Sources */,
 				62E98B07F7FCC64DBCB17FF1 /* NewMatchingQuizTitleView.swift in Sources */,
+				2C3A053F25B7693B0007FBCA /* WidgetRoutingService.swift in Sources */,
 				62E985413150E83869B5BA9F /* NewMatchingQuizView.swift in Sources */,
 				62E989B229C9881583AD07D1 /* NewSortingQuizAssembly.swift in Sources */,
 				62E98706EE08B59BC5CB5B03 /* NewSortingQuizDataFlow.swift in Sources */,
@@ -10035,12 +10050,13 @@
 				2C434D4525B7367500854D6F /* WidgetContentProvider.swift in Sources */,
 				2C7AC44025B19F2A0024D4D2 /* ContinueCourseView.swift in Sources */,
 				2C7AC3DD25B0AFF30024D4D2 /* WidgetUserCourse.swift in Sources */,
-				2C7AC48525B3764E0024D4D2 /* WidgetUserCourse+WidgetKit.swift in Sources */,
+				2C7AC48525B3764E0024D4D2 /* WidgetUserCourseExtensions.swift in Sources */,
 				2CA3B7D425B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */,
 				2C7AC3E825B0B60F0024D4D2 /* ContinueLearningEntryView.swift in Sources */,
 				2C7AC4A725B37D210024D4D2 /* Require.swift in Sources */,
 				2C7AC4BD25B453400024D4D2 /* WidgetContentFileManager.swift in Sources */,
 				2C434D3725B6FD8200854D6F /* NSDateExtensions.swift in Sources */,
+				2C3A052025B763370007FBCA /* WidgetURL.swift in Sources */,
 				2C434D4E25B74D1A00854D6F /* Array+Reordering.swift in Sources */,
 				2CB7D89225B5F0AF0033D7B8 /* StepikWidgetToken.swift in Sources */,
 				2C7AC4A225B37CF10024D4D2 /* FileManager+SharedContainer.swift in Sources */,

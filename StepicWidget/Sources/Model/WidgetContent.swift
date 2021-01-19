@@ -6,15 +6,5 @@ struct WidgetContent: TimelineEntry {
 }
 
 extension WidgetContent {
-    static let snapshotEntry = WidgetContent(
-        userCourses: [
-            WidgetUserCourse(
-                id: 5207,
-                title: "Creating a course on Stepik",
-                subtitle: "by Stepik Team",
-                progress: 76.0,
-                thumbnailData: nil
-            )
-        ]
-    )
+    static let snapshotEntry = WidgetContent(userCourses: [.snapshotEntry])
 }
