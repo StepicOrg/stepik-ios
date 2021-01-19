@@ -90,11 +90,11 @@ struct ContinueCourseWithCourseListView: View {
             .cornerRadius(8)
 
             VStack(alignment: .leading) {
-                Text("Find your first course")
+                Text("ContinueCourseEmptyTitle")
                     .font(.headline)
                     .lineLimit(1)
 
-                Text("There will be your progress")
+                Text("ContinueCourseEmptySubtitle")
                     .font(.caption2)
                     .lineLimit(1)
             }
@@ -141,7 +141,7 @@ struct ContinueCourseWithCourseListView: View {
 
                 Spacer()
 
-                Text("Find More Courses")
+                Text("CourseListEmptyTitle")
                     .font(.subheadline)
                     .frame(maxWidth: .infinity)
             }.padding()

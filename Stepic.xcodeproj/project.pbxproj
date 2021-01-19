@@ -496,6 +496,7 @@
 		2C3A035924AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */; };
 		2C3A052025B763370007FBCA /* WidgetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A051F25B763370007FBCA /* WidgetURL.swift */; };
 		2C3A053F25B7693B0007FBCA /* WidgetRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */; };
+		2C3A056225B780A80007FBCA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A056425B780A80007FBCA /* Localizable.strings */; };
 		2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */; };
 		2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */; };
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
@@ -2078,6 +2079,8 @@
 		2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsTimeSelectionView.swift; sourceTree = "<group>"; };
 		2C3A051F25B763370007FBCA /* WidgetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetURL.swift; sourceTree = "<group>"; };
 		2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRoutingService.swift; sourceTree = "<group>"; };
+		2C3A056325B780A80007FBCA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2C3A056925B780B00007FBCA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksFeedback.swift; sourceTree = "<group>"; };
 		2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetworksView.swift; sourceTree = "<group>"; };
@@ -3868,9 +3871,10 @@
 		2C7AC42225B0CD180024D4D2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2CF6E62F25ADB92B00B5A703 /* Info.plist */,
-				2C7AC3F825B0C9670024D4D2 /* Color+Extensions.swift */,
 				2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */,
+				2C7AC3F825B0C9670024D4D2 /* Color+Extensions.swift */,
+				2CF6E62F25ADB92B00B5A703 /* Info.plist */,
+				2C3A056425B780A80007FBCA /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -8280,6 +8284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CF6E62E25ADB92B00B5A703 /* Assets.xcassets in Resources */,
+				2C3A056225B780A80007FBCA /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10154,6 +10159,15 @@
 				2C35C4D41F4DA471002F3BF4 /* en */,
 			);
 			name = nouns_m.plist;
+			sourceTree = "<group>";
+		};
+		2C3A056425B780A80007FBCA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C3A056325B780A80007FBCA /* en */,
+				2C3A056925B780B00007FBCA /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		2CB62BDC2019FD8400B5E336 /* step3.html */ = {

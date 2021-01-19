@@ -83,7 +83,7 @@ struct ContinueCourseView: View {
 
             Spacer()
 
-            Text("Find your first course")
+            Text("ContinueCourseEmptyTitle")
                 .font(Font.system(size: 15, weight: .semibold))
         }
         .padding()

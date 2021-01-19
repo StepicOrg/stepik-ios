@@ -9,8 +9,8 @@ struct StepicWidget: Widget {
         StaticConfiguration(kind: kind, provider: WidgetContentProvider()) { entry in
             ContinueLearningEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("ConfigurationDisplayName")
+        .description("ConfigurationDescription")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

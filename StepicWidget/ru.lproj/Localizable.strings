@@ -1,0 +1,5 @@
+ConfigurationDisplayName = "Продолжить учиться";
+ConfigurationDescription = "Продолжайте учиться с того же места, где остановились.";
+ContinueCourseEmptyTitle = "Найдите свой первый курс";
+ContinueCourseEmptySubtitle = "Здесь будет ваш прогресс";
+CourseListEmptyTitle = "Найти больше курсов";
