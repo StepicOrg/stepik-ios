@@ -1,0 +1,9 @@
+ConfigurationDisplayName = "Continue Learning";
+ConfigurationDescription = "Keep learning where you left off.";
+
+ContinueCourseEmptyTitle = "Find your first course";
+ContinueCourseEmptySubtitle = "There will be your progress";
+CourseListEmptyTitle = "Find More Courses";
+
+SnapshotUserCourseTitle = "Creating a course on Stepik";
+SnapshotUserCourseSubtitle = "by Stepik Team";

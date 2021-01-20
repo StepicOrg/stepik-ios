@@ -27,13 +27,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private lazy var notificationsService = NotificationsService()
+    private lazy var notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private lazy var branchService = BranchService()
     private lazy var spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private lazy var applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
-    private lazy var notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private lazy var userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
     private lazy var visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
+    private lazy var analyticsStorageManager: AnalyticsStorageManagerProtocol = AnalyticsStorageManager.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
+
+    @available(iOS 14.0, *)
+    private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
+    @available(iOS 14.0, *)
+    private lazy var widgetRoutingService: WidgetRoutingServiceProtocol = WidgetRoutingService.default
+    @available(iOS 14.0, *)
+    private lazy var widgetUserDefaults: WidgetUserDefaultsProtocol = WidgetUserDefaults.default
+
+    private var applicationDidBecomeActiveAfterLaunch = true
 
     // MARK: - Initializing the App
 
@@ -146,12 +156,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.userCoursesObserver.startObserving()
         self.visitedCoursesCleaner.addObserves()
         IAPService.shared.prefetchProducts()
+
+        if #available(iOS 14.0, *) {
+            self.widgetContentIndexingService.startIndexing(force: self.applicationDidBecomeActiveAfterLaunch)
+
+            let widgetAddedEvent = AmplitudeAnalyticsEvent.homeScreenWidgetAdded(
+                size: self.widgetUserDefaults.lastWidgetSize
+            )
+            if self.widgetUserDefaults.isWidgetAdded && !self.analyticsStorageManager.didSend(widgetAddedEvent) {
+                self.analytics.send(widgetAddedEvent)
+                self.analyticsStorageManager.send(widgetAddedEvent)
+            }
+        }
+
+        self.applicationDidBecomeActiveAfterLaunch = false
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         self.notificationsService.scheduleRetentionNotifications()
         self.userCoursesObserver.stopObserving()
         self.visitedCoursesCleaner.removeObservers()
+
+        if #available(iOS 14.0, *) {
+            self.widgetContentIndexingService.stopIndexing()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -295,8 +323,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topViewController.route(from: .social, to: .email(email: email))
             }
         } else {
-            if branchService.canOpenWithBranch(url: url) {
-                branchService.openURL(app: app, open: url, options: options)
+            if self.branchService.canOpenWithBranch(url: url) {
+                self.branchService.openURL(app: app, open: url, options: options)
+            } else if #available(iOS 14.0, *),
+                      self.widgetRoutingService.canOpen(url: url) {
+                self.widgetRoutingService.open(url: url)
             } else {
                 // Other actions
                 self.handleOpenedFromDeepLink(url)
