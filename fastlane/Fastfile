@@ -18,14 +18,17 @@ platform :ios do
     "Stepic Production" => [
       "Stepic",
       "StickerPackExtension",
+      "StepicWidgetExtension",
     ],
     "Stepic Develop" => [
       "Stepic",
       "StickerPackExtension",
+      "StepicWidgetExtension",
     ],
     "Stepic Release" => [
       "Stepic",
       "StickerPackExtension",
+      "StepicWidgetExtension",
     ],
   }
 
