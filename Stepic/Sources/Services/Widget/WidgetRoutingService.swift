@@ -12,15 +12,18 @@ final class WidgetRoutingService: WidgetRoutingServiceProtocol {
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let sourcelessRouter: SourcelessRouter
+    private let analytics: Analytics
 
     init(
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
-        sourcelessRouter: SourcelessRouter
+        sourcelessRouter: SourcelessRouter,
+        analytics: Analytics
     ) {
         self.coursesPersistenceService = coursesPersistenceService
         self.adaptiveStorageManager = adaptiveStorageManager
         self.sourcelessRouter = sourcelessRouter
+        self.analytics = analytics
     }
 
     func canOpen(url: URL) -> Bool {
@@ -50,6 +53,10 @@ final class WidgetRoutingService: WidgetRoutingServiceProtocol {
         switch deeplinkRoute {
         case .course(let courseID):
             self.coursesPersistenceService.fetch(id: courseID).done { course in
+                self.analytics.send(
+                    .courseContinuePressed(source: .homeScreenWidget, id: courseID, title: course?.title ?? "")
+                )
+
                 guard let course = course,
                       let currentNavigationController = self.sourcelessRouter.currentNavigation else {
                     return
@@ -61,8 +68,12 @@ final class WidgetRoutingService: WidgetRoutingServiceProtocol {
                     using: currentNavigationController,
                     courseViewSource: courseViewSource
                 )
-            }.cauterize()
+            }.catch { _ in
+                self.analytics.send(.courseContinuePressed(source: .homeScreenWidget, id: courseID, title: ""))
+            }
         default:
+            self.analytics.send(.homeScreenWidgetClicked)
+
             let deepLinkRoutingService = DeepLinkRoutingService(courseViewSource: courseViewSource)
             deepLinkRoutingService.route(deeplinkRoute)
         }
@@ -75,7 +86,8 @@ extension WidgetRoutingService {
         WidgetRoutingService(
             coursesPersistenceService: CoursesPersistenceService(),
             adaptiveStorageManager: AdaptiveStorageManager(),
-            sourcelessRouter: SourcelessRouter()
+            sourcelessRouter: SourcelessRouter(),
+            analytics: StepikAnalytics.shared
         )
     }
 }

@@ -6,7 +6,7 @@ struct StepicWidget: Widget {
     let kind: String = "StepicWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: WidgetContentProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: WidgetContentProvider.default) { entry in
             ContinueLearningEntryView(entry: entry)
         }
         .configurationDisplayName("ConfigurationDisplayName")

@@ -546,6 +546,9 @@
 		2C50364224C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */; };
 		2C50364524C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50364424C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift */; };
 		2C50364724C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C50364624C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift */; };
+		2C51E1CE25B88B5600E38DF8 /* WidgetUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C51E1CD25B88B5600E38DF8 /* WidgetUserDefaults.swift */; };
+		2C51E1CF25B88B5600E38DF8 /* WidgetUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C51E1CD25B88B5600E38DF8 /* WidgetUserDefaults.swift */; };
+		2C51E1E125B8A34000E38DF8 /* AnalyticsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C51E1E025B8A34000E38DF8 /* AnalyticsStorageManager.swift */; };
 		2C52310924C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */; };
 		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
 		2C53B4752588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53B4742588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift */; };
@@ -2136,6 +2139,8 @@
 		2C50364124C5A1F3001FAE04 /* NewProfileCertificatesCertificateWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCertificateWidgetView.swift; sourceTree = "<group>"; };
 		2C50364424C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2C50364624C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		2C51E1CD25B88B5600E38DF8 /* WidgetUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUserDefaults.swift; sourceTree = "<group>"; };
+		2C51E1E025B8A34000E38DF8 /* AnalyticsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsStorageManager.swift; sourceTree = "<group>"; };
 		2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesOutputProtocol.swift; sourceTree = "<group>"; };
 		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
 		2C53B4742588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -3889,6 +3894,7 @@
 			isa = PBXGroup;
 			children = (
 				2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */,
+				2C51E1CD25B88B5600E38DF8 /* WidgetUserDefaults.swift */,
 				2C7AC4CC25B457300024D4D2 /* Content */,
 				2C8FA6C125B60096006BF4B6 /* Token */,
 			);
@@ -7087,6 +7093,7 @@
 		62E986D1988A3445F3416404 /* StorageManagers */ = {
 			isa = PBXGroup;
 			children = (
+				2C51E1E025B8A34000E38DF8 /* AnalyticsStorageManager.swift */,
 				2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */,
 				62E981C57D5BCF81714F344C /* DiscussionsSortTypeStorageManager.swift */,
 				2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */,
@@ -8888,6 +8895,7 @@
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				2C50363B24C58A43001FAE04 /* NewProfileCertificatesViewModel.swift in Sources */,
 				2C2385B024E3C38F0049BA42 /* FullscreenImageViewer.swift in Sources */,
+				2C51E1E125B8A34000E38DF8 /* AnalyticsStorageManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */,
@@ -9633,6 +9641,7 @@
 				62E98A9F7DF282A326FF2F5A /* EditStepPresenter.swift in Sources */,
 				62E986AB8C08F56B64F290B4 /* EditStepProvider.swift in Sources */,
 				62E98FB2CF69ABEC55E3C7DC /* EditStepView.swift in Sources */,
+				2C51E1CE25B88B5600E38DF8 /* WidgetUserDefaults.swift in Sources */,
 				62E98AC637D0CBBC48619134 /* EditStepViewController.swift in Sources */,
 				62E98F49D3CA846C2940B454 /* EditStepViewModel.swift in Sources */,
 				62E98E5288DA003FCF78566F /* EditStepOutputProtocol.swift in Sources */,
@@ -10057,6 +10066,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C51E1CF25B88B5600E38DF8 /* WidgetUserDefaults.swift in Sources */,
 				2C434D3225B6FC7300854D6F /* Responses.swift in Sources */,
 				2C434D4525B7367500854D6F /* WidgetContentProvider.swift in Sources */,
 				2C7AC44025B19F2A0024D4D2 /* ContinueCourseView.swift in Sources */,

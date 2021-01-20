@@ -33,12 +33,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
     private lazy var userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
     private lazy var visitedCoursesCleaner: VisitedCoursesCleanerProtocol = VisitedCoursesCleaner()
+    private lazy var analyticsStorageManager: AnalyticsStorageManagerProtocol = AnalyticsStorageManager.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
 
     @available(iOS 14.0, *)
     private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
     @available(iOS 14.0, *)
     private lazy var widgetRoutingService: WidgetRoutingServiceProtocol = WidgetRoutingService.default
+    @available(iOS 14.0, *)
+    private lazy var widgetUserDefaults: WidgetUserDefaultsProtocol = WidgetUserDefaults.default
 
     private var applicationDidBecomeActiveAfterLaunch = true
 
@@ -156,6 +159,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if #available(iOS 14.0, *) {
             self.widgetContentIndexingService.startIndexing(force: self.applicationDidBecomeActiveAfterLaunch)
+
+            let widgetAddedEvent = AmplitudeAnalyticsEvent.homeScreenWidgetAdded(
+                size: self.widgetUserDefaults.lastWidgetSize
+            )
+            if self.widgetUserDefaults.isWidgetAdded && !self.analyticsStorageManager.didSend(widgetAddedEvent) {
+                self.analytics.send(widgetAddedEvent)
+                self.analyticsStorageManager.send(widgetAddedEvent)
+            }
         }
 
         self.applicationDidBecomeActiveAfterLaunch = false

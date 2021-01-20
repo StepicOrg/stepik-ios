@@ -1,6 +1,8 @@
 import Foundation
 
 enum WidgetConstants {
+    static let appGroupName = "group.com.AlexKarpov.Stepic.WidgetContent"
+
     static let maxUserCoursesCount = 6
     static let timelineUpdateTimeInterval: TimeInterval = 1800
 

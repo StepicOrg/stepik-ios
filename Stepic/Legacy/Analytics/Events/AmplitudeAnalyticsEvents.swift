@@ -114,6 +114,7 @@ extension AnalyticsEvent {
         case courseWidget = "course_widget"
         case homeWidget = "home_widget"
         case courseScreen = "course_screen"
+        case homeScreenWidget = "ios_home_screen_widget"
     }
 
     static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
@@ -800,6 +801,17 @@ extension AnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Home screen quick action triggered",
             parameters: ["type": type]
+        )
+    }
+
+    // MARK: - Home Screen Widget -
+
+    static let homeScreenWidgetClicked = AmplitudeAnalyticsEvent(name: "Home screen widget clicked")
+
+    static func homeScreenWidgetAdded(size: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Home screen widget added",
+            parameters: ["size": size]
         )
     }
 }

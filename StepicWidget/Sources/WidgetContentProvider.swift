@@ -3,23 +3,22 @@ import WidgetKit
 struct WidgetContentProvider: TimelineProvider {
     typealias Entry = WidgetContent
 
-    let stepikNetworkService: StepikNetworkService = .shared
-    let contentFileManager: WidgetContentFileManagerProtocol = WidgetContentFileManager.default
-    let tokenFileManager: StepikWidgetTokenFileManagerProtocol = StepikWidgetTokenFileManager.default
+    let stepikNetworkService: StepikNetworkService
+    let contentFileManager: WidgetContentFileManagerProtocol
+    let tokenFileManager: StepikWidgetTokenFileManagerProtocol
+    let widgetUserDefaults: WidgetUserDefaultsProtocol
 
-    private let userDefaults = WidgetContentProviderUserDefaults()
+    func placeholder(in context: Context) -> WidgetContent { .snapshotEntry }
 
-    func placeholder(in context: Context) -> WidgetContent {
-        .snapshotEntry
-    }
-
-    func getSnapshot(in context: Context, completion: @escaping (WidgetContent) -> Void) {
-        completion(.snapshotEntry)
-    }
+    func getSnapshot(in context: Context, completion: @escaping (WidgetContent) -> Void) { completion(.snapshotEntry) }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        if self.userDefaults.shouldPerformRemoteRequest {
-            self.userDefaults.updateLastDateRemoteRequestPerformed()
+        self.widgetUserDefaults.isWidgetAdded = true
+        self.widgetUserDefaults.lastWidgetSize = context.family.rawValue
+
+        if self.shouldPerformRemoteRequest {
+            self.updateLastDateRemoteRequestPerformed()
+
             self.fetchRemoteContent { result in
                 switch result {
                 case .success(let remoteContent):
@@ -147,29 +146,31 @@ struct WidgetContentProvider: TimelineProvider {
     }
 }
 
-// MARK: - WidgetContentProviderUserDefaults -
+extension WidgetContentProvider {
+    static var `default`: WidgetContentProvider {
+        WidgetContentProvider(
+            stepikNetworkService: .shared,
+            contentFileManager: WidgetContentFileManager.default,
+            tokenFileManager: StepikWidgetTokenFileManager.default,
+            widgetUserDefaults: WidgetUserDefaults.default
+        )
+    }
+}
 
-fileprivate class WidgetContentProviderUserDefaults {
-    private static let lastDateRemoteDataRequestedKey = "lastDateRemoteDataRequestedKey"
+// MARK: - WidgetContentProvider (UserDefaults) -
+
+extension WidgetContentProvider {
+    private static let lastDateRemoteRequestPerformedKey = "lastDateRemoteDataRequestedKey"
 
     var shouldPerformRemoteRequest: Bool {
-        Date().timeIntervalSince(self.lastDateRemoteRequestPerformed) >= WidgetConstants.timelineUpdateTimeInterval
-    }
+        let lastDateRemoteRequestPerformed = UserDefaults.standard.object(
+            forKey: Self.lastDateRemoteRequestPerformedKey
+        ) as? Date ?? Date(timeIntervalSince1970: 0)
 
-    private var lastDateRemoteRequestPerformed: Date {
-        get {
-            if let defaultsDate = UserDefaults.standard.object(forKey: Self.lastDateRemoteDataRequestedKey) as? Date {
-                return defaultsDate
-            } else {
-                return Date(timeIntervalSince1970: 0)
-            }
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Self.lastDateRemoteDataRequestedKey)
-        }
+        return Date().timeIntervalSince(lastDateRemoteRequestPerformed) >= WidgetConstants.timelineUpdateTimeInterval
     }
 
     func updateLastDateRemoteRequestPerformed() {
-        self.lastDateRemoteRequestPerformed = Date()
+        UserDefaults.standard.set(Date(), forKey: Self.lastDateRemoteRequestPerformedKey)
     }
 }
