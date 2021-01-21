@@ -920,7 +920,8 @@ SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 UnsupportedQuizTitle = "Неподдерживаемый тип шага";
-FreeAnswerQuizTitle = "Напишите эссе";
+FreeAnswerQuizTitle = "Напишите ответ";
+FreeAnswerQuizPlaceholder = "Введите текст";
 FillBlanksQuizTitle = "Заполните пробелы";
 TableQuizTitle = "Выберите верные ячейки";
 
