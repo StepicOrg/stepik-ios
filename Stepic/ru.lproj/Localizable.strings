@@ -921,6 +921,7 @@ MatchingQuizTitle = "Сопоставьте значения из двух сп�
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 UnsupportedQuizTitle = "Неподдерживаемый тип шага";
 FreeAnswerQuizTitle = "Напишите ответ";
+FreeAnswerQuizPlaceholder = "Введите текст";
 FillBlanksQuizTitle = "Заполните пробелы";
 TableQuizTitle = "Выберите верные ячейки";
 
