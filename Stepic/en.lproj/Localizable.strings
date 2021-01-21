@@ -919,7 +919,7 @@ SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
-FreeAnswerQuizTitle = "Write an essay";
+FreeAnswerQuizTitle = "Write an answer";
 FillBlanksQuizTitle = "Fill in the blanks";
 TableQuizTitle = "Select the right cells";
 
