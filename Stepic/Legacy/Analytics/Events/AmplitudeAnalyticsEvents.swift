@@ -786,6 +786,8 @@ extension AnalyticsEvent {
                 return "coursePromo"
             case .certificates:
                 return "certificates"
+            case .story:
+                return "story-template"
             }
         }()
 

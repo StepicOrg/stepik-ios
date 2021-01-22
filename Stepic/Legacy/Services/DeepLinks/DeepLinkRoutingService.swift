@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import SVProgressHUD
 
 final class DeepLinkRoutingService {
     private var courseViewSource: AnalyticsEvent.CourseViewSource?
@@ -53,9 +54,15 @@ final class DeepLinkRoutingService {
                 fallbackPath: fallbackURLPath
             )
             router.route()
-        }.catch { _ in
-            //TODO: Handle this
-            print("network error during routing, handle this")
+        }.catch { error in
+            print("DeepLinkRoutingService :: failed route = \(String(describing: route)), fallbackPath = \(fallbackURLPath), error = \(error)")
+
+            if let routerError = error as? Error {
+                switch routerError {
+                case .failedRouteToStory:
+                    SVProgressHUD.showError(withStatus: routerError.errorDescription)
+                }
+            }
         }
     }
 
@@ -95,6 +102,22 @@ final class DeepLinkRoutingService {
                 embedInNavigation: true,
                 fallbackPath: fallbackPath
             )
+        case .story:
+            if let sourceController = (source ?? self.currentNavigation?.topViewController),
+               let destinationController = moduleStack.first {
+                return ModalRouter(
+                    source: sourceController,
+                    destination: destinationController,
+                    embedInNavigation: false
+                )
+            } else {
+                return ModalOrPushStackRouter(
+                    source: source,
+                    destinationStack: moduleStack,
+                    embedInNavigation: false,
+                    fallbackPath: fallbackPath
+                )
+            }
         }
     }
 
@@ -170,6 +193,27 @@ final class DeepLinkRoutingService {
                 )
             case .certificates(let userID):
                 seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
+            case .story(let id):
+                SVProgressHUD.show()
+                DeepLinkRouter.routeToStoryWithID(id) { moduleStack in
+                    if moduleStack.isEmpty {
+                        seal.reject(Error.failedRouteToStory)
+                    } else {
+                        SVProgressHUD.showSuccess(withStatus: nil)
+                        seal.fulfill(moduleStack)
+                    }
+                }
+            }
+        }
+    }
+
+    enum Error: Swift.Error, LocalizedError {
+        case failedRouteToStory
+
+        var errorDescription: String? {
+            switch self {
+            case .failedRouteToStory:
+                return NSLocalizedString("DeepLinkRoutingServiceErrorStatusRouteStory", comment: "")
             }
         }
     }

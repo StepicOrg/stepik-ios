@@ -63,15 +63,6 @@ final class StoriesPresenter: StoriesPresenterProtocol {
         self.view?.updateStory(index: index)
     }
 
-    private func isSupported(story: Story) -> Bool {
-        for part in story.parts {
-            if part.type == nil {
-                return false
-            }
-        }
-        return story.parts.count > 0
-    }
-
     func refresh() {
         self.view?.set(state: .loading)
 
@@ -90,7 +81,7 @@ final class StoriesPresenter: StoriesPresenterProtocol {
             }
 
             strongSelf.stories = stories.filter {
-                strongSelf.isSupported(story: $0)
+                $0.isSupported
             }.sorted(by: {
                 $0.position >= $1.position
             }).sorted(by: {
