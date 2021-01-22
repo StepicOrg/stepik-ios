@@ -665,13 +665,17 @@ extension AnalyticsEvent {
 
     // MARK: - Stories -
 
-    static func storyOpened(id: Int) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Story opened",
-            parameters: [
-                "id": id
-            ]
-        )
+    static func storyOpened(id: Int, source: StoryOpenSource) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "id": id,
+            "source": source.name
+        ]
+
+        if case .deeplink(let path) = source {
+            parameters["deeplink_url"] = path
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Story opened", parameters: parameters)
     }
 
     static func storyPartOpened(id: Int, position: Int) -> AmplitudeAnalyticsEvent {

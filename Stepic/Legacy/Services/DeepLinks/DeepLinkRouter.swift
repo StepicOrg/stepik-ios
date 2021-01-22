@@ -290,7 +290,11 @@ final class DeepLinkRouter {
         return
     }
 
-    static func routeToStoryWithID(_ id: Story.IdType, completion: @escaping ([UIViewController]) -> Void) {
+    static func routeToStoryWithID(
+        _ id: Story.IdType,
+        urlPath: String,
+        completion: @escaping ([UIViewController]) -> Void
+    ) {
         struct Holder {
             static var networkService = StoryTemplatesNetworkService(storyTemplatesAPI: StoryTemplatesAPI())
         }
@@ -323,6 +327,7 @@ final class DeepLinkRouter {
             let assembly = OpenedStoriesAssembly(
                 stories: resultStories,
                 startPosition: deepLinkStoryIndex,
+                storyOpenSource: .deeplink(path: urlPath),
                 moduleOutput: nil
             )
 

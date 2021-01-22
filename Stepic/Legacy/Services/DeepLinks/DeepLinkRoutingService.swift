@@ -195,7 +195,7 @@ final class DeepLinkRoutingService {
                 seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
             case .story(let id):
                 SVProgressHUD.show()
-                DeepLinkRouter.routeToStoryWithID(id) { moduleStack in
+                DeepLinkRouter.routeToStoryWithID(id, urlPath: urlPath) { moduleStack in
                     if moduleStack.isEmpty {
                         seal.reject(Error.failedRouteToStory)
                     } else {
