@@ -78,6 +78,7 @@ final class NotificationsService {
         case achievementProgresses = "achievement-progresses"
         case retentionNextDay = "retention-next-day"
         case retentionThirdDay = "retention-third-day"
+        case storyTemplates = "story-templates"
     }
 }
 
@@ -173,22 +174,23 @@ extension NotificationsService {
     func handleRemoteNotification(with userInfo: NotificationUserInfo) {
         print("remote notification received: DEBUG = \(userInfo)")
 
-        guard let notificationType = self.extractNotificationType(from: userInfo) else {
+        guard let notificationTypeStringValue = self.extractNotificationType(from: userInfo) else {
             return print("remote notification received: unable to parse notification type")
         }
 
-        self.reportReceivedNotificationWithType(notificationType)
+        self.reportReceivedNotificationWithType(notificationTypeStringValue)
 
-        // FIXME: Use `NotificationType` instead of raw values.
-        switch notificationType {
-        case NotificationType.notifications.rawValue:
+        switch NotificationType(rawValue: notificationTypeStringValue) {
+        case .notifications?:
             self.resolveRemoteNotificationsNotification(userInfo)
-        case NotificationType.notificationStatuses.rawValue:
+        case .notificationStatuses?:
             self.resolveRemoteNotificationStatusesNotification(userInfo)
-        case NotificationType.achievementProgresses.rawValue:
+        case .achievementProgresses?:
             self.resolveRemoteAchievementNotification(userInfo)
+        case .storyTemplates?:
+            self.resolveRemoteStoryTemplatesNotification(userInfo)
         default:
-            print("remote notification received: unsupported notification type: \(notificationType)")
+            print("remote notification received: unsupported notification type: \(notificationTypeStringValue)")
         }
     }
 
@@ -249,6 +251,16 @@ extension NotificationsService {
         self.routeToProfile(userInfo: userInfo)
     }
 
+    private func resolveRemoteStoryTemplatesNotification(_ userInfo: NotificationUserInfo) {
+        guard let storyURL = userInfo[PayloadKey.storyURL.rawValue] as? String else {
+            return print("remote notification received: unable to parse notification: \(userInfo)")
+        }
+
+        DispatchQueue.main.async {
+            self.deepLinkRoutingService.route(path: storyURL)
+        }
+    }
+
     private func routeToProfile(userInfo: NotificationUserInfo) {
         DispatchQueue.main.async {
             if #available(iOS 10.0, *) {
@@ -278,6 +290,7 @@ extension NotificationsService {
         case id
         case new
         case badge
+        case storyURL = "story_url"
     }
 }
 
