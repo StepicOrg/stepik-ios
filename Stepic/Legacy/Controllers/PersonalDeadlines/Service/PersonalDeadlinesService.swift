@@ -49,7 +49,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
         Promise { seal in
             counter.countDeadlines(mode: mode, for: course).then {
                 sectionDeadlines -> Promise<StorageRecord> in
-                let data = DeadlineStorageData(courseID: course.id, deadlines: sectionDeadlines)
+                let data = DeadlineStorageRecordData(courseID: course.id, deadlines: sectionDeadlines)
                 let record = StorageRecord(data: data, kind: StorageRecordKind.deadline(courseID: course.id))
                 return self.storageRecordsAPI.create(record: record)
             }.done { createdRecord in
@@ -118,7 +118,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                 seal.reject(DeadlineChangeError.noLocalRecord)
                 return
             }
-            guard let dataToChange = record.data as? DeadlineStorageData else {
+            guard let dataToChange = record.data as? DeadlineStorageRecordData else {
                 seal.reject(DeadlineChangeError.noLocalRecord)
                 return
             }

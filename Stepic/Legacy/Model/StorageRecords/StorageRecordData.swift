@@ -8,7 +8,7 @@ protocol StorageRecordData {
 
 // MARK: - Deadlines -
 
-final class DeadlineStorageData: StorageRecordData {
+final class DeadlineStorageRecordData: StorageRecordData {
     var courseID: Int
     var deadlines: [SectionDeadline]
 
@@ -69,5 +69,29 @@ struct SectionDeadline {
     enum JSONKey: String {
         case section
         case deadline
+    }
+}
+
+// MARK: - Personal Offers -
+
+final class PersonalOfferStorageRecordData: StorageRecordData {
+    var promoStories: [Story.IdType]
+
+    var dictValue: [String : Any] {
+        [
+            JSONKey.promoStories.rawValue: self.promoStories
+        ]
+    }
+
+    init(promoStories: [Story.IdType]) {
+        self.promoStories = promoStories
+    }
+
+    init(json: JSON) {
+        self.promoStories = json[JSONKey.promoStories.rawValue].arrayValue.map(\.intValue)
+    }
+
+    enum JSONKey: String {
+        case promoStories = "promo_stories"
     }
 }

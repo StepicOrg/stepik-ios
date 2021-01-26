@@ -42,7 +42,9 @@ final class StorageRecord: JSONSerializable {
 
         switch kind {
         case .deadline:
-            return DeadlineStorageData(json: json)
+            return DeadlineStorageRecordData(json: json)
+        case .personalOffers:
+            return PersonalOfferStorageRecordData(json: json)
         }
     }
 

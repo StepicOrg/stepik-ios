@@ -7,6 +7,10 @@ class ExploreAssembly: Assembly {
             presenter: presenter,
             contentLanguageService: ContentLanguageService(),
             networkReachabilityService: NetworkReachabilityService(),
+            userAccountService: UserAccountService(),
+            personalOffersService: PersonalOffersService(
+                storageRecordsNetworkService: StorageRecordsNetworkService(storageRecordsAPI: StorageRecordsAPI())
+            ),
             languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityService()
         )
         let viewController = ExploreViewController(interactor: interactor, analytics: StepikAnalytics.shared)

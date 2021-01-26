@@ -16,7 +16,7 @@ final class Course: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
     var sectionDeadlines: [SectionDeadline]? {
-        (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageData)?.deadlines
+        (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageRecordData)?.deadlines
     }
 
     var metaInfo: String {

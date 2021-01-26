@@ -700,6 +700,7 @@
 		2C8FA6E225B6097D006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */; };
 		2C911B8625C02A9E0076DC31 /* StorageRecordKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C911B8525C02A9E0076DC31 /* StorageRecordKind.swift */; };
 		2C911B9025C02E430076DC31 /* StorageRecordsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C911B8F25C02E430076DC31 /* StorageRecordsNetworkService.swift */; };
+		2C911B9A25C037EB0076DC31 /* PersonalOffersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C911B9925C037EB0076DC31 /* PersonalOffersService.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
@@ -2302,6 +2303,7 @@
 		2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikWidgetTokenFileManager.swift; sourceTree = "<group>"; };
 		2C911B8525C02A9E0076DC31 /* StorageRecordKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecordKind.swift; sourceTree = "<group>"; };
 		2C911B8F25C02E430076DC31 /* StorageRecordsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecordsNetworkService.swift; sourceTree = "<group>"; };
+		2C911B9925C037EB0076DC31 /* PersonalOffersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalOffersService.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationThemeService.swift; sourceTree = "<group>"; };
@@ -7618,6 +7620,7 @@
 				2C7AC4D525B462BC0024D4D2 /* ImagePreheater.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
+				2C911B9925C037EB0076DC31 /* PersonalOffersService.swift */,
 				2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
@@ -10065,6 +10068,7 @@
 				DF2D0B6B2964A1E24CB373B2 /* TableQuizView.swift in Sources */,
 				4B32F5A0FE4CF3EE3F0FB14B /* TableQuizViewController.swift in Sources */,
 				F97BB185088B9D4BDC7CF147 /* CourseListFilterAssembly.swift in Sources */,
+				2C911B9A25C037EB0076DC31 /* PersonalOffersService.swift in Sources */,
 				8B172316D4E6435D8AB2AEE8 /* CourseListFilterDataFlow.swift in Sources */,
 				48B0EC48DA9989013F58FB2A /* CourseListFilterInteractor.swift in Sources */,
 				7EAA19D4026219B6276DE691 /* CourseListFilterPresenter.swift in Sources */,

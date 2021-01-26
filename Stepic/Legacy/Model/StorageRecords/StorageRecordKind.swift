@@ -2,11 +2,14 @@ import Foundation
 
 enum StorageRecordKind {
     case deadline(courseID: Int)
+    case personalOffers
 
     var name: String {
         switch self {
         case .deadline(let courseID):
             return "deadline_\(courseID)"
+        case .personalOffers:
+            return "personal_offers"
         }
     }
 
@@ -14,6 +17,8 @@ enum StorageRecordKind {
         switch self {
         case .deadline:
             return .deadline
+        case .personalOffers:
+            return .personalOffers
         }
     }
 
@@ -24,17 +29,23 @@ enum StorageRecordKind {
                 self = .deadline(courseID: courseID)
                 return
             }
+        } else if PrefixType(rawValue: string) == .personalOffers {
+            self = .personalOffers
+            return
         }
         return nil
     }
 
     enum PrefixType: String {
         case deadline
+        case personalOffers = "personal_offers"
 
         var prefix: String {
             switch self {
             case .deadline:
                 return "deadline_"
+            case .personalOffers:
+                return self.rawValue
             }
         }
 
@@ -42,6 +53,8 @@ enum StorageRecordKind {
             switch self {
             case .deadline:
                 return "deadline"
+            case .personalOffers:
+                return self.rawValue
             }
         }
     }
