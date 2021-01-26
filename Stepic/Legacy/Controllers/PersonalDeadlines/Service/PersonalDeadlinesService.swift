@@ -50,7 +50,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
             counter.countDeadlines(mode: mode, for: course).then {
                 sectionDeadlines -> Promise<StorageRecord> in
                 let data = DeadlineStorageData(courseID: course.id, deadlines: sectionDeadlines)
-                let record = StorageRecord(data: data, kind: StorageKind.deadline(courseID: course.id))
+                let record = StorageRecord(data: data, kind: StorageRecordKind.deadline(courseID: course.id))
                 return self.storageRecordsAPI.create(record: record)
             }.done { createdRecord in
                 self.localStorageManager.set(storageRecord: createdRecord, for: course)

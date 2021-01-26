@@ -16,7 +16,7 @@ final class StorageRecordsAPI: APIEndpoint {
 
     func retrieve(
         userID: User.IdType,
-        kindPrefixType prefixType: StorageKind.PrefixType
+        kindPrefixType prefixType: StorageRecordKind.PrefixType
     ) -> Promise<([StorageRecord], Meta)> {
         let params: Parameters = [
             StorageRecord.JSONKey.user.rawValue: userID,
@@ -31,7 +31,7 @@ final class StorageRecordsAPI: APIEndpoint {
         )
     }
 
-    func retrieve(userID: User.IdType, kind: StorageKind?) -> Promise<([StorageRecord], Meta)> {
+    func retrieve(userID: User.IdType, kind: StorageRecordKind?) -> Promise<([StorageRecord], Meta)> {
         let params: Parameters = [
             StorageRecord.JSONKey.kind.rawValue: kind?.name ?? "",
             StorageRecord.JSONKey.user.rawValue: userID
