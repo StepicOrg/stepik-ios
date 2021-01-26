@@ -13,10 +13,17 @@ final class OpenedStoriesAssembly: Assembly {
 
     private let stories: [Story]
     private let startPosition: Int
+    private let storyOpenSource: StoryOpenSource
 
-    init(stories: [Story], startPosition: Int, moduleOutput: OpenedStoriesOutputProtocol?) {
+    init(
+        stories: [Story],
+        startPosition: Int,
+        storyOpenSource: StoryOpenSource,
+        moduleOutput: OpenedStoriesOutputProtocol? = nil
+    ) {
         self.stories = stories
         self.startPosition = startPosition
+        self.storyOpenSource = storyOpenSource
         self.moduleOutput = moduleOutput
     }
 
@@ -28,7 +35,9 @@ final class OpenedStoriesAssembly: Assembly {
         )
         let presenter = OpenedStoriesPresenter(
             view: viewController,
-            stories: self.stories, startPosition: self.startPosition,
+            stories: self.stories,
+            startPosition: self.startPosition,
+            storyOpenSource: self.storyOpenSource,
             analytics: StepikAnalytics.shared
         )
 

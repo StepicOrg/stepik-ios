@@ -44,6 +44,8 @@ final class StoryPresenter: StoryPresenterProtocol {
     private var urlNavigator: URLNavigator
     private var story: Story
 
+    private let storyOpenSource: StoryOpenSource
+
     private let storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol
     private let analytics: Analytics
 
@@ -67,6 +69,7 @@ final class StoryPresenter: StoryPresenterProtocol {
         urlNavigator: URLNavigator,
         navigationDelegate: StoryNavigationDelegate?,
         storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol,
+        storyOpenSource: StoryOpenSource,
         analytics: Analytics
     ) {
         self.view = view
@@ -75,6 +78,7 @@ final class StoryPresenter: StoryPresenterProtocol {
         self.navigationDelegate = navigationDelegate
         self.urlNavigator = urlNavigator
         self.storyPartsReactionsPersistenceService = storyPartsReactionsPersistenceService
+        self.storyOpenSource = storyOpenSource
         self.analytics = analytics
     }
 
@@ -138,7 +142,7 @@ final class StoryPresenter: StoryPresenterProtocol {
     }
 
     func didAppear() {
-        self.analytics.send(.storyOpened(id: self.storyID))
+        self.analytics.send(.storyOpened(id: self.storyID, source: self.storyOpenSource))
         NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": self.storyID])
 
         if self.shouldRestartSegment {

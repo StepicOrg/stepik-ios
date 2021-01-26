@@ -1,4 +1,4 @@
-fastlane_version "2.170.0"
+fastlane_version "2.172.0"
 
 default_platform :ios
 
@@ -18,14 +18,17 @@ platform :ios do
     "Stepic Production" => [
       "Stepic",
       "StickerPackExtension",
+      "StepicWidgetExtension",
     ],
     "Stepic Develop" => [
       "Stepic",
       "StickerPackExtension",
+      "StepicWidgetExtension",
     ],
     "Stepic Release" => [
       "Stepic",
       "StickerPackExtension",
+      "StepicWidgetExtension",
     ],
   }
 

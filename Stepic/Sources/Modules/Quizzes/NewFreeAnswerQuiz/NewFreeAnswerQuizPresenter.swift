@@ -7,7 +7,7 @@ protocol NewFreeAnswerQuizPresenterProtocol {
 final class NewFreeAnswerQuizPresenter: NewFreeAnswerQuizPresenterProtocol {
     weak var viewController: NewFreeAnswerQuizViewControllerProtocol?
 
-    private lazy var quizPlaceholder = NSLocalizedString("StringQuizPlaceholder", comment: "")
+    private lazy var quizPlaceholder = NSLocalizedString("FreeAnswerQuizPlaceholder", comment: "")
 
     func presentReply(response: NewFreeAnswerQuiz.ReplyLoad.Response) {
         let viewModel = NewFreeAnswerQuizViewModel(

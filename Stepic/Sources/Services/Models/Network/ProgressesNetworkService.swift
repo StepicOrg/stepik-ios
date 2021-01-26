@@ -6,6 +6,12 @@ protocol ProgressesNetworkServiceProtocol: AnyObject {
     func fetch(id: Progress.IdType) -> Promise<Progress?>
 }
 
+extension ProgressesNetworkServiceProtocol {
+    func fetch(ids: [Progress.IdType]) -> Promise<[Progress]> {
+        self.fetch(ids: ids, page: 1).map { $0.0 }
+    }
+}
+
 final class ProgressesNetworkService: ProgressesNetworkServiceProtocol {
     private let progressesAPI: ProgressesAPI
 

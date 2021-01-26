@@ -114,6 +114,7 @@ extension AnalyticsEvent {
         case courseWidget = "course_widget"
         case homeWidget = "home_widget"
         case courseScreen = "course_screen"
+        case homeScreenWidget = "ios_home_screen_widget"
     }
 
     static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
@@ -494,6 +495,7 @@ extension AnalyticsEvent {
         case query(courseListType: CourseListType)
         case story(id: Int)
         case deepLink(url: String)
+        case widgetExtension(url: String)
         case notification
         case profile(id: Int)
         case unknown
@@ -520,6 +522,8 @@ extension AnalyticsEvent {
                 return "story"
             case .deepLink:
                 return "deeplink"
+            case .widgetExtension:
+                return "widget_extension"
             case .notification:
                 return "notification"
             case .profile:
@@ -561,7 +565,7 @@ extension AnalyticsEvent {
                 return params
             case .story(let id):
                 return ["story": id]
-            case .deepLink(let url):
+            case .deepLink(let url), .widgetExtension(let url):
                 return ["url": url]
             }
         }
@@ -661,13 +665,17 @@ extension AnalyticsEvent {
 
     // MARK: - Stories -
 
-    static func storyOpened(id: Int) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Story opened",
-            parameters: [
-                "id": id
-            ]
-        )
+    static func storyOpened(id: Int, source: StoryOpenSource) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "id": id,
+            "source": source.name
+        ]
+
+        if case .deeplink(let path) = source {
+            parameters["deeplink_url"] = path
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Story opened", parameters: parameters)
     }
 
     static func storyPartOpened(id: Int, position: Int) -> AmplitudeAnalyticsEvent {
@@ -782,6 +790,8 @@ extension AnalyticsEvent {
                 return "coursePromo"
             case .certificates:
                 return "certificates"
+            case .story:
+                return "story-template"
             }
         }()
 
@@ -797,6 +807,17 @@ extension AnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Home screen quick action triggered",
             parameters: ["type": type]
+        )
+    }
+
+    // MARK: - Home Screen Widget -
+
+    static let homeScreenWidgetClicked = AmplitudeAnalyticsEvent(name: "Home screen widget clicked")
+
+    static func homeScreenWidgetAdded(size: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Home screen widget added",
+            parameters: ["size": size]
         )
     }
 }

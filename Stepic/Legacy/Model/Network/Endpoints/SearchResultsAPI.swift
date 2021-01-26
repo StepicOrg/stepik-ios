@@ -21,6 +21,7 @@ final class SearchResultsAPI: APIEndpoint {
         type: String?,
         language: ContentLanguage,
         page: Int?,
+        searchQueryParams: Parameters,
         filterQuery: CourseListFilterQuery? = nil,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([SearchResult], Meta) -> Void,
@@ -29,12 +30,7 @@ final class SearchResultsAPI: APIEndpoint {
         var params: Parameters = [
             "query": query.lowercased(),
             "access_token": AuthInfo.shared.token?.accessToken ?? "",
-            "language": language.searchCoursesParameter ?? "",
-            "is_popular": "true",
-            "is_public": "true",
-            "readiness__gte": 0.7,
-            "has_logo": "true",
-            "is_idea_compatible": "false"
+            "language": language.searchCoursesParameter ?? ""
         ]
 
         if let page = page {
@@ -43,6 +39,8 @@ final class SearchResultsAPI: APIEndpoint {
         if let type = type {
             params["type"] = type
         }
+
+        params.merge(searchQueryParams) { (_, new) in new }
 
         if let filterQuery = filterQuery {
             filterQuery.dictValue.forEach { key, value in
@@ -78,6 +76,7 @@ final class SearchResultsAPI: APIEndpoint {
         query: String,
         language: ContentLanguage,
         page: Int,
+        searchQueryParams: Parameters = RemoteConfig.shared.searchResultsQueryParams,
         filterQuery: CourseListFilterQuery? = nil,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<([SearchResult], Meta)> {
@@ -87,6 +86,7 @@ final class SearchResultsAPI: APIEndpoint {
                 type: "course",
                 language: language,
                 page: page,
+                searchQueryParams: searchQueryParams,
                 filterQuery: filterQuery,
                 headers: headers,
                 success: { searchResults, meta in

@@ -10,10 +10,16 @@ import UIKit
 
 final class StoryAssembly: Assembly {
     private let story: Story
+    private let storyOpenSource: StoryOpenSource
     private weak var navigationDelegate: StoryNavigationDelegate?
 
-    init(story: Story, navigationDelegate: StoryNavigationDelegate) {
+    init(
+        story: Story,
+        storyOpenSource: StoryOpenSource,
+        navigationDelegate: StoryNavigationDelegate
+    ) {
         self.story = story
+        self.storyOpenSource = storyOpenSource
         self.navigationDelegate = navigationDelegate
     }
 
@@ -32,6 +38,7 @@ final class StoryAssembly: Assembly {
             urlNavigator: urlNavigator,
             navigationDelegate: self.navigationDelegate,
             storyPartsReactionsPersistenceService: StoryPartsReactionsPersistenceService(),
+            storyOpenSource: self.storyOpenSource,
             analytics: StepikAnalytics.shared
         )
 

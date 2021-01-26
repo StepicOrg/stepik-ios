@@ -10,7 +10,10 @@ protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
 
 final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol {
     private lazy var explorePresenter = self.presenter as? ExplorePresenterProtocol
-    let contentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
+
+    private let userAccountService: UserAccountServiceProtocol
+    private let personalOffersService: PersonalOffersServiceProtocol
+    private let contentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
 
     private lazy var currentSearchResultsCourseListFilters = self.getDefaultSearchResultsCourseListFilters()
 
@@ -18,9 +21,14 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         presenter: ExplorePresenterProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
+        userAccountService: UserAccountServiceProtocol,
+        personalOffersService: PersonalOffersServiceProtocol,
         languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
     ) {
+        self.userAccountService = userAccountService
+        self.personalOffersService = personalOffersService
         self.contentLanguageSwitchAvailabilityService = languageSwitchAvailabilityService
+
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
@@ -32,6 +40,11 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         self.explorePresenter?.presentContent(
             response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         )
+
+        if self.networkReachabilityService.isReachable && self.userAccountService.isAuthorized,
+           let userID = self.userAccountService.currentUserID {
+            self.personalOffersService.syncPersonalOffers(userID: userID).cauterize()
+        }
     }
 
     func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request) {
