@@ -3,6 +3,13 @@ import PromiseKit
 
 protocol PersonalOffersServiceProtocol: AnyObject {
     func syncPersonalOffers(userID: User.IdType) -> Promise<Void>
+    func fetchPersonalOffers(userID: User.IdType) -> Promise<[StorageRecord]>
+}
+
+extension PersonalOffersServiceProtocol {
+    func fetchPersonalOffer(userID: User.IdType) -> Promise<StorageRecord?> {
+        self.fetchPersonalOffers(userID: userID).map { $0.first }
+    }
 }
 
 final class PersonalOffersService: PersonalOffersServiceProtocol {
@@ -28,6 +35,10 @@ final class PersonalOffersService: PersonalOffersServiceProtocol {
                 return self.storageRecordsNetworkService.create(record: personalOffersRecord)
             }
         }.asVoid()
+    }
+
+    func fetchPersonalOffers(userID: User.IdType) -> Promise<[StorageRecord]> {
+        self.storageRecordsNetworkService.fetch(userID: userID, kindPrefixType: .personalOffers).map { $0.0 }
     }
 
     enum Error: Swift.Error {
