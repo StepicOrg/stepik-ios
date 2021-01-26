@@ -17,6 +17,15 @@ final class Story: JSONSerializable {
     var parts: [StoryPart]
     var position: Int
 
+    var isSupported: Bool {
+        for part in self.parts {
+            if part.type == nil {
+                return false
+            }
+        }
+        return self.parts.count > 0
+    }
+
     required init(json: JSON) {
         let id = json["id"].intValue
         self.id = json["id"].intValue

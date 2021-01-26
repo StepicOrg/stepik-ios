@@ -266,7 +266,11 @@ final class RetrieveRequestMaker {
         updating: [T],
         withManager manager: Alamofire.Session
     ) -> Promise<[T]> {
-        Promise { seal in
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return Promise { seal in
             self.request(
                 requestEndpoint: requestEndpoint,
                 paramName: paramName,

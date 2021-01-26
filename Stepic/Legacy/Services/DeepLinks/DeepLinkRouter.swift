@@ -290,6 +290,53 @@ final class DeepLinkRouter {
         return
     }
 
+    static func routeToStoryWithID(
+        _ id: Story.IdType,
+        urlPath: String,
+        completion: @escaping ([UIViewController]) -> Void
+    ) {
+        struct Holder {
+            static var networkService = StoryTemplatesNetworkService(storyTemplatesAPI: StoryTemplatesAPI())
+        }
+
+        Holder.networkService.fetch(id: id).then { storyOrNil -> Promise<(Story, [Story])> in
+            guard let story = storyOrNil else {
+                throw Error.fetchFailed
+            }
+
+            return Holder.networkService.fetch(
+                language: ContentLanguageService().globalContentLanguage,
+                maxVersion: StepikApplicationsInfo.Versions.stories ?? 0,
+                isPublished: AuthInfo.shared.user?.profileEntity?.isStaff != true ? true : nil
+            ).map { (story, $0) }
+        }.done { deepLinkStory, allStories in
+            let resultStories = (
+                allStories.contains(where: { $0.id == deepLinkStory.id }) ? allStories : (allStories + [deepLinkStory])
+            ).filter {
+                $0.isSupported
+            }.sorted {
+                $0.position >= $1.position
+            }.sorted {
+                !($0.isViewed.value) || ($1.isViewed.value)
+            }
+
+            guard let deepLinkStoryIndex = resultStories.firstIndex(where: { $0.id == deepLinkStory.id }) else {
+                return completion([])
+            }
+
+            let assembly = OpenedStoriesAssembly(
+                stories: resultStories,
+                startPosition: deepLinkStoryIndex,
+                storyOpenSource: .deeplink(path: urlPath),
+                moduleOutput: nil
+            )
+
+            completion([assembly.makeModule()])
+        }.catch { _ in
+            completion([])
+        }
+    }
+
     static func routeToCatalogWithID(_ id: CourseListModel.IdType, completion: @escaping ([UIViewController]) -> Void) {
         struct Holder {
             static var persistenceService = CourseListsPersistenceService()
@@ -496,5 +543,9 @@ final class DeepLinkRouter {
                 )
             })
         }
+    }
+
+    enum Error: Swift.Error {
+        case fetchFailed
     }
 }

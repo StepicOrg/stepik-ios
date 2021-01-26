@@ -299,6 +299,23 @@ class DeepLinkRouteSpec: QuickSpec {
                     }
                 }
             }
+
+            context("stories") {
+                it("matches story deep link with given paths") {
+                    let paths = [
+                        "http://stepik.org/story-template/8092",
+                        "https://stepik.org/story-template/8092",
+                        "https://stepik.org/story-template/8092/",
+                        "https://stepik.org/story-template/8092?etk=WzEyNSwyNTcwNzY2NV0.1j4TGN.KO8s5AxOSbpY3CxNa4X_OAUl5_o"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .story(id) = route else {
+                            return .failed(reason: "wrong enum case, expected `story`, got \(route)")
+                        }
+                        return id == 8092 ? .succeeded : .failed(reason: "wrong course id")
+                    }
+                }
+            }
         }
     }
 }

@@ -316,6 +316,7 @@ NoNotifications = "No notifications";
 AnonymousNotificationsTitle = "Anonymous users can't receive notifications";
 SignInToHaveNotifications = "Sign in to be able to receive notifications";
 BadConnectionAuth = "Check your internet connection";
+DeepLinkRoutingServiceErrorStatusRouteStory = "Failed to Open a Story";
 
 ContinueLearningWidgetButtonTitle = "Continue Learning";
 ShowAll = "All";

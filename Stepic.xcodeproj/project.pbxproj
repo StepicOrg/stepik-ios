@@ -503,6 +503,8 @@
 		2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA9023D229C200E90439 /* Bundle+Version.swift */; };
 		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
+		2C41F0EC25BAE6F200DA634A /* StoryTemplatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */; };
+		2C41F0F625BB007C00DA634A /* StoryOpenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41F0F525BB007C00DA634A /* StoryOpenSource.swift */; };
 		2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */; };
 		2C42EFBA2476FADB00423695 /* MagicLinksNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */; };
 		2C434D2C25B6F0C400854D6F /* StepikNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C434D2B25B6F0C400854D6F /* StepikNetworkService.swift */; };
@@ -2095,6 +2097,8 @@
 		2C3D00C124C8080F00441053 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFontSizeStorageManager.swift; sourceTree = "<group>"; };
 		2C3DAB90233D735D00453B1C /* StepFontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepFontSize.swift; sourceTree = "<group>"; };
+		2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTemplatesNetworkService.swift; sourceTree = "<group>"; };
+		2C41F0F525BB007C00DA634A /* StoryOpenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryOpenSource.swift; sourceTree = "<group>"; };
 		2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksAPI.swift; sourceTree = "<group>"; };
 		2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksNetworkService.swift; sourceTree = "<group>"; };
 		2C434D2B25B6F0C400854D6F /* StepikNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikNetworkService.swift; sourceTree = "<group>"; };
@@ -4932,6 +4936,7 @@
 				08484EE6211AF42E0006266F /* SegmentedProgressView.swift */,
 				08484EED211AF4300006266F /* Story.swift */,
 				08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */,
+				2C41F0F525BB007C00DA634A /* StoryOpenSource.swift */,
 				080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */,
 				2CA4CF99242A1825008BC4E8 /* OpenedStories */,
 				2CA4CF9A242A1831008BC4E8 /* Stories */,
@@ -6850,6 +6855,7 @@
 				2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */,
 				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
 				2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */,
+				2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */,
 				2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */,
 				62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */,
 				2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */,
@@ -9436,6 +9442,7 @@
 				62E983B402214CA82BF050E8 /* LessonsNetworkService.swift in Sources */,
 				2CA93080253C6B03007B717A /* DiscussionThreadPlainObject.swift in Sources */,
 				2CE9BF44248D07D0004F6659 /* CodeTemplatesPersistenceService.swift in Sources */,
+				2C41F0EC25BAE6F200DA634A /* StoryTemplatesNetworkService.swift in Sources */,
 				2C8F3AE123CCBD26004D113A /* DownloadVideoQuality.swift in Sources */,
 				2CDB95892412C08100F676A7 /* SpotlightContinueUserActivityService.swift in Sources */,
 				62E98F5FB06328B5D7212700 /* HighlightFakeButton.swift in Sources */,
@@ -9988,6 +9995,7 @@
 				62E987084C26B24E039EA0A0 /* NotificationsPersistenceService.swift in Sources */,
 				62E98778B1320381E97A0E1F /* LastStepPersistenceService.swift in Sources */,
 				62E98672DA4B29B46167B0A4 /* LastCodeLanguagePersistenceService.swift in Sources */,
+				2C41F0F625BB007C00DA634A /* StoryOpenSource.swift in Sources */,
 				46115BB4590732AAB387046D /* NewProfileUserActivityAssembly.swift in Sources */,
 				8A248387CF216CCCFFC39E76 /* NewProfileUserActivityDataFlow.swift in Sources */,
 				9FAD76150240B4F8C13ADFA2 /* NewProfileUserActivityInteractor.swift in Sources */,

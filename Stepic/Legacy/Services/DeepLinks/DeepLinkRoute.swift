@@ -21,6 +21,7 @@ enum DeepLinkRoute {
     case course(courseID: Int)
     case coursePromo(courseID: Int)
     case certificates(userID: Int)
+    case story(id: Int)
 
     var path: String {
         let path: String
@@ -65,6 +66,8 @@ enum DeepLinkRoute {
             path = "course/\(courseID)/promo"
         case .certificates(let userID):
             path = "users/\(userID)/certificates"
+        case .story(let id):
+            path = "story-template/\(id)"
         }
 
         return "\(StepikApplicationsInfo.stepikURL)/\(path)"
@@ -81,23 +84,24 @@ enum DeepLinkRoute {
         }
 
         if let match = Pattern.course.regex.firstMatch(in: path),
-           let courseIDString = match.captures[0],
-           let courseID = Int(courseIDString),
+           let courseIDStringValue = match.captures[0],
+           let courseID = Int(courseIDStringValue),
            match.matchedString == path {
             self = .course(courseID: courseID)
             return
         }
 
         if let match = Pattern.coursePromo.regex.firstMatch(in: path),
-           let courseIDString = match.captures[0],
-           let courseID = Int(courseIDString),
+           let courseIDStringValue = match.captures[0],
+           let courseID = Int(courseIDStringValue),
            match.matchedString == path {
             self = .coursePromo(courseID: courseID)
             return
         }
 
         if let match = Pattern.profile.regex.firstMatch(in: path),
-           let userIDString = match.captures[0], let userID = Int(userIDString),
+           let userIDStringValue = match.captures[0],
+           let userID = Int(userIDStringValue),
            match.matchedString == path {
             self = .profile(userID: userID)
             return
@@ -110,16 +114,18 @@ enum DeepLinkRoute {
         }
 
         if let match = Pattern.syllabus.regex.firstMatch(in: path),
-           let courseIDString = match.captures[0],
-           let courseID = Int(courseIDString),
+           let courseIDStringValue = match.captures[0],
+           let courseID = Int(courseIDStringValue),
            match.matchedString == path {
             self = .syllabus(courseID: courseID)
             return
         }
 
         if let match = Pattern.lesson.regex.firstMatch(in: path),
-           let lessonIDString = match.captures[0], let lessonID = Int(lessonIDString),
-           let stepIDString = match.captures[1], let stepID = Int(stepIDString),
+           let lessonIDStringValue = match.captures[0],
+           let lessonID = Int(lessonIDStringValue),
+           let stepIDStringValue = match.captures[1],
+           let stepID = Int(stepIDStringValue),
            match.matchedString == path {
             let unitID = match.captures[2].flatMap { Int($0) }
             self = .lesson(lessonID: lessonID, stepID: stepID, unitID: unitID)
@@ -127,9 +133,12 @@ enum DeepLinkRoute {
         }
 
         if let match = Pattern.discussions.regex.firstMatch(in: path),
-           let lessonIDString = match.captures[0], let lessonID = Int(lessonIDString),
-           let stepIDString = match.captures[1], let stepID = Int(stepIDString),
-           let discussionIDString = match.captures[2], let discussionID = Int(discussionIDString),
+           let lessonIDStringValue = match.captures[0],
+           let lessonID = Int(lessonIDStringValue),
+           let stepIDStringValue = match.captures[1],
+           let stepID = Int(stepIDStringValue),
+           let discussionIDStringValue = match.captures[2],
+           let discussionID = Int(discussionIDStringValue),
            match.matchedString == path {
             let unitID = match.captures[3].flatMap { Int($0) }
             self = .discussions(lessonID: lessonID, stepID: stepID, discussionID: discussionID, unitID: unitID)
@@ -137,12 +146,16 @@ enum DeepLinkRoute {
         }
 
         if let match = Pattern.solutions.regex.firstMatch(in: path),
-           let lessonIDString = match.captures[0], let lessonID = Int(lessonIDString),
-           let stepIDString = match.captures[1], let stepID = Int(stepIDString),
-           let url = URL(string: path), let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+           let lessonIDStringValue = match.captures[0],
+           let lessonID = Int(lessonIDStringValue),
+           let stepIDStringValue = match.captures[1],
+           let stepID = Int(stepIDStringValue),
+           let url = URL(string: path),
+           let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
            let queryItems = urlComponents.queryItems,
            let discussionQueryItem = queryItems.first(where: { $0.name == "discussion" }),
-           let discussionIDString = discussionQueryItem.value, let discussionID = Int(discussionIDString),
+           let discussionIDStringValue = discussionQueryItem.value,
+           let discussionID = Int(discussionIDStringValue),
            match.matchedString == path {
             let unitID = queryItems.first(where: { $0.name == "unit" })?.value.flatMap { Int($0) }
             self = .solutions(lessonID: lessonID, stepID: stepID, discussionID: discussionID, unitID: unitID)
@@ -150,9 +163,18 @@ enum DeepLinkRoute {
         }
 
         if let match = Pattern.certificates.regex.firstMatch(in: path),
-           let userIDString = match.captures[0], let userID = Int(userIDString),
+           let userIDStringValue = match.captures[0],
+           let userID = Int(userIDStringValue),
            match.matchedString == path {
             self = .certificates(userID: userID)
+            return
+        }
+
+        if let match = Pattern.story.regex.firstMatch(in: path),
+           let storyIDStringValue = match.captures[0],
+           let storyID = Int(storyIDStringValue),
+           match.matchedString == path {
+            self = .story(id: storyID)
             return
         }
 
@@ -170,6 +192,7 @@ enum DeepLinkRoute {
         case discussions
         case solutions
         case certificates
+        case story
 
         var regex: Regex {
             try! Regex(string: self.pattern, options: [.ignoreCase])
@@ -202,6 +225,8 @@ enum DeepLinkRoute {
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?&thread=solutions.*"#
             case .certificates:
                 return #"\#(stepik)users\/(\d+)\/certificates\/?\#(queryComponents)"#
+            case .story:
+                return #"\#(stepik)story-template\/(\d+)\/?\#(queryComponents)"#
             }
         }
     }
