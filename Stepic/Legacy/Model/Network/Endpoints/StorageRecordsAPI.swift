@@ -12,11 +12,13 @@ import PromiseKit
 import SwiftyJSON
 
 final class StorageRecordsAPI: APIEndpoint {
+    private static let createUpdateParamName = "storage-record"
+
     override var name: String { "storage-records" }
 
     func retrieve(
         userID: User.IdType,
-        kindPrefixType prefixType: StorageKind.PrefixType
+        kindPrefixType prefixType: StorageRecordKind.PrefixType
     ) -> Promise<([StorageRecord], Meta)> {
         let params: Parameters = [
             StorageRecord.JSONKey.user.rawValue: userID,
@@ -31,7 +33,7 @@ final class StorageRecordsAPI: APIEndpoint {
         )
     }
 
-    func retrieve(userID: User.IdType, kind: StorageKind?) -> Promise<([StorageRecord], Meta)> {
+    func retrieve(userID: User.IdType, kind: StorageRecordKind?) -> Promise<([StorageRecord], Meta)> {
         let params: Parameters = [
             StorageRecord.JSONKey.kind.rawValue: kind?.name ?? "",
             StorageRecord.JSONKey.user.rawValue: userID
@@ -52,7 +54,7 @@ final class StorageRecordsAPI: APIEndpoint {
     func create(record: StorageRecord) -> Promise<StorageRecord> {
         self.create.request(
             requestEndpoint: self.name,
-            paramName: "storage-record",
+            paramName: Self.createUpdateParamName,
             creatingObject: record,
             withManager: self.manager
         )
@@ -61,7 +63,7 @@ final class StorageRecordsAPI: APIEndpoint {
     func update(record: StorageRecord) -> Promise<StorageRecord> {
         self.update.request(
             requestEndpoint: self.name,
-            paramName: "storage-record",
+            paramName: Self.createUpdateParamName,
             updatingObject: record,
             withManager: self.manager
         )

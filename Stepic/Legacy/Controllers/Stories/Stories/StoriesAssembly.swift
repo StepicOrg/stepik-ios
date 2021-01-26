@@ -17,7 +17,15 @@ final class StoriesAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let viewController = StoriesViewController()
-        let presenter = StoriesPresenter(view: viewController, storyTemplatesAPI: StoryTemplatesAPI())
+        let presenter = StoriesPresenter(
+            view: viewController,
+            storyTemplatesNetworkService: StoryTemplatesNetworkService(storyTemplatesAPI: StoryTemplatesAPI()),
+            contentLanguageService: ContentLanguageService(),
+            userAccountService: UserAccountService(),
+            personalOffersService: PersonalOffersService(
+                storageRecordsNetworkService: StorageRecordsNetworkService(storageRecordsAPI: StorageRecordsAPI())
+            )
+        )
         presenter.moduleOutput = self.moduleOutput
         viewController.presenter = presenter
 
