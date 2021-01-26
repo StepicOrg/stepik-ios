@@ -699,6 +699,7 @@
 		2C8FA6CF25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */; };
 		2C8FA6E225B6097D006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */; };
 		2C911B8625C02A9E0076DC31 /* StorageRecordKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C911B8525C02A9E0076DC31 /* StorageRecordKind.swift */; };
+		2C911B9025C02E430076DC31 /* StorageRecordsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C911B8F25C02E430076DC31 /* StorageRecordsNetworkService.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
@@ -2300,6 +2301,7 @@
 		2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQuality.swift; sourceTree = "<group>"; };
 		2C8FA6CE25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikWidgetTokenFileManager.swift; sourceTree = "<group>"; };
 		2C911B8525C02A9E0076DC31 /* StorageRecordKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecordKind.swift; sourceTree = "<group>"; };
+		2C911B8F25C02E430076DC31 /* StorageRecordsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRecordsNetworkService.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationThemeService.swift; sourceTree = "<group>"; };
@@ -6858,6 +6860,7 @@
 				2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */,
 				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
 				2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */,
+				2C911B8F25C02E430076DC31 /* StorageRecordsNetworkService.swift */,
 				2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */,
 				2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */,
 				62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */,
@@ -9969,6 +9972,7 @@
 				F26EBB85670ECB562C65D84C /* DownloadARQuickLookInteractor.swift in Sources */,
 				AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */,
 				245107514E8F81CF9A8C4C44 /* DownloadARQuickLookView.swift in Sources */,
+				2C911B9025C02E430076DC31 /* StorageRecordsNetworkService.swift in Sources */,
 				2C0B771D25480A7500BA474D /* CourseListFilterViewModel.swift in Sources */,
 				008437078C67C7149BE6DE53 /* DownloadARQuickLookViewController.swift in Sources */,
 				C2537B043956035AEFCABAB5 /* DownloadARQuickLookOutputProtocol.swift in Sources */,
