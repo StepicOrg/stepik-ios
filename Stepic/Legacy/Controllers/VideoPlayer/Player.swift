@@ -563,18 +563,34 @@ extension Player {
         )
     }
 
-    internal func removeApplicationObservers() {
-    }
+    func removeApplicationObservers() {}
 
-    @objc internal func handleApplicationDidBecomeActive(_ aNotification: Notification) {
+    // MARK: Playing media while in the background
+    // https://developer.apple.com/library/archive/qa/qa1668/_index.html
+
+    @objc
+    private func handleApplicationDidBecomeActive(_ aNotification: Notification) {
+        self.setVideoTracksIsEnabledInPlayerItem(true)
         // Attach AVPlayer to AVPlayerLayer again
-        playerView.player = self.avplayer
+        self.playerView.player = self.avplayer
     }
 
-    @objc internal func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+    @objc
+    private func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+        self.setVideoTracksIsEnabledInPlayerItem(false)
         // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
-        playerView.player = nil
+        self.playerView.player = nil
         StepikAnalytics.shared.send(.videoPlayerDidEnterBackground)
+    }
+
+    private func setVideoTracksIsEnabledInPlayerItem(_ isEnabled: Bool) {
+        guard let playerItemTracks = self.playerItem?.tracks else {
+            return
+        }
+
+        for track in playerItemTracks where track.assetTrack?.hasMediaCharacteristic(.visual) == true {
+            track.isEnabled = isEnabled
+        }
     }
 }
 
