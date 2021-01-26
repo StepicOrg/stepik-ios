@@ -100,6 +100,7 @@ final class HomeViewController: BaseExploreViewController {
         }
 
         let storiesAssembly = StoriesAssembly(
+            storyOpenSource: .home,
             output: self.homeInteractor as? StoriesOutputProtocol
         )
         let storiesViewController = storiesAssembly.makeModule()

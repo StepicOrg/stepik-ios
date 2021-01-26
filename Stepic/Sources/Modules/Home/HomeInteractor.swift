@@ -9,6 +9,7 @@ protocol HomeInteractorProtocol: BaseExploreInteractorProtocol {
 final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     private let provider: HomeProviderProtocol
     private let userAccountService: UserAccountServiceProtocol
+    private let personalOffersService: PersonalOffersServiceProtocol
 
     private lazy var homePresenter = self.presenter as? HomePresenterProtocol
 
@@ -17,10 +18,13 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         provider: HomeProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
-        contentLanguageService: ContentLanguageServiceProtocol
+        contentLanguageService: ContentLanguageServiceProtocol,
+        personalOffersService: PersonalOffersServiceProtocol
     ) {
         self.provider = provider
         self.userAccountService = userAccountService
+        self.personalOffersService = personalOffersService
+
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
@@ -55,6 +59,11 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
                 contentLanguage: self.contentLanguageService.globalContentLanguage
             )
         )
+
+        if self.networkReachabilityService.isReachable && self.userAccountService.isAuthorized,
+           let userID = self.userAccountService.currentUserID {
+            self.personalOffersService.syncPersonalOffers(userID: userID).cauterize()
+        }
     }
 
     override func presentEmptyState(sourceModule: CourseListInputProtocol) {

@@ -13,6 +13,7 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     var presenter: StoriesPresenterProtocol?
+    var storyOpenSource = StoryOpenSource.catalog
 
     private var stories: [Story] = []
     private var currentItemFrame: CGRect?
@@ -97,23 +98,25 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
     }()
 
     func showStory(at index: Int) {
-        let moduleToPresent = OpenedStoriesAssembly(
+        let assembly = OpenedStoriesAssembly(
             stories: self.stories,
             startPosition: index,
-            storyOpenSource: .catalog,
+            storyOpenSource: self.storyOpenSource,
             moduleOutput: self.presenter as? OpenedStoriesOutputProtocol
-        ).makeModule()
+        )
+        let viewController = assembly.makeModule()
+
         if DeviceInfo.current.isPad {
             self.customPresentViewController(
                 self.storyPresentr,
-                viewController: moduleToPresent,
+                viewController: viewController,
                 animated: true,
                 completion: nil
             )
         } else {
-            moduleToPresent.modalPresentationStyle = .custom
-            moduleToPresent.transitioningDelegate = self
-            self.present(moduleToPresent, animated: true, completion: nil)
+            viewController.modalPresentationStyle = .custom
+            viewController.transitioningDelegate = self
+            self.present(viewController, animated: true, completion: nil)
         }
     }
 
