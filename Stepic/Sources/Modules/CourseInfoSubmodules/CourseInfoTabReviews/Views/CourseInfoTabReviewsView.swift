@@ -22,7 +22,7 @@ extension CourseInfoTabReviewsView {
         let emptyStateLabelColor = UIColor.stepikPlaceholderText
         let emptyStateLabelInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
 
-        let errorPlaceholderViewBackgroundColor = UIColor.white
+        let errorPlaceholderViewBackgroundColor = UIColor.stepikBackground
     }
 }
 

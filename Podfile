@@ -10,7 +10,7 @@ def shared_pods
     pod 'Alamofire', '5.4.1'
     pod 'Atributika', '4.9.10'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.10.2'
+    pod 'SDWebImage', '5.10.3'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'DeviceKit', '4.2.1'
     pod 'PromiseKit', '6.13.1'
@@ -35,7 +35,7 @@ def all_pods
     pod 'Firebase/Crashlytics', '7.4.0'
     pod 'Firebase/RemoteConfig', '7.4.0'
 
-    pod 'YandexMobileMetrica/Dynamic', '3.14.0'
+    pod 'YandexMobileMetrica/Dynamic', '3.14.1'
     pod 'Amplitude-iOS', '4.9.3'
     pod 'Branch', '0.31.0'
         
@@ -67,7 +67,7 @@ def all_pods
     pod 'ActionSheetPicker-3.0', '2.7.1'
     pod 'Nuke', '9.2.4'
     pod 'STRegex', '2.1.1'
-    pod 'Tabman', '2.8.0'
+    pod 'Tabman', '2.10.0'
     pod 'SwiftDate', '6.3.1'
 end
 
