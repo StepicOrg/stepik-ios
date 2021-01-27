@@ -10,7 +10,7 @@ private final class NewStepViewControllerMock: StepViewControllerProtocol {
 
     func displayStep(viewModel: StepDataFlow.StepLoad.ViewModel) {
         if case .result(let data) = viewModel.state {
-            self.didSetViewModelCompletion?(data)
+            self.didSetViewModelCompletion!(data)
         }
     }
 
@@ -68,19 +68,6 @@ class NewStepViewControllerSpec: QuickSpec {
             waitUntil { done in
                 let step = Step(json: json)
 
-                presenter.presentStep(
-                    response: .init(
-                        result: .success(
-                            StepDataFlow.StepLoad.Data(
-                                step: step,
-                                stepFontSize: .small,
-                                storedImages: [],
-                                isDisabledStepsSupported: false
-                            )
-                        )
-                    )
-                )
-
                 viewController.didSetViewModelCompletion = { viewModel in
                     expect(viewModel.quizType).to(beNil())
 
@@ -93,6 +80,19 @@ class NewStepViewControllerSpec: QuickSpec {
 
                     done()
                 }
+
+                presenter.presentStep(
+                    response: .init(
+                        result: .success(
+                            StepDataFlow.StepLoad.Data(
+                                step: step,
+                                stepFontSize: .small,
+                                storedImages: [],
+                                isDisabledStepsSupported: false
+                            )
+                        )
+                    )
+                )
             }
         }
 
@@ -142,6 +142,19 @@ class NewStepViewControllerSpec: QuickSpec {
             )
 
             waitUntil { done in
+                viewController.didSetViewModelCompletion = { viewModel in
+                    expect(viewModel.quizType).to(beNil())
+
+                    switch viewModel.content {
+                    case .text:
+                        XCTFail()
+                    case .video(let viewModel):
+                        expect(viewModel!.video.id) == 69659
+                    }
+
+                    done()
+                }
+
                 let step = Step(json: json)
 
                 presenter.presentStep(
@@ -156,19 +169,6 @@ class NewStepViewControllerSpec: QuickSpec {
                         )
                     )
                 )
-
-                viewController.didSetViewModelCompletion = { viewModel in
-                    expect(viewModel.quizType).to(beNil())
-
-                    switch viewModel.content {
-                    case .text:
-                        XCTFail()
-                    case .video(let viewModel):
-                        expect(viewModel!.video.id) == 69659
-                    }
-
-                    done()
-                }
             }
         }
 
@@ -219,20 +219,8 @@ class NewStepViewControllerSpec: QuickSpec {
 
             steps.enumerated().forEach { index, step in
                 lock.lock()
-                waitUntil { done in
-                    presenter.presentStep(
-                        response: .init(
-                            result: .success(
-                                StepDataFlow.StepLoad.Data(
-                                    step: step,
-                                    stepFontSize: .small,
-                                    storedImages: [],
-                                    isDisabledStepsSupported: false
-                                )
-                            )
-                        )
-                    )
 
+                waitUntil { done in
                     viewController.didSetViewModelCompletion = { viewModel in
                         expect(viewModel.quizType).toNot(beNil())
                         expect(viewModel.quizType) == blockNameWithQuizTypePairs[index].1
@@ -249,6 +237,19 @@ class NewStepViewControllerSpec: QuickSpec {
                         lock.unlock()
                         done()
                     }
+
+                    presenter.presentStep(
+                        response: .init(
+                            result: .success(
+                                StepDataFlow.StepLoad.Data(
+                                    step: step,
+                                    stepFontSize: .small,
+                                    storedImages: [],
+                                    isDisabledStepsSupported: false
+                                )
+                            )
+                        )
+                    )
                 }
             }
         }

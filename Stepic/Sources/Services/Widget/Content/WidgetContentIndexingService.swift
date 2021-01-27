@@ -231,8 +231,6 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
                 return provider.data
             }
 
-            assert(!coversData.contains(where: { $0 == nil }))
-
             return .value(coversData)
         }
     }

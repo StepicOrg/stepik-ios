@@ -100,6 +100,7 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
         let moduleToPresent = OpenedStoriesAssembly(
             stories: self.stories,
             startPosition: index,
+            storyOpenSource: .catalog,
             moduleOutput: self.presenter as? OpenedStoriesOutputProtocol
         ).makeModule()
         if DeviceInfo.current.isPad {

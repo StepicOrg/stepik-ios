@@ -1,11 +1,3 @@
-//
-//  StoryTemplatesAPI.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 16.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Alamofire
 import Foundation
 import PromiseKit
@@ -40,5 +32,15 @@ final class StoryTemplatesAPI: APIEndpoint {
                 seal.reject(error)
             }
         }
+    }
+
+    func retrieve(ids: [Int]) -> Promise<[Story]> {
+        self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            ids: ids,
+            updating: [],
+            withManager: self.manager
+        )
     }
 }

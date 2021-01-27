@@ -57,12 +57,20 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
 
     var currentPosition: Int
 
+    private let storyOpenSource: StoryOpenSource
     private let analytics: Analytics
 
-    init(view: OpenedStoriesViewProtocol, stories: [Story], startPosition: Int, analytics: Analytics) {
+    init(
+        view: OpenedStoriesViewProtocol,
+        stories: [Story],
+        startPosition: Int,
+        storyOpenSource: StoryOpenSource,
+        analytics: Analytics
+    ) {
         self.view = view
         self.stories = stories
         self.currentPosition = startPosition
+        self.storyOpenSource = storyOpenSource
         self.analytics = analytics
 
         NotificationCenter.default.addObserver(
@@ -98,7 +106,11 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     }
 
     private func makeModule(for story: Story) -> UIViewController {
-        StoryAssembly(story: story, navigationDelegate: self).makeModule()
+        StoryAssembly(
+            story: story,
+            storyOpenSource: self.storyOpenSource,
+            navigationDelegate: self
+        ).makeModule()
     }
 
     @objc
