@@ -147,7 +147,8 @@ final class NewProfileAchievementsInteractor: NewProfileAchievementsInteractorPr
 
                 return when(fulfilled: fetchAchievementProgressPromises)
             }.done { achievementsProgressesData in
-                seal.fulfill(.init(result: .success(achievementsProgressesData)))
+                let sortedData = achievementsProgressesData.sorted { $0.currentScore > $1.currentScore }
+                seal.fulfill(.init(result: .success(sortedData)))
             }.catch { error in
                 if self.didLoadAchievements {
                     // Offline mode: we already presented cached achievements, but network request failed
