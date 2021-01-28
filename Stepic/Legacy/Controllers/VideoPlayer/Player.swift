@@ -124,6 +124,8 @@ class Player: UIViewController {
 
     // state
 
+    var isPictureInPictureActive: Bool = false
+
     var playbackLoops: Bool {
         get {
             (self.avplayer.actionAtItemEnd == .none) as Bool
@@ -338,7 +340,7 @@ class Player: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        if self.playbackState == .playing {
+        if self.playbackState == .playing && !self.isPictureInPictureActive {
             self.pause()
         }
     }
@@ -570,6 +572,10 @@ extension Player {
 
     @objc
     private func handleApplicationDidBecomeActive(_ aNotification: Notification) {
+        if self.isPictureInPictureActive {
+            return
+        }
+
         self.setVideoTracksIsEnabledInPlayerItem(true)
         // Attach AVPlayer to AVPlayerLayer again
         self.playerView.player = self.avplayer
@@ -577,9 +583,14 @@ extension Player {
 
     @objc
     private func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+        if self.isPictureInPictureActive {
+            return
+        }
+
         self.setVideoTracksIsEnabledInPlayerItem(false)
         // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
         self.playerView.player = nil
+
         StepikAnalytics.shared.send(.videoPlayerDidEnterBackground)
     }
 

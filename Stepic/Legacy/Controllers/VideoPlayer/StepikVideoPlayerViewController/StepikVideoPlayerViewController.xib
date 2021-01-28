@@ -19,7 +19,7 @@
                 <outlet property="forward10SecButton" destination="MoB-ve-4BS" id="Ilj-3b-seN"/>
                 <outlet property="fullTimeTopLabel" destination="ZZw-HW-dZ9" id="HwJ-V4-ibc"/>
                 <outlet property="fullscreenPlayButton" destination="um1-Jr-FFH" id="b7q-ye-mc8"/>
-                <outlet property="pipButton" destination="8WK-so-iOg" id="TKA-Mg-Vrl"/>
+                <outlet property="pictureInPictureButton" destination="8WK-so-iOg" id="0Xe-4W-sJp"/>
                 <outlet property="qualityButton" destination="toN-Q6-jzn" id="tPW-y7-IaL"/>
                 <outlet property="rateButton" destination="jpo-wy-Esq" id="Qbr-7a-Nx8"/>
                 <outlet property="topContainerView" destination="9gx-PI-4Wv" id="UrU-3z-rIa"/>
