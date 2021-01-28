@@ -425,40 +425,48 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     private func setupPictureInPicture() {
-        if #available(iOS 13.0, *) {
-            let startImage = AVPictureInPictureController.pictureInPictureButtonStartImage
-            let stopImage = AVPictureInPictureController.pictureInPictureButtonStopImage
-
-            self.pictureInPictureButton.setImage(startImage, for: .normal)
-            self.pictureInPictureButton.setImage(stopImage, for: .selected)
-            self.pictureInPictureButton.tintColor = .black
-            self.pictureInPictureButton.imageView?.contentMode = .scaleAspectFit
-
-            self.pictureInPictureButton.addTarget(self, action: #selector(self.togglePictureInPictureMode(_:)), for: .touchUpInside)
-
-            if AVPictureInPictureController.isPictureInPictureSupported() {
-                self.pictureInPictureController = AVPictureInPictureController(
-                    playerLayer: self.player.playerView.playerLayer
+        let (pictureInPictureButtonStartImage, pictureInPictureButtonStopImage): (UIImage?, UIImage?) = {
+            if #available(iOS 13.0, *) {
+                return (
+                    AVPictureInPictureController.pictureInPictureButtonStartImage,
+                    AVPictureInPictureController.pictureInPictureButtonStopImage
                 )
-                self.pictureInPictureController?.delegate = self
-
-                self.pictureInPicturePossibleObservation = self.pictureInPictureController?.observe(
-                    \AVPictureInPictureController.isPictureInPicturePossible,
-                    options: [.initial, .new]
-                ) { [weak self] _, change in
-                    print("StepikVideoPlayerViewController :: isPictureInPicturePossible = \(change.newValue ?? false)")
-                    self?.pictureInPictureButton.isEnabled = change.newValue ?? false
-                }
-
-                self.pictureInPictureActiveObservation = self.pictureInPictureController?.observe(
-                    \AVPictureInPictureController.isPictureInPictureActive,
-                    options: [.initial, .new]
-                ) { [weak self] _, change in
-                    print("StepikVideoPlayerViewController :: isPictureInPictureActive = \(change.newValue ?? false)")
-                    self?.player.isPictureInPictureActive = change.newValue ?? false
-                }
             } else {
-                self.pictureInPictureButton.isEnabled = false
+                return (UIImage(named: "pip.enter"), UIImage(named: "pip.exit"))
+            }
+        }()
+
+        self.pictureInPictureButton.setImage(pictureInPictureButtonStartImage, for: .normal)
+        self.pictureInPictureButton.setImage(pictureInPictureButtonStopImage, for: .selected)
+        self.pictureInPictureButton.tintColor = .black
+        self.pictureInPictureButton.imageView?.contentMode = .scaleAspectFit
+
+        self.pictureInPictureButton.addTarget(
+            self,
+            action: #selector(self.togglePictureInPictureMode(_:)),
+            for: .touchUpInside
+        )
+
+        if AVPictureInPictureController.isPictureInPictureSupported() {
+            self.pictureInPictureController = AVPictureInPictureController(
+                playerLayer: self.player.playerView.playerLayer
+            )
+            self.pictureInPictureController?.delegate = self
+
+            self.pictureInPicturePossibleObservation = self.pictureInPictureController?.observe(
+                \AVPictureInPictureController.isPictureInPicturePossible,
+                options: [.initial, .new]
+            ) { [weak self] _, change in
+                print("StepikVideoPlayerViewController :: isPictureInPicturePossible = \(change.newValue ?? false)")
+                self?.pictureInPictureButton.isEnabled = change.newValue ?? false
+            }
+
+            self.pictureInPictureActiveObservation = self.pictureInPictureController?.observe(
+                \AVPictureInPictureController.isPictureInPictureActive,
+                options: [.initial, .new]
+            ) { [weak self] _, change in
+                print("StepikVideoPlayerViewController :: isPictureInPictureActive = \(change.newValue ?? false)")
+                self?.player.isPictureInPictureActive = change.newValue ?? false
             }
         } else {
             self.pictureInPictureButton.isEnabled = false
