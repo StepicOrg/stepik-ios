@@ -237,6 +237,8 @@ class Player: UIViewController {
     var playerView: PlayerView!
     var timeObserver: Any!
 
+    private var timeControlStatusObservation: NSKeyValueObservation?
+
     // MARK: - object lifecycle
 
     convenience init() {
@@ -333,6 +335,26 @@ class Player: UIViewController {
             options: ([.new, .old]),
             context: &PlayerObserverContext
         )
+
+        self.timeControlStatusObservation = self.avplayer.observe(
+            \AVPlayer.timeControlStatus,
+            options: [.initial, .new]
+        ) { [weak self] _, _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            switch strongSelf.avplayer.timeControlStatus {
+            case .paused:
+                print("timeControlStatus = paused")
+                strongSelf.playbackState = .paused
+            case .playing:
+                print("timeControlStatus = playing")
+                strongSelf.playbackState = .playing
+            default:
+                break
+            }
+        }
 
         self.addApplicationObservers()
     }
@@ -583,15 +605,19 @@ extension Player {
 
     @objc
     private func handleApplicationDidEnterBackground(_ aNotification: Notification) {
+        defer {
+            StepikAnalytics.shared.send(.videoPlayerDidEnterBackground)
+        }
+
         if self.isPictureInPictureActive {
             return
         }
 
-        self.setVideoTracksIsEnabledInPlayerItem(false)
-        // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
-        self.playerView.player = nil
-
-        StepikAnalytics.shared.send(.videoPlayerDidEnterBackground)
+        if self.playbackState == .playing {
+            self.setVideoTracksIsEnabledInPlayerItem(false)
+            // Detach AVPlayer from AVPlayerLayer (from Apple's manual)
+            self.playerView.player = nil
+        }
     }
 
     private func setVideoTracksIsEnabledInPlayerItem(_ isEnabled: Bool) {

@@ -20,6 +20,11 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
+        if let retainedVideoPlayerViewController = PictureInPictureVideoPlayerHolder.shared.videoPlayerViewController,
+           retainedVideoPlayerViewController.video.equals(self.video) {
+            return retainedVideoPlayerViewController
+        }
+
         let videoPlayerViewController = StepikVideoPlayerViewController(
             nibName: "StepikVideoPlayerViewController",
             bundle: nil
@@ -45,7 +50,7 @@ protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
 // MARK: - Appearance & Animation -
 
 extension StepikVideoPlayerViewController {
-    struct Appearance {
+    enum Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
         static let bottomFullscreenControlsCornerRadius: CGFloat = 8
 
@@ -61,9 +66,11 @@ extension StepikVideoPlayerViewController {
 
         static let autoplayPreferenceContainerHeight: CGFloat = 31
         static let autoplayPreferenceSwitchWidth: CGFloat = 51
+
+        static let pictureInPictureButtonTintColor = UIColor.black
     }
 
-    struct Animation {
+    enum Animation {
         static let playerBarControlsAnimationDuration: TimeInterval = 0.5
         static let autoplayAnimationDuration: TimeInterval = 7.2
     }
@@ -169,10 +176,25 @@ final class StepikVideoPlayerViewController: UIViewController {
         return player
     }()
 
+    // Picture in Picture
     fileprivate var pictureInPictureController: AVPictureInPictureController?
+
     private var pictureInPicturePossibleObservation: NSKeyValueObservation?
     private var pictureInPictureActiveObservation: NSKeyValueObservation?
-    fileprivate var onWillStopPictureInPicture: Bool = false
+
+    private var isPictureInPicturePossible: Bool = false {
+        didSet {
+            self.pictureInPictureButton.isEnabled = self.isPictureInPicturePossible
+            print("StepikVideoPlayerViewController :: isPictureInPicturePossible = \(self.isPictureInPicturePossible)")
+        }
+    }
+    private var isPictureInPictureActive: Bool = false {
+        didSet {
+            self.pictureInPictureButton.isSelected = self.isPictureInPictureActive
+            self.player.isPictureInPictureActive = self.isPictureInPictureActive
+            print("StepikVideoPlayerViewController :: isPictureInPictureActive = \(self.isPictureInPictureActive)")
+        }
+    }
 
     private var playerStartTime: TimeInterval = 0.0
 
@@ -289,10 +311,12 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     deinit {
         print("StepikVideoPlayerViewController :: deinit")
-        self.stopPlayback(deactivateAudioSession: !self.onWillStopPictureInPicture)
+
+        self.player.stop()
+        self.hidePlayerControlsTimer?.invalidate()
+
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         NotificationCenter.default.removeObserver(self)
-        self.hidePlayerControlsTimer?.invalidate()
     }
 
     // MARK: Player Setup
@@ -326,7 +350,7 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.setupPictureInPicture()
         self.setupObservers()
         self.setupGestureRecognizers()
-        self.addAccessibilitySupport()
+        self.setupAccessibility()
     }
 
     private func setupAppearance() {
@@ -438,7 +462,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
         self.pictureInPictureButton.setImage(pictureInPictureButtonStartImage, for: .normal)
         self.pictureInPictureButton.setImage(pictureInPictureButtonStopImage, for: .selected)
-        self.pictureInPictureButton.tintColor = .black
+        self.pictureInPictureButton.tintColor = Appearance.pictureInPictureButtonTintColor
         self.pictureInPictureButton.imageView?.contentMode = .scaleAspectFit
 
         self.pictureInPictureButton.addTarget(
@@ -457,16 +481,14 @@ final class StepikVideoPlayerViewController: UIViewController {
                 \AVPictureInPictureController.isPictureInPicturePossible,
                 options: [.initial, .new]
             ) { [weak self] _, change in
-                print("StepikVideoPlayerViewController :: isPictureInPicturePossible = \(change.newValue ?? false)")
-                self?.pictureInPictureButton.isEnabled = change.newValue ?? false
+                self?.isPictureInPicturePossible = change.newValue ?? false
             }
 
             self.pictureInPictureActiveObservation = self.pictureInPictureController?.observe(
                 \AVPictureInPictureController.isPictureInPictureActive,
                 options: [.initial, .new]
             ) { [weak self] _, change in
-                print("StepikVideoPlayerViewController :: isPictureInPictureActive = \(change.newValue ?? false)")
-                self?.player.isPictureInPictureActive = change.newValue ?? false
+                self?.isPictureInPictureActive = change.newValue ?? false
             }
         } else {
             self.pictureInPictureButton.isEnabled = false
@@ -498,7 +520,7 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
     }
 
-    private func addAccessibilitySupport() {
+    private func setupAccessibility() {
         self.backButton.accessibilityLabel = NSLocalizedString("VideoPlayerBackButtonAccessibilityLabel", comment: "")
         self.backButton.accessibilityHint = NSLocalizedString("VideoPlayerBackButtonAccessibilityHint", comment: "")
 
@@ -705,12 +727,8 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     // MARK: Controlling the playback state
 
-    func stopPlayback(deactivateAudioSession: Bool = true) {
+    func stopPlayback() {
         self.player.stop()
-
-        guard deactivateAudioSession else {
-            return
-        }
 
         do {
             try AVAudioSession.sharedInstance().setActive(false)
@@ -948,6 +966,8 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
         print("StepikVideoPlayerViewController :: player is ready to display")
 
+        OnlyOneActivePlayerWatcher.shared.addPlayer(player)
+
         if self.shouldShowAutoplayOnPlayerReady {
             self.shouldShowAutoplayOnPlayerReady = false
 
@@ -993,6 +1013,8 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         case .playing:
             self.setButtonPlaying(false)
             self.dismissAutoplay()
+
+            OnlyOneActivePlayerWatcher.shared.setPlayerPlaying(player)
         case .stopped:
             break
         }
@@ -1013,7 +1035,10 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         self.isPlayerControlsVisible = false
         self.updateVideoControlsVisibility(hideControlsAutomatically: false)
 
-        // Enter autoplay mode only if we are in the foreground state.
+        if self.isPictureInPictureActive {
+            return
+        }
+
         if UIApplication.shared.applicationState == .active {
             self.setAutoplayControlsHidden(false)
             if self.autoplayPreferenceSwitch.isOn {
@@ -1154,10 +1179,13 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
     ) {
         print("StepikVideoPlayerViewController :: \(#function)")
 
-        self.player.isPictureInPictureActive = true
-        self.onWillStopPictureInPicture = false
+        self.isPictureInPictureActive = true
 
-        PictureInPictureControllerHolder.shared.retainVideoPlayerViewController(self)
+        self.hidePlayerControlsIfVisible()
+        self.hidePlayerControlsTimer?.invalidate()
+        self.dismissAutoplay()
+
+        PictureInPictureVideoPlayerHolder.shared.retainVideoPlayerViewController(self)
 
         self.dismiss(animated: true)
     }
@@ -1166,9 +1194,7 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
         _ pictureInPictureController: AVPictureInPictureController
     ) {
         print("StepikVideoPlayerViewController :: \(#function)")
-
-        self.onWillStopPictureInPicture = true
-        PictureInPictureControllerHolder.shared.releaseVideoPlayerViewController()
+        PictureInPictureVideoPlayerHolder.shared.releaseVideoPlayerViewController()
     }
 
     func pictureInPictureController(
@@ -1176,7 +1202,7 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
         restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void
     ) {
         print("StepikVideoPlayerViewController :: \(#function)")
-        PictureInPictureControllerHolder.shared.restoreVideoPlayerViewController(completionHandler: completionHandler)
+        PictureInPictureVideoPlayerHolder.shared.restoreVideoPlayerViewController(completionHandler: completionHandler)
     }
 
     func pictureInPictureController(
@@ -1187,20 +1213,18 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
     }
 }
 
-private final class PictureInPictureControllerHolder {
-    static let shared = PictureInPictureControllerHolder()
+private final class PictureInPictureVideoPlayerHolder {
+    static let shared = PictureInPictureVideoPlayerHolder()
 
-    private var videoPlayerViewController: StepikVideoPlayerViewController?
+    private(set) var videoPlayerViewController: StepikVideoPlayerViewController?
 
     private init() {}
 
     func retainVideoPlayerViewController(_ videoPlayerViewController: StepikVideoPlayerViewController) {
-        self.videoPlayerViewController?.onWillStopPictureInPicture = true
         self.videoPlayerViewController = videoPlayerViewController
     }
 
     func releaseVideoPlayerViewController() {
-        self.videoPlayerViewController?.onWillStopPictureInPicture = true
         self.videoPlayerViewController = nil
     }
 
@@ -1209,21 +1233,44 @@ private final class PictureInPictureControllerHolder {
             return completionHandler(false)
         }
 
-        let parentViewControllerOrNil: UIViewController? = {
-            if let parent = videoPlayerViewController.parent {
-                return parent
-            } else {
-                let sourcelessRouter = SourcelessRouter()
-                return sourcelessRouter.currentNavigation?.topViewController ?? sourcelessRouter.currentNavigation
-            }
+        let isVisible = videoPlayerViewController.isViewLoaded && videoPlayerViewController.view.window != nil
+        if isVisible {
+            return completionHandler(true)
+        }
+
+        let sourceViewControllerOrNil: UIViewController? = {
+            let sourcelessRouter = SourcelessRouter()
+            return sourcelessRouter.currentNavigation?.topViewController ?? sourcelessRouter.currentNavigation
         }()
 
-        guard let parentViewController = parentViewControllerOrNil else {
+        guard let sourceViewController = sourceViewControllerOrNil else {
             return completionHandler(false)
         }
 
-        parentViewController.present(videoPlayerViewController, animated: true) {
+        sourceViewController.present(videoPlayerViewController, animated: true) {
             completionHandler(true)
         }
     }
+}
+
+private final class OnlyOneActivePlayerWatcher {
+    static let shared = OnlyOneActivePlayerWatcher()
+
+    private let players = NSHashTable<Player>.weakObjects()
+
+    func addPlayer(_ player: Player) {
+        self.players.add(player)
+    }
+
+    func setPlayerPlaying(_ playingPlayer: Player) {
+        for player in self.players.allObjects {
+            if player === playingPlayer {
+                continue
+            } else {
+                player.pause()
+            }
+        }
+    }
+
+    private init() {}
 }
