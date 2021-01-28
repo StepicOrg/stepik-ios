@@ -92,6 +92,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     @IBOutlet weak var topTimeProgressView: UIProgressView!
     @IBOutlet weak var topTimeSlider: UISlider!
     @IBOutlet var fillModeButton: UIButton!
+    @IBOutlet var pipButton: UIButton!
 
     // MARK: Bottom fullscreen controls
     @IBOutlet weak var rateButton: UIButton!
@@ -167,7 +168,12 @@ final class StepikVideoPlayerViewController: UIViewController {
         player.delegate = self
         return player
     }()
+
+    private var pictureInPictureController: AVPictureInPictureController?
+    private var pipPossibleObservation: NSKeyValueObservation?
+
     private var playerStartTime: TimeInterval = 0.0
+
     private var isPlaying = false
 
     private var isPlayerPassedReadyState = false
@@ -315,6 +321,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func setup() {
         self.setupPlayer()
         self.setupAppearance()
+        self.setupPictureInPicture()
         self.setupObservers()
         self.setupGestureRecognizers()
         self.addAccessibilitySupport()
@@ -413,6 +420,38 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.currentVideoFillMode = .aspect
 
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
+    }
+
+    private func setupPictureInPicture() {
+        if #available(iOS 13.0, *) {
+            let startImage = AVPictureInPictureController.pictureInPictureButtonStartImage
+            let stopImage = AVPictureInPictureController.pictureInPictureButtonStopImage
+
+            self.pipButton.setImage(startImage, for: .normal)
+            self.pipButton.setImage(stopImage, for: .selected)
+            self.pipButton.tintColor = .black
+            self.pipButton.imageView?.contentMode = .scaleAspectFit
+
+            self.pipButton.addTarget(self, action: #selector(self.togglePictureInPictureMode(_:)), for: .touchUpInside)
+
+            if AVPictureInPictureController.isPictureInPictureSupported() {
+                self.pictureInPictureController = AVPictureInPictureController(
+                    playerLayer: self.player.playerView.playerLayer
+                )
+                self.pictureInPictureController?.delegate = self
+
+                self.pipPossibleObservation = self.pictureInPictureController?.observe(
+                    \AVPictureInPictureController.isPictureInPicturePossible,
+                    options: [.initial, .new]
+                ) { [weak self] _, change in
+                    self?.pipButton.isEnabled = change.newValue ?? false
+                }
+            } else {
+                self.pipButton.isEnabled = false
+            }
+        } else {
+            self.pipButton.isEnabled = false
+        }
     }
 
     private func setupObservers() {
@@ -863,6 +902,21 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func didClickCancelAutoplay() {
         self.autoplayPlayNextCircleControlView.stopCountdown()
     }
+
+    // MARK: Picture in Picture
+
+    @objc
+    private func togglePictureInPictureMode(_ sender: UIButton) {
+        guard let pictureInPictureController = self.pictureInPictureController else {
+            return
+        }
+
+        if pictureInPictureController.isPictureInPictureActive {
+            pictureInPictureController.stopPictureInPicture()
+        } else {
+            pictureInPictureController.startPictureInPicture()
+        }
+    }
 }
 
 // MARK: - StepikVideoPlayerViewController: PlayerDelegate -
@@ -1066,5 +1120,48 @@ extension StepikVideoPlayerViewController {
     @objc
     private func fillModeButtonDidClick() {
         self.currentVideoFillMode.toggle()
+    }
+}
+
+// MARK: - StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate -
+
+extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate {
+    func pictureInPictureControllerWillStartPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        print(#function)
+    }
+
+    func pictureInPictureControllerDidStartPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        print(#function)
+    }
+
+    func pictureInPictureController(
+        _ pictureInPictureController: AVPictureInPictureController,
+        failedToStartPictureInPictureWithError error: Error
+    ) {
+        print(#function)
+    }
+
+    func pictureInPictureControllerWillStopPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        print(#function)
+    }
+
+    func pictureInPictureControllerDidStopPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        print(#function)
+    }
+
+    func pictureInPictureController(
+        _ pictureInPictureController: AVPictureInPictureController,
+        restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void
+    ) {
+        print(#function)
+        completionHandler(true)
     }
 }
