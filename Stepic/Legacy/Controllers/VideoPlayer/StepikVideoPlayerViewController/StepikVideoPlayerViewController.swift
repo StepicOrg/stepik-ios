@@ -20,6 +20,11 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
+        if let retainedVideoPlayerViewController = PictureInPictureVideoPlayerHolder.shared.videoPlayerViewController,
+           retainedVideoPlayerViewController.video.equals(self.video) {
+            return retainedVideoPlayerViewController
+        }
+
         let videoPlayerViewController = StepikVideoPlayerViewController(
             nibName: "StepikVideoPlayerViewController",
             bundle: nil
@@ -45,7 +50,7 @@ protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
 // MARK: - Appearance & Animation -
 
 extension StepikVideoPlayerViewController {
-    struct Appearance {
+    enum Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
         static let bottomFullscreenControlsCornerRadius: CGFloat = 8
 
@@ -61,9 +66,11 @@ extension StepikVideoPlayerViewController {
 
         static let autoplayPreferenceContainerHeight: CGFloat = 31
         static let autoplayPreferenceSwitchWidth: CGFloat = 51
+
+        static let pictureInPictureButtonTintColor = UIColor.black
     }
 
-    struct Animation {
+    enum Animation {
         static let playerBarControlsAnimationDuration: TimeInterval = 0.5
         static let autoplayAnimationDuration: TimeInterval = 7.2
     }
@@ -92,6 +99,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     @IBOutlet weak var topTimeProgressView: UIProgressView!
     @IBOutlet weak var topTimeSlider: UISlider!
     @IBOutlet var fillModeButton: UIButton!
+    @IBOutlet var pictureInPictureButton: UIButton!
 
     // MARK: Bottom fullscreen controls
     @IBOutlet weak var rateButton: UIButton!
@@ -167,7 +175,27 @@ final class StepikVideoPlayerViewController: UIViewController {
         player.delegate = self
         return player
     }()
+
+    // Picture in Picture
+    private var pictureInPictureController: AVPictureInPictureController?
+
+    private var pictureInPicturePossibleObservation: NSKeyValueObservation?
+    private var pictureInPictureActiveObservation: NSKeyValueObservation?
+
+    private var isPictureInPicturePossible: Bool = false {
+        didSet {
+            self.pictureInPictureButton.isEnabled = self.isPictureInPicturePossible
+        }
+    }
+    private var isPictureInPictureActive: Bool = false {
+        didSet {
+            self.pictureInPictureButton.isSelected = self.isPictureInPictureActive
+            self.player.isPictureInPictureActive = self.isPictureInPictureActive
+        }
+    }
+
     private var playerStartTime: TimeInterval = 0.0
+
     private var isPlaying = false
 
     private var isPlayerPassedReadyState = false
@@ -281,10 +309,12 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     deinit {
         print("StepikVideoPlayerViewController :: deinit")
-        self.stopPlayback()
+
+        self.player.stop()
+        self.hidePlayerControlsTimer?.invalidate()
+
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         NotificationCenter.default.removeObserver(self)
-        self.hidePlayerControlsTimer?.invalidate()
     }
 
     // MARK: Player Setup
@@ -315,9 +345,10 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func setup() {
         self.setupPlayer()
         self.setupAppearance()
+        self.setupPictureInPicture()
         self.setupObservers()
         self.setupGestureRecognizers()
-        self.addAccessibilitySupport()
+        self.setupAccessibility()
     }
 
     private func setupAppearance() {
@@ -415,6 +446,53 @@ final class StepikVideoPlayerViewController: UIViewController {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
     }
 
+    private func setupPictureInPicture() {
+        let (pictureInPictureButtonStartImage, pictureInPictureButtonStopImage): (UIImage?, UIImage?) = {
+            if #available(iOS 13.0, *) {
+                return (
+                    AVPictureInPictureController.pictureInPictureButtonStartImage,
+                    AVPictureInPictureController.pictureInPictureButtonStopImage
+                )
+            } else {
+                return (UIImage(named: "pip.enter"), UIImage(named: "pip.exit"))
+            }
+        }()
+
+        self.pictureInPictureButton.setImage(pictureInPictureButtonStartImage, for: .normal)
+        self.pictureInPictureButton.setImage(pictureInPictureButtonStopImage, for: .selected)
+        self.pictureInPictureButton.tintColor = Appearance.pictureInPictureButtonTintColor
+        self.pictureInPictureButton.imageView?.contentMode = .scaleAspectFit
+
+        self.pictureInPictureButton.addTarget(
+            self,
+            action: #selector(self.togglePictureInPictureMode(_:)),
+            for: .touchUpInside
+        )
+
+        if AVPictureInPictureController.isPictureInPictureSupported() {
+            self.pictureInPictureController = AVPictureInPictureController(
+                playerLayer: self.player.playerView.playerLayer
+            )
+            self.pictureInPictureController?.delegate = self
+
+            self.pictureInPicturePossibleObservation = self.pictureInPictureController?.observe(
+                \AVPictureInPictureController.isPictureInPicturePossible,
+                options: [.initial, .new]
+            ) { [weak self] _, change in
+                self?.isPictureInPicturePossible = change.newValue ?? false
+            }
+
+            self.pictureInPictureActiveObservation = self.pictureInPictureController?.observe(
+                \AVPictureInPictureController.isPictureInPictureActive,
+                options: [.initial, .new]
+            ) { [weak self] _, change in
+                self?.isPictureInPictureActive = change.newValue ?? false
+            }
+        } else {
+            self.pictureInPictureButton.isEnabled = false
+        }
+    }
+
     private func setupObservers() {
         NotificationCenter.default.addObserver(
             self,
@@ -440,7 +518,7 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
     }
 
-    private func addAccessibilitySupport() {
+    private func setupAccessibility() {
         self.backButton.accessibilityLabel = NSLocalizedString("VideoPlayerBackButtonAccessibilityLabel", comment: "")
         self.backButton.accessibilityHint = NSLocalizedString("VideoPlayerBackButtonAccessibilityHint", comment: "")
 
@@ -863,6 +941,21 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func didClickCancelAutoplay() {
         self.autoplayPlayNextCircleControlView.stopCountdown()
     }
+
+    // MARK: Picture in Picture
+
+    @objc
+    private func togglePictureInPictureMode(_ sender: UIButton) {
+        guard let pictureInPictureController = self.pictureInPictureController else {
+            return
+        }
+
+        if pictureInPictureController.isPictureInPictureActive {
+            pictureInPictureController.stopPictureInPicture()
+        } else {
+            pictureInPictureController.startPictureInPicture()
+        }
+    }
 }
 
 // MARK: - StepikVideoPlayerViewController: PlayerDelegate -
@@ -870,6 +963,8 @@ final class StepikVideoPlayerViewController: UIViewController {
 extension StepikVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
         print("StepikVideoPlayerViewController :: player is ready to display")
+
+        OnlyOneActivePlayerWatcher.shared.addPlayer(player)
 
         if self.shouldShowAutoplayOnPlayerReady {
             self.shouldShowAutoplayOnPlayerReady = false
@@ -916,6 +1011,8 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         case .playing:
             self.setButtonPlaying(false)
             self.dismissAutoplay()
+
+            OnlyOneActivePlayerWatcher.shared.setPlayerPlaying(player)
         case .stopped:
             break
         }
@@ -936,7 +1033,10 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         self.isPlayerControlsVisible = false
         self.updateVideoControlsVisibility(hideControlsAutomatically: false)
 
-        // Enter autoplay mode only if we are in the foreground state.
+        if self.isPictureInPictureActive {
+            return
+        }
+
         if UIApplication.shared.applicationState == .active {
             self.setAutoplayControlsHidden(false)
             if self.autoplayPreferenceSwitch.isOn {
@@ -1066,5 +1166,117 @@ extension StepikVideoPlayerViewController {
     @objc
     private func fillModeButtonDidClick() {
         self.currentVideoFillMode.toggle()
+    }
+}
+
+// MARK: - Picture in Picture -
+
+extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate {
+    func pictureInPictureControllerWillStartPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        self.isPictureInPictureActive = true
+
+        self.hidePlayerControlsIfVisible()
+        self.hidePlayerControlsTimer?.invalidate()
+        self.dismissAutoplay()
+
+        PictureInPictureVideoPlayerHolder.shared.retain(self)
+
+        self.dismiss(animated: true)
+    }
+
+    func pictureInPictureControllerDidStartPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        self.analytics.send(.videoPlayerDidStartPictureInPicture)
+    }
+
+    func pictureInPictureControllerWillStopPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        PictureInPictureVideoPlayerHolder.shared.release()
+    }
+
+    func pictureInPictureController(
+        _ pictureInPictureController: AVPictureInPictureController,
+        restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void
+    ) {
+        func isViewControllerVisible(_ viewController: UIViewController) -> Bool {
+            viewController.isViewLoaded && viewController.view.window != nil
+        }
+
+        if isViewControllerVisible(self) {
+            return completionHandler(true)
+        }
+
+        let sourceViewControllerOrNil: UIViewController? = {
+            let sourcelessRouter = SourcelessRouter()
+            return sourcelessRouter.currentNavigation?.topViewController ?? sourcelessRouter.currentNavigation
+        }()
+
+        guard let sourceViewController = sourceViewControllerOrNil else {
+            return completionHandler(false)
+        }
+
+        if isViewControllerVisible(sourceViewController) {
+            sourceViewController.present(self, animated: true) {
+                completionHandler(true)
+            }
+        } else {
+            completionHandler(false)
+        }
+    }
+
+    func pictureInPictureController(
+        _ pictureInPictureController: AVPictureInPictureController,
+        failedToStartPictureInPictureWithError error: Error
+    ) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("VideoPlayerFailedToStartPictureInPictureTitle", comment: ""),
+            message: NSLocalizedString("VideoPlayerFailedToStartPictureInPictureMessage", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+        self.present(alert, animated: true)
+    }
+}
+
+private final class PictureInPictureVideoPlayerHolder {
+    static let shared = PictureInPictureVideoPlayerHolder()
+
+    private(set) var videoPlayerViewController: StepikVideoPlayerViewController?
+
+    private init() {}
+
+    func retain(_ videoPlayerViewController: StepikVideoPlayerViewController) {
+        self.videoPlayerViewController = videoPlayerViewController
+    }
+
+    func release() {
+        self.videoPlayerViewController = nil
+    }
+}
+
+private final class OnlyOneActivePlayerWatcher {
+    static let shared = OnlyOneActivePlayerWatcher()
+
+    private let players = NSHashTable<Player>.weakObjects()
+
+    private init() {}
+
+    func addPlayer(_ player: Player) {
+        self.players.add(player)
+    }
+
+    func setPlayerPlaying(_ playingPlayer: Player) {
+        for player in self.players.allObjects {
+            if player === playingPlayer {
+                continue
+            } else {
+                player.pause()
+            }
+        }
     }
 }

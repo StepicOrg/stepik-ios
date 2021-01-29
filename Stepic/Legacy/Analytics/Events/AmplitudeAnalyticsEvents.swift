@@ -733,7 +733,9 @@ extension AnalyticsEvent {
 
     // MARK: - Video -
 
-    static let videoPlayerDidEnterBackground = AmplitudeAnalyticsEvent(name: "Video played in background")
+    static let videoPlayerDidPlayInBackground = AmplitudeAnalyticsEvent(name: "Video played in background")
+
+    static let videoPlayerDidStartPictureInPicture = AmplitudeAnalyticsEvent(name: "Video played in picture-in-picture")
 
     static func videoPlayerDidChangeSpeed(currentSpeed: String, targetSpeed: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
