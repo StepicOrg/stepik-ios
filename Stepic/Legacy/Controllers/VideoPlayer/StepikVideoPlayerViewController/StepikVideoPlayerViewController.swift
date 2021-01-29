@@ -1186,6 +1186,12 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
         self.dismiss(animated: true)
     }
 
+    func pictureInPictureControllerDidStartPictureInPicture(
+        _ pictureInPictureController: AVPictureInPictureController
+    ) {
+        self.analytics.send(.videoPlayerDidStartPictureInPicture)
+    }
+
     func pictureInPictureControllerWillStopPictureInPicture(
         _ pictureInPictureController: AVPictureInPictureController
     ) {

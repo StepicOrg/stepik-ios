@@ -604,7 +604,9 @@ extension Player {
     @objc
     private func handleApplicationDidEnterBackground(_ aNotification: Notification) {
         defer {
-            StepikAnalytics.shared.send(.videoPlayerDidEnterBackground)
+            if self.playbackState == .playing {
+                StepikAnalytics.shared.send(.videoPlayerDidPlayInBackground)
+            }
         }
 
         if self.isPictureInPictureActive {
