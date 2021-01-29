@@ -346,10 +346,8 @@ class Player: UIViewController {
 
             switch strongSelf.avplayer.timeControlStatus {
             case .paused:
-                print("timeControlStatus = paused")
                 strongSelf.playbackState = .paused
             case .playing:
-                print("timeControlStatus = playing")
                 strongSelf.playbackState = .playing
             default:
                 break

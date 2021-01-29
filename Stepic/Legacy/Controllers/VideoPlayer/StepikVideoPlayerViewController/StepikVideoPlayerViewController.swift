@@ -185,14 +185,12 @@ final class StepikVideoPlayerViewController: UIViewController {
     private var isPictureInPicturePossible: Bool = false {
         didSet {
             self.pictureInPictureButton.isEnabled = self.isPictureInPicturePossible
-            print("StepikVideoPlayerViewController :: isPictureInPicturePossible = \(self.isPictureInPicturePossible)")
         }
     }
     private var isPictureInPictureActive: Bool = false {
         didSet {
             self.pictureInPictureButton.isSelected = self.isPictureInPictureActive
             self.player.isPictureInPictureActive = self.isPictureInPictureActive
-            print("StepikVideoPlayerViewController :: isPictureInPictureActive = \(self.isPictureInPictureActive)")
         }
     }
 
@@ -1177,15 +1175,13 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
     func pictureInPictureControllerWillStartPictureInPicture(
         _ pictureInPictureController: AVPictureInPictureController
     ) {
-        print("StepikVideoPlayerViewController :: \(#function)")
-
         self.isPictureInPictureActive = true
 
         self.hidePlayerControlsIfVisible()
         self.hidePlayerControlsTimer?.invalidate()
         self.dismissAutoplay()
 
-        PictureInPictureVideoPlayerHolder.shared.retainVideoPlayerViewController(self)
+        PictureInPictureVideoPlayerHolder.shared.retain(self)
 
         self.dismiss(animated: true)
     }
@@ -1193,16 +1189,37 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
     func pictureInPictureControllerWillStopPictureInPicture(
         _ pictureInPictureController: AVPictureInPictureController
     ) {
-        print("StepikVideoPlayerViewController :: \(#function)")
-        PictureInPictureVideoPlayerHolder.shared.releaseVideoPlayerViewController()
+        PictureInPictureVideoPlayerHolder.shared.release()
     }
 
     func pictureInPictureController(
         _ pictureInPictureController: AVPictureInPictureController,
         restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void
     ) {
-        print("StepikVideoPlayerViewController :: \(#function)")
-        PictureInPictureVideoPlayerHolder.shared.restoreVideoPlayerViewController(completionHandler: completionHandler)
+        func isViewControllerVisible(_ viewController: UIViewController) -> Bool {
+            viewController.isViewLoaded && viewController.view.window != nil
+        }
+
+        if isViewControllerVisible(self) {
+            return completionHandler(true)
+        }
+
+        let sourceViewControllerOrNil: UIViewController? = {
+            let sourcelessRouter = SourcelessRouter()
+            return sourcelessRouter.currentNavigation?.topViewController ?? sourcelessRouter.currentNavigation
+        }()
+
+        guard let sourceViewController = sourceViewControllerOrNil else {
+            return completionHandler(false)
+        }
+
+        if isViewControllerVisible(sourceViewController) {
+            sourceViewController.present(self, animated: true) {
+                completionHandler(true)
+            }
+        } else {
+            completionHandler(false)
+        }
     }
 
     func pictureInPictureController(
@@ -1220,36 +1237,12 @@ private final class PictureInPictureVideoPlayerHolder {
 
     private init() {}
 
-    func retainVideoPlayerViewController(_ videoPlayerViewController: StepikVideoPlayerViewController) {
+    func retain(_ videoPlayerViewController: StepikVideoPlayerViewController) {
         self.videoPlayerViewController = videoPlayerViewController
     }
 
-    func releaseVideoPlayerViewController() {
+    func release() {
         self.videoPlayerViewController = nil
-    }
-
-    func restoreVideoPlayerViewController(completionHandler: @escaping (Bool) -> Void) {
-        guard let videoPlayerViewController = self.videoPlayerViewController else {
-            return completionHandler(false)
-        }
-
-        let isVisible = videoPlayerViewController.isViewLoaded && videoPlayerViewController.view.window != nil
-        if isVisible {
-            return completionHandler(true)
-        }
-
-        let sourceViewControllerOrNil: UIViewController? = {
-            let sourcelessRouter = SourcelessRouter()
-            return sourcelessRouter.currentNavigation?.topViewController ?? sourcelessRouter.currentNavigation
-        }()
-
-        guard let sourceViewController = sourceViewControllerOrNil else {
-            return completionHandler(false)
-        }
-
-        sourceViewController.present(videoPlayerViewController, animated: true) {
-            completionHandler(true)
-        }
     }
 }
 
@@ -1257,6 +1250,8 @@ private final class OnlyOneActivePlayerWatcher {
     static let shared = OnlyOneActivePlayerWatcher()
 
     private let players = NSHashTable<Player>.weakObjects()
+
+    private init() {}
 
     func addPlayer(_ player: Player) {
         self.players.add(player)
@@ -1271,6 +1266,4 @@ private final class OnlyOneActivePlayerWatcher {
             }
         }
     }
-
-    private init() {}
 }
