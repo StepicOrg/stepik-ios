@@ -177,7 +177,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     }()
 
     // Picture in Picture
-    fileprivate var pictureInPictureController: AVPictureInPictureController?
+    private var pictureInPictureController: AVPictureInPictureController?
 
     private var pictureInPicturePossibleObservation: NSKeyValueObservation?
     private var pictureInPictureActiveObservation: NSKeyValueObservation?
@@ -1232,7 +1232,14 @@ extension StepikVideoPlayerViewController: AVPictureInPictureControllerDelegate 
         _ pictureInPictureController: AVPictureInPictureController,
         failedToStartPictureInPictureWithError error: Error
     ) {
-        print("StepikVideoPlayerViewController :: \(#function), error = \(error)")
+        let alert = UIAlertController(
+            title: NSLocalizedString("VideoPlayerFailedToStartPictureInPictureTitle", comment: ""),
+            message: NSLocalizedString("VideoPlayerFailedToStartPictureInPictureMessage", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+        self.present(alert, animated: true)
     }
 }
 
