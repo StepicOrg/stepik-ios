@@ -3,8 +3,9 @@ import UIKit
 
 protocol StepViewDelegate: AnyObject {
     func stepViewDidRequestVideo(_ view: StepView)
-    func stepViewDidRequestPrevious(_ view: StepView)
-    func stepViewDidRequestNext(_ view: StepView)
+    func stepViewDidRequestPreviousUnit(_ view: StepView)
+    func stepViewDidRequestNextUnit(_ view: StepView)
+    func stepViewDidRequestNextStep(_ view: StepView)
     func stepViewDidRequestDiscussions(_ view: StepView)
     func stepViewDidRequestSolutions(_ view: StepView)
     func stepViewDidLoadContent(_ view: StepView)
@@ -74,17 +75,23 @@ final class StepView: UIView {
 
     private lazy var stepControlsView: StepControlsView = {
         let view = StepControlsView()
-        view.onPreviousButtonClick = { [weak self] in
+        view.onNextStepButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.stepViewDidRequestPrevious(strongSelf)
+            strongSelf.delegate?.stepViewDidRequestNextStep(strongSelf)
         }
-        view.onNextButtonClick = { [weak self] in
+        view.onPreviousUnitButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.stepViewDidRequestNext(strongSelf)
+            strongSelf.delegate?.stepViewDidRequestPreviousUnit(strongSelf)
+        }
+        view.onNextUnitButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepViewDidRequestNextUnit(strongSelf)
         }
         view.onDiscussionsButtonClick = { [weak self] in
             guard let strongSelf = self else {
@@ -104,6 +111,14 @@ final class StepView: UIView {
     private lazy var quizContainerView = UIView()
 
     private lazy var stepDisabledView = StepDisabledView()
+
+    private var canNavigateToNextStep: Bool = false {
+        didSet {
+            if oldValue == true && !self.canNavigateToNextStep {
+                self.stepControlsView.hasNextStepButton = false
+            }
+        }
+    }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -158,6 +173,8 @@ final class StepView: UIView {
             self.stepTextView.processedContent = processedContent
         }
 
+        self.stepControlsView.hasNextStepButton = quizView == nil && self.canNavigateToNextStep
+
         self.stepControlsView.passedByCount = viewModel.passedByCount
         self.stepControlsView.correctRatio = viewModel.correctRatio
 
@@ -181,17 +198,23 @@ final class StepView: UIView {
         self.quizContainerView.subviews.forEach { $0.removeFromSuperview() }
     }
 
-    func updateNavigationButtons(hasPreviousButton: Bool, hasNextButton: Bool) {
-        switch (hasPreviousButton, hasNextButton) {
+    func updateNavigationButtons(
+        canNavigateToPreviousUnit: Bool,
+        canNavigateToNextUnit: Bool,
+        canNavigateToNextStep: Bool
+    ) {
+        switch (canNavigateToPreviousUnit, canNavigateToNextUnit) {
         case (true, true):
-            self.stepControlsView.navigationState = .both
+            self.stepControlsView.unitNavigationState = .both
         case (true, _):
-            self.stepControlsView.navigationState = .previous
+            self.stepControlsView.unitNavigationState = .previous
         case (_, true):
-            self.stepControlsView.navigationState = .next
+            self.stepControlsView.unitNavigationState = .next
         default:
-            self.stepControlsView.navigationState = nil
+            self.stepControlsView.unitNavigationState = nil
         }
+
+        self.canNavigateToNextStep = canNavigateToNextStep
     }
 
     func updateTextContent(_ processedContent: ProcessedContent) {

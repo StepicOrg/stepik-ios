@@ -76,17 +76,31 @@ final class StepControlsView: UIView {
         return stackView
     }()
 
-    private lazy var navigationStackView: UIStackView = {
+    private lazy var nextStepButton: UIButton = {
+        let button = NextStepButton()
+        button.addTarget(self, action: #selector(self.nextStepClicked), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var nextStepButtonContainerView = UIView()
+
+    private lazy var unitNavigationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = self.appearance.navigationButtonsSpacing
         return stackView
     }()
 
-    private lazy var navigationContainerView = UIView()
+    private lazy var unitNavigationContainerView = UIView()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.navigationContainerView, self.bottomControlsStackView])
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.nextStepButtonContainerView,
+                self.unitNavigationContainerView,
+                self.bottomControlsStackView
+            ]
+        )
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
@@ -94,18 +108,7 @@ final class StepControlsView: UIView {
 
     override var intrinsicContentSize: CGSize {
         let stackViewSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        return CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: self.appearance.insets.top
-                + stackViewSize.height
-                + (self.navigationState == .none ? 0 : self.appearance.spacing)
-                + self.appearance.statisticsViewHeight
-                + (self.discussionsButtonTopSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
-                + self.appearance.discussionThreadButtonHeight
-                + (self.discussionsButtonBottomSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
-                + (self.solutionsButton.isHidden ? 0 : self.appearance.discussionThreadButtonHeight)
-                + (self.solutionsButtonBottomSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
-        )
+        return CGSize(width: UIView.noIntrinsicMetric, height: self.appearance.insets.top + stackViewSize.height)
     }
 
     var sizeWithAllControls: CGSize {
@@ -113,6 +116,8 @@ final class StepControlsView: UIView {
         return CGSize(
             width: size.width,
             height: self.appearance.insets.top
+                + self.appearance.navigationButtonsHeight
+                + self.appearance.spacing
                 + self.appearance.navigationButtonsHeight
                 + self.appearance.spacing
                 + self.appearance.statisticsViewHeight
@@ -124,9 +129,15 @@ final class StepControlsView: UIView {
         )
     }
 
-    var navigationState: NavigationState? {
+    var hasNextStepButton: Bool = false {
         didSet {
-            self.updateNavigationState()
+            self.nextStepButtonContainerView.isHidden = !self.hasNextStepButton
+        }
+    }
+
+    var unitNavigationState: UnitNavigationState? {
+        didSet {
+            self.updateUnitNavigationState()
         }
     }
 
@@ -171,8 +182,9 @@ final class StepControlsView: UIView {
 
     var onDiscussionsButtonClick: (() -> Void)?
     var onSolutionsButtonClick: (() -> Void)?
-    var onPreviousButtonClick: (() -> Void)?
-    var onNextButtonClick: (() -> Void)?
+    var onPreviousUnitButtonClick: (() -> Void)?
+    var onNextUnitButtonClick: (() -> Void)?
+    var onNextStepButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -196,13 +208,18 @@ final class StepControlsView: UIView {
     // MARK: Private API
 
     @objc
-    private func previousButtonClicked() {
-        self.onPreviousButtonClick?()
+    private func nextStepClicked() {
+        self.onNextStepButtonClick?()
     }
 
     @objc
-    private func nextButtonClicked() {
-        self.onNextButtonClick?()
+    private func previousUnitButtonClicked() {
+        self.onPreviousUnitButtonClick?()
+    }
+
+    @objc
+    private func nextUnitButtonClicked() {
+        self.onNextUnitButtonClick?()
     }
 
     @objc
@@ -215,36 +232,36 @@ final class StepControlsView: UIView {
         self.onSolutionsButtonClick?()
     }
 
-    private func updateNavigationState() {
-        self.navigationStackView.removeAllArrangedSubviews()
+    private func updateUnitNavigationState() {
+        self.unitNavigationStackView.removeAllArrangedSubviews()
 
-        if self.navigationContainerView.superview != nil {
-            self.stackView.removeArrangedSubview(self.navigationContainerView)
-            self.navigationContainerView.removeFromSuperview()
+        if self.unitNavigationContainerView.superview != nil {
+            self.stackView.removeArrangedSubview(self.unitNavigationContainerView)
+            self.unitNavigationContainerView.removeFromSuperview()
         }
 
-        if self.navigationState == .none {
+        if self.unitNavigationState == .none {
             return
         }
 
-        let previousButton = StepNavigationButton(type: .previous, isCentered: self.navigationState == .previous)
-        previousButton.addTarget(self, action: #selector(self.previousButtonClicked), for: .touchUpInside)
-        if self.navigationState == .both {
+        let previousButton = StepNavigationButton(type: .previous, isCentered: self.unitNavigationState == .previous)
+        previousButton.addTarget(self, action: #selector(self.previousUnitButtonClicked), for: .touchUpInside)
+        if self.unitNavigationState == .both {
             previousButton.isTitleHidden = true
         }
 
-        let nextButton = StepNavigationButton(type: .next, isCentered: self.navigationState == .next)
-        nextButton.addTarget(self, action: #selector(self.nextButtonClicked), for: .touchUpInside)
+        let nextButton = StepNavigationButton(type: .next, isCentered: self.unitNavigationState == .next)
+        nextButton.addTarget(self, action: #selector(self.nextUnitButtonClicked), for: .touchUpInside)
 
-        if self.navigationState == .previous || self.navigationState == .both {
-            self.navigationStackView.addArrangedSubview(previousButton)
+        if self.unitNavigationState == .previous || self.unitNavigationState == .both {
+            self.unitNavigationStackView.addArrangedSubview(previousButton)
         }
 
-        if self.navigationState == .next || self.navigationState == .both {
-            self.navigationStackView.addArrangedSubview(nextButton)
+        if self.unitNavigationState == .next || self.unitNavigationState == .both {
+            self.unitNavigationStackView.addArrangedSubview(nextButton)
         }
 
-        self.stackView.insertArrangedSubview(self.navigationContainerView, at: 0)
+        self.stackView.insertArrangedSubview(self.unitNavigationContainerView, at: 1)
     }
 
     private func updateStatisticsVisibility() {
@@ -261,7 +278,7 @@ final class StepControlsView: UIView {
 
     // MARK: Enum
 
-    enum NavigationState {
+    enum UnitNavigationState {
         case both
         case next
         case previous
@@ -270,12 +287,14 @@ final class StepControlsView: UIView {
 
 extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.updateNavigationState()
+        self.hasNextStepButton = false
+        self.updateUnitNavigationState()
     }
 
     func addSubviews() {
         self.addSubview(self.stackView)
-        self.navigationContainerView.addSubview(self.navigationStackView)
+        self.nextStepButtonContainerView.addSubview(self.nextStepButton)
+        self.unitNavigationContainerView.addSubview(self.unitNavigationStackView)
     }
 
     func makeConstraints() {
@@ -286,13 +305,21 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
         }
 
-        self.navigationContainerView.translatesAutoresizingMaskIntoConstraints = false
-        self.navigationContainerView.snp.makeConstraints { make in
+        self.nextStepButton.translatesAutoresizingMaskIntoConstraints = false
+        self.nextStepButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+            make.top.bottom.equalToSuperview()
             make.height.equalTo(self.appearance.navigationButtonsHeight)
         }
 
-        self.navigationStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.navigationStackView.snp.makeConstraints { make in
+        self.unitNavigationContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.unitNavigationContainerView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.navigationButtonsHeight)
+        }
+
+        self.unitNavigationStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.unitNavigationStackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.top.bottom.equalToSuperview()
