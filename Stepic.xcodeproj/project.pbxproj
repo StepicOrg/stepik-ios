@@ -418,6 +418,7 @@
 		2C183D7A257163360025090D /* AuthorsCourseListWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C183D79257163360025090D /* AuthorsCourseListWidgetViewModel.swift */; };
 		2C1864C924F6350F004AFFD1 /* StepikURLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1864C824F6350F004AFFD1 /* StepikURLFactory.swift */; };
 		2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */; };
+		2C1883A125C44C5E00820DEE /* NextStepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1883A025C44C5E00820DEE /* NextStepButton.swift */; };
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
 		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
 		2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */; };
@@ -1997,6 +1998,7 @@
 		2C183D79257163360025090D /* AuthorsCourseListWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListWidgetViewModel.swift; sourceTree = "<group>"; };
 		2C1864C824F6350F004AFFD1 /* StepikURLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikURLFactory.swift; sourceTree = "<group>"; };
 		2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikURLFactoryTests.swift; sourceTree = "<group>"; };
+		2C1883A025C44C5E00820DEE /* NextStepButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextStepButton.swift; sourceTree = "<group>"; };
 		2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingServiceFactory.swift; sourceTree = "<group>"; };
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
 		2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARKit-Badge-Glyph-Only.png"; sourceTree = "<group>"; };
@@ -7053,6 +7055,7 @@
 				62E983C44270B73F5F3508F2 /* DownloadControlView.swift */,
 				62E9802EAA7E12A5C9B4F800 /* HighlightFakeButton.swift */,
 				62E9869C9474DB9208F1E5FC /* ImageButton.swift */,
+				2C1883A025C44C5E00820DEE /* NextStepButton.swift */,
 				62E98CA36176671DDF744499 /* PaddingLabel.swift */,
 				2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */,
 				62E984651165CED551545B5C /* ProgressCircleImage.swift */,
@@ -9161,6 +9164,7 @@
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				2C22042520E277B40060117A /* Skeletonable.swift in Sources */,
+				2C1883A125C44C5E00820DEE /* NextStepButton.swift in Sources */,
 				089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				08883AC2214C52EC00898BBE /* ModalOrPushStackRouter.swift in Sources */,
