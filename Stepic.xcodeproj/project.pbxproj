@@ -570,6 +570,9 @@
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
 		2C5B3813257280C6007BF21E /* AuthorsCourseListWidgetCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B3812257280C6007BF21E /* AuthorsCourseListWidgetCoverView.swift */; };
 		2C5BE9DC233C0A110098EB2F /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BE9DB233C0A100098EB2F /* katex */; };
+		2C5D33DE25C9695300372C61 /* PromoCodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */; };
+		2C5D340225C988FA00372C61 /* PromoCodesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */; };
+		2C5D340825C98A6800372C61 /* PromoCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D340725C98A6800372C61 /* PromoCode.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */; };
 		2C5D963B24C9B251004E9FD1 /* Auth-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963924C9B251004E9FD1 /* Auth-Release.plist */; };
@@ -2168,6 +2171,9 @@
 		2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_limits.xcdatamodel; sourceTree = "<group>"; };
 		2C5B3812257280C6007BF21E /* AuthorsCourseListWidgetCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListWidgetCoverView.swift; sourceTree = "<group>"; };
 		2C5BE9DB233C0A100098EB2F /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
+		2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesAPI.swift; sourceTree = "<group>"; };
+		2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesNetworkService.swift; sourceTree = "<group>"; };
+		2C5D340725C98A6800372C61 /* PromoCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCode.swift; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikLabelBarButton.swift; sourceTree = "<group>"; };
 		2C5D963924C9B251004E9FD1 /* Auth-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Auth-Release.plist"; sourceTree = "<group>"; };
@@ -4018,6 +4024,7 @@
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */,
 				2C130E3B2512402B00389AEB /* LaunchArguments.swift */,
+				2C5D340725C98A6800372C61 /* PromoCode.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
 				2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */,
 				2C3DAB90233D735D00453B1C /* StepFontSize.swift */,
@@ -6317,6 +6324,7 @@
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
 				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
 				080CE1541E9563590089A27F /* ProgressesAPI.swift */,
+				2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */,
 				08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */,
 				2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */,
 				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
@@ -6859,6 +6867,7 @@
 				2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
+				2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
 				2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */,
 				2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */,
@@ -9011,6 +9020,7 @@
 				2C50363E24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift in Sources */,
 				2C22042C20E277F70060117A /* Skeletonable+UIView.swift in Sources */,
 				082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */,
+				2C5D340225C988FA00372C61 /* PromoCodesNetworkService.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				2C3A035624AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
@@ -9501,6 +9511,7 @@
 				62E98E8F09C3C24A98858518 /* SettingsTableSectionHeaderView.swift in Sources */,
 				62E9851D236EC702791E1776 /* TableInputTextField.swift in Sources */,
 				62E9852B2621211F8DEA7CBE /* SettingsTableViewCell.swift in Sources */,
+				2C5D340825C98A6800372C61 /* PromoCode.swift in Sources */,
 				62E98AF1D0D810811FAC3CCA /* SettingsInputTableViewCell.swift in Sources */,
 				2C8F3ADD23CCAB7C004D113A /* DownloadVideoQualityStorageManager.swift in Sources */,
 				2C05FBDD2523B21E004FD313 /* FontWeightNameMapping.swift in Sources */,
@@ -9543,6 +9554,7 @@
 				62E983396017D01A87AF3140 /* CourseInfoViewController.swift in Sources */,
 				62E98AC39414931813624929 /* CourseInfoBlurredBackgroundView.swift in Sources */,
 				62E98334A27C3351C39CEFD8 /* CourseInfoHeaderView.swift in Sources */,
+				2C5D33DE25C9695300372C61 /* PromoCodesAPI.swift in Sources */,
 				62E98F05C243FB1C3EEBA452 /* CourseInfoStatsView.swift in Sources */,
 				2CC5AA74242A351100C09F94 /* TapProxyView.swift in Sources */,
 				62E98A0AC93659FC94B50F7E /* CourseInfoView.swift in Sources */,
