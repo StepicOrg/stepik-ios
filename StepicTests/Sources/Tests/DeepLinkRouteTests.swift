@@ -100,6 +100,43 @@ class DeepLinkRouteSpec: QuickSpec {
                 }
             }
 
+            context("coursePay") {
+                it("matches course pay deep link without promo code name") {
+                    let paths = [
+                        "http://stepik.org/course/8092/pay",
+                        "https://stepik.org/course/8092/pay",
+                        "https://stepik.org/course/8092/pay/",
+                        "https://stepik.org/course/8092/pay/?",
+                        "https://stepik.org/course/8092/pay/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .coursePay(id, promoCodeName) = route else {
+                            return .failed(reason: "wrong enum case, expected `course`, got \(route)")
+                        }
+                        return (id == 8092 && promoCodeName == nil) ? .succeeded : .failed(reason: "wrong course id")
+                    }
+                }
+
+                it("matches course pay deep link with promo code name") {
+                    let paths = [
+                        "http://stepik.org/course/389182/pay?promo=PROMO",
+                        "https://stepik.org/course/389182/pay?promo=PROMO",
+                        "https://stepik.org/course/389182/pay/?promo=PROMO",
+                        "https://stepik.org/course/389182/pay/?utm_source=newsletter&utm_medium=email&promo=PROMO&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
+                    ]
+
+                    self.checkPaths(paths) { route in
+                        guard case let .coursePay(id, promoCodeName) = route else {
+                            return .failed(reason: "wrong enum case, expected `course`, got \(route)")
+                        }
+
+                        return (id == 389182 && promoCodeName == "PROMO")
+                            ? .succeeded
+                            : .failed(reason: "wrong course id")
+                    }
+                }
+            }
+
             context("profile") {
                 it("matches profile deep link with given paths") {
                     let paths = [
