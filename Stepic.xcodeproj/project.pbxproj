@@ -401,6 +401,8 @@
 		2C0B771D25480A7500BA474D /* CourseListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B771C25480A7500BA474D /* CourseListFilterViewModel.swift */; };
 		2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */; };
 		2C0F80BA25C9B80C006E9233 /* DiscountAppearanceSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80B925C9B80C006E9233 /* DiscountAppearanceSplitTest.swift */; };
+		2C0F80C525C9BB5A006E9233 /* PromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */; };
+		2C0F80D925C9C861006E9233 /* TransparentPromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */; };
 		2C0FA689252F4D7A0032DDEC /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA688252F4D7A0032DDEC /* Typography.swift */; };
 		2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10100A239EFAD700440651 /* DiscountingPolicy.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
@@ -1984,6 +1986,8 @@
 		2C0B771C25480A7500BA474D /* CourseListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterViewModel.swift; sourceTree = "<group>"; };
 		2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPReceiptValidationService.swift; sourceTree = "<group>"; };
 		2C0F80B925C9B80C006E9233 /* DiscountAppearanceSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountAppearanceSplitTest.swift; sourceTree = "<group>"; };
+		2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPriceButton.swift; sourceTree = "<group>"; };
+		2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentPromoPriceButton.swift; sourceTree = "<group>"; };
 		2C0FA688252F4D7A0032DDEC /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		2C0FBEB224E25A4D002CA67F /* Model_quiz_is_partially_correct_v61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_quiz_is_partially_correct_v61.xcdatamodel; sourceTree = "<group>"; };
 		2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_discount_policy.xcdatamodel; sourceTree = "<group>"; };
@@ -3459,6 +3463,15 @@
 				2CF9BD332538503C00C2AFD2 /* PromiseKit */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		2C0F80C325C9BB06006E9233 /* PromoPriceButton */ = {
+			isa = PBXGroup;
+			children = (
+				2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */,
+				2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */,
+			);
+			path = PromoPriceButton;
 			sourceTree = "<group>";
 		};
 		2C10AFE8217E04780019966D /* Registration */ = {
@@ -7544,6 +7557,7 @@
 				62E9825DC46191B6B299CBC2 /* CourseInfoStatsView.swift */,
 				2CDC9EF924E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift */,
 				62E98ABA6ADA2DEA8E21746B /* CourseInfoView.swift */,
+				2C0F80C325C9BB06006E9233 /* PromoPriceButton */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -9184,6 +9198,7 @@
 				2C1883A125C44C5E00820DEE /* NextStepButton.swift in Sources */,
 				089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
+				2C0F80D925C9C861006E9233 /* TransparentPromoPriceButton.swift in Sources */,
 				08883AC2214C52EC00898BBE /* ModalOrPushStackRouter.swift in Sources */,
 				2C1E42A02497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift in Sources */,
 				2C87A7AB2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift in Sources */,
@@ -9326,6 +9341,7 @@
 				2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
 				2CC5AA70242A34FA00C09F94 /* AdaptiveRatingManager.swift in Sources */,
+				2C0F80C525C9BB5A006E9233 /* PromoPriceButton.swift in Sources */,
 				2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */,
 				2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C20C86622F8E4BF0052E9BF /* CodeDetails.swift in Sources */,

@@ -24,5 +24,6 @@ struct CourseInfoHeaderViewModel {
         let subtitle: String?
         let isCallToAction: Bool
         let isEnabled: Bool
+        let isPromo: Bool
     }
 }

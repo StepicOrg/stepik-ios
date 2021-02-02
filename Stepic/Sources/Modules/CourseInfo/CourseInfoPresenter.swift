@@ -250,6 +250,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         let isEnrolled = course.enrolled
         let isEnabled = isEnrolled ? course.canContinue : true
         let isNotPurchased = course.isPaid && !course.isPurchased
+        var isPromo = false
 
         let title: String = {
             if isEnrolled {
@@ -262,6 +263,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                     displayPrice = iapLocalizedPrice
                 } else if let promoCode = promoCode {
                     displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
+                    isPromo = true
                 } else {
                     displayPrice = course.displayPrice
                 }
@@ -285,7 +287,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             title: title,
             subtitle: subtitle,
             isCallToAction: !isEnrolled,
-            isEnabled: isEnabled
+            isEnabled: isEnabled,
+            isPromo: isPromo
         )
     }
 }
