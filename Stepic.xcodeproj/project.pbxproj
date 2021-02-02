@@ -573,6 +573,7 @@
 		2C5D33DE25C9695300372C61 /* PromoCodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */; };
 		2C5D340225C988FA00372C61 /* PromoCodesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */; };
 		2C5D340825C98A6800372C61 /* PromoCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D340725C98A6800372C61 /* PromoCode.swift */; };
+		2C5D341625C997DF00372C61 /* CurrencySymbolMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D341525C997DF00372C61 /* CurrencySymbolMap.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */; };
 		2C5D963B24C9B251004E9FD1 /* Auth-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963924C9B251004E9FD1 /* Auth-Release.plist */; };
@@ -2174,6 +2175,7 @@
 		2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesAPI.swift; sourceTree = "<group>"; };
 		2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesNetworkService.swift; sourceTree = "<group>"; };
 		2C5D340725C98A6800372C61 /* PromoCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCode.swift; sourceTree = "<group>"; };
+		2C5D341525C997DF00372C61 /* CurrencySymbolMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySymbolMap.swift; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5D601C2464BAF700D1103B /* StepikLabelBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikLabelBarButton.swift; sourceTree = "<group>"; };
 		2C5D963924C9B251004E9FD1 /* Auth-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Auth-Release.plist"; sourceTree = "<group>"; };
@@ -4021,6 +4023,7 @@
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
 				08A9F71D1FC38C9E00640F1F /* CourseTag.swift */,
+				2C5D341525C997DF00372C61 /* CurrencySymbolMap.swift */,
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */,
 				2C130E3B2512402B00389AEB /* LaunchArguments.swift */,
@@ -8956,6 +8959,7 @@
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */,
 				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
+				2C5D341625C997DF00372C61 /* CurrencySymbolMap.swift in Sources */,
 				2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */,
 				2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */,
 				2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */,

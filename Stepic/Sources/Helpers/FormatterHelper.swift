@@ -43,6 +43,15 @@ enum FormatterHelper {
         return "\(prefix)\(adjustedMegabytes) \(NSLocalizedString("Mb", comment: ""))"
     }
 
+    static func price(_ price: Float, currencyCode: String) -> String {
+        let hasDecimals = price.truncatingRemainder(dividingBy: 1) != 0
+        let priceString = hasDecimals ? String(format: "%.2f", price) : "\(Int(price))"
+
+        let currencySymbol = CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode
+
+        return "\(priceString) \(currencySymbol)"
+    }
+
     /// Format courses count with localized and pluralized suffix; 1 -> "1 course", 5 -> "5 courses"
     static func coursesCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(

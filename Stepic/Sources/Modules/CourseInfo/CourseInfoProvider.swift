@@ -5,8 +5,10 @@ protocol CourseInfoProviderProtocol {
     func fetchCached() -> Promise<Course?>
     func fetchRemote() -> Promise<Course?>
 
-    func fetchUserCourse(courseID: Course.IdType) -> Promise<UserCourse?>
-    func updateUserCourse(userCourse: UserCourse) -> Promise<UserCourse>
+    func fetchUserCourse() -> Promise<UserCourse?>
+    func updateUserCourse(_ userCourse: UserCourse) -> Promise<UserCourse>
+
+    func checkPromoCode(name: String) -> Promise<PromoCode>
 }
 
 final class CourseInfoProvider: CourseInfoProviderProtocol {
@@ -26,6 +28,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
     private let userCoursesNetworkService: UserCoursesNetworkServiceProtocol
 
+    private let promoCodesNetworkService: PromoCodesNetworkServiceProtocol
+
     init(
         courseID: Course.IdType,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
@@ -36,7 +40,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
         coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol,
         coursePurchasesNetworkService: CoursePurchasesNetworkServiceProtocol,
-        userCoursesNetworkService: UserCoursesNetworkServiceProtocol
+        userCoursesNetworkService: UserCoursesNetworkServiceProtocol,
+        promoCodesNetworkService: PromoCodesNetworkServiceProtocol
     ) {
         self.courseID = courseID
         self.coursesNetworkService = coursesNetworkService
@@ -48,6 +53,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.coursePurchasesPersistenceService = coursePurchasesPersistenceService
         self.coursePurchasesNetworkService = coursePurchasesNetworkService
         self.userCoursesNetworkService = userCoursesNetworkService
+        self.promoCodesNetworkService = promoCodesNetworkService
     }
 
     func fetchCached() -> Promise<Course?> {
@@ -80,9 +86,9 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         }
     }
 
-    func fetchUserCourse(courseID: Course.IdType) -> Promise<UserCourse?> {
+    func fetchUserCourse() -> Promise<UserCourse?> {
         Promise { seal in
-            self.userCoursesNetworkService.fetch(courseID: courseID).done { userCourse in
+            self.userCoursesNetworkService.fetch(courseID: self.courseID).done { userCourse in
                 seal.fulfill(userCourse)
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
@@ -90,7 +96,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         }
     }
 
-    func updateUserCourse(userCourse: UserCourse) -> Promise<UserCourse> {
+    func updateUserCourse(_ userCourse: UserCourse) -> Promise<UserCourse> {
         Promise { seal in
             self.userCoursesNetworkService.update(userCourse: userCourse).done { userCourse in
                 seal.fulfill(userCourse)
@@ -98,6 +104,10 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
                 seal.reject(Error.networkFetchFailed)
             }
         }
+    }
+
+    func checkPromoCode(name: String) -> Promise<PromoCode> {
+        self.promoCodesNetworkService.checkPromoCode(courseID: self.courseID, name: name)
     }
 
     private func fetchAndMergeCourse(

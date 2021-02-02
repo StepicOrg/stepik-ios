@@ -13,12 +13,18 @@ final class PromoCodesNetworkService: PromoCodesNetworkServiceProtocol {
     }
 
     func checkPromoCode(courseID: Course.IdType, name: String) -> Promise<PromoCode> {
-        self.promoCodesAPI.check(courseID: courseID, name: name).map { response in
+        let trimmedName = name.trimmed()
+
+        if trimmedName.isEmpty {
+            return Promise(error: Error.badName)
+        }
+
+        return self.promoCodesAPI.check(courseID: courseID, name: trimmedName).map { response in
             PromoCode(courseID: courseID, name: name, price: response.price, currencyCode: response.currencyCode)
         }
     }
 
     enum Error: Swift.Error {
-        case fetchFailed
+        case badName
     }
 }

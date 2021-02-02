@@ -21,6 +21,7 @@ struct CourseInfoHeaderViewModel {
 
     struct ButtonDescription {
         let title: String
+        let subtitle: String?
         let isCallToAction: Bool
         let isEnabled: Bool
     }
