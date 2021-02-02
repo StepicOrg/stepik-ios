@@ -48,6 +48,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
     private var currentCourseIAPLocalizedPrice: String?
 
+    private let promoCodeName: String?
+    private var currentPromoCode: PromoCode?
+
     private var courseWebURL: URL? {
         guard let course = self.currentCourse else {
             return nil
@@ -81,6 +84,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     init(
         courseID: Course.IdType,
+        promoCodeName: String?,
         presenter: CourseInfoPresenterProtocol,
         provider: CourseInfoProviderProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
@@ -113,6 +117,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.analytics = analytics
 
         self.courseID = courseID
+        self.promoCodeName = promoCodeName
         self.courseViewSource = courseViewSource
     }
 
@@ -188,14 +193,14 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request) {
-        if let currentCourse = self.currentCourse, currentCourse.enrolled {
-            self.doUserCourseAction(currentCourse.isFavorite ? .favoriteRemove : .favoriteAdd)
+        if let course = self.currentCourse, course.enrolled {
+            self.doUserCourseAction(course: course, action: course.isFavorite ? .favoriteRemove : .favoriteAdd)
         }
     }
 
     func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request) {
-        if let currentCourse = self.currentCourse, currentCourse.enrolled {
-            self.doUserCourseAction(currentCourse.isArchived ? .archiveRemove : .archiveAdd)
+        if let course = self.currentCourse, course.enrolled {
+            self.doUserCourseAction(course: course, action: course.isArchived ? .archiveRemove : .archiveAdd)
         }
     }
 
@@ -279,7 +284,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     // MARK: Private methods
 
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
-        .init(course: self.currentCourse.require(), iapLocalizedPrice: self.currentCourseIAPLocalizedPrice)
+        .init(
+            course: self.currentCourse.require(),
+            iapLocalizedPrice: self.currentCourseIAPLocalizedPrice,
+            promoCode: self.currentPromoCode
+        )
     }
 
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.CourseLoad.Response> {
@@ -317,6 +326,16 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     }
                 }
 
+                if let promoCodeName = self.promoCodeName, self.currentPromoCode == nil,
+                   let course = course, course.isPaid {
+                    self.provider.checkPromoCode(name: promoCodeName).done { promoCode in
+                        self.currentPromoCode = promoCode
+                        DispatchQueue.main.async {
+                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                        }
+                    }.cauterize()
+                }
+
                 if !self.didLoadFromCache {
                     self.didLoadFromCache = true
                 }
@@ -340,14 +359,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
-    private func doUserCourseAction(_ action: CourseInfo.UserCourseAction) {
-        let currentCourse = self.currentCourse.require()
-
+    private func doUserCourseAction(course: Course, action: CourseInfo.UserCourseAction) {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         firstly {
             self.provider
-                .fetchUserCourse(courseID: currentCourse.id)
+                .fetchUserCourse()
                 .compactMap { $0 }
         }.then { userCourse -> Promise<UserCourse> in
             switch action {
@@ -361,15 +378,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 userCourse.isArchived = false
             }
 
-            return self.provider.updateUserCourse(userCourse: userCourse)
+            return self.provider.updateUserCourse(userCourse)
         }.done { userCourse in
-            if currentCourse.isFavorite != userCourse.isFavorite {
-                currentCourse.isFavorite = userCourse.isFavorite
-                self.dataBackUpdateService.triggerCourseIsFavoriteUpdate(retrievedCourse: currentCourse)
+            if course.isFavorite != userCourse.isFavorite {
+                course.isFavorite = userCourse.isFavorite
+                self.dataBackUpdateService.triggerCourseIsFavoriteUpdate(retrievedCourse: course)
             }
-            if currentCourse.isArchived != userCourse.isArchived {
-                currentCourse.isArchived = userCourse.isArchived
-                self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: currentCourse)
+            if course.isArchived != userCourse.isArchived {
+                course.isArchived = userCourse.isArchived
+                self.dataBackUpdateService.triggerCourseIsArchivedUpdate(retrievedCourse: course)
             }
 
             self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))

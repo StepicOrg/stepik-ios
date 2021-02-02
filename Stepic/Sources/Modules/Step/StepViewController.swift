@@ -255,8 +255,9 @@ extension StepViewController: StepViewControllerProtocol {
 
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) {
         self.stepView?.updateNavigationButtons(
-            hasPreviousButton: viewModel.canNavigateToPreviousUnit,
-            hasNextButton: viewModel.canNavigateToNextUnit
+            canNavigateToPreviousUnit: viewModel.canNavigateToPreviousUnit,
+            canNavigateToNextUnit: viewModel.canNavigateToNextUnit,
+            canNavigateToNextStep: viewModel.canNavigateToNextStep
         )
         self.canNavigateToNextStep = viewModel.canNavigateToNextStep
     }
@@ -388,12 +389,16 @@ extension StepViewController: StepViewDelegate {
         self.presentVideoPlayer()
     }
 
-    func stepViewDidRequestPrevious(_ view: StepView) {
+    func stepViewDidRequestPreviousUnit(_ view: StepView) {
         self.interactor.doLessonNavigationRequest(request: .init(direction: .previous))
     }
 
-    func stepViewDidRequestNext(_ view: StepView) {
+    func stepViewDidRequestNextUnit(_ view: StepView) {
         self.interactor.doLessonNavigationRequest(request: .init(direction: .next))
+    }
+
+    func stepViewDidRequestNextStep(_ view: StepView) {
+        self.interactor.doStepNavigationRequest(request: .init(direction: .next))
     }
 
     func stepViewDidRequestDiscussions(_ view: StepView) {

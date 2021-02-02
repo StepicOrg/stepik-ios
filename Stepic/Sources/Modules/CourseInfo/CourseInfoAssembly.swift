@@ -4,17 +4,20 @@ final class CourseInfoAssembly: Assembly {
     private let courseID: Course.IdType
     private let initialTab: CourseInfo.Tab
     private let didJustSubscribe: Bool
+    private let promoCodeName: String?
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     init(
         courseID: Course.IdType,
         initialTab: CourseInfo.Tab = .info,
         didJustSubscribe: Bool = false,
+        promoCodeName: String? = nil,
         courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.courseID = courseID
         self.initialTab = initialTab
         self.didJustSubscribe = didJustSubscribe
+        self.promoCodeName = promoCodeName
         self.courseViewSource = courseViewSource
     }
 
@@ -31,7 +34,8 @@ final class CourseInfoAssembly: Assembly {
             ),
             coursePurchasesPersistenceService: CoursePurchasesPersistenceService(),
             coursePurchasesNetworkService: CoursePurchasesNetworkService(coursePurchasesAPI: CoursePurchasesAPI()),
-            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI())
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
+            promoCodesNetworkService: PromoCodesNetworkService(promoCodesAPI: PromoCodesAPI())
         )
         let presenter = CourseInfoPresenter(urlFactory: StepikURLFactory())
 
@@ -53,6 +57,7 @@ final class CourseInfoAssembly: Assembly {
 
         let interactor = CourseInfoInteractor(
             courseID: self.courseID,
+            promoCodeName: self.promoCodeName,
             presenter: presenter,
             provider: provider,
             networkReachabilityService: NetworkReachabilityService(),

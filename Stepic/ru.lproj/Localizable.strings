@@ -872,6 +872,8 @@ VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующ
 VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
 VideoPlayerInvalidVideoAlertTitle = "Ошибка воспроизведения";
 VideoPlayerInvalidVideoAlertMessage = "Видео ещё не было загружено преподавателем или обработано. Пожалуйста, попробуйте воспроизвести видео позже.";
+VideoPlayerFailedToStartPictureInPictureTitle = "Ошибка воспроизведения";
+VideoPlayerFailedToStartPictureInPictureMessage = "Не удалось начать воспроизведение этого видео в режиме \"Картинка в картинке\".";
 
 StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
