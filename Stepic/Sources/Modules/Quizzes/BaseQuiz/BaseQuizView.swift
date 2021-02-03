@@ -11,13 +11,7 @@ protocol BaseQuizViewDelegate: AnyObject {
 
 extension BaseQuizView {
     struct Appearance {
-        let submitButtonBackgroundColor = UIColor.dynamic(light: .stepikGreen, dark: .stepikBackground)
         let submitButtonHeight: CGFloat = 44
-        let submitButtonTextColor = UIColor.dynamic(light: .white, dark: .stepikGreen)
-        let submitButtonCornerRadius: CGFloat = 6
-        let submitButtonBorderWidth: CGFloat = 1
-        let submitButtonBorderColor = UIColor.dynamic(light: .clear, dark: .stepikGreen)
-        let submitButtonFont = UIFont.systemFont(ofSize: 16)
 
         let retryButtonSize = CGSize(width: 44, height: 44)
         let retryButtonIconSize = CGSize(width: 22, height: 22)
@@ -72,15 +66,10 @@ final class BaseQuizView: UIView {
     }()
 
     private lazy var submitButton: UIButton = {
-        let submitButton = UIButton(type: .system)
-        submitButton.setTitleColor(self.appearance.submitButtonTextColor, for: .normal)
-        submitButton.titleLabel?.font = self.appearance.submitButtonFont
-        submitButton.layer.cornerRadius = self.appearance.submitButtonCornerRadius
-        submitButton.layer.borderWidth = self.appearance.submitButtonBorderWidth
-        submitButton.clipsToBounds = true
-        submitButton.backgroundColor = self.appearance.submitButtonBackgroundColor
-        submitButton.addTarget(self, action: #selector(self.submitClicked), for: .touchUpInside)
-        return submitButton
+        let button = NextStepButton()
+        button.setTitle(nil, for: .normal)
+        button.addTarget(self, action: #selector(self.submitClicked), for: .touchUpInside)
+        return button
     }()
 
     private lazy var retryButton: ImageButton = {
@@ -200,7 +189,7 @@ final class BaseQuizView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.updateAppearance()
+        self.retryButton.layer.borderColor = self.appearance.retryButtonTintColor.cgColor
     }
 
     func addQuiz(view: UIView) {
@@ -242,11 +231,6 @@ final class BaseQuizView: UIView {
     }
 
     // MARK: - Private API
-
-    private func updateAppearance() {
-        self.submitButton.layer.borderColor = self.appearance.submitButtonBorderColor.cgColor
-        self.retryButton.layer.borderColor = self.appearance.retryButtonTintColor.cgColor
-    }
 
     private func updateRetryButton() {
         // Hide retry button for last step in lesson.

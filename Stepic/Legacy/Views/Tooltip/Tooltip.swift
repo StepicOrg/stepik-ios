@@ -38,7 +38,7 @@ enum TooltipColor {
         case .dark:
             return UIColor.stepikGrey
         case .standard:
-            return UIColor.stepikLightBlue
+            return UIColor.stepikLightBlueFixed
         }
     }
 
@@ -49,7 +49,7 @@ enum TooltipColor {
         case .dark:
             return UIColor.stepikAccent
         case .standard:
-            return UIColor.stepikLightBlue
+            return UIColor.stepikLightBlueFixed
         }
     }
 }

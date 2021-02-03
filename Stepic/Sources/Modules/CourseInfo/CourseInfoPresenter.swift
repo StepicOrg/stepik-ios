@@ -31,7 +31,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         case .success(let data):
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
-                iapLocalizedPrice: data.iapLocalizedPrice
+                iapLocalizedPrice: data.iapLocalizedPrice,
+                promoCode: data.promoCode
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         default:
@@ -198,7 +199,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
-    private func makeHeaderViewModel(course: Course, iapLocalizedPrice: String?) -> CourseInfoHeaderViewModel {
+    private func makeHeaderViewModel(
+        course: Course,
+        iapLocalizedPrice: String?,
+        promoCode: PromoCode?
+    ) -> CourseInfoHeaderViewModel {
         let rating: Int = {
             if let reviewsCount = course.reviewSummary?.count,
                let averageRating = course.reviewSummary?.average,
@@ -229,23 +234,40 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
             isTryForFreeAvailable: isTryForFreeAvailable,
-            buttonDescription: self.makeButtonDescription(course: course, iapLocalizedPrice: iapLocalizedPrice)
+            buttonDescription: self.makeButtonDescription(
+                course: course,
+                iapLocalizedPrice: iapLocalizedPrice,
+                promoCode: promoCode
+            )
         )
     }
 
     private func makeButtonDescription(
         course: Course,
-        iapLocalizedPrice: String?
+        iapLocalizedPrice: String?,
+        promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
         let isEnabled = isEnrolled ? course.canContinue : true
+        let isNotPurchased = course.isPaid && !course.isPurchased
+        var isPromo = false
+
         let title: String = {
             if isEnrolled {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
             }
 
-            if course.isPaid && !course.isPurchased {
-                let displayPrice = iapLocalizedPrice ?? course.displayPrice
+            if isNotPurchased {
+                let displayPrice: String?
+                if let iapLocalizedPrice = iapLocalizedPrice {
+                    displayPrice = iapLocalizedPrice
+                } else if let promoCode = promoCode {
+                    displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
+                    isPromo = true
+                } else {
+                    displayPrice = course.displayPrice
+                }
+
                 if let displayPrice = displayPrice {
                     return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
                 }
@@ -254,10 +276,19 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             return NSLocalizedString("WidgetButtonJoin", comment: "")
         }()
 
+        let subtitle: String? = {
+            if isNotPurchased && promoCode != nil {
+                return course.displayPrice
+            }
+            return nil
+        }()
+
         return CourseInfoHeaderViewModel.ButtonDescription(
             title: title,
+            subtitle: subtitle,
             isCallToAction: !isEnrolled,
-            isEnabled: isEnabled
+            isEnabled: isEnabled,
+            isPromo: isPromo
         )
     }
 }

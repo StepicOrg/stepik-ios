@@ -35,9 +35,10 @@ enum CourseInfo {
             struct Data {
                 let course: Course
                 let iapLocalizedPrice: String?
+                let promoCode: PromoCode?
             }
 
-            var result: Swift.Result<Data, Swift.Error>
+            var result: StepikResult<Data>
         }
 
         struct ViewModel {

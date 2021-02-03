@@ -33,6 +33,15 @@ extension CourseInfoHeaderView {
 final class CourseInfoHeaderView: UIView {
     let appearance: Appearance
 
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+
+    private var shouldParticipateInPromoPriceSplitTest: Bool {
+        DiscountAppearanceSplitTest.shouldParticipate
+    }
+
     private lazy var backgroundView: CourseInfoBlurredBackgroundView = {
         let view = CourseInfoBlurredBackgroundView()
         // To prevent tap handling
@@ -46,6 +55,25 @@ final class CourseInfoHeaderView: UIView {
         return button
     }()
 
+    private lazy var promoPriceButton: PromoPriceButtonProtocol = {
+        let splitTest = self.splitTestingService.fetchSplitTest(DiscountAppearanceSplitTest.self)
+
+        let button: PromoPriceButtonProtocol
+        switch splitTest.currentGroup {
+        case .discountTransparent:
+            button = TransparentPromoPriceButton()
+        case .discountGreen:
+            button = PromoPriceButton(style: .green)
+        case .discountPurple:
+            button = PromoPriceButton(style: .purple)
+        }
+
+        button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
+        button.isHidden = true
+
+        return button
+    }()
+
     private lazy var tryForFreeButton: CourseInfoTryForFreeButton = {
         let button = CourseInfoTryForFreeButton()
         button.isHidden = true
@@ -53,7 +81,6 @@ final class CourseInfoHeaderView: UIView {
         return button
     }()
 
-    // Stack view for actionButton and tryForFreeButton.
     private lazy var actionButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = self.appearance.actionButtonsStackViewSpacing
@@ -154,11 +181,24 @@ final class CourseInfoHeaderView: UIView {
 
         self.verifiedSignView.isHidden = !viewModel.isVerified
 
+        let shouldShowPromoPriceButton = self.shouldParticipateInPromoPriceSplitTest
+            && viewModel.buttonDescription.isCallToAction && viewModel.buttonDescription.isPromo
+
         self.actionButton.mode = viewModel.buttonDescription.isCallToAction
             ? .callToAction
             : .default
         self.actionButton.setTitle(viewModel.buttonDescription.title, for: .normal)
         self.actionButton.isEnabled = viewModel.buttonDescription.isEnabled
+        self.actionButton.isHidden = shouldShowPromoPriceButton
+
+        if shouldShowPromoPriceButton {
+            self.promoPriceButton.configure(
+                promoPriceString: viewModel.buttonDescription.title,
+                fullPriceString: viewModel.buttonDescription.subtitle ?? ""
+            )
+            self.promoPriceButton.isEnabled = viewModel.buttonDescription.isEnabled
+            self.promoPriceButton.isHidden = !shouldShowPromoPriceButton
+        }
 
         self.tryForFreeButton.isHidden = !viewModel.isTryForFreeAvailable
     }
@@ -190,6 +230,9 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.marksStackView.addArrangedSubview(self.verifiedSignView)
 
         self.actionButtonsStackView.addArrangedSubview(self.actionButton)
+        if self.shouldParticipateInPromoPriceSplitTest {
+            self.actionButtonsStackView.addArrangedSubview(self.promoPriceButton)
+        }
         self.actionButtonsStackView.addArrangedSubview(self.tryForFreeButton)
 
         self.addSubview(self.backgroundView)
@@ -241,6 +284,17 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.actionButton.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.actionButtonHeight)
             make.width.equalTo(self.snp.width).multipliedBy(self.appearance.actionButtonWidthRatio)
+        }
+
+        if self.shouldParticipateInPromoPriceSplitTest {
+            self.promoPriceButton.translatesAutoresizingMaskIntoConstraints = false
+            self.promoPriceButton.snp.makeConstraints { make in
+                make.height.equalTo(self.appearance.actionButtonHeight)
+                make.width
+                    .equalTo(self.snp.width)
+                    .multipliedBy(self.appearance.actionButtonWidthRatio)
+                    .priority(.low)
+            }
         }
     }
 }

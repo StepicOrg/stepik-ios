@@ -1,3 +1,4 @@
+import Regex
 import UIKit
 import WebKit
 
@@ -60,9 +61,12 @@ final class MathJaxInjection: ContentProcessingInjection {
 
 /// Detect web scripts
 final class WebScriptInjection: ContentProcessingInjection {
+    private static let htmlEntitiesRegex = try? Regex(
+        string: "&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});",
+        options: [.ignoreCase]
+    )
+
     func shouldInject(to code: String) -> Bool {
-        code.contains("&lt;") ||
-        code.contains("&gt;") ||
         code.contains("wysiwyg") ||
         code.contains("<strong") ||
         code.contains("<em") ||
@@ -85,7 +89,13 @@ final class WebScriptInjection: ContentProcessingInjection {
         code.contains("<blockquote") ||
         code.contains("<ol") ||
         code.contains("<ul") ||
-        code.contains("<span")
+        code.contains("<span") ||
+        code.contains("&quot") ||
+        self.hasHTMLEntity(in: code)
+    }
+
+    private func hasHTMLEntity(in string: String) -> Bool {
+        Self.htmlEntitiesRegex?.firstMatch(in: string) != nil
     }
 }
 

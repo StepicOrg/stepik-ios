@@ -1,11 +1,3 @@
-//
-//  ActiveSplitTestsContainer.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 16/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 final class ActiveSplitTestsContainer {
@@ -15,6 +7,6 @@ final class ActiveSplitTestsContainer {
     )
 
     static func setActiveTestsGroups() {
-        // There are no A/B tests now
+        self.splitTestingService.fetchSplitTest(DiscountAppearanceSplitTest.self).setSplitTestGroup()
     }
 }

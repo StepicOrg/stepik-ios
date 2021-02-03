@@ -46,13 +46,13 @@ final class LastStepRouter {
 
         ApiDataDownloader.lastSteps.getObjectsByIds(
             ids: [lastStepID],
-            updating: course.lastStep != nil ? [course.lastStep!] : []
-        ).done { newLastSteps in
-            guard let newLastStep = newLastSteps.first else {
+            updating: [course.lastStep].flatMap { $0 }
+        ).done { lastSteps in
+            guard let lastStep = lastSteps.first else {
                 throw LastStepError.multipleLastSteps
             }
 
-            course.lastStep = newLastStep
+            course.lastStep = lastStep
             CoreDataHelper.shared.save()
         }.ensure {
             self.navigate(
@@ -137,16 +137,12 @@ final class LastStepRouter {
         }
 
         func checkSectionAndNavigate(in unit: Unit) {
-            var sectionForUpdate: Section?
-            if let retrievedSections = try? Section.getSections(unit.sectionId),
-               let section = retrievedSections.first {
-                sectionForUpdate = section
-            }
+            let cachedSection = try? Section.getSections(unit.sectionId).first
 
             // Always refresh section to prevent obsolete `isReachable` state
             ApiDataDownloader.sections.retrieve(
                 ids: [unit.sectionId],
-                existing: sectionForUpdate == nil ? [] : [sectionForUpdate!],
+                existing: [cachedSection].flatMap { $0 },
                 refreshMode: .update,
                 success: { sections in
                     if let section = sections.first {
@@ -170,7 +166,7 @@ final class LastStepRouter {
                     print("last step router: error while loading section, error = \(error)")
 
                     // Fallback: use cached section
-                    guard let section = sectionForUpdate else {
+                    guard let section = cachedSection else {
                         return openSyllabus()
                     }
 

@@ -95,7 +95,7 @@ final class DeepLinkRoutingService {
                 )
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
-        case .course, .coursePromo, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
+        case .course, .coursePromo, .coursePay, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
             return ModalOrPushStackRouter(
                 source: source,
                 destinationStack: moduleStack,
@@ -128,6 +128,8 @@ final class DeepLinkRoutingService {
                 return
             }
 
+            let courseViewSource = self.courseViewSource ?? .deepLink(url: urlPath)
+
             switch route {
             case .catalog(let courseListIDOrNil):
                 if let courseListID = courseListIDOrNil {
@@ -145,14 +147,22 @@ final class DeepLinkRoutingService {
                 let assembly = CourseInfoAssembly(
                     courseID: courseID,
                     initialTab: .info,
-                    courseViewSource: self.courseViewSource ?? .deepLink(url: urlPath)
+                    courseViewSource: courseViewSource
+                )
+                seal.fulfill([assembly.makeModule()])
+            case .coursePay(let courseID, let promoCodeName):
+                let assembly = CourseInfoAssembly(
+                    courseID: courseID,
+                    initialTab: .info,
+                    promoCodeName: promoCodeName,
+                    courseViewSource: courseViewSource
                 )
                 seal.fulfill([assembly.makeModule()])
             case .syllabus(let courseID):
                 let assembly = CourseInfoAssembly(
                     courseID: courseID,
                     initialTab: .syllabus,
-                    courseViewSource: self.courseViewSource ?? .deepLink(url: urlPath)
+                    courseViewSource: courseViewSource
                 )
                 seal.fulfill([assembly.makeModule()])
             case .lesson(let lessonID, let stepID, let unitID):

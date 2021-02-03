@@ -871,6 +871,8 @@ VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
 VideoPlayerAutoplayCancelTitle = "Stay on this step";
 VideoPlayerInvalidVideoAlertTitle = "Playback error";
 VideoPlayerInvalidVideoAlertMessage = "Video has not been uploaded or processed yet. Please, try again later.";
+VideoPlayerFailedToStartPictureInPictureTitle = "Playback error";
+VideoPlayerFailedToStartPictureInPictureMessage = "Failed to start playing this video in Picture in Picture.";
 
 StepikSocialNetworksTitle = "Our social networks";
 

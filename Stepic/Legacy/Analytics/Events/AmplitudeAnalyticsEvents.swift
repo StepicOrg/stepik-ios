@@ -733,7 +733,9 @@ extension AnalyticsEvent {
 
     // MARK: - Video -
 
-    static let videoPlayerDidEnterBackground = AmplitudeAnalyticsEvent(name: "Video played in background")
+    static let videoPlayerDidPlayInBackground = AmplitudeAnalyticsEvent(name: "Video played in background")
+
+    static let videoPlayerDidStartPictureInPicture = AmplitudeAnalyticsEvent(name: "Video played in picture-in-picture")
 
     static func videoPlayerDidChangeSpeed(currentSpeed: String, targetSpeed: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
@@ -768,30 +770,10 @@ extension AnalyticsEvent {
     static func spotlightUserActivityContinued(deepLinkRoute: DeepLinkRoute) -> AmplitudeAnalyticsEvent {
         let type: String = {
             switch deepLinkRoute {
-            case .lesson:
-                return "lesson"
-            case .notifications:
-                return "notifications"
-            case .discussions:
-                return "discussions"
-            case .solutions:
-                return "solutions"
-            case .profile:
-                return "profile"
-            case .syllabus:
-                return "syllabus"
-            case .catalog:
-                return "catalog"
-            case .home:
-                return "home"
             case .course:
                 return "course"
-            case .coursePromo:
-                return "coursePromo"
-            case .certificates:
-                return "certificates"
-            case .story:
-                return "story-template"
+            default:
+                return "unknown"
             }
         }()
 

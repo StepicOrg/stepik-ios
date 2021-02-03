@@ -102,8 +102,12 @@ final class LessonInteractor: LessonInteractorProtocol {
                 self.loadData(context: context, startStep: startStep, dataSourceType: .cache).done {
                     self.didLoadFromCache = true
 
-                    attempt(retryLimit: 2) { () -> Promise<Void> in
-                        self.loadData(context: context, startStep: startStep, dataSourceType: .remote)
+                    attempt(retryLimit: 2) { [weak self] () -> Promise<Void> in
+                        guard let strongSelf = self else {
+                            return Promise(error: Error.fetchFailed)
+                        }
+
+                        return strongSelf.loadData(context: context, startStep: startStep, dataSourceType: .remote)
                     }.cauterize()
 
                     seal.fulfill(())
@@ -136,7 +140,7 @@ final class LessonInteractor: LessonInteractorProtocol {
                     .fetchLessonAndUnit(unitID: unitID, dataSourceType: dataSourceType)
                     .map { ($0.1, $0.0) }
             }
-        }.then(on: .global(qos: .userInitiated)) { lesson, unit -> Promise<([Assignment], Lesson)> in
+        }.then { lesson, unit -> Promise<([Assignment], Lesson)> in
             self.currentUnit = unit
             self.currentLesson = lesson
 
@@ -157,7 +161,7 @@ final class LessonInteractor: LessonInteractorProtocol {
             }
 
             return assignmentsPromise.map { ($0, lesson) }
-        }.then(on: .global(qos: .userInitiated)) { assignments, lesson -> Promise<([Step]?, Lesson)> in
+        }.then { assignments, lesson -> Promise<([Step]?, Lesson)> in
             let assignments = assignments.reordered(order: lesson.stepsArray, transform: { $0.stepId })
 
             for (index, stepID) in lesson.stepsArray.enumerated() where index < assignments.count {
@@ -165,7 +169,7 @@ final class LessonInteractor: LessonInteractorProtocol {
             }
 
             return self.provider.fetchSteps(ids: lesson.stepsArray, dataSourceType: dataSourceType).map { ($0, lesson) }
-        }.then(on: .global(qos: .userInitiated)) { steps, lesson -> Promise<([Step], Lesson, [Progress])> in
+        }.then { steps, lesson -> Promise<([Step], Lesson, [Progress])> in
             guard let steps = steps, !steps.isEmpty else {
                 throw Error.fetchFailed
             }
