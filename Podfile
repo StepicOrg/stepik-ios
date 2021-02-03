@@ -55,7 +55,7 @@ def all_pods
   pod 'TUSafariActivity', '1.0.4'
 
   # Social SDKs
-  pod 'VK-ios-sdk', '1.5.1'
+  pod 'VK-ios-sdk', '1.6.2'
   pod 'FBSDKCoreKit', '8.2.0'
   pod 'FBSDKLoginKit', '8.2.0'
   pod 'GoogleSignIn', '5.0.2'
