@@ -66,7 +66,7 @@ def all_pods
   pod 'Highlightr', '2.1.0'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.0'
-  pod 'Koloda', '5.0'
+  pod 'Koloda', '5.0.1'
   pod 'Charts', '3.6.0'
   pod 'EasyTipView', '2.0.4'
   pod 'ActionSheetPicker-3.0', '2.7.1'
