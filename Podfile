@@ -16,12 +16,11 @@ def shared_pods
   pod 'Alamofire', '5.4.1'
   pod 'Atributika', '4.9.10'
   pod 'SwiftyJSON', '5.0.0'
-  pod 'SDWebImage', '5.10.3'
+  pod 'SDWebImage', '5.10.4'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.2.1'
   pod 'PromiseKit', '6.13.1'
   pod 'SwiftLint', '0.42.0'
-  pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
 end
 
 def all_pods
@@ -35,27 +34,27 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '7.4.0'
-  pod 'Firebase/Messaging', '7.4.0'
-  pod 'Firebase/Analytics', '7.4.0'
-  pod 'Firebase/Crashlytics', '7.4.0'
-  pod 'Firebase/RemoteConfig', '7.4.0'
+  pod 'Firebase/Core', '7.5.0'
+  pod 'Firebase/Messaging', '7.5.0'
+  pod 'Firebase/Analytics', '7.5.0'
+  pod 'Firebase/Crashlytics', '7.5.0'
+  pod 'Firebase/RemoteConfig', '7.5.0'
 
   pod 'YandexMobileMetrica/Dynamic', '3.14.1'
-  pod 'Amplitude-iOS', '4.9.3'
-  pod 'Branch', '0.31.0'
+  pod 'Amplitude', '7.2.2'
+  pod 'Branch', '0.37.0'
 
   pod 'BEMCheckBox', '1.4.1'
 
-  pod 'IQKeyboardManagerSwift', '6.5.4'
+  pod 'IQKeyboardManagerSwift', '6.5.6'
 
-  pod 'Kanna', '5.2.2'
+  pod 'Kanna', '5.2.4'
   # Remove after NotificationsService refactoring
   pod 'CRToast', '0.0.9'
   pod 'TUSafariActivity', '1.0.4'
 
   # Social SDKs
-  pod 'VK-ios-sdk', '1.5.1'
+  pod 'VK-ios-sdk', '1.6.2'
   pod 'FBSDKCoreKit', '8.2.0'
   pod 'FBSDKLoginKit', '8.2.0'
   pod 'GoogleSignIn', '5.0.2'
@@ -66,10 +65,10 @@ def all_pods
   pod 'Agrume', '5.6.12'
   pod 'Highlightr', '2.1.0'
   pod 'TTTAttributedLabel', '2.0.0'
-  pod 'lottie-ios', '2.5.3'
-  pod 'Koloda', '5.0'
+  pod 'lottie-ios', '3.2.0'
+  pod 'Koloda', '5.0.1'
   pod 'Charts', '3.6.0'
-  pod 'EasyTipView', '2.0.4'
+  pod 'EasyTipView', '2.1.0'
   pod 'ActionSheetPicker-3.0', '2.7.1'
   pod 'Nuke', '9.2.4'
   pod 'STRegex', '2.1.1'

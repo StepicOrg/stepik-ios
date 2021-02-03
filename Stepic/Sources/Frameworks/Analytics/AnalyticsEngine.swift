@@ -1,4 +1,4 @@
-import Amplitude_iOS
+import Amplitude
 import FirebaseAnalytics
 import Foundation
 import YandexMobileMetrica

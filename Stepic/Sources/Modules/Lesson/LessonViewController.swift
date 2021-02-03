@@ -31,7 +31,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         static let separatorColor = UIColor.stepikOpaqueSeparator
         static let loadingIndicatorColor = UIColor.stepikLoadingIndicator
         static let tooltipBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikAlertBackground)
-        static let tooltipHorizontalSpacing: CGFloat = 16
+        static let tooltipContentInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 
     private let interactor: LessonInteractorProtocol
@@ -329,7 +329,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
             var preferences = EasyTipView.Preferences()
             preferences.drawing.backgroundColor = Appearance.tooltipBackgroundColor
             preferences.drawing.arrowPosition = .top
-            preferences.positioning.contentHInset = Appearance.tooltipHorizontalSpacing
+            preferences.positioning.contentInsets = Appearance.tooltipContentInsets
 
             self.tooltipView = EasyTipView(contentView: contentView, preferences: preferences, delegate: self)
             self.tooltipView?.show(
@@ -557,6 +557,8 @@ extension LessonViewController: LessonViewControllerProtocol {
 // MARK: - LessonViewController: EasyTipViewDelegate -
 
 extension LessonViewController: EasyTipViewDelegate {
+    func easyTipViewDidTap(_ tipView: EasyTipView) {}
+
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         self.isTooltipVisible = false
         self.tooltipView = nil
