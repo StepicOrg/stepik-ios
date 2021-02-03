@@ -68,7 +68,7 @@ def all_pods
   pod 'lottie-ios', '3.2.0'
   pod 'Koloda', '5.0.1'
   pod 'Charts', '3.6.0'
-  pod 'EasyTipView', '2.0.4'
+  pod 'EasyTipView', '2.1.0'
   pod 'ActionSheetPicker-3.0', '2.7.1'
   pod 'Nuke', '9.2.4'
   pod 'STRegex', '2.1.1'

@@ -23,7 +23,7 @@ PODS:
   - CRToast (0.0.9)
   - DeviceKit (4.2.1)
   - DownloadButton (0.1.0)
-  - EasyTipView (2.0.4)
+  - EasyTipView (2.1.0)
   - FBSDKCoreKit (8.2.0):
     - FBSDKCoreKit/Basics (= 8.2.0)
     - FBSDKCoreKit/Core (= 8.2.0)
@@ -213,7 +213,7 @@ DEPENDENCIES:
   - CRToast (= 0.0.9)
   - DeviceKit (= 4.2.1)
   - DownloadButton (= 0.1.0)
-  - EasyTipView (= 2.0.4)
+  - EasyTipView (= 2.1.0)
   - FBSDKCoreKit (= 8.2.0)
   - FBSDKLoginKit (= 8.2.0)
   - Firebase/Analytics (= 7.5.0)
@@ -344,7 +344,7 @@ SPEC CHECKSUMS:
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
-  EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
+  EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   Firebase: fd5e4d2b756292c6e7ee6faac1eb320225d6e97e
@@ -397,6 +397,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
 
-PODFILE CHECKSUM: 4a216ab208ca6e9c6ffbb0a819afb4d0a3cba1b4
+PODFILE CHECKSUM: 071e504365f569c5bbcb91b856c5ecb5cb7a67f9
 
 COCOAPODS: 1.10.1
