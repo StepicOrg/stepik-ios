@@ -6,7 +6,7 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Amplitude_iOS
+import Amplitude
 import Firebase
 import FirebaseCore
 import UIKit
