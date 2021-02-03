@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Amplitude_iOS
+import Amplitude
 import FirebaseAnalytics
 import FirebaseCrashlytics
 import Foundation
@@ -27,8 +27,7 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     func setAmplitudeProperty(key: String, value: Any?) {
         if let value = value {
             Amplitude.instance().setUserProperties([key: value])
-        } else {
-            let identify = AMPIdentify().unset(key)
+        } else if let identify = AMPIdentify().unset(key) {
             Amplitude.instance().identify(identify)
         }
     }
@@ -40,8 +39,9 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     }
 
     private func incrementAmplitudeProperty(key: String, value: Int = 1) {
-        let identify = AMPIdentify().add(key, value: value as NSObject)
-        Amplitude.instance().identify(identify)
+        if let identify = AMPIdentify().add(key, value: value as NSObject) {
+            Amplitude.instance().identify(identify)
+        }
     }
 
     func clearUserDependentProperties() {

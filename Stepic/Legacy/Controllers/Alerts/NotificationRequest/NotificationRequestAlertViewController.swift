@@ -20,7 +20,7 @@ final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var yesButton: UIButton!
 
     private var messageLabelWidth: Constraint?
-    private let animationView = LOTAnimationView(name: "onboardingAnimation4")
+    private let animationView = AnimationView(name: "onboardingAnimation4")
 
     private let analytics: Analytics = StepikAnalytics.shared
 
@@ -79,7 +79,12 @@ final class NotificationRequestAlertViewController: UIViewController {
         super.viewDidAppear(animated)
 
         self.animationView.isHidden = false
-        self.animationView.play()
+        self.animationView.play { [weak self] finished in
+            if finished {
+                // Prevent animation hides on stop.
+                self?.animationView.currentProgress = 0.99
+            }
+        }
 
         self.analytics.send(.notificationRequestAlertShown(context: self.context))
     }

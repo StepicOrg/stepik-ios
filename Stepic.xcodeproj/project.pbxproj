@@ -8504,7 +8504,7 @@
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/Amplitude/Amplitude.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
@@ -8540,7 +8540,6 @@
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
@@ -8569,7 +8568,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Amplitude_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Amplitude.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
@@ -8605,7 +8604,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
@@ -8644,7 +8642,7 @@
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/Amplitude/Amplitude.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
@@ -8680,7 +8678,6 @@
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
@@ -8705,7 +8702,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Amplitude_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Amplitude.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
@@ -8741,7 +8738,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
@@ -10384,7 +10380,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -10409,7 +10405,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -10551,7 +10547,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -10581,7 +10577,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -10671,7 +10667,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -10723,7 +10719,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -10804,7 +10800,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -10852,7 +10848,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -11373,7 +11369,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -11427,7 +11423,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -11509,7 +11505,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -11557,7 +11553,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 282;
+				CURRENT_PROJECT_VERSION = 284;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
