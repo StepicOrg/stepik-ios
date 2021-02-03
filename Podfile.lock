@@ -17,9 +17,9 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
-  - CocoaLumberjack (3.6.1):
-    - CocoaLumberjack/Core (= 3.6.1)
-  - CocoaLumberjack/Core (3.6.1)
+  - CocoaLumberjack (3.7.0):
+    - CocoaLumberjack/Core (= 3.7.0)
+  - CocoaLumberjack/Core (3.7.0)
   - CRToast (0.0.9)
   - DeviceKit (4.2.1)
   - DownloadButton (0.1.0)
@@ -130,14 +130,14 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.2.2):
     - GoogleUtilities/Logger
-  - GTMAppAuth (1.0.0):
-    - AppAuth/Core (~> 1.0)
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.4.0):
-    - GTMSessionFetcher/Full (= 1.4.0)
-  - GTMSessionFetcher/Core (1.4.0)
-  - GTMSessionFetcher/Full (1.4.0):
-    - GTMSessionFetcher/Core (= 1.4.0)
+  - GTMAppAuth (1.1.0):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.5.0):
+    - GTMSessionFetcher/Full (= 1.5.0)
+  - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Full (1.5.0):
+    - GTMSessionFetcher/Core (= 1.5.0)
   - HexColors (2.3.0)
   - Highlightr (2.1.0)
   - IQKeyboardManagerSwift (6.5.6)
@@ -184,7 +184,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.3.1)
   - SwiftLint (0.42.0)
-  - SwiftyGif (5.3.0)
+  - SwiftyGif (5.4.0)
   - SwiftyJSON (5.0.0)
   - Tabman (2.10.0):
     - Pageboy (~> 3.6.0)
@@ -340,7 +340,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
@@ -361,8 +361,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
-  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
-  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
@@ -387,7 +387,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
-  SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: d8d6ab0b483c7db375a71ac227d3ef791b56a049
   TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
@@ -397,6 +397,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
 
-PODFILE CHECKSUM: 071e504365f569c5bbcb91b856c5ecb5cb7a67f9
+PODFILE CHECKSUM: 92f605f9d71a90bd1125a4d89f5e17f92a86f553
 
 COCOAPODS: 1.10.1
