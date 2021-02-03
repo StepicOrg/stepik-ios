@@ -46,7 +46,7 @@ def all_pods
 
   pod 'BEMCheckBox', '1.4.1'
 
-  pod 'IQKeyboardManagerSwift', '6.5.4'
+  pod 'IQKeyboardManagerSwift', '6.5.6'
 
   pod 'Kanna', '5.2.2'
   # Remove after NotificationsService refactoring

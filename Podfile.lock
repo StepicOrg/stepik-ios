@@ -140,7 +140,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.4.0)
   - HexColors (2.3.0)
   - Highlightr (2.1.0)
-  - IQKeyboardManagerSwift (6.5.4)
+  - IQKeyboardManagerSwift (6.5.6)
   - Kanna (5.2.2)
   - Koloda (5.0):
     - pop (~> 1.0)
@@ -223,7 +223,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig (= 7.5.0)
   - GoogleSignIn (= 5.0.2)
   - Highlightr (= 2.1.0)
-  - IQKeyboardManagerSwift (= 6.5.4)
+  - IQKeyboardManagerSwift (= 6.5.6)
   - Kanna (= 5.2.2)
   - Koloda (= 5.0)
   - lottie-ios (= 3.2.0)
@@ -365,7 +365,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
-  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kanna: 2c4eddaaa4bfb9a1ed19e53c0b3d42ef02838046
   Koloda: 75302d21882cc3e274c1561b1155805ea5919dab
   lottie-ios: b6b911246246a90a1d25e7388afe6d9ef003d293
@@ -397,6 +397,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
 
-PODFILE CHECKSUM: de0580970047032aae375b60b7efe267321a51a7
+PODFILE CHECKSUM: 169076ca96f14696f927b3dc509a681fb7b3e5a1
 
 COCOAPODS: 1.10.1
