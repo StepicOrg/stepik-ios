@@ -21,7 +21,6 @@ def shared_pods
   pod 'DeviceKit', '4.2.1'
   pod 'PromiseKit', '6.13.1'
   pod 'SwiftLint', '0.42.0'
-  pod 'Reveal-SDK', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
 end
 
 def all_pods
