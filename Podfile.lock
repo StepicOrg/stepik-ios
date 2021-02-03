@@ -11,9 +11,7 @@ PODS:
   - AppAuth/ExternalUserAgent (1.4.0)
   - Atributika (4.9.10)
   - BEMCheckBox (1.4.1)
-  - Branch (0.31.0):
-    - Branch/Core (= 0.31.0)
-  - Branch/Core (0.31.0)
+  - Branch (0.37.0)
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
@@ -208,7 +206,7 @@ DEPENDENCIES:
   - Amplitude (= 7.2.2)
   - Atributika (= 4.9.10)
   - BEMCheckBox (= 1.4.1)
-  - Branch (= 0.31.0)
+  - Branch (= 0.37.0)
   - Charts (= 3.6.0)
   - CRToast (= 0.0.9)
   - DeviceKit (= 4.2.1)
@@ -338,7 +336,7 @@ SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Atributika: cf87f95f1d31d9cdb9af611a2b4e00672e9ae195
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
-  Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
+  Branch: 49c609eb0ac0130b8491d0923a9298714731bd0d
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
@@ -397,6 +395,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
 
-PODFILE CHECKSUM: 92f605f9d71a90bd1125a4d89f5e17f92a86f553
+PODFILE CHECKSUM: e4df4bb7f15b16d34d01dea91e8d7497678d8de4
 
 COCOAPODS: 1.10.1

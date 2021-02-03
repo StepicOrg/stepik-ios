@@ -42,12 +42,12 @@ def all_pods
 
   pod 'YandexMobileMetrica/Dynamic', '3.14.1'
   pod 'Amplitude', '7.2.2'
-  pod 'Branch', '0.31.0'
+  pod 'Branch', '0.37.0'
 
   pod 'BEMCheckBox', '1.4.1'
 
   pod 'IQKeyboardManagerSwift', '6.5.6'
-  
+
   pod 'Kanna', '5.2.4'
   # Remove after NotificationsService refactoring
   pod 'CRToast', '0.0.9'
