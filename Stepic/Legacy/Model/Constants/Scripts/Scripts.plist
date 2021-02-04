@@ -22,6 +22,10 @@
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
 $(document).ready(function() {
     $(&quot;img&quot;).each(function() {
+    	var parentTagName = $(this).parent().get(0).tagName;
+    	if (parentTagName.toLowerCase() == &quot;a&quot;) {
+    		return true;
+    	}
         var $this = $(this);
         var src = &quot;openimg://&quot; + $this.attr(&apos;src&apos;);
         $this.addClass(&apos;image&apos;);
