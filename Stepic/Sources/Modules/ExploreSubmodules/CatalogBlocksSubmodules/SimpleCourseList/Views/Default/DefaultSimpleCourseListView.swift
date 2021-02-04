@@ -9,6 +9,9 @@ extension DefaultSimpleCourseListView {
         let layoutNextPageWidth: CGFloat = 12.0
         let layoutDefaultItemHeight: CGFloat = 96
         let layoutIncreasedItemHeight: CGFloat = 112
+        let layoutSmallScreenItemWidthRatio: CGFloat = 1.5
+        let layoutColumnsCountOrientationPortrait = 2
+        let layoutColumnsCountOrientationLandscape = 3
 
         let backgroundColor = UIColor.stepikBackground
     }
@@ -50,9 +53,21 @@ final class DefaultSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         let (_, interfaceOrientation) = currentDeviceInfo.orientation
 
         if interfaceOrientation.isPortrait {
-            return currentDeviceInfo.isPad ? 3 : 2
+            if currentDeviceInfo.isPad {
+                return self.appearance.layoutColumnsCountOrientationPortrait + 1
+            } else {
+                return currentDeviceInfo.isSmallDiagonal
+                    ? self.appearance.layoutColumnsCountOrientationPortrait - 1
+                    : self.appearance.layoutColumnsCountOrientationPortrait
+            }
         } else {
-            return currentDeviceInfo.isPad ? 4 : 3
+            if currentDeviceInfo.isPad {
+                return self.appearance.layoutColumnsCountOrientationLandscape + 1
+            } else {
+                return currentDeviceInfo.isSmallDiagonal
+                    ? self.appearance.layoutColumnsCountOrientationLandscape - 1
+                    : self.appearance.layoutColumnsCountOrientationLandscape
+            }
         }
     }
 
@@ -129,11 +144,22 @@ final class DefaultSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
             - self.appearance.layoutSectionInset.left
             - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount)
             - self.appearance.layoutNextPageWidth
-        let layoutItemWidth = (width / CGFloat(self.columnsCount)).rounded(.down)
+
+        let layoutItemWidth = { () -> CGFloat in
+            if self.columnsCount == 1 {
+                return width / self.appearance.layoutSmallScreenItemWidthRatio
+            } else {
+                return width / CGFloat(self.columnsCount)
+            }
+        }()
+        .rounded(.down)
 
         self.flowLayout.columnsCount = self.columnsCount
 
-        return CGSize(width: layoutItemWidth, height: self.layoutItemHeight)
+        return CGSize(
+            width: layoutItemWidth,
+            height: self.layoutItemHeight
+        )
     }
 }
 
