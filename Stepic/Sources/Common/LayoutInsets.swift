@@ -1,6 +1,8 @@
 import UIKit
 
 struct LayoutInsets {
+    static let `default` = LayoutInsets(inset: 16)
+
     private let topInset: CGFloat?
     private let leftInset: CGFloat?
     private let rightInset: CGFloat?
@@ -46,5 +48,12 @@ struct LayoutInsets {
         self.leftInset = insets.left
         self.rightInset = insets.right
         self.bottomInset = insets.bottom
+    }
+
+    init(inset: CGFloat) {
+        self.topInset = inset
+        self.leftInset = inset
+        self.rightInset = inset
+        self.bottomInset = inset
     }
 }

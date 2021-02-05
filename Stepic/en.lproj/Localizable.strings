@@ -1009,6 +1009,7 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 
 /* Course List */
 CourseWidgetArchived = "Archived";
+CourseWidgetSeeAllTitle = "See All";
 
 /* Course List Filter */
 CourseListFilterTitle = "Filters";

@@ -176,7 +176,7 @@ extension UIColor {
     /// A non adaptable color with hex value #3E50CB (violet04).
     static let stepikDarkVioletFixed = ColorPalette.violet04
     /// A non adaptable color with hex value #98A0E8 (violet05).
-    static let stepikViolet05 = ColorPalette.violet05
+    static let stepikViolet05Fixed = ColorPalette.violet05
 
     // MARK: Orange
 

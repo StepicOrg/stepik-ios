@@ -4,7 +4,7 @@ import UIKit
 extension GridSimpleCourseListWidgetView {
     struct Appearance {
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let titleLabelTextColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikViolet05)
+        let titleLabelTextColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikViolet05Fixed)
         let titleLabelInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
 
         let backgroundColor = UIColor.stepikOverlayViolet
