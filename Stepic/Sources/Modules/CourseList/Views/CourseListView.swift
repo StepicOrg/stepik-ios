@@ -4,8 +4,9 @@ import UIKit
 // swiftlint:disable file_length
 extension CourseListView {
     struct Appearance {
-        let layoutMinimumLineSpacing: CGFloat = 16.0
-        let layoutMinimumInteritemSpacing: CGFloat = 16.0
+        let layoutMinimumLineSpacing: CGFloat = 16
+        let layoutMinimumInteritemSpacing: CGFloat = 16
+        let layoutNextPageWidth: CGFloat = 12
 
         let verticalLayoutMinimumItemWidth: CGFloat = 288
         let horizontalLayoutMinimumItemWidth: CGFloat = 276
@@ -16,8 +17,6 @@ extension CourseListView {
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
         let groupedModeBackgroundColor = UIColor.stepikGroupedBackground
-
-        let horizontalLayoutNextPageWidth: CGFloat = 12.0
     }
 }
 
@@ -109,14 +108,14 @@ class CourseListView: UIView {
         self.backgroundColor = self.getBackgroundColor(for: self.colorMode)
     }
 
-    fileprivate func calculateAdaptiveLayoutColumnAttributes(
+    fileprivate func calculateAdaptiveLayoutFittingAttributes(
         minimumColumnWidth: CGFloat,
         columnHorizontalInsets: CGFloat,
         containerHorizontalInsets: CGFloat = 0
     ) -> (columnsCount: Int, columnWidth: CGFloat) {
         func calculateColumnWidth(columnsCount: Int) -> CGFloat {
             let totalWidth = self.bounds.width
-                - columnHorizontalInsets * CGFloat(columnsCount + 1)
+                - columnHorizontalInsets * CGFloat(columnsCount)
                 - containerHorizontalInsets
             return (totalWidth / CGFloat(columnsCount)).rounded(.down)
         }
@@ -134,7 +133,7 @@ class CourseListView: UIView {
             columnWidth = calculateColumnWidth(columnsCount: columnsCount)
         }
 
-        columnWidth = max(minimumColumnWidth, columnWidth)
+        columnWidth = max(minimumColumnWidth, columnWidth).rounded(.down)
 
         return (columnsCount, columnWidth)
     }
@@ -322,9 +321,10 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
 
     override func calculateItemSize() -> CGSize {
         if self.gridSize.isAutoColumns {
-            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
+            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutFittingAttributes(
                 minimumColumnWidth: self.minimumItemWidth,
-                columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing
+                columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing,
+                containerHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing
             )
             self.gridSize.columns = columnsCount
 
@@ -332,7 +332,9 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
         } else {
             let width = self.bounds.width
                 - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.gridSize.columns + 1)
-            return CGSize(width: width / CGFloat(self.gridSize.columns), height: self.cardStyle.height)
+            let itemWidth = width / CGFloat(self.gridSize.columns).rounded(.down)
+
+            return CGSize(width: itemWidth, height: self.cardStyle.height)
         }
     }
 
@@ -496,7 +498,7 @@ final class HorizontalCourseListView: CourseListView, UICollectionViewDelegate, 
         self.collectionView.dataSource = self
 
         // Make scroll faster
-        self.collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        self.collectionView.decelerationRate = .fast
     }
 
     @available(*, unavailable)
@@ -521,23 +523,25 @@ final class HorizontalCourseListView: CourseListView, UICollectionViewDelegate, 
     }
 
     override func calculateItemSize() -> CGSize {
+        let containerHorizontalInsets = self.horizontalCourseFlowLayout.appearance.insets.left
+            + self.appearance.layoutNextPageWidth
+
         if self.gridSize.isAutoColumns {
-            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutColumnAttributes(
+            let (columnsCount, columnWidth) = self.calculateAdaptiveLayoutFittingAttributes(
                 minimumColumnWidth: self.minimumItemWidth,
                 columnHorizontalInsets: self.appearance.layoutMinimumInteritemSpacing,
-                containerHorizontalInsets: self.appearance.horizontalLayoutNextPageWidth
+                containerHorizontalInsets: containerHorizontalInsets
             )
             self.gridSize.columns = columnsCount
 
             return CGSize(width: columnWidth, height: self.cardStyle.height)
         } else {
             let width = self.bounds.width
-                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.gridSize.columns + 1)
-                - self.appearance.horizontalLayoutNextPageWidth
-            return CGSize(
-                width: width / CGFloat(self.gridSize.columns),
-                height: self.cardStyle.height
-            )
+                - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.gridSize.columns)
+                - containerHorizontalInsets
+            let itemWidth = (width / CGFloat(self.gridSize.columns)).rounded(.down)
+
+            return CGSize(width: itemWidth, height: self.cardStyle.height)
         }
     }
 
