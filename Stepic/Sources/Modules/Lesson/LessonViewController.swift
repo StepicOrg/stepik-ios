@@ -207,7 +207,10 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         }
 
         self.reloadData()
-        self.addBar(self.tabBarView, dataSource: self, at: .top)
+
+        if self.tabBarView.superview == nil {
+            self.addBar(self.tabBarView, dataSource: self, at: .top)
+        }
 
         UIView.animate(withDuration: Self.animationDuration) {
             self.overlayView.alpha = 0.0
