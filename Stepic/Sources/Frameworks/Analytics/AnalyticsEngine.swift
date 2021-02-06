@@ -37,11 +37,30 @@ final class FirebaseAnalyticsEngine: AnalyticsEngine {
     init() {}
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
-        FirebaseAnalytics.Analytics.logEvent(name, parameters: parameters)
+        let processedName = self.processString(name)
+        let processedParameters: [String: Any]? = {
+            guard let parameters = parameters else {
+                return nil
+            }
+
+            return Dictionary(uniqueKeysWithValues: parameters.map { (self.processString($0), $1) })
+        }()
+
+        FirebaseAnalytics.Analytics.logEvent(processedName, parameters: processedParameters)
 
         if LaunchArguments.analyticsDebugEnabled {
-            print("Logging Firebase event: \(name), parameters: \(String(describing: parameters))")
+            print("Logging Firebase event: \(processedName), parameters: \(String(describing: processedParameters))")
         }
+    }
+
+    private func processString(_ string: String) -> String {
+        guard string.containsWhitespace else {
+            return string
+        }
+
+        return string
+            .replacingOccurrences(of: " ", with: "_")
+            .lowercased()
     }
 }
 
