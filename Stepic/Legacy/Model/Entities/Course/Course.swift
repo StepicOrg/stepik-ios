@@ -279,19 +279,19 @@ final class Course: NSManagedObject, IDFetchable {
         })
     }
 
-    static func fetchAsync(
+    static func fetch(
         _ ids: [Int],
         featured: Bool? = nil,
         enrolled: Bool? = nil,
         isPublic: Bool? = nil
-    ) -> Promise<[Course]> {
+    ) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let idPredicates = ids.map {
             NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
-        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        let idCompoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
 
         var nonIdPredicates = [NSPredicate]()
         if let f = featured {
@@ -306,21 +306,19 @@ final class Course: NSManagedObject, IDFetchable {
             nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
         }
 
-        let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: nonIdPredicates)
+        let nonIdCompoundPredicate = NSCompoundPredicate(type: .and, subpredicates: nonIdPredicates)
 
-        let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
+        let predicate = NSCompoundPredicate(type: .and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
         request.predicate = predicate
         request.sortDescriptors = [descriptor]
 
-        return Promise<[Course]> { seal in
-            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: { results in
-                guard let courses = results.finalResult as? [Course] else {
-                    seal.fulfill([])
-                    return
-                }
-                seal.fulfill(courses)
-            })
-            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
+        do {
+            let results = try CoreDataHelper.shared.context.fetch(request)
+            let finalResult = results as? [Course] ?? []
+
+            return finalResult
+        } catch {
+            return []
         }
     }
 
