@@ -75,8 +75,15 @@ final class SearchQueriesViewController: UIViewController {
 
 extension SearchQueriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.presenter?.didSelect(suggestion: self.suggestions[indexPath.row])
-        self.delegate?.didSelectSuggestion(suggestion: self.suggestions[indexPath.row], position: indexPath.row)
+        guard indexPath.section >= 0,
+              self.suggestions.count > indexPath.row,
+              indexPath.row >= 0,
+              let suggestion = self.suggestions[safe: indexPath.row] else {
+            return
+        }
+
+        self.presenter?.didSelect(suggestion: suggestion)
+        self.delegate?.didSelectSuggestion(suggestion: suggestion, position: indexPath.row)
     }
 }
 
