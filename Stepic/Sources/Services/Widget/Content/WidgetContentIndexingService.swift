@@ -257,12 +257,15 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
                     : "\(NSLocalizedString("CourseInfoTitleAuthor", comment: "")) \(formattedAuthorsString)"
             }()
 
+            let progress = progresses[safe: index]?.percentPassed ?? 0
+            let thumbnailData = coversData[safe: index]?.flatMap { $0 }
+
             return WidgetUserCourse(
                 id: course.id,
                 title: course.title,
                 subtitle: subtitle,
-                progress: progresses[index].percentPassed,
-                thumbnailData: coversData[index]
+                progress: progress,
+                thumbnailData: thumbnailData
             )
         }
 
