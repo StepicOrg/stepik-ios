@@ -17,19 +17,18 @@ class CourseListPersistenceService: CourseListPersistenceServiceProtocol {
         let courseListIDs = self.storage.getCoursesList()
 
         return Promise { seal in
-            Course.fetchAsync(courseListIDs).done { courses in
-                var uniqueCourses: [Course] = []
-                for course in courses {
-                    if !uniqueCourses.contains(where: { $0.id == course.id }) {
-                        uniqueCourses.append(course)
-                    }
-                }
+            let courses = Course.fetch(courseListIDs)
 
-                let courses = uniqueCourses.reordered(order: courseListIDs, transform: { $0.id })
-                seal.fulfill(courses)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
+            var uniqueCourses = [Course]()
+            for course in courses {
+                if !uniqueCourses.contains(where: { $0.id == course.id }) {
+                    uniqueCourses.append(course)
+                }
             }
+
+            let result = uniqueCourses.reordered(order: courseListIDs, transform: { $0.id })
+
+            seal.fulfill(result)
         }
     }
 

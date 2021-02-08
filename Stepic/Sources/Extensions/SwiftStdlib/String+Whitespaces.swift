@@ -1,6 +1,10 @@
 import Foundation
 
 extension String {
+    var containsWhitespace: Bool {
+        self.rangeOfCharacter(from: .whitespacesAndNewlines) != nil
+    }
+
     /// String with no spaces or new lines in beginning and end.
     func trimmed() -> String {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
