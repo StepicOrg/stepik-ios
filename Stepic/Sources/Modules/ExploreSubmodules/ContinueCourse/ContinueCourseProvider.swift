@@ -6,49 +6,44 @@ protocol ContinueCourseProviderProtocol {
 }
 
 final class ContinueCourseProvider: ContinueCourseProviderProtocol {
-    private let userCoursesAPI: UserCoursesAPI
-    private let coursesAPI: CoursesAPI
+    private let userCoursesNetworkService: UserCoursesNetworkServiceProtocol
+    private let coursesNetworkService: CoursesNetworkServiceProtocol
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
 
     init(
-        userCoursesAPI: UserCoursesAPI,
-        coursesAPI: CoursesAPI,
+        userCoursesNetworkService: UserCoursesNetworkServiceProtocol,
+        coursesNetworkService: CoursesNetworkServiceProtocol,
         progressesNetworkService: ProgressesNetworkServiceProtocol
     ) {
-        self.userCoursesAPI = userCoursesAPI
-        self.coursesAPI = coursesAPI
+        self.userCoursesNetworkService = userCoursesNetworkService
+        self.coursesNetworkService = coursesNetworkService
         self.progressesNetworkService = progressesNetworkService
     }
 
     func fetchLastCourse() -> Promise<Course?> {
-        Promise { seal in
-            self.userCoursesAPI.retrieve(page: 1).then { result -> Promise<[Course]> in
-                let lastCourse = result.0
-                    .sorted(by: { $0.lastViewed > $1.lastViewed })
-                    .prefix(1)
-                // [] or [id]
-                let coursesIDs = lastCourse.compactMap { $0.courseID }
-                return self.coursesAPI.retrieve(ids: coursesIDs)
-            }.then { courses -> Promise<(Course?, Progress?)> in
-                if let course = courses.first,
-                   let progressID = course.progressId {
-                    return self.progressesNetworkService
-                        .fetch(id: progressID)
-                        .map { (course, $0) }
-                } else {
-                    return Promise.value((nil, nil))
-                }
-            }.done { course, progress in
-                course?.progress = progress
-                CoreDataHelper.shared.save()
-                seal.fulfill(course)
-            }.catch { error in
-                seal.reject(error)
+        self.userCoursesNetworkService.fetch().then { userCoursesFetchResult -> Promise<[Course]> in
+            let lastCourse = userCoursesFetchResult.0
+                .sorted(by: { $0.lastViewed > $1.lastViewed })
+                .prefix(1)
+            // [] or [id]
+            let coursesIDs = lastCourse.compactMap { $0.courseID }
+            return self.coursesNetworkService.fetch(ids: coursesIDs)
+        }.then { courses -> Promise<(Course?, Progress?)> in
+            if let course = courses.first,
+               let progressID = course.progressId {
+                return self.progressesNetworkService
+                    .fetch(id: progressID)
+                    .map { (course, $0) }
+            } else {
+                return .value((nil, nil))
             }
-        }
-    }
+        }.then { course, progress -> Promise<Course?> in
+            if let course = course {
+                course.progress = progress
+                CoreDataHelper.shared.save()
+            }
 
-    enum Error: Swift.Error {
-        case lastCourseFetchFailed
+            return .value(course)
+        }
     }
 }

@@ -1,4 +1,5 @@
 import PromiseKit
+import SnapKit
 import UIKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
@@ -10,6 +11,10 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
 }
 
 final class HomeViewController: BaseExploreViewController {
+    enum Appearance {
+        static let continueCourseHeight: CGFloat = 72
+    }
+
     enum Animation {
         static let startRefreshDelay: TimeInterval = 1.0
         static let modulesRefreshDelay: TimeInterval = 0.3
@@ -18,7 +23,6 @@ final class HomeViewController: BaseExploreViewController {
     fileprivate static let submodulesOrder: [Home.Submodule] = [
         .stories,
         .streakActivity,
-        .continueCourse,
         .enrolledCourses,
         .visitedCourses,
         .popularCourses
@@ -155,8 +159,17 @@ final class HomeViewController: BaseExploreViewController {
     }
 
     private func refreshContinueCourse(state: ContinueCourseState) {
+        var contentInsets = self.exploreView?.contentInsets ?? .zero
+
         if let submodule = self.getSubmodule(type: Home.Submodule.continueCourse) {
             self.removeSubmodule(submodule)
+        }
+
+        defer {
+            contentInsets.bottom = state == .shown
+                ? (Appearance.continueCourseHeight + LayoutInsets.default.bottom)
+                : 0
+            self.exploreView?.contentInsets = contentInsets
         }
 
         guard case .shown = state else {
@@ -167,14 +180,22 @@ final class HomeViewController: BaseExploreViewController {
             output: self.interactor as? ContinueCourseOutputProtocol
         )
         let continueCourseViewController = continueCourseAssembly.makeModule()
+
         self.registerSubmodule(
             .init(
                 viewController: continueCourseViewController,
                 view: continueCourseViewController.view,
+                isArrangeable: false,
                 isLanguageDependent: false,
                 type: Home.Submodule.continueCourse
             )
         )
+
+        continueCourseViewController.view.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(Appearance.continueCourseHeight)
+        }
     }
 
     // MARK: - Fullscreen displaying
@@ -479,10 +500,7 @@ extension HomeViewController: HomeViewControllerProtocol {
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
         case .continueCourse:
-            switch viewModel.result {
-            default:
-                self.refreshContinueCourse(state: .hidden)
-            }
+            self.refreshContinueCourse(state: .hidden)
         case .enrolledCourses:
             switch viewModel.result {
             case .empty:
@@ -524,14 +542,13 @@ extension HomeViewController: HomeViewControllerProtocol {
             let shouldDisplayStories = strongSelf.currentStoriesSubmoduleState == .shown
                 || (strongSelf.currentStoriesSubmoduleState == .hidden
                         && strongSelf.lastContentLanguage != viewModel.contentLanguage)
-            let shouldDisplayContinueCourse = viewModel.isAuthorized
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
 
             strongSelf.lastContentLanguage = viewModel.contentLanguage
             strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
 
             strongSelf.refreshStateForStories(state: shouldDisplayStories ? .shown : .hidden)
-            strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
+            strongSelf.refreshContinueCourse(state: .shown)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)

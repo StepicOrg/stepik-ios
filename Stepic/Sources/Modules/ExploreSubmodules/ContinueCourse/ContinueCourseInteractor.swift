@@ -41,12 +41,14 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         self.provider.fetchLastCourse().done { course in
             if let course = course {
                 self.currentCourse = course
-                self.presenter.presentLastCourse(response: .init(result: course))
+                self.presenter.presentLastCourse(response: .init(result: .success(course)))
             } else {
-                self.moduleOutput?.hideContinueCourse()
+                self.presenter.presentLastCourse(response: .init(result: .failure(Error.noLastCourse)))
             }
         }.catch { _ in
-            self.moduleOutput?.hideContinueCourse()
+            if self.currentCourse == nil {
+                self.presenter.presentLastCourse(response: .init(result: .failure(Error.fetchFailed)))
+            }
         }
     }
 
@@ -71,6 +73,11 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         )
         self.tooltipStorageManager.didShowOnHomeContinueLearning = true
     }
+
+    enum Error: Swift.Error {
+        case fetchFailed
+        case noLastCourse
+    }
 }
 
 extension ContinueCourseInteractor: DataBackUpdateServiceDelegate {
@@ -85,7 +92,7 @@ extension ContinueCourseInteractor: DataBackUpdateServiceDelegate {
         }
 
         self.currentCourse = course
-        self.presenter.presentLastCourse(response: .init(result: course))
+        self.presenter.presentLastCourse(response: .init(result: .success(course)))
     }
 
     func dataBackUpdateService(

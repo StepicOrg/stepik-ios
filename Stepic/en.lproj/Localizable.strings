@@ -1011,6 +1011,8 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 CourseWidgetArchived = "Archived";
 CourseWidgetSeeAllTitle = "See All";
 
+ContinueCourseEmptyTitle = "Find your first course";
+
 /* Course List Filter */
 CourseListFilterTitle = "Filters";
 CourseListFilterResetButtonTitle = "Reset";

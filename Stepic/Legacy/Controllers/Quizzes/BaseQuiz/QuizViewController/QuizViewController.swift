@@ -125,7 +125,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             self?.presenter?.refreshAttempt()
         }), for: .connectionError)
 
-        self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
+        self.hintView.roundAllCorners(radius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(
             webView: hintWebView,
             fontSize: StepFontSizeStorageManager().globalStepFontSize

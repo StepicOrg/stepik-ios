@@ -1012,6 +1012,8 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 CourseWidgetArchived = "В архиве";
 CourseWidgetSeeAllTitle = "Посмотреть все";
 
+ContinueCourseEmptyTitle = "Найдите свой первый курс";
+
 /* Course List Filter */
 CourseListFilterTitle = "Фильтры";
 CourseListFilterResetButtonTitle = "Сбросить";

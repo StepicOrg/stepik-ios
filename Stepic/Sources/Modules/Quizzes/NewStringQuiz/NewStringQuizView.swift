@@ -53,8 +53,8 @@ final class NewStringQuizView: UIView, TitlePresentable {
             bottom: self.appearance.textFieldInsets.bottom,
             right: self.appearance.textFieldDefaultOffset
         )
-        field.setRoundedCorners(
-            cornerRadius: self.appearance.textFieldBorderCornerRadius,
+        field.roundAllCorners(
+            radius: self.appearance.textFieldBorderCornerRadius,
             borderWidth: self.appearance.textFieldBorderWidth,
             borderColor: self.appearance.textFieldBorderColor
         )
