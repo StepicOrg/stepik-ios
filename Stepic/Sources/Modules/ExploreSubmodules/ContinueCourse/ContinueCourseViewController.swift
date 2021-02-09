@@ -34,9 +34,7 @@ final class ContinueCourseViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        let view = ContinueCourseView(
-            frame: UIScreen.main.bounds
-        )
+        let view = ContinueCourseView(frame: UIScreen.main.bounds)
         view.delegate = self
         self.view = view
     }
@@ -68,7 +66,8 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     }
 
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel) {
-        guard let continueCourseView = self.continueCourseView else {
+        guard let continueCourseView = self.continueCourseView,
+              let parentView = self.parent?.view else {
             return
         }
 
@@ -78,8 +77,8 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
                 continueCourseView.setNeedsLayout()
                 continueCourseView.layoutIfNeeded()
                 self?.continueLearningTooltip.show(
-                    direction: .up,
-                    in: continueCourseView,
+                    direction: .down,
+                    in: parentView,
                     from: continueCourseView.tooltipAnchorView
                 )
             }

@@ -363,9 +363,9 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.backButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
 
         // Set rounded corners for controls containers.
-        self.topContainerView.setRoundedCorners(cornerRadius: Appearance.topContainerViewCornerRadius)
-        self.bottomFullscreenControlsView.setRoundedCorners(
-            cornerRadius: Appearance.bottomFullscreenControlsCornerRadius
+        self.topContainerView.roundAllCorners(radius: Appearance.topContainerViewCornerRadius)
+        self.bottomFullscreenControlsView.roundAllCorners(
+            radius: Appearance.bottomFullscreenControlsCornerRadius
         )
 
         self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)

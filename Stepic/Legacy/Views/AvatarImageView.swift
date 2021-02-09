@@ -38,9 +38,9 @@ final class AvatarImageView: UIImageView {
     private func updateShape() {
         switch self.shape {
         case .circle(let borderWidth, let borderColor):
-            self.setRoundedBounds(width: borderWidth, color: borderColor)
+            self.roundBounds(width: borderWidth, color: borderColor)
         case .rectangle(let radius):
-            self.setRoundedCorners(cornerRadius: radius, borderWidth: 0)
+            self.roundAllCorners(radius: radius, borderWidth: 0)
         }
     }
 

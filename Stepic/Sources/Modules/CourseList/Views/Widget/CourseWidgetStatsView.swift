@@ -4,7 +4,7 @@ import UIKit
 extension CourseWidgetStatsView {
     struct Appearance {
         let statItemsSpacing: CGFloat = 8
-        let leftInset: CGFloat = 2.0
+        var leftInset: CGFloat = 2.0
 
         let learnersViewImageViewSize = CGSize(width: 8, height: 10)
         let ratingViewImageViewSize = CGSize(width: 8, height: 12)
@@ -132,6 +132,10 @@ final class CourseWidgetStatsView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func hideAllItems() {
+        self.stackView.arrangedSubviews.forEach { $0.isHidden = true }
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {

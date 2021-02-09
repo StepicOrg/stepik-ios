@@ -34,7 +34,7 @@ final class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.contentView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: .stepikSeparator)
+        self.contentView.roundAllCorners(radius: 8, borderWidth: 1, borderColor: .stepikSeparator)
         self.colorize()
     }
 

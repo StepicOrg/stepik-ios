@@ -205,7 +205,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         storyButton.setTitle(buttonModel.title, for: .normal)
 
         let cornerRadius = self.appearance.buttonHeight / 2.0
-        storyButton.setRoundedCorners(cornerRadius: cornerRadius)
+        storyButton.roundAllCorners(radius: cornerRadius)
         storyButton.widthDelta = cornerRadius * 2
 
         containerView.addSubview(storyButton)

@@ -5,17 +5,32 @@ protocol ContinueCourseViewDelegate: AnyObject {
     func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView)
 }
 
+extension ContinueCourseView {
+    struct Appearance {
+        let cornerRadius: CGFloat = 13
+
+        let coverSize = CGSize(width: 40, height: 40)
+        let coverCornerRadius: CGFloat = 8
+    }
+}
+
 final class ContinueCourseView: UIView {
-    private lazy var lastStepView = ContinueLastStepView()
     weak var delegate: ContinueCourseViewDelegate?
 
-    // View for tooltip
-    var tooltipAnchorView: UIView { self.lastStepView.continueButton }
+    let appearance: Appearance
 
-    override init(frame: CGRect) {
+    private lazy var lastStepView: ContinueLastStepView = {
+        let view = ContinueLastStepView()
+        view.addTarget(self, action: #selector(self.lastStepViewClicked), for: .touchUpInside)
+        return view
+    }()
+
+    var tooltipAnchorView: UIView { self.lastStepView.tooltipAnchorView }
+
+    init(frame: CGRect, appearance: Appearance = Appearance()) {
+        self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -23,6 +38,11 @@ final class ContinueCourseView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.roundCorners([.topLeft, .topRight], radius: self.appearance.cornerRadius)
     }
 
     func configure(viewModel: ContinueCourseViewModel) {
@@ -46,18 +66,14 @@ final class ContinueCourseView: UIView {
     func hideLoading() {
         self.skeleton.hide()
     }
+
+    @objc
+    private func lastStepViewClicked() {
+        self.delegate?.continueCourseContinueButtonDidClick(self)
+    }
 }
 
 extension ContinueCourseView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.lastStepView.onContinueButtonClick = { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.delegate?.continueCourseContinueButtonDidClick(strongSelf)
-        }
-    }
-
     func addSubviews() {
         self.addSubview(self.lastStepView)
     }
