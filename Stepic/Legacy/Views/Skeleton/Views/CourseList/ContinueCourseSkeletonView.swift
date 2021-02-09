@@ -11,15 +11,26 @@ import UIKit
 
 extension ContinueCourseSkeletonView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
-        let cornerRadius: CGFloat = 8.0
+        let labelsCornerRadius: CGFloat = 5
+        let defaultInsets = LayoutInsets.default
+
+        let coverCornerRadius: CGFloat = 8
+        let coverSize = CGSize(width: 40, height: 40)
+
+        let courseLabelInsets = LayoutInsets(left: 8, right: 8)
+        let courseLabelWidthRatio: CGFloat = 0.7
+
+        let statsViewHeight: CGFloat = 17
+        let statsViewWidthRatio: CGFloat = 0.4
     }
 }
 
 final class ContinueCourseSkeletonView: UIView {
     let appearance: Appearance
 
-    private lazy var largeView = UIView()
+    private lazy var courseCoverView = UIView()
+    private lazy var courseLabelView = UIView()
+    private lazy var courseStatsView = UIView()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -39,21 +50,45 @@ extension ContinueCourseSkeletonView: ProgrammaticallyInitializableViewProtocol 
     func setupView() {
         self.backgroundColor = .clear
 
-        self.largeView.clipsToBounds = true
-        self.largeView.layer.cornerRadius = self.appearance.cornerRadius
+        self.courseCoverView.clipsToBounds = true
+        self.courseCoverView.layer.cornerRadius = self.appearance.coverCornerRadius
+
+        self.courseLabelView.clipsToBounds = true
+        self.courseLabelView.layer.cornerRadius = self.appearance.labelsCornerRadius
+
+        self.courseStatsView.clipsToBounds = true
+        self.courseStatsView.layer.cornerRadius = self.appearance.labelsCornerRadius
     }
 
     func addSubviews() {
-        self.addSubview(self.largeView)
+        self.addSubviews([self.courseCoverView, self.courseLabelView, self.courseStatsView])
     }
 
     func makeConstraints() {
-        self.largeView.translatesAutoresizingMaskIntoConstraints = false
-        self.largeView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.mainInsets.top)
-            make.leading.equalToSuperview().offset(self.appearance.mainInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.mainInsets.right)
-            make.bottom.equalToSuperview().offset(self.appearance.mainInsets.bottom)
+        self.courseCoverView.translatesAutoresizingMaskIntoConstraints = false
+        self.courseCoverView.snp.makeConstraints { make in
+            make.leading
+                .equalTo(self.safeAreaLayoutGuide.snp.leading)
+                .offset(self.appearance.defaultInsets.left)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(self.appearance.coverSize)
+        }
+
+        self.courseLabelView.translatesAutoresizingMaskIntoConstraints = false
+        self.courseLabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.courseCoverView.snp.top)
+            make.leading
+                .equalTo(self.courseCoverView.snp.trailing)
+                .offset(self.appearance.courseLabelInsets.left)
+            make.width.equalToSuperview().multipliedBy(self.appearance.courseLabelWidthRatio)
+        }
+
+        self.courseStatsView.translatesAutoresizingMaskIntoConstraints = false
+        self.courseStatsView.snp.makeConstraints { make in
+            make.leading.equalTo(self.courseLabelView.snp.leading)
+            make.bottom.equalTo(self.courseCoverView.snp.bottom)
+            make.height.equalTo(self.appearance.statsViewHeight)
+            make.width.equalToSuperview().multipliedBy(self.appearance.statsViewWidthRatio)
         }
     }
 }

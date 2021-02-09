@@ -57,13 +57,13 @@ final class ContinueCourseView: UIView {
     }
 
     func showLoading() {
-        self.skeleton.viewBuilder = {
-            ContinueCourseSkeletonView()
-        }
+        self.lastStepView.setContentHidden(true)
+        self.skeleton.viewBuilder = { ContinueCourseSkeletonView() }
         self.skeleton.show()
     }
 
     func hideLoading() {
+        self.lastStepView.setContentHidden(false)
         self.skeleton.hide()
     }
 

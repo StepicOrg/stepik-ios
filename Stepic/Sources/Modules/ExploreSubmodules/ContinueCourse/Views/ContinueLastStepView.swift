@@ -92,14 +92,18 @@ final class ContinueLastStepView: UIControl {
 
     var tooltipAnchorView: UIView { self.rightDetailImageView }
 
+    private var contentViews: [UIView] {
+        [
+            self.coverImageView,
+            self.courseNameLabel,
+            self.statsView,
+            self.rightDetailImageView
+        ]
+    }
+
     override var isHighlighted: Bool {
         didSet {
-            [
-                self.coverImageView,
-                self.courseNameLabel,
-                self.statsView,
-                self.rightDetailImageView
-            ].forEach { $0.alpha = self.isHighlighted ? 0.5 : 1.0 }
+            self.contentViews.forEach { $0.alpha = self.isHighlighted ? 0.5 : 1.0 }
         }
     }
 
@@ -123,6 +127,10 @@ final class ContinueLastStepView: UIControl {
         self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
             self.updateBackground()
         }
+    }
+
+    func setContentHidden(_ isHidden: Bool) {
+        self.contentViews.forEach { $0.isHidden = isHidden }
     }
 
     private func updateBackground() {
