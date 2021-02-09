@@ -77,6 +77,15 @@ extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
 }
 
 extension BaseExploreView: ScrollableStackViewDelegate {
+    var contentInsets: UIEdgeInsets {
+        get {
+            self.scrollableStackView.contentInsets
+        }
+        set {
+            self.scrollableStackView.contentInsets = newValue
+        }
+    }
+
     func scrollableStackViewRefreshControlDidRefresh(_ scrollableStackView: ScrollableStackView) {
         self.delegate?.refreshControlDidRefresh()
     }

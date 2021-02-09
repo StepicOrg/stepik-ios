@@ -159,8 +159,17 @@ final class HomeViewController: BaseExploreViewController {
     }
 
     private func refreshContinueCourse(state: ContinueCourseState) {
+        var contentInsets = self.exploreView?.contentInsets ?? .zero
+
         if let submodule = self.getSubmodule(type: Home.Submodule.continueCourse) {
             self.removeSubmodule(submodule)
+        }
+
+        defer {
+            contentInsets.bottom = state == .shown
+                ? (Appearance.continueCourseHeight + LayoutInsets.default.bottom)
+                : 0
+            self.exploreView?.contentInsets = contentInsets
         }
 
         guard case .shown = state else {
