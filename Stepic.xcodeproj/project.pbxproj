@@ -518,6 +518,8 @@
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
+		2C456C3425D2C47100435A86 /* ContinueCourseEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C456C3325D2C47100435A86 /* ContinueCourseEmptyView.swift */; };
+		2C456C3E25D2C52F00435A86 /* ContinueCourseBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C456C3D25D2C52F00435A86 /* ContinueCourseBackgroundView.swift */; };
 		2C45C6EF254160A100AF24BF /* HTMLExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */; };
 		2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
 		2C48BA0725727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA0625727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift */; };
@@ -2122,6 +2124,8 @@
 		2C434D4425B7367500854D6F /* WidgetContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentProvider.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
+		2C456C3325D2C47100435A86 /* ContinueCourseEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCourseEmptyView.swift; sourceTree = "<group>"; };
+		2C456C3D25D2C52F00435A86 /* ContinueCourseBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCourseBackgroundView.swift; sourceTree = "<group>"; };
 		2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractorTests.swift; sourceTree = "<group>"; };
 		2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lessons_demo_access_v58.xcdatamodel; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
@@ -3792,6 +3796,8 @@
 		2C64388D25D17F480045D139 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C456C3D25D2C52F00435A86 /* ContinueCourseBackgroundView.swift */,
+				2C456C3325D2C47100435A86 /* ContinueCourseEmptyView.swift */,
 				62E98021576A447517397409 /* ContinueCourseView.swift */,
 				62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */,
 			);
@@ -9211,6 +9217,7 @@
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				2C5E90842333DF2100288BE3 /* CodeLanguageSuggestionsService.swift in Sources */,
 				2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */,
+				2C456C3425D2C47100435A86 /* ContinueCourseEmptyView.swift in Sources */,
 				2C8BCC222486540F00DFB009 /* ShowAllButton.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				2C5DF1431FED2758003B1177 /* CardStepDelegate.swift in Sources */,
@@ -9636,6 +9643,7 @@
 				62E980B234CAE5A61B9E546C /* CourseInfoTabSyllabusView.swift in Sources */,
 				2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */,
 				62E9870EF451D397B27AB075 /* CourseInfoTabSyllabusCellStatsView.swift in Sources */,
+				2C456C3E25D2C52F00435A86 /* ContinueCourseBackgroundView.swift in Sources */,
 				62E9893B98E774DA8141AD0F /* CourseInfoTabSyllabusCellView.swift in Sources */,
 				2C2F6E6024DD3E69000E8844 /* StepikAnalyticsEvents.swift in Sources */,
 				62E98C92B0827BEB4E28A8D9 /* CourseInfoTabSyllabusTableViewCell.swift in Sources */,

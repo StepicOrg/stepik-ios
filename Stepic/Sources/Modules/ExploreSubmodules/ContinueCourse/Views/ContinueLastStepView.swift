@@ -3,8 +3,7 @@ import UIKit
 
 extension ContinueLastStepView {
     struct Appearance {
-        let primaryColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikSystemPrimaryText)
-        let backgroundColor = UIColor.stepikSecondaryBackground
+        let primaryColor: UIColor
         let defaultInsets = LayoutInsets.default
 
         let coverCornerRadius: CGFloat = 8
@@ -60,12 +59,6 @@ final class ContinueLastStepView: UIControl {
         return imageView
     }()
 
-    private lazy var backgroundImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "continue_learning_gradient"))
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-
     var courseTitle: String? {
         didSet {
             self.courseNameLabel.text = self.courseTitle
@@ -92,26 +85,16 @@ final class ContinueLastStepView: UIControl {
 
     var tooltipAnchorView: UIView { self.rightDetailImageView }
 
-    private var contentViews: [UIView] {
-        [
-            self.coverImageView,
-            self.courseNameLabel,
-            self.statsView,
-            self.rightDetailImageView
-        ]
-    }
-
     override var isHighlighted: Bool {
         didSet {
-            self.contentViews.forEach { $0.alpha = self.isHighlighted ? 0.5 : 1.0 }
+            self.subviews.forEach { $0.alpha = self.isHighlighted ? 0.5 : 1.0 }
         }
     }
 
-    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance) {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -119,23 +102,6 @@ final class ContinueLastStepView: UIControl {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
-            self.updateBackground()
-        }
-    }
-
-    func setContentHidden(_ isHidden: Bool) {
-        self.contentViews.forEach { $0.isHidden = isHidden }
-    }
-
-    private func updateBackground() {
-        self.backgroundColor = self.appearance.backgroundColor
-        self.backgroundImageView.isHidden = self.isDarkInterfaceStyle
     }
 
     private func updateProgress() {
@@ -146,24 +112,11 @@ final class ContinueLastStepView: UIControl {
 }
 
 extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.updateBackground()
-    }
-
     func addSubviews() {
-        self.addSubviews([
-            self.backgroundImageView,
-            self.coverImageView,
-            self.courseNameLabel,
-            self.statsView,
-            self.rightDetailImageView
-        ])
+        self.addSubviews([self.coverImageView, self.courseNameLabel, self.statsView, self.rightDetailImageView])
     }
 
     func makeConstraints() {
-        self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundImageView.snp.makeConstraints { $0.edges.equalToSuperview() }
-
         self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
         self.coverImageView.snp.makeConstraints { make in
             make.leading

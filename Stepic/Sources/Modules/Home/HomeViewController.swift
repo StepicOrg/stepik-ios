@@ -542,14 +542,13 @@ extension HomeViewController: HomeViewControllerProtocol {
             let shouldDisplayStories = strongSelf.currentStoriesSubmoduleState == .shown
                 || (strongSelf.currentStoriesSubmoduleState == .hidden
                         && strongSelf.lastContentLanguage != viewModel.contentLanguage)
-            let shouldDisplayContinueCourse = viewModel.isAuthorized
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
 
             strongSelf.lastContentLanguage = viewModel.contentLanguage
             strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
 
             strongSelf.refreshStateForStories(state: shouldDisplayStories ? .shown : .hidden)
-            strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
+            strongSelf.refreshContinueCourse(state: .shown)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)

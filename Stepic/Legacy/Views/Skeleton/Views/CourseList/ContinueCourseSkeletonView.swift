@@ -18,6 +18,7 @@ extension ContinueCourseSkeletonView {
         let coverSize = CGSize(width: 40, height: 40)
 
         let courseLabelInsets = LayoutInsets(left: 8, right: 8)
+        let courseLabelHeight: CGFloat = 17
         let courseLabelWidthRatio: CGFloat = 0.7
 
         let statsViewHeight: CGFloat = 17
@@ -80,6 +81,7 @@ extension ContinueCourseSkeletonView: ProgrammaticallyInitializableViewProtocol 
             make.leading
                 .equalTo(self.courseCoverView.snp.trailing)
                 .offset(self.appearance.courseLabelInsets.left)
+            make.height.equalTo(self.appearance.courseLabelHeight)
             make.width.equalToSuperview().multipliedBy(self.appearance.courseLabelWidthRatio)
         }
 

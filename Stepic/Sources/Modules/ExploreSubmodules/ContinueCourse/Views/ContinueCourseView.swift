@@ -2,15 +2,14 @@ import SnapKit
 import UIKit
 
 protocol ContinueCourseViewDelegate: AnyObject {
-    func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView)
+    func continueCourseDidClickContinue(_ continueCourseView: ContinueCourseView)
+    func continueCourseDidClickEmpty(_ continueCourseView: ContinueCourseView)
 }
 
 extension ContinueCourseView {
     struct Appearance {
         let cornerRadius: CGFloat = 13
-
-        let coverSize = CGSize(width: 40, height: 40)
-        let coverCornerRadius: CGFloat = 8
+        let primaryColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikSystemPrimaryText)
     }
 }
 
@@ -19,8 +18,17 @@ final class ContinueCourseView: UIView {
 
     let appearance: Appearance
 
+    private lazy var backgroundView = ContinueCourseBackgroundView()
+
+    private lazy var emptyView: ContinueCourseEmptyView = {
+        let view = ContinueCourseEmptyView(appearance: .init(primaryColor: self.appearance.primaryColor))
+        view.addTarget(self, action: #selector(self.emptyViewClicked), for: .touchUpInside)
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var lastStepView: ContinueLastStepView = {
-        let view = ContinueLastStepView()
+        let view = ContinueLastStepView(appearance: .init(primaryColor: self.appearance.primaryColor))
         view.addTarget(self, action: #selector(self.lastStepViewClicked), for: .touchUpInside)
         return view
     }()
@@ -57,31 +65,60 @@ final class ContinueCourseView: UIView {
     }
 
     func showLoading() {
-        self.lastStepView.setContentHidden(true)
+        self.lastStepView.isHidden = true
         self.skeleton.viewBuilder = { ContinueCourseSkeletonView() }
         self.skeleton.show()
     }
 
     func hideLoading() {
-        self.lastStepView.setContentHidden(false)
+        self.lastStepView.isHidden = false
         self.skeleton.hide()
+    }
+
+    func showEmpty() {
+        self.lastStepView.isHidden = true
+        self.emptyView.isHidden = false
+    }
+
+    func hideEmpty() {
+        self.lastStepView.isHidden = false
+        self.emptyView.isHidden = true
+    }
+
+    func showError() {
+        self.lastStepView.isHidden = true
+    }
+
+    func hideError() {
+        self.lastStepView.isHidden = false
     }
 
     @objc
     private func lastStepViewClicked() {
-        self.delegate?.continueCourseContinueButtonDidClick(self)
+        self.delegate?.continueCourseDidClickContinue(self)
+    }
+
+    @objc
+    private func emptyViewClicked() {
+        self.delegate?.continueCourseDidClickEmpty(self)
     }
 }
 
 extension ContinueCourseView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
+        self.addSubview(self.backgroundView)
+        self.addSubview(self.emptyView)
         self.addSubview(self.lastStepView)
     }
 
     func makeConstraints() {
-        self.lastStepView.translatesAutoresizingMaskIntoConstraints = false
-        self.lastStepView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        [
+            self.backgroundView,
+            self.emptyView,
+            self.lastStepView
+        ].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.snp.makeConstraints { $0.edges.equalToSuperview() }
         }
     }
 }

@@ -107,13 +107,4 @@ extension HomeInteractor: StoriesOutputProtocol {
     }
 }
 
-extension HomeInteractor: ContinueCourseOutputProtocol {
-    func hideContinueCourse() {
-        self.homePresenter?.presentCourseListState(
-            response: .init(
-                module: Home.Submodule.continueCourse,
-                result: .empty
-            )
-        )
-    }
-}
+extension HomeInteractor: ContinueCourseOutputProtocol {}

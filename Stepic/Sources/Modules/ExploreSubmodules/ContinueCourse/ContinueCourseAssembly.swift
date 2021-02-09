@@ -9,11 +9,9 @@ final class ContinueCourseAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = ContinueCourseProvider(
-            userCoursesAPI: UserCoursesAPI(),
-            coursesAPI: CoursesAPI(),
-            progressesNetworkService: ProgressesNetworkService(
-                progressesAPI: ProgressesAPI()
-            )
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
         )
         let presenter = ContinueCoursePresenter()
 

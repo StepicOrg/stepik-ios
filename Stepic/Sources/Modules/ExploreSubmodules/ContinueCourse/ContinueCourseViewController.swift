@@ -5,14 +5,13 @@ protocol ContinueCourseViewControllerProtocol: AnyObject {
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel)
 }
 
-final class ContinueCourseViewController: UIViewController {
+final class ContinueCourseViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: ContinueCourseInteractorProtocol
-    private var state: ContinueCourse.ViewControllerState {
-        didSet {
-            self.updateState()
-        }
-    }
+    private var state: ContinueCourse.ViewControllerState
 
+    var placeholderContainer = StepikPlaceholderControllerContainer(
+        appearance: .init(placeholderAppearance: .init(backgroundColor: .clear))
+    )
     lazy var continueCourseView = self.view as? ContinueCourseView
     private lazy var continueLearningTooltip = TooltipFactory.continueLearningWidget
 
@@ -42,27 +41,57 @@ final class ContinueCourseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.updateState()
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .tryAgain,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.updateState(newState: .loading)
+                    strongSelf.interactor.doLastCourseRefresh(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
+
+        self.updateState(newState: self.state)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.interactor.doLastCourseRefresh(request: .init())
     }
 
-    private func updateState() {
-        if case .loading = self.state {
+    private func updateState(newState: ContinueCourse.ViewControllerState) {
+        defer {
+            self.state = newState
+        }
+
+        self.isPlaceholderShown = false
+        self.continueCourseView?.hideLoading()
+        self.continueCourseView?.hideEmpty()
+        self.continueCourseView?.hideError()
+
+        switch newState {
+        case .loading:
             self.continueCourseView?.showLoading()
-        } else {
-            self.continueCourseView?.hideLoading()
+        case .empty:
+            self.continueCourseView?.showEmpty()
+        case .error:
+            self.continueCourseView?.showError()
+            self.showPlaceholder(for: .connectionError)
+        case .result(let viewModel):
+            self.continueCourseView?.configure(viewModel: viewModel)
+            self.interactor.doTooltipAvailabilityCheck(request: .init())
         }
     }
 }
 
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel) {
-        if case .result(let result) = viewModel.state {
-            self.continueCourseView?.configure(viewModel: result)
-            self.interactor.doTooltipAvailabilityCheck(request: .init())
-        }
-
-        self.state = viewModel.state
+        self.updateState(newState: viewModel.state)
     }
 
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel) {
@@ -87,7 +116,11 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
 }
 
 extension ContinueCourseViewController: ContinueCourseViewDelegate {
-    func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView) {
+    func continueCourseDidClickContinue(_ continueCourseView: ContinueCourseView) {
         self.interactor.doContinueLastCourseAction(request: .init())
+    }
+
+    func continueCourseDidClickEmpty(_ continueCourseView: ContinueCourseView) {
+        DeepLinkRouter.routeToCatalog()
     }
 }
