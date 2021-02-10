@@ -29,11 +29,13 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
 
         let viewModel = NewChoiceQuizViewModel(
             title: title,
-            choices: response.choices.map {
-                NewChoiceQuiz.Choice(
-                    text: $0.text,
-                    isSelected: $0.isSelected,
-                    hint: $0.hint
+            choices: response.choices.map { choice in
+                let trimmedHint = choice.hint?.trimmed() ?? ""
+
+                return NewChoiceQuiz.Choice(
+                    text: choice.text,
+                    isSelected: choice.isSelected,
+                    hint: trimmedHint.isEmpty ? nil : trimmedHint
                 )
             },
             finalState: state,
