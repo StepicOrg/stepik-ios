@@ -47,11 +47,13 @@ final class CourseListProvider: CourseListProviderProtocol {
         }
 
         return Promise { seal in
-            persistenceService.fetch().done { courses in
-                seal.fulfill((courses, Meta.oneAndOnlyPage))
-            }.catch { error in
-                print("course list provider: unable to fetch courses from cache, error = \(error)")
-                seal.reject(Error.persistenceFetchFailed)
+            DispatchQueue.doWorkOnMain {
+                persistenceService.fetch().done { courses in
+                    seal.fulfill((courses, Meta.oneAndOnlyPage))
+                }.catch { error in
+                    print("course list provider: unable to fetch courses from cache, error = \(error)")
+                    seal.reject(Error.persistenceFetchFailed)
+                }
             }
         }
     }

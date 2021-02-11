@@ -1010,6 +1010,7 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 
 /* Course List */
 CourseWidgetArchived = "В архиве";
+CourseWidgetSeeAllTitle = "Посмотреть все";
 
 /* Course List Filter */
 CourseListFilterTitle = "Фильтры";

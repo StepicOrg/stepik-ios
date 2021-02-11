@@ -94,6 +94,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-com.AlexKarpov.Stepic.AnalyticsDebugEnabled"
             isEnabled = "NO">
          </CommandLineArgument>

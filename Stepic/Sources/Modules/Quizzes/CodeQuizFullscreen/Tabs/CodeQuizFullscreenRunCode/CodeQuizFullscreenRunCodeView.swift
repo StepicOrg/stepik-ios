@@ -186,10 +186,7 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         self.samplesButton.isEnabled = viewModel.isSamplesButtonEnabled
         self.isRunCodeButtonEnabled = viewModel.isRunCodeButtonEnabled
 
-        self.updateTestOutputCard(
-            userCodeRunStatus: viewModel.userCodeRunStatus,
-            isTestOutputMatchesSampleOutput: viewModel.isTestOutputMatchesSampleOutput
-        )
+        self.updateTestOutputCard(userCodeRunStatus: viewModel.userCodeRunStatus)
 
         self.testInputTextView.isEditable = viewModel.userCodeRunStatus == .evaluation ? false : true
         self.evaluationView.isHidden = viewModel.userCodeRunStatus == .evaluation ? false : true
@@ -220,19 +217,13 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         return view
     }
 
-    private func updateTestOutputCard(userCodeRunStatus: UserCodeRun.Status?, isTestOutputMatchesSampleOutput: Bool) {
+    private func updateTestOutputCard(userCodeRunStatus: UserCodeRun.Status?) {
         let (image, tintColor, backgroundColor): (UIImage?, UIColor, UIColor) = {
             if userCodeRunStatus == .failure {
                 return (
                     UIImage(named: "quiz-mark-wrong"),
                     UIColor.stepikLightRedFixed,
                     UIColor.quizElementWrongBackground
-                )
-            } else if userCodeRunStatus == .success && isTestOutputMatchesSampleOutput {
-                return (
-                    UIImage(named: "quiz-feedback-correct"),
-                    UIColor.stepikCallToActionText,
-                    UIColor.quizElementCorrectBackground
                 )
             } else {
                 return (

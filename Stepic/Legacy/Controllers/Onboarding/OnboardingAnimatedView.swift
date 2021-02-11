@@ -18,7 +18,7 @@ final class OnboardingAnimatedView: UIView {
         "onboardingAnimation3",
         "onboardingAnimation4"
     ]
-    private var animationViews: [LOTAnimationView] = []
+    private var animationViews: [AnimationView] = []
     private var currentSegmentIndex = 0
 
     private var prevPercent = 0.0
@@ -32,7 +32,7 @@ final class OnboardingAnimatedView: UIView {
         clipsToBounds = false
 
         (0..<animationSegmentsNames.count).forEach { index in
-            let view = LOTAnimationView(name: animationSegmentsNames[index])
+            let view = AnimationView(name: animationSegmentsNames[index])
             view.contentMode = .scaleAspectFill
             view.isHidden = true
             view.clipsToBounds = false
@@ -53,7 +53,7 @@ final class OnboardingAnimatedView: UIView {
         currentView?.play()
     }
 
-    private var currentView: LOTAnimationView? {
+    private var currentView: AnimationView? {
         animationViews.forEach { $0.isHidden = $0 != animationViews[currentSegmentIndex] }
         return animationViews[currentSegmentIndex]
     }
@@ -123,8 +123,12 @@ final class OnboardingAnimatedView: UIView {
     }
 
     func play() {
-        currentView?.animationProgress = 0.0
-        currentView?.play()
+        currentView?.currentProgress = 0.0
+        currentView?.play { [weak self] finished in
+            if finished {
+                self?.currentView?.currentProgress = 0.99
+            }
+        }
     }
 
     private func transitionToSegment(from fromIndex: Int, to toIndex: Int, next: Bool = true, completion: (() -> Void)? = nil) {

@@ -252,7 +252,12 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
         let strippedText: String = {
             do {
+                if comment.text.trimmed().isEmpty {
+                    return comment.text
+                }
+
                 let htmlDocument = try Kanna.HTML(html: comment.text, encoding: .utf8)
+
                 return htmlDocument.css("*").first?.text ?? comment.text
             } catch {
                 return comment.text

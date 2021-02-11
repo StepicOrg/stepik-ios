@@ -157,9 +157,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
                             ? []
                             : Array(course.sectionsArray[(sectionPosition + 1)...])
                     case .previous:
-                        return sectionPosition == 0
-                            ? []
-                            : Array(course.sectionsArray[...(sectionPosition - 1)])
+                        return Array(course.sectionsArray.prefix(sectionPosition))
                     }
                 }()
 
