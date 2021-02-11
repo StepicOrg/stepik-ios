@@ -12,7 +12,8 @@ extension ChoiceElementView {
         let feedbackBackgroundColor = UIColor.stepikLightSecondaryBackground
         let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-        let font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        let contentFont = Typography.quizContent
+        let feedbackFont = Typography.quizFeedback
         let textColor = UIColor.stepikPrimaryText
     }
 }
@@ -23,7 +24,7 @@ final class ChoiceElementView: UIView {
     private lazy var quizElementView = QuizElementView()
     private lazy var contentView: ProcessedContentView = {
         let appearance = ProcessedContentView.Appearance(
-            labelFont: self.appearance.font,
+            labelFont: self.appearance.contentFont,
             labelTextColor: self.appearance.textColor,
             activityIndicatorViewStyle: .stepikGray,
             activityIndicatorViewColor: nil,
@@ -34,7 +35,7 @@ final class ChoiceElementView: UIView {
         let contentProcessor = ContentProcessor(
             rules: ContentProcessor.defaultRules,
             injections: ContentProcessor.defaultInjections + [
-                FontInjection(font: self.appearance.font),
+                FontInjection(font: self.appearance.contentFont),
                 TextColorInjection(dynamicColor: self.appearance.textColor)
             ]
         )
@@ -43,7 +44,7 @@ final class ChoiceElementView: UIView {
             frame: .zero,
             appearance: appearance,
             contentProcessor: contentProcessor,
-            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.font)
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.contentFont)
         )
         processedContentView.delegate = self
 
@@ -63,7 +64,7 @@ final class ChoiceElementView: UIView {
 
     private lazy var feedbackView: ProcessedContentView = {
         let appearance = ProcessedContentView.Appearance(
-            labelFont: self.appearance.font,
+            labelFont: self.appearance.feedbackFont,
             labelTextColor: self.appearance.textColor,
             activityIndicatorViewStyle: .stepikGray,
             activityIndicatorViewColor: nil,
@@ -74,7 +75,7 @@ final class ChoiceElementView: UIView {
         let contentProcessor = ContentProcessor(
             rules: ContentProcessor.defaultRules,
             injections: ContentProcessor.defaultInjections + [
-                FontInjection(font: self.appearance.font),
+                FontInjection(font: self.appearance.feedbackFont),
                 TextColorInjection(dynamicColor: self.appearance.textColor)
             ]
         )
@@ -83,7 +84,7 @@ final class ChoiceElementView: UIView {
             frame: .zero,
             appearance: appearance,
             contentProcessor: contentProcessor,
-            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.font)
+            htmlToAttributedStringConverter: HTMLToAttributedStringConverter(font: self.appearance.feedbackFont)
         )
 
         return processedContentView

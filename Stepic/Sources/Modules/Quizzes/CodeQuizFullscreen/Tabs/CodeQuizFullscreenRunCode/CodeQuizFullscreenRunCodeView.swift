@@ -28,7 +28,7 @@ extension CodeQuizFullscreenRunCodeView {
         let testInputPlaceholderTextColor = UIColor.stepikPlaceholderText
 
         let testInputOutputTitleFont = UIFont.preferredFont(forTextStyle: .headline)
-        let testInputOutputTextViewFont = UIFont.preferredFont(forTextStyle: .body)
+        let testInputOutputTextViewFont = Typography.quizFeedback
 
         let testInputOutputTitleInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 16)
         let testInputOutputTextViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
