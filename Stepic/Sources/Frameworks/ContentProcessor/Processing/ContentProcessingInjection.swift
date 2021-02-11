@@ -226,13 +226,49 @@ final class FontWeightInjection: ContentProcessingInjection {
     }
 }
 
+/// Injects script that assigns font family.
+final class FontFamilyInjection: ContentProcessingInjection {
+    private let style: FamilyStyle
+
+    var bodyHeadScript: String {
+        """
+        <script type="text/javascript">
+            document.documentElement.style.setProperty('--font-family', \(self.style.fontsString));
+        </script>
+        """
+    }
+
+    init(style: FamilyStyle) {
+        self.style = style
+    }
+
+    convenience init(fontFamily: String) {
+        self.init(style: fontFamily.lowercased().contains("monospace") ? .mono : .regular)
+    }
+
+    enum FamilyStyle {
+        case mono
+        case regular
+
+        fileprivate var fontsString: String {
+            switch self {
+            case .mono:
+                return "\"ui-monospace, 'SF Mono', Menlo, Consolas, monospace\""
+            case .regular:
+                return "\"-apple-system, Arial, Helvetica, sans-serif\""
+            }
+        }
+    }
+}
+
 /// Injects script that assigns font size and weight.
 final class FontInjection: ContentProcessingInjection {
     private let font: UIFont
 
     var bodyHeadScript: String {
         guard let size = self.font.fontDescriptor.object(forKey: .size) as? NSNumber,
-              let face = self.font.fontDescriptor.object(forKey: .face) as? String else {
+              let face = self.font.fontDescriptor.object(forKey: .face) as? String,
+              let family = self.font.fontDescriptor.object(forKey: .family) as? String else {
             return ""
         }
 
@@ -243,7 +279,9 @@ final class FontInjection: ContentProcessingInjection {
             fontWeightScript = FontWeightInjection(fontWeightNameMapping: fontWeightNameMapping).bodyHeadScript
         }
 
-        return "\(fontSizeScript)\(fontWeightScript)"
+        let fontFamilyScript = FontFamilyInjection(fontFamily: family).bodyHeadScript
+
+        return "\(fontFamilyScript)\(fontSizeScript)\(fontWeightScript)"
     }
 
     init(font: UIFont) {

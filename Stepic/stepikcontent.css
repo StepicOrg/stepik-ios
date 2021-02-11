@@ -9,6 +9,7 @@
     --h2-font-size: 22;
     --h3-font-size: 20;
     --blockquote-font-size: 17;
+    --font-family: -apple-system, Arial, Helvetica, sans-serif;
     --font-weight: 400;
 }
 
@@ -64,11 +65,11 @@
 }
 
 html {
-    font-family: -apple-system, Arial, Helvetica, sans-serif;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
+    font-family: var(--font-family);
     font-size: var(--body-font-size);
     font-weight: var(--font-weight);
 }

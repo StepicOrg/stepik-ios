@@ -16,7 +16,7 @@ extension NewMatchingQuizTitleView {
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
 
-        let contentTextViewFont = UIFont.systemFont(ofSize: 17, weight: .regular)
+        let contentTextViewFont = Typography.quizContent
         let contentTextViewTextColor = UIColor.stepikPrimaryText
     }
 }

@@ -23,4 +23,19 @@ enum Typography {
     static let caption1Font = UIFont.preferredFont(forTextStyle: .caption1)
     /// The font used for alternate captions.
     static let caption2Font = UIFont.preferredFont(forTextStyle: .caption2)
+
+    /// The font used for quiz contents text.
+    static let quizContent = Self.bodyFont
+    /// The font used for quiz feedbacks text.
+    static var quizFeedback = Self.makeMonospacedFont(ofSize: 17, weight: .regular)
+
+    // MARK: Private Helpers
+
+    private static func makeMonospacedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+        if #available(iOS 13.0, *) {
+            return UIFont.monospacedSystemFont(ofSize: size, weight: weight)
+        } else {
+            return UIFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
+        }
+    }
 }
