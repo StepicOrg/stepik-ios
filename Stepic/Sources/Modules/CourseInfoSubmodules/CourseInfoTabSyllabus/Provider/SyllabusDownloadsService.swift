@@ -18,9 +18,9 @@ protocol SyllabusDownloadsServiceProtocol: AnyObject {
     func cancel(unit: Unit) -> Promise<Void>
     func cancel(section: Section) -> Promise<Void>
 
-    func getUnitDownloadState(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getSectionDownloadState(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getCourseDownloadState(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
+    func getUnitDownloadState(_ unit: Unit, in section: Section) -> Guarantee<CourseInfoTabSyllabus.DownloadState>
+    func getSectionDownloadState(_ section: Section) -> Guarantee<CourseInfoTabSyllabus.DownloadState>
+    func getCourseDownloadState(_ course: Course) -> Guarantee<CourseInfoTabSyllabus.DownloadState>
 }
 
 // MARK: - SyllabusDownloadsService: SyllabusDownloadsServiceProtocol -
@@ -447,7 +447,53 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
     // MARK: Downloading state
 
-    func getUnitDownloadState(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getUnitDownloadState(_ unit: Unit, in section: Section) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
+        Guarantee { seal in
+            let unitPlainObject = UnitPlainObject(unit: unit)
+            let sectionPlainObject = SectionPlainObject(section: section)
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                let downloadState = self.getUnitDownloadState(unitPlainObject, in: sectionPlainObject)
+
+                DispatchQueue.main.async {
+                    seal(downloadState)
+                }
+            }
+        }
+    }
+
+    func getSectionDownloadState(_ section: Section) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
+        Guarantee { seal in
+            let sectionPlainObject = SectionPlainObject(section: section)
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                let downloadState = self.getSectionDownloadState(sectionPlainObject)
+
+                DispatchQueue.main.async {
+                    seal(downloadState)
+                }
+            }
+        }
+    }
+
+    func getCourseDownloadState(_ course: Course) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
+        Guarantee { seal in
+            let coursePlainObject = CoursePlainObject(course: course)
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                let downloadState = self.getCourseDownloadState(coursePlainObject)
+
+                DispatchQueue.main.async {
+                    seal(downloadState)
+                }
+            }
+        }
+    }
+
+    private func getUnitDownloadState(
+        _ unit: UnitPlainObject,
+        in section: SectionPlainObject
+    ) -> CourseInfoTabSyllabus.DownloadState {
         // If section is unreachable or exam then all units are not available
         guard !section.isExam, section.isReachable else {
             return .notAvailable
@@ -464,8 +510,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // If have unloaded steps for lesson then show "not cached" state
         let hasUncachedSteps = steps
-            .filter { lesson.stepsArray.contains($0.id) }
-            .count != lesson.stepsArray.count
+            .filter { lesson.stepsIDs.contains($0.id) }
+            .count != lesson.stepsIDs.count
         if hasUncachedSteps {
             return .notCached
         }
@@ -490,7 +536,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         let stepsWithCachedImagesCount = steps
             .filter { !$0.block.imageSourceURLs.isEmpty }
-            .compactMap { step -> Step? in
+            .compactMap { step -> StepPlainObject? in
                 for imageURL in step.block.imageSourceURLs {
                     if self.imageFileManager.getImageStoredFile(imageURL: imageURL) == nil {
                         return nil
@@ -508,7 +554,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let stepsWithVideo = steps
             .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
-        let videosDownloadProgresses = stepsWithVideo.compactMap { self.getVideoDownloadProgress($0) }
+        let videosDownloadProgresses = stepsWithVideo.compactMap { self.getVideoDownloadProgress(videoID: $0.id) }
 
         let imagesDownloadProgresses = self.imageURLsByUnitID[unit.id, default: []]
             .compactMap { self.getImageDownloadProgress(url: $0) }
@@ -549,7 +595,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func getSectionDownloadState(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    private func getSectionDownloadState(_ section: SectionPlainObject) -> CourseInfoTabSyllabus.DownloadState {
         let units = section.units
 
         // Unreachable and exam not available
@@ -559,8 +605,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // If have unloaded units for lesson then show "not available" state
         let hasUncachedUnits = units
-            .filter { section.unitsArray.contains($0.id) }
-            .count != section.unitsArray.count
+            .filter { section.unitsIDs.contains($0.id) }
+            .count != section.unitsIDs.count
         if hasUncachedUnits {
             return .notAvailable
         }
@@ -617,7 +663,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .cached(bytesTotal: sectionSizeInBytes, hasCachedVideosOrImages: containsUnitWithCachedResources)
     }
 
-    func getCourseDownloadState(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
+    private func getCourseDownloadState(_ course: CoursePlainObject) -> CourseInfoTabSyllabus.DownloadState {
         let sectionStates = course.sections.map { self.getSectionDownloadState($0) }
 
         var cachedSectionsCount = 0
@@ -640,7 +686,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             }
         }
 
-        if course.sectionsArray.count == cachedSectionsCount {
+        if course.sectionsIDs.count == cachedSectionsCount {
             return .cached(
                 bytesTotal: courseSizeInBytes,
                 hasCachedVideosOrImages: containsSectionWithCachedResources
@@ -650,8 +696,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return containsUncachedSection ? .notCached : .notAvailable
     }
 
-    private func getVideoDownloadProgress(_ video: Video) -> Float? {
-        self.activeVideoDownloads.contains(video.id) ? self.progressByVideoID[video.id] : nil
+    private func getVideoDownloadProgress(videoID: Video.IdType) -> Float? {
+        self.activeVideoDownloads.contains(videoID) ? self.progressByVideoID[videoID] : nil
     }
 
     private func getImageDownloadProgress(url: URL) -> Float? {
@@ -701,7 +747,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
     // MARK: - Private Helpers -
 
-    private func restoreDownloading(section: Section, unit: Unit) throws {
+    private func restoreDownloading(section: SectionPlainObject, unit: UnitPlainObject) throws {
         guard let lesson = unit.lesson else {
             throw Error.lessonNotFound
         }
@@ -750,8 +796,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
     private func fetchAttemptForStep(_ step: Step) -> Promise<Void> {
         guard step.block.managedName != nil,
-              step.block.name != Block.BlockType.text.rawValue,
-              step.block.name != Block.BlockType.video.rawValue else {
+              step.block.name != BlockType.text.rawValue,
+              step.block.name != BlockType.video.rawValue else {
             return .value(())
         }
 
