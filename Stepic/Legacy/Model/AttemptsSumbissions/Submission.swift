@@ -163,7 +163,7 @@ final class Submission: JSONSerializable, Hashable {
     // MARK: Private API
 
     private func getReplyFromJSON(_ json: JSON, stepBlockName: String) -> Reply? {
-        guard let blockType = Block.BlockType(rawValue: stepBlockName) else {
+        guard let blockType = BlockType(rawValue: stepBlockName) else {
             return nil
         }
 

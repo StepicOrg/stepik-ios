@@ -130,7 +130,7 @@ final class Attempt: JSONSerializable, Hashable, CustomStringConvertible {
     // MARK: Private API
 
     private func getDatasetFromJSON(_ json: JSON, stepBlockName: String) -> Dataset? {
-        guard let blockType = Block.BlockType(rawValue: stepBlockName) else {
+        guard let blockType = BlockType(rawValue: stepBlockName) else {
             return nil
         }
 
