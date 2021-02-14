@@ -1,9 +1,11 @@
 import Foundation
 
 struct CoursePlainObject {
-    var id: Int
-    var sectionsIDs: [Int]
-    var sections: [SectionPlainObject]
+    let id: Int
+    let sectionsIDs: [Int]
+    let sections: [SectionPlainObject]
+    let isEnrolled: Bool
+    let isPaid: Bool
 }
 
 extension CoursePlainObject {
@@ -11,5 +13,7 @@ extension CoursePlainObject {
         self.id = course.id
         self.sectionsIDs = course.sectionsArray
         self.sections = course.sections.map(SectionPlainObject.init)
+        self.isEnrolled = course.enrolled
+        self.isPaid = course.isPaid
     }
 }
