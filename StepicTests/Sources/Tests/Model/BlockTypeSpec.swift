@@ -13,84 +13,84 @@ class BlockTypeSpec: QuickSpec {
         describe("its parses correctly") {
             it("parses") {
                 names.forEach { blockName in
-                    expect(Block.BlockType(rawValue: blockName)).notTo(beNil())
+                    expect(BlockType(rawValue: blockName)).notTo(beNil())
                 }
             }
 
             it("is text") {
-                expect(Block.BlockType(rawValue: "text")) == .text
+                expect(BlockType(rawValue: "text")) == .text
             }
 
             it("is video") {
-                expect(Block.BlockType(rawValue: "video")) == .video
+                expect(BlockType(rawValue: "video")) == .video
             }
 
             it("is animation") {
-                expect(Block.BlockType(rawValue: "animation")) == .animation
+                expect(BlockType(rawValue: "animation")) == .animation
             }
 
             it("is chemical") {
-                expect(Block.BlockType(rawValue: "chemical")) == .chemical
+                expect(BlockType(rawValue: "chemical")) == .chemical
             }
 
             it("is choice") {
-                expect(Block.BlockType(rawValue: "choice")) == .choice
+                expect(BlockType(rawValue: "choice")) == .choice
             }
 
             it("is code") {
-                expect(Block.BlockType(rawValue: "code")) == .code
+                expect(BlockType(rawValue: "code")) == .code
             }
 
             it("is dataset") {
-                expect(Block.BlockType(rawValue: "dataset")) == .dataset
+                expect(BlockType(rawValue: "dataset")) == .dataset
             }
 
             it("is fill blanks") {
-                expect(Block.BlockType(rawValue: "fill-blanks")) == .fillBlanks
+                expect(BlockType(rawValue: "fill-blanks")) == .fillBlanks
             }
 
             it("is free answer") {
-                expect(Block.BlockType(rawValue: "free-answer")) == .freeAnswer
+                expect(BlockType(rawValue: "free-answer")) == .freeAnswer
             }
 
             it("is linux code") {
-                expect(Block.BlockType(rawValue: "linux-code")) == .linuxCode
+                expect(BlockType(rawValue: "linux-code")) == .linuxCode
             }
 
             it("is matching") {
-                expect(Block.BlockType(rawValue: "matching")) == .matching
+                expect(BlockType(rawValue: "matching")) == .matching
             }
 
             it("is math") {
-                expect(Block.BlockType(rawValue: "math")) == .math
+                expect(BlockType(rawValue: "math")) == .math
             }
 
             it("is number") {
-                expect(Block.BlockType(rawValue: "number")) == .number
+                expect(BlockType(rawValue: "number")) == .number
             }
 
             it("is puzzle") {
-                expect(Block.BlockType(rawValue: "puzzle")) == .puzzle
+                expect(BlockType(rawValue: "puzzle")) == .puzzle
             }
 
             it("is pycharm") {
-                expect(Block.BlockType(rawValue: "pycharm")) == .pycharm
+                expect(BlockType(rawValue: "pycharm")) == .pycharm
             }
 
             it("is sorting") {
-                expect(Block.BlockType(rawValue: "sorting")) == .sorting
+                expect(BlockType(rawValue: "sorting")) == .sorting
             }
 
             it("is sql") {
-                expect(Block.BlockType(rawValue: "sql")) == .sql
+                expect(BlockType(rawValue: "sql")) == .sql
             }
 
             it("is string") {
-                expect(Block.BlockType(rawValue: "string")) == .string
+                expect(BlockType(rawValue: "string")) == .string
             }
 
             it("is admin") {
-                expect(Block.BlockType(rawValue: "admin")) == .admin
+                expect(BlockType(rawValue: "admin")) == .admin
             }
         }
     }

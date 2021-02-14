@@ -43,7 +43,7 @@ extension Lesson {
 
     var id: Int {
         get {
-             self.managedId?.intValue ?? -1
+            self.managedId?.intValue ?? -1
         }
         set {
             self.managedId = newValue as NSNumber?
@@ -52,7 +52,7 @@ extension Lesson {
 
     var title: String {
         get {
-             self.managedTitle ?? "No title"
+            self.managedTitle ?? "No title"
         }
         set {
             self.managedTitle = newValue
@@ -61,7 +61,7 @@ extension Lesson {
 
     var slug: String {
         get {
-             self.managedSlug ?? ""
+            self.managedSlug ?? ""
         }
         set {
             self.managedSlug = newValue
@@ -70,7 +70,7 @@ extension Lesson {
 
     var coverURL: String? {
         get {
-             self.managedCoverURL
+            self.managedCoverURL
         }
         set {
             self.managedCoverURL = newValue
@@ -79,7 +79,7 @@ extension Lesson {
 
     var isFeatured: Bool {
         get {
-             self.managedFeatured?.boolValue ?? false
+            self.managedFeatured?.boolValue ?? false
         }
         set {
             self.managedFeatured = newValue as NSNumber?
@@ -88,7 +88,7 @@ extension Lesson {
 
     var isPublic: Bool {
         get {
-             self.managedPublic?.boolValue ?? false
+            self.managedPublic?.boolValue ?? false
         }
         set {
             self.managedPublic = newValue as NSNumber?
@@ -97,7 +97,7 @@ extension Lesson {
 
     var canEdit: Bool {
         get {
-             self.managedCanEdit?.boolValue ?? false
+            self.managedCanEdit?.boolValue ?? false
         }
         set {
             self.managedCanEdit = newValue as NSNumber?
@@ -113,9 +113,9 @@ extension Lesson {
         }
     }
 
-    var stepsArray: [IdType] {
+    var stepsArray: [Step.IdType] {
         get {
-             (self.managedStepsArray as? [IdType]) ?? []
+            (self.managedStepsArray as? [IdType]) ?? []
         }
         set {
             self.managedStepsArray = newValue as NSObject?
@@ -124,7 +124,7 @@ extension Lesson {
 
     var steps: [Step] {
         get {
-             (self.managedSteps?.array as? [Step]) ?? []
+            (self.managedSteps?.array as? [Step]) ?? []
         }
         set {
             self.managedSteps = NSOrderedSet(array: newValue)
@@ -133,7 +133,7 @@ extension Lesson {
 
     var timeToComplete: Double {
         get {
-             self.managedTimeToComplete?.doubleValue ?? 0
+            self.managedTimeToComplete?.doubleValue ?? 0
         }
         set {
             self.managedTimeToComplete = newValue as NSNumber?
@@ -142,7 +142,7 @@ extension Lesson {
 
     var voteDelta: Int {
         get {
-             self.managedVoteDelta?.intValue ?? 0
+            self.managedVoteDelta?.intValue ?? 0
         }
         set {
             self.managedVoteDelta = newValue as NSNumber?
@@ -151,7 +151,7 @@ extension Lesson {
 
     var passedBy: Int {
         get {
-             managedPassedBy?.intValue ?? 0
+            managedPassedBy?.intValue ?? 0
         }
         set {
             self.managedPassedBy = newValue as NSNumber?
