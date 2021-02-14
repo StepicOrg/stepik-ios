@@ -22,104 +22,27 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         Date().timeIntervalSince(self.lastDateFailedAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
     }
 
+    private lazy var privateQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusPresenter")
+
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {
-        var viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel
+        self.privateQueue.async {
+            let viewModel = self.makeSyllabusViewModel(response: response)
 
-        switch response.result {
-        case let .success(result):
-            let sectionViewModels = result.sections.enumerated().map {
-                sectionData -> CourseInfoTabSyllabusSectionViewModel in
-
-                var currentSectionUnitViewModels: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper] = []
-
-                for (unitIndex, unitID) in sectionData.element.entity.unitsArray.enumerated() {
-                    if let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID }),
-                       let unit = matchedUnitRecord.entity {
-                        currentSectionUnitViewModels.append(
-                            self.makeUnitViewModel(
-                                sectionIndex: sectionData.offset,
-                                unitIndex: unitIndex,
-                                uid: matchedUnitRecord.uniqueIdentifier,
-                                unit: unit,
-                                course: result.course,
-                                isSectionReachable: sectionData.element.entity.isReachable,
-                                downloadState: matchedUnitRecord.downloadState
-                            )
-                        )
-                    } else {
-                        currentSectionUnitViewModels.append(.placeholder)
-                    }
-                }
-
-                let hasPlaceholderUnits = currentSectionUnitViewModels.contains(
-                    where: { unit in
-                        if case .placeholder = unit {
-                            return true
-                        }
-                        return false
-                    }
-                )
-
-                let sectionDeadline = result.sectionsDeadlines
-                    .first { $0.section == sectionData.element.entity.id }?
-                    .deadlineDate
-
-                let requiredSection = result.sections
-                    .first { $0.entity.id == sectionData.element.entity.requiredSectionID }?
-                    .entity
-
-                return self.makeSectionViewModel(
-                    index: sectionData.offset,
-                    uid: sectionData.element.uniqueIdentifier,
-                    section: sectionData.element.entity,
-                    requiredSection: requiredSection,
-                    units: currentSectionUnitViewModels,
-                    downloadState: hasPlaceholderUnits || !result.course.enrolled
-                        ? .notAvailable
-                        : sectionData.element.downloadState,
-                    personalDeadlineDate: sectionDeadline
-                )
+            DispatchQueue.main.async {
+                self.viewController?.displaySyllabus(viewModel: viewModel)
             }
-
-            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .result(data: sectionViewModels))
-        default:
-            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .loading)
         }
-
-        // TODO: Refactor
-        self.viewController?.displaySyllabus(viewModel: viewModel)
     }
 
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response) {
-        switch response.source {
-        case .section(let section):
-            self.cachedSectionViewModels[section.id]?.downloadState = response.downloadState
-            if let cachedViewModel = self.cachedSectionViewModels[section.id] {
-                let viewModel = CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel(
-                    data: .section(viewModel: cachedViewModel)
-                )
-                self.viewController?.displayDownloadButtonStateUpdate(viewModel: viewModel)
+        self.privateQueue.async {
+            let viewModelOrNil = self.makeDownloadButtonStateUpdateViewModel(response: response)
+
+            guard let viewModel = viewModelOrNil else {
+                return
             }
-        case .unit(let unit):
-            self.cachedUnitViewModels[unit.id]?.downloadState = response.downloadState
 
-            if let cachedViewModel = self.cachedUnitViewModels[unit.id] {
-                // Update unit downloadState in cached sections view models.
-                var updatedUnit = false
-                for (sectionID, sectionViewModel) in self.cachedSectionViewModels where !updatedUnit {
-                    for (index, unitViewModelWrapper) in sectionViewModel.units.enumerated() where !updatedUnit {
-                        if case .normal(let viewModel) = unitViewModelWrapper,
-                           viewModel.uniqueIdentifier == "\(unit.id)" {
-                            updatedUnit = true
-                            self.cachedSectionViewModels[sectionID]?.units[index] = .normal(viewModel: cachedViewModel)
-                        }
-                    }
-                }
-
-                let viewModel = CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel(
-                    data: .unit(viewModel: cachedViewModel)
-                )
-
+            DispatchQueue.main.async {
                 self.viewController?.displayDownloadButtonStateUpdate(viewModel: viewModel)
             }
         }
@@ -251,11 +174,116 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
     // MARK: - Private API
 
+    private func makeDownloadButtonStateUpdateViewModel(
+        response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response
+    ) -> CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel? {
+        var viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel?
+
+        switch response.source {
+        case .section(let section):
+            self.cachedSectionViewModels[section.id]?.downloadState = response.downloadState
+            if let cachedViewModel = self.cachedSectionViewModels[section.id] {
+                viewModel = .init(data: .section(viewModel: cachedViewModel))
+            }
+        case .unit(let unit):
+            self.cachedUnitViewModels[unit.id]?.downloadState = response.downloadState
+
+            if let cachedViewModel = self.cachedUnitViewModels[unit.id] {
+                // Update unit downloadState in cached sections view models.
+                var updatedUnit = false
+                for (sectionID, sectionViewModel) in self.cachedSectionViewModels where !updatedUnit {
+                    for (index, unitViewModelWrapper) in sectionViewModel.units.enumerated() where !updatedUnit {
+                        if case .normal(let viewModel) = unitViewModelWrapper,
+                           viewModel.uniqueIdentifier == "\(unit.id)" {
+                            updatedUnit = true
+                            self.cachedSectionViewModels[sectionID]?.units[index] = .normal(
+                                viewModel: cachedViewModel
+                            )
+                        }
+                    }
+                }
+
+                viewModel = .init(data: .unit(viewModel: cachedViewModel))
+            }
+        }
+
+        return viewModel
+    }
+
+    private func makeSyllabusViewModel(
+        response: CourseInfoTabSyllabus.SyllabusLoad.Response
+    ) -> CourseInfoTabSyllabus.SyllabusLoad.ViewModel {
+        var viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel
+
+        switch response.result {
+        case let .success(result):
+            let sectionViewModels = result.sections.enumerated().map {
+                sectionData -> CourseInfoTabSyllabusSectionViewModel in
+
+                var currentSectionUnitViewModels: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper] = []
+
+                for (unitIndex, unitID) in sectionData.element.entity.unitsIDs.enumerated() {
+                    if let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID }),
+                       let unit = matchedUnitRecord.entity {
+                        currentSectionUnitViewModels.append(
+                            self.makeUnitViewModel(
+                                sectionIndex: sectionData.offset,
+                                unitIndex: unitIndex,
+                                uid: matchedUnitRecord.uniqueIdentifier,
+                                unit: unit,
+                                course: result.course,
+                                isSectionReachable: sectionData.element.entity.isReachable,
+                                downloadState: matchedUnitRecord.downloadState
+                            )
+                        )
+                    } else {
+                        currentSectionUnitViewModels.append(.placeholder)
+                    }
+                }
+
+                let hasPlaceholderUnits = currentSectionUnitViewModels.contains(
+                    where: { unit in
+                        if case .placeholder = unit {
+                            return true
+                        }
+                        return false
+                    }
+                )
+
+                let sectionDeadline = result.sectionsDeadlines
+                    .first { $0.section == sectionData.element.entity.id }?
+                    .deadlineDate
+
+                let requiredSection = result.sections
+                    .first { $0.entity.id == sectionData.element.entity.requiredSectionID }?
+                    .entity
+
+                return self.makeSectionViewModel(
+                    index: sectionData.offset,
+                    uid: sectionData.element.uniqueIdentifier,
+                    section: sectionData.element.entity,
+                    requiredSection: requiredSection,
+                    units: currentSectionUnitViewModels,
+                    downloadState: hasPlaceholderUnits || !result.course.isEnrolled
+                        ? .notAvailable
+                        : sectionData.element.downloadState,
+                    personalDeadlineDate: sectionDeadline
+                )
+            }
+
+            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .result(data: sectionViewModels))
+        default:
+            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .loading)
+        }
+
+        return viewModel
+    }
+
     private func makeSectionViewModel(
         index: Int,
         uid: UniqueIdentifierType,
-        section: Section,
-        requiredSection: Section?,
+        section: SectionPlainObject,
+        requiredSection: SectionPlainObject?,
         units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
         downloadState: CourseInfoTabSyllabus.DownloadState,
         personalDeadlineDate: Date? = nil
@@ -305,8 +333,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         sectionIndex: Int,
         unitIndex: Int,
         uid: UniqueIdentifierType,
-        unit: Unit,
-        course: Course,
+        unit: UnitPlainObject,
+        course: CoursePlainObject,
         isSectionReachable: Bool,
         downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
@@ -350,7 +378,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }()
 
         let access: CourseInfoTabSyllabusUnitViewModel.Access = {
-            if !course.enrolled && course.isPaid && lesson.canLearnLesson {
+            if !course.isEnrolled && course.isPaid && lesson.canLearnLesson {
                 return .demo
             }
             return isSectionReachable ? .full : .no
@@ -375,7 +403,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     }
 
     private func makeDeadlinesViewModel(
-        section: Section,
+        section: SectionPlainObject,
         personalDeadlineDate: Date?
     ) -> CourseInfoTabSyllabusSectionDeadlinesViewModel? {
         let dates: [(title: String, date: Date)] = {
@@ -440,7 +468,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         return .init(timelineItems: items)
     }
 
-    private func makeFormattedSectionRequirementsText(section: Section, requiredSection: Section?) -> String? {
+    private func makeFormattedSectionRequirementsText(
+        section: SectionPlainObject,
+        requiredSection: SectionPlainObject?
+    ) -> String? {
         if section.isRequirementSatisfied {
             return nil
         }
