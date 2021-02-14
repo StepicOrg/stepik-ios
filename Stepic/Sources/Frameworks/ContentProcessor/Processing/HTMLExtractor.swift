@@ -42,3 +42,24 @@ final class HTMLExtractor: HTMLExtractorProtocol {
         return documentDOM.css(tag).compactMap { $0.toHTML }
     }
 }
+
+final class ImageSourceURLExtractor {
+    private let text: String
+    private let extractorType: HTMLExtractorProtocol.Type
+
+    init(text: String, extractorType: HTMLExtractorProtocol.Type = HTMLExtractor.self) {
+        self.text = text
+        self.extractorType = extractorType
+    }
+
+    func extractAllImageSourceURLs() -> [URL] {
+        if self.text.isEmpty {
+            return []
+        }
+
+        let sources = self.extractorType.extractAllTagsAttribute(tag: "img", attribute: "src", from: self.text)
+        let urls = Set(sources.compactMap { URL(string: $0) })
+
+        return Array(urls)
+    }
+}

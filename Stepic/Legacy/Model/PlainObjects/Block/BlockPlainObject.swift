@@ -5,7 +5,10 @@ struct BlockPlainObject: Equatable {
     let type: BlockType?
     let text: String?
     let video: VideoPlainObject?
-    let imageSourceURLs: [URL]
+
+    var imageSourceURLs: [URL] {
+        ImageSourceURLExtractor(text: self.text ?? "").extractAllImageSourceURLs()
+    }
 }
 
 extension BlockPlainObject {
@@ -19,7 +22,5 @@ extension BlockPlainObject {
         } else {
             self.video = nil
         }
-
-        self.imageSourceURLs = block.imageSourceURLs
     }
 }

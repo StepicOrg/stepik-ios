@@ -28,14 +28,7 @@ final class Block: NSManagedObject {
 
     /// The extracted `src` attributes from `text` property.
     var imageSourceURLs: [URL] {
-        guard let text = self.text else {
-            return []
-        }
-
-        let sources = HTMLExtractor.extractAllTagsAttribute(tag: "img", attribute: "src", from: text)
-        let urls = Set(sources.compactMap { URL(string: $0) })
-
-        return Array(urls)
+        ImageSourceURLExtractor(text: self.text ?? "").extractAllImageSourceURLs()
     }
 
     required convenience init(json: JSON) {
