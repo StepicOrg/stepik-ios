@@ -512,6 +512,9 @@ RetentionNotificationOnNextDayText = "You've done a great job learning so far. C
 RetentionNotificationOnThirdDayTitle = "Time to study";
 RetentionNotificationOnThirdDayText = "You haven't been here for a while. Come back and continue study! 💡";
 
+PurchaseCourseNotificationTitle = "One step to new knowledge";
+PurchaseCourseNotificationText = "Were you planning to obtain %@? Finish your purchase and start studying right away!";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 

@@ -7,6 +7,12 @@ struct ProgressPlainObject: Equatable {
     let cost: Int
     let numberOfSteps: Int
     let numberOfStepsPassed: Int
+
+    var percentPassed: Float {
+        self.numberOfSteps != 0
+            ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps) * 100
+            : 100.0
+    }
 }
 
 extension ProgressPlainObject {

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var notificationsService = NotificationsService()
     private lazy var notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private lazy var branchService = BranchService()
+    private lazy var coursePurchaseReminder: CoursePurchaseReminderProtocol = CoursePurchaseReminder.default
     private lazy var spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private lazy var applicationShortcutService: ApplicationShortcutServiceProtocol = ApplicationShortcutService()
     private lazy var userCoursesObserver: UserCoursesObserverProtocol = UserCoursesObserver()
@@ -151,10 +152,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.analytics.send(.applicationDidBecomeActive)
+
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
+
         self.notificationsService.removeRetentionNotifications()
+        self.coursePurchaseReminder.updateAllPurchaseNotifications()
+
         self.userCoursesObserver.startObserving()
         self.visitedCoursesCleaner.addObserves()
+
         IAPService.shared.prefetchProducts()
 
         if #available(iOS 14.0, *) {

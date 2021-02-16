@@ -219,6 +219,11 @@ enum CourseInfo {
         }
     }
 
+    /// Update remind purchase course notification
+    enum PurchaseNotificationUpdate {
+        struct Request {}
+    }
+
     /// Present in-app purchases are not allowed alert
     enum IAPNotAllowedPresentation {
         struct Response {

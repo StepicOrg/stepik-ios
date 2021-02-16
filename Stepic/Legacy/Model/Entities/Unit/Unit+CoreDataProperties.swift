@@ -48,7 +48,7 @@ extension Unit {
             self.managedId = newId as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
@@ -57,13 +57,13 @@ extension Unit {
             self.managedSectionId = newId as NSNumber?
         }
         get {
-             managedSectionId?.intValue ?? -1
+            managedSectionId?.intValue ?? -1
         }
     }
 
     var progressId: String? {
         get {
-             managedProgressId
+            managedProgressId
         }
         set(value) {
             managedProgressId = value
@@ -75,7 +75,7 @@ extension Unit {
             self.managedLessonId = newId as NSNumber?
         }
         get {
-             managedLessonId?.intValue ?? -1
+            managedLessonId?.intValue ?? -1
         }
     }
 
@@ -84,7 +84,7 @@ extension Unit {
             self.managedPosition = value as NSNumber?
         }
         get {
-             managedPosition?.intValue ?? -1
+            managedPosition?.intValue ?? -1
         }
     }
 
@@ -93,7 +93,7 @@ extension Unit {
             self.managedBeginDate = date
         }
         get {
-             managedBeginDate
+            managedBeginDate
         }
     }
 
@@ -102,7 +102,7 @@ extension Unit {
             self.managedSoftDeadline = date
         }
         get {
-             managedSoftDeadline
+            managedSoftDeadline
         }
     }
 
@@ -111,7 +111,7 @@ extension Unit {
             self.managedHardDeadline = date
         }
         get {
-             managedHardDeadline
+            managedHardDeadline
         }
     }
 
@@ -120,13 +120,13 @@ extension Unit {
             self.managedActive = value as NSNumber?
         }
         get {
-             managedActive?.boolValue ?? false
+            managedActive?.boolValue ?? false
         }
     }
 
     var progress: Progress? {
         get {
-             managedProgress
+            managedProgress
         }
         set(value) {
             managedProgress = value
@@ -135,7 +135,7 @@ extension Unit {
 
     var lesson: Lesson? {
         get {
-             managedLesson
+            managedLesson
         }
         set(value) {
             self.managedLesson = value
@@ -148,13 +148,13 @@ extension Unit {
         }
 
         get {
-             (self.managedAssignmentsArray as? [Int]) ?? []
+            (self.managedAssignmentsArray as? [Int]) ?? []
         }
     }
 
     var assignments: [Assignment] {
         get {
-             (managedAssignments?.array as? [Assignment]) ?? []
+            (managedAssignments?.array as? [Assignment]) ?? []
         }
 
         set(value) {
@@ -164,7 +164,7 @@ extension Unit {
 
     var section: Section? {
         get {
-             managedSection
+            managedSection
         }
         set(value) {
             self.managedSection = value

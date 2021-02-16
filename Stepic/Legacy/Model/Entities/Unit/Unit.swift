@@ -37,17 +37,21 @@ final class Unit: NSManagedObject, IDFetchable {
         initialize(json)
     }
 
-    func loadAssignments(_ completion: @escaping (() -> Void), errorHandler: @escaping (() -> Void)) {
-        _ = ApiDataDownloader.assignments.retrieve(ids: self.assignmentsArray, existing: self.assignments, refreshMode: .update, success: {
-            newAssignments in
-            self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
-            completion()
-            }, error: {
-                _ in
+    func loadAssignments(_ completion: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+        _ = ApiDataDownloader.assignments.retrieve(
+            ids: self.assignmentsArray,
+            existing: self.assignments,
+            refreshMode: .update,
+            success: { newAssignments in
+                self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
+                completion()
+            },
+            error: { _ in
                 print("Error while downloading assignments")
                 errorHandler()
-        })
-   }
+            }
+        )
+    }
 
     static func getUnit(id: Int) -> Unit? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
