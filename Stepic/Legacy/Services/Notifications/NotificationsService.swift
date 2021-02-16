@@ -79,6 +79,7 @@ final class NotificationsService {
         case retentionNextDay = "retention-next-day"
         case retentionThirdDay = "retention-third-day"
         case storyTemplates = "story-templates"
+        case remindPurchaseCourse = "remind-purchase-course"
     }
 }
 

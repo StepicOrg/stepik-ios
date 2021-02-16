@@ -605,6 +605,7 @@
 		2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */; };
 		2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */; };
 		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
+		2C64995425DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
 		2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C698C9424CEA90100979661 /* NewProfileCoverView.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
@@ -2221,6 +2222,7 @@
 		2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C63C776253EFE2300B20195 /* TableDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataset.swift; sourceTree = "<group>"; };
+		2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCourseLocalNotificationProvider.swift; sourceTree = "<group>"; };
 		2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_personal_preferences_v62.xcdatamodel; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
@@ -6421,6 +6423,7 @@
 				08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */,
 				0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */,
 				2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */,
+				2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */,
 				62E9863EA3DABDA4ACF78273 /* RetentionLocalNotificationProvider.swift */,
 			);
 			path = Notifications;
@@ -10000,6 +10003,7 @@
 				62E9888DF0D85074AFE0092C /* StepViewController.swift in Sources */,
 				62E986D61FF5B6B4692F3D7F /* StepViewModel.swift in Sources */,
 				62E98BFC923309B4590E58C3 /* StepInputProtocol.swift in Sources */,
+				2C64995425DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift in Sources */,
 				62E98BDCB4B4D53580E841E4 /* StepOutputProtocol.swift in Sources */,
 				62E982E78135FFD95288E366 /* StepControlsView.swift in Sources */,
 				62E988F76FA263D820183158 /* StepDiscussionThreadButton.swift in Sources */,
