@@ -605,6 +605,7 @@
 		2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */; };
 		2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */; };
 		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
+		2C64995425DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
 		2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C698C9424CEA90100979661 /* NewProfileCoverView.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
@@ -713,6 +714,8 @@
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C936D45243D3ADB00A4A4A9 /* ApplicationThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */; };
 		2C936D47243D3FCE00A4A4A9 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */; };
+		2C93717225DBB96C00004A61 /* CoursePurchaseReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93717125DBB96C00004A61 /* CoursePurchaseReminder.swift */; };
+		2C93717D25DBBCA100004A61 /* UNNotificationTrigger+nextTriggerDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93717C25DBBCA100004A61 /* UNNotificationTrigger+nextTriggerDate.swift */; };
 		2C9414F1256D75500010B9A6 /* SimpleCourseListWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9414F0256D75500010B9A6 /* SimpleCourseListWidgetViewModel.swift */; };
 		2C9414FD256D7D0A0010B9A6 /* DefaultSimpleCourseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9414FC256D7D0A0010B9A6 /* DefaultSimpleCourseListCollectionViewCell.swift */; };
 		2C941505256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C941504256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift */; };
@@ -2221,6 +2224,7 @@
 		2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C63C776253EFE2300B20195 /* TableDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataset.swift; sourceTree = "<group>"; };
+		2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCourseLocalNotificationProvider.swift; sourceTree = "<group>"; };
 		2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_personal_preferences_v62.xcdatamodel; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
@@ -2332,6 +2336,8 @@
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationThemeService.swift; sourceTree = "<group>"; };
 		2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
+		2C93717125DBB96C00004A61 /* CoursePurchaseReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchaseReminder.swift; sourceTree = "<group>"; };
+		2C93717C25DBBCA100004A61 /* UNNotificationTrigger+nextTriggerDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotificationTrigger+nextTriggerDate.swift"; sourceTree = "<group>"; };
 		2C9414F0256D75500010B9A6 /* SimpleCourseListWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCourseListWidgetViewModel.swift; sourceTree = "<group>"; };
 		2C9414FC256D7D0A0010B9A6 /* DefaultSimpleCourseListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSimpleCourseListCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C941504256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSimpleCourseListWidgetView.swift; sourceTree = "<group>"; };
@@ -4151,6 +4157,14 @@
 				2C7AC3E725B0B60F0024D4D2 /* ContinueLearningEntryView.swift */,
 			);
 			path = EntryView;
+			sourceTree = "<group>";
+		};
+		2C93717B25DBBC7100004A61 /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				2C93717C25DBBCA100004A61 /* UNNotificationTrigger+nextTriggerDate.swift */,
+			);
+			path = UserNotifications;
 			sourceTree = "<group>";
 		};
 		2C9414F8256D7B540010B9A6 /* Views */ = {
@@ -6421,6 +6435,7 @@
 				08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */,
 				0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */,
 				2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */,
+				2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */,
 				62E9863EA3DABDA4ACF78273 /* RetentionLocalNotificationProvider.swift */,
 			);
 			path = Notifications;
@@ -7210,6 +7225,7 @@
 				2C096587236C5706005B771A /* SwiftStdlib */,
 				2C096588236C5727005B771A /* ThirdParty */,
 				2C096585236C56B4005B771A /* UIKit */,
+				2C93717B25DBBC7100004A61 /* UserNotifications */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -7680,6 +7696,7 @@
 			children = (
 				2CCDD80624F8A7D7006644A8 /* ApplicationShortcutService.swift */,
 				2C936D44243D3ADB00A4A4A9 /* ApplicationThemeService.swift */,
+				2C93717125DBB96C00004A61 /* CoursePurchaseReminder.swift */,
 				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				2C7AC4D525B462BC0024D4D2 /* ImagePreheater.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
@@ -9193,6 +9210,7 @@
 				2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
+				2C93717D25DBBCA100004A61 /* UNNotificationTrigger+nextTriggerDate.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
 				0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
@@ -9963,6 +9981,7 @@
 				62E989FA1FEC604ACCD3DC48 /* NewStringQuizPresenter.swift in Sources */,
 				62E98BBD22F829D149B6A5B5 /* NewStringQuizView.swift in Sources */,
 				62E98E80CCAB1644F30BB353 /* NewStringQuizViewController.swift in Sources */,
+				2C93717225DBB96C00004A61 /* CoursePurchaseReminder.swift in Sources */,
 				62E98F6ECD163058DEB1CA70 /* NewStringQuizViewModel.swift in Sources */,
 				62E9808CF9B6F0466E4DFD35 /* UnsupportedQuizAssembly.swift in Sources */,
 				62E98C318FB919C9C4E39AD1 /* UnsupportedQuizDataFlow.swift in Sources */,
@@ -10000,6 +10019,7 @@
 				62E9888DF0D85074AFE0092C /* StepViewController.swift in Sources */,
 				62E986D61FF5B6B4692F3D7F /* StepViewModel.swift in Sources */,
 				62E98BFC923309B4590E58C3 /* StepInputProtocol.swift in Sources */,
+				2C64995425DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift in Sources */,
 				62E98BDCB4B4D53580E841E4 /* StepOutputProtocol.swift in Sources */,
 				62E982E78135FFD95288E366 /* StepControlsView.swift in Sources */,
 				62E988F76FA263D820183158 /* StepDiscussionThreadButton.swift in Sources */,

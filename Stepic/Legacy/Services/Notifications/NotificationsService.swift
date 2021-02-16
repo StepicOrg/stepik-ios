@@ -79,6 +79,7 @@ final class NotificationsService {
         case retentionNextDay = "retention-next-day"
         case retentionThirdDay = "retention-third-day"
         case storyTemplates = "story-templates"
+        case remindPurchaseCourse = "remind-purchase-course"
     }
 }
 
@@ -143,6 +144,12 @@ extension NotificationsService {
             route(to: .home)
         } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
             if let courseID = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int {
+                route(to: .course(courseID: courseID))
+            } else {
+                route(to: .home)
+            }
+        } else if key.localizedCaseInsensitiveContains(NotificationType.remindPurchaseCourse.rawValue) {
+            if let courseID = userInfo[PurchaseCourseLocalNotificationProvider.Key.course.rawValue] as? Int {
                 route(to: .course(courseID: courseID))
             } else {
                 route(to: .home)

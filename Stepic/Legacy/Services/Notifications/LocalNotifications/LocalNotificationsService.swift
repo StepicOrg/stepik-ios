@@ -104,18 +104,7 @@ final class LocalNotificationsService {
                 throw Error.badContentProvider
             }
 
-            let nextTriggerDate: Date? = {
-                switch notificationTrigger {
-                case let timeIntervalTrigger as UNTimeIntervalNotificationTrigger:
-                    return timeIntervalTrigger.nextTriggerDate()
-                case let calendarTrigger as UNCalendarNotificationTrigger:
-                    return calendarTrigger.nextTriggerDate()
-                default:
-                    return nil
-                }
-            }()
-
-            guard self.isFireDateValid(nextTriggerDate) else {
+            guard self.isFireDateValid(notificationTrigger.nextTriggerDate) else {
                 throw Error.badFireDate
             }
 
