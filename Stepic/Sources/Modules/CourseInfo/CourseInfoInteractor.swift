@@ -21,6 +21,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let provider: CourseInfoProviderProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
     private let courseSubscriber: CourseSubscriberProtocol
+    private let coursePurchaseReminder: CoursePurchaseReminderProtocol
     private let userAccountService: UserAccountServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let notificationSuggestionManager: NotificationSuggestionManager
@@ -89,6 +90,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         provider: CourseInfoProviderProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         courseSubscriber: CourseSubscriberProtocol,
+        coursePurchaseReminder: CoursePurchaseReminderProtocol,
         userAccountService: UserAccountServiceProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
@@ -105,6 +107,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.provider = provider
         self.networkReachabilityService = networkReachabilityService
         self.courseSubscriber = courseSubscriber
+        self.coursePurchaseReminder = coursePurchaseReminder
         self.userAccountService = userAccountService
         self.adaptiveStorageManager = adaptiveStorageManager
         self.notificationSuggestionManager = notificationSuggestionManager
@@ -242,7 +245,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         response: .init(course: course, courseViewSource: self.courseViewSource)
                     )
                 }
-                return
+
+                return self.coursePurchaseReminder.remindPurchase(course)
             }
 
             self.analytics.send(.authorizedUserTappedJoinCourse)

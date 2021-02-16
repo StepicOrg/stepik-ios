@@ -148,6 +148,12 @@ extension NotificationsService {
             } else {
                 route(to: .home)
             }
+        } else if key.localizedCaseInsensitiveContains(NotificationType.remindPurchaseCourse.rawValue) {
+            if let courseID = userInfo[PurchaseCourseLocalNotificationProvider.Key.course.rawValue] as? Int {
+                route(to: .course(courseID: courseID))
+            } else {
+                route(to: .home)
+            }
         } else {
             route(to: .home)
         }
