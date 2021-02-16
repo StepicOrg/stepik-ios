@@ -107,6 +107,7 @@ final class CourseInfoViewController: UIViewController {
         super.viewDidAppear(animated)
 
         self.interactor.doOnlineModeReset(request: .init())
+        self.interactor.doPurchaseCourseNotificationUpdate(request: .init())
 
         if self.didJustSubscribe {
             NotificationPermissionStatus.current.done { status in

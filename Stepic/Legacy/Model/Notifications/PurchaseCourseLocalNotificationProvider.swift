@@ -5,7 +5,8 @@ final class PurchaseCourseLocalNotificationProvider: LocalNotificationContentPro
     private static let hourDelay = 1
     private static let defaultFireHour = 12
 
-    private let course: CoursePlainObject
+    private let courseID: Course.IdType
+    private let courseTitle: String
     private let referenceDate: Date
 
     private var dateComponents: DateComponents? {
@@ -37,19 +38,19 @@ final class PurchaseCourseLocalNotificationProvider: LocalNotificationContentPro
     var body: String {
         NSString.localizedUserNotificationString(
             forKey: "PurchaseCourseNotificationText",
-            arguments: [self.course.title]
+            arguments: [self.courseTitle]
         )
     }
 
     var userInfo: [AnyHashable: Any] {
         [
-            Key.course.rawValue: self.course.id,
+            Key.course.rawValue: self.courseID,
             NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.remindPurchaseCourse.rawValue
         ]
     }
 
     var identifier: String {
-        "\(NotificationsService.NotificationType.remindPurchaseCourse.rawValue)_course_\(self.course.id)"
+        "\(NotificationsService.NotificationType.remindPurchaseCourse.rawValue)_course_\(self.courseID)"
     }
 
     var trigger: UNNotificationTrigger? {
@@ -60,8 +61,9 @@ final class PurchaseCourseLocalNotificationProvider: LocalNotificationContentPro
         return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
     }
 
-    init(course: CoursePlainObject, referenceDate: Date = Date()) {
-        self.course = course
+    init(courseID: Course.IdType, courseTitle: String = "", referenceDate: Date = Date()) {
+        self.courseID = courseID
+        self.courseTitle = courseTitle
         self.referenceDate = referenceDate
     }
 
