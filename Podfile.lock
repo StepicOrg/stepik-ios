@@ -19,7 +19,7 @@ PODS:
     - CocoaLumberjack/Core (= 3.7.0)
   - CocoaLumberjack/Core (3.7.0)
   - CRToast (0.0.9)
-  - DeviceKit (4.2.1)
+  - DeviceKit (4.3.0)
   - DownloadButton (0.1.0)
   - EasyTipView (2.1.0)
   - FBSDKCoreKit (8.2.0):
@@ -209,7 +209,7 @@ DEPENDENCIES:
   - Branch (= 1.38.0)
   - Charts (= 3.6.0)
   - CRToast (= 0.0.9)
-  - DeviceKit (= 4.2.1)
+  - DeviceKit (= 4.3.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.1.0)
   - FBSDKCoreKit (= 8.2.0)
@@ -340,7 +340,7 @@ SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
-  DeviceKit: cadb5ff25d45fe186778bf2d0fd2ea4750542189
+  DeviceKit: 7decde449c308ac7e816e2184ded1c7c596fb885
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
@@ -395,6 +395,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
 
-PODFILE CHECKSUM: 35600ed0bb9fb369ed71665dfb85677b16c9bd73
+PODFILE CHECKSUM: 63555c34b78f13a7a435d743a9f0369a007e03d8
 
 COCOAPODS: 1.10.1
