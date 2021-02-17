@@ -38,7 +38,9 @@ final class PersonalOffersService: PersonalOffersServiceProtocol {
     }
 
     func fetchPersonalOffers(userID: User.IdType) -> Promise<[StorageRecord]> {
-        self.storageRecordsNetworkService.fetch(userID: userID, kindPrefixType: .personalOffers).map { $0.0 }
+        self.storageRecordsNetworkService
+            .fetchWithSortingByUpdateDateDesc(userID: userID, kindPrefixType: .personalOffers)
+            .map { $0.0 }
     }
 
     enum Error: Swift.Error {
