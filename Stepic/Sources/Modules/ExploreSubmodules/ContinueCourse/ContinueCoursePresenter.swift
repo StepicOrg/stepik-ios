@@ -16,8 +16,6 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
         case .failure(let error):
             if case ContinueCourseInteractor.Error.noLastCourse = error {
                 self.viewController?.displayLastCourse(viewModel: .init(state: .empty))
-            } else {
-                self.viewController?.displayLastCourse(viewModel: .init(state: .error))
             }
         }
     }

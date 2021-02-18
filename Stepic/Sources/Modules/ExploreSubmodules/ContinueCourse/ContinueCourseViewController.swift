@@ -5,13 +5,10 @@ protocol ContinueCourseViewControllerProtocol: AnyObject {
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel)
 }
 
-final class ContinueCourseViewController: UIViewController, ControllerWithStepikPlaceholder {
+final class ContinueCourseViewController: UIViewController {
     private let interactor: ContinueCourseInteractorProtocol
     private var state: ContinueCourse.ViewControllerState
 
-    var placeholderContainer = StepikPlaceholderControllerContainer(
-        appearance: .init(placeholderAppearance: .init(backgroundColor: .clear))
-    )
     lazy var continueCourseView = self.view as? ContinueCourseView
     private lazy var continueLearningTooltip = TooltipFactory.continueLearningWidget
 
@@ -40,22 +37,6 @@ final class ContinueCourseViewController: UIViewController, ControllerWithStepik
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.registerPlaceholder(
-            placeholder: StepikPlaceholder(
-                .tryAgain,
-                action: { [weak self] in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.updateState(newState: .loading)
-                    strongSelf.interactor.doLastCourseRefresh(request: .init())
-                }
-            ),
-            for: .connectionError
-        )
-
         self.updateState(newState: self.state)
     }
 
@@ -69,19 +50,14 @@ final class ContinueCourseViewController: UIViewController, ControllerWithStepik
             self.state = newState
         }
 
-        self.isPlaceholderShown = false
         self.continueCourseView?.hideLoading()
         self.continueCourseView?.hideEmpty()
-        self.continueCourseView?.hideError()
 
         switch newState {
         case .loading:
             self.continueCourseView?.showLoading()
         case .empty:
             self.continueCourseView?.showEmpty()
-        case .error:
-            self.continueCourseView?.showError()
-            self.showPlaceholder(for: .connectionError)
         case .result(let viewModel):
             self.continueCourseView?.configure(viewModel: viewModel)
             self.interactor.doTooltipAvailabilityCheck(request: .init())

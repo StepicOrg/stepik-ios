@@ -47,7 +47,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             }
         }.catch { _ in
             if self.currentCourse == nil {
-                self.presenter.presentLastCourse(response: .init(result: .failure(Error.fetchFailed)))
+                self.moduleOutput?.hideContinueCourse()
             }
         }
     }
@@ -75,7 +75,6 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     }
 
     enum Error: Swift.Error {
-        case fetchFailed
         case noLastCourse
     }
 }

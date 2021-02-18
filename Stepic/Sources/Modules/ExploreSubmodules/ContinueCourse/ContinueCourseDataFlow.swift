@@ -39,7 +39,6 @@ enum ContinueCourse {
     enum ViewControllerState {
         case loading
         case empty
-        case error
         case result(data: ContinueCourseViewModel)
     }
 }

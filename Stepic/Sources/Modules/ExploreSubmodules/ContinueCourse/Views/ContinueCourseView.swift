@@ -85,14 +85,6 @@ final class ContinueCourseView: UIView {
         self.emptyView.isHidden = true
     }
 
-    func showError() {
-        self.lastStepView.isHidden = true
-    }
-
-    func hideError() {
-        self.lastStepView.isHidden = false
-    }
-
     @objc
     private func lastStepViewClicked() {
         self.delegate?.continueCourseDidClickContinue(self)
