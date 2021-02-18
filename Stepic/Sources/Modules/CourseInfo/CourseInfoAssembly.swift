@@ -62,6 +62,7 @@ final class CourseInfoAssembly: Assembly {
             provider: provider,
             networkReachabilityService: NetworkReachabilityService(),
             courseSubscriber: CourseSubscriber(),
+            coursePurchaseReminder: CoursePurchaseReminder.default,
             userAccountService: UserAccountService(),
             adaptiveStorageManager: AdaptiveStorageManager(),
             notificationSuggestionManager: NotificationSuggestionManager(),

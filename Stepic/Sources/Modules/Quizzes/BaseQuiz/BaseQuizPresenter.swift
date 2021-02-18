@@ -144,6 +144,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         let text = "<div style=\"white-space: pre-wrap;\">\(text)</div>"
 
         let injections = ContentProcessor.defaultInjections + [
+            FontInjection(font: Typography.quizFeedback),
             TextColorInjection(dynamicColor: .stepikPrimaryText)
         ]
 

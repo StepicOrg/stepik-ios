@@ -10,10 +10,10 @@ enum CourseInfoTabSyllabus {
             let downloadState: DownloadState
         }
 
-        let sections: [Record<Section>]
-        let units: [Record<Unit?>]
+        let sections: [Record<SectionPlainObject>]
+        let units: [Record<UnitPlainObject?>]
         let sectionsDeadlines: [SectionDeadline]
-        let course: Course
+        let course: CoursePlainObject
     }
 
     enum DownloadState {
@@ -119,8 +119,8 @@ enum CourseInfoTabSyllabus {
     /// Update download state
     enum DownloadButtonStateUpdate {
         enum Source {
-            case unit(entity: Unit)
-            case section(entity: Section)
+            case unit(entity: UnitPlainObject)
+            case section(entity: SectionPlainObject)
         }
 
         enum Result {

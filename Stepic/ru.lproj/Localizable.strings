@@ -514,6 +514,9 @@ RetentionNotificationOnNextDayText = "Вы проделали отличную �
 RetentionNotificationOnThirdDayTitle = "Время учиться";
 RetentionNotificationOnThirdDayText = "Вас давно не было. Заходите и учитесь новому! 💡";
 
+PurchaseCourseNotificationTitle = "Один шаг до новых знаний";
+PurchaseCourseNotificationText = "Вы собирались приобрести курс %@? Завершите покупку и начните учиться прямо сейчас!";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
 

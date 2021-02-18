@@ -14,6 +14,7 @@ protocol CourseInfoInteractorProtocol {
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
     func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request)
     func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request)
+    func doPurchaseCourseNotificationUpdate(request: CourseInfo.PurchaseNotificationUpdate.Request)
 }
 
 final class CourseInfoInteractor: CourseInfoInteractorProtocol {
@@ -21,6 +22,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let provider: CourseInfoProviderProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
     private let courseSubscriber: CourseSubscriberProtocol
+    private let coursePurchaseReminder: CoursePurchaseReminderProtocol
     private let userAccountService: UserAccountServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let notificationSuggestionManager: NotificationSuggestionManager
@@ -89,6 +91,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         provider: CourseInfoProviderProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         courseSubscriber: CourseSubscriberProtocol,
+        coursePurchaseReminder: CoursePurchaseReminderProtocol,
         userAccountService: UserAccountServiceProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
@@ -105,6 +108,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.provider = provider
         self.networkReachabilityService = networkReachabilityService
         self.courseSubscriber = courseSubscriber
+        self.coursePurchaseReminder = coursePurchaseReminder
         self.userAccountService = userAccountService
         self.adaptiveStorageManager = adaptiveStorageManager
         self.notificationSuggestionManager = notificationSuggestionManager
@@ -242,7 +246,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         response: .init(course: course, courseViewSource: self.courseViewSource)
                     )
                 }
-                return
+
+                return self.coursePurchaseReminder.createPurchaseNotification(for: course)
             }
 
             self.analytics.send(.authorizedUserTappedJoinCourse)
@@ -279,6 +284,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         if let course = self.currentCourse {
             self.iapService.retryValidateReceipt(course: course, delegate: self)
         }
+    }
+
+    func doPurchaseCourseNotificationUpdate(request: CourseInfo.PurchaseNotificationUpdate.Request) {
+        self.coursePurchaseReminder.updatePurchaseNotification(for: self.courseID)
     }
 
     // MARK: Private methods
@@ -461,6 +470,7 @@ extension CourseInfoInteractor: IAPServiceDelegate {
     func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         self.doCourseRefresh(request: .init())
+        self.coursePurchaseReminder.removePurchaseNotification(for: courseID)
     }
 
     func iapService(

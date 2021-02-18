@@ -11,6 +11,8 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
+    private static let maxConcurrentOperations = 3
+
     weak var moduleOutput: CourseInfoTabSyllabusOutputProtocol?
 
     private let presenter: CourseInfoTabSyllabusPresenterProtocol
@@ -70,6 +72,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     )
     private lazy var unitsFetchBackgroundQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.UnitsFetch"
+    )
+    private lazy var downloadUpdatesQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.DownloadUpdate"
     )
 
     init(
@@ -183,54 +188,55 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return print("CourseInfoTabSyllabusInteractor :: unit doesn't exists in current units, id = \(id)")
             }
 
-            let currentState = self.getDownloadingStateForUnit(unit)
-            switch currentState {
-            case .cached:
-                self.presenter.presentDeleteDownloadsConfirmationAlert(
-                    response: .init(
-                        type: .unit,
-                        cancelActionHandler: { [weak self] in
-                            self?.analytics.send(
-                                .deleteDownloadConfirmationInteracted(content: .lesson, isConfirmed: false)
-                            )
-                        },
-                        confirmedActionHandler: { [weak self] in
-                            guard let strongSelf = self else {
-                                return
-                            }
-
-                            strongSelf.analytics.send(
-                                .deleteDownloadConfirmationInteracted(content: .lesson, isConfirmed: true)
-                            )
-                            strongSelf.removeCached(unit: unit)
-                        }
-                    )
-                )
-            case .notCached:
-                if shouldConfirmUseOfCellularDataForDownloading {
-                    self.presenter.presentDownloadOnCellularDataAlert(
+            self.getDownloadingStateForUnit(unit).done { currentState in
+                switch currentState {
+                case .cached:
+                    self.presenter.presentDeleteDownloadsConfirmationAlert(
                         response: .init(
-                            useAlwaysActionHandler: { [weak self] in
+                            type: .unit,
+                            cancelActionHandler: { [weak self] in
+                                self?.analytics.send(
+                                    .deleteDownloadConfirmationInteracted(content: .lesson, isConfirmed: false)
+                                )
+                            },
+                            confirmedActionHandler: { [weak self] in
                                 guard let strongSelf = self else {
                                     return
                                 }
 
-                                strongSelf.useCellularDataForDownloadsStorageManager
-                                    .shouldUseCellularDataForDownloads = true
-                                strongSelf.startDownloading(unit: unit)
-                            },
-                            justOnceActionHandler: { [weak self] in
-                                self?.startDownloading(unit: unit)
+                                strongSelf.analytics.send(
+                                    .deleteDownloadConfirmationInteracted(content: .lesson, isConfirmed: true)
+                                )
+                                strongSelf.removeCached(unit: unit)
                             }
                         )
                     )
-                } else {
-                    self.startDownloading(unit: unit)
+                case .notCached:
+                    if shouldConfirmUseOfCellularDataForDownloading {
+                        self.presenter.presentDownloadOnCellularDataAlert(
+                            response: .init(
+                                useAlwaysActionHandler: { [weak self] in
+                                    guard let strongSelf = self else {
+                                        return
+                                    }
+
+                                    strongSelf.useCellularDataForDownloadsStorageManager
+                                        .shouldUseCellularDataForDownloads = true
+                                    strongSelf.startDownloading(unit: unit)
+                                },
+                                justOnceActionHandler: { [weak self] in
+                                    self?.startDownloading(unit: unit)
+                                }
+                            )
+                        )
+                    } else {
+                        self.startDownloading(unit: unit)
+                    }
+                case .downloading:
+                    self.cancelDownloading(unit: unit)
+                default:
+                    break
                 }
-            case .downloading:
-                self.cancelDownloading(unit: unit)
-            default:
-                break
             }
         }
 
@@ -239,104 +245,106 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return print("CourseInfoTabSyllabusInteractor :: section doesn't exists in current sections, id = \(id)")
             }
 
-            let currentState = self.getDownloadingStateForSection(section)
-            switch currentState {
-            case .cached:
-                self.presenter.presentDeleteDownloadsConfirmationAlert(
-                    response: .init(
-                        type: .section,
-                        cancelActionHandler: { [weak self] in
-                            self?.analytics.send(
-                                .deleteDownloadConfirmationInteracted(content: .section, isConfirmed: false)
-                            )
-                        },
-                        confirmedActionHandler: { [weak self] in
-                            guard let strongSelf = self else {
-                                return
-                            }
-
-                            strongSelf.analytics.send(
-                                .deleteDownloadConfirmationInteracted(content: .section, isConfirmed: true)
-                            )
-                            strongSelf.removeCached(section: section)
-                        }
-                    )
-                )
-            case .notCached:
-                if shouldConfirmUseOfCellularDataForDownloading {
-                    self.presenter.presentDownloadOnCellularDataAlert(
+            self.getDownloadingStateForSection(section).done { currentState in
+                switch currentState {
+                case .cached:
+                    self.presenter.presentDeleteDownloadsConfirmationAlert(
                         response: .init(
-                            useAlwaysActionHandler: { [weak self] in
+                            type: .section,
+                            cancelActionHandler: { [weak self] in
+                                self?.analytics.send(
+                                    .deleteDownloadConfirmationInteracted(content: .section, isConfirmed: false)
+                                )
+                            },
+                            confirmedActionHandler: { [weak self] in
                                 guard let strongSelf = self else {
                                     return
                                 }
 
-                                strongSelf.useCellularDataForDownloadsStorageManager
-                                    .shouldUseCellularDataForDownloads = true
-                                self?.startDownloading(section: section)
-                            },
-                            justOnceActionHandler: { [weak self] in
-                                self?.startDownloading(section: section)
+                                strongSelf.analytics.send(
+                                    .deleteDownloadConfirmationInteracted(content: .section, isConfirmed: true)
+                                )
+                                strongSelf.removeCached(section: section)
                             }
                         )
                     )
-                } else {
-                    self.startDownloading(section: section)
+                case .notCached:
+                    if shouldConfirmUseOfCellularDataForDownloading {
+                        self.presenter.presentDownloadOnCellularDataAlert(
+                            response: .init(
+                                useAlwaysActionHandler: { [weak self] in
+                                    guard let strongSelf = self else {
+                                        return
+                                    }
+
+                                    strongSelf.useCellularDataForDownloadsStorageManager
+                                        .shouldUseCellularDataForDownloads = true
+                                    self?.startDownloading(section: section)
+                                },
+                                justOnceActionHandler: { [weak self] in
+                                    self?.startDownloading(section: section)
+                                }
+                            )
+                        )
+                    } else {
+                        self.startDownloading(section: section)
+                    }
+                case .downloading:
+                    self.cancelDownloading(section: section)
+                default:
+                    break
                 }
-            case .downloading:
-                self.cancelDownloading(section: section)
-            default:
-                break
             }
         }
 
         func handleAll() {
-            let currentState = self.getDownloadingStateForCourse()
-            switch currentState {
-            case .cached:
-                self.presenter.presentDeleteDownloadsConfirmationAlert(
-                    response: .init(
-                        type: .course,
-                        cancelActionHandler: { [weak self] in
-                            self?.analytics.send(
-                                .deleteDownloadConfirmationInteracted(content: .course, isConfirmed: false)
-                            )
-                        },
-                        confirmedActionHandler: { [weak self] in
-                            guard let strongSelf = self else {
-                                return
-                            }
-
-                            strongSelf.analytics.send(
-                                .deleteDownloadConfirmationInteracted(content: .course, isConfirmed: true)
-                            )
-                            strongSelf.removeCachedCourse()
-                        }
-                    )
-                )
-            case .notCached:
-                if shouldConfirmUseOfCellularDataForDownloading {
-                    self.presenter.presentDownloadOnCellularDataAlert(
+            self.getDownloadingStateForCourse().done { currentState in
+                switch currentState {
+                case .cached:
+                    self.presenter.presentDeleteDownloadsConfirmationAlert(
                         response: .init(
-                            useAlwaysActionHandler: { [weak self] in
+                            type: .course,
+                            cancelActionHandler: { [weak self] in
+                                self?.analytics.send(
+                                    .deleteDownloadConfirmationInteracted(content: .course, isConfirmed: false)
+                                )
+                            },
+                            confirmedActionHandler: { [weak self] in
                                 guard let strongSelf = self else {
                                     return
                                 }
 
-                                strongSelf.useCellularDataForDownloadsStorageManager
-                                    .shouldUseCellularDataForDownloads = true
-                                self?.startDownloadingCourse()
-                            },
-                            justOnceActionHandler: { [weak self] in
-                                self?.startDownloadingCourse()
+                                strongSelf.analytics.send(
+                                    .deleteDownloadConfirmationInteracted(content: .course, isConfirmed: true)
+                                )
+                                strongSelf.removeCachedCourse()
                             }
                         )
                     )
-                } else {
-                    self.startDownloadingCourse()
+                case .notCached:
+                    if shouldConfirmUseOfCellularDataForDownloading {
+                        self.presenter.presentDownloadOnCellularDataAlert(
+                            response: .init(
+                                useAlwaysActionHandler: { [weak self] in
+                                    guard let strongSelf = self else {
+                                        return
+                                    }
+
+                                    strongSelf.useCellularDataForDownloadsStorageManager
+                                        .shouldUseCellularDataForDownloads = true
+                                    self?.startDownloadingCourse()
+                                },
+                                justOnceActionHandler: { [weak self] in
+                                    self?.startDownloadingCourse()
+                                }
+                            )
+                        )
+                    } else {
+                        self.startDownloadingCourse()
+                    }
+                default:
+                    print("CourseInfoTabSyllabusInteractor :: did receive invalid state when handle download all")
                 }
-            default:
-                return print("CourseInfoTabSyllabusInteractor :: did receive invalid state when handle download all")
             }
         }
 
@@ -381,9 +389,18 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             if availableUnits.sorted() == allUnits.sorted() {
                 seal.fulfill(())
             } else {
+                var iterator = self.currentSections.values.makeIterator()
+
+                let generator = AnyIterator<Promise<CourseInfoTabSyllabus.SyllabusLoad.Response>> {
+                    guard let section = iterator.next() else {
+                        return nil
+                    }
+
+                    return self.fetchSyllabusSection(section: section)
+                }
+
                 // Load all units in each section
-                let unitsPromises = self.currentSections.values.map { self.fetchSyllabusSection(section: $0) }
-                when(fulfilled: unitsPromises).done { _ in
+                when(fulfilled: generator, concurrently: Self.maxConcurrentOperations).done { _ in
                     seal.fulfill(())
                 }.catch { error in
                     seal.reject(error)
@@ -397,38 +414,43 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        let isEnrolledOnCourse = course.enrolled
+        let plainCourse = CoursePlainObject(course: course)
 
         let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(in: course)
             || self.personalDeadlinesService.hasDeadlines(in: course)
-        let isPersonalDeadlinesEnabled = isPersonalDeadlinesAvailable && isEnrolledOnCourse
 
-        let isPersonalDeadlinesTooltipVisible = !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
-            && isPersonalDeadlinesEnabled
+        self.downloadUpdatesQueue.async {
+            let isPersonalDeadlinesEnabled = isPersonalDeadlinesAvailable && plainCourse.isEnrolled
 
-        let courseDownloadState = self.getDownloadingStateForCourse()
+            let isPersonalDeadlinesTooltipVisible = !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
+                && isPersonalDeadlinesEnabled
 
-        let isDownloadAllAvailable: Bool = {
-            switch courseDownloadState {
-            case .cached, .notCached:
-                return true
-            default:
-                return false
+            self.getDownloadingStateForCourse(plainCourse).done { courseDownloadState in
+                let isDownloadAllAvailable: Bool = {
+                    switch courseDownloadState {
+                    case .cached, .notCached:
+                        return true
+                    default:
+                        return false
+                    }
+                }() && !shouldForceDisableDownloadAll
+
+                DispatchQueue.main.async {
+                    self.presenter.presentCourseSyllabusHeader(
+                        response: .init(
+                            isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
+                            isPersonalDeadlinesEnabled: isPersonalDeadlinesEnabled,
+                            isDownloadAllAvailable: isDownloadAllAvailable,
+                            isPersonalDeadlinesTooltipVisible: isPersonalDeadlinesTooltipVisible,
+                            courseDownloadState: courseDownloadState
+                        )
+                    )
+                }
+
+                if isPersonalDeadlinesTooltipVisible {
+                    self.tooltipStorageManager.didShowOnPersonalDeadlinesButton = true
+                }
             }
-        }() && !shouldForceDisableDownloadAll
-
-        self.presenter.presentCourseSyllabusHeader(
-            response: .init(
-                isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
-                isPersonalDeadlinesEnabled: isPersonalDeadlinesEnabled,
-                isDownloadAllAvailable: isDownloadAllAvailable,
-                isPersonalDeadlinesTooltipVisible: isPersonalDeadlinesTooltipVisible,
-                courseDownloadState: courseDownloadState
-            )
-        )
-
-        if isPersonalDeadlinesTooltipVisible {
-            self.tooltipStorageManager.didShowOnPersonalDeadlinesButton = true
         }
     }
 
@@ -439,10 +461,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             self.provider.fetchUnitsWithLessons(
                 for: section,
                 shouldUseNetwork: true
-            ).done { units in
+            ).then { units -> Guarantee<CourseInfoTabSyllabus.SyllabusData> in
                 self.mergeWithCurrentData(sections: [], units: units, dataSourceType: .remote)
-
-                let data = self.makeSyllabusDataFromCurrentData()
+                return self.makeSyllabusDataFromCurrentData()
+            }.done { data in
                 seal.fulfill(.init(result: .success(data)))
             }.catch { error in
                 print("CourseInfoTabSyllabusInteractor :: unable to fetch section, error = \(error)")
@@ -457,8 +479,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     ) -> Promise<CourseInfoTabSyllabus.SyllabusLoad.Response> {
         Promise { seal in
             // Load sections & progresses
-            self.provider.fetchSections(for: course, shouldUseNetwork: isOnline).then {
-                sections -> Promise<([Section], [[Unit]])> in
+            self.provider.fetchSections(
+                for: course,
+                shouldUseNetwork: isOnline
+            ).then { sections -> Promise<([Section], [[Unit]])> in
                 // In offline mode load units & lessons just now
                 // In online mode load units & lessons on demand
 
@@ -470,14 +494,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 let onlineUnitsPromise = Promise.value([[Unit]]())
 
                 let unitsPromise = isOnline ? onlineUnitsPromise : offlineUnitsPromise
+
                 return unitsPromise.map { (sections, $0) }
-            }.done { result in
+            }.then { result -> Guarantee<CourseInfoTabSyllabus.SyllabusData> in
                 let sections = result.0
                 let units = Array(result.1.joined())
 
                 self.mergeWithCurrentData(sections: sections, units: units, dataSourceType: isOnline ? .remote : .cache)
 
-                let data = self.makeSyllabusDataFromCurrentData()
+                return self.makeSyllabusDataFromCurrentData()
+            }.done { data in
                 seal.fulfill(.init(result: .success(data)))
             }.catch { error in
                 print("CourseInfoTabSyllabusInteractor :: unable to fetch syllabus, error = \(error)")
@@ -511,29 +537,62 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    private func makeSyllabusDataFromCurrentData() -> CourseInfoTabSyllabus.SyllabusData {
-        CourseInfoTabSyllabus.SyllabusData(
-            sections: self.currentSections
-                .map { uid, entity in
-                    .init(
-                        uniqueIdentifier: uid,
-                        entity: entity,
-                        downloadState: self.getDownloadingStateForSection(entity)
+    private func makeSyllabusDataFromCurrentData() -> Guarantee<CourseInfoTabSyllabus.SyllabusData> {
+        let plainSections = self.currentSections.mapValues(SectionPlainObject.init)
+        let plainUnits = self.currentUnits.mapValues { unitOrNil -> UnitPlainObject? in
+            if let unit = unitOrNil {
+                return UnitPlainObject(unit: unit)
+            }
+            return nil
+        }
+        let plainCourse = CoursePlainObject(course: self.currentCourse.require())
+
+        return Guarantee { seal in
+            self.downloadUpdatesQueue.async {
+                let sectionsArray = Array(plainSections.values)
+                let sectionsIDs: [UniqueIdentifierType] = Array(plainSections.keys)
+
+                let unitsArray = Array(plainUnits.values)
+                let unitsIDs: [UniqueIdentifierType] = Array(plainUnits.keys)
+
+                firstly {
+                    self.getDownloadingStatesForSections(sectionsArray)
+                        .map { zip(sectionsIDs, $0) }
+                }.then { sectionsResult in
+                    self.getDownloadingStatesForUnits(unitsArray, in: sectionsArray)
+                        .map { (sectionsResult, zip(unitsIDs, $0)) }
+                }.map { sectionsResult, unitsResult in
+                    (Dictionary(uniqueKeysWithValues: sectionsResult), Dictionary(uniqueKeysWithValues: unitsResult))
+                }.done { sectionsDownloadStates, unitsDownloadStates in
+                    let data = CourseInfoTabSyllabus.SyllabusData(
+                        sections: plainSections
+                            .map { uid, entity in
+                                .init(
+                                    uniqueIdentifier: uid,
+                                    entity: entity,
+                                    downloadState: sectionsDownloadStates[uid] ?? .notAvailable
+                                )
+                            }
+                            .sorted(by: { $0.entity.position < $1.entity.position }),
+                        units: plainUnits
+                            .map { uid, entity in
+                                .init(
+                                    uniqueIdentifier: uid,
+                                    entity: entity,
+                                    downloadState: unitsDownloadStates[uid] ?? .notAvailable
+                                )
+                            }
+                            .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
+                        sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
+                        course: plainCourse
                     )
+
+                    DispatchQueue.main.async {
+                        seal(data)
+                    }
                 }
-                .sorted(by: { $0.entity.position < $1.entity.position }),
-            units: self.currentUnits
-                .map { uid, entity in
-                    .init(
-                        uniqueIdentifier: uid,
-                        entity: entity,
-                        downloadState: entity != nil ? self.getDownloadingStateForUnit(entity.require()) : .notAvailable
-                    )
-                }
-                .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
-            sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
-            course: self.currentCourse.require()
-        )
+            }
+        }
     }
 
     private func getUniqueIdentifierBySectionID(_ sectionID: Section.IdType) -> UniqueIdentifierType { "\(sectionID)" }
@@ -632,12 +691,18 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             return
         }
 
-        self.presenter.presentDownloadButtonUpdate(
-            response: .init(
-                source: .unit(entity: unit),
-                downloadState: .downloading(progress: progress)
-            )
-        )
+        self.downloadUpdatesQueue.async {
+            let plainUnit = UnitPlainObject(unit: unit)
+
+            DispatchQueue.main.async {
+                self.presenter.presentDownloadButtonUpdate(
+                    response: .init(
+                        source: .unit(entity: plainUnit),
+                        downloadState: .downloading(progress: progress)
+                    )
+                )
+            }
+        }
     }
 
     func syllabusDownloadsService(
@@ -649,12 +714,18 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             return
         }
 
-        self.presenter.presentDownloadButtonUpdate(
-            response: .init(
-                source: .section(entity: section),
-                downloadState: .downloading(progress: progress)
-            )
-        )
+        self.downloadUpdatesQueue.async {
+            let plainSection = SectionPlainObject(section: section)
+
+            DispatchQueue.main.async {
+                self.presenter.presentDownloadButtonUpdate(
+                    response: .init(
+                        source: .section(entity: plainSection),
+                        downloadState: .downloading(progress: progress)
+                    )
+                )
+            }
+        }
     }
 
     func syllabusDownloadsService(
@@ -764,7 +835,7 @@ extension CourseInfoTabSyllabusInteractor {
 
         self.presenter.presentDownloadButtonUpdate(
             response: .init(
-                source: .unit(entity: unit),
+                source: .unit(entity: .init(unit: unit)),
                 downloadState: .waiting
             )
         )
@@ -784,29 +855,38 @@ extension CourseInfoTabSyllabusInteractor {
     private func startDownloading(section: Section) {
         self.analytics.send(.downloadStarted(content: .section))
 
-        let sectionID = section.id
+        let plainSection = SectionPlainObject(section: section)
+        let sectionID = plainSection.id
         print("CourseInfoTabSyllabusInteractor :: start downloading section = \(sectionID)")
 
         self.presenter.presentDownloadButtonUpdate(
             response: .init(
-                source: .section(entity: section),
+                source: .section(entity: plainSection),
                 downloadState: .waiting
             )
         )
 
-        // Present waiting state for units if not cached
-        section.units.forEach { unit in
-            if case .notCached = self.getDownloadingStateForUnit(unit) {
-                self.presenter.presentDownloadButtonUpdate(
-                    response: .init(
-                        source: .unit(entity: unit),
-                        downloadState: .waiting
-                    )
-                )
+        self.downloadUpdatesQueue.promise {
+            self.getDownloadingStatesForUnits(plainSection.units, in: [plainSection])
+        }.then(on: self.downloadUpdatesQueue) { unitsDownloadStates -> Promise<Void> in
+            // Present waiting state for units if not cached
+            for (unit, downloadState) in zip(plainSection.units, unitsDownloadStates) {
+                if case .notCached = downloadState {
+                    DispatchQueue.main.async {
+                        self.presenter.presentDownloadButtonUpdate(
+                            response: .init(
+                                source: .unit(entity: unit),
+                                downloadState: .waiting
+                            )
+                        )
+                    }
+                }
             }
-        }
 
-        self.syllabusDownloadsService.download(section: section).done {
+            return .value(())
+        }.then { () -> Promise<Void> in
+            self.syllabusDownloadsService.download(section: section)
+        }.done {
             print("CourseInfoTabSyllabusInteractor :: started downloading section = \(sectionID)")
         }.catch { error in
             print("CourseInfoTabSyllabusInteractor :: error while starting download section = \(sectionID), error = \(error)")
@@ -824,14 +904,28 @@ extension CourseInfoTabSyllabusInteractor {
 
         self.shouldCheckUseOfCellularDataForDownloads = false
 
-        self.forceLoadAllSectionsIfNeeded().done {
-            for (uid, section) in self.currentSections {
-                let sectionState = self.getDownloadingStateForSection(section)
-                if case .notCached = sectionState {
-                    self.doDownloadButtonAction(request: .init(type: .section(uniqueIdentifier: uid)))
+        let plainSections = self.currentSections.values.map(SectionPlainObject.init)
+
+        firstly {
+            after(seconds: 1)
+        }.then {
+            self.forceLoadAllSectionsIfNeeded()
+        }.then(on: self.downloadUpdatesQueue) {
+            self.getDownloadingStatesForSections(plainSections)
+        }.done(on: self.downloadUpdatesQueue) { sectionsDownloadStates in
+            zip(plainSections, sectionsDownloadStates).forEach { section, downloadState in
+                if case .notCached = downloadState {
+                    let uid = self.getUniqueIdentifierBySectionID(section.id)
+
+                    DispatchQueue.main.async {
+                        self.doDownloadButtonAction(request: .init(type: .section(uniqueIdentifier: uid)))
+                    }
                 }
             }
-            self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
+
+            DispatchQueue.main.async {
+                self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
+            }
         }.ensure {
             self.shouldCheckUseOfCellularDataForDownloads = true
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
@@ -928,53 +1022,160 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func updateUnitDownloadState(_ unit: Unit, forceSectionUpdate: Bool) {
-        self.presenter.presentDownloadButtonUpdate(
-            response: .init(
-                source: .unit(entity: unit),
-                downloadState: self.getDownloadingStateForUnit(unit)
-            )
+        self.updateUnitDownloadState(
+            UnitPlainObject(unit: unit),
+            in: unit.section.flatMap(SectionPlainObject.init),
+            forceSectionUpdate: forceSectionUpdate
         )
+    }
 
-        if forceSectionUpdate {
-            guard let section = self.currentSections.first(where: { $1.unitsArray.contains(unit.id) })?.value else {
-                return
+    private func updateUnitDownloadState(
+        _ unit: UnitPlainObject,
+        in section: SectionPlainObject?,
+        forceSectionUpdate: Bool
+    ) {
+        let section: SectionPlainObject? = {
+            if let section = section {
+                return section
             }
 
-            self.presenter.presentDownloadButtonUpdate(
-                response: .init(
-                    source: .section(entity: section),
-                    downloadState: self.getDownloadingStateForSection(section)
+            return self.currentSections
+                .first(where: { $1.unitsArray.contains(unit.id) })
+                .flatMap { SectionPlainObject(section: $1) }
+        }()
+
+        guard let targetSection = section else {
+            return
+        }
+
+        self.downloadUpdatesQueue.async {
+            self.getDownloadingStateForUnit(unit, in: targetSection).done(on: .main) { downloadState in
+                self.presenter.presentDownloadButtonUpdate(
+                    response: .init(
+                        source: .unit(entity: unit),
+                        downloadState: downloadState
+                    )
                 )
-            )
+            }
+
+            if forceSectionUpdate {
+                self.getDownloadingStateForSection(targetSection).done(on: .main) { downloadState in
+                    self.presenter.presentDownloadButtonUpdate(
+                        response: .init(
+                            source: .section(entity: targetSection),
+                            downloadState: downloadState
+                        )
+                    )
+                }
+            }
         }
     }
 
     private func updateSectionDownloadState(_ section: Section) {
-        section.units.forEach { self.updateUnitDownloadState($0, forceSectionUpdate: false) }
+        let plainSection = SectionPlainObject(section: section)
 
-        self.presenter.presentDownloadButtonUpdate(
-            response: .init(
-                source: .section(entity: section),
-                downloadState: self.getDownloadingStateForSection(section)
-            )
-        )
+        self.downloadUpdatesQueue.async {
+            plainSection.units.forEach {
+                self.updateUnitDownloadState($0, in: plainSection, forceSectionUpdate: false)
+            }
+
+            self.getDownloadingStateForSection(plainSection).done(on: .main) { downloadState in
+                self.presenter.presentDownloadButtonUpdate(
+                    response: .init(
+                        source: .section(entity: plainSection),
+                        downloadState: downloadState
+                    )
+                )
+            }
+        }
     }
 
-    private func getDownloadingStateForUnit(_ unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
+    private func getDownloadingStateForUnit(_ unit: Unit) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
         if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)] {
             return self.syllabusDownloadsService.getUnitDownloadState(unit, in: section)
         }
-        return .notAvailable
+        return .value(.notAvailable)
     }
 
-    private func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    private func getDownloadingStateForUnit(
+        _ unit: UnitPlainObject,
+        in section: SectionPlainObject
+    ) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
+        self.syllabusDownloadsService.getUnitDownloadState(unit, in: section)
+    }
+
+    private func getDownloadingStatesForUnits(
+        _ units: [UnitPlainObject?],
+        in sections: [SectionPlainObject]
+    ) -> Guarantee<[CourseInfoTabSyllabus.DownloadState]> {
+        Guarantee { seal in
+            var unitsIterator = units.makeIterator()
+
+            let generator = AnyIterator<Guarantee<CourseInfoTabSyllabus.DownloadState>> {
+                guard let unitOrNil = unitsIterator.next() else {
+                    return nil
+                }
+
+                guard let unit = unitOrNil,
+                      let section = sections.first(where: { $0.id == unit.sectionID }) else {
+                    return .value(.notAvailable)
+                }
+
+                return self.syllabusDownloadsService.getUnitDownloadState(unit, in: section)
+            }
+
+            when(fulfilled: generator, concurrently: Self.maxConcurrentOperations).done { downloadStates in
+                seal(downloadStates)
+            }.catch { _ in
+                seal([])
+            }
+        }
+    }
+
+    private func getDownloadingStateForSection(_ section: Section) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
         self.syllabusDownloadsService.getSectionDownloadState(section)
     }
 
-    private func getDownloadingStateForCourse() -> CourseInfoTabSyllabus.DownloadState {
+    private func getDownloadingStateForSection(
+        _ section: SectionPlainObject
+    ) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
+        self.syllabusDownloadsService.getSectionDownloadState(section)
+    }
+
+    private func getDownloadingStatesForSections(
+        _ sections: [SectionPlainObject]
+    ) -> Guarantee<[CourseInfoTabSyllabus.DownloadState]> {
+        Guarantee { seal in
+            var sectionsIterator = sections.makeIterator()
+
+            let generator = AnyIterator<Guarantee<CourseInfoTabSyllabus.DownloadState>> {
+                guard let section = sectionsIterator.next() else {
+                    return nil
+                }
+
+                return self.syllabusDownloadsService.getSectionDownloadState(section)
+            }
+
+            when(fulfilled: generator, concurrently: Self.maxConcurrentOperations).done { downloadStates in
+                seal(downloadStates)
+            }.catch { _ in
+                seal([])
+            }
+        }
+    }
+
+    private func getDownloadingStateForCourse(
+        _ course: Course? = nil
+    ) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
         if let course = self.currentCourse {
             return self.syllabusDownloadsService.getCourseDownloadState(course)
         }
-        return .notAvailable
+        return .value(.notAvailable)
+    }
+
+    private func getDownloadingStateForCourse(
+        _ course: CoursePlainObject
+    ) -> Guarantee<CourseInfoTabSyllabus.DownloadState> {
+        self.syllabusDownloadsService.getCourseDownloadState(course)
     }
 }

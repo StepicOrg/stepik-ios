@@ -9,6 +9,7 @@
     --h2-font-size: 22;
     --h3-font-size: 20;
     --blockquote-font-size: 17;
+    --font-family: -apple-system, Arial, Helvetica, sans-serif;
     --font-weight: 400;
 }
 
@@ -64,35 +65,28 @@
 }
 
 html {
-    font-family: -apple-system, Arial, Helvetica, sans-serif;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
+    font-family: var(--font-family);
     font-size: var(--body-font-size);
     font-weight: var(--font-weight);
 }
 
 h1 {
-    text-align: center;
     font-size: var(--h1-font-size);
 }
 
 h2 {
-    text-align: center;
     font-size: var(--h2-font-size);
 }
 
 h3 {
-    text-align: center;
     font-size: var(--h3-font-size);
 }
 
 blockquote {
-    font-style: italic;
-    margin-left: 32px;
-    border-left: 4px solid #ccc;
-    padding-left: 8px;
     font-size: var(--blockquote-font-size);
 }
 
@@ -100,30 +94,15 @@ a {
     color: var(--link-color);
 }
 
-img {
-    max-width: 100%;
-}
-
 iframe {
     max-width: 100%;
 }
 
 body table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin: 0;
-    padding: 0;
     background-color: var(--table-background-color);
     border: 1px solid var(--table-border-color);
 }
 
 body table tr:nth-of-type(even) {
     background-color: var(--table-background-color-even);
-}
-
-body table tr td {
-    padding: 0.5625em 0.625em;
-    line-height: inherit;
-    color: inherit;
-    font-size: inherit;
 }

@@ -36,6 +36,7 @@ final class DownloadingService: DownloadingServiceProtocol {
     private var eventHandlers: [DownloadingServiceEventHandler] = []
     private var observedTasks: [DownloaderTaskProtocol.IDType: DownloaderTaskProtocol] = [:]
 
+    @Protected
     private var taskIDByDownloadURL: [URL: DownloaderTaskProtocol.IDType] = [:]
     private var taskProgressByID: [DownloaderTaskProtocol.IDType: Float] = [:]
 

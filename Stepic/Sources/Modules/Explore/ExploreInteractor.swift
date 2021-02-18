@@ -40,11 +40,7 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         self.explorePresenter?.presentContent(
             response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         )
-
-        if self.networkReachabilityService.isReachable && self.userAccountService.isAuthorized,
-           let userID = self.userAccountService.currentUserID {
-            self.personalOffersService.syncPersonalOffers(userID: userID).cauterize()
-        }
+        self.syncPersonalOffers()
     }
 
     func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request) {
@@ -108,6 +104,19 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
             return .visitedCourses
         }
         return nil
+    }
+
+    private func syncPersonalOffers() {
+        guard self.networkReachabilityService.isReachable else {
+            return
+        }
+
+        guard let currentUser = self.userAccountService.currentUser,
+              !currentUser.isGuest && self.userAccountService.isAuthorized else {
+            return
+        }
+
+        self.personalOffersService.syncPersonalOffers(userID: currentUser.id).cauterize()
     }
 }
 
