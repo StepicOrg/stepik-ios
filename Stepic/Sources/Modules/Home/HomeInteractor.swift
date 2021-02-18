@@ -116,4 +116,8 @@ extension HomeInteractor: ContinueCourseOutputProtocol {
             )
         )
     }
+
+    func presentCatalog() {
+        self.homePresenter?.presentCatalog(response: .init())
+    }
 }

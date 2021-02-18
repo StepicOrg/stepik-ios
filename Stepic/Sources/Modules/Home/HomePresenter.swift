@@ -6,6 +6,7 @@ protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
     func presentCourseListState(response: Home.CourseListStateUpdate.Response)
     func presentStoriesBlock(response: Home.StoriesVisibilityUpdate.Response)
     func presentStatusBarStyle(response: Home.StatusBarStyleUpdate.Response)
+    func presentCatalog(response: Home.CatalogPresentation.Response)
 }
 
 final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
@@ -60,6 +61,10 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
 
     func presentStatusBarStyle(response: Home.StatusBarStyleUpdate.Response) {
         self.homeViewController?.displayStatusBarStyle(viewModel: .init(statusBarStyle: response.statusBarStyle))
+    }
+
+    func presentCatalog(response: Home.CatalogPresentation.Response) {
+        self.homeViewController?.displayCatalog(viewModel: .init())
     }
 
     private func makeStreakActivityMessage(days: Int, needsToSolveToday: Bool) -> String {

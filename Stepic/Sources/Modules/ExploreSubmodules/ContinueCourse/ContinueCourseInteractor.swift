@@ -4,6 +4,7 @@ import PromiseKit
 protocol ContinueCourseInteractorProtocol {
     func doLastCourseRefresh(request: ContinueCourse.LastCourseLoad.Request)
     func doContinueLastCourseAction(request: ContinueCourse.ContinueCourseAction.Request)
+    func doContinueCourseEmptyAction(request: ContinueCourse.ContinueCourseEmptyAction.Request)
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request)
 }
 
@@ -63,6 +64,10 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
 
         let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: currentCourse.id)
         self.moduleOutput?.presentLastStep(course: currentCourse, isAdaptive: isAdaptive, viewSource: .fastContinue)
+    }
+
+    func doContinueCourseEmptyAction(request: ContinueCourse.ContinueCourseEmptyAction.Request) {
+        self.moduleOutput?.presentCatalog()
     }
 
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request) {

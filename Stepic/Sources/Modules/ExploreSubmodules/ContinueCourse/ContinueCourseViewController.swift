@@ -97,6 +97,6 @@ extension ContinueCourseViewController: ContinueCourseViewDelegate {
     }
 
     func continueCourseDidClickEmpty(_ continueCourseView: ContinueCourseView) {
-        DeepLinkRouter.routeToCatalog()
+        self.interactor.doContinueCourseEmptyAction(request: .init())
     }
 }

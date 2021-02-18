@@ -8,6 +8,7 @@ protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel)
     func displayStoriesBlock(viewModel: Home.StoriesVisibilityUpdate.ViewModel)
     func displayStatusBarStyle(viewModel: Home.StatusBarStyleUpdate.ViewModel)
+    func displayCatalog(viewModel: Home.CatalogPresentation.ViewModel)
 }
 
 final class HomeViewController: BaseExploreViewController {
@@ -563,6 +564,10 @@ extension HomeViewController: HomeViewControllerProtocol {
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
         }
+    }
+
+    func displayCatalog(viewModel: Home.CatalogPresentation.ViewModel) {
+        DeepLinkRouter.routeToCatalog()
     }
 }
 

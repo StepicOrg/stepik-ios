@@ -97,4 +97,10 @@ enum Home {
             let statusBarStyle: UIStatusBarStyle
         }
     }
+
+    enum CatalogPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
 }

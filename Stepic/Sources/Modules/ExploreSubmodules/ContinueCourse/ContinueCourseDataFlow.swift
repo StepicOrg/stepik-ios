@@ -21,6 +21,11 @@ enum ContinueCourse {
         struct Request {}
     }
 
+    /// Go to catalog
+    enum ContinueCourseEmptyAction {
+        struct Request {}
+    }
+
     /// Check for tooltip
     enum TooltipAvailabilityCheck {
         struct Request {}
