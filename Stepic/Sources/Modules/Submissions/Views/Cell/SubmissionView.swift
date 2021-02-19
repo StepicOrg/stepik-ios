@@ -93,7 +93,7 @@ final class SubmissionView: UIView {
     override var intrinsicContentSize: CGSize {
         let titleHeight = max(
             self.titleLabel.intrinsicContentSize.height,
-            self.scoreTitleLabel.intrinsicContentSize.height
+            self.scoreTitleLabel.isHidden ? 0 : self.scoreTitleLabel.intrinsicContentSize.height
         )
         let insets = max(self.appearance.statusLabelInsets.top, self.appearance.scoreSubtitleInsets.top)
         let subtitleHeight = max(
