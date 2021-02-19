@@ -964,6 +964,11 @@ CodeQuizRunCodeTooltip = "Перед отправкой решения, вы м�
 /* Submissions */
 SubmissionsTitle = "Решения";
 SubmissionsPlaceholderEmptyTitle = "Решений нет";
+SubmissionScoreText = "Оценка";
+SubmissionStatusWrongText = "Неверно";
+SubmissionStatusCorrectText = "Верно";
+SubmissionStatusPartiallyCorrectText = "Частично верно";
+SubmissionStatusEvaluationText = "Оценивается";
 
 /* Solution */
 SolutionTitle = "Решение %@";

@@ -691,6 +691,7 @@
 		2C87A7AB2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7AA2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift */; };
 		2C87A7AD2446696D00933CA4 /* UserActivitiesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
+		2C89BED325DFCC48003EE967 /* SubmissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89BED225DFCC48003EE967 /* SubmissionView.swift */; };
 		2C89FF8424AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8324AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift */; };
 		2C89FF8624AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */; };
 		2C89FF8824AEE90500168F1B /* StreakNotificationsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8724AEE90500168F1B /* StreakNotificationsStorageManager.swift */; };
@@ -2310,6 +2311,7 @@
 		2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesPersistenceService.swift; sourceTree = "<group>"; };
 		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
+		2C89BED225DFCC48003EE967 /* SubmissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionView.swift; sourceTree = "<group>"; };
 		2C89FF8324AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsFooterView.swift; sourceTree = "<group>"; };
 		2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsViewModel.swift; sourceTree = "<group>"; };
 		2C89FF8724AEE90500168F1B /* StreakNotificationsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsStorageManager.swift; sourceTree = "<group>"; };
@@ -6681,6 +6683,7 @@
 			children = (
 				62E989AE37304FCAD47B52AF /* SubmissionsCellView.swift */,
 				62E9857076DD60DEB4DBD9B1 /* SubmissionsTableViewCell.swift */,
+				2C89BED225DFCC48003EE967 /* SubmissionView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -9816,6 +9819,7 @@
 				62E984EF97B59BCBB5FE7401 /* CourseListsCollectionPresenter.swift in Sources */,
 				62E98434178EA051C7B20A56 /* CourseListsCollectionViewController.swift in Sources */,
 				62E9871AD527F876580625C3 /* CourseListsCollectionViewModel.swift in Sources */,
+				2C89BED325DFCC48003EE967 /* SubmissionView.swift in Sources */,
 				62E988D1D8CBFA4ACFD85E21 /* CourseListsCollectionNetworkService.swift in Sources */,
 				62E98084C7D850589BEE6389 /* CourseListsCollectionPersistenceService.swift in Sources */,
 				62E98DCE33DED1EB1CC11988 /* CourseListsCollectionProvider.swift in Sources */,
