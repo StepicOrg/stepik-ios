@@ -963,6 +963,11 @@ CodeQuizRunCodeTooltip = "Before sending your solution, you can run your code wi
 /* Submissions */
 SubmissionsTitle = "Submissions";
 SubmissionsPlaceholderEmptyTitle = "No Submissions";
+SubmissionScoreText = "Score";
+SubmissionStatusWrongText = "Wrong";
+SubmissionStatusCorrectText = "Correct";
+SubmissionStatusPartiallyCorrectText = "Partially correct";
+SubmissionStatusEvaluationText = "Evaluation";
 
 /* Solution */
 SolutionTitle = "Solution %@";

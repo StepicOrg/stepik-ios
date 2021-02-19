@@ -231,7 +231,7 @@ extension SubmissionsViewController: SubmissionsViewDelegate {
 extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
     func submissionsTableViewDataSource(
         _ dataSource: SubmissionsTableViewDataSource,
-        didSelectAvatar viewModel: SubmissionsViewModel
+        didSelectAvatar viewModel: SubmissionViewModel
     ) {
         let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
         self.push(module: assembly.makeModule())
@@ -239,10 +239,8 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
 
     func submissionsTableViewDataSource(
         _ dataSource: SubmissionsTableViewDataSource,
-        didSelectSubmission viewModel: SubmissionsViewModel
-    ) {
-        self.interactor.doSubmissionPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
-    }
+        didSelectMore viewModel: SubmissionViewModel
+    ) {}
 }
 
 // MARK: - SubmissionsViewController: StyledNavigationControllerPresentable -

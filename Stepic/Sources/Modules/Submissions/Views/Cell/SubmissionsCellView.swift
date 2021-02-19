@@ -3,20 +3,23 @@ import UIKit
 
 extension SubmissionsCellView {
     struct Appearance {
-        let avatarImageViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 0)
-        let avatarImageViewSize = CGSize(width: 36, height: 36)
-        let avatarImageViewCornerRadius: CGFloat = 4.0
+        let avatarInsets = LayoutInsets(top: 16, left: 16)
+        let avatarSize = CGSize(width: 36, height: 36)
+        let avatarCornerRadius: CGFloat = 4
+        let avatarHighlightedBackgroundColor = UIColor.stepikTertiaryBackground.withAlphaComponent(0.5)
 
-        let nameLabelTextColor = UIColor.stepikPrimaryText
-        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
-        let nameLabelInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let nameLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        let nameLabelTextColor = UIColor.stepikSystemPrimaryText
+        let nameLabelInsets = LayoutInsets(left: 16, right: 16)
 
-        let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
-        let solutionControlInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
+        let dateLabelTextColor = UIColor.stepikSystemSecondaryText
 
-        let dateLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
-        let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.stepikSecondaryText
+        let moreButtonSize = CGSize(width: 26, height: 26)
+        let moreButtonTintColor = UIColor.stepikAccent
+        let moreButtonInsets = LayoutInsets(right: 16)
+
+        let submissionViewInsets = LayoutInsets(top: 16, bottom: 16)
     }
 }
 
@@ -25,13 +28,13 @@ final class SubmissionsCellView: UIView {
 
     private lazy var avatarImageView: AvatarImageView = {
         let view = AvatarImageView()
-        view.shape = .rectangle(cornerRadius: self.appearance.avatarImageViewCornerRadius)
+        view.shape = .rectangle(cornerRadius: self.appearance.avatarCornerRadius)
         return view
     }()
 
     private lazy var avatarOverlayButton: UIButton = {
         let button = HighlightFakeButton()
-        button.highlightedBackgroundColor = UIColor.stepikTertiaryBackground.withAlphaComponent(0.5)
+        button.highlightedBackgroundColor = self.appearance.avatarHighlightedBackgroundColor
         button.addTarget(self, action: #selector(self.avatarButtonClicked), for: .touchUpInside)
         return button
     }()
@@ -44,12 +47,6 @@ final class SubmissionsCellView: UIView {
         return label
     }()
 
-    private lazy var solutionControl: DiscussionsSolutionControl = {
-        let control = DiscussionsSolutionControl()
-        control.addTarget(self, action: #selector(self.solutionControlClicked), for: .touchUpInside)
-        return control
-    }()
-
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.dateLabelFont
@@ -58,8 +55,21 @@ final class SubmissionsCellView: UIView {
         return label
     }()
 
+    private lazy var moreButton: UIButton = {
+        let image = UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate)
+        let button = UIButton(type: .system)
+        button.setImage(image, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = self.appearance.moreButtonTintColor
+        button.addTarget(self, action: #selector(self.moreButtonClicked), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+
+    private lazy var submissionView = SubmissionView()
+
     var onAvatarClick: (() -> Void)?
-    var onSolutionClick: (() -> Void)?
+    var onMoreClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -75,11 +85,13 @@ final class SubmissionsCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: SubmissionsViewModel?) {
+    func configure(viewModel: SubmissionViewModel?) {
         guard let viewModel = viewModel else {
             self.nameLabel.text = nil
             self.dateLabel.text = nil
-            self.solutionControl.update(state: .wrong, title: nil)
+            self.submissionView.status = .evaluation
+            self.submissionView.title = nil
+            self.submissionView.score = nil
             self.avatarImageView.reset()
             return
         }
@@ -87,7 +99,9 @@ final class SubmissionsCellView: UIView {
         self.nameLabel.text = viewModel.formattedUsername
         self.dateLabel.text = viewModel.formattedDate
 
-        self.solutionControl.update(state: .init(quizStatus: viewModel.quizStatus), title: viewModel.submissionTitle)
+        self.submissionView.status = viewModel.quizStatus
+        self.submissionView.title = viewModel.submissionTitle
+        self.submissionView.score = viewModel.score
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
@@ -100,8 +114,8 @@ final class SubmissionsCellView: UIView {
     }
 
     @objc
-    private func solutionControlClicked() {
-        self.onSolutionClick?()
+    private func moreButtonClicked() {
+        self.onMoreClick?()
     }
 }
 
@@ -110,44 +124,49 @@ extension SubmissionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)
         self.addSubview(self.nameLabel)
-        self.addSubview(self.solutionControl)
         self.addSubview(self.dateLabel)
+        self.addSubview(self.moreButton)
+        self.addSubview(self.submissionView)
     }
 
     func makeConstraints() {
         self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.avatarImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.avatarImageViewInsets.left)
-            make.top.equalToSuperview().offset(self.appearance.avatarImageViewInsets.top)
-            make.size.equalTo(self.appearance.avatarImageViewSize)
+            make.top.equalToSuperview().offset(self.appearance.avatarInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.avatarInsets.left)
+            make.size.equalTo(self.appearance.avatarSize)
         }
 
         self.avatarOverlayButton.translatesAutoresizingMaskIntoConstraints = false
-        self.avatarOverlayButton.snp.makeConstraints { make in
-            make.edges.equalTo(self.avatarImageView)
+        self.avatarOverlayButton.snp.makeConstraints { $0.edges.equalTo(self.avatarImageView) }
+
+        self.moreButton.translatesAutoresizingMaskIntoConstraints = false
+        self.moreButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-self.appearance.moreButtonInsets.right)
+            make.centerY.equalTo(self.avatarImageView.snp.centerY)
+            make.size.equalTo(self.appearance.moreButtonSize)
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.nameLabel.snp.makeConstraints { make in
             make.top.equalTo(self.avatarImageView.snp.top)
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
-        }
-
-        self.solutionControl.translatesAutoresizingMaskIntoConstraints = false
-        self.solutionControl.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.solutionControlHeight)
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.solutionControlInsets.top)
-            make.leading.equalTo(self.nameLabel.snp.leading)
-            make.trailing.equalTo(self.nameLabel.snp.trailing)
+            make.trailing.equalTo(self.moreButton.snp.leading)
         }
 
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.solutionControl.snp.bottom).offset(self.appearance.dateLabelInsets.top)
-            make.leading.equalTo(self.solutionControl.snp.leading)
-            make.bottom.equalToSuperview().offset(-self.appearance.dateLabelInsets.bottom)
-            make.trailing.equalTo(self.solutionControl.snp.trailing)
+            make.leading.equalTo(self.nameLabel.snp.leading)
+            make.bottom.equalTo(self.avatarImageView.snp.bottom)
+            make.trailing.equalTo(self.nameLabel.snp.trailing)
+        }
+
+        self.submissionView.translatesAutoresizingMaskIntoConstraints = false
+        self.submissionView.snp.makeConstraints { make in
+            make.top.equalTo(self.avatarImageView.snp.bottom).offset(self.appearance.submissionViewInsets.top)
+            make.leading.equalTo(self.avatarImageView.snp.leading)
+            make.bottom.equalToSuperview().offset(-self.appearance.submissionViewInsets.bottom)
+            make.trailing.equalTo(self.moreButton.snp.trailing)
         }
     }
 }
