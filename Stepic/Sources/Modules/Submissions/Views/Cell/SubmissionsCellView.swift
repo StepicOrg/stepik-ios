@@ -62,6 +62,7 @@ final class SubmissionsCellView: UIView {
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = self.appearance.moreButtonTintColor
         button.addTarget(self, action: #selector(self.moreButtonClicked), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
 
