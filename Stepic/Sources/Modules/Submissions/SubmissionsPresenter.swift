@@ -53,7 +53,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(user: User, submission: Submission) -> SubmissionsViewModel {
+    private func makeViewModel(user: User, submission: Submission) -> SubmissionViewModel {
         let username: String = {
             let fullName = "\(user.firstName) \(user.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
             return fullName.isEmpty ? "User \(user.id)" : fullName
@@ -61,18 +61,21 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
 
         let relativeDateString = FormatterHelper.dateToRelativeString(submission.time)
 
-        let submissionTitle = String(
-            format: NSLocalizedString("DiscussionThreadCommentSolutionTitle", comment: ""),
-            arguments: ["\(submission.id)"]
-        )
+        let score: String? = {
+            if submission.status == .correct {
+                return FormatterHelper.submissionScore(submission.score)
+            }
+            return nil
+        }()
 
-        return SubmissionsViewModel(
+        return SubmissionViewModel(
             uniqueIdentifier: submission.uniqueIdentifier,
             userID: user.id,
             avatarImageURL: URL(string: user.avatarURL),
             formattedUsername: username,
             formattedDate: relativeDateString,
-            submissionTitle: submissionTitle,
+            submissionTitle: "#\(submission.id)",
+            score: score,
             quizStatus: QuizStatus(submission: submission) ?? .wrong
         )
     }

@@ -55,7 +55,7 @@ enum Submissions {
     }
 
     struct SubmissionsResult {
-        let submissions: [SubmissionsViewModel]
+        let submissions: [SubmissionViewModel]
         let hasNextPage: Bool
     }
 

@@ -3,20 +3,20 @@ import UIKit
 protocol SubmissionsTableViewDataSourceDelegate: AnyObject {
     func submissionsTableViewDataSource(
         _ dataSource: SubmissionsTableViewDataSource,
-        didSelectAvatar viewModel: SubmissionsViewModel
+        didSelectAvatar viewModel: SubmissionViewModel
     )
     func submissionsTableViewDataSource(
         _ dataSource: SubmissionsTableViewDataSource,
-        didSelectSubmission viewModel: SubmissionsViewModel
+        didSelectMore viewModel: SubmissionViewModel
     )
 }
 
 final class SubmissionsTableViewDataSource: NSObject {
     weak var delegate: SubmissionsTableViewDataSourceDelegate?
 
-    var viewModels: [SubmissionsViewModel]
+    var viewModels: [SubmissionViewModel]
 
-    init(viewModels: [SubmissionsViewModel] = []) {
+    init(viewModels: [SubmissionViewModel] = []) {
         self.viewModels = viewModels
         super.init()
     }
@@ -44,12 +44,12 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
 
             strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectAvatar: viewModel)
         }
-        cell.onSolutionClick = { [weak self] in
+        cell.onMoreClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectSubmission: viewModel)
+            strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectMore: viewModel)
         }
 
         return cell
