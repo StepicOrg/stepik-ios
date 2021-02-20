@@ -369,6 +369,8 @@ FullscreenImageViewerErrorMessage = "Failed to load the image. Try again or clos
 FullscreenImageViewerErrorActionRetry = "Try Again";
 FullscreenImageViewerErrorActionClose = "Close";
 
+ResetButtonTitle = "Reset";
+
 /* Onboarding */
 OnboardingTitle1 = "Choose";
 OnboardingTitle2 = "Download";
@@ -967,7 +969,24 @@ SubmissionScoreText = "Score";
 SubmissionStatusWrongText = "Wrong";
 SubmissionStatusCorrectText = "Correct";
 SubmissionStatusPartiallyCorrectText = "Partially correct";
-SubmissionStatusEvaluationText = "Evaluation";
+SubmissionStatusEvaluationText = "Processing";
+
+/* Submissions Filter */
+SubmissionsFilterTitle = "Search Submissions";
+SubmissionsFilterSubmissionStatusAnyTitle = "Any";
+SubmissionsFilterSubmissionStatusCorrectTitle = "Correct";
+SubmissionsFilterSubmissionStatusPartiallyCorrectTitle = "Partially correct";
+SubmissionsFilterSubmissionStatusWrongTitle = "Wrong";
+SubmissionsFilterSubmissionStatusEvaluationTitle = "Processing";
+SubmissionsFilterOrderDescendingTitle = "Newer first";
+SubmissionsFilterOrderAscendingTitle = "Older first";
+SubmissionsFilterReviewStatusAnyTitle = "Any review status";
+SubmissionsFilterReviewStatusDoneTitle = "Review done";
+SubmissionsFilterReviewStatusAwaitingTitle = "Awaiting review";
+SubmissionsFilterSectionSubmissionStatusTitle = "Submission Status";
+SubmissionsFilterSectionOrderTitle = "Date";
+SubmissionsFilterSectionReviewStatusTitle = "Reviews";
+SubmissionsFilterSectionShowResultTitle = "Show Result";
 
 /* Solution */
 SolutionTitle = "Solution %@";
@@ -1021,7 +1040,6 @@ CourseWidgetSeeAllTitle = "See All";
 
 /* Course List Filter */
 CourseListFilterTitle = "Filters";
-CourseListFilterResetButtonTitle = "Reset";
 CourseListFilterSectionCourseLanguageTitle = "Course Language";
 CourseListFilterSectionCourseDetailsTitle = "Course Details";
 CourseListFilterRowWithCertificateTitle = "With Certificate";

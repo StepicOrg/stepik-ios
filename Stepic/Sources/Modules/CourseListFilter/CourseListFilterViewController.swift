@@ -65,7 +65,7 @@ final class CourseListFilterViewController: UIViewController {
             action: #selector(self.closeClicked)
         )
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("CourseListFilterResetButtonTitle", comment: ""),
+            title: NSLocalizedString("ResetButtonTitle", comment: ""),
             style: .plain,
             target: self,
             action: #selector(self.resetClicked)
