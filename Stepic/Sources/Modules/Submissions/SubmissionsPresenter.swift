@@ -4,6 +4,9 @@ protocol SubmissionsPresenterProtocol {
     func presentSubmissions(response: Submissions.SubmissionsLoad.Response)
     func presentNextSubmissions(response: Submissions.NextSubmissionsLoad.Response)
     func doSubmissionPresentation(response: Submissions.SubmissionPresentation.Response)
+    func presentFilter(response: Submissions.FilterPresentation.Response)
+    func presentLoadingState(response: Submissions.LoadingStatePresentation.Response)
+    func presentFilterButtonActiveState(response: Submissions.FilterButtonActiveStatePresentation.Response)
 }
 
 final class SubmissionsPresenter: SubmissionsPresenterProtocol {
@@ -22,8 +25,9 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 return nil
                             }
 
-                            return self.makeViewModel(user: user, submission: submission)
+                            return self.makeViewModel(user: user, submission: submission, isTeacher: data.isTeacher)
                         },
+                        isSubmissionsFilterAvailable: data.isTeacher,
                         hasNextPage: data.hasNextPage
                     )
                 )
@@ -45,8 +49,9 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 return nil
                             }
 
-                            return self.makeViewModel(user: user, submission: submission)
+                            return self.makeViewModel(user: user, submission: submission, isTeacher: data.isTeacher)
                         },
+                        isSubmissionsFilterAvailable: data.isTeacher,
                         hasNextPage: data.hasNextPage
                     )
                 )
@@ -63,9 +68,23 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         )
     }
 
+    func presentFilter(response: Submissions.FilterPresentation.Response) {
+        self.viewController?.displayFilter(
+            viewModel: .init(hasReview: response.step.hasReview, filters: response.filters)
+        )
+    }
+
+    func presentLoadingState(response: Submissions.LoadingStatePresentation.Response) {
+        self.viewController?.displayLoadingState(viewModel: .init(state: .loading))
+    }
+
+    func presentFilterButtonActiveState(response: Submissions.FilterButtonActiveStatePresentation.Response) {
+        self.viewController?.displayFilterButtonActiveState(viewModel: .init(isActive: response.isActive))
+    }
+
     // MARK: Private API
 
-    private func makeViewModel(user: User, submission: Submission) -> SubmissionViewModel {
+    private func makeViewModel(user: User, submission: Submission, isTeacher: Bool) -> SubmissionViewModel {
         let username: String = {
             let fullName = "\(user.firstName) \(user.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
             return fullName.isEmpty ? "User \(user.id)" : fullName
@@ -88,7 +107,8 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             formattedDate: relativeDateString,
             submissionTitle: "#\(submission.id)",
             score: score,
-            quizStatus: QuizStatus(submission: submission) ?? .wrong
+            quizStatus: QuizStatus(submission: submission) ?? .wrong,
+            isMoreActionAvailable: isTeacher
         )
     }
 }

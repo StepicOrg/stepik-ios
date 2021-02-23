@@ -41,6 +41,7 @@ final class SubmissionsAssembly: Assembly {
         )
         let viewController = SubmissionsViewController(
             interactor: interactor,
+            initialIsSubmissionsFilterAvailable: self.isTeacher,
             appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
         )
 

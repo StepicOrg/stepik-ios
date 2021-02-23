@@ -5,10 +5,14 @@ protocol SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request)
     func doNextSubmissionsLoad(request: Submissions.NextSubmissionsLoad.Request)
     func doSubmissionPresentation(request: Submissions.SubmissionPresentation.Request)
+    func doFilterPresentation(request: Submissions.FilterPresentation.Request)
+    func doSearchSubmissions(request: Submissions.SearchSubmissions.Request)
 }
 
 final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     typealias PaginationState = (page: Int, hasNext: Bool)
+
+    private static let searchDebounceInterval: TimeInterval = 1
 
     weak var moduleOutput: SubmissionsOutputProtocol?
 
@@ -18,9 +22,14 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     private let presenter: SubmissionsPresenterProtocol
     private let provider: SubmissionsProviderProtocol
 
+    private var currentStep: Step?
     private var currentSubmissions: [Submission] = []
-    private var currentFilterQuery: SubmissionsFilterQuery
     private var paginationState = PaginationState(page: 1, hasNext: true)
+
+    private var currentFilterQuery: SubmissionsFilterQuery
+    private var currentFilters: [SubmissionsFilter.Filter] = []
+
+    private let searchDebouncer = Debouncer(delay: SubmissionsInteractor.searchDebounceInterval)
 
     init(
         stepID: Step.IdType,
@@ -61,6 +70,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             let responseData = Submissions.SubmissionsData(
                 users: users,
                 submissions: submissions,
+                isTeacher: self.isTeacher,
                 hasNextPage: meta.hasNext
             )
             self.presenter.presentSubmissions(response: .init(result: .success(responseData)))
@@ -83,6 +93,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             let responseData = Submissions.SubmissionsData(
                 users: users,
                 submissions: submissions,
+                isTeacher: self.isTeacher,
                 hasNextPage: meta.hasNext
             )
             self.presenter.presentNextSubmissions(response: .init(result: .success(responseData)))
@@ -104,11 +115,50 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 moduleOutput.handleSubmissionSelected(submission)
             }
         } else {
-            self.provider
-                .fetchStep(id: self.stepID)
+            self.getCurrentStep()
                 .compactMap { $0 }
                 .done { self.presenter.doSubmissionPresentation(response: .init(step: $0, submission: submission)) }
                 .cauterize()
+        }
+    }
+
+    func doFilterPresentation(request: Submissions.FilterPresentation.Request) {
+        self.getCurrentStep()
+            .compactMap { $0 }
+            .done { self.presenter.presentFilter(response: .init(step: $0, filters: self.currentFilters)) }
+            .cauterize()
+    }
+
+    func doSearchSubmissions(request: Submissions.SearchSubmissions.Request) {
+        let newFilterQuery = SubmissionsFilterQuery(
+            user: self.currentFilterQuery.user,
+            status: self.currentFilterQuery.status,
+            order: self.currentFilterQuery.order,
+            reviewStatus: self.currentFilterQuery.reviewStatus,
+            search: request.text.trimmed()
+        )
+
+        let shouldDoSearch = self.currentFilterQuery != newFilterQuery
+        self.currentFilterQuery = newFilterQuery
+
+        guard shouldDoSearch else {
+            return
+        }
+
+        if request.forceSearch {
+            self.searchDebouncer.action = nil
+
+            self.presenter.presentLoadingState(response: .init())
+            self.doSubmissionsLoad(request: .init())
+        } else {
+            self.searchDebouncer.action = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.presenter.presentLoadingState(response: .init())
+                strongSelf.doSubmissionsLoad(request: .init())
+            }
         }
     }
 
@@ -143,13 +193,58 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         }
     }
 
+    private func getCurrentStep() -> Promise<Step?> {
+        if let currentStep = self.currentStep {
+            return .value(currentStep)
+        }
+
+        return self.provider.fetchStep(id: self.stepID).then { step -> Promise<Step?> in
+            self.currentStep = step
+            return .value(step)
+        }
+    }
+
     private func updateCurrentUserSubmissionsFilterQuery() -> Promise<Void> {
         self.provider
             .fetchCurrentUser()
             .compactMap { $0 }
             .then { currentUser -> Promise<Void> in
-                self.currentFilterQuery.user = currentUser.id
+                self.currentFilterQuery = SubmissionsFilterQuery(
+                    user: currentUser.id,
+                    status: self.currentFilterQuery.status,
+                    order: self.currentFilterQuery.order,
+                    reviewStatus: self.currentFilterQuery.reviewStatus,
+                    search: self.currentFilterQuery.search
+                )
                 return .value(())
             }
+    }
+}
+
+// MARK: - SubmissionsInteractor: SubmissionsFilterOutputProtocol -
+
+extension SubmissionsInteractor: SubmissionsFilterOutputProtocol {
+    func handleSubmissionsFilterDidFinishWithFilters(_ filters: [SubmissionsFilter.Filter]) {
+        self.currentFilters = filters
+
+        let selectedFilterQuery = SubmissionsFilterQuery(filters: filters)
+        let newFilterQuery = SubmissionsFilterQuery(
+            user: self.currentFilterQuery.user,
+            status: selectedFilterQuery.status,
+            order: selectedFilterQuery.order,
+            reviewStatus: selectedFilterQuery.reviewStatus,
+            search: self.currentFilterQuery.search
+        )
+
+        if newFilterQuery != self.currentFilterQuery {
+            self.presenter.presentLoadingState(response: .init())
+            self.doSubmissionsLoad(request: .init())
+        }
+
+        self.currentFilterQuery = newFilterQuery
+    }
+
+    func handleSubmissionsFilterActive(_ isActive: Bool) {
+        self.presenter.presentFilterButtonActiveState(response: .init(isActive: isActive))
     }
 }

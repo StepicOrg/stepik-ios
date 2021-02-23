@@ -1,11 +1,11 @@
 import Foundation
 
-struct SubmissionsFilterQuery {
-    var user: User.IdType?
-    var status: String?
-    var order: Order?
-    var reviewStatus: String?
-    var search: String?
+struct SubmissionsFilterQuery: Equatable {
+    let user: User.IdType?
+    let status: String?
+    let order: Order?
+    let reviewStatus: String?
+    let search: String?
 
     static var `default`: SubmissionsFilterQuery { SubmissionsFilterQuery(order: .desc) }
 

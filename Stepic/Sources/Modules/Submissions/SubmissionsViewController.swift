@@ -4,6 +4,9 @@ protocol SubmissionsViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel)
     func displayNextSubmissions(viewModel: Submissions.NextSubmissionsLoad.ViewModel)
     func displaySubmission(viewModel: Submissions.SubmissionPresentation.ViewModel)
+    func displayFilter(viewModel: Submissions.FilterPresentation.ViewModel)
+    func displayLoadingState(viewModel: Submissions.LoadingStatePresentation.ViewModel)
+    func displayFilterButtonActiveState(viewModel: Submissions.FilterButtonActiveStatePresentation.ViewModel)
 }
 
 extension SubmissionsViewController {
@@ -18,28 +21,38 @@ extension SubmissionsViewController {
 
 final class SubmissionsViewController: UIViewController, ControllerWithStepikPlaceholder {
     let appearance: Appearance
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: SubmissionsInteractorProtocol
 
     private lazy var submissionsView = self.view as? SubmissionsView
     private lazy var paginationView = PaginationView()
+
     private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.closeButtonClicked)
     )
-    var placeholderContainer = StepikPlaceholderControllerContainer()
+    private lazy var searchBar = SubmissionsSearchBar()
+    private lazy var filterBarButtonItem = CourseListFilterBarButtonItem(
+        target: self,
+        action: #selector(self.filterBarButtonItemClicked)
+    )
 
     private var state: Submissions.ViewControllerState
     private var canTriggerPagination = true
     private let tableDataSource = SubmissionsTableViewDataSource()
 
+    private let initialIsSubmissionsFilterAvailable: Bool
+
     init(
         interactor: SubmissionsInteractorProtocol,
         initialState: Submissions.ViewControllerState = .loading,
+        initialIsSubmissionsFilterAvailable: Bool,
         appearance: Appearance = .init()
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.initialIsSubmissionsFilterAvailable = initialIsSubmissionsFilterAvailable
         self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,7 +72,10 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setup()
+        self.updateNavigationItem(shouldShowFilter: self.initialIsSubmissionsFilterAvailable)
+        self.registerPlaceholders()
+
+        self.tableDataSource.delegate = self
 
         self.updateState(newState: self.state)
         self.interactor.doSubmissionsLoad(request: .init())
@@ -75,15 +91,6 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
     }
 
     // MARK: Private API
-
-    private func setup() {
-        self.title = NSLocalizedString("SubmissionsTitle", comment: "")
-        self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
-
-        self.tableDataSource.delegate = self
-
-        self.registerPlaceholders()
-    }
 
     private func registerPlaceholders() {
         self.registerPlaceholder(
@@ -121,6 +128,7 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
         switch newState {
         case .result(let data):
+            self.updateNavigationItem(shouldShowFilter: data.isSubmissionsFilterAvailable)
             self.updateSubmissionsData(newData: data)
         case .error:
             self.showPlaceholder(for: .connectionError)
@@ -153,9 +161,30 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
         }
     }
 
+    private func updateNavigationItem(shouldShowFilter: Bool) {
+        if shouldShowFilter {
+            self.navigationItem.titleView = self.searchBar
+            self.searchBar.searchBarDelegate = self
+
+            self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+            self.navigationItem.rightBarButtonItem = self.filterBarButtonItem
+        } else {
+            self.navigationItem.titleView = nil
+            self.title = NSLocalizedString("SubmissionsTitle", comment: "")
+
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
+        }
+    }
+
     @objc
     private func closeButtonClicked() {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc
+    private func filterBarButtonItemClicked() {
+        self.interactor.doFilterPresentation(request: .init())
     }
 }
 
@@ -173,6 +202,7 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
                 let newState = Submissions.ViewControllerState.result(
                     data: .init(
                         submissions: currentData.submissions + nextData.submissions,
+                        isSubmissionsFilterAvailable: nextData.isSubmissionsFilterAvailable,
                         hasNextPage: nextData.hasNextPage
                     )
                 )
@@ -194,6 +224,27 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
             )
         )
         self.push(module: assembly.makeModule())
+    }
+
+    func displayFilter(viewModel: Submissions.FilterPresentation.ViewModel) {
+        let assembly = SubmissionsFilterAssembly(
+            presentationDescription: SubmissionsFilter.PresentationDescription(
+                availableFilters: viewModel.hasReview ? .withPeerReview : .default,
+                prefilledFilters: viewModel.filters
+            ),
+            output: self.interactor as? SubmissionsFilterOutputProtocol
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
+    }
+
+    func displayLoadingState(viewModel: Submissions.LoadingStatePresentation.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
+    func displayFilterButtonActiveState(viewModel: Submissions.FilterButtonActiveStatePresentation.ViewModel) {
+        self.filterBarButtonItem.setActive(viewModel.isActive)
     }
 }
 
@@ -241,6 +292,18 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         _ dataSource: SubmissionsTableViewDataSource,
         didSelectMore viewModel: SubmissionViewModel
     ) {}
+}
+
+// MARK: - SubmissionsViewController: SubmissionsSearchBarDelegate -
+
+extension SubmissionsViewController: SubmissionsSearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.interactor.doSearchSubmissions(request: .init(text: searchText))
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.interactor.doSearchSubmissions(request: .init(text: searchBar.text ?? "", forceSearch: true))
+    }
 }
 
 // MARK: - SubmissionsViewController: StyledNavigationControllerPresentable -

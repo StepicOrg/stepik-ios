@@ -92,12 +92,15 @@ final class SubmissionsCellView: UIView {
             self.submissionView.status = .evaluation
             self.submissionView.title = nil
             self.submissionView.score = nil
+            self.moreButton.isHidden = true
             self.avatarImageView.reset()
             return
         }
 
         self.nameLabel.text = viewModel.formattedUsername
         self.dateLabel.text = viewModel.formattedDate
+
+        self.moreButton.isHidden = !viewModel.isMoreActionAvailable
 
         self.submissionView.status = viewModel.quizStatus
         self.submissionView.title = viewModel.submissionTitle

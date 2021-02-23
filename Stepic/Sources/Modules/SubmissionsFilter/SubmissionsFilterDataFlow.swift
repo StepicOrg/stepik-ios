@@ -51,7 +51,7 @@ enum SubmissionsFilter {
         }
     }
 
-    enum Filter {
+    enum Filter: Equatable {
         case submissionStatus(SubmissionStatus)
         case order(Order)
         case reviewStatus(ReviewStatus)

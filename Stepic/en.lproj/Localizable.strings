@@ -970,6 +970,7 @@ SubmissionStatusWrongText = "Wrong";
 SubmissionStatusCorrectText = "Correct";
 SubmissionStatusPartiallyCorrectText = "Partially correct";
 SubmissionStatusEvaluationText = "Processing";
+SubmissionsSearchBarPlaceholderText = "ID, email, name, submission number";
 
 /* Submissions Filter */
 SubmissionsFilterTitle = "Search Submissions";

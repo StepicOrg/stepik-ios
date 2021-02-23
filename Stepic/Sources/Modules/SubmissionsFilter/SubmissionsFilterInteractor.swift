@@ -36,6 +36,7 @@ final class SubmissionsFilterInteractor: SubmissionsFilterInteractorProtocol {
         self.mutableState.reviewStatus = request.data.reviewStatus
 
         self.moduleOutput?.handleSubmissionsFilterDidFinishWithFilters(self.mutableState.filters)
+        self.moduleOutput?.handleSubmissionsFilterActive(self.mutableState.filters != self.defaultState.filters)
     }
 
     func doSubmissionsFilterReset(request: SubmissionsFilter.SubmissionsFilterReset.Request) {
