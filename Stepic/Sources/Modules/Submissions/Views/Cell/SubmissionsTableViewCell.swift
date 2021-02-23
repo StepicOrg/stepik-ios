@@ -49,6 +49,8 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         }
     }
 
+    var moreActionAnchorView: UIView { self.cellView.moreActionAnchorView }
+
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
 

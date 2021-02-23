@@ -143,6 +143,22 @@ enum LessonDataFlow {
         }
     }
 
+    enum SubmissionsPresentation {
+        struct Request {
+            let index: Int
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+        }
+    }
+
     /// Load new step HTML text (after step source updated)
     enum StepTextUpdate {
         struct Response {

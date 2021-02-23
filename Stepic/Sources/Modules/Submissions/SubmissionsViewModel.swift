@@ -9,4 +9,5 @@ struct SubmissionViewModel: UniqueIdentifiable {
     let submissionTitle: String
     let score: String?
     let quizStatus: QuizStatus
+    let isMoreActionAvailable: Bool
 }
