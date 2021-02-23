@@ -6,7 +6,28 @@ protocol SubmissionsNetworkServiceProtocol: AnyObject {
     func fetch(stepID: Step.IdType, blockName: String, page: Int) -> Promise<([Submission], Meta)>
     func fetch(attemptID: Attempt.IdType, blockName: String) -> Promise<([Submission], Meta)>
     func fetch(submissionID: Submission.IdType, blockName: String) -> Promise<Submission?>
-    func fetch(stepID: Step.IdType, blockName: String, userID: User.IdType, page: Int) -> Promise<([Submission], Meta)>
+    func fetch(
+        stepID: Step.IdType,
+        blockName: String,
+        filterQuery: SubmissionsFilterQuery,
+        page: Int
+    ) -> Promise<([Submission], Meta)>
+}
+
+extension SubmissionsNetworkServiceProtocol {
+    func fetch(
+        stepID: Step.IdType,
+        blockName: String,
+        userID: User.IdType,
+        page: Int
+    ) -> Promise<([Submission], Meta)> {
+        self.fetch(
+            stepID: stepID,
+            blockName: blockName,
+            filterQuery: SubmissionsFilterQuery(user: userID, order: .desc),
+            page: page
+        )
+    }
 }
 
 final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
@@ -49,17 +70,10 @@ final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
     func fetch(
         stepID: Step.IdType,
         blockName: String,
-        userID: User.IdType,
+        filterQuery: SubmissionsFilterQuery,
         page: Int
     ) -> Promise<([Submission], Meta)> {
-        Promise { seal in
-            self.submissionsAPI.retrieve(stepID: stepID, stepName: blockName, userID: userID, page: page).done {
-                submissions, meta in
-                seal.fulfill((submissions, meta))
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
-        }
+        self.submissionsAPI.retrieve(stepID: stepID, stepName: blockName, filterQuery: filterQuery, page: page)
     }
 
     func create(attemptID: Attempt.IdType, blockName: String, reply: Reply) -> Promise<Submission?> {

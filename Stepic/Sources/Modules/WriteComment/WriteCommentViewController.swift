@@ -225,6 +225,7 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 
         let assembly = SubmissionsAssembly(
             stepID: viewModel.stepID,
+            isTeacher: false,
             navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self
         )

@@ -15,9 +15,15 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         switch response.result {
         case .success(let data):
             let viewModel: Submissions.SubmissionsLoad.ViewModel = .init(
-                state: Submissions.ViewControllerState.result(
+                state: .result(
                     data: .init(
-                        submissions: data.submissions.map { self.makeViewModel(user: data.user, submission: $0) },
+                        submissions: data.submissions.compactMap { submission in
+                            guard let user = data.users.first(where: { $0.id == submission.attempt?.userID }) else {
+                                return nil
+                            }
+
+                            return self.makeViewModel(user: user, submission: submission)
+                        },
                         hasNextPage: data.hasNextPage
                     )
                 )
@@ -32,9 +38,15 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         switch response.result {
         case .success(let data):
             let viewModel: Submissions.NextSubmissionsLoad.ViewModel = .init(
-                state: Submissions.PaginationState.result(
+                state: .result(
                     data: .init(
-                        submissions: data.submissions.map { self.makeViewModel(user: data.user, submission: $0) },
+                        submissions: data.submissions.compactMap { submission in
+                            guard let user = data.users.first(where: { $0.id == submission.attempt?.userID }) else {
+                                return nil
+                            }
+
+                            return self.makeViewModel(user: user, submission: submission)
+                        },
                         hasNextPage: data.hasNextPage
                     )
                 )

@@ -49,7 +49,7 @@ enum Submissions {
     // MARK: - Types -
 
     struct SubmissionsData {
-        let user: User
+        let users: [User]
         let submissions: [Submission]
         let hasNextPage: Bool
     }

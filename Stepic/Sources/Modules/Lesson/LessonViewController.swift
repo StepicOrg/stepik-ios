@@ -14,6 +14,7 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displayCurrentStepUpdate(viewModel: LessonDataFlow.CurrentStepUpdate.ViewModel)
     func displayCurrentStepAutoplay(viewModel: LessonDataFlow.CurrentStepAutoplay.ViewModel)
     func displayEditStep(viewModel: LessonDataFlow.EditStepPresentation.ViewModel)
+    func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
@@ -370,7 +371,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                     title: NSLocalizedString("StepSubmissionsAlertActionTitle", comment: ""),
                     style: .default,
                     handler: { [weak self] _ in
-                        self?.presentSubmissions(stepID: step.id)
+                        self?.interactor.doSubmissionsPresentation(request: .init(index: currentIndex))
                     }
                 )
             )
@@ -411,18 +412,6 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                 self.present(sharingViewController, animated: true, completion: nil)
             }
         }
-    }
-
-    private func presentSubmissions(stepID: Step.IdType) {
-        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
-
-        let assembly = SubmissionsAssembly(
-            stepID: stepID,
-            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
-        )
-        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
-
-        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 }
 
@@ -534,6 +523,19 @@ extension LessonViewController: LessonViewControllerProtocol {
             stepID: viewModel.stepID,
             navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? EditStepOutputProtocol
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
+    }
+
+    func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel) {
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = SubmissionsAssembly(
+            stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
         )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 

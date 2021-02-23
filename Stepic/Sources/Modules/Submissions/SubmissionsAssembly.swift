@@ -2,15 +2,21 @@ import UIKit
 
 final class SubmissionsAssembly: Assembly {
     private let stepID: Step.IdType
+    private let isTeacher: Bool
+    private let submissionsFilterQuery: SubmissionsFilterQuery?
     private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
     private weak var moduleOutput: SubmissionsOutputProtocol?
 
     init(
         stepID: Step.IdType,
+        isTeacher: Bool,
+        submissionsFilterQuery: SubmissionsFilterQuery? = nil,
         navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
         output: SubmissionsOutputProtocol? = nil
     ) {
         self.stepID = stepID
+        self.isTeacher = isTeacher
+        self.submissionsFilterQuery = submissionsFilterQuery
         self.navigationBarAppearance = navigationBarAppearance
         self.moduleOutput = output
     }
@@ -19,12 +25,20 @@ final class SubmissionsAssembly: Assembly {
         let provider = SubmissionsProvider(
             submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
             attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
+            usersPersistenceService: UsersPersistenceService(),
             userAccountService: UserAccountService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
         let presenter = SubmissionsPresenter()
-        let interactor = SubmissionsInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
+        let interactor = SubmissionsInteractor(
+            stepID: self.stepID,
+            isTeacher: self.isTeacher,
+            submissionsFilterQuery: self.submissionsFilterQuery,
+            presenter: presenter,
+            provider: provider
+        )
         let viewController = SubmissionsViewController(
             interactor: interactor,
             appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
