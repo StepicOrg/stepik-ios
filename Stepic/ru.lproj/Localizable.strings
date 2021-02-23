@@ -972,6 +972,7 @@ SubmissionStatusCorrectText = "Верно";
 SubmissionStatusPartiallyCorrectText = "Частично верно";
 SubmissionStatusEvaluationText = "В обработке";
 SubmissionsSearchBarPlaceholderText = "ID, email, имя, номер решения";
+SubmissionsActionFilterByUser = "Фильтр по пользователю";
 
 /* Submissions Filter */
 SubmissionsFilterTitle = "Поиск Решений";

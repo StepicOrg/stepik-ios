@@ -290,8 +290,37 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
 
     func submissionsTableViewDataSource(
         _ dataSource: SubmissionsTableViewDataSource,
-        didSelectMore viewModel: SubmissionViewModel
-    ) {}
+        didSelectMore viewModel: SubmissionViewModel,
+        anchorView: UIView
+    ) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("SubmissionsActionFilterByUser", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    let searchText = "id:\(viewModel.userID)"
+
+                    strongSelf.searchBar.text = searchText
+                    strongSelf.interactor.doSearchSubmissions(request: .init(text: searchText))
+
+                    strongSelf.view.endEditing(true)
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = anchorView
+            popoverPresentationController.sourceRect = anchorView.bounds
+        }
+
+        self.present(alert, animated: true)
+    }
 }
 
 // MARK: - SubmissionsViewController: SubmissionsSearchBarDelegate -

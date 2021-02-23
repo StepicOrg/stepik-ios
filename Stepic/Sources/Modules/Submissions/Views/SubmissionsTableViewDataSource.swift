@@ -7,7 +7,8 @@ protocol SubmissionsTableViewDataSourceDelegate: AnyObject {
     )
     func submissionsTableViewDataSource(
         _ dataSource: SubmissionsTableViewDataSource,
-        didSelectMore viewModel: SubmissionViewModel
+        didSelectMore viewModel: SubmissionViewModel,
+        anchorView: UIView
     )
 }
 
@@ -44,12 +45,17 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
 
             strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectAvatar: viewModel)
         }
-        cell.onMoreClick = { [weak self] in
-            guard let strongSelf = self else {
+        cell.onMoreClick = { [weak self, weak cell] in
+            guard let strongSelf = self,
+                  let strongCell = cell else {
                 return
             }
 
-            strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectMore: viewModel)
+            strongSelf.delegate?.submissionsTableViewDataSource(
+                strongSelf,
+                didSelectMore: viewModel,
+                anchorView: strongCell.moreActionAnchorView
+            )
         }
 
         return cell

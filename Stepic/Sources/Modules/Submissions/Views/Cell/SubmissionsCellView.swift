@@ -68,6 +68,8 @@ final class SubmissionsCellView: UIView {
 
     private lazy var submissionView = SubmissionView()
 
+    var moreActionAnchorView: UIView { self.moreButton }
+
     var onAvatarClick: (() -> Void)?
     var onMoreClick: (() -> Void)?
 
