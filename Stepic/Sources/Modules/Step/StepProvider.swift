@@ -10,6 +10,8 @@ protocol StepProviderProtocol {
     func fetchStoredARQuickLookFile(remoteURL: URL) -> Guarantee<StoredFileProtocol?>
     func fetchDiscussionThreads(stepID: Step.IdType) -> Promise<FetchResult<[DiscussionThread]>>
     func fetchRemoteDiscussionThreads(ids: [DiscussionThread.IdType]) -> Promise<[DiscussionThread]>
+    func fetchCachedLesson(id: Lesson.IdType) -> Promise<Lesson?>
+    func fetchRemoteLesson(id: Lesson.IdType) -> Promise<Lesson?>
 }
 
 final class StepProvider: StepProviderProtocol {
@@ -20,6 +22,8 @@ final class StepProvider: StepProviderProtocol {
     private let arQuickLookStoredFileManager: ARQuickLookStoredFileManagerProtocol
     private let discussionThreadsNetworkService: DiscussionThreadsNetworkServiceProtocol
     private let discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
+    private let lessonsNetworkService: LessonsNetworkServiceProtocol
+    private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
 
     init(
         stepsPersistenceService: StepsPersistenceServiceProtocol,
@@ -28,7 +32,9 @@ final class StepProvider: StepProviderProtocol {
         imageStoredFileManager: StoredFileManagerProtocol,
         arQuickLookStoredFileManager: ARQuickLookStoredFileManagerProtocol,
         discussionThreadsNetworkService: DiscussionThreadsNetworkServiceProtocol,
-        discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
+        discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol,
+        lessonsNetworkService: LessonsNetworkServiceProtocol,
+        lessonsPersistenceService: LessonsPersistenceServiceProtocol
     ) {
         self.stepsPersistenceService = stepsPersistenceService
         self.stepsNetworkService = stepsNetworkService
@@ -37,6 +43,8 @@ final class StepProvider: StepProviderProtocol {
         self.arQuickLookStoredFileManager = arQuickLookStoredFileManager
         self.discussionThreadsNetworkService = discussionThreadsNetworkService
         self.discussionThreadsPersistenceService = discussionThreadsPersistenceService
+        self.lessonsNetworkService = lessonsNetworkService
+        self.lessonsPersistenceService = lessonsPersistenceService
     }
 
     // MARK: Protocol Conforming
@@ -171,6 +179,14 @@ final class StepProvider: StepProviderProtocol {
                 seal.reject(Error.fetchFailed)
             }
         }
+    }
+
+    func fetchCachedLesson(id: Lesson.IdType) -> Promise<Lesson?> {
+        self.lessonsPersistenceService.fetch(id: id)
+    }
+
+    func fetchRemoteLesson(id: Lesson.IdType) -> Promise<Lesson?> {
+        self.lessonsNetworkService.fetch(id: id)
     }
 
     // MARK: Private API

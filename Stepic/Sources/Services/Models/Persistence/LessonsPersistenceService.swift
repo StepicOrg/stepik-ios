@@ -7,6 +7,12 @@ protocol LessonsPersistenceServiceProtocol: AnyObject {
     func deleteAll() -> Promise<Void>
 }
 
+extension LessonsPersistenceServiceProtocol {
+    func fetch(id: Lesson.IdType) -> Promise<Lesson?> {
+        self.fetch(ids: [id]).map { $0.first }
+    }
+}
+
 final class LessonsPersistenceService: LessonsPersistenceServiceProtocol {
     private let managedObjectContext: NSManagedObjectContext
 

@@ -255,9 +255,9 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
         )
     }
 
-    override func presentDiscussions(stepId: Int, discussionProxyId: String) {
+    override func presentDiscussions(stepID: Int, discussionProxyID: String, isTeacher: Bool) {
         self.shouldToggleNavigationBar = true
-        super.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
+        super.presentDiscussions(stepID: stepID, discussionProxyID: discussionProxyID, isTeacher: isTeacher)
     }
 
     private func changeZPositionForElements(change: CGFloat, relativeTo layer: CALayer) {

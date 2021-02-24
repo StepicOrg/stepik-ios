@@ -275,6 +275,7 @@ extension StepViewController: StepViewControllerProtocol {
             discussionThreadType: .default,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
             shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
         )
     }
@@ -284,6 +285,7 @@ extension StepViewController: StepViewControllerProtocol {
             discussionThreadType: .solutions,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
             shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
         )
     }
@@ -335,12 +337,14 @@ extension StepViewController: StepViewControllerProtocol {
         discussionThreadType: DiscussionThread.ThreadType,
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
+        isTeacher: Bool,
         shouldEmbedInWriteComment: Bool
     ) {
         let discussionsAssembly = DiscussionsAssembly(
             discussionThreadType: discussionThreadType,
             discussionProxyID: discussionProxyID,
-            stepID: stepID
+            stepID: stepID,
+            isTeacher: isTeacher
         )
         let discussionsViewController = discussionsAssembly.makeModule()
 

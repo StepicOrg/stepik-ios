@@ -107,6 +107,7 @@ final class StepPresenter: StepPresenterProtocol {
             viewModel: .init(
                 discussionProxyID: discussionProxyID,
                 stepID: response.step.id,
+                isTeacher: response.isTeacher,
                 shouldEmbedInWriteComment: (response.step.discussionsCount ?? 0) == 0
             )
         )
@@ -122,6 +123,7 @@ final class StepPresenter: StepPresenterProtocol {
             viewModel: .init(
                 stepID: response.step.id,
                 discussionProxyID: response.discussionThread.discussionProxy,
+                isTeacher: response.isTeacher,
                 shouldEmbedInWriteComment: response.discussionThread.discussionsCount == 0
             )
         )

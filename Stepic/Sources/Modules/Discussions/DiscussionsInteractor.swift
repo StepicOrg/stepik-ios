@@ -28,6 +28,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     private let discussionThreadType: DiscussionThread.ThreadType
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
+    private let isTeacher: Bool
     private let presentationContext: Discussions.PresentationContext
 
     private var currentDiscussionProxy: DiscussionProxy?
@@ -72,6 +73,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         discussionThreadType: DiscussionThread.ThreadType,
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
+        isTeacher: Bool,
         presentationContext: Discussions.PresentationContext,
         presenter: DiscussionsPresenterProtocol,
         provider: DiscussionsProviderProtocol,
@@ -81,6 +83,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         self.discussionThreadType = discussionThreadType
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
+        self.isTeacher = isTeacher
         self.presentationContext = presentationContext
         self.presenter = presenter
         self.provider = provider
