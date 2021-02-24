@@ -14,6 +14,7 @@ protocol DiscussionsInteractorProtocol {
     func doSortTypesPresentation(request: Discussions.SortTypesPresentation.Request)
     func doSortTypeUpdate(request: Discussions.SortTypeUpdate.Request)
     func doSolutionPresentation(request: Discussions.SolutionPresentation.Request)
+    func doCommentActionSheetPresentation(request: Discussions.CommentActionSheetPresentation.Request)
 }
 
 final class DiscussionsInteractor: DiscussionsInteractorProtocol {
@@ -384,7 +385,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         self.presenter.presentSortTypeUpdate(response: .init(result: self.makeDiscussionsData()))
     }
 
-    // MARK: Solution
+    // MARK: Other
 
     func doSolutionPresentation(request: Discussions.SolutionPresentation.Request) {
         guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
@@ -397,6 +398,16 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
         self.presenter.presentSolution(
             response: .init(stepID: self.stepID, submission: submission, discussionID: comment.id)
+        )
+    }
+
+    func doCommentActionSheetPresentation(request: Discussions.CommentActionSheetPresentation.Request) {
+        guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
+            return
+        }
+
+        self.presenter.presentCommentActionSheet(
+            response: .init(stepID: self.stepID, isTeacher: self.isTeacher, comment: comment)
         )
     }
 

@@ -80,6 +80,17 @@ enum Submissions {
         }
     }
 
+    /// Set search text
+    enum SearchTextUpdate {
+        struct Response {
+            let searchText: String
+        }
+
+        struct ViewModel {
+            let searchText: String
+        }
+    }
+
     /// Show loading state
     enum LoadingStatePresentation {
         struct Response {}

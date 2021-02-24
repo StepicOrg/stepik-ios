@@ -3,10 +3,11 @@ import UIKit
 protocol SubmissionsPresenterProtocol {
     func presentSubmissions(response: Submissions.SubmissionsLoad.Response)
     func presentNextSubmissions(response: Submissions.NextSubmissionsLoad.Response)
-    func doSubmissionPresentation(response: Submissions.SubmissionPresentation.Response)
+    func presentSubmission(response: Submissions.SubmissionPresentation.Response)
     func presentFilter(response: Submissions.FilterPresentation.Response)
     func presentLoadingState(response: Submissions.LoadingStatePresentation.Response)
     func presentFilterButtonActiveState(response: Submissions.FilterButtonActiveStatePresentation.Response)
+    func presentSearchTextUpdate(response: Submissions.SearchTextUpdate.Response)
 }
 
 final class SubmissionsPresenter: SubmissionsPresenterProtocol {
@@ -62,7 +63,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         }
     }
 
-    func doSubmissionPresentation(response: Submissions.SubmissionPresentation.Response) {
+    func presentSubmission(response: Submissions.SubmissionPresentation.Response) {
         self.viewController?.displaySubmission(
             viewModel: .init(stepID: response.step.id, submission: response.submission)
         )
@@ -80,6 +81,10 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
 
     func presentFilterButtonActiveState(response: Submissions.FilterButtonActiveStatePresentation.Response) {
         self.viewController?.displayFilterButtonActiveState(viewModel: .init(isActive: response.isActive))
+    }
+
+    func presentSearchTextUpdate(response: Submissions.SearchTextUpdate.Response) {
+        self.viewController?.displaySearchTextUpdate(viewModel: .init(searchText: response.searchText))
     }
 
     // MARK: Private API

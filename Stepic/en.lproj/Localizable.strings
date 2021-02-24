@@ -1004,6 +1004,7 @@ DiscussionsAlertActionUnlikeTitle = "Unlike";
 DiscussionsAlertActionAbuseTitle = "Abuse";
 DiscussionsAlertActionUnabuseTitle = "Don't abuse";
 DiscussionsAlertActionShowSolutionTitle = "Show solution";
+DiscussionsAlertActionShowSubmissionsTitle = "Submissions";
 DiscussionsSortTypeAlertTitle = "Sort by";
 DiscussionsSortTypeLastDiscussions = "Last discussions";
 DiscussionsSortTypeMostLikedDiscussions = "Most liked";
