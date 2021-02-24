@@ -139,7 +139,7 @@ PODS:
   - HexColors (2.3.0)
   - Highlightr (2.1.0)
   - IQKeyboardManagerSwift (6.5.6)
-  - Kanna (5.2.4)
+  - Kanna (5.2.2)
   - Koloda (5.0.1):
     - pop (~> 1.0)
   - lottie-ios (3.2.1)
@@ -222,7 +222,7 @@ DEPENDENCIES:
   - GoogleSignIn (= 5.0.2)
   - Highlightr (= 2.1.0)
   - IQKeyboardManagerSwift (= 6.5.6)
-  - Kanna (= 5.2.4)
+  - Kanna (= 5.2.2)
   - Koloda (= 5.0.1)
   - lottie-ios (= 3.2.1)
   - Mockingjay (= 3.0.0-alpha.1)
@@ -364,7 +364,7 @@ SPEC CHECKSUMS:
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kanna: b9d00d7c11428308c7f95e1f1f84b8205f567a8f
+  Kanna: 2c4eddaaa4bfb9a1ed19e53c0b3d42ef02838046
   Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
   lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
@@ -395,6 +395,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
 
-PODFILE CHECKSUM: 63555c34b78f13a7a435d743a9f0369a007e03d8
+PODFILE CHECKSUM: 8cc4f549b738265d0ff825d6e6f173f0b68c88e5
 
 COCOAPODS: 1.10.1
