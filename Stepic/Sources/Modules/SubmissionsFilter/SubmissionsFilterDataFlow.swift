@@ -70,7 +70,6 @@ enum SubmissionsFilter {
         enum SubmissionStatus: String, CaseIterable, UniqueIdentifiable {
             case any
             case correct
-            case partiallyCorrect
             case wrong
             case evaluation
 
@@ -84,8 +83,6 @@ enum SubmissionsFilter {
                     return NSLocalizedString("SubmissionsFilterSubmissionStatusAnyTitle", comment: "")
                 case .correct:
                     return NSLocalizedString("SubmissionsFilterSubmissionStatusCorrectTitle", comment: "")
-                case .partiallyCorrect:
-                    return NSLocalizedString("SubmissionsFilterSubmissionStatusPartiallyCorrectTitle", comment: "")
                 case .wrong:
                     return NSLocalizedString("SubmissionsFilterSubmissionStatusWrongTitle", comment: "")
                 case .evaluation:
@@ -94,22 +91,10 @@ enum SubmissionsFilter {
             }
 
             var dictValue: JSONDictionary? {
-                let valueOrNil: String? = {
-                    switch self {
-                    case .any:
-                        return nil
-                    case .partiallyCorrect:
-                        return SubmissionStatus.correct.rawValue
-                    default:
-                        return self.rawValue
-                    }
-                }()
-
-                if let value = valueOrNil {
-                    return ["status": value]
+                if self == .any {
+                    return nil
                 }
-
-                return nil
+                return ["status": self.rawValue]
             }
         }
 

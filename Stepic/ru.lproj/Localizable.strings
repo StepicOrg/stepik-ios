@@ -978,7 +978,6 @@ SubmissionsActionFilterByUser = "Фильтр по пользователю";
 SubmissionsFilterTitle = "Поиск Решений";
 SubmissionsFilterSubmissionStatusAnyTitle = "Любой";
 SubmissionsFilterSubmissionStatusCorrectTitle = "Верно";
-SubmissionsFilterSubmissionStatusPartiallyCorrectTitle = "Частично верно";
 SubmissionsFilterSubmissionStatusWrongTitle = "Неверно";
 SubmissionsFilterSubmissionStatusEvaluationTitle = "В обработке";
 SubmissionsFilterOrderDescendingTitle = "Сначала новые";

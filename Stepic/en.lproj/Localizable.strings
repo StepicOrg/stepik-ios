@@ -977,7 +977,6 @@ SubmissionsActionFilterByUser = "Filter by user";
 SubmissionsFilterTitle = "Search Submissions";
 SubmissionsFilterSubmissionStatusAnyTitle = "Any";
 SubmissionsFilterSubmissionStatusCorrectTitle = "Correct";
-SubmissionsFilterSubmissionStatusPartiallyCorrectTitle = "Partially correct";
 SubmissionsFilterSubmissionStatusWrongTitle = "Wrong";
 SubmissionsFilterSubmissionStatusEvaluationTitle = "Processing";
 SubmissionsFilterOrderDescendingTitle = "Newer first";
