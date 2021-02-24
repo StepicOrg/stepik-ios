@@ -85,12 +85,16 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
     }
 
     func fetchAttempts(ids: [Attempt.IdType], stepID: Step.IdType) -> Promise<[Attempt]> {
-        Promise { seal in
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return Promise { seal in
             firstly {
                 self.fetchStep(id: stepID).compactMap { $0 }
-            }.then { step -> Promise<([Attempt], Meta)> in
+            }.then { step -> Promise<[Attempt]> in
                 self.attemptsNetworkService.fetch(ids: ids, blockName: step.block.name)
-            }.done { attempts, _ in
+            }.done { attempts in
                 seal.fulfill(attempts)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
@@ -99,7 +103,11 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
     }
 
     func fetchUsers(ids: [User.IdType]) -> Promise<[User]> {
-        Promise { seal in
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return Promise { seal in
             self.usersPersistenceService.fetch(ids: ids).then { cachedUsers -> Promise<[User]> in
                 if Set(cachedUsers.map(\.id)) == Set(ids) {
                     return .value(cachedUsers)

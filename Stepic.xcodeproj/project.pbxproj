@@ -790,6 +790,7 @@
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
 		2CADFEF424C1325F00008C65 /* AchievementProgressData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */; };
+		2CB06B1E25E6809A00DEF0AA /* IDTypeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB06B1D25E6809A00DEF0AA /* IDTypeable.swift */; };
 		2CB1139C2591F5F60093B572 /* StoryReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1139B2591F5F60093B572 /* StoryReactionsView.swift */; };
 		2CB113A6259203C90093B572 /* StoryPartReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113A5259203C90093B572 /* StoryPartReaction.swift */; };
 		2CB113AB259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */; };
@@ -2415,6 +2416,7 @@
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CADFEF324C1325F00008C65 /* AchievementProgressData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementProgressData.swift; sourceTree = "<group>"; };
+		2CB06B1D25E6809A00DEF0AA /* IDTypeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDTypeable.swift; sourceTree = "<group>"; };
 		2CB1139B2591F5F60093B572 /* StoryReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryReactionsView.swift; sourceTree = "<group>"; };
 		2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_stories_reactions_v69.xcdatamodel; sourceTree = "<group>"; };
 		2CB113A5259203C90093B572 /* StoryPartReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartReaction.swift; sourceTree = "<group>"; };
@@ -6854,6 +6856,7 @@
 		62E982AE7C8995C2C6F1A430 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				2CB06B1D25E6809A00DEF0AA /* IDTypeable.swift */,
 				62E98F9F759D04EFACC2579D /* NibLoadable.swift */,
 				62E980F9CFE23B23B5720F5E /* ProgrammaticallyInitializableViewProtocol.swift */,
 				62E98128FE2C79FBA6AD7D4B /* Reusable.swift */,
@@ -9147,6 +9150,7 @@
 				2C71F10B256D9C9400A1D40B /* DefaultSimpleCourseListCollectionViewDataSource.swift in Sources */,
 				2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
+				2CB06B1E25E6809A00DEF0AA /* IDTypeable.swift in Sources */,
 				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
