@@ -27,6 +27,8 @@ extension Lesson {
 
     @NSManaged var managedStepsArray: NSObject?
     @NSManaged var managedSteps: NSOrderedSet?
+    @NSManaged var managedCoursesArray: NSObject?
+    @NSManaged var managedUnitsArray: NSObject?
     @NSManaged var managedUnit: Unit?
 
     static var oldEntity: NSEntityDescription {
@@ -128,6 +130,24 @@ extension Lesson {
         }
         set {
             self.managedSteps = NSOrderedSet(array: newValue)
+        }
+    }
+
+    var coursesArray: [Course.IdType] {
+        get {
+            (self.managedCoursesArray as? [Course.IdType]) ?? []
+        }
+        set {
+            self.managedCoursesArray = newValue as NSObject?
+        }
+    }
+
+    var unitsArray: [Unit.IdType] {
+        get {
+            (self.managedUnitsArray as? [Unit.IdType]) ?? []
+        }
+        set {
+            self.managedUnitsArray = newValue as NSObject?
         }
     }
 
