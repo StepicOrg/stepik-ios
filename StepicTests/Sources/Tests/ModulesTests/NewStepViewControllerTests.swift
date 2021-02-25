@@ -32,6 +32,8 @@ private final class NewStepViewControllerMock: StepViewControllerProtocol {
 
     func displayARQuickLook(viewModel: StepDataFlow.ARQuickLookPresentation.ViewModel) {}
 
+    func displayURL(viewModel: StepDataFlow.URLPresentation.ViewModel) {}
+
     func displayOKAlert(viewModel: StepDataFlow.OKAlertPresentation.ViewModel) {}
 
     func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {}

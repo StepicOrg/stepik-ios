@@ -336,6 +336,36 @@ extension LessonInteractor: StepOutputProtocol {
         self.navigateToNextUnit(autoplayNext: false)
     }
 
+    func handleLessonNavigation(lessonID: Int, stepIndex: Int, unitID: Int?) {
+        guard let currentLesson = self.currentLesson else {
+            return
+        }
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        self.provider
+            .fetchLesson(id: lessonID, dataSourceType: .remote)
+            .compactMap { $0 }
+            .then { requestedLesson -> Promise<Void> in
+                if currentLesson.coursesArray == requestedLesson.coursesArray {
+                    let initialContext: LessonDataFlow.Context = {
+                        if let unitID = unitID {
+                            return .unit(id: unitID)
+                        }
+                        return .lesson(id: lessonID)
+                    }()
+
+                    self.didLoadFromCache = false
+
+                    return self.refreshLesson(context: initialContext, startStep: .index(stepIndex - 1))
+                } else {
+                    return .value(())
+                }
+            }.ensure {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            }.cauterize()
+    }
+
     func handleStepNavigation(to index: Int) {
         self.navigateToStep(at: index, autoplayNext: false)
     }

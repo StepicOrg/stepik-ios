@@ -180,6 +180,21 @@ enum StepDataFlow {
         }
     }
 
+    /// Parse url and navigate
+    enum URLPresentation {
+        struct Request {
+            let url: URL
+        }
+
+        struct Response {
+            let url: URL
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Present alert with title, message and OK action.
     enum OKAlertPresentation {
         struct ViewModel {
