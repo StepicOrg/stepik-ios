@@ -2371,6 +2371,7 @@
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C998ACF246EC83800AAFDE4 /* NotificationAlertsAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertsAnalytics.swift; sourceTree = "<group>"; };
 		2C9A2DB425501B3B003AAD2E /* CourseListFilterQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterQuery.swift; sourceTree = "<group>"; };
+		2C9A3C2525E7A85F005A04F8 /* Model_lesson_courses_units_array_v71.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_courses_units_array_v71.xcdatamodel; sourceTree = "<group>"; };
 		2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLEscape.swift"; sourceTree = "<group>"; };
 		2C9BBE4024903AB500FFED49 /* UserCoursesObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesObserver.swift; sourceTree = "<group>"; };
 		2C9BBE422490462C00FFED49 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
@@ -11762,6 +11763,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C9A3C2525E7A85F005A04F8 /* Model_lesson_courses_units_array_v71.xcdatamodel */,
 				2CA785EE2592238F00873CB3 /* Model_steps_is_enabled_v70.xcdatamodel */,
 				2CB113A32592027F0093B572 /* Model_stories_reactions_v69.xcdatamodel */,
 				2CBE4EE22583912800C78855 /* Model_course_list_similar_v68.xcdatamodel */,
@@ -11834,7 +11836,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CA785EE2592238F00873CB3 /* Model_steps_is_enabled_v70.xcdatamodel */;
+			currentVersion = 2C9A3C2525E7A85F005A04F8 /* Model_lesson_courses_units_array_v71.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

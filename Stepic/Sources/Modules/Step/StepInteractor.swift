@@ -13,6 +13,7 @@ protocol StepInteractorProtocol {
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request)
     func doSolutionsPresentation(request: StepDataFlow.SolutionsPresentation.Request)
     func doARQuickLookPresentation(request: StepDataFlow.ARQuickLookPresentation.Request)
+    func doURLPresentation(request: StepDataFlow.URLPresentation.Request)
 }
 
 final class StepInteractor: StepInteractorProtocol {
@@ -160,6 +161,14 @@ final class StepInteractor: StepInteractorProtocol {
             }
         } else {
             self.presenter.presentARQuickLook(response: .init(result: .failure(Error.arQuickLookUnsupported)))
+        }
+    }
+
+    func doURLPresentation(request: StepDataFlow.URLPresentation.Request) {
+        if case .lesson(let lessonID, let stepID, let unitID) = DeepLinkRoute(path: request.url.absoluteString) {
+            self.moduleOutput?.handleLessonNavigation(lessonID: lessonID, stepIndex: stepID, unitID: unitID)
+        } else {
+            self.presenter.presentURL(response: .init(url: request.url))
         }
     }
 

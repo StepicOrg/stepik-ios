@@ -12,6 +12,7 @@ protocol StepPresenterProtocol {
     func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
     func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response)
     func presentARQuickLook(response: StepDataFlow.ARQuickLookPresentation.Response)
+    func presentURL(response: StepDataFlow.URLPresentation.Response)
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -156,6 +157,10 @@ final class StepPresenter: StepPresenterProtocol {
 
             self.viewController?.displayOKAlert(viewModel: .init(title: title, message: message))
         }
+    }
+
+    func presentURL(response: StepDataFlow.URLPresentation.Response) {
+        self.viewController?.displayURL(viewModel: .init(url: response.url))
     }
 
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {
