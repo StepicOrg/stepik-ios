@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "fastlane"
+      - dependency-name: "cocoapods"
+      - dependency-name: "generamba"
+    assignees:
+      - "ivan-magda"
+    commit-message:
+      prefix: "bundler"
+    labels:
+      - "dependencies"
+    rebase-strategy: "disabled"
+    target-branch: "dev"
