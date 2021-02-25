@@ -359,6 +359,7 @@ extension LessonInteractor: StepOutputProtocol {
 
                     return self.refreshLesson(context: initialContext, startStep: .index(stepIndex - 1))
                 } else {
+                    self.presenter.presentLessonModule(response: .init(lessonID: lessonID, stepIndex: stepIndex))
                     return .value(())
                 }
             }.ensure {
