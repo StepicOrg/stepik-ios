@@ -7,6 +7,7 @@ protocol SubmissionsViewControllerProtocol: AnyObject {
     func displayFilter(viewModel: Submissions.FilterPresentation.ViewModel)
     func displayLoadingState(viewModel: Submissions.LoadingStatePresentation.ViewModel)
     func displayFilterButtonActiveState(viewModel: Submissions.FilterButtonActiveStatePresentation.ViewModel)
+    func displaySearchTextUpdate(viewModel: Submissions.SearchTextUpdate.ViewModel)
 }
 
 extension SubmissionsViewController {
@@ -162,18 +163,28 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
     }
 
     private func updateNavigationItem(shouldShowFilter: Bool) {
+        let shouldShowCloseItem = self.navigationController?.navigationBar.backItem == nil
+
         if shouldShowFilter {
             self.navigationItem.titleView = self.searchBar
             self.searchBar.searchBarDelegate = self
 
-            self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+            if shouldShowCloseItem {
+                self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+            } else if let styledNavigationController = self.navigationController as? StyledNavigationController {
+                styledNavigationController.removeBackButtonTitleForTopController()
+            }
+
             self.navigationItem.rightBarButtonItem = self.filterBarButtonItem
         } else {
             self.navigationItem.titleView = nil
             self.title = NSLocalizedString("SubmissionsTitle", comment: "")
 
             self.navigationItem.leftBarButtonItem = nil
-            self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
+
+            if shouldShowCloseItem {
+                self.navigationItem.rightBarButtonItem = self.closeBarButtonItem
+            }
         }
     }
 
@@ -245,6 +256,10 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
 
     func displayFilterButtonActiveState(viewModel: Submissions.FilterButtonActiveStatePresentation.ViewModel) {
         self.filterBarButtonItem.setActive(viewModel.isActive)
+    }
+
+    func displaySearchTextUpdate(viewModel: Submissions.SearchTextUpdate.ViewModel) {
+        self.searchBar.text = viewModel.searchText
     }
 }
 

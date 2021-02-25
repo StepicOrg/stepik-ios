@@ -23,6 +23,14 @@ struct SubmissionsFilterQuery: Equatable {
         self.search = search
     }
 
+    init(searchUserID: User.IdType) {
+        self.user = nil
+        self.status = nil
+        self.order = .desc
+        self.reviewStatus = nil
+        self.search = "id:\(searchUserID)"
+    }
+
     var dictValue: JSONDictionary {
         var result: JSONDictionary = [:]
 

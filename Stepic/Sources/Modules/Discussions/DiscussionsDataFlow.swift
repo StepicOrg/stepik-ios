@@ -223,6 +223,25 @@ enum Discussions {
         }
     }
 
+    /// Show comment actions
+    enum CommentActionSheetPresentation {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+            let comment: Comment
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+            let comment: DiscussionsCommentViewModel
+        }
+    }
+
     // MARK: - Sort type
 
     /// Presents action sheet with available and current sort type (after sort type bar button item click)

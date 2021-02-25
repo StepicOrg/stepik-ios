@@ -16,6 +16,7 @@ protocol DiscussionsPresenterProtocol {
     func presentSortTypes(response: Discussions.SortTypesPresentation.Response)
     func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response)
     func presentSolution(response: Discussions.SolutionPresentation.Response)
+    func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response)
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -158,6 +159,18 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 submission: response.submission,
                 discussionID: response.discussionID
             )
+        )
+    }
+
+    func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response) {
+        let commentViewModel = self.makeCommentViewModel(
+            comment: response.comment,
+            isSelected: false,
+            hasReplies: false
+        )
+
+        self.viewController?.displayCommentActionSheet(
+            viewModel: .init(stepID: response.stepID, isTeacher: response.isTeacher, comment: commentViewModel)
         )
     }
 

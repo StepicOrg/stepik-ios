@@ -6,17 +6,20 @@ final class DiscussionsAssembly: Assembly {
     private let discussionThreadType: DiscussionThread.ThreadType
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
+    private let isTeacher: Bool
     private let presentationContext: Discussions.PresentationContext
 
     init(
         discussionThreadType: DiscussionThread.ThreadType,
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
+        isTeacher: Bool,
         presentationContext: Discussions.PresentationContext = .fromBeginning
     ) {
         self.discussionThreadType = discussionThreadType
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
+        self.isTeacher = isTeacher
         self.presentationContext = presentationContext
     }
 
@@ -35,6 +38,7 @@ final class DiscussionsAssembly: Assembly {
             discussionThreadType: self.discussionThreadType,
             discussionProxyID: self.discussionProxyID,
             stepID: self.stepID,
+            isTeacher: self.isTeacher,
             presentationContext: self.presentationContext,
             presenter: presenter,
             provider: provider,

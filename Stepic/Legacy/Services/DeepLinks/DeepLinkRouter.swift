@@ -476,7 +476,8 @@ final class DeepLinkRouter {
                 return
             }
 
-            guard let stepInLessonID = Lesson.fetch([lessonID]).first?.stepsArray[safe: stepID - 1] else {
+            guard let lesson = Lesson.fetch([lessonID]).first,
+                  let stepInLessonID = lesson.stepsArray[safe: stepID - 1] else {
                 completion([])
                 return
             }
@@ -509,6 +510,7 @@ final class DeepLinkRouter {
                                 discussionThreadType: .default,
                                 discussionProxyID: discussionProxyID,
                                 stepID: step.id,
+                                isTeacher: lesson.canEdit,
                                 presentationContext: .scrollTo(discussionID: discussionID, replyID: replyID)
                             )
                             completion(viewControllers + [assembly.makeModule()])
@@ -529,6 +531,7 @@ final class DeepLinkRouter {
                                     discussionThreadType: .solutions,
                                     discussionProxyID: discussionThread.discussionProxy,
                                     stepID: step.id,
+                                    isTeacher: lesson.canEdit,
                                     presentationContext: .scrollTo(discussionID: discussionID, replyID: replyID)
                                 )
                                 completion(viewControllers + [assembly.makeModule()])

@@ -110,28 +110,13 @@ final class StepInteractor: StepInteractorProtocol {
     }
 
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request) {
-        self.provider.fetchCachedStep(id: self.stepID).done { cachedStep in
-            if let cachedStep = cachedStep {
-                self.presenter.presentDiscussions(response: .init(step: cachedStep))
-            }
+        self.fetchStepWithLesson().done { step in
+            self.presenter.presentDiscussions(response: .init(step: step, isTeacher: step.lesson?.canEdit ?? false))
         }.cauterize()
     }
 
     func doSolutionsPresentation(request: StepDataFlow.SolutionsPresentation.Request) {
-        firstly {
-            self.provider.fetchCachedStep(id: self.stepID)
-        }.then { cachedStep -> Promise<Step?> in
-            if let cachedStep = cachedStep {
-                return .value(cachedStep)
-            } else {
-                self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-                return self.provider.fetchRemoteStep(id: self.stepID)
-            }
-        }.then { step -> Promise<(Step, [DiscussionThread]?)> in
-            guard let step = step else {
-                throw Error.fetchFailed
-            }
-
+        self.fetchStepWithLesson().then { step -> Promise<(Step, [DiscussionThread]?)> in
             if step.discussionThreads?.contains(where: { $0.threadType == .solutions }) ?? false {
                 return .value((step, step.discussionThreads))
             }
@@ -150,7 +135,13 @@ final class StepInteractor: StepInteractorProtocol {
             }
 
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-            self.presenter.presentSolutions(response: .init(step: step, discussionThread: solutionsDiscussionThread))
+            self.presenter.presentSolutions(
+                response: .init(
+                    step: step,
+                    discussionThread: solutionsDiscussionThread,
+                    isTeacher: step.lesson?.canEdit ?? false
+                )
+            )
         }.ensure {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
@@ -297,6 +288,38 @@ final class StepInteractor: StepInteractorProtocol {
                     seal.reject(Error.fetchFromCacheFailed)
                 }
             }
+        }
+    }
+
+    private func fetchStepWithLesson() -> Promise<Step> {
+        self.provider.fetchCachedStep(
+            id: self.stepID
+        ).then { cachedStep -> Promise<Step> in
+            if let cachedStep = cachedStep {
+                return .value(cachedStep)
+            }
+
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+            return self.provider.fetchRemoteStep(id: self.stepID).compactMap { $0 }
+        }.then { step -> Promise<(Step, Lesson)> in
+            if let cachedLesson = step.lesson {
+                return .value((step, cachedLesson))
+            }
+
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+            return self.provider
+                .fetchRemoteLesson(id: step.lessonID)
+                .compactMap { $0 }
+                .map { (step, $0) }
+        }.then { step, lesson -> Promise<Step> in
+            step.lesson = lesson
+            CoreDataHelper.shared.save()
+
+            return .value(step)
+        }.ensure {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }
     }
 

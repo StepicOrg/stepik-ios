@@ -21,7 +21,9 @@ final class StepAssembly: Assembly {
             discussionThreadsNetworkService: DiscussionThreadsNetworkService(
                 discussionThreadsAPI: DiscussionThreadsAPI()
             ),
-            discussionThreadsPersistenceService: DiscussionThreadsPersistenceService()
+            discussionThreadsPersistenceService: DiscussionThreadsPersistenceService(),
+            lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
+            lessonsPersistenceService: LessonsPersistenceService()
         )
         let presenter = StepPresenter(urlFactory: StepikURLFactory())
         let interactor = StepInteractor(

@@ -14,6 +14,7 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
     func displayCommentLike(viewModel: Discussions.CommentLike.ViewModel)
     func displayCommentAbuse(viewModel: Discussions.CommentAbuse.ViewModel)
     func displaySolution(viewModel: Discussions.SolutionPresentation.ViewModel)
+    func displayCommentActionSheet(viewModel: Discussions.CommentActionSheetPresentation.ViewModel)
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -327,6 +328,14 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         self.push(module: assembly.makeModule())
     }
 
+    func displayCommentActionSheet(viewModel: Discussions.CommentActionSheetPresentation.ViewModel) {
+        self.presentCommentActionSheetAlert(
+            comment: viewModel.comment,
+            stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher
+        )
+    }
+
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
@@ -360,6 +369,137 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    // MARK: Private Helpers
+
+    private func presentCommentActionSheetAlert(
+        comment: DiscussionsCommentViewModel,
+        stepID: Step.IdType,
+        isTeacher: Bool
+    ) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        if isTeacher {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionShowSubmissionsTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        let assembly = SubmissionsAssembly(
+                            stepID: stepID,
+                            isTeacher: true,
+                            submissionsFilterQuery: .init(searchUserID: comment.userID)
+                        )
+
+                        strongSelf.push(module: assembly.makeModule())
+                    }
+                )
+            )
+        }
+
+        if comment.solution != nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionShowSolutionTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doSolutionPresentation(request: .init(commentID: comment.id))
+                    }
+                )
+            )
+        }
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Copy", comment: ""),
+                style: .default,
+                handler: { _ in
+                    UIPasteboard.general.string = comment.strippedText
+                }
+            )
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Reply", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doWriteCommentPresentation(
+                        request: .init(commentID: comment.id, presentationContext: .create)
+                    )
+                }
+            )
+        )
+
+        if comment.canEdit {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doWriteCommentPresentation(
+                            request: .init(commentID: comment.id, presentationContext: .edit)
+                        )
+                    }
+                )
+            )
+        }
+
+        if comment.canVote {
+            let likeTitle = comment.voteValue == .epic
+                ? NSLocalizedString("DiscussionsAlertActionUnlikeTitle", comment: "")
+                : NSLocalizedString("DiscussionsAlertActionLikeTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: likeTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentLike(request: .init(commentID: comment.id))
+                    }
+                )
+            )
+
+            let abuseTitle = comment.voteValue == .abuse
+                ? NSLocalizedString("DiscussionsAlertActionUnabuseTitle", comment: "")
+                : NSLocalizedString("DiscussionsAlertActionAbuseTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: abuseTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentAbuse(request: .init(commentID: comment.id))
+                    }
+                )
+            )
+        }
+
+        if comment.canDelete {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionDeleteTitle", comment: ""),
+                    style: .destructive,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentDelete(request: .init(commentID: comment.id))
+                    }
+                )
+            )
+        }
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        if let popoverPresentationController = alert.popoverPresentationController,
+           let indexPath = self.discussionsTableDelegate.indexPath(for: comment.id),
+           let cell = self.discussionsView?.cellForRow(at: indexPath) {
+            popoverPresentationController.sourceView = cell
+            popoverPresentationController.sourceRect = cell.bounds
+        }
+
+        self.present(alert, animated: true)
     }
 }
 
@@ -457,111 +597,6 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         at indexPath: IndexPath,
         cell: UITableViewCell
     ) {
-        self.presentCommentActionSheet(comment, sourceView: cell, sourceRect: cell.bounds)
-    }
-
-    private func presentCommentActionSheet(
-        _ viewModel: DiscussionsCommentViewModel,
-        sourceView: UIView,
-        sourceRect: CGRect
-    ) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        if viewModel.solution != nil {
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("DiscussionsAlertActionShowSolutionTitle", comment: ""),
-                    style: .default,
-                    handler: { [weak self] _ in
-                        self?.interactor.doSolutionPresentation(request: .init(commentID: viewModel.id))
-                    }
-                )
-            )
-        }
-
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Copy", comment: ""),
-                style: .default,
-                handler: { _ in
-                    UIPasteboard.general.string = viewModel.strippedText
-                }
-            )
-        )
-
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Reply", comment: ""),
-                style: .default,
-                handler: { [weak self] _ in
-                    self?.interactor.doWriteCommentPresentation(
-                        request: .init(commentID: viewModel.id, presentationContext: .create)
-                    )
-                }
-            )
-        )
-
-        if viewModel.canEdit {
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),
-                    style: .default,
-                    handler: { [weak self] _ in
-                        self?.interactor.doWriteCommentPresentation(
-                            request: .init(commentID: viewModel.id, presentationContext: .edit)
-                        )
-                    }
-                )
-            )
-        }
-
-        if viewModel.canVote {
-            let likeTitle = viewModel.voteValue == .epic
-                ? NSLocalizedString("DiscussionsAlertActionUnlikeTitle", comment: "")
-                : NSLocalizedString("DiscussionsAlertActionLikeTitle", comment: "")
-            alert.addAction(
-                UIAlertAction(
-                    title: likeTitle,
-                    style: .default,
-                    handler: { [weak self] _ in
-                        self?.interactor.doCommentLike(request: .init(commentID: viewModel.id))
-                    }
-                )
-            )
-
-            let abuseTitle = viewModel.voteValue == .abuse
-                ? NSLocalizedString("DiscussionsAlertActionUnabuseTitle", comment: "")
-                : NSLocalizedString("DiscussionsAlertActionAbuseTitle", comment: "")
-            alert.addAction(
-                UIAlertAction(
-                    title: abuseTitle,
-                    style: .default,
-                    handler: { [weak self] _ in
-                        self?.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
-                    }
-                )
-            )
-        }
-
-        if viewModel.canDelete {
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("DiscussionsAlertActionDeleteTitle", comment: ""),
-                    style: .destructive,
-                    handler: { [weak self] _ in
-                        self?.interactor.doCommentDelete(request: .init(commentID: viewModel.id))
-                    }
-                )
-            )
-        }
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
-
-        if let popoverPresentationController = alert.popoverPresentationController {
-            popoverPresentationController.sourceView = sourceView
-            popoverPresentationController.sourceRect = sourceRect
-        }
-
-        self.present(alert, animated: true)
+        self.interactor.doCommentActionSheetPresentation(request: .init(commentID: comment.id))
     }
 }

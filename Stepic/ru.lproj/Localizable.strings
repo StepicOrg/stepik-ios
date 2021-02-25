@@ -1004,6 +1004,7 @@ DiscussionsAlertActionUnlikeTitle = "Больше не нравится";
 DiscussionsAlertActionAbuseTitle = "Пожаловаться";
 DiscussionsAlertActionUnabuseTitle = "Не жаловаться";
 DiscussionsAlertActionShowSolutionTitle = "Показать решение";
+DiscussionsAlertActionShowSubmissionsTitle = "Решения";
 DiscussionsSortTypeAlertTitle = "Сортировка:";
 DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
