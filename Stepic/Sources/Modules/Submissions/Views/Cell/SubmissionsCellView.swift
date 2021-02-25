@@ -16,7 +16,7 @@ extension SubmissionsCellView {
         let dateLabelTextColor = UIColor.stepikSystemSecondaryText
 
         let moreButtonSize = CGSize(width: 26, height: 26)
-        let moreButtonTintColor = UIColor.stepikAccent
+        let moreButtonTintColor = UIColor.stepikSystemSecondaryText
         let moreButtonInsets = LayoutInsets(right: 16)
 
         let submissionViewInsets = LayoutInsets(top: 16, bottom: 16)
