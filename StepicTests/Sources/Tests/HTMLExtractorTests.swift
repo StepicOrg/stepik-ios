@@ -29,4 +29,51 @@ final class HTMLExtractorTests: XCTestCase {
             XCTAssertEqual(result, [])
         }
     }
+
+    func testThatHTMLExtractorAPIIsSafe() {
+        let content = """
+                    <html>
+                    <head>
+                        <title>test title</title>
+                    </head>
+                    <body>
+                        <a href="https://www.google.com/">google</a>
+                        <img alt="" src="https://ucarecdn.com/57ea9a4e-b8a9-4d14-9748-d1851cc58247/" width="70" />
+                        <p><img alt="" src="https://ucarecdn.com/983dc5db-6cc1-45bd-9f9b-5d787a3be48c/" /></p>
+                    </body>
+                    </html>
+                    """
+
+        let extractorType: HTMLExtractorProtocol.Type = HTMLExtractor.self
+
+        DispatchQueue.concurrentPerform(iterations: 100) { _ in
+            DispatchQueue.concurrentPerform(iterations: 100) { _ in
+                let links = extractorType.extractAllTagsAttribute(tag: "a", attribute: "href", from: content)
+
+                XCTAssertTrue(links.count == 1)
+                XCTAssertEqual(links, ["https://www.google.com/"])
+            }
+
+            DispatchQueue.concurrentPerform(iterations: 100) { _ in
+                let contents = extractorType.extractAllTagsContent(tag: "title", from: content)
+
+                XCTAssertTrue(contents.count == 1)
+                XCTAssertEqual(contents, ["test title"])
+            }
+
+            DispatchQueue.concurrentPerform(iterations: 100) { _ in
+                let images = extractorType.extractAllTags(tag: "img", from: content)
+
+                XCTAssertTrue(images.count == 2)
+                XCTAssertEqual(
+                    images[0],
+                    "<img alt=\"\" src=\"https://ucarecdn.com/57ea9a4e-b8a9-4d14-9748-d1851cc58247/\" width=\"70\">"
+                )
+                XCTAssertEqual(
+                    images[1],
+                    "<img alt=\"\" src=\"https://ucarecdn.com/983dc5db-6cc1-45bd-9f9b-5d787a3be48c/\">"
+                )
+            }
+        }
+    }
 }
