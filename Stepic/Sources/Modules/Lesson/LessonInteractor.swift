@@ -4,6 +4,7 @@ import PromiseKit
 protocol LessonInteractorProtocol {
     func doLessonLoad(request: LessonDataFlow.LessonLoad.Request)
     func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
+    func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request)
 }
 
 final class LessonInteractor: LessonInteractorProtocol {
@@ -62,6 +63,15 @@ final class LessonInteractor: LessonInteractorProtocol {
         }
 
         self.presenter.presentEditStep(response: .init(stepID: stepID))
+    }
+
+    func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request) {
+        guard let lesson = self.currentLesson,
+              let stepID = lesson.stepsArray[safe: request.index] else {
+            return
+        }
+
+        self.presenter.presentSubmissions(response: .init(stepID: stepID, isTeacher: lesson.canEdit))
     }
 
     // MARK: Private API

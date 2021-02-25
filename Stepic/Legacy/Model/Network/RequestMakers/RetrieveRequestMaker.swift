@@ -216,6 +216,39 @@ final class RetrieveRequestMaker {
         }
     }
 
+    func request(
+        requestEndpoint: String,
+        ids: [IDTypeable],
+        withManager manager: Alamofire.Session
+    ) -> Promise<JSON> {
+        if ids.isEmpty {
+            return .value([:])
+        }
+
+        let params: Parameters = [
+            "ids": ids
+        ]
+
+        return Promise { seal in
+            checkToken().done {
+                manager.request(
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    parameters: params,
+                    encoding: URLEncoding.default
+                ).validate().responseSwiftyJSON { response in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let json):
+                        seal.fulfill(json)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func request<T: JSONSerializable>(
         requestEndpoint: String,
         paramName: String,
@@ -223,6 +256,10 @@ final class RetrieveRequestMaker {
         updating: [T],
         withManager manager: Alamofire.Session
     ) -> Promise<([T], JSON)> {
+        if ids.isEmpty {
+            return .value(([], [:]))
+        }
+
         let params: Parameters = [
             "ids": ids
         ]
@@ -254,7 +291,7 @@ final class RetrieveRequestMaker {
                     }
                 }
             }.catch { error in
-                print("\(#file) \(#function) \(error)")
+                seal.reject(error)
             }
         }
     }
@@ -266,11 +303,7 @@ final class RetrieveRequestMaker {
         updating: [T],
         withManager manager: Alamofire.Session
     ) -> Promise<[T]> {
-        if ids.isEmpty {
-            return .value([])
-        }
-
-        return Promise { seal in
+        Promise { seal in
             self.request(
                 requestEndpoint: requestEndpoint,
                 paramName: paramName,

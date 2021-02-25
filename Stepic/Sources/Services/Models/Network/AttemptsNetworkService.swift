@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol AttemptsNetworkServiceProtocol: AnyObject {
-    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)>
+    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<[Attempt]>
     func fetch(stepID: Step.IdType, userID: User.IdType, blockName: String) -> Promise<([Attempt], Meta)>
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt>
 }
@@ -14,10 +14,10 @@ final class AttemptsNetworkService: AttemptsNetworkServiceProtocol {
         self.attemptsAPI = attemptsAPI
     }
 
-    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)> {
+    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<[Attempt]> {
         Promise { seal in
-            self.attemptsAPI.retrieve(ids: ids, stepName: blockName, page: 1).done { attempts, meta in
-                seal.fulfill((attempts, meta))
+            self.attemptsAPI.retrieve(ids: ids, stepName: blockName).done { attempts in
+                seal.fulfill(attempts)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

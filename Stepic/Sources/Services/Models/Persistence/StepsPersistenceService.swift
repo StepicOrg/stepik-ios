@@ -7,6 +7,12 @@ protocol StepsPersistenceServiceProtocol: AnyObject {
     func deleteAll() -> Promise<Void>
 }
 
+extension StepsPersistenceServiceProtocol {
+    func fetch(id: Step.IdType) -> Promise<Step?> {
+        self.fetch(ids: [id]).map { $0.first }
+    }
+}
+
 final class StepsPersistenceService: StepsPersistenceServiceProtocol {
     private let managedObjectContext: NSManagedObjectContext
 

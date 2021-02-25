@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol AttemptsRepositoryProtocol: AnyObject {
-    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)>
+    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<[Attempt]>
     func fetch(stepID: Step.IdType, userID: User.IdType, blockName: String) -> Promise<([Attempt], Meta)>
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt>
 }
@@ -19,7 +19,7 @@ final class AttemptsRepository: AttemptsRepositoryProtocol {
         self.attemptsPersistenceService = attemptsPersistenceService
     }
 
-    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)> {
+    func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<[Attempt]> {
         let persistenceServicePromise = Guarantee(self.attemptsPersistenceService.fetch(ids: ids), fallback: nil)
         let networkServicePromise = Guarantee(
             self.attemptsNetworkService.fetch(ids: ids, blockName: blockName),
@@ -30,16 +30,16 @@ final class AttemptsRepository: AttemptsRepositoryProtocol {
             when(
                 fulfilled: persistenceServicePromise,
                 networkServicePromise
-            ).done { cachedAttempts, remoteFetchResult in
-                if let remoteFetchResult = remoteFetchResult {
-                    self.attemptsPersistenceService.save(attempts: remoteFetchResult.0).done {
-                        seal.fulfill(remoteFetchResult)
+            ).done { cachedAttempts, remoteAttemptsOrNil in
+                if let remoteAttempts = remoteAttemptsOrNil {
+                    self.attemptsPersistenceService.save(attempts: remoteAttempts).done {
+                        seal.fulfill(remoteAttempts)
                     }
                 } else if let cachedAttempts = cachedAttempts {
                     let plainAttempts = cachedAttempts.map { $0.plainObject }
-                    seal.fulfill((plainAttempts, Meta.oneAndOnlyPage))
+                    seal.fulfill(plainAttempts)
                 } else {
-                    seal.fulfill(([], Meta.oneAndOnlyPage))
+                    seal.fulfill([])
                 }
             }.catch { error in
                 seal.reject(error)

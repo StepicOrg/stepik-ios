@@ -18,7 +18,7 @@ def shared_pods
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.10.4'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-  pod 'DeviceKit', '4.2.1'
+  pod 'DeviceKit', '4.3.0'
   pod 'PromiseKit', '6.13.1'
   pod 'SwiftLint', '0.42.0'
 end
@@ -34,21 +34,21 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '7.5.0'
-  pod 'Firebase/Messaging', '7.5.0'
-  pod 'Firebase/Analytics', '7.5.0'
-  pod 'Firebase/Crashlytics', '7.5.0'
-  pod 'Firebase/RemoteConfig', '7.5.0'
+  pod 'Firebase/Core', '7.6.0'
+  pod 'Firebase/Messaging', '7.6.0'
+  pod 'Firebase/Analytics', '7.6.0'
+  pod 'Firebase/Crashlytics', '7.6.0'
+  pod 'Firebase/RemoteConfig', '7.6.0'
 
   pod 'YandexMobileMetrica/Dynamic', '3.14.1'
   pod 'Amplitude', '7.2.2'
-  pod 'Branch', '0.37.0'
+  pod 'Branch', '1.38.0'
 
   pod 'BEMCheckBox', '1.4.1'
 
   pod 'IQKeyboardManagerSwift', '6.5.6'
 
-  pod 'Kanna', '5.2.4'
+  pod 'Kanna', '5.2.2'
   # Remove after NotificationsService refactoring
   pod 'CRToast', '0.0.9'
   pod 'TUSafariActivity', '1.0.4'
@@ -65,7 +65,7 @@ def all_pods
   pod 'Agrume', '5.6.12'
   pod 'Highlightr', '2.1.0'
   pod 'TTTAttributedLabel', '2.0.0'
-  pod 'lottie-ios', '3.2.0'
+  pod 'lottie-ios', '3.2.1'
   pod 'Koloda', '5.0.1'
   pod 'Charts', '3.6.0'
   pod 'EasyTipView', '2.1.0'
@@ -77,7 +77,7 @@ def all_pods
 end
 
 def testing_pods
-  pod 'Quick', '3.0.0'
+  pod 'Quick', '3.1.2'
   pod 'Nimble', '9.0.0'
   pod 'Mockingjay', '3.0.0-alpha.1'
 end

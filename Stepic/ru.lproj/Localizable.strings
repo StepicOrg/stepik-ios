@@ -372,6 +372,8 @@ FullscreenImageViewerErrorMessage = "Не удалось загрузить из
 FullscreenImageViewerErrorActionRetry = "Повторить";
 FullscreenImageViewerErrorActionClose = "Закрыть";
 
+ResetButtonTitle = "Сбросить";
+
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
 OnboardingTitle2 = "Сохраняйте";
@@ -964,6 +966,29 @@ CodeQuizRunCodeTooltip = "Перед отправкой решения, вы м�
 /* Submissions */
 SubmissionsTitle = "Решения";
 SubmissionsPlaceholderEmptyTitle = "Решений нет";
+SubmissionScoreText = "Оценка";
+SubmissionStatusWrongText = "Неверно";
+SubmissionStatusCorrectText = "Верно";
+SubmissionStatusPartiallyCorrectText = "Частично верно";
+SubmissionStatusEvaluationText = "В обработке";
+SubmissionsSearchBarPlaceholderText = "ID, email, имя, номер решения";
+SubmissionsActionFilterByUser = "Фильтр по пользователю";
+
+/* Submissions Filter */
+SubmissionsFilterTitle = "Поиск Решений";
+SubmissionsFilterSubmissionStatusAnyTitle = "Любой";
+SubmissionsFilterSubmissionStatusCorrectTitle = "Верно";
+SubmissionsFilterSubmissionStatusWrongTitle = "Неверно";
+SubmissionsFilterSubmissionStatusEvaluationTitle = "В обработке";
+SubmissionsFilterOrderDescendingTitle = "Сначала новые";
+SubmissionsFilterOrderAscendingTitle = "Сначала старые";
+SubmissionsFilterReviewStatusAnyTitle = "Любой статус рецензии";
+SubmissionsFilterReviewStatusDoneTitle = "Рецензирование завершено";
+SubmissionsFilterReviewStatusAwaitingTitle = "Ожидают рецензии";
+SubmissionsFilterSectionSubmissionStatusTitle = "Статус решения";
+SubmissionsFilterSectionOrderTitle = "Дата отправки решения";
+SubmissionsFilterSectionReviewStatusTitle = "Рецензии";
+SubmissionsFilterSectionShowResultTitle = "Показать результат";
 
 /* Solution */
 SolutionTitle = "Решение %@";
@@ -1017,7 +1042,6 @@ CourseWidgetSeeAllTitle = "Посмотреть все";
 
 /* Course List Filter */
 CourseListFilterTitle = "Фильтры";
-CourseListFilterResetButtonTitle = "Сбросить";
 CourseListFilterSectionCourseLanguageTitle = "Язык курса";
 CourseListFilterSectionCourseDetailsTitle = "Детали курса";
 CourseListFilterRowWithCertificateTitle = "Только с сертификатом";
