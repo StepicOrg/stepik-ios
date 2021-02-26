@@ -170,7 +170,12 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         )
 
         self.viewController?.displayCommentActionSheet(
-            viewModel: .init(stepID: response.stepID, isTeacher: response.isTeacher, comment: commentViewModel)
+            viewModel: .init(
+                stepID: response.stepID,
+                isTeacher: response.isTeacher,
+                isTheoryStep: response.isTheoryStep,
+                comment: commentViewModel
+            )
         )
     }
 

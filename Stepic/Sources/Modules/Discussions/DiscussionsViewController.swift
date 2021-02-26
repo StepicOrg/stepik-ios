@@ -332,7 +332,8 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         self.presentCommentActionSheetAlert(
             comment: viewModel.comment,
             stepID: viewModel.stepID,
-            isTeacher: viewModel.isTeacher
+            isTeacher: viewModel.isTeacher,
+            isTheoryStep: viewModel.isTheoryStep
         )
     }
 
@@ -376,11 +377,12 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     private func presentCommentActionSheetAlert(
         comment: DiscussionsCommentViewModel,
         stepID: Step.IdType,
-        isTeacher: Bool
+        isTeacher: Bool,
+        isTheoryStep: Bool
     ) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        if isTeacher {
+        if isTeacher && !isTheoryStep {
             alert.addAction(
                 UIAlertAction(
                     title: NSLocalizedString("DiscussionsAlertActionShowSubmissionsTitle", comment: ""),

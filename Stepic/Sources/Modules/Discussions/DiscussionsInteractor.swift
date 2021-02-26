@@ -406,9 +406,16 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             return
         }
 
-        self.presenter.presentCommentActionSheet(
-            response: .init(stepID: self.stepID, isTeacher: self.isTeacher, comment: comment)
-        )
+        self.provider.fetchCachedStep(stepID: self.stepID).done { step in
+            self.presenter.presentCommentActionSheet(
+                response: .init(
+                    stepID: self.stepID,
+                    isTeacher: self.isTeacher,
+                    isTheoryStep: step?.block.type?.isTheory ?? false,
+                    comment: comment
+                )
+            )
+        }
     }
 
     // MARK: - Private API
