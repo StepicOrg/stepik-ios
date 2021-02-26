@@ -559,6 +559,13 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
 
     func discussionsTableViewDataSource(
         _ dataSource: DiscussionsTableViewDataSource,
+        didSelectMoreAction comment: DiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentActionSheetPresentation(request: .init(commentID: comment.id))
+    }
+
+    func discussionsTableViewDataSource(
+        _ dataSource: DiscussionsTableViewDataSource,
         didSelectSolution comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doSolutionPresentation(request: .init(commentID: comment.id))

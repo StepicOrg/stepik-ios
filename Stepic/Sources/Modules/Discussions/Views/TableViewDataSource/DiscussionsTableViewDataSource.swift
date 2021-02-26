@@ -139,6 +139,11 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
                 strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectAvatar: commentViewModel)
             }
         }
+        cell.onMoreClick = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectMoreAction: commentViewModel)
+            }
+        }
         cell.onLinkClick = { [weak self] url in
             if let strongSelf = self {
                 strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didRequestOpenURL: url)

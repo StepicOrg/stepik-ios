@@ -82,6 +82,14 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
             self.cellView.onAvatarClick = newValue
         }
     }
+    var onMoreClick: (() -> Void)? {
+        get {
+            self.cellView.onMoreClick
+        }
+        set {
+            self.cellView.onMoreClick = newValue
+        }
+    }
     var onLinkClick: ((URL) -> Void)? {
         get {
             self.cellView.onLinkClick

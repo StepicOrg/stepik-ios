@@ -19,6 +19,10 @@ protocol DiscussionsTableViewDataSourceDelegate: AnyObject {
     )
     func discussionsTableViewDataSource(
         _ dataSource: DiscussionsTableViewDataSource,
+        didSelectMoreAction comment: DiscussionsCommentViewModel
+    )
+    func discussionsTableViewDataSource(
+        _ dataSource: DiscussionsTableViewDataSource,
         didSelectSolution comment: DiscussionsCommentViewModel
     )
     func discussionsTableViewDataSource(

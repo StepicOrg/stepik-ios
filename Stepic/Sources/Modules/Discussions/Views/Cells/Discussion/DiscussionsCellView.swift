@@ -18,6 +18,10 @@ extension DiscussionsCellView {
         let nameLabelTextColor = UIColor.stepikSystemPrimaryText
         let nameLabelHeight: CGFloat = 18
 
+        let moreButtonSize = CGSize(width: 26, height: 26)
+        let moreButtonTintColor = UIColor.stepikSystemSecondaryText
+        let moreButtonInsets = LayoutInsets(right: 16)
+
         let secondaryTextColor = UIColor.dynamic(
             light: UIColor.black.withAlphaComponent(0.6),
             dark: .stepikSystemSecondaryText
@@ -59,6 +63,16 @@ final class DiscussionsCellView: UIView {
         label.textColor = self.appearance.nameLabelTextColor
         label.numberOfLines = 1
         return label
+    }()
+
+    private lazy var moreButton: UIButton = {
+        let image = UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate)
+        let button = UIButton(type: .system)
+        button.setImage(image, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.tintColor = self.appearance.moreButtonTintColor
+        button.addTarget(self, action: #selector(self.moreButtonClicked), for: .touchUpInside)
+        return button
     }()
 
     private lazy var processedContentView: ProcessedContentView = {
@@ -107,6 +121,9 @@ final class DiscussionsCellView: UIView {
     private var nameLabelTopToBottomOfBadgesConstraint: Constraint?
     private var nameLabelTopToTopOfAvatarConstraint: Constraint?
 
+    private var moreButtonCenterYToCenterYOfBadges: Constraint?
+    private var moreButtonCenterYToCenterYOfNameLabel: Constraint?
+
     var onReplyClick: (() -> Void)? {
         get {
             self.bottomControlsView.onReplyClick
@@ -135,6 +152,7 @@ final class DiscussionsCellView: UIView {
     }
 
     var onAvatarClick: (() -> Void)?
+    var onMoreClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
     var onImageClick: ((URL) -> Void)?
     var onSolutionClick: (() -> Void)?
@@ -203,6 +221,14 @@ final class DiscussionsCellView: UIView {
 
         self.updateBadges(userRoleBadgeText: viewModel.userRoleBadgeText, isPinned: viewModel.isPinned)
 
+        if self.badgesView.isHidden {
+            self.moreButtonCenterYToCenterYOfNameLabel?.activate()
+            self.moreButtonCenterYToCenterYOfBadges?.deactivate()
+        } else {
+            self.moreButtonCenterYToCenterYOfNameLabel?.deactivate()
+            self.moreButtonCenterYToCenterYOfBadges?.activate()
+        }
+
         self.nameLabel.text = viewModel.username
 
         self.processedContentView.processedContent = viewModel.processedContent
@@ -260,6 +286,11 @@ final class DiscussionsCellView: UIView {
     }
 
     @objc
+    private func moreButtonClicked() {
+        self.onMoreClick?()
+    }
+
+    @objc
     private func solutionControlClicked() {
         self.onSolutionClick?()
     }
@@ -278,6 +309,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.avatarOverlayButton)
         self.addSubview(self.badgesView)
         self.addSubview(self.nameLabel)
+        self.addSubview(self.moreButton)
 
         self.addSubview(self.textContentStackView)
         self.textContentStackView.addArrangedSubview(self.processedContentView)
@@ -304,7 +336,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.badgesView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.badgesViewInsets.top)
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgesViewInsets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.badgesViewInsets.right)
+            make.trailing.lessThanOrEqualTo(self.moreButton.snp.leading).offset(-self.appearance.badgesViewInsets.right)
             make.height.equalTo(self.appearance.badgesViewHeight)
         }
 
@@ -322,8 +354,20 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             self.nameLabelTopToTopOfAvatarConstraint = make.top.equalTo(self.avatarImageView.snp.top).constraint
 
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
+            make.trailing.equalTo(self.moreButton.snp.leading).offset(-self.appearance.nameLabelInsets.right)
             make.height.equalTo(self.appearance.nameLabelHeight)
+        }
+
+        self.moreButton.translatesAutoresizingMaskIntoConstraints = false
+        self.moreButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-self.appearance.moreButtonInsets.right)
+            make.size.equalTo(self.appearance.moreButtonSize)
+
+            self.moreButtonCenterYToCenterYOfBadges = make.centerY.equalTo(self.badgesView.snp.centerY).constraint
+            self.moreButtonCenterYToCenterYOfNameLabel = make.centerY.equalTo(self.nameLabel.snp.centerY).constraint
+
+            self.moreButtonCenterYToCenterYOfBadges?.deactivate()
+            self.moreButtonCenterYToCenterYOfNameLabel?.deactivate()
         }
 
         self.textContentStackView.translatesAutoresizingMaskIntoConstraints = false
