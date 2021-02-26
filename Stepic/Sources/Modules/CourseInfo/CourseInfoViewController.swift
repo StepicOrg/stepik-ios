@@ -100,6 +100,7 @@ final class CourseInfoViewController: UIViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
 
+        self.updateState(newState: .loading)
         self.interactor.doCourseRefresh(request: .init())
     }
 
@@ -142,6 +143,24 @@ final class CourseInfoViewController: UIViewController {
         self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
             // Update status bar style.
             self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+        }
+    }
+
+    private func updateState(newState: CourseInfo.ViewControllerState) {
+        switch newState {
+        case .result(let data):
+            self.moreBarButton.isEnabled = true
+            self.courseInfoView?.setErrorPlaceholderVisible(false)
+
+            self.storedViewModel = data
+            self.courseInfoView?.configure(viewModel: data)
+        case .loading:
+            self.moreBarButton.isEnabled = false
+            self.courseInfoView?.setErrorPlaceholderVisible(false)
+        case .error:
+            self.updateTopBar(alpha: 1)
+            self.moreBarButton.isEnabled = false
+            self.courseInfoView?.setErrorPlaceholderVisible(true)
         }
     }
 
@@ -450,13 +469,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayCourse(viewModel: CourseInfo.CourseLoad.ViewModel) {
-        switch viewModel.state {
-        case .result(let data):
-            self.storedViewModel = data
-            self.courseInfoView?.configure(viewModel: data)
-        case .loading:
-            break
-        }
+        self.updateState(newState: viewModel.state)
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
@@ -616,6 +629,12 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
 
     func courseInfoViewDidTryForFreeAction(_ courseInfoView: CourseInfoView) {
         self.interactor.doPreviewLessonPresentation(request: .init())
+    }
+
+    func courseInfoViewDidPlaceholderAction(_ view: CourseInfoView) {
+        self.updateTopBar(alpha: 0)
+        self.updateState(newState: .loading)
+        self.interactor.doCourseRefresh(request: .init())
     }
 }
 

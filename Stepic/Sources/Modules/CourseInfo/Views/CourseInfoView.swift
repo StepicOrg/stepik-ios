@@ -7,6 +7,7 @@ protocol CourseInfoViewDelegate: AnyObject {
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int
     func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView)
     func courseInfoViewDidTryForFreeAction(_ courseInfoView: CourseInfoView)
+    func courseInfoViewDidPlaceholderAction(_ view: CourseInfoView)
 }
 
 extension CourseInfoView {
@@ -16,6 +17,8 @@ extension CourseInfoView {
         let segmentedControlHeight: CGFloat = 48.0
 
         let minimalHeaderHeight: CGFloat = 240
+
+        let errorPlaceholderViewBackgroundColor = UIColor.stepikBackground
     }
 }
 
@@ -50,6 +53,19 @@ final class CourseInfoView: UIView {
         let control = TabSegmentedControlView(frame: .zero, items: self.tabsTitles)
         control.delegate = self
         return control
+    }()
+
+    private lazy var errorPlaceholderView: StepikPlaceholderView = {
+        let appearance = StepikPlaceholderView.Appearance(
+            backgroundColor: self.appearance.errorPlaceholderViewBackgroundColor
+        )
+
+        let view = StepikPlaceholderView()
+        view.appearance = appearance
+        view.delegate = self
+        view.isHidden = true
+
+        return view
     }()
 
     private let pageControllerView: UIView
@@ -88,6 +104,16 @@ final class CourseInfoView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func setErrorPlaceholderVisible(_ isVisible: Bool) {
+        if isVisible {
+            self.errorPlaceholderView.set(placeholder: .noConnection)
+            self.errorPlaceholderView.delegate = self
+            self.errorPlaceholderView.isHidden = false
+        } else {
+            self.errorPlaceholderView.isHidden = true
+        }
     }
 
     func configure(viewModel: CourseInfoHeaderViewModel) {
@@ -162,6 +188,7 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.headerView)
         self.addSubview(self.segmentedControl)
         self.insertSubview(self.pageControllerView, aboveSubview: self.headerView)
+        self.addSubview(self.errorPlaceholderView)
     }
 
     func makeConstraints() {
@@ -184,6 +211,12 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
+
+        self.errorPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.errorPlaceholderView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.centerX.leading.bottom.trailing.equalToSuperview()
+        }
     }
 }
 
@@ -196,5 +229,11 @@ extension CourseInfoView: TabSegmentedControlViewDelegate {
 
         self.delegate?.courseInfoView(self, didRequestScrollToPage: index)
         self.currentPageIndex = index
+    }
+}
+
+extension CourseInfoView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.courseInfoViewDidPlaceholderAction(self)
     }
 }

@@ -140,6 +140,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 strongSelf.fetchSemaphore.signal()
             }.catch { error in
                 print("course info interactor: course refresh error = \(error)")
+
+                DispatchQueue.main.async {
+                    if self?.currentCourse == nil {
+                        self?.presenter.presentCourse(response: .init(result: .failure(error)))
+                    }
+                }
             }
         }
     }
