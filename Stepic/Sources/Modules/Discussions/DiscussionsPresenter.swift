@@ -240,15 +240,16 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         }()
 
         let processedContent: ProcessedContent = {
-            let contentProcessingInjections = ContentProcessor.defaultInjections + [
-                FontSizeInjection(baseFontSize: 14),
-                TextColorInjection(dynamicColor: .stepikPrimaryText)
-            ]
+            let appearance = DiscussionsCellView.Appearance()
 
             let contentProcessor = ContentProcessor(
                 rules: ContentProcessor.defaultRules,
-                injections: contentProcessingInjections
+                injections: ContentProcessor.defaultInjections + [
+                    FontInjection(font: appearance.processedContentViewLabelFont),
+                    TextColorInjection(dynamicColor: appearance.secondaryTextColor)
+                ]
             )
+
             let processedContent = contentProcessor.processContent(comment.text)
 
             return processedContent
