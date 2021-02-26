@@ -3,11 +3,11 @@ import UIKit
 
 extension DiscussionsBottomControlsView {
     struct Appearance {
-        let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.stepikPrimaryText
+        let dateLabelFont = Typography.caption1Font
+        var dateLabelTextColor = UIColor.stepikPrimaryText
 
-        let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let replyButtonTextColor = UIColor.stepikDarkVioletFixed
+        let replyButtonFont = Typography.caption1Font
+        let replyButtonTextColor = UIColor.stepikVioletFixed
 
         let spacing: CGFloat = 16
         let subgroupSpacing: CGFloat = 8

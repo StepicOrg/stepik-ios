@@ -14,18 +14,21 @@ extension DiscussionsCellView {
         let badgesViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
-        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
-        let nameLabelTextColor = UIColor.stepikPrimaryText
+        let nameLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        let nameLabelTextColor = UIColor.stepikSystemPrimaryText
         let nameLabelHeight: CGFloat = 18
 
-        let processedContentViewLabelFont = UIFont.systemFont(ofSize: 14)
-        let processedContentViewLabelTextColor = UIColor.stepikPrimaryText
-        let textContentStackViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
+        let secondaryTextColor = UIColor.dynamic(
+            light: UIColor.black.withAlphaComponent(0.6),
+            dark: .stepikSystemSecondaryText
+        )
+        let processedContentViewLabelFont = UIFont.systemFont(ofSize: 15)
+        let textContentStackViewInsets = LayoutInsets(top: 8, bottom: 16, right: 16)
 
         let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
         let solutionControlInsets = LayoutInsets(top: 8)
 
-        let bottomControlsViewInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
+        let bottomControlsViewInsets = LayoutInsets(left: 16, bottom: 16, right: 16)
         let bottomControlsViewHeight: CGFloat = 20
     }
 }
@@ -61,25 +64,17 @@ final class DiscussionsCellView: UIView {
     private lazy var processedContentView: ProcessedContentView = {
         let appearance = ProcessedContentView.Appearance(
             labelFont: self.appearance.processedContentViewLabelFont,
-            labelTextColor: self.appearance.processedContentViewLabelTextColor,
+            labelTextColor: self.appearance.secondaryTextColor,
             activityIndicatorViewStyle: .stepikGray,
             activityIndicatorViewColor: nil,
             insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
 
-        let contentProcessor = ContentProcessor(
-            rules: ContentProcessor.defaultRules,
-            injections: ContentProcessor.defaultInjections + [
-                FontInjection(font: self.appearance.processedContentViewLabelFont),
-                TextColorInjection(dynamicColor: self.appearance.processedContentViewLabelTextColor)
-            ]
-        )
-
         let processedContentView = ProcessedContentView(
             frame: .zero,
             appearance: appearance,
-            contentProcessor: contentProcessor,
+            contentProcessor: ContentProcessor(),
             htmlToAttributedStringConverter: HTMLToAttributedStringConverter(
                 font: self.appearance.processedContentViewLabelFont,
                 tagTransformers: [.brTransformer]
@@ -104,7 +99,9 @@ final class DiscussionsCellView: UIView {
 
     private lazy var solutionContainerView = UIView()
 
-    private lazy var bottomControlsView = DiscussionsBottomControlsView()
+    private lazy var bottomControlsView = DiscussionsBottomControlsView(
+        appearance: .init(dateLabelTextColor: self.appearance.secondaryTextColor)
+    )
 
     // Dynamically position nameLabel on based on badges visibility
     private var nameLabelTopToBottomOfBadgesConstraint: Constraint?
@@ -186,7 +183,7 @@ final class DiscussionsCellView: UIView {
             + self.appearance.textContentStackViewInsets.top
             + textContentHeight
             + solutionHeight
-            + self.appearance.bottomControlsViewInsets.top
+            + self.appearance.textContentStackViewInsets.bottom
             + self.appearance.bottomControlsViewHeight
             + self.appearance.bottomControlsViewInsets.bottom
 

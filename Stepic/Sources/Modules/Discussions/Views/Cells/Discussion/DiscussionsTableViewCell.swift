@@ -5,8 +5,6 @@ import UIKit
 
 extension DiscussionsTableViewCell {
     enum Appearance {
-        static let separatorColor = UIColor.stepikSeparator
-
         static let selectedBackgroundColor = UIColor.dynamic(
             light: .stepikExtraLightVioletFixed,
             dark: .stepikSecondaryBackground
@@ -35,11 +33,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         return cellView
     }()
 
-    private lazy var separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Appearance.separatorColor
-        return view
-    }()
+    private lazy var separatorView = UIView()
 
     // Dynamic cell/separator leading offset
     private var cellViewLeadingConstraint: Constraint?
@@ -231,6 +225,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         self.separatorStyle = style
         self.separatorHeightConstraint?.update(offset: style.height)
         self.separatorView.isHidden = style == .none
+        self.separatorView.backgroundColor = style.color
     }
 
     private func getBackgroundColor() -> UIColor {
@@ -263,11 +258,28 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
             var height: CGFloat {
                 switch self {
                 case .small:
-                    return 1.0 / UIScreen.main.scale
+                    return 1
                 case .large:
-                    return 8.0 / UIScreen.main.scale
+                    return 4
                 case .none:
-                    return 0.0
+                    return 0
+                }
+            }
+
+            var color: UIColor {
+                switch self {
+                case .small:
+                    return UIColor.dynamic(
+                        light: UIColor.black.withAlphaComponent(0.08),
+                        dark: .stepikSeparator
+                    )
+                case .large:
+                    return UIColor.dynamic(
+                        light: UIColor.black.withAlphaComponent(0.04),
+                        dark: .stepikSeparator
+                    )
+                case .none:
+                    return .clear
                 }
             }
         }
