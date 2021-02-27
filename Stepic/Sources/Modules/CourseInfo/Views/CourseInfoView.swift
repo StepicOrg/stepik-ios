@@ -116,6 +116,16 @@ final class CourseInfoView: UIView {
         }
     }
 
+    func setLoading(_ isLoading: Bool) {
+        self.headerView.setLoading(isLoading)
+
+        if isLoading {
+            self.headerHeightConstraint?.update(offset: self.appearance.minimalHeaderHeight)
+        } else {
+            self.headerHeightConstraint?.update(offset: self.headerHeight)
+        }
+    }
+
     func configure(viewModel: CourseInfoHeaderViewModel) {
         // Update data in header
         self.headerView.configure(viewModel: viewModel)

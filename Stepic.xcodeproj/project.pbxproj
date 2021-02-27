@@ -566,6 +566,7 @@
 		2C546C1323DA02AB00352F27 /* String+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */; };
 		2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
+		2C558E8625E973EF00860BF9 /* CourseInfoHeaderSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C558E8525E973EF00860BF9 /* CourseInfoHeaderSkeletonView.swift */; };
 		2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */; };
 		2C572768252C7C2200C4C7C0 /* DiscussionsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */; };
 		2C57276D252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */; };
@@ -2193,6 +2194,7 @@
 		2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SafeSubscript.swift"; sourceTree = "<group>"; };
 		2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
+		2C558E8525E973EF00860BF9 /* CourseInfoHeaderSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoHeaderSkeletonView.swift; sourceTree = "<group>"; };
 		2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBadgesView.swift; sourceTree = "<group>"; };
 		2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsVotesView.swift; sourceTree = "<group>"; };
 		2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBottomControlsView.swift; sourceTree = "<group>"; };
@@ -5776,6 +5778,7 @@
 		2CFF9005242A236900FD7311 /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
+				2C558E8525E973EF00860BF9 /* CourseInfoHeaderSkeletonView.swift */,
 				2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */,
 				2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */,
 			);
@@ -9155,6 +9158,7 @@
 				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
+				2C558E8625E973EF00860BF9 /* CourseInfoHeaderSkeletonView.swift in Sources */,
 				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				2CA930B7253C8A65007B717A /* ProgressPlainObject.swift in Sources */,

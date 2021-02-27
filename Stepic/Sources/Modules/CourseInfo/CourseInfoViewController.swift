@@ -151,16 +151,19 @@ final class CourseInfoViewController: UIViewController {
         case .result(let data):
             self.moreBarButton.isEnabled = true
             self.courseInfoView?.setErrorPlaceholderVisible(false)
+            self.courseInfoView?.setLoading(false)
 
             self.storedViewModel = data
             self.courseInfoView?.configure(viewModel: data)
         case .loading:
             self.moreBarButton.isEnabled = false
             self.courseInfoView?.setErrorPlaceholderVisible(false)
+            self.courseInfoView?.setLoading(true)
         case .error:
             self.updateTopBar(alpha: 1)
             self.moreBarButton.isEnabled = false
             self.courseInfoView?.setErrorPlaceholderVisible(true)
+            self.courseInfoView?.setLoading(false)
         }
     }
 
