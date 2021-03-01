@@ -15,17 +15,14 @@ extension DiscussionsCellView {
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        let nameLabelTextColor = UIColor.stepikSystemPrimaryText
+        let nameLabelTextColor = UIColor.stepikMaterialPrimaryText
         let nameLabelHeight: CGFloat = 18
 
         let moreButtonSize = CGSize(width: 26, height: 26)
-        let moreButtonTintColor = UIColor.stepikSystemSecondaryText
+        let moreButtonTintColor = UIColor.black.withAlphaComponent(0.38)
         let moreButtonInsets = LayoutInsets(right: 16)
 
-        let secondaryTextColor = UIColor.dynamic(
-            light: UIColor.black.withAlphaComponent(0.6),
-            dark: .stepikSystemSecondaryText
-        )
+        let secondaryTextColor = UIColor.stepikMaterialSecondaryText
         let processedContentViewLabelFont = UIFont.systemFont(ofSize: 15)
         let textContentStackViewInsets = LayoutInsets(top: 8, bottom: 16, right: 16)
 
