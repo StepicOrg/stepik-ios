@@ -71,11 +71,10 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
             self.analytics.send(.coursePreviewScreenOpened(course: course, viewSource: courseViewSource))
             self.shouldOpenedAnalyticsEventSend = false
         } else {
-            self.presenter.presentCourseInfo(
-                response: .init(course: nil, streamVideoQuality: self.provider.globalStreamVideoQuality)
-            )
             self.shouldOpenedAnalyticsEventSend = true
         }
+
+        self.presenter.presentCourseInfoDidAppear(response: .init())
     }
 
     func update(with course: Course, viewSource: AnalyticsEvent.CourseViewSource, isOnline: Bool) {
