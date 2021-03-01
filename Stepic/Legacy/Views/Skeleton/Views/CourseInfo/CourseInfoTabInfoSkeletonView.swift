@@ -4,12 +4,12 @@ import SnapKit
 extension CourseInfoTabInfoSkeletonView {
     struct Appearance {
         let labelCornerRadius: CGFloat = 5.0
-        let nameLabelHeight: CGFloat = 14.0
+        let nameLabelHeight: CGFloat = 15.0
 
-        let blockSpacing: CGFloat = 20
+        let blockSpacing: CGFloat = 40
 
         let iconSpacing = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        let iconSize = CGSize(width: 12, height: 12)
+        let iconSize = CGSize(width: 15, height: 15)
 
         var topOffset: CGFloat = 0
     }

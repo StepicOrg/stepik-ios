@@ -71,6 +71,9 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
             self.analytics.send(.coursePreviewScreenOpened(course: course, viewSource: courseViewSource))
             self.shouldOpenedAnalyticsEventSend = false
         } else {
+            self.presenter.presentCourseInfo(
+                response: .init(course: nil, streamVideoQuality: self.provider.globalStreamVideoQuality)
+            )
             self.shouldOpenedAnalyticsEventSend = true
         }
     }

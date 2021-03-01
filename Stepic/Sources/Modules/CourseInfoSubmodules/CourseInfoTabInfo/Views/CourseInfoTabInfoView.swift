@@ -61,6 +61,7 @@ final class CourseInfoTabInfoView: UIView {
     private var skeletonView: CourseInfoTabInfoSkeletonView?
 
     func showLoading() {
+        self.hideLoading()
         self.scrollableStackView.isHidden = true
 
         self.skeletonView = CourseInfoTabInfoSkeletonView(
