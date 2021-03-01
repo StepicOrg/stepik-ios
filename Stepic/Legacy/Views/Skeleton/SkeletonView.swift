@@ -8,8 +8,17 @@
 
 import UIKit
 
-class SkeletonView: UIView {
+extension SkeletonView {
+    struct Appearance {
+        let gradientFirstColor: UIColor
+        let gradientSecondColor: UIColor
+    }
+}
+
+final class SkeletonView: UIView {
     private static let maxSubviewDepth = 3
+
+    let appearance: Appearance
 
     private var cachedViews = [UIView]()
     private var shouldRebuildCache = true
@@ -22,8 +31,18 @@ class SkeletonView: UIView {
 
     private var gradientLayer: CAGradientLayer?
 
-    convenience init(placeholderView: UIView) {
-        self.init()
+    init(frame: CGRect = .zero, appearance: Appearance) {
+        self.appearance = appearance
+        super.init(frame: frame)
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    convenience init(placeholderView: UIView, appearance: Appearance) {
+        self.init(appearance: appearance)
 
         self.translatesAutoresizingMaskIntoConstraints = false
         placeholderView.translatesAutoresizingMaskIntoConstraints = false
@@ -164,9 +183,9 @@ class SkeletonView: UIView {
 
     private func updateGradientColors() {
         self.gradientLayer?.colors = [
-            UIColor.skeletonGradientFirst.cgColor,
-            UIColor.skeletonGradientSecond.cgColor,
-            UIColor.skeletonGradientThird.cgColor
+            self.appearance.gradientFirstColor.cgColor,
+            self.appearance.gradientSecondColor.cgColor,
+            self.appearance.gradientFirstColor.cgColor
         ]
     }
 }

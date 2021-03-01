@@ -12,8 +12,6 @@ protocol CourseInfoTabReviewsViewDelegate: AnyObject {
 
 extension CourseInfoTabReviewsView {
     struct Appearance {
-        let loadingIndicatorInsets = LayoutInsets(top: 20)
-
         let headerViewHeight: CGFloat = 60
 
         let paginationViewHeight: CGFloat = 52
@@ -28,14 +26,8 @@ extension CourseInfoTabReviewsView {
 
 final class CourseInfoTabReviewsView: UIView {
     let appearance: Appearance
-    weak var delegate: CourseInfoTabReviewsViewDelegate?
 
-    private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .stepikGray)
-        view.hidesWhenStopped = true
-        return view
-    }()
-    private var loadingIndicatorTopConstraint: Constraint?
+    weak var delegate: CourseInfoTabReviewsViewDelegate?
 
     private lazy var headerView: CourseInfoTabReviewsHeaderView = {
         let headerView = CourseInfoTabReviewsHeaderView()
@@ -176,17 +168,20 @@ final class CourseInfoTabReviewsView: UIView {
     }
 
     func showLoading() {
-        self.tableView.isHidden = true
         self.emptyStateLabel.isHidden = true
         self.errorPlaceholderView.isHidden = true
-        self.loadingIndicator.startAnimating()
+
+        self.tableView.skeleton.viewBuilder = {
+            CourseInfoTabReviewsCellSkeletonView()
+        }
+        self.tableView.skeleton.show()
     }
 
     func hideLoading() {
-        self.tableView.isHidden = false
         self.emptyStateLabel.isHidden = false
         self.errorPlaceholderView.isHidden = true
-        self.loadingIndicator.stopAnimating()
+
+        self.tableView.skeleton.hide()
     }
 
     func showErrorPlaceholder() {
@@ -216,7 +211,6 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.tableView)
         self.addSubview(self.emptyStateLabel)
         self.addSubview(self.errorPlaceholderView)
-        self.addSubview(self.loadingIndicator)
     }
 
     func makeConstraints() {
@@ -244,14 +238,6 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
         self.errorPlaceholderView.snp.makeConstraints { make in
             self.errorPlaceholderViewTopConstraint = make.top.equalToSuperview().constraint
             make.centerX.leading.bottom.trailing.equalToSuperview()
-        }
-
-        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.loadingIndicator.snp.makeConstraints { make in
-            self.loadingIndicatorTopConstraint = make.top
-                .equalToSuperview()
-                .offset(self.appearance.loadingIndicatorInsets.top).constraint
-            make.centerX.equalToSuperview()
         }
     }
 }
@@ -307,9 +293,6 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
             self.emptyStateLabel.snp.updateConstraints { make in
                 make.centerY.equalToSuperview().offset(newValue.top / 2)
             }
-
-            let loadingIndicatorTopOffset = newValue.top + self.appearance.loadingIndicatorInsets.top
-            self.loadingIndicatorTopConstraint?.update(offset: loadingIndicatorTopOffset)
 
             self.errorPlaceholderViewTopConstraint?.update(offset: newValue.top)
         }

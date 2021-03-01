@@ -4,27 +4,17 @@ import UIKit
 
 protocol CourseInfoTabInfoViewControllerProtocol: AnyObject {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.InfoLoad.ViewModel)
+    func displayCourseInfoDidAppear(viewModel: CourseInfoTabInfo.ControllerAppearance.ViewModel)
 }
 
 final class CourseInfoTabInfoViewController: UIViewController {
-    enum Animation {
-        static let refreshDelay: TimeInterval = 0.33
-    }
-
     private let interactor: CourseInfoTabInfoInteractorProtocol
     private let analytics: Analytics
 
     private lazy var infoView = self.view as? CourseInfoTabInfoView
-
-    private var state: CourseInfoTabInfo.ViewControllerState {
-        didSet {
-            self.updateState()
-        }
-    }
-
     private lazy var playerViewController = AVPlayerViewController()
 
-    private var didLoadContent = false
+    private var state: CourseInfoTabInfo.ViewControllerState
 
     // MARK: Init
 
@@ -61,7 +51,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.updateState()
+        self.updateState(newState: self.state)
         self.interactor.doCourseInfoRefresh(request: .init())
     }
 
@@ -72,12 +62,16 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
     // MARK: Private helpers
 
-    private func updateState() {
-        if case .loading = self.state {
+    private func updateState(newState: CourseInfoTabInfo.ViewControllerState) {
+        switch newState {
+        case .loading:
             self.infoView?.showLoading()
-        } else if self.didLoadContent {
+        case .result(let data):
             self.infoView?.hideLoading()
+            self.infoView?.configure(viewModel: data)
         }
+
+        self.state = newState
     }
 }
 
@@ -85,16 +79,16 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtocol {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.InfoLoad.ViewModel) {
-        self.display(newState: viewModel.state)
+        self.updateState(newState: viewModel.state)
     }
 
-    private func display(newState: CourseInfoTabInfo.ViewControllerState) {
-        if case .result(let viewModel) = newState {
-            self.didLoadContent = false
-            self.infoView?.configure(viewModel: viewModel)
+    func displayCourseInfoDidAppear(viewModel: CourseInfoTabInfo.ControllerAppearance.ViewModel) {
+        switch self.state {
+        case .loading:
+            self.updateState(newState: .loading)
+        default:
+            break
         }
-
-        self.state = newState
     }
 }
 
@@ -134,12 +128,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
-    func courseInfoTabInfoViewDidLoadContent(_ view: CourseInfoTabInfoView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.refreshDelay) {
-            self.didLoadContent = true
-            self.infoView?.hideLoading()
-        }
-    }
+    func courseInfoTabInfoViewDidLoadContent(_ view: CourseInfoTabInfoView) {}
 
     func courseInfoTabInfoView(_ view: CourseInfoTabInfoView, didOpenURL url: URL) {
         if let deepLinkRoute = DeepLinkRoute(path: url.absoluteString) {

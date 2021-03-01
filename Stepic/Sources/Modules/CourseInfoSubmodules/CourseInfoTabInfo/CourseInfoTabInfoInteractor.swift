@@ -73,6 +73,8 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
         } else {
             self.shouldOpenedAnalyticsEventSend = true
         }
+
+        self.presenter.presentCourseInfoDidAppear(response: .init())
     }
 
     func update(with course: Course, viewSource: AnalyticsEvent.CourseViewSource, isOnline: Bool) {

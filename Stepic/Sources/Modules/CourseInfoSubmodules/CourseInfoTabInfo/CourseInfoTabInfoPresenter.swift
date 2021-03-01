@@ -2,6 +2,7 @@ import UIKit
 
 protocol CourseInfoTabInfoPresenterProtocol {
     func presentCourseInfo(response: CourseInfoTabInfo.InfoLoad.Response)
+    func presentCourseInfoDidAppear(response: CourseInfoTabInfo.ControllerAppearance.Response)
 }
 
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
@@ -24,6 +25,10 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
 
         self.viewController?.displayCourseInfo(viewModel: viewModel)
+    }
+
+    func presentCourseInfoDidAppear(response: CourseInfoTabInfo.ControllerAppearance.Response) {
+        self.viewController?.displayCourseInfoDidAppear(viewModel: .init())
     }
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {

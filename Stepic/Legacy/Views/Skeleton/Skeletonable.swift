@@ -14,6 +14,9 @@ private struct AssociatedKey {
 
 // Proxy class to hide UIView implementation
 class Skeleton {
+    var firstColor = UIColor.skeletonGradientFirst
+    var secondColor = UIColor.skeletonGradientSecond
+
     private var parent: Skeletonable
 
     var viewBuilder: (() -> UIView?) = {
