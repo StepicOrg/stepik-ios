@@ -153,8 +153,19 @@ final class CourseInfoViewController: UIViewController {
             self.courseInfoView?.setErrorPlaceholderVisible(false)
             self.courseInfoView?.setLoading(false)
 
+            let isFirstLoadedResult = self.storedViewModel == nil
+
             self.storedViewModel = data
             self.courseInfoView?.configure(viewModel: data)
+
+            if isFirstLoadedResult {
+                DispatchQueue.main.async {
+                    let headerHeight = (self.courseInfoView?.headerHeight ?? 0)
+                        + (self.courseInfoView?.appearance.segmentedControlHeight ?? 0)
+                    self.updateContentOffset(scrollOffset: -headerHeight)
+                    self.updateContentInset(headerHeight: headerHeight)
+                }
+            }
         case .loading:
             self.moreBarButton.isEnabled = false
             self.courseInfoView?.setErrorPlaceholderVisible(false)
