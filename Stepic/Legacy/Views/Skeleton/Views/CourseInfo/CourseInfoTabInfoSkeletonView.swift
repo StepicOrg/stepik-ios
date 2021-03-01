@@ -41,10 +41,6 @@ final class CourseInfoTabInfoSkeletonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateTopOffset(_ newValue: CGFloat) {
-        self.stackViewTopConstraint?.update(offset: newValue)
-    }
-
     private func makeBlockView() -> UIView {
         let view = UIView()
         view.backgroundColor = .clear

@@ -239,11 +239,14 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
             self.scrollableStackView.contentInsets
         }
         set {
-            self.skeletonView?.updateTopOffset(newValue.top + self.appearance.skeletonTopInset)
-
             // Fixes an issue with incorrect content offset on presentation when initial tab is `CourseInfo.Tab.info`.
             if newValue.top > 0 && self.contentOffset.y == 0 {
                 self.contentOffset = CGPoint(x: self.contentOffset.x, y: -newValue.top)
+            }
+
+            if let currentSkeletonViewTopOffset = self.skeletonView?.appearance.topOffset,
+               newValue.top > 0 && newValue.top != currentSkeletonViewTopOffset {
+                self.showLoading()
             }
 
             self.scrollableStackView.contentInsets = newValue
