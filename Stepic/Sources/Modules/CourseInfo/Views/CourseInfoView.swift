@@ -119,12 +119,15 @@ final class CourseInfoView: UIView {
     func setLoading(_ isLoading: Bool) {
         self.headerView.setLoading(isLoading)
 
-        let headerHeight = isLoading ? self.appearance.minimalHeaderHeight : self.headerHeight
-        self.headerHeightConstraint?.update(offset: headerHeight)
-        self.delegate?.courseInfoView(
-            self,
-            didReportNewHeaderHeight: headerHeight + self.appearance.segmentedControlHeight
-        )
+        if isLoading {
+            self.headerHeightConstraint?.update(offset: self.appearance.minimalHeaderHeight)
+            self.delegate?.courseInfoView(
+                self,
+                didReportNewHeaderHeight: self.appearance.minimalHeaderHeight + self.appearance.segmentedControlHeight
+            )
+        } else {
+            self.headerHeightConstraint?.update(offset: self.headerHeight)
+        }
     }
 
     func configure(viewModel: CourseInfoHeaderViewModel) {
