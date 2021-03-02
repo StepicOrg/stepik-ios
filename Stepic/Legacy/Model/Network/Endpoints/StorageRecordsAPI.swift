@@ -18,12 +18,17 @@ final class StorageRecordsAPI: APIEndpoint {
 
     func retrieve(
         userID: User.IdType,
-        kindPrefixType prefixType: StorageRecordKind.PrefixType
+        kindPrefixType prefixType: StorageRecordKind.PrefixType,
+        order: Order? = nil
     ) -> Promise<([StorageRecord], Meta)> {
-        let params: Parameters = [
+        var params: Parameters = [
             StorageRecord.JSONKey.user.rawValue: userID,
             "kind__startswith": prefixType.startsWith
         ]
+
+        if let order = order {
+            params["order"] = order.rawValue
+        }
 
         return self.retrieve.request(
             requestEndpoint: self.name,
@@ -67,5 +72,9 @@ final class StorageRecordsAPI: APIEndpoint {
             updatingObject: record,
             withManager: self.manager
         )
+    }
+
+    enum Order: String {
+        case updateDateDesc = "-update_date"
     }
 }

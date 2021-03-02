@@ -26,6 +26,7 @@ final class SubmissionsView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = self.appearance.estimatedRowHeight
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .interactive
 
         tableView.refreshControl = self.refreshControl
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: .valueChanged)

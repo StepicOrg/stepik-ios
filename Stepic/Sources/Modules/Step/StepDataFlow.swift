@@ -129,11 +129,13 @@ enum StepDataFlow {
 
         struct Response {
             let step: Step
+            let isTeacher: Bool
         }
 
         struct ViewModel {
             let discussionProxyID: DiscussionProxy.IdType
             let stepID: Step.IdType
+            let isTeacher: Bool
             let shouldEmbedInWriteComment: Bool
         }
     }
@@ -145,11 +147,13 @@ enum StepDataFlow {
         struct Response {
             let step: Step
             let discussionThread: DiscussionThread
+            let isTeacher: Bool
         }
 
         struct ViewModel {
             let stepID: Step.IdType
             let discussionProxyID: DiscussionProxy.IdType
+            let isTeacher: Bool
             let shouldEmbedInWriteComment: Bool
         }
     }
@@ -171,6 +175,21 @@ enum StepDataFlow {
 
     /// Present download AR Quick Look usdz file module
     enum DownloadARQuickLookPresentation {
+        struct Response {
+            let url: URL
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
+    /// Parse url and navigate
+    enum URLPresentation {
+        struct Request {
+            let url: URL
+        }
+
         struct Response {
             let url: URL
         }

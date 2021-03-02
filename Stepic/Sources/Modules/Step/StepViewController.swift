@@ -14,6 +14,7 @@ protocol StepViewControllerProtocol: AnyObject {
     func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel)
     func displayDownloadARQuickLook(viewModel: StepDataFlow.DownloadARQuickLookPresentation.ViewModel)
     func displayARQuickLook(viewModel: StepDataFlow.ARQuickLookPresentation.ViewModel)
+    func displayURL(viewModel: StepDataFlow.URLPresentation.ViewModel)
     func displayOKAlert(viewModel: StepDataFlow.OKAlertPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
@@ -275,6 +276,7 @@ extension StepViewController: StepViewControllerProtocol {
             discussionThreadType: .default,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
             shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
         )
     }
@@ -284,6 +286,7 @@ extension StepViewController: StepViewControllerProtocol {
             discussionThreadType: .solutions,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
             shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
         )
     }
@@ -315,6 +318,16 @@ extension StepViewController: StepViewControllerProtocol {
         self.present(previewController, animated: true, completion: nil)
     }
 
+    func displayURL(viewModel: StepDataFlow.URLPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
+
     func displayOKAlert(viewModel: StepDataFlow.OKAlertPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
@@ -335,12 +348,14 @@ extension StepViewController: StepViewControllerProtocol {
         discussionThreadType: DiscussionThread.ThreadType,
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
+        isTeacher: Bool,
         shouldEmbedInWriteComment: Bool
     ) {
         let discussionsAssembly = DiscussionsAssembly(
             discussionThreadType: discussionThreadType,
             discussionProxyID: discussionProxyID,
-            stepID: stepID
+            stepID: stepID,
+            isTeacher: isTeacher
         )
         let discussionsViewController = discussionsAssembly.makeModule()
 
@@ -432,13 +447,7 @@ extension StepViewController: StepViewDelegate {
             }
         }
 
-        WebControllerManager.shared.presentWebControllerWithURL(
-            url,
-            inController: self,
-            withKey: .externalLink,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+        self.interactor.doURLPresentation(request: .init(url: url))
     }
 
     func stepView(_ view: StepView, didRequestFullscreenImage url: URL) {

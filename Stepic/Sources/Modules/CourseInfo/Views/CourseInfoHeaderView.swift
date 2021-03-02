@@ -27,6 +27,9 @@ extension CourseInfoHeaderView {
         let verifiedImageSize = CGSize(width: 11, height: 11)
         let verifiedSpacing: CGFloat = 4.0
         let verifiedTextFont = UIFont.systemFont(ofSize: 12, weight: .light)
+
+        let skeletonFirstColor = UIColor.dynamic(light: UIColor(white: 0.99, alpha: 0.95), dark: .skeletonGradientFirst)
+        let skeletonSecondColor = UIColor.dynamic(light: UIColor(white: 0.75, alpha: 1), dark: .skeletonGradientSecond)
     }
 }
 
@@ -166,6 +169,23 @@ final class CourseInfoHeaderView: UIView {
             + actionButtonsStackViewIntrinsicContentSize.height
             + self.appearance.actionButtonsStackViewInsets.top
             + (hasVerifiedMark ? verifiedMarkHeight : 0)
+    }
+
+    func setLoading(_ isLoading: Bool) {
+        [
+            self.actionButtonsStackView,
+            self.titleStackView,
+            self.marksStackView
+        ].forEach { $0.isHidden = isLoading }
+
+        if isLoading {
+            self.skeleton.firstColor = self.appearance.skeletonFirstColor
+            self.skeleton.secondColor = self.appearance.skeletonSecondColor
+            self.skeleton.viewBuilder = { CourseInfoHeaderSkeletonView() }
+            self.skeleton.show()
+        } else {
+            self.skeleton.hide()
+        }
     }
 
     // MARK: View model

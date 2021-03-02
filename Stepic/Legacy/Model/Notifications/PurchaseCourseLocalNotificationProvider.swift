@@ -23,6 +23,7 @@ final class PurchaseCourseLocalNotificationProvider: LocalNotificationContentPro
         case let fireHour where fireHour >= 21:
             if let adjustedDate = Calendar.current.date(byAdding: .day, value: 1, to: fireDate) {
                 dateComponents = Calendar.current.dateComponents(components, from: adjustedDate)
+                dateComponents.hour = Self.defaultFireHour
             }
         default:
             break

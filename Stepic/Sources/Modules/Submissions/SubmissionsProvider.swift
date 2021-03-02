@@ -3,27 +3,40 @@ import PromiseKit
 
 protocol SubmissionsProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<Step?>
-    func fetchSubmissions(stepID: Step.IdType, page: Int) -> Promise<([Submission], Meta)>
+    func fetchSubmissions(
+        stepID: Step.IdType,
+        filterQuery: SubmissionsFilterQuery,
+        page: Int
+    ) -> Promise<([Submission], Meta)>
     func fetchAttempts(ids: [Attempt.IdType], stepID: Step.IdType) -> Promise<[Attempt]>
+    func fetchUsers(ids: [User.IdType]) -> Promise<[User]>
     func fetchCurrentUser() -> Guarantee<User?>
 }
 
 final class SubmissionsProvider: SubmissionsProviderProtocol {
     private let submissionsNetworkService: SubmissionsNetworkServiceProtocol
     private let attemptsNetworkService: AttemptsNetworkServiceProtocol
+
+    private let usersNetworkService: UsersNetworkServiceProtocol
+    private let usersPersistenceService: UsersPersistenceServiceProtocol
     private let userAccountService: UserAccountServiceProtocol
+
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
     init(
         submissionsNetworkService: SubmissionsNetworkServiceProtocol,
         attemptsNetworkService: AttemptsNetworkServiceProtocol,
+        usersNetworkService: UsersNetworkServiceProtocol,
+        usersPersistenceService: UsersPersistenceServiceProtocol,
         userAccountService: UserAccountServiceProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol,
         stepsPersistenceService: StepsPersistenceServiceProtocol
     ) {
         self.submissionsNetworkService = submissionsNetworkService
         self.attemptsNetworkService = attemptsNetworkService
+        self.usersNetworkService = usersNetworkService
+        self.usersPersistenceService = usersPersistenceService
         self.userAccountService = userAccountService
         self.stepsNetworkService = stepsNetworkService
         self.stepsPersistenceService = stepsPersistenceService
@@ -48,23 +61,23 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
         }
     }
 
-    func fetchSubmissions(stepID: Step.IdType, page: Int) -> Promise<([Submission], Meta)> {
+    func fetchSubmissions(
+        stepID: Step.IdType,
+        filterQuery: SubmissionsFilterQuery,
+        page: Int
+    ) -> Promise<([Submission], Meta)> {
         Promise { seal in
-            firstly {
-                self.fetchCurrentUser().compactMap { $0 }
-            }.then { currentUser -> Promise<(User, Step)> in
-                self.fetchStep(id: stepID)
-                    .compactMap { $0 }
-                    .map { (currentUser, $0) }
-            }.then { currentUser, step -> Promise<([Submission], Meta)> in
+            firstly { () -> Promise<Step> in
+                self.fetchStep(id: stepID).compactMap { $0 }
+            }.then { step -> Promise<([Submission], Meta)> in
                 self.submissionsNetworkService.fetch(
-                    stepID: step.id,
+                    stepID: stepID,
                     blockName: step.block.name,
-                    userID: currentUser.id,
+                    filterQuery: filterQuery,
                     page: page
                 )
-            }.done { fetchResult in
-                seal.fulfill((fetchResult.0, fetchResult.1))
+            }.done { submissions, meta in
+                seal.fulfill((submissions, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
@@ -72,13 +85,36 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
     }
 
     func fetchAttempts(ids: [Attempt.IdType], stepID: Step.IdType) -> Promise<[Attempt]> {
-        Promise { seal in
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return Promise { seal in
             firstly {
                 self.fetchStep(id: stepID).compactMap { $0 }
-            }.then { step -> Promise<([Attempt], Meta)> in
+            }.then { step -> Promise<[Attempt]> in
                 self.attemptsNetworkService.fetch(ids: ids, blockName: step.block.name)
-            }.done { attempts, _ in
+            }.done { attempts in
                 seal.fulfill(attempts)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchUsers(ids: [User.IdType]) -> Promise<[User]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return Promise { seal in
+            self.usersPersistenceService.fetch(ids: ids).then { cachedUsers -> Promise<[User]> in
+                if Set(cachedUsers.map(\.id)) == Set(ids) {
+                    return .value(cachedUsers)
+                }
+                return self.usersNetworkService.fetch(ids: ids)
+            }.done { users in
+                seal.fulfill(users)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

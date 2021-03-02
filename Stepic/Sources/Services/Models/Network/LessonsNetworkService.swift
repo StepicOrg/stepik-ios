@@ -5,6 +5,12 @@ protocol LessonsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Lesson.IdType]) -> Promise<[Lesson]>
 }
 
+extension LessonsNetworkServiceProtocol {
+    func fetch(id: Lesson.IdType) -> Promise<Lesson?> {
+        self.fetch(ids: [id]).map { $0.first }
+    }
+}
+
 final class LessonsNetworkService: LessonsNetworkServiceProtocol {
     private let lessonsAPI: LessonsAPI
 

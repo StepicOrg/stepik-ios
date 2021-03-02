@@ -77,7 +77,15 @@ class SkeletonTableViewDataSource: NSObject, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.attach(view: SkeletonView(placeholderView: placeholderCellView))
+        let skeletonView = SkeletonView(
+            placeholderView: placeholderCellView,
+            appearance: .init(
+                gradientFirstColor: tableView.skeleton.firstColor,
+                gradientSecondColor: tableView.skeleton.secondColor
+            )
+        )
+        cell.attach(view: skeletonView)
+
         return cell
     }
 

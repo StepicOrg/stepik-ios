@@ -269,6 +269,32 @@ extension UIColor {
     /// A non adaptable color with hex value #222437 (darkblue02).
     static let stepikExtraDarkAccentFixed = ColorPalette.extraDarkAccent900
 
+    // MARK: - Material Color Theme -
+
+    static let onSurface = UIColor.black
+
+    /// The material color for text labels that contain primary content.
+    static var stepikMaterialPrimaryText: UIColor {
+        let lightColor = UIColor.onSurface.withAlphaComponent(0.87)
+
+        if #available(iOS 13.0, *) {
+            return .dynamic(light: lightColor, dark: .stepikSystemPrimaryText)
+        } else {
+            return lightColor
+        }
+    }
+
+    /// The material color for text labels that contain secondary content.
+    static var stepikMaterialSecondaryText: UIColor {
+        let lightColor = UIColor.onSurface.withAlphaComponent(0.6)
+
+        if #available(iOS 13.0, *) {
+            return .dynamic(light: lightColor, dark: .secondaryLabel)
+        } else {
+            return lightColor
+        }
+    }
+
     // MARK: - System Standard Colors
 
     /// The base gray color.
@@ -522,10 +548,6 @@ extension UIColor {
 
     static var skeletonGradientSecond: UIColor {
         .dynamic(light: UIColor(hex6: 0xE7E7E7), dark: .stepikTertiaryBackground)
-    }
-
-    static var skeletonGradientThird: UIColor {
-        .dynamic(light: ColorPalette.grey100, dark: .stepikSecondaryBackground)
     }
 
     // MARK: - Quizzes -

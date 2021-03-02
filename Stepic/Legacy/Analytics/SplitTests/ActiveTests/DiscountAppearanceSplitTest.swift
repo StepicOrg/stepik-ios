@@ -4,7 +4,7 @@ final class DiscountAppearanceSplitTest: SplitTestProtocol {
     typealias GroupType = Group
 
     static let identifier = "discount_appearance"
-    static let minParticipatingStartVersion = "1.159"
+    static let minParticipatingStartVersion = "1.0"
 
     var currentGroup: Group
     var analytics: ABAnalyticsServiceProtocol

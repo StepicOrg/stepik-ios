@@ -44,24 +44,40 @@ final class DeepLinkRoutingService {
         self.route(DeepLinkRoute(path: path), fallbackPath: path, from: source)
     }
 
-    func route(_ route: DeepLinkRoute?, fallbackPath: String = "", from source: UIViewController? = nil) {
-        let fallbackURLPath = fallbackPath.isEmpty ? (route?.path ?? "") : fallbackPath
-        self.getModuleStack(route: route, urlPath: fallbackURLPath).done { moduleStack in
-            let router = self.makeRouter(
-                route: route,
-                from: source,
-                moduleStack: moduleStack,
-                fallbackPath: fallbackURLPath
-            )
-            router.route()
-        }.catch { error in
-            print("DeepLinkRoutingService :: failed route = \(String(describing: route)), fallbackPath = \(fallbackURLPath), error = \(error)")
+    @discardableResult
+    func route(
+        _ route: DeepLinkRoute?,
+        fallbackPath: String = "",
+        from source: UIViewController? = nil
+    ) -> Promise<Void> {
+        Promise { seal in
+            let fallbackURLPath = fallbackPath.isEmpty ? (route?.path ?? "") : fallbackPath
+            self.getModuleStack(route: route, urlPath: fallbackURLPath).done { moduleStack in
+                let router = self.makeRouter(
+                    route: route,
+                    from: source,
+                    moduleStack: moduleStack,
+                    fallbackPath: fallbackURLPath
+                )
+                router.route()
 
-            if let routerError = error as? Error {
-                switch routerError {
-                case .failedRouteToStory:
-                    SVProgressHUD.showError(withStatus: routerError.errorDescription)
+                seal.fulfill(())
+            }.catch { error in
+                print(
+                    """
+                    DeepLinkRoutingService :: failed route = \(String(describing: route)), \
+                    fallbackPath = \(fallbackURLPath), error = \(error)
+                    """
+                )
+
+                if let routerError = error as? Error {
+                    switch routerError {
+                    case .failedRouteToStory:
+                        SVProgressHUD.showError(withStatus: routerError.errorDescription)
+                    }
                 }
+
+                seal.reject(error)
             }
         }
     }

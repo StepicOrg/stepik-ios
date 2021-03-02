@@ -4,11 +4,13 @@ protocol LessonPresenterProtocol {
     func presentLesson(response: LessonDataFlow.LessonLoad.Response)
     func presentLessonNavigation(response: LessonDataFlow.LessonNavigationLoad.Response)
     func presentLessonTooltipInfo(response: LessonDataFlow.LessonTooltipInfoLoad.Response)
+    func presentLessonModule(response: LessonDataFlow.LessonModulePresentation.Response)
     func presentStepTooltipInfoUpdate(response: LessonDataFlow.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: LessonDataFlow.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: LessonDataFlow.CurrentStepUpdate.Response)
     func presentCurrentStepAutoplay(response: LessonDataFlow.CurrentStepAutoplay.Response)
     func presentEditStep(response: LessonDataFlow.EditStepPresentation.Response)
+    func presentSubmissions(response: LessonDataFlow.SubmissionsPresentation.Response)
     func presentStepTextUpdate(response: LessonDataFlow.StepTextUpdate.Response)
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
@@ -63,6 +65,12 @@ final class LessonPresenter: LessonPresenterProtocol {
         self.viewController?.displayLessonTooltipInfo(viewModel: .init(data: data))
     }
 
+    func presentLessonModule(response: LessonDataFlow.LessonModulePresentation.Response) {
+        self.viewController?.displayLessonModule(
+            viewModel: .init(lessonID: response.lessonID, stepIndex: response.stepIndex)
+        )
+    }
+
     func presentStepTooltipInfoUpdate(response: LessonDataFlow.StepTooltipInfoUpdate.Response) {
         self.viewController?.displayStepTooltipInfoUpdate(
             viewModel: .init(
@@ -92,6 +100,12 @@ final class LessonPresenter: LessonPresenterProtocol {
 
     func presentEditStep(response: LessonDataFlow.EditStepPresentation.Response) {
         self.viewController?.displayEditStep(viewModel: .init(stepID: response.stepID))
+    }
+
+    func presentSubmissions(response: LessonDataFlow.SubmissionsPresentation.Response) {
+        self.viewController?.displaySubmissions(
+            viewModel: .init(stepID: response.stepID, isTeacher: response.isTeacher)
+        )
     }
 
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response) {

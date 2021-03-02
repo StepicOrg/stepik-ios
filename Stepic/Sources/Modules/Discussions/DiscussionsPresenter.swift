@@ -16,6 +16,7 @@ protocol DiscussionsPresenterProtocol {
     func presentSortTypes(response: Discussions.SortTypesPresentation.Response)
     func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response)
     func presentSolution(response: Discussions.SolutionPresentation.Response)
+    func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response)
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -161,6 +162,23 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         )
     }
 
+    func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response) {
+        let commentViewModel = self.makeCommentViewModel(
+            comment: response.comment,
+            isSelected: false,
+            hasReplies: false
+        )
+
+        self.viewController?.displayCommentActionSheet(
+            viewModel: .init(
+                stepID: response.stepID,
+                isTeacher: response.isTeacher,
+                isTheoryStep: response.isTheoryStep,
+                comment: commentViewModel
+            )
+        )
+    }
+
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
@@ -227,15 +245,16 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         }()
 
         let processedContent: ProcessedContent = {
-            let contentProcessingInjections = ContentProcessor.defaultInjections + [
-                FontSizeInjection(baseFontSize: 14),
-                TextColorInjection(dynamicColor: .stepikPrimaryText)
-            ]
+            let appearance = DiscussionsCellView.Appearance()
 
             let contentProcessor = ContentProcessor(
                 rules: ContentProcessor.defaultRules,
-                injections: contentProcessingInjections
+                injections: ContentProcessor.defaultInjections + [
+                    FontInjection(font: appearance.processedContentViewLabelFont),
+                    TextColorInjection(dynamicColor: appearance.secondaryTextColor)
+                ]
             )
+
             let processedContent = contentProcessor.processContent(comment.text)
 
             return processedContent

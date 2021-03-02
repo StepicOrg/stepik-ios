@@ -137,6 +137,10 @@ final class DiscussionsView: UIView {
         self.tableView.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
     }
 
+    func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
+        self.tableView.cellForRow(at: indexPath)
+    }
+
     // MARK: - Private API
 
     @objc

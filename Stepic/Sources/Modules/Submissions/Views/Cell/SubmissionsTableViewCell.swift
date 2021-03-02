@@ -40,14 +40,16 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         }
     }
 
-    var onSolutionClick: (() -> Void)? {
+    var onMoreClick: (() -> Void)? {
         get {
-            self.cellView.onSolutionClick
+            self.cellView.onMoreClick
         }
         set {
-            self.cellView.onSolutionClick = newValue
+            self.cellView.onMoreClick = newValue
         }
     }
+
+    var moreActionAnchorView: UIView { self.cellView.moreActionAnchorView }
 
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
@@ -62,7 +64,7 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         self.cellView.configure(viewModel: nil)
     }
 
-    func configure(viewModel: SubmissionsViewModel) {
+    func configure(viewModel: SubmissionViewModel) {
         self.cellView.configure(viewModel: viewModel)
     }
 

@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-extension CourseInfoTabReviewsSkeletonView {
+extension CourseInfoTabReviewsCellSkeletonView {
     struct Appearance {
         let labelCornerRadius: CGFloat = 5.0
 
@@ -31,7 +31,7 @@ extension CourseInfoTabReviewsSkeletonView {
     }
 }
 
-final class CourseInfoTabReviewsSkeletonView: UIView {
+final class CourseInfoTabReviewsCellSkeletonView: UIView {
     let appearance: Appearance
 
     private lazy var avatarView: UIView = {
@@ -88,7 +88,7 @@ final class CourseInfoTabReviewsSkeletonView: UIView {
     }
 }
 
-extension CourseInfoTabReviewsSkeletonView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabReviewsCellSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarView)
         self.addSubview(self.nameLabelView)

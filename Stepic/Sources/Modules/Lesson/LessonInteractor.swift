@@ -4,6 +4,7 @@ import PromiseKit
 protocol LessonInteractorProtocol {
     func doLessonLoad(request: LessonDataFlow.LessonLoad.Request)
     func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
+    func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request)
 }
 
 final class LessonInteractor: LessonInteractorProtocol {
@@ -62,6 +63,15 @@ final class LessonInteractor: LessonInteractorProtocol {
         }
 
         self.presenter.presentEditStep(response: .init(stepID: stepID))
+    }
+
+    func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request) {
+        guard let lesson = self.currentLesson,
+              let stepID = lesson.stepsArray[safe: request.index] else {
+            return
+        }
+
+        self.presenter.presentSubmissions(response: .init(stepID: stepID, isTeacher: lesson.canEdit))
     }
 
     // MARK: Private API
@@ -324,6 +334,37 @@ extension LessonInteractor: StepOutputProtocol {
 
     func handleNextUnitNavigation() {
         self.navigateToNextUnit(autoplayNext: false)
+    }
+
+    func handleLessonNavigation(lessonID: Int, stepIndex: Int, unitID: Int?) {
+        guard let currentLesson = self.currentLesson else {
+            return
+        }
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        self.provider
+            .fetchLesson(id: lessonID, dataSourceType: .remote)
+            .compactMap { $0 }
+            .then { requestedLesson -> Promise<Void> in
+                if currentLesson.coursesArray == requestedLesson.coursesArray {
+                    let initialContext: LessonDataFlow.Context = {
+                        if let unitID = unitID {
+                            return .unit(id: unitID)
+                        }
+                        return .lesson(id: lessonID)
+                    }()
+
+                    self.didLoadFromCache = false
+
+                    return self.refreshLesson(context: initialContext, startStep: .index(stepIndex - 1))
+                } else {
+                    self.presenter.presentLessonModule(response: .init(lessonID: lessonID, stepIndex: stepIndex))
+                    return .value(())
+                }
+            }.ensure {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            }.cauterize()
     }
 
     func handleStepNavigation(to index: Int) {

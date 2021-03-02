@@ -49,7 +49,10 @@ final class LessonAssembly: Assembly {
             persistenceQueuesService: PersistenceQueuesService(),
             dataBackUpdateService: dataBackUpdateService
         )
-        let viewController = LessonViewController(interactor: interactor)
+        let viewController = LessonViewController(
+            interactor: interactor,
+            deepLinkRoutingService: DeepLinkRoutingService()
+        )
         viewController.hidesBottomBarWhenPushed = true
 
         presenter.viewController = viewController

@@ -35,8 +35,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 promoCode: data.promoCode
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
-        default:
-            break
+        case .failure:
+            self.viewController?.displayCourse(viewModel: .init(state: .error))
         }
     }
 

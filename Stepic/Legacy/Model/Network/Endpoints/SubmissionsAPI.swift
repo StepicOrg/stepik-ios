@@ -59,21 +59,23 @@ final class SubmissionsAPI: APIEndpoint {
         }
     }
     
-    /// Get user submissions for the step.
+    /// Get submissions for the step by filterQuery.
     func retrieve(
         stepID: Int,
         stepName: String,
-        userID: User.IdType,
+        filterQuery: SubmissionsFilterQuery,
         page: Int = 1,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<([Submission], Meta)> {
         Promise { seal in
-            let parameters: Parameters = [
-                "order": "desc",
+            var parameters: Parameters = [
                 "page": page,
-                "step": stepID,
-                "user": userID
+                "step": stepID
             ]
+
+            filterQuery.dictValue.forEach { key, value in
+                parameters[key] = String(describing: value)
+            }
             
             self.manager.request(
                 "\(StepikApplicationsInfo.apiURL)/\(self.name)",

@@ -31,7 +31,7 @@ enum Typography {
 
     // MARK: Private Helpers
 
-    private static func makeMonospacedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+    static func makeMonospacedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
         if #available(iOS 13.0, *) {
             return UIFont.monospacedSystemFont(ofSize: size, weight: weight)
         } else {

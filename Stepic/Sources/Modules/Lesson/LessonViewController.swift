@@ -9,11 +9,13 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displayLesson(viewModel: LessonDataFlow.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: LessonDataFlow.LessonNavigationLoad.ViewModel)
     func displayLessonTooltipInfo(viewModel: LessonDataFlow.LessonTooltipInfoLoad.ViewModel)
+    func displayLessonModule(viewModel: LessonDataFlow.LessonModulePresentation.ViewModel)
     func displayStepTooltipInfoUpdate(viewModel: LessonDataFlow.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: LessonDataFlow.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: LessonDataFlow.CurrentStepUpdate.ViewModel)
     func displayCurrentStepAutoplay(viewModel: LessonDataFlow.CurrentStepAutoplay.ViewModel)
     func displayEditStep(viewModel: LessonDataFlow.EditStepPresentation.ViewModel)
+    func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
@@ -35,6 +37,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     }
 
     private let interactor: LessonInteractorProtocol
+    private let deepLinkRoutingService: DeepLinkRoutingService
 
     private lazy var infoBarButtonItem = UIBarButtonItem.stepikInfoBarButtonItem(
         target: self,
@@ -99,8 +102,9 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    init(interactor: LessonInteractorProtocol) {
+    init(interactor: LessonInteractorProtocol, deepLinkRoutingService: DeepLinkRoutingService) {
         self.interactor = interactor
+        self.deepLinkRoutingService = deepLinkRoutingService
         self.state = .loading
         super.init(nibName: nil, bundle: nil)
     }
@@ -370,7 +374,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                     title: NSLocalizedString("StepSubmissionsAlertActionTitle", comment: ""),
                     style: .default,
                     handler: { [weak self] _ in
-                        self?.presentSubmissions(stepID: step.id)
+                        self?.interactor.doSubmissionsPresentation(request: .init(index: currentIndex))
                     }
                 )
             )
@@ -411,18 +415,6 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                 self.present(sharingViewController, animated: true, completion: nil)
             }
         }
-    }
-
-    private func presentSubmissions(stepID: Step.IdType) {
-        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
-
-        let assembly = SubmissionsAssembly(
-            stepID: stepID,
-            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
-        )
-        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
-
-        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 }
 
@@ -499,6 +491,18 @@ extension LessonViewController: LessonViewControllerProtocol {
         self.updateInfoBarButtonItem()
     }
 
+    func displayLessonModule(viewModel: LessonDataFlow.LessonModulePresentation.ViewModel) {
+        self.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: false))
+
+        self.deepLinkRoutingService
+            .route(.lesson(lessonID: viewModel.lessonID, stepID: viewModel.stepIndex, unitID: nil))
+            .done { _ in
+                SVProgressHUD.showSuccess(withStatus: nil)
+            }.catch { _ in
+                self.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: true))
+            }
+    }
+
     func displayStepTooltipInfoUpdate(viewModel: LessonDataFlow.StepTooltipInfoUpdate.ViewModel) {
         self.tooltipInfos[viewModel.stepID] = viewModel.info
         self.updateInfoBarButtonItem()
@@ -534,6 +538,19 @@ extension LessonViewController: LessonViewControllerProtocol {
             stepID: viewModel.stepID,
             navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? EditStepOutputProtocol
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
+    }
+
+    func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel) {
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = SubmissionsAssembly(
+            stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
         )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 

@@ -81,7 +81,15 @@ class SkeletonCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        cell.attach(view: SkeletonView(placeholderView: placeholderCellView))
+        let skeletonView = SkeletonView(
+            placeholderView: placeholderCellView,
+            appearance: .init(
+                gradientFirstColor: collectionView.skeleton.firstColor,
+                gradientSecondColor: collectionView.skeleton.secondColor
+            )
+        )
+        cell.attach(view: skeletonView)
+
         return cell
     }
 }

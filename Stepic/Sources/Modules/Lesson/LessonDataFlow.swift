@@ -71,6 +71,19 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present new lesson module
+    enum LessonModulePresentation {
+        struct Response {
+            let lessonID: Int
+            let stepIndex: Int
+        }
+
+        struct ViewModel {
+            let lessonID: Int
+            let stepIndex: Int
+        }
+    }
+
     /// Mark step as passed
     enum StepPassedStatusUpdate {
         struct Response {
@@ -140,6 +153,22 @@ enum LessonDataFlow {
 
         struct ViewModel {
             let stepID: Step.IdType
+        }
+    }
+
+    enum SubmissionsPresentation {
+        struct Request {
+            let index: Int
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let isTeacher: Bool
         }
     }
 

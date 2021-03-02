@@ -36,6 +36,11 @@ extension UIColor {
 
         let hexString = String(format: "%02X%02X%02X", Int(red * 255.0), Int(green * 255.0), Int(blue * 255.0))
 
+        if alpha < 1 {
+            let alphaString = String(format: "%02X", Int(alpha * 255.0))
+            return "\(hexString)\(alphaString)"
+        }
+
         return hexString
     }
 }

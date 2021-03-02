@@ -59,11 +59,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
                 contentLanguage: self.contentLanguageService.globalContentLanguage
             )
         )
-
-        if self.networkReachabilityService.isReachable && self.userAccountService.isAuthorized,
-           let userID = self.userAccountService.currentUserID {
-            self.personalOffersService.syncPersonalOffers(userID: userID).cauterize()
-        }
+        self.syncPersonalOffers()
     }
 
     override func presentEmptyState(sourceModule: CourseListInputProtocol) {
@@ -94,6 +90,19 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         } else {
             fatalError("Unrecognized submodule")
         }
+    }
+
+    private func syncPersonalOffers() {
+        guard self.networkReachabilityService.isReachable else {
+            return
+        }
+
+        guard let currentUser = self.userAccountService.currentUser,
+              !currentUser.isGuest && self.userAccountService.isAuthorized else {
+            return
+        }
+
+        self.personalOffersService.syncPersonalOffers(userID: currentUser.id).cauterize()
     }
 }
 

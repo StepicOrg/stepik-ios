@@ -100,6 +100,7 @@ final class CourseInfoViewController: UIViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
 
+        self.updateState(newState: .loading)
         self.interactor.doCourseRefresh(request: .init())
     }
 
@@ -142,6 +143,38 @@ final class CourseInfoViewController: UIViewController {
         self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
             // Update status bar style.
             self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+        }
+    }
+
+    private func updateState(newState: CourseInfo.ViewControllerState) {
+        switch newState {
+        case .result(let data):
+            self.moreBarButton.isEnabled = true
+            self.courseInfoView?.setErrorPlaceholderVisible(false)
+            self.courseInfoView?.setLoading(false)
+
+            let isFirstLoadedResult = self.storedViewModel == nil
+
+            self.storedViewModel = data
+            self.courseInfoView?.configure(viewModel: data)
+
+            if isFirstLoadedResult {
+                DispatchQueue.main.async {
+                    let headerHeight = (self.courseInfoView?.headerHeight ?? 0)
+                        + (self.courseInfoView?.appearance.segmentedControlHeight ?? 0)
+                    self.updateContentOffset(scrollOffset: -headerHeight)
+                    self.updateContentInset(headerHeight: headerHeight)
+                }
+            }
+        case .loading:
+            self.moreBarButton.isEnabled = false
+            self.courseInfoView?.setErrorPlaceholderVisible(false)
+            self.courseInfoView?.setLoading(true)
+        case .error:
+            self.updateTopBar(alpha: 1)
+            self.moreBarButton.isEnabled = false
+            self.courseInfoView?.setErrorPlaceholderVisible(true)
+            self.courseInfoView?.setLoading(false)
         }
     }
 
@@ -450,13 +483,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayCourse(viewModel: CourseInfo.CourseLoad.ViewModel) {
-        switch viewModel.state {
-        case .result(let data):
-            self.storedViewModel = data
-            self.courseInfoView?.configure(viewModel: data)
-        case .loading:
-            break
-        }
+        self.updateState(newState: viewModel.state)
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
@@ -616,6 +643,12 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
 
     func courseInfoViewDidTryForFreeAction(_ courseInfoView: CourseInfoView) {
         self.interactor.doPreviewLessonPresentation(request: .init())
+    }
+
+    func courseInfoViewDidPlaceholderAction(_ view: CourseInfoView) {
+        self.updateTopBar(alpha: 0)
+        self.updateState(newState: .loading)
+        self.interactor.doCourseRefresh(request: .init())
     }
 }
 

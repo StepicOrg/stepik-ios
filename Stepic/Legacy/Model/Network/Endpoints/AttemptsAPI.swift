@@ -15,34 +15,14 @@ final class AttemptsAPI: APIEndpoint {
     override var name: String { "attempts" }
 
     /// Get attempts by ids.
-    func retrieve(
-        ids: [Attempt.IdType],
-        stepName: String,
-        page: Int = 1,
-        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
-    ) -> Promise<([Attempt], Meta)> {
-        let parameters: Parameters = [
-            "ids": ids,
-            "page": page
-        ]
-
-        return Promise { seal in
-            self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
-                method: .get,
-                parameters: parameters,
-                encoding: URLEncoding.default,
-                headers: headers
-            ).validate().responseSwiftyJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    seal.reject(error)
-                case .success(let json):
-                    let meta = Meta(json: json["meta"])
-                    let attempts = json["attempts"].arrayValue.map { Attempt(json: $0, stepBlockName: stepName) }
-                    seal.fulfill((attempts, meta))
-                }
-            }
+    func retrieve(ids: [Attempt.IdType], stepName: String) -> Promise<[Attempt]> {
+        self.retrieve.request(
+            requestEndpoint: self.name,
+            ids: ids,
+            withManager: self.manager
+        ).then { json -> Promise<[Attempt]> in
+            let attempts = json[self.name].arrayValue.map { Attempt(json: $0, stepBlockName: stepName) }
+            return .value(attempts)
         }
     }
 

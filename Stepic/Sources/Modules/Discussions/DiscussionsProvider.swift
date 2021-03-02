@@ -8,6 +8,7 @@ protocol DiscussionsProviderProtocol {
     func updateVote(_ vote: Vote) -> Promise<Vote>
     func incrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void>
     func decrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void>
+    func fetchCachedStep(stepID: Step.IdType) -> Guarantee<Step?>
 }
 
 final class DiscussionsProvider: DiscussionsProviderProtocol {
@@ -107,6 +108,16 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
                 CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.stepDiscussionsDecrementFailed)
+            }
+        }
+    }
+
+    func fetchCachedStep(stepID: Step.IdType) -> Guarantee<Step?> {
+        Guarantee { seal in
+            self.stepsPersistenceService.fetch(id: stepID).done { step in
+                seal(step)
+            }.catch { _ in
+                seal(nil)
             }
         }
     }
