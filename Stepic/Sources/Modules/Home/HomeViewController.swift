@@ -185,6 +185,12 @@ final class HomeViewController: BaseExploreViewController {
         case error
         case empty
 
+        var containerDescription: CourseListContainerViewFactory.HorizontalContainerDescription {
+            CourseListContainerViewFactory.HorizontalContainerDescription(
+                background: .image(UIImage(named: "enrolled_courses_gradient"))
+            )
+        }
+
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Enrolled", comment: ""),
@@ -211,7 +217,7 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = EnrolledCourseListType()
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .light,
+            colorMode: .clearLight,
             courseViewSource: .myCourses,
             output: self.interactor as? CourseListOutputProtocol
         )
@@ -262,6 +268,7 @@ final class HomeViewController: BaseExploreViewController {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
+                containerDescription: state.containerDescription,
                 headerDescription: state.headerDescription,
                 contentViewInsets: contentViewInsets
             )
