@@ -3,6 +3,16 @@
     {
       "filename" : "new_courses_gradient.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "new_courses_gradient_dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
