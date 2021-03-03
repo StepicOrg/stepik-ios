@@ -238,6 +238,17 @@ final class HomeViewController: BaseExploreViewController {
         case error
         case empty
 
+        var containerDescription: CourseListContainerViewFactory.HorizontalContainerDescription {
+            switch self {
+            case .normal:
+                return .init(background: .image(UIImage(named: "new_courses_gradient")))
+            case .empty:
+                return .init(background: .image(UIImage(named: "new_courses_placeholder_gradient_large")))
+            case .anonymous, .error:
+                return .init(background: .image(UIImage(named: "new_courses_placeholder_gradient_small")))
+            }
+        }
+
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Enrolled", comment: ""),
@@ -246,12 +257,12 @@ final class HomeViewController: BaseExploreViewController {
             )
         }
 
-        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+        var placeholderStyle: NewExploreBlockPlaceholderView.PlaceholderStyle {
             switch self {
             case .anonymous:
-                return .login
+                return .anonymous
             case .error:
-                return .enrolledError
+                return .error
             case .empty:
                 return .enrolledEmpty
             default:
@@ -264,7 +275,7 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = EnrolledCourseListType()
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .light,
+            colorMode: .clearLight,
             courseViewSource: .myCourses,
             output: self.interactor as? CourseListOutputProtocol
         )
@@ -292,15 +303,19 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makeEnrolledCourseListSubmodule()
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
+            let placeholderView = NewExploreBlockPlaceholderView(placeholderStyle: state.placeholderStyle)
             switch state {
             case .anonymous:
-                placeholderView.onPlaceholderClick = { [weak self] in
+                placeholderView.onActionButtonClick = { [weak self] in
                     self?.displayAuthorization(viewModel: .init())
                 }
             case .error:
-                placeholderView.onPlaceholderClick = { [weak self] in
+                placeholderView.onActionButtonClick = { [weak self] in
                     self?.refreshStateForEnrolledCourses(state: .normal)
+                }
+            case .empty:
+                placeholderView.onActionButtonClick = { [weak self] in
+                    self?.displayCatalog(viewModel: .init())
                 }
             default:
                 break
@@ -311,6 +326,7 @@ final class HomeViewController: BaseExploreViewController {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
+                containerDescription: state.containerDescription,
                 headerDescription: state.headerDescription
             )
 
