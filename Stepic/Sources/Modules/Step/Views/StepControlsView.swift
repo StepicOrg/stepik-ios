@@ -153,6 +153,12 @@ final class StepControlsView: UIView {
         }
     }
 
+    var isDiscussionsButtonVisible: Bool = true {
+        didSet {
+            self.discussionsButton.isHidden = !self.isDiscussionsButtonVisible
+        }
+    }
+
     var solutionsTitle: String? {
         didSet {
             self.solutionsButton.title = self.solutionsTitle
