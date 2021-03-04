@@ -42,7 +42,7 @@ final class DownloadsCellView: UIView {
         }
     }
 
-    var shouldShowAdaptiveMark: Bool = false {
+    var shouldShowAdaptiveMark = false {
         didSet {
             self.coverView.shouldShowAdaptiveMark = self.shouldShowAdaptiveMark
         }

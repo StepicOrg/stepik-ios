@@ -5,7 +5,7 @@ import Foundation
 final class StepikWidgetToken: NSObject, NSSecureCoding {
     private static let accessTokenCoderKey = "accessToken"
 
-    static var supportsSecureCoding: Bool = true
+    static var supportsSecureCoding = true
 
     let accessToken: String?
 

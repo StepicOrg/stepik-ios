@@ -42,7 +42,7 @@ final class CourseWidgetCoverView: UIView {
         }
     }
 
-    var shouldShowAdaptiveMark: Bool = false {
+    var shouldShowAdaptiveMark = false {
         didSet {
             self.adaptiveMarkLabel.isHidden = !self.shouldShowAdaptiveMark
         }

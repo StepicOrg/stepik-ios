@@ -40,7 +40,7 @@ final class NewProfileBlockHeaderView: UIControl, NewProfileBlockHeaderViewProto
         }
     }
 
-    var isShowAllButtonHidden: Bool = false {
+    var isShowAllButtonHidden = false {
         didSet {
             self.showAllButton.isHidden = self.isShowAllButtonHidden
         }

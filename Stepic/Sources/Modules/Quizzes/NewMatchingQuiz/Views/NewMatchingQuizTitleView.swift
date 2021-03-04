@@ -75,7 +75,7 @@ final class NewMatchingQuizTitleView: UIView {
         )
     }
 
-    var isShadowVisible: Bool = true {
+    var isShadowVisible = true {
         didSet {
             self.updateShadowVisibility()
         }

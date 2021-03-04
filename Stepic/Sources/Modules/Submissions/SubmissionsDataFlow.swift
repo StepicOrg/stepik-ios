@@ -76,7 +76,7 @@ enum Submissions {
     enum SearchSubmissions {
         struct Request {
             let text: String
-            var forceSearch: Bool = false
+            var forceSearch = false
         }
     }
 

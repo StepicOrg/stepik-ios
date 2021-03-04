@@ -42,13 +42,13 @@ final class NewProfileStreakNotificationsSwitchView: UIView {
 
     var streakNotificationsSwitchTooltipAnchorView: UIView { self.switchControl }
 
-    var isOn: Bool = false {
+    var isOn = false {
         didSet {
             self.switchControl.isOn = isOn
         }
     }
 
-    var isSeparatorHidden: Bool = false {
+    var isSeparatorHidden = false {
         didSet {
             self.separatorView.isHidden = self.isSeparatorHidden
         }

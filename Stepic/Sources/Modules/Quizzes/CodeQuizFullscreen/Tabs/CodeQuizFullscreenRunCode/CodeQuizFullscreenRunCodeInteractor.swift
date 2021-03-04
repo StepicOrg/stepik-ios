@@ -22,7 +22,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
     private var currentUserCodeRun: UserCodeRun
     private var currentSamples: [CodeSamplePlainObject] = []
 
-    private var isSetDefaultTestInput: Bool = false
+    private var isSetDefaultTestInput = false
 
     init(
         stepID: Step.IdType,

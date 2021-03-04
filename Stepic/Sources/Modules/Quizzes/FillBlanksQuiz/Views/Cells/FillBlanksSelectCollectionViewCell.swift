@@ -49,7 +49,7 @@ final class FillBlanksSelectCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
-    var isEnabled: Bool = true {
+    var isEnabled = true {
         didSet {
             self.isUserInteractionEnabled = self.isEnabled
             self.imageView.alpha = self.isEnabled ? 1.0 : 0.5
