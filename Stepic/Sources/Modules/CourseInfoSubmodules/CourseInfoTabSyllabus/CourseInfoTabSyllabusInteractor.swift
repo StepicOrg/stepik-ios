@@ -121,7 +121,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             strongSelf.fetchSyllabusInAppropriateMode(course: course, isOnline: shouldUseNetwork).done { response in
                 DispatchQueue.main.async {
                     print("CourseInfoTabSyllabusInteractor :: finish fetching syllabus, isOnline = \(shouldUseNetwork)")
-                    strongSelf.presenter.presentCourseSyllabus(response: response)
+                    let isEmptyCacheFetchResult: Bool = {
+                        if !shouldUseNetwork, case .success(let data) = response.result {
+                            return data.sections.isEmpty
+                        }
+                        return false
+                    }()
+
+                    if !isEmptyCacheFetchResult {
+                        strongSelf.presenter.presentCourseSyllabus(response: response)
+                    }
 
                     if !strongSelf.didLoadFromCache {
                         strongSelf.didLoadFromCache = true
