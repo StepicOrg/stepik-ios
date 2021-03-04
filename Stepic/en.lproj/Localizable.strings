@@ -871,7 +871,8 @@ DownloadARQuickLookAlertFailedMessage = "Couldn't download AR-object. Please try
 StepARQuickLookUnsupportedAlertTitle = "AR Quick Look Not Supported";
 StepARQuickLookUnsupportedAlertMessage = "Your device is not supported by viewing the content in the augmented reality, the minimum requirement iOS 12.";
 StepDisabledTitle = "You can't see the quiz yet";
-StepDisabledMessage = "Write to the course authors so that they pay attention to the settings.\nAccess may be restored after some time.";
+StepDisabledMessage = "Write to the course authors so that they pay attention to the settings %@.<br><br>Access may be restored after some time.";
+StepPosition = "Step %@";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

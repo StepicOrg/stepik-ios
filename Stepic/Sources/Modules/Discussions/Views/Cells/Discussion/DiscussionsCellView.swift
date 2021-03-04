@@ -19,7 +19,6 @@ extension DiscussionsCellView {
         let nameLabelHeight: CGFloat = 18
 
         let moreButtonSize = CGSize(width: 26, height: 26)
-        let moreButtonTintColor = UIColor.black.withAlphaComponent(0.38)
         let moreButtonInsets = LayoutInsets(right: 16)
 
         let secondaryTextColor = UIColor.stepikMaterialSecondaryText
@@ -67,7 +66,7 @@ final class DiscussionsCellView: UIView {
         let button = UIButton(type: .system)
         button.setImage(image, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = self.appearance.moreButtonTintColor
+        button.tintColor = self.appearance.secondaryTextColor
         button.addTarget(self, action: #selector(self.moreButtonClicked), for: .touchUpInside)
         return button
     }()

@@ -60,14 +60,16 @@ final class CourseInfoTabInfoView: UIView {
 
     private var skeletonView: CourseInfoTabInfoSkeletonView?
 
-    func showLoading() {
+    func showLoading(topOffset: CGFloat? = nil) {
         self.hideLoading()
         self.scrollableStackView.isHidden = true
 
-        self.skeletonView = CourseInfoTabInfoSkeletonView(
-            appearance: .init(topOffset: self.contentInsets.top + self.appearance.skeletonTopInset)
+        let loadingView = CourseInfoTabInfoSkeletonView(
+            appearance: .init(topOffset: (topOffset ?? self.contentInsets.top) + self.appearance.skeletonTopInset)
         )
-        self.skeleton.viewBuilder = { self.skeletonView.require() }
+        self.skeletonView = loadingView
+
+        self.skeleton.viewBuilder = { loadingView }
         self.skeleton.show()
     }
 
@@ -246,7 +248,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
             if let currentSkeletonViewTopOffset = self.skeletonView?.appearance.topOffset,
                newValue.top > 0 && newValue.top != currentSkeletonViewTopOffset {
-                self.showLoading()
+                self.showLoading(topOffset: newValue.top)
             }
 
             self.scrollableStackView.contentInsets = newValue

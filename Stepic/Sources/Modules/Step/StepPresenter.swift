@@ -29,7 +29,35 @@ final class StepPresenter: StepPresenterProtocol {
         switch response.result {
         case .success(let data):
             if !data.step.isEnabled && data.isDisabledStepsSupported {
-                self.viewController?.displayStep(viewModel: .init(state: .disabled))
+                let stepHyperlink: String = {
+                    let stepURLString = self.urlFactory.makeStep(
+                        lessonID: data.step.lessonID,
+                        stepPosition: data.step.position
+                    )?.absoluteString ?? ""
+                    let lessonTitle = data.step.lesson != nil
+                        ? FormatterHelper.lessonTitle(data.step.lesson.require())
+                        : ""
+                    let stepTitle = String(
+                        format: NSLocalizedString("StepPosition", comment: ""),
+                        arguments: ["\(data.step.position)"]
+                    )
+
+                    return """
+                    <a href="\(stepURLString)" \
+                    rel="noopener noreferrer nofollow">\(lessonTitle) → \(stepTitle)</a>
+                    """
+                }()
+                let message = String(
+                    format: NSLocalizedString("StepDisabledMessage", comment: ""),
+                    arguments: [stepHyperlink]
+                )
+
+                let viewModel = StepDisabledViewModel(
+                    title: NSLocalizedString("StepDisabledTitle", comment: ""),
+                    message: message
+                )
+
+                self.viewController?.displayStep(viewModel: .init(state: .disabled(data: viewModel)))
             } else {
                 let viewModel = self.makeViewModel(
                     step: data.step,
