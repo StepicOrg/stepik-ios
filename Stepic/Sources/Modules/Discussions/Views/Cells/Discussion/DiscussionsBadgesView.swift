@@ -3,7 +3,7 @@ import UIKit
 
 extension DiscussionsBadgesView {
     struct Appearance {
-        let badgeFont = UIFont.systemFont(ofSize: 10, weight: .medium)
+        let badgeFont = Typography.caption2Font
         let badgeTintColor = UIColor.white
         let badgeCornerRadius: CGFloat = 10
 

@@ -4,15 +4,24 @@ import UIKit
 extension DiscussionsVotesView {
     struct Appearance {
         let imageSize = CGSize(width: 20, height: 20)
-        let font = UIFont.systemFont(ofSize: 12, weight: .light)
+        let font = Typography.bodyFont
         let spacing: CGFloat = 16
 
-        let filledTintColor = UIColor.stepikAccent
-        let normalTintColor = UIColor.stepikAccentAlpha50
-        let disabledTintColor = UIColor.stepikAccentAlpha25
+        let filledTintColor = UIColor.dynamic(
+            light: UIColor.black.withAlphaComponent(0.6),
+            dark: UIColor.stepikSystemSecondaryText.withAlphaComponent(0.8)
+        )
+        let normalTintColor = UIColor.dynamic(
+            light: UIColor.black.withAlphaComponent(0.38),
+            dark: UIColor.stepikSystemSecondaryText.withAlphaComponent(0.5)
+        )
+        let disabledTintColor = UIColor.dynamic(
+            light: UIColor.black.withAlphaComponent(0.25),
+            dark: UIColor.stepikSystemSecondaryText.withAlphaComponent(0.25)
+        )
 
-        let likeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
-        let dislikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
+        let likeButtonTitleInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
+        let dislikeButtonTitleInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
     }
 }
 

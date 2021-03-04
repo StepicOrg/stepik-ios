@@ -54,6 +54,14 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         } else {
             self.currentFilterQuery = .default
         }
+
+        let searchText = self.currentFilterQuery.search ?? ""
+
+        if !searchText.isEmpty {
+            DispatchQueue.main.async {
+                self.presenter.presentSearchTextUpdate(response: .init(searchText: searchText))
+            }
+        }
     }
 
     // MARK: Protocol Conforming
@@ -117,7 +125,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         } else {
             self.getCurrentStep()
                 .compactMap { $0 }
-                .done { self.presenter.doSubmissionPresentation(response: .init(step: $0, submission: submission)) }
+                .done { self.presenter.presentSubmission(response: .init(step: $0, submission: submission)) }
                 .cauterize()
         }
     }

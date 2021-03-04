@@ -273,6 +273,7 @@ enum CourseInfo {
 
     enum ViewControllerState {
         case loading
+        case error
         case result(data: CourseInfoHeaderViewModel)
     }
 }

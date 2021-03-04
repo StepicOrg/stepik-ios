@@ -24,7 +24,7 @@ protocol CardsStepsView: AnyObject {
     func swipeCardRight()
     func updateTopCardContent(stepViewController: CardStepViewController)
     func updateTopCardTitle(title: String, showControls: Bool)
-    func presentDiscussions(stepId: Int, discussionProxyId: String)
+    func presentDiscussions(stepID: Int, discussionProxyID: String, isTeacher: Bool)
     func presentShareDialog(for link: String)
     func refreshCards()
 
@@ -553,12 +553,14 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func onTitleButtonClick() {
-        guard let stepId = currentStepPresenter?.step.id,
-              let discussionProxyId = currentStepPresenter?.step.discussionProxyID else {
+        guard let step = currentStepPresenter?.step,
+              let discussionProxyID = step.discussionProxyID else {
             return
         }
 
-        view?.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
+        let isTeacher = step.lesson?.canEdit ?? false
+
+        self.view?.presentDiscussions(stepID: step.id, discussionProxyID: discussionProxyID, isTeacher: isTeacher)
     }
 }
 

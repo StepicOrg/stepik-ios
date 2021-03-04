@@ -269,6 +269,20 @@ extension UIColor {
     /// A non adaptable color with hex value #222437 (darkblue02).
     static let stepikExtraDarkAccentFixed = ColorPalette.extraDarkAccent900
 
+    // MARK: - Material Color Theme -
+
+    static let onSurface = UIColor.dynamic(light: .black, dark: .white)
+
+    /// The material color for text labels that contain primary content.
+    static var stepikMaterialPrimaryText: UIColor {
+        UIColor.onSurface.withAlphaComponent(0.87)
+    }
+
+    /// The material color for text labels that contain secondary content.
+    static var stepikMaterialSecondaryText: UIColor {
+        UIColor.onSurface.withAlphaComponent(0.6)
+    }
+
     // MARK: - System Standard Colors
 
     /// The base gray color.
@@ -522,10 +536,6 @@ extension UIColor {
 
     static var skeletonGradientSecond: UIColor {
         .dynamic(light: UIColor(hex6: 0xE7E7E7), dark: .stepikTertiaryBackground)
-    }
-
-    static var skeletonGradientThird: UIColor {
-        .dynamic(light: ColorPalette.grey100, dark: .stepikSecondaryBackground)
     }
 
     // MARK: - Quizzes -

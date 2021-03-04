@@ -20,7 +20,7 @@ extension CourseInfoTabInfoView {
         let authorTitleLabelNumberOfLines = 0
         let authorIconLeadingSpace: CGFloat = 20
 
-        let loadingIndicatorTopInset: CGFloat = 20
+        let skeletonTopInset: CGFloat = 20
     }
 }
 
@@ -35,12 +35,6 @@ final class CourseInfoTabInfoView: UIView {
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
-    }()
-
-    private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .stepikGray)
-        view.hidesWhenStopped = true
-        return view
     }()
 
     init(
@@ -64,14 +58,26 @@ final class CourseInfoTabInfoView: UIView {
 
     // MARK: Public API
 
-    func showLoading() {
+    private var skeletonView: CourseInfoTabInfoSkeletonView?
+
+    func showLoading(topOffset: CGFloat? = nil) {
+        self.hideLoading()
         self.scrollableStackView.isHidden = true
-        self.loadingIndicator.startAnimating()
+
+        let loadingView = CourseInfoTabInfoSkeletonView(
+            appearance: .init(topOffset: (topOffset ?? self.contentInsets.top) + self.appearance.skeletonTopInset)
+        )
+        self.skeletonView = loadingView
+
+        self.skeleton.viewBuilder = { loadingView }
+        self.skeleton.show()
     }
 
     func hideLoading() {
         self.scrollableStackView.isHidden = false
-        self.loadingIndicator.stopAnimating()
+
+        self.skeletonView = nil
+        self.skeleton.hide()
     }
 
     func configure(viewModel: CourseInfoTabInfoViewModel) {
@@ -207,7 +213,6 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
-        self.addSubview(self.loadingIndicator)
     }
 
     func makeConstraints() {
@@ -215,12 +220,6 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.stackViewInsets.top).priority(999)
             make.leading.trailing.bottom.equalToSuperview()
-        }
-
-        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.loadingIndicator.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.loadingIndicatorTopInset)
-            make.centerX.equalToSuperview()
         }
     }
 }
@@ -242,13 +241,14 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
             self.scrollableStackView.contentInsets
         }
         set {
-            self.loadingIndicator.snp.updateConstraints { make in
-                make.top.equalToSuperview().offset(newValue.top + self.appearance.loadingIndicatorTopInset)
-            }
-
             // Fixes an issue with incorrect content offset on presentation when initial tab is `CourseInfo.Tab.info`.
             if newValue.top > 0 && self.contentOffset.y == 0 {
                 self.contentOffset = CGPoint(x: self.contentOffset.x, y: -newValue.top)
+            }
+
+            if let currentSkeletonViewTopOffset = self.skeletonView?.appearance.topOffset,
+               newValue.top > 0 && newValue.top != currentSkeletonViewTopOffset {
+                self.showLoading(topOffset: newValue.top)
             }
 
             self.scrollableStackView.contentInsets = newValue

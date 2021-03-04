@@ -12,6 +12,7 @@ protocol StepPresenterProtocol {
     func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
     func presentDownloadARQuickLook(response: StepDataFlow.DownloadARQuickLookPresentation.Response)
     func presentARQuickLook(response: StepDataFlow.ARQuickLookPresentation.Response)
+    func presentURL(response: StepDataFlow.URLPresentation.Response)
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -107,6 +108,7 @@ final class StepPresenter: StepPresenterProtocol {
             viewModel: .init(
                 discussionProxyID: discussionProxyID,
                 stepID: response.step.id,
+                isTeacher: response.isTeacher,
                 shouldEmbedInWriteComment: (response.step.discussionsCount ?? 0) == 0
             )
         )
@@ -122,6 +124,7 @@ final class StepPresenter: StepPresenterProtocol {
             viewModel: .init(
                 stepID: response.step.id,
                 discussionProxyID: response.discussionThread.discussionProxy,
+                isTeacher: response.isTeacher,
                 shouldEmbedInWriteComment: response.discussionThread.discussionsCount == 0
             )
         )
@@ -154,6 +157,10 @@ final class StepPresenter: StepPresenterProtocol {
 
             self.viewController?.displayOKAlert(viewModel: .init(title: title, message: message))
         }
+    }
+
+    func presentURL(response: StepDataFlow.URLPresentation.Response) {
+        self.viewController?.displayURL(viewModel: .init(url: response.url))
     }
 
     func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {

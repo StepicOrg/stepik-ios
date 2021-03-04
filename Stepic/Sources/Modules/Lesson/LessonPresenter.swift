@@ -4,6 +4,7 @@ protocol LessonPresenterProtocol {
     func presentLesson(response: LessonDataFlow.LessonLoad.Response)
     func presentLessonNavigation(response: LessonDataFlow.LessonNavigationLoad.Response)
     func presentLessonTooltipInfo(response: LessonDataFlow.LessonTooltipInfoLoad.Response)
+    func presentLessonModule(response: LessonDataFlow.LessonModulePresentation.Response)
     func presentStepTooltipInfoUpdate(response: LessonDataFlow.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: LessonDataFlow.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: LessonDataFlow.CurrentStepUpdate.Response)
@@ -62,6 +63,12 @@ final class LessonPresenter: LessonPresenterProtocol {
         }
 
         self.viewController?.displayLessonTooltipInfo(viewModel: .init(data: data))
+    }
+
+    func presentLessonModule(response: LessonDataFlow.LessonModulePresentation.Response) {
+        self.viewController?.displayLessonModule(
+            viewModel: .init(lessonID: response.lessonID, stepIndex: response.stepIndex)
+        )
     }
 
     func presentStepTooltipInfoUpdate(response: LessonDataFlow.StepTooltipInfoUpdate.Response) {

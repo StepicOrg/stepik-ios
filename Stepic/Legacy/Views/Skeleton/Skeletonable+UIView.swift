@@ -27,11 +27,18 @@ extension UIView: Skeletonable {
             return
         }
 
-        skeletonView = SkeletonView(placeholderView: placeholderView)
-        skeletonView?.show(in: self)
+        self.skeletonView = SkeletonView(
+            placeholderView: placeholderView,
+            appearance: .init(
+                gradientFirstColor: self.skeleton.firstColor,
+                gradientSecondColor: self.skeleton.secondColor
+            )
+        )
+
+        self.skeletonView?.show(in: self)
     }
 
     func hideSkeleton() {
-        skeletonView?.hide()
+        self.skeletonView?.hide()
     }
 }

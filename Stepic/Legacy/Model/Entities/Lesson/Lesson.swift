@@ -41,6 +41,8 @@ final class Lesson: NSManagedObject, IDFetchable {
         self.coverURL = json[JSONKey.coverURL.rawValue].string
         self.timeToComplete = json[JSONKey.timeToComplete.rawValue].doubleValue
         self.stepsArray = json[JSONKey.steps.rawValue].arrayObject as! [Int]
+        self.coursesArray = json[JSONKey.courses.rawValue].arrayObject as? [Course.IdType] ?? []
+        self.unitsArray = json[JSONKey.units.rawValue].arrayObject as? [Unit.IdType] ?? []
         self.passedBy = json[JSONKey.passedBy.rawValue].intValue
         self.voteDelta = json[JSONKey.voteDelta.rawValue].intValue
 
@@ -73,6 +75,8 @@ final class Lesson: NSManagedObject, IDFetchable {
         if self.coverURL != object.coverURL { return false }
         if self.timeToComplete != object.timeToComplete { return false }
         if self.stepsArray != object.stepsArray { return false }
+        if self.coursesArray != object.coursesArray { return false }
+        if self.unitsArray != object.unitsArray { return false }
         if self.passedBy != object.passedBy { return false }
         if self.voteDelta != object.voteDelta { return false }
         if self.canEdit != object.canEdit { return false }
@@ -221,6 +225,8 @@ final class Lesson: NSManagedObject, IDFetchable {
         case coverURL = "cover_url"
         case timeToComplete = "time_to_complete"
         case steps
+        case courses
+        case units
         case passedBy = "passed_by"
         case voteDelta = "vote_delta"
         case actions

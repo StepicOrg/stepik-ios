@@ -48,10 +48,7 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = CourseInfoTabSyllabusView(
-            frame: UIScreen.main.bounds,
-            tableViewDelegate: self.syllabusTableDelegate
-        )
+        let view = CourseInfoTabSyllabusView(frame: UIScreen.main.bounds)
         view.delegate = self
         self.view = view
     }

@@ -8,7 +8,6 @@ protocol CourseInfoTabSyllabusViewDelegate: AnyObject {
 
 extension CourseInfoTabSyllabusView {
     struct Appearance {
-        let loadingIndicatorInsets = LayoutInsets(top: 20)
         let headerViewHeight: CGFloat = 60
     }
 }
@@ -17,13 +16,6 @@ final class CourseInfoTabSyllabusView: UIView {
     weak var delegate: CourseInfoTabSyllabusViewDelegate?
 
     let appearance: Appearance
-
-    private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .stepikGray)
-        view.hidesWhenStopped = true
-        return view
-    }()
-    private var loadingIndicatorTopConstraint: Constraint?
 
     private lazy var headerView: CourseInfoTabSyllabusHeaderView = {
         let headerView = CourseInfoTabSyllabusHeaderView()
@@ -84,14 +76,11 @@ final class CourseInfoTabSyllabusView: UIView {
 
     init(
         frame: CGRect = .zero,
-        tableViewDelegate: (UITableViewDelegate & UITableViewDataSource),
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
-        self.tableViewDelegate = tableViewDelegate
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -109,13 +98,14 @@ final class CourseInfoTabSyllabusView: UIView {
     // MARK: Public API
 
     func showLoading() {
-        self.tableView.isHidden = true
-        self.loadingIndicator.startAnimating()
+        self.tableView.skeleton.viewBuilder = {
+            CourseInfoTabSyllabusCellSkeletonView()
+        }
+        self.tableView.skeleton.show()
     }
 
     func hideLoading() {
-        self.tableView.isHidden = false
-        self.loadingIndicator.stopAnimating()
+        self.tableView.skeleton.hide()
     }
 
     func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
@@ -136,21 +126,12 @@ final class CourseInfoTabSyllabusView: UIView {
 extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
-        self.addSubview(self.loadingIndicator)
     }
 
     func makeConstraints() {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-
-        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.loadingIndicator.snp.makeConstraints { make in
-            self.loadingIndicatorTopConstraint = make.top
-                .equalToSuperview()
-                .offset(self.appearance.loadingIndicatorInsets.top).constraint
-            make.centerX.equalToSuperview()
         }
     }
 }
@@ -222,8 +203,10 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
         set {
             self.tableView.contentInset = newValue
 
-            let loadingIndicatorTopOffset = newValue.top + self.appearance.loadingIndicatorInsets.top
-            self.loadingIndicatorTopConstraint?.update(offset: loadingIndicatorTopOffset)
+            // Fixes an issue with incorrect content offset on presentation
+            if newValue.top > 0 && self.contentOffset.y == 0 {
+                self.contentOffset = CGPoint(x: self.contentOffset.x, y: -newValue.top)
+            }
         }
     }
 

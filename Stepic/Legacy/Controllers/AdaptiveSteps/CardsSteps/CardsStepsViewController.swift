@@ -107,11 +107,12 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
         card.updateLabel(title)
     }
 
-    func presentDiscussions(stepId: Int, discussionProxyId: String) {
+    func presentDiscussions(stepID: Int, discussionProxyID: String, isTeacher: Bool) {
         let assembly = DiscussionsAssembly(
             discussionThreadType: .default,
-            discussionProxyID: discussionProxyId,
-            stepID: stepId
+            discussionProxyID: discussionProxyID,
+            stepID: stepID,
+            isTeacher: isTeacher
         )
         self.push(module: assembly.makeModule())
     }
