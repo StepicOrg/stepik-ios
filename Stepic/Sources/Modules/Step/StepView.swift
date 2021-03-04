@@ -14,6 +14,7 @@ protocol StepViewDelegate: AnyObject {
     func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage)
     func stepView(_ view: StepView, didRequestOpenURL url: URL)
     func stepView(_ view: StepView, didRequestOpenARQuickLook url: URL)
+    func stepView(_ view: StepView, didSelectDisabledStepURL url: URL)
 }
 
 extension StepView {
@@ -129,6 +130,12 @@ final class StepView: UIView {
                 return
             }
             strongSelf.delegate?.stepViewDidRequestNextUnit(strongSelf)
+        }
+        view.onLinkClick = { [weak self] url in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepView(strongSelf, didSelectDisabledStepURL: url)
         }
         return view
     }()
@@ -259,7 +266,7 @@ final class StepView: UIView {
         self.stepControlsView.isSolutionsButtonEnabled = isEnabled
     }
 
-    func showDisabledView() {
+    func showDisabledView(viewModel: StepDisabledViewModel) {
         if self.stepDisabledView.superview == nil {
             self.insertSubview(self.stepDisabledView, at: Int.max)
             self.stepDisabledView.translatesAutoresizingMaskIntoConstraints = false
@@ -268,6 +275,7 @@ final class StepView: UIView {
             }
         }
 
+        self.stepDisabledView.configure(viewModel: viewModel)
         self.setStepDisabledViewVisible(true)
     }
 

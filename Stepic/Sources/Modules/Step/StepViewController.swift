@@ -142,9 +142,9 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
         case .error:
             self.stepView?.hideDisabledView()
             self.showPlaceholder(for: .connectionError)
-        case .disabled:
+        case .disabled(let data):
             self.isPlaceholderShown = false
-            self.stepView?.showDisabledView()
+            self.stepView?.showDisabledView(viewModel: data)
         }
     }
 
@@ -456,6 +456,11 @@ extension StepViewController: StepViewDelegate {
 
     func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage) {
         FullscreenImageViewer.show(image: image, from: self)
+    }
+
+    func stepView(_ view: StepView, didSelectDisabledStepURL url: URL) {
+        UIPasteboard.general.string = url.absoluteString
+        SVProgressHUD.showSuccess(withStatus: NSLocalizedString("Copied", comment: ""))
     }
 
     func stepViewDidLoadContent(_ view: StepView) {

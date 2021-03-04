@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -6,11 +7,11 @@ extension StepDisabledView {
         let placeholderImageSize = CGSize(width: 150, height: 120)
         let placeholderImageInsets = LayoutInsets(top: 32)
 
-        let feedbackViewHeight: CGFloat = 52
         let feedbackViewInsets = LayoutInsets(top: 32, left: 16, right: 16)
 
         let descriptionLabelFont = Typography.bodyFont
         let descriptionLabelTextColor = UIColor.stepikMaterialPrimaryText
+        let descriptionLabelLinkColor = UIColor.stepikVioletFixed
         let descriptionLabelInsets = LayoutInsets(inset: 16)
 
         let stepControlsInsets = LayoutInsets(inset: 16)
@@ -29,21 +30,29 @@ final class StepDisabledView: UIView {
         return imageView
     }()
 
-    private lazy var feedbackView: QuizFeedbackView = {
-        let view = QuizFeedbackView()
-        view.update(
-            state: .validation,
-            title: NSLocalizedString("StepDisabledTitle", comment: "")
-        )
-        return view
-    }()
+    private lazy var feedbackView = QuizFeedbackView()
 
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
+    private lazy var descriptionLabel: AttributedLabel = {
+        let label = AttributedLabel()
         label.font = self.appearance.descriptionLabelFont
         label.textColor = self.appearance.descriptionLabelTextColor
         label.numberOfLines = 0
-        label.text = NSLocalizedString("StepDisabledMessage", comment: "")
+        label.onClick = { [weak self] _, detection in
+            guard let strongSelf = self else {
+                return
+            }
+
+            switch detection.type {
+            case .tag(let tag):
+                if tag.name == "a",
+                   let href = tag.attributes["href"],
+                   let url = URL(string: href) {
+                    strongSelf.onLinkClick?(url)
+                }
+            default:
+                break
+            }
+        }
         return label
     }()
 
@@ -55,6 +64,16 @@ final class StepDisabledView: UIView {
         view.correctRatio = nil
         return view
     }()
+
+    private lazy var attributedTextConverter = HTMLToAttributedStringConverter(
+        font: self.appearance.descriptionLabelFont,
+        tagStyles: [
+            Style("a")
+                .foregroundColor(self.appearance.descriptionLabelLinkColor, .normal)
+                .foregroundColor(self.appearance.descriptionLabelLinkColor.withAlphaComponent(0.5), .highlighted)
+        ],
+        tagTransformers: [.brTransformer]
+    )
 
     var hasNextStepButton: Bool? {
         didSet {
@@ -95,13 +114,15 @@ final class StepDisabledView: UIView {
         }
     }
 
+    var onLinkClick: ((URL) -> Void)?
+
     override var intrinsicContentSize: CGSize {
         let height = self.appearance.placeholderImageInsets.top
             + self.appearance.placeholderImageSize.height
             + self.appearance.feedbackViewInsets.top
-            + self.appearance.feedbackViewHeight
+            + self.feedbackView.intrinsicContentSize.height
             + self.appearance.descriptionLabelInsets.top
-            + self.descriptionLabel.intrinsicContentSize.height
+            + self.descriptionLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
             + self.appearance.stepControlsInsets.top
             + self.stepControlsView.intrinsicContentSize.height
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
@@ -122,6 +143,13 @@ final class StepDisabledView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(viewModel: StepDisabledViewModel) {
+        self.feedbackView.update(state: .validation, title: viewModel.title)
+        self.descriptionLabel.attributedText = self.attributedTextConverter.convertToAttributedText(
+            htmlString: viewModel.message
+        )
     }
 }
 
@@ -150,7 +178,6 @@ extension StepDisabledView: ProgrammaticallyInitializableViewProtocol {
             make.top.equalTo(self.placeholderImageView.snp.bottom).offset(self.appearance.feedbackViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.feedbackViewInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.feedbackViewInsets.right)
-            make.height.equalTo(self.appearance.feedbackViewHeight)
         }
 
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
