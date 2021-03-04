@@ -72,7 +72,7 @@ final class DiscussionsBadgesView: UIView {
         }
     }
 
-    var isPinned: Bool = true {
+    var isPinned = true {
         didSet {
             self.isPinnedImageButton.isHidden = !self.isPinned
         }

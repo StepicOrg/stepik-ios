@@ -59,7 +59,7 @@ final class SettingsRightDetailSwitchCellView: UIView {
         }
     }
 
-    var switchIsOn: Bool = false {
+    var switchIsOn = false {
         didSet {
             self.detailSwitch.isOn = self.switchIsOn
         }

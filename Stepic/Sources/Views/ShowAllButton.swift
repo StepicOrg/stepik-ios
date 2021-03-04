@@ -42,7 +42,7 @@ final class ShowAllButton: UIControl {
         }
     }
 
-    var shouldShowDisclosureIndicator: Bool = true {
+    var shouldShowDisclosureIndicator = true {
         didSet {
             self.imageView.isHidden = !self.shouldShowDisclosureIndicator
             self.imageViewLeadingConstraint?.update(

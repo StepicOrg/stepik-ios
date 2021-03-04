@@ -70,13 +70,13 @@ final class StepStatisticsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var isTopSeparatorVisible: Bool = false {
+    var isTopSeparatorVisible = false {
         didSet {
             self.topSeparatorView.isHidden = !self.isTopSeparatorVisible
         }
     }
 
-    var isBottomSeparatorVisible: Bool = false {
+    var isBottomSeparatorVisible = false {
         didSet {
             self.bottomSeparatorView.isHidden = !self.isBottomSeparatorVisible
         }

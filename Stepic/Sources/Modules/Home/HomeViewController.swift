@@ -22,7 +22,7 @@ final class HomeViewController: BaseExploreViewController {
     ]
 
     private var lastContentLanguage: ContentLanguage?
-    private var lastIsAuthorizedFlag: Bool = false
+    private var lastIsAuthorizedFlag = false
 
     private var currentEnrolledCourseListState: EnrolledCourseListState?
 

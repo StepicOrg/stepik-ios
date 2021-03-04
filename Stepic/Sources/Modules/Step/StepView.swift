@@ -140,7 +140,7 @@ final class StepView: UIView {
         return view
     }()
 
-    private var canNavigateToNextStep: Bool = false {
+    private var canNavigateToNextStep = false {
         didSet {
             if oldValue == true && !self.canNavigateToNextStep {
                 self.stepControlsView.hasNextStepButton = false

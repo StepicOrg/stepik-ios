@@ -19,7 +19,7 @@ final class ScrollableStackView: UIView {
 
     // MARK: - Refresh control
 
-    var isRefreshControlEnabled: Bool = false {
+    var isRefreshControlEnabled = false {
         didSet {
             guard oldValue != self.isRefreshControlEnabled else {
                 return

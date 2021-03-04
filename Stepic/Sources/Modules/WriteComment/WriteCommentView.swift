@@ -63,7 +63,7 @@ final class WriteCommentView: UIView {
     private var textViewTopToSuperviewConstraint: Constraint?
     private var textViewTopToBottomOfSeparatorConstraint: Constraint?
 
-    var isEnabled: Bool = true {
+    var isEnabled = true {
         didSet {
             self.textView.isEditable = self.isEnabled
         }

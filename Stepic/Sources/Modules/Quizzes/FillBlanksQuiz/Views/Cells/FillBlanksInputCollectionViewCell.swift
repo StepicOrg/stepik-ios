@@ -37,7 +37,7 @@ final class FillBlanksInputCollectionViewCell: UICollectionViewCell, Reusable {
         }
     }
 
-    var isEnabled: Bool = true {
+    var isEnabled = true {
         didSet {
             self.isUserInteractionEnabled = self.isEnabled
         }
