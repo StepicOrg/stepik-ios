@@ -28,7 +28,7 @@ final class StepPresenter: StepPresenterProtocol {
     func presentStep(response: StepDataFlow.StepLoad.Response) {
         switch response.result {
         case .success(let data):
-            if data.step.isEnabled && !data.isDisabledStepsSupported {
+            if !data.step.isEnabled && data.isDisabledStepsSupported {
                 let stepHyperlink: String = {
                     let stepURLString = self.urlFactory.makeStep(
                         lessonID: data.step.lessonID,
