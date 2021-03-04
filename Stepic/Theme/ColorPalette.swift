@@ -271,28 +271,16 @@ extension UIColor {
 
     // MARK: - Material Color Theme -
 
-    static let onSurface = UIColor.black
+    static let onSurface = UIColor.dynamic(light: .black, dark: .white)
 
     /// The material color for text labels that contain primary content.
     static var stepikMaterialPrimaryText: UIColor {
-        let lightColor = UIColor.onSurface.withAlphaComponent(0.87)
-
-        if #available(iOS 13.0, *) {
-            return .dynamic(light: lightColor, dark: .stepikSystemPrimaryText)
-        } else {
-            return lightColor
-        }
+        UIColor.onSurface.withAlphaComponent(0.87)
     }
 
     /// The material color for text labels that contain secondary content.
     static var stepikMaterialSecondaryText: UIColor {
-        let lightColor = UIColor.onSurface.withAlphaComponent(0.6)
-
-        if #available(iOS 13.0, *) {
-            return .dynamic(light: lightColor, dark: .secondaryLabel)
-        } else {
-            return lightColor
-        }
+        UIColor.onSurface.withAlphaComponent(0.6)
     }
 
     // MARK: - System Standard Colors
