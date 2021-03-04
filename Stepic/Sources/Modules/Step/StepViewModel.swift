@@ -25,3 +25,8 @@ struct StepVideoViewModel {
     let video: Video
     let videoThumbnailImageURL: URL?
 }
+
+struct StepDisabledViewModel {
+    let title: String
+    let message: String
+}

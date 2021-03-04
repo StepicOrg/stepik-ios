@@ -121,13 +121,6 @@ final class LessonPresenter: LessonPresenterProtocol {
         startStepIndex: Int,
         canEdit: Bool
     ) -> LessonViewModel {
-        let lessonTitle: String = {
-            if let unit = lesson.unit, let section = unit.section {
-                return "\(section.position).\(unit.position) \(lesson.title)"
-            }
-            return lesson.title
-        }()
-
         let steps: [LessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
                 if step.hasReview {
@@ -155,7 +148,7 @@ final class LessonPresenter: LessonPresenterProtocol {
         }
 
         return LessonViewModel(
-            lessonTitle: lessonTitle,
+            lessonTitle: FormatterHelper.lessonTitle(lesson),
             steps: steps,
             stepLinkMaker: { self.urlFactory.makeStep(lessonID: lesson.id, stepPosition: $0, fromMobile: true) },
             startStepIndex: startStepIndex
