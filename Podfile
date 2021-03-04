@@ -20,7 +20,7 @@ def shared_pods
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.3.0'
   pod 'PromiseKit', '6.13.1'
-  pod 'SwiftLint', '0.42.0'
+  pod 'SwiftLint', '0.43.0'
 end
 
 def all_pods
