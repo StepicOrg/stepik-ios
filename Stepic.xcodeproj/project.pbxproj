@@ -952,6 +952,15 @@
 		2CF6E62E25ADB92B00B5A703 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */; };
 		2CF6E63225ADB92B00B5A703 /* StepicWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2CF6E62525ADB92A00B5A703 /* StepicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */; };
+		2CF8DF4025F2291100F577C2 /* ReviewSessionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF3F25F2291100F577C2 /* ReviewSessionsAPI.swift */; };
+		2CF8DF4725F2303300F577C2 /* ReviewSessionPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */; };
+		2CF8DF5125F2586400F577C2 /* ReviewSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF5025F2586400F577C2 /* ReviewSessionResponse.swift */; };
+		2CF8DF5B25F25CA300F577C2 /* ReviewPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF5A25F25CA300F577C2 /* ReviewPlainObject.swift */; };
+		2CF8DF6525F260BC00F577C2 /* RubricScorePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF6425F260BC00F577C2 /* RubricScorePlainObject.swift */; };
+		2CF8DF7325F2682100F577C2 /* ReviewSessionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF7225F2682100F577C2 /* ReviewSessionsNetworkService.swift */; };
+		2CF8DF7E25F26A9F00F577C2 /* review-sessions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CF8DF7D25F26A9F00F577C2 /* review-sessions.json */; };
+		2CF8DF8825F26B9300F577C2 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF8725F26B9300F577C2 /* TestData.swift */; };
+		2CF8DF9A25F2754C00F577C2 /* ReviewSessionResponseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF9925F2754C00F577C2 /* ReviewSessionResponseSpec.swift */; };
 		2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */; };
 		2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
@@ -2599,6 +2608,15 @@
 		2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CF6E62F25ADB92B00B5A703 /* Info-Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
 		2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCellularDataForDownloadsStorageManager.swift; sourceTree = "<group>"; };
+		2CF8DF3F25F2291100F577C2 /* ReviewSessionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionsAPI.swift; sourceTree = "<group>"; };
+		2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionPlainObject.swift; sourceTree = "<group>"; };
+		2CF8DF5025F2586400F577C2 /* ReviewSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionResponse.swift; sourceTree = "<group>"; };
+		2CF8DF5A25F25CA300F577C2 /* ReviewPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPlainObject.swift; sourceTree = "<group>"; };
+		2CF8DF6425F260BC00F577C2 /* RubricScorePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RubricScorePlainObject.swift; sourceTree = "<group>"; };
+		2CF8DF7225F2682100F577C2 /* ReviewSessionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionsNetworkService.swift; sourceTree = "<group>"; };
+		2CF8DF7D25F26A9F00F577C2 /* review-sessions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "review-sessions.json"; sourceTree = "<group>"; };
+		2CF8DF8725F26B9300F577C2 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		2CF8DF9925F2754C00F577C2 /* ReviewSessionResponseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionResponseSpec.swift; sourceTree = "<group>"; };
 		2CF9BD3B2538508800C2AFD2 /* PromiseKit+Retry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PromiseKit+Retry.swift"; sourceTree = "<group>"; };
 		2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsPersistenceService.swift; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
@@ -3747,6 +3765,7 @@
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C453399204D5DEE0061342A /* PinsMapSpec.swift */,
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
+				2CF8DF9925F2754C00F577C2 /* ReviewSessionResponseSpec.swift */,
 				2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */,
 				2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
@@ -5450,6 +5469,7 @@
 				085D5CDD1D007F2200092060 /* Info-Production.plist */,
 				2C3D00BC24C8076A00441053 /* Info-Release.plist */,
 				080AA2341EA05BE00079272F /* TestInfo.plist */,
+				2CF8DF7C25F26A3C00F577C2 /* Data */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -5459,6 +5479,7 @@
 			children = (
 				080AA2361EA05CD20079272F /* TestConfig.swift */,
 				2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */,
+				2CF8DF8725F26B9300F577C2 /* TestData.swift */,
 				2CEC48A925BA0B7900AF1751 /* Tests */,
 			);
 			path = Sources;
@@ -5551,6 +5572,25 @@
 				2C91B55E25B6EF68002F2B3E /* Sources */,
 			);
 			path = StepicWidget;
+			sourceTree = "<group>";
+		};
+		2CF8DF4525F22F9900F577C2 /* ReviewSession */ = {
+			isa = PBXGroup;
+			children = (
+				2CF8DF5A25F25CA300F577C2 /* ReviewPlainObject.swift */,
+				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
+				2CF8DF5025F2586400F577C2 /* ReviewSessionResponse.swift */,
+				2CF8DF6425F260BC00F577C2 /* RubricScorePlainObject.swift */,
+			);
+			path = ReviewSession;
+			sourceTree = "<group>";
+		};
+		2CF8DF7C25F26A3C00F577C2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2CF8DF7D25F26A9F00F577C2 /* review-sessions.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		2CF9BD332538503C00C2AFD2 /* PromiseKit */ = {
@@ -6415,6 +6455,7 @@
 				2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */,
 				08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */,
 				2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */,
+				2CF8DF3F25F2291100F577C2 /* ReviewSessionsAPI.swift */,
 				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
 				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
 				2C619A7624CFF954007D3529 /* SocialProfilesAPI.swift */,
@@ -6489,6 +6530,7 @@
 				2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */,
 				2C97764225D6CBD2008778D6 /* Block */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
+				2CF8DF4525F22F9900F577C2 /* ReviewSession */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
 				2CA9308F253C86BD007B717A /* Video */,
 			);
@@ -6980,6 +7022,7 @@
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */,
+				2CF8DF7225F2682100F577C2 /* ReviewSessionsNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
 				2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */,
 				2C5418CB24A2903700B2DCE2 /* StepikMetricsNetworkService.swift */,
@@ -8348,6 +8391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CF8DF7E25F26A9F00F577C2 /* review-sessions.json in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8877,6 +8921,7 @@
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
 				2CE0CAC7255A8824009C6574 /* CatalogBlockTests.swift in Sources */,
 				2CFE6A84255AA6DE00A43952 /* CatalogBlockContentItemTests.swift in Sources */,
+				2CF8DF8825F26B9300F577C2 /* TestData.swift in Sources */,
 				2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */,
 				2CF24F642390040F002DBD0F /* BlockTypeSpec.swift in Sources */,
 				2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */,
@@ -8891,6 +8936,7 @@
 				2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */,
 				2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */,
 				2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */,
+				2CF8DF9A25F2754C00F577C2 /* ReviewSessionResponseSpec.swift in Sources */,
 				2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */,
 				2CCDD20124DBB61100A48EE0 /* ProtectedTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
@@ -9257,6 +9303,7 @@
 				089200742199E01D00083627 /* DeepLinkRoute.swift in Sources */,
 				0863B9672069A41A0023A182 /* RetrieveRequestMaker.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
+				2CF8DF5125F2586400F577C2 /* ReviewSessionResponse.swift in Sources */,
 				2C941505256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift in Sources */,
 				2C22042720E277E50060117A /* SkeletonView.swift in Sources */,
 				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
@@ -9325,6 +9372,7 @@
 				2C48D601228F0C6000739477 /* ContentProcessor.swift in Sources */,
 				2C97E00B215E47F3005684A1 /* SearchQueriesPersistentManager.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
+				2CF8DF4025F2291100F577C2 /* ReviewSessionsAPI.swift in Sources */,
 				2CE0CADD255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift in Sources */,
 				2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				2C04BA4A24072EA600D74D4B /* ChoiceSubmissionFeedback.swift in Sources */,
@@ -9555,6 +9603,8 @@
 				62E9852B56E55E5C79AEC91A /* CourseReviewsPersistenceService.swift in Sources */,
 				2CFED66E252C649400FCAD41 /* DiscussionsTableViewDataSourceDelegate.swift in Sources */,
 				2CB695382465D4030037BF0D /* NewProfileHeaderView.swift in Sources */,
+				2CF8DF6525F260BC00F577C2 /* RubricScorePlainObject.swift in Sources */,
+				2CF8DF7325F2682100F577C2 /* ReviewSessionsNetworkService.swift in Sources */,
 				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
 				2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */,
@@ -9822,6 +9872,7 @@
 				62E986C9651DF1D7C368A0C0 /* DownloadsCellView.swift in Sources */,
 				62E98A3F3AE1296A1D8481A6 /* DownloadsTableViewCell.swift in Sources */,
 				62E98850260403F889A132DC /* EditStepAssembly.swift in Sources */,
+				2CF8DF5B25F25CA300F577C2 /* ReviewPlainObject.swift in Sources */,
 				62E98AAB78A4AC1374AF2FE8 /* EditStepDataFlow.swift in Sources */,
 				62E98D3AA0AF10457B47857C /* EditStepInteractor.swift in Sources */,
 				2C0FA689252F4D7A0032DDEC /* Typography.swift in Sources */,
@@ -9898,6 +9949,7 @@
 				62E9888B20E524751AEB87AC /* TagViewModel.swift in Sources */,
 				62E98E17CA922F1D87F6DA96 /* FullscreenCourseListAssembly.swift in Sources */,
 				62E98AF6A9BDB9A4102F56F3 /* FullscreenCourseListDataFlow.swift in Sources */,
+				2CF8DF4725F2303300F577C2 /* ReviewSessionPlainObject.swift in Sources */,
 				2C1AC2DF255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift in Sources */,
 				62E9881A9FF61D408A09160F /* FullscreenCourseListInteractor.swift in Sources */,
 				2C11C9F224EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
