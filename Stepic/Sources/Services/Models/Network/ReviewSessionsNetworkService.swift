@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol ReviewSessionsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Int], blockName: String?) -> Promise<[ReviewSessionDataPlainObject]>
+    func fetch(userID: User.IdType, instructionID: Int, blockName: String?) -> Promise<ReviewSessionDataPlainObject?>
 }
 
 final class ReviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol {
@@ -18,19 +19,30 @@ final class ReviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol {
             .map(self.mapReviewSessionResponseToData)
     }
 
+    func fetch(userID: User.IdType, instructionID: Int, blockName: String?) -> Promise<ReviewSessionDataPlainObject?> {
+        self.reviewSessionsAPI
+            .getReviewSession(userID: userID, instructionID: instructionID, blockName: blockName)
+            .map(self.mapReviewSessionResponseToData)
+            .map(\.first)
+    }
+
     private func mapReviewSessionResponseToData(_ response: ReviewSessionResponse) -> [ReviewSessionDataPlainObject] {
         let attemptsMap = response.attempts.reduce(into: [:]) { $0[$1.id] = $1 }
         let submissionsMap = response.submissions.reduce(into: [:]) { $0[$1.id] = $1 }
         let reviewsMap = response.reviews.reduce(into: [:]) { $0[$1.id] = $1 }
         let rubricScoresMap = response.rubricScores.reduce(into: [:]) { $0[$1.id] = $1 }
 
-        return response.reviewSessions.compactMap { session -> ReviewSessionDataPlainObject? in
-            guard let submission = submissionsMap[session.submission],
-                  let attempt = attemptsMap[submission.attemptID] else {
-                return nil
-            }
+        return response.reviewSessions.map { session -> ReviewSessionDataPlainObject in
+            var submission: Submission?
+            var attempt: Attempt?
 
-            submission.attempt = attempt
+            if let submissionID = session.submission {
+                submission = submissionsMap[submissionID]
+                if let attemptID = submission?.attemptID {
+                    attempt = attemptsMap[attemptID]
+                    submission?.attempt = attempt
+                }
+            }
 
             func mapReviews(_ ids: [Int]) -> [ReviewDataPlainObject] {
                 ids.compactMap { id -> ReviewDataPlainObject? in

@@ -4,7 +4,7 @@ import SwiftyJSON
 struct ReviewSessionPlainObject: Equatable {
     let id: Int
     let instruction: Int
-    let submission: Int
+    let submission: Int?
 
     let givenReviews: [Int]
     let isGivingStarted: Bool
@@ -36,7 +36,7 @@ extension ReviewSessionPlainObject {
     init(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.instruction = json[JSONKey.instruction.rawValue].intValue
-        self.submission = json[JSONKey.submission.rawValue].intValue
+        self.submission = json[JSONKey.submission.rawValue].int
 
         self.givenReviews = json[JSONKey.givenReviews.rawValue].arrayValue.compactMap(\.int)
         self.isGivingStarted = json[JSONKey.isGivingStarted.rawValue].boolValue

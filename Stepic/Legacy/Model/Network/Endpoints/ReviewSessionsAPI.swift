@@ -16,4 +16,24 @@ final class ReviewSessionsAPI: APIEndpoint {
             .request(requestEndpoint: self.name, ids: ids, withManager: self.manager)
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
+
+    func getReviewSession(
+        userID: User.IdType,
+        instructionID: Int,
+        blockName: String?
+    ) -> Promise<ReviewSessionResponse> {
+        let params: Parameters = [
+            JSONKey.user.rawValue: userID,
+            JSONKey.instruction.rawValue: instructionID
+        ]
+
+        return self.retrieve
+            .request(requestEndpoint: self.name, params: params, withManager: self.manager)
+            .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
+    }
+
+    private enum JSONKey: String {
+        case user
+        case instruction
+    }
 }
