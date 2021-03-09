@@ -25,6 +25,7 @@ final class SubmissionsAssembly: Assembly {
         let provider = SubmissionsProvider(
             submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
             attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+            reviewSessionsNetworkService: ReviewSessionsNetworkService(reviewSessionsAPI: ReviewSessionsAPI()),
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
             usersPersistenceService: UsersPersistenceService(),
             userAccountService: UserAccountService(),

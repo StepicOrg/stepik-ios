@@ -11,11 +11,18 @@ protocol SubmissionsProviderProtocol {
     func fetchAttempts(ids: [Attempt.IdType], stepID: Step.IdType) -> Promise<[Attempt]>
     func fetchUsers(ids: [User.IdType]) -> Promise<[User]>
     func fetchCurrentUser() -> Guarantee<User?>
+    func fetchReviewSessions(ids: [Int], stepID: Step.IdType) -> Promise<[ReviewSessionDataPlainObject]>
+    func fetchReviewSession(
+        userID: User.IdType,
+        instructionID: Int,
+        stepID: Step.IdType
+    ) -> Promise<ReviewSessionDataPlainObject?>
 }
 
 final class SubmissionsProvider: SubmissionsProviderProtocol {
     private let submissionsNetworkService: SubmissionsNetworkServiceProtocol
     private let attemptsNetworkService: AttemptsNetworkServiceProtocol
+    private let reviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol
 
     private let usersNetworkService: UsersNetworkServiceProtocol
     private let usersPersistenceService: UsersPersistenceServiceProtocol
@@ -27,6 +34,7 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
     init(
         submissionsNetworkService: SubmissionsNetworkServiceProtocol,
         attemptsNetworkService: AttemptsNetworkServiceProtocol,
+        reviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol,
         usersNetworkService: UsersNetworkServiceProtocol,
         usersPersistenceService: UsersPersistenceServiceProtocol,
         userAccountService: UserAccountServiceProtocol,
@@ -35,6 +43,7 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
     ) {
         self.submissionsNetworkService = submissionsNetworkService
         self.attemptsNetworkService = attemptsNetworkService
+        self.reviewSessionsNetworkService = reviewSessionsNetworkService
         self.usersNetworkService = usersNetworkService
         self.usersPersistenceService = usersPersistenceService
         self.userAccountService = userAccountService
@@ -96,6 +105,46 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
                 self.attemptsNetworkService.fetch(ids: ids, blockName: step.block.name)
             }.done { attempts in
                 seal.fulfill(attempts)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchReviewSessions(ids: [Int], stepID: Step.IdType) -> Promise<[ReviewSessionDataPlainObject]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return Promise { seal in
+            firstly {
+                self.fetchStep(id: stepID).compactMap { $0 }
+            }.then { step -> Promise<[ReviewSessionDataPlainObject]> in
+                self.reviewSessionsNetworkService.fetch(ids: ids, blockName: step.block.name)
+            }.done { reviewSessions in
+                seal.fulfill(reviewSessions)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchReviewSession(
+        userID: User.IdType,
+        instructionID: Int,
+        stepID: Step.IdType
+    ) -> Promise<ReviewSessionDataPlainObject?> {
+        Promise { seal in
+            firstly {
+                self.fetchStep(id: stepID).compactMap { $0 }
+            }.then { step -> Promise<ReviewSessionDataPlainObject?> in
+                self.reviewSessionsNetworkService.fetch(
+                    userID: userID,
+                    instructionID: instructionID,
+                    blockName: step.block.name
+                )
+            }.done { reviewSession in
+                seal.fulfill(reviewSession)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

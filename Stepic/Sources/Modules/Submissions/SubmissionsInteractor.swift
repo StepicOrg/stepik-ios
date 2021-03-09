@@ -181,34 +181,19 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             }
         }.then { () -> Promise<([Submission], Meta)> in
             self.provider.fetchSubmissions(stepID: self.stepID, filterQuery: self.currentFilterQuery, page: page)
-        }.then { submissionsFetchResult -> Promise<(([Submission], Meta), [Attempt])> in
-            self.provider
-                .fetchAttempts(ids: submissionsFetchResult.0.map(\.attemptID), stepID: self.stepID)
-                .map { (submissionsFetchResult, $0) }
-        }.then { submissionsFetchResult, attempts -> Promise<([User], [Submission], Meta)> in
-            let submissions = submissionsFetchResult.0
-            submissions.forEach { submission in
-                if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
-                    submission.attempt = attempt
-                }
-            }
-
+        }.then { submissionsFetchResult -> Promise<([Submission], Meta)> in
+            self.loadAttempts(submissions: submissionsFetchResult.0)
+                .map { ($0, submissionsFetchResult.1) }
+        }.then { submissionsFetchResult -> Promise<([Submission], Meta)> in
+            self.loadReviewSessions(submissions: submissionsFetchResult.0)
+                .map { ($0, submissionsFetchResult.1) }
+        }.then { submissionsFetchResult -> Promise<([User], [Submission], Meta)> in
+            let attempts = submissionsFetchResult.0.compactMap(\.attempt)
             let usersIDs = Set(attempts.compactMap(\.userID))
 
             return self.provider
                 .fetchUsers(ids: Array(usersIDs))
-                .map { ($0, submissions, submissionsFetchResult.1) }
-        }
-    }
-
-    private func getCurrentStep() -> Promise<Step?> {
-        if let currentStep = self.currentStep {
-            return .value(currentStep)
-        }
-
-        return self.provider.fetchStep(id: self.stepID).then { step -> Promise<Step?> in
-            self.currentStep = step
-            return .value(step)
+                .map { ($0, submissionsFetchResult.0, submissionsFetchResult.1) }
         }
     }
 
@@ -226,6 +211,109 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 )
                 return .value(())
             }
+    }
+
+    private func getCurrentStep() -> Promise<Step?> {
+        if let currentStep = self.currentStep {
+            return .value(currentStep)
+        }
+
+        return self.provider.fetchStep(id: self.stepID).then { step -> Promise<Step?> in
+            self.currentStep = step
+            return .value(step)
+        }
+    }
+
+    private func loadAttempts(submissions: [Submission]) -> Promise<[Submission]> {
+        self.provider.fetchAttempts(
+            ids: submissions.map(\.attemptID),
+            stepID: self.stepID
+        ).then { attempts -> Promise<[Submission]> in
+            let attemptsMap = attempts.reduce(into: [:]) { $0[$1.id] = $1 }
+
+            for submission in submissions {
+                submission.attempt = attemptsMap[submission.attemptID]
+            }
+
+            return .value(submissions)
+        }
+    }
+
+    private func loadReviewSessions(submissions: [Submission]) -> Promise<[Submission]> {
+        Promise { seal in
+            self.getCurrentStep().compactMap { $0 }.done { step in
+                guard step.hasReview else {
+                    return seal.fulfill(submissions)
+                }
+
+                self.loadReviewSessionsBySessionsIDs(submissions: submissions).then { submissions in
+                    self.loadReviewSessionsWithoutSessionID(submissions: submissions)
+                }.done { submissions in
+                    seal.fulfill(submissions)
+                }.catch { error in
+                    seal.reject(error)
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
+    private func loadReviewSessionsBySessionsIDs(submissions: [Submission]) -> Promise<[Submission]> {
+        self.provider.fetchReviewSessions(
+            ids: submissions.compactMap(\.sessionID),
+            stepID: self.stepID
+        ).then { sessions -> Promise<[Submission]> in
+            let sessionsMap: [Int: ReviewSessionDataPlainObject] = sessions.reduce(into: [:]) { result, session in
+                if let submissionID = session.reviewSession.submission {
+                    result[submissionID] = session
+                }
+            }
+
+            for submission in submissions {
+                if let sessionID = submission.sessionID {
+                    submission.session = sessionsMap[sessionID]
+                }
+            }
+
+            return .value(submissions)
+        }
+    }
+
+    private func loadReviewSessionsWithoutSessionID(submissions: [Submission]) -> Promise<[Submission]> {
+        let promises = submissions
+            .filter { $0.sessionID == nil && $0.status == .correct }
+            .map { submission -> Promise<Void> in
+                Promise { seal in
+                    firstly { () -> Promise<Step?> in
+                        if let stepID = submission.attempt?.stepID {
+                            return self.provider.fetchStep(id: stepID)
+                        } else {
+                            return .value(nil)
+                        }
+                    }.then { stepOrNil -> Promise<Void> in
+                        guard let step = stepOrNil,
+                              let instructionID = step.instructionID,
+                              let userID = submission.attempt?.userID else {
+                            return .value(())
+                        }
+
+                        return self.provider.fetchReviewSession(
+                            userID: userID,
+                            instructionID: instructionID,
+                            stepID: step.id
+                        ).then { session -> Promise<Void> in
+                            submission.session = session
+                            return .value(())
+                        }
+                    }.done { _ in
+                        seal.fulfill(())
+                    }.catch { error in
+                        seal.reject(error)
+                    }
+                }
+            }
+        return when(fulfilled: promises).map { submissions }
     }
 }
 

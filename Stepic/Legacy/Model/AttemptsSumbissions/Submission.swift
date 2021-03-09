@@ -22,6 +22,7 @@ final class Submission: JSONSerializable, Hashable {
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
     var sessionID: Int?
+    var session: ReviewSessionDataPlainObject?
     var isLocal: Bool = false
 
     var status: SubmissionStatus? {
