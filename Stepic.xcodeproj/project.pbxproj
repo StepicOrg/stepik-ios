@@ -405,6 +405,12 @@
 		2C0F80C525C9BB5A006E9233 /* PromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */; };
 		2C0F80D925C9C861006E9233 /* TransparentPromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */; };
 		2C0FA689252F4D7A0032DDEC /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA688252F4D7A0032DDEC /* Typography.swift */; };
+		2C0FE8B025F8191A00626289 /* InstructionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8AF25F8191A00626289 /* InstructionsAPI.swift */; };
+		2C0FE8B625F8199200626289 /* RubricPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8B525F8199200626289 /* RubricPlainObject.swift */; };
+		2C0FE8C425F81A4900626289 /* InstructionPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8C325F81A4900626289 /* InstructionPlainObject.swift */; };
+		2C0FE8CE25F81B8100626289 /* InstructionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8CD25F81B8100626289 /* InstructionsResponse.swift */; };
+		2C0FE8D425F81D0500626289 /* InstructionDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8D325F81D0500626289 /* InstructionDataPlainObject.swift */; };
+		2C0FE8E225F81D9C00626289 /* InstructionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8E125F81D9C00626289 /* InstructionsNetworkService.swift */; };
 		2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10100A239EFAD700440651 /* DiscountingPolicy.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10650825ECE1610094FC39 /* CourseInfoTabInfoSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10650725ECE1610094FC39 /* CourseInfoTabInfoSkeletonView.swift */; };
@@ -2027,6 +2033,12 @@
 		2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentPromoPriceButton.swift; sourceTree = "<group>"; };
 		2C0FA688252F4D7A0032DDEC /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		2C0FBEB224E25A4D002CA67F /* Model_quiz_is_partially_correct_v61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_quiz_is_partially_correct_v61.xcdatamodel; sourceTree = "<group>"; };
+		2C0FE8AF25F8191A00626289 /* InstructionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsAPI.swift; sourceTree = "<group>"; };
+		2C0FE8B525F8199200626289 /* RubricPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RubricPlainObject.swift; sourceTree = "<group>"; };
+		2C0FE8C325F81A4900626289 /* InstructionPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionPlainObject.swift; sourceTree = "<group>"; };
+		2C0FE8CD25F81B8100626289 /* InstructionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsResponse.swift; sourceTree = "<group>"; };
+		2C0FE8D325F81D0500626289 /* InstructionDataPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionDataPlainObject.swift; sourceTree = "<group>"; };
+		2C0FE8E125F81D9C00626289 /* InstructionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsNetworkService.swift; sourceTree = "<group>"; };
 		2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_discount_policy.xcdatamodel; sourceTree = "<group>"; };
 		2C10100A239EFAD700440651 /* DiscountingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountingPolicy.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -5582,11 +5594,15 @@
 		2CF8DF4525F22F9900F577C2 /* ReviewSession */ = {
 			isa = PBXGroup;
 			children = (
+				2C0FE8D325F81D0500626289 /* InstructionDataPlainObject.swift */,
+				2C0FE8C325F81A4900626289 /* InstructionPlainObject.swift */,
+				2C0FE8CD25F81B8100626289 /* InstructionsResponse.swift */,
 				2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */,
 				2CF8DF5A25F25CA300F577C2 /* ReviewPlainObject.swift */,
 				2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */,
 				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
 				2CF8DF5025F2586400F577C2 /* ReviewSessionResponse.swift */,
+				2C0FE8B525F8199200626289 /* RubricPlainObject.swift */,
 				2CF8DF6425F260BC00F577C2 /* RubricScorePlainObject.swift */,
 			);
 			path = ReviewSession;
@@ -6451,6 +6467,7 @@
 				2C4AD01423E301C50049B7B0 /* DiscussionThreadsAPI.swift */,
 				2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */,
 				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
+				2C0FE8AF25F8191A00626289 /* InstructionsAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
 				2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */,
@@ -7024,6 +7041,7 @@
 				62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */,
 				2C4AD01823E304140049B7B0 /* DiscussionThreadsNetworkService.swift */,
 				2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */,
+				2C0FE8E125F81D9C00626289 /* InstructionsNetworkService.swift */,
 				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
 				2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
@@ -9102,6 +9120,7 @@
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
 				082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */,
+				2C0FE8B625F8199200626289 /* RubricPlainObject.swift in Sources */,
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
 				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
@@ -9234,6 +9253,7 @@
 				2C12E4722565668000DC52CB /* UIViewController+PresentPadPanModal.swift in Sources */,
 				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
 				2CA867C12588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift in Sources */,
+				2C0FE8C425F81A4900626289 /* InstructionPlainObject.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
 				2C83E20C2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift in Sources */,
 				089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */,
@@ -9386,6 +9406,7 @@
 				2C04BA4A24072EA600D74D4B /* ChoiceSubmissionFeedback.swift in Sources */,
 				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				08DF788D1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
+				2C0FE8CE25F81B8100626289 /* InstructionsResponse.swift in Sources */,
 				0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
 				2CE8BA9B23D631E500C2EED9 /* ImageStoredFileManager.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
@@ -9614,6 +9635,7 @@
 				2CB695382465D4030037BF0D /* NewProfileHeaderView.swift in Sources */,
 				2CF8DF6525F260BC00F577C2 /* RubricScorePlainObject.swift in Sources */,
 				2CF8DF7325F2682100F577C2 /* ReviewSessionsNetworkService.swift in Sources */,
+				2C0FE8D425F81D0500626289 /* InstructionDataPlainObject.swift in Sources */,
 				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
 				2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */,
@@ -9668,6 +9690,7 @@
 				2CB113A6259203C90093B572 /* StoryPartReaction.swift in Sources */,
 				62E980F97C42FABD40DC27D6 /* TooltipStorageManager.swift in Sources */,
 				2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */,
+				2C0FE8B025F8191A00626289 /* InstructionsAPI.swift in Sources */,
 				2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */,
 				2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */,
 				2C7545A824C01C00004F9074 /* AchievementProgressesNetworkService.swift in Sources */,
@@ -10098,6 +10121,7 @@
 				62E980BD19AD05F7E7BE10A9 /* NewSortingQuizElementView.swift in Sources */,
 				62E981262E15287F6DD169A5 /* NewSortingQuizView.swift in Sources */,
 				62E985699E2070D3CFC4B42D /* NewStringQuizAssembly.swift in Sources */,
+				2C0FE8E225F81D9C00626289 /* InstructionsNetworkService.swift in Sources */,
 				2C7545A624C019CE004F9074 /* AchievementsNetworkService.swift in Sources */,
 				62E98C34004760F9527BC4A2 /* NewStringQuizDataFlow.swift in Sources */,
 				62E98E0CD4B1ED07DA15ED82 /* NewStringQuizInteractor.swift in Sources */,

@@ -4,27 +4,34 @@ import PromiseKit
 protocol SubmissionsProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<Step?>
     func fetchSteps(ids: [Step.IdType]) -> Promise<[Step]>
+
     func fetchSubmissions(
         stepID: Step.IdType,
         filterQuery: SubmissionsFilterQuery,
         page: Int
     ) -> Promise<([Submission], Meta)>
+
     func fetchAttempts(ids: [Attempt.IdType], stepID: Step.IdType) -> Promise<[Attempt]>
-    func fetchUsers(ids: [User.IdType]) -> Promise<[User]>
-    func fetchCurrentUser() -> Guarantee<User?>
-    func getCurrentUserID() -> User.IdType?
+
     func fetchReviewSessions(ids: [Int], stepID: Step.IdType) -> Promise<[ReviewSessionDataPlainObject]>
     func fetchReviewSession(
         userID: User.IdType,
         instructionID: Int,
         stepID: Step.IdType
     ) -> Promise<ReviewSessionDataPlainObject?>
+
+    func fetchInstruction(id: Int) -> Promise<InstructionDataPlainObject?>
+
+    func fetchUsers(ids: [User.IdType]) -> Promise<[User]>
+    func fetchCurrentUser() -> Guarantee<User?>
+    func getCurrentUserID() -> User.IdType?
 }
 
 final class SubmissionsProvider: SubmissionsProviderProtocol {
     private let submissionsNetworkService: SubmissionsNetworkServiceProtocol
     private let attemptsNetworkService: AttemptsNetworkServiceProtocol
     private let reviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol
+    private let instructionsNetworkService: InstructionsNetworkServiceProtocol
 
     private let usersNetworkService: UsersNetworkServiceProtocol
     private let usersPersistenceService: UsersPersistenceServiceProtocol
@@ -37,6 +44,7 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
         submissionsNetworkService: SubmissionsNetworkServiceProtocol,
         attemptsNetworkService: AttemptsNetworkServiceProtocol,
         reviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol,
+        instructionsNetworkService: InstructionsNetworkServiceProtocol,
         usersNetworkService: UsersNetworkServiceProtocol,
         usersPersistenceService: UsersPersistenceServiceProtocol,
         userAccountService: UserAccountServiceProtocol,
@@ -46,6 +54,7 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
         self.submissionsNetworkService = submissionsNetworkService
         self.attemptsNetworkService = attemptsNetworkService
         self.reviewSessionsNetworkService = reviewSessionsNetworkService
+        self.instructionsNetworkService = instructionsNetworkService
         self.usersNetworkService = usersNetworkService
         self.usersPersistenceService = usersPersistenceService
         self.userAccountService = userAccountService
@@ -170,6 +179,10 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
                 seal.reject(Error.fetchFailed)
             }
         }
+    }
+
+    func fetchInstruction(id: Int) -> Promise<InstructionDataPlainObject?> {
+        self.instructionsNetworkService.fetch(id: id)
     }
 
     func fetchUsers(ids: [User.IdType]) -> Promise<[User]> {

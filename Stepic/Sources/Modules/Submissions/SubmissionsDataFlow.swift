@@ -106,6 +106,7 @@ enum Submissions {
         let users: [User]
         let currentUserID: User.IdType?
         let submissions: [Submission]
+        let instruction: InstructionDataPlainObject?
         let isTeacher: Bool
         let hasNextPage: Bool
     }

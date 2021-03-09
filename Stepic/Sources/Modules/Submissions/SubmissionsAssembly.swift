@@ -26,6 +26,7 @@ final class SubmissionsAssembly: Assembly {
             submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
             attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
             reviewSessionsNetworkService: ReviewSessionsNetworkService(reviewSessionsAPI: ReviewSessionsAPI()),
+            instructionsNetworkService: InstructionsNetworkService(instructionsAPI: InstructionsAPI()),
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
             usersPersistenceService: UsersPersistenceService(),
             userAccountService: UserAccountService(),

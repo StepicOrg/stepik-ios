@@ -69,18 +69,19 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request) {
         print("SubmissionsInteractor :: started fetching submissions")
 
-        self.fetchSubmissions(page: 1).done { users, submissions, meta in
+        self.fetchSubmissions(page: 1).done { fetchResult in
             print("SubmissionsInteractor :: done fetching submissions")
 
-            self.currentSubmissions = submissions
-            self.paginationState = PaginationState(page: 1, hasNext: meta.hasNext)
+            self.currentSubmissions = fetchResult.submissions
+            self.paginationState = PaginationState(page: 1, hasNext: fetchResult.meta.hasNext)
 
             let responseData = Submissions.SubmissionsData(
-                users: users,
+                users: fetchResult.users,
                 currentUserID: self.provider.getCurrentUserID(),
-                submissions: submissions,
+                submissions: fetchResult.submissions,
+                instruction: fetchResult.instruction,
                 isTeacher: self.isTeacher,
-                hasNextPage: meta.hasNext
+                hasNextPage: fetchResult.meta.hasNext
             )
             self.presenter.presentSubmissions(response: .init(result: .success(responseData)))
         }.catch { error in
@@ -93,18 +94,19 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         let nextPageIndex = self.paginationState.page + 1
         print("SubmissionsInteractor :: started fetching next submissions, page: \(nextPageIndex)")
 
-        self.fetchSubmissions(page: nextPageIndex).done { users, submissions, meta in
+        self.fetchSubmissions(page: nextPageIndex).done { fetchResult in
             print("SubmissionsInteractor :: done fetching next submissions")
 
-            self.currentSubmissions.append(contentsOf: submissions)
-            self.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
+            self.currentSubmissions.append(contentsOf: fetchResult.submissions)
+            self.paginationState = PaginationState(page: nextPageIndex, hasNext: fetchResult.meta.hasNext)
 
             let responseData = Submissions.SubmissionsData(
-                users: users,
+                users: fetchResult.users,
                 currentUserID: self.provider.getCurrentUserID(),
-                submissions: submissions,
+                submissions: fetchResult.submissions,
+                instruction: fetchResult.instruction,
                 isTeacher: self.isTeacher,
-                hasNextPage: meta.hasNext
+                hasNextPage: fetchResult.meta.hasNext
             )
             self.presenter.presentNextSubmissions(response: .init(result: .success(responseData)))
         }.catch { error in
@@ -174,7 +176,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
 
     // MARK: Private API
 
-    private func fetchSubmissions(page: Int) -> Promise<([User], [Submission], Meta)> {
+    private func fetchSubmissions(page: Int) -> Promise<SubmissionsFetchResult> {
         firstly { () -> Promise<Void> in
             if self.isTeacher {
                 return .value(())
@@ -199,6 +201,9 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             return self.provider
                 .fetchUsers(ids: Array(usersIDs))
                 .map { ($0, submissionsFetchResult.0, submissionsFetchResult.1) }
+        }.then { users, submissions, meta in
+            self.fetchInstruction()
+                .map { SubmissionsFetchResult(users: users, submissions: submissions, instruction: $0, meta: meta) }
         }
     }
 
@@ -321,6 +326,25 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 }
             }
         return when(fulfilled: promises).map { submissions }
+    }
+
+    private func fetchInstruction() -> Promise<InstructionDataPlainObject?> {
+        self.getCurrentStep().then { step -> Promise<InstructionDataPlainObject?> in
+            if let instructionID = step?.instructionID {
+                return self.provider.fetchInstruction(id: instructionID)
+            } else {
+                return .value(nil)
+            }
+        }
+    }
+
+    // MARK: Types
+
+    struct SubmissionsFetchResult {
+        let users: [User]
+        let submissions: [Submission]
+        let instruction: InstructionDataPlainObject?
+        let meta: Meta
     }
 }
 

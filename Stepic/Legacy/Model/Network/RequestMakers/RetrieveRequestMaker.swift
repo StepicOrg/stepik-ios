@@ -14,7 +14,7 @@ import SwiftyJSON
 final class RetrieveRequestMaker {
     func request(
         requestEndpoint: String,
-        params: Parameters,
+        params: Parameters? = nil,
         withManager manager: Alamofire.Session
     ) -> Promise<JSON> {
         return Promise { seal in
