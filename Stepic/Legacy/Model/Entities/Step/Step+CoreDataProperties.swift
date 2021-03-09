@@ -25,6 +25,8 @@ extension Step {
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
     @NSManaged var managedIsEnabled: NSNumber?
+    @NSManaged var managedInstructionId: NSNumber?
+    @NSManaged var managedInstructionType: String?
 
     @NSManaged var managedAttempt: AttemptEntity?
     @NSManaged var managedBlock: Block?
@@ -239,6 +241,24 @@ extension Step {
         }
         set {
             self.managedIsEnabled = NSNumber(value: newValue)
+        }
+    }
+
+    var instructionID: Int? {
+        get {
+            self.managedInstructionId?.intValue
+        }
+        set {
+            self.managedInstructionId = newValue as NSNumber?
+        }
+    }
+
+    var instructionType: String? {
+        get {
+            self.managedInstructionType
+        }
+        set {
+            self.managedInstructionType = newValue
         }
     }
 }
