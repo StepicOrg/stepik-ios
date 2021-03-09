@@ -7,6 +7,7 @@ struct StepPlainObject: Equatable {
     let progressID: String?
     let lessonID: Int
     let hasReview: Bool
+    let instructionID: Int?
     let canEdit: Bool
     let isEnabled: Bool
     let hasSubmissionRestrictions: Bool
@@ -30,6 +31,7 @@ extension StepPlainObject {
         self.status = step.status
         self.progressID = step.progressID
         self.hasReview = step.hasReview
+        self.instructionID = step.instructionID
         self.canEdit = step.canEdit
         self.isEnabled = step.isEnabled
         self.lessonID = step.lessonID

@@ -104,6 +104,7 @@ enum Submissions {
 
     struct SubmissionsData {
         let users: [User]
+        let currentUserID: User.IdType?
         let submissions: [Submission]
         let isTeacher: Bool
         let hasNextPage: Bool
@@ -126,5 +127,14 @@ enum Submissions {
     enum PaginationState {
         case result(data: SubmissionsResult)
         case error
+    }
+
+    enum ReviewState {
+        case finished
+        case inProgress
+        case cantReviewWrong
+        case cantReviewTeacher
+        case notSubmittedForReview
+        case cantReviewAnother
     }
 }

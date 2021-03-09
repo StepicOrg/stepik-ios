@@ -77,6 +77,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
 
             let responseData = Submissions.SubmissionsData(
                 users: users,
+                currentUserID: self.provider.getCurrentUserID(),
                 submissions: submissions,
                 isTeacher: self.isTeacher,
                 hasNextPage: meta.hasNext
@@ -100,6 +101,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
 
             let responseData = Submissions.SubmissionsData(
                 users: users,
+                currentUserID: self.provider.getCurrentUserID(),
                 submissions: submissions,
                 isTeacher: self.isTeacher,
                 hasNextPage: meta.hasNext
@@ -185,6 +187,9 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             self.loadAttempts(submissions: submissionsFetchResult.0)
                 .map { ($0, submissionsFetchResult.1) }
         }.then { submissionsFetchResult -> Promise<([Submission], Meta)> in
+            self.loadSteps(submissions: submissionsFetchResult.0)
+                .map { ($0, submissionsFetchResult.1) }
+        }.then { submissionsFetchResult -> Promise<([Submission], Meta)> in
             self.loadReviewSessions(submissions: submissionsFetchResult.0)
                 .map { ($0, submissionsFetchResult.1) }
         }.then { submissionsFetchResult -> Promise<([User], [Submission], Meta)> in
@@ -239,6 +244,22 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         }
     }
 
+    private func loadSteps(submissions: [Submission]) -> Promise<[Submission]> {
+        self.provider.fetchSteps(
+            ids: submissions.compactMap { $0.attempt?.stepID }
+        ).then { steps -> Promise<[Submission]> in
+            let stepsMap = steps.reduce(into: [:]) { $0[$1.id] = StepPlainObject(step: $1) }
+
+            for submission in submissions {
+                if let attempt = submission.attempt {
+                    attempt.step = stepsMap[attempt.stepID]
+                }
+            }
+
+            return .value(submissions)
+        }
+    }
+
     private func loadReviewSessions(submissions: [Submission]) -> Promise<[Submission]> {
         Promise { seal in
             self.getCurrentStep().compactMap { $0 }.done { step in
@@ -264,11 +285,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             ids: submissions.compactMap(\.sessionID),
             stepID: self.stepID
         ).then { sessions -> Promise<[Submission]> in
-            let sessionsMap: [Int: ReviewSessionDataPlainObject] = sessions.reduce(into: [:]) { result, session in
-                if let submissionID = session.reviewSession.submission {
-                    result[submissionID] = session
-                }
-            }
+            let sessionsMap = sessions.reduce(into: [:]) { $0[$1.id] = $1 }
 
             for submission in submissions {
                 if let sessionID = submission.sessionID {
@@ -285,28 +302,18 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             .filter { $0.sessionID == nil && $0.status == .correct }
             .map { submission -> Promise<Void> in
                 Promise { seal in
-                    firstly { () -> Promise<Step?> in
-                        if let stepID = submission.attempt?.stepID {
-                            return self.provider.fetchStep(id: stepID)
-                        } else {
-                            return .value(nil)
-                        }
-                    }.then { stepOrNil -> Promise<Void> in
-                        guard let step = stepOrNil,
-                              let instructionID = step.instructionID,
-                              let userID = submission.attempt?.userID else {
-                            return .value(())
-                        }
+                    guard let step = submission.attempt?.step,
+                          let instructionID = step.instructionID,
+                          let userID = submission.attempt?.userID else {
+                        return seal.fulfill(())
+                    }
 
-                        return self.provider.fetchReviewSession(
-                            userID: userID,
-                            instructionID: instructionID,
-                            stepID: step.id
-                        ).then { session -> Promise<Void> in
-                            submission.session = session
-                            return .value(())
-                        }
-                    }.done { _ in
+                    self.provider.fetchReviewSession(
+                        userID: userID,
+                        instructionID: instructionID,
+                        stepID: step.id
+                    ).done { session in
+                        submission.session = session
                         seal.fulfill(())
                     }.catch { error in
                         seal.reject(error)

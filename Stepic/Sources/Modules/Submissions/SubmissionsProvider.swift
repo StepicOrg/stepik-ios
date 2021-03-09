@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol SubmissionsProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<Step?>
+    func fetchSteps(ids: [Step.IdType]) -> Promise<[Step]>
     func fetchSubmissions(
         stepID: Step.IdType,
         filterQuery: SubmissionsFilterQuery,
@@ -11,6 +12,7 @@ protocol SubmissionsProviderProtocol {
     func fetchAttempts(ids: [Attempt.IdType], stepID: Step.IdType) -> Promise<[Attempt]>
     func fetchUsers(ids: [User.IdType]) -> Promise<[User]>
     func fetchCurrentUser() -> Guarantee<User?>
+    func getCurrentUserID() -> User.IdType?
     func fetchReviewSessions(ids: [Int], stepID: Step.IdType) -> Promise<[ReviewSessionDataPlainObject]>
     func fetchReviewSession(
         userID: User.IdType,
@@ -64,6 +66,25 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
                 return self.stepsNetworkService.fetch(ids: [id])
             }.done { steps in
                 seal.fulfill(steps.first)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchSteps(ids: [Step.IdType]) -> Promise<[Step]> {
+        Promise { seal in
+            let uniqueIDs = Set(ids)
+            let uniqueIDsArray = Array(uniqueIDs).reordered(order: ids, transform: { $0 })
+
+            self.stepsPersistenceService.fetch(ids: uniqueIDsArray).then { cachedSteps -> Promise<[Step]> in
+                if Set(cachedSteps.map(\.id)) == uniqueIDs {
+                    return .value(cachedSteps)
+                } else {
+                    return self.stepsNetworkService.fetch(ids: uniqueIDsArray)
+                }
+            }.done { steps in
+                seal.fulfill(steps)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
@@ -172,6 +193,10 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
 
     func fetchCurrentUser() -> Guarantee<User?> {
         .value(self.userAccountService.currentUser)
+    }
+
+    func getCurrentUserID() -> User.IdType? {
+        self.userAccountService.currentUserID
     }
 
     // MARK: Types

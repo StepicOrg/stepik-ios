@@ -26,7 +26,12 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 return nil
                             }
 
-                            return self.makeViewModel(user: user, submission: submission, isTeacher: data.isTeacher)
+                            return self.makeViewModel(
+                                user: user,
+                                currentUserID: data.currentUserID,
+                                submission: submission,
+                                isTeacher: data.isTeacher
+                            )
                         },
                         isSubmissionsFilterAvailable: data.isTeacher,
                         hasNextPage: data.hasNextPage
@@ -50,7 +55,12 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 return nil
                             }
 
-                            return self.makeViewModel(user: user, submission: submission, isTeacher: data.isTeacher)
+                            return self.makeViewModel(
+                                user: user,
+                                currentUserID: data.currentUserID,
+                                submission: submission,
+                                isTeacher: data.isTeacher
+                            )
                         },
                         isSubmissionsFilterAvailable: data.isTeacher,
                         hasNextPage: data.hasNextPage
@@ -89,7 +99,12 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(user: User, submission: Submission, isTeacher: Bool) -> SubmissionViewModel {
+    private func makeViewModel(
+        user: User,
+        currentUserID: User.IdType?,
+        submission: Submission,
+        isTeacher: Bool
+    ) -> SubmissionViewModel {
         let username: String = {
             let fullName = "\(user.firstName) \(user.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
             return fullName.isEmpty ? "User \(user.id)" : fullName
@@ -104,6 +119,44 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             return nil
         }()
 
+        let reviewState: Submissions.ReviewState? = {
+            guard let attempt = submission.attempt,
+                  let step = attempt.step else {
+                return nil
+            }
+
+            if step.instructionID == nil {
+                return nil
+            }
+
+            if submission.sessionID != nil,
+               let session = submission.session {
+                if session.reviewSession.isFinished {
+                    return .finished
+                } else {
+                    return .inProgress
+                }
+            }
+
+            if !submission.isCorrect {
+                return .cantReviewWrong
+            }
+
+            if attempt.userID == currentUserID && isTeacher {
+                return .cantReviewTeacher
+            }
+
+            if submission.session == nil {
+                return .notSubmittedForReview
+            }
+
+            if submission.session?.submission != nil {
+                return .cantReviewAnother
+            } else {
+                return .cantReviewTeacher
+            }
+        }()
+
         return SubmissionViewModel(
             uniqueIdentifier: submission.uniqueIdentifier,
             userID: user.id,
@@ -113,7 +166,8 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             submissionTitle: "#\(submission.id)",
             score: score,
             quizStatus: QuizStatus(submission: submission) ?? .wrong,
-            isMoreActionAvailable: isTeacher
+            isMoreActionAvailable: isTeacher,
+            reviewState: reviewState
         )
     }
 }
