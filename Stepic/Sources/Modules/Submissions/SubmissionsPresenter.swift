@@ -129,6 +129,10 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                 return nil
             }
 
+            if submission.status == .evaluation {
+                return .evaluation
+            }
+
             if submission.sessionID != nil,
                let session = submission.session {
                 if session.reviewSession.isFinished {

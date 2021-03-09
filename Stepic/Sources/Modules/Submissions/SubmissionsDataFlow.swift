@@ -130,6 +130,7 @@ enum Submissions {
     }
 
     enum ReviewState {
+        case evaluation
         case finished
         case inProgress
         case cantReviewWrong
