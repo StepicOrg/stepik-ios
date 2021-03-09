@@ -9,6 +9,6 @@ final class InstructionsAPI: APIEndpoint {
     func getInstruction(id: Int) -> Promise<InstructionsResponse> {
         self.retrieve
             .request(requestEndpoint: "\(self.name)/\(id)", withManager: self.manager)
-            .map { InstructionsResponse(json: $0) }
+            .map(InstructionsResponse.init)
     }
 }
