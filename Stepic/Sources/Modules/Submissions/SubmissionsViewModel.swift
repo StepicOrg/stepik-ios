@@ -10,5 +10,12 @@ struct SubmissionViewModel: UniqueIdentifiable {
     let score: String?
     let quizStatus: QuizStatus
     let isMoreActionAvailable: Bool
-    let reviewState: Submissions.ReviewState?
+
+    let review: SubmissionReviewViewModel?
+}
+
+struct SubmissionReviewViewModel {
+    let title: String
+    let actionButtonTitle: String
+    let isEnabled: Bool
 }

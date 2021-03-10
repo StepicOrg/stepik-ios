@@ -30,6 +30,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 user: user,
                                 currentUserID: data.currentUserID,
                                 submission: submission,
+                                instruction: data.instruction,
                                 isTeacher: data.isTeacher
                             )
                         },
@@ -59,6 +60,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 user: user,
                                 currentUserID: data.currentUserID,
                                 submission: submission,
+                                instruction: data.instruction,
                                 isTeacher: data.isTeacher
                             )
                         },
@@ -103,6 +105,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         user: User,
         currentUserID: User.IdType?,
         submission: Submission,
+        instruction: InstructionDataPlainObject?,
         isTeacher: Bool
     ) -> SubmissionViewModel {
         let username: String = {
@@ -119,7 +122,34 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             return nil
         }()
 
-        let reviewState: Submissions.ReviewState? = {
+        let reviewViewModel = self.makeReviewViewModel(
+            currentUserID: currentUserID,
+            submission: submission,
+            instruction: instruction,
+            isTeacher: isTeacher
+        )
+
+        return SubmissionViewModel(
+            uniqueIdentifier: submission.uniqueIdentifier,
+            userID: user.id,
+            avatarImageURL: URL(string: user.avatarURL),
+            formattedUsername: username,
+            formattedDate: relativeDateString,
+            submissionTitle: "#\(submission.id)",
+            score: score,
+            quizStatus: QuizStatus(submission: submission) ?? .wrong,
+            isMoreActionAvailable: isTeacher,
+            review: reviewViewModel
+        )
+    }
+
+    private func makeReviewViewModel(
+        currentUserID: User.IdType?,
+        submission: Submission,
+        instruction: InstructionDataPlainObject?,
+        isTeacher: Bool
+    ) -> SubmissionReviewViewModel? {
+        let reviewStateOrNil: Submissions.ReviewState? = {
             guard let attempt = submission.attempt,
                   let step = attempt.step else {
                 return nil
@@ -161,17 +191,30 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             }
         }()
 
-        return SubmissionViewModel(
-            uniqueIdentifier: submission.uniqueIdentifier,
-            userID: user.id,
-            avatarImageURL: URL(string: user.avatarURL),
-            formattedUsername: username,
-            formattedDate: relativeDateString,
-            submissionTitle: "#\(submission.id)",
-            score: score,
-            quizStatus: QuizStatus(submission: submission) ?? .wrong,
-            isMoreActionAvailable: isTeacher,
-            reviewState: reviewState
+        guard let reviewState = reviewStateOrNil else {
+            return nil
+        }
+
+        let title: String = {
+            switch reviewState {
+            case .inProgress, .finished:
+                let takenReviewCount = submission.session?.takenReviews.count ?? 0
+                let minReviewsCount = instruction?.instruction.minReviews ?? 0
+
+                return String(
+                    format: reviewState.title,
+                    arguments: ["\(takenReviewCount)", "\(minReviewsCount)"]
+                )
+            default:
+                return reviewState.title
+            }
+        }()
+        let formattedTitle = "\(title)\n\(reviewState.message)".trimmed()
+
+        return SubmissionReviewViewModel(
+            title: formattedTitle,
+            actionButtonTitle: "",
+            isEnabled: false
         )
     }
 }

@@ -136,7 +136,37 @@ enum Submissions {
         case inProgress
         case cantReviewWrong
         case cantReviewTeacher
-        case notSubmittedForReview
         case cantReviewAnother
+        case notSubmittedForReview
+
+        var title: String {
+            switch self {
+            case .inProgress, .finished:
+                return NSLocalizedString("SubmissionsReviewStateInProgressTitle", comment: "")
+            case .notSubmittedForReview:
+                return NSLocalizedString("SubmissionsReviewStateNotSubmittedForReviewTitle", comment: "")
+            case .evaluation, .cantReviewWrong, .cantReviewTeacher, .cantReviewAnother:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewTitle", comment: "")
+            }
+        }
+
+        var message: String {
+            switch self {
+            case .evaluation:
+                return NSLocalizedString("SubmissionsReviewStateEvaluationMessage", comment: "")
+            case .finished:
+                return NSLocalizedString("SubmissionsReviewStateFinishedMessage", comment: "")
+            case .inProgress:
+                return NSLocalizedString("SubmissionsReviewStateInProgressMessage", comment: "")
+            case .cantReviewWrong:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewWrongMessage", comment: "")
+            case .cantReviewTeacher:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewTeacherMessage", comment: "")
+            case .cantReviewAnother:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewAnotherMessage", comment: "")
+            case .notSubmittedForReview:
+                return NSLocalizedString("SubmissionsReviewStateNotSubmittedForReviewMessage", comment: "")
+            }
+        }
     }
 }
