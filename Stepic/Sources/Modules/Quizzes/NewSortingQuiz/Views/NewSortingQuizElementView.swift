@@ -141,7 +141,7 @@ final class NewSortingQuizElementView: UIView {
         }
     }
 
-    var isShadowVisible: Bool = true {
+    var isShadowVisible = true {
         didSet {
             self.updateShadowVisibility()
         }

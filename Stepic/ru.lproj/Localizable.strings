@@ -866,7 +866,8 @@ DownloadARQuickLookAlertFailedMessage = "Не удалось загрузить 
 StepARQuickLookUnsupportedAlertTitle = "Дополненная реальность не поддерживается";
 StepARQuickLookUnsupportedAlertMessage = "Ваше устройство не поддерживает просмотр объектов в дополненной реальности. Требуется iOS 12.0 и новее.";
 StepDisabledTitle = "Увидеть задачу пока нельзя";
-StepDisabledMessage = "Напишите авторам курса, чтобы они обратили внимание на настройки.\nВозможно, через какое-то время доступ восстановится.";
+StepDisabledMessage = "Напишите авторам курса, чтобы они обратили внимание на настройки %@.<br><br>Возможно, через какое-то время доступ восстановится.";
+StepPosition = "Шаг %@";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";

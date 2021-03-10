@@ -48,7 +48,7 @@ final class DiscussionsLoadMoreTableViewCell: UITableViewCell, Reusable {
         }
     }
 
-    var isUpdating: Bool = false {
+    var isUpdating = false {
         didSet {
             if self.isUpdating {
                 self.titleLabel.isHidden = true

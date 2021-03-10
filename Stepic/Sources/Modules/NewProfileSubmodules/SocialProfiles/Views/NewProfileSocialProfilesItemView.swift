@@ -63,7 +63,7 @@ final class NewProfileSocialProfilesItemView: UIControl {
 
     var link: URL?
 
-    var isSeparatorHidden: Bool = false {
+    var isSeparatorHidden = false {
         didSet {
             self.separatorView.isHidden = self.isSeparatorHidden
         }

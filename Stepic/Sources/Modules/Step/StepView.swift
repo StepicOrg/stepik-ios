@@ -14,6 +14,7 @@ protocol StepViewDelegate: AnyObject {
     func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage)
     func stepView(_ view: StepView, didRequestOpenURL url: URL)
     func stepView(_ view: StepView, didRequestOpenARQuickLook url: URL)
+    func stepView(_ view: StepView, didSelectDisabledStepURL url: URL)
 }
 
 extension StepView {
@@ -110,9 +111,36 @@ final class StepView: UIView {
 
     private lazy var quizContainerView = UIView()
 
-    private lazy var stepDisabledView = StepDisabledView()
+    private lazy var stepDisabledView: StepDisabledView = {
+        let view = StepDisabledView()
+        view.onNextStepButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepViewDidRequestNextStep(strongSelf)
+        }
+        view.onPreviousUnitButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepViewDidRequestPreviousUnit(strongSelf)
+        }
+        view.onNextUnitButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepViewDidRequestNextUnit(strongSelf)
+        }
+        view.onLinkClick = { [weak self] url in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepView(strongSelf, didSelectDisabledStepURL: url)
+        }
+        return view
+    }()
 
-    private var canNavigateToNextStep: Bool = false {
+    private var canNavigateToNextStep = false {
         didSet {
             if oldValue == true && !self.canNavigateToNextStep {
                 self.stepControlsView.hasNextStepButton = false
@@ -206,15 +234,20 @@ final class StepView: UIView {
         switch (canNavigateToPreviousUnit, canNavigateToNextUnit) {
         case (true, true):
             self.stepControlsView.unitNavigationState = .both
+            self.stepDisabledView.unitNavigationState = .both
         case (true, _):
             self.stepControlsView.unitNavigationState = .previous
+            self.stepDisabledView.unitNavigationState = .previous
         case (_, true):
             self.stepControlsView.unitNavigationState = .next
+            self.stepDisabledView.unitNavigationState = .next
         default:
             self.stepControlsView.unitNavigationState = nil
+            self.stepDisabledView.unitNavigationState = nil
         }
 
         self.canNavigateToNextStep = canNavigateToNextStep
+        self.stepDisabledView.hasNextStepButton = canNavigateToNextStep
     }
 
     func updateTextContent(_ processedContent: ProcessedContent) {
@@ -233,7 +266,7 @@ final class StepView: UIView {
         self.stepControlsView.isSolutionsButtonEnabled = isEnabled
     }
 
-    func showDisabledView() {
+    func showDisabledView(viewModel: StepDisabledViewModel) {
         if self.stepDisabledView.superview == nil {
             self.insertSubview(self.stepDisabledView, at: Int.max)
             self.stepDisabledView.translatesAutoresizingMaskIntoConstraints = false
@@ -242,6 +275,7 @@ final class StepView: UIView {
             }
         }
 
+        self.stepDisabledView.configure(viewModel: viewModel)
         self.setStepDisabledViewVisible(true)
     }
 

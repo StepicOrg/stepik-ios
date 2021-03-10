@@ -129,7 +129,7 @@ final class StepControlsView: UIView {
         )
     }
 
-    var hasNextStepButton: Bool = false {
+    var hasNextStepButton = false {
         didSet {
             self.nextStepButtonContainerView.isHidden = !self.hasNextStepButton
         }
@@ -147,9 +147,15 @@ final class StepControlsView: UIView {
         }
     }
 
-    var isDiscussionsButtonEnabled: Bool = true {
+    var isDiscussionsButtonEnabled = true {
         didSet {
             self.discussionsButton.isEnabled = self.isDiscussionsButtonEnabled
+        }
+    }
+
+    var isDiscussionsButtonVisible = true {
+        didSet {
+            self.discussionsButton.isHidden = !self.isDiscussionsButtonVisible
         }
     }
 
@@ -160,7 +166,7 @@ final class StepControlsView: UIView {
         }
     }
 
-    var isSolutionsButtonEnabled: Bool = true {
+    var isSolutionsButtonEnabled = true {
         didSet {
             self.solutionsButton.isEnabled = self.isSolutionsButtonEnabled
         }

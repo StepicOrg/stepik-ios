@@ -276,4 +276,14 @@ enum FormatterHelper {
             arguments: [version, build]
         )
     }
+
+    /// Format lesson title with section and unit positions
+    static func lessonTitle(_ lesson: Lesson) -> String {
+        guard let unit = lesson.unit,
+              let section = unit.section else {
+            return lesson.title
+        }
+
+        return "\(section.position).\(unit.position) \(lesson.title)"
+    }
 }

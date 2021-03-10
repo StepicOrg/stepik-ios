@@ -92,7 +92,7 @@ final class ExploreCatalogBlockHeaderView: UIView, ExploreCatalogBlockHeaderView
         }
     }
 
-    var shouldShowAllButton: Bool = true {
+    var shouldShowAllButton = true {
         didSet {
             // We should not only hidden button but resize cause there is no space
             if self.shouldShowAllButton {

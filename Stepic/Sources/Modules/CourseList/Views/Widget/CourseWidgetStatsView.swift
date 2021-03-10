@@ -46,7 +46,7 @@ final class CourseWidgetStatsView: UIView {
         }
     }
 
-    var isArchived: Bool = false {
+    var isArchived = false {
         didSet {
             self.archiveView.isHidden = !self.isArchived
         }

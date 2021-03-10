@@ -92,7 +92,7 @@ final class NewMatchingQuizView: UIView, TitlePresentable {
         }
     }
 
-    var shouldShowShadows: Bool = true {
+    var shouldShowShadows = true {
         didSet {
             self.itemsStackView.arrangedSubviews
                 .forEach { view in

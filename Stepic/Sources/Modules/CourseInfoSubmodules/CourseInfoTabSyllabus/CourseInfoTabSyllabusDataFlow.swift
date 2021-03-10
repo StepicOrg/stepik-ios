@@ -188,7 +188,7 @@ enum CourseInfoTabSyllabus {
         struct Response {
             let error: Error
             var reason: FailReason = .other
-            var forcePresentation: Bool = false
+            var forcePresentation = false
         }
 
         struct ViewModel {
