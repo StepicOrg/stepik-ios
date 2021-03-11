@@ -348,9 +348,8 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     }
 
     private func fetchInstruction(submissions: [Submission]) -> Promise<InstructionDataPlainObject?> {
-        guard let instructionID = submissions.first(
-            where: { $0.session != nil }
-        )?.session?.reviewSession.instruction else {
+        guard let submission = submissions.first(where: { $0.session != nil }),
+              let instructionID = submission.session?.reviewSession.instruction else {
             return .value(nil)
         }
 
