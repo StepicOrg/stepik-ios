@@ -974,6 +974,21 @@ SubmissionStatusPartiallyCorrectText = "Частично верно";
 SubmissionStatusEvaluationText = "В обработке";
 SubmissionsSearchBarPlaceholderText = "ID, email, имя, номер решения";
 SubmissionsActionFilterByUser = "Фильтр по пользователю";
+/* Review titles */
+SubmissionsReviewStateCantReviewTitle = "Рецензирование невозможно.";
+SubmissionsReviewStateInProgressTitle = "%@ из %@ рецензий получены.";
+SubmissionsReviewStateNotSubmittedForReviewTitle = "Не отправлено на рецензию.";
+/* Review messages */
+SubmissionsReviewStateCantReviewAnotherMessage = "Другое решение отправлено.";
+SubmissionsReviewStateCantReviewTeacherMessage = "Решение преподавателя отрецензировать нельзя.";
+SubmissionsReviewStateCantReviewWrongMessage = "Ответ неверен.";
+SubmissionsReviewStateEvaluationMessage = "Ответ в обработке.";
+SubmissionsReviewStateInProgressMessage = "Нужны ещё рецензии на это решение.";
+SubmissionsReviewStateNotSubmittedForReviewMessage = "Нужно отправить решение на рецензию.";
+SubmissionsReviewStateFinishedMessage = "Обязательное количество рецензий на это решение получено.";
+/* Review action titles */
+SubmissionsReviewActionSeeReviewsTitle = "Посмотреть рецензии";
+SubmissionsReviewActionSeeSubmissionTitle = "Посмотреть решение";
 
 /* Submissions Filter */
 SubmissionsFilterTitle = "Поиск Решений";

@@ -68,10 +68,21 @@ final class SubmissionsCellView: UIView {
 
     private lazy var submissionView = SubmissionView()
 
+    private lazy var reviewView: SubmissionsReviewView = {
+        let view = SubmissionsReviewView()
+        view.addTarget(self, action: #selector(self.reviewViewClicked), for: .touchUpInside)
+        view.isHidden = true
+        return view
+    }()
+
+    private var submissionViewBottomToSuperviewConstraint: Constraint?
+    private var submissionViewBottomToReviewViewTopConstraint: Constraint?
+
     var moreActionAnchorView: UIView { self.moreButton }
 
     var onAvatarClick: (() -> Void)?
     var onMoreClick: (() -> Void)?
+    var onReviewClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -88,12 +99,23 @@ final class SubmissionsCellView: UIView {
     }
 
     func configure(viewModel: SubmissionViewModel?) {
+        defer {
+            if self.reviewView.isHidden {
+                self.submissionViewBottomToSuperviewConstraint?.activate()
+                self.submissionViewBottomToReviewViewTopConstraint?.deactivate()
+            } else {
+                self.submissionViewBottomToSuperviewConstraint?.deactivate()
+                self.submissionViewBottomToReviewViewTopConstraint?.activate()
+            }
+        }
+
         guard let viewModel = viewModel else {
             self.nameLabel.text = nil
             self.dateLabel.text = nil
             self.submissionView.status = .evaluation
             self.submissionView.title = nil
             self.submissionView.score = nil
+            self.reviewView.isHidden = true
             self.moreButton.isHidden = true
             self.avatarImageView.reset()
             return
@@ -107,6 +129,15 @@ final class SubmissionsCellView: UIView {
         self.submissionView.status = viewModel.quizStatus
         self.submissionView.title = viewModel.submissionTitle
         self.submissionView.score = viewModel.score
+
+        if let reviewViewModel = viewModel.review {
+            self.reviewView.title = reviewViewModel.title
+            self.reviewView.actionTitle = reviewViewModel.actionButtonTitle
+            self.reviewView.isEnabled = reviewViewModel.isEnabled
+            self.reviewView.isHidden = false
+        } else {
+            self.reviewView.isHidden = true
+        }
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
@@ -122,6 +153,11 @@ final class SubmissionsCellView: UIView {
     private func moreButtonClicked() {
         self.onMoreClick?()
     }
+
+    @objc
+    private func reviewViewClicked() {
+        self.onReviewClick?()
+    }
 }
 
 extension SubmissionsCellView: ProgrammaticallyInitializableViewProtocol {
@@ -132,6 +168,7 @@ extension SubmissionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.dateLabel)
         self.addSubview(self.moreButton)
         self.addSubview(self.submissionView)
+        self.addSubview(self.reviewView)
     }
 
     func makeConstraints() {
@@ -170,8 +207,25 @@ extension SubmissionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.submissionView.snp.makeConstraints { make in
             make.top.equalTo(self.avatarImageView.snp.bottom).offset(self.appearance.submissionViewInsets.top)
             make.leading.equalTo(self.avatarImageView.snp.leading)
-            make.bottom.equalToSuperview().offset(-self.appearance.submissionViewInsets.bottom)
             make.trailing.equalTo(self.moreButton.snp.trailing)
+
+            self.submissionViewBottomToSuperviewConstraint = make
+                .bottom
+                .equalToSuperview()
+                .offset(-self.appearance.submissionViewInsets.bottom)
+                .constraint
+
+            self.submissionViewBottomToReviewViewTopConstraint = make
+                .bottom
+                .equalTo(self.reviewView.snp.top)
+                .offset(-self.appearance.submissionViewInsets.bottom)
+                .constraint
+            self.submissionViewBottomToReviewViewTopConstraint?.deactivate()
+        }
+
+        self.reviewView.translatesAutoresizingMaskIntoConstraints = false
+        self.reviewView.snp.makeConstraints { make in
+            make.leading.bottom.trailing.equalToSuperview()
         }
     }
 }

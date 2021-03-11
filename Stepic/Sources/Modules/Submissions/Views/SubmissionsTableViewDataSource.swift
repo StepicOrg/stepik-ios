@@ -10,6 +10,10 @@ protocol SubmissionsTableViewDataSourceDelegate: AnyObject {
         didSelectMore viewModel: SubmissionViewModel,
         anchorView: UIView
     )
+    func submissionsTableViewDataSource(
+        _ dataSource: SubmissionsTableViewDataSource,
+        didSelectReview viewModel: SubmissionViewModel
+    )
 }
 
 final class SubmissionsTableViewDataSource: NSObject {
@@ -35,9 +39,6 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
         let viewModel = self.viewModels[indexPath.row]
         cell.configure(viewModel: viewModel)
 
-        let isLastCell = indexPath.row == self.viewModels.count - 1
-        cell.separatorIndentationStyle = isLastCell ? .edgeToEdge : .indented
-
         cell.onAvatarClick = { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -56,6 +57,13 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
                 didSelectMore: viewModel,
                 anchorView: strongCell.moreActionAnchorView
             )
+        }
+        cell.onReviewClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectReview: viewModel)
         }
 
         return cell

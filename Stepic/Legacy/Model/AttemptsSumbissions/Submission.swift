@@ -21,6 +21,8 @@ final class Submission: JSONSerializable, Hashable {
     var reply: Reply?
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
+    var sessionID: Int?
+    var session: ReviewSessionDataPlainObject?
     var isLocal: Bool = false
 
     var status: SubmissionStatus? {
@@ -56,6 +58,7 @@ final class Submission: JSONSerializable, Hashable {
         reply: Reply? = nil,
         attemptID: Attempt.IdType,
         attempt: Attempt? = nil,
+        sessionID: Int? = nil,
         isLocal: Bool = false
     ) {
         self.id = id
@@ -67,6 +70,7 @@ final class Submission: JSONSerializable, Hashable {
         self.reply = reply
         self.attemptID = attemptID
         self.attempt = attempt
+        self.sessionID = sessionID
         self.isLocal = isLocal
     }
 
@@ -96,7 +100,8 @@ final class Submission: JSONSerializable, Hashable {
             time: submission?.time ?? Date(),
             reply: submission?.reply,
             attemptID: submission?.attemptID ?? 0,
-            attempt: submission?.attempt
+            attempt: submission?.attempt,
+            sessionID: submission?.sessionID
         )
     }
 
@@ -107,6 +112,7 @@ final class Submission: JSONSerializable, Hashable {
         self.hint = json[JSONKey.hint.rawValue].string
         self.feedback = self.getFeedbackFromJSON(json[JSONKey.feedback.rawValue])
         self.attemptID = json[JSONKey.attempt.rawValue].intValue
+        self.sessionID = json[JSONKey.session.rawValue].int
         self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
     }
 
@@ -130,6 +136,7 @@ final class Submission: JSONSerializable, Hashable {
         hasher.combine(self.reply)
         hasher.combine(self.attemptID)
         hasher.combine(self.attempt)
+        hasher.combine(self.sessionID)
         hasher.combine(self.isLocal)
     }
 
@@ -144,6 +151,7 @@ final class Submission: JSONSerializable, Hashable {
         if lhs.time != rhs.time { return false }
         if lhs.attemptID != rhs.attemptID { return false }
         if lhs.attempt != rhs.attempt { return false }
+        if lhs.sessionID != rhs.sessionID { return false }
 
         if let lhsFeedback = lhs.feedback {
             if !lhsFeedback.isEqual(rhs.feedback) { return false }
@@ -216,6 +224,7 @@ final class Submission: JSONSerializable, Hashable {
         case score
         case hint
         case attempt
+        case session
         case reply
         case feedback
         case time
@@ -238,7 +247,8 @@ extension Submission: CustomDebugStringConvertible {
         feedback: \(feedback ??? "nil"), \
         reply: \(reply ??? "nil"), \
         attemptID: \(attemptID), \
-        attempt: \(attempt ??? "nil"))
+        attempt: \(attempt ??? "nil"), \
+        sessionID: \(sessionID ??? "nil"))
         """
     }
 }

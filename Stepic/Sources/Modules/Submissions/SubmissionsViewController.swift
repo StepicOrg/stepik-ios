@@ -4,6 +4,7 @@ protocol SubmissionsViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel)
     func displayNextSubmissions(viewModel: Submissions.NextSubmissionsLoad.ViewModel)
     func displaySubmission(viewModel: Submissions.SubmissionPresentation.ViewModel)
+    func displayReview(viewModel: Submissions.ReviewPresentation.ViewModel)
     func displayFilter(viewModel: Submissions.FilterPresentation.ViewModel)
     func displayLoadingState(viewModel: Submissions.LoadingStatePresentation.ViewModel)
     func displayFilterButtonActiveState(viewModel: Submissions.FilterButtonActiveStatePresentation.ViewModel)
@@ -237,6 +238,16 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
         self.push(module: assembly.makeModule())
     }
 
+    func displayReview(viewModel: Submissions.ReviewPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .peerReview,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
+
     func displayFilter(viewModel: Submissions.FilterPresentation.ViewModel) {
         let assembly = SubmissionsFilterAssembly(
             presentationDescription: SubmissionsFilter.PresentationDescription(
@@ -335,6 +346,13 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         }
 
         self.present(alert, animated: true)
+    }
+
+    func submissionsTableViewDataSource(
+        _ dataSource: SubmissionsTableViewDataSource,
+        didSelectReview viewModel: SubmissionViewModel
+    ) {
+        self.interactor.doReviewPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
     }
 }
 

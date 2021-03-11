@@ -63,14 +63,26 @@ final class StepikURLFactory {
 
     // MARK: Submissions
 
-    func makeSubmission(stepID: Step.IdType, submissionID: Submission.IdType) -> URL? {
-        self.makeURL(path: .submissionsStepIDSubmissionID(stepID: stepID, submissionID: submissionID))
+    func makeSubmission(stepID: Step.IdType, submissionID: Submission.IdType, unitID: Unit.IdType? = nil) -> URL? {
+        self.makeURL(
+            path: .submissionsStepIDSubmissionID(stepID: stepID, submissionID: submissionID),
+            queryItems: unitID != nil ? [.unit(unitID.require())] : []
+        )
     }
 
     // MARK: Accounts
 
     func makeResetAccountPassword() -> URL? {
         self.makeURL(path: .resetAccountPassword)
+    }
+
+    // MARK: Review
+
+    func makeReviewSession(sessionID: Int, unitID: Unit.IdType? = nil) -> URL? {
+        self.makeURL(
+            path: .reviewSession(sessionID),
+            queryItems: unitID != nil ? [.unit(unitID.require())] : []
+        )
     }
 
     // MARK: - Private API -
@@ -92,6 +104,7 @@ final class StepikURLFactory {
         case fromMobileApp
         case discussion(Comment.IdType)
         case solutionsThread
+        case unit(Unit.IdType)
 
         var urlQueryItem: URLQueryItem {
             switch self {
@@ -101,6 +114,8 @@ final class StepikURLFactory {
                 return URLQueryItem(name: "discussion", value: "\(id)")
             case .solutionsThread:
                 return URLQueryItem(name: "thread", value: "solutions")
+            case .unit(let id):
+                return URLQueryItem(name: "unit", value: "\(id)")
             }
         }
     }
@@ -116,6 +131,7 @@ final class StepikURLFactory {
         case submissionsStepIDSubmissionID(stepID: Step.IdType, submissionID: Submission.IdType)
         case resetAccountPassword
         case catalog(CourseListModel.IdType?)
+        case reviewSession(Int)
 
         var formattedPath: String {
             switch self {
@@ -142,6 +158,8 @@ final class StepikURLFactory {
                     return "/catalog/\(courseListID)"
                 }
                 return "/catalog"
+            case .reviewSession(let sessionID):
+                return "/review/sessions/\(sessionID)"
             }
         }
     }
