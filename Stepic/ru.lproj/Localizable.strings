@@ -986,6 +986,9 @@ SubmissionsReviewStateEvaluationMessage = "Ответ в обработке.";
 SubmissionsReviewStateInProgressMessage = "Нужны ещё рецензии на это решение.";
 SubmissionsReviewStateNotSubmittedForReviewMessage = "Нужно отправить решение на рецензию.";
 SubmissionsReviewStateFinishedMessage = "Обязательное количество рецензий на это решение получено.";
+/* Review action titles */
+SubmissionsReviewActionSeeReviewsTitle = "Посмотреть рецензии";
+SubmissionsReviewActionSeeSubmissionTitle = "Посмотреть решение";
 
 /* Submissions Filter */
 SubmissionsFilterTitle = "Поиск Решений";

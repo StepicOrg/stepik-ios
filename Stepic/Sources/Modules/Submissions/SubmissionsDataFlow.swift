@@ -168,5 +168,14 @@ enum Submissions {
                 return NSLocalizedString("SubmissionsReviewStateNotSubmittedForReviewMessage", comment: "")
             }
         }
+
+        var actionTitle: String {
+            switch self {
+            case .notSubmittedForReview:
+                return NSLocalizedString("SubmissionsReviewActionSeeSubmissionTitle", comment: "")
+            default:
+                return NSLocalizedString("SubmissionsReviewActionSeeReviewsTitle", comment: "")
+            }
+        }
     }
 }

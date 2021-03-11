@@ -985,6 +985,9 @@ SubmissionsReviewStateEvaluationMessage = "Answer in processing.";
 SubmissionsReviewStateInProgressMessage = "More reviews are needed for this submission.";
 SubmissionsReviewStateNotSubmittedForReviewMessage = "Need to send the solution for review.";
 SubmissionsReviewStateFinishedMessage = "Required number of reviews for this submission have been received.";
+/* Review action titles */
+SubmissionsReviewActionSeeReviewsTitle = "See reviews";
+SubmissionsReviewActionSeeSubmissionTitle = "See submission";
 
 /* Submissions Filter */
 SubmissionsFilterTitle = "Search Submissions";

@@ -211,10 +211,19 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         }()
         let formattedTitle = "\(title)\n\(reviewState.message)".trimmed()
 
+        let isEnabled: Bool = {
+            switch reviewState {
+            case .evaluation, .cantReviewWrong, .cantReviewTeacher, .cantReviewAnother:
+                return false
+            case .finished, .inProgress, .notSubmittedForReview:
+                return true
+            }
+        }()
+
         return SubmissionReviewViewModel(
             title: formattedTitle,
-            actionButtonTitle: "",
-            isEnabled: false
+            actionButtonTitle: reviewState.actionTitle,
+            isEnabled: isEnabled
         )
     }
 }
