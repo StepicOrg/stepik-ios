@@ -150,19 +150,34 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
 
         let relativeDateString = FormatterHelper.dateToRelativeString(submission.time)
 
-        let score: String? = {
-            if submission.status == .correct {
-                return FormatterHelper.submissionScore(submission.score)
-            }
-            return nil
-        }()
-
         let reviewViewModel = self.makeReviewViewModel(
             currentUserID: currentUserID,
             submission: submission,
             instruction: instruction,
             isTeacher: isTeacher
         )
+
+        let formattedScore: String? = {
+            if reviewViewModel != nil {
+                let hasValue = (submission.session?.reviewSession.isFinished ?? false)
+                    && (submission.sessionID != nil && submission.session != nil)
+                    && instruction != nil
+
+                if hasValue {
+                    let value = submission.score
+                        * submission.session.require().reviewSession.score
+                        / Float(instruction.require().maxScore)
+
+                    return FormatterHelper.submissionScore(value)
+                } else {
+                    return nil
+                }
+            } else if submission.status == .correct {
+                return FormatterHelper.submissionScore(submission.score)
+            } else {
+                return nil
+            }
+        }()
 
         return SubmissionViewModel(
             uniqueIdentifier: submission.uniqueIdentifier,
@@ -171,7 +186,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             formattedUsername: username,
             formattedDate: relativeDateString,
             submissionTitle: "#\(submission.id)",
-            score: score,
+            score: formattedScore,
             quizStatus: QuizStatus(submission: submission) ?? .wrong,
             isMoreActionAvailable: isTeacher,
             review: reviewViewModel
