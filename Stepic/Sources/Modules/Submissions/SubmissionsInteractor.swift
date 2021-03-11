@@ -221,7 +221,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 .fetchUsers(ids: Array(usersIDs))
                 .map { ($0, submissionsFetchResult.0, submissionsFetchResult.1) }
         }.then { users, submissions, meta in
-            self.fetchInstruction()
+            self.fetchInstruction(submissions: submissions)
                 .map { SubmissionsFetchResult(users: users, submissions: submissions, instruction: $0, meta: meta) }
         }
     }
@@ -347,14 +347,14 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         return when(fulfilled: promises).map { submissions }
     }
 
-    private func fetchInstruction() -> Promise<InstructionDataPlainObject?> {
-        self.getCurrentStep().then { step -> Promise<InstructionDataPlainObject?> in
-            if let instructionID = step?.instructionID {
-                return self.provider.fetchInstruction(id: instructionID)
-            } else {
-                return .value(nil)
-            }
+    private func fetchInstruction(submissions: [Submission]) -> Promise<InstructionDataPlainObject?> {
+        guard let instructionID = submissions.first(
+            where: { $0.session != nil }
+        )?.session?.reviewSession.instruction else {
+            return .value(nil)
         }
+
+        return self.provider.fetchInstruction(id: instructionID)
     }
 
     // MARK: Types
