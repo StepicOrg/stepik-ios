@@ -4015,6 +4015,33 @@
 			path = Content;
 			sourceTree = "<group>";
 		};
+		2C7CCE9325FA7212007D0C83 /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				2C0FE8D325F81D0500626289 /* InstructionDataPlainObject.swift */,
+				2C0FE8C325F81A4900626289 /* InstructionPlainObject.swift */,
+			);
+			path = Instruction;
+			sourceTree = "<group>";
+		};
+		2C7CCE9825FA7233007D0C83 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */,
+				2CF8DF5A25F25CA300F577C2 /* ReviewPlainObject.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		2C7CCE9D25FA7245007D0C83 /* ReviewSession */ = {
+			isa = PBXGroup;
+			children = (
+				2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */,
+				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
+			);
+			path = ReviewSession;
+			sourceTree = "<group>";
+		};
 		2C7EFCF024D08D8E003A4E93 /* SocialProfiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -5593,21 +5620,18 @@
 			path = StepicWidget;
 			sourceTree = "<group>";
 		};
-		2CF8DF4525F22F9900F577C2 /* ReviewSession */ = {
+		2CF8DF4525F22F9900F577C2 /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				2C0FE8D325F81D0500626289 /* InstructionDataPlainObject.swift */,
-				2C0FE8C325F81A4900626289 /* InstructionPlainObject.swift */,
 				2C0FE8CD25F81B8100626289 /* InstructionsResponse.swift */,
-				2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */,
-				2CF8DF5A25F25CA300F577C2 /* ReviewPlainObject.swift */,
-				2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */,
-				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
 				2CF8DF5025F2586400F577C2 /* ReviewSessionResponse.swift */,
 				2C0FE8B525F8199200626289 /* RubricPlainObject.swift */,
 				2CF8DF6425F260BC00F577C2 /* RubricScorePlainObject.swift */,
+				2C7CCE9325FA7212007D0C83 /* Instruction */,
+				2C7CCE9825FA7233007D0C83 /* Review */,
+				2C7CCE9D25FA7245007D0C83 /* ReviewSession */,
 			);
-			path = ReviewSession;
+			path = Review;
 			sourceTree = "<group>";
 		};
 		2CF8DF7C25F26A3C00F577C2 /* Data */ = {
@@ -6556,7 +6580,7 @@
 				2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */,
 				2C97764225D6CBD2008778D6 /* Block */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
-				2CF8DF4525F22F9900F577C2 /* ReviewSession */,
+				2CF8DF4525F22F9900F577C2 /* Review */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
 				2CA9308F253C86BD007B717A /* Video */,
 			);
