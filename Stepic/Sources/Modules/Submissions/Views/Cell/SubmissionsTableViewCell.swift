@@ -3,33 +3,17 @@ import UIKit
 
 final class SubmissionsTableViewCell: UITableViewCell, Reusable {
     enum Appearance {
-        static let separatorLeadingOffset: CGFloat = 16
-    }
-
-    enum SeparatorIndentationStyle {
-        case indented
-        case edgeToEdge
-
-        fileprivate var offset: CGFloat {
-            switch self {
-            case .indented:
-                return Appearance.separatorLeadingOffset
-            case .edgeToEdge:
-                return 0
-            }
-        }
+        static let separatorHeight: CGFloat = 4
+        static let separatorBackgroundColor = UIColor.onSurface.withAlphaComponent(0.04)
     }
 
     private lazy var cellView = SubmissionsCellView()
 
-    private lazy var separatorView = SeparatorView()
-    private var separatorLeadingConstraint: Constraint?
-
-    var separatorIndentationStyle: SeparatorIndentationStyle = .indented {
-        didSet {
-            self.separatorLeadingConstraint?.update(offset: self.separatorIndentationStyle.offset)
-        }
-    }
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Appearance.separatorBackgroundColor
+        return view
+    }()
 
     var onAvatarClick: (() -> Void)? {
         get {
@@ -83,13 +67,9 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
             make.top.equalTo(self.cellView.snp.bottom)
-            self.separatorLeadingConstraint = make.leading
-                .equalToSuperview()
-                .offset(self.separatorIndentationStyle.offset)
-                .constraint
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().priority(999)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(self.separatorView.intrinsicContentSize.height)
+            make.height.equalTo(Appearance.separatorHeight)
         }
     }
 }
