@@ -33,7 +33,7 @@ final class SubmissionsAssembly: Assembly {
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        let presenter = SubmissionsPresenter()
+        let presenter = SubmissionsPresenter(urlFactory: StepikURLFactory())
         let interactor = SubmissionsInteractor(
             stepID: self.stepID,
             isTeacher: self.isTeacher,

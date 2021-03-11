@@ -5,6 +5,7 @@ protocol SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request)
     func doNextSubmissionsLoad(request: Submissions.NextSubmissionsLoad.Request)
     func doSubmissionPresentation(request: Submissions.SubmissionPresentation.Request)
+    func doReviewPresentation(request: Submissions.ReviewPresentation.Request)
     func doFilterPresentation(request: Submissions.FilterPresentation.Request)
     func doSearchSubmissions(request: Submissions.SearchSubmissions.Request)
 }
@@ -132,6 +133,24 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 .done { self.presenter.presentSubmission(response: .init(step: $0, submission: submission)) }
                 .cauterize()
         }
+    }
+
+    func doReviewPresentation(request: Submissions.ReviewPresentation.Request) {
+        guard let submission = self.currentSubmissions.first(
+            where: { $0.uniqueIdentifier == request.uniqueIdentifier }
+        ) else {
+            return
+        }
+
+        self.presenter.presentReview(
+            response: .init(
+                stepID: self.stepID,
+                unitID: self.currentStep?.lesson?.unit?.id,
+                submission: submission,
+                isTeacher: self.isTeacher,
+                currentUserID: self.provider.getCurrentUserID()
+            )
+        )
     }
 
     func doFilterPresentation(request: Submissions.FilterPresentation.Request) {

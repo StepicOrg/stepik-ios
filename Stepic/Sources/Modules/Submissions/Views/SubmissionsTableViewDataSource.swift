@@ -10,6 +10,10 @@ protocol SubmissionsTableViewDataSourceDelegate: AnyObject {
         didSelectMore viewModel: SubmissionViewModel,
         anchorView: UIView
     )
+    func submissionsTableViewDataSource(
+        _ dataSource: SubmissionsTableViewDataSource,
+        didSelectReview viewModel: SubmissionViewModel
+    )
 }
 
 final class SubmissionsTableViewDataSource: NSObject {
@@ -53,6 +57,13 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
                 didSelectMore: viewModel,
                 anchorView: strongCell.moreActionAnchorView
             )
+        }
+        cell.onReviewClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectReview: viewModel)
         }
 
         return cell

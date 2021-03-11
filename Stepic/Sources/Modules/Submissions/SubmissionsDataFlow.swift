@@ -46,6 +46,24 @@ enum Submissions {
         }
     }
 
+    enum ReviewPresentation {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+            let unitID: Unit.IdType?
+            let submission: Submission
+            let isTeacher: Bool
+            let currentUserID: User.IdType?
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Show submissions filter module
     enum FilterPresentation {
         struct Request {}

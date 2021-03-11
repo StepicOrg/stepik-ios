@@ -70,6 +70,7 @@ final class SubmissionsCellView: UIView {
 
     private lazy var reviewView: SubmissionsReviewView = {
         let view = SubmissionsReviewView()
+        view.addTarget(self, action: #selector(self.reviewViewClicked), for: .touchUpInside)
         view.isHidden = true
         return view
     }()
@@ -81,6 +82,7 @@ final class SubmissionsCellView: UIView {
 
     var onAvatarClick: (() -> Void)?
     var onMoreClick: (() -> Void)?
+    var onReviewClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -150,6 +152,11 @@ final class SubmissionsCellView: UIView {
     @objc
     private func moreButtonClicked() {
         self.onMoreClick?()
+    }
+
+    @objc
+    private func reviewViewClicked() {
+        self.onReviewClick?()
     }
 }
 

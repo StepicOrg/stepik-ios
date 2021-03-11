@@ -4,6 +4,7 @@ protocol SubmissionsPresenterProtocol {
     func presentSubmissions(response: Submissions.SubmissionsLoad.Response)
     func presentNextSubmissions(response: Submissions.NextSubmissionsLoad.Response)
     func presentSubmission(response: Submissions.SubmissionPresentation.Response)
+    func presentReview(response: Submissions.ReviewPresentation.Response)
     func presentFilter(response: Submissions.FilterPresentation.Response)
     func presentLoadingState(response: Submissions.LoadingStatePresentation.Response)
     func presentFilterButtonActiveState(response: Submissions.FilterButtonActiveStatePresentation.Response)
@@ -12,6 +13,12 @@ protocol SubmissionsPresenterProtocol {
 
 final class SubmissionsPresenter: SubmissionsPresenterProtocol {
     weak var viewController: SubmissionsViewControllerProtocol?
+
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
 
     // MARK: Protocol Conforming
 
@@ -79,6 +86,34 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         self.viewController?.displaySubmission(
             viewModel: .init(stepID: response.step.id, submission: response.submission)
         )
+    }
+
+    func presentReview(response: Submissions.ReviewPresentation.Response) {
+        guard let reviewState = self.getSubmissionReviewState(
+            submission: response.submission,
+            isTeacher: response.isTeacher,
+            currentUserID: response.currentUserID
+        ) else {
+            return
+        }
+
+        let targetURL: URL? = {
+            if case .notSubmittedForReview = reviewState {
+                return self.urlFactory.makeSubmission(
+                    stepID: response.stepID,
+                    submissionID: response.submission.id,
+                    unitID: response.unitID
+                )
+            } else if let sessionID = response.submission.sessionID {
+                return self.urlFactory.makeReviewSession(sessionID: sessionID, unitID: response.unitID)
+            } else {
+                return nil
+            }
+        }()
+
+        if let targetURL = targetURL {
+            self.viewController?.displayReview(viewModel: .init(url: targetURL))
+        }
     }
 
     func presentFilter(response: Submissions.FilterPresentation.Response) {
@@ -149,49 +184,11 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         instruction: InstructionDataPlainObject?,
         isTeacher: Bool
     ) -> SubmissionReviewViewModel? {
-        let reviewStateOrNil: Submissions.ReviewState? = {
-            guard let attempt = submission.attempt,
-                  let step = attempt.step else {
-                return nil
-            }
-
-            if step.instructionID == nil {
-                return nil
-            }
-
-            if submission.status == .evaluation {
-                return .evaluation
-            }
-
-            if submission.sessionID != nil,
-               let session = submission.session {
-                if session.reviewSession.isFinished {
-                    return .finished
-                } else {
-                    return .inProgress
-                }
-            }
-
-            if !submission.isCorrect {
-                return .cantReviewWrong
-            }
-
-            if attempt.userID == currentUserID && isTeacher {
-                return .cantReviewTeacher
-            }
-
-            if submission.session == nil {
-                return .notSubmittedForReview
-            }
-
-            if submission.session?.submission != nil {
-                return .cantReviewAnother
-            } else {
-                return .cantReviewTeacher
-            }
-        }()
-
-        guard let reviewState = reviewStateOrNil else {
+        guard let reviewState = self.getSubmissionReviewState(
+            submission: submission,
+            isTeacher: isTeacher,
+            currentUserID: currentUserID
+        ) else {
             return nil
         }
 
@@ -225,5 +222,51 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             actionButtonTitle: reviewState.actionTitle,
             isEnabled: isEnabled
         )
+    }
+
+    private func getSubmissionReviewState(
+        submission: Submission,
+        isTeacher: Bool,
+        currentUserID: User.IdType?
+    ) -> Submissions.ReviewState? {
+        guard let attempt = submission.attempt,
+              let step = attempt.step else {
+            return nil
+        }
+
+        if step.instructionID == nil {
+            return nil
+        }
+
+        if submission.status == .evaluation {
+            return .evaluation
+        }
+
+        if submission.sessionID != nil,
+           let session = submission.session {
+            if session.reviewSession.isFinished {
+                return .finished
+            } else {
+                return .inProgress
+            }
+        }
+
+        if !submission.isCorrect {
+            return .cantReviewWrong
+        }
+
+        if attempt.userID == currentUserID && isTeacher {
+            return .cantReviewTeacher
+        }
+
+        if submission.session == nil {
+            return .notSubmittedForReview
+        }
+
+        if submission.session?.submission != nil {
+            return .cantReviewAnother
+        } else {
+            return .cantReviewTeacher
+        }
     }
 }
