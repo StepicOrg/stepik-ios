@@ -16,7 +16,7 @@ final class InstructionsNetworkService: InstructionsNetworkServiceProtocol {
         self.instructionsAPI
             .getInstruction(id: id)
             .map(self.mapInstructionsResponseToData)
-            .map { $0.first }
+            .map(\.first)
     }
 
     private func mapInstructionsResponseToData(_ response: InstructionsResponse) -> [InstructionDataPlainObject] {
