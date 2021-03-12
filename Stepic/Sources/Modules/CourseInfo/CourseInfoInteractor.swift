@@ -78,6 +78,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private var isOnline = false
     private var didLoadFromCache = false
 
+    private var onNetworkReachabilityStatusChangeCallback: ((NetworkReachabilityStatus) -> Void)?
+
     // To fetch only one course concurrently
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     private lazy var fetchBackgroundQueue = DispatchQueue(
@@ -153,6 +155,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request) {
         if self.isOnline {
             return
+        }
+
+        if self.onNetworkReachabilityStatusChangeCallback == nil {
+            self.onNetworkReachabilityStatusChangeCallback = { [weak self] _ in
+                self?.doOnlineModeReset(request: .init())
+            }
+            self.networkReachabilityService.startListening(
+                onUpdatePerforming: self.onNetworkReachabilityStatusChangeCallback.require()
+            )
         }
 
         if self.networkReachabilityService.isReachable {

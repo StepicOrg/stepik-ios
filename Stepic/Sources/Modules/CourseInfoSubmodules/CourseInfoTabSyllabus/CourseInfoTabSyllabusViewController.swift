@@ -66,18 +66,24 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
         }
 
         if case .loading = newState {
+            self.courseInfoTabSyllabusView?.hideError()
             self.courseInfoTabSyllabusView?.showLoading()
             return
         }
 
         if case .loading = self.state {
+            self.courseInfoTabSyllabusView?.hideError()
             self.courseInfoTabSyllabusView?.hideLoading()
         }
 
         switch newState {
         case .loading:
             break
+        case .error:
+            self.courseInfoTabSyllabusView?.showError()
         case .result(let data):
+            self.courseInfoTabSyllabusView?.hideError()
+
             self.syllabusTableDelegate.update(viewModels: data)
             self.courseInfoTabSyllabusView?.updateTableViewData(delegate: self.syllabusTableDelegate)
         }
@@ -205,5 +211,12 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate
 
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
         self.interactor.doDownloadButtonAction(request: .init(type: .all))
+    }
+
+    func courseInfoTabSyllabusViewDidClickErrorPlaceholderAction(
+        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
+    ) {
+        self.updateState(newState: .loading)
+        self.interactor.doSectionsFetch(request: .init())
     }
 }
