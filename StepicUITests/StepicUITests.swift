@@ -2,7 +2,7 @@
 //  StepicUITests.swift
 //  StepicUITests
 //
-//  Created by admin on 11.03.2021.
+//  Created by AKholin on 11.03.2021.
 //  Copyright © 2021 Alex Karpov. All rights reserved.
 //
 
@@ -56,7 +56,7 @@ class StepicUITests: XCTestCase {
     }
     
     func testUserCanAllowNotificationsAfterCloseSplash() throws {
-        // Adding Notification alert interraption
+        // Adding Notification alert interruption
         addUIInterruptionMonitor(withDescription: "“Stepik” Would Like to Send You Notifications") { (alert) -> Bool in
             let alertButton = alert.buttons["Allow"]
             if alertButton.exists {
@@ -85,7 +85,7 @@ class StepicUITests: XCTestCase {
     }
     
     func testUserCanDisallowNotificationsAfterFinishingSplash() throws {
-        // Adding Notification alert interraption
+        // Adding Notification alert interruption
         addUIInterruptionMonitor(withDescription: "“Stepik” Would Like to Send You Notifications") { (alert) -> Bool in
             let alertButton = alert.buttons["Don’t Allow"]
             if alertButton.exists {
@@ -117,9 +117,8 @@ class StepicUITests: XCTestCase {
         }
     }
     
-    // This test is flaky
     func testUserCanChangeLanguageOnce() throws {
-        // Adding Notification alert interraption
+        // Adding Notification alert interruption
         addUIInterruptionMonitor(withDescription: "“Stepik” Would Like to Send You Notifications") { (alert) -> Bool in
             let alertButton = alert.buttons["Allow"]
             if alertButton.exists {
@@ -136,9 +135,6 @@ class StepicUITests: XCTestCase {
         
         // Closing splash with cross
         app.navigationBars["Stepic.OnboardingView"].children(matching: .button).element.tap()
-        
-        // Allowing notifications alert
-        //app.tap()
         
         // Waiting for language change button
         
@@ -176,7 +172,7 @@ class StepicUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        // Check all catalog sections exists
+        // Check all Catalog sections
         let scrollViewsQuery = app.scrollViews
         let elementsQuery = scrollViewsQuery.otherElements
         
