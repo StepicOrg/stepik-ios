@@ -63,6 +63,16 @@
                ReferencedContainer = "container:Stepic.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8489EE7325FAF13A004A85C5"
+               BuildableName = "StepicUITests.xctest"
+               BlueprintName = "StepicUITests"
+               ReferencedContainer = "container:Stepic.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
