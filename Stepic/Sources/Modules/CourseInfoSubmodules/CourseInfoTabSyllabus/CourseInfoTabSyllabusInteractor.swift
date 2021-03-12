@@ -55,6 +55,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
     private var didLoadFromCache = false
+    private var didPresentCourseSyllabus = false
     private var connectionType: NetworkReachabilityConnectionType { self.networkReachabilityService.connectionType }
     private var shouldCheckUseOfCellularDataForDownloads = true
 
@@ -129,11 +130,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     }()
 
                     if !isEmptyCacheFetchResult {
+                        strongSelf.didPresentCourseSyllabus = true
                         strongSelf.presenter.presentCourseSyllabus(response: response)
                     }
 
                     if !strongSelf.didLoadFromCache {
                         strongSelf.didLoadFromCache = true
+
+                        if strongSelf.isOnline {
+                            strongSelf.doSectionsFetch(request: .init())
+                        }
                     }
 
                     if shouldUseNetwork && !strongSelf.didLoadFromNetwork {
@@ -143,8 +149,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     }
                 }
             }.catch { error in
-                // TODO: handle error
-                print("CourseInfoTabSyllabusInteractor :: error while fetching syllabus, isOnline = \(shouldUseNetwork), error = \(error)")
+                print(
+                    """
+                    CourseInfoTabSyllabusInteractor :: error while fetching syllabus, isOnline = \(shouldUseNetwork), \
+                    error = \(error)
+                    """
+                )
+
+                if shouldUseNetwork && !strongSelf.didPresentCourseSyllabus {
+                    strongSelf.presenter.presentCourseSyllabus(response: .init(result: .failure(error)))
+                }
             }.finally {
                 strongSelf.fetchSemaphore.signal()
             }
