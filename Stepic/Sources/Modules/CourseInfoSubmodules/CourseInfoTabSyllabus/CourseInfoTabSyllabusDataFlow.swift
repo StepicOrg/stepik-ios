@@ -201,6 +201,7 @@ enum CourseInfoTabSyllabus {
 
     enum ViewControllerState {
         case loading
+        case error
         case result(data: [CourseInfoTabSyllabusSectionViewModel])
     }
 }

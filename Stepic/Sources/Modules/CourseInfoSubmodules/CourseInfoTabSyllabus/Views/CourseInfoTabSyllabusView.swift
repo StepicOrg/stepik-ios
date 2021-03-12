@@ -4,11 +4,14 @@ import UIKit
 protocol CourseInfoTabSyllabusViewDelegate: AnyObject {
     func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
+    func courseInfoTabSyllabusViewDidClickErrorPlaceholderAction(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
 }
 
 extension CourseInfoTabSyllabusView {
     struct Appearance {
         let headerViewHeight: CGFloat = 60
+
+        let errorPlaceholderBackgroundColor = UIColor.stepikBackground
     }
 }
 
@@ -68,6 +71,16 @@ final class CourseInfoTabSyllabusView: UIView {
         return tableView
     }()
 
+    private lazy var errorPlaceholderView: StepikPlaceholderView = {
+        let view = StepikPlaceholderView()
+        view.appearance = .init(backgroundColor: self.appearance.errorPlaceholderBackgroundColor)
+        view.delegate = self
+        view.isHidden = true
+        return view
+    }()
+
+    private var errorPlaceholderViewTopConstraint: Constraint?
+
     // Reference to tooltip-anchor view
     var deadlinesButtonTooltipAnchorView: UIView { self.headerView.deadlinesButtonTooltipAnchorView }
 
@@ -98,6 +111,7 @@ final class CourseInfoTabSyllabusView: UIView {
     // MARK: Public API
 
     func showLoading() {
+        self.errorPlaceholderView.isHidden = true
         self.tableView.skeleton.viewBuilder = {
             CourseInfoTabSyllabusCellSkeletonView()
         }
@@ -105,7 +119,18 @@ final class CourseInfoTabSyllabusView: UIView {
     }
 
     func hideLoading() {
+        self.errorPlaceholderView.isHidden = true
         self.tableView.skeleton.hide()
+    }
+
+    func showError() {
+        self.errorPlaceholderView.set(placeholder: .noConnection)
+        self.errorPlaceholderView.delegate = self
+        self.errorPlaceholderView.isHidden = false
+    }
+
+    func hideError() {
+        self.errorPlaceholderView.isHidden = true
     }
 
     func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
@@ -126,12 +151,19 @@ final class CourseInfoTabSyllabusView: UIView {
 extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
+        self.addSubview(self.errorPlaceholderView)
     }
 
     func makeConstraints() {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.errorPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.errorPlaceholderView.snp.makeConstraints { make in
+            self.errorPlaceholderViewTopConstraint = make.top.equalToSuperview().constraint
+            make.centerX.leading.bottom.trailing.equalToSuperview()
         }
     }
 }
@@ -207,6 +239,8 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
             if newValue.top > 0 && self.contentOffset.y == 0 {
                 self.contentOffset = CGPoint(x: self.contentOffset.x, y: -newValue.top)
             }
+
+            self.errorPlaceholderViewTopConstraint?.update(offset: newValue.top)
         }
     }
 
@@ -226,5 +260,11 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue
         }
+    }
+}
+
+extension CourseInfoTabSyllabusView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.courseInfoTabSyllabusViewDidClickErrorPlaceholderAction(self)
     }
 }
