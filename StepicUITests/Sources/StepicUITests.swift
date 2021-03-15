@@ -175,7 +175,7 @@ class StepicUITests: XCTestCase {
         // Check all Catalog sections
         let scrollViewsQuery = app.scrollViews
         let elementsQuery = scrollViewsQuery.otherElements
-        
+
         XCTAssertTrue(elementsQuery.staticTexts["Editors' choice"].exists,"No Editors choice section")
         XCTAssertTrue(elementsQuery.staticTexts["Stepik trends"].exists,"No Stepik trends section")
         app.swipeUp()
