@@ -2274,6 +2274,9 @@
 		2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C63C776253EFE2300B20195 /* TableDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataset.swift; sourceTree = "<group>"; };
 		2C64995325DA8586005F63D5 /* PurchaseCourseLocalNotificationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCourseLocalNotificationProvider.swift; sourceTree = "<group>"; };
+		2C67075425FF84BE00B18163 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
+		2C67075525FF84BE00B18163 /* Info-Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
+		2C67075625FF84BE00B18163 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_personal_preferences_v62.xcdatamodel; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
@@ -3163,7 +3166,6 @@
 		7F15948AB9342436A2D3423A /* Pods-Stepic.develop release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.develop release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.develop release.xcconfig"; sourceTree = "<group>"; };
 		8489EE7425FAF13A004A85C5 /* StepicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8489EE7625FAF13B004A85C5 /* StepicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicUITests.swift; sourceTree = "<group>"; };
-		8489EE7825FAF13B004A85C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Init.swift"; sourceTree = "<group>"; };
 		8622056A2055561F00F14255 /* PinsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapView.swift; sourceTree = "<group>"; };
 		86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusesAPI.swift; sourceTree = "<group>"; };
@@ -3319,9 +3321,9 @@
 			children = (
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
+				8489EE7525FAF13B004A85C5 /* StepicUITests */,
 				2CF6E62A25ADB92A00B5A703 /* StepicWidget */,
 				086538361EB02716003A8415 /* StickerPackExtension */,
-				8489EE7525FAF13B004A85C5 /* StepicUITests */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				DCA78145E487F3C8F1848CF6 /* Pods */,
@@ -3889,6 +3891,24 @@
 				2C619A7C24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift */,
 			);
 			path = SocialProfile;
+			sourceTree = "<group>";
+		};
+		2C67075125FF844400B18163 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C67075425FF84BE00B18163 /* Info-Develop.plist */,
+				2C67075525FF84BE00B18163 /* Info-Production.plist */,
+				2C67075625FF84BE00B18163 /* Info-Release.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2C67075325FF845B00B18163 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8489EE7625FAF13B004A85C5 /* StepicUITests.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
@@ -8117,8 +8137,8 @@
 		8489EE7525FAF13B004A85C5 /* StepicUITests */ = {
 			isa = PBXGroup;
 			children = (
-				8489EE7625FAF13B004A85C5 /* StepicUITests.swift */,
-				8489EE7825FAF13B004A85C5 /* Info.plist */,
+				2C67075125FF844400B18163 /* Resources */,
+				2C67075325FF845B00B18163 /* Sources */,
 			);
 			path = StepicUITests;
 			sourceTree = "<group>";
@@ -8485,9 +8505,9 @@
 			targets = (
 				08DE94101B8C58AC00D278AB /* Stepic */,
 				085D5CD81D007F2100092060 /* StepicTests */,
+				8489EE7325FAF13A004A85C5 /* StepicUITests */,
 				086538341EB02715003A8415 /* StickerPackExtension */,
 				2CF6E62425ADB92A00B5A703 /* StepicWidgetExtension */,
-				8489EE7325FAF13A004A85C5 /* StepicUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -11917,12 +11937,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -11937,19 +11955,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = StepicUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				INFOPLIST_FILE = "StepicUITests/Info-Production.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "-32.StepicUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Stepic;
 			};
 			name = "Production Debug";
@@ -11987,11 +12004,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -12001,19 +12017,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = StepicUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				INFOPLIST_FILE = "StepicUITests/Info-Release.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "-32.StepicUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Stepic;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = "Release Debug";
 		};
@@ -12050,11 +12067,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -12064,19 +12080,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = StepicUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				INFOPLIST_FILE = "StepicUITests/Info-Develop.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "-32.StepicUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Stepic;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = "Develop Debug";
 		};
@@ -12113,9 +12130,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -12127,17 +12142,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = StepicUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				INFOPLIST_FILE = "StepicUITests/Info-Production.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "-32.StepicUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Stepic;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -12176,9 +12190,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -12190,17 +12202,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = StepicUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				INFOPLIST_FILE = "StepicUITests/Info-Release.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "-32.StepicUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Stepic;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -12239,9 +12250,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -12253,17 +12262,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = StepicUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				INFOPLIST_FILE = "StepicUITests/Info-Develop.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "-32.StepicUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Stepic;
 				VALIDATE_PRODUCT = YES;
 			};
