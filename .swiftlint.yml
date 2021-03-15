@@ -4,6 +4,7 @@ indentation: 4
 
 included:
   - Stepic/Sources
+  - StepicUITests/Sources
 
 analyzer_rules:
   - explicit_self
