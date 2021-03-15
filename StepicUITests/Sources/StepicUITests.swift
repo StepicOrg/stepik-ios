@@ -1,51 +1,17 @@
-//
-//  StepicUITests.swift
-//  StepicUITests
-//
-//  Created by AKholin on 11.03.2021.
-//  Copyright © 2021 Alex Karpov. All rights reserved.
-//
-
 import XCTest
 
 class StepicUITests: XCTestCase {
-    override func setUpWithError() throws {
-        // This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        super.setUp()
         continueAfterFailure = false
         XCUIApplication().launchArguments += ["-AppleLanguages", "(en)"]
         XCUIApplication().launchArguments += ["-AppleLocale", "en_EN"]
     }
 
-    override func tearDownWithError() throws {
-        // This method is called after the invocation of each test method in the class.
+    override func tearDown() {
         XCUIApplication().terminate()
         super.tearDown()
     }
-
-
-    func deleteMyApp() {
-        let appName = "Stepik"
-
-        // Put the app in the background
-        //XCUIDevice.shared.press(XCUIDevice.Button.home)
-
-        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        if springboard.icons[appName].waitForExistence(timeout: 5) {
-            springboard.icons[appName].press(forDuration: 1.5)
-        }
-
-        if springboard.collectionViews.buttons["Remove App"].waitForExistence(timeout: 5) {
-            springboard.collectionViews.buttons["Remove App"].tap()
-        }
-
-        if springboard.alerts["Remove “\(appName)”?"].scrollViews.otherElements.buttons["Delete App"].waitForExistence(timeout: 5) {
-            springboard.alerts["Remove “\(appName)”?"].scrollViews.otherElements.buttons["Delete App"].tap()
-        }
-
-        if springboard.alerts["Delete “\(appName)”?"].scrollViews.otherElements.buttons["Delete"].waitForExistence(timeout: 5) {
-            springboard.alerts["Delete “\(appName)”?"].scrollViews.otherElements.buttons["Delete"].tap()
-        }
-        }
 
     func testApplicationCanStart() throws {
         let app = XCUIApplication()
@@ -64,7 +30,7 @@ class StepicUITests: XCTestCase {
             return false
         }
         // We need clean installation for this test
-        deleteMyApp()
+        Common.deleteMyApp()
 
         let app = XCUIApplication()
         app.launch()
@@ -93,7 +59,7 @@ class StepicUITests: XCTestCase {
             return false
         }
         // We need clean installation for this test
-        deleteMyApp()
+        Common.deleteMyApp()
 
         let app = XCUIApplication()
         app.launch()
@@ -126,7 +92,7 @@ class StepicUITests: XCTestCase {
             return false
         }
         // We need clean installation for this test
-        deleteMyApp()
+        Common.deleteMyApp()
 
         let app = XCUIApplication()
         app.launch()
@@ -135,7 +101,7 @@ class StepicUITests: XCTestCase {
         app.navigationBars["Stepic.OnboardingView"].children(matching: .button).element.tap()
 
         // Waiting for language change button
-
+        // swiftlint:disable:next line_length
         if app.scrollViews.otherElements/*@START_MENU_TOKEN@*/.staticTexts["En"]/*[[".buttons[\"En\"].staticTexts[\"En\"]",".staticTexts[\"En\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 5) {
             let elementsQuery = app.scrollViews.otherElements
             let enStaticText = elementsQuery/*@START_MENU_TOKEN@*/.staticTexts["En"]/*[[".buttons[\"En\"].staticTexts[\"En\"]",".staticTexts[\"En\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
@@ -157,6 +123,7 @@ class StepicUITests: XCTestCase {
         app.launch()
 
         // Check for language change button abstance
+        // swiftlint:disable:next line_length
         if app.scrollViews.otherElements/*@START_MENU_TOKEN@*/.staticTexts["En"]/*[[".buttons[\"En\"].staticTexts[\"En\"]",".staticTexts[\"En\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 5) {
             XCTFail("Language switcher still exists after restart")
         }
@@ -173,7 +140,7 @@ class StepicUITests: XCTestCase {
         let scrollViewsQuery = app.scrollViews
         let elementsQuery = scrollViewsQuery.otherElements
 
-        XCTAssertTrue(elementsQuery.staticTexts["Editors' choice"].exists, "No Editors choice section")
+        XCTAssertTrue(elementsQuery.staticTexts["Editors' choice"].waitForExistence(timeout: 5), "No Editors choice section")
         XCTAssertTrue(elementsQuery.staticTexts["Stepik trends"].exists, "No Stepik trends section")
         app.swipeUp()
         XCTAssertTrue(elementsQuery.staticTexts["Top categories"].exists, "No Top categories section")
@@ -190,13 +157,14 @@ class StepicUITests: XCTestCase {
 
         // Check unsigned profile tab elements
         app.tabBars["Tab Bar"].buttons["Profile"].tap()
-
+        // swiftlint:disable:next line_length
         if !app/*@START_MENU_TOKEN@*/.buttons["Sign In"].staticTexts["Sign In"]/*[[".buttons[\"Sign In\"].staticTexts[\"Sign In\"]",".staticTexts[\"Sign In\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 10) {
                 XCTFail("No Sign In button in profile tab")
         }
 
         // Check unsigned notification tab elements
         app.tabBars["Tab Bar"].buttons["Notifications"].tap()
+                // swiftlint:disable:next line_length
         if !app/*@START_MENU_TOKEN@*/.buttons["Sign In"].staticTexts["Sign In"]/*[[".buttons[\"Sign In\"].staticTexts[\"Sign In\"]",".staticTexts[\"Sign In\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 10) {
                 XCTFail("No Sign In button in notifications tab")
         }
