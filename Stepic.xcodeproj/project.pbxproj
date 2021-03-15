@@ -3908,8 +3908,8 @@
 		2C67075325FF845B00B18163 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8489EE7625FAF13B004A85C5 /* StepicUITests.swift */,
 				8489EEE325FFBE8E004A85C5 /* Common.swift */,
+				8489EE7625FAF13B004A85C5 /* StepicUITests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

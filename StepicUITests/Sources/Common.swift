@@ -1,5 +1,6 @@
 import Foundation
 import XCTest
+
 private var currentUserName: String?
 
 enum Common {
@@ -10,6 +11,7 @@ enum Common {
         // register new user
         return currentUserName ?? "test"
     }
+
     static func deleteMyApp() {
         let appName = "Stepik"
 
@@ -32,5 +34,5 @@ enum Common {
         if springboard.alerts["Delete “\(appName)”?"].scrollViews.otherElements.buttons["Delete"].waitForExistence(timeout: 5) {
             springboard.alerts["Delete “\(appName)”?"].scrollViews.otherElements.buttons["Delete"].tap()
         }
-        }
+    }
 }
