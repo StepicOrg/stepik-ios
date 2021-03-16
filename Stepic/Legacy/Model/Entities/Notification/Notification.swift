@@ -22,7 +22,7 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
     func initialize(_ json: JSON) {
         id = json["id"].intValue
         htmlText = json["html_text"].stringValue
-        time = Parser.shared.dateFromTimedateJSON(json["time"])
+        time = Parser.dateFromTimedateJSON(json["time"])
         isMuted = json["is_muted"].boolValue
         isFavorite = json["is_favorite"].boolValue
 

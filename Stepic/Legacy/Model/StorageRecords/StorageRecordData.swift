@@ -47,7 +47,7 @@ struct SectionDeadline {
     var dictValue: [String: Any] {
         [
             JSONKey.section.rawValue: self.section,
-            JSONKey.deadline.rawValue: Parser.shared.timedateStringFromDate(date: self.deadlineDate)
+            JSONKey.deadline.rawValue: Parser.timedateStringFromDate(date: self.deadlineDate)
         ]
     }
 
@@ -58,7 +58,7 @@ struct SectionDeadline {
 
     init?(json: JSON) {
         guard let section = json[JSONKey.section.rawValue].int,
-              let deadlineDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.deadline.rawValue]) else {
+              let deadlineDate = Parser.dateFromTimedateJSON(json[JSONKey.deadline.rawValue]) else {
             return nil
         }
 

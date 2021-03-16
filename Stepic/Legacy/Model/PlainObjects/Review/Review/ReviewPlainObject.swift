@@ -21,7 +21,7 @@ extension ReviewPlainObject {
         self.text = json[JSONKey.text.rawValue].stringValue
         self.rubricScores = json[JSONKey.rubricScores.rawValue].arrayValue.compactMap(\.int)
         self.submission = json[JSONKey.submission.rawValue].int
-        self.whenFinished = Parser.shared.dateFromTimedateJSON(json[JSONKey.whenFinished.rawValue])
+        self.whenFinished = Parser.dateFromTimedateJSON(json[JSONKey.whenFinished.rawValue])
         self.isVerified = json[JSONKey.isVerified.rawValue].boolValue
         self.isFrozen = json[JSONKey.isFrozen.rawValue].boolValue
     }
