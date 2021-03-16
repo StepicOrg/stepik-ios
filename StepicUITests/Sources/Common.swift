@@ -35,4 +35,22 @@ enum Common {
             springboard.alerts["Delete “\(appName)”?"].scrollViews.otherElements.buttons["Delete"].tap()
         }
     }
+
+    static func pasteTextFieldText(app: XCUIApplication, element: XCUIElement, value: String, clearText: Bool) {
+        // Get the password into the pasteboard buffer
+        UIPasteboard.init()
+        UIPasteboard.general.string = value
+
+        // Bring up the popup menu on the password field
+        element.tap()
+
+        if clearText {
+            element.buttons["Clear text"].tap()
+        }
+
+        element.doubleTap()
+
+        // Tap the Paste button to input the password
+        app.menuItems["Paste"].tap()
+    }
 }

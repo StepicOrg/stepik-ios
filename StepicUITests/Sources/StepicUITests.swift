@@ -175,6 +175,38 @@ class StepicUITests: XCTestCase {
 
         app.terminate()
     }
+    
+    func testUserCanRegister() throws {
+        let timestamp = Int64(Date().timeIntervalSince1970)
+        let app = XCUIApplication()
+        app.launch()
+
+        // Register new user
+        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        if !app.buttons["Sign In"].staticTexts["Sign In"].waitForExistence(timeout: 10) {
+            XCTFail("No Sign In button in profile tab")
+        } else {
+            app.buttons["Sign In"].staticTexts["Sign In"].tap()
+            app.buttons["Sign Up"].tap()
+            app.textFields["Name"].tap()
+            app.textFields["Name"].typeText("ios_autotest_\(timestamp)")
+            app.textFields["Email"].tap()
+            Common.pasteTextFieldText(app: app, element: app.textFields["Email"], value: "\(timestamp)@stepik.org", clearText: false)
+            app.secureTextFields["Password"].tap()
+            sleep(2)
+            Common.pasteTextFieldText(app: app, element: app.secureTextFields["Password"], value: "512", clearText: false)
+            app.buttons["Register"].tap()
+        }
+        // Check user profile loaded
+        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        let elementsQuery = app.scrollViews.otherElements
+               if elementsQuery.staticTexts["ios_autotest_\(timestamp)"].waitForExistence(timeout: 5) {
+               XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
+               XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
+               }
+        app.terminate()
+    }
+
 
 //    func testLaunchPerformance() throws {
 //        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
