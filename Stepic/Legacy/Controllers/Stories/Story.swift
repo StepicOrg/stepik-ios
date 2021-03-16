@@ -10,43 +10,31 @@ final class Story: JSONSerializable {
     var position: Int
 
     var isSupported: Bool {
-        for part in self.parts {
-            if part.type == nil {
-                return false
-            }
+        for part in self.parts where part.type == nil {
+            return false
         }
-        return self.parts.count > 0
+        return !self.parts.isEmpty
     }
 
     required init(json: JSON) {
-        let id = json["id"].intValue
-        self.id = json["id"].intValue
-        self.coverPath = HTMLProcessor.addStepikURLIfNeeded(url: json["cover"].stringValue)
-        self.title = json["title"].stringValue
+        let id = json[JSONKey.id.rawValue].intValue
+        self.id = id
+        self.coverPath = HTMLProcessor.addStepikURLIfNeeded(url: json[JSONKey.cover.rawValue].stringValue)
+        self.title = json[JSONKey.title.rawValue].stringValue
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
-        self.parts = json["parts"].arrayValue.compactMap { Story.buildStoryPart(json: $0, storyID: id) }
-        self.position = json["position"].intValue
+        self.position = json[JSONKey.position.rawValue].intValue
+        self.parts = json[JSONKey.parts.rawValue].arrayValue.compactMap { json in
+            StoryPartFactory.makeStoryPart(json: json, storyID: id)
+        }
     }
 
-    func update(json: JSON) {
-        self.id = json["id"].intValue
-        self.coverPath = json["cover"].stringValue
-        self.title = json["title"].stringValue
-        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0, storyID: id) }
-        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
-        self.position = json["position"].intValue
-    }
+    func update(json: JSON) {}
 
-    private static func buildStoryPart(json: JSON, storyID: Int) -> StoryPart? {
-        guard let type = json["type"].string else {
-            return nil
-        }
-
-        switch type {
-        case "text":
-            return TextStoryPart(json: json, storyID: storyID)
-        default:
-            return nil
-        }
+    enum JSONKey: String {
+        case id
+        case cover
+        case title
+        case parts
+        case position
     }
 }

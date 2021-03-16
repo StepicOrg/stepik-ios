@@ -797,6 +797,7 @@
 		2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CAC7D5624EF56A600942D14 /* FillBlanksQuizInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */; };
+		2CAD40412600C305008EFDE5 /* StoryPartFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
@@ -2458,6 +2459,7 @@
 		2CA9D9892011FBD5007AA743 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2CAB3718219EF332007A524A /* Model_course_time_to_complete_v26.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_time_to_complete_v26.xcdatamodel; sourceTree = "<group>"; };
 		2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizInputContainerView.swift; sourceTree = "<group>"; };
+		2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartFactory.swift; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -5148,6 +5150,7 @@
 				08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */,
 				2C41F0F525BB007C00DA634A /* StoryOpenSource.swift */,
 				2CEDB4042600BD7700CB077F /* StoryPart.swift */,
+				2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */,
 				080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */,
 				2CA4CF99242A1825008BC4E8 /* OpenedStories */,
 				2CA4CF9A242A1831008BC4E8 /* Stories */,
@@ -10326,6 +10329,7 @@
 				62E98DF5532AD32C87291E21 /* WriteCourseReviewViewController.swift in Sources */,
 				62E985AC1026224CD9117376 /* WriteCourseReviewViewModel.swift in Sources */,
 				2C87A7A12446502900933CA4 /* UsersPersistenceService.swift in Sources */,
+				2CAD40412600C305008EFDE5 /* StoryPartFactory.swift in Sources */,
 				62E98A894044493A1CDD1C77 /* WriteCourseReviewOutputProtocol.swift in Sources */,
 				C95BEF69AB5100E263ED66F6 /* DownloadARQuickLookAssembly.swift in Sources */,
 				2AFCCAAEBDBC4C05F4D5E5F0 /* DownloadARQuickLookDataFlow.swift in Sources */,
