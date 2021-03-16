@@ -801,6 +801,8 @@
 		2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD405B2600D10D008EFDE5 /* story-template-text.json */; };
 		2CAD40682600D1D7008EFDE5 /* StoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40672600D1D7008EFDE5 /* StoryTests.swift */; };
 		2CAD40852600FD5A008EFDE5 /* story-template-feedback.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */; };
+		2CAD409C26011EF1008EFDE5 /* FeedbackStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD409B26011EF1008EFDE5 /* FeedbackStoryView.swift */; };
+		2CAD40AD26011FE0008EFDE5 /* StoryPartGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40AC26011FE0008EFDE5 /* StoryPartGradientView.swift */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
@@ -951,6 +953,8 @@
 		2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEC211AF4300006266F /* StoriesAssembly.swift */; };
 		2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
 		2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
+		2CF20A4326012B5300BF050B /* StoryPartTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF20A4226012B5300BF050B /* StoryPartTitleLabel.swift */; };
+		2CF20A55260140A800BF050B /* FeedbackStoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF20A54260140A800BF050B /* FeedbackStoryFormView.swift */; };
 		2CF24F642390040F002DBD0F /* BlockTypeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF24F632390040E002DBD0F /* BlockTypeSpec.swift */; };
 		2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */; };
 		2CF4661525402077002415AF /* TableQuizSelectColumnsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4661425402077002415AF /* TableQuizSelectColumnsViewController.swift */; };
@@ -2466,6 +2470,8 @@
 		2CAD405B2600D10D008EFDE5 /* story-template-text.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "story-template-text.json"; sourceTree = "<group>"; };
 		2CAD40672600D1D7008EFDE5 /* StoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTests.swift; sourceTree = "<group>"; };
 		2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "story-template-feedback.json"; sourceTree = "<group>"; };
+		2CAD409B26011EF1008EFDE5 /* FeedbackStoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackStoryView.swift; sourceTree = "<group>"; };
+		2CAD40AC26011FE0008EFDE5 /* StoryPartGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartGradientView.swift; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -2628,6 +2634,8 @@
 		2CF10C882384243100F8CC95 /* StepSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSource.swift; sourceTree = "<group>"; };
 		2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesNetworkService.swift; sourceTree = "<group>"; };
 		2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesAPI.swift; sourceTree = "<group>"; };
+		2CF20A4226012B5300BF050B /* StoryPartTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartTitleLabel.swift; sourceTree = "<group>"; };
+		2CF20A54260140A800BF050B /* FeedbackStoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackStoryFormView.swift; sourceTree = "<group>"; };
 		2CF24F632390040E002DBD0F /* BlockTypeSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTypeSpec.swift; sourceTree = "<group>"; };
 		2CF24F66239004D8002DBD0F /* NewStepViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStepViewControllerTests.swift; sourceTree = "<group>"; };
 		2CF4252A2024C10C002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
@@ -5230,9 +5238,11 @@
 		2CA4CF9F242A1889008BC4E8 /* StoryPartViews */ = {
 			isa = PBXGroup;
 			children = (
+				2CAD40AC26011FE0008EFDE5 /* StoryPartGradientView.swift */,
+				2CF20A4226012B5300BF050B /* StoryPartTitleLabel.swift */,
 				2CB1139B2591F5F60093B572 /* StoryReactionsView.swift */,
-				08484EFD211AF4320006266F /* TextStoryView.swift */,
-				08484EE7211AF42F0006266F /* TextStoryView.xib */,
+				2CF20A532601328F00BF050B /* FeedbackStoryView */,
+				2CAD409526011E65008EFDE5 /* TextStoryView */,
 			);
 			path = StoryPartViews;
 			sourceTree = "<group>";
@@ -5308,6 +5318,15 @@
 				2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */,
 			);
 			path = AdaptiveLeaderboardsNames;
+			sourceTree = "<group>";
+		};
+		2CAD409526011E65008EFDE5 /* TextStoryView */ = {
+			isa = PBXGroup;
+			children = (
+				08484EFD211AF4320006266F /* TextStoryView.swift */,
+				08484EE7211AF42F0006266F /* TextStoryView.xib */,
+			);
+			path = TextStoryView;
 			sourceTree = "<group>";
 		};
 		2CAD8B9E2170CDF7003F420B /* Notifications */ = {
@@ -5636,6 +5655,15 @@
 				2CB9E55E23D54B5E0050A7F3 /* Store */,
 			);
 			path = Downloader;
+			sourceTree = "<group>";
+		};
+		2CF20A532601328F00BF050B /* FeedbackStoryView */ = {
+			isa = PBXGroup;
+			children = (
+				2CF20A54260140A800BF050B /* FeedbackStoryFormView.swift */,
+				2CAD409B26011EF1008EFDE5 /* FeedbackStoryView.swift */,
+			);
+			path = FeedbackStoryView;
 			sourceTree = "<group>";
 		};
 		2CF24F65239004AC002DBD0F /* ModulesTests */ = {
@@ -9125,6 +9153,7 @@
 				2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */,
 				2C97E009215E47E7005684A1 /* SearchQueriesViewController.swift in Sources */,
 				2CB9EE8125CD68E70042AAD7 /* SeeAllCourseWidgetView.swift in Sources */,
+				2CF20A55260140A800BF050B /* FeedbackStoryFormView.swift in Sources */,
 				2C7AC49925B37ACA0024D4D2 /* FileManager+SharedContainer.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */,
 				08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */,
@@ -10240,6 +10269,7 @@
 				62E980B320BE6BBF3D7CAF97 /* NewMatchingQuizViewController.swift in Sources */,
 				62E98BA429FB13408B1961B7 /* NewMatchingQuizViewModel.swift in Sources */,
 				62E98B07F7FCC64DBCB17FF1 /* NewMatchingQuizTitleView.swift in Sources */,
+				2CAD409C26011EF1008EFDE5 /* FeedbackStoryView.swift in Sources */,
 				2C3A053F25B7693B0007FBCA /* WidgetRoutingService.swift in Sources */,
 				62E985413150E83869B5BA9F /* NewMatchingQuizView.swift in Sources */,
 				62E989B229C9881583AD07D1 /* NewSortingQuizAssembly.swift in Sources */,
@@ -10247,6 +10277,7 @@
 				62E9844FD1845C298B281950 /* NewSortingQuizInteractor.swift in Sources */,
 				62E9885EBB5FC595D3F8622D /* NewSortingQuizPresenter.swift in Sources */,
 				62E98A9EE808444DF405438B /* NewSortingQuizViewController.swift in Sources */,
+				2CF20A4326012B5300BF050B /* StoryPartTitleLabel.swift in Sources */,
 				62E9820D47A040FC9BD74080 /* NewSortingQuizViewModel.swift in Sources */,
 				62E980BD19AD05F7E7BE10A9 /* NewSortingQuizElementView.swift in Sources */,
 				2CEDB4052600BD7700CB077F /* StoryPart.swift in Sources */,
@@ -10465,6 +10496,7 @@
 				8692BDB41783003A7B98E476 /* SimpleCourseListViewController.swift in Sources */,
 				DA79093AB5627C652A4830CC /* SimpleCourseListOutputProtocol.swift in Sources */,
 				BF08E100FC52E10D3D085BE7 /* AuthorsCourseListAssembly.swift in Sources */,
+				2CAD40AD26011FE0008EFDE5 /* StoryPartGradientView.swift in Sources */,
 				54A790C581BEE7B51FFC1121 /* AuthorsCourseListDataFlow.swift in Sources */,
 				89232565DB802FFBC4D97BCD /* AuthorsCourseListInteractor.swift in Sources */,
 				09D3CF0B1191F77777422700 /* AuthorsCourseListPresenter.swift in Sources */,

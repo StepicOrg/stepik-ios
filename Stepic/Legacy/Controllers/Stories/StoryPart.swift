@@ -129,7 +129,6 @@ final class FeedbackStoryPart: StoryPart {
         let buttonJSON = json[JSONKey.button.rawValue]
         if buttonJSON != JSON.null {
             let title = buttonJSON[JSONKey.title.rawValue].stringValue
-            let urlPath = buttonJSON[JSONKey.url.rawValue].stringValue
             let feedbackTitle = buttonJSON[JSONKey.feedbackTitle.rawValue].stringValue
 
             let backgroundColor = Parser.colorFromHex6StringJSON(
@@ -142,7 +141,6 @@ final class FeedbackStoryPart: StoryPart {
 
             self.button = Button(
                 title: title,
-                urlPath: urlPath,
                 backgroundColor: backgroundColor,
                 titleColor: titleColor,
                 feedbackTitle: feedbackTitle
@@ -204,7 +202,6 @@ final class FeedbackStoryPart: StoryPart {
         fileprivate static var defaultTitleColor = UIColor.white
 
         var title: String
-        var urlPath: String
         var backgroundColor: UIColor
         var titleColor: UIColor
         var feedbackTitle: String
@@ -234,7 +231,14 @@ final class FeedbackStoryPart: StoryPart {
 
             static var `default`: IconStyle { .dark }
 
-            var icon: UIImage? { fatalError() }
+            var image: UIImage? {
+                switch self {
+                case .light:
+                    return UIImage(named: "stories-feedback-comment-light")
+                case .dark:
+                    return UIImage(named: "stories-feedback-comment-dark")
+                }
+            }
         }
     }
 
@@ -242,7 +246,6 @@ final class FeedbackStoryPart: StoryPart {
         case text
         case title
         case button
-        case url
         case feedback
         case textColor = "text_color"
         case backgroundColor = "background_color"

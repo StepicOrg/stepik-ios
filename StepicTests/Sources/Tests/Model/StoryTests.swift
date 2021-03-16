@@ -77,7 +77,6 @@ class StorySpec: QuickSpec {
                     expect(feedbackStoryPart.text!.textColor) == UIColor(hex6: 0xFFFFFF)
                     // Button
                     expect(feedbackStoryPart.button!.title) == "Send feedback"
-                    expect(feedbackStoryPart.button!.urlPath) == "https://stepik.org/course/3138/syllabus"
                     expect(feedbackStoryPart.button!.backgroundColor) == UIColor(hex6: 0x6C7BDF)
                     expect(feedbackStoryPart.button!.titleColor) == UIColor(hex6: 0xFFFFFF)
                     expect(feedbackStoryPart.button!.feedbackTitle) == "Фидбек отправлен"
