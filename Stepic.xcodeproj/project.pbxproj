@@ -798,6 +798,8 @@
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CAC7D5624EF56A600942D14 /* FillBlanksQuizInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */; };
 		2CAD40412600C305008EFDE5 /* StoryPartFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */; };
+		2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD405B2600D10D008EFDE5 /* story-template-text.json */; };
+		2CAD40682600D1D7008EFDE5 /* StoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40672600D1D7008EFDE5 /* StoryTests.swift */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
@@ -2460,6 +2462,8 @@
 		2CAB3718219EF332007A524A /* Model_course_time_to_complete_v26.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_time_to_complete_v26.xcdatamodel; sourceTree = "<group>"; };
 		2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizInputContainerView.swift; sourceTree = "<group>"; };
 		2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartFactory.swift; sourceTree = "<group>"; };
+		2CAD405B2600D10D008EFDE5 /* story-template-text.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "story-template-text.json"; sourceTree = "<group>"; };
+		2CAD40672600D1D7008EFDE5 /* StoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTests.swift; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -3814,6 +3818,7 @@
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
 				2CF8DF9925F2754C00F577C2 /* ReviewSessionResponseSpec.swift */,
 				2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */,
+				2CAD40672600D1D7008EFDE5 /* StoryTests.swift */,
 				2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
@@ -5687,6 +5692,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF8DF7D25F26A9F00F577C2 /* review-sessions.json */,
+				2CAD405B2600D10D008EFDE5 /* story-template-text.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -8527,6 +8533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CF8DF7E25F26A9F00F577C2 /* review-sessions.json in Resources */,
+				2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9077,6 +9084,7 @@
 				2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */,
 				2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */,
 				2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */,
+				2CAD40682600D1D7008EFDE5 /* StoryTests.swift in Sources */,
 				2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */,
 				2CF8DF9A25F2754C00F577C2 /* ReviewSessionResponseSpec.swift in Sources */,
 				2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */,

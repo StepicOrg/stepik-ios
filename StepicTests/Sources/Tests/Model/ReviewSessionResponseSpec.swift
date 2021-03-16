@@ -88,6 +88,7 @@ class ReviewSessionResponseSpec: QuickSpec {
                     reply: ChoiceReply(choices: [false, false, true, false]),
                     attemptID: 359944920,
                     attempt: nil,
+                    sessionID: 908571,
                     isLocal: false
                 )
             }
