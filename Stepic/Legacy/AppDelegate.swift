@@ -314,7 +314,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        if let code = Parser.shared.codeFromURL(url) {
+        if let code = Parser.codeFromURL(url) {
             // Auth token
             NotificationCenter.default.post(
                 name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"),

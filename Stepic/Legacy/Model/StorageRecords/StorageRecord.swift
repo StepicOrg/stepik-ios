@@ -29,8 +29,8 @@ final class StorageRecord: JSONSerializable {
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].int ?? 0
         self.kind = StorageRecordKind(string: json[JSONKey.kind.rawValue].stringValue)
-        self.createDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.createDate.rawValue])
-        self.updateDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.updateDate.rawValue])
+        self.createDate = Parser.dateFromTimedateJSON(json[JSONKey.createDate.rawValue])
+        self.updateDate = Parser.dateFromTimedateJSON(json[JSONKey.updateDate.rawValue])
         self.data = self.parseStorageData(from: json[JSONKey.data.rawValue], withKind: self.kind)
         self.user = json[JSONKey.user.rawValue].int
     }

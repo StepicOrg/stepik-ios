@@ -6,6 +6,14 @@ enum TestData {
         self.loadJSON(path: "review-sessions")
     }
 
+    static var textStoryTemplate: JSON {
+        self.loadJSON(path: "story-template-text")
+    }
+
+    static var feedbackStoryTemplate: JSON {
+        self.loadJSON(path: "story-template-feedback")
+    }
+
     private static func loadJSON(path: String) -> JSON {
         let testBundle = TestBundle().bundle
         let resourcePath = testBundle.path(forResource: path, ofType: "json")!

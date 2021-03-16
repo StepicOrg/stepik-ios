@@ -1,20 +1,9 @@
-//
-//  TextStoryView.swift
-//  stepik-stories
-//
-//  Created by Ostrenkiy on 03.08.2018.
-//  Copyright © 2018 Ostrenkiy. All rights reserved.
-//
-
-import Foundation
 import Nuke
 import SnapKit
 import UIKit
 
 extension TextStoryView {
     struct Appearance {
-        let titleLabelFont = UIFont.systemFont(ofSize: 26, weight: .bold)
-
         let textLabelFont = UIFont.systemFont(ofSize: 20, weight: .bold)
 
         let buttonFont = Typography.bodyFont
@@ -45,24 +34,8 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
     private let analytics: Analytics = StepikAnalytics.shared
 
-    private lazy var topGradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer(
-            colors: [UIColor.black.withAlphaComponent(0.87), UIColor.clear],
-            rotationAngle: 0
-        )
-        return layer
-    }()
+    private lazy var gradientView = StoryPartGradientView()
 
-    private lazy var bottomGradientLayer: CAGradientLayer = {
-        let layer = CAGradientLayer(
-            colors: [UIColor.black.withAlphaComponent(0.87), UIColor.clear],
-            rotationAngle: 0
-        )
-        layer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        layer.endPoint = CGPoint(x: 0.5, y: 0.0)
-        return layer
-    }()
-    
     private lazy var elementsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
@@ -88,29 +61,12 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
 
         self.activityIndicator.isHidden = true
 
-        self.layer.addSublayer(self.topGradientLayer)
-        self.layer.addSublayer(self.bottomGradientLayer)
+        self.insertSubview(self.gradientView, aboveSubview: self.imageView)
+        self.gradientView.translatesAutoresizingMaskIntoConstraints = false
+        self.gradientView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.topGradientLayer.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: self.frame.width,
-            height: self.frame.height / 2
-        )
-
-        self.bottomGradientLayer.frame = CGRect(
-            x: 0,
-            y: self.center.y,
-            width: self.frame.width,
-            height: self.frame.height / 2
-        )
-    }
-
-    func setup(storyPart: TextStoryPart, urlNavigationDelegate: StoryURLNavigationDelegate?) {
+    func configure(storyPart: TextStoryPart, urlNavigationDelegate: StoryURLNavigationDelegate?) {
         self.imagePath = storyPart.imagePath
         self.urlNavigationDelegate = urlNavigationDelegate
 
@@ -175,12 +131,8 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     }
 
     private func makeTitleView(textModel: TextStoryPart.Text) -> UIView {
-        let label = UILabel()
+        let label = StoryPartTitleLabel(appearance: .init(textColor: textModel.textColor))
         label.text = textModel.title
-        label.textColor = textModel.textColor
-        label.font = self.appearance.titleLabelFont
-        label.textAlignment = .left
-        label.numberOfLines = 0
         return label
     }
 

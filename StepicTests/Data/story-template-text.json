@@ -1,0 +1,42 @@
+{
+    "id": 47,
+    "title": "Экономика",
+    "parts": [
+        {
+            "position": 1,
+            "type": "text",
+            "duration": 10,
+            "image": "https://ucarecdn.com/0d9a1830-2e43-4140-b2a0-c54a69b2688e/",
+            "text": {
+                "title": "Экономика",
+                "text": "В экономических процессах полезно разбираться не только тем, кто работает в этой сфере!",
+                "text_color": "fffff0",
+                "background_style": "dark"
+            },
+            "button": null
+        },
+        {
+            "position": 2,
+            "type": "text",
+            "duration": 15,
+            "image": "https://ucarecdn.com/de5af33e-6d63-474f-98d0-7bb1ab3aa5fa/",
+            "text": {
+                "title": "Микроэкономика: базовый курс. Теория спроса и предложения",
+                "text": "Новый курс на Stepik, который познакомит вас с основами микроэкономики. Хорошее введение для тех, кто только начинает разбираться!",
+                "text_color": "fffff0",
+                "background_style": "dark"
+            },
+            "button": {
+                "title": "Начать учиться",
+                "url": "https://stepik.org/course/58626/promo",
+                "background_color": "6C7BDF",
+                "text_color": "FFFFFF"
+            }
+        }
+    ],
+    "cover": "/media/stories/7206a18c8b46cef7db253010ee391fe8997dbbc2.png",
+    "is_published": true,
+    "version": 1,
+    "language": "ru",
+    "position": 968
+}

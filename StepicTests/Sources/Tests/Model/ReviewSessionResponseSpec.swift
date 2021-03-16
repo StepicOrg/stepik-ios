@@ -65,7 +65,7 @@ class ReviewSessionResponseSpec: QuickSpec {
                     text: "<p>General comments</p>\n\n<p><strong>General</strong> <u>comments <span style=\"background-color: #f3f4f6; font-size: 14.399999618530273px;\">good</span></u></p>\n",
                     rubricScores: [3269032],
                     submission: nil,
-                    whenFinished: Parser.shared.dateFromTimedateJSON(JSON("2021-03-04T20:15:23Z")),
+                    whenFinished: Parser.dateFromTimedateJSON(JSON("2021-03-04T20:15:23Z")),
                     isVerified: false,
                     isFrozen: true
                 )
@@ -84,10 +84,11 @@ class ReviewSessionResponseSpec: QuickSpec {
                     score: 1,
                     hint: "",
                     feedback: StringSubmissionFeedback(string: ""),
-                    time: Parser.shared.dateFromTimedateJSON(JSON("2021-03-04T20:11:58Z"))!,
+                    time: Parser.dateFromTimedateJSON(JSON("2021-03-04T20:11:58Z"))!,
                     reply: ChoiceReply(choices: [false, false, true, false]),
                     attemptID: 359944920,
                     attempt: nil,
+                    sessionID: 908571,
                     isLocal: false
                 )
             }
