@@ -30,6 +30,8 @@ final class StoryPartViewFactory {
             viewToAnimate.setup(storyPart: storyPart, urlNavigationDelegate: self.urlNavigationDelegate)
 
             return viewToAnimate
+        case .feedback:
+            fatalError()
         }
     }
 }

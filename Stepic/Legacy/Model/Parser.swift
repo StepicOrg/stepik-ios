@@ -38,7 +38,14 @@ enum Parser {
         }
     }
 
-    func timedateStringFromDate(date: Date) -> String {
+    static func colorFromHex6StringJSON(_ json: JSON) -> UIColor? {
+        guard let hexStringValue = json.string,
+              let hexUIntValue = UInt32(hexStringValue, radix: 16) else {
+            return nil
+        }
+
+        return UIColor(hex6: hexUIntValue)
+    }
 
     static func timedateStringFromDate(date: Date) -> String {
         let dateFormatter = DateFormatter()

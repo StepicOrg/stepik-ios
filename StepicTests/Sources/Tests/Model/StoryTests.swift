@@ -50,6 +50,47 @@ class StorySpec: QuickSpec {
                     expect(secondStoryPart.button!.backgroundColor) == UIColor(hex6: 0x6C7BDF)
                     expect(secondStoryPart.button!.titleColor) == UIColor(hex6: 0xFFFFFF)
                 }
+
+                it("successfully parses story with parts of type feedback") {
+                    // Given
+                    let json = TestData.feedbackStoryTemplate
+
+                    // When
+                    let story = Story(json: json)
+
+                    // Then
+                    expect(story.id) == 32
+                    expect(story.coverPath) == "http://stepik.org/media/stories/49d002fba3b5c419a87f557fda55fab235edfee9.jpg"
+                    expect(story.title) == "Feedback Story"
+                    expect(story.position) == 777
+                    expect(story.parts.count) == 2
+                    expect(story.parts[0].type) == .text
+
+                    let feedbackStoryPart = story.parts[1] as! FeedbackStoryPart
+                    expect(feedbackStoryPart.type) == .feedback
+                    expect(feedbackStoryPart.position) == 1
+                    expect(feedbackStoryPart.duration) == 20
+                    expect(feedbackStoryPart.storyID) == 32
+                    expect(feedbackStoryPart.imagePath) == "https://ucarecdn.com/de5af33e-6d63-474f-98d0-7bb1ab3aa5fa/"
+                    // Text
+                    expect(feedbackStoryPart.text!.title) == "Микроэкономика: базовый курс. Теория спроса и предложения"
+                    expect(feedbackStoryPart.text!.textColor) == UIColor(hex6: 0xFFFFFF)
+                    // Button
+                    expect(feedbackStoryPart.button!.title) == "Send feedback"
+                    expect(feedbackStoryPart.button!.urlPath) == "https://stepik.org/course/3138/syllabus"
+                    expect(feedbackStoryPart.button!.backgroundColor) == UIColor(hex6: 0x6C7BDF)
+                    expect(feedbackStoryPart.button!.titleColor) == UIColor(hex6: 0xFFFFFF)
+                    expect(feedbackStoryPart.button!.feedbackTitle) == "Фидбек отправлен"
+                    // Feedback
+                    expect(feedbackStoryPart.feedback!.backgroundColor) == UIColor(hex6: 0xFFFFFF)
+                    expect(feedbackStoryPart.feedback!.text) == "We need your feedback"
+                    expect(feedbackStoryPart.feedback!.textColor) == UIColor(hex6: 0x000000)
+                    expect(feedbackStoryPart.feedback!.iconStyle) == .light
+                    expect(feedbackStoryPart.feedback!.inputBackgroundColor) == UIColor(hex6: 0x6C7BDF)
+                    expect(feedbackStoryPart.feedback!.inputTextColor) == UIColor(hex6: 0xfffff0)
+                    expect(feedbackStoryPart.feedback!.placeholderText) == "Type your feedback..."
+                    expect(feedbackStoryPart.feedback!.placeholderTextColor) == UIColor(hex6: 0x5f5ef7)
+                }
             }
         }
     }

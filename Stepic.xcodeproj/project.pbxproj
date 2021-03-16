@@ -800,6 +800,7 @@
 		2CAD40412600C305008EFDE5 /* StoryPartFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */; };
 		2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD405B2600D10D008EFDE5 /* story-template-text.json */; };
 		2CAD40682600D1D7008EFDE5 /* StoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40672600D1D7008EFDE5 /* StoryTests.swift */; };
+		2CAD40852600FD5A008EFDE5 /* story-template-feedback.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */; };
@@ -2464,6 +2465,7 @@
 		2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartFactory.swift; sourceTree = "<group>"; };
 		2CAD405B2600D10D008EFDE5 /* story-template-text.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "story-template-text.json"; sourceTree = "<group>"; };
 		2CAD40672600D1D7008EFDE5 /* StoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTests.swift; sourceTree = "<group>"; };
+		2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "story-template-feedback.json"; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -5692,6 +5694,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF8DF7D25F26A9F00F577C2 /* review-sessions.json */,
+				2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */,
 				2CAD405B2600D10D008EFDE5 /* story-template-text.json */,
 			);
 			path = Data;
@@ -8532,6 +8535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CAD40852600FD5A008EFDE5 /* story-template-feedback.json in Resources */,
 				2CF8DF7E25F26A9F00F577C2 /* review-sessions.json in Resources */,
 				2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,

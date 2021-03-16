@@ -11,6 +11,8 @@ enum StoryPartFactory {
         switch type {
         case .text:
             return TextStoryPart(json: json, storyID: storyID)
+        case .feedback:
+            return FeedbackStoryPart(json: json, storyID: storyID)
         }
     }
 }
