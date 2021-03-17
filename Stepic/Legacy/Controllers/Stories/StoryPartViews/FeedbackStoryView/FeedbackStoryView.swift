@@ -35,25 +35,12 @@ final class FeedbackStoryView: UIView, UIStoryPartViewProtocol {
 
     private lazy var titleLabel = StoryPartTitleLabel()
 
-    private lazy var formView: FeedbackStoryFormView = {
-        let view = FeedbackStoryFormView()
-        view.onInputTextDidChange = { [weak self] text in
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.actionButton.isEnabled = !text.trimmed().isEmpty
-        }
-        return view
-    }()
+    private lazy var formView = FeedbackStoryFormView()
 
     private lazy var actionButton: ImageButton = {
         let button = ImageButton()
         button.imageSize = self.appearance.actionButtonImageSize
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
-
-        button.disabledAlpha = 0.75
-        button.isEnabled = false
 
         let cornerRadius = self.appearance.actionButtonHeight / 2
         button.setRoundedCorners(cornerRadius: cornerRadius)

@@ -45,7 +45,6 @@ final class FeedbackStoryFormView: UIView {
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
         textView.dataDetectorTypes = []
-        textView.delegate = self
         textView.setRoundedCorners(cornerRadius: self.appearance.inputTextViewCornerRadius)
         return textView
     }()
@@ -107,8 +106,6 @@ final class FeedbackStoryFormView: UIView {
             self.inputTextView.text = newValue
         }
     }
-
-    var onInputTextDidChange: ((String) -> Void)?
 
     override var isFirstResponder: Bool {
         self.inputTextView.isFirstResponder
@@ -179,11 +176,5 @@ extension FeedbackStoryFormView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.inputTextViewInsets.right)
             make.height.equalTo(self.appearance.inputTextViewHeight)
         }
-    }
-}
-
-extension FeedbackStoryFormView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        self.onInputTextDidChange?(textView.text)
     }
 }
