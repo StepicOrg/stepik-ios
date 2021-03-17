@@ -147,6 +147,8 @@ final class DiscussionsCellView: UIView {
         }
     }
 
+    var moreActionAnchorView: UIView { self.moreButton }
+
     var onAvatarClick: (() -> Void)?
     var onMoreClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
