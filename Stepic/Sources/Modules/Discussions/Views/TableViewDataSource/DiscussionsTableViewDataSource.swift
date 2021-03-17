@@ -25,10 +25,16 @@ final class DiscussionsTableViewDataSource: NSObject {
     }
 
     func indexPath(for commentID: Comment.IdType) -> IndexPath? {
-        // Expected to have discussion id here
-        if let discussionIndex = self.viewModels.firstIndex(where: { $0.id == commentID }) {
-            return IndexPath(row: 0, section: discussionIndex)
+        for (discussionIndex, discussion) in self.viewModels.enumerated() {
+            if discussion.id == commentID {
+                return IndexPath(row: 0, section: discussionIndex)
+            }
+
+            for (replyIndex, reply) in discussion.replies.enumerated() where reply.id == commentID {
+                return IndexPath(row: replyIndex + Self.parentDiscussionInset, section: discussionIndex)
+            }
         }
+
         return nil
     }
 
