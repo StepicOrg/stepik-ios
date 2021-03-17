@@ -139,7 +139,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                         if strongSelf.isOnline {
                             strongSelf.doSectionsFetch(request: .init())
-                        } else if isEmptyCacheFetchResult {
+                        } else if isEmptyCacheFetchResult && !strongSelf.networkReachabilityService.isReachable {
                             strongSelf.presenter.presentCourseSyllabus(
                                 response: .init(result: .failure(Error.fetchFailed))
                             )
