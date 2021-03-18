@@ -45,7 +45,7 @@ final class FeedbackStoryFormView: UIView {
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
         textView.dataDetectorTypes = []
-        textView.setRoundedCorners(cornerRadius: self.appearance.inputTextViewCornerRadius)
+        textView.roundAllCorners(radius: self.appearance.inputTextViewCornerRadius)
         return textView
     }()
 
@@ -144,7 +144,7 @@ final class FeedbackStoryFormView: UIView {
 
 extension FeedbackStoryFormView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.setRoundedCorners(cornerRadius: self.appearance.cornerRadius)
+        self.roundAllCorners(radius: self.appearance.cornerRadius)
     }
 
     func addSubviews() {

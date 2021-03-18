@@ -43,7 +43,7 @@ final class FeedbackStoryView: UIView, UIStoryPartViewProtocol {
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
 
         let cornerRadius = self.appearance.actionButtonHeight / 2
-        button.setRoundedCorners(cornerRadius: cornerRadius)
+        button.roundAllCorners(radius: cornerRadius)
 
         button.titleInsets = .init(top: 0, left: cornerRadius, bottom: 0, right: cornerRadius)
 

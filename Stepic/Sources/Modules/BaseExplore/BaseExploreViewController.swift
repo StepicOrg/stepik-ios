@@ -134,7 +134,7 @@ class BaseExploreViewController: UIViewController {
     struct Submodule {
         let viewController: UIViewController?
         let view: UIView
-        var isArrangeable: Bool = true
+        var isArrangeable = true
         let isLanguageDependent: Bool
         let type: SubmoduleType
     }
