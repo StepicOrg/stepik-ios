@@ -15,7 +15,11 @@ fi
 swiftlint_executable="${PWD}/Pods/SwiftLint/swiftlint"
 
 if [[ -f $swiftlint_executable ]]; then
-    $swiftlint_executable lint --config ${PWD}/.swiftlint.yml --path $path
+    if [[ $target_name == "Stepic" ]]; then
+    	$swiftlint_executable --fix --config ${PWD}/.swiftlint.yml --path $path
+    else
+    	$swiftlint_executable --fix --config ${PWD}/.swiftlint.yml --path $path --format
+    fi
 else
     echo "warning: SwiftLint not installed, run pod install"
 fi

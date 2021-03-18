@@ -8417,10 +8417,10 @@
 			buildConfigurationList = 08DE94301B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "Stepic" */;
 			buildPhases = (
 				5753E9371DCCED3A6EA46861 /* [CP] Check Pods Manifest.lock */,
+				08983F241F3E4112008199B1 /* SwiftLint Script */,
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
-				08983F241F3E4112008199B1 /* SwiftLint Script */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				D25EB23E484464AD999FE2C5 /* [CP] Embed Pods Frameworks */,
 				08343B1A1BF5EC7F00370FC1 /* FirebaseCrashlytics Script */,
@@ -8458,6 +8458,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8489EE8125FAF13B004A85C5 /* Build configuration list for PBXNativeTarget "StepicUITests" */;
 			buildPhases = (
+				2C4B05FA26039CEB0081513C /* SwiftLint Script */,
 				8489EE7025FAF13A004A85C5 /* Sources */,
 				8489EE7125FAF13A004A85C5 /* Frameworks */,
 				8489EE7225FAF13A004A85C5 /* Resources */,
@@ -8751,7 +8752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/lint.sh\n";
+			shellScript = "${SRCROOT}/lint.sh ${TARGET_NAME}\n";
 		};
 		2C47A16C206297D0003E87EC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8765,6 +8766,24 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "/usr/bin/xcrun simctl uninstall booted com.AlexKarpov.Stepic\n\n";
+		};
+		2C4B05FA26039CEB0081513C /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${SRCROOT}/lint.sh ${TARGET_NAME}\n";
 		};
 		5753E9371DCCED3A6EA46861 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
