@@ -8752,7 +8752,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/lint.sh Stepic\n";
+			shellScript = "${SRCROOT}/lint.sh ${TARGET_NAME}\n";
 		};
 		2C47A16C206297D0003E87EC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8783,7 +8783,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/lint.sh StepicUITests\n";
+			shellScript = "${SRCROOT}/lint.sh ${TARGET_NAME}\n";
 		};
 		5753E9371DCCED3A6EA46861 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
