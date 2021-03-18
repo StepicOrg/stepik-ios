@@ -32,10 +32,10 @@ enum FormatterHelper {
         return hasDecimals ? String(format: "%.2f", score) : "\(Int(score))"
     }
 
-    /// Format Submission's score with decimal points if has decimals; 0.75 -> "0.75", 1.0 -> "1"
+    /// Format Submission's score with 2 decimal points if has decimals; 0.75 -> "0.75", 1.0 -> "1"
     static func submissionScore(_ score: Float) -> String {
         let hasDecimals = score.truncatingRemainder(dividingBy: 1) != 0
-        return hasDecimals ? "\(score)" : "\(Int(score))"
+        return hasDecimals ? String(format: "%.2f", score) : "\(Int(score))"
     }
 
     static func megabytesInBytes(_ bytes: UInt64, checkForLessThanOne: Bool = true) -> String {
