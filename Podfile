@@ -20,7 +20,7 @@ def shared_pods
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.3.0'
   pod 'PromiseKit', '6.13.1'
-  pod 'SwiftLint', '0.43.0'
+  pod 'SwiftLint', '0.43.1'
 end
 
 def all_pods
@@ -34,14 +34,14 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '7.8.0'
-  pod 'Firebase/Messaging', '7.8.0'
-  pod 'Firebase/Analytics', '7.8.0'
-  pod 'Firebase/Crashlytics', '7.8.0'
-  pod 'Firebase/RemoteConfig', '7.8.0'
+  pod 'Firebase/Core', '7.8.1'
+  pod 'Firebase/Messaging', '7.8.1'
+  pod 'Firebase/Analytics', '7.8.1'
+  pod 'Firebase/Crashlytics', '7.8.1'
+  pod 'Firebase/RemoteConfig', '7.8.1'
 
   pod 'YandexMobileMetrica/Dynamic', '3.14.1'
-  pod 'Amplitude', '8.0.0'
+  pod 'Amplitude', '8.1.0'
   pod 'Branch', '1.39.1'
 
   pod 'BEMCheckBox', '1.4.1'
