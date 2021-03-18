@@ -25,13 +25,15 @@ final class SubmissionsAssembly: Assembly {
         let provider = SubmissionsProvider(
             submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
             attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+            reviewSessionsNetworkService: ReviewSessionsNetworkService(reviewSessionsAPI: ReviewSessionsAPI()),
+            instructionsNetworkService: InstructionsNetworkService(instructionsAPI: InstructionsAPI()),
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
             usersPersistenceService: UsersPersistenceService(),
             userAccountService: UserAccountService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        let presenter = SubmissionsPresenter()
+        let presenter = SubmissionsPresenter(urlFactory: StepikURLFactory())
         let interactor = SubmissionsInteractor(
             stepID: self.stepID,
             isTeacher: self.isTeacher,

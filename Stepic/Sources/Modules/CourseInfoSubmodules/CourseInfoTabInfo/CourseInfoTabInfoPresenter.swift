@@ -33,7 +33,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
         let authorsViewModel = course.authors.map { author in
-            CourseInfoTabInfoAuthorViewModel(id: author.id, name: author.fullName)
+            CourseInfoTabInfoAuthorViewModel(id: author.id, name: FormatterHelper.username(author))
         }
 
         let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
@@ -50,7 +50,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             CourseInfoTabInfoInstructorViewModel(
                 id: user.id,
                 avatarImageURL: URL(string: user.avatarURL),
-                title: "\(user.firstName) \(user.lastName)",
+                title: FormatterHelper.username(user),
                 description: user.bio
             )
         }

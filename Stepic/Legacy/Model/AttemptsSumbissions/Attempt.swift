@@ -18,6 +18,7 @@ final class Attempt: JSONSerializable, Hashable, CustomStringConvertible {
     var time: String?
     var status: String?
     var stepID: Step.IdType = 0
+    var step: StepPlainObject?
     var timeLeft: String?
     var userID: User.IdType?
 
@@ -31,6 +32,7 @@ final class Attempt: JSONSerializable, Hashable, CustomStringConvertible {
         time: \(String(describing: self.time)), \
         status: \(String(describing: self.status)), \
         stepID: \(self.stepID), \
+        step: \(String(describing: self.step)), \
         timeLeft: \(String(describing: self.timeLeft)), \
         userID: \(String(describing: self.userID)))
         """

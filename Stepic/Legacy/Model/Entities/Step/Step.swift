@@ -26,6 +26,8 @@ final class Step: NSManagedObject, IDFetchable {
         self.progressID = json[JSONKey.progress.rawValue].stringValue
         self.hasSubmissionRestrictions = json[JSONKey.hasSubmissionsRestrictions.rawValue].boolValue
         self.isEnabled = json[JSONKey.isEnabled.rawValue].bool ?? true
+        self.instructionID = json[JSONKey.instruction.rawValue].int
+        self.instructionType = json[JSONKey.instructionType.rawValue].string
 
         if let doReview = json[JSONKey.actions.rawValue][JSONKey.doReview.rawValue].string {
             self.hasReview = (doReview != "")
@@ -83,6 +85,7 @@ final class Step: NSManagedObject, IDFetchable {
         if self.correctRatio != object.correctRatio { return false }
         if self.canEdit != object.canEdit { return false }
         if self.isEnabled != object.isEnabled { return false }
+        if self.instructionID != object.instructionID { return false }
 
         if !self.block.equals(object.block) { return false }
 
@@ -138,5 +141,7 @@ final class Step: NSManagedObject, IDFetchable {
         case discussionProxy = "discussion_proxy"
         case discussionThreads = "discussion_threads"
         case isEnabled = "is_enabled"
+        case instruction
+        case instructionType = "instruction_type"
     }
 }

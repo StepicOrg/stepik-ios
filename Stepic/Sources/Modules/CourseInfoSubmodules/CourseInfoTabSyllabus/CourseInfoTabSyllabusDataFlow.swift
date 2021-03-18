@@ -28,7 +28,9 @@ enum CourseInfoTabSyllabus {
 
     /// Course syllabus
     enum SyllabusLoad {
-        struct Request {}
+        struct Request {
+            var shouldUseNetwork = false
+        }
 
         struct Response {
             var result: StepikResult<SyllabusData>
@@ -201,6 +203,7 @@ enum CourseInfoTabSyllabus {
 
     enum ViewControllerState {
         case loading
+        case error
         case result(data: [CourseInfoTabSyllabusSectionViewModel])
     }
 }

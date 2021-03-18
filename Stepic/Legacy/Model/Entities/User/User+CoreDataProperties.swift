@@ -163,7 +163,7 @@ extension User {
     }
 
     var fullName: String {
-        "\(self.firstName) \(self.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
+        "\(self.firstName) \(self.lastName)".trimmed()
     }
 
     var avatarURL: String {

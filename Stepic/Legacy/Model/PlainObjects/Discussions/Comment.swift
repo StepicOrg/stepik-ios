@@ -94,8 +94,8 @@ final class Comment: JSONSerializable {
         self.parentID = json[JSONKey.parent.rawValue].int
         self.userID = json[JSONKey.user.rawValue].intValue
         self.userRole = UserRole(rawValue: json[JSONKey.userRole.rawValue].stringValue) ?? .student
-        self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]).require()
-        self.lastTime = Parser.shared.dateFromTimedateJSON(json[JSONKey.lastTime.rawValue]).require()
+        self.time = Parser.dateFromTimedateJSON(json[JSONKey.time.rawValue]).require()
+        self.lastTime = Parser.dateFromTimedateJSON(json[JSONKey.lastTime.rawValue]).require()
         self.text = json[JSONKey.text.rawValue].stringValue
         self.replyCount = json[JSONKey.replyCount.rawValue].intValue
         self.isDeleted = json[JSONKey.isDeleted.rawValue].boolValue

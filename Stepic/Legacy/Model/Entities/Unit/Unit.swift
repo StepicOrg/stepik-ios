@@ -28,9 +28,9 @@ final class Unit: NSManagedObject, IDFetchable {
 
         assignmentsArray = json["assignments"].arrayObject as! [Int]
 
-        beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date"])
-        softDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.shared.dateFromTimedateJSON(json["hard_deadline"])
+        beginDate = Parser.dateFromTimedateJSON(json["begin_date"])
+        softDeadline = Parser.dateFromTimedateJSON(json["soft_deadline"])
+        hardDeadline = Parser.dateFromTimedateJSON(json["hard_deadline"])
     }
 
     func update(json: JSON) {

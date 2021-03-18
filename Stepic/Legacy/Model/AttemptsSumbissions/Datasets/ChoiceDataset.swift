@@ -44,6 +44,13 @@ final class ChoiceDataset: Dataset {
         super.init(coder: coder)
     }
 
+    init(isMultipleChoice: Bool, options: [String]) {
+        self.isMultipleChoice = isMultipleChoice
+        self.options = options
+
+        super.init()
+    }
+
     private override init() {
         self.isMultipleChoice = false
         self.options = []

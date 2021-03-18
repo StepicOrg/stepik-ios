@@ -407,9 +407,13 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         let stepsRange = lesson.stepsArray.startIndex..<lesson.stepsArray.endIndex
+
         if stepsRange.contains(index) {
             self.presenter.presentCurrentStepUpdate(response: .init(index: index))
-            self.autoplayCurrentStep()
+
+            if autoplayNext {
+                self.autoplayCurrentStep()
+            }
         }
     }
 
