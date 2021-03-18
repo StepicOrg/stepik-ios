@@ -984,7 +984,7 @@ SubmissionsReviewStateCantReviewTeacherMessage = "Решение препода�
 SubmissionsReviewStateCantReviewWrongMessage = "Ответ неверен.";
 SubmissionsReviewStateEvaluationMessage = "Ответ в обработке.";
 SubmissionsReviewStateInProgressMessage = "Нужны ещё рецензии на это решение.";
-SubmissionsReviewStateInProgressNotGiveNotTakeMessage = "%@ ещё не отправил все рецензии на чужие работы и получил рецензии на свою.";
+SubmissionsReviewStateInProgressNotGiveNotTakeMessage = "%@ ещё не отправил все рецензии на чужие работы и не получил рецензии на свою.";
 SubmissionsReviewStateInProgressNotGiveMessage = "%@ ещё не отправил все рецензии на чужие работы.";
 SubmissionsReviewStateNotSubmittedForReviewMessage = "Нужно отправить решение на рецензию.";
 /* Review action titles */
