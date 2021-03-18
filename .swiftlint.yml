@@ -2,10 +2,6 @@ warning_threshold: 15
 
 indentation: 4
 
-included:
-  - Stepic/Sources
-  - StepicUITests/Sources
-
 analyzer_rules:
   - explicit_self
   - unused_declaration
