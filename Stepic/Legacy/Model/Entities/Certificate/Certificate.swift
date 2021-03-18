@@ -23,8 +23,8 @@ final class Certificate: NSManagedObject, IDFetchable {
         self.id = json[JSONKey.id.rawValue].intValue
         self.userId = json[JSONKey.user.rawValue].intValue
         self.courseId = json[JSONKey.course.rawValue].intValue
-        self.issueDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.issueDate.rawValue])
-        self.updateDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.updateDate.rawValue])
+        self.issueDate = Parser.dateFromTimedateJSON(json[JSONKey.issueDate.rawValue])
+        self.updateDate = Parser.dateFromTimedateJSON(json[JSONKey.updateDate.rawValue])
         self.grade = json[JSONKey.grade.rawValue].intValue
         self.type = CertificateType(rawValue: json[JSONKey.type.rawValue].stringValue) ?? .regular
         self.urlString = json[JSONKey.url.rawValue].string

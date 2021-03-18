@@ -12,6 +12,31 @@ import PromiseKit
 import SwiftyJSON
 
 final class RetrieveRequestMaker {
+    func request(
+        requestEndpoint: String,
+        params: Parameters? = nil,
+        withManager manager: Alamofire.Session
+    ) -> Promise<JSON> {
+        return Promise { seal in
+            checkToken().done {
+                manager.request(
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    parameters: params,
+                    encoding: URLEncoding.default
+                ).validate().responseSwiftyJSON { response in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let json):
+                        seal.fulfill(json)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func request<T: JSONSerializable>(
         requestEndpoint: String,
         paramName: String,

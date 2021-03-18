@@ -44,7 +44,7 @@ final class User: NSManagedObject, IDFetchable {
         self.knowledgeRank = json[JSONKey.knowledgeRank.rawValue].intValue
         self.reputation = json[JSONKey.reputation.rawValue].intValue
         self.reputationRank = json[JSONKey.reputationRank.rawValue].intValue
-        self.joinDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.joinDate.rawValue])
+        self.joinDate = Parser.dateFromTimedateJSON(json[JSONKey.joinDate.rawValue])
         self.solvedStepsCount = json[JSONKey.solvedStepsCount.rawValue].intValue
         self.createdCoursesCount = json[JSONKey.createdCoursesCount.rawValue].intValue
         self.createdLessonsCount = json[JSONKey.createdLessonsCount.rawValue].intValue

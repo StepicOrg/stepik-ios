@@ -271,9 +271,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 )
             }
 
-            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .result(data: sectionViewModels))
-        default:
-            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .loading)
+            viewModel = .init(state: .result(data: sectionViewModels))
+        case .failure:
+            viewModel = .init(state: .error)
         }
 
         return viewModel

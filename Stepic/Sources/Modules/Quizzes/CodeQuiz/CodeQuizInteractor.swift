@@ -30,7 +30,7 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
         }
     }
 
-    var isCurrentUserCodeTemplateUpdateEnabled: Bool = true
+    var isCurrentUserCodeTemplateUpdateEnabled = true
 
     init(
         presenter: CodeQuizPresenterProtocol,

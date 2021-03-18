@@ -243,6 +243,9 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var videoInBackgroundTooltip: Tooltip?
 
+    private var applicationDidEnterBackground = false
+    private var applicationDidComeFromBackground = false
+
     override var prefersStatusBarHidden: Bool { true }
 
     override var prefersHomeIndicatorAutoHidden: Bool {
@@ -499,6 +502,19 @@ final class StepikVideoPlayerViewController: UIViewController {
             selector: #selector(self.audioRouteChanged(_:)),
             name: AVAudioSession.routeChangeNotification,
             object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleApplicationWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: UIApplication.shared
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleApplicationDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: UIApplication.shared
         )
     }
 
@@ -800,6 +816,18 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     @objc
+    private func handleApplicationWillEnterForeground() {
+        self.applicationDidComeFromBackground = self.applicationDidEnterBackground
+        self.applicationDidEnterBackground = false
+    }
+
+    @objc
+    private func handleApplicationDidEnterBackground() {
+        self.applicationDidComeFromBackground = false
+        self.applicationDidEnterBackground = true
+    }
+
+    @objc
     private func startedSeeking() {
         print("StepikVideoPlayerViewController :: started seeking")
 
@@ -978,7 +1006,13 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         }
 
         let isPlayerFirstTimeReady = player.playbackState == .stopped || !self.isPlayerPassedReadyState
-        let isPlayerReadyAfterVideoQualityChanged = player.playbackState == .paused && self.isPlayerPassedReadyState
+        let isPlayerReadyAfterVideoQualityChanged = player.playbackState == .paused
+            && self.isPlayerPassedReadyState
+            && !self.applicationDidComeFromBackground
+
+        if self.applicationDidComeFromBackground {
+            self.applicationDidComeFromBackground = false
+        }
 
         guard isPlayerFirstTimeReady || isPlayerReadyAfterVideoQualityChanged else {
             return

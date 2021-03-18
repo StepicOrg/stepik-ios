@@ -141,13 +141,15 @@ final class ImageButton: UIControl {
 
         switch self.imagePosition {
         case .left:
-            self.iconImageView.frame = CGRect(
-                origin: CGPoint(
-                    x: self.imageInsets.left,
-                    y: additionalVerticalOffset + self.imageInsets.top
-                ),
-                size: self.imageSize
-            )
+            self.iconImageView.frame = self.image != nil
+                ? CGRect(
+                    origin: CGPoint(
+                        x: self.imageInsets.left,
+                        y: additionalVerticalOffset + self.imageInsets.top
+                    ),
+                    size: self.imageSize
+                  )
+                : .zero
 
             self.titleLabel.frame = CGRect(
                 x: self.iconImageView.frame.maxX + self.titleInsets.left + self.imageInsets.right,

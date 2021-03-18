@@ -34,7 +34,7 @@ final class NewProfileUserActivityCurrentStreakView: UIView {
         return label
     }()
 
-    var didSolveToday: Bool = false {
+    var didSolveToday = false {
         didSet {
             self.imageView.tintColor = self.didSolveToday
                 ? self.appearance.imageViewColorStreak

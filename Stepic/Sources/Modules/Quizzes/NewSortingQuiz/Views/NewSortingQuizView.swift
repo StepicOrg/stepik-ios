@@ -85,7 +85,7 @@ final class NewSortingQuizView: UIView, TitlePresentable {
         }
     }
 
-    var shouldShowShadows: Bool = true {
+    var shouldShowShadows = true {
         didSet {
             self.optionsStackView.arrangedSubviews
                 .compactMap { $0 as? NewSortingQuizElementView }

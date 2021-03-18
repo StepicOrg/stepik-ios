@@ -81,7 +81,7 @@ final class EditStepView: UIView {
         }
     }
 
-    var isEnabled: Bool = true {
+    var isEnabled = true {
         didSet {
             self.textView.isEditable = self.isEnabled
             self.textView.isSelectable = self.isEnabled

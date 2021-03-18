@@ -46,6 +46,24 @@ enum Submissions {
         }
     }
 
+    enum ReviewPresentation {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+            let unitID: Unit.IdType?
+            let submission: Submission
+            let isTeacher: Bool
+            let currentUserID: User.IdType?
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Show submissions filter module
     enum FilterPresentation {
         struct Request {}
@@ -76,7 +94,7 @@ enum Submissions {
     enum SearchSubmissions {
         struct Request {
             let text: String
-            var forceSearch: Bool = false
+            var forceSearch = false
         }
     }
 
@@ -104,7 +122,9 @@ enum Submissions {
 
     struct SubmissionsData {
         let users: [User]
+        let currentUserID: User.IdType?
         let submissions: [Submission]
+        let instruction: InstructionDataPlainObject?
         let isTeacher: Bool
         let hasNextPage: Bool
     }
@@ -126,5 +146,54 @@ enum Submissions {
     enum PaginationState {
         case result(data: SubmissionsResult)
         case error
+    }
+
+    enum ReviewState {
+        case evaluation
+        case finished
+        case inProgress
+        case cantReviewWrong
+        case cantReviewTeacher
+        case cantReviewAnother
+        case notSubmittedForReview
+
+        var title: String {
+            switch self {
+            case .inProgress, .finished:
+                return NSLocalizedString("SubmissionsReviewStateInProgressTitle", comment: "")
+            case .notSubmittedForReview:
+                return NSLocalizedString("SubmissionsReviewStateNotSubmittedForReviewTitle", comment: "")
+            case .evaluation, .cantReviewWrong, .cantReviewTeacher, .cantReviewAnother:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewTitle", comment: "")
+            }
+        }
+
+        var message: String {
+            switch self {
+            case .evaluation:
+                return NSLocalizedString("SubmissionsReviewStateEvaluationMessage", comment: "")
+            case .finished:
+                return ""
+            case .inProgress:
+                return NSLocalizedString("SubmissionsReviewStateInProgressMessage", comment: "")
+            case .cantReviewWrong:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewWrongMessage", comment: "")
+            case .cantReviewTeacher:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewTeacherMessage", comment: "")
+            case .cantReviewAnother:
+                return NSLocalizedString("SubmissionsReviewStateCantReviewAnotherMessage", comment: "")
+            case .notSubmittedForReview:
+                return NSLocalizedString("SubmissionsReviewStateNotSubmittedForReviewMessage", comment: "")
+            }
+        }
+
+        var actionTitle: String {
+            switch self {
+            case .notSubmittedForReview:
+                return NSLocalizedString("SubmissionsReviewActionSeeSubmissionTitle", comment: "")
+            default:
+                return NSLocalizedString("SubmissionsReviewActionSeeReviewsTitle", comment: "")
+            }
+        }
     }
 }

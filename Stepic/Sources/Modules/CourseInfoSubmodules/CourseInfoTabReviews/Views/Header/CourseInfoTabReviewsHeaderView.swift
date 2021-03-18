@@ -57,21 +57,21 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
     private var currentReviewAction = ReviewAction.write
 
-    var shouldShowWriteReviewButton: Bool = false {
+    var shouldShowWriteReviewButton = false {
         didSet {
             self.currentReviewAction = .write
             self.updateReviewButton()
         }
     }
 
-    var shouldShowEditReviewButton: Bool = false {
+    var shouldShowEditReviewButton = false {
         didSet {
             self.currentReviewAction = .edit
             self.updateReviewButton()
         }
     }
 
-    var shouldShowWriteReviewBanner: Bool = true {
+    var shouldShowWriteReviewBanner = true {
         didSet {
             self.reviewDescriptionLabel.isHidden = !self.shouldShowWriteReviewBanner
         }

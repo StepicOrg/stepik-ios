@@ -725,6 +725,17 @@ extension AnalyticsEvent {
         )
     }
 
+    static func storyFeedbackPressed(id: Int, position: Int, feedback: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Story feedback pressed",
+            parameters: [
+                "id": id,
+                "position": position,
+                "feedback": feedback
+            ]
+        )
+    }
+
     // MARK: - PersonalDeadlines -
 
     static let personalDeadlinesScheduleButtonTapped = AmplitudeAnalyticsEvent(

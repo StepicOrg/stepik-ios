@@ -30,7 +30,7 @@ final class HomeViewController: BaseExploreViewController {
     ]
 
     private var lastContentLanguage: ContentLanguage?
-    private var lastIsAuthorizedFlag: Bool = false
+    private var lastIsAuthorizedFlag = false
 
     private var currentStoriesSubmoduleState = StoriesState.shown
     private var currentEnrolledCourseListState: EnrolledCourseListState?

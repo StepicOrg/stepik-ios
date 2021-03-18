@@ -1,0 +1,516 @@
+{
+    "meta": {
+        "page": 1,
+        "has_next": false,
+        "has_previous": false
+    },
+    "review-sessions": [
+        {
+            "id": 908582,
+            "instruction": 26700,
+            "submission": 376038909,
+            "given_reviews": [
+                1720159
+            ],
+            "is_giving_started": true,
+            "is_giving_finished": false,
+            "taken_reviews": [
+                1720161
+            ],
+            "is_taking_started": true,
+            "is_taking_finished": false,
+            "is_taking_finished_by_teacher": false,
+            "when_taking_finished_by_teacher": null,
+            "is_review_available": null,
+            "is_finished": false,
+            "score": 0,
+            "available_reviews_count": null,
+            "active_review": 1720160,
+            "actions": {
+                "finish": false
+            }
+        },
+        {
+            "id": 908576,
+            "instruction": 26700,
+            "submission": 376036773,
+            "given_reviews": [
+                1720144,
+                1720145
+            ],
+            "is_giving_started": true,
+            "is_giving_finished": false,
+            "taken_reviews": [
+                1720147,
+                1720159
+            ],
+            "is_taking_started": true,
+            "is_taking_finished": false,
+            "is_taking_finished_by_teacher": false,
+            "when_taking_finished_by_teacher": null,
+            "is_review_available": null,
+            "is_finished": false,
+            "score": 0,
+            "available_reviews_count": null,
+            "active_review": 1720139,
+            "actions": {
+                "finish": false
+            }
+        },
+        {
+            "id": 908573,
+            "instruction": 26700,
+            "submission": 376035061,
+            "given_reviews": [
+                1720129
+            ],
+            "is_giving_started": true,
+            "is_giving_finished": false,
+            "taken_reviews": [
+                1720144,
+                1720149
+            ],
+            "is_taking_started": true,
+            "is_taking_finished": false,
+            "is_taking_finished_by_teacher": false,
+            "when_taking_finished_by_teacher": null,
+            "is_review_available": null,
+            "is_finished": false,
+            "score": 0,
+            "available_reviews_count": null,
+            "active_review": null,
+            "actions": {
+                "finish": false
+            }
+        },
+        {
+            "id": 908571,
+            "instruction": 26700,
+            "submission": 376034175,
+            "given_reviews": [
+                1720147,
+                1720149,
+                1720161
+            ],
+            "is_giving_started": true,
+            "is_giving_finished": true,
+            "taken_reviews": [
+                1720129,
+                1720137,
+                1720145
+            ],
+            "is_taking_started": true,
+            "is_taking_finished": true,
+            "is_taking_finished_by_teacher": false,
+            "when_taking_finished_by_teacher": null,
+            "is_review_available": null,
+            "is_finished": true,
+            "score": 3,
+            "available_reviews_count": null,
+            "active_review": null,
+            "actions": {
+                "finish": false
+            }
+        }
+    ],
+    "attempts": [
+        {
+            "id": 359944920,
+            "dataset": {
+                "is_multiple_choice": false,
+                "options": [
+                    "520",
+                    "52",
+                    "502",
+                    "5002"
+                ]
+            },
+            "dataset_url": null,
+            "time": "2021-03-04T20:11:55Z",
+            "status": "active",
+            "time_left": null,
+            "step": 1979373,
+            "user": 52444375
+        },
+        {
+            "id": 359944921,
+            "dataset": {
+                "is_multiple_choice": false,
+                "options": [
+                    "520",
+                    "52",
+                    "5002",
+                    "502"
+                ]
+            },
+            "dataset_url": null,
+            "time": "2021-03-04T20:13:52Z",
+            "status": "active",
+            "time_left": null,
+            "step": 1979373,
+            "user": 132482867
+        },
+        {
+            "id": 359944925,
+            "dataset": {
+                "is_multiple_choice": false,
+                "options": [
+                    "52",
+                    "502",
+                    "520",
+                    "5002"
+                ]
+            },
+            "dataset_url": null,
+            "time": "2021-03-04T20:18:10Z",
+            "status": "active",
+            "time_left": null,
+            "step": 1979373,
+            "user": 132488963
+        },
+        {
+            "id": 359944927,
+            "dataset": {
+                "is_multiple_choice": false,
+                "options": [
+                    "502",
+                    "5002",
+                    "52",
+                    "520"
+                ]
+            },
+            "dataset_url": null,
+            "time": "2021-03-04T20:23:39Z",
+            "status": "active",
+            "time_left": null,
+            "step": 1979373,
+            "user": 132498047
+        }
+    ],
+    "reviews": [
+        {
+            "id": 1720129,
+            "session": null,
+            "target_session": null,
+            "text": "<p>General comments</p>\n\n<p><strong>General</strong> <u>comments <span style=\"background-color: #f3f4f6; font-size: 14.399999618530273px;\">good</span></u></p>\n",
+            "rubric_scores": [
+                3269032
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:15:23Z",
+            "is_verified": false,
+            "is_frozen": true
+        },
+        {
+            "id": 1720137,
+            "session": null,
+            "target_session": null,
+            "text": "<p>Комментарий</p>\n",
+            "rubric_scores": [
+                3269040
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:17:14Z",
+            "is_verified": true,
+            "is_frozen": true
+        },
+        {
+            "id": 1720139,
+            "session": null,
+            "target_session": null,
+            "text": "",
+            "rubric_scores": [
+                3269042
+            ],
+            "submission": null,
+            "when_finished": null,
+            "is_verified": false,
+            "is_frozen": false
+        },
+        {
+            "id": 1720140,
+            "session": null,
+            "target_session": null,
+            "text": "",
+            "rubric_scores": [
+                3269043
+            ],
+            "submission": null,
+            "when_finished": null,
+            "is_verified": false,
+            "is_frozen": false
+        },
+        {
+            "id": 1720141,
+            "session": null,
+            "target_session": null,
+            "text": "",
+            "rubric_scores": [
+                3269044
+            ],
+            "submission": null,
+            "when_finished": null,
+            "is_verified": false,
+            "is_frozen": false
+        },
+        {
+            "id": 1720144,
+            "session": null,
+            "target_session": null,
+            "text": "<p>comment goes here</p>\n",
+            "rubric_scores": [
+                3269047
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:20:42Z",
+            "is_verified": false,
+            "is_frozen": true
+        },
+        {
+            "id": 1720145,
+            "session": null,
+            "target_session": null,
+            "text": "<p>comment <strong>General comments</strong></p>\n",
+            "rubric_scores": [
+                3269048
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:21:04Z",
+            "is_verified": false,
+            "is_frozen": true
+        },
+        {
+            "id": 1720147,
+            "session": null,
+            "target_session": null,
+            "text": "<p>комментарий</p>\n",
+            "rubric_scores": [
+                3269050
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:22:21Z",
+            "is_verified": false,
+            "is_frozen": true
+        },
+        {
+            "id": 1720149,
+            "session": null,
+            "target_session": null,
+            "text": "<p>Общие комментарии</p>\n",
+            "rubric_scores": [
+                3269052
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:22:55Z",
+            "is_verified": false,
+            "is_frozen": true
+        },
+        {
+            "id": 1720159,
+            "session": null,
+            "target_session": null,
+            "text": "<p>General comments </p>\n",
+            "rubric_scores": [
+                3269069
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:24:19Z",
+            "is_verified": false,
+            "is_frozen": true
+        },
+        {
+            "id": 1720160,
+            "session": null,
+            "target_session": null,
+            "text": "",
+            "rubric_scores": [
+                3269070
+            ],
+            "submission": null,
+            "when_finished": null,
+            "is_verified": false,
+            "is_frozen": false
+        },
+        {
+            "id": 1720161,
+            "session": null,
+            "target_session": null,
+            "text": "<p>Общие комментарии </p>\n",
+            "rubric_scores": [
+                3269071
+            ],
+            "submission": null,
+            "when_finished": "2021-03-04T20:24:41Z",
+            "is_verified": false,
+            "is_frozen": true
+        }
+    ],
+    "rubric-scores": [
+        {
+            "id": 3269032,
+            "review": 1720129,
+            "rubric": 39550,
+            "score": 3,
+            "text": "Detailed explanation of the score"
+        },
+        {
+            "id": 3269040,
+            "review": 1720137,
+            "rubric": 39550,
+            "score": 2,
+            "text": "Развернутое объяснение вашей оценки идет здесь..."
+        },
+        {
+            "id": 3269042,
+            "review": 1720139,
+            "rubric": 39550,
+            "score": 0,
+            "text": ""
+        },
+        {
+            "id": 3269043,
+            "review": 1720140,
+            "rubric": 39550,
+            "score": 0,
+            "text": ""
+        },
+        {
+            "id": 3269044,
+            "review": 1720141,
+            "rubric": 39550,
+            "score": 0,
+            "text": ""
+        },
+        {
+            "id": 3269047,
+            "review": 1720144,
+            "rubric": 39550,
+            "score": 1,
+            "text": "Rubric 1explanation"
+        },
+        {
+            "id": 3269048,
+            "review": 1720145,
+            "rubric": 39550,
+            "score": 3,
+            "text": "explanation"
+        },
+        {
+            "id": 3269050,
+            "review": 1720147,
+            "rubric": 39550,
+            "score": 0,
+            "text": "объяснение оценки"
+        },
+        {
+            "id": 3269052,
+            "review": 1720149,
+            "rubric": 39550,
+            "score": 3,
+            "text": "Критерий 1 Запишите, по какому критерию будет оцениваться ответ."
+        },
+        {
+            "id": 3269069,
+            "review": 1720159,
+            "rubric": 39550,
+            "score": 3,
+            "text": "Rubric 1\nЗапишите, по какому критерию будет оцениваться ответ."
+        },
+        {
+            "id": 3269070,
+            "review": 1720160,
+            "rubric": 39550,
+            "score": 0,
+            "text": ""
+        },
+        {
+            "id": 3269071,
+            "review": 1720161,
+            "rubric": 39550,
+            "score": 3,
+            "text": "Критерий 1\nЗапишите, по какому критерию будет оцениваться ответ."
+        }
+    ],
+    "submissions": [
+        {
+            "id": 376034175,
+            "status": "correct",
+            "score": 1.0,
+            "hint": "",
+            "feedback": "",
+            "time": "2021-03-04T20:11:58Z",
+            "reply": {
+                "choices": [
+                    false,
+                    false,
+                    true,
+                    false
+                ]
+            },
+            "reply_url": null,
+            "attempt": 359944920,
+            "session": 908571,
+            "eta": 0
+        },
+        {
+            "id": 376035061,
+            "status": "correct",
+            "score": 1.0,
+            "hint": "",
+            "feedback": "",
+            "time": "2021-03-04T20:14:06Z",
+            "reply": {
+                "choices": [
+                    false,
+                    false,
+                    false,
+                    true
+                ]
+            },
+            "reply_url": null,
+            "attempt": 359944921,
+            "session": 908573,
+            "eta": 0
+        },
+        {
+            "id": 376036773,
+            "status": "correct",
+            "score": 1.0,
+            "hint": "",
+            "feedback": "",
+            "time": "2021-03-04T20:18:28Z",
+            "reply": {
+                "choices": [
+                    false,
+                    true,
+                    false,
+                    false
+                ]
+            },
+            "reply_url": null,
+            "attempt": 359944925,
+            "session": 908576,
+            "eta": 0
+        },
+        {
+            "id": 376038909,
+            "status": "correct",
+            "score": 1.0,
+            "hint": "",
+            "feedback": "",
+            "time": "2021-03-04T20:23:51Z",
+            "reply": {
+                "choices": [
+                    true,
+                    false,
+                    false,
+                    false
+                ]
+            },
+            "reply_url": null,
+            "attempt": 359944927,
+            "session": 908582,
+            "eta": 0
+        }
+    ]
+}

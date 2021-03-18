@@ -979,6 +979,22 @@ SubmissionStatusPartiallyCorrectText = "Partially correct";
 SubmissionStatusEvaluationText = "Processing";
 SubmissionsSearchBarPlaceholderText = "ID, email, name, submission number";
 SubmissionsActionFilterByUser = "Filter by user";
+/* Review titles */
+SubmissionsReviewStateCantReviewTitle = "Reviewing is not possible.";
+SubmissionsReviewStateInProgressTitle = "%@ out of %@ reviews.";
+SubmissionsReviewStateNotSubmittedForReviewTitle = "Not submitted for review.";
+/* Review messages */
+SubmissionsReviewStateCantReviewAnotherMessage = "Another submission has been sent for review.";
+SubmissionsReviewStateCantReviewTeacherMessage = "Submission of a teacher cannot be reviewed.";
+SubmissionsReviewStateCantReviewWrongMessage = "Wrong answer.";
+SubmissionsReviewStateEvaluationMessage = "Answer in processing.";
+SubmissionsReviewStateInProgressMessage = "More reviews are needed for this submission.";
+SubmissionsReviewStateInProgressNotGiveNotTakeMessage = "%@ has not yet submitted all reviews for other learner submissions and has not received his reviews.";
+SubmissionsReviewStateInProgressNotGiveMessage = "%@ has not yet submitted all reviews for other learner submissions.";
+SubmissionsReviewStateNotSubmittedForReviewMessage = "Need to send the solution for review.";
+/* Review action titles */
+SubmissionsReviewActionSeeReviewsTitle = "See reviews";
+SubmissionsReviewActionSeeSubmissionTitle = "See submission";
 
 /* Submissions Filter */
 SubmissionsFilterTitle = "Search Submissions";

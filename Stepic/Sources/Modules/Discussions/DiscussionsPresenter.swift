@@ -235,14 +235,9 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             }
         }()
 
-        let username: String = {
-            let userIDString = "User \(comment.userID)"
-            if let userInfo = comment.userInfo {
-                let fullName = "\(userInfo.firstName) \(userInfo.lastName)"
-                return fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? userIDString : fullName
-            }
-            return userIDString
-        }()
+        let username = comment.userInfo != nil
+            ? FormatterHelper.username(comment.userInfo.require())
+            : "User \(comment.userID)"
 
         let processedContent: ProcessedContent = {
             let appearance = DiscussionsCellView.Appearance()

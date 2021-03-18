@@ -210,6 +210,24 @@ class StepikURLFactorySpec: QuickSpec {
                     // Then
                     expect(constructedURL.absoluteString) == staticURLString
                 }
+
+                it("returns correct URL for submission with step, submission and unit ids") {
+                    // Given
+                    let stepID = 101
+                    let submissionID = 1
+                    let unitID = 272615
+                    let staticURLString = "\(stepikURL)/submissions/\(stepID)/\(submissionID)?unit=\(unitID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeSubmission(
+                        stepID: stepID,
+                        submissionID: submissionID,
+                        unitID: unitID
+                    )!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
             }
 
             context("accounts password reset") {
@@ -244,6 +262,33 @@ class StepikURLFactorySpec: QuickSpec {
 
                     // When
                     let constructedURL = stepikURLFactory.makeCatalog()!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+            }
+
+            context("review sessions") {
+                it("returns correct URL for review session with session id") {
+                    // Given
+                    let sessionID = 908582
+                    let staticURLString = "\(stepikURL)/review/sessions/\(sessionID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeReviewSession(sessionID: sessionID)!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+
+                it("returns correct URL for review session with session and unit ids") {
+                    // Given
+                    let sessionID = 908582
+                    let unitID = 272615
+                    let staticURLString = "\(stepikURL)/review/sessions/\(sessionID)?unit=\(unitID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeReviewSession(sessionID: sessionID, unitID: unitID)!
 
                     // Then
                     expect(constructedURL.absoluteString) == staticURLString

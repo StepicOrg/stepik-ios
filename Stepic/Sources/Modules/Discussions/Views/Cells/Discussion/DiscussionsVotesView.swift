@@ -95,7 +95,7 @@ final class DiscussionsVotesView: UIView {
         }
     }
 
-    var isEnabled: Bool = true {
+    var isEnabled = true {
         didSet {
             self.likeImageButton.isEnabled = self.isEnabled
             self.dislikeImageButton.isEnabled = self.isEnabled
