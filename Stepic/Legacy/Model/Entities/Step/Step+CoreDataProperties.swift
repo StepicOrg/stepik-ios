@@ -27,6 +27,7 @@ extension Step {
     @NSManaged var managedIsEnabled: NSNumber?
     @NSManaged var managedInstructionId: NSNumber?
     @NSManaged var managedInstructionType: String?
+    @NSManaged var managedNeedsPlan: String?
 
     @NSManaged var managedAttempt: AttemptEntity?
     @NSManaged var managedBlock: Block?
@@ -259,6 +260,15 @@ extension Step {
         }
         set {
             self.managedInstructionType = newValue
+        }
+    }
+
+    var needsPlan: String? {
+        get {
+            self.managedNeedsPlan
+        }
+        set {
+            self.managedNeedsPlan = newValue
         }
     }
 }
