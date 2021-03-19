@@ -65,7 +65,7 @@ final class SettingsRightDetailSwitchCellView: UIView {
         }
     }
 
-    var switchOnTintColor: UIColor = .stepikSwitchOnTint {
+    var switchOnTintColor: UIColor? {
         didSet {
             self.detailSwitch.onTintColor = self.switchOnTintColor
         }
