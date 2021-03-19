@@ -48,8 +48,13 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             shouldUseCellularDataForDownloads: self.provider.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: self.provider.isAutoplayEnabled,
             isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled,
-            isDarkModeAvailable: self.remoteConfig.isDarkModeAvailable
+            isDarkModeAvailable: self.remoteConfig.isDarkModeAvailable,
+            isAuthorized: self.isAuthorized
         )
+    }
+
+    private var isAuthorized: Bool {
+        !(self.userAccountService.currentUser?.isGuest ?? true) && self.userAccountService.isAuthorized
     }
 
     init(
