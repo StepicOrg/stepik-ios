@@ -111,8 +111,8 @@ final class StepView: UIView {
 
     private lazy var quizContainerView = UIView()
 
-    private lazy var stepDisabledView: StepDisabledView = {
-        let view = StepDisabledView()
+    private lazy var stepDisabledView: StepStudentDisabledView = {
+        let view = StepStudentDisabledView()
         view.onNextStepButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return

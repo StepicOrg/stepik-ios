@@ -2,7 +2,7 @@ import Atributika
 import SnapKit
 import UIKit
 
-extension StepDisabledView {
+extension StepStudentDisabledView {
     struct Appearance {
         let placeholderImageSize = CGSize(width: 150, height: 120)
         let placeholderImageInsets = LayoutInsets(top: 32)
@@ -20,7 +20,7 @@ extension StepDisabledView {
     }
 }
 
-final class StepDisabledView: UIView {
+final class StepStudentDisabledView: UIView {
     let appearance: Appearance
 
     private lazy var placeholderImageView: UIImageView = {
@@ -153,7 +153,7 @@ final class StepDisabledView: UIView {
     }
 }
 
-extension StepDisabledView: ProgrammaticallyInitializableViewProtocol {
+extension StepStudentDisabledView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }
