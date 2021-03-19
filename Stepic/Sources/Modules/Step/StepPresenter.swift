@@ -193,36 +193,28 @@ final class StepPresenter: StepPresenterProtocol {
         if isTeacher {
             title = NSLocalizedString("StepDisabledTeacherTitle", comment: "")
 
-            let stepInCourse = step.lesson?.unit != nil
-            if stepInCourse {
-                let needsPlanTitle: String
-                switch step.needsPlanType {
-                case .pro:
-                    needsPlanTitle = NSLocalizedString("StepDisabledTeacherInCoursePlanProTitle", comment: "")
-                case .enterprise:
-                    needsPlanTitle = NSLocalizedString("StepDisabledTeacherInCoursePlanEnterpriseTitle", comment: "")
-                default:
-                    needsPlanTitle = "N/A"
-                }
-
+            let isStepInCourse = step.lesson?.unit != nil
+            if isStepInCourse {
                 message = String(
                     format: NSLocalizedString("StepDisabledTeacherInCourseMessage", comment: ""),
-                    arguments: [needsPlanTitle]
+                    arguments: [
+                        self.makeNeedsPlanTitle(
+                            step.needsPlanType,
+                            proLocalizedKey: "StepDisabledTeacherInCoursePlanProTitle",
+                            enterpriseLocalizedKey: "StepDisabledTeacherInCoursePlanEnterpriseTitle"
+                        )
+                    ]
                 )
             } else {
-                let needsPlanTitle: String
-                switch step.needsPlanType {
-                case .pro:
-                    needsPlanTitle = NSLocalizedString("StepDisabledTeacherNoCoursePlanProTitle", comment: "")
-                case .enterprise:
-                    needsPlanTitle = NSLocalizedString("StepDisabledTeacherNoCoursePlanEnterpriseTitle", comment: "")
-                default:
-                    needsPlanTitle = "N/A"
-                }
-
                 message = String(
                     format: NSLocalizedString("StepDisabledTeacherNoCourseMessage", comment: ""),
-                    arguments: [needsPlanTitle]
+                    arguments: [
+                        self.makeNeedsPlanTitle(
+                            step.needsPlanType,
+                            proLocalizedKey: "StepDisabledTeacherNoCoursePlanProTitle",
+                            enterpriseLocalizedKey: "StepDisabledTeacherNoCoursePlanEnterpriseTitle"
+                        )
+                    ]
                 )
             }
         } else {
@@ -259,6 +251,21 @@ final class StepPresenter: StepPresenterProtocol {
                 isTeacher: isTeacher
             )
         )
+    }
+
+    private func makeNeedsPlanTitle(
+        _ needsPlanType: CourseType?,
+        proLocalizedKey: String,
+        enterpriseLocalizedKey: String
+    ) -> String {
+        switch needsPlanType {
+        case .pro:
+            return NSLocalizedString(proLocalizedKey, comment: "")
+        case .enterprise:
+            return NSLocalizedString(enterpriseLocalizedKey, comment: "")
+        default:
+            return "N/A"
+        }
     }
 
     private func makeStepViewModel(
