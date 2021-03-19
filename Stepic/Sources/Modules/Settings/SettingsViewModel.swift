@@ -10,4 +10,5 @@ struct SettingsViewModel {
     let isAutoplayEnabled: Bool
     let isAdaptiveModeEnabled: Bool
     let isApplicationThemeSettingAvailable: Bool
+    let isAuthorized: Bool
 }

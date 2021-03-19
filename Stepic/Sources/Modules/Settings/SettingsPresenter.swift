@@ -119,7 +119,8 @@ final class SettingsPresenter: SettingsPresenterProtocol {
             shouldUseCellularDataForDownloads: data.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: data.isAutoplayEnabled,
             isAdaptiveModeEnabled: data.isAdaptiveModeEnabled,
-            isApplicationThemeSettingAvailable: data.isDarkModeAvailable
+            isApplicationThemeSettingAvailable: data.isDarkModeAvailable,
+            isAuthorized: data.isAuthorized
         )
     }
 }

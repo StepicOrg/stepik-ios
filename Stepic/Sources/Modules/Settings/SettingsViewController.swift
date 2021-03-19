@@ -418,20 +418,6 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
         )
 
-        // Log Out
-        let logOutCellViewModel = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.logOut.rawValue,
-            type: .rightDetail(
-                options: .init(
-                    title: .init(
-                        text: Setting.logOut.cellTitle,
-                        appearance: .init(textColor: .stepikRed, textAlignment: .center)
-                    ),
-                    accessoryType: .none
-                )
-            )
-        )
-
         let learningSectionCellsViewModels = settingsViewModel.isApplicationThemeSettingAvailable
             ? [autoplayCellViewModel, adaptiveModeCellViewModel]
             : [
@@ -468,8 +454,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleOther", comment: "")),
                 cells: [aboutCellViewModel],
                 footer: nil
-            ),
-            .init(header: nil, cells: [logOutCellViewModel], footer: nil)
+            )
         ]
 
         if settingsViewModel.isApplicationThemeSettingAvailable {
@@ -480,6 +465,23 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
 
             sectionsViewModels.insert(appearanceSectionViewModel, at: 1)
+        }
+
+        if settingsViewModel.isAuthorized {
+            let logOutCellViewModel = SettingsTableSectionViewModel.Cell(
+                uniqueIdentifier: Setting.logOut.rawValue,
+                type: .rightDetail(
+                    options: .init(
+                        title: .init(
+                            text: Setting.logOut.cellTitle,
+                            appearance: .init(textColor: .stepikRed, textAlignment: .center)
+                        ),
+                        accessoryType: .none
+                    )
+                )
+            )
+
+            sectionsViewModels.append(.init(header: nil, cells: [logOutCellViewModel], footer: nil))
         }
 
         self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sectionsViewModels))
