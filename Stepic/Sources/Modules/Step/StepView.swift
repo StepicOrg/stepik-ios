@@ -266,7 +266,7 @@ final class StepView: UIView {
         self.stepControlsView.isSolutionsButtonEnabled = isEnabled
     }
 
-    func showDisabledView(viewModel: StepDisabledViewModel) {
+    func showDisabledView(viewModel: DisabledStepViewModel) {
         if self.stepDisabledView.superview == nil {
             self.insertSubview(self.stepDisabledView, at: Int.max)
             self.stepDisabledView.translatesAutoresizingMaskIntoConstraints = false

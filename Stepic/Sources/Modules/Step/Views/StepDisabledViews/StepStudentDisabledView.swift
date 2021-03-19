@@ -145,10 +145,10 @@ final class StepStudentDisabledView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: StepDisabledViewModel) {
-        self.feedbackView.update(state: .validation, title: viewModel.title)
+    func configure(viewModel: DisabledStepViewModel) {
+        self.feedbackView.update(state: .validation, title: viewModel.disabled.title)
         self.descriptionLabel.attributedText = self.attributedTextConverter.convertToAttributedText(
-            htmlString: viewModel.message
+            htmlString: viewModel.disabled.message
         )
     }
 }
