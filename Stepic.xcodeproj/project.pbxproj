@@ -592,6 +592,7 @@
 		2C5D963C24C9B251004E9FD1 /* Auth-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963A24C9B251004E9FD1 /* Auth-Develop.plist */; };
 		2C5D964124C9B4DD004E9FD1 /* Config-Develop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D963F24C9B4DD004E9FD1 /* Config-Develop.plist */; };
 		2C5D964224C9B4DD004E9FD1 /* Config-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D964024C9B4DD004E9FD1 /* Config-Release.plist */; };
+		2C5DA7C726077BEE00A98E4A /* StepTeacherDisabledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DA7C626077BEE00A98E4A /* StepTeacherDisabledView.swift */; };
 		2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
 		2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */; };
 		2C5DF13F1FED26AC003B1177 /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */; };
@@ -2259,6 +2260,7 @@
 		2C5D963A24C9B251004E9FD1 /* Auth-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Auth-Develop.plist"; sourceTree = "<group>"; };
 		2C5D963F24C9B4DD004E9FD1 /* Config-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Develop.plist"; sourceTree = "<group>"; };
 		2C5D964024C9B4DD004E9FD1 /* Config-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Release.plist"; sourceTree = "<group>"; };
+		2C5DA7C626077BEE00A98E4A /* StepTeacherDisabledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTeacherDisabledView.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStepViewController.swift; sourceTree = "<group>"; };
@@ -4203,6 +4205,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA785F22592689400873CB3 /* StepStudentDisabledView.swift */,
+				2C5DA7C626077BEE00A98E4A /* StepTeacherDisabledView.swift */,
 			);
 			path = StepDisabledViews;
 			sourceTree = "<group>";
@@ -9712,6 +9715,7 @@
 				2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
+				2C5DA7C726077BEE00A98E4A /* StepTeacherDisabledView.swift in Sources */,
 				2CA3B7D325B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */,
 				08B3B80620F3909400F64D20 /* HTMLProcessor.swift in Sources */,
 				2C1E42A22497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift in Sources */,

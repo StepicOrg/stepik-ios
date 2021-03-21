@@ -870,7 +870,7 @@ StepDisabledTeacherTitle = "Learners can't view the assignment yet";
 StepDisabledTeacherInCourseMessage = "For enable learners to view the assignment, change the course type to %@.<br><br>This step has paid features. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">Learn about plans</a>.";
 StepDisabledTeacherInCoursePlanProTitle = "<b>PRO</b> or paid";
 StepDisabledTeacherInCoursePlanEnterpriseTitle = "<b>Enterprise</b>";
-StepDisabledTeacherNoCourseMessage = "For enable learners to view the assignment, add the lesson to %@.<br><br>This step has paid features. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">О тарифных планах</a>.";
+StepDisabledTeacherNoCourseMessage = "For enable learners to view the assignment, add the lesson to %@.<br><br>This step has paid features. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">Learn about plans</a>.";
 StepDisabledTeacherNoCoursePlanProTitle = "a <b>PRO</b> or <b>paid</b> course";
 StepDisabledTeacherNoCoursePlanEnterpriseTitle = "an <b>Enterprise</b> course";
 StepPosition = "Step %@";

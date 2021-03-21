@@ -14,7 +14,8 @@ protocol StepViewDelegate: AnyObject {
     func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage)
     func stepView(_ view: StepView, didRequestOpenURL url: URL)
     func stepView(_ view: StepView, didRequestOpenARQuickLook url: URL)
-    func stepView(_ view: StepView, didSelectDisabledStepURL url: URL)
+    func stepView(_ view: StepView, didSelectStudentDisabledStepURL url: URL)
+    func stepView(_ view: StepView, didSelectTeacherDisabledStepURL url: URL)
 }
 
 extension StepView {
@@ -111,7 +112,18 @@ final class StepView: UIView {
 
     private lazy var quizContainerView = UIView()
 
-    private lazy var stepDisabledView: StepStudentDisabledView = {
+    private lazy var stepTeacherDisabledView: StepTeacherDisabledView = {
+        let view = StepTeacherDisabledView()
+        view.onLinkClick = { [weak self] url in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepView(strongSelf, didSelectTeacherDisabledStepURL: url)
+        }
+        return view
+    }()
+
+    private lazy var stepStudentDisabledView: StepStudentDisabledView = {
         let view = StepStudentDisabledView()
         view.onNextStepButtonClick = { [weak self] in
             guard let strongSelf = self else {
@@ -135,7 +147,7 @@ final class StepView: UIView {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.stepView(strongSelf, didSelectDisabledStepURL: url)
+            strongSelf.delegate?.stepView(strongSelf, didSelectStudentDisabledStepURL: url)
         }
         return view
     }()
@@ -234,20 +246,20 @@ final class StepView: UIView {
         switch (canNavigateToPreviousUnit, canNavigateToNextUnit) {
         case (true, true):
             self.stepControlsView.unitNavigationState = .both
-            self.stepDisabledView.unitNavigationState = .both
+            self.stepStudentDisabledView.unitNavigationState = .both
         case (true, _):
             self.stepControlsView.unitNavigationState = .previous
-            self.stepDisabledView.unitNavigationState = .previous
+            self.stepStudentDisabledView.unitNavigationState = .previous
         case (_, true):
             self.stepControlsView.unitNavigationState = .next
-            self.stepDisabledView.unitNavigationState = .next
+            self.stepStudentDisabledView.unitNavigationState = .next
         default:
             self.stepControlsView.unitNavigationState = nil
-            self.stepDisabledView.unitNavigationState = nil
+            self.stepStudentDisabledView.unitNavigationState = nil
         }
 
         self.canNavigateToNextStep = canNavigateToNextStep
-        self.stepDisabledView.hasNextStepButton = canNavigateToNextStep
+        self.stepStudentDisabledView.hasNextStepButton = canNavigateToNextStep
     }
 
     func updateTextContent(_ processedContent: ProcessedContent) {
@@ -267,20 +279,29 @@ final class StepView: UIView {
     }
 
     func showDisabledView(viewModel: DisabledStepViewModel) {
-        if self.stepDisabledView.superview == nil {
-            self.insertSubview(self.stepDisabledView, at: Int.max)
-            self.stepDisabledView.translatesAutoresizingMaskIntoConstraints = false
-            self.stepDisabledView.snp.makeConstraints { make in
-                make.edges.equalTo(self.safeAreaLayoutGuide)
+        if viewModel.disabled.isTeacher {
+            if self.stepTeacherDisabledView.superview == nil {
+                self.scrollableStackView.insertArrangedView(self.stepTeacherDisabledView, at: 0)
             }
-        }
 
-        self.stepDisabledView.configure(viewModel: viewModel)
-        self.setStepDisabledViewVisible(true)
+            self.stepTeacherDisabledView.isHidden = false
+            self.stepTeacherDisabledView.configure(viewModel: viewModel)
+        } else {
+            if self.stepStudentDisabledView.superview == nil {
+                self.insertSubview(self.stepStudentDisabledView, at: Int.max)
+                self.stepStudentDisabledView.translatesAutoresizingMaskIntoConstraints = false
+                self.stepStudentDisabledView.snp.makeConstraints { make in
+                    make.edges.equalTo(self.safeAreaLayoutGuide)
+                }
+            }
+
+            self.stepStudentDisabledView.isHidden = false
+            self.stepStudentDisabledView.configure(viewModel: viewModel)
+        }
     }
 
     func hideDisabledView() {
-        self.setStepDisabledViewVisible(false)
+        [self.stepTeacherDisabledView, self.stepStudentDisabledView].forEach { $0.isHidden = true }
     }
 
     // MARK: Private API
@@ -304,11 +325,6 @@ final class StepView: UIView {
             make.top.equalToSuperview().offset(previewContainerHeight * 0.5)
             make.bottom.equalToSuperview().offset(-previewContainerHeight * 0.5 - controlsDiffHeight)
         }
-    }
-
-    private func setStepDisabledViewVisible(_ isVisible: Bool) {
-        self.stepDisabledView.isHidden = !isVisible
-        self.stepDisabledView.alpha = isVisible ? 1 : 0
     }
 }
 
