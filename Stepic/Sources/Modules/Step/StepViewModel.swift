@@ -26,7 +26,13 @@ struct StepVideoViewModel {
     let videoThumbnailImageURL: URL?
 }
 
-struct StepDisabledViewModel {
-    let title: String
-    let message: String
+struct DisabledStepViewModel {
+    let step: StepViewModel
+    let disabled: DisabledViewModel
+
+    struct DisabledViewModel {
+        let title: String
+        let message: String
+        let isTeacher: Bool
+    }
 }

@@ -2,33 +2,24 @@ import Atributika
 import SnapKit
 import UIKit
 
-extension StepDisabledView {
+extension StepTeacherDisabledView {
     struct Appearance {
-        let placeholderImageSize = CGSize(width: 150, height: 120)
-        let placeholderImageInsets = LayoutInsets(top: 32)
-
-        let feedbackViewInsets = LayoutInsets(top: 32, left: 16, right: 16)
+        let feedbackViewInsets = LayoutInsets(inset: 16)
 
         let descriptionLabelFont = Typography.bodyFont
         let descriptionLabelTextColor = UIColor.stepikMaterialPrimaryText
         let descriptionLabelLinkColor = UIColor.stepikVioletFixed
         let descriptionLabelInsets = LayoutInsets(inset: 16)
 
-        let stepControlsInsets = LayoutInsets(inset: 16)
+        let separatorColor = UIColor.stepikSeparator
+        let separatorHeight: CGFloat = 0.5
 
         let backgroundColor = UIColor.stepikBackground
     }
 }
 
-final class StepDisabledView: UIView {
+final class StepTeacherDisabledView: UIView {
     let appearance: Appearance
-
-    private lazy var placeholderImageView: UIImageView = {
-        let image = UIImage(named: "placeholder-sleepy")
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
 
     private lazy var feedbackView = QuizFeedbackView()
 
@@ -56,75 +47,32 @@ final class StepDisabledView: UIView {
         return label
     }()
 
-    private lazy var stepControlsView: StepControlsView = {
-        let view = StepControlsView()
-        view.isDiscussionsButtonVisible = false
-        view.solutionsTitle = nil
-        view.passedByCount = nil
-        view.correctRatio = nil
-        return view
-    }()
-
     private lazy var attributedTextConverter = HTMLToAttributedStringConverter(
         font: self.appearance.descriptionLabelFont,
         tagStyles: [
             Style("a")
                 .foregroundColor(self.appearance.descriptionLabelLinkColor, .normal)
-                .foregroundColor(self.appearance.descriptionLabelLinkColor.withAlphaComponent(0.5), .highlighted)
+                .foregroundColor(self.appearance.descriptionLabelLinkColor.withAlphaComponent(0.5), .highlighted),
+            Style("b").font(.boldSystemFont(ofSize: self.appearance.descriptionLabelFont.pointSize))
         ],
         tagTransformers: [.brTransformer]
     )
 
-    var hasNextStepButton: Bool? {
-        didSet {
-            self.stepControlsView.hasNextStepButton = self.hasNextStepButton ?? false
-        }
-    }
-
-    var unitNavigationState: StepControlsView.UnitNavigationState? {
-        didSet {
-            self.stepControlsView.unitNavigationState = self.unitNavigationState
-        }
-    }
-
-    var onNextStepButtonClick: (() -> Void)? {
-        get {
-            self.stepControlsView.onNextStepButtonClick
-        }
-        set {
-            self.stepControlsView.onNextStepButtonClick = newValue
-        }
-    }
-
-    var onPreviousUnitButtonClick: (() -> Void)? {
-        get {
-            self.stepControlsView.onPreviousUnitButtonClick
-        }
-        set {
-            self.stepControlsView.onPreviousUnitButtonClick = newValue
-        }
-    }
-
-    var onNextUnitButtonClick: (() -> Void)? {
-        get {
-            self.stepControlsView.onNextUnitButtonClick
-        }
-        set {
-            self.stepControlsView.onNextUnitButtonClick = newValue
-        }
-    }
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        return view
+    }()
 
     var onLinkClick: ((URL) -> Void)?
 
     override var intrinsicContentSize: CGSize {
-        let height = self.appearance.placeholderImageInsets.top
-            + self.appearance.placeholderImageSize.height
-            + self.appearance.feedbackViewInsets.top
+        let height = self.appearance.feedbackViewInsets.top
             + self.feedbackView.intrinsicContentSize.height
             + self.appearance.descriptionLabelInsets.top
             + self.descriptionLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
-            + self.appearance.stepControlsInsets.top
-            + self.stepControlsView.intrinsicContentSize.height
+            + self.appearance.descriptionLabelInsets.bottom
+            + self.appearance.separatorHeight
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
@@ -145,37 +93,31 @@ final class StepDisabledView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: StepDisabledViewModel) {
-        self.feedbackView.update(state: .validation, title: viewModel.title)
+    func configure(viewModel: DisabledStepViewModel) {
+        self.feedbackView.update(state: .wrong, title: viewModel.disabled.title)
+        self.feedbackView.setIconImage(UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate))
+
         self.descriptionLabel.attributedText = self.attributedTextConverter.convertToAttributedText(
-            htmlString: viewModel.message
+            htmlString: viewModel.disabled.message
         )
     }
 }
 
-extension StepDisabledView: ProgrammaticallyInitializableViewProtocol {
+extension StepTeacherDisabledView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }
 
     func addSubviews() {
-        self.addSubview(self.placeholderImageView)
         self.addSubview(self.feedbackView)
         self.addSubview(self.descriptionLabel)
-        self.addSubview(self.stepControlsView)
+        self.addSubview(self.separatorView)
     }
 
     func makeConstraints() {
-        self.placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.placeholderImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.placeholderImageInsets.top)
-            make.centerX.equalToSuperview()
-            make.size.equalTo(self.appearance.placeholderImageSize)
-        }
-
         self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
         self.feedbackView.snp.makeConstraints { make in
-            make.top.equalTo(self.placeholderImageView.snp.bottom).offset(self.appearance.feedbackViewInsets.top)
+            make.top.equalToSuperview().offset(self.appearance.feedbackViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.feedbackViewInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.feedbackViewInsets.right)
         }
@@ -184,14 +126,13 @@ extension StepDisabledView: ProgrammaticallyInitializableViewProtocol {
         self.descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(self.feedbackView.snp.bottom).offset(self.appearance.descriptionLabelInsets.top)
             make.leading.trailing.equalTo(self.feedbackView)
+            make.bottom.equalTo(self.separatorView.snp.top).offset(-self.appearance.descriptionLabelInsets.bottom)
         }
 
-        self.stepControlsView.translatesAutoresizingMaskIntoConstraints = false
-        self.stepControlsView.snp.makeConstraints { make in
-            make.top
-                .greaterThanOrEqualTo(self.descriptionLabel.snp.bottom)
-                .offset(self.appearance.stepControlsInsets.top)
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
             make.leading.bottom.trailing.equalToSuperview()
+            make.height.equalTo(self.appearance.separatorHeight)
         }
     }
 }

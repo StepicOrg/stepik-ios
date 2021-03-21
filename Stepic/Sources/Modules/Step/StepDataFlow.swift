@@ -242,7 +242,7 @@ enum StepDataFlow {
     enum ViewControllerState {
         case loading
         case error
-        case disabled(data: StepDisabledViewModel)
+        case disabled(data: DisabledStepViewModel)
         case result(data: StepViewModel)
     }
 
