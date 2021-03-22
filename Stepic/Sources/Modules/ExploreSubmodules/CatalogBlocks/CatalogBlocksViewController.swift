@@ -97,6 +97,39 @@ final class CatalogBlocksViewController: UIViewController, ControllerWithStepikP
                         self?.interactor.doFullCourseListPresentation(request: .init(courseListType: type))
                     }
                     self.catalogBlocksView?.addBlockView(containerView)
+                case .recommendedCourses:
+                    let type = RecommendationsCourseListType(
+                        id: block.id,
+                        language: ContentLanguage(languageString: block.language),
+                        platform: block.platformType ?? .ios
+                    )
+
+                    let assembly = HorizontalCourseListAssembly(
+                        type: type,
+                        colorMode: .light,
+                        courseViewSource: .catalogBlock(id: block.id), // change
+                        output: self.interactor as? CourseListOutputProtocol
+                    )
+                    let viewController = assembly.makeModule()
+                    assembly.moduleInput?.setOnlineStatus()
+                    self.addChild(viewController)
+
+                    let containerView = CourseListContainerViewFactory()
+                        .makeHorizontalCatalogBlocksContainerView(
+                            for: viewController.view,
+                            headerDescription: .init(
+                                title: block.title,
+                                subtitle: nil,
+                                description: block.descriptionString,
+                                isTitleVisible: block.isTitleVisible,
+                                shouldShowAllButton: true
+                            ),
+                            contentViewInsets: .zero
+                        )
+                    containerView.onShowAllButtonClick = { [weak self] in
+                        self?.interactor.doFullCourseListPresentation(request: .init(courseListType: type))
+                    }
+                    self.catalogBlocksView?.addBlockView(containerView)
                 case .simpleCourseLists:
                     guard let blockAppearance = block.appearance else {
                         continue
