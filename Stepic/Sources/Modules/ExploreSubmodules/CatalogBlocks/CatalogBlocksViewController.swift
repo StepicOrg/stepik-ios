@@ -56,144 +56,15 @@ final class CatalogBlocksViewController: UIViewController, ControllerWithStepikP
             self.isPlaceholderShown = false
 
             for block in data {
-                guard let kind = block.kind else {
+                guard let module = CatalogBlockItemModuleFactory.makeCatalogBlockModule(
+                    block: block,
+                    interactor: self.interactor
+                ) else {
                     continue
                 }
 
-                switch kind {
-                case .fullCourseLists:
-                    guard let contentItem = block.content.first as? FullCourseListsCatalogBlockContentItem else {
-                        continue
-                    }
-
-                    let type = CatalogBlockCourseListType(
-                        courseListID: contentItem.id,
-                        coursesIDs: contentItem.courses
-                    )
-
-                    let assembly = HorizontalCourseListAssembly(
-                        type: type,
-                        colorMode: .light,
-                        courseViewSource: .catalogBlock(id: block.id),
-                        output: self.interactor as? CourseListOutputProtocol
-                    )
-                    let viewController = assembly.makeModule()
-                    assembly.moduleInput?.setOnlineStatus()
-                    self.addChild(viewController)
-
-                    let containerView = CourseListContainerViewFactory()
-                        .makeHorizontalCatalogBlocksContainerView(
-                            for: viewController.view,
-                            headerDescription: .init(
-                                title: block.title,
-                                subtitle: FormatterHelper.catalogBlockCoursesCount(contentItem.coursesCount),
-                                description: block.descriptionString,
-                                isTitleVisible: block.isTitleVisible,
-                                shouldShowAllButton: true
-                            ),
-                            contentViewInsets: .zero
-                        )
-                    containerView.onShowAllButtonClick = { [weak self] in
-                        self?.interactor.doFullCourseListPresentation(
-                            request: .init(
-                                courseListType: type,
-                                presentationDescription: .init(title: block.title)
-                            )
-                        )
-                    }
-                    self.catalogBlocksView?.addBlockView(containerView)
-                case .recommendedCourses:
-                    let type = RecommendationsCourseListType(
-                        id: block.id,
-                        language: ContentLanguage(languageString: block.language),
-                        platform: block.platformType ?? .ios
-                    )
-
-                    let assembly = HorizontalCourseListAssembly(
-                        type: type,
-                        colorMode: .light,
-                        courseViewSource: .recommendation,
-                        output: self.interactor as? CourseListOutputProtocol
-                    )
-                    let viewController = assembly.makeModule()
-                    assembly.moduleInput?.setOnlineStatus()
-                    self.addChild(viewController)
-
-                    let containerView = CourseListContainerViewFactory()
-                        .makeHorizontalCatalogBlocksContainerView(
-                            for: viewController.view,
-                            headerDescription: .init(
-                                title: block.title,
-                                subtitle: nil,
-                                description: block.descriptionString,
-                                isTitleVisible: block.isTitleVisible,
-                                shouldShowAllButton: true
-                            ),
-                            contentViewInsets: .zero
-                        )
-                    containerView.onShowAllButtonClick = { [weak self] in
-                        self?.interactor.doFullCourseListPresentation(
-                            request: .init(
-                                courseListType: type,
-                                presentationDescription: .init(title: block.title)
-                            )
-                        )
-                    }
-                    self.catalogBlocksView?.addBlockView(containerView)
-                case .simpleCourseLists:
-                    guard let blockAppearance = block.appearance else {
-                        continue
-                    }
-
-                    let assembly = SimpleCourseListAssembly(
-                        catalogBlockID: block.id,
-                        layoutType: .init(catalogBlockAppearance: blockAppearance),
-                        output: self.interactor as? SimpleCourseListOutputProtocol
-                    )
-                    let viewController = assembly.makeModule()
-                    self.addChild(viewController)
-
-                    var contentViewInsets = CourseListContainerViewFactory.Appearance
-                        .horizontalCatalogBlocksContentInsets
-                    if !block.isTitleVisible {
-                        contentViewInsets.top = 0
-                    }
-
-                    let containerView = CourseListContainerViewFactory()
-                        .makeHorizontalCatalogBlocksContainerView(
-                            for: viewController.view,
-                            headerDescription: .init(
-                                title: block.title,
-                                subtitle: nil,
-                                description: block.descriptionString,
-                                isTitleVisible: block.isTitleVisible,
-                                shouldShowAllButton: false
-                            ),
-                            contentViewInsets: contentViewInsets
-                        )
-                    self.catalogBlocksView?.addBlockView(containerView)
-                case .authors:
-                    let assembly = AuthorsCourseListAssembly(
-                        catalogBlockID: block.id,
-                        output: self.interactor as? AuthorsCourseListOutputProtocol
-                    )
-                    let viewController = assembly.makeModule()
-                    self.addChild(viewController)
-
-                    let containerView = CourseListContainerViewFactory()
-                        .makeHorizontalCatalogBlocksContainerView(
-                            for: viewController.view,
-                            headerDescription: .init(
-                                title: block.title,
-                                subtitle: FormatterHelper.authorsCount(block.content.count),
-                                description: block.descriptionString,
-                                isTitleVisible: block.isTitleVisible,
-                                shouldShowAllButton: false
-                            ),
-                            contentViewInsets: .zero
-                        )
-                    self.catalogBlocksView?.addBlockView(containerView)
-                }
+                self.addChild(module.viewController)
+                self.catalogBlocksView?.addBlockView(module.containerView)
             }
         }
     }

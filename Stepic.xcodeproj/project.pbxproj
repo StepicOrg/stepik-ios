@@ -529,6 +529,7 @@
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
 		2C45C6EF254160A100AF24BF /* HTMLExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */; };
 		2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
+		2C47E6B72608EB8900732642 /* CatalogBlockItemModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47E6B62608EB8900732642 /* CatalogBlockItemModuleFactory.swift */; };
 		2C48BA0725727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA0625727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift */; };
 		2C48BA0F25727885009103B2 /* AuthorsCourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA0E25727885009103B2 /* AuthorsCourseListCollectionViewDelegate.swift */; };
 		2C48BA1425727962009103B2 /* AuthorsCourseListHorizontalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA1325727962009103B2 /* AuthorsCourseListHorizontalFlowLayout.swift */; };
@@ -2200,6 +2201,7 @@
 		2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractorTests.swift; sourceTree = "<group>"; };
 		2C46417A24CFD23400FB6696 /* Model_lessons_demo_access_v58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lessons_demo_access_v58.xcdatamodel; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
+		2C47E6B62608EB8900732642 /* CatalogBlockItemModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockItemModuleFactory.swift; sourceTree = "<group>"; };
 		2C48BA0625727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2C48BA0E25727885009103B2 /* AuthorsCourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		2C48BA1325727962009103B2 /* AuthorsCourseListHorizontalFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListHorizontalFlowLayout.swift; sourceTree = "<group>"; };
@@ -8390,6 +8392,7 @@
 		FB7BA3E8E921A2CB7CDF8612 /* CatalogBlocks */ = {
 			isa = PBXGroup;
 			children = (
+				2C47E6B62608EB8900732642 /* CatalogBlockItemModuleFactory.swift */,
 				511B5A8F33033E182CFE4949 /* CatalogBlocksAssembly.swift */,
 				EB3FB0B427E038E36BA99318 /* CatalogBlocksDataFlow.swift */,
 				BA9ABFDBF465C10326697700 /* CatalogBlocksInteractor.swift */,
@@ -9195,6 +9198,7 @@
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
+				2C47E6B72608EB8900732642 /* CatalogBlockItemModuleFactory.swift in Sources */,
 				866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */,

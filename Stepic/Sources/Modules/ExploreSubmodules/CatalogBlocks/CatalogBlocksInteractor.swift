@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CatalogBlocksInteractorProtocol {
+protocol CatalogBlocksInteractorProtocol: AnyObject {
     func doCatalogBlocksLoad(request: CatalogBlocks.CatalogBlocksLoad.Request)
     func doFullCourseListPresentation(
         request: CatalogBlocks.FullCourseListModulePresentation.Request
