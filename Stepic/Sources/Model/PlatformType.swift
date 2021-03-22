@@ -32,20 +32,24 @@ struct PlatformOptionSet: OptionSet {
     static let android = PlatformOptionSet(rawValue: 1 << 3)
     static let ios = PlatformOptionSet(rawValue: 1 << 4)
 
-    static let mobileiOS: PlatformOptionSet = [.mobile, .ios]
+    static let mobileIOS: PlatformOptionSet = [.mobile, .ios]
 
     var stringValue: String {
         var platforms = [PlatformType]()
 
         if self.contains(.web) {
             platforms.append(.web)
-        } else if self.contains(.mobile) {
+        }
+        if self.contains(.mobile) {
             platforms.append(.mobile)
-        } else if self.contains(.sunionPlugin) {
+        }
+        if self.contains(.sunionPlugin) {
             platforms.append(.sunionPlugin)
-        } else if self.contains(.android) {
+        }
+        if self.contains(.android) {
             platforms.append(.android)
-        } else if self.contains(.ios) {
+        }
+        if self.contains(.ios) {
             platforms.append(.ios)
         }
 

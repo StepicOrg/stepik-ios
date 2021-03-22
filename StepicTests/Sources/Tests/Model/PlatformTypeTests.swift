@@ -12,7 +12,12 @@ class PlatformTypeSpec: QuickSpec {
             }
 
             it("correctly merges two options into a single string") {
-                let platforms: PlatformOptionSet = [.mobile, .ios]
+                let platforms: PlatformOptionSet = [.mobile, .web]
+                expect(platforms.stringValue) == "web,mobile"
+            }
+
+            it("correctly merges mobileIOS option into a single string") {
+                let platforms = PlatformOptionSet.mobileIOS
                 expect(platforms.stringValue) == "mobile,ios"
             }
         }
