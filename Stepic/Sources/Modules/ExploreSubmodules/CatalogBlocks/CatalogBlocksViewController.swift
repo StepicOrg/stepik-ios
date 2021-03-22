@@ -94,7 +94,12 @@ final class CatalogBlocksViewController: UIViewController, ControllerWithStepikP
                             contentViewInsets: .zero
                         )
                     containerView.onShowAllButtonClick = { [weak self] in
-                        self?.interactor.doFullCourseListPresentation(request: .init(courseListType: type))
+                        self?.interactor.doFullCourseListPresentation(
+                            request: .init(
+                                courseListType: type,
+                                presentationDescription: .init(title: block.title)
+                            )
+                        )
                     }
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .recommendedCourses:
@@ -127,7 +132,12 @@ final class CatalogBlocksViewController: UIViewController, ControllerWithStepikP
                             contentViewInsets: .zero
                         )
                     containerView.onShowAllButtonClick = { [weak self] in
-                        self?.interactor.doFullCourseListPresentation(request: .init(courseListType: type))
+                        self?.interactor.doFullCourseListPresentation(
+                            request: .init(
+                                courseListType: type,
+                                presentationDescription: .init(title: block.title)
+                            )
+                        )
                     }
                     self.catalogBlocksView?.addBlockView(containerView)
                 case .simpleCourseLists:
