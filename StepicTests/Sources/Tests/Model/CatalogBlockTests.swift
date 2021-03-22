@@ -93,6 +93,25 @@ class CatalogBlockSpec: QuickSpec {
                     expect(content[0].followersCount) == 99425
                 }
 
+                it("parses recommended_courses") {
+                    // Given
+                    let json = JSON(parseJSON: JSONResponse.recommendedCourses.stringValue)
+
+                    // When
+                    let catalogBlock = CatalogBlock(json: json)
+
+                    // Then
+                    expect(catalogBlock.id) == 47
+                    expect(catalogBlock.position) == 999
+                    expect(catalogBlock.title) == "Персональные рекомендации"
+                    expect(catalogBlock.descriptionString) == ""
+                    expect(catalogBlock.language) == "ru"
+                    expect(catalogBlock.kind!) == .recommendedCourses
+                    expect(catalogBlock.appearance!) == .default
+                    expect(catalogBlock.isTitleVisible) == true
+                    expect(catalogBlock.content.isEmpty) == true
+                }
+
                 it("not parses organizations content") {
                     // Given
                     let json = JSON(parseJSON: JSONResponse.organizations.stringValue)
@@ -122,6 +141,7 @@ private enum JSONResponse {
     case simpleCourseLists
     case authors
     case organizations
+    case recommendedCourses
 
     var stringValue: String {
         switch self {
@@ -281,6 +301,23 @@ private enum JSONResponse {
             "followers_count": 0
         }
     ]
+}
+"""
+        case .recommendedCourses:
+            return """
+{
+    "id": 47,
+    "position": 999,
+    "title": "Персональные рекомендации",
+    "description": "",
+    "details_url": "",
+    "cover": null,
+    "language": "ru",
+    "platform": 3,
+    "kind": "recommended_courses",
+    "appearance": "default",
+    "is_title_visible": true,
+    "content": []
 }
 """
         }

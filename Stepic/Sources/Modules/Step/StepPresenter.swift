@@ -200,8 +200,8 @@ final class StepPresenter: StepPresenterProtocol {
                     arguments: [
                         self.makeNeedsPlanTitle(
                             step.needsPlanType,
-                            proLocalizedKey: "StepDisabledTeacherInCoursePlanProTitle",
-                            enterpriseLocalizedKey: "StepDisabledTeacherInCoursePlanEnterpriseTitle"
+                            proPlanLocalizedStringKey: "StepDisabledTeacherInCoursePlanProTitle",
+                            enterprisePlanLocalizedStringKey: "StepDisabledTeacherInCoursePlanEnterpriseTitle"
                         )
                     ]
                 )
@@ -211,8 +211,8 @@ final class StepPresenter: StepPresenterProtocol {
                     arguments: [
                         self.makeNeedsPlanTitle(
                             step.needsPlanType,
-                            proLocalizedKey: "StepDisabledTeacherNoCoursePlanProTitle",
-                            enterpriseLocalizedKey: "StepDisabledTeacherNoCoursePlanEnterpriseTitle"
+                            proPlanLocalizedStringKey: "StepDisabledTeacherNoCoursePlanProTitle",
+                            enterprisePlanLocalizedStringKey: "StepDisabledTeacherNoCoursePlanEnterpriseTitle"
                         )
                     ]
                 )
@@ -255,17 +255,19 @@ final class StepPresenter: StepPresenterProtocol {
 
     private func makeNeedsPlanTitle(
         _ needsPlanType: CourseType?,
-        proLocalizedKey: String,
-        enterpriseLocalizedKey: String
+        proPlanLocalizedStringKey: String,
+        enterprisePlanLocalizedStringKey: String
     ) -> String {
+        // swiftlint:disable nslocalizedstring_key
         switch needsPlanType {
         case .pro:
-            return NSLocalizedString(proLocalizedKey, comment: "")
+            return NSLocalizedString(proPlanLocalizedStringKey, comment: "")
         case .enterprise:
-            return NSLocalizedString(enterpriseLocalizedKey, comment: "")
+            return NSLocalizedString(enterprisePlanLocalizedStringKey, comment: "")
         default:
             return "N/A"
         }
+        // swiftlint:enable nslocalizedstring_key
     }
 
     private func makeStepViewModel(

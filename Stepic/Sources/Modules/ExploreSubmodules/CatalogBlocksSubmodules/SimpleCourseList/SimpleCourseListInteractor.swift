@@ -45,7 +45,10 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
                 coursesIDs: selectedItem.courses
             )
 
-            self.moduleOutput?.presentSimpleCourseList(type: courseListType)
+            self.moduleOutput?.presentSimpleCourseList(
+                type: courseListType,
+                presentationDescription: .init(title: selectedItem.title)
+            )
         case .courseLists(let courseLists):
             guard let selectedCourseList = courseLists.first(where: { "\($0.id)" == request.uniqueIdentifier }) else {
                 return
@@ -56,7 +59,10 @@ final class SimpleCourseListInteractor: SimpleCourseListInteractorProtocol {
                 coursesIDs: selectedCourseList.coursesArray
             )
 
-            self.moduleOutput?.presentSimpleCourseList(type: courseListType)
+            self.moduleOutput?.presentSimpleCourseList(
+                type: courseListType,
+                presentationDescription: .init(title: selectedCourseList.title)
+            )
         }
     }
 

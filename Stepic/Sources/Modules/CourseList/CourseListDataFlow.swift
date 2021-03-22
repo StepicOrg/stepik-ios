@@ -17,6 +17,7 @@ enum CourseList {
 
     // Use it for module initializing
     struct PresentationDescription {
+        var title: String?
         var headerViewDescription: HeaderViewPresentationDescription?
         var courseListFilterDescription: CourseListFilter.PresentationDescription?
 

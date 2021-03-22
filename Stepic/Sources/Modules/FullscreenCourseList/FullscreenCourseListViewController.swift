@@ -45,7 +45,9 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
         super.init(nibName: nil, bundle: nil)
 
-        if self.presentationDescription?.headerViewDescription != nil {
+        if !(self.presentationDescription?.title?.isEmpty ?? true) {
+            self.title = self.presentationDescription?.title
+        } else if self.presentationDescription?.headerViewDescription != nil {
             self.title = NSLocalizedString("RecommendedCategory", comment: "")
         } else {
             self.title = NSLocalizedString("AllCourses", comment: "")
@@ -382,7 +384,10 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     }
 
     func displayFullscreenCourseList(viewModel: FullscreenCourseList.FullscreenCourseListModulePresentation.ViewModel) {
-        let assembly = FullscreenCourseListAssembly(courseListType: viewModel.courseListType)
+        let assembly = FullscreenCourseListAssembly(
+            presentationDescription: viewModel.presentationDescription,
+            courseListType: viewModel.courseListType
+        )
         self.push(module: assembly.makeModule())
     }
 
