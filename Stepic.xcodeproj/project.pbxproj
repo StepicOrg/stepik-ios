@@ -944,6 +944,8 @@
 		2CECFEF1252F1F4C006BA883 /* VisitedCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */; };
 		2CECFEF9252F235A006BA883 /* VisitedCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */; };
 		2CEDB4052600BD7700CB077F /* StoryPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDB4042600BD7700CB077F /* StoryPart.swift */; };
+		2CEDC661260898F700B0B018 /* PlatformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC660260898F700B0B018 /* PlatformType.swift */; };
+		2CEDC67226089DAE00B0B018 /* PlatformTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC67126089DAE00B0B018 /* PlatformTypeTests.swift */; };
 		2CF0848F244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
@@ -2630,6 +2632,8 @@
 		2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCourse.swift; sourceTree = "<group>"; };
 		2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesNetworkService.swift; sourceTree = "<group>"; };
 		2CEDB4042600BD7700CB077F /* StoryPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPart.swift; sourceTree = "<group>"; };
+		2CEDC660260898F700B0B018 /* PlatformType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformType.swift; sourceTree = "<group>"; };
+		2CEDC67126089DAE00B0B018 /* PlatformTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformTypeTests.swift; sourceTree = "<group>"; };
 		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
 		2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepARQuickLookPreviewDataSource.swift; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
@@ -3830,6 +3834,7 @@
 				2CE0CAC6255A8824009C6574 /* CatalogBlockTests.swift */,
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C453399204D5DEE0061342A /* PinsMapSpec.swift */,
+				2CEDC67126089DAE00B0B018 /* PlatformTypeTests.swift */,
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
 				2CF8DF9925F2754C00F577C2 /* ReviewSessionResponseSpec.swift */,
 				2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */,
@@ -4234,6 +4239,7 @@
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */,
 				2C130E3B2512402B00389AEB /* LaunchArguments.swift */,
+				2CEDC660260898F700B0B018 /* PlatformType.swift */,
 				2C5D340725C98A6800372C61 /* PromoCode.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
 				2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */,
@@ -9153,6 +9159,7 @@
 				2CAD40682600D1D7008EFDE5 /* StoryTests.swift in Sources */,
 				2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */,
 				2CF8DF9A25F2754C00F577C2 /* ReviewSessionResponseSpec.swift in Sources */,
+				2CEDC67226089DAE00B0B018 /* PlatformTypeTests.swift in Sources */,
 				2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */,
 				2CCDD20124DBB61100A48EE0 /* ProtectedTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
@@ -10138,6 +10145,7 @@
 				2C7CCE8625FA084C007D0C83 /* SubmissionsReviewView.swift in Sources */,
 				62E98E830A3AC918F1CD339F /* ContinueCourseDataFlow.swift in Sources */,
 				62E988E66119F2BF32D4C317 /* ContinueCourseInteractor.swift in Sources */,
+				2CEDC661260898F700B0B018 /* PlatformType.swift in Sources */,
 				62E98779C46941AA1F710191 /* ContinueCourseOutputProtocol.swift in Sources */,
 				62E984E7020CA7E523C824EA /* ContinueCoursePresenter.swift in Sources */,
 				62E983C5C87C83700311EFCC /* ContinueCourseProvider.swift in Sources */,
