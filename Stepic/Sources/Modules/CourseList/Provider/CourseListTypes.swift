@@ -69,6 +69,14 @@ struct CatalogBlockCourseListType: CourseListType {
     var analyticName: String { "catalog_block_course_list" }
 }
 
+struct RecommendationsCourseListType: CourseListType {
+    let id: CourseListModel.IdType
+    let language: ContentLanguage
+    let platform: PlatformType
+
+    var analyticName: String { "recommendations_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -78,6 +86,7 @@ final class CourseListServicesFactory {
     private let searchResultsAPI: SearchResultsAPI
     private let visitedCoursesAPI: VisitedCoursesAPI
     private let courseListsAPI: CourseListsAPI
+    private let courseRecommendationsAPI: CourseRecommendationsAPI
 
     init(
         type: CourseListType,
@@ -85,7 +94,8 @@ final class CourseListServicesFactory {
         userCoursesAPI: UserCoursesAPI = UserCoursesAPI(),
         searchResultsAPI: SearchResultsAPI = SearchResultsAPI(),
         visitedCoursesAPI: VisitedCoursesAPI = VisitedCoursesAPI(),
-        courseListsAPI: CourseListsAPI = CourseListsAPI()
+        courseListsAPI: CourseListsAPI = CourseListsAPI(),
+        courseRecommendationsAPI: CourseRecommendationsAPI = CourseRecommendationsAPI()
     ) {
         self.type = type
         self.coursesAPI = coursesAPI
@@ -93,6 +103,7 @@ final class CourseListServicesFactory {
         self.searchResultsAPI = searchResultsAPI
         self.visitedCoursesAPI = visitedCoursesAPI
         self.courseListsAPI = courseListsAPI
+        self.courseRecommendationsAPI = courseRecommendationsAPI
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
@@ -151,6 +162,12 @@ final class CourseListServicesFactory {
                     defaultCoursesList: type.coursesIDs
                 )
             )
+        } else if let type = self.type as? RecommendationsCourseListType {
+            return CourseListPersistenceService(
+                storage: DefaultsCourseListPersistenceStorage(
+                    cacheID: "RecommendedCourses_\(type.id)_\(type.language.languageString)_\(type.platform.stringValue)"
+                )
+            )
         } else {
             fatalError("Unsupported course list type")
         }
@@ -192,6 +209,14 @@ final class CourseListServicesFactory {
                 type: type,
                 coursesAPI: self.coursesAPI,
                 courseListsAPI: self.courseListsAPI
+            )
+        } else if let type = self.type as? RecommendationsCourseListType {
+            return RecommendationsCourseListNetworkService(
+                type: type,
+                coursesAPI: self.coursesAPI,
+                courseRecommendationsNetworkService: CourseRecommendationsNetworkService(
+                    courseRecommendationsAPI: self.courseRecommendationsAPI
+                )
             )
         } else {
             fatalError("Unsupported course list type")

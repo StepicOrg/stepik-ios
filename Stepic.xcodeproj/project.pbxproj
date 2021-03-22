@@ -944,6 +944,9 @@
 		2CECFEF1252F1F4C006BA883 /* VisitedCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */; };
 		2CECFEF9252F235A006BA883 /* VisitedCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */; };
 		2CEDB4052600BD7700CB077F /* StoryPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDB4042600BD7700CB077F /* StoryPart.swift */; };
+		2CEDC6422608906F00B0B018 /* CourseRecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC6412608906F00B0B018 /* CourseRecommendationsAPI.swift */; };
+		2CEDC6492608919C00B0B018 /* CourseRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC6482608919C00B0B018 /* CourseRecommendation.swift */; };
+		2CEDC65A260893E500B0B018 /* CourseRecommendationsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC659260893E500B0B018 /* CourseRecommendationsNetworkService.swift */; };
 		2CEDC661260898F700B0B018 /* PlatformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC660260898F700B0B018 /* PlatformType.swift */; };
 		2CEDC67226089DAE00B0B018 /* PlatformTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC67126089DAE00B0B018 /* PlatformTypeTests.swift */; };
 		2CF0848F244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */; };
@@ -2632,8 +2635,12 @@
 		2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCourse.swift; sourceTree = "<group>"; };
 		2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesNetworkService.swift; sourceTree = "<group>"; };
 		2CEDB4042600BD7700CB077F /* StoryPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPart.swift; sourceTree = "<group>"; };
+		2CEDC6412608906F00B0B018 /* CourseRecommendationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRecommendationsAPI.swift; sourceTree = "<group>"; };
+		2CEDC6482608919C00B0B018 /* CourseRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRecommendation.swift; sourceTree = "<group>"; };
+		2CEDC659260893E500B0B018 /* CourseRecommendationsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRecommendationsNetworkService.swift; sourceTree = "<group>"; };
 		2CEDC660260898F700B0B018 /* PlatformType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformType.swift; sourceTree = "<group>"; };
 		2CEDC67126089DAE00B0B018 /* PlatformTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformTypeTests.swift; sourceTree = "<group>"; };
+		2CEDC67D2608A2F100B0B018 /* Model_catalog_block_platform_v74.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_catalog_block_platform_v74.xcdatamodel; sourceTree = "<group>"; };
 		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
 		2CF0848E244EF5750062EDB6 /* StepARQuickLookPreviewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepARQuickLookPreviewDataSource.swift; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
@@ -6592,6 +6599,7 @@
 				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
 				2C284DB82474418600669736 /* CoursePaymentsAPI.swift */,
 				2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */,
+				2CEDC6412608906F00B0B018 /* CourseRecommendationsAPI.swift */,
 				2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */,
 				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
 				080CE1421E955D300089A27F /* CoursesAPI.swift */,
@@ -6676,6 +6684,7 @@
 				2CA93087253C79C9007B717A /* AttemptPlainObject.swift */,
 				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
 				2C97765125D6CF0F008778D6 /* CoursePlainObject.swift */,
+				2CEDC6482608919C00B0B018 /* CourseRecommendation.swift */,
 				62E986D2ADA8942B2C685F05 /* LessonPlainObject.swift */,
 				2CB3563D2476CB7B00E59A03 /* MagicLink.swift */,
 				2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */,
@@ -7169,6 +7178,7 @@
 				2CB31C71256D11E500265CC5 /* CourseListsNetworkService.swift */,
 				2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */,
 				2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */,
+				2CEDC659260893E500B0B018 /* CourseRecommendationsNetworkService.swift */,
 				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
@@ -9308,6 +9318,7 @@
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C284DBB247444DF00669736 /* CoursePaymentsNetworkService.swift in Sources */,
 				2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */,
+				2CEDC65A260893E500B0B018 /* CourseRecommendationsNetworkService.swift in Sources */,
 				2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				2C87A7AD2446696D00933CA4 /* UserActivitiesPersistenceService.swift in Sources */,
@@ -9957,6 +9968,7 @@
 				62E98034865DC79E2B5C5D67 /* BaseExploreDataFlow.swift in Sources */,
 				62E9887FA8D78BE11EE4F470 /* BaseExploreInteractor.swift in Sources */,
 				62E98208853EC07B1F71D5CB /* BaseExplorePresenter.swift in Sources */,
+				2CEDC6422608906F00B0B018 /* CourseRecommendationsAPI.swift in Sources */,
 				62E98CC55AA2E50ED1FABF32 /* BaseExploreView.swift in Sources */,
 				2C7545AC24C034CB004F9074 /* NewProfileAchievementsViewModel.swift in Sources */,
 				62E98B04C8A3F4DFE7F8B00F /* BaseExploreViewController.swift in Sources */,
@@ -10168,6 +10180,7 @@
 				62E98DCE33DED1EB1CC11988 /* CourseListsCollectionProvider.swift in Sources */,
 				62E989FFBAD20007D816071B /* CourseListsCollectionView.swift in Sources */,
 				62E987E02EC520C92F15E0B9 /* ExploreCoursesCollectionHeaderView.swift in Sources */,
+				2CEDC6492608919C00B0B018 /* CourseRecommendation.swift in Sources */,
 				2CEBEBF4242F8F9900DBFDF0 /* StepikRequestAdapter.swift in Sources */,
 				62E98F7CBC091ADD515E1E89 /* GradientCoursesPlaceholderView.swift in Sources */,
 				2C6D61B024D9729D00D019F2 /* NewProfileHeaderViewSkeleton.swift in Sources */,
@@ -12464,6 +12477,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CEDC67D2608A2F100B0B018 /* Model_catalog_block_platform_v74.xcdatamodel */,
 				2C8EE76C2604B52E003512BC /* Model_step_needs_plan_v73.xcdatamodel */,
 				2C995A1D25F7968B00459588 /* Model_submissions_review_v72.xcdatamodel */,
 				2C9A3C2525E7A85F005A04F8 /* Model_lesson_courses_units_array_v71.xcdatamodel */,
@@ -12539,7 +12553,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C8EE76C2604B52E003512BC /* Model_step_needs_plan_v73.xcdatamodel */;
+			currentVersion = 2CEDC67D2608A2F100B0B018 /* Model_catalog_block_platform_v74.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
