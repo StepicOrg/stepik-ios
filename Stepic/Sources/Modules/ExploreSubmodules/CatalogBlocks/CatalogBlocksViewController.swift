@@ -112,7 +112,7 @@ final class CatalogBlocksViewController: UIViewController, ControllerWithStepikP
                     let assembly = HorizontalCourseListAssembly(
                         type: type,
                         colorMode: .light,
-                        courseViewSource: .catalogBlock(id: block.id), // change
+                        courseViewSource: .recommendation,
                         output: self.interactor as? CourseListOutputProtocol
                     )
                     let viewController = assembly.makeModule()
