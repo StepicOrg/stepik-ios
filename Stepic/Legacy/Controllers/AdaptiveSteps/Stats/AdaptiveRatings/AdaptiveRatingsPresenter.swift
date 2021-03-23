@@ -111,9 +111,9 @@ final class AdaptiveRatingsPresenter {
                 let locale = String(Locale.preferredLanguages.first?.split(separator: "-").first ?? "en")
                 users.forEach { user in
                     if ["ru", "ua"].contains(locale) {
-                        userNames[user.id] = "\(user.firstName) \(user.lastName)"
+                        userNames[user.id] = user.fullName
                     } else {
-                        userNames[user.id] = StringHelper.cyrillicToLatin("\(user.firstName) \(user.lastName)")
+                        userNames[user.id] = StringHelper.cyrillicToLatin(user.fullName)
                     }
                 }
 

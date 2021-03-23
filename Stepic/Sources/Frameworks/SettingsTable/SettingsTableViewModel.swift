@@ -122,14 +122,14 @@ struct RightDetailCellOptions {
 
         init(
             isOn: Bool,
-            appearance: Appearance = .init(onTintColor: .stepikSwitchOnTint)
+            appearance: Appearance = .init()
         ) {
             self.isOn = isOn
             self.appearance = appearance
         }
 
         struct Appearance {
-            var onTintColor: UIColor
+            var onTintColor: UIColor?
         }
     }
 

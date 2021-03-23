@@ -143,18 +143,15 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         instruction: InstructionDataPlainObject?,
         isTeacher: Bool
     ) -> SubmissionViewModel {
-        let username: String = {
-            let fullName = "\(user.firstName) \(user.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
-            return fullName.isEmpty ? "User \(user.id)" : fullName
-        }()
-
+        let username = FormatterHelper.username(user)
         let relativeDateString = FormatterHelper.dateToRelativeString(submission.time)
 
         let reviewViewModel = self.makeReviewViewModel(
             currentUserID: currentUserID,
             submission: submission,
             instruction: instruction,
-            isTeacher: isTeacher
+            isTeacher: isTeacher,
+            username: username
         )
 
         let formattedScore: String? = {
@@ -197,7 +194,8 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         currentUserID: User.IdType?,
         submission: Submission,
         instruction: InstructionDataPlainObject?,
-        isTeacher: Bool
+        isTeacher: Bool,
+        username: String
     ) -> SubmissionReviewViewModel? {
         guard let reviewState = self.getSubmissionReviewState(
             submission: submission,
@@ -207,12 +205,13 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             return nil
         }
 
+        let takenReviewCount = submission.session?.takenReviews.count ?? 0
+        let givenReviewsCount = submission.session?.givenReviews.count ?? 0
+        let minReviewsCount = instruction?.instruction.minReviews ?? 0
+
         let title: String = {
             switch reviewState {
             case .inProgress, .finished:
-                let takenReviewCount = submission.session?.takenReviews.count ?? 0
-                let minReviewsCount = instruction?.instruction.minReviews ?? 0
-
                 return String(
                     format: reviewState.title,
                     arguments: ["\(takenReviewCount)", "\(minReviewsCount)"]
@@ -221,7 +220,23 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                 return reviewState.title
             }
         }()
-        let formattedTitle = "\(title)\n\(reviewState.message)".trimmed()
+        let message: String = {
+            if reviewState == .inProgress {
+                if givenReviewsCount < minReviewsCount && takenReviewCount < minReviewsCount {
+                    return String(
+                        format: NSLocalizedString("SubmissionsReviewStateInProgressNotGiveNotTakeMessage", comment: ""),
+                        arguments: [username]
+                    )
+                } else if givenReviewsCount < minReviewsCount {
+                    return String(
+                        format: NSLocalizedString("SubmissionsReviewStateInProgressNotGiveMessage", comment: ""),
+                        arguments: [username]
+                    )
+                }
+            }
+            return reviewState.message
+        }()
+        let formattedTitle = "\(title)\n\(message)".trimmed()
 
         let isEnabled: Bool = {
             switch reviewState {

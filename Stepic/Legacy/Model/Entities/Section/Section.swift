@@ -35,10 +35,10 @@ final class Section: NSManagedObject, IDFetchable {
         self.requiredSectionID = json[JSONKey.requiredSection.rawValue].int
         self.requiredPercent = json[JSONKey.requiredPercent.rawValue].intValue
         // Dates
-        self.beginDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
-        self.endDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
-        self.softDeadline = Parser.shared.dateFromTimedateJSON(json[JSONKey.softDeadline.rawValue])
-        self.hardDeadline = Parser.shared.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
+        self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
+        self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
+        self.softDeadline = Parser.dateFromTimedateJSON(json[JSONKey.softDeadline.rawValue])
+        self.hardDeadline = Parser.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
     }
 
     func update(json: JSON) {

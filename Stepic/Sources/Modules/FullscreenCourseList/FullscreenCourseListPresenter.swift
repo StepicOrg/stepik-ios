@@ -76,6 +76,11 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
     }
 
     func presentFullscreenCourseList(response: FullscreenCourseList.FullscreenCourseListModulePresentation.Response) {
-        self.viewController?.displayFullscreenCourseList(viewModel: .init(courseListType: response.courseListType))
+        self.viewController?.displayFullscreenCourseList(
+            viewModel: .init(
+                courseListType: response.courseListType,
+                presentationDescription: response.presentationDescription
+            )
+        )
     }
 }

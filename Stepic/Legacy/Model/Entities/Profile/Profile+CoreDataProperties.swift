@@ -55,7 +55,7 @@ extension Profile {
             self.managedId = newId as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
@@ -64,7 +64,7 @@ extension Profile {
             managedFirstName = value
         }
         get {
-             managedFirstName ?? "No first name"
+            managedFirstName ?? "No first name"
         }
     }
 
@@ -73,7 +73,7 @@ extension Profile {
             managedLastName = value
         }
         get {
-             managedLastName ?? "No last name"
+            managedLastName ?? "No last name"
         }
     }
 
@@ -82,7 +82,7 @@ extension Profile {
             managedShortBio = newValue
         }
         get {
-             managedShortBio ?? ""
+            managedShortBio ?? ""
         }
     }
 
@@ -91,7 +91,7 @@ extension Profile {
             managedDetails = newValue
         }
         get {
-             managedDetails ?? ""
+            managedDetails ?? ""
         }
     }
 
@@ -109,7 +109,7 @@ extension Profile {
             managedSubscribedForMail = value as NSNumber?
         }
         get {
-             managedSubscribedForMail?.boolValue ?? true
+            managedSubscribedForMail?.boolValue ?? true
         }
     }
 
@@ -172,7 +172,7 @@ extension Profile {
             managedIsStaff = value as NSNumber?
         }
         get {
-             managedIsStaff?.boolValue ?? false
+            managedIsStaff?.boolValue ?? false
         }
     }
 
@@ -198,18 +198,18 @@ extension Profile {
         }
     }
 
-    var emailAddressesArray: [Int] {
+    var emailAddressesArray: [EmailAddress.IdType] {
         get {
-             (self.managedEmailAddressesArray as? [Int]) ?? []
+            self.managedEmailAddressesArray as? [EmailAddress.IdType] ?? []
         }
         set {
-            self.managedEmailAddressesArray = newValue as NSObject?
+            self.managedEmailAddressesArray = NSArray(array: newValue)
         }
     }
 
     var emailAddresses: [EmailAddress] {
         get {
-             (self.managedEmailAddresses?.array as? [EmailAddress]) ?? []
+            (self.managedEmailAddresses?.array as? [EmailAddress]) ?? []
         }
         set {
             self.managedEmailAddresses = NSOrderedSet(array: newValue)
@@ -218,7 +218,7 @@ extension Profile {
 
     var user: User? {
         get {
-             managedUser
+            managedUser
         }
         set(value) {
             managedUser = value

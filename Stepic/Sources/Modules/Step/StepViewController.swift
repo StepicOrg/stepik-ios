@@ -142,9 +142,15 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
         case .error:
             self.stepView?.hideDisabledView()
             self.showPlaceholder(for: .connectionError)
-        case .disabled(let data):
+        case .disabled(let viewModel):
             self.isPlaceholderShown = false
-            self.stepView?.showDisabledView(viewModel: data)
+
+            if viewModel.disabled.isTeacher {
+                self.removeContent()
+                self.showContent()
+            }
+
+            self.stepView?.showDisabledView(viewModel: viewModel)
         }
     }
 
@@ -166,7 +172,18 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
     @objc
     private func showContent() {
-        guard case .result(let viewModel) = self.state else {
+        let stepViewModelOrNil: StepViewModel? = {
+            switch self.state {
+            case .result(let viewModel):
+                return viewModel
+            case .disabled(let viewModel) where viewModel.disabled.isTeacher:
+                return viewModel.step
+            default:
+                return nil
+            }
+        }()
+
+        guard let stepViewModel = stepViewModelOrNil else {
             return
         }
 
@@ -174,9 +191,9 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
             self.sendStepDidPassedGroup?.leave()
         }
 
-        guard let quizType = viewModel.quizType else {
+        guard let quizType = stepViewModel.quizType else {
             // Video & text steps
-            self.stepView?.configure(viewModel: viewModel, quizView: nil)
+            self.stepView?.configure(viewModel: stepViewModel, quizView: nil)
             self.requestAutoplayIfNeeded()
             return
         }
@@ -187,7 +204,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
             }
 
             let assembly = BaseQuizAssembly(
-                step: viewModel.step,
+                step: stepViewModel.step,
                 hasNextStep: self.canNavigateToNextStep,
                 output: self
             )
@@ -197,13 +214,13 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
         if let quizController = quizController {
             self.addChild(quizController)
-            self.stepView?.configure(viewModel: viewModel, quizView: quizController.view)
+            self.stepView?.configure(viewModel: stepViewModel, quizView: quizController.view)
             self.quizChildViewController = quizController
         } else {
-            let assembly = UnsupportedQuizAssembly(stepURLPath: viewModel.stepURLPath)
+            let assembly = UnsupportedQuizAssembly(stepURLPath: stepViewModel.stepURLPath)
             let viewController = assembly.makeModule()
             self.addChild(viewController)
-            self.stepView?.configure(viewModel: viewModel, quizView: viewController.view)
+            self.stepView?.configure(viewModel: stepViewModel, quizView: viewController.view)
             self.quizChildViewController = viewController
         }
     }
@@ -458,9 +475,13 @@ extension StepViewController: StepViewDelegate {
         FullscreenImageViewer.show(image: image, from: self)
     }
 
-    func stepView(_ view: StepView, didSelectDisabledStepURL url: URL) {
+    func stepView(_ view: StepView, didSelectStudentDisabledStepURL url: URL) {
         UIPasteboard.general.string = url.absoluteString
         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("Copied", comment: ""))
+    }
+
+    func stepView(_ view: StepView, didSelectTeacherDisabledStepURL url: URL) {
+        self.interactor.doURLPresentation(request: .init(url: url))
     }
 
     func stepViewDidLoadContent(_ view: StepView) {

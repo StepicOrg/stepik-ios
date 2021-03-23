@@ -217,6 +217,6 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate
         _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
     ) {
         self.updateState(newState: .loading)
-        self.interactor.doSectionsFetch(request: .init())
+        self.interactor.doSectionsFetch(request: .init(shouldUseNetwork: true))
     }
 }

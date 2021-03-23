@@ -173,7 +173,7 @@ enum Submissions {
             case .evaluation:
                 return NSLocalizedString("SubmissionsReviewStateEvaluationMessage", comment: "")
             case .finished:
-                return NSLocalizedString("SubmissionsReviewStateFinishedMessage", comment: "")
+                return ""
             case .inProgress:
                 return NSLocalizedString("SubmissionsReviewStateInProgressMessage", comment: "")
             case .cantReviewWrong:

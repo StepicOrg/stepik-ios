@@ -124,7 +124,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
 
         return CourseInfoTabReviewsViewModel(
             uniqueIdentifier: courseReview.id,
-            userName: reviewAuthor.fullName,
+            userName: FormatterHelper.username(reviewAuthor),
             dateRepresentation: FormatterHelper.dateStringWithFullMonthAndYear(courseReview.creationDate),
             text: courseReview.text.trimmingCharacters(in: .whitespacesAndNewlines),
             avatarImageURL: URL(string: reviewAuthor.avatarURL),

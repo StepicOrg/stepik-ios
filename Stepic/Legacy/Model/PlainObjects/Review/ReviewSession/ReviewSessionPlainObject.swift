@@ -46,7 +46,7 @@ extension ReviewSessionPlainObject {
         self.isTakingStarted = json[JSONKey.isTakingStarted.rawValue].boolValue
         self.isTakingFinished = json[JSONKey.isTakingFinished.rawValue].boolValue
         self.isTakingFinishedByTeacher = json[JSONKey.isTakingFinishedByTeacher.rawValue].boolValue
-        self.whenTakingFinishedByTeacher = Parser.shared.dateFromTimedateJSON(
+        self.whenTakingFinishedByTeacher = Parser.dateFromTimedateJSON(
             json[JSONKey.whenTakingFinishedByTeacher.rawValue]
         )
 

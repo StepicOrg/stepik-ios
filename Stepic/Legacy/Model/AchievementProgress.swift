@@ -24,9 +24,9 @@ final class AchievementProgress: JSONSerializable {
         self.achievement = json["achievement"].intValue
         self.score = json["score"].intValue
         self.kind = json["kind"].stringValue
-        self.createDate = Parser.shared.dateFromTimedateJSON(json["create_date"])
-        self.updateDate = Parser.shared.dateFromTimedateJSON(json["update_date"])
-        self.obtainDate = Parser.shared.dateFromTimedateJSON(json["obtain_date"])
+        self.createDate = Parser.dateFromTimedateJSON(json["create_date"])
+        self.updateDate = Parser.dateFromTimedateJSON(json["update_date"])
+        self.obtainDate = Parser.dateFromTimedateJSON(json["obtain_date"])
     }
 
     func update(json: JSON) {
@@ -35,8 +35,8 @@ final class AchievementProgress: JSONSerializable {
         self.achievement = json["achievement"].intValue
         self.score = json["score"].intValue
         self.kind = json["kind"].stringValue
-        self.createDate = Parser.shared.dateFromTimedateJSON(json["create_date"])
-        self.updateDate = Parser.shared.dateFromTimedateJSON(json["update_date"])
-        self.obtainDate = Parser.shared.dateFromTimedateJSON(json["obtain_date"])
+        self.createDate = Parser.dateFromTimedateJSON(json["create_date"])
+        self.updateDate = Parser.dateFromTimedateJSON(json["update_date"])
+        self.obtainDate = Parser.dateFromTimedateJSON(json["obtain_date"])
     }
 }

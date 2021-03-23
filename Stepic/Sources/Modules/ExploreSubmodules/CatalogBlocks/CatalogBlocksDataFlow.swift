@@ -16,10 +16,11 @@ enum CatalogBlocks {
         }
     }
 
-    /// Present catalog block content item of type full_course_lists in fullscreen
+    /// Present catalog block content item in fullscreen
     enum FullCourseListModulePresentation {
         struct Request {
-            let courseListType: CatalogBlockCourseListType
+            let courseListType: CourseListType
+            let presentationDescription: CourseList.PresentationDescription?
         }
     }
 

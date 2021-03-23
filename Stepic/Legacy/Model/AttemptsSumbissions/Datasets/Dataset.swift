@@ -1,7 +1,9 @@
 import SwiftyJSON
 import Foundation
 
-class Dataset: NSObject, NSCoding, NSCopying {
+class Dataset: NSObject, NSSecureCoding, NSCopying {
+    class var supportsSecureCoding: Bool { true }
+
     required init(json: JSON) {
         super.init()
     }

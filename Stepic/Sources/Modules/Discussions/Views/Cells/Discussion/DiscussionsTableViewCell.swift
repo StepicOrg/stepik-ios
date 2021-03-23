@@ -125,6 +125,8 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     }
     var onNewHeightUpdate: ((CGFloat) -> Void)?
 
+    var moreActionAnchorView: UIView { self.cellView.moreActionAnchorView }
+
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
 

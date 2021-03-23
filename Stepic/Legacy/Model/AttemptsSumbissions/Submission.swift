@@ -113,7 +113,7 @@ final class Submission: JSONSerializable, Hashable {
         self.feedback = self.getFeedbackFromJSON(json[JSONKey.feedback.rawValue])
         self.attemptID = json[JSONKey.attempt.rawValue].intValue
         self.sessionID = json[JSONKey.session.rawValue].int
-        self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
+        self.time = Parser.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
     }
 
     func initReply(json: JSON, stepBlockName: String) {

@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class SQLReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var code: String
 
     override var dictValue: [String: Any] {

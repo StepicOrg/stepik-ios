@@ -34,6 +34,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     private var canTriggerTopPagination = true
     private var canTriggerBottomPagination = true
 
+    private var currentPopoverAnchorData: (sourceView: UIView?, sourceRect: CGRect)?
+
     // swiftlint:disable:next weak_delegate
     private lazy var discussionsTableDelegate: DiscussionsTableViewDataSource = {
         let tableDataSource = DiscussionsTableViewDataSource()
@@ -494,11 +496,16 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
 
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
 
-        if let popoverPresentationController = alert.popoverPresentationController,
-           let indexPath = self.discussionsTableDelegate.indexPath(for: comment.id),
-           let cell = self.discussionsView?.cellForRow(at: indexPath) {
-            popoverPresentationController.sourceView = cell
-            popoverPresentationController.sourceRect = cell.bounds
+        if let popoverPresentationController = alert.popoverPresentationController {
+            guard let popoverAnchorData = self.currentPopoverAnchorData else {
+                return
+            }
+
+            popoverPresentationController.sourceView = popoverAnchorData.sourceView
+            popoverPresentationController.sourceRect = popoverAnchorData.sourceRect
+            popoverPresentationController.permittedArrowDirections = [.up]
+
+            self.currentPopoverAnchorData = nil
         }
 
         self.present(alert, animated: true)
@@ -561,8 +568,10 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
 
     func discussionsTableViewDataSource(
         _ dataSource: DiscussionsTableViewDataSource,
-        didSelectMoreAction comment: DiscussionsCommentViewModel
+        didSelectMoreAction comment: DiscussionsCommentViewModel,
+        anchorView: UIView
     ) {
+        self.currentPopoverAnchorData = (anchorView, anchorView.bounds)
         self.interactor.doCommentActionSheetPresentation(request: .init(commentID: comment.id))
     }
 
@@ -606,6 +615,10 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         at indexPath: IndexPath,
         cell: UITableViewCell
     ) {
+        self.currentPopoverAnchorData = (
+            cell,
+            CGRect(x: cell.bounds.midX, y: cell.bounds.midY, width: 0, height: 0)
+        )
         self.interactor.doCommentActionSheetPresentation(request: .init(commentID: comment.id))
     }
 }

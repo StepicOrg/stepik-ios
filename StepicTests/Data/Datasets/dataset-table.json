@@ -1,0 +1,15 @@
+{
+    "description": "",
+    "rows": [
+        "Traffic lights",
+        "Women's dress",
+        "Sun",
+        "Grass"
+    ],
+    "columns": [
+        "Red",
+        "Blue",
+        "Green"
+    ],
+    "is_checkbox": true
+}

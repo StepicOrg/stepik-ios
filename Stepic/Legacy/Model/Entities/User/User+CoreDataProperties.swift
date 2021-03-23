@@ -163,7 +163,7 @@ extension User {
     }
 
     var fullName: String {
-        "\(self.firstName) \(self.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
+        "\(self.firstName) \(self.lastName)".trimmed()
     }
 
     var avatarURL: String {
@@ -223,19 +223,19 @@ extension User {
 
     var socialProfilesArray: [SocialProfile.IdType] {
         get {
-            (self.managedSocialProfilesArray as? [Int]) ?? []
+            self.managedSocialProfilesArray as? [SocialProfile.IdType] ?? []
         }
         set {
-            self.managedSocialProfilesArray = newValue as NSObject?
+            self.managedSocialProfilesArray = NSArray(array: newValue)
         }
     }
 
     var createdCoursesArray: [Course.IdType] {
         get {
-            (self.managedCreatedCoursesArray as? [Int]) ?? []
+            self.managedCreatedCoursesArray as? [Course.IdType] ?? []
         }
         set {
-            self.managedCreatedCoursesArray = newValue as NSObject?
+            self.managedCreatedCoursesArray = NSArray(array: newValue)
         }
     }
 

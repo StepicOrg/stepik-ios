@@ -4,18 +4,21 @@ import SwiftyJSON
 final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
     private static let defaultPosition = 1
     private static let defaultLanguage = "en"
+    private static let defaultPlatform = PlatformType.ios.rawValue
     private static let defaultIsTitleVisible = true
 
-    var id: Int = 0
-    var position: Int = CatalogBlock.defaultPosition
-    var title: String = ""
-    var language: String = CatalogBlock.defaultLanguage
-    var descriptionString: String = ""
-    var kindString: String = ""
-    var appearanceString: String = ""
-    var isTitleVisible: Bool = CatalogBlock.defaultIsTitleVisible
-    var content: [CatalogBlockContentItem] = []
+    var id = 0
+    var position = CatalogBlock.defaultPosition
+    var title = ""
+    var language = CatalogBlock.defaultLanguage
+    var platform = CatalogBlock.defaultPlatform
+    var descriptionString = ""
+    var kindString = ""
+    var appearanceString = ""
+    var isTitleVisible = CatalogBlock.defaultIsTitleVisible
+    var content = [CatalogBlockContentItem]()
 
+    var platformType: PlatformType? { PlatformType(rawValue: self.platform) }
     var kind: CatalogBlockKind? { CatalogBlockKind(rawValue: self.kindString) }
     var appearance: CatalogBlockAppearance? { CatalogBlockAppearance(rawValue: self.appearanceString) }
 
@@ -25,6 +28,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         position: \(self.position), \
         title: \(self.title), \
         language: \(self.language), \
+        platform: \(self.platform), \
         description: \(self.descriptionString), \
         kind: \(self.kindString), \
         appearance: \(self.appearanceString), \
@@ -38,6 +42,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         position: Int,
         title: String,
         language: String,
+        platform: Int,
         descriptionString: String,
         kindString: String,
         appearanceString: String,
@@ -48,6 +53,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         self.position = position
         self.title = title
         self.language = language
+        self.platform = platform
         self.descriptionString = descriptionString
         self.kindString = kindString
         self.appearanceString = appearanceString
@@ -64,6 +70,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         self.position = json[JSONKey.position.rawValue].int ?? Self.defaultPosition
         self.title = json[JSONKey.title.rawValue].stringValue
         self.language = json[JSONKey.language.rawValue].string ?? Self.defaultLanguage
+        self.platform = json[JSONKey.platform.rawValue].int ?? Self.defaultPlatform
         self.descriptionString = json[JSONKey.description.rawValue].stringValue
         self.kindString = json[JSONKey.kind.rawValue].stringValue
         self.appearanceString = json[JSONKey.appearance.rawValue].stringValue
@@ -78,6 +85,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         hasher.combine(self.position)
         hasher.combine(self.title)
         hasher.combine(self.language)
+        hasher.combine(self.platform)
         hasher.combine(self.descriptionString)
         hasher.combine(self.kindString)
         hasher.combine(self.appearanceString)
@@ -92,6 +100,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         if lhs.position != rhs.position { return false }
         if lhs.title != rhs.title { return false }
         if lhs.language != rhs.language { return false }
+        if lhs.platform != rhs.platform { return false }
         if lhs.descriptionString != rhs.descriptionString { return false }
         if lhs.kindString != rhs.kindString { return false }
         if lhs.appearanceString != rhs.appearanceString { return false }
@@ -105,6 +114,7 @@ final class CatalogBlock: JSONSerializable, CustomStringConvertible, Hashable {
         case position
         case title
         case language
+        case platform
         case description
         case kind
         case appearance

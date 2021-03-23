@@ -13,6 +13,14 @@ import SwiftyJSON
 final class Step: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
+    var needsPlanType: CourseType? {
+        guard let needsPlanStringValue = self.needsPlan else {
+            return nil
+        }
+
+        return CourseType(rawValue: needsPlanStringValue)
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
@@ -28,6 +36,7 @@ final class Step: NSManagedObject, IDFetchable {
         self.isEnabled = json[JSONKey.isEnabled.rawValue].bool ?? true
         self.instructionID = json[JSONKey.instruction.rawValue].int
         self.instructionType = json[JSONKey.instructionType.rawValue].string
+        self.needsPlan = json[JSONKey.needsPlan.rawValue].string
 
         if let doReview = json[JSONKey.actions.rawValue][JSONKey.doReview.rawValue].string {
             self.hasReview = (doReview != "")
@@ -86,6 +95,7 @@ final class Step: NSManagedObject, IDFetchable {
         if self.canEdit != object.canEdit { return false }
         if self.isEnabled != object.isEnabled { return false }
         if self.instructionID != object.instructionID { return false }
+        if self.needsPlan != object.needsPlan { return false }
 
         if !self.block.equals(object.block) { return false }
 
@@ -143,5 +153,6 @@ final class Step: NSManagedObject, IDFetchable {
         case isEnabled = "is_enabled"
         case instruction
         case instructionType = "instruction_type"
+        case needsPlan = "needs_plan"
     }
 }

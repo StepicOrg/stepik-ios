@@ -2,6 +2,8 @@ import Foundation
 import SwiftDate
 
 enum FormatterHelper {
+    // MARK: Numbers
+
     /// Format number; 1000 -> "1K", 900 -> "900"
     static func longNumber(_ number: Int) -> String {
         number >= 1000
@@ -30,10 +32,10 @@ enum FormatterHelper {
         return hasDecimals ? String(format: "%.2f", score) : "\(Int(score))"
     }
 
-    /// Format Submission's score with decimal points if has decimals; 0.75 -> "0.75", 1.0 -> "1"
+    /// Format Submission's score with 2 decimal points if has decimals; 0.75 -> "0.75", 1.0 -> "1"
     static func submissionScore(_ score: Float) -> String {
         let hasDecimals = score.truncatingRemainder(dividingBy: 1) != 0
-        return hasDecimals ? "\(score)" : "\(Int(score))"
+        return hasDecimals ? String(format: "%.2f", score) : "\(Int(score))"
     }
 
     static func megabytesInBytes(_ bytes: UInt64, checkForLessThanOne: Bool = true) -> String {
@@ -57,6 +59,8 @@ enum FormatterHelper {
 
         return "\(priceString) \(currencySymbol)"
     }
+
+    // MARK: Count
 
     /// Format courses count with localized and pluralized suffix; 1 -> "1 course", 5 -> "5 courses"
     static func coursesCount(_ count: Int) -> String {
@@ -144,6 +148,8 @@ enum FormatterHelper {
         }
     }
 
+    // MARK: Date
+
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"
     static func daysCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(
@@ -224,6 +230,8 @@ enum FormatterHelper {
         )
     }
 
+    // MARK: Video
+
     /// Format download video quality to a string representation; `DownloadVideoQuality.medium` -> "360p"
     static func downloadVideoQualityInProgressiveScan(_ quality: DownloadVideoQuality) -> String {
         "\(quality.rawValue)p"
@@ -264,6 +272,8 @@ enum FormatterHelper {
         }
     }
 
+    // MARK: Titles
+
     static func prettyVersion(versionNumber: String?, buildNumber: String?) -> String {
         guard let version = versionNumber else {
             return NSLocalizedString("AppVersionUnknownTitle", comment: "")
@@ -285,5 +295,16 @@ enum FormatterHelper {
         }
 
         return "\(section.position).\(unit.position) \(lesson.title)"
+    }
+
+    /// Format username with full name otherwise with user id.
+    static func username(_ user: User) -> String {
+        user.fullName.isEmpty ? "User \(user.id)" : user.fullName
+    }
+
+    /// Format username with full name otherwise with user id.
+    static func username(_ userInfo: UserInfo) -> String {
+        let fullName = "\(userInfo.firstName) \(userInfo.lastName)".trimmed()
+        return fullName.isEmpty ? "User \(userInfo.id)" : fullName
     }
 }

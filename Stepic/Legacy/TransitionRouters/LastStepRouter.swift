@@ -76,6 +76,8 @@ final class LastStepRouter {
         skipSyllabus: Bool = false,
         courseViewSource: AnalyticsEvent.CourseViewSource = .unknown
     ) {
+        SVProgressHUD.show()
+
         let shouldOpenInAdaptiveMode = isAdaptive
             ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
         if shouldOpenInAdaptiveMode {
@@ -233,15 +235,15 @@ final class LastStepRouter {
             checkUnitAndNavigate(for: unitID)
         } else {
             // If last step does not exist then take first section and its first unit
-            guard let sectionID = course.sectionsArray.first,
-                  let sections = try? Section.getSections(sectionID),
-                  let cachedSection = sections.first else {
+            guard let sectionID = course.sectionsArray.first else {
                 return openSyllabus()
             }
 
+            let cachedSection = try? Section.getSections(sectionID).first
+
             ApiDataDownloader.sections.retrieve(
                 ids: [sectionID],
-                existing: [cachedSection]
+                existing: cachedSection != nil ? [cachedSection.require()] : []
             ).done { section in
                 if let unitID = section.first?.unitsArray.first {
                     checkUnitAndNavigate(for: unitID)

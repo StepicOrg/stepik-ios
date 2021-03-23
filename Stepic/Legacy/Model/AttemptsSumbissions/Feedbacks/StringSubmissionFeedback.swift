@@ -2,6 +2,8 @@ import SwiftyJSON
 import Foundation
 
 final class StringSubmissionFeedback: SubmissionFeedback {
+    override class var supportsSecureCoding: Bool { true }
+
     var string: String
 
     override var hash: Int {

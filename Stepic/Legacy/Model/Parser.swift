@@ -29,12 +29,8 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-final class Parser: NSObject {
-    static var shared = Parser()
-
-    override private init() {}
-
-    func dateFromTimedateJSON(_ json: JSON) -> Date? {
+enum Parser {
+    static func dateFromTimedateJSON(_ json: JSON) -> Date? {
         if let date = json.string {
             return Date(timeIntervalSince1970: TimeInterval(timeString: date))
         } else {
@@ -42,7 +38,16 @@ final class Parser: NSObject {
         }
     }
 
-    func timedateStringFromDate(date: Date) -> String {
+    static func colorFromHex6StringJSON(_ json: JSON) -> UIColor? {
+        guard let hexStringValue = json.string,
+              let hexUIntValue = UInt32(hexStringValue, radix: 16) else {
+            return nil
+        }
+
+        return UIColor(hex6: hexUIntValue)
+    }
+
+    static func timedateStringFromDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -50,7 +55,7 @@ final class Parser: NSObject {
         return dateFormatter.string(from: date)
     }
 
-    func codeFromURL(_ url: URL) -> String? {
+    static func codeFromURL(_ url: URL) -> String? {
         url.getKeyVals()?["code"]
     }
 }

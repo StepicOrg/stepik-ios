@@ -90,8 +90,8 @@ final class Course: NSManagedObject, IDFetchable {
         self.courseDescription = json[JSONKey.description.rawValue].stringValue
         self.coverURLString = "\(StepikApplicationsInfo.stepikURL)" + json[JSONKey.cover.rawValue].stringValue
 
-        self.beginDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
-        self.endDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.lastDeadline.rawValue])
+        self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
+        self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.lastDeadline.rawValue])
 
         self.enrolled = json[JSONKey.enrollment.rawValue].int != nil
         self.featured = json[JSONKey.isFeatured.rawValue].boolValue

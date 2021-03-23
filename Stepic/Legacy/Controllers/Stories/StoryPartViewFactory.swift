@@ -1,11 +1,3 @@
-//
-//  StoryPartViewFactory.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 16.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 final class StoryPartViewFactory {
@@ -22,14 +14,23 @@ final class StoryPartViewFactory {
 
         switch type {
         case .text:
-            guard let storyPart = storyPart as? TextStoryPart else {
+            guard let textStoryPart = storyPart as? TextStoryPart else {
                 return nil
             }
 
-            let viewToAnimate: TextStoryView = .fromNib()
-            viewToAnimate.setup(storyPart: storyPart, urlNavigationDelegate: self.urlNavigationDelegate)
+            let textStoryView: TextStoryView = .fromNib()
+            textStoryView.configure(storyPart: textStoryPart, urlNavigationDelegate: self.urlNavigationDelegate)
 
-            return viewToAnimate
+            return textStoryView
+        case .feedback:
+            guard let feedbackStoryPart = storyPart as? FeedbackStoryPart else {
+                return nil
+            }
+
+            let feedbackStoryView = FeedbackStoryView()
+            feedbackStoryView.configure(storyPart: feedbackStoryPart)
+
+            return feedbackStoryView
         }
     }
 }

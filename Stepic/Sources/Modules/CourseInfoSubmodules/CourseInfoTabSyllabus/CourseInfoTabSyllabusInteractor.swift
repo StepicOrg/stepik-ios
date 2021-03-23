@@ -116,7 +116,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             strongSelf.fetchSemaphore.wait()
 
-            let shouldUseNetwork = strongSelf.isOnline && strongSelf.didLoadFromCache
+            let shouldUseNetwork = request.shouldUseNetwork || (strongSelf.isOnline && strongSelf.didLoadFromCache)
             print("CourseInfoTabSyllabusInteractor :: start fetching syllabus, isOnline = \(shouldUseNetwork)")
 
             strongSelf.fetchSyllabusInAppropriateMode(course: course, isOnline: shouldUseNetwork).done { response in
@@ -139,6 +139,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                         if strongSelf.isOnline {
                             strongSelf.doSectionsFetch(request: .init())
+                        } else if isEmptyCacheFetchResult && !strongSelf.networkReachabilityService.isReachable {
+                            strongSelf.presenter.presentCourseSyllabus(
+                                response: .init(result: .failure(Error.fetchFailed))
+                            )
                         }
                     }
 

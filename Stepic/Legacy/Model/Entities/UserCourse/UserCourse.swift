@@ -25,7 +25,7 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
         self.courseID = json[JSONKey.course.rawValue].intValue
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
-        self.lastViewed = Parser.shared.dateFromTimedateJSON(json[JSONKey.lastViewed.rawValue]) ?? Date()
+        self.lastViewed = Parser.dateFromTimedateJSON(json[JSONKey.lastViewed.rawValue]) ?? Date()
     }
 
     func hasEqualId(json: JSON) -> Bool {
