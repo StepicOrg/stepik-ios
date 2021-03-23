@@ -53,13 +53,13 @@ extension Section {
             self.managedId = newId as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
     var progressId: String? {
         get {
-             managedProgressId
+            managedProgressId
         }
         set(value) {
             managedProgressId = value
@@ -68,7 +68,7 @@ extension Section {
 
     var testSectionAction: String? {
         get {
-             managedTestSectionAction
+            managedTestSectionAction
         }
         set(value) {
             managedTestSectionAction = value
@@ -80,7 +80,7 @@ extension Section {
             self.managedPosition = value as NSNumber?
         }
         get {
-             managedPosition?.intValue ?? -1
+            managedPosition?.intValue ?? -1
         }
     }
 
@@ -89,7 +89,7 @@ extension Section {
             self.managedTitle = value
         }
         get {
-             managedTitle ?? "No title"
+            managedTitle ?? "No title"
         }
     }
 
@@ -98,7 +98,7 @@ extension Section {
             self.managedBeginDate = date
         }
         get {
-             managedBeginDate
+            managedBeginDate
         }
     }
 
@@ -107,7 +107,7 @@ extension Section {
             self.managedEndDate = newValue
         }
         get {
-             managedEndDate
+            managedEndDate
         }
     }
 
@@ -116,7 +116,7 @@ extension Section {
             self.managedSoftDeadline = date
         }
         get {
-             managedSoftDeadline
+            managedSoftDeadline
         }
     }
 
@@ -125,7 +125,7 @@ extension Section {
             self.managedHardDeadline = date
         }
         get {
-             managedHardDeadline
+            managedHardDeadline
         }
     }
 
@@ -134,7 +134,7 @@ extension Section {
             self.managedActive = value as NSNumber?
         }
         get {
-             managedActive?.boolValue ?? false
+            managedActive?.boolValue ?? false
         }
     }
 
@@ -143,7 +143,7 @@ extension Section {
             self.managedIsExam = value as NSNumber?
         }
         get {
-             managedIsExam?.boolValue ?? false
+            managedIsExam?.boolValue ?? false
         }
     }
 
@@ -152,13 +152,13 @@ extension Section {
             self.managedCourseId = newId as NSNumber?
         }
         get {
-             managedCourseId?.intValue ?? -1
+            managedCourseId?.intValue ?? -1
         }
     }
 
     var course: Course? {
         get {
-             managedCourse
+            managedCourse
         }
         set {
             managedCourse = newValue
@@ -167,7 +167,7 @@ extension Section {
 
     var progress: Progress? {
         get {
-             managedProgress
+            managedProgress
         }
         set(value) {
             managedProgress = value
@@ -176,25 +176,25 @@ extension Section {
 
     var units: [Unit] {
         get {
-             (managedUnits?.array as? [Unit]) ?? []
+            (managedUnits?.array as? [Unit]) ?? []
         }
         set(value) {
             managedUnits = NSOrderedSet(array: value)
         }
     }
 
-    var unitsArray: [Int] {
-        set(value) {
-            self.managedUnitsArray = value as NSObject?
-        }
+    var unitsArray: [Unit.IdType] {
         get {
-             (self.managedUnitsArray as? [Int]) ?? []
+            self.managedUnitsArray as? [Unit.IdType] ?? []
+        }
+        set {
+            self.managedUnitsArray = NSArray(array: newValue)
         }
     }
 
     var discountingPolicy: String? {
         get {
-             self.managedDiscountingPolicy
+            self.managedDiscountingPolicy
         }
         set {
             self.managedDiscountingPolicy = newValue
@@ -207,7 +207,7 @@ extension Section {
 
     var isRequirementSatisfied: Bool {
         get {
-             self.managedIsRequirementSatisfied?.boolValue ?? true
+            self.managedIsRequirementSatisfied?.boolValue ?? true
         }
         set {
             self.managedIsRequirementSatisfied = newValue as NSNumber?
@@ -216,7 +216,7 @@ extension Section {
 
     var requiredSectionID: Section.IdType? {
         get {
-             self.managedRequiredSectionID?.intValue
+            self.managedRequiredSectionID?.intValue
         }
         set {
             self.managedRequiredSectionID = newValue as NSNumber?
@@ -225,7 +225,7 @@ extension Section {
 
     var requiredPercent: Int {
         get {
-             self.managedRequiredPercent?.intValue ?? 0
+            self.managedRequiredPercent?.intValue ?? 0
         }
         set {
             self.managedRequiredPercent = newValue as NSNumber?

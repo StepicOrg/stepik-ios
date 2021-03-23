@@ -1,7 +1,9 @@
 import Foundation
 import SwiftyJSON
 
-class Reply: NSObject, NSCoding {
+class Reply: NSObject, NSSecureCoding {
+    class var supportsSecureCoding: Bool { true }
+
     var dictValue: [String: Any] { [:] }
 
     override var description: String { "Reply(\(self.dictValue))" }

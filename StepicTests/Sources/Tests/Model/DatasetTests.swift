@@ -126,10 +126,10 @@ class DatasetSpec: QuickSpec {
                 }
             }
 
-            describe("NSCoding") {
-                func makeTemporaryPath(name: String) -> String {
+            describe("NSSecureCoding") {
+                func makeTemporaryFile(name: String) -> URL {
                     let temporaryDirectoryPath = NSTemporaryDirectory() as NSString
-                    return temporaryDirectoryPath.appendingPathComponent(name)
+                    return URL(fileURLWithPath: temporaryDirectoryPath.appendingPathComponent(name))
                 }
 
                 it("choice dataset encoded and decoded") {
@@ -137,12 +137,19 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"is_multiple_choice":false,"options":["502","5002","520","52"]}"#)
                     let choiceDataset = ChoiceDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "choice-dataset")
+                    let fileURL = makeTemporaryFile(name: "choice-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(choiceDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: choiceDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedChoiceDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! ChoiceDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedChoiceDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! ChoiceDataset
 
                     // Then
                     expect(unarchivedChoiceDataset) == choiceDataset
@@ -185,16 +192,23 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: jsonString)
                     let fillBlanksDataset = FillBlanksDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "fill-blanks-dataset")
+                    let fileURL = makeTemporaryFile(name: "fill-blanks-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(fillBlanksDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: fillBlanksDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FillBlanksDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedFillBlanksDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! FillBlanksDataset
 
                     // Then
-                    expect(unarchivedDataset) == fillBlanksDataset
-                    expect(unarchivedDataset.components.count) == 4
+                    expect(unarchivedFillBlanksDataset) == fillBlanksDataset
+                    expect(unarchivedFillBlanksDataset.components.count) == 4
                 }
 
                 it("string dataset encoded and decoded") {
@@ -202,12 +216,19 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"dataset": "string value"}"#)
                     let stringDataset = StringDataset(json: json["dataset"])
 
-                    let path = makeTemporaryPath(name: "string-dataset")
+                    let fileURL = makeTemporaryFile(name: "string-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(stringDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: stringDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedStringDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! StringDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedStringDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! StringDataset
 
                     // Then
                     expect(unarchivedStringDataset) == stringDataset
@@ -219,16 +240,25 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"options": ["Four <p><strong>HTML tags in items enabled.</strong></p>", "Three", "One", "Two"]}"#)
                     let sortingDataset = SortingDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "sorting-dataset")
+                    let fileURL = makeTemporaryFile(name: "sorting-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(sortingDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: sortingDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedSortingDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! SortingDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedSortingDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! SortingDataset
 
                     // Then
                     expect(unarchivedSortingDataset) == sortingDataset
-                    expect(unarchivedSortingDataset.options) == ["Four <p><strong>HTML tags in items enabled.</strong></p>", "Three", "One", "Two"]
+                    expect(unarchivedSortingDataset.options) == [
+                        "Four <p><strong>HTML tags in items enabled.</strong></p>", "Three", "One", "Two"
+                    ]
                 }
 
                 it("free answer dataset encoded and decoded") {
@@ -236,12 +266,19 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"is_attachments_enabled": false, "is_html_enabled": true}"#)
                     let freeAnswerDataset = FreeAnswerDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "freeAnswer-dataset")
+                    let fileURL = makeTemporaryFile(name: "freeAnswer-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(freeAnswerDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: freeAnswerDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedFreeAnswerDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FreeAnswerDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedFreeAnswerDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! FreeAnswerDataset
 
                     // Then
                     expect(unarchivedFreeAnswerDataset) == freeAnswerDataset
@@ -254,12 +291,19 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"pairs": [{"first": "Sky", "second": "Green"}, {"first": "Sun", "second": "Orange"}, {"first": "Grass", "second": "Blue"}]}"#)
                     let matchingDataset = MatchingDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "matching-dataset")
+                    let fileURL = makeTemporaryFile(name: "matching-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(matchingDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: matchingDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedMatchingDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! MatchingDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedMatchingDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! MatchingDataset
 
                     // Then
                     expect(unarchivedMatchingDataset) == matchingDataset
@@ -272,12 +316,19 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"description":"Table:","rows":["Traffic lights","Women's dress","Sun","Grass"],"columns":["Red","Blue","Green"],"is_checkbox":true}"#)
                     let tableDataset = TableDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "table-dataset")
+                    let fileURL = makeTemporaryFile(name: "table-dataset")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(tableDataset, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: tableDataset,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedTableDataset = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! TableDataset
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedTableDataset = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! TableDataset
 
                     // Then
                     expect(unarchivedTableDataset) == tableDataset

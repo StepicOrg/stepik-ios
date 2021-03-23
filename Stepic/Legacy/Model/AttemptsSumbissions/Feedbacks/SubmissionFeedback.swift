@@ -1,7 +1,9 @@
 import SwiftyJSON
 import Foundation
 
-class SubmissionFeedback: NSObject, NSCoding {
+class SubmissionFeedback: NSObject, NSSecureCoding {
+    class var supportsSecureCoding: Bool { true }
+
     override init() {
         super.init()
     }

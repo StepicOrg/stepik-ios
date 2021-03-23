@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class TableReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var choices: [TableReplyChoice]
 
     override var dictValue: [String: Any] {
@@ -81,7 +83,9 @@ final class TableReply: Reply {
 
 // MARK: - TableReplyChoice -
 
-final class TableReplyChoice: NSObject, NSCoding {
+final class TableReplyChoice: NSObject, NSSecureCoding {
+    static var supportsSecureCoding: Bool { true }
+
     var rowName: String
     var columns: [Column]
 
@@ -165,7 +169,10 @@ final class TableReplyChoice: NSObject, NSCoding {
 
     // MARK: - Column
 
-    @objc(TableReplyChoiceColumn)final class Column: NSObject, NSCoding {
+    @objc(TableReplyChoiceColumn)
+    final class Column: NSObject, NSSecureCoding {
+        static var supportsSecureCoding: Bool { true }
+
         var name: String
         var answer: Bool
 

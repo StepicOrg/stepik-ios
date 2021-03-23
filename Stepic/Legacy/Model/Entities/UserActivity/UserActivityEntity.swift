@@ -19,10 +19,10 @@ final class UserActivityEntity: NSManagedObject {
 
     var pins: [Int] {
         get {
-            (self.managedPinsArray as? [Int]) ?? []
+            self.managedPinsArray as? [Int] ?? []
         }
         set {
-            self.managedPinsArray = newValue as NSObject?
+            self.managedPinsArray = NSArray(array: newValue)
         }
     }
 

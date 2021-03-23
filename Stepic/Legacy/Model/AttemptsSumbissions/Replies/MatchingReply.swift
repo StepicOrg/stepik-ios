@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class MatchingReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var ordering: [Int]
 
     override var dictValue: [String: Any] {
