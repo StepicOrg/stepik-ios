@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class StringDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     var string: String
 
     override var hash: Int {

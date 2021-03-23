@@ -9,7 +9,7 @@
         <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedAssignments" inverseEntity="Unit" syncable="YES"/>
     </entity>
     <entity name="AttemptEntity" representedClassName=".AttemptEntity" syncable="YES">
-        <attribute name="managedDataset" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName=".Dataset" syncable="YES"/>
+        <attribute name="managedDataset" optional="YES" attributeType="Transformable" valueTransformerName="DatasetValueTransformer" customClassName=".Dataset" syncable="YES"/>
         <attribute name="managedDatasetURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
