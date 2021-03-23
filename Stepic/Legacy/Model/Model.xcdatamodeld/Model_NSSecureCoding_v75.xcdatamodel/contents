@@ -324,7 +324,7 @@
         <attribute name="managedHint" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedLocal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedReply" optional="YES" attributeType="Transformable" customClassName=".Reply" syncable="YES"/>
+        <attribute name="managedReply" optional="YES" attributeType="Transformable" valueTransformerName="ReplyValueTransformer" customClassName=".Reply" syncable="YES"/>
         <attribute name="managedScore" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>

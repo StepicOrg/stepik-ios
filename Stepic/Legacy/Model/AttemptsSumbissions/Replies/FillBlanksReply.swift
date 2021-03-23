@@ -2,6 +2,8 @@ import SwiftyJSON
 import Foundation
 
 final class FillBlanksReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var blanks: [String]
 
     override var dictValue: [String: Any] {

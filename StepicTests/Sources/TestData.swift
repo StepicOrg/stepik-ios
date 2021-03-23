@@ -50,6 +50,52 @@ enum TestData {
         self.loadJSON(path: "feedback-fill-blanks")
     }
 
+    // MARK: Replies
+
+    static var choiceReply: JSON {
+        self.loadJSON(path: "reply-choice")
+    }
+
+    static var codeReply: JSON {
+        self.loadJSON(path: "reply-code")
+    }
+
+    static var fillBlanksReply: JSON {
+        self.loadJSON(path: "reply-fill-blanks")
+    }
+
+    static var freeAnswerReply: JSON {
+        self.loadJSON(path: "reply-free-answer")
+    }
+
+    static var matchingReply: JSON {
+        self.loadJSON(path: "reply-matching")
+    }
+
+    static var mathReply: JSON {
+        self.loadJSON(path: "reply-math")
+    }
+
+    static var numberReply: JSON {
+        self.loadJSON(path: "reply-number")
+    }
+
+    static var sortingReply: JSON {
+        self.loadJSON(path: "reply-sorting")
+    }
+
+    static var sqlReply: JSON {
+        self.loadJSON(path: "reply-sorting")
+    }
+
+    static var tableReply: JSON {
+        self.loadJSON(path: "reply-table")
+    }
+
+    static var textReply: JSON {
+        self.loadJSON(path: "reply-text")
+    }
+
     // MARK: Private API
 
     private static func loadJSON(path: String) -> JSON {

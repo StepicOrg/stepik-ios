@@ -107,6 +107,283 @@ class SubmissionEntityTests: QuickSpec {
                     expect(fetchedSubmission.feedback!.isEqual(stringFeedback)) == true
                 }
             }
+
+            context("ReplyValueTransformer") {
+                it("persists SubmissionEntity with choice reply") {
+                    // Given
+                    let choiceReply = ChoiceReply(json: TestData.choiceReply)
+                    let submission = makeSubmission(feedback: nil, reply: choiceReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(choiceReply)) == true
+                }
+
+                it("persists SubmissionEntity with code reply") {
+                    // Given
+                    let codeReply = CodeReply(json: TestData.codeReply)
+                    let submission = makeSubmission(feedback: nil, reply: codeReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(codeReply)) == true
+                }
+
+                it("persists SubmissionEntity with fill blanks reply") {
+                    // Given
+                    let fillBlanksReply = FillBlanksReply(json: TestData.fillBlanksReply)
+                    let submission = makeSubmission(feedback: nil, reply: fillBlanksReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(fillBlanksReply)) == true
+                }
+
+                it("persists SubmissionEntity with free answer reply") {
+                    // Given
+                    let freeAnswerReply = FreeAnswerReply(json: TestData.freeAnswerReply)
+                    let submission = makeSubmission(feedback: nil, reply: freeAnswerReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(freeAnswerReply)) == true
+                }
+
+                it("persists SubmissionEntity with matching reply") {
+                    // Given
+                    let matchingReply = MatchingReply(json: TestData.matchingReply)
+                    let submission = makeSubmission(feedback: nil, reply: matchingReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(matchingReply)) == true
+                }
+
+                it("persists SubmissionEntity with math reply") {
+                    // Given
+                    let mathReply = MathReply(json: TestData.mathReply)
+                    let submission = makeSubmission(feedback: nil, reply: mathReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(mathReply)) == true
+                }
+
+                it("persists SubmissionEntity with number reply") {
+                    // Given
+                    let numberReply = NumberReply(json: TestData.numberReply)
+                    let submission = makeSubmission(feedback: nil, reply: numberReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(numberReply)) == true
+                }
+
+                it("persists SubmissionEntity with sorting reply") {
+                    // Given
+                    let sortingReply = SortingReply(json: TestData.sortingReply)
+                    let submission = makeSubmission(feedback: nil, reply: sortingReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(sortingReply)) == true
+                }
+
+                it("persists SubmissionEntity with SQL reply") {
+                    // Given
+                    let sqlReply = SQLReply(json: TestData.sqlReply)
+                    let submission = makeSubmission(feedback: nil, reply: sqlReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(sqlReply)) == true
+                }
+
+                it("persists SubmissionEntity with table reply") {
+                    // Given
+                    let tableReply = TableReply(json: TestData.tableReply)
+                    let submission = makeSubmission(feedback: nil, reply: tableReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(tableReply)) == true
+                }
+
+                it("persists SubmissionEntity with text reply") {
+                    // Given
+                    let textReply = TextReply(json: TestData.textReply)
+                    let submission = makeSubmission(feedback: nil, reply: textReply)
+
+                    // When
+                    _ = SubmissionEntity(
+                        submission: submission,
+                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    )
+                    testCoreDataStack.saveContext()
+
+                    // Then
+                    let request = SubmissionEntity.fetchRequest
+                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+
+                    let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
+                    expect(submissions.count) == 1
+
+                    let fetchedSubmission = submissions[0]
+
+                    expect(fetchedSubmission.plainObject) == submission
+                    expect(fetchedSubmission.reply!.isEqual(textReply)) == true
+                }
+            }
         }
     }
 }

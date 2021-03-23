@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class FreeAnswerReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var text: String
 
     override var dictValue: [String: Any] {
