@@ -89,10 +89,10 @@ final class CatalogBlockEntity: NSManagedObject {
 
     var content: [CatalogBlockContentItem] {
         get {
-            (self.managedContent as? [CatalogBlockContentItem]) ?? []
+            self.managedContent as? [CatalogBlockContentItem] ?? []
         }
         set {
-            self.managedContent = newValue as NSObject?
+            self.managedContent = NSArray(array: newValue)
         }
     }
 
@@ -118,7 +118,7 @@ extension CatalogBlockEntity {
             content: self.content
         )
     }
-
+    
     convenience init(catalogBlock: CatalogBlock, managedObjectContext: NSManagedObjectContext) {
         guard let entity = NSEntityDescription.entity(
             forEntityName: "CatalogBlockEntity", in: managedObjectContext

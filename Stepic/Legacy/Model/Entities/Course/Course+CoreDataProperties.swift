@@ -451,21 +451,21 @@ extension Course {
         managedInstructors = mutableItems.copy() as? NSOrderedSet
     }
 
-    var sectionsArray: [Int] {
-        set(value) {
-            self.managedSectionsArray = value as NSObject?
-        }
+    var sectionsArray: [Section.IdType] {
         get {
-             (self.managedSectionsArray as? [Int]) ?? []
+            self.managedSectionsArray as? [Section.IdType] ?? []
+        }
+        set {
+            self.managedSectionsArray = NSArray(array: newValue)
         }
     }
 
-    var instructorsArray: [Int] {
-        set(value) {
-            self.managedInstructorsArray = value as NSObject?
-        }
+    var instructorsArray: [User.IdType] {
         get {
-             (self.managedInstructorsArray as? [Int]) ?? []
+            self.managedInstructorsArray as? [User.IdType] ?? []
+        }
+        set {
+            self.managedInstructorsArray = NSArray(array: newValue)
         }
     }
 
@@ -479,12 +479,12 @@ extension Course {
         }
     }
 
-    var authorsArray: [Int] {
+    var authorsArray: [User.IdType] {
         get {
-             (self.managedAuthorsArray as? [Int]) ?? []
+            self.managedAuthorsArray as? [User.IdType] ?? []
         }
         set {
-            self.managedAuthorsArray = newValue as NSObject?
+            self.managedAuthorsArray = NSArray(array: newValue)
         }
     }
 

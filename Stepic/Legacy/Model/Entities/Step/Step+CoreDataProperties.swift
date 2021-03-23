@@ -187,12 +187,16 @@ extension Step {
         }
     }
 
-    var discussionThreadsArray: [String]? {
+    var discussionThreadsArray: [DiscussionThread.IdType]? {
         get {
-            self.managedDiscussionThreadsArray as? [String]
+            self.managedDiscussionThreadsArray as? [DiscussionThread.IdType]
         }
         set {
-            self.managedDiscussionThreadsArray = newValue as NSObject?
+            if let newValue = newValue {
+                self.managedDiscussionThreadsArray = NSArray(array: newValue)
+            } else {
+                self.managedDiscussionThreadsArray = nil
+            }
         }
     }
 

@@ -30,38 +30,38 @@ extension CourseReviewSummary {
     }
 
     var id: Int {
-        set(newId) {
-            self.managedId = newId as NSNumber?
-        }
         get {
-             managedId?.intValue ?? -1
+            self.managedId?.intValue ?? -1
+        }
+        set {
+            self.managedId = NSNumber(value: newValue)
         }
     }
 
     var average: Float {
         get {
-             managedAverage?.floatValue ?? 0
+            self.managedAverage?.floatValue ?? 0
         }
-        set(value) {
-            managedAverage = value as NSNumber?
+        set {
+            self.managedAverage = NSNumber(value: newValue)
         }
     }
 
     var count: Int {
         get {
-             managedCount?.intValue ?? 0
+            self.managedCount?.intValue ?? 0
         }
-        set(value) {
-            managedCount = value as NSNumber?
+        set {
+            self.managedCount = NSNumber(value: newValue)
         }
     }
 
     var distribution: [Int] {
-        set(value) {
-            self.managedDistribution = value as NSObject?
-        }
         get {
-             (self.managedDistribution as? [Int]) ?? []
+            self.managedDistribution as? [Int] ?? []
+        }
+        set {
+            self.managedDistribution = NSArray(array: newValue)
         }
     }
 }
