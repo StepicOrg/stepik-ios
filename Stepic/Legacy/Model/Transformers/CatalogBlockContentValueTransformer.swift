@@ -11,6 +11,6 @@ final class CatalogBlockContentValueTransformer: NSSecureUnarchiveFromDataTransf
 
     static func register() {
         let transformer = CatalogBlockContentValueTransformer()
-        CatalogBlockContentValueTransformer.setValueTransformer(transformer, forName: self.name)
+        ValueTransformer.setValueTransformer(transformer, forName: self.name)
     }
 }
