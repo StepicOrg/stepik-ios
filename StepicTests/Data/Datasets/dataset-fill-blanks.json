@@ -1,0 +1,28 @@
+{
+    "components": [
+        {
+            "type": "text",
+            "text": "<strong>2 + 2</strong> =",
+            "options": []
+        },
+        {
+            "type": "input",
+            "text": "",
+            "options": []
+        },
+        {
+            "type": "text",
+            "text": "3 + 3 =",
+            "options": []
+        },
+        {
+            "type": "select",
+            "text": "",
+            "options": [
+                "4",
+                "5",
+                "6"
+            ]
+        }
+    ]
+}

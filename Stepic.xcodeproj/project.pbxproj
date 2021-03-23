@@ -789,6 +789,13 @@
 		2CA930B7253C8A65007B717A /* ProgressPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */; };
 		2CA99EFB260A1588000ABCAD /* CatalogBlockContentValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA99EFA260A1588000ABCAD /* CatalogBlockContentValueTransformer.swift */; };
 		2CA99F11260A30DB000ABCAD /* DatasetValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA99F10260A30DB000ABCAD /* DatasetValueTransformer.swift */; };
+		2CA99F18260A38D2000ABCAD /* AttemptEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA99F17260A38D2000ABCAD /* AttemptEntityTests.swift */; };
+		2CA99F20260A3B9C000ABCAD /* dataset-choice.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F1F260A3B9C000ABCAD /* dataset-choice.json */; };
+		2CA99F2C260A3DEB000ABCAD /* dataset-fill-blanks.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F2B260A3DEB000ABCAD /* dataset-fill-blanks.json */; };
+		2CA99F38260A3F63000ABCAD /* dataset-free-answer.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F37260A3F63000ABCAD /* dataset-free-answer.json */; };
+		2CA99F3F260A3FE6000ABCAD /* dataset-matching.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F3E260A3FE6000ABCAD /* dataset-matching.json */; };
+		2CA99F46260A4044000ABCAD /* dataset-sorting.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F45260A4044000ABCAD /* dataset-sorting.json */; };
+		2CA99F4D260A4107000ABCAD /* dataset-table.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F4C260A4107000ABCAD /* dataset-table.json */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
@@ -2472,6 +2479,13 @@
 		2CA930C8253C9644007B717A /* Model_step_actions_v66.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_actions_v66.xcdatamodel; sourceTree = "<group>"; };
 		2CA99EFA260A1588000ABCAD /* CatalogBlockContentValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentValueTransformer.swift; sourceTree = "<group>"; };
 		2CA99F10260A30DB000ABCAD /* DatasetValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetValueTransformer.swift; sourceTree = "<group>"; };
+		2CA99F17260A38D2000ABCAD /* AttemptEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntityTests.swift; sourceTree = "<group>"; };
+		2CA99F1F260A3B9C000ABCAD /* dataset-choice.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-choice.json"; sourceTree = "<group>"; };
+		2CA99F2B260A3DEB000ABCAD /* dataset-fill-blanks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-fill-blanks.json"; sourceTree = "<group>"; };
+		2CA99F37260A3F63000ABCAD /* dataset-free-answer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-free-answer.json"; sourceTree = "<group>"; };
+		2CA99F3E260A3FE6000ABCAD /* dataset-matching.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-matching.json"; sourceTree = "<group>"; };
+		2CA99F45260A4044000ABCAD /* dataset-sorting.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-sorting.json"; sourceTree = "<group>"; };
+		2CA99F4C260A4107000ABCAD /* dataset-table.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-table.json"; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -3842,6 +3856,7 @@
 		2C5967EC23E7828E00072800 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2CA99F17260A38D2000ABCAD /* AttemptEntityTests.swift */,
 				2CF24F632390040E002DBD0F /* BlockTypeSpec.swift */,
 				2CFE6A83255AA6DE00A43952 /* CatalogBlockContentItemTests.swift */,
 				2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */,
@@ -5344,6 +5359,19 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		2CA99F1E260A3B74000ABCAD /* Datasets */ = {
+			isa = PBXGroup;
+			children = (
+				2CA99F1F260A3B9C000ABCAD /* dataset-choice.json */,
+				2CA99F2B260A3DEB000ABCAD /* dataset-fill-blanks.json */,
+				2CA99F37260A3F63000ABCAD /* dataset-free-answer.json */,
+				2CA99F3E260A3FE6000ABCAD /* dataset-matching.json */,
+				2CA99F45260A4044000ABCAD /* dataset-sorting.json */,
+				2CA99F4C260A4107000ABCAD /* dataset-table.json */,
+			);
+			path = Datasets;
+			sourceTree = "<group>";
+		};
 		2CA9D98B20122EAF007AA743 /* AdaptiveLeaderboardsNames */ = {
 			isa = PBXGroup;
 			children = (
@@ -5768,6 +5796,7 @@
 				2CF8DF7D25F26A9F00F577C2 /* review-sessions.json */,
 				2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */,
 				2CAD405B2600D10D008EFDE5 /* story-template-text.json */,
+				2CA99F1E260A3B74000ABCAD /* Datasets */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -8613,9 +8642,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA99F2C260A3DEB000ABCAD /* dataset-fill-blanks.json in Resources */,
+				2CA99F4D260A4107000ABCAD /* dataset-table.json in Resources */,
 				2CAD40852600FD5A008EFDE5 /* story-template-feedback.json in Resources */,
 				2CF8DF7E25F26A9F00F577C2 /* review-sessions.json in Resources */,
+				2CA99F3F260A3FE6000ABCAD /* dataset-matching.json in Resources */,
+				2CA99F38260A3F63000ABCAD /* dataset-free-answer.json in Resources */,
+				2CA99F20260A3B9C000ABCAD /* dataset-choice.json in Resources */,
 				2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */,
+				2CA99F46260A4044000ABCAD /* dataset-sorting.json in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9177,6 +9212,7 @@
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 				0805FE481F0E584B001226B4 /* CodePlaygroundTests.swift in Sources */,
 				2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */,
+				2CA99F18260A38D2000ABCAD /* AttemptEntityTests.swift in Sources */,
 				2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */,
 				2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */,
 				2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */,
