@@ -29,7 +29,7 @@
     </entity>
     <entity name="CatalogBlockEntity" representedClassName=".CatalogBlockEntity" syncable="YES">
         <attribute name="managedAppearance" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="managedContent" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName=".NSArray" syncable="YES"/>
+        <attribute name="managedContent" optional="YES" attributeType="Transformable" valueTransformerName="CatalogBlockContentValueTransformer" customClassName=".NSArray" syncable="YES"/>
         <attribute name="managedDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsTitleVisible" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
