@@ -3,7 +3,6 @@ import XCTest
 class StepicUITests: XCTestCase {
     override func setUp() {
         super.setUp()
-
         self.continueAfterFailure = false
 
         XCUIApplication().launchArguments += ["-AppleLanguages", "(en)"]
@@ -134,13 +133,26 @@ class StepicUITests: XCTestCase {
     }
 
     func testUnregisteredUserAllUI() throws {
+        // Adding Notification alert interruption
+        self.addUIInterruptionMonitor(withDescription: "“Stepik” Would Like to Send You Notifications") { alert in
+            let alertButton = alert.buttons["Allow"]
+            if alertButton.exists {
+                alertButton.tap()
+                return true
+            }
+            return false
+        }
+        // We need clean installation for this test
+        Common.deleteMyApp()
         let app = XCUIApplication()
         app.launch()
+        // Closing splash with cross
+        app.navigationBars["Stepic.OnboardingView"].children(matching: .button).element.tap()
 
         // Check all Catalog sections
         let scrollViewsQuery = app.scrollViews
         let elementsQuery = scrollViewsQuery.otherElements
-
+        app.tabBars["Tab Bar"].buttons["Catalog"].tap()
         XCTAssertTrue(
             elementsQuery.staticTexts["Editors' choice"].waitForExistence(timeout: 5),
             "No Editors choice section"
@@ -175,12 +187,24 @@ class StepicUITests: XCTestCase {
 
         app.terminate()
     }
-    
+
     func testUserCanRegister() throws {
+        // Adding Notification alert interruption
+        self.addUIInterruptionMonitor(withDescription: "“Stepik” Would Like to Send You Notifications") { alert in
+            let alertButton = alert.buttons["Allow"]
+            if alertButton.exists {
+                alertButton.tap()
+                return true
+            }
+            return false
+        }
+        // We need clean installation for this test
+        Common.deleteMyApp()
         let timestamp = Int64(Date().timeIntervalSince1970)
         let app = XCUIApplication()
         app.launch()
-
+        // Closing splash with cross
+        app.navigationBars["Stepic.OnboardingView"].children(matching: .button).element.tap()
         // Register new user
         app.tabBars["Tab Bar"].buttons["Profile"].tap()
         if !app.buttons["Sign In"].staticTexts["Sign In"].waitForExistence(timeout: 10) {
@@ -191,10 +215,15 @@ class StepicUITests: XCTestCase {
             app.textFields["Name"].tap()
             app.textFields["Name"].typeText("ios_autotest_\(timestamp)")
             app.textFields["Email"].tap()
-            Common.pasteTextFieldText(app: app, element: app.textFields["Email"], value: "\(timestamp)@stepik.org", clearText: false)
+            Common.pasteTextFieldText(app: app, element: app.textFields["Email"], value: "ios_autotest_\(timestamp)@stepik.org", clearText: false)
             app.secureTextFields["Password"].tap()
-            sleep(2)
-            Common.pasteTextFieldText(app: app, element: app.secureTextFields["Password"], value: "512", clearText: false)
+            sleep(5)
+            Common.pasteTextFieldText(
+                app: app,
+                element: app.secureTextFields["Password"],
+                value: kcurrentUserPwd,
+                clearText: false
+            )
             app.buttons["Register"].tap()
         }
         // Check user profile loaded
@@ -206,8 +235,49 @@ class StepicUITests: XCTestCase {
                }
         app.terminate()
     }
-
-
+    func testUserCanLogIn() throws {
+        let app = XCUIApplication()
+        app.launch()
+        if Common.userLoggedIn(app: app) {
+            Common.logOut(app: app)
+        }
+        Common.setUser()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        app.buttons["Sign In"].staticTexts["Sign In"].tap()
+        app.buttons["Sign In with e-mail"].tap()
+        app.textFields["Email"].tap()
+        Common.pasteTextFieldText(app: app, element: app.textFields["Email"], value: currentUserEmail, clearText: false)
+        app.secureTextFields["Password"].tap()
+        sleep(5)
+        Common.pasteTextFieldText(
+            app: app,
+            element: app.secureTextFields["Password"],
+            value: kcurrentUserPwd,
+            clearText: false
+        )
+        app.buttons["Log in"].tap()
+        // Check user profile loaded
+        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        let elementsQuery = app.scrollViews.otherElements
+               if elementsQuery.staticTexts[currentUserName].waitForExistence(timeout: 5) {
+               XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
+               XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
+               }
+    app.terminate()
+    }
+    func testUserCanLogout() throws {
+        let app = XCUIApplication()
+        app.launch()
+        if !Common.userLoggedIn(app: app) {
+            Common.logIn(app: app)
+        }
+        Common.logOut(app: app)
+        if Common.userLoggedIn(app: app) {
+            XCTFail("User was not logged out")
+        }
+    app.terminate()
+    }
 //    func testLaunchPerformance() throws {
 //        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
 //            // This measures how long it takes to launch your application.
