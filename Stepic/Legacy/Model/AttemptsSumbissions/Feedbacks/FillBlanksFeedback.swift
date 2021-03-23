@@ -2,6 +2,8 @@ import SwiftyJSON
 import Foundation
 
 final class FillBlanksFeedback: SubmissionFeedback {
+    override class var supportsSecureCoding: Bool { true }
+
     var blanksCorrectness: [Bool]
 
     override var hash: Int {

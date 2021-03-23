@@ -40,6 +40,16 @@ enum TestData {
         self.loadJSON(path: "dataset-table")
     }
 
+    // MARK: Feedbacks
+
+    static var choiceSubmissionFeedback: JSON {
+        self.loadJSON(path: "feedback-choice-submission")
+    }
+
+    static var fillBlanksSubmissionFeedback: JSON {
+        self.loadJSON(path: "feedback-fill-blanks")
+    }
+
     // MARK: Private API
 
     private static func loadJSON(path: String) -> JSON {

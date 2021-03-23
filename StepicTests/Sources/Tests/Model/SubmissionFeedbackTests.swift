@@ -7,10 +7,10 @@ import SwiftyJSON
 class SubmissionFeedbackSpec: QuickSpec {
     override func spec() {
         describe("SubmissionFeedback") {
-            describe("NSCoding") {
-                func makeTemporaryPath(name: String) -> String {
+            describe("NSSecureCoding") {
+                func makeTemporaryFile(name: String) -> URL {
                     let temporaryDirectoryPath = NSTemporaryDirectory() as NSString
-                    return temporaryDirectoryPath.appendingPathComponent(name)
+                    return URL(fileURLWithPath: temporaryDirectoryPath.appendingPathComponent(name))
                 }
 
                 it("choice feedback encoded and decoded") {
@@ -18,12 +18,19 @@ class SubmissionFeedbackSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"options_feedback":["502","5002","520","52"]}"#)
                     let choiceFeedback = ChoiceSubmissionFeedback(json: json)
 
-                    let path = makeTemporaryPath(name: "choice-submission-feedback")
+                    let fileURL = makeTemporaryFile(name: "choice-submission-feedback")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(choiceFeedback, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: choiceFeedback,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedChoiceFeedback = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! ChoiceSubmissionFeedback
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedChoiceFeedback = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! ChoiceSubmissionFeedback
 
                     // Then
                     expect(unarchivedChoiceFeedback) == choiceFeedback
@@ -35,12 +42,19 @@ class SubmissionFeedbackSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"feedback":"test feedback"}"#)
                     let stringFeedback = StringSubmissionFeedback(json: json["feedback"])
 
-                    let path = makeTemporaryPath(name: "string-submission-feedback")
+                    let fileURL = makeTemporaryFile(name: "string-submission-feedback")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(stringFeedback, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: stringFeedback,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedStringFeedback = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! StringSubmissionFeedback
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedStringFeedback = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! StringSubmissionFeedback
 
                     // Then
                     expect(unarchivedStringFeedback) == stringFeedback
@@ -52,12 +66,19 @@ class SubmissionFeedbackSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"blanks_feedback": [false, true]}"#)
                     let fillBlanksFeedback = FillBlanksFeedback(json: json)
 
-                    let path = makeTemporaryPath(name: "blanks-submission-feedback")
+                    let fileURL = makeTemporaryFile(name: "blanks-submission-feedback")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(fillBlanksFeedback, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: fillBlanksFeedback,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedFillBlanksFeedback = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FillBlanksFeedback
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedFillBlanksFeedback = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! FillBlanksFeedback
 
                     // Then
                     expect(unarchivedFillBlanksFeedback) == fillBlanksFeedback

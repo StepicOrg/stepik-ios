@@ -320,7 +320,7 @@
     </entity>
     <entity name="SubmissionEntity" representedClassName=".SubmissionEntity" syncable="YES">
         <attribute name="managedAttemptID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedFeedback" optional="YES" attributeType="Transformable" customClassName=".SubmissionFeedback" syncable="YES"/>
+        <attribute name="managedFeedback" optional="YES" attributeType="Transformable" valueTransformerName="SubmissionFeedbackValueTransformer" customClassName=".SubmissionFeedback" syncable="YES"/>
         <attribute name="managedHint" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedLocal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
@@ -436,7 +436,7 @@
         <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="389"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
         <element name="StoryPartReaction" positionX="-450" positionY="-225" width="128" height="74"/>
-        <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="193"/>
+        <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="179"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="239"/>
         <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="479"/>
         <element name="UserActivityEntity" positionX="-450" positionY="-234" width="128" height="74"/>

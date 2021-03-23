@@ -796,6 +796,10 @@
 		2CA99F3F260A3FE6000ABCAD /* dataset-matching.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F3E260A3FE6000ABCAD /* dataset-matching.json */; };
 		2CA99F46260A4044000ABCAD /* dataset-sorting.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F45260A4044000ABCAD /* dataset-sorting.json */; };
 		2CA99F4D260A4107000ABCAD /* dataset-table.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F4C260A4107000ABCAD /* dataset-table.json */; };
+		2CA99F5E260A42F6000ABCAD /* SubmissionFeedbackValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA99F5D260A42F6000ABCAD /* SubmissionFeedbackValueTransformer.swift */; };
+		2CA99F6A260A4467000ABCAD /* SubmissionEntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA99F69260A4467000ABCAD /* SubmissionEntityTests.swift */; };
+		2CA99F72260A4506000ABCAD /* feedback-choice-submission.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F71260A4506000ABCAD /* feedback-choice-submission.json */; };
+		2CA99F7E260A4743000ABCAD /* feedback-fill-blanks.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CA99F7D260A4743000ABCAD /* feedback-fill-blanks.json */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
@@ -2486,6 +2490,10 @@
 		2CA99F3E260A3FE6000ABCAD /* dataset-matching.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-matching.json"; sourceTree = "<group>"; };
 		2CA99F45260A4044000ABCAD /* dataset-sorting.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-sorting.json"; sourceTree = "<group>"; };
 		2CA99F4C260A4107000ABCAD /* dataset-table.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "dataset-table.json"; sourceTree = "<group>"; };
+		2CA99F5D260A42F6000ABCAD /* SubmissionFeedbackValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionFeedbackValueTransformer.swift; sourceTree = "<group>"; };
+		2CA99F69260A4467000ABCAD /* SubmissionEntityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntityTests.swift; sourceTree = "<group>"; };
+		2CA99F71260A4506000ABCAD /* feedback-choice-submission.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "feedback-choice-submission.json"; sourceTree = "<group>"; };
+		2CA99F7D260A4743000ABCAD /* feedback-fill-blanks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "feedback-fill-blanks.json"; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -3868,6 +3876,7 @@
 				2CF8DF9925F2754C00F577C2 /* ReviewSessionResponseSpec.swift */,
 				2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */,
 				2CAD40672600D1D7008EFDE5 /* StoryTests.swift */,
+				2CA99F69260A4467000ABCAD /* SubmissionEntityTests.swift */,
 				2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
@@ -5372,6 +5381,15 @@
 			path = Datasets;
 			sourceTree = "<group>";
 		};
+		2CA99F70260A44EC000ABCAD /* Feedbacks */ = {
+			isa = PBXGroup;
+			children = (
+				2CA99F71260A4506000ABCAD /* feedback-choice-submission.json */,
+				2CA99F7D260A4743000ABCAD /* feedback-fill-blanks.json */,
+			);
+			path = Feedbacks;
+			sourceTree = "<group>";
+		};
 		2CA9D98B20122EAF007AA743 /* AdaptiveLeaderboardsNames */ = {
 			isa = PBXGroup;
 			children = (
@@ -5409,6 +5427,7 @@
 			children = (
 				2CA99EFA260A1588000ABCAD /* CatalogBlockContentValueTransformer.swift */,
 				2CA99F10260A30DB000ABCAD /* DatasetValueTransformer.swift */,
+				2CA99F5D260A42F6000ABCAD /* SubmissionFeedbackValueTransformer.swift */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -5797,6 +5816,7 @@
 				2CAD40842600FD5A008EFDE5 /* story-template-feedback.json */,
 				2CAD405B2600D10D008EFDE5 /* story-template-text.json */,
 				2CA99F1E260A3B74000ABCAD /* Datasets */,
+				2CA99F70260A44EC000ABCAD /* Feedbacks */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -8652,6 +8672,8 @@
 				2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */,
 				2CA99F46260A4044000ABCAD /* dataset-sorting.json in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
+				2CA99F7E260A4743000ABCAD /* feedback-fill-blanks.json in Resources */,
+				2CA99F72260A4506000ABCAD /* feedback-choice-submission.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9215,6 +9237,7 @@
 				2CA99F18260A38D2000ABCAD /* AttemptEntityTests.swift in Sources */,
 				2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */,
 				2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */,
+				2CA99F6A260A4467000ABCAD /* SubmissionEntityTests.swift in Sources */,
 				2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
 				2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */,
@@ -9747,6 +9770,7 @@
 				2CA93099253C8760007B717A /* VideoPlainObject.swift in Sources */,
 				2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepikToken.swift in Sources */,
+				2CA99F5E260A42F6000ABCAD /* SubmissionFeedbackValueTransformer.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				2CE61D832412960500DA2CBA /* SpotlightSearchableItem.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
