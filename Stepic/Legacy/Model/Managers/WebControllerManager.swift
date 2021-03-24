@@ -174,7 +174,16 @@ final class WebControllerManager: NSObject {
         backButtonStyle: BackButtonStyle,
         animated: Bool = true
     ) {
-        let controller = WebViewController(url: url)
+        if self.currentWebControllerKey == .socialAuth {
+            WebCacheCleaner.clean()
+        }
+
+        let urlRequest = URLRequest(
+            url: url,
+            cachePolicy: self.currentWebControllerKey == .socialAuth ? .reloadIgnoringLocalCacheData : .useProtocolCachePolicy
+        )
+
+        let controller = WebViewController(urlRequest: urlRequest)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
         controller.webView.navigationDelegate = self

@@ -16,12 +16,14 @@ final class StepikSession {
     static var cookieDict = [String: String]()
     static var hasCookies: Bool { !self.cookieDict.isEmpty }
 
+    static func isStepikSessionCookie(_ cookie: HTTPCookie) -> Bool {
+        cookie.domain.contains("stepic") || cookie.domain.contains("stepik")
+    }
+
     static func delete() {
         let storage = HTTPCookieStorage.shared
-        for cookie in storage.cookies ?? [] {
-            if cookie.domain.range(of: "stepic") != nil || cookie.domain.range(of: "stepik") != nil {
-                storage.deleteCookie(cookie)
-            }
+        for cookie in storage.cookies ?? [] where isStepikSessionCookie(cookie) {
+            storage.deleteCookie(cookie)
         }
         self.cookieDict = [:]
         self.cookieHeaders = [:]
