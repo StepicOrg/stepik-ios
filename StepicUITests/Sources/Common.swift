@@ -65,7 +65,7 @@ enum Common {
         app.tables.staticTexts["Log Out"].tap()
         app.alerts["Log Out"].scrollViews.otherElements.buttons["Log Out"].tap()
         if !app.buttons["Sign In"].staticTexts["Sign In"].waitForExistence(timeout: 10) {
-        XCTFail("Logout failed")
+            XCTFail("Logout failed")
         }
     }
     static func logIn(app: XCUIApplication) {

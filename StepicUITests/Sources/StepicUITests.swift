@@ -229,10 +229,10 @@ class StepicUITests: XCTestCase {
         // Check user profile loaded
         app.tabBars["Tab Bar"].buttons["Profile"].tap()
         let elementsQuery = app.scrollViews.otherElements
-               if elementsQuery.staticTexts["ios_autotest_\(timestamp)"].waitForExistence(timeout: 5) {
-               XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
-               XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
-               }
+        if elementsQuery.staticTexts["ios_autotest_\(timestamp)"].waitForExistence(timeout: 5) {
+            XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
+            XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
+        }
         app.terminate()
     }
     func testUserCanLogIn() throws {
@@ -260,11 +260,11 @@ class StepicUITests: XCTestCase {
         // Check user profile loaded
         app.tabBars["Tab Bar"].buttons["Profile"].tap()
         let elementsQuery = app.scrollViews.otherElements
-               if elementsQuery.staticTexts[currentUserName].waitForExistence(timeout: 5) {
-               XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
-               XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
-               }
-    app.terminate()
+        if elementsQuery.staticTexts[currentUserName].waitForExistence(timeout: 5) {
+            XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
+            XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
+        }
+        app.terminate()
     }
     func testUserCanLogout() throws {
         let app = XCUIApplication()
@@ -276,14 +276,14 @@ class StepicUITests: XCTestCase {
         if Common.userLoggedIn(app: app) {
             XCTFail("User was not logged out")
         }
-    app.terminate()
+        app.terminate()
     }
-//    func testLaunchPerformance() throws {
-//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-//            // This measures how long it takes to launch your application.
-//            measure(metrics: [XCTApplicationLaunchMetric()]) {
-//                XCUIApplication().launch()
-//            }
-//        }
-//    }
+    //    func testLaunchPerformance() throws {
+    //        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+    //            // This measures how long it takes to launch your application.
+    //            measure(metrics: [XCTApplicationLaunchMetric()]) {
+    //                XCUIApplication().launch()
+    //            }
+    //        }
+    //    }
 }
