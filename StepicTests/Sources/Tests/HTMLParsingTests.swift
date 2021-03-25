@@ -1,17 +1,10 @@
-//
-// HTMLParsingTests.swift
-// Stepic
-//
-// Created by Alexander Karpov on 01.06.16.
-// Copyright © 2016 Alex Karpov. All rights reserved.
-//
+@testable
+import Stepic
 
 import Foundation
 import XCTest
-@testable import Stepic
 
 class HTMLParsingTests: XCTestCase {
-
     struct HTMLStrings {
         static let latex = "Square of x is $x^2$"
         static let nonLatex = "Wow! I have won 100$!"

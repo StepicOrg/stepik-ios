@@ -1,8 +1,9 @@
+@testable
+import Stepic
+
 import Nimble
 import Quick
 import SwiftyJSON
-
-@testable import Stepic
 
 class DatasetSpec: QuickSpec {
     override func spec() {
@@ -16,7 +17,7 @@ class DatasetSpec: QuickSpec {
                     let datasetCopy = dataset.copy() as! Dataset
 
                     // Then
-                    expect(dataset !== datasetCopy).to(beTrue())
+                    expect(dataset !== datasetCopy) == true
                 }
 
                 it("copies choice dataset") {
@@ -29,8 +30,8 @@ class DatasetSpec: QuickSpec {
                     let choiceDatasetCopy = choiceDataset.copy() as! ChoiceDataset
 
                     // Then
-                    expect(choiceDataset !== choiceDatasetCopy).to(beTrue())
-                    expect(choiceDataset.isEqual(choiceDatasetCopy)).to(beTrue())
+                    expect(choiceDataset !== choiceDatasetCopy) == true
+                    expect(choiceDataset.isEqual(choiceDatasetCopy)) == true
                 }
 
                 it("copies fill blanks dataset") {
@@ -52,8 +53,8 @@ class DatasetSpec: QuickSpec {
                     let fillBlanksDatasetCopy = fillBlanksDataset.copy() as! FillBlanksDataset
 
                     // Then
-                    expect(fillBlanksDataset !== fillBlanksDatasetCopy).to(beTrue())
-                    expect(fillBlanksDataset.isEqual(fillBlanksDatasetCopy)).to(beTrue())
+                    expect(fillBlanksDataset !== fillBlanksDatasetCopy) == true
+                    expect(fillBlanksDataset.isEqual(fillBlanksDatasetCopy)) == true
                 }
 
                 it("copies free answer dataset") {
@@ -66,8 +67,8 @@ class DatasetSpec: QuickSpec {
                     let freeAnswerDatasetCopy = freeAnswerDataset.copy() as! FreeAnswerDataset
 
                     // Then
-                    expect(freeAnswerDataset !== freeAnswerDatasetCopy).to(beTrue())
-                    expect(freeAnswerDataset.isEqual(freeAnswerDatasetCopy)).to(beTrue())
+                    expect(freeAnswerDataset !== freeAnswerDatasetCopy) == true
+                    expect(freeAnswerDataset.isEqual(freeAnswerDatasetCopy)) == true
                 }
 
                 it("copies matching dataset") {
@@ -79,8 +80,8 @@ class DatasetSpec: QuickSpec {
                     let matchingDatasetCopy = matchingDataset.copy() as! MatchingDataset
 
                     // Then
-                    expect(matchingDataset !== matchingDatasetCopy).to(beTrue())
-                    expect(matchingDataset.isEqual(matchingDatasetCopy)).to(beTrue())
+                    expect(matchingDataset !== matchingDatasetCopy) == true
+                    expect(matchingDataset.isEqual(matchingDatasetCopy)) == true
                 }
 
                 it("copies sorting dataset") {
@@ -92,8 +93,8 @@ class DatasetSpec: QuickSpec {
                     let sortingDatasetCopy = sortingDataset.copy() as! SortingDataset
 
                     // Then
-                    expect(sortingDataset !== sortingDatasetCopy).to(beTrue())
-                    expect(sortingDataset.isEqual(sortingDatasetCopy)).to(beTrue())
+                    expect(sortingDataset !== sortingDatasetCopy) == true
+                    expect(sortingDataset.isEqual(sortingDatasetCopy)) == true
                 }
 
                 it("copies string dataset") {
@@ -105,8 +106,8 @@ class DatasetSpec: QuickSpec {
                     let stringDatasetCopy = stringDataset.copy() as! StringDataset
 
                     // Then
-                    expect(stringDataset !== stringDatasetCopy).to(beTrue())
-                    expect(stringDataset.isEqual(stringDatasetCopy)).to(beTrue())
+                    expect(stringDataset !== stringDatasetCopy) == true
+                    expect(stringDataset.isEqual(stringDatasetCopy)) == true
                 }
 
                 it("copies table dataset") {
@@ -121,8 +122,8 @@ class DatasetSpec: QuickSpec {
                     let tableDatasetCopy = tableDataset.copy() as! TableDataset
 
                     // Then
-                    expect(tableDataset !== tableDatasetCopy).to(beTrue())
-                    expect(tableDataset.isEqual(tableDatasetCopy)).to(beTrue())
+                    expect(tableDataset !== tableDatasetCopy) == true
+                    expect(tableDataset.isEqual(tableDatasetCopy)) == true
                 }
             }
 
@@ -154,7 +155,7 @@ class DatasetSpec: QuickSpec {
                     // Then
                     expect(unarchivedChoiceDataset) == choiceDataset
                     expect(unarchivedChoiceDataset.isMultipleChoice) == false
-                    expect(unarchivedChoiceDataset.options) == ["502","5002","520","52"]
+                    expect(unarchivedChoiceDataset.options) == ["502", "5002", "520", "52"]
                 }
 
                 it("fill blanks dataset encoded and decoded") {

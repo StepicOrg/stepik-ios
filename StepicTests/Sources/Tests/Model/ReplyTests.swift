@@ -1,8 +1,9 @@
+@testable
+import Stepic
+
 import Nimble
 import Quick
 import SwiftyJSON
-
-@testable import Stepic
 
 class ReplySpec: QuickSpec {
     override func spec() {

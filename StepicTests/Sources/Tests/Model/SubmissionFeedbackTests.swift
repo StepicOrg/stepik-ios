@@ -1,8 +1,9 @@
+@testable
+import Stepic
+
 import Nimble
 import Quick
 import SwiftyJSON
-
-@testable import Stepic
 
 class SubmissionFeedbackSpec: QuickSpec {
     override func spec() {
@@ -34,7 +35,7 @@ class SubmissionFeedbackSpec: QuickSpec {
 
                     // Then
                     expect(unarchivedChoiceFeedback) == choiceFeedback
-                    expect(unarchivedChoiceFeedback.options) == ["502","5002","520","52"]
+                    expect(unarchivedChoiceFeedback.options) == ["502", "5002", "520", "52"]
                 }
 
                 it("string feedback encoded and decoded") {

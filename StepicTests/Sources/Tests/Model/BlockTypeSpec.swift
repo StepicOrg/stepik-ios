@@ -1,4 +1,6 @@
-@testable import Stepic
+@testable
+import Stepic
+
 import Foundation
 import Nimble
 import Quick

@@ -1,17 +1,10 @@
-//
-// DeepLinkRouteTests.swift
-// stepik-ios
-//
-// Created by Ivan Magda on 2018-12-17.
-// Copyright 2018 Stepik. All rights reserved.
-//
+@testable
+import Stepic
 
 import Foundation
-import XCTest
-import Quick
 import Nimble
-
-@testable import Stepic
+import Quick
+import XCTest
 
 class DeepLinkRouteSpec: QuickSpec {
     private func makeRoute(for path: String) -> DeepLinkRoute {
@@ -81,7 +74,7 @@ class DeepLinkRouteSpec: QuickSpec {
                     }
                 }
             }
-            
+
             context("coursePromo") {
                 it("matches course promo deep link with given paths") {
                     let paths = [
@@ -300,7 +293,7 @@ class DeepLinkRouteSpec: QuickSpec {
                         "http://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions/",
                         "https://stepik.org/lesson/172508/step/1?discussion=803115&thread=solutions&unit=148015",
                         "https://stepik.org/lesson/172508/step/1?discussion=803115&thread=solutions&unit=148015&from_mobile_app=true",
-                        "http://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&thread=solutions&from_mobile_app=true",
+                        "http://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&thread=solutions&from_mobile_app=true"
                     ]
                     self.checkPaths(paths) { route in
                         checkRoute(route, expectedUnitID: 148015)

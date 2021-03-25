@@ -1,18 +1,11 @@
-//
-//  DownloaderTests.swift
-//  StepicTests
-//
-//  Created by Vladislav Kiryukhin on 11.07.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
+@testable
+import Stepic
 
 import Foundation
 import Mockingjay
 import Nimble
 import Quick
 import XCTest
-
-@testable import Stepic
 
 class DownloaderTaskMock: DownloaderTask {
     var isCompleted = false
@@ -24,7 +17,7 @@ class DownloaderTaskMock: DownloaderTask {
 
     override var stateReporter: ((DownloaderTaskState) -> Void)? {
         get {
-             { newState in
+            { newState in
                 self._state = newState
                 self.customStateReporter?(newState)
             }
@@ -90,7 +83,6 @@ class DownloaderSpec: QuickSpec {
 
     override func spec() {
         describe("Downloader") {
-
             context("when task with correct url and without size in headers executed in downloader") {
                 var task: DownloaderTaskMock!
 
@@ -159,7 +151,7 @@ class DownloaderSpec: QuickSpec {
                             done()
                         }
 
-                        task.completionReporter = { url in
+                        task.completionReporter = { _ in
                             fail("completion reporter shouldn't be called")
 
                             done()
@@ -217,7 +209,7 @@ class DownloaderSpec: QuickSpec {
                         var didPauseCall = false
                         var states = [DownloaderTaskState]()
                         let lock = NSLock()
-                        task.progressReporter = { progress in
+                        task.progressReporter = { _ in
                             // Some trick: pause task from first call of progress reporter
                             if !didPauseCall {
                                 expect { try self.downloader.pause(task: task) }.notTo(throwError())
@@ -234,7 +226,7 @@ class DownloaderSpec: QuickSpec {
                         }
 
                         waitUntil { done in
-                            task.completionReporter = { url in
+                            task.completionReporter = { _ in
                                 // Check states history
                                 expect(states) == [.attached, .active, .paused, .active]
                                 done()
@@ -268,7 +260,7 @@ class DownloaderSpec: QuickSpec {
                             }
 
                             var didCancelCall = false
-                            task.progressReporter = { progress in
+                            task.progressReporter = { _ in
                                 if !didCancelCall {
                                     expect { try self.downloader.cancel(task: task) }.notTo(throwError())
                                     didCancelCall = true
@@ -281,7 +273,7 @@ class DownloaderSpec: QuickSpec {
                                 done()
                             }
 
-                            task.completionReporter = { url in
+                            task.completionReporter = { _ in
                                 fail("completion reporter shouldn't be called")
 
                                 done()
@@ -341,7 +333,7 @@ class DownloaderSpec: QuickSpec {
                 }
 
                 it("not throws any error") {
-                    DispatchQueue.concurrentPerform(iterations: 100) { iteration in
+                    DispatchQueue.concurrentPerform(iterations: 100) { _ in
                         DispatchQueue.concurrentPerform(iterations: 100) { _ in
                             let task = DownloaderTaskMock(url: URL(string: DownloaderSpec.okFileLink)!)
                             expect { try self.downloader.add(task: task) }.notTo(throwError())
