@@ -13,7 +13,6 @@ import Foundation
  */
 final class DefaultsContainer {
     static let launch = LaunchDefaultsContainer()
-    static let explore = ExploreDefaultsContainer()
 
     private init() {}
 }

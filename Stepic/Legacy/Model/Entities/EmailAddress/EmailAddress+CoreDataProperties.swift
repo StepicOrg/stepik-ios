@@ -32,7 +32,7 @@ extension EmailAddress {
 
     var id: Int {
         get {
-             self.managedId?.intValue ?? -1
+            self.managedId?.intValue ?? -1
         }
         set {
             self.managedId = newValue as NSNumber?
@@ -41,7 +41,7 @@ extension EmailAddress {
 
     var userID: Int {
         get {
-             self.managedUserId?.intValue ?? -1
+            self.managedUserId?.intValue ?? -1
         }
         set {
             self.managedUserId = newValue as NSNumber?
@@ -50,7 +50,7 @@ extension EmailAddress {
 
     var email: String {
         get {
-             self.managedEmail ?? ""
+            self.managedEmail ?? ""
         }
         set {
             self.managedEmail = newValue
@@ -59,7 +59,7 @@ extension EmailAddress {
 
     var isVerified: Bool {
         get {
-             self.managedIsVerified?.boolValue ?? false
+            self.managedIsVerified?.boolValue ?? false
         }
         set {
             self.managedIsVerified = newValue as NSNumber?
@@ -68,7 +68,7 @@ extension EmailAddress {
 
     var isPrimary: Bool {
         get {
-             self.managedIsPrimary?.boolValue ?? false
+            self.managedIsPrimary?.boolValue ?? false
         }
         set {
             self.managedIsPrimary = newValue as NSNumber?
@@ -77,7 +77,7 @@ extension EmailAddress {
 
     var profile: Profile? {
         get {
-             self.managedProfile
+            self.managedProfile
         }
         set {
             self.managedProfile = newValue

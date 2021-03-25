@@ -95,7 +95,7 @@ final class NewFreeAnswerQuizView: UIView, TitlePresentable {
 
     var isTextViewEnabled: Bool {
         get {
-             self.textView.isEditable
+            self.textView.isEditable
         }
         set {
             self.textView.isEditable = newValue

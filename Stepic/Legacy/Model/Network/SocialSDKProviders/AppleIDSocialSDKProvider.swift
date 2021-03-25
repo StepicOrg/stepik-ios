@@ -5,13 +5,13 @@ import PromiseKit
 @available(iOS 13.0, *)
 final class AppleIDSocialSDKProvider: NSObject, SocialSDKProvider {
     private typealias CompletionHandler = (Swift.Result<SocialSDKCredential, SocialSDKError>) -> Void
-    
+
     let name = "apple"
 
     private var completionHandler: CompletionHandler?
 
     func getAccessInfo() -> Promise<SocialSDKCredential> {
-        return Promise { seal in
+        Promise { seal in
             self.signInWithApple { result in
                 switch result {
                 case .success(let credential):

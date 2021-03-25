@@ -28,7 +28,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowOnLessonDownloadsKey) as? Bool ?? false
+            defaults.value(forKey: didShowOnLessonDownloadsKey) as? Bool ?? false
         }
     }
 
@@ -38,7 +38,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowOnHomeContinueLearningKey) as? Bool ?? false
+            defaults.value(forKey: didShowOnHomeContinueLearningKey) as? Bool ?? false
         }
     }
 
@@ -48,7 +48,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowOnStreaksSwitchInProfileKey) as? Bool ?? false
+            defaults.value(forKey: didShowOnStreaksSwitchInProfileKey) as? Bool ?? false
         }
     }
 
@@ -58,7 +58,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowInVideoPlayerKey) as? Bool ?? false
+            defaults.value(forKey: didShowInVideoPlayerKey) as? Bool ?? false
         }
     }
 
@@ -68,7 +68,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowForCodeEditorKey) as? Bool ?? false
+            defaults.value(forKey: didShowForCodeEditorKey) as? Bool ?? false
         }
     }
 
@@ -78,7 +78,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowOnPersonalDeadlinesButtonKey) as? Bool ?? false
+            defaults.value(forKey: didShowOnPersonalDeadlinesButtonKey) as? Bool ?? false
         }
     }
 
@@ -88,7 +88,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-             defaults.value(forKey: didShowOnFullscreenCodeQuizTabRunKey) as? Bool ?? false
+            defaults.value(forKey: didShowOnFullscreenCodeQuizTabRunKey) as? Bool ?? false
         }
     }
 }

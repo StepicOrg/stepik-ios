@@ -26,10 +26,10 @@ final class Comment: JSONSerializable {
     var lastTime = Date()
     var text: String = ""
     var replyCount: Int = 0
-    var isDeleted: Bool = false
+    var isDeleted = false
     var targetID: Int = 0
     var repliesIDs: [Int] = []
-    var isPinned: Bool = false
+    var isPinned = false
     var voteID: String = ""
     var epicCount: Int = 0
     var abuseCount: Int = 0

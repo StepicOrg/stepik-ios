@@ -1,4 +1,6 @@
-@testable import Stepic
+@testable
+import Stepic
+
 import Foundation
 import Nimble
 import Quick
@@ -75,7 +77,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                     switch viewModel.content {
                     case .text(let processedContent):
-                        expect(processedContent.stringValue.contains("---some very important text ---")).to(beTrue())
+                        expect(processedContent.stringValue.contains("---some very important text ---")) == true
                     case .video:
                         XCTFail()
                     }
@@ -229,9 +231,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                         switch viewModel.content {
                         case .text(let processedContent):
-                            expect(
-                                processedContent.stringValue.contains("---some very important text ---")
-                            ).to(beTrue())
+                            expect(processedContent.stringValue.contains("---some very important text ---")) == true
                         case .video:
                             XCTFail()
                         }

@@ -11,7 +11,7 @@ final class CoursePayment: JSONSerializable {
     var amount: Float = 0
     var currencyCode: String = ""
     var statusStringValue: String = ""
-    var isPaid: Bool = false
+    var isPaid = false
     var data: Data?
     var paymentProviderStringValue: String = PaymentProvider.apple.rawValue
 

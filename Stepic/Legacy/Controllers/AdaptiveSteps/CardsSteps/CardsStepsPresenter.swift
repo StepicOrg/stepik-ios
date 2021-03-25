@@ -76,7 +76,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
     private let analytics: Analytics
 
-    // FIXME: incapsulate/remove this 
+    // FIXME: incapsulate/remove this
     var state: CardsStepsPresenterState = .loaded
     // We can init this class w/o course (for adaptive app)
     var course: Course?

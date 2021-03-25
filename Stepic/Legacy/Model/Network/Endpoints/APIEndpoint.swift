@@ -25,7 +25,7 @@ class APIEndpoint {
     init() {
         var eventMonitors = [EventMonitor]()
         #if DEBUG
-            eventMonitors = [AlamofireRequestsLogger()]
+        eventMonitors = [AlamofireRequestsLogger()]
         #endif
 
         self.manager = Alamofire.Session(

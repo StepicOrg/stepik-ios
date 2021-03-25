@@ -289,7 +289,7 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
         didReportTextChange text: String?,
         identifiedBy uniqueIdentifier: UniqueIdentifierType?
     ) {
-       self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
+        self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
     }
 
     func settingsCell(

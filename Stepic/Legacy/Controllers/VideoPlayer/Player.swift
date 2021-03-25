@@ -124,7 +124,7 @@ class Player: UIViewController {
 
     // state
 
-    var isPictureInPictureActive: Bool = false
+    var isPictureInPictureActive = false
 
     var playbackLoops: Bool {
         get {
@@ -139,7 +139,7 @@ class Player: UIViewController {
         }
     }
 
-    var playbackFreezesAtEnd: Bool = false
+    var playbackFreezesAtEnd = false
 
     var playbackState: PlaybackState = .stopped {
         didSet {
@@ -159,7 +159,7 @@ class Player: UIViewController {
 
     var bufferSize: Double = 10
 
-    var playbackEdgeTriggered: Bool = true
+    var playbackEdgeTriggered = true
 
     var maximumDuration: TimeInterval {
         get {
@@ -206,7 +206,7 @@ class Player: UIViewController {
 
     private func getTimeFromBufferSize() {}
 
-    //block's parameters are current current time + current buffered value 
+    //block's parameters are current current time + current buffered value
     func setPeriodicTimeObserver(_ block: @escaping (TimeInterval, TimeInterval?) -> Void) {
         let interval = CMTimeMakeWithSeconds(1, preferredTimescale: 10)
         periodicTimeObserver = self.avplayer.addPeriodicTimeObserver(

@@ -37,7 +37,7 @@ final class FreeAnswerDataset: Dataset {
         super.init(coder: coder)
     }
 
-    private override init() {
+    override private init() {
         self.isHTMLEnabled = false
         self.isAttachmentsEnabled = false
 

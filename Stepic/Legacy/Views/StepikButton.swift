@@ -22,7 +22,7 @@ class StepikButton: UIButton {
         }
     }
 
-    var isLightBackground: Bool = true {
+    var isLightBackground = true {
         didSet {
             if self.isLightBackground != oldValue {
                 self.updateStyle()

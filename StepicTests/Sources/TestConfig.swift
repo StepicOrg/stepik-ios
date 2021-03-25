@@ -1,15 +1,6 @@
-//
-//  TestConfig.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 14.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 class TestConfig {
-
     static let sharedConfig = TestConfig()
 
     private init() {

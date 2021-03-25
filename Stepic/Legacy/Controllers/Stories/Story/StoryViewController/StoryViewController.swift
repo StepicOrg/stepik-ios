@@ -17,8 +17,8 @@ final class StoryViewController: UIViewController {
 
     var presenter: StoryPresenterProtocol?
 
-    private var didAppear: Bool = false
-    private var didLayout: Bool = false
+    private var didAppear = false
+    private var didLayout = false
     private var onAppearBlock: (() -> Void)?
 
     @IBAction func onCloseButtonClick(_ sender: Any) {

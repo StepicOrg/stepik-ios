@@ -1,18 +1,10 @@
-//
-//  UserActivitySpec.swift
-//  StepicTests
-//
-//  Created by Vladislav Kiryukhin on 07.03.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
+@testable
+import Stepic
 
 import Foundation
-
-import Quick
 import Nimble
+import Quick
 import SwiftyJSON
-
-@testable import Stepic
 
 class UserActivitySpec: QuickSpec {
     override func spec() {
@@ -26,7 +18,7 @@ class UserActivitySpec: QuickSpec {
             }
 
             context("when constructed with json") {
-                let sampleObj = ["id": 239, "pins": (1...7).map({ $0 })] as [String : Any]
+                let sampleObj = ["id": 239, "pins": (1...7).map({ $0 })] as [String: Any]
                 let ua = UserActivity(json: JSON(sampleObj))
                 it("has correct id and pins") {
                     expect(ua.id) == 239
@@ -35,7 +27,7 @@ class UserActivitySpec: QuickSpec {
             }
 
             context("when constructed with empty pins list") {
-                let sampleObj = ["id": 239, "pins": []] as [String : Any]
+                let sampleObj = ["id": 239, "pins": []] as [String: Any]
                 let ua = UserActivity(json: JSON(sampleObj))
                 it("has correct properties") {
                     expect(ua.pins) == []
@@ -56,84 +48,84 @@ class UserActivitySpec: QuickSpec {
 
             context("when constructed with data") {
                 it("has currentStreak == 0") {
-                    let sampleObj = ["id": 239, "pins": [0, 0, 2, 0, 1, 0]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 0, 2, 0, 1, 0]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.currentStreak) == 0
                 }
 
                 it("has currentStreak == 3") {
-                    let sampleObj = ["id": 239, "pins": [0, 1, 2, 1, 0, 4, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 1, 2, 1, 0, 4, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.currentStreak) == 3
                 }
 
                 it("has longestStreak == 0") {
-                    let sampleObj = ["id": 239, "pins": [0, 0, 0]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 0, 0]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.longestStreak) == 0
                 }
 
                 it("has longestStreak == 1") {
-                    let sampleObj = ["id": 239, "pins": [0, 1, 0, 1, 0]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 1, 0, 1, 0]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.longestStreak) == 1
                 }
 
                 it("has longestStreak == 3") {
-                    let sampleObj = ["id": 239, "pins": [1, 0, 2, 3, 4, 0, 1, 1, 0, 0, 1, 1, 0, 1]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [1, 0, 2, 3, 4, 0, 1, 1, 0, 0, 1, 1, 0, 1]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.longestStreak) == 3
                 }
 
                 it("didn't solve this week") {
-                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.didSolveThisWeek) == false
                 }
 
                 it("did solve this week") {
-                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.didSolveThisWeek) == true
                 }
 
                 it("did solve today") {
-                    let sampleObj = ["id": 239, "pins": [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.didSolveToday) == true
                 }
 
                 it("didn't solve today") {
-                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.didSolveToday) == false
                 }
 
                 it("needs to solve today") {
-                    let sampleObj = ["id": 239, "pins": [0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.needsToSolveToday) == true
                 }
 
                 it("dont need to solve today, today pin > 0") {
-                    let sampleObj = ["id": 239, "pins": [6, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [6, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.needsToSolveToday) == false
                 }
 
                 it("dont need to solve today, has no solved yesterday") {
-                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String : Any]
+                    let sampleObj = ["id": 239, "pins": [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 2]] as [String: Any]
                     let ua = UserActivity(json: JSON(sampleObj))
 
                     expect(ua.needsToSolveToday) == false

@@ -23,7 +23,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
 
     // For init View-Presenter via view creating
     var course: Course!
-    var didJustSubscribe: Bool = false
+    var didJustSubscribe = false
 
     override var state: CardsStepsViewState {
         set {

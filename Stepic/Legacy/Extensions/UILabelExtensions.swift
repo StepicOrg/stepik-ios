@@ -30,7 +30,7 @@ extension UILabel {
     }
 
     func getHeightWithText(_ text: String, html: Bool = false) -> CGFloat {
-        type(of: self).heightForLabelWithText(
+        Self.heightForLabelWithText(
             text,
             lines: self.numberOfLines,
             font: self.font,

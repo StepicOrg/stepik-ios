@@ -32,7 +32,7 @@ final class CourseInfoHeaderSkeletonView: UIView {
     private lazy var coverView = UIView()
 
     private lazy var titleView = UIView()
-    
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()

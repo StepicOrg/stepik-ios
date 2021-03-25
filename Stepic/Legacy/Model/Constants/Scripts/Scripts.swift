@@ -45,7 +45,7 @@ struct Scripts {
     }
 
     static var clickableImages: String {
-         "\(self.localJQuery)\(self.loadScriptWithKey(self.clickableImagesScriptKey))"
+        "\(self.localJQuery)\(self.loadScriptWithKey(self.clickableImagesScriptKey))"
     }
 
     static var audioTagWrapper: String {
@@ -57,15 +57,15 @@ struct Scripts {
     }
 
     static var styles: String {
-         "\(self.loadScriptWithKey(self.wysiwygStylesKey))\(self.loadScriptWithKey(self.commonStylesKey))"
+        "\(self.loadScriptWithKey(self.wysiwygStylesKey))\(self.loadScriptWithKey(self.commonStylesKey))"
     }
 
     static var highlightJS: String {
-         "\(self.loadScriptWithKey(self.highlightJSKey))"
+        "\(self.loadScriptWithKey(self.highlightJSKey))"
     }
 
     static var webkitCalloutDisable: String {
-         "\(self.loadScriptWithKey(self.webkitCalloutDisableKey))"
+        "\(self.loadScriptWithKey(self.webkitCalloutDisableKey))"
     }
 
     private static func loadScriptWithKey(_ key: String) -> String {

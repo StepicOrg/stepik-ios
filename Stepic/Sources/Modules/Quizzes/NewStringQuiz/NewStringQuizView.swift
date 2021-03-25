@@ -116,7 +116,7 @@ final class NewStringQuizView: UIView, TitlePresentable {
 
     var isTextFieldEnabled: Bool {
         get {
-             self.textField.isEnabled
+            self.textField.isEnabled
         }
         set {
             self.textField.isEnabled = newValue

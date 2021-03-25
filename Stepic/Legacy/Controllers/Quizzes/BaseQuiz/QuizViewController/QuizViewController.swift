@@ -77,7 +77,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         return containerView
     }
 
-    private var doesPresentActivityIndicatorView: Bool = false {
+    private var doesPresentActivityIndicatorView = false {
         didSet {
             if doesPresentActivityIndicatorView {
                 DispatchQueue.main.async { [weak self] in
@@ -95,7 +95,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
-    private var doesPresentWarningView: Bool = false {
+    private var doesPresentWarningView = false {
         didSet {
             if doesPresentWarningView {
                 showPlaceholder(for: .connectionError)
@@ -429,7 +429,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         return newSize.height
     }
 
-    var needNewAttempt: Bool = false
+    var needNewAttempt = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -458,7 +458,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         submitPressed()
     }
 
-    var isSubmitButtonHidden: Bool = false {
+    var isSubmitButtonHidden = false {
         didSet {
             self.sendButton.isHidden = isSubmitButtonHidden
             self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 44
