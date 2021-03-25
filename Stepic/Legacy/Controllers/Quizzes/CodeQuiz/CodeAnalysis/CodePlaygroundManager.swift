@@ -41,8 +41,8 @@ final class CodePlaygroundManager {
         // Search for the beginning of the changed substring
         var changesBeginningOffset = 0
         while changesBeginningOffset < minString.count
-            && minString[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)]
-            == maxString[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)] {
+                && minString[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)]
+                == maxString[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)] {
             changesBeginningOffset += 1
         }
 
@@ -56,8 +56,8 @@ final class CodePlaygroundManager {
         // Search for the ending of the changed substring
         var changesEndingOffset = 0
         while changesEndingOffset < minString.count
-            && minString[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)]
-            == maxString[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)] {
+                && minString[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)]
+                == maxString[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)] {
             changesEndingOffset += 1
         }
 

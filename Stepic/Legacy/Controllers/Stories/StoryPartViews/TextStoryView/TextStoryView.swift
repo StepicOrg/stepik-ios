@@ -183,7 +183,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             return
         }
 
-        Nuke.loadImage(with: url, options: .shared, into: self.imageView, completion:  { [weak self] _ in
+        Nuke.loadImage(with: url, options: .shared, into: self.imageView, completion: { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }

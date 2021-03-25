@@ -17,7 +17,7 @@ final class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var separatorImageView: UIImageView!
 
-    private var isMe: Bool = false
+    private var isMe = false
     private var isMeBackgroundColor: UIColor {
         .dynamic(
             light: UIColor.stepikYellow.withAlphaComponent(0.4),
@@ -25,7 +25,7 @@ final class LeaderboardTableViewCell: UITableViewCell {
         )
     }
 
-    var isSeparator: Bool = false {
+    var isSeparator = false {
         didSet {
             self.separatorImageView.isHidden = !self.isSeparator
             self.userLabel.isHidden = self.isSeparator

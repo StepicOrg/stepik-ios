@@ -67,7 +67,7 @@ final class TableDataset: Dataset {
         super.init(coder: coder)
     }
 
-    private override init() {
+    override private init() {
         self.datasetDescription = ""
         self.rows = []
         self.columns = []

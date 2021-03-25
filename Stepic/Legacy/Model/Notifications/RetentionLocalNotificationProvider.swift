@@ -115,7 +115,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         }
 
         private func localized(for key: String) -> String {
-            return NSString.localizedUserNotificationString(forKey: key, arguments: nil)
+            NSString.localizedUserNotificationString(forKey: key, arguments: nil)
         }
     }
 }

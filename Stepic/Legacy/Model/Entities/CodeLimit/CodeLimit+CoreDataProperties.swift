@@ -30,7 +30,7 @@ extension CodeLimit {
 
     var languageString: String {
         get {
-             managedLanguage ?? ""
+            managedLanguage ?? ""
         }
         set(value) {
             managedLanguage = value
@@ -39,7 +39,7 @@ extension CodeLimit {
 
     var memory: Double {
         get {
-             managedMemory?.doubleValue ?? 0.0
+            managedMemory?.doubleValue ?? 0.0
         }
         set(value) {
             managedMemory = value as NSNumber?
@@ -48,7 +48,7 @@ extension CodeLimit {
 
     var time: Double {
         get {
-             managedTime?.doubleValue ?? 0.0
+            managedTime?.doubleValue ?? 0.0
         }
         set(value) {
             managedTime = value as NSNumber?

@@ -11,7 +11,7 @@ import Foundation
 import SwiftyJSON
 
 /*
- ExecutableTask for deleting device on the server 
+ ExecutableTask for deleting device on the server
  */
 final class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
     var id: String {

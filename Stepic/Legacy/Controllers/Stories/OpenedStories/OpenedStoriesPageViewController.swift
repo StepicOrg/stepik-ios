@@ -14,7 +14,7 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
     var swipeInteractionController: SwipeInteractionController?
     var startOffset: CGFloat = 0
 
-    private var isDragging: Bool = false
+    private var isDragging = false
     private var previousStatusBarStyle: UIStatusBarStyle?
 
     private weak var currentStoryController: UIViewController?

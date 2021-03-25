@@ -13,8 +13,8 @@ final class UserCodeRun: JSONSerializable {
     var stdin: String?
     var stdout: String?
     var stderr: String?
-    var timeLimitExceeded: Bool = false
-    var memoryLimitExceeded: Bool = false
+    var timeLimitExceeded = false
+    var memoryLimitExceeded = false
     var createDateString: String?
     var updateDateString: String?
 

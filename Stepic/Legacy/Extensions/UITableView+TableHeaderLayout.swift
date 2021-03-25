@@ -9,11 +9,19 @@ import Foundation
 
 extension UITableView {
     func layoutTableHeaderView() {
-        guard let headerView = self.tableHeaderView else { return }
+        guard let headerView = self.tableHeaderView else {
+            return
+        }
+
         headerView.translatesAutoresizingMaskIntoConstraints = false
 
         let headerWidth = headerView.bounds.size.width
-        let temporaryWidthConstraints = NSLayoutConstraint.constraints(withVisualFormat: "[headerView(width)]", options: NSLayoutConstraint.FormatOptions(rawValue: UInt(0)), metrics: ["width": headerWidth], views: ["headerView": headerView])
+        let temporaryWidthConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "[headerView(width)]",
+            options: NSLayoutConstraint.FormatOptions(rawValue: UInt(0)),
+            metrics: ["width": headerWidth],
+            views: ["headerView": headerView]
+        )
         temporaryWidthConstraints.forEach {
             $0.identifier = "layoutTableHeaderView() temporary constraint"
         }

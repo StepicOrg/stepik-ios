@@ -48,7 +48,7 @@ final class AdaptiveStatsManager {
 
     var maxStreak: Int {
         get {
-             defaults.value(forKey: maxStreakKey) as? Int ?? 1
+            defaults.value(forKey: maxStreakKey) as? Int ?? 1
         }
         set(newValue) {
             defaults.set(max(maxStreak, newValue), forKey: maxStreakKey)

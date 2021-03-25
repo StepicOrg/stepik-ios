@@ -9,7 +9,7 @@
 import Foundation
 
 /*
- Contains and runs a queue of Executable objects 
+ Contains and runs a queue of Executable objects
  */
 final class ExecutionQueue: DictionarySerializable {
     private var queue: [Executable] = []
@@ -26,7 +26,7 @@ final class ExecutionQueue: DictionarySerializable {
         let executedCount = 0
 
         func didExecuteAll() -> Bool {
-            return notCompletedExecutionQueue.count + executedCount == queue.count
+            notCompletedExecutionQueue.count + executedCount == queue.count
         }
 
         func completeIfAllExecuted() {

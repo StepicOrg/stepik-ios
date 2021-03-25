@@ -16,7 +16,7 @@ private struct AssociatedKey {
 extension UITableView {
     private var savedDataSource: UITableViewDataSource? {
         get {
-             objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UITableViewDataSource
+            objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UITableViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.savedDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -25,7 +25,7 @@ extension UITableView {
 
     private var skeletonDataSource: SkeletonTableViewDataSource? {
         get {
-             objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonTableViewDataSource
+            objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonTableViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.skeletonDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)

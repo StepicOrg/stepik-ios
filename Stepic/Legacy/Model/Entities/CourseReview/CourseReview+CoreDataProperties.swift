@@ -45,13 +45,13 @@ extension CourseReview {
             self.managedId = newValue as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
     var score: Int {
         get {
-             managedScore?.intValue ?? 0
+            managedScore?.intValue ?? 0
         }
         set {
             managedScore = newValue as NSNumber?
@@ -60,7 +60,7 @@ extension CourseReview {
 
     var userID: User.IdType {
         get {
-             managedUserId?.intValue ?? 0
+            managedUserId?.intValue ?? 0
         }
         set {
             managedUserId = newValue as NSNumber?
@@ -69,7 +69,7 @@ extension CourseReview {
 
     var courseID: Course.IdType {
         get {
-             managedCourseId?.intValue ?? 0
+            managedCourseId?.intValue ?? 0
         }
         set {
             managedCourseId = newValue as NSNumber?
@@ -78,7 +78,7 @@ extension CourseReview {
 
     var course: Course? {
         get {
-             managedCourse
+            managedCourse
         }
         set {
             managedCourse = newValue
@@ -87,7 +87,7 @@ extension CourseReview {
 
     var user: User? {
         get {
-             managedUser
+            managedUser
         }
         set {
             managedUser = newValue
@@ -96,7 +96,7 @@ extension CourseReview {
 
     var creationDate: Date {
         get {
-             managedCreateDate ?? Date()
+            managedCreateDate ?? Date()
         }
         set {
             managedCreateDate = newValue
@@ -105,7 +105,7 @@ extension CourseReview {
 
     var text: String {
         get {
-             managedText ?? ""
+            managedText ?? ""
         }
         set {
             managedText = newValue

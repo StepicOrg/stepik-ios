@@ -38,7 +38,7 @@ extension Assignment {
             self.managedId = newId as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
@@ -47,7 +47,7 @@ extension Assignment {
             self.managedStepId = newId as NSNumber?
         }
         get {
-             managedStepId?.intValue ?? -1
+            managedStepId?.intValue ?? -1
         }
     }
 
@@ -56,7 +56,7 @@ extension Assignment {
             self.managedUnitId = newId as NSNumber?
         }
         get {
-             managedUnitId?.intValue ?? -1
+            managedUnitId?.intValue ?? -1
         }
     }
 

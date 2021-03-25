@@ -75,7 +75,6 @@
 		0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
 		0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
 		0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
-		0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */; };
 		082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */; };
 		082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */; };
 		082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */; };
@@ -175,7 +174,6 @@
 		0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D71CE3684000F8A6DB /* default_sound.wav */; };
 		086A8B251D21434B00F45C45 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
 		086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
-		086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */; };
 		086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B3E20127A25000F7715 /* Tooltip.swift */; };
 		086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D5B51201283C2000F7715 /* TooltipFactory.swift */; };
@@ -422,7 +420,6 @@
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C12E4722565668000DC52CB /* UIViewController+PresentPadPanModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12E4712565668000DC52CB /* UIViewController+PresentPadPanModal.swift */; };
 		2C130E3C2512402B00389AEB /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E3B2512402B00389AEB /* LaunchArguments.swift */; };
-		2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */; };
 		2C16A88F248F98C9001E5CBD /* UserCoursesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16A88E248F98C9001E5CBD /* UserCoursesPersistenceService.swift */; };
 		2C16ED3523D0BC620017C113 /* SettingsRightDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */; };
@@ -1712,7 +1709,6 @@
 		0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_certificates_v15.xcdatamodel; sourceTree = "<group>"; };
 		0829B8381E9D05AE009B4A84 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
 		0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Certificate+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDefaultsContainer.swift; sourceTree = "<group>"; };
 		082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesModeSelectionViewController.swift; sourceTree = "<group>"; };
 		082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PersonalDeadlines.storyboard; sourceTree = "<group>"; };
 		082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineModeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1829,7 +1825,6 @@
 		0869F6D71CE3684000F8A6DB /* default_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default_sound.wav; sourceTree = "<group>"; };
 		086A8B241D21434B00F45C45 /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		086A8B271D21796800F45C45 /* VotesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesAPI.swift; sourceTree = "<group>"; };
-		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastStepRouter.swift; sourceTree = "<group>"; };
 		086D5B3E20127A25000F7715 /* Tooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
 		086D5B51201283C2000F7715 /* TooltipFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipFactory.swift; sourceTree = "<group>"; };
@@ -2104,7 +2099,6 @@
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C12E4712565668000DC52CB /* UIViewController+PresentPadPanModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentPadPanModal.swift"; sourceTree = "<group>"; };
 		2C130E3B2512402B00389AEB /* LaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArguments.swift; sourceTree = "<group>"; };
-		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesNetworkService.swift; sourceTree = "<group>"; };
 		2C16A88E248F98C9001E5CBD /* UserCoursesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesPersistenceService.swift; sourceTree = "<group>"; };
 		2C16ED3423D0BC620017C113 /* SettingsRightDetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailCellView.swift; sourceTree = "<group>"; };
@@ -4017,7 +4011,6 @@
 				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
 				08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */,
 				08CA59ED1BBFC962008DC44D /* UIButtonExtensions.swift */,
-				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
 				089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */,
 				08CA59E91BBD3D55008DC44D /* UILabelExtensions.swift */,
 				62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */,
@@ -5902,7 +5895,6 @@
 				083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
 				08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */,
-				086A9D611C74AF90003611DC /* GlobalFunctions.swift */,
 				087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */,
 				08B3B80520F3909400F64D20 /* HTMLProcessor.swift */,
 				08C0A4331BF1276C0010F049 /* Messages.swift */,
@@ -5930,7 +5922,6 @@
 			isa = PBXGroup;
 			children = (
 				2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */,
-				0829ED9820C8825E0018E6FF /* ExploreDefaultsContainer.swift */,
 				2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */,
 			);
 			path = Defaults;
@@ -9329,7 +9320,6 @@
 				08FA62272121BF6100F00275 /* SwipeInteractionController.swift in Sources */,
 				08484F07211AF4320006266F /* StoryPresenter.swift in Sources */,
 				2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */,
-				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				2C47E6B72608EB8900732642 /* CatalogBlockItemModuleFactory.swift in Sources */,
 				866AD0D62061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
@@ -9488,7 +9478,6 @@
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */,
-				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
@@ -9785,7 +9774,6 @@
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
-				2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				084DDDE1204EDF7600913503 /* NotificationRequestAlertViewController.swift in Sources */,
 				2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */,

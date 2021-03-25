@@ -34,7 +34,7 @@ final class PinsMap {
         }
 
         public static func == (lhs: Week, rhs: Week) -> Bool {
-            return lhs.allowedPins == rhs.allowedPins && lhs.pins == rhs.pins
+            lhs.allowedPins == rhs.allowedPins && lhs.pins == rhs.pins
         }
     }
 
@@ -42,7 +42,7 @@ final class PinsMap {
         var weeks: [Week] = []
 
         var days: [(Bool, Int)] {
-            return weeks.map { zip($0.allowedPins, $0.pins) }.reduce([], +)
+            weeks.map { zip($0.allowedPins, $0.pins) }.reduce([], +)
         }
 
         init(weeks: [Week]) {

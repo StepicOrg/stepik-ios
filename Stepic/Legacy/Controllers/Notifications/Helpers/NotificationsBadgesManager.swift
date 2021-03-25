@@ -39,7 +39,7 @@ final class NotificationsBadgesManager {
     @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let status = userInfo["status"] as? NotificationStatus else {
-                return
+            return
         }
 
         if status == .read {

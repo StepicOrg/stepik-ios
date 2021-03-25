@@ -118,7 +118,7 @@ extension CatalogBlockEntity {
             content: self.content
         )
     }
-    
+
     convenience init(catalogBlock: CatalogBlock, managedObjectContext: NSManagedObjectContext) {
         guard let entity = NSEntityDescription.entity(
             forEntityName: "CatalogBlockEntity", in: managedObjectContext

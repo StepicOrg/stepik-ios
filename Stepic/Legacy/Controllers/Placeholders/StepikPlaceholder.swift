@@ -36,7 +36,7 @@ final class StepikPlaceholder {
         }
 
         public static func == (lhs: StepikPlaceholderStyle, rhs: StepikPlaceholderStyle) -> Bool {
-            return lhs.id == rhs.id
+            lhs.id == rhs.id
         }
     }
 }

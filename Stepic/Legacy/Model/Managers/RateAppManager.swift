@@ -21,7 +21,7 @@ final class RateAppManager {
 
     private var showRateLaterPressedDate: TimeInterval? {
         get {
-             defaults.value(forKey: showRateLaterPressedDateKey) as? TimeInterval
+            defaults.value(forKey: showRateLaterPressedDateKey) as? TimeInterval
         }
         set(value) {
             defaults.set(value, forKey: showRateLaterPressedDateKey)
@@ -31,7 +31,7 @@ final class RateAppManager {
 
     private var neverShowRateAlert: Bool {
         get {
-             defaults.value(forKey: neverShowRateAlertKey) as? Bool ?? false
+            defaults.value(forKey: neverShowRateAlertKey) as? Bool ?? false
         }
         set(value) {
             defaults.set(value, forKey: neverShowRateAlertKey)

@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 class SubmissionFeedback: NSObject, NSSecureCoding {
     class var supportsSecureCoding: Bool { true }

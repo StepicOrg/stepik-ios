@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 class CatalogBlockContentItem: NSObject, NSSecureCoding {
     class var supportsSecureCoding: Bool { true }

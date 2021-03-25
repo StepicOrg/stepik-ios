@@ -32,8 +32,8 @@ final class SearchQueriesPresenter {
         self.view?.setState(state: .updating)
         self.currentRequest = self.queriesAPI.retrieve(query: query.lowercased(), success: { [weak self] suggestions in
             let uniqueSuggestions = NSOrderedSet(
-                array: localSuggestions + suggestions.map({ $0.lowercased() })).array as? [String] ?? (localSuggestions + suggestions
-            )
+                array: localSuggestions + suggestions.map({ $0.lowercased() })
+            ).array as? [String] ?? (localSuggestions + suggestions)
             self?.view?.updateSuggestions(suggestions: uniqueSuggestions)
             self?.view?.setState(state: .ok)
         }, error: { [weak self] error in
