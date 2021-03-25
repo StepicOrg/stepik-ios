@@ -2,6 +2,8 @@ import SwiftyJSON
 import Foundation
 
 final class FillBlanksDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     var components: [FillBlanksComponent]
 
     override var hash: Int {
@@ -87,7 +89,9 @@ final class FillBlanksDataset: Dataset {
     }
 }
 
-final class FillBlanksComponent: NSObject, NSCoding, NSCopying {
+final class FillBlanksComponent: NSObject, NSSecureCoding, NSCopying {
+    class var supportsSecureCoding: Bool { true }
+
     var componentType: ComponentType
     var text: String
     var options: [String]

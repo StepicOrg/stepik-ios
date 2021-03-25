@@ -15,17 +15,24 @@ final class CourseReviewSummary: NSManagedObject, JSONSerializable, IDFetchable 
 
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
+        self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        average = json["average"].floatValue
-        count = json["count"].intValue
-        distribution = json["distribution"].arrayObject as! [Int]
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.average = json[JSONKey.average.rawValue].floatValue
+        self.count = json[JSONKey.count.rawValue].intValue
+        self.distribution = json[JSONKey.distribution.rawValue].arrayValue.compactMap(\.int)
     }
 
     func update(json: JSON) {
-        initialize(json)
+        self.initialize(json)
+    }
+
+    enum JSONKey: String {
+        case id
+        case average
+        case count
+        case distribution
     }
 }

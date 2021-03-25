@@ -2,6 +2,8 @@ import SwiftyJSON
 import UIKit
 
 final class MatchingDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     typealias Pair = (first: String, second: String)
 
     var pairs: [Pair]

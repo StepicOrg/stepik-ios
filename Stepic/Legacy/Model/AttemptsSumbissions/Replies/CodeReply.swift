@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class CodeReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var code: String
     var languageName: String
 

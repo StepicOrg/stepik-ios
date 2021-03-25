@@ -870,8 +870,15 @@ DownloadARQuickLookTitle = "Downloading AR-object";
 DownloadARQuickLookAlertFailedMessage = "Couldn't download AR-object. Please try again later.";
 StepARQuickLookUnsupportedAlertTitle = "AR Quick Look Not Supported";
 StepARQuickLookUnsupportedAlertMessage = "Your device is not supported by viewing the content in the augmented reality, the minimum requirement iOS 12.";
-StepDisabledTitle = "You can't see the quiz yet";
-StepDisabledMessage = "Write to the course authors so that they pay attention to the settings %@.<br><br>Access may be restored after some time.";
+StepDisabledStudentTitle = "You can't view the assignment yet";
+StepDisabledStudentMessage = "Write to the course authors so that they pay attention to the settings %@.<br><br>Access may be restored after some time.";
+StepDisabledTeacherTitle = "Learners can't view the assignment yet";
+StepDisabledTeacherInCourseMessage = "For enable learners to view the assignment, change the course type to %@.<br><br>This step has paid features. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">Learn about plans</a>.";
+StepDisabledTeacherInCoursePlanProTitle = "<b>PRO</b> or paid";
+StepDisabledTeacherInCoursePlanEnterpriseTitle = "<b>Enterprise</b>";
+StepDisabledTeacherNoCourseMessage = "For enable learners to view the assignment, add the lesson to %@.<br><br>This step has paid features. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">Learn about plans</a>.";
+StepDisabledTeacherNoCoursePlanProTitle = "a <b>PRO</b> or <b>paid</b> course";
+StepDisabledTeacherNoCoursePlanEnterpriseTitle = "an <b>Enterprise</b> course";
 StepPosition = "Step %@";
 
 /* Video player */

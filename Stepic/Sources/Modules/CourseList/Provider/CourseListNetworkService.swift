@@ -221,14 +221,14 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
                 language: self.type.language,
                 page: page,
                 filterQuery: self.type.filterQuery
-            ).then { result, meta -> Promise<([Course.IdType], Meta, [Course])> in
+            ).then { result, meta -> Promise<([Course], [Course.IdType], Meta)> in
                 let ids = result.compactMap { $0.courseId }
                 return self.coursesAPI
                     .retrieve(ids: ids)
-                    .map { (ids, meta, $0) }
-            }.done { ids, meta, courses in
-                let resultCourses = courses.reordered(order: ids, transform: { $0.id })
-                seal.fulfill((resultCourses, meta))
+                    .map { ($0, ids, meta) }
+            }.done { courses, ids, meta in
+                let result = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((result, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
@@ -278,14 +278,14 @@ final class VisitedCourseListNetworkService: BaseCourseListNetworkService, Cours
         Promise { seal in
             self.visitedCoursesAPI.retrieve(
                 page: page
-            ).then { visitedCourses, meta -> Promise<([Course.IdType], Meta, [Course])> in
+            ).then { visitedCourses, meta -> Promise<([Course], [Course.IdType], Meta)> in
                 let ids = visitedCourses.map(\.courseID)
                 return self.coursesAPI
                     .retrieve(ids: ids)
-                    .map { (ids, meta, $0) }
-            }.done { ids, _, courses in
-                let resultCourses = courses.reordered(order: ids, transform: { $0.id })
-                seal.fulfill((resultCourses, Meta.oneAndOnlyPage))
+                    .map { ($0, ids, meta) }
+            }.done { courses, ids, _ in
+                let result = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((result, Meta.oneAndOnlyPage))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
@@ -313,7 +313,7 @@ final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, 
             self.courseListsAPI.retrieve(
                 id: self.type.courseListID,
                 page: 1
-            ).then { courseLists, _ -> Promise<([Course.IdType], Meta, [Course])> in
+            ).then { courseLists, _ -> Promise<([Course], [Course.IdType], Meta)> in
                 guard let courseList = courseLists.first else {
                     throw Error.fetchFailed
                 }
@@ -322,10 +322,50 @@ final class CatalogBlockCourseListNetworkService: BaseCourseListNetworkService, 
 
                 return self.coursesAPI
                     .retrieve(ids: coursesIDs)
-                    .map { (coursesIDs, meta, $0) }
-            }.done { ids, meta, courses in
-                let resultCourses = courses.reordered(order: ids, transform: { $0.id })
-                seal.fulfill((resultCourses, meta))
+                    .map { ($0, coursesIDs, meta) }
+            }.done { courses, ids, meta in
+                let result = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((result, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+}
+
+final class RecommendationsCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: RecommendationsCourseListType
+    private let courseRecommendationsNetworkService: CourseRecommendationsNetworkServiceProtocol
+
+    init(
+        type: RecommendationsCourseListType,
+        coursesAPI: CoursesAPI,
+        courseRecommendationsNetworkService: CourseRecommendationsNetworkServiceProtocol
+    ) {
+        self.type = type
+        self.courseRecommendationsNetworkService = courseRecommendationsNetworkService
+
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
+        Promise { seal in
+            self.courseRecommendationsNetworkService.fetch(
+                language: self.type.language,
+                platform: self.type.platform
+            ).then { courseRecommendations, _ -> Promise<([Course], [Course.IdType], Meta)> in
+                guard let courseRecommendation = courseRecommendations.first else {
+                    throw Error.fetchFailed
+                }
+
+                let (coursesIDs, meta) = self.getCoursesIDsSlice(at: page, ids: courseRecommendation.courses)
+
+                return self.coursesAPI
+                    .retrieve(ids: coursesIDs)
+                    .map { ($0, coursesIDs, meta) }
+            }.done { courses, ids, meta in
+                let result = courses.reordered(order: ids, transform: { $0.id })
+                seal.fulfill((result, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CatalogBlocksInteractorProtocol {
+protocol CatalogBlocksInteractorProtocol: AnyObject {
     func doCatalogBlocksLoad(request: CatalogBlocks.CatalogBlocksLoad.Request)
     func doFullCourseListPresentation(
         request: CatalogBlocks.FullCourseListModulePresentation.Request
@@ -48,7 +48,10 @@ final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
     }
 
     func doFullCourseListPresentation(request: CatalogBlocks.FullCourseListModulePresentation.Request) {
-        self.moduleOutput?.presentCourseList(type: request.courseListType)
+        self.moduleOutput?.presentCourseList(
+            type: request.courseListType,
+            presentationDescription: request.presentationDescription
+        )
     }
 }
 
@@ -83,8 +86,11 @@ extension CatalogBlocksInteractor: CourseListOutputProtocol {
 }
 
 extension CatalogBlocksInteractor: SimpleCourseListOutputProtocol {
-    func presentSimpleCourseList(type: CatalogBlockCourseListType) {
-        self.moduleOutput?.presentCourseList(type: type)
+    func presentSimpleCourseList(
+        type: CatalogBlockCourseListType,
+        presentationDescription: CourseList.PresentationDescription?
+    ) {
+        self.moduleOutput?.presentCourseList(type: type, presentationDescription: presentationDescription)
     }
 }
 

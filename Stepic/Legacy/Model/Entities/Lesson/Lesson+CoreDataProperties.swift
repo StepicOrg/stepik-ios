@@ -117,10 +117,10 @@ extension Lesson {
 
     var stepsArray: [Step.IdType] {
         get {
-            (self.managedStepsArray as? [IdType]) ?? []
+            self.managedStepsArray as? [Step.IdType] ?? []
         }
         set {
-            self.managedStepsArray = newValue as NSObject?
+            self.managedStepsArray = NSArray(array: newValue)
         }
     }
 
@@ -135,19 +135,19 @@ extension Lesson {
 
     var coursesArray: [Course.IdType] {
         get {
-            (self.managedCoursesArray as? [Course.IdType]) ?? []
+            self.managedCoursesArray as? [Course.IdType] ?? []
         }
         set {
-            self.managedCoursesArray = newValue as NSObject?
+            self.managedCoursesArray = NSArray(array: newValue)
         }
     }
 
     var unitsArray: [Unit.IdType] {
         get {
-            (self.managedUnitsArray as? [Unit.IdType]) ?? []
+            self.managedUnitsArray as? [Unit.IdType] ?? []
         }
         set {
-            self.managedUnitsArray = newValue as NSObject?
+            self.managedUnitsArray = NSArray(array: newValue)
         }
     }
 

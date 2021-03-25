@@ -2,6 +2,8 @@ import SwiftyJSON
 import UIKit
 
 final class ChoiceDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     var isMultipleChoice: Bool
     var options: [String]
 

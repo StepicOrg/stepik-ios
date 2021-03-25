@@ -7,10 +7,10 @@ import SwiftyJSON
 class ReplySpec: QuickSpec {
     override func spec() {
         describe("Reply") {
-            describe("NSCoding") {
-                func makeTemporaryPath(name: String) -> String {
+            describe("NSSecureCoding") {
+                func makeTemporaryFile(name: String) -> URL {
                     let temporaryDirectoryPath = NSTemporaryDirectory() as NSString
-                    return temporaryDirectoryPath.appendingPathComponent(name)
+                    return URL(fileURLWithPath: temporaryDirectoryPath.appendingPathComponent(name))
                 }
 
                 it("choice reply encoded and decoded") {
@@ -18,12 +18,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"choices": [false, true, false, false]}"#)
                     let choiceReply = ChoiceReply(json: json)
 
-                    let path = makeTemporaryPath(name: "choice-reply")
+                    let fileURL = makeTemporaryFile(name: "choice-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(choiceReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: choiceReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedChoiceReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! ChoiceReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedChoiceReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! ChoiceReply
 
                     // Then
                     expect(unarchivedChoiceReply) == choiceReply
@@ -35,12 +42,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"text": "test text", "files": []}"#)
                     let textReply = TextReply(json: json)
 
-                    let path = makeTemporaryPath(name: "text-reply")
+                    let fileURL = makeTemporaryFile(name: "text-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(textReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: textReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedTextReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! TextReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedTextReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! TextReply
 
                     // Then
                     expect(unarchivedTextReply) == textReply
@@ -52,12 +66,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"number": "25"}"#)
                     let numberReply = NumberReply(json: json)
 
-                    let path = makeTemporaryPath(name: "number-reply")
+                    let fileURL = makeTemporaryFile(name: "number-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(numberReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: numberReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedNumberReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! NumberReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedNumberReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! NumberReply
 
                     // Then
                     expect(unarchivedNumberReply) == numberReply
@@ -69,12 +90,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"text": "test", "attachments": []}"#)
                     let freeAnswerReply = FreeAnswerReply(json: json)
 
-                    let path = makeTemporaryPath(name: "free-answer-reply")
+                    let fileURL = makeTemporaryFile(name: "free-answer-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(freeAnswerReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: freeAnswerReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedFreeAnswerReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FreeAnswerReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedFreeAnswerReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! FreeAnswerReply
 
                     // Then
                     expect(unarchivedFreeAnswerReply) == freeAnswerReply
@@ -86,12 +114,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"formula": "2*x+y/z"}"#)
                     let mathReply = MathReply(json: json)
 
-                    let path = makeTemporaryPath(name: "math-reply")
+                    let fileURL = makeTemporaryFile(name: "math-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(mathReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: mathReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedMathReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! MathReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedMathReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! MathReply
 
                     // Then
                     expect(unarchivedMathReply) == mathReply
@@ -103,12 +138,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"ordering": [2, 0, 1]}"#)
                     let sortingReply = SortingReply(json: json)
 
-                    let path = makeTemporaryPath(name: "sorting-reply")
+                    let fileURL = makeTemporaryFile(name: "sorting-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(sortingReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: sortingReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedSortingReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! SortingReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedSortingReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! SortingReply
 
                     // Then
                     expect(unarchivedSortingReply) == sortingReply
@@ -120,12 +162,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"ordering": [1, 2, 0]}"#)
                     let matchingReply = MatchingReply(json: json)
 
-                    let path = makeTemporaryPath(name: "matching-reply")
+                    let fileURL = makeTemporaryFile(name: "matching-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(matchingReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: matchingReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedMatchingReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! MatchingReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedMatchingReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! MatchingReply
 
                     // Then
                     expect(unarchivedMatchingReply) == matchingReply
@@ -137,12 +186,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"language": "python3", "code": "def main():\n    pass"}"#)
                     let codeReply = CodeReply(json: json)
 
-                    let path = makeTemporaryPath(name: "code-reply")
+                    let fileURL = makeTemporaryFile(name: "code-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(codeReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: codeReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedCodeReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! CodeReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedCodeReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! CodeReply
 
                     // Then
                     expect(unarchivedCodeReply) == codeReply
@@ -155,12 +211,19 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"solve_sql": "INSERT INTO users (name) VALUES ('Fluttershy');\n"}"#)
                     let sqlReply = SQLReply(json: json)
 
-                    let path = makeTemporaryPath(name: "sql-reply")
+                    let fileURL = makeTemporaryFile(name: "sql-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(sqlReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: sqlReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedSQLReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! SQLReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedSQLReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! SQLReply
 
                     // Then
                     expect(unarchivedSQLReply) == sqlReply
@@ -172,16 +235,23 @@ class ReplySpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"blanks": ["4", "5"]}"#)
                     let fillBlanksReply = FillBlanksReply(json: json)
 
-                    let path = makeTemporaryPath(name: "fill-blanks-reply")
+                    let fileURL = makeTemporaryFile(name: "fill-blanks-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(fillBlanksReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: fillBlanksReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! FillBlanksReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedFillBlanksReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! FillBlanksReply
 
                     // Then
-                    expect(unarchivedReply) == fillBlanksReply
-                    expect(unarchivedReply.blanks) == ["4", "5"]
+                    expect(unarchivedFillBlanksReply) == fillBlanksReply
+                    expect(unarchivedFillBlanksReply.blanks) == ["4", "5"]
                 }
 
                 it("table reply encoded and decoded") {
@@ -316,12 +386,19 @@ class ReplySpec: QuickSpec {
                         choices.append(choice)
                     }
 
-                    let path = makeTemporaryPath(name: "table-reply")
+                    let fileURL = makeTemporaryFile(name: "table-reply")
 
                     // When
-                    NSKeyedArchiver.archiveRootObject(tableReply, toFile: path)
+                    let archivedData = try! NSKeyedArchiver.archivedData(
+                        withRootObject: tableReply,
+                        requiringSecureCoding: true
+                    )
+                    try! archivedData.write(to: fileURL)
 
-                    let unarchivedTableReply = NSKeyedUnarchiver.unarchiveObject(withFile: path) as! TableReply
+                    let unarchivedData = try! Data(contentsOf: fileURL)
+                    let unarchivedTableReply = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(
+                        unarchivedData
+                    ) as! TableReply
 
                     // Then
                     expect(unarchivedTableReply) == tableReply

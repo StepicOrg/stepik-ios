@@ -72,27 +72,27 @@ extension CourseListModel {
         }
     }
 
-    var coursesArray: [Int] {
-        set(value) {
-            self.managedCoursesArray = value as NSObject?
-        }
+    var coursesArray: [Course.IdType] {
         get {
-             (self.managedCoursesArray as? [Int]) ?? []
+            self.managedCoursesArray as? [Course.IdType] ?? []
+        }
+        set {
+            self.managedCoursesArray = NSArray(array: newValue)
         }
     }
 
-    var similarAuthorsArray: [Int] {
+    var similarAuthorsArray: [User.IdType] {
         get {
-            self.managedSimilarAuthorsArray as? [Int] ?? []
+            self.managedSimilarAuthorsArray as? [User.IdType] ?? []
         }
         set {
             self.managedSimilarAuthorsArray = NSArray(array: newValue)
         }
     }
 
-    var similarCourseListsArray: [Int] {
+    var similarCourseListsArray: [CourseListModel.IdType] {
         get {
-            self.managedSimilarCourseListsArray as? [Int] ?? []
+            self.managedSimilarCourseListsArray as? [CourseListModel.IdType] ?? []
         }
         set {
             self.managedSimilarCourseListsArray = NSArray(array: newValue)

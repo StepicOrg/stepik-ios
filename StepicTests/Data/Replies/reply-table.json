@@ -1,0 +1,17 @@
+{
+    "choices": [
+        {
+            "name_row": "United States",
+            "columns": [
+                {
+                    "name": "New York",
+                    "answer": false
+                },
+                {
+                    "name": "Moscow",
+                    "answer": false
+                }
+            ]
+        }
+    ]
+}

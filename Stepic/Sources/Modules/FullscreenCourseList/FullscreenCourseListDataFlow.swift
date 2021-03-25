@@ -94,10 +94,12 @@ enum FullscreenCourseList {
     enum FullscreenCourseListModulePresentation {
         struct Response {
             let courseListType: CourseListType
+            let presentationDescription: CourseList.PresentationDescription?
         }
 
         struct ViewModel {
             let courseListType: CourseListType
+            let presentationDescription: CourseList.PresentationDescription?
         }
     }
 

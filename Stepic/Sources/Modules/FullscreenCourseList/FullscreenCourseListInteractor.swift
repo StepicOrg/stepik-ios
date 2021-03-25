@@ -75,7 +75,15 @@ extension FullscreenCourseListInteractor: AuthorsCourseListOutputProtocol {
 }
 
 extension FullscreenCourseListInteractor: SimpleCourseListOutputProtocol {
-    func presentSimpleCourseList(type: CatalogBlockCourseListType) {
-        self.presenter.presentFullscreenCourseList(response: .init(courseListType: type))
+    func presentSimpleCourseList(
+        type: CatalogBlockCourseListType,
+        presentationDescription: CourseList.PresentationDescription?
+    ) {
+        self.presenter.presentFullscreenCourseList(
+            response: .init(
+                courseListType: type,
+                presentationDescription: presentationDescription
+            )
+        )
     }
 }

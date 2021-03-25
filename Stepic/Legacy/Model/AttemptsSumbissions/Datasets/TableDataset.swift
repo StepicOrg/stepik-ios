@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class TableDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     var datasetDescription: String
     var rows: [String]
     var columns: [String]
