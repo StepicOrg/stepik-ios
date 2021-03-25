@@ -99,6 +99,10 @@ final class WebControllerManager: NSObject {
             return
         }
 
+        if key == .socialAuth {
+            return present(url: url)
+        }
+
         var queryParameters = ["from_mobile_app": "true"]
         if key == .externalLink {
             queryParameters["mobile_internal_deeplink"] = "true"
