@@ -2,7 +2,7 @@ import UIKit
 import WidgetKit
 
 struct WidgetContent: TimelineEntry {
-    var date: Date = Date()
+    var date = Date()
     let userCourses: [WidgetUserCourse]
 }
 
