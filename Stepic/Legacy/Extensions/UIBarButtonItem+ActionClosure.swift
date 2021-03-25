@@ -10,22 +10,23 @@ import Foundation
 import UIKit
 
 extension UIBarButtonItem {
-    private struct AssociatedObject {
-        static var key = "action_closure_key"
-    }
-
     var actionClosure: (() -> Void)? {
         get {
-             objc_getAssociatedObject(self, &AssociatedObject.key) as? () -> Void
+            objc_getAssociatedObject(self, &AssociatedObject.key) as? () -> Void
         }
         set {
             objc_setAssociatedObject(self, &AssociatedObject.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            target = self
-            action = #selector(didTapButton(sender:))
+            self.target = self
+            self.action = #selector(self.didTapButton(sender:))
         }
     }
 
-    @objc func didTapButton(sender: Any) {
-        actionClosure?()
+    @objc
+    private func didTapButton(sender: Any) {
+        self.actionClosure?()
+    }
+
+    private enum AssociatedObject {
+        static var key = "action_closure_key"
     }
 }

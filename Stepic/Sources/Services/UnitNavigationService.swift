@@ -116,8 +116,8 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             }
 
             guard let targetUnitID = direction == .previous
-                ? section.unitsArray.last
-                : section.unitsArray.first else {
+                    ? section.unitsArray.last
+                    : section.unitsArray.first else {
                 return Promise.value(nil)
             }
 

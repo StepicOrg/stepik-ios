@@ -74,7 +74,7 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
 
                         for submission in submissions {
                             if submission.managedObjectContext != nil
-                                   && submission.managedObjectContext == attempt.managedObjectContext {
+                                && submission.managedObjectContext == attempt.managedObjectContext {
                                 submission.attempt = attempt
                             }
                         }

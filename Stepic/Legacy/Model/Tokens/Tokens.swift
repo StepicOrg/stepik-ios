@@ -34,8 +34,8 @@ final class Tokens {
             return nil
         }
         guard let amplitude = dic["Amplitude"] as? String,
-            let appmetrica = dic["AppMetrica"] as? String,
-            let firebase = dic["FirebaseAppID"] as? UInt else {
+              let appmetrica = dic["AppMetrica"] as? String,
+              let firebase = dic["FirebaseAppID"] as? UInt else {
             return nil
         }
         self.init(amplitudeToken: amplitude, appMetricaToken: appmetrica, firebaseId: firebase)

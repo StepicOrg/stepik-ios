@@ -37,7 +37,7 @@ final class CyrillicURLActivityItemSource: NSObject, UIActivityItemSource {
     ) -> Any? {
         print("Activity type is \(activityType ??? "unknown")")
         switch activityType?.rawValue {
-        case "TUSafariActivity"? :
+        case "TUSafariActivity":
             if let url = self.url {
                 return url
             } else {

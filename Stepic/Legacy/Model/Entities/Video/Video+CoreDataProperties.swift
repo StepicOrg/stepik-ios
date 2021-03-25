@@ -39,7 +39,7 @@ extension Video {
             self.managedId = newId as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
@@ -48,7 +48,7 @@ extension Video {
             self.managedThumbnailURL = value
         }
         get {
-             managedThumbnailURL ?? ""
+            managedThumbnailURL ?? ""
         }
     }
 
@@ -57,13 +57,13 @@ extension Video {
             self.managedStatus = value
         }
         get {
-             managedStatus ?? ""
+            managedStatus ?? ""
         }
     }
 
     var urls: [VideoURL] {
         get {
-             (managedURLs?.array as? [VideoURL]) ?? []
+            (managedURLs?.array as? [VideoURL]) ?? []
         }
         set(value) {
             managedURLs = NSOrderedSet(array: value)

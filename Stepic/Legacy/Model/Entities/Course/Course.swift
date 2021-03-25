@@ -83,7 +83,7 @@ final class Course: NSManagedObject, IDFetchable {
         self.init()
         self.initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.title = json[JSONKey.title.rawValue].stringValue

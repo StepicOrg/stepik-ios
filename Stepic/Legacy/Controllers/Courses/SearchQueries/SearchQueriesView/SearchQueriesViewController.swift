@@ -97,7 +97,7 @@ extension SearchQueriesViewController: UITableViewDataSource {
               let cell = tableView.dequeueReusableCell(
                 withIdentifier: "SearchSuggestionTableViewCell",
                 for: indexPath
-        ) as? SearchSuggestionTableViewCell else {
+              ) as? SearchSuggestionTableViewCell else {
             return UITableViewCell()
         }
 

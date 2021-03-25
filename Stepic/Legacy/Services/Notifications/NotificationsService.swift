@@ -188,13 +188,13 @@ extension NotificationsService {
         self.reportReceivedNotificationWithType(notificationTypeStringValue)
 
         switch NotificationType(rawValue: notificationTypeStringValue) {
-        case .notifications?:
+        case .notifications:
             self.resolveRemoteNotificationsNotification(userInfo)
-        case .notificationStatuses?:
+        case .notificationStatuses:
             self.resolveRemoteNotificationStatusesNotification(userInfo)
-        case .achievementProgresses?:
+        case .achievementProgresses:
             self.resolveRemoteAchievementNotification(userInfo)
-        case .storyTemplates?:
+        case .storyTemplates:
             self.resolveRemoteStoryTemplatesNotification(userInfo)
         default:
             print("remote notification received: unsupported notification type: \(notificationTypeStringValue)")

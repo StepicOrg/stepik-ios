@@ -33,7 +33,7 @@ final class TableInputTextView: UITextView {
 
     var placeholder: String? {
         get {
-             self.placeholderLabel.text
+            self.placeholderLabel.text
         }
         set {
             self.placeholderLabel.text = newValue

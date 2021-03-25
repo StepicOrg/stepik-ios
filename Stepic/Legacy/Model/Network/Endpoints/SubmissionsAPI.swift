@@ -58,7 +58,7 @@ final class SubmissionsAPI: APIEndpoint {
             }
         }
     }
-    
+
     /// Get submissions for the step by filterQuery.
     func retrieve(
         stepID: Int,
@@ -76,7 +76,7 @@ final class SubmissionsAPI: APIEndpoint {
             filterQuery.dictValue.forEach { key, value in
                 parameters[key] = String(describing: value)
             }
-            
+
             self.manager.request(
                 "\(StepikApplicationsInfo.apiURL)/\(self.name)",
                 method: .get,
@@ -173,7 +173,7 @@ final class SubmissionsAPI: APIEndpoint {
             })
         }
     }
-    
+
     @discardableResult
     func retrieve(
         stepName: String,

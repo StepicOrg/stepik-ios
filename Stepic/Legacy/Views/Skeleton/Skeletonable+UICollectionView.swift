@@ -16,7 +16,7 @@ private struct AssociatedKey {
 extension UICollectionView {
     private var savedDataSource: UICollectionViewDataSource? {
         get {
-             objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UICollectionViewDataSource
+            objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UICollectionViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.savedDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -25,7 +25,7 @@ extension UICollectionView {
 
     private var skeletonDataSource: SkeletonCollectionViewDataSource? {
         get {
-             objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonCollectionViewDataSource
+            objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonCollectionViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.skeletonDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)

@@ -18,7 +18,7 @@ final class NumberQuizViewController: QuizViewController {
     var reply: NumberReply?
 
     // Hack for adaptive mode (ugly layout when child quiz has padding)
-    var useSmallPadding: Bool = false
+    var useSmallPadding = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

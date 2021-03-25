@@ -32,7 +32,7 @@ struct StepikApplicationsInfo {
             idPath: Root.AuthType.Social.id,
             secretPath: Root.AuthType.Social.secret,
             redirectPath: Root.AuthType.Social.redirect
-          )
+        )
 
     static let password: AuthInfo? = !(Self.stepikAuthInfo?.has(path: Root.AuthType.password) ?? false)
         ? nil
@@ -40,7 +40,7 @@ struct StepikApplicationsInfo {
             idPath: Root.AuthType.Password.id,
             secretPath: Root.AuthType.Password.secret,
             redirectPath: Root.AuthType.Password.redirect
-          )
+        )
 
     // Section: URL
     static let appId = Self.stepikConfigInfo?.get(for: Root.URL.appId) as? String ?? ""

@@ -19,7 +19,7 @@ final class StringQuizViewController: QuizViewController {
     let textViewHeight = 64
 
     // Hack for adaptive mode (ugly layout when child quiz has padding)
-    var useSmallPadding: Bool = false
+    var useSmallPadding = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

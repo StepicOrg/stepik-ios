@@ -310,7 +310,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if url.scheme == "vk\(StepikApplicationsInfo.SocialInfo.AppIds.vk)"
-               || url.scheme == "fb\(StepikApplicationsInfo.SocialInfo.AppIds.facebook)" {
+            || url.scheme == "fb\(StepikApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 

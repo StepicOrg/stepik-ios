@@ -34,7 +34,7 @@ extension VideoURL {
             self.managedQuality = value
         }
         get {
-             managedQuality ?? ""
+            managedQuality ?? ""
         }
     }
 
@@ -43,7 +43,7 @@ extension VideoURL {
             self.managedURL = value
         }
         get {
-             managedURL ?? ""
+            managedURL ?? ""
         }
     }
 }

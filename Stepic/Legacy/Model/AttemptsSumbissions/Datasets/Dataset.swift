@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 class Dataset: NSObject, NSSecureCoding, NSCopying {
     class var supportsSecureCoding: Bool { true }

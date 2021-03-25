@@ -29,7 +29,7 @@ final class FullscreenCourseListView: UIView {
 
         if self.contentView === self.scrollableStackView {
             for (index, subview) in self.scrollableStackView.arrangedSubviews.enumerated()
-                where subview === previousView {
+            where subview === previousView {
                 return self.scrollableStackView.insertArrangedView(view, at: index)
             }
             self.scrollableStackView.addArrangedView(view)

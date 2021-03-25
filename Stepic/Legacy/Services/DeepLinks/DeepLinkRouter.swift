@@ -177,8 +177,8 @@ final class DeepLinkRouter {
         }
 
         if components.count == 4
-               && components[1].lowercased() == "users"
-               && components[3].lowercased() == "certificates" {
+            && components[1].lowercased() == "users"
+            && components[3].lowercased() == "certificates" {
             guard let userID = getID(components[2], reversed: false) else {
                 completion([])
                 return

@@ -35,7 +35,7 @@ final class HTMLParsingUtil {
         if let doc = try? Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             res += doc.css("a").compactMap {
                 if let link = $0["href"],
-                    let text = $0.text {
+                   let text = $0.text {
                     return (link: link, text: text)
                 } else {
                     return nil
@@ -51,7 +51,11 @@ final class HTMLParsingUtil {
                 return res
             }
 
-            let matches = detect.matches(in: htmlString, options: .reportCompletion, range: NSRange(location: 0, length: htmlString.count))
+            let matches = detect.matches(
+                in: htmlString,
+                options: .reportCompletion,
+                range: NSRange(location: 0, length: htmlString.count)
+            )
 
             for match in matches {
                 if let urlString = match.url?.absoluteString {
@@ -112,7 +116,7 @@ final class HTMLParsingUtil {
         if !self.isHTMLStringValid(htmlString) {
             return []
         }
-        
+
         if let doc = try? Kanna.HTML(html: "<html><body>\(htmlString)</body></html>", encoding: String.Encoding.utf8) {
             let nodes = doc.css("*")
             // Drop 2 first tags: html, body

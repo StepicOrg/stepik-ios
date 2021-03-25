@@ -1,11 +1,11 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 final class AuthorsCatalogBlockContentItem: CatalogBlockContentItem {
     override class var supportsSecureCoding: Bool { true }
 
     var id: Int = 0
-    var isOrganization: Bool = false
+    var isOrganization = false
     var fullName: String = ""
     var alias: String?
     var avatar: String = ""

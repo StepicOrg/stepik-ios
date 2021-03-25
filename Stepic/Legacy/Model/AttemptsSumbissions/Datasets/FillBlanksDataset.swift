@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 final class FillBlanksDataset: Dataset {
     override class var supportsSecureCoding: Bool { true }
@@ -59,7 +59,7 @@ final class FillBlanksDataset: Dataset {
         super.init(coder: coder)
     }
 
-    private override init() {
+    override private init() {
         self.components = []
         super.init()
     }
@@ -133,7 +133,7 @@ final class FillBlanksComponent: NSObject, NSSecureCoding, NSCopying {
         super.init()
     }
 
-    private override init() {
+    override private init() {
         self.componentType = .text
         self.text = ""
         self.options = []

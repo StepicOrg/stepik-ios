@@ -116,7 +116,7 @@ final class FeedbackStoryView: UIView, UIStoryPartViewProtocol {
         self.setContentHidden(true)
         self.activityIndicator.startAnimating()
 
-        Nuke.loadImage(with: imageURL, options: .shared, into: self.imageView, completion:  { [weak self] _ in
+        Nuke.loadImage(with: imageURL, options: .shared, into: self.imageView, completion: { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }

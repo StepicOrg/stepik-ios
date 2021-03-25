@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 final class FullCourseListsCatalogBlockContentItem: CatalogBlockContentItem {
     override class var supportsSecureCoding: Bool { true }

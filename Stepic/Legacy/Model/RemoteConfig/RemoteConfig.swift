@@ -16,7 +16,7 @@ final class RemoteConfig {
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
-    var fetchComplete: Bool = false
+    var fetchComplete = false
 
     var fetchDuration: TimeInterval = 43200
 
@@ -131,7 +131,7 @@ final class RemoteConfig {
 
     private func fetchRemoteConfigData() {
         #if DEBUG
-            self.activateDebugMode()
+        self.activateDebugMode()
         #endif
 
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(

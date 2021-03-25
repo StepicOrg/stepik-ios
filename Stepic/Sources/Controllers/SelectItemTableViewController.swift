@@ -101,7 +101,7 @@ final class SelectItemTableViewController: UITableViewController {
         let indexPath: IndexPath? = {
             for (sectionIndex, sectionViewModel) in self.viewModel.sections.enumerated() {
                 for (cellIndex, cellViewModel) in sectionViewModel.cells.enumerated()
-                    where cellViewModel.uniqueIdentifier == viewModel.uniqueIdentifier {
+                where cellViewModel.uniqueIdentifier == viewModel.uniqueIdentifier {
                     return IndexPath(row: cellIndex, section: sectionIndex)
                 }
             }

@@ -96,8 +96,8 @@ final class NotificationsPresenter {
 
     @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
-            let value = userInfo["value"] as? Int else {
-                return
+              let value = userInfo["value"] as? Int else {
+            return
         }
 
         self.badgeUnreadCount = value
@@ -108,7 +108,7 @@ final class NotificationsPresenter {
               let firedSection = userInfo["section"] as? NotificationsSection,
               let id = userInfo["id"] as? Int,
               let status = userInfo["status"] as? NotificationStatus else {
-                return
+            return
         }
 
         self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in

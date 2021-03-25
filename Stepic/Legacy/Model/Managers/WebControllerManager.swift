@@ -6,8 +6,8 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import SVProgressHUD
 import SafariServices
+import SVProgressHUD
 import UIKit
 import WebKit
 

@@ -9,7 +9,7 @@ final class StepSource: JSONSerializable {
 
     var text: String {
         get {
-             self.block[JSONKey.text.rawValue] as? String ?? ""
+            self.block[JSONKey.text.rawValue] as? String ?? ""
         }
         set {
             self.block[JSONKey.text.rawValue] = newValue

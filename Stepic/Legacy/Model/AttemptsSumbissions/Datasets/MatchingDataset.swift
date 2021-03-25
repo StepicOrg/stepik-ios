@@ -59,7 +59,7 @@ final class MatchingDataset: Dataset {
         super.init(coder: coder)
     }
 
-    private override init() {
+    override private init() {
         self.pairs = []
         super.init()
     }

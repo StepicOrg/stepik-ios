@@ -1,5 +1,5 @@
-import Foundation
 import CoreData
+import Foundation
 
 class TestCoreDataStack {
     lazy var managedObjectModel: NSManagedObjectModel = {

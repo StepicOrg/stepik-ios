@@ -91,7 +91,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
             when(
                 fulfilled:
                     self.usersNetworkService.fetch(id: currentUserID),
-                    self.courseReviewsNetworkService.fetch(courseID: course.id, userID: currentUserID)
+                self.courseReviewsNetworkService.fetch(courseID: course.id, userID: currentUserID)
             ).done { user, reviewsResult in
                 let review = reviewsResult.0.first
                 review?.course = course

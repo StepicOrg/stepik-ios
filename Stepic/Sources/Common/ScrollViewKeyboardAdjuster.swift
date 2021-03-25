@@ -66,7 +66,7 @@ final class ScrollViewKeyboardAdjuster {
     private func onKeyboardWillHide(notification: NSNotification) {
         guard self.keyboardIsShowing,
               let duration = notification
-                  .userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
+                .userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
             return
         }
 

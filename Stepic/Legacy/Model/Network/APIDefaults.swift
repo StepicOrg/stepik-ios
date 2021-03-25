@@ -12,7 +12,7 @@ import Foundation
 enum APIDefaults {
     enum Headers {
         static var bearer: HTTPHeaders {
-            return self.bearer(AuthInfo.shared.token?.accessToken)
+            self.bearer(AuthInfo.shared.token?.accessToken)
         }
 
         static func bearer(_ bearerToken: String?) -> HTTPHeaders {

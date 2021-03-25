@@ -120,28 +120,36 @@ final class Section: NSManagedObject, IDFetchable {
         }
 
         for ids in idsArray {
-            _ = ApiDataDownloader.units.retrieve(ids: ids, existing: self.units, refreshMode: .update, success: {
-                newUnits in
-                self.loadProgressesForUnits(units: newUnits, completion: {
-                    self.loadLessonsForUnits(units: newUnits, completion: {
-                        idsDownloaded(newUnits)
+            _ = ApiDataDownloader.units.retrieve(
+                ids: ids,
+                existing: self.units,
+                refreshMode: .update,
+                success: { newUnits in
+                    self.loadProgressesForUnits(units: newUnits, completion: {
+                        self.loadLessonsForUnits(units: newUnits, completion: {
+                            idsDownloaded(newUnits)
+                        }, error: {
+                            print("Error while downloading units")
+                            errorWhileDownloading()
+                        })
                     }, error: {
                         print("Error while downloading units")
                         errorWhileDownloading()
                     })
-                }, error: {
+                },
+                error: { _ in
                     print("Error while downloading units")
                     errorWhileDownloading()
-                })
-                }, error: {
-                    _ in
-                    print("Error while downloading units")
-                    errorWhileDownloading()
-            })
+                }
+            )
         }
     }
 
-    func loadProgressesForUnits(units: [Unit], completion: @escaping (() -> Void), error errorHandler: (() -> Void)? = nil) {
+    func loadProgressesForUnits(
+        units: [Unit],
+        completion: @escaping (() -> Void),
+        error errorHandler: (() -> Void)? = nil
+    ) {
         var progressIds: [String] = []
         var progresses: [Progress] = []
         for unit in units {
@@ -153,24 +161,32 @@ final class Section: NSManagedObject, IDFetchable {
             }
         }
 
-        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-            newProgresses -> Void in
-            progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            for i in 0 ..< min(units.count, progresses.count) {
-                units[i].progress = progresses[i]
-            }
+        _ = ApiDataDownloader.progresses.retrieve(
+            ids: progressIds,
+            existing: progresses,
+            refreshMode: .update,
+            success: { newProgresses -> Void in
+                progresses = Sorter.sort(newProgresses, byIds: progressIds)
+                for i in 0 ..< min(units.count, progresses.count) {
+                    units[i].progress = progresses[i]
+                }
 
-            CoreDataHelper.shared.save()
+                CoreDataHelper.shared.save()
 
-            completion()
-            }, error: {
-                (_) -> Void in
+                completion()
+            },
+            error: { (_) -> Void in
                 errorHandler?()
                 print("Error while dowloading progresses")
-        })
+            }
+        )
     }
 
-    func loadLessonsForUnits(units: [Unit], completion: @escaping (() -> Void), error errorHandler: (() -> Void)? = nil) {
+    func loadLessonsForUnits(
+        units: [Unit],
+        completion: @escaping (() -> Void),
+        error errorHandler: (() -> Void)? = nil
+    ) {
         var lessonIds: [Int] = []
         var lessons: [Lesson] = []
         for unit in units {
@@ -180,22 +196,26 @@ final class Section: NSManagedObject, IDFetchable {
             }
         }
 
-        _ = ApiDataDownloader.lessons.retrieve(ids: lessonIds, existing: lessons, refreshMode: .update, success: {
-            newLessons in
-            lessons = Sorter.sort(newLessons, byIds: lessonIds)
+        _ = ApiDataDownloader.lessons.retrieve(
+            ids: lessonIds,
+            existing: lessons,
+            refreshMode: .update,
+            success: { newLessons in
+                lessons = Sorter.sort(newLessons, byIds: lessonIds)
 
-            for i in 0 ..< units.count {
-                units[i].lesson = lessons[i]
-            }
+                for i in 0 ..< units.count {
+                    units[i].lesson = lessons[i]
+                }
 
-            CoreDataHelper.shared.save()
+                CoreDataHelper.shared.save()
 
-            completion()
-            }, error: {
-                _ in
+                completion()
+            },
+            error: { _ in
                 print("Error while downloading units")
                 errorHandler?()
-        })
+            }
+        )
     }
 
     func isCompleted(_ lessons: [Lesson]) -> Bool {
