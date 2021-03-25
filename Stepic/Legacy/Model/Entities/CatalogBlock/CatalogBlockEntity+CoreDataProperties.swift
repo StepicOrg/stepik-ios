@@ -7,6 +7,7 @@ extension CatalogBlockEntity {
     @NSManaged var managedTitle: String?
     @NSManaged var managedDescription: String?
     @NSManaged var managedLanguage: String?
+    @NSManaged var managedPlatform: NSNumber?
     @NSManaged var managedKind: String?
     @NSManaged var managedAppearance: String?
     @NSManaged var managedIsTitleVisible: NSNumber?

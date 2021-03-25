@@ -142,13 +142,12 @@ extension Unit {
         }
     }
 
-    var assignmentsArray: [Int] {
-        set(value) {
-            self.managedAssignmentsArray = value as NSObject?
-        }
-
+    var assignmentsArray: [Assignment.IdType] {
         get {
-            (self.managedAssignmentsArray as? [Int]) ?? []
+            self.managedAssignmentsArray as? [Assignment.IdType] ?? []
+        }
+        set {
+            self.managedAssignmentsArray = NSArray(array: newValue)
         }
     }
 

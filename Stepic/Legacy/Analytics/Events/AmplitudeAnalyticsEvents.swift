@@ -491,6 +491,7 @@ extension AnalyticsEvent {
         case fastContinue
         case search(query: String)
         case catalogBlock(id: Int)
+        case recommendation
         case collection(id: Int)
         case query(courseListType: CourseListType)
         case story(id: Int)
@@ -514,6 +515,8 @@ extension AnalyticsEvent {
                 return "search"
             case .catalogBlock:
                 return "catalog_block"
+            case .recommendation:
+                return "recommendation"
             case .collection:
                 return "collection"
             case .query:
@@ -535,7 +538,7 @@ extension AnalyticsEvent {
 
         var params: [String: Any]? {
             switch self {
-            case .myCourses, .visitedCourses, .downloads, .fastContinue, .notification, .unknown:
+            case .myCourses, .visitedCourses, .downloads, .fastContinue, .notification, .unknown, .recommendation:
                 return nil
             case .search(let query):
                 return ["query": query]

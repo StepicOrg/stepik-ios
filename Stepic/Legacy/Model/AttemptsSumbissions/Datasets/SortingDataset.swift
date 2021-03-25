@@ -2,6 +2,8 @@ import SwiftyJSON
 import UIKit
 
 final class SortingDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     var options: [String]
 
     override var hash: Int {

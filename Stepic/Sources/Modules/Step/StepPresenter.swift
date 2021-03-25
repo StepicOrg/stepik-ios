@@ -29,37 +29,15 @@ final class StepPresenter: StepPresenterProtocol {
         switch response.result {
         case .success(let data):
             if !data.step.isEnabled && data.isDisabledStepsSupported {
-                let stepHyperlink: String = {
-                    let stepURLString = self.urlFactory.makeStep(
-                        lessonID: data.step.lessonID,
-                        stepPosition: data.step.position
-                    )?.absoluteString ?? ""
-                    let lessonTitle = data.step.lesson != nil
-                        ? FormatterHelper.lessonTitle(data.step.lesson.require())
-                        : ""
-                    let stepTitle = String(
-                        format: NSLocalizedString("StepPosition", comment: ""),
-                        arguments: ["\(data.step.position)"]
-                    )
-
-                    return """
-                    <a href="\(stepURLString)" \
-                    rel="noopener noreferrer nofollow">\(lessonTitle) → \(stepTitle)</a>
-                    """
-                }()
-                let message = String(
-                    format: NSLocalizedString("StepDisabledMessage", comment: ""),
-                    arguments: [stepHyperlink]
-                )
-
-                let viewModel = StepDisabledViewModel(
-                    title: NSLocalizedString("StepDisabledTitle", comment: ""),
-                    message: message
+                let viewModel = self.makeDisabledStepViewModel(
+                    step: data.step,
+                    stepFontSize: data.stepFontSize,
+                    storedImages: data.storedImages
                 )
 
                 self.viewController?.displayStep(viewModel: .init(state: .disabled(data: viewModel)))
             } else {
-                let viewModel = self.makeViewModel(
+                let viewModel = self.makeStepViewModel(
                     step: data.step,
                     stepFontSize: data.stepFontSize,
                     storedImages: data.storedImages
@@ -197,7 +175,102 @@ final class StepPresenter: StepPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(
+    private func makeDisabledStepViewModel(
+        step: Step,
+        stepFontSize: StepFontSize,
+        storedImages: [StepDataFlow.StoredImage]
+    ) -> DisabledStepViewModel {
+        let stepViewModel = self.makeStepViewModel(
+            step: step,
+            stepFontSize: stepFontSize,
+            storedImages: storedImages
+        )
+
+        let title: String
+        let message: String
+        let isTeacher = step.lesson?.canEdit ?? false
+
+        if isTeacher {
+            title = NSLocalizedString("StepDisabledTeacherTitle", comment: "")
+
+            let isStepInCourse = step.lesson?.unit != nil
+            if isStepInCourse {
+                message = String(
+                    format: NSLocalizedString("StepDisabledTeacherInCourseMessage", comment: ""),
+                    arguments: [
+                        self.makeNeedsPlanTitle(
+                            step.needsPlanType,
+                            proPlanLocalizedStringKey: "StepDisabledTeacherInCoursePlanProTitle",
+                            enterprisePlanLocalizedStringKey: "StepDisabledTeacherInCoursePlanEnterpriseTitle"
+                        )
+                    ]
+                )
+            } else {
+                message = String(
+                    format: NSLocalizedString("StepDisabledTeacherNoCourseMessage", comment: ""),
+                    arguments: [
+                        self.makeNeedsPlanTitle(
+                            step.needsPlanType,
+                            proPlanLocalizedStringKey: "StepDisabledTeacherNoCoursePlanProTitle",
+                            enterprisePlanLocalizedStringKey: "StepDisabledTeacherNoCoursePlanEnterpriseTitle"
+                        )
+                    ]
+                )
+            }
+        } else {
+            title = NSLocalizedString("StepDisabledStudentTitle", comment: "")
+
+            let stepHyperlink: String = {
+                let stepURLString = self.urlFactory.makeStep(
+                    lessonID: step.lessonID,
+                    stepPosition: step.position
+                )?.absoluteString ?? ""
+
+                let lessonTitle = step.lesson != nil
+                    ? FormatterHelper.lessonTitle(step.lesson.require())
+                    : ""
+
+                let stepTitle = String(
+                    format: NSLocalizedString("StepPosition", comment: ""),
+                    arguments: ["\(step.position)"]
+                )
+
+                return "<a href=\"\(stepURLString)\">\(lessonTitle) → \(stepTitle)</a>"
+            }()
+            message = String(
+                format: NSLocalizedString("StepDisabledStudentMessage", comment: ""),
+                arguments: [stepHyperlink]
+            )
+        }
+
+        return DisabledStepViewModel(
+            step: stepViewModel,
+            disabled: .init(
+                title: title,
+                message: message,
+                isTeacher: isTeacher
+            )
+        )
+    }
+
+    private func makeNeedsPlanTitle(
+        _ needsPlanType: CourseType?,
+        proPlanLocalizedStringKey: String,
+        enterprisePlanLocalizedStringKey: String
+    ) -> String {
+        // swiftlint:disable nslocalizedstring_key
+        switch needsPlanType {
+        case .pro:
+            return NSLocalizedString(proPlanLocalizedStringKey, comment: "")
+        case .enterprise:
+            return NSLocalizedString(enterprisePlanLocalizedStringKey, comment: "")
+        default:
+            return "N/A"
+        }
+        // swiftlint:enable nslocalizedstring_key
+    }
+
+    private func makeStepViewModel(
         step: Step,
         stepFontSize: StepFontSize,
         storedImages: [StepDataFlow.StoredImage]

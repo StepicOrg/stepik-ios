@@ -25,10 +25,16 @@ final class DiscussionsTableViewDataSource: NSObject {
     }
 
     func indexPath(for commentID: Comment.IdType) -> IndexPath? {
-        // Expected to have discussion id here
-        if let discussionIndex = self.viewModels.firstIndex(where: { $0.id == commentID }) {
-            return IndexPath(row: 0, section: discussionIndex)
+        for (discussionIndex, discussion) in self.viewModels.enumerated() {
+            if discussion.id == commentID {
+                return IndexPath(row: 0, section: discussionIndex)
+            }
+
+            for (replyIndex, reply) in discussion.replies.enumerated() where reply.id == commentID {
+                return IndexPath(row: replyIndex + Self.parentDiscussionInset, section: discussionIndex)
+            }
         }
+
         return nil
     }
 
@@ -139,9 +145,13 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
                 strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectAvatar: commentViewModel)
             }
         }
-        cell.onMoreClick = { [weak self] in
-            if let strongSelf = self {
-                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectMoreAction: commentViewModel)
+        cell.onMoreClick = { [weak self, weak cell] in
+            if let strongSelf = self, let strongCell = cell {
+                strongSelf.delegate?.discussionsTableViewDataSource(
+                    strongSelf,
+                    didSelectMoreAction: commentViewModel,
+                    anchorView: strongCell.moreActionAnchorView
+                )
             }
         }
         cell.onLinkClick = { [weak self] url in

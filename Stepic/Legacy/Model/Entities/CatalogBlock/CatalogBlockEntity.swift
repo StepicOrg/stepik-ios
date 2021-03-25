@@ -51,6 +51,15 @@ final class CatalogBlockEntity: NSManagedObject {
         }
     }
 
+    var platform: Int {
+        get {
+            self.managedPlatform?.intValue ?? PlatformType.ios.rawValue
+        }
+        set {
+            self.managedPlatform = NSNumber(value: newValue)
+        }
+    }
+
     var kind: String {
         get {
             self.managedKind ?? ""
@@ -80,10 +89,10 @@ final class CatalogBlockEntity: NSManagedObject {
 
     var content: [CatalogBlockContentItem] {
         get {
-            (self.managedContent as? [CatalogBlockContentItem]) ?? []
+            self.managedContent as? [CatalogBlockContentItem] ?? []
         }
         set {
-            self.managedContent = newValue as NSObject?
+            self.managedContent = NSArray(array: newValue)
         }
     }
 
@@ -101,6 +110,7 @@ extension CatalogBlockEntity {
             position: self.position,
             title: self.title,
             language: self.language,
+            platform: self.platform,
             descriptionString: self.descriptionString,
             kindString: self.kind,
             appearanceString: self.appearance,
@@ -108,7 +118,7 @@ extension CatalogBlockEntity {
             content: self.content
         )
     }
-
+    
     convenience init(catalogBlock: CatalogBlock, managedObjectContext: NSManagedObjectContext) {
         guard let entity = NSEntityDescription.entity(
             forEntityName: "CatalogBlockEntity", in: managedObjectContext
@@ -122,6 +132,7 @@ extension CatalogBlockEntity {
         self.position = catalogBlock.position
         self.title = catalogBlock.title
         self.language = catalogBlock.language
+        self.platform = catalogBlock.platform
         self.descriptionString = catalogBlock.descriptionString
         self.kind = catalogBlock.kindString
         self.appearance = catalogBlock.appearanceString

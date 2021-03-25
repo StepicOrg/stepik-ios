@@ -14,6 +14,8 @@ enum CatalogBlockContentItemParser {
             return SimpleCourseListsCatalogBlockContentItem(json: json)
         case .authors:
             return AuthorsCatalogBlockContentItem(json: json)
+        case .recommendedCourses:
+            return nil
         }
     }
 }

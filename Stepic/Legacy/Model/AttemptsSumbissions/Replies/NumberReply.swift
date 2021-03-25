@@ -2,6 +2,8 @@ import Foundation
 import SwiftyJSON
 
 final class NumberReply: Reply {
+    override class var supportsSecureCoding: Bool { true }
+
     var number: String
 
     override var dictValue: [String: Any] {

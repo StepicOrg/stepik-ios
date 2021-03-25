@@ -122,6 +122,12 @@ final class QuizFeedbackView: UIView {
         self.animateFeedbackAppearance(showFeedback: hint != nil)
     }
 
+    func setIconImage(_ image: UIImage?) {
+        if let imageView = self.leftView.subviews.first as? UIImageView {
+            imageView.image = image
+        }
+    }
+
     // MARK: Private API
 
     private func animateFeedbackAppearance(showFeedback: Bool) {

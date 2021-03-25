@@ -2,6 +2,8 @@ import SwiftyJSON
 import UIKit
 
 final class FreeAnswerDataset: Dataset {
+    override class var supportsSecureCoding: Bool { true }
+
     var isHTMLEnabled: Bool
     var isAttachmentsEnabled: Bool
 
