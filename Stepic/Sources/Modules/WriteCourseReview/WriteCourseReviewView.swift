@@ -75,7 +75,7 @@ final class WriteCourseReviewView: UIView {
 
     private var starsCount: Int {
         get {
-             self.starsView.starsCount
+            self.starsView.starsCount
         }
         set {
             if newValue != self.starsView.starsCount {

@@ -148,7 +148,7 @@ final class ImageButton: UIControl {
                         y: additionalVerticalOffset + self.imageInsets.top
                     ),
                     size: self.imageSize
-                  )
+                )
                 : .zero
 
             self.titleLabel.frame = CGRect(

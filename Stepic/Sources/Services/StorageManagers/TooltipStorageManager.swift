@@ -11,7 +11,7 @@ protocol TooltipStorageManagerProtocol: AnyObject {
 final class TooltipStorageManager: TooltipStorageManagerProtocol {
     var didShowOnHomeContinueLearning: Bool {
         get {
-             TooltipDefaultsManager.shared.didShowOnHomeContinueLearning
+            TooltipDefaultsManager.shared.didShowOnHomeContinueLearning
         }
         set {
             TooltipDefaultsManager.shared.didShowOnHomeContinueLearning = newValue
@@ -20,7 +20,7 @@ final class TooltipStorageManager: TooltipStorageManagerProtocol {
 
     var didShowOnPersonalDeadlinesButton: Bool {
         get {
-             TooltipDefaultsManager.shared.didShowOnPersonalDeadlinesButton
+            TooltipDefaultsManager.shared.didShowOnPersonalDeadlinesButton
         }
         set {
             TooltipDefaultsManager.shared.didShowOnPersonalDeadlinesButton = newValue
