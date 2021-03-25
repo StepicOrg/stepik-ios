@@ -90,7 +90,7 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
                 self.likesView.image = likesCount >= 0
                     ? UIImage(named: "course-info-lesson-like")?.withRenderingMode(.alwaysTemplate)
                     : UIImage(named: "course-info-lesson-dislike")?.withRenderingMode(.alwaysTemplate)
-                self.likesView.text = "\(likesCount)"
+                self.likesView.text = "\(abs(likesCount))"
             }
         }
     }
