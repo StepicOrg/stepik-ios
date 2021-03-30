@@ -302,17 +302,20 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         )
 
         let progressLabelText: String? = {
-            guard let progress = section.progress,
-                  progress.cost > 0 else {
+            guard let progress = section.progress else {
                 return nil
             }
 
-            if let examViewModel = examViewModel {
-                if examViewModel.state == .finished, progress.score == 0 {
-                    return NSLocalizedString("CourseInfoTabSyllabusSectionExamNoScoreTitle", comment: "")
-                } else {
-                    return nil
-                }
+            if examViewModel?.state == .finished, progress.score == 0 {
+                return NSLocalizedString("CourseInfoTabSyllabusSectionExamNoScoreTitle", comment: "")
+            }
+
+            guard progress.cost > 0 else {
+                return nil
+            }
+
+            if examViewModel != nil && examViewModel?.state != .finished {
+                return nil
             }
 
             return String(
