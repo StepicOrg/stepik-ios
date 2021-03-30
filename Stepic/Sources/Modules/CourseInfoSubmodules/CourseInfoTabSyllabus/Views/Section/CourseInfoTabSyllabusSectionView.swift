@@ -13,6 +13,8 @@ extension CourseInfoTabSyllabusSectionView {
 
         let badgesViewHeight: CGFloat = 21
 
+        let examActionButtonHeight: CGFloat = 44
+
         let textStackViewSpacing: CGFloat = 10
         let textStackViewInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
 
@@ -90,6 +92,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return label
     }()
 
+    private lazy var examActionButton: CourseInfoTabSyllabusSectionExamActionButton = {
+        let button = CourseInfoTabSyllabusSectionExamActionButton()
+        button.addTarget(self, action: #selector(self.examButtonClicked), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+
     private lazy var downloadButtonTapProxyView = TapProxyView(targetView: self.downloadButton)
 
     private lazy var downloadButton: DownloadControlView = {
@@ -145,6 +154,7 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     // To properly center when downloaded size visible
     private var downloadButtonCenterYConstraint: Constraint?
 
+    var onExamButtonClick: (() -> Void)?
     var onDownloadButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -171,17 +181,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.progressLabel.isHidden = viewModel.progressLabelText == nil
         self.requirementsLabel.isHidden = viewModel.requirementsLabelText == nil
 
-        self.badgesView.configure(viewModel: viewModel)
-        if self.badgesView.isEmpty {
-            self.badgesContainerStackView.isHidden = true
-            self.indexLabelCenterYBadgesConstraint?.deactivate()
-            self.indexLabelCenterYTitleConstraint?.activate()
-        } else {
-            self.badgesContainerStackView.isHidden = false
-            self.indexLabelCenterYTitleConstraint?.deactivate()
-            self.indexLabelCenterYBadgesConstraint?.activate()
-        }
-
+        self.updateBadges(viewModel: viewModel)
+        self.updateExamActionButton(viewModel: viewModel.exam)
         self.updateDownloadState(newState: viewModel.downloadState)
         self.updateEnabledAppearance(isEnabled: !viewModel.isDisabled)
 
@@ -247,6 +248,42 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         }
     }
 
+    private func updateBadges(viewModel: CourseInfoTabSyllabusSectionViewModel) {
+        self.badgesView.configure(viewModel: viewModel)
+
+        if self.badgesView.isEmpty {
+            self.badgesContainerStackView.isHidden = true
+
+            self.indexLabelCenterYBadgesConstraint?.deactivate()
+            self.indexLabelCenterYTitleConstraint?.activate()
+        } else {
+            self.badgesContainerStackView.isHidden = false
+
+            self.indexLabelCenterYTitleConstraint?.deactivate()
+            self.indexLabelCenterYBadgesConstraint?.activate()
+        }
+    }
+
+    private func updateExamActionButton(viewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?) {
+        if let viewModel = viewModel {
+            let title: String? = {
+                switch viewModel.state {
+                case .canStart:
+                    return NSLocalizedString("SyllabusExamStartInWeb", comment: "")
+                case .inProgress:
+                    return NSLocalizedString("SyllabusExamContinueInWeb", comment: "")
+                case .canNotStart, .finished:
+                    return nil
+                }
+            }()
+
+            self.examActionButton.setTitle(title, for: .normal)
+            self.examActionButton.isHidden = title == nil
+        } else {
+            self.examActionButton.isHidden = true
+        }
+    }
+
     private func updateEnabledAppearance(isEnabled: Bool) {
         // Not dims the requirements label, to make section requirements visible
         let alpha = isEnabled
@@ -267,6 +304,11 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     private func downloadButtonClicked() {
         self.onDownloadButtonClick?()
     }
+
+    @objc
+    private func examButtonClicked() {
+        self.onExamButtonClick?()
+    }
 }
 
 extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewProtocol {
@@ -282,6 +324,7 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.textStackView.addArrangedSubview(self.titleLabel)
         self.textStackView.addArrangedSubview(self.progressLabel)
         self.textStackView.addArrangedSubview(self.requirementsLabel)
+        self.textStackView.addArrangedSubview(self.examActionButton)
         self.addSubview(self.textStackView)
 
         self.addSubview(self.downloadButtonTapProxyView)
@@ -321,6 +364,9 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
 
         self.badgesContainerStackView.translatesAutoresizingMaskIntoConstraints = false
         self.badgesContainerStackView.snp.makeConstraints { $0.height.equalTo(self.appearance.badgesViewHeight) }
+
+        self.examActionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.examActionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.examActionButtonHeight) }
 
         self.downloadButton.translatesAutoresizingMaskIntoConstraints = false
         self.downloadButton.setContentCompressionResistancePriority(.required, for: .horizontal)

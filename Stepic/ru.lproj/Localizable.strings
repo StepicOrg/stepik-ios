@@ -767,6 +767,8 @@ SyllabusDownloadAll = "Скачать";
 SyllabusDownloaded = "Загружено %@";
 SyllabusExamFinished = "Завершен";
 SyllabusExamInProgress = "В процессе";
+SyllabusExamStartInWeb = "Начать экзамен в Web-версии";
+SyllabusExamContinueInWeb = "Продолжить в Web-версии";
 NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
 
 /* Profile edit */

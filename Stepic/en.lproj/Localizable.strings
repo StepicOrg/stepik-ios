@@ -765,7 +765,9 @@ SyllabusDeadlinesButton = "Schedule";
 SyllabusDownloadAll = "Download";
 SyllabusDownloaded = "Downloaded %@";
 SyllabusExamFinished = "Finished";
-SyllabusExamInProgress = "In progress";
+SyllabusExamInProgress = "In Progress";
+SyllabusExamStartInWeb = "Start the Exam in the Web-Version";
+SyllabusExamContinueInWeb = "Сontinue in the Web-Version";
 NoReviews = "Unfortunately, there are no reviews sent for this course";
 
 /* Profile edit */
