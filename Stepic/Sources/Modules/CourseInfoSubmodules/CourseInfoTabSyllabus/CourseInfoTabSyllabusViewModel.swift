@@ -19,15 +19,30 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let requirementsLabelText: String?
 
     var units: [UnitViewModelWrapper]
-    var deadlines: CourseInfoTabSyllabusSectionDeadlinesViewModel?
+    let deadlines: CourseInfoTabSyllabusSectionDeadlinesViewModel?
+    let exam: ExamViewModel?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
     let isDisabled: Bool
-    let isExam: Bool
+
+    var isExam: Bool { self.exam != nil }
 
     enum UnitViewModelWrapper {
         case placeholder
         case normal(viewModel: CourseInfoTabSyllabusUnitViewModel)
+    }
+
+    struct ExamViewModel {
+        let state: State
+        let isProctored: Bool
+        let durationText: String
+
+        enum State {
+            case canStart
+            case canNotStart
+            case inProgress
+            case finished
+        }
     }
 }
 

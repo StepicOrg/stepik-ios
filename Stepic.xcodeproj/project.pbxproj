@@ -838,6 +838,7 @@
 		2CB113AB259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */; };
 		2CB113B0259205D60093B572 /* StoryPartsReactionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */; };
 		2CB113C425920EC20093B572 /* StoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113C325920EC20093B572 /* StoryProtocols.swift */; };
+		2CB11AE826131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB11AE726131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift */; };
 		2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */; };
 		2CB1C3AF24008D4A001DA83E /* UserCodeRunsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */; };
 		2CB1C3B124009339001DA83E /* UserCodeRunsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3B024009339001DA83E /* UserCodeRunsNetworkService.swift */; };
@@ -2541,6 +2542,7 @@
 		2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoryPartReaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartsReactionsPersistenceService.swift; sourceTree = "<group>"; };
 		2CB113C325920EC20093B572 /* StoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryProtocols.swift; sourceTree = "<group>"; };
+		2CB11AE726131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusSectionBadgesView.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB1C01725B84FCD00582327 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2CB1C01825B84FCD00582327 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
@@ -8248,6 +8250,7 @@
 		62E98FAB33FB4DB9AF8CA32F /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				2CB11AE726131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift */,
 				62E98F7A453F3892E5B1243A /* CourseInfoTabSyllabusSectionDeadlinesView.swift */,
 				62E9849974EAC26EC8A30C2F /* CourseInfoTabSyllabusSectionView.swift */,
 			);
@@ -10673,6 +10676,7 @@
 				69C6D82E51B19E566B93C25F /* CatalogBlocksView.swift in Sources */,
 				725A032976CEA104C4F958AC /* CatalogBlocksViewController.swift in Sources */,
 				23A9551EEBE3A772D03905A6 /* CatalogBlocksOutputProtocol.swift in Sources */,
+				2CB11AE826131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift in Sources */,
 				2C7C874AB06B7AFA9B3E0DEF /* SimpleCourseListAssembly.swift in Sources */,
 				88D23475D2D365AD46F7BFAE /* SimpleCourseListDataFlow.swift in Sources */,
 				2BCB44322E830B821B671855 /* SimpleCourseListInteractor.swift in Sources */,

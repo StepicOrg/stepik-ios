@@ -165,6 +165,7 @@ points234 = "points";
 points567890 = "points";
 VideoRate = "Video rate";
 ExamTitle = "Exam";
+ExamProctoredTitle = "Exam with proctoring";
 ShowExamInWeb = "Open exam in web version?";
 LastStepRouterShowExamInWeb = "The next module is an exam module, you can only solve it in the web version. Press \"Open\" to continue in the web version.";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
@@ -763,6 +764,8 @@ CourseMeetsRecommendations = "Meets the recommendations of Stepik";
 SyllabusDeadlinesButton = "Schedule";
 SyllabusDownloadAll = "Download";
 SyllabusDownloaded = "Downloaded %@";
+SyllabusExamFinished = "Finished";
+SyllabusExamInProgress = "In progress";
 NoReviews = "Unfortunately, there are no reviews sent for this course";
 
 /* Profile edit */

@@ -310,6 +310,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             requiredSection: requiredSection
         )
 
+        let examViewModel = self.makeExamViewModel(section: section)
+
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
             index: "\(index + 1)",
@@ -319,14 +321,28 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             requirementsLabelText: requirementsLabelText,
             units: units,
             deadlines: deadlines,
+            exam: examViewModel,
             downloadState: downloadState,
-            isDisabled: !section.isReachable,
-            isExam: section.isExam
+            isDisabled: !section.isReachable
         )
 
         self.cachedSectionViewModels[section.id] = viewModel
 
         return viewModel
+    }
+
+    private func makeExamViewModel(
+        section: SectionPlainObject
+    ) -> CourseInfoTabSyllabusSectionViewModel.ExamViewModel? {
+        guard section.isExam else {
+            return nil
+        }
+
+        return .init(
+            state: .inProgress,
+            isProctored: false,
+            durationText: FormatterHelper.minutesCount(120)
+        )
     }
 
     private func makeUnitViewModel(

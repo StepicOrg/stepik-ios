@@ -9,10 +9,9 @@ extension CourseInfoTabSyllabusSectionView {
         let indexFont = UIFont.systemFont(ofSize: 15)
         let indexLabelInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
         // Width for two-digit indexes
-        let indexLabelWidth: CGFloat = 16
+        let indexLabelWidth: CGFloat = 17
 
-        let examTextColor = UIColor.stepikPrimaryText
-        let examFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let badgesViewHeight: CGFloat = 21
 
         let textStackViewSpacing: CGFloat = 10
         let textStackViewInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
@@ -56,6 +55,16 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         label.textAlignment = .center
         label.textColor = self.appearance.indexTextColor
         return label
+    }()
+
+    private lazy var badgesView = CourseInfoTabSyllabusSectionBadgesView()
+
+    private lazy var badgesContainerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.isHidden = true
+        return stackView
     }()
 
     private lazy var titleLabel: UILabel = {
@@ -107,15 +116,6 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return stackView
     }()
 
-    private lazy var examLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.examFont
-        label.textColor = self.appearance.examTextColor
-        label.numberOfLines = 1
-        label.text = NSLocalizedString("ExamTitle", comment: "")
-        return label
-    }()
-
     private lazy var progressIndicatorView: UIProgressView = {
         let view = UIProgressView()
         view.progressViewStyle = .bar
@@ -137,6 +137,10 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         let view = CourseInfoTabSyllabusSectionDeadlinesView(appearance: appearance)
         return view
     }()
+
+    // To properly center index label
+    private var indexLabelCenterYBadgesConstraint: Constraint?
+    private var indexLabelCenterYTitleConstraint: Constraint?
 
     // To properly center when downloaded size visible
     private var downloadButtonCenterYConstraint: Constraint?
@@ -164,9 +168,19 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.progressLabel.text = viewModel.progressLabelText
         self.progressIndicatorView.progress = viewModel.progress
 
-        self.examLabel.isHidden = !viewModel.isExam
         self.progressLabel.isHidden = viewModel.progressLabelText == nil
         self.requirementsLabel.isHidden = viewModel.requirementsLabelText == nil
+
+        self.badgesView.configure(viewModel: viewModel)
+        if self.badgesView.isEmpty {
+            self.badgesContainerStackView.isHidden = true
+            self.indexLabelCenterYBadgesConstraint?.deactivate()
+            self.indexLabelCenterYTitleConstraint?.activate()
+        } else {
+            self.badgesContainerStackView.isHidden = false
+            self.indexLabelCenterYTitleConstraint?.deactivate()
+            self.indexLabelCenterYBadgesConstraint?.activate()
+        }
 
         self.updateDownloadState(newState: viewModel.downloadState)
         self.updateEnabledAppearance(isEnabled: !viewModel.isDisabled)
@@ -242,7 +256,6 @@ final class CourseInfoTabSyllabusSectionView: UIView {
             self.indexLabel,
             self.titleLabel,
             self.progressLabel,
-            self.examLabel,
             self.downloadButton,
             self.downloadedSizeLabel,
             self.deadlinesView,
@@ -264,10 +277,11 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
     func addSubviews() {
         self.addSubview(self.indexLabel)
 
+        self.badgesContainerStackView.addArrangedSubview(self.badgesView)
+        self.textStackView.addArrangedSubview(self.badgesContainerStackView)
         self.textStackView.addArrangedSubview(self.titleLabel)
         self.textStackView.addArrangedSubview(self.progressLabel)
         self.textStackView.addArrangedSubview(self.requirementsLabel)
-        self.textStackView.addArrangedSubview(self.examLabel)
         self.addSubview(self.textStackView)
 
         self.addSubview(self.downloadButtonTapProxyView)
@@ -296,10 +310,17 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.indexLabel.translatesAutoresizingMaskIntoConstraints = false
         self.indexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.indexLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.titleLabel.snp.centerY)
             make.leading.equalToSuperview().offset(self.appearance.indexLabelInsets.left)
             make.width.equalTo(self.appearance.indexLabelWidth)
+
+            self.indexLabelCenterYTitleConstraint = make.centerY.equalTo(self.titleLabel.snp.centerY).constraint
+
+            self.indexLabelCenterYBadgesConstraint = make.centerY.equalTo(self.badgesView.snp.centerY).constraint
+            self.indexLabelCenterYBadgesConstraint?.deactivate()
         }
+
+        self.badgesContainerStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.badgesContainerStackView.snp.makeConstraints { $0.height.equalTo(self.appearance.badgesViewHeight) }
 
         self.downloadButton.translatesAutoresizingMaskIntoConstraints = false
         self.downloadButton.setContentCompressionResistancePriority(.required, for: .horizontal)
