@@ -369,6 +369,14 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 return .canStart
             }
 
+            if section.isExamActive {
+                return .inProgress
+            }
+
+            if section.isExamFinished {
+                return .finished
+            }
+
             return .canNotStart
         }()
 

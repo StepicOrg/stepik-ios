@@ -38,6 +38,13 @@ final class Section: NSManagedObject, IDFetchable {
         }
     }
 
+    var isFinished: Bool {
+        if let effectiveEndDateSource = self.effectiveEndDateSource {
+            return effectiveEndDateSource < Date()
+        }
+        return false
+    }
+
     var effectiveBeginDateSource: Date? {
         self.beginDateSource ?? self.course?.beginDateSource
     }
@@ -71,6 +78,18 @@ final class Section: NSManagedObject, IDFetchable {
         }
 
         return self.isExamTime && self.isRequirementSatisfied
+    }
+
+    var isExamActive: Bool {
+        (self.examSession?.isActive ?? false) && !(self.proctorSession?.isFinished ?? false)
+    }
+
+    var isExamFinished: Bool {
+        if self.isExamCanStart || self.isExamActive {
+            return false
+        }
+
+        return self.isFinished || (self.proctorSession?.isFinished ?? false) || self.examSession?.id != nil
     }
 
     required convenience init(json: JSON) {

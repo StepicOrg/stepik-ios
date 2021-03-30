@@ -5,6 +5,8 @@ import SwiftyJSON
 final class ExamSession: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
 
+    var isActive: Bool { self.timeLeft > 0 }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
