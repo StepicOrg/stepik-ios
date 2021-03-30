@@ -14,14 +14,17 @@ import Foundation
 
 extension Course {
     @NSManaged var managedId: NSNumber?
-    @NSManaged var managedBeginDate: Date?
     @NSManaged var managedCourseDescription: String?
     @NSManaged var managedTitle: String?
+    @NSManaged var managedBeginDate: Date?
     @NSManaged var managedEndDate: Date?
+    @NSManaged var managedBeginDateSource: Date?
+    @NSManaged var managedEndDateSource: Date?
     @NSManaged var managedImageURL: String?
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
+    @NSManaged var managedIsProctored: NSNumber?
     @NSManaged var managedIsFavorite: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
@@ -128,15 +131,6 @@ extension Course {
         }
     }
 
-    var beginDate: Date? {
-        set(date) {
-            self.managedBeginDate = date
-        }
-        get {
-            managedBeginDate
-        }
-    }
-
     var courseDescription: String {
         set(description) {
             self.managedCourseDescription = description
@@ -164,12 +158,39 @@ extension Course {
         }
     }
 
+    var beginDate: Date? {
+        set(date) {
+            self.managedBeginDate = date
+        }
+        get {
+            managedBeginDate
+        }
+    }
+
     var endDate: Date? {
         set(date) {
             self.managedEndDate = date
         }
         get {
             managedEndDate
+        }
+    }
+
+    var beginDateSource: Date? {
+        get {
+            self.managedBeginDateSource
+        }
+        set {
+            self.managedBeginDateSource = newValue
+        }
+    }
+
+    var endDateSource: Date? {
+        get {
+            self.managedEndDateSource
+        }
+        set {
+            self.managedEndDateSource = newValue
         }
     }
 
@@ -224,6 +245,15 @@ extension Course {
         }
         get {
             managedFeatured?.boolValue ?? false
+        }
+    }
+
+    var isProctored: Bool {
+        get {
+            self.managedIsProctored?.boolValue ?? false
+        }
+        set {
+            self.managedIsProctored = NSNumber(value: newValue)
         }
     }
 

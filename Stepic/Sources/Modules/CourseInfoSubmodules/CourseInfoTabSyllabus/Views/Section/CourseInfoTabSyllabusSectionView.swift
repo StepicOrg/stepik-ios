@@ -9,10 +9,11 @@ extension CourseInfoTabSyllabusSectionView {
         let indexFont = UIFont.systemFont(ofSize: 15)
         let indexLabelInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
         // Width for two-digit indexes
-        let indexLabelWidth: CGFloat = 16
+        let indexLabelWidth: CGFloat = 17
 
-        let examTextColor = UIColor.stepikPrimaryText
-        let examFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let badgesViewHeight: CGFloat = 21
+
+        let examActionButtonHeight: CGFloat = 44
 
         let textStackViewSpacing: CGFloat = 10
         let textStackViewInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
@@ -58,6 +59,16 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return label
     }()
 
+    private lazy var badgesView = CourseInfoTabSyllabusSectionBadgesView()
+
+    private lazy var badgesContainerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.isHidden = true
+        return stackView
+    }()
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.titleFont
@@ -79,6 +90,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         label.textColor = self.appearance.requirementsTextColor
         label.numberOfLines = 0
         return label
+    }()
+
+    private lazy var examActionButton: CourseInfoTabSyllabusSectionExamActionButton = {
+        let button = CourseInfoTabSyllabusSectionExamActionButton()
+        button.addTarget(self, action: #selector(self.examButtonClicked), for: .touchUpInside)
+        button.isHidden = true
+        return button
     }()
 
     private lazy var downloadButtonTapProxyView = TapProxyView(targetView: self.downloadButton)
@@ -107,15 +125,6 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return stackView
     }()
 
-    private lazy var examLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.examFont
-        label.textColor = self.appearance.examTextColor
-        label.numberOfLines = 1
-        label.text = NSLocalizedString("ExamTitle", comment: "")
-        return label
-    }()
-
     private lazy var progressIndicatorView: UIProgressView = {
         let view = UIProgressView()
         view.progressViewStyle = .bar
@@ -138,9 +147,14 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return view
     }()
 
+    // To properly center index label
+    private var indexLabelCenterYBadgesConstraint: Constraint?
+    private var indexLabelCenterYTitleConstraint: Constraint?
+
     // To properly center when downloaded size visible
     private var downloadButtonCenterYConstraint: Constraint?
 
+    var onExamButtonClick: (() -> Void)?
     var onDownloadButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -164,10 +178,11 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.progressLabel.text = viewModel.progressLabelText
         self.progressIndicatorView.progress = viewModel.progress
 
-        self.examLabel.isHidden = !viewModel.isExam
         self.progressLabel.isHidden = viewModel.progressLabelText == nil
         self.requirementsLabel.isHidden = viewModel.requirementsLabelText == nil
 
+        self.updateBadges(viewModel: viewModel)
+        self.updateExamActionButton(viewModel: viewModel.exam)
         self.updateDownloadState(newState: viewModel.downloadState)
         self.updateEnabledAppearance(isEnabled: !viewModel.isDisabled)
 
@@ -233,6 +248,42 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         }
     }
 
+    private func updateBadges(viewModel: CourseInfoTabSyllabusSectionViewModel) {
+        self.badgesView.configure(viewModel: viewModel)
+
+        if self.badgesView.isEmpty {
+            self.badgesContainerStackView.isHidden = true
+
+            self.indexLabelCenterYBadgesConstraint?.deactivate()
+            self.indexLabelCenterYTitleConstraint?.activate()
+        } else {
+            self.badgesContainerStackView.isHidden = false
+
+            self.indexLabelCenterYTitleConstraint?.deactivate()
+            self.indexLabelCenterYBadgesConstraint?.activate()
+        }
+    }
+
+    private func updateExamActionButton(viewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?) {
+        if let viewModel = viewModel {
+            let title: String? = {
+                switch viewModel.state {
+                case .canStart:
+                    return NSLocalizedString("SyllabusExamStartInWeb", comment: "")
+                case .inProgress:
+                    return NSLocalizedString("SyllabusExamContinueInWeb", comment: "")
+                case .canNotStart, .finished:
+                    return nil
+                }
+            }()
+
+            self.examActionButton.setTitle(title, for: .normal)
+            self.examActionButton.isHidden = title == nil
+        } else {
+            self.examActionButton.isHidden = true
+        }
+    }
+
     private func updateEnabledAppearance(isEnabled: Bool) {
         // Not dims the requirements label, to make section requirements visible
         let alpha = isEnabled
@@ -242,7 +293,6 @@ final class CourseInfoTabSyllabusSectionView: UIView {
             self.indexLabel,
             self.titleLabel,
             self.progressLabel,
-            self.examLabel,
             self.downloadButton,
             self.downloadedSizeLabel,
             self.deadlinesView,
@@ -254,6 +304,11 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     private func downloadButtonClicked() {
         self.onDownloadButtonClick?()
     }
+
+    @objc
+    private func examButtonClicked() {
+        self.onExamButtonClick?()
+    }
 }
 
 extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewProtocol {
@@ -264,10 +319,12 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
     func addSubviews() {
         self.addSubview(self.indexLabel)
 
+        self.badgesContainerStackView.addArrangedSubview(self.badgesView)
+        self.textStackView.addArrangedSubview(self.badgesContainerStackView)
         self.textStackView.addArrangedSubview(self.titleLabel)
         self.textStackView.addArrangedSubview(self.progressLabel)
         self.textStackView.addArrangedSubview(self.requirementsLabel)
-        self.textStackView.addArrangedSubview(self.examLabel)
+        self.textStackView.addArrangedSubview(self.examActionButton)
         self.addSubview(self.textStackView)
 
         self.addSubview(self.downloadButtonTapProxyView)
@@ -296,10 +353,20 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.indexLabel.translatesAutoresizingMaskIntoConstraints = false
         self.indexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.indexLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.titleLabel.snp.centerY)
             make.leading.equalToSuperview().offset(self.appearance.indexLabelInsets.left)
             make.width.equalTo(self.appearance.indexLabelWidth)
+
+            self.indexLabelCenterYTitleConstraint = make.centerY.equalTo(self.titleLabel.snp.centerY).constraint
+
+            self.indexLabelCenterYBadgesConstraint = make.centerY.equalTo(self.badgesView.snp.centerY).constraint
+            self.indexLabelCenterYBadgesConstraint?.deactivate()
         }
+
+        self.badgesContainerStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.badgesContainerStackView.snp.makeConstraints { $0.height.equalTo(self.appearance.badgesViewHeight) }
+
+        self.examActionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.examActionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.examActionButtonHeight) }
 
         self.downloadButton.translatesAutoresizingMaskIntoConstraints = false
         self.downloadButton.setContentCompressionResistancePriority(.required, for: .horizontal)

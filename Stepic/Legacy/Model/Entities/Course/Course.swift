@@ -90,14 +90,17 @@ final class Course: NSManagedObject, IDFetchable {
         self.courseDescription = json[JSONKey.description.rawValue].stringValue
         self.coverURLString = "\(StepikApplicationsInfo.stepikURL)" + json[JSONKey.cover.rawValue].stringValue
 
-        self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
-        self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.lastDeadline.rawValue])
+        self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
+        self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
+        self.beginDateSource = Parser.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
+        self.endDateSource = Parser.dateFromTimedateJSON(json[JSONKey.endDateSource.rawValue])
 
         self.enrolled = json[JSONKey.enrollment.rawValue].int != nil
         self.featured = json[JSONKey.isFeatured.rawValue].boolValue
         self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
+        self.isProctored = json[JSONKey.isProctored.rawValue].boolValue
         self.readiness = json[JSONKey.readiness.rawValue].float
 
         self.summary = json[JSONKey.summary.rawValue].stringValue
@@ -369,8 +372,10 @@ final class Course: NSManagedObject, IDFetchable {
         case title
         case description
         case cover
+        case beginDate = "begin_date"
+        case endDate = "end_date"
         case beginDateSource = "begin_date_source"
-        case lastDeadline = "last_deadline"
+        case endDateSource = "end_date_source"
         case enrollment
         case isFeatured = "is_featured"
         case isPublic = "is_public"
@@ -407,5 +412,6 @@ final class Course: NSManagedObject, IDFetchable {
         case options
         case coursePreview = "course_preview"
         case previewLessonID = "preview_lesson_id"
+        case isProctored = "is_proctored"
     }
 }
