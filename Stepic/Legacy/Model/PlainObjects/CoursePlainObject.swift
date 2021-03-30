@@ -7,6 +7,7 @@ struct CoursePlainObject {
     let sections: [SectionPlainObject]
     let isEnrolled: Bool
     let isPaid: Bool
+    let isProctored: Bool
 }
 
 extension CoursePlainObject {
@@ -17,5 +18,6 @@ extension CoursePlainObject {
         self.sections = course.sections.map(SectionPlainObject.init)
         self.isEnrolled = course.enrolled
         self.isPaid = course.isPaid
+        self.isProctored = course.isProctored
     }
 }

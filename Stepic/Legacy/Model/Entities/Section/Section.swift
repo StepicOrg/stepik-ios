@@ -25,11 +25,16 @@ final class Section: NSManagedObject, IDFetchable {
         self.position = json[JSONKey.position.rawValue].intValue
         self.isActive = json[JSONKey.isActive.rawValue].boolValue
         self.progressId = json[JSONKey.progress.rawValue].string
-        self.isExam = json[JSONKey.isExam.rawValue].boolValue
         self.unitsArray = json[JSONKey.units.rawValue].arrayObject as! [Int]
         self.courseId = json[JSONKey.course.rawValue].intValue
         self.testSectionAction = json[JSONKey.actions.rawValue][JSONKey.testSection.rawValue].string
         self.discountingPolicy = json[JSONKey.discountingPolicy.rawValue].string
+        // Exam
+        self.isExam = json[JSONKey.isExam.rawValue].boolValue
+        self.examDurationInMinutes = json[JSONKey.examDurationMinutes.rawValue].int
+        self.examSessionId = json[JSONKey.examSession.rawValue].int
+        self.proctorSessionId = json[JSONKey.proctorSession.rawValue].int
+        self.isProctoringCanBeScheduled = json[JSONKey.isProctoringCanBeScheduled.rawValue].boolValue
         // Required section
         self.isRequirementSatisfied = json[JSONKey.isRequirementSatisfied.rawValue].bool ?? true
         self.requiredSectionID = json[JSONKey.requiredSection.rawValue].int
@@ -268,6 +273,10 @@ final class Section: NSManagedObject, IDFetchable {
         case isRequirementSatisfied = "is_requirement_satisfied"
         case requiredSection = "required_section"
         case requiredPercent = "required_percent"
+        case examDurationMinutes = "exam_duration_minutes"
+        case examSession = "exam_session"
+        case proctorSession = "proctor_session"
+        case isProctoringCanBeScheduled = "is_proctoring_can_be_scheduled"
     }
 }
 

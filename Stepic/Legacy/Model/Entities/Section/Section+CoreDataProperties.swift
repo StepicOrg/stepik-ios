@@ -23,10 +23,15 @@ extension Section {
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedProgressId: String?
     @NSManaged var managedTestSectionAction: String?
-    @NSManaged var managedIsExam: NSNumber?
     @NSManaged var managedCourseId: NSNumber?
     @NSManaged var managedDiscountingPolicy: String?
     @NSManaged var managedUnitsArray: NSObject?
+    // Exam
+    @NSManaged var managedIsExam: NSNumber?
+    @NSManaged var managedExamDurationMinutes: NSNumber?
+    @NSManaged var managedExamSessionId: NSNumber?
+    @NSManaged var managedProctorSessionId: NSNumber?
+    @NSManaged var managedIsProctoringCanBeScheduled: NSNumber?
     // Required section
     @NSManaged var managedIsRequirementSatisfied: NSNumber?
     @NSManaged var managedRequiredSectionID: NSNumber?
@@ -35,6 +40,8 @@ extension Section {
     @NSManaged var managedUnits: NSOrderedSet?
     @NSManaged var managedCourse: Course?
     @NSManaged var managedProgress: Progress?
+    @NSManaged var managedExamSession: ExamSession?
+    @NSManaged var managedProctorSession: ProctorSession?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.shared.context)!
@@ -144,6 +151,72 @@ extension Section {
         }
         get {
             managedIsExam?.boolValue ?? false
+        }
+    }
+
+    var examDurationInMinutes: Int? {
+        get {
+            self.managedExamDurationMinutes?.intValue
+        }
+        set {
+            if let newValue = newValue {
+                self.managedExamDurationMinutes = NSNumber(value: newValue)
+            } else {
+                self.managedExamDurationMinutes = nil
+            }
+        }
+    }
+
+    var examSessionId: ExamSession.IdType? {
+        get {
+            self.managedExamSessionId?.intValue
+        }
+        set {
+            if let newValue = newValue {
+                self.managedExamSessionId = NSNumber(value: newValue)
+            } else {
+                self.managedExamSessionId = nil
+            }
+        }
+    }
+
+    var proctorSessionId: ProctorSession.IdType? {
+        get {
+            self.managedProctorSessionId?.intValue
+        }
+        set {
+            if let newValue = newValue {
+                self.managedProctorSessionId = NSNumber(value: newValue)
+            } else {
+                self.managedProctorSessionId = nil
+            }
+        }
+    }
+
+    var isProctoringCanBeScheduled: Bool {
+        get {
+            self.managedIsProctoringCanBeScheduled?.boolValue ?? false
+        }
+        set {
+            self.managedIsProctoringCanBeScheduled = NSNumber(value: newValue)
+        }
+    }
+
+    var examSession: ExamSession? {
+        get {
+            self.managedExamSession
+        }
+        set {
+            self.managedExamSession = newValue
+        }
+    }
+
+    var proctorSession: ProctorSession? {
+        get {
+            self.managedProctorSession
+        }
+        set {
+            self.managedProctorSession = newValue
         }
     }
 

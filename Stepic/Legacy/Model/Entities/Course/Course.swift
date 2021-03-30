@@ -98,6 +98,7 @@ final class Course: NSManagedObject, IDFetchable {
         self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
+        self.isProctored = json[JSONKey.isProctored.rawValue].boolValue
         self.readiness = json[JSONKey.readiness.rawValue].float
 
         self.summary = json[JSONKey.summary.rawValue].stringValue
@@ -407,5 +408,6 @@ final class Course: NSManagedObject, IDFetchable {
         case options
         case coursePreview = "course_preview"
         case previewLessonID = "preview_lesson_id"
+        case isProctored = "is_proctored"
     }
 }
