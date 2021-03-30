@@ -220,6 +220,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             let sectionViewModels = result.sections.enumerated().map {
                 sectionData -> CourseInfoTabSyllabusSectionViewModel in
 
+                let examViewModelOrNil = self.makeExamViewModel(section: sectionData.element.entity)
+
                 var currentSectionUnitViewModels: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper] = []
 
                 for (unitIndex, unitID) in sectionData.element.entity.unitsIDs.enumerated() {
@@ -233,7 +235,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                                 unit: unit,
                                 course: result.course,
                                 isSectionReachable: sectionData.element.entity.isReachable,
-                                downloadState: matchedUnitRecord.downloadState
+                                downloadState: matchedUnitRecord.downloadState,
+                                examViewModel: examViewModelOrNil
                             )
                         )
                     } else {
@@ -267,7 +270,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     downloadState: hasPlaceholderUnits || !result.course.isEnrolled
                         ? .notAvailable
                         : sectionData.element.downloadState,
-                    personalDeadlineDate: sectionDeadline
+                    personalDeadlineDate: sectionDeadline,
+                    examViewModel: examViewModelOrNil
                 )
             }
 
@@ -286,7 +290,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         requiredSection: SectionPlainObject?,
         units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
         downloadState: CourseInfoTabSyllabus.DownloadState,
-        personalDeadlineDate: Date? = nil
+        personalDeadlineDate: Date? = nil,
+        examViewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?
     ) -> CourseInfoTabSyllabusSectionViewModel {
         let deadlines = self.makeDeadlinesViewModel(
             section: section,
@@ -297,6 +302,14 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             guard let progress = section.progress,
                   progress.cost > 0 else {
                 return nil
+            }
+
+            if let examViewModel = examViewModel {
+                if examViewModel.state == .finished, progress.score == 0 {
+                    return NSLocalizedString("CourseInfoTabSyllabusSectionExamNoScoreTitle", comment: "")
+                } else {
+                    return nil
+                }
             }
 
             return String(
@@ -310,7 +323,12 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             requiredSection: requiredSection
         )
 
-        let examViewModel = self.makeExamViewModel(section: section)
+        let isDisabled: Bool = {
+            if let examViewModel = examViewModel, examViewModel.state == .canNotStart {
+                return true
+            }
+            return !section.isReachable
+        }()
 
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
@@ -323,7 +341,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             deadlines: deadlines,
             exam: examViewModel,
             downloadState: downloadState,
-            isDisabled: !section.isReachable
+            isDisabled: isDisabled
         )
 
         self.cachedSectionViewModels[section.id] = viewModel
@@ -339,7 +357,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
 
         return .init(
-            state: .inProgress,
+            state: .finished,
             isProctored: false,
             durationText: FormatterHelper.minutesCount(120)
         )
@@ -352,7 +370,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         unit: UnitPlainObject,
         course: CoursePlainObject,
         isSectionReachable: Bool,
-        downloadState: CourseInfoTabSyllabus.DownloadState
+        downloadState: CourseInfoTabSyllabus.DownloadState,
+        examViewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?
     ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
         guard let lesson = unit.lesson else {
             return .placeholder
@@ -394,9 +413,14 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }()
 
         let access: CourseInfoTabSyllabusUnitViewModel.Access = {
+            if let examViewModel = examViewModel, examViewModel.state != .finished {
+                return .no
+            }
+
             if !course.isEnrolled && course.isPaid && lesson.canLearnLesson {
                 return .demo
             }
+
             return isSectionReachable ? .full : .no
         }()
 

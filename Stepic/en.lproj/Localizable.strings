@@ -477,6 +477,7 @@ CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Failed to Remove Cours
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
+CourseInfoTabSyllabusSectionExamNoScoreTitle = "The score for the exam will appear later";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ points";
 CourseInfoTabSyllabusUnitDemoAccessTitle = "Demo access";
 CourseInfoTabSyllabusFailedDownloadAlertTitle = "Download Error";

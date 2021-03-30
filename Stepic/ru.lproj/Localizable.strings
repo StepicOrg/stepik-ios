@@ -479,6 +479,7 @@ CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Не удалось у
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
+CourseInfoTabSyllabusSectionExamNoScoreTitle = "Оценка за экзамен появится позже";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusUnitDemoAccessTitle = "Демо-доступ";
 CourseInfoTabSyllabusFailedDownloadAlertTitle = "Ошибка загрузки";
