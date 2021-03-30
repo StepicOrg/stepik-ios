@@ -15,6 +15,7 @@ protocol CourseInfoTabSyllabusViewControllerDelegate: AnyObject {
     func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel)
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusUnitViewModel)
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel)
+    func examButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel)
 }
 
 // MARK: - CourseInfoTabSyllabusViewController: UIViewController -
@@ -199,6 +200,10 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
 
     func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel) {
         self.interactor.doUnitSelection(request: .init(uniqueIdentifier: cell.uniqueIdentifier))
+    }
+
+    func examButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel) {
+        self.interactor.doSectionSelection(request: .init(uniqueIdentifier: cell.uniqueIdentifier))
     }
 }
 

@@ -6,6 +6,7 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
     func doSectionsFetch(request: CourseInfoTabSyllabus.SyllabusLoad.Request)
     func doSectionFetch(request: CourseInfoTabSyllabus.SyllabusSectionLoad.Request)
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request)
+    func doSectionSelection(request: CourseInfoTabSyllabus.SectionSelection.Request)
     func doUnitSelection(request: CourseInfoTabSyllabus.UnitSelection.Request)
     func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonAction.Request)
 }
@@ -385,11 +386,22 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    func doSectionSelection(request: CourseInfoTabSyllabus.SectionSelection.Request) {
+        guard let section = self.currentSections[request.uniqueIdentifier] else {
+            return
+        }
+
+        if section.isExam {
+            self.moduleOutput?.presentExamLesson()
+        }
+    }
+
     func doUnitSelection(request: CourseInfoTabSyllabus.UnitSelection.Request) {
         guard let unit = self.currentUnits[request.uniqueIdentifier] as? Unit else {
             return
         }
-        self.requestUnitPresentation(unit)
+
+        self.moduleOutput?.presentLesson(in: unit)
     }
 
     func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonAction.Request) {
