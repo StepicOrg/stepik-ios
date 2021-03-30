@@ -361,23 +361,15 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
 
         let state: CourseInfoTabSyllabusSectionViewModel.ExamViewModel.State = {
-            guard section.isReachable else {
-                return .canNotStart
-            }
-
             if section.isExamCanStart {
                 return .canStart
-            }
-
-            if section.isExamActive {
+            } else if section.isExamActive {
                 return .inProgress
-            }
-
-            if section.isExamFinished {
+            } else if section.isExamFinished {
                 return .finished
+            } else {
+                return .canNotStart
             }
-
-            return .canNotStart
         }()
 
         return .init(

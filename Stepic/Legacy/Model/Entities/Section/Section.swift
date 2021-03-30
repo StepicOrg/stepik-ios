@@ -65,6 +65,10 @@ final class Section: NSManagedObject, IDFetchable {
             return false
         }
 
+        if !self.isReachable {
+            return false
+        }
+
         if self.examSession?.id != nil {
             return false
         }
