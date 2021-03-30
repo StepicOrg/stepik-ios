@@ -17,6 +17,7 @@ struct SectionPlainObject {
     let hardDeadline: Date?
     let isActive: Bool
     let isExam: Bool
+    let isExamCanStart: Bool
     let examDurationInMinutes: Int?
     let examSessionID: Int?
     let examSession: ExamSessionPlainObject?
@@ -54,6 +55,7 @@ extension SectionPlainObject {
         self.isActive = section.isActive
 
         self.isExam = section.isExam
+        self.isExamCanStart = section.isExamCanStart
         self.examDurationInMinutes = section.examDurationInMinutes
         self.examSessionID = section.examSessionId
         self.proctorSessionID = section.proctorSessionId

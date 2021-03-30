@@ -14,6 +14,65 @@ import SwiftyJSON
 final class Section: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
+    var isReachable: Bool {
+        (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
+    }
+
+    var isCached: Bool {
+        get {
+            if self.units.isEmpty {
+                return false
+            }
+
+            for unit in self.units {
+                if let lesson = unit.lesson {
+                    if !lesson.isCached {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            }
+
+            return true
+        }
+    }
+
+    var effectiveBeginDateSource: Date? {
+        self.beginDateSource ?? self.course?.beginDateSource
+    }
+
+    var effectiveEndDateSource: Date? {
+        self.endDateSource ?? self.course?.endDateSource
+    }
+
+    var isExamTime: Bool {
+        let now = Date()
+        let beginDate = self.effectiveBeginDateSource
+        let endDate = self.effectiveEndDateSource
+        return (beginDate == nil || (beginDate.require() < now)) && (endDate == nil || (now < endDate.require()))
+    }
+
+    var isExamCanStart: Bool {
+        if !self.isExam {
+            return false
+        }
+
+        if self.examSession?.id != nil {
+            return false
+        }
+
+        if self.proctorSession?.isFinished ?? false {
+            return false
+        }
+
+        if self.testSectionAction != nil {
+            return true
+        }
+
+        return self.isExamTime && self.isRequirementSatisfied
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
@@ -42,6 +101,8 @@ final class Section: NSManagedObject, IDFetchable {
         // Dates
         self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
         self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
+        self.beginDateSource = Parser.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
+        self.endDateSource = Parser.dateFromTimedateJSON(json[JSONKey.endDateSource.rawValue])
         self.softDeadline = Parser.dateFromTimedateJSON(json[JSONKey.softDeadline.rawValue])
         self.hardDeadline = Parser.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
     }
@@ -223,37 +284,6 @@ final class Section: NSManagedObject, IDFetchable {
         )
     }
 
-    func isCompleted(_ lessons: [Lesson]) -> Bool {
-        for lesson in lessons {
-            if !lesson.isCached {
-                return false
-            }
-        }
-        return true
-    }
-
-    var isCached: Bool {
-        get {
-            if units.count == 0 {
-                return false
-            }
-            for unit in units {
-                if let lesson = unit.lesson {
-                    if !lesson.isCached {
-                        return false
-                    }
-                } else {
-                    return false
-                }
-            }
-            return true
-        }
-    }
-
-    var isReachable: Bool {
-        (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
-    }
-
     enum JSONKey: String {
         case id
         case title
@@ -262,6 +292,8 @@ final class Section: NSManagedObject, IDFetchable {
         case progress
         case beginDate = "begin_date"
         case endDate = "end_date"
+        case beginDateSource = "begin_date_source"
+        case endDateSource = "end_date_source"
         case softDeadline = "soft_deadline"
         case hardDeadline = "hard_deadline"
         case actions

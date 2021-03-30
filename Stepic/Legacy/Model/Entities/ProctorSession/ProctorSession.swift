@@ -5,6 +5,10 @@ import SwiftyJSON
 final class ProctorSession: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
 
+    var isFinished: Bool {
+        self.stopDate != nil || self.submitDate != nil
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)

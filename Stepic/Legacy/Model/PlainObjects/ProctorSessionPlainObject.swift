@@ -12,6 +12,7 @@ struct ProctorSessionPlainObject {
     let submitDate: Date?
     let comment: String
     let score: Float
+    let isFinished: Bool
 }
 
 extension ProctorSessionPlainObject {
@@ -27,5 +28,6 @@ extension ProctorSessionPlainObject {
         self.submitDate = proctorSession.submitDate
         self.comment = proctorSession.comment
         self.score = proctorSession.score
+        self.isFinished = proctorSession.isFinished
     }
 }

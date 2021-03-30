@@ -73,12 +73,14 @@
         <attribute name="managedAudience" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedAuthorsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedBeginDateSource" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCertificate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedCertificateDistinctionThreshold" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCertificateRegularThreshold" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCourseDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedDisplayPrice" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedEndDateSource" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedEnrolled" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedFeatured" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedFormat" optional="YES" attributeType="String" syncable="YES"/>
@@ -274,9 +276,11 @@
     <entity name="Section" representedClassName=".Section" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedBeginDateSource" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDiscountingPolicy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedEndDateSource" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedExamDurationMinutes" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedExamSessionId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedHardDeadline" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -448,7 +452,7 @@
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
-        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="794"/>
+        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="824"/>
         <element name="CourseList" positionX="-14.1953125" positionY="793.859375" width="128" height="149"/>
         <element name="CoursePurchase" positionX="-450" positionY="-234" width="128" height="133"/>
         <element name="CourseReview" positionX="-441" positionY="-234" width="128" height="165"/>
@@ -461,7 +465,7 @@
         <element name="Notification" positionX="-208.453125" positionY="793.484375" width="128" height="195"/>
         <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="329"/>
         <element name="Progress" positionX="210.40234375" positionY="32.89453125" width="128" height="223"/>
-        <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="434"/>
+        <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="464"/>
         <element name="SocialProfile" positionX="-450" positionY="-234" width="128" height="133"/>
         <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="389"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>

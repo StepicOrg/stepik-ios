@@ -18,6 +18,8 @@ extension Section {
     @NSManaged var managedTitle: String?
     @NSManaged var managedBeginDate: Date?
     @NSManaged var managedEndDate: Date?
+    @NSManaged var managedBeginDateSource: Date?
+    @NSManaged var managedEndDateSource: Date?
     @NSManaged var managedSoftDeadline: Date?
     @NSManaged var managedHardDeadline: Date?
     @NSManaged var managedActive: NSNumber?
@@ -115,6 +117,24 @@ extension Section {
         }
         get {
             managedEndDate
+        }
+    }
+
+    var beginDateSource: Date? {
+        get {
+            self.managedBeginDateSource
+        }
+        set {
+            self.managedBeginDateSource = newValue
+        }
+    }
+
+    var endDateSource: Date? {
+        get {
+            self.managedEndDateSource
+        }
+        set {
+            self.managedEndDateSource = newValue
         }
     }
 

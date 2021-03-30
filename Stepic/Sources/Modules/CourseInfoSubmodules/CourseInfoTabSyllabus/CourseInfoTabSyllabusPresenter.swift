@@ -220,7 +220,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             let sectionViewModels = result.sections.enumerated().map {
                 sectionData -> CourseInfoTabSyllabusSectionViewModel in
 
-                let examViewModelOrNil = self.makeExamViewModel(section: sectionData.element.entity)
+                let examViewModelOrNil = self.makeExamViewModel(
+                    course: result.course,
+                    section: sectionData.element.entity
+                )
 
                 var currentSectionUnitViewModels: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper] = []
 
@@ -350,16 +353,29 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     }
 
     private func makeExamViewModel(
+        course: CoursePlainObject,
         section: SectionPlainObject
     ) -> CourseInfoTabSyllabusSectionViewModel.ExamViewModel? {
         guard section.isExam else {
             return nil
         }
 
+        let state: CourseInfoTabSyllabusSectionViewModel.ExamViewModel.State = {
+            guard section.isReachable else {
+                return .canNotStart
+            }
+
+            if section.isExamCanStart {
+                return .canStart
+            }
+
+            return .canNotStart
+        }()
+
         return .init(
-            state: .finished,
-            isProctored: false,
-            durationText: FormatterHelper.minutesCount(120)
+            state: state,
+            isProctored: course.isProctored,
+            durationText: FormatterHelper.minutesCount(section.examDurationInMinutes ?? 0)
         )
     }
 
