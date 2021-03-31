@@ -16,8 +16,8 @@ extension CourseInfoTabReviewsView {
 
         let paginationViewHeight: CGFloat = 52
 
-        let emptyStateLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
-        let emptyStateLabelColor = UIColor.stepikPlaceholderText
+        let emptyStateLabelFont = Typography.bodyFont
+        let emptyStateLabelColor = UIColor.stepikMaterialDisabledText
         let emptyStateLabelInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
 
         let errorPlaceholderViewBackgroundColor = UIColor.stepikBackground
@@ -276,7 +276,7 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
 extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
-             self.pageScrollViewDelegate
+            self.pageScrollViewDelegate
         }
         set {
             self.pageScrollViewDelegate = newValue
@@ -285,7 +285,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsets: UIEdgeInsets {
         get {
-             self.tableView.contentInset
+            self.tableView.contentInset
         }
         set {
             self.tableView.contentInset = newValue
@@ -300,7 +300,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
     var contentOffset: CGPoint {
         get {
-             self.tableView.contentOffset
+            self.tableView.contentOffset
         }
         set {
             self.tableView.contentOffset = newValue
@@ -309,7 +309,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-             self.tableView.contentInsetAdjustmentBehavior
+            self.tableView.contentInsetAdjustmentBehavior
         }
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue

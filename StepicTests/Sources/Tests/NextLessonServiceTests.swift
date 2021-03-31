@@ -1,18 +1,11 @@
-//
-//  NextLessonServiceTests.swift
-//  StepicTests
-//
-//  Created by jetbrains on 28/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
+@testable
+import Stepic
 
 import Foundation
+import Mockingjay
 import Nimble
 import Quick
 import XCTest
-import Mockingjay
-
-@testable import Stepic
 
 /// Singleton to provide unique identifiers factory
 final class UniqueIDsPool {

@@ -1,14 +1,9 @@
-//
-//  UserAgentTests.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13.04.18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-import Nimble
+@testable
+import Stepic
+
 import Alamofire
+import Nimble
 import XCTest
-@testable import Stepic
 
 class UserAgentTests: XCTestCase {
     func testAPIEndpointManagerUserAgent() {

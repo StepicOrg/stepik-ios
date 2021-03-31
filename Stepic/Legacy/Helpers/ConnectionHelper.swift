@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(*, deprecated, message: "Legacy class, use `NetworkReachabilityService`")
 final class ConnectionHelper: NSObject {
     override private init() {
         super.init()

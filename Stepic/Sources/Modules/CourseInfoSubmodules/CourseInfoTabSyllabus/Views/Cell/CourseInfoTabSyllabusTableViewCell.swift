@@ -16,7 +16,7 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
 
     var onDownloadButtonClick: (() -> Void)? {
         get {
-             self.cellView.onDownloadButtonClick
+            self.cellView.onDownloadButtonClick
         }
         set {
             self.cellView.onDownloadButtonClick = newValue

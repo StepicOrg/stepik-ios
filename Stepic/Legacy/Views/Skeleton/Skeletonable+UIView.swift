@@ -15,7 +15,7 @@ private struct AssociatedKey {
 extension UIView: Skeletonable {
     private var skeletonView: SkeletonView? {
         get {
-             objc_getAssociatedObject(self, &AssociatedKey.skeletonView) as? SkeletonView
+            objc_getAssociatedObject(self, &AssociatedKey.skeletonView) as? SkeletonView
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.skeletonView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)

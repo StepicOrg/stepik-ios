@@ -32,7 +32,7 @@ extension CourseListModel {
             self.managedId = newId as NSNumber?
         }
         get {
-             managedId?.intValue ?? -1
+            managedId?.intValue ?? -1
         }
     }
 
@@ -41,7 +41,7 @@ extension CourseListModel {
             managedTitle = value
         }
         get {
-             managedTitle ?? ""
+            managedTitle ?? ""
         }
     }
 
@@ -50,7 +50,7 @@ extension CourseListModel {
             managedDescription = value
         }
         get {
-             managedDescription ?? ""
+            managedDescription ?? ""
         }
     }
 
@@ -59,7 +59,7 @@ extension CourseListModel {
             managedLanguage = value
         }
         get {
-             managedLanguage ?? ""
+            managedLanguage ?? ""
         }
     }
 
@@ -68,7 +68,7 @@ extension CourseListModel {
             self.managedPosition = value as NSNumber?
         }
         get {
-             managedPosition?.intValue ?? 0
+            managedPosition?.intValue ?? 0
         }
     }
 

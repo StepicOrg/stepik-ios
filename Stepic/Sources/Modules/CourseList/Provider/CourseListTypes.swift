@@ -175,8 +175,8 @@ final class CourseListServicesFactory {
 
     func makeNetworkService() -> CourseListNetworkServiceProtocol {
         if self.type is EnrolledCourseListType
-               || self.type is FavoriteCourseListType
-               || self.type is ArchivedCourseListType {
+            || self.type is FavoriteCourseListType
+            || self.type is ArchivedCourseListType {
             return UserCoursesCourseListNetworkService(
                 type: self.type,
                 coursesAPI: self.coursesAPI,

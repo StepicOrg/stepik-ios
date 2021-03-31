@@ -138,7 +138,7 @@ final class NewMatchingQuizView: UIView, TitlePresentable {
 
     func set(items: [NewMatchingQuiz.MatchItem]) {
         if self.items.map({ $0.title.text }) == items.map({ $0.title.text })
-           && self.items.map({ $0.option.text }) == items.map({ $0.option.text }) {
+            && self.items.map({ $0.option.text }) == items.map({ $0.option.text }) {
             return
         }
 

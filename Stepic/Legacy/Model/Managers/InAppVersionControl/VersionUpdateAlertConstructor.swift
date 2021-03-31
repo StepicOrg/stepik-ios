@@ -9,7 +9,7 @@
 import UIKit
 
 /*
- Constructs alert controller 
+ Constructs alert controller
  */
 final class VersionUpdateAlertConstructor: NSObject {
     override private init() {}

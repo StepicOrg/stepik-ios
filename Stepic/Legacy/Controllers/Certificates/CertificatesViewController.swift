@@ -62,7 +62,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
     var userID: User.IdType?
 
     private var certificates: [CertificateViewData] = []
-    private var showNextPageFooter: Bool = false
+    private var showNextPageFooter = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -6,8 +6,8 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import SVProgressHUD
 import SafariServices
+import SVProgressHUD
 import UIKit
 import WebKit
 
@@ -97,6 +97,10 @@ final class WebControllerManager: NSObject {
                 completionHandler: nil
             )
             return
+        }
+
+        if key == .socialAuth {
+            return present(url: url)
         }
 
         var queryParameters = ["from_mobile_app": "true"]

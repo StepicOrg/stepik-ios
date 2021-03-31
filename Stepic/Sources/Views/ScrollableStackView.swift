@@ -52,7 +52,7 @@ final class ScrollableStackView: UIView {
 
     var showsHorizontalScrollIndicator: Bool {
         get {
-             self.scrollView.showsHorizontalScrollIndicator
+            self.scrollView.showsHorizontalScrollIndicator
         }
         set {
             self.scrollView.showsHorizontalScrollIndicator = newValue
@@ -61,7 +61,7 @@ final class ScrollableStackView: UIView {
 
     var showsVerticalScrollIndicator: Bool {
         get {
-             self.scrollView.showsVerticalScrollIndicator
+            self.scrollView.showsVerticalScrollIndicator
         }
         set {
             self.scrollView.showsVerticalScrollIndicator = newValue
@@ -70,7 +70,7 @@ final class ScrollableStackView: UIView {
 
     var spacing: CGFloat {
         get {
-             self.stackView.spacing
+            self.stackView.spacing
         }
         set {
             self.stackView.spacing = newValue
@@ -79,7 +79,7 @@ final class ScrollableStackView: UIView {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-             self.scrollView.contentInsetAdjustmentBehavior
+            self.scrollView.contentInsetAdjustmentBehavior
         }
         set {
             self.scrollView.contentInsetAdjustmentBehavior = newValue
@@ -88,7 +88,7 @@ final class ScrollableStackView: UIView {
 
     var scrollDelegate: UIScrollViewDelegate? {
         get {
-             self.scrollView.delegate
+            self.scrollView.delegate
         }
         set {
             self.scrollView.delegate = newValue
@@ -97,7 +97,7 @@ final class ScrollableStackView: UIView {
 
     var contentInsets: UIEdgeInsets {
         get {
-             self.scrollView.contentInset
+            self.scrollView.contentInset
         }
         set {
             self.scrollView.contentInset = newValue
@@ -106,7 +106,7 @@ final class ScrollableStackView: UIView {
 
     var contentOffset: CGPoint {
         get {
-             self.scrollView.contentOffset
+            self.scrollView.contentOffset
         }
         set {
             self.scrollView.contentOffset = newValue
@@ -115,7 +115,7 @@ final class ScrollableStackView: UIView {
 
     var scrollIndicatorInsets: UIEdgeInsets {
         get {
-             self.scrollView.scrollIndicatorInsets
+            self.scrollView.scrollIndicatorInsets
         }
         set {
             self.scrollView.scrollIndicatorInsets = newValue
@@ -154,7 +154,7 @@ final class ScrollableStackView: UIView {
 
     var shouldBounce: Bool {
         get {
-             self.scrollView.bounces
+            self.scrollView.bounces
         }
         set {
             self.scrollView.bounces = newValue
@@ -163,7 +163,7 @@ final class ScrollableStackView: UIView {
 
     var isPagingEnabled: Bool {
         get {
-             self.scrollView.isPagingEnabled
+            self.scrollView.isPagingEnabled
         }
         set {
             self.scrollView.isPagingEnabled = newValue
@@ -172,7 +172,7 @@ final class ScrollableStackView: UIView {
 
     var isScrollEnabled: Bool {
         get {
-             self.scrollView.isScrollEnabled
+            self.scrollView.isScrollEnabled
         }
         set {
             self.scrollView.isScrollEnabled = newValue
@@ -181,7 +181,7 @@ final class ScrollableStackView: UIView {
 
     var contentSize: CGSize {
         get {
-             self.scrollView.contentSize
+            self.scrollView.contentSize
         }
         set {
             self.scrollView.contentSize = newValue

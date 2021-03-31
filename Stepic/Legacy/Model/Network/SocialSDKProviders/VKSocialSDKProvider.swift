@@ -57,7 +57,7 @@ final class VKSocialSDKProvider: NSObject, SocialSDKProvider {
             VKSdk.forceLogout()
         }
 
-        VKSdk.authorize(["email"])
+        VKSdk.authorize([VK_PER_EMAIL])
     }
 }
 

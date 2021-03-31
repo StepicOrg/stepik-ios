@@ -67,7 +67,7 @@ extension User {
             managedId = value as NSNumber?
         }
         get {
-             managedId?.intValue ?? 0
+            managedId?.intValue ?? 0
         }
     }
 
@@ -76,7 +76,7 @@ extension User {
             managedProfile = value as NSNumber?
         }
         get {
-             managedProfile?.intValue ?? 0
+            managedProfile?.intValue ?? 0
         }
     }
 
@@ -85,7 +85,7 @@ extension User {
             managedJoinDate = value
         }
         get {
-             managedJoinDate
+            managedJoinDate
         }
     }
 
@@ -119,7 +119,7 @@ extension User {
 
     var isOrganization: Bool {
         get {
-             self.managedOrganization?.boolValue ?? false
+            self.managedOrganization?.boolValue ?? false
         }
         set {
             self.managedOrganization = newValue as NSNumber?
@@ -131,7 +131,7 @@ extension User {
             managedBio = value
         }
         get {
-             managedBio ?? "No bio"
+            managedBio ?? "No bio"
         }
     }
 
@@ -149,7 +149,7 @@ extension User {
             managedFirstName = value
         }
         get {
-             managedFirstName ?? "No first name"
+            managedFirstName ?? "No first name"
         }
     }
 
@@ -158,7 +158,7 @@ extension User {
             managedLastName = value
         }
         get {
-             managedLastName ?? "No last name"
+            managedLastName ?? "No last name"
         }
     }
 
@@ -171,7 +171,7 @@ extension User {
             managedAvatarURL = value
         }
         get {
-             managedAvatarURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+            managedAvatarURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
         }
     }
 
@@ -295,7 +295,7 @@ extension User {
 
     var instructedCourses: [Course] {
         get {
-             managedInstructedCourses?.allObjects as! [Course]
+            managedInstructedCourses?.allObjects as! [Course]
         }
     }
 
@@ -310,7 +310,7 @@ extension User {
 
     var profileEntity: Profile? {
         get {
-             managedProfileEntity
+            managedProfileEntity
         }
         set(value) {
             managedProfileEntity = value
@@ -328,7 +328,7 @@ extension User {
 
     var authoredCourses: [Course] {
         get {
-             self.managedAuthoredCourses?.allObjects as! [Course]
+            self.managedAuthoredCourses?.allObjects as! [Course]
         }
     }
 

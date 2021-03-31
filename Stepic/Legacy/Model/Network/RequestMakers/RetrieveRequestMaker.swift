@@ -17,7 +17,7 @@ final class RetrieveRequestMaker {
         params: Parameters? = nil,
         withManager manager: Alamofire.Session
     ) -> Promise<JSON> {
-        return Promise { seal in
+        Promise { seal in
             checkToken().done {
                 manager.request(
                     "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",

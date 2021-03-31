@@ -32,7 +32,7 @@ final class StringDataset: Dataset {
         super.init(coder: coder)
     }
 
-    private override init() {
+    override private init() {
         self.string = ""
         super.init()
     }

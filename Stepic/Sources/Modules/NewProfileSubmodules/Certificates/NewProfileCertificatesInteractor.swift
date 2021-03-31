@@ -89,8 +89,8 @@ final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorPr
                 seal.fulfill(.init(result: .success(certificates)))
             }.catch { error in
                 if case NewProfileCertificatesProvider.Error.networkFetchFailed = error,
-                    self.didLoadFromCache,
-                    !self.currentCertificatesIDs.isEmpty {
+                   self.didLoadFromCache,
+                   !self.currentCertificatesIDs.isEmpty {
                     // Offline mode: we already presented cached certificates, but network request failed
                     // so let's ignore it and show only cached
                     seal.fulfill(.init(result: .failure(Error.networkFetchFailed)))

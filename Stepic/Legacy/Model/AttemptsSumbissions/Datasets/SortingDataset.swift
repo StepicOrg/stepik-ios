@@ -39,7 +39,7 @@ final class SortingDataset: Dataset {
         super.init(coder: coder)
     }
 
-    private override init() {
+    override private init() {
         self.options = []
         super.init()
     }

@@ -39,7 +39,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    var isWatched: Bool = true {
+    var isWatched = true {
         didSet {
             self.gradientImageView.isHidden = self.isWatched
         }

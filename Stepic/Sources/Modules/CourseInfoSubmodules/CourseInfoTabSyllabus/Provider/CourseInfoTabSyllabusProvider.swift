@@ -5,6 +5,7 @@ protocol CourseInfoTabSyllabusProviderProtocol {
     func fetchSections(for course: Course, shouldUseNetwork: Bool) -> Promise<[Section]>
     func fetchUnitsWithLessons(for section: Section, shouldUseNetwork: Bool) -> Promise<[Unit]>
     func fetchSteps(for lesson: Lesson) -> Promise<[Step]>
+    func fetchExamData(for section: Section) -> Promise<Section>
 }
 
 final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol {
@@ -24,6 +25,9 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
 
     private let stepsNetworkService: StepsNetworkServiceProtocol
 
+    private let examSessionsNetworkService: ExamSessionsNetworkServiceProtocol
+    private let proctorSessionsNetworkService: ProctorSessionsNetworkServiceProtocol
+
     init(
         sectionsPersistenceService: SectionsPersistenceServiceProtocol,
         sectionsNetworkService: SectionsNetworkServiceProtocol,
@@ -33,7 +37,9 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         unitsNetworkService: UnitsNetworkServiceProtocol,
         lessonsPersistenceService: LessonsPersistenceServiceProtocol,
         lessonsNetworkService: LessonsNetworkServiceProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        examSessionsNetworkService: ExamSessionsNetworkServiceProtocol,
+        proctorSessionsNetworkService: ProctorSessionsNetworkServiceProtocol
     ) {
         self.sectionsPersistenceService = sectionsPersistenceService
         self.sectionsNetworkService = sectionsNetworkService
@@ -44,6 +50,8 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         self.lessonsPersistenceService = lessonsPersistenceService
         self.lessonsNetworkService = lessonsNetworkService
         self.stepsNetworkService = stepsNetworkService
+        self.examSessionsNetworkService = examSessionsNetworkService
+        self.proctorSessionsNetworkService = proctorSessionsNetworkService
     }
 
     func fetchSections(for course: Course, shouldUseNetwork: Bool) -> Promise<[Section]> {
@@ -105,6 +113,35 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
                 CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.stepsNetworkFetchFailed)
+            }
+        }
+    }
+
+    func fetchExamData(for section: Section) -> Promise<Section> {
+        Promise { seal in
+            let examSessionPromise: Promise<ExamSession?> = {
+                if let examSessionID = section.examSessionId {
+                    return self.examSessionsNetworkService.fetch(id: examSessionID)
+                }
+                return .value(nil)
+            }()
+
+            let proctorSessionPromise: Promise<ProctorSession?> = {
+                if let proctorSessionID = section.proctorSessionId {
+                    return self.proctorSessionsNetworkService.fetch(id: proctorSessionID)
+                }
+                return .value(nil)
+            }()
+
+            when(fulfilled: examSessionPromise, proctorSessionPromise).done { examSession, proctorSession in
+                section.examSession = examSession
+                section.proctorSession = proctorSession
+
+                CoreDataHelper.shared.save()
+
+                seal.fulfill(section)
+            }.catch { _ in
+                seal.reject(Error.examNetworkFetchFailed)
             }
         }
     }
@@ -213,5 +250,6 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         case unitsPersistenceFetchFailed
         case unitsNetworkFetchFailed
         case stepsNetworkFetchFailed
+        case examNetworkFetchFailed
     }
 }

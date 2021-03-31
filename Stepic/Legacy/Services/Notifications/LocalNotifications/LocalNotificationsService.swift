@@ -18,7 +18,7 @@ final class LocalNotificationsService {
         Guarantee { seal in
             when(
                 fulfilled:
-                self.getPendingNotificationRequests(),
+                    self.getPendingNotificationRequests(),
                 self.getDeliveredNotifications()
             ).done { result in
                 seal((pending: result.0, delivered: result.1))

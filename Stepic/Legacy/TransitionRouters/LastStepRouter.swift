@@ -6,9 +6,9 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
 import SVProgressHUD
+import UIKit
 
 enum LastStepError: Error {
     case multipleLastSteps

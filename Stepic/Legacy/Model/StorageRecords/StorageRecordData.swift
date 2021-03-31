@@ -77,7 +77,7 @@ struct SectionDeadline {
 final class PersonalOfferStorageRecordData: StorageRecordData {
     var promoStories: [Story.IdType]
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         [
             JSONKey.promoStories.rawValue: self.promoStories
         ]

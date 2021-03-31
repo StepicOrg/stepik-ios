@@ -44,13 +44,13 @@ extension Progress {
             self.managedId = newId
         }
         get {
-             managedId ?? ""
+            managedId ?? ""
         }
     }
 
     var isPassed: Bool {
         get {
-             managedIsPassed?.boolValue ?? false
+            managedIsPassed?.boolValue ?? false
         }
         set(value) {
             managedIsPassed = value as NSNumber?
@@ -59,7 +59,7 @@ extension Progress {
 
     var lastViewed: Double {
         get {
-             managedLastViewed?.doubleValue ?? 0
+            managedLastViewed?.doubleValue ?? 0
         }
         set(value) {
             managedLastViewed = value as NSNumber?
@@ -77,7 +77,7 @@ extension Progress {
 
     var numberOfSteps: Int {
         get {
-             managedNumberOfSteps?.intValue ?? 0
+            managedNumberOfSteps?.intValue ?? 0
         }
         set(value) {
             managedNumberOfSteps = value as NSNumber?
@@ -86,7 +86,7 @@ extension Progress {
 
     var numberOfStepsPassed: Int {
         get {
-             managedNumberOfStepsPassed?.intValue ?? 0
+            managedNumberOfStepsPassed?.intValue ?? 0
         }
         set(value) {
             managedNumberOfStepsPassed = value as NSNumber?
@@ -95,7 +95,7 @@ extension Progress {
 
     var cost: Int {
         get {
-             managedCost?.intValue ?? 0
+            managedCost?.intValue ?? 0
         }
         set(value) {
             managedCost = value as NSNumber?

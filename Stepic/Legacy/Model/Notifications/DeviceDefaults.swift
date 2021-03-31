@@ -21,7 +21,7 @@ final class DeviceDefaults {
 
     var deviceId: Int? {
         get {
-             defaults.value(forKey: deviceIdKey) as? Int
+            defaults.value(forKey: deviceIdKey) as? Int
         }
         set(id) {
             defaults.setValue(id, forKey: deviceIdKey)

@@ -21,7 +21,9 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
-            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+            examSessionsNetworkService: ExamSessionsNetworkService(examSessionsAPI: ExamSessionsAPI()),
+            proctorSessionsNetworkService: ProctorSessionsNetworkService(proctorSessionsAPI: ProctorSessionsAPI())
         )
         let presenter = CourseInfoTabSyllabusPresenter()
         let interactor = CourseInfoTabSyllabusInteractor(

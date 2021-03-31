@@ -1,7 +1,8 @@
+@testable
+import Stepic
+
 import Nimble
 import Quick
-
-@testable import Stepic
 
 final class StringExtensionsSpec: QuickSpec {
     override func spec() {

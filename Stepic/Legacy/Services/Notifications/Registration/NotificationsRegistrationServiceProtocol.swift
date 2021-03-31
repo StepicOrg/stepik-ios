@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 /// The centralized point for registration with Apple Push Notifications service (APNs).
 protocol NotificationsRegistrationServiceProtocol: AnyObject {

@@ -45,7 +45,7 @@ extension LastStep {
             self.managedStepId = newId as NSNumber?
         }
         get {
-             managedStepId?.intValue
+            managedStepId?.intValue
         }
     }
 
@@ -54,7 +54,7 @@ extension LastStep {
             self.managedUnitId = newId as NSNumber?
         }
         get {
-             managedUnitId?.intValue
+            managedUnitId?.intValue
         }
     }
 }

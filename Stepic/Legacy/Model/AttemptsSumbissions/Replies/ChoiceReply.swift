@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 final class ChoiceReply: Reply {
     override class var supportsSecureCoding: Bool { true }

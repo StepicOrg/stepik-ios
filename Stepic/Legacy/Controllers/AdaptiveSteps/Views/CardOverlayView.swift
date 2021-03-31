@@ -34,12 +34,12 @@ final class CardOverlayView: OverlayView {
     override var overlayState: SwipeResultDirection? {
         didSet {
             switch overlayState {
-            case .left? :
+            case .left :
                 overlayImageView.image = UIImage(named: overlayLeftImageName)
 
                 leadingConstraint.deactivate()
                 trailingConstraint.activate()
-            case .right? :
+            case .right :
                 overlayImageView.image = UIImage(named: overlayRightImageName)
 
                 leadingConstraint.activate()

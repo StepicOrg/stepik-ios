@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 final class FillBlanksFeedback: SubmissionFeedback {
     override class var supportsSecureCoding: Bool { true }

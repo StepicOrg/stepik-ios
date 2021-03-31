@@ -7,12 +7,12 @@ extension CourseInfoTabSyllabusSectionDeadlinesView {
         let labelTopOffset: CGFloat = 8
         let labelsSpacing: CGFloat = 20
 
-        let secondaryProgressColor = UIColor(hex6: 0xb4b4bd)
-        let mainProgressColor = UIColor.stepikAccent
+        let secondaryProgressColor = UIColor.stepikMaterialSecondaryText
+        let mainProgressColor = UIColor.stepikMaterialPrimaryText
 
         let progressIndicatorHeight: CGFloat = 1.5
-        let labelTextColor = UIColor.stepikPrimaryText
-        let labelFont = UIFont.systemFont(ofSize: 13, weight: .light)
+        let labelTextColor = UIColor.stepikMaterialSecondaryText
+        let labelFont = Typography.caption1Font
 
         let circleIndicatorRadius: CGFloat = 6.5
     }
@@ -231,11 +231,11 @@ extension CourseInfoTabSyllabusSectionDeadlinesView: UIScrollViewDelegate {
 
         var pageDiff: CGFloat = 0
         if nearestPage < currentPage {
-            if velocity.x >= CourseInfoTabSyllabusSectionDeadlinesView.pagingVelocityThreshold {
+            if velocity.x >= Self.pagingVelocityThreshold {
                 pageDiff = 1
             }
         } else {
-            if velocity.x <= -CourseInfoTabSyllabusSectionDeadlinesView.pagingVelocityThreshold {
+            if velocity.x <= -Self.pagingVelocityThreshold {
                 pageDiff = -1
             }
         }

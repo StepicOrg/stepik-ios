@@ -30,7 +30,7 @@ extension CodeTemplate {
 
     var languageString: String {
         get {
-             managedLanguage ?? ""
+            managedLanguage ?? ""
         }
         set(value) {
             managedLanguage = value
@@ -39,7 +39,7 @@ extension CodeTemplate {
 
     var templateString: String {
         get {
-             managedTemplateString ?? ""
+            managedTemplateString ?? ""
         }
         set(value) {
             managedTemplateString = value
@@ -48,7 +48,7 @@ extension CodeTemplate {
 
     var isUserGenerated: Bool {
         get {
-             managedIsUserGenerated?.boolValue ?? true
+            managedIsUserGenerated?.boolValue ?? true
         }
         set(value) {
             managedIsUserGenerated = value as NSNumber?

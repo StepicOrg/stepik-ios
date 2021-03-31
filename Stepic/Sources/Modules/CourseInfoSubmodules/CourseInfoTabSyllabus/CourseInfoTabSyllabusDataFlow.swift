@@ -140,6 +140,13 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Click on section
+    enum SectionSelection {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     /// Click on unit
     enum UnitSelection {
         struct Request {

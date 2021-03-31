@@ -23,7 +23,7 @@ class CardStepViewController: UIViewController, CardStepView {
     var stepWebViewHeight: Constraint!
 
     // For updates after rotation only when controller not presented
-    var shouldRefreshOnAppear: Bool = false
+    var shouldRefreshOnAppear = false
 
     var baseScrollView: UIScrollView { self.scrollView }
 
@@ -65,7 +65,7 @@ class CardStepViewController: UIViewController, CardStepView {
     }
 
     // MARK: CardStepView
-    
+
     func updateProblem(viewModel: CardStepViewModel) {
         let processor = HTMLProcessor(html: viewModel.htmlText)
         let html = processor

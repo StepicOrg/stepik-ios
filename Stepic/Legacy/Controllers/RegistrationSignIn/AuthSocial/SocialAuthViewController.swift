@@ -301,16 +301,7 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension SocialAuthViewController: VKSocialSDKProviderDelegate {
     func presentAuthController(_ controller: UIViewController) {
-        // FIXME: register URL
-        let registerURL = SocialProvider.vk.info.registerURL
-        WebControllerManager.shared.presentWebControllerWithURL(
-            registerURL,
-            inController: self,
-            withKey: .socialAuth,
-            allowsSafari: false,
-            backButtonStyle: .close,
-            forceCustom: true
-        )
+        self.present(controller, animated: true)
     }
 }
 

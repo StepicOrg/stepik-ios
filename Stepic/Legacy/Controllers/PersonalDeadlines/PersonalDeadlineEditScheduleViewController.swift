@@ -109,7 +109,7 @@ final class PersonalDeadlineEditScheduleLegacyAssembly: Assembly {
             identifier: "PersonalDeadlineEditScheduleViewController",
             storyboardName: "PersonalDeadlines"
         ) as? PersonalDeadlineEditScheduleViewController else {
-                fatalError()
+            fatalError()
         }
         modesVC.course = self.course
 

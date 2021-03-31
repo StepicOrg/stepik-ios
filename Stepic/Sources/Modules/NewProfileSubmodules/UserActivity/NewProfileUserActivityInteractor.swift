@@ -95,7 +95,7 @@ final class NewProfileUserActivityInteractor: NewProfileUserActivityInteractorPr
                         seal.fulfill(.init(result: .failure(Error.cachedFetchFailed)))
                     }
                 } else if case NewProfileUserActivityProvider.Error.networkFetchFailed = error,
-                    self.didLoadFromCache {
+                          self.didLoadFromCache {
                     // Offline mode: we already presented cached activity, but network request failed
                     seal.fulfill(.init(result: .failure(Error.networkFetchFailed)))
                 } else {
