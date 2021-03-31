@@ -5,23 +5,23 @@ import UIKit
 
 extension CourseInfoTabSyllabusCellView {
     struct Appearance {
-        let coverImageViewCornerRadius: CGFloat = 4
+        let coverImageViewCornerRadius: CGFloat = 6
         let coverImageViewInsets = UIEdgeInsets(top: 20, left: 23, bottom: 20, right: 0)
-        let coverImageViewSize = CGSize(width: 30, height: 30)
+        let coverImageViewSize = CGSize(width: 32, height: 32)
 
-        let titleTextColor = UIColor.stepikPrimaryText
-        let titleFont = UIFont.systemFont(ofSize: 14)
+        let titleTextColor = UIColor.stepikMaterialPrimaryText
+        let titleFont = Typography.subheadlineFont
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 16)
 
         let downloadButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
         let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
 
-        let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let downloadedSizeLabelTextColor = UIColor.stepikPrimaryText
+        let downloadedSizeLabelFont = Typography.caption1Font
+        let downloadedSizeLabelTextColor = UIColor.stepikMaterialSecondaryText
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
-        let demoAccessLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let demoAccessLabelFont = Typography.caption1Font
         let demoAccessLabelTextColor = UIColor.stepikVioletFixed
 
         let statsInsets = UIEdgeInsets(top: 10, left: 8, bottom: 20, right: 16)

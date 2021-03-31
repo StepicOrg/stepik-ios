@@ -5,11 +5,11 @@ extension CourseInfoTabSyllabusSectionView {
     struct Appearance {
         let backgroundColor = UIColor.stepikLightSecondaryBackground
 
-        let indexTextColor = UIColor.stepikPrimaryText
-        let indexFont = UIFont.systemFont(ofSize: 15)
+        let indexTextColor = UIColor.stepikMaterialSecondaryText
+        let indexFont = Typography.title3Font
         let indexLabelInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
         // Width for two-digit indexes
-        let indexLabelWidth: CGFloat = 17
+        let indexLabelWidth: CGFloat = 25
 
         let badgesViewHeight: CGFloat = 21
 
@@ -18,21 +18,21 @@ extension CourseInfoTabSyllabusSectionView {
         let textStackViewSpacing: CGFloat = 10
         let textStackViewInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
 
-        let titleTextColor = UIColor.stepikPrimaryText
-        let titleFont = UIFont.systemFont(ofSize: 14)
+        let titleTextColor = UIColor.stepikMaterialPrimaryText
+        let titleFont = Typography.subheadlineFont
 
-        let progressTextColor = UIColor.stepikPrimaryText
-        let progressTextFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let progressTextColor = UIColor.stepikMaterialSecondaryText
+        let progressTextFont = Typography.caption1Font
 
-        let requirementsTextColor = UIColor.stepikPrimaryText
-        let requirementsTextFont = UIFont.systemFont(ofSize: 12)
+        let requirementsTextColor = UIColor.stepikMaterialSecondaryText
+        let requirementsTextFont = Typography.caption1Font
 
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
         let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
 
-        let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let downloadedSizeLabelTextColor = UIColor.stepikPrimaryText
+        let downloadedSizeLabelFont = Typography.caption1Font
+        let downloadedSizeLabelTextColor = UIColor.stepikMaterialSecondaryText
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let deadlinesInsets = UIEdgeInsets(top: 16, left: 0, bottom: 19, right: 0)

@@ -3,16 +3,17 @@ import UIKit
 
 extension CourseInfoHeaderView {
     struct Appearance {
+        let actionButtondTitleColor = UIColor.black.withAlphaComponent(0.87)
         let actionButtonHeight: CGFloat = 42.0
         let actionButtonWidthRatio: CGFloat = 0.55
 
         let actionButtonsStackViewInsets = UIEdgeInsets(top: 10, left: 30, bottom: 15, right: 30)
         let actionButtonsStackViewSpacing: CGFloat = 15.0
 
-        let coverImageViewSize = CGSize(width: 36, height: 36)
-        let coverImageViewCornerRadius: CGFloat = 3
+        let coverImageViewSize = CGSize(width: 32, height: 32)
+        let coverImageViewCornerRadius: CGFloat = 6
 
-        let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+        let titleLabelFont = Typography.subheadlineFont
         let titleLabelColor = UIColor.white
 
         let titleStackViewSpacing: CGFloat = 10
@@ -24,9 +25,9 @@ extension CourseInfoHeaderView {
         let statsViewHeight: CGFloat = 17.0
 
         let verifiedTextColor = UIColor.white
-        let verifiedImageSize = CGSize(width: 11, height: 11)
+        let verifiedImageSize = CGSize(width: 12, height: 12)
         let verifiedSpacing: CGFloat = 4.0
-        let verifiedTextFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let verifiedTextFont = Typography.caption1Font
 
         let skeletonFirstColor = UIColor.dynamic(light: UIColor(white: 0.99, alpha: 0.95), dark: .skeletonGradientFirst)
         let skeletonSecondColor = UIColor.dynamic(light: UIColor(white: 0.75, alpha: 1), dark: .skeletonGradientSecond)
@@ -53,7 +54,9 @@ final class CourseInfoHeaderView: UIView {
     }()
 
     private lazy var actionButton: ContinueActionButton = {
-        let button = ContinueActionButton(mode: .callToAction)
+        var appearance = ContinueActionButton.Appearance()
+        appearance.defaultTitleColor = self.appearance.actionButtondTitleColor
+        let button = ContinueActionButton(mode: .callToAction, appearance: appearance)
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         return button
     }()

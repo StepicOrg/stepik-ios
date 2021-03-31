@@ -3,12 +3,12 @@ import UIKit
 
 extension CourseInfoTabSyllabusHeaderView {
     struct Appearance {
-        let buttonSpacing: CGFloat = 14.0
+        let buttonSpacing: CGFloat = 16
 
-        let buttonTintColor = UIColor.stepikPrimaryText
-        let buttonFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let buttonImageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 4)
-        let buttonTitleInsets = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0)
+        let buttonTintColor = UIColor.stepikMaterialPrimaryText
+        let buttonFont = Typography.subheadlineFont
+        let buttonImageInsets = UIEdgeInsets(top: 1.5, left: 0, bottom: 0, right: 0)
+        let buttonTitleInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         let buttonImageSize = CGSize(width: 15, height: 15)
 
         let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
