@@ -220,6 +220,11 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             let sectionViewModels = result.sections.enumerated().map {
                 sectionData -> CourseInfoTabSyllabusSectionViewModel in
 
+                let examViewModelOrNil = self.makeExamViewModel(
+                    course: result.course,
+                    section: sectionData.element.entity
+                )
+
                 var currentSectionUnitViewModels: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper] = []
 
                 for (unitIndex, unitID) in sectionData.element.entity.unitsIDs.enumerated() {
@@ -233,7 +238,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                                 unit: unit,
                                 course: result.course,
                                 isSectionReachable: sectionData.element.entity.isReachable,
-                                downloadState: matchedUnitRecord.downloadState
+                                downloadState: matchedUnitRecord.downloadState,
+                                examViewModel: examViewModelOrNil
                             )
                         )
                     } else {
@@ -267,7 +273,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     downloadState: hasPlaceholderUnits || !result.course.isEnrolled
                         ? .notAvailable
                         : sectionData.element.downloadState,
-                    personalDeadlineDate: sectionDeadline
+                    personalDeadlineDate: sectionDeadline,
+                    examViewModel: examViewModelOrNil
                 )
             }
 
@@ -286,7 +293,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         requiredSection: SectionPlainObject?,
         units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
         downloadState: CourseInfoTabSyllabus.DownloadState,
-        personalDeadlineDate: Date? = nil
+        personalDeadlineDate: Date? = nil,
+        examViewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?
     ) -> CourseInfoTabSyllabusSectionViewModel {
         let deadlines = self.makeDeadlinesViewModel(
             section: section,
@@ -294,8 +302,19 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         )
 
         let progressLabelText: String? = {
-            guard let progress = section.progress,
-                  progress.cost > 0 else {
+            guard let progress = section.progress else {
+                return nil
+            }
+
+            if examViewModel?.state == .finished, progress.score == 0 {
+                return NSLocalizedString("CourseInfoTabSyllabusSectionExamNoScoreTitle", comment: "")
+            }
+
+            guard progress.cost > 0 else {
+                return nil
+            }
+
+            if examViewModel != nil && examViewModel?.state != .finished {
                 return nil
             }
 
@@ -310,6 +329,13 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             requiredSection: requiredSection
         )
 
+        let isDisabled: Bool = {
+            if let examViewModel = examViewModel, examViewModel.state == .canNotStart {
+                return true
+            }
+            return !section.isReachable
+        }()
+
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
             index: "\(index + 1)",
@@ -319,14 +345,41 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             requirementsLabelText: requirementsLabelText,
             units: units,
             deadlines: deadlines,
+            exam: examViewModel,
             downloadState: downloadState,
-            isDisabled: !section.isReachable,
-            isExam: section.isExam
+            isDisabled: isDisabled
         )
 
         self.cachedSectionViewModels[section.id] = viewModel
 
         return viewModel
+    }
+
+    private func makeExamViewModel(
+        course: CoursePlainObject,
+        section: SectionPlainObject
+    ) -> CourseInfoTabSyllabusSectionViewModel.ExamViewModel? {
+        guard section.isExam else {
+            return nil
+        }
+
+        let state: CourseInfoTabSyllabusSectionViewModel.ExamViewModel.State = {
+            if section.isExamCanStart {
+                return .canStart
+            } else if section.isExamActive {
+                return .inProgress
+            } else if section.isExamFinished {
+                return .finished
+            } else {
+                return .canNotStart
+            }
+        }()
+
+        return .init(
+            state: state,
+            isProctored: course.isProctored,
+            durationText: FormatterHelper.minutesCount(section.examDurationInMinutes ?? 0)
+        )
     }
 
     private func makeUnitViewModel(
@@ -336,7 +389,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         unit: UnitPlainObject,
         course: CoursePlainObject,
         isSectionReachable: Bool,
-        downloadState: CourseInfoTabSyllabus.DownloadState
+        downloadState: CourseInfoTabSyllabus.DownloadState,
+        examViewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?
     ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
         guard let lesson = unit.lesson else {
             return .placeholder
@@ -378,9 +432,14 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }()
 
         let access: CourseInfoTabSyllabusUnitViewModel.Access = {
+            if let examViewModel = examViewModel, examViewModel.state != .finished {
+                return .no
+            }
+
             if !course.isEnrolled && course.isPaid && lesson.canLearnLesson {
                 return .demo
             }
+
             return isSectionReachable ? .full : .no
         }()
 
@@ -485,10 +544,13 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             (Float(requiredSectionProgress.cost) * Float(section.requiredPercent) / 100.0).rounded(.up)
         )
 
+        let title = section.isExam
+            ? NSLocalizedString("CourseInfoTabSyllabusSectionExamRequirementTitle", comment: "")
+            : NSLocalizedString("CourseInfoTabSyllabusSectionRequirementTitle", comment: "")
+
         return String(
-            format: NSLocalizedString("CourseInfoTabSyllabusSectionRequirementTitle", comment: ""),
-            FormatterHelper.pointsCount(requiredPoints),
-            requiredSection.title
+            format: title,
+            arguments: [FormatterHelper.pointsCount(requiredPoints), requiredSection.title]
         )
     }
 }

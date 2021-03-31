@@ -20,10 +20,12 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
     private let discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
     private let emailAddressesPersistenceService: EmailAddressesPersistenceServiceProtocol
+    private let examSessionsPersistenceService: ExamSessionsPersistenceServiceProtocol
     private let lastCodeLanguagePersistenceService: LastCodeLanguagePersistenceServiceProtocol
     private let lastStepPersistenceService: LastStepPersistenceServiceProtocol
     private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
     private let notificationsPersistenceService: NotificationsPersistenceServiceProtocol
+    private let proctorSessionsPersistenceService: ProctorSessionsPersistenceServiceProtocol
     private let profilesPersistenceService: ProfilesPersistenceServiceProtocol
     private let progressesPersistenceService: ProgressesPersistenceServiceProtocol
     private let sectionsPersistenceService: SectionsPersistenceServiceProtocol
@@ -67,10 +69,12 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol = CourseReviewsPersistenceService(),
         discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol = DiscussionThreadsPersistenceService(),
         emailAddressesPersistenceService: EmailAddressesPersistenceServiceProtocol = EmailAddressesPersistenceService(),
+        examSessionsPersistenceService: ExamSessionsPersistenceServiceProtocol = ExamSessionsPersistenceService(),
         lastCodeLanguagePersistenceService: LastCodeLanguagePersistenceServiceProtocol = LastCodeLanguagePersistenceService(),
         lastStepPersistenceService: LastStepPersistenceServiceProtocol = LastStepPersistenceService(),
         lessonsPersistenceService: LessonsPersistenceServiceProtocol = LessonsPersistenceService(),
         notificationsPersistenceService: NotificationsPersistenceServiceProtocol = NotificationsPersistenceService(),
+        proctorSessionsPersistenceService: ProctorSessionsPersistenceServiceProtocol = ProctorSessionsPersistenceService(),
         profilesPersistenceService: ProfilesPersistenceServiceProtocol = ProfilesPersistenceService(),
         progressesPersistenceService: ProgressesPersistenceServiceProtocol = ProgressesPersistenceService(),
         sectionsPersistenceService: SectionsPersistenceServiceProtocol = SectionsPersistenceService(),
@@ -104,10 +108,12 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.courseReviewsPersistenceService = courseReviewsPersistenceService
         self.discussionThreadsPersistenceService = discussionThreadsPersistenceService
         self.emailAddressesPersistenceService = emailAddressesPersistenceService
+        self.examSessionsPersistenceService = examSessionsPersistenceService
         self.lastCodeLanguagePersistenceService = lastCodeLanguagePersistenceService
         self.lastStepPersistenceService = lastStepPersistenceService
         self.lessonsPersistenceService = lessonsPersistenceService
         self.notificationsPersistenceService = notificationsPersistenceService
+        self.proctorSessionsPersistenceService = proctorSessionsPersistenceService
         self.profilesPersistenceService = profilesPersistenceService
         self.progressesPersistenceService = progressesPersistenceService
         self.sectionsPersistenceService = sectionsPersistenceService
@@ -189,10 +195,12 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                         self.courseReviewsPersistenceService.deleteAll(),
                         self.discussionThreadsPersistenceService.deleteAll(),
                         self.emailAddressesPersistenceService.deleteAll(),
+                        self.examSessionsPersistenceService.deleteAll(),
                         self.lastCodeLanguagePersistenceService.deleteAll(),
                         self.lastStepPersistenceService.deleteAll(),
                         self.lessonsPersistenceService.deleteAll(),
                         self.notificationsPersistenceService.deleteAll(),
+                        self.proctorSessionsPersistenceService.deleteAll(),
                         self.profilesPersistenceService.deleteAll(),
                         self.progressesPersistenceService.deleteAll(),
                         self.sectionsPersistenceService.deleteAll(),

@@ -6,7 +6,7 @@ extension CourseInfoStatsView {
     struct Appearance {
         let itemsSpacing: CGFloat = 17.0
 
-        let itemTextFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let itemTextFont = Typography.caption1Font
         let itemTextColor = UIColor.white
 
         let learnersImageColor = UIColor.white

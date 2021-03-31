@@ -197,6 +197,19 @@ enum FormatterHelper {
         return "\(minutes) \(pluralizedMinutesString)"
     }
 
+    /// Format minutes count with localized and pluralized suffix; 1 -> "1 minute", 5 -> "5 minutes"
+    static func minutesCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("minutes1", comment: ""),
+                NSLocalizedString("minutes234", comment: ""),
+                NSLocalizedString("minutes567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
     /// Format seconds with localized and pluralized suffix; 1 -> "1 second", 5 -> "5 seconds"
     static func seconds(_ seconds: TimeInterval, roundingRule: FloatingPointRoundingRule = .up) -> String {
         let seconds = Int(seconds.rounded(roundingRule))

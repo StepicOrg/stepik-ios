@@ -7,8 +7,8 @@ extension CourseInfoTabInfoTextBlockView {
         var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
 
         let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
-        let messageLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let messageLabelTextColor = UIColor.stepikSystemSecondaryText
+        let messageLabelFont = Typography.subheadlineFont
+        let messageLabelTextColor = UIColor.stepikMaterialSecondaryText
     }
 }
 

@@ -131,6 +131,9 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject, UITableViewDeleg
 
         if let viewModel = self.viewModels[safe: section] {
             sectionView.configure(viewModel: viewModel)
+            sectionView.onExamButtonClick = { [weak self] in
+                self?.delegate?.examButtonDidClick(viewModel)
+            }
             sectionView.onDownloadButtonClick = { [weak self] in
                 self?.delegate?.downloadButtonDidClick(viewModel)
             }

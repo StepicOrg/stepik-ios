@@ -6,14 +6,14 @@ extension CourseInfoTabSyllabusCellStatsView {
     struct Appearance {
         let itemsSpacing: CGFloat = 8.0
 
-        let itemTextFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let itemTextColor = UIColor.stepikPrimaryText
+        let itemTextFont = Typography.caption1Font
+        let itemTextColor = UIColor.stepikMaterialSecondaryText
 
-        let learnersImageColor = UIColor.stepikAccent
+        let learnersImageColor = UIColor.stepikMaterialSecondaryText
         let learnersImageSize = CGSize(width: 8.5, height: 11)
         let learnersSpacing: CGFloat = 5.0
 
-        let likesImageColor = UIColor.stepikAccent
+        let likesImageColor = UIColor.stepikMaterialSecondaryText
         let likesImageSize = CGSize(width: 10, height: 8.7)
         let likesSpacing: CGFloat = 5.0
     }

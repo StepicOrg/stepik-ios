@@ -842,6 +842,8 @@
 		2CB113AB259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */; };
 		2CB113B0259205D60093B572 /* StoryPartsReactionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */; };
 		2CB113C425920EC20093B572 /* StoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB113C325920EC20093B572 /* StoryProtocols.swift */; };
+		2CB11AE826131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB11AE726131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift */; };
+		2CB11B1526135D8C001E400D /* CourseInfoTabSyllabusSectionExamActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB11B1426135D8B001E400D /* CourseInfoTabSyllabusSectionExamActionButton.swift */; };
 		2CB1C3AD240050F9001DA83E /* UserCodeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */; };
 		2CB1C3AF24008D4A001DA83E /* UserCodeRunsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3AE24008D4A001DA83E /* UserCodeRunsAPI.swift */; };
 		2CB1C3B124009339001DA83E /* UserCodeRunsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1C3B024009339001DA83E /* UserCodeRunsNetworkService.swift */; };
@@ -932,6 +934,18 @@
 		2CD99DD722DCE4D800628224 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
 		2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */; };
+		2CDA1AF72613920200E36BF7 /* ExamSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1AF62613920200E36BF7 /* ExamSession.swift */; };
+		2CDA1AFE2613921000E36BF7 /* ExamSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1AFD2613921000E36BF7 /* ExamSession+CoreDataProperties.swift */; };
+		2CDA1B052613972400E36BF7 /* ExamSessionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B042613972400E36BF7 /* ExamSessionsAPI.swift */; };
+		2CDA1B0C261397B600E36BF7 /* ExamSessionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B0B261397B600E36BF7 /* ExamSessionsNetworkService.swift */; };
+		2CDA1B182613998B00E36BF7 /* ExamSessionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B172613998B00E36BF7 /* ExamSessionsPersistenceService.swift */; };
+		2CDA1B1F26139C4100E36BF7 /* ExamSessionPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B1E26139C4100E36BF7 /* ExamSessionPlainObject.swift */; };
+		2CDA1B2C2613B81700E36BF7 /* ProctorSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B2B2613B81700E36BF7 /* ProctorSession.swift */; };
+		2CDA1B332613B82200E36BF7 /* ProctorSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B322613B82200E36BF7 /* ProctorSession+CoreDataProperties.swift */; };
+		2CDA1B3A2613BDEA00E36BF7 /* ProctorSessionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B392613BDEA00E36BF7 /* ProctorSessionsAPI.swift */; };
+		2CDA1B462613BE8600E36BF7 /* ProctorSessionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B452613BE8600E36BF7 /* ProctorSessionsNetworkService.swift */; };
+		2CDA1B522613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B512613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift */; };
+		2CDA1B5E2613C06E00E36BF7 /* ProctorSessionPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA1B5D2613C06E00E36BF7 /* ProctorSessionPlainObject.swift */; };
 		2CDAD308229EB3F700AA9EF5 /* AssignmentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */; };
 		2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */; };
 		2CDB95892412C08100F676A7 /* SpotlightContinueUserActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB95882412C08100F676A7 /* SpotlightContinueUserActivityService.swift */; };
@@ -2550,6 +2564,8 @@
 		2CB113AA259203DC0093B572 /* StoryPartReaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoryPartReaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CB113AF259205D60093B572 /* StoryPartsReactionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartsReactionsPersistenceService.swift; sourceTree = "<group>"; };
 		2CB113C325920EC20093B572 /* StoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryProtocols.swift; sourceTree = "<group>"; };
+		2CB11AE726131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusSectionBadgesView.swift; sourceTree = "<group>"; };
+		2CB11B1426135D8B001E400D /* CourseInfoTabSyllabusSectionExamActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusSectionExamActionButton.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB1C01725B84FCD00582327 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2CB1C01825B84FCD00582327 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
@@ -2652,6 +2668,19 @@
 		2CD8B475241906B1006A7D08 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestsLogger.swift; sourceTree = "<group>"; };
+		2CDA1AEF26137C8C00E36BF7 /* Model_exams_redesign_v76.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_exams_redesign_v76.xcdatamodel; sourceTree = "<group>"; };
+		2CDA1AF62613920200E36BF7 /* ExamSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamSession.swift; sourceTree = "<group>"; };
+		2CDA1AFD2613921000E36BF7 /* ExamSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExamSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CDA1B042613972400E36BF7 /* ExamSessionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamSessionsAPI.swift; sourceTree = "<group>"; };
+		2CDA1B0B261397B600E36BF7 /* ExamSessionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamSessionsNetworkService.swift; sourceTree = "<group>"; };
+		2CDA1B172613998B00E36BF7 /* ExamSessionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamSessionsPersistenceService.swift; sourceTree = "<group>"; };
+		2CDA1B1E26139C4100E36BF7 /* ExamSessionPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamSessionPlainObject.swift; sourceTree = "<group>"; };
+		2CDA1B2B2613B81700E36BF7 /* ProctorSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProctorSession.swift; sourceTree = "<group>"; };
+		2CDA1B322613B82200E36BF7 /* ProctorSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProctorSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CDA1B392613BDEA00E36BF7 /* ProctorSessionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProctorSessionsAPI.swift; sourceTree = "<group>"; };
+		2CDA1B452613BE8600E36BF7 /* ProctorSessionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProctorSessionsNetworkService.swift; sourceTree = "<group>"; };
+		2CDA1B512613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProctorSessionsPersistenceService.swift; sourceTree = "<group>"; };
+		2CDA1B5D2613C06E00E36BF7 /* ProctorSessionPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProctorSessionPlainObject.swift; sourceTree = "<group>"; };
 		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
 		2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceQueuesService.swift; sourceTree = "<group>"; };
 		2CDB95882412C08100F676A7 /* SpotlightContinueUserActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightContinueUserActivityService.swift; sourceTree = "<group>"; };
@@ -5661,6 +5690,24 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		2CDA1AF5261391EA00E36BF7 /* ExamSession */ = {
+			isa = PBXGroup;
+			children = (
+				2CDA1AF62613920200E36BF7 /* ExamSession.swift */,
+				2CDA1AFD2613921000E36BF7 /* ExamSession+CoreDataProperties.swift */,
+			);
+			path = ExamSession;
+			sourceTree = "<group>";
+		};
+		2CDA1B2A2613B80700E36BF7 /* ProctorSession */ = {
+			isa = PBXGroup;
+			children = (
+				2CDA1B2B2613B81700E36BF7 /* ProctorSession.swift */,
+				2CDA1B322613B82200E36BF7 /* ProctorSession+CoreDataProperties.swift */,
+			);
+			path = ProctorSession;
+			sourceTree = "<group>";
+		};
 		2CDB95872412C04A00F676A7 /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -6323,10 +6370,12 @@
 				2CFF901F242A25FF00FD7311 /* CourseReviewSummary */,
 				2CFF9020242A260A00FD7311 /* DiscussionThread */,
 				2CFF9021242A261700FD7311 /* EmailAddress */,
+				2CDA1AF5261391EA00E36BF7 /* ExamSession */,
 				2CFF9022242A262800FD7311 /* LastCodeLanguage */,
 				2CFF9023242A263700FD7311 /* LastStep */,
 				2CFF9024242A264400FD7311 /* Lesson */,
 				2CFF9025242A265000FD7311 /* Notification */,
+				2CDA1B2A2613B80700E36BF7 /* ProctorSession */,
 				2CFF9026242A265F00FD7311 /* Profile */,
 				2CFF9027242A266A00FD7311 /* Progress */,
 				2CFF9028242A267700FD7311 /* Section */,
@@ -6735,6 +6784,7 @@
 				2C4AD01423E301C50049B7B0 /* DiscussionThreadsAPI.swift */,
 				2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */,
 				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
+				2CDA1B042613972400E36BF7 /* ExamSessionsAPI.swift */,
 				2C0FE8AF25F8191A00626289 /* InstructionsAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
@@ -6742,6 +6792,7 @@
 				2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */,
 				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
+				2CDA1B392613BDEA00E36BF7 /* ProctorSessionsAPI.swift */,
 				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
 				080CE1541E9563590089A27F /* ProgressesAPI.swift */,
 				2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */,
@@ -6812,8 +6863,10 @@
 				62E98321CB033D7736CD4DDB /* CoursePayment.swift */,
 				2C97765125D6CF0F008778D6 /* CoursePlainObject.swift */,
 				2CEDC6482608919C00B0B018 /* CourseRecommendation.swift */,
+				2CDA1B1E26139C4100E36BF7 /* ExamSessionPlainObject.swift */,
 				62E986D2ADA8942B2C685F05 /* LessonPlainObject.swift */,
 				2CB3563D2476CB7B00E59A03 /* MagicLink.swift */,
+				2CDA1B5D2613C06E00E36BF7 /* ProctorSessionPlainObject.swift */,
 				2CA930B6253C8A65007B717A /* ProgressPlainObject.swift */,
 				2C97763825D6C545008778D6 /* SectionPlainObject.swift */,
 				2CA9307A253C691F007B717A /* StepPlainObject.swift */,
@@ -6977,10 +7030,12 @@
 				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
 				2C4AD01A23E305FA0049B7B0 /* DiscussionThreadsPersistenceService.swift */,
 				2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */,
+				2CDA1B172613998B00E36BF7 /* ExamSessionsPersistenceService.swift */,
 				62E989EE577036747B419AAC /* LastCodeLanguagePersistenceService.swift */,
 				62E98AC352F76C23F60E12A6 /* LastStepPersistenceService.swift */,
 				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
 				62E98D6C6FA9C92ABDECEF12 /* NotificationsPersistenceService.swift */,
+				2CDA1B512613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift */,
 				2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */,
 				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
 				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
@@ -7312,9 +7367,11 @@
 				62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */,
 				2C4AD01823E304140049B7B0 /* DiscussionThreadsNetworkService.swift */,
 				2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */,
+				2CDA1B0B261397B600E36BF7 /* ExamSessionsNetworkService.swift */,
 				2C0FE8E125F81D9C00626289 /* InstructionsNetworkService.swift */,
 				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
 				2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */,
+				2CDA1B452613BE8600E36BF7 /* ProctorSessionsNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */,
@@ -8271,7 +8328,9 @@
 		62E98FAB33FB4DB9AF8CA32F /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				2CB11AE726131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift */,
 				62E98F7A453F3892E5B1243A /* CourseInfoTabSyllabusSectionDeadlinesView.swift */,
+				2CB11B1426135D8B001E400D /* CourseInfoTabSyllabusSectionExamActionButton.swift */,
 				62E9849974EAC26EC8A30C2F /* CourseInfoTabSyllabusSectionView.swift */,
 			);
 			path = Section;
@@ -9359,6 +9418,7 @@
 				08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
+				2CDA1AF72613920200E36BF7 /* ExamSession.swift in Sources */,
 				2C97E00A215E47EC005684A1 /* SearchQueriesPresenter.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* UILabelExtensions.swift in Sources */,
 				08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */,
@@ -9366,6 +9426,7 @@
 				08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
+				2CDA1B5E2613C06E00E36BF7 /* ProctorSessionPlainObject.swift in Sources */,
 				2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */,
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
@@ -9464,6 +9525,7 @@
 				2C7024BC23D00799002A0246 /* SettingsRightDetailSwitchCellView.swift in Sources */,
 				2C3A035924AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift in Sources */,
 				2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */,
+				2CDA1B462613BE8600E36BF7 /* ProctorSessionsNetworkService.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C284DBB247444DF00669736 /* CoursePaymentsNetworkService.swift in Sources */,
 				2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */,
@@ -9556,6 +9618,7 @@
 				2C52310924C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift in Sources */,
 				2C04BA4E24072ED900D74D4B /* StringSubmissionFeedback.swift in Sources */,
 				082E35B020B5B14A006E28F9 /* StorageRecordData.swift in Sources */,
+				2CDA1B052613972400E36BF7 /* ExamSessionsAPI.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */,
@@ -9818,6 +9881,7 @@
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
+				2CDA1B522613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift in Sources */,
 				2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */,
 				2C26BF0A240810A3000EE23C /* AttemptsRepository.swift in Sources */,
 				080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */,
@@ -9924,6 +9988,7 @@
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */,
+				2CB11B1526135D8C001E400D /* CourseInfoTabSyllabusSectionExamActionButton.swift in Sources */,
 				08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */,
 				62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
@@ -9970,6 +10035,7 @@
 				2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */,
 				2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */,
 				62E98236342BF7C367FB6F36 /* Array+Reordering.swift in Sources */,
+				2CDA1B1F26139C4100E36BF7 /* ExamSessionPlainObject.swift in Sources */,
 				2C7AC4D625B462BC0024D4D2 /* ImagePreheater.swift in Sources */,
 				2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				62E98144B8A52511F4EEB63F /* CourseWidgetSkeletonView.swift in Sources */,
@@ -10016,6 +10082,7 @@
 				62E98E916518CC0446F2DCDF /* ProgrammaticallyInitializableViewProtocol.swift in Sources */,
 				62E9854D204FADAEDD044CAD /* NibLoadable.swift in Sources */,
 				62E9824265673F973F160C0A /* ProgressCircleImage.swift in Sources */,
+				2CDA1B3A2613BDEA00E36BF7 /* ProctorSessionsAPI.swift in Sources */,
 				62E981DD043FB3AEC3BDB669 /* PaddingLabel.swift in Sources */,
 				2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */,
 				2C1E42A424991CA3009F4C69 /* IAPPaymentsCache.swift in Sources */,
@@ -10498,6 +10565,7 @@
 				62E985699E2070D3CFC4B42D /* NewStringQuizAssembly.swift in Sources */,
 				2C0FE8E225F81D9C00626289 /* InstructionsNetworkService.swift in Sources */,
 				2C7545A624C019CE004F9074 /* AchievementsNetworkService.swift in Sources */,
+				2CDA1B2C2613B81700E36BF7 /* ProctorSession.swift in Sources */,
 				62E98C34004760F9527BC4A2 /* NewStringQuizDataFlow.swift in Sources */,
 				62E98E0CD4B1ED07DA15ED82 /* NewStringQuizInteractor.swift in Sources */,
 				62E989FA1FEC604ACCD3DC48 /* NewStringQuizPresenter.swift in Sources */,
@@ -10558,6 +10626,7 @@
 				62E98FE1CE19810D6930DAE6 /* SubmissionsProvider.swift in Sources */,
 				62E984D9CA1E33C6B75A12D9 /* SubmissionsView.swift in Sources */,
 				62E98B06A1CA0DC253AE007C /* SubmissionsViewController.swift in Sources */,
+				2CDA1B0C261397B600E36BF7 /* ExamSessionsNetworkService.swift in Sources */,
 				62E98A8799E57B0E5E67AF34 /* SubmissionsViewModel.swift in Sources */,
 				62E987A7A6162716ABF323CF /* SubmissionsOutputProtocol.swift in Sources */,
 				62E98DE228BB533D1A9001C8 /* SubmissionsTableViewDataSource.swift in Sources */,
@@ -10633,6 +10702,7 @@
 				79A20D8F6931BCF4BDD7656E /* NewProfileUserActivityView.swift in Sources */,
 				12CB070461601452E35A6334 /* NewProfileUserActivityViewController.swift in Sources */,
 				E68D5D39475BA651C54FD4C9 /* NewProfileStreakNotificationsAssembly.swift in Sources */,
+				2CDA1AFE2613921000E36BF7 /* ExamSession+CoreDataProperties.swift in Sources */,
 				209E27FAF79E14028BA3E27E /* NewProfileStreakNotificationsDataFlow.swift in Sources */,
 				2431A273489AF7D40AB21348 /* NewProfileStreakNotificationsInteractor.swift in Sources */,
 				CB429BDBAF7772B836FCA675 /* NewProfileStreakNotificationsPresenter.swift in Sources */,
@@ -10663,6 +10733,7 @@
 				2C73718D24EB6D9100ED24C3 /* FillBlanksDataset.swift in Sources */,
 				5D239816094AD2C3575E81CC /* NewProfileCreatedCoursesView.swift in Sources */,
 				AA4038BFF0FB9031371EBB38 /* NewProfileCreatedCoursesViewController.swift in Sources */,
+				2CDA1B182613998B00E36BF7 /* ExamSessionsPersistenceService.swift in Sources */,
 				ECD21878641B360C12E8C585 /* NewProfileCreatedCoursesOutputProtocol.swift in Sources */,
 				D0EC355329C93B41463C75F9 /* NewProfileSocialProfilesAssembly.swift in Sources */,
 				E25A7DCBFC93A1B63789122B /* NewProfileSocialProfilesDataFlow.swift in Sources */,
@@ -10678,6 +10749,7 @@
 				38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */,
 				F3E3754E1307F57F39624528 /* FillBlanksQuizViewController.swift in Sources */,
 				62E98841F5904735D7F003CA /* FillBlanksReply.swift in Sources */,
+				2CDA1B332613B82200E36BF7 /* ProctorSession+CoreDataProperties.swift in Sources */,
 				62E986C7853C6DB8193E436D /* FillBlanksQuizCollectionViewAdapter.swift in Sources */,
 				3817EBF30A4CB97036ABA9B7 /* TableQuizAssembly.swift in Sources */,
 				55A86C658087D6A12E5B9202 /* TableQuizDataFlow.swift in Sources */,
@@ -10701,6 +10773,7 @@
 				69C6D82E51B19E566B93C25F /* CatalogBlocksView.swift in Sources */,
 				725A032976CEA104C4F958AC /* CatalogBlocksViewController.swift in Sources */,
 				23A9551EEBE3A772D03905A6 /* CatalogBlocksOutputProtocol.swift in Sources */,
+				2CB11AE826131FF0001E400D /* CourseInfoTabSyllabusSectionBadgesView.swift in Sources */,
 				2C7C874AB06B7AFA9B3E0DEF /* SimpleCourseListAssembly.swift in Sources */,
 				88D23475D2D365AD46F7BFAE /* SimpleCourseListDataFlow.swift in Sources */,
 				2BCB44322E830B821B671855 /* SimpleCourseListInteractor.swift in Sources */,
@@ -10986,7 +11059,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -11011,7 +11084,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -11153,7 +11226,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -11183,7 +11256,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -11274,7 +11347,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -11326,7 +11399,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -11407,7 +11480,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -11455,7 +11528,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -11976,7 +12049,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -12030,7 +12103,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -12112,7 +12185,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -12160,7 +12233,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 310;
+				CURRENT_PROJECT_VERSION = 312;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -12634,6 +12707,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CDA1AEF26137C8C00E36BF7 /* Model_exams_redesign_v76.xcdatamodel */,
 				2CAFAF042609DC3E00701D9F /* Model_NSSecureCoding_v75.xcdatamodel */,
 				2CEDC67D2608A2F100B0B018 /* Model_catalog_block_platform_v74.xcdatamodel */,
 				2C8EE76C2604B52E003512BC /* Model_step_needs_plan_v73.xcdatamodel */,
@@ -12711,7 +12785,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CAFAF042609DC3E00701D9F /* Model_NSSecureCoding_v75.xcdatamodel */;
+			currentVersion = 2CDA1AEF26137C8C00E36BF7 /* Model_exams_redesign_v76.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -14,6 +14,88 @@ import SwiftyJSON
 final class Section: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
+    var isReachable: Bool {
+        (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
+    }
+
+    var isCached: Bool {
+        get {
+            if self.units.isEmpty {
+                return false
+            }
+
+            for unit in self.units {
+                if let lesson = unit.lesson {
+                    if !lesson.isCached {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            }
+
+            return true
+        }
+    }
+
+    var isFinished: Bool {
+        if let effectiveEndDateSource = self.effectiveEndDateSource {
+            return effectiveEndDateSource < Date()
+        }
+        return false
+    }
+
+    var effectiveBeginDateSource: Date? {
+        self.beginDateSource ?? self.course?.beginDateSource
+    }
+
+    var effectiveEndDateSource: Date? {
+        self.endDateSource ?? self.course?.endDateSource
+    }
+
+    var isExamTime: Bool {
+        let now = Date()
+        let beginDate = self.effectiveBeginDateSource
+        let endDate = self.effectiveEndDateSource
+        return (beginDate == nil || (beginDate.require() < now)) && (endDate == nil || (now < endDate.require()))
+    }
+
+    var isExamCanStart: Bool {
+        if !self.isExam {
+            return false
+        }
+
+        if !self.isReachable {
+            return false
+        }
+
+        if self.examSession?.id != nil {
+            return false
+        }
+
+        if self.proctorSession?.isFinished ?? false {
+            return false
+        }
+
+        if self.testSectionAction != nil {
+            return true
+        }
+
+        return self.isExamTime && self.isRequirementSatisfied
+    }
+
+    var isExamActive: Bool {
+        (self.examSession?.isActive ?? false) && !(self.proctorSession?.isFinished ?? false)
+    }
+
+    var isExamFinished: Bool {
+        if self.isExamCanStart || self.isExamActive {
+            return false
+        }
+
+        return self.isFinished || (self.proctorSession?.isFinished ?? false) || self.examSession?.id != nil
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
@@ -25,11 +107,16 @@ final class Section: NSManagedObject, IDFetchable {
         self.position = json[JSONKey.position.rawValue].intValue
         self.isActive = json[JSONKey.isActive.rawValue].boolValue
         self.progressId = json[JSONKey.progress.rawValue].string
-        self.isExam = json[JSONKey.isExam.rawValue].boolValue
         self.unitsArray = json[JSONKey.units.rawValue].arrayObject as! [Int]
         self.courseId = json[JSONKey.course.rawValue].intValue
         self.testSectionAction = json[JSONKey.actions.rawValue][JSONKey.testSection.rawValue].string
         self.discountingPolicy = json[JSONKey.discountingPolicy.rawValue].string
+        // Exam
+        self.isExam = json[JSONKey.isExam.rawValue].boolValue
+        self.examDurationInMinutes = json[JSONKey.examDurationMinutes.rawValue].int
+        self.examSessionId = json[JSONKey.examSession.rawValue].int
+        self.proctorSessionId = json[JSONKey.proctorSession.rawValue].int
+        self.isProctoringCanBeScheduled = json[JSONKey.isProctoringCanBeScheduled.rawValue].boolValue
         // Required section
         self.isRequirementSatisfied = json[JSONKey.isRequirementSatisfied.rawValue].bool ?? true
         self.requiredSectionID = json[JSONKey.requiredSection.rawValue].int
@@ -37,6 +124,8 @@ final class Section: NSManagedObject, IDFetchable {
         // Dates
         self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
         self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
+        self.beginDateSource = Parser.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
+        self.endDateSource = Parser.dateFromTimedateJSON(json[JSONKey.endDateSource.rawValue])
         self.softDeadline = Parser.dateFromTimedateJSON(json[JSONKey.softDeadline.rawValue])
         self.hardDeadline = Parser.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
     }
@@ -218,37 +307,6 @@ final class Section: NSManagedObject, IDFetchable {
         )
     }
 
-    func isCompleted(_ lessons: [Lesson]) -> Bool {
-        for lesson in lessons {
-            if !lesson.isCached {
-                return false
-            }
-        }
-        return true
-    }
-
-    var isCached: Bool {
-        get {
-            if units.count == 0 {
-                return false
-            }
-            for unit in units {
-                if let lesson = unit.lesson {
-                    if !lesson.isCached {
-                        return false
-                    }
-                } else {
-                    return false
-                }
-            }
-            return true
-        }
-    }
-
-    var isReachable: Bool {
-        (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
-    }
-
     enum JSONKey: String {
         case id
         case title
@@ -257,6 +315,8 @@ final class Section: NSManagedObject, IDFetchable {
         case progress
         case beginDate = "begin_date"
         case endDate = "end_date"
+        case beginDateSource = "begin_date_source"
+        case endDateSource = "end_date_source"
         case softDeadline = "soft_deadline"
         case hardDeadline = "hard_deadline"
         case actions
@@ -268,6 +328,10 @@ final class Section: NSManagedObject, IDFetchable {
         case isRequirementSatisfied = "is_requirement_satisfied"
         case requiredSection = "required_section"
         case requiredPercent = "required_percent"
+        case examDurationMinutes = "exam_duration_minutes"
+        case examSession = "exam_session"
+        case proctorSession = "proctor_session"
+        case isProctoringCanBeScheduled = "is_proctoring_can_be_scheduled"
     }
 }
 
