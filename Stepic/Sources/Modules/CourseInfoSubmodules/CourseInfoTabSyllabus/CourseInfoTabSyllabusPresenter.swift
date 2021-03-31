@@ -544,10 +544,13 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             (Float(requiredSectionProgress.cost) * Float(section.requiredPercent) / 100.0).rounded(.up)
         )
 
+        let title = section.isExam
+            ? NSLocalizedString("CourseInfoTabSyllabusSectionExamRequirementTitle", comment: "")
+            : NSLocalizedString("CourseInfoTabSyllabusSectionRequirementTitle", comment: "")
+
         return String(
-            format: NSLocalizedString("CourseInfoTabSyllabusSectionRequirementTitle", comment: ""),
-            FormatterHelper.pointsCount(requiredPoints),
-            requiredSection.title
+            format: title,
+            arguments: [FormatterHelper.pointsCount(requiredPoints), requiredSection.title]
         )
     }
 }
