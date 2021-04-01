@@ -141,6 +141,8 @@ enum CatalogBlockItemModuleFactory {
                 )
 
             return (viewController: viewController, containerView: containerView)
+        case .specializations:
+            return nil
         }
     }
 }

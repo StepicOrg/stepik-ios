@@ -1,0 +1,22 @@
+{
+    "id": 3,
+    "position": 3,
+    "title": "Размещают курсы на Stepik",
+    "description": "",
+    "language": "ru",
+    "platform": 1,
+    "kind": "organizations",
+    "appearance": "default",
+    "is_title_visible": true,
+    "content": [
+        {
+            "id": 48,
+            "is_organization": false,
+            "full_name": "Yu Lin",
+            "alias": null,
+            "avatar": "https://stepik.org/users/48/3b62a20672e02189428ed445ef67798772678272/avatar.svg",
+            "created_courses_count": 0,
+            "followers_count": 0
+        }
+    ]
+}

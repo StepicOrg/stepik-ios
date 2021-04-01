@@ -16,6 +16,8 @@ enum CatalogBlockContentItemParser {
             return AuthorsCatalogBlockContentItem(json: json)
         case .recommendedCourses:
             return nil
+        case .specializations:
+            return SpecializationsCatalogBlockContentItem(json: json)
         }
     }
 }
