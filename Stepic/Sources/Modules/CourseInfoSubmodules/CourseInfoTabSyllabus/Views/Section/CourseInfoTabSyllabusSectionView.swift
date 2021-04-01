@@ -151,6 +151,9 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     private var indexLabelCenterYBadgesConstraint: Constraint?
     private var indexLabelCenterYTitleConstraint: Constraint?
 
+    private var textStackViewTrailingToDownloadButtonLeadingConstraint: Constraint?
+    private var textStackViewTrailingToSuperviewConstraint: Constraint?
+
     // To properly center when downloaded size visible
     private var downloadButtonCenterYConstraint: Constraint?
 
@@ -233,6 +236,14 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         case .downloading(let progress):
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .downloading(progress: progress)
+        }
+
+        if self.downloadButton.isHidden {
+            self.textStackViewTrailingToDownloadButtonLeadingConstraint?.deactivate()
+            self.textStackViewTrailingToSuperviewConstraint?.activate()
+        } else {
+            self.textStackViewTrailingToSuperviewConstraint?.deactivate()
+            self.textStackViewTrailingToDownloadButtonLeadingConstraint?.activate()
         }
 
         if let downloadedBytesTotal = downloadedBytesTotal {
@@ -394,7 +405,19 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.textStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.textStackViewInsets.top)
             make.leading.equalTo(self.indexLabel.snp.trailing).offset(self.appearance.textStackViewInsets.left)
-            make.trailing.equalTo(self.downloadButton.snp.leading).offset(-self.appearance.textStackViewInsets.right)
+
+            self.textStackViewTrailingToDownloadButtonLeadingConstraint = make
+                .trailing
+                .equalTo(self.downloadButton.snp.leading)
+                .offset(-self.appearance.textStackViewInsets.right)
+                .constraint
+
+            self.textStackViewTrailingToSuperviewConstraint = make
+                .trailing
+                .equalToSuperview()
+                .offset(-self.appearance.textStackViewInsets.right)
+                .constraint
+            self.textStackViewTrailingToSuperviewConstraint?.deactivate()
         }
 
         self.deadlinesView.translatesAutoresizingMaskIntoConstraints = false
