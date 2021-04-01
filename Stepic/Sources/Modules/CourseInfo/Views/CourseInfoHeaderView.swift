@@ -5,7 +5,7 @@ extension CourseInfoHeaderView {
     struct Appearance {
         let actionButtondTitleColor = UIColor.black.withAlphaComponent(0.87)
         let actionButtonHeight: CGFloat = 42.0
-        let actionButtonWidthRatio: CGFloat = 0.55
+        let actionButtonWidthRatio: CGFloat = DeviceInfo.current.isSmallDiagonal ? 0.75 : 0.55
 
         let actionButtonsStackViewInsets = UIEdgeInsets(top: 10, left: 30, bottom: 15, right: 30)
         let actionButtonsStackViewSpacing: CGFloat = 15.0
