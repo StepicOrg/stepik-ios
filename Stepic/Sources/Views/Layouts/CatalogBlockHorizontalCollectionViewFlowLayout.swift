@@ -1,16 +1,16 @@
 import UIKit
 
-extension AuthorsCourseListHorizontalFlowLayout {
+extension CatalogBlockHorizontalCollectionViewFlowLayout {
     enum Paging {
         static let velocityThreshold: CGFloat = 0.6
     }
 
     struct Appearance {
-        let insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        var insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 }
 
-final class AuthorsCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
+final class CatalogBlockHorizontalCollectionViewFlowLayout: UICollectionViewFlowLayout {
     let appearance: Appearance
 
     var rowsCount: Int
@@ -38,10 +38,11 @@ final class AuthorsCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
 
     private var contentWidth: CGFloat = 0
     private var contentHeight: CGFloat {
+        let verticalAppearanceInsets = self.appearance.insets.top + self.appearance.insets.bottom
         let verticalSectionInsets = self.sectionInset.top + self.sectionInset.bottom
         let allItemsHeight = self.itemSize.height * CGFloat(self.rowsCount)
-        let allSpacing = CGFloat(self.rowsCount) * self.minimumLineSpacing
-        return verticalSectionInsets + allItemsHeight + allSpacing
+        let allSpacing = self.minimumLineSpacing * CGFloat(max(1, self.rowsCount - 1))
+        return verticalAppearanceInsets + verticalSectionInsets + allItemsHeight + allSpacing
     }
 
     override var collectionViewContentSize: CGSize {
@@ -49,8 +50,8 @@ final class AuthorsCourseListHorizontalFlowLayout: UICollectionViewFlowLayout {
     }
 
     init(
-        rowsCount: Int = 1,
-        columnsCount: Int = 1,
+        rowsCount: Int = 2,
+        columnsCount: Int = 2,
         appearance: Appearance = Appearance()
     ) {
         self.rowsCount = rowsCount
