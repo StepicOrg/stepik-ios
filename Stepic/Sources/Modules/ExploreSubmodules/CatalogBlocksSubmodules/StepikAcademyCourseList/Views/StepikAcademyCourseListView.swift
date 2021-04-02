@@ -1,21 +1,26 @@
 import SnapKit
 import UIKit
 
-extension AuthorsCourseListView {
+extension StepikAcademyCourseListView {
     struct Appearance {
-        let layoutSectionInset = UIEdgeInsets(top: 16, left: 20, bottom: 0, right: 20)
-        let layoutMinimumInteritemSpacing: CGFloat = 16
-        let layoutMinimumLineSpacing: CGFloat = 16
+        let layoutSectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+
+        let layoutMinimumInteritemSpacing: CGFloat = 12
+        let layoutMinimumLineSpacing: CGFloat = 12
         let layoutNextPageWidth: CGFloat = 12
-        let layoutDefaultItemHeight: CGFloat = 96
-        let layoutIncreasedItemHeight: CGFloat = 114
+
+        let layoutDefaultItemHeight: CGFloat = 114
+        let layoutSmallDiagonalItemHeight: CGFloat = 136
+
+        let layoutColumnsCountOrientationPortrait = 2
+        let layoutColumnsCountOrientationLandscape = 3
 
         let backgroundColor = UIColor.stepikBackground
     }
 }
 
-final class AuthorsCourseListView: UIView {
-    private static let layoutRowsCount = 3
+final class StepikAcademyCourseListView: UIView {
+    private static let layoutRowsCount = 2
 
     let appearance: Appearance
 
@@ -29,15 +34,15 @@ final class AuthorsCourseListView: UIView {
         collectionView.backgroundColor = .clear
         collectionView.decelerationRate = .fast
 
-        collectionView.register(cellClass: AuthorsCourseListCollectionViewCell.self)
+        collectionView.register(cellClass: StepikAcademyCourseListCollectionViewCell.self)
 
         return collectionView
     }()
 
     private lazy var flowLayout: CatalogBlockHorizontalCollectionViewFlowLayout = {
         var appearance = CatalogBlockHorizontalCollectionViewFlowLayout.Appearance()
-        appearance.insets.top = AuthorsCourseListCollectionViewCell.Appearance.shadowRadius
-        appearance.insets.bottom = AuthorsCourseListCollectionViewCell.Appearance.shadowRadius
+        appearance.insets.top = StepikAcademyCourseListCollectionViewCell.Appearance.shadowRadius
+        appearance.insets.bottom = StepikAcademyCourseListCollectionViewCell.Appearance.shadowRadius
 
         let layout = CatalogBlockHorizontalCollectionViewFlowLayout(
             rowsCount: Self.layoutRowsCount,
@@ -56,15 +61,19 @@ final class AuthorsCourseListView: UIView {
         let (_, interfaceOrientation) = currentDeviceInfo.orientation
 
         if interfaceOrientation.isPortrait {
-            return currentDeviceInfo.isPad ? 2 : 1
+            return currentDeviceInfo.isPad
+                ? (self.appearance.layoutColumnsCountOrientationPortrait + 1)
+                : self.appearance.layoutColumnsCountOrientationPortrait
         } else {
-            return currentDeviceInfo.isPad ? 3 : 2
+            return currentDeviceInfo.isPad
+                ? (self.appearance.layoutColumnsCountOrientationLandscape + 1)
+                : self.appearance.layoutColumnsCountOrientationLandscape
         }
     }
 
     private var layoutItemHeight: CGFloat {
         DeviceInfo.current.isSmallDiagonal
-            ? self.appearance.layoutIncreasedItemHeight
+            ? self.appearance.layoutSmallDiagonalItemHeight
             : self.appearance.layoutDefaultItemHeight
     }
 
@@ -91,11 +100,14 @@ final class AuthorsCourseListView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.updateItemSize(self.calculateItemSize())
+
+        let itemSize = self.calculateItemSize()
+        self.updateItemSize(itemSize)
+
         self.invalidateIntrinsicContentSize()
     }
 
-    // MARK: - Public API
+    // MARK: Public API
 
     func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         self.collectionView.delegate = delegate
@@ -104,10 +116,8 @@ final class AuthorsCourseListView: UIView {
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
-    // MARK: Loading state
-
     func showLoading() {
-        self.collectionView.skeleton.viewBuilder = { AuthorsCourseListCellSkeletonView() }
+        self.collectionView.skeleton.viewBuilder = { SimpleCourseListCellSkeletonView() }
         self.collectionView.skeleton.show()
     }
 
@@ -115,7 +125,7 @@ final class AuthorsCourseListView: UIView {
         self.collectionView.skeleton.hide()
     }
 
-    // MARK: - Private API
+    // MARK: Private API
 
     private func updateItemSize(_ itemSize: CGSize) {
         guard let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
@@ -140,7 +150,7 @@ final class AuthorsCourseListView: UIView {
     }
 }
 
-extension AuthorsCourseListView: ProgrammaticallyInitializableViewProtocol {
+extension StepikAcademyCourseListView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }
@@ -151,8 +161,6 @@ extension AuthorsCourseListView: ProgrammaticallyInitializableViewProtocol {
 
     func makeConstraints() {
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        self.collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }

@@ -146,7 +146,32 @@ enum CatalogBlockItemModuleFactory {
                 return nil
             }
 
-            return nil
+            let assembly = StepikAcademyCourseListAssembly(
+                catalogBlockID: block.id,
+                output: interactor as? StepikAcademyCourseListOutputProtocol
+            )
+            let viewController = assembly.makeModule()
+
+            var contentViewInsets = CourseListContainerViewFactory.Appearance
+                .horizontalCatalogBlocksContentInsets
+            if !block.isTitleVisible {
+                contentViewInsets.top = 0
+            }
+
+            let containerView = CourseListContainerViewFactory()
+                .makeHorizontalCatalogBlocksContainerView(
+                    for: viewController.view,
+                    headerDescription: .init(
+                        title: block.title,
+                        subtitle: nil,
+                        description: block.descriptionString,
+                        isTitleVisible: block.isTitleVisible,
+                        shouldShowAllButton: false
+                    ),
+                    contentViewInsets: contentViewInsets
+                )
+
+            return (viewController: viewController, containerView: containerView)
         }
     }
 }

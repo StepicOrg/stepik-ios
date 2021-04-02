@@ -1,3 +1,5 @@
 import Foundation
 
-protocol StepikAcademyCourseListOutputProtocol: AnyObject {}
+protocol StepikAcademyCourseListOutputProtocol: AnyObject {
+    func presentStepikAcademySpecialization(url: URL)
+}

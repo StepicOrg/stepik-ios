@@ -99,3 +99,9 @@ extension CatalogBlocksInteractor: AuthorsCourseListOutputProtocol {
         self.moduleOutput?.presentProfile(id: id)
     }
 }
+
+extension CatalogBlocksInteractor: StepikAcademyCourseListOutputProtocol {
+    func presentStepikAcademySpecialization(url: URL) {
+        print(#function)
+    }
+}
