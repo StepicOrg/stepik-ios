@@ -142,6 +142,10 @@ enum CatalogBlockItemModuleFactory {
 
             return (viewController: viewController, containerView: containerView)
         case .specializations:
+            guard block.appearance == .specializationsStepikAcademy else {
+                return nil
+            }
+
             return nil
         }
     }
