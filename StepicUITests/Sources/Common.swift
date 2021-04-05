@@ -14,11 +14,9 @@ enum Common {
         let timestamp = Int64(Date().timeIntervalSince1970)
         currentUserName = "ios_autotest_\(timestamp)"
         currentUserEmail = "ios_autotest_\(timestamp)@stepik.org"
-
         // register new user
         let app = XCUIApplication()
         app.launch()
-
         // Register new user
         app.tabBars["Tab Bar"].buttons["Profile"].tap()
         if !app.buttons["Sign In"].staticTexts["Sign In"].waitForExistence(timeout: 5) {
@@ -29,12 +27,7 @@ enum Common {
             app.textFields["Name"].tap()
             app.textFields["Name"].typeText(currentUserName)
             app.textFields["Email"].tap()
-            Common.pasteTextFieldText(
-                app: app,
-                element: app.textFields["Email"],
-                value: currentUserEmail,
-                clearText: false
-            )
+            app.textFields["Email"].typeText(currentUserEmail)
             app.secureTextFields["Password"].tap()
             sleep(5)
             Common.pasteTextFieldText(
@@ -59,7 +52,9 @@ enum Common {
     }
 
     static func logOut(app: XCUIApplication) {
-        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        if app.tabBars["Tab Bar"].buttons["Profile"].waitForExistence(timeout: 10) {
+            app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        }
         app.navigationBars["Profile"].buttons["settings"].tap()
         app.swipeUp()
         app.tables.staticTexts["Log Out"].tap()
@@ -69,16 +64,13 @@ enum Common {
         }
     }
     static func logIn(app: XCUIApplication) {
+        app.tabBars["Tab Bar"].buttons["Profile"].tap()
         app.buttons["Sign In"].staticTexts["Sign In"].tap()
         app.buttons["Sign In with e-mail"].tap()
-        Common.pasteTextFieldText(
-            app: app,
-            element: app.textFields["Email"],
-            value: currentUserEmail,
-            clearText: false
-        )
-        app.secureTextFields["Password"].tap()
+        app.textFields["Email"].tap()
+        app.textFields["Email"].typeText(currentUserEmail)
         sleep(5)
+        app.secureTextFields["Password"].tap()
         Common.pasteTextFieldText(
             app: app,
             element: app.secureTextFields["Password"],
@@ -118,12 +110,13 @@ enum Common {
         UIPasteboard.general.string = value
 
         // Bring up the popup menu on the password field
-        element.tap()
+        if element.waitForExistence(timeout: 5) {
+            element.tap()
+        } else { XCTFail(element.title + " is not hittable") }
 
         if clearText {
             element.buttons["Clear text"].tap()
         }
-
         element.doubleTap()
 
         // Tap the Paste button to input the password

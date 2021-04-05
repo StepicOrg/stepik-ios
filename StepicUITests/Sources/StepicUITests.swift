@@ -215,7 +215,7 @@ class StepicUITests: XCTestCase {
             app.textFields["Name"].tap()
             app.textFields["Name"].typeText("ios_autotest_\(timestamp)")
             app.textFields["Email"].tap()
-            Common.pasteTextFieldText(app: app, element: app.textFields["Email"], value: "ios_autotest_\(timestamp)@stepik.org", clearText: false)
+            app.textFields["Email"].typeText("ios_autotest_\(timestamp)@stepik.org")
             app.secureTextFields["Password"].tap()
             sleep(5)
             Common.pasteTextFieldText(
@@ -247,9 +247,9 @@ class StepicUITests: XCTestCase {
         app.buttons["Sign In"].staticTexts["Sign In"].tap()
         app.buttons["Sign In with e-mail"].tap()
         app.textFields["Email"].tap()
-        Common.pasteTextFieldText(app: app, element: app.textFields["Email"], value: currentUserEmail, clearText: false)
-        app.secureTextFields["Password"].tap()
+        app.textFields["Email"].typeText(currentUserEmail)
         sleep(5)
+        app.secureTextFields["Password"].tap()
         Common.pasteTextFieldText(
             app: app,
             element: app.secureTextFields["Password"],
@@ -258,18 +258,22 @@ class StepicUITests: XCTestCase {
         )
         app.buttons["Log in"].tap()
         // Check user profile loaded
-        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        if app.tabBars["Tab Bar"].buttons["Profile"].waitForExistence(timeout: 5) {
+            app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        }
         let elementsQuery = app.scrollViews.otherElements
         if elementsQuery.staticTexts[currentUserName].waitForExistence(timeout: 5) {
             XCTAssertTrue(elementsQuery.staticTexts["Activity"].exists, "No Activity section")
             XCTAssertTrue(elementsQuery.staticTexts["Achievements"].exists, "No Achievements section")
-        }
+        } else { XCTFail("User could not login") }
         app.terminate()
     }
     func testUserCanLogout() throws {
         let app = XCUIApplication()
         app.launch()
         if !Common.userLoggedIn(app: app) {
+            Common.setUser()
+            app.launch()
             Common.logIn(app: app)
         }
         Common.logOut(app: app)
