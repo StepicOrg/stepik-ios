@@ -76,14 +76,20 @@ final class StepikAcademyCourseListWidgetView: UIView {
 
     func configure(viewModel: StepikAcademyCourseListWidgetViewModel) {
         self.titleLabel.text = viewModel.title
-        self.durationLabel.text = "6 недель"
-        self.discountLabel.text = "6000 R"
-        self.priceLabel.attributedText = NSAttributedString(
-            string: "35000 R",
-            attributes: [
-                .strikethroughStyle: NSUnderlineStyle.single.rawValue
-            ]
-        )
+        self.durationLabel.text = viewModel.duration
+
+        if let discount = viewModel.discount {
+            self.discountLabel.text = discount
+            self.priceLabel.attributedText = NSAttributedString(
+                string: viewModel.price,
+                attributes: [
+                    .strikethroughStyle: NSUnderlineStyle.single.rawValue
+                ]
+            )
+        } else {
+            self.discountLabel.text = viewModel.price
+            self.priceLabel.text = nil
+        }
     }
 }
 
