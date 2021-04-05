@@ -439,6 +439,8 @@
 		2C19D9A626174EEE00181DB0 /* StepikAcademyCourseListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D9A526174EEE00181DB0 /* StepikAcademyCourseListWidgetView.swift */; };
 		2C19D9B22617586100181DB0 /* StepikAcademyCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D9B12617586100181DB0 /* StepikAcademyCourseListCollectionViewDataSource.swift */; };
 		2C19D9BE2617587700181DB0 /* StepikAcademyCourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D9BD2617587700181DB0 /* StepikAcademyCourseListCollectionViewDelegate.swift */; };
+		2C19D9C5261B11FA00181DB0 /* ExploreStepikAcademyBlockHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D9C4261B11F900181DB0 /* ExploreStepikAcademyBlockHeaderView.swift */; };
+		2C19D9D1261B46CC00181DB0 /* ExploreStepikAcademyBlockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D9D0261B46CC00181DB0 /* ExploreStepikAcademyBlockContainerView.swift */; };
 		2C1A4D93244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */; };
 		2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */; };
 		2C1AC2DF255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */; };
@@ -2153,6 +2155,8 @@
 		2C19D9A526174EEE00181DB0 /* StepikAcademyCourseListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListWidgetView.swift; sourceTree = "<group>"; };
 		2C19D9B12617586100181DB0 /* StepikAcademyCourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2C19D9BD2617587700181DB0 /* StepikAcademyCourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		2C19D9C4261B11F900181DB0 /* ExploreStepikAcademyBlockHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreStepikAcademyBlockHeaderView.swift; sourceTree = "<group>"; };
+		2C19D9D0261B46CC00181DB0 /* ExploreStepikAcademyBlockContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreStepikAcademyBlockContainerView.swift; sourceTree = "<group>"; };
 		2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ARKit-Badge-Glyph-Only.png"; sourceTree = "<group>"; };
 		2C1AC2D6255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCourseListsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
 		2C1AC2DE255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
@@ -4193,6 +4197,7 @@
 			children = (
 				62E984D999BE6BB5F6A64AE1 /* ExploreBlockContainerView.swift */,
 				2C73B0DE25628EF500EA217D /* ExploreCatalogBlockContainerView.swift */,
+				2C19D9D0261B46CC00181DB0 /* ExploreStepikAcademyBlockContainerView.swift */,
 			);
 			path = ExploreBlockContainerView;
 			sourceTree = "<group>";
@@ -4202,6 +4207,7 @@
 			children = (
 				62E98AA14C7255A86152B53B /* ExploreBlockHeaderView.swift */,
 				2C73B0EA25628FE600EA217D /* ExploreCatalogBlockHeaderView.swift */,
+				2C19D9C4261B11F900181DB0 /* ExploreStepikAcademyBlockHeaderView.swift */,
 			);
 			path = ExploreBlockHeaderView;
 			sourceTree = "<group>";
@@ -9996,6 +10002,7 @@
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
+				2C19D9C5261B11FA00181DB0 /* ExploreStepikAcademyBlockHeaderView.swift in Sources */,
 				2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */,
 				2CC5AA6C242A34C500C09F94 /* RecommendationsAPI.swift in Sources */,
 				2CA93099253C8760007B717A /* VideoPlainObject.swift in Sources */,
@@ -10401,6 +10408,7 @@
 				2C85EC162559A57D0059EF97 /* CatalogBlockAppearance.swift in Sources */,
 				62E989945806203AB464B5EF /* CourseWidgetLabel.swift in Sources */,
 				62E98E6F295E2C4799957DFB /* CourseWidgetStatsItemView.swift in Sources */,
+				2C19D9D1261B46CC00181DB0 /* ExploreStepikAcademyBlockContainerView.swift in Sources */,
 				2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */,
 				62E982348800CA9D75D78064 /* CourseWidgetStatsView.swift in Sources */,
 				62E9873C5D78AED0DDF82C0A /* CourseWidgetView.swift in Sources */,

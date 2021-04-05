@@ -6,6 +6,7 @@ protocol CatalogBlocksInteractorProtocol: AnyObject {
     func doFullCourseListPresentation(
         request: CatalogBlocks.FullCourseListModulePresentation.Request
     )
+    func doURLPresentation(request: CatalogBlocks.URLPresentation.Request)
 }
 
 final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
@@ -52,6 +53,10 @@ final class CatalogBlocksInteractor: CatalogBlocksInteractorProtocol {
             type: request.courseListType,
             presentationDescription: request.presentationDescription
         )
+    }
+
+    func doURLPresentation(request: CatalogBlocks.URLPresentation.Request) {
+        self.presenter.presentURL(response: .init(url: request.url))
     }
 }
 
@@ -102,6 +107,6 @@ extension CatalogBlocksInteractor: AuthorsCourseListOutputProtocol {
 
 extension CatalogBlocksInteractor: StepikAcademyCourseListOutputProtocol {
     func presentStepikAcademySpecialization(url: URL) {
-        self.presenter.presentURL(response: .init(url: url))
+        self.doURLPresentation(request: .init(url: url))
     }
 }

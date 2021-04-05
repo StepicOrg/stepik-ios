@@ -152,24 +152,16 @@ enum CatalogBlockItemModuleFactory {
             )
             let viewController = assembly.makeModule()
 
-            var contentViewInsets = CourseListContainerViewFactory.Appearance
-                .horizontalCatalogBlocksContentInsets
-            if !block.isTitleVisible {
-                contentViewInsets.top = 0
-            }
-
             let containerView = CourseListContainerViewFactory()
-                .makeHorizontalCatalogBlocksContainerView(
-                    for: viewController.view,
-                    headerDescription: .init(
-                        title: block.title,
-                        subtitle: nil,
-                        description: block.descriptionString,
-                        isTitleVisible: block.isTitleVisible,
-                        shouldShowAllButton: false
-                    ),
-                    contentViewInsets: contentViewInsets
-                )
+                .makeHorizontalStepikAcademyBlockContainerView(for: viewController.view)
+            containerView.onShowAllButtonClick = { [weak interactor] in
+                guard let strongInteractor = interactor,
+                      let stepikAcademyURL = StepikURLFactory().makeStepikAcademy() else {
+                    return
+                }
+
+                strongInteractor.doURLPresentation(request: .init(url: stepikAcademyURL))
+            }
 
             return (viewController: viewController, containerView: containerView)
         }

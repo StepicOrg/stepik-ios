@@ -26,6 +26,10 @@ enum CatalogBlocks {
 
     /// Show URL
     enum URLPresentation {
+        struct Request {
+            let url: URL
+        }
+
         struct Response {
             let url: URL
         }

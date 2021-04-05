@@ -8,7 +8,7 @@ extension StepikAcademyCourseListCollectionViewCell {
         static let shadowColor = UIColor.black
         static let shadowOffset = CGSize(width: 0, height: 1)
         static let shadowRadius: CGFloat = 4
-        static let shadowOpacity: Float = 0.1
+        static let shadowOpacity: Float = 0.08
     }
 }
 
@@ -45,7 +45,6 @@ final class StepikAcademyCourseListCollectionViewCell: UICollectionViewCell, Reu
 
         self.contentView.backgroundColor = Appearance.backgroundColor
         self.contentView.layer.cornerRadius = Appearance.cornerRadius
-        self.contentView.layer.masksToBounds = true
 
         self.layer.shadowColor = Appearance.shadowColor.cgColor
         self.layer.shadowOffset = Appearance.shadowOffset

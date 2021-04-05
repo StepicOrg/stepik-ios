@@ -1085,6 +1085,11 @@ CourseListFilterCourseLanguageAnyTitle = "Любой";
 SimilarCourseListHeaderTitle = "Похожие темы";
 SimilarCourseListAuthorsHeaderTitle = "Авторы курсов";
 
+/* Stepik Academy Course List */
+StepikAcademyCourseListHeaderTitle = "Скучно учиться одному?";
+StepikAcademyCourseListHeaderDescription = "Stepik Academy – это программы с поддержкой преподавателя, группы и куратора от команды Stepik c дедлайнами и проверкой заданий. Обучение платное, но оно того стоит!";
+StepikAcademyCourseListHeaderMoreButtonTitle = "Узнать больше";
+
 /* New profile */
 NewProfileRatingReputation = "Репутация %@";
 NewProfileRatingKnowledge = "Знания %@";

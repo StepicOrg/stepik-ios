@@ -3,7 +3,7 @@ import UIKit
 
 extension StepikAcademyCourseListView {
     struct Appearance {
-        let layoutSectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let layoutSectionInset = UIEdgeInsets(top: 6, left: 20, bottom: 16, right: 20)
 
         let layoutMinimumInteritemSpacing: CGFloat = 12
         let layoutMinimumLineSpacing: CGFloat = 12
@@ -40,19 +40,13 @@ final class StepikAcademyCourseListView: UIView {
     }()
 
     private lazy var flowLayout: CatalogBlockHorizontalCollectionViewFlowLayout = {
-        var appearance = CatalogBlockHorizontalCollectionViewFlowLayout.Appearance()
-        appearance.insets.top = StepikAcademyCourseListCollectionViewCell.Appearance.shadowRadius
-        appearance.insets.bottom = StepikAcademyCourseListCollectionViewCell.Appearance.shadowRadius
-
         let layout = CatalogBlockHorizontalCollectionViewFlowLayout(
             rowsCount: Self.layoutRowsCount,
-            columnsCount: self.columnsCount,
-            appearance: appearance
+            columnsCount: self.columnsCount
         )
         layout.sectionInset = self.appearance.layoutSectionInset
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
         layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
-
         return layout
     }()
 
