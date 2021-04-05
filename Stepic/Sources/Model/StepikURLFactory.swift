@@ -85,13 +85,23 @@ final class StepikURLFactory {
         )
     }
 
+    // MARK: Stepik Academy
+
+    func makeStepikAcademy() -> URL? {
+        self.makeURL(path: nil, host: "academy.stepik.org", queryItems: [.fromMobileApp])
+    }
+
     // MARK: - Private API -
 
-    private func makeURL(path: Path, queryItems: [QueryItem] = []) -> URL? {
+    private func makeURL(
+        path: Path?,
+        host: String = StepikApplicationsInfo.stepikHost,
+        queryItems: [QueryItem] = []
+    ) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = StepikApplicationsInfo.stepikHost
-        components.path = path.formattedPath
+        components.host = host
+        components.path = path?.formattedPath ?? ""
 
         if !queryItems.isEmpty {
             components.queryItems = queryItems.map(\.urlQueryItem)

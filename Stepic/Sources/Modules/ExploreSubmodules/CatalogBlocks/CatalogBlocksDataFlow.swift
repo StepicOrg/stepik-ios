@@ -24,6 +24,21 @@ enum CatalogBlocks {
         }
     }
 
+    /// Show URL
+    enum URLPresentation {
+        struct Request {
+            let url: URL
+        }
+
+        struct Response {
+            let url: URL
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

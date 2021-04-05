@@ -37,8 +37,8 @@ final class DefaultSimpleCourseListView: UIView, SimpleCourseListViewProtocol {
         return collectionView
     }()
 
-    private lazy var flowLayout: DefaultSimpleCourseListHorizontalFlowLayout = {
-        let layout = DefaultSimpleCourseListHorizontalFlowLayout(
+    private lazy var flowLayout: CatalogBlockHorizontalCollectionViewFlowLayout = {
+        let layout = CatalogBlockHorizontalCollectionViewFlowLayout(
             rowsCount: Self.layoutRowsCount,
             columnsCount: self.columnsCount
         )

@@ -1,0 +1,14 @@
+{
+    "id": 47,
+    "position": 999,
+    "title": "Персональные рекомендации",
+    "description": "",
+    "details_url": "",
+    "cover": null,
+    "language": "ru",
+    "platform": 3,
+    "kind": "recommended_courses",
+    "appearance": "default",
+    "is_title_visible": true,
+    "content": []
+}

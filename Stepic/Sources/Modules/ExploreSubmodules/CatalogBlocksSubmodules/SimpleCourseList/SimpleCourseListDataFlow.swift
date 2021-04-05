@@ -44,10 +44,10 @@ enum SimpleCourseList {
 
         init(catalogBlockAppearance: CatalogBlockAppearance) {
             switch catalogBlockAppearance {
-            case .default:
-                self = .default
             case .simpleCourseListsGrid:
                 self = .grid
+            default:
+                self = .default
             }
         }
     }

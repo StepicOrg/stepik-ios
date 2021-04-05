@@ -36,6 +36,12 @@ extension CourseListColorMode {
         return appearance
     }
 
+    var exploreStepikAcademyBlockContainerViewAppearance: ExploreStepikAcademyBlockContainerView.Appearance {
+        var appearance = ExploreStepikAcademyBlockContainerView.Appearance()
+        appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
+        return appearance
+    }
+
     private var exploreBlockContainerViewBackgroundColor: UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { (traitCollection: UITraitCollection) -> UIColor in
