@@ -102,6 +102,6 @@ extension CatalogBlocksInteractor: AuthorsCourseListOutputProtocol {
 
 extension CatalogBlocksInteractor: StepikAcademyCourseListOutputProtocol {
     func presentStepikAcademySpecialization(url: URL) {
-        print(#function)
+        self.presenter.presentURL(response: .init(url: url))
     }
 }

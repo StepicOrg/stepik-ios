@@ -2,6 +2,7 @@ import UIKit
 
 protocol CatalogBlocksViewControllerProtocol: AnyObject {
     func displayCatalogBlocks(viewModel: CatalogBlocks.CatalogBlocksLoad.ViewModel)
+    func displayURL(viewModel: CatalogBlocks.URLPresentation.ViewModel)
 }
 
 final class CatalogBlocksViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -94,5 +95,15 @@ extension CatalogBlocksViewController: CatalogBlocksViewControllerProtocol {
         self.children.forEach { $0.removeFromParent() }
         self.catalogBlocksView?.removeAllBlocks()
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayURL(viewModel: CatalogBlocks.URLPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
