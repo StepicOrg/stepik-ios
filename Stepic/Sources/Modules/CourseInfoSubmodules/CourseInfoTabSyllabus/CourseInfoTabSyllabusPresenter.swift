@@ -238,6 +238,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                                 unit: unit,
                                 course: result.course,
                                 isSectionReachable: sectionData.element.entity.isReachable,
+                                isSectionTestAction: sectionData.element.entity.testSectionAction != nil,
                                 downloadState: matchedUnitRecord.downloadState,
                                 examViewModel: examViewModelOrNil
                             )
@@ -364,7 +365,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
 
         let state: CourseInfoTabSyllabusSectionViewModel.ExamViewModel.State = {
-            if section.isExamCanStart {
+            if section.isExamCanNotStart {
+                return .canNotStart
+            } else if section.isExamCanStart {
                 return .canStart
             } else if section.isExamActive {
                 return .inProgress
@@ -389,6 +392,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         unit: UnitPlainObject,
         course: CoursePlainObject,
         isSectionReachable: Bool,
+        isSectionTestAction: Bool,
         downloadState: CourseInfoTabSyllabus.DownloadState,
         examViewModel: CourseInfoTabSyllabusSectionViewModel.ExamViewModel?
     ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
@@ -432,7 +436,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }()
 
         let access: CourseInfoTabSyllabusUnitViewModel.Access = {
-            if let examViewModel = examViewModel, examViewModel.state != .finished {
+            if let examViewModel = examViewModel,
+               examViewModel.state != .finished && !isSectionTestAction {
                 return .no
             }
 
