@@ -93,6 +93,8 @@ final class ProcessedContentWebView: UIView {
     private var isClearWebViewContentInProgress = false
     private var htmlTextToLoadAfterWebViewContentCleared: String?
 
+    private var currentWebViewWidth = Int(ProcessedContentWebView.defaultWebViewHeight)
+
     /// A Boolean value that determines whether auto-scrolling is enabled.
     ///
     /// If the value of this property is `true`, auto-scrolling is enabled and view will enable scrolling for wider content than webView's size,
@@ -156,6 +158,15 @@ final class ProcessedContentWebView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        CGSize(
+            width: CGFloat(self.currentWebViewWidth),
+            height: CGFloat(self.height)
+                + self.appearance.insets.top
+                + self.appearance.insets.bottom
+        )
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
@@ -183,6 +194,7 @@ final class ProcessedContentWebView: UIView {
         self.isClearWebViewContentInProgress = true
 
         self.height = Int(Self.defaultWebViewHeight)
+        self.currentWebViewWidth = Int(Self.defaultWebViewHeight)
 
         guard let clearWebViewContentURL = URL(string: Self.clearWebViewContentURLString) else {
             self.isClearWebViewContentInProgress = false
@@ -292,6 +304,7 @@ extension ProcessedContentWebView: WKNavigationDelegate {
             self.isLoadHTMLStringInProgress = false
 
             self.height = height
+            self.currentWebViewWidth = width
             self.delegate?.processedContentTextView(self, didReportNewHeight: height)
 
             if self.isClearWebViewContentInProgress {

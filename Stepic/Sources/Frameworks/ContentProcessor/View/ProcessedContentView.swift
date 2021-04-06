@@ -172,7 +172,7 @@ final class ProcessedContentView: UIView {
         if self.didSetupTextView && !self.textView.isHidden {
             resSize = self.textView.sizeThatFits(size)
         } else if self.didSetupWebView {
-            resSize = CGSize(width: UIView.noIntrinsicMetric, height: self.webView.intrinsicContentSize.height)
+            resSize = self.webView.sizeThatFits(size)
         } else {
             resSize = CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
         }

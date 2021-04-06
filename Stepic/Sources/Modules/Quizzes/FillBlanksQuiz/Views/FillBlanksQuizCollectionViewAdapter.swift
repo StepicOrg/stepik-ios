@@ -10,9 +10,15 @@ protocol FillBlanksQuizCollectionViewAdapterDelegate: AnyObject {
         _ adapter: FillBlanksQuizCollectionViewAdapter,
         didSelectComponentAt indexPath: IndexPath
     )
+    func fillBlanksQuizCollectionViewAdapter(
+        _ adapter: FillBlanksQuizCollectionViewAdapter,
+        didLoadContentForComponent component: FillBlanksQuiz.Component
+    )
 }
 
 final class FillBlanksQuizCollectionViewAdapter: NSObject {
+    private static var textComponentsSizes: [UniqueIdentifierType: CGSize] = [:]
+
     weak var delegate: FillBlanksQuizCollectionViewAdapterDelegate?
 
     var components: [FillBlanksQuiz.Component]
@@ -74,6 +80,26 @@ extension FillBlanksQuizCollectionViewAdapter: UICollectionViewDataSource {
         case .text:
             let cell: FillBlanksTextCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.text = component.text
+            cell.onContentLoaded = { [weak self] size in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                Self.textComponentsSizes[component.uniqueIdentifier] = size
+
+                strongSelf.delegate?.fillBlanksQuizCollectionViewAdapter(
+                    strongSelf,
+                    didLoadContentForComponent: component
+                )
+            }
+
+            if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                let maxWidth = collectionView.bounds.width
+                    - flowLayout.sectionInset.left
+                    - flowLayout.sectionInset.right
+                _ = cell.calculatePreferredContentSize(text: component.text, maxWidth: maxWidth)
+            }
+
             return cell
         case .input:
             let cell: FillBlanksInputCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
@@ -122,10 +148,7 @@ extension FillBlanksQuizCollectionViewAdapter: UICollectionViewDelegateFlowLayou
 
         switch self.rowTypeForItemAt(indexPath) {
         case .text:
-            return FillBlanksTextCollectionViewCell.calculatePreferredContentSize(
-                text: component.text,
-                maxWidth: maxWidth
-            )
+            return Self.textComponentsSizes[component.uniqueIdentifier] ?? .zero
         case .input:
             return FillBlanksInputCollectionViewCell.calculatePreferredContentSize(
                 text: component.blank ?? "",

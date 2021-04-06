@@ -104,4 +104,11 @@ extension FillBlanksQuizViewController: FillBlanksQuizCollectionViewAdapterDeleg
 
         self.customPresentViewController(presentr, viewController: pickerViewController, animated: true)
     }
+
+    func fillBlanksQuizCollectionViewAdapter(
+        _ adapter: FillBlanksQuizCollectionViewAdapter,
+        didLoadContentForComponent component: FillBlanksQuiz.Component
+    ) {
+        self.fillBlanksQuizView?.invalidateCollectionViewLayout()
+    }
 }
