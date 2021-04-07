@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.167-develop</string>
+	<string>1.168-develop</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -62,7 +62,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>312</string>
+	<string>313</string>
 	<key>FacebookAppID</key>
 	<string>171127739724012</string>
 	<key>FacebookDisplayName</key>
