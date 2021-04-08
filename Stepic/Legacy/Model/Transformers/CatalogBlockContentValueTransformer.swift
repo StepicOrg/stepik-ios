@@ -6,7 +6,7 @@ final class CatalogBlockContentValueTransformer: NSSecureUnarchiveFromDataTransf
     static let name = NSValueTransformerName(rawValue: String(describing: CatalogBlockContentValueTransformer.self))
 
     override static var allowedTopLevelClasses: [AnyClass] {
-        [NSArray.self, CatalogBlockContentItem.self]
+        [NSArray.self, CatalogBlockContentItem.self, NSDate.self]
     }
 
     static func register() {
