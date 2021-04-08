@@ -230,7 +230,7 @@ DEPENDENCIES:
   - Mockingjay (= 3.0.0-alpha.1)
   - Nimble (= 9.0.0)
   - Nuke (= 9.5.0)
-  - PanModal (= 1.2.7)
+  - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.1)
   - Quick (= 3.1.2)
@@ -294,7 +294,6 @@ SPEC REPOS:
     - Nimble
     - Nuke
     - Pageboy
-    - PanModal
     - pop
     - Presentr
     - PromiseKit
@@ -316,6 +315,9 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 EXTERNAL SOURCES:
+  PanModal:
+    :branch: remove-presenting-appearance-transitions
+    :git: https://github.com/ivan-magda/PanModal.git
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -323,6 +325,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
+  PanModal:
+    :commit: 32fc8b5868b0254a2025c9c01b24c0e4b3fe537d
+    :git: https://github.com/ivan-magda/PanModal.git
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
@@ -397,6 +402,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: bf9b2bceb40811ab29c3d0f660ef13d381d8dd93
 
-PODFILE CHECKSUM: 7683dacf877ca3dd15e9def405e251db40e1d02a
+PODFILE CHECKSUM: b69bd78fc9f62642c86138e82167d75e186a16b0
 
 COCOAPODS: 1.10.1
