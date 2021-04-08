@@ -62,7 +62,7 @@ def all_pods
   pod 'Presentr', '1.9'
   pod 'PanModal', '1.2.7'
 
-  pod 'Agrume', '5.6.12'
+  pod 'Agrume', '5.6.13'
   pod 'Highlightr', '2.1.0'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.1'
