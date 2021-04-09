@@ -1,0 +1,39 @@
+{
+    "id": 15,
+    "position": 7,
+    "title": "Stepik Academy",
+    "description": "",
+    "details_url": "",
+    "cover": null,
+    "language": "ru",
+    "platform": 1,
+    "kind": "specializations",
+    "appearance": "specializations_stepik_academy",
+    "is_title_visible": true,
+    "content": [
+        {
+            "id": 6,
+            "title": "Big Data for Data Science",
+            "description": "",
+            "details_url": "http://academy.stepik.org/big-data?utm_source=stepik&utm_medium=catalog&utm_campaign=catalog",
+            "price": "35000.00",
+            "discount": "6000.00",
+            "currency": "RUB",
+            "start_date": "2021-02-12T03:00:01Z",
+            "end_date": null,
+            "duration": "6 недель"
+        },
+        {
+            "id": 7,
+            "title": "Основы программирования на Python",
+            "description": "",
+            "details_url": "https://academy.stepik.org/python-for-beginners?utm_source=stepik&utm_medium=catalog&utm_campaign=catalog",
+            "price": "19900.00",
+            "discount": "4000.00",
+            "currency": "RUB",
+            "start_date": "2021-02-15T03:00:01Z",
+            "end_date": null,
+            "duration": "6 недель"
+        }
+    ]
+}

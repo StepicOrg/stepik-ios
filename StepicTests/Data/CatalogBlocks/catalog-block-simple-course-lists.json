@@ -1,0 +1,51 @@
+{
+    "id": 7,
+    "position": 4,
+    "title": "Предметы",
+    "description": "",
+    "language": "ru",
+    "platform": 1,
+    "kind": "simple_course_lists",
+    "appearance": "simple_course_lists_grid",
+    "is_title_visible": true,
+    "content": [
+        {
+            "id": 51,
+            "title": "Гуманитарные науки",
+            "description": "",
+            "courses": [
+                51,
+                578,
+                720,
+                1564,
+                1565,
+                1655,
+                1587,
+                3141,
+                6303,
+                2438,
+                8327
+            ],
+            "courses_count": 53
+        },
+        {
+            "id": 4,
+            "title": "Статистика и анализ данных",
+            "description": "",
+            "courses": [
+                76,
+                129,
+                326,
+                401,
+                497,
+                524,
+                579,
+                701,
+                724,
+                1878,
+                2152
+            ],
+            "courses_count": 18
+        }
+    ]
+}

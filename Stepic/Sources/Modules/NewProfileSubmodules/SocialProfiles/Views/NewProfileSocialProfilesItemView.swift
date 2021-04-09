@@ -116,7 +116,7 @@ extension NewProfileSocialProfilesItemView: ProgrammaticallyInitializableViewPro
             make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.textLabelInsets.left)
             make.centerY.equalToSuperview()
             make.trailing
-                .greaterThanOrEqualTo(self.accessoryImageView.snp.leading)
+                .lessThanOrEqualTo(self.accessoryImageView.snp.leading)
                 .offset(-self.appearance.textLabelInsets.right)
         }
 

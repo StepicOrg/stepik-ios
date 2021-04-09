@@ -17,6 +17,7 @@ struct SectionPlainObject {
     let hardDeadline: Date?
     let isActive: Bool
     let isExam: Bool
+    let isExamCanNotStart: Bool
     let isExamCanStart: Bool
     let isExamActive: Bool
     let isExamFinished: Bool
@@ -57,6 +58,7 @@ extension SectionPlainObject {
         self.isActive = section.isActive
 
         self.isExam = section.isExam
+        self.isExamCanNotStart = section.isExamCanNotStart
         self.isExamCanStart = section.isExamCanStart
         self.isExamActive = section.isExamActive
         self.isExamFinished = section.isExamFinished

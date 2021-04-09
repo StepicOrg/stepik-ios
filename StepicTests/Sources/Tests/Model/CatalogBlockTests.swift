@@ -11,7 +11,7 @@ class CatalogBlockSpec: QuickSpec {
             describe("JSON parsing") {
                 it("parses full_course_lists") {
                     // Given
-                    let json = JSON(parseJSON: JSONResponse.fullCourseLists.stringValue)
+                    let json = TestData.fullCourseListsCatalogBlock
 
                     // When
                     let catalogBlock = CatalogBlock(json: json)
@@ -39,7 +39,7 @@ class CatalogBlockSpec: QuickSpec {
 
                 it("parses simple_course_lists") {
                     // Given
-                    let json = JSON(parseJSON: JSONResponse.simpleCourseLists.stringValue)
+                    let json = TestData.simpleCourseListsCatalogBlock
 
                     // When
                     let catalogBlock = CatalogBlock(json: json)
@@ -67,7 +67,7 @@ class CatalogBlockSpec: QuickSpec {
 
                 it("parses authors") {
                     // Given
-                    let json = JSON(parseJSON: JSONResponse.authors.stringValue)
+                    let json = TestData.authorsCatalogBlock
 
                     // When
                     let catalogBlock = CatalogBlock(json: json)
@@ -95,7 +95,7 @@ class CatalogBlockSpec: QuickSpec {
 
                 it("parses recommended_courses") {
                     // Given
-                    let json = JSON(parseJSON: JSONResponse.recommendedCourses.stringValue)
+                    let json = TestData.recommendedCoursesCatalogBlock
 
                     // When
                     let catalogBlock = CatalogBlock(json: json)
@@ -112,9 +112,41 @@ class CatalogBlockSpec: QuickSpec {
                     expect(catalogBlock.content.isEmpty) == true
                 }
 
+                it("parses specializations_stepik_academy") {
+                    // Given
+                    let json = TestData.specializationsStepikAcademyCatalogBlock
+
+                    // When
+                    let catalogBlock = CatalogBlock(json: json)
+
+                    // Then
+                    expect(catalogBlock.id) == 15
+                    expect(catalogBlock.position) == 7
+                    expect(catalogBlock.title) == "Stepik Academy"
+                    expect(catalogBlock.descriptionString.isEmpty) == true
+                    expect(catalogBlock.language) == "ru"
+                    expect(catalogBlock.kind!) == .specializations
+                    expect(catalogBlock.appearance!) == .specializationsStepikAcademy
+                    expect(catalogBlock.isTitleVisible) == true
+                    expect(catalogBlock.content.count) == 2
+
+                    let content = catalogBlock.content as! [SpecializationsCatalogBlockContentItem]
+                    expect(content.count) == 2
+                    expect(content[0].id) == 6
+                    expect(content[0].title) == "Big Data for Data Science"
+                    expect(content[0].descriptionString.isEmpty) == true
+                    expect(content[0].detailsURLString) == "http://academy.stepik.org/big-data?utm_source=stepik&utm_medium=catalog&utm_campaign=catalog"
+                    expect(content[0].priceString) == "35000.00"
+                    expect(content[0].discountString) == "6000.00"
+                    expect(content[0].currencyString) == "RUB"
+                    expect(content[0].startDate) == Parser.dateFromTimedateJSON(JSON("2021-02-12T03:00:01Z"))!
+                    expect(content[0].endDate).to(beNil())
+                    expect(content[0].durationString) == "6 недель"
+                }
+
                 it("not parses organizations content") {
                     // Given
-                    let json = JSON(parseJSON: JSONResponse.organizations.stringValue)
+                    let json = TestData.organizationsCatalogBlock
 
                     // When
                     let catalogBlock = CatalogBlock(json: json)
@@ -132,194 +164,6 @@ class CatalogBlockSpec: QuickSpec {
                     expect(catalogBlock.content.isEmpty) == true
                 }
             }
-        }
-    }
-}
-
-private enum JSONResponse {
-    case fullCourseLists
-    case simpleCourseLists
-    case authors
-    case organizations
-    case recommendedCourses
-
-    var stringValue: String {
-        switch self {
-        case .fullCourseLists:
-            return """
-{
-    "id": 5,
-    "position": 2,
-    "title": "Онлайн-курсы",
-    "description": "",
-    "language": "ru",
-    "platform": 1,
-    "kind": "full_course_lists",
-    "appearance": "default",
-    "is_title_visible": true,
-    "content": [
-        {
-            "id": 1,
-            "title": "Новые курсы",
-            "description": "",
-            "courses": [
-                51904,
-                56495,
-                82176,
-                84952,
-                82799,
-                71402,
-                56594,
-                84101,
-                82893,
-                78471,
-                69599
-            ],
-            "courses_count": 34
-        },
-        {
-            "id": 49,
-            "title": "Популярные курсы",
-            "description": "",
-            "courses": [
-                58852,
-                67,
-                363,
-                7798,
-                38218,
-                63054,
-                76,
-                5482,
-                512,
-                80971,
-                9737
-            ],
-            "courses_count": 1829
-        }
-    ]
-}
-"""
-        case .simpleCourseLists:
-            return """
-{
-    "id": 7,
-    "position": 4,
-    "title": "Предметы",
-    "description": "",
-    "language": "ru",
-    "platform": 1,
-    "kind": "simple_course_lists",
-    "appearance": "simple_course_lists_grid",
-    "is_title_visible": true,
-    "content": [
-        {
-            "id": 51,
-            "title": "Гуманитарные науки",
-            "description": "",
-            "courses": [
-                51,
-                578,
-                720,
-                1564,
-                1565,
-                1655,
-                1587,
-                3141,
-                6303,
-                2438,
-                8327
-            ],
-            "courses_count": 53
-        },
-        {
-            "id": 4,
-            "title": "Статистика и анализ данных",
-            "description": "",
-            "courses": [
-                76,
-                129,
-                326,
-                401,
-                497,
-                524,
-                579,
-                701,
-                724,
-                1878,
-                2152
-            ],
-            "courses_count": 18
-        }
-    ]
-}
-"""
-        case .authors:
-            return """
-{
-    "id": 4,
-    "position": 15,
-    "title": "Авторы курсов",
-    "description": "",
-    "language": "ru",
-    "platform": 1,
-    "kind": "authors",
-    "appearance": "default",
-    "is_title_visible": true,
-    "content": [
-        {
-            "id": 26533986,
-            "is_organization": false,
-            "full_name": "Ляйсан Хутова",
-            "alias": null,
-            "avatar": "https://stepik.org/media/users/26533986/avatar.png?1586183748",
-            "created_courses_count": 7,
-            "followers_count": 99425
-        }
-    ]
-}
-"""
-        case .organizations:
-            return """
-{
-    "id": 3,
-    "position": 3,
-    "title": "Размещают курсы на Stepik",
-    "description": "",
-    "language": "ru",
-    "platform": 1,
-    "kind": "organizations",
-    "appearance": "default",
-    "is_title_visible": true,
-    "content": [
-        {
-            "id": 48,
-            "is_organization": false,
-            "full_name": "Yu Lin",
-            "alias": null,
-            "avatar": "https://stepik.org/users/48/3b62a20672e02189428ed445ef67798772678272/avatar.svg",
-            "created_courses_count": 0,
-            "followers_count": 0
-        }
-    ]
-}
-"""
-        case .recommendedCourses:
-            return """
-{
-    "id": 47,
-    "position": 999,
-    "title": "Персональные рекомендации",
-    "description": "",
-    "details_url": "",
-    "cover": null,
-    "language": "ru",
-    "platform": 3,
-    "kind": "recommended_courses",
-    "appearance": "default",
-    "is_title_visible": true,
-    "content": []
-}
-"""
         }
     }
 }

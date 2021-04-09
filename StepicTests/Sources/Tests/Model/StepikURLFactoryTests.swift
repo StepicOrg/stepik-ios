@@ -294,6 +294,19 @@ class StepikURLFactorySpec: QuickSpec {
                     expect(constructedURL.absoluteString) == staticURLString
                 }
             }
+
+            context("stepik academy") {
+                it("returns correct URL for Stepik Academy") {
+                    // Given
+                    let staticURLString = "https://academy.stepik.org?from_mobile_app=true"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeStepikAcademy()!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+            }
         }
     }
 }
