@@ -299,7 +299,7 @@ private enum TabController: String {
                 tag: self.tag
             )
         case .debug:
-            let viewController = DebugViewController()
+            let viewController = DebugMenuAssembly().makeModule()
             let navigationViewController = StyledNavigationController(rootViewController: viewController)
 
             let infoImage: UIImage? = {

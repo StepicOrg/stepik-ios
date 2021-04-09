@@ -12,6 +12,7 @@ protocol SettingsTableViewDelegate:
         didSelectCell cell: SettingsTableSectionViewModel.Cell,
         at indexPath: IndexPath
     )
+    func settingsTableViewRefreshControlDidRefresh(_ tableView: SettingsTableView)
 }
 
 extension SettingsTableViewDelegate {
@@ -36,6 +37,8 @@ extension SettingsTableViewDelegate {
     func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {}
 
     func settingsCell(_ cell: SettingsRightDetailCheckboxTableViewCell, checkboxValueChanged isOn: Bool) {}
+
+    func settingsTableViewRefreshControlDidRefresh(_ tableView: SettingsTableView) {}
 }
 
 extension SettingsTableView {
@@ -73,6 +76,25 @@ final class SettingsTableView: UIView {
     private lazy var inputCellGroups: [SettingsInputCellGroup] = []
     private lazy var checkBoxCellGroups: [SettingsCheckBoxCellGroup] = []
 
+    var isRefreshControlEnabled = false {
+        didSet {
+            guard oldValue != self.isRefreshControlEnabled else {
+                return
+            }
+
+            let refreshControl = self.isRefreshControlEnabled ? UIRefreshControl() : nil
+            if let refreshControl = refreshControl {
+                refreshControl.addTarget(
+                    self,
+                    action: #selector(self.onRefreshControlValueChanged),
+                    for: .valueChanged
+                )
+            }
+
+            self.tableView.refreshControl = refreshControl
+        }
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -94,6 +116,18 @@ final class SettingsTableView: UIView {
 
         // Section footers heights not being calculated properly APPS-2586.
         self.performTableViewUpdates()
+    }
+
+    func startRefreshing() {
+        self.tableView.refreshControl?.beginRefreshing()
+    }
+
+    func endRefreshing() {
+        self.tableView.refreshControl?.endRefreshing()
+    }
+
+    func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
+        self.tableView.cellForRow(at: indexPath)
     }
 
     // MARK: Cells initialization
@@ -235,6 +269,11 @@ final class SettingsTableView: UIView {
                 self.tableView.endUpdates()
             }
         }
+    }
+
+    @objc
+    private func onRefreshControlValueChanged() {
+        self.delegate?.settingsTableViewRefreshControlDidRefresh(self)
     }
 }
 
