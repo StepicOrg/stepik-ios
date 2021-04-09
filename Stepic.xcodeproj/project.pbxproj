@@ -550,6 +550,7 @@
 		2C48D604228F0EF700739477 /* ContentProcessingRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D603228F0EF700739477 /* ContentProcessingRule.swift */; };
 		2C48D606228F114400739477 /* HTMLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D605228F114400739477 /* HTMLExtractor.swift */; };
 		2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */; };
+		2C48D8A72620575F009C5761 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D8A62620575F009C5761 /* DebugViewController.swift */; };
 		2C4AD01123E2F3CD0049B7B0 /* DiscussionThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AD01023E2F3CD0049B7B0 /* DiscussionThread.swift */; };
 		2C4AD01323E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AD01223E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift */; };
 		2C4AD01523E301C50049B7B0 /* DiscussionThreadsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AD01423E301C50049B7B0 /* DiscussionThreadsAPI.swift */; };
@@ -2281,6 +2282,7 @@
 		2C48D603228F0EF700739477 /* ContentProcessingRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProcessingRule.swift; sourceTree = "<group>"; };
 		2C48D605228F114400739477 /* HTMLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractor.swift; sourceTree = "<group>"; };
 		2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProcessingInjection.swift; sourceTree = "<group>"; };
+		2C48D8A62620575F009C5761 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		2C4AD00E23E2E6550049B7B0 /* Model_ discussion_threads.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_ discussion_threads.xcdatamodel"; sourceTree = "<group>"; };
 		2C4AD01023E2F3CD0049B7B0 /* DiscussionThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThread.swift; sourceTree = "<group>"; };
 		2C4AD01223E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscussionThread+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -7472,10 +7474,11 @@
 			isa = PBXGroup;
 			children = (
 				2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */,
+				62E9811E14B07132959D4987 /* ContactSupportController.swift */,
+				2C48D8A62620575F009C5761 /* DebugViewController.swift */,
 				2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */,
 				62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */,
 				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
-				62E9811E14B07132959D4987 /* ContactSupportController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -10177,6 +10180,7 @@
 				62E98570B05049B3A8619283 /* CourseRatingView.swift in Sources */,
 				62E980CB3EB9E38E716EB433 /* TabSegmentedControlView.swift in Sources */,
 				62E98ABA0A56F069278EF47D /* CourseReviewSummariesNetworkService.swift in Sources */,
+				2C48D8A72620575F009C5761 /* DebugViewController.swift in Sources */,
 				62E98F5E955545F7A75F77BC /* ProgressesNetworkService.swift in Sources */,
 				62E983B1F742209528DC222A /* ContentLanguageService.swift in Sources */,
 				62E9826EBCAB31DA927E56FE /* Reusable.swift in Sources */,

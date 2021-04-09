@@ -11,7 +11,17 @@ final class StyledTabBarViewController: UITabBarController {
         )
     }
 
-    private let items = StepikApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
+    private lazy var items: [TabBarItemInfo] = {
+        var modulesTabs = StepikApplicationsInfo.Modules.tabs?.compactMap { uniqueIdentifier in
+            TabController(rawValue: uniqueIdentifier)?.itemInfo
+        } ?? []
+
+        #if BETA_PROFILE || DEBUG
+        modulesTabs.append(TabController.debug.itemInfo)
+        #endif
+
+        return modulesTabs
+    }()
 
     private var notificationsBadgeNumber: Int {
         get {
@@ -158,6 +168,7 @@ private enum TabController: String {
     case home = "Home"
     case notifications = "Notifications"
     case explore = "Catalog"
+    case debug = "Debug"
 
     var tag: Int { self.hashValue }
 
@@ -171,6 +182,8 @@ private enum TabController: String {
             return 2
         case .notifications:
             return 3
+        case .debug:
+            return 4
         }
     }
 
@@ -283,6 +296,33 @@ private enum TabController: String {
                 controller: navigationViewController,
                 image: exploreImage,
                 selectedImage: exploreImage,
+                tag: self.tag
+            )
+        case .debug:
+            let viewController = DebugViewController()
+            let navigationViewController = StyledNavigationController(rootViewController: viewController)
+
+            let infoImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "info.circle")
+                } else {
+                    return UIImage(named: "quiz-feedback-info").require()
+                }
+            }()
+
+            let infoFillImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "info.circle.fill")
+                } else {
+                    return infoImage
+                }
+            }()
+
+            return TabBarItemInfo(
+                title: "Debug",
+                controller: navigationViewController,
+                image: infoImage,
+                selectedImage: infoFillImage,
                 tag: self.tag
             )
         }
