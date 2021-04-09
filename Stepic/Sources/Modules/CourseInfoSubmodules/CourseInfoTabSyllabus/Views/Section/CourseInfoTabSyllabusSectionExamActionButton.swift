@@ -4,7 +4,7 @@ import UIKit
 extension CourseInfoTabSyllabusSectionExamActionButton {
     struct Appearance {
         let titleColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikViolet05Fixed)
-        let font = Typography.bodyFont
+        let font = UIFont.systemFont(ofSize: 16)
 
         let cornerRadius: CGFloat = 8
         let borderWidth: CGFloat = 1
@@ -46,6 +46,7 @@ extension CourseInfoTabSyllabusSectionExamActionButton: ProgrammaticallyInitiali
     func setupView() {
         self.setTitleColor(self.appearance.titleColor, for: .normal)
         self.titleLabel?.font = self.appearance.font
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
 
         self.layer.cornerRadius = self.appearance.cornerRadius
         self.layer.borderWidth = self.appearance.borderWidth

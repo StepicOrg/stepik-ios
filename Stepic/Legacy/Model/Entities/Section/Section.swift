@@ -38,6 +38,13 @@ final class Section: NSManagedObject, IDFetchable {
         }
     }
 
+    var isStarted: Bool {
+        if let effectiveBeginDateSource = self.effectiveBeginDateSource {
+            return effectiveBeginDateSource <= Date()
+        }
+        return false
+    }
+
     var isFinished: Bool {
         if let effectiveEndDateSource = self.effectiveEndDateSource {
             return effectiveEndDateSource < Date()
@@ -58,6 +65,10 @@ final class Section: NSManagedObject, IDFetchable {
         let beginDate = self.effectiveBeginDateSource
         let endDate = self.effectiveEndDateSource
         return (beginDate == nil || (beginDate.require() < now)) && (endDate == nil || (now < endDate.require()))
+    }
+
+    var isExamCanNotStart: Bool {
+        !self.isStarted || self.isFinished
     }
 
     var isExamCanStart: Bool {

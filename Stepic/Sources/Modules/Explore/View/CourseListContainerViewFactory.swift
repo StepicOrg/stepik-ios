@@ -50,6 +50,19 @@ final class CourseListContainerViewFactory {
         }
     }
 
+    struct HorizontalStepikAcademyHeaderDescription {
+        var title: String
+        var summary: String
+
+        init(
+            title: String = NSLocalizedString("StepikAcademyCourseListHeaderTitle", comment: ""),
+            summary: String = NSLocalizedString("StepikAcademyCourseListHeaderDescription", comment: "")
+        ) {
+            self.title = title
+            self.summary = summary
+        }
+    }
+
     enum Appearance {
         static let horizontalContentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         static let horizontalCoursesCollectionContentInsets = UIEdgeInsets(
@@ -133,6 +146,20 @@ final class CourseListContainerViewFactory {
         )
     }
 
+    func makeHorizontalStepikAcademyBlockContainerView(
+        for contentView: UIView,
+        headerDescription: HorizontalStepikAcademyHeaderDescription = HorizontalStepikAcademyHeaderDescription()
+    ) -> ExploreStepikAcademyBlockContainerView {
+        let headerView = ExploreStepikAcademyBlockHeaderView()
+        headerView.titleText = headerDescription.title
+        headerView.summaryText = headerDescription.summary
+
+        return self.makeHorizontalStepikAcademyBlockContainerView(
+            headerView: headerView,
+            contentView: contentView
+        )
+    }
+
     // MARK: Private API
 
     private func makeHorizontalContainerView(
@@ -179,6 +206,17 @@ final class CourseListContainerViewFactory {
             headerView: headerView,
             contentView: contentView,
             appearance: appearance
+        )
+    }
+
+    private func makeHorizontalStepikAcademyBlockContainerView(
+        headerView: UIView & ExploreBlockHeaderViewProtocol,
+        contentView: UIView
+    ) -> ExploreStepikAcademyBlockContainerView {
+        ExploreStepikAcademyBlockContainerView(
+            headerView: headerView,
+            contentView: contentView,
+            appearance: self.colorMode.exploreStepikAcademyBlockContainerViewAppearance
         )
     }
 }

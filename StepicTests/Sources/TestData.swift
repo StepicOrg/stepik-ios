@@ -96,6 +96,32 @@ enum TestData {
         self.loadJSON(path: "reply-text")
     }
 
+    // MARK: CatalogBlocks
+
+    static var fullCourseListsCatalogBlock: JSON {
+        self.loadJSON(path: "catalog-block-full-course-lists")
+    }
+
+    static var simpleCourseListsCatalogBlock: JSON {
+        self.loadJSON(path: "catalog-block-simple-course-lists")
+    }
+
+    static var authorsCatalogBlock: JSON {
+        self.loadJSON(path: "catalog-block-authors")
+    }
+
+    static var organizationsCatalogBlock: JSON {
+        self.loadJSON(path: "catalog-block-organizations")
+    }
+
+    static var recommendedCoursesCatalogBlock: JSON {
+        self.loadJSON(path: "catalog-block-recommended-courses")
+    }
+
+    static var specializationsStepikAcademyCatalogBlock: JSON {
+        self.loadJSON(path: "catalog-block-specializations-stepik-academy")
+    }
+
     // MARK: Private API
 
     private static func loadJSON(path: String) -> JSON {

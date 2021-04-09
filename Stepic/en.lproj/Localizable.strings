@@ -1092,6 +1092,11 @@ CourseListFilterCourseLanguageAnyTitle = "Any";
 SimilarCourseListHeaderTitle = "Similar themes";
 SimilarCourseListAuthorsHeaderTitle = "Courses authors";
 
+/* Stepik Academy Course List */
+StepikAcademyCourseListHeaderTitle = "Bored of studying alone?";
+StepikAcademyCourseListHeaderDescription = "Stepik Academy is a program with the support of a teacher, a group, and a curator from the Stepik team with deadlines and task verification. The training is paid, but it's worth it!";
+StepikAcademyCourseListHeaderMoreButtonTitle = "Learn More";
+
 /* New profile */
 NewProfileRatingReputation = "Reputation %@";
 NewProfileRatingKnowledge = "Knowledge %@";

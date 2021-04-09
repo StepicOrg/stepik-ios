@@ -141,6 +141,29 @@ enum CatalogBlockItemModuleFactory {
                 )
 
             return (viewController: viewController, containerView: containerView)
+        case .specializations:
+            guard block.appearance == .specializationsStepikAcademy else {
+                return nil
+            }
+
+            let assembly = StepikAcademyCourseListAssembly(
+                catalogBlockID: block.id,
+                output: interactor as? StepikAcademyCourseListOutputProtocol
+            )
+            let viewController = assembly.makeModule()
+
+            let containerView = CourseListContainerViewFactory()
+                .makeHorizontalStepikAcademyBlockContainerView(for: viewController.view)
+            containerView.onShowAllButtonClick = { [weak interactor] in
+                guard let strongInteractor = interactor,
+                      let stepikAcademyURL = StepikURLFactory().makeStepikAcademy() else {
+                    return
+                }
+
+                strongInteractor.doURLPresentation(request: .init(url: stepikAcademyURL))
+            }
+
+            return (viewController: viewController, containerView: containerView)
         }
     }
 }

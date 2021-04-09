@@ -1,9 +1,9 @@
 PODS:
   - ActionSheetPicker-3.0 (2.7.1)
-  - Agrume (5.6.12):
+  - Agrume (5.6.13):
     - SwiftyGif
-  - Alamofire (5.4.1)
-  - Amplitude (8.1.0)
+  - Alamofire (5.4.2)
+  - Amplitude (8.2.1)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -11,7 +11,7 @@ PODS:
   - AppAuth/ExternalUserAgent (1.4.0)
   - Atributika (4.9.10)
   - BEMCheckBox (1.4.1)
-  - Branch (1.39.1)
+  - Branch (1.39.2)
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
@@ -32,80 +32,80 @@ PODS:
     - FBSDKLoginKit/Login (= 8.2.0)
   - FBSDKLoginKit/Login (8.2.0):
     - FBSDKCoreKit (~> 8.2.0)
-  - Firebase/Analytics (7.9.0):
+  - Firebase/Analytics (7.10.0):
     - Firebase/Core
-  - Firebase/Core (7.9.0):
+  - Firebase/Core (7.10.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 7.9.0)
-  - Firebase/CoreOnly (7.9.0):
-    - FirebaseCore (= 7.9.0)
-  - Firebase/Crashlytics (7.9.0):
+    - FirebaseAnalytics (~> 7.10.0)
+  - Firebase/CoreOnly (7.10.0):
+    - FirebaseCore (= 7.10.0)
+  - Firebase/Crashlytics (7.10.0):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 7.9.0)
-  - Firebase/Messaging (7.9.0):
+    - FirebaseCrashlytics (~> 7.10.0)
+  - Firebase/Messaging (7.10.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 7.9.0)
-  - Firebase/RemoteConfig (7.9.0):
+    - FirebaseMessaging (~> 7.10.0)
+  - Firebase/RemoteConfig (7.10.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 7.9.0)
-  - FirebaseABTesting (7.9.0):
+    - FirebaseRemoteConfig (~> 7.10.0)
+  - FirebaseABTesting (7.10.0):
     - FirebaseCore (~> 7.0)
-  - FirebaseAnalytics (7.9.0):
+  - FirebaseAnalytics (7.10.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
-    - GoogleAppMeasurement (= 7.9.0)
+    - GoogleAppMeasurement (= 7.10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
     - GoogleUtilities/Network (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-    - nanopb (~> 2.30907.0)
-  - FirebaseCore (7.9.0):
+    - nanopb (~> 2.30908.0)
+  - FirebaseCore (7.10.0):
     - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-  - FirebaseCoreDiagnostics (7.9.0):
-    - GoogleDataTransport (~> 8.0)
+  - FirebaseCoreDiagnostics (7.10.0):
+    - GoogleDataTransport (~> 8.4)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-    - nanopb (~> 2.30907.0)
-  - FirebaseCrashlytics (7.9.0):
+    - nanopb (~> 2.30908.0)
+  - FirebaseCrashlytics (7.10.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
-    - GoogleDataTransport (~> 8.0)
-    - nanopb (~> 2.30907.0)
+    - GoogleDataTransport (~> 8.4)
+    - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstallations (7.9.0):
+  - FirebaseInstallations (7.10.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (7.9.0):
+  - FirebaseInstanceID (7.10.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
-  - FirebaseMessaging (7.9.0):
+  - FirebaseMessaging (7.10.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstanceID (~> 7.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Reachability (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
-  - FirebaseRemoteConfig (7.9.0):
+  - FirebaseRemoteConfig (7.10.0):
     - FirebaseABTesting (~> 7.0)
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-  - GoogleAppMeasurement (7.9.0):
+  - GoogleAppMeasurement (7.10.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
     - GoogleUtilities/Network (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-    - nanopb (~> 2.30907.0)
-  - GoogleDataTransport (8.3.0):
+    - nanopb (~> 2.30908.0)
+  - GoogleDataTransport (8.4.0):
     - GoogleUtilities/Environment (~> 7.2)
-    - nanopb (~> 2.30907.0)
+    - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
@@ -152,13 +152,13 @@ PODS:
     - URITemplate (~> 3.0)
   - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
-  - nanopb (2.30907.0):
-    - nanopb/decode (= 2.30907.0)
-    - nanopb/encode (= 2.30907.0)
-  - nanopb/decode (2.30907.0)
-  - nanopb/encode (2.30907.0)
+  - nanopb (2.30908.0):
+    - nanopb/decode (= 2.30908.0)
+    - nanopb/encode (= 2.30908.0)
+  - nanopb/decode (2.30908.0)
+  - nanopb/encode (2.30908.0)
   - Nimble (9.0.0)
-  - Nuke (9.3.0)
+  - Nuke (9.5.0)
   - Pageboy (3.6.2)
   - PanModal (1.2.7)
   - pop (1.0.12)
@@ -174,9 +174,9 @@ PODS:
     - PromiseKit/CorePromise
   - PromisesObjC (1.2.12)
   - Quick (3.1.2)
-  - SDWebImage (5.10.4):
-    - SDWebImage/Core (= 5.10.4)
-  - SDWebImage/Core (5.10.4)
+  - SDWebImage (5.11.0):
+    - SDWebImage/Core (= 5.11.0)
+  - SDWebImage/Core (5.11.0)
   - SnapKit (5.0.1)
   - STRegex (2.1.1)
   - SVGKit (2.1.0):
@@ -194,21 +194,21 @@ PODS:
   - TUSafariActivity (1.0.4)
   - URITemplate (3.0.0)
   - VK-ios-sdk (1.6.2)
-  - YandexMobileMetrica/Dynamic (3.14.1):
-    - YandexMobileMetrica/Dynamic/Core (= 3.14.1)
-    - YandexMobileMetrica/Dynamic/Crashes (= 3.14.1)
-  - YandexMobileMetrica/Dynamic/Core (3.14.1)
-  - YandexMobileMetrica/Dynamic/Crashes (3.14.1):
+  - YandexMobileMetrica/Dynamic (3.15.0):
+    - YandexMobileMetrica/Dynamic/Core (= 3.15.0)
+    - YandexMobileMetrica/Dynamic/Crashes (= 3.15.0)
+  - YandexMobileMetrica/Dynamic/Core (3.15.0)
+  - YandexMobileMetrica/Dynamic/Crashes (3.15.0):
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.7.1)
-  - Agrume (= 5.6.12)
-  - Alamofire (= 5.4.1)
-  - Amplitude (= 8.1.0)
+  - Agrume (= 5.6.13)
+  - Alamofire (= 5.4.2)
+  - Amplitude (= 8.2.1)
   - Atributika (= 4.9.10)
   - BEMCheckBox (= 1.4.1)
-  - Branch (= 1.39.1)
+  - Branch (= 1.39.2)
   - Charts (= 3.6.0)
   - CRToast (= 0.0.9)
   - DeviceKit (= 4.3.0)
@@ -216,11 +216,11 @@ DEPENDENCIES:
   - EasyTipView (= 2.1.0)
   - FBSDKCoreKit (= 8.2.0)
   - FBSDKLoginKit (= 8.2.0)
-  - Firebase/Analytics (= 7.9.0)
-  - Firebase/Core (= 7.9.0)
-  - Firebase/Crashlytics (= 7.9.0)
-  - Firebase/Messaging (= 7.9.0)
-  - Firebase/RemoteConfig (= 7.9.0)
+  - Firebase/Analytics (= 7.10.0)
+  - Firebase/Core (= 7.10.0)
+  - Firebase/Crashlytics (= 7.10.0)
+  - Firebase/Messaging (= 7.10.0)
+  - Firebase/RemoteConfig (= 7.10.0)
   - GoogleSignIn (= 5.0.2)
   - Highlightr (= 2.1.0)
   - IQKeyboardManagerSwift (= 6.5.6)
@@ -229,12 +229,12 @@ DEPENDENCIES:
   - lottie-ios (= 3.2.1)
   - Mockingjay (= 3.0.0-alpha.1)
   - Nimble (= 9.0.0)
-  - Nuke (= 9.3.0)
-  - PanModal (= 1.2.7)
+  - Nuke (= 9.5.0)
+  - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
   - Presentr (= 1.9)
   - PromiseKit (= 6.13.1)
   - Quick (= 3.1.2)
-  - SDWebImage (= 5.10.4)
+  - SDWebImage (= 5.11.0)
   - SnapKit (= 5.0.1)
   - STRegex (= 2.1.1)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
@@ -247,7 +247,7 @@ DEPENDENCIES:
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
   - VK-ios-sdk (= 1.6.2)
-  - YandexMobileMetrica/Dynamic (= 3.14.1)
+  - YandexMobileMetrica/Dynamic (= 3.15.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -294,7 +294,6 @@ SPEC REPOS:
     - Nimble
     - Nuke
     - Pageboy
-    - PanModal
     - pop
     - Presentr
     - PromiseKit
@@ -316,6 +315,9 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 EXTERNAL SOURCES:
+  PanModal:
+    :branch: remove-presenting-appearance-transitions
+    :git: https://github.com/ivan-magda/PanModal.git
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -323,6 +325,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
+  PanModal:
+    :commit: 32fc8b5868b0254a2025c9c01b24c0e4b3fe537d
+    :git: https://github.com/ivan-magda/PanModal.git
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
@@ -332,13 +337,13 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
-  Agrume: d60f7ead4aad9720564148f7e9cbe0b225b1d814
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
-  Amplitude: 5660eda956f6f53c4be4aa3abe1a041bf1760cc3
+  Agrume: 21b96a1138abc0f890211bfcb12f8b1e3464b4c1
+  Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  Amplitude: e91463935daea43afc81afa535b3d4d23043b0f5
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Atributika: cf87f95f1d31d9cdb9af611a2b4e00672e9ae195
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
-  Branch: beed5fba2cd3888ada27dece59140892e415bdd2
+  Branch: 6a281514287f99d707615ac62c2cca69e0213df0
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
@@ -347,18 +352,18 @@ SPEC CHECKSUMS:
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
-  Firebase: d8bd6bd34b4c7ed57bfdd056c66ff5adcdde53ab
-  FirebaseABTesting: f6853447dc61fa785df777748747c845f40fa7cd
-  FirebaseAnalytics: 31b1269830dfe16687db3c60b76082c12bd6d527
-  FirebaseCore: 0798738ad1ae0fda67e17c7b9081241c431c6859
-  FirebaseCoreDiagnostics: 3d36e05da74cb8b7ce30e6594a8f201b982c725c
-  FirebaseCrashlytics: 73cfa8d24d573ed1ff648acce3900df39ca32d77
-  FirebaseInstallations: 5e777e6640fa060405cc7632447b6c5ca5af4742
-  FirebaseInstanceID: 53140c03b9f6136f890d7901399f85a4c90ab2d0
-  FirebaseMessaging: 5f83f200a251c44f647f36cb43e557be09889e8d
-  FirebaseRemoteConfig: ad9b7af6a1308d8dd26787b1702ce9e7d609d22e
-  GoogleAppMeasurement: 120eec8803fe65a4a7475fb3d3d59a61d0e1a866
-  GoogleDataTransport: b006084b73915a42c28a3466961a4edda3065da6
+  Firebase: fffddd0bab8677d07376538365faa93ff3889b39
+  FirebaseABTesting: 457bc058cf6de8bcffc6fd9a2a4c933b24bfc264
+  FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
+  FirebaseCore: ec566d917b2195fc2610aeb148dae99f57a788f9
+  FirebaseCoreDiagnostics: 5662a3823ffcc0acbaa9a21ba5ed302fac634705
+  FirebaseCrashlytics: e7669d368a22d202f1d0c7546ffdfdff496e1a8c
+  FirebaseInstallations: bf2ec8dbf36ff4c91af6b9a003d15855757680c1
+  FirebaseInstanceID: 5ad92c898e1328b66e8dd58811964d6fe4d334c3
+  FirebaseMessaging: 76b3058cef7f339cf10db196e03bbbb2165fb5d7
+  FirebaseRemoteConfig: 2841e353accfe688150781deebeb245e3fe16c2f
+  GoogleAppMeasurement: 1c863b1161fc3c8cf614a7460d1be6a7c262aab3
+  GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
@@ -370,9 +375,9 @@ SPEC CHECKSUMS:
   Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
   lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
-  nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
-  Nuke: 56a7266398951d9af3a897a71a7b662344915ec5
+  Nuke: 6f400a4ea957e09149ec335a3c6acdcc814d89e4
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
@@ -380,7 +385,7 @@ SPEC CHECKSUMS:
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
-  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
+  SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   STRegex: d49e88d0fe58538d3175fdd989bc1243b9be2a07
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
@@ -395,8 +400,8 @@ SPEC CHECKSUMS:
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
-  YandexMobileMetrica: 072fc59d216c8824d83d1d54bdc6e96d9cfcc59c
+  YandexMobileMetrica: bf9b2bceb40811ab29c3d0f660ef13d381d8dd93
 
-PODFILE CHECKSUM: 0315c68ccdc0b3955949532b3434b933fbe05894
+PODFILE CHECKSUM: b69bd78fc9f62642c86138e82167d75e186a16b0
 
 COCOAPODS: 1.10.1

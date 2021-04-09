@@ -54,3 +54,12 @@ final class CatalogBlocksRepository: CatalogBlocksRepositoryProtocol {
         }
     }
 }
+
+extension CatalogBlocksRepository {
+    static var `default`: CatalogBlocksRepository {
+        CatalogBlocksRepository(
+            catalogBlocksNetworkService: CatalogBlocksNetworkService(catalogBlocksAPI: CatalogBlocksAPI()),
+            catalogBlocksPersistenceService: CatalogBlocksPersistenceService()
+        )
+    }
+}

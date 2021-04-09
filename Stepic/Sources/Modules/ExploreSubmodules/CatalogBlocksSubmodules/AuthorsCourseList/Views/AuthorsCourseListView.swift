@@ -34,14 +34,20 @@ final class AuthorsCourseListView: UIView {
         return collectionView
     }()
 
-    private lazy var flowLayout: AuthorsCourseListHorizontalFlowLayout = {
-        let layout = AuthorsCourseListHorizontalFlowLayout(
+    private lazy var flowLayout: CatalogBlockHorizontalCollectionViewFlowLayout = {
+        var appearance = CatalogBlockHorizontalCollectionViewFlowLayout.Appearance()
+        appearance.insets.top = AuthorsCourseListCollectionViewCell.Appearance.shadowRadius
+        appearance.insets.bottom = AuthorsCourseListCollectionViewCell.Appearance.shadowRadius
+
+        let layout = CatalogBlockHorizontalCollectionViewFlowLayout(
             rowsCount: Self.layoutRowsCount,
-            columnsCount: self.columnsCount
+            columnsCount: self.columnsCount,
+            appearance: appearance
         )
         layout.sectionInset = self.appearance.layoutSectionInset
         layout.minimumInteritemSpacing = self.appearance.layoutMinimumInteritemSpacing
         layout.minimumLineSpacing = self.appearance.layoutMinimumLineSpacing
+
         return layout
     }()
 
