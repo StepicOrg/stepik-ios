@@ -88,6 +88,34 @@ final class StyledTabBarViewController: UITabBarController {
 
             self.present(onboardingViewController, animated: true)
         }
+
+        var alertMessage = ""
+        #if BETA_PROFILE
+        alertMessage.append("BETA_PROFILE 1")
+        #else
+        alertMessage.append("BETA_PROFILE 0")
+        #endif
+
+        alertMessage.append("\n")
+
+        #if DEBUG
+        alertMessage.append("DEBUG 1")
+        #else
+        alertMessage.append("DEBUG 0")
+        #endif
+
+        alertMessage.append("\n")
+
+        #if PRODUCTION
+        alertMessage.append("PRODUCTION 1")
+        #else
+        alertMessage.append("PRODUCTION 0")
+        #endif
+
+        let alert = UIAlertController(title: nil, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+        self.present(alert, animated: true)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

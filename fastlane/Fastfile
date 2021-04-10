@@ -225,6 +225,7 @@ platform :ios do
           # use only provisioning profiles from match
           provisioningProfiles: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
         },
+        xcargs: "SWIFT_ACTIVE_COMPILATION_CONDITIONS=BETA_PROFILE",
       )
     ensure
       set_auto_code_signing(
