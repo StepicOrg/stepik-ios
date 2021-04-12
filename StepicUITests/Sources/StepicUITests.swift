@@ -1,4 +1,8 @@
 import XCTest
+/* WARNING!
+   This tests needs make sure 'Hardware -> Keyboard -> Connect hardware keyboard' is off IN SIMULATOR.
+   Use "defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false" in CI
+*/
 
 class StepicUITests: XCTestCase {
     override func setUp() {
@@ -215,9 +219,10 @@ class StepicUITests: XCTestCase {
             app.textFields["Name"].tap()
             app.textFields["Name"].typeText("ios_autotest_\(timestamp)")
             app.textFields["Email"].tap()
+            sleep(1)
             app.textFields["Email"].typeText("ios_autotest_\(timestamp)@stepik.org")
             app.secureTextFields["Password"].tap()
-            sleep(5)
+            sleep(1)
             Common.pasteTextFieldText(
                 app: app,
                 element: app.secureTextFields["Password"],

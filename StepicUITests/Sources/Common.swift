@@ -27,6 +27,7 @@ enum Common {
             app.textFields["Name"].tap()
             app.textFields["Name"].typeText(currentUserName)
             app.textFields["Email"].tap()
+            sleep(2)
             app.textFields["Email"].typeText(currentUserEmail)
             app.secureTextFields["Password"].tap()
             sleep(5)
