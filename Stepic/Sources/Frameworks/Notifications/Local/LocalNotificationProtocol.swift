@@ -1,15 +1,7 @@
-//
-//  LocalNotificationContentProvider.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 12/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import UserNotifications
 
-protocol LocalNotificationContentProvider {
+protocol LocalNotificationProtocol {
     var title: String { get }
 
     var body: String { get }
@@ -23,7 +15,7 @@ protocol LocalNotificationContentProvider {
     var trigger: UNNotificationTrigger? { get }
 }
 
-extension LocalNotificationContentProvider {
+extension LocalNotificationProtocol {
     var userInfo: [AnyHashable: Any] { [:] }
 
     var sound: UNNotificationSound { .default }

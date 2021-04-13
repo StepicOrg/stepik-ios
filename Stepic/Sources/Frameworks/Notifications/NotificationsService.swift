@@ -1,11 +1,3 @@
-//
-//  NotificationsService.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 11/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 import SwiftyJSON
@@ -17,10 +9,6 @@ final class NotificationsService {
     private let localNotificationsService: LocalNotificationsService
     private let deepLinkRoutingService: DeepLinkRoutingService
     private let analytics: Analytics
-
-    private var isInForeground: Bool {
-        UIApplication.shared.applicationState == .active
-    }
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
@@ -86,15 +74,12 @@ final class NotificationsService {
 // MARK: - NotificationsService (LocalNotifications) -
 
 extension NotificationsService {
-    func scheduleLocalNotification(
-        with contentProvider: LocalNotificationContentProvider,
-        removeIdentical: Bool = true
-    ) {
+    func scheduleLocalNotification(_ localNotification: LocalNotificationProtocol, removeIdentical: Bool = true) {
         if removeIdentical {
-            self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+            self.removeLocalNotifications(identifiers: [localNotification.identifier])
         }
 
-        self.localNotificationsService.scheduleNotification(contentProvider: contentProvider).catch { error in
+        self.localNotificationsService.scheduleNotification(localNotification).catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
@@ -103,29 +88,14 @@ extension NotificationsService {
         self.localNotificationsService.removeAllNotifications()
     }
 
-    func removeLocalNotifications(withIdentifiers identifiers: [String]) {
-        if !identifiers.isEmpty {
-            self.localNotificationsService.removeNotifications(withIdentifiers: identifiers)
-        }
+    func removeLocalNotifications(identifiers: [String]) {
+        self.localNotificationsService.removeNotifications(identifiers: identifiers)
     }
 
     func handleLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
-
         self.reportReceivedNotificationWithType(self.extractNotificationType(from: userInfo))
-
-        if #available(iOS 10.0, *) {
-            self.routeLocalNotification(with: userInfo)
-        } else if self.isInForeground {
-            guard let title = userInfo?[LocalNotificationsService.PayloadKey.title.rawValue] as? String,
-                  let body = userInfo?[LocalNotificationsService.PayloadKey.body.rawValue] as? String else {
-                return
-            }
-
-            LegacyNotificationsPresenter.present(text: title, subtitle: body, onTap: {
-                self.routeLocalNotification(with: userInfo)
-            })
-        }
+        self.routeLocalNotification(with: userInfo)
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
@@ -143,13 +113,13 @@ extension NotificationsService {
         if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
             route(to: .home)
         } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
-            if let courseID = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int {
+            if let courseID = userInfo[PersonalDeadlineLocalNotification.UserInfoKey.course.rawValue] as? Int {
                 route(to: .course(courseID: courseID))
             } else {
                 route(to: .home)
             }
         } else if key.localizedCaseInsensitiveContains(NotificationType.remindPurchaseCourse.rawValue) {
-            if let courseID = userInfo[PurchaseCourseLocalNotificationProvider.Key.course.rawValue] as? Int {
+            if let courseID = userInfo[PurchaseCourseLocalNotification.UserInfoKey.course.rawValue] as? Int {
                 route(to: .course(courseID: courseID))
             } else {
                 route(to: .home)
@@ -210,18 +180,15 @@ extension NotificationsService {
             )
         }
 
-        guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-              let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
-              let body = alert[PayloadKey.body.rawValue] as? String,
-              let object = userInfo[PayloadKey.object.rawValue] as? String else {
+        guard let object = userInfo[PayloadKey.object.rawValue] as? String else {
             return print("remote notification received: unable to parse notification: \(userInfo)")
         }
 
         var notification: Notification
         let json = JSON(parseJSON: object)
 
-        if let notificationId = json[PayloadKey.id.rawValue].int,
-           let fetchedNotification = Notification.fetch(id: notificationId) {
+        if let notificationID = json[PayloadKey.id.rawValue].int,
+           let fetchedNotification = Notification.fetch(id: notificationID) {
             fetchedNotification.update(json: json)
             notification = fetchedNotification
             postNotification(id: notification.id, isNew: false)
@@ -233,15 +200,7 @@ extension NotificationsService {
         CoreDataHelper.shared.save()
 
         DispatchQueue.main.async {
-            if #available(iOS 10.0, *) {
-                NotificationReactionHandler().handle(with: notification)
-            } else if self.isInForeground {
-                LegacyNotificationsPresenter.present(text: body, onTap: {
-                    NotificationReactionHandler().handle(with: notification)
-                })
-            } else {
-                NotificationReactionHandler().handle(with: notification)
-            }
+            NotificationReactionHandler().handle(with: notification)
         }
     }
 
@@ -255,7 +214,9 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
-        self.routeToProfile(userInfo: userInfo)
+        DispatchQueue.main.async {
+            TabBarRouter(tab: .profile).route()
+        }
     }
 
     private func resolveRemoteStoryTemplatesNotification(_ userInfo: NotificationUserInfo) {
@@ -265,26 +226,6 @@ extension NotificationsService {
 
         DispatchQueue.main.async {
             self.deepLinkRoutingService.route(path: storyURL)
-        }
-    }
-
-    private func routeToProfile(userInfo: NotificationUserInfo) {
-        DispatchQueue.main.async {
-            if #available(iOS 10.0, *) {
-                TabBarRouter(tab: .profile).route()
-            } else if self.isInForeground {
-                guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-                      let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
-                      let body = alert[PayloadKey.body.rawValue] as? String else {
-                    return
-                }
-
-                LegacyNotificationsPresenter.present(text: body, onTap: {
-                    TabBarRouter(tab: .profile).route()
-                })
-            } else {
-                TabBarRouter(tab: .profile).route()
-            }
         }
     }
 
@@ -309,14 +250,11 @@ extension NotificationsService {
     private var lastActiveTimeInterval: TimeInterval {
         get {
             UserDefaults.standard.value(
-                forKey: NotificationsService.lastActiveTimeIntervalKey
+                forKey: Self.lastActiveTimeIntervalKey
             ) as? TimeInterval ?? Date().timeIntervalSince1970
         }
         set {
-            UserDefaults.standard.set(
-                newValue,
-                forKey: NotificationsService.lastActiveTimeIntervalKey
-            )
+            UserDefaults.standard.set(newValue, forKey: Self.lastActiveTimeIntervalKey)
         }
     }
 

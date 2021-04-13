@@ -82,8 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.didReceiveRegistrationToken(_:)),
-            name: .InstanceIDTokenRefresh,
+            selector: #selector(self.messagingRegistrationTokenDidRefresh),
+            name: .MessagingRegistrationTokenRefreshed,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
 
-        self.notificationsService.removeRetentionNotifications()
+        self.notificationsService.removeRetentionLocalNotifications()
         self.coursePurchaseReminder.updateAllPurchaseNotifications()
 
         self.userCoursesObserver.startObserving()
@@ -179,7 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        self.notificationsService.scheduleRetentionNotifications()
+        self.notificationsService.scheduleRetentionLocalNotifications()
         self.userCoursesObserver.stopObserving()
         self.visitedCoursesCleaner.removeObservers()
 
@@ -226,31 +226,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.handleRemoteNotification(with: userInfo)
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         self.notificationsService.handleLocalNotification(with: notification.userInfo)
-    }
-
-    func application(
-        _ application: UIApplication,
-        didRegister notificationSettings: UIUserNotificationSettings
-    ) {
-        self.notificationsRegistrationService.handleRegisteredNotificationSettings(notificationSettings)
     }
 
     // MARK: Private Helpers
 
     @objc
-    private func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
+    private func messagingRegistrationTokenDidRefresh() {
         guard AuthInfo.shared.isAuthorized else {
             return
         }
 
-        InstanceID.instanceID().instanceID { [weak self] (result, error) in
+        Messaging.messaging().token { [weak self] (token, error) in
             if let error = error {
-                print("Error fetching Firebase remote instance ID: \(error)")
-            } else if let result = result {
-                self?.notificationsRegistrationService.registerDevice(result.token)
+                print("Error fetching FCM token: \(error)")
+            } else if let token = token {
+                self?.notificationsRegistrationService.registerDevice(token)
             }
         }
     }
