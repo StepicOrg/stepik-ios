@@ -43,11 +43,6 @@ protocol NotificationsRegistrationServiceProtocol: AnyObject {
     /// - Parameter error: Encapsulates information why registration did not succeed.
     func handleRegistrationError(_ error: Error)
 
-    /// Tells that the types of local and remote notifications that can be used to get the user’s attention.
-    ///
-    /// - Parameter notificationSettings: The user’s specified notification settings.
-    func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings)
-
     /// Register the device with our notification provider server.
     ///
     /// - Parameters:

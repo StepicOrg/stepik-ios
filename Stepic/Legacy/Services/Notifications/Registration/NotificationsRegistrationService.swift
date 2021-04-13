@@ -43,25 +43,6 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         self.delegate?.notificationsRegistrationServiceDidFailRegisterWithAPNs(self, error: error)
     }
 
-    func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
-        print("NotificationsRegistrationService: registered with settings: \(notificationSettings)")
-
-        let granted = notificationSettings.types != []
-
-        if self.isFirstRegistrationIsInProgress {
-            self.isFirstRegistrationIsInProgress = false
-            self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
-        }
-
-        if granted {
-            self.registerWithAPNs()
-        } else {
-            self.postCurrentPermissionStatus()
-        }
-
-        self.updatePushPermissionStatusUserProperty()
-    }
-
     // MARK: - Register -
 
     func renewDeviceToken() {
@@ -128,31 +109,23 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
         self.didShowDefaultPermissionAlert = true
 
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: [.alert, .badge, .sound],
-                completionHandler: { granted, error in
-                    if self.isFirstRegistrationIsInProgress {
-                        self.isFirstRegistrationIsInProgress = false
-                        self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
-                    }
-
-                    if granted {
-                        self.registerWithAPNs()
-                    } else if let error = error {
-                        print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
-                    }
-
-                    self.updatePushPermissionStatusUserProperty()
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound],
+            completionHandler: { granted, error in
+                if self.isFirstRegistrationIsInProgress {
+                    self.isFirstRegistrationIsInProgress = false
+                    self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
                 }
-            )
-        } else {
-            let notificationSettings = UIUserNotificationSettings(
-                types: [.alert, .badge, .sound],
-                categories: nil
-            )
-            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
-        }
+
+                if granted {
+                    self.registerWithAPNs()
+                } else if let error = error {
+                    print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
+                }
+
+                self.updatePushPermissionStatusUserProperty()
+            }
+        )
     }
 
     /// Initiates the registration process with Apple Push Notification service.

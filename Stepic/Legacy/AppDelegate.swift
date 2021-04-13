@@ -231,13 +231,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.handleLocalNotification(with: notification.userInfo)
     }
 
-    func application(
-        _ application: UIApplication,
-        didRegister notificationSettings: UIUserNotificationSettings
-    ) {
-        self.notificationsRegistrationService.handleRegisteredNotificationSettings(notificationSettings)
-    }
-
     // MARK: Private Helpers
 
     @objc
