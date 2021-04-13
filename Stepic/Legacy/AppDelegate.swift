@@ -239,11 +239,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        InstanceID.instanceID().instanceID { [weak self] (result, error) in
+        Messaging.messaging().token { [weak self] (token, error) in
             if let error = error {
-                print("Error fetching Firebase remote instance ID: \(error)")
-            } else if let result = result {
-                self?.notificationsRegistrationService.registerDevice(result.token)
+                print("Error fetching FCM token: \(error)")
+            } else if let token = token {
+                self?.notificationsRegistrationService.registerDevice(token)
             }
         }
     }

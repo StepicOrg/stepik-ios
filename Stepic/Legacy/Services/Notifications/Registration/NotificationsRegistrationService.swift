@@ -32,7 +32,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     func handleDeviceToken(_ deviceToken: Data) {
         print("NotificationsRegistrationService: did register for remote notifications")
-        self.getGCMRegistrationToken(deviceToken: deviceToken)
+        self.setAPNsTokenToFirebaseMessaging(apnsToken: deviceToken)
         self.postCurrentPermissionStatus()
         self.delegate?.notificationsRegistrationServiceDidSuccessfullyRegisterWithAPNs(self)
     }
@@ -87,16 +87,12 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             return
         }
 
-        if #available(iOS 10.0, *) {
-            NotificationPermissionStatus.current.done { status in
-                if status == .denied {
-                    self.presentSettingsAlertIfNeeded()
-                } else {
-                    self.presentPermissionAlertIfNeeded()
-                }
+        NotificationPermissionStatus.current.done { status in
+            if status == .denied {
+                self.presentSettingsAlertIfNeeded()
+            } else {
+                self.presentPermissionAlertIfNeeded()
             }
-        } else {
-            self.presentPermissionAlertIfNeeded()
         }
     }
 
@@ -190,11 +186,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
             if UIApplication.shared.canOpenURL(settingsURL) {
                 NotificationCenter.default.post(name: .notificationsRegistrationServiceWillOpenSettings, object: nil)
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(settingsURL)
-                } else {
-                    UIApplication.shared.openURL(settingsURL)
-                }
+                UIApplication.shared.open(settingsURL)
             }
         }
         self.presenter?.onCancelCallback = {
@@ -259,16 +251,16 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     // MARK: - Firebase -
 
-    private func getGCMRegistrationToken(deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
+    private func setAPNsTokenToFirebaseMessaging(apnsToken: Data) {
+        Messaging.messaging().apnsToken = apnsToken
     }
 
     private func fetchFirebaseAppInstanceID() {
-        InstanceID.instanceID().instanceID { (result, error) in
+        Messaging.messaging().token { (token, error) in
             if let error = error {
-                print("NotificationsRegistrationService: error while fetching Firebase remote instance ID: \(error)")
-            } else if let result = result {
-                self.registerDevice(result.token)
+                print("NotificationsRegistrationService: error while fetching FCM token: \(error)")
+            } else if let token = token {
+                self.registerDevice(token)
             }
         }
     }
