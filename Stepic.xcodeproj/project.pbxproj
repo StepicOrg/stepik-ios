@@ -5650,10 +5650,10 @@
 		2CBE8A9C2625C58400AF7C86 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */,
 				2C89089F216F465200083341 /* NotificationsService.swift */,
 				2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */,
 				2CBE8A9D2625C59600AF7C86 /* Local */,
+				2CC3ADE12625E947001C6B73 /* PermissionStatus */,
 				2C10AFE8217E04780019966D /* Registration */,
 			);
 			path = Notifications;
@@ -5679,6 +5679,15 @@
 				2CA1001E2174BE49003775CB /* StreakLocalNotification.swift */,
 			);
 			path = ConcreteNotifications;
+			sourceTree = "<group>";
+		};
+		2CC3ADE12625E947001C6B73 /* PermissionStatus */ = {
+			isa = PBXGroup;
+			children = (
+				2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */,
+				62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */,
+			);
+			path = PermissionStatus;
 			sourceTree = "<group>";
 		};
 		2CCDD1FF24DBB39100A48EE0 /* Concurrency */ = {
@@ -6943,7 +6952,6 @@
 			isa = PBXGroup;
 			children = (
 				08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */,
-				2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";

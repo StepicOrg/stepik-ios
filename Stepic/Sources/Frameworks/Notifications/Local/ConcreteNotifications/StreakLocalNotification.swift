@@ -3,7 +3,6 @@ import UserNotifications
 
 struct StreakLocalNotification: LocalNotificationProtocol {
     let utcStartHour: Int
-    let calendar: Calendar
 
     var title = ""
 
@@ -38,11 +37,6 @@ struct StreakLocalNotification: LocalNotificationProtocol {
         }
 
         return DateComponents(hour: localStartHour)
-    }
-
-    init(utcStartHour: Int, calendar: Calendar = Calendar(identifier: .gregorian)) {
-        self.utcStartHour = utcStartHour
-        self.calendar = calendar
     }
 }
 

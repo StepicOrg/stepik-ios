@@ -82,8 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.didReceiveRegistrationToken(_:)),
-            name: .InstanceIDTokenRefresh,
+            selector: #selector(self.messagingRegistrationTokenDidRefresh),
+            name: .MessagingRegistrationTokenRefreshed,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -226,7 +226,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.handleRemoteNotification(with: userInfo)
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         self.notificationsService.handleLocalNotification(with: notification.userInfo)
     }
@@ -234,7 +233,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Private Helpers
 
     @objc
-    private func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
+    private func messagingRegistrationTokenDidRefresh() {
         guard AuthInfo.shared.isAuthorized else {
             return
         }

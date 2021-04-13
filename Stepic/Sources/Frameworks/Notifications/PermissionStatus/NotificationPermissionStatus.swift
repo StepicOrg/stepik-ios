@@ -1,11 +1,3 @@
-//
-//  NotificationPermissionStatus.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 19/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 import UserNotifications
