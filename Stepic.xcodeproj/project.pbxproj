@@ -4352,7 +4352,6 @@
 				2C23C12621AD8907001DCF89 /* NextLessonService.swift */,
 				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
 				089200722199DFF000083627 /* DeepLinks */,
-				2CAD8B9E2170CDF7003F420B /* Notifications */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -4604,20 +4603,6 @@
 				2C19D99D26174C5800181DB0 /* Cell */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2CA3DA9F2179C38400F43888 /* LocalNotifications */ = {
-			isa = PBXGroup;
-			children = (
-				2CAD8B9C2170CDB4003F420B /* LocalNotificationProtocol.swift */,
-				2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */,
-				2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */,
-				2CA100152174BB66003775CB /* PersonalDeadlineLocalNotification.swift */,
-				2CE770052625AAED00D5DD1F /* PurchaseCourseLocalNotification.swift */,
-				62E9863EA3DABDA4ACF78273 /* RetentionLocalNotification.swift */,
-				2CA1001E2174BE49003775CB /* StreakLocalNotification.swift */,
-			);
-			path = LocalNotifications;
 			sourceTree = "<group>";
 		};
 		2CA3DAA62179DF7300F43888 /* Discussions */ = {
@@ -5588,18 +5573,6 @@
 			path = TextStoryView;
 			sourceTree = "<group>";
 		};
-		2CAD8B9E2170CDF7003F420B /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */,
-				2C89089F216F465200083341 /* NotificationsService.swift */,
-				2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */,
-				2CA3DA9F2179C38400F43888 /* LocalNotifications */,
-				2C10AFE8217E04780019966D /* Registration */,
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
 		2CAFAF052609DEF200701D9F /* Transformers */ = {
 			isa = PBXGroup;
 			children = (
@@ -5672,6 +5645,40 @@
 				2CDBDCA6244DFF86008AB9BF /* StoredFile */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		2CBE8A9C2625C58400AF7C86 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */,
+				2C89089F216F465200083341 /* NotificationsService.swift */,
+				2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */,
+				2CBE8A9D2625C59600AF7C86 /* Local */,
+				2C10AFE8217E04780019966D /* Registration */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		2CBE8A9D2625C59600AF7C86 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				2CAD8B9C2170CDB4003F420B /* LocalNotificationProtocol.swift */,
+				2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */,
+				2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */,
+				2CBE8A9E2625C5CA00AF7C86 /* ConcreteNotifications */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		2CBE8A9E2625C5CA00AF7C86 /* ConcreteNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				2CA100152174BB66003775CB /* PersonalDeadlineLocalNotification.swift */,
+				2CE770052625AAED00D5DD1F /* PurchaseCourseLocalNotification.swift */,
+				62E9863EA3DABDA4ACF78273 /* RetentionLocalNotification.swift */,
+				2CA1001E2174BE49003775CB /* StreakLocalNotification.swift */,
+			);
+			path = ConcreteNotifications;
 			sourceTree = "<group>";
 		};
 		2CCDD1FF24DBB39100A48EE0 /* Concurrency */ = {
@@ -8173,6 +8180,7 @@
 				2C48D5FF228F0C4800739477 /* ContentProcessor */,
 				2CF1505123D532D900915E5A /* Downloader */,
 				2C284DBC2474907C00669736 /* InAppPurchases */,
+				2CBE8A9C2625C58400AF7C86 /* Notifications */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
 			);
 			path = Frameworks;

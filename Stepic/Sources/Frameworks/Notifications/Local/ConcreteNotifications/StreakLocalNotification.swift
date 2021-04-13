@@ -30,10 +30,11 @@ struct StreakLocalNotification: LocalNotificationProtocol {
         var localStartHour = self.utcStartHour + timeZoneDiff
 
         if localStartHour < 0 {
-            localStartHour = 24 + localStartHour
+            localStartHour += 24
         }
+
         if localStartHour > 23 {
-            localStartHour = localStartHour - 24
+            localStartHour -= 24
         }
 
         return DateComponents(hour: localStartHour)
@@ -55,6 +56,6 @@ extension NotificationsService {
 
     func removeStreakLocalNotifications() {
         let notification = StreakLocalNotification(utcStartHour: 0)
-        self.removeLocalNotifications(withIdentifiers: [notification.identifier])
+        self.removeLocalNotifications(identifiers: [notification.identifier])
     }
 }

@@ -1,11 +1,3 @@
-//
-//  NotificationsRegistrationService.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 19/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import FirebaseCore
 import FirebaseInstanceID
 import FirebaseMessaging
@@ -16,7 +8,7 @@ import UserNotifications
 final class NotificationsRegistrationService: NotificationsRegistrationServiceProtocol {
     weak var delegate: NotificationsRegistrationServiceDelegate?
     var presenter: NotificationsRegistrationPresentationServiceProtocol?
-    private var analytics: NotificationAlertsAnalytics?
+    private let analytics: NotificationAlertsAnalytics?
 
     init(
         delegate: NotificationsRegistrationServiceDelegate? = nil,
@@ -80,7 +72,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func register() {
         defer {
-            self.fetchFirebaseAppInstanceID()
+            self.fetchFirebaseMessagingRegistrationToken()
         }
 
         guard StepikApplicationsInfo.shouldRegisterNotifications else {
@@ -216,7 +208,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             deviceDescription: DeviceInfo.current.deviceInfoString
         )
 
-        //TODO: Remove this after refactoring errors
+        // TODO: Remove this after refactoring errors
         checkToken().then { _ -> Promise<Device> in
             if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
                 print("NotificationsRegistrationService: retrieve device by saved deviceId = \(savedDeviceId)")
@@ -255,7 +247,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         Messaging.messaging().apnsToken = apnsToken
     }
 
-    private func fetchFirebaseAppInstanceID() {
+    private func fetchFirebaseMessagingRegistrationToken() {
         Messaging.messaging().token { (token, error) in
             if let error = error {
                 print("NotificationsRegistrationService: error while fetching FCM token: \(error)")
@@ -297,7 +289,9 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                                 key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey
                             )
                         } else {
-                            print("NotificationsRegistrationService: could not get current user ID or token to delete device")
+                            print(
+                                "NotificationsRegistrationService: can't get current user ID or token to delete device"
+                            )
                             StepikAnalytics.shared.send(.errorUnregisterDeviceInvalidCredentials)
                         }
                     }
@@ -319,29 +313,19 @@ extension NotificationsRegistrationService {
 
     private var didShowDefaultPermissionAlert: Bool {
         get {
-            UserDefaults.standard.bool(
-                forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
-            )
+            UserDefaults.standard.bool(forKey: Self.didShowDefaultPermissionAlertKey)
         }
         set {
-            UserDefaults.standard.set(
-                newValue,
-                forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
-            )
+            UserDefaults.standard.set(newValue, forKey: Self.didShowDefaultPermissionAlertKey)
         }
     }
 
     private var isFirstRegistrationIsInProgress: Bool {
         get {
-            UserDefaults.standard.bool(
-                forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
-            )
+            UserDefaults.standard.bool(forKey: Self.isFirstRegistrationIsInProgressKey)
         }
         set {
-            UserDefaults.standard.set(
-                newValue,
-                forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
-            )
+            UserDefaults.standard.set(newValue, forKey: Self.isFirstRegistrationIsInProgressKey)
         }
     }
 }

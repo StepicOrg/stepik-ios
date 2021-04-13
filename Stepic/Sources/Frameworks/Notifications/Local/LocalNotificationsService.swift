@@ -84,11 +84,11 @@ final class LocalNotificationsService {
     func isNotificationExists(identifier: String) -> Guarantee<Bool> {
         Guarantee { seal in
             self.getAllNotifications().done { (pending, delivered) in
-                if pending.first(where: { $0.identifier == identifier }) != nil {
+                if pending.contains(where: { $0.identifier == identifier }) {
                     return seal(true)
                 }
 
-                if delivered.first(where: { $0.request.identifier == identifier }) != nil {
+                if delivered.contains(where: { $0.request.identifier == identifier }) {
                     return seal(true)
                 }
 

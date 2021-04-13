@@ -135,6 +135,6 @@ extension NotificationsService {
 
     func removeRetentionLocalNotifications() {
         let ids = self.retentionLocalNotifications.map(\.identifier)
-        self.removeLocalNotifications(withIdentifiers: ids)
+        self.removeLocalNotifications(identifiers: ids)
     }
 }

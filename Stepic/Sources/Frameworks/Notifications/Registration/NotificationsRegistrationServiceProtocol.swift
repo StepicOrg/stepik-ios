@@ -1,11 +1,3 @@
-//
-//  NotificationsRegistrationServiceProtocol.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 26/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import PromiseKit
 import UIKit
 

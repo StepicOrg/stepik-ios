@@ -23,7 +23,8 @@ struct PurchaseCourseLocalNotification: LocalNotificationProtocol {
     var userInfo: [AnyHashable: Any] {
         [
             UserInfoKey.course.rawValue: self.courseID,
-            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.remindPurchaseCourse.rawValue
+            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType
+                .remindPurchaseCourse.rawValue
         ]
     }
 

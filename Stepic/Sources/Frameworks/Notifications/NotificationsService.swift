@@ -1,11 +1,3 @@
-//
-//  NotificationsService.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 11/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 import SwiftyJSON
@@ -84,7 +76,7 @@ final class NotificationsService {
 extension NotificationsService {
     func scheduleLocalNotification(_ localNotification: LocalNotificationProtocol, removeIdentical: Bool = true) {
         if removeIdentical {
-            self.removeLocalNotifications(withIdentifiers: [localNotification.identifier])
+            self.removeLocalNotifications(identifiers: [localNotification.identifier])
         }
 
         self.localNotificationsService.scheduleNotification(localNotification).catch { error in
@@ -96,10 +88,8 @@ extension NotificationsService {
         self.localNotificationsService.removeAllNotifications()
     }
 
-    func removeLocalNotifications(withIdentifiers identifiers: [String]) {
-        if !identifiers.isEmpty {
-            self.localNotificationsService.removeNotifications(identifiers: identifiers)
-        }
+    func removeLocalNotifications(identifiers: [String]) {
+        self.localNotificationsService.removeNotifications(identifiers: identifiers)
     }
 
     func handleLocalNotification(with userInfo: NotificationUserInfo?) {
@@ -260,14 +250,11 @@ extension NotificationsService {
     private var lastActiveTimeInterval: TimeInterval {
         get {
             UserDefaults.standard.value(
-                forKey: NotificationsService.lastActiveTimeIntervalKey
+                forKey: Self.lastActiveTimeIntervalKey
             ) as? TimeInterval ?? Date().timeIntervalSince1970
         }
         set {
-            UserDefaults.standard.set(
-                newValue,
-                forKey: NotificationsService.lastActiveTimeIntervalKey
-            )
+            UserDefaults.standard.set(newValue, forKey: Self.lastActiveTimeIntervalKey)
         }
     }
 

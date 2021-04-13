@@ -21,7 +21,8 @@ struct PersonalDeadlineLocalNotification: LocalNotificationProtocol {
             UserInfoKey.course.rawValue: self.course.id,
             UserInfoKey.section.rawValue: self.section.id,
             UserInfoKey.hoursBeforeDeadline.rawValue: self.hoursBeforeDeadline,
-            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.personalDeadline.rawValue
+            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType
+                .personalDeadline.rawValue
         ]
     }
 
@@ -76,7 +77,7 @@ extension NotificationsService {
 
     func removePersonalDeadlineLocalNotifications(course: Course) {
         let identifiers = self.getPersonalDeadlineLocalNotifications(course: course).map(\.identifier)
-        self.removeLocalNotifications(withIdentifiers: identifiers)
+        self.removeLocalNotifications(identifiers: identifiers)
     }
 
     private func getPersonalDeadlineLocalNotifications(course: Course) -> [PersonalDeadlineLocalNotification] {
