@@ -33,8 +33,6 @@
 		<string>https://dev.stepik.org</string>
 		<key>host</key>
 		<string>dev.stepik.org</string>
-		<key>version</key>
-		<string>https://stepik.org/media/attachments/lesson/26869/version.json</string>
 	</dict>
 	<key>cookie</key>
 	<dict>
@@ -45,8 +43,6 @@
 	<dict>
 		<key>courseUnenrollment</key>
 		<true/>
-		<key>inAppUpdates</key>
-		<false/>
 		<key>streaks</key>
 		<true/>
 		<key>notifications</key>

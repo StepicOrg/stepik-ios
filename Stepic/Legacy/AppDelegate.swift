@@ -109,10 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.analytics.send(.applicationDidLaunchFirstTime)
         }
 
-        if StepikApplicationsInfo.inAppUpdatesAvailable {
-            self.checkForUpdates()
-        }
-
         self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
         self.notificationsService.handleLaunchOptions(launchOptions)
@@ -346,25 +342,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Private API -
-
-    private func checkForUpdates() {
-        UpdateChecker.shared.checkForUpdatesIfNeeded({ [weak self] newVersion in
-            guard let newVersion = newVersion else {
-                return
-            }
-
-            let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(
-                updateUrl: newVersion.url,
-                addNeverAskAction: true
-            )
-
-            DispatchQueue.main.async {
-                self?.window?.rootViewController?.present(alert, animated: true)
-            }
-        }, error: { error in
-            print("error while checking for updates: \(error)")
-        })
-    }
 
     private func checkNotificationsCount() {
         guard AuthInfo.shared.isAuthorized else {

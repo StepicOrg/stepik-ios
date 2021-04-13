@@ -207,11 +207,6 @@
 		088E73F020619C8F00D458E3 /* DeleteRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */; };
 		088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */; };
 		088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73F32061BDAA00D458E3 /* StepikModelView.swift */; };
-		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
-		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
-		08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */; };
-		08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
-		08901E721CD1173200D94613 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
 		089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
@@ -1901,11 +1896,6 @@
 		088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequestMaker.swift; sourceTree = "<group>"; };
 		088E73F32061BDAA00D458E3 /* StepikModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikModelView.swift; sourceTree = "<group>"; };
 		088FD8161FB242B3008A2953 /* CourseSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSubscriber.swift; sourceTree = "<group>"; };
-		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
-		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
-		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
-		08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionUpdateAlertConstructor.swift; sourceTree = "<group>"; };
-		08901E711CD1173200D94613 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		0890560F1E98021000B8FE6A /* RateAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppViewController.swift; sourceTree = "<group>"; };
 		089056101E98021000B8FE6A /* RateAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateAppViewController.xib; sourceTree = "<group>"; };
 		089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -6804,23 +6794,10 @@
 				0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */,
 				08B062DC1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift */,
 				08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */,
-				2CFF9037242A281800FD7311 /* InAppVersionControl */,
 				2CFF9038242A282B00FD7311 /* RoutingManagers */,
 				2CFF9039242A283F00FD7311 /* WKWebViewPanelManager */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		2CFF9037242A281800FD7311 /* InAppVersionControl */ = {
-			isa = PBXGroup;
-			children = (
-				08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */,
-				08901E691CD1019A00D94613 /* UpdateChecker.swift */,
-				08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */,
-				08901E711CD1173200D94613 /* Version.swift */,
-				08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */,
-			);
-			path = InAppVersionControl;
 			sourceTree = "<group>";
 		};
 		2CFF9038242A282B00FD7311 /* RoutingManagers */ = {
@@ -9566,7 +9543,6 @@
 				2C8BCC1F248647E800DFB009 /* NewProfileBlockContainerView.swift in Sources */,
 				2C82F22421D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
-				08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				2C50364524C5A454001FAE04 /* NewProfileCertificatesCollectionViewDataSource.swift in Sources */,
 				08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
@@ -9790,7 +9766,6 @@
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				2C558E8625E973EF00860BF9 /* CourseInfoHeaderSkeletonView.swift in Sources */,
 				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
-				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				2CA930B7253C8A65007B717A /* ProgressPlainObject.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				2C8FA6CF25B600D6006BF4B6 /* StepikWidgetTokenFileManager.swift in Sources */,
@@ -9953,7 +9928,6 @@
 				2CE9BF4C248D0EC5004F6659 /* VideoURLsPersistenceService.swift in Sources */,
 				2C48D601228F0C6000739477 /* ContentProcessor.swift in Sources */,
 				2C97E00B215E47F3005684A1 /* SearchQueriesPersistentManager.swift in Sources */,
-				08901E721CD1173200D94613 /* Version.swift in Sources */,
 				2CF8DF4025F2291100F577C2 /* ReviewSessionsAPI.swift in Sources */,
 				2CE0CADD255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift in Sources */,
 				2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
@@ -9978,7 +9952,6 @@
 				2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08AB82381D74C44100FDEADE /* StepikSession.swift in Sources */,
-				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */,
 				2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */,
 				082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */,
@@ -10058,7 +10031,6 @@
 				08E43EA7214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
 				2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */,
-				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C8BCC1D248647B400DFB009 /* NewProfileBlockHeaderView.swift in Sources */,
