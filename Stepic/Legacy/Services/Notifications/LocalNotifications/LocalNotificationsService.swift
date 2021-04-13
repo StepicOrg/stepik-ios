@@ -65,40 +65,6 @@ final class LocalNotificationsService {
     // MARK: - Scheduling Notifications -
 
     func scheduleNotification(contentProvider: LocalNotificationContentProvider) -> Promise<Void> {
-        self.userNotificationsScheduleNotification(contentProvider: contentProvider)
-    }
-
-    func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
-        Guarantee { seal in
-            self.getAllNotifications().done { (pending, delivered) in
-                if pending.first(where: { $0.identifier == identifier }) != nil {
-                    return seal(true)
-                }
-
-                if delivered.first(where: { $0.request.identifier == identifier }) != nil {
-                    return seal(true)
-                }
-
-                seal(false)
-            }
-        }
-    }
-
-    private func getMergedUserInfo(
-        contentProvider: LocalNotificationContentProvider
-    ) -> [AnyHashable: Any] {
-        var userInfo = contentProvider.userInfo
-        userInfo.merge([
-            PayloadKey.notificationName.rawValue: contentProvider.identifier,
-            PayloadKey.title.rawValue: contentProvider.title,
-            PayloadKey.body.rawValue: contentProvider.body
-        ])
-        return userInfo
-    }
-
-    private func userNotificationsScheduleNotification(
-        contentProvider: LocalNotificationContentProvider
-    ) -> Promise<Void> {
         Promise { seal in
             guard let notificationTrigger = contentProvider.trigger else {
                 throw Error.badContentProvider
@@ -123,6 +89,22 @@ final class LocalNotificationsService {
         }
     }
 
+    func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
+        Guarantee { seal in
+            self.getAllNotifications().done { (pending, delivered) in
+                if pending.first(where: { $0.identifier == identifier }) != nil {
+                    return seal(true)
+                }
+
+                if delivered.first(where: { $0.request.identifier == identifier }) != nil {
+                    return seal(true)
+                }
+
+                seal(false)
+            }
+        }
+    }
+
     private func makeNotificationContent(
         for contentProvider: LocalNotificationContentProvider
     ) -> UNNotificationContent {
@@ -130,7 +112,14 @@ final class LocalNotificationsService {
         content.title = contentProvider.title
         content.body = contentProvider.body
         content.sound = contentProvider.sound
-        content.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
+
+        var userInfo = contentProvider.userInfo
+        userInfo.merge([
+            PayloadKey.notificationName.rawValue: contentProvider.identifier,
+            PayloadKey.title.rawValue: contentProvider.title,
+            PayloadKey.body.rawValue: contentProvider.body
+        ])
+        content.userInfo = userInfo
 
         return content
     }
