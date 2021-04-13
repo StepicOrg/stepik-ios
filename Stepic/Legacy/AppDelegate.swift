@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
 
-        self.notificationsService.removeRetentionNotifications()
+        self.notificationsService.removeRetentionLocalNotifications()
         self.coursePurchaseReminder.updateAllPurchaseNotifications()
 
         self.userCoursesObserver.startObserving()
@@ -179,7 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        self.notificationsService.scheduleRetentionNotifications()
+        self.notificationsService.scheduleRetentionLocalNotifications()
         self.userCoursesObserver.stopObserving()
         self.visitedCoursesCleaner.removeObservers()
 

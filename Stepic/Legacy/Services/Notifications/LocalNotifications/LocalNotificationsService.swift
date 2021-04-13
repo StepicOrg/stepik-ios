@@ -1,11 +1,3 @@
-//
-//  LocalNotificationsService.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 12/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import PromiseKit
 import UserNotifications
 
@@ -18,7 +10,7 @@ final class LocalNotificationsService {
         Guarantee { seal in
             when(
                 fulfilled:
-                    self.getPendingNotificationRequests(),
+                self.getPendingNotificationRequests(),
                 self.getDeliveredNotifications()
             ).done { result in
                 seal((pending: result.0, delivered: result.1))
@@ -45,28 +37,28 @@ final class LocalNotificationsService {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 
-    func removeNotifications(withIdentifiers identifiers: [String]) {
+    func removeNotifications(identifiers: [String]) {
         if identifiers.isEmpty {
             return
         }
 
-        self.removePendingNotificationRequests(withIdentifiers: identifiers)
-        self.removeDeliveredNotifications(withIdentifiers: identifiers)
+        self.removePendingNotificationRequests(identifiers: identifiers)
+        self.removeDeliveredNotifications(identifiers: identifiers)
     }
 
-    private func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
+    private func removeDeliveredNotifications(identifiers: [String]) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
     }
 
-    private func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+    private func removePendingNotificationRequests(identifiers: [String]) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
     }
 
     // MARK: - Scheduling Notifications -
 
-    func scheduleNotification(contentProvider: LocalNotificationContentProvider) -> Promise<Void> {
+    func scheduleNotification(_ localNotification: LocalNotificationProtocol) -> Promise<Void> {
         Promise { seal in
-            guard let notificationTrigger = contentProvider.trigger else {
+            guard let notificationTrigger = localNotification.trigger else {
                 throw Error.badContentProvider
             }
 
@@ -75,8 +67,8 @@ final class LocalNotificationsService {
             }
 
             let request = UNNotificationRequest(
-                identifier: contentProvider.identifier,
-                content: self.makeNotificationContent(for: contentProvider),
+                identifier: localNotification.identifier,
+                content: self.makeNotificationContent(localNotification: localNotification),
                 trigger: notificationTrigger
             )
 
@@ -89,7 +81,7 @@ final class LocalNotificationsService {
         }
     }
 
-    func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
+    func isNotificationExists(identifier: String) -> Guarantee<Bool> {
         Guarantee { seal in
             self.getAllNotifications().done { (pending, delivered) in
                 if pending.first(where: { $0.identifier == identifier }) != nil {
@@ -105,19 +97,17 @@ final class LocalNotificationsService {
         }
     }
 
-    private func makeNotificationContent(
-        for contentProvider: LocalNotificationContentProvider
-    ) -> UNNotificationContent {
+    private func makeNotificationContent(localNotification: LocalNotificationProtocol) -> UNNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = contentProvider.title
-        content.body = contentProvider.body
-        content.sound = contentProvider.sound
+        content.title = localNotification.title
+        content.body = localNotification.body
+        content.sound = localNotification.sound
 
-        var userInfo = contentProvider.userInfo
+        var userInfo = localNotification.userInfo
         userInfo.merge([
-            PayloadKey.notificationName.rawValue: contentProvider.identifier,
-            PayloadKey.title.rawValue: contentProvider.title,
-            PayloadKey.body.rawValue: contentProvider.body
+            PayloadKey.notificationName.rawValue: localNotification.identifier,
+            PayloadKey.title.rawValue: localNotification.title,
+            PayloadKey.body.rawValue: localNotification.body
         ])
         content.userInfo = userInfo
 

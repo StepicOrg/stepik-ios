@@ -82,15 +82,12 @@ final class NotificationsService {
 // MARK: - NotificationsService (LocalNotifications) -
 
 extension NotificationsService {
-    func scheduleLocalNotification(
-        with contentProvider: LocalNotificationContentProvider,
-        removeIdentical: Bool = true
-    ) {
+    func scheduleLocalNotification(_ localNotification: LocalNotificationProtocol, removeIdentical: Bool = true) {
         if removeIdentical {
-            self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+            self.removeLocalNotifications(withIdentifiers: [localNotification.identifier])
         }
 
-        self.localNotificationsService.scheduleNotification(contentProvider: contentProvider).catch { error in
+        self.localNotificationsService.scheduleNotification(localNotification).catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
@@ -101,7 +98,7 @@ extension NotificationsService {
 
     func removeLocalNotifications(withIdentifiers identifiers: [String]) {
         if !identifiers.isEmpty {
-            self.localNotificationsService.removeNotifications(withIdentifiers: identifiers)
+            self.localNotificationsService.removeNotifications(identifiers: identifiers)
         }
     }
 
@@ -126,13 +123,13 @@ extension NotificationsService {
         if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
             route(to: .home)
         } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
-            if let courseID = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int {
+            if let courseID = userInfo[PersonalDeadlineLocalNotification.UserInfoKey.course.rawValue] as? Int {
                 route(to: .course(courseID: courseID))
             } else {
                 route(to: .home)
             }
         } else if key.localizedCaseInsensitiveContains(NotificationType.remindPurchaseCourse.rawValue) {
-            if let courseID = userInfo[PurchaseCourseLocalNotificationProvider.Key.course.rawValue] as? Int {
+            if let courseID = userInfo[PurchaseCourseLocalNotification.UserInfoKey.course.rawValue] as? Int {
                 route(to: .course(courseID: courseID))
             } else {
                 route(to: .home)

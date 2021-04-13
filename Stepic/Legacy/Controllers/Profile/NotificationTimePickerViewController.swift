@@ -30,38 +30,43 @@ final class NotificationTimePickerViewController: PickerViewController {
     }
 
     func initializeSelectedAction() {
-        selectedAction = {
-            [weak self] in
-            if let s = self {
-                let selectedLocalStartHour = s.picker.selectedRow(inComponent: 0)
-                let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
-                var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
-
-                if selectedUTCStartHour < 0 {
-                    selectedUTCStartHour = 24 + selectedUTCStartHour
-                }
-
-                if selectedUTCStartHour > 23 {
-                    selectedUTCStartHour = selectedUTCStartHour - 24
-                }
-
-                print("selected UTC start hour -> \(selectedUTCStartHour)")
-
-                PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
-                NotificationsService().scheduleStreakLocalNotification(UTCStartHour: selectedUTCStartHour)
+        selectedAction = { [weak self] in
+            guard let strongSelf = self else {
+                return
             }
+
+            let selectedLocalStartHour = strongSelf.picker.selectedRow(inComponent: 0)
+            let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
+            var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
+
+            if selectedUTCStartHour < 0 {
+                selectedUTCStartHour = 24 + selectedUTCStartHour
+            }
+
+            if selectedUTCStartHour > 23 {
+                selectedUTCStartHour = selectedUTCStartHour - 24
+            }
+
+            print("selected UTC start hour -> \(selectedUTCStartHour)")
+
+            PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
+            NotificationsService().scheduleStreakLocalNotification(utcStartHour: selectedUTCStartHour)
         }
     }
 
     func getDisplayingStreakTimeInterval(startHour: Int) -> String {
         let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+
         let startInterval = TimeInterval((startHour % 24) * 60 * 60 - timeZoneDiff)
         let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
+
         let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60 - timeZoneDiff)
         let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
+
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
+
         return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
     }
 }

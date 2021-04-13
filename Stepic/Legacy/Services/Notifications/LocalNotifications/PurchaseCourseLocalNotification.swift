@@ -1,16 +1,50 @@
 import Foundation
 import UserNotifications
 
-final class PurchaseCourseLocalNotificationProvider: LocalNotificationContentProvider {
+struct PurchaseCourseLocalNotification: LocalNotificationProtocol {
     private static let hourDelay = 1
     private static let defaultFireHour = 12
 
-    private let courseID: Course.IdType
-    private let courseTitle: String
-    private let referenceDate: Date
+    let courseID: Course.IdType
+    let courseTitle: String
+    let referenceDate: Date
+
+    var title: String {
+        NSString.localizedUserNotificationString(forKey: "PurchaseCourseNotificationTitle", arguments: nil)
+    }
+
+    var body: String {
+        NSString.localizedUserNotificationString(
+            forKey: "PurchaseCourseNotificationText",
+            arguments: [self.courseTitle]
+        )
+    }
+
+    var userInfo: [AnyHashable: Any] {
+        [
+            UserInfoKey.course.rawValue: self.courseID,
+            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.remindPurchaseCourse.rawValue
+        ]
+    }
+
+    var identifier: String {
+        "\(NotificationsService.NotificationType.remindPurchaseCourse.rawValue)_course_\(self.courseID)"
+    }
+
+    var trigger: UNNotificationTrigger? {
+        guard let dateComponents = self.dateComponents else {
+            return nil
+        }
+
+        return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+    }
 
     private var dateComponents: DateComponents? {
-        guard let fireDate = Calendar.current.date(byAdding: .hour, value: Self.hourDelay, to: self.referenceDate) else {
+        guard let fireDate = Calendar.current.date(
+            byAdding: .hour,
+            value: Self.hourDelay,
+            to: self.referenceDate
+        ) else {
             return nil
         }
 
@@ -32,43 +66,13 @@ final class PurchaseCourseLocalNotificationProvider: LocalNotificationContentPro
         return dateComponents
     }
 
-    var title: String {
-        NSString.localizedUserNotificationString(forKey: "PurchaseCourseNotificationTitle", arguments: nil)
-    }
-
-    var body: String {
-        NSString.localizedUserNotificationString(
-            forKey: "PurchaseCourseNotificationText",
-            arguments: [self.courseTitle]
-        )
-    }
-
-    var userInfo: [AnyHashable: Any] {
-        [
-            Key.course.rawValue: self.courseID,
-            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.remindPurchaseCourse.rawValue
-        ]
-    }
-
-    var identifier: String {
-        "\(NotificationsService.NotificationType.remindPurchaseCourse.rawValue)_course_\(self.courseID)"
-    }
-
-    var trigger: UNNotificationTrigger? {
-        guard let dateComponents = self.dateComponents else {
-            return nil
-        }
-
-        return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-    }
-
     init(courseID: Course.IdType, courseTitle: String = "", referenceDate: Date = Date()) {
         self.courseID = courseID
         self.courseTitle = courseTitle
         self.referenceDate = referenceDate
     }
 
-    enum Key: String {
+    enum UserInfoKey: String {
         case course
     }
 }
