@@ -28,9 +28,14 @@ enum Common {
             app.textFields["Name"].typeText(currentUserName)
             app.textFields["Email"].tap()
             sleep(2)
-            app.textFields["Email"].typeText(currentUserEmail)
+            Common.pasteTextFieldText(
+                app: app,
+                element: app.textFields["Email"],
+                value: currentUserEmail,
+                clearText: false
+            )
             app.secureTextFields["Password"].tap()
-            sleep(5)
+            sleep(2)
             Common.pasteTextFieldText(
                 app: app,
                 element: app.secureTextFields["Password"],
@@ -109,17 +114,11 @@ enum Common {
         // Get the password into the pasteboard buffer
         UIPasteboard.init()
         UIPasteboard.general.string = value
-
         // Bring up the popup menu on the password field
-        if element.waitForExistence(timeout: 5) {
-            element.tap()
-        } else { XCTFail(element.title + " is not hittable") }
-
         if clearText {
             element.buttons["Clear text"].tap()
         }
         element.doubleTap()
-
         // Tap the Paste button to input the password
         app.menuItems["Paste"].tap()
     }

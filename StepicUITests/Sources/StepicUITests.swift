@@ -219,10 +219,15 @@ class StepicUITests: XCTestCase {
             app.textFields["Name"].tap()
             app.textFields["Name"].typeText("ios_autotest_\(timestamp)")
             app.textFields["Email"].tap()
-            sleep(1)
-            app.textFields["Email"].typeText("ios_autotest_\(timestamp)@stepik.org")
+            sleep(2)
+            Common.pasteTextFieldText(
+                app: app,
+                element: app.textFields["Email"],
+                value: "ios_autotest_\(timestamp)@stepik.org",
+                clearText: false
+            )
             app.secureTextFields["Password"].tap()
-            sleep(1)
+            sleep(2)
             Common.pasteTextFieldText(
                 app: app,
                 element: app.secureTextFields["Password"],
@@ -252,9 +257,15 @@ class StepicUITests: XCTestCase {
         app.buttons["Sign In"].staticTexts["Sign In"].tap()
         app.buttons["Sign In with e-mail"].tap()
         app.textFields["Email"].tap()
-        app.textFields["Email"].typeText(currentUserEmail)
-        sleep(5)
+        sleep(2)
+        Common.pasteTextFieldText(
+            app: app,
+            element: app.textFields["Email"],
+            value: currentUserEmail,
+            clearText: false
+        )
         app.secureTextFields["Password"].tap()
+        sleep(2)
         Common.pasteTextFieldText(
             app: app,
             element: app.secureTextFields["Password"],
