@@ -104,8 +104,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
             self.notificationsRegistrationService.registerForRemoteNotifications()
 
             self.notificationsService.scheduleStreakLocalNotification(
-                UTCStartHour: self.streakNotificationsStorageManager.streakNotificationsStartHourUTC,
-                cancelPrevious: true
+                utcStartHour: self.streakNotificationsStorageManager.streakNotificationsStartHourUTC
             )
 
             self.analytics.send(.streaksPreferenceOn)
@@ -115,7 +114,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
     }
 
     private func turnOffStreakNotifications() {
-        self.notificationsService.cancelStreakLocalNotifications()
+        self.notificationsService.removeStreakLocalNotifications()
         self.streakNotificationsStorageManager.isStreakNotificationsEnabled = false
         self.analytics.send(.streaksPreferenceOff)
     }

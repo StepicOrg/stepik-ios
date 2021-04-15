@@ -1,11 +1,3 @@
-//
-//  LocalNotificationsMigrator.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 15/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 final class LocalNotificationsMigrator {
@@ -43,7 +35,7 @@ final class LocalNotificationsMigrator {
     private func migrateStreakNotifications() {
         if self.notificationPreferencesContainer.allowStreaksNotifications {
             self.notificationsService.scheduleStreakLocalNotification(
-                UTCStartHour: self.notificationPreferencesContainer.streaksNotificationStartHourUTC
+                utcStartHour: self.notificationPreferencesContainer.streaksNotificationStartHourUTC
             )
         }
     }
@@ -67,19 +59,19 @@ extension LocalNotificationsMigrator {
 
     private var didMigrateLocalNotifications: Bool {
         get {
-            UserDefaults.standard.bool(forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
+            UserDefaults.standard.bool(forKey: Self.didMigrateLocalNotificationsKey)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
+            UserDefaults.standard.set(newValue, forKey: Self.didMigrateLocalNotificationsKey)
         }
     }
 
     private var localNotificationsVersion: Int {
         get {
-            UserDefaults.standard.value(forKey: LocalNotificationsMigrator.localNotificationsVersionKey) as? Int ?? 1
+            UserDefaults.standard.value(forKey: Self.localNotificationsVersionKey) as? Int ?? 1
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.localNotificationsVersionKey)
+            UserDefaults.standard.set(newValue, forKey: Self.localNotificationsVersionKey)
         }
     }
 }

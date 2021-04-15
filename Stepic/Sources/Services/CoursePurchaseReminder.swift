@@ -31,16 +31,16 @@ final class CoursePurchaseReminder: CoursePurchaseReminderProtocol {
         self.removePurchaseNotification(for: courseID)
 
         self.getReferenceDate().map {
-            PurchaseCourseLocalNotificationProvider(courseID: courseID, courseTitle: courseTitle, referenceDate: $0)
-        }.then { provider in
+            PurchaseCourseLocalNotification(courseID: courseID, courseTitle: courseTitle, referenceDate: $0)
+        }.then { notification in
             self.localNotificationsService
-                .scheduleNotification(contentProvider: provider)
-                .map { provider }
-        }.done { provider in
+                .scheduleNotification(notification)
+                .map { notification }
+        }.done { notification in
             print(
                 """
                 CoursePurchaseReminder :: successfully scheduled notification for course = \(courseID), \
-                fireDate = \(String(describing: provider.trigger?.nextTriggerDate))
+                fireDate = \(String(describing: notification.trigger?.nextTriggerDate))
                 """
             )
         }.catch { error in
@@ -52,7 +52,7 @@ final class CoursePurchaseReminder: CoursePurchaseReminderProtocol {
 
     func removePurchaseNotification(for courseID: Course.IdType) {
         self.localNotificationsService.removeNotifications(
-            withIdentifiers: [PurchaseCourseLocalNotificationProvider(courseID: courseID).identifier]
+            identifiers: [PurchaseCourseLocalNotification(courseID: courseID).identifier]
         )
         print("CoursePurchaseReminder :: did remove notification for course = \(courseID)")
     }
@@ -77,7 +77,7 @@ final class CoursePurchaseReminder: CoursePurchaseReminderProtocol {
 
     func updateAllPurchaseNotifications() {
         self.getAllPurchaseNotificationRequests().compactMapValues { notificationRequest in
-            notificationRequest.content.userInfo[PurchaseCourseLocalNotificationProvider.Key.course.rawValue] as? Int
+            notificationRequest.content.userInfo[PurchaseCourseLocalNotification.UserInfoKey.course.rawValue] as? Int
         }.done { courseIDs in
             courseIDs.forEach {
                 self.updatePurchaseNotification(for: $0)
@@ -123,7 +123,7 @@ final class CoursePurchaseReminder: CoursePurchaseReminderProtocol {
     private func getPurchaseNotificationRequest(for courseID: Course.IdType) -> Guarantee<UNNotificationRequest?> {
         self.getAllPurchaseNotificationRequests().filterValues { notificationRequest in
             if let notificationCourseID = notificationRequest.content.userInfo[
-                PurchaseCourseLocalNotificationProvider.Key.course.rawValue
+                PurchaseCourseLocalNotification.UserInfoKey.course.rawValue
             ] as? Int {
                 return courseID == notificationCourseID
             }

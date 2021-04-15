@@ -13,10 +13,10 @@ project 'Stepic',
         'Develop Release' => :release
 
 def shared_pods
-  pod 'Alamofire', '5.4.1'
+  pod 'Alamofire', '5.4.2'
   pod 'Atributika', '4.9.10'
   pod 'SwiftyJSON', '5.0.0'
-  pod 'SDWebImage', '5.10.4'
+  pod 'SDWebImage', '5.11.0'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.3.0'
   pod 'PromiseKit', '6.13.1'
@@ -34,23 +34,21 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '7.9.0'
-  pod 'Firebase/Messaging', '7.9.0'
-  pod 'Firebase/Analytics', '7.9.0'
-  pod 'Firebase/Crashlytics', '7.9.0'
-  pod 'Firebase/RemoteConfig', '7.9.0'
+  pod 'Firebase/Core', '7.10.0'
+  pod 'Firebase/Messaging', '7.10.0'
+  pod 'Firebase/Analytics', '7.10.0'
+  pod 'Firebase/Crashlytics', '7.10.0'
+  pod 'Firebase/RemoteConfig', '7.10.0'
 
-  pod 'YandexMobileMetrica/Dynamic', '3.14.1'
-  pod 'Amplitude', '8.1.0'
-  pod 'Branch', '1.39.1'
+  pod 'YandexMobileMetrica/Dynamic', '3.15.0'
+  pod 'Amplitude', '8.2.1'
+  pod 'Branch', '1.39.2'
 
   pod 'BEMCheckBox', '1.4.1'
 
   pod 'IQKeyboardManagerSwift', '6.5.6'
 
   pod 'Kanna', '5.2.2'
-  # Remove after NotificationsService refactoring
-  pod 'CRToast', '0.0.9'
   pod 'TUSafariActivity', '1.0.4'
 
   # Social SDKs
@@ -60,9 +58,9 @@ def all_pods
   pod 'GoogleSignIn', '5.0.2'
 
   pod 'Presentr', '1.9'
-  pod 'PanModal', '1.2.7'
+  pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
-  pod 'Agrume', '5.6.12'
+  pod 'Agrume', '5.6.13'
   pod 'Highlightr', '2.1.0'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.1'
@@ -70,7 +68,7 @@ def all_pods
   pod 'Charts', '3.6.0'
   pod 'EasyTipView', '2.1.0'
   pod 'ActionSheetPicker-3.0', '2.7.1'
-  pod 'Nuke', '9.3.0'
+  pod 'Nuke', '9.5.0'
   pod 'STRegex', '2.1.1'
   pod 'Tabman', '2.10.0'
   pod 'SwiftDate', '6.3.1'

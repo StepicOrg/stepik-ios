@@ -54,7 +54,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                 return self.storageRecordsAPI.create(record: record)
             }.done { createdRecord in
                 self.localStorageManager.set(storageRecord: createdRecord, for: course)
-                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineLocalNotifications(course: course)
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
@@ -68,7 +68,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                 if storageRecords.isEmpty {
                     courses.forEach { course in
                         self.localStorageManager.deleteRecord(for: course)
-                        self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                        self.notificationsService.updatePersonalDeadlineLocalNotifications(course: course)
                     }
                     seal.fulfill(())
                 } else {
@@ -76,7 +76,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                         if case .deadline(let courseID)? = storageRecord.kind,
                            let course = courses.first(where: { $0.id == courseID }) {
                             self.localStorageManager.set(storageRecord: storageRecord, for: course)
-                            self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                            self.notificationsService.updatePersonalDeadlineLocalNotifications(course: course)
                         }
                     }
                     seal.fulfill(())
@@ -95,12 +95,12 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
             ).done { storageRecords, _ in
                 guard let storageRecord = storageRecords.first else {
                     self.localStorageManager.deleteRecord(for: course)
-                    self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                    self.notificationsService.updatePersonalDeadlineLocalNotifications(course: course)
                     seal.fulfill(())
                     return
                 }
                 self.localStorageManager.set(storageRecord: storageRecord, for: course)
-                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineLocalNotifications(course: course)
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
@@ -126,7 +126,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
             record.data = dataToChange
             storageRecordsAPI.update(record: record).done { updatedRecord in
                 self.localStorageManager.set(storageRecord: updatedRecord, for: course)
-                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineLocalNotifications(course: course)
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
@@ -141,7 +141,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                 return
             }
             storageRecordsAPI.delete(id: record.id).done { _ in
-                self.notificationsService.removePersonalDeadlineNotifications(for: course)
+                self.notificationsService.removePersonalDeadlineLocalNotifications(course: course)
                 self.localStorageManager.deleteRecord(for: course)
                 seal.fulfill(())
             }.catch {

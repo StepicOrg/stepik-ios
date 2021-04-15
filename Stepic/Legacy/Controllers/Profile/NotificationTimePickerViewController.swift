@@ -9,59 +9,58 @@
 import UIKit
 
 final class NotificationTimePickerViewController: PickerViewController {
-    var startHour: Int = 0
+    var startHour = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setup()
+    }
 
+    private func setup() {
         self.titleLabel.text = NSLocalizedString("SelectTimeTitle", comment: "")
 
-        self.initializeData()
-        self.initializeSelectedAction()
-        self.picker.reloadAllComponents()
-        self.picker.selectRow(startHour, inComponent: 0, animated: false)
-    }
+        self.data = (0..<24).map(self.makeFormattedStreakTimeInterval(startHour:))
 
-    func initializeData() {
-        data = []
-        for hour in 0..<24 {
-            data += [getDisplayingStreakTimeInterval(startHour: hour)]
-        }
-    }
-
-    func initializeSelectedAction() {
-        selectedAction = {
-            [weak self] in
-            if let s = self {
-                let selectedLocalStartHour = s.picker.selectedRow(inComponent: 0)
-                let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
-                var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
-
-                if selectedUTCStartHour < 0 {
-                    selectedUTCStartHour = 24 + selectedUTCStartHour
-                }
-
-                if selectedUTCStartHour > 23 {
-                    selectedUTCStartHour = selectedUTCStartHour - 24
-                }
-
-                print("selected UTC start hour -> \(selectedUTCStartHour)")
-
-                PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
-                NotificationsService().scheduleStreakLocalNotification(UTCStartHour: selectedUTCStartHour)
+        self.selectedAction = { [weak self] in
+            guard let strongSelf = self else {
+                return
             }
+
+            let selectedLocalStartHour = strongSelf.picker.selectedRow(inComponent: 0)
+            let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
+            var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
+
+            if selectedUTCStartHour < 0 {
+                selectedUTCStartHour += 24
+            }
+
+            if selectedUTCStartHour > 23 {
+                selectedUTCStartHour -= 24
+            }
+
+            print("selected UTC start hour -> \(selectedUTCStartHour)")
+
+            PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
+            NotificationsService().scheduleStreakLocalNotification(utcStartHour: selectedUTCStartHour)
         }
+
+        self.picker.reloadAllComponents()
+        self.picker.selectRow(self.startHour, inComponent: 0, animated: false)
     }
 
-    func getDisplayingStreakTimeInterval(startHour: Int) -> String {
+    private func makeFormattedStreakTimeInterval(startHour: Int) -> String {
         let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+
         let startInterval = TimeInterval((startHour % 24) * 60 * 60 - timeZoneDiff)
         let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
+
         let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60 - timeZoneDiff)
         let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
+
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
+
         return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
     }
 }
