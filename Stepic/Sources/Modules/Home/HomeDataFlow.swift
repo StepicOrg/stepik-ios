@@ -1,7 +1,5 @@
 import Foundation
 
-// swiftlint:disable nesting
-
 enum Home {
     // MARK: Submodules identifiers
 

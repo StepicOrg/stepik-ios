@@ -1,11 +1,3 @@
-//
-//  NotificationsRegistrationService.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 19/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import FirebaseCore
 import FirebaseInstanceID
 import FirebaseMessaging
@@ -16,7 +8,7 @@ import UserNotifications
 final class NotificationsRegistrationService: NotificationsRegistrationServiceProtocol {
     weak var delegate: NotificationsRegistrationServiceDelegate?
     var presenter: NotificationsRegistrationPresentationServiceProtocol?
-    private var analytics: NotificationAlertsAnalytics?
+    private let analytics: NotificationAlertsAnalytics?
 
     init(
         delegate: NotificationsRegistrationServiceDelegate? = nil,
@@ -32,7 +24,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     func handleDeviceToken(_ deviceToken: Data) {
         print("NotificationsRegistrationService: did register for remote notifications")
-        self.getGCMRegistrationToken(deviceToken: deviceToken)
+        self.setAPNsTokenToFirebaseMessaging(apnsToken: deviceToken)
         self.postCurrentPermissionStatus()
         self.delegate?.notificationsRegistrationServiceDidSuccessfullyRegisterWithAPNs(self)
     }
@@ -41,25 +33,6 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         print("NotificationsRegistrationService: did fail register with error: \(error)")
         self.postCurrentPermissionStatus()
         self.delegate?.notificationsRegistrationServiceDidFailRegisterWithAPNs(self, error: error)
-    }
-
-    func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
-        print("NotificationsRegistrationService: registered with settings: \(notificationSettings)")
-
-        let granted = notificationSettings.types != []
-
-        if self.isFirstRegistrationIsInProgress {
-            self.isFirstRegistrationIsInProgress = false
-            self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
-        }
-
-        if granted {
-            self.registerWithAPNs()
-        } else {
-            self.postCurrentPermissionStatus()
-        }
-
-        self.updatePushPermissionStatusUserProperty()
     }
 
     // MARK: - Register -
@@ -99,23 +72,19 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func register() {
         defer {
-            self.fetchFirebaseAppInstanceID()
+            self.fetchFirebaseMessagingRegistrationToken()
         }
 
         guard StepikApplicationsInfo.shouldRegisterNotifications else {
             return
         }
 
-        if #available(iOS 10.0, *) {
-            NotificationPermissionStatus.current.done { status in
-                if status == .denied {
-                    self.presentSettingsAlertIfNeeded()
-                } else {
-                    self.presentPermissionAlertIfNeeded()
-                }
+        NotificationPermissionStatus.current.done { status in
+            if status == .denied {
+                self.presentSettingsAlertIfNeeded()
+            } else {
+                self.presentPermissionAlertIfNeeded()
             }
-        } else {
-            self.presentPermissionAlertIfNeeded()
         }
     }
 
@@ -128,31 +97,23 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
         self.didShowDefaultPermissionAlert = true
 
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: [.alert, .badge, .sound],
-                completionHandler: { granted, error in
-                    if self.isFirstRegistrationIsInProgress {
-                        self.isFirstRegistrationIsInProgress = false
-                        self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
-                    }
-
-                    if granted {
-                        self.registerWithAPNs()
-                    } else if let error = error {
-                        print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
-                    }
-
-                    self.updatePushPermissionStatusUserProperty()
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound],
+            completionHandler: { granted, error in
+                if self.isFirstRegistrationIsInProgress {
+                    self.isFirstRegistrationIsInProgress = false
+                    self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
                 }
-            )
-        } else {
-            let notificationSettings = UIUserNotificationSettings(
-                types: [.alert, .badge, .sound],
-                categories: nil
-            )
-            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
-        }
+
+                if granted {
+                    self.registerWithAPNs()
+                } else if let error = error {
+                    print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
+                }
+
+                self.updatePushPermissionStatusUserProperty()
+            }
+        )
     }
 
     /// Initiates the registration process with Apple Push Notification service.
@@ -217,11 +178,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
             if UIApplication.shared.canOpenURL(settingsURL) {
                 NotificationCenter.default.post(name: .notificationsRegistrationServiceWillOpenSettings, object: nil)
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(settingsURL)
-                } else {
-                    UIApplication.shared.openURL(settingsURL)
-                }
+                UIApplication.shared.open(settingsURL)
             }
         }
         self.presenter?.onCancelCallback = {
@@ -251,7 +208,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             deviceDescription: DeviceInfo.current.deviceInfoString
         )
 
-        //TODO: Remove this after refactoring errors
+        // TODO: Remove this after refactoring errors
         checkToken().then { _ -> Promise<Device> in
             if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
                 print("NotificationsRegistrationService: retrieve device by saved deviceId = \(savedDeviceId)")
@@ -286,16 +243,16 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     // MARK: - Firebase -
 
-    private func getGCMRegistrationToken(deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
+    private func setAPNsTokenToFirebaseMessaging(apnsToken: Data) {
+        Messaging.messaging().apnsToken = apnsToken
     }
 
-    private func fetchFirebaseAppInstanceID() {
-        InstanceID.instanceID().instanceID { (result, error) in
+    private func fetchFirebaseMessagingRegistrationToken() {
+        Messaging.messaging().token { (token, error) in
             if let error = error {
-                print("NotificationsRegistrationService: error while fetching Firebase remote instance ID: \(error)")
-            } else if let result = result {
-                self.registerDevice(result.token)
+                print("NotificationsRegistrationService: error while fetching FCM token: \(error)")
+            } else if let token = token {
+                self.registerDevice(token)
             }
         }
     }
@@ -332,7 +289,9 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                                 key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey
                             )
                         } else {
-                            print("NotificationsRegistrationService: could not get current user ID or token to delete device")
+                            print(
+                                "NotificationsRegistrationService: can't get current user ID or token to delete device"
+                            )
                             StepikAnalytics.shared.send(.errorUnregisterDeviceInvalidCredentials)
                         }
                     }
@@ -354,29 +313,19 @@ extension NotificationsRegistrationService {
 
     private var didShowDefaultPermissionAlert: Bool {
         get {
-            UserDefaults.standard.bool(
-                forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
-            )
+            UserDefaults.standard.bool(forKey: Self.didShowDefaultPermissionAlertKey)
         }
         set {
-            UserDefaults.standard.set(
-                newValue,
-                forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
-            )
+            UserDefaults.standard.set(newValue, forKey: Self.didShowDefaultPermissionAlertKey)
         }
     }
 
     private var isFirstRegistrationIsInProgress: Bool {
         get {
-            UserDefaults.standard.bool(
-                forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
-            )
+            UserDefaults.standard.bool(forKey: Self.isFirstRegistrationIsInProgressKey)
         }
         set {
-            UserDefaults.standard.set(
-                newValue,
-                forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
-            )
+            UserDefaults.standard.set(newValue, forKey: Self.isFirstRegistrationIsInProgressKey)
         }
     }
 }

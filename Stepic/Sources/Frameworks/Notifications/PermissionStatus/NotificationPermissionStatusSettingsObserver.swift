@@ -1,11 +1,3 @@
-//
-// NotificationPermissionStatusSettingsObserver.swift
-// stepik-ios
-//
-// Created by Ivan Magda on 2018-12-12.
-// Copyright 2018 Stepik. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -110,19 +102,14 @@ extension NotificationPermissionStatusSettingsObserver {
 
     private var notificationPermissionStatus: NotificationPermissionStatus {
         get {
-            if let stringValue = UserDefaults.standard.string(
-                forKey: NotificationPermissionStatusSettingsObserver.notificationPermissionStatusKey
-            ) {
+            if let stringValue = UserDefaults.standard.string(forKey: Self.notificationPermissionStatusKey) {
                 return NotificationPermissionStatus(rawValue: stringValue) ?? .notDetermined
             } else {
                 return .notDetermined
             }
         }
         set {
-            UserDefaults.standard.set(
-                newValue.rawValue,
-                forKey: NotificationPermissionStatusSettingsObserver.notificationPermissionStatusKey
-            )
+            UserDefaults.standard.set(newValue.rawValue, forKey: Self.notificationPermissionStatusKey)
         }
     }
 }
