@@ -8,10 +8,10 @@ enum FLEXManager {
     static func setup() {
         #if BETA_PROFILE || DEBUG
         FLEX.FLEXManager.shared.isNetworkDebuggingEnabled = true
-        #endif
 
-        #if DEBUG
-        FLEX.FLEXManager.shared.showExplorer()
+        if LaunchArguments.flexShowExplorerOnLaunch {
+            FLEX.FLEXManager.shared.showExplorer()
+        }
         #endif
     }
 
