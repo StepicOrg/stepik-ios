@@ -5,4 +5,5 @@ enum CatalogBlockKind: String {
     case simpleCourseLists = "simple_course_lists"
     case authors
     case recommendedCourses = "recommended_courses"
+    case specializations
 }

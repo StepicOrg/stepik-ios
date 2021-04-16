@@ -32,7 +32,7 @@ struct StepikApplicationsInfo {
             idPath: Root.AuthType.Social.id,
             secretPath: Root.AuthType.Social.secret,
             redirectPath: Root.AuthType.Social.redirect
-          )
+        )
 
     static let password: AuthInfo? = !(Self.stepikAuthInfo?.has(path: Root.AuthType.password) ?? false)
         ? nil
@@ -40,7 +40,7 @@ struct StepikApplicationsInfo {
             idPath: Root.AuthType.Password.id,
             secretPath: Root.AuthType.Password.secret,
             redirectPath: Root.AuthType.Password.redirect
-          )
+        )
 
     // Section: URL
     static let appId = Self.stepikConfigInfo?.get(for: Root.URL.appId) as? String ?? ""
@@ -49,7 +49,6 @@ struct StepikApplicationsInfo {
     static let oauthURL = Self.stepikConfigInfo?.get(for: Root.URL.oauth) as? String ?? ""
     static let stepikURL = Self.stepikConfigInfo?.get(for: Root.URL.stepik) as? String ?? ""
     static let stepikHost = Self.stepikConfigInfo?.get(for: Root.URL.host) as? String ?? ""
-    static let versionInfoURL = Self.stepikConfigInfo?.get(for: Root.URL.version) as? String ?? ""
     static let adaptiveRatingURL = Self.stepikConfigInfo?.get(for: Root.URL.adaptiveRating) as? String ?? ""
 
     // Section: Cookie
@@ -57,7 +56,6 @@ struct StepikApplicationsInfo {
 
     // Section: Feature
     static let doesAllowCourseUnenrollment = Self.stepikConfigInfo?.get(for: Root.Feature.courseUnenrollment) as? Bool ?? true
-    static let inAppUpdatesAvailable = Self.stepikConfigInfo?.get(for: Root.Feature.inAppUpdates) as? Bool ?? false
     static let streaksEnabled = Self.stepikConfigInfo?.get(for: Root.Feature.streaks) as? Bool ?? true
     static let shouldRegisterNotifications = Self.stepikConfigInfo?.get(for: Root.Feature.notifications) as? Bool ?? true
 

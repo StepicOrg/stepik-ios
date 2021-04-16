@@ -167,7 +167,7 @@ enum SupportedMenuBlockType {
     }
 
     var cellIdentifier: String {
-        return nibName
+        nibName
     }
 
     init?(block: MenuBlock) {

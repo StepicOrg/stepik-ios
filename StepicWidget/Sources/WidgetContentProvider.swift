@@ -12,7 +12,7 @@ struct WidgetContentProvider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetContent) -> Void) { completion(.snapshotEntry) }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         self.widgetUserDefaults.isWidgetAdded = true
         self.widgetUserDefaults.lastWidgetSize = context.family.rawValue
 
@@ -39,7 +39,7 @@ struct WidgetContentProvider: TimelineProvider {
 
     // MARK: Private API
 
-    private func presentTimeline(entry: Entry, completion: @escaping (Timeline<Entry>) -> ()) {
+    private func presentTimeline(entry: Entry, completion: @escaping (Timeline<Entry>) -> Void) {
         let nextUpdateDate = Calendar.current.date(
             byAdding: .second,
             value: Int(WidgetConstants.timelineUpdateTimeInterval),
@@ -59,7 +59,7 @@ struct WidgetContentProvider: TimelineProvider {
         return WidgetContent(userCourses: userCourses)
     }
 
-    private func fetchRemoteContent(completion: @escaping (Result<WidgetContent>) -> ()) {
+    private func fetchRemoteContent(completion: @escaping (Result<WidgetContent>) -> Void) {
         self.stepikNetworkService.token = self.tokenFileManager.read()
 
         self.stepikNetworkService.getUserCourses { userCoursesResult in

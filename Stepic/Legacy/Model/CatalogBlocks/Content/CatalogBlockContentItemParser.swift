@@ -1,5 +1,5 @@
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 enum CatalogBlockContentItemParser {
     static func parse(json: JSON, kind: String) -> CatalogBlockContentItem? {
@@ -16,6 +16,8 @@ enum CatalogBlockContentItemParser {
             return AuthorsCatalogBlockContentItem(json: json)
         case .recommendedCourses:
             return nil
+        case .specializations:
+            return SpecializationsCatalogBlockContentItem(json: json)
         }
     }
 }

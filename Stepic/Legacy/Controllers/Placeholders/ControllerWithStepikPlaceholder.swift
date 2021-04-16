@@ -53,7 +53,7 @@ final class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate 
 
     fileprivate var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
     fileprivate var currentPlaceholderButtonAction: (() -> Void)?
-    fileprivate var isPlaceholderShown: Bool = false
+    fileprivate var isPlaceholderShown = false
 
     func buttonDidClick(_ button: UIButton) {
         currentPlaceholderButtonAction?()

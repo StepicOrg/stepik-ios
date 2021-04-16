@@ -28,7 +28,7 @@ final class AchievementPopupViewController: UIViewController {
     var widthConstraint: NSLayoutConstraint?
 
     var data: AchievementViewData?
-    var canShare: Bool = true
+    var canShare = true
     var source: Source = .notification
 
     private let analytics: Analytics = StepikAnalytics.shared

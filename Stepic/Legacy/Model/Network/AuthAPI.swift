@@ -137,7 +137,7 @@ final class AuthAPI {
                     }
                 case .success(let json):
                     if let requestResponse = response.response,
-                        !(200...299 ~= requestResponse.statusCode) {
+                       !(200...299 ~= requestResponse.statusCode) {
                         switch requestResponse.statusCode {
                         case 497:
                             seal.reject(SignInError.manyAttempts)
@@ -256,7 +256,7 @@ final class AuthAPI {
                     seal.reject(SignUpError.other(error: error, code: nil, message: nil))
                 case .success(let json):
                     if let requestResponse = response.response,
-                        !(200...299 ~= requestResponse.statusCode) {
+                       !(200...299 ~= requestResponse.statusCode) {
                         switch requestResponse.statusCode {
                         case 400:
                             seal.reject(

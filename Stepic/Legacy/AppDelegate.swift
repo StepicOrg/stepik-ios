@@ -52,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        FLEXManager.setup()
+
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
@@ -82,8 +84,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.didReceiveRegistrationToken(_:)),
-            name: .InstanceIDTokenRefresh,
+            selector: #selector(self.messagingRegistrationTokenDidRefresh),
+            name: .MessagingRegistrationTokenRefreshed,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -107,10 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
             self.analytics.send(.applicationDidLaunchFirstTime)
-        }
-
-        if StepikApplicationsInfo.inAppUpdatesAvailable {
-            self.checkForUpdates()
         }
 
         self.notificationsRegistrationService.renewDeviceToken()
@@ -155,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
 
-        self.notificationsService.removeRetentionNotifications()
+        self.notificationsService.removeRetentionLocalNotifications()
         self.coursePurchaseReminder.updateAllPurchaseNotifications()
 
         self.userCoursesObserver.startObserving()
@@ -179,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        self.notificationsService.scheduleRetentionNotifications()
+        self.notificationsService.scheduleRetentionLocalNotifications()
         self.userCoursesObserver.stopObserving()
         self.visitedCoursesCleaner.removeObservers()
 
@@ -226,31 +224,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.notificationsService.handleRemoteNotification(with: userInfo)
     }
 
-    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         self.notificationsService.handleLocalNotification(with: notification.userInfo)
-    }
-
-    func application(
-        _ application: UIApplication,
-        didRegister notificationSettings: UIUserNotificationSettings
-    ) {
-        self.notificationsRegistrationService.handleRegisteredNotificationSettings(notificationSettings)
     }
 
     // MARK: Private Helpers
 
     @objc
-    private func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
+    private func messagingRegistrationTokenDidRefresh() {
         guard AuthInfo.shared.isAuthorized else {
             return
         }
 
-        InstanceID.instanceID().instanceID { [weak self] (result, error) in
+        Messaging.messaging().token { [weak self] (token, error) in
             if let error = error {
-                print("Error fetching Firebase remote instance ID: \(error)")
-            } else if let result = result {
-                self?.notificationsRegistrationService.registerDevice(result.token)
+                print("Error fetching FCM token: \(error)")
+            } else if let token = token {
+                self?.notificationsRegistrationService.registerDevice(token)
             }
         }
     }
@@ -310,7 +300,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if url.scheme == "vk\(StepikApplicationsInfo.SocialInfo.AppIds.vk)"
-               || url.scheme == "fb\(StepikApplicationsInfo.SocialInfo.AppIds.facebook)" {
+            || url.scheme == "fb\(StepikApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 
@@ -354,25 +344,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Private API -
-
-    private func checkForUpdates() {
-        UpdateChecker.shared.checkForUpdatesIfNeeded({ [weak self] newVersion in
-            guard let newVersion = newVersion else {
-                return
-            }
-
-            let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(
-                updateUrl: newVersion.url,
-                addNeverAskAction: true
-            )
-
-            DispatchQueue.main.async {
-                self?.window?.rootViewController?.present(alert, animated: true)
-            }
-        }, error: { error in
-            print("error while checking for updates: \(error)")
-        })
-    }
 
     private func checkNotificationsCount() {
         guard AuthInfo.shared.isAuthorized else {

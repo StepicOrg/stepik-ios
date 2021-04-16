@@ -6,8 +6,8 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import SVProgressHUD
 import SafariServices
+import SVProgressHUD
 import UIKit
 import WebKit
 
@@ -99,6 +99,10 @@ final class WebControllerManager: NSObject {
             return
         }
 
+        if key == .socialAuth {
+            return present(url: url)
+        }
+
         var queryParameters = ["from_mobile_app": "true"]
         if key == .externalLink {
             queryParameters["mobile_internal_deeplink"] = "true"
@@ -174,7 +178,16 @@ final class WebControllerManager: NSObject {
         backButtonStyle: BackButtonStyle,
         animated: Bool = true
     ) {
-        let controller = WebViewController(url: url)
+        if self.currentWebControllerKey == .socialAuth {
+            WebCacheCleaner.clean()
+        }
+
+        let urlRequest = URLRequest(
+            url: url,
+            cachePolicy: self.currentWebControllerKey == .socialAuth ? .reloadIgnoringLocalCacheData : .useProtocolCachePolicy
+        )
+
+        let controller = WebViewController(urlRequest: urlRequest)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
         controller.webView.navigationDelegate = self

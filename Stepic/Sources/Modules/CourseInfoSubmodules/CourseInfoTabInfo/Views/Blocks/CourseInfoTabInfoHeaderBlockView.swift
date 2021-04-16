@@ -4,12 +4,12 @@ import UIKit
 
 extension CourseInfoTabInfoHeaderBlockView {
     struct Appearance {
-        let imageViewSize = CGSize(width: 12, height: 12)
-        let imageViewTintColor = UIColor.stepikAccent
+        let imageViewSize = CGSize(width: 15, height: 15)
+        let imageViewTintColor = UIColor.stepikMaterialPrimaryText
         var imageViewLeadingSpace: CGFloat = 0
 
-        var titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let titleLabelTextColor = UIColor.stepikPrimaryText
+        var titleLabelFont = Typography.subheadlineFont
+        let titleLabelTextColor = UIColor.stepikMaterialPrimaryText
         var titleLabelInsets = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 0)
         var titleLabelNumberOfLines = 1
     }

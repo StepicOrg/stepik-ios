@@ -47,7 +47,7 @@ final class HTMLToAttributedStringConverter: HTMLToAttributedStringConverterProt
                 tagStyles + defaultStyles.filter { defaultStyle in
                     !tagStyles.contains { $0.name == defaultStyle.name }
                 }
-        )
+            )
 
         self.font = font
         self.tagStyles = finalStyles

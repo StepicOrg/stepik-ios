@@ -41,7 +41,7 @@ final class NewProfileUserActivityPresenter: NewProfileUserActivityPresenterProt
             ? String(
                 format: NSLocalizedString("NewProfileUserActivityLongestStreak", comment: ""),
                 arguments: [FormatterHelper.daysCount(userActivity.longestStreak)]
-              )
+            )
             : ""
 
         return NewProfileUserActivityViewModel(

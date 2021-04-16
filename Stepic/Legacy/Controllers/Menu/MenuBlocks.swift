@@ -40,7 +40,7 @@ final class CustomMenuBlock: MenuBlock {
 
 class ExpandableMenuBlock: MenuBlock {
     var onExpanded: ((Bool) -> Void)?
-    var isExpanded: Bool = false
+    var isExpanded = false
 }
 
 final class ContentExpandableMenuBlock: ExpandableMenuBlock {

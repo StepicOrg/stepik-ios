@@ -142,7 +142,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     func displayCourseReviewDelete(viewModel: CourseInfoTabReviews.DeleteReview.ViewModel) {
         guard viewModel.isDeleted,
               let index = self.tableDataSource.viewModels.firstIndex(
-                  where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }
+                where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }
               ) else {
             return SVProgressHUD.showError(withStatus: viewModel.statusMessage)
         }

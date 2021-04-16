@@ -120,7 +120,7 @@ final class AuthInfo: NSObject {
         }
     }
 
-    var didRefresh: Bool = false
+    var didRefresh = false
 
     var anonymousUserId: Int?
 

@@ -4,24 +4,24 @@ import UIKit
 extension CourseInfoTabReviewsCellView {
     struct Appearance {
         let avatarImageViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 16)
-        let avatarImageViewSize = CGSize(width: 30, height: 30)
-        let avatarImageViewCornerRadius: CGFloat = 4.0
+        let avatarImageViewSize = CGSize(width: 32, height: 32)
+        let avatarImageViewCornerRadius: CGFloat = 6
 
         let starsViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
 
         let dateLabelInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
-        let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.stepikPrimaryText
+        let dateLabelFont = Typography.caption1Font
+        let dateLabelTextColor = UIColor.stepikMaterialSecondaryText
 
-        let nameLabelTextColor = UIColor.stepikPrimaryText
-        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let nameLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 0, right: 20)
+        let nameLabelTextColor = UIColor.stepikMaterialPrimaryText
+        let nameLabelFont = Typography.subheadlineFont
+        let nameLabelInsets = UIEdgeInsets(top: 4, left: 16, bottom: 0, right: 20)
 
-        let textLabelTextColor = UIColor.stepikPrimaryText
-        let textLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let textLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let textLabelFont = Typography.subheadlineFont
         let textLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 20)
 
-        let clearStarsColor = UIColor.stepikAccent
+        let clearStarsColor = UIColor.stepikMaterialPrimaryText
     }
 }
 

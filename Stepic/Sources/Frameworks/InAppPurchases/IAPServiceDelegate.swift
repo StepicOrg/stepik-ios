@@ -47,11 +47,11 @@ final class DefaultIAPServiceDelegate: IAPServiceDelegate {
                 ? String(
                     format: NSLocalizedString("IAPPurchaseSucceededMessage", comment: ""),
                     arguments: [courseTitle]
-                  )
+                )
                 : String(
                     format: NSLocalizedString("IAPPurchaseFailedMessage", comment: ""),
                     arguments: [courseTitle, error.require().localizedDescription]
-                  )
+                )
 
             let alert = UIAlertController(
                 title: title,

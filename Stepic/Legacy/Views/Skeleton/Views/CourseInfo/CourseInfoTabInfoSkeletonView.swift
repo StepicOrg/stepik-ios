@@ -1,5 +1,5 @@
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoSkeletonView {
     struct Appearance {

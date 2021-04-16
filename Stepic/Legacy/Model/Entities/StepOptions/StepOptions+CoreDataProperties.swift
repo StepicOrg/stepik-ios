@@ -32,7 +32,7 @@ extension StepOptions {
 
     var executionTimeLimit: Double {
         get {
-             self.managedExecutionTimeLimit?.doubleValue ?? 0.0
+            self.managedExecutionTimeLimit?.doubleValue ?? 0.0
         }
         set {
             self.managedExecutionTimeLimit = newValue as NSNumber?
@@ -41,7 +41,7 @@ extension StepOptions {
 
     var executionMemoryLimit: Double {
         get {
-             self.managedExecutionMemoryLimit?.doubleValue ?? 0.0
+            self.managedExecutionMemoryLimit?.doubleValue ?? 0.0
         }
         set {
             self.managedExecutionMemoryLimit = newValue as NSNumber?
@@ -59,7 +59,7 @@ extension StepOptions {
 
     var limits: [CodeLimit] {
         get {
-             (managedLimits?.array as? [CodeLimit]) ?? []
+            (managedLimits?.array as? [CodeLimit]) ?? []
         }
         set(value) {
             managedLimits = NSOrderedSet(array: value)
@@ -68,7 +68,7 @@ extension StepOptions {
 
     var templates: [CodeTemplate] {
         get {
-             (managedTemplates?.array as? [CodeTemplate]) ?? []
+            (managedTemplates?.array as? [CodeTemplate]) ?? []
         }
         set(value) {
             managedTemplates = NSOrderedSet(array: value)
@@ -77,7 +77,7 @@ extension StepOptions {
 
     var samples: [CodeSample] {
         get {
-             (managedSamples?.array as? [CodeSample]) ?? []
+            (managedSamples?.array as? [CodeSample]) ?? []
         }
         set(value) {
             managedSamples = NSOrderedSet(array: value)

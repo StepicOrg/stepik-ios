@@ -1,17 +1,8 @@
-//
-//  PinsMapSpec.swift
-//  StepicTests
-//
-//  Created by Vladislav Kiryukhin on 05.03.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
+@testable
+import Stepic
 
-import Quick
 import Nimble
-
-@testable import Stepic
-
-// TODO: Fix the ambiguous use of `expect` after Nimble update.
+import Quick
 
 class PinsMapSpec: QuickSpec {
     override func spec() {

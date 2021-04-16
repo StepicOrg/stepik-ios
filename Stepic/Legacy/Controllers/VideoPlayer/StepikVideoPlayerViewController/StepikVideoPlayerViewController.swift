@@ -182,12 +182,12 @@ final class StepikVideoPlayerViewController: UIViewController {
     private var pictureInPicturePossibleObservation: NSKeyValueObservation?
     private var pictureInPictureActiveObservation: NSKeyValueObservation?
 
-    private var isPictureInPicturePossible: Bool = false {
+    private var isPictureInPicturePossible = false {
         didSet {
             self.pictureInPictureButton.isEnabled = self.isPictureInPicturePossible
         }
     }
-    private var isPictureInPictureActive: Bool = false {
+    private var isPictureInPictureActive = false {
         didSet {
             self.pictureInPictureButton.isSelected = self.isPictureInPictureActive
             self.player.isPictureInPictureActive = self.isPictureInPictureActive

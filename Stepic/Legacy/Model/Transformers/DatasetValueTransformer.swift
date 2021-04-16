@@ -6,7 +6,7 @@ final class DatasetValueTransformer: NSSecureUnarchiveFromDataTransformer {
     static let name = NSValueTransformerName(rawValue: String(describing: DatasetValueTransformer.self))
 
     override static var allowedTopLevelClasses: [AnyClass] {
-        return [Dataset.self, FillBlanksComponent.self, NSArray.self]
+        [Dataset.self, FillBlanksComponent.self, NSArray.self]
     }
 
     static func register() {

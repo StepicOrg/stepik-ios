@@ -1,0 +1,22 @@
+{
+    "id": 4,
+    "position": 15,
+    "title": "Авторы курсов",
+    "description": "",
+    "language": "ru",
+    "platform": 1,
+    "kind": "authors",
+    "appearance": "default",
+    "is_title_visible": true,
+    "content": [
+        {
+            "id": 26533986,
+            "is_organization": false,
+            "full_name": "Ляйсан Хутова",
+            "alias": null,
+            "avatar": "https://stepik.org/media/users/26533986/avatar.png?1586183748",
+            "created_courses_count": 7,
+            "followers_count": 99425
+        }
+    ]
+}

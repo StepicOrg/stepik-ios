@@ -13,8 +13,8 @@ extension CourseInfoTabInfoAboutBlockView {
         var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
 
         let contentTextViewInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
-        let contentTextViewFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let contentTextViewTextColor = UIColor.stepikSystemSecondaryText
+        let contentTextViewFont = Typography.subheadlineFont
+        let contentTextViewTextColor = UIColor.stepikMaterialSecondaryText
 
         let backgroundColor = UIColor.stepikBackground
     }

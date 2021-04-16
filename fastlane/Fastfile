@@ -97,6 +97,40 @@ platform :ios do
     bundle_id_to_scheme
   end
 
+  def update_beta_profile_compilation_condition(options)
+    require 'xcodeproj'
+
+    target_name = options[:target] || "Stepic"
+    scheme = options[:scheme]
+    configurations = options[:configurations]
+    should_remove = options[:should_remove] || false
+
+    UI.user_error!("Wrong scheme parameter") if scheme.nil?
+    UI.user_error!("Wrong configurations parameter") if configurations.nil?
+
+    configuration_name = configurations[scheme]
+    UI.user_error!("No configuration found for scheme #{scheme}") if configuration_name.nil?
+
+    puts "Updating BETA_PROFILE build setting for scheme=#{scheme}, configuration=#{configuration_name}"
+
+    project = Xcodeproj::Project.open("../Stepic.xcodeproj")
+
+    target = project.targets.find {|it| it.name == target_name }
+    UI.user_error!("Can't find target for name #{target_name}") if target.nil?
+
+    build_configuration = target.build_configurations.find {|it| it.name == configuration_name }
+    UI.user_error!("Can't find build configuration for name #{configuration_name}") if build_configuration.nil?
+
+    old_build_setting = build_configuration.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"]
+    new_build_setting = should_remove ? old_build_setting.chomp("BETA_PROFILE").strip() : "#{old_build_setting} BETA_PROFILE"
+
+    build_configuration.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = new_build_setting
+
+    project.save()
+
+    puts "Finished updating BETA_PROFILE build setting. Current SWIFT_ACTIVE_COMPILATION_CONDITIONS=#{new_build_setting}"
+  end
+
   # Private lanes
 
   private_lane :match_scheme do |options|
@@ -199,6 +233,8 @@ platform :ios do
     UI.user_error!("Wrong scheme parameter") if scheme.nil?
     UI.user_error!("Firebase App ID is required") if firebase_app_id.nil?
 
+    ENV["FASTLANE_BETA_PROFILE"] = "true"
+
     clear_derived_data
     cocoapods(repo_update: true)
 
@@ -212,6 +248,8 @@ platform :ios do
       provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
       scheme: scheme,
     )
+    # Add BETA_PROFILE to SWIFT_ACTIVE_COMPILATION_CONDITIONS -> build -> remove
+    update_beta_profile_compilation_condition(scheme: scheme, configurations: configurations, should_remove: false)
     begin
       gym(
         scheme: scheme,
@@ -231,6 +269,7 @@ platform :ios do
         provisioning_profile_mapping: lane_context[SharedValues::MATCH_PROVISIONING_PROFILE_MAPPING],
         scheme: scheme,
       )
+      update_beta_profile_compilation_condition(scheme: scheme, configurations: configurations, should_remove: true)
     end
 
     firebase_app_distribution(
@@ -436,6 +475,10 @@ platform :ios do
       channel: "#ios-ci",
       link_names: true,
     )
+  end
+
+  before_all do
+    ENV["FASTLANE_BETA_PROFILE"] = "false"
   end
 
   after_all do |lane, options|

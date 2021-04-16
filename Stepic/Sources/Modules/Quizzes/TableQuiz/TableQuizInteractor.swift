@@ -86,7 +86,7 @@ extension TableQuizInteractor: QuizInputProtocol {
 
         for choice in tableReply.choices {
             guard let rowIndex = self.currentRows.firstIndex(
-                    where: { $0.uniqueIdentifier == self.getUniqueIdentifierByRow(choice.rowName) }
+                where: { $0.uniqueIdentifier == self.getUniqueIdentifierByRow(choice.rowName) }
             ) else {
                 continue
             }

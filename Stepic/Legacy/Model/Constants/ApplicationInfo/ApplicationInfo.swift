@@ -17,7 +17,6 @@ final class ApplicationInfo {
             static let oauth = "url.oauth"
             static let stepik = "url.stepik"
             static let host = "url.host"
-            static let version = "url.version"
             static let adaptiveRating = "url.adaptiveRating"
         }
         enum Cookie {
@@ -25,7 +24,6 @@ final class ApplicationInfo {
         }
         enum Feature {
             static let courseUnenrollment = "feature.courseUnenrollment"
-            static let inAppUpdates = "feature.inAppUpdates"
             static let streaks = "feature.streaks"
             static let notifications = "feature.notifications"
         }

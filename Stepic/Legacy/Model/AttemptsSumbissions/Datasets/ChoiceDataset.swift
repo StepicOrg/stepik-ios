@@ -53,7 +53,7 @@ final class ChoiceDataset: Dataset {
         super.init()
     }
 
-    private override init() {
+    override private init() {
         self.isMultipleChoice = false
         self.options = []
 

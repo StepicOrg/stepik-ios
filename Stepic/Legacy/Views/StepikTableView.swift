@@ -24,7 +24,7 @@ class StepikTableView: UITableView {
 
     // Trick with removing cell separators: we should store previous footer to restore
     private var savedFooterView: UIView?
-    private var hasSavedFooter: Bool = false
+    private var hasSavedFooter = false
 }
 
 extension StepikTableView {

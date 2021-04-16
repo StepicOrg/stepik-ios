@@ -104,15 +104,7 @@ UserInfo = "Пользователь";
 Updates = "Обновления";
 VideoPreferences = "Настройки видео";
 Actions = "Действия";
-AutoCheckForUpdates = "Автоматически проверять обновления";
-CheckForUpdates = "Проверить обновления";
-UpdateAvailable = "Доступно обновление";
-AppUpdateMessage = "Обновить приложение до новой версии?";
-Update = "Обновить";
 Later = "Позже";
-NeverAsk = "Никогда не спрашивать";
-NoUpdateAvailable = "Обновлений нет";
-NoAppUpdateMessage = "В данный момент нет доступных обновлений";
 NewCommentAlertTitle = "Новый комментарий";
 NewCommentAlertMessage = "Прочитать комментарий в браузере?";
 Reply = "Ответить";
@@ -165,6 +157,7 @@ points234 = "балла";
 points567890 = "баллов";
 Downloaded = "Загруженное";
 ExamTitle = "Экзамен";
+ExamProctoredTitle = "Экзамен с наблюдением";
 ShowExamInWeb = "Открыть экзамен в веб версии?";
 LastStepRouterShowExamInWeb = "Следующий модуль экзаменационный, который доступен только в веб версии. Нажмите \"Открыть\", чтобы продолжить в веб версии.";
 StreakNotificationAlertBody = "Не забудь решить задачу сегодня, чтобы улучшить личный рекорд!";
@@ -478,6 +471,7 @@ CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Не удалось у
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
+CourseInfoTabSyllabusSectionExamNoScoreTitle = "Оценка за экзамен появится позже";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusUnitDemoAccessTitle = "Демо-доступ";
 CourseInfoTabSyllabusFailedDownloadAlertTitle = "Ошибка загрузки";
@@ -489,7 +483,8 @@ CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Удалить ур
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный урок?";
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationTitle = "Удалить модуль";
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный модуль?";
-CourseInfoTabSyllabusSectionRequirementTitle = "Для открытия этого модуля необходимо набрать %@ в модуле %@";
+CourseInfoTabSyllabusSectionRequirementTitle = "Для открытия этого модуля необходимо набрать %@ в модуле \"%@\"";
+CourseInfoTabSyllabusSectionExamRequirementTitle = "Экзамен недоступен. Наберите %@ в модуле \"%@\" для доступа.";
 CourseInfoTabSyllabusDownloadOnCellularDataAlertTitle = "Использовать сотовые данные";
 CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage = "Вы не подключены к Wi-Fi. Использовать сотовые данные для загрузки?";
 CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction = "Всегда";
@@ -764,6 +759,10 @@ CourseMeetsRecommendations = "Соответствует рекомендаци�
 SyllabusDeadlinesButton = "Расписание";
 SyllabusDownloadAll = "Скачать";
 SyllabusDownloaded = "Загружено %@";
+SyllabusExamFinished = "Завершен";
+SyllabusExamInProgress = "В процессе";
+SyllabusExamStartInWeb = "Начать экзамен в Web-версии";
+SyllabusExamContinueInWeb = "Продолжить в Web-версии";
 NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
 
 /* Profile edit */
@@ -1077,6 +1076,11 @@ CourseListFilterCourseLanguageAnyTitle = "Любой";
 /* Similar Course Lists */
 SimilarCourseListHeaderTitle = "Похожие темы";
 SimilarCourseListAuthorsHeaderTitle = "Авторы курсов";
+
+/* Stepik Academy Course List */
+StepikAcademyCourseListHeaderTitle = "Скучно учиться одному?";
+StepikAcademyCourseListHeaderDescription = "Stepik Academy – это программы с поддержкой преподавателя, группы и куратора от команды Stepik c дедлайнами и проверкой заданий. Обучение платное, но оно того стоит!";
+StepikAcademyCourseListHeaderMoreButtonTitle = "Узнать больше";
 
 /* New profile */
 NewProfileRatingReputation = "Репутация %@";

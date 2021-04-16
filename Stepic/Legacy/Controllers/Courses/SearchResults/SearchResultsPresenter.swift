@@ -46,7 +46,7 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
         if self.currentCourseListFilterQuery == query {
             return
         }
-        
+
         self.currentCourseListFilterQuery = query
 
         if self.resultsVC != nil {

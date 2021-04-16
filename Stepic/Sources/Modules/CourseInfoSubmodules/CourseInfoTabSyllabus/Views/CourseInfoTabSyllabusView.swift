@@ -221,7 +221,7 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
 extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
-             self.pageScrollViewDelegate
+            self.pageScrollViewDelegate
         }
         set {
             self.pageScrollViewDelegate = newValue
@@ -230,7 +230,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsets: UIEdgeInsets {
         get {
-             self.tableView.contentInset
+            self.tableView.contentInset
         }
         set {
             self.tableView.contentInset = newValue
@@ -246,7 +246,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
 
     var contentOffset: CGPoint {
         get {
-             self.tableView.contentOffset
+            self.tableView.contentOffset
         }
         set {
             self.tableView.contentOffset = newValue
@@ -255,7 +255,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-             self.tableView.contentInsetAdjustmentBehavior
+            self.tableView.contentInsetAdjustmentBehavior
         }
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue

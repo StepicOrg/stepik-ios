@@ -16,7 +16,7 @@ final class CoursePurchasesAPI: APIEndpoint {
     }
 
     func retrieve(courseID: Course.IdType) -> Promise<([CoursePurchase], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             let params: Parameters = [
                 CoursePurchase.JSONKey.course.rawValue: courseID
             ]

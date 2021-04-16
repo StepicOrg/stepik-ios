@@ -53,7 +53,7 @@ struct AutocompleteWords {
 
     private static func loadSuggestionsFromFile(language: String) -> [String] {
         if let path = Bundle.main.path(forResource: suggestionsFilename, ofType: "plist"),
-            let words = NSDictionary(contentsOfFile: path) as? [String: [String]] {
+           let words = NSDictionary(contentsOfFile: path) as? [String: [String]] {
             return words[language] ?? []
         }
         return []

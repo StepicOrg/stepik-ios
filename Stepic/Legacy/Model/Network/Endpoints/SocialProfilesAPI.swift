@@ -13,7 +13,7 @@ final class SocialProfilesAPI: APIEndpoint {
                 "ids": ids,
                 "page": page
             ]
-            
+
             self.retrieve.requestWithFetching(
                 requestEndpoint: self.name,
                 paramName: self.name,

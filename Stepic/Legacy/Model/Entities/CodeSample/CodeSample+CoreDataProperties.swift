@@ -29,7 +29,7 @@ extension CodeSample {
 
     var input: String {
         get {
-             managedInput ?? ""
+            managedInput ?? ""
         }
         set(value) {
             managedInput = value
@@ -38,7 +38,7 @@ extension CodeSample {
 
     var output: String {
         get {
-             managedOutput ?? ""
+            managedOutput ?? ""
         }
         set(value) {
             managedOutput = value

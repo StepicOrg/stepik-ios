@@ -15,9 +15,9 @@ class CatalogBlockEntitySpec: QuickSpec {
                 testCoreDataStack = TestCoreDataStack()
             }
 
-            it("persists CatalogBlockEntity") {
+            it("persists full_course_lists") {
                 // Given
-                let json = JSON(parseJSON: JSONResponse.fullCourseLists.stringValue)
+                let json = TestData.fullCourseListsCatalogBlock
                 let catalogBlock = CatalogBlock(json: json)
 
                 // When
@@ -41,108 +41,143 @@ class CatalogBlockEntitySpec: QuickSpec {
                 expect(fetchedCatalogBlock.title) == "Онлайн-курсы"
                 expect(fetchedCatalogBlock.descriptionString) == ""
                 expect(fetchedCatalogBlock.language) == "ru"
-                expect(fetchedCatalogBlock.kind) == "full_course_lists"
-                expect(fetchedCatalogBlock.appearance) == "default"
+                expect(fetchedCatalogBlock.kind) == CatalogBlockKind.fullCourseLists.rawValue
+                expect(fetchedCatalogBlock.appearance) == CatalogBlockAppearance.default.rawValue
                 expect(fetchedCatalogBlock.isTitleVisible) == true
                 expect(fetchedCatalogBlock.content.isEmpty) == false
                 expect(fetchedCatalogBlock.content == catalogBlock.content) == true
             }
-        }
-    }
-}
 
-private enum JSONResponse {
-    case fullCourseLists
+            it("persists simple_course_lists") {
+                // Given
+                let json = TestData.simpleCourseListsCatalogBlock
+                let catalogBlock = CatalogBlock(json: json)
 
-    var stringValue: String {
-        switch self {
-        case .fullCourseLists:
-            return """
-{
-    "id": 5,
-    "position": 2,
-    "title": "Онлайн-курсы",
-    "description": "",
-    "language": "ru",
-    "platform": 1,
-    "kind": "full_course_lists",
-    "appearance": "default",
-    "is_title_visible": true,
-    "content": [
-        {
-            "id": 1,
-            "title": "Новые курсы",
-            "description": "",
-            "courses": [
-                51904,
-                56495,
-                82176,
-                84952,
-                82799,
-                71402,
-                56594,
-                84101,
-                82893,
-                78471,
-                69599
-            ],
-            "courses_count": 34
-        },
-        {
-            "id": 49,
-            "title": "Популярные курсы",
-            "description": "",
-            "courses": [
-                58852,
-                67,
-                363,
-                7798,
-                38218,
-                63054,
-                76,
-                5482,
-                512,
-                80971,
-                9737
-            ],
-            "courses_count": 1829
-        },
-        {
-            "id": 50,
-            "title": "Stepik рекомендует 👍",
-            "description": "",
-            "courses": [
-                51562,
-                575,
-                68712,
-                56365,
-                4852,
-                738
-            ],
-            "courses_count": 6
-        },
-        {
-            "id": 12,
-            "title": "Программирование для начинающих",
-            "description": "",
-            "courses": [
-                363,
-                2223,
-                67,
-                58852,
-                58973,
-                217,
-                38218,
-                5482,
-                54403,
-                187,
-                3078
-            ],
-            "courses_count": 21
-        }
-    ]
-}
-"""
+                // When
+                _ = CatalogBlockEntity(
+                    catalogBlock: catalogBlock,
+                    managedObjectContext: testCoreDataStack.managedObjectContext
+                )
+                testCoreDataStack.saveContext()
+
+                // Then
+                let request = CatalogBlockEntity.fetchRequest
+                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+
+                let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
+                expect(catalogBlocks.count) == 1
+
+                let fetchedCatalogBlock = catalogBlocks[0]
+
+                expect(fetchedCatalogBlock.id) == 7
+                expect(fetchedCatalogBlock.position) == 4
+                expect(fetchedCatalogBlock.title) == "Предметы"
+                expect(fetchedCatalogBlock.descriptionString) == ""
+                expect(fetchedCatalogBlock.language) == "ru"
+                expect(fetchedCatalogBlock.kind) == CatalogBlockKind.simpleCourseLists.rawValue
+                expect(fetchedCatalogBlock.appearance) == CatalogBlockAppearance.simpleCourseListsGrid.rawValue
+                expect(fetchedCatalogBlock.isTitleVisible) == true
+                expect(fetchedCatalogBlock.content.isEmpty) == false
+                expect(fetchedCatalogBlock.content == catalogBlock.content) == true
+            }
+
+            it("persists authors") {
+                // Given
+                let json = TestData.authorsCatalogBlock
+                let catalogBlock = CatalogBlock(json: json)
+
+                // When
+                _ = CatalogBlockEntity(
+                    catalogBlock: catalogBlock,
+                    managedObjectContext: testCoreDataStack.managedObjectContext
+                )
+                testCoreDataStack.saveContext()
+
+                // Then
+                let request = CatalogBlockEntity.fetchRequest
+                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+
+                let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
+                expect(catalogBlocks.count) == 1
+
+                let fetchedCatalogBlock = catalogBlocks[0]
+
+                expect(fetchedCatalogBlock.id) == 4
+                expect(fetchedCatalogBlock.position) == 15
+                expect(fetchedCatalogBlock.title) == "Авторы курсов"
+                expect(fetchedCatalogBlock.descriptionString) == ""
+                expect(fetchedCatalogBlock.language) == "ru"
+                expect(fetchedCatalogBlock.kind) == CatalogBlockKind.authors.rawValue
+                expect(fetchedCatalogBlock.appearance) == CatalogBlockAppearance.default.rawValue
+                expect(fetchedCatalogBlock.isTitleVisible) == true
+                expect(fetchedCatalogBlock.content.isEmpty) == false
+                expect(fetchedCatalogBlock.content == catalogBlock.content) == true
+            }
+
+            it("persists recommended_courses") {
+                // Given
+                let json = TestData.recommendedCoursesCatalogBlock
+                let catalogBlock = CatalogBlock(json: json)
+
+                // When
+                _ = CatalogBlockEntity(
+                    catalogBlock: catalogBlock,
+                    managedObjectContext: testCoreDataStack.managedObjectContext
+                )
+                testCoreDataStack.saveContext()
+
+                // Then
+                let request = CatalogBlockEntity.fetchRequest
+                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+
+                let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
+                expect(catalogBlocks.count) == 1
+
+                let fetchedCatalogBlock = catalogBlocks[0]
+
+                expect(fetchedCatalogBlock.id) == 47
+                expect(fetchedCatalogBlock.position) == 999
+                expect(fetchedCatalogBlock.title) == "Персональные рекомендации"
+                expect(fetchedCatalogBlock.descriptionString) == ""
+                expect(fetchedCatalogBlock.language) == "ru"
+                expect(fetchedCatalogBlock.kind) == CatalogBlockKind.recommendedCourses.rawValue
+                expect(fetchedCatalogBlock.appearance) == CatalogBlockAppearance.default.rawValue
+                expect(fetchedCatalogBlock.isTitleVisible) == true
+                expect(fetchedCatalogBlock.content.isEmpty) == true
+            }
+
+            it("persists specializations_stepik_academy") {
+                // Given
+                let json = TestData.specializationsStepikAcademyCatalogBlock
+                let catalogBlock = CatalogBlock(json: json)
+
+                // When
+                _ = CatalogBlockEntity(
+                    catalogBlock: catalogBlock,
+                    managedObjectContext: testCoreDataStack.managedObjectContext
+                )
+                testCoreDataStack.saveContext()
+
+                // Then
+                let request = CatalogBlockEntity.fetchRequest
+                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+
+                let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
+                expect(catalogBlocks.count) == 1
+
+                let fetchedCatalogBlock = catalogBlocks[0]
+
+                expect(fetchedCatalogBlock.id) == 15
+                expect(fetchedCatalogBlock.position) == 7
+                expect(fetchedCatalogBlock.title) == "Stepik Academy"
+                expect(fetchedCatalogBlock.descriptionString.isEmpty) == true
+                expect(fetchedCatalogBlock.language) == "ru"
+                expect(fetchedCatalogBlock.kind) == CatalogBlockKind.specializations.rawValue
+                expect(fetchedCatalogBlock.appearance) == CatalogBlockAppearance.specializationsStepikAcademy.rawValue
+                expect(fetchedCatalogBlock.isTitleVisible) == true
+                expect(fetchedCatalogBlock.content.isEmpty) == false
+                expect(fetchedCatalogBlock.content == catalogBlock.content) == true
+            }
         }
     }
 }

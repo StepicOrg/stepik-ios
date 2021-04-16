@@ -23,7 +23,7 @@ final class Submission: JSONSerializable, Hashable {
     var attempt: Attempt?
     var sessionID: Int?
     var session: ReviewSessionDataPlainObject?
-    var isLocal: Bool = false
+    var isLocal = false
 
     var status: SubmissionStatus? {
         get {
