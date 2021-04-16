@@ -21,6 +21,17 @@ def shared_pods
   pod 'DeviceKit', '4.3.0'
   pod 'PromiseKit', '6.13.1'
   pod 'SwiftLint', '0.43.1'
+
+  if ENV['FASTLANE_BETA_PROFILE'] == 'true'
+    pod 'FLEX',
+        :git => 'https://github.com/ivan-magda/FLEX.git',
+        :branch => 'master'
+  else
+    pod 'FLEX',
+        :git => 'https://github.com/ivan-magda/FLEX.git',
+        :branch => 'master',
+        :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
+  end
 end
 
 def all_pods
