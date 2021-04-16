@@ -1,8 +1,8 @@
 import XCTest
 /* WARNING!
-   This tests needs make sure 'Hardware -> Keyboard -> Connect hardware keyboard' is off IN SIMULATOR.
-   Use "defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false" in CI
-*/
+ This tests needs make sure 'Hardware -> Keyboard -> Connect hardware keyboard' is off IN SIMULATOR.
+ Use "defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false" in CI
+ */
 
 class StepicUITests: XCTestCase {
     override func setUp() {

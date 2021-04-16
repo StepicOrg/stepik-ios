@@ -12,8 +12,6 @@ enum Common {
             return false
         }
         let timestamp = Int64(Date().timeIntervalSince1970)
-        currentUserName = "ios_autotest_\(timestamp)"
-        currentUserEmail = "ios_autotest_\(timestamp)@stepik.org"
         // register new user
         let app = XCUIApplication()
         app.launch()
@@ -25,13 +23,13 @@ enum Common {
             app.buttons["Sign In"].staticTexts["Sign In"].tap()
             app.buttons["Sign Up"].tap()
             app.textFields["Name"].tap()
-            app.textFields["Name"].typeText(currentUserName)
+            app.textFields["Name"].typeText("ios_autotest_\(timestamp)")
             app.textFields["Email"].tap()
             sleep(2)
             Common.pasteTextFieldText(
                 app: app,
                 element: app.textFields["Email"],
-                value: currentUserEmail,
+                value: "ios_autotest_\(timestamp)@stepik.org",
                 clearText: false
             )
             app.secureTextFields["Password"].tap()
@@ -43,6 +41,10 @@ enum Common {
                 clearText: false
             )
             app.buttons["Register"].tap()
+            if userLoggedIn(app: app) {
+                currentUserName = "ios_autotest_\(timestamp)"
+                currentUserEmail = "ios_autotest_\(timestamp)@stepik.org"
+            } else { XCTFail("User setup failed") }
         }
         logOut(app: app)
         app.terminate()
