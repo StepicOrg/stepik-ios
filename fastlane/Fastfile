@@ -233,6 +233,8 @@ platform :ios do
     UI.user_error!("Wrong scheme parameter") if scheme.nil?
     UI.user_error!("Firebase App ID is required") if firebase_app_id.nil?
 
+    ENV["FASTLANE_BETA_PROFILE"] = "true"
+
     clear_derived_data
     cocoapods(repo_update: true)
 
@@ -473,6 +475,10 @@ platform :ios do
       channel: "#ios-ci",
       link_names: true,
     )
+  end
+
+  before_all do
+    ENV["FASTLANE_BETA_PROFILE"] = "false"
   end
 
   after_all do |lane, options|
