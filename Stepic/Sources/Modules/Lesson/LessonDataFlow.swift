@@ -97,6 +97,19 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present exam alert
+    enum LessonUnitNavigationExamPresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {

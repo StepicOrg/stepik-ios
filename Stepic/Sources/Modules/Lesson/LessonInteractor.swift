@@ -439,6 +439,13 @@ extension LessonInteractor: StepOutputProtocol {
             return false
         }
 
+        if targetSection.testSectionAction != nil {
+            return false
+        }
+        if targetSection.isReachable && !targetSection.isExam {
+            return false
+        }
+
         if !targetSection.isRequirementSatisfied,
            let requiredSectionID = targetSection.requiredSectionID {
             self.presentUnitNavigationRequirementNotSatisfied(
@@ -451,7 +458,10 @@ extension LessonInteractor: StepOutputProtocol {
             return true
         }
 
-        if !targetSection.isReachable || targetSection.isExam || targetSection.unitsArray.isEmpty {
+        if targetSection.isExam {
+            self.presenter.presentLessonUnitNavigationExam(
+                response: .init(currentSection: currentSection, targetSection: targetSection)
+            )
             return true
         }
 

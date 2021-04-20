@@ -17,6 +17,7 @@ protocol LessonPresenterProtocol {
         response: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.Response
     )
     func presentLessonUnitNavigationError(response: LessonDataFlow.LessonUnitNavigationErrorPresentation.Response)
+    func presentLessonUnitNavigationExam(response: LessonDataFlow.LessonUnitNavigationExamPresentation.Response)
 }
 
 final class LessonPresenter: LessonPresenterProtocol {
@@ -120,7 +121,7 @@ final class LessonPresenter: LessonPresenterProtocol {
         response: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.Response
     ) {
         let title = String(
-            format: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedTitle", comment: ""),
+            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
             arguments: [response.currentSection.title]
         )
 
@@ -154,6 +155,20 @@ final class LessonPresenter: LessonPresenterProtocol {
         )
 
         self.viewController?.displayLessonUnitNavigationError(viewModel: .init(title: title, message: message))
+    }
+
+    func presentLessonUnitNavigationExam(response: LessonDataFlow.LessonUnitNavigationExamPresentation.Response) {
+        let title = String(
+            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
+            arguments: [response.currentSection.title]
+        )
+
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationExamMessage", comment: ""),
+            arguments: [response.targetSection.title]
+        )
+
+        self.viewController?.displayLessonUnitNavigationExam(viewModel: .init(title: title, message: message))
     }
 
     // MAKE: Private API

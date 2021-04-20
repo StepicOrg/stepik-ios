@@ -22,6 +22,7 @@ protocol LessonViewControllerProtocol: AnyObject {
         viewModel: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.ViewModel
     )
     func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel)
+    func displayLessonUnitNavigationExam(viewModel: LessonDataFlow.LessonUnitNavigationExamPresentation.ViewModel)
 }
 
 // MARK: - LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
@@ -583,7 +584,7 @@ extension LessonViewController: LessonViewControllerProtocol {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(
             UIAlertAction(
-                title: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedActionSyllabus", comment: ""),
+                title: NSLocalizedString("LessonUnitNavigationActionSyllabus", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
                     self?.navigationController?.popViewController(animated: true)
@@ -603,6 +604,21 @@ extension LessonViewController: LessonViewControllerProtocol {
     func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+        self.present(alert, animated: true)
+    }
+
+    func displayLessonUnitNavigationExam(viewModel: LessonDataFlow.LessonUnitNavigationExamPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationActionSyllabus", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+        )
 
         self.present(alert, animated: true)
     }
