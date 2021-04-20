@@ -9,13 +9,28 @@ protocol LessonProviderProtocol {
     func fetchAssignments(ids: [Assignment.IdType], dataSourceType: DataSourceType) -> Promise<[Assignment]>
     func fetchProgresses(ids: [Progress.IdType], dataSourceType: DataSourceType) -> Promise<[Progress]>
     func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>>
+    func fetchSection(id: Section.IdType, dataSourceType: DataSourceType) -> Promise<Section?>
 
     func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void>
+}
+
+extension LessonProviderProtocol {
+    func fetchSectionFromCacheOrNetwork(id: Section.IdType) -> Promise<Section?> {
+        self.fetchSection(id: id, dataSourceType: .cache).then { cachedSection -> Promise<Section?> in
+            if let cachedSection = cachedSection {
+                return .value(cachedSection)
+            } else {
+                return self.fetchSection(id: id, dataSourceType: .remote)
+            }
+        }
+    }
 }
 
 final class LessonProvider: LessonProviderProtocol {
     private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
     private let lessonsNetworkService: LessonsNetworkServiceProtocol
+    private let sectionsPersistenceService: SectionsPersistenceServiceProtocol
+    private let sectionsNetworkService: SectionsNetworkServiceProtocol
     private let unitsPersistenceService: UnitsPersistenceServiceProtocol
     private let unitsNetworkService: UnitsNetworkServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
@@ -29,6 +44,8 @@ final class LessonProvider: LessonProviderProtocol {
     init(
         lessonsPersistenceService: LessonsPersistenceServiceProtocol,
         lessonsNetworkService: LessonsNetworkServiceProtocol,
+        sectionsPersistenceService: SectionsPersistenceServiceProtocol,
+        sectionsNetworkService: SectionsNetworkServiceProtocol,
         unitsPersistenceService: UnitsPersistenceServiceProtocol,
         unitsNetworkService: UnitsNetworkServiceProtocol,
         stepsPersistenceService: StepsPersistenceServiceProtocol,
@@ -41,6 +58,8 @@ final class LessonProvider: LessonProviderProtocol {
     ) {
         self.lessonsPersistenceService = lessonsPersistenceService
         self.lessonsNetworkService = lessonsNetworkService
+        self.sectionsPersistenceService = sectionsPersistenceService
+        self.sectionsNetworkService = sectionsNetworkService
         self.unitsPersistenceService = unitsPersistenceService
         self.unitsNetworkService = unitsNetworkService
         self.stepsPersistenceService = stepsPersistenceService
@@ -197,6 +216,23 @@ final class LessonProvider: LessonProviderProtocol {
                 return Promise.value(result)
             }.done { result in
                 seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchSection(id: Section.IdType, dataSourceType: DataSourceType) -> Promise<Section?> {
+        Promise { seal in
+            firstly { () -> Promise<[Section]> in
+                switch dataSourceType {
+                case .remote:
+                    return self.sectionsNetworkService.fetch(ids: [id])
+                case .cache:
+                    return self.sectionsPersistenceService.fetch(ids: [id])
+                }
+            }.done { sections in
+                seal.fulfill(sections.first)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

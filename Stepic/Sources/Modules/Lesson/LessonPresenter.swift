@@ -13,6 +13,14 @@ protocol LessonPresenterProtocol {
     func presentSubmissions(response: LessonDataFlow.SubmissionsPresentation.Response)
     func presentStepTextUpdate(response: LessonDataFlow.StepTextUpdate.Response)
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response)
+    func presentUnitNavigationUnreachableState(response: LessonDataFlow.UnitNavigationUnreachablePresentation.Response)
+    func presentUnitNavigationExamState(response: LessonDataFlow.UnitNavigationExamPresentation.Response)
+    func presentUnitNavigationRequirementNotSatisfiedState(
+        response: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.Response
+    )
+    func presentUnitNavigationClosedByBeginDateState(
+        response: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.Response
+    )
 }
 
 final class LessonPresenter: LessonPresenterProtocol {
@@ -110,6 +118,91 @@ final class LessonPresenter: LessonPresenterProtocol {
 
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentUnitNavigationRequirementNotSatisfiedState(
+        response: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.Response
+    ) {
+        let title = String(
+            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
+            arguments: [response.currentSection.title]
+        )
+
+        let requiredPointsCount: String = {
+            guard let requiredSectionProgress = response.requiredSection.progress else {
+                return FormatterHelper.pointsCount(0).replacingOccurrences(of: "0", with: "N/A")
+            }
+
+            let requiredPoints = Int(
+                (Float(requiredSectionProgress.cost) * Float(response.targetSection.requiredPercent) / 100).rounded(.up)
+            )
+
+            return FormatterHelper.pointsCount(requiredPoints)
+        }()
+
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedMessage", comment: ""),
+            arguments: [response.targetSection.title, requiredPointsCount, response.requiredSection.title]
+        )
+
+        self.viewController?.displayUnitNavigationRequirementNotSatisfiedState(
+            viewModel: .init(title: title, message: message)
+        )
+    }
+
+    func presentUnitNavigationUnreachableState(
+        response: LessonDataFlow.UnitNavigationUnreachablePresentation.Response
+    ) {
+        let title = NSLocalizedString("Error", comment: "")
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationCommonErrorMessage", comment: ""),
+            arguments: [response.targetSection.title]
+        )
+
+        self.viewController?.displayUnitNavigationUnreachableState(viewModel: .init(title: title, message: message))
+    }
+
+    func presentUnitNavigationExamState(response: LessonDataFlow.UnitNavigationExamPresentation.Response) {
+        let title = String(
+            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
+            arguments: [response.currentSection.title]
+        )
+
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationExamMessage", comment: ""),
+            arguments: [response.targetSection.title]
+        )
+
+        self.viewController?.displayUnitNavigationExamState(viewModel: .init(title: title, message: message))
+    }
+
+    func presentUnitNavigationClosedByBeginDateState(
+        response: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.Response
+    ) {
+        let title = String(
+            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
+            arguments: [response.currentSection.title]
+        )
+
+        let formattedBeginDate: String = {
+            guard let beginDate = response.targetSection.beginDate else {
+                return "N/A"
+            }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+
+            return dateFormatter.string(from: beginDate)
+        }()
+
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationClosedByBeginDateMessage", comment: ""),
+            arguments: [response.targetUnit.lesson?.title ?? "N/A", formattedBeginDate]
+        )
+
+        self.viewController?.displayUnitNavigationClosedByBeginDateState(
+            viewModel: .init(title: title, message: message)
+        )
     }
 
     // MAKE: Private API

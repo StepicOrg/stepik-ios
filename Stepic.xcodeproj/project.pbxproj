@@ -228,7 +228,6 @@
 		089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */; };
 		089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */; };
 		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
-		08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
@@ -476,8 +475,6 @@
 		2C223A1524A0CC91002E4F02 /* IAPServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */; };
 		2C2365E421078CEF00C99742 /* StoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* StoredFileManager.swift */; };
 		2C2385B024E3C38F0049BA42 /* FullscreenImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2385AF24E3C38F0049BA42 /* FullscreenImageViewer.swift */; };
-		2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12621AD8907001DCF89 /* NextLessonService.swift */; };
-		2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */; };
 		2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
 		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
@@ -1919,7 +1916,6 @@
 		089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStorageServiceProtocol.swift; sourceTree = "<group>"; };
 		089877B521407AB50065DFA2 /* Model_profile_staff_v24.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_staff_v24.xcdatamodel; sourceTree = "<group>"; };
 		089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionNavigationDelegate.swift; sourceTree = "<group>"; };
 		08A1256E1BDE8E460066B2B2 /* Sorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorter.swift; sourceTree = "<group>"; };
 		08A1257A1BDEBCC90066B2B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2197,8 +2193,6 @@
 		2C22F3E2226E2A7100467F54 /* Model_course_paid.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_paid.xcdatamodel; sourceTree = "<group>"; };
 		2C2365E321078CEF00C99742 /* StoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFileManager.swift; sourceTree = "<group>"; };
 		2C2385AF24E3C38F0049BA42 /* FullscreenImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenImageViewer.swift; sourceTree = "<group>"; };
-		2C23C12621AD8907001DCF89 /* NextLessonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonService.swift; sourceTree = "<group>"; };
-		2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonServiceTests.swift; sourceTree = "<group>"; };
 		2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthProviders.swift; sourceTree = "<group>"; };
 		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
@@ -4341,7 +4335,6 @@
 			isa = PBXGroup;
 			children = (
 				088FD8161FB242B3008A2953 /* CourseSubscriber.swift */,
-				2C23C12621AD8907001DCF89 /* NextLessonService.swift */,
 				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
 				089200722199DFF000083627 /* DeepLinks */,
 			);
@@ -4613,7 +4606,6 @@
 			children = (
 				089504821F27C5C600EEC939 /* FullHeightTableView.swift */,
 				08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */,
-				08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */,
 				2CA4CF48242A0D80008BC4E8 /* AdaptiveSteps */,
 				2CA4CF56242A0F39008BC4E8 /* Alerts */,
 				2CA4CF59242A0F7C008BC4E8 /* Certificates */,
@@ -5911,7 +5903,6 @@
 				2C2485482101EE3E006F8858 /* DownloaderTests.swift */,
 				2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */,
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
-				2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */,
 				2CCDD20024DBB61100A48EE0 /* ProtectedTests.swift */,
 				62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */,
 				2C546C1623DA0E6100352F27 /* ExtensionsTests */,
@@ -9474,7 +9465,6 @@
 				2CF8DF8825F26B9300F577C2 /* TestData.swift in Sources */,
 				2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */,
 				2CF24F642390040F002DBD0F /* BlockTypeSpec.swift in Sources */,
-				2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 				0805FE481F0E584B001226B4 /* CodePlaygroundTests.swift in Sources */,
 				2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */,
@@ -9735,7 +9725,6 @@
 				082E35B020B5B14A006E28F9 /* StorageRecordData.swift in Sources */,
 				2CDA1B052613972400E36BF7 /* ExamSessionsAPI.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
-				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */,
 				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
 				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
@@ -10072,7 +10061,6 @@
 				2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */,
 				2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */,
 				2C53B48F2588D80600E53779 /* SimpleCourseListCollectionViewDataSource.swift in Sources */,
-				2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */,
 				089200712199DB9900083627 /* BranchService.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */,

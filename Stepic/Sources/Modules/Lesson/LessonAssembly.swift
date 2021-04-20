@@ -29,6 +29,8 @@ final class LessonAssembly: Assembly {
         let provider = LessonProvider(
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
+            sectionsPersistenceService: SectionsPersistenceService(),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
             unitsPersistenceService: UnitsPersistenceService(),
             unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
             stepsPersistenceService: StepsPersistenceService(),
