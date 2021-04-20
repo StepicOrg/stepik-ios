@@ -850,6 +850,7 @@ LessonUnitNavigationRequirementNotSatisfiedMessage = "To unlock \"%@\" module, y
 LessonUnitNavigationActionSyllabus = "Go to Syllabus";
 LessonUnitNavigationRequirementNotSatisfiedActionContinue = "Continue Learning";
 LessonUnitNavigationExamMessage = "Next module \"%@\" is exam. You can start it from the course syllabus.";
+LessonUnitNavigationClosedByBeginDateMessage = "Next course lesson (\"%@\") will be available %@.";
 DiscussionsButtonTitle = "Show Comments (%@)";
 NoDiscussionsButtonTitle = "Leave a Comment";
 DisabledDiscussionsButtonTitle = "Comments Disabled";

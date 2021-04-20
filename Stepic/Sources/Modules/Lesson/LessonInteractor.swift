@@ -458,6 +458,17 @@ extension LessonInteractor: StepOutputProtocol {
             return true
         }
 
+        if let beginDate = targetSection.beginDate, Date() < beginDate {
+            self.presentLessonUnitNavigationClosedByBeginDate(
+                currentSection: currentSection,
+                targetSection: targetSection,
+                targetUnit: targetUnit
+            ).catch { _ in
+                self.presenter.presentLessonUnitNavigationError(response: .init(targetSection: targetSection))
+            }
+            return true
+        }
+
         if targetSection.isExam {
             self.presenter.presentLessonUnitNavigationExam(
                 response: .init(currentSection: currentSection, targetSection: targetSection)
@@ -497,6 +508,41 @@ extension LessonInteractor: StepOutputProtocol {
                         currentSection: currentSection,
                         targetSection: targetSection,
                         requiredSection: requiredSection
+                    )
+                )
+            }
+    }
+
+    private func presentLessonUnitNavigationClosedByBeginDate(
+        currentSection: Section,
+        targetSection: Section,
+        targetUnit: Unit
+    ) -> Promise<Void> {
+        self.provider
+            .fetchLesson(id: targetUnit.lessonId, dataSourceType: .cache)
+            .then { cachedLesson -> Promise<Lesson?> in
+                if let cachedLesson = cachedLesson {
+                    return .value(cachedLesson)
+                } else {
+                    return self.provider.fetchLesson(
+                        id: targetUnit.lessonId,
+                        dataSourceType: .remote
+                    ).then { lesson -> Promise<Lesson?> in
+                        if let lesson = lesson {
+                            lesson.managedUnit = targetUnit
+                            CoreDataHelper.shared.save()
+                        }
+                        return .value(lesson)
+                    }
+                }
+            }
+            .compactMap { $0 }
+            .done { _ in
+                self.presenter.presentLessonUnitNavigationClosedByBeginDate(
+                    response: .init(
+                        currentSection: currentSection,
+                        targetSection: targetSection,
+                        targetUnit: targetUnit
                     )
                 )
             }

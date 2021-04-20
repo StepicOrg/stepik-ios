@@ -5,6 +5,7 @@ import SVProgressHUD
 import Tabman
 import UIKit
 
+// swiftlint:disable file_length
 protocol LessonViewControllerProtocol: AnyObject {
     func displayLesson(viewModel: LessonDataFlow.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: LessonDataFlow.LessonNavigationLoad.ViewModel)
@@ -23,6 +24,9 @@ protocol LessonViewControllerProtocol: AnyObject {
     )
     func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel)
     func displayLessonUnitNavigationExam(viewModel: LessonDataFlow.LessonUnitNavigationExamPresentation.ViewModel)
+    func displayLessonUnitNavigationClosedByBeginDate(
+        viewModel: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.ViewModel
+    )
 }
 
 // MARK: - LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
@@ -609,6 +613,23 @@ extension LessonViewController: LessonViewControllerProtocol {
     }
 
     func displayLessonUnitNavigationExam(viewModel: LessonDataFlow.LessonUnitNavigationExamPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationActionSyllabus", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+
+    func displayLessonUnitNavigationClosedByBeginDate(
+        viewModel: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.ViewModel
+    ) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(
             UIAlertAction(

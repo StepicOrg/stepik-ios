@@ -18,6 +18,9 @@ protocol LessonPresenterProtocol {
     )
     func presentLessonUnitNavigationError(response: LessonDataFlow.LessonUnitNavigationErrorPresentation.Response)
     func presentLessonUnitNavigationExam(response: LessonDataFlow.LessonUnitNavigationExamPresentation.Response)
+    func presentLessonUnitNavigationClosedByBeginDate(
+        response: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.Response
+    )
 }
 
 final class LessonPresenter: LessonPresenterProtocol {
@@ -169,6 +172,35 @@ final class LessonPresenter: LessonPresenterProtocol {
         )
 
         self.viewController?.displayLessonUnitNavigationExam(viewModel: .init(title: title, message: message))
+    }
+
+    func presentLessonUnitNavigationClosedByBeginDate(
+        response: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.Response
+    ) {
+        let title = String(
+            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
+            arguments: [response.currentSection.title]
+        )
+
+        let formattedBeginDate: String = {
+            guard let beginDate = response.targetSection.beginDate else {
+                return "N/A"
+            }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+
+            return dateFormatter.string(from: beginDate)
+        }()
+
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationClosedByBeginDateMessage", comment: ""),
+            arguments: [response.targetUnit.lesson?.title ?? "N/A", formattedBeginDate]
+        )
+
+        self.viewController?.displayLessonUnitNavigationClosedByBeginDate(
+            viewModel: .init(title: title, message: message)
+        )
     }
 
     // MAKE: Private API

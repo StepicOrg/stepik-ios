@@ -110,6 +110,20 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present alert with about unit navigation error closed by begin date
+    enum LessonUnitNavigationClosedByBeginDatePresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let targetUnit: Unit
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {

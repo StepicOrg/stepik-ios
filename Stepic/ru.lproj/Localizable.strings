@@ -851,6 +851,7 @@ LessonUnitNavigationActionSyllabus = "В содержание";
 LessonUnitNavigationRequirementNotSatisfiedActionContinue = "К задачам";
 LessonUnitNavigationFinishedModuleTitle = "Поздравляем!\nВы закончили модуль \"%@\".";
 LessonUnitNavigationExamMessage = "Следующий модуль \"%@\" является экзаменом. Вы можете начать его из Расписания курса.";
+LessonUnitNavigationClosedByBeginDateMessage = "Следующий урок (\"%@\") из этого курса будет доступен %@.";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
 DisabledDiscussionsButtonTitle = "Комментарии отключены";
