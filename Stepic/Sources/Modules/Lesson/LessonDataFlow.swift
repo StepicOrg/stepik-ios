@@ -71,6 +71,32 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present alert with about unit navigation error requirement not satisfied
+    enum LessonUnitNavigationRequirementNotSatisfiedPresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let requiredSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present alert with common unit navigation error description
+    enum LessonUnitNavigationErrorPresentation {
+        struct Response {
+            let targetSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {

@@ -13,6 +13,10 @@ protocol LessonPresenterProtocol {
     func presentSubmissions(response: LessonDataFlow.SubmissionsPresentation.Response)
     func presentStepTextUpdate(response: LessonDataFlow.StepTextUpdate.Response)
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response)
+    func presentLessonUnitNavigationRequirementNotSatisfied(
+        response: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.Response
+    )
+    func presentLessonUnitNavigationError(response: LessonDataFlow.LessonUnitNavigationErrorPresentation.Response)
 }
 
 final class LessonPresenter: LessonPresenterProtocol {
@@ -110,6 +114,46 @@ final class LessonPresenter: LessonPresenterProtocol {
 
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentLessonUnitNavigationRequirementNotSatisfied(
+        response: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.Response
+    ) {
+        let title = String(
+            format: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedTitle", comment: ""),
+            arguments: [response.currentSection.title]
+        )
+
+        let requiredPointsCount: String = {
+            guard let requiredSectionProgress = response.requiredSection.progress else {
+                return FormatterHelper.pointsCount(0).replacingOccurrences(of: "0", with: "N/A")
+            }
+
+            let requiredPoints = Int(
+                (Float(requiredSectionProgress.cost) * Float(response.targetSection.requiredPercent) / 100).rounded(.up)
+            )
+
+            return FormatterHelper.pointsCount(requiredPoints)
+        }()
+
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedMessage", comment: ""),
+            arguments: [response.targetSection.title, requiredPointsCount, response.requiredSection.title]
+        )
+
+        self.viewController?.displayLessonUnitNavigationRequirementNotSatisfied(
+            viewModel: .init(title: title, message: message)
+        )
+    }
+
+    func presentLessonUnitNavigationError(response: LessonDataFlow.LessonUnitNavigationErrorPresentation.Response) {
+        let title = NSLocalizedString("Error", comment: "")
+        let message = String(
+            format: NSLocalizedString("LessonUnitNavigationCommonErrorMessage", comment: ""),
+            arguments: [response.targetSection.title]
+        )
+
+        self.viewController?.displayLessonUnitNavigationError(viewModel: .init(title: title, message: message))
     }
 
     // MAKE: Private API

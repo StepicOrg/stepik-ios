@@ -18,6 +18,10 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayLessonUnitNavigationRequirementNotSatisfied(
+        viewModel: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    )
+    func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel)
 }
 
 // MARK: - LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
@@ -571,6 +575,36 @@ extension LessonViewController: LessonViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    func displayLessonUnitNavigationRequirementNotSatisfied(
+        viewModel: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    ) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedActionSyllabus", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedActionContinue", comment: ""),
+                style: .cancel
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+
+    func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+        self.present(alert, animated: true)
     }
 }
 

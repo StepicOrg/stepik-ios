@@ -844,6 +844,11 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 /* New lesson & step */
 NextLessonNavigation = "Next Lesson";
 PreviousLessonNavigation = "Previous Lesson";
+LessonUnitNavigationCommonErrorMessage = "Couldn't open \"%@\" module. Please try again later.";
+LessonUnitNavigationRequirementNotSatisfiedTitle = "Congratulations!\nYou finished \"%@\" module.";
+LessonUnitNavigationRequirementNotSatisfiedMessage = "To unlock \"%@\" module, you need to score %@ in \"%@\" module.";
+LessonUnitNavigationRequirementNotSatisfiedActionSyllabus = "Go to Syllabus";
+LessonUnitNavigationRequirementNotSatisfiedActionContinue = "Continue Learning";
 DiscussionsButtonTitle = "Show Comments (%@)";
 NoDiscussionsButtonTitle = "Leave a Comment";
 DisabledDiscussionsButtonTitle = "Comments Disabled";

@@ -327,9 +327,14 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.didLoadFromCache = false
-        self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+        let didPresentUnitNavigationError = self.presentUnitNavigationErrorIfNeeded(targetUnit: unit)
+
+        if !didPresentUnitNavigationError {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+            self.didLoadFromCache = false
+
+            self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+        }
     }
 
     func handleNextUnitNavigation() {
@@ -392,13 +397,18 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.didLoadFromCache = false
-        self.refreshLesson(context: .unit(id: unit.id)).done {
-            if autoplayNext {
-                self.autoplayCurrentStep()
-            }
-        }.cauterize()
+        let didPresentUnitNavigationError = self.presentUnitNavigationErrorIfNeeded(targetUnit: unit)
+
+        if !didPresentUnitNavigationError {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+            self.didLoadFromCache = false
+
+            self.refreshLesson(context: .unit(id: unit.id)).done {
+                if autoplayNext {
+                    self.autoplayCurrentStep()
+                }
+            }.cauterize()
+        }
     }
 
     private func navigateToStep(at index: Int, autoplayNext: Bool) {
@@ -421,6 +431,65 @@ extension LessonInteractor: StepOutputProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoplayDelay) {
             self.presenter.presentCurrentStepAutoplay(response: .init())
         }
+    }
+
+    private func presentUnitNavigationErrorIfNeeded(targetUnit: Unit) -> Bool {
+        guard let currentSection = self.currentUnit?.section,
+              let targetSection = targetUnit.section else {
+            return false
+        }
+
+        if !targetSection.isRequirementSatisfied,
+           let requiredSectionID = targetSection.requiredSectionID {
+            self.presentUnitNavigationRequirementNotSatisfied(
+                currentSection: currentSection,
+                targetSection: targetSection,
+                requiredSectionID: requiredSectionID
+            ).catch { _ in
+                self.presenter.presentLessonUnitNavigationError(response: .init(targetSection: targetSection))
+            }
+            return true
+        }
+
+        if !targetSection.isReachable || targetSection.isExam || targetSection.unitsArray.isEmpty {
+            return true
+        }
+
+        return false
+    }
+
+    private func presentUnitNavigationRequirementNotSatisfied(
+        currentSection: Section,
+        targetSection: Section,
+        requiredSectionID: Section.IdType
+    ) -> Promise<Void> {
+        self.provider
+            .fetchSectionFromCacheOrNetwork(id: requiredSectionID)
+            .compactMap { $0 }
+            .then { section -> Promise<Section> in
+                if section.progress == nil,
+                   let progressID = section.progressId {
+                    return self.provider.fetchProgresses(
+                        ids: [progressID],
+                        dataSourceType: .remote
+                    ).then { progresses -> Promise<Section> in
+                        section.progress = progresses.first
+                        CoreDataHelper.shared.save()
+                        return .value(section)
+                    }
+                } else {
+                    return .value(section)
+                }
+            }
+            .done { requiredSection in
+                self.presenter.presentLessonUnitNavigationRequirementNotSatisfied(
+                    response: .init(
+                        currentSection: currentSection,
+                        targetSection: targetSection,
+                        requiredSection: requiredSection
+                    )
+                )
+            }
     }
 }
 
