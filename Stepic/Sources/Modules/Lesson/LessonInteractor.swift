@@ -327,9 +327,9 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        let didPresentUnitNavigationError = self.presentUnitNavigationErrorIfNeeded(targetUnit: unit)
+        let didPresentUnreachableState = self.presentUnreachableUnitNavigationState(targetUnit: unit)
 
-        if !didPresentUnitNavigationError {
+        if !didPresentUnreachableState {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
             self.didLoadFromCache = false
 
@@ -397,9 +397,9 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        let didPresentUnitNavigationError = self.presentUnitNavigationErrorIfNeeded(targetUnit: unit)
+        let didPresentUnreachableState = self.presentUnreachableUnitNavigationState(targetUnit: unit)
 
-        if !didPresentUnitNavigationError {
+        if !didPresentUnreachableState {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
             self.didLoadFromCache = false
 
@@ -433,7 +433,7 @@ extension LessonInteractor: StepOutputProtocol {
         }
     }
 
-    private func presentUnitNavigationErrorIfNeeded(targetUnit: Unit) -> Bool {
+    private func presentUnreachableUnitNavigationState(targetUnit: Unit) -> Bool {
         guard let currentSection = self.currentUnit?.section,
               let targetSection = targetUnit.section else {
             return false
@@ -448,29 +448,29 @@ extension LessonInteractor: StepOutputProtocol {
 
         if !targetSection.isRequirementSatisfied,
            let requiredSectionID = targetSection.requiredSectionID {
-            self.presentUnitNavigationRequirementNotSatisfied(
+            self.presentRequirementNotSatisfiedUnitNavigationState(
                 currentSection: currentSection,
                 targetSection: targetSection,
                 requiredSectionID: requiredSectionID
             ).catch { _ in
-                self.presenter.presentLessonUnitNavigationError(response: .init(targetSection: targetSection))
+                self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
             }
             return true
         }
 
         if let beginDate = targetSection.beginDate, Date() < beginDate {
-            self.presentLessonUnitNavigationClosedByBeginDate(
+            self.presentClosedByBeginDateUnitNavigationState(
                 currentSection: currentSection,
                 targetSection: targetSection,
                 targetUnit: targetUnit
             ).catch { _ in
-                self.presenter.presentLessonUnitNavigationError(response: .init(targetSection: targetSection))
+                self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
             }
             return true
         }
 
         if targetSection.isExam {
-            self.presenter.presentLessonUnitNavigationExam(
+            self.presenter.presentUnitNavigationExamState(
                 response: .init(currentSection: currentSection, targetSection: targetSection)
             )
             return true
@@ -479,7 +479,7 @@ extension LessonInteractor: StepOutputProtocol {
         return false
     }
 
-    private func presentUnitNavigationRequirementNotSatisfied(
+    private func presentRequirementNotSatisfiedUnitNavigationState(
         currentSection: Section,
         targetSection: Section,
         requiredSectionID: Section.IdType
@@ -503,7 +503,7 @@ extension LessonInteractor: StepOutputProtocol {
                 }
             }
             .done { requiredSection in
-                self.presenter.presentLessonUnitNavigationRequirementNotSatisfied(
+                self.presenter.presentUnitNavigationRequirementNotSatisfiedState(
                     response: .init(
                         currentSection: currentSection,
                         targetSection: targetSection,
@@ -513,15 +513,15 @@ extension LessonInteractor: StepOutputProtocol {
             }
     }
 
-    private func presentLessonUnitNavigationClosedByBeginDate(
+    private func presentClosedByBeginDateUnitNavigationState(
         currentSection: Section,
         targetSection: Section,
         targetUnit: Unit
     ) -> Promise<Void> {
         self.provider
             .fetchLesson(id: targetUnit.lessonId, dataSourceType: .cache)
-            .then { cachedLesson -> Promise<Lesson?> in
-                if let cachedLesson = cachedLesson {
+            .then { cachedLessonOrNil -> Promise<Lesson?> in
+                if let cachedLesson = cachedLessonOrNil {
                     return .value(cachedLesson)
                 } else {
                     return self.provider.fetchLesson(
@@ -536,9 +536,8 @@ extension LessonInteractor: StepOutputProtocol {
                     }
                 }
             }
-            .compactMap { $0 }
             .done { _ in
-                self.presenter.presentLessonUnitNavigationClosedByBeginDate(
+                self.presenter.presentUnitNavigationClosedByBeginDateState(
                     response: .init(
                         currentSection: currentSection,
                         targetSection: targetSection,

@@ -13,13 +13,13 @@ protocol LessonPresenterProtocol {
     func presentSubmissions(response: LessonDataFlow.SubmissionsPresentation.Response)
     func presentStepTextUpdate(response: LessonDataFlow.StepTextUpdate.Response)
     func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response)
-    func presentLessonUnitNavigationRequirementNotSatisfied(
-        response: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.Response
+    func presentUnitNavigationUnreachableState(response: LessonDataFlow.UnitNavigationUnreachablePresentation.Response)
+    func presentUnitNavigationExamState(response: LessonDataFlow.UnitNavigationExamPresentation.Response)
+    func presentUnitNavigationRequirementNotSatisfiedState(
+        response: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.Response
     )
-    func presentLessonUnitNavigationError(response: LessonDataFlow.LessonUnitNavigationErrorPresentation.Response)
-    func presentLessonUnitNavigationExam(response: LessonDataFlow.LessonUnitNavigationExamPresentation.Response)
-    func presentLessonUnitNavigationClosedByBeginDate(
-        response: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.Response
+    func presentUnitNavigationClosedByBeginDateState(
+        response: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.Response
     )
 }
 
@@ -120,8 +120,8 @@ final class LessonPresenter: LessonPresenterProtocol {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
-    func presentLessonUnitNavigationRequirementNotSatisfied(
-        response: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.Response
+    func presentUnitNavigationRequirementNotSatisfiedState(
+        response: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.Response
     ) {
         let title = String(
             format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
@@ -145,22 +145,24 @@ final class LessonPresenter: LessonPresenterProtocol {
             arguments: [response.targetSection.title, requiredPointsCount, response.requiredSection.title]
         )
 
-        self.viewController?.displayLessonUnitNavigationRequirementNotSatisfied(
+        self.viewController?.displayUnitNavigationRequirementNotSatisfiedState(
             viewModel: .init(title: title, message: message)
         )
     }
 
-    func presentLessonUnitNavigationError(response: LessonDataFlow.LessonUnitNavigationErrorPresentation.Response) {
+    func presentUnitNavigationUnreachableState(
+        response: LessonDataFlow.UnitNavigationUnreachablePresentation.Response
+    ) {
         let title = NSLocalizedString("Error", comment: "")
         let message = String(
             format: NSLocalizedString("LessonUnitNavigationCommonErrorMessage", comment: ""),
             arguments: [response.targetSection.title]
         )
 
-        self.viewController?.displayLessonUnitNavigationError(viewModel: .init(title: title, message: message))
+        self.viewController?.displayUnitNavigationUnreachableState(viewModel: .init(title: title, message: message))
     }
 
-    func presentLessonUnitNavigationExam(response: LessonDataFlow.LessonUnitNavigationExamPresentation.Response) {
+    func presentUnitNavigationExamState(response: LessonDataFlow.UnitNavigationExamPresentation.Response) {
         let title = String(
             format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
             arguments: [response.currentSection.title]
@@ -171,11 +173,11 @@ final class LessonPresenter: LessonPresenterProtocol {
             arguments: [response.targetSection.title]
         )
 
-        self.viewController?.displayLessonUnitNavigationExam(viewModel: .init(title: title, message: message))
+        self.viewController?.displayUnitNavigationExamState(viewModel: .init(title: title, message: message))
     }
 
-    func presentLessonUnitNavigationClosedByBeginDate(
-        response: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.Response
+    func presentUnitNavigationClosedByBeginDateState(
+        response: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.Response
     ) {
         let title = String(
             format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
@@ -198,7 +200,7 @@ final class LessonPresenter: LessonPresenterProtocol {
             arguments: [response.targetUnit.lesson?.title ?? "N/A", formattedBeginDate]
         )
 
-        self.viewController?.displayLessonUnitNavigationClosedByBeginDate(
+        self.viewController?.displayUnitNavigationClosedByBeginDateState(
             viewModel: .init(title: title, message: message)
         )
     }

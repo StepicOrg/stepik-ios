@@ -19,13 +19,15 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
-    func displayLessonUnitNavigationRequirementNotSatisfied(
-        viewModel: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    func displayUnitNavigationExamState(viewModel: LessonDataFlow.UnitNavigationExamPresentation.ViewModel)
+    func displayUnitNavigationUnreachableState(
+        viewModel: LessonDataFlow.UnitNavigationUnreachablePresentation.ViewModel
     )
-    func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel)
-    func displayLessonUnitNavigationExam(viewModel: LessonDataFlow.LessonUnitNavigationExamPresentation.ViewModel)
-    func displayLessonUnitNavigationClosedByBeginDate(
-        viewModel: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.ViewModel
+    func displayUnitNavigationRequirementNotSatisfiedState(
+        viewModel: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    )
+    func displayUnitNavigationClosedByBeginDateState(
+        viewModel: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.ViewModel
     )
 }
 
@@ -582,8 +584,8 @@ extension LessonViewController: LessonViewControllerProtocol {
         }
     }
 
-    func displayLessonUnitNavigationRequirementNotSatisfied(
-        viewModel: LessonDataFlow.LessonUnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    func displayUnitNavigationRequirementNotSatisfiedState(
+        viewModel: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.ViewModel
     ) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(
@@ -601,18 +603,18 @@ extension LessonViewController: LessonViewControllerProtocol {
                 style: .cancel
             )
         )
-
         self.present(alert, animated: true)
     }
 
-    func displayLessonUnitNavigationError(viewModel: LessonDataFlow.LessonUnitNavigationErrorPresentation.ViewModel) {
+    func displayUnitNavigationUnreachableState(
+        viewModel: LessonDataFlow.UnitNavigationUnreachablePresentation.ViewModel
+    ) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-
         self.present(alert, animated: true)
     }
 
-    func displayLessonUnitNavigationExam(viewModel: LessonDataFlow.LessonUnitNavigationExamPresentation.ViewModel) {
+    func displayUnitNavigationExamState(viewModel: LessonDataFlow.UnitNavigationExamPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(
             UIAlertAction(
@@ -623,12 +625,11 @@ extension LessonViewController: LessonViewControllerProtocol {
                 }
             )
         )
-
         self.present(alert, animated: true)
     }
 
-    func displayLessonUnitNavigationClosedByBeginDate(
-        viewModel: LessonDataFlow.LessonUnitNavigationClosedByBeginDatePresentation.ViewModel
+    func displayUnitNavigationClosedByBeginDateState(
+        viewModel: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.ViewModel
     ) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(
@@ -640,7 +641,6 @@ extension LessonViewController: LessonViewControllerProtocol {
                 }
             )
         )
-
         self.present(alert, animated: true)
     }
 }
