@@ -8,6 +8,12 @@ extension Analytics {
     func send(_ event: AnalyticsEvent) {
         self.send(event, forceSend: false)
     }
+
+    func send(_ events: AnalyticsEvent..., forceSend: Bool = false) {
+        events.forEach { event in
+            self.send(event, forceSend: forceSend)
+        }
+    }
 }
 
 final class StepikAnalytics: Analytics {

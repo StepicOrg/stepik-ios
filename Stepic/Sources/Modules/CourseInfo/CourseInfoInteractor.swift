@@ -253,7 +253,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         } else {
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
-                self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
+                self.analytics.send(
+                    .buyCoursePressed(courseID: course.id),
+                    .courseBuyPressed(source: .courseScreen, id: course.id)
+                )
 
                 if self.iapService.canBuyCourse(course) {
                     self.iapService.buy(course: course, delegate: self)
