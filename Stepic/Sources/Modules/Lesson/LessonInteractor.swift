@@ -459,13 +459,24 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         if let beginDate = targetSection.beginDate, Date() < beginDate {
-            self.presentClosedByBeginDateUnitNavigationState(
-                currentSection: currentSection,
-                targetSection: targetSection,
-                targetUnit: targetUnit
-            ).catch { _ in
-                self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
-            }
+            self.presenter.presentUnitNavigationClosedByDateState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    dateSource: .beginDate
+                )
+            )
+            return true
+        }
+
+        if let endDate = targetSection.endDate, Date() > endDate {
+            self.presenter.presentUnitNavigationClosedByDateState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    dateSource: .endDate
+                )
+            )
             return true
         }
 
@@ -508,40 +519,6 @@ extension LessonInteractor: StepOutputProtocol {
                         currentSection: currentSection,
                         targetSection: targetSection,
                         requiredSection: requiredSection
-                    )
-                )
-            }
-    }
-
-    private func presentClosedByBeginDateUnitNavigationState(
-        currentSection: Section,
-        targetSection: Section,
-        targetUnit: Unit
-    ) -> Promise<Void> {
-        self.provider
-            .fetchLesson(id: targetUnit.lessonId, dataSourceType: .cache)
-            .then { cachedLessonOrNil -> Promise<Lesson?> in
-                if let cachedLesson = cachedLessonOrNil {
-                    return .value(cachedLesson)
-                } else {
-                    return self.provider.fetchLesson(
-                        id: targetUnit.lessonId,
-                        dataSourceType: .remote
-                    ).then { lesson -> Promise<Lesson?> in
-                        if let lesson = lesson {
-                            lesson.managedUnit = targetUnit
-                            CoreDataHelper.shared.save()
-                        }
-                        return .value(lesson)
-                    }
-                }
-            }
-            .done { _ in
-                self.presenter.presentUnitNavigationClosedByBeginDateState(
-                    response: .init(
-                        currentSection: currentSection,
-                        targetSection: targetSection,
-                        targetUnit: targetUnit
                     )
                 )
             }
