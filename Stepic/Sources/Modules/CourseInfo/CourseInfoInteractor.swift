@@ -254,7 +254,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(
-                    .buyCoursePressed(courseID: course.id),
+                    .buyCoursePressed(id: course.id),
                     .courseBuyPressed(source: .courseScreen, id: course.id)
                 )
 

@@ -69,11 +69,11 @@ extension AnalyticsEvent {
 
     // MARK: - BuyClick -
 
-    static func buyCoursePressed(courseID: Course.IdType) -> StepikAnalyticsEvent {
+    static func buyCoursePressed(id: Course.IdType) -> StepikAnalyticsEvent {
         let name = "buy-course-pressed"
 
         let params: [String: Any] = [
-            "data": ["course": courseID],
+            "data": ["course": id],
             "name": name,
             "timestamp": Date().timeIntervalSince1970
         ]
