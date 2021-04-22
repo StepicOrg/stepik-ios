@@ -13,7 +13,7 @@ project 'Stepic',
         'Develop Release' => :release
 
 def shared_pods
-  pod 'Alamofire', '5.4.2'
+  pod 'Alamofire', '5.4.3'
   pod 'Atributika', '4.9.10'
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.11.0'
@@ -45,13 +45,13 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '7.10.0'
-  pod 'Firebase/Messaging', '7.10.0'
-  pod 'Firebase/Analytics', '7.10.0'
-  pod 'Firebase/Crashlytics', '7.10.0'
-  pod 'Firebase/RemoteConfig', '7.10.0'
+  pod 'Firebase/Core', '7.11.0'
+  pod 'Firebase/Messaging', '7.11.0'
+  pod 'Firebase/Analytics', '7.11.0'
+  pod 'Firebase/Crashlytics', '7.11.0'
+  pod 'Firebase/RemoteConfig', '7.11.0'
 
-  pod 'YandexMobileMetrica/Dynamic', '3.15.0'
+  pod 'YandexMobileMetrica/Dynamic', '3.15.1'
   pod 'Amplitude', '8.2.1'
   pod 'Branch', '1.39.2'
 
@@ -72,7 +72,7 @@ def all_pods
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
   pod 'Agrume', '5.6.13'
-  pod 'Highlightr', '2.1.0'
+  pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :tag => '2.1.2'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.1'
   pod 'Koloda', '5.0.1'
