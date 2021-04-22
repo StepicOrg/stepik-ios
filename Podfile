@@ -13,7 +13,7 @@ project 'Stepic',
         'Develop Release' => :release
 
 def shared_pods
-  pod 'Alamofire', '5.4.2'
+  pod 'Alamofire', '5.4.3'
   pod 'Atributika', '4.9.10'
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.11.0'
