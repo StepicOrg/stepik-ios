@@ -63,19 +63,35 @@ final class DebugMenuViewController: UIViewController {
 
     private enum Section {
         case fcmToken
+        case flex
 
         var title: String {
             switch self {
             case .fcmToken:
                 return "FCM Token"
+            case .flex:
+                return "FLEX"
             }
         }
     }
 
     private enum Row: String, UniqueIdentifiable {
         case fcmRegistrationToken
+        case flexToggleExplorer
+        case flexShowMenu
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
+
+        var title: String {
+            switch self {
+            case .flexToggleExplorer:
+                return "Toggle Explorer"
+            case .flexShowMenu:
+                return "Show Menu"
+            default:
+                return ""
+            }
+        }
     }
 }
 
@@ -99,6 +115,27 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
             )
         )
         sections.append(.init(header: .init(title: Section.fcmToken.title), cells: [fcmTokenCell], footer: nil))
+
+        let flexToggleExplorerCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.flexToggleExplorer.uniqueIdentifier,
+            type: .rightDetail(options: .init(title: .init(text: Row.flexToggleExplorer.title)))
+        )
+        let flexShowMenuCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.flexShowMenu.uniqueIdentifier,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Row.flexShowMenu.title),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        sections.append(
+            .init(
+                header: .init(title: Section.flex.title),
+                cells: [flexToggleExplorerCell, flexShowMenuCell],
+                footer: nil
+            )
+        )
 
         self.debugMenuView?.configure(viewModel: SettingsTableViewModel(sections: sections))
     }
@@ -124,6 +161,12 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
         switch selectedRow {
         case .fcmRegistrationToken:
             self.shareContent(activityItems: [data.fcmRegistrationToken], sourceView: sourceView)
+        case .flexShowMenu:
+            if let menuViewController = FLEXManager.makeMenuViewController() {
+                self.push(module: menuViewController)
+            }
+        case .flexToggleExplorer:
+            FLEXManager.toggleExplorer()
         }
     }
 

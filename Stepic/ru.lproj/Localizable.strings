@@ -845,6 +845,14 @@ WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить от
 /* New lesson & step */
 NextLessonNavigation = "Следующий урок";
 PreviousLessonNavigation = "Предыдущий урок";
+LessonUnitNavigationCommonErrorMessage = "Не удалось открыть модуль \"%@\". Пожалуйста, попробуйте открыть модуль позже.";
+LessonUnitNavigationRequirementNotSatisfiedMessage = "Чтобы открыть следующий модуль \"%@\", вам нужно набрать %@ в модуле \"%@\".";
+LessonUnitNavigationActionSyllabus = "В содержание";
+LessonUnitNavigationRequirementNotSatisfiedActionContinue = "К задачам";
+LessonUnitNavigationFinishedModuleTitle = "Поздравляем!\nВы закончили модуль \"%@\".";
+LessonUnitNavigationExamMessage = "Следующий модуль \"%@\" является экзаменом. Вы можете начать его из содержания курса.";
+LessonUnitNavigationClosedByBeginDateMessage = "Следующий модуль \"%@\" из этого курса будет доступен %@.";
+LessonUnitNavigationClosedByEndDateMessage = "Доступ к следующему модулю \"%@\" был закрыт %@.";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
 DisabledDiscussionsButtonTitle = "Комментарии отключены";

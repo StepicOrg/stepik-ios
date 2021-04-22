@@ -71,6 +71,64 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present alert with about unit navigation error requirement not satisfied
+    enum UnitNavigationRequirementNotSatisfiedPresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let requiredSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present alert with common unit navigation error description
+    enum UnitNavigationUnreachablePresentation {
+        struct Response {
+            let targetSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present exam alert
+    enum UnitNavigationExamPresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present alert with about unit navigation error closed by begin or end date
+    enum UnitNavigationClosedByDatePresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let dateSource: DateSource
+
+            enum DateSource {
+                case beginDate
+                case endDate
+            }
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {

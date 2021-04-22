@@ -327,9 +327,14 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.didLoadFromCache = false
-        self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+        let didPresentUnreachableState = self.presentUnreachableUnitNavigationState(targetUnit: unit)
+
+        if !didPresentUnreachableState {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+            self.didLoadFromCache = false
+
+            self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+        }
     }
 
     func handleNextUnitNavigation() {
@@ -392,13 +397,18 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.didLoadFromCache = false
-        self.refreshLesson(context: .unit(id: unit.id)).done {
-            if autoplayNext {
-                self.autoplayCurrentStep()
-            }
-        }.cauterize()
+        let didPresentUnreachableState = self.presentUnreachableUnitNavigationState(targetUnit: unit)
+
+        if !didPresentUnreachableState {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+            self.didLoadFromCache = false
+
+            self.refreshLesson(context: .unit(id: unit.id)).done {
+                if autoplayNext {
+                    self.autoplayCurrentStep()
+                }
+            }.cauterize()
+        }
     }
 
     private func navigateToStep(at index: Int, autoplayNext: Bool) {
@@ -421,6 +431,97 @@ extension LessonInteractor: StepOutputProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoplayDelay) {
             self.presenter.presentCurrentStepAutoplay(response: .init())
         }
+    }
+
+    private func presentUnreachableUnitNavigationState(targetUnit: Unit) -> Bool {
+        guard let currentSection = self.currentUnit?.section,
+              let targetSection = targetUnit.section else {
+            return false
+        }
+
+        if targetSection.testSectionAction != nil {
+            return false
+        }
+        if targetSection.isReachable && !targetSection.isExam {
+            return false
+        }
+
+        if !targetSection.isRequirementSatisfied,
+           let requiredSectionID = targetSection.requiredSectionID {
+            self.presentRequirementNotSatisfiedUnitNavigationState(
+                currentSection: currentSection,
+                targetSection: targetSection,
+                requiredSectionID: requiredSectionID
+            ).catch { _ in
+                self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
+            }
+            return true
+        }
+
+        if let beginDate = targetSection.beginDate, Date() < beginDate {
+            self.presenter.presentUnitNavigationClosedByDateState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    dateSource: .beginDate
+                )
+            )
+            return true
+        }
+
+        if let endDate = targetSection.endDate, Date() > endDate {
+            self.presenter.presentUnitNavigationClosedByDateState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    dateSource: .endDate
+                )
+            )
+            return true
+        }
+
+        if targetSection.isExam {
+            self.presenter.presentUnitNavigationExamState(
+                response: .init(currentSection: currentSection, targetSection: targetSection)
+            )
+            return true
+        }
+
+        return false
+    }
+
+    private func presentRequirementNotSatisfiedUnitNavigationState(
+        currentSection: Section,
+        targetSection: Section,
+        requiredSectionID: Section.IdType
+    ) -> Promise<Void> {
+        self.provider
+            .fetchSectionFromCacheOrNetwork(id: requiredSectionID)
+            .compactMap { $0 }
+            .then { section -> Promise<Section> in
+                if section.progress == nil,
+                   let progressID = section.progressId {
+                    return self.provider.fetchProgresses(
+                        ids: [progressID],
+                        dataSourceType: .remote
+                    ).then { progresses -> Promise<Section> in
+                        section.progress = progresses.first
+                        CoreDataHelper.shared.save()
+                        return .value(section)
+                    }
+                } else {
+                    return .value(section)
+                }
+            }
+            .done { requiredSection in
+                self.presenter.presentUnitNavigationRequirementNotSatisfiedState(
+                    response: .init(
+                        currentSection: currentSection,
+                        targetSection: targetSection,
+                        requiredSection: requiredSection
+                    )
+                )
+            }
     }
 }
 
