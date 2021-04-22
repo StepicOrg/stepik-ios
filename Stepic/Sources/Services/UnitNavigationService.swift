@@ -37,13 +37,14 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     func findUnitForNavigation(from unit: Unit.IdType, direction: UnitNavigationDirection) -> Promise<Unit?> {
         self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
             guard let unit = unit else {
-                return Promise.value((nil, nil))
+                return .value((nil, nil))
             }
 
             return self.getSectionFromCacheOrNetwork(id: unit.sectionId).map { (unit, $0) }
         }.then { unit, section -> Promise<Unit?> in
-            guard let section = section, let unit = unit else {
-                return Promise.value(nil)
+            guard let section = section,
+                  let unit = unit else {
+                return .value(nil)
             }
 
             unit.section = section
@@ -88,7 +89,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         }()
 
         guard let targetUnitID = unitID else {
-            return Promise.value(nil)
+            return .value(nil)
         }
 
         return self.getUnitFromCacheOrNetwork(id: targetUnitID)
@@ -105,31 +106,30 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             direction: direction
         ).then { sections -> Promise<Section?> in
             let sections = direction == .previous ? sections.reversed() : sections
-            for section in sections where section.isReachable && !section.isExam && !section.unitsArray.isEmpty {
-                return Promise.value(section)
-            }
-
-            return Promise.value(nil)
+            return .value(sections.first)
         }.then { targetSection -> Promise<Unit?> in
             guard let section = targetSection else {
-                return Promise.value(nil)
+                return .value(nil)
             }
 
             guard let targetUnitID = direction == .previous
-                    ? section.unitsArray.last
-                    : section.unitsArray.first else {
-                return Promise.value(nil)
+                ? section.unitsArray.last
+                : section.unitsArray.first else {
+                return .value(nil)
             }
 
             // Load all units to make next findUnitInCurrentSection calls faster
-            let allUnitsFromCacheOrNetwork = section.unitsArray.map { unitID in
-                self.getUnitFromCacheOrNetwork(id: unitID)
-            }
+            let allUnitsFromCacheOrNetworkPromises = section.unitsArray.map(self.getUnitFromCacheOrNetwork(id:))
 
             return Promise { seal in
-                when(fulfilled: allUnitsFromCacheOrNetwork).done { units in
-                    let targetUnit = units.compactMap { $0 }
+                when(fulfilled: allUnitsFromCacheOrNetworkPromises).done { units in
+                    let targetUnit = units
+                        .compactMap { $0 }
                         .first { $0.id == targetUnitID }
+
+                    targetUnit?.section = section
+                    CoreDataHelper.shared.save()
+
                     seal.fulfill(targetUnit)
                 }.catch { error in
                     seal.reject(error)
@@ -138,7 +138,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         }
     }
 
-    /// Return array of sections after or before section with given position
+    /// Returns array of sections after or before section with given position.
     private func getSlicedSections(
         courseID: Course.IdType,
         sectionPosition: Int,
@@ -161,7 +161,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
                     }
                 }()
 
-                return self.sectionsNetworkService.fetch(ids: sectionIDs)
+                return self.getSectionsFromCacheOrNetwork(ids: sectionIDs)
             }.done { sections in
                 seal.fulfill(sections)
             }.catch { error in
@@ -176,7 +176,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     private func getUnitFromCacheOrNetwork(id: Unit.IdType) -> Promise<Unit?> {
         self.unitsPersistenceService.fetch(id: id).then { unit -> Promise<Unit?> in
             if let unit = unit {
-                return Promise.value(unit)
+                return .value(unit)
             } else {
                 return self.unitsNetworkService.fetch(id: id)
             }
@@ -186,7 +186,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     private func getCourseFromCacheOrNetwork(id: Course.IdType) -> Promise<Course?> {
         self.coursesPersistenceService.fetch(id: id).then { course -> Promise<Course?> in
             if let course = course {
-                return Promise.value(course)
+                return .value(course)
             } else {
                 return self.coursesNetworkService.fetch(id: id)
             }
@@ -196,9 +196,19 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     private func getSectionFromCacheOrNetwork(id: Section.IdType) -> Promise<Section?> {
         self.sectionsPersistenceService.fetch(id: id).then { section -> Promise<Section?> in
             if let section = section {
-                return Promise.value(section)
+                return .value(section)
             } else {
                 return self.sectionsNetworkService.fetch(id: id)
+            }
+        }
+    }
+
+    private func getSectionsFromCacheOrNetwork(ids: [Section.IdType]) -> Promise<[Section]> {
+        self.sectionsPersistenceService.fetch(ids: ids).then { sections -> Promise<[Section]> in
+            if Set(ids) == Set(sections.map(\.id)) {
+                return .value(sections)
+            } else {
+                return self.sectionsNetworkService.fetch(ids: ids)
             }
         }
     }

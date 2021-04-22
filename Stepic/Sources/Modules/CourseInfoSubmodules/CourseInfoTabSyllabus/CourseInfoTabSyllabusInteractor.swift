@@ -19,7 +19,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private let presenter: CourseInfoTabSyllabusPresenterProtocol
     private let provider: CourseInfoTabSyllabusProviderProtocol
     private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
-    private let nextLessonService: NextLessonServiceProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
     private let tooltipStorageManager: TooltipStorageManagerProtocol
     private let useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol
@@ -27,17 +26,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private let analytics: Analytics
 
     private var currentCourse: Course?
-    private var currentSections: [UniqueIdentifierType: Section] = [:] {
-        didSet {
-            self.refreshNextLessonService()
-        }
-    }
-
-    private var currentUnits: [UniqueIdentifierType: Unit?] = [:] {
-        didSet {
-            self.refreshNextLessonService()
-        }
-    }
+    private var currentSections: [UniqueIdentifierType: Section] = [:]
+    private var currentUnits: [UniqueIdentifierType: Unit?] = [:]
 
     private var remoteFetchedSectionsUniqueIdentifiers: Set<UniqueIdentifierType> = []
 
@@ -84,7 +74,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         provider: CourseInfoTabSyllabusProviderProtocol,
         analytics: Analytics,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
-        nextLessonService: NextLessonServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         tooltipStorageManager: TooltipStorageManagerProtocol,
         useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol,
@@ -94,7 +83,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.provider = provider
         self.analytics = analytics
         self.personalDeadlinesService = personalDeadlinesService
-        self.nextLessonService = nextLessonService
         self.networkReachabilityService = networkReachabilityService
         self.tooltipStorageManager = tooltipStorageManager
         self.useCellularDataForDownloadsStorageManager = useCellularDataForDownloadsStorageManager
@@ -640,22 +628,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType { "\(unitID)" }
 
-    private func refreshNextLessonService() {
-        let orderedSections = self.currentSections.values.sorted(by: { $0.position < $1.position })
-        self.nextLessonService.configure(with: orderedSections)
-    }
-
-    private func requestUnitPresentation(_ unit: Unit) {
-        // Check whether unit is in exam section
-        if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
-           section.isExam, section.isReachable {
-            self.moduleOutput?.presentExamLesson()
-            return
-        }
-
-        self.moduleOutput?.presentLesson(in: unit)
-    }
-
     enum Error: Swift.Error {
         case fetchFailed
     }
@@ -684,28 +656,6 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
             self.analytics.send(.sectionsScreenOpened(courseID: course.id, courseTitle: course.title))
             self.shouldOpenedAnalyticsEventSend = false
         }
-    }
-}
-
-// MARK: - CourseInfoTabSyllabusInteractor: SectionNavigationDelegate -
-
-extension CourseInfoTabSyllabusInteractor: SectionNavigationDelegate {
-    func didRequestPreviousUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
-        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
-              let previousUnit = self.nextLessonService.findPreviousUnit(for: unit) as? Unit else {
-            return
-        }
-
-        self.requestUnitPresentation(previousUnit)
-    }
-
-    func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
-        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
-              let nextUnit = self.nextLessonService.findNextUnit(for: unit) as? Unit else {
-            return
-        }
-
-        self.requestUnitPresentation(nextUnit)
     }
 }
 

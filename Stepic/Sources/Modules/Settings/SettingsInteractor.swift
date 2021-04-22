@@ -117,7 +117,9 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     }
 
     func doContentLanguageSettingUpdate(request: Settings.ContentLanguageSettingUpdate.Request) {
-        self.provider.globalContentLanguage = ContentLanguage(languageString: request.setting.uniqueIdentifier)
+        let selectedContentLanguage = ContentLanguage(languageString: request.setting.uniqueIdentifier)
+        self.provider.globalContentLanguage = selectedContentLanguage
+        self.analytics.send(.contentLanguageChanged(selectedContentLanguage, source: .settings))
     }
 
     func doStepFontSizeSettingPresentation(request: Settings.StepFontSizeSettingPresentation.Request) {

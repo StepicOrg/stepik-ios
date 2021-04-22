@@ -5,6 +5,7 @@ import SVProgressHUD
 import Tabman
 import UIKit
 
+// swiftlint:disable file_length
 protocol LessonViewControllerProtocol: AnyObject {
     func displayLesson(viewModel: LessonDataFlow.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: LessonDataFlow.LessonNavigationLoad.ViewModel)
@@ -18,6 +19,16 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: LessonDataFlow.SubmissionsPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayUnitNavigationExamState(viewModel: LessonDataFlow.UnitNavigationExamPresentation.ViewModel)
+    func displayUnitNavigationUnreachableState(
+        viewModel: LessonDataFlow.UnitNavigationUnreachablePresentation.ViewModel
+    )
+    func displayUnitNavigationRequirementNotSatisfiedState(
+        viewModel: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    )
+    func displayUnitNavigationClosedByDateState(
+        viewModel: LessonDataFlow.UnitNavigationClosedByDatePresentation.ViewModel
+    )
 }
 
 // MARK: - LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
@@ -571,6 +582,66 @@ extension LessonViewController: LessonViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    func displayUnitNavigationRequirementNotSatisfiedState(
+        viewModel: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.ViewModel
+    ) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationActionSyllabus", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedActionContinue", comment: ""),
+                style: .cancel
+            )
+        )
+        self.present(alert, animated: true)
+    }
+
+    func displayUnitNavigationUnreachableState(
+        viewModel: LessonDataFlow.UnitNavigationUnreachablePresentation.ViewModel
+    ) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+        self.present(alert, animated: true)
+    }
+
+    func displayUnitNavigationExamState(viewModel: LessonDataFlow.UnitNavigationExamPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationActionSyllabus", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+        )
+        self.present(alert, animated: true)
+    }
+
+    func displayUnitNavigationClosedByDateState(
+        viewModel: LessonDataFlow.UnitNavigationClosedByDatePresentation.ViewModel
+    ) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LessonUnitNavigationActionSyllabus", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+        )
+        self.present(alert, animated: true)
     }
 }
 

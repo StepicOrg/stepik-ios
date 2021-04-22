@@ -465,6 +465,26 @@ extension AnalyticsEvent {
         return AmplitudeAnalyticsEvent(name: "Font size selected", parameters: ["size": fontSizeStringValue])
     }
 
+    // MARK: - Content Language -
+
+    static func contentLanguageChanged(
+        _ contentLanguage: ContentLanguage,
+        source: ContentLanguageChangeSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Content language changed",
+            parameters: [
+                "language": contentLanguage.languageString,
+                "source": source.rawValue
+            ]
+        )
+    }
+
+    enum ContentLanguageChangeSource: String {
+        case catalog
+        case settings
+    }
+
     // MARK: - CoursePreview -
 
     static func coursePreviewScreenOpened(course: Course, viewSource: CourseViewSource) -> AmplitudeAnalyticsEvent {
