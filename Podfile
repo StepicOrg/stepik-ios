@@ -72,7 +72,7 @@ def all_pods
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
   pod 'Agrume', '5.6.13'
-  pod 'Highlightr', '2.1.0'
+  pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :tag => '2.1.2'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.1'
   pod 'Koloda', '5.0.1'
