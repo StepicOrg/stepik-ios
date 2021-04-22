@@ -18,8 +18,8 @@ protocol LessonPresenterProtocol {
     func presentUnitNavigationRequirementNotSatisfiedState(
         response: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.Response
     )
-    func presentUnitNavigationClosedByBeginDateState(
-        response: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.Response
+    func presentUnitNavigationClosedByDateState(
+        response: LessonDataFlow.UnitNavigationClosedByDatePresentation.Response
     )
 }
 
@@ -176,33 +176,43 @@ final class LessonPresenter: LessonPresenterProtocol {
         self.viewController?.displayUnitNavigationExamState(viewModel: .init(title: title, message: message))
     }
 
-    func presentUnitNavigationClosedByBeginDateState(
-        response: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.Response
+    func presentUnitNavigationClosedByDateState(
+        response: LessonDataFlow.UnitNavigationClosedByDatePresentation.Response
     ) {
         let title = String(
             format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
             arguments: [response.currentSection.title]
         )
 
-        let formattedBeginDate: String = {
-            guard let beginDate = response.targetSection.beginDate else {
+        let sourceDate: Date?
+        let messageFormatString: String
+
+        switch response.dateSource {
+        case .beginDate:
+            sourceDate = response.targetSection.beginDate
+            messageFormatString = NSLocalizedString("LessonUnitNavigationClosedByBeginDateMessage", comment: "")
+        case .endDate:
+            sourceDate = response.targetSection.endDate
+            messageFormatString = NSLocalizedString("LessonUnitNavigationClosedByEndDateMessage", comment: "")
+        }
+
+        let formattedDate: String = {
+            guard let sourceDate = sourceDate else {
                 return "N/A"
             }
 
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd.MM.yyyy"
 
-            return dateFormatter.string(from: beginDate)
+            return dateFormatter.string(from: sourceDate)
         }()
 
         let message = String(
-            format: NSLocalizedString("LessonUnitNavigationClosedByBeginDateMessage", comment: ""),
-            arguments: [response.targetUnit.lesson?.title ?? "N/A", formattedBeginDate]
+            format: messageFormatString,
+            arguments: [response.targetSection.title, formattedDate]
         )
 
-        self.viewController?.displayUnitNavigationClosedByBeginDateState(
-            viewModel: .init(title: title, message: message)
-        )
+        self.viewController?.displayUnitNavigationClosedByDateState(viewModel: .init(title: title, message: message))
     }
 
     // MAKE: Private API

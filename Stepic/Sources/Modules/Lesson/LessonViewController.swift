@@ -26,8 +26,8 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displayUnitNavigationRequirementNotSatisfiedState(
         viewModel: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.ViewModel
     )
-    func displayUnitNavigationClosedByBeginDateState(
-        viewModel: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.ViewModel
+    func displayUnitNavigationClosedByDateState(
+        viewModel: LessonDataFlow.UnitNavigationClosedByDatePresentation.ViewModel
     )
 }
 
@@ -628,8 +628,8 @@ extension LessonViewController: LessonViewControllerProtocol {
         self.present(alert, animated: true)
     }
 
-    func displayUnitNavigationClosedByBeginDateState(
-        viewModel: LessonDataFlow.UnitNavigationClosedByBeginDatePresentation.ViewModel
+    func displayUnitNavigationClosedByDateState(
+        viewModel: LessonDataFlow.UnitNavigationClosedByDatePresentation.ViewModel
     ) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(
