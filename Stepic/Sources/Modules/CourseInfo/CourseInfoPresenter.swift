@@ -7,6 +7,7 @@ protocol CourseInfoPresenterProtocol {
     func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response)
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response)
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
+    func presentLessonModuleBuyCourseAction(response: CourseInfo.LessonModuleBuyCourseActionPresentation.Response)
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
@@ -78,6 +79,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 isAdaptive: response.isAdaptive
             )
         )
+    }
+
+    func presentLessonModuleBuyCourseAction(response: CourseInfo.LessonModuleBuyCourseActionPresentation.Response) {
+        self.viewController?.displayLessonModuleBuyCourseAction(viewModel: .init())
     }
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {

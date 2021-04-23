@@ -56,4 +56,18 @@ struct LayoutInsets {
         self.rightInset = inset
         self.bottomInset = inset
     }
+
+    init(horizontal: CGFloat) {
+        self.topInset = nil
+        self.leftInset = horizontal
+        self.rightInset = horizontal
+        self.bottomInset = nil
+    }
+
+    init(vertical: CGFloat) {
+        self.topInset = vertical
+        self.leftInset = nil
+        self.rightInset = nil
+        self.bottomInset = vertical
+    }
 }

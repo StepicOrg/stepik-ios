@@ -8,7 +8,7 @@ protocol TableQuizSelectColumnsViewControllerDelegate: AnyObject {
     )
 }
 
-final class TableQuizSelectColumnsViewController: UIViewController {
+final class TableQuizSelectColumnsViewController: PanModalPresentableViewController {
     weak var moduleOutput: TableQuizSelectColumnsOutputProtocol?
 
     private let row: TableQuiz.Row
@@ -20,7 +20,7 @@ final class TableQuizSelectColumnsViewController: UIViewController {
 
     var tableQuizSelectColumnsView: TableQuizSelectColumnsView? { self.view as? TableQuizSelectColumnsView }
 
-    private var isShortFormEnabled = true
+    override var panScrollable: UIScrollView? { self.tableQuizSelectColumnsView?.panScrollable }
 
     init(
         row: TableQuiz.Row,
@@ -33,12 +33,7 @@ final class TableQuizSelectColumnsViewController: UIViewController {
         self.selectedColumnsIDs = selectedColumnsIDs
         self.isMultipleChoice = isMultipleChoice
 
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init()
     }
 
     override func loadView() {
@@ -49,33 +44,14 @@ final class TableQuizSelectColumnsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupView()
-    }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(
-            alongsideTransition: { _ in
-                self.updateAdditionalSafeAreaInsets()
-            },
-            completion: nil
-        )
-    }
-
-    private func setupView() {
         self.tableQuizSelectColumnsView?.prompt = self.isMultipleChoice
             ? NSLocalizedString("MultipleChoiceTableQuizPrompt", comment: "")
             : NSLocalizedString("SingleChoiceTableQuizPrompt", comment: "")
         self.tableQuizSelectColumnsView?.title = self.row.text
         self.tableQuizSelectColumnsView?.set(columns: self.columns, selectedColumnsIDs: self.selectedColumnsIDs)
 
-        self.updateAdditionalSafeAreaInsets()
         self.panModalSetNeedsLayoutUpdate()
-    }
-
-    private func updateAdditionalSafeAreaInsets() {
-        self.additionalSafeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets ?? .zero
     }
 }
 
@@ -105,27 +81,6 @@ extension TableQuizSelectColumnsViewController: TableQuizSelectColumnsViewDelega
     }
 
     func tableQuizSelectColumnsViewDidClickClose(_ view: TableQuizSelectColumnsView) {
-        self.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension TableQuizSelectColumnsViewController: PanModalPresentable {
-    var panScrollable: UIScrollView? { self.tableQuizSelectColumnsView?.panScrollable }
-
-    var shortFormHeight: PanModalHeight {
-        self.isShortFormEnabled
-            ? .contentHeight(floor(UIScreen.main.bounds.height / 3))
-            : self.longFormHeight
-    }
-
-    var anchorModalToLongForm: Bool { false }
-
-    func willTransition(to state: PanModalPresentationController.PresentationState) {
-        guard self.isShortFormEnabled, case .longForm = state else {
-            return
-        }
-
-        self.isShortFormEnabled = false
-        self.panModalSetNeedsLayoutUpdate()
+        self.dismiss(animated: true)
     }
 }

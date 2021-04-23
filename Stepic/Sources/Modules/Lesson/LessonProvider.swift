@@ -10,17 +10,38 @@ protocol LessonProviderProtocol {
     func fetchProgresses(ids: [Progress.IdType], dataSourceType: DataSourceType) -> Promise<[Progress]>
     func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>>
     func fetchSection(id: Section.IdType, dataSourceType: DataSourceType) -> Promise<Section?>
+    func fetchCourse(id: Course.IdType, dataSourceType: DataSourceType) -> Promise<Course?>
 
     func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void>
 }
 
 extension LessonProviderProtocol {
+    func fetchLessonFromCacheOrNetwork(id: Lesson.IdType) -> Promise<Lesson?> {
+        self.fetchLesson(id: id, dataSourceType: .cache).then { cachedLessonOrNil -> Promise<Lesson?> in
+            if let cachedLesson = cachedLessonOrNil {
+                return .value(cachedLesson)
+            } else {
+                return self.fetchLesson(id: id, dataSourceType: .remote)
+            }
+        }
+    }
+
     func fetchSectionFromCacheOrNetwork(id: Section.IdType) -> Promise<Section?> {
-        self.fetchSection(id: id, dataSourceType: .cache).then { cachedSection -> Promise<Section?> in
-            if let cachedSection = cachedSection {
+        self.fetchSection(id: id, dataSourceType: .cache).then { cachedSectionOrNil -> Promise<Section?> in
+            if let cachedSection = cachedSectionOrNil {
                 return .value(cachedSection)
             } else {
                 return self.fetchSection(id: id, dataSourceType: .remote)
+            }
+        }
+    }
+
+    func fetchCourseFromCacheOrNetwork(id: Course.IdType) -> Promise<Course?> {
+        self.fetchCourse(id: id, dataSourceType: .cache).then { cachedCourseOrNil -> Promise<Course?> in
+            if let cachedCourse = cachedCourseOrNil {
+                return .value(cachedCourse)
+            } else {
+                return self.fetchCourse(id: id, dataSourceType: .remote)
             }
         }
     }
@@ -40,6 +61,8 @@ final class LessonProvider: LessonProviderProtocol {
     private let progressesPersistenceService: ProgressesPersistenceServiceProtocol
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
     private let viewsNetworkService: ViewsNetworkServiceProtocol
+    private let coursesPersistenceService: CoursesPersistenceServiceProtocol
+    private let coursesNetworkService: CoursesNetworkServiceProtocol
 
     init(
         lessonsPersistenceService: LessonsPersistenceServiceProtocol,
@@ -54,7 +77,9 @@ final class LessonProvider: LessonProviderProtocol {
         assignmentsPersistenceService: AssignmentsPersistenceServiceProtocol,
         progressesPersistenceService: ProgressesPersistenceServiceProtocol,
         progressesNetworkService: ProgressesNetworkServiceProtocol,
-        viewsNetworkService: ViewsNetworkServiceProtocol
+        viewsNetworkService: ViewsNetworkServiceProtocol,
+        coursesPersistenceService: CoursesPersistenceServiceProtocol,
+        coursesNetworkService: CoursesNetworkServiceProtocol
     ) {
         self.lessonsPersistenceService = lessonsPersistenceService
         self.lessonsNetworkService = lessonsNetworkService
@@ -69,6 +94,8 @@ final class LessonProvider: LessonProviderProtocol {
         self.progressesPersistenceService = progressesPersistenceService
         self.progressesNetworkService = progressesNetworkService
         self.viewsNetworkService = viewsNetworkService
+        self.coursesPersistenceService = coursesPersistenceService
+        self.coursesNetworkService = coursesNetworkService
     }
 
     // MARK: Public API
@@ -236,6 +263,15 @@ final class LessonProvider: LessonProviderProtocol {
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
+        }
+    }
+
+    func fetchCourse(id: Course.IdType, dataSourceType: DataSourceType) -> Promise<Course?> {
+        switch dataSourceType {
+        case .remote:
+            return self.coursesNetworkService.fetch(id: id)
+        case .cache:
+            return self.coursesPersistenceService.fetch(id: id)
         }
     }
 

@@ -177,6 +177,13 @@ enum CourseInfo {
         struct Request {}
     }
 
+    /// Pop lesson module and do main course action
+    enum LessonModuleBuyCourseActionPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     /// Do try for free action -> open preview lesson by id
     enum PreviewLessonPresentation {
         struct Request {}

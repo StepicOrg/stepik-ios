@@ -432,6 +432,17 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 }
 
+// MARK: - CourseInfoInteractor: CourseInfoInputProtocol -
+extension CourseInfoInteractor: CourseInfoInputProtocol {}
+
+// MARK: - CourseInfoInteractor: LessonOutputProtocol -
+
+extension CourseInfoInteractor: LessonOutputProtocol {
+    func handleLessonDidRequestBuyCourse() {
+        self.presenter.presentLessonModuleBuyCourseAction(response: .init())
+    }
+}
+
 // MARK: - CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol -
 
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
