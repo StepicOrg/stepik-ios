@@ -676,8 +676,8 @@ extension LessonViewController: EasyTipViewDelegate {
 
 extension LessonViewController: LessonFinishedDemoPanModalOutputProtocol {
     func handleLessonFinishedDemoPanModalMainAction() {
-        self.dismiss(animated: true) {
-            print("TODO!!")
+        self.dismiss(animated: true) { [weak self] in
+            self?.interactor.doBuyCourse(request: .init())
         }
     }
 }

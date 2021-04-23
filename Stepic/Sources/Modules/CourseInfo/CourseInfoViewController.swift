@@ -18,6 +18,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayExamLesson(viewModel: CourseInfo.ExamLessonPresentation.ViewModel)
     func displayCourseSharing(viewModel: CourseInfo.CourseShareAction.ViewModel)
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
+    func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel)
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
@@ -487,7 +488,10 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
-        let assembly = LessonAssembly(initialContext: .unit(id: viewModel.unitID))
+        let assembly = LessonAssembly(
+            initialContext: .unit(id: viewModel.unitID),
+            moduleOutput: self.interactor as? LessonOutputProtocol
+        )
         self.push(module: assembly.makeModule())
     }
 
@@ -553,8 +557,24 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         )
     }
 
+    func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel) {
+        guard let navigationController = self.navigationController,
+              navigationController.topViewController?.isKind(of: LessonViewController.self) ?? false else {
+            return
+        }
+
+        navigationController.popViewController(animated: true)
+
+        DispatchQueue.main.async {
+            self.interactor.doMainCourseAction(request: .init())
+        }
+    }
+
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel) {
-        let assembly = LessonAssembly(initialContext: .lesson(id: viewModel.previewLessonID))
+        let assembly = LessonAssembly(
+            initialContext: .lesson(id: viewModel.previewLessonID),
+            moduleOutput: self.interactor as? LessonOutputProtocol
+        )
         self.push(module: assembly.makeModule())
     }
 

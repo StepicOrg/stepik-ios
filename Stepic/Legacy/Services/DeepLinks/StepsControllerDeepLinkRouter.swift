@@ -195,22 +195,26 @@ final class StepsControllerDeepLinkRouter: NSObject {
                 initialTab: .syllabus,
                 courseViewSource: self.courseViewSource
             )
+            let courseInfoViewController = courseInfoAssembly.makeModule()
+
             let lessonAssemblyWithoutUnit = LessonAssembly(
                 initialContext: .lesson(id: lesson.id),
-                startStep: .index(stepId - 1)
+                startStep: .index(stepId - 1),
+                moduleOutput: courseInfoAssembly.moduleInput as? LessonOutputProtocol
             )
 
             var controllersStack: [UIViewController] = []
 
             if section.isExam {
-                controllersStack.append(courseInfoAssembly.makeModule())
+                controllersStack.append(courseInfoViewController)
             } else if includeUnit {
-                controllersStack.append(courseInfoAssembly.makeModule())
+                controllersStack.append(courseInfoViewController)
 
                 if let unit = currentUnit {
                     let lessonAssembly = LessonAssembly(
                         initialContext: .unit(id: unit.id),
-                        startStep: .index(stepId - 1)
+                        startStep: .index(stepId - 1),
+                        moduleOutput: courseInfoAssembly.moduleInput as? LessonOutputProtocol
                     )
                     controllersStack.append(lessonAssembly.makeModule())
                 } else {

@@ -254,6 +254,11 @@ enum LessonDataFlow {
         }
     }
 
+    /// Do buy course action
+    enum BuyCourseAction {
+        struct Request {}
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

@@ -4,9 +4,16 @@ final class LessonAssembly: Assembly {
     private var initialContext: LessonDataFlow.Context
     private var startStep: LessonDataFlow.StartStep?
 
-    init(initialContext: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep? = nil) {
+    private weak var moduleOutput: LessonOutputProtocol?
+
+    init(
+        initialContext: LessonDataFlow.Context,
+        startStep: LessonDataFlow.StartStep? = nil,
+        moduleOutput: LessonOutputProtocol?
+    ) {
         self.initialContext = initialContext
         self.startStep = startStep
+        self.moduleOutput = moduleOutput
     }
 
     func makeModule() -> UIViewController {
@@ -60,6 +67,7 @@ final class LessonAssembly: Assembly {
         viewController.hidesBottomBarWhenPushed = true
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

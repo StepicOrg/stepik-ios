@@ -5,9 +5,12 @@ protocol LessonInteractorProtocol {
     func doLessonLoad(request: LessonDataFlow.LessonLoad.Request)
     func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
     func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request)
+    func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request)
 }
 
 final class LessonInteractor: LessonInteractorProtocol {
+    weak var moduleOutput: LessonOutputProtocol?
+
     private let presenter: LessonPresenterProtocol
     private let provider: LessonProviderProtocol
     private let unitNavigationService: UnitNavigationServiceProtocol
@@ -72,6 +75,10 @@ final class LessonInteractor: LessonInteractorProtocol {
         }
 
         self.presenter.presentSubmissions(response: .init(stepID: stepID, isTeacher: lesson.canEdit))
+    }
+
+    func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request) {
+        self.moduleOutput?.handleLessonDidRequestBuyCourse()
     }
 
     // MARK: Private API
