@@ -1,11 +1,11 @@
 import UIKit
 
 protocol LessonFinishedDemoPanModalPresenterProtocol {
-    func presentSomeActionResult(response: LessonFinishedDemoPanModal.SomeAction.Response)
+    func presentModal(response: LessonFinishedDemoPanModal.ModalLoad.Response)
 }
 
 final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPresenterProtocol {
     weak var viewController: LessonFinishedDemoPanModalViewControllerProtocol?
 
-    func presentSomeActionResult(response: LessonFinishedDemoPanModal.SomeAction.Response) {}
+    func presentModal(response: LessonFinishedDemoPanModal.ModalLoad.Response) {}
 }

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol LessonFinishedDemoPanModalViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: LessonFinishedDemoPanModal.SomeAction.ViewModel)
+    func displayModal(viewModel: LessonFinishedDemoPanModal.ModalLoad.ViewModel)
 }
 
 final class LessonFinishedDemoPanModalViewController: UIViewController {
@@ -24,5 +24,5 @@ final class LessonFinishedDemoPanModalViewController: UIViewController {
 }
 
 extension LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalViewControllerProtocol {
-    func displaySomeActionResult(viewModel: LessonFinishedDemoPanModal.SomeAction.ViewModel) {}
+    func displayModal(viewModel: LessonFinishedDemoPanModal.ModalLoad.ViewModel) {}
 }

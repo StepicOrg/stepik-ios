@@ -1,10 +1,13 @@
 import Foundation
 
 enum LessonFinishedDemoPanModal {
-    enum SomeAction {
+    enum ModalLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let course: Course
+            let section: Section
+        }
 
         struct ViewModel {}
     }
