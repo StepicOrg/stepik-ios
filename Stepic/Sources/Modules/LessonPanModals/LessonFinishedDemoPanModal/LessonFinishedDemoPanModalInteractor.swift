@@ -28,10 +28,19 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
             .fetchSection(id: self.sectionID)
             .compactMap { $0 }
             .then { section -> Promise<(Section, Course)> in
-                self.provider
-                    .fetchCourse(id: section.courseId)
-                    .compactMap { $0 }
-                    .map { (section, $0) }
+                if let course = section.course {
+                    return .value((section, course))
+                } else {
+                    return self.provider
+                        .fetchCourse(id: section.courseId)
+                        .compactMap { $0 }
+                        .then { course -> Promise<(Section, Course)> in
+                            section.course = course
+                            CoreDataHelper.shared.save()
+
+                            return .value((section, course))
+                        }
+                }
             }
             .done { section, course in
                 self.presenter.presentModal(response: .init(course: course, section: section))
