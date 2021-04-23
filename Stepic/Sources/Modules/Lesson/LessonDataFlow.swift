@@ -129,6 +129,17 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present modal with finished demo access info
+    enum UnitNavigationFinishedDemoAccessPresentation {
+        struct Response {
+            let section: Section
+        }
+
+        struct ViewModel {
+            let sectionID: Section.IdType
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {

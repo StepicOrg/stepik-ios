@@ -58,6 +58,6 @@ extension LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalVi
     }
 
     func lessonFinishedDemoPanModalViewDidClickActionButton(_ view: LessonFinishedDemoPanModalView) {
-        print(#function)
+        self.interactor.doModalMainAction(request: .init())
     }
 }

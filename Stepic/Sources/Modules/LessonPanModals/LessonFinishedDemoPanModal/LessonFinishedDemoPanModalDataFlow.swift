@@ -15,4 +15,8 @@ enum LessonFinishedDemoPanModal {
             let actionButtonTitle: String
         }
     }
+
+    enum MainModalAction {
+        struct Request {}
+    }
 }

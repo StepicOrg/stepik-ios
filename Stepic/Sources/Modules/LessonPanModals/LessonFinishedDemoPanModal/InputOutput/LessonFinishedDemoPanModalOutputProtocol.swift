@@ -1,3 +1,5 @@
 import Foundation
 
-protocol LessonFinishedDemoPanModalOutputProtocol: AnyObject {}
+protocol LessonFinishedDemoPanModalOutputProtocol: AnyObject {
+    func handleLessonFinishedDemoPanModalMainAction()
+}

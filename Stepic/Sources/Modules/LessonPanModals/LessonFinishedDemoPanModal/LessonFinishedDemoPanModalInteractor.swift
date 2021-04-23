@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol LessonFinishedDemoPanModalInteractorProtocol {
     func doModalLoad(request: LessonFinishedDemoPanModal.ModalLoad.Request)
+    func doModalMainAction(request: LessonFinishedDemoPanModal.MainModalAction.Request)
 }
 
 final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInteractorProtocol {
@@ -48,5 +49,9 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
             .catch { error in
                 print("LessonFinishedDemoPanModalInteractor :: failed load data with error = \(error)")
             }
+    }
+
+    func doModalMainAction(request: LessonFinishedDemoPanModal.MainModalAction.Request) {
+        self.moduleOutput?.handleLessonFinishedDemoPanModalMainAction()
     }
 }

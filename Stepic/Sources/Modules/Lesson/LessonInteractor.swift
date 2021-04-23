@@ -297,6 +297,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
 extension LessonInteractor: StepOutputProtocol {
     private static let autoplayDelay: TimeInterval = 0.33
+    private static let unitNavigationDelay: TimeInterval = 0.5
 
     func handleStepView(id: Step.IdType) {
         let assignmentID = self.assignmentsForCurrentSteps[id]
@@ -327,13 +328,19 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        let didPresentUnreachableState = self.presentUnreachableUnitNavigationState(targetUnit: unit)
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
-        if !didPresentUnreachableState {
-            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-            self.didLoadFromCache = false
-
-            self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+        firstly {
+            after(seconds: Self.unitNavigationDelay)
+        }.then {
+            self.presentUnreachableUnitNavigationState(targetUnit: unit)
+        }.done { didPresentUnreachableState in
+            if didPresentUnreachableState {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            } else {
+                self.didLoadFromCache = false
+                self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+            }
         }
     }
 
@@ -397,17 +404,23 @@ extension LessonInteractor: StepOutputProtocol {
             return
         }
 
-        let didPresentUnreachableState = self.presentUnreachableUnitNavigationState(targetUnit: unit)
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
-        if !didPresentUnreachableState {
-            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-            self.didLoadFromCache = false
-
-            self.refreshLesson(context: .unit(id: unit.id)).done {
-                if autoplayNext {
-                    self.autoplayCurrentStep()
-                }
-            }.cauterize()
+        firstly {
+            after(seconds: Self.unitNavigationDelay)
+        }.then {
+            self.presentUnreachableUnitNavigationState(targetUnit: unit)
+        }.done { didPresentUnreachableState in
+            if didPresentUnreachableState {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            } else {
+                self.didLoadFromCache = false
+                self.refreshLesson(context: .unit(id: unit.id)).done {
+                    if autoplayNext {
+                        self.autoplayCurrentStep()
+                    }
+                }.cauterize()
+            }
         }
     }
 
@@ -433,29 +446,33 @@ extension LessonInteractor: StepOutputProtocol {
         }
     }
 
-    private func presentUnreachableUnitNavigationState(targetUnit: Unit) -> Bool {
-        guard let currentSection = self.currentUnit?.section,
+    private func presentUnreachableUnitNavigationState(targetUnit: Unit) -> Guarantee<Bool> {
+        guard let currentLesson = self.currentLesson,
+              let currentSection = self.currentUnit?.section,
               let targetSection = targetUnit.section else {
-            return false
+            return .value(false)
         }
 
         if targetSection.testSectionAction != nil {
-            return false
+            return .value(false)
         }
         if targetSection.isReachable && !targetSection.isExam {
-            return false
+            return .value(false)
         }
 
-        if !targetSection.isRequirementSatisfied,
-           let requiredSectionID = targetSection.requiredSectionID {
-            self.presentRequirementNotSatisfiedUnitNavigationState(
-                currentSection: currentSection,
-                targetSection: targetSection,
-                requiredSectionID: requiredSectionID
-            ).catch { _ in
-                self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
+        if !targetSection.isRequirementSatisfied, let requiredSectionID = targetSection.requiredSectionID {
+            return Guarantee { seal in
+                self.presentRequirementNotSatisfiedUnitNavigationState(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    requiredSectionID: requiredSectionID
+                ).done { _ in
+                    seal(true)
+                }.catch { _ in
+                    self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
+                    seal(true)
+                }
             }
-            return true
         }
 
         if let beginDate = targetSection.beginDate, Date() < beginDate {
@@ -466,7 +483,7 @@ extension LessonInteractor: StepOutputProtocol {
                     dateSource: .beginDate
                 )
             )
-            return true
+            return .value(true)
         }
 
         if let endDate = targetSection.endDate, Date() > endDate {
@@ -477,17 +494,21 @@ extension LessonInteractor: StepOutputProtocol {
                     dateSource: .endDate
                 )
             )
-            return true
+            return .value(true)
         }
 
         if targetSection.isExam {
             self.presenter.presentUnitNavigationExamState(
                 response: .init(currentSection: currentSection, targetSection: targetSection)
             )
-            return true
+            return .value(true)
         }
 
-        return false
+        return self.presentUnitNavigationFinishedDemoAccessState(
+            currentLesson: currentLesson,
+            currentSection: currentSection,
+            targetUnit: targetUnit
+        )
     }
 
     private func presentRequirementNotSatisfiedUnitNavigationState(
@@ -522,6 +543,47 @@ extension LessonInteractor: StepOutputProtocol {
                     )
                 )
             }
+    }
+
+    private func presentUnitNavigationFinishedDemoAccessState(
+        currentLesson: Lesson,
+        currentSection: Section,
+        targetUnit: Unit
+    ) -> Guarantee<Bool> {
+        guard currentLesson.canLearnLesson else {
+            return .value(false)
+        }
+
+        return Guarantee { seal in
+            firstly { () -> Promise<Course> in
+                if let course = currentSection.course {
+                    return .value(course)
+                } else {
+                    return self.provider.fetchCourseFromCacheOrNetwork(id: currentSection.courseId).compactMap { $0 }
+                }
+            }.then { course -> Promise<Lesson> in
+                guard !course.enrolled && course.isPaid else {
+                    throw Error.fetchFailed
+                }
+
+                if let lesson = targetUnit.lesson {
+                    return .value(lesson)
+                } else {
+                    return self.provider.fetchLessonFromCacheOrNetwork(id: targetUnit.lessonId).compactMap { $0 }
+                }
+            }.done { targetLesson in
+                if !targetLesson.canLearnLesson {
+                    self.presenter.presentUnitNavigationFinishedDemoAccessState(
+                        response: .init(section: currentSection)
+                    )
+                    seal(true)
+                } else {
+                    seal(false)
+                }
+            }.catch { _ in
+                seal(false)
+            }
+        }
     }
 }
 

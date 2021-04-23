@@ -21,6 +21,9 @@ protocol LessonPresenterProtocol {
     func presentUnitNavigationClosedByDateState(
         response: LessonDataFlow.UnitNavigationClosedByDatePresentation.Response
     )
+    func presentUnitNavigationFinishedDemoAccessState(
+        response: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.Response
+    )
 }
 
 final class LessonPresenter: LessonPresenterProtocol {
@@ -213,6 +216,14 @@ final class LessonPresenter: LessonPresenterProtocol {
         )
 
         self.viewController?.displayUnitNavigationClosedByDateState(viewModel: .init(title: title, message: message))
+    }
+
+    func presentUnitNavigationFinishedDemoAccessState(
+        response: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.Response
+    ) {
+        self.viewController?.displayUnitNavigationFinishedDemoAccessState(
+            viewModel: .init(sectionID: response.section.id)
+        )
     }
 
     // MAKE: Private API

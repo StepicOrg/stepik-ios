@@ -1,5 +1,6 @@
 import EasyTipView
 import Pageboy
+import PanModal
 import SnapKit
 import SVProgressHUD
 import Tabman
@@ -28,6 +29,9 @@ protocol LessonViewControllerProtocol: AnyObject {
     )
     func displayUnitNavigationClosedByDateState(
         viewModel: LessonDataFlow.UnitNavigationClosedByDatePresentation.ViewModel
+    )
+    func displayUnitNavigationFinishedDemoAccessState(
+        viewModel: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.ViewModel
     )
 }
 
@@ -643,6 +647,20 @@ extension LessonViewController: LessonViewControllerProtocol {
         )
         self.present(alert, animated: true)
     }
+
+    func displayUnitNavigationFinishedDemoAccessState(
+        viewModel: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.ViewModel
+    ) {
+        let assembly = LessonFinishedDemoPanModalAssembly(
+            sectionID: viewModel.sectionID,
+            output: self
+        )
+        let viewController = assembly.makeModule()
+
+        if let panModalPresentableViewController = viewController as? UIViewController & PanModalPresentable {
+            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
+        }
+    }
 }
 
 // MARK: - LessonViewController: EasyTipViewDelegate -
@@ -653,5 +671,13 @@ extension LessonViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         self.isTooltipVisible = false
         self.tooltipView = nil
+    }
+}
+
+extension LessonViewController: LessonFinishedDemoPanModalOutputProtocol {
+    func handleLessonFinishedDemoPanModalMainAction() {
+        self.dismiss(animated: true) {
+            print("TODO!!")
+        }
     }
 }

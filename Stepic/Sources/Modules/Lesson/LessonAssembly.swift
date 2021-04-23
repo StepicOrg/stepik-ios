@@ -39,7 +39,9 @@ final class LessonAssembly: Assembly {
             assignmentsPersistenceService: AssignmentsPersistenceService(),
             progressesPersistenceService: ProgressesPersistenceService(),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
-            viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI())
+            viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI()),
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI())
         )
         let presenter = LessonPresenter(urlFactory: StepikURLFactory())
         let interactor = LessonInteractor(
