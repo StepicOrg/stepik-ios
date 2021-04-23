@@ -12,7 +12,7 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
 
     var anchorModalToLongForm: Bool { false }
 
-    private var isShortFormEnabled = true
+    var isShortFormEnabled = true
 
     init() {
         super.init(nibName: nil, bundle: nil)
