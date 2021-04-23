@@ -9,6 +9,10 @@ enum LessonFinishedDemoPanModal {
             let section: Section
         }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let title: String
+            let subtitle: String
+            let actionButtonTitle: String
+        }
     }
 }

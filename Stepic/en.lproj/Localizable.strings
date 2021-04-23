@@ -882,6 +882,10 @@ StepDisabledTeacherNoCoursePlanProTitle = "a <b>PRO</b> or <b>paid</b> course";
 StepDisabledTeacherNoCoursePlanEnterpriseTitle = "an <b>Enterprise</b> course";
 StepPosition = "Step %@";
 
+/* LessonFinishedDemoPanModal */
+LessonFinishedDemoPanModalTitle = "Congratulations! You have just finished the demo-module «%@».";
+LessonFinishedDemoPanModalSubtitle = "To view, the other lessons buy full access to the course.";
+
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
 VideoPlayerPlaybackFailedStateAlertMessage = "Video playback error occurred, try again or close the player?";
