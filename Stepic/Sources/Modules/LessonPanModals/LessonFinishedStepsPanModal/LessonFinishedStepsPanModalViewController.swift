@@ -21,7 +21,7 @@ final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewCo
         self.view as? LessonFinishedStepsPanModalView
     }
 
-    override var panScrollable: UIScrollView? { nil }
+    override var panScrollable: UIScrollView? { self.lessonFinishedStepsPanModalView?.panScrollable }
 
     override var shortFormHeight: PanModalHeight {
         if self.hasLoadedData && self.isShortFormEnabled,
@@ -44,6 +44,7 @@ final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewCo
     override func loadView() {
         let view = LessonFinishedStepsPanModalView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -60,9 +61,10 @@ final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewCo
 
         switch newState {
         case .result(let viewModel):
-            print(viewModel)
+            self.lessonFinishedStepsPanModalView?.hideLoading()
+            self.lessonFinishedStepsPanModalView?.configure(viewModel: viewModel)
         case .loading:
-            print("loading")
+            self.lessonFinishedStepsPanModalView?.showLoading()
         }
     }
 }
@@ -73,5 +75,15 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
 
         self.panModalSetNeedsLayoutUpdate()
         self.panModalTransition(to: .shortForm)
+    }
+}
+
+extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModalViewDelegate {
+    func lessonFinishedStepsPanModalViewDidClickCloseButton(_ view: LessonFinishedStepsPanModalView) {
+        self.dismiss(animated: true)
+    }
+
+    func lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(_ view: LessonFinishedStepsPanModalView) {
+        print(#function)
     }
 }
