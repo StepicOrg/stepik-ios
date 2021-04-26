@@ -1,22 +1,35 @@
 import UIKit
 
 final class LessonFinishedStepsPanModalAssembly: Assembly {
-    var moduleInput: LessonFinishedStepsPanModalInputProtocol?
+    private let courseID: Course.IdType
 
     private weak var moduleOutput: LessonFinishedStepsPanModalOutputProtocol?
 
-    init(output: LessonFinishedStepsPanModalOutputProtocol? = nil) {
+    init(
+        courseID: Course.IdType,
+        output: LessonFinishedStepsPanModalOutputProtocol? = nil
+    ) {
+        self.courseID = courseID
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = LessonFinishedStepsPanModalProvider()
+        let provider = LessonFinishedStepsPanModalProvider(
+            courseID: self.courseID,
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesPersistenceService: ProgressesPersistenceService(),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
         let presenter = LessonFinishedStepsPanModalPresenter()
-        let interactor = LessonFinishedStepsPanModalInteractor(presenter: presenter, provider: provider)
+        let interactor = LessonFinishedStepsPanModalInteractor(
+            courseID: self.courseID,
+            presenter: presenter,
+            provider: provider
+        )
         let viewController = LessonFinishedStepsPanModalViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol LessonFinishedStepsPanModalInteractorProtocol {
-    func doSomeAction(request: LessonFinishedStepsPanModal.SomeAction.Request)
+    func doModalLoad(request: LessonFinishedStepsPanModal.ModalLoad.Request)
 }
 
 final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalInteractorProtocol {
@@ -11,19 +11,24 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
     private let presenter: LessonFinishedStepsPanModalPresenterProtocol
     private let provider: LessonFinishedStepsPanModalProviderProtocol
 
+    private let courseID: Course.IdType
+
     init(
+        courseID: Course.IdType,
         presenter: LessonFinishedStepsPanModalPresenterProtocol,
         provider: LessonFinishedStepsPanModalProviderProtocol
     ) {
+        self.courseID = courseID
         self.presenter = presenter
         self.provider = provider
     }
 
-    func doSomeAction(request: LessonFinishedStepsPanModal.SomeAction.Request) {}
-
-    enum Error: Swift.Error {
-        case something
+    func doModalLoad(request: LessonFinishedStepsPanModal.ModalLoad.Request) {
+        self.provider.fetchFromNetworkOrCache().compactMap { $0 }.done { course in
+            print("LessonFinishedStepsPanModalInteractor :: did load data = \(course)")
+            self.presenter.presentModal(response: .init(course: course))
+        }.catch { error in
+            print("LessonFinishedStepsPanModalInteractor :: failed load data with error = \(error)")
+        }
     }
 }
-
-extension LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalInputProtocol {}

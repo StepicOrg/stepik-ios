@@ -1,11 +1,22 @@
 import Foundation
 
 enum LessonFinishedStepsPanModal {
-    enum SomeAction {
+    enum ModalLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let course: Course
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: Enums
+
+    enum ViewControllerState {
+        case loading
+        case result(data: LessonFinishedStepsPanModalViewModel)
     }
 }

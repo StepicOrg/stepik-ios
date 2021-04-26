@@ -343,7 +343,6 @@
 		09ACDC74180F4250D7E8573D /* NewProfileSocialProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */; };
 		09D3CF0B1191F77777422700 /* AuthorsCourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7EEE6C9EC897044BAEBA7 /* AuthorsCourseListPresenter.swift */; };
 		0BCE34E8356EA252F3F2CD34 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */; };
-		0E81688A83642EF1989878FA /* LessonFinishedStepsPanModalInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A55228DFF2471188730AE3 /* LessonFinishedStepsPanModalInputProtocol.swift */; };
 		101D4F9FA505413E820316A3 /* FillBlanksQuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06455AE519D17C1948944F0E /* FillBlanksQuizAssembly.swift */; };
 		10EE105C3899569C32A7E24C /* NewProfileAchievementsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA42C58C967F7FED2305306 /* NewProfileAchievementsAssembly.swift */; };
 		1232DCE0E54B310C809D031C /* LessonFinishedDemoPanModalDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB20549B185EBFAFD229A56 /* LessonFinishedDemoPanModalDataFlow.swift */; };
@@ -696,6 +695,7 @@
 		2C80C829201A504700ABB312 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB7C05201953AF00063538 /* CongratulationViewController.swift */; };
 		2C81051E25757AD400FFD531 /* AuthorsCourseListCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81051D25757AD400FFD531 /* AuthorsCourseListCellSkeletonView.swift */; };
+		2C82029A26371855002C2C37 /* LessonFinishedStepsPanModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82029926371855002C2C37 /* LessonFinishedStepsPanModalViewModel.swift */; };
 		2C82D51721830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82D51621830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift */; };
 		2C82F22421D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */; };
 		2C83E20C2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E20B2549754400D0C1F3 /* SettingsRightDetailCheckboxTableViewCell.swift */; };
@@ -2447,6 +2447,7 @@
 		2C7FEE7C1FDFCE5300B2B4F1 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		2C7FEE7E1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimatedView.swift; sourceTree = "<group>"; };
 		2C81051D25757AD400FFD531 /* AuthorsCourseListCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListCellSkeletonView.swift; sourceTree = "<group>"; };
+		2C82029926371855002C2C37 /* LessonFinishedStepsPanModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalViewModel.swift; sourceTree = "<group>"; };
 		2C82D51621830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationServiceProtocol.swift; sourceTree = "<group>"; };
 		2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellSkeletonView.swift; sourceTree = "<group>"; };
 		2C8345D123156D5E00E6CE91 /* Model_course_can_continue.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_can_continue.xcdatamodel; sourceTree = "<group>"; };
@@ -2845,7 +2846,6 @@
 		52DE5FD0F368D7B48B0E3B5E /* FillBlanksQuizViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizViewController.swift; sourceTree = "<group>"; };
 		53EE6AAA8E539D30FAF22B0B /* NewProfileUserActivityInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityInteractor.swift; sourceTree = "<group>"; };
 		55D1D1FD9DEC7FEAC0642FCC /* SimpleCourseListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SimpleCourseListAssembly.swift; sourceTree = "<group>"; };
-		57A55228DFF2471188730AE3 /* LessonFinishedStepsPanModalInputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalInputProtocol.swift; sourceTree = "<group>"; };
 		5808833D97EE19419B9277C1 /* SimpleCourseListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SimpleCourseListViewController.swift; sourceTree = "<group>"; };
 		582946156484A5655EF72E43 /* UserCoursesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesPresenter.swift; sourceTree = "<group>"; };
 		58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsPresenter.swift; sourceTree = "<group>"; };
@@ -3587,7 +3587,6 @@
 		19E01B0F175AC94980DFF8E6 /* InputOutput */ = {
 			isa = PBXGroup;
 			children = (
-				57A55228DFF2471188730AE3 /* LessonFinishedStepsPanModalInputProtocol.swift */,
 				3B343CD0106AAF3E89DE7F23 /* LessonFinishedStepsPanModalOutputProtocol.swift */,
 			);
 			path = InputOutput;
@@ -7066,6 +7065,7 @@
 				A0250C97AA6FB7D60234B25A /* LessonFinishedStepsPanModalProvider.swift */,
 				5EE4ED6E9648215F1B416059 /* LessonFinishedStepsPanModalView.swift */,
 				B7B8028216D0178B5F2E2594 /* LessonFinishedStepsPanModalViewController.swift */,
+				2C82029926371855002C2C37 /* LessonFinishedStepsPanModalViewModel.swift */,
 				19E01B0F175AC94980DFF8E6 /* InputOutput */,
 			);
 			path = LessonFinishedStepsPanModal;
@@ -9647,6 +9647,7 @@
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				2CDA1B5E2613C06E00E36BF7 /* ProctorSessionPlainObject.swift in Sources */,
 				2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */,
+				2C82029A26371855002C2C37 /* LessonFinishedStepsPanModalViewModel.swift in Sources */,
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */,
@@ -11045,7 +11046,6 @@
 				6A10E1CBC8245445C41FB9F8 /* LessonFinishedStepsPanModalProvider.swift in Sources */,
 				BAF3545D8CC66168A37E2A58 /* LessonFinishedStepsPanModalView.swift in Sources */,
 				C56B3693FD36033B00C6AEB7 /* LessonFinishedStepsPanModalViewController.swift in Sources */,
-				0E81688A83642EF1989878FA /* LessonFinishedStepsPanModalInputProtocol.swift in Sources */,
 				5BB0F4923200056C332A59FF /* LessonFinishedStepsPanModalOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
