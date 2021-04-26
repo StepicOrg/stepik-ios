@@ -1,0 +1,6 @@
+import Foundation
+import PromiseKit
+
+protocol LessonFinishedStepsPanModalProviderProtocol {}
+
+final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProviderProtocol {}
