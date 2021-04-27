@@ -10,6 +10,9 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
     func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response) {}
 
     private func makeViewModel(course: Course) -> LessonFinishedStepsPanModalViewModel {
+        let state = self.getState(course: course)
+        print("LessonFinishedStepsPanModalPresenter :: state = \(state)")
+
         let headerImageName = self.makeHeaderImageName(course: course)
 
         let title = self.makeTitle(course: course)
@@ -32,6 +35,41 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             primaryOptionButtonDescription: primaryOptionButtonDescription,
             secondaryOptionButtonDescription: secondaryOptionButtonDescription
         )
+    }
+
+    private func getState(course: Course) -> State {
+        let progressPercent = course.progress?.percentPassed ?? 0
+        let progressScore = Int(course.progress?.score ?? 0)
+        let courseReviewsTreshold: Float = 0
+
+        if !course.isWithCertificate {
+            if progressPercent < 20 {
+                return .neutralWithoutCert
+            } else if progressPercent < courseReviewsTreshold {
+                return .successNeutralWithoutCert
+            } else {
+                return .successWithoutCert
+            }
+        } else {
+            let didReceiveCertificate = course.anyCertificateTreshold != nil
+                ? (progressScore >= course.anyCertificateTreshold.require())
+                : false
+
+            if didReceiveCertificate {
+                if let certificateDistinctionThreshold = course.certificateDistinctionThreshold,
+                   progressScore >= certificateDistinctionThreshold {
+                    return .successDistinctionCert
+                } else {
+                    return .successRegularCert
+                }
+            } else {
+                if progressPercent < 20 {
+                    return .neutralWithCert
+                } else {
+                    return .successNeutralWithCert
+                }
+            }
+        }
     }
 
     private func makeHeaderImageName(course: Course) -> String {
@@ -84,5 +122,15 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         course: Course
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
         .init(title: "", iconName: nil, isHidden: false)
+    }
+
+    private enum State {
+        case neutralWithCert
+        case neutralWithoutCert
+        case successNeutralWithCert
+        case successNeutralWithoutCert
+        case successWithoutCert
+        case successRegularCert
+        case successDistinctionCert
     }
 }

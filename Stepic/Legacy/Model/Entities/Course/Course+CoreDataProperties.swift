@@ -51,6 +51,7 @@ extension Course {
     @NSManaged var managedCertificateDistinctionThreshold: NSNumber?
     @NSManaged var managedIsCertificateAutoIssued: NSNumber?
     @NSManaged var managedIsCertificateIssued: NSNumber?
+    @NSManaged var managedWithCertificate: NSNumber?
 
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
@@ -409,6 +410,15 @@ extension Course {
         }
         set {
             self.managedIsCertificateIssued = newValue as NSNumber?
+        }
+    }
+
+    var isWithCertificate: Bool {
+        get {
+            self.managedWithCertificate?.boolValue ?? false
+        }
+        set {
+            self.managedWithCertificate = NSNumber(value: newValue)
         }
     }
 
