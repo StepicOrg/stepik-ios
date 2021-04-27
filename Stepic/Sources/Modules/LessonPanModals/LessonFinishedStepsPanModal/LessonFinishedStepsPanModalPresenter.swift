@@ -38,14 +38,13 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
     }
 
     private func getState(course: Course) -> State {
-        let progressPercent = course.progress?.percentPassed ?? 0
         let progressScore = Int(course.progress?.score ?? 0)
-        let courseReviewsTreshold: Float = 0
+        let progressPercentPassed = course.progress?.percentPassed ?? 0
 
         if !course.isWithCertificate {
-            if progressPercent < 20 {
+            if progressPercentPassed < 20 {
                 return .neutralWithoutCert
-            } else if progressPercent < courseReviewsTreshold {
+            } else if progressPercentPassed < 80 {
                 return .successNeutralWithoutCert
             } else {
                 return .successWithoutCert
@@ -63,8 +62,10 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                     return .successRegularCert
                 }
             } else {
-                if progressPercent < 20 {
+                if progressPercentPassed < 20 {
                     return .neutralWithCert
+                } else if progressPercentPassed < 80 {
+                    return .successNeutralWithCert
                 } else {
                     return .successNeutralWithCert
                 }
