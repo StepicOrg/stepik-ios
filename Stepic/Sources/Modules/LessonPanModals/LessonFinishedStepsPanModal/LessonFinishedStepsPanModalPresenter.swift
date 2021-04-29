@@ -7,13 +7,16 @@ protocol LessonFinishedStepsPanModalPresenterProtocol {
 final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPresenterProtocol {
     weak var viewController: LessonFinishedStepsPanModalViewControllerProtocol?
 
-    func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response) {}
+    func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response) {
+        let viewModel = self.makeViewModel(course: response.course)
+        self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
+    }
 
     private func makeViewModel(course: Course) -> LessonFinishedStepsPanModalViewModel {
         let state = self.getState(course: course)
         print("LessonFinishedStepsPanModalPresenter :: state = \(state)")
 
-        let headerImageName = self.makeHeaderImageName(course: course)
+        let headerImageName = self.makeHeaderImageName(state: state)
 
         let title = self.makeTitle(course: course)
         let feedbackText = self.makeFeedbackText(course: course)
@@ -67,25 +70,24 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                 } else if progressPercentPassed < 80 {
                     return .successNeutralWithCert
                 } else {
-                    return .successNeutralWithCert
+                    return .successWithCert
                 }
             }
         }
     }
 
-    private func makeHeaderImageName(course: Course) -> String {
-        // finished-steps-distinction-modal-header
-        // finished-steps-happy-neutral-modal-header
-        // finished-steps-neutral-modal-header
-        // finished-steps-regular-modal-header
-        // finished-steps-success-modal-header
-        switch course.progress?.percentPassed ?? 0 {
-        case 20..<80:
-            return ""
-        case 80...:
-            return ""
-        default:
+    private func makeHeaderImageName(state: State) -> String {
+        switch state {
+        case .neutralWithCert, .neutralWithoutCert:
             return "finished-steps-neutral-modal-header"
+        case .successNeutralWithCert, .successNeutralWithoutCert, .successWithCert:
+            return "finished-steps-happy-neutral-modal-header"
+        case .successWithoutCert:
+            return "finished-steps-success-modal-header"
+        case .successRegularCert:
+            return "finished-steps-regular-modal-header"
+        case .successDistinctionCert:
+            return "finished-steps-distinction-modal-header"
         }
     }
 
@@ -130,6 +132,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         case neutralWithoutCert
         case successNeutralWithCert
         case successNeutralWithoutCert
+        case successWithCert
         case successWithoutCert
         case successRegularCert
         case successDistinctionCert

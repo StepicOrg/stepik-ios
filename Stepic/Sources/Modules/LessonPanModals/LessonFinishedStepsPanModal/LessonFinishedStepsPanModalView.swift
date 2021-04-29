@@ -149,7 +149,9 @@ final class LessonFinishedStepsPanModalView: UIView {
         self.loadingIndicator.stopAnimating()
     }
 
-    func configure(viewModel: LessonFinishedStepsPanModalViewModel) {}
+    func configure(viewModel: LessonFinishedStepsPanModalViewModel) {
+        self.headerImageView.image = UIImage(named: viewModel.headerImageName)
+    }
 
     @objc
     private func closeButtonClicked() {
