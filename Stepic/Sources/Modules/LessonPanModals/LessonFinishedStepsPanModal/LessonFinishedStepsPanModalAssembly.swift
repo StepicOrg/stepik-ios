@@ -22,6 +22,8 @@ final class LessonFinishedStepsPanModalAssembly: Assembly {
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
             certificatesPersistenceService: CertificatesPersistenceService(),
             certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
+            courseReviewsPersistenceService: CourseReviewsPersistenceService(),
+            courseReviewsNetworkService: CourseReviewsNetworkService(courseReviewsAPI: CourseReviewsAPI()),
             userAccountService: UserAccountService()
         )
         let presenter = LessonFinishedStepsPanModalPresenter()

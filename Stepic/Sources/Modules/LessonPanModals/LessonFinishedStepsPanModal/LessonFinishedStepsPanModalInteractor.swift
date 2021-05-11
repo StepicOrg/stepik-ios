@@ -24,11 +24,27 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
     }
 
     func doModalLoad(request: LessonFinishedStepsPanModal.ModalLoad.Request) {
-        self.provider.fetchFromNetworkOrCache().compactMap { $0 }.done { course in
-            print("LessonFinishedStepsPanModalInteractor :: did load data = \(course)")
-            self.presenter.presentModal(response: .init(course: course))
-        }.catch { error in
-            print("LessonFinishedStepsPanModalInteractor :: failed load data with error = \(error)")
-        }
+        self.provider
+            .fetchCourseFromNetworkOrCache()
+            .compactMap { $0 }
+            .then { course -> Guarantee<(Course, CourseReview?)> in
+                Guarantee(
+                    self.provider.fetchCourseReviewFromNetworkOrCache(),
+                    fallback: nil
+                ).map { (course, $0?.flatMap({ $0 })) }
+            }
+            .done { course, courseReviewOrNil in
+                if let courseReview = courseReviewOrNil {
+                    courseReview.course = course
+                    CoreDataHelper.shared.save()
+                }
+
+                print("LessonFinishedStepsPanModalInteractor :: did load data = \(course)")
+
+                self.presenter.presentModal(response: .init(course: course, courseReview: courseReviewOrNil))
+            }
+            .catch { error in
+                print("LessonFinishedStepsPanModalInteractor :: failed load data with error = \(error)")
+            }
     }
 }

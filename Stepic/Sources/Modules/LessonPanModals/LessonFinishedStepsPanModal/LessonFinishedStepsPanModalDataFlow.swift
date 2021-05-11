@@ -6,6 +6,7 @@ enum LessonFinishedStepsPanModal {
 
         struct Response {
             let course: Course
+            let courseReview: CourseReview?
         }
 
         struct ViewModel {

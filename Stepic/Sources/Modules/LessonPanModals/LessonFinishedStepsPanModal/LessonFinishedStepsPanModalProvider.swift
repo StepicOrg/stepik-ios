@@ -2,17 +2,33 @@ import Foundation
 import PromiseKit
 
 protocol LessonFinishedStepsPanModalProviderProtocol {
-    func fetchCached() -> Promise<Course?>
-    func fetchRemote() -> Promise<Course?>
+    func fetchCachedCourse() -> Promise<Course?>
+    func fetchRemoteCourse() -> Promise<Course?>
+
+    func fetchCachedCourseReview() -> Promise<CourseReview?>
+    func fetchRemoteCourseReview() -> Promise<CourseReview?>
 }
 
 extension LessonFinishedStepsPanModalProviderProtocol {
-    func fetchFromNetworkOrCache() -> Promise<Course?> {
-        Guarantee(self.fetchRemote(), fallback: nil).then { remoteCourseOrNil -> Promise<Course?> in
+    func fetchCourseFromNetworkOrCache() -> Promise<Course?> {
+        Guarantee(self.fetchRemoteCourse(), fallback: nil).then { remoteCourseOrNil -> Promise<Course?> in
             if let remoteCourse = remoteCourseOrNil?.flatMap({ $0 }) {
                 return .value(remoteCourse)
             } else {
-                return self.fetchCached()
+                return self.fetchCachedCourse()
+            }
+        }
+    }
+
+    func fetchCourseReviewFromNetworkOrCache() -> Promise<CourseReview?> {
+        Guarantee(
+            self.fetchRemoteCourseReview(),
+            fallback: nil
+        ).then { remoteCourseReviewOrNil -> Promise<CourseReview?> in
+            if let remoteCourseReview = remoteCourseReviewOrNil?.flatMap({ $0 }) {
+                return .value(remoteCourseReview)
+            } else {
+                return self.fetchCachedCourseReview()
             }
         }
     }
@@ -30,6 +46,9 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
     private let certificatesPersistenceService: CertificatesPersistenceServiceProtocol
     private let certificatesNetworkService: CertificatesNetworkServiceProtocol
 
+    private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
+    private let courseReviewsNetworkService: CourseReviewsNetworkServiceProtocol
+
     private let userAccountService: UserAccountServiceProtocol
 
     init(
@@ -40,6 +59,8 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         progressesNetworkService: ProgressesNetworkServiceProtocol,
         certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
         certificatesNetworkService: CertificatesNetworkServiceProtocol,
+        courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol,
+        courseReviewsNetworkService: CourseReviewsNetworkServiceProtocol,
         userAccountService: UserAccountServiceProtocol
     ) {
         self.courseID = courseID
@@ -49,10 +70,12 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         self.progressesPersistenceService = progressesPersistenceService
         self.certificatesPersistenceService = certificatesPersistenceService
         self.certificatesNetworkService = certificatesNetworkService
+        self.courseReviewsPersistenceService = courseReviewsPersistenceService
+        self.courseReviewsNetworkService = courseReviewsNetworkService
         self.userAccountService = userAccountService
     }
 
-    func fetchCached() -> Promise<Course?> {
+    func fetchCachedCourse() -> Promise<Course?> {
         Promise { seal in
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesPersistenceService.fetch(id:),
@@ -66,7 +89,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         }
     }
 
-    func fetchRemote() -> Promise<Course?> {
+    func fetchRemoteCourse() -> Promise<Course?> {
         Promise { seal in
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesNetworkService.fetch(id:),
@@ -74,6 +97,41 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
                 certificatesFetchMethod: self.certificatesNetworkService.fetch(courseID:userID:)
             ).done { course in
                 seal.fulfill(course)
+            }.catch { _ in
+                seal.reject(Error.networkFetchFailed)
+            }
+        }
+    }
+
+    func fetchCachedCourseReview() -> Promise<CourseReview?> {
+        guard let currentUser = self.userAccountService.currentUser else {
+            return .value(nil)
+        }
+
+        return Promise { seal in
+            self.courseReviewsPersistenceService.fetch(by: self.courseID, userID: currentUser.id).done { review in
+                review?.user = currentUser
+                CoreDataHelper.shared.save()
+
+                seal.fulfill(review)
+            }.catch { _ in
+                seal.reject(Error.persistenceFetchFailed)
+            }
+        }
+    }
+
+    func fetchRemoteCourseReview() -> Promise<CourseReview?> {
+        guard let currentUser = self.userAccountService.currentUser else {
+            return .value(nil)
+        }
+
+        return Promise { seal in
+            self.courseReviewsNetworkService.fetch(courseID: self.courseID, userID: currentUser.id).done { reviews, _ in
+                let review = reviews.first
+                review?.user = currentUser
+                CoreDataHelper.shared.save()
+
+                seal.fulfill(review)
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
             }
