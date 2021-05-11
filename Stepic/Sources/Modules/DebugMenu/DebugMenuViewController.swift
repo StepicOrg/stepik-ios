@@ -64,6 +64,7 @@ final class DebugMenuViewController: UIViewController {
     private enum Section {
         case fcmToken
         case flex
+        case deepLinking
 
         var title: String {
             switch self {
@@ -71,6 +72,8 @@ final class DebugMenuViewController: UIViewController {
                 return "FCM Token"
             case .flex:
                 return "FLEX"
+            case .deepLinking:
+                return "Deep Linking"
             }
         }
     }
@@ -79,6 +82,8 @@ final class DebugMenuViewController: UIViewController {
         case fcmRegistrationToken
         case flexToggleExplorer
         case flexShowMenu
+        case deepLinkInput
+        case deepLinkOpen
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
 
@@ -88,6 +93,8 @@ final class DebugMenuViewController: UIViewController {
                 return "Toggle Explorer"
             case .flexShowMenu:
                 return "Show Menu"
+            case .deepLinkOpen:
+                return "Open deep link"
             default:
                 return ""
             }
@@ -105,6 +112,7 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
     private func display(newViewModel viewModel: DebugMenuViewModel) {
         var sections = [SettingsTableSectionViewModel]()
 
+        // Firebase
         let fcmTokenCell = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Row.fcmRegistrationToken.uniqueIdentifier,
             type: .rightDetail(
@@ -116,6 +124,7 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
         )
         sections.append(.init(header: .init(title: Section.fcmToken.title), cells: [fcmTokenCell], footer: nil))
 
+        // FLEX
         let flexToggleExplorerCell = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Row.flexToggleExplorer.uniqueIdentifier,
             type: .rightDetail(options: .init(title: .init(text: Row.flexToggleExplorer.title)))
@@ -133,6 +142,37 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
             .init(
                 header: .init(title: Section.flex.title),
                 cells: [flexToggleExplorerCell, flexShowMenuCell],
+                footer: nil
+            )
+        )
+
+        // Deep Linking
+        let deepLinkInputCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.deepLinkInput.rawValue,
+            type: .largeInput(
+                options: .init(
+                    valueText: self.formState.deepLink,
+                    placeholderText: "Enter deep link text",
+                    maxLength: nil
+                )
+            )
+        )
+        let deepLinkOpenCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.deepLinkOpen.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(
+                        text: Row.deepLinkOpen.title,
+                        appearance: .init(textColor: .stepikVioletFixed, textAlignment: .left)
+                    ),
+                    accessoryType: .none
+                )
+            )
+        )
+        sections.append(
+            .init(
+                header: .init(title: Section.deepLinking.title),
+                cells: [deepLinkInputCell, deepLinkOpenCell],
                 footer: nil
             )
         )
