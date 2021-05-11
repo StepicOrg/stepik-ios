@@ -503,6 +503,7 @@
 		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
 		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
+		2C2F6965263AC8BB0025D80B /* LessonPanModalActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F6964263AC8BB0025D80B /* LessonPanModalActionButton.swift */; };
 		2C2F6E6024DD3E69000E8844 /* StepikAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */; };
 		2C30505B24574B1F005DCD81 /* CourseListDataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */; };
 		2C30A6A024A29B6D0074693D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30A69F24A29B6D0074693D /* Queue.swift */; };
@@ -2237,6 +2238,7 @@
 		2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertPresenter.swift; sourceTree = "<group>"; };
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
+		2C2F6964263AC8BB0025D80B /* LessonPanModalActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPanModalActionButton.swift; sourceTree = "<group>"; };
 		2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAnalyticsEvents.swift; sourceTree = "<group>"; };
 		2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataBackUpdateService.swift; sourceTree = "<group>"; };
 		2C30A69F24A29B6D0074693D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -3961,6 +3963,15 @@
 				2C223A1424A0CC90002E4F02 /* IAPServiceDelegate.swift */,
 			);
 			path = InAppPurchases;
+			sourceTree = "<group>";
+		};
+		2C2F695E263AC8940025D80B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5EE4ED6E9648215F1B416059 /* LessonFinishedStepsPanModalView.swift */,
+				2C2F6964263AC8BB0025D80B /* LessonPanModalActionButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2C30505924574A82005DCD81 /* Interactor */ = {
@@ -7064,10 +7075,10 @@
 				3D61DBD05355014717A35F04 /* LessonFinishedStepsPanModalInteractor.swift */,
 				940645D0A09D0D65D263AEC3 /* LessonFinishedStepsPanModalPresenter.swift */,
 				A0250C97AA6FB7D60234B25A /* LessonFinishedStepsPanModalProvider.swift */,
-				5EE4ED6E9648215F1B416059 /* LessonFinishedStepsPanModalView.swift */,
 				B7B8028216D0178B5F2E2594 /* LessonFinishedStepsPanModalViewController.swift */,
 				2C82029926371855002C2C37 /* LessonFinishedStepsPanModalViewModel.swift */,
 				19E01B0F175AC94980DFF8E6 /* InputOutput */,
+				2C2F695E263AC8940025D80B /* Views */,
 			);
 			path = LessonFinishedStepsPanModal;
 			sourceTree = "<group>";
@@ -10567,6 +10578,7 @@
 				62E98E5288DA003FCF78566F /* EditStepOutputProtocol.swift in Sources */,
 				2C42EFBA2476FADB00423695 /* MagicLinksNetworkService.swift in Sources */,
 				62E987062AC5064918B27379 /* ContentLanguageSwitchAvailabilityService.swift in Sources */,
+				2C2F6965263AC8BB0025D80B /* LessonPanModalActionButton.swift in Sources */,
 				62E987998151D191C16B5E15 /* ExploreAssembly.swift in Sources */,
 				62E980E01C1500666CEDAA7D /* ExploreDataFlow.swift in Sources */,
 				62E98C708D92E21A7A1B2655 /* ExploreInteractor.swift in Sources */,

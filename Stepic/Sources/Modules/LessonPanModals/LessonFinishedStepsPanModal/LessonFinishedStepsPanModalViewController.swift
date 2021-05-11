@@ -84,6 +84,10 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
     }
 
     func lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(_ view: LessonFinishedStepsPanModalView) {
+        self.dismiss(animated: true)
+    }
+
+    func lessonFinishedStepsPanModalViewDidClickSecondaryActionButton(_ view: LessonFinishedStepsPanModalView) {
         print(#function)
     }
 }

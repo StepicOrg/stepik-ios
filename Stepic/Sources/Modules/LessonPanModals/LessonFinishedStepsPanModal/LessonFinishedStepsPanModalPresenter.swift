@@ -14,7 +14,6 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
 
     private func makeViewModel(course: Course) -> LessonFinishedStepsPanModalViewModel {
         let state = self.getState(course: course)
-        print("LessonFinishedStepsPanModalPresenter :: state = \(state)")
 
         let headerImageName = self.makeHeaderImageName(state: state)
 
@@ -22,7 +21,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         let feedbackText = self.makeFeedbackText(course: course)
         let subtitle = self.makeSubtitle(course: course)
 
-        let primaryActionButtonDescription = self.makePrimaryActionButtonDescription(course: course)
+        let primaryActionButtonDescription = self.makePrimaryActionButtonDescription()
         let secondaryActionButtonDescription = self.makeSecondaryActionButtonDescription(course: course)
 
         let primaryOptionButtonDescription = self.makePrimaryOptionButtonDescription(course: course)
@@ -103,16 +102,23 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         ""
     }
 
-    private func makePrimaryActionButtonDescription(
-        course: Course
-    ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(title: "", iconName: nil, isHidden: false)
+    private func makePrimaryActionButtonDescription() -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
+        .init(
+            title: NSLocalizedString("LessonFinishedStepsPanModalPrimaryActionButtonTitle", comment: ""),
+            iconName: nil,
+            isHidden: false
+        )
     }
 
     private func makeSecondaryActionButtonDescription(
         course: Course
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(title: "", iconName: nil, isHidden: false)
+        let title: String = {
+            NSLocalizedString("LessonFinishedStepsPanModalSecondaryActionButtonFindNewCourseTitle", comment: "")
+            // LessonFinishedStepsPanModalSecondaryActionButtonLeaveReviewTitle
+        }()
+
+        return .init(title: title, iconName: nil, isHidden: false)
     }
 
     private func makePrimaryOptionButtonDescription(

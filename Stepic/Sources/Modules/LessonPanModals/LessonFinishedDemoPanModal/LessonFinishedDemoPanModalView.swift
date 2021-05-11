@@ -22,8 +22,6 @@ extension LessonFinishedDemoPanModalView {
         let subtitleLabelFont = Typography.bodyFont
         let subtitleLabelTextColor = UIColor.stepikMaterialPrimaryText
 
-        let actionButtonFont = Typography.bodyFont
-        let actionButtonCornerRadius: CGFloat = 8
         let actionButtonHeight: CGFloat = 44
 
         let stackViewSpacing: CGFloat = 16
@@ -66,13 +64,8 @@ final class LessonFinishedDemoPanModalView: UIView {
     }()
 
     private lazy var actionButton: UIButton = {
-        var appearance = NextStepButton.Appearance()
-        appearance.font = self.appearance.actionButtonFont
-        appearance.cornerRadius = self.appearance.actionButtonCornerRadius
-
-        let button = NextStepButton(appearance: appearance)
+        let button = LessonPanModalActionButton()
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
-
         return button
     }()
 

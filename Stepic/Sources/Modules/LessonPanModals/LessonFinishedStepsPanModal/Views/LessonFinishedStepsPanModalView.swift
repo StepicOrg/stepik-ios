@@ -4,6 +4,7 @@ import UIKit
 protocol LessonFinishedStepsPanModalViewDelegate: AnyObject {
     func lessonFinishedStepsPanModalViewDidClickCloseButton(_ view: LessonFinishedStepsPanModalView)
     func lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(_ view: LessonFinishedStepsPanModalView)
+    func lessonFinishedStepsPanModalViewDidClickSecondaryActionButton(_ view: LessonFinishedStepsPanModalView)
 }
 
 extension LessonFinishedStepsPanModalView {
@@ -22,8 +23,6 @@ extension LessonFinishedStepsPanModalView {
         let subtitleLabelFont = Typography.bodyFont
         let subtitleLabelTextColor = UIColor.stepikMaterialPrimaryText
 
-        let actionButtonFont = Typography.bodyFont
-        let actionButtonCornerRadius: CGFloat = 8
         let actionButtonHeight: CGFloat = 44
 
         let stackViewSpacing: CGFloat = 16
@@ -73,13 +72,14 @@ final class LessonFinishedStepsPanModalView: UIView {
     }()
 
     private lazy var primaryActionButton: UIButton = {
-        var appearance = NextStepButton.Appearance()
-        appearance.font = self.appearance.actionButtonFont
-        appearance.cornerRadius = self.appearance.actionButtonCornerRadius
-
-        let button = NextStepButton(appearance: appearance)
+        let button = LessonPanModalActionButton()
         button.addTarget(self, action: #selector(self.primaryActionButtonClicked), for: .touchUpInside)
+        return button
+    }()
 
+    private lazy var secondaryActionButton: UIButton = {
+        let button = LessonPanModalActionButton(style: .outline)
+        button.addTarget(self, action: #selector(self.secondaryActionButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -151,6 +151,15 @@ final class LessonFinishedStepsPanModalView: UIView {
 
     func configure(viewModel: LessonFinishedStepsPanModalViewModel) {
         self.headerImageView.image = UIImage(named: viewModel.headerImageName)
+
+        self.titleLabel.text = viewModel.title
+        self.subtitleLabel.text = viewModel.subtitle
+
+        self.primaryActionButton.setTitle(viewModel.primaryActionButtonDescription.title, for: .normal)
+        self.primaryActionButton.isHidden = viewModel.primaryActionButtonDescription.isHidden
+
+        self.secondaryActionButton.setTitle(viewModel.secondaryActionButtonDescription.title, for: .normal)
+        self.secondaryActionButton.isHidden = viewModel.secondaryActionButtonDescription.isHidden
     }
 
     @objc
@@ -161,6 +170,11 @@ final class LessonFinishedStepsPanModalView: UIView {
     @objc
     private func primaryActionButtonClicked() {
         self.delegate?.lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(self)
+    }
+
+    @objc
+    private func secondaryActionButtonClicked() {
+        self.delegate?.lessonFinishedStepsPanModalViewDidClickSecondaryActionButton(self)
     }
 }
 
@@ -182,6 +196,7 @@ extension LessonFinishedStepsPanModalView: ProgrammaticallyInitializableViewProt
         self.contentStackView.addArrangedSubview(self.titleLabel)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
         self.contentStackView.addArrangedSubview(SeparatorView())
+        self.contentStackView.addArrangedSubview(self.secondaryActionButton)
         self.contentStackView.addArrangedSubview(self.primaryActionButton)
     }
 
@@ -204,6 +219,9 @@ extension LessonFinishedStepsPanModalView: ProgrammaticallyInitializableViewProt
             make.top.equalToSuperview().offset(self.appearance.closeButtonInsets.top)
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-self.appearance.closeButtonInsets.right)
         }
+
+        self.secondaryActionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.secondaryActionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
 
         self.primaryActionButton.translatesAutoresizingMaskIntoConstraints = false
         self.primaryActionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }

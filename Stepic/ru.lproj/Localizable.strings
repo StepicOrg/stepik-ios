@@ -886,6 +886,10 @@ StepPosition = "Шаг %@";
 /* LessonFinishedDemoPanModal */
 LessonFinishedDemoPanModalTitle = "Поздравляем! Вы закончили демо-модуль «%@».";
 LessonFinishedDemoPanModalSubtitle = "Для доступа к следующим урокам, купите курс.";
+/* LessonFinishedStepsPanModal */
+LessonFinishedStepsPanModalPrimaryActionButtonTitle = "Вернуться к задачам";
+LessonFinishedStepsPanModalSecondaryActionButtonFindNewCourseTitle = "Найти новый курс";
+LessonFinishedStepsPanModalSecondaryActionButtonLeaveReviewTitle = "Оставить отзыв";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
