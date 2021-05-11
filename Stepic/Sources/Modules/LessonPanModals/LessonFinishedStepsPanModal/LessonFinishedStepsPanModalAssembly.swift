@@ -19,7 +19,10 @@ final class LessonFinishedStepsPanModalAssembly: Assembly {
             coursesPersistenceService: CoursesPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             progressesPersistenceService: ProgressesPersistenceService(),
-            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            certificatesPersistenceService: CertificatesPersistenceService(),
+            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
+            userAccountService: UserAccountService()
         )
         let presenter = LessonFinishedStepsPanModalPresenter()
         let interactor = LessonFinishedStepsPanModalInteractor(

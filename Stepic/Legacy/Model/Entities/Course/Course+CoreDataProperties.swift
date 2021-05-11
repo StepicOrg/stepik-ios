@@ -377,6 +377,15 @@ extension Course {
         }
     }
 
+    var certificateEntity: Certificate? {
+        get {
+            self.managedCertificateEntity
+        }
+        set {
+            self.managedCertificateEntity = newValue
+        }
+    }
+
     var certificateRegularThreshold: Int? {
         get {
             self.managedCertificateRegularThreshold?.intValue
