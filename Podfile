@@ -86,7 +86,7 @@ def all_pods
 end
 
 def testing_pods
-  pod 'Quick', '3.1.2'
+  pod 'Quick', '4.0.0'
   pod 'Nimble', '9.2.0'
   pod 'Mockingjay', '3.0.0-alpha.1'
 end
