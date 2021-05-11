@@ -8,7 +8,10 @@ final class DebugMenuViewController: UIViewController {
     var debugMenuView: DebugMenuView? { self.view as? DebugMenuView }
 
     private let interactor: DebugMenuInteractorProtocol
+    private let deepLinkRoutingService = DeepLinkRoutingService()
+
     private var state: DebugMenu.ViewControllerState
+    private var formState = FormState()
 
     init(
         interactor: DebugMenuInteractorProtocol,
@@ -99,6 +102,10 @@ final class DebugMenuViewController: UIViewController {
                 return ""
             }
         }
+    }
+
+    private struct FormState {
+        var deepLink = ""
     }
 }
 
@@ -207,7 +214,27 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
             }
         case .flexToggleExplorer:
             FLEXManager.toggleExplorer()
+        case .deepLinkOpen:
+            self.handleOpenDeepLink()
+        default:
+            break
         }
+    }
+
+    func settingsCell(
+        elementView: UITextView,
+        didReportTextChange text: String,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) {
+        self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
+    }
+
+    func settingsCell(
+        elementView: UITextField,
+        didReportTextChange text: String?,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) {
+        self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
     }
 
     // MARK: Private Helpers
@@ -224,5 +251,43 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
         }
 
         self.present(module: activityViewController)
+    }
+
+    private func handleTextField(uniqueIdentifier: UniqueIdentifierType?, text: String?) {
+        guard let id = uniqueIdentifier,
+              let row = Row(rawValue: id) else {
+            return
+        }
+
+        switch row {
+        case .deepLinkInput:
+            self.formState.deepLink = text ?? ""
+        default:
+            break
+        }
+    }
+
+    private func handleOpenDeepLink() {
+        if let route = DeepLinkRoute(path: self.formState.deepLink) {
+            self.deepLinkRoutingService.route(route).catch { error in
+                let alert = UIAlertController(
+                    title: "Error",
+                    message: "Failed to open deep link \"\(self.formState.deepLink)\" with error \"\(error)\".",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+                self.present(alert, animated: true)
+            }
+        } else {
+            let alert = UIAlertController(
+                title: "Error",
+                message: "Failed to open deep link \"\(self.formState.deepLink)\".",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+            self.present(alert, animated: true)
+        }
     }
 }
