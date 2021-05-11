@@ -172,7 +172,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Nimble (9.0.0)
+  - Nimble (9.2.0)
   - Nuke (9.5.0)
   - Pageboy (3.6.2)
   - PanModal (1.2.7)
@@ -243,7 +243,7 @@ DEPENDENCIES:
   - Koloda (= 5.0.1)
   - lottie-ios (= 3.2.1)
   - Mockingjay (= 3.0.0-alpha.1)
-  - Nimble (= 9.0.0)
+  - Nimble (= 9.2.0)
   - Nuke (= 9.5.0)
   - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
   - Presentr (= 1.9)
@@ -401,7 +401,7 @@ SPEC CHECKSUMS:
   lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   Nuke: 6f400a4ea957e09149ec335a3c6acdcc814d89e4
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
