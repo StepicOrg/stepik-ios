@@ -16,6 +16,14 @@ enum LessonFinishedStepsPanModal {
 
     // MARK: Enums
 
+    enum ActionType: String, UniqueIdentifiable {
+        case backToAssignments
+        case leaveReview
+        case findNewCourse
+
+        var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
+    }
+
     enum ViewControllerState {
         case loading
         case result(data: LessonFinishedStepsPanModalViewModel)

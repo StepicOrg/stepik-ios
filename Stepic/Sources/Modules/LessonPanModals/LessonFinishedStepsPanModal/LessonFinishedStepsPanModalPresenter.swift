@@ -21,8 +21,8 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         let feedbackText = self.makeFeedbackText(course: course)
         let subtitle = self.makeSubtitle(course: course)
 
-        let primaryActionButtonDescription = self.makePrimaryActionButtonDescription()
-        let secondaryActionButtonDescription = self.makeSecondaryActionButtonDescription(course: course)
+        let primaryActionButtonDescription = self.makePrimaryActionButtonDescription(state: state)
+        let secondaryActionButtonDescription = self.makeSecondaryActionButtonDescription(state: state)
 
         let primaryOptionButtonDescription = self.makePrimaryOptionButtonDescription(course: course)
         let secondaryOptionButtonDescription = self.makeSecondaryOptionButtonDescription(course: course)
@@ -123,13 +123,29 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         switch state {
         case .neutralWithCert, .neutralWithoutCert:
             return "finished-steps-neutral-modal-header"
-        case .successNeutralWithCert, .successNeutralWithoutCert, .successWithCert:
+        case .successNeutralWithCert,
+             .successNeutralWithoutCert,
+             .successWithCertWithReview,
+             .successWithCertWithoutReview:
             return "finished-steps-happy-neutral-modal-header"
-        case .successWithoutCert:
+        case .successWithoutCertWithoutReview, .successWithoutCertWithReview:
             return "finished-steps-success-modal-header"
-        case .successRegularCert:
+        case .successNeutralRegularCertReady,
+             .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertReadyWithoutDistinctionCert,
+             .successRegularCertWithoutReviewReady,
+             .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewReady,
+             .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert:
             return "finished-steps-regular-modal-header"
-        case .successDistinctionCert:
+        case .successNeutralDistinctionCertReady,
+             .successNeutralDistinctionCertNotReady,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithoutReviewNotReady,
+             .successDistinctionCertWithReviewReady,
+             .successDistinctionCertWithReviewNotReady:
             return "finished-steps-distinction-modal-header"
         }
     }
@@ -146,35 +162,95 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         ""
     }
 
-    private func makePrimaryActionButtonDescription() -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(
-            title: NSLocalizedString("LessonFinishedStepsPanModalPrimaryActionButtonTitle", comment: ""),
-            iconName: nil,
-            isHidden: false
-        )
+    private func makePrimaryActionButtonDescription(
+        state: State
+    ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
+        switch state {
+        case .successNeutralDistinctionCertReady,
+             .successNeutralDistinctionCertNotReady,
+             .successWithoutCertWithReview,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert,
+             .successDistinctionCertWithReviewReady,
+             .successDistinctionCertWithReviewNotReady:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonFindNewCourseTitle", comment: ""),
+                iconName: nil,
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.findNewCourse.uniqueIdentifier
+            )
+        case .successWithoutCertWithoutReview,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithoutReviewNotReady:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonLeaveReviewTitle", comment: ""),
+                iconName: nil,
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.leaveReview.uniqueIdentifier
+            )
+        default:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle", comment: ""),
+                iconName: nil,
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.backToAssignments.uniqueIdentifier
+            )
+        }
     }
 
     private func makeSecondaryActionButtonDescription(
-        course: Course
+        state: State
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        let title: String = {
-            NSLocalizedString("LessonFinishedStepsPanModalSecondaryActionButtonFindNewCourseTitle", comment: "")
-            // LessonFinishedStepsPanModalSecondaryActionButtonLeaveReviewTitle
-        }()
-
-        return .init(title: title, iconName: nil, isHidden: false)
+        switch state {
+        case .neutralWithCert,
+             .neutralWithoutCert,
+             .successNeutralWithCert,
+             .successNeutralWithoutCert,
+             .successWithoutCertWithoutReview,
+             .successWithCertWithReview,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewReady,
+             .successRegularCertWithReviewNotReady,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithoutReviewNotReady:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonFindNewCourseTitle", comment: ""),
+                iconName: nil,
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.findNewCourse.uniqueIdentifier
+            )
+        case .successWithCertWithoutReview,
+             .successRegularCertWithoutReviewReady,
+             .successRegularCertWithoutReviewNotReady:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonLeaveReviewTitle", comment: ""),
+                iconName: nil,
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.leaveReview.uniqueIdentifier
+            )
+        case .successNeutralRegularCertReady,
+             .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertReadyWithoutDistinctionCert,
+             .successNeutralDistinctionCertReady,
+             .successNeutralDistinctionCertNotReady,
+             .successWithoutCertWithReview,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert,
+             .successDistinctionCertWithReviewReady,
+             .successDistinctionCertWithReviewNotReady:
+            return .init(title: "", iconName: nil, isHidden: true, uniqueIdentifier: "")
+        }
     }
 
     private func makePrimaryOptionButtonDescription(
         course: Course
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(title: "", iconName: nil, isHidden: false)
+        .init(title: "", iconName: nil, isHidden: false, uniqueIdentifier: "")
     }
 
     private func makeSecondaryOptionButtonDescription(
         course: Course
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(title: "", iconName: nil, isHidden: false)
+        .init(title: "", iconName: nil, isHidden: false, uniqueIdentifier: "")
     }
 
     private enum State {

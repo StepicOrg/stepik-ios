@@ -890,6 +890,10 @@ StepPosition = "Step %@";
 /* LessonFinishedDemoPanModal */
 LessonFinishedDemoPanModalTitle = "Congratulations! You have just finished the demo-module «%@».";
 LessonFinishedDemoPanModalSubtitle = "To view, the other lessons buy full access to the course.";
+/* LessonFinishedStepsPanModal */
+LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle = "Go Back to the Assignments";
+LessonFinishedStepsPanModalActionButtonFindNewCourseTitle = "Find a New Course";
+LessonFinishedStepsPanModalActionButtonLeaveReviewTitle = "Leave a Review";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

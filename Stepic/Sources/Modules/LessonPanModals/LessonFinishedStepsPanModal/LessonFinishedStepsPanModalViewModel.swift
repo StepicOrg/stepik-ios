@@ -13,9 +13,10 @@ struct LessonFinishedStepsPanModalViewModel {
     let primaryOptionButtonDescription: ButtonDescription
     let secondaryOptionButtonDescription: ButtonDescription
 
-    struct ButtonDescription {
+    struct ButtonDescription: UniqueIdentifiable {
         let title: String
         let iconName: String?
         let isHidden: Bool
+        let uniqueIdentifier: UniqueIdentifierType
     }
 }
