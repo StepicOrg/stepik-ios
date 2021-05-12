@@ -8,12 +8,12 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
     weak var viewController: LessonFinishedStepsPanModalViewControllerProtocol?
 
     func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response) {
-        let viewModel = self.makeViewModel(course: response.course)
+        let viewModel = self.makeViewModel(course: response.course, courseReview: response.courseReview)
         self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
     }
 
-    private func makeViewModel(course: Course) -> LessonFinishedStepsPanModalViewModel {
-        let state = self.getState(course: course)
+    private func makeViewModel(course: Course, courseReview: CourseReview?) -> LessonFinishedStepsPanModalViewModel {
+        let state = self.getState(course: course, courseReview: courseReview)
 
         let headerImageName = self.makeHeaderImageName(state: state)
 
@@ -39,17 +39,19 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         )
     }
 
-    private func getState(course: Course) -> State {
+    private func getState(course: Course, courseReview: CourseReview?) -> State {
         let progressScore = Int(course.progress?.score ?? 0)
         let progressPercentPassed = course.progress?.percentPassed ?? 0
 
+        let didWriteReview = courseReview != nil
+
         if !course.isWithCertificate {
-            if progressPercentPassed < 20 {
+            if progressPercentPassed < State.neutralTreshold {
                 return .neutralWithoutCert
-            } else if progressPercentPassed < 80 {
+            } else if progressPercentPassed < State.successNeutralTreshold {
                 return .successNeutralWithoutCert
             } else {
-                return .successWithoutCert
+                return didWriteReview ? .successWithoutCertWithReview : .successWithoutCertWithoutReview
             }
         } else {
             let didReceiveCertificate = course.anyCertificateTreshold != nil
@@ -57,19 +59,61 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                 : false
 
             if didReceiveCertificate {
+                let isCertificateReady = course.certificateEntity != nil
+                let isDistinctionCertIssuable = course.certificateDistinctionThreshold != nil
+
                 if let certificateDistinctionThreshold = course.certificateDistinctionThreshold,
                    progressScore >= certificateDistinctionThreshold {
-                    return .successDistinctionCert
+                    if progressPercentPassed < State.successNeutralTreshold {
+                        return isCertificateReady
+                            ? .successNeutralDistinctionCertReady
+                            : .successNeutralDistinctionCertNotReady
+                    } else {
+                        switch (didWriteReview, isCertificateReady) {
+                        case (false, true):
+                            return .successDistinctionCertWithoutReviewReady
+                        case (false, false):
+                            return .successDistinctionCertWithoutReviewNotReady
+                        case (true, true):
+                            return .successDistinctionCertWithReviewReady
+                        case (true, false):
+                            return .successDistinctionCertWithReviewNotReady
+                        }
+                    }
                 } else {
-                    return .successRegularCert
+                    if progressPercentPassed < State.successNeutralTreshold {
+                        switch (isCertificateReady, isDistinctionCertIssuable) {
+                        case (true, false):
+                            return .successNeutralRegularCertReadyWithoutDistinctionCert
+                        case (true, true):
+                            return .successNeutralRegularCertReady
+                        case (false, _):
+                            return .successNeutralRegularCertNotReady
+                        }
+                    } else {
+                        switch (didWriteReview, isCertificateReady, isDistinctionCertIssuable) {
+                        case (false, true, false):
+                            return .successRegularCertWithoutReviewReadyWithoutDistinctionCert
+                        case (false, true, true):
+                            return .successRegularCertWithoutReviewReady
+                        case (false, false, _):
+                            return .successRegularCertWithoutReviewNotReady
+                        case (true, true, false):
+                            return .successRegularCertWithReviewReadyWithoutDistinctionCert
+                        case (true, true, true):
+                            return .successRegularCertWithReviewReady
+                        case (true, false, _):
+                            return .successRegularCertWithReviewNotReady
+                        }
+                    }
                 }
             } else {
-                if progressPercentPassed < 20 {
+                if progressPercentPassed < State.neutralTreshold {
                     return .neutralWithCert
-                } else if progressPercentPassed < 80 {
+                } else if progressPercentPassed < State.successNeutralTreshold {
                     return .successNeutralWithCert
                 } else {
-                    return .successWithCert
+                    return didWriteReview ? .successWithCertWithReview : .successWithCertWithoutReview
                 }
             }
         }
@@ -134,13 +178,34 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
     }
 
     private enum State {
+        // ...<20
         case neutralWithCert
         case neutralWithoutCert
+        // 20..<80
         case successNeutralWithCert
         case successNeutralWithoutCert
-        case successWithCert
-        case successWithoutCert
-        case successRegularCert
-        case successDistinctionCert
+        case successNeutralRegularCertReady
+        case successNeutralRegularCertNotReady
+        case successNeutralRegularCertReadyWithoutDistinctionCert
+        case successNeutralDistinctionCertReady
+        case successNeutralDistinctionCertNotReady
+        // 80...
+        case successWithCertWithoutReview
+        case successWithCertWithReview
+        case successWithoutCertWithoutReview
+        case successWithoutCertWithReview
+        case successRegularCertWithoutReviewReady
+        case successRegularCertWithoutReviewNotReady
+        case successRegularCertWithoutReviewReadyWithoutDistinctionCert
+        case successRegularCertWithReviewReady
+        case successRegularCertWithReviewNotReady
+        case successRegularCertWithReviewReadyWithoutDistinctionCert
+        case successDistinctionCertWithoutReviewReady
+        case successDistinctionCertWithoutReviewNotReady
+        case successDistinctionCertWithReviewReady
+        case successDistinctionCertWithReviewNotReady
+
+        static let neutralTreshold: Float = 20
+        static let successNeutralTreshold: Float = 80
     }
 }
