@@ -77,6 +77,7 @@ enum LessonDataFlow {
             let currentSection: Section
             let targetSection: Section
             let requiredSection: Section
+            let unitNavigationDirection: UnitNavigationDirection
         }
 
         struct ViewModel {
@@ -102,6 +103,7 @@ enum LessonDataFlow {
         struct Response {
             let currentSection: Section
             let targetSection: Section
+            let unitNavigationDirection: UnitNavigationDirection
         }
 
         struct ViewModel {
@@ -116,6 +118,7 @@ enum LessonDataFlow {
             let currentSection: Section
             let targetSection: Section
             let dateSource: DateSource
+            let unitNavigationDirection: UnitNavigationDirection
 
             enum DateSource {
                 case beginDate
@@ -126,6 +129,17 @@ enum LessonDataFlow {
         struct ViewModel {
             let title: String
             let message: String
+        }
+    }
+
+    /// Present modal with finished demo access info
+    enum UnitNavigationFinishedDemoAccessPresentation {
+        struct Response {
+            let section: Section
+        }
+
+        struct ViewModel {
+            let sectionID: Section.IdType
         }
     }
 
@@ -241,6 +255,11 @@ enum LessonDataFlow {
             let index: Int
             let text: String
         }
+    }
+
+    /// Do buy course action
+    enum BuyCourseAction {
+        struct Request {}
     }
 
     /// Handle HUD

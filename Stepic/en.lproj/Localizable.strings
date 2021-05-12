@@ -850,14 +850,19 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 /* New lesson & step */
 NextLessonNavigation = "Next Lesson";
 PreviousLessonNavigation = "Previous Lesson";
-LessonUnitNavigationCommonErrorMessage = "Couldn't open \"%@\" module. Please try again later.";
 LessonUnitNavigationFinishedModuleTitle = "Congratulations!\nYou finished \"%@\" module.";
-LessonUnitNavigationRequirementNotSatisfiedMessage = "To unlock \"%@\" module, you need to score %@ in \"%@\" module.";
+LessonUnitNavigationCommonErrorMessage = "Couldn't open \"%@\" module. Please try again later.";
+LessonUnitNavigationRequirementNotSatisfiedMessage = "To unlock next \"%@\" module, you need to score %@ in \"%@\" module.";
+LessonUnitNavigationExamMessage = "Next module \"%@\" is exam. You can start it from the course syllabus.";
+LessonUnitNavigationClosedByBeginDateMessage = "The next module \"%@\" will open %@.";
+LessonUnitNavigationClosedByEndDateMessage = "The next module \"%@\" was closed %@.";
 LessonUnitNavigationActionSyllabus = "Go to Syllabus";
 LessonUnitNavigationRequirementNotSatisfiedActionContinue = "Continue Learning";
-LessonUnitNavigationExamMessage = "Next module \"%@\" is exam. You can start it from the course syllabus.";
-LessonUnitNavigationClosedByBeginDateMessage = "Next module \"%@\" will be available %@.";
-LessonUnitNavigationClosedByEndDateMessage = "Access to the next \"%@\" module was denied %@.";
+LessonPreviousUnitNavigationFinishedModuleTitle = "You finished \"%@\" module.";
+LessonPreviousUnitNavigationRequirementNotSatisfiedMessage = "To unlock adjacent \"%@\" module, you need to score %@ in \"%@\" module.";
+LessonPreviousUnitNavigationExamMessage = "Adjacent module \"%@\" is exam. You can start it from the course syllabus.";
+LessonPreviousUnitNavigationClosedByBeginDateMessage = "The adjacent module \"%@\" will open %@.";
+LessonPreviousUnitNavigationClosedByEndDateMessage = "The adjacent module \"%@\" was closed %@.";
 DiscussionsButtonTitle = "Show Comments (%@)";
 NoDiscussionsButtonTitle = "Leave a Comment";
 DisabledDiscussionsButtonTitle = "Comments Disabled";
@@ -887,6 +892,10 @@ StepDisabledTeacherNoCourseMessage = "For enable learners to view the assignment
 StepDisabledTeacherNoCoursePlanProTitle = "a <b>PRO</b> or <b>paid</b> course";
 StepDisabledTeacherNoCoursePlanEnterpriseTitle = "an <b>Enterprise</b> course";
 StepPosition = "Step %@";
+
+/* LessonFinishedDemoPanModal */
+LessonFinishedDemoPanModalTitle = "Congratulations! You have just finished the demo-module «%@».";
+LessonFinishedDemoPanModalSubtitle = "To view, the other lessons buy full access to the course.";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
