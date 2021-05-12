@@ -77,6 +77,7 @@ enum LessonDataFlow {
             let currentSection: Section
             let targetSection: Section
             let requiredSection: Section
+            let unitNavigationDirection: UnitNavigationDirection
         }
 
         struct ViewModel {
@@ -102,6 +103,7 @@ enum LessonDataFlow {
         struct Response {
             let currentSection: Section
             let targetSection: Section
+            let unitNavigationDirection: UnitNavigationDirection
         }
 
         struct ViewModel {
@@ -116,6 +118,7 @@ enum LessonDataFlow {
             let currentSection: Section
             let targetSection: Section
             let dateSource: DateSource
+            let unitNavigationDirection: UnitNavigationDirection
 
             enum DateSource {
                 case beginDate

@@ -126,10 +126,10 @@ final class LessonPresenter: LessonPresenterProtocol {
     func presentUnitNavigationRequirementNotSatisfiedState(
         response: LessonDataFlow.UnitNavigationRequirementNotSatisfiedPresentation.Response
     ) {
-        let title = String(
-            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
-            arguments: [response.currentSection.title]
-        )
+        let titleFormatString = response.unitNavigationDirection == .previous
+            ? NSLocalizedString("LessonPreviousUnitNavigationFinishedModuleTitle", comment: "")
+            : NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: "")
+        let title = String(format: titleFormatString, arguments: [response.currentSection.title])
 
         let requiredPointsCount: String = {
             guard let requiredSectionProgress = response.requiredSection.progress else {
@@ -143,8 +143,11 @@ final class LessonPresenter: LessonPresenterProtocol {
             return FormatterHelper.pointsCount(requiredPoints)
         }()
 
+        let messageFormatString = response.unitNavigationDirection == .previous
+            ? NSLocalizedString("LessonPreviousUnitNavigationRequirementNotSatisfiedMessage", comment: "")
+            : NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedMessage", comment: "")
         let message = String(
-            format: NSLocalizedString("LessonUnitNavigationRequirementNotSatisfiedMessage", comment: ""),
+            format: messageFormatString,
             arguments: [response.targetSection.title, requiredPointsCount, response.requiredSection.title]
         )
 
@@ -166,13 +169,16 @@ final class LessonPresenter: LessonPresenterProtocol {
     }
 
     func presentUnitNavigationExamState(response: LessonDataFlow.UnitNavigationExamPresentation.Response) {
-        let title = String(
-            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
-            arguments: [response.currentSection.title]
-        )
+        let titleFormatString = response.unitNavigationDirection == .previous
+            ? NSLocalizedString("LessonPreviousUnitNavigationFinishedModuleTitle", comment: "")
+            : NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: "")
+        let title = String(format: titleFormatString, arguments: [response.currentSection.title])
 
+        let messageFormatString = response.unitNavigationDirection == .previous
+            ? NSLocalizedString("LessonPreviousUnitNavigationExamMessage", comment: "")
+            : NSLocalizedString("LessonUnitNavigationExamMessage", comment: "")
         let message = String(
-            format: NSLocalizedString("LessonUnitNavigationExamMessage", comment: ""),
+            format: messageFormatString,
             arguments: [response.targetSection.title]
         )
 
@@ -182,10 +188,10 @@ final class LessonPresenter: LessonPresenterProtocol {
     func presentUnitNavigationClosedByDateState(
         response: LessonDataFlow.UnitNavigationClosedByDatePresentation.Response
     ) {
-        let title = String(
-            format: NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: ""),
-            arguments: [response.currentSection.title]
-        )
+        let titleFormatString = response.unitNavigationDirection == .previous
+            ? NSLocalizedString("LessonPreviousUnitNavigationFinishedModuleTitle", comment: "")
+            : NSLocalizedString("LessonUnitNavigationFinishedModuleTitle", comment: "")
+        let title = String(format: titleFormatString, arguments: [response.currentSection.title])
 
         let sourceDate: Date?
         let messageFormatString: String
@@ -193,10 +199,14 @@ final class LessonPresenter: LessonPresenterProtocol {
         switch response.dateSource {
         case .beginDate:
             sourceDate = response.targetSection.beginDate
-            messageFormatString = NSLocalizedString("LessonUnitNavigationClosedByBeginDateMessage", comment: "")
+            messageFormatString = response.unitNavigationDirection == .previous
+                ? NSLocalizedString("LessonPreviousUnitNavigationClosedByBeginDateMessage", comment: "")
+                : NSLocalizedString("LessonUnitNavigationClosedByBeginDateMessage", comment: "")
         case .endDate:
             sourceDate = response.targetSection.endDate
-            messageFormatString = NSLocalizedString("LessonUnitNavigationClosedByEndDateMessage", comment: "")
+            messageFormatString = response.unitNavigationDirection == .previous
+                ? NSLocalizedString("LessonPreviousUnitNavigationClosedByEndDateMessage", comment: "")
+                : NSLocalizedString("LessonUnitNavigationClosedByEndDateMessage", comment: "")
         }
 
         let formattedDate: String = {

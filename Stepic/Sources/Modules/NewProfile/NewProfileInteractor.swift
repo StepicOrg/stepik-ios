@@ -207,8 +207,8 @@ final class NewProfileInteractor: NewProfileInteractorProtocol {
 
                 if let currentUser = self.currentUser {
                     seal.fulfill(
-                        .init(result: .success(
-                            .init(user: currentUser, isCurrentUserProfile: self.isCurrentUserProfile))
+                        .init(
+                            result: .success(.init(user: currentUser, isCurrentUserProfile: self.isCurrentUserProfile))
                         )
                     )
                 } else {

@@ -1,6 +1,7 @@
 import Foundation
 import PromiseKit
 
+// swiftlint:disable file_length
 protocol LessonInteractorProtocol {
     func doLessonLoad(request: LessonDataFlow.LessonLoad.Request)
     func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
@@ -340,7 +341,7 @@ extension LessonInteractor: StepOutputProtocol {
         firstly {
             after(seconds: Self.unitNavigationDelay)
         }.then {
-            self.presentUnreachableUnitNavigationState(targetUnit: unit)
+            self.presentUnreachableUnitNavigationState(targetUnit: unit, direction: .previous)
         }.done { didPresentUnreachableState in
             if didPresentUnreachableState {
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
@@ -416,7 +417,7 @@ extension LessonInteractor: StepOutputProtocol {
         firstly {
             after(seconds: Self.unitNavigationDelay)
         }.then {
-            self.presentUnreachableUnitNavigationState(targetUnit: unit)
+            self.presentUnreachableUnitNavigationState(targetUnit: unit, direction: .next)
         }.done { didPresentUnreachableState in
             if didPresentUnreachableState {
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
@@ -453,7 +454,10 @@ extension LessonInteractor: StepOutputProtocol {
         }
     }
 
-    private func presentUnreachableUnitNavigationState(targetUnit: Unit) -> Guarantee<Bool> {
+    private func presentUnreachableUnitNavigationState(
+        targetUnit: Unit,
+        direction: UnitNavigationDirection
+    ) -> Guarantee<Bool> {
         guard let currentLesson = self.currentLesson,
               let currentSection = self.currentUnit?.section,
               let targetSection = targetUnit.section else {
@@ -472,7 +476,8 @@ extension LessonInteractor: StepOutputProtocol {
                 self.presentRequirementNotSatisfiedUnitNavigationState(
                     currentSection: currentSection,
                     targetSection: targetSection,
-                    requiredSectionID: requiredSectionID
+                    requiredSectionID: requiredSectionID,
+                    unitNavigationDirection: direction
                 ).done { _ in
                     seal(true)
                 }.catch { _ in
@@ -487,7 +492,8 @@ extension LessonInteractor: StepOutputProtocol {
                 response: .init(
                     currentSection: currentSection,
                     targetSection: targetSection,
-                    dateSource: .beginDate
+                    dateSource: .beginDate,
+                    unitNavigationDirection: direction
                 )
             )
             return .value(true)
@@ -498,7 +504,8 @@ extension LessonInteractor: StepOutputProtocol {
                 response: .init(
                     currentSection: currentSection,
                     targetSection: targetSection,
-                    dateSource: .endDate
+                    dateSource: .endDate,
+                    unitNavigationDirection: direction
                 )
             )
             return .value(true)
@@ -506,7 +513,11 @@ extension LessonInteractor: StepOutputProtocol {
 
         if targetSection.isExam {
             self.presenter.presentUnitNavigationExamState(
-                response: .init(currentSection: currentSection, targetSection: targetSection)
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    unitNavigationDirection: direction
+                )
             )
             return .value(true)
         }
@@ -521,7 +532,8 @@ extension LessonInteractor: StepOutputProtocol {
     private func presentRequirementNotSatisfiedUnitNavigationState(
         currentSection: Section,
         targetSection: Section,
-        requiredSectionID: Section.IdType
+        requiredSectionID: Section.IdType,
+        unitNavigationDirection: UnitNavigationDirection
     ) -> Promise<Void> {
         self.provider
             .fetchSectionFromCacheOrNetwork(id: requiredSectionID)
@@ -546,7 +558,8 @@ extension LessonInteractor: StepOutputProtocol {
                     response: .init(
                         currentSection: currentSection,
                         targetSection: targetSection,
-                        requiredSection: requiredSection
+                        requiredSection: requiredSection,
+                        unitNavigationDirection: unitNavigationDirection
                     )
                 )
             }
