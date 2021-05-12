@@ -253,7 +253,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         } else {
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
-                self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
+                self.analytics.send(
+                    .buyCoursePressed(id: course.id),
+                    .courseBuyPressed(source: .courseScreen, id: course.id)
+                )
 
                 if self.iapService.canBuyCourse(course) {
                     self.iapService.buy(course: course, delegate: self)
@@ -426,6 +429,17 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     enum Error: Swift.Error {
         case cachedFetchFailed
         case networkFetchFailed
+    }
+}
+
+// MARK: - CourseInfoInteractor: CourseInfoInputProtocol -
+extension CourseInfoInteractor: CourseInfoInputProtocol {}
+
+// MARK: - CourseInfoInteractor: LessonOutputProtocol -
+
+extension CourseInfoInteractor: LessonOutputProtocol {
+    func handleLessonDidRequestBuyCourse() {
+        self.presenter.presentLessonModuleBuyCourseAction(response: .init())
     }
 }
 

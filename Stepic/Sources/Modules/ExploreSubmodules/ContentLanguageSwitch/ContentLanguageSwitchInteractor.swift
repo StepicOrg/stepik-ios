@@ -10,14 +10,18 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
     private let presenter: ContentLanguageSwitchPresenterProtocol
     private let provider: ContentLanguageSwitchProviderProtocol
 
+    private let analytics: Analytics
+
     private var currentAvailableContentLanguages: [(UniqueIdentifierType, ContentLanguage)] = []
 
     init(
         presenter: ContentLanguageSwitchPresenterProtocol,
-        provider: ContentLanguageSwitchProviderProtocol
+        provider: ContentLanguageSwitchProviderProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
     }
 
     func doLanguagesListPresentation(request: ContentLanguageSwitch.LanguagesLoad.Request) {
@@ -55,6 +59,8 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
         )?.1 else {
             fatalError("Request contains invalid data")
         }
+
+        self.analytics.send(.contentLanguageChanged(selectedLanguage, source: .catalog))
 
         self.provider.setGlobalContentLanguage(selectedLanguage)
         self.presenter.presentLanguageChange(

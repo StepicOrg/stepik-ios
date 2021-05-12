@@ -129,6 +129,17 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present modal with finished demo access info
+    enum UnitNavigationFinishedDemoAccessPresentation {
+        struct Response {
+            let section: Section
+        }
+
+        struct ViewModel {
+            let sectionID: Section.IdType
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {
@@ -241,6 +252,11 @@ enum LessonDataFlow {
             let index: Int
             let text: String
         }
+    }
+
+    /// Do buy course action
+    enum BuyCourseAction {
+        struct Request {}
     }
 
     /// Handle HUD

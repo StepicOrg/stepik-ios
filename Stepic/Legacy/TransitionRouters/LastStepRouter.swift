@@ -102,11 +102,12 @@ final class LastStepRouter {
             return
         }
 
-        let courseInfoController = CourseInfoAssembly(
+        let courseInfoAssembly = CourseInfoAssembly(
             courseID: course.id,
             initialTab: .syllabus,
             courseViewSource: courseViewSource
-        ).makeModule()
+        )
+        let courseInfoController = courseInfoAssembly.makeModule()
 
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
@@ -214,7 +215,8 @@ final class LastStepRouter {
             stepIDPromise.done { targetStepID in
                 let lessonAssembly = LessonAssembly(
                     initialContext: .unit(id: unit.id),
-                    startStep: .id(targetStepID)
+                    startStep: .id(targetStepID),
+                    moduleOutput: courseInfoAssembly.moduleInput as? LessonOutputProtocol
                 )
 
                 SVProgressHUD.showSuccess(withStatus: "")

@@ -883,6 +883,10 @@ StepDisabledTeacherNoCoursePlanProTitle = "<b>платный</b> или <b>PRO-�
 StepDisabledTeacherNoCoursePlanEnterpriseTitle = "<b>Enterprise-курс</b>";
 StepPosition = "Шаг %@";
 
+/* LessonFinishedDemoPanModal */
+LessonFinishedDemoPanModalTitle = "Поздравляем! Вы закончили демо-модуль «%@».";
+LessonFinishedDemoPanModalSubtitle = "Для доступа к следующим урокам, купите курс.";
+
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
 VideoPlayerPlaybackFailedStateAlertMessage = "Возникла ошибка воспроизведения видео, попробовать снова или закрыть плеер?";
