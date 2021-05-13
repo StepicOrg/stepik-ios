@@ -17,9 +17,9 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
 
         let headerImageName = self.makeHeaderImageName(state: state)
 
-        let title = self.makeTitle(course: course)
-        let feedbackText = self.makeFeedbackText(course: course)
-        let subtitle = self.makeSubtitle(course: course)
+        let title = self.makeTitle(course: course, state: state)
+        let feedbackText = self.makeFeedbackText(course: course, state: state)
+        let subtitle = self.makeSubtitle(course: course, state: state)
 
         let primaryActionButtonDescription = self.makePrimaryActionButtonDescription(state: state)
         let secondaryActionButtonDescription = self.makeSecondaryActionButtonDescription(state: state)
@@ -40,22 +40,22 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
     }
 
     private func getState(course: Course, courseReview: CourseReview?) -> State {
-        let progressScore = Int(course.progress?.score ?? 0)
+        let progressScore = course.progress?.score ?? 0
         let progressPercentPassed = course.progress?.percentPassed ?? 0
 
         let didWriteReview = courseReview != nil
 
         if !course.isWithCertificate {
-            if progressPercentPassed < State.neutralTreshold {
+            if progressPercentPassed < State.neutralThreshold {
                 return .neutralWithoutCert
-            } else if progressPercentPassed < State.successNeutralTreshold {
+            } else if progressPercentPassed < State.successNeutralThreshold {
                 return .successNeutralWithoutCert
             } else {
                 return didWriteReview ? .successWithoutCertWithReview : .successWithoutCertWithoutReview
             }
         } else {
             let didReceiveCertificate = course.anyCertificateTreshold != nil
-                ? (progressScore >= course.anyCertificateTreshold.require())
+                ? (progressScore >= Float(course.anyCertificateTreshold.require()))
                 : false
 
             if didReceiveCertificate {
@@ -63,8 +63,8 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                 let isDistinctionCertIssuable = course.certificateDistinctionThreshold != nil
 
                 if let certificateDistinctionThreshold = course.certificateDistinctionThreshold,
-                   progressScore >= certificateDistinctionThreshold {
-                    if progressPercentPassed < State.successNeutralTreshold {
+                   progressScore >= Float(certificateDistinctionThreshold) {
+                    if progressPercentPassed < State.successNeutralThreshold {
                         return isCertificateReady
                             ? .successNeutralDistinctionCertReady
                             : .successNeutralDistinctionCertNotReady
@@ -81,7 +81,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                         }
                     }
                 } else {
-                    if progressPercentPassed < State.successNeutralTreshold {
+                    if progressPercentPassed < State.successNeutralThreshold {
                         switch (isCertificateReady, isDistinctionCertIssuable) {
                         case (true, false):
                             return .successNeutralRegularCertReadyWithoutDistinctionCert
@@ -108,9 +108,9 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                     }
                 }
             } else {
-                if progressPercentPassed < State.neutralTreshold {
+                if progressPercentPassed < State.neutralThreshold {
                     return .neutralWithCert
-                } else if progressPercentPassed < State.successNeutralTreshold {
+                } else if progressPercentPassed < State.successNeutralThreshold {
                     return .successNeutralWithCert
                 } else {
                     return didWriteReview ? .successWithCertWithReview : .successWithCertWithoutReview
@@ -150,16 +150,173 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         }
     }
 
-    private func makeTitle(course: Course) -> String {
-        ""
+    private func makeTitle(course: Course, state: State) -> String {
+        switch state {
+        case .neutralWithCert,
+             .neutralWithoutCert:
+            return String(
+                format: NSLocalizedString("LessonFinishedStepsPanModalTitleFinishedCourse", comment: ""),
+                arguments: [course.title]
+            )
+        case .successNeutralWithCert,
+             .successNeutralWithoutCert,
+             .successNeutralDistinctionCertReady,
+             .successNeutralDistinctionCertNotReady,
+             .successWithCertWithoutReview,
+             .successWithCertWithReview,
+             .successWithoutCertWithoutReview,
+             .successWithoutCertWithReview,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithoutReviewNotReady,
+             .successDistinctionCertWithReviewReady,
+             .successDistinctionCertWithReviewNotReady:
+            return String(
+                format: NSLocalizedString("LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess", comment: ""),
+                arguments: [course.title]
+            )
+        case .successNeutralRegularCertReady,
+             .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertReadyWithoutDistinctionCert,
+             .successRegularCertWithoutReviewReady,
+             .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewReady,
+             .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert:
+            return String(
+                format: NSLocalizedString(
+                    "LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate",
+                    comment: ""
+                ),
+                arguments: [course.title]
+            )
+        }
     }
 
-    private func makeFeedbackText(course: Course) -> String {
-        ""
+    private func makeFeedbackText(course: Course, state: State) -> String {
+        switch state {
+        case .neutralWithCert,
+             .successNeutralWithCert,
+             .successWithCertWithoutReview,
+             .successWithCertWithReview:
+            let progressScore = course.progress?.score ?? 0
+            let anyCertificateThreshold = Float(course.anyCertificateTreshold ?? 0)
+
+            let needScore = anyCertificateThreshold - progressScore
+
+            return String(
+                format: NSLocalizedString("LessonFinishedStepsPanModalCertificateFeedback", comment: ""),
+                arguments: [FormatterHelper.pointsCount(needScore)]
+            )
+        default:
+            return ""
+        }
     }
 
-    private func makeSubtitle(course: Course) -> String {
-        ""
+    private func makeSubtitle(course: Course, state: State) -> String {
+        let progressScore = course.progress?.score ?? 0
+        let progressCost = course.progress?.cost ?? 0
+        let progressPercentPassed = course.progress?.percentPassed ?? 0
+
+        let formattedScore = FormatterHelper.pointsCount(progressScore)
+        let formattedProgressPercentPassed = FormatterHelper.integerPercent(progressPercentPassed / 100.0)
+        let formattedProgress = String(
+            format: NSLocalizedString("LessonFinishedStepsPanModalSubtitleProgress", comment: ""),
+            arguments: [formattedScore, "\(progressCost)", formattedProgressPercentPassed]
+        )
+
+        let formattedDistinctionCertNeedScore: String = {
+            let certificateDistinctionThreshold = course.certificateDistinctionThreshold ?? 0
+            let needScore = Float(certificateDistinctionThreshold) - progressScore
+
+            let formattedDistinctionThreshold = FormatterHelper.pointsCount(certificateDistinctionThreshold)
+            let formattedNeedScore = FormatterHelper.progressScore(needScore)
+
+            return String(
+                format: NSLocalizedString(
+                    "LessonFinishedStepsPanModalSubtitleCertificateDistinctionNeedScoreMessage",
+                    comment: ""
+                ),
+                arguments: [formattedDistinctionThreshold, formattedNeedScore]
+            )
+        }()
+
+        let certificateHint = NSLocalizedString("LessonFinishedStepsPanModalSubtitleCertificateHint", comment: "")
+        let certificateReadyMessage = NSLocalizedString(
+            "LessonFinishedStepsPanModalSubtitleCertificateReadyMessage",
+            comment: ""
+        )
+        let certificateNotReadyMessage = NSLocalizedString(
+            "LessonFinishedStepsPanModalSubtitleCertificateNotReadyNotifyMessage",
+            comment: ""
+        )
+
+        switch state {
+        case .neutralWithCert,
+             .successNeutralWithCert,
+             .successWithCertWithoutReview,
+             .successWithCertWithReview:
+            let certificateRegularThreshold = course.certificateRegularThreshold ?? 0
+            let formattedCertificateRegularThreshold = FormatterHelper.pointsCount(certificateRegularThreshold)
+
+            let formattedCertificateIssuedMessage: String = {
+                if let certificateDistinctionThreshold = course.certificateDistinctionThreshold {
+                    return String(
+                        format: NSLocalizedString(
+                            "LessonFinishedStepsPanModalSubtitleCertificateIssuedMessage",
+                            comment: ""
+                        ),
+                        arguments: [formattedCertificateRegularThreshold, "\(certificateDistinctionThreshold)"]
+                    )
+                } else {
+                    return String(
+                        format: NSLocalizedString(
+                            "LessonFinishedStepsPanModalSubtitleCertificateWithoutDistinctionIssuedMessage",
+                            comment: ""
+                        ),
+                        arguments: [formattedCertificateRegularThreshold]
+                    )
+                }
+            }()
+
+            return "\(formattedProgress) \(formattedCertificateIssuedMessage)\n\n\(certificateHint)"
+        case .neutralWithoutCert:
+            let withoutCertMessage = NSLocalizedString(
+                "LessonFinishedStepsPanModalSubtitleCertificateNotIssuedNeutralMessage",
+                comment: ""
+            )
+            let continueMessage = NSLocalizedString("LessonFinishedStepsPanModalSubtitleContinueMessage", comment: "")
+
+            return "\(formattedProgress) \(withoutCertMessage)\n\n\(continueMessage)"
+        case .successNeutralWithoutCert,
+             .successWithoutCertWithoutReview,
+             .successWithoutCertWithReview:
+            let withoutCertMessage = NSLocalizedString(
+                "LessonFinishedStepsPanModalSubtitleCertificateNotIssuedSuccessMessage",
+                comment: ""
+            )
+
+            return "\(formattedProgress) \(withoutCertMessage)"
+        case .successNeutralRegularCertReady,
+             .successRegularCertWithoutReviewReady,
+             .successRegularCertWithReviewReady:
+            return "\(formattedProgress) \(formattedDistinctionCertNeedScore)\n\n\(certificateReadyMessage)"
+        case .successNeutralRegularCertNotReady,
+             .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithReviewNotReady:
+            return "\(formattedProgress) \(formattedDistinctionCertNeedScore)\n\n\(certificateNotReadyMessage) \(certificateHint)"
+        case .successNeutralRegularCertReadyWithoutDistinctionCert,
+             .successNeutralDistinctionCertReady,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithReviewReady:
+            return "\(formattedProgress)\n\n\(certificateReadyMessage)"
+        case .successNeutralDistinctionCertNotReady,
+             .successDistinctionCertWithoutReviewNotReady,
+             .successDistinctionCertWithReviewNotReady:
+            return "\(formattedProgress)\n\n\(certificateNotReadyMessage) \(certificateHint)"
+        }
     }
 
     private func makePrimaryActionButtonDescription(
@@ -281,7 +438,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         case successDistinctionCertWithReviewReady
         case successDistinctionCertWithReviewNotReady
 
-        static let neutralTreshold: Float = 20
-        static let successNeutralTreshold: Float = 80
+        static let neutralThreshold: Float = 20
+        static let successNeutralThreshold: Float = 80
     }
 }
