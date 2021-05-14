@@ -5,6 +5,8 @@ protocol LessonFinishedStepsPanModalInteractorProtocol {
     func doModalLoad(request: LessonFinishedStepsPanModal.ModalLoad.Request)
     func doShareResultPresentation(request: LessonFinishedStepsPanModal.ShareResultPresentation.Request)
     func doCertificatePresentation(request: LessonFinishedStepsPanModal.CertificatePresentation.Request)
+    func doLeaveReviewPresentation(request: LessonFinishedStepsPanModal.LeaveReviewPresentation.Request)
+    func doFindNewCoursePresentation(request: LessonFinishedStepsPanModal.FindNewCoursePresentation.Request)
 }
 
 final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalInteractorProtocol {
@@ -67,5 +69,13 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
         }
 
         self.presenter.presentCertificate(response: .init(certificate: certificate))
+    }
+
+    func doLeaveReviewPresentation(request: LessonFinishedStepsPanModal.LeaveReviewPresentation.Request) {
+        self.moduleOutput?.handleLessonFinishedStepsPanModalLeaveReviewAction()
+    }
+
+    func doFindNewCoursePresentation(request: LessonFinishedStepsPanModal.FindNewCoursePresentation.Request) {
+        self.moduleOutput?.handleLessonFinishedStepsPanModalFindNewCourseAction()
     }
 }

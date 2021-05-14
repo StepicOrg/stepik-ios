@@ -7,6 +7,8 @@ protocol LessonInteractorProtocol {
     func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
     func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request)
     func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request)
+    func doLeaveReviewPresentation(request: LessonDataFlow.LeaveReviewPresentation.Request)
+    func doCatalogPresentation(request: LessonDataFlow.CatalogPresentation.Request)
 }
 
 final class LessonInteractor: LessonInteractorProtocol {
@@ -80,6 +82,14 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request) {
         self.moduleOutput?.handleLessonDidRequestBuyCourse()
+    }
+
+    func doLeaveReviewPresentation(request: LessonDataFlow.LeaveReviewPresentation.Request) {
+        self.moduleOutput?.handleLessonDidRequestLeaveReview()
+    }
+
+    func doCatalogPresentation(request: LessonDataFlow.CatalogPresentation.Request) {
+        self.moduleOutput?.handleLessonDidRequestPresentCatalog()
     }
 
     // MARK: Private API
@@ -256,16 +266,20 @@ final class LessonInteractor: LessonInteractorProtocol {
                 return
             }
 
-            if strongSelf.currentUnit?.id == unitID {
-                strongSelf.nextUnit = nextUnit
-                strongSelf.previousUnit = previousUnit
-
-                print("new lesson interactor: next & previous units did load")
-
-                strongSelf.presenter.presentLessonNavigation(
-                    response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: nextUnit != nil)
-                )
+            guard strongSelf.currentUnit?.id == unitID else {
+                return
             }
+
+            strongSelf.nextUnit = nextUnit
+            strongSelf.previousUnit = previousUnit
+
+            print("new lesson interactor: next & previous units did load")
+
+            let hasNextUnit = nextUnit != nil || strongSelf.isCurrentUnitLastInCourse
+
+            strongSelf.presenter.presentLessonNavigation(
+                response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: hasNextUnit)
+            )
         }.cauterize()
     }
 
@@ -306,6 +320,12 @@ final class LessonInteractor: LessonInteractorProtocol {
 extension LessonInteractor: StepOutputProtocol {
     private static let autoplayDelay: TimeInterval = 0.33
     private static let unitNavigationDelay: TimeInterval = 0.5
+
+    private var isCurrentUnitLastInCourse: Bool {
+        self.nextUnit == nil
+            && self.currentUnit?.position == self.currentUnit?.section?.unitsArray.count
+            && self.currentUnit?.section?.position == self.currentUnit?.section?.course?.sectionsArray.count
+    }
 
     func handleStepView(id: Step.IdType) {
         let assignmentID = self.assignmentsForCurrentSteps[id]
@@ -409,6 +429,9 @@ extension LessonInteractor: StepOutputProtocol {
 
     private func navigateToNextUnit(autoplayNext: Bool) {
         guard let unit = self.nextUnit else {
+            if self.isCurrentUnitLastInCourse {
+                self.presentLessonFinishedSteps()
+            }
             return
         }
 
@@ -604,6 +627,22 @@ extension LessonInteractor: StepOutputProtocol {
                 seal(false)
             }
         }
+    }
+
+    private func presentLessonFinishedSteps() {
+        guard let currentSection = self.currentUnit?.section else {
+            return
+        }
+
+        firstly { () -> Promise<Course> in
+            if let course = currentSection.course {
+                return .value(course)
+            } else {
+                return self.provider.fetchCourseFromCacheOrNetwork(id: currentSection.courseId).compactMap { $0 }
+            }
+        }.done { course in
+            self.presenter.presentLessonFinishedSteps(response: .init(courseID: course.id))
+        }.cauterize()
     }
 }
 

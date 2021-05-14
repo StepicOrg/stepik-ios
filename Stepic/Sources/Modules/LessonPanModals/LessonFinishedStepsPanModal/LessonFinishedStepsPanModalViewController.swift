@@ -127,9 +127,9 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
         case .backToAssignments:
             self.dismiss(animated: true)
         case .leaveReview:
-            print("leaveReview")
+            self.interactor.doLeaveReviewPresentation(request: .init())
         case .findNewCourse:
-            print("findNewCourse")
+            self.interactor.doFindNewCoursePresentation(request: .init())
         case .shareResult:
             self.interactor.doShareResultPresentation(request: .init())
         case .viewCertificate:

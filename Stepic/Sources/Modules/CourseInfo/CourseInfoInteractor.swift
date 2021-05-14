@@ -441,6 +441,14 @@ extension CourseInfoInteractor: LessonOutputProtocol {
     func handleLessonDidRequestBuyCourse() {
         self.presenter.presentLessonModuleBuyCourseAction(response: .init())
     }
+
+    func handleLessonDidRequestLeaveReview() {
+        self.presenter.presentLessonModuleWriteReviewAction(response: .init())
+    }
+
+    func handleLessonDidRequestPresentCatalog() {
+        self.presenter.presentLessonModuleCatalogAction(response: .init())
+    }
 }
 
 // MARK: - CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol -

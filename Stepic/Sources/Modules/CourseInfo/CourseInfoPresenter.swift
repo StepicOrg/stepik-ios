@@ -8,6 +8,8 @@ protocol CourseInfoPresenterProtocol {
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response)
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
     func presentLessonModuleBuyCourseAction(response: CourseInfo.LessonModuleBuyCourseActionPresentation.Response)
+    func presentLessonModuleCatalogAction(response: CourseInfo.LessonModuleCatalogPresentation.Response)
+    func presentLessonModuleWriteReviewAction(response: CourseInfo.LessonModuleWriteReviewPresentation.Response)
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
@@ -83,6 +85,14 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentLessonModuleBuyCourseAction(response: CourseInfo.LessonModuleBuyCourseActionPresentation.Response) {
         self.viewController?.displayLessonModuleBuyCourseAction(viewModel: .init())
+    }
+
+    func presentLessonModuleCatalogAction(response: CourseInfo.LessonModuleCatalogPresentation.Response) {
+        self.viewController?.displayLessonModuleCatalogAction(viewModel: .init())
+    }
+
+    func presentLessonModuleWriteReviewAction(response: CourseInfo.LessonModuleWriteReviewPresentation.Response) {
+        self.viewController?.displayLessonModuleWriteReviewAction(viewModel: .init())
     }
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {

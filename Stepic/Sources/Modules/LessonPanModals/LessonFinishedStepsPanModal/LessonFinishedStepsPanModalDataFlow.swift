@@ -38,6 +38,14 @@ enum LessonFinishedStepsPanModal {
         }
     }
 
+    enum LeaveReviewPresentation {
+        struct Request {}
+    }
+
+    enum FindNewCoursePresentation {
+        struct Request {}
+    }
+
     // MARK: Enums
 
     enum ActionType: String, UniqueIdentifiable {

@@ -262,6 +262,24 @@ enum LessonDataFlow {
         struct Request {}
     }
 
+    enum LeaveReviewPresentation {
+        struct Request {}
+    }
+
+    enum CatalogPresentation {
+        struct Request {}
+    }
+
+    enum LessonFinishedStepsPresentation {
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
