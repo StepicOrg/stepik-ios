@@ -11,7 +11,7 @@ final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewCo
 
     private var state: LessonFinishedStepsPanModal.ViewControllerState
 
-    private var currentPopoverAnchorData: (sourceView: UIView?, sourceRect: CGRect)?
+    private weak var currentPopoverPresentationSourceView: UIView?
 
     private var hasLoadedData: Bool {
         if case .result = self.state {
@@ -87,10 +87,10 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
         )
 
         if let popoverPresentationController = activityViewController.popoverPresentationController {
-            popoverPresentationController.sourceView = self.currentPopoverAnchorData?.sourceView ?? self.view
-            popoverPresentationController.sourceRect = self.currentPopoverAnchorData?.sourceRect ?? .zero
+            popoverPresentationController.sourceView = self.currentPopoverPresentationSourceView ?? self.view
+            popoverPresentationController.sourceRect = self.currentPopoverPresentationSourceView?.bounds ?? .zero
         }
-        self.currentPopoverAnchorData = nil
+        self.currentPopoverPresentationSourceView = nil
 
         self.present(activityViewController, animated: true)
     }
@@ -111,11 +111,11 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
             return
         }
 
-        self.currentPopoverAnchorData = (sourceView, sourceView.bounds)
+        self.currentPopoverPresentationSourceView = sourceView
 
         switch actionType {
         case .backToAssignments:
-            self.currentPopoverAnchorData = nil
+            self.currentPopoverPresentationSourceView = nil
             self.dismiss(animated: true)
         case .leaveReview:
             print("leaveReview")
