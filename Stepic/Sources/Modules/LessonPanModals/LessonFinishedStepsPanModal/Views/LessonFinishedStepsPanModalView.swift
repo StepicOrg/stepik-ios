@@ -59,6 +59,7 @@ final class LessonFinishedStepsPanModalView: UIView {
     private lazy var headerImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -138,23 +139,43 @@ final class LessonFinishedStepsPanModalView: UIView {
             )
         }
 
-        let height = self.appearance.headerImageViewHeight
-            + self.appearance.stackViewSpacing
-            + self.titleLabel.intrinsicContentSize.height
-            + self.appearance.stackViewSpacing
-            + self.feedbackView.intrinsicContentSize.height
-            + self.appearance.stackViewSpacing
-            + self.subtitleLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
-            + self.appearance.stackViewSpacing
-            + SeparatorView.Appearance().height
-            + self.appearance.stackViewSpacing
-            + self.appearance.actionButtonHeight
-            + self.appearance.stackViewSpacing
+        var verticalInsets: CGFloat = 0
 
-        return CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: height
-        )
+        let titleHeight = self.titleLabel.isHidden ? 0 : self.titleLabel.intrinsicContentSize.height
+        verticalInsets += self.titleLabel.isHidden ? 0 : self.appearance.stackViewSpacing
+
+        let feedbackHeight = self.feedbackView.isHidden ? 0 : self.feedbackView.intrinsicContentSize.height
+        verticalInsets += self.feedbackView.isHidden ? 0 : self.appearance.stackViewSpacing
+
+        let subtitleHeight = self.subtitleLabel.isHidden
+            ? 0
+            : self.subtitleLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
+        verticalInsets += self.subtitleLabel.isHidden ? 0 : self.appearance.stackViewSpacing
+
+        let optionButtonsStackViewIntrinsicContentSize = self.optionButtonsStackView
+            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        verticalInsets += self.optionButtonsStackView.isHidden ? 0 : self.appearance.stackViewSpacing
+
+        let separatorHeight = SeparatorView.Appearance().height
+        verticalInsets += self.appearance.stackViewSpacing
+
+        let secondaryActionButtonHeight = self.secondaryActionButton.isHidden ? 0 : self.appearance.actionButtonHeight
+        verticalInsets += self.secondaryActionButton.isHidden ? 0 : self.appearance.stackViewSpacing
+
+        let primaryActionButtonHeight = self.primaryActionButton.isHidden ? 0 : self.appearance.actionButtonHeight
+        verticalInsets += self.primaryActionButton.isHidden ? 0 : self.appearance.stackViewSpacing
+
+        let heightWithInsets = self.appearance.headerImageViewHeight
+            + titleHeight
+            + feedbackHeight
+            + subtitleHeight
+            + optionButtonsStackViewIntrinsicContentSize.height
+            + separatorHeight
+            + secondaryActionButtonHeight
+            + primaryActionButtonHeight
+            + verticalInsets
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: heightWithInsets)
     }
 
     init(
