@@ -26,6 +26,18 @@ enum LessonFinishedStepsPanModal {
         }
     }
 
+    enum CertificatePresentation {
+        struct Request {}
+
+        struct Response {
+            let certificate: Certificate
+        }
+
+        struct ViewModel {
+            let certificateURL: URL
+        }
+    }
+
     // MARK: Enums
 
     enum ActionType: String, UniqueIdentifiable {

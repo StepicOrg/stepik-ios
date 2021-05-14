@@ -4,6 +4,7 @@ import UIKit
 protocol LessonFinishedStepsPanModalPresenterProtocol {
     func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response)
     func presentShareResult(response: LessonFinishedStepsPanModal.ShareResultPresentation.Response)
+    func presentCertificate(response: LessonFinishedStepsPanModal.CertificatePresentation.Response)
 }
 
 final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPresenterProtocol {
@@ -35,6 +36,15 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         let shareText = "\(formattedResult) \(courseURL?.absoluteString ?? "")".trimmed()
 
         self.viewController?.displayShareResult(viewModel: .init(text: shareText))
+    }
+
+    func presentCertificate(response: LessonFinishedStepsPanModal.CertificatePresentation.Response) {
+        guard let urlString = response.certificate.urlString,
+              let url = URL(string: urlString) else {
+            return
+        }
+
+        self.viewController?.displayCertificate(viewModel: .init(certificateURL: url))
     }
 
     // MARK: Private API

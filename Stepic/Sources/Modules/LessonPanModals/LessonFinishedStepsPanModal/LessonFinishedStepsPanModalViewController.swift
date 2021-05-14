@@ -4,6 +4,7 @@ import UIKit
 protocol LessonFinishedStepsPanModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: LessonFinishedStepsPanModal.ModalLoad.ViewModel)
     func displayShareResult(viewModel: LessonFinishedStepsPanModal.ShareResultPresentation.ViewModel)
+    func displayCertificate(viewModel: LessonFinishedStepsPanModal.CertificatePresentation.ViewModel)
 }
 
 final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewController {
@@ -90,9 +91,18 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
             popoverPresentationController.sourceView = self.currentPopoverPresentationSourceView ?? self.view
             popoverPresentationController.sourceRect = self.currentPopoverPresentationSourceView?.bounds ?? .zero
         }
-        self.currentPopoverPresentationSourceView = nil
 
         self.present(activityViewController, animated: true)
+    }
+
+    func displayCertificate(viewModel: LessonFinishedStepsPanModal.CertificatePresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.certificateURL,
+            inController: self,
+            withKey: .certificate,
+            allowsSafari: true,
+            backButtonStyle: .close
+        )
     }
 }
 
@@ -115,7 +125,6 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
 
         switch actionType {
         case .backToAssignments:
-            self.currentPopoverPresentationSourceView = nil
             self.dismiss(animated: true)
         case .leaveReview:
             print("leaveReview")
@@ -124,7 +133,7 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
         case .shareResult:
             self.interactor.doShareResultPresentation(request: .init())
         case .viewCertificate:
-            print("viewCertificate")
+            self.interactor.doCertificatePresentation(request: .init())
         }
     }
 }

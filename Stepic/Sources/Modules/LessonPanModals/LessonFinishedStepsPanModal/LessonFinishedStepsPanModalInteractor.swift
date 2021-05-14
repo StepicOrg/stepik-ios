@@ -4,6 +4,7 @@ import PromiseKit
 protocol LessonFinishedStepsPanModalInteractorProtocol {
     func doModalLoad(request: LessonFinishedStepsPanModal.ModalLoad.Request)
     func doShareResultPresentation(request: LessonFinishedStepsPanModal.ShareResultPresentation.Request)
+    func doCertificatePresentation(request: LessonFinishedStepsPanModal.CertificatePresentation.Request)
 }
 
 final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalInteractorProtocol {
@@ -58,5 +59,13 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
         }
 
         self.presenter.presentShareResult(response: .init(course: currentCourse))
+    }
+
+    func doCertificatePresentation(request: LessonFinishedStepsPanModal.CertificatePresentation.Request) {
+        guard let certificate = self.currentCourse?.certificateEntity else {
+            return
+        }
+
+        self.presenter.presentCertificate(response: .init(certificate: certificate))
     }
 }
