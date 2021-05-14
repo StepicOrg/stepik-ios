@@ -910,6 +910,7 @@ LessonFinishedStepsPanModalSubtitleCertificateNotIssuedNeutralMessage = "There a
 LessonFinishedStepsPanModalSubtitleCertificateNotIssuedSuccessMessage = "There are no certificates in this course, but you can share your result on your social networks.";
 LessonFinishedStepsPanModalSubtitleContinueMessage = "Continue with this course or find another one?";
 LessonFinishedStepsPanModalSubtitleCertificateNotReadyNotifyMessage = "We will notify you when your certificate is ready.";
+LessonFinishedStepsPanModalShareResult = "I've received %@ out of %@ in the course «%@»";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

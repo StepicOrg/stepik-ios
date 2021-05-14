@@ -4,8 +4,11 @@ import UIKit
 
 protocol LessonFinishedStepsPanModalViewDelegate: AnyObject {
     func lessonFinishedStepsPanModalViewDidClickCloseButton(_ view: LessonFinishedStepsPanModalView)
-    func lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(_ view: LessonFinishedStepsPanModalView)
-    func lessonFinishedStepsPanModalViewDidClickSecondaryActionButton(_ view: LessonFinishedStepsPanModalView)
+    func lessonFinishedStepsPanModalView(
+        _ view: LessonFinishedStepsPanModalView,
+        didClickButtonWith uniqueIdentifier: UniqueIdentifierType?,
+        sourceView: UIView
+    )
 }
 
 extension LessonFinishedStepsPanModalView {
@@ -41,6 +44,7 @@ final class LessonFinishedStepsPanModalView: UIView {
     weak var delegate: LessonFinishedStepsPanModalViewDelegate?
 
     let appearance: Appearance
+    private var storedViewModel: LessonFinishedStepsPanModalViewModel?
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
@@ -174,6 +178,7 @@ final class LessonFinishedStepsPanModalView: UIView {
             + secondaryActionButtonHeight
             + primaryActionButtonHeight
             + verticalInsets
+            + self.appearance.stackViewSpacing
 
         return CGSize(width: UIView.noIntrinsicMetric, height: heightWithInsets)
     }
@@ -239,6 +244,8 @@ final class LessonFinishedStepsPanModalView: UIView {
 
         self.secondaryActionButton.setTitle(viewModel.secondaryActionButtonDescription.title, for: .normal)
         self.secondaryActionButton.isHidden = viewModel.secondaryActionButtonDescription.isHidden
+
+        self.storedViewModel = viewModel
     }
 
     override func layoutSubviews() {
@@ -280,19 +287,39 @@ final class LessonFinishedStepsPanModalView: UIView {
     }
 
     @objc
-    private func primaryOptionButtonClicked() {}
+    private func primaryOptionButtonClicked() {
+        self.delegate?.lessonFinishedStepsPanModalView(
+            self,
+            didClickButtonWith: self.storedViewModel?.primaryOptionButtonDescription.uniqueIdentifier,
+            sourceView: self.primaryOptionButton
+        )
+    }
 
     @objc
-    private func secondaryOptionButtonClicked() {}
+    private func secondaryOptionButtonClicked() {
+        self.delegate?.lessonFinishedStepsPanModalView(
+            self,
+            didClickButtonWith: self.storedViewModel?.secondaryOptionButtonDescription.uniqueIdentifier,
+            sourceView: self.secondaryOptionButton
+        )
+    }
 
     @objc
     private func primaryActionButtonClicked() {
-        self.delegate?.lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(self)
+        self.delegate?.lessonFinishedStepsPanModalView(
+            self,
+            didClickButtonWith: self.storedViewModel?.primaryActionButtonDescription.uniqueIdentifier,
+            sourceView: self.primaryActionButton
+        )
     }
 
     @objc
     private func secondaryActionButtonClicked() {
-        self.delegate?.lessonFinishedStepsPanModalViewDidClickSecondaryActionButton(self)
+        self.delegate?.lessonFinishedStepsPanModalView(
+            self,
+            didClickButtonWith: self.storedViewModel?.secondaryActionButtonDescription.uniqueIdentifier,
+            sourceView: self.secondaryActionButton
+        )
     }
 }
 

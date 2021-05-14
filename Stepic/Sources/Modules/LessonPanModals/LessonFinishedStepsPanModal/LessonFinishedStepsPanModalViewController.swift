@@ -3,12 +3,15 @@ import UIKit
 
 protocol LessonFinishedStepsPanModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: LessonFinishedStepsPanModal.ModalLoad.ViewModel)
+    func displayShareResult(viewModel: LessonFinishedStepsPanModal.ShareResultPresentation.ViewModel)
 }
 
 final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewController {
     private let interactor: LessonFinishedStepsPanModalInteractorProtocol
 
     private var state: LessonFinishedStepsPanModal.ViewControllerState
+
+    private var currentPopoverAnchorData: (sourceView: UIView?, sourceRect: CGRect)?
 
     private var hasLoadedData: Bool {
         if case .result = self.state {
@@ -76,6 +79,21 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
         self.panModalSetNeedsLayoutUpdate()
         self.panModalTransition(to: .shortForm)
     }
+
+    func displayShareResult(viewModel: LessonFinishedStepsPanModal.ShareResultPresentation.ViewModel) {
+        let activityViewController = UIActivityViewController(
+            activityItems: [viewModel.text],
+            applicationActivities: nil
+        )
+
+        if let popoverPresentationController = activityViewController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.currentPopoverAnchorData?.sourceView ?? self.view
+            popoverPresentationController.sourceRect = self.currentPopoverAnchorData?.sourceRect ?? .zero
+        }
+        self.currentPopoverAnchorData = nil
+
+        self.present(activityViewController, animated: true)
+    }
 }
 
 extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModalViewDelegate {
@@ -83,11 +101,30 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
         self.dismiss(animated: true)
     }
 
-    func lessonFinishedStepsPanModalViewDidClickPrimaryActionButton(_ view: LessonFinishedStepsPanModalView) {
-        self.dismiss(animated: true)
-    }
+    func lessonFinishedStepsPanModalView(
+        _ view: LessonFinishedStepsPanModalView,
+        didClickButtonWith uniqueIdentifier: UniqueIdentifierType?,
+        sourceView: UIView
+    ) {
+        guard let uniqueIdentifier = uniqueIdentifier,
+              let actionType = LessonFinishedStepsPanModal.ActionType(rawValue: uniqueIdentifier) else {
+            return
+        }
 
-    func lessonFinishedStepsPanModalViewDidClickSecondaryActionButton(_ view: LessonFinishedStepsPanModalView) {
-        print(#function)
+        self.currentPopoverAnchorData = (sourceView, sourceView.bounds)
+
+        switch actionType {
+        case .backToAssignments:
+            self.currentPopoverAnchorData = nil
+            self.dismiss(animated: true)
+        case .leaveReview:
+            print("leaveReview")
+        case .findNewCourse:
+            print("findNewCourse")
+        case .shareResult:
+            self.interactor.doShareResultPresentation(request: .init())
+        case .viewCertificate:
+            print("viewCertificate")
+        }
     }
 }

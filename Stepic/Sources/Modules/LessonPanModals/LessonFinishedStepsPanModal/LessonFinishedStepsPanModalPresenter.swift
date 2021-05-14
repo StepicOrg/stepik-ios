@@ -1,16 +1,43 @@
 import UIKit
 
+// swiftlint:disable file_length
 protocol LessonFinishedStepsPanModalPresenterProtocol {
     func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response)
+    func presentShareResult(response: LessonFinishedStepsPanModal.ShareResultPresentation.Response)
 }
 
 final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPresenterProtocol {
     weak var viewController: LessonFinishedStepsPanModalViewControllerProtocol?
 
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
+
     func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response) {
         let viewModel = self.makeViewModel(course: response.course, courseReview: response.courseReview)
         self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
     }
+
+    func presentShareResult(response: LessonFinishedStepsPanModal.ShareResultPresentation.Response) {
+        let course = response.course
+        let progressScore = course.progress?.score ?? 0
+        let progressCost = course.progress?.cost ?? 0
+
+        let formattedScore = FormatterHelper.pointsCount(progressScore)
+        let formattedResult = String(
+            format: NSLocalizedString("LessonFinishedStepsPanModalShareResult", comment: ""),
+            arguments: [formattedScore, "\(progressCost)", course.title]
+        )
+
+        let courseURL = self.urlFactory.makeCourse(id: course.id)
+        let shareText = "\(formattedResult) \(courseURL?.absoluteString ?? "")".trimmed()
+
+        self.viewController?.displayShareResult(viewModel: .init(text: shareText))
+    }
+
+    // MARK: Private API
 
     private func makeViewModel(course: Course, courseReview: CourseReview?) -> LessonFinishedStepsPanModalViewModel {
         let state = self.getState(course: course, courseReview: courseReview)

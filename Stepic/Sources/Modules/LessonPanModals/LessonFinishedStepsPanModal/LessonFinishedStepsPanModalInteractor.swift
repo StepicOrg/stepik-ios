@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol LessonFinishedStepsPanModalInteractorProtocol {
     func doModalLoad(request: LessonFinishedStepsPanModal.ModalLoad.Request)
+    func doShareResultPresentation(request: LessonFinishedStepsPanModal.ShareResultPresentation.Request)
 }
 
 final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalInteractorProtocol {
@@ -12,6 +13,7 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
     private let provider: LessonFinishedStepsPanModalProviderProtocol
 
     private let courseID: Course.IdType
+    private var currentCourse: Course?
 
     init(
         courseID: Course.IdType,
@@ -34,6 +36,8 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
                 ).map { (course, $0?.flatMap({ $0 })) }
             }
             .done { course, courseReviewOrNil in
+                self.currentCourse = course
+
                 if let courseReview = courseReviewOrNil {
                     courseReview.course = course
                     CoreDataHelper.shared.save()
@@ -46,5 +50,13 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
             .catch { error in
                 print("LessonFinishedStepsPanModalInteractor :: failed load data with error = \(error)")
             }
+    }
+
+    func doShareResultPresentation(request: LessonFinishedStepsPanModal.ShareResultPresentation.Request) {
+        guard let currentCourse = self.currentCourse else {
+            return
+        }
+
+        self.presenter.presentShareResult(response: .init(course: currentCourse))
     }
 }

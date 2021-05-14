@@ -911,6 +911,7 @@ LessonFinishedStepsPanModalSubtitleCertificateNotIssuedNeutralMessage = "Сер�
 LessonFinishedStepsPanModalSubtitleCertificateNotIssuedSuccessMessage = "Сертификат в нём не выдаётся, но вы можете поделиться своим результатом в соцсетях.";
 LessonFinishedStepsPanModalSubtitleContinueMessage = "Продолжите изучать этот курс или поищете другой?";
 LessonFinishedStepsPanModalSubtitleCertificateNotReadyNotifyMessage = "Мы пришлём уведомление, когда сертификат будет готов.";
+LessonFinishedStepsPanModalShareResult = "Я получил(а) %@ из %@ в курсе «%@»";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";

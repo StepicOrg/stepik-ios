@@ -26,7 +26,7 @@ final class LessonFinishedStepsPanModalAssembly: Assembly {
             courseReviewsNetworkService: CourseReviewsNetworkService(courseReviewsAPI: CourseReviewsAPI()),
             userAccountService: UserAccountService()
         )
-        let presenter = LessonFinishedStepsPanModalPresenter()
+        let presenter = LessonFinishedStepsPanModalPresenter(urlFactory: StepikURLFactory())
         let interactor = LessonFinishedStepsPanModalInteractor(
             courseID: self.courseID,
             presenter: presenter,

@@ -14,6 +14,18 @@ enum LessonFinishedStepsPanModal {
         }
     }
 
+    enum ShareResultPresentation {
+        struct Request {}
+
+        struct Response {
+            let course: Course
+        }
+
+        struct ViewModel {
+            let text: String
+        }
+    }
+
     // MARK: Enums
 
     enum ActionType: String, UniqueIdentifiable {
