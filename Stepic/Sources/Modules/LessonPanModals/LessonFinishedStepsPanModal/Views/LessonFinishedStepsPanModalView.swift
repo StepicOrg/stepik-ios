@@ -24,6 +24,12 @@ extension LessonFinishedStepsPanModalView {
         let subtitleLabelFont = Typography.bodyFont
         let subtitleLabelTextColor = UIColor.stepikMaterialPrimaryText
 
+        let optionButtonImageSize = CGSize(width: 20, height: 20)
+        let optionButtonTintColor = UIColor.stepikGreenFixed
+        let optionButtonFont = UIFont.systemFont(ofSize: 17)
+        let optionButtonTitleInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        let optionButtonHeight: CGFloat = 20
+
         let actionButtonHeight: CGFloat = 44
 
         let stackViewSpacing: CGFloat = 16
@@ -74,6 +80,26 @@ final class LessonFinishedStepsPanModalView: UIView {
         return label
     }()
 
+    private lazy var primaryOptionButton: ImageButton = {
+        let imageButton = ImageButton()
+        imageButton.imageSize = self.appearance.optionButtonImageSize
+        imageButton.tintColor = self.appearance.optionButtonTintColor
+        imageButton.font = self.appearance.optionButtonFont
+        imageButton.titleInsets = self.appearance.optionButtonTitleInsets
+        imageButton.addTarget(self, action: #selector(self.primaryOptionButtonClicked), for: .touchUpInside)
+        return imageButton
+    }()
+
+    private lazy var secondaryOptionButton: ImageButton = {
+        let imageButton = ImageButton()
+        imageButton.imageSize = self.appearance.optionButtonImageSize
+        imageButton.tintColor = self.appearance.optionButtonTintColor
+        imageButton.font = self.appearance.optionButtonFont
+        imageButton.titleInsets = self.appearance.optionButtonTitleInsets
+        imageButton.addTarget(self, action: #selector(self.secondaryOptionButtonClicked), for: .touchUpInside)
+        return imageButton
+    }()
+
     private lazy var primaryActionButton: UIButton = {
         let button = LessonPanModalActionButton()
         button.addTarget(self, action: #selector(self.primaryActionButtonClicked), for: .touchUpInside)
@@ -85,6 +111,8 @@ final class LessonFinishedStepsPanModalView: UIView {
         button.addTarget(self, action: #selector(self.secondaryActionButtonClicked), for: .touchUpInside)
         return button
     }()
+
+    private lazy var optionButtonsStackView = UIStackView()
 
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -170,6 +198,21 @@ final class LessonFinishedStepsPanModalView: UIView {
         )
         self.subtitleLabel.isHidden = viewModel.subtitle.isEmpty
 
+        self.primaryOptionButton.title = viewModel.primaryOptionButtonDescription.title
+        self.primaryOptionButton.isHidden = viewModel.primaryOptionButtonDescription.isHidden
+        if let iconName = viewModel.primaryOptionButtonDescription.iconName {
+            self.primaryOptionButton.image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate)
+        }
+
+        self.secondaryOptionButton.title = viewModel.secondaryOptionButtonDescription.title
+        self.secondaryOptionButton.isHidden = viewModel.secondaryOptionButtonDescription.isHidden
+        if let iconName = viewModel.secondaryOptionButtonDescription.iconName {
+            self.secondaryOptionButton.image = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate)
+        }
+
+        self.optionButtonsStackView.isHidden = self.primaryOptionButton.isHidden && self.secondaryOptionButton.isHidden
+        self.updateOptionButtonsStackView()
+
         self.primaryActionButton.setTitle(viewModel.primaryActionButtonDescription.title, for: .normal)
         self.primaryActionButton.isHidden = viewModel.primaryActionButtonDescription.isHidden
 
@@ -177,10 +220,49 @@ final class LessonFinishedStepsPanModalView: UIView {
         self.secondaryActionButton.isHidden = viewModel.secondaryActionButtonDescription.isHidden
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.updateOptionButtonsStackView()
+    }
+
+    private func updateOptionButtonsStackView() {
+        if self.optionButtonsStackView.isHidden {
+            return
+        }
+
+        let primaryOptionButtonWidth = self.primaryOptionButton.isHidden
+            ? 0
+            : self.primaryOptionButton.intrinsicContentSize.width
+        let secondaryOptionButtonWidth = self.secondaryOptionButton.isHidden
+            ? 0
+            : self.secondaryOptionButton.intrinsicContentSize.width
+        let insets = primaryOptionButtonWidth > 0 && secondaryOptionButtonWidth > 0
+            ? self.appearance.stackViewSpacing
+            : 0
+        let optionButtonsWidthWithInsets = primaryOptionButtonWidth + insets + secondaryOptionButtonWidth
+
+        if optionButtonsWidthWithInsets <= self.contentStackView.frame.width {
+            self.optionButtonsStackView.spacing = 0
+            self.optionButtonsStackView.axis = .horizontal
+            self.optionButtonsStackView.distribution = .equalSpacing
+        } else {
+            self.optionButtonsStackView.spacing = self.appearance.stackViewSpacing
+            self.optionButtonsStackView.axis = .vertical
+            self.optionButtonsStackView.distribution = .fillProportionally
+            self.optionButtonsStackView.alignment = .leading
+        }
+    }
+
     @objc
     private func closeButtonClicked() {
         self.delegate?.lessonFinishedStepsPanModalViewDidClickCloseButton(self)
     }
+
+    @objc
+    private func primaryOptionButtonClicked() {}
+
+    @objc
+    private func secondaryOptionButtonClicked() {}
 
     @objc
     private func primaryActionButtonClicked() {
@@ -208,9 +290,13 @@ extension LessonFinishedStepsPanModalView: ProgrammaticallyInitializableViewProt
         self.contentStackViewContainerView.addSubview(self.contentStackView)
         self.scrollableStackView.addArrangedView(self.contentStackViewContainerView)
 
+        self.optionButtonsStackView.addArrangedSubview(self.primaryOptionButton)
+        self.optionButtonsStackView.addArrangedSubview(self.secondaryOptionButton)
+
         self.contentStackView.addArrangedSubview(self.titleLabel)
         self.contentStackView.addArrangedSubview(self.feedbackView)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
+        self.contentStackView.addArrangedSubview(self.optionButtonsStackView)
         self.contentStackView.addArrangedSubview(SeparatorView())
         self.contentStackView.addArrangedSubview(self.secondaryActionButton)
         self.contentStackView.addArrangedSubview(self.primaryActionButton)
@@ -235,6 +321,12 @@ extension LessonFinishedStepsPanModalView: ProgrammaticallyInitializableViewProt
             make.top.equalToSuperview().offset(self.appearance.closeButtonInsets.top)
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-self.appearance.closeButtonInsets.right)
         }
+
+        self.primaryOptionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.primaryOptionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.optionButtonHeight) }
+
+        self.secondaryOptionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.secondaryOptionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.optionButtonHeight) }
 
         self.secondaryActionButton.translatesAutoresizingMaskIntoConstraints = false
         self.secondaryActionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }

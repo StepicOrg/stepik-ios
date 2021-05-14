@@ -24,8 +24,8 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         let primaryActionButtonDescription = self.makePrimaryActionButtonDescription(state: state)
         let secondaryActionButtonDescription = self.makeSecondaryActionButtonDescription(state: state)
 
-        let primaryOptionButtonDescription = self.makePrimaryOptionButtonDescription(course: course)
-        let secondaryOptionButtonDescription = self.makeSecondaryOptionButtonDescription(course: course)
+        let primaryOptionButtonDescription = self.makePrimaryOptionButtonDescription(state: state)
+        let secondaryOptionButtonDescription = self.makeSecondaryOptionButtonDescription(state: state)
 
         return LessonFinishedStepsPanModalViewModel(
             headerImageName: headerImageName,
@@ -399,15 +399,63 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
     }
 
     private func makePrimaryOptionButtonDescription(
-        course: Course
+        state: State
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(title: "", iconName: nil, isHidden: false, uniqueIdentifier: "")
+        switch state {
+        case .successNeutralWithoutCert,
+             .successNeutralWithCert,
+             .successNeutralRegularCertReady,
+             .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertReadyWithoutDistinctionCert,
+             .successNeutralDistinctionCertReady,
+             .successNeutralDistinctionCertNotReady,
+             .successWithCertWithoutReview,
+             .successWithCertWithReview,
+             .successWithoutCertWithoutReview,
+             .successWithoutCertWithReview,
+             .successRegularCertWithoutReviewReady,
+             .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewReady,
+             .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithoutReviewNotReady,
+             .successDistinctionCertWithReviewReady,
+             .successDistinctionCertWithReviewNotReady:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonShareResultTitle", comment: ""),
+                iconName: "finished-steps-button-share",
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.shareResult.uniqueIdentifier
+            )
+        default:
+            return .init(title: "", iconName: nil, isHidden: true, uniqueIdentifier: "")
+        }
     }
 
     private func makeSecondaryOptionButtonDescription(
-        course: Course
+        state: State
     ) -> LessonFinishedStepsPanModalViewModel.ButtonDescription {
-        .init(title: "", iconName: nil, isHidden: false, uniqueIdentifier: "")
+        switch state {
+        case .successNeutralRegularCertReady,
+             .successNeutralRegularCertReadyWithoutDistinctionCert,
+             .successNeutralDistinctionCertReady,
+             .successRegularCertWithoutReviewReady,
+             .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewReady,
+             .successRegularCertWithReviewReadyWithoutDistinctionCert,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithReviewReady:
+            return .init(
+                title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonViewCertificateTitle", comment: ""),
+                iconName: "finished-steps-button-certificate",
+                isHidden: false,
+                uniqueIdentifier: LessonFinishedStepsPanModal.ActionType.viewCertificate.uniqueIdentifier
+            )
+        default:
+            return .init(title: "", iconName: nil, isHidden: true, uniqueIdentifier: "")
+        }
     }
 
     private enum State {

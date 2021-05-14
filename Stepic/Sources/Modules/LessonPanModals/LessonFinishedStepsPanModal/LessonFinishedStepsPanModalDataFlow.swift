@@ -20,6 +20,8 @@ enum LessonFinishedStepsPanModal {
         case backToAssignments
         case leaveReview
         case findNewCourse
+        case shareResult
+        case viewCertificate
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
     }
