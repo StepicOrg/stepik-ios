@@ -964,6 +964,7 @@
 		2CE0CACF255A8CCD009C6574 /* CatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CACE255A8CCD009C6574 /* CatalogBlockContentItem.swift */; };
 		2CE0CAD8255A8D36009C6574 /* CatalogBlockContentItemParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */; };
 		2CE0CADD255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */; };
+		2CE310FD264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE310FC264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */; };
 		2CE42D4623CCC6500073F774 /* VideoRateStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */; };
@@ -2736,6 +2737,7 @@
 		2CE0CACE255A8CCD009C6574 /* CatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentItem.swift; sourceTree = "<group>"; };
 		2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentItemParser.swift; sourceTree = "<group>"; };
 		2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCourseListsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
+		2CE310FC264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalFeedbackView.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQualityStorageManager.swift; sourceTree = "<group>"; };
 		2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRateStorageManager.swift; sourceTree = "<group>"; };
@@ -3968,6 +3970,7 @@
 		2C2F695E263AC8940025D80B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CE310FC264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift */,
 				5EE4ED6E9648215F1B416059 /* LessonFinishedStepsPanModalView.swift */,
 				2C2F6964263AC8BB0025D80B /* LessonPanModalActionButton.swift */,
 			);
@@ -10244,6 +10247,7 @@
 				62E987CB113F6D20B108D070 /* AchievementPopupAlertManager.swift in Sources */,
 				08484F0A211AF4320006266F /* Story.swift in Sources */,
 				2C9959FD25F758EC00459588 /* ReviewSessionDataPlainObject.swift in Sources */,
+				2CE310FD264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift in Sources */,
 				2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */,
 				2C4AD01123E2F3CD0049B7B0 /* DiscussionThread.swift in Sources */,
 				62E98F602ED9E5CEA4E02D0A /* UIStackView+RemoveAllArrangedSubviews.swift in Sources */,

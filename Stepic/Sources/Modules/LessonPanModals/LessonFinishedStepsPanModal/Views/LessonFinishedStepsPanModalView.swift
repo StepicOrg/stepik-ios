@@ -1,3 +1,4 @@
+import Atributika
 import SnapKit
 import UIKit
 
@@ -63,8 +64,10 @@ final class LessonFinishedStepsPanModalView: UIView {
         return label
     }()
 
-    private lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
+    private lazy var feedbackView = LessonFinishedStepsPanModalFeedbackView()
+
+    private lazy var subtitleLabel: AttributedLabel = {
+        let label = AttributedLabel()
         label.font = self.appearance.subtitleLabelFont
         label.textColor = self.appearance.subtitleLabelTextColor
         label.numberOfLines = 0
@@ -97,6 +100,8 @@ final class LessonFinishedStepsPanModalView: UIView {
         return scrollableStackView
     }()
 
+    private lazy var subtitleTextConverter = HTMLToAttributedStringConverter(font: self.appearance.subtitleLabelFont)
+
     override var intrinsicContentSize: CGSize {
         if self.loadingIndicator.isAnimating {
             return CGSize(
@@ -109,7 +114,9 @@ final class LessonFinishedStepsPanModalView: UIView {
             + self.appearance.stackViewSpacing
             + self.titleLabel.intrinsicContentSize.height
             + self.appearance.stackViewSpacing
-            + self.subtitleLabel.intrinsicContentSize.height
+            + self.feedbackView.intrinsicContentSize.height
+            + self.appearance.stackViewSpacing
+            + self.subtitleLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
             + self.appearance.stackViewSpacing
             + SeparatorView.Appearance().height
             + self.appearance.stackViewSpacing
@@ -153,7 +160,15 @@ final class LessonFinishedStepsPanModalView: UIView {
         self.headerImageView.image = UIImage(named: viewModel.headerImageName)
 
         self.titleLabel.text = viewModel.title
-        self.subtitleLabel.text = viewModel.subtitle
+        self.titleLabel.isHidden = viewModel.title.isEmpty
+
+        self.feedbackView.text = viewModel.feedbackText
+        self.feedbackView.isHidden = viewModel.feedbackText.isEmpty
+
+        self.subtitleLabel.attributedText = self.subtitleTextConverter.convertToAttributedText(
+            htmlString: viewModel.subtitle
+        )
+        self.subtitleLabel.isHidden = viewModel.subtitle.isEmpty
 
         self.primaryActionButton.setTitle(viewModel.primaryActionButtonDescription.title, for: .normal)
         self.primaryActionButton.isHidden = viewModel.primaryActionButtonDescription.isHidden
@@ -194,6 +209,7 @@ extension LessonFinishedStepsPanModalView: ProgrammaticallyInitializableViewProt
         self.scrollableStackView.addArrangedView(self.contentStackViewContainerView)
 
         self.contentStackView.addArrangedSubview(self.titleLabel)
+        self.contentStackView.addArrangedSubview(self.feedbackView)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
         self.contentStackView.addArrangedSubview(SeparatorView())
         self.contentStackView.addArrangedSubview(self.secondaryActionButton)
