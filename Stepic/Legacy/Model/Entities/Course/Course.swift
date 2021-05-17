@@ -69,14 +69,14 @@ final class Course: NSManagedObject, IDFetchable {
             && self.scheduleType != "upcoming"
     }
 
-    var hasAnyCertificateThreshold: Bool {
-        (self.certificateRegularThreshold != nil) || (self.certificateDistinctionThreshold != nil)
+    var anyCertificateTreshold: Int? {
+        self.certificateRegularThreshold ?? self.certificateDistinctionThreshold
     }
 
     var hasCertificate: Bool {
         let hasText = !self.certificate.isEmpty
         let isIssued = self.isCertificatesAutoIssued && self.isCertificateIssued
-        return self.hasAnyCertificateThreshold && (hasText || isIssued)
+        return self.anyCertificateTreshold != nil && (hasText || isIssued)
     }
 
     required convenience init(json: JSON) {
@@ -130,6 +130,7 @@ final class Course: NSManagedObject, IDFetchable {
         self.certificateDistinctionThreshold = json[JSONKey.certificateDistinctionThreshold.rawValue].int
         self.isCertificatesAutoIssued = json[JSONKey.isCertificateAutoIssued.rawValue].boolValue
         self.isCertificateIssued = json[JSONKey.isCertificateIssued.rawValue].boolValue
+        self.isWithCertificate = json[JSONKey.withCertificate.rawValue].boolValue
 
         if let _ = json[JSONKey.introVideo.rawValue].null {
             self.introVideo = nil
@@ -392,6 +393,7 @@ final class Course: NSManagedObject, IDFetchable {
         case certificateDistinctionThreshold = "certificate_distinction_threshold"
         case isCertificateAutoIssued = "is_certificate_auto_issued"
         case isCertificateIssued = "is_certificate_issued"
+        case withCertificate = "with_certificate"
         case requirements
         case slug
         case progress
