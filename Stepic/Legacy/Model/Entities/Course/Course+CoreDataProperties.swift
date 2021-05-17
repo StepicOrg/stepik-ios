@@ -61,6 +61,11 @@ extension Course {
     @NSManaged var managedDisplayPrice: String?
     @NSManaged var managedPriceTier: NSNumber?
 
+    @NSManaged var managedDefaultPromoCodeName: String?
+    @NSManaged var managedDefaultPromoCodePrice: NSNumber?
+    @NSManaged var managedDefaultPromoCodeDiscount: NSNumber?
+    @NSManaged var managedDefaultPromoCodeExpireDate: Date?
+
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
     @NSManaged var managedCertificateEntity: Certificate?
@@ -455,6 +460,42 @@ extension Course {
         }
         set {
             self.managedLanguageCode = newValue
+        }
+    }
+
+    var defaultPromoCodeName: String? {
+        get {
+            self.managedDefaultPromoCodeName
+        }
+        set {
+            self.managedDefaultPromoCodeName = newValue
+        }
+    }
+
+    var defaultPromoCodePrice: Float? {
+        get {
+            self.managedDefaultPromoCodePrice?.floatValue
+        }
+        set {
+            self.managedDefaultPromoCodePrice = newValue as NSNumber?
+        }
+    }
+
+    var defaultPromoCodeDiscount: Float? {
+        get {
+            self.managedDefaultPromoCodeDiscount?.floatValue
+        }
+        set {
+            self.managedDefaultPromoCodeDiscount = newValue as NSNumber?
+        }
+    }
+
+    var defaultPromoCodeExpireDate: Date? {
+        get {
+            self.managedDefaultPromoCodeExpireDate
+        }
+        set {
+            self.managedDefaultPromoCodeExpireDate = newValue
         }
     }
 

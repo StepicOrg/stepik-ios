@@ -122,6 +122,16 @@ enum TestData {
         self.loadJSON(path: "catalog-block-specializations-stepik-academy")
     }
 
+    // MARK: Courses
+
+    static var courseWithDefaultPromoCode: JSON {
+        self.loadJSON(path: "course-default-promo-code")
+    }
+
+    static var courseWithoutDefaultPromoCode: JSON {
+        self.loadJSON(path: "course-without-default-promo-code")
+    }
+
     // MARK: Private API
 
     private static func loadJSON(path: String) -> JSON {

@@ -514,6 +514,9 @@
 		2C3A052025B763370007FBCA /* WidgetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A051F25B763370007FBCA /* WidgetURL.swift */; };
 		2C3A053F25B7693B0007FBCA /* WidgetRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */; };
 		2C3A056225B780A80007FBCA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A056425B780A80007FBCA /* Localizable.strings */; };
+		2C3A0EF3265291F8008D54C5 /* CourseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A0EF2265291F8008D54C5 /* CourseTests.swift */; };
+		2C3A0EF6265292A3008D54C5 /* course-default-promo-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A0EF5265292A3008D54C5 /* course-default-promo-code.json */; };
+		2C3A0EF82652978A008D54C5 /* course-without-default-promo-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C3A0EF72652978A008D54C5 /* course-without-default-promo-code.json */; };
 		2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */; };
 		2C3ABA8923D1DA8D00E90439 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */; };
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
@@ -2260,6 +2263,10 @@
 		2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRoutingService.swift; sourceTree = "<group>"; };
 		2C3A056325B780A80007FBCA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C3A056925B780B00007FBCA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2C3A0EF126528A91008D54C5 /* Model_course_default_promo_code_v78.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_default_promo_code_v78.xcdatamodel; sourceTree = "<group>"; };
+		2C3A0EF2265291F8008D54C5 /* CourseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTests.swift; sourceTree = "<group>"; };
+		2C3A0EF5265292A3008D54C5 /* course-default-promo-code.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "course-default-promo-code.json"; sourceTree = "<group>"; };
+		2C3A0EF72652978A008D54C5 /* course-without-default-promo-code.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "course-without-default-promo-code.json"; sourceTree = "<group>"; };
 		2C3A1F5D24F3B1D200B4070F /* FillBlanksFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksFeedback.swift; sourceTree = "<group>"; };
 		2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetworksView.swift; sourceTree = "<group>"; };
@@ -4015,6 +4022,15 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
+		2C3A0EF426529284008D54C5 /* Courses */ = {
+			isa = PBXGroup;
+			children = (
+				2C3A0EF5265292A3008D54C5 /* course-default-promo-code.json */,
+				2C3A0EF72652978A008D54C5 /* course-without-default-promo-code.json */,
+			);
+			path = Courses;
+			sourceTree = "<group>";
+		};
 		2C48BA02257277DD009103B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -4098,6 +4114,7 @@
 				2CFE6A83255AA6DE00A43952 /* CatalogBlockContentItemTests.swift */,
 				2C1AC305255B34BB00E6ECA9 /* CatalogBlockEntityTests.swift */,
 				2CE0CAC6255A8824009C6574 /* CatalogBlockTests.swift */,
+				2C3A0EF2265291F8008D54C5 /* CourseTests.swift */,
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C453399204D5DEE0061342A /* PinsMapSpec.swift */,
 				2CEDC67126089DAE00B0B018 /* PlatformTypeTests.swift */,
@@ -6099,6 +6116,7 @@
 			children = (
 				2C06DAF32615F97C00BDF715 /* APIResponses */,
 				2C06DAF42615F9D900BDF715 /* CatalogBlocks */,
+				2C3A0EF426529284008D54C5 /* Courses */,
 				2CA99F1E260A3B74000ABCAD /* Datasets */,
 				2CA99F70260A44EC000ABCAD /* Feedbacks */,
 				2CA99F95260A4DEF000ABCAD /* Replies */,
@@ -9032,6 +9050,7 @@
 				2CA99F46260A4044000ABCAD /* dataset-sorting.json in Resources */,
 				2C06DB172616048A00BDF715 /* catalog-block-recommended-courses.json in Resources */,
 				2CA99FBF260A530E000ABCAD /* reply-math.json in Resources */,
+				2C3A0EF6265292A3008D54C5 /* course-default-promo-code.json in Resources */,
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 				2CA99FA3260A5177000ABCAD /* reply-code.json in Resources */,
 				2CA99FAA260A51BF000ABCAD /* reply-fill-blanks.json in Resources */,
@@ -9040,6 +9059,7 @@
 				2C06DB102616044300BDF715 /* catalog-block-organizations.json in Resources */,
 				2CA99F72260A4506000ABCAD /* feedback-choice-submission.json in Resources */,
 				2CA99FE2260A5499000ABCAD /* reply-text.json in Resources */,
+				2C3A0EF82652978A008D54C5 /* course-without-default-promo-code.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9591,6 +9611,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
+				2C3A0EF3265291F8008D54C5 /* CourseTests.swift in Sources */,
 				2CE0CAC7255A8824009C6574 /* CatalogBlockTests.swift in Sources */,
 				2CFE6A84255AA6DE00A43952 /* CatalogBlockContentItemTests.swift in Sources */,
 				2CF8DF8825F26B9300F577C2 /* TestData.swift in Sources */,
@@ -12972,6 +12993,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C3A0EF126528A91008D54C5 /* Model_course_default_promo_code_v78.xcdatamodel */,
 				2C8202BB26385A88002C2C37 /* Model_lesson_finished_steps_v77.xcdatamodel */,
 				2CDA1AEF26137C8C00E36BF7 /* Model_exams_redesign_v76.xcdatamodel */,
 				2CAFAF042609DC3E00701D9F /* Model_NSSecureCoding_v75.xcdatamodel */,
@@ -13051,7 +13073,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C8202BB26385A88002C2C37 /* Model_lesson_finished_steps_v77.xcdatamodel */;
+			currentVersion = 2C3A0EF126528A91008D54C5 /* Model_course_default_promo_code_v78.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
