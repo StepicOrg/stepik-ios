@@ -46,8 +46,6 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
                     CoreDataHelper.shared.save()
                 }
 
-                print("LessonFinishedStepsPanModalInteractor :: did load data = \(course)")
-
                 self.presenter.presentModal(response: .init(course: course, courseReview: courseReviewOrNil))
             }
             .catch { error in
@@ -56,19 +54,15 @@ final class LessonFinishedStepsPanModalInteractor: LessonFinishedStepsPanModalIn
     }
 
     func doShareResultPresentation(request: LessonFinishedStepsPanModal.ShareResultPresentation.Request) {
-        guard let currentCourse = self.currentCourse else {
-            return
+        if let currentCourse = self.currentCourse {
+            self.presenter.presentShareResult(response: .init(course: currentCourse))
         }
-
-        self.presenter.presentShareResult(response: .init(course: currentCourse))
     }
 
     func doCertificatePresentation(request: LessonFinishedStepsPanModal.CertificatePresentation.Request) {
-        guard let certificate = self.currentCourse?.certificateEntity else {
-            return
+        if let certificate = self.currentCourse?.certificateEntity {
+            self.presenter.presentCertificate(response: .init(certificate: certificate))
         }
-
-        self.presenter.presentCertificate(response: .init(certificate: certificate))
     }
 
     func doLeaveReviewPresentation(request: LessonFinishedStepsPanModal.LeaveReviewPresentation.Request) {

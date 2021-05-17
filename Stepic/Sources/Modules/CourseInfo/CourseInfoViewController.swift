@@ -670,7 +670,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
 
     private func popLessonViewController() -> UIViewController? {
         guard let navigationController = self.navigationController,
-              navigationController.topViewController?.isKind(of: LessonViewController.self) ?? false else {
+              navigationController.topViewController as? LessonViewControllerProtocol != nil else {
             return nil
         }
 
