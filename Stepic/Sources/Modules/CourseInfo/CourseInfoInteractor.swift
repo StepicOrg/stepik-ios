@@ -386,17 +386,19 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             if let promoCodeName = self.promoCodeName {
                 return self.provider.checkPromoCode(name: promoCodeName).map { $0 }
             } else if let defaultPromoCodeName = course.defaultPromoCodeName,
-                      let defaultPromoCodePrice = course.defaultPromoCodePrice,
-                      let defaultPromoCodeExpireDate = course.defaultPromoCodeExpireDate,
-                      defaultPromoCodeExpireDate > Date() {
-                return .value(
-                    PromoCode(
-                        courseID: course.id,
-                        name: defaultPromoCodeName,
-                        price: defaultPromoCodePrice,
-                        currencyCode: course.currencyCode ?? "RUB"
-                    )
+                      let defaultPromoCodePrice = course.defaultPromoCodePrice {
+                let defaultPromoCode = PromoCode(
+                    courseID: course.id,
+                    name: defaultPromoCodeName,
+                    price: defaultPromoCodePrice,
+                    currencyCode: course.currencyCode ?? "RUB"
                 )
+
+                if let defaultPromoCodeExpireDate = course.defaultPromoCodeExpireDate {
+                    return defaultPromoCodeExpireDate > Date() ? .value(defaultPromoCode) : .value(nil)
+                } else {
+                    return .value(defaultPromoCode)
+                }
             } else {
                 return .value(nil)
             }
