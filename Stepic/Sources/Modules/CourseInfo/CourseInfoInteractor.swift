@@ -355,14 +355,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     }
                 }
 
-                if let promoCodeName = self.promoCodeName, self.currentPromoCode == nil,
-                   let course = course, course.isPaid {
-                    self.provider.checkPromoCode(name: promoCodeName).done { promoCode in
-                        self.currentPromoCode = promoCode
-                        DispatchQueue.main.async {
-                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
-                        }
-                    }.cauterize()
+                DispatchQueue.main.async {
+                    self.fetchAndPresentPromoCodeIfNeeded()
                 }
 
                 if !self.didLoadFromCache {
@@ -380,6 +374,39 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 }
             }
         }
+    }
+
+    private func fetchAndPresentPromoCodeIfNeeded() {
+        guard self.currentPromoCode == nil,
+              let course = self.currentCourse, course.isPaid else {
+            return
+        }
+
+        firstly { () -> Promise<PromoCode?> in
+            if let promoCodeName = self.promoCodeName {
+                return self.provider.checkPromoCode(name: promoCodeName).map { $0 }
+            } else if let defaultPromoCodeName = course.defaultPromoCodeName,
+                      let defaultPromoCodePrice = course.defaultPromoCodePrice,
+                      let defaultPromoCodeExpireDate = course.defaultPromoCodeExpireDate,
+                      defaultPromoCodeExpireDate > Date() {
+                return .value(
+                    PromoCode(
+                        courseID: course.id,
+                        name: defaultPromoCodeName,
+                        price: defaultPromoCodePrice,
+                        currencyCode: course.currencyCode ?? "RUB"
+                    )
+                )
+            } else {
+                return .value(nil)
+            }
+        }
+        .compactMap { $0 }
+        .done { promoCode in
+            self.currentPromoCode = promoCode
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+        }
+        .cauterize()
     }
 
     private func pushCurrentCourseToSubmodules(submodules: [CourseInfoSubmoduleProtocol]) {

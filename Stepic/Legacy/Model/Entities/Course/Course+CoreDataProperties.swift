@@ -60,6 +60,7 @@ extension Course {
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
     @NSManaged var managedPriceTier: NSNumber?
+    @NSManaged var managedCurrencyCode: String?
 
     @NSManaged var managedDefaultPromoCodeName: String?
     @NSManaged var managedDefaultPromoCodePrice: NSNumber?
@@ -314,6 +315,15 @@ extension Course {
         }
         set {
             self.managedPriceTier = newValue as NSNumber?
+        }
+    }
+
+    var currencyCode: String? {
+        get {
+            self.managedCurrencyCode
+        }
+        set {
+            self.managedCurrencyCode = newValue
         }
     }
 

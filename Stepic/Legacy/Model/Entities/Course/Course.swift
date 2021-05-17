@@ -124,6 +124,7 @@ final class Course: NSManagedObject, IDFetchable {
         self.isPaid = json[JSONKey.isPaid.rawValue].boolValue
         self.displayPrice = json[JSONKey.displayPrice.rawValue].string
         self.priceTier = json[JSONKey.priceTier.rawValue].int
+        self.currencyCode = json[JSONKey.currencyCode.rawValue].string
 
         self.certificate = json[JSONKey.certificate.rawValue].stringValue
         self.certificateRegularThreshold = json[JSONKey.certificateRegularThreshold.rawValue].int
@@ -423,6 +424,7 @@ final class Course: NSManagedObject, IDFetchable {
         case language
         case isPaid = "is_paid"
         case displayPrice = "display_price"
+        case currencyCode = "currency_code"
         case introVideo = "intro_video"
         case priceTier = "price_tier"
         case options
