@@ -1,0 +1,17 @@
+{
+    "id": 191,
+    "instructors": [
+        1716759,
+        1718018,
+        1870105
+    ],
+    "sections": [
+        615,
+        616,
+        617
+    ],
+    "default_promo_code_name": "SALE100",
+    "default_promo_code_price": "2790.00",
+    "default_promo_code_discount": "100.00",
+    "default_promo_code_expire_date": "2021-06-03T20:59:00Z"
+}
