@@ -18,7 +18,7 @@ PODS:
   - CocoaLumberjack (3.7.2):
     - CocoaLumberjack/Core (= 3.7.2)
   - CocoaLumberjack/Core (3.7.2)
-  - DeviceKit (4.3.0)
+  - DeviceKit (4.4.0)
   - DownloadButton (0.1.0)
   - EasyTipView (2.1.0)
   - FBSDKCoreKit (8.2.0):
@@ -225,7 +225,7 @@ DEPENDENCIES:
   - BEMCheckBox (= 1.4.1)
   - Branch (= 1.39.2)
   - Charts (= 3.6.0)
-  - DeviceKit (= 4.3.0)
+  - DeviceKit (= 4.4.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.1.0)
   - FBSDKCoreKit (= 8.2.0)
@@ -371,7 +371,7 @@ SPEC CHECKSUMS:
   Branch: 6a281514287f99d707615ac62c2cca69e0213df0
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
-  DeviceKit: 7decde449c308ac7e816e2184ded1c7c596fb885
+  DeviceKit: 2c5d7485a2fa10b65c0091b2952d30843a6ba06d
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
@@ -427,6 +427,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: fb4b3c20a0c0237b03b34cc07b6d575332f43097
 
-PODFILE CHECKSUM: d502e60fb1ab7579553747e70f0638ceb15f4b78
+PODFILE CHECKSUM: 13970928001cad96043faf5431fb4502568a4493
 
 COCOAPODS: 1.10.1
