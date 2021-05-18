@@ -52,7 +52,7 @@ def all_pods
   pod 'Firebase/RemoteConfig', '7.11.0'
 
   pod 'YandexMobileMetrica/Dynamic', '3.15.1'
-  pod 'Amplitude', '8.2.1'
+  pod 'Amplitude', '8.3.0'
   pod 'Branch', '1.39.2'
 
   pod 'BEMCheckBox', '1.4.1'
