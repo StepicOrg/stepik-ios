@@ -1006,15 +1006,25 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         }
 
         let isPlayerFirstTimeReady = player.playbackState == .stopped || !self.isPlayerPassedReadyState
+
         let isPlayerReadyAfterVideoQualityChanged = player.playbackState == .paused
             && self.isPlayerPassedReadyState
             && !self.applicationDidComeFromBackground
+
+        let isPlayerReadyAfterDidComeFromBackgroundAtDoubleFastVideoRate = player.playbackState == .paused
+            && self.currentVideoRate == .doubleFast
+            && self.isPlayerPassedReadyState
+            && self.applicationDidComeFromBackground
 
         if self.applicationDidComeFromBackground {
             self.applicationDidComeFromBackground = false
         }
 
-        guard isPlayerFirstTimeReady || isPlayerReadyAfterVideoQualityChanged else {
+        let shouldPlayFromCurrentTime = isPlayerFirstTimeReady
+            || isPlayerReadyAfterVideoQualityChanged
+            || isPlayerReadyAfterDidComeFromBackgroundAtDoubleFastVideoRate
+
+        guard shouldPlayFromCurrentTime else {
             return
         }
 
