@@ -5,4 +5,5 @@ struct PromoCode {
     let name: String
     let price: Float
     let currencyCode: String
+    var expireDate: Date?
 }

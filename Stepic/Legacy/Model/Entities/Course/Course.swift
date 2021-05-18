@@ -79,6 +79,20 @@ final class Course: NSManagedObject, IDFetchable {
         return self.anyCertificateTreshold != nil && (hasText || isIssued)
     }
 
+    var defaultPromoCode: PromoCode? {
+        if let defaultPromoCodeName = self.defaultPromoCodeName,
+           let defaultPromoCodePrice = self.defaultPromoCodePrice {
+            return PromoCode(
+                courseID: self.id,
+                name: defaultPromoCodeName,
+                price: defaultPromoCodePrice,
+                currencyCode: self.currencyCode ?? "RUB",
+                expireDate: self.defaultPromoCodeExpireDate
+            )
+        }
+        return nil
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
