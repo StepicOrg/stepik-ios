@@ -14,7 +14,7 @@ project 'Stepic',
 
 def shared_pods
   pod 'Alamofire', '5.4.3'
-  pod 'Atributika', '4.9.10'
+  pod 'Atributika', '4.10.1'
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.11.0'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
