@@ -65,7 +65,7 @@ final class BaseQuizView: UIView {
         return label
     }()
 
-    private lazy var submitButton: UIButton = {
+    private lazy var submitButton: NextStepButton = {
         let button = NextStepButton()
         button.setTitle(nil, for: .normal)
         button.addTarget(self, action: #selector(self.submitClicked), for: .touchUpInside)
@@ -147,6 +147,7 @@ final class BaseQuizView: UIView {
     var isRetryAvailable = false {
         didSet {
             self.updateRetryButton()
+            self.updateSubmitButtonStyle()
         }
     }
 
@@ -245,6 +246,10 @@ final class BaseQuizView: UIView {
             self.retryContainerView.isHidden = !self.isRetryAvailable
             self.retryButton.isEnabled = true
         }
+    }
+
+    private func updateSubmitButtonStyle() {
+        self.submitButton.style = !self.isNextStepAvailable && self.isRetryAvailable ? .outlineDark : .filled
     }
 
     @objc
