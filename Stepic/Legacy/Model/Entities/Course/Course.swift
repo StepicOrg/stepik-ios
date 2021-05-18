@@ -148,18 +148,9 @@ final class Course: NSManagedObject, IDFetchable {
         self.isWithCertificate = json[JSONKey.withCertificate.rawValue].boolValue
 
         self.defaultPromoCodeName = json[JSONKey.defaultPromoCodeName.rawValue].string
+        self.defaultPromoCodePrice = json[JSONKey.defaultPromoCodePrice.rawValue].decimalNumber?.floatValue
+        self.defaultPromoCodeDiscount = json[JSONKey.defaultPromoCodeDiscount.rawValue].decimalNumber?.floatValue
         self.defaultPromoCodeExpireDate = Parser.dateFromTimedateJSON(json[JSONKey.defaultPromoCodeExpireDate.rawValue])
-
-        if let defaultPromoCodePriceStringValue = json[JSONKey.defaultPromoCodePrice.rawValue].string {
-            self.defaultPromoCodePrice = Float(defaultPromoCodePriceStringValue)
-        } else {
-            self.defaultPromoCodePrice = json[JSONKey.defaultPromoCodePrice.rawValue].float
-        }
-        if let defaultPromoCodeDiscountStringValue = json[JSONKey.defaultPromoCodeDiscount.rawValue].string {
-            self.defaultPromoCodeDiscount = Float(defaultPromoCodeDiscountStringValue)
-        } else {
-            self.defaultPromoCodeDiscount = json[JSONKey.defaultPromoCodeDiscount.rawValue].float
-        }
 
         if let _ = json[JSONKey.introVideo.rawValue].null {
             self.introVideo = nil
