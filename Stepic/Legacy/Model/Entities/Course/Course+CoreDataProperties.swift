@@ -29,6 +29,7 @@ extension Course {
     @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
     @NSManaged var managedPreviewLessonId: NSNumber?
+    @NSManaged var managedPreviewUnitId: NSNumber?
     @NSManaged var managedReadiness: NSNumber?
 
     @NSManaged var managedScheduleType: String?
@@ -116,6 +117,15 @@ extension Course {
             } else {
                 self.managedPreviewLessonId = nil
             }
+        }
+    }
+
+    var previewUnitID: Unit.IdType? {
+        get {
+            self.managedPreviewUnitId?.intValue
+        }
+        set {
+            self.managedPreviewUnitId = newValue as NSNumber?
         }
     }
 

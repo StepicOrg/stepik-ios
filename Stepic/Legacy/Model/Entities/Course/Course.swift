@@ -139,6 +139,8 @@ final class Course: NSManagedObject, IDFetchable {
         self.displayPrice = json[JSONKey.displayPrice.rawValue].string
         self.priceTier = json[JSONKey.priceTier.rawValue].int
         self.currencyCode = json[JSONKey.currencyCode.rawValue].string
+        self.previewLessonID = json[JSONKey.previewLesson.rawValue].int
+        self.previewUnitID = json[JSONKey.previewUnit.rawValue].int
 
         self.certificate = json[JSONKey.certificate.rawValue].stringValue
         self.certificateRegularThreshold = json[JSONKey.certificateRegularThreshold.rawValue].int
@@ -157,15 +159,6 @@ final class Course: NSManagedObject, IDFetchable {
         } else {
             self.introVideo = Video(json: json[JSONKey.introVideo.rawValue])
         }
-
-        var previewLessonID: Lesson.IdType?
-        if let optionsDictionary = json[JSONKey.options.rawValue].dictionary {
-            if let coursePreviewDictionary = optionsDictionary[JSONKey.coursePreview.rawValue]?.dictionary {
-                previewLessonID = coursePreviewDictionary[JSONKey.previewLessonID.rawValue]?.int
-            }
-        }
-
-        self.previewLessonID = previewLessonID
     }
 
     func update(json: JSON) {
@@ -432,9 +425,8 @@ final class Course: NSManagedObject, IDFetchable {
         case currencyCode = "currency_code"
         case introVideo = "intro_video"
         case priceTier = "price_tier"
-        case options
-        case coursePreview = "course_preview"
-        case previewLessonID = "preview_lesson_id"
+        case previewLesson = "preview_lesson"
+        case previewUnit = "preview_unit"
         case isProctored = "is_proctored"
         case defaultPromoCodeName = "default_promo_code_name"
         case defaultPromoCodePrice = "default_promo_code_price"
