@@ -77,6 +77,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private var isOnline = false
     private var didLoadFromCache = false
+    private var shouldOpenedAnalyticsEventSend = true
 
     private var onNetworkReachabilityStatusChangeCallback: ((NetworkReachabilityStatus) -> Void)?
 
@@ -134,6 +135,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }
 
             strongSelf.fetchSemaphore.wait()
+            strongSelf.sendOpenedAnalyticsEvents()
+
             strongSelf.fetchCourseInAppropriateMode().done { response in
                 DispatchQueue.main.async { [weak self] in
                     if case .success = response.result {
@@ -311,6 +314,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     // MARK: Private methods
+
+    private func sendOpenedAnalyticsEvents() {
+        guard self.shouldOpenedAnalyticsEventSend else {
+            return
+        }
+
+        self.shouldOpenedAnalyticsEventSend = false
+        self.analytics.send(.catalogClick(courseID: self.courseID, viewSource: self.courseViewSource))
+    }
 
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
         .init(

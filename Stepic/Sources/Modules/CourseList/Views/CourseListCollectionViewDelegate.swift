@@ -5,14 +5,8 @@ final class CourseListCollectionViewDelegate: NSObject, UICollectionViewDelegate
 
     var viewModels: [CourseWidgetViewModel]
 
-    private let analytics: Analytics
-
-    init(
-        viewModels: [CourseWidgetViewModel] = [],
-        analytics: Analytics = StepikAnalytics.shared
-    ) {
+    init(viewModels: [CourseWidgetViewModel] = []) {
         self.viewModels = viewModels
-        self.analytics = analytics
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -25,6 +19,5 @@ final class CourseListCollectionViewDelegate: NSObject, UICollectionViewDelegate
         }
 
         self.delegate?.itemDidSelected(viewModel: viewModel)
-        self.analytics.send(.catalogClick(courseID: viewModel.courseID, viewSource: viewModel.viewSource))
     }
 }
