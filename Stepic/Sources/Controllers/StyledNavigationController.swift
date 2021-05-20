@@ -161,12 +161,16 @@ class StyledNavigationController: UINavigationController {
             return
         }
 
-        parentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: nil,
-            action: nil
-        )
+        if #available(iOS 14.0, *) {
+            parentViewController.navigationItem.backButtonDisplayMode = .minimal
+        } else {
+            parentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "",
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+        }
     }
 
     /// Change color of navigation bar & status bar background
