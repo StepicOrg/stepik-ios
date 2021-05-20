@@ -2492,6 +2492,7 @@
 		2C8BCC2B2486C54400DFB009 /* NewProfileDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileDetailsViewController.swift; sourceTree = "<group>"; };
 		2C8C17282260EA94008DC7EA /* Model_course_is_certificate_auto_issued.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_is_certificate_auto_issued.xcdatamodel; sourceTree = "<group>"; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
+		2C8DD7672656777900CE57D8 /* Model_course_preview_unit_v79.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_preview_unit_v79.xcdatamodel; sourceTree = "<group>"; };
 		2C8E477A258966570084A070 /* GridSimpleCourseListCollectionHeaderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListCollectionHeaderContentView.swift; sourceTree = "<group>"; };
 		2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_authors_v29.xcdatamodel; sourceTree = "<group>"; };
 		2C8EE76C2604B52E003512BC /* Model_step_needs_plan_v73.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_needs_plan_v73.xcdatamodel; sourceTree = "<group>"; };
@@ -13001,6 +13002,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C8DD7672656777900CE57D8 /* Model_course_preview_unit_v79.xcdatamodel */,
 				2C3A0EF126528A91008D54C5 /* Model_course_default_promo_code_v78.xcdatamodel */,
 				2C8202BB26385A88002C2C37 /* Model_lesson_finished_steps_v77.xcdatamodel */,
 				2CDA1AEF26137C8C00E36BF7 /* Model_exams_redesign_v76.xcdatamodel */,
@@ -13081,7 +13083,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C3A0EF126528A91008D54C5 /* Model_course_default_promo_code_v78.xcdatamodel */;
+			currentVersion = 2C8DD7672656777900CE57D8 /* Model_course_preview_unit_v79.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
