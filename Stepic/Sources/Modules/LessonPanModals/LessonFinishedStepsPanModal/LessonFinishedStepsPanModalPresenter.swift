@@ -124,8 +124,10 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                             return .successNeutralRegularCertReadyWithoutDistinctionCert
                         case (true, true):
                             return .successNeutralRegularCertReady
-                        case (false, _):
+                        case (false, true):
                             return .successNeutralRegularCertNotReady
+                        case (false, false):
+                            return .successNeutralRegularCertNotReadyWithoutDistinctionCert
                         }
                     } else {
                         switch (didWriteReview, isCertificateReady, isDistinctionCertIssuable) {
@@ -133,14 +135,18 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                             return .successRegularCertWithoutReviewReadyWithoutDistinctionCert
                         case (false, true, true):
                             return .successRegularCertWithoutReviewReady
-                        case (false, false, _):
+                        case (false, false, true):
                             return .successRegularCertWithoutReviewNotReady
+                        case (false, false, false):
+                            return .successRegularCertWithoutReviewNotReadyWithoutDistinctionCert
                         case (true, true, false):
                             return .successRegularCertWithReviewReadyWithoutDistinctionCert
                         case (true, true, true):
                             return .successRegularCertWithReviewReady
-                        case (true, false, _):
+                        case (true, false, true):
                             return .successRegularCertWithReviewNotReady
+                        case (true, false, false):
+                            return .successRegularCertWithReviewNotReadyWithoutDistinctionCert
                         }
                     }
                 }
@@ -169,12 +175,15 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             return "finished-steps-success-modal-header"
         case .successNeutralRegularCertReady,
              .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertNotReadyWithoutDistinctionCert,
              .successNeutralRegularCertReadyWithoutDistinctionCert,
              .successRegularCertWithoutReviewReady,
              .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewNotReadyWithoutDistinctionCert,
              .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReady,
              .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewNotReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReadyWithoutDistinctionCert:
             return "finished-steps-regular-modal-header"
         case .successNeutralDistinctionCertReady,
@@ -213,12 +222,15 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             )
         case .successNeutralRegularCertReady,
              .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertNotReadyWithoutDistinctionCert,
              .successNeutralRegularCertReadyWithoutDistinctionCert,
              .successRegularCertWithoutReviewReady,
              .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewNotReadyWithoutDistinctionCert,
              .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReady,
              .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewNotReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReadyWithoutDistinctionCert:
             return String(
                 format: NSLocalizedString(
@@ -350,6 +362,9 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
              .successDistinctionCertWithReviewReady:
             return "\(formattedProgress)\n\n\(certificateReadyMessage)"
         case .successNeutralDistinctionCertNotReady,
+             .successNeutralRegularCertNotReadyWithoutDistinctionCert,
+             .successRegularCertWithoutReviewNotReadyWithoutDistinctionCert,
+             .successRegularCertWithReviewNotReadyWithoutDistinctionCert,
              .successDistinctionCertWithoutReviewNotReady,
              .successDistinctionCertWithReviewNotReady:
             return "\(formattedProgress)\n\n\(certificateNotReadyMessage) \(certificateHint)"
@@ -405,6 +420,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
              .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReady,
              .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewNotReadyWithoutDistinctionCert,
              .successDistinctionCertWithoutReviewReady,
              .successDistinctionCertWithoutReviewNotReady:
             return .init(
@@ -415,7 +431,8 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             )
         case .successWithCertWithoutReview,
              .successRegularCertWithoutReviewReady,
-             .successRegularCertWithoutReviewNotReady:
+             .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewNotReadyWithoutDistinctionCert:
             return .init(
                 title: NSLocalizedString("LessonFinishedStepsPanModalActionButtonLeaveReviewTitle", comment: ""),
                 iconName: nil,
@@ -424,6 +441,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             )
         case .successNeutralRegularCertReady,
              .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertNotReadyWithoutDistinctionCert,
              .successNeutralRegularCertReadyWithoutDistinctionCert,
              .successNeutralDistinctionCertReady,
              .successNeutralDistinctionCertNotReady,
@@ -443,6 +461,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
              .successNeutralWithCert,
              .successNeutralRegularCertReady,
              .successNeutralRegularCertNotReady,
+             .successNeutralRegularCertNotReadyWithoutDistinctionCert,
              .successNeutralRegularCertReadyWithoutDistinctionCert,
              .successNeutralDistinctionCertReady,
              .successNeutralDistinctionCertNotReady,
@@ -452,9 +471,11 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
              .successWithoutCertWithReview,
              .successRegularCertWithoutReviewReady,
              .successRegularCertWithoutReviewNotReady,
+             .successRegularCertWithoutReviewNotReadyWithoutDistinctionCert,
              .successRegularCertWithoutReviewReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReady,
              .successRegularCertWithReviewNotReady,
+             .successRegularCertWithReviewNotReadyWithoutDistinctionCert,
              .successRegularCertWithReviewReadyWithoutDistinctionCert,
              .successDistinctionCertWithoutReviewReady,
              .successDistinctionCertWithoutReviewNotReady,
@@ -504,6 +525,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         case successNeutralWithoutCert
         case successNeutralRegularCertReady
         case successNeutralRegularCertNotReady
+        case successNeutralRegularCertNotReadyWithoutDistinctionCert
         case successNeutralRegularCertReadyWithoutDistinctionCert
         case successNeutralDistinctionCertReady
         case successNeutralDistinctionCertNotReady
@@ -514,9 +536,11 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         case successWithoutCertWithReview
         case successRegularCertWithoutReviewReady
         case successRegularCertWithoutReviewNotReady
+        case successRegularCertWithoutReviewNotReadyWithoutDistinctionCert
         case successRegularCertWithoutReviewReadyWithoutDistinctionCert
         case successRegularCertWithReviewReady
         case successRegularCertWithReviewNotReady
+        case successRegularCertWithReviewNotReadyWithoutDistinctionCert
         case successRegularCertWithReviewReadyWithoutDistinctionCert
         case successDistinctionCertWithoutReviewReady
         case successDistinctionCertWithoutReviewNotReady
