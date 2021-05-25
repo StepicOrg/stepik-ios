@@ -2,22 +2,25 @@ import Foundation
 import PromiseKit
 
 protocol UserCoursesReviewsProviderProtocol {
-    func fetchCached(userID: User.IdType) -> Promise<([CourseReview], Meta)>
-    func fetchRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)>
+    func fetchLeavedCourseReviewsFromCache(userID: User.IdType) -> Promise<([CourseReview], Meta)>
+    func fetchLeavedCourseReviewsFromRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)>
 
     func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void>
 }
 
 extension UserCoursesReviewsProviderProtocol {
-    func fetchRemoteOrCache(userID: User.IdType, page: Int = 1) -> Promise<([CourseReview], Meta)> {
+    func fetchLeavedCourseReviewsFromRemoteOrCache(
+        userID: User.IdType,
+        page: Int = 1
+    ) -> Promise<([CourseReview], Meta)> {
         Guarantee(
-            self.fetchRemote(userID: userID, page: page),
+            self.fetchLeavedCourseReviewsFromRemote(userID: userID, page: page),
             fallback: nil
         ).then { remoteFetchResultOrNil -> Promise<([CourseReview], Meta)> in
             if let remoteFetchResult = remoteFetchResultOrNil.flatMap({ $0 }) {
                 return .value(remoteFetchResult)
             } else {
-                return self.fetchCached(userID: userID)
+                return self.fetchLeavedCourseReviewsFromCache(userID: userID)
             }
         }
     }
@@ -42,7 +45,7 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
         self.coursesPersistenceService = coursesPersistenceService
     }
 
-    func fetchCached(userID: User.IdType) -> Promise<([CourseReview], Meta)> {
+    func fetchLeavedCourseReviewsFromCache(userID: User.IdType) -> Promise<([CourseReview], Meta)> {
         Promise { seal in
             self.fetchAndMergeCourseReviews(
                 courseReviewsFetchMethod: {
@@ -59,7 +62,7 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
         }
     }
 
-    func fetchRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)> {
+    func fetchLeavedCourseReviewsFromRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)> {
         Promise { seal in
             self.fetchAndMergeCourseReviews(
                 courseReviewsFetchMethod: { self.courseReviewsNetworkService.fetch(userID: userID) },
