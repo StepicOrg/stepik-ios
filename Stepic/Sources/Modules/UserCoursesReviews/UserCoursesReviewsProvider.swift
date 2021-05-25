@@ -4,6 +4,8 @@ import PromiseKit
 protocol UserCoursesReviewsProviderProtocol {
     func fetchCached(userID: User.IdType) -> Promise<([CourseReview], Meta)>
     func fetchRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)>
+
+    func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void>
 }
 
 extension UserCoursesReviewsProviderProtocol {
@@ -70,6 +72,23 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
         }
     }
 
+    func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void> {
+        Promise { seal in
+            self.courseReviewsNetworkService.delete(id: id).then { _ in
+                self.courseReviewsPersistenceService.fetch(ids: [id])
+            }.then { cachedReviews in
+                when(resolved: cachedReviews.map({ self.courseReviewsPersistenceService.delete(by: $0.id) }))
+            }.done { _ in
+                CoreDataHelper.shared.save()
+                seal.fulfill(())
+            }.catch { _ in
+                seal.reject(Error.deleteFailed)
+            }
+        }
+    }
+
+    // MARK: Private API
+
     private func fetchAndMergeCourseReviews(
         courseReviewsFetchMethod: @escaping () -> Promise<([CourseReview], Meta)>,
         coursesFetchMethod: @escaping ([Course.IdType]) -> Promise<[Course]>
@@ -91,5 +110,6 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     enum Error: Swift.Error {
         case persistenceFetchFailed
         case networkFetchFailed
+        case deleteFailed
     }
 }
