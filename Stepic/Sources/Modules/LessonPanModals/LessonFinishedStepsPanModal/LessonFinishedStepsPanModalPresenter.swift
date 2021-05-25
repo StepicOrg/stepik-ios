@@ -206,16 +206,10 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             )
         case .successNeutralWithCert,
              .successNeutralWithoutCert,
-             .successNeutralDistinctionCertReady,
-             .successNeutralDistinctionCertNotReady,
              .successWithCertWithoutReview,
              .successWithCertWithReview,
              .successWithoutCertWithoutReview,
-             .successWithoutCertWithReview,
-             .successDistinctionCertWithoutReviewReady,
-             .successDistinctionCertWithoutReviewNotReady,
-             .successDistinctionCertWithReviewReady,
-             .successDistinctionCertWithReviewNotReady:
+             .successWithoutCertWithReview:
             return String(
                 format: NSLocalizedString("LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess", comment: ""),
                 arguments: [course.title]
@@ -235,6 +229,19 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
             return String(
                 format: NSLocalizedString(
                     "LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate",
+                    comment: ""
+                ),
+                arguments: [course.title]
+            )
+        case .successNeutralDistinctionCertReady,
+             .successNeutralDistinctionCertNotReady,
+             .successDistinctionCertWithoutReviewReady,
+             .successDistinctionCertWithoutReviewNotReady,
+             .successDistinctionCertWithReviewReady,
+             .successDistinctionCertWithReviewNotReady:
+            return String(
+                format: NSLocalizedString(
+                    "LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndDistinctionCertificate",
                     comment: ""
                 ),
                 arguments: [course.title]
