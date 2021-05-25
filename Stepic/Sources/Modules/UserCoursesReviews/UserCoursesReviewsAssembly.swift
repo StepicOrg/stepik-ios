@@ -11,6 +11,7 @@ final class UserCoursesReviewsAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = UserCoursesReviewsProvider(
+            userAccountService: UserAccountService(),
             courseReviewsNetworkService: CourseReviewsNetworkService(courseReviewsAPI: CourseReviewsAPI()),
             courseReviewsPersistenceService: CourseReviewsPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),

@@ -2,54 +2,63 @@ import Foundation
 import PromiseKit
 
 protocol UserCoursesReviewsProviderProtocol {
-    func fetchLeavedCourseReviewsFromCache(userID: User.IdType) -> Promise<([CourseReview], Meta)>
-    func fetchLeavedCourseReviewsFromRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)>
+    func fetchLeavedCourseReviewsFromCache() -> Promise<([CourseReview], Meta)>
+    func fetchLeavedCourseReviewsFromRemote(page: Int) -> Promise<([CourseReview], Meta)>
+
+    func fetchPossibleCoursesFromCache() -> Promise<([Course], Meta)>
 
     func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void>
 }
 
 extension UserCoursesReviewsProviderProtocol {
-    func fetchLeavedCourseReviewsFromRemoteOrCache(
-        userID: User.IdType,
-        page: Int = 1
-    ) -> Promise<([CourseReview], Meta)> {
+    func fetchLeavedCourseReviewsFromRemoteOrCache(page: Int = 1) -> Promise<([CourseReview], Meta)> {
         Guarantee(
-            self.fetchLeavedCourseReviewsFromRemote(userID: userID, page: page),
+            self.fetchLeavedCourseReviewsFromRemote(page: page),
             fallback: nil
         ).then { remoteFetchResultOrNil -> Promise<([CourseReview], Meta)> in
             if let remoteFetchResult = remoteFetchResultOrNil.flatMap({ $0 }) {
                 return .value(remoteFetchResult)
             } else {
-                return self.fetchLeavedCourseReviewsFromCache(userID: userID)
+                return self.fetchLeavedCourseReviewsFromCache()
             }
         }
     }
 }
 
 final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
+    private let userAccountService: UserAccountServiceProtocol
+
     private let courseReviewsNetworkService: CourseReviewsNetworkServiceProtocol
     private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
 
     private let coursesNetworkService: CoursesNetworkServiceProtocol
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
 
+    private var currentUserID: User.IdType? { self.userAccountService.currentUserID }
+
     init(
+        userAccountService: UserAccountServiceProtocol,
         courseReviewsNetworkService: CourseReviewsNetworkServiceProtocol,
         courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol,
         coursesNetworkService: CoursesNetworkServiceProtocol,
         coursesPersistenceService: CoursesPersistenceServiceProtocol
     ) {
+        self.userAccountService = userAccountService
         self.courseReviewsNetworkService = courseReviewsNetworkService
         self.courseReviewsPersistenceService = courseReviewsPersistenceService
         self.coursesNetworkService = coursesNetworkService
         self.coursesPersistenceService = coursesPersistenceService
     }
 
-    func fetchLeavedCourseReviewsFromCache(userID: User.IdType) -> Promise<([CourseReview], Meta)> {
+    func fetchLeavedCourseReviewsFromCache() -> Promise<([CourseReview], Meta)> {
         Promise { seal in
+            guard let currentUserID = self.currentUserID else {
+                throw Error.invalidUserID
+            }
+
             self.fetchAndMergeCourseReviews(
                 courseReviewsFetchMethod: {
-                    self.courseReviewsPersistenceService.fetch(userID: userID).map { ($0, Meta.oneAndOnlyPage) }
+                    self.courseReviewsPersistenceService.fetch(userID: currentUserID).map { ($0, Meta.oneAndOnlyPage) }
                 },
                 coursesFetchMethod: { ids in
                     self.coursesPersistenceService.fetch(ids: ids).map { $0.0 }
@@ -62,10 +71,14 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
         }
     }
 
-    func fetchLeavedCourseReviewsFromRemote(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)> {
+    func fetchLeavedCourseReviewsFromRemote(page: Int) -> Promise<([CourseReview], Meta)> {
         Promise { seal in
+            guard let currentUserID = self.currentUserID else {
+                throw Error.invalidUserID
+            }
+
             self.fetchAndMergeCourseReviews(
-                courseReviewsFetchMethod: { self.courseReviewsNetworkService.fetch(userID: userID) },
+                courseReviewsFetchMethod: { self.courseReviewsNetworkService.fetch(userID: currentUserID, page: page) },
                 coursesFetchMethod: self.coursesNetworkService.fetch(ids:)
             ).done { reviews, meta in
                 seal.fulfill((reviews, meta))
@@ -73,6 +86,13 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
                 seal.reject(Error.networkFetchFailed)
             }
         }
+    }
+
+    func fetchPossibleCoursesFromCache() -> Promise<([Course], Meta)> {
+        self.coursesPersistenceService
+            .fetchEnrolled()
+            .filterValues(\.canWriteReview)
+            .map { (Array($0), Meta.oneAndOnlyPage) }
     }
 
     func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void> {
@@ -111,6 +131,7 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     }
 
     enum Error: Swift.Error {
+        case invalidUserID
         case persistenceFetchFailed
         case networkFetchFailed
         case deleteFailed

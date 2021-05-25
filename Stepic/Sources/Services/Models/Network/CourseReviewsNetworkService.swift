@@ -4,7 +4,7 @@ import PromiseKit
 protocol CourseReviewsNetworkServiceProtocol: AnyObject {
     func fetch(by courseID: Course.IdType, page: Int) -> Promise<([CourseReview], Meta)>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<([CourseReview], Meta)>
-    func fetch(userID: User.IdType) -> Promise<([CourseReview], Meta)>
+    func fetch(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)>
     func create(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) -> Promise<CourseReview>
     func update(courseReview: CourseReview) -> Promise<CourseReview>
     func delete(id: CourseReview.IdType) -> Promise<Void>
@@ -37,9 +37,9 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
         }
     }
 
-    func fetch(userID: User.IdType) -> Promise<([CourseReview], Meta)> {
+    func fetch(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)> {
         Promise { seal in
-            self.courseReviewsAPI.retrieve(userID: userID).done { results, meta in
+            self.courseReviewsAPI.retrieve(userID: userID, page: page).done { results, meta in
                 seal.fulfill((results, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
