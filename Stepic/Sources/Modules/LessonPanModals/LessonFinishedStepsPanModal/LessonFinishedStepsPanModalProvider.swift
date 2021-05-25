@@ -109,7 +109,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         }
 
         return Promise { seal in
-            self.courseReviewsPersistenceService.fetch(by: self.courseID, userID: currentUser.id).done { review in
+            self.courseReviewsPersistenceService.fetch(courseID: self.courseID, userID: currentUser.id).done { review in
                 review?.user = currentUser
                 CoreDataHelper.shared.save()
 

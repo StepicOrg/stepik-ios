@@ -32,7 +32,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
 
     func fetchCached(course: Course) -> Promise<([CourseReview], Meta)> {
         Promise { seal in
-            self.courseReviewsPersistenceService.fetch(by: course.id).done {
+            self.courseReviewsPersistenceService.fetch(courseID: course.id).done {
                 seal.fulfill(($0, Meta.oneAndOnlyPage))
             }.catch { _ in
                 seal.reject(Error.persistenceFetchFailed)
@@ -74,7 +74,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
         }
 
         return Promise { seal in
-            self.courseReviewsPersistenceService.fetch(by: course.id, userID: currentUserID).done {
+            self.courseReviewsPersistenceService.fetch(courseID: course.id, userID: currentUserID).done {
                 seal.fulfill($0)
             }.catch { _ in
                 seal.reject(Error.persistenceFetchFailed)

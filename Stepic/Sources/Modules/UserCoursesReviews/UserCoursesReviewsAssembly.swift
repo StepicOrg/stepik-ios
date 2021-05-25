@@ -10,7 +10,12 @@ final class UserCoursesReviewsAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = UserCoursesReviewsProvider()
+        let provider = UserCoursesReviewsProvider(
+            courseReviewsNetworkService: CourseReviewsNetworkService(courseReviewsAPI: CourseReviewsAPI()),
+            courseReviewsPersistenceService: CourseReviewsPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            coursesPersistenceService: CoursesPersistenceService()
+        )
         let presenter = UserCoursesReviewsPresenter()
         let interactor = UserCoursesReviewsInteractor(presenter: presenter, provider: provider)
         let viewController = UserCoursesReviewsViewController(interactor: interactor)

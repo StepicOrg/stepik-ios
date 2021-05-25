@@ -64,6 +64,28 @@ final class CourseReviewsAPI: APIEndpoint {
         }
     }
 
+    /// Get course review by user id.
+    func retrieve(userID: User.IdType) -> Promise<([CourseReview], Meta)> {
+        Promise { seal in
+            let parameters: Parameters = ["user": userID]
+
+            CourseReview.fetch(userID: userID).then {
+                cachedReviews -> Promise<([CourseReview], Meta, JSON)> in
+                self.retrieve.request(
+                    requestEndpoint: self.name,
+                    paramName: self.name,
+                    params: parameters,
+                    updatingObjects: cachedReviews,
+                    withManager: self.manager
+                )
+            }.done { reviews, meta, _ in
+                seal.fulfill((reviews, meta))
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func create(
         courseID: Course.IdType,
         userID: User.IdType,
