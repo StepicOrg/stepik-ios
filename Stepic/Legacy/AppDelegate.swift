@@ -8,7 +8,6 @@
 
 import FBSDKCoreKit
 import FirebaseCore
-import FirebaseInstanceID
 import FirebaseMessaging
 import GoogleSignIn
 import IQKeyboardManagerSwift

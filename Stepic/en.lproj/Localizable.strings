@@ -890,6 +890,28 @@ StepPosition = "Step %@";
 /* LessonFinishedDemoPanModal */
 LessonFinishedDemoPanModalTitle = "Congratulations! You have just finished the demo-module «%@».";
 LessonFinishedDemoPanModalSubtitle = "To view, the other lessons buy full access to the course.";
+/* LessonFinishedStepsPanModal */
+LessonFinishedStepsPanModalTitleFinishedCourse = "This has been the last lesson of the course «%@».";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess = "Congratulations!\nYou've completed the course «%@».";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate = "Congratulations!\nYou've completed the course «%@» and received the certificate!";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndDistinctionCertificate = "Congratulations!\nYou've completed the course «%@» and received the certificate with distinction!";
+LessonFinishedStepsPanModalCertificateFeedback = "Receive %@ to get a certificate.";
+LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle = "Go Back to the Assignments";
+LessonFinishedStepsPanModalActionButtonFindNewCourseTitle = "Find a New Course";
+LessonFinishedStepsPanModalActionButtonLeaveReviewTitle = "Leave a Review";
+LessonFinishedStepsPanModalActionButtonShareResultTitle = "Share Result";
+LessonFinishedStepsPanModalActionButtonViewCertificateTitle = "View Certificate";
+LessonFinishedStepsPanModalSubtitleProgress = "You've received <b>%@ out of %@</b>, which makes up %@ of the course material.";
+LessonFinishedStepsPanModalSubtitleCertificateHint = "You will be able to put it in your CV or on social networks, or download and print.";
+LessonFinishedStepsPanModalSubtitleCertificateReadyMessage = "Put your certificate in your CV or on social networks. This is an excellent result and you can be proud of it!";
+LessonFinishedStepsPanModalSubtitleCertificateIssuedMessage = "The regular certificate is issued for %@, the certificate with distinction for %@.";
+LessonFinishedStepsPanModalSubtitleCertificateWithoutDistinctionIssuedMessage = "The regular certificate is issued for %@.";
+LessonFinishedStepsPanModalSubtitleCertificateDistinctionNeedScoreMessage = "To receive the certificate with distinction, you need to gain %@, %@ now left.";
+LessonFinishedStepsPanModalSubtitleCertificateNotIssuedNeutralMessage = "There are no certificates in this course, but we don't only learn for formal confirmation, do we?";
+LessonFinishedStepsPanModalSubtitleCertificateNotIssuedSuccessMessage = "There are no certificates in this course, but you can share your result on your social networks.";
+LessonFinishedStepsPanModalSubtitleContinueMessage = "Continue with this course or find another one?";
+LessonFinishedStepsPanModalSubtitleCertificateNotReadyNotifyMessage = "We will notify you when your certificate is ready.";
+LessonFinishedStepsPanModalShareResult = "I've received %@ out of %@ in the course «%@»";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

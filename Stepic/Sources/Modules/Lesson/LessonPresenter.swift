@@ -24,6 +24,7 @@ protocol LessonPresenterProtocol {
     func presentUnitNavigationFinishedDemoAccessState(
         response: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.Response
     )
+    func presentLessonFinishedSteps(response: LessonDataFlow.LessonFinishedStepsPresentation.Response)
 }
 
 final class LessonPresenter: LessonPresenterProtocol {
@@ -234,6 +235,10 @@ final class LessonPresenter: LessonPresenterProtocol {
         self.viewController?.displayUnitNavigationFinishedDemoAccessState(
             viewModel: .init(sectionID: response.section.id)
         )
+    }
+
+    func presentLessonFinishedSteps(response: LessonDataFlow.LessonFinishedStepsPresentation.Response) {
+        self.viewController?.displayLessonFinishedSteps(viewModel: .init(courseID: response.courseID))
     }
 
     // MAKE: Private API

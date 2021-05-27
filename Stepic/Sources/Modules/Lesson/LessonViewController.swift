@@ -33,6 +33,7 @@ protocol LessonViewControllerProtocol: AnyObject {
     func displayUnitNavigationFinishedDemoAccessState(
         viewModel: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.ViewModel
     )
+    func displayLessonFinishedSteps(viewModel: LessonDataFlow.LessonFinishedStepsPresentation.ViewModel)
 }
 
 // MARK: - LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
@@ -661,6 +662,18 @@ extension LessonViewController: LessonViewControllerProtocol {
             self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
         }
     }
+
+    func displayLessonFinishedSteps(viewModel: LessonDataFlow.LessonFinishedStepsPresentation.ViewModel) {
+        let assembly = LessonFinishedStepsPanModalAssembly(
+            courseID: viewModel.courseID,
+            output: self
+        )
+        let viewController = assembly.makeModule()
+
+        if let panModalPresentableViewController = viewController as? UIViewController & PanModalPresentable {
+            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
+        }
+    }
 }
 
 // MARK: - LessonViewController: EasyTipViewDelegate -
@@ -674,10 +687,28 @@ extension LessonViewController: EasyTipViewDelegate {
     }
 }
 
+// MARK: - LessonViewController: LessonFinishedDemoPanModalOutputProtocol -
+
 extension LessonViewController: LessonFinishedDemoPanModalOutputProtocol {
     func handleLessonFinishedDemoPanModalMainAction() {
         self.dismiss(animated: true) { [weak self] in
             self?.interactor.doBuyCourse(request: .init())
+        }
+    }
+}
+
+// MARK: - LessonViewController: LessonFinishedStepsPanModalOutputProtocol -
+
+extension LessonViewController: LessonFinishedStepsPanModalOutputProtocol {
+    func handleLessonFinishedStepsPanModalLeaveReviewAction() {
+        self.dismiss(animated: true) { [weak self] in
+            self?.interactor.doLeaveReviewPresentation(request: .init())
+        }
+    }
+
+    func handleLessonFinishedStepsPanModalFindNewCourseAction() {
+        self.dismiss(animated: true) { [weak self] in
+            self?.interactor.doCatalogPresentation(request: .init())
         }
     }
 }

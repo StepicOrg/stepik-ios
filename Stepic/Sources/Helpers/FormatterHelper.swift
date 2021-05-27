@@ -109,6 +109,14 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format points count with localized and pluralized suffix; 17.2 -> "17.2 points", 1 -> "1 point", 5 -> "5 points"
+    static func pointsCount(_ count: Float) -> String {
+        let hasDecimals = count.truncatingRemainder(dividingBy: 1) != 0
+        return hasDecimals
+            ? "\(String(format: "%.2f", count)) \(NSLocalizedString("points234", comment: ""))"
+            : self.pointsCount(Int(count))
+    }
+
     /// Format authors count with localized and pluralized suffix; 1 -> "1 author", 5 -> "5 authors"
     static func authorsCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(
