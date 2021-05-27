@@ -184,6 +184,20 @@ enum CourseInfo {
         struct ViewModel {}
     }
 
+    /// Pop lesson module and present catalog
+    enum LessonModuleCatalogPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
+    /// Pop lesson module and present write review module
+    enum LessonModuleWriteReviewPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     /// Do try for free action -> open preview lesson by id
     enum PreviewLessonPresentation {
         struct Request {}

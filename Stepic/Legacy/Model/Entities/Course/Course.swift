@@ -69,14 +69,28 @@ final class Course: NSManagedObject, IDFetchable {
             && self.scheduleType != "upcoming"
     }
 
-    var hasAnyCertificateThreshold: Bool {
-        (self.certificateRegularThreshold != nil) || (self.certificateDistinctionThreshold != nil)
+    var anyCertificateTreshold: Int? {
+        self.certificateRegularThreshold ?? self.certificateDistinctionThreshold
     }
 
     var hasCertificate: Bool {
         let hasText = !self.certificate.isEmpty
         let isIssued = self.isCertificatesAutoIssued && self.isCertificateIssued
-        return self.hasAnyCertificateThreshold && (hasText || isIssued)
+        return self.anyCertificateTreshold != nil && (hasText || isIssued)
+    }
+
+    var defaultPromoCode: PromoCode? {
+        if let defaultPromoCodeName = self.defaultPromoCodeName,
+           let defaultPromoCodePrice = self.defaultPromoCodePrice {
+            return PromoCode(
+                courseID: self.id,
+                name: defaultPromoCodeName,
+                price: defaultPromoCodePrice,
+                currencyCode: self.currencyCode ?? "RUB",
+                expireDate: self.defaultPromoCodeExpireDate
+            )
+        }
+        return nil
     }
 
     required convenience init(json: JSON) {
@@ -124,27 +138,27 @@ final class Course: NSManagedObject, IDFetchable {
         self.isPaid = json[JSONKey.isPaid.rawValue].boolValue
         self.displayPrice = json[JSONKey.displayPrice.rawValue].string
         self.priceTier = json[JSONKey.priceTier.rawValue].int
+        self.currencyCode = json[JSONKey.currencyCode.rawValue].string
+        self.previewLessonID = json[JSONKey.previewLesson.rawValue].int
+        self.previewUnitID = json[JSONKey.previewUnit.rawValue].int
 
         self.certificate = json[JSONKey.certificate.rawValue].stringValue
         self.certificateRegularThreshold = json[JSONKey.certificateRegularThreshold.rawValue].int
         self.certificateDistinctionThreshold = json[JSONKey.certificateDistinctionThreshold.rawValue].int
         self.isCertificatesAutoIssued = json[JSONKey.isCertificateAutoIssued.rawValue].boolValue
         self.isCertificateIssued = json[JSONKey.isCertificateIssued.rawValue].boolValue
+        self.isWithCertificate = json[JSONKey.withCertificate.rawValue].boolValue
+
+        self.defaultPromoCodeName = json[JSONKey.defaultPromoCodeName.rawValue].string
+        self.defaultPromoCodePrice = json[JSONKey.defaultPromoCodePrice.rawValue].decimalNumber?.floatValue
+        self.defaultPromoCodeDiscount = json[JSONKey.defaultPromoCodeDiscount.rawValue].decimalNumber?.floatValue
+        self.defaultPromoCodeExpireDate = Parser.dateFromTimedateJSON(json[JSONKey.defaultPromoCodeExpireDate.rawValue])
 
         if let _ = json[JSONKey.introVideo.rawValue].null {
             self.introVideo = nil
         } else {
             self.introVideo = Video(json: json[JSONKey.introVideo.rawValue])
         }
-
-        var previewLessonID: Lesson.IdType?
-        if let optionsDictionary = json[JSONKey.options.rawValue].dictionary {
-            if let coursePreviewDictionary = optionsDictionary[JSONKey.coursePreview.rawValue]?.dictionary {
-                previewLessonID = coursePreviewDictionary[JSONKey.previewLessonID.rawValue]?.int
-            }
-        }
-
-        self.previewLessonID = previewLessonID
     }
 
     func update(json: JSON) {
@@ -392,6 +406,7 @@ final class Course: NSManagedObject, IDFetchable {
         case certificateDistinctionThreshold = "certificate_distinction_threshold"
         case isCertificateAutoIssued = "is_certificate_auto_issued"
         case isCertificateIssued = "is_certificate_issued"
+        case withCertificate = "with_certificate"
         case requirements
         case slug
         case progress
@@ -407,11 +422,15 @@ final class Course: NSManagedObject, IDFetchable {
         case language
         case isPaid = "is_paid"
         case displayPrice = "display_price"
+        case currencyCode = "currency_code"
         case introVideo = "intro_video"
         case priceTier = "price_tier"
-        case options
-        case coursePreview = "course_preview"
-        case previewLessonID = "preview_lesson_id"
+        case previewLesson = "preview_lesson"
+        case previewUnit = "preview_unit"
         case isProctored = "is_proctored"
+        case defaultPromoCodeName = "default_promo_code_name"
+        case defaultPromoCodePrice = "default_promo_code_price"
+        case defaultPromoCodeDiscount = "default_promo_code_discount"
+        case defaultPromoCodeExpireDate = "default_promo_code_expire_date"
     }
 }

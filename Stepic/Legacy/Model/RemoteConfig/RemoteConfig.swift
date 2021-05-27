@@ -7,7 +7,6 @@
 //
 
 import DeviceKit
-import FirebaseInstanceID
 import FirebaseRemoteConfig
 import Foundation
 

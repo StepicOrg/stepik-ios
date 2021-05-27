@@ -14,11 +14,20 @@ import SwiftyJSON
 final class CertificatesAPI: APIEndpoint {
     override var name: String { "certificates" }
 
-    func retrieve(userId: Int, page: Int = 1, order: Order? = nil) -> Promise<([Certificate], Meta)> {
+    func retrieve(
+        userID: User.IdType,
+        courseID: Course.IdType? = nil,
+        page: Int = 1,
+        order: Order? = nil
+    ) -> Promise<([Certificate], Meta)> {
         var params: Parameters = [
-            "user": userId,
+            "user": userID,
             "page": page
         ]
+
+        if let courseID = courseID {
+            params["course"] = courseID
+        }
 
         if let order = order {
             params["order"] = order.rawValue
@@ -42,7 +51,7 @@ final class CertificatesAPI: APIEndpoint {
         success: @escaping (Meta, [Certificate]) -> Void,
         error errorHandler: @escaping (NetworkError) -> Void
     ) -> Request? {
-        self.retrieve(userId: userId, page: page).done { certificates, meta in
+        self.retrieve(userID: userId, page: page).done { certificates, meta in
             success(meta, certificates)
         }.catch { error in
             errorHandler(NetworkError(error: error))
