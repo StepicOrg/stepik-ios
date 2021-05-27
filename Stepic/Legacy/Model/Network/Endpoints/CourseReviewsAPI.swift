@@ -89,6 +89,19 @@ final class CourseReviewsAPI: APIEndpoint {
         }
     }
 
+    /// Get all course reviews by user id.
+    func retrieveAll(userID: User.IdType) -> Promise<[CourseReview]> {
+        CourseReview.fetch(userID: userID).then {
+            self.retrieve.requestWithCollectAllPages(
+                requestEndpoint: self.name,
+                paramName: self.name,
+                params: ["user": userID],
+                updatingObjects: $0,
+                withManager: self.manager
+            )
+        }
+    }
+
     func create(
         courseID: Course.IdType,
         userID: User.IdType,

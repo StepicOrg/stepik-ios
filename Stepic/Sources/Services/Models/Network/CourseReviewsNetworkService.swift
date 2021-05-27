@@ -5,6 +5,7 @@ protocol CourseReviewsNetworkServiceProtocol: AnyObject {
     func fetch(by courseID: Course.IdType, page: Int) -> Promise<([CourseReview], Meta)>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<([CourseReview], Meta)>
     func fetch(userID: User.IdType, page: Int) -> Promise<([CourseReview], Meta)>
+    func fetchAll(userID: User.IdType) -> Promise<[CourseReview]>
     func create(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) -> Promise<CourseReview>
     func update(courseReview: CourseReview) -> Promise<CourseReview>
     func delete(id: CourseReview.IdType) -> Promise<Void>
@@ -41,6 +42,16 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
         Promise { seal in
             self.courseReviewsAPI.retrieve(userID: userID, page: page).done { results, meta in
                 seal.fulfill((results, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchAll(userID: User.IdType) -> Promise<[CourseReview]> {
+        Promise { seal in
+            self.courseReviewsAPI.retrieveAll(userID: userID).done { results in
+                seal.fulfill(results)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
