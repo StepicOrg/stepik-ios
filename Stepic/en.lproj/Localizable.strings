@@ -894,6 +894,7 @@ LessonFinishedDemoPanModalSubtitle = "To view, the other lessons buy full access
 LessonFinishedStepsPanModalTitleFinishedCourse = "This has been the last lesson of the course «%@».";
 LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess = "Congratulations!\nYou've completed the course «%@».";
 LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate = "Congratulations!\nYou've completed the course «%@» and received the certificate!";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndDistinctionCertificate = "Congratulations!\nYou've completed the course «%@» and received the certificate with distinction!";
 LessonFinishedStepsPanModalCertificateFeedback = "Receive %@ to get a certificate.";
 LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle = "Go Back to the Assignments";
 LessonFinishedStepsPanModalActionButtonFindNewCourseTitle = "Find a New Course";
