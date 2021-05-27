@@ -895,6 +895,7 @@ LessonFinishedDemoPanModalSubtitle = "Для доступа к следующи�
 LessonFinishedStepsPanModalTitleFinishedCourse = "Это был последний урок курса «%@».";
 LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess = "Поздравляем!\nВы завершили курс «%@».";
 LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate = "Поздравляем!\nВы завершили курс «%@» и получили сертификат!";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndDistinctionCertificate = "Поздравляем!\nВы завершили курс «%@» и получили сертификат с отличием!";
 LessonFinishedStepsPanModalCertificateFeedback = "Наберите ещё %@, чтобы получить сертификат.";
 LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle = "Вернуться к задачам";
 LessonFinishedStepsPanModalActionButtonFindNewCourseTitle = "Найти новый курс";
