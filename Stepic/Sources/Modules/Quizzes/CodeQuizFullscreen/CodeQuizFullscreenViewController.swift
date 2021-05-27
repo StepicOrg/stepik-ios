@@ -132,7 +132,12 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
             Appearance.navigationBarAppearance.shadowViewAlpha,
             sender: self
         )
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+        if #available(iOS 14.0, *) {
+            self.navigationItem.backButtonDisplayMode = .minimal
+        } else {
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
