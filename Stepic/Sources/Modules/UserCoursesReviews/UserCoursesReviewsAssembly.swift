@@ -1,8 +1,6 @@
 import UIKit
 
 final class UserCoursesReviewsAssembly: Assembly {
-    var moduleInput: UserCoursesReviewsInputProtocol?
-
     private weak var moduleOutput: UserCoursesReviewsOutputProtocol?
 
     init(output: UserCoursesReviewsOutputProtocol? = nil) {
@@ -22,7 +20,6 @@ final class UserCoursesReviewsAssembly: Assembly {
         let viewController = UserCoursesReviewsViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

@@ -506,6 +506,10 @@ UserCoursesTabAllCoursesTitle = "Все";
 UserCoursesTabFavoritesTitle = "Избранные";
 UserCoursesTabArchivedTitle = "Архив";
 
+/* User Courses Reviews */
+UserCoursesReviewsTitle = "Отзывы";
+UserCoursesReviewsPlaceholderEmptyTitle = "Нет отзывов";
+
 RetentionNotificationOnNextDayTitle = "Не сбавляем темп";
 RetentionNotificationOnNextDayText = "Вы проделали отличную работу вчера - это хороший повод зайти сегодня и продолжить учиться! 🚀";
 RetentionNotificationOnThirdDayTitle = "Время учиться";

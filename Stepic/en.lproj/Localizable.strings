@@ -504,6 +504,10 @@ UserCoursesTabAllCoursesTitle = "All";
 UserCoursesTabFavoritesTitle = "Favorite";
 UserCoursesTabArchivedTitle = "Archive";
 
+/* User Courses Reviews */
+UserCoursesReviewsTitle = "Reviews";
+UserCoursesReviewsPlaceholderEmptyTitle = "No Reviews";
+
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning so far. Come back and get even smarter! 🚀";
 RetentionNotificationOnThirdDayTitle = "Time to study";

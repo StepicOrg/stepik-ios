@@ -53,7 +53,7 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     func fetchLeavedCourseReviewsFromCache() -> Promise<[CourseReview]> {
         Promise { seal in
             guard let currentUserID = self.currentUserID else {
-                throw Error.invalidUserID
+                throw Error.persistenceFetchFailed
             }
 
             self.fetchAndMergeCourseReviews(
@@ -70,7 +70,7 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     func fetchLeavedCourseReviewsFromRemote() -> Promise<[CourseReview]> {
         Promise { seal in
             guard let currentUserID = self.currentUserID else {
-                throw Error.invalidUserID
+                throw Error.networkFetchFailed
             }
 
             self.fetchAndMergeCourseReviews(
@@ -127,7 +127,6 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     }
 
     enum Error: Swift.Error {
-        case invalidUserID
         case persistenceFetchFailed
         case networkFetchFailed
         case deleteFailed
