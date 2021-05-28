@@ -21,11 +21,19 @@ final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
             }
 
             let result = UserCoursesReviews.ReviewsResult(
-                possibleReviews: data.possibleReviews.map {
-                    self.makeUserCoursesReviewItemViewModel(plainObject: $0, isPossibleReview: true)
+                possibleReviews: data.possibleReviews.map { courseReview in
+                    self.makeUserCoursesReviewItemViewModel(
+                        plainObject: courseReview,
+                        isPossibleReview: true,
+                        isCourseAdaptive: data.supportedInAdaptiveModeCoursesIDs.contains(courseReview.courseID)
+                    )
                 },
-                leavedReviews: data.leavedReviews.map {
-                    self.makeUserCoursesReviewItemViewModel(plainObject: $0, isPossibleReview: false)
+                leavedReviews: data.leavedReviews.map { courseReview in
+                    self.makeUserCoursesReviewItemViewModel(
+                        plainObject: courseReview,
+                        isPossibleReview: false,
+                        isCourseAdaptive: data.supportedInAdaptiveModeCoursesIDs.contains(courseReview.courseID)
+                    )
                 }
             )
 
@@ -37,7 +45,8 @@ final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
 
     private func makeUserCoursesReviewItemViewModel(
         plainObject: CourseReviewPlainObject,
-        isPossibleReview: Bool
+        isPossibleReview: Bool,
+        isCourseAdaptive: Bool
     ) -> UserCoursesReviewsItemViewModel {
         let uniqueIdentifier = UserCoursesReviewsUniqueIdentifierMapper.toUniqueIdentifier(
             courseReviewPlainObject: plainObject
@@ -48,9 +57,9 @@ final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
             ? nil
             : FormatterHelper.dateToRelativeString(plainObject.creationDate)
 
-        var avatarImageURL: URL?
+        var coverImageURL: URL?
         if let coverURLString = plainObject.course?.coverURLString {
-            avatarImageURL = URL(string: coverURLString)
+            coverImageURL = URL(string: coverURLString)
         }
 
         return UserCoursesReviewsItemViewModel(
@@ -59,7 +68,8 @@ final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
             text: text,
             dateRepresentation: dateRepresentation,
             score: plainObject.score,
-            avatarImageURL: avatarImageURL
+            coverImageURL: coverImageURL,
+            shouldShowAdaptiveMark: isCourseAdaptive
         )
     }
 }

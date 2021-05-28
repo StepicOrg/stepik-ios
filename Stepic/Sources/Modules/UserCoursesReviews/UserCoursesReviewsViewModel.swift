@@ -7,5 +7,6 @@ struct UserCoursesReviewsItemViewModel: UniqueIdentifiable {
     let text: String?
     let dateRepresentation: String?
     let score: Int
-    let avatarImageURL: URL?
+    let coverImageURL: URL?
+    let shouldShowAdaptiveMark: Bool
 }

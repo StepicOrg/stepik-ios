@@ -11,15 +11,20 @@ extension UserCoursesReviewsLeavedReviewCellView {
         let titleTextColor = UIColor.stepikMaterialPrimaryText
         let titleInsets = LayoutInsets.default
 
+        let moreButtonSize = CGSize(width: 26, height: 26)
         let moreButtonTintColor = UIColor.stepikMaterialSecondaryText
+        let moreButtonInsets = LayoutInsets.default
 
         let textLabelFont = UIFont.systemFont(ofSize: 15, weight: .regular)
         let textLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let textLabelInsets = LayoutInsets(top: 8)
 
         let dateLabelFont = Typography.caption1Font
         let dateLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let dateLabelInsets = LayoutInsets(top: 8)
 
         let scoreClearStarsColor = UIColor.onSurface.withAlphaComponent(0.12)
+        let scoreInsets = LayoutInsets(top: 8, bottom: 16)
     }
 }
 
@@ -77,41 +82,7 @@ final class UserCoursesReviewsLeavedReviewCellView: UIView {
         return view
     }()
 
-    var coverImageURL: URL? {
-        didSet {
-            self.coverView.coverImageURL = self.coverImageURL
-        }
-    }
-
-    var shouldShowAdaptiveMark = false {
-        didSet {
-            self.coverView.shouldShowAdaptiveMark = self.shouldShowAdaptiveMark
-        }
-    }
-
-    var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
-        }
-    }
-
-    var text: String? {
-        didSet {
-            self.textLabel.text = self.text
-        }
-    }
-
-    var dateText: String? {
-        didSet {
-            self.dateLabel.text = self.dateText
-        }
-    }
-
-    var score: Int = 0 {
-        didSet {
-            self.scoreView.starsCount = self.score
-        }
-    }
+    var moreActionAnchorView: UIView { self.moreButton }
 
     var onCoverClick: (() -> Void)?
     var onMoreClick: (() -> Void)?
@@ -130,6 +101,15 @@ final class UserCoursesReviewsLeavedReviewCellView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(viewModel: UserCoursesReviewsItemViewModel?) {
+        self.coverView.coverImageURL = viewModel?.coverImageURL
+        self.titleLabel.text = viewModel?.title
+        self.textLabel.text = viewModel?.text
+        self.dateLabel.text = viewModel?.dateRepresentation
+        self.scoreView.starsCount = viewModel?.score ?? 0
+        self.coverView.shouldShowAdaptiveMark = viewModel?.shouldShowAdaptiveMark ?? false
     }
 
     @objc
@@ -154,5 +134,51 @@ extension UserCoursesReviewsLeavedReviewCellView: ProgrammaticallyInitializableV
         self.addSubview(self.scoreView)
     }
 
-    func makeConstraints() {}
+    func makeConstraints() {
+        self.coverView.translatesAutoresizingMaskIntoConstraints = false
+        self.coverView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.coverInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.coverInsets.left)
+            make.size.equalTo(self.appearance.coverViewSize)
+        }
+
+        self.coverOverlayButton.translatesAutoresizingMaskIntoConstraints = false
+        self.coverOverlayButton.snp.makeConstraints { $0.edges.equalTo(self.coverView) }
+
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.coverView.snp.top)
+            make.leading.equalTo(self.coverView.snp.trailing).offset(self.appearance.titleInsets.left)
+            make.trailing.equalTo(self.moreButton.snp.leading).offset(-self.appearance.titleInsets.right)
+        }
+
+        self.moreButton.translatesAutoresizingMaskIntoConstraints = false
+        self.moreButton.snp.makeConstraints { make in
+            make.centerY.equalTo(self.titleLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(-self.appearance.moreButtonInsets.right)
+            make.size.equalTo(self.appearance.moreButtonSize)
+        }
+
+        self.textLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.textLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.textLabelInsets.top)
+            make.leading.equalTo(self.titleLabel.snp.leading)
+            make.trailing.equalTo(self.titleLabel.snp.trailing)
+        }
+
+        self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.textLabel.snp.bottom).offset(self.appearance.dateLabelInsets.top)
+            make.leading.equalTo(self.textLabel.snp.leading)
+            make.trailing.equalTo(self.textLabel.snp.trailing)
+        }
+
+        self.scoreView.translatesAutoresizingMaskIntoConstraints = false
+        self.scoreView.snp.makeConstraints { make in
+            make.top.equalTo(self.dateLabel.snp.bottom).offset(self.appearance.scoreInsets.top)
+            make.leading.equalTo(self.dateLabel.snp.leading)
+            make.bottom.equalToSuperview().offset(-self.appearance.scoreInsets.bottom)
+            make.trailing.lessThanOrEqualTo(self.dateLabel.snp.trailing)
+        }
+    }
 }

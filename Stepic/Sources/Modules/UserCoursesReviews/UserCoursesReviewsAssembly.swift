@@ -16,7 +16,11 @@ final class UserCoursesReviewsAssembly: Assembly {
             coursesPersistenceService: CoursesPersistenceService()
         )
         let presenter = UserCoursesReviewsPresenter()
-        let interactor = UserCoursesReviewsInteractor(presenter: presenter, provider: provider)
+        let interactor = UserCoursesReviewsInteractor(
+            presenter: presenter,
+            provider: provider,
+            adaptiveStorageManager: AdaptiveStorageManager()
+        )
         let viewController = UserCoursesReviewsViewController(interactor: interactor)
 
         presenter.viewController = viewController

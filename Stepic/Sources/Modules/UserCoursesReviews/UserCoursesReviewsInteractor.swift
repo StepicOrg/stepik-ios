@@ -10,6 +10,7 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
 
     private let presenter: UserCoursesReviewsPresenterProtocol
     private let provider: UserCoursesReviewsProviderProtocol
+    private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
     private var currentLeavedCourseReviews: [CourseReview]?
     private var currentPossibleCourses: [Course]?
@@ -19,10 +20,12 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
 
     init(
         presenter: UserCoursesReviewsPresenterProtocol,
-        provider: UserCoursesReviewsProviderProtocol
+        provider: UserCoursesReviewsProviderProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.adaptiveStorageManager = adaptiveStorageManager
     }
 
     func doReviewsLoad(request: UserCoursesReviews.ReviewsLoad.Request) {
@@ -90,7 +93,8 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
                             course: CoursePlainObject(course: course, withSections: false)
                         )
                     },
-                    leavedReviews: leavedCourseReviews.map(CourseReviewPlainObject.init)
+                    leavedReviews: leavedCourseReviews.map(CourseReviewPlainObject.init),
+                    supportedInAdaptiveModeCoursesIDs: self.adaptiveStorageManager.supportedInAdaptiveModeCoursesIDs
                 )
 
                 seal.fulfill(response)

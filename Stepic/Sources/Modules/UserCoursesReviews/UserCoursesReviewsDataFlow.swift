@@ -15,6 +15,7 @@ enum UserCoursesReviews {
         struct Data {
             let possibleReviews: [CourseReviewPlainObject]
             let leavedReviews: [CourseReviewPlainObject]
+            let supportedInAdaptiveModeCoursesIDs: [Course.IdType]
 
             var isEmpty: Bool {
                 self.possibleReviews.isEmpty && self.leavedReviews.isEmpty
