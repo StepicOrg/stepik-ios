@@ -2,6 +2,7 @@ import UIKit
 
 protocol UserCoursesReviewsViewControllerProtocol: AnyObject {
     func displayReviews(viewModel: UserCoursesReviews.ReviewsLoad.ViewModel)
+    func displayCourseInfo(viewModel: UserCoursesReviews.CourseInfoPresentation.ViewModel)
 }
 
 protocol UserCoursesReviewsViewControllerDelegate: AnyObject {
@@ -108,6 +109,15 @@ extension UserCoursesReviewsViewController: UserCoursesReviewsViewControllerProt
     func displayReviews(viewModel: UserCoursesReviews.ReviewsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
+
+    func displayCourseInfo(viewModel: UserCoursesReviews.CourseInfoPresentation.ViewModel) {
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            initialTab: .reviews,
+            courseViewSource: .userCoursesReviews
+        )
+        self.push(module: assembly.makeModule())
+    }
 }
 
 extension UserCoursesReviewsViewController: UserCoursesReviewsViewDelegate {
@@ -124,7 +134,7 @@ extension UserCoursesReviewsViewController: UserCoursesReviewsViewControllerDele
     }
 
     func coverDidClick(_ cell: UserCoursesReviewsItemViewModel) {
-        print(#function)
+        self.interactor.doCourseInfoPresentation(request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier))
     }
 
     func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel) {

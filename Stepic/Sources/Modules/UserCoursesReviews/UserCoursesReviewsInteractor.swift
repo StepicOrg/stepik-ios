@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol UserCoursesReviewsInteractorProtocol {
     func doReviewsLoad(request: UserCoursesReviews.ReviewsLoad.Request)
+    func doCourseInfoPresentation(request: UserCoursesReviews.CourseInfoPresentation.Request)
 }
 
 final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
@@ -61,6 +62,18 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
             }
         }
     }
+
+    func doCourseInfoPresentation(request: UserCoursesReviews.CourseInfoPresentation.Request) {
+        let (_, courseID) = UserCoursesReviewsUniqueIdentifierMapper.toParts(
+            uniqueIdentifier: request.viewModelUniqueIdentifier
+        )
+
+        if courseID != UserCoursesReviewsUniqueIdentifierMapper.notAIdentifier {
+            self.presenter.presentCourseInfo(response: .init(courseID: courseID))
+        }
+    }
+
+    // MARK: Private API
 
     private func fetchReviewsInAppropriateMode() -> Promise<UserCoursesReviews.ReviewsLoad.Data> {
         Promise { seal in
@@ -121,6 +134,8 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
 // MARK: - UserCoursesReviewsUniqueIdentifierMapper -
 
 enum UserCoursesReviewsUniqueIdentifierMapper {
+    static let notAIdentifier = -1
+
     static func toUniqueIdentifier(courseReviewPlainObject: CourseReviewPlainObject) -> UniqueIdentifierType {
         "\(courseReviewPlainObject.id)-\(courseReviewPlainObject.courseID)"
     }
@@ -131,7 +146,7 @@ enum UserCoursesReviewsUniqueIdentifierMapper {
                let intValue = Int(substring) {
                 return intValue
             }
-            return -1
+            return self.notAIdentifier
         }
 
         let splits = uniqueIdentifier.split(separator: "-")

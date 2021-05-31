@@ -2,6 +2,7 @@ import UIKit
 
 protocol UserCoursesReviewsPresenterProtocol {
     func presentReviews(response: UserCoursesReviews.ReviewsLoad.Response)
+    func presentCourseInfo(response: UserCoursesReviews.CourseInfoPresentation.Response)
 }
 
 final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
@@ -42,6 +43,12 @@ final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
             viewController.displayReviews(viewModel: .init(state: .error))
         }
     }
+
+    func presentCourseInfo(response: UserCoursesReviews.CourseInfoPresentation.Response) {
+        self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.courseID))
+    }
+
+    // MARK: Private API
 
     private func makeUserCoursesReviewItemViewModel(
         plainObject: CourseReviewPlainObject,

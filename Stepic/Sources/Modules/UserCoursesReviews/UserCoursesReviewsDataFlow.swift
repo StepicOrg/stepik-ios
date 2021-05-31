@@ -31,6 +31,21 @@ enum UserCoursesReviews {
         }
     }
 
+    /// Show course info module
+    enum CourseInfoPresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
