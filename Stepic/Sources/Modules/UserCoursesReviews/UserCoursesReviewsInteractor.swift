@@ -17,14 +17,26 @@ protocol UserCoursesReviewsInteractorProtocol {
 }
 
 final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
+    private static let outputDebounceInterval: TimeInterval = 0.1
+
     weak var moduleOutput: UserCoursesReviewsOutputProtocol?
 
     private let presenter: UserCoursesReviewsPresenterProtocol
     private let provider: UserCoursesReviewsProviderProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
-    private var currentLeavedCourseReviews: [CourseReview]?
-    private var currentPossibleCourses: [Course]?
+    private let outputDebouncer = Debouncer(delay: UserCoursesReviewsInteractor.outputDebounceInterval)
+
+    private var currentLeavedCourseReviews: [CourseReview]? {
+        didSet {
+            self.outputReviewsCounts()
+        }
+    }
+    private var currentPossibleCourses: [Course]? {
+        didSet {
+            self.outputReviewsCounts()
+        }
+    }
 
     private var currentPossibleReviews: [CourseReviewPlainObject]?
 
@@ -237,6 +249,19 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
             leavedReviews: (self.currentLeavedCourseReviews ?? []).map(CourseReviewPlainObject.init),
             supportedInAdaptiveModeCoursesIDs: self.adaptiveStorageManager.supportedInAdaptiveModeCoursesIDs
         )
+    }
+
+    private func outputReviewsCounts() {
+        self.outputDebouncer.action = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.moduleOutput?.handleUserCoursesReviewsCountsChanged(
+                possibleReviewsCount: strongSelf.currentPossibleReviews?.count ?? 0,
+                leavedCourseReviewsCount: strongSelf.currentLeavedCourseReviews?.count ?? 0
+            )
+        }
     }
 
     enum Error: Swift.Error {
