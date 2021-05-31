@@ -919,6 +919,7 @@
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		2CC38AB025750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC38AAF25750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift */; };
 		2CC4FD5C2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */; };
+		2CC4FD5F2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4FD5E2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift */; };
 		2CC5AA6C242A34C500C09F94 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */; };
 		2CC5AA70242A34FA00C09F94 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6D242A34F900C09F94 /* AdaptiveRatingManager.swift */; };
 		2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6E242A34F900C09F94 /* AdaptiveStatsManager.swift */; };
@@ -2707,6 +2708,7 @@
 		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CC38AAF25750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListWidgetRatingView.swift; sourceTree = "<group>"; };
 		2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsPossibleReviewCellView.swift; sourceTree = "<group>"; };
+		2CC4FD5E2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsTableSectionView.swift; sourceTree = "<group>"; };
 		2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsAPI.swift; sourceTree = "<group>"; };
 		2CC5AA6D242A34F900C09F94 /* AdaptiveRatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingManager.swift; sourceTree = "<group>"; };
 		2CC5AA6E242A34F900C09F94 /* AdaptiveStatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsManager.swift; sourceTree = "<group>"; };
@@ -5821,6 +5823,14 @@
 			path = PermissionStatus;
 			sourceTree = "<group>";
 		};
+		2CC4FD5D2664EB0500A33178 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				2CC4FD5E2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
 		2CCDD1FF24DBB39100A48EE0 /* Concurrency */ = {
 			isa = PBXGroup;
 			children = (
@@ -6084,6 +6094,7 @@
 				2CEE66A92661123C0079F03B /* UserCoursesReviewsTableViewDataSource.swift */,
 				EB9EABC3559C7152B7A21484 /* UserCoursesReviewsView.swift */,
 				2CEE66AB266116750079F03B /* Cell */,
+				2CC4FD5D2664EB0500A33178 /* Section */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10006,6 +10017,7 @@
 				2C5D340225C988FA00372C61 /* PromoCodesNetworkService.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				2C3A035624AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift in Sources */,
+				2CC4FD5F2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift in Sources */,
 				2C8EE76E2604B65B003512BC /* CourseType.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,

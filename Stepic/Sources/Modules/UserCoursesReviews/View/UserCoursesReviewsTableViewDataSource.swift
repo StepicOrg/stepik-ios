@@ -97,33 +97,26 @@ final class UserCoursesReviewsTableViewDataSource: NSObject, UITableViewDelegate
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let sectionType = self.sectionType(at: section) else {
             return nil
         }
 
+        let sectionView = UserCoursesReviewsTableSectionView()
+
         switch sectionType {
         case .possible:
-            return "Possible"
+            sectionView.style = .accent
+            sectionView.title = FormatterHelper.userCoursesReviewsPossibleReviewsCount(
+                self.possibleCourseReviewViewModels.count
+            )
         case .leaved:
-            return "Leaved"
+            sectionView.style = .normal
+            sectionView.title = FormatterHelper.reviewsCount(self.leavedCourseReviewViewModels.count)
         }
-    }
 
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let sectionView = CourseInfoTabSyllabusSectionView()
-//
-////        if let viewModel = self.viewModels[safe: section] {
-////            sectionView.configure(viewModel: viewModel)
-////            sectionView.onExamButtonClick = { [weak self] in
-////                self?.delegate?.examButtonDidClick(viewModel)
-////            }
-////            sectionView.onDownloadButtonClick = { [weak self] in
-////                self?.delegate?.downloadButtonDidClick(viewModel)
-////            }
-////        }
-//        return sectionView
-//    }
+        return sectionView
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

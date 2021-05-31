@@ -4,7 +4,10 @@ import UIKit
 extension UserCoursesReviewsPossibleReviewTableViewCell {
     enum Appearance {
         static let separatorHeight: CGFloat = 4
-        static let separatorBackgroundColor = UIColor.onSurface.withAlphaComponent(0.04)
+        static let separatorBackgroundColor = UIColor.dynamic(
+            light: .onSurface.withAlphaComponent(0.04),
+            dark: .stepikSeparator
+        )
     }
 }
 
