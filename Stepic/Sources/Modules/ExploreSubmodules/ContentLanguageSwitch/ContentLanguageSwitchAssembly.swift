@@ -8,7 +8,8 @@ final class ContentLanguageSwitchAssembly: Assembly {
         let presenter = ContentLanguageSwitchPresenter()
         let interactor = ContentLanguageSwitchInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            analytics: StepikAnalytics.shared
         )
         let viewController = ContentLanguageSwitchViewController(
             interactor: interactor

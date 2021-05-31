@@ -345,11 +345,3 @@ final class Section: NSManagedObject, IDFetchable {
         case isProctoringCanBeScheduled = "is_proctoring_can_be_scheduled"
     }
 }
-
-// MARK: - Section: NextLessonServiceSectionSourceProtocol -
-
-extension Section: NextLessonServiceSectionSourceProtocol {
-    var unitsList: [NextLessonServiceUnitSourceProtocol] { self.units }
-
-    var uniqueIdentifier: UniqueIdentifierType { "\(self.id)" }
-}

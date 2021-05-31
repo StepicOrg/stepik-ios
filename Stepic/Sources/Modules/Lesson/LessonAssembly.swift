@@ -4,9 +4,16 @@ final class LessonAssembly: Assembly {
     private var initialContext: LessonDataFlow.Context
     private var startStep: LessonDataFlow.StartStep?
 
-    init(initialContext: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep? = nil) {
+    private weak var moduleOutput: LessonOutputProtocol?
+
+    init(
+        initialContext: LessonDataFlow.Context,
+        startStep: LessonDataFlow.StartStep? = nil,
+        moduleOutput: LessonOutputProtocol?
+    ) {
         self.initialContext = initialContext
         self.startStep = startStep
+        self.moduleOutput = moduleOutput
     }
 
     func makeModule() -> UIViewController {
@@ -29,6 +36,8 @@ final class LessonAssembly: Assembly {
         let provider = LessonProvider(
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
+            sectionsPersistenceService: SectionsPersistenceService(),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
             unitsPersistenceService: UnitsPersistenceService(),
             unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
             stepsPersistenceService: StepsPersistenceService(),
@@ -37,7 +46,9 @@ final class LessonAssembly: Assembly {
             assignmentsPersistenceService: AssignmentsPersistenceService(),
             progressesPersistenceService: ProgressesPersistenceService(),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
-            viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI())
+            viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI()),
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI())
         )
         let presenter = LessonPresenter(urlFactory: StepikURLFactory())
         let interactor = LessonInteractor(
@@ -56,6 +67,7 @@ final class LessonAssembly: Assembly {
         viewController.hidesBottomBarWhenPushed = true
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

@@ -1,13 +1,19 @@
 import Foundation
 import PromiseKit
 
+// swiftlint:disable file_length
 protocol LessonInteractorProtocol {
     func doLessonLoad(request: LessonDataFlow.LessonLoad.Request)
     func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
     func doSubmissionsPresentation(request: LessonDataFlow.SubmissionsPresentation.Request)
+    func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request)
+    func doLeaveReviewPresentation(request: LessonDataFlow.LeaveReviewPresentation.Request)
+    func doCatalogPresentation(request: LessonDataFlow.CatalogPresentation.Request)
 }
 
 final class LessonInteractor: LessonInteractorProtocol {
+    weak var moduleOutput: LessonOutputProtocol?
+
     private let presenter: LessonPresenterProtocol
     private let provider: LessonProviderProtocol
     private let unitNavigationService: UnitNavigationServiceProtocol
@@ -72,6 +78,18 @@ final class LessonInteractor: LessonInteractorProtocol {
         }
 
         self.presenter.presentSubmissions(response: .init(stepID: stepID, isTeacher: lesson.canEdit))
+    }
+
+    func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request) {
+        self.moduleOutput?.handleLessonDidRequestBuyCourse()
+    }
+
+    func doLeaveReviewPresentation(request: LessonDataFlow.LeaveReviewPresentation.Request) {
+        self.moduleOutput?.handleLessonDidRequestLeaveReview()
+    }
+
+    func doCatalogPresentation(request: LessonDataFlow.CatalogPresentation.Request) {
+        self.moduleOutput?.handleLessonDidRequestPresentCatalog()
     }
 
     // MARK: Private API
@@ -248,16 +266,20 @@ final class LessonInteractor: LessonInteractorProtocol {
                 return
             }
 
-            if strongSelf.currentUnit?.id == unitID {
-                strongSelf.nextUnit = nextUnit
-                strongSelf.previousUnit = previousUnit
-
-                print("new lesson interactor: next & previous units did load")
-
-                strongSelf.presenter.presentLessonNavigation(
-                    response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: nextUnit != nil)
-                )
+            guard strongSelf.currentUnit?.id == unitID else {
+                return
             }
+
+            strongSelf.nextUnit = nextUnit
+            strongSelf.previousUnit = previousUnit
+
+            print("new lesson interactor: next & previous units did load")
+
+            let hasNextUnit = nextUnit != nil || strongSelf.isCurrentUnitLastInCourse
+
+            strongSelf.presenter.presentLessonNavigation(
+                response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: hasNextUnit)
+            )
         }.cauterize()
     }
 
@@ -297,6 +319,13 @@ final class LessonInteractor: LessonInteractorProtocol {
 
 extension LessonInteractor: StepOutputProtocol {
     private static let autoplayDelay: TimeInterval = 0.33
+    private static let unitNavigationDelay: TimeInterval = 0.5
+
+    private var isCurrentUnitLastInCourse: Bool {
+        self.nextUnit == nil
+            && self.currentUnit?.position == self.currentUnit?.section?.unitsArray.count
+            && self.currentUnit?.section?.position == self.currentUnit?.section?.course?.sectionsArray.count
+    }
 
     func handleStepView(id: Step.IdType) {
         let assignmentID = self.assignmentsForCurrentSteps[id]
@@ -328,8 +357,19 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.didLoadFromCache = false
-        self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+
+        firstly {
+            after(seconds: Self.unitNavigationDelay)
+        }.then {
+            self.presentUnreachableUnitNavigationState(targetUnit: unit, direction: .previous)
+        }.done { didPresentUnreachableState in
+            if didPresentUnreachableState {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            } else {
+                self.didLoadFromCache = false
+                self.refreshLesson(context: .unit(id: unit.id)).cauterize()
+            }
+        }
     }
 
     func handleNextUnitNavigation() {
@@ -389,16 +429,30 @@ extension LessonInteractor: StepOutputProtocol {
 
     private func navigateToNextUnit(autoplayNext: Bool) {
         guard let unit = self.nextUnit else {
+            if self.isCurrentUnitLastInCourse {
+                self.presentLessonFinishedSteps()
+            }
             return
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.didLoadFromCache = false
-        self.refreshLesson(context: .unit(id: unit.id)).done {
-            if autoplayNext {
-                self.autoplayCurrentStep()
+
+        firstly {
+            after(seconds: Self.unitNavigationDelay)
+        }.then {
+            self.presentUnreachableUnitNavigationState(targetUnit: unit, direction: .next)
+        }.done { didPresentUnreachableState in
+            if didPresentUnreachableState {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            } else {
+                self.didLoadFromCache = false
+                self.refreshLesson(context: .unit(id: unit.id)).done {
+                    if autoplayNext {
+                        self.autoplayCurrentStep()
+                    }
+                }.cauterize()
             }
-        }.cauterize()
+        }
     }
 
     private func navigateToStep(at index: Int, autoplayNext: Bool) {
@@ -421,6 +475,174 @@ extension LessonInteractor: StepOutputProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoplayDelay) {
             self.presenter.presentCurrentStepAutoplay(response: .init())
         }
+    }
+
+    private func presentUnreachableUnitNavigationState(
+        targetUnit: Unit,
+        direction: UnitNavigationDirection
+    ) -> Guarantee<Bool> {
+        guard let currentLesson = self.currentLesson,
+              let currentSection = self.currentUnit?.section,
+              let targetSection = targetUnit.section else {
+            return .value(false)
+        }
+
+        if targetSection.testSectionAction != nil {
+            return .value(false)
+        }
+        if targetSection.isReachable && !targetSection.isExam {
+            return .value(false)
+        }
+
+        if !targetSection.isRequirementSatisfied, let requiredSectionID = targetSection.requiredSectionID {
+            return Guarantee { seal in
+                self.presentRequirementNotSatisfiedUnitNavigationState(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    requiredSectionID: requiredSectionID,
+                    unitNavigationDirection: direction
+                ).done { _ in
+                    seal(true)
+                }.catch { _ in
+                    self.presenter.presentUnitNavigationUnreachableState(response: .init(targetSection: targetSection))
+                    seal(true)
+                }
+            }
+        }
+
+        if let beginDate = targetSection.beginDate, Date() < beginDate {
+            self.presenter.presentUnitNavigationClosedByDateState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    dateSource: .beginDate,
+                    unitNavigationDirection: direction
+                )
+            )
+            return .value(true)
+        }
+
+        if let endDate = targetSection.endDate, Date() > endDate {
+            self.presenter.presentUnitNavigationClosedByDateState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    dateSource: .endDate,
+                    unitNavigationDirection: direction
+                )
+            )
+            return .value(true)
+        }
+
+        if targetSection.isExam {
+            self.presenter.presentUnitNavigationExamState(
+                response: .init(
+                    currentSection: currentSection,
+                    targetSection: targetSection,
+                    unitNavigationDirection: direction
+                )
+            )
+            return .value(true)
+        }
+
+        return self.presentUnitNavigationFinishedDemoAccessState(
+            currentLesson: currentLesson,
+            currentSection: currentSection,
+            targetUnit: targetUnit
+        )
+    }
+
+    private func presentRequirementNotSatisfiedUnitNavigationState(
+        currentSection: Section,
+        targetSection: Section,
+        requiredSectionID: Section.IdType,
+        unitNavigationDirection: UnitNavigationDirection
+    ) -> Promise<Void> {
+        self.provider
+            .fetchSectionFromCacheOrNetwork(id: requiredSectionID)
+            .compactMap { $0 }
+            .then { section -> Promise<Section> in
+                if section.progress == nil,
+                   let progressID = section.progressId {
+                    return self.provider.fetchProgresses(
+                        ids: [progressID],
+                        dataSourceType: .remote
+                    ).then { progresses -> Promise<Section> in
+                        section.progress = progresses.first
+                        CoreDataHelper.shared.save()
+                        return .value(section)
+                    }
+                } else {
+                    return .value(section)
+                }
+            }
+            .done { requiredSection in
+                self.presenter.presentUnitNavigationRequirementNotSatisfiedState(
+                    response: .init(
+                        currentSection: currentSection,
+                        targetSection: targetSection,
+                        requiredSection: requiredSection,
+                        unitNavigationDirection: unitNavigationDirection
+                    )
+                )
+            }
+    }
+
+    private func presentUnitNavigationFinishedDemoAccessState(
+        currentLesson: Lesson,
+        currentSection: Section,
+        targetUnit: Unit
+    ) -> Guarantee<Bool> {
+        guard currentLesson.canLearnLesson else {
+            return .value(false)
+        }
+
+        return Guarantee { seal in
+            firstly { () -> Promise<Course> in
+                if let course = currentSection.course {
+                    return .value(course)
+                } else {
+                    return self.provider.fetchCourseFromCacheOrNetwork(id: currentSection.courseId).compactMap { $0 }
+                }
+            }.then { course -> Promise<Lesson> in
+                guard !course.enrolled && course.isPaid else {
+                    throw Error.fetchFailed
+                }
+
+                if let lesson = targetUnit.lesson {
+                    return .value(lesson)
+                } else {
+                    return self.provider.fetchLessonFromCacheOrNetwork(id: targetUnit.lessonId).compactMap { $0 }
+                }
+            }.done { targetLesson in
+                if !targetLesson.canLearnLesson {
+                    self.presenter.presentUnitNavigationFinishedDemoAccessState(
+                        response: .init(section: currentSection)
+                    )
+                    seal(true)
+                } else {
+                    seal(false)
+                }
+            }.catch { _ in
+                seal(false)
+            }
+        }
+    }
+
+    private func presentLessonFinishedSteps() {
+        guard let currentSection = self.currentUnit?.section else {
+            return
+        }
+
+        firstly { () -> Promise<Course> in
+            if let course = currentSection.course {
+                return .value(course)
+            } else {
+                return self.provider.fetchCourseFromCacheOrNetwork(id: currentSection.courseId).compactMap { $0 }
+            }
+        }.done { course in
+            self.presenter.presentLessonFinishedSteps(response: .init(courseID: course.id))
+        }.cauterize()
     }
 }
 

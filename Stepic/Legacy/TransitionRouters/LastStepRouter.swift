@@ -22,8 +22,13 @@ final class LastStepRouter {
         didJustSubscribe: Bool = false,
         using navigationController: UINavigationController,
         skipSyllabus: Bool = false,
-        courseViewSource: AnalyticsEvent.CourseViewSource
+        courseViewSource: AnalyticsEvent.CourseViewSource,
+        lessonModuleOutput: LessonOutputProtocol? = nil
     ) {
+        if skipSyllabus == true && lessonModuleOutput == nil {
+            assert(false, "You need to provide LessonOutputProtocol when skipping syllabus!")
+        }
+
         guard course.enrolled else {
             return self.fallbackToCourseInfo(
                 courseID: course.id,
@@ -61,7 +66,8 @@ final class LastStepRouter {
                 didJustSubscribe: didJustSubscribe,
                 using: navigationController,
                 skipSyllabus: skipSyllabus,
-                courseViewSource: courseViewSource
+                courseViewSource: courseViewSource,
+                lessonModuleOutput: lessonModuleOutput
             )
         }.catch { error in
             print("error while updating lastStep: \(error)")
@@ -74,7 +80,8 @@ final class LastStepRouter {
         didJustSubscribe: Bool,
         using navigationController: UINavigationController,
         skipSyllabus: Bool = false,
-        courseViewSource: AnalyticsEvent.CourseViewSource = .unknown
+        courseViewSource: AnalyticsEvent.CourseViewSource = .unknown,
+        lessonModuleOutput: LessonOutputProtocol? = nil
     ) {
         SVProgressHUD.show()
 
@@ -102,15 +109,16 @@ final class LastStepRouter {
             return
         }
 
-        let courseInfoController = CourseInfoAssembly(
+        let courseInfoAssembly = CourseInfoAssembly(
             courseID: course.id,
             initialTab: .syllabus,
             courseViewSource: courseViewSource
-        ).makeModule()
+        )
+        let courseInfoViewController = courseInfoAssembly.makeModule()
 
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
-            navigationController.pushViewController(courseInfoController, animated: true)
+            navigationController.pushViewController(courseInfoViewController, animated: true)
             StepikAnalytics.shared.send(.continueLastStepSyllabusOpened)
         }
 
@@ -214,15 +222,17 @@ final class LastStepRouter {
             stepIDPromise.done { targetStepID in
                 let lessonAssembly = LessonAssembly(
                     initialContext: .unit(id: unit.id),
-                    startStep: .id(targetStepID)
+                    startStep: .id(targetStepID),
+                    moduleOutput: lessonModuleOutput ?? courseInfoAssembly.moduleInput as? LessonOutputProtocol
                 )
+                let lessonViewController = lessonAssembly.makeModule()
 
                 SVProgressHUD.showSuccess(withStatus: "")
 
                 if !skipSyllabus {
-                    navigationController.pushViewController(courseInfoController, animated: false)
+                    navigationController.pushViewController(courseInfoViewController, animated: false)
                 }
-                navigationController.pushViewController(lessonAssembly.makeModule(), animated: true)
+                navigationController.pushViewController(lessonViewController, animated: true)
 
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 StepikAnalytics.shared.send(.continueLastStepStepOpened)

@@ -1,5 +1,4 @@
 import FirebaseCore
-import FirebaseInstanceID
 import FirebaseMessaging
 import Foundation
 import PromiseKit

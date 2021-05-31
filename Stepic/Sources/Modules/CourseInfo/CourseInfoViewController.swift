@@ -18,6 +18,9 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayExamLesson(viewModel: CourseInfo.ExamLessonPresentation.ViewModel)
     func displayCourseSharing(viewModel: CourseInfo.CourseShareAction.ViewModel)
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
+    func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel)
+    func displayLessonModuleCatalogAction(viewModel: CourseInfo.LessonModuleCatalogPresentation.ViewModel)
+    func displayLessonModuleWriteReviewAction(viewModel: CourseInfo.LessonModuleWriteReviewPresentation.ViewModel)
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
@@ -54,6 +57,7 @@ final class CourseInfoViewController: UIViewController {
 
     // Element is nil when view controller was not initialized yet
     private var submodulesControllers: [UIViewController?] = []
+    private var submodulesInputs: [CourseInfoSubmoduleProtocol?] = []
 
     private var storedViewModel: CourseInfoHeaderViewModel?
     private let didJustSubscribe: Bool
@@ -69,6 +73,7 @@ final class CourseInfoViewController: UIViewController {
 
         self.availableTabs = availableTabs
         self.submodulesControllers = Array(repeating: nil, count: availableTabs.count)
+        self.submodulesInputs = Array(repeating: nil, count: availableTabs.count)
 
         if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
@@ -237,6 +242,7 @@ final class CourseInfoViewController: UIViewController {
         }
 
         self.submodulesControllers[index] = controller
+        self.submodulesInputs[index] = moduleInput
 
         if let submodule = moduleInput {
             self.interactor.doSubmodulesRegistration(request: .init(submodules: [index: submodule]))
@@ -487,7 +493,10 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
-        let assembly = LessonAssembly(initialContext: .unit(id: viewModel.unitID))
+        let assembly = LessonAssembly(
+            initialContext: .unit(id: viewModel.unitID),
+            moduleOutput: self.interactor as? LessonOutputProtocol
+        )
         self.push(module: assembly.makeModule())
     }
 
@@ -549,12 +558,49 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
             skipSyllabus: true,
-            courseViewSource: .unknown
+            courseViewSource: .unknown,
+            lessonModuleOutput: self.interactor as? LessonOutputProtocol
         )
     }
 
+    func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel) {
+        if self.popLessonViewController() != nil {
+            DispatchQueue.main.async {
+                self.interactor.doMainCourseAction(request: .init())
+            }
+        }
+    }
+
+    func displayLessonModuleCatalogAction(viewModel: CourseInfo.LessonModuleCatalogPresentation.ViewModel) {
+        if self.popLessonViewController() != nil {
+            DispatchQueue.main.async {
+                TabBarRouter(tab: .catalog(searchCourses: false)).route()
+            }
+        }
+    }
+
+    func displayLessonModuleWriteReviewAction(viewModel: CourseInfo.LessonModuleWriteReviewPresentation.ViewModel) {
+        if self.popLessonViewController() != nil {
+            guard let tabIndex = self.availableTabs.firstIndex(of: .reviews) else {
+                return
+            }
+
+            self.pageViewController.scrollToPage(.at(index: tabIndex), animated: true) { _, _, _ in
+                for submoduleInput in self.submodulesInputs {
+                    if let reviewsModuleInput = submoduleInput as? CourseInfoTabReviewsInputProtocol {
+                        reviewsModuleInput.presentWriteCourseReview()
+                        return
+                    }
+                }
+            }
+        }
+    }
+
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel) {
-        let assembly = LessonAssembly(initialContext: .lesson(id: viewModel.previewLessonID))
+        let assembly = LessonAssembly(
+            initialContext: .lesson(id: viewModel.previewLessonID),
+            moduleOutput: self.interactor as? LessonOutputProtocol
+        )
         self.push(module: assembly.makeModule())
     }
 
@@ -618,6 +664,17 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
         self.present(module: alert)
+    }
+
+    // MARK: Private Helpers
+
+    private func popLessonViewController() -> UIViewController? {
+        guard let navigationController = self.navigationController,
+              navigationController.topViewController as? LessonViewControllerProtocol != nil else {
+            return nil
+        }
+
+        return navigationController.popViewController(animated: true)
     }
 }
 

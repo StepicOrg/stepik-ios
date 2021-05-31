@@ -1,6 +1,8 @@
 import Foundation
 
 extension AnalyticsEvent {
+    // MARK: - Catalog -
+
     static func catalogDisplay(
         courseID: Course.IdType,
         viewSource: CourseViewSource,
@@ -63,5 +65,19 @@ extension AnalyticsEvent {
         }
 
         return params
+    }
+
+    // MARK: - BuyClick -
+
+    static func buyCoursePressed(id: Course.IdType) -> StepikAnalyticsEvent {
+        let name = "buy-course-pressed"
+
+        let params: [String: Any] = [
+            "data": ["course": id],
+            "name": name,
+            "timestamp": Date().timeIntervalSince1970
+        ]
+
+        return StepikAnalyticsEvent(name: name, parameters: params)
     }
 }

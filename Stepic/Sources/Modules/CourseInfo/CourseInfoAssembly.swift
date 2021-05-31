@@ -1,6 +1,8 @@
 import UIKit
 
 final class CourseInfoAssembly: Assembly {
+    var moduleInput: CourseInfoInputProtocol?
+
     private let courseID: Course.IdType
     private let initialTab: CourseInfo.Tab
     private let didJustSubscribe: Bool
@@ -84,6 +86,7 @@ final class CourseInfoAssembly: Assembly {
             didJustSubscribe: self.didJustSubscribe
         )
         presenter.viewController = viewController
+        self.moduleInput = interactor
 
         return viewController
     }

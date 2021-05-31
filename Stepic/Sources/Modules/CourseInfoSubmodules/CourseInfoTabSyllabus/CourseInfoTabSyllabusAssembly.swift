@@ -31,7 +31,6 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             provider: provider,
             analytics: StepikAnalytics.shared,
             personalDeadlinesService: PersonalDeadlinesService(),
-            nextLessonService: NextLessonService(),
             networkReachabilityService: NetworkReachabilityService(),
             tooltipStorageManager: TooltipStorageManager(),
             useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManager(),

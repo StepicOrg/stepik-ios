@@ -13,12 +13,12 @@ project 'Stepic',
         'Develop Release' => :release
 
 def shared_pods
-  pod 'Alamofire', '5.4.2'
-  pod 'Atributika', '4.9.10'
+  pod 'Alamofire', '5.4.3'
+  pod 'Atributika', '4.10.1'
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.11.0'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-  pod 'DeviceKit', '4.3.0'
+  pod 'DeviceKit', '4.4.0'
   pod 'PromiseKit', '6.13.1'
   pod 'SwiftLint', '0.43.1'
 
@@ -45,15 +45,15 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '7.10.0'
-  pod 'Firebase/Messaging', '7.10.0'
-  pod 'Firebase/Analytics', '7.10.0'
-  pod 'Firebase/Crashlytics', '7.10.0'
-  pod 'Firebase/RemoteConfig', '7.10.0'
+  pod 'Firebase/Core', '8.0.0'
+  pod 'Firebase/Messaging', '8.0.0'
+  pod 'Firebase/Analytics', '8.0.0'
+  pod 'Firebase/Crashlytics', '8.0.0'
+  pod 'Firebase/RemoteConfig', '8.0.0'
 
-  pod 'YandexMobileMetrica/Dynamic', '3.15.0'
-  pod 'Amplitude', '8.2.1'
-  pod 'Branch', '1.39.2'
+  pod 'YandexMobileMetrica/Dynamic', '3.15.1'
+  pod 'Amplitude', '8.3.0'
+  pod 'Branch', '1.39.3'
 
   pod 'BEMCheckBox', '1.4.1'
 
@@ -72,9 +72,9 @@ def all_pods
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
   pod 'Agrume', '5.6.13'
-  pod 'Highlightr', '2.1.0'
+  pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :tag => '2.1.2'
   pod 'TTTAttributedLabel', '2.0.0'
-  pod 'lottie-ios', '3.2.1'
+  pod 'lottie-ios', '3.2.3'
   pod 'Koloda', '5.0.1'
   pod 'Charts', '3.6.0'
   pod 'EasyTipView', '2.1.0'
@@ -86,8 +86,8 @@ def all_pods
 end
 
 def testing_pods
-  pod 'Quick', '3.1.2'
-  pod 'Nimble', '9.0.0'
+  pod 'Quick', '4.0.0'
+  pod 'Nimble', '9.2.0'
   pod 'Mockingjay', '3.0.0-alpha.1'
 end
 

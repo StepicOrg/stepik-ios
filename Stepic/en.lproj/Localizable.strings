@@ -844,6 +844,19 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 /* New lesson & step */
 NextLessonNavigation = "Next Lesson";
 PreviousLessonNavigation = "Previous Lesson";
+LessonUnitNavigationFinishedModuleTitle = "Congratulations!\nYou finished \"%@\" module.";
+LessonUnitNavigationCommonErrorMessage = "Couldn't open \"%@\" module. Please try again later.";
+LessonUnitNavigationRequirementNotSatisfiedMessage = "To unlock next \"%@\" module, you need to score %@ in \"%@\" module.";
+LessonUnitNavigationExamMessage = "Next module \"%@\" is exam. You can start it from the course syllabus.";
+LessonUnitNavigationClosedByBeginDateMessage = "The next module \"%@\" will open %@.";
+LessonUnitNavigationClosedByEndDateMessage = "The next module \"%@\" was closed %@.";
+LessonUnitNavigationActionSyllabus = "Go to Syllabus";
+LessonUnitNavigationRequirementNotSatisfiedActionContinue = "Continue Learning";
+LessonPreviousUnitNavigationFinishedModuleTitle = "You finished \"%@\" module.";
+LessonPreviousUnitNavigationRequirementNotSatisfiedMessage = "To unlock adjacent \"%@\" module, you need to score %@ in \"%@\" module.";
+LessonPreviousUnitNavigationExamMessage = "Adjacent module \"%@\" is exam. You can start it from the course syllabus.";
+LessonPreviousUnitNavigationClosedByBeginDateMessage = "The adjacent module \"%@\" will open %@.";
+LessonPreviousUnitNavigationClosedByEndDateMessage = "The adjacent module \"%@\" was closed %@.";
 DiscussionsButtonTitle = "Show Comments (%@)";
 NoDiscussionsButtonTitle = "Leave a Comment";
 DisabledDiscussionsButtonTitle = "Comments Disabled";
@@ -873,6 +886,32 @@ StepDisabledTeacherNoCourseMessage = "For enable learners to view the assignment
 StepDisabledTeacherNoCoursePlanProTitle = "a <b>PRO</b> or <b>paid</b> course";
 StepDisabledTeacherNoCoursePlanEnterpriseTitle = "an <b>Enterprise</b> course";
 StepPosition = "Step %@";
+
+/* LessonFinishedDemoPanModal */
+LessonFinishedDemoPanModalTitle = "Congratulations! You have just finished the demo-module «%@».";
+LessonFinishedDemoPanModalSubtitle = "To view, the other lessons buy full access to the course.";
+/* LessonFinishedStepsPanModal */
+LessonFinishedStepsPanModalTitleFinishedCourse = "This has been the last lesson of the course «%@».";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess = "Congratulations!\nYou've completed the course «%@».";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate = "Congratulations!\nYou've completed the course «%@» and received the certificate!";
+LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndDistinctionCertificate = "Congratulations!\nYou've completed the course «%@» and received the certificate with distinction!";
+LessonFinishedStepsPanModalCertificateFeedback = "Receive %@ to get a certificate.";
+LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle = "Go Back to the Assignments";
+LessonFinishedStepsPanModalActionButtonFindNewCourseTitle = "Find a New Course";
+LessonFinishedStepsPanModalActionButtonLeaveReviewTitle = "Leave a Review";
+LessonFinishedStepsPanModalActionButtonShareResultTitle = "Share Result";
+LessonFinishedStepsPanModalActionButtonViewCertificateTitle = "View Certificate";
+LessonFinishedStepsPanModalSubtitleProgress = "You've received <b>%@ out of %@</b>, which makes up %@ of the course material.";
+LessonFinishedStepsPanModalSubtitleCertificateHint = "You will be able to put it in your CV or on social networks, or download and print.";
+LessonFinishedStepsPanModalSubtitleCertificateReadyMessage = "Put your certificate in your CV or on social networks. This is an excellent result and you can be proud of it!";
+LessonFinishedStepsPanModalSubtitleCertificateIssuedMessage = "The regular certificate is issued for %@, the certificate with distinction for %@.";
+LessonFinishedStepsPanModalSubtitleCertificateWithoutDistinctionIssuedMessage = "The regular certificate is issued for %@.";
+LessonFinishedStepsPanModalSubtitleCertificateDistinctionNeedScoreMessage = "To receive the certificate with distinction, you need to gain %@, %@ now left.";
+LessonFinishedStepsPanModalSubtitleCertificateNotIssuedNeutralMessage = "There are no certificates in this course, but we don't only learn for formal confirmation, do we?";
+LessonFinishedStepsPanModalSubtitleCertificateNotIssuedSuccessMessage = "There are no certificates in this course, but you can share your result on your social networks.";
+LessonFinishedStepsPanModalSubtitleContinueMessage = "Continue with this course or find another one?";
+LessonFinishedStepsPanModalSubtitleCertificateNotReadyNotifyMessage = "We will notify you when your certificate is ready.";
+LessonFinishedStepsPanModalShareResult = "I've received %@ out of %@ in the course «%@»";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

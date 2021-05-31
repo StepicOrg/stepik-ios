@@ -77,6 +77,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private var isOnline = false
     private var didLoadFromCache = false
+    private var shouldOpenedAnalyticsEventSend = true
 
     private var onNetworkReachabilityStatusChangeCallback: ((NetworkReachabilityStatus) -> Void)?
 
@@ -134,6 +135,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }
 
             strongSelf.fetchSemaphore.wait()
+            strongSelf.sendOpenedAnalyticsEvents()
+
             strongSelf.fetchCourseInAppropriateMode().done { response in
                 DispatchQueue.main.async { [weak self] in
                     if case .success = response.result {
@@ -253,7 +256,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         } else {
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
-                self.analytics.send(.courseBuyPressed(source: .courseScreen, id: course.id))
+                self.analytics.send(
+                    .buyCoursePressed(id: course.id),
+                    .courseBuyPressed(source: .courseScreen, id: course.id)
+                )
 
                 if self.iapService.canBuyCourse(course) {
                     self.iapService.buy(course: course, delegate: self)
@@ -309,6 +315,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     // MARK: Private methods
 
+    private func sendOpenedAnalyticsEvents() {
+        guard self.shouldOpenedAnalyticsEventSend else {
+            return
+        }
+
+        self.shouldOpenedAnalyticsEventSend = false
+        self.analytics.send(.catalogClick(courseID: self.courseID, viewSource: self.courseViewSource))
+    }
+
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
         .init(
             course: self.currentCourse.require(),
@@ -352,14 +367,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     }
                 }
 
-                if let promoCodeName = self.promoCodeName, self.currentPromoCode == nil,
-                   let course = course, course.isPaid {
-                    self.provider.checkPromoCode(name: promoCodeName).done { promoCode in
-                        self.currentPromoCode = promoCode
-                        DispatchQueue.main.async {
-                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
-                        }
-                    }.cauterize()
+                DispatchQueue.main.async {
+                    self.fetchAndPresentPromoCodeIfNeeded()
                 }
 
                 if !self.didLoadFromCache {
@@ -377,6 +386,34 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 }
             }
         }
+    }
+
+    private func fetchAndPresentPromoCodeIfNeeded() {
+        guard self.currentPromoCode == nil,
+              let course = self.currentCourse, course.isPaid else {
+            return
+        }
+
+        firstly { () -> Promise<PromoCode?> in
+            if let promoCodeName = self.promoCodeName {
+                // swiftlint:disable:next array_init
+                return self.provider.checkPromoCode(name: promoCodeName).map { $0 }
+            } else if let defaultPromoCode = course.defaultPromoCode {
+                if let expireDate = defaultPromoCode.expireDate {
+                    return expireDate > Date() ? .value(defaultPromoCode) : .value(nil)
+                } else {
+                    return .value(defaultPromoCode)
+                }
+            } else {
+                return .value(nil)
+            }
+        }
+        .compactMap { $0 }
+        .done { promoCode in
+            self.currentPromoCode = promoCode
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+        }
+        .cauterize()
     }
 
     private func pushCurrentCourseToSubmodules(submodules: [CourseInfoSubmoduleProtocol]) {
@@ -426,6 +463,25 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     enum Error: Swift.Error {
         case cachedFetchFailed
         case networkFetchFailed
+    }
+}
+
+// MARK: - CourseInfoInteractor: CourseInfoInputProtocol -
+extension CourseInfoInteractor: CourseInfoInputProtocol {}
+
+// MARK: - CourseInfoInteractor: LessonOutputProtocol -
+
+extension CourseInfoInteractor: LessonOutputProtocol {
+    func handleLessonDidRequestBuyCourse() {
+        self.presenter.presentLessonModuleBuyCourseAction(response: .init())
+    }
+
+    func handleLessonDidRequestLeaveReview() {
+        self.presenter.presentLessonModuleWriteReviewAction(response: .init())
+    }
+
+    func handleLessonDidRequestPresentCatalog() {
+        self.presenter.presentLessonModuleCatalogAction(response: .init())
     }
 }
 

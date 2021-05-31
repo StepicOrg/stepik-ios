@@ -71,6 +71,78 @@ enum LessonDataFlow {
         }
     }
 
+    /// Present alert with about unit navigation error requirement not satisfied
+    enum UnitNavigationRequirementNotSatisfiedPresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let requiredSection: Section
+            let unitNavigationDirection: UnitNavigationDirection
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present alert with common unit navigation error description
+    enum UnitNavigationUnreachablePresentation {
+        struct Response {
+            let targetSection: Section
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present exam alert
+    enum UnitNavigationExamPresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let unitNavigationDirection: UnitNavigationDirection
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present alert with about unit navigation error closed by begin or end date
+    enum UnitNavigationClosedByDatePresentation {
+        struct Response {
+            let currentSection: Section
+            let targetSection: Section
+            let dateSource: DateSource
+            let unitNavigationDirection: UnitNavigationDirection
+
+            enum DateSource {
+                case beginDate
+                case endDate
+            }
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
+    /// Present modal with finished demo access info
+    enum UnitNavigationFinishedDemoAccessPresentation {
+        struct Response {
+            let section: Section
+        }
+
+        struct ViewModel {
+            let sectionID: Section.IdType
+        }
+    }
+
     /// Present new lesson module
     enum LessonModulePresentation {
         struct Response {
@@ -182,6 +254,29 @@ enum LessonDataFlow {
         struct ViewModel {
             let index: Int
             let text: String
+        }
+    }
+
+    /// Do buy course action
+    enum BuyCourseAction {
+        struct Request {}
+    }
+
+    enum LeaveReviewPresentation {
+        struct Request {}
+    }
+
+    enum CatalogPresentation {
+        struct Request {}
+    }
+
+    enum LessonFinishedStepsPresentation {
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
         }
     }
 

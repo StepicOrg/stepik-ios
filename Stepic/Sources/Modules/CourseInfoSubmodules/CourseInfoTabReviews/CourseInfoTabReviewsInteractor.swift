@@ -276,6 +276,10 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
             self.shouldOpenedAnalyticsEventSend = false
         }
     }
+
+    func presentWriteCourseReview() {
+        self.doWriteCourseReviewPresentation(request: .init())
+    }
 }
 
 // MARK: - CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol -
