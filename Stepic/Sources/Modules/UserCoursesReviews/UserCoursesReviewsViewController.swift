@@ -6,6 +6,10 @@ protocol UserCoursesReviewsViewControllerProtocol: AnyObject {
 
 protocol UserCoursesReviewsViewControllerDelegate: AnyObject {
     func cellDidSelect(_ cell: UserCoursesReviewsItemViewModel)
+    func coverDidClick(_ cell: UserCoursesReviewsItemViewModel)
+    func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel)
+    func scoreDidChange(_ score: Int, cell: UserCoursesReviewsItemViewModel)
+    func sharePossibleReviewButtonDidClick(_ cell: UserCoursesReviewsItemViewModel)
 }
 
 extension UserCoursesReviewsViewController {
@@ -116,5 +120,22 @@ extension UserCoursesReviewsViewController: UserCoursesReviewsViewDelegate {
 
 extension UserCoursesReviewsViewController: UserCoursesReviewsViewControllerDelegate {
     func cellDidSelect(_ cell: UserCoursesReviewsItemViewModel) {
+        print(#function)
+    }
+
+    func coverDidClick(_ cell: UserCoursesReviewsItemViewModel) {
+        print(#function)
+    }
+
+    func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel) {
+        print(#function)
+    }
+
+    func scoreDidChange(_ score: Int, cell: UserCoursesReviewsItemViewModel) {
+        print(#function)
+    }
+
+    func sharePossibleReviewButtonDidClick(_ cell: UserCoursesReviewsItemViewModel) {
+        print(#function)
     }
 }

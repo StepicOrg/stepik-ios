@@ -58,9 +58,6 @@ final class UserCoursesReviewsLeavedReviewTableViewCell: UITableViewCell, Reusab
         self.contentView.addSubview(self.cellView)
         self.contentView.addSubview(self.separatorView)
 
-        self.clipsToBounds = true
-        self.contentView.clipsToBounds = true
-
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
         self.cellView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()

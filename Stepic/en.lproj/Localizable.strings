@@ -507,6 +507,7 @@ UserCoursesTabArchivedTitle = "Archive";
 /* User Courses Reviews */
 UserCoursesReviewsTitle = "Reviews";
 UserCoursesReviewsPlaceholderEmptyTitle = "No Reviews";
+UserCoursesReviewsShareResult = "Share your result";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning so far. Come back and get even smarter! 🚀";

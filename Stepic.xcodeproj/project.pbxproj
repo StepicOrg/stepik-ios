@@ -918,6 +918,7 @@
 		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		2CC38AB025750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC38AAF25750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift */; };
+		2CC4FD5C2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */; };
 		2CC5AA6C242A34C500C09F94 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */; };
 		2CC5AA70242A34FA00C09F94 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6D242A34F900C09F94 /* AdaptiveRatingManager.swift */; };
 		2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6E242A34F900C09F94 /* AdaptiveStatsManager.swift */; };
@@ -2705,6 +2706,7 @@
 		2CC351991F68339A004255B6 /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CC38AAF25750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListWidgetRatingView.swift; sourceTree = "<group>"; };
+		2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsPossibleReviewCellView.swift; sourceTree = "<group>"; };
 		2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsAPI.swift; sourceTree = "<group>"; };
 		2CC5AA6D242A34F900C09F94 /* AdaptiveRatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingManager.swift; sourceTree = "<group>"; };
 		2CC5AA6E242A34F900C09F94 /* AdaptiveStatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsManager.swift; sourceTree = "<group>"; };
@@ -6107,6 +6109,7 @@
 		2CEE66B1266117470079F03B /* Possible */ = {
 			isa = PBXGroup;
 			children = (
+				2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */,
 				2CEE66AC266116AC0079F03B /* UserCoursesReviewsPossibleReviewTableViewCell.swift */,
 			);
 			path = Possible;
@@ -9779,6 +9782,7 @@
 				2CA93091253C86D0007B717A /* VideoURLPlainObject.swift in Sources */,
 				08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
+				2CC4FD5C2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				2CDA1B5E2613C06E00E36BF7 /* ProctorSessionPlainObject.swift in Sources */,
 				2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */,

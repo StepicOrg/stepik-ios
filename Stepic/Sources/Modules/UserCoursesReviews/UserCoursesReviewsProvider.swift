@@ -85,10 +85,22 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     }
 
     func fetchPossibleCoursesFromCache() -> Promise<[Course]> {
-        self.coursesPersistenceService
-            .fetchEnrolled()
-            .filterValues(\.canWriteReview)
-            .map { Array($0) }
+        Promise { seal in
+            self.coursesPersistenceService.fetchEnrolled().done { courses in
+                let filteredCourses = courses.filter(\.canWriteReview)
+
+                var uniqueCourses = [Course]()
+                for course in filteredCourses {
+                    if !uniqueCourses.contains(where: { $0.id == course.id }) {
+                        uniqueCourses.append(course)
+                    }
+                }
+
+                let result = uniqueCourses.reordered(order: courses.map(\.id), transform: { $0.id })
+
+                seal.fulfill(result)
+            }
+        }
     }
 
     func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void> {
