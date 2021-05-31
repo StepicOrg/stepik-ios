@@ -1,21 +1,33 @@
+import SVProgressHUD
 import UIKit
 
 protocol UserCoursesReviewsViewControllerProtocol: AnyObject {
     func displayReviews(viewModel: UserCoursesReviews.ReviewsLoad.ViewModel)
     func displayCourseInfo(viewModel: UserCoursesReviews.CourseInfoPresentation.ViewModel)
+    func displayWritePossibleCourseReview(viewModel: UserCoursesReviews.WritePossibleCourseReviewPresentation.ViewModel)
+    func displayEditLeavedCourseReview(viewModel: UserCoursesReviews.EditLeavedCourseReviewPresentation.ViewModel)
+    func displayLeavedCourseReviewActionSheet(
+        viewModel: UserCoursesReviews.LeavedCourseReviewActionSheetPresentation.ViewModel
+    )
+
+    func displayBlockingLoadingIndicator(viewModel: UserCoursesReviews.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayBlockingLoadingIndicatorWithStatus(
+        viewModel: UserCoursesReviews.BlockingWaitingIndicatorStatusUpdate.ViewModel
+    )
 }
 
 protocol UserCoursesReviewsViewControllerDelegate: AnyObject {
-    func cellDidSelect(_ cell: UserCoursesReviewsItemViewModel)
+    func cellDidSelect(_ cell: UserCoursesReviewsItemViewModel, anchorView: UIView?)
     func coverDidClick(_ cell: UserCoursesReviewsItemViewModel)
-    func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel)
-    func scoreDidChange(_ score: Int, cell: UserCoursesReviewsItemViewModel)
+    func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel, anchorView: UIView)
+    func possibleReviewScoreDidChange(_ score: Int, cell: UserCoursesReviewsItemViewModel)
     func sharePossibleReviewButtonDidClick(_ cell: UserCoursesReviewsItemViewModel)
 }
 
 extension UserCoursesReviewsViewController {
     enum Animation {
         static let startRefreshDelay: TimeInterval = 1.0
+        static let possibleReviewScoreUpdateDelay: TimeInterval = 0.33
     }
 }
 
@@ -28,6 +40,8 @@ final class UserCoursesReviewsViewController: UIViewController, ControllerWithSt
     var userCoursesReviewsView: UserCoursesReviewsView? { self.view as? UserCoursesReviewsView }
 
     private var state: UserCoursesReviews.ViewControllerState
+
+    private weak var currentAnchorView: UIView?
 
     init(
         interactor: UserCoursesReviewsInteractorProtocol,
@@ -118,6 +132,91 @@ extension UserCoursesReviewsViewController: UserCoursesReviewsViewControllerProt
         )
         self.push(module: assembly.makeModule())
     }
+
+    func displayWritePossibleCourseReview(
+        viewModel: UserCoursesReviews.WritePossibleCourseReviewPresentation.ViewModel
+    ) {
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = WriteCourseReviewAssembly(
+            courseID: viewModel.courseReviewPlainObject.courseID,
+            presentationContext: .create(viewModel.courseReviewPlainObject),
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
+            output: self.interactor as? WriteCourseReviewOutputProtocol
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, modalPresentationStyle: modalPresentationStyle)
+    }
+
+    func displayEditLeavedCourseReview(viewModel: UserCoursesReviews.EditLeavedCourseReviewPresentation.ViewModel) {
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = WriteCourseReviewAssembly(
+            courseID: viewModel.courseReview.courseID,
+            presentationContext: .update(viewModel.courseReview),
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
+            output: self.interactor as? WriteCourseReviewOutputProtocol
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, modalPresentationStyle: modalPresentationStyle)
+    }
+
+    func displayLeavedCourseReviewActionSheet(
+        viewModel: UserCoursesReviews.LeavedCourseReviewActionSheetPresentation.ViewModel
+    ) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("WriteCourseReviewActionEdit", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doEditLeavedCourseReviewPresentation(
+                        request: .init(viewModelUniqueIdentifier: viewModel.viewModelUniqueIdentifier)
+                    )
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("WriteCourseReviewActionDelete", comment: ""),
+                style: .destructive,
+                handler: { [weak self] _ in
+                    self?.interactor.doDeleteLeavedCourseReview(
+                        request: .init(viewModelUniqueIdentifier: viewModel.viewModelUniqueIdentifier)
+                    )
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            let sourceView: UIView = self.currentAnchorView ?? self.view
+            popoverPresentationController.sourceView = sourceView
+            popoverPresentationController.sourceRect = sourceView.bounds
+        }
+
+        self.present(alert, animated: true)
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: UserCoursesReviews.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
+    }
+
+    func displayBlockingLoadingIndicatorWithStatus(
+        viewModel: UserCoursesReviews.BlockingWaitingIndicatorStatusUpdate.ViewModel
+    ) {
+        if viewModel.success {
+            SVProgressHUD.showSuccess(withStatus: nil)
+        } else {
+            SVProgressHUD.showError(withStatus: nil)
+        }
+    }
 }
 
 extension UserCoursesReviewsViewController: UserCoursesReviewsViewDelegate {
@@ -129,23 +228,37 @@ extension UserCoursesReviewsViewController: UserCoursesReviewsViewDelegate {
 }
 
 extension UserCoursesReviewsViewController: UserCoursesReviewsViewControllerDelegate {
-    func cellDidSelect(_ cell: UserCoursesReviewsItemViewModel) {
-        print(#function)
+    func cellDidSelect(_ cell: UserCoursesReviewsItemViewModel, anchorView: UIView?) {
+        self.currentAnchorView = anchorView
+        self.interactor.doMainReviewAction(request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier))
     }
 
     func coverDidClick(_ cell: UserCoursesReviewsItemViewModel) {
         self.interactor.doCourseInfoPresentation(request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier))
     }
 
-    func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel) {
-        print(#function)
+    func moreButtonDidClick(_ cell: UserCoursesReviewsItemViewModel, anchorView: UIView) {
+        self.currentAnchorView = anchorView
+        self.interactor.doLeavedCourseReviewActionSheetPresentation(
+            request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier)
+        )
     }
 
-    func scoreDidChange(_ score: Int, cell: UserCoursesReviewsItemViewModel) {
-        print(#function)
+    func possibleReviewScoreDidChange(_ score: Int, cell: UserCoursesReviewsItemViewModel) {
+        self.interactor.doPossibleCourseReviewScoreUpdate(
+            request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier, score: score)
+        )
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.possibleReviewScoreUpdateDelay) { [weak self] in
+            self?.interactor.doWritePossibleCourseReviewPresentation(
+                request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier)
+            )
+        }
     }
 
     func sharePossibleReviewButtonDidClick(_ cell: UserCoursesReviewsItemViewModel) {
-        print(#function)
+        self.interactor.doWritePossibleCourseReviewPresentation(
+            request: .init(viewModelUniqueIdentifier: cell.uniqueIdentifier)
+        )
     }
 }

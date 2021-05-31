@@ -3,14 +3,20 @@ import UIKit
 protocol UserCoursesReviewsPresenterProtocol {
     func presentReviews(response: UserCoursesReviews.ReviewsLoad.Response)
     func presentCourseInfo(response: UserCoursesReviews.CourseInfoPresentation.Response)
+    func presentWritePossibleCourseReview(response: UserCoursesReviews.WritePossibleCourseReviewPresentation.Response)
+    func presentEditLeavedCourseReview(response: UserCoursesReviews.EditLeavedCourseReviewPresentation.Response)
+    func presentLeavedCourseReviewActionSheet(
+        response: UserCoursesReviews.LeavedCourseReviewActionSheetPresentation.Response
+    )
+
+    func presentWaitingState(response: UserCoursesReviews.BlockingWaitingIndicatorUpdate.Response)
+    func presentWaitingStatus(response: UserCoursesReviews.BlockingWaitingIndicatorStatusUpdate.Response)
 }
 
 final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
     weak var viewController: UserCoursesReviewsViewControllerProtocol?
 
     func presentReviews(response: UserCoursesReviews.ReviewsLoad.Response) {
-        print("UserCoursesReviewsPresenter :: response = \(response)")
-
         guard let viewController = self.viewController else {
             return
         }
@@ -46,6 +52,32 @@ final class UserCoursesReviewsPresenter: UserCoursesReviewsPresenterProtocol {
 
     func presentCourseInfo(response: UserCoursesReviews.CourseInfoPresentation.Response) {
         self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.courseID))
+    }
+
+    func presentWritePossibleCourseReview(response: UserCoursesReviews.WritePossibleCourseReviewPresentation.Response) {
+        self.viewController?.displayWritePossibleCourseReview(
+            viewModel: .init(courseReviewPlainObject: response.courseReviewPlainObject)
+        )
+    }
+
+    func presentLeavedCourseReviewActionSheet(
+        response: UserCoursesReviews.LeavedCourseReviewActionSheetPresentation.Response
+    ) {
+        self.viewController?.displayLeavedCourseReviewActionSheet(
+            viewModel: .init(viewModelUniqueIdentifier: response.viewModelUniqueIdentifier)
+        )
+    }
+
+    func presentEditLeavedCourseReview(response: UserCoursesReviews.EditLeavedCourseReviewPresentation.Response) {
+        self.viewController?.displayEditLeavedCourseReview(viewModel: .init(courseReview: response.courseReview))
+    }
+
+    func presentWaitingState(response: UserCoursesReviews.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentWaitingStatus(response: UserCoursesReviews.BlockingWaitingIndicatorStatusUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicatorWithStatus(viewModel: .init(success: response.success))
     }
 
     // MARK: Private API

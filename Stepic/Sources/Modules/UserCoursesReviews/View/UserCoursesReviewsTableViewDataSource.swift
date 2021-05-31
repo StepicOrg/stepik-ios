@@ -63,7 +63,7 @@ final class UserCoursesReviewsTableViewDataSource: NSObject, UITableViewDelegate
                     self?.delegate?.coverDidClick(viewModel)
                 }
                 cell.onScoreDidChange = { [weak self] score in
-                    self?.delegate?.scoreDidChange(score, cell: viewModel)
+                    self?.handlePossibleReviewScoreChanged(score, at: indexPath)
                 }
                 cell.onActionButtonClick = { [weak self] in
                     self?.delegate?.sharePossibleReviewButtonDidClick(viewModel)
@@ -86,8 +86,13 @@ final class UserCoursesReviewsTableViewDataSource: NSObject, UITableViewDelegate
                 cell.onCoverClick = { [weak self] in
                     self?.delegate?.coverDidClick(viewModel)
                 }
-                cell.onMoreClick = { [weak self] in
-                    self?.delegate?.moreButtonDidClick(viewModel)
+                cell.onMoreClick = { [weak self, weak cell] in
+                    guard let strongSelf = self,
+                          let strongCell = cell else {
+                        return
+                    }
+
+                    strongSelf.delegate?.moreButtonDidClick(viewModel, anchorView: strongCell.moreActionAnchorView)
                 }
             }
 
@@ -128,11 +133,11 @@ final class UserCoursesReviewsTableViewDataSource: NSObject, UITableViewDelegate
         switch sectionType {
         case .possible:
             if let viewModel = self.possibleCourseReviewViewModels[safe: indexPath.row] {
-                self.delegate?.cellDidSelect(viewModel)
+                self.delegate?.cellDidSelect(viewModel, anchorView: nil)
             }
         case .leaved:
             if let viewModel = self.leavedCourseReviewViewModels[safe: indexPath.row] {
-                self.delegate?.cellDidSelect(viewModel)
+                self.delegate?.cellDidSelect(viewModel, anchorView: tableView.cellForRow(at: indexPath))
             }
         }
     }
@@ -152,6 +157,25 @@ final class UserCoursesReviewsTableViewDataSource: NSObject, UITableViewDelegate
         default:
             return nil
         }
+    }
+
+    private func handlePossibleReviewScoreChanged(_ score: Int, at indexPath: IndexPath) {
+        guard let oldViewModel = self.possibleCourseReviewViewModels[safe: indexPath.row] else {
+            return
+        }
+
+        let newViewModel = UserCoursesReviewsItemViewModel(
+            uniqueIdentifier: oldViewModel.uniqueIdentifier,
+            title: oldViewModel.title,
+            text: oldViewModel.text,
+            dateRepresentation: oldViewModel.dateRepresentation,
+            score: score,
+            coverImageURL: oldViewModel.coverImageURL,
+            shouldShowAdaptiveMark: oldViewModel.shouldShowAdaptiveMark
+        )
+        self.possibleCourseReviewViewModels[indexPath.row] = newViewModel
+
+        self.delegate?.possibleReviewScoreDidChange(score, cell: newViewModel)
     }
 
     private enum SectionType {
