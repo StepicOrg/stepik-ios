@@ -511,6 +511,7 @@ UserCoursesTabArchivedTitle = "Архив";
 
 /* User Courses Reviews */
 UserCoursesReviewsTitle = "Отзывы";
+UserCoursesReviewsBlockTitle = "Мои отзывы";
 UserCoursesReviewsPlaceholderEmptyTitle = "Нет отзывов";
 UserCoursesReviewsShareResult = "Поделиться результатом";
 UserCoursesReviewsPossibleReviews1 = "новый курс для отзыва";

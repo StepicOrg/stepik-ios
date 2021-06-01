@@ -509,6 +509,7 @@ UserCoursesTabArchivedTitle = "Archive";
 
 /* User Courses Reviews */
 UserCoursesReviewsTitle = "Reviews";
+UserCoursesReviewsBlockTitle = "My Reviews";
 UserCoursesReviewsPlaceholderEmptyTitle = "No Reviews";
 UserCoursesReviewsShareResult = "Share your result";
 UserCoursesReviewsPossibleReviews1 = "new course for review";
