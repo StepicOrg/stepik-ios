@@ -34,9 +34,7 @@ final class UserCoursesReviewsBlockViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.updateState(newState: self.state)
-        self.interactor.doReviewsLoad(request: .init())
     }
 
     private func updateState(newState: UserCoursesReviewsBlock.ViewControllerState) {

@@ -10,21 +10,6 @@ protocol UserCoursesReviewsProviderProtocol {
     func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void>
 }
 
-extension UserCoursesReviewsProviderProtocol {
-    func fetchLeavedCourseReviewsFromRemoteOrCache() -> Promise<[CourseReview]> {
-        Guarantee(
-            self.fetchLeavedCourseReviewsFromRemote(),
-            fallback: nil
-        ).then { remoteCourseReviewsOrNil -> Promise<[CourseReview]> in
-            if let remoteCourseReviews = remoteCourseReviewsOrNil.flatMap({ $0 }) {
-                return .value(remoteCourseReviews)
-            } else {
-                return self.fetchLeavedCourseReviewsFromCache()
-            }
-        }
-    }
-}
-
 final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     private let userAccountService: UserAccountServiceProtocol
 

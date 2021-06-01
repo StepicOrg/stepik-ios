@@ -32,9 +32,7 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.setup()
-        self.refreshSubmodules()
     }
 
     // MARK: Public API

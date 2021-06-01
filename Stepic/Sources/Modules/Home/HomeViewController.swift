@@ -26,6 +26,7 @@ final class HomeViewController: BaseExploreViewController {
     private var lastIsAuthorizedFlag = false
 
     private var currentEnrolledCourseListState: EnrolledCourseListState?
+    private var currentReviewsAndWishlistState: ReviewsAndWishlistState?
 
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
@@ -60,6 +61,9 @@ final class HomeViewController: BaseExploreViewController {
 
             if strongSelf.currentEnrolledCourseListState == .empty {
                 strongSelf.refreshStateForEnrolledCourses(state: .normal)
+            }
+            if strongSelf.currentReviewsAndWishlistState == .shown {
+                strongSelf.refreshReviewsAndWishlist(state: .shown)
             }
 
             strongSelf.refreshStateForVisitedCourses(state: .shown)
@@ -305,6 +309,8 @@ final class HomeViewController: BaseExploreViewController {
                 self.removeSubmodule(submodule)
             }
         }
+
+        self.currentReviewsAndWishlistState = state
     }
 
     // MARK: - Visited courses submodule
