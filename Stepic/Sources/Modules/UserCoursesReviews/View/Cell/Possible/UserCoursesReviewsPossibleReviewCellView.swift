@@ -57,7 +57,7 @@ final class UserCoursesReviewsPossibleReviewCellView: UIView {
         let button = UIButton(type: .system)
         button.titleLabel?.font = self.appearance.actionButtonFont
         button.setTitleColor(self.appearance.actionButtonTintColor, for: .normal)
-        button.setTitle(NSLocalizedString("UserCoursesReviewsShareResult", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("UserCoursesReviewsLeaveReview", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         return button
     }()
