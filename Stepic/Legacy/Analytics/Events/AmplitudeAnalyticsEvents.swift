@@ -519,6 +519,7 @@ extension AnalyticsEvent {
         case widgetExtension(url: String)
         case notification
         case profile(id: Int)
+        case userCoursesReviews
         case unknown
 
         var name: String {
@@ -551,6 +552,8 @@ extension AnalyticsEvent {
                 return "notification"
             case .profile:
                 return "profile"
+            case .userCoursesReviews:
+                return "user_courses_reviews"
             case .unknown:
                 return "unknown"
             }
@@ -558,7 +561,14 @@ extension AnalyticsEvent {
 
         var params: [String: Any]? {
             switch self {
-            case .myCourses, .visitedCourses, .downloads, .fastContinue, .notification, .unknown, .recommendation:
+            case .myCourses,
+                 .visitedCourses,
+                 .downloads,
+                 .fastContinue,
+                 .notification,
+                 .recommendation,
+                 .userCoursesReviews,
+                 .unknown:
                 return nil
             case .search(let query):
                 return ["query": query]
