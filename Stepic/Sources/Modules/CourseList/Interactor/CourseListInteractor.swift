@@ -208,6 +208,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                     courseId: targetCourse.id
                 ),
+                source: .courseWidget,
                 viewSource: self.courseViewSource
             )
         } else {
@@ -225,14 +226,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
 
-                self.analytics.send(.courseContinuePressed(source: .courseWidget, id: course.id, title: course.title))
-
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: targetCourse.id
                     ),
+                    source: .courseWidget,
                     viewSource: self.courseViewSource
                 )
             }.catch { _ in

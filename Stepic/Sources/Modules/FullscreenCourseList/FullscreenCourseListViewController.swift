@@ -360,7 +360,8 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             for: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
-            courseViewSource: viewModel.courseViewSource
+            source: viewModel.courseContinueSource,
+            viewSource: viewModel.courseViewSource
         )
     }
 
