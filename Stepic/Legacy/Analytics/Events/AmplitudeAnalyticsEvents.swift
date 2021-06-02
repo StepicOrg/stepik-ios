@@ -846,4 +846,38 @@ extension AnalyticsEvent {
             parameters: ["size": size]
         )
     }
+
+    // MARK: - UserCourse -
+
+    static func userCourseActionMade(
+        _ action: CourseInfo.UserCourseAction,
+        course: Course,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course action",
+            parameters: [
+                "action": action.analyticName,
+                "course": course.id,
+                "title": course.title,
+                "is_paid": course.isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+}
+
+fileprivate extension CourseInfo.UserCourseAction {
+    var analyticName: String {
+        switch self {
+        case .favoriteAdd:
+            return "favorite_add"
+        case .favoriteRemove:
+            return "favorite_remove"
+        case .archiveAdd:
+            return "archive_add"
+        case .archiveRemove:
+            return "archive_remove"
+        }
+    }
 }
