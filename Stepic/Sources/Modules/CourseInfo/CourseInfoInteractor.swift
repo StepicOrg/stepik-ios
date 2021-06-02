@@ -250,7 +250,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     course: course,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: course.id
-                    )
+                    ),
+                    courseViewSource: self.courseViewSource
                 )
             )
         } else {
@@ -286,7 +287,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         course: course,
                         isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                             courseId: course.id
-                        )
+                        ),
+                        courseViewSource: self.courseViewSource
                     )
                 )
             }.ensure {

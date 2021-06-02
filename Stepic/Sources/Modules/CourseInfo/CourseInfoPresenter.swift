@@ -78,7 +78,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayLastStep(
             viewModel: .init(
                 course: response.course,
-                isAdaptive: response.isAdaptive
+                isAdaptive: response.isAdaptive,
+                courseViewSource: response.courseViewSource
             )
         )
     }

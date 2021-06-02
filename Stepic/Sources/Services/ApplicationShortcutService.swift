@@ -114,7 +114,8 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
                 for: lastCourse,
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: lastCourse.id),
                 using: currentNavigationController,
-                courseViewSource: .unknown
+                source: .applicationShortcut,
+                viewSource: .unknown
             )
         }.catch { error in
             print("ApplicationShortcutService :: failed perform continue learning with error = \(error)")

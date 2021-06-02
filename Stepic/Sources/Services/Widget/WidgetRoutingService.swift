@@ -53,10 +53,6 @@ final class WidgetRoutingService: WidgetRoutingServiceProtocol {
         switch deeplinkRoute {
         case .course(let courseID):
             self.coursesPersistenceService.fetch(id: courseID).done { course in
-                self.analytics.send(
-                    .courseContinuePressed(source: .homeScreenWidget, id: courseID, title: course?.title ?? "")
-                )
-
                 guard let course = course,
                       let currentNavigationController = self.sourcelessRouter.currentNavigation else {
                     return
@@ -66,10 +62,18 @@ final class WidgetRoutingService: WidgetRoutingServiceProtocol {
                     for: course,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: courseID),
                     using: currentNavigationController,
-                    courseViewSource: courseViewSource
+                    source: .homeScreenWidget,
+                    viewSource: courseViewSource
                 )
             }.catch { _ in
-                self.analytics.send(.courseContinuePressed(source: .homeScreenWidget, id: courseID, title: ""))
+                self.analytics.send(
+                    .courseContinuePressed(
+                        id: courseID,
+                        title: "",
+                        source: .homeScreenWidget,
+                        viewSource: courseViewSource
+                    )
+                )
             }
         default:
             self.analytics.send(.homeScreenWidgetClicked)

@@ -116,6 +116,7 @@ enum CourseInfo {
         struct Response {
             let course: Course
             let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
@@ -123,6 +124,7 @@ enum CourseInfo {
             let course: Course
             @available(*, deprecated, message: "Target modules can't be initialized w/o model")
             let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
     }
 

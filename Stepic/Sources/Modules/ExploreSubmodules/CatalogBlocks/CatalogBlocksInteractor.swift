@@ -71,8 +71,18 @@ extension CatalogBlocksInteractor: CourseListOutputProtocol {
         self.moduleOutput?.presentCourseSyllabus(course: course, viewSource: viewSource)
     }
 
-    func presentLastStep(course: Course, isAdaptive: Bool, viewSource: AnalyticsEvent.CourseViewSource) {
-        self.moduleOutput?.presentLastStep(course: course, isAdaptive: isAdaptive, viewSource: viewSource)
+    func presentLastStep(
+        course: Course,
+        isAdaptive: Bool,
+        source: AnalyticsEvent.CourseContinueSource,
+        viewSource: AnalyticsEvent.CourseViewSource
+    ) {
+        self.moduleOutput?.presentLastStep(
+            course: course,
+            isAdaptive: isAdaptive,
+            source: source,
+            viewSource: viewSource
+        )
     }
 
     func presentAuthorization() {

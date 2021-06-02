@@ -99,13 +99,19 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseContinuePressed(source: CourseContinueSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
+    static func courseContinuePressed(
+        id: Int,
+        title: String,
+        source: CourseContinueSource,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Continue course pressed",
             parameters: [
-                "source": source.rawValue,
                 "course": id,
-                "title": title
+                "title": title,
+                "source": source.rawValue,
+                "view_source": viewSource.name
             ]
         )
     }
@@ -115,6 +121,7 @@ extension AnalyticsEvent {
         case homeWidget = "home_widget"
         case courseScreen = "course_screen"
         case homeScreenWidget = "ios_home_screen_widget"
+        case applicationShortcut = "ios_application_shortcut"
     }
 
     static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {

@@ -33,6 +33,7 @@ final class NewProfileCreatedCoursesPresenter: NewProfileCreatedCoursesPresenter
             viewModel: .init(
                 course: response.course,
                 isAdaptive: response.isAdaptive,
+                courseContinueSource: response.courseContinueSource,
                 courseViewSource: response.courseViewSource
             )
         )
