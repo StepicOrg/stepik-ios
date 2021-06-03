@@ -87,16 +87,71 @@ class LoginUITests: XCTestCase {
             app.webViews.webViews.webViews.staticTexts["Сменить аккаунт"].tap()
         }
         app.tap()
-        app.webViews.webViews.webViews.textFields["Телефон или адрес эл. почты"].tap()
-        app.webViews.webViews.webViews.textFields["Телефон или адрес эл. почты"].typeText("stepik.qa4@gmail.com")
+        app.webViews.webViews.webViews.textFields.element(boundBy: 0).waitForExistence(timeout: 5)
+        app.webViews.webViews.webViews.textFields.element(boundBy: 0).tap()
+        app.webViews.webViews.webViews.textFields.element(boundBy: 0).typeText("stepik.qa4@gmail.com")
         app.tap()
-        app.webViews.webViews.webViews.buttons["Далее"].tap()
-        app.webViews.webViews.webViews.secureTextFields["Введите пароль"].tap()
-        app.webViews.webViews.webViews.secureTextFields["Введите пароль"].typeText("Qq1234567890Qq")
+        app.webViews.webViews.webViews.buttons.element(boundBy: 2).tap()
+        sleep(3)
+        app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0).tap()
+        app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0).typeText("Qq0987654321Qq")
         app.tap()
-        app.webViews.webViews.webViews.buttons["Далее"].tap()
+        app.webViews.webViews.webViews.buttons.element(boundBy: 0).tap()
+        sleep(5)
         if !Common.isUserLoggedIn(app: app) {
             XCTFail("Login with google account failed")
+        }
+    }
+
+    func testUserCanLogInWithFacebook() throws {
+        let app = XCUIApplication()
+
+        // Adding Notification alert interruption
+        self.addUIInterruptionMonitor(withDescription: "“Stepik” Wants to Use “facebook.com” to Sign In") { alert in
+            let alertButton = alert.buttons["Continue"]
+            if alertButton.exists {
+                alertButton.tap()
+                return true
+            }
+            return false
+        }
+        app.launch()
+        if Common.isUserLoggedIn(app: app) {
+            Common.logOut(app: app)
+        }
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["Profile"].tap()
+        app.buttons["Sign In"].staticTexts["Sign In"].tap()
+        app.buttons["More"].tap()
+        app.collectionViews.children(matching: .cell).element(boundBy: 3).tap()
+        sleep(5)
+        if app.collectionViews.children(matching: .cell).element(boundBy: 3).exists {
+            app.tap()
+        }
+
+        app.webViews.webViews.webViews.staticTexts["..."].waitForExistence(timeout: 5)
+        if app.webViews.webViews.webViews.staticTexts["..."].exists {
+            app.webViews.webViews.webViews.staticTexts["..."].tap()
+            app.webViews.webViews.webViews.otherElements["main"].children(matching: .other).element(boundBy: 3).staticTexts["English (US)"].tap()
+            app.webViews.webViews.webViews.staticTexts["Accept All"].tap()
+        }
+        app.webViews.webViews.webViews.staticTexts["Русский"].tap()
+        let textField = app.webViews.webViews.webViews.textFields.element(boundBy: 0)
+        textField.tap()
+        textField.typeText("ios_cmvthcs_autotest@tfbnw.net")
+        app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0).tap()
+        app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0).typeText("Test999Test")
+
+        app.webViews.webViews.webViews.buttons["Войти"].tap()
+        sleep(3)
+        if app.webViews.webViews.webViews.buttons["Продолжить"].exists {
+            app.webViews.webViews.webViews.buttons["Продолжить"].tap()
+        }
+
+        if !Common.isUserLoggedIn(app: app) {
+            XCTFail("Login with facebook account failed")
+        } else {
+            Common.logOut(app: app)
         }
     }
 
