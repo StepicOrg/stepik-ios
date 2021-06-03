@@ -71,6 +71,7 @@ final class CourseInfoAssembly: Assembly {
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
             visitedCourseListPersistenceService: visitedCourseListPersistenceService.require(),
+            wishlistService: WishlistService.default,
             urlFactory: StepikURLFactory(),
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,

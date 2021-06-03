@@ -18,6 +18,7 @@ protocol CourseInfoPresenterProtocol {
     func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
+    func presentWishlistMainActionResult(response: CourseInfo.CourseWishlistMainAction.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -34,6 +35,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         case .success(let data):
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
+                isInWithlist: data.isInWithlist,
+                isWishlistAvailable: data.isWishlistAvailable,
                 iapLocalizedPrice: data.iapLocalizedPrice,
                 promoCode: data.promoCode
             )
@@ -178,6 +181,29 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
+    func presentWishlistMainActionResult(response: CourseInfo.CourseWishlistMainAction.Response) {
+        let isSuccessful = response.isSuccessful
+
+        let message: String = {
+            switch response.action {
+            case .add:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoAddToWishlistSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoAddToWishlistFailureMessage", comment: "")
+            case .remove:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoRemoveFromWishlistSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoRemoveFromWishlistFailureMessage", comment: "")
+            }
+        }()
+
+        self.viewController?.displayWishlistMainActionResult(
+            viewModel: .init(isSuccessful: isSuccessful, message: message)
+        )
+    }
+
+    // MARK: Private API
+
     private func makeIAPErrorMessage(course: Course, error: Error) -> String {
         String(
             format: NSLocalizedString("IAPPurchaseFailedMessage", comment: ""),
@@ -216,6 +242,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeHeaderViewModel(
         course: Course,
+        isInWithlist: Bool,
+        isWishlistAvailable: Bool,
         iapLocalizedPrice: String?,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel {
@@ -248,6 +276,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
+            isInWithlist: isInWithlist,
+            isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             buttonDescription: self.makeButtonDescription(
                 course: course,

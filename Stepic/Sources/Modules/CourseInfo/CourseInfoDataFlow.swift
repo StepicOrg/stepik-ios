@@ -25,6 +25,11 @@ enum CourseInfo {
         case archiveRemove
     }
 
+    enum CourseWishlistAction {
+        case add
+        case remove
+    }
+
     // MARK: Use cases
 
     /// Load & show info about course
@@ -34,6 +39,8 @@ enum CourseInfo {
         struct Response {
             struct Data {
                 let course: Course
+                let isInWithlist: Bool
+                let isWishlistAvailable: Bool
                 let iapLocalizedPrice: String?
                 let promoCode: PromoCode?
             }
@@ -163,6 +170,21 @@ enum CourseInfo {
     enum UserCourseActionPresentation {
         struct Response {
             let userCourseAction: UserCourseAction
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+            let message: String
+        }
+    }
+
+    /// Add or remove course to/from withlist
+    enum CourseWishlistMainAction {
+        struct Request {}
+
+        struct Response {
+            let action: CourseWishlistAction
             let isSuccessful: Bool
         }
 
