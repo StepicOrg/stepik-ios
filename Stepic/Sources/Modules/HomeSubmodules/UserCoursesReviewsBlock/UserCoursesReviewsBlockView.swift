@@ -19,15 +19,15 @@ extension UserCoursesReviewsBlockView {
         let imageViewInsets = LayoutInsets(top: 16, left: 16)
 
         let titleTextColor = UIColor.stepikMaterialPrimaryText
-        let titleFont = Typography.headlineFont
+        let titleFont = UIFont.systemFont(ofSize: 16, weight: .medium)
         let titleInsets = LayoutInsets(top: 8, right: 16)
 
         let subtitleTextColor = UIColor.stepikMaterialSecondaryText
-        let subtitleFont = Typography.calloutFont
+        let subtitleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
         let subtitleInsets = LayoutInsets(top: 8)
 
         let accentSubtitleTextColor = UIColor.stepikGreenFixed
-        let accentSubtitleFont = Typography.calloutFont
+        let accentSubtitleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
         let accentSubtitleInsets = LayoutInsets(left: 4, right: 16)
 
         let accentIndicatorViewBackgroundColor = UIColor.stepikGreenFixed

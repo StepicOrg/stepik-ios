@@ -372,3 +372,26 @@ final class RecommendationsCourseListNetworkService: BaseCourseListNetworkServic
         }
     }
 }
+
+final class WishlistCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
+    let type: WishlistCourseListType
+
+    init(type: WishlistCourseListType, coursesAPI: CoursesAPI) {
+        self.type = type
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
+        let finalMeta = Meta.oneAndOnlyPage
+        return Promise { seal in
+            self.coursesAPI.retrieve(
+                ids: self.type.ids
+            ).done { courses in
+                let courses = courses.reordered(order: self.type.ids, transform: { $0.id })
+                seal.fulfill((courses, finalMeta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+}

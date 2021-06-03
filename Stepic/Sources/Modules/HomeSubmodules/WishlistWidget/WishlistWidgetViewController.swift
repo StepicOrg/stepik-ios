@@ -1,14 +1,24 @@
 import UIKit
 
 protocol WishlistWidgetViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: WishlistWidget.SomeAction.ViewModel)
+    func displayWishlist(viewModel: WishlistWidget.WishlistLoad.ViewModel)
+    func displayFullscreenCourseList(viewModel: WishlistWidget.FullscreenCourseListModulePresentation.ViewModel)
 }
 
 final class WishlistWidgetViewController: UIViewController {
     private let interactor: WishlistWidgetInteractorProtocol
 
-    init(interactor: WishlistWidgetInteractorProtocol) {
+    var wishlistWidgetView: WishlistWidgetView? { self.view as? WishlistWidgetView }
+
+    private var state: WishlistWidget.ViewControllerState
+
+    init(
+        interactor: WishlistWidgetInteractorProtocol,
+        initialState: WishlistWidget.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
+        self.state = initialState
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -20,9 +30,44 @@ final class WishlistWidgetViewController: UIViewController {
     override func loadView() {
         let view = WishlistWidgetView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.updateState(newState: self.state)
+    }
+
+    private func updateState(newState: WishlistWidget.ViewControllerState) {
+        switch newState {
+        case .loading:
+            self.wishlistWidgetView?.showLoading()
+        case .result(let viewModel):
+            self.wishlistWidgetView?.hideLoading()
+            self.wishlistWidgetView?.configure(viewModel: viewModel)
+        }
+
+        self.state = newState
     }
 }
 
 extension WishlistWidgetViewController: WishlistWidgetViewControllerProtocol {
-    func displaySomeActionResult(viewModel: WishlistWidget.SomeAction.ViewModel) {}
+    func displayWishlist(viewModel: WishlistWidget.WishlistLoad.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
+    func displayFullscreenCourseList(viewModel: WishlistWidget.FullscreenCourseListModulePresentation.ViewModel) {
+        let assembly = FullscreenCourseListAssembly(
+            presentationDescription: .init(title: NSLocalizedString("WishlistWidgetTitle", comment: "")),
+            courseListType: WishlistCourseListType(ids: viewModel.coursesIDs),
+            courseViewSource: .wishlist
+        )
+        self.push(module: assembly.makeModule())
+    }
+}
+
+extension WishlistWidgetViewController: WishlistWidgetViewDelegate {
+    func wishlistWidgetViewDidClick(_ view: WishlistWidgetView) {
+        self.interactor.doFullscreenCourseListPresentation(request: .init())
+    }
 }

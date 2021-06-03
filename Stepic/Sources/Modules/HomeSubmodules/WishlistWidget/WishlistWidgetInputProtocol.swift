@@ -1,3 +1,5 @@
 import Foundation
 
-protocol WishlistWidgetInputProtocol: AnyObject {}
+protocol WishlistWidgetInputProtocol: AnyObject {
+    func refreshWishlist()
+}

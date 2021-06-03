@@ -520,6 +520,7 @@ extension AnalyticsEvent {
         case notification
         case profile(id: Int)
         case userCoursesReviews
+        case wishlist
         case unknown
 
         var name: String {
@@ -554,6 +555,8 @@ extension AnalyticsEvent {
                 return "profile"
             case .userCoursesReviews:
                 return "user_courses_reviews"
+            case .wishlist:
+                return "wishlist"
             case .unknown:
                 return "unknown"
             }
@@ -568,6 +571,7 @@ extension AnalyticsEvent {
                  .notification,
                  .recommendation,
                  .userCoursesReviews,
+                 .wishlist,
                  .unknown:
                 return nil
             case .search(let query):
