@@ -108,7 +108,7 @@ final class CourseInfoViewController: UIViewController {
 
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
-        self.navigationItem.rightBarButtonItem = self.moreBarButton
+        self.navigationItem.rightBarButtonItems = [self.moreBarButton]
         self.styledNavigationController?.removeBackButtonTitleForTopController()
 
         self.automaticallyAdjustsScrollViewInsets = false
@@ -171,7 +171,7 @@ final class CourseInfoViewController: UIViewController {
                 let wishlistImageName = data.isInWithlist ? "wishlist-like-filled" : "wishlist-like"
                 self.wishlistBarButton.image = UIImage(named: wishlistImageName)?.withRenderingMode(.alwaysTemplate)
             } else {
-                self.navigationItem.rightBarButtonItem = self.moreBarButton
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton]
             }
 
             let isFirstLoadedResult = self.storedViewModel == nil

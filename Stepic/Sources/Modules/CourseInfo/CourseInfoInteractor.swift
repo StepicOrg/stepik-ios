@@ -311,6 +311,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 self.currentCourse = course
                 self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
 
+                // Remove course from wishlist
+                if self.wishlistService.isCourseInWishlist(course),
+                   let currentUserID = self.userAccountService.currentUserID {
+                    self.wishlistService.removeCourseFromWishlist(course, userID: currentUserID).cauterize()
+                }
+
                 // Present step
                 self.presenter.presentLastStep(
                     response: .init(
