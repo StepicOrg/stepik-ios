@@ -97,7 +97,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
 
                 strongSelf.currentCourses = courses.map { (strongSelf.getUniqueIdentifierForCourse($0), $0) }
-                strongSelf.currentWishlistCoursesIDs = Set(strongSelf.wishlistService.getCoursesWishlist())
+                strongSelf.currentWishlistCoursesIDs = Set(strongSelf.wishlistService.getWishlist())
 
                 // Cache new courses fetched from remote.
                 if strongSelf.didLoadFromCache && strongSelf.currentFilters.isEmpty {
@@ -282,7 +282,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // - have no more courses
             // then ignore request and pass empty list to presenter
             if !self.isOnline || !self.paginationState.hasNext {
-                self.currentWishlistCoursesIDs = Set(self.wishlistService.getCoursesWishlist())
+                self.currentWishlistCoursesIDs = Set(self.wishlistService.getWishlist())
                 let result = CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
                     availableAdaptiveCourses: Set<Course>(),
@@ -310,7 +310,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
                 let appendedCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
                 self.currentCourses.append(contentsOf: appendedCourses)
-                self.currentWishlistCoursesIDs = Set(self.wishlistService.getCoursesWishlist())
+                self.currentWishlistCoursesIDs = Set(self.wishlistService.getWishlist())
 
                 let courses = CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(

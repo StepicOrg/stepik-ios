@@ -39,7 +39,7 @@ enum CourseInfo {
         struct Response {
             struct Data {
                 let course: Course
-                let isInWithlist: Bool
+                let isWishlisted: Bool
                 let isWishlistAvailable: Bool
                 let iapLocalizedPrice: String?
                 let promoCode: PromoCode?

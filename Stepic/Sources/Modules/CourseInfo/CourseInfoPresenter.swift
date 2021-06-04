@@ -35,7 +35,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         case .success(let data):
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
-                isInWithlist: data.isInWithlist,
+                isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
                 iapLocalizedPrice: data.iapLocalizedPrice,
                 promoCode: data.promoCode
@@ -243,7 +243,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeHeaderViewModel(
         course: Course,
-        isInWithlist: Bool,
+        isWishlisted: Bool,
         isWishlistAvailable: Bool,
         iapLocalizedPrice: String?,
         promoCode: PromoCode?
@@ -277,7 +277,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
-            isInWithlist: isInWithlist,
+            isWishlisted: isWishlisted,
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             buttonDescription: self.makeButtonDescription(

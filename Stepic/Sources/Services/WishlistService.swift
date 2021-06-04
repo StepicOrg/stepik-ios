@@ -2,34 +2,26 @@ import Foundation
 import PromiseKit
 
 protocol WishlistServiceProtocol: AnyObject {
-    func canAddCourseToWishlist(_ course: Course) -> Bool
-    func isCourseInWishlist(_ courseID: Course.IdType) -> Bool
-    func getCoursesWishlist() -> [Course.IdType]
+    func canAdd(_ course: Course) -> Bool
+    func contains(_ courseID: Course.IdType) -> Bool
+    func getWishlist() -> [Course.IdType]
     func removeAll()
 
-    func syncWishlist(userID: User.IdType) -> Promise<Void>
-    func addCourseToWishlist(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void>
-    func removeCourseFromWishlist(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void>
+    func fetchWishlist(userID: User.IdType) -> Promise<Void>
+    func add(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void>
+    func remove(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void>
 }
 
 extension WishlistServiceProtocol {
-    func canAddCourseToWishlist(_ course: Course) -> Bool { !course.enrolled }
+    func canAdd(_ course: Course) -> Bool { !course.enrolled }
 
-    func isCourseInWishlist(_ courseID: Course.IdType) -> Bool {
-        self.getCoursesWishlist().contains(courseID)
-    }
+    func contains(_ courseID: Course.IdType) -> Bool { self.getWishlist().contains(courseID) }
 
-    func isCourseInWishlist(_ course: Course) -> Bool {
-        self.isCourseInWishlist(course.id)
-    }
+    func contains(_ course: Course) -> Bool { self.contains(course.id) }
 
-    func addCourseToWishlist(_ course: Course, userID: User.IdType) -> Promise<Void> {
-        self.addCourseToWishlist(course.id, userID: userID)
-    }
+    func add(_ course: Course, userID: User.IdType) -> Promise<Void> { self.add(course.id, userID: userID) }
 
-    func removeCourseFromWishlist(_ course: Course, userID: User.IdType) -> Promise<Void> {
-        self.removeCourseFromWishlist(course.id, userID: userID)
-    }
+    func remove(_ course: Course, userID: User.IdType) -> Promise<Void> { self.remove(course.id, userID: userID) }
 }
 
 final class WishlistService: WishlistServiceProtocol {
@@ -44,7 +36,7 @@ final class WishlistService: WishlistServiceProtocol {
         self.storageRecordsNetworkService = storageRecordsNetworkService
     }
 
-    func getCoursesWishlist() -> [Course.IdType] {
+    func getWishlist() -> [Course.IdType] {
         self.wishlistStorageManager.coursesIDs
     }
 
@@ -52,7 +44,7 @@ final class WishlistService: WishlistServiceProtocol {
         self.wishlistStorageManager.coursesIDs = []
     }
 
-    func syncWishlist(userID: User.IdType) -> Promise<Void> {
+    func fetchWishlist(userID: User.IdType) -> Promise<Void> {
         self.storageRecordsNetworkService.fetch(
             userID: userID,
             kind: .wishlist
@@ -67,7 +59,7 @@ final class WishlistService: WishlistServiceProtocol {
         }
     }
 
-    func addCourseToWishlist(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void> {
+    func add(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void> {
         if self.wishlistStorageManager.coursesIDs.contains(courseID) {
             return .value(())
         }
@@ -101,7 +93,7 @@ final class WishlistService: WishlistServiceProtocol {
         }
     }
 
-    func removeCourseFromWishlist(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void> {
+    func remove(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void> {
         if !self.wishlistStorageManager.coursesIDs.contains(courseID) {
             return .value(())
         }

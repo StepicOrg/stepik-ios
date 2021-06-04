@@ -29,11 +29,11 @@ final class WishlistWidgetProvider: WishlistWidgetProviderProtocol {
 
         switch dataSourceType {
         case .cache:
-            return .value(self.wishlistService.getCoursesWishlist())
+            return .value(self.wishlistService.getWishlist())
         case .remote:
             return Promise { seal in
-                self.wishlistService.syncWishlist(userID: currentUserID).done {
-                    let coursesIDs = self.wishlistService.getCoursesWishlist()
+                self.wishlistService.fetchWishlist(userID: currentUserID).done {
+                    let coursesIDs = self.wishlistService.getWishlist()
                     seal.fulfill(coursesIDs)
                 }.catch { _ in
                     seal.reject(Error.remoteFetchFailed)

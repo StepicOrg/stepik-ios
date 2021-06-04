@@ -239,7 +239,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             return
         }
 
-        let targetAction = self.wishlistService.isCourseInWishlist(course)
+        let targetAction = self.wishlistService.contains(course)
             ? CourseInfo.CourseWishlistAction.remove
             : CourseInfo.CourseWishlistAction.add
 
@@ -256,7 +256,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         viewSource: self.courseViewSource
                     )
                 )
-                return self.wishlistService.addCourseToWishlist(course, userID: currentUserID)
+                return self.wishlistService.add(course, userID: currentUserID)
             case .remove:
                 self.analytics.send(
                     .wishlistCourseRemoved(
@@ -266,14 +266,14 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         viewSource: self.courseViewSource
                     )
                 )
-                return self.wishlistService.removeCourseFromWishlist(course, userID: currentUserID)
+                return self.wishlistService.remove(course, userID: currentUserID)
             }
         }.done {
             self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
             self.presenter.presentWishlistMainActionResult(response: .init(action: targetAction, isSuccessful: true))
 
-            let newCoursesWishlist = self.wishlistService.getCoursesWishlist()
-            self.dataBackUpdateService.triggerWishlistUpdate(coursesIDs: newCoursesWishlist)
+            let newWishlist = self.wishlistService.getWishlist()
+            self.dataBackUpdateService.triggerWishlistUpdate(coursesIDs: newWishlist)
         }.catch { _ in
             self.presenter.presentWishlistMainActionResult(response: .init(action: targetAction, isSuccessful: false))
         }
@@ -306,7 +306,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
-            let isWishlisted = self.wishlistService.isCourseInWishlist(self.courseID)
+            let isWishlisted = self.wishlistService.contains(self.courseID)
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(
@@ -334,9 +334,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
 
                 // Remove course from wishlist
-                if self.wishlistService.isCourseInWishlist(course),
+                if self.wishlistService.contains(course),
                    let currentUserID = self.userAccountService.currentUserID {
-                    self.wishlistService.removeCourseFromWishlist(course, userID: currentUserID).cauterize()
+                    self.wishlistService.remove(course, userID: currentUserID).cauterize()
                 }
 
                 // Present step
@@ -386,10 +386,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
         let isWishlistAvailable = self.userAccountService.isAuthorized
-            && self.wishlistService.canAddCourseToWishlist(self.currentCourse.require())
+            && self.wishlistService.canAdd(self.currentCourse.require())
         return .init(
             course: self.currentCourse.require(),
-            isInWithlist: self.wishlistService.isCourseInWishlist(self.courseID),
+            isWishlisted: self.wishlistService.contains(self.courseID),
             isWishlistAvailable: isWishlistAvailable,
             iapLocalizedPrice: self.currentCourseIAPLocalizedPrice,
             promoCode: self.currentPromoCode

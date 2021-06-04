@@ -168,7 +168,7 @@ final class CourseInfoViewController: UIViewController {
 
             if data.isWishlistAvailable {
                 self.navigationItem.rightBarButtonItems = [self.moreBarButton, self.wishlistBarButton]
-                let wishlistImageName = data.isInWithlist ? "wishlist-like-filled" : "wishlist-like"
+                let wishlistImageName = data.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
                 self.wishlistBarButton.image = UIImage(named: wishlistImageName)?.withRenderingMode(.alwaysTemplate)
             } else {
                 self.navigationItem.rightBarButtonItems = [self.moreBarButton]
