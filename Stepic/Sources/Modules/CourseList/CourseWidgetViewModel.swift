@@ -19,6 +19,7 @@ struct CourseWidgetViewModel: UniqueIdentifiable {
     let certificateLabelText: String?
     let isAdaptive: Bool
     let isEnrolled: Bool
+    let isWishlisted: Bool
     let progress: CourseWidgetProgressViewModel?
     let userCourse: CourseWidgetUserCourseViewModel?
     let uniqueIdentifier: UniqueIdentifierType

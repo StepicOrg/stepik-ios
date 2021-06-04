@@ -25,6 +25,11 @@ protocol CourseListDataBackUpdateServiceDelegate: AnyObject {
     func courseListDataBackUpdateServiceDidUpdateCourseList(
         _ service: CourseListDataBackUpdateServiceProtocol
     )
+    /// Tells the delegate that the wislist is updated.
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didUpdateWishlist wishlistCoursesIDs: Set<Course.IdType>
+    )
 }
 
 protocol CourseListDataBackUpdateServiceProtocol: AnyObject {
@@ -87,6 +92,8 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
             self.delegate?.courseListDataBackUpdateService(self, didUpdateUserCourse: userCourse)
         case .visitedCourse:
             self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+        case .wishlist(let coursesIDs):
+            self.delegate?.courseListDataBackUpdateService(self, didUpdateWishlist: Set(coursesIDs))
         default:
             break
         }

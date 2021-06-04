@@ -13,7 +13,6 @@ extension CourseWidgetView {
         let titleLabelInsets = LayoutInsets(left: 8, right: 8)
 
         let badgeImageViewInsets = LayoutInsets(right: 16)
-        let badgeImageViewTintColor = UIColor.stepikSystemSecondaryText
         let badgeImageViewSize = CGSize(width: 18, height: 18)
 
         let statsViewHeight: CGFloat = 17
@@ -40,7 +39,7 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
     private lazy var badgeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = self.appearance.badgeImageViewTintColor
+        imageView.tintColor = self.colorMode.courseWidgetBadgeTintColor
         return imageView
     }()
 
@@ -107,16 +106,32 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         self.statsView.isArchived = isArchived
         self.statsView.progress = isArchived ? nil : viewModel.progress
 
-        let isFavorite = viewModel.userCourse?.isFavorite ?? false
-        self.badgeImageView.image = isFavorite
-            ? UIImage(named: "course-widget-favorite")?.withRenderingMode(.alwaysTemplate)
-            : nil
-        self.badgeImageViewWidthConstraint?.update(offset: isFavorite ? self.appearance.badgeImageViewSize.width : 0)
-        self.badgeImageView.isHidden = !isFavorite
+        self.updateBadgeImageView(viewModel: viewModel)
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
         self.statsView.progress = viewModel
+    }
+
+    private func updateBadgeImageView(viewModel: CourseWidgetViewModel) {
+        let badgeImage: UIImage? = {
+            if !viewModel.isEnrolled {
+                let imageName = viewModel.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
+                return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+            } else if let userCourse = viewModel.userCourse {
+                return userCourse.isFavorite
+                    ? UIImage(named: "course-widget-favorite")?.withRenderingMode(.alwaysTemplate)
+                    : nil
+            } else {
+                return nil
+            }
+        }()
+
+        self.badgeImageView.image = badgeImage
+        self.badgeImageView.isHidden = badgeImage == nil
+        self.badgeImageViewWidthConstraint?.update(
+            offset: badgeImage != nil ? self.appearance.badgeImageViewSize.width : 0
+        )
     }
 
     // MARK: Private API
