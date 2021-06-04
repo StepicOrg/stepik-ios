@@ -9,7 +9,11 @@ final class WishlistWidgetAssembly: Assembly {
             userAccountService: UserAccountService()
         )
         let presenter = WishlistWidgetPresenter()
-        let interactor = WishlistWidgetInteractor(presenter: presenter, provider: provider)
+        let interactor = WishlistWidgetInteractor(
+            presenter: presenter,
+            provider: provider,
+            dataBackUpdateService: DataBackUpdateService.default
+        )
         let viewController = WishlistWidgetViewController(interactor: interactor)
 
         presenter.viewController = viewController

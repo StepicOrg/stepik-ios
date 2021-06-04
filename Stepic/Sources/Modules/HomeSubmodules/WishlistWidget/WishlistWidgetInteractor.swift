@@ -10,15 +10,21 @@ final class WishlistWidgetInteractor: WishlistWidgetInteractorProtocol {
     private let presenter: WishlistWidgetPresenterProtocol
     private let provider: WishlistWidgetProviderProtocol
 
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
+
     private var didLoadFromCache = false
     private var didPresentWishlist = false
 
     init(
         presenter: WishlistWidgetPresenterProtocol,
-        provider: WishlistWidgetProviderProtocol
+        provider: WishlistWidgetProviderProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
     }
 
     func doWishlistLoad(request: WishlistWidget.WishlistLoad.Request) {
@@ -86,5 +92,25 @@ final class WishlistWidgetInteractor: WishlistWidgetInteractorProtocol {
 extension WishlistWidgetInteractor: WishlistWidgetInputProtocol {
     func refreshWishlist() {
         self.doWishlistLoad(request: .init())
+    }
+}
+
+extension WishlistWidgetInteractor: DataBackUpdateServiceDelegate {
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport refreshedTarget: DataBackUpdateTarget
+    ) {
+        guard case .wishlist(let coursesIDs) = refreshedTarget else {
+            return
+        }
+
+        self.presenter.presentWishlist(response: .init(result: .success(.init(coursesIDs: coursesIDs))))
+    }
+
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        didReport update: DataBackUpdateDescription,
+        for target: DataBackUpdateTarget
+    ) {
     }
 }

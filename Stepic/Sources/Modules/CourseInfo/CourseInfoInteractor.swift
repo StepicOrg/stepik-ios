@@ -254,6 +254,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }.done {
             self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
             self.presenter.presentWishlistMainActionResult(response: .init(action: targetAction, isSuccessful: true))
+
+            let newCoursesWishlist = self.wishlistService.getCoursesWishlist()
+            self.dataBackUpdateService.triggerWishlistUpdate(coursesIDs: newCoursesWishlist)
         }.catch { _ in
             self.presenter.presentWishlistMainActionResult(response: .init(action: targetAction, isSuccessful: false))
         }

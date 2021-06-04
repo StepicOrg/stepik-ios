@@ -10,6 +10,7 @@ enum DataBackUpdateTarget {
     case profile(Profile)
     case userCourse(UserCourse)
     case visitedCourse
+    case wishlist([Course.IdType])
 }
 
 /// Affected fields in updated object
@@ -62,6 +63,8 @@ protocol DataBackUpdateServiceProtocol: AnyObject {
     func triggerUserCourseUpdate(updatedUserCourse: UserCourse)
     /// Report about visited course list update
     func triggerVisitedCourseListUpdate()
+    /// Report about wishlist update
+    func triggerWishlistUpdate(coursesIDs: [Course.IdType])
 }
 
 final class DataBackUpdateService: DataBackUpdateServiceProtocol {
@@ -209,6 +212,10 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
         self.postNotification(target: .visitedCourse)
     }
 
+    func triggerWishlistUpdate(coursesIDs: [Course.IdType]) {
+        self.postNotification(target: .wishlist(coursesIDs))
+    }
+
     // MARK: Private methods
 
     private func postNotification(description: DataBackUpdateDescription? = nil, target: DataBackUpdateTarget) {
@@ -264,4 +271,15 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
 private extension Foundation.Notification.Name {
     static let dataBackUpdated = NSNotification.Name("dataBackUpdated")
     static let dataBackUpdatedWithDescription = NSNotification.Name("dataBackUpdatedWithDescription")
+}
+
+extension DataBackUpdateService {
+    static var `default`: DataBackUpdateService {
+        DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+    }
 }
