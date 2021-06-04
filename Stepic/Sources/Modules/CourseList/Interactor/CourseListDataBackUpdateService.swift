@@ -94,6 +94,10 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
             self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
         case .wishlist(let coursesIDs):
             self.delegate?.courseListDataBackUpdateService(self, didUpdateWishlist: Set(coursesIDs))
+
+            if self.courseListType is WishlistCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            }
         default:
             break
         }

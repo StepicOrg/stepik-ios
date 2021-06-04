@@ -64,7 +64,7 @@ extension WishlistWidgetViewController: WishlistWidgetViewControllerProtocol {
 
         let assembly = FullscreenCourseListAssembly(
             presentationDescription: .init(title: NSLocalizedString("WishlistWidgetTitle", comment: "")),
-            courseListType: WishlistCourseListType(ids: viewModel.coursesIDs),
+            courseListType: WishlistCourseListType(),
             courseViewSource: .wishlist
         )
 
