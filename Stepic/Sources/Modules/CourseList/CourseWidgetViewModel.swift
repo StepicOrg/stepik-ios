@@ -20,6 +20,7 @@ struct CourseWidgetViewModel: UniqueIdentifiable {
     let isAdaptive: Bool
     let isEnrolled: Bool
     let isWishlisted: Bool
+    let isWishlistAvailable: Bool
     let progress: CourseWidgetProgressViewModel?
     let userCourse: CourseWidgetUserCourseViewModel?
     let uniqueIdentifier: UniqueIdentifierType

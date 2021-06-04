@@ -135,6 +135,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             isAdaptive: isAdaptive,
             isEnrolled: isAuthorized && course.enrolled,
             isWishlisted: isWishlisted,
+            isWishlistAvailable: isAuthorized && !course.enrolled,
             progress: progressViewModel,
             userCourse: userCourseViewModel,
             uniqueIdentifier: uniqueIdentifier,

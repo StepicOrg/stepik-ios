@@ -60,7 +60,7 @@ final class SmallCourseWidgetView: UIView, CourseWidgetViewProtocol {
 
     private func updateBadgeImageView(viewModel: CourseWidgetViewModel) {
         let badgeImage: UIImage? = {
-            if !viewModel.isEnrolled {
+            if viewModel.isWishlistAvailable {
                 let imageName = viewModel.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
                 return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
             } else if let userCourse = viewModel.userCourse {
