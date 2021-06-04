@@ -125,12 +125,13 @@ extension AnalyticsEvent {
         case homeScreenWidget = "ios_home_screen_widget"
     }
 
-    static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
+    static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Buy course pressed",
             parameters: [
                 "source": source.rawValue,
-                "course": id
+                "course": id,
+                "is_wishlisted": isWishlisted
             ]
         )
     }

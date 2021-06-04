@@ -288,11 +288,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
+            let isWishlisted = self.wishlistService.isCourseInWishlist(self.courseID)
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(
                     .buyCoursePressed(id: course.id),
-                    .courseBuyPressed(source: .courseScreen, id: course.id)
+                    .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: isWishlisted)
                 )
 
                 if self.iapService.canBuyCourse(course) {
@@ -309,7 +310,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
             self.analytics.send(.authorizedUserTappedJoinCourse)
             // Unenrolled course -> join, open last step
-            let isWishlisted = self.wishlistService.isCourseInWishlist(self.courseID)
             self.courseSubscriber.join(course: course, source: .preview, isWishlisted: isWishlisted).done { course in
                 // Refresh course
                 self.currentCourse = course
