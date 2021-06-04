@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "user-courses-reviews-block-stars.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
