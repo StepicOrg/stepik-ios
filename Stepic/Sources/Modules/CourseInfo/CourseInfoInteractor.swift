@@ -301,7 +301,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     course: course,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: course.id
-                    )
+                    ),
+                    courseViewSource: self.courseViewSource
                 )
             )
         } else {
@@ -344,7 +345,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         course: course,
                         isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                             courseId: course.id
-                        )
+                        ),
+                        courseViewSource: self.courseViewSource
                     )
                 )
             }.ensure {
@@ -486,6 +488,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private func doUserCourseAction(course: Course, action: CourseInfo.UserCourseAction) {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        self.analytics.send(.userCourseActionMade(action, course: course, viewSource: self.courseViewSource))
 
         firstly {
             self.provider

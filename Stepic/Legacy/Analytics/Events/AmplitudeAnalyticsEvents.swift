@@ -107,13 +107,19 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseContinuePressed(source: CourseContinueSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
+    static func courseContinuePressed(
+        id: Int,
+        title: String,
+        source: CourseContinueSource,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Continue course pressed",
             parameters: [
-                "source": source.rawValue,
                 "course": id,
-                "title": title
+                "title": title,
+                "source": source.rawValue,
+                "view_source": viewSource.name
             ]
         )
     }
@@ -123,6 +129,7 @@ extension AnalyticsEvent {
         case homeWidget = "home_widget"
         case courseScreen = "course_screen"
         case homeScreenWidget = "ios_home_screen_widget"
+        case applicationShortcut = "ios_application_shortcut"
     }
 
     static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
@@ -897,4 +904,38 @@ extension AnalyticsEvent {
     }
 
     static let wishlistScreenOpened = AmplitudeAnalyticsEvent(name: "Wishlist screen opened")
+
+    // MARK: - UserCourse -
+
+    static func userCourseActionMade(
+        _ action: CourseInfo.UserCourseAction,
+        course: Course,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course action",
+            parameters: [
+                "action": action.analyticName,
+                "course": course.id,
+                "title": course.title,
+                "is_paid": course.isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+}
+
+fileprivate extension CourseInfo.UserCourseAction {
+    var analyticName: String {
+        switch self {
+        case .favoriteAdd:
+            return "favorite_add"
+        case .favoriteRemove:
+            return "favorite_remove"
+        case .archiveAdd:
+            return "archive_add"
+        case .archiveRemove:
+            return "archive_remove"
+        }
+    }
 }

@@ -587,7 +587,8 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
             skipSyllabus: true,
-            courseViewSource: .unknown,
+            source: .courseScreen,
+            viewSource: viewModel.courseViewSource,
             lessonModuleOutput: self.interactor as? LessonOutputProtocol
         )
     }
