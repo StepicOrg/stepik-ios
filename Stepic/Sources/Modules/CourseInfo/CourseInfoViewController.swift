@@ -29,6 +29,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel)
+    func displayWishlistMainActionResult(viewModel: CourseInfo.CourseWishlistMainAction.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -47,6 +48,13 @@ final class CourseInfoViewController: UIViewController {
 
     lazy var courseInfoView = self.view as? CourseInfoView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
+
+    private lazy var wishlistBarButton = UIBarButtonItem(
+        image: nil,
+        style: .plain,
+        target: self,
+        action: #selector(self.wishlistButtonClicked)
+    )
 
     private lazy var moreBarButton = UIBarButtonItem(
         image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
@@ -100,7 +108,7 @@ final class CourseInfoViewController: UIViewController {
 
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
-        self.navigationItem.rightBarButtonItem = self.moreBarButton
+        self.navigationItem.rightBarButtonItems = [self.moreBarButton]
         self.styledNavigationController?.removeBackButtonTitleForTopController()
 
         self.automaticallyAdjustsScrollViewInsets = false
@@ -157,6 +165,14 @@ final class CourseInfoViewController: UIViewController {
             self.moreBarButton.isEnabled = true
             self.courseInfoView?.setErrorPlaceholderVisible(false)
             self.courseInfoView?.setLoading(false)
+
+            if data.isWishlistAvailable {
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton, self.wishlistBarButton]
+                let wishlistImageName = data.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
+                self.wishlistBarButton.image = UIImage(named: wishlistImageName)?.withRenderingMode(.alwaysTemplate)
+            } else {
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton]
+            }
 
             let isFirstLoadedResult = self.storedViewModel == nil
 
@@ -247,6 +263,11 @@ final class CourseInfoViewController: UIViewController {
         if let submodule = moduleInput {
             self.interactor.doSubmodulesRegistration(request: .init(submodules: [index: submodule]))
         }
+    }
+
+    @objc
+    private func wishlistButtonClicked() {
+        self.interactor.doWishlistMainAction(request: .init())
     }
 
     @objc
@@ -541,6 +562,14 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel) {
+        if viewModel.isSuccessful {
+            SVProgressHUD.showSuccess(withStatus: viewModel.message)
+        } else {
+            SVProgressHUD.showError(withStatus: viewModel.message)
+        }
+    }
+
+    func displayWishlistMainActionResult(viewModel: CourseInfo.CourseWishlistMainAction.ViewModel) {
         if viewModel.isSuccessful {
             SVProgressHUD.showSuccess(withStatus: viewModel.message)
         } else {

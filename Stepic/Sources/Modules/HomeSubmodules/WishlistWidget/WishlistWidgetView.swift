@@ -1,11 +1,11 @@
 import SnapKit
 import UIKit
 
-protocol UserCoursesReviewsBlockViewDelegate: AnyObject {
-    func userCoursesReviewsBlockViewDidClick(_ view: UserCoursesReviewsBlockView)
+protocol WishlistWidgetViewDelegate: AnyObject {
+    func wishlistWidgetViewDidClick(_ view: WishlistWidgetView)
 }
 
-extension UserCoursesReviewsBlockView {
+extension WishlistWidgetView {
     struct Appearance {
         let backgroundColor = UIColor.dynamic(light: .white, dark: .stepikSecondaryBackground)
         let cornerRadius: CGFloat = 13.0
@@ -20,33 +20,24 @@ extension UserCoursesReviewsBlockView {
 
         let titleTextColor = UIColor.stepikMaterialPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 16, weight: .medium)
-        let titleInsets = LayoutInsets(top: 8, right: 16)
+        let titleInsets = LayoutInsets(top: 8, right: 8)
 
         let subtitleTextColor = UIColor.stepikMaterialSecondaryText
         let subtitleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
         let subtitleInsets = LayoutInsets(top: 8)
-
-        let accentSubtitleTextColor = UIColor.stepikGreenFixed
-        let accentSubtitleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-        let accentSubtitleInsets = LayoutInsets(left: 4, right: 16)
-
-        let accentIndicatorViewBackgroundColor = UIColor.stepikGreenFixed
-        let accentIndicatorViewSize = CGSize(width: 10, height: 10)
-        let accentIndicatorViewCornerRadius: CGFloat = 5
-        let accentIndicatorViewInsets = LayoutInsets(top: 16, right: 16)
 
         let skeletonViewHeight: CGFloat = 8
         let skeletonViewInsets = LayoutInsets(top: 16)
     }
 }
 
-final class UserCoursesReviewsBlockView: UIView {
+final class WishlistWidgetView: UIView {
     let appearance: Appearance
 
-    weak var delegate: UserCoursesReviewsBlockViewDelegate?
+    weak var delegate: WishlistWidgetViewDelegate?
 
     private lazy var imageView: UIImageView = {
-        let image = UIImage(named: "user-courses-reviews-block-stars")
+        let image = UIImage(named: "wishlist-widget-like")
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -54,7 +45,7 @@ final class UserCoursesReviewsBlockView: UIView {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("UserCoursesReviewsBlockTitle", comment: "")
+        label.text = NSLocalizedString("WishlistWidgetTitle", comment: "")
         label.textColor = self.appearance.titleTextColor
         label.font = self.appearance.titleFont
         label.numberOfLines = 1
@@ -68,22 +59,6 @@ final class UserCoursesReviewsBlockView: UIView {
         label.font = self.appearance.subtitleFont
         label.numberOfLines = 1
         return label
-    }()
-
-    private lazy var accentSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = self.appearance.accentSubtitleTextColor
-        label.font = self.appearance.accentSubtitleFont
-        label.numberOfLines = 1
-        return label
-    }()
-
-    private lazy var accentIndicatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = self.appearance.accentIndicatorViewBackgroundColor
-        view.isHidden = true
-        view.setRoundedCorners(cornerRadius: self.appearance.accentIndicatorViewCornerRadius)
-        return view
     }()
 
     private lazy var overlayButton: UIButton = {
@@ -133,7 +108,7 @@ final class UserCoursesReviewsBlockView: UIView {
     }
 
     func showLoading() {
-        [self.subtitleLabel, self.accentSubtitleLabel, self.accentIndicatorView].forEach { $0.alpha = 0 }
+        self.subtitleLabel.alpha = 0
         self.overlayButton.isUserInteractionEnabled = false
 
         self.skeletonFakeView.isHidden = false
@@ -147,29 +122,25 @@ final class UserCoursesReviewsBlockView: UIView {
         self.skeletonFakeView.skeleton.hide()
         self.skeletonFakeView.isHidden = true
 
-        [self.subtitleLabel, self.accentSubtitleLabel, self.accentIndicatorView].forEach { $0.alpha = 1 }
+        self.subtitleLabel.alpha = 1
         self.overlayButton.isUserInteractionEnabled = true
     }
 
-    func configure(viewModel: UserCoursesReviewsBlockViewModel) {
-        self.subtitleLabel.text = viewModel.formattedLeavedCourseReviewsCount
-        self.accentSubtitleLabel.text = viewModel.formattedPossibleReviewsCount
-        self.accentIndicatorView.isHidden = viewModel.formattedPossibleReviewsCount?.trimmed().isEmpty ?? true
+    func configure(viewModel: WishlistWidgetViewModel) {
+        self.subtitleLabel.text = viewModel.formattedSubtitle
     }
 
     @objc
     private func overlayButtonClicked() {
-        self.delegate?.userCoursesReviewsBlockViewDidClick(self)
+        self.delegate?.wishlistWidgetViewDidClick(self)
     }
 }
 
-extension UserCoursesReviewsBlockView: ProgrammaticallyInitializableViewProtocol {
+extension WishlistWidgetView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
-        self.addSubview(self.accentIndicatorView)
         self.addSubview(self.subtitleLabel)
-        self.addSubview(self.accentSubtitleLabel)
         self.addSubview(self.skeletonFakeView)
         self.addSubview(self.overlayButton)
     }
@@ -189,24 +160,11 @@ extension UserCoursesReviewsBlockView: ProgrammaticallyInitializableViewProtocol
             make.trailing.equalToSuperview().offset(-self.appearance.titleInsets.right)
         }
 
-        self.accentIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.accentIndicatorView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.accentIndicatorViewInsets.top)
-            make.trailing.equalToSuperview().offset(-self.appearance.accentIndicatorViewInsets.right)
-            make.size.equalTo(self.appearance.accentIndicatorViewSize)
-        }
-
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.subtitleInsets.top)
             make.leading.equalTo(self.titleLabel.snp.leading)
-        }
-
-        self.accentSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.accentSubtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.subtitleLabel.snp.top)
-            make.leading.equalTo(self.subtitleLabel.snp.trailing).offset(self.appearance.accentSubtitleInsets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.accentSubtitleInsets.right)
+            make.trailing.equalTo(self.titleLabel.snp.trailing)
         }
 
         self.skeletonFakeView.translatesAutoresizingMaskIntoConstraints = false
@@ -218,8 +176,6 @@ extension UserCoursesReviewsBlockView: ProgrammaticallyInitializableViewProtocol
         }
 
         self.overlayButton.translatesAutoresizingMaskIntoConstraints = false
-        self.overlayButton.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        self.overlayButton.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }

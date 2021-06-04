@@ -470,6 +470,11 @@ CourseInfoCourseActionMoveToArchivedSuccessMessage = "Курс успешно п
 CourseInfoCourseActionRemoveFromArchivedSuccessMessage = "Курс успешно убран из архива";
 CourseInfoCourseActionMoveToArchivedFailureMessage = "Не удалось переместить курс в архив";
 CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Не удалось убрать курс из архива";
+// Wishlist
+CourseInfoAddToWishlistSuccessMessage = "Курс успешно добавлен в список желаний";
+CourseInfoAddToWishlistFailureMessage = "Не удалось добавить курс в список желаний";
+CourseInfoRemoveFromWishlistSuccessMessage = "Курс успешно убран из списка желаний";
+CourseInfoRemoveFromWishlistFailureMessage = "Не удалось убрать курс из списка желаний";
 
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
@@ -517,6 +522,10 @@ UserCoursesReviewsLeaveReview = "Оставить отзыв";
 UserCoursesReviewsPossibleReviews1 = "новый курс для отзыва";
 UserCoursesReviewsPossibleReviews234 = "новых курса для отзыва";
 UserCoursesReviewsPossibleReviews567890 = "новых курсов для отзыва";
+
+/* Wishlist */
+WishlistWidgetTitle = "Список желаний";
+WishlistWidgetEmptyMessage = "Нет курсов";
 
 RetentionNotificationOnNextDayTitle = "Не сбавляем темп";
 RetentionNotificationOnNextDayText = "Вы проделали отличную работу вчера - это хороший повод зайти сегодня и продолжить учиться! 🚀";

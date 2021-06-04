@@ -78,15 +78,23 @@ extension AnalyticsEvent {
 
     // MARK: - Course -
 
-    static func courseJoined(source: CourseSubscriptionSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course joined",
-            parameters: [
-                "source": source.rawValue,
-                "course": id,
-                "title": title
-            ]
-        )
+    static func courseJoined(
+        source: CourseSubscriptionSource,
+        id: Int,
+        title: String,
+        isWishlisted: Bool? = nil
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String : Any] = [
+            "source": source.rawValue,
+            "course": id,
+            "title": title
+        ]
+
+        if let isWishlisted = isWishlisted {
+            parameters["is_wishlisted"] = isWishlisted
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course joined", parameters: parameters)
     }
 
     static func courseUnsubscribed(id: Int, title: String) -> AmplitudeAnalyticsEvent {
@@ -124,12 +132,13 @@ extension AnalyticsEvent {
         case applicationShortcut = "ios_application_shortcut"
     }
 
-    static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
+    static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Buy course pressed",
             parameters: [
                 "source": source.rawValue,
-                "course": id
+                "course": id,
+                "is_wishlisted": isWishlisted
             ]
         )
     }
@@ -527,6 +536,7 @@ extension AnalyticsEvent {
         case notification
         case profile(id: Int)
         case userCoursesReviews
+        case wishlist
         case unknown
 
         var name: String {
@@ -561,6 +571,8 @@ extension AnalyticsEvent {
                 return "profile"
             case .userCoursesReviews:
                 return "user_courses_reviews"
+            case .wishlist:
+                return "wishlist"
             case .unknown:
                 return "unknown"
             }
@@ -575,6 +587,7 @@ extension AnalyticsEvent {
                  .notification,
                  .recommendation,
                  .userCoursesReviews,
+                 .wishlist,
                  .unknown:
                 return nil
             case .search(let query):
@@ -853,6 +866,44 @@ extension AnalyticsEvent {
             parameters: ["size": size]
         )
     }
+
+    // MARK: - Wishlist -
+
+    static func wishlistCourseAdded(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist added",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static func wishlistCourseRemoved(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist removed",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static let wishlistScreenOpened = AmplitudeAnalyticsEvent(name: "Wishlist screen opened")
 
     // MARK: - UserCourse -
 

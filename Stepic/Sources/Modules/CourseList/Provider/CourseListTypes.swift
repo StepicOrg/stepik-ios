@@ -77,6 +77,10 @@ struct RecommendationsCourseListType: CourseListType {
     var analyticName: String { "recommendations_course_list" }
 }
 
+struct WishlistCourseListType: CourseListType {
+    var analyticName: String { "wishlist_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -168,6 +172,8 @@ final class CourseListServicesFactory {
                     cacheID: "RecommendedCourses_\(type.id)_\(type.language.languageString)_\(type.platform.stringValue)"
                 )
             )
+        } else if self.type is WishlistCourseListType {
+            return CourseListPersistenceService(storage: WishlistStorageManager())
         } else {
             fatalError("Unsupported course list type")
         }
@@ -217,6 +223,12 @@ final class CourseListServicesFactory {
                 courseRecommendationsNetworkService: CourseRecommendationsNetworkService(
                     courseRecommendationsAPI: self.courseRecommendationsAPI
                 )
+            )
+        } else if let type = self.type as? WishlistCourseListType {
+            return WishlistCourseListNetworkService(
+                type: type,
+                coursesAPI: self.coursesAPI,
+                wishlistStorageManager: WishlistStorageManager()
             )
         } else {
             fatalError("Unsupported course list type")
