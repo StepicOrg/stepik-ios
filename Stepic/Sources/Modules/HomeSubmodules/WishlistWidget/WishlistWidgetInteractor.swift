@@ -111,6 +111,5 @@ extension WishlistWidgetInteractor: DataBackUpdateServiceDelegate {
         _ dataBackUpdateService: DataBackUpdateService,
         didReport update: DataBackUpdateDescription,
         for target: DataBackUpdateTarget
-    ) {
-    }
+    ) {}
 }

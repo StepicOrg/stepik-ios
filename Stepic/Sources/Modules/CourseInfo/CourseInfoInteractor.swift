@@ -309,7 +309,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
             self.analytics.send(.authorizedUserTappedJoinCourse)
             // Unenrolled course -> join, open last step
-            self.courseSubscriber.join(course: course, source: .preview).done { course in
+            let isWishlisted = self.wishlistService.isCourseInWishlist(self.courseID)
+            self.courseSubscriber.join(course: course, source: .preview, isWishlisted: isWishlisted).done { course in
                 // Refresh course
                 self.currentCourse = course
                 self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))

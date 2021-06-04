@@ -78,15 +78,23 @@ extension AnalyticsEvent {
 
     // MARK: - Course -
 
-    static func courseJoined(source: CourseSubscriptionSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course joined",
-            parameters: [
-                "source": source.rawValue,
-                "course": id,
-                "title": title
-            ]
-        )
+    static func courseJoined(
+        source: CourseSubscriptionSource,
+        id: Int,
+        title: String,
+        isWishlisted: Bool? = nil
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String : Any] = [
+            "source": source.rawValue,
+            "course": id,
+            "title": title
+        ]
+
+        if let isWishlisted = isWishlisted {
+            parameters["is_wishlisted"] = isWishlisted
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course joined", parameters: parameters)
     }
 
     static func courseUnsubscribed(id: Int, title: String) -> AmplitudeAnalyticsEvent {
