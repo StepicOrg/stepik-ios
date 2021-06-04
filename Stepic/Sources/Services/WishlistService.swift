@@ -5,6 +5,7 @@ protocol WishlistServiceProtocol: AnyObject {
     func canAddCourseToWishlist(_ course: Course) -> Bool
     func isCourseInWishlist(_ courseID: Course.IdType) -> Bool
     func getCoursesWishlist() -> [Course.IdType]
+    func removeAll()
 
     func syncWishlist(userID: User.IdType) -> Promise<Void>
     func addCourseToWishlist(_ courseID: Course.IdType, userID: User.IdType) -> Promise<Void>
@@ -45,6 +46,10 @@ final class WishlistService: WishlistServiceProtocol {
 
     func getCoursesWishlist() -> [Course.IdType] {
         self.wishlistStorageManager.coursesIDs
+    }
+
+    func removeAll() {
+        self.wishlistStorageManager.coursesIDs = []
     }
 
     func syncWishlist(userID: User.IdType) -> Promise<Void> {
