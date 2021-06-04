@@ -7,6 +7,7 @@ protocol WishlistWidgetViewControllerProtocol: AnyObject {
 
 final class WishlistWidgetViewController: UIViewController {
     private let interactor: WishlistWidgetInteractorProtocol
+    private let analytics: Analytics
 
     var wishlistWidgetView: WishlistWidgetView? { self.view as? WishlistWidgetView }
 
@@ -14,9 +15,11 @@ final class WishlistWidgetViewController: UIViewController {
 
     init(
         interactor: WishlistWidgetInteractorProtocol,
+        analytics: Analytics,
         initialState: WishlistWidget.ViewControllerState = .loading
     ) {
         self.interactor = interactor
+        self.analytics = analytics
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
@@ -57,11 +60,14 @@ extension WishlistWidgetViewController: WishlistWidgetViewControllerProtocol {
     }
 
     func displayFullscreenCourseList(viewModel: WishlistWidget.FullscreenCourseListModulePresentation.ViewModel) {
+        self.analytics.send(.wishlistScreenOpened)
+
         let assembly = FullscreenCourseListAssembly(
             presentationDescription: .init(title: NSLocalizedString("WishlistWidgetTitle", comment: "")),
             courseListType: WishlistCourseListType(ids: viewModel.coursesIDs),
             courseViewSource: .wishlist
         )
+
         self.push(module: assembly.makeModule())
     }
 }

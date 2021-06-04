@@ -1,6 +1,7 @@
 import Foundation
 import PromiseKit
 
+// swiftlint:disable file_length
 protocol CourseInfoInteractorProtocol {
     func doCourseRefresh(request: CourseInfo.CourseLoad.Request)
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request)
@@ -247,8 +248,24 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         firstly { () -> Promise<Void> in
             switch targetAction {
             case .add:
+                self.analytics.send(
+                    .wishlistCourseAdded(
+                        id: course.id,
+                        title: course.title,
+                        isPaid: course.isPaid,
+                        viewSource: self.courseViewSource
+                    )
+                )
                 return self.wishlistService.addCourseToWishlist(course, userID: currentUserID)
             case .remove:
+                self.analytics.send(
+                    .wishlistCourseRemoved(
+                        id: course.id,
+                        title: course.title,
+                        isPaid: course.isPaid,
+                        viewSource: self.courseViewSource
+                    )
+                )
                 return self.wishlistService.removeCourseFromWishlist(course, userID: currentUserID)
             }
         }.done {

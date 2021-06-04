@@ -859,4 +859,42 @@ extension AnalyticsEvent {
             parameters: ["size": size]
         )
     }
+
+    // MARK: - Wishlist -
+
+    static func wishlistCourseAdded(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist added",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static func wishlistCourseRemoved(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist removed",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static let wishlistScreenOpened = AmplitudeAnalyticsEvent(name: "Wishlist screen opened")
 }

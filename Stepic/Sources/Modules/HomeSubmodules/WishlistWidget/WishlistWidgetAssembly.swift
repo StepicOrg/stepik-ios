@@ -14,7 +14,7 @@ final class WishlistWidgetAssembly: Assembly {
             provider: provider,
             dataBackUpdateService: DataBackUpdateService.default
         )
-        let viewController = WishlistWidgetViewController(interactor: interactor)
+        let viewController = WishlistWidgetViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 
         presenter.viewController = viewController
         self.moduleInput = interactor
