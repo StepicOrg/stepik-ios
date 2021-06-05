@@ -1,26 +1,26 @@
 import Foundation
 import PromiseKit
 
-protocol UserCoursesReviewsBlockInteractorProtocol {
-    func doReviewsLoad(request: UserCoursesReviewsBlock.ReviewsLoad.Request)
+protocol UserCoursesReviewsWidgetInteractorProtocol {
+    func doReviewsLoad(request: UserCoursesReviewsWidget.ReviewsLoad.Request)
 }
 
-final class UserCoursesReviewsBlockInteractor: UserCoursesReviewsBlockInteractorProtocol {
-    private let presenter: UserCoursesReviewsBlockPresenterProtocol
-    private let provider: UserCoursesReviewsBlockProviderProtocol
+final class UserCoursesReviewsWidgetInteractor: UserCoursesReviewsWidgetInteractorProtocol {
+    private let presenter: UserCoursesReviewsWidgetPresenterProtocol
+    private let provider: UserCoursesReviewsWidgetProviderProtocol
 
     private var didLoadFromCache = false
     private var didPresentReviews = false
 
     init(
-        presenter: UserCoursesReviewsBlockPresenterProtocol,
-        provider: UserCoursesReviewsBlockProviderProtocol
+        presenter: UserCoursesReviewsWidgetPresenterProtocol,
+        provider: UserCoursesReviewsWidgetProviderProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
     }
 
-    func doReviewsLoad(request: UserCoursesReviewsBlock.ReviewsLoad.Request) {
+    func doReviewsLoad(request: UserCoursesReviewsWidget.ReviewsLoad.Request) {
         self.fetchReviewsInAppropriateMode().done { data in
             let isCacheEmpty = !self.didLoadFromCache && data.isEmpty
 
@@ -49,7 +49,7 @@ final class UserCoursesReviewsBlockInteractor: UserCoursesReviewsBlockInteractor
 
     // MARK: Private API
 
-    private func fetchReviewsInAppropriateMode() -> Promise<UserCoursesReviewsBlock.ReviewsLoad.Data> {
+    private func fetchReviewsInAppropriateMode() -> Promise<UserCoursesReviewsWidget.ReviewsLoad.Data> {
         Promise { seal in
             firstly {
                 self.didLoadFromCache
@@ -62,7 +62,7 @@ final class UserCoursesReviewsBlockInteractor: UserCoursesReviewsBlockInteractor
                     !leavedCourseReviews.contains(where: { $0.courseID == course.id })
                 }
 
-                let response = UserCoursesReviewsBlock.ReviewsLoad.Data(
+                let response = UserCoursesReviewsWidget.ReviewsLoad.Data(
                     possibleReviewsCount: filteredPossibleCourses.count,
                     leavedReviewsCount: leavedCourseReviews.count
                 )
@@ -88,15 +88,15 @@ final class UserCoursesReviewsBlockInteractor: UserCoursesReviewsBlockInteractor
     }
 }
 
-extension UserCoursesReviewsBlockInteractor: UserCoursesReviewsBlockInputProtocol {
-    func refreshUserCoursesReviews() {
+extension UserCoursesReviewsWidgetInteractor: UserCoursesReviewsWidgetInputProtocol {
+    func refreshReviews() {
         self.doReviewsLoad(request: .init())
     }
 }
 
-extension UserCoursesReviewsBlockInteractor: UserCoursesReviewsOutputProtocol {
+extension UserCoursesReviewsWidgetInteractor: UserCoursesReviewsOutputProtocol {
     func handleUserCoursesReviewsCountsChanged(possibleReviewsCount: Int, leavedCourseReviewsCount: Int) {
-        let response = UserCoursesReviewsBlock.ReviewsLoad.Data(
+        let response = UserCoursesReviewsWidget.ReviewsLoad.Data(
             possibleReviewsCount: possibleReviewsCount,
             leavedReviewsCount: leavedCourseReviewsCount
         )

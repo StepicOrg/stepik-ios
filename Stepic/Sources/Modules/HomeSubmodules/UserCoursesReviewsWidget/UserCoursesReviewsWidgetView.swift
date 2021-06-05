@@ -1,11 +1,11 @@
 import SnapKit
 import UIKit
 
-protocol UserCoursesReviewsBlockViewDelegate: AnyObject {
-    func userCoursesReviewsBlockViewDidClick(_ view: UserCoursesReviewsBlockView)
+protocol UserCoursesReviewsWidgetViewDelegate: AnyObject {
+    func userCoursesReviewsWidgetViewDidClick(_ view: UserCoursesReviewsWidgetView)
 }
 
-extension UserCoursesReviewsBlockView {
+extension UserCoursesReviewsWidgetView {
     struct Appearance {
         let backgroundColor = UIColor.dynamic(light: .white, dark: .stepikSecondaryBackground)
         let cornerRadius: CGFloat = 13.0
@@ -40,10 +40,10 @@ extension UserCoursesReviewsBlockView {
     }
 }
 
-final class UserCoursesReviewsBlockView: UIView {
+final class UserCoursesReviewsWidgetView: UIView {
     let appearance: Appearance
 
-    weak var delegate: UserCoursesReviewsBlockViewDelegate?
+    weak var delegate: UserCoursesReviewsWidgetViewDelegate?
 
     private lazy var imageView: UIImageView = {
         let image = UIImage(named: "user-courses-reviews-block-stars")
@@ -151,7 +151,7 @@ final class UserCoursesReviewsBlockView: UIView {
         self.overlayButton.isUserInteractionEnabled = true
     }
 
-    func configure(viewModel: UserCoursesReviewsBlockViewModel) {
+    func configure(viewModel: UserCoursesReviewsWidgetViewModel) {
         self.subtitleLabel.text = viewModel.formattedLeavedCourseReviewsCount
         self.accentSubtitleLabel.text = viewModel.formattedPossibleReviewsCount
         self.accentIndicatorView.isHidden = viewModel.formattedPossibleReviewsCount?.trimmed().isEmpty ?? true
@@ -159,11 +159,11 @@ final class UserCoursesReviewsBlockView: UIView {
 
     @objc
     private func overlayButtonClicked() {
-        self.delegate?.userCoursesReviewsBlockViewDidClick(self)
+        self.delegate?.userCoursesReviewsWidgetViewDidClick(self)
     }
 }
 
-extension UserCoursesReviewsBlockView: ProgrammaticallyInitializableViewProtocol {
+extension UserCoursesReviewsWidgetView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)

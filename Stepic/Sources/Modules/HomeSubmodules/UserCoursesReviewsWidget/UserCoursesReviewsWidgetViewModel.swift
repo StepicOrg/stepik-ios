@@ -1,6 +1,6 @@
 import Foundation
 
-struct UserCoursesReviewsBlockViewModel {
+struct UserCoursesReviewsWidgetViewModel {
     let formattedPossibleReviewsCount: String?
     let formattedLeavedCourseReviewsCount: String?
 }

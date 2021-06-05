@@ -10,7 +10,7 @@ extension ReviewsAndWishlistContainerViewController {
 }
 
 final class ReviewsAndWishlistContainerViewController: UIViewController {
-    private let userCoursesReviewsBlockAssembly: UserCoursesReviewsBlockAssembly
+    private let userCoursesReviewsWidgetAssembly: UserCoursesReviewsWidgetAssembly
     private let wishlistWidgetAssembly: WishlistWidgetAssembly
 
     private lazy var stackView: UIStackView = {
@@ -22,7 +22,7 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
     }()
 
     init() {
-        self.userCoursesReviewsBlockAssembly = UserCoursesReviewsBlockAssembly()
+        self.userCoursesReviewsWidgetAssembly = UserCoursesReviewsWidgetAssembly()
         self.wishlistWidgetAssembly = WishlistWidgetAssembly()
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,7 +40,7 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
     // MARK: Public API
 
     func refreshSubmodules() {
-        self.userCoursesReviewsBlockAssembly.moduleInput?.refreshUserCoursesReviews()
+        self.userCoursesReviewsWidgetAssembly.moduleInput?.refreshReviews()
         self.wishlistWidgetAssembly.moduleInput?.refreshWishlist()
     }
 
@@ -54,10 +54,10 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
             make.height.equalTo(Appearance.stackViewHeight)
         }
 
-        [self.userCoursesReviewsBlockAssembly, self.wishlistWidgetAssembly].forEach(self.registerChildModule(assembly:))
+        [self.userCoursesReviewsWidgetAssembly, self.wishlistWidgetAssembly].forEach(self.registerSubmodule(assembly:))
     }
 
-    private func registerChildModule(assembly: Assembly) {
+    private func registerSubmodule(assembly: Assembly) {
         let viewController = assembly.makeModule()
 
         self.addChild(viewController)
