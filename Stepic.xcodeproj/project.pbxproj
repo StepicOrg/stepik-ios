@@ -993,6 +993,8 @@
 		2CE532F2266E824300E80983 /* CourseBenefitSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532F1266E824300E80983 /* CourseBenefitSummary+CoreDataProperties.swift */; };
 		2CE532F4266E95C400E80983 /* CourseBenefitSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532F3266E95C400E80983 /* CourseBenefitSummaryTests.swift */; };
 		2CE532F7266E965600E80983 /* course-benefit-summaries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CE532F6266E965600E80983 /* course-benefit-summaries.json */; };
+		2CE532FB266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */; };
+		2CE53300266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532FF266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift */; };
 		2CE61D832412960500DA2CBA /* SpotlightSearchableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE61D822412960500DA2CBA /* SpotlightSearchableItem.swift */; };
 		2CE61D852412961500DA2CBA /* SpotlightDomainIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE61D842412961500DA2CBA /* SpotlightDomainIdentifier.swift */; };
 		2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664DF20F520790082F3FE /* Downloader.swift */; };
@@ -2813,6 +2815,8 @@
 		2CE532F1266E824300E80983 /* CourseBenefitSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseBenefitSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CE532F3266E95C400E80983 /* CourseBenefitSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummaryTests.swift; sourceTree = "<group>"; };
 		2CE532F6266E965600E80983 /* course-benefit-summaries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "course-benefit-summaries.json"; sourceTree = "<group>"; };
+		2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesPersistenceService.swift; sourceTree = "<group>"; };
+		2CE532FF266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+BatchDeleteRequest.swift"; sourceTree = "<group>"; };
 		2CE61D822412960500DA2CBA /* SpotlightSearchableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightSearchableItem.swift; sourceTree = "<group>"; };
 		2CE61D842412961500DA2CBA /* SpotlightDomainIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightDomainIdentifier.swift; sourceTree = "<group>"; };
 		2CE664DF20F520790082F3FE /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -6096,6 +6100,14 @@
 			path = CourseBenefitSummaries;
 			sourceTree = "<group>";
 		};
+		2CE532FE266EBD9100E80983 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2CE532FF266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		2CE61D81241295F500DA2CBA /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -7401,6 +7413,7 @@
 				2CE9BF47248D0950004F6659 /* CodeLimitsPersistenceService.swift */,
 				2CE9BF45248D08A8004F6659 /* CodeSamplesPersistenceService.swift */,
 				2CE9BF43248D07D0004F6659 /* CodeTemplatesPersistenceService.swift */,
+				2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */,
 				62E98C9F5E7C0823E94A4527 /* CourseListsCollectionPersistenceService.swift */,
 				2CB31C79256D130100265CC5 /* CourseListsPersistenceService.swift */,
 				2C1E42A12497C0C7009F4C69 /* CoursePurchasesPersistenceService.swift */,
@@ -8049,6 +8062,7 @@
 		62E986D974D797A3BDF8DA59 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2CE532FE266EBD9100E80983 /* CoreData */,
 				2C096586236C56D2005B771A /* Dispatch */,
 				2C096584236C56AE005B771A /* Foundation */,
 				2C096587236C5706005B771A /* SwiftStdlib */,
@@ -10606,6 +10620,7 @@
 				2C8F3AE123CCBD26004D113A /* DownloadVideoQuality.swift in Sources */,
 				2CDB95892412C08100F676A7 /* SpotlightContinueUserActivityService.swift in Sources */,
 				62E98F5FB06328B5D7212700 /* HighlightFakeButton.swift in Sources */,
+				2CE532FB266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift in Sources */,
 				62E984E8EC57F9A62E5650D6 /* NetworkReachabilityService.swift in Sources */,
 				2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */,
 				2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */,
@@ -10833,6 +10848,7 @@
 				2CF8DF5B25F25CA300F577C2 /* ReviewPlainObject.swift in Sources */,
 				62E98AAB78A4AC1374AF2FE8 /* EditStepDataFlow.swift in Sources */,
 				62E98D3AA0AF10457B47857C /* EditStepInteractor.swift in Sources */,
+				2CE53300266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift in Sources */,
 				2C0FA689252F4D7A0032DDEC /* Typography.swift in Sources */,
 				62E98A9F7DF282A326FF2F5A /* EditStepPresenter.swift in Sources */,
 				62E986AB8C08F56B64F290B4 /* EditStepProvider.swift in Sources */,

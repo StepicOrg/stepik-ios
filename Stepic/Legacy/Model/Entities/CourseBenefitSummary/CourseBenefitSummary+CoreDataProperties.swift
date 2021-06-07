@@ -17,6 +17,10 @@ extension CourseBenefitSummary {
         NSEntityDescription.entity(forEntityName: "CourseBenefitSummary", in: CoreDataHelper.shared.context)!
     }
 
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+
     static var fetchRequest: NSFetchRequest<CourseBenefitSummary> {
         NSFetchRequest<CourseBenefitSummary>(entityName: "CourseBenefitSummary")
     }
