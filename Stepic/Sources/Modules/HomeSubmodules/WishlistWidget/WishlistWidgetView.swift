@@ -31,7 +31,7 @@ extension WishlistWidgetView {
     }
 }
 
-final class WishlistWidgetView: UIView {
+final class WishlistWidgetView: UIControl {
     let appearance: Appearance
 
     weak var delegate: WishlistWidgetViewDelegate?
@@ -61,17 +61,17 @@ final class WishlistWidgetView: UIView {
         return label
     }()
 
-    private lazy var overlayButton: UIButton = {
-        let button = HighlightFakeButton()
-        button.addTarget(self, action: #selector(self.overlayButtonClicked), for: .touchUpInside)
-        return button
-    }()
-
     private lazy var skeletonFakeView: UIView = {
         let view = UIView()
         view.isHidden = true
         return view
     }()
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.animateBounce()
+        }
+    }
 
     init(
         frame: CGRect = .zero,
@@ -80,6 +80,7 @@ final class WishlistWidgetView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -109,7 +110,7 @@ final class WishlistWidgetView: UIView {
 
     func showLoading() {
         self.subtitleLabel.alpha = 0
-        self.overlayButton.isUserInteractionEnabled = false
+        self.isUserInteractionEnabled = false
 
         self.skeletonFakeView.isHidden = false
         self.skeletonFakeView.skeleton.viewBuilder = {
@@ -123,7 +124,7 @@ final class WishlistWidgetView: UIView {
         self.skeletonFakeView.isHidden = true
 
         self.subtitleLabel.alpha = 1
-        self.overlayButton.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
 
     func configure(viewModel: WishlistWidgetViewModel) {
@@ -131,18 +132,21 @@ final class WishlistWidgetView: UIView {
     }
 
     @objc
-    private func overlayButtonClicked() {
+    private func handleTouchUpInside() {
         self.delegate?.wishlistWidgetViewDidClick(self)
     }
 }
 
 extension WishlistWidgetView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.addTarget(self, action: #selector(self.handleTouchUpInside), for: .touchUpInside)
+    }
+
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.subtitleLabel)
         self.addSubview(self.skeletonFakeView)
-        self.addSubview(self.overlayButton)
     }
 
     func makeConstraints() {
@@ -174,8 +178,5 @@ extension WishlistWidgetView: ProgrammaticallyInitializableViewProtocol {
             make.width.equalToSuperview().multipliedBy(0.33)
             make.height.equalTo(self.appearance.skeletonViewHeight)
         }
-
-        self.overlayButton.translatesAutoresizingMaskIntoConstraints = false
-        self.overlayButton.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }

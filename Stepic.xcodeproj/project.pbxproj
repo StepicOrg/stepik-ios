@@ -984,6 +984,7 @@
 		2CE0CAD8255A8D36009C6574 /* CatalogBlockContentItemParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */; };
 		2CE0CADD255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */; };
 		2CE310FD264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE310FC264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift */; };
+		2CE3318E266E0D090092EF08 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3318D266E0D090092EF08 /* UIView+Animations.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */; };
 		2CE42D4623CCC6500073F774 /* VideoRateStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */; };
@@ -2798,6 +2799,7 @@
 		2CE0CAD7255A8D36009C6574 /* CatalogBlockContentItemParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockContentItemParser.swift; sourceTree = "<group>"; };
 		2CE0CADC255A913B009C6574 /* FullCourseListsCatalogBlockContentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullCourseListsCatalogBlockContentItem.swift; sourceTree = "<group>"; };
 		2CE310FC264E626F00526D81 /* LessonFinishedStepsPanModalFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalFeedbackView.swift; sourceTree = "<group>"; };
+		2CE3318D266E0D090092EF08 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQualityStorageManager.swift; sourceTree = "<group>"; };
 		2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRateStorageManager.swift; sourceTree = "<group>"; };
@@ -3886,6 +3888,7 @@
 				62E980371A0458D70C61D357 /* UIStackView+RemoveAllArrangedSubviews.swift */,
 				2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */,
 				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
+				2CE3318D266E0D090092EF08 /* UIView+Animations.swift */,
 				2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */,
 			);
 			path = UIKit;
@@ -11054,6 +11057,7 @@
 				62E9811605C834DE4E559592 /* SettingsViewModel.swift in Sources */,
 				62E9885D8B64C53C2BA545F5 /* SettingsOutputProtocol.swift in Sources */,
 				62E988DEEC0358B72B725D3A /* SolutionAssembly.swift in Sources */,
+				2CE3318E266E0D090092EF08 /* UIView+Animations.swift in Sources */,
 				62E989C07C8092DDD028E286 /* SolutionDataFlow.swift in Sources */,
 				2CEE66B32661180E0079F03B /* UserCoursesReviewsLeavedReviewCellView.swift in Sources */,
 				62E9874B2367F47B416932CF /* SolutionInteractor.swift in Sources */,

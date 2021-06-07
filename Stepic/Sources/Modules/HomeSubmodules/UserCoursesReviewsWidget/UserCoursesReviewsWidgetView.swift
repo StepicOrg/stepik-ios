@@ -40,7 +40,7 @@ extension UserCoursesReviewsWidgetView {
     }
 }
 
-final class UserCoursesReviewsWidgetView: UIView {
+final class UserCoursesReviewsWidgetView: UIControl {
     let appearance: Appearance
 
     weak var delegate: UserCoursesReviewsWidgetViewDelegate?
@@ -86,17 +86,17 @@ final class UserCoursesReviewsWidgetView: UIView {
         return view
     }()
 
-    private lazy var overlayButton: UIButton = {
-        let button = HighlightFakeButton()
-        button.addTarget(self, action: #selector(self.overlayButtonClicked), for: .touchUpInside)
-        return button
-    }()
-
     private lazy var skeletonFakeView: UIView = {
         let view = UIView()
         view.isHidden = true
         return view
     }()
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.animateBounce()
+        }
+    }
 
     init(
         frame: CGRect = .zero,
@@ -105,6 +105,7 @@ final class UserCoursesReviewsWidgetView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -134,7 +135,7 @@ final class UserCoursesReviewsWidgetView: UIView {
 
     func showLoading() {
         [self.subtitleLabel, self.accentSubtitleLabel, self.accentIndicatorView].forEach { $0.alpha = 0 }
-        self.overlayButton.isUserInteractionEnabled = false
+        self.isUserInteractionEnabled = false
 
         self.skeletonFakeView.isHidden = false
         self.skeletonFakeView.skeleton.viewBuilder = {
@@ -148,7 +149,7 @@ final class UserCoursesReviewsWidgetView: UIView {
         self.skeletonFakeView.isHidden = true
 
         [self.subtitleLabel, self.accentSubtitleLabel, self.accentIndicatorView].forEach { $0.alpha = 1 }
-        self.overlayButton.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
 
     func configure(viewModel: UserCoursesReviewsWidgetViewModel) {
@@ -158,12 +159,16 @@ final class UserCoursesReviewsWidgetView: UIView {
     }
 
     @objc
-    private func overlayButtonClicked() {
+    private func handleTouchUpInside() {
         self.delegate?.userCoursesReviewsWidgetViewDidClick(self)
     }
 }
 
 extension UserCoursesReviewsWidgetView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.addTarget(self, action: #selector(self.handleTouchUpInside), for: .touchUpInside)
+    }
+
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
@@ -171,7 +176,6 @@ extension UserCoursesReviewsWidgetView: ProgrammaticallyInitializableViewProtoco
         self.addSubview(self.subtitleLabel)
         self.addSubview(self.accentSubtitleLabel)
         self.addSubview(self.skeletonFakeView)
-        self.addSubview(self.overlayButton)
     }
 
     func makeConstraints() {
@@ -215,11 +219,6 @@ extension UserCoursesReviewsWidgetView: ProgrammaticallyInitializableViewProtoco
             make.leading.equalTo(self.titleLabel.snp.leading)
             make.width.equalToSuperview().multipliedBy(0.33)
             make.height.equalTo(self.appearance.skeletonViewHeight)
-        }
-
-        self.overlayButton.translatesAutoresizingMaskIntoConstraints = false
-        self.overlayButton.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
         }
     }
 }
