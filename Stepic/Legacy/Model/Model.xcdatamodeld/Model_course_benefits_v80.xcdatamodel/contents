@@ -131,6 +131,18 @@
         <relationship name="managedSections" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Section" inverseName="managedCourse" inverseEntity="Section" syncable="YES"/>
         <relationship name="managedUserCourse" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="UserCourse" inverseName="managedCourse" inverseEntity="UserCourse" syncable="YES"/>
     </entity>
+    <entity name="CourseBenefitSummary" representedClassName=".CourseBenefitSummary" syncable="YES">
+        <attribute name="managedBeginPaymentDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedCurrencyCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedCurrentDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedMonthIncome" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedMonthTurnover" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedMonthUserIncome" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedTotalIncome" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedTotalTurnover" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedTotalUserIncome" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
     <entity name="CourseList" representedClassName=".CourseListModel" syncable="YES">
         <attribute name="managedCoursesArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -486,5 +498,6 @@
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="178"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
+        <element name="CourseBenefitSummary" positionX="-450" positionY="-234" width="128" height="179"/>
     </elements>
 </model>
