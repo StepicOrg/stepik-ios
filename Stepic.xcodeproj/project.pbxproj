@@ -529,6 +529,7 @@
 		2C3ABA8B23D1F1F600E90439 /* StepikSocialNetworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */; };
 		2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */; };
 		2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA9023D229C200E90439 /* Bundle+Version.swift */; };
+		2C3B5D06266F5984000B211B /* CourseBenefitSummariesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B5D05266F5984000B211B /* CourseBenefitSummariesNetworkService.swift */; };
 		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
 		2C41F0EC25BAE6F200DA634A /* StoryTemplatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */; };
@@ -993,6 +994,7 @@
 		2CE532F2266E824300E80983 /* CourseBenefitSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532F1266E824300E80983 /* CourseBenefitSummary+CoreDataProperties.swift */; };
 		2CE532F4266E95C400E80983 /* CourseBenefitSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532F3266E95C400E80983 /* CourseBenefitSummaryTests.swift */; };
 		2CE532F7266E965600E80983 /* course-benefit-summaries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CE532F6266E965600E80983 /* course-benefit-summaries.json */; };
+		2CE532F9266EB02200E80983 /* CourseBenefitSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532F8266EB02200E80983 /* CourseBenefitSummariesAPI.swift */; };
 		2CE532FB266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */; };
 		2CE53300266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532FF266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift */; };
 		2CE61D832412960500DA2CBA /* SpotlightSearchableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE61D822412960500DA2CBA /* SpotlightSearchableItem.swift */; };
@@ -2322,6 +2324,7 @@
 		2C3ABA8A23D1F1F600E90439 /* StepikSocialNetworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetworksView.swift; sourceTree = "<group>"; };
 		2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetwork.swift; sourceTree = "<group>"; };
 		2C3ABA9023D229C200E90439 /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
+		2C3B5D05266F5984000B211B /* CourseBenefitSummariesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesNetworkService.swift; sourceTree = "<group>"; };
 		2C3D00B824C7FF0D00441053 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
 		2C3D00B924C7FF0D00441053 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2C3D00BC24C8076A00441053 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
@@ -2815,6 +2818,7 @@
 		2CE532F1266E824300E80983 /* CourseBenefitSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseBenefitSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CE532F3266E95C400E80983 /* CourseBenefitSummaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummaryTests.swift; sourceTree = "<group>"; };
 		2CE532F6266E965600E80983 /* course-benefit-summaries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "course-benefit-summaries.json"; sourceTree = "<group>"; };
+		2CE532F8266EB02200E80983 /* CourseBenefitSummariesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesAPI.swift; sourceTree = "<group>"; };
 		2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesPersistenceService.swift; sourceTree = "<group>"; };
 		2CE532FF266EBDC200E80983 /* NSManagedObjectContext+BatchDeleteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+BatchDeleteRequest.swift"; sourceTree = "<group>"; };
 		2CE61D822412960500DA2CBA /* SpotlightSearchableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightSearchableItem.swift; sourceTree = "<group>"; };
@@ -7134,6 +7138,7 @@
 				2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */,
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				2CE532F8266EB02200E80983 /* CourseBenefitSummariesAPI.swift */,
 				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
 				2C284DB82474418600669736 /* CoursePaymentsAPI.swift */,
 				2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */,
@@ -7752,6 +7757,7 @@
 				2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */,
 				2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
+				2C3B5D05266F5984000B211B /* CourseBenefitSummariesNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
 				2CB31C71256D11E500265CC5 /* CourseListsNetworkService.swift */,
 				2C284DBA247444DF00669736 /* CoursePaymentsNetworkService.swift */,
@@ -10558,6 +10564,7 @@
 				2CCC505E21E8EA88004D9FC1 /* PersonalDeadlinesTimeService.swift in Sources */,
 				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
 				62E982F9CF826D3E99B7EE08 /* NotificationPermissionStatusSettingsObserver.swift in Sources */,
+				2C3B5D06266F5984000B211B /* CourseBenefitSummariesNetworkService.swift in Sources */,
 				62E987560B7A0EFE8D4753CB /* RetentionLocalNotification.swift in Sources */,
 				62E985181538017E088C38D9 /* DataBackUpdateService.swift in Sources */,
 				2C30A6A024A29B6D0074693D /* Queue.swift in Sources */,
@@ -10831,6 +10838,7 @@
 				62E981E3990C9BF7DFFD3A93 /* DiscussionsCellView.swift in Sources */,
 				62E981260E846E172FAAA065 /* DiscussionsLoadMoreTableViewCell.swift in Sources */,
 				2CF4661525402077002415AF /* TableQuizSelectColumnsViewController.swift in Sources */,
+				2CE532F9266EB02200E80983 /* CourseBenefitSummariesAPI.swift in Sources */,
 				62E985B65951147A86D63FD4 /* DiscussionsTableViewCell.swift in Sources */,
 				62E98D8C47E3B4A08EE1B392 /* DownloadsAssembly.swift in Sources */,
 				2C83B545265FB572006E1CC5 /* UserCoursesReviewsViewModel.swift in Sources */,
