@@ -530,6 +530,9 @@
 		2C3ABA8D23D1FE1D00E90439 /* StepikSocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */; };
 		2C3ABA9123D229C200E90439 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3ABA9023D229C200E90439 /* Bundle+Version.swift */; };
 		2C3B5D06266F5984000B211B /* CourseBenefitSummariesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B5D05266F5984000B211B /* CourseBenefitSummariesNetworkService.swift */; };
+		2C3B5D09266F7BF6000B211B /* CourseBenefit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B5D08266F7BF6000B211B /* CourseBenefit.swift */; };
+		2C3B5D0B266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B5D0A266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift */; };
+		2C3B5D0D266F8D37000B211B /* CourseBenefitsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B5D0C266F8D37000B211B /* CourseBenefitsPersistenceService.swift */; };
 		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
 		2C41F0EC25BAE6F200DA634A /* StoryTemplatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */; };
@@ -2325,6 +2328,9 @@
 		2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikSocialNetwork.swift; sourceTree = "<group>"; };
 		2C3ABA9023D229C200E90439 /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
 		2C3B5D05266F5984000B211B /* CourseBenefitSummariesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesNetworkService.swift; sourceTree = "<group>"; };
+		2C3B5D08266F7BF6000B211B /* CourseBenefit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefit.swift; sourceTree = "<group>"; };
+		2C3B5D0A266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseBenefit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C3B5D0C266F8D37000B211B /* CourseBenefitsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitsPersistenceService.swift; sourceTree = "<group>"; };
 		2C3D00B824C7FF0D00441053 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
 		2C3D00B924C7FF0D00441053 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2C3D00BC24C8076A00441053 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
@@ -4131,6 +4137,15 @@
 				2C3A0EF72652978A008D54C5 /* course-without-default-promo-code.json */,
 			);
 			path = Courses;
+			sourceTree = "<group>";
+		};
+		2C3B5D07266F7BE4000B211B /* CourseBenefit */ = {
+			isa = PBXGroup;
+			children = (
+				2C3B5D08266F7BF6000B211B /* CourseBenefit.swift */,
+				2C3B5D0A266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift */,
+			);
+			path = CourseBenefit;
 			sourceTree = "<group>";
 		};
 		2C48BA02257277DD009103B2 /* Views */ = {
@@ -6742,6 +6757,7 @@
 				2CFF901A242A25A300FD7311 /* CodeSample */,
 				2CFF901B242A25B000FD7311 /* CodeTemplates */,
 				2CFF901C242A25C900FD7311 /* Course */,
+				2C3B5D07266F7BE4000B211B /* CourseBenefit */,
 				2CE532EE266E822200E80983 /* CourseBenefitSummary */,
 				2CFF901D242A25E200FD7311 /* CourseList */,
 				2C1E429E2497BDC0009F4C69 /* CoursePurchase */,
@@ -7418,6 +7434,7 @@
 				2CE9BF47248D0950004F6659 /* CodeLimitsPersistenceService.swift */,
 				2CE9BF45248D08A8004F6659 /* CodeSamplesPersistenceService.swift */,
 				2CE9BF43248D07D0004F6659 /* CodeTemplatesPersistenceService.swift */,
+				2C3B5D0C266F8D37000B211B /* CourseBenefitsPersistenceService.swift */,
 				2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */,
 				62E98C9F5E7C0823E94A4527 /* CourseListsCollectionPersistenceService.swift */,
 				2CB31C79256D130100265CC5 /* CourseListsPersistenceService.swift */,
@@ -10477,6 +10494,7 @@
 				2C53B48F2588D80600E53779 /* SimpleCourseListCollectionViewDataSource.swift in Sources */,
 				089200712199DB9900083627 /* BranchService.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
+				2C3B5D0B266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift in Sources */,
 				2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */,
 				2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
@@ -10985,6 +11003,7 @@
 				62E987DF306FC95DF1737BC8 /* QuizInputProtocol.swift in Sources */,
 				62E98C827078AE8A3B832A0C /* QuizOutputProtocol.swift in Sources */,
 				62E98E44FD63F8D6A6D16AB8 /* QuizAssembly.swift in Sources */,
+				2C3B5D0D266F8D37000B211B /* CourseBenefitsPersistenceService.swift in Sources */,
 				62E981171A8030E938221E36 /* BaseQuizOutputProtocol.swift in Sources */,
 				62E981ADC3D9DC9BF5CA3F38 /* QuizFeedbackView.swift in Sources */,
 				62E98C3B0A3CDBD055C8D2BF /* CodeQuizAssembly.swift in Sources */,
@@ -11106,6 +11125,7 @@
 				62E98E6772AA1720F2A9180E /* SettingsAssembly.swift in Sources */,
 				62E986E5921381881E25B9BD /* SettingsDataFlow.swift in Sources */,
 				62E9834C67D261607573C5AB /* SettingsInteractor.swift in Sources */,
+				2C3B5D09266F7BF6000B211B /* CourseBenefit.swift in Sources */,
 				62E9821D0DE04EE902095BE4 /* SettingsPresenter.swift in Sources */,
 				62E98960A2450BF3F16C02C2 /* SettingsProvider.swift in Sources */,
 				62E98F59AA6AA8BC8CEB5EF2 /* SettingsView.swift in Sources */,
