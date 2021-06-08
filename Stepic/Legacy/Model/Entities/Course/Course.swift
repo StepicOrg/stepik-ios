@@ -159,6 +159,13 @@ final class Course: NSManagedObject, IDFetchable {
         } else {
             self.introVideo = Video(json: json[JSONKey.introVideo.rawValue])
         }
+
+        if let actionsDictionary = json[JSONKey.actions.rawValue].dictionary {
+            self.canViewRevenue =
+                actionsDictionary[JSONKey.viewRevenue.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
+        } else {
+            self.canViewRevenue = false
+        }
     }
 
     func update(json: JSON) {
@@ -432,5 +439,8 @@ final class Course: NSManagedObject, IDFetchable {
         case defaultPromoCodePrice = "default_promo_code_price"
         case defaultPromoCodeDiscount = "default_promo_code_discount"
         case defaultPromoCodeExpireDate = "default_promo_code_expire_date"
+        case actions
+        case viewRevenue = "view_revenue"
+        case enabled
     }
 }

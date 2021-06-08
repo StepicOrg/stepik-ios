@@ -38,6 +38,10 @@ enum Parser {
         }
     }
 
+    static func dateFromTimedateString(_ timeString: String) -> Date? {
+        Date(timeIntervalSince1970: TimeInterval(timeString: timeString))
+    }
+
     static func colorFromHex6StringJSON(_ json: JSON) -> UIColor? {
         guard let hexStringValue = json.string,
               let hexUIntValue = UInt32(hexStringValue, radix: 16) else {
