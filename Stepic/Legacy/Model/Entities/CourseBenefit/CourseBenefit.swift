@@ -5,7 +5,7 @@ import SwiftyJSON
 final class CourseBenefit: NSManagedObject, JSONSerializable {
     typealias IdType = Int
 
-    var status: Status? { Status(rawValue: self.statusString) }
+    var status: CourseBenefitStatus? { CourseBenefitStatus(rawValue: self.statusString) }
 
     required convenience init(json: JSON) {
         self.init()
@@ -25,11 +25,6 @@ final class CourseBenefit: NSManagedObject, JSONSerializable {
         self.buyerID = json[JSONKey.buyer.rawValue].intValue
         self.isZLinkUsed = json[JSONKey.isZLinkUsed.rawValue].boolValue
         self.promoCode = json[JSONKey.promoCode.rawValue].string
-    }
-
-    enum Status: String {
-        case debited
-        case refunded
     }
 
     enum JSONKey: String {
