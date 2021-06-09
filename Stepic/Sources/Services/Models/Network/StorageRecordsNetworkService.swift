@@ -10,6 +10,10 @@ protocol StorageRecordsNetworkServiceProtocol: AnyObject {
         userID: User.IdType,
         kindPrefixType: StorageRecordKind.PrefixType
     ) -> Promise<([StorageRecord], Meta)>
+    func fetchWithSortingByUpdateDateDesc(
+        userID: User.IdType,
+        kind: StorageRecordKind
+    ) -> Promise<([StorageRecord], Meta)>
     func fetch(userID: User.IdType, kind: StorageRecordKind) -> Promise<([StorageRecord], Meta)>
     func delete(id: StorageRecord.IdType) -> Promise<Void>
     func create(record: StorageRecord) -> Promise<StorageRecord>
@@ -39,6 +43,13 @@ final class StorageRecordsNetworkService: StorageRecordsNetworkServiceProtocol {
 
     func fetch(userID: User.IdType, kind: StorageRecordKind) -> Promise<([StorageRecord], Meta)> {
         self.storageRecordsAPI.retrieve(userID: userID, kind: kind)
+    }
+
+    func fetchWithSortingByUpdateDateDesc(
+        userID: User.IdType,
+        kind: StorageRecordKind
+    ) -> Promise<([StorageRecord], Meta)> {
+        self.storageRecordsAPI.retrieve(userID: userID, kind: kind, order: .updateDateDesc)
     }
 
     func delete(id: StorageRecord.IdType) -> Promise<Void> {

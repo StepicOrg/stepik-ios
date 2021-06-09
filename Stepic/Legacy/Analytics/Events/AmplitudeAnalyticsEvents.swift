@@ -78,15 +78,23 @@ extension AnalyticsEvent {
 
     // MARK: - Course -
 
-    static func courseJoined(source: CourseSubscriptionSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course joined",
-            parameters: [
-                "source": source.rawValue,
-                "course": id,
-                "title": title
-            ]
-        )
+    static func courseJoined(
+        source: CourseSubscriptionSource,
+        id: Int,
+        title: String,
+        isWishlisted: Bool? = nil
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String : Any] = [
+            "source": source.rawValue,
+            "course": id,
+            "title": title
+        ]
+
+        if let isWishlisted = isWishlisted {
+            parameters["is_wishlisted"] = isWishlisted
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course joined", parameters: parameters)
     }
 
     static func courseUnsubscribed(id: Int, title: String) -> AmplitudeAnalyticsEvent {
@@ -99,13 +107,19 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseContinuePressed(source: CourseContinueSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
+    static func courseContinuePressed(
+        id: Int,
+        title: String,
+        source: CourseContinueSource,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Continue course pressed",
             parameters: [
-                "source": source.rawValue,
                 "course": id,
-                "title": title
+                "title": title,
+                "source": source.rawValue,
+                "view_source": viewSource.name
             ]
         )
     }
@@ -115,14 +129,16 @@ extension AnalyticsEvent {
         case homeWidget = "home_widget"
         case courseScreen = "course_screen"
         case homeScreenWidget = "ios_home_screen_widget"
+        case applicationShortcut = "ios_application_shortcut"
     }
 
-    static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
+    static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Buy course pressed",
             parameters: [
                 "source": source.rawValue,
-                "course": id
+                "course": id,
+                "is_wishlisted": isWishlisted
             ]
         )
     }
@@ -520,6 +536,7 @@ extension AnalyticsEvent {
         case notification
         case profile(id: Int)
         case userCoursesReviews
+        case wishlist
         case unknown
 
         var name: String {
@@ -554,6 +571,8 @@ extension AnalyticsEvent {
                 return "profile"
             case .userCoursesReviews:
                 return "user_courses_reviews"
+            case .wishlist:
+                return "wishlist"
             case .unknown:
                 return "unknown"
             }
@@ -568,6 +587,7 @@ extension AnalyticsEvent {
                  .notification,
                  .recommendation,
                  .userCoursesReviews,
+                 .wishlist,
                  .unknown:
                 return nil
             case .search(let query):
@@ -845,5 +865,77 @@ extension AnalyticsEvent {
             name: "Home screen widget added",
             parameters: ["size": size]
         )
+    }
+
+    // MARK: - Wishlist -
+
+    static func wishlistCourseAdded(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist added",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static func wishlistCourseRemoved(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist removed",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static let wishlistScreenOpened = AmplitudeAnalyticsEvent(name: "Wishlist screen opened")
+
+    // MARK: - UserCourse -
+
+    static func userCourseActionMade(
+        _ action: CourseInfo.UserCourseAction,
+        course: Course,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course action",
+            parameters: [
+                "action": action.analyticName,
+                "course": course.id,
+                "title": course.title,
+                "is_paid": course.isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+}
+
+fileprivate extension CourseInfo.UserCourseAction {
+    var analyticName: String {
+        switch self {
+        case .favoriteAdd:
+            return "favorite_add"
+        case .favoriteRemove:
+            return "favorite_remove"
+        case .archiveAdd:
+            return "archive_add"
+        case .archiveRemove:
+            return "archive_remove"
+        }
     }
 }

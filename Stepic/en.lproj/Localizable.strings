@@ -468,6 +468,11 @@ CourseInfoCourseActionMoveToArchivedSuccessMessage = "Course Successfully Moved 
 CourseInfoCourseActionRemoveFromArchivedSuccessMessage = "Course Successfully Removed from Archived";
 CourseInfoCourseActionMoveToArchivedFailureMessage = "Failed to Move Course to Archived";
 CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Failed to Remove Course from Archived";
+// Wishlist
+CourseInfoAddToWishlistSuccessMessage = "Course Successfully Added to Wishlist";
+CourseInfoAddToWishlistFailureMessage = "Failed to Add Course to Wishlist";
+CourseInfoRemoveFromWishlistSuccessMessage = "Course Successfully Removed from Wishlist";
+CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishlist";
 
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
@@ -515,6 +520,10 @@ UserCoursesReviewsLeaveReview = "Leave a Review";
 UserCoursesReviewsPossibleReviews1 = "new course for review";
 UserCoursesReviewsPossibleReviews234 = "new courses for review";
 UserCoursesReviewsPossibleReviews567890 = "new courses for review";
+
+/* Wishlist */
+WishlistWidgetTitle = "Wishlist";
+WishlistWidgetEmptyMessage = "No Courses";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning so far. Come back and get even smarter! 🚀";

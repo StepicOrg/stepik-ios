@@ -52,6 +52,7 @@ enum NewProfileCreatedCourses {
         struct Response {
             let course: Course
             let isAdaptive: Bool
+            let courseContinueSource: AnalyticsEvent.CourseContinueSource
             let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
@@ -60,6 +61,7 @@ enum NewProfileCreatedCourses {
             let course: Course
             @available(*, deprecated, message: "Target modules can't be initialized w/o model")
             let isAdaptive: Bool
+            let courseContinueSource: AnalyticsEvent.CourseContinueSource
             let courseViewSource: AnalyticsEvent.CourseViewSource
         }
     }

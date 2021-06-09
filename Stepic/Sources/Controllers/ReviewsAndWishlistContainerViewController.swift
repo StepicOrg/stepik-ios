@@ -5,12 +5,13 @@ extension ReviewsAndWishlistContainerViewController {
     enum Appearance {
         static let stackViewSpacing: CGFloat = 12
         static let stackViewHeight: CGFloat = 100
-        static let stackViewInsets = UIEdgeInsets(top: 4, left: 20, bottom: 10, right: 20)
+        static let stackViewInsets = UIEdgeInsets(top: 4, left: 20, bottom: 10, right: 28)
     }
 }
 
 final class ReviewsAndWishlistContainerViewController: UIViewController {
-    private let userCoursesReviewsBlockAssembly: UserCoursesReviewsBlockAssembly
+    private let userCoursesReviewsWidgetAssembly: UserCoursesReviewsWidgetAssembly
+    private let wishlistWidgetAssembly: WishlistWidgetAssembly
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -21,7 +22,8 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
     }()
 
     init() {
-        self.userCoursesReviewsBlockAssembly = UserCoursesReviewsBlockAssembly()
+        self.userCoursesReviewsWidgetAssembly = UserCoursesReviewsWidgetAssembly()
+        self.wishlistWidgetAssembly = WishlistWidgetAssembly()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -38,7 +40,8 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
     // MARK: Public API
 
     func refreshSubmodules() {
-        self.userCoursesReviewsBlockAssembly.moduleInput?.refreshUserCoursesReviews()
+        self.userCoursesReviewsWidgetAssembly.moduleInput?.refreshReviews()
+        self.wishlistWidgetAssembly.moduleInput?.refreshWishlist()
     }
 
     // MARK: Private API
@@ -51,13 +54,14 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
             make.height.equalTo(Appearance.stackViewHeight)
         }
 
-        let userCoursesReviewsBlockViewController = self.userCoursesReviewsBlockAssembly.makeModule()
+        [self.userCoursesReviewsWidgetAssembly, self.wishlistWidgetAssembly].forEach(self.registerSubmodule(assembly:))
+    }
 
-        self.addChild(userCoursesReviewsBlockViewController)
-        self.stackView.addArrangedSubview(userCoursesReviewsBlockViewController.view)
-        userCoursesReviewsBlockViewController.didMove(toParent: self)
+    private func registerSubmodule(assembly: Assembly) {
+        let viewController = assembly.makeModule()
 
-        let wishlistView = UIView()
-        self.stackView.addArrangedSubview(wishlistView)
+        self.addChild(viewController)
+        self.stackView.addArrangedSubview(viewController.view)
+        viewController.didMove(toParent: self)
     }
 }

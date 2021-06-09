@@ -132,6 +132,12 @@ enum TestData {
         self.loadJSON(path: "course-without-default-promo-code")
     }
 
+    // MARK: CourseBenefitSummaries
+
+    static var courseBenefitSummary: JSON {
+        self.loadJSON(path: "course-benefit-summaries")
+    }
+
     // MARK: Private API
 
     private static func loadJSON(path: String) -> JSON {

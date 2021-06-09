@@ -1,14 +1,14 @@
 import UIKit
 
-protocol UserCoursesReviewsBlockPresenterProtocol {
-    func presentReviews(response: UserCoursesReviewsBlock.ReviewsLoad.Response)
+protocol UserCoursesReviewsWidgetPresenterProtocol {
+    func presentReviews(response: UserCoursesReviewsWidget.ReviewsLoad.Response)
 }
 
-final class UserCoursesReviewsBlockPresenter: UserCoursesReviewsBlockPresenterProtocol {
-    weak var viewController: UserCoursesReviewsBlockViewControllerProtocol?
+final class UserCoursesReviewsWidgetPresenter: UserCoursesReviewsWidgetPresenterProtocol {
+    weak var viewController: UserCoursesReviewsWidgetViewControllerProtocol?
 
-    func presentReviews(response: UserCoursesReviewsBlock.ReviewsLoad.Response) {
-        let viewModel: UserCoursesReviewsBlockViewModel
+    func presentReviews(response: UserCoursesReviewsWidget.ReviewsLoad.Response) {
+        let viewModel: UserCoursesReviewsWidgetViewModel
 
         switch response.result {
         case .success(let data):

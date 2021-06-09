@@ -1,6 +1,6 @@
 import Foundation
 
-enum UserCoursesReviewsBlock {
+enum UserCoursesReviewsWidget {
     /// Show reviews
     enum ReviewsLoad {
         struct Request {}
@@ -27,6 +27,6 @@ enum UserCoursesReviewsBlock {
 
     enum ViewControllerState {
         case loading
-        case result(data: UserCoursesReviewsBlockViewModel)
+        case result(data: UserCoursesReviewsWidgetViewModel)
     }
 }

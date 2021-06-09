@@ -15,6 +15,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let codeLimitsPersistenceService: CodeLimitsPersistenceServiceProtocol
     private let codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol
     private let codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol
+    private let courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol
+    private let courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol
     private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
@@ -47,6 +49,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let analyticsUserProperties: AnalyticsUserProperties
     private let deviceDefaults: DeviceDefaults
+    private let wishlistService: WishlistServiceProtocol
 
     private let synchronizationQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.LogoutDataClearQueue",
@@ -64,6 +67,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         codeLimitsPersistenceService: CodeLimitsPersistenceServiceProtocol = CodeLimitsPersistenceService(),
         codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol = CodeSamplesPersistenceService(),
         codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol = CodeTemplatesPersistenceService(),
+        courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol = CourseBenefitsPersistenceService(),
+        courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol = CourseBenefitSummariesPersistenceService(),
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
         coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol = CoursePurchasesPersistenceService(),
         courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol = CourseReviewsPersistenceService(),
@@ -93,7 +98,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         spotlightIndexingService: SpotlightIndexingServiceProtocol = SpotlightIndexingService.shared,
         analyticsUserProperties: AnalyticsUserProperties = .shared,
         notificationsBadgesManager: NotificationsBadgesManager = .shared,
-        deviceDefaults: DeviceDefaults = .sharedDefaults
+        deviceDefaults: DeviceDefaults = .sharedDefaults,
+        wishlistService: WishlistServiceProtocol = WishlistService.default
     ) {
         self.downloadsDeletionService = downloadsDeletionService
         self.assignmentsPersistenceService = assignmentsPersistenceService
@@ -103,6 +109,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.codeLimitsPersistenceService = codeLimitsPersistenceService
         self.codeSamplesPersistenceService = codeSamplesPersistenceService
         self.codeTemplatePersistenceService = codeTemplatePersistenceService
+        self.courseBenefitsPersistenceService = courseBenefitsPersistenceService
+        self.courseBenefitSummariesPersistenceService = courseBenefitSummariesPersistenceService
         self.coursesPersistenceService = coursesPersistenceService
         self.coursePurchasesPersistenceService = coursePurchasesPersistenceService
         self.courseReviewsPersistenceService = courseReviewsPersistenceService
@@ -133,6 +141,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.analyticsUserProperties = analyticsUserProperties
         self.notificationsBadgesManager = notificationsBadgesManager
         self.deviceDefaults = deviceDefaults
+        self.wishlistService = wishlistService
     }
 
     func clearCurrentUserData() -> Guarantee<Void> {
@@ -167,6 +176,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
             self.notificationsBadgesManager.set(number: 0)
 
             self.deviceDefaults.deviceId = nil
+            self.wishlistService.removeAll()
 
             self.notificationsService.removeAllLocalNotifications()
             self.spotlightIndexingService.deleteAllSearchableItems()
@@ -191,6 +201,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                         self.codeLimitsPersistenceService.deleteAll(),
                         self.codeSamplesPersistenceService.deleteAll(),
                         self.codeTemplatePersistenceService.deleteAll(),
+                        self.courseBenefitsPersistenceService.deleteAll(),
+                        self.courseBenefitSummariesPersistenceService.deleteAll(),
                         self.coursePurchasesPersistenceService.deleteAll(),
                         self.courseReviewsPersistenceService.deleteAll(),
                         self.discussionThreadsPersistenceService.deleteAll(),

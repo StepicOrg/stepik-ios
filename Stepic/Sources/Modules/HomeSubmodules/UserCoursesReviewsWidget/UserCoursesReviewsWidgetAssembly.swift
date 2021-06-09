@@ -1,7 +1,7 @@
 import UIKit
 
-final class UserCoursesReviewsBlockAssembly: Assembly {
-    var moduleInput: UserCoursesReviewsBlockInputProtocol?
+final class UserCoursesReviewsWidgetAssembly: Assembly {
+    var moduleInput: UserCoursesReviewsWidgetInputProtocol?
 
     func makeModule() -> UIViewController {
         let userCoursesReviewsProvider = UserCoursesReviewsProvider(
@@ -12,10 +12,10 @@ final class UserCoursesReviewsBlockAssembly: Assembly {
             coursesPersistenceService: CoursesPersistenceService()
         )
 
-        let provider = UserCoursesReviewsBlockProvider(userCoursesReviewsProvider: userCoursesReviewsProvider)
-        let presenter = UserCoursesReviewsBlockPresenter()
-        let interactor = UserCoursesReviewsBlockInteractor(presenter: presenter, provider: provider)
-        let viewController = UserCoursesReviewsBlockViewController(interactor: interactor)
+        let provider = UserCoursesReviewsWidgetProvider(userCoursesReviewsProvider: userCoursesReviewsProvider)
+        let presenter = UserCoursesReviewsWidgetPresenter()
+        let interactor = UserCoursesReviewsWidgetInteractor(presenter: presenter, provider: provider)
+        let viewController = UserCoursesReviewsWidgetViewController(interactor: interactor)
 
         presenter.viewController = viewController
         self.moduleInput = interactor

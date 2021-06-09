@@ -15,8 +15,14 @@ enum CourseSubscriptionSource: String {
 }
 
 protocol CourseSubscriberProtocol {
-    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course>
+    func join(course: Course, source: CourseSubscriptionSource, isWishlisted: Bool?) -> Promise<Course>
     func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course>
+}
+
+extension CourseSubscriberProtocol {
+    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
+        self.join(course: course, source: source, isWishlisted: nil)
+    }
 }
 
 @available(*, deprecated, message: "Legacy code")
@@ -26,15 +32,7 @@ final class CourseSubscriber: CourseSubscriberProtocol {
         case badResponseFormat
     }
 
-    private lazy var dataBackUpdateService: DataBackUpdateServiceProtocol = {
-        let service = DataBackUpdateService(
-            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
-            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
-            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
-            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
-        )
-        return service
-    }()
+    private lazy var dataBackUpdateService: DataBackUpdateServiceProtocol = DataBackUpdateService.default
 
     private let analytics: Analytics
 
@@ -42,18 +40,19 @@ final class CourseSubscriber: CourseSubscriberProtocol {
         self.analytics = analytics
     }
 
-    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
-        self.performCourseJoinActions(course: course, unsubscribe: false, source: source)
+    func join(course: Course, source: CourseSubscriptionSource, isWishlisted: Bool?) -> Promise<Course> {
+        self.performCourseJoinActions(course: course, unsubscribe: false, source: source, isWishlisted: isWishlisted)
     }
 
     func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
-        self.performCourseJoinActions(course: course, unsubscribe: true, source: source)
+        self.performCourseJoinActions(course: course, unsubscribe: true, source: source, isWishlisted: nil)
     }
 
     private func performCourseJoinActions(
         course: Course,
         unsubscribe: Bool,
-        source: CourseSubscriptionSource
+        source: CourseSubscriptionSource,
+        isWishlisted: Bool?
     ) -> Promise<Course> {
         Promise<Course> { seal in
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: { [weak self] in
@@ -66,7 +65,9 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                     self?.analytics.send(.courseUnsubscribed(id: course.id, title: course.title))
                     AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
-                    self?.analytics.send(.courseJoined(source: source, id: course.id, title: course.title))
+                    self?.analytics.send(
+                        .courseJoined(source: source, id: course.id, title: course.title, isWishlisted: isWishlisted)
+                    )
                     AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
 

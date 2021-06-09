@@ -23,6 +23,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     private let courseSubscriber: CourseSubscriberProtocol
     private let userAccountService: UserAccountServiceProtocol
     private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
+    private let wishlistService: WishlistServiceProtocol
     private let courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
@@ -37,6 +38,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         CourseListFilterQuery(courseListFilters: self.currentFilters)
     }
 
+    private var currentWishlistCoursesIDs = Set<Course.IdType>()
+
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     private lazy var fetchBackgroundQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.CourseListInteractor.CoursesFetch"
@@ -49,6 +52,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         courseSubscriber: CourseSubscriberProtocol,
         userAccountService: UserAccountServiceProtocol,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
+        wishlistService: WishlistServiceProtocol,
         courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol,
         analytics: Analytics,
         courseViewSource: AnalyticsEvent.CourseViewSource
@@ -59,6 +63,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
         self.personalDeadlinesService = personalDeadlinesService
+        self.wishlistService = wishlistService
         self.analytics = analytics
         self.courseViewSource = courseViewSource
 
@@ -92,6 +97,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
 
                 strongSelf.currentCourses = courses.map { (strongSelf.getUniqueIdentifierForCourse($0), $0) }
+                strongSelf.currentWishlistCoursesIDs = Set(strongSelf.wishlistService.getWishlist())
 
                 // Cache new courses fetched from remote.
                 if strongSelf.didLoadFromCache && strongSelf.currentFilters.isEmpty {
@@ -116,7 +122,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                             courses: strongSelf.currentCourses,
                             hasNextPage: meta.hasNext
                         ),
-                        availableAdaptiveCourses: strongSelf.getAvailableAdaptiveCourses(from: courses)
+                        availableAdaptiveCourses: strongSelf.getAvailableAdaptiveCourses(from: courses),
+                        wishlistCoursesIDs: strongSelf.currentWishlistCoursesIDs
                     )
 
                     let response = CourseList.CoursesLoad.Response(
@@ -208,6 +215,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                     courseId: targetCourse.id
                 ),
+                source: .courseWidget,
                 viewSource: self.courseViewSource
             )
         } else {
@@ -225,14 +233,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course
 
-                self.analytics.send(.courseContinuePressed(source: .courseWidget, id: course.id, title: course.title))
-
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: targetCourse.id
                     ),
+                    source: .courseWidget,
                     viewSource: self.courseViewSource
                 )
             }.catch { _ in
@@ -275,9 +282,11 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // - have no more courses
             // then ignore request and pass empty list to presenter
             if !self.isOnline || !self.paginationState.hasNext {
+                self.currentWishlistCoursesIDs = Set(self.wishlistService.getWishlist())
                 let result = CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
-                    availableAdaptiveCourses: Set<Course>()
+                    availableAdaptiveCourses: Set<Course>(),
+                    wishlistCoursesIDs: self.currentWishlistCoursesIDs
                 )
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
@@ -301,12 +310,15 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
                 let appendedCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
                 self.currentCourses.append(contentsOf: appendedCourses)
+                self.currentWishlistCoursesIDs = Set(self.wishlistService.getWishlist())
+
                 let courses = CourseList.AvailableCourses(
                     fetchedCourses: CourseList.ListData(
                         courses: appendedCourses,
                         hasNextPage: meta.hasNext
                     ),
-                    availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
+                    availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses),
+                    wishlistCoursesIDs: self.currentWishlistCoursesIDs
                 )
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
@@ -367,7 +379,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             ),
             availableAdaptiveCourses: self.getAvailableAdaptiveCourses(
                 from: self.currentCourses.map { $0.1 }
-            )
+            ),
+            wishlistCoursesIDs: self.currentWishlistCoursesIDs
         )
         let response = CourseList.CoursesLoad.Response(
             isAuthorized: self.userAccountService.isAuthorized,
@@ -506,5 +519,22 @@ extension CourseListInteractor: CourseListDataBackUpdateServiceDelegate {
 
     func courseListDataBackUpdateServiceDidUpdateCourseList(_ service: CourseListDataBackUpdateServiceProtocol) {
         self.doCoursesFetch(request: .init())
+    }
+
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didUpdateWishlist wishlistCoursesIDs: Set<Course.IdType>
+    ) {
+        let currentCoursesIDs = Set(self.currentCourses.map(\.1.id))
+
+        let shoulsRefreshCourseList = !currentCoursesIDs.isDisjoint(with: wishlistCoursesIDs)
+            || (!self.currentWishlistCoursesIDs.isDisjoint(with: wishlistCoursesIDs)
+                    && !currentCoursesIDs.isDisjoint(with: self.currentWishlistCoursesIDs))
+
+        self.currentWishlistCoursesIDs = wishlistCoursesIDs
+
+        if shoulsRefreshCourseList {
+            refreshCourseList()
+        }
     }
 }

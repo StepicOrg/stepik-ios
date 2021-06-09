@@ -1,9 +1,9 @@
 import Foundation
 import PromiseKit
 
-protocol UserCoursesReviewsBlockProviderProtocol: UserCoursesReviewsProviderProtocol {}
+protocol UserCoursesReviewsWidgetProviderProtocol: UserCoursesReviewsProviderProtocol {}
 
-final class UserCoursesReviewsBlockProvider: UserCoursesReviewsBlockProviderProtocol {
+final class UserCoursesReviewsWidgetProvider: UserCoursesReviewsWidgetProviderProtocol {
     private let userCoursesReviewsProvider: UserCoursesReviewsProviderProtocol
 
     init(userCoursesReviewsProvider: UserCoursesReviewsProviderProtocol) {
