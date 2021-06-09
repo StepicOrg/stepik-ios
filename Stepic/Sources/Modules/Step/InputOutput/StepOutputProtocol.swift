@@ -7,5 +7,5 @@ protocol StepOutputProtocol: AnyObject {
     func handleNextUnitNavigation()
     func handleLessonNavigation(lessonID: Int, stepIndex: Int, unitID: Int?)
     func handleStepNavigation(to index: Int)
-    func handleAutoplayNavigation(from index: Int)
+    func handleAutoplayNavigation(from index: Int, direction: AutoplayNavigationDirection)
 }

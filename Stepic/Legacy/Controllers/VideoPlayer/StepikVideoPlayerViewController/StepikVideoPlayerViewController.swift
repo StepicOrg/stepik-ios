@@ -44,7 +44,8 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
 // MARK: - StepikVideoPlayerViewControllerDelegate: AnyObject -
 
 protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
-    func stepikVideoPlayerViewControllerDidRequestAutoplay(_ viewController: StepikVideoPlayerViewController)
+    func stepikVideoPlayerViewControllerDidRequestPlayNext(_ viewController: StepikVideoPlayerViewController)
+    func stepikVideoPlayerViewControllerDidRequestPlayPrevious(_ viewController: StepikVideoPlayerViewController)
 }
 
 // MARK: - Appearance & Animation -
@@ -929,12 +930,12 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @IBAction
     func playBackwardButtonPressed(_ sender: UIButton) {
-        print(#function)
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestPlayPrevious(self)
     }
 
     @IBAction
     func playForwardButtonPressed(_ sender: UIButton) {
-        print(#function)
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestPlayNext(self)
     }
 
     // MARK: Autoplay
@@ -954,7 +955,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                 return
             }
 
-            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(strongSelf)
+            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestPlayNext(strongSelf)
         }
     }
 
@@ -965,7 +966,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @objc
     private func didClickAutoplayNext() {
-        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(self)
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestPlayNext(self)
     }
 
     @objc
