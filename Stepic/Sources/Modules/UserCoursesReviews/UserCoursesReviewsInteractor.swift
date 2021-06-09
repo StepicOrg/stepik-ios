@@ -23,7 +23,10 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
 
     private let presenter: UserCoursesReviewsPresenterProtocol
     private let provider: UserCoursesReviewsProviderProtocol
+
+    private let userAccountService: UserAccountServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    private let analytics: Analytics
 
     private let outputDebouncer = Debouncer(delay: UserCoursesReviewsInteractor.outputDebounceInterval)
 
@@ -43,17 +46,26 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
     private var didLoadFromCache = false
     private var didPresentReviews = false
 
+    private var shouldOpenedAnalyticsEventSend = true
+    private var currentEditingCourseReviewScore: Int?
+
     init(
         presenter: UserCoursesReviewsPresenterProtocol,
         provider: UserCoursesReviewsProviderProtocol,
-        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+        userAccountService: UserAccountServiceProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
         self.adaptiveStorageManager = adaptiveStorageManager
+        self.analytics = analytics
     }
 
     func doReviewsLoad(request: UserCoursesReviews.ReviewsLoad.Request) {
+        self.sendOpenedAnalyticsEventIfNeeded()
+
         self.fetchReviewsInAppropriateMode().done { data in
             let isCacheEmpty = !self.didLoadFromCache && data.isEmpty
 
@@ -122,6 +134,14 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
             return
         }
 
+        self.analytics.send(
+            .writeCourseReviewPressed(
+                courseID: possibleReview.courseID,
+                courseTitle: possibleReview.course?.title ?? "",
+                source: .userReviews
+            )
+        )
+
         self.presenter.presentWritePossibleCourseReview(response: .init(courseReviewPlainObject: possibleReview))
     }
 
@@ -168,6 +188,15 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
             return
         }
 
+        self.analytics.send(
+            .editCourseReviewPressed(
+                courseID: courseReview.courseID,
+                courseTitle: courseReview.course?.title ?? "",
+                source: .userReviews
+            )
+        )
+        self.currentEditingCourseReviewScore = courseReview.score
+
         self.presenter.presentEditLeavedCourseReview(response: .init(courseReview: courseReview))
     }
 
@@ -182,11 +211,14 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
             return
         }
 
+        let deletingScore = courseReview.score
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         self.provider.deleteCourseReview(id: courseReview.id).then {
             self.fetchReviewsInAppropriateMode()
         }.done { data in
+            self.analytics.send(.courseReviewDeleted(courseID: courseID, rating: deletingScore, source: .userReviews))
+
             self.presenter.presentWaitingStatus(response: .init(success: true))
             self.presenter.presentReviews(response: .init(result: .success(data)))
         }.catch { _ in
@@ -264,6 +296,27 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
         }
     }
 
+    private func sendOpenedAnalyticsEventIfNeeded() {
+        guard self.shouldOpenedAnalyticsEventSend else {
+            return
+        }
+
+        self.shouldOpenedAnalyticsEventSend = false
+
+        guard let currentUserID = self.userAccountService.currentUserID else {
+            return
+        }
+
+        self.analytics.send(
+            .userCourseReviewsScreenOpened(
+                userID: currentUserID,
+                userAccountState: self.userAccountService.isAuthorized
+                    ? .authorized
+                    : (self.userAccountService.currentUser?.isGuest ?? false) ? .anonymous : .other
+            )
+        )
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
         case cacheFetchFailed
@@ -280,6 +333,10 @@ extension UserCoursesReviewsInteractor: WriteCourseReviewOutputProtocol {
 
         self.currentLeavedCourseReviews?.insert(courseReview, at: 0)
 
+        self.analytics.send(
+            .courseReviewCreated(courseID: courseReview.courseID, rating: courseReview.score, source: .userReviews)
+        )
+
         let newReviewsData = self.makeReviewsDataFromCurrentData()
         self.presenter.presentReviews(response: .init(result: .success(newReviewsData)))
     }
@@ -288,6 +345,15 @@ extension UserCoursesReviewsInteractor: WriteCourseReviewOutputProtocol {
         guard let targetIndex = self.currentLeavedCourseReviews?.firstIndex(where: { $0.id == courseReview.id }) else {
             return
         }
+
+        self.analytics.send(
+            .courseReviewUpdated(
+                courseID: courseReview.courseID,
+                fromRating: self.currentEditingCourseReviewScore ?? 0,
+                toRating: courseReview.score,
+                source: .userReviews
+            )
+        )
 
         self.currentLeavedCourseReviews?[targetIndex] = courseReview
 
