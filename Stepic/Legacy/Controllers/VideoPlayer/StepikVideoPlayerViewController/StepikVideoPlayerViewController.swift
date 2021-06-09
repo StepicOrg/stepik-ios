@@ -904,6 +904,14 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @objc
     private func videoLayerDoubleTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        let location = gestureRecognizer.location(in: self.view)
+
+        if location.x < self.view.frame.width / 3 {
+            self.analytics.send(.videoPlayerControlClicked(.doubleClickLeft))
+        } else if location.x > self.view.frame.width / 3 * 2 {
+            self.analytics.send(.videoPlayerControlClicked(.doubleClickRight))
+        }
+
         self.currentVideoFillMode.toggle()
     }
 
