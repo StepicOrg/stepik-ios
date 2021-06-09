@@ -843,14 +843,46 @@ extension AnalyticsEvent {
 
     static let videoPlayerDidStartPictureInPicture = AmplitudeAnalyticsEvent(name: "Video played in picture-in-picture")
 
-    static func videoPlayerDidChangeSpeed(currentSpeed: String, targetSpeed: String) -> AmplitudeAnalyticsEvent {
+    static func videoPlayerDidChangeSpeed(source: String, target: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Video rate changed",
             parameters: [
-                "source": currentSpeed,
-                "target": targetSpeed
+                "source": source,
+                "target": target
             ]
         )
+    }
+
+    static func videoPlayerQualityChanged(source: String, target: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Video quality changed",
+            parameters: [
+                "source": source,
+                "target": target
+            ]
+        )
+    }
+
+    static func videoPlayerControlClicked(_ sender: VideoPlayerControlType) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Video player control clicked",
+            parameters: [
+                "action": sender.rawValue
+            ]
+        )
+    }
+
+    enum VideoPlayerControlType: String {
+        case previos
+        case rewind
+        case forward
+        case next
+        case seekBack = "seek_back"
+        case seekForward = "seek_forward"
+        case doubleClickLeft = "double_click_left"
+        case doubleClickRight = "double_click_right"
+        case play
+        case pause
     }
 
     // MARK: - AdaptiveRating -

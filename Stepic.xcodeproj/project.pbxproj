@@ -1028,6 +1028,7 @@
 		2CECFEE9252F1EDD006BA883 /* VisitedCoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEE8252F1EDD006BA883 /* VisitedCoursesAPI.swift */; };
 		2CECFEF1252F1F4C006BA883 /* VisitedCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */; };
 		2CECFEF9252F235A006BA883 /* VisitedCoursesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */; };
+		2CED386326710EFE00854DA3 /* AutoplayNavigationDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED386226710EFE00854DA3 /* AutoplayNavigationDirection.swift */; };
 		2CEDB4052600BD7700CB077F /* StoryPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDB4042600BD7700CB077F /* StoryPart.swift */; };
 		2CEDC6422608906F00B0B018 /* CourseRecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC6412608906F00B0B018 /* CourseRecommendationsAPI.swift */; };
 		2CEDC6492608919C00B0B018 /* CourseRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDC6482608919C00B0B018 /* CourseRecommendation.swift */; };
@@ -2860,6 +2861,7 @@
 		2CECFEE8252F1EDD006BA883 /* VisitedCoursesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesAPI.swift; sourceTree = "<group>"; };
 		2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCourse.swift; sourceTree = "<group>"; };
 		2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesNetworkService.swift; sourceTree = "<group>"; };
+		2CED386226710EFE00854DA3 /* AutoplayNavigationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoplayNavigationDirection.swift; sourceTree = "<group>"; };
 		2CEDB4042600BD7700CB077F /* StoryPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPart.swift; sourceTree = "<group>"; };
 		2CEDC6412608906F00B0B018 /* CourseRecommendationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRecommendationsAPI.swift; sourceTree = "<group>"; };
 		2CEDC6482608919C00B0B018 /* CourseRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRecommendation.swift; sourceTree = "<group>"; };
@@ -4648,6 +4650,7 @@
 			children = (
 				2CCDD80424F8A695006644A8 /* ApplicationShortcutIdentifier.swift */,
 				2C936D46243D3FCE00A4A4A9 /* ApplicationTheme.swift */,
+				2CED386226710EFE00854DA3 /* AutoplayNavigationDirection.swift */,
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
@@ -10484,6 +10487,7 @@
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				2C5DF13F1FED26AC003B1177 /* CardStepViewController.swift in Sources */,
 				2C5DF1411FED26B7003B1177 /* CardStepPresenter.swift in Sources */,
+				2CED386326710EFE00854DA3 /* AutoplayNavigationDirection.swift in Sources */,
 				084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
