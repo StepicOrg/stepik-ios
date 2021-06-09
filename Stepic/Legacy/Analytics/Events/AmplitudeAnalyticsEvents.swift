@@ -648,55 +648,97 @@ extension AnalyticsEvent {
         )
     }
 
-    static func writeCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func writeCourseReviewPressed(
+        courseID: Int,
+        courseTitle: String,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Create course review pressed",
             parameters: [
                 "course": courseID,
-                "title": courseTitle
+                "title": courseTitle,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func editCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func editCourseReviewPressed(
+        courseID: Int,
+        courseTitle: String,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Edit course review pressed",
             parameters: [
                 "course": courseID,
-                "title": courseTitle
+                "title": courseTitle,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewCreated(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewCreated(courseID: Int, rating: Int, source: CourseReviewSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review created",
             parameters: [
                 "course": courseID,
-                "rating": rating
+                "rating": rating,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewUpdated(courseID: Int, fromRating: Int, toRating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewUpdated(
+        courseID: Int,
+        fromRating: Int,
+        toRating: Int,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review updated",
             parameters: [
                 "course": courseID,
                 "from_rating": fromRating,
-                "to_rating": toRating
+                "to_rating": toRating,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewDeleted(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewDeleted(courseID: Int, rating: Int, source: CourseReviewSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review deleted",
             parameters: [
                 "course": courseID,
-                "rating": rating
+                "rating": rating,
+                "source": source.rawValue
             ]
         )
+    }
+
+    enum CourseReviewSource: String {
+        case courseReviews = "course_reviews"
+        case userReviews = "user_reviews"
+    }
+
+    static func userCourseReviewsScreenOpened(
+        userID: Int,
+        userAccountState: UserCourseReviewsUserAccountState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course reviews screen opened",
+            parameters: [
+                "id": userID,
+                "state": userAccountState.rawValue
+            ]
+        )
+    }
+
+    enum UserCourseReviewsUserAccountState: String {
+        case other
+        case anonymous
+        case authorized = "self"
     }
 
     // MARK: - Discussions -
