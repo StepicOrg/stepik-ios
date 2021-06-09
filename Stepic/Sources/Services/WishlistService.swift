@@ -28,12 +28,16 @@ final class WishlistService: WishlistServiceProtocol {
     private let wishlistStorageManager: WishlistStorageManagerProtocol
     private let storageRecordsNetworkService: StorageRecordsNetworkServiceProtocol
 
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
+
     init(
         wishlistStorageManager: WishlistStorageManagerProtocol,
-        storageRecordsNetworkService: StorageRecordsNetworkServiceProtocol
+        storageRecordsNetworkService: StorageRecordsNetworkServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.wishlistStorageManager = wishlistStorageManager
         self.storageRecordsNetworkService = storageRecordsNetworkService
+        self.dataBackUpdateService = dataBackUpdateService
     }
 
     func getWishlist() -> [Course.IdType] {
@@ -89,6 +93,8 @@ final class WishlistService: WishlistServiceProtocol {
                 self.wishlistStorageManager.coursesIDs = wishlistData.coursesIDs
             }
 
+            self.dataBackUpdateService.triggerWishlistUpdate(coursesIDs: self.wishlistStorageManager.coursesIDs)
+
             return .value(())
         }
     }
@@ -120,6 +126,8 @@ final class WishlistService: WishlistServiceProtocol {
                     self.wishlistStorageManager.coursesIDs.filter { $0 != courseID }
             }
 
+            self.dataBackUpdateService.triggerWishlistUpdate(coursesIDs: self.wishlistStorageManager.coursesIDs)
+
             return .value(())
         }
     }
@@ -129,7 +137,8 @@ extension WishlistService {
     static var `default`: WishlistService {
         WishlistService(
             wishlistStorageManager: WishlistStorageManager(),
-            storageRecordsNetworkService: StorageRecordsNetworkService(storageRecordsAPI: StorageRecordsAPI())
+            storageRecordsNetworkService: StorageRecordsNetworkService(storageRecordsAPI: StorageRecordsAPI()),
+            dataBackUpdateService: DataBackUpdateService.default
         )
     }
 }
