@@ -107,6 +107,8 @@ final class StepikVideoPlayerViewController: UIViewController {
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
+    @IBOutlet var playBackwardButton: UIButton!
+    @IBOutlet var playForwardButton: UIButton!
 
     // MARK: Autoplay controls
 
@@ -119,7 +121,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private lazy var autoplayPlayNextCircleControlView: PlayNextCircleControlView = {
         let view = PlayNextCircleControlView()
-        view.addTarget(self, action: #selector(self.didClickPlayNext), for: .touchUpInside)
+        view.addTarget(self, action: #selector(self.didClickAutoplayNext), for: .touchUpInside)
         return view
     }()
 
@@ -923,6 +925,18 @@ final class StepikVideoPlayerViewController: UIViewController {
         }
     }
 
+    // MARK: Play backward & forward
+
+    @IBAction
+    func playBackwardButtonPressed(_ sender: UIButton) {
+        print(#function)
+    }
+
+    @IBAction
+    func playForwardButtonPressed(_ sender: UIButton) {
+        print(#function)
+    }
+
     // MARK: Autoplay
 
     private func setAutoplayControlsHidden(_ isHidden: Bool) {
@@ -950,7 +964,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     @objc
-    private func didClickPlayNext() {
+    private func didClickAutoplayNext() {
         self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(self)
     }
 
