@@ -341,6 +341,9 @@ followers567890 = "followers";
 authors1 = "author";
 authors234 = "authors";
 authors567890 = "authors";
+reviews1 = "review";
+reviews234 = "reviews";
+reviews567890 = "reviews";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 TagPlaceholderError = "Error while loading courses. <b>Press</b> to try again";
@@ -471,6 +474,11 @@ CourseInfoCourseActionMoveToArchivedSuccessMessage = "Course Successfully Moved 
 CourseInfoCourseActionRemoveFromArchivedSuccessMessage = "Course Successfully Removed from Archived";
 CourseInfoCourseActionMoveToArchivedFailureMessage = "Failed to Move Course to Archived";
 CourseInfoCourseActionRemoveFromArchivedFailureMessage = "Failed to Remove Course from Archived";
+// Wishlist
+CourseInfoAddToWishlistSuccessMessage = "Course Successfully Added to Wishlist";
+CourseInfoAddToWishlistFailureMessage = "Failed to Add Course to Wishlist";
+CourseInfoRemoveFromWishlistSuccessMessage = "Course Successfully Removed from Wishlist";
+CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishlist";
 
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
@@ -509,6 +517,19 @@ UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";
 UserCoursesTabFavoritesTitle = "Favorite";
 UserCoursesTabArchivedTitle = "Archive";
+
+/* User Courses Reviews */
+UserCoursesReviewsTitle = "Reviews";
+UserCoursesReviewsBlockTitle = "My Reviews";
+UserCoursesReviewsPlaceholderEmptyTitle = "No Reviews";
+UserCoursesReviewsLeaveReview = "Leave a Review";
+UserCoursesReviewsPossibleReviews1 = "new course for review";
+UserCoursesReviewsPossibleReviews234 = "new courses for review";
+UserCoursesReviewsPossibleReviews567890 = "new courses for review";
+
+/* Wishlist */
+WishlistWidgetTitle = "Wishlist";
+WishlistWidgetEmptyMessage = "No Courses";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning so far. Come back and get even smarter! 🚀";

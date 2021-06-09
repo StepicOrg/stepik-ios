@@ -1,12 +1,14 @@
 import Foundation
 import PromiseKit
 
+// swiftlint:disable file_length
 protocol CourseInfoInteractorProtocol {
     func doCourseRefresh(request: CourseInfo.CourseLoad.Request)
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request)
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request)
     func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request)
     func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request)
+    func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request)
     func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request)
@@ -29,6 +31,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
+    private let wishlistService: WishlistServiceProtocol
     private let urlFactory: StepikURLFactory
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
@@ -101,6 +104,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
         visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol,
+        wishlistService: WishlistServiceProtocol,
         urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
@@ -118,6 +122,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
+        self.wishlistService = wishlistService
         self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
@@ -228,6 +233,52 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request) {
+        guard let course = self.currentCourse,
+              let currentUserID = self.userAccountService.currentUserID else {
+            return
+        }
+
+        let targetAction = self.wishlistService.contains(course)
+            ? CourseInfo.CourseWishlistAction.remove
+            : CourseInfo.CourseWishlistAction.add
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        firstly { () -> Promise<Void> in
+            switch targetAction {
+            case .add:
+                self.analytics.send(
+                    .wishlistCourseAdded(
+                        id: course.id,
+                        title: course.title,
+                        isPaid: course.isPaid,
+                        viewSource: self.courseViewSource
+                    )
+                )
+                return self.wishlistService.add(course, userID: currentUserID)
+            case .remove:
+                self.analytics.send(
+                    .wishlistCourseRemoved(
+                        id: course.id,
+                        title: course.title,
+                        isPaid: course.isPaid,
+                        viewSource: self.courseViewSource
+                    )
+                )
+                return self.wishlistService.remove(course, userID: currentUserID)
+            }
+        }.done {
+            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+            self.presenter.presentWishlistMainActionResult(response: .init(action: targetAction, isSuccessful: true))
+
+            let newWishlist = self.wishlistService.getWishlist()
+            self.dataBackUpdateService.triggerWishlistUpdate(coursesIDs: newWishlist)
+        }.catch { _ in
+            self.presenter.presentWishlistMainActionResult(response: .init(action: targetAction, isSuccessful: false))
+        }
+    }
+
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request) {
         guard let course = self.currentCourse else {
             return
@@ -250,15 +301,17 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     course: course,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                         courseId: course.id
-                    )
+                    ),
+                    courseViewSource: self.courseViewSource
                 )
             )
         } else {
+            let isWishlisted = self.wishlistService.contains(self.courseID)
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(
                     .buyCoursePressed(id: course.id),
-                    .courseBuyPressed(source: .courseScreen, id: course.id)
+                    .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: isWishlisted)
                 )
 
                 if self.iapService.canBuyCourse(course) {
@@ -275,10 +328,16 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
             self.analytics.send(.authorizedUserTappedJoinCourse)
             // Unenrolled course -> join, open last step
-            self.courseSubscriber.join(course: course, source: .preview).done { course in
+            self.courseSubscriber.join(course: course, source: .preview, isWishlisted: isWishlisted).done { course in
                 // Refresh course
                 self.currentCourse = course
                 self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+
+                // Remove course from wishlist
+                if self.wishlistService.contains(course),
+                   let currentUserID = self.userAccountService.currentUserID {
+                    self.wishlistService.remove(course, userID: currentUserID).cauterize()
+                }
 
                 // Present step
                 self.presenter.presentLastStep(
@@ -286,7 +345,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         course: course,
                         isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
                             courseId: course.id
-                        )
+                        ),
+                        courseViewSource: self.courseViewSource
                     )
                 )
             }.ensure {
@@ -325,8 +385,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
-        .init(
+        let isWishlistAvailable = self.userAccountService.isAuthorized
+            && self.wishlistService.canAdd(self.currentCourse.require())
+        return .init(
             course: self.currentCourse.require(),
+            isWishlisted: self.wishlistService.contains(self.courseID),
+            isWishlistAvailable: isWishlistAvailable,
             iapLocalizedPrice: self.currentCourseIAPLocalizedPrice,
             promoCode: self.currentPromoCode
         )
@@ -424,6 +488,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private func doUserCourseAction(course: Course, action: CourseInfo.UserCourseAction) {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        self.analytics.send(.userCourseActionMade(action, course: course, viewSource: self.courseViewSource))
 
         firstly {
             self.provider

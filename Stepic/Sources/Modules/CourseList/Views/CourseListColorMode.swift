@@ -128,6 +128,18 @@ extension CourseListColorMode {
         return appearance
     }
 
+    var courseWidgetBadgeTintColor: UIColor {
+        switch self {
+        case .light, .grouped, .clearLight:
+            return .stepikSystemSecondaryText
+        case .dark:
+            return .dynamic(
+                light: .white.withAlphaComponent(0.6),
+                dark: .stepikSystemSecondaryText
+            )
+        }
+    }
+
     var courseWidgetBorderColor: UIColor {
         switch self {
         case .light, .grouped, .clearLight:

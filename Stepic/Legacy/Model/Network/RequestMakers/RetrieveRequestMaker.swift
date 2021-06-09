@@ -133,6 +133,7 @@ final class RetrieveRequestMaker {
         requestEndpoint: String,
         paramName: String,
         params: Parameters,
+        updatingObjects: [T] = [],
         withManager manager: Alamofire.Session
     ) -> Promise<[T]> {
         var allObjects = [T]()
@@ -147,7 +148,7 @@ final class RetrieveRequestMaker {
                         requestEndpoint: requestEndpoint,
                         paramName: paramName,
                         params: currentPageParams,
-                        updatingObjects: [],
+                        updatingObjects: updatingObjects,
                         withManager: manager
                     )
                 }.done { objects, meta in

@@ -2,23 +2,23 @@ import Foundation
 import PromiseKit
 
 protocol CoursesPersistenceServiceProtocol: AnyObject {
-    func fetch(ids: [Course.IdType], page: Int) -> Promise<([Course], Meta)>
+    func fetch(ids: [Course.IdType]) -> Promise<[Course]>
     func fetch(id: Course.IdType) -> Promise<Course?>
     func fetchEnrolled() -> Guarantee<[Course]>
     func fetchAll() -> Guarantee<[Course]>
 }
 
 extension CoursesPersistenceServiceProtocol {
-    func fetch(ids: [Course.IdType]) -> Promise<([Course], Meta)> {
-        self.fetch(ids: ids, page: 1)
+    func fetch(ids: [Course.IdType], page: Int = 1) -> Promise<([Course], Meta)> {
+        self.fetch(ids: ids).map { ($0, Meta.oneAndOnlyPage) }
     }
 }
 
 final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
-    func fetch(ids: [Course.IdType], page: Int) -> Promise<([Course], Meta)> {
+    func fetch(ids: [Course.IdType]) -> Promise<[Course]> {
         Promise { seal in
             Course.fetchAsync(ids: ids).done { courses in
-                seal.fulfill((courses, Meta.oneAndOnlyPage))
+                seal.fulfill(courses)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
@@ -27,7 +27,7 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
 
     func fetch(id: Course.IdType) -> Promise<Course?> {
         Promise { seal in
-            self.fetch(ids: [id]).done { courses, _ in
+            self.fetch(ids: [id]).done { courses in
                 seal.fulfill(courses.first)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

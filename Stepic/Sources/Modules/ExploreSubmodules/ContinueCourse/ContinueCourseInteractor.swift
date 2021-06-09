@@ -58,12 +58,14 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             return
         }
 
-        self.analytics.send(
-            .courseContinuePressed(source: .homeWidget, id: currentCourse.id, title: currentCourse.title)
-        )
-
         let isAdaptive = self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: currentCourse.id)
-        self.moduleOutput?.presentLastStep(course: currentCourse, isAdaptive: isAdaptive, viewSource: .fastContinue)
+
+        self.moduleOutput?.presentLastStep(
+            course: currentCourse,
+            isAdaptive: isAdaptive,
+            source: .homeWidget,
+            viewSource: .fastContinue
+        )
     }
 
     func doContinueCourseEmptyAction(request: ContinueCourse.ContinueCourseEmptyAction.Request) {

@@ -116,9 +116,16 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel) {
         let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
+        let presentationContext: WriteCourseReview.PresentationContext = {
+            if let review = viewModel.review {
+                return .update(review)
+            }
+            return .create
+        }()
+
         let assembly = WriteCourseReviewAssembly(
             courseID: viewModel.courseID,
-            courseReview: viewModel.review,
+            presentationContext: presentationContext,
             navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? WriteCourseReviewOutputProtocol
         )

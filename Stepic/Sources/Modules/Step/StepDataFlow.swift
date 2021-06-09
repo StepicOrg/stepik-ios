@@ -82,7 +82,9 @@ enum StepDataFlow {
 
     /// Handle autoplay navigation inside/next lesson
     enum AutoplayNavigationRequest {
-        struct Request {}
+        struct Request {
+            let direction: AutoplayNavigationDirection
+        }
     }
 
     /// Handle information about step was presented

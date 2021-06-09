@@ -65,6 +65,30 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         }
     }
 
+    static func fetch(userID: User.IdType) -> Guarantee<[CourseReview]> {
+        let request = CourseReview.fetchRequest
+        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
+
+        let predicate = NSPredicate(format: "managedUserId == %@", userID.fetchValue)
+
+        request.predicate = predicate
+        request.sortDescriptors = [descriptor]
+
+        return Guarantee { seal in
+            DispatchQueue.doWorkOnMain {
+                let context = CoreDataHelper.shared.context
+                context.performAndWait {
+                    do {
+                        let courseReviews = try context.fetch(request)
+                        seal(courseReviews)
+                    } catch {
+                        seal([])
+                    }
+                }
+            }
+        }
+    }
+
     static func fetch(courseID: Course.IdType, userID: User.IdType) -> Guarantee<[CourseReview]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseReview")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)

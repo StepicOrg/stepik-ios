@@ -2,6 +2,7 @@ import PromiseKit
 import SnapKit
 import UIKit
 
+// swiftlint:disable file_length
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
     func displayContent(viewModel: Home.ContentLoad.ViewModel)
@@ -25,6 +26,7 @@ final class HomeViewController: BaseExploreViewController {
         .stories,
         .streakActivity,
         .enrolledCourses,
+        .reviewsAndWishlist,
         .visitedCourses,
         .popularCourses
     ]
@@ -34,6 +36,7 @@ final class HomeViewController: BaseExploreViewController {
 
     private var currentStoriesSubmoduleState = StoriesState.shown
     private var currentEnrolledCourseListState: EnrolledCourseListState?
+    private var currentReviewsAndWishlistState: ReviewsAndWishlistState?
 
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
@@ -68,6 +71,9 @@ final class HomeViewController: BaseExploreViewController {
 
             if strongSelf.currentEnrolledCourseListState == .empty {
                 strongSelf.refreshStateForEnrolledCourses(state: .normal)
+            }
+            if strongSelf.currentReviewsAndWishlistState == .shown {
+                strongSelf.refreshReviewsAndWishlist(state: .shown)
             }
 
             strongSelf.refreshStateForVisitedCourses(state: .shown)
@@ -323,11 +329,16 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = (placeholderView, nil)
         }
 
+        let contentViewInsets = state == .normal
+            ? .zero
+            : CourseListContainerViewFactory.Appearance.horizontalContentInsets
+
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
                 containerDescription: state.containerDescription,
-                headerDescription: state.headerDescription
+                headerDescription: state.headerDescription,
+                contentViewInsets: contentViewInsets
             )
 
         containerView.onShowAllButtonClick = { [weak self] in
@@ -345,6 +356,42 @@ final class HomeViewController: BaseExploreViewController {
         )
 
         self.currentEnrolledCourseListState = state
+    }
+
+    // MARK: - Reviews and wishlist submodule
+
+    private enum ReviewsAndWishlistState {
+        case shown
+        case hidden
+    }
+
+    private func refreshReviewsAndWishlist(state: ReviewsAndWishlistState) {
+        let submoduleType = Home.Submodule.reviewsAndWishlist
+
+        switch state {
+        case .shown:
+            if let submodule = self.getSubmodule(type: submoduleType),
+               let containerViewController = submodule.viewController as? ReviewsAndWishlistContainerViewController {
+                containerViewController.refreshSubmodules()
+            } else {
+                let containerViewController = ReviewsAndWishlistContainerViewController()
+
+                self.registerSubmodule(
+                    .init(
+                        viewController: containerViewController,
+                        view: containerViewController.view,
+                        isLanguageDependent: false,
+                        type: submoduleType
+                    )
+                )
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: submoduleType) {
+                self.removeSubmodule(submodule)
+            }
+        }
+
+        self.currentReviewsAndWishlistState = state
     }
 
     // MARK: - Visited courses submodule
@@ -560,6 +607,7 @@ extension HomeViewController: HomeViewControllerProtocol {
                 || (strongSelf.currentStoriesSubmoduleState == .hidden
                         && strongSelf.lastContentLanguage != viewModel.contentLanguage)
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
+            let shouldDisplayReviewsAndWishlist = viewModel.isAuthorized
 
             strongSelf.lastContentLanguage = viewModel.contentLanguage
             strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
@@ -567,6 +615,7 @@ extension HomeViewController: HomeViewControllerProtocol {
             strongSelf.refreshStateForStories(state: shouldDisplayStories ? .shown : .hidden)
             strongSelf.refreshContinueCourse(state: .shown)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
+            strongSelf.refreshReviewsAndWishlist(state: shouldDisplayReviewsAndWishlist ? .shown : .hidden)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }

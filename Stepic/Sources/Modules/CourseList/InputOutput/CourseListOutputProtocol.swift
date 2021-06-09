@@ -3,7 +3,12 @@ import Foundation
 protocol CourseListOutputProtocol: AnyObject {
     func presentCourseInfo(course: Course, viewSource: AnalyticsEvent.CourseViewSource)
     func presentCourseSyllabus(course: Course, viewSource: AnalyticsEvent.CourseViewSource)
-    func presentLastStep(course: Course, isAdaptive: Bool, viewSource: AnalyticsEvent.CourseViewSource)
+    func presentLastStep(
+        course: Course,
+        isAdaptive: Bool,
+        source: AnalyticsEvent.CourseContinueSource,
+        viewSource: AnalyticsEvent.CourseViewSource
+    )
     func presentAuthorization()
     func presentPaidCourseInfo(course: Course)
 
