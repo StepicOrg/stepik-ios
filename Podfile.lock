@@ -31,44 +31,26 @@ PODS:
     - FBSDKLoginKit/Login (= 8.2.0)
   - FBSDKLoginKit/Login (8.2.0):
     - FBSDKCoreKit (~> 8.2.0)
-  - Firebase/Analytics (8.0.0):
+  - Firebase/Analytics (8.1.1):
     - Firebase/Core
-  - Firebase/Core (8.0.0):
+  - Firebase/Core (8.1.1):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 8.0.0)
-  - Firebase/CoreOnly (8.0.0):
-    - FirebaseCore (= 8.0.0)
-  - Firebase/Crashlytics (8.0.0):
+    - FirebaseAnalytics (~> 8.1.0)
+  - Firebase/CoreOnly (8.1.1):
+    - FirebaseCore (= 8.1.0)
+  - Firebase/Crashlytics (8.1.1):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 8.0.0)
-  - Firebase/Messaging (8.0.0):
+    - FirebaseCrashlytics (~> 8.1.0)
+  - Firebase/Messaging (8.1.1):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 8.0.0)
-  - Firebase/RemoteConfig (8.0.0):
+    - FirebaseMessaging (~> 8.1.0)
+  - Firebase/RemoteConfig (8.1.1):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 8.0.0)
-  - FirebaseABTesting (8.0.0):
+    - FirebaseRemoteConfig (~> 8.1.0)
+  - FirebaseABTesting (8.1.0):
     - FirebaseCore (~> 8.0)
-  - FirebaseAnalytics (8.0.0):
-    - FirebaseAnalytics/AdIdSupport (= 8.0.0)
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
-    - GoogleUtilities/MethodSwizzler (~> 7.4)
-    - GoogleUtilities/Network (~> 7.4)
-    - "GoogleUtilities/NSData+zlib (~> 7.4)"
-    - nanopb (~> 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (8.0.0):
-    - FirebaseAnalytics/Base (= 8.0.0)
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
-    - GoogleAppMeasurement (= 8.0.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
-    - GoogleUtilities/MethodSwizzler (~> 7.4)
-    - GoogleUtilities/Network (~> 7.4)
-    - "GoogleUtilities/NSData+zlib (~> 7.4)"
-    - nanopb (~> 2.30908.0)
-  - FirebaseAnalytics/Base (8.0.0):
+  - FirebaseAnalytics (8.1.1):
+    - FirebaseAnalytics/AdIdSupport (= 8.1.1)
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
@@ -76,54 +58,72 @@ PODS:
     - GoogleUtilities/Network (~> 7.4)
     - "GoogleUtilities/NSData+zlib (~> 7.4)"
     - nanopb (~> 2.30908.0)
-  - FirebaseCore (8.0.0):
+  - FirebaseAnalytics/AdIdSupport (8.1.1):
+    - FirebaseAnalytics/Base (= 8.1.1)
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleAppMeasurement (= 8.1.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
+    - GoogleUtilities/MethodSwizzler (~> 7.4)
+    - GoogleUtilities/Network (~> 7.4)
+    - "GoogleUtilities/NSData+zlib (~> 7.4)"
+    - nanopb (~> 2.30908.0)
+  - FirebaseAnalytics/Base (8.1.1):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
+    - GoogleUtilities/MethodSwizzler (~> 7.4)
+    - GoogleUtilities/Network (~> 7.4)
+    - "GoogleUtilities/NSData+zlib (~> 7.4)"
+    - nanopb (~> 2.30908.0)
+  - FirebaseCore (8.1.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
-  - FirebaseCoreDiagnostics (8.0.0):
+  - FirebaseCoreDiagnostics (8.1.0):
     - GoogleDataTransport (~> 9.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
-  - FirebaseCrashlytics (8.0.0):
+  - FirebaseCrashlytics (8.1.0):
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
     - GoogleDataTransport (~> 9.0)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstallations (8.0.0):
+  - FirebaseInstallations (8.1.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
     - PromisesObjC (~> 1.2)
-  - FirebaseMessaging (8.0.0):
+  - FirebaseMessaging (8.1.0):
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Reachability (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
-  - FirebaseRemoteConfig (8.0.0):
+  - FirebaseRemoteConfig (8.1.0):
     - FirebaseABTesting (~> 8.0)
     - FirebaseCore (~> 8.0)
     - FirebaseInstallations (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - "GoogleUtilities/NSData+zlib (~> 7.4)"
   - FLEX (4.4.1)
-  - GoogleAppMeasurement (8.0.0):
-    - GoogleAppMeasurement/AdIdSupport (= 8.0.0)
+  - GoogleAppMeasurement (8.1.1):
+    - GoogleAppMeasurement/AdIdSupport (= 8.1.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/MethodSwizzler (~> 7.4)
     - GoogleUtilities/Network (~> 7.4)
     - "GoogleUtilities/NSData+zlib (~> 7.4)"
     - nanopb (~> 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (8.0.0):
+  - GoogleAppMeasurement/AdIdSupport (8.1.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/MethodSwizzler (~> 7.4)
     - GoogleUtilities/Network (~> 7.4)
     - "GoogleUtilities/NSData+zlib (~> 7.4)"
     - nanopb (~> 2.30908.0)
-  - GoogleDataTransport (9.0.0):
+  - GoogleDataTransport (9.0.1):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
@@ -231,11 +231,11 @@ DEPENDENCIES:
   - EasyTipView (= 2.1.0)
   - FBSDKCoreKit (= 8.2.0)
   - FBSDKLoginKit (= 8.2.0)
-  - Firebase/Analytics (= 8.0.0)
-  - Firebase/Core (= 8.0.0)
-  - Firebase/Crashlytics (= 8.0.0)
-  - Firebase/Messaging (= 8.0.0)
-  - Firebase/RemoteConfig (= 8.0.0)
+  - Firebase/Analytics (= 8.1.1)
+  - Firebase/Core (= 8.1.1)
+  - Firebase/Crashlytics (= 8.1.1)
+  - Firebase/Messaging (= 8.1.1)
+  - Firebase/RemoteConfig (= 8.1.1)
   - FLEX (from `https://github.com/ivan-magda/FLEX.git`, branch `master`)
   - GoogleSignIn (= 5.0.2)
   - Highlightr (from `https://github.com/raspu/Highlightr.git`, tag `2.1.2`)
@@ -376,18 +376,18 @@ SPEC CHECKSUMS:
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
-  Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
-  FirebaseABTesting: daebc95ec8829607d07dfe5e92dc3285aca29bc4
-  FirebaseAnalytics: dcb92c7c9ef4fa7ffac276e8f87bd4fc8c97f1b8
-  FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255
-  FirebaseCoreDiagnostics: a31d987ba0fe16d59886a5dbadc2f1de871f88c8
-  FirebaseCrashlytics: 69cddb6bfa7656c5346e603bc85b029392252ee6
-  FirebaseInstallations: c4aab1005d6547b00a7529777fe52f5d4d45165b
-  FirebaseMessaging: 1a33b4af3c8042ed6ddacb6c031894af2064bfab
-  FirebaseRemoteConfig: 055f6b5ba1751547596ded5032c4d5c6054ca501
+  Firebase: 4bb49ae87756034cef870fa3c4006235eb46f475
+  FirebaseABTesting: 5b22abfa9a55d5b9cd3d1e500a3ca29f6b1264cb
+  FirebaseAnalytics: d6dd061b26a04744cb988c66e29697181152b2a3
+  FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
+  FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
+  FirebaseCrashlytics: 1b55b3a718f9e20d59d96db46a4652d95a8ba1d2
+  FirebaseInstallations: 7f31798a8198c354eadcb87176d2090b62edc187
+  FirebaseMessaging: c8871b0907dcf4e76de81241eb6a62be6d657d2f
+  FirebaseRemoteConfig: eef8513f6d368ba5c6ed6d1cb267b4d949cf65bf
   FLEX: 75ca95cff4bd57592c6e75adee7651ace29f9c25
-  GoogleAppMeasurement: c6bbc9753d046b5456dd4f940057fbad2c28419e
-  GoogleDataTransport: 11e3a5f2c190327df1a4a5d7e7ae3d4d5b9c9e4c
+  GoogleAppMeasurement: 31c7d7655818784b7dd34bdf6884f75b465d5f6c
+  GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
@@ -426,6 +426,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: fb4b3c20a0c0237b03b34cc07b6d575332f43097
 
-PODFILE CHECKSUM: 467989e7d3885f8c7879182750677027787ce517
+PODFILE CHECKSUM: f8a967a620739319b2458e7fce4a5889af7b90fd
 
 COCOAPODS: 1.10.1
