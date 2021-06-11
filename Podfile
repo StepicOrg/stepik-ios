@@ -19,7 +19,7 @@ def shared_pods
   pod 'SDWebImage', '5.11.0'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.4.0'
-  pod 'PromiseKit', '6.13.1'
+  pod 'PromiseKit', '6.15.3'
   pod 'SwiftLint', '0.43.1'
 
   if ENV['FASTLANE_BETA_PROFILE'] == 'true'
