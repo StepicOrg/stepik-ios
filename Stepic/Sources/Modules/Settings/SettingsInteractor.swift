@@ -24,6 +24,7 @@ protocol SettingsInteractorProtocol {
     func doAdaptiveModeSettingUpdate(request: Settings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: Settings.DeleteAllContent.Request)
     func doAccountLogOut(request: Settings.AccountLogOut.Request)
+    func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request)
 }
 
 final class SettingsInteractor: SettingsInteractorProtocol {
@@ -189,4 +190,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             self.presenter.presentDismiss(response: .init())
         }
     }
-}
+
+    func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request) {
+        self.presenter.presentDeleteUserAccount(response: .init())
+    }

@@ -215,6 +215,7 @@ final class WebControllerManager: NSObject {
         case certificate
         case externalLink
         case resetPassword
+        case deleteUserAccount
         case openQuizInWeb
 
         fileprivate var isRequiresAuthorizationToOpenURL: Bool {
@@ -226,7 +227,7 @@ final class WebControllerManager: NSObject {
         }
 
         private var withAuthorizationKeys: [WebControllerKey] {
-            [.exam, .solution, .peerReview, .paidCourse, .openQuizInWeb]
+            [.exam, .solution, .peerReview, .paidCourse, .openQuizInWeb, .deleteUserAccount]
         }
 
         private var withEmbeddedModeKeys: [WebControllerKey] {

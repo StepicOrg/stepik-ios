@@ -24,7 +24,7 @@ final class SettingsAssembly: Assembly {
             adaptiveStorageManager: AdaptiveStorageManager.shared,
             applicationThemeService: ApplicationThemeService()
         )
-        let presenter = SettingsPresenter()
+        let presenter = SettingsPresenter(urlFactory: StepikURLFactory())
         let interactor = SettingsInteractor(
             presenter: presenter,
             provider: provider,

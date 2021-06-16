@@ -12,6 +12,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
     func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel)
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
+    func displayDeleteUserAccount(viewModel: Settings.DeleteUserAccountPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayDismiss(viewModel: Settings.DismissPresentation.ViewModel)
 }
@@ -236,6 +237,16 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         } else {
             SVProgressHUD.showError(withStatus: nil)
         }
+    }
+
+    func displayDeleteUserAccount(viewModel: Settings.DeleteUserAccountPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .deleteUserAccount,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 
     func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel) {
@@ -547,6 +558,7 @@ extension SettingsViewController: SettingsViewDelegate {
         case .about:
             self.push(module: AboutAppViewController())
         case .deleteAccount:
+            self.interactor.doDeleteUserAccountPresentation(request: .init())
         case .logOut:
             self.handleLogOutAction()
         case .useCellularDataForDownloads, .autoplayNextVideo, .adaptiveMode:

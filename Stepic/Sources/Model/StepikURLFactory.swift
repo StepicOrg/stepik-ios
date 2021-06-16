@@ -7,6 +7,10 @@ final class StepikURLFactory {
         self.makeURL(path: .users(id))
     }
 
+    func makeDeleteUserAccount() -> URL? {
+        self.makeURL(path: .deleteUserAccount)
+    }
+
     // MARK: Course
 
     func makeCourse(id: Course.IdType) -> URL? {
@@ -140,6 +144,7 @@ final class StepikURLFactory {
         case lessonIDStepPosition(lessonID: Lesson.IdType, stepPosition: Int)
         case submissionsStepIDSubmissionID(stepID: Step.IdType, submissionID: Submission.IdType)
         case resetAccountPassword
+        case deleteUserAccount
         case catalog(CourseListModel.IdType?)
         case reviewSession(Int)
 
@@ -163,6 +168,8 @@ final class StepikURLFactory {
                 return "/submissions/\(stepID)/\(submissionID)"
             case .resetAccountPassword:
                 return "/accounts/password/reset"
+            case .deleteUserAccount:
+                return "/users/delete-account/"
             case .catalog(let courseListIDOrNil):
                 if let courseListID = courseListIDOrNil {
                     return "/catalog/\(courseListID)"
