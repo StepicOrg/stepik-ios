@@ -192,5 +192,6 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     }
 
     func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request) {
+        self.analytics.send(.deleteAccountClicked)
         self.presenter.presentDeleteUserAccount(response: .init())
     }

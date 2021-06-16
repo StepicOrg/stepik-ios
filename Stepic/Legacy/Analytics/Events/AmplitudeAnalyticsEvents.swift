@@ -481,6 +481,8 @@ extension AnalyticsEvent {
         return AmplitudeAnalyticsEvent(name: "Font size selected", parameters: ["size": fontSizeStringValue])
     }
 
+    static let deleteAccountClicked = AmplitudeAnalyticsEvent(name: "Delete account clicked")
+
     // MARK: - Content Language -
 
     static func contentLanguageChanged(
