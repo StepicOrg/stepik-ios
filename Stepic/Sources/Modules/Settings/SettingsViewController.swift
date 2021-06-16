@@ -12,6 +12,7 @@ protocol SettingsViewControllerProtocol: AnyObject {
     func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel)
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
+    func displayDeleteUserAccount(viewModel: Settings.DeleteUserAccountPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayDismiss(viewModel: Settings.DismissPresentation.ViewModel)
 }
@@ -117,6 +118,7 @@ final class SettingsViewController: UIViewController {
         case downloads
         case deleteAllContent
         case about
+        case deleteAccount
         case logOut
 
         var cellTitle: String {
@@ -145,6 +147,8 @@ final class SettingsViewController: UIViewController {
                 return NSLocalizedString("SettingsCellTitleDeleteAllContent", comment: "")
             case .about:
                 return NSLocalizedString("SettingsCellTitleAbout", comment: "")
+            case .deleteAccount:
+                return NSLocalizedString("SettingsCellTitleDeleteAccount", comment: "")
             case .logOut:
                 return NSLocalizedString("SettingsCellTitleLogOut", comment: "")
             }
@@ -233,6 +237,16 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         } else {
             SVProgressHUD.showError(withStatus: nil)
         }
+    }
+
+    func displayDeleteUserAccount(viewModel: Settings.DeleteUserAccountPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .deleteUserAccount,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 
     func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel) {
@@ -413,15 +427,33 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         )
 
         // Other
-        let aboutCellViewModel = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.about.rawValue,
-            type: .rightDetail(
-                options: .init(
-                    title: .init(text: Setting.about.cellTitle),
-                    accessoryType: .disclosureIndicator
+        var otherSectionCellsViewModels = [
+            SettingsTableSectionViewModel.Cell(
+                uniqueIdentifier: Setting.about.rawValue,
+                type: .rightDetail(
+                    options: .init(
+                        title: .init(text: Setting.about.cellTitle),
+                        accessoryType: .disclosureIndicator
+                    )
                 )
             )
-        )
+        ]
+        if settingsViewModel.isAuthorized {
+            otherSectionCellsViewModels.append(
+                SettingsTableSectionViewModel.Cell(
+                    uniqueIdentifier: Setting.deleteAccount.rawValue,
+                    type: .rightDetail(
+                        options: .init(
+                            title: .init(
+                                text: Setting.deleteAccount.cellTitle,
+                                appearance: .init(textColor: .stepikRed, textAlignment: .left)
+                            ),
+                            accessoryType: .disclosureIndicator
+                        )
+                    )
+                )
+            )
+        }
 
         let learningSectionCellsViewModels = settingsViewModel.isApplicationThemeSettingAvailable
             ? [autoplayCellViewModel, adaptiveModeCellViewModel]
@@ -457,7 +489,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleOther", comment: "")),
-                cells: [aboutCellViewModel],
+                cells: otherSectionCellsViewModels,
                 footer: nil
             )
         ]
@@ -525,6 +557,8 @@ extension SettingsViewController: SettingsViewDelegate {
             self.handleDeleteAllContentAction()
         case .about:
             self.push(module: AboutAppViewController())
+        case .deleteAccount:
+            self.interactor.doDeleteUserAccountPresentation(request: .init())
         case .logOut:
             self.handleLogOutAction()
         case .useCellularDataForDownloads, .autoplayNextVideo, .adaptiveMode:
