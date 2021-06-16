@@ -981,92 +981,68 @@ extension AnalyticsEvent {
 
     // MARK: - Finished Steps -
 
-    static func finishedStepsScreenOpened(
-        courseID: Int,
-        title: String,
-        completeRate: Float
-    ) -> AmplitudeAnalyticsEvent {
+    static func finishedStepsScreenOpened(course: Course) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Finished steps screen opened",
             parameters: [
-                "course": courseID,
-                "title": title,
-                "complete_rate": completeRate
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
             ]
         )
     }
 
-    static func finishedStepsSharePressed(
-        courseID: Int,
-        title: String,
-        completeRate: Float
-    ) -> AmplitudeAnalyticsEvent {
+    static func finishedStepsSharePressed(course: Course) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Finished steps share pressed",
             parameters: [
-                "course": courseID,
-                "title": title,
-                "complete_rate": completeRate
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
             ]
         )
     }
 
-    static func finishedStepsViewCertificatePressed(
-        courseID: Int,
-        title: String,
-        completeRate: Float
-    ) -> AmplitudeAnalyticsEvent {
+    static func finishedStepsViewCertificatePressed(course: Course) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Finished steps view certificate pressed",
             parameters: [
-                "course": courseID,
-                "title": title,
-                "complete_rate": completeRate
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
             ]
         )
     }
 
-    static func finishedStepsBackToAssignmentsPressed(
-        courseID: Int,
-        title: String,
-        completeRate: Float
-    ) -> AmplitudeAnalyticsEvent {
+    static func finishedStepsBackToAssignmentsPressed(course: Course) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Finished steps back to assignments pressed",
             parameters: [
-                "course": courseID,
-                "title": title,
-                "complete_rate": completeRate
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
             ]
         )
     }
 
-    static func finishedStepsFindNewCoursePressed(
-        courseID: Int,
-        title: String,
-        completeRate: Float
-    ) -> AmplitudeAnalyticsEvent {
+    static func finishedStepsFindNewCoursePressed(course: Course) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Finished steps find new course pressed",
             parameters: [
-                "course": courseID,
-                "title": title,
-                "complete_rate": completeRate
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
             ]
         )
     }
 
-    static func finishedStepsLeaveReviewPressed(
-        courseID: Int,
-        title: String,
-        completeRate: Float
-    ) -> AmplitudeAnalyticsEvent {
+    static func finishedStepsLeaveReviewPressed(course: Course) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Finished steps leave review pressed",
             parameters: [
-                "course": courseID,
-                "title": title,
-                "complete_rate": completeRate
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
             ]
         )
     }
