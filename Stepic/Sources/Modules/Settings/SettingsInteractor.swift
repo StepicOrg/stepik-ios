@@ -58,6 +58,8 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         !(self.userAccountService.currentUser?.isGuest ?? true) && self.userAccountService.isAuthorized
     }
 
+    var shouldCheckUserAccountDeletionResult = false
+
     init(
         presenter: SettingsPresenterProtocol,
         provider: SettingsProviderProtocol,
@@ -75,6 +77,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
+        self.checkUserAccountIsDeletedIfNeeded()
         self.presenter.presentSettings(response: .init(data: self.settingsData))
     }
 
@@ -193,5 +196,22 @@ final class SettingsInteractor: SettingsInteractorProtocol {
 
     func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request) {
         self.analytics.send(.deleteAccountClicked)
+        self.shouldCheckUserAccountDeletionResult = true
         self.presenter.presentDeleteUserAccount(response: .init())
     }
+
+    private func checkUserAccountIsDeletedIfNeeded() {
+        guard self.shouldCheckUserAccountDeletionResult,
+              let currentUserID = self.userAccountService.currentUserID else {
+            return
+        }
+
+        self.shouldCheckUserAccountDeletionResult = false
+
+        self.provider.fetchCurrentUser().done { remoteCurrentUser in
+            if currentUserID != remoteCurrentUser.id {
+                self.doAccountLogOut(request: .init())
+            }
+        }.cauterize()
+    }
+}
