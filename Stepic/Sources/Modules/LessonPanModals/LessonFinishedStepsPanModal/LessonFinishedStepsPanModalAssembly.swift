@@ -30,7 +30,8 @@ final class LessonFinishedStepsPanModalAssembly: Assembly {
         let interactor = LessonFinishedStepsPanModalInteractor(
             courseID: self.courseID,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            analytics: StepikAnalytics.shared
         )
         let viewController = LessonFinishedStepsPanModalViewController(interactor: interactor)
 

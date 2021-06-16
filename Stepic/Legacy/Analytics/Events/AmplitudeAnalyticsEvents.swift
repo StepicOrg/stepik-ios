@@ -979,6 +979,74 @@ extension AnalyticsEvent {
 
     static let wishlistScreenOpened = AmplitudeAnalyticsEvent(name: "Wishlist screen opened")
 
+    // MARK: - Finished Steps -
+
+    static func finishedStepsScreenOpened(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps screen opened",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsSharePressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps share pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsViewCertificatePressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps view certificate pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsBackToAssignmentsPressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps back to assignments pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsFindNewCoursePressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps find new course pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsLeaveReviewPressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps leave review pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
     // MARK: - UserCourse -
 
     static func userCourseActionMade(
