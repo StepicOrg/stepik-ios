@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.177-develop</string>
 	<key>CFBundleVersion</key>
-	<string>339</string>
+	<string>340</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
