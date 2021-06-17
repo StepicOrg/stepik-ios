@@ -17,6 +17,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             availableInAdaptive: response.result.availableAdaptiveCourses,
             wishlistCoursesIDs: response.result.wishlistCoursesIDs,
             isAuthorized: response.isAuthorized,
+            isCoursePricesEnabled: response.isCoursePricesEnabled,
             viewSource: response.viewSource
         )
 
@@ -39,6 +40,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
                 availableInAdaptive: data.availableAdaptiveCourses,
                 wishlistCoursesIDs: data.wishlistCoursesIDs,
                 isAuthorized: response.isAuthorized,
+                isCoursePricesEnabled: response.isCoursePricesEnabled,
                 viewSource: response.viewSource
             )
             let listData = CourseList.ListData(
@@ -59,6 +61,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         availableInAdaptive: Set<Course>,
         wishlistCoursesIDs: Set<Course.IdType>,
         isAuthorized: Bool,
+        isCoursePricesEnabled: Bool,
         viewSource: AnalyticsEvent.CourseViewSource
     ) -> [CourseWidgetViewModel] {
         var viewModels: [CourseWidgetViewModel] = []
@@ -70,6 +73,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
                 isAdaptive: isAdaptive,
                 isWishlisted: wishlistCoursesIDs.contains(course.id),
                 isAuthorized: isAuthorized,
+                isCoursePricesEnabled: isCoursePricesEnabled,
                 viewSource: viewSource
             )
 
@@ -94,6 +98,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         isAdaptive: Bool,
         isWishlisted: Bool,
         isAuthorized: Bool,
+        isCoursePricesEnabled: Bool,
         viewSource: AnalyticsEvent.CourseViewSource
     ) -> CourseWidgetViewModel {
         let summaryText: String = {
@@ -125,6 +130,32 @@ final class CourseListPresenter: CourseListPresenterProtocol {
 
         let certificateLabelText = course.hasCertificate ? NSLocalizedString("Certificate", comment: "") : nil
 
+        var priceViewModel: CourseWidgetPriceViewModel?
+        if isCoursePricesEnabled {
+            let priceString: String? = {
+                guard course.isPaid else {
+                    return nil
+                }
+
+                return course.displayPriceIAP ?? course.displayPrice
+            }()
+            let discountPriceString: String? = {
+                guard course.isPaid,
+                      let defaultPromoCode = course.defaultPromoCode,
+                      defaultPromoCode.isValid && course.priceTier == nil else {
+                    return nil
+                }
+
+                return FormatterHelper.price(defaultPromoCode.price, currencyCode: defaultPromoCode.currencyCode)
+            }()
+
+            priceViewModel = CourseWidgetPriceViewModel(
+                isPaid: course.isPaid,
+                priceString: priceString,
+                discountPriceString: discountPriceString
+            )
+        }
+
         return CourseWidgetViewModel(
             title: course.title,
             summary: summaryText,
@@ -138,6 +169,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             isWishlistAvailable: isAuthorized && !course.enrolled,
             progress: progressViewModel,
             userCourse: userCourseViewModel,
+            price: priceViewModel,
             uniqueIdentifier: uniqueIdentifier,
             courseID: course.id,
             viewSource: viewSource

@@ -81,7 +81,8 @@ class CourseListAssembly: Assembly {
             wishlistService: WishlistService.default,
             courseListDataBackUpdateService: courseListDataBackUpdateService,
             analytics: StepikAnalytics.shared,
-            courseViewSource: self.courseViewSource
+            courseViewSource: self.courseViewSource,
+            remoteConfig: RemoteConfig.shared
         )
         self.moduleInput = interactor
 
