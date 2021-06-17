@@ -455,7 +455,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
         firstly { () -> Promise<PromoCode?> in
             if let promoCodeName = self.promoCodeName {
-                // swiftlint:disable:next array_init
                 return self.provider.checkPromoCode(name: promoCodeName).map { $0 }
             } else if let defaultPromoCode = course.defaultPromoCode {
                 return defaultPromoCode.isValid ? .value(defaultPromoCode) : .value(nil)

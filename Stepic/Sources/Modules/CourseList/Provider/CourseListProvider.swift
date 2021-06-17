@@ -23,13 +23,16 @@ final class CourseListProvider: CourseListProviderProtocol {
     private let reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
     private let courseListsPersistenceService: CourseListsPersistenceServiceProtocol
 
+    private let iapService: IAPServiceProtocol
+
     init(
         type: CourseListType,
         networkService: CourseListNetworkServiceProtocol,
         persistenceService: CourseListPersistenceServiceProtocol? = nil,
         progressesNetworkService: ProgressesNetworkServiceProtocol,
         reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
-        courseListsPersistenceService: CourseListsPersistenceServiceProtocol
+        courseListsPersistenceService: CourseListsPersistenceServiceProtocol,
+        iapService: IAPServiceProtocol
     ) {
         self.type = type
         self.persistenceService = persistenceService
@@ -37,6 +40,7 @@ final class CourseListProvider: CourseListProviderProtocol {
         self.progressesNetworkService = progressesNetworkService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
         self.courseListsPersistenceService = courseListsPersistenceService
+        self.iapService = iapService
     }
 
     // MARK: - CourseListProviderProtocol
@@ -60,20 +64,30 @@ final class CourseListProvider: CourseListProviderProtocol {
 
     func fetchRemote(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
-            self.networkService.fetch(page: page, filterQuery: filterQuery).then {
-                (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
+            self.networkService.fetch(
+                page: page,
+                filterQuery: filterQuery
+            ).then { (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary], [String?])> in
                 let progressesIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }
 
+                let iapPricePromises = courses.map { course -> Promise<String?> in
+                    self.iapService.canBuyCourse(course)
+                        ? Promise(self.iapService.getLocalizedPrice(for: course))
+                        : .value(nil)
+                }
+
                 return when(
                     fulfilled: self.progressesNetworkService.fetch(ids: progressesIDs, page: 1),
-                    self.reviewSummariesNetworkService.fetch(ids: summariesIDs, page: 1)
-                ).compactMap { (courses, meta, $0.0, $1.0) }
-            }.then { (courses, meta, progresses, reviewSummaries) -> Guarantee<([Course], Meta)> in
+                    self.reviewSummariesNetworkService.fetch(ids: summariesIDs, page: 1),
+                    when(fulfilled: iapPricePromises)
+                ).compactMap { (courses, meta, $0.0, $1.0, $2) }
+            }.then { (courses, meta, progresses, reviewSummaries, iapPrices) -> Guarantee<([Course], Meta)> in
                 self.mergeAsync(
                     courses: courses,
                     progresses: progresses,
-                    reviewSummaries: reviewSummaries
+                    reviewSummaries: reviewSummaries,
+                    iapPrices: iapPrices
                 ).map { ($0, meta) }
             }.done { courses, meta in
                 seal.fulfill((courses, meta))
@@ -101,7 +115,8 @@ final class CourseListProvider: CourseListProviderProtocol {
     private func mergeAsync(
         courses: [Course],
         progresses: [Progress],
-        reviewSummaries: [CourseReviewSummary]
+        reviewSummaries: [CourseReviewSummary],
+        iapPrices: [String?]
     ) -> Guarantee<[Course]> {
         Guarantee { seal in
             let progressesMap: [Progress.IdType: Progress] = progresses
@@ -116,6 +131,7 @@ final class CourseListProvider: CourseListProviderProtocol {
                 if let reviewSummaryID = courses[i].reviewSummaryId {
                     courses[i].reviewSummary = reviewSummariesMap[reviewSummaryID]
                 }
+                courses[i].displayPriceIAP = iapPrices[i]
             }
 
             CoreDataHelper.shared.save()

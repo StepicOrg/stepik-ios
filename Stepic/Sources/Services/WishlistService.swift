@@ -112,7 +112,6 @@ final class WishlistService: WishlistServiceProtocol {
                case .wishlist = storageRecord.kind,
                let wishlistData = storageRecord.data as? WishlistStorageRecordData {
                 wishlistData.coursesIDs = wishlistData.coursesIDs.filter { $0 != courseID }
-                // swiftlint:disable:next array_init
                 return self.storageRecordsNetworkService.update(record: storageRecord).map { $0 }
             } else {
                 return .value(nil)
