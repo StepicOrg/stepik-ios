@@ -309,6 +309,9 @@ enum LessonDataFlow {
     enum StartStep {
         case index(_: Int)
         case id(_: Step.IdType)
+        case last
+
+        static var first: StartStep { .index(0) }
     }
 
     // MARK: Structs

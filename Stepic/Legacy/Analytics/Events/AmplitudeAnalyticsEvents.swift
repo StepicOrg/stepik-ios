@@ -648,55 +648,97 @@ extension AnalyticsEvent {
         )
     }
 
-    static func writeCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func writeCourseReviewPressed(
+        courseID: Int,
+        courseTitle: String,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Create course review pressed",
             parameters: [
                 "course": courseID,
-                "title": courseTitle
+                "title": courseTitle,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func editCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func editCourseReviewPressed(
+        courseID: Int,
+        courseTitle: String,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Edit course review pressed",
             parameters: [
                 "course": courseID,
-                "title": courseTitle
+                "title": courseTitle,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewCreated(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewCreated(courseID: Int, rating: Int, source: CourseReviewSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review created",
             parameters: [
                 "course": courseID,
-                "rating": rating
+                "rating": rating,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewUpdated(courseID: Int, fromRating: Int, toRating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewUpdated(
+        courseID: Int,
+        fromRating: Int,
+        toRating: Int,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review updated",
             parameters: [
                 "course": courseID,
                 "from_rating": fromRating,
-                "to_rating": toRating
+                "to_rating": toRating,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewDeleted(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewDeleted(courseID: Int, rating: Int, source: CourseReviewSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review deleted",
             parameters: [
                 "course": courseID,
-                "rating": rating
+                "rating": rating,
+                "source": source.rawValue
             ]
         )
+    }
+
+    enum CourseReviewSource: String {
+        case courseReviews = "course_reviews"
+        case userReviews = "user_reviews"
+    }
+
+    static func userCourseReviewsScreenOpened(
+        userID: Int,
+        userAccountState: UserCourseReviewsUserAccountState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course reviews screen opened",
+            parameters: [
+                "id": userID,
+                "state": userAccountState.rawValue
+            ]
+        )
+    }
+
+    enum UserCourseReviewsUserAccountState: String {
+        case other
+        case anonymous
+        case authorized = "self"
     }
 
     // MARK: - Discussions -
@@ -801,14 +843,46 @@ extension AnalyticsEvent {
 
     static let videoPlayerDidStartPictureInPicture = AmplitudeAnalyticsEvent(name: "Video played in picture-in-picture")
 
-    static func videoPlayerDidChangeSpeed(currentSpeed: String, targetSpeed: String) -> AmplitudeAnalyticsEvent {
+    static func videoPlayerDidChangeSpeed(source: String, target: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Video rate changed",
             parameters: [
-                "source": currentSpeed,
-                "target": targetSpeed
+                "source": source,
+                "target": target
             ]
         )
+    }
+
+    static func videoPlayerQualityChanged(source: String, target: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Video quality changed",
+            parameters: [
+                "source": source,
+                "target": target
+            ]
+        )
+    }
+
+    static func videoPlayerControlClicked(_ sender: VideoPlayerControlType) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Video player control clicked",
+            parameters: [
+                "action": sender.rawValue
+            ]
+        )
+    }
+
+    enum VideoPlayerControlType: String {
+        case previos
+        case rewind
+        case forward
+        case next
+        case seekBack = "seek_back"
+        case seekForward = "seek_forward"
+        case doubleClickLeft = "double_click_left"
+        case doubleClickRight = "double_click_right"
+        case play
+        case pause
     }
 
     // MARK: - AdaptiveRating -

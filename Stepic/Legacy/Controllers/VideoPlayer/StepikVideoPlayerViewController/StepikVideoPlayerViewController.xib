@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,6 +20,8 @@
                 <outlet property="fullTimeTopLabel" destination="ZZw-HW-dZ9" id="HwJ-V4-ibc"/>
                 <outlet property="fullscreenPlayButton" destination="um1-Jr-FFH" id="b7q-ye-mc8"/>
                 <outlet property="pictureInPictureButton" destination="8WK-so-iOg" id="0Xe-4W-sJp"/>
+                <outlet property="playBackwardButton" destination="02R-hW-zh2" id="Taq-mS-PWK"/>
+                <outlet property="playForwardButton" destination="dXN-ZV-x28" id="TpN-6w-qZg"/>
                 <outlet property="qualityButton" destination="toN-Q6-jzn" id="tPW-y7-IaL"/>
                 <outlet property="rateButton" destination="jpo-wy-Esq" id="Qbr-7a-Nx8"/>
                 <outlet property="topContainerView" destination="9gx-PI-4Wv" id="UrU-3z-rIa"/>
@@ -37,7 +39,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyR-gR-ToD" userLabel="Bottom Controls">
                     <rect key="frame" x="20" y="340" width="560" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="um1-Jr-FFH">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="um1-Jr-FFH" userLabel="PlayPauseButton">
                             <rect key="frame" x="256" y="1" width="48" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="48" id="HQg-DJ-s4W"/>
@@ -48,8 +50,8 @@
                                 <action selector="playPressed:" destination="-1" eventType="touchUpInside" id="QHH-1T-Pcw"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoB-ve-4BS">
-                            <rect key="frame" x="320" y="10" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoB-ve-4BS" userLabel="SeekForwardButton">
+                            <rect key="frame" x="314" y="10" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="tVL-Dp-TN2"/>
                                 <constraint firstAttribute="height" constant="30" id="wZk-Yo-OEn"/>
@@ -59,8 +61,8 @@
                                 <action selector="seekForwardPressed:" destination="-1" eventType="touchUpInside" id="3Lm-9j-ZPq"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knc-c5-olR">
-                            <rect key="frame" x="210" y="10" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knc-c5-olR" userLabel="SeekBackwardButton">
+                            <rect key="frame" x="216" y="10" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="DMK-n1-UpU"/>
                                 <constraint firstAttribute="width" constant="30" id="n5t-wt-pm2"/>
@@ -70,7 +72,18 @@
                                 <action selector="seekBackPressed:" destination="-1" eventType="touchUpInside" id="DYa-XZ-3sb"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toN-Q6-jzn">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02R-hW-zh2" userLabel="PlayBackwardButton">
+                            <rect key="frame" x="167" y="1" width="33" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="vBb-tR-155"/>
+                                <constraint firstAttribute="height" constant="48" id="yQ7-QF-N8W"/>
+                            </constraints>
+                            <state key="normal" image="backward.fill"/>
+                            <connections>
+                                <action selector="playBackwardButtonPressed:" destination="-1" eventType="touchUpInside" id="LRh-JX-xwT"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toN-Q6-jzn" userLabel="QualityButton">
                             <rect key="frame" x="508" y="10" width="44" height="30"/>
                             <state key="normal" title="1080p">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -79,7 +92,7 @@
                                 <action selector="changeQualityPressed:" destination="-1" eventType="touchUpInside" id="hEr-wd-5kf"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpo-wy-Esq">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpo-wy-Esq" userLabel="RateButton">
                             <rect key="frame" x="8" y="10" width="30" height="30"/>
                             <state key="normal" title="1.5x">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -88,18 +101,33 @@
                                 <action selector="changeRatePressed:" destination="-1" eventType="touchUpInside" id="gGv-Gn-ahs"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXN-ZV-x28" userLabel="PlayForwardButton">
+                            <rect key="frame" x="360" y="1" width="33" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="k9k-pg-3fN"/>
+                                <constraint firstAttribute="height" constant="48" id="kSX-m1-KBo"/>
+                            </constraints>
+                            <state key="normal" image="forward.fill"/>
+                            <connections>
+                                <action selector="playForwardButtonPressed:" destination="-1" eventType="touchUpInside" id="0J9-ZC-hde"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="gts-J5-a5Y"/>
                     <color key="backgroundColor" red="0.83529411764705885" green="0.83137254901960778" blue="0.85098039215686272" alpha="0.74794130069999998" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="knc-c5-olR" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="7ZO-ur-Sfh"/>
+                        <constraint firstItem="dXN-ZV-x28" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="Hkp-tk-DF3"/>
                         <constraint firstItem="MoB-ve-4BS" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="I1e-2N-aae"/>
                         <constraint firstItem="gts-J5-a5Y" firstAttribute="trailing" secondItem="toN-Q6-jzn" secondAttribute="trailing" constant="8" id="SWq-FR-Q39"/>
-                        <constraint firstItem="MoB-ve-4BS" firstAttribute="leading" secondItem="um1-Jr-FFH" secondAttribute="trailing" constant="16" id="VvC-b6-Uyy"/>
+                        <constraint firstItem="MoB-ve-4BS" firstAttribute="leading" secondItem="um1-Jr-FFH" secondAttribute="trailing" constant="10" id="VvC-b6-Uyy"/>
+                        <constraint firstItem="knc-c5-olR" firstAttribute="leading" secondItem="02R-hW-zh2" secondAttribute="trailing" constant="16" id="X6w-Op-S1L"/>
+                        <constraint firstItem="02R-hW-zh2" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="Y5r-Ab-PJU"/>
                         <constraint firstItem="jpo-wy-Esq" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="e96-UG-koQ"/>
                         <constraint firstAttribute="height" constant="50" id="igX-Zj-N0W"/>
                         <constraint firstItem="um1-Jr-FFH" firstAttribute="centerX" secondItem="fyR-gR-ToD" secondAttribute="centerX" id="j2a-8M-cBZ"/>
-                        <constraint firstItem="um1-Jr-FFH" firstAttribute="leading" secondItem="knc-c5-olR" secondAttribute="trailing" constant="16" id="pMg-pD-6wl"/>
+                        <constraint firstItem="um1-Jr-FFH" firstAttribute="leading" secondItem="knc-c5-olR" secondAttribute="trailing" constant="10" id="pMg-pD-6wl"/>
+                        <constraint firstItem="dXN-ZV-x28" firstAttribute="leading" secondItem="MoB-ve-4BS" secondAttribute="trailing" constant="16" id="ppy-R8-N2b"/>
                         <constraint firstItem="um1-Jr-FFH" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="sus-vd-Mx6"/>
                         <constraint firstItem="jpo-wy-Esq" firstAttribute="leading" secondItem="gts-J5-a5Y" secondAttribute="leading" constant="8" id="tvt-q5-fQw"/>
                         <constraint firstItem="toN-Q6-jzn" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="w29-8I-pJO"/>
@@ -222,6 +250,8 @@
         </view>
     </objects>
     <resources>
+        <image name="backward.fill" width="33" height="33"/>
+        <image name="forward.fill" width="33" height="33"/>
         <image name="ic_forward_10_48pt" width="48" height="48"/>
         <image name="ic_play_arrow_48pt" width="48" height="48"/>
         <image name="ic_replay_10_48pt" width="48" height="48"/>

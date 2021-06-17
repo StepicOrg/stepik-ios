@@ -19,7 +19,9 @@ final class UserCoursesReviewsAssembly: Assembly {
         let interactor = UserCoursesReviewsInteractor(
             presenter: presenter,
             provider: provider,
-            adaptiveStorageManager: AdaptiveStorageManager()
+            userAccountService: UserAccountService(),
+            adaptiveStorageManager: AdaptiveStorageManager(),
+            analytics: StepikAnalytics.shared
         )
         let viewController = UserCoursesReviewsViewController(interactor: interactor)
 
