@@ -19,6 +19,7 @@ extension CourseWidgetView {
         let statsViewInsets = LayoutInsets(top: 8)
 
         let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
+        let priceViewInsets = LayoutInsets(top: 12, bottom: 17)
 
         let continueLearningButtonInsets = LayoutInsets(top: 16)
 
@@ -65,7 +66,16 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         return button
     }()
 
+    private lazy var priceView: CourseWidgetPriceView = {
+        let view = CourseWidgetPriceView()
+        view.isHidden = true
+        return view
+    }()
+
     private var badgeImageViewWidthConstraint: Constraint?
+
+    private var summaryLabelLeadingToSuperviewConstraint: Constraint?
+    private var summaryLabelLeadingToTitleConstraint: Constraint?
 
     var onContinueLearningButtonClick: (() -> Void)?
 
@@ -106,11 +116,26 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         self.statsView.isArchived = isArchived
         self.statsView.progress = isArchived ? nil : viewModel.progress
 
+        self.updatePriceView(viewModel: viewModel.price)
         self.updateBadgeImageView(viewModel: viewModel)
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
         self.statsView.progress = viewModel
+    }
+
+    private func updatePriceView(viewModel: CourseWidgetPriceViewModel?) {
+        if let viewModel = viewModel, !viewModel.isEnrolled {
+            self.summaryLabelLeadingToTitleConstraint?.activate()
+            self.summaryLabelLeadingToSuperviewConstraint?.deactivate()
+
+            self.priceView.isHidden = false
+            self.priceView.configure(viewModel: viewModel)
+        } else {
+            self.summaryLabelLeadingToTitleConstraint?.deactivate()
+            self.summaryLabelLeadingToSuperviewConstraint?.activate()
+            self.priceView.isHidden = true
+        }
     }
 
     private func updateBadgeImageView(viewModel: CourseWidgetViewModel) {
@@ -153,6 +178,7 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.badgeImageView)
         self.addSubview(self.statsView)
         self.addSubview(self.summaryLabel)
+        self.addSubview(self.priceView)
         self.addSubview(self.continueLearningButton)
         self.addSubview(self.separatorView)
     }
@@ -217,15 +243,27 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
             make.top
                 .equalTo(self.coverView.snp.bottom)
                 .offset(self.appearance.summaryLabelInsets.top)
-            make.leading
-                .equalToSuperview()
-                .offset(self.appearance.summaryLabelInsets.left)
             make.bottom
                 .equalToSuperview()
                 .offset(-self.appearance.summaryLabelInsets.bottom)
             make.trailing
                 .equalToSuperview()
                 .offset(-self.appearance.summaryLabelInsets.right)
+
+            self.summaryLabelLeadingToSuperviewConstraint = make.leading
+                .equalToSuperview()
+                .offset(self.appearance.summaryLabelInsets.left)
+                .constraint
+            self.summaryLabelLeadingToTitleConstraint = make.leading.equalTo(self.titleLabel.snp.leading).constraint
+            self.summaryLabelLeadingToTitleConstraint?.deactivate()
+        }
+
+        self.priceView.translatesAutoresizingMaskIntoConstraints = false
+        self.priceView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(self.coverView.snp.bottom).offset(self.appearance.priceViewInsets.top)
+            make.leading.equalTo(self.coverView.snp.leading)
+            make.bottom.equalToSuperview().offset(-self.appearance.priceViewInsets.bottom)
+            make.trailing.equalTo(self.coverView.snp.trailing)
         }
 
         self.continueLearningButton.translatesAutoresizingMaskIntoConstraints = false

@@ -101,6 +101,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         isCoursePricesEnabled: Bool,
         viewSource: AnalyticsEvent.CourseViewSource
     ) -> CourseWidgetViewModel {
+        let isEnrolled = isAuthorized && course.enrolled
+
         let summaryText: String = {
             let summary = course.summary.trimmingCharacters(in: .whitespacesAndNewlines)
             return summary.isEmpty
@@ -133,11 +135,10 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         var priceViewModel: CourseWidgetPriceViewModel?
         if isCoursePricesEnabled {
             let priceString: String? = {
-                guard course.isPaid else {
-                    return nil
+                if course.isPaid {
+                    return course.displayPriceIAP ?? course.displayPrice
                 }
-
-                return course.displayPriceIAP ?? course.displayPrice
+                return NSLocalizedString("CourseWidgetPriceFree", comment: "")
             }()
             let discountPriceString: String? = {
                 guard course.isPaid,
@@ -151,6 +152,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
 
             priceViewModel = CourseWidgetPriceViewModel(
                 isPaid: course.isPaid,
+                isEnrolled: isEnrolled,
                 priceString: priceString,
                 discountPriceString: discountPriceString
             )
@@ -164,7 +166,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             ratingLabelText: ratingLabelText,
             certificateLabelText: certificateLabelText,
             isAdaptive: isAdaptive,
-            isEnrolled: isAuthorized && course.enrolled,
+            isEnrolled: isEnrolled,
             isWishlisted: isWishlisted,
             isWishlistAvailable: isAuthorized && !course.enrolled,
             progress: progressViewModel,

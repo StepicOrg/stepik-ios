@@ -12,6 +12,7 @@ struct CourseWidgetUserCourseViewModel {
 
 struct CourseWidgetPriceViewModel {
     let isPaid: Bool
+    let isEnrolled: Bool
     let priceString: String?
     let discountPriceString: String?
 }

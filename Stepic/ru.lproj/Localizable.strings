@@ -1123,6 +1123,8 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 
 /* Course List */
 CourseWidgetArchived = "В архиве";
+CourseWidgetEnrolled = "Вы записаны";
+CourseWidgetPriceFree = "Бесплатно";
 CourseWidgetSeeAllTitle = "Посмотреть все";
 
 /* Course List Filter */

@@ -416,6 +416,9 @@ extension UIColor {
         }
     }
 
+    /// The color for texts that contain discount price content.
+    static let stepikDiscountPriceText = UIColor(hex6: 0xFF7A65)
+
     // MARK: Other Text Colors
 
     /// The color for texts that calls to action (join course, sign in...).
