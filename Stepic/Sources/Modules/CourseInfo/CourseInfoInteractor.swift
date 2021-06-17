@@ -460,11 +460,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 // swiftlint:disable:next array_init
                 return self.provider.checkPromoCode(name: promoCodeName).map { $0 }
             } else if let defaultPromoCode = course.defaultPromoCode {
-                if let expireDate = defaultPromoCode.expireDate {
-                    return expireDate > Date() ? .value(defaultPromoCode) : .value(nil)
-                } else {
-                    return .value(defaultPromoCode)
-                }
+                return defaultPromoCode.isValid ? .value(defaultPromoCode) : .value(nil)
             } else {
                 return .value(nil)
             }
