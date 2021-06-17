@@ -37,7 +37,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 course: data.course,
                 isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
-                iapLocalizedPrice: data.iapLocalizedPrice,
                 promoCode: data.promoCode
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
@@ -245,7 +244,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         course: Course,
         isWishlisted: Bool,
         isWishlistAvailable: Bool,
-        iapLocalizedPrice: String?,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel {
         let rating: Int = {
@@ -282,7 +280,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isTryForFreeAvailable: isTryForFreeAvailable,
             buttonDescription: self.makeButtonDescription(
                 course: course,
-                iapLocalizedPrice: iapLocalizedPrice,
                 promoCode: promoCode
             )
         )
@@ -290,7 +287,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeButtonDescription(
         course: Course,
-        iapLocalizedPrice: String?,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
@@ -305,8 +301,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
             if isNotPurchased {
                 let displayPrice: String?
-                if let iapLocalizedPrice = iapLocalizedPrice {
-                    displayPrice = iapLocalizedPrice
+                if let displayPriceIAP = course.displayPriceIAP {
+                    displayPrice = displayPriceIAP
                 } else if let promoCode = promoCode {
                     displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
                     isPromo = true
