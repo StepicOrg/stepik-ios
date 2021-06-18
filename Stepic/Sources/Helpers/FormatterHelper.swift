@@ -52,11 +52,12 @@ enum FormatterHelper {
     }
 
     static func price(_ price: Float, currencyCode: String) -> String {
+        self.price(price, currencySymbol: CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode)
+    }
+
+    static func price(_ price: Float, currencySymbol: String) -> String {
         let hasDecimals = price.truncatingRemainder(dividingBy: 1) != 0
         let priceString = hasDecimals ? String(format: "%.2f", price) : "\(Int(price))"
-
-        let currencySymbol = CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode
-
         return "\(priceString) \(currencySymbol)"
     }
 

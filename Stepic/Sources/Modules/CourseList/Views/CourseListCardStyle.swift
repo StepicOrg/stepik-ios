@@ -9,7 +9,7 @@ enum CourseListCardStyle {
     var height: CGFloat {
         switch self {
         case .small:
-            return 186
+            return RemoteConfig.shared.isCoursePricesEnabled ? 230 : 186
         case .normal:
             return 160
         }
