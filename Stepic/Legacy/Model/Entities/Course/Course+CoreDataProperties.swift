@@ -83,6 +83,7 @@ extension Course {
     @NSManaged var managedSections: NSOrderedSet?
     @NSManaged var managedUserCourse: UserCourse?
     @NSManaged var managedCoursePurchases: NSOrderedSet?
+    @NSManaged var managedCourseBenefitSummaries: NSSet?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
@@ -655,10 +656,6 @@ extension Course {
         }
     }
 
-    var isPurchased: Bool {
-        self.purchases.contains(where: { $0.isActive })
-    }
-
     var userCourse: UserCourse? {
         get {
             self.managedUserCourse
@@ -668,11 +665,13 @@ extension Course {
         }
     }
 
-    var canWriteReview: Bool {
-        if let progress = self.progress {
-            return (Double(progress.numberOfStepsPassed) * 100.0 / Double(progress.numberOfSteps)) >= 80.0
+    var courseBenefitSummaries: [CourseBenefitSummary] {
+        get {
+            self.managedCourseBenefitSummaries?.allObjects as! [CourseBenefitSummary]
         }
-        return false
+        set {
+            self.managedCourseBenefitSummaries = NSSet(array: newValue)
+        }
     }
 
     func addSection(_ section: Section) {

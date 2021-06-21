@@ -8,7 +8,15 @@ final class CourseRevenueAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = CourseRevenueProvider(courseID: self.courseID)
+        let provider = CourseRevenueProvider(
+            courseID: self.courseID,
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceService(),
+            courseBenefitSummariesNetworkService: CourseBenefitSummariesNetworkService(
+                courseBenefitSummariesAPI: CourseBenefitSummariesAPI()
+            )
+        )
         let presenter = CourseRevenuePresenter()
         let interactor = CourseRevenueInteractor(
             courseID: self.courseID,
