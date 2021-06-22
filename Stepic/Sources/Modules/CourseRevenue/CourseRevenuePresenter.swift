@@ -81,7 +81,8 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
             totalIncomeDate: totalIncomeDateString,
             totalIncomeValue: totalIncomeValueString,
             totalTurnoverDate: totalTurnoverDateString,
-            totalTurnoverValue: totalTurnoverValueString
+            totalTurnoverValue: totalTurnoverValueString,
+            disclaimerText: NSLocalizedString("CourseRevenueDisclaimer", comment: "")
         )
     }
 }

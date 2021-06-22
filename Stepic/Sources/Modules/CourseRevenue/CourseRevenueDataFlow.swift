@@ -1,6 +1,20 @@
 import Foundation
 
 enum CourseRevenue {
+    enum Tab: CaseIterable {
+        case purchasesAndRefunds
+        case payments
+
+        var title: String {
+            switch self {
+            case .purchasesAndRefunds:
+                return NSLocalizedString("CourseRevenueTabPurchasesAndRefunds", comment: "")
+            case .payments:
+                return NSLocalizedString("CourseRevenueTabPayments", comment: "")
+            }
+        }
+    }
+
     /// Load & show course revenue
     enum CourseRevenueLoad {
         struct Request {}
@@ -15,6 +29,13 @@ enum CourseRevenue {
 
         struct ViewModel {
             let state: ViewControllerState
+        }
+    }
+
+    /// Register submodules
+    enum SubmoduleRegistration {
+        struct Request {
+            var submodules: [Int: CourseRevenueSubmoduleProtocol]
         }
     }
 

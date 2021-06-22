@@ -508,10 +508,13 @@ CourseInfoTitleCertificateDetails = "Certificate details";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
+CourseRevenueTabPurchasesAndRefunds = "Purchases and refunds";
+CourseRevenueTabPayments = "Payments";
 CourseRevenueMonthIncomeDate = "Your earnings in %@";
 CourseRevenueMonthTurnoverDate = "Sales in %@";
 CourseRevenueTotalIncomeDate = "Earnings since %@";
 CourseRevenueTotalTurnoverDate = "Sales since %@";
+CourseRevenueDisclaimer = "You can see the refunds in the payment report, and our support will tell you about the sales.";
 
 /* User Courses */
 UserCoursesTitle = "My Courses";

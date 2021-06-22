@@ -4,6 +4,9 @@ import UIKit
 extension CourseRevenueHeaderView {
     struct Appearance {
         let incomeViewInsets = LayoutInsets.default
+
+        let disclaimerLabelFont = UIFont.systemFont(ofSize: 12)
+        let disclaimerLabelTextColor = UIColor.stepikMaterialSecondaryText
     }
 }
 
@@ -11,6 +14,14 @@ final class CourseRevenueHeaderView: UIView {
     let appearance: Appearance
 
     private lazy var incomeView = CourseRevenueIncomeView()
+
+    private lazy var disclaimerLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.disclaimerLabelFont
+        label.textColor = self.appearance.disclaimerLabelTextColor
+        label.numberOfLines = 0
+        return label
+    }()
 
     override var intrinsicContentSize: CGSize {
         let height = self.appearance.incomeViewInsets.top
@@ -41,6 +52,7 @@ final class CourseRevenueHeaderView: UIView {
 
     func configure(viewModel: CourseRevenueHeaderViewModel) {
         self.incomeView.configure(viewModel: viewModel)
+        self.disclaimerLabel.text = viewModel.disclaimerText
     }
 }
 

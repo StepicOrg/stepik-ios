@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CourseRevenueInteractorProtocol {
     func doCourseRevenueLoad(request: CourseRevenue.CourseRevenueLoad.Request)
+    func doSubmodulesRegistration(request: CourseRevenue.SubmoduleRegistration.Request)
 }
 
 final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
@@ -10,7 +11,14 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
     private let provider: CourseRevenueProviderProtocol
 
     private let courseID: Course.IdType
-    private var currentCourse: Course?
+    private var currentCourse: Course? {
+        didSet {
+            self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
+        }
+    }
+
+    // Tab index -> Submodule
+    private var submodules: [Int: CourseRevenueSubmoduleProtocol] = [:]
 
     init(
         courseID: Course.IdType,
@@ -33,6 +41,19 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
         }.catch { error in
             print("CourseRevenueInteractor :: error = \(error)")
             self.presenter.presentCourseRevenue(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doSubmodulesRegistration(request: CourseRevenue.SubmoduleRegistration.Request) {
+        for (key, value) in request.submodules {
+            self.submodules[key] = value
+        }
+        self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
+    }
+
+    private func pushCurrentCourseToSubmodules(submodules: [CourseRevenueSubmoduleProtocol]) {
+        if let course = self.currentCourse {
+            submodules.forEach { $0.update(with: course) }
         }
     }
 

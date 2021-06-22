@@ -510,10 +510,13 @@ CourseInfoTitleCertificateDetails = "Подробнее о сертификат�
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
+CourseRevenueTabPurchasesAndRefunds = "Покупки и возвраты";
+CourseRevenueTabPayments = "Выплаты";
 CourseRevenueMonthIncomeDate = "Ваш доход за %@";
 CourseRevenueMonthTurnoverDate = "Продажи за %@";
 CourseRevenueTotalIncomeDate = "Доход с %@";
 CourseRevenueTotalTurnoverDate = "Продажи с %@";
+CourseRevenueDisclaimer = "Возвраты можно увидеть в отчёте о платежах, а о продажах по счёту расскажет наша поддержка.";
 
 /* User Courses */
 UserCoursesTitle = "Мои курсы";

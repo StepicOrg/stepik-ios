@@ -2,9 +2,14 @@ import UIKit
 
 final class CourseRevenueAssembly: Assembly {
     private let courseID: Course.IdType
+    private let initialTab: CourseRevenue.Tab
 
-    init(courseID: Course.IdType) {
+    init(
+        courseID: Course.IdType,
+        initialTab: CourseRevenue.Tab = .purchasesAndRefunds
+    ) {
         self.courseID = courseID
+        self.initialTab = initialTab
     }
 
     func makeModule() -> UIViewController {
@@ -23,7 +28,11 @@ final class CourseRevenueAssembly: Assembly {
             presenter: presenter,
             provider: provider
         )
-        let viewController = CourseRevenueViewController(interactor: interactor)
+        let viewController = CourseRevenueViewController(
+            interactor: interactor,
+            availableTabs: [.purchasesAndRefunds],
+            initialTab: self.initialTab
+        )
 
         presenter.viewController = viewController
 

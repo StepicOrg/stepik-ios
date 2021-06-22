@@ -9,4 +9,5 @@ struct CourseRevenueHeaderViewModel {
     let totalIncomeValue: String
     let totalTurnoverDate: String
     let totalTurnoverValue: String
+    let disclaimerText: String
 }
