@@ -5,8 +5,25 @@ enum CourseRevenue {
     enum CourseRevenueLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            struct Data {
+                let courseBenefitSummary: CourseBenefitSummary?
+            }
 
-        struct ViewModel {}
+            let result: StepikResult<Data>
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: States
+
+    enum ViewControllerState {
+        case loading
+        case error
+        case empty
+        case result(data: CourseRevenueHeaderViewModel)
     }
 }

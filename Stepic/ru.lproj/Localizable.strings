@@ -508,6 +508,13 @@ CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
 
+/* Course revenue */
+CourseRevenueTitle = "Доходы";
+CourseRevenueMonthIncomeDate = "Ваш доход за %@";
+CourseRevenueMonthTurnoverDate = "Продажи за %@";
+CourseRevenueTotalIncomeDate = "Доход с %@";
+CourseRevenueTotalTurnoverDate = "Продажи с %@";
+
 /* User Courses */
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";

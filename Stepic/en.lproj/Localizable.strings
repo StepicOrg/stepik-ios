@@ -506,6 +506,13 @@ CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
 
+/* Course revenue */
+CourseRevenueTitle = "Revenue";
+CourseRevenueMonthIncomeDate = "Your earnings in %@";
+CourseRevenueMonthTurnoverDate = "Sales in %@";
+CourseRevenueTotalIncomeDate = "Earnings since %@";
+CourseRevenueTotalTurnoverDate = "Sales since %@";
+
 /* User Courses */
 UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";
