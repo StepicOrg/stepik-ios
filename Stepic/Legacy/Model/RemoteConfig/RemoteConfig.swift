@@ -117,7 +117,7 @@ final class RemoteConfig {
     }
 
     var isCoursePricesEnabled: Bool {
-        #if DEBUG
+        #if BETA_PROFILE || DEBUG
         return true
         #else
         return FirebaseRemoteConfig.RemoteConfig
