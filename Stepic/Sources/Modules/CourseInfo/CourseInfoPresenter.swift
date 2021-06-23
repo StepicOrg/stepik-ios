@@ -11,6 +11,7 @@ protocol CourseInfoPresenterProtocol {
     func presentLessonModuleCatalogAction(response: CourseInfo.LessonModuleCatalogPresentation.Response)
     func presentLessonModuleWriteReviewAction(response: CourseInfo.LessonModuleWriteReviewPresentation.Response)
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response)
+    func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
@@ -100,6 +101,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
         self.viewController?.displayPreviewLesson(viewModel: .init(previewLessonID: response.previewLessonID))
+    }
+
+    func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response) {
+        self.viewController?.displayCourseRevenue(viewModel: .init(courseID: response.courseID))
     }
 
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response) {
@@ -278,6 +283,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isWishlisted: isWishlisted,
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
+            isRevenueAvailable: course.canViewRevenue,
             buttonDescription: self.makeButtonDescription(
                 course: course,
                 promoCode: promoCode

@@ -454,6 +454,7 @@ ContinueCourseCourseCurrentProgressTitle = "Current progress: %@/%@ points";
 /* Course info */
 CourseInfoTitle = "About course";
 CourseInfoTryForFreeButtonTitle = "Try for Free";
+CourseInfoCourseActionViewRevenueAlertTitle = "View Revenue";
 // Favorite
 CourseInfoCourseActionAddToFavoritesAlertTitle = "Add to Favorites";
 CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Remove from Favorites";

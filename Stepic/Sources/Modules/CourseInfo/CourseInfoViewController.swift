@@ -22,6 +22,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayLessonModuleCatalogAction(viewModel: CourseInfo.LessonModuleCatalogPresentation.ViewModel)
     func displayLessonModuleWriteReviewAction(viewModel: CourseInfo.LessonModuleWriteReviewPresentation.ViewModel)
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel)
+    func displayCourseRevenue(viewModel: CourseInfo.CourseRevenuePresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
@@ -283,6 +284,18 @@ final class CourseInfoViewController: UIViewController {
             )
         )
 
+        if self.storedViewModel?.isRevenueAvailable ?? false {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("CourseInfoCourseActionViewRevenueAlertTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCourseRevenuePresentation(request: .init())
+                    }
+                )
+            )
+        }
+        
         if let viewModel = self.storedViewModel, viewModel.isEnrolled {
             let favoriteActionTitle = viewModel.isFavorite
                 ? NSLocalizedString("CourseInfoCourseActionRemoveFromFavoritesAlertTitle", comment: "")
@@ -631,6 +644,11 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             initialContext: .lesson(id: viewModel.previewLessonID),
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayCourseRevenue(viewModel: CourseInfo.CourseRevenuePresentation.ViewModel) {
+        let assembly = CourseRevenueAssembly(courseID: viewModel.courseID)
         self.push(module: assembly.makeModule())
     }
 

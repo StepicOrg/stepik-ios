@@ -11,6 +11,7 @@ protocol CourseInfoInteractorProtocol {
     func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request)
+    func doCourseRevenuePresentation(request: CourseInfo.CourseRevenuePresentation.Request)
     func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request)
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
@@ -357,6 +358,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         if let previewLessonID = self.currentCourse?.previewLessonID {
             self.presenter.presentPreviewLesson(response: .init(previewLessonID: previewLessonID))
         }
+    }
+
+    func doCourseRevenuePresentation(request: CourseInfo.CourseRevenuePresentation.Request) {
+        self.presenter.presentCourseRevenue(response: .init(courseID: self.courseID))
     }
 
     func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request) {

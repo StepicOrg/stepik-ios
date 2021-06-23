@@ -234,6 +234,19 @@ enum CourseInfo {
         }
     }
 
+    /// Present course revenue
+    enum CourseRevenuePresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
     /// Try to set online mode
     enum OnlineModeReset {
         struct Request {}
