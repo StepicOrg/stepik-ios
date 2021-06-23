@@ -38,6 +38,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 course: data.course,
                 isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
+                isCourseRevenueAvailable: data.isCourseRevenueAvailable,
                 promoCode: data.promoCode
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
@@ -249,6 +250,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         course: Course,
         isWishlisted: Bool,
         isWishlistAvailable: Bool,
+        isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel {
         let rating: Int = {
@@ -283,7 +285,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isWishlisted: isWishlisted,
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
-            isRevenueAvailable: course.canViewRevenue,
+            isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             buttonDescription: self.makeButtonDescription(
                 course: course,
                 promoCode: promoCode

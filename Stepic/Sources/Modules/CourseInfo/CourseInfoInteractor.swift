@@ -41,6 +41,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
+    private let remoteConfig: RemoteConfig
+
     private let courseID: Course.IdType
     private var currentCourse: Course? {
         didSet {
@@ -109,6 +111,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
         analytics: Analytics,
+        remoteConfig: RemoteConfig,
         courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.presenter = presenter
@@ -127,6 +130,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
         self.analytics = analytics
+        self.remoteConfig = remoteConfig
 
         self.courseID = courseID
         self.promoCodeName = promoCodeName
@@ -392,6 +396,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             course: self.currentCourse.require(),
             isWishlisted: self.wishlistService.contains(self.courseID),
             isWishlistAvailable: isWishlistAvailable,
+            isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
             promoCode: self.currentPromoCode
         )
     }

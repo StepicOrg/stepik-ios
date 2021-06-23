@@ -76,6 +76,7 @@ final class CourseInfoAssembly: Assembly {
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,
             analytics: StepikAnalytics.shared,
+            remoteConfig: RemoteConfig.shared,
             courseViewSource: self.courseViewSource
         )
         notificationsRegistrationService.delegate = interactor

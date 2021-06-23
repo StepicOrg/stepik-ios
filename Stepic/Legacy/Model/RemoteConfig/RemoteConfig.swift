@@ -28,7 +28,8 @@ final class RemoteConfig {
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
         Key.isDisabledStepsSupported.rawValue: NSNumber(value: false),
         Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
-        Key.isCoursePricesEnabled.rawValue: NSNumber(value: false)
+        Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
+        Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -123,6 +124,17 @@ final class RemoteConfig {
             .boolValue
     }
 
+    var isCourseRevenueAvailable: Bool {
+        #if DEBUG
+        return true
+        #else
+        return FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.isCourseRevenueAvailable.rawValue)
+            .boolValue
+        #endif
+    }
+
     init() {
         self.setConfigDefaults()
         self.fetchRemoteConfigData()
@@ -185,5 +197,6 @@ final class RemoteConfig {
         case isDisabledStepsSupported = "is_disabled_steps_supported"
         case searchResultsQueryParams = "search_query_params_ios"
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
+        case isCourseRevenueAvailable = "is_course_revenue_available_ios"
     }
 }
