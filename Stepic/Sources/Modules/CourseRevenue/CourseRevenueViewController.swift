@@ -280,6 +280,10 @@ extension CourseRevenueViewController: CourseRevenueViewDelegate {
         self.updateContentInset(headerHeight: self.lastKnownHeaderHeight)
     }
 
+    func courseRevenueView(_ courseRevenueView: CourseRevenueView, didClickSummary expanded: Bool) {
+        self.interactor.doCourseSummaryClickAction(request: .init(expanded: expanded))
+    }
+
     func courseRevenueView(_ courseRevenueView: CourseRevenueView, didRequestScrollToPage index: Int) {
         self.pageViewController.scrollToPage(.at(index: index), animated: true)
     }

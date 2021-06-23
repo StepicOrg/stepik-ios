@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CourseRevenueTabPurchasesInteractorProtocol {
     func doPurchasesLoad(request: CourseRevenueTabPurchases.PurchasesLoad.Request)
+    func doPurchasePresentation(request: CourseRevenueTabPurchases.PurchasePresentation.Request)
 }
 
 final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesInteractorProtocol {
@@ -11,6 +12,8 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
     private let presenter: CourseRevenueTabPurchasesPresenterProtocol
     private let provider: CourseRevenueTabPurchasesProviderProtocol
 
+    private let analytics: Analytics
+
     private var currentCourse: Course?
     private var currentCourseBenefits: [CourseBenefit]?
 
@@ -18,10 +21,12 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
 
     init(
         presenter: CourseRevenueTabPurchasesPresenterProtocol,
-        provider: CourseRevenueTabPurchasesProviderProtocol
+        provider: CourseRevenueTabPurchasesProviderProtocol,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
     }
 
     func doPurchasesLoad(request: CourseRevenueTabPurchases.PurchasesLoad.Request) {
@@ -43,8 +48,22 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
         }
     }
 
-    enum Error: Swift.Error {
-        case something
+    func doPurchasePresentation(request: CourseRevenueTabPurchases.PurchasePresentation.Request) {
+        guard let currentCourse = self.currentCourse,
+              let targetCourseBenefit = self.currentCourseBenefits?.first(
+                where: { "\($0.id)" == request.viewModelUniqueIdentifier }
+              ) else {
+            return
+        }
+
+        self.analytics.send(
+            .courseBenefitClicked(
+                benefitID: targetCourseBenefit.id,
+                status: targetCourseBenefit.statusString,
+                courseID: currentCourse.id,
+                courseTitle: currentCourse.title
+            )
+        )
     }
 }
 

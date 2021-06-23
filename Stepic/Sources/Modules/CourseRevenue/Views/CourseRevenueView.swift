@@ -3,6 +3,7 @@ import UIKit
 
 protocol CourseRevenueViewDelegate: AnyObject {
     func courseRevenueView(_ courseRevenueView: CourseRevenueView, didReportNewHeaderHeight height: CGFloat)
+    func courseRevenueView(_ courseRevenueView: CourseRevenueView, didClickSummary expanded: Bool)
     func courseRevenueView(_ courseRevenueView: CourseRevenueView, didRequestScrollToPage index: Int)
     func numberOfPages(in courseRevenueView: CourseRevenueView) -> Int
 }
@@ -29,7 +30,17 @@ final class CourseRevenueView: UIView {
 
     private var currentPageIndex = 0
 
-    private lazy var headerView = CourseRevenueHeaderView()
+    private lazy var headerView: CourseRevenueHeaderView = {
+        let view = CourseRevenueHeaderView()
+        view.onSummaryButtonClick = { [weak self] expanded in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseRevenueView(strongSelf, didClickSummary: expanded)
+        }
+        return view
+    }()
 
     private lazy var segmentedControl: TabSegmentedControlView = {
         let control = TabSegmentedControlView(frame: .zero, items: self.tabsTitles)

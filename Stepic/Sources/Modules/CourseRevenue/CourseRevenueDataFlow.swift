@@ -39,6 +39,13 @@ enum CourseRevenue {
         }
     }
 
+    /// Send Course benefits summary clicked event
+    enum CourseSummaryClickAction {
+        struct Request {
+            let expanded: Bool
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

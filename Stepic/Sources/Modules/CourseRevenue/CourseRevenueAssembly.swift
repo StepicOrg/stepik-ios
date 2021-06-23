@@ -26,7 +26,8 @@ final class CourseRevenueAssembly: Assembly {
         let interactor = CourseRevenueInteractor(
             courseID: self.courseID,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            analytics: StepikAnalytics.shared
         )
         let viewController = CourseRevenueViewController(
             interactor: interactor,

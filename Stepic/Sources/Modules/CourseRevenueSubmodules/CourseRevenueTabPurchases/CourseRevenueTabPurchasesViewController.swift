@@ -82,6 +82,13 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
     }
 
     func courseRevenueTabPurchasesView(_ view: CourseRevenueTabPurchasesView, didSelectRowAt indexPath: IndexPath) {
-        print(#function)
+        guard case .result(let data) = self.state,
+              let targetCourseBenefit = data.courseBenefits[safe: indexPath.row] else {
+            return
+        }
+
+        self.interactor.doPurchasePresentation(
+            request: .init(viewModelUniqueIdentifier: targetCourseBenefit.uniqueIdentifier)
+        )
     }
 }

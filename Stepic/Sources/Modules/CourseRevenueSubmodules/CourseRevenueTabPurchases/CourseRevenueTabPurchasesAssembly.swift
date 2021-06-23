@@ -9,7 +9,11 @@ final class CourseRevenueTabPurchasesAssembly: Assembly {
             courseBenefitsNetworkService: CourseBenefitsNetworkService(courseBenefitsAPI: CourseBenefitsAPI())
         )
         let presenter = CourseRevenueTabPurchasesPresenter()
-        let interactor = CourseRevenueTabPurchasesInteractor(presenter: presenter, provider: provider)
+        let interactor = CourseRevenueTabPurchasesInteractor(
+            presenter: presenter,
+            provider: provider,
+            analytics: StepikAnalytics.shared
+        )
         let viewController = CourseRevenueTabPurchasesViewController(interactor: interactor)
 
         presenter.viewController = viewController

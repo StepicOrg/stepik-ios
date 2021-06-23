@@ -23,6 +23,15 @@ final class CourseRevenueHeaderView: UIView {
         return label
     }()
 
+    var onSummaryButtonClick: ((Bool) -> Void)? {
+        get {
+            self.incomeView.onExpandContentButtonClick
+        }
+        set {
+            self.incomeView.onExpandContentButtonClick = newValue
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let height = self.appearance.incomeViewInsets.top
             + self.incomeView.intrinsicContentSize.height
@@ -40,7 +49,6 @@ final class CourseRevenueHeaderView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -69,8 +77,6 @@ final class CourseRevenueHeaderView: UIView {
 }
 
 extension CourseRevenueHeaderView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
-
     func addSubviews() {
         self.addSubview(self.incomeView)
     }

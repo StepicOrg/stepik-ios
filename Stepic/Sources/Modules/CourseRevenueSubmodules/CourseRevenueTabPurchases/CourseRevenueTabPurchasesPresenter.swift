@@ -23,6 +23,7 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
 
     private func makeViewModel(_ courseBenefit: CourseBenefit) -> CourseRevenueTabPurchasesViewModel {
         CourseRevenueTabPurchasesViewModel(
+            uniqueIdentifier: "\(courseBenefit.id)",
             title: FormatterHelper.price(courseBenefit.totalIncome, currencyCode: courseBenefit.currencyCode)
         )
     }

@@ -37,6 +37,13 @@ enum CourseRevenueTabPurchases {
         }
     }
 
+    /// Present purchase details
+    enum PurchasePresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

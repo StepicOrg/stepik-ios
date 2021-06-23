@@ -59,6 +59,7 @@ final class CourseRevenueIncomeView: UIView {
     }()
 
     private var isContentExpanded = false
+    var onExpandContentButtonClick: ((Bool) -> Void)?
 
     override var intrinsicContentSize: CGSize {
         let contentStackViewHeight = self.contentStackView
@@ -129,6 +130,8 @@ final class CourseRevenueIncomeView: UIView {
     private func handleExpandContentControlClicked() {
         let shouldExpandContent = !self.isContentExpanded
         self.isContentExpanded.toggle()
+
+        self.onExpandContentButtonClick?(shouldExpandContent)
 
         UIView.animate(withDuration: Animation.expandContentAnimationDuration) {
             self.separatorView.isHidden = !shouldExpandContent
