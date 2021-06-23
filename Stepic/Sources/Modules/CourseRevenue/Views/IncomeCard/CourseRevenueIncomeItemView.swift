@@ -8,6 +8,7 @@ extension CourseRevenueIncomeItemView {
 
         let expandContentControlSize = CGSize(width: 16, height: 16)
         let expandContentControlInsets = LayoutInsets(right: 16)
+        let expandContentTapProxyViewSize = CGSize(width: 32, height: 32)
 
         let titleLabelFont = UIFont.systemFont(ofSize: 12)
         let titleLabelTextColor = UIColor.stepikMaterialSecondaryText
@@ -53,6 +54,7 @@ final class CourseRevenueIncomeItemView: UIView {
     }()
 
     private lazy var expandContentControl = ExpandContentControl()
+    private lazy var expandContentTapProxyView = TapProxyView(targetView: self.expandContentControl)
 
     private lazy var detailsTitleLabel: UILabel = {
         let label = UILabel()
@@ -174,6 +176,11 @@ final class CourseRevenueIncomeItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.expandContentTapProxyView)
+        return self.expandContentTapProxyView.hitTest(convertedPoint, with: event)
+    }
+
     private func updateDetailsVisibility() {
         self.detailsStackView.isHidden = !self.shouldShowDetails
     }
@@ -209,10 +216,6 @@ extension CourseRevenueIncomeItemView: ProgrammaticallyInitializableViewProtocol
     func addSubviews() {
         self.addSubview(self.imageView)
 
-        if self.shouldShowExpandContentControl {
-            self.addSubview(self.expandContentControl)
-        }
-
         self.addSubview(self.contentStackView)
         self.contentStackView.addArrangedSubview(self.titleStackView)
         self.contentStackView.addArrangedSubview(self.detailsStackView)
@@ -222,6 +225,11 @@ extension CourseRevenueIncomeItemView: ProgrammaticallyInitializableViewProtocol
 
         self.detailsStackView.addArrangedSubview(self.detailsTitleLabel)
         self.detailsStackView.addArrangedSubview(self.detailsPriceLabel)
+
+        if self.shouldShowExpandContentControl {
+            self.addSubview(self.expandContentControl)
+            self.addSubview(self.expandContentTapProxyView)
+        }
     }
 
     func makeConstraints() {
@@ -238,6 +246,12 @@ extension CourseRevenueIncomeItemView: ProgrammaticallyInitializableViewProtocol
                 make.trailing.equalToSuperview().offset(-self.appearance.expandContentControlInsets.right)
                 make.size.equalTo(self.appearance.expandContentControlSize)
                 make.centerY.equalTo(self.titleStackView.snp.centerY)
+            }
+
+            self.expandContentTapProxyView.translatesAutoresizingMaskIntoConstraints = false
+            self.expandContentTapProxyView.snp.makeConstraints { make in
+                make.size.equalTo(self.appearance.expandContentTapProxyViewSize)
+                make.center.equalTo(self.expandContentControl.snp.center)
             }
         }
 

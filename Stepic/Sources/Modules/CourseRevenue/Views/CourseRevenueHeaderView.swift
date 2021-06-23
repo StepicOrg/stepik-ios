@@ -50,6 +50,18 @@ final class CourseRevenueHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.incomeView)
+
+        if self.incomeView.bounds.contains(convertedPoint) {
+            if let targetView = self.incomeView.hitTest(convertedPoint, with: event) {
+                return targetView
+            }
+        }
+
+        return nil
+    }
+
     func configure(viewModel: CourseRevenueHeaderViewModel) {
         self.incomeView.configure(viewModel: viewModel)
         self.disclaimerLabel.text = viewModel.disclaimerText

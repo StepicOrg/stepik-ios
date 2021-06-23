@@ -74,20 +74,30 @@ final class CourseRevenueView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.updateHeaderHeight()
+    }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.headerView)
+
+        if self.headerView.bounds.contains(convertedPoint) {
+            if let targetView = self.headerView.hitTest(convertedPoint, with: event) {
+                return targetView
+            }
+        }
+
+        return super.hitTest(point, with: event)
+    }
+
     func configure(viewModel: CourseRevenueHeaderViewModel) {
         self.headerView.configure(viewModel: viewModel)
-
-        self.calculatedHeaderHeight = self.headerView.intrinsicContentSize.height
-
-        self.delegate?.courseRevenueView(
-            self,
-            didReportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
-        )
-        self.headerHeightConstraint?.update(offset: self.calculatedHeaderHeight)
+        self.updateHeaderHeight(forceUpdate: true)
     }
 
     func updateScroll(offset: CGFloat) {
-        self.topConstraint?.update(offset: min(self.appearance.headerTopOffset, -offset))
+        self.topConstraint?.update(offset: -offset)
     }
 
     func updateCurrentPageIndex(_ index: Int) {
@@ -95,22 +105,19 @@ final class CourseRevenueView: UIView {
         self.segmentedControl.selectTab(index: index)
     }
 
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        // Dispatch hits to correct views
-        let convertedPoint = self.convert(point, to: self.headerView)
-        if self.headerView.bounds.contains(convertedPoint) {
-            // Pass hits to header subviews
-            for subview in self.headerView.subviews.reversed() {
-                // Skip subview-receiver if it has isUserInteractionEnabled == false
-                // to pass some hits to scrollview (e.g. swipes in header area)
-                let shouldSubviewInteract = subview.isUserInteractionEnabled
-                if subview.frame.contains(convertedPoint) && shouldSubviewInteract {
-                    return subview
-                }
-            }
-        }
+    private func updateHeaderHeight(forceUpdate: Bool = false) {
+        let newHeaderHeight = self.headerView.intrinsicContentSize.height
 
-        return super.hitTest(point, with: event)
+        if self.calculatedHeaderHeight != newHeaderHeight || forceUpdate {
+            self.calculatedHeaderHeight = newHeaderHeight
+
+            self.delegate?.courseRevenueView(
+                self,
+                didReportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
+            )
+
+            self.headerHeightConstraint?.update(offset: self.calculatedHeaderHeight)
+        }
     }
 }
 

@@ -102,6 +102,18 @@ final class CourseRevenueIncomeView: UIView {
         ).cgPath
     }
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.monthItemView)
+
+        if self.monthItemView.bounds.contains(convertedPoint) {
+            if let targetView = self.monthItemView.hitTest(convertedPoint, with: event) {
+                return targetView
+            }
+        }
+
+        return nil
+    }
+
     func configure(viewModel: CourseRevenueHeaderViewModel) {
         self.monthItemView.titleText = viewModel.monthIncomeDate
         self.monthItemView.priceText = viewModel.monthIncomeValue
