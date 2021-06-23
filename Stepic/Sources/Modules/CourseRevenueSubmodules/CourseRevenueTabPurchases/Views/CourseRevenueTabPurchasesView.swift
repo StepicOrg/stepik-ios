@@ -107,7 +107,7 @@ extension CourseRevenueTabPurchasesView: UITableViewDelegate {
     }
 }
 
-extension CourseRevenueTabPurchasesView: CourseRevenueScrollablePageViewProtocol {
+extension CourseRevenueTabPurchasesView: ScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
             self.pageScrollViewDelegate

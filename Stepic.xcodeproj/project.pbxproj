@@ -606,6 +606,7 @@
 		2C572760252C71BE00C4C7C0 /* DiscussionsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */; };
 		2C572768252C7C2200C4C7C0 /* DiscussionsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */; };
 		2C57276D252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */; };
+		2C5793DD26838EA8001A19F3 /* ScrollablePageViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5793DC26838EA8001A19F3 /* ScrollablePageViewProtocol.swift */; };
 		2C57B29F24092868008284F0 /* SubmissionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */; };
 		2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */; };
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
@@ -2443,6 +2444,7 @@
 		2C57275F252C71BE00C4C7C0 /* DiscussionsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBadgesView.swift; sourceTree = "<group>"; };
 		2C572767252C7C2200C4C7C0 /* DiscussionsVotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsVotesView.swift; sourceTree = "<group>"; };
 		2C57276C252C89C900C4C7C0 /* DiscussionsBottomControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsBottomControlsView.swift; sourceTree = "<group>"; };
+		2C5793DC26838EA8001A19F3 /* ScrollablePageViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollablePageViewProtocol.swift; sourceTree = "<group>"; };
 		2C57B29E24092868008284F0 /* SubmissionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsPersistenceService.swift; sourceTree = "<group>"; };
 		2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsRepository.swift; sourceTree = "<group>"; };
 		2C5967EA23E7828800072800 /* SubmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionTests.swift; sourceTree = "<group>"; };
@@ -7797,6 +7799,7 @@
 				62E98F9F759D04EFACC2579D /* NibLoadable.swift */,
 				62E980F9CFE23B23B5720F5E /* ProgrammaticallyInitializableViewProtocol.swift */,
 				62E98128FE2C79FBA6AD7D4B /* Reusable.swift */,
+				2C5793DC26838EA8001A19F3 /* ScrollablePageViewProtocol.swift */,
 				2C1C37DE25938CAF009CC761 /* TitlePresentable.swift */,
 				62E98B6565A0041AD519798A /* UniqueIdentifiable.swift */,
 			);
@@ -11214,6 +11217,7 @@
 				2C94C7FA248F86C900E4104E /* UserCourse+CoreDataProperties.swift in Sources */,
 				2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */,
 				62E98F91C1E401E5C9855DB1 /* CodeToolbarView.swift in Sources */,
+				2C5793DD26838EA8001A19F3 /* ScrollablePageViewProtocol.swift in Sources */,
 				62E9817AE10960C05029CA37 /* CodeQuizFullscreenAssembly.swift in Sources */,
 				2C50364724C5A503001FAE04 /* NewProfileCertificatesCollectionViewDelegate.swift in Sources */,
 				62E983AF85B0A9D1D21797DD /* CodeQuizFullscreenDataFlow.swift in Sources */,

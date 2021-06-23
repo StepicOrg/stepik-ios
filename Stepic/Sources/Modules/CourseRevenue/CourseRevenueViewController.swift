@@ -1,13 +1,6 @@
 import Pageboy
 import UIKit
 
-protocol CourseRevenueScrollablePageViewProtocol: AnyObject {
-    var scrollViewDelegate: UIScrollViewDelegate? { get set }
-    var contentInsets: UIEdgeInsets { get set }
-    var contentOffset: CGPoint { get set }
-    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior { get set }
-}
-
 protocol CourseRevenueViewControllerProtocol: AnyObject {
     func displayCourseRevenue(viewModel: CourseRevenue.CourseRevenueLoad.ViewModel)
 }
@@ -133,7 +126,7 @@ final class CourseRevenueViewController: UIViewController {
                 continue
             }
 
-            let view = viewController.view as? CourseRevenueScrollablePageViewProtocol
+            let view = viewController.view as? ScrollablePageViewProtocol
 
             if let view = view {
                 view.contentInsets = UIEdgeInsets(
@@ -185,7 +178,7 @@ final class CourseRevenueViewController: UIViewController {
 
     private func arrangePagesScrollOffset(topOffsetOfCurrentTab: CGFloat, maxTopOffset: CGFloat) {
         for viewController in self.submodulesControllers {
-            guard let view = viewController?.view as? CourseRevenueScrollablePageViewProtocol else {
+            guard let view = viewController?.view as? ScrollablePageViewProtocol else {
                 continue
             }
 

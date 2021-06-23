@@ -4,13 +4,6 @@ import SVProgressHUD
 import UIKit
 
 // swiftlint:disable file_length
-protocol CourseInfoScrollablePageViewProtocol: AnyObject {
-    var scrollViewDelegate: UIScrollViewDelegate? { get set }
-    var contentInsets: UIEdgeInsets { get set }
-    var contentOffset: CGPoint { get set }
-    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior { get set }
-}
-
 protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayCourse(viewModel: CourseInfo.CourseLoad.ViewModel)
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel)
@@ -295,7 +288,7 @@ final class CourseInfoViewController: UIViewController {
                 )
             )
         }
-        
+
         if let viewModel = self.storedViewModel, viewModel.isEnrolled {
             let favoriteActionTitle = viewModel.isFavorite
                 ? NSLocalizedString("CourseInfoCourseActionRemoveFromFavoritesAlertTitle", comment: "")
@@ -349,7 +342,7 @@ final class CourseInfoViewController: UIViewController {
                 continue
             }
 
-            let view = viewController.view as? CourseInfoScrollablePageViewProtocol
+            let view = viewController.view as? ScrollablePageViewProtocol
 
             if let view = view {
                 view.contentInsets = UIEdgeInsets(
@@ -403,7 +396,7 @@ final class CourseInfoViewController: UIViewController {
 
     private func arrangePagesScrollOffset(topOffsetOfCurrentTab: CGFloat, maxTopOffset: CGFloat) {
         for viewController in self.submodulesControllers {
-            guard let view = viewController?.view as? CourseInfoScrollablePageViewProtocol else {
+            guard let view = viewController?.view as? ScrollablePageViewProtocol else {
                 continue
             }
 
