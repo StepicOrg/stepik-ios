@@ -1,6 +1,11 @@
 import Foundation
 
 enum CourseRevenueTabPurchases {
+    struct PurchasesData {
+        let courseBenefits: [CourseBenefit]
+        let hasNextPage: Bool
+    }
+
     struct PurchasesResult {
         let courseBenefits: [CourseRevenueTabPurchasesViewModel]
         let hasNextPage: Bool
@@ -9,13 +14,8 @@ enum CourseRevenueTabPurchases {
     enum PurchasesLoad {
         struct Request {}
 
-        struct Data {
-            let courseBenefits: [CourseBenefit]
-            let hasNextPage: Bool
-        }
-
         struct Response {
-            let result: StepikResult<Data>
+            let result: StepikResult<PurchasesData>
         }
 
         struct ViewModel {
@@ -28,8 +28,7 @@ enum CourseRevenueTabPurchases {
         struct Request {}
 
         struct Response {
-            let courseBenefits: [CourseBenefit]
-            let hasNextPage: Bool
+            let result: StepikResult<PurchasesData>
         }
 
         struct ViewModel {

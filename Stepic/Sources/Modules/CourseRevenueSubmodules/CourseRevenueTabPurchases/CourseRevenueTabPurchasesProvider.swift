@@ -16,12 +16,19 @@ final class CourseRevenueTabPurchasesProvider: CourseRevenueTabPurchasesProvider
     private let courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol
     private let courseBenefitsNetworkService: CourseBenefitsNetworkServiceProtocol
 
+    private let usersPersistenceService: UsersPersistenceServiceProtocol
+    private let usersNetworkService: UsersNetworkServiceProtocol
+
     init(
         courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol,
-        courseBenefitsNetworkService: CourseBenefitsNetworkServiceProtocol
+        courseBenefitsNetworkService: CourseBenefitsNetworkServiceProtocol,
+        usersPersistenceService: UsersPersistenceServiceProtocol,
+        usersNetworkService: UsersNetworkServiceProtocol
     ) {
         self.courseBenefitsPersistenceService = courseBenefitsPersistenceService
         self.courseBenefitsNetworkService = courseBenefitsNetworkService
+        self.usersPersistenceService = usersPersistenceService
+        self.usersNetworkService = usersNetworkService
     }
 
     func fetchCourseBenefits(courseID: Course.IdType, page: Int) -> Promise<FetchResult<([CourseBenefit], Meta)>> {
@@ -34,6 +41,8 @@ final class CourseRevenueTabPurchasesProvider: CourseRevenueTabPurchasesProvider
                     return .value(.init(value: remoteFetchResult, source: .remote))
                 }
                 return .value(.init(value: (cachedCourseBenefits, Meta.oneAndOnlyPage), source: .cache))
+            }.then { fetchResult -> Guarantee<FetchResult<([CourseBenefit], Meta)>> in
+                self.fetchAndMergeBuyers(courseBenefits: fetchResult.value.0).map { fetchResult }
             }.done { fetchResult in
                 seal.fulfill(fetchResult)
             }.catch { _ in
@@ -44,11 +53,40 @@ final class CourseRevenueTabPurchasesProvider: CourseRevenueTabPurchasesProvider
 
     func fetchRemoteCourseBenefits(courseID: Course.IdType, page: Int) -> Promise<([CourseBenefit], Meta)> {
         Promise { seal in
-            self.courseBenefitsNetworkService.fetch(courseID: courseID, page: page).done {
+            self.courseBenefitsNetworkService.fetch(courseID: courseID, page: page).then { fetchResult in
+                self.fetchAndMergeBuyers(courseBenefits: fetchResult.0).map { fetchResult }
+            }.done {
                 seal.fulfill($0)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
+        }
+    }
+
+    private func fetchAndMergeBuyers(courseBenefits: [CourseBenefit]) -> Guarantee<Void> {
+        Guarantee(
+            self.fetchUsersFromCacheOrNetwork(ids: courseBenefits.map(\.buyerID)),
+            fallback: nil
+        ).done { buyersOrNil in
+            if let buyers = buyersOrNil {
+                courseBenefits.forEach { courseBenefit in
+                    courseBenefit.buyer = buyers.first(where: { $0.id == courseBenefit.buyerID })
+                }
+                CoreDataHelper.shared.save()
+            }
+        }
+    }
+
+    private func fetchUsersFromCacheOrNetwork(ids: [User.IdType]) -> Promise<[User]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return self.usersPersistenceService.fetch(ids: ids).then { cachedUsers -> Promise<[User]> in
+            if Set(cachedUsers.map(\.id)) == Set(ids) {
+                return .value(cachedUsers)
+            }
+            return self.usersNetworkService.fetch(ids: ids)
         }
     }
 

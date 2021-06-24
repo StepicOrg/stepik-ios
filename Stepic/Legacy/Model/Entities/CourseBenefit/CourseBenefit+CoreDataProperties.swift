@@ -15,6 +15,9 @@ extension CourseBenefit {
     @NSManaged var managedIsZLinkUsed: NSNumber?
     @NSManaged var managedPromoCode: String?
 
+    @NSManaged var managedCourse: Course?
+    @NSManaged var managedBuyer: User?
+
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "CourseBenefit", in: CoreDataHelper.shared.context)!
     }
@@ -136,6 +139,24 @@ extension CourseBenefit {
         }
         set {
             self.managedPromoCode = newValue
+        }
+    }
+
+    var course: Course? {
+        get {
+            self.managedCourse
+        }
+        set {
+            self.managedCourse = newValue
+        }
+    }
+
+    var buyer: User? {
+        get {
+            self.managedBuyer
+        }
+        set {
+            self.managedBuyer = newValue
         }
     }
 }

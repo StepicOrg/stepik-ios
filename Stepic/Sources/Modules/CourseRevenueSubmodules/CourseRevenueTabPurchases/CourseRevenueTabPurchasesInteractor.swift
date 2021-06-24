@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CourseRevenueTabPurchasesInteractorProtocol {
     func doPurchasesLoad(request: CourseRevenueTabPurchases.PurchasesLoad.Request)
+    func doNextPurchasesLoad(request: CourseRevenueTabPurchases.NextPurchasesLoad.Request)
     func doPurchasePresentation(request: CourseRevenueTabPurchases.PurchasePresentation.Request)
 }
 
@@ -30,21 +31,51 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
     }
 
     func doPurchasesLoad(request: CourseRevenueTabPurchases.PurchasesLoad.Request) {
-        guard let course = self.currentCourse else {
+        guard let currentCourse = self.currentCourse else {
             return
         }
 
-        self.provider.fetchCourseBenefits(courseID: course.id).done { fetchResult in
+        self.provider.fetchCourseBenefits(courseID: currentCourse.id).done { fetchResult in
             self.currentCourseBenefits = fetchResult.value.0
             self.paginationState = PaginationState(page: 1, hasNext: fetchResult.value.1.hasNext)
 
-            let data = CourseRevenueTabPurchases.PurchasesLoad.Data(
-                courseBenefits: self.currentCourseBenefits ?? [],
-                hasNextPage: self.paginationState.hasNext
+            fetchResult.value.0.forEach { $0.course = currentCourse }
+            CoreDataHelper.shared.save()
+
+            let data = CourseRevenueTabPurchases.PurchasesData(
+                courseBenefits: fetchResult.value.0,
+                hasNextPage: fetchResult.value.1.hasNext
             )
             self.presenter.presentPurchases(response: .init(result: .success(data)))
         }.catch { error in
             self.presenter.presentPurchases(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doNextPurchasesLoad(request: CourseRevenueTabPurchases.NextPurchasesLoad.Request) {
+        guard let currentCourse = self.currentCourse else {
+            return
+        }
+
+        let nextPageIndex = self.paginationState.page + 1
+
+        self.provider.fetchRemoteCourseBenefits(
+            courseID: currentCourse.id,
+            page: nextPageIndex
+        ).done { courseBenefits, meta in
+            self.currentCourseBenefits?.append(contentsOf: courseBenefits)
+            self.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
+
+            courseBenefits.forEach { $0.course = currentCourse }
+            CoreDataHelper.shared.save()
+
+            let data = CourseRevenueTabPurchases.PurchasesData(
+                courseBenefits: courseBenefits,
+                hasNextPage: meta.hasNext
+            )
+            self.presenter.presentNextPurchases(response: .init(result: .success(data)))
+        }.catch { error in
+            self.presenter.presentNextPurchases(response: .init(result: .failure(error)))
         }
     }
 

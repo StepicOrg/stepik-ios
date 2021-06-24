@@ -6,7 +6,9 @@ final class CourseRevenueTabPurchasesAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = CourseRevenueTabPurchasesProvider(
             courseBenefitsPersistenceService: CourseBenefitsPersistenceService(),
-            courseBenefitsNetworkService: CourseBenefitsNetworkService(courseBenefitsAPI: CourseBenefitsAPI())
+            courseBenefitsNetworkService: CourseBenefitsNetworkService(courseBenefitsAPI: CourseBenefitsAPI()),
+            usersPersistenceService: UsersPersistenceService(),
+            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI())
         )
         let presenter = CourseRevenueTabPurchasesPresenter()
         let interactor = CourseRevenueTabPurchasesInteractor(
