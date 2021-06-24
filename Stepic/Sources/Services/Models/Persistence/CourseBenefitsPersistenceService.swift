@@ -4,6 +4,7 @@ import PromiseKit
 
 protocol CourseBenefitsPersistenceServiceProtocol: AnyObject {
     func fetch(id: CourseBenefit.IdType) -> Guarantee<[CourseBenefit]>
+    func fetch(ids: [CourseBenefit.IdType]) -> Guarantee<[CourseBenefit]>
     func fetch(courseID: Course.IdType) -> Guarantee<[CourseBenefit]>
     func fetchAll() -> Guarantee<[CourseBenefit]>
 
@@ -38,6 +39,31 @@ final class CourseBenefitsPersistenceService: CourseBenefitsPersistenceServicePr
                 seal(courseBenefits)
             } catch {
                 print("CourseBenefitsPersistenceService :: failed fetch by id = \(id)")
+                seal([])
+            }
+        }
+    }
+
+    func fetch(ids: [CourseBenefit.IdType]) -> Guarantee<[CourseBenefit]> {
+        Guarantee { seal in
+            let fetchRequest = CourseBenefit.fetchRequest
+            let idSubpredicates = ids.map { id in
+                NSPredicate(
+                    format: "%K == %@",
+                    #keyPath(CourseBenefit.managedId),
+                    NSNumber(value: id)
+                )
+            }
+            let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
+
+            fetchRequest.predicate = compoundPredicate
+            fetchRequest.sortDescriptors = CourseBenefit.defaultSortDescriptors
+
+            do {
+                let courseBenefits = try self.managedObjectContext.fetch(fetchRequest)
+                seal(courseBenefits)
+            } catch {
+                print("CourseBenefitsPersistenceService :: failed fetch by ids = \(ids)")
                 seal([])
             }
         }

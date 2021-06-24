@@ -1,23 +1,27 @@
 import UIKit
 
 final class CourseBenefitDetailAssembly: Assembly {
-    var moduleInput: CourseBenefitDetailInputProtocol?
+    private let courseBenefitID: CourseBenefit.IdType
 
-    private weak var moduleOutput: CourseBenefitDetailOutputProtocol?
-
-    init(output: CourseBenefitDetailOutputProtocol? = nil) {
-        self.moduleOutput = output
+    init(courseBenefitID: CourseBenefit.IdType) {
+        self.courseBenefitID = courseBenefitID
     }
 
     func makeModule() -> UIViewController {
-        let provider = CourseBenefitDetailProvider()
+        let provider = CourseBenefitDetailProvider(
+            courseBenefitID: self.courseBenefitID,
+            courseBenefitsPersistenceService: CourseBenefitsPersistenceService(),
+            courseBenefitsNetworkService: CourseBenefitsNetworkService(courseBenefitsAPI: CourseBenefitsAPI())
+        )
         let presenter = CourseBenefitDetailPresenter()
-        let interactor = CourseBenefitDetailInteractor(presenter: presenter, provider: provider)
+        let interactor = CourseBenefitDetailInteractor(
+            presenter: presenter,
+            provider: provider,
+            courseBenefitID: self.courseBenefitID
+        )
         let viewController = CourseBenefitDetailViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CourseBenefitDetailViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: CourseBenefitDetail.SomeAction.ViewModel)
+    func displayCourseBenefit(viewModel: CourseBenefitDetail.CourseBenefitLoad.ViewModel)
 }
 
 final class CourseBenefitDetailViewController: UIViewController {
@@ -24,5 +24,5 @@ final class CourseBenefitDetailViewController: UIViewController {
 }
 
 extension CourseBenefitDetailViewController: CourseBenefitDetailViewControllerProtocol {
-    func displaySomeActionResult(viewModel: CourseBenefitDetail.SomeAction.ViewModel) {}
+    func displayCourseBenefit(viewModel: CourseBenefitDetail.CourseBenefitLoad.ViewModel) {}
 }
