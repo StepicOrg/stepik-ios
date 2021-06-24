@@ -19,9 +19,9 @@ final class CourseRevenueViewController: UIViewController {
     private let availableTabs: [CourseRevenue.Tab]
     private let initialTabIndex: Int
 
-    private var currentState: CourseRevenue.ViewControllerState {
+    private var state: CourseRevenue.ViewControllerState {
         didSet {
-            self.updateState(newState: self.currentState)
+            self.updateState(newState: self.state)
         }
     }
 
@@ -36,7 +36,7 @@ final class CourseRevenueViewController: UIViewController {
         initialState: CourseRevenue.ViewControllerState = .loading
     ) {
         self.interactor = interactor
-        self.currentState = initialState
+        self.state = initialState
 
         self.availableTabs = availableTabs
         self.submodulesControllers = Array(repeating: nil, count: availableTabs.count)
@@ -86,7 +86,7 @@ final class CourseRevenueViewController: UIViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
 
-        self.updateState(newState: self.currentState)
+        self.updateState(newState: self.state)
         self.interactor.doCourseRevenueLoad(request: .init())
     }
 
@@ -267,7 +267,7 @@ extension CourseRevenueViewController: PageboyViewControllerDataSource, PageboyV
 
 extension CourseRevenueViewController: CourseRevenueViewControllerProtocol {
     func displayCourseRevenue(viewModel: CourseRevenue.CourseRevenueLoad.ViewModel) {
-        self.currentState = viewModel.state
+        self.state = viewModel.state
     }
 }
 

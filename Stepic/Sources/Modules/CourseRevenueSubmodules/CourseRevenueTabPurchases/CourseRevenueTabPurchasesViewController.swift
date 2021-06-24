@@ -2,6 +2,7 @@ import UIKit
 
 protocol CourseRevenueTabPurchasesViewControllerProtocol: AnyObject {
     func displayPurchases(viewModel: CourseRevenueTabPurchases.PurchasesLoad.ViewModel)
+    func displayNextPurchases(viewModel: CourseRevenueTabPurchases.NextPurchasesLoad.ViewModel)
 }
 
 final class CourseRevenueTabPurchasesViewController: UIViewController {
@@ -73,6 +74,18 @@ final class CourseRevenueTabPurchasesViewController: UIViewController {
 extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesViewControllerProtocol {
     func displayPurchases(viewModel: CourseRevenueTabPurchases.PurchasesLoad.ViewModel) {
         self.state = viewModel.state
+    }
+
+    func displayNextPurchases(viewModel: CourseRevenueTabPurchases.NextPurchasesLoad.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            self.tableDataSource.viewModels.append(contentsOf: data.courseBenefits)
+            self.updateState(newState: self.state)
+            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
+        case .error:
+            self.updateState(newState: self.state)
+            self.updatePagination(hasNextPage: false, hasError: true)
+        }
     }
 }
 
