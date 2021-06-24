@@ -516,6 +516,7 @@ CourseRevenueMonthTurnoverDate = "Sales in %@";
 CourseRevenueTotalIncomeDate = "Earnings since %@";
 CourseRevenueTotalTurnoverDate = "Sales since %@";
 CourseRevenueDisclaimer = "You can see the refunds in the payment report, and our support will tell you about the sales.";
+CourseRevenueTransactionRefundedTitle = "Refund";
 
 /* User Courses */
 UserCoursesTitle = "My Courses";
