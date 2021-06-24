@@ -12,7 +12,7 @@ extension CourseRevenueView {
     struct Appearance {
         // Status bar + navbar + other offsets
         var headerTopOffset: CGFloat = 0.0
-        let segmentedControlHeight: CGFloat = 48
+        let segmentedControlHeight: CGFloat = 61
 
         let minimalHeaderHeight: CGFloat = 78
 
@@ -42,9 +42,9 @@ final class CourseRevenueView: UIView {
         return view
     }()
 
-    private lazy var segmentedControl: TabSegmentedControlView = {
-        let control = TabSegmentedControlView(frame: .zero, items: self.tabsTitles)
-        control.delegate = self
+    private lazy var segmentedControl: CourseRevenueTabSegmentedControlView = {
+        let control = CourseRevenueTabSegmentedControlView(tabsTitles: self.tabsTitles)
+        control.segmentedControlValueDidChange = self.onSegmentedControlValueChanged(_:)
         return control
     }()
 
@@ -109,11 +109,27 @@ final class CourseRevenueView: UIView {
 
     func updateScroll(offset: CGFloat) {
         self.topConstraint?.update(offset: -offset)
+        self.segmentedControl.backgroundColor = offset < (self.headerHeight - self.appearance.headerTopOffset * 2)
+            ? .clear
+            : self.appearance.backgroundColor
     }
 
     func updateCurrentPageIndex(_ index: Int) {
         self.currentPageIndex = index
-        self.segmentedControl.selectTab(index: index)
+        self.segmentedControl.selectedSegmentIndex = index
+    }
+
+    private func onSegmentedControlValueChanged(_ selectedSegmentIndex: Int) {
+        let tabsCount = self.delegate?.numberOfPages(in: self) ?? 0
+
+        guard selectedSegmentIndex >= 0,
+              selectedSegmentIndex < tabsCount else {
+            self.segmentedControl.selectedSegmentIndex = UISegmentedControl.noSegment
+            return
+        }
+
+        self.delegate?.courseRevenueView(self, didRequestScrollToPage: selectedSegmentIndex)
+        self.currentPageIndex = selectedSegmentIndex
     }
 
     private func updateHeaderHeight(forceUpdate: Bool = false) {
@@ -153,27 +169,15 @@ extension CourseRevenueView: ProgrammaticallyInitializableViewProtocol {
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.headerView.snp.makeConstraints { make in
             self.topConstraint = make.top.equalToSuperview().constraint
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             self.headerHeightConstraint = make.height.equalTo(self.headerHeight).constraint
         }
 
         self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(self.headerView.snp.bottom)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
-    }
-}
-
-extension CourseRevenueView: TabSegmentedControlViewDelegate {
-    func tabSegmentedControlView(_ tabSegmentedControlView: TabSegmentedControlView, didSelectTabWithIndex index: Int) {
-        let tabsCount = self.delegate?.numberOfPages(in: self) ?? 0
-        guard index >= 0, index < tabsCount else {
-            return
-        }
-
-        self.delegate?.courseRevenueView(self, didRequestScrollToPage: index)
-        self.currentPageIndex = index
     }
 }

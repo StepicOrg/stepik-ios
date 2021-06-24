@@ -108,7 +108,8 @@ final class CourseRevenueViewController: UIViewController {
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
         case .payments:
-            fatalError("payments tab has not been implemented")
+            controller = UIViewController()
+            moduleInput = nil
         }
 
         self.submodulesControllers[index] = controller

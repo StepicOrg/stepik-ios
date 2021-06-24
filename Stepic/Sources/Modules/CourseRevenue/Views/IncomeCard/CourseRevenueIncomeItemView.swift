@@ -10,7 +10,7 @@ extension CourseRevenueIncomeItemView {
         let expandContentControlInsets = LayoutInsets(right: 16)
         let expandContentTapProxyViewSize = CGSize(width: 32, height: 32)
 
-        let titleLabelFont = UIFont.systemFont(ofSize: 12)
+        let titleLabelFont = Typography.caption1Font
         let titleLabelTextColor = UIColor.stepikMaterialSecondaryText
 
         let priceLabelFont = UIFont.systemFont(ofSize: 22, weight: .semibold)

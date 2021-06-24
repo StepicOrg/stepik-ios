@@ -31,7 +31,7 @@ final class CourseRevenueAssembly: Assembly {
         )
         let viewController = CourseRevenueViewController(
             interactor: interactor,
-            availableTabs: [.purchasesAndRefunds],
+            availableTabs: CourseRevenue.Tab.allCases,
             initialTab: self.initialTab
         )
 

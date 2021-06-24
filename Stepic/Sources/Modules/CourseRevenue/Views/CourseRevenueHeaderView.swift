@@ -5,8 +5,9 @@ extension CourseRevenueHeaderView {
     struct Appearance {
         let incomeViewInsets = LayoutInsets.default
 
-        let disclaimerLabelFont = UIFont.systemFont(ofSize: 12)
+        let disclaimerLabelFont = Typography.caption1Font
         let disclaimerLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let disclaimerLabelInsets = LayoutInsets.default
     }
 }
 
@@ -35,7 +36,8 @@ final class CourseRevenueHeaderView: UIView {
     override var intrinsicContentSize: CGSize {
         let height = self.appearance.incomeViewInsets.top
             + self.incomeView.intrinsicContentSize.height
-            + self.appearance.incomeViewInsets.bottom
+            + self.appearance.disclaimerLabelInsets.top
+            + self.disclaimerLabel.intrinsicContentSize.height
         return CGSize(
             width: UIView.noIntrinsicMetric,
             height: height
@@ -79,6 +81,7 @@ final class CourseRevenueHeaderView: UIView {
 extension CourseRevenueHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.incomeView)
+        self.addSubview(self.disclaimerLabel)
     }
 
     func makeConstraints() {
@@ -86,8 +89,15 @@ extension CourseRevenueHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.incomeView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.incomeViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.incomeViewInsets.left)
-            make.bottom.equalToSuperview().offset(-self.appearance.incomeViewInsets.bottom)
             make.trailing.equalToSuperview().offset(-self.appearance.incomeViewInsets.right)
+        }
+
+        self.disclaimerLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.disclaimerLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.incomeView.snp.bottom).offset(self.appearance.disclaimerLabelInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.disclaimerLabelInsets.left)
+            make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-self.appearance.disclaimerLabelInsets.right)
         }
     }
 }
