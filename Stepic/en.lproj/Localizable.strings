@@ -628,6 +628,7 @@ SettingsCellTitleAdaptiveMode = "Adaptive mode";
 SettingsCellTitleDownloads = "Downloads";
 SettingsCellTitleDeleteAllContent = "Delete all content";
 SettingsCellTitleAbout = "About";
+SettingsCellTitleDeleteAccount = "Delete account";
 SettingsCellTitleLogOut = "Log Out";
 
 SettingsDownloadVideoQualityTitle = "Video download quality";
@@ -1127,6 +1128,8 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 
 /* Course List */
 CourseWidgetArchived = "Archived";
+CourseWidgetEnrolled = "Enrolled";
+CourseWidgetPriceFree = "Free";
 CourseWidgetSeeAllTitle = "See All";
 
 ContinueCourseEmptyTitle = "Find your first course";

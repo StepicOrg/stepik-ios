@@ -51,7 +51,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
         }
     }
-    private var currentCourseIAPLocalizedPrice: String?
 
     private let promoCodeName: String?
     private var currentPromoCode: PromoCode?
@@ -388,7 +387,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             course: self.currentCourse.require(),
             isWishlisted: self.wishlistService.contains(self.courseID),
             isWishlistAvailable: isWishlistAvailable,
-            iapLocalizedPrice: self.currentCourseIAPLocalizedPrice,
             promoCode: self.currentPromoCode
         )
     }
@@ -419,9 +417,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 }
 
                 if let course = course,
-                   course.isPaid && self.iapService.canBuyCourse(course) && self.currentCourseIAPLocalizedPrice == nil {
+                   course.isPaid && self.iapService.canBuyCourse(course) && course.displayPriceIAP?.isEmpty ?? true {
                     self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
-                        self.currentCourseIAPLocalizedPrice = localizedPrice
+                        self.currentCourse?.displayPriceIAP = localizedPrice
                         DispatchQueue.main.async {
                             self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
                         }
@@ -457,14 +455,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
         firstly { () -> Promise<PromoCode?> in
             if let promoCodeName = self.promoCodeName {
-                // swiftlint:disable:next array_init
                 return self.provider.checkPromoCode(name: promoCodeName).map { $0 }
             } else if let defaultPromoCode = course.defaultPromoCode {
-                if let expireDate = defaultPromoCode.expireDate {
-                    return expireDate > Date() ? .value(defaultPromoCode) : .value(nil)
-                } else {
-                    return .value(defaultPromoCode)
-                }
+                return defaultPromoCode.isValid ? .value(defaultPromoCode) : .value(nil)
             } else {
                 return .value(nil)
             }

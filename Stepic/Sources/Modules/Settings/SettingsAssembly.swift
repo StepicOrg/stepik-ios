@@ -22,9 +22,10 @@ final class SettingsAssembly: Assembly {
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             autoplayStorageManager: AutoplayStorageManager(),
             adaptiveStorageManager: AdaptiveStorageManager.shared,
-            applicationThemeService: ApplicationThemeService()
+            applicationThemeService: ApplicationThemeService(),
+            stepicsNetworkService: StepicsNetworkService(stepicsAPI: StepicsAPI())
         )
-        let presenter = SettingsPresenter()
+        let presenter = SettingsPresenter(urlFactory: StepikURLFactory())
         let interactor = SettingsInteractor(
             presenter: presenter,
             provider: provider,

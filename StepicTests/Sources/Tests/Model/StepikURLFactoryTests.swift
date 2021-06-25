@@ -15,13 +15,24 @@ class StepikURLFactorySpec: QuickSpec {
             }
 
             context("users") {
-                it("returns correct URL") {
+                it("returns correct URL for user with id") {
                     // Given
                     let userID = 101
                     let staticURLString = "\(stepikURL)/users/\(userID)"
 
                     // When
                     let constructedURL = stepikURLFactory.makeUser(id: userID)!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+
+                it("returns correct URL for delete user account") {
+                    // Given
+                    let staticURLString = "\(stepikURL)/users/delete-account/"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeDeleteUserAccount()!
 
                     // Then
                     expect(constructedURL.absoluteString) == staticURLString

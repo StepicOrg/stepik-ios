@@ -63,10 +63,14 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         return true
     }
 
-    var percentPassed: Float {
+    var completeRate: Float {
         self.numberOfSteps != 0
-            ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps) * 100
-            : 100.0
+            ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps)
+            : 1
+    }
+
+    var percentPassed: Float {
+        self.completeRate * 100
     }
 
     enum JSONKey: String {

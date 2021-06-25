@@ -96,10 +96,16 @@ final class IAPService: IAPServiceProtocol {
     }
 
     func getLocalizedPrice(for product: SKProduct) -> String? {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = product.priceLocale
-        return formatter.string(from: product.price)
+        if let currencySymbol = product.priceLocale.currencySymbol {
+            return FormatterHelper.price(product.price.floatValue, currencySymbol: currencySymbol)
+        } else if let currencyCode = product.priceLocale.currencyCode {
+            return FormatterHelper.price(product.price.floatValue, currencyCode: currencyCode)
+        } else {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.locale = product.priceLocale
+            return formatter.string(from: product.price)
+        }
     }
 
     func getLocalizedPrice(for course: Course) -> Guarantee<String?> {

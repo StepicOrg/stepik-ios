@@ -9,7 +9,6 @@ analyzer_rules:
 
 only_rules:
   - anyobject_protocol
-  - array_init
   - attributes
   - block_based_kvo
   - class_delegate_protocol
@@ -155,9 +154,6 @@ only_rules:
 
 # settings
 anyobject_protocol:
-  severity: error
-
-array_init:
   severity: error
 
 attributes:

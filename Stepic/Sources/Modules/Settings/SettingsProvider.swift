@@ -22,6 +22,8 @@ protocol SettingsProviderProtocol: AnyObject {
 
     var isAutoplayEnabled: Bool { get set }
     var isAdaptiveModeEnabled: Bool { get set }
+
+    func fetchCurrentUser() -> Promise<User>
 }
 
 final class SettingsProvider: SettingsProviderProtocol {
@@ -33,6 +35,8 @@ final class SettingsProvider: SettingsProviderProtocol {
     private let autoplayStorageManager: AutoplayStorageManagerProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let applicationThemeService: ApplicationThemeServiceProtocol
+
+    private let stepicsNetworkService: StepicsNetworkServiceProtocol
 
     var globalDownloadVideoQuality: DownloadVideoQuality {
         get {
@@ -124,7 +128,8 @@ final class SettingsProvider: SettingsProviderProtocol {
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         autoplayStorageManager: AutoplayStorageManagerProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
-        applicationThemeService: ApplicationThemeServiceProtocol
+        applicationThemeService: ApplicationThemeServiceProtocol,
+        stepicsNetworkService: StepicsNetworkServiceProtocol
     ) {
         self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
         self.streamVideoQualityStorageManager = streamVideoQualityStorageManager
@@ -134,5 +139,10 @@ final class SettingsProvider: SettingsProviderProtocol {
         self.autoplayStorageManager = autoplayStorageManager
         self.adaptiveStorageManager = adaptiveStorageManager
         self.applicationThemeService = applicationThemeService
+        self.stepicsNetworkService = stepicsNetworkService
+    }
+
+    func fetchCurrentUser() -> Promise<User> {
+        self.stepicsNetworkService.fetchCurrentUser()
     }
 }
