@@ -3,6 +3,7 @@ import UIKit
 protocol CourseRevenueTabPurchasesViewControllerProtocol: AnyObject {
     func displayPurchases(viewModel: CourseRevenueTabPurchases.PurchasesLoad.ViewModel)
     func displayNextPurchases(viewModel: CourseRevenueTabPurchases.NextPurchasesLoad.ViewModel)
+    func displayPurchaseDetails(viewModel: CourseRevenueTabPurchases.PurchaseDetailsPresentation.ViewModel)
 }
 
 final class CourseRevenueTabPurchasesViewController: UIViewController {
@@ -87,6 +88,11 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
             self.updatePagination(hasNextPage: false, hasError: true)
         }
     }
+
+    func displayPurchaseDetails(viewModel: CourseRevenueTabPurchases.PurchaseDetailsPresentation.ViewModel) {
+        let assembly = CourseBenefitDetailAssembly(courseBenefitID: viewModel.courseBenefitID)
+        self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
+    }
 }
 
 extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesViewDelegate {
@@ -100,7 +106,7 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
             return
         }
 
-        self.interactor.doPurchasePresentation(
+        self.interactor.doPurchaseDetailsPresentation(
             request: .init(viewModelUniqueIdentifier: targetCourseBenefit.uniqueIdentifier)
         )
     }

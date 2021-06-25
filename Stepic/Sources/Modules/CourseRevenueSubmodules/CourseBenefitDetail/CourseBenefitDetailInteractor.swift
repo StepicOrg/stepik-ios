@@ -10,6 +10,7 @@ final class CourseBenefitDetailInteractor: CourseBenefitDetailInteractorProtocol
     private let provider: CourseBenefitDetailProviderProtocol
 
     private let courseBenefitID: CourseBenefit.IdType
+    private var currentCourseBenefit: CourseBenefit?
 
     init(
         presenter: CourseBenefitDetailPresenterProtocol,
@@ -21,5 +22,19 @@ final class CourseBenefitDetailInteractor: CourseBenefitDetailInteractorProtocol
         self.courseBenefitID = courseBenefitID
     }
 
-    func doCourseBenefitLoad(request: CourseBenefitDetail.CourseBenefitLoad.Request) {}
+    func doCourseBenefitLoad(request: CourseBenefitDetail.CourseBenefitLoad.Request) {
+        self.provider
+            .fetchCourseBenefit()
+            .compactMap { $0 }
+            .done { courseBenefit in
+                self.currentCourseBenefit = courseBenefit
+                self.presenter.presentCourseBenefit(response: .init(result: .success(courseBenefit)))
+            }.catch { _ in
+                self.presenter.presentCourseBenefit(response: .init(result: .failure(Error.fetchFailed)))
+            }
+    }
+
+    enum Error: Swift.Error {
+        case fetchFailed
+    }
 }

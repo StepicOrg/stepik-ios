@@ -518,6 +518,13 @@ CourseRevenueTotalTurnoverDate = "Sales since %@";
 CourseRevenueDisclaimer = "You can see the refunds in the payment report, and our support will tell you about the sales.";
 CourseRevenueTransactionRefundedTitle = "Refund";
 
+/* CourseBenefitDetail */
+CourseBenefitDetailTitle = "Sale Info";
+CourseBenefitDetailAmountPercent = "%@ of sales, net of commissions";
+CourseBenefitDetailChannelZLink = "Came via Z-Link";
+CourseBenefitDetailChannelStepikLink = "Came via Stepik Link";
+CourseBenefitDetailChannelRefund = "Refund";
+
 /* User Courses */
 UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";

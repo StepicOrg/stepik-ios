@@ -4,8 +4,17 @@ enum CourseBenefitDetail {
     enum CourseBenefitLoad {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let result: StepikResult<CourseBenefit>
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    enum ViewControllerState {
+        case loading
+        case result(data: CourseBenefitDetailViewModel)
     }
 }

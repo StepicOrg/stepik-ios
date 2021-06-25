@@ -37,9 +37,17 @@ enum CourseRevenueTabPurchases {
     }
 
     /// Present purchase details
-    enum PurchasePresentation {
+    enum PurchaseDetailsPresentation {
         struct Request {
             let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let courseBenefitID: CourseBenefit.IdType
+        }
+
+        struct ViewModel {
+            let courseBenefitID: CourseBenefit.IdType
         }
     }
 

@@ -4,7 +4,7 @@ import PromiseKit
 protocol CourseRevenueTabPurchasesInteractorProtocol {
     func doPurchasesLoad(request: CourseRevenueTabPurchases.PurchasesLoad.Request)
     func doNextPurchasesLoad(request: CourseRevenueTabPurchases.NextPurchasesLoad.Request)
-    func doPurchasePresentation(request: CourseRevenueTabPurchases.PurchasePresentation.Request)
+    func doPurchaseDetailsPresentation(request: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Request)
 }
 
 final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesInteractorProtocol {
@@ -79,7 +79,7 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
         }
     }
 
-    func doPurchasePresentation(request: CourseRevenueTabPurchases.PurchasePresentation.Request) {
+    func doPurchaseDetailsPresentation(request: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Request) {
         guard let currentCourse = self.currentCourse,
               let targetCourseBenefit = self.currentCourseBenefits?.first(
                 where: { "\($0.id)" == request.viewModelUniqueIdentifier }
@@ -95,6 +95,8 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
                 courseTitle: currentCourse.title
             )
         )
+
+        self.presenter.presentPurchaseDetails(response: .init(courseBenefitID: targetCourseBenefit.id))
     }
 }
 

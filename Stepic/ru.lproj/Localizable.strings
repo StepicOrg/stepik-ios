@@ -520,6 +520,13 @@ CourseRevenueTotalTurnoverDate = "Продажи с %@";
 CourseRevenueDisclaimer = "Возвраты можно увидеть в отчёте о платежах, а о продажах по счёту расскажет наша поддержка.";
 CourseRevenueTransactionRefundedTitle = "Возврат";
 
+/* CourseBenefitDetail */
+CourseBenefitDetailTitle = "Детали покупки";
+CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии";
+CourseBenefitDetailChannelZLink = "Переход по Z-Link";
+CourseBenefitDetailChannelStepikLink = "Переход по Stepik Link";
+CourseBenefitDetailChannelRefund = "Возврат";
+
 /* User Courses */
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";

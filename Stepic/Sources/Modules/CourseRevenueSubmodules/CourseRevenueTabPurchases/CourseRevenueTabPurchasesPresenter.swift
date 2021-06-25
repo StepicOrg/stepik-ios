@@ -3,6 +3,7 @@ import UIKit
 protocol CourseRevenueTabPurchasesPresenterProtocol {
     func presentPurchases(response: CourseRevenueTabPurchases.PurchasesLoad.Response)
     func presentNextPurchases(response: CourseRevenueTabPurchases.NextPurchasesLoad.Response)
+    func presentPurchaseDetails(response: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Response)
 }
 
 final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresenterProtocol {
@@ -34,6 +35,10 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
         case .failure:
             self.viewController?.displayNextPurchases(viewModel: .init(state: .error))
         }
+    }
+
+    func presentPurchaseDetails(response: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Response) {
+        self.viewController?.displayPurchaseDetails(viewModel: .init(courseBenefitID: response.courseBenefitID))
     }
 
     private func makeViewModel(_ courseBenefit: CourseBenefit) -> CourseRevenueTabPurchasesViewModel {
