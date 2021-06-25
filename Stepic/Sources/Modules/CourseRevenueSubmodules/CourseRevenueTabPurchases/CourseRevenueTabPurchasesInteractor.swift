@@ -5,10 +5,14 @@ protocol CourseRevenueTabPurchasesInteractorProtocol {
     func doPurchasesLoad(request: CourseRevenueTabPurchases.PurchasesLoad.Request)
     func doNextPurchasesLoad(request: CourseRevenueTabPurchases.NextPurchasesLoad.Request)
     func doPurchaseDetailsPresentation(request: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Request)
+    func doCourseInfoPresentation(request: CourseRevenueTabPurchases.CourseInfoPresentation.Request)
+    func doProfilePresentation(request: CourseRevenueTabPurchases.ProfilePresentation.Request)
 }
 
 final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesInteractorProtocol {
     typealias PaginationState = (page: Int, hasNext: Bool)
+
+    weak var moduleOutput: CourseRevenueTabPurchasesOutputProtocol?
 
     private let presenter: CourseRevenueTabPurchasesPresenterProtocol
     private let provider: CourseRevenueTabPurchasesProviderProtocol
@@ -97,6 +101,14 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
         )
 
         self.presenter.presentPurchaseDetails(response: .init(courseBenefitID: targetCourseBenefit.id))
+    }
+
+    func doCourseInfoPresentation(request: CourseRevenueTabPurchases.CourseInfoPresentation.Request) {
+        self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentCourseInfo(courseID: request.courseID)
+    }
+
+    func doProfilePresentation(request: CourseRevenueTabPurchases.ProfilePresentation.Request) {
+        self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: request.userID)
     }
 }
 

@@ -3,6 +3,8 @@ import UIKit
 
 protocol CourseRevenueViewControllerProtocol: AnyObject {
     func displayCourseRevenue(viewModel: CourseRevenue.CourseRevenueLoad.ViewModel)
+    func displayCourseInfo(viewModel: CourseRevenue.CourseInfoPresentation.ViewModel)
+    func displayProfile(viewModel: CourseRevenue.ProfilePresentation.ViewModel)
 }
 
 final class CourseRevenueViewController: UIViewController {
@@ -104,7 +106,9 @@ final class CourseRevenueViewController: UIViewController {
 
         switch tab {
         case .purchasesAndRefunds:
-            let assembly = CourseRevenueTabPurchasesAssembly()
+            let assembly = CourseRevenueTabPurchasesAssembly(
+                moduleOutput: self.interactor as? CourseRevenueTabPurchasesOutputProtocol
+            )
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
         case .payments:
@@ -268,6 +272,16 @@ extension CourseRevenueViewController: PageboyViewControllerDataSource, PageboyV
 extension CourseRevenueViewController: CourseRevenueViewControllerProtocol {
     func displayCourseRevenue(viewModel: CourseRevenue.CourseRevenueLoad.ViewModel) {
         self.state = viewModel.state
+    }
+
+    func displayCourseInfo(viewModel: CourseRevenue.CourseInfoPresentation.ViewModel) {
+        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, courseViewSource: .unknown)
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayProfile(viewModel: CourseRevenue.ProfilePresentation.ViewModel) {
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
+        self.push(module: assembly.makeModule())
     }
 }
 

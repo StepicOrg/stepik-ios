@@ -13,6 +13,14 @@ enum CourseBenefitDetail {
         }
     }
 
+    enum CourseInfoPresentation {
+        struct Request {}
+    }
+
+    enum BuyerProfilePresentation {
+        struct Request {}
+    }
+
     enum ViewControllerState {
         case loading
         case result(data: CourseBenefitDetailViewModel)

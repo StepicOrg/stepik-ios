@@ -3,8 +3,14 @@ import UIKit
 final class CourseBenefitDetailAssembly: Assembly {
     private let courseBenefitID: CourseBenefit.IdType
 
-    init(courseBenefitID: CourseBenefit.IdType) {
+    private weak var moduleOutput: CourseBenefitDetailOutputProtocol?
+
+    init(
+        courseBenefitID: CourseBenefit.IdType,
+        moduleOutput: CourseBenefitDetailOutputProtocol? = nil
+    ) {
         self.courseBenefitID = courseBenefitID
+        self.moduleOutput = moduleOutput
     }
 
     func makeModule() -> UIViewController {
@@ -22,6 +28,7 @@ final class CourseBenefitDetailAssembly: Assembly {
         let viewController = CourseBenefitDetailViewController(interactor: interactor)
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

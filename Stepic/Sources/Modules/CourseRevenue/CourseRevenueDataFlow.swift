@@ -46,6 +46,26 @@ enum CourseRevenue {
         }
     }
 
+    enum CourseInfoPresentation {
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
+    enum ProfilePresentation {
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

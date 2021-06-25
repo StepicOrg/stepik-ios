@@ -89,3 +89,13 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
         self.analytics.send(.courseBenefitsScreenOpened(id: currentCourse.id, title: currentCourse.title))
     }
 }
+
+extension CourseRevenueInteractor: CourseRevenueTabPurchasesOutputProtocol {
+    func handleCourseRevenueTabPurchasesDidRequestPresentCourseInfo(courseID: Course.IdType) {
+        self.presenter.presentCourseInfo(response: .init(courseID: courseID))
+    }
+
+    func handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: User.IdType) {
+        self.presenter.presentProfile(response: .init(userID: userID))
+    }
+}

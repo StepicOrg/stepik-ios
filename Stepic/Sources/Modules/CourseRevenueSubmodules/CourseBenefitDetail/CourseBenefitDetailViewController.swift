@@ -84,4 +84,12 @@ extension CourseBenefitDetailViewController: CourseBenefitDetailViewDelegate {
     func courseBenefitDetailViewDidClickCloseButton(_ view: CourseBenefitDetailView) {
         self.dismiss(animated: true)
     }
+
+    func courseBenefitDetailViewDidClickCourseButton(_ view: CourseBenefitDetailView) {
+        self.interactor.doCourseInfoPresentation(request: .init())
+    }
+
+    func courseBenefitDetailViewDidClickBuyerButton(_ view: CourseBenefitDetailView) {
+        self.interactor.doBuyerProfilePresentation(request: .init())
+    }
 }

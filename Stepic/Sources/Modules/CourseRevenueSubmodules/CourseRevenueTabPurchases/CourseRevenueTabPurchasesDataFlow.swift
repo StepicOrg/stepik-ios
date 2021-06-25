@@ -51,6 +51,18 @@ enum CourseRevenueTabPurchases {
         }
     }
 
+    enum CourseInfoPresentation {
+        struct Request {
+            let courseID: Course.IdType
+        }
+    }
+
+    enum ProfilePresentation {
+        struct Request {
+            let userID: User.IdType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

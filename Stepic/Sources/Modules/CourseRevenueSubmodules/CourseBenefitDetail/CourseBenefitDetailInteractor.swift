@@ -3,9 +3,13 @@ import PromiseKit
 
 protocol CourseBenefitDetailInteractorProtocol {
     func doCourseBenefitLoad(request: CourseBenefitDetail.CourseBenefitLoad.Request)
+    func doCourseInfoPresentation(request: CourseBenefitDetail.CourseInfoPresentation.Request)
+    func doBuyerProfilePresentation(request: CourseBenefitDetail.BuyerProfilePresentation.Request)
 }
 
 final class CourseBenefitDetailInteractor: CourseBenefitDetailInteractorProtocol {
+    weak var moduleOutput: CourseBenefitDetailOutputProtocol?
+
     private let presenter: CourseBenefitDetailPresenterProtocol
     private let provider: CourseBenefitDetailProviderProtocol
 
@@ -32,6 +36,20 @@ final class CourseBenefitDetailInteractor: CourseBenefitDetailInteractorProtocol
             }.catch { _ in
                 self.presenter.presentCourseBenefit(response: .init(result: .failure(Error.fetchFailed)))
             }
+    }
+
+    func doCourseInfoPresentation(request: CourseBenefitDetail.CourseInfoPresentation.Request) {
+        if let currentCourseBenefit = self.currentCourseBenefit {
+            self.moduleOutput?.handleCourseBenefitDetailDidRequestPresentCourseInfo(
+                courseID: currentCourseBenefit.courseID
+            )
+        }
+    }
+
+    func doBuyerProfilePresentation(request: CourseBenefitDetail.BuyerProfilePresentation.Request) {
+        if let currentCourseBenefit = self.currentCourseBenefit {
+            self.moduleOutput?.handleCourseBenefitDetailDidRequestPresentUser(userID: currentCourseBenefit.buyerID)
+        }
     }
 
     enum Error: Swift.Error {

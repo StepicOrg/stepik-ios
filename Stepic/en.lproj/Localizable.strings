@@ -524,6 +524,14 @@ CourseBenefitDetailAmountPercent = "%@ of sales, net of commissions";
 CourseBenefitDetailChannelZLink = "Came via Z-Link";
 CourseBenefitDetailChannelStepikLink = "Came via Stepik Link";
 CourseBenefitDetailChannelRefund = "Refund";
+CourseBenefitDetailDateTitle = "Date";
+CourseBenefitDetailCourseTitle = "Course";
+CourseBenefitDetailBuyerTitle = "Customer";
+CourseBenefitDetailPaymentAmountTitle = "Payment";
+CourseBenefitDetailPromoCodeTitle = "Promo code";
+CourseBenefitDetailChannelTitle = "Channel";
+CourseBenefitDetailAmountPercentTitle = "Earning percentage";
+CourseBenefitDetailAmountTitle = "Earnings";
 
 /* User Courses */
 UserCoursesTitle = "My Courses";

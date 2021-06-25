@@ -526,6 +526,14 @@ CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом ко�
 CourseBenefitDetailChannelZLink = "Переход по Z-Link";
 CourseBenefitDetailChannelStepikLink = "Переход по Stepik Link";
 CourseBenefitDetailChannelRefund = "Возврат";
+CourseBenefitDetailDateTitle = "Дата";
+CourseBenefitDetailCourseTitle = "Курс";
+CourseBenefitDetailBuyerTitle = "Покупатель";
+CourseBenefitDetailPaymentAmountTitle = "Платёж";
+CourseBenefitDetailPromoCodeTitle = "Промокод";
+CourseBenefitDetailChannelTitle = "Канал";
+CourseBenefitDetailAmountPercentTitle = "Ваш процент";
+CourseBenefitDetailAmountTitle = "Ваш доход";
 
 /* User Courses */
 UserCoursesTitle = "Мои курсы";

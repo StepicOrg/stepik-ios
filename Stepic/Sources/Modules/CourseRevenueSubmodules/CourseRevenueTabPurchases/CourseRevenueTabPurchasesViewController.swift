@@ -90,7 +90,10 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
     }
 
     func displayPurchaseDetails(viewModel: CourseRevenueTabPurchases.PurchaseDetailsPresentation.ViewModel) {
-        let assembly = CourseBenefitDetailAssembly(courseBenefitID: viewModel.courseBenefitID)
+        let assembly = CourseBenefitDetailAssembly(
+            courseBenefitID: viewModel.courseBenefitID,
+            moduleOutput: self
+        )
         self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
     }
 }
@@ -109,5 +112,19 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
         self.interactor.doPurchaseDetailsPresentation(
             request: .init(viewModelUniqueIdentifier: targetCourseBenefit.uniqueIdentifier)
         )
+    }
+}
+
+extension CourseRevenueTabPurchasesViewController: CourseBenefitDetailOutputProtocol {
+    func handleCourseBenefitDetailDidRequestPresentCourseInfo(courseID: Course.IdType) {
+        self.dismiss(animated: true) { [weak self] in
+            self?.interactor.doCourseInfoPresentation(request: .init(courseID: courseID))
+        }
+    }
+
+    func handleCourseBenefitDetailDidRequestPresentUser(userID: User.IdType) {
+        self.dismiss(animated: true) { [weak self] in
+            self?.interactor.doProfilePresentation(request: .init(userID: userID))
+        }
     }
 }

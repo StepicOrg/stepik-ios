@@ -3,6 +3,8 @@ import UIKit
 
 protocol CourseRevenuePresenterProtocol {
     func presentCourseRevenue(response: CourseRevenue.CourseRevenueLoad.Response)
+    func presentCourseInfo(response: CourseRevenue.CourseInfoPresentation.Response)
+    func presentProfile(response: CourseRevenue.ProfilePresentation.Response)
 }
 
 final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
@@ -28,6 +30,14 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
         case .failure:
             viewController.displayCourseRevenue(viewModel: .init(state: .error))
         }
+    }
+
+    func presentCourseInfo(response: CourseRevenue.CourseInfoPresentation.Response) {
+        self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.courseID))
+    }
+
+    func presentProfile(response: CourseRevenue.ProfilePresentation.Response) {
+        self.viewController?.displayProfile(viewModel: .init(userID: response.userID))
     }
 
     private func makeHeaderViewModel(benefitSummary: CourseBenefitSummary) -> CourseRevenueHeaderViewModel {
