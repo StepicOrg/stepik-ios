@@ -5,6 +5,7 @@ protocol LessonFinishedStepsPanModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: LessonFinishedStepsPanModal.ModalLoad.ViewModel)
     func displayShareResult(viewModel: LessonFinishedStepsPanModal.ShareResultPresentation.ViewModel)
     func displayCertificate(viewModel: LessonFinishedStepsPanModal.CertificatePresentation.ViewModel)
+    func displayBackToAssignments(viewModel: LessonFinishedStepsPanModal.BackToAssignmentsPresentation.ViewModel)
 }
 
 final class LessonFinishedStepsPanModalViewController: PanModalPresentableViewController {
@@ -104,6 +105,10 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
             backButtonStyle: .close
         )
     }
+
+    func displayBackToAssignments(viewModel: LessonFinishedStepsPanModal.BackToAssignmentsPresentation.ViewModel) {
+        self.dismiss(animated: true)
+    }
 }
 
 extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModalViewDelegate {
@@ -116,24 +121,11 @@ extension LessonFinishedStepsPanModalViewController: LessonFinishedStepsPanModal
         didClickButtonWith uniqueIdentifier: UniqueIdentifierType?,
         sourceView: UIView
     ) {
-        guard let uniqueIdentifier = uniqueIdentifier,
-              let actionType = LessonFinishedStepsPanModal.ActionType(rawValue: uniqueIdentifier) else {
+        guard let uniqueIdentifier = uniqueIdentifier else {
             return
         }
 
         self.currentPopoverPresentationSourceView = sourceView
-
-        switch actionType {
-        case .backToAssignments:
-            self.dismiss(animated: true)
-        case .leaveReview:
-            self.interactor.doLeaveReviewPresentation(request: .init())
-        case .findNewCourse:
-            self.interactor.doFindNewCoursePresentation(request: .init())
-        case .shareResult:
-            self.interactor.doShareResultPresentation(request: .init())
-        case .viewCertificate:
-            self.interactor.doCertificatePresentation(request: .init())
-        }
+        self.interactor.doModalAction(request: .init(actionUniqueIdentifier: uniqueIdentifier))
     }
 }

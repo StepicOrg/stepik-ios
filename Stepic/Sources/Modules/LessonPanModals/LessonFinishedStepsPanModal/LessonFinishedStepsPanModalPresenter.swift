@@ -5,6 +5,7 @@ protocol LessonFinishedStepsPanModalPresenterProtocol {
     func presentModal(response: LessonFinishedStepsPanModal.ModalLoad.Response)
     func presentShareResult(response: LessonFinishedStepsPanModal.ShareResultPresentation.Response)
     func presentCertificate(response: LessonFinishedStepsPanModal.CertificatePresentation.Response)
+    func presentBackToAssignments(response: LessonFinishedStepsPanModal.BackToAssignmentsPresentation.Response)
 }
 
 final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPresenterProtocol {
@@ -45,6 +46,10 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
         }
 
         self.viewController?.displayCertificate(viewModel: .init(certificateURL: url))
+    }
+
+    func presentBackToAssignments(response: LessonFinishedStepsPanModal.BackToAssignmentsPresentation.Response) {
+        self.viewController?.displayBackToAssignments(viewModel: .init())
     }
 
     // MARK: Private API

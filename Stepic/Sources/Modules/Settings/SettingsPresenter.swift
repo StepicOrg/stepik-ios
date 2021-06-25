@@ -8,12 +8,19 @@ protocol SettingsPresenterProtocol {
     func presentContentLanguageSetting(response: Settings.ContentLanguageSettingPresentation.Response)
     func presentStepFontSizeSetting(response: Settings.StepFontSizeSettingPresentation.Response)
     func presentDeleteAllContentResult(response: Settings.DeleteAllContent.Response)
+    func presentDeleteUserAccount(response: Settings.DeleteUserAccountPresentation.Response)
     func presentWaitingState(response: Settings.BlockingWaitingIndicatorUpdate.Response)
     func presentDismiss(response: Settings.DismissPresentation.Response)
 }
 
 final class SettingsPresenter: SettingsPresenterProtocol {
     weak var viewController: SettingsViewControllerProtocol?
+
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
 
     func presentSettings(response: Settings.SettingsLoad.Response) {
         let settingsViewModel = self.makeViewModel(from: response.data)
@@ -97,6 +104,12 @@ final class SettingsPresenter: SettingsPresenterProtocol {
 
     func presentDeleteAllContentResult(response: Settings.DeleteAllContent.Response) {
         self.viewController?.displayDeleteAllContentResult(viewModel: .init(isSuccessful: response.isSuccessful))
+    }
+
+    func presentDeleteUserAccount(response: Settings.DeleteUserAccountPresentation.Response) {
+        if let url = self.urlFactory.makeDeleteUserAccount() {
+            self.viewController?.displayDeleteUserAccount(viewModel: .init(url: url))
+        }
     }
 
     func presentWaitingState(response: Settings.BlockingWaitingIndicatorUpdate.Response) {

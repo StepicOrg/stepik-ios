@@ -28,6 +28,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
+    private let remoteConfig: RemoteConfig
+
     private var isOnline = false
     private var didLoadFromCache = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
@@ -55,7 +57,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         wishlistService: WishlistServiceProtocol,
         courseListDataBackUpdateService: CourseListDataBackUpdateServiceProtocol,
         analytics: Analytics,
-        courseViewSource: AnalyticsEvent.CourseViewSource
+        courseViewSource: AnalyticsEvent.CourseViewSource,
+        remoteConfig: RemoteConfig
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -66,6 +69,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.wishlistService = wishlistService
         self.analytics = analytics
         self.courseViewSource = courseViewSource
+        self.remoteConfig = remoteConfig
 
         self.courseListDataBackUpdateService = courseListDataBackUpdateService
         self.courseListDataBackUpdateService.delegate = self
@@ -128,6 +132,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
                     let response = CourseList.CoursesLoad.Response(
                         isAuthorized: strongSelf.userAccountService.isAuthorized,
+                        isCoursePricesEnabled: strongSelf.remoteConfig.isCoursePricesEnabled,
                         result: courses,
                         viewSource: strongSelf.courseViewSource
                     )
@@ -182,6 +187,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             }.catch { error in
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: strongSelf.userAccountService.isAuthorized,
+                    isCoursePricesEnabled: strongSelf.remoteConfig.isCoursePricesEnabled,
                     result: .failure(error),
                     viewSource: strongSelf.courseViewSource
                 )
@@ -290,6 +296,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
+                    isCoursePricesEnabled: self.remoteConfig.isCoursePricesEnabled,
                     result: .success(result),
                     viewSource: self.courseViewSource
                 )
@@ -322,6 +329,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
+                    isCoursePricesEnabled: self.remoteConfig.isCoursePricesEnabled,
                     result: .success(courses),
                     viewSource: self.courseViewSource
                 )
@@ -384,6 +392,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         )
         let response = CourseList.CoursesLoad.Response(
             isAuthorized: self.userAccountService.isAuthorized,
+            isCoursePricesEnabled: self.remoteConfig.isCoursePricesEnabled,
             result: courses,
             viewSource: self.courseViewSource
         )

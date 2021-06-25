@@ -24,6 +24,7 @@ protocol SettingsInteractorProtocol {
     func doAdaptiveModeSettingUpdate(request: Settings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: Settings.DeleteAllContent.Request)
     func doAccountLogOut(request: Settings.AccountLogOut.Request)
+    func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request)
 }
 
 final class SettingsInteractor: SettingsInteractorProtocol {
@@ -57,6 +58,8 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         !(self.userAccountService.currentUser?.isGuest ?? true) && self.userAccountService.isAuthorized
     }
 
+    var shouldCheckUserAccountDeletionResult = false
+
     init(
         presenter: SettingsPresenterProtocol,
         provider: SettingsProviderProtocol,
@@ -74,6 +77,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
+        self.checkUserAccountIsDeletedIfNeeded()
         self.presenter.presentSettings(response: .init(data: self.settingsData))
     }
 
@@ -188,5 +192,26 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             self.moduleOutput?.handleUserLoggedOut()
             self.presenter.presentDismiss(response: .init())
         }
+    }
+
+    func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request) {
+        self.analytics.send(.deleteAccountClicked)
+        self.shouldCheckUserAccountDeletionResult = true
+        self.presenter.presentDeleteUserAccount(response: .init())
+    }
+
+    private func checkUserAccountIsDeletedIfNeeded() {
+        guard self.shouldCheckUserAccountDeletionResult,
+              let currentUserID = self.userAccountService.currentUserID else {
+            return
+        }
+
+        self.shouldCheckUserAccountDeletionResult = false
+
+        self.provider.fetchCurrentUser().done { remoteCurrentUser in
+            if currentUserID != remoteCurrentUser.id {
+                self.doAccountLogOut(request: .init())
+            }
+        }.cauterize()
     }
 }

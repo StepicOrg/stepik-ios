@@ -623,6 +623,7 @@ SettingsCellTitleAdaptiveMode = "Адаптивный режим";
 SettingsCellTitleDownloads = "Загрузки";
 SettingsCellTitleDeleteAllContent = "Удалить весь контент";
 SettingsCellTitleAbout = "О приложении";
+SettingsCellTitleDeleteAccount = "Удалить аккаунт";
 SettingsCellTitleLogOut = "Выйти";
 
 SettingsDownloadVideoQualityTitle = "Качество загрузки видео";
@@ -1122,6 +1123,8 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
 
 /* Course List */
 CourseWidgetArchived = "В архиве";
+CourseWidgetEnrolled = "Вы записаны";
+CourseWidgetPriceFree = "Бесплатно";
 CourseWidgetSeeAllTitle = "Посмотреть все";
 
 /* Course List Filter */

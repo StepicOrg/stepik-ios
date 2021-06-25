@@ -158,6 +158,17 @@ enum Settings {
         struct Request {}
     }
 
+    /// Present delete Stepik account form in the Web.
+    enum DeleteUserAccountPresentation {
+        struct Request {}
+
+        struct Response {}
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
