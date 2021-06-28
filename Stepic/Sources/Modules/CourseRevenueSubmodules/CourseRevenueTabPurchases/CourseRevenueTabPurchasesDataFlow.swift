@@ -63,6 +63,12 @@ enum CourseRevenueTabPurchases {
         }
     }
 
+    enum BuyerProfilePresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     enum LoadingStatePresentation {
         struct Response {}
 

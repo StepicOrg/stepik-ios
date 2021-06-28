@@ -7,6 +7,7 @@ protocol CourseRevenueTabPurchasesInteractorProtocol {
     func doPurchaseDetailsPresentation(request: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Request)
     func doCourseInfoPresentation(request: CourseRevenueTabPurchases.CourseInfoPresentation.Request)
     func doProfilePresentation(request: CourseRevenueTabPurchases.ProfilePresentation.Request)
+    func doBuyerProfilePresentation(request: CourseRevenueTabPurchases.BuyerProfilePresentation.Request)
 }
 
 final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesInteractorProtocol {
@@ -114,6 +115,16 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
 
     func doProfilePresentation(request: CourseRevenueTabPurchases.ProfilePresentation.Request) {
         self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: request.userID)
+    }
+
+    func doBuyerProfilePresentation(request: CourseRevenueTabPurchases.BuyerProfilePresentation.Request) {
+        guard let targetCourseBenefit = self.currentCourseBenefits?.first(
+            where: { "\($0.id)" == request.viewModelUniqueIdentifier }
+        ) else {
+            return
+        }
+
+        self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: targetCourseBenefit.buyerID)
     }
 
     enum Error: Swift.Error {

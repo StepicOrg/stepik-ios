@@ -51,6 +51,15 @@ final class CourseRevenueTabPurchasesCellView: UIView {
         label.font = self.appearance.titleLabelFont
         label.textColor = self.appearance.titleLabelTextColor
         label.numberOfLines = 0
+
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.titleLabelTapped)
+        )
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        label.addGestureRecognizer(tapGestureRecognizer)
+        label.isUserInteractionEnabled = true
+
         return label
     }()
 
@@ -79,6 +88,8 @@ final class CourseRevenueTabPurchasesCellView: UIView {
     }()
 
     private var subtitleBottomConstraint: Constraint?
+
+    var onTitleLabelTapped: (() -> Void)?
 
     init(
         frame: CGRect = .zero,
@@ -126,6 +137,11 @@ final class CourseRevenueTabPurchasesCellView: UIView {
         self.rightDetailTitleLabel.textColor = isRefunded
             ? self.appearance.rightDetailTitleLabelRefundedTextColor
             : self.appearance.rightDetailTitleLabelTextColor
+    }
+
+    @objc
+    private func titleLabelTapped() {
+        self.onTitleLabelTapped?()
     }
 }
 

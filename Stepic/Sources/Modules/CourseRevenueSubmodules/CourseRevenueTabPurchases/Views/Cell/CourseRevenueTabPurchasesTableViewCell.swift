@@ -16,6 +16,15 @@ final class CourseRevenueTabPurchasesTableViewCell: UITableViewCell, Reusable {
         return view
     }()
 
+    var onTitleLabelTapped: (() -> Void)? {
+        get {
+            self.cellView.onTitleLabelTapped
+        }
+        set {
+            self.cellView.onTitleLabelTapped = newValue
+        }
+    }
+
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
 

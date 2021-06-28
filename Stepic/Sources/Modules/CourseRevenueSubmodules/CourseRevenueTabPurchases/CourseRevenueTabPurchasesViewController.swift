@@ -21,7 +21,7 @@ final class CourseRevenueTabPurchasesViewController: UIViewController {
     }
     private var canTriggerPagination = true
 
-    private let tableDataSource = CourseRevenueTabPurchasesTableViewDataSource()
+    private lazy var tableDataSource = CourseRevenueTabPurchasesTableViewDataSource(delegate: self)
 
     init(
         interactor: CourseRevenueTabPurchasesInteractorProtocol,
@@ -136,6 +136,17 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
     func courseRevenueTabPurchasesViewDidClickErrorPlaceholderViewButton(_ view: CourseRevenueTabPurchasesView) {
         self.state = .loading
         self.interactor.doPurchasesLoad(request: .init())
+    }
+}
+
+extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesTableViewDataSourceDelegate {
+    func courseRevenueTabPurchasesTableViewDataSource(
+        _ dataSource: CourseRevenueTabPurchasesTableViewDataSource,
+        didSelectBuyer viewModel: CourseRevenueTabPurchasesViewModel
+    ) {
+        self.interactor.doBuyerProfilePresentation(
+            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
+        )
     }
 }
 
