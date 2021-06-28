@@ -512,13 +512,13 @@ CourseInfoTitleCertificateDetails = "Подробнее о сертификат�
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
 CourseRevenueTabPurchasesAndRefunds = "Покупки и возвраты";
-CourseRevenueTabPayments = "Выплаты";
+CourseRevenueTabMonthly = "По месяцам";
 CourseRevenueMonthIncomeDate = "Ваш доход за %@";
 CourseRevenueMonthTurnoverDate = "Продажи за %@";
 CourseRevenueTotalIncomeDate = "Доход с %@";
 CourseRevenueTotalTurnoverDate = "Продажи с %@";
 CourseRevenueEmptyMessage = "Здесь будет ваш доход";
-CourseRevenueDisclaimer = "Возвраты можно увидеть в отчёте о платежах, а о продажах по счёту расскажет наша поддержка.";
+CourseRevenueDisclaimer = "Примечание: Все операции проходят по московскому времени (МСК, UTC+3).";
 CourseRevenueTransactionRefundedTitle = "Возврат";
 CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу платежей не найдено";
 

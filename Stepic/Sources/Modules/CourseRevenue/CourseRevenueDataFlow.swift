@@ -3,14 +3,14 @@ import Foundation
 enum CourseRevenue {
     enum Tab: CaseIterable {
         case purchasesAndRefunds
-        case payments
+        case monthly
 
         var title: String {
             switch self {
             case .purchasesAndRefunds:
                 return NSLocalizedString("CourseRevenueTabPurchasesAndRefunds", comment: "")
-            case .payments:
-                return NSLocalizedString("CourseRevenueTabPayments", comment: "")
+            case .monthly:
+                return NSLocalizedString("CourseRevenueTabMonthly", comment: "")
             }
         }
     }

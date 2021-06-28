@@ -509,20 +509,20 @@ CourseInfoTitleCertificateDetails = "Certificate details";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
-CourseRevenueTabPurchasesAndRefunds = "Purchases and refunds";
-CourseRevenueTabPayments = "Payments";
-CourseRevenueMonthIncomeDate = "Your earnings in %@";
-CourseRevenueMonthTurnoverDate = "Sales in %@";
+CourseRevenueTabPurchasesAndRefunds = "Purchases and Refunds";
+CourseRevenueTabMonthly = "Monthly";
+CourseRevenueMonthIncomeDate = "Your earnings for %@";
+CourseRevenueMonthTurnoverDate = "Your sales for %@";
 CourseRevenueTotalIncomeDate = "Earnings since %@";
 CourseRevenueTotalTurnoverDate = "Sales since %@";
 CourseRevenueEmptyMessage = "Your earnings will be here";
-CourseRevenueDisclaimer = "You can see the refunds in the payment report, and our support will tell you about the sales.";
+CourseRevenueDisclaimer = "Important: All operations are carried out Moscow Time (MSK, UTC+3).";
 CourseRevenueTransactionRefundedTitle = "Refund";
-CourseRevenueEmptyCourseBenefitsTitle = "No payments were found for this request";
+CourseRevenueEmptyCourseBenefitsTitle = "No payments found for this request";
 
 /* CourseBenefitDetail */
-CourseBenefitDetailTitle = "Sale Info";
-CourseBenefitDetailAmountPercent = "%@ of sales, net of commissions";
+CourseBenefitDetailTitle = "Purchase Details";
+CourseBenefitDetailAmountPercent = "%@ of sales revenue minus Stepik's fee";
 CourseBenefitDetailChannelZLink = "Came via Z-Link";
 CourseBenefitDetailChannelStepikLink = "Came via Stepik Link";
 CourseBenefitDetailChannelRefund = "Refund";
@@ -532,8 +532,8 @@ CourseBenefitDetailBuyerTitle = "Customer";
 CourseBenefitDetailPaymentAmountTitle = "Payment";
 CourseBenefitDetailPromoCodeTitle = "Promo code";
 CourseBenefitDetailChannelTitle = "Channel";
-CourseBenefitDetailAmountPercentTitle = "Earning percentage";
-CourseBenefitDetailAmountTitle = "Earnings";
+CourseBenefitDetailAmountPercentTitle = "Your share";
+CourseBenefitDetailAmountTitle = "Your earnings";
 
 /* User Courses */
 UserCoursesTitle = "My Courses";

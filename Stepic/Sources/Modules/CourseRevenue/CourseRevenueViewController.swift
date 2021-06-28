@@ -148,7 +148,7 @@ final class CourseRevenueViewController: UIViewController, ControllerWithStepikP
             )
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
-        case .payments:
+        case .monthly:
             controller = UIViewController()
             moduleInput = nil
         }
