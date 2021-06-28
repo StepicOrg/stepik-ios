@@ -129,7 +129,7 @@ final class RemoteConfig {
     }
 
     var isCourseRevenueAvailable: Bool {
-        #if DEBUG
+        #if BETA_PROFILE || DEBUG
         return true
         #else
         return FirebaseRemoteConfig.RemoteConfig
