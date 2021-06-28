@@ -105,22 +105,9 @@ final class CourseRevenueView: UIView {
     }
 
     func setLoading(_ isLoading: Bool) {
-        let oldIsLoadingValue = self.isLoading
         self.isLoading = isLoading
-
         self.headerView.setLoading(isLoading)
-
-        if isLoading {
-            self.headerHeightConstraint?.update(offset: self.appearance.minimalHeaderHeight)
-            self.delegate?.courseRevenueView(
-                self,
-                didReportNewHeaderHeight: self.appearance.minimalHeaderHeight
-                    + self.appearance.headerTopOffset
-                    + self.appearance.segmentedControlHeight
-            )
-        } else {
-            self.updateHeaderHeight(forceUpdate: oldIsLoadingValue != isLoading)
-        }
+        self.updateHeaderHeight(forceUpdate: true)
     }
 
     func configure(viewModel: CourseRevenueEmptyHeaderViewModel) {
