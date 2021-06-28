@@ -7,7 +7,7 @@ protocol CourseRevenueViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: CourseRevenue.ProfilePresentation.ViewModel)
 }
 
-final class CourseRevenueViewController: UIViewController {
+final class CourseRevenueViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: CourseRevenueInteractorProtocol
 
     // Due to lazy initializing we should know actual values to update inset/offset of new scrollview
@@ -16,6 +16,7 @@ final class CourseRevenueViewController: UIViewController {
 
     private lazy var pageViewController = PageboyViewController()
 
+    var placeholderContainer = StepikPlaceholderControllerContainer()
     var courseRevenueView: CourseRevenueView? { self.view as? CourseRevenueView }
 
     private let availableTabs: [CourseRevenue.Tab]
@@ -88,8 +89,43 @@ final class CourseRevenueViewController: UIViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
 
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.state = .loading
+                    strongSelf.interactor.doCourseRevenueLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
+
         self.updateState(newState: self.state)
         self.interactor.doCourseRevenueLoad(request: .init())
+    }
+
+    // MARK: Private API
+
+    private func updateState(newState: CourseRevenue.ViewControllerState) {
+        switch newState {
+        case .loading:
+            self.isPlaceholderShown = false
+            self.courseRevenueView?.setLoading(true)
+        case .error:
+            self.showPlaceholder(for: .connectionError)
+        case .empty(let viewModel):
+            self.isPlaceholderShown = false
+            self.courseRevenueView?.setLoading(false)
+            self.courseRevenueView?.configure(viewModel: viewModel)
+        case .result(let viewModel):
+            self.isPlaceholderShown = false
+            self.courseRevenueView?.setLoading(false)
+            self.courseRevenueView?.configure(viewModel: viewModel)
+        }
     }
 
     private func loadSubmoduleIfNeeded(at index: Int) {
@@ -203,19 +239,6 @@ final class CourseRevenueViewController: UIViewController {
                 x: view.contentOffset.x,
                 y: topOffset
             )
-        }
-    }
-
-    private func updateState(newState: CourseRevenue.ViewControllerState) {
-        switch newState {
-        case .loading:
-            break
-        case .error:
-            break
-        case .empty:
-            break
-        case .result(let viewModel):
-            self.courseRevenueView?.configure(viewModel: viewModel)
         }
     }
 }

@@ -115,7 +115,17 @@ final class CourseRevenueIncomeView: UIView {
         return nil
     }
 
+    func configure(viewModel: CourseRevenueEmptyHeaderViewModel) {
+        self.monthItemView.style = .empty
+        self.monthItemView.messageText = viewModel.title
+
+        self.isContentExpanded = false
+        self.separatorView.isHidden = true
+        self.totalItemView.isHidden = true
+    }
+
     func configure(viewModel: CourseRevenueHeaderViewModel) {
+        self.monthItemView.style = .income
         self.monthItemView.titleText = viewModel.monthIncomeDate
         self.monthItemView.priceText = viewModel.monthIncomeValue
         self.monthItemView.detailsTitleText = viewModel.monthTurnoverDate

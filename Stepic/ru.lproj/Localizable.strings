@@ -517,6 +517,7 @@ CourseRevenueMonthIncomeDate = "Ваш доход за %@";
 CourseRevenueMonthTurnoverDate = "Продажи за %@";
 CourseRevenueTotalIncomeDate = "Доход с %@";
 CourseRevenueTotalTurnoverDate = "Продажи с %@";
+CourseRevenueEmptyMessage = "Здесь будет ваш доход";
 CourseRevenueDisclaimer = "Возвраты можно увидеть в отчёте о платежах, а о продажах по счёту расскажет наша поддержка.";
 CourseRevenueTransactionRefundedTitle = "Возврат";
 

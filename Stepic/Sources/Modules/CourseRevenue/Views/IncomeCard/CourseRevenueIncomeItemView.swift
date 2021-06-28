@@ -19,6 +19,10 @@ extension CourseRevenueIncomeItemView {
         let detailsPriceLabelFont = UIFont.systemFont(ofSize: 20)
         let detailsPriceLabelTextColor = UIColor.stepikMaterialPrimaryText
 
+        let messageLabelFont = Typography.caption1Font
+        let messageLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let messageLabelInsets = LayoutInsets.default
+
         let stackViewSpacing: CGFloat = 8
 
         let contentStackViewSpacing: CGFloat = 16
@@ -71,6 +75,16 @@ final class CourseRevenueIncomeItemView: UIView {
         label.textColor = self.appearance.detailsPriceLabelTextColor
         label.numberOfLines = 1
         label.textAlignment = .left
+        return label
+    }()
+
+    private lazy var messageLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.messageLabelFont
+        label.textColor = self.appearance.messageLabelTextColor
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.isHidden = true
         return label
     }()
 
@@ -133,6 +147,12 @@ final class CourseRevenueIncomeItemView: UIView {
         }
     }
 
+    var messageText: String? {
+        didSet {
+            self.messageLabel.text = self.messageText
+        }
+    }
+
     var onExpandContentControlClick: (() -> Void)? {
         get {
             self.expandContentControl.onClick
@@ -147,7 +167,7 @@ final class CourseRevenueIncomeItemView: UIView {
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             .height
         let height = self.appearance.contentStackViewInsets.top
-            + contentStackViewHeight
+            + max(contentStackViewHeight, self.appearance.imageViewSize.height)
             + self.appearance.contentStackViewInsets.bottom
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
@@ -187,6 +207,24 @@ final class CourseRevenueIncomeItemView: UIView {
 
     private func updateStyle() {
         self.imageView.image = self.style.icon
+
+        switch self.style {
+        case .income, .info:
+            self.messageLabel.isHidden = true
+            self.contentStackView.isHidden = false
+
+            if self.shouldShowExpandContentControl {
+                self.expandContentControl.isHidden = false
+            }
+        case .empty:
+            self.messageLabel.isHidden = false
+            self.contentStackView.isHidden = true
+
+            if self.shouldShowExpandContentControl {
+                self.expandContentControl.reset()
+                self.expandContentControl.isHidden = true
+            }
+        }
     }
 
     enum Style {
@@ -230,6 +268,8 @@ extension CourseRevenueIncomeItemView: ProgrammaticallyInitializableViewProtocol
             self.addSubview(self.expandContentControl)
             self.addSubview(self.expandContentTapProxyView)
         }
+
+        self.addSubview(self.messageLabel)
     }
 
     func makeConstraints() {
@@ -268,6 +308,12 @@ extension CourseRevenueIncomeItemView: ProgrammaticallyInitializableViewProtocol
             } else {
                 make.trailing.equalToSuperview().offset(-self.appearance.contentStackViewInsets.right)
             }
+        }
+
+        self.messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.messageLabel.snp.makeConstraints { make in
+            make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.messageLabelInsets.left)
+            make.centerY.equalTo(self.imageView.snp.centerY)
         }
     }
 }

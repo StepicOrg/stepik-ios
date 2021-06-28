@@ -16,13 +16,13 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
         }
 
         switch response.result {
-        case .success(let data):
-            guard let courseBenefitSummary = data.courseBenefitSummary else {
-                return viewController.displayCourseRevenue(viewModel: .init(state: .empty))
-            }
-
+        case .success(let courseBenefitSummary):
             if courseBenefitSummary.isEmpty {
-                viewController.displayCourseRevenue(viewModel: .init(state: .empty))
+                let emptyHeaderViewModel = CourseRevenueEmptyHeaderViewModel(
+                    title: NSLocalizedString("CourseRevenueEmptyMessage", comment: ""),
+                    disclaimerText: NSLocalizedString("CourseRevenueDisclaimer", comment: "")
+                )
+                viewController.displayCourseRevenue(viewModel: .init(state: .empty(data: emptyHeaderViewModel)))
             } else {
                 let headerViewModel = self.makeHeaderViewModel(benefitSummary: courseBenefitSummary)
                 viewController.displayCourseRevenue(viewModel: .init(state: .result(data: headerViewModel)))

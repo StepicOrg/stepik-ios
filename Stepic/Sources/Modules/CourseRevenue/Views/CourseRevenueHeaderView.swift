@@ -72,9 +72,25 @@ final class CourseRevenueHeaderView: UIView {
         return nil
     }
 
+    func configure(viewModel: CourseRevenueEmptyHeaderViewModel) {
+        self.incomeView.configure(viewModel: viewModel)
+        self.disclaimerLabel.text = viewModel.disclaimerText
+    }
+
     func configure(viewModel: CourseRevenueHeaderViewModel) {
         self.incomeView.configure(viewModel: viewModel)
         self.disclaimerLabel.text = viewModel.disclaimerText
+    }
+
+    func setLoading(_ isLoading: Bool) {
+        [self.incomeView, self.disclaimerLabel].forEach { $0.isHidden = isLoading }
+
+        if isLoading {
+            self.skeleton.viewBuilder = { CourseRevenueHeaderSkeletonView() }
+            self.skeleton.show()
+        } else {
+            self.skeleton.hide()
+        }
     }
 }
 

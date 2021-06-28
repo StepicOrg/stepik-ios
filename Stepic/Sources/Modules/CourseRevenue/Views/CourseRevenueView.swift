@@ -64,6 +64,8 @@ final class CourseRevenueView: UIView {
 
     weak var delegate: CourseRevenueViewDelegate?
 
+    private var isLoading = false
+
     init(
         frame: CGRect = .zero,
         pageControllerView: UIView,
@@ -87,7 +89,10 @@ final class CourseRevenueView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.updateHeaderHeight()
+
+        if !self.isLoading {
+            self.updateHeaderHeight()
+        }
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -100,6 +105,30 @@ final class CourseRevenueView: UIView {
         }
 
         return super.hitTest(point, with: event)
+    }
+
+    func setLoading(_ isLoading: Bool) {
+        let oldIsLoadingValue = self.isLoading
+        self.isLoading = isLoading
+
+        self.headerView.setLoading(isLoading)
+
+        if isLoading {
+            self.headerHeightConstraint?.update(offset: self.appearance.minimalHeaderHeight)
+            self.delegate?.courseRevenueView(
+                self,
+                didReportNewHeaderHeight: self.appearance.minimalHeaderHeight
+                    + self.appearance.headerTopOffset
+                    + self.appearance.segmentedControlHeight
+            )
+        } else {
+            self.updateHeaderHeight(forceUpdate: oldIsLoadingValue != isLoading)
+        }
+    }
+
+    func configure(viewModel: CourseRevenueEmptyHeaderViewModel) {
+        self.headerView.configure(viewModel: viewModel)
+        self.updateHeaderHeight(forceUpdate: true)
     }
 
     func configure(viewModel: CourseRevenueHeaderViewModel) {

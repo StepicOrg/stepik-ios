@@ -20,11 +20,7 @@ enum CourseRevenue {
         struct Request {}
 
         struct Response {
-            struct Data {
-                let courseBenefitSummary: CourseBenefitSummary?
-            }
-
-            let result: StepikResult<Data>
+            let result: StepikResult<CourseBenefitSummary>
         }
 
         struct ViewModel {
@@ -71,7 +67,7 @@ enum CourseRevenue {
     enum ViewControllerState {
         case loading
         case error
-        case empty
+        case empty(data: CourseRevenueEmptyHeaderViewModel)
         case result(data: CourseRevenueHeaderViewModel)
     }
 }

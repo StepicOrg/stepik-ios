@@ -37,19 +37,24 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
     }
 
     func doCourseRevenueLoad(request: CourseRevenue.CourseRevenueLoad.Request) {
-        self.provider.fetchCourseAndBenefitSummary().done { fetchResult in
-            self.currentCourse = fetchResult.value
+        self.provider
+            .fetchCourseAndBenefitSummary()
+            .compactMap { fetchResult -> (Course, CourseBenefitSummary)? in
+                guard let course = fetchResult.value,
+                      let benefitSummary = course.courseBenefitSummaries.first(where: { $0.id == course.id }) else {
+                    return nil
+                }
 
-            let benefitSummary = self.currentCourse?.courseBenefitSummaries.first(where: { $0.id == self.courseID })
-            self.presenter.presentCourseRevenue(
-                response: .init(result: .success(.init(courseBenefitSummary: benefitSummary)))
-            )
-
-            self.sendOpenedAnalyticsEventIfNeeded()
-        }.catch { error in
-            print("CourseRevenueInteractor :: error = \(error)")
-            self.presenter.presentCourseRevenue(response: .init(result: .failure(error)))
-        }
+                return (course, benefitSummary)
+            }
+            .done { course, courseBenefitSummary in
+                self.currentCourse = course
+                self.presenter.presentCourseRevenue(response: .init(result: .success(courseBenefitSummary)))
+                self.sendOpenedAnalyticsEventIfNeeded()
+            }
+            .catch { error in
+                self.presenter.presentCourseRevenue(response: .init(result: .failure(error)))
+            }
     }
 
     func doSubmodulesRegistration(request: CourseRevenue.SubmoduleRegistration.Request) {

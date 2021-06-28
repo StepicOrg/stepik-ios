@@ -543,6 +543,7 @@
 		2C3B5D11266F9343000B211B /* CourseBenefitsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3B5D10266F9343000B211B /* CourseBenefitsNetworkService.swift */; };
 		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* StepFontSize.swift */; };
+		2C3E5F642689DA7900612728 /* CourseRevenueHeaderSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E5F632689DA7900612728 /* CourseRevenueHeaderSkeletonView.swift */; };
 		2C41F0EC25BAE6F200DA634A /* StoryTemplatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */; };
 		2C41F0F625BB007C00DA634A /* StoryOpenSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41F0F525BB007C00DA634A /* StoryOpenSource.swift */; };
 		2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */; };
@@ -2393,6 +2394,7 @@
 		2C3D00C124C8080F00441053 /* Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFontSizeStorageManager.swift; sourceTree = "<group>"; };
 		2C3DAB90233D735D00453B1C /* StepFontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepFontSize.swift; sourceTree = "<group>"; };
+		2C3E5F632689DA7900612728 /* CourseRevenueHeaderSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueHeaderSkeletonView.swift; sourceTree = "<group>"; };
 		2C41F0EB25BAE6F200DA634A /* StoryTemplatesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTemplatesNetworkService.swift; sourceTree = "<group>"; };
 		2C41F0F525BB007C00DA634A /* StoryOpenSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryOpenSource.swift; sourceTree = "<group>"; };
 		2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinksAPI.swift; sourceTree = "<group>"; };
@@ -4244,6 +4246,14 @@
 				2C3B5D0A266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift */,
 			);
 			path = CourseBenefit;
+			sourceTree = "<group>";
+		};
+		2C3E5F652689DA7D00612728 /* CourseRevenue */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E5F632689DA7900612728 /* CourseRevenueHeaderSkeletonView.swift */,
+			);
+			path = CourseRevenue;
 			sourceTree = "<group>";
 		};
 		2C48BA02257277DD009103B2 /* Views */ = {
@@ -6687,6 +6697,7 @@
 				2CFF9006242A23AF00FD7311 /* Achievements */,
 				2CFF9005242A236900FD7311 /* CourseInfo */,
 				2CFF9007242A23E700FD7311 /* CourseList */,
+				2C3E5F652689DA7D00612728 /* CourseRevenue */,
 				2C04846624C6845800B3DAC8 /* Profile */,
 			);
 			path = Views;
@@ -11529,6 +11540,7 @@
 				2C19D9B22617586100181DB0 /* StepikAcademyCourseListCollectionViewDataSource.swift in Sources */,
 				2CBC5AFD2682483D0000F2D1 /* CourseRevenueTabPurchasesCellView.swift in Sources */,
 				2C73718D24EB6D9100ED24C3 /* FillBlanksDataset.swift in Sources */,
+				2C3E5F642689DA7900612728 /* CourseRevenueHeaderSkeletonView.swift in Sources */,
 				5D239816094AD2C3575E81CC /* NewProfileCreatedCoursesView.swift in Sources */,
 				AA4038BFF0FB9031371EBB38 /* NewProfileCreatedCoursesViewController.swift in Sources */,
 				2CDA1B182613998B00E36BF7 /* ExamSessionsPersistenceService.swift in Sources */,

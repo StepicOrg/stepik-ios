@@ -11,3 +11,8 @@ struct CourseRevenueHeaderViewModel {
     let totalTurnoverValue: String
     let disclaimerText: String
 }
+
+struct CourseRevenueEmptyHeaderViewModel {
+    let title: String
+    let disclaimerText: String
+}

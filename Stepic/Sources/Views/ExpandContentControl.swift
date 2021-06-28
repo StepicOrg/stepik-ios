@@ -49,6 +49,11 @@ final class ExpandContentControl: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func reset() {
+        self.currentRotationAngle = 0
+        self.imageView.transform = .identity
+    }
+
     @objc
     private func handleTouchUpInside() {
         self.rotateImageView()
