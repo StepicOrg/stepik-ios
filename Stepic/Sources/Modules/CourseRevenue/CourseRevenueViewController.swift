@@ -91,7 +91,7 @@ final class CourseRevenueViewController: UIViewController, ControllerWithStepikP
 
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
-                .noConnection,
+                .noConnectionCourseBenefitSummaries,
                 action: { [weak self] in
                     guard let strongSelf = self else {
                         return
@@ -116,6 +116,7 @@ final class CourseRevenueViewController: UIViewController, ControllerWithStepikP
             self.isPlaceholderShown = false
             self.courseRevenueView?.setLoading(true)
         case .error:
+            self.courseRevenueView?.setLoading(false)
             self.showPlaceholder(for: .connectionError)
         case .empty(let viewModel):
             self.isPlaceholderShown = false

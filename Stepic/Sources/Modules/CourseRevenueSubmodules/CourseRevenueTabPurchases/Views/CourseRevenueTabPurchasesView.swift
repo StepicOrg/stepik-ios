@@ -4,11 +4,14 @@ import UIKit
 protocol CourseRevenueTabPurchasesViewDelegate: AnyObject {
     func courseRevenueTabPurchasesViewDidPaginationRequesting(_ view: CourseRevenueTabPurchasesView)
     func courseRevenueTabPurchasesView(_ view: CourseRevenueTabPurchasesView, didSelectRowAt indexPath: IndexPath)
+    func courseRevenueTabPurchasesViewDidClickErrorPlaceholderViewButton(_ view: CourseRevenueTabPurchasesView)
 }
 
 extension CourseRevenueTabPurchasesView {
     struct Appearance {
         let paginationViewHeight: CGFloat = 52
+
+        let backgroundColor = UIColor.stepikBackground
     }
 }
 
@@ -29,6 +32,17 @@ final class CourseRevenueTabPurchasesView: UIView {
 
         return tableView
     }()
+
+    private lazy var placeholderView: StepikPlaceholderView = {
+        let appearance = StepikPlaceholderView.Appearance(backgroundColor: self.appearance.backgroundColor)
+        let view = StepikPlaceholderView()
+        view.appearance = appearance
+        view.delegate = self
+        view.isHidden = true
+        return view
+    }()
+
+    private var placeholderViewTopConstraint: Constraint?
 
     // Proxify delegates
     private weak var pageScrollViewDelegate: UIScrollViewDelegate?
@@ -57,33 +71,71 @@ final class CourseRevenueTabPurchasesView: UIView {
         self.tableView.reloadData()
     }
 
-    func showPaginationView() {
-        self.shouldShowPaginationView = true
-        self.tableView.tableFooterView = self.paginationView
-        self.tableView.tableFooterView?.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: self.frame.width,
-            height: self.appearance.paginationViewHeight
-        )
+    func setLoading(_ isLoading: Bool) {
+        self.tableView.skeleton.hide()
+
+        if isLoading {
+            DispatchQueue.main.async {
+                self.tableView.skeleton.viewBuilder = { CourseInfoTabReviewsCellSkeletonView() }
+                self.tableView.skeleton.show()
+            }
+        }
     }
 
-    func hidePaginationView() {
-        self.shouldShowPaginationView = false
-        self.tableView.tableFooterView?.frame = .zero
-        self.tableView.tableFooterView = nil
+    func setPaginationViewVisible(_ isVisible: Bool) {
+        if isVisible {
+            self.shouldShowPaginationView = true
+            self.tableView.tableFooterView = self.paginationView
+            self.tableView.tableFooterView?.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: self.frame.width,
+                height: self.appearance.paginationViewHeight
+            )
+        } else {
+            self.shouldShowPaginationView = false
+            self.tableView.tableFooterView?.frame = .zero
+            self.tableView.tableFooterView = nil
+        }
+    }
+
+    func setErrorPlaceholderVisible(_ isVisible: Bool) {
+        if isVisible {
+            self.placeholderView.set(placeholder: .noConnectionCourseBenefits)
+            self.placeholderView.delegate = self
+            self.placeholderView.isHidden = false
+        } else {
+            self.placeholderView.isHidden = true
+        }
+    }
+
+    func setEmptyPlaceholderVisible(_ isVisible: Bool) {
+        if isVisible {
+            self.placeholderView.set(placeholder: .emptyCourseBenefits)
+            self.placeholderView.delegate = nil
+            self.placeholderView.isHidden = false
+        } else {
+            self.placeholderView.isHidden = true
+        }
     }
 }
 
 extension CourseRevenueTabPurchasesView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
+        self.addSubview(self.placeholderView)
     }
 
     func makeConstraints() {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.placeholderView.snp.makeConstraints { make in
+            self.placeholderViewTopConstraint = make.top.equalToSuperview().constraint
+            make.centerX.leading.bottom.trailing.equalToSuperview()
         }
     }
 }
@@ -123,6 +175,7 @@ extension CourseRevenueTabPurchasesView: ScrollablePageViewProtocol {
         }
         set {
             self.tableView.contentInset = newValue
+            self.placeholderViewTopConstraint?.update(offset: newValue.top)
         }
     }
 
@@ -142,5 +195,11 @@ extension CourseRevenueTabPurchasesView: ScrollablePageViewProtocol {
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue
         }
+    }
+}
+
+extension CourseRevenueTabPurchasesView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.courseRevenueTabPurchasesViewDidClickErrorPlaceholderViewButton(self)
     }
 }

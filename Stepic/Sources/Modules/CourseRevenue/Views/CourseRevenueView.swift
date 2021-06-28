@@ -89,10 +89,7 @@ final class CourseRevenueView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        if !self.isLoading {
-            self.updateHeaderHeight()
-        }
+        self.updateHeaderHeight()
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -138,9 +135,14 @@ final class CourseRevenueView: UIView {
 
     func updateScroll(offset: CGFloat) {
         self.topConstraint?.update(offset: -offset)
-        self.segmentedControl.backgroundColor = offset < (self.headerHeight - self.appearance.headerTopOffset * 2)
-            ? .clear
-            : self.appearance.backgroundColor
+
+        if self.isLoading {
+            self.segmentedControl.backgroundColor = self.appearance.backgroundColor
+        } else {
+            self.segmentedControl.backgroundColor = offset < (self.headerHeight - self.appearance.headerTopOffset * 2)
+                ? .clear
+                : self.appearance.backgroundColor
+        }
     }
 
     func updateCurrentPageIndex(_ index: Int) {

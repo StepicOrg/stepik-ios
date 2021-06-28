@@ -40,6 +40,11 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
         }
 
         self.provider.fetchCourseBenefits(courseID: currentCourse.id).done { fetchResult in
+            let isFallbackCacheEmpty = fetchResult.source == .cache && fetchResult.value.0.isEmpty
+            if isFallbackCacheEmpty {
+                return self.presenter.presentPurchases(response: .init(result: .failure(Error.fetchFailed)))
+            }
+
             self.currentCourseBenefits = fetchResult.value.0
             self.paginationState = PaginationState(page: 1, hasNext: fetchResult.value.1.hasNext)
 
@@ -110,11 +115,17 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
     func doProfilePresentation(request: CourseRevenueTabPurchases.ProfilePresentation.Request) {
         self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: request.userID)
     }
+
+    enum Error: Swift.Error {
+        case fetchFailed
+    }
 }
 
 extension CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesInputProtocol {
     func update(with course: Course) {
         self.currentCourse = course
+
+        self.presenter.presentLoadingState(response: .init())
         self.doPurchasesLoad(request: .init())
     }
 }

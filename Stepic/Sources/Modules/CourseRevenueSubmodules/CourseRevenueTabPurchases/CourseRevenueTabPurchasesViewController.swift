@@ -4,6 +4,7 @@ protocol CourseRevenueTabPurchasesViewControllerProtocol: AnyObject {
     func displayPurchases(viewModel: CourseRevenueTabPurchases.PurchasesLoad.ViewModel)
     func displayNextPurchases(viewModel: CourseRevenueTabPurchases.NextPurchasesLoad.ViewModel)
     func displayPurchaseDetails(viewModel: CourseRevenueTabPurchases.PurchaseDetailsPresentation.ViewModel)
+    func displayLoadingState(viewModel: CourseRevenueTabPurchases.LoadingStatePresentation.ViewModel)
 }
 
 final class CourseRevenueTabPurchasesViewController: UIViewController {
@@ -52,21 +53,30 @@ final class CourseRevenueTabPurchasesViewController: UIViewController {
         self.canTriggerPagination = hasNextPage
         if hasNextPage {
             self.paginationView.setLoading()
-            self.courseRevenueTabPurchasesView?.showPaginationView()
+            self.courseRevenueTabPurchasesView?.setPaginationViewVisible(true)
         } else {
-            self.courseRevenueTabPurchasesView?.hidePaginationView()
+            self.courseRevenueTabPurchasesView?.setPaginationViewVisible(false)
         }
     }
 
     private func updateState(newState: CourseRevenueTabPurchases.ViewControllerState) {
         switch newState {
         case .loading:
-            break
+            self.courseRevenueTabPurchasesView?.setEmptyPlaceholderVisible(false)
+            self.courseRevenueTabPurchasesView?.setErrorPlaceholderVisible(false)
+            self.courseRevenueTabPurchasesView?.setLoading(true)
         case .error:
-            break
+            self.courseRevenueTabPurchasesView?.setEmptyPlaceholderVisible(false)
+            self.courseRevenueTabPurchasesView?.setErrorPlaceholderVisible(true)
+            self.courseRevenueTabPurchasesView?.setLoading(false)
         case .result(let data):
+            self.courseRevenueTabPurchasesView?.setErrorPlaceholderVisible(false)
+            self.courseRevenueTabPurchasesView?.setLoading(false)
+
             self.tableDataSource.viewModels = data.courseBenefits
             self.courseRevenueTabPurchasesView?.updateTableViewData(dataSource: self.tableDataSource)
+            self.courseRevenueTabPurchasesView?.setEmptyPlaceholderVisible(self.tableDataSource.viewModels.isEmpty)
+
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         }
     }
@@ -96,6 +106,10 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
         )
         self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
     }
+
+    func displayLoadingState(viewModel: CourseRevenueTabPurchases.LoadingStatePresentation.ViewModel) {
+        self.state = .loading
+    }
 }
 
 extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesViewDelegate {
@@ -112,6 +126,11 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
         self.interactor.doPurchaseDetailsPresentation(
             request: .init(viewModelUniqueIdentifier: targetCourseBenefit.uniqueIdentifier)
         )
+    }
+
+    func courseRevenueTabPurchasesViewDidClickErrorPlaceholderViewButton(_ view: CourseRevenueTabPurchasesView) {
+        self.state = .loading
+        self.interactor.doPurchasesLoad(request: .init())
     }
 }
 

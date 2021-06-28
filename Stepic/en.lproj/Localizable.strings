@@ -518,6 +518,7 @@ CourseRevenueTotalTurnoverDate = "Sales since %@";
 CourseRevenueEmptyMessage = "Your earnings will be here";
 CourseRevenueDisclaimer = "You can see the refunds in the payment report, and our support will tell you about the sales.";
 CourseRevenueTransactionRefundedTitle = "Refund";
+CourseRevenueEmptyCourseBenefitsTitle = "No payments were found for this request";
 
 /* CourseBenefitDetail */
 CourseBenefitDetailTitle = "Sale Info";

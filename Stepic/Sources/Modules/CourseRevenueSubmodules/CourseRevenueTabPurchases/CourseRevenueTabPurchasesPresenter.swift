@@ -4,6 +4,7 @@ protocol CourseRevenueTabPurchasesPresenterProtocol {
     func presentPurchases(response: CourseRevenueTabPurchases.PurchasesLoad.Response)
     func presentNextPurchases(response: CourseRevenueTabPurchases.NextPurchasesLoad.Response)
     func presentPurchaseDetails(response: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Response)
+    func presentLoadingState(response: CourseRevenueTabPurchases.LoadingStatePresentation.Response)
 }
 
 final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresenterProtocol {
@@ -39,6 +40,10 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
 
     func presentPurchaseDetails(response: CourseRevenueTabPurchases.PurchaseDetailsPresentation.Response) {
         self.viewController?.displayPurchaseDetails(viewModel: .init(courseBenefitID: response.courseBenefitID))
+    }
+
+    func presentLoadingState(response: CourseRevenueTabPurchases.LoadingStatePresentation.Response) {
+        self.viewController?.displayLoadingState(viewModel: .init())
     }
 
     private func makeViewModel(_ courseBenefit: CourseBenefit) -> CourseRevenueTabPurchasesViewModel {

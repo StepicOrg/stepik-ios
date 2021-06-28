@@ -63,6 +63,12 @@ enum CourseRevenueTabPurchases {
         }
     }
 
+    enum LoadingStatePresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {

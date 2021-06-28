@@ -520,6 +520,7 @@ CourseRevenueTotalTurnoverDate = "Продажи с %@";
 CourseRevenueEmptyMessage = "Здесь будет ваш доход";
 CourseRevenueDisclaimer = "Возвраты можно увидеть в отчёте о платежах, а о продажах по счёту расскажет наша поддержка.";
 CourseRevenueTransactionRefundedTitle = "Возврат";
+CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу платежей не найдено";
 
 /* CourseBenefitDetail */
 CourseBenefitDetailTitle = "Детали покупки";

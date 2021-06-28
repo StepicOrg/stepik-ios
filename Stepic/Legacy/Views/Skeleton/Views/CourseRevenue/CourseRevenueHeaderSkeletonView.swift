@@ -11,8 +11,11 @@ extension CourseRevenueHeaderSkeletonView {
         let titleHeight: CGFloat = 17
         let titleWidthRatio: CGFloat = 0.5
 
-        let subtitleHeight: CGFloat = 26
+        let subtitleHeight: CGFloat = 24
         let subtitleWidthRatio: CGFloat = 0.3
+
+        let disclaimerHeight: CGFloat = 17
+        let disclaimerWidthRatio: CGFloat = 0.8
 
         let labelsCornerRadius: CGFloat = 5
     }
@@ -26,6 +29,8 @@ final class CourseRevenueHeaderSkeletonView: UIView {
     private lazy var titleView = UIView()
 
     private lazy var subtitleView = UIView()
+
+    private lazy var disclaimerView = UIView()
 
     init(
         frame: CGRect = .zero,
@@ -57,19 +62,25 @@ extension CourseRevenueHeaderSkeletonView: ProgrammaticallyInitializableViewProt
 
         self.subtitleView.clipsToBounds = true
         self.subtitleView.layer.cornerRadius = self.appearance.labelsCornerRadius
+
+        self.disclaimerView.clipsToBounds = true
+        self.disclaimerView.layer.cornerRadius = self.appearance.labelsCornerRadius
     }
 
     func addSubviews() {
         self.addSubview(self.coverView)
         self.addSubview(self.titleView)
         self.addSubview(self.subtitleView)
+        self.addSubview(self.disclaimerView)
     }
 
     func makeConstraints() {
         self.coverView.translatesAutoresizingMaskIntoConstraints = false
         self.coverView.snp.makeConstraints { make in
+            make.top
+                .equalTo(self.titleView.snp.bottom)
+                .offset(-(self.appearance.coverSize.height / 2) + (self.appearance.insets.top / 4))
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.centerY.equalToSuperview()
             make.size.equalTo(self.appearance.coverSize)
         }
 
@@ -87,6 +98,14 @@ extension CourseRevenueHeaderSkeletonView: ProgrammaticallyInitializableViewProt
             make.leading.equalTo(self.coverView.snp.trailing).offset(self.appearance.insets.left)
             make.height.equalTo(self.appearance.subtitleHeight)
             make.width.equalToSuperview().multipliedBy(self.appearance.subtitleWidthRatio)
+        }
+
+        self.disclaimerView.translatesAutoresizingMaskIntoConstraints = false
+        self.disclaimerView.snp.makeConstraints { make in
+            make.top.equalTo(self.subtitleView.snp.bottom).offset(self.appearance.insets.top / 2)
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.height.equalTo(self.appearance.disclaimerHeight)
+            make.width.equalToSuperview().multipliedBy(self.appearance.disclaimerWidthRatio)
         }
     }
 }
