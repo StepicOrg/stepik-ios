@@ -49,16 +49,6 @@ final class CourseRevenueTabPurchasesViewController: UIViewController {
         self.updateState(newState: self.state)
     }
 
-    private func updatePagination(hasNextPage: Bool, hasError: Bool) {
-        self.canTriggerPagination = hasNextPage
-        if hasNextPage {
-            self.paginationView.setLoading()
-            self.courseRevenueTabPurchasesView?.setPaginationViewVisible(true)
-        } else {
-            self.courseRevenueTabPurchasesView?.setPaginationViewVisible(false)
-        }
-    }
-
     private func updateState(newState: CourseRevenueTabPurchases.ViewControllerState) {
         switch newState {
         case .loading:
@@ -78,6 +68,16 @@ final class CourseRevenueTabPurchasesViewController: UIViewController {
             self.courseRevenueTabPurchasesView?.setEmptyPlaceholderVisible(self.tableDataSource.viewModels.isEmpty)
 
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
+        }
+    }
+
+    private func updatePagination(hasNextPage: Bool, hasError: Bool) {
+        self.canTriggerPagination = hasNextPage
+        if hasNextPage {
+            self.paginationView.setLoading()
+            self.courseRevenueTabPurchasesView?.setPaginationViewVisible(true)
+        } else {
+            self.courseRevenueTabPurchasesView?.setPaginationViewVisible(false)
         }
     }
 }
@@ -114,7 +114,12 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
 
 extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesViewDelegate {
     func courseRevenueTabPurchasesViewDidPaginationRequesting(_ view: CourseRevenueTabPurchasesView) {
-        print(#function)
+        guard self.canTriggerPagination else {
+            return
+        }
+
+        self.canTriggerPagination = false
+        self.interactor.doNextPurchasesLoad(request: .init())
     }
 
     func courseRevenueTabPurchasesView(_ view: CourseRevenueTabPurchasesView, didSelectRowAt indexPath: IndexPath) {
