@@ -118,10 +118,14 @@ final class RemoteConfig {
     }
 
     var isCoursePricesEnabled: Bool {
-        FirebaseRemoteConfig.RemoteConfig
+        #if BETA_PROFILE || DEBUG
+        return true
+        #else
+        return FirebaseRemoteConfig.RemoteConfig
             .remoteConfig()
             .configValue(forKey: Key.isCoursePricesEnabled.rawValue)
             .boolValue
+        #endif
     }
 
     var isCourseRevenueAvailable: Bool {
