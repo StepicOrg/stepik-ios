@@ -5,6 +5,13 @@ import SwiftyJSON
 final class CourseBenefitSummary: NSManagedObject, JSONSerializable {
     typealias IdType = Int
 
+    var isEmpty: Bool {
+        self.totalUserIncome.isZero
+            && self.totalTurnover.isZero
+            && self.monthUserIncome.isZero
+            && self.monthTurnover.isZero
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.update(json: json)

@@ -226,7 +226,7 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
 
 // MARK: - CourseInfoTabInfoView: CourseInfoPageViewProtocol -
 
-extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
+extension CourseInfoTabInfoView: ScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
             self.scrollableStackView.scrollDelegate

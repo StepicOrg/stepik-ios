@@ -456,6 +456,7 @@ ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/
 /* Course info */
 CourseInfoTitle = "О курсе";
 CourseInfoTryForFreeButtonTitle = "Попробовать бесплатно";
+CourseInfoCourseActionViewRevenueAlertTitle = "Посмотреть доходы";
 // Favorite
 CourseInfoCourseActionAddToFavoritesAlertTitle = "Добавить в избранное";
 CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Убрать из избранного";
@@ -507,6 +508,34 @@ CourseInfoTitleTimeToComplete = "Время прохождения курса";
 CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+
+/* Course revenue */
+CourseRevenueTitle = "Доходы";
+CourseRevenueTabPurchasesAndRefunds = "Покупки и возвраты";
+CourseRevenueTabMonthly = "По месяцам";
+CourseRevenueMonthIncomeDate = "Ваш доход за %@";
+CourseRevenueMonthTurnoverDate = "Продажи за %@";
+CourseRevenueTotalIncomeDate = "Доход с %@";
+CourseRevenueTotalTurnoverDate = "Продажи с %@";
+CourseRevenueEmptyMessage = "Здесь будет ваш доход";
+CourseRevenueDisclaimer = "Примечание: Все операции проходят по московскому времени (МСК, UTC+3).";
+CourseRevenueTransactionRefundedTitle = "Возврат";
+CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу платежей не найдено";
+
+/* CourseBenefitDetail */
+CourseBenefitDetailTitle = "Детали покупки";
+CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии";
+CourseBenefitDetailChannelZLink = "Переход по Z-Link";
+CourseBenefitDetailChannelStepikLink = "Переход по Stepik Link";
+CourseBenefitDetailChannelRefund = "Возврат";
+CourseBenefitDetailDateTitle = "Дата";
+CourseBenefitDetailCourseTitle = "Курс";
+CourseBenefitDetailBuyerTitle = "Покупатель";
+CourseBenefitDetailPaymentAmountTitle = "Платёж";
+CourseBenefitDetailPromoCodeTitle = "Промокод";
+CourseBenefitDetailChannelTitle = "Канал";
+CourseBenefitDetailAmountPercentTitle = "Ваш процент";
+CourseBenefitDetailAmountTitle = "Ваш доход";
 
 /* User Courses */
 UserCoursesTitle = "Мои курсы";

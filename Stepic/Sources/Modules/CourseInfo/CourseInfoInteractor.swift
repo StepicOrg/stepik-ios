@@ -11,6 +11,7 @@ protocol CourseInfoInteractorProtocol {
     func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request)
+    func doCourseRevenuePresentation(request: CourseInfo.CourseRevenuePresentation.Request)
     func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request)
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
@@ -39,6 +40,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let iapService: IAPServiceProtocol
 
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
+
+    private let remoteConfig: RemoteConfig
 
     private let courseID: Course.IdType
     private var currentCourse: Course? {
@@ -108,6 +111,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
         analytics: Analytics,
+        remoteConfig: RemoteConfig,
         courseViewSource: AnalyticsEvent.CourseViewSource
     ) {
         self.presenter = presenter
@@ -126,6 +130,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
         self.analytics = analytics
+        self.remoteConfig = remoteConfig
 
         self.courseID = courseID
         self.promoCodeName = promoCodeName
@@ -359,6 +364,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    func doCourseRevenuePresentation(request: CourseInfo.CourseRevenuePresentation.Request) {
+        self.presenter.presentCourseRevenue(response: .init(courseID: self.courseID))
+    }
+
     func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request) {
         if let course = self.currentCourse {
             self.iapService.retryValidateReceipt(course: course, delegate: self)
@@ -387,6 +396,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             course: self.currentCourse.require(),
             isWishlisted: self.wishlistService.contains(self.courseID),
             isWishlistAvailable: isWishlistAvailable,
+            isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
             promoCode: self.currentPromoCode
         )
     }

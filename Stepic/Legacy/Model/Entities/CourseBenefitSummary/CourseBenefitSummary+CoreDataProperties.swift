@@ -13,6 +13,8 @@ extension CourseBenefitSummary {
     @NSManaged var managedMonthUserIncome: NSNumber?
     @NSManaged var managedCurrencyCode: String?
 
+    @NSManaged var managedCourse: Course?
+
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "CourseBenefitSummary", in: CoreDataHelper.shared.context)!
     }
@@ -116,6 +118,15 @@ extension CourseBenefitSummary {
         }
         set {
             self.managedCurrencyCode = newValue
+        }
+    }
+
+    var course: Course? {
+        get {
+            self.managedCourse
+        }
+        set {
+            self.managedCourse = newValue
         }
     }
 }

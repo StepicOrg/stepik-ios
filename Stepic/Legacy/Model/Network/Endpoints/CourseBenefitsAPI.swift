@@ -15,6 +15,25 @@ final class CourseBenefitsAPI: APIEndpoint {
         super.init()
     }
 
+    func retrieve(ids: [CourseBenefit.IdType]) -> Promise<[CourseBenefit]> {
+        Promise { seal in
+            self.courseBenefitsPersistenceService.fetch(ids: ids).then {
+                cachedCourseBenefits -> Promise<([CourseBenefit], Meta, JSON)> in
+                self.retrieve.request(
+                    requestEndpoint: self.name,
+                    paramName: self.name,
+                    params: ["ids": ids],
+                    updatingObjects: cachedCourseBenefits,
+                    withManager: self.manager
+                )
+            }.done { courseBenefits, _, _ in
+                seal.fulfill(courseBenefits)
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func retrieve(courseID: Course.IdType? = nil, page: Int = 1) -> Promise<([CourseBenefit], Meta)> {
         var params: Parameters = ["page": page]
 

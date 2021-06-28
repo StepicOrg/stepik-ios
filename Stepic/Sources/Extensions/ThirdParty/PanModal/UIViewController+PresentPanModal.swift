@@ -12,4 +12,14 @@ extension UIViewController {
             self.presentPanModal(viewControllerToPresent)
         }
     }
+
+    @discardableResult
+    func presentIfPanModalWithCustomModalPresentationStyle(_ viewControllerToPresent: UIViewController) -> Bool {
+        if let panModalPresentableViewController = viewControllerToPresent as? UIViewController & PanModalPresentable {
+            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
+            return true
+        } else {
+            return false
+        }
+    }
 }
