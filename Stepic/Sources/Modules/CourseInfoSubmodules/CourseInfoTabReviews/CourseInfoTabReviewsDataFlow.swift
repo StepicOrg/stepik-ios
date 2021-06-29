@@ -6,6 +6,7 @@ enum CourseInfoTabReviews {
     struct ReviewsResult {
         let reviews: [CourseInfoTabReviewsViewModel]
         let hasNextPage: Bool
+        let summary: CourseInfoTabReviewsSummaryViewModel
         let writeCourseReviewState: WriteCourseReviewState
     }
 

@@ -25,6 +25,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                             )
                         },
                         hasNextPage: data.hasNextPage,
+                        summary: self.makeSummaryViewModel(course: data.course),
                         writeCourseReviewState: self.getWriteCourseReviewState(
                             course: data.course,
                             currentUserReview: data.currentUserReview
@@ -49,6 +50,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                         )
                     },
                     hasNextPage: response.hasNextPage,
+                    summary: self.makeSummaryViewModel(course: response.course),
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
                         currentUserReview: response.currentUserReview
@@ -130,6 +132,20 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
             avatarImageURL: URL(string: reviewAuthor.avatarURL),
             score: courseReview.score,
             isCurrentUserReview: isCurrentUserReview
+        )
+    }
+
+    private func makeSummaryViewModel(course: Course) -> CourseInfoTabReviewsSummaryViewModel {
+        guard let reviewSummary = course.reviewSummary else {
+            return .empty
+        }
+
+        return CourseInfoTabReviewsSummaryViewModel(
+            rating: reviewSummary.average,
+            reviewsCount: reviewSummary.count,
+            reviewsDistribution: reviewSummary.distribution,
+            formattedReviewsCount: FormatterHelper.reviewSummariesCount(reviewSummary.count),
+            formattedReviewsDistribution: reviewSummary.distribution.map(FormatterHelper.longNumber(_:))
         )
     }
 

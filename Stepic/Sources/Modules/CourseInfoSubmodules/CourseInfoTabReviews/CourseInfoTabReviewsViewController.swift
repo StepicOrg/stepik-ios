@@ -88,6 +88,7 @@ final class CourseInfoTabReviewsViewController: UIViewController {
             self.tableDataSource.viewModels = data.reviews
             self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
             self.courseInfoTabReviewsView?.writeCourseReviewState = data.writeCourseReviewState
+            print("CourseInfoTabReviewsViewController :: summary = \(data.summary)")
 
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         }
