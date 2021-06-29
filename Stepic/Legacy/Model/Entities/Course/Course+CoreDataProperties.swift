@@ -85,6 +85,7 @@ extension Course {
     @NSManaged var managedCoursePurchases: NSOrderedSet?
     @NSManaged var managedCourseBenefitSummaries: NSSet?
     @NSManaged var managedCourseBenefits: NSOrderedSet?
+    @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
@@ -681,6 +682,15 @@ extension Course {
         }
         set {
             self.managedCourseBenefits = NSOrderedSet(array: newValue)
+        }
+    }
+
+    var courseBenefitByMonths: [CourseBenefitByMonth] {
+        get {
+            self.managedCourseBenefitByMonths?.array as? [CourseBenefitByMonth] ?? []
+        }
+        set {
+            self.managedCourseBenefitByMonths = NSOrderedSet(array: newValue)
         }
     }
 

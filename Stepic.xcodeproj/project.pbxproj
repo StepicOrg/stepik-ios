@@ -410,6 +410,11 @@
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
 		2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */; };
 		2C0A109D268B1412001D4023 /* Date+Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A109C268B1412001D4023 /* Date+Region.swift */; };
+		2C0A10A1268B19ED001D4023 /* CourseBenefitByMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A10A0268B19ED001D4023 /* CourseBenefitByMonth.swift */; };
+		2C0A10A3268B19FD001D4023 /* CourseBenefitByMonth+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A10A2268B19FD001D4023 /* CourseBenefitByMonth+CoreDataProperties.swift */; };
+		2C0A10A5268B23E8001D4023 /* CourseBenefitByMonthsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A10A4268B23E8001D4023 /* CourseBenefitByMonthsPersistenceService.swift */; };
+		2C0A10A7268B279A001D4023 /* CourseBenefitByMonthsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A10A6268B279A001D4023 /* CourseBenefitByMonthsAPI.swift */; };
+		2C0A10A9268B2A06001D4023 /* CourseBenefitByMonthsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A10A8268B2A06001D4023 /* CourseBenefitByMonthsNetworkService.swift */; };
 		2C0A7D4F24C535D2000A66B5 /* CertificatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */; };
 		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
 		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
@@ -2240,6 +2245,12 @@
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
 		2C0A109C268B1412001D4023 /* Date+Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Region.swift"; sourceTree = "<group>"; };
+		2C0A109E268B1949001D4023 /* Model_course_benefit_by_month_v83.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_benefit_by_month_v83.xcdatamodel; sourceTree = "<group>"; };
+		2C0A10A0268B19ED001D4023 /* CourseBenefitByMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitByMonth.swift; sourceTree = "<group>"; };
+		2C0A10A2268B19FD001D4023 /* CourseBenefitByMonth+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseBenefitByMonth+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C0A10A4268B23E8001D4023 /* CourseBenefitByMonthsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitByMonthsPersistenceService.swift; sourceTree = "<group>"; };
+		2C0A10A6268B279A001D4023 /* CourseBenefitByMonthsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitByMonthsAPI.swift; sourceTree = "<group>"; };
+		2C0A10A8268B2A06001D4023 /* CourseBenefitByMonthsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitByMonthsNetworkService.swift; sourceTree = "<group>"; };
 		2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesNetworkService.swift; sourceTree = "<group>"; };
 		2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_certificates_v55.xcdatamodel; sourceTree = "<group>"; };
 		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
@@ -4050,6 +4061,15 @@
 				2C762B3E2653C8B400E0AB59 /* SwiftyJSON */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		2C0A109F268B19DC001D4023 /* CourseBenefitByMonth */ = {
+			isa = PBXGroup;
+			children = (
+				2C0A10A0268B19ED001D4023 /* CourseBenefitByMonth.swift */,
+				2C0A10A2268B19FD001D4023 /* CourseBenefitByMonth+CoreDataProperties.swift */,
+			);
+			path = CourseBenefitByMonth;
 			sourceTree = "<group>";
 		};
 		2C0F80C325C9BB06006E9233 /* PromoPriceButton */ = {
@@ -6922,6 +6942,7 @@
 				2CFF901B242A25B000FD7311 /* CodeTemplates */,
 				2CFF901C242A25C900FD7311 /* Course */,
 				2C3B5D07266F7BE4000B211B /* CourseBenefit */,
+				2C0A109F268B19DC001D4023 /* CourseBenefitByMonth */,
 				2CE532EE266E822200E80983 /* CourseBenefitSummary */,
 				2CFF901D242A25E200FD7311 /* CourseList */,
 				2C1E429E2497BDC0009F4C69 /* CoursePurchase */,
@@ -7318,6 +7339,7 @@
 				2C1AC2E6255B249800E6ECA9 /* CatalogBlocksAPI.swift */,
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				2C0A10A6268B279A001D4023 /* CourseBenefitByMonthsAPI.swift */,
 				2C3B5D0E266F9134000B211B /* CourseBenefitsAPI.swift */,
 				2CE532F8266EB02200E80983 /* CourseBenefitSummariesAPI.swift */,
 				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
@@ -7621,6 +7643,7 @@
 				2CE9BF47248D0950004F6659 /* CodeLimitsPersistenceService.swift */,
 				2CE9BF45248D08A8004F6659 /* CodeSamplesPersistenceService.swift */,
 				2CE9BF43248D07D0004F6659 /* CodeTemplatesPersistenceService.swift */,
+				2C0A10A4268B23E8001D4023 /* CourseBenefitByMonthsPersistenceService.swift */,
 				2C3B5D0C266F8D37000B211B /* CourseBenefitsPersistenceService.swift */,
 				2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */,
 				62E98C9F5E7C0823E94A4527 /* CourseListsCollectionPersistenceService.swift */,
@@ -7964,6 +7987,7 @@
 				2C1AC312255B466100E6ECA9 /* CatalogBlocksNetworkService.swift */,
 				2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
+				2C0A10A8268B2A06001D4023 /* CourseBenefitByMonthsNetworkService.swift */,
 				2C3B5D10266F9343000B211B /* CourseBenefitsNetworkService.swift */,
 				2C3B5D05266F5984000B211B /* CourseBenefitSummariesNetworkService.swift */,
 				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
@@ -10475,6 +10499,7 @@
 				2CE9BF4A248D09FC004F6659 /* BlocksPersistenceService.swift in Sources */,
 				2CCDD80724F8A7D7006644A8 /* ApplicationShortcutService.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
+				2C0A10A7268B279A001D4023 /* CourseBenefitByMonthsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
 				2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */,
@@ -10552,6 +10577,7 @@
 				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
+				2C0A10A3268B19FD001D4023 /* CourseBenefitByMonth+CoreDataProperties.swift in Sources */,
 				2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
@@ -11310,6 +11336,7 @@
 				62E983AF85B0A9D1D21797DD /* CodeQuizFullscreenDataFlow.swift in Sources */,
 				62E987A5122564575E3B4852 /* CodeQuizFullscreenInteractor.swift in Sources */,
 				62E98AF7A4ADB3C60BCD2046 /* CodeQuizFullscreenOutputProtocol.swift in Sources */,
+				2C0A10A1268B19ED001D4023 /* CourseBenefitByMonth.swift in Sources */,
 				2C1AC313255B466100E6ECA9 /* CatalogBlocksNetworkService.swift in Sources */,
 				2CB3563E2476CB7B00E59A03 /* MagicLink.swift in Sources */,
 				62E9833E9BFB4229BFEB4DD5 /* CodeQuizFullscreenPresenter.swift in Sources */,
@@ -11510,6 +11537,7 @@
 				2C41F0F625BB007C00DA634A /* StoryOpenSource.swift in Sources */,
 				46115BB4590732AAB387046D /* NewProfileUserActivityAssembly.swift in Sources */,
 				8A248387CF216CCCFFC39E76 /* NewProfileUserActivityDataFlow.swift in Sources */,
+				2C0A10A5268B23E8001D4023 /* CourseBenefitByMonthsPersistenceService.swift in Sources */,
 				9FAD76150240B4F8C13ADFA2 /* NewProfileUserActivityInteractor.swift in Sources */,
 				96A3827B7E57E4B055221311 /* NewProfileUserActivityPresenter.swift in Sources */,
 				1403FF0C9A5259CF2D63D98C /* NewProfileUserActivityProvider.swift in Sources */,
@@ -11655,6 +11683,7 @@
 				C56B3693FD36033B00C6AEB7 /* LessonFinishedStepsPanModalViewController.swift in Sources */,
 				5BB0F4923200056C332A59FF /* LessonFinishedStepsPanModalOutputProtocol.swift in Sources */,
 				BD1C9F8F65E99FCF6959F92A /* UserCoursesReviewsAssembly.swift in Sources */,
+				2C0A10A9268B2A06001D4023 /* CourseBenefitByMonthsNetworkService.swift in Sources */,
 				967846575CD3702AF484AF52 /* UserCoursesReviewsDataFlow.swift in Sources */,
 				85CFA575736E6C0570D48065 /* UserCoursesReviewsInteractor.swift in Sources */,
 				03DCDF023C3BC6656039CD69 /* UserCoursesReviewsPresenter.swift in Sources */,
@@ -13609,6 +13638,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C0A109E268B1949001D4023 /* Model_course_benefit_by_month_v83.xcdatamodel */,
 				2C4E35BA2680D5FA000B39C2 /* Model_course_revenue_v82.xcdatamodel */,
 				2C252AE7267B538B009B5B2D /* Model_course_iap_price_v81.xcdatamodel */,
 				2CE532ED266E802800E80983 /* Model_course_benefits_v80.xcdatamodel */,
@@ -13693,7 +13723,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C4E35BA2680D5FA000B39C2 /* Model_course_revenue_v82.xcdatamodel */;
+			currentVersion = 2C0A109E268B1949001D4023 /* Model_course_benefit_by_month_v83.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
