@@ -62,12 +62,15 @@ final class CourseBenefitSummariesPersistenceService: CourseBenefitSummariesPers
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseBenefitSummary")
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
-            do {
-                try self.managedObjectContext.executeAndMergeChanges(using: batchDeleteRequest)
-                seal.fulfill(())
-            } catch {
-                print("CourseBenefitSummariesPersistenceService :: failed delete all with error = \(error)")
-                seal.reject(Error.deleteFailed)
+            self.managedObjectContext.performAndWait {
+                do {
+                    try self.managedObjectContext.executeAndMergeChanges(using: batchDeleteRequest)
+                    try? self.managedObjectContext.save()
+                    seal.fulfill(())
+                } catch {
+                    print("CourseBenefitSummariesPersistenceService :: failed delete all with error = \(error)")
+                    seal.reject(Error.deleteFailed)
+                }
             }
         }
     }
