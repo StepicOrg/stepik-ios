@@ -409,6 +409,7 @@
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
 		2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */; };
+		2C0A109D268B1412001D4023 /* Date+Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A109C268B1412001D4023 /* Date+Region.swift */; };
 		2C0A7D4F24C535D2000A66B5 /* CertificatesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */; };
 		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
 		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
@@ -2238,6 +2239,7 @@
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
+		2C0A109C268B1412001D4023 /* Date+Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Region.swift"; sourceTree = "<group>"; };
 		2C0A7D4E24C535D2000A66B5 /* CertificatesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesNetworkService.swift; sourceTree = "<group>"; };
 		2C0A7D5024C53D7F000A66B5 /* Model_new_profile_certificates_v55.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_certificates_v55.xcdatamodel; sourceTree = "<group>"; };
 		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
@@ -3993,6 +3995,7 @@
 				62E98BC02EC89CF78E0FC7A6 /* Array+Reordering.swift */,
 				2C3ABA9023D229C200E90439 /* Bundle+Version.swift */,
 				62E98E4C4AECA5B066006DE7 /* CollectionExtensions.swift */,
+				2C0A109C268B1412001D4023 /* Date+Region.swift */,
 				2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */,
 				2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */,
 				62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */,
@@ -10317,6 +10320,7 @@
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
 				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				2C06DB2A261606BB00BDF715 /* SpecializationsCatalogBlockContentItem.swift in Sources */,
+				2C0A109D268B1412001D4023 /* Date+Region.swift in Sources */,
 				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */,

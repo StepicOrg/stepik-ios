@@ -53,7 +53,13 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             }
             return "User \(courseBenefit.buyerID)"
         }()
-        let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(courseBenefit.time ?? Date())
+
+        let formattedDate: String = {
+            if let moscowDateInRegion = courseBenefit.time?.inEuropeMoscow {
+                return FormatterHelper.dateStringWithFullMonthAndYear(moscowDateInRegion)
+            }
+            return FormatterHelper.dateStringWithFullMonthAndYear(courseBenefit.time ?? Date())
+        }()
 
         let formattedPaymentAmount = FormatterHelper.price(
             courseBenefit.paymentAmount,

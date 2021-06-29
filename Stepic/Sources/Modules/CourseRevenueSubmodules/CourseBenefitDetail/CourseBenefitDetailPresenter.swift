@@ -18,7 +18,12 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
     }
 
     private func makeViewModel(courseBenefit: CourseBenefit) -> CourseBenefitDetailViewModel {
-        let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(courseBenefit.time ?? Date())
+        let formattedDate: String = {
+            if let moscowDateInRegion = courseBenefit.time?.inEuropeMoscow {
+                return FormatterHelper.dateStringWithFullMonthAndYear(moscowDateInRegion)
+            }
+            return FormatterHelper.dateStringWithFullMonthAndYear(courseBenefit.time ?? Date())
+        }()
 
         let courseTitle: String = {
             if let course = courseBenefit.course {
