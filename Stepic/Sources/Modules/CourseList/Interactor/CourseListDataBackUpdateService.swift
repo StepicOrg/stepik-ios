@@ -75,6 +75,10 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
 
         if update.contains(.enrollment) {
             self.handleCourse(course, didUpdateEnrollment: update)
+
+            if self.courseListType is DownloadedCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            }
         }
 
         // If isArchived or isFavorite state was updated then handle specified update and refresh course list

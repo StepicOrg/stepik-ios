@@ -373,31 +373,52 @@ final class RecommendationsCourseListNetworkService: BaseCourseListNetworkServic
     }
 }
 
-final class WishlistCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
-    let type: WishlistCourseListType
-    private let wishlistStorageManager: WishlistStorageManagerProtocol
-
-    init(
-        type: WishlistCourseListType,
-        coursesAPI: CoursesAPI,
-        wishlistStorageManager: WishlistStorageManagerProtocol
-    ) {
-        self.type = type
-        self.wishlistStorageManager = wishlistStorageManager
-        super.init(coursesAPI: coursesAPI)
-    }
+class BaseCacheCoursesIDsSourceCourseListNetworkService: BaseCourseListNetworkService,
+    CourseListNetworkServiceProtocol {
+    func getCoursesIDs() -> Promise<[Course.IdType]> { .value([]) }
 
     func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
-        let coursesIDs = self.wishlistStorageManager.coursesIDs
-        let finalMeta = Meta.oneAndOnlyPage
-
-        return Promise { seal in
-            self.coursesAPI.retrieve(ids: coursesIDs).done { courses in
-                let courses = courses.reordered(order: coursesIDs, transform: { $0.id })
-                seal.fulfill((courses, finalMeta))
+        Promise { seal in
+            self.getCoursesIDs().then { coursesIDs -> Promise<([Course.IdType], [Course])> in
+                self.coursesAPI.retrieve(ids: coursesIDs).map { (coursesIDs, $0) }
+            }.done { coursesIDs, courses in
+                let result = courses.reordered(order: coursesIDs, transform: { $0.id })
+                seal.fulfill((result, .oneAndOnlyPage))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
         }
+    }
+}
+
+final class WishlistCourseListNetworkService: BaseCacheCoursesIDsSourceCourseListNetworkService {
+    private let wishlistStorageManager: WishlistStorageManagerProtocol
+
+    init(
+        coursesAPI: CoursesAPI,
+        wishlistStorageManager: WishlistStorageManagerProtocol
+    ) {
+        self.wishlistStorageManager = wishlistStorageManager
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    override func getCoursesIDs() -> Promise<[Course.IdType]> {
+        .value(self.wishlistStorageManager.coursesIDs)
+    }
+}
+
+final class DownloadedCourseListNetworkService: BaseCacheCoursesIDsSourceCourseListNetworkService {
+    private let downloadedCourseListPersistenceService: DownloadedCourseListPersistenceService
+
+    init(
+        coursesAPI: CoursesAPI,
+        downloadedCourseListPersistenceService: DownloadedCourseListPersistenceService
+    ) {
+        self.downloadedCourseListPersistenceService = downloadedCourseListPersistenceService
+        super.init(coursesAPI: coursesAPI)
+    }
+
+    override func getCoursesIDs() -> Promise<[Course.IdType]> {
+        self.downloadedCourseListPersistenceService.fetch().mapValues(\.id)
     }
 }

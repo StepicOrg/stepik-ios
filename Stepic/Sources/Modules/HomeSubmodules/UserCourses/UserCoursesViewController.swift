@@ -14,6 +14,8 @@ final class UserCoursesViewController: TabmanViewController {
         static let barTintColor = UIColor.stepikAccent
         static let barBackgroundColor = UIColor.stepikNavigationBarBackground
         static let barSeparatorColor = UIColor.stepikOpaqueSeparator
+        static let barInterButtonSpacing: CGFloat = 16
+        static let barContentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
             .init(shadowViewAlpha: 0.0)
@@ -27,8 +29,10 @@ final class UserCoursesViewController: TabmanViewController {
         bar.backgroundView.style = .flat(color: Appearance.barBackgroundColor)
         bar.indicator.tintColor = Appearance.barTintColor
         bar.indicator.weight = .light
-        bar.layout.interButtonSpacing = 0
-        bar.layout.contentMode = .fit
+        bar.layout.interButtonSpacing = Appearance.barInterButtonSpacing
+        bar.layout.contentInset = Appearance.barContentInset
+        bar.layout.alignment = .leading
+        bar.layout.contentMode = .intrinsic
 
         let separatorView = UIView()
         separatorView.backgroundColor = Appearance.barSeparatorColor
@@ -48,10 +52,13 @@ final class UserCoursesViewController: TabmanViewController {
     private let initialTabIndex: Int
     private var tabViewControllers: [UIViewController?] = []
 
+    private let analytics: Analytics
+
     init(
         interactor: UserCoursesInteractorProtocol,
         availableTabs: [UserCourses.Tab],
-        initialTab: UserCourses.Tab
+        initialTab: UserCourses.Tab,
+        analytics: Analytics
     ) {
         self.interactor = interactor
 
@@ -63,6 +70,8 @@ final class UserCoursesViewController: TabmanViewController {
         } else {
             self.initialTabIndex = 0
         }
+
+        self.analytics = analytics
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -92,6 +101,26 @@ final class UserCoursesViewController: TabmanViewController {
                 Appearance.navigationBarAppearance.shadowViewAlpha,
                 sender: self
             )
+        }
+
+        self.analytics.send(.myCoursesScreenOpened)
+    }
+
+    override func pageboyViewController(
+        _ pageboyViewController: PageboyViewController,
+        didScrollToPageAt index: TabmanViewController.PageIndex,
+        direction: PageboyViewController.NavigationDirection,
+        animated: Bool
+    ) {
+        super.pageboyViewController(
+            pageboyViewController,
+            didScrollToPageAt: index,
+            direction: direction,
+            animated: animated
+        )
+
+        if let selectedTab = self.availableTabs[safe: index] {
+            self.analytics.send(.myCoursesScreenTabOpened(tab: selectedTab))
         }
     }
 
@@ -135,6 +164,8 @@ private extension UserCourses.Tab {
             return EnrolledCourseListType()
         case .favorites:
             return FavoriteCourseListType()
+        case .downloaded:
+            return DownloadedCourseListType()
         case .archived:
             return ArchivedCourseListType()
         }

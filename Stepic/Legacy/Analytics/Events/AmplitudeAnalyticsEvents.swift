@@ -987,6 +987,19 @@ extension AnalyticsEvent {
         )
     }
 
+    // MARK: - UserCourses -
+
+    static let myCoursesScreenOpened = AmplitudeAnalyticsEvent(name: "My courses screen opened")
+
+    static func myCoursesScreenTabOpened(tab: UserCourses.Tab) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "My courses screen tab opened",
+            parameters: [
+                "tab": tab.rawValue
+            ]
+        )
+    }
+
     // MARK: - Wishlist -
 
     static func wishlistCourseAdded(
