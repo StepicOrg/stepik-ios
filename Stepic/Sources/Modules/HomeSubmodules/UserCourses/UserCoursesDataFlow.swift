@@ -1,11 +1,11 @@
 import Foundation
 
 enum UserCourses {
-    enum Tab: CaseIterable {
-        case allCourses
+    enum Tab: String, CaseIterable {
+        case allCourses = "all"
         case favorites
         case downloaded
-        case archived
+        case archived = "archive"
 
         var title: String {
             switch self {

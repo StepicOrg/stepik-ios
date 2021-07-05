@@ -52,10 +52,13 @@ final class UserCoursesViewController: TabmanViewController {
     private let initialTabIndex: Int
     private var tabViewControllers: [UIViewController?] = []
 
+    private let analytics: Analytics
+
     init(
         interactor: UserCoursesInteractorProtocol,
         availableTabs: [UserCourses.Tab],
-        initialTab: UserCourses.Tab
+        initialTab: UserCourses.Tab,
+        analytics: Analytics
     ) {
         self.interactor = interactor
 
@@ -67,6 +70,8 @@ final class UserCoursesViewController: TabmanViewController {
         } else {
             self.initialTabIndex = 0
         }
+
+        self.analytics = analytics
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -96,6 +101,26 @@ final class UserCoursesViewController: TabmanViewController {
                 Appearance.navigationBarAppearance.shadowViewAlpha,
                 sender: self
             )
+        }
+
+        self.analytics.send(.myCoursesScreenOpened)
+    }
+
+    override func pageboyViewController(
+        _ pageboyViewController: PageboyViewController,
+        didScrollToPageAt index: TabmanViewController.PageIndex,
+        direction: PageboyViewController.NavigationDirection,
+        animated: Bool
+    ) {
+        super.pageboyViewController(
+            pageboyViewController,
+            didScrollToPageAt: index,
+            direction: direction,
+            animated: animated
+        )
+
+        if let selectedTab = self.availableTabs[safe: index] {
+            self.analytics.send(.myCoursesScreenTabOpened(tab: selectedTab))
         }
     }
 
