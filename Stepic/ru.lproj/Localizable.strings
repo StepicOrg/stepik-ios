@@ -541,6 +541,7 @@ CourseBenefitDetailAmountTitle = "Ваш доход";
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";
 UserCoursesTabFavoritesTitle = "Избранные";
+UserCoursesTabDownloadedTitle = "Загруженные";
 UserCoursesTabArchivedTitle = "Архив";
 
 /* User Courses Reviews */

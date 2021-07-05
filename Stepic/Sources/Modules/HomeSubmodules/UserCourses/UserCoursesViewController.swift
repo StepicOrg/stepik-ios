@@ -14,6 +14,8 @@ final class UserCoursesViewController: TabmanViewController {
         static let barTintColor = UIColor.stepikAccent
         static let barBackgroundColor = UIColor.stepikNavigationBarBackground
         static let barSeparatorColor = UIColor.stepikOpaqueSeparator
+        static let barInterButtonSpacing: CGFloat = 16
+        static let barContentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
             .init(shadowViewAlpha: 0.0)
@@ -27,8 +29,10 @@ final class UserCoursesViewController: TabmanViewController {
         bar.backgroundView.style = .flat(color: Appearance.barBackgroundColor)
         bar.indicator.tintColor = Appearance.barTintColor
         bar.indicator.weight = .light
-        bar.layout.interButtonSpacing = 0
-        bar.layout.contentMode = .fit
+        bar.layout.interButtonSpacing = Appearance.barInterButtonSpacing
+        bar.layout.contentInset = Appearance.barContentInset
+        bar.layout.alignment = .leading
+        bar.layout.contentMode = .intrinsic
 
         let separatorView = UIView()
         separatorView.backgroundColor = Appearance.barSeparatorColor
@@ -135,6 +139,8 @@ private extension UserCourses.Tab {
             return EnrolledCourseListType()
         case .favorites:
             return FavoriteCourseListType()
+        case .downloaded:
+            return DownloadedCourseListType()
         case .archived:
             return ArchivedCourseListType()
         }

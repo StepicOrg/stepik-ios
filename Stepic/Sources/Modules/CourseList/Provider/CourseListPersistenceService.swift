@@ -81,3 +81,23 @@ extension VisitedCourseListPersistenceService: VisitedCourseListPersistenceServi
         self.updateStorageUsingCurrentData()
     }
 }
+
+// MARK: - DownloadedCourseListPersistenceService: CourseListPersistenceService -
+
+final class DownloadedCourseListPersistenceService: CourseListPersistenceService {
+    private let downloadsProvider: DownloadsProviderProtocol
+
+    init(downloadsProvider: DownloadsProviderProtocol = DownloadsProvider.default) {
+        self.downloadsProvider = downloadsProvider
+        super.init(storage: PassiveCourseListPersistenceStorage(cachedList: []))
+    }
+
+    override func fetch() -> Promise<[Course]> {
+        self.downloadsProvider.fetchCachedCourses().then { courses -> Promise<[Course]> in
+            let resultCourses = courses.filter(\.enrolled).sorted { $0.id < $1.id }
+            return .value(resultCourses)
+        }
+    }
+
+    override func update(newCachedList: [Course]) {}
+}

@@ -4,6 +4,7 @@ enum UserCourses {
     enum Tab: CaseIterable {
         case allCourses
         case favorites
+        case downloaded
         case archived
 
         var title: String {
@@ -12,6 +13,8 @@ enum UserCourses {
                 return NSLocalizedString("UserCoursesTabAllCoursesTitle", comment: "")
             case .favorites:
                 return NSLocalizedString("UserCoursesTabFavoritesTitle", comment: "")
+            case .downloaded:
+                return NSLocalizedString("UserCoursesTabDownloadedTitle", comment: "")
             case .archived:
                 return NSLocalizedString("UserCoursesTabArchivedTitle", comment: "")
             }
