@@ -90,8 +90,9 @@ final class AttemptEntity: NSManagedObject {
     }
 
     var time: Date? {
-        if let timeString = self.timeString {
-            return Date(timeIntervalSince1970: TimeInterval(timeString: timeString))
+        if let timeString = self.timeString,
+           let timeInterval = TimeInterval(timeString: timeString) {
+            return Date(timeIntervalSince1970: timeInterval)
         } else {
             return nil
         }
