@@ -158,6 +158,50 @@ extension AnalyticsEvent {
         )
     }
 
+    // MARK: - Course Benefits -
+
+    static func courseBenefitsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course benefits screen opened",
+            parameters: [
+                "course": id,
+                "course_title": title
+            ]
+        )
+    }
+
+    static func courseBenefitClicked(
+        benefitID: Int,
+        status: String,
+        courseID: Int,
+        courseTitle: String
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course benefit clicked",
+            parameters: [
+                "benefit": benefitID,
+                "status": status,
+                "course": courseID,
+                "course_title": courseTitle
+            ]
+        )
+    }
+
+    static func courseBenefitsSummaryClicked(
+        id: Int,
+        title: String,
+        expanded: Bool
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course benefits summary clicked",
+            parameters: [
+                "course": id,
+                "course_title": title,
+                "expanded": expanded
+            ]
+        )
+    }
+
     // MARK: - Steps -
 
     static func submissionMade(

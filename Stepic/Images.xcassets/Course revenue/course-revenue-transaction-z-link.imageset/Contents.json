@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "course-revenue-transaction-z-link.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

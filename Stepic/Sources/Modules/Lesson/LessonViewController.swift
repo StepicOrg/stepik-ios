@@ -1,6 +1,5 @@
 import EasyTipView
 import Pageboy
-import PanModal
 import SnapKit
 import SVProgressHUD
 import Tabman
@@ -657,10 +656,7 @@ extension LessonViewController: LessonViewControllerProtocol {
             output: self
         )
         let viewController = assembly.makeModule()
-
-        if let panModalPresentableViewController = viewController as? UIViewController & PanModalPresentable {
-            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
-        }
+        self.presentIfPanModalWithCustomModalPresentationStyle(viewController)
     }
 
     func displayLessonFinishedSteps(viewModel: LessonDataFlow.LessonFinishedStepsPresentation.ViewModel) {
@@ -669,10 +665,7 @@ extension LessonViewController: LessonViewControllerProtocol {
             output: self
         )
         let viewController = assembly.makeModule()
-
-        if let panModalPresentableViewController = viewController as? UIViewController & PanModalPresentable {
-            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
-        }
+        self.presentIfPanModalWithCustomModalPresentationStyle(viewController)
     }
 }
 

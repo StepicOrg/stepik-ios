@@ -218,7 +218,7 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
     }
 }
 
-extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
+extension CourseInfoTabSyllabusView: ScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
             self.pageScrollViewDelegate

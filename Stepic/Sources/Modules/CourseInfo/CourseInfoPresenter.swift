@@ -11,6 +11,7 @@ protocol CourseInfoPresenterProtocol {
     func presentLessonModuleCatalogAction(response: CourseInfo.LessonModuleCatalogPresentation.Response)
     func presentLessonModuleWriteReviewAction(response: CourseInfo.LessonModuleWriteReviewPresentation.Response)
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response)
+    func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
@@ -37,6 +38,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 course: data.course,
                 isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
+                isCourseRevenueAvailable: data.isCourseRevenueAvailable,
                 promoCode: data.promoCode
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
@@ -100,6 +102,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
         self.viewController?.displayPreviewLesson(viewModel: .init(previewLessonID: response.previewLessonID))
+    }
+
+    func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response) {
+        self.viewController?.displayCourseRevenue(viewModel: .init(courseID: response.courseID))
     }
 
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response) {
@@ -244,6 +250,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         course: Course,
         isWishlisted: Bool,
         isWishlistAvailable: Bool,
+        isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel {
         let rating: Int = {
@@ -278,6 +285,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isWishlisted: isWishlisted,
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
+            isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             buttonDescription: self.makeButtonDescription(
                 course: course,
                 promoCode: promoCode

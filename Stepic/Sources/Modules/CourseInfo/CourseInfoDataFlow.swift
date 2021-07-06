@@ -41,6 +41,7 @@ enum CourseInfo {
                 let course: Course
                 let isWishlisted: Bool
                 let isWishlistAvailable: Bool
+                let isCourseRevenueAvailable: Bool
                 let promoCode: PromoCode?
             }
 
@@ -231,6 +232,19 @@ enum CourseInfo {
 
         struct ViewModel {
             let previewLessonID: Lesson.IdType
+        }
+    }
+
+    /// Present course revenue
+    enum CourseRevenuePresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
         }
     }
 

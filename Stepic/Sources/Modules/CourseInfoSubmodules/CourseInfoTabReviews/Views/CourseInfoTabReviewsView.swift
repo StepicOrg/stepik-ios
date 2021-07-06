@@ -271,9 +271,9 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
     }
 }
 
-// MARK: - CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol -
+// MARK: - CourseInfoTabReviewsView: ScrollablePageViewProtocol -
 
-extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
+extension CourseInfoTabReviewsView: ScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
             self.pageScrollViewDelegate

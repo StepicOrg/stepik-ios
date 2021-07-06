@@ -36,6 +36,15 @@ struct LayoutInsets {
         return value
     }
 
+    var edgeInsets: UIEdgeInsets {
+        UIEdgeInsets(
+            top: self.topInset ?? 0,
+            left: self.leftInset ?? 0,
+            bottom: self.bottomInset ?? 0,
+            right: self.rightInset ?? 0
+        )
+    }
+
     init(top: CGFloat? = nil, left: CGFloat? = nil, bottom: CGFloat? = nil, right: CGFloat? = nil) {
         self.topInset = top
         self.leftInset = left

@@ -15,6 +15,18 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
         buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: "")
     )
+    static let noConnectionCourseBenefitSummaries = StepikPlaceholderStyle(
+        id: "noConnectionCourseBenefitSummaries",
+        image: PlaceholderImage(image: UIImage(named: "new-error-course-benefit-summaries"), scale: 0.49),
+        text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
+        buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: "")
+    )
+    static let noConnectionCourseBenefits = StepikPlaceholderStyle(
+        id: "noConnectionCourseBenefits",
+        image: nil,
+        text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
+        buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: "")
+    )
     static let login = StepikPlaceholderStyle(
         id: "login",
         image: PlaceholderImage(image: UIImage(named: "new-empty-login"), scale: 0.59),
@@ -168,6 +180,12 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("Refreshing", comment: ""),
         buttonTitle: nil
     )
+    static let emptyCourseBenefits = StepikPlaceholderStyle(
+        id: "emptyCourseBenefits",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-course-benefits"), scale: 0.99),
+        text: NSLocalizedString("CourseRevenueEmptyCourseBenefitsTitle", comment: ""),
+        buttonTitle: nil
+    )
 }
 
 extension StepikPlaceholder.Style {
@@ -175,6 +193,8 @@ extension StepikPlaceholder.Style {
         [
             .empty,
             .noConnection,
+            .noConnectionCourseBenefitSummaries,
+            .noConnectionCourseBenefits,
             .login,
             .emptyDownloads,
             .emptyNotifications,
@@ -184,7 +204,8 @@ extension StepikPlaceholder.Style {
             .emptyDiscussions,
             .emptyProfileLoading,
             .emptySections,
-            .emptyUnits
+            .emptyUnits,
+            .emptyCourseBenefits
         ]
     }
 }
