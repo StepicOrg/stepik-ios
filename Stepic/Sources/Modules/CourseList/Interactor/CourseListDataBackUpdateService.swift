@@ -99,6 +99,10 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
             if self.courseListType is WishlistCourseListType {
                 self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
             }
+        case .downloads:
+            if self.courseListType is DownloadedCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            }
         default:
             break
         }
