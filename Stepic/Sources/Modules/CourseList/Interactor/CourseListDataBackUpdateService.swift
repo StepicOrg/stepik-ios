@@ -46,6 +46,7 @@ final class CourseListDataBackUpdateService: CourseListDataBackUpdateServiceProt
         self.courseListType is EnrolledCourseListType
             || self.courseListType is FavoriteCourseListType
             || self.courseListType is ArchivedCourseListType
+            || self.courseListType is DownloadedCourseListType
     }
 
     init(
@@ -75,10 +76,6 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
 
         if update.contains(.enrollment) {
             self.handleCourse(course, didUpdateEnrollment: update)
-
-            if self.courseListType is DownloadedCourseListType {
-                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
-            }
         }
 
         // If isArchived or isFavorite state was updated then handle specified update and refresh course list
@@ -111,7 +108,9 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
 
     private func handleCourse(_ course: Course, didUpdateEnrollment update: DataBackUpdateDescription) {
         if self.isUserCoursesCourseListType {
-            if course.enrolled && self.courseListType is EnrolledCourseListType {
+            if self.courseListType is DownloadedCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            } else if course.enrolled && self.courseListType is EnrolledCourseListType {
                 self.delegate?.courseListDataBackUpdateService(self, didInsertCourse: course)
             } else {
                 self.delegate?.courseListDataBackUpdateService(self, didDeleteCourse: course)
