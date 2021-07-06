@@ -35,6 +35,10 @@ final class CourseRatingView: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        self.starsStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -64,6 +68,8 @@ final class CourseRatingView: UIView {
             self.starsStackView.addArrangedSubview(self.makeStar(isFilled: false, atIndex: currentIndex))
             currentIndex += 1
         }
+
+        self.invalidateIntrinsicContentSize()
     }
 
     private func makeStar(isFilled: Bool, atIndex index: Int) -> UIView {
