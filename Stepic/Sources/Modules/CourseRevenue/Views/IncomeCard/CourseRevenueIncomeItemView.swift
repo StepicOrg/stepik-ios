@@ -197,6 +197,9 @@ final class CourseRevenueIncomeItemView: UIView {
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.expandContentControl.isHidden {
+            return nil
+        }
         let convertedPoint = self.convert(point, to: self.expandContentTapProxyView)
         return self.expandContentTapProxyView.hitTest(convertedPoint, with: event)
     }

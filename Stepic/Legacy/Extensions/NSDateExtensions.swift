@@ -22,14 +22,20 @@ extension Date {
 }
 
 extension TimeInterval {
-    init(timeString: String) {
+    init?(timeString: String) {
+        guard let utcTimeZone = TimeZone(abbreviation: "UTC") else {
+            return nil
+        }
+
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(abbreviation: "UTC")!
+        formatter.timeZone = utcTimeZone
         formatter.locale = Locale(identifier: "en_US_POSIX")
 
-        let dateFormats = ["yyyy-MM-dd'T'HH:mm:ss'Z'",
-                           "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                           "yyyy-MM-dd'T'hh:mm:ss.SSS a'Z'"]
+        let dateFormats = [
+            "yyyy-MM-dd'T'HH:mm:ss'Z'",
+            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "yyyy-MM-dd'T'hh:mm:ss.SSS a'Z'"
+        ]
 
         for dateFormat in dateFormats {
             formatter.dateFormat = dateFormat
@@ -39,6 +45,10 @@ extension TimeInterval {
             }
         }
 
-        self = formatter.date(from: timeString)!.timeIntervalSince1970
+        if let timeInterval = formatter.date(from: timeString)?.timeIntervalSince1970 {
+            self = timeInterval
+        } else {
+            return nil
+        }
     }
 }

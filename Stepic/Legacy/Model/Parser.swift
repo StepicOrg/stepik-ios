@@ -31,15 +31,19 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 enum Parser {
     static func dateFromTimedateJSON(_ json: JSON) -> Date? {
-        if let date = json.string {
-            return Date(timeIntervalSince1970: TimeInterval(timeString: date))
+        if let date = json.string,
+           let timeInterval = TimeInterval(timeString: date) {
+            return Date(timeIntervalSince1970: timeInterval)
         } else {
             return nil
         }
     }
 
     static func dateFromTimedateString(_ timeString: String) -> Date? {
-        Date(timeIntervalSince1970: TimeInterval(timeString: timeString))
+        if let timeInterval = TimeInterval(timeString: timeString) {
+            return Date(timeIntervalSince1970: timeInterval)
+        }
+        return nil
     }
 
     static func colorFromHex6StringJSON(_ json: JSON) -> UIColor? {

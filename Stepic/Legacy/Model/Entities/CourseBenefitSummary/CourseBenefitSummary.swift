@@ -19,7 +19,7 @@ final class CourseBenefitSummary: NSManagedObject, JSONSerializable {
 
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
-        self.beginPaymentDate = Parser.dateFromTimedateJSON(json[JSONKey.beginPaymentDate.rawValue])
+        self.beginPaymentDate = json[JSONKey.beginPaymentDate.rawValue].string?.toISODate()?.date
         self.currentDate = Parser.dateFromTimedateJSON(json[JSONKey.currentDate.rawValue])
         self.totalIncome = json[JSONKey.totalIncome.rawValue].floatValue
         self.totalTurnover = json[JSONKey.totalTurnover.rawValue].floatValue
