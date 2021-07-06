@@ -102,3 +102,18 @@ final class DownloadsProvider: DownloadsProviderProtocol {
         return resultSteps
     }
 }
+
+extension DownloadsProvider {
+    static var `default`: DownloadsProvider {
+        DownloadsProvider(
+            coursesPersistenceService: CoursesPersistenceService(),
+            adaptiveStorageManager: AdaptiveStorageManager.shared,
+            videoFileManager: VideoStoredFileManager(fileManager: .default),
+            imageFileManager: ImageStoredFileManager(fileManager: .default),
+            storageUsageService: StorageUsageService(
+                videoFileManager: VideoStoredFileManager(fileManager: .default),
+                imageFileManager: ImageStoredFileManager(fileManager: .default)
+            )
+        )
+    }
+}

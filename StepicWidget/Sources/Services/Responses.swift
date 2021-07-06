@@ -24,8 +24,9 @@ struct UserCourse: Decodable {
     let last_viewed: String?
 
     var lastViewed: Date {
-        if let lastViewedTimeString = self.last_viewed {
-            return Date(timeIntervalSince1970: TimeInterval(timeString: lastViewedTimeString))
+        if let lastViewedTimeString = self.last_viewed,
+           let timeInterval = TimeInterval(timeString: lastViewedTimeString) {
+            return Date(timeIntervalSince1970: timeInterval)
         }
         return Date()
     }

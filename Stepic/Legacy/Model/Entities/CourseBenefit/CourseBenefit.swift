@@ -21,6 +21,7 @@ final class CourseBenefit: NSManagedObject, JSONSerializable {
         self.userID = json[JSONKey.user.rawValue].intValue
         self.courseID = json[JSONKey.course.rawValue].intValue
         self.time = Parser.dateFromTimedateJSON(json[JSONKey.time.rawValue])
+            ?? json[JSONKey.time.rawValue].string?.toISODate()?.date
         self.statusString = json[JSONKey.status.rawValue].stringValue
         self.amount = json[JSONKey.amount.rawValue].floatValue
         self.currencyCode = json[JSONKey.currencyCode.rawValue].stringValue

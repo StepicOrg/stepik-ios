@@ -88,14 +88,18 @@ extension CourseRevenueTabPurchasesViewController: CourseRevenueTabPurchasesView
     }
 
     func displayNextPurchases(viewModel: CourseRevenueTabPurchases.NextPurchasesLoad.ViewModel) {
-        switch viewModel.state {
-        case .result(let data):
-            self.tableDataSource.viewModels.append(contentsOf: data.courseBenefits)
+        switch (self.state, viewModel.state) {
+        case (.result(let currentData), .result(let nextData)):
+            self.state = .result(
+                data: .init(
+                    courseBenefits: currentData.courseBenefits + nextData.courseBenefits,
+                    hasNextPage: nextData.hasNextPage
+                )
+            )
+        case (_, .error):
             self.updateState(newState: self.state)
-            self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
-        case .error:
-            self.updateState(newState: self.state)
-            self.updatePagination(hasNextPage: false, hasError: true)
+        default:
+            break
         }
     }
 

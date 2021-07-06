@@ -542,6 +542,7 @@ CourseBenefitDetailAmountTitle = "Your earnings";
 UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";
 UserCoursesTabFavoritesTitle = "Favorite";
+UserCoursesTabDownloadedTitle = "Downloaded";
 UserCoursesTabArchivedTitle = "Archive";
 
 /* User Courses Reviews */

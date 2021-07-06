@@ -7,7 +7,8 @@ final class UserCoursesAssembly: Assembly {
         let viewController = UserCoursesViewController(
             interactor: interactor,
             availableTabs: UserCourses.Tab.allCases,
-            initialTab: .allCourses
+            initialTab: .allCourses,
+            analytics: StepikAnalytics.shared
         )
 
         presenter.viewController = viewController
