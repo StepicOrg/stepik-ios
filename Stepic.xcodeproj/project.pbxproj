@@ -828,6 +828,7 @@
 		2CA3E8AF24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */; };
 		2CA47D4A248ABF0E00925335 /* LogoutDataClearService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */; };
 		2CA51BB024AB9B4300A400AE /* NewProfileUserActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */; };
+		2CA603592694D73900BABA4D /* CourseInfoTabReviewsReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA603582694D73900BABA4D /* CourseInfoTabReviewsReviewButton.swift */; };
 		2CA6A1E6266624F4000AAA90 /* ReviewsAndWishlistContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6A1E5266624F4000AAA90 /* ReviewsAndWishlistContainerViewController.swift */; };
 		2CA6A1E82666551F000AAA90 /* UserCoursesReviewsWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6A1E72666551F000AAA90 /* UserCoursesReviewsWidgetViewModel.swift */; };
 		2CA6A1EA26665AC2000AAA90 /* UserCoursesReviewsBlockSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6A1E926665AC2000AAA90 /* UserCoursesReviewsBlockSkeletonView.swift */; };
@@ -2700,6 +2701,7 @@
 		2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAboutBlockView.swift; sourceTree = "<group>"; };
 		2CA47D49248ABF0E00925335 /* LogoutDataClearService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutDataClearService.swift; sourceTree = "<group>"; };
 		2CA51BAF24AB9B4300A400AE /* NewProfileUserActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityViewModel.swift; sourceTree = "<group>"; };
+		2CA603582694D73900BABA4D /* CourseInfoTabReviewsReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsReviewButton.swift; sourceTree = "<group>"; };
 		2CA6A1E5266624F4000AAA90 /* ReviewsAndWishlistContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsAndWishlistContainerViewController.swift; sourceTree = "<group>"; };
 		2CA6A1E72666551F000AAA90 /* UserCoursesReviewsWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsWidgetViewModel.swift; sourceTree = "<group>"; };
 		2CA6A1E926665AC2000AAA90 /* UserCoursesReviewsBlockSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsBlockSkeletonView.swift; sourceTree = "<group>"; };
@@ -8274,6 +8276,7 @@
 			isa = PBXGroup;
 			children = (
 				62E980B94835CC8DCAC9EEAC /* CourseInfoTabReviewsHeaderView.swift */,
+				2CA603582694D73900BABA4D /* CourseInfoTabReviewsReviewButton.swift */,
 				2C7F415E26947F9E00BD5C48 /* Summary */,
 			);
 			path = Header;
@@ -10583,6 +10586,7 @@
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
+				2CA603592694D73900BABA4D /* CourseInfoTabReviewsReviewButton.swift in Sources */,
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
 				2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */,
 				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,

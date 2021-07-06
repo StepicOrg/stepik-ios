@@ -3,6 +3,7 @@ import UIKit
 
 extension CourseInfoTabReviewsSummaryDistributionCountsView {
     struct Appearance {
+        let stackViewSpacing: CGFloat = 0
     }
 }
 
@@ -15,6 +16,7 @@ final class CourseInfoTabReviewsSummaryDistributionCountsView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
+        stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
 
@@ -51,8 +53,7 @@ final class CourseInfoTabReviewsSummaryDistributionCountsView: UIView {
     private func updateDistributions() {
         self.stackView.removeAllArrangedSubviews()
 
-        let slicedDistributions = Array(self.distributions[..<Self.maxDistributionsCount])
-        for (idx, distribution) in slicedDistributions.enumerated().reversed() {
+        for (idx, distribution) in self.distributions.prefix(Self.maxDistributionsCount).enumerated().reversed() {
             let itemView = CourseInfoTabReviewsSummaryDistributionCountItemView()
             itemView.title = distribution
             itemView.starsCount = idx + 1

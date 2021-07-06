@@ -135,9 +135,9 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         )
     }
 
-    private func makeSummaryViewModel(course: Course) -> CourseInfoTabReviewsSummaryViewModel {
+    private func makeSummaryViewModel(course: Course) -> CourseInfoTabReviewsSummaryViewModel? {
         guard let reviewSummary = course.reviewSummary else {
-            return .empty
+            return nil
         }
 
         return CourseInfoTabReviewsSummaryViewModel(
@@ -156,7 +156,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         currentUserReview: CourseReview?
     ) -> CourseInfoTabReviews.WriteCourseReviewState {
         if course.progressId == nil {
-            return .hide
+            return .summary
         }
 
         if currentUserReview != nil {

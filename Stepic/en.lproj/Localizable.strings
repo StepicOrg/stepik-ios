@@ -844,6 +844,8 @@ WriteCourseReviewPlaceholder = "Review";
 WriteCourseReviewRatingHint = "Tap a Star to Rate";
 WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more than 80% steps";
 
+CourseInfoTabReviewsOutOfRatingTitle = "out of 5";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 

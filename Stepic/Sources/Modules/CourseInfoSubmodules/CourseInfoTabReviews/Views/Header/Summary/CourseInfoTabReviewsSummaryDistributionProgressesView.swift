@@ -5,6 +5,9 @@ extension CourseInfoTabReviewsSummaryDistributionProgressesView {
     struct Appearance {
         let progressViewSecondaryColor = UIColor.stepikGreenFixed.withAlphaComponent(0.12)
         let progressViewMainColor = UIColor.stepikGreenFixed
+        let progressViewHeight: CGFloat = 4
+
+        let stackViewSpacing: CGFloat = 8
     }
 }
 
@@ -16,6 +19,7 @@ final class CourseInfoTabReviewsSummaryDistributionProgressesView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = self.appearance.stackViewSpacing
         stackView.distribution = .equalSpacing
         return stackView
     }()
@@ -62,6 +66,10 @@ final class CourseInfoTabReviewsSummaryDistributionProgressesView: UIView {
             progressView.progressTintColor = self.appearance.progressViewMainColor
 
             self.stackView.addArrangedSubview(progressView)
+            progressView.translatesAutoresizingMaskIntoConstraints = false
+            progressView.snp.makeConstraints { make in
+                make.height.equalTo(self.appearance.progressViewHeight)
+            }
         }
 
         self.invalidateIntrinsicContentSize()

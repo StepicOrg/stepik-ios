@@ -31,13 +31,10 @@ final class CourseInfoTabReviewsView: UIView {
 
     private lazy var headerView: CourseInfoTabReviewsHeaderView = {
         let headerView = CourseInfoTabReviewsHeaderView()
-
-        // Disable masks to prevent constraints breaking
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.snp.makeConstraints { make in
-            make.height.equalTo(150)
+            self.headerViewHeightConstraint = make.height.equalTo(self.appearance.headerViewHeight).constraint
         }
-
         headerView.onWriteReviewButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -45,7 +42,6 @@ final class CourseInfoTabReviewsView: UIView {
 
             strongSelf.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(strongSelf)
         }
-
         headerView.onEditReviewButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -53,7 +49,6 @@ final class CourseInfoTabReviewsView: UIView {
 
             strongSelf.delegate?.courseInfoTabReviewsViewDidRequestEditReview(strongSelf)
         }
-
         return headerView
     }()
 
@@ -94,6 +89,9 @@ final class CourseInfoTabReviewsView: UIView {
         return view
     }()
 
+    private var headerViewHeightConstraint: Constraint?
+    private var currentHeaderHeight: CGFloat?
+
     private var errorPlaceholderViewTopConstraint: Constraint?
 
     // Proxify delegates
@@ -102,7 +100,7 @@ final class CourseInfoTabReviewsView: UIView {
     private var shouldShowPaginationView = false
     var paginationView: UIView?
 
-    var writeCourseReviewState: CourseInfoTabReviews.WriteCourseReviewState = .hide {
+    var writeCourseReviewState: CourseInfoTabReviews.WriteCourseReviewState = .summary {
         didSet {
             switch self.writeCourseReviewState {
             case .write:
@@ -111,7 +109,7 @@ final class CourseInfoTabReviewsView: UIView {
             case .edit:
                 self.tableView.tableHeaderView = self.headerView
                 self.headerView.shouldShowEditReviewButton = true
-            case .hide:
+            case .summary:
                 self.tableView.tableHeaderView = self.headerView
                 self.headerView.shouldShowWriteReviewButton = false
                 self.headerView.shouldShowEditReviewButton = false
@@ -146,6 +144,13 @@ final class CourseInfoTabReviewsView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        let newHeaderHeight = self.headerView.intrinsicContentSize.height
+        if self.currentHeaderHeight != newHeaderHeight {
+            self.currentHeaderHeight = newHeaderHeight
+            self.headerViewHeightConstraint?.update(offset: newHeaderHeight)
+        }
+
         self.tableView.layoutTableHeaderView()
     }
 

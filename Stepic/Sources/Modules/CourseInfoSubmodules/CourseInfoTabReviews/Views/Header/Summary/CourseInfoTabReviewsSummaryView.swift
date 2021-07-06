@@ -4,6 +4,10 @@ import UIKit
 extension CourseInfoTabReviewsSummaryView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 16
+
+        let subtitleLabelFont = Typography.caption1Font
+        let subtitleLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let subtitleLabelInsets = LayoutInsets.default
     }
 }
 
@@ -12,7 +16,24 @@ final class CourseInfoTabReviewsSummaryView: UIView {
 
     private lazy var ratingView = CourseInfoTabReviewsSummaryRatingView()
 
+    private lazy var ratingSubtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.subtitleLabelFont
+        label.textColor = self.appearance.subtitleLabelTextColor
+        label.numberOfLines = 1
+        label.text = NSLocalizedString("CourseInfoTabReviewsOutOfRatingTitle", comment: "")
+        return label
+    }()
+
     private lazy var progressesView = CourseInfoTabReviewsSummaryDistributionProgressesView()
+
+    private lazy var progressesSubtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.subtitleLabelFont
+        label.textColor = self.appearance.subtitleLabelTextColor
+        label.numberOfLines = 1
+        return label
+    }()
 
     private lazy var distributionCountsView = CourseInfoTabReviewsSummaryDistributionCountsView()
 
@@ -24,7 +45,14 @@ final class CourseInfoTabReviewsSummaryView: UIView {
     }()
 
     override var intrinsicContentSize: CGSize {
-        self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        let height = stackViewIntrinsicContentSize.height
+            + self.ratingSubtitleLabel.intrinsicContentSize.height
+            + self.appearance.subtitleLabelInsets.top
+        return CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: height
+        )
     }
 
     init(
@@ -50,6 +78,7 @@ final class CourseInfoTabReviewsSummaryView: UIView {
         self.progressesView.progresses = viewModel.reviewsDistribution
             .map { Float($0) / Float(viewModel.reviewsCount) }
             .reversed()
+        self.progressesSubtitleLabel.text = viewModel.formattedReviewsCount
 
         self.distributionCountsView.distributions = viewModel.formattedReviewsDistribution
 
@@ -60,6 +89,8 @@ final class CourseInfoTabReviewsSummaryView: UIView {
 extension CourseInfoTabReviewsSummaryView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
+        self.addSubview(self.ratingSubtitleLabel)
+        self.addSubview(self.progressesSubtitleLabel)
 
         self.stackView.addArrangedSubview(self.ratingView)
         self.stackView.addArrangedSubview(self.progressesView)
@@ -69,12 +100,26 @@ extension CourseInfoTabReviewsSummaryView: ProgrammaticallyInitializableViewProt
     func makeConstraints() {
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
         }
 
         self.progressesView.translatesAutoresizingMaskIntoConstraints = false
         self.progressesView.snp.makeConstraints { make in
             make.width.greaterThanOrEqualToSuperview().multipliedBy(0.33)
+        }
+
+        self.ratingSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.ratingSubtitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.stackView.snp.bottom).offset(self.appearance.subtitleLabelInsets.top)
+            make.leading.equalTo(self.ratingView.snp.leading)
+            make.bottom.equalToSuperview()
+        }
+
+        self.progressesSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.progressesSubtitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.stackView.snp.bottom).offset(self.appearance.subtitleLabelInsets.top)
+            make.leading.equalTo(self.progressesView.snp.leading)
+            make.bottom.equalToSuperview()
         }
     }
 }

@@ -6,7 +6,7 @@ enum CourseInfoTabReviews {
     struct ReviewsResult {
         let reviews: [CourseInfoTabReviewsViewModel]
         let hasNextPage: Bool
-        let summary: CourseInfoTabReviewsSummaryViewModel
+        let summary: CourseInfoTabReviewsSummaryViewModel?
         let writeCourseReviewState: WriteCourseReviewState
     }
 
@@ -124,7 +124,7 @@ enum CourseInfoTabReviews {
     enum WriteCourseReviewState {
         case write
         case edit
-        case hide
+        case summary
         case banner(String)
     }
 }

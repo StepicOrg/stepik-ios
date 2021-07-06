@@ -82,8 +82,9 @@ extension CourseInfoTabReviewsSummaryRatingView: ProgrammaticallyInitializableVi
     func makeConstraints() {
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
             make.bottom.equalTo(self.starsView.snp.top).offset(-self.appearance.titleLabelInsets.bottom)
+            make.centerX.equalToSuperview()
         }
 
         self.starsView.translatesAutoresizingMaskIntoConstraints = false

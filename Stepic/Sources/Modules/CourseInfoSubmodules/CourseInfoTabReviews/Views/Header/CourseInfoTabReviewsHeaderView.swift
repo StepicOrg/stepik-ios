@@ -3,18 +3,17 @@ import UIKit
 
 extension CourseInfoTabReviewsHeaderView {
     struct Appearance {
-        let buttonSpacing: CGFloat = 16.0
+        let stackViewSpacing: CGFloat = 16
+        let stackViewInsets = LayoutInsets(top: 16)
 
-        let buttonTintColor = UIColor.stepikMaterialPrimaryText
-        let buttonFont = Typography.subheadlineFont
-        let buttonImageInsets = UIEdgeInsets(top: 1.5, left: 0, bottom: 0, right: 0)
-        let buttonTitleInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-        let buttonImageSize = CGSize(width: 15, height: 15)
+        let summaryViewInsets = LayoutInsets(horizontal: 16)
 
-        let labelFont = Typography.subheadlineFont
-        let labelTextColor = UIColor.stepikMaterialSecondaryText
+        let reviewButtonHeight: CGFloat = 44
+        let reviewButtonInsets = LayoutInsets(horizontal: 16)
 
-        let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+        let reviewDescriptionLabelFont = Typography.subheadlineFont
+        let reviewDescriptionLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let reviewDescriptionLabelInsets = LayoutInsets(horizontal: 16)
 
         let separatorHeight: CGFloat = 0.5
     }
@@ -25,37 +24,50 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = self.appearance.buttonSpacing
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
 
     private lazy var summaryView = CourseInfoTabReviewsSummaryView()
 
-    private lazy var reviewButton: ImageButton = {
-        let button = ImageButton()
-        button.image = UIImage(named: "course-info-reviews-write")?.withRenderingMode(.alwaysTemplate)
-        button.tintColor = self.appearance.buttonTintColor
+    private lazy var summaryContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
+
+    private lazy var summarySeparatorView: SeparatorView = {
+        let view = SeparatorView()
+        view.isHidden = true
+        return view
+    }()
+
+    private lazy var reviewButton: CourseInfoTabReviewsReviewButton = {
+        let button = CourseInfoTabReviewsReviewButton()
         button.title = NSLocalizedString("WriteCourseReviewActionCreate", comment: "")
-        button.font = self.appearance.buttonFont
-        button.imageInsets = self.appearance.buttonImageInsets
-        button.titleInsets = self.appearance.buttonTitleInsets
-        button.imageSize = self.appearance.buttonImageSize
         button.addTarget(self, action: #selector(self.onReviewButtonClicked), for: .touchUpInside)
-        button.isHidden = true
         return button
+    }()
+
+    private lazy var reviewButtonContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
     }()
 
     private lazy var reviewDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("WriteCourseReviewActionNotAllowedDescription", comment: "")
-        label.font = self.appearance.labelFont
-        label.textColor = self.appearance.labelTextColor
+        label.font = self.appearance.reviewDescriptionLabelFont
+        label.textColor = self.appearance.reviewDescriptionLabelTextColor
         label.numberOfLines = 0
         return label
     }()
 
-    private lazy var separatorView = SeparatorView()
+    private lazy var reviewDescriptionContainerView = UIView()
+
+    private lazy var reviewSeparatorView = SeparatorView()
 
     private var currentReviewAction = ReviewAction.write
 
@@ -75,24 +87,38 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
     var shouldShowWriteReviewBanner = true {
         didSet {
-            self.reviewDescriptionLabel.isHidden = !self.shouldShowWriteReviewBanner
+            self.reviewDescriptionContainerView.isHidden = !self.shouldShowWriteReviewBanner
+            self.invalidateIntrinsicContentSize()
         }
     }
 
     var writeReviewBannerText: String? {
         didSet {
             self.reviewDescriptionLabel.text = self.writeReviewBannerText
+            self.invalidateIntrinsicContentSize()
         }
     }
 
     var summaryViewModel: CourseInfoTabReviewsSummaryViewModel? {
         didSet {
             self.summaryView.configure(viewModel: self.summaryViewModel ?? .empty)
+            self.summaryContainerView.isHidden = self.summaryViewModel == nil
+            self.summarySeparatorView.isHidden = self.summaryViewModel == nil
+
+            self.invalidateIntrinsicContentSize()
         }
     }
 
     var onWriteReviewButtonClick: (() -> Void)?
     var onEditReviewButtonClick: (() -> Void)?
+
+    override var intrinsicContentSize: CGSize {
+        let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        return CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: self.appearance.stackViewInsets.top + stackViewIntrinsicContentSize.height
+        )
+    }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -112,12 +138,15 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
     private func updateReviewButton() {
         let isVisible = self.shouldShowWriteReviewButton || self.shouldShowEditReviewButton
+
         if isVisible {
             self.shouldShowWriteReviewBanner = false
         }
 
-        self.reviewButton.isHidden = !isVisible
+        self.reviewButtonContainerView.isHidden = !isVisible
         self.reviewButton.title = self.currentReviewAction.title
+
+        self.invalidateIntrinsicContentSize()
     }
 
     @objc
@@ -151,45 +180,45 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
 extension CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.addSubview(self.summaryView)
-
         self.addSubview(self.stackView)
-        self.addSubview(self.reviewDescriptionLabel)
-        self.addSubview(self.separatorView)
 
-        self.stackView.addArrangedSubview(self.reviewButton)
+        self.summaryContainerView.addSubview(self.summaryView)
+        self.reviewButtonContainerView.addSubview(self.reviewButton)
+        self.reviewDescriptionContainerView.addSubview(self.reviewDescriptionLabel)
+
+        self.stackView.addArrangedSubview(self.summaryContainerView)
+        self.stackView.addArrangedSubview(self.summarySeparatorView)
+        self.stackView.addArrangedSubview(self.reviewButtonContainerView)
+        self.stackView.addArrangedSubview(self.reviewDescriptionContainerView)
+        self.stackView.addArrangedSubview(self.reviewSeparatorView)
     }
 
     func makeConstraints() {
-        self.summaryView.translatesAutoresizingMaskIntoConstraints = false
-        self.summaryView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.top.equalTo(self.summaryView.snp.bottom).offset(self.appearance.insets.top)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.insets.right).priority(999)
+            make.edges.equalToSuperview().inset(self.appearance.stackViewInsets.edgeInsets)
+        }
+
+        self.summaryView.translatesAutoresizingMaskIntoConstraints = false
+        self.summaryView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.summaryViewInsets.edgeInsets)
+        }
+
+        self.summarySeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.summarySeparatorView.snp.makeConstraints { $0.height.equalTo(self.appearance.separatorHeight) }
+
+        self.reviewButton.translatesAutoresizingMaskIntoConstraints = false
+        self.reviewButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.reviewButtonInsets.edgeInsets)
+            make.height.equalTo(self.appearance.reviewButtonHeight)
         }
 
         self.reviewDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.reviewDescriptionLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.top.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
-            make.bottom.equalTo(self.separatorView.snp.top)
+            make.edges.equalToSuperview().inset(self.appearance.reviewDescriptionLabelInsets.edgeInsets)
         }
 
-        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.separatorView.snp.makeConstraints { make in
-            make.top
-                .equalTo(self.stackView.snp.bottom)
-                .offset(self.appearance.insets.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(self.appearance.separatorHeight)
-        }
+        self.reviewSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.reviewSeparatorView.snp.makeConstraints { $0.height.equalTo(self.appearance.separatorHeight) }
     }
 }
