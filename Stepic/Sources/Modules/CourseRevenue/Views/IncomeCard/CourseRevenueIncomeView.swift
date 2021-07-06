@@ -144,6 +144,7 @@ final class CourseRevenueIncomeView: UIView {
         self.onExpandContentButtonClick?(shouldExpandContent)
 
         UIView.animate(withDuration: Animation.expandContentAnimationDuration) {
+            self.monthItemView.shouldShowDetails = shouldExpandContent
             self.separatorView.isHidden = !shouldExpandContent
             self.totalItemView.isHidden = !shouldExpandContent
         }
