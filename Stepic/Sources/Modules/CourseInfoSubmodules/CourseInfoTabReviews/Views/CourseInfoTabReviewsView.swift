@@ -35,7 +35,7 @@ final class CourseInfoTabReviewsView: UIView {
         // Disable masks to prevent constraints breaking
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.headerViewHeight)
+            make.height.equalTo(150)
         }
 
         headerView.onWriteReviewButtonClick = { [weak self] in
@@ -112,12 +112,21 @@ final class CourseInfoTabReviewsView: UIView {
                 self.tableView.tableHeaderView = self.headerView
                 self.headerView.shouldShowEditReviewButton = true
             case .hide:
-                self.tableView.tableHeaderView = nil
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.shouldShowWriteReviewButton = false
+                self.headerView.shouldShowEditReviewButton = false
+                self.headerView.shouldShowWriteReviewBanner = false
             case .banner(let text):
                 self.tableView.tableHeaderView = self.headerView
                 self.headerView.writeReviewBannerText = text
                 self.headerView.shouldShowWriteReviewBanner = true
             }
+        }
+    }
+
+    var summaryViewModel: CourseInfoTabReviewsSummaryViewModel? {
+        didSet {
+            self.headerView.summaryViewModel = self.summaryViewModel
         }
     }
 

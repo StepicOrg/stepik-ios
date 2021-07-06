@@ -141,9 +141,11 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         }
 
         return CourseInfoTabReviewsSummaryViewModel(
-            rating: reviewSummary.average,
+            rating: reviewSummary.rating,
+            averageRating: reviewSummary.average,
             reviewsCount: reviewSummary.count,
             reviewsDistribution: reviewSummary.distribution,
+            formattedRating: String(format: "%.1f", reviewSummary.average),
             formattedReviewsCount: FormatterHelper.reviewSummariesCount(reviewSummary.count),
             formattedReviewsDistribution: reviewSummary.distribution.map(FormatterHelper.longNumber(_:))
         )

@@ -253,14 +253,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel {
-        let rating: Int = {
-            if let reviewsCount = course.reviewSummary?.count,
-               let averageRating = course.reviewSummary?.average,
-               reviewsCount > 0 {
-                return Int(round(averageRating))
-            }
-            return 0
-        }()
+        let rating = course.reviewSummary?.rating ?? 0
 
         let progress: CourseInfoProgressViewModel? = {
             if let progress = course.progress {

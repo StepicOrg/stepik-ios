@@ -30,6 +30,8 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         return stackView
     }()
 
+    private lazy var summaryView = CourseInfoTabReviewsSummaryView()
+
     private lazy var reviewButton: ImageButton = {
         let button = ImageButton()
         button.image = UIImage(named: "course-info-reviews-write")?.withRenderingMode(.alwaysTemplate)
@@ -80,6 +82,12 @@ final class CourseInfoTabReviewsHeaderView: UIView {
     var writeReviewBannerText: String? {
         didSet {
             self.reviewDescriptionLabel.text = self.writeReviewBannerText
+        }
+    }
+
+    var summaryViewModel: CourseInfoTabReviewsSummaryViewModel? {
+        didSet {
+            self.summaryView.configure(viewModel: self.summaryViewModel ?? .empty)
         }
     }
 
@@ -143,6 +151,8 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
 extension CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
+        self.addSubview(self.summaryView)
+
         self.addSubview(self.stackView)
         self.addSubview(self.reviewDescriptionLabel)
         self.addSubview(self.separatorView)
@@ -151,10 +161,17 @@ extension CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProto
     }
 
     func makeConstraints() {
+        self.summaryView.translatesAutoresizingMaskIntoConstraints = false
+        self.summaryView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.top.equalTo(self.summaryView.snp.bottom).offset(self.appearance.insets.top)
             make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.insets.right).priority(999)
         }
 
