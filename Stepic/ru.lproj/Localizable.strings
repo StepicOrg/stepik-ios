@@ -345,6 +345,9 @@ authors567890 = "авторов";
 reviews1 = "отзыв";
 reviews234 = "отзыва";
 reviews567890 = "отзывов";
+reviewSummaries1 = "оценка";
+reviewSummaries234 = "оценки";
+reviewSummaries567890 = "оценок";
 SearchPlaceholderEmpty = "<b>Упс</b>, мы не нашли ни одного курса по запросу";
 SearchPlaceholderError = "Ошибка при поиске курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
 TagPlaceholderError = "Ошибка при загрузке курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
@@ -462,6 +465,7 @@ ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/
 /* Course info */
 CourseInfoTitle = "О курсе";
 CourseInfoTryForFreeButtonTitle = "Попробовать бесплатно";
+CourseInfoCourseActionViewRevenueAlertTitle = "Посмотреть доходы";
 // Favorite
 CourseInfoCourseActionAddToFavoritesAlertTitle = "Добавить в избранное";
 CourseInfoCourseActionRemoveFromFavoritesAlertTitle = "Убрать из избранного";
@@ -514,10 +518,39 @@ CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
 
+/* Course revenue */
+CourseRevenueTitle = "Доходы";
+CourseRevenueTabPurchasesAndRefunds = "Покупки и возвраты";
+CourseRevenueTabMonthly = "По месяцам";
+CourseRevenueMonthIncomeDate = "Ваш доход за %@";
+CourseRevenueMonthTurnoverDate = "Продажи за %@";
+CourseRevenueTotalIncomeDate = "Доход с %@";
+CourseRevenueTotalTurnoverDate = "Продажи с %@";
+CourseRevenueEmptyMessage = "Здесь будет ваш доход";
+CourseRevenueDisclaimer = "Примечание: Все операции проходят по московскому времени (МСК, UTC+3).";
+CourseRevenueTransactionRefundedTitle = "Возврат";
+CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу платежей не найдено";
+
+/* CourseBenefitDetail */
+CourseBenefitDetailTitle = "Детали покупки";
+CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии";
+CourseBenefitDetailChannelZLink = "Переход по Z-Link";
+CourseBenefitDetailChannelStepikLink = "Переход по Stepik Link";
+CourseBenefitDetailChannelRefund = "Возврат";
+CourseBenefitDetailDateTitle = "Дата";
+CourseBenefitDetailCourseTitle = "Курс";
+CourseBenefitDetailBuyerTitle = "Покупатель";
+CourseBenefitDetailPaymentAmountTitle = "Платёж";
+CourseBenefitDetailPromoCodeTitle = "Промокод";
+CourseBenefitDetailChannelTitle = "Канал";
+CourseBenefitDetailAmountPercentTitle = "Ваш процент";
+CourseBenefitDetailAmountTitle = "Ваш доход";
+
 /* User Courses */
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";
 UserCoursesTabFavoritesTitle = "Избранные";
+UserCoursesTabDownloadedTitle = "Загруженные";
 UserCoursesTabArchivedTitle = "Архив";
 
 /* User Courses Reviews */
@@ -817,6 +850,8 @@ WriteCourseReviewActionDelete = "Удалить отзыв";
 WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
 WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
+
+CourseInfoTabReviewsOutOfRatingTitle = "из 5";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";

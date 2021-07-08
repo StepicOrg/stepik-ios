@@ -5,6 +5,13 @@ import SwiftyJSON
 final class CourseBenefitSummary: NSManagedObject, JSONSerializable {
     typealias IdType = Int
 
+    var isEmpty: Bool {
+        self.totalUserIncome.isZero
+            && self.totalTurnover.isZero
+            && self.monthUserIncome.isZero
+            && self.monthTurnover.isZero
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.update(json: json)
@@ -12,7 +19,7 @@ final class CourseBenefitSummary: NSManagedObject, JSONSerializable {
 
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
-        self.beginPaymentDate = Parser.dateFromTimedateJSON(json[JSONKey.beginPaymentDate.rawValue])
+        self.beginPaymentDate = json[JSONKey.beginPaymentDate.rawValue].string?.toISODate()?.date
         self.currentDate = Parser.dateFromTimedateJSON(json[JSONKey.currentDate.rawValue])
         self.totalIncome = json[JSONKey.totalIncome.rawValue].floatValue
         self.totalTurnover = json[JSONKey.totalTurnover.rawValue].floatValue

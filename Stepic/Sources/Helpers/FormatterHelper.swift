@@ -183,6 +183,19 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format reviews count with localized and pluralized suffix; 1 -> "1 review", 5 -> "5 reviews"
+    static func reviewSummariesCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("reviewSummaries1", comment: ""),
+                NSLocalizedString("reviewSummaries234", comment: ""),
+                NSLocalizedString("reviewSummaries567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
     // MARK: Date
 
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"
@@ -267,6 +280,11 @@ enum FormatterHelper {
         dateFormatter.dateFormat = "dd MMMM yyyy HH:mm"
 
         return dateFormatter.string(from: date)
+    }
+
+    /// Format date with full month and year; "18 October 2018 00:00"
+    static func dateStringWithFullMonthAndYear(_ dateInRegion: DateInRegion) -> String {
+        dateInRegion.toFormat("dd MMMM yyyy HH:mm")
     }
 
     /// Format a date to a string representation relative to another reference date (default current).

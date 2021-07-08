@@ -69,6 +69,17 @@ final class Course: NSManagedObject, IDFetchable {
             && self.scheduleType != "upcoming"
     }
 
+    var canWriteReview: Bool {
+        if let progress = self.progress {
+            return (Double(progress.numberOfStepsPassed) * 100.0 / Double(progress.numberOfSteps)) >= 80.0
+        }
+        return false
+    }
+
+    var isPurchased: Bool {
+        self.purchases.contains(where: { $0.isActive })
+    }
+
     var anyCertificateTreshold: Int? {
         self.certificateRegularThreshold ?? self.certificateDistinctionThreshold
     }

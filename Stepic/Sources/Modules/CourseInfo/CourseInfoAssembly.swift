@@ -76,6 +76,7 @@ final class CourseInfoAssembly: Assembly {
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,
             analytics: StepikAnalytics.shared,
+            remoteConfig: RemoteConfig.shared,
             courseViewSource: self.courseViewSource
         )
         notificationsRegistrationService.delegate = interactor
@@ -96,6 +97,6 @@ final class CourseInfoAssembly: Assembly {
         let adaptiveManager = AdaptiveStorageManager()
         return adaptiveManager.canOpenInAdaptiveMode(courseId: self.courseID)
             ? [.info, .reviews]
-            : [.info, .syllabus, .reviews]
+            : [.info, .reviews, .syllabus]
     }
 }

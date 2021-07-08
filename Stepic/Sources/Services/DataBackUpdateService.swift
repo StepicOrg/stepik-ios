@@ -11,6 +11,7 @@ enum DataBackUpdateTarget {
     case userCourse(UserCourse)
     case visitedCourse
     case wishlist([Course.IdType])
+    case downloads
 }
 
 /// Affected fields in updated object
@@ -65,6 +66,8 @@ protocol DataBackUpdateServiceProtocol: AnyObject {
     func triggerVisitedCourseListUpdate()
     /// Report about wishlist update
     func triggerWishlistUpdate(coursesIDs: [Course.IdType])
+    /// Report about downloads update
+    func triggerDownloadsUpdated()
 }
 
 final class DataBackUpdateService: DataBackUpdateServiceProtocol {
@@ -214,6 +217,10 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
 
     func triggerWishlistUpdate(coursesIDs: [Course.IdType]) {
         self.postNotification(target: .wishlist(coursesIDs))
+    }
+
+    func triggerDownloadsUpdated() {
+        self.postNotification(target: .downloads)
     }
 
     // MARK: Private methods

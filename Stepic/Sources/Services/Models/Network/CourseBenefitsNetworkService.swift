@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseBenefitsNetworkServiceProtocol: AnyObject {
     func fetch(courseID: Course.IdType, page: Int) -> Promise<([CourseBenefit], Meta)>
     func fetch(page: Int) -> Promise<([CourseBenefit], Meta)>
+    func fetch(ids: [CourseBenefit.IdType]) -> Promise<[CourseBenefit]>
 }
 
 extension CourseBenefitsNetworkServiceProtocol {
@@ -29,5 +30,9 @@ final class CourseBenefitsNetworkService: CourseBenefitsNetworkServiceProtocol {
 
     func fetch(page: Int) -> Promise<([CourseBenefit], Meta)> {
         self.courseBenefitsAPI.retrieve(courseID: nil, page: page)
+    }
+
+    func fetch(ids: [CourseBenefit.IdType]) -> Promise<[CourseBenefit]> {
+        self.courseBenefitsAPI.retrieve(ids: ids)
     }
 }

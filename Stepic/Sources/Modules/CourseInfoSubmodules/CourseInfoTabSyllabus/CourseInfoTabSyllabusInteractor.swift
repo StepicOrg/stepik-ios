@@ -12,6 +12,7 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
+    private static let downloadsDataBackUpdateDebounceInterval: Double = 0.1
     private static let maxConcurrentOperations = 3
 
     weak var moduleOutput: CourseInfoTabSyllabusOutputProtocol?
@@ -69,6 +70,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.DownloadUpdate"
     )
 
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
+    private let downloadsDataBackUpdateDebouncer = Debouncer(
+        delay: CourseInfoTabSyllabusInteractor.downloadsDataBackUpdateDebounceInterval
+    )
+
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
         provider: CourseInfoTabSyllabusProviderProtocol,
@@ -77,6 +83,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         tooltipStorageManager: TooltipStorageManagerProtocol,
         useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol,
         syllabusDownloadsService: SyllabusDownloadsServiceProtocol
     ) {
         self.presenter = presenter
@@ -86,6 +93,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.networkReachabilityService = networkReachabilityService
         self.tooltipStorageManager = tooltipStorageManager
         self.useCellularDataForDownloadsStorageManager = useCellularDataForDownloadsStorageManager
+        self.dataBackUpdateService = dataBackUpdateService
 
         self.syllabusDownloadsService = syllabusDownloadsService
         self.syllabusDownloadsService.delegate = self
@@ -628,6 +636,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType { "\(unitID)" }
 
+    private func triggerDownloadsDataBackUpdated() {
+        self.downloadsDataBackUpdateDebouncer.action = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.dataBackUpdateService.triggerDownloadsUpdated()
+        }
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
     }
@@ -726,6 +744,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
     ) {
         self.reportedToAnalyticsVideoDownloadIDs.remove(videoID)
         self.analytics.send(isCompleted ? .videoDownloadSucceeded : .videoDownloadFailed)
+
+        self.triggerDownloadsDataBackUpdated()
     }
 
     func syllabusDownloadsService(
@@ -733,6 +753,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         didReceiveCompletion isCompleted: Bool,
         forUnitWithID unitID: Unit.IdType
     ) {
+        self.triggerDownloadsDataBackUpdated()
+
         guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit else {
             return
         }
@@ -746,6 +768,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         didReceiveCompletion isCompleted: Bool,
         forSectionWithID sectionID: Section.IdType
     ) {
+        self.triggerDownloadsDataBackUpdated()
+
         guard let section = self.currentSections[self.getUniqueIdentifierBySectionID(sectionID)] else {
             return
         }
@@ -936,6 +960,7 @@ extension CourseInfoTabSyllabusInteractor {
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
             self.updateSyllabusHeader()
+            self.triggerDownloadsDataBackUpdated()
         }.catch { error in
             print("CourseInfoTabSyllabusInteractor :: error while cancelling unit = \(unitID), error = \(error)")
         }
@@ -954,6 +979,7 @@ extension CourseInfoTabSyllabusInteractor {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                 self.updateSectionDownloadState(section)
                 self.updateSyllabusHeader()
+                self.triggerDownloadsDataBackUpdated()
             }
         }.catch { error in
             print("CourseInfoTabSyllabusInteractor :: error while cancelling section = \(sectionID), error = \(error)")
@@ -971,6 +997,7 @@ extension CourseInfoTabSyllabusInteractor {
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
             self.updateSyllabusHeader()
+            self.triggerDownloadsDataBackUpdated()
         }.catch { error in
             print("CourseInfoTabSyllabusInteractor :: error while removing cached unit = \(unitID), error = \(error)")
         }
@@ -987,6 +1014,7 @@ extension CourseInfoTabSyllabusInteractor {
         }.ensure {
             self.updateSectionDownloadState(section)
             self.updateSyllabusHeader()
+            self.triggerDownloadsDataBackUpdated()
         }.catch { error in
             print("CourseInfoTabSyllabusInteractor :: error while removing cached section = \(sectionID), error = \(error)")
         }
@@ -1007,6 +1035,7 @@ extension CourseInfoTabSyllabusInteractor {
         }.ensure {
             self.updateSyllabusHeader()
             course.sections.forEach { self.updateSectionDownloadState($0) }
+            self.triggerDownloadsDataBackUpdated()
         }.catch { error in
             print("CourseInfoTabSyllabusInteractor :: error while removing cached course = \(courseID), error = \(error)")
         }

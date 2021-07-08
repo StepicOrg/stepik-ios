@@ -38,6 +38,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     private let remoteConfig: RemoteConfig
 
     private let downloadsDeletionService: DownloadsDeletionServiceProtocol
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var settingsData: Settings.SettingsData {
         .init(
@@ -66,7 +67,8 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         analytics: Analytics,
         userAccountService: UserAccountServiceProtocol,
         remoteConfig: RemoteConfig,
-        downloadsDeletionService: DownloadsDeletionServiceProtocol
+        downloadsDeletionService: DownloadsDeletionServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -74,6 +76,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         self.userAccountService = userAccountService
         self.remoteConfig = remoteConfig
         self.downloadsDeletionService = downloadsDeletionService
+        self.dataBackUpdateService = dataBackUpdateService
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
@@ -181,6 +184,8 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             self.downloadsDeletionService.deleteAllDownloads()
         }.done {
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: true))
+        }.ensure {
+            self.dataBackUpdateService.triggerDownloadsUpdated()
         }.catch { _ in
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: false))
         }
