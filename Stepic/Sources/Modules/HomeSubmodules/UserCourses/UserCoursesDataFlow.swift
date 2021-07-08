@@ -1,10 +1,11 @@
 import Foundation
 
 enum UserCourses {
-    enum Tab: CaseIterable {
-        case allCourses
+    enum Tab: String, CaseIterable {
+        case allCourses = "all"
         case favorites
-        case archived
+        case downloaded
+        case archived = "archive"
 
         var title: String {
             switch self {
@@ -12,6 +13,8 @@ enum UserCourses {
                 return NSLocalizedString("UserCoursesTabAllCoursesTitle", comment: "")
             case .favorites:
                 return NSLocalizedString("UserCoursesTabFavoritesTitle", comment: "")
+            case .downloaded:
+                return NSLocalizedString("UserCoursesTabDownloadedTitle", comment: "")
             case .archived:
                 return NSLocalizedString("UserCoursesTabArchivedTitle", comment: "")
             }

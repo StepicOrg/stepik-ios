@@ -25,6 +25,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                             )
                         },
                         hasNextPage: data.hasNextPage,
+                        summary: self.makeSummaryViewModel(course: data.course),
                         writeCourseReviewState: self.getWriteCourseReviewState(
                             course: data.course,
                             currentUserReview: data.currentUserReview
@@ -49,6 +50,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                         )
                     },
                     hasNextPage: response.hasNextPage,
+                    summary: self.makeSummaryViewModel(course: response.course),
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
                         currentUserReview: response.currentUserReview
@@ -133,12 +135,28 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         )
     }
 
+    private func makeSummaryViewModel(course: Course) -> CourseInfoTabReviewsSummaryViewModel? {
+        guard let reviewSummary = course.reviewSummary else {
+            return nil
+        }
+
+        return CourseInfoTabReviewsSummaryViewModel(
+            rating: reviewSummary.rating,
+            averageRating: reviewSummary.average,
+            reviewsCount: reviewSummary.count,
+            reviewsDistribution: reviewSummary.distribution,
+            formattedRating: String(format: "%.1f", reviewSummary.average),
+            formattedReviewsCount: FormatterHelper.reviewSummariesCount(reviewSummary.count),
+            formattedReviewsDistribution: reviewSummary.distribution.map(FormatterHelper.longNumber(_:))
+        )
+    }
+
     private func getWriteCourseReviewState(
         course: Course,
         currentUserReview: CourseReview?
     ) -> CourseInfoTabReviews.WriteCourseReviewState {
         if course.progressId == nil {
-            return .hide
+            return .summary
         }
 
         if currentUserReview != nil {

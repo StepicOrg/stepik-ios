@@ -13,6 +13,10 @@ import SwiftyJSON
 final class CourseReviewSummary: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
 
+    var rating: Int {
+        self.count > 0 ? Int(round(self.average)) : 0
+    }
+
     required convenience init(json: JSON) {
         self.init()
         self.initialize(json)

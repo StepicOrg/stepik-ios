@@ -32,7 +32,8 @@ final class SettingsAssembly: Assembly {
             analytics: StepikAnalytics.shared,
             userAccountService: UserAccountService(),
             remoteConfig: .shared,
-            downloadsDeletionService: DownloadsDeletionService()
+            downloadsDeletionService: DownloadsDeletionService(),
+            dataBackUpdateService: DataBackUpdateService.default
         )
         let viewController = SettingsViewController(
             interactor: interactor,

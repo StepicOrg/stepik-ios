@@ -339,6 +339,9 @@ authors567890 = "авторов";
 reviews1 = "отзыв";
 reviews234 = "отзыва";
 reviews567890 = "отзывов";
+reviewSummaries1 = "оценка";
+reviewSummaries234 = "оценки";
+reviewSummaries567890 = "оценок";
 SearchPlaceholderEmpty = "<b>Упс</b>, мы не нашли ни одного курса по запросу";
 SearchPlaceholderError = "Ошибка при поиске курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
 TagPlaceholderError = "Ошибка при загрузке курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
@@ -541,6 +544,7 @@ CourseBenefitDetailAmountTitle = "Ваш доход";
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";
 UserCoursesTabFavoritesTitle = "Избранные";
+UserCoursesTabDownloadedTitle = "Загруженные";
 UserCoursesTabArchivedTitle = "Архив";
 
 /* User Courses Reviews */
@@ -840,6 +844,8 @@ WriteCourseReviewActionDelete = "Удалить отзыв";
 WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
 WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
+
+CourseInfoTabReviewsOutOfRatingTitle = "из 5";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
