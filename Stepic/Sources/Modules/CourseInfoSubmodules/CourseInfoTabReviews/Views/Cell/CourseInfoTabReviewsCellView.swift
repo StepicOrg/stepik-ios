@@ -21,7 +21,7 @@ extension CourseInfoTabReviewsCellView {
         let textLabelFont = Typography.subheadlineFont
         let textLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 20)
 
-        let clearStarsColor = UIColor.stepikMaterialPrimaryText
+        let clearStarsColor = UIColor.stepikMaterialDisabledText
     }
 }
 

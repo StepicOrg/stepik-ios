@@ -3,7 +3,7 @@ import UIKit
 
 extension CourseInfoTabReviewsSummaryDistributionCountItemView {
     struct Appearance {
-        let titleLabelFont = Typography.caption2Font
+        let titleLabelFont = UIFont.systemFont(ofSize: 11)
         let titleLabelTextColor = UIColor.stepikMaterialSecondaryText
 
         let starsSpacing: CGFloat = 3
@@ -86,6 +86,7 @@ extension CourseInfoTabReviewsSummaryDistributionCountItemView: Programmatically
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview()
+            make.height.equalTo(self.appearance.titleLabelFont.pointSize)
         }
 
         self.starsView.translatesAutoresizingMaskIntoConstraints = false

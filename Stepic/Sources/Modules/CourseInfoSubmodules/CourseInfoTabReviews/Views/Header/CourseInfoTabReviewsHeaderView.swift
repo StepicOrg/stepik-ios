@@ -75,6 +75,8 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         didSet {
             self.currentReviewAction = .write
             self.updateReviewButton()
+            self.updateReviewSeparatorVisibility()
+            self.invalidateIntrinsicContentSize()
         }
     }
 
@@ -82,12 +84,15 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         didSet {
             self.currentReviewAction = .edit
             self.updateReviewButton()
+            self.updateReviewSeparatorVisibility()
+            self.invalidateIntrinsicContentSize()
         }
     }
 
     var shouldShowWriteReviewBanner = true {
         didSet {
             self.reviewDescriptionContainerView.isHidden = !self.shouldShowWriteReviewBanner
+            self.updateReviewSeparatorVisibility()
             self.invalidateIntrinsicContentSize()
         }
     }
@@ -147,6 +152,11 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         self.reviewButton.title = self.currentReviewAction.title
 
         self.invalidateIntrinsicContentSize()
+    }
+
+    private func updateReviewSeparatorVisibility() {
+        self.reviewSeparatorView.isHidden = self.reviewButtonContainerView.isHidden
+            && self.reviewDescriptionContainerView.isHidden
     }
 
     @objc

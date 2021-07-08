@@ -5,6 +5,11 @@ extension CourseInfoTabReviewsSummaryView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 16
 
+        let progressesViewWidthRatio: CGFloat = 0.33
+        let progressesViewInsets = LayoutInsets(top: 3.5)
+
+        let distributionCountsViewInsets = LayoutInsets(bottom: -3.5)
+
         let subtitleLabelFont = Typography.caption1Font
         let subtitleLabelTextColor = UIColor.stepikMaterialSecondaryText
         let subtitleLabelInsets = LayoutInsets.default
@@ -27,6 +32,8 @@ final class CourseInfoTabReviewsSummaryView: UIView {
 
     private lazy var progressesView = CourseInfoTabReviewsSummaryDistributionProgressesView()
 
+    private lazy var progressesContainerView = UIView()
+
     private lazy var progressesSubtitleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.subtitleLabelFont
@@ -36,6 +43,8 @@ final class CourseInfoTabReviewsSummaryView: UIView {
     }()
 
     private lazy var distributionCountsView = CourseInfoTabReviewsSummaryDistributionCountsView()
+
+    private lazy var distributionCountsContainerView = UIView()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -92,9 +101,12 @@ extension CourseInfoTabReviewsSummaryView: ProgrammaticallyInitializableViewProt
         self.addSubview(self.ratingSubtitleLabel)
         self.addSubview(self.progressesSubtitleLabel)
 
+        self.progressesContainerView.addSubview(self.progressesView)
+        self.distributionCountsContainerView.addSubview(self.distributionCountsView)
+
         self.stackView.addArrangedSubview(self.ratingView)
-        self.stackView.addArrangedSubview(self.progressesView)
-        self.stackView.addArrangedSubview(self.distributionCountsView)
+        self.stackView.addArrangedSubview(self.progressesContainerView)
+        self.stackView.addArrangedSubview(self.distributionCountsContainerView)
     }
 
     func makeConstraints() {
@@ -105,7 +117,13 @@ extension CourseInfoTabReviewsSummaryView: ProgrammaticallyInitializableViewProt
 
         self.progressesView.translatesAutoresizingMaskIntoConstraints = false
         self.progressesView.snp.makeConstraints { make in
-            make.width.greaterThanOrEqualToSuperview().multipliedBy(0.33)
+            make.edges.equalToSuperview().inset(self.appearance.progressesViewInsets.edgeInsets)
+            make.width.greaterThanOrEqualToSuperview().multipliedBy(self.appearance.progressesViewWidthRatio)
+        }
+
+        self.distributionCountsView.translatesAutoresizingMaskIntoConstraints = false
+        self.distributionCountsView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.distributionCountsViewInsets.edgeInsets)
         }
 
         self.ratingSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false

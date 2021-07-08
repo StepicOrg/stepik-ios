@@ -7,7 +7,7 @@ extension CourseInfoTabReviewsSummaryRatingView {
         let titleLabelTextColor = UIColor.stepikMaterialPrimaryText
         let titleLabelInsets = LayoutInsets(bottom: 4)
 
-        let clearStarsColor = UIColor.stepikMaterialPrimaryText
+        let clearStarsColor = UIColor.stepikMaterialDisabledText
         let starsSize = CGSize(width: 11, height: 11)
     }
 }
