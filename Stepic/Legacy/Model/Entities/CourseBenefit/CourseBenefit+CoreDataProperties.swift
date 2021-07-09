@@ -97,6 +97,7 @@ extension CourseBenefit {
         }
     }
 
+    @available(*, deprecated, message: "Removed from API")
     var totalIncome: Float {
         get {
             self.managedTotalIncome?.floatValue ?? 0
