@@ -17,6 +17,7 @@ extension CourseRevenueTabMonthlyTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CourseRevenueTabMonthlyTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.updateConstraintsIfNeeded()
+        cell.selectionStyle = .none
 
         let viewModel = self.viewModels[indexPath.row]
         cell.configure(viewModel: viewModel)

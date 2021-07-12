@@ -75,7 +75,7 @@ final class CourseRevenueTabMonthlyView: UIView {
 
         if isLoading {
             DispatchQueue.main.async {
-                self.tableView.skeleton.viewBuilder = { CourseRevenueTabPurchasesCellSkeletonView() }
+                self.tableView.skeleton.viewBuilder = { CourseRevenueTabMonthlyCellSkeletonView() }
                 self.tableView.skeleton.show()
             }
         }

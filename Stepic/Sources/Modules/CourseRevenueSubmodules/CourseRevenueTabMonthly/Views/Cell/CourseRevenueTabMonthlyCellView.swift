@@ -55,7 +55,7 @@ final class CourseRevenueTabMonthlyCellView: UIView {
     func configure(viewModel: CourseRevenueTabMonthlyViewModel?) {
         self.totalView.title = viewModel?.formattedDate
         self.totalView.rightDetailTitle = viewModel?.formattedTotalIncome
-        self.totalView.style = (viewModel?.totalIncome ?? 0) >= 0 ? .yellowGreen : .red
+        self.totalView.style = (viewModel?.totalIncome ?? 0) < (viewModel?.totalRefunds ?? 0) ? .red : .yellowGreen
 
         self.itemsStackView.removeAllArrangedSubviews()
         let items: [Item] = [

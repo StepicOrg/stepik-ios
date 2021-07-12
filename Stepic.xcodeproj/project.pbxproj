@@ -980,6 +980,7 @@
 		2CC8678725E1504000762416 /* SubmissionsFilterQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8678625E1504000762416 /* SubmissionsFilterQuery.swift */; };
 		2CCBDBE524AF93B8001A5A83 /* NewProfileDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCBDBE424AF93B8001A5A83 /* NewProfileDetailsViewModel.swift */; };
 		2CCC505E21E8EA88004D9FC1 /* PersonalDeadlinesTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */; };
+		2CCD26A9269CB9A600053536 /* CourseRevenueTabMonthlyCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD26A8269CB9A600053536 /* CourseRevenueTabMonthlyCellSkeletonView.swift */; };
 		2CCDD1FE24DBB35700A48EE0 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDD1FD24DBB35700A48EE0 /* Protected.swift */; };
 		2CCDD20124DBB61100A48EE0 /* ProtectedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCDD20024DBB61100A48EE0 /* ProtectedTests.swift */; };
 		2CCDD80024F8A59B006644A8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CCDD80224F8A59B006644A8 /* InfoPlist.strings */; };
@@ -2881,6 +2882,7 @@
 		2CC925F9685393FA44977549 /* NewProfileCertificatesAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesAssembly.swift; sourceTree = "<group>"; };
 		2CCBDBE424AF93B8001A5A83 /* NewProfileDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileDetailsViewModel.swift; sourceTree = "<group>"; };
 		2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_language_code_v27.xcdatamodel; sourceTree = "<group>"; };
+		2CCD26A8269CB9A600053536 /* CourseRevenueTabMonthlyCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabMonthlyCellSkeletonView.swift; sourceTree = "<group>"; };
 		2CCDD1FD24DBB35700A48EE0 /* Protected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protected.swift; sourceTree = "<group>"; };
 		2CCDD20024DBB61100A48EE0 /* ProtectedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtectedTests.swift; sourceTree = "<group>"; };
 		2CCDD80124F8A59B006644A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -4322,6 +4324,7 @@
 			isa = PBXGroup;
 			children = (
 				2C3E5F632689DA7900612728 /* CourseRevenueHeaderSkeletonView.swift */,
+				2CCD26A8269CB9A600053536 /* CourseRevenueTabMonthlyCellSkeletonView.swift */,
 				2CE05968268A1DCB00369E59 /* CourseRevenueTabPurchasesCellSkeletonView.swift */,
 			);
 			path = CourseRevenue;
@@ -11560,6 +11563,7 @@
 				62E989C07C8092DDD028E286 /* SolutionDataFlow.swift in Sources */,
 				2CEE66B32661180E0079F03B /* UserCoursesReviewsLeavedReviewCellView.swift in Sources */,
 				62E9874B2367F47B416932CF /* SolutionInteractor.swift in Sources */,
+				2CCD26A9269CB9A600053536 /* CourseRevenueTabMonthlyCellSkeletonView.swift in Sources */,
 				2CB31C72256D11E500265CC5 /* CourseListsNetworkService.swift in Sources */,
 				62E98CB8722C1DBC5B578107 /* SolutionPresenter.swift in Sources */,
 				62E984635A642A7C708C8693 /* SolutionProvider.swift in Sources */,
