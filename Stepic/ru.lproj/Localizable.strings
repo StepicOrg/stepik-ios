@@ -540,6 +540,13 @@ CourseBenefitDetailChannelTitle = "Канал";
 CourseBenefitDetailAmountPercentTitle = "Ваш процент";
 CourseBenefitDetailAmountTitle = "Ваш доход";
 
+/* CourseRevenueTabMonthly */
+CourseRevenueTabMonthlyTurnoverTitle = "Продажи";
+CourseRevenueTabMonthlyRefundsTitle = "Возвраты";
+CourseRevenueTabMonthlyIncomeTitle = "Покупки";
+CourseRevenueTabMonthlyChannelStepikTitle = "Переходы через Stepik";
+CourseRevenueTabMonthlyChannelZLinkTitle = "Переходы через Z-Link";
+
 /* User Courses */
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";

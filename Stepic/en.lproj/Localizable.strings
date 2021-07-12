@@ -538,6 +538,13 @@ CourseBenefitDetailChannelTitle = "Channel";
 CourseBenefitDetailAmountPercentTitle = "Your share";
 CourseBenefitDetailAmountTitle = "Your earnings";
 
+/* CourseRevenueTabMonthly */
+CourseRevenueTabMonthlyTurnoverTitle = "Sales";
+CourseRevenueTabMonthlyRefundsTitle = "Refunds";
+CourseRevenueTabMonthlyIncomeTitle = "Purchases";
+CourseRevenueTabMonthlyChannelStepikTitle = "Came via Stepik";
+CourseRevenueTabMonthlyChannelZLinkTitle = "Came via Z-Link";
+
 /* User Courses */
 UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";

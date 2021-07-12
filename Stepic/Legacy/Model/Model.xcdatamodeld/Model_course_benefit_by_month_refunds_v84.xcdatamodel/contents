@@ -153,6 +153,8 @@
         <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedCourseBenefits" inverseEntity="Course" syncable="YES"/>
     </entity>
     <entity name="CourseBenefitByMonth" representedClassName=".CourseBenefitByMonth" syncable="YES">
+        <attribute name="managedCountCoursePayments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedCountInvoicePayments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCountNonZPayments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCountPayments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCountRefunds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -161,6 +163,7 @@
         <attribute name="managedDateString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedMonthNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedTotalRefunds" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTotalTurnover" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTotalUserIncome" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -513,7 +516,7 @@
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
         <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1004"/>
         <element name="CourseBenefit" positionX="-450" positionY="-234" width="128" height="239"/>
-        <element name="CourseBenefitByMonth" positionX="-450" positionY="-234" width="128" height="239"/>
+        <element name="CourseBenefitByMonth" positionX="-450" positionY="-234" width="128" height="284"/>
         <element name="CourseBenefitSummary" positionX="-450" positionY="-234" width="128" height="194"/>
         <element name="CourseList" positionX="-14.1953125" positionY="793.859375" width="128" height="149"/>
         <element name="CoursePurchase" positionX="-450" positionY="-234" width="128" height="133"/>
