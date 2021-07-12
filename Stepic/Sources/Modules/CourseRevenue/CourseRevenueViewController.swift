@@ -149,8 +149,9 @@ final class CourseRevenueViewController: UIViewController, ControllerWithStepikP
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
         case .monthly:
-            controller = UIViewController()
-            moduleInput = nil
+            let assembly = CourseRevenueTabMonthlyAssembly()
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
         }
 
         self.submodulesControllers[index] = controller

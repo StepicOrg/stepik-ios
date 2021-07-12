@@ -11,8 +11,6 @@ protocol SubmissionsInteractorProtocol {
 }
 
 final class SubmissionsInteractor: SubmissionsInteractorProtocol {
-    typealias PaginationState = (page: Int, hasNext: Bool)
-
     private static let searchDebounceInterval: TimeInterval = 1
 
     weak var moduleOutput: SubmissionsOutputProtocol?
