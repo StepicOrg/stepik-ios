@@ -74,6 +74,7 @@ final class CourseRevenueTabMonthlyPresenter: CourseRevenueTabMonthlyPresenterPr
             formattedTotalIncome: formattedTotalIncome,
             formattedTotalTurnover: formattedTotalTurnover,
             formattedTotalRefunds: formattedTotalRefunds,
+            totalIncome: courseBenefitByMonth.totalUserIncome,
             countPayments: courseBenefitByMonth.countPayments,
             countNonZPayments: courseBenefitByMonth.countNonZPayments,
             countZPayments: courseBenefitByMonth.countZPayments

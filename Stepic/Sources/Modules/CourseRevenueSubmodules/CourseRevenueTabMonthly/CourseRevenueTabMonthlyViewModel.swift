@@ -8,6 +8,7 @@ struct CourseRevenueTabMonthlyViewModel {
     let formattedTotalTurnover: String
     let formattedTotalRefunds: String
 
+    let totalIncome: Float
     let countPayments: Int
     let countNonZPayments: Int
     let countZPayments: Int

@@ -6,7 +6,7 @@ extension CourseRevenueTabMonthlyCellView {
         let totalViewInsets = LayoutInsets.default
 
         let itemsStackViewSpacing: CGFloat = 16
-        let itemsStackViewInsets = LayoutInsets(top: 24, left: 32, bottom: 16, right: 32)
+        let itemsStackViewInsets = LayoutInsets(top: 16, left: 32, bottom: 16, right: 32)
     }
 }
 
@@ -55,6 +55,7 @@ final class CourseRevenueTabMonthlyCellView: UIView {
     func configure(viewModel: CourseRevenueTabMonthlyViewModel?) {
         self.totalView.title = viewModel?.formattedDate
         self.totalView.rightDetailTitle = viewModel?.formattedTotalIncome
+        self.totalView.style = (viewModel?.totalIncome ?? 0) >= 0 ? .yellowGreen : .red
 
         self.itemsStackView.removeAllArrangedSubviews()
         let items: [Item] = [
