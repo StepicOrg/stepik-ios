@@ -992,6 +992,7 @@
 		2CD6E25B234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */; };
 		2CD6E25D234E388B00F49303 /* EmailAddressesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */; };
 		2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */; };
+		2CD80A7E269C47670047AE3C /* PaginationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD80A7D269C47670047AE3C /* PaginationState.swift */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
@@ -2887,6 +2888,7 @@
 		2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmailAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesPersistenceService.swift; sourceTree = "<group>"; };
 		2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesNetworkService.swift; sourceTree = "<group>"; };
+		2CD80A7D269C47670047AE3C /* PaginationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationState.swift; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
@@ -4833,6 +4835,7 @@
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2C05FBDC2523B21E004FD313 /* FontWeightNameMapping.swift */,
 				2C130E3B2512402B00389AEB /* LaunchArguments.swift */,
+				2CD80A7D269C47670047AE3C /* PaginationState.swift */,
 				2CEDC660260898F700B0B018 /* PlatformType.swift */,
 				2C5D340725C98A6800372C61 /* PromoCode.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
@@ -10874,6 +10877,7 @@
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
+				2CD80A7E269C47670047AE3C /* PaginationState.swift in Sources */,
 				088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */,
