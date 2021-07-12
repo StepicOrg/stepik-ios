@@ -10,7 +10,12 @@ final class CourseRevenueTabMonthlyAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = CourseRevenueTabMonthlyProvider()
+        let provider = CourseRevenueTabMonthlyProvider(
+            courseBenefitByMonthsPersistenceService: CourseBenefitByMonthsPersistenceService(),
+            courseBenefitByMonthsNetworkService: CourseBenefitByMonthsNetworkService(
+                courseBenefitByMonthsAPI: CourseBenefitByMonthsAPI()
+            )
+        )
         let presenter = CourseRevenueTabMonthlyPresenter()
         let interactor = CourseRevenueTabMonthlyInteractor(presenter: presenter, provider: provider)
         let viewController = CourseRevenueTabMonthlyViewController(interactor: interactor)
