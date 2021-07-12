@@ -6,8 +6,11 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel)
     func displayModuleErrorState(viewModel: Explore.CourseListStateUpdate.ViewModel)
     func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel)
-    func displayCourseListFilter(viewModel: Explore.CourseListFilterPresentation.ViewModel)
-    func displaySearchResultsCourseListFilters(viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel)
+    func displayExploreCourseListFilter(viewModel: Explore.ExploreCourseListFilterPresentation.ViewModel)
+    func displaySearchResultsCourseListFilter(viewModel: Explore.SearchResultsCourseListFilterPresentation.ViewModel)
+    func displaySearchResultsCourseListFiltersUpdateResult(
+        viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel
+    )
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -36,6 +39,26 @@ final class ExploreViewController: BaseExploreViewController {
         action: #selector(self.ipadCancelSearchButtonClicked)
     )
 
+    private lazy var exploreCourseListFilterOutput: CourseListFilterOutputProtocol = {
+        let output = ExploreCourseListFilterOutput()
+        output.onFiltersChanged = { [weak self] filters in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.exploreInteractor?.doSearchResultsCourseListFiltersUpdate(request: .init(filters: filters))
+
+            strongSelf.showSearchResults()
+            strongSelf.searchResultsModuleInput?.searchStarted()
+            strongSelf.searchResultsModuleInput?.search(query: "")
+        }
+        return output
+    }()
+
+    private var isSearchResultsHidden: Bool {
+        self.searchResultsController?.view.isHidden ?? true
+    }
+
     init(
         interactor: ExploreInteractorProtocol,
         analytics: Analytics,
@@ -60,6 +83,7 @@ final class ExploreViewController: BaseExploreViewController {
         self.navigationItem.titleView = self.searchBar
         self.exploreInteractor?.doLanguageSwitchBlockLoad(request: .init())
 
+        self.searchBar.showsFilterButton = true
         self.initSearchResults()
 
         self.updateState(newState: self.state)
@@ -237,7 +261,6 @@ final class ExploreViewController: BaseExploreViewController {
 
     private func hideSearchResults() {
         self.searchResultsController?.view.isHidden = true
-        self.searchBar.showsFilterButton = false
         self.exploreInteractor?.doSearchResultsCourseListFiltersUpdate(request: .init(filters: []))
     }
 
@@ -303,7 +326,7 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         self.searchBarTextDidBeginEditing(self.searchBar)
     }
 
-    func displayCourseListFilter(viewModel: Explore.CourseListFilterPresentation.ViewModel) {
+    func displaySearchResultsCourseListFilter(viewModel: Explore.SearchResultsCourseListFilterPresentation.ViewModel) {
         let assembly = CourseListFilterAssembly(
             presentationDescription: viewModel.presentationDescription,
             output: self.interactor as? CourseListFilterOutputProtocol
@@ -313,7 +336,19 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
     }
 
-    func displaySearchResultsCourseListFilters(viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel) {
+    func displayExploreCourseListFilter(viewModel: Explore.ExploreCourseListFilterPresentation.ViewModel) {
+        let assembly = CourseListFilterAssembly(
+            presentationDescription: viewModel.presentationDescription,
+            output: self.exploreCourseListFilterOutput
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .stepikAutomatic)
+    }
+
+    func displaySearchResultsCourseListFiltersUpdateResult(
+        viewModel: Explore.SearchResultsCourseListFiltersUpdate.ViewModel
+    ) {
         let newFilterQuery = CourseListFilterQuery(courseListFilters: viewModel.filters)
         self.searchResultsModuleInput?.filterQueryChanged(to: newFilterQuery)
     }
@@ -365,7 +400,11 @@ extension ExploreViewController: ExploreSearchBarDelegate {
     }
 
     func exploreSearchBarFilterButtonClicked(_ searchBar: ExploreSearchBar) {
-        self.exploreInteractor?.doCourseListFilterPresentation(request: .init())
+        if self.isSearchResultsHidden {
+            self.exploreInteractor?.doExploreCourseListFilterPresentation(request: .init())
+        } else {
+            self.exploreInteractor?.doSearchResultsCourseListFilterPresentation(request: .init())
+        }
     }
 }
 
@@ -375,5 +414,13 @@ extension ExploreViewController: BaseExploreViewDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
             self?.exploreInteractor?.doContentLoad(request: .init())
         }
+    }
+}
+
+private class ExploreCourseListFilterOutput: CourseListFilterOutputProtocol {
+    var onFiltersChanged: (([CourseListFilter.Filter]) -> Void)?
+
+    func handleCourseListFilterDidFinishWithFilters(_ filters: [CourseListFilter.Filter]) {
+        self.onFiltersChanged?(filters)
     }
 }

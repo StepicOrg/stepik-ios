@@ -8,12 +8,15 @@ extension CourseBenefitByMonth {
     @NSManaged var managedYearNumber: NSNumber?
     @NSManaged var managedMonthNumber: NSNumber?
     @NSManaged var managedCountPayments: NSNumber?
+    @NSManaged var managedCountCoursePayments: NSNumber?
+    @NSManaged var managedCountInvoicePayments: NSNumber?
     @NSManaged var managedCountZPayments: NSNumber?
     @NSManaged var managedCountNonZPayments: NSNumber?
     @NSManaged var managedCountRefunds: NSNumber?
     @NSManaged var managedCurrencyCode: String?
     @NSManaged var managedTotalTurnover: NSNumber?
     @NSManaged var managedTotalUserIncome: NSNumber?
+    @NSManaged var managedTotalRefunds: NSNumber?
 
     @NSManaged var managedUser: User?
     @NSManaged var managedCourse: Course?
@@ -88,6 +91,24 @@ extension CourseBenefitByMonth {
         }
     }
 
+    var countCoursePayments: Int {
+        get {
+            self.managedCountCoursePayments?.intValue ?? 0
+        }
+        set {
+            self.managedCountCoursePayments = NSNumber(value: newValue)
+        }
+    }
+
+    var countInvoicePayments: Int {
+        get {
+            self.managedCountInvoicePayments?.intValue ?? 0
+        }
+        set {
+            self.managedCountInvoicePayments = NSNumber(value: newValue)
+        }
+    }
+
     var countZPayments: Int {
         get {
             self.managedCountZPayments?.intValue ?? 0
@@ -139,6 +160,15 @@ extension CourseBenefitByMonth {
         }
         set {
             self.managedTotalUserIncome = NSNumber(value: newValue)
+        }
+    }
+
+    var totalRefunds: Float {
+        get {
+            self.managedTotalRefunds?.floatValue ?? 0
+        }
+        set {
+            self.managedTotalRefunds = NSNumber(value: newValue)
         }
     }
 

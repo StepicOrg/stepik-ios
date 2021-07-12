@@ -5,7 +5,8 @@ protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
     func doContentLoad(request: Explore.ContentLoad.Request)
     func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request)
     func doSearchResultsCourseListFiltersUpdate(request: Explore.SearchResultsCourseListFiltersUpdate.Request)
-    func doCourseListFilterPresentation(request: Explore.CourseListFilterPresentation.Request)
+    func doSearchResultsCourseListFilterPresentation(request: Explore.SearchResultsCourseListFilterPresentation.Request)
+    func doExploreCourseListFilterPresentation(request: Explore.ExploreCourseListFilterPresentation.Request)
 }
 
 final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol {
@@ -50,15 +51,26 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         self.currentSearchResultsCourseListFilters = request.filters.isEmpty
             ? self.getDefaultSearchResultsCourseListFilters()
             : request.filters
-        self.explorePresenter?.presentSearchResultsCourseListFilters(
+        self.explorePresenter?.presentSearchResultsCourseListFiltersUpdateResult(
             response: .init(filters: self.currentSearchResultsCourseListFilters)
         )
     }
 
-    func doCourseListFilterPresentation(request: Explore.CourseListFilterPresentation.Request) {
-        self.explorePresenter?.presentCourseListFilter(
+    func doSearchResultsCourseListFilterPresentation(
+        request: Explore.SearchResultsCourseListFilterPresentation.Request
+    ) {
+        self.explorePresenter?.presentSearchResultsCourseListFilter(
             response: .init(
                 currentFilters: self.currentSearchResultsCourseListFilters,
+                defaultCourseLanguage: self.getDefaultSearchResultsCourseListFilterLanguage()
+            )
+        )
+    }
+
+    func doExploreCourseListFilterPresentation(request: Explore.ExploreCourseListFilterPresentation.Request) {
+        self.explorePresenter?.presentExploreCourseListFilter(
+            response: .init(
+                currentFilters: self.getDefaultSearchResultsCourseListFilters(),
                 defaultCourseLanguage: self.getDefaultSearchResultsCourseListFilterLanguage()
             )
         )

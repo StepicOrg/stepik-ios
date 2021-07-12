@@ -11,8 +11,6 @@ protocol CourseRevenueTabPurchasesInteractorProtocol {
 }
 
 final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesInteractorProtocol {
-    typealias PaginationState = (page: Int, hasNext: Bool)
-
     weak var moduleOutput: CourseRevenueTabPurchasesOutputProtocol?
 
     private let presenter: CourseRevenueTabPurchasesPresenterProtocol

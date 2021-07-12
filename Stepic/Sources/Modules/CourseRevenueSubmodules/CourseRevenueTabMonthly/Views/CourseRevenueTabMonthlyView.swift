@@ -1,13 +1,12 @@
 import SnapKit
 import UIKit
 
-protocol CourseRevenueTabPurchasesViewDelegate: AnyObject {
-    func courseRevenueTabPurchasesViewDidPaginationRequesting(_ view: CourseRevenueTabPurchasesView)
-    func courseRevenueTabPurchasesView(_ view: CourseRevenueTabPurchasesView, didSelectRowAt indexPath: IndexPath)
-    func courseRevenueTabPurchasesViewDidClickErrorPlaceholderViewButton(_ view: CourseRevenueTabPurchasesView)
+protocol CourseRevenueTabMonthlyViewDelegate: AnyObject {
+    func courseRevenueTabMonthlyViewDidPaginationRequesting(_ view: CourseRevenueTabMonthlyView)
+    func courseRevenueTabMonthlyViewDidClickErrorPlaceholderViewButton(_ view: CourseRevenueTabMonthlyView)
 }
 
-extension CourseRevenueTabPurchasesView {
+extension CourseRevenueTabMonthlyView {
     struct Appearance {
         let paginationViewHeight: CGFloat = 52
 
@@ -15,20 +14,20 @@ extension CourseRevenueTabPurchasesView {
     }
 }
 
-final class CourseRevenueTabPurchasesView: UIView {
+final class CourseRevenueTabMonthlyView: UIView {
     let appearance: Appearance
 
-    weak var delegate: CourseRevenueTabPurchasesViewDelegate?
+    weak var delegate: CourseRevenueTabMonthlyViewDelegate?
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 96
+        tableView.estimatedRowHeight = 292
         tableView.separatorStyle = .none
 
         tableView.delegate = self
-        tableView.register(cellClass: CourseRevenueTabPurchasesTableViewCell.self)
+        tableView.register(cellClass: CourseRevenueTabMonthlyTableViewCell.self)
 
         return tableView
     }()
@@ -76,7 +75,7 @@ final class CourseRevenueTabPurchasesView: UIView {
 
         if isLoading {
             DispatchQueue.main.async {
-                self.tableView.skeleton.viewBuilder = { CourseRevenueTabPurchasesCellSkeletonView() }
+                self.tableView.skeleton.viewBuilder = { CourseRevenueTabMonthlyCellSkeletonView() }
                 self.tableView.skeleton.show()
             }
         }
@@ -120,7 +119,7 @@ final class CourseRevenueTabPurchasesView: UIView {
     }
 }
 
-extension CourseRevenueTabPurchasesView: ProgrammaticallyInitializableViewProtocol {
+extension CourseRevenueTabMonthlyView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
         self.addSubview(self.placeholderView)
@@ -140,7 +139,7 @@ extension CourseRevenueTabPurchasesView: ProgrammaticallyInitializableViewProtoc
     }
 }
 
-extension CourseRevenueTabPurchasesView: UITableViewDelegate {
+extension CourseRevenueTabMonthlyView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
@@ -149,17 +148,14 @@ extension CourseRevenueTabPurchasesView: UITableViewDelegate {
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1,
            tableView.numberOfSections == 1,
            self.shouldShowPaginationView {
-            self.delegate?.courseRevenueTabPurchasesViewDidPaginationRequesting(self)
+            self.delegate?.courseRevenueTabMonthlyViewDidPaginationRequesting(self)
         }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.delegate?.courseRevenueTabPurchasesView(self, didSelectRowAt: indexPath)
-    }
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? { nil }
 }
 
-extension CourseRevenueTabPurchasesView: ScrollablePageViewProtocol {
+extension CourseRevenueTabMonthlyView: ScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
             self.pageScrollViewDelegate
@@ -204,8 +200,8 @@ extension CourseRevenueTabPurchasesView: ScrollablePageViewProtocol {
     }
 }
 
-extension CourseRevenueTabPurchasesView: StepikPlaceholderViewDelegate {
+extension CourseRevenueTabMonthlyView: StepikPlaceholderViewDelegate {
     func buttonDidClick(_ button: UIButton) {
-        self.delegate?.courseRevenueTabPurchasesViewDidClickErrorPlaceholderViewButton(self)
+        self.delegate?.courseRevenueTabMonthlyViewDidClickErrorPlaceholderViewButton(self)
     }
 }

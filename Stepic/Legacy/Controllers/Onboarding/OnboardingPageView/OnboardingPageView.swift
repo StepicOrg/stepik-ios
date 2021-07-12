@@ -60,9 +60,17 @@ final class OnboardingPageView: NibInitializableView {
 
     var height: CGFloat {
         // 28 – 24 + 4, constraints from xib
-        pageTitleLabel.sizeToFit()
-        pageDescriptionLabel.sizeToFit()
-        return 28 + pageDescriptionLabel.bounds.size.height + pageTitleLabel.bounds.size.height + nextButton.bounds.size.height + buttonPaddingConstraint.constant
+        self.pageTitleLabel.sizeToFit()
+        self.pageDescriptionLabel.sizeToFit()
+
+        let topOffset: CGFloat = 28
+        let height: CGFloat = topOffset
+            + self.pageDescriptionLabel.bounds.size.height
+            + self.pageTitleLabel.bounds.size.height
+            + self.nextButton.bounds.size.height
+            + self.buttonPaddingConstraint.constant
+
+        return height
     }
 
     var descriptionHeight: CGFloat {

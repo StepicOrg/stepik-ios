@@ -62,8 +62,22 @@ enum Explore {
         struct ViewModel {}
     }
 
-    /// Present course list filter
-    enum CourseListFilterPresentation {
+    /// Present explore course list filter, when search results hidden
+    enum ExploreCourseListFilterPresentation {
+        struct Request {}
+
+        struct Response {
+            let currentFilters: [CourseListFilter.Filter]
+            let defaultCourseLanguage: CourseListFilter.Filter.CourseLanguage
+        }
+
+        struct ViewModel {
+            let presentationDescription: CourseListFilter.PresentationDescription
+        }
+    }
+
+    /// Present course list filter when search results visible
+    enum SearchResultsCourseListFilterPresentation {
         struct Request {}
 
         struct Response {
