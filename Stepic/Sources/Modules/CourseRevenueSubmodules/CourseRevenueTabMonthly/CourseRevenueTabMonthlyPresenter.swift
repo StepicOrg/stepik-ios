@@ -44,7 +44,7 @@ final class CourseRevenueTabMonthlyPresenter: CourseRevenueTabMonthlyPresenterPr
     private func makeViewModel(_ courseBenefitByMonth: CourseBenefitByMonth) -> CourseRevenueTabMonthlyViewModel {
         let formattedDate: String = {
             if let date = courseBenefitByMonth.date {
-                return date.toFormat("MMMM yyyy")
+                return "\(date.monthName(.defaultStandalone).capitalized) \(date.year)"
             }
             return "\(courseBenefitByMonth.monthNumber) \(courseBenefitByMonth.yearNumber)"
         }()

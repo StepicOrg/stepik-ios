@@ -7,7 +7,7 @@ final class CourseBenefitByMonth: NSManagedObject, JSONSerializable {
     typealias IdType = String
 
     var date: DateInRegion? {
-        self.dateString.toISODate()
+        self.dateString.toISODate(region: Date.europeMoscowRegion)
     }
 
     required convenience init(json: JSON) {
