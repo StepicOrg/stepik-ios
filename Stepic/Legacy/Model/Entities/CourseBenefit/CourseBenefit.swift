@@ -7,8 +7,8 @@ final class CourseBenefit: NSManagedObject, JSONSerializable {
 
     var status: CourseBenefitStatus? { CourseBenefitStatus(rawValue: self.statusString) }
 
-    var amountPercent: Float {
-        self.amount / self.paymentAmount
+    var userSharePercent: Float? {
+        self.course?.courseBeneficiaries.first(where: { $0.userID == self.userID })?.percent
     }
 
     required convenience init(json: JSON) {

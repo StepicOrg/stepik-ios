@@ -20,6 +20,10 @@ final class CourseRevenueAssembly: Assembly {
             courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceService(),
             courseBenefitSummariesNetworkService: CourseBenefitSummariesNetworkService(
                 courseBenefitSummariesAPI: CourseBenefitSummariesAPI()
+            ),
+            courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceService(),
+            courseBeneficiariesNetworkService: CourseBeneficiariesNetworkService(
+                courseBeneficiariesAPI: CourseBeneficiariesAPI()
             )
         )
         let presenter = CourseRevenuePresenter()
@@ -27,6 +31,7 @@ final class CourseRevenueAssembly: Assembly {
             courseID: self.courseID,
             presenter: presenter,
             provider: provider,
+            userAccountService: UserAccountService(),
             analytics: StepikAnalytics.shared
         )
         let viewController = CourseRevenueViewController(
