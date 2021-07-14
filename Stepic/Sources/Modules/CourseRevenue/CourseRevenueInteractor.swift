@@ -11,6 +11,8 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
     private let presenter: CourseRevenuePresenterProtocol
     private let provider: CourseRevenueProviderProtocol
 
+    private let userAccountService: UserAccountServiceProtocol
+
     private let courseID: Course.IdType
     private var currentCourse: Course? {
         didSet {
@@ -28,17 +30,24 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
         courseID: Course.IdType,
         presenter: CourseRevenuePresenterProtocol,
         provider: CourseRevenueProviderProtocol,
+        userAccountService: UserAccountServiceProtocol,
         analytics: Analytics
     ) {
         self.courseID = courseID
         self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
         self.analytics = analytics
     }
 
     func doCourseRevenueLoad(request: CourseRevenue.CourseRevenueLoad.Request) {
+        guard let currentUserID = self.userAccountService.currentUserID,
+              self.userAccountService.isAuthorized else {
+            return self.presenter.presentCourseRevenue(response: .init(result: .failure(Error.unauthorized)))
+        }
+
         self.provider
-            .fetchCourseAndBenefitSummary()
+            .fetchCourseWithAllData(userID: currentUserID)
             .compactMap { fetchResult -> (Course, CourseBenefitSummary)? in
                 guard let course = fetchResult.value,
                       let benefitSummary = course.courseBenefitSummaries.first(where: { $0.id == course.id }) else {
@@ -92,6 +101,10 @@ final class CourseRevenueInteractor: CourseRevenueInteractorProtocol {
 
         self.shouldOpenedAnalyticsEventSend = false
         self.analytics.send(.courseBenefitsScreenOpened(id: currentCourse.id, title: currentCourse.title))
+    }
+
+    enum Error: Swift.Error {
+        case unauthorized
     }
 }
 

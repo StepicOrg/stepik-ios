@@ -44,6 +44,7 @@ extension User {
     @NSManaged var managedSocialProfiles: NSOrderedSet?
     @NSManaged var managedBuyerCourseBenefits: NSSet?
     @NSManaged var managedCourseBenefitByMonths: NSSet?
+    @NSManaged var managedCourseBeneficiaries: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
@@ -343,6 +344,15 @@ extension User {
         }
         set {
             self.managedCourseBenefitByMonths = NSSet(array: newValue)
+        }
+    }
+
+    var courseBeneficiaries: [CourseBeneficiary] {
+        get {
+            self.managedCourseBeneficiaries?.allObjects as! [CourseBeneficiary]
+        }
+        set {
+            self.managedCourseBeneficiaries = NSSet(array: newValue)
         }
     }
 
