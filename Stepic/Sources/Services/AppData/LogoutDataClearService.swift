@@ -15,6 +15,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let codeLimitsPersistenceService: CodeLimitsPersistenceServiceProtocol
     private let codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol
     private let codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol
+    private let courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol
     private let courseBenefitByMonthsPersistenceService: CourseBenefitByMonthsPersistenceServiceProtocol
     private let courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol
     private let courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol
@@ -68,6 +69,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         codeLimitsPersistenceService: CodeLimitsPersistenceServiceProtocol = CodeLimitsPersistenceService(),
         codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol = CodeSamplesPersistenceService(),
         codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol = CodeTemplatesPersistenceService(),
+        courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol = CourseBeneficiariesPersistenceService(),
         courseBenefitByMonthsPersistenceService: CourseBenefitByMonthsPersistenceServiceProtocol = CourseBenefitByMonthsPersistenceService(),
         courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol = CourseBenefitsPersistenceService(),
         courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol = CourseBenefitSummariesPersistenceService(),
@@ -111,6 +113,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.codeLimitsPersistenceService = codeLimitsPersistenceService
         self.codeSamplesPersistenceService = codeSamplesPersistenceService
         self.codeTemplatePersistenceService = codeTemplatePersistenceService
+        self.courseBeneficiariesPersistenceService = courseBeneficiariesPersistenceService
         self.courseBenefitByMonthsPersistenceService = courseBenefitByMonthsPersistenceService
         self.courseBenefitsPersistenceService = courseBenefitsPersistenceService
         self.courseBenefitSummariesPersistenceService = courseBenefitSummariesPersistenceService
@@ -204,6 +207,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                         self.codeLimitsPersistenceService.deleteAll(),
                         self.codeSamplesPersistenceService.deleteAll(),
                         self.codeTemplatePersistenceService.deleteAll(),
+                        self.courseBeneficiariesPersistenceService.deleteAll(),
                         self.courseBenefitByMonthsPersistenceService.deleteAll(),
                         self.courseBenefitsPersistenceService.deleteAll(),
                         self.courseBenefitSummariesPersistenceService.deleteAll(),
