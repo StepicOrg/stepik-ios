@@ -74,6 +74,14 @@ final class NewProfileView: UIView {
         self.scrollableStackView.isRefreshControlEnabled = !viewModel.headerViewModel.isStretchyHeaderAvailable
     }
 
+    func updateVerticalScrollIndicatorInsets(_ insets: UIEdgeInsets) {
+        if #available(iOS 11.1, *) {
+            self.scrollableStackView.verticalScrollIndicatorInsets = insets
+        } else {
+            self.scrollableStackView.scrollIndicatorInsets = insets
+        }
+    }
+
     // MARK: Blocks
 
     func removeBlockView(_ view: UIView) {
