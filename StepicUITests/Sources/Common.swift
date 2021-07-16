@@ -44,11 +44,7 @@ enum Common {
                 value: kCurrentUserPassword
             )
 
-            if app.buttons["Register"].waitForExistence(timeout: 2) {
-                app.buttons["Register"].tap()
-            } else {
-                XCTFail("User setup failed, unable find Register button")
-            }
+            app.buttons["Register"].tap()
 
             if self.isUserLoggedIn(app: app) {
                 currentUserName = "ios_autotest_\(timestamp)"
@@ -123,12 +119,12 @@ enum Common {
         }
 
         if springboard.alerts["Remove “\(appName)”?"]
-            .scrollViews.otherElements.buttons["Delete App"].waitForExistence(timeout: 5) {
+               .scrollViews.otherElements.buttons["Delete App"].waitForExistence(timeout: 5) {
             springboard.alerts["Remove “\(appName)”?"].scrollViews.otherElements.buttons["Delete App"].tap()
         }
 
         if springboard.alerts["Delete “\(appName)”?"]
-            .scrollViews.otherElements.buttons["Delete"].waitForExistence(timeout: 5) {
+               .scrollViews.otherElements.buttons["Delete"].waitForExistence(timeout: 5) {
             springboard.alerts["Delete “\(appName)”?"].scrollViews.otherElements.buttons["Delete"].tap()
         }
     }
