@@ -275,6 +275,13 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
             ? .zero
             : UIEdgeInsets(top: self.getTopBarHeight(), left: 0, bottom: 0, right: 0)
         self.newProfileView?.contentInsets = contentInsets
+
+        if self.isStretchyHeaderAvailable {
+            let navigationBarHeight = self.navigationController?.navigationBar.bounds.height ?? 0
+            self.newProfileView?.updateVerticalScrollIndicatorInsets(
+                UIEdgeInsets(top: navigationBarHeight, left: 0, bottom: 0, right: 0)
+            )
+        }
     }
 
     private func updateTopBar(alpha: CGFloat) {
