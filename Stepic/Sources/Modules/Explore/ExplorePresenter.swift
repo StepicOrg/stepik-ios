@@ -6,8 +6,11 @@ protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
     func presentStoriesBlock(response: Explore.StoriesVisibilityUpdate.Response)
     func presentCourseListState(response: Explore.CourseListStateUpdate.Response)
     func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response)
-    func presentCourseListFilter(response: Explore.CourseListFilterPresentation.Response)
-    func presentSearchResultsCourseListFilters(response: Explore.SearchResultsCourseListFiltersUpdate.Response)
+    func presentExploreCourseListFilter(response: Explore.ExploreCourseListFilterPresentation.Response)
+    func presentSearchResultsCourseListFilter(response: Explore.SearchResultsCourseListFilterPresentation.Response)
+    func presentSearchResultsCourseListFiltersUpdateResult(
+        response: Explore.SearchResultsCourseListFiltersUpdate.Response
+    )
 }
 
 final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
@@ -44,18 +47,33 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
         self.exploreViewController?.displayStatusBarStyle(viewModel: .init(statusBarStyle: response.statusBarStyle))
     }
 
-    func presentCourseListFilter(response: Explore.CourseListFilterPresentation.Response) {
+    func presentSearchResultsCourseListFilter(response: Explore.SearchResultsCourseListFilterPresentation.Response) {
         let presentationDescription = CourseListFilter.PresentationDescription(
             availableFilters: .all,
             prefilledFilters: response.currentFilters,
             defaultCourseLanguage: response.defaultCourseLanguage
         )
-        self.exploreViewController?.displayCourseListFilter(
+        self.exploreViewController?.displaySearchResultsCourseListFilter(
             viewModel: .init(presentationDescription: presentationDescription)
         )
     }
 
-    func presentSearchResultsCourseListFilters(response: Explore.SearchResultsCourseListFiltersUpdate.Response) {
-        self.exploreViewController?.displaySearchResultsCourseListFilters(viewModel: .init(filters: response.filters))
+    func presentExploreCourseListFilter(response: Explore.ExploreCourseListFilterPresentation.Response) {
+        let presentationDescription = CourseListFilter.PresentationDescription(
+            availableFilters: .all,
+            prefilledFilters: response.currentFilters,
+            defaultCourseLanguage: response.defaultCourseLanguage
+        )
+        self.exploreViewController?.displayExploreCourseListFilter(
+            viewModel: .init(presentationDescription: presentationDescription)
+        )
+    }
+
+    func presentSearchResultsCourseListFiltersUpdateResult(
+        response: Explore.SearchResultsCourseListFiltersUpdate.Response
+    ) {
+        self.exploreViewController?.displaySearchResultsCourseListFiltersUpdateResult(
+            viewModel: .init(filters: response.filters)
+        )
     }
 }

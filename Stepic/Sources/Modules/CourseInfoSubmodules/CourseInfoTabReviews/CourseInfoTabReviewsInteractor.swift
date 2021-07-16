@@ -9,8 +9,6 @@ protocol CourseInfoTabReviewsInteractorProtocol: AnyObject {
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
-    typealias PaginationState = (page: Int, hasNext: Bool)
-
     private let presenter: CourseInfoTabReviewsPresenterProtocol
     private let provider: CourseInfoTabReviewsProviderProtocol
     private let analytics: Analytics

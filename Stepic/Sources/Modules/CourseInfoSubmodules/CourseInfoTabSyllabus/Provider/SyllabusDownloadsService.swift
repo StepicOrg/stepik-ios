@@ -763,13 +763,13 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         var videosProgress: Float?
         if !videoIDs.isEmpty {
-            videosProgress = videoIDs.reduce(0, { $0 + (self.mutableState.progressByVideoID[$1] ?? 0) })
+            videosProgress = videoIDs.reduce(Float(0), { $0 + (self.mutableState.progressByVideoID[$1] ?? Float(0)) })
                 / Float(videoIDs.count)
         }
 
         var imagesProgress: Float?
         if !imageURLs.isEmpty {
-            imagesProgress = imageURLs.reduce(0, { $0 + (self.mutableState.progressByImageURL[$1] ?? 0) })
+            imagesProgress = imageURLs.reduce(Float(0), { $0 + (self.mutableState.progressByImageURL[$1] ?? Float(0)) })
                 / Float(imageURLs.count)
         }
 

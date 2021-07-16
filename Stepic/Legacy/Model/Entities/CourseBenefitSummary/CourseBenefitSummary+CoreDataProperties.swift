@@ -58,6 +58,7 @@ extension CourseBenefitSummary {
         }
     }
 
+    @available(*, deprecated, message: "Removed from API")
     var totalIncome: Float {
         get {
             self.managedTotalIncome?.floatValue ?? 0
@@ -85,6 +86,7 @@ extension CourseBenefitSummary {
         }
     }
 
+    @available(*, deprecated, message: "Removed from API")
     var monthIncome: Float {
         get {
             self.managedMonthIncome?.floatValue ?? 0

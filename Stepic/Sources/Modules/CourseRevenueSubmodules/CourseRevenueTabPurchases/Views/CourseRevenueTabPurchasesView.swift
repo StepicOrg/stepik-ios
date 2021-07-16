@@ -176,6 +176,12 @@ extension CourseRevenueTabPurchasesView: ScrollablePageViewProtocol {
         set {
             self.tableView.contentInset = newValue
             self.placeholderViewTopConstraint?.update(offset: newValue.top)
+
+            // Manually update contentOffset if needed APPS-3384
+            let newContentOffset = CGPoint(x: 0, y: -newValue.top)
+            if self.contentOffset != newContentOffset {
+                self.contentOffset = newContentOffset
+            }
         }
     }
 
