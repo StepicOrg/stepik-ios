@@ -119,6 +119,10 @@
             argument = "-com.AlexKarpov.Stepic.FLEXShowExplorerOnLaunch"
             isEnabled = "NO">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-com.AlexKarpov.Stepic.IsNetworkDebuggingEnabled"
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
