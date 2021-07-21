@@ -22,7 +22,7 @@ final class StreaksAlertPresentationManager {
     }()
 
     private let streakTimePickerPresenter: Presentr = {
-        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
+        let streakTimePickerPresenter = Presentr(presentationType: .popup)
         return streakTimePickerPresenter
     }()
 
