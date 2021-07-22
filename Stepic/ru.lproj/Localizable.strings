@@ -533,7 +533,7 @@ CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу пл
 
 /* CourseBenefitDetail */
 CourseBenefitDetailTitle = "Детали покупки";
-CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии";
+CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии Stepik";
 CourseBenefitDetailChannelZLink = "Переход по Z-Link";
 CourseBenefitDetailChannelStepikLink = "Переход по Stepik Link";
 CourseBenefitDetailChannelRefund = "Возврат";

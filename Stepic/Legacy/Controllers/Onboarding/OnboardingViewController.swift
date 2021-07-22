@@ -190,7 +190,13 @@ final class OnboardingViewController: UIViewController {
             })
 
             if let authSource = authSource {
-                RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
+                RoutingManager.auth.routeFrom(
+                    controller: authSource,
+                    success: {
+                        TabBarRouter(tab: .profile).route()
+                    },
+                    cancel: nil
+                )
             }
         }
     }

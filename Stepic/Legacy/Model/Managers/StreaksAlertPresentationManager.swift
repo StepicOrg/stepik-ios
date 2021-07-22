@@ -61,14 +61,18 @@ final class StreaksAlertPresentationManager {
         let source = self.source.analyticsSource
         presenter.onPositiveCallback = { [weak self] in
             PreferencesContainer.notifications.allowStreaksNotifications = true
+            NotificationCenter.default.post(
+                name: .streaksAlertPresentationManagerDidChangeStreakNotifications,
+                object: nil
+            )
 
             StepikAnalytics.shared.send(
                 .streaksSuggestionSucceeded(index: NotificationSuggestionManager().streakAlertShownCnt)
             )
             NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.yes)
 
-            // When we are suggesting streak with the `Source` of .login type - `self` will be deallocated at this point.
-            // In this case we need to register for remote notifications.
+            assert(self != nil)
+
             if let strongSelf = self {
                 strongSelf.notifyPressed()
             } else {
@@ -101,7 +105,12 @@ final class StreaksAlertPresentationManager {
         }
     }
 
-    private func didChooseTime() {}
+    private func didChooseTime() {
+        NotificationCenter.default.post(
+            name: .streaksAlertPresentationManagerDidChangeStreakNotifications,
+            object: PreferencesContainer.notifications.streaksNotificationStartHourUTC
+        )
+    }
 
     private func selectStreakNotificationTime() {
         guard let controller = controller else {
@@ -144,7 +153,6 @@ final class StreaksAlertPresentationManager {
             case .denied:
                 self?.showSettingsAlert()
             }
-            return
         }
     }
 
@@ -204,4 +212,9 @@ final class StreaksAlertPresentationManager {
             }
         }
     }
+}
+
+extension Foundation.Notification.Name {
+    static let streaksAlertPresentationManagerDidChangeStreakNotifications = Foundation.Notification
+        .Name("streaksAlertPresentationManagerDidChangeStreakNotifications")
 }
