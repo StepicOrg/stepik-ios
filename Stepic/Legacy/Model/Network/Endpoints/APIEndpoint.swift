@@ -25,7 +25,9 @@ class APIEndpoint {
     init() {
         var eventMonitors = [EventMonitor]()
         #if DEBUG
-        eventMonitors = [AlamofireRequestsLogger()]
+        if LaunchArguments.isNetworkDebuggingEnabled {
+            eventMonitors = [AlamofireRequestsLogger()]
+        }
         #endif
 
         self.manager = Alamofire.Session(

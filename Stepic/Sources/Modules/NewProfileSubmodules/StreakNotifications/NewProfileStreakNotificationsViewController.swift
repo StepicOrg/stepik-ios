@@ -82,7 +82,7 @@ extension NewProfileStreakNotificationsViewController: NewProfileStreakNotificat
 
             strongSelf.streaksTooltip.show(
                 direction: .up,
-                in: streakNotificationsView,
+                in: streakNotificationsView.superview ?? streakNotificationsView,
                 from: streakNotificationsView.streakNotificationsSwitchTooltipAnchorView
             )
         }

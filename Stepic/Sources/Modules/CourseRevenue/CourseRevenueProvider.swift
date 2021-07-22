@@ -4,7 +4,8 @@ import PromiseKit
 protocol CourseRevenueProviderProtocol {
     func fetchCourse() -> Promise<FetchResult<Course?>>
     func fetchCourseBenefitSummary() -> Promise<FetchResult<CourseBenefitSummary?>>
-    func fetchCourseAndBenefitSummary() -> Promise<FetchResult<Course?>>
+    func fetchCourseBeneficiary(userID: User.IdType) -> Promise<FetchResult<CourseBeneficiary?>>
+    func fetchCourseWithAllData(userID: User.IdType) -> Promise<FetchResult<Course?>>
 }
 
 final class CourseRevenueProvider: CourseRevenueProviderProtocol {
@@ -16,18 +17,25 @@ final class CourseRevenueProvider: CourseRevenueProviderProtocol {
     private let courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol
     private let courseBenefitSummariesNetworkService: CourseBenefitSummariesNetworkServiceProtocol
 
+    private let courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol
+    private let courseBeneficiariesNetworkService: CourseBeneficiariesNetworkServiceProtocol
+
     init(
         courseID: Course.IdType,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
         coursesNetworkService: CoursesNetworkServiceProtocol,
         courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol,
-        courseBenefitSummariesNetworkService: CourseBenefitSummariesNetworkServiceProtocol
+        courseBenefitSummariesNetworkService: CourseBenefitSummariesNetworkServiceProtocol,
+        courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol,
+        courseBeneficiariesNetworkService: CourseBeneficiariesNetworkServiceProtocol
     ) {
         self.courseID = courseID
         self.coursesPersistenceService = coursesPersistenceService
         self.coursesNetworkService = coursesNetworkService
         self.courseBenefitSummariesPersistenceService = courseBenefitSummariesPersistenceService
         self.courseBenefitSummariesNetworkService = courseBenefitSummariesNetworkService
+        self.courseBeneficiariesPersistenceService = courseBeneficiariesPersistenceService
+        self.courseBeneficiariesNetworkService = courseBeneficiariesNetworkService
     }
 
     func fetchCourse() -> Promise<FetchResult<Course?>> {
@@ -74,14 +82,44 @@ final class CourseRevenueProvider: CourseRevenueProviderProtocol {
         }
     }
 
-    func fetchCourseAndBenefitSummary() -> Promise<FetchResult<Course?>> {
+    func fetchCourseBeneficiary(userID: User.IdType) -> Promise<FetchResult<CourseBeneficiary?>> {
+        let persistenceGuarantee: Guarantee<CourseBeneficiary?>
+            = self.courseBeneficiariesPersistenceService.fetch(courseID: self.courseID, userID: userID)
+        let remoteGuarantee: Guarantee<CourseBeneficiary??> = Guarantee(
+            self.courseBeneficiariesNetworkService.fetch(courseID: self.courseID, userID: userID),
+            fallback: nil
+        )
+
+        return Promise { seal in
+            when(
+                fulfilled: persistenceGuarantee,
+                remoteGuarantee
+            ).then { cachedCourseBeneficiary, remoteCourseBeneficiary -> Promise<FetchResult<CourseBeneficiary?>> in
+                if let remoteCourseBeneficiary = remoteCourseBeneficiary {
+                    return .value(.init(value: remoteCourseBeneficiary, source: .remote))
+                }
+                return .value(.init(value: cachedCourseBeneficiary, source: .cache))
+            }.done { fetchResult in
+                seal.fulfill(fetchResult)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchCourseWithAllData(userID: User.IdType) -> Promise<FetchResult<Course?>> {
         Promise { seal in
             when(
                 fulfilled: self.fetchCourse(),
-                self.fetchCourseBenefitSummary()
-            ).done { courseFetchResult, courseBenefitSummaryFetchResult in
+                self.fetchCourseBenefitSummary(),
+                self.fetchCourseBeneficiary(userID: userID)
+            ).done { courseFetchResult, courseBenefitSummaryFetchResult, courseBeneficiaryFetchResult in
                 if let courseBenefitSummary = courseBenefitSummaryFetchResult.value {
                     courseBenefitSummary.course = courseFetchResult.value
+                    CoreDataHelper.shared.save()
+                }
+                if let courseBeneficiary = courseBeneficiaryFetchResult.value {
+                    courseBeneficiary.course = courseFetchResult.value
                     CoreDataHelper.shared.save()
                 }
 

@@ -10,8 +10,8 @@ protocol CourseInfoTabSyllabusViewDelegate: AnyObject {
 extension CourseInfoTabSyllabusView {
     struct Appearance {
         let headerViewHeight: CGFloat = 60
-
         let errorPlaceholderBackgroundColor = UIColor.stepikBackground
+        let skeletonCellBackgroundColor = UIColor.stepikBackground
     }
 }
 
@@ -112,6 +112,7 @@ final class CourseInfoTabSyllabusView: UIView {
 
     func showLoading() {
         self.errorPlaceholderView.isHidden = true
+        self.tableView.skeleton.cellBackgroundColor = self.appearance.skeletonCellBackgroundColor
         self.tableView.skeleton.viewBuilder = {
             CourseInfoTabSyllabusCellSkeletonView()
         }

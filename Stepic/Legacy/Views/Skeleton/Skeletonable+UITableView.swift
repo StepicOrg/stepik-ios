@@ -69,7 +69,9 @@ class SkeletonTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SkeletonTableViewCell.reuseId, for: indexPath) as? SkeletonTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SkeletonTableViewCell.reuseId, for: indexPath
+        ) as? SkeletonTableViewCell else {
             return UITableViewCell()
         }
 
@@ -85,6 +87,10 @@ class SkeletonTableViewDataSource: NSObject, UITableViewDataSource {
             )
         )
         cell.attach(view: skeletonView)
+
+        if let cellBackgroundColor = tableView.skeleton.cellBackgroundColor {
+            cell.backgroundColor = cellBackgroundColor
+        }
 
         return cell
     }

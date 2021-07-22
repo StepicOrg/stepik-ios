@@ -16,6 +16,7 @@ private struct AssociatedKey {
 class Skeleton {
     var firstColor = UIColor.skeletonGradientFirst
     var secondColor = UIColor.skeletonGradientSecond
+    var cellBackgroundColor: UIColor?
 
     private var parent: Skeletonable
 

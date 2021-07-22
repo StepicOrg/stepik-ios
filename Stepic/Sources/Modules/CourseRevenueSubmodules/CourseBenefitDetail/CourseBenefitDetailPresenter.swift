@@ -56,9 +56,15 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             currencyCode: courseBenefit.currencyCode
         )
 
+        let formattedUserSharePercent: String = {
+            if let userSharePercent = courseBenefit.userSharePercent {
+                return FormatterHelper.integerPercent(userSharePercent / 100)
+            }
+            return "n/a"
+        }()
         let formattedAmountPercent = String(
             format: NSLocalizedString("CourseBenefitDetailAmountPercent", comment: ""),
-            arguments: [FormatterHelper.integerPercent(courseBenefit.amountPercent)]
+            arguments: [formattedUserSharePercent]
         )
         let formattedAmount = FormatterHelper.price(courseBenefit.amount, currencyCode: courseBenefit.currencyCode)
 
