@@ -9,7 +9,7 @@
 import UIKit
 
 final class AuthNavigationViewController: UINavigationController {
-    private let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
+    private static let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
     private let notificationSuggestionManager = NotificationSuggestionManager()
     private let userActivitiesAPI = UserActivitiesAPI()
 
@@ -21,7 +21,7 @@ final class AuthNavigationViewController: UINavigationController {
 
     weak var source: UIViewController? {
         didSet {
-            streaksAlertPresentationManager.controller = source
+            Self.streaksAlertPresentationManager.controller = source
         }
     }
     var success: (() -> Void)?
@@ -31,7 +31,7 @@ final class AuthNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        streaksAlertPresentationManager.controller = source
+        Self.streaksAlertPresentationManager.controller = source
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
@@ -47,7 +47,7 @@ final class AuthNavigationViewController: UINavigationController {
                 after: .login
             )
             if canShowAlert && userActivity.didSolveThisWeek {
-                self.streaksAlertPresentationManager.suggestStreak(
+                Self.streaksAlertPresentationManager.suggestStreak(
                     streak: userActivity.currentStreak
                 )
             }
