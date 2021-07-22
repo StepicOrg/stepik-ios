@@ -13,6 +13,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
     lazy var baseQuizView = self.view as? BaseQuizView
 
+    private lazy var streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
+
     private var quizAssembly: QuizAssembly
 
     private var childQuizModuleInput: QuizInputProtocol? { self.quizAssembly.moduleInput }
@@ -151,9 +153,8 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
     }
 
     func displayStreakAlert(viewModel: BaseQuiz.StreakAlertPresentation.ViewModel) {
-        let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
-        streaksAlertPresentationManager.controller = self
-        streaksAlertPresentationManager.suggestStreak(streak: viewModel.streak)
+        self.streaksAlertPresentationManager.controller = self
+        self.streaksAlertPresentationManager.suggestStreak(streak: viewModel.streak)
     }
 }
 
