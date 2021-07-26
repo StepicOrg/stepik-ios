@@ -991,6 +991,35 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Failed to start playing this 
 
 StepikSocialNetworksTitle = "Our social networks";
 
+/* Peer review */
+StepQuizReviewSendPending = "Send your best submission to review";
+StepQuizReviewSendInProgress = "Send your best submission to review. You can't change it later.";
+StepQuizReviewSendCompleted = "Submission was sent to review";
+StepQuizReviewSendChoose = "Choose submission";
+StepQuizReviewSendSubmit = "Submit this submission";
+
+StepQuizReviewGivenTitle = "Review";
+StepQuizReviewGivenPendingZero = "Write %@ reviews";
+StepQuizReviewGivenExtraNote = "Write more reviews to increase your chance to receive review";
+StepQuizReviewGivenStartReview = "Start review";
+StepQuizReviewGivenNoReview = "Nothing to review";
+StepQuizReviewTakenPendingZero = "Wait for %@ reviews of your solution";
+StepQuizReviewTakenAction = "View reviews";
+StepQuizReviewTakenTitle = "Received reviews";
+StepQuizReviewTakenHint = "Average waiting time - 48 hours";
+
+StepQuizReviewInstructorPending = "Instructor will grade your solution with the maximum score of %@";
+StepQuizReviewInstructorCompletedHint = "The instructor’s response will not come immediately, you will receive a notification";
+StepQuizReviewInstructorCompletedAction = "View review";
+
+StepQuizReviewPeerPending = "Get points, max score is %@";
+StepQuizReviewPeerCompleted = "Your solution was scored for %@ out of %@";
+
+StepQuizReviewTeacherQuizTitle = "Quiz field";
+StepQuizReviewTeacherNoticePeer = "Learners review each other";
+StepQuizReviewTeacherNoticeInstructorsNoSubmissions = "All reviews have been sent.";
+StepQuizReviewTeacherNoticeInstructorsSubmissions = "Review %@, learners will receive points";
+
 /* Quiz */
 CorrectFeedbackTitle1 = "Correct.";
 CorrectFeedbackTitle2 = "You are right, well done!";
