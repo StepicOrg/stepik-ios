@@ -2,7 +2,9 @@ import SnapKit
 import UIKit
 
 extension StepQuizReviewView {
-    struct Appearance {}
+    struct Appearance {
+        let backgroundColor = UIColor.stepikBackground
+    }
 }
 
 final class StepQuizReviewView: UIView {
@@ -27,7 +29,9 @@ final class StepQuizReviewView: UIView {
 }
 
 extension StepQuizReviewView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
+    func setupView() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 
     func addSubviews() {}
 
