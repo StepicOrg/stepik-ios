@@ -18,7 +18,9 @@ extension StepQuizReviewStatusView {
 final class StepQuizReviewStatusView: UIView {
     let appearance: Appearance
 
-    private lazy var circleView = StepQuizReviewStatusCircleView()
+    private lazy var circleView = StepQuizReviewStatusCircleView(
+        appearance: .init(imageViewSize: self.appearance.circleViewSize * 0.5)
+    )
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

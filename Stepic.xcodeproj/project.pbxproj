@@ -729,6 +729,8 @@
 		2C7C874AB06B7AFA9B3E0DEF /* SimpleCourseListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1D1FD9DEC7FEAC0642FCC /* SimpleCourseListAssembly.swift */; };
 		2C7CCE8625FA084C007D0C83 /* SubmissionsReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CCE8525FA084C007D0C83 /* SubmissionsReviewView.swift */; };
 		2C7D7FAD2669382200C8F690 /* WishlistWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D7FAC2669382200C8F690 /* WishlistWidgetViewModel.swift */; };
+		2C7E293126B038BE008581F4 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */; };
+		2C7E293326B03B69008581F4 /* CGSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
 		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
 		2C7F4160269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */; };
@@ -2631,6 +2633,8 @@
 		2C7AC4D525B462BC0024D4D2 /* ImagePreheater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreheater.swift; sourceTree = "<group>"; };
 		2C7CCE8525FA084C007D0C83 /* SubmissionsReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsReviewView.swift; sourceTree = "<group>"; };
 		2C7D7FAC2669382200C8F690 /* WishlistWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistWidgetViewModel.swift; sourceTree = "<group>"; };
+		2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensions.swift; sourceTree = "<group>"; };
+		2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionsTests.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
 		2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryRatingView.swift; sourceTree = "<group>"; };
@@ -4480,6 +4484,7 @@
 		2C546C1623DA0E6100352F27 /* ExtensionsTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */,
 				2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */,
 			);
 			path = ExtensionsTests;
@@ -4784,6 +4789,14 @@
 				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
 			);
 			path = ReviewSession;
+			sourceTree = "<group>";
+		};
+		2C7E292F26B038AF008581F4 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */,
+			);
+			path = CoreGraphics;
 			sourceTree = "<group>";
 		};
 		2C7EFCF024D08D8E003A4E93 /* SocialProfiles */ = {
@@ -8498,6 +8511,7 @@
 			isa = PBXGroup;
 			children = (
 				2CE532FE266EBD9100E80983 /* CoreData */,
+				2C7E292F26B038AF008581F4 /* CoreGraphics */,
 				2C096586236C56D2005B771A /* Dispatch */,
 				2C096584236C56AE005B771A /* Foundation */,
 				2C096587236C5706005B771A /* SwiftStdlib */,
@@ -10363,6 +10377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
+				2C7E293326B03B69008581F4 /* CGSizeExtensionsTests.swift in Sources */,
 				2CE532F4266E95C400E80983 /* CourseBenefitSummaryTests.swift in Sources */,
 				2C3A0EF3265291F8008D54C5 /* CourseTests.swift in Sources */,
 				2CE0CAC7255A8824009C6574 /* CatalogBlockTests.swift in Sources */,
@@ -10869,6 +10884,7 @@
 				2CE8BA9B23D631E500C2EED9 /* ImageStoredFileManager.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */,
+				2C7E293126B038BE008581F4 /* CGSizeExtensions.swift in Sources */,
 				08484F0C211AF4320006266F /* StoryViewController.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
