@@ -537,6 +537,8 @@
 		2C2F6E6024DD3E69000E8844 /* StepikAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */; };
 		2C30505B24574B1F005DCD81 /* CourseListDataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */; };
 		2C30A6A024A29B6D0074693D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30A69F24A29B6D0074693D /* Queue.swift */; };
+		2C313E5326AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C313E5226AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift */; };
+		2C313E5526AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C313E5426AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C381BEF25505EC90084AD90 /* CourseListFilterBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */; };
 		2C38A7052666B0DB00F3528A /* WishlistStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38A7042666B0DB00F3528A /* WishlistStorageManager.swift */; };
@@ -2415,6 +2417,8 @@
 		2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAnalyticsEvents.swift; sourceTree = "<group>"; };
 		2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataBackUpdateService.swift; sourceTree = "<group>"; };
 		2C30A69F24A29B6D0074693D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		2C313E5226AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusView.swift; sourceTree = "<group>"; };
+		2C313E5426AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusCircleView.swift; sourceTree = "<group>"; };
 		2C32664224B00BEF0013C473 /* Model_course_purchases_v54.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_purchases_v54.xcdatamodel; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
@@ -4009,6 +4013,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0196FB26AED46C009741C1 /* StepQuizReviewMessageView.swift */,
+				2C313E5626AFE640004ECBD2 /* StatusView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4337,6 +4342,15 @@
 				62E9846FAD1E23AB87024093 /* CourseListInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		2C313E5626AFE640004ECBD2 /* StatusView */ = {
+			isa = PBXGroup;
+			children = (
+				2C313E5426AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift */,
+				2C313E5226AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift */,
+			);
+			path = StatusView;
 			sourceTree = "<group>";
 		};
 		2C37968421ABED9500BC7E62 /* ActiveTests */ = {
@@ -11009,6 +11023,7 @@
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				2C5D601D2464BAF700D1103B /* StepikLabelBarButton.swift in Sources */,
 				08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */,
+				2C313E5526AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift in Sources */,
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */,
@@ -11184,6 +11199,7 @@
 				2CD6E25B234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift in Sources */,
 				2C20C86022F8E1C90052E9BF /* CodeLimitPlainObject.swift in Sources */,
 				2C381BEF25505EC90084AD90 /* CourseListFilterBarButtonItem.swift in Sources */,
+				2C313E5326AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift in Sources */,
 				2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */,
 				62E985D6A85E24E493C064E9 /* SettingsTableView.swift in Sources */,
 				62E98CB2C2F2B7AE44023FEA /* SettingsTableViewModel.swift in Sources */,
