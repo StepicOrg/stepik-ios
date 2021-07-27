@@ -992,6 +992,35 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Не удалось нача�
 
 StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
+/* Peer review */
+StepQuizReviewSendPending = "Отправьте лучшее решение на проверку";
+StepQuizReviewSendInProgress = "Отправьте лучшее решение на проверку. После отправки заменить решение нельзя.";
+StepQuizReviewSendCompleted = "Решение отправлено на проверку";
+StepQuizReviewSendChoose = "Выбрать решение";
+StepQuizReviewSendSubmit = "Отправить это решение";
+
+StepQuizReviewGivenTitle = "Рецензия";
+StepQuizReviewGivenPendingZero = "Сделайте рецензии на решения других учащихся";
+StepQuizReviewGivenExtraNote = "Делая дополнительные рецензии, вы повышаете шанс получить рецензии на свою работу быстрее";
+StepQuizReviewGivenStartReview = "Рецензировать";
+StepQuizReviewGivenNoReview = "Пока нет решений для рецензии";
+StepQuizReviewTakenPendingZero = "Дождитесь рецензии на своё решение";
+StepQuizReviewTakenAction = "Смотреть рецензии";
+StepQuizReviewTakenTitle = "Полученные рецензии";
+StepQuizReviewTakenHint = "Обычно первая рецензия приходит через 2 дня после отправки решения на рецензирование (но это не точно)";
+
+StepQuizReviewInstructorPending = "Дождитесь оценки преподавателя, максимум за задачу — %@";
+StepQuizReviewInstructorCompletedHint = "Ответ преподавателя придет не сразу, вы получите уведомление";
+StepQuizReviewInstructorCompletedAction = "Смотреть рецензию";
+
+StepQuizReviewPeerPending = "Получите баллы, максимальная оценка — %@";
+StepQuizReviewPeerCompleted = "Ваш ответ оценили на %@ из %@";
+
+StepQuizReviewTeacherQuizTitle = "Поле ответа задачи";
+StepQuizReviewTeacherNoticePeer = "Учащиеся проверяют решения друг друга";
+StepQuizReviewTeacherNoticeInstructorsNoSubmissions = "Все нужные рецензии на решения отправлены.";
+StepQuizReviewTeacherNoticeInstructorsSubmissions = "Отрецензируйте %@, чтобы учащиеся получили баллы.";
+
 /* Quiz */
 CorrectFeedbackTitle1 = "Правильно.";
 CorrectFeedbackTitle2 = "Правильно, молодец!";
