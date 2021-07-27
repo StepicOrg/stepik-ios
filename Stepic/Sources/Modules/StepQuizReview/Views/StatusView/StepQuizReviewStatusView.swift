@@ -120,9 +120,9 @@ final class StepQuizReviewStatusView: UIView {
             case .pending:
                 return .quizReviewPendingBorder
             case .inProgress:
-                return .stepikGreen
+                return .stepikGreenFixed
             case .completed:
-                return .stepikGreen
+                return .stepikGreenFixed
             }
         }
 
@@ -131,7 +131,7 @@ final class StepQuizReviewStatusView: UIView {
             case .error, .pending, .inProgress:
                 return .clear
             case .completed:
-                return .stepikGreen
+                return .stepikGreenFixed
             }
         }
 

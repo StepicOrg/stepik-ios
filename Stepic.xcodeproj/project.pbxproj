@@ -732,6 +732,7 @@
 		2C7E293126B038BE008581F4 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */; };
 		2C7E293326B03B69008581F4 /* CGSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */; };
 		2C7E293526B0403F008581F4 /* StepQuizReviewStatusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */; };
+		2C7E293726B05680008581F4 /* StepQuizReviewStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
 		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
 		2C7F4160269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */; };
@@ -2637,6 +2638,7 @@
 		2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensions.swift; sourceTree = "<group>"; };
 		2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionsTests.swift; sourceTree = "<group>"; };
 		2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusContainerView.swift; sourceTree = "<group>"; };
+		2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusesView.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
 		2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryRatingView.swift; sourceTree = "<group>"; };
@@ -4020,6 +4022,7 @@
 			children = (
 				2C0196FB26AED46C009741C1 /* StepQuizReviewMessageView.swift */,
 				2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */,
+				2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */,
 				2C313E5626AFE640004ECBD2 /* StatusView */,
 			);
 			path = Views;
@@ -11023,6 +11026,7 @@
 				089200712199DB9900083627 /* BranchService.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				2C3B5D0B266F7C0C000B211B /* CourseBenefit+CoreDataProperties.swift in Sources */,
+				2C7E293726B05680008581F4 /* StepQuizReviewStatusesView.swift in Sources */,
 				2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */,
 				2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,

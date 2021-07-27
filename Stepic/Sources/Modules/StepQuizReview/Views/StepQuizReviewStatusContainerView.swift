@@ -17,7 +17,7 @@ extension StepQuizReviewStatusContainerView {
 final class StepQuizReviewStatusContainerView: UIView {
     let appearance: Appearance
 
-    private let headerView: StepQuizReviewStatusView
+    private(set) var headerView: StepQuizReviewStatusView
     private let contentView: UIView?
     private let shouldShowSeparator: Bool
 
