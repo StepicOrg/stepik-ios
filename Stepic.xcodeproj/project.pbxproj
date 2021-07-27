@@ -731,6 +731,7 @@
 		2C7D7FAD2669382200C8F690 /* WishlistWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D7FAC2669382200C8F690 /* WishlistWidgetViewModel.swift */; };
 		2C7E293126B038BE008581F4 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */; };
 		2C7E293326B03B69008581F4 /* CGSizeExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */; };
+		2C7E293526B0403F008581F4 /* StepQuizReviewStatusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
 		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
 		2C7F4160269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */; };
@@ -2635,6 +2636,7 @@
 		2C7D7FAC2669382200C8F690 /* WishlistWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistWidgetViewModel.swift; sourceTree = "<group>"; };
 		2C7E293026B038BE008581F4 /* CGSizeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensions.swift; sourceTree = "<group>"; };
 		2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensionsTests.swift; sourceTree = "<group>"; };
+		2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusContainerView.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
 		2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryRatingView.swift; sourceTree = "<group>"; };
@@ -4017,6 +4019,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0196FB26AED46C009741C1 /* StepQuizReviewMessageView.swift */,
+				2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */,
 				2C313E5626AFE640004ECBD2 /* StatusView */,
 			);
 			path = Views;
@@ -11551,6 +11554,7 @@
 				2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */,
 				62E98291FE763CC1E639E497 /* CodeQuizDataFlow.swift in Sources */,
 				62E98F2598146750666AC334 /* CodeQuizInteractor.swift in Sources */,
+				2C7E293526B0403F008581F4 /* StepQuizReviewStatusContainerView.swift in Sources */,
 				62E98450FB31F2092BA6DC08 /* CodeQuizPresenter.swift in Sources */,
 				2C73718F24EB9F1800ED24C3 /* FillBlanksQuizViewModel.swift in Sources */,
 				2C19D9BE2617587700181DB0 /* StepikAcademyCourseListCollectionViewDelegate.swift in Sources */,
