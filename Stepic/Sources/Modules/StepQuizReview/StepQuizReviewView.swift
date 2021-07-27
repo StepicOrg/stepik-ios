@@ -40,6 +40,15 @@ final class StepQuizReviewView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func showLoading() {
+        self.skeleton.viewBuilder = { StepQuizReviewSkeletonView() }
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.skeleton.hide()
+    }
+
     private func configureDummyPeerReview() {
         self.messageView.title = """
 Проверка задачи способом рецензирования. Выполните следующие шаги для получения баллов за задание.
