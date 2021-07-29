@@ -1,6 +1,16 @@
 import CoreData
 
 extension NSManagedObjectContext {
+    func insertObject<Object: NSManagedObject>() -> Object where Object: ManagedObject {
+        guard let object = NSEntityDescription.insertNewObject(
+            forEntityName: Object.entityName,
+            into: self
+        ) as? Object else {
+            fatalError("Wrong object type")
+        }
+        return object
+    }
+
     func saveOrRollback() -> Bool {
         guard self.hasChanges else {
             return true
