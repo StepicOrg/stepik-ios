@@ -1,16 +1,4 @@
-//
-//  Course+CoreDataProperties.swift
-//  
-//
-//  Created by Alexander Karpov on 25.09.15.
-//
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Course {
     @NSManaged var managedId: NSNumber?
@@ -87,14 +75,6 @@ extension Course {
     @NSManaged var managedCourseBenefits: NSOrderedSet?
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
-    }
-
-    convenience init() {
-        self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         set(newId) {

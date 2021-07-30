@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension CoursePurchase {
     @NSManaged var managedId: NSNumber?
@@ -9,22 +8,6 @@ extension CoursePurchase {
     @NSManaged var managedPaymentId: NSNumber?
 
     @NSManaged var managedCourse: Course?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CoursePurchase", in: CoreDataHelper.shared.context)!
-    }
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<CoursePurchase> {
-        NSFetchRequest<CoursePurchase>(entityName: "CoursePurchase")
-    }
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

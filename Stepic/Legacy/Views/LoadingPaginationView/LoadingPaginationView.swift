@@ -18,7 +18,7 @@ final class LoadingPaginationView: NibInitializableView {
 
     override var nibName: String { "LoadingPaginationView" }
 
-    var refreshAction : (() -> Void)?
+    var refreshAction: (() -> Void)?
 
     func setLoading() {
         activityIndicator.startAnimating()

@@ -1,13 +1,4 @@
-//
-//  Profile+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 24.07.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension Profile {
     @NSManaged var managedId: NSNumber?
@@ -33,22 +24,6 @@ extension Profile {
     @NSManaged var managedUser: User?
 
     @NSManaged var managedUserActivity: UserActivityEntity?
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<Profile> {
-        NSFetchRequest<Profile>(entityName: "Profile")
-    }
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Profile", in: CoreDataHelper.shared.context)!
-    }
-
-    convenience init() {
-        self.init(entity: Profile.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         set(newId) {

@@ -17,7 +17,7 @@ final class CourseBenefitSummariesAPI: APIEndpoint {
 
     func retrieve(id: CourseBenefitSummary.IdType) -> Promise<([CourseBenefitSummary], Meta)> {
         firstly { () -> Guarantee<[CourseBenefitSummary]> in
-            self.courseBenefitSummariesPersistenceService.fetch(id: id)
+            self.courseBenefitSummariesPersistenceService.fetch(id: id).map { $0 != nil ? [$0!] : [] }
         }.then { cachedCourseBenefitSummaries -> Promise<([CourseBenefitSummary], Meta)> in
             self.retrieve.request(
                 requestEndpoint: "\(self.name)/\(id)",

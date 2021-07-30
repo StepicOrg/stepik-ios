@@ -1,17 +1,9 @@
-//
-//  Notification+FetchMethods.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13.10.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension Notification {
-    // FIXME: CREATE GENERIC CLASS
+    // FIXME: Move to NotificationsPersistenceService
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(_ ids: [Int]) -> [Notification] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
 
@@ -29,10 +21,12 @@ extension Notification {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(id: Int) -> Notification? {
         self.fetch([id]).first
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(type: NotificationType?, offset: Int = 0, limit: Int = 10) -> [Notification]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
         let sort = NSSortDescriptor(key: "managedTime", ascending: false)
@@ -56,6 +50,7 @@ extension Notification {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func markAllAsRead() {
         let request = NSBatchUpdateRequest(entityName: "Notification")
         request.predicate = NSPredicate(value: true)

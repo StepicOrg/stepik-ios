@@ -16,6 +16,7 @@ protocol StepCardViewDelegate: AnyObject {
 
 extension StepCardViewDelegate {
     func onControlButtonClick() {}
+
     func onTitleButtonClick() {}
 }
 

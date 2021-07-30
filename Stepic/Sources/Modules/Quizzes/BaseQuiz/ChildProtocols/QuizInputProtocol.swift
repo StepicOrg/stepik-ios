@@ -17,9 +17,14 @@ enum ReplyValidationResultType {
 
 extension QuizInputProtocol {
     func update(reply: Reply?) {}
+
     func update(status: QuizStatus?) {}
+
     func update(dataset: Dataset?) {}
+
     func update(feedback: SubmissionFeedback?) {}
+
     func update(codeDetails: CodeDetails?) {}
+
     func isReplyValid(_ reply: Reply) -> ReplyValidationResultType { .success }
 }

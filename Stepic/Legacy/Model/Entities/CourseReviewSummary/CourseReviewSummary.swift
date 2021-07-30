@@ -1,16 +1,7 @@
-//
-//  CourseReviewSummary.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 29.09.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class CourseReviewSummary: NSManagedObject, JSONSerializable, IDFetchable {
+final class CourseReviewSummary: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var rating: Int {
@@ -18,19 +9,15 @@ final class CourseReviewSummary: NSManagedObject, JSONSerializable, IDFetchable 
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.average = json[JSONKey.average.rawValue].floatValue
         self.count = json[JSONKey.count.rawValue].intValue
         self.distribution = json[JSONKey.distribution.rawValue].arrayValue.compactMap(\.int)
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     enum JSONKey: String {

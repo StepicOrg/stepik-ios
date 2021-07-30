@@ -51,7 +51,7 @@ func ??? <T>(optional: T?, defaultValue: @autoclosure () -> String) -> String {
     }
 }
 
-func ==<T: Equatable>(lhs: T?, rhs: T?) -> Bool {
+func == <T: Equatable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case (.some(let lhs), .some(let rhs)):
         return lhs == rhs

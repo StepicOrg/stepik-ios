@@ -1,13 +1,4 @@
-//
-//  CodeLimit+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 30.05.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension CodeLimit {
     @NSManaged var managedLanguage: String?
@@ -16,42 +7,30 @@ extension CodeLimit {
 
     @NSManaged var managedOptions: StepOptions?
 
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CodeLimit", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<CodeLimit> {
-        NSFetchRequest<CodeLimit>(entityName: "CodeLimit")
-    }
-
-    convenience init() {
-        self.init(entity: CodeLimit.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
-
     var languageString: String {
         get {
-            managedLanguage ?? ""
+            self.managedLanguage ?? ""
         }
-        set(value) {
-            managedLanguage = value
+        set {
+            self.managedLanguage = newValue
         }
     }
 
     var memory: Double {
         get {
-            managedMemory?.doubleValue ?? 0.0
+            self.managedMemory?.doubleValue ?? 0.0
         }
-        set(value) {
-            managedMemory = value as NSNumber?
+        set {
+            self.managedMemory = NSNumber(value: newValue)
         }
     }
 
     var time: Double {
         get {
-            managedTime?.doubleValue ?? 0.0
+            self.managedTime?.doubleValue ?? 0.0
         }
-        set(value) {
-            managedTime = value as NSNumber?
+        set {
+            self.managedTime = NSNumber(value: newValue)
         }
     }
 }

@@ -32,7 +32,7 @@ final class StreakNotificationsStorageManager: StreakNotificationsStorageManager
     }
 
     var streakNotificationsStartHourLocal: Int {
-        let time = (self.streakNotificationsStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        let time = (self.streakNotificationsStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60) % 24
         return time < 0 ? 24 + time : time
     }
 

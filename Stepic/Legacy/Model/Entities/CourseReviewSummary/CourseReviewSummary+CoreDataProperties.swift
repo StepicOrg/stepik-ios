@@ -1,13 +1,4 @@
-//
-//  CourseReviewSummary+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 29.09.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension CourseReviewSummary {
     @NSManaged var managedDistribution: NSObject?
@@ -16,18 +7,6 @@ extension CourseReviewSummary {
     @NSManaged var managedId: NSNumber?
 
     @NSManaged var managedCourse: Course?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CourseReviewSummary", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<CourseReviewSummary> {
-        NSFetchRequest<CourseReviewSummary>(entityName: "CourseReviewSummary")
-    }
-
-    convenience init() {
-        self.init(entity: CourseReviewSummary.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

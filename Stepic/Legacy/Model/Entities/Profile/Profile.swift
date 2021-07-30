@@ -1,17 +1,12 @@
-//
-//  Profile.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 24.07.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class Profile: NSManagedObject, JSONSerializable {
+final class Profile: NSManagedObject, ManagedObject, JSONSerializable {
     typealias IdType = Int
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
 
     var json: JSON {
         [
@@ -34,11 +29,11 @@ final class Profile: NSManagedObject, JSONSerializable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.firstName = json[JSONKey.firstName.rawValue].stringValue
         self.lastName = json[JSONKey.lastName.rawValue].stringValue
@@ -58,10 +53,7 @@ final class Profile: NSManagedObject, JSONSerializable {
         self.emailAddressesArray = json[JSONKey.emailAddresses.rawValue].arrayObject as? [Int] ?? []
     }
 
-    func update(json: JSON) {
-        self.initialize(json)
-    }
-
+    @available(*, deprecated, message: "Legacy")
     static func fetchById(_ id: Int) -> [Profile]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Profile")
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
