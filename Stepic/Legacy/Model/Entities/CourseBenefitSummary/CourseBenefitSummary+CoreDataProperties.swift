@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension CourseBenefitSummary {
     @NSManaged var managedId: NSNumber?
@@ -14,22 +13,6 @@ extension CourseBenefitSummary {
     @NSManaged var managedCurrencyCode: String?
 
     @NSManaged var managedCourse: Course?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CourseBenefitSummary", in: CoreDataHelper.shared.context)!
-    }
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<CourseBenefitSummary> {
-        NSFetchRequest<CourseBenefitSummary>(entityName: "CourseBenefitSummary")
-    }
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

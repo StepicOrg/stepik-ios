@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: - Responding to App State Changes and System Events
+    // MARK: - Responding to App Life-Cycle Events
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.notificationsRegistrationService.renewDeviceToken()
@@ -187,6 +187,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         IAPService.shared.stopObservingPayments()
+    }
+
+    // MARK: - Responding to Environment Changes
+
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        CoreDataHelper.shared.context.refreshAllObjects()
     }
 
     // MARK: - Downloading Data in the Background

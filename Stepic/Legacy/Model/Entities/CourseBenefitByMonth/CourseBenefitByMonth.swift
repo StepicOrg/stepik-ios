@@ -1,17 +1,20 @@
 import CoreData
-import Foundation
 import SwiftDate
 import SwiftyJSON
 
-final class CourseBenefitByMonth: NSManagedObject, JSONSerializable {
+final class CourseBenefitByMonth: NSManagedObject, ManagedObject, JSONSerializable {
     typealias IdType = String
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
 
     var date: DateInRegion? {
         self.dateString.toISODate(region: Date.europeMoscowRegion)
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
     }
 

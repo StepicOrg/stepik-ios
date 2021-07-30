@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension ProctorSession {
     @NSManaged var managedId: NSNumber?
@@ -18,18 +17,6 @@ extension ProctorSession {
     @NSManaged var managedScore: NSNumber?
 
     @NSManaged var managedSection: Section?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "ProctorSession", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<ProctorSession> {
-        NSFetchRequest<ProctorSession>(entityName: "ProctorSession")
-    }
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

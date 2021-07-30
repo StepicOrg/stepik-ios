@@ -1,17 +1,8 @@
-//
-//  CourseReview.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 12/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import PromiseKit
 import SwiftyJSON
 
-final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
+final class CourseReview: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var json: JSON {
@@ -23,8 +14,16 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         ]
     }
 
+    convenience init(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) {
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.courseID = courseID
+        self.userID = userID
+        self.score = score
+        self.text = text
+    }
+
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         initialize(json)
     }
 
@@ -41,8 +40,9 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         initialize(json)
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(courseID: Course.IdType) -> Guarantee<[CourseReview]> {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseReview")
+        let request = CourseReview.sortedFetchRequest
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let predicate = NSPredicate(format: "managedCourseId == %@", courseID.fetchValue)
@@ -65,8 +65,9 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(userID: User.IdType) -> Guarantee<[CourseReview]> {
-        let request = CourseReview.fetchRequest
+        let request = CourseReview.sortedFetchRequest
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let predicate = NSPredicate(format: "managedUserId == %@", userID.fetchValue)
@@ -89,8 +90,9 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(courseID: Course.IdType, userID: User.IdType) -> Guarantee<[CourseReview]> {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseReview")
+        let request = CourseReview.sortedFetchRequest
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let courseIDPredicate = NSPredicate(format: "managedCourseId == %@", courseID.fetchValue)
@@ -115,6 +117,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func delete(_ id: CourseReview.IdType) -> Guarantee<Void> {
         CourseReview.fetchAsync(ids: [id]).done { courseReviews in
             courseReviews.forEach {

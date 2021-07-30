@@ -1,115 +1,12 @@
 import CoreData
-import Foundation
 
-final class SubmissionEntity: NSManagedObject {
+final class SubmissionEntity: NSManagedObject, ManagedObject, Identifiable {
     typealias IdType = Int
 
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "SubmissionEntity", in: CoreDataHelper.shared.context)!
-    }
+    static var idAttributeName: String { #keyPath(managedID) }
 
-    var id: Int {
-        get {
-            self.managedID.intValue
-        }
-        set {
-            self.managedID = NSNumber(value: newValue)
-        }
-    }
-
-    var attemptID: AttemptEntity.IdType {
-        get {
-            self.managedAttemptID.intValue
-        }
-        set {
-            self.managedAttemptID = NSNumber(value: newValue)
-        }
-    }
-
-    var reply: Reply? {
-        get {
-            self.managedReply
-        }
-        set {
-            self.managedReply = newValue
-        }
-    }
-
-    var isLocal: Bool {
-        get {
-            self.managedLocal.boolValue
-        }
-        set {
-            self.managedLocal = NSNumber(value: newValue)
-        }
-    }
-
-    var score: Float {
-        get {
-            self.managedScore.floatValue
-        }
-        set {
-            self.managedScore = NSNumber(value: newValue)
-        }
-    }
-
-    var hint: String? {
-        get {
-            self.managedHint
-        }
-        set {
-            self.managedHint = newValue
-        }
-    }
-
-    var statusString: String? {
-        get {
-            self.managedStatus
-        }
-        set {
-            self.managedStatus = newValue
-        }
-    }
-
-    var status: SubmissionStatus? {
-        if let statusString = self.statusString {
-            return SubmissionStatus(rawValue: statusString)
-        } else {
-            return nil
-        }
-    }
-
-    var feedback: SubmissionFeedback? {
-        get {
-            self.managedFeedback
-        }
-        set {
-            self.managedFeedback = newValue
-        }
-    }
-
-    var time: Date {
-        get {
-            self.managedTime ?? Date()
-        }
-        set {
-            self.managedTime = newValue
-        }
-    }
-
-    var attempt: AttemptEntity? {
-        get {
-            self.managedAttempt
-        }
-        set {
-            self.managedAttempt = newValue
-        }
-    }
-
-    // MARK: Init
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedID), ascending: false)]
     }
 }
 
@@ -131,23 +28,19 @@ extension SubmissionEntity {
         )
     }
 
-    convenience init(submission: Submission, managedObjectContext: NSManagedObjectContext) {
-        guard let entity = NSEntityDescription.entity(
-            forEntityName: "SubmissionEntity", in: managedObjectContext
-        ) else {
-            fatalError("Wrong object type")
-        }
+    static func insert(into context: NSManagedObjectContext, submission: Submission) -> SubmissionEntity {
+        let object: SubmissionEntity = context.insertObject()
 
-        self.init(entity: entity, insertInto: managedObjectContext)
+        object.id = submission.id
+        object.attemptID = submission.attemptID
+        object.reply = submission.reply
+        object.isLocal = submission.isLocal
+        object.score = submission.score
+        object.hint = submission.hint
+        object.statusString = submission.statusString
+        object.feedback = submission.feedback
+        object.time = submission.time
 
-        self.id = submission.id
-        self.attemptID = submission.attemptID
-        self.reply = submission.reply
-        self.isLocal = submission.isLocal
-        self.score = submission.score
-        self.hint = submission.hint
-        self.statusString = submission.statusString
-        self.feedback = submission.feedback
-        self.time = submission.time
+        return object
     }
 }

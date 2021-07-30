@@ -1,27 +1,22 @@
-//
-//  LastStep.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 13.03.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class LastStep: NSManagedObject, JSONSerializable {
+final class LastStep: NSManagedObject, ManagedObject, JSONSerializable {
     typealias IdType = String
+
+    convenience init() {
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+    }
 
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
+        self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        id = json["id"].stringValue
-        unitId = json["unit"].int
-        stepId = json["step"].int
+        self.id = json["id"].stringValue
+        self.unitId = json["unit"].int
+        self.stepId = json["step"].int
     }
 
     func update(unitId: Int?, stepId: Int?) {
@@ -37,6 +32,6 @@ final class LastStep: NSManagedObject, JSONSerializable {
     }
 
     func update(json: JSON) {
-        initialize(json)
+        self.initialize(json)
     }
 }

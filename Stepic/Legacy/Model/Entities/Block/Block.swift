@@ -1,16 +1,7 @@
-//
-//  Block.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 12.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class Block: NSManagedObject {
+final class Block: NSManagedObject, ManagedObject {
     var type: BlockType? { BlockType(rawValue: self.name) }
 
     var image: UIImage {
@@ -32,7 +23,7 @@ final class Block: NSManagedObject {
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.initialize(json)
         self.video = Video(json: json[JSONKey.video.rawValue])
     }

@@ -1,13 +1,4 @@
-//
-//  EmailAddress+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 10/9/19.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension EmailAddress {
     @NSManaged var managedId: NSNumber?
@@ -17,18 +8,6 @@ extension EmailAddress {
     @NSManaged var managedIsPrimary: NSNumber?
 
     @NSManaged var managedProfile: Profile?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "EmailAddress", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<EmailAddress> {
-        NSFetchRequest<EmailAddress>(entityName: "EmailAddress")
-    }
-
-    convenience init() {
-        self.init(entity: EmailAddress.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

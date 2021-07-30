@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol SubmissionsPersistenceServiceProtocol: AnyObject {
@@ -12,56 +11,29 @@ protocol SubmissionsPersistenceServiceProtocol: AnyObject {
     func deleteAll() -> Promise<Void>
 }
 
-final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
+final class SubmissionsPersistenceService: BasePersistenceService<SubmissionEntity>,
+                                           SubmissionsPersistenceServiceProtocol {
     private let attemptsPersistenceService: AttemptsPersistenceServiceProtocol
 
     init(
         managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context,
         attemptsPersistenceService: AttemptsPersistenceServiceProtocol = AttemptsPersistenceService()
     ) {
-        self.managedObjectContext = managedObjectContext
         self.attemptsPersistenceService = attemptsPersistenceService
-    }
-
-    // MARK: Protocol Conforming
-
-    func fetch(ids: [Submission.IdType]) -> Guarantee<[SubmissionEntity]> {
-        Guarantee { seal in
-            let request = NSFetchRequest<SubmissionEntity>(entityName: "SubmissionEntity")
-
-            let idSubpredicates = ids.map { id in
-                NSPredicate(format: "%K == %@", #keyPath(SubmissionEntity.managedID), NSNumber(value: id))
-            }
-            let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
-
-            request.predicate = compoundPredicate
-            request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
-
-            self.managedObjectContext.performAndWait {
-                do {
-                    let submissions = try self.managedObjectContext.fetch(request)
-                    seal(submissions)
-                } catch {
-                    print("Error while fetching submissions = \(ids)")
-                    seal([])
-                }
-            }
-        }
+        super.init(managedObjectContext: managedObjectContext)
     }
 
     func fetchAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<[SubmissionEntity]> {
         Guarantee { seal in
             firstly { () -> Guarantee<AttemptEntity?> in
-                self.fetchAttempt(id: attemptID)
+                self.attemptsPersistenceService.fetch(id: attemptID)
             }.done { cachedAttemptOrNil in
-                let request = NSFetchRequest<SubmissionEntity>(entityName: "SubmissionEntity")
+                let request = SubmissionEntity.sortedFetchRequest
                 request.predicate = NSPredicate(
                     format: "%K == %@",
                     #keyPath(SubmissionEntity.managedAttemptID),
                     NSNumber(value: attemptID)
                 )
-                request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
                 request.returnsObjectsAsFaults = false
 
                 self.managedObjectContext.performAndWait {
@@ -135,39 +107,12 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
         }
     }
 
-    func deleteAll() -> Promise<Void> {
-        Promise { seal in
-            let request: NSFetchRequest<SubmissionEntity> = SubmissionEntity.fetchRequest
-            self.managedObjectContext.performAndWait {
-                do {
-                    let submissions = try self.managedObjectContext.fetch(request)
-                    for submission in submissions {
-                        self.managedObjectContext.delete(submission)
-                    }
-
-                    try? self.managedObjectContext.save()
-
-                    seal.fulfill(())
-                } catch {
-                    print("SubmissionsPersistenceService :: failed delete all submissions with error = \(error)")
-                    seal.reject(Error.deleteFailed)
-                }
-            }
-        }
-    }
-
     // MARK: Private API
-
-    private func fetchAttempt(id: Attempt.IdType) -> Guarantee<AttemptEntity?> {
-        self.attemptsPersistenceService
-            .fetch(ids: [id])
-            .map { $0.first }
-    }
 
     private func insertOrReplace(submission: Submission) -> Guarantee<Void> {
         Guarantee { seal in
             DispatchQueue.main.promise { () -> Guarantee<AttemptEntity?> in
-                self.fetchAttempt(id: submission.attemptID)
+                self.attemptsPersistenceService.fetch(id: submission.attemptID)
             }.then { cachedAttemptOrNil -> Guarantee<(AttemptEntity?, [SubmissionEntity])> in
                 self.fetchAttemptSubmissions(attemptID: submission.attemptID)
                     .map { (cachedAttemptOrNil, $0) }
@@ -183,9 +128,9 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                 self.managedObjectContext.performAndWait {
                     cachedSubmissions.forEach { self.managedObjectContext.delete($0) }
 
-                    let newSubmission = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: self.managedObjectContext
+                    let newSubmission = SubmissionEntity.insert(
+                        into: self.managedObjectContext,
+                        submission: submission
                     )
 
                     try? self.managedObjectContext.save()
@@ -214,9 +159,5 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
                 seal(())
             }
         }
-    }
-
-    enum Error: Swift.Error {
-        case deleteFailed
     }
 }

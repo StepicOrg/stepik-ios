@@ -1,33 +1,18 @@
-//
-//  Assignment.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 19.11.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
 @objc
-final class Assignment: NSManagedObject, IDFetchable {
-    typealias IdType = Int
-
+final class Assignment: NSManagedObject, ManagedObject, IDFetchable {
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.unitId = json[JSONKey.unit.rawValue].intValue
         self.stepId = json[JSONKey.step.rawValue].intValue
         self.progressId = json[JSONKey.progress.rawValue].stringValue
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     enum JSONKey: String {

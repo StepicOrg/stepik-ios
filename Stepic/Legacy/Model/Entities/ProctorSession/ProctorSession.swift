@@ -1,8 +1,7 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class ProctorSession: NSManagedObject, JSONSerializable, IDFetchable {
+final class ProctorSession: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var isFinished: Bool {
@@ -10,11 +9,11 @@ final class ProctorSession: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.userId = json[JSONKey.user.rawValue].intValue
         self.sectionId = json[JSONKey.section.rawValue].intValue
@@ -26,10 +25,6 @@ final class ProctorSession: NSManagedObject, JSONSerializable, IDFetchable {
         self.submitDate = Parser.dateFromTimedateJSON(json[JSONKey.submitDate.rawValue])
         self.comment = json[JSONKey.comment.rawValue].stringValue
         self.score = json[JSONKey.score.rawValue].floatValue
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     enum JSONKey: String {

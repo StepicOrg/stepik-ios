@@ -36,7 +36,7 @@ final class UserActivitiesNetworkService: UserActivitiesNetworkServiceProtocol {
                 if let cachedUserActivityEntity = cachedUserActivityEntityOrNil {
                     return .value(cachedUserActivityEntity)
                 } else {
-                    return self.userActivitiesPersistenceService.create(userActivity: userActivity)
+                    return self.userActivitiesPersistenceService.insert(userActivity: userActivity)
                 }
             }.done { userActivityEntity in
                 userActivityEntity.pins = userActivity.pins

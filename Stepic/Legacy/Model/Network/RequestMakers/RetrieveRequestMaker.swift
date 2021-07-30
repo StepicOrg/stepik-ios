@@ -242,9 +242,9 @@ final class RetrieveRequestMaker {
         }
     }
 
-    func request(
+    func request<IdType: Equatable>(
         requestEndpoint: String,
-        ids: [IDTypeable],
+        ids: [IdType],
         withManager manager: Alamofire.Session
     ) -> Promise<JSON> {
         if ids.isEmpty {
@@ -302,8 +302,7 @@ final class RetrieveRequestMaker {
                         seal.reject(NetworkError(error: error))
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
-                        let resultArray: [T] = jsonArray.map {
-                            objectJSON in
+                        let resultArray: [T] = jsonArray.map { objectJSON in
                             if let recoveredIndex = updating.firstIndex(where: { $0.hasEqualId(json: objectJSON) }) {
                                 updating[recoveredIndex].update(json: objectJSON)
                                 return updating[recoveredIndex]

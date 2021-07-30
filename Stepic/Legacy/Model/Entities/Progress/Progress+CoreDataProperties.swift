@@ -1,16 +1,4 @@
-//
-//  Progress+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 03.11.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Progress {
     @NSManaged var managedId: String?
@@ -26,18 +14,6 @@ extension Progress {
     @NSManaged var managedSection: Section?
     @NSManaged var managedUnit: Unit?
     @NSManaged var managedCourse: Course?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<Progress> {
-        NSFetchRequest<Progress>(entityName: "Progress")
-    }
-
-    convenience init() {
-        self.init(entity: Progress.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: String {
         set(newId) {
