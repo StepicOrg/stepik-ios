@@ -6,7 +6,7 @@ extension CourseListModel {
     @NSManaged var managedDescription: String?
     @NSManaged var managedLanguage: String?
     @NSManaged var managedPosition: NSNumber?
-    
+
     @NSManaged var managedCoursesArray: NSObject?
     @NSManaged var managedSimilarAuthorsArray: NSObject?
     @NSManaged var managedSimilarCourseListsArray: NSObject?

@@ -7,7 +7,7 @@ final class CourseBenefitSummary: NSManagedObject, ManagedObject, JSONSerializab
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
-    
+
     var isEmpty: Bool {
         self.totalUserIncome.isZero
             && self.totalTurnover.isZero

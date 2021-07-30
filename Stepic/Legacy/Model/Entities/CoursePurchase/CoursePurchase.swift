@@ -7,7 +7,7 @@ final class CoursePurchase: NSManagedObject, ManagedObject, IDFetchable {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
-    
+
     required convenience init(json: JSON) {
         self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)

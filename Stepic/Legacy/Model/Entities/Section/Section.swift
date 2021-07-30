@@ -202,7 +202,7 @@ final class Section: NSManagedObject, ManagedObject, IDFetchable {
         }
 
         var wasError = false
-        let errorWhileDownloading : () -> Void = {
+        let errorWhileDownloading: () -> Void = {
             if !wasError {
                 wasError = true
                 errorHandler()
@@ -258,7 +258,7 @@ final class Section: NSManagedObject, ManagedObject, IDFetchable {
             refreshMode: .update,
             success: { newProgresses -> Void in
                 progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                for i in 0 ..< min(units.count, progresses.count) {
+                for i in 0..<min(units.count, progresses.count) {
                     units[i].progress = progresses[i]
                 }
 
@@ -295,7 +295,7 @@ final class Section: NSManagedObject, ManagedObject, IDFetchable {
             success: { newLessons in
                 lessons = Sorter.sort(newLessons, byIds: lessonIds)
 
-                for i in 0 ..< units.count {
+                for i in 0..<units.count {
                     units[i].lesson = lessons[i]
                 }
 

@@ -8,7 +8,7 @@ extension LastStep {
     @NSManaged var managedCourse: Course?
 
     var id: String {
-        set (newId) {
+        set(newId) {
             self.managedId = newId
         }
         get {

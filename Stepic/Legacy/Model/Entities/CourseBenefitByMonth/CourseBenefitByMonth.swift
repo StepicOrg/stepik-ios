@@ -8,7 +8,7 @@ final class CourseBenefitByMonth: NSManagedObject, ManagedObject, JSONSerializab
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
-    
+
     var date: DateInRegion? {
         self.dateString.toISODate(region: Date.europeMoscowRegion)
     }

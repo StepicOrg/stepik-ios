@@ -9,7 +9,7 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         case distinction = "distinction"
         case regular = "regular"
     }
-    
+
     required convenience init(json: JSON) {
         self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)

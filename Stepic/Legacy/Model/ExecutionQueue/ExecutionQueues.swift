@@ -13,6 +13,7 @@ import Foundation
  */
 final class ExecutionQueues {
     private init() {}
+
     static let sharedQueues = ExecutionQueues()
 
     var connectionAvailableExecutionQueue = ExecutionQueue()

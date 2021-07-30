@@ -25,7 +25,7 @@ final class ConnectionHelper: NSObject {
 
     func instantiate() {}
 
-    func addReachabilityChangedHandler(handler : @escaping (Bool) -> Void) {
+    func addReachabilityChangedHandler(handler: @escaping (Bool) -> Void) {
         reachabilityChangedHandlers.append(handler)
     }
 

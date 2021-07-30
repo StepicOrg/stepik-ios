@@ -9,7 +9,7 @@ final class UserCourse: NSManagedObject, ManagedObject, IDFetchable {
     }
 
     static var observableKeys: Set<String> = ["managedIsFavorite", "managedIsArchived", "managedCourse"]
-    
+
     var json: JSON {
         [
             JSONKey.isFavorite.rawValue: self.isFavorite,

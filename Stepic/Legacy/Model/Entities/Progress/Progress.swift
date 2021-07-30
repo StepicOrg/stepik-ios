@@ -25,7 +25,7 @@ final class Progress: NSManagedObject, ManagedObject, IDFetchable {
     var percentPassed: Float {
         self.completeRate * 100
     }
-    
+
     required convenience init(json: JSON) {
         self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)

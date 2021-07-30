@@ -4,7 +4,7 @@ final class StoryPartReaction: NSManagedObject, ManagedObject {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedPosition), ascending: true)]
     }
-    
+
     var storyReaction: StoryReaction? {
         if let reaction = self.reaction {
             return StoryReaction(rawValue: reaction)

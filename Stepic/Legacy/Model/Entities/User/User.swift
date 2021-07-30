@@ -8,7 +8,7 @@ final class User: NSManagedObject, ManagedObject, IDFetchable {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
-    
+
     /// Returns true if joinDate is less than in 5 minutes from now.
     var didJustRegister: Bool {
         if let joinDate = self.joinDate {
