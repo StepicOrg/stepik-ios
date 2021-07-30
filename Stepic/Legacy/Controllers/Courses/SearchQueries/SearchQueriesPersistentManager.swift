@@ -33,7 +33,7 @@ final class SearchQueriesPersistentManager {
             key.indexOf(query.lowercased()) != nil
         })
         let arr = [String](filteredQueries.sorted(by: {
-            (first: (key: String, value: Int), second: (key: String, value: Int))  in
+            (first: (key: String, value: Int), second: (key: String, value: Int)) in
             if first.value == second.value {
                 return first.key.count < second.key.count
             } else {

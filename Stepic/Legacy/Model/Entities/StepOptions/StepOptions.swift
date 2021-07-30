@@ -1,16 +1,7 @@
-//
-//  StepOptions.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 30.05.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class StepOptions: NSManagedObject {
+final class StepOptions: NSManagedObject, ManagedObject {
     var languages: [CodeLanguage] {
         self.limits.compactMap { $0.language }
     }
@@ -20,15 +11,11 @@ final class StepOptions: NSManagedObject {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
     func update(json: JSON) {
-        self.initialize(json)
-    }
-
-    func initialize(_ json: JSON) {
         self.executionTimeLimit = json[JSONKey.executionTimeLimit.rawValue].doubleValue
         self.executionMemoryLimit = json[JSONKey.executionMemoryLimit.rawValue].doubleValue
         self.isRunUserCodeAllowed = json[JSONKey.isRunUserCodeAllowed.rawValue].boolValue

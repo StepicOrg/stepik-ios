@@ -1,17 +1,8 @@
-//
-//  Section.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 08.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
 @objc
-final class Section: NSManagedObject, IDFetchable {
+final class Section: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var isReachable: Bool {
@@ -108,11 +99,11 @@ final class Section: NSManagedObject, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.title = json[JSONKey.title.rawValue].stringValue
         self.position = json[JSONKey.position.rawValue].intValue
@@ -141,10 +132,7 @@ final class Section: NSManagedObject, IDFetchable {
         self.hardDeadline = Parser.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
     }
 
-    func update(json: JSON) {
-        self.initialize(json)
-    }
-
+    @available(*, deprecated, message: "Legacy")
     static func fetch(_ ids: [IdType]) -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
         let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
@@ -162,6 +150,7 @@ final class Section: NSManagedObject, IDFetchable {
         return sections
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func getSections(_ id: Int) throws -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
 
@@ -182,6 +171,7 @@ final class Section: NSManagedObject, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     func loadUnits(success: @escaping (() -> Void), error errorHandler: @escaping (() -> Void)) {
         if self.unitsArray.count == 0 {
             success()
@@ -212,7 +202,7 @@ final class Section: NSManagedObject, IDFetchable {
         }
 
         var wasError = false
-        let errorWhileDownloading : () -> Void = {
+        let errorWhileDownloading: () -> Void = {
             if !wasError {
                 wasError = true
                 errorHandler()
@@ -245,6 +235,7 @@ final class Section: NSManagedObject, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     func loadProgressesForUnits(
         units: [Unit],
         completion: @escaping (() -> Void),
@@ -267,7 +258,7 @@ final class Section: NSManagedObject, IDFetchable {
             refreshMode: .update,
             success: { newProgresses -> Void in
                 progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                for i in 0 ..< min(units.count, progresses.count) {
+                for i in 0..<min(units.count, progresses.count) {
                     units[i].progress = progresses[i]
                 }
 
@@ -282,6 +273,7 @@ final class Section: NSManagedObject, IDFetchable {
         )
     }
 
+    @available(*, deprecated, message: "Legacy")
     func loadLessonsForUnits(
         units: [Unit],
         completion: @escaping (() -> Void),
@@ -303,7 +295,7 @@ final class Section: NSManagedObject, IDFetchable {
             success: { newLessons in
                 lessons = Sorter.sort(newLessons, byIds: lessonIds)
 
-                for i in 0 ..< units.count {
+                for i in 0..<units.count {
                     units[i].lesson = lessons[i]
                 }
 

@@ -46,6 +46,7 @@ enum CourseList {
             let state: ViewControllerState
         }
     }
+
     /// Load and show next course page for given course list
     enum NextCoursesLoad {
         struct Request {}

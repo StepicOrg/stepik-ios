@@ -1,7 +1,6 @@
 import CoreData
-import Foundation
 
-final class LastCodeLanguage: NSManagedObject {
+final class LastCodeLanguage: NSManagedObject, ManagedObject {
     var language: CodeLanguage? { CodeLanguage(rawValue: self.languageString) }
 
     override var description: String {
@@ -9,7 +8,7 @@ final class LastCodeLanguage: NSManagedObject {
     }
 
     convenience init(language: CodeLanguage) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.languageString = language.rawValue
     }
 }

@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension DiscussionThread {
     @NSManaged var managedId: String?
@@ -8,18 +7,6 @@ extension DiscussionThread {
     @NSManaged var managedDiscussionProxy: String?
 
     @NSManaged var managedStep: Step?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "DiscussionThread", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<DiscussionThread> {
-        NSFetchRequest<DiscussionThread>(entityName: "DiscussionThread")
-    }
-
-    convenience init() {
-        self.init(entity: DiscussionThread.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: String {
         get {

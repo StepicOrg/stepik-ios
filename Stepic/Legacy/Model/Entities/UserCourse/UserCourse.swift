@@ -1,9 +1,14 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
+final class UserCourse: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+
+    static var observableKeys: Set<String> = ["managedIsFavorite", "managedIsArchived", "managedCourse"]
 
     var json: JSON {
         [
@@ -14,7 +19,7 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
         NotificationCenter.default.post(name: .userCourseDidCreateNotification, object: self)
     }

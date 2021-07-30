@@ -14,6 +14,7 @@ import Foundation
 @available(*, deprecated, message: "Legacy class")
 final class DeviceDefaults {
     private init() {}
+
     static let sharedDefaults = DeviceDefaults()
 
     private let defaults = UserDefaults.standard

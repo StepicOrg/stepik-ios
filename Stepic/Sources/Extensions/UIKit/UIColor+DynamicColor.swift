@@ -16,7 +16,7 @@ extension UIColor {
     ) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { (traitCollection: UITraitCollection) -> UIColor in
-                switch(traitCollection.userInterfaceStyle, traitCollection.accessibilityContrast) {
+                switch (traitCollection.userInterfaceStyle, traitCollection.accessibilityContrast) {
                 case (.dark, .high):
                     return darkAccessibility ?? dark
                 case (.dark, _):

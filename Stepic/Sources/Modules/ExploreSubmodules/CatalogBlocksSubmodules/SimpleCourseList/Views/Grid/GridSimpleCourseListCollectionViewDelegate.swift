@@ -49,7 +49,7 @@ final class GridSimpleCourseListCollectionViewDelegate: NSObject,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout,
-              let viewModel = self.itemsInSectionViewModels[safe: indexPath.row]  else {
+              let viewModel = self.itemsInSectionViewModels[safe: indexPath.row] else {
             return .zero
         }
 

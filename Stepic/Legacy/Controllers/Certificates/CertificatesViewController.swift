@@ -30,6 +30,7 @@ final class CertificatesLegacyAssembly: Assembly {
             certificatesAPI: ApiDataDownloader.certificates,
             coursesAPI: ApiDataDownloader.courses,
             presentationContainer: PresentationContainer.certificates,
+            certificatesPersistenceService: CertificatesPersistenceService(),
             view: certificatesVC
         )
 

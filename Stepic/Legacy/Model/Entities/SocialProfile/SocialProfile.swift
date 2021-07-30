@@ -1,9 +1,12 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class SocialProfile: NSManagedObject, JSONSerializable, IDFetchable {
+final class SocialProfile: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
 
     var json: JSON {
         [
@@ -20,20 +23,16 @@ final class SocialProfile: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.userID = json[JSONKey.user.rawValue].intValue
         self.providerString = json[JSONKey.provider.rawValue].stringValue
         self.name = json[JSONKey.name.rawValue].stringValue
         self.urlString = json[JSONKey.url.rawValue].stringValue
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     enum JSONKey: String {

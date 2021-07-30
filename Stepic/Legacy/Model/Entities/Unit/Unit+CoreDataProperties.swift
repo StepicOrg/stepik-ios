@@ -1,16 +1,4 @@
-//
-//  Unit+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 09.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Unit {
     @NSManaged var managedId: NSNumber?
@@ -30,18 +18,6 @@ extension Unit {
     @NSManaged var managedProgress: Progress?
 
     @NSManaged var managedAssignments: NSOrderedSet?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<Unit> {
-        NSFetchRequest<Unit>(entityName: "Unit")
-    }
-
-    convenience init() {
-        self.init(entity: Unit.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         set(newId) {

@@ -17,11 +17,102 @@ extension AttemptEntity {
     @NSManaged var managedUser: User?
     @NSManaged var managedSubmission: SubmissionEntity?
 
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedID), ascending: false)]
+    var id: Int {
+        get {
+            self.managedID.intValue
+        }
+        set {
+            self.managedID = NSNumber(value: newValue)
+        }
     }
 
-    static var fetchRequest: NSFetchRequest<AttemptEntity> {
-        NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")
+    var stepID: Step.IdType {
+        get {
+            self.managedStepID.intValue
+        }
+        set {
+            self.managedStepID = NSNumber(value: newValue)
+        }
+    }
+
+    var step: Step? {
+        get {
+            self.managedStep
+        }
+        set {
+            self.managedStep = newValue
+        }
+    }
+
+    var userID: User.IdType {
+        get {
+            self.managedUserID.intValue
+        }
+        set {
+            self.managedUserID = NSNumber(value: newValue)
+        }
+    }
+
+    var user: User? {
+        get {
+            self.managedUser
+        }
+        set {
+            self.managedUser = newValue
+        }
+    }
+
+    var dataset: Dataset? {
+        get {
+            self.managedDataset
+        }
+        set {
+            self.managedDataset = newValue
+        }
+    }
+
+    var datasetURL: String? {
+        get {
+            self.managedDatasetURL
+        }
+        set {
+            self.managedDatasetURL = newValue
+        }
+    }
+
+    var status: String? {
+        get {
+            self.managedStatus
+        }
+        set {
+            self.managedStatus = newValue
+        }
+    }
+
+    var timeString: String? {
+        get {
+            self.managedTime
+        }
+        set {
+            self.managedTime = newValue
+        }
+    }
+
+    var timeLeftString: String? {
+        get {
+            self.managedTimeLeft
+        }
+        set {
+            self.managedTimeLeft = newValue
+        }
+    }
+
+    var submission: SubmissionEntity? {
+        get {
+            self.managedSubmission
+        }
+        set {
+            self.managedSubmission = newValue
+        }
     }
 }

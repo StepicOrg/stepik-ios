@@ -1,23 +1,20 @@
-//
-//  CourseList.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 10.11.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import PromiseKit
 import SwiftyJSON
 
-final class CourseListModel: NSManagedObject, IDFetchable {
+final class CourseListModel: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
+
+    static var entityName: String { "CourseList" }
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: "managedPosition", ascending: true)]
+    }
 
     var language: ContentLanguage { ContentLanguage(languageString: self.languageString) }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
     }
 
@@ -33,7 +30,7 @@ final class CourseListModel: NSManagedObject, IDFetchable {
     }
 
     static func fetchAsync(ids: [CourseListModel.IdType]) -> Guarantee<[CourseListModel]> {
-        DatabaseFetchService.fetchAsync(entityName: "CourseList", ids: ids)
+        DatabaseFetchService.fetchAsync(entityName: Self.entityName, ids: ids)
     }
 
     enum JSONKey: String {

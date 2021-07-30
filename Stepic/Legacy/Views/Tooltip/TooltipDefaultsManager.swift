@@ -10,6 +10,7 @@ import Foundation
 
 final class TooltipDefaultsManager {
     static let shared = TooltipDefaultsManager()
+
     private init() {}
 
     private let defaults = UserDefaults.standard

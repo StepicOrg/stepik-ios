@@ -17,7 +17,7 @@ final class PersistentTaskRecoveryManager: PersistentRecoveryManager {
         if let type = ExecutableTaskType(rawValue: typeStringOrNil ?? "") {
             switch type {
             case .deleteDevice:
-                return  DeleteDeviceExecutableTask(dictionary: dictionary)
+                return DeleteDeviceExecutableTask(dictionary: dictionary)
             case .postViews:
                 return PostViewsExecutableTask(dictionary: dictionary)
             }
