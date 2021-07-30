@@ -1,16 +1,7 @@
-//
-//  Step.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 12.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class Step: NSManagedObject, IDFetchable {
+final class Step: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var needsPlanType: CourseType? {
@@ -22,7 +13,7 @@ final class Step: NSManagedObject, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Step.entity, insertInto: CoreDataHelper.shared.context)
         self.initialize(json)
         self.block = Block(json: json[JSONKey.block.rawValue])
     }
@@ -108,6 +99,7 @@ final class Step: NSManagedObject, IDFetchable {
         return true
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func getStepWithID(_ id: IdType, unitID: Unit.IdType? = nil) -> Step? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)

@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension ExamSession {
     @NSManaged var managedId: NSNumber?
@@ -10,18 +9,6 @@ extension ExamSession {
     @NSManaged var managedTimeLeft: NSNumber?
 
     @NSManaged var managedSection: Section?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "ExamSession", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<ExamSession> {
-        NSFetchRequest<ExamSession>(entityName: "ExamSession")
-    }
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

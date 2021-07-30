@@ -1,57 +1,68 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol CertificatesPersistenceServiceProtocol: AnyObject {
+    func fetch(id: Certificate.IdType) -> Guarantee<Certificate?>
+    func fetch(ids: [Certificate.IdType]) -> Guarantee<[Certificate]>
     func fetch(ids: [Certificate.IdType], userID: User.IdType) -> Guarantee<[Certificate]>
     func fetch(userID: User.IdType) -> Guarantee<[Certificate]>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Guarantee<[Certificate]>
+
     func deleteAll() -> Promise<Void>
 }
 
-final class CertificatesPersistenceService: CertificatesPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
-
-    init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
-        self.managedObjectContext = managedObjectContext
-    }
-
+final class CertificatesPersistenceService: BasePersistenceService<Certificate>,
+                                            CertificatesPersistenceServiceProtocol {
     func fetch(ids: [Certificate.IdType], userID: User.IdType) -> Guarantee<[Certificate]> {
         Guarantee { seal in
-            self.managedObjectContext.performAndWait {
-                let certificates = Certificate.fetch(ids, user: userID)
+            do {
+                let certificates = try Certificate.fetch(in: self.managedObjectContext) { request in
+                    let idPredicates = ids.map { id in
+                        NSPredicate(format: "%K == %@", #keyPath(Certificate.managedId), NSNumber(value: id))
+                    }
+                    let idCompoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
+                    let userPredicate = NSPredicate(
+                        format: "%K == %@",
+                        #keyPath(Certificate.managedUserId),
+                        NSNumber(value: userID)
+                    )
+                    request.predicate = NSCompoundPredicate(
+                        type: .and,
+                        subpredicates: [userPredicate, idCompoundPredicate]
+                    )
+                    request.returnsObjectsAsFaults = false
+                }
                 seal(certificates)
+            } catch {
+                print("CertificatesPersistenceService :: failed fetch user certificates with error = \(error)")
+                seal([])
             }
         }
     }
 
     func fetch(userID: User.IdType) -> Guarantee<[Certificate]> {
         Guarantee { seal in
-            let request: NSFetchRequest<Certificate> = Certificate.fetchRequest
+            let request = Certificate.sortedFetchRequest
             request.predicate = NSPredicate(
                 format: "%K == %@",
                 #keyPath(Certificate.managedUserId),
                 NSNumber(value: userID)
             )
-            request.sortDescriptors = Certificate.defaultSortDescriptors
             request.returnsObjectsAsFaults = false
 
-            self.managedObjectContext.performAndWait {
-                do {
-                    let certificates = try self.managedObjectContext.fetch(request)
-                    seal(certificates)
-                } catch {
-                    print("Error while fetching certificates for user = \(userID), error = \(error)")
-                    seal([])
-                }
+            do {
+                let certificates = try self.managedObjectContext.fetch(request)
+                seal(certificates)
+            } catch {
+                print("CertificatesPersistenceService :: failed fetch certificates user = \(userID), error = \(error)")
+                seal([])
             }
         }
     }
 
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Guarantee<[Certificate]> {
         Guarantee { seal in
-            let request: NSFetchRequest<Certificate> = Certificate.fetchRequest
-            request.sortDescriptors = Certificate.defaultSortDescriptors
+            let request: NSFetchRequest<Certificate> = Certificate.sortedFetchRequest
             request.returnsObjectsAsFaults = false
 
             let coursePredicate = NSPredicate(
@@ -66,40 +77,13 @@ final class CertificatesPersistenceService: CertificatesPersistenceServiceProtoc
             )
             request.predicate = NSCompoundPredicate(type: .and, subpredicates: [coursePredicate, userPredicate])
 
-            self.managedObjectContext.performAndWait {
-                do {
-                    let certificates = try self.managedObjectContext.fetch(request)
-                    seal(certificates)
-                } catch {
-                    print("Error fetching certificates for course = \(courseID) user = \(userID), error = \(error)")
-                    seal([])
-                }
+            do {
+                let certificates = try self.managedObjectContext.fetch(request)
+                seal(certificates)
+            } catch {
+                print("CertificatesPersistenceService :: failed fetch certificates course = \(courseID) user = \(userID) error = \(error)")
+                seal([])
             }
         }
-    }
-
-    func deleteAll() -> Promise<Void> {
-        Promise { seal in
-            let request: NSFetchRequest<Certificate> = Certificate.fetchRequest
-            self.managedObjectContext.performAndWait {
-                do {
-                    let certificates = try self.managedObjectContext.fetch(request)
-                    for certificate in certificates {
-                        self.managedObjectContext.delete(certificate)
-                    }
-
-                    try? self.managedObjectContext.save()
-
-                    seal.fulfill(())
-                } catch {
-                    print("CertificatesPersistenceService :: failed delete all certificates with error = \(error)")
-                    seal.reject(Error.deleteFailed)
-                }
-            }
-        }
-    }
-
-    enum Error: Swift.Error {
-        case deleteFailed
     }
 }

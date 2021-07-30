@@ -84,7 +84,7 @@ extension AnalyticsEvent {
         title: String,
         isWishlisted: Bool? = nil
     ) -> AmplitudeAnalyticsEvent {
-        var parameters: [String : Any] = [
+        var parameters: [String: Any] = [
             "source": source.rawValue,
             "course": id,
             "title": title

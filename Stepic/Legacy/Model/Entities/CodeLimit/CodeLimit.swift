@@ -1,16 +1,7 @@
-//
-//  CodeLimit.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 30.05.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class CodeLimit: NSManagedObject {
+final class CodeLimit: NSManagedObject, ManagedObject {
     var language: CodeLanguage? { CodeLanguage(rawValue: languageString) }
 
     override var description: String {
@@ -18,18 +9,14 @@ final class CodeLimit: NSManagedObject {
     }
 
     required convenience init(language: String, json: JSON) {
-        self.init()
-        self.initialize(language: language, json: json)
-    }
-
-    func initialize(language: String, json: JSON) {
-        self.languageString = language
-        self.time = json[JSONKey.time.rawValue].doubleValue
-        self.memory = json[JSONKey.memory.rawValue].doubleValue
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(language: language, json: json)
     }
 
     func update(language: String, json: JSON) {
-        self.initialize(language: language, json: json)
+        self.languageString = language
+        self.time = json[JSONKey.time.rawValue].doubleValue
+        self.memory = json[JSONKey.memory.rawValue].doubleValue
     }
 
     func equals(_ object: Any?) -> Bool {
