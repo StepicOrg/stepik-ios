@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol StoryPartsReactionsPersistenceServiceProtocol: AnyObject {
@@ -8,32 +7,24 @@ protocol StoryPartsReactionsPersistenceServiceProtocol: AnyObject {
     func deleteAll() -> Promise<Void>
 }
 
-final class StoryPartsReactionsPersistenceService: StoryPartsReactionsPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
-
-    init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
-        self.managedObjectContext = managedObjectContext
-    }
-
+final class StoryPartsReactionsPersistenceService: BasePersistenceService<StoryPartReaction>,
+                                                   StoryPartsReactionsPersistenceServiceProtocol {
     func fetch(storyID: Int) -> Guarantee<[StoryPartReaction]> {
         Guarantee { seal in
-            let request: NSFetchRequest<StoryPartReaction> = StoryPartReaction.fetchRequest
+            let request = StoryPartReaction.sortedFetchRequest
             request.predicate = NSPredicate(
                 format: "%K == %@",
                 #keyPath(StoryPartReaction.managedStoryId),
                 NSNumber(value: storyID)
             )
-            request.sortDescriptors = StoryPartReaction.defaultSortDescriptors
             request.returnsObjectsAsFaults = false
 
-            self.managedObjectContext.performAndWait {
-                do {
-                    let reactions = try self.managedObjectContext.fetch(request)
-                    seal(reactions)
-                } catch {
-                    print("StoryPartsReactionsPersistenceService :: failed fetch with error = \(error)")
-                    seal([])
-                }
+            do {
+                let reactions = try self.managedObjectContext.fetch(request)
+                seal(reactions)
+            } catch {
+                print("StoryPartsReactionsPersistenceService :: failed fetch with error = \(error)")
+                seal([])
             }
         }
     }
@@ -49,47 +40,18 @@ final class StoryPartsReactionsPersistenceService: StoryPartsReactionsPersistenc
                         self.managedObjectContext.delete(reaction)
                     }
 
-                    if self.managedObjectContext.hasChanges {
-                        try? self.managedObjectContext.save()
-                    }
-
-                    let storyPartReaction = StoryPartReaction(
+                    let storyPartReaction = StoryPartReaction.insert(
+                        into: self.managedObjectContext,
                         storyID: storyPart.storyID,
                         position: storyPart.position,
-                        reaction: reaction,
-                        managedObjectContext: self.managedObjectContext
+                        reaction: reaction
                     )
 
-                    try? self.managedObjectContext.save()
+                    self.managedObjectContext.saveOrRollback()
 
                     seal(storyPartReaction)
                 }
             }
         }
-    }
-
-    func deleteAll() -> Promise<Void> {
-        Promise { seal in
-            let request: NSFetchRequest<StoryPartReaction> = StoryPartReaction.fetchRequest
-            self.managedObjectContext.performAndWait {
-                do {
-                    let reactions = try self.managedObjectContext.fetch(request)
-                    for reaction in reactions {
-                        self.managedObjectContext.delete(reaction)
-                    }
-
-                    try? self.managedObjectContext.save()
-
-                    seal.fulfill(())
-                } catch {
-                    print("StoryPartsReactionsPersistenceService :: failed delete all with error = \(error)")
-                    seal.reject(Error.deleteFailed)
-                }
-            }
-        }
-    }
-
-    enum Error: Swift.Error {
-        case deleteFailed
     }
 }

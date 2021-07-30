@@ -1,16 +1,7 @@
-//
-//  Lesson.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 09.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class Lesson: NSManagedObject, IDFetchable {
+final class Lesson: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var isCached: Bool {
@@ -28,11 +19,11 @@ final class Lesson: NSManagedObject, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.title = json[JSONKey.title.rawValue].stringValue
         self.isFeatured = json[JSONKey.isFeatured.rawValue].boolValue
@@ -53,10 +44,6 @@ final class Lesson: NSManagedObject, IDFetchable {
             self.canEdit = false
             self.canLearnLesson = false
         }
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     func equals(_ object: Any?) -> Bool {
@@ -85,95 +72,6 @@ final class Lesson: NSManagedObject, IDFetchable {
         return true
     }
 
-    func loadSteps(
-        completion: @escaping () -> Void,
-        error errorHandler: ((String) -> Void)? = nil,
-        onlyLesson: Bool = false
-    ) {
-        _ = ApiDataDownloader.steps.retrieve(
-            ids: self.stepsArray,
-            existing: self.steps,
-            refreshMode: .update,
-            success: { newSteps in
-                self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
-                self.loadProgressesForSteps({
-                    if !onlyLesson {
-                        if let unit = self.unit {
-                            _ = ApiDataDownloader.assignments.retrieve(
-                                ids: unit.assignmentsArray,
-                                existing: unit.assignments,
-                                refreshMode: .update,
-                                success: { newAssignments in
-                                    unit.assignments = Sorter.sort(newAssignments, steps: self.steps)
-                                    completion()
-                                },
-                                error: { _ in
-                                    print("Error while downloading assignments")
-                                    errorHandler?("Error while downloading assignments")
-                                }
-                            )
-                        } else {
-                            completion()
-                        }
-                    } else {
-                        completion()
-                    }
-                })
-                CoreDataHelper.shared.save()
-            },
-            error: { _ in
-                print("Error while downloading steps")
-                errorHandler?("Error while downloading steps")
-            }
-        )
-    }
-
-    func loadProgressesForSteps(_ completion: @escaping () -> Void) {
-        var progressIds: [String] = []
-        var progresses: [Progress] = []
-
-        for step in steps {
-            if let progressId = step.progressID {
-                progressIds += [progressId]
-            }
-            if let progress = step.progress {
-                progresses += [progress]
-            }
-        }
-
-        _ = ApiDataDownloader.progresses.retrieve(
-            ids: progressIds,
-            existing: progresses,
-            refreshMode: .update,
-            success: { newProgresses -> Void in
-                progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                for i in 0..<min(self.steps.count, progresses.count) {
-                    self.steps[i].progress = progresses[i]
-                }
-
-                CoreDataHelper.shared.save()
-
-                completion()
-            },
-            error: {
-                (_) -> Void in
-                print("Error while downloading progresses")
-            }
-        )
-    }
-
-    func getVideoURLs() -> [String] {
-        var videoURLs = [String]()
-
-        for step in self.steps where step.block.type == .video {
-            if let video = step.block.video {
-                videoURLs += [video.urls[0].url]
-            }
-        }
-
-        return videoURLs
-    }
-
     func getVideos() -> [Video] {
         var videos = [Video]()
 
@@ -186,6 +84,7 @@ final class Lesson: NSManagedObject, IDFetchable {
         return videos
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func getLesson(_ id: IdType) -> Lesson? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
         request.predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
@@ -198,6 +97,7 @@ final class Lesson: NSManagedObject, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(_ ids: [IdType]) -> [Lesson] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
 

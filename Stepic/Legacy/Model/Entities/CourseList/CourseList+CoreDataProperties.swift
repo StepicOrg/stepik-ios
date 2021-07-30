@@ -1,13 +1,4 @@
-//
-//  CourseList+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 10.11.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension CourseListModel {
     @NSManaged var managedId: NSNumber?
@@ -15,17 +6,10 @@ extension CourseListModel {
     @NSManaged var managedDescription: String?
     @NSManaged var managedLanguage: String?
     @NSManaged var managedPosition: NSNumber?
+    
     @NSManaged var managedCoursesArray: NSObject?
     @NSManaged var managedSimilarAuthorsArray: NSObject?
     @NSManaged var managedSimilarCourseListsArray: NSObject?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.shared.context)!
-    }
-
-    convenience init() {
-        self.init(entity: CourseListModel.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         set(newId) {

@@ -1,13 +1,4 @@
-//
-//  Notification+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 26.09.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension Notification {
     @NSManaged public var managedId: NSNumber?
@@ -20,18 +11,6 @@ extension Notification {
     @NSManaged public var managedLevel: String?
     @NSManaged public var managedPriority: String?
     @NSManaged public var managedHtmlText: String?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<Notification> {
-        NSFetchRequest<Notification>(entityName: "Notification")
-    }
-
-    convenience init() {
-        self.init(entity: Notification.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

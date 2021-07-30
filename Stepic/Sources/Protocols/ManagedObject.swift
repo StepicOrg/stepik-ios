@@ -5,6 +5,7 @@ protocol ManagedObject: NSFetchRequestResult {
     static var entityName: String { get }
     static var defaultSortDescriptors: [NSSortDescriptor] { get }
     static var defaultPredicate: NSPredicate { get }
+    static var idAttributeName: String { get }
 
     var managedObjectContext: NSManagedObjectContext? { get }
 }
@@ -18,6 +19,11 @@ extension ManagedObject {
         request.sortDescriptors = self.defaultSortDescriptors
         request.predicate = self.defaultPredicate
         return request
+    }
+
+    static var batchDeleteRequest: NSBatchDeleteRequest {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
+        return NSBatchDeleteRequest(fetchRequest: request)
     }
 
     static func sortedFetchRequest(with predicate: NSPredicate) -> NSFetchRequest<Self> {
@@ -78,5 +84,30 @@ extension ManagedObject where Self: NSManagedObject {
             return result
         }
         return nil
+    }
+}
+
+extension ManagedObject where Self: NSManagedObject {
+    static var idAttributeName: String { "managedId" }
+
+    static func findOrFetch(in context: NSManagedObjectContext, byID id: CoreDataRepresentable) -> Self? {
+        let predicate = self.predicate(format: "\(self.idAttributeName) == %@", id.fetchValue)
+        return self.findOrFetch(in: context, matching: predicate)
+    }
+
+    static func fetch(in context: NSManagedObjectContext, byIDs ids: [CoreDataRepresentable]) -> [Self] {
+        let idPredicates = ids.map { NSPredicate(format: "\(self.idAttributeName) == %@", $0.fetchValue) }
+        let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
+
+        do {
+            return try self.fetch(in: context) { request in
+                request.predicate = compoundPredicate
+                request.returnsObjectsAsFaults = false
+                request.sortDescriptors = self.defaultSortDescriptors
+            }
+        } catch {
+            print("ManagedObject :: failed execute \(#function) with error = \(error)")
+            return []
+        }
     }
 }

@@ -11,30 +11,31 @@ extension NSManagedObjectContext {
         return object
     }
 
+    @discardableResult
     func saveOrRollback() -> Bool {
         guard self.hasChanges else {
             return true
         }
 
         do {
-            try save()
+            try self.save()
             return true
         } catch {
-            rollback()
+            self.rollback()
             return false
         }
     }
 
     func performSaveOrRollback() {
-        perform {
-            _ = self.saveOrRollback()
+        self.perform {
+            self.saveOrRollback()
         }
     }
 
     func performChanges(block: @escaping () -> Void) {
-        perform {
+        self.perform {
             block()
-            _ = self.saveOrRollback()
+            self.saveOrRollback()
         }
     }
 }
@@ -44,14 +45,14 @@ extension NSManagedObjectContext {
 extension NSManagedObjectContext {
     func executeAndMergeChanges(using batchDeleteRequest: NSBatchDeleteRequest) throws {
         batchDeleteRequest.resultType = .resultTypeObjectIDs
-        let result = try execute(batchDeleteRequest) as? NSBatchDeleteResult
+        let result = try self.execute(batchDeleteRequest) as? NSBatchDeleteResult
         let changes: [AnyHashable: Any] = [NSDeletedObjectsKey: result?.result as? [NSManagedObjectID] ?? []]
         NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self])
     }
 
     func executeAndMergeChanges(using batchUpdateRequest: NSBatchUpdateRequest) throws {
         batchUpdateRequest.resultType = .updatedObjectIDsResultType
-        let result = try execute(batchUpdateRequest) as? NSBatchUpdateResult
+        let result = try self.execute(batchUpdateRequest) as? NSBatchUpdateResult
         let changes: [AnyHashable: Any] = [NSUpdatedObjectsKey: result?.result as? [NSManagedObjectID] ?? []]
         NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self])
     }

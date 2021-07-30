@@ -1,15 +1,5 @@
-//
-//  Video.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 14.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import Alamofire
 import CoreData
-import Foundation
-import SwiftyJSON
 import SwiftyJSON
 
 enum VideoState {
@@ -17,28 +7,31 @@ enum VideoState {
 }
 
 @objc
-final class Video: NSManagedObject, JSONSerializable {
+final class Video: NSManagedObject, ManagedObject, JSONSerializable {
     typealias IdType = Int
 
-    required convenience init(json: JSON) {
-        self.init()
-        initialize(json)
+    var state: VideoState {
+        VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: id) != nil
+            ? .cached
+            : .online
     }
 
-    func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        thumbnailURL = json["thumbnail"].stringValue
-        status = json["status"].stringValue
+    required convenience init(json: JSON) {
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
+    }
+
+    func update(json: JSON) {
+        self.id = json["id"].intValue
+        self.thumbnailURL = json["thumbnail"].stringValue
+        self.status = json["status"].stringValue
 
         var videoURLs: [VideoURL] = []
         for urlJSON in json["urls"].arrayValue {
             videoURLs += [VideoURL(json: urlJSON)]
         }
-        urls = videoURLs
-    }
 
-    func update(json: JSON) {
-        initialize(json)
+        self.urls = videoURLs
     }
 
     func equals(_ object: Any?) -> Bool {
@@ -106,25 +99,6 @@ final class Video: NSManagedObject, JSONSerializable {
             return URL(string: url.url)
         } else {
             return URL(string: self.urls[0].url)
-        }
-    }
-
-    var state: VideoState {
-        VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: id) != nil
-            ? .cached
-            : .online
-    }
-
-    static func getAllVideos() -> [Video] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
-        let predicate = NSPredicate(value: true)
-        request.predicate = predicate
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request)
-            return results as! [Video]
-        } catch {
-            print("Error while getting videos")
-            return []
         }
     }
 }

@@ -1,10 +1,9 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol CoursesPersistenceServiceProtocol: AnyObject {
-    func fetch(ids: [Course.IdType]) -> Promise<[Course]>
     func fetch(id: Course.IdType) -> Promise<Course?>
+    func fetch(ids: [Course.IdType]) -> Promise<[Course]>
     func fetchEnrolled() -> Guarantee<[Course]>
     func fetchAll() -> Guarantee<[Course]>
     func unenrollAll() -> Promise<Void>
@@ -16,30 +15,16 @@ extension CoursesPersistenceServiceProtocol {
     }
 }
 
-final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
-
-    init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
-        self.managedObjectContext = managedObjectContext
-    }
-
-    func fetch(ids: [Course.IdType]) -> Promise<[Course]> {
-        Promise { seal in
-            Course.fetchAsync(ids: ids).done { courses in
-                seal.fulfill(courses)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
+final class CoursesPersistenceService: BasePersistenceService<Course>, CoursesPersistenceServiceProtocol {
+    func fetch(id: Course.IdType) -> Promise<Course?> {
+        firstly { () -> Guarantee<Course?> in
+            self.fetch(id: id)
         }
     }
 
-    func fetch(id: Course.IdType) -> Promise<Course?> {
-        Promise { seal in
-            self.fetch(ids: [id]).done { courses in
-                seal.fulfill(courses.first)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
+    func fetch(ids: [Course.IdType]) -> Promise<[Course]> {
+        firstly { () -> Guarantee<[Course]> in
+            self.fetch(ids: ids)
         }
     }
 
@@ -50,20 +35,13 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
         }
     }
 
-    func fetchAll() -> Guarantee<[Course]> {
-        Guarantee { seal in
-            let allCourses = Course.getAllCourses()
-            seal(allCourses)
-        }
-    }
-
     func unenrollAll() -> Promise<Void> {
         Promise { seal in
-            let batchUpdateRequest = NSBatchUpdateRequest(entityName: "Course")
+            let batchUpdateRequest = NSBatchUpdateRequest(entityName: Course.entityName)
             batchUpdateRequest.predicate = NSPredicate(format: "managedEnrolled == %@", NSNumber(value: true))
             batchUpdateRequest.propertiesToUpdate = ["managedEnrolled": NSNumber(value: false)]
 
-            self.managedObjectContext.performAndWait {
+            self.managedObjectContext.perform {
                 do {
                     try self.managedObjectContext.executeAndMergeChanges(using: batchUpdateRequest)
                     try self.managedObjectContext.save()
@@ -76,7 +54,6 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
     }
 
     enum Error: Swift.Error {
-        case fetchFailed
         case batchUpdateFailed
     }
 }

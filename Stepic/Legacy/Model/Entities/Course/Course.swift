@@ -1,18 +1,9 @@
-//
-//  Course.swift
-//  
-//
-//  Created by Alexander Karpov on 25.09.15.
-//
-//
-
 import CoreData
-import Foundation
 import PromiseKit
 import SwiftyJSON
 
 @objc
-final class Course: NSManagedObject, IDFetchable {
+final class Course: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var sectionDeadlines: [SectionDeadline]? {
@@ -105,11 +96,11 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.title = json[JSONKey.title.rawValue].stringValue
         self.courseDescription = json[JSONKey.description.rawValue].stringValue
@@ -179,141 +170,7 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    func update(json: JSON) {
-        self.initialize(json)
-    }
-
     @available(*, deprecated, message: "Legacy")
-    func loadAllInstructors(success: @escaping (() -> Void)) {
-        _ = ApiDataDownloader.users.retrieve(
-            ids: self.instructorsArray,
-            existing: self.instructors,
-            refreshMode: .update,
-            success: { users in
-                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
-                CoreDataHelper.shared.save()
-                success()
-            },
-            error: { _ in
-                print("error while loading section")
-            }
-        )
-    }
-
-    @available(*, deprecated, message: "Legacy")
-    func loadAllSections(
-        success: @escaping (() -> Void),
-        error errorHandler : @escaping (() -> Void),
-        withProgresses: Bool = true
-    ) {
-        if sectionsArray.isEmpty {
-            success()
-            return
-        }
-
-        let requestSectionsCount = 50
-        var dimCount = 0
-        var idsArray = [[Int]]()
-        for (index, sectionId) in self.sectionsArray.enumerated() {
-            if index % requestSectionsCount == 0 {
-                idsArray.append([Int]())
-                dimCount += 1
-            }
-            idsArray[dimCount - 1].append(sectionId)
-        }
-
-        var downloadedSections = [Section]()
-
-        let idsDownloaded: ([Section]) -> Void = {
-            secs in
-            downloadedSections.append(contentsOf: secs)
-            if downloadedSections.count == self.sectionsArray.count {
-                self.sections = Sorter.sort(downloadedSections, byIds: self.sectionsArray)
-                CoreDataHelper.shared.save()
-                success()
-            }
-        }
-
-        var wasError = false
-        let errorWhileDownloading : () -> Void = {
-            if !wasError {
-                wasError = true
-                errorHandler()
-            }
-        }
-
-        for ids in idsArray {
-            _ = ApiDataDownloader.sections.retrieve(ids: ids, existing: self.sections, refreshMode: .update, success: {
-                secs in
-                if withProgresses {
-                    self.loadProgressesForSections(sections: secs, success: {
-                        idsDownloaded(secs)
-                    }, error: {
-                        errorWhileDownloading()
-                    })
-                } else {
-                    idsDownloaded(secs)
-                }
-            }, error: {
-                _ in
-                print("error while loading section")
-                errorWhileDownloading()
-            })
-        }
-    }
-
-    @available(*, deprecated, message: "Legacy")
-    func loadProgressesForSections(
-        sections: [Section],
-        success completion: @escaping (() -> Void),
-        error errorHandler : @escaping (() -> Void)
-    ) {
-        var progressIds: [String] = []
-        var progresses: [Progress] = []
-        for section in sections {
-            if let progressId = section.progressId {
-                progressIds += [progressId]
-            }
-
-            if let progress = section.progress {
-                progresses += [progress]
-            }
-        }
-
-        if progressIds.count == 0 {
-            completion()
-            return
-        }
-
-        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-            newProgresses -> Void in
-            progresses = Sorter.sort(newProgresses, byIds: progressIds)
-
-            if progresses.count == 0 {
-                CoreDataHelper.shared.save()
-                completion()
-                return
-            }
-
-            var progressCnt = 0
-            for i in 0 ..< sections.count {
-                if sections[i].progressId == progresses[progressCnt].id {
-                    sections[i].progress = progresses[progressCnt]
-                    progressCnt += 1
-                }
-                if progressCnt == progresses.count {
-                    break
-                }
-            }
-            CoreDataHelper.shared.save()
-            completion()
-        }, error: {
-            (_) -> Void in
-            print("Error while downloading progresses")
-            errorHandler()
-        })
-    }
-
     static func fetch(
         _ ids: [Int],
         featured: Bool? = nil,
@@ -357,6 +214,7 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func getAllCourses(enrolled: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
@@ -374,26 +232,6 @@ final class Course: NSManagedObject, IDFetchable {
         } catch {
             print("Error while getting courses")
             return []
-        }
-    }
-
-    func getSection(before section: Section) -> Section? {
-        let currentIndex = sectionsArray.firstIndex(of: section.id)
-        if currentIndex == nil || currentIndex == sectionsArray.startIndex {
-            return nil
-        } else {
-            let prevId = sectionsArray[currentIndex!.advanced(by: -1)]
-            return sections.filter({ $0.id == prevId }).first
-        }
-    }
-
-    func getSection(after section: Section) -> Section? {
-        let currentIndex = sectionsArray.firstIndex(of: section.id)
-        if currentIndex == nil || currentIndex == sectionsArray.endIndex.advanced(by: -1) {
-            return nil
-        } else {
-            let nextId = sectionsArray[currentIndex!.advanced(by: 1)]
-            return sections.filter({ $0.id == nextId }).first
         }
     }
 

@@ -1,12 +1,15 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class CoursePurchase: NSManagedObject, JSONSerializable, IDFetchable {
+final class CoursePurchase: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+    
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
     }
 

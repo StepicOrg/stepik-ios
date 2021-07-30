@@ -191,7 +191,7 @@ final class LessonProvider: LessonProviderProtocol {
                 case .remote:
                     return self.assignmentsNetworkService.fetch(ids: ids)
                 case .cache:
-                    return self.assignmentsPersistenceService.fetch(ids: ids)
+                    return Promise(self.assignmentsPersistenceService.fetch(ids: ids))
                 }
             }.done { assignments in
                 seal.fulfill(assignments)

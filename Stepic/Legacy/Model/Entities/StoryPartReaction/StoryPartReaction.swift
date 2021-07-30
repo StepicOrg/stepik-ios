@@ -1,7 +1,10 @@
 import CoreData
-import Foundation
 
-final class StoryPartReaction: NSManagedObject {
+final class StoryPartReaction: NSManagedObject, ManagedObject {
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedPosition), ascending: true)]
+    }
+    
     var storyReaction: StoryReaction? {
         if let reaction = self.reaction {
             return StoryReaction(rawValue: reaction)
@@ -13,22 +16,18 @@ final class StoryPartReaction: NSManagedObject {
         "StoryPartReaction(storyID: \(self.storyID), position: \(self.position), reaction: \(String(describing: self.reaction))"
     }
 
-    convenience init(
+    static func insert(
+        into context: NSManagedObjectContext,
         storyID: Int,
         position: Int,
-        reaction: StoryReaction,
-        managedObjectContext: NSManagedObjectContext
-    ) {
-        guard let entity = NSEntityDescription.entity(
-            forEntityName: "StoryPartReaction", in: managedObjectContext
-        ) else {
-            fatalError("Wrong object type")
-        }
+        reaction: StoryReaction
+    ) -> StoryPartReaction {
+        let object: StoryPartReaction = context.insertObject()
 
-        self.init(entity: entity, insertInto: managedObjectContext)
+        object.storyID = storyID
+        object.position = position
+        object.reaction = reaction.rawValue
 
-        self.storyID = storyID
-        self.position = position
-        self.reaction = reaction.rawValue
+        return object
     }
 }

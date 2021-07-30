@@ -1,16 +1,4 @@
-//
-//  User+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 03.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension User {
     @NSManaged var managedId: NSNumber?
@@ -48,22 +36,6 @@ extension User {
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<User> {
-        NSFetchRequest<User>(entityName: "User")
-    }
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.shared.context)!
-    }
-
-    convenience init() {
-        self.init(entity: User.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         set(value) {
