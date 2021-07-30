@@ -14,6 +14,7 @@ protocol ProcessedContentWebViewDelegate: AnyObject {
 
 extension ProcessedContentWebViewDelegate {
     func processedContentTextView(_ view: ProcessedContentWebView, didReportNewHeight height: Int) {}
+
     func processedContentTextView(_ view: ProcessedContentWebView, didOpenARKitLink url: URL) {}
 }
 

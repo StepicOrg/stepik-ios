@@ -78,6 +78,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         // To be able to return `DownloadState.waiting`.
         var pendingUnitIDs: Set<Unit.IdType> = []
     }
+
     /// Protected `MutableState` value that provides thread-safe access to state values.
     @Protected
     private var mutableState = MutableState()

@@ -1,13 +1,4 @@
-//
-//  Certificate+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 11.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 
 extension Certificate {
     @NSManaged var managedId: NSNumber?
@@ -20,97 +11,81 @@ extension Certificate {
     @NSManaged var managedURL: String?
     @NSManaged var managedisPublic: NSNumber?
     @NSManaged var managedIsWithScore: NSNumber?
+
     @NSManaged var managedCourse: Course?
 
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.shared.context)!
-    }
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<Certificate> {
-        NSFetchRequest<Certificate>(entityName: "Certificate")
-    }
-
-    convenience init() {
-        self.init(entity: Certificate.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
-
     var id: Int {
-        set(newId) {
-            self.managedId = newId as NSNumber?
-        }
         get {
-            managedId?.intValue ?? -1
+            self.managedId?.intValue ?? -1
+        }
+        set {
+            self.managedId = NSNumber(value: newValue)
         }
     }
 
     var courseId: Int {
-        set(newId) {
-            self.managedCourseId = newId as NSNumber?
-        }
         get {
-            managedCourseId?.intValue ?? -1
+            self.managedCourseId?.intValue ?? -1
+        }
+        set {
+            self.managedCourseId = NSNumber(value: newValue)
         }
     }
 
     var userId: Int {
-        set(newId) {
-            self.managedUserId = newId as NSNumber?
-        }
         get {
-            managedUserId?.intValue ?? -1
+            self.managedUserId?.intValue ?? -1
+        }
+        set {
+            self.managedUserId = NSNumber(value: newValue)
         }
     }
 
     var issueDate: Date? {
-        set(date) {
-            self.managedIssueDate = date
-        }
         get {
-            managedIssueDate
+            self.managedIssueDate
+        }
+        set {
+            self.managedIssueDate = newValue
         }
     }
 
     var updateDate: Date? {
-        set(date) {
-            self.managedUpdateDate = date
-        }
         get {
-            managedUpdateDate
+            self.managedUpdateDate
         }
-    }
-
-    enum CertificateType: String {
-        case distinction = "distinction", regular = "regular"
+        set {
+            self.managedUpdateDate = newValue
+        }
     }
 
     var type: CertificateType {
-        set(type) {
-            self.managedType = type.rawValue
-        }
         get {
-            CertificateType(rawValue: self.managedType ?? "regular") ?? .regular
+            if let managedType = self.managedType {
+                return CertificateType(rawValue: managedType) ?? .regular
+            }
+            return .regular
+        }
+        set {
+            self.managedType = newValue.rawValue
         }
     }
 
     var grade: Int {
-        set(newGrade) {
-            self.managedGrade = newGrade as NSNumber?
-        }
         get {
-            managedGrade?.intValue ?? 0
+            self.managedGrade?.intValue ?? 0
+        }
+        set {
+            self.managedGrade = NSNumber(value: newValue)
         }
     }
 
     var urlString: String? {
-        set(newUrlString) {
-            self.managedURL = newUrlString
-        }
         get {
             self.managedURL
+        }
+        set {
+            self.managedURL = newValue
         }
     }
 
@@ -118,8 +93,8 @@ extension Certificate {
         get {
             self.managedisPublic?.boolValue ?? false
         }
-        set(value) {
-            self.managedisPublic = value as NSNumber?
+        set {
+            self.managedisPublic = newValue as NSNumber?
         }
     }
 
@@ -136,8 +111,8 @@ extension Certificate {
         get {
             self.managedCourse
         }
-        set(value) {
-            self.managedCourse = value
+        set {
+            self.managedCourse = newValue
         }
     }
 }

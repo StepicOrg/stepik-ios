@@ -1,8 +1,7 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class DiscussionThread: NSManagedObject, JSONSerializable, IDFetchable {
+final class DiscussionThread: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = String
 
     var json: JSON {
@@ -19,19 +18,15 @@ final class DiscussionThread: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].stringValue
         self.thread = json[JSONKey.thread.rawValue].stringValue
         self.discussionsCount = json[JSONKey.discussionsCount.rawValue].intValue
         self.discussionProxy = json[JSONKey.discussionProxy.rawValue].stringValue
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     // MARK: Enums

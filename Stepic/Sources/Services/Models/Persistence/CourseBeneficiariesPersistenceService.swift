@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol CourseBeneficiariesPersistenceServiceProtocol: AnyObject {
@@ -14,13 +13,8 @@ extension CourseBeneficiariesPersistenceServiceProtocol {
     }
 }
 
-final class CourseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
-
-    init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
-        self.managedObjectContext = managedObjectContext
-    }
-
+final class CourseBeneficiariesPersistenceService: BasePersistenceService<CourseBeneficiary>,
+                                                   CourseBeneficiariesPersistenceServiceProtocol {
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Guarantee<[CourseBeneficiary]> {
         Guarantee { seal in
             let coursePredicate = NSPredicate(
@@ -35,54 +29,16 @@ final class CourseBeneficiariesPersistenceService: CourseBeneficiariesPersistenc
             )
             let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [coursePredicate, userPredicate])
 
-            let fetchRequest = CourseBeneficiary.fetchRequest
-            fetchRequest.predicate = compoundPredicate
-            fetchRequest.sortDescriptors = CourseBeneficiary.defaultSortDescriptors
+            let request = CourseBeneficiary.sortedFetchRequest(with: compoundPredicate)
+            request.returnsObjectsAsFaults = false
 
             do {
-                let courseBeneficiaries = try self.managedObjectContext.fetch(fetchRequest)
+                let courseBeneficiaries = try self.managedObjectContext.fetch(request)
                 seal(courseBeneficiaries)
             } catch {
                 print("CourseBeneficiariesPersistenceService :: failed fetch with error = \(error)")
                 seal([])
             }
         }
-    }
-
-    func fetchAll() -> Guarantee<[CourseBeneficiary]> {
-        Guarantee { seal in
-            let fetchRequest = CourseBeneficiary.fetchRequest
-            fetchRequest.sortDescriptors = CourseBeneficiary.defaultSortDescriptors
-
-            do {
-                let courseBeneficiaries = try self.managedObjectContext.fetch(fetchRequest)
-                seal(courseBeneficiaries)
-            } catch {
-                print("CourseBeneficiariesPersistenceService :: failed fetch all")
-                seal([])
-            }
-        }
-    }
-
-    func deleteAll() -> Promise<Void> {
-        Promise { seal in
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseBeneficiary")
-            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-            self.managedObjectContext.performAndWait {
-                do {
-                    try self.managedObjectContext.executeAndMergeChanges(using: batchDeleteRequest)
-                    try? self.managedObjectContext.save()
-                    seal.fulfill(())
-                } catch {
-                    print("CourseBeneficiariesPersistenceService :: failed delete all with error = \(error)")
-                    seal.reject(Error.deleteFailed)
-                }
-            }
-        }
-    }
-
-    enum Error: Swift.Error {
-        case deleteFailed
     }
 }

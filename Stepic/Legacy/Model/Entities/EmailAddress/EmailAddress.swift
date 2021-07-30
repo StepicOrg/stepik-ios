@@ -1,34 +1,8 @@
-//
-//  EmailAddress.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 10/9/19.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class EmailAddress: NSManagedObject, JSONSerializable, IDFetchable {
+final class EmailAddress: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
-
-    required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
-    }
-
-    func initialize(_ json: JSON) {
-        self.id = json["id"].intValue
-        self.userID = json["user"].intValue
-        self.email = json["email"].stringValue
-        self.isVerified = json["is_verified"].boolValue
-        self.isPrimary = json["is_primary"].boolValue
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
-    }
 
     var json: JSON {
         [
@@ -38,5 +12,18 @@ final class EmailAddress: NSManagedObject, JSONSerializable, IDFetchable {
             "is_verified": self.isVerified as AnyObject,
             "is_primary": self.isPrimary as AnyObject
         ]
+    }
+
+    required convenience init(json: JSON) {
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
+    }
+
+    func update(json: JSON) {
+        self.id = json["id"].intValue
+        self.userID = json["user"].intValue
+        self.email = json["email"].stringValue
+        self.isVerified = json["is_verified"].boolValue
+        self.isPrimary = json["is_primary"].boolValue
     }
 }

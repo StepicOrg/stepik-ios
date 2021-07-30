@@ -121,7 +121,7 @@ extension SearchQueriesViewController: SearchQueriesView {
         case .updating:
             self.updatingView.setLoading()
             self.tableView.tableFooterView = self.updatingView
-        case.ok:
+        case .ok:
             self.tableView.tableFooterView = UIView()
         }
     }
