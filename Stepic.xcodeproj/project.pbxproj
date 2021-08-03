@@ -807,6 +807,9 @@
 		2C9414FD256D7D0A0010B9A6 /* DefaultSimpleCourseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9414FC256D7D0A0010B9A6 /* DefaultSimpleCourseListCollectionViewCell.swift */; };
 		2C941505256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C941504256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift */; };
 		2C94C7FA248F86C900E4104E /* UserCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */; };
+		2C96290B26B983FF00C9EA9C /* ReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96290A26B983FF00C9EA9C /* ReviewsAPI.swift */; };
+		2C96290D26B9847600C9EA9C /* ReviewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96290C26B9847600C9EA9C /* ReviewsResponse.swift */; };
+		2C96290F26B9856F00C9EA9C /* ReviewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96290E26B9856F00C9EA9C /* ReviewsNetworkService.swift */; };
 		2C964109257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C964108257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift */; };
 		2C96410E257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96410D257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift */; };
 		2C964116257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C964115257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift */; };
@@ -2725,6 +2728,9 @@
 		2C941504256D7DCC0010B9A6 /* DefaultSimpleCourseListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSimpleCourseListWidgetView.swift; sourceTree = "<group>"; };
 		2C94C7F7248F7E0F00E4104E /* Model_user_courses_v52.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_courses_v52.xcdatamodel; sourceTree = "<group>"; };
 		2C94C7F9248F86C900E4104E /* UserCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C96290A26B983FF00C9EA9C /* ReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsAPI.swift; sourceTree = "<group>"; };
+		2C96290C26B9847600C9EA9C /* ReviewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsResponse.swift; sourceTree = "<group>"; };
+		2C96290E26B9856F00C9EA9C /* ReviewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsNetworkService.swift; sourceTree = "<group>"; };
 		2C964108257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsRestoreAPI.swift; sourceTree = "<group>"; };
 		2C96410D257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsNetworkService.swift; sourceTree = "<group>"; };
 		2C964115257003200007A3A4 /* AdaptiveRatingsRestoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsRestoreNetworkService.swift; sourceTree = "<group>"; };
@@ -6665,6 +6671,7 @@
 			children = (
 				2C0FE8CD25F81B8100626289 /* InstructionsResponse.swift */,
 				2CF8DF5025F2586400F577C2 /* ReviewSessionResponse.swift */,
+				2C96290C26B9847600C9EA9C /* ReviewsResponse.swift */,
 				2C0FE8B525F8199200626289 /* RubricPlainObject.swift */,
 				2CF8DF6425F260BC00F577C2 /* RubricScorePlainObject.swift */,
 				2C7CCE9325FA7212007D0C83 /* Instruction */,
@@ -7565,6 +7572,7 @@
 				2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */,
 				08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */,
 				2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */,
+				2C96290A26B983FF00C9EA9C /* ReviewsAPI.swift */,
 				2CF8DF3F25F2291100F577C2 /* ReviewSessionsAPI.swift */,
 				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
 				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
@@ -8228,6 +8236,7 @@
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */,
 				2CF8DF7225F2682100F577C2 /* ReviewSessionsNetworkService.swift */,
+				2C96290E26B9856F00C9EA9C /* ReviewsNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
 				2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */,
 				2C6A22F6267A4F1000B1476D /* StepicsNetworkService.swift */,
@@ -10942,6 +10951,7 @@
 				2CEBEBF2242F8E9900DBFDF0 /* StepikRequestInterceptor.swift in Sources */,
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
+				2C96290F26B9856F00C9EA9C /* ReviewsNetworkService.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				2CDA1B522613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift in Sources */,
 				2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */,
@@ -11158,6 +11168,7 @@
 				62E9824265673F973F160C0A /* ProgressCircleImage.swift in Sources */,
 				2CDA1B3A2613BDEA00E36BF7 /* ProctorSessionsAPI.swift in Sources */,
 				62E981DD043FB3AEC3BDB669 /* PaddingLabel.swift in Sources */,
+				2C96290D26B9847600C9EA9C /* ReviewsResponse.swift in Sources */,
 				2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */,
 				2C1E42A424991CA3009F4C69 /* IAPPaymentsCache.swift in Sources */,
 				62E989403A2025381E5B308B /* BounceButton.swift in Sources */,
@@ -11436,6 +11447,7 @@
 				62E98FB2CF69ABEC55E3C7DC /* EditStepView.swift in Sources */,
 				2C51E1CE25B88B5600E38DF8 /* WidgetUserDefaults.swift in Sources */,
 				62E98AC637D0CBBC48619134 /* EditStepViewController.swift in Sources */,
+				2C96290B26B983FF00C9EA9C /* ReviewsAPI.swift in Sources */,
 				62E98F49D3CA846C2940B454 /* EditStepViewModel.swift in Sources */,
 				62E98E5288DA003FCF78566F /* EditStepOutputProtocol.swift in Sources */,
 				2C42EFBA2476FADB00423695 /* MagicLinksNetworkService.swift in Sources */,

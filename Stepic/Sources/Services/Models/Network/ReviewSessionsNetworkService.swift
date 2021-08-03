@@ -32,23 +32,22 @@ final class ReviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol {
         let reviewsMap = response.reviews.reduce(into: [:]) { $0[$1.id] = $1 }
         let rubricScoresMap = response.rubricScores.reduce(into: [:]) { $0[$1.id] = $1 }
 
-        return response.reviewSessions.map { session -> ReviewSessionDataPlainObject in
-            var submission: Submission?
-            var attempt: Attempt?
+        for (_, submission) in submissionsMap {
+            submission.attempt = attemptsMap[submission.attemptID]
+        }
 
-            if let submissionID = session.submission {
-                submission = submissionsMap[submissionID]
-                if let attemptID = submission?.attemptID {
-                    attempt = attemptsMap[attemptID]
-                    submission?.attempt = attempt
-                }
-            }
+        return response.reviewSessions.map { session -> ReviewSessionDataPlainObject in
+            let submission = session.submission != nil ? submissionsMap[session.submission.require()] : nil
 
             func mapReviews(_ ids: [Int]) -> [ReviewDataPlainObject] {
                 ids.compactMap { id -> ReviewDataPlainObject? in
                     if let review = reviewsMap[id] {
                         let rubricScores = review.rubricScores.compactMap { rubricScoresMap[$0] }
-                        return ReviewDataPlainObject(review: review, rubricScores: rubricScores)
+                        return ReviewDataPlainObject(
+                            review: review,
+                            rubricScores: rubricScores,
+                            submission: review.submission != nil ? submissionsMap[review.submission.require()] : nil
+                        )
                     }
                     return nil
                 }
@@ -60,7 +59,7 @@ final class ReviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol {
             return ReviewSessionDataPlainObject(
                 reviewSession: session,
                 submission: submission,
-                attempt: attempt,
+                attempt: submission?.attempt,
                 givenReviews: givenReviews,
                 takenReviews: takenReviews
             )
