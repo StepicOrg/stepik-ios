@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol ReviewsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Int], blockName: String?) -> Promise<[ReviewDataPlainObject]>
+    func create(sessionID: Int, blockName: String?) -> Promise<ReviewDataPlainObject?>
 }
 
 final class ReviewsNetworkService: ReviewsNetworkServiceProtocol {
@@ -16,6 +17,13 @@ final class ReviewsNetworkService: ReviewsNetworkServiceProtocol {
         self.reviewsAPI
             .getReviews(ids: ids, blockName: blockName)
             .map(self.mapReviewsResponseToData)
+    }
+
+    func create(sessionID: Int, blockName: String?) -> Promise<ReviewDataPlainObject?> {
+        self.reviewsAPI
+            .createReview(sessionID: sessionID, blockName: blockName)
+            .map(self.mapReviewsResponseToData)
+            .map(\.first)
     }
 
     private func mapReviewsResponseToData(_ response: ReviewsResponse) -> [ReviewDataPlainObject] {
