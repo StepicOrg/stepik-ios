@@ -6,6 +6,18 @@ import SwiftyJSON
 final class ReviewSessionsAPI: APIEndpoint {
     override var name: String { "review-sessions" }
 
+    func createReviewSession(submissionID: Submission.IdType, blockName: String?) -> Promise<ReviewSessionResponse> {
+        let body = [
+            JSONKey.reviewSession.rawValue: [
+                JSONKey.submission.rawValue: submissionID
+            ]
+        ]
+
+        return self.create
+            .request(requestEndpoint: self.name, bodyJSONObject: body, withManager: self.manager)
+            .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
+    }
+
     /// Get review sessions by ids.
     ///
     /// - Parameter ids: The identifiers array of the review sessions to fetch.
@@ -35,5 +47,7 @@ final class ReviewSessionsAPI: APIEndpoint {
     private enum JSONKey: String {
         case user
         case instruction
+        case reviewSession
+        case submission
     }
 }
