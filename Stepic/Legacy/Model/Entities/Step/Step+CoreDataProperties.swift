@@ -234,7 +234,7 @@ extension Step {
         }
     }
 
-    var instructionType: String? {
+    var instructionTypeString: String? {
         get {
             self.managedInstructionType
         }
