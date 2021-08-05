@@ -13,6 +13,7 @@ extension Step {
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
     @NSManaged var managedIsEnabled: NSNumber?
+    @NSManaged var managedSessionId: NSNumber?
     @NSManaged var managedInstructionId: NSNumber?
     @NSManaged var managedInstructionType: String?
     @NSManaged var managedNeedsPlan: String?
@@ -222,6 +223,15 @@ extension Step {
         }
         set {
             self.managedIsEnabled = NSNumber(value: newValue)
+        }
+    }
+
+    var sessionID: Int? {
+        get {
+            self.managedSessionId?.intValue
+        }
+        set {
+            self.managedSessionId = newValue as NSNumber?
         }
     }
 
