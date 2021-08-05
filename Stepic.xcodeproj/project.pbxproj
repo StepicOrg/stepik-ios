@@ -2274,6 +2274,7 @@
 		2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_lesson_fields_v31.xcdatamodel; sourceTree = "<group>"; };
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
+		2C093E0B26BBE4C700E4D575 /* Model_peer_review_step_session_v86.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_peer_review_step_session_v86.xcdatamodel; sourceTree = "<group>"; };
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
 		2C0A109C268B1412001D4023 /* Date+Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Region.swift"; sourceTree = "<group>"; };
 		2C0A109E268B1949001D4023 /* Model_course_benefit_by_month_v83.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_benefit_by_month_v83.xcdatamodel; sourceTree = "<group>"; };
@@ -13816,6 +13817,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C093E0B26BBE4C700E4D575 /* Model_peer_review_step_session_v86.xcdatamodel */,
 				2C29ED57269EF1D000729A97 /* Model_course_beneficiaries_v85.xcdatamodel */,
 				2C921A36269C7A4800029A1E /* Model_course_benefit_by_month_refunds_v84.xcdatamodel */,
 				2C0A109E268B1949001D4023 /* Model_course_benefit_by_month_v83.xcdatamodel */,
@@ -13903,7 +13905,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C29ED57269EF1D000729A97 /* Model_course_beneficiaries_v85.xcdatamodel */;
+			currentVersion = 2C093E0B26BBE4C700E4D575 /* Model_peer_review_step_session_v86.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
