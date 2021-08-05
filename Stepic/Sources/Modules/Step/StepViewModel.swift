@@ -11,6 +11,9 @@ struct StepViewModel {
     let passedByCount: Int?
     let correctRatio: Float?
 
+    let hasReview: Bool
+    let instructionType: InstructionType?
+
     @available(*, deprecated, message: "Deprecated initialization")
     let step: Step
 

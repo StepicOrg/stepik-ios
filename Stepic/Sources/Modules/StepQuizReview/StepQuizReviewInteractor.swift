@@ -11,10 +11,17 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     private let presenter: StepQuizReviewPresenterProtocol
     private let provider: StepQuizReviewProviderProtocol
 
+    private let step: Step
+    private let instructionType: InstructionType
+
     init(
+        step: Step,
+        instructionType: InstructionType,
         presenter: StepQuizReviewPresenterProtocol,
         provider: StepQuizReviewProviderProtocol
     ) {
+        self.step = step
+        self.instructionType = instructionType
         self.presenter = presenter
         self.provider = provider
     }

@@ -331,6 +331,8 @@ final class StepPresenter: StepPresenterProtocol {
             lessonID: step.lessonID,
             passedByCount: shouldShowStepStatistics ? step.passedByCount : nil,
             correctRatio: shouldShowStepStatistics ? step.correctRatio : nil,
+            hasReview: step.hasReview,
+            instructionType: step.instructionType,
             step: step
         )
 
