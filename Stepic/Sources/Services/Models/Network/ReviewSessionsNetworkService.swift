@@ -7,6 +7,12 @@ protocol ReviewSessionsNetworkServiceProtocol: AnyObject {
     func create(submissionID: Submission.IdType, blockName: String?) -> Promise<ReviewSessionDataPlainObject?>
 }
 
+extension ReviewSessionsNetworkServiceProtocol {
+    func fetch(id: Int, blockName: String?) -> Promise<ReviewSessionDataPlainObject?> {
+        self.fetch(ids: [id], blockName: blockName).map(\.first)
+    }
+}
+
 final class ReviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol {
     private let reviewSessionsAPI: ReviewSessionsAPI
 

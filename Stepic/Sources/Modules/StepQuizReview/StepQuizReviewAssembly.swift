@@ -14,7 +14,12 @@ final class StepQuizReviewAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = StepQuizReviewProvider()
+        let provider = StepQuizReviewProvider(
+            stepBlockName: self.step.block.name,
+            reviewSessionsNetworkService: ReviewSessionsNetworkService(reviewSessionsAPI: ReviewSessionsAPI()),
+            reviewsNetworkService: ReviewsNetworkService(reviewsAPI: ReviewsAPI()),
+            instructionsNetworkService: InstructionsNetworkService(instructionsAPI: InstructionsAPI())
+        )
         let presenter = StepQuizReviewPresenter()
         let interactor = StepQuizReviewInteractor(
             step: self.step,
