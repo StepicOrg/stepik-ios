@@ -5,13 +5,19 @@ extension StepQuizReviewTeacherView {
     struct Appearance {
         let backgroundColor = UIColor.stepikBackground
 
-        let messageViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let quizSeparatorInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
+
+        let messageViewInsets = LayoutInsets.default
 
         let actionButtonMinHeight: CGFloat = 44
         let actionButtonInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
-        let stackViewSpacing: CGFloat = 16
+        let stackViewSpacing: CGFloat = 0
         let stackViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    }
+
+    enum Animation {
+        static let expandQuizAnimationDuration: TimeInterval = 0.33
     }
 }
 
@@ -21,9 +27,31 @@ final class StepQuizReviewTeacherView: UIView, StepQuizReviewViewProtocol {
     let appearance: Appearance
     private var storedViewModel: StepQuizReviewViewModel?
 
-    private lazy var quizContainerView = UIView()
+    private lazy var expandQuizView: StepQuizReviewExpandQuizView = {
+        let view = StepQuizReviewExpandQuizView()
+        view.title = NSLocalizedString("StepQuizReviewTeacherQuizTitle", comment: "")
+        view.onExpand = { [weak self] isExpanded in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.handleQuizExpanded(isExpanded)
+        }
+        return view
+    }()
+
+    private lazy var quizContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
 
     private lazy var quizSeparatorView = SeparatorView()
+    private lazy var quizSeparatorContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
 
     private lazy var messageView = StepQuizReviewMessageView()
     private lazy var messageContainerView = UIView()
@@ -94,6 +122,13 @@ final class StepQuizReviewTeacherView: UIView, StepQuizReviewViewProtocol {
         self.storedViewModel = viewModel
     }
 
+    private func handleQuizExpanded(_ isExpanded: Bool) {
+        UIView.animate(withDuration: Animation.expandQuizAnimationDuration) {
+            self.quizContainerView.isHidden = !isExpanded
+            self.quizSeparatorContainerView.isHidden = !isExpanded
+        }
+    }
+
     @objc
     private func actionButtonClicked() {
         self.delegate?.stepQuizReviewViewView(
@@ -111,11 +146,13 @@ extension StepQuizReviewTeacherView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
 
+        self.stackView.addArrangedSubview(self.expandQuizView)
         self.stackView.addArrangedSubview(self.quizContainerView)
-        self.stackView.addArrangedSubview(self.quizSeparatorView)
+        self.stackView.addArrangedSubview(self.quizSeparatorContainerView)
         self.stackView.addArrangedSubview(self.messageContainerView)
         self.stackView.addArrangedSubview(self.actionButtonContainerView)
 
+        self.quizSeparatorContainerView.addSubview(self.quizSeparatorView)
         self.messageContainerView.addSubview(self.messageView)
         self.actionButtonContainerView.addSubview(self.actionButton)
     }
@@ -126,9 +163,14 @@ extension StepQuizReviewTeacherView: ProgrammaticallyInitializableViewProtocol {
             make.edges.equalToSuperview().inset(self.appearance.stackViewInsets)
         }
 
+        self.quizSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.quizSeparatorView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.quizSeparatorInsets)
+        }
+
         self.messageView.translatesAutoresizingMaskIntoConstraints = false
         self.messageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(self.appearance.messageViewInsets)
+            make.edges.equalToSuperview().inset(self.appearance.messageViewInsets.edgeInsets)
         }
 
         self.actionButton.translatesAutoresizingMaskIntoConstraints = false
