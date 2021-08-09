@@ -321,6 +321,8 @@ final class StepPresenter: StepPresenterProtocol {
             fromMobile: true
         )?.absoluteString ?? ""
 
+        let isTeacher = step.lesson?.canEdit ?? false
+
         let viewModel = StepViewModel(
             content: contentType,
             quizType: quizType,
@@ -333,6 +335,7 @@ final class StepPresenter: StepPresenterProtocol {
             correctRatio: shouldShowStepStatistics ? step.correctRatio : nil,
             hasReview: step.hasReview,
             instructionType: step.instructionType,
+            isTeacher: isTeacher,
             step: step
         )
 

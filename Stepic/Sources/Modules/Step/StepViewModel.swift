@@ -13,6 +13,7 @@ struct StepViewModel {
 
     let hasReview: Bool
     let instructionType: InstructionType?
+    let isTeacher: Bool
 
     @available(*, deprecated, message: "Deprecated initialization")
     let step: Step

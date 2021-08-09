@@ -672,6 +672,8 @@
 		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
 		2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C698C9424CEA90100979661 /* NewProfileCoverView.swift */; };
+		2C69BDCE26C147A3007C51FB /* StepQuizReviewTeacherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */; };
+		2C69BDD126C1482B007C51FB /* StepQuizReviewViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */; };
 		2C6A22F7267A4F1000B1476D /* StepicsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6A22F6267A4F1000B1476D /* StepicsNetworkService.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
 		2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */; };
@@ -783,6 +785,7 @@
 		2C8BCC2624869A3400DFB009 /* NewProfileDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BCC2524869A3400DFB009 /* NewProfileDetailsView.swift */; };
 		2C8BCC2824869A6000DFB009 /* NewProfileSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BCC2724869A6000DFB009 /* NewProfileSubmoduleProtocol.swift */; };
 		2C8BCC2C2486C54400DFB009 /* NewProfileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BCC2B2486C54400DFB009 /* NewProfileDetailsViewController.swift */; };
+		2C8CEA9A26BD715600F0A5BA /* StepQuizReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CEA9926BD715600F0A5BA /* StepQuizReviewViewModel.swift */; };
 		2C8E477B258966570084A070 /* GridSimpleCourseListCollectionHeaderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E477A258966570084A070 /* GridSimpleCourseListCollectionHeaderContentView.swift */; };
 		2C8EE76E2604B65B003512BC /* CourseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EE76D2604B65B003512BC /* CourseType.swift */; };
 		2C8F3ADB23CC8533004D113A /* SelectItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */; };
@@ -2588,6 +2591,8 @@
 		2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_personal_preferences_v62.xcdatamodel; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
+		2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewTeacherView.swift; sourceTree = "<group>"; };
+		2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewViewProtocols.swift; sourceTree = "<group>"; };
 		2C6A22F6267A4F1000B1476D /* StepicsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicsNetworkService.swift; sourceTree = "<group>"; };
 		2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupViewController.swift; sourceTree = "<group>"; };
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
@@ -2702,6 +2707,7 @@
 		2C8BCC2B2486C54400DFB009 /* NewProfileDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileDetailsViewController.swift; sourceTree = "<group>"; };
 		2C8C17282260EA94008DC7EA /* Model_course_is_certificate_auto_issued.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_is_certificate_auto_issued.xcdatamodel; sourceTree = "<group>"; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
+		2C8CEA9926BD715600F0A5BA /* StepQuizReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewViewModel.swift; sourceTree = "<group>"; };
 		2C8DD7672656777900CE57D8 /* Model_course_preview_unit_v79.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_preview_unit_v79.xcdatamodel; sourceTree = "<group>"; };
 		2C8E477A258966570084A070 /* GridSimpleCourseListCollectionHeaderContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListCollectionHeaderContentView.swift; sourceTree = "<group>"; };
 		2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_authors_v29.xcdatamodel; sourceTree = "<group>"; };
@@ -3897,8 +3903,8 @@
 				F15887F8EBEB4F0B02BA05F4 /* StepQuizReviewInteractor.swift */,
 				FF7C2E426B3D67D0EB13D312 /* StepQuizReviewPresenter.swift */,
 				DB60763DF30E81A85EF73B62 /* StepQuizReviewProvider.swift */,
-				58B2A82D76D2BD2EC85171E0 /* StepQuizReviewView.swift */,
 				9D20EE766983EF4FCEB8DA1C /* StepQuizReviewViewController.swift */,
+				2C8CEA9926BD715600F0A5BA /* StepQuizReviewViewModel.swift */,
 				91D32F71B09110FE560C222E /* InputOutput */,
 				2C0196FD26AED645009741C1 /* Views */,
 			);
@@ -4037,6 +4043,7 @@
 				2C7E293426B0403F008581F4 /* StepQuizReviewStatusContainerView.swift */,
 				2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */,
 				2C313E5626AFE640004ECBD2 /* StatusView */,
+				2C69BDCF26C147B0007C51FB /* StepQuizReviewView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4629,6 +4636,16 @@
 				8489EE7625FAF13B004A85C5 /* StepicUITests.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		2C69BDCF26C147B0007C51FB /* StepQuizReviewView */ = {
+			isa = PBXGroup;
+			children = (
+				2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */,
+				58B2A82D76D2BD2EC85171E0 /* StepQuizReviewView.swift */,
+				2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */,
+			);
+			path = StepQuizReviewView;
 			sourceTree = "<group>";
 		};
 		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
@@ -10595,6 +10612,7 @@
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
+				2C69BDCE26C147A3007C51FB /* StepQuizReviewTeacherView.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
 				082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */,
 				2C0FE8B625F8199200626289 /* RubricPlainObject.swift in Sources */,
@@ -11644,6 +11662,7 @@
 				62E98120BD0CAC63FFBAD181 /* NewChoiceQuizInteractor.swift in Sources */,
 				62E984AF1A9CF200A909A364 /* NewChoiceQuizPresenter.swift in Sources */,
 				2CBB21D924A60D7500B57F2D /* AppleIDSocialSDKProvider.swift in Sources */,
+				2C69BDD126C1482B007C51FB /* StepQuizReviewViewProtocols.swift in Sources */,
 				62E989C639A6F7D5455AD230 /* NewChoiceQuizViewController.swift in Sources */,
 				62E9827C16A8925D41C5BD53 /* NewChoiceQuizViewModel.swift in Sources */,
 				62E98961F7A3F44BF56A5B0D /* ChoiceElementView.swift in Sources */,
@@ -12010,6 +12029,7 @@
 				C6CF7E954A942E8ADC3FE8A2 /* CourseBenefitDetailAssembly.swift in Sources */,
 				7E361F13052A77F4C0D25940 /* CourseBenefitDetailDataFlow.swift in Sources */,
 				28A422F794BC483454064487 /* CourseBenefitDetailInteractor.swift in Sources */,
+				2C8CEA9A26BD715600F0A5BA /* StepQuizReviewViewModel.swift in Sources */,
 				C19DAE4445747E0B0E0AE9D2 /* CourseBenefitDetailPresenter.swift in Sources */,
 				DD6ADDCB2B61676CFC5DFABD /* CourseBenefitDetailProvider.swift in Sources */,
 				0E263F845429D4A13FBB7ED0 /* CourseBenefitDetailView.swift in Sources */,

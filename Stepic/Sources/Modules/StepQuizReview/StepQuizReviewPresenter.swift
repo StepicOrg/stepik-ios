@@ -1,11 +1,82 @@
 import UIKit
 
 protocol StepQuizReviewPresenterProtocol {
-    func presentSomeActionResult(response: StepQuizReview.SomeAction.Response)
+    func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response)
 }
 
 final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
     weak var viewController: StepQuizReviewViewControllerProtocol?
 
-    func presentSomeActionResult(response: StepQuizReview.SomeAction.Response) {}
+    func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response) {
+        switch response.result {
+        case .success(let data):
+            guard data.isTeacher else {
+                return
+            }
+
+            let viewModel = self.makeViewModel(
+                step: data.step,
+                instructionType: data.instructionType,
+                isTeacher: data.isTeacher,
+                session: data.session,
+                instruction: data.instruction
+            )
+            self.viewController?.displayStepQuizReview(viewModel: .init(state: .result(data: viewModel)))
+        case .failure:
+            self.viewController?.displayStepQuizReview(viewModel: .init(state: .error))
+        }
+    }
+
+    private func makeViewModel(
+        step: Step,
+        instructionType: InstructionType,
+        isTeacher: Bool,
+        session: ReviewSessionDataPlainObject?,
+        instruction: InstructionDataPlainObject
+    ) -> StepQuizReviewViewModel {
+        guard isTeacher else {
+            fatalError("Only teacheres mode supported")
+        }
+
+        let availableReviewsCount = session?.reviewSession.availableReviewsCount ?? 0
+
+        let infoMessage: String? = {
+            switch instructionType {
+            case .instructor:
+                return availableReviewsCount == 0
+                    ? NSLocalizedString("StepQuizReviewTeacherNoticeInstructorsNoSubmissions", comment: "")
+                    : String(
+                        format: NSLocalizedString("StepQuizReviewTeacherNoticeInstructorsSubmissions", comment: ""),
+                        arguments: [FormatterHelper.submissionsCount(availableReviewsCount)]
+                    )
+            case .peer:
+                return NSLocalizedString("StepQuizReviewTeacherNoticePeer", comment: "")
+            }
+        }()
+
+        let primaryActionButtonDescription: StepQuizReviewViewModel.ButtonDescription = {
+            switch instructionType {
+            case .instructor:
+                return .init(
+                    title: NSLocalizedString("StepQuizReviewGivenStartReview", comment: ""),
+                    isEnabled: availableReviewsCount > 0,
+                    uniqueIdentifier: StepQuizReview.ActionType.teacherReviewSubmissions.uniqueIdentifier
+                )
+            case .peer:
+                return .init(
+                    title: NSLocalizedString("SubmissionsTitle", comment: ""),
+                    isEnabled: true,
+                    uniqueIdentifier: StepQuizReview.ActionType.teacherViewSubmissions.uniqueIdentifier
+                )
+            }
+        }()
+
+        return StepQuizReviewViewModel(
+            isInstructorInstructionType: instructionType == .instructor,
+            isPeerInstructionType: instructionType == .peer,
+            isTeacher: isTeacher,
+            infoMessage: infoMessage,
+            primaryActionButtonDescription: primaryActionButtonDescription
+        )
+    }
 }

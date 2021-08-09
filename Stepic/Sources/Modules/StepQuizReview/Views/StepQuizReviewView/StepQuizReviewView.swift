@@ -8,7 +8,9 @@ extension StepQuizReviewView {
     }
 }
 
-final class StepQuizReviewView: UIView {
+final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
+    weak var delegate: StepQuizReviewViewDelegate?
+
     let appearance: Appearance
 
     private lazy var messageView = StepQuizReviewMessageView()
@@ -48,6 +50,8 @@ final class StepQuizReviewView: UIView {
     func hideLoading() {
         self.skeleton.hide()
     }
+
+    func configure(viewModel: StepQuizReviewViewModel) {}
 
     private func configureDummyPeerReview() {
         self.messageView.title = """

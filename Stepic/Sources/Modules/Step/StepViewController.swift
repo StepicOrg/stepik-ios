@@ -209,6 +209,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
                 assembly = StepQuizReviewAssembly(
                     step: stepViewModel.step,
                     instructionType: instructionType,
+                    isTeacher: stepViewModel.isTeacher,
                     output: nil
                 )
             } else {
