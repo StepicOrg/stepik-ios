@@ -7,7 +7,9 @@ protocol StepQuizReviewViewControllerProtocol: AnyObject {
 final class StepQuizReviewViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: StepQuizReviewInteractorProtocol
 
+    private let step: Step
     private let isTeacher: Bool
+    private let canNavigateToNextStep: Bool
     private var state: StepQuizReview.ViewControllerState
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -16,11 +18,15 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
 
     init(
         interactor: StepQuizReviewInteractorProtocol,
+        step: Step,
         isTeacher: Bool,
+        canNavigateToNextStep: Bool,
         initialState: StepQuizReview.ViewControllerState = .loading
     ) {
         self.interactor = interactor
+        self.step = step
         self.isTeacher = isTeacher
+        self.canNavigateToNextStep = canNavigateToNextStep
         self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,6 +64,21 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
 
         self.updateState(newState: self.state)
         self.interactor.doStepQuizReviewLoad(request: .init())
+
+        self.setupQuizChildModule()
+    }
+
+    private func setupQuizChildModule() {
+        let assembly = BaseQuizAssembly(
+            step: self.step,
+            hasNextStep: self.canNavigateToNextStep,
+            output: self.interactor as? BaseQuizOutputProtocol
+        )
+        let quizChildViewController = assembly.makeModule()
+
+        self.addChild(quizChildViewController)
+        self.stepQuizReviewView?.addQuiz(view: quizChildViewController.view)
+        quizChildViewController.didMove(toParent: self)
     }
 
     private func updateState(newState: StepQuizReview.ViewControllerState) {

@@ -210,6 +210,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
                     step: stepViewModel.step,
                     instructionType: instructionType,
                     isTeacher: stepViewModel.isTeacher,
+                    canNavigateToNextStep: self.canNavigateToNextStep,
                     output: nil
                 )
             } else {
@@ -542,6 +543,10 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepNavigationRequest(request: .init(direction: .next))
     }
 }
+
+// MARK: - StepViewController: StepQuizReviewOutputProtocol -
+
+extension StepViewController: StepQuizReviewOutputProtocol {}
 
 // MARK: - StepViewController: StepikVideoPlayerViewControllerDelegate -
 

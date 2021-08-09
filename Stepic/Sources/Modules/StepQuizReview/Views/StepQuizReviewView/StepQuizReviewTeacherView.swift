@@ -4,11 +4,14 @@ import UIKit
 extension StepQuizReviewTeacherView {
     struct Appearance {
         let backgroundColor = UIColor.stepikBackground
-        let insets = LayoutInsets.default
+
+        let messageViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         let actionButtonMinHeight: CGFloat = 44
+        let actionButtonInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         let stackViewSpacing: CGFloat = 16
+        let stackViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 }
 
@@ -18,13 +21,19 @@ final class StepQuizReviewTeacherView: UIView, StepQuizReviewViewProtocol {
     let appearance: Appearance
     private var storedViewModel: StepQuizReviewViewModel?
 
-    private lazy var messageView = StepQuizReviewMessageView()
+    private lazy var quizContainerView = UIView()
 
-    private lazy var primaryActionButton: UIButton = {
+    private lazy var quizSeparatorView = SeparatorView()
+
+    private lazy var messageView = StepQuizReviewMessageView()
+    private lazy var messageContainerView = UIView()
+
+    private lazy var actionButton: UIButton = {
         let button = LessonPanModalActionButton()
-        button.addTarget(self, action: #selector(self.primaryActionButtonClicked), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         return button
     }()
+    private lazy var actionButtonContainerView = UIView()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -67,18 +76,26 @@ final class StepQuizReviewTeacherView: UIView, StepQuizReviewViewProtocol {
         self.stackView.alpha = 1
     }
 
+    func addQuiz(view: UIView) {
+        self.quizContainerView.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+
     func configure(viewModel: StepQuizReviewViewModel) {
         self.messageView.title = viewModel.infoMessage
 
-        self.primaryActionButton.setTitle(viewModel.primaryActionButtonDescription.title, for: .normal)
-        self.primaryActionButton.isEnabled = viewModel.primaryActionButtonDescription.isEnabled
-        self.primaryActionButton.alpha = self.primaryActionButton.isEnabled ? 1.0 : 0.5
+        self.actionButton.setTitle(viewModel.primaryActionButtonDescription.title, for: .normal)
+        self.actionButton.isEnabled = viewModel.primaryActionButtonDescription.isEnabled
+        self.actionButton.alpha = self.actionButton.isEnabled ? 1.0 : 0.5
 
         self.storedViewModel = viewModel
     }
 
     @objc
-    private func primaryActionButtonClicked() {
+    private func actionButtonClicked() {
         self.delegate?.stepQuizReviewViewView(
             self,
             didClickButtonWith: self.storedViewModel?.primaryActionButtonDescription.uniqueIdentifier
@@ -93,18 +110,30 @@ extension StepQuizReviewTeacherView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.stackView)
-        self.stackView.addArrangedSubview(self.messageView)
-        self.stackView.addArrangedSubview(self.primaryActionButton)
+
+        self.stackView.addArrangedSubview(self.quizContainerView)
+        self.stackView.addArrangedSubview(self.quizSeparatorView)
+        self.stackView.addArrangedSubview(self.messageContainerView)
+        self.stackView.addArrangedSubview(self.actionButtonContainerView)
+
+        self.messageContainerView.addSubview(self.messageView)
+        self.actionButtonContainerView.addSubview(self.actionButton)
     }
 
     func makeConstraints() {
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.edges.equalTo(self.appearance.insets.edgeInsets)
+            make.edges.equalToSuperview().inset(self.appearance.stackViewInsets)
         }
 
-        self.primaryActionButton.translatesAutoresizingMaskIntoConstraints = false
-        self.primaryActionButton.snp.makeConstraints { make in
+        self.messageView.translatesAutoresizingMaskIntoConstraints = false
+        self.messageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.messageViewInsets)
+        }
+
+        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.actionButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.actionButtonInsets)
             make.height.greaterThanOrEqualTo(self.appearance.actionButtonMinHeight)
         }
     }

@@ -51,6 +51,8 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         self.skeleton.hide()
     }
 
+    func addQuiz(view: UIView) {}
+
     func configure(viewModel: StepQuizReviewViewModel) {}
 
     private func configureDummyPeerReview() {

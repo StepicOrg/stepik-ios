@@ -83,3 +83,17 @@ StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)),
 }
 
 extension StepQuizReviewInteractor: StepQuizReviewInputProtocol {}
+
+extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
+    func handleCorrectSubmission() {
+        self.moduleOutput?.handleCorrectSubmission()
+    }
+
+    func handleSubmissionEvaluated() {
+        self.moduleOutput?.handleSubmissionEvaluated()
+    }
+
+    func handleNextStepNavigation() {
+        self.moduleOutput?.handleNextStepNavigation()
+    }
+}
