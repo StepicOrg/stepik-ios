@@ -41,12 +41,23 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
                 return self.provider.fetchInstruction(id: instructionID).map { (reviewSession, $0) }
             }
             return .value((reviewSession, nil))
-        }.compactMap {
-            reviewSessionOrNil, instructionOrNil -> (ReviewSessionDataPlainObject?, InstructionDataPlainObject)? in
-            if let instruction = instructionOrNil {
-                return (reviewSessionOrNil, instruction)
+        }.compactMap { reviewSession, instruction -> (ReviewSessionDataPlainObject?, InstructionDataPlainObject)? in
+            if let instruction = instruction {
+                return (reviewSession, instruction)
             }
             return nil
+        }.then { reviewSession, instruction -> Promise<(ReviewSessionDataPlainObject?, InstructionDataPlainObject)> in
+            if self.step.sessionID == nil && instruction.instruction.isFrozen {
+                return self.provider
+                    .createReviewSession(instructionID: instruction.instruction.id)
+                    .then { reviewSession -> Promise<ReviewSessionDataPlainObject?> in
+                        self.step.sessionID = reviewSession?.id
+                        CoreDataHelper.shared.save()
+                        return .value(reviewSession)
+                    }
+                    .map { ($0, instruction) }
+            }
+            return .value((reviewSession, instruction))
         }.done { reviewSessionOrNil, instruction in
             print(
                 """

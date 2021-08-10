@@ -4,7 +4,9 @@ import PromiseKit
 protocol ReviewSessionsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Int], blockName: String?) -> Promise<[ReviewSessionDataPlainObject]>
     func fetch(userID: User.IdType, instructionID: Int, blockName: String?) -> Promise<ReviewSessionDataPlainObject?>
+
     func create(submissionID: Submission.IdType, blockName: String?) -> Promise<ReviewSessionDataPlainObject?>
+    func create(instructionID: Int, blockName: String?) -> Promise<ReviewSessionDataPlainObject?>
 }
 
 extension ReviewSessionsNetworkServiceProtocol {
@@ -36,6 +38,13 @@ final class ReviewSessionsNetworkService: ReviewSessionsNetworkServiceProtocol {
     func create(submissionID: Submission.IdType, blockName: String?) -> Promise<ReviewSessionDataPlainObject?> {
         self.reviewSessionsAPI
             .createReviewSession(submissionID: submissionID, blockName: blockName)
+            .map(self.mapReviewSessionResponseToData)
+            .map(\.first)
+    }
+
+    func create(instructionID: Int, blockName: String?) -> Promise<ReviewSessionDataPlainObject?> {
+        self.reviewSessionsAPI
+            .createReviewSession(instructionID: instructionID, blockName: blockName)
             .map(self.mapReviewSessionResponseToData)
             .map(\.first)
     }

@@ -18,6 +18,18 @@ final class ReviewSessionsAPI: APIEndpoint {
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
 
+    func createReviewSession(instructionID: Int, blockName: String?) -> Promise<ReviewSessionResponse> {
+        let body = [
+            JSONKey.reviewSession.rawValue: [
+                JSONKey.instruction.rawValue: instructionID
+            ]
+        ]
+
+        return self.create
+            .request(requestEndpoint: self.name, bodyJSONObject: body, withManager: self.manager)
+            .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
+    }
+
     /// Get review sessions by ids.
     ///
     /// - Parameter ids: The identifiers array of the review sessions to fetch.

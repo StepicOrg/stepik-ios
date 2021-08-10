@@ -4,6 +4,7 @@ import PromiseKit
 protocol StepQuizReviewProviderProtocol {
     func fetchReviewSession(id: Int) -> Promise<ReviewSessionDataPlainObject?>
     func createReviewSession(submissionID: Submission.IdType) -> Promise<ReviewSessionDataPlainObject?>
+    func createReviewSession(instructionID: Int) -> Promise<ReviewSessionDataPlainObject?>
 
     func createReview(sessionID: Int) -> Promise<ReviewDataPlainObject?>
 
@@ -35,6 +36,10 @@ final class StepQuizReviewProvider: StepQuizReviewProviderProtocol {
 
     func createReviewSession(submissionID: Submission.IdType) -> Promise<ReviewSessionDataPlainObject?> {
         self.reviewSessionsNetworkService.create(submissionID: submissionID, blockName: self.stepBlockName)
+    }
+
+    func createReviewSession(instructionID: Int) -> Promise<ReviewSessionDataPlainObject?> {
+        self.reviewSessionsNetworkService.create(instructionID: instructionID, blockName: self.stepBlockName)
     }
 
     func createReview(sessionID: Int) -> Promise<ReviewDataPlainObject?> {
