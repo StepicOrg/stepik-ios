@@ -89,7 +89,13 @@ StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)),
         case .teacherReviewSubmissions:
             self.startTeacherReview()
         case .teacherViewSubmissions:
-            break
+            self.presenter.presentSubmissions(
+                response: .init(
+                    stepID: self.step.id,
+                    isTeacher: self.isTeacher,
+                    filterQuery: .init(filters: [.reviewStatus(.awaiting)])
+                )
+            )
         }
     }
 

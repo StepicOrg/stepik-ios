@@ -3,6 +3,7 @@ import UIKit
 protocol StepQuizReviewPresenterProtocol {
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response)
     func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response)
+    func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response)
     func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -39,6 +40,12 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
         if let url = self.urlFactory.makeReviewReviews(reviewID: response.review.id, unitID: response.unitID) {
             self.viewController?.displayTeacherReview(viewModel: .init(url: url))
         }
+    }
+
+    func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response) {
+        self.viewController?.displaySubmissions(
+            viewModel: .init(stepID: response.stepID, isTeacher: response.isTeacher, filterQuery: response.filterQuery)
+        )
     }
 
     func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response) {

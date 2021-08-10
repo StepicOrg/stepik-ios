@@ -4,6 +4,7 @@ import UIKit
 protocol StepQuizReviewViewControllerProtocol: AnyObject {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel)
     func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel)
+    func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -104,6 +105,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     }
 }
 
+// MARK: - StepQuizReviewViewController: StepQuizReviewViewControllerProtocol -
+
 extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
@@ -119,6 +122,24 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
         )
     }
 
+    func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel) {
+        let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
+
+        let assembly = SubmissionsAssembly(
+            stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
+            submissionsFilterQuery: viewModel.filterQuery,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
+    }
+
     func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.showError {
             SVProgressHUD.showError(withStatus: nil)
@@ -129,6 +150,8 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
         }
     }
 }
+
+// MARK: - StepQuizReviewViewController: StepQuizReviewViewDelegate -
 
 extension StepQuizReviewViewController: StepQuizReviewViewDelegate {
     func stepQuizReviewViewView(

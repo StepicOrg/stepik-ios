@@ -40,6 +40,20 @@ enum StepQuizReview {
         }
     }
 
+    enum SubmissionsPresentation {
+        struct Response {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+            var filterQuery: SubmissionsFilterQuery?
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let isTeacher: Bool
+            let filterQuery: SubmissionsFilterQuery?
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

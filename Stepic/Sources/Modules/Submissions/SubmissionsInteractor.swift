@@ -54,6 +54,12 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             self.currentFilterQuery = .default
         }
 
+        if self.currentFilterQuery != .default {
+            DispatchQueue.main.async {
+                self.presenter.presentFilterButtonActiveState(response: .init(isActive: true))
+            }
+        }
+
         let searchText = self.currentFilterQuery.search ?? ""
 
         if !searchText.isEmpty {
