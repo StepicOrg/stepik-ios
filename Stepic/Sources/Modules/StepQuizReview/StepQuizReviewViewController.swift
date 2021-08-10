@@ -16,6 +16,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     private let canNavigateToNextStep: Bool
     private var state: StepQuizReview.ViewControllerState
 
+    private var didDisplayTeacherReview = false
+
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     var stepQuizReviewView: StepQuizReviewViewProtocol? { self.view as? StepQuizReviewViewProtocol }
@@ -72,6 +74,17 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
         self.setupQuizChildModule()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if self.didDisplayTeacherReview {
+            self.didDisplayTeacherReview = false
+            self.interactor.doStepQuizReviewRefresh(request: .init(afterTeacherReviewPresentation: true))
+        }
+    }
+
+    // MARK: Private API
+
     private func setupQuizChildModule() {
         let assembly = BaseQuizAssembly(
             step: self.step,
@@ -120,6 +133,7 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
             allowsSafari: true,
             backButtonStyle: .done
         )
+        self.didDisplayTeacherReview = true
     }
 
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel) {

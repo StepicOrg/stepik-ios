@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol StepQuizReviewInteractorProtocol {
     func doStepQuizReviewLoad(request: StepQuizReview.QuizReviewLoad.Request)
+    func doStepQuizReviewRefresh(request: StepQuizReview.QuizReviewRefresh.Request)
     func doButtonAction(request: StepQuizReview.ButtonAction.Request)
 }
 
@@ -77,6 +78,12 @@ StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)),
         }.catch { error in
             print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
             self.presenter.presentStepQuizReview(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doStepQuizReviewRefresh(request: StepQuizReview.QuizReviewRefresh.Request) {
+        if request.afterTeacherReviewPresentation {
+            self.doStepQuizReviewLoad(request: .init())
         }
     }
 

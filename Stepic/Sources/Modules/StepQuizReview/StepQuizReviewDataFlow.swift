@@ -1,6 +1,7 @@
 import Foundation
 
 enum StepQuizReview {
+    /// Load latest review data
     enum QuizReviewLoad {
         struct Request {}
 
@@ -18,6 +19,13 @@ enum StepQuizReview {
 
         struct ViewModel {
             let state: ViewControllerState
+        }
+    }
+
+    /// Load latest review data if needed
+    enum QuizReviewRefresh {
+        struct Request {
+            var afterTeacherReviewPresentation = false
         }
     }
 
