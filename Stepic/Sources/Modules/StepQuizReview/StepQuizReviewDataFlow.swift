@@ -21,9 +21,35 @@ enum StepQuizReview {
         }
     }
 
+    /// Handle tap on action button
     enum ButtonAction {
         struct Request {
             let actionUniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
+    /// Present teacher review in the web
+    enum TeacherReviewPresentation {
+        struct Response {
+            let review: ReviewDataPlainObject
+            let unitID: Unit.IdType?
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+            var showError = false
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
+            let showError: Bool
         }
     }
 

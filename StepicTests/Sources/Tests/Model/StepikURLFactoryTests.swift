@@ -279,7 +279,7 @@ class StepikURLFactorySpec: QuickSpec {
                 }
             }
 
-            context("review sessions") {
+            context("review") {
                 it("returns correct URL for review session with session id") {
                     // Given
                     let sessionID = 908582
@@ -300,6 +300,31 @@ class StepikURLFactorySpec: QuickSpec {
 
                     // When
                     let constructedURL = stepikURLFactory.makeReviewSession(sessionID: sessionID, unitID: unitID)!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+
+                it("returns correct URL for review reviews with review id") {
+                    // Given
+                    let reviewID = 1936960
+                    let staticURLString = "\(stepikURL)/review/reviews/\(reviewID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeReviewReviews(reviewID: reviewID)!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+
+                it("returns correct URL for review reviews with review and unit ids") {
+                    // Given
+                    let reviewID = 1936960
+                    let unitID = 272615
+                    let staticURLString = "\(stepikURL)/review/reviews/\(reviewID)?unit=\(unitID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeReviewReviews(reviewID: reviewID, unitID: unitID)!
 
                     // Then
                     expect(constructedURL.absoluteString) == staticURLString

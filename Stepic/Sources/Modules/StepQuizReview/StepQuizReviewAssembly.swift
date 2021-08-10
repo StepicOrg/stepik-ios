@@ -30,7 +30,7 @@ final class StepQuizReviewAssembly: Assembly {
             reviewsNetworkService: ReviewsNetworkService(reviewsAPI: ReviewsAPI()),
             instructionsNetworkService: InstructionsNetworkService(instructionsAPI: InstructionsAPI())
         )
-        let presenter = StepQuizReviewPresenter()
+        let presenter = StepQuizReviewPresenter(urlFactory: StepikURLFactory())
         let interactor = StepQuizReviewInteractor(
             step: self.step,
             instructionType: self.instructionType,

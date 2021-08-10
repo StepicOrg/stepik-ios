@@ -1,7 +1,10 @@
+import SVProgressHUD
 import UIKit
 
 protocol StepQuizReviewViewControllerProtocol: AnyObject {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel)
+    func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 final class StepQuizReviewViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -104,6 +107,26 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
 extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .peerReview,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.showError {
+            SVProgressHUD.showError(withStatus: nil)
+        } else if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
     }
 }
 

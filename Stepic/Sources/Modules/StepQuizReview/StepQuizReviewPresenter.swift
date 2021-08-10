@@ -2,10 +2,18 @@ import UIKit
 
 protocol StepQuizReviewPresenterProtocol {
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response)
+    func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response)
+    func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
     weak var viewController: StepQuizReviewViewControllerProtocol?
+
+    private let urlFactory: StepikURLFactory
+
+    init(urlFactory: StepikURLFactory) {
+        self.urlFactory = urlFactory
+    }
 
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response) {
         switch response.result {
@@ -26,6 +34,20 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             self.viewController?.displayStepQuizReview(viewModel: .init(state: .error))
         }
     }
+
+    func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response) {
+        if let url = self.urlFactory.makeReviewReviews(reviewID: response.review.id, unitID: response.unitID) {
+            self.viewController?.displayTeacherReview(viewModel: .init(url: url))
+        }
+    }
+
+    func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(
+            viewModel: .init(shouldDismiss: response.shouldDismiss, showError: response.showError)
+        )
+    }
+
+    // MARK: Private API
 
     private func makeViewModel(
         step: Step,

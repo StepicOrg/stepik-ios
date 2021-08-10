@@ -85,7 +85,30 @@ StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)),
             return
         }
 
-        print(action)
+        switch action {
+        case .teacherReviewSubmissions:
+            self.startTeacherReview()
+        case .teacherViewSubmissions:
+            break
+        }
+    }
+
+    // MARK: Private API
+
+    private func startTeacherReview() {
+        guard let sessionID = self.step.sessionID else {
+            return print("StepQuizReviewInteractor :: failed \(#function) no session")
+        }
+
+        self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: false))
+
+        self.provider.createReview(sessionID: sessionID).compactMap { $0 }.done { review in
+            self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true))
+            self.presenter.presentTeacherReview(response: .init(review: review, unitID: self.step.lesson?.unit?.id))
+        }.catch { error in
+            print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
+            self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true, showError: true))
+        }
     }
 
     enum Error: Swift.Error {
