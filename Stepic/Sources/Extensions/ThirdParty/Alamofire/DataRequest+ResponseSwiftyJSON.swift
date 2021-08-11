@@ -2,12 +2,10 @@ import Alamofire
 import Foundation
 import SwiftyJSON
 
-// MARK: SwiftyJSON Response Serializer -
-
-public final class SwiftyJSONResponseSerializer: ResponseSerializer {
+final class SwiftyJSONResponseSerializer: ResponseSerializer {
     private let jsonResponseSerializer: JSONResponseSerializer
 
-    public init(
+    init(
         dataPreprocessor: DataPreprocessor = JSONResponseSerializer.defaultDataPreprocessor,
         emptyResponseCodes: Set<Int> = JSONResponseSerializer.defaultEmptyResponseCodes,
         emptyRequestMethods: Set<HTTPMethod> = JSONResponseSerializer.defaultEmptyRequestMethods,
@@ -21,7 +19,7 @@ public final class SwiftyJSONResponseSerializer: ResponseSerializer {
         )
     }
 
-    public func serialize(
+    func serialize(
         request: URLRequest?,
         response: HTTPURLResponse?,
         data: Data?,
@@ -49,7 +47,7 @@ extension DataRequest {
     ///
     /// - returns: The request.
     @discardableResult
-    public func responseSwiftyJSON(
+    func responseSwiftyJSON(
         queue: DispatchQueue = .main,
         options: JSONSerialization.ReadingOptions = .allowFragments,
         _ completionHandler: @escaping (AFDataResponse<JSON>) -> Void

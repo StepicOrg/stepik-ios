@@ -1,3 +1,4 @@
+// swiftlint:disable all
 //
 //  ViewPager.swift
 //  Pager
@@ -6,8 +7,8 @@
 //  Copyright (c) 2015 Cheesecake. All rights reserved.
 //
 import Foundation
-import UIKit.UITableView
 import SnapKit
+import UIKit.UITableView
 
 // MARK: - Pager Enums
 //Enum for the location of the tab bar
@@ -39,12 +40,11 @@ public enum PagerAnimation: Int {
 }
 
 open class PagerController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
-
     // MARK: - public properties
-    open var contentViewBackgroundColor: UIColor = UIColor.white
-    open var indicatorColor: UIColor = UIColor.red
-    open var tabsViewBackgroundColor: UIColor = UIColor.gray
-    open var tabsTextColor: UIColor = UIColor.white
+    open var contentViewBackgroundColor = UIColor.white
+    open var indicatorColor = UIColor.red
+    open var tabsViewBackgroundColor = UIColor.gray
+    open var tabsTextColor = UIColor.white
     open var selectedTabTextColor = UIColor.white
     open var tabsImageViewContentMode = UIView.ContentMode.scaleAspectFit
     open weak var dataSource: PagerDataSource?
@@ -53,22 +53,22 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     open var tabTopOffset: CGFloat = 0.0
     open var tabOffset: CGFloat = 56.0
     open var tabWidth: CGFloat = 128.0
-    open var tabsTextFont: UIFont = UIFont.boldSystemFont(ofSize: 16.0)
+    open var tabsTextFont = UIFont.boldSystemFont(ofSize: 16.0)
     open var indicatorHeight: CGFloat = 5.0
-    open var tabLocation: PagerTabLocation = PagerTabLocation.top
-    open var animation: PagerAnimation = PagerAnimation.during
+    open var tabLocation = PagerTabLocation.top
+    open var animation = PagerAnimation.during
     open var startTabIndex: Int = 0
-    open var centerCurrentTab: Bool = false
-    open var fixFormerTabsPositions: Bool = false
-    open var fixLaterTabsPosition: Bool = false
-    open var ignoreTopBarHeight: Bool = false
-    open var ignoreBottomBarHeight: Bool = false
+    open var centerCurrentTab = false
+    open var fixFormerTabsPositions = false
+    open var fixLaterTabsPosition = false
+    open var ignoreTopBarHeight = false
+    open var ignoreBottomBarHeight = false
     fileprivate var tabViews: [UIView] = []
     fileprivate var tabControllers: [UIViewController] = []
 
     // MARK: - Tab and content stuff
     internal var tabsView: UIScrollView?
-    open var pageViewController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    open var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     internal weak var actualDelegate: UIScrollViewDelegate?
     internal var contentView: UIView {
         let contentView = self.pageViewController.view
@@ -80,15 +80,15 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     }
 
     // MARK: - Tab and content cache
-    internal var underlineStroke: UIView = UIView()
+    internal var underlineStroke = UIView()
     internal var tabs: [UIView?] = []
     internal var contents: [UIViewController?] = []
     internal var tabCount: Int = 0
     internal var activeTabIndex: Int = 0
     internal var activeContentIndex: Int = 0
-    internal var animatingToTab: Bool = false
-    internal var defaultSetupDone: Bool = false
-    internal var didTapOnTabView: Bool = false
+    internal var animatingToTab = false
+    internal var defaultSetupDone = false
+    internal var didTapOnTabView = false
 
     // MARK: - Important Methods
     // Initializing PagerController with Name of the Tabs and their respective ViewControllers
@@ -146,7 +146,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         super.viewWillLayoutSubviews()
     }
 
-    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         self.changeActiveTabIndex(self.activeTabIndex)
     }
@@ -201,7 +201,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
         // Add tabsView
         if self.tabsView == nil {
-
             self.tabsView = UIScrollView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.tabHeight))
             self.tabsView?.autoresizingMask = .flexibleWidth
             self.tabsView?.backgroundColor = self.tabsViewBackgroundColor
@@ -347,7 +346,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     }
 
     func updateSelectedTab(_ index: Int) {
-
         let selectedTab = self.tabViewAtIndex(index)
 
         // Resetting all tab colors to white
@@ -361,7 +359,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
                     tab?.alpha = 0.566
 //                }
             }
-
         }
 
         // Setting current selected tab to red
@@ -374,7 +371,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     }
 
     func changeActiveTabIndex(_ newIndex: Int) {
-
         if newIndex == self.activeTabIndex {
             return
         }
@@ -389,20 +385,16 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         var frame: CGRect = tabView.frame
 
         if self.centerCurrentTab {
-
             if (frame.origin.x + frame.width + (tabsView.frame.width / 2)) >= tabsView.contentSize.width {
                 frame.origin.x = (tabsView.contentSize.width - tabsView.frame.width)
             } else {
-
                 frame.origin.x += (frame.width / 2)
                 frame.origin.x -= (tabsView.frame.width / 2)
 
                 if frame.origin.x < 0 {
                     frame.origin.x = 0
                 }
-
             }
-
         } else {
             frame.origin.x -= self.tabOffset
             frame.size.width = tabsView.frame.width
@@ -422,7 +414,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         }
 
         if (self.tabs[index] as UIView?) == nil {
-
             var tabViewContent = UIView()
             if let tab = dataSource.tabViewForIndex?(index, pager: self) {
                 tabViewContent = tab
@@ -431,7 +422,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             }
             tabViewContent.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 
-            let tabView: TabView = TabView(frame: CGRect(x: 0.0, y: 0.0, width: self.tabWidth, height: self.tabHeight))
+            let tabView = TabView(frame: CGRect(x: 0.0, y: 0.0, width: self.tabWidth, height: self.tabHeight))
             tabView.addSubview(tabViewContent)
             tabView.clipsToBounds = true
             tabViewContent.center = tabView.center
@@ -474,7 +465,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
         // Extend contentSizeWidth if fixLatterTabsPositions is provided YES
         if self.fixLaterTabsPosition {
-
             // And if the centerCurrentTab is provided as YES fine tune the content size according to it
             if self.centerCurrentTab {
                 contentSizeWidth += (tabsView.frame.width - self.tabWidth) / 2.0
@@ -575,7 +565,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
                 })
             }
         } else if !(activeContentIndex + 1 == self.activeContentIndex || activeContentIndex - 1 == self.activeContentIndex) {
-
             let direction: UIPageViewController.NavigationDirection = (activeContentIndex < self.activeContentIndex) ? .reverse : .forward
             DispatchQueue.main.async {
                 self.pageViewController.setViewControllers([vc], direction: direction, animated: true, completion: {
@@ -632,14 +621,12 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         }
 
         if !self.animatingToTab {
-
             // Get the related tab view position
             var frame: CGRect = tabView.frame
             let movedRatio: CGFloat = (scrollView.contentOffset.x / scrollView.frame.width) - 1
             frame.origin.x += movedRatio * frame.width
 
             if self.centerCurrentTab {
-
                 frame.origin.x += (frame.size.width / 2)
                 frame.origin.x -= tabsView.frame.width / 2
                 frame.size.width = tabsView.frame.width
@@ -652,7 +639,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
                     frame.origin.x = (tabsView.contentSize.width - tabsView.frame.width)
                 }
             } else {
-
                 frame.origin.x -= self.tabOffset
                 frame.size.width = tabsView.frame.width
             }
@@ -801,7 +787,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
 // MARK: - TabView
 class TabView: UIView {
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear

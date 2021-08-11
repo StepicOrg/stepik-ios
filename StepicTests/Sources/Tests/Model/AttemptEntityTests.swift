@@ -34,15 +34,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: choiceDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
@@ -65,15 +64,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: fillBlanksDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
@@ -96,15 +94,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: freeAnswerDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
@@ -127,15 +124,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: matchingDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
@@ -158,15 +154,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: sortingDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
@@ -189,15 +184,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: stringDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
@@ -220,15 +214,14 @@ class AttemptEntitySpec: QuickSpec {
                 let attempt = makeAttempt(dataset: tableDataset)
 
                 // When
-                _ = AttemptEntity(
-                    attempt: attempt,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = AttemptEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    attempt: attempt
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = AttemptEntity.fetchRequest
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
+                let request = AttemptEntity.sortedFetchRequest
 
                 let attempts = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(attempts.count) == 1
