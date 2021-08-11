@@ -63,7 +63,7 @@
 		081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */; };
 		081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */; };
 		081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */; };
-		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
+		0824289C1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift */; };
 		08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
 		08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
 		082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
@@ -1892,7 +1892,7 @@
 		081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPageViewController.swift; sourceTree = "<group>"; };
 		081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPresenter.swift; sourceTree = "<group>"; };
 		081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesAssembly.swift; sourceTree = "<group>"; };
-		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
+		0824289B1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+ResponseSwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
 		08263D6F1DE5F230002E5B7F /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
 		082799471E9B81AF008A3786 /* RateAppAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppAlertManager.swift; sourceTree = "<group>"; };
@@ -3838,15 +3838,6 @@
 			path = Stepic;
 			sourceTree = "<group>";
 		};
-		08E16F201BDBA495004822E1 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				08E16F211BDBA4AF004822E1 /* Reachability.h */,
-				08E16F221BDBA4AF004822E1 /* Reachability.m */,
-			);
-			name = Reachability;
-			sourceTree = "<group>";
-		};
 		0E839B9EC258A7A3342CE5FA /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
@@ -3895,11 +3886,7 @@
 				9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */,
 				938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
-				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
-				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
-				08C1943F1ED0A05D00A41B72 /* PagerController.swift */,
 				2C4BBF0B203DC5C9000A4250 /* Plyr */,
-				08E16F201BDBA495004822E1 /* Reachability */,
 				2CF6E62625ADB92A00B5A703 /* WidgetKit.framework */,
 				2CF6E62825ADB92A00B5A703 /* SwiftUI.framework */,
 			);
@@ -4729,6 +4716,25 @@
 				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
 			);
 			path = ReviewSession;
+			sourceTree = "<group>";
+		};
+		2C7DFC4426C3F16800B243D7 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
+				08C1943F1ED0A05D00A41B72 /* PagerController.swift */,
+				2C7DFC4526C3F30300B243D7 /* Reachability */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		2C7DFC4526C3F30300B243D7 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				08E16F211BDBA4AF004822E1 /* Reachability.h */,
+				08E16F221BDBA4AF004822E1 /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		2C7EFCF024D08D8E003A4E93 /* SocialProfiles */ = {
@@ -6623,6 +6629,7 @@
 		2CF9BD372538504D00C2AFD2 /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
+				0824289B1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift */,
 				2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */,
 			);
 			path = Alamofire;
@@ -8870,6 +8877,7 @@
 				2C284DBC2474907C00669736 /* InAppPurchases */,
 				2CBE8A9C2625C58400AF7C86 /* Notifications */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
+				2C7DFC4426C3F16800B243D7 /* ThirdParty */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -10808,7 +10816,7 @@
 				08484F0C211AF4320006266F /* StoryViewController.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
-				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
+				0824289C1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift in Sources */,
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				2C53B4752588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift in Sources */,
