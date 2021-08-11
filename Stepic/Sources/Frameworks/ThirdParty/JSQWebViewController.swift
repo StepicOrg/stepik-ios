@@ -1,3 +1,4 @@
+// swiftlint:disable all
 //
 //  Created by Jesse Squires
 //  http://www.jessesquires.com
@@ -25,7 +26,6 @@ private let EstimatedProgressKeyPath = "estimatedProgress"
 
 /// An instance of `WebViewController` displays interactive web content.
 class WebViewController: UIViewController {
-
     // MARK: Properties
 
     var allowsToOpenInSafari = true
@@ -50,14 +50,14 @@ class WebViewController: UIViewController {
      Specifies whether or not to display the web view title as the navigation bar title.
      The default is `false`, which sets the navigation bar title to the URL host name of the URL request.
      */
-    final var displaysWebViewTitle: Bool = false
+    final var displaysWebViewTitle = false
 
     // MARK: Private properties
 
     fileprivate lazy final var _webView: WKWebView = { [unowned self] in
         // FIXME: prevent Swift bug, lazy property initialized twice from `init(coder:)`
         // return existing webView if webView already added
-        let views = self.view.subviews.filter {$0 is WKWebView } as! [WKWebView]
+        let views = self.view.subviews.filter { $0 is WKWebView } as! [WKWebView]
         if views.count != 0 {
             return views.first!
         }
@@ -70,7 +70,7 @@ class WebViewController: UIViewController {
         webView.allowsLinkPreview = true
         webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"
         return webView
-        }()
+    }()
 
     fileprivate lazy final var _progressBar: UIProgressView = { [unowned self] in
         let progressBar = UIProgressView(progressViewStyle: .bar)
@@ -78,7 +78,7 @@ class WebViewController: UIViewController {
         progressBar.trackTintColor = UIColor.clear
         self.view.addSubview(progressBar)
         return progressBar
-        }()
+    }()
 
     fileprivate final let configuration: WKWebViewConfiguration
 
@@ -88,14 +88,18 @@ class WebViewController: UIViewController {
 
     /**
     Constructs a new `WebViewController`.
-    
+
     - parameter urlRequest:    The URL request for the web view to load.
     - parameter configuration: The configuration for the web view.
     - parameter activities:    The custom activities to display in the `UIActivityViewController` that is presented when the action button is tapped.
-    
+
     - returns: A new `WebViewController` instance.
     */
-    init(urlRequest: URLRequest, configuration: WKWebViewConfiguration = WKWebViewConfiguration(), activities: [UIActivity]? = nil) {
+    init(
+        urlRequest: URLRequest,
+        configuration: WKWebViewConfiguration = WKWebViewConfiguration(),
+        activities: [UIActivity]? = nil
+    ) {
         self.configuration = configuration
         self.urlRequest = urlRequest
         self.activities = activities
@@ -213,7 +217,12 @@ class WebViewController: UIViewController {
     // MARK: KVO
 
     /// :nodoc:
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
         guard let theKeyPath = keyPath, object as? WKWebView == webView else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
@@ -235,5 +244,4 @@ class WebViewController: UIViewController {
         progressBar.setProgress(completed ? 0.0 : Float(webView.estimatedProgress), animated: !completed)
         UIApplication.shared.isNetworkActivityIndicatorVisible = !completed
     }
-
 }

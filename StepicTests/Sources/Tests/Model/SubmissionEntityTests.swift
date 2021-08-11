@@ -38,15 +38,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: choiceFeedback, reply: nil)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -63,15 +62,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: fillBlanksFeedback, reply: nil)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -88,15 +86,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: stringFeedback, reply: nil)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -115,15 +112,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: choiceReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -140,15 +136,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: codeReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -165,15 +160,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: fillBlanksReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -190,15 +184,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: freeAnswerReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -215,15 +208,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: matchingReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -240,15 +232,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: mathReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -265,15 +256,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: numberReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -290,15 +280,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: sortingReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -315,15 +304,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: sqlReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -340,15 +328,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: tableReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
@@ -365,15 +352,14 @@ class SubmissionEntityTests: QuickSpec {
                     let submission = makeSubmission(feedback: nil, reply: textReply)
 
                     // When
-                    _ = SubmissionEntity(
-                        submission: submission,
-                        managedObjectContext: testCoreDataStack.managedObjectContext
+                    _ = SubmissionEntity.insert(
+                        into: testCoreDataStack.managedObjectContext,
+                        submission: submission
                     )
                     testCoreDataStack.saveContext()
 
                     // Then
-                    let request = SubmissionEntity.fetchRequest
-                    request.sortDescriptors = SubmissionEntity.defaultSortDescriptors
+                    let request = SubmissionEntity.sortedFetchRequest
 
                     let submissions = try! testCoreDataStack.managedObjectContext.fetch(request)
                     expect(submissions.count) == 1
