@@ -59,7 +59,7 @@ def all_pods
 
   pod 'IQKeyboardManagerSwift', '6.5.6'
 
-  pod 'Kanna', '5.2.2'
+  pod 'Kanna', '5.2.7'
   pod 'TUSafariActivity', '1.0.4'
 
   # Social SDKs
