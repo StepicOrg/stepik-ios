@@ -21,15 +21,14 @@ class CatalogBlockEntitySpec: QuickSpec {
                 let catalogBlock = CatalogBlock(json: json)
 
                 // When
-                _ = CatalogBlockEntity(
-                    catalogBlock: catalogBlock,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = CatalogBlockEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    catalogBlock: catalogBlock
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = CatalogBlockEntity.fetchRequest
-                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+                let request = CatalogBlockEntity.sortedFetchRequest
 
                 let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(catalogBlocks.count) == 1
@@ -54,15 +53,14 @@ class CatalogBlockEntitySpec: QuickSpec {
                 let catalogBlock = CatalogBlock(json: json)
 
                 // When
-                _ = CatalogBlockEntity(
-                    catalogBlock: catalogBlock,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = CatalogBlockEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    catalogBlock: catalogBlock
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = CatalogBlockEntity.fetchRequest
-                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+                let request = CatalogBlockEntity.sortedFetchRequest
 
                 let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(catalogBlocks.count) == 1
@@ -87,15 +85,14 @@ class CatalogBlockEntitySpec: QuickSpec {
                 let catalogBlock = CatalogBlock(json: json)
 
                 // When
-                _ = CatalogBlockEntity(
-                    catalogBlock: catalogBlock,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = CatalogBlockEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    catalogBlock: catalogBlock
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = CatalogBlockEntity.fetchRequest
-                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+                let request = CatalogBlockEntity.sortedFetchRequest
 
                 let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(catalogBlocks.count) == 1
@@ -120,15 +117,14 @@ class CatalogBlockEntitySpec: QuickSpec {
                 let catalogBlock = CatalogBlock(json: json)
 
                 // When
-                _ = CatalogBlockEntity(
-                    catalogBlock: catalogBlock,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = CatalogBlockEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    catalogBlock: catalogBlock
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = CatalogBlockEntity.fetchRequest
-                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+                let request = CatalogBlockEntity.sortedFetchRequest
 
                 let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(catalogBlocks.count) == 1
@@ -152,15 +148,14 @@ class CatalogBlockEntitySpec: QuickSpec {
                 let catalogBlock = CatalogBlock(json: json)
 
                 // When
-                _ = CatalogBlockEntity(
-                    catalogBlock: catalogBlock,
-                    managedObjectContext: testCoreDataStack.managedObjectContext
+                _ = CatalogBlockEntity.insert(
+                    into: testCoreDataStack.managedObjectContext,
+                    catalogBlock: catalogBlock
                 )
                 testCoreDataStack.saveContext()
 
                 // Then
-                let request = CatalogBlockEntity.fetchRequest
-                request.sortDescriptors = CatalogBlockEntity.defaultSortDescriptors
+                let request = CatalogBlockEntity.sortedFetchRequest
 
                 let catalogBlocks = try! testCoreDataStack.managedObjectContext.fetch(request)
                 expect(catalogBlocks.count) == 1
