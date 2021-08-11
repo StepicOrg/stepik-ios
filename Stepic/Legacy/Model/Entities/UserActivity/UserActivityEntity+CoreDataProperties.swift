@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension UserActivityEntity {
     @NSManaged var managedId: NSNumber?
@@ -7,12 +6,22 @@ extension UserActivityEntity {
 
     @NSManaged var managedProfile: Profile?
 
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    var id: Int {
+        get {
+            self.managedId?.intValue ?? -1
+        }
+        set {
+            self.managedId = NSNumber(value: newValue)
+        }
     }
 
-    static var fetchRequest: NSFetchRequest<UserActivityEntity> {
-        NSFetchRequest<UserActivityEntity>(entityName: "UserActivityEntity")
+    var pins: [Int] {
+        get {
+            self.managedPinsArray as? [Int] ?? []
+        }
+        set {
+            self.managedPinsArray = NSArray(array: newValue)
+        }
     }
 
     var profile: Profile? {

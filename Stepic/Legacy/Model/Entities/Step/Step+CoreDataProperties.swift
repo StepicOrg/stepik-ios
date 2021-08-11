@@ -1,16 +1,4 @@
-//
-//  Step+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 12.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Step {
     @NSManaged var managedId: NSNumber?
@@ -25,6 +13,7 @@ extension Step {
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
     @NSManaged var managedIsEnabled: NSNumber?
+    @NSManaged var managedSessionId: NSNumber?
     @NSManaged var managedInstructionId: NSNumber?
     @NSManaged var managedInstructionType: String?
     @NSManaged var managedNeedsPlan: String?
@@ -39,18 +28,6 @@ extension Step {
     @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionThreadsArray: NSObject?
     @NSManaged var managedDiscussionThreads: NSOrderedSet?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<Step> {
-        NSFetchRequest<Step>(entityName: "Step")
-    }
-
-    convenience init() {
-        self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {
@@ -246,6 +223,15 @@ extension Step {
         }
         set {
             self.managedIsEnabled = NSNumber(value: newValue)
+        }
+    }
+
+    var sessionID: Int? {
+        get {
+            self.managedSessionId?.intValue
+        }
+        set {
+            self.managedSessionId = newValue as NSNumber?
         }
     }
 

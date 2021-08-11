@@ -36,7 +36,7 @@ extension EnrollmentsAPI {
     func joinCourse(
         _ course: Course,
         delete: Bool = false,
-        success : @escaping () -> Void,
+        success: @escaping () -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
         let headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders

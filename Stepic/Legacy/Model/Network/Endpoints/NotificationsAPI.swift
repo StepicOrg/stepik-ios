@@ -16,7 +16,7 @@ import SwiftyJSON
 final class NotificationsAPI: APIEndpoint {
     override var name: String { "notifications" }
 
-    func retrieve(page: Int = 1, notificationType: NotificationType? = nil) -> Promise<( [Notification], Meta)> {
+    func retrieve(page: Int = 1, notificationType: NotificationType? = nil) -> Promise<([Notification], Meta)> {
         var parameters = [
             "page": "\(page)"
         ]

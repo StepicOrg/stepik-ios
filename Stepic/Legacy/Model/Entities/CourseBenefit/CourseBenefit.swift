@@ -1,9 +1,12 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class CourseBenefit: NSManagedObject, JSONSerializable {
+final class CourseBenefit: NSManagedObject, ManagedObject, JSONSerializable {
     typealias IdType = Int
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
 
     var status: CourseBenefitStatus? { CourseBenefitStatus(rawValue: self.statusString) }
 
@@ -12,7 +15,7 @@ final class CourseBenefit: NSManagedObject, JSONSerializable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
     }
 

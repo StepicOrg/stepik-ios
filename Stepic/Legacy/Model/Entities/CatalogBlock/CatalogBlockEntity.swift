@@ -1,103 +1,8 @@
 import CoreData
-import Foundation
 
-final class CatalogBlockEntity: NSManagedObject {
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CatalogBlockEntity", in: CoreDataHelper.shared.context)!
-    }
-
-    var id: Int {
-        get {
-            self.managedId?.intValue ?? 0
-        }
-        set {
-            self.managedId = NSNumber(value: newValue)
-        }
-    }
-
-    var position: Int {
-        get {
-            self.managedPosition?.intValue ?? 0
-        }
-        set {
-            self.managedPosition = NSNumber(value: newValue)
-        }
-    }
-
-    var title: String {
-        get {
-            self.managedTitle ?? ""
-        }
-        set {
-            self.managedTitle = newValue
-        }
-    }
-
-    var descriptionString: String {
-        get {
-            self.managedDescription ?? ""
-        }
-        set {
-            self.managedDescription = newValue
-        }
-    }
-
-    var language: String {
-        get {
-            self.managedLanguage ?? ""
-        }
-        set {
-            self.managedLanguage = newValue
-        }
-    }
-
-    var platform: Int {
-        get {
-            self.managedPlatform?.intValue ?? PlatformType.ios.rawValue
-        }
-        set {
-            self.managedPlatform = NSNumber(value: newValue)
-        }
-    }
-
-    var kind: String {
-        get {
-            self.managedKind ?? ""
-        }
-        set {
-            self.managedKind = newValue
-        }
-    }
-
-    var appearance: String {
-        get {
-            self.managedAppearance ?? ""
-        }
-        set {
-            self.managedAppearance = newValue
-        }
-    }
-
-    var isTitleVisible: Bool {
-        get {
-            self.managedIsTitleVisible?.boolValue ?? true
-        }
-        set {
-            self.managedIsTitleVisible = NSNumber(value: newValue)
-        }
-    }
-
-    var content: [CatalogBlockContentItem] {
-        get {
-            self.managedContent as? [CatalogBlockContentItem] ?? []
-        }
-        set {
-            self.managedContent = NSArray(array: newValue)
-        }
-    }
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
+final class CatalogBlockEntity: NSManagedObject, ManagedObject, Identifiable {
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedPosition), ascending: true)]
     }
 }
 
@@ -119,15 +24,13 @@ extension CatalogBlockEntity {
         )
     }
 
-    convenience init(catalogBlock: CatalogBlock, managedObjectContext: NSManagedObjectContext) {
-        guard let entity = NSEntityDescription.entity(
-            forEntityName: "CatalogBlockEntity", in: managedObjectContext
-        ) else {
-            fatalError("Wrong object type")
-        }
+    static func insert(into context: NSManagedObjectContext, catalogBlock: CatalogBlock) -> CatalogBlockEntity {
+        let catalogBlockEntity: CatalogBlockEntity = context.insertObject()
+        catalogBlockEntity.update(catalogBlock: catalogBlock)
+        return catalogBlockEntity
+    }
 
-        self.init(entity: entity, insertInto: managedObjectContext)
-
+    func update(catalogBlock: CatalogBlock) {
         self.id = catalogBlock.id
         self.position = catalogBlock.position
         self.title = catalogBlock.title

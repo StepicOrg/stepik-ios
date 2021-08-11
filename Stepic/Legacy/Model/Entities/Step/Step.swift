@@ -1,16 +1,7 @@
-//
-//  Step.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 12.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class Step: NSManagedObject, IDFetchable {
+final class Step: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     var needsPlanType: CourseType? {
@@ -22,7 +13,7 @@ final class Step: NSManagedObject, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Step.entity, insertInto: CoreDataHelper.shared.context)
         self.initialize(json)
         self.block = Block(json: json[JSONKey.block.rawValue])
     }
@@ -34,6 +25,7 @@ final class Step: NSManagedObject, IDFetchable {
         self.progressID = json[JSONKey.progress.rawValue].stringValue
         self.hasSubmissionRestrictions = json[JSONKey.hasSubmissionsRestrictions.rawValue].boolValue
         self.isEnabled = json[JSONKey.isEnabled.rawValue].bool ?? true
+        self.sessionID = json[JSONKey.session.rawValue].int
         self.instructionID = json[JSONKey.instruction.rawValue].int
         self.instructionType = json[JSONKey.instructionType.rawValue].string
         self.needsPlan = json[JSONKey.needsPlan.rawValue].string
@@ -94,6 +86,7 @@ final class Step: NSManagedObject, IDFetchable {
         if self.correctRatio != object.correctRatio { return false }
         if self.canEdit != object.canEdit { return false }
         if self.isEnabled != object.isEnabled { return false }
+        if self.sessionID != object.sessionID { return false }
         if self.instructionID != object.instructionID { return false }
         if self.needsPlan != object.needsPlan { return false }
 
@@ -108,6 +101,7 @@ final class Step: NSManagedObject, IDFetchable {
         return true
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func getStepWithID(_ id: IdType, unitID: Unit.IdType? = nil) -> Step? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
@@ -151,6 +145,7 @@ final class Step: NSManagedObject, IDFetchable {
         case discussionProxy = "discussion_proxy"
         case discussionThreads = "discussion_threads"
         case isEnabled = "is_enabled"
+        case session
         case instruction
         case instructionType = "instruction_type"
         case needsPlan = "needs_plan"

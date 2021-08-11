@@ -19,46 +19,56 @@ final class ApplicationInfo {
             static let host = "url.host"
             static let adaptiveRating = "url.adaptiveRating"
         }
+
         enum Cookie {
             static let prefix = "cookie.prefix"
         }
+
         enum Feature {
             static let courseUnenrollment = "feature.courseUnenrollment"
             static let streaks = "feature.streaks"
             static let notifications = "feature.notifications"
         }
+
         enum Adaptive {
             static let supportedCourses = "adaptive.supportedCourses"
             static let isAdaptive = "adaptive.isAdaptive"
             static let mainColor = "adaptive.mainColor"
             static let coursesInfoURL = "adaptive.coursesInfoURL"
         }
+
         enum RateApp {
             static let submissionsThreshold = "rateApp.submissionsThreshold"
             static let appStoreLink = "rateApp.appStoreLink"
         }
+
         enum SocialProviders {
             static let vkId = "socialProviders.vk"
             static let facebookId = "socialProviders.facebook"
             static let googleId = "socialProviders.google"
         }
+
         enum AuthType {
             static let social = "social"
             static let password = "password"
+
             enum Social {
                 static let id = "social.id"
                 static let secret = "social.secret"
                 static let redirect = "social.redirect_uri"
             }
+
             enum Password {
                 static let id = "password.id"
                 static let secret = "password.secret"
                 static let redirect = "password.redirect_uri"
             }
         }
+
         enum Modules {
             static let tabs = "modules.tabs"
         }
+
         enum Versions {
             static let stories = "versions.stories"
         }
