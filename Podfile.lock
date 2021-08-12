@@ -146,7 +146,6 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.5.0)
-  - HexColors (2.3.0)
   - Highlightr (2.1.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Kanna (5.2.7)
@@ -196,8 +195,6 @@ PODS:
   - SwiftyJSON (5.0.0)
   - Tabman (2.10.0):
     - Pageboy (~> 3.6.0)
-  - TSMessages (0.9.13):
-    - HexColors (~> 2.3.0)
   - TTTAttributedLabel (2.0.0)
   - TUSafariActivity (1.0.4)
   - URITemplate (3.0.0)
@@ -251,7 +248,6 @@ DEPENDENCIES:
   - SwiftLint (= 0.43.1)
   - SwiftyJSON (= 5.0.0)
   - Tabman (= 2.10.0)
-  - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
   - VK-ios-sdk (= 1.6.2)
@@ -289,7 +285,6 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
-    - HexColors
     - IQKeyboardManagerSwift
     - Kanna
     - Koloda
@@ -332,8 +327,6 @@ EXTERNAL SOURCES:
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
-  TSMessages:
-    :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
   FLEX:
@@ -348,9 +341,6 @@ CHECKOUT OPTIONS:
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
-  TSMessages:
-    :commit: e4802d290362c87ba8a35c1afae88668dba8ab9a
-    :git: https://github.com/KrauseFx/TSMessages.git
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
@@ -384,7 +374,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
-  HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   Highlightr: 683f05d5223cade533a78528a35c9f06e4caddf8
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
@@ -411,13 +400,12 @@ SPEC CHECKSUMS:
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: d8d6ab0b483c7db375a71ac227d3ef791b56a049
-  TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: fb4b3c20a0c0237b03b34cc07b6d575332f43097
 
-PODFILE CHECKSUM: a5b2d5637f36f4f5ca81ca6338715f2f39d87b92
+PODFILE CHECKSUM: cccc1c98bd754cedc93138178c69cc2be62ede1f
 
 COCOAPODS: 1.10.2
