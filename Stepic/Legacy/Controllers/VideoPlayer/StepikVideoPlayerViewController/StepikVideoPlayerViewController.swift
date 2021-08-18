@@ -1147,13 +1147,19 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
     // MARK: Private helpers
 
     private func setTimeParametersAfterPlayerIsReady() {
-        self.fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
+        func stringFromTimeInterval(_ ti: TimeInterval) -> String {
+            let formatter = DateComponentsFormatter()
+            let additionalFormat = ti >= 60 ? "" : (ti < 10 ? "0:0" : "0:")
+            return "\(additionalFormat)\(ti >= 60 ? formatter.string(from: ti)! : "\(Int(ti))")"
+        }
+
+        self.fullTimeTopLabel.text = stringFromTimeInterval(self.player.maximumDuration)
         self.player.setPeriodicTimeObserver { [weak self] time, bufferedTime in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
+            strongSelf.currentTimeTopLabel.text = stringFromTimeInterval(time)
             strongSelf.topTimeSlider.value = Float(time / Double(strongSelf.player.maximumDuration))
 
             if let bufferedTime = bufferedTime {

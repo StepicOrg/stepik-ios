@@ -37,6 +37,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: StepInteractorProtocol
+    private let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     private var state: StepDataFlow.ViewControllerState {
         didSet {
@@ -57,9 +58,14 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
     private var arQuickLookPreviewDataSource: StepARQuickLookPreviewDataSource?
 
-    init(interactor: StepInteractorProtocol) {
+    init(
+        interactor: StepInteractorProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
+        initialState: StepDataFlow.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
-        self.state = .loading
+        self.networkReachabilityService = networkReachabilityService
+        self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -509,8 +515,7 @@ extension StepViewController: StepViewDelegate {
             return
         }
 
-        let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
-            || ConnectionHelper.shared.reachability.isReachableViaWWAN()
+        let isVideoPlayingReachable = self.networkReachabilityService.isReachable
         let isVideoCached = video.state == .cached
 
         if !isVideoCached && !isVideoPlayingReachable {
