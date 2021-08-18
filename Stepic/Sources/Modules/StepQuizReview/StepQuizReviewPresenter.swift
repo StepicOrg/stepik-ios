@@ -61,7 +61,7 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
         instructionType: InstructionType,
         isTeacher: Bool,
         session: ReviewSessionDataPlainObject?,
-        instruction: InstructionDataPlainObject
+        instruction: InstructionDataPlainObject?
     ) -> StepQuizReviewViewModel {
         guard isTeacher else {
             fatalError("Only teacheres mode supported")

@@ -92,11 +92,25 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         if isFirstSubmissionLoad && !request.shouldRefreshAttempt {
             self.fetchSubmissionDataFromCache().done { cachedAttempt, cachedSubmission, cachedSubmissionsCount in
+                self.moduleOutput?.handleQuizLoaded(
+                    attempt: cachedAttempt,
+                    submission: cachedSubmission,
+                    submissionsCount: cachedSubmissionsCount,
+                    source: .cache
+                )
+
                 self.presentSubmission(attempt: cachedAttempt, submission: cachedSubmission)
 
                 self.fetchSubmissionDataFromRemote(
                     forceRefreshAttempt: false
                 ).done { remoteAttempt, remoteSubmission, remoteSubmissionsCount in
+                    self.moduleOutput?.handleQuizLoaded(
+                        attempt: remoteAttempt,
+                        submission: remoteSubmission,
+                        submissionsCount: remoteSubmissionsCount,
+                        source: .remote
+                    )
+
                     let shouldReload = cachedAttempt != remoteAttempt
                         || cachedSubmission != remoteSubmission
                         || cachedSubmissionsCount != remoteSubmissionsCount
@@ -105,7 +119,16 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                     }
                 }.cauterize()
             }.catch { _ in
-                self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { attempt, submission, _ in
+                self.fetchSubmissionDataFromRemote(
+                    forceRefreshAttempt: false
+                ).done { attempt, submission, submissionsCount in
+                    self.moduleOutput?.handleQuizLoaded(
+                        attempt: attempt,
+                        submission: submission,
+                        submissionsCount: submissionsCount,
+                        source: .remote
+                    )
+
                     self.presentSubmission(attempt: attempt, submission: submission)
                 }.catch { error in
                     self.presenter.presentSubmission(response: .init(result: .failure(error)))
@@ -114,7 +137,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         } else {
             self.fetchSubmissionDataFromRemote(
                 forceRefreshAttempt: request.shouldRefreshAttempt
-            ).done { attempt, submission, _ in
+            ).done { attempt, submission, submissionsCount in
+                self.moduleOutput?.handleQuizLoaded(
+                    attempt: attempt,
+                    submission: submission,
+                    submissionsCount: submissionsCount,
+                    source: .remote
+                )
+
                 self.presentSubmission(attempt: attempt, submission: submission)
             }.catch { error in
                 self.presenter.presentSubmission(response: .init(result: .failure(error)))

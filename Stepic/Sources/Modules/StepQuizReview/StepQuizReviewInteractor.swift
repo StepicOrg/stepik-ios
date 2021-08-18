@@ -17,6 +17,12 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     private let instructionType: InstructionType
     private let isTeacher: Bool
 
+    private var currentReviewSession: ReviewSessionDataPlainObject?
+    private var currentInstruction: InstructionDataPlainObject?
+
+    private var currentStudentQuizData: FetchResult<StepQuizReview.QuizData>?
+    private var isFetchStudentDataInProgress = false
+
     init(
         step: Step,
         instructionType: InstructionType,
@@ -32,52 +38,10 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     }
 
     func doStepQuizReviewLoad(request: StepQuizReview.QuizReviewLoad.Request) {
-        firstly { () -> Promise<ReviewSessionDataPlainObject?> in
-            if let sessionID = self.step.sessionID {
-                return self.provider.fetchReviewSession(id: sessionID)
-            }
-            return .value(nil)
-        }.then { reviewSession -> Promise<(ReviewSessionDataPlainObject?, InstructionDataPlainObject?)> in
-            if let instructionID = self.step.instructionID {
-                return self.provider.fetchInstruction(id: instructionID).map { (reviewSession, $0) }
-            }
-            return .value((reviewSession, nil))
-        }.compactMap { reviewSession, instruction -> (ReviewSessionDataPlainObject?, InstructionDataPlainObject)? in
-            if let instruction = instruction {
-                return (reviewSession, instruction)
-            }
-            return nil
-        }.then { reviewSession, instruction -> Promise<(ReviewSessionDataPlainObject?, InstructionDataPlainObject)> in
-            if self.step.sessionID == nil && instruction.instruction.isFrozen {
-                return self.provider
-                    .createReviewSession(instructionID: instruction.instruction.id)
-                    .then { reviewSession -> Promise<ReviewSessionDataPlainObject?> in
-                        self.step.sessionID = reviewSession?.id
-                        CoreDataHelper.shared.save()
-                        return .value(reviewSession)
-                    }
-                    .map { ($0, instruction) }
-            }
-            return .value((reviewSession, instruction))
-        }.done { reviewSessionOrNil, instruction in
-            print(
-                """
-StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)), instruction = \(instruction)
-"""
-            )
-
-            let data = StepQuizReview.QuizReviewLoad.Data(
-                step: self.step,
-                instructionType: self.instructionType,
-                isTeacher: self.isTeacher,
-                session: reviewSessionOrNil,
-                instruction: instruction
-            )
-
-            self.presenter.presentStepQuizReview(response: .init(result: .success(data)))
-        }.catch { error in
-            print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
-            self.presenter.presentStepQuizReview(response: .init(result: .failure(error)))
+        if self.isTeacher {
+            self.fetchTeacherData()
+        } else {
+            self.fetchStudentData()
         }
     }
 
@@ -108,6 +72,78 @@ StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)),
 
     // MARK: Private API
 
+    private func fetchStudentData() {
+        self.isFetchStudentDataInProgress = false
+
+        guard let sessionID = self.step.sessionID, sessionID > 0 else {
+            return
+        }
+
+        self.isFetchStudentDataInProgress = true
+
+        self.provider.fetchReviewSession(
+            id: sessionID
+        ).then { reviewSession -> Promise<(ReviewSessionDataPlainObject?, InstructionDataPlainObject?)> in
+            if let instructionID = self.step.instructionID {
+                return self.provider.fetchInstruction(id: instructionID).map { (reviewSession, $0) }
+            }
+            return .value((reviewSession, nil))
+        }.done { reviewSession, instruction in
+            self.currentReviewSession = reviewSession
+            self.currentInstruction = instruction
+
+            if let currentStudentQuizData = self.currentStudentQuizData {
+                print("StepQuizReviewInteractor :: \(#function) currentStudentQuizData = \(currentStudentQuizData)")
+                self.presentStepQuizReviewFromCurrentData()
+            } else {
+                print("StepQuizReviewInteractor :: \(#function) currentStudentQuizData is `nil`")
+            }
+        }.ensure {
+            self.isFetchStudentDataInProgress = false
+        }.catch { error in
+            print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
+            self.presenter.presentStepQuizReview(response: .init(result: .failure(error)))
+        }
+    }
+
+    private func fetchTeacherData() {
+        firstly { () -> Promise<ReviewSessionDataPlainObject?> in
+            if let sessionID = self.step.sessionID {
+                return self.provider.fetchReviewSession(id: sessionID)
+            }
+            return .value(nil)
+        }.then { reviewSession -> Promise<(ReviewSessionDataPlainObject?, InstructionDataPlainObject?)> in
+            if let instructionID = self.step.instructionID {
+                return self.provider.fetchInstruction(id: instructionID).map { (reviewSession, $0) }
+            }
+            return .value((reviewSession, nil))
+        }.compactMap { reviewSession, instruction -> (ReviewSessionDataPlainObject?, InstructionDataPlainObject)? in
+            if let instruction = instruction {
+                return (reviewSession, instruction)
+            }
+            return nil
+        }.then { reviewSession, instruction -> Promise<(ReviewSessionDataPlainObject?, InstructionDataPlainObject)> in
+            if self.step.sessionID == nil && instruction.instruction.isFrozen {
+                return self.provider
+                    .createReviewSession(instructionID: instruction.instruction.id)
+                    .then { reviewSession -> Promise<ReviewSessionDataPlainObject?> in
+                        self.step.sessionID = reviewSession?.id
+                        CoreDataHelper.shared.save()
+                        return .value(reviewSession)
+                    }
+                    .map { ($0, instruction) }
+            }
+            return .value((reviewSession, instruction))
+        }.done { reviewSessionOrNil, instruction in
+            self.currentReviewSession = reviewSessionOrNil
+            self.currentInstruction = instruction
+            self.presentStepQuizReviewFromCurrentData()
+        }.catch { error in
+            print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
+            self.presenter.presentStepQuizReview(response: .init(result: .failure(error)))
+        }
+    }
+
     private func startTeacherReview() {
         guard let sessionID = self.step.sessionID else {
             return print("StepQuizReviewInteractor :: failed \(#function) no session")
@@ -124,8 +160,16 @@ StepQuizReviewInteractor :: session = \(String(describing: reviewSessionOrNil)),
         }
     }
 
-    enum Error: Swift.Error {
-        case something
+    private func presentStepQuizReviewFromCurrentData() {
+        let data = StepQuizReview.QuizReviewLoad.Data(
+            step: self.step,
+            instructionType: self.instructionType,
+            isTeacher: self.isTeacher,
+            session: self.currentReviewSession,
+            instruction: self.currentInstruction,
+            quizData: self.currentStudentQuizData?.value
+        )
+        self.presenter.presentStepQuizReview(response: .init(result: .success(data)))
     }
 }
 
@@ -142,5 +186,45 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
 
     func handleNextStepNavigation() {
         self.moduleOutput?.handleNextStepNavigation()
+    }
+
+    func handleQuizLoaded(attempt: Attempt, submission: Submission, submissionsCount: Int, source: DataSourceType) {
+        defer {
+            self.moduleOutput?.handleQuizLoaded(
+                attempt: attempt,
+                submission: submission,
+                submissionsCount: submissionsCount,
+                source: source
+            )
+        }
+
+        if self.isTeacher {
+            return
+        }
+
+        let newQuizData: FetchResult<StepQuizReview.QuizData> = .init(
+            value: .init(attempt: attempt, submission: submission, submissionsCount: submissionsCount),
+            source: .init(dataSource: source)
+        )
+
+        let isQuizDataChanged: Bool = {
+            if let currentQuizData = self.currentStudentQuizData {
+                return currentQuizData.value != newQuizData.value || currentQuizData.source != newQuizData.source
+            }
+            return true
+        }()
+
+        self.currentStudentQuizData = newQuizData
+
+        DispatchQueue.main.async {
+            let shouldReload = !self.isFetchStudentDataInProgress && isQuizDataChanged
+            print(
+                "StepQuizReviewInteractor :: \(#function) newQuizData = \(newQuizData); shouldReload = \(shouldReload)"
+            )
+
+            if shouldReload {
+                self.presentStepQuizReviewFromCurrentData()
+            }
+        }
     }
 }

@@ -1,6 +1,13 @@
 import Foundation
 
 enum StepQuizReview {
+    /// Data from BaseQuiz module
+    struct QuizData: Equatable {
+        let attempt: Attempt
+        let submission: Submission
+        let submissionsCount: Int
+    }
+
     /// Load latest review data
     enum QuizReviewLoad {
         struct Request {}
@@ -10,7 +17,8 @@ enum StepQuizReview {
             let instructionType: InstructionType
             let isTeacher: Bool
             let session: ReviewSessionDataPlainObject?
-            let instruction: InstructionDataPlainObject
+            let instruction: InstructionDataPlainObject?
+            var quizData: QuizData?
         }
 
         struct Response {
