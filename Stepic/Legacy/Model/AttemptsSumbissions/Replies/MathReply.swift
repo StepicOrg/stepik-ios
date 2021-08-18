@@ -10,6 +10,8 @@ final class MathReply: Reply {
         [JSONKey.formula.rawValue: self.formula]
     }
 
+    override var isEmpty: Bool { self.formula.isEmpty }
+
     override var hash: Int {
         self.formula.hashValue
     }

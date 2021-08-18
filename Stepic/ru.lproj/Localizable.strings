@@ -989,6 +989,8 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Не удалось нача�
 StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
 /* Peer review */
+StepQuizReviewSolveQuizTitle = "Решите задачу";
+
 StepQuizReviewSendPending = "Отправьте лучшее решение на проверку";
 StepQuizReviewSendInProgress = "Отправьте лучшее решение на проверку. После отправки заменить решение нельзя.";
 StepQuizReviewSendCompleted = "Решение отправлено на проверку";
@@ -1011,6 +1013,8 @@ StepQuizReviewInstructorCompletedAction = "Смотреть рецензию";
 
 StepQuizReviewPeerPending = "Получите баллы, максимальная оценка — %@";
 StepQuizReviewPeerCompleted = "Ваш ответ оценили на %@ из %@";
+
+StepQuizReviewStagesNotice = "Проверка задачи способом рецензирования. Выполните следующие шаги для получения баллов за задание.";
 
 StepQuizReviewTeacherQuizTitle = "Поле ответа задачи";
 StepQuizReviewTeacherNoticePeer = "Учащиеся проверяют решения друг друга";

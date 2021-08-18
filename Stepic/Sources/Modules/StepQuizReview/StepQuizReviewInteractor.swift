@@ -23,6 +23,8 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     private var currentStudentQuizData: FetchResult<StepQuizReview.QuizData>?
     private var isFetchStudentDataInProgress = false
 
+    private var shouldShowFirstStageMessage = true
+
     init(
         step: Step,
         instructionType: InstructionType,
@@ -165,6 +167,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
             step: self.step,
             instructionType: self.instructionType,
             isTeacher: self.isTeacher,
+            shouldShowFirstStageMessage: self.shouldShowFirstStageMessage,
             session: self.currentReviewSession,
             instruction: self.currentInstruction,
             quizData: self.currentStudentQuizData?.value
@@ -180,8 +183,27 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
         self.moduleOutput?.handleCorrectSubmission()
     }
 
-    func handleSubmissionEvaluated() {
-        self.moduleOutput?.handleSubmissionEvaluated()
+    func handleSubmissionEvaluated(submission: Submission) {
+        self.moduleOutput?.handleSubmissionEvaluated(submission: submission)
+
+        print("StepQuizReviewInteractor :: \(#function) submission = \(submission)")
+
+        guard !self.isTeacher,
+              let currentStudentQuizData = self.currentStudentQuizData else {
+            return
+        }
+
+        self.currentStudentQuizData = .init(
+            value: .init(
+                attempt: currentStudentQuizData.value.attempt,
+                submission: submission,
+                submissionsCount: currentStudentQuizData.value.submissionsCount + 1
+            ),
+            source: .remote
+        )
+
+        self.shouldShowFirstStageMessage = false
+        self.presentStepQuizReviewFromCurrentData()
     }
 
     func handleNextStepNavigation() {

@@ -540,7 +540,7 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepDoneRequest(request: .init())
     }
 
-    func handleSubmissionEvaluated() {
+    func handleSubmissionEvaluated(submission: Submission) {
         self.interactor.doSolutionsButtonUpdate(request: .init())
     }
 

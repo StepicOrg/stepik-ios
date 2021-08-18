@@ -8,6 +8,13 @@ enum StepQuizReview {
         let submissionsCount: Int
     }
 
+    enum QuizReviewStage {
+        case submissionNotMade // 1
+        case submissionNotSelected // 2
+        case submissionSelected // 3
+        case completed // 3 / 5
+    }
+
     /// Load latest review data
     enum QuizReviewLoad {
         struct Request {}
@@ -16,6 +23,7 @@ enum StepQuizReview {
             let step: Step
             let instructionType: InstructionType
             let isTeacher: Bool
+            let shouldShowFirstStageMessage: Bool
             let session: ReviewSessionDataPlainObject?
             let instruction: InstructionDataPlainObject?
             var quizData: QuizData?

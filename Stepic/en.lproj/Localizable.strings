@@ -988,6 +988,8 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Failed to start playing this 
 StepikSocialNetworksTitle = "Our social networks";
 
 /* Peer review */
+StepQuizReviewSolveQuizTitle = "Solve quiz";
+
 StepQuizReviewSendPending = "Send your best submission to review";
 StepQuizReviewSendInProgress = "Send your best submission to review. You can't change it later.";
 StepQuizReviewSendCompleted = "Submission was sent to review";
@@ -1010,6 +1012,8 @@ StepQuizReviewInstructorCompletedAction = "View review";
 
 StepQuizReviewPeerPending = "Get points, max score is %@";
 StepQuizReviewPeerCompleted = "Your solution was scored for %@ out of %@";
+
+StepQuizReviewStagesNotice = "Quiz verification by the review method. Follow these steps to get points.";
 
 StepQuizReviewTeacherQuizTitle = "Quiz field";
 StepQuizReviewTeacherNoticePeer = "Learners review each other";

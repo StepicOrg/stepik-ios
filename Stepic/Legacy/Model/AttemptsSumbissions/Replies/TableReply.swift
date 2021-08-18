@@ -12,6 +12,8 @@ final class TableReply: Reply {
         ]
     }
 
+    override var isEmpty: Bool { self.choices.isEmpty }
+
     override var hash: Int {
         self.choices.hashValue
     }

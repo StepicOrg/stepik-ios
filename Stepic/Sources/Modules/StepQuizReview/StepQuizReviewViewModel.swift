@@ -3,7 +3,9 @@ import Foundation
 struct StepQuizReviewViewModel {
     let isInstructorInstructionType: Bool
     let isPeerInstructionType: Bool
-    let isTeacher: Bool
+    let stage: StepQuizReview.QuizReviewStage?
+    let isSubmissionCorrect: Bool
+    let isSubmissionWrong: Bool
 
     let infoMessage: String?
 

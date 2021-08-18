@@ -420,7 +420,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         self.currentSubmission = submission
         self.presentSubmission(attempt: attempt, submission: submission)
-        self.moduleOutput?.handleSubmissionEvaluated()
+        self.moduleOutput?.handleSubmissionEvaluated(submission: submission)
 
         if submission.isCorrect {
             self.moduleOutput?.handleCorrectSubmission()

@@ -19,17 +19,16 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response) {
         switch response.result {
         case .success(let data):
-            guard data.isTeacher else {
-                return
-            }
-
-            let viewModel = self.makeViewModel(
-                step: data.step,
-                instructionType: data.instructionType,
-                isTeacher: data.isTeacher,
-                session: data.session,
-                instruction: data.instruction
-            )
+            let viewModel = data.isTeacher
+                ? self.makeTeacherViewModel(instructionType: data.instructionType, session: data.session)
+                : self.makeStudentViewModel(
+                    step: data.step,
+                    instructionType: data.instructionType,
+                    shouldShowFirstStageMessage: data.shouldShowFirstStageMessage,
+                    session: data.session,
+                    instruction: data.instruction,
+                    quizData: data.quizData
+                  )
             self.viewController?.displayStepQuizReview(viewModel: .init(state: .result(data: viewModel)))
         case .failure:
             self.viewController?.displayStepQuizReview(viewModel: .init(state: .error))
@@ -56,17 +55,58 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(
+    private func makeStudentViewModel(
         step: Step,
         instructionType: InstructionType,
-        isTeacher: Bool,
+        shouldShowFirstStageMessage: Bool,
         session: ReviewSessionDataPlainObject?,
-        instruction: InstructionDataPlainObject?
+        instruction: InstructionDataPlainObject?,
+        quizData: StepQuizReview.QuizData?
     ) -> StepQuizReviewViewModel {
-        guard isTeacher else {
-            fatalError("Only teacheres mode supported")
-        }
+        let stage: StepQuizReview.QuizReviewStage = {
+            guard let quizData = quizData else {
+                return .submissionNotMade
+            }
 
+            if let session = session {
+                return session.reviewSession.isFinished ? .completed : .submissionSelected
+            }
+
+            if quizData.submission.status == .correct {
+                return .submissionNotSelected
+            }
+
+            return .submissionNotMade
+        }()
+        print("StepQuizReviewPresenter :: stage = \(stage)")
+
+        let infoMessage: String? = {
+            guard shouldShowFirstStageMessage else {
+                return nil
+            }
+
+            if stage == .submissionNotMade && (quizData?.submission.reply?.isEmpty ?? true) {
+                return NSLocalizedString("StepQuizReviewStagesNotice", comment: "")
+            }
+
+            return nil
+        }()
+
+        return StepQuizReviewViewModel(
+            isInstructorInstructionType: instructionType == .instructor,
+            isPeerInstructionType: instructionType == .peer,
+            stage: stage,
+            isSubmissionCorrect: quizData?.submission.status == .correct,
+            isSubmissionWrong: quizData?.submission.status == .wrong,
+            infoMessage: infoMessage,
+            primaryActionButtonDescription: .init(title: "", isEnabled: false, uniqueIdentifier: "")
+        )
+    }
+
+    private func makeTeacherViewModel(
+        instructionType: InstructionType,
+        session: ReviewSessionDataPlainObject?
+    ) -> StepQuizReviewViewModel {
         let availableReviewsCount = session?.reviewSession.availableReviewsCount ?? 0
 
         let infoMessage: String? = {
@@ -103,7 +143,9 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
         return StepQuizReviewViewModel(
             isInstructorInstructionType: instructionType == .instructor,
             isPeerInstructionType: instructionType == .peer,
-            isTeacher: isTeacher,
+            stage: nil,
+            isSubmissionCorrect: false,
+            isSubmissionWrong: false,
             infoMessage: infoMessage,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
