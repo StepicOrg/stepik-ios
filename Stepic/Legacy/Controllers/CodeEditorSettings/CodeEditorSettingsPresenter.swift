@@ -66,8 +66,6 @@ final class CodeEditorSettingsPresenter {
 
     private let colorsHeaderBlockId = "colors_header"
     private let themeBlockId = "theme_block"
-    private let fontsHeaderBlockId = "fonts_header"
-    private let fontSizeBlockId = "font_size_block"
 
     private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock { .init(id: id, title: title) }
 

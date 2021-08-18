@@ -130,7 +130,6 @@ extension AnalyticsEvent {
     // MARK: Video
 
     static let courseDetailVideoTapped = AnalyticsEvent(name: "course_detail_video_clicked")
-    static let courseDetailVideoShown = AnalyticsEvent(name: "course_detail_video_shown")
 
     // MARK: - SignIn -
 

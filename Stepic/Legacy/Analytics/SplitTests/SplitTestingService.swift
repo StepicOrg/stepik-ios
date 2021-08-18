@@ -4,7 +4,7 @@ protocol SplitTestingServiceProtocol {
     func fetchSplitTest<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value
 }
 
-class SplitTestingService: SplitTestingServiceProtocol {
+final class SplitTestingService: SplitTestingServiceProtocol {
     private let analyticsService: ABAnalyticsServiceProtocol
     private let storage: StringStorageServiceProtocol
 

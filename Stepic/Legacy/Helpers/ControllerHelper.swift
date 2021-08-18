@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ControllerHelper {
+enum ControllerHelper {
     static func getTopViewController() -> UIViewController? {
         var topViewController = UIApplication.shared.keyWindow?.rootViewController
 

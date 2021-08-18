@@ -125,7 +125,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
                 ),
                 ratingManager: AdaptiveRatingManager(courseID: self.course.id),
                 statsManager: AdaptiveStatsManager(courseId: self.course.id),
-                storageManager: AdaptiveStorageManager(),
+                adaptiveStorageManager: AdaptiveStorageManager(),
                 lastViewedUpdater: LocalProgressLastViewedUpdater(),
                 notificationSuggestionManager: NotificationSuggestionManager(),
                 notificationsRegistrationService: NotificationsRegistrationService(

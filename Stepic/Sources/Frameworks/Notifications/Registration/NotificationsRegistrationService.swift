@@ -285,7 +285,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                             let queuePersistenceManager = PersistentQueueRecoveryManager(baseName: "Queues")
                             queuePersistenceManager.writeQueue(
                                 ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue,
-                                key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey
+                                key: ExecutionQueues.connectionAvailableExecutionQueueKey
                             )
                         } else {
                             print(

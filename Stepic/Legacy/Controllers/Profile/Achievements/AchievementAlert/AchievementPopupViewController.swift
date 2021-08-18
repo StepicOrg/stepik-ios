@@ -25,8 +25,6 @@ final class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var separatorView: UIView!
 
-    var widthConstraint: NSLayoutConstraint?
-
     var data: AchievementViewData?
     var canShare = true
     var source: Source = .notification

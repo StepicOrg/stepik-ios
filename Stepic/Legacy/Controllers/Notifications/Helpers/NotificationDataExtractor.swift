@@ -13,7 +13,7 @@ final class NotificationDataExtractor {
     private var type: NotificationType
 
     // Extract id from strings: "/users/100000" -> 100000
-    lazy var userId: Int? = {
+    lazy var userID: Int? = {
         guard self.type == .comments else {
             return nil
         }
@@ -26,37 +26,6 @@ final class NotificationDataExtractor {
             }
         }
         return nil
-    }()
-
-    // Extract course id
-    lazy var courseId: Int? = {
-        guard self.type == .learn else {
-            return nil
-        }
-
-        if let courseLink = HTMLParsingUtil.getLink(self.text, index: 0) {
-            if let courseIdStartIndex = courseLink.lastIndexOf("-") {
-                let start = courseLink.index(courseLink.startIndex, offsetBy: courseIdStartIndex + 1)
-                let end = courseLink.index(courseLink.startIndex, offsetBy: courseLink.count - 1)
-                let courseIdString = courseLink.substring(with: start..<end)
-                return Int(courseIdString)
-            }
-        }
-        return nil
-    }()
-
-    // Extract comments URL
-    lazy var commentsURL: URL? = {
-        guard self.type == .comments else {
-            return nil
-        }
-
-        if let commentsLink = HTMLParsingUtil.getLink(self.text, index: 2) {
-            let urlString = StepikApplicationsInfo.stepikURL + commentsLink
-            return URL(string: urlString)
-        } else {
-            return nil
-        }
     }()
 
     // Remove spaces and new lines

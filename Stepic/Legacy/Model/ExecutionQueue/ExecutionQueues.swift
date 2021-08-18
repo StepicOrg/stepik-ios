@@ -12,39 +12,45 @@ import Foundation
  Contains all ExecutionQueues
  */
 final class ExecutionQueues {
-    private init() {}
+    private static let networkReachabilityService: NetworkReachabilityServiceProtocol = NetworkReachabilityService()
 
     static let sharedQueues = ExecutionQueues()
 
-    var connectionAvailableExecutionQueue = ExecutionQueue()
-    var connectionAvailableExecutionQueueKey = "connectionAvailableExecutionQueueKey"
+    private init() {}
+
+    private(set) var connectionAvailableExecutionQueue = ExecutionQueue()
+    static let connectionAvailableExecutionQueueKey = "connectionAvailableExecutionQueueKey"
 
     func setUpQueueObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
-    }
-
-    @objc func reachabilityChanged(_ notification: Foundation.Notification) {
-        if ConnectionHelper.shared.isReachable {
-            executeConnectionAvailableQueue()
+        Self.networkReachabilityService.startListening { status in
+            if status == .reachable {
+                self.executeConnectionAvailableQueue()
+            }
         }
     }
 
     func executeConnectionAvailableQueue() {
-        connectionAvailableExecutionQueue.executeAll {
-            newQueue in
+        self.connectionAvailableExecutionQueue.executeAll { newQueue in
             print("could not execute \(newQueue.count) tasks, rewriting the queue")
             self.connectionAvailableExecutionQueue = newQueue
+
             let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
-            queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
+            queuePersistencyManager.writeQueue(
+                Self.sharedQueues.connectionAvailableExecutionQueue,
+                key: Self.connectionAvailableExecutionQueueKey
+            )
         }
     }
 
     func recoverQueuesFromPersistentStore() {
         let queueRecoveryManager = PersistentQueueRecoveryManager(baseName: "Queues")
-        if let recoveredConnectionAvailableExecutionQueue = queueRecoveryManager.recoverQueue(connectionAvailableExecutionQueueKey) {
-            connectionAvailableExecutionQueue = recoveredConnectionAvailableExecutionQueue
-        } else {
-            print("failed to recover connection available queue from persistent store")
+
+        guard let recoveredConnectionAvailableExecutionQueue = queueRecoveryManager.recoverQueue(
+            Self.connectionAvailableExecutionQueueKey
+        ) else {
+            return print("failed to recover connection available queue from persistent store")
         }
+
+        self.connectionAvailableExecutionQueue = recoveredConnectionAvailableExecutionQueue
     }
 }

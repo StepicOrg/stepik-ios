@@ -70,8 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setHapticsEnabled(true)
 
-        ConnectionHelper.shared.instantiate()
-
         if !AudioManager.shared.initAudioSession() {
             print("Could not initialize audio session")
         }
