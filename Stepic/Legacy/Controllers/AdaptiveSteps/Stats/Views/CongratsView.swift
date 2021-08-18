@@ -14,7 +14,6 @@ final class CongratsView: UIView {
     let padOpacity: CGFloat = 0.15
 
     enum AnimationDuration {
-        static let hiding: TimeInterval = 0.5
         static let backgroundRotate: TimeInterval = 30.0
     }
 

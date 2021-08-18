@@ -37,7 +37,7 @@ extension CourseInfoHeaderView {
 final class CourseInfoHeaderView: UIView {
     let appearance: Appearance
 
-    private let splitTestingService = SplitTestingService(
+    private let splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )

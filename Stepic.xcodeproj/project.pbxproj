@@ -63,7 +63,7 @@
 		081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */; };
 		081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */; };
 		081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */; };
-		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
+		0824289C1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift */; };
 		08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
 		08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
 		082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
@@ -160,7 +160,6 @@
 		085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D5CE31D007F6500092060 /* HTMLParsingTests.swift */; };
 		085DF8D51C99B9FB006809D9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
-		085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
 		0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
 		0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */; };
@@ -251,8 +250,6 @@
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
-		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
-		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
@@ -294,9 +291,7 @@
 		08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
 		08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
-		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
-		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
 		08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		08E43E9421495FD500E3CB50 /* DeepLinkRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */; };
 		08E43E98214C279700E3CB50 /* PushRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E43E96214C279600E3CB50 /* PushRouter.swift */; };
@@ -1892,7 +1887,7 @@
 		081D7417211DB4720086F6F8 /* OpenedStoriesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPageViewController.swift; sourceTree = "<group>"; };
 		081D7419211DB4930086F6F8 /* OpenedStoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesPresenter.swift; sourceTree = "<group>"; };
 		081D741D211DCDD50086F6F8 /* OpenedStoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedStoriesAssembly.swift; sourceTree = "<group>"; };
-		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
+		0824289B1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+ResponseSwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
 		08263D6F1DE5F230002E5B7F /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
 		082799471E9B81AF008A3786 /* RateAppAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppAlertManager.swift; sourceTree = "<group>"; };
@@ -2005,7 +2000,6 @@
 		085D5CE31D007F6500092060 /* HTMLParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingTests.swift; sourceTree = "<group>"; };
 		085DF8D41C99B9FB006809D9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		085DF8D71C99C49E006809D9 /* VideoRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRate.swift; sourceTree = "<group>"; };
-		085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFormatHelper.swift; sourceTree = "<group>"; };
 		0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSnippetSymbols.swift; sourceTree = "<group>"; };
 		0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputAccessoryBuilder.swift; sourceTree = "<group>"; };
 		0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionsTableViewController.swift; sourceTree = "<group>"; };
@@ -2103,8 +2097,6 @@
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
-		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
-		08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CustomMessagesDesign.json; sourceTree = "<group>"; };
 		08C1943F1ED0A05D00A41B72 /* PagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerController.swift; sourceTree = "<group>"; };
 		08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsPresenter.swift; sourceTree = "<group>"; };
 		08C1BF301FBA0CA1008F342F /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
@@ -2156,10 +2148,7 @@
 		08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		08DF78D11F64059900AEEA85 /* StepikLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikLabel.swift; sourceTree = "<group>"; };
-		08E16F211BDBA4AF004822E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		08E16F281BDBA731004822E1 /* ConnectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
 		08E3B9661EEA16DC0072995B /* CodeReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeReply.swift; sourceTree = "<group>"; };
 		08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRoutingService.swift; sourceTree = "<group>"; };
 		08E43E96214C279600E3CB50 /* PushRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushRouter.swift; sourceTree = "<group>"; };
@@ -3838,15 +3827,6 @@
 			path = Stepic;
 			sourceTree = "<group>";
 		};
-		08E16F201BDBA495004822E1 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				08E16F211BDBA4AF004822E1 /* Reachability.h */,
-				08E16F221BDBA4AF004822E1 /* Reachability.m */,
-			);
-			name = Reachability;
-			sourceTree = "<group>";
-		};
 		0E839B9EC258A7A3342CE5FA /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
@@ -3895,11 +3875,7 @@
 				9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */,
 				938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
-				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
-				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
-				08C1943F1ED0A05D00A41B72 /* PagerController.swift */,
 				2C4BBF0B203DC5C9000A4250 /* Plyr */,
-				08E16F201BDBA495004822E1 /* Reachability */,
 				2CF6E62625ADB92A00B5A703 /* WidgetKit.framework */,
 				2CF6E62825ADB92A00B5A703 /* SwiftUI.framework */,
 			);
@@ -4496,7 +4472,6 @@
 				2CDE82E1221D5CCB00C41887 /* highlight.js */,
 				2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */,
 				2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */,
-				08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */,
 				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
 				2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */,
 				2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */,
@@ -4729,6 +4704,15 @@
 				2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */,
 			);
 			path = ReviewSession;
+			sourceTree = "<group>";
+		};
+		2C7DFC4426C3F16800B243D7 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
+				08C1943F1ED0A05D00A41B72 /* PagerController.swift */,
+			);
+			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		2C7EFCF024D08D8E003A4E93 /* SocialProfiles */ = {
@@ -6623,6 +6607,7 @@
 		2CF9BD372538504D00C2AFD2 /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
+				0824289B1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift */,
 				2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */,
 			);
 			path = Alamofire;
@@ -6652,18 +6637,15 @@
 			isa = PBXGroup;
 			children = (
 				08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */,
-				08E16F281BDBA731004822E1 /* ConnectionHelper.swift */,
 				083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
 				08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */,
 				087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */,
 				08B3B80520F3909400F64D20 /* HTMLProcessor.swift */,
-				08C0A4331BF1276C0010F049 /* Messages.swift */,
 				0840707F1D64847000308FC1 /* SharingHelper.swift */,
 				08A1256E1BDE8E460066B2B2 /* Sorter.swift */,
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
 				0858B7081CFF271200459A6A /* TagDetectionUtil.swift */,
-				085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */,
 				2CFF8FF5242A1E9800FD7311 /* Containers */,
 			);
 			path = Helpers;
@@ -8870,6 +8852,7 @@
 				2C284DBC2474907C00669736 /* InAppPurchases */,
 				2CBE8A9C2625C58400AF7C86 /* Notifications */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
+				2C7DFC4426C3F16800B243D7 /* ThirdParty */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -9773,7 +9756,6 @@
 				2CB62BE72019FD8500B5E336 /* step2.html in Resources */,
 				2C4BBF15203DC668000A4250 /* plyr.css in Resources */,
 				082B54D920AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib in Resources */,
-				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */,
 				2C97E010215E5246005684A1 /* Explore.storyboard in Resources */,
 				2CD99DD622DCE4D500628224 /* overlay_hard.png in Resources */,
@@ -10061,7 +10043,6 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/HexColors/HexColors.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
@@ -10080,7 +10061,6 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
@@ -10124,7 +10104,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
@@ -10143,7 +10122,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
@@ -10197,7 +10175,6 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/HexColors/HexColors.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
@@ -10216,7 +10193,6 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
@@ -10256,7 +10232,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
@@ -10275,7 +10250,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
@@ -10415,7 +10389,6 @@
 				2CD80A80269C648E0047AE3C /* CourseRevenueTabMonthlyViewModel.swift in Sources */,
 				2CE0CAD8255A8D36009C6574 /* CatalogBlockContentItemParser.swift in Sources */,
 				2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */,
-				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C04846224C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift in Sources */,
 				2C50364024C5A0E9001FAE04 /* NewProfileCertificatesCertificateCollectionViewCell.swift in Sources */,
@@ -10613,7 +10586,6 @@
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				2C71F10B256D9C9400A1D40B /* DefaultSimpleCourseListCollectionViewDataSource.swift in Sources */,
 				2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */,
-				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
@@ -10678,7 +10650,6 @@
 				2C2E44D524FE5FEA006B7303 /* VisitedCoursesCleaner.swift in Sources */,
 				2C2C4D91246B485400CF759D /* UIModalPresentationStyle+Fallback.swift in Sources */,
 				2C3DAB91233D735E00453B1C /* StepFontSize.swift in Sources */,
-				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */,
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				2C619A7B24CFFB95007D3529 /* SocialProfile.swift in Sources */,
@@ -10808,7 +10779,7 @@
 				08484F0C211AF4320006266F /* StoryViewController.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
-				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
+				0824289C1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift in Sources */,
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				2C53B4752588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift in Sources */,
@@ -10908,7 +10879,6 @@
 				2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */,
 				2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
-				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				2C5DF13F1FED26AC003B1177 /* CardStepViewController.swift in Sources */,
 				2C5DF1411FED26B7003B1177 /* CardStepPresenter.swift in Sources */,
 				2CED386326710EFE00854DA3 /* AutoplayNavigationDirection.swift in Sources */,
@@ -12169,7 +12139,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -12194,7 +12164,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -12336,7 +12306,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -12366,7 +12336,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -12457,7 +12427,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -12509,7 +12479,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -12590,7 +12560,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -12638,7 +12608,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -13159,7 +13129,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -13213,7 +13183,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -13295,7 +13265,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -13343,7 +13313,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 358;
+				CURRENT_PROJECT_VERSION = 359;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

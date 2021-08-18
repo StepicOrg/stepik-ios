@@ -24,7 +24,7 @@ final class PersistenceQueuesService: PersistenceQueuesServiceProtocol {
 
         queuePersistencyManager.writeQueue(
             ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue,
-            key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey
+            key: ExecutionQueues.connectionAvailableExecutionQueueKey
         )
     }
 }

@@ -39,17 +39,15 @@ def all_pods
 
   pod 'DownloadButton', '0.1.0'
   pod 'SVProgressHUD', '2.2.5'
-  # TSMessages is no longer being maintained/updated, remove or migrate to RMessage/SwiftMessages
-  pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
 
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '8.5.0'
-  pod 'Firebase/Messaging', '8.5.0'
-  pod 'Firebase/Analytics', '8.5.0'
-  pod 'Firebase/Crashlytics', '8.5.0'
-  pod 'Firebase/RemoteConfig', '8.5.0'
+  pod 'Firebase/Core', '8.6.0'
+  pod 'Firebase/Messaging', '8.6.0'
+  pod 'Firebase/Analytics', '8.6.0'
+  pod 'Firebase/Crashlytics', '8.6.0'
+  pod 'Firebase/RemoteConfig', '8.6.0'
 
   pod 'YandexMobileMetrica/Dynamic', '3.15.1'
   pod 'Amplitude', '8.3.0'

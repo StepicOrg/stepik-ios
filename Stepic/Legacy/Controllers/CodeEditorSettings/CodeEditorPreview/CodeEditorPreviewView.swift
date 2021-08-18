@@ -28,8 +28,6 @@ final class CodeEditorPreviewView: NibInitializableView {
     var highlightr: Highlightr? { self.textStorage?.highlightr }
 
     private var theme: String?
-    private var fontSize: Int?
-    private var language: CodeLanguage?
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -73,10 +71,7 @@ final class CodeEditorPreviewView: NibInitializableView {
         self.theme = theme
 
         self.updateFontSize(with: fontSize)
-        self.fontSize = fontSize
-
         self.updateLanguage(with: language)
-        self.language = language
     }
 
     func updateTheme(with newTheme: String) {

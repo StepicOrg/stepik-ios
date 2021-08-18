@@ -42,8 +42,4 @@ final class PersonalOffersService: PersonalOffersServiceProtocol {
             .fetchWithSortingByUpdateDateDesc(userID: userID, kindPrefixType: .personalOffers)
             .map { $0.0 }
     }
-
-    enum Error: Swift.Error {
-        case fetchFailed
-    }
 }

@@ -90,12 +90,6 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("PlaceholderEmptyNotificationsText", comment: ""),
         buttonTitle: nil
     )
-    static let emptyNotificationsLoading = StepikPlaceholderStyle(
-        id: "emptyNotificationsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-notifications"), scale: 0.48),
-        text: NSLocalizedString("Refreshing", comment: ""),
-        buttonTitle: nil
-    )
     static let emptySearch = StepikPlaceholderStyle(
         id: "emptySearch",
         image: PlaceholderImage(image: UIImage(named: "new-empty-search"), scale: 0.49),
@@ -125,12 +119,6 @@ extension StepikPlaceholder.Style {
         image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
         text: NSLocalizedString("PlaceholderNoDiscussionsTitle", comment: ""),
         buttonTitle: NSLocalizedString("PlaceholderNoDiscussionsButtonTitle", comment: "")
-    )
-    static let emptyDiscussionsLoading = StepikPlaceholderStyle(
-        id: "emptyDiscussionsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
-        text: NSLocalizedString("Refreshing", comment: ""),
-        buttonTitle: nil
     )
     static let emptySolutions = StepikPlaceholderStyle(
         id: "emptySolutions",
@@ -162,22 +150,10 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("EmptyTitle", comment: ""),
         buttonTitle: nil
     )
-    static let emptySectionsLoading = StepikPlaceholderStyle(
-        id: "emptySectionsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
-        text: NSLocalizedString("Refreshing", comment: ""),
-        buttonTitle: nil
-    )
     static let emptyUnits = StepikPlaceholderStyle(
         id: "emptyUnits",
         image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
         text: NSLocalizedString("PullToRefreshUnitsTitle", comment: ""),
-        buttonTitle: nil
-    )
-    static let emptyUnitsLoading = StepikPlaceholderStyle(
-        id: "emptyUnitsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
-        text: NSLocalizedString("Refreshing", comment: ""),
         buttonTitle: nil
     )
     static let emptyCourseBenefits = StepikPlaceholderStyle(
