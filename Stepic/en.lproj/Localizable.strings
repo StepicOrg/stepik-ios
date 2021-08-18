@@ -988,8 +988,6 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Failed to start playing this 
 StepikSocialNetworksTitle = "Our social networks";
 
 /* Peer review */
-StepQuizReviewSolveQuizTitle = "Solve quiz";
-
 StepQuizReviewSendPending = "Send your best submission to review";
 StepQuizReviewSendInProgress = "Send your best submission to review. You can't change it later.";
 StepQuizReviewSendCompleted = "Submission was sent to review";
@@ -1064,6 +1062,7 @@ MultipleChoiceQuizTitle = "Select one or more options";
 SingleChoiceQuizTitle = "Select one option";
 SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
+CodeQuizTitle = "Write a program";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
 FreeAnswerQuizTitle = "Write an answer";

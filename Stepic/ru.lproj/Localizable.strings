@@ -989,8 +989,6 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Не удалось нача�
 StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
 /* Peer review */
-StepQuizReviewSolveQuizTitle = "Решите задачу";
-
 StepQuizReviewSendPending = "Отправьте лучшее решение на проверку";
 StepQuizReviewSendInProgress = "Отправьте лучшее решение на проверку. После отправки заменить решение нельзя.";
 StepQuizReviewSendCompleted = "Решение отправлено на проверку";
@@ -1065,6 +1063,7 @@ MultipleChoiceQuizTitle = "Выберите один или несколько �
 SingleChoiceQuizTitle = "Выберите один вариант";
 SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
+CodeQuizTitle = "Напишите программу";
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 UnsupportedQuizTitle = "Неподдерживаемый тип шага";
 FreeAnswerQuizTitle = "Напишите ответ";

@@ -55,7 +55,7 @@ final class CodeQuizPresenter: CodeQuizPresenterProtocol {
         }()
 
         let title = response.language == .sql
-            ? NSLocalizedString("SQLQuizTitle", comment: "")
+            ? QuizTitleFactory.makeTitle(for: .sql)
             : nil
 
         let viewModel = CodeQuizViewModel(

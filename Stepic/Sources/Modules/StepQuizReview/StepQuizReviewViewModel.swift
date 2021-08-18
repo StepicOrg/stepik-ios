@@ -8,6 +8,7 @@ struct StepQuizReviewViewModel {
     let isSubmissionWrong: Bool
 
     let infoMessage: String?
+    let quizTitle: String?
 
     let primaryActionButtonDescription: ButtonDescription
 

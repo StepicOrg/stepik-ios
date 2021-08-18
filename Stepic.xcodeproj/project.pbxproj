@@ -488,6 +488,7 @@
 		2C20C86622F8E4BF0052E9BF /* CodeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */; };
 		2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */; };
 		2C20C86C22F988030052E9BF /* CodeEditorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */; };
+		2C2144CF26CD80F1005A61CE /* QuizTitleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2144CE26CD80F1005A61CE /* QuizTitleFactory.swift */; };
 		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
 		2C22042720E277E50060117A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042620E277E50060117A /* SkeletonView.swift */; };
 		2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
@@ -2375,6 +2376,7 @@
 		2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetails.swift; sourceTree = "<group>"; };
 		2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorThemeService.swift; sourceTree = "<group>"; };
 		2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorTheme.swift; sourceTree = "<group>"; };
+		2C2144CE26CD80F1005A61CE /* QuizTitleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTitleFactory.swift; sourceTree = "<group>"; };
 		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
 		2C22042620E277E50060117A /* SkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		2C22042820E277F60060117A /* SkeletonViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewAnimation.swift; sourceTree = "<group>"; };
@@ -7977,9 +7979,10 @@
 		62E9815144C92BAC47D6C15C /* ChildProtocols */ = {
 			isa = PBXGroup;
 			children = (
+				62E98F28122B85242F1310D7 /* QuizAssembly.swift */,
 				62E9846D039F4EA3B496F613 /* QuizInputProtocol.swift */,
 				62E989F28C53D0189666044B /* QuizOutputProtocol.swift */,
-				62E98F28122B85242F1310D7 /* QuizAssembly.swift */,
+				2C2144CE26CD80F1005A61CE /* QuizTitleFactory.swift */,
 			);
 			path = ChildProtocols;
 			sourceTree = "<group>";
@@ -11299,6 +11302,7 @@
 				62E98F4EBAC69FD9AA11FFFE /* CourseInfoTabInfoDataFlow.swift in Sources */,
 				62E988A30D23C70799B8E4C3 /* CourseInfoTabInfoInteractor.swift in Sources */,
 				2CA0DE62266FC01B0008C0D6 /* CourseBenefitSummaryPlainObject.swift in Sources */,
+				2C2144CF26CD80F1005A61CE /* QuizTitleFactory.swift in Sources */,
 				62E984A5B0B216EF4C06E037 /* CourseInfoTabInfoPresenter.swift in Sources */,
 				62E98E8B19788BBE5859D696 /* CourseInfoTabInfoProvider.swift in Sources */,
 				62E988775E581205F08D9163 /* CourseInfoTabInfoViewController.swift in Sources */,

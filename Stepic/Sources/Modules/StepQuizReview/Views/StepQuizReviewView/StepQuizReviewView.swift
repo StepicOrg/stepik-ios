@@ -114,7 +114,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                 return .completed
             }
         }()
-        statusView1.title = NSLocalizedString("StepQuizReviewSolveQuizTitle", comment: "")
+        statusView1.title = viewModel.quizTitle
 
         let statusContainerView1: StepQuizReviewStatusContainerView = {
             if statusView1.status == .completed {

@@ -92,6 +92,11 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             return nil
         }()
 
+        let quizTitle = QuizTitleFactory.makeTitle(
+            for: StepDataFlow.QuizType(blockName: step.block.name),
+            isMultipleChoice: (quizData?.attempt.dataset as? ChoiceDataset)?.isMultipleChoice ?? false
+        )
+
         return StepQuizReviewViewModel(
             isInstructorInstructionType: instructionType == .instructor,
             isPeerInstructionType: instructionType == .peer,
@@ -99,6 +104,7 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             isSubmissionCorrect: quizData?.submission.status == .correct,
             isSubmissionWrong: quizData?.submission.status == .wrong,
             infoMessage: infoMessage,
+            quizTitle: quizTitle,
             primaryActionButtonDescription: .init(title: "", isEnabled: false, uniqueIdentifier: "")
         )
     }
@@ -147,6 +153,7 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             isSubmissionCorrect: false,
             isSubmissionWrong: false,
             infoMessage: infoMessage,
+            quizTitle: nil,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
     }

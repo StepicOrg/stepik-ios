@@ -23,7 +23,11 @@ final class FillBlanksQuizPresenter: FillBlanksQuizPresenterProtocol {
             }
         }()
 
-        let viewModel = FillBlanksQuizViewModel(components: response.components, finalState: state)
+        let viewModel = FillBlanksQuizViewModel(
+            title: QuizTitleFactory.makeTitle(for: .fillBlanks),
+            components: response.components,
+            finalState: state
+        )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
     }
