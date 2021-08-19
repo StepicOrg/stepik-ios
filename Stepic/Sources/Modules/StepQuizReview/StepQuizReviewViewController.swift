@@ -88,7 +88,11 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     private func setupQuizChildModule() {
         let assembly = BaseQuizAssembly(
             step: self.step,
-            hasNextStep: self.canNavigateToNextStep,
+            config: .init(
+                hasNextStep: self.canNavigateToNextStep,
+                isTopSeparatorHidden: true,
+                isTitleHidden: true
+            ),
             output: self.interactor as? BaseQuizOutputProtocol
         )
         let quizChildViewController = assembly.makeModule()

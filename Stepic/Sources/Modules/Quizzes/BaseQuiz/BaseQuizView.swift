@@ -40,6 +40,8 @@ extension BaseQuizView {
 }
 
 final class BaseQuizView: UIView {
+    private static let childQuizViewTag = 1
+
     let appearance: Appearance
     weak var delegate: BaseQuizViewDelegate?
 
@@ -95,14 +97,7 @@ final class BaseQuizView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(
-            arrangedSubviews: [
-                self.separatorView,
-                self.discountingPolicyContainerView,
-                self.feedbackContainerView,
-                self.submitControlsContainerView
-            ]
-        )
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
@@ -174,6 +169,19 @@ final class BaseQuizView: UIView {
 
     var isPeerReviewAvailable = false
 
+    var isTopSeparatorHidden: Bool {
+        get {
+            self.separatorView.isHidden
+        }
+        set {
+            self.separatorView.isHidden = newValue
+        }
+    }
+
+    var childQuizView: UIView? {
+        self.stackView.arrangedSubviews.first(where: { $0.tag == Self.childQuizViewTag })
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -194,6 +202,8 @@ final class BaseQuizView: UIView {
     }
 
     func addQuiz(view: UIView) {
+        view.tag = Self.childQuizViewTag
+
         guard let discountingPolicyLabelIndex = self.stackView.arrangedSubviews.firstIndex(
             where: { $0 === self.discountingPolicyContainerView }
         ) else {
@@ -277,6 +287,11 @@ final class BaseQuizView: UIView {
 extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
+
+        self.stackView.addArrangedSubview(self.separatorView)
+        self.stackView.addArrangedSubview(self.discountingPolicyContainerView)
+        self.stackView.addArrangedSubview(self.feedbackContainerView)
+        self.stackView.addArrangedSubview(self.submitControlsContainerView)
 
         self.discountingPolicyContainerView.addSubview(self.discountingPolicyLabel)
         self.submitControlsContainerView.addSubview(self.submitControlsStackView)

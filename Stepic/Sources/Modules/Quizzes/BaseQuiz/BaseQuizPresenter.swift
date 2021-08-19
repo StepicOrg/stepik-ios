@@ -31,7 +31,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
                 submission: data.submission,
                 attempt: data.attempt,
                 submissionsCount: data.submissionsCount,
-                hasNextStep: data.hasNextStep
+                config: data.config
             )
             self.viewController?.displaySubmission(viewModel: .init(state: .result(data: viewModel)))
         }
@@ -50,7 +50,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         submission: Submission,
         attempt: Attempt,
         submissionsCount: Int,
-        hasNextStep: Bool
+        config: BaseQuiz.Config
     ) -> BaseQuizViewModel {
         let quizStatus = QuizStatus(submission: submission)
 
@@ -91,7 +91,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
 
         let isSubmitButtonDisabled = quizStatus == .evaluation || submissionsLeft == 0
         let shouldPassPeerReview = isQuizCorrect && step.hasReview
-        let canNavigateToNextStep = isQuizCorrect && hasNextStep
+        let canNavigateToNextStep = isQuizCorrect && config.hasNextStep
         let canRetry = isQuizCorrect && !(submissionsLeft == 0)
 
         let hintContent: String? = {
@@ -135,7 +135,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             canNavigateToNextStep: canNavigateToNextStep,
             canRetry: canRetry,
             discountingPolicyTitle: discountingPolicyTitle ?? "",
-            isDiscountingPolicyVisible: isDiscountingPolicyVisible
+            isDiscountingPolicyVisible: isDiscountingPolicyVisible,
+            isTopSeparatorHidden: config.isTopSeparatorHidden,
+            isTitleHidden: config.isTitleHidden
         )
     }
 

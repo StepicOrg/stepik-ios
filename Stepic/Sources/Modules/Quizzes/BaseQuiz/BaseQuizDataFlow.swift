@@ -8,7 +8,7 @@ enum BaseQuiz {
             let attempt: Attempt
             let submission: Submission
             let submissionsCount: Int
-            let hasNextStep: Bool
+            let config: BaseQuiz.Config
         }
 
         struct Request {
@@ -75,5 +75,11 @@ enum BaseQuiz {
             case networkConnection
             case evaluateSubmission
         }
+    }
+
+    struct Config {
+        let hasNextStep: Bool
+        var isTopSeparatorHidden = false
+        var isTitleHidden = false
     }
 }

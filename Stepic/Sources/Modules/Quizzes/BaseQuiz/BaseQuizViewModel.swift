@@ -18,4 +18,6 @@ struct BaseQuizViewModel {
     let canRetry: Bool
     let discountingPolicyTitle: String
     let isDiscountingPolicyVisible: Bool
+    let isTopSeparatorHidden: Bool
+    let isTitleHidden: Bool
 }

@@ -24,8 +24,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private let rateAppManager: RateAppManager
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
-    let step: Step
-    private let hasNextStep: Bool
+    private let step: Step
+    private let config: BaseQuiz.Config
 
     private var submissionsCount = 0
     private var currentAttempt: Attempt?
@@ -40,7 +40,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     init(
         step: Step,
-        hasNextStep: Bool,
+        config: BaseQuiz.Config,
         presenter: BaseQuizPresenterProtocol,
         provider: BaseQuizProviderProtocol,
         analytics: Analytics,
@@ -50,7 +50,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.step = step
-        self.hasNextStep = hasNextStep
+        self.config = config
         self.presenter = presenter
         self.provider = provider
         self.userAccountService = userAccountService
@@ -238,7 +238,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             attempt: attempt,
             submission: submission,
             submissionsCount: self.submissionsCount,
-            hasNextStep: self.hasNextStep
+            config: self.config
         )
 
         self.presenter.presentSubmission(response: .init(result: .success(response)))

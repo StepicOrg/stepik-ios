@@ -113,6 +113,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.stepURL = data.stepURL
         self.currentReply = data.reply
 
+        self.baseQuizView?.isTopSeparatorHidden = data.isTopSeparatorHidden
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
         self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
@@ -138,6 +139,11 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.childQuizModuleInput?.update(status: data.quizStatus)
 
         self.shouldRetryWithNewAttempt = data.retryWithNewAttempt
+
+        if data.isTitleHidden,
+           let titlePresentableView = baseQuizView?.childQuizView as? TitlePresentable {
+            titlePresentableView.title = nil
+        }
 
         self.baseQuizView?.endLoading()
     }

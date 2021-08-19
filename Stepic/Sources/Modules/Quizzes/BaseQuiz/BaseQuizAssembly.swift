@@ -2,13 +2,26 @@ import UIKit
 
 final class BaseQuizAssembly: Assembly {
     private weak var moduleOutput: BaseQuizOutputProtocol?
-    private let step: Step
-    private let hasNextStep: Bool
 
-    init(step: Step, hasNextStep: Bool = false, output: BaseQuizOutputProtocol? = nil) {
+    private let step: Step
+    private let config: BaseQuiz.Config
+
+    init(
+        step: Step,
+        config: BaseQuiz.Config = .init(hasNextStep: false),
+        output: BaseQuizOutputProtocol? = nil
+    ) {
         self.moduleOutput = output
         self.step = step
-        self.hasNextStep = hasNextStep
+        self.config = config
+    }
+
+    convenience init(
+        step: Step,
+        hasNextStep: Bool = false,
+        output: BaseQuizOutputProtocol? = nil
+    ) {
+        self.init(step: step, config: .init(hasNextStep: hasNextStep), output: output)
     }
 
     func makeModule() -> UIViewController {
@@ -34,7 +47,7 @@ final class BaseQuizAssembly: Assembly {
         let presenter = BaseQuizPresenter(urlFactory: StepikURLFactory())
         let interactor = BaseQuizInteractor(
             step: self.step,
-            hasNextStep: self.hasNextStep,
+            config: self.config,
             presenter: presenter,
             provider: provider,
             analytics: StepikAnalytics.shared,
