@@ -44,7 +44,7 @@ final class BaseQuizAssembly: Assembly {
             submissionsPersistenceService: SubmissionsPersistenceService(),
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
-        let presenter = BaseQuizPresenter(urlFactory: StepikURLFactory())
+        let presenter = BaseQuizPresenter()
         let interactor = BaseQuizInteractor(
             step: self.step,
             config: self.config,

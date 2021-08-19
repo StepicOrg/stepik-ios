@@ -4,7 +4,6 @@ import UIKit
 protocol BaseQuizViewDelegate: AnyObject {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView)
     func baseQuizViewDidRequestNextStep(_ view: BaseQuizView)
-    func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView)
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL)
     func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL)
 }
@@ -120,12 +119,6 @@ final class BaseQuizView: UIView {
         return view
     }()
 
-    // Peer review: make feedback view clickable
-    private lazy var peerReviewTapGestureRecognizer = UITapGestureRecognizer(
-        target: self,
-        action: #selector(self.peerReviewSelected)
-    )
-
     var submitButtonTitle: String? {
         didSet {
             self.submitButton.setTitle(self.submitButtonTitle, for: .normal)
@@ -167,7 +160,7 @@ final class BaseQuizView: UIView {
         }
     }
 
-    var isPeerReviewAvailable = false
+    var isReviewAvailable = false
 
     var isTopSeparatorHidden: Bool {
         get {
@@ -275,13 +268,6 @@ final class BaseQuizView: UIView {
     private func retryClicked() {
         self.delegate?.baseQuizViewDidRequestSubmit(self)
     }
-
-    @objc
-    private func peerReviewSelected() {
-        if self.isPeerReviewAvailable {
-            self.delegate?.baseQuizViewDidRequestPeerReview(self)
-        }
-    }
 }
 
 extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
@@ -298,8 +284,6 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
         self.retryContainerView.addSubview(self.retryButton)
         self.submitContainerView.addSubview(self.submitButton)
         self.feedbackContainerView.addSubview(self.feedbackView)
-
-        self.feedbackView.addGestureRecognizer(self.peerReviewTapGestureRecognizer)
 
         self.addSubview(self.loadingIndicatorView)
     }

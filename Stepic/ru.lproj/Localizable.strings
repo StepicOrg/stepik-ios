@@ -990,7 +990,7 @@ StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
 /* Peer review */
 StepQuizReviewSendPending = "Отправьте лучшее решение на проверку";
-StepQuizReviewSendInProgress = "Отправьте лучшее решение на проверку. После отправки заменить решение нельзя.";
+StepQuizReviewSendInProgress = "Отправьте лучшее из решений на проверку. После отправки заменить решение нельзя.";
 StepQuizReviewSendCompleted = "Решение отправлено на проверку";
 StepQuizReviewSendChoose = "Выбрать решение";
 StepQuizReviewSendSubmit = "Отправить это решение";
@@ -1046,7 +1046,6 @@ WrongFeedbackTitleNotLastTry2 = "Пока неверно, но вы можете
 WrongFeedbackTitleNotLastTry3 = "Не получилось. Ещё немного и вы точно сможете.";
 WrongFeedbackTitleLastTry = "Неверно.";
 EvaluationFeedbackTitle = "Проверка...";
-PeerReviewFeedbackTitle = "Это задание с рецензией. <b>Нажмите сюда</b>, чтобы закончить задание в веб-версии и получить баллы.";
 NextStepNavigationTitle = "Дальше";
 DiscountPolicyInverseTitle = "После каждого неправильного решения баллы, которые можно получить за задание, будут уменьшены";
 DiscountPolicyNoWayTitle = "За Ваши следующие попытки не будут начислены баллы";

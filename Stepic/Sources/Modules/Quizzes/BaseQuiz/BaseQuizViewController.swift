@@ -21,7 +21,6 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
     private var currentReply: Reply?
     private var shouldRetryWithNewAttempt = true
-    private var stepURL: URL?
 
     private var state: BaseQuiz.ViewControllerState {
         didSet {
@@ -110,13 +109,12 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
             return
         }
 
-        self.stepURL = data.stepURL
         self.currentReply = data.reply
 
         self.baseQuizView?.isTopSeparatorHidden = data.isTopSeparatorHidden
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
-        self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
+        self.baseQuizView?.isReviewAvailable = data.shouldPassReview
         self.baseQuizView?.isNextStepAvailable = data.canNavigateToNextStep
         self.baseQuizView?.isRetryAvailable = data.canRetry
         self.baseQuizView?.isDiscountPolicyAvailable = data.isDiscountingPolicyVisible
@@ -171,20 +169,6 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
 
     func baseQuizViewDidRequestNextStep(_ view: BaseQuizView) {
         self.interactor.doNextStepNavigationRequest(request: .init())
-    }
-
-    func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {
-        guard let stepURL = self.stepURL else {
-            return
-        }
-
-        WebControllerManager.shared.presentWebControllerWithURL(
-            stepURL,
-            inController: self,
-            withKey: .peerReview,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
     }
 
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL) {

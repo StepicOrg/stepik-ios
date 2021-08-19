@@ -216,7 +216,6 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
                     step: stepViewModel.step,
                     instructionType: instructionType,
                     isTeacher: stepViewModel.isTeacher,
-                    canNavigateToNextStep: self.canNavigateToNextStep,
                     output: nil
                 )
             } else {

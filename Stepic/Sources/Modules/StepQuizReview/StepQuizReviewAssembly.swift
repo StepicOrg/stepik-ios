@@ -6,20 +6,18 @@ final class StepQuizReviewAssembly: Assembly {
     private let step: Step
     private let instructionType: InstructionType
     private let isTeacher: Bool
-    private let canNavigateToNextStep: Bool
+
     private weak var moduleOutput: StepQuizReviewOutputProtocol?
 
     init(
         step: Step,
         instructionType: InstructionType,
         isTeacher: Bool,
-        canNavigateToNextStep: Bool = false,
         output: StepQuizReviewOutputProtocol? = nil
     ) {
         self.step = step
         self.instructionType = instructionType
         self.isTeacher = isTeacher
-        self.canNavigateToNextStep = canNavigateToNextStep
         self.moduleOutput = output
     }
 
@@ -41,8 +39,7 @@ final class StepQuizReviewAssembly: Assembly {
         let viewController = StepQuizReviewViewController(
             interactor: interactor,
             step: self.step,
-            isTeacher: self.isTeacher,
-            canNavigateToNextStep: self.canNavigateToNextStep
+            isTeacher: self.isTeacher
         )
 
         presenter.viewController = viewController

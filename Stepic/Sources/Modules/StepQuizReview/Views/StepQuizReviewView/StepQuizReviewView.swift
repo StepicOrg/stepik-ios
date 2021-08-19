@@ -129,9 +129,27 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         // 2
         let statusView2 = StepQuizReviewStatusView()
         statusView2.position = 2
-        statusView2.status = .completed
-        statusView2.title = "Решение отправлено на проверку"
-        let statusContainerView2 = StepQuizReviewStatusContainerView(headerView: statusView2)
+        statusView2.status = { () -> StepQuizReviewStatusView.Status in
+            switch stage {
+            case .submissionNotMade:
+                return .pending
+            case .submissionNotSelected, .submissionSelected:
+                return .inProgress
+            case .completed:
+                return .completed
+            }
+        }()
+        statusView2.title = statusView2.status == .completed
+            ? NSLocalizedString("StepQuizReviewSendCompleted", comment: "")
+            : NSLocalizedString("StepQuizReviewSendInProgress", comment: "")
+
+        let statusContainerView2: StepQuizReviewStatusContainerView = {
+            if statusView2.status == .inProgress {
+                self.quizContainerView.isHidden = false
+                return StepQuizReviewStatusContainerView(headerView: statusView2, contentView: self.quizContainerView)
+            }
+            return StepQuizReviewStatusContainerView(headerView: statusView2)
+        }()
         self.statusesView.addArrangedReviewStatus(statusContainerView2)
 
         // 3

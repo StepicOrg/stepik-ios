@@ -10,12 +10,6 @@ protocol BaseQuizPresenterProtocol {
 final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     weak var viewController: BaseQuizViewControllerProtocol?
 
-    private let urlFactory: StepikURLFactory
-
-    init(urlFactory: StepikURLFactory) {
-        self.urlFactory = urlFactory
-    }
-
     func presentSubmission(response: BaseQuiz.SubmissionLoad.Response) {
         switch response.result {
         case .failure(let error):
@@ -90,7 +84,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         )
 
         let isSubmitButtonDisabled = quizStatus == .evaluation || submissionsLeft == 0
-        let shouldPassPeerReview = isQuizCorrect && step.hasReview
+        let shouldPassReview = isQuizCorrect && step.hasReview
         let canNavigateToNextStep = isQuizCorrect && config.hasNextStep
         let canRetry = isQuizCorrect && !(submissionsLeft == 0)
 
@@ -128,8 +122,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             submissionsLeft: submissionsLeft,
             feedbackTitle: feedbackTitle,
             retryWithNewAttempt: retryWithNewAttempt,
-            shouldPassPeerReview: shouldPassPeerReview,
-            stepURL: self.makeURL(for: step),
+            shouldPassReview: shouldPassReview,
             hintContent: hintContent,
             codeDetails: codeDetails,
             canNavigateToNextStep: canNavigateToNextStep,
@@ -186,9 +179,6 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         // swiftlint:disable nslocalizedstring_key
         switch status {
         case .correct:
-            if step.hasReview {
-                return NSLocalizedString("PeerReviewFeedbackTitle", comment: "")
-            }
             if case .freeAnswer = StepDataFlow.QuizType(blockName: step.block.name) {
                 return NSLocalizedString("CorrectFeedbackTitleFreeAnswer", comment: "")
             }
@@ -213,10 +203,6 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             return NSLocalizedString("EvaluationFeedbackTitle", comment: "")
         }
         // swiftlint:enable nslocalizedstring_key
-    }
-
-    private func makeURL(for step: Step) -> URL {
-        self.urlFactory.makeStep(lessonID: step.lessonID, stepPosition: step.position, fromMobile: true).require()
     }
 
     private func makeDiscountingPolicyTitle(step: Step, submissionsCount: Int) -> String? {

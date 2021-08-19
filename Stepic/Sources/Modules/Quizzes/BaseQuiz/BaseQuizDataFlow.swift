@@ -81,5 +81,6 @@ enum BaseQuiz {
         let hasNextStep: Bool
         var isTopSeparatorHidden = false
         var isTitleHidden = false
+        var shouldShowReviewControlsWhenShouldPassReview = false
     }
 }

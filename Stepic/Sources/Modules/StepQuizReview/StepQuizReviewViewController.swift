@@ -13,7 +13,6 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
 
     private let step: Step
     private let isTeacher: Bool
-    private let canNavigateToNextStep: Bool
     private var state: StepQuizReview.ViewControllerState
 
     private var didDisplayTeacherReview = false
@@ -26,13 +25,11 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
         interactor: StepQuizReviewInteractorProtocol,
         step: Step,
         isTeacher: Bool,
-        canNavigateToNextStep: Bool,
         initialState: StepQuizReview.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.step = step
         self.isTeacher = isTeacher
-        self.canNavigateToNextStep = canNavigateToNextStep
         self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
@@ -89,9 +86,10 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
         let assembly = BaseQuizAssembly(
             step: self.step,
             config: .init(
-                hasNextStep: self.canNavigateToNextStep,
+                hasNextStep: false,
                 isTopSeparatorHidden: true,
-                isTitleHidden: true
+                isTitleHidden: true,
+                shouldShowReviewControlsWhenShouldPassReview: true
             ),
             output: self.interactor as? BaseQuizOutputProtocol
         )
