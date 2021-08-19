@@ -30,6 +30,8 @@ extension BaseQuizView {
 
         let withInsets = LayoutInsets(left: 16, right: 16)
         let withoutHorizontalInsets = LayoutInsets(inset: 0)
+        let withoutHorizontalInsetsChildQuiz = LayoutInsets(top: 0, left: -16, bottom: 0, right: -16)
+
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
         let separatorColor = UIColor.stepikSeparator
@@ -241,13 +243,27 @@ final class BaseQuizView: UIView {
     func addQuiz(view: UIView) {
         view.tag = Self.childQuizViewTag
 
-        guard let discountingPolicyLabelIndex = self.stackView.arrangedSubviews.firstIndex(
-            where: { $0 === self.discountingPolicyContainerView }
-        ) else {
-            return self.stackView.insertArrangedSubview(view, at: 0)
-        }
+        let stackIndex: Int = {
+            guard let discountingPolicyLabelIndex = self.stackView.arrangedSubviews.firstIndex(
+                where: { $0 === self.discountingPolicyContainerView }
+            ) else {
+                return 0
+            }
+            return discountingPolicyLabelIndex + 1
+        }()
 
-        self.stackView.insertArrangedSubview(view, at: discountingPolicyLabelIndex + 1)
+        if self.withHorizontalInsets {
+            self.stackView.insertArrangedSubview(view, at: stackIndex)
+        } else {
+            let containerView = UIView()
+            self.stackView.insertArrangedSubview(containerView, at: stackIndex)
+
+            containerView.addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.snp.makeConstraints { make in
+                make.edges.equalToSuperview().inset(self.appearance.withoutHorizontalInsetsChildQuiz.edgeInsets)
+            }
+        }
     }
 
     func showFeedback(state: QuizFeedbackView.State, title: String, hint: String? = nil) {
