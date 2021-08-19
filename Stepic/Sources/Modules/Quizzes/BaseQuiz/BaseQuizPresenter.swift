@@ -123,6 +123,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             feedbackTitle: feedbackTitle,
             retryWithNewAttempt: retryWithNewAttempt,
             shouldPassReview: shouldPassReview,
+            isReviewControlsAvailable: config.isReviewControlsAvailable,
             hintContent: hintContent,
             codeDetails: codeDetails,
             canNavigateToNextStep: canNavigateToNextStep,

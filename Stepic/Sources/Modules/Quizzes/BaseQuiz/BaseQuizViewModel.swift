@@ -11,6 +11,7 @@ struct BaseQuizViewModel {
     let feedbackTitle: String
     let retryWithNewAttempt: Bool
     let shouldPassReview: Bool
+    let isReviewControlsAvailable: Bool
     let hintContent: String?
     let codeDetails: CodeDetails?
     let canNavigateToNextStep: Bool

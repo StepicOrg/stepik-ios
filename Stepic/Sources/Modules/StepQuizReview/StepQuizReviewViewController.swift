@@ -89,7 +89,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
                 hasNextStep: false,
                 isTopSeparatorHidden: true,
                 isTitleHidden: true,
-                shouldShowReviewControlsWhenShouldPassReview: true
+                isReviewControlsAvailable: true,
+                withHorizontalInsets: false
             ),
             output: self.interactor as? BaseQuizOutputProtocol
         )

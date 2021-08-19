@@ -121,7 +121,11 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                 return StepQuizReviewStatusContainerView(headerView: statusView1)
             } else {
                 self.quizContainerView.isHidden = false
-                return StepQuizReviewStatusContainerView(headerView: statusView1, contentView: self.quizContainerView)
+                return StepQuizReviewStatusContainerView(
+                    headerView: statusView1,
+                    contentView: self.quizContainerView,
+                    shouldShowSeparator: true
+                )
             }
         }()
         self.statusesView.addArrangedReviewStatus(statusContainerView1)
@@ -146,7 +150,11 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         let statusContainerView2: StepQuizReviewStatusContainerView = {
             if statusView2.status == .inProgress {
                 self.quizContainerView.isHidden = false
-                return StepQuizReviewStatusContainerView(headerView: statusView2, contentView: self.quizContainerView)
+                return StepQuizReviewStatusContainerView(
+                    headerView: statusView2,
+                    contentView: self.quizContainerView,
+                    shouldShowSeparator: true
+                )
             }
             return StepQuizReviewStatusContainerView(headerView: statusView2)
         }()

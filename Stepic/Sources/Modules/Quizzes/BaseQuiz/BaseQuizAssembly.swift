@@ -58,7 +58,8 @@ final class BaseQuizAssembly: Assembly {
         )
         let viewController = BaseQuizViewController(
             interactor: interactor,
-            quizAssembly: QuizAssemblyFactory().make(for: StepDataFlow.QuizType(blockName: self.step.block.name))
+            quizAssembly: QuizAssemblyFactory().make(for: StepDataFlow.QuizType(blockName: self.step.block.name)),
+            withHorizontalInsets: self.config.withHorizontalInsets
         )
 
         presenter.viewController = viewController

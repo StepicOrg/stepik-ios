@@ -659,6 +659,7 @@
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
 		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
 		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C60CCEE26CE81F30015C6A8 /* QuizReviewControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */; };
 		2C619A7724CFF954007D3529 /* SocialProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7624CFF954007D3529 /* SocialProfilesAPI.swift */; };
 		2C619A7B24CFFB95007D3529 /* SocialProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7A24CFFB95007D3529 /* SocialProfile.swift */; };
 		2C619A7D24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7C24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift */; };
@@ -2569,6 +2570,7 @@
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
 		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
+		2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewControlsView.swift; sourceTree = "<group>"; };
 		2C619A7624CFF954007D3529 /* SocialProfilesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesAPI.swift; sourceTree = "<group>"; };
 		2C619A7824CFF9DC007D3529 /* Model_social_profiles_v59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_social_profiles_v59.xcdatamodel; sourceTree = "<group>"; };
 		2C619A7A24CFFB95007D3529 /* SocialProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfile.swift; sourceTree = "<group>"; };
@@ -8578,6 +8580,7 @@
 			isa = PBXGroup;
 			children = (
 				62E98F4DB096DD59F85A41C0 /* QuizFeedbackView.swift */,
+				2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -10909,6 +10912,7 @@
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
 				0824289C1BB0104700C98185 /* DataRequest+ResponseSwiftyJSON.swift in Sources */,
+				2C60CCEE26CE81F30015C6A8 /* QuizReviewControlsView.swift in Sources */,
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				2C53B4752588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift in Sources */,

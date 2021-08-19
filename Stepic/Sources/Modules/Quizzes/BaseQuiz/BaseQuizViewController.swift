@@ -9,6 +9,8 @@ protocol BaseQuizViewControllerProtocol: AnyObject {
 final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: BaseQuizInteractorProtocol
 
+    private let withHorizontalInsets: Bool
+
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     lazy var baseQuizView = self.view as? BaseQuizView
@@ -31,10 +33,12 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
     init(
         interactor: BaseQuizInteractorProtocol,
         quizAssembly: QuizAssembly,
+        withHorizontalInsets: Bool,
         initialState: BaseQuiz.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.quizAssembly = quizAssembly
+        self.withHorizontalInsets = withHorizontalInsets
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
@@ -46,7 +50,10 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
     }
 
     override func loadView() {
-        self.view = BaseQuizView(frame: UIScreen.main.bounds)
+        self.view = BaseQuizView(
+            frame: UIScreen.main.bounds,
+            withHorizontalInsets: self.withHorizontalInsets
+        )
     }
 
     override func viewDidLoad() {
@@ -114,11 +121,12 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.baseQuizView?.isTopSeparatorHidden = data.isTopSeparatorHidden
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
-        self.baseQuizView?.isReviewAvailable = data.shouldPassReview
         self.baseQuizView?.isNextStepAvailable = data.canNavigateToNextStep
         self.baseQuizView?.isRetryAvailable = data.canRetry
         self.baseQuizView?.isDiscountPolicyAvailable = data.isDiscountingPolicyVisible
         self.baseQuizView?.discountPolicyTitle = data.discountingPolicyTitle
+        self.baseQuizView?.isReviewAvailable = data.shouldPassReview
+        self.baseQuizView?.isReviewControlsAvailable = data.isReviewControlsAvailable
 
         if let quizStatus = data.quizStatus {
             self.baseQuizView?.showFeedback(
@@ -169,6 +177,19 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
 
     func baseQuizViewDidRequestNextStep(_ view: BaseQuizView) {
         self.interactor.doNextStepNavigationRequest(request: .init())
+    }
+
+    func baseQuizViewDidRequestReviewSubmit(_ view: BaseQuizView) {
+        print(#function)
+    }
+
+    func baseQuizViewDidRequestReviewRetry(_ view: BaseQuizView) {
+        print(#function)
+        self.submitCurrentReply()
+    }
+
+    func baseQuizViewDidRequestReviewChoose(_ view: BaseQuizView) {
+        print(#function)
     }
 
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL) {
