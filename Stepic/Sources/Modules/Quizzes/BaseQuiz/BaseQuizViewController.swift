@@ -155,6 +155,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
     }
 }
 
+// MARK: - BaseQuizViewController: BaseQuizViewControllerProtocol -
+
 extension BaseQuizViewController: BaseQuizViewControllerProtocol {
     func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel) {
         self.state = viewModel.state
@@ -170,6 +172,8 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
     }
 }
 
+// MARK: - BaseQuizViewController: BaseQuizViewDelegate -
+
 extension BaseQuizViewController: BaseQuizViewDelegate {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView) {
         self.submitCurrentReply()
@@ -179,17 +183,16 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
         self.interactor.doNextStepNavigationRequest(request: .init())
     }
 
-    func baseQuizViewDidRequestReviewSubmit(_ view: BaseQuizView) {
-        print(#function)
+    func baseQuizViewDidRequestReviewCreateSession(_ view: BaseQuizView) {
+        self.interactor.doReviewCreateSession(request: .init())
     }
 
-    func baseQuizViewDidRequestReviewRetry(_ view: BaseQuizView) {
-        print(#function)
+    func baseQuizViewDidRequestReviewSolveAgain(_ view: BaseQuizView) {
         self.submitCurrentReply()
     }
 
-    func baseQuizViewDidRequestReviewChoose(_ view: BaseQuizView) {
-        print(#function)
+    func baseQuizViewDidRequestReviewSelectDifferentSubmission(_ view: BaseQuizView) {
+        self.interactor.doReviewSelectDifferentSubmission(request: .init())
     }
 
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL) {
@@ -237,6 +240,8 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
     }
 }
 
+// MARK: - BaseQuizViewController: QuizOutputProtocol -
+
 extension BaseQuizViewController: QuizOutputProtocol {
     func update(reply: Reply) {
         self.currentReply = reply
@@ -248,6 +253,8 @@ extension BaseQuizViewController: QuizOutputProtocol {
         self.submitCurrentReply()
     }
 }
+
+// MARK: - StepikPlaceholderControllerContainer.PlaceholderState -
 
 private extension StepikPlaceholderControllerContainer.PlaceholderState {
     static let connectionErrorPollQuiz = StepikPlaceholderControllerContainer.PlaceholderState(

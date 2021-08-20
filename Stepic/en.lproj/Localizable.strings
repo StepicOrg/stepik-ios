@@ -1101,6 +1101,7 @@ CodeQuizRunCodeTooltip = "Before sending your solution, you can run your code wi
 
 /* Submissions */
 SubmissionsTitle = "Submissions";
+SubmissionsTitleSelectSubmission = "Select Submission";
 SubmissionsPlaceholderEmptyTitle = "No Submissions";
 SubmissionScoreText = "Score";
 SubmissionStatusWrongText = "Wrong";
@@ -1109,6 +1110,7 @@ SubmissionStatusPartiallyCorrectText = "Partially correct";
 SubmissionStatusEvaluationText = "Processing";
 SubmissionsSearchBarPlaceholderText = "ID, email, name, submission number";
 SubmissionsActionFilterByUser = "Filter by user";
+SubmissionsSelectSubmission = "Select this submission";
 /* Review titles */
 SubmissionsReviewStateCantReviewTitle = "Reviewing is not possible.";
 SubmissionsReviewStateInProgressTitle = "%@ out of %@ reviews.";

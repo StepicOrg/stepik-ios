@@ -4,9 +4,9 @@ import UIKit
 protocol BaseQuizViewDelegate: AnyObject {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView)
     func baseQuizViewDidRequestNextStep(_ view: BaseQuizView)
-    func baseQuizViewDidRequestReviewSubmit(_ view: BaseQuizView)
-    func baseQuizViewDidRequestReviewRetry(_ view: BaseQuizView)
-    func baseQuizViewDidRequestReviewChoose(_ view: BaseQuizView)
+    func baseQuizViewDidRequestReviewCreateSession(_ view: BaseQuizView)
+    func baseQuizViewDidRequestReviewSolveAgain(_ view: BaseQuizView)
+    func baseQuizViewDidRequestReviewSelectDifferentSubmission(_ view: BaseQuizView)
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL)
     func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL)
 }
@@ -127,26 +127,26 @@ final class BaseQuizView: UIView {
     private lazy var reviewControls: QuizReviewControlsView = {
         let view = QuizReviewControlsView()
         view.isHidden = true
-        view.onSubmit = { [weak self] in
+        view.onCreateSessionClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.baseQuizViewDidRequestReviewSubmit(strongSelf)
+            strongSelf.delegate?.baseQuizViewDidRequestReviewCreateSession(strongSelf)
         }
-        view.onRetry = { [weak self] in
+        view.onSolveAgainClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.baseQuizViewDidRequestReviewRetry(strongSelf)
+            strongSelf.delegate?.baseQuizViewDidRequestReviewSolveAgain(strongSelf)
         }
-        view.onChoose = { [weak self] in
+        view.onSelectDifferentSubmissionClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.baseQuizViewDidRequestReviewChoose(strongSelf)
+            strongSelf.delegate?.baseQuizViewDidRequestReviewSelectDifferentSubmission(strongSelf)
         }
         return view
     }()

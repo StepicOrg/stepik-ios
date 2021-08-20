@@ -850,6 +850,7 @@
 		2CA100162174BB66003775CB /* PersonalDeadlineLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA100152174BB66003775CB /* PersonalDeadlineLocalNotification.swift */; };
 		2CA1001F2174BE49003775CB /* StreakLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1001E2174BE49003775CB /* StreakLocalNotification.swift */; };
 		2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */; };
+		2CA267A526CFB638000668C7 /* SubmissionsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA267A426CFB638000668C7 /* SubmissionsSelectionView.swift */; };
 		2CA3B7D325B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */; };
 		2CA3B7D425B4ADDF003AC2C1 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */; };
 		2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */; };
@@ -2768,6 +2769,7 @@
 		2CA1001E2174BE49003775CB /* StreakLocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakLocalNotification.swift; sourceTree = "<group>"; };
 		2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_block_remove_animation.xcdatamodel; sourceTree = "<group>"; };
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
+		2CA267A426CFB638000668C7 /* SubmissionsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsSelectionView.swift; sourceTree = "<group>"; };
 		2CA3B7D225B4ADDF003AC2C1 /* WidgetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConstants.swift; sourceTree = "<group>"; };
 		2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationService.swift; sourceTree = "<group>"; };
 		2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionStatus.swift; sourceTree = "<group>"; };
@@ -7972,6 +7974,7 @@
 			children = (
 				62E989AE37304FCAD47B52AF /* SubmissionsCellView.swift */,
 				2C7CCE8525FA084C007D0C83 /* SubmissionsReviewView.swift */,
+				2CA267A426CFB638000668C7 /* SubmissionsSelectionView.swift */,
 				62E9857076DD60DEB4DBD9B1 /* SubmissionsTableViewCell.swift */,
 				2C89BED225DFCC48003EE967 /* SubmissionView.swift */,
 			);
@@ -11785,6 +11788,7 @@
 				AAB4F45B011C05D59E6EEEEB /* DownloadARQuickLookPresenter.swift in Sources */,
 				2C921A41269C839800029A1E /* CourseRevenueTabMonthlyItemView.swift in Sources */,
 				245107514E8F81CF9A8C4C44 /* DownloadARQuickLookView.swift in Sources */,
+				2CA267A526CFB638000668C7 /* SubmissionsSelectionView.swift in Sources */,
 				2C911B9025C02E430076DC31 /* StorageRecordsNetworkService.swift in Sources */,
 				2C0B771D25480A7500BA474D /* CourseListFilterViewModel.swift in Sources */,
 				008437078C67C7149BE6DE53 /* DownloadARQuickLookViewController.swift in Sources */,

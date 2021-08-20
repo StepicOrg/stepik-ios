@@ -7,6 +7,8 @@ protocol BaseQuizInteractorProtocol {
     func doRetryPollSubmission(request: BaseQuiz.RetryPollSubmission.Request)
     func doReplyCache(request: BaseQuiz.ReplyCache.Request)
     func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request)
+    func doReviewCreateSession(request: BaseQuiz.ReviewCreateSession.Request)
+    func doReviewSelectDifferentSubmission(request: BaseQuiz.ReviewSelectDifferentSubmission.Request)
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
@@ -228,6 +230,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request) {
         self.moduleOutput?.handleNextStepNavigation()
+    }
+
+    func doReviewCreateSession(request: BaseQuiz.ReviewCreateSession.Request) {
+        self.moduleOutput?.handleReviewCreateSession()
+    }
+
+    func doReviewSelectDifferentSubmission(request: BaseQuiz.ReviewSelectDifferentSubmission.Request) {
+        self.moduleOutput?.handleReviewSelectDifferentSubmission()
     }
 
     // MARK: Private API

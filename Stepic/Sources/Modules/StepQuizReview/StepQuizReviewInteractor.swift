@@ -5,6 +5,7 @@ protocol StepQuizReviewInteractorProtocol {
     func doStepQuizReviewLoad(request: StepQuizReview.QuizReviewLoad.Request)
     func doStepQuizReviewRefresh(request: StepQuizReview.QuizReviewRefresh.Request)
     func doButtonAction(request: StepQuizReview.ButtonAction.Request)
+    func doSubmissionSelection(request: StepQuizReview.SubmissionSelection.Request)
 }
 
 final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
@@ -66,10 +67,15 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
                 response: .init(
                     stepID: self.step.id,
                     isTeacher: self.isTeacher,
+                    isSelectionEnabled: false,
                     filterQuery: .init(filters: [.reviewStatus(.awaiting)])
                 )
             )
         }
+    }
+
+    func doSubmissionSelection(request: StepQuizReview.SubmissionSelection.Request) {
+        print("\(#function) \(request.submission)")
     }
 
     // MARK: Private API
@@ -178,6 +184,8 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
 
 extension StepQuizReviewInteractor: StepQuizReviewInputProtocol {}
 
+// MARK: - StepQuizReviewInteractor: BaseQuizOutputProtocol -
+
 extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
     func handleCorrectSubmission() {
         self.moduleOutput?.handleCorrectSubmission()
@@ -248,5 +256,20 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
                 self.presentStepQuizReviewFromCurrentData()
             }
         }
+    }
+
+    func handleReviewCreateSession() {
+        print(#function)
+    }
+
+    func handleReviewSelectDifferentSubmission() {
+        self.presenter.presentSubmissions(
+            response: .init(
+                stepID: self.step.id,
+                isTeacher: self.isTeacher,
+                isSelectionEnabled: true,
+                filterQuery: .init(filters: [.submissionStatus(.correct)])
+            )
+        )
     }
 }

@@ -146,7 +146,9 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
             stepID: viewModel.stepID,
             isTeacher: viewModel.isTeacher,
             submissionsFilterQuery: viewModel.filterQuery,
-            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init()
+            isSelectionEnabled: viewModel.isSelectionEnabled,
+            navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
+            output: self
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
 
@@ -180,5 +182,18 @@ extension StepQuizReviewViewController: StepQuizReviewViewDelegate {
         }
 
         self.interactor.doButtonAction(request: .init(actionUniqueIdentifier: uniqueIdentifier))
+    }
+}
+
+// MARK: - StepQuizReviewViewController: SubmissionsOutputProtocol -
+
+extension StepQuizReviewViewController: SubmissionsOutputProtocol {
+    func handleSubmissionSelected(_ submission: Submission) {
+        self.dismiss(
+            animated: true,
+            completion: { [weak self] in
+                self?.interactor.doSubmissionSelection(request: .init(submission: submission))
+            }
+        )
     }
 }

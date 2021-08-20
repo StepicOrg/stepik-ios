@@ -68,13 +68,22 @@ enum StepQuizReview {
         struct Response {
             let stepID: Step.IdType
             let isTeacher: Bool
+            let isSelectionEnabled: Bool
             var filterQuery: SubmissionsFilterQuery?
         }
 
         struct ViewModel {
             let stepID: Step.IdType
             let isTeacher: Bool
+            let isSelectionEnabled: Bool
             let filterQuery: SubmissionsFilterQuery?
+        }
+    }
+
+    /// Select submission
+    enum SubmissionSelection {
+        struct Request {
+            let submission: Submission
         }
     }
 

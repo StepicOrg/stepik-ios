@@ -42,6 +42,15 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         }
     }
 
+    var onSelectSubmissionClick: (() -> Void)? {
+        get {
+            self.cellView.onSelectSubmissionClick
+        }
+        set {
+            self.cellView.onSelectSubmissionClick = newValue
+        }
+    }
+
     var moreActionAnchorView: UIView { self.cellView.moreActionAnchorView }
 
     override func updateConstraintsIfNeeded() {

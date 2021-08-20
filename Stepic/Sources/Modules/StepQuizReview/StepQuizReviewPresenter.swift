@@ -43,7 +43,12 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
 
     func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response) {
         self.viewController?.displaySubmissions(
-            viewModel: .init(stepID: response.stepID, isTeacher: response.isTeacher, filterQuery: response.filterQuery)
+            viewModel: .init(
+                stepID: response.stepID,
+                isTeacher: response.isTeacher,
+                isSelectionEnabled: response.isSelectionEnabled,
+                filterQuery: response.filterQuery
+            )
         )
     }
 

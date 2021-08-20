@@ -49,9 +49,9 @@ final class QuizReviewControlsView: UIView {
         return button
     }()
 
-    var onSubmit: (() -> Void)?
-    var onRetry: (() -> Void)?
-    var onChoose: (() -> Void)?
+    var onCreateSessionClick: (() -> Void)?
+    var onSolveAgainClick: (() -> Void)?
+    var onSelectDifferentSubmissionClick: (() -> Void)?
 
     override var intrinsicContentSize: CGSize {
         CGSize(
@@ -78,17 +78,17 @@ final class QuizReviewControlsView: UIView {
 
     @objc
     private func submitClicked() {
-        self.onSubmit?()
+        self.onCreateSessionClick?()
     }
 
     @objc
     private func retryClicked() {
-        self.onRetry?()
+        self.onSolveAgainClick?()
     }
 
     @objc
     private func chooseClicked() {
-        self.onChoose?()
+        self.onSelectDifferentSubmissionClick?()
     }
 }
 

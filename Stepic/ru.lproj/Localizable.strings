@@ -1102,6 +1102,7 @@ CodeQuizRunCodeTooltip = "Перед отправкой решения, вы м�
 
 /* Submissions */
 SubmissionsTitle = "Решения";
+SubmissionsTitleSelectSubmission = "Выбор решения";
 SubmissionsPlaceholderEmptyTitle = "Решений нет";
 SubmissionScoreText = "Оценка";
 SubmissionStatusWrongText = "Неверно";
@@ -1110,6 +1111,7 @@ SubmissionStatusPartiallyCorrectText = "Частично верно";
 SubmissionStatusEvaluationText = "В обработке";
 SubmissionsSearchBarPlaceholderText = "ID, email, имя, номер решения";
 SubmissionsActionFilterByUser = "Фильтр по пользователю";
+SubmissionsSelectSubmission = "Выбрать это решение";
 /* Review titles */
 SubmissionsReviewStateCantReviewTitle = "Рецензирование невозможно.";
 SubmissionsReviewStateInProgressTitle = "%@ из %@ рецензий получены.";
