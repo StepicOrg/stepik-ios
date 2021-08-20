@@ -485,3 +485,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         case unknownUser
     }
 }
+
+// MARK: - BaseQuizInteractor: BaseQuizInputProtocol -
+
+extension BaseQuizInteractor: BaseQuizInputProtocol {
+    func changeCurrent(attempt: Attempt, submission: Submission) {
+        self.currentAttempt = attempt
+        self.currentSubmission = submission
+
+        self.presentSubmission(attempt: attempt, submission: submission)
+    }
+}

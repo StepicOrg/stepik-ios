@@ -80,9 +80,18 @@ enum StepQuizReview {
         }
     }
 
-    /// Select submission
-    enum SubmissionSelection {
+    enum ChangeCurrentSubmission {
         struct Request {
+            let submission: Submission
+        }
+
+        struct Response {
+            let attempt: Attempt
+            let submission: Submission
+        }
+
+        struct ViewModel {
+            let attempt: Attempt
             let submission: Submission
         }
     }

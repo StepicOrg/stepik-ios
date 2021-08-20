@@ -1,6 +1,8 @@
 import UIKit
 
 final class BaseQuizAssembly: Assembly {
+    var moduleInput: BaseQuizInputProtocol?
+
     private weak var moduleOutput: BaseQuizOutputProtocol?
 
     private let step: Step
@@ -63,6 +65,7 @@ final class BaseQuizAssembly: Assembly {
         )
 
         presenter.viewController = viewController
+        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

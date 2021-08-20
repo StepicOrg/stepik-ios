@@ -4,6 +4,7 @@ protocol StepQuizReviewPresenterProtocol {
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response)
     func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response)
     func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response)
+    func presentChangeCurrentSubmissionResult(response: StepQuizReview.ChangeCurrentSubmission.Response)
     func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -49,6 +50,12 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
                 isSelectionEnabled: response.isSelectionEnabled,
                 filterQuery: response.filterQuery
             )
+        )
+    }
+
+    func presentChangeCurrentSubmissionResult(response: StepQuizReview.ChangeCurrentSubmission.Response) {
+        self.viewController?.displayChangeCurrentSubmissionResult(
+            viewModel: .init(attempt: response.attempt, submission: response.submission)
         )
     }
 

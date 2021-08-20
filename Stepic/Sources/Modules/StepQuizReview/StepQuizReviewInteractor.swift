@@ -5,7 +5,7 @@ protocol StepQuizReviewInteractorProtocol {
     func doStepQuizReviewLoad(request: StepQuizReview.QuizReviewLoad.Request)
     func doStepQuizReviewRefresh(request: StepQuizReview.QuizReviewRefresh.Request)
     func doButtonAction(request: StepQuizReview.ButtonAction.Request)
-    func doSubmissionSelection(request: StepQuizReview.SubmissionSelection.Request)
+    func doChangeCurrentSubmission(request: StepQuizReview.ChangeCurrentSubmission.Request)
 }
 
 final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
@@ -74,8 +74,30 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
         }
     }
 
-    func doSubmissionSelection(request: StepQuizReview.SubmissionSelection.Request) {
-        print("\(#function) \(request.submission)")
+    func doChangeCurrentSubmission(request: StepQuizReview.ChangeCurrentSubmission.Request) {
+        guard !self.isTeacher,
+              let currentStudentQuizData = self.currentStudentQuizData,
+              let attempt = request.submission.attempt else {
+            return print("StepQuizReviewInteractor :: \(#function) missing data")
+        }
+
+        guard currentStudentQuizData.value.attempt != attempt,
+              currentStudentQuizData.value.submission != request.submission else {
+            return print("StepQuizReviewInteractor :: \(#function) skipping, the same submission selected")
+        }
+
+        self.currentStudentQuizData = .init(
+            value: .init(
+                attempt: attempt,
+                submission: request.submission,
+                submissionsCount: currentStudentQuizData.value.submissionsCount
+            ),
+            source: .remote
+        )
+
+        self.presenter.presentChangeCurrentSubmissionResult(
+            response: .init(attempt: attempt, submission: request.submission)
+        )
     }
 
     // MARK: Private API

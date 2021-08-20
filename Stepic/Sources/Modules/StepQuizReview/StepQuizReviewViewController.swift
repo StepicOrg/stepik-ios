@@ -5,6 +5,7 @@ protocol StepQuizReviewViewControllerProtocol: AnyObject {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel)
     func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel)
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel)
+    func displayChangeCurrentSubmissionResult(viewModel: StepQuizReview.ChangeCurrentSubmission.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -14,6 +15,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     private let step: Step
     private let isTeacher: Bool
     private var state: StepQuizReview.ViewControllerState
+
+    private var childQuizModuleInput: BaseQuizInputProtocol?
 
     private var didDisplayTeacherReview = false
 
@@ -99,6 +102,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
         self.addChild(quizChildViewController)
         self.stepQuizReviewView?.addQuiz(view: quizChildViewController.view)
         quizChildViewController.didMove(toParent: self)
+
+        self.childQuizModuleInput = assembly.moduleInput
     }
 
     private func updateState(newState: StepQuizReview.ViewControllerState) {
@@ -159,6 +164,10 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
         )
     }
 
+    func displayChangeCurrentSubmissionResult(viewModel: StepQuizReview.ChangeCurrentSubmission.ViewModel) {
+        self.childQuizModuleInput?.changeCurrent(attempt: viewModel.attempt, submission: viewModel.submission)
+    }
+
     func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.showError {
             SVProgressHUD.showError(withStatus: nil)
@@ -192,7 +201,12 @@ extension StepQuizReviewViewController: SubmissionsOutputProtocol {
         self.dismiss(
             animated: true,
             completion: { [weak self] in
-                self?.interactor.doSubmissionSelection(request: .init(submission: submission))
+                guard let strongSelf = self,
+                      strongSelf.childQuizModuleInput != nil else {
+                    return
+                }
+
+                strongSelf.interactor.doChangeCurrentSubmission(request: .init(submission: submission))
             }
         )
     }
