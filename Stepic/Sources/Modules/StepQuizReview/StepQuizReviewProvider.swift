@@ -31,7 +31,7 @@ final class StepQuizReviewProvider: StepQuizReviewProviderProtocol {
     }
 
     func fetchReviewSession(id: Int) -> Promise<ReviewSessionDataPlainObject?> {
-        self.reviewSessionsNetworkService.fetch(id: id, blockName: stepBlockName)
+        self.reviewSessionsNetworkService.fetch(id: id, blockName: self.stepBlockName)
     }
 
     func createReviewSession(submissionID: Submission.IdType) -> Promise<ReviewSessionDataPlainObject?> {

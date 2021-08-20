@@ -190,6 +190,40 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
         }
     }
 
+    private func createReviewSessionWithCurrentSubmission() {
+        guard let currentStudentQuizData = self.currentStudentQuizData else {
+            return print("StepQuizReviewInteractor :: \(#function) no data")
+        }
+
+        self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: false))
+
+        self.provider
+            .createReviewSession(submissionID: currentStudentQuizData.value.submission.id)
+            .compactMap { $0 }
+            .then { reviewSession -> Promise<(ReviewSessionDataPlainObject, InstructionDataPlainObject)> in
+                self.provider
+                    .fetchInstruction(id: reviewSession.reviewSession.instruction)
+                    .compactMap { $0 }
+                    .map { (reviewSession, $0) }
+            }
+            .done { reviewSession, instruction in
+                self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true))
+
+                self.step.sessionID = reviewSession.id
+                self.step.instructionID = instruction.instruction.id
+                CoreDataHelper.shared.save()
+
+                self.currentReviewSession = reviewSession
+                self.currentInstruction = instruction
+
+                self.presentStepQuizReviewFromCurrentData()
+            }
+            .catch { error in
+                print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
+                self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true, showError: true))
+            }
+    }
+
     private func presentStepQuizReviewFromCurrentData() {
         let data = StepQuizReview.QuizReviewLoad.Data(
             step: self.step,
@@ -281,7 +315,7 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
     }
 
     func handleReviewCreateSession() {
-        print(#function)
+        self.createReviewSessionWithCurrentSubmission()
     }
 
     func handleReviewSelectDifferentSubmission() {

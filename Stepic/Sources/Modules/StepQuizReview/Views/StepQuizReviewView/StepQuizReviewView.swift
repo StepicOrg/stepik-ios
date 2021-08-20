@@ -137,9 +137,9 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             switch stage {
             case .submissionNotMade:
                 return .pending
-            case .submissionNotSelected, .submissionSelected:
+            case .submissionNotSelected:
                 return .inProgress
-            case .completed:
+            case .submissionSelected, .completed:
                 return .completed
             }
         }()
