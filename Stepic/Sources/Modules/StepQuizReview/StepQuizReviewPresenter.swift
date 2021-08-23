@@ -151,6 +151,8 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             quizTitle: quizTitle,
             score: step.progress?.score,
             cost: step.progress?.cost,
+            minReviewsCount: instruction?.instruction.minReviews,
+            givenReviewsCount: session?.reviewSession.givenReviews.count,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
     }
@@ -202,6 +204,8 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             quizTitle: nil,
             score: nil,
             cost: nil,
+            minReviewsCount: nil,
+            givenReviewsCount: nil,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
     }

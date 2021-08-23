@@ -12,6 +12,9 @@ struct StepQuizReviewViewModel {
     let score: Float?
     let cost: Int?
 
+    let minReviewsCount: Int?
+    let givenReviewsCount: Int?
+
     let primaryActionButtonDescription: ButtonDescription
 
     struct ButtonDescription: UniqueIdentifiable {

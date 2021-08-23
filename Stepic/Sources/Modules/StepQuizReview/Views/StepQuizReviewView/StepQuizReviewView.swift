@@ -214,7 +214,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
 
     private func configurePeerReview(_ viewModel: StepQuizReviewViewModel) {
         let stage = viewModel.stage ?? .submissionNotMade
-        print(stage)
 
         // 1
         let statusContainerView1 = self.makeStage1StatusContainerView(viewModel)
@@ -227,8 +226,44 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         // 3
         let statusView3 = StepQuizReviewStatusView()
         statusView3.position = 3
-        statusView3.status = .pending
-        statusView3.title = "Сделайте 3 рецензии на решения других учащихся"
+        statusView3.status = { () -> StepQuizReviewStatusView.Status in
+            switch stage {
+            case .submissionNotMade, .submissionNotSelected:
+                return .pending
+            case .submissionSelected:
+                return .inProgress
+            case .completed:
+                return .completed
+            }
+        }()
+        statusView3.title = { () -> String in
+            switch statusView3.status {
+            case .error, .pending:
+                return NSLocalizedString("StepQuizReviewGivenPendingZero", comment: "")
+            case .inProgress:
+                guard let minReviewsCount = viewModel.minReviewsCount,
+                      let givenReviewsCount = viewModel.givenReviewsCount else {
+                    return NSLocalizedString("StepQuizReviewGivenPendingZero", comment: "")
+                }
+
+                let remainingReviewCount = minReviewsCount - givenReviewsCount
+
+                if remainingReviewCount > 0 {
+                    if givenReviewsCount > 0 {
+                    } else {
+                        return String(
+                            format: NSLocalizedString("StepQuizReviewGivenInProgressZero", comment: ""),
+                            arguments: [FormatterHelper.quizReviewsCount(minReviewsCount)]
+                        )
+                    }
+                }
+
+                return ""
+            case .completed:
+                return ""
+            }
+        }()
+
         let statusContainerView3 = StepQuizReviewStatusContainerView(headerView: statusView3)
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
 

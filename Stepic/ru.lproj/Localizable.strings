@@ -335,6 +335,9 @@ reviews567890 = "отзывов";
 reviewSummaries1 = "оценка";
 reviewSummaries234 = "оценки";
 reviewSummaries567890 = "оценок";
+quizReviews1 = "рецензия";
+quizReviews234 = "рецензии";
+quizReviews567890 = "рецензий";
 submissions1 = "решение";
 submissions234 = "решения";
 submissions567890 = "решений";
@@ -997,6 +1000,7 @@ StepQuizReviewSendSubmit = "Отправить это решение";
 
 StepQuizReviewGivenTitle = "Рецензия";
 StepQuizReviewGivenPendingZero = "Сделайте рецензии на решения других учащихся";
+StepQuizReviewGivenInProgressZero = "Сделайте %@ на решения других учащихся";
 StepQuizReviewGivenExtraNote = "Делая дополнительные рецензии, вы повышаете шанс получить рецензии на свою работу быстрее";
 StepQuizReviewGivenStartReview = "Рецензировать";
 StepQuizReviewGivenNoReview = "Пока нет решений для рецензии";
