@@ -12,6 +12,8 @@ extension StepQuizReviewView {
 
         let stackViewSpacing: CGFloat = 0
         let stackViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+
+        let actionButtonHeight: CGFloat = 44
     }
 }
 
@@ -19,6 +21,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
     weak var delegate: StepQuizReviewViewDelegate?
 
     let appearance: Appearance
+    private var storedViewModel: StepQuizReviewViewModel?
 
     private lazy var topSeparatorView = SeparatorView()
 
@@ -101,6 +104,8 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
     }
 
     func configure(viewModel: StepQuizReviewViewModel) {
+        self.storedViewModel = viewModel
+
         self.messageView.title = viewModel.infoMessage
         self.messageContainerView.isHidden = self.messageView.title?.isEmpty ?? true
 
@@ -189,19 +194,90 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         let statusView3 = StepQuizReviewStatusView()
         statusView3.position = 3
         statusView3.isLastPosition = true
-        statusView3.status = .inProgress
-        statusView3.title = "Дождитесь оценки преподавателя. Максимум за задачу — 7 баллов."
-        let messageView3 = StepQuizReviewMessageView()
-        messageView3.title = "Преподаватель скоро приступит к проверке. Вы можете продолжить обучение."
+        statusView3.status = { () -> StepQuizReviewStatusView.Status in
+            switch stage {
+            case .submissionNotMade, .submissionNotSelected:
+                return .pending
+            case .submissionSelected:
+                return .inProgress
+            case .completed:
+                return .completed
+            }
+        }()
+        statusView3.title = { () -> String in
+            let defaultStringValue = "n/a"
+
+            if statusView3.status == .completed {
+                let formattedScore = viewModel.score != nil ? "\(viewModel.score.require())" : defaultStringValue
+
+                let formattedCost: String
+                if let cost = viewModel.cost {
+                    formattedCost = cost == 1
+                        ? "\(cost) \(NSLocalizedString("points234", comment: ""))"
+                        : "\(cost) \(NSLocalizedString("points567890", comment: ""))"
+                } else {
+                    formattedCost = "\(defaultStringValue) \(NSLocalizedString("points567890", comment: ""))"
+                }
+
+                return String(
+                    format: NSLocalizedString("StepQuizReviewInstructorCompleted", comment: ""),
+                    arguments: [formattedScore, formattedCost]
+                )
+            } else {
+                let formattedCost: String
+                if let cost = viewModel.cost {
+                    formattedCost = FormatterHelper.pointsCount(cost)
+                } else {
+                    formattedCost = "\(defaultStringValue) \(NSLocalizedString("points567890", comment: ""))"
+                }
+
+                return String(
+                    format: NSLocalizedString("StepQuizReviewInstructorPending", comment: ""),
+                    arguments: [formattedCost]
+                )
+            }
+        }()
+
+        let contentView3: UIView? = {
+            switch statusView3.status {
+            case .error, .pending:
+                return nil
+            case .inProgress:
+                let messageView = StepQuizReviewMessageView()
+                messageView.title = NSLocalizedString("StepQuizReviewInstructorCompletedHint", comment: "")
+                return messageView
+            case .completed:
+                let button = NextStepButton(style: .outlineGreen)
+                button.setTitle(viewModel.primaryActionButtonDescription.title, for: .normal)
+                button.addTarget(self, action: #selector(self.viewInstructorReviewClicked), for: .touchUpInside)
+                return button
+            }
+        }()
+
         let statusContainerView3 = StepQuizReviewStatusContainerView(
             headerView: statusView3,
-            contentView: messageView3,
+            contentView: contentView3,
             shouldShowSeparator: true
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
+
+        if statusView3.status == .completed {
+            contentView3?.translatesAutoresizingMaskIntoConstraints = false
+            contentView3?.snp.makeConstraints { make in
+                make.height.equalTo(self.appearance.actionButtonHeight)
+            }
+        }
     }
 
     private func configurePeerReview(_ viewModel: StepQuizReviewViewModel) {}
+
+    @objc
+    private func viewInstructorReviewClicked() {
+        self.delegate?.stepQuizReviewViewView(
+            self,
+            didClickButtonWith: self.storedViewModel?.primaryActionButtonDescription.uniqueIdentifier
+        )
+    }
 }
 
 extension StepQuizReviewView: ProgrammaticallyInitializableViewProtocol {

@@ -45,8 +45,6 @@ extension BaseQuizView {
 }
 
 final class BaseQuizView: UIView {
-    private static let childQuizViewTag = 1
-
     weak var delegate: BaseQuizViewDelegate?
 
     let appearance: Appearance
@@ -211,9 +209,7 @@ final class BaseQuizView: UIView {
         }
     }
 
-    var childQuizView: UIView? {
-        self.stackView.arrangedSubviews.first(where: { $0.tag == Self.childQuizViewTag })
-    }
+    private(set) weak var childQuizView: UIView?
 
     init(
         frame: CGRect = .zero,
@@ -241,7 +237,7 @@ final class BaseQuizView: UIView {
     }
 
     func addQuiz(view: UIView) {
-        view.tag = Self.childQuizViewTag
+        self.childQuizView = view
 
         let stackIndex: Int = {
             guard let discountingPolicyLabelIndex = self.stackView.arrangedSubviews.firstIndex(

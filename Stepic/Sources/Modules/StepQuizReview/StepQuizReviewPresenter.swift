@@ -3,6 +3,7 @@ import UIKit
 protocol StepQuizReviewPresenterProtocol {
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response)
     func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response)
+    func presentInstructorReview(response: StepQuizReview.InstructorReviewPresentation.Response)
     func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response)
     func presentChangeCurrentSubmissionResult(response: StepQuizReview.ChangeCurrentSubmission.Response)
     func presentSubmittedForReviewSubmission(response: StepQuizReview.SubmittedForReviewSubmissionPresentation.Response)
@@ -40,6 +41,12 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
     func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response) {
         if let url = self.urlFactory.makeReviewReviews(reviewID: response.review.id, unitID: response.unitID) {
             self.viewController?.displayTeacherReview(viewModel: .init(url: url))
+        }
+    }
+
+    func presentInstructorReview(response: StepQuizReview.InstructorReviewPresentation.Response) {
+        if let url = self.urlFactory.makeReviewSession(sessionID: response.reviewSession.id) {
+            self.viewController?.displayInstructorReview(viewModel: .init(url: url))
         }
     }
 
@@ -99,7 +106,6 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
 
             return .submissionNotMade
         }()
-        print("StepQuizReviewPresenter :: stage = \(stage)")
 
         let infoMessage: String? = {
             guard shouldShowFirstStageMessage else {
@@ -118,15 +124,34 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             isMultipleChoice: (quizData?.attempt.dataset as? ChoiceDataset)?.isMultipleChoice ?? false
         )
 
+        let primaryActionButtonDescription: StepQuizReviewViewModel.ButtonDescription = {
+            switch instructionType {
+            case .instructor:
+                if stage == .completed {
+                    return .init(
+                        title: NSLocalizedString("StepQuizReviewInstructorCompletedAction", comment: ""),
+                        isEnabled: true,
+                        uniqueIdentifier: StepQuizReview.ActionType.studentViewInstructorReview.uniqueIdentifier
+                    )
+                }
+            case .peer:
+                break
+            }
+
+            return .init(title: "", isEnabled: false, uniqueIdentifier: "")
+        }()
+
         return StepQuizReviewViewModel(
             isInstructorInstructionType: instructionType == .instructor,
             isPeerInstructionType: instructionType == .peer,
-            stage: stage,
             isSubmissionCorrect: quizData?.submission.status == .correct,
             isSubmissionWrong: quizData?.submission.status == .wrong,
+            stage: stage,
             infoMessage: infoMessage,
             quizTitle: quizTitle,
-            primaryActionButtonDescription: .init(title: "", isEnabled: false, uniqueIdentifier: "")
+            score: step.progress?.score,
+            cost: step.progress?.cost,
+            primaryActionButtonDescription: primaryActionButtonDescription
         )
     }
 
@@ -170,11 +195,13 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
         return StepQuizReviewViewModel(
             isInstructorInstructionType: instructionType == .instructor,
             isPeerInstructionType: instructionType == .peer,
-            stage: nil,
             isSubmissionCorrect: false,
             isSubmissionWrong: false,
+            stage: nil,
             infoMessage: infoMessage,
             quizTitle: nil,
+            score: nil,
+            cost: nil,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
     }

@@ -109,6 +109,17 @@ enum StepQuizReview {
         }
     }
 
+    /// Present student review
+    enum InstructorReviewPresentation {
+        struct Response {
+            let reviewSession: ReviewSessionDataPlainObject
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
@@ -127,6 +138,7 @@ enum StepQuizReview {
     enum ActionType: String, UniqueIdentifiable {
         case teacherReviewSubmissions
         case teacherViewSubmissions
+        case studentViewInstructorReview
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
     }

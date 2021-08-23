@@ -1005,9 +1005,10 @@ StepQuizReviewTakenAction = "Смотреть рецензии";
 StepQuizReviewTakenTitle = "Полученные рецензии";
 StepQuizReviewTakenHint = "Обычно первая рецензия приходит через 2 дня после отправки решения на рецензирование (но это не точно)";
 
-StepQuizReviewInstructorPending = "Дождитесь оценки преподавателя, максимум за задачу — %@";
-StepQuizReviewInstructorCompletedHint = "Ответ преподавателя придет не сразу, вы получите уведомление";
-StepQuizReviewInstructorCompletedAction = "Смотреть рецензию";
+StepQuizReviewInstructorPending = "Дождитесь оценки преподавателя. Максимум за задачу — %@.";
+StepQuizReviewInstructorCompleted = "Оценка получена. Ваш ответ оценили на %@ из %@.";
+StepQuizReviewInstructorCompletedHint = "Преподаватель скоро приступит к проверке. Вы можете продолжить обучение.";
+StepQuizReviewInstructorCompletedAction = "Смотреть рецензию преподавателя";
 
 StepQuizReviewPeerPending = "Получите баллы, максимальная оценка — %@";
 StepQuizReviewPeerCompleted = "Ваш ответ оценили на %@ из %@";

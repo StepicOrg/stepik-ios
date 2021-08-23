@@ -4,6 +4,7 @@ import UIKit
 protocol StepQuizReviewViewControllerProtocol: AnyObject {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel)
     func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel)
+    func displayInstructorReview(viewModel: StepQuizReview.InstructorReviewPresentation.ViewModel)
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel)
     func displayChangeCurrentSubmissionResult(viewModel: StepQuizReview.ChangeCurrentSubmission.ViewModel)
     func displaySubmittedForReviewSubmission(
@@ -145,6 +146,16 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
             backButtonStyle: .done
         )
         self.didDisplayTeacherReview = true
+    }
+
+    func displayInstructorReview(viewModel: StepQuizReview.InstructorReviewPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .peerReview,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel) {

@@ -1004,7 +1004,8 @@ StepQuizReviewTakenAction = "View reviews";
 StepQuizReviewTakenTitle = "Received reviews";
 StepQuizReviewTakenHint = "Average waiting time - 48 hours";
 
-StepQuizReviewInstructorPending = "Instructor will grade your solution with the maximum score of %@";
+StepQuizReviewInstructorPending = "Instructor will grade your solution with the maximum score of %@.";
+StepQuizReviewInstructorCompleted = "Your solution graded. You got %@ out of %@.";
 StepQuizReviewInstructorCompletedHint = "The instructor’s response will not come immediately, you will receive a notification";
 StepQuizReviewInstructorCompletedAction = "View review";
 
