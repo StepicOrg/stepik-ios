@@ -126,68 +126,11 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         let stage = viewModel.stage ?? .submissionNotMade
 
         // 1
-        let statusView1 = StepQuizReviewStatusView()
-        statusView1.position = 1
-        statusView1.status = { () -> StepQuizReviewStatusView.Status in
-            switch stage {
-            case .submissionNotMade:
-                return viewModel.isSubmissionWrong ? .error : .inProgress
-            case .submissionNotSelected, .submissionSelected, .completed:
-                return .completed
-            }
-        }()
-        statusView1.title = viewModel.quizTitle
-
-        let statusContainerView1: StepQuizReviewStatusContainerView = {
-            if statusView1.status == .completed {
-                return StepQuizReviewStatusContainerView(headerView: statusView1)
-            } else {
-                self.quizContainerView.isHidden = false
-                return StepQuizReviewStatusContainerView(
-                    headerView: statusView1,
-                    contentView: self.quizContainerView,
-                    shouldShowSeparator: true
-                )
-            }
-        }()
+        let statusContainerView1 = self.makeStage1StatusContainerView(viewModel)
         self.statusesView.addArrangedReviewStatus(statusContainerView1)
 
         // 2
-        let statusView2 = StepQuizReviewStatusView()
-        statusView2.position = 2
-        statusView2.status = { () -> StepQuizReviewStatusView.Status in
-            switch stage {
-            case .submissionNotMade:
-                return .pending
-            case .submissionNotSelected:
-                return .inProgress
-            case .submissionSelected, .completed:
-                return .completed
-            }
-        }()
-        statusView2.title = statusView2.status == .completed
-            ? NSLocalizedString("StepQuizReviewSendCompleted", comment: "")
-            : NSLocalizedString("StepQuizReviewSendInProgress", comment: "")
-
-        let statusContainerView2: StepQuizReviewStatusContainerView = {
-            if statusView2.status == .inProgress {
-                self.quizContainerView.isHidden = false
-                return StepQuizReviewStatusContainerView(
-                    headerView: statusView2,
-                    contentView: self.quizContainerView,
-                    shouldShowSeparator: true
-                )
-            } else if statusView2.status == .completed {
-                self.solutionContainerView.isHidden = false
-                return StepQuizReviewStatusContainerView(
-                    headerView: statusView2,
-                    contentView: self.solutionContainerView,
-                    shouldShowSeparator: true
-                )
-            } else {
-                return StepQuizReviewStatusContainerView(headerView: statusView2)
-            }
-        }()
+        let statusContainerView2 = self.makeStage2StatusContainerView(viewModel)
         self.statusesView.addArrangedReviewStatus(statusContainerView2)
 
         // 3
@@ -274,19 +217,11 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         print(stage)
 
         // 1
-        let statusView1 = StepQuizReviewStatusView()
-        statusView1.position = 1
-        statusView1.status = .inProgress
-        statusView1.title = "Решите задачу"
-        let statusContainerView1 = StepQuizReviewStatusContainerView(headerView: statusView1)
+        let statusContainerView1 = self.makeStage1StatusContainerView(viewModel)
         self.statusesView.addArrangedReviewStatus(statusContainerView1)
 
         // 2
-        let statusView2 = StepQuizReviewStatusView()
-        statusView2.position = 2
-        statusView2.status = .pending
-        statusView2.title = "Отправьте лучшее из решений на проверку. После отправки заменить решение нельзя."
-        let statusContainerView2 = StepQuizReviewStatusContainerView(headerView: statusView2)
+        let statusContainerView2 = self.makeStage2StatusContainerView(viewModel)
         self.statusesView.addArrangedReviewStatus(statusContainerView2)
 
         // 3
@@ -313,6 +248,71 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         statusView5.title = "Получите баллы. Максимум за задачу — 7 баллов."
         let statusContainerView5 = StepQuizReviewStatusContainerView(headerView: statusView5)
         self.statusesView.addArrangedReviewStatus(statusContainerView5)
+    }
+
+    private func makeStage1StatusContainerView(
+        _ viewModel: StepQuizReviewViewModel
+    ) -> StepQuizReviewStatusContainerView {
+        let statusView = StepQuizReviewStatusView()
+        statusView.position = 1
+        statusView.status = { () -> StepQuizReviewStatusView.Status in
+            switch viewModel.stage ?? .submissionNotMade {
+            case .submissionNotMade:
+                return viewModel.isSubmissionWrong ? .error : .inProgress
+            case .submissionNotSelected, .submissionSelected, .completed:
+                return .completed
+            }
+        }()
+        statusView.title = viewModel.quizTitle
+
+        if statusView.status == .completed {
+            return StepQuizReviewStatusContainerView(headerView: statusView)
+        } else {
+            self.quizContainerView.isHidden = false
+            return StepQuizReviewStatusContainerView(
+                headerView: statusView,
+                contentView: self.quizContainerView,
+                shouldShowSeparator: true
+            )
+        }
+    }
+
+    private func makeStage2StatusContainerView(
+        _ viewModel: StepQuizReviewViewModel
+    ) -> StepQuizReviewStatusContainerView {
+        let statusView = StepQuizReviewStatusView()
+        statusView.position = 2
+        statusView.status = { () -> StepQuizReviewStatusView.Status in
+            switch viewModel.stage ?? .submissionNotMade {
+            case .submissionNotMade:
+                return .pending
+            case .submissionNotSelected:
+                return .inProgress
+            case .submissionSelected, .completed:
+                return .completed
+            }
+        }()
+        statusView.title = statusView.status == .completed
+            ? NSLocalizedString("StepQuizReviewSendCompleted", comment: "")
+            : NSLocalizedString("StepQuizReviewSendInProgress", comment: "")
+
+        if statusView.status == .inProgress {
+            self.quizContainerView.isHidden = false
+            return StepQuizReviewStatusContainerView(
+                headerView: statusView,
+                contentView: self.quizContainerView,
+                shouldShowSeparator: true
+            )
+        } else if statusView.status == .completed {
+            self.solutionContainerView.isHidden = false
+            return StepQuizReviewStatusContainerView(
+                headerView: statusView,
+                contentView: self.solutionContainerView,
+                shouldShowSeparator: true
+            )
+        } else {
+            return StepQuizReviewStatusContainerView(headerView: statusView)
+        }
     }
 
     @objc
