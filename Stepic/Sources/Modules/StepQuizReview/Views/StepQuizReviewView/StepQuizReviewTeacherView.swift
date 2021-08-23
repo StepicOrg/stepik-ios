@@ -112,6 +112,8 @@ final class StepQuizReviewTeacherView: UIView, StepQuizReviewViewProtocol {
         }
     }
 
+    func addSolution(view: UIView) {}
+
     func configure(viewModel: StepQuizReviewViewModel) {
         self.messageView.title = viewModel.infoMessage
 

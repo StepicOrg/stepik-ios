@@ -15,6 +15,8 @@ enum StepQuizReview {
         case completed // 3 / 5
     }
 
+    // MARK: Use cases
+
     /// Load latest review data
     enum QuizReviewLoad {
         struct Request {}
@@ -92,6 +94,17 @@ enum StepQuizReview {
 
         struct ViewModel {
             let attempt: Attempt
+            let submission: Submission
+        }
+    }
+
+    /// Present submitted for review submission
+    enum SubmittedForReviewSubmissionPresentation {
+        struct Response {
+            let reviewSession: ReviewSessionDataPlainObject
+        }
+
+        struct ViewModel {
             let submission: Submission
         }
     }

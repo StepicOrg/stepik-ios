@@ -8,6 +8,8 @@ extension StepQuizReviewView {
 
         let messageViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
 
+        let solutionViewInsets = LayoutInsets(top: 0, left: -16, bottom: 0, right: -16)
+
         let stackViewSpacing: CGFloat = 0
         let stackViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
@@ -30,6 +32,12 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
     private lazy var statusesView = StepQuizReviewStatusesView()
 
     private lazy var quizContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
+
+    private lazy var solutionContainerView: UIView = {
         let view = UIView()
         view.isHidden = true
         return view
@@ -84,11 +92,20 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         }
     }
 
+    func addSolution(view: UIView) {
+        self.solutionContainerView.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.solutionViewInsets.edgeInsets)
+        }
+    }
+
     func configure(viewModel: StepQuizReviewViewModel) {
         self.messageView.title = viewModel.infoMessage
         self.messageContainerView.isHidden = self.messageView.title?.isEmpty ?? true
 
         self.quizContainerView.isHidden = true
+        self.solutionContainerView.isHidden = true
         self.statusesView.removeAllReviewStatuses()
 
         if viewModel.isInstructorInstructionType {
@@ -155,8 +172,16 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                     contentView: self.quizContainerView,
                     shouldShowSeparator: true
                 )
+            } else if statusView2.status == .completed {
+                self.solutionContainerView.isHidden = false
+                return StepQuizReviewStatusContainerView(
+                    headerView: statusView2,
+                    contentView: self.solutionContainerView,
+                    shouldShowSeparator: true
+                )
+            } else {
+                return StepQuizReviewStatusContainerView(headerView: statusView2)
             }
-            return StepQuizReviewStatusContainerView(headerView: statusView2)
         }()
         self.statusesView.addArrangedReviewStatus(statusContainerView2)
 

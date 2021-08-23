@@ -6,6 +6,9 @@ protocol StepQuizReviewViewControllerProtocol: AnyObject {
     func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel)
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel)
     func displayChangeCurrentSubmissionResult(viewModel: StepQuizReview.ChangeCurrentSubmission.ViewModel)
+    func displaySubmittedForReviewSubmission(
+        viewModel: StepQuizReview.SubmittedForReviewSubmissionPresentation.ViewModel
+    )
     func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -166,6 +169,33 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
 
     func displayChangeCurrentSubmissionResult(viewModel: StepQuizReview.ChangeCurrentSubmission.ViewModel) {
         self.childQuizModuleInput?.changeCurrent(attempt: viewModel.attempt, submission: viewModel.submission)
+    }
+
+    func displaySubmittedForReviewSubmission(
+        viewModel: StepQuizReview.SubmittedForReviewSubmissionPresentation.ViewModel
+    ) {
+        if let currentSolutionViewController = self.children.first(where: { $0 is SolutionViewControllerProtocol }) {
+            currentSolutionViewController.willMove(toParent: nil)
+            currentSolutionViewController.removeFromParent()
+            currentSolutionViewController.view.removeFromSuperview()
+        }
+
+        let assembly = SolutionAssembly(
+            stepID: self.step.id,
+            submission: viewModel.submission,
+            submissionURLProvider: nil
+        )
+
+        let solutionViewController = assembly.makeModule()
+
+        self.stepQuizReviewView?.addSolution(view: solutionViewController.view)
+        self.addChild(solutionViewController)
+        solutionViewController.didMove(toParent: self)
+
+        if let solutionView = solutionViewController.view as? SolutionViewProtocol {
+            solutionView.setOnlyQuizVisible()
+            solutionView.setContentInsets(.zero)
+        }
     }
 
     func displayBlockingLoadingIndicator(viewModel: StepQuizReview.BlockingWaitingIndicatorUpdate.ViewModel) {

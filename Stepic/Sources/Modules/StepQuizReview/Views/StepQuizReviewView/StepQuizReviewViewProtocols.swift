@@ -7,6 +7,7 @@ protocol StepQuizReviewViewProtocol: AnyObject {
     func hideLoading()
 
     func addQuiz(view: UIView)
+    func addSolution(view: UIView)
     func configure(viewModel: StepQuizReviewViewModel)
 }
 

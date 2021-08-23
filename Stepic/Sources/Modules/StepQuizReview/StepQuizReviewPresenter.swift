@@ -5,6 +5,7 @@ protocol StepQuizReviewPresenterProtocol {
     func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response)
     func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response)
     func presentChangeCurrentSubmissionResult(response: StepQuizReview.ChangeCurrentSubmission.Response)
+    func presentSubmittedForReviewSubmission(response: StepQuizReview.SubmittedForReviewSubmissionPresentation.Response)
     func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -57,6 +58,14 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
         self.viewController?.displayChangeCurrentSubmissionResult(
             viewModel: .init(attempt: response.attempt, submission: response.submission)
         )
+    }
+
+    func presentSubmittedForReviewSubmission(
+        response: StepQuizReview.SubmittedForReviewSubmissionPresentation.Response
+    ) {
+        if let submission = response.reviewSession.submission {
+            self.viewController?.displaySubmittedForReviewSubmission(viewModel: .init(submission: submission))
+        }
     }
 
     func presentBlockingLoadingIndicator(response: StepQuizReview.BlockingWaitingIndicatorUpdate.Response) {

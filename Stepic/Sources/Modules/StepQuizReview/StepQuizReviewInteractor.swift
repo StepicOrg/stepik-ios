@@ -18,7 +18,11 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     private let instructionType: InstructionType
     private let isTeacher: Bool
 
-    private var currentReviewSession: ReviewSessionDataPlainObject?
+    private var currentReviewSession: ReviewSessionDataPlainObject? {
+        didSet {
+            self.presentSubmittedForReviewSubmissionIfNeeded()
+        }
+    }
     private var currentInstruction: InstructionDataPlainObject?
 
     private var currentStudentQuizData: FetchResult<StepQuizReview.QuizData>?
@@ -222,6 +226,16 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
                 print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
                 self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true, showError: true))
             }
+    }
+
+    private func presentSubmittedForReviewSubmissionIfNeeded() {
+        guard !self.isTeacher,
+              let currentReviewSession = self.currentReviewSession,
+              currentReviewSession.attempt != nil && currentReviewSession.submission != nil else {
+            return
+        }
+
+        self.presenter.presentSubmittedForReviewSubmission(response: .init(reviewSession: currentReviewSession))
     }
 
     private func presentStepQuizReviewFromCurrentData() {
