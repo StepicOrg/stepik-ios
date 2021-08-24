@@ -563,8 +563,35 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         let statusView5 = StepQuizReviewStatusView()
         statusView5.position = 5
         statusView5.isLastPosition = true
-        statusView5.status = .pending
-        statusView5.title = "Получите баллы. Максимум за задачу — 7 баллов."
+        statusView5.status = stage == .completed ? .completed : .pending
+        statusView5.title = { () -> String in
+            guard let cost = viewModel.cost else {
+                return NSLocalizedString("StepQuizReviewPeerPendingZero", comment: "")
+            }
+
+            if statusView5.status == .completed {
+                let scoreString = viewModel.score != nil
+                    ? FormatterHelper.submissionScore(viewModel.score.require())
+                    : "n/a"
+                let pluralizedCountString = StringHelper.pluralize(
+                    number: cost,
+                    forms: [
+                        NSLocalizedString("StepQuizReviewPeerCompleted1", comment: ""),
+                        NSLocalizedString("StepQuizReviewPeerCompleted234", comment: ""),
+                        NSLocalizedString("StepQuizReviewPeerCompleted567890", comment: "")
+                    ]
+                )
+                return String(
+                    format: pluralizedCountString,
+                    arguments: [scoreString, "\(cost)"]
+                )
+            } else {
+                return String(
+                    format: NSLocalizedString("StepQuizReviewPeerPending", comment: ""),
+                    arguments: [FormatterHelper.pointsCount(cost)]
+                )
+            }
+        }()
         let statusContainerView5 = StepQuizReviewStatusContainerView(headerView: statusView5)
         self.statusesView.addArrangedReviewStatus(statusContainerView5)
     }

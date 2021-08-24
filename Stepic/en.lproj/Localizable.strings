@@ -1034,8 +1034,11 @@ StepQuizReviewInstructorCompleted = "Your solution graded. You got %@ out of %@.
 StepQuizReviewInstructorCompletedHint = "The instructor’s response will not come immediately, you will receive a notification";
 StepQuizReviewInstructorCompletedAction = "View review";
 
+StepQuizReviewPeerPendingZero = "Get points";
 StepQuizReviewPeerPending = "Get points, max score is %@";
-StepQuizReviewPeerCompleted = "Your solution was scored for %@ out of %@";
+StepQuizReviewPeerCompleted1 = "Your solution was scored for %@ out of %@ point";
+StepQuizReviewPeerCompleted234 = "Your solution was scored for %@ out of %@ points";
+StepQuizReviewPeerCompleted567890 = "Your solution was scored for %@ out of %@ points";
 
 StepQuizReviewStagesNotice = "Quiz verification by the review method. Follow these steps to get points.";
 
