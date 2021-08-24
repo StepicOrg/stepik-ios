@@ -230,7 +230,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         self.statusesView.addArrangedReviewStatus(statusContainerView2)
 
         // 3
-        let statusView3 = StepQuizReviewStatusView()
+        let statusView3 = StepQuizReviewStatusView(shouldShowSeparator: false)
         statusView3.position = 3
         statusView3.status = { () -> StepQuizReviewStatusView.Status in
             switch stage {
@@ -266,24 +266,26 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                         )
                         return String(
                             format: pluralizedCountString,
-                            arguments: [
-                                "\(remainingReviewsCount)",
-                                FormatterHelper.quizGivenReviewsCount(givenReviewsCount)
-                            ]
+                            arguments: ["\(remainingReviewsCount)", self.makeGivenReviewsCountString(givenReviewsCount)]
                         )
                     } else {
-                        return String(
-                            format: NSLocalizedString("StepQuizReviewGivenInProgressZero", comment: ""),
-                            arguments: [FormatterHelper.quizReviewsCount(minReviewsCount)]
+                        let pluralizedCountString = StringHelper.pluralize(
+                            number: minReviewsCount,
+                            forms: [
+                                NSLocalizedString("StepQuizReviewGivenInProgressZero1", comment: ""),
+                                NSLocalizedString("StepQuizReviewGivenInProgressZero234", comment: ""),
+                                NSLocalizedString("StepQuizReviewGivenInProgressZero567890", comment: "")
+                            ]
                         )
+                        return String(format: pluralizedCountString, arguments: ["\(minReviewsCount)"])
                     }
                 } else if givenReviewsCount > 0 {
-                    return FormatterHelper.quizGivenReviewsCount(givenReviewsCount)
+                    return self.makeGivenReviewsCountString(givenReviewsCount)
                 } else {
                     return NSLocalizedString("StepQuizReviewGivenPendingZero", comment: "")
                 }
             case .completed:
-                return FormatterHelper.quizGivenReviewsCount(viewModel.givenReviewsCount ?? 0)
+                return self.makeGivenReviewsCountString(viewModel.givenReviewsCount ?? 0)
             }
         }()
 
@@ -439,10 +441,13 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             }
         }()
 
+        var statusContainerView3Appearance = StepQuizReviewStatusContainerView.Appearance()
+        statusContainerView3Appearance.contentViewInsets.top = 0
         let statusContainerView3 = StepQuizReviewStatusContainerView(
             headerView: statusView3,
             contentView: contentView3,
-            shouldShowSeparator: contentView3 != nil
+            shouldShowSeparator: contentView3 != nil,
+            appearance: statusContainerView3Appearance
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
 
@@ -454,11 +459,104 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         }
 
         // 4
-        let statusView4 = StepQuizReviewStatusView()
+        let statusView4 = StepQuizReviewStatusView(shouldShowSeparator: false)
         statusView4.position = 4
-        statusView4.status = .pending
-        statusView4.title = "Дождитесь 3 рецензии на свое решение"
-        let statusContainerView4 = StepQuizReviewStatusContainerView(headerView: statusView4)
+        statusView4.status = statusView3.status
+        statusView4.title = { () -> String in
+            switch statusView4.status {
+            case .error, .pending:
+                return NSLocalizedString("StepQuizReviewTakenPendingZero", comment: "")
+            case .inProgress:
+                guard let minReviewsCount = viewModel.minReviewsCount,
+                      let takenReviewsCount = viewModel.takenReviewsCount else {
+                    return NSLocalizedString("StepQuizReviewTakenPendingZero", comment: "")
+                }
+
+                let remainingReviewsCount = minReviewsCount - takenReviewsCount
+
+                if remainingReviewsCount > 0 {
+                    if takenReviewsCount > 0 {
+                        let pluralizedCountString = StringHelper.pluralize(
+                            number: remainingReviewsCount,
+                            forms: [
+                                NSLocalizedString("StepQuizReviewTakenInProgress1", comment: ""),
+                                NSLocalizedString("StepQuizReviewTakenInProgress234", comment: ""),
+                                NSLocalizedString("StepQuizReviewTakenInProgress567890", comment: "")
+                            ]
+                        )
+                        return String(
+                            format: pluralizedCountString,
+                            arguments: ["\(remainingReviewsCount)", self.makeTakenReviewsCountString(takenReviewsCount)]
+                        )
+                    } else {
+                        let pluralizedCountString = StringHelper.pluralize(
+                            number: minReviewsCount,
+                            forms: [
+                                NSLocalizedString("StepQuizReviewTakenInProgressZero1", comment: ""),
+                                NSLocalizedString("StepQuizReviewTakenInProgressZero234", comment: ""),
+                                NSLocalizedString("StepQuizReviewTakenInProgressZero567890", comment: "")
+                            ]
+                        )
+                        return String(format: pluralizedCountString, arguments: ["\(minReviewsCount)"])
+                    }
+                } else if takenReviewsCount > 0 {
+                    return self.makeTakenReviewsCountString(takenReviewsCount)
+                } else {
+                    return NSLocalizedString("StepQuizReviewTakenPendingZero", comment: "")
+                }
+            case .completed:
+                return self.makeTakenReviewsCountString(viewModel.takenReviewsCount ?? 0)
+            }
+        }()
+
+        let contentView4: UIView? = {
+            let primaryActionButton = self.makePrimaryActionButton(
+                description: .init(
+                    title: NSLocalizedString("StepQuizReviewTakenAction", comment: ""),
+                    isEnabled: true,
+                    uniqueIdentifier: StepQuizReview.ActionType.studentViewTakenReviews.uniqueIdentifier
+                ),
+                isFilled: false
+            )
+            primaryActionButton.addTarget(self, action: #selector(self.viewTakenReviewsClicked), for: .touchUpInside)
+
+            let primaryActionButtonContainerView = UIView()
+            primaryActionButtonContainerView.addSubview(primaryActionButton)
+
+            primaryActionButton.translatesAutoresizingMaskIntoConstraints = false
+            primaryActionButton.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+                make.height.equalTo(self.appearance.actionButtonHeight)
+            }
+
+            switch statusView3.status {
+            case .error, .pending:
+                return nil
+            case .inProgress:
+                guard let takenReviewsCount = viewModel.takenReviewsCount else {
+                    return nil
+                }
+
+                if takenReviewsCount > 0 {
+                    return primaryActionButtonContainerView
+                } else {
+                    let messageView = StepQuizReviewMessageView()
+                    messageView.title = NSLocalizedString("StepQuizReviewTakenHint", comment: "")
+                    return messageView
+                }
+            case .completed:
+                return primaryActionButton
+            }
+        }()
+
+        var statusContainerView4Appearance = StepQuizReviewStatusContainerView.Appearance()
+        statusContainerView4Appearance.contentViewInsets.top = 0
+        let statusContainerView4 = StepQuizReviewStatusContainerView(
+            headerView: statusView4,
+            contentView: contentView4,
+            shouldShowSeparator: contentView4 != nil,
+            appearance: statusContainerView4Appearance
+        )
         self.statusesView.addArrangedReviewStatus(statusContainerView4)
 
         // 5
@@ -548,6 +646,32 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         return button
     }
 
+    private func makeGivenReviewsCountString(_ count: Int) -> String {
+        let formattedReviewsCount = FormatterHelper.quizReviewsCount(count)
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("StepQuizReviewGivenCompleted1", comment: ""),
+                NSLocalizedString("StepQuizReviewGivenCompleted234", comment: ""),
+                NSLocalizedString("StepQuizReviewGivenCompleted567890", comment: "")
+            ]
+        )
+        return String(format: pluralizedCountString, arguments: [formattedReviewsCount])
+    }
+
+    private func makeTakenReviewsCountString(_ count: Int) -> String {
+        let formattedReviewsCount = FormatterHelper.quizReviewsCount(count)
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("StepQuizReviewTakenCompleted1", comment: ""),
+                NSLocalizedString("StepQuizReviewTakenCompleted234", comment: ""),
+                NSLocalizedString("StepQuizReviewTakenCompleted567890", comment: "")
+            ]
+        )
+        return String(format: pluralizedCountString, arguments: [formattedReviewsCount])
+    }
+
     @objc
     private func primaryActionButtonClicked() {
         self.delegate?.stepQuizReviewViewView(
@@ -569,6 +693,14 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         self.delegate?.stepQuizReviewViewView(
             self,
             didClickButtonWith: StepQuizReview.ActionType.studentViewGivenReviews.uniqueIdentifier
+        )
+    }
+
+    @objc
+    private func viewTakenReviewsClicked() {
+        self.delegate?.stepQuizReviewViewView(
+            self,
+            didClickButtonWith: StepQuizReview.ActionType.studentViewTakenReviews.uniqueIdentifier
         )
     }
 }

@@ -75,7 +75,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
                     filterQuery: .init(filters: [.reviewStatus(.awaiting)])
                 )
             )
-        case .studentViewInstructorReview, .studentViewGivenReviews:
+        case .studentViewInstructorReview, .studentViewGivenReviews, .studentViewTakenReviews:
             if let currentReviewSession = self.currentReviewSession {
                 self.presenter.presentReviewSession(response: .init(reviewSession: currentReviewSession))
             }

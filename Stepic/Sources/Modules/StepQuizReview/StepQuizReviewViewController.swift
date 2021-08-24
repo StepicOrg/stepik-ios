@@ -138,24 +138,12 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
     }
 
     func displayReview(viewModel: StepQuizReview.ReviewPresentation.ViewModel) {
-        WebControllerManager.shared.presentWebControllerWithURL(
-            viewModel.url,
-            inController: self,
-            withKey: .peerReview,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+        self.presentReviewWebController(with: viewModel.url)
         self.didDisplayReviewInTheWeb = true
     }
 
     func displayReviewSession(viewModel: StepQuizReview.ReviewSessionPresentation.ViewModel) {
-        WebControllerManager.shared.presentWebControllerWithURL(
-            viewModel.url,
-            inController: self,
-            withKey: .peerReview,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+        self.presentReviewWebController(with: viewModel.url)
     }
 
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel) {
@@ -217,6 +205,18 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    // MARK: Private Helpers
+
+    private func presentReviewWebController(with url: URL) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: .peerReview,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
 

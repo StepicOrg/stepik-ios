@@ -17,6 +17,7 @@ extension StepQuizReviewStatusView {
 
 final class StepQuizReviewStatusView: UIView {
     let appearance: Appearance
+    private let shouldShowSeparator: Bool
 
     private lazy var circleView = StepQuizReviewStatusCircleView(
         appearance: .init(imageViewSize: self.appearance.circleViewSize * 0.5)
@@ -68,9 +69,12 @@ final class StepQuizReviewStatusView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
+        appearance: Appearance = Appearance(),
+        shouldShowSeparator: Bool = true
     ) {
         self.appearance = appearance
+        self.shouldShowSeparator = shouldShowSeparator
+
         super.init(frame: frame)
 
         self.setupView()
@@ -156,7 +160,10 @@ extension StepQuizReviewStatusView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.circleView)
         self.addSubview(self.titleLabel)
-        self.addSubview(self.separatorView)
+
+        if self.shouldShowSeparator {
+            self.addSubview(self.separatorView)
+        }
     }
 
     func makeConstraints() {
@@ -176,11 +183,13 @@ extension StepQuizReviewStatusView: ProgrammaticallyInitializableViewProtocol {
             make.centerY.equalToSuperview()
         }
 
-        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.separatorView.snp.makeConstraints { make in
-            make.leading.equalTo(self.titleLabel.snp.leading)
-            make.bottom.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.separatorHeight)
+        if self.shouldShowSeparator {
+            self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+            self.separatorView.snp.makeConstraints { make in
+                make.leading.equalTo(self.titleLabel.snp.leading)
+                make.bottom.trailing.equalToSuperview()
+                make.height.equalTo(self.appearance.separatorHeight)
+            }
         }
     }
 }

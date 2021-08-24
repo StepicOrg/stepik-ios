@@ -141,6 +141,7 @@ enum StepQuizReview {
         case studentViewInstructorReview
         case studentWriteReviews
         case studentViewGivenReviews
+        case studentViewTakenReviews
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
     }

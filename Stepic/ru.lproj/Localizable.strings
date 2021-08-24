@@ -1000,10 +1000,12 @@ StepQuizReviewSendSubmit = "Отправить это решение";
 
 StepQuizReviewGivenTitle = "Рецензия";
 StepQuizReviewGivenPendingZero = "Сделайте рецензии на решения других учащихся";
-StepQuizReviewGivenInProgressZero = "Сделайте %@ на решения других учащихся";
+StepQuizReviewGivenInProgressZero1 = "Сделайте %@ рецензию на решения других учащихся";
+StepQuizReviewGivenInProgressZero234 = "Сделайте %@ рецензии на решения других учащихся";
+StepQuizReviewGivenInProgressZero567890 = "Сделайте %@ рецензий на решения других учащихся";
 StepQuizReviewGivenInProgress1 = "Сделайте ещё %@ рецензию на решения других учащихся. %@.";
 StepQuizReviewGivenInProgress234 = "Сделайте ещё %@ рецензии на решения других учащихся. %@.";
-StepQuizReviewGivenInProgress567890 = "Сделайте ещё %@ рецензии на решения других учащихся. %@.";
+StepQuizReviewGivenInProgress567890 = "Сделайте ещё %@ рецензий на решения других учащихся. %@.";
 StepQuizReviewGivenCompleted1 = "%@ отправлена";
 StepQuizReviewGivenCompleted234 = "%@ отправлены";
 StepQuizReviewGivenCompleted567890 = "%@ отправлено";
@@ -1013,8 +1015,18 @@ StepQuizReviewGivenInProgressContinueAction = "Продолжить реценз
 StepQuizReviewGivenExtraNote = "Делая дополнительные рецензии, вы повышаете шанс получить рецензии на свою работу быстрее";
 StepQuizReviewGivenStartReview = "Рецензировать";
 StepQuizReviewGivenNoReview = "Пока нет решений для рецензии";
-StepQuizReviewTakenPendingZero = "Дождитесь рецензии на своё решение";
-StepQuizReviewTakenAction = "Смотреть рецензии";
+
+StepQuizReviewTakenPendingZero = "Дождитесь рецензий на своё решение";
+StepQuizReviewTakenInProgressZero1 = "Дождитесь %@ рецензию на своё решение";
+StepQuizReviewTakenInProgressZero234 = "Дождитесь %@ рецензии на своё решение";
+StepQuizReviewTakenInProgressZero567890 = "Дождитесь %@ рецензий на своё решение";
+StepQuizReviewTakenInProgress1 = "Дождитесь ещё %@ рецензию на своё решение. %@.";
+StepQuizReviewTakenInProgress234 = "Дождитесь ещё %@-х рецензий на своё решение. %@.";
+StepQuizReviewTakenInProgress567890 = "Дождитесь ещё %@-и рецензий на своё решение. %@.";
+StepQuizReviewTakenCompleted1 = "%@ получена";
+StepQuizReviewTakenCompleted234 = "%@ получены";
+StepQuizReviewTakenCompleted567890 = "%@ получено";
+StepQuizReviewTakenAction = "Смотреть полученные рецензии";
 StepQuizReviewTakenTitle = "Полученные рецензии";
 StepQuizReviewTakenHint = "Обычно первая рецензия приходит через 2 дня после отправки решения на рецензирование (но это не точно)";
 

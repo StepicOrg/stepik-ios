@@ -14,6 +14,7 @@ struct StepQuizReviewViewModel {
 
     let minReviewsCount: Int?
     let givenReviewsCount: Int?
+    let takenReviewsCount: Int?
     let isReviewAvailable: Bool?
 
     let primaryActionButtonDescription: ButtonDescription

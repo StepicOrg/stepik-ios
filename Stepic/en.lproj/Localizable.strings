@@ -999,7 +999,9 @@ StepQuizReviewSendSubmit = "Submit this submission";
 
 StepQuizReviewGivenTitle = "Review";
 StepQuizReviewGivenPendingZero = "Write reviews";
-StepQuizReviewGivenInProgressZero = "Write %@";
+StepQuizReviewGivenInProgressZero1 = "Write %@ review";
+StepQuizReviewGivenInProgressZero234 = "Write %@ reviews";
+StepQuizReviewGivenInProgressZero567890 = "Write %@ reviews";
 StepQuizReviewGivenInProgress1 = "Write %@ more review. %@.";
 StepQuizReviewGivenInProgress234 = "Write %@ more reviews. %@.";
 StepQuizReviewGivenInProgress567890 = "Write %@ more reviews. %@.";
@@ -1012,8 +1014,18 @@ StepQuizReviewGivenInProgressContinueAction = "Continue review in Web";
 StepQuizReviewGivenExtraNote = "Write more reviews to increase your chance to receive review";
 StepQuizReviewGivenStartReview = "Start review";
 StepQuizReviewGivenNoReview = "Nothing to review";
-StepQuizReviewTakenPendingZero = "Wait for %@ reviews of your solution";
-StepQuizReviewTakenAction = "View reviews";
+
+StepQuizReviewTakenPendingZero = "Wait for reviews of your solution";
+StepQuizReviewTakenInProgressZero1 = "Wait for %@ review of your solution";
+StepQuizReviewTakenInProgressZero234 = "Wait for %@ reviews of your solution";
+StepQuizReviewTakenInProgressZero567890 = "Wait for %@ reviews of your solution";
+StepQuizReviewTakenInProgress1 = "Wait for %@ more review of your solution. %@.";
+StepQuizReviewTakenInProgress234 = "Wait for %@ more reviews of your solution. %@.";
+StepQuizReviewTakenInProgress567890 = "Wait for %@ more reviews of your solution. %@.";
+StepQuizReviewTakenCompleted1 = "%@ review received";
+StepQuizReviewTakenCompleted234 = "%@ reviews received";
+StepQuizReviewTakenCompleted567890 = "%@ reviews received";
+StepQuizReviewTakenAction = "View received reviews";
 StepQuizReviewTakenTitle = "Received reviews";
 StepQuizReviewTakenHint = "Average waiting time - 48 hours";
 
