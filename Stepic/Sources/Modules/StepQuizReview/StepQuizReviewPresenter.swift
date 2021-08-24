@@ -2,8 +2,8 @@ import UIKit
 
 protocol StepQuizReviewPresenterProtocol {
     func presentStepQuizReview(response: StepQuizReview.QuizReviewLoad.Response)
-    func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response)
-    func presentInstructorReview(response: StepQuizReview.InstructorReviewPresentation.Response)
+    func presentReview(response: StepQuizReview.ReviewPresentation.Response)
+    func presentReviewSession(response: StepQuizReview.ReviewSessionPresentation.Response)
     func presentSubmissions(response: StepQuizReview.SubmissionsPresentation.Response)
     func presentChangeCurrentSubmissionResult(response: StepQuizReview.ChangeCurrentSubmission.Response)
     func presentSubmittedForReviewSubmission(response: StepQuizReview.SubmittedForReviewSubmissionPresentation.Response)
@@ -38,15 +38,15 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
         }
     }
 
-    func presentTeacherReview(response: StepQuizReview.TeacherReviewPresentation.Response) {
+    func presentReview(response: StepQuizReview.ReviewPresentation.Response) {
         if let url = self.urlFactory.makeReviewReviews(reviewID: response.review.id, unitID: response.unitID) {
-            self.viewController?.displayTeacherReview(viewModel: .init(url: url))
+            self.viewController?.displayReview(viewModel: .init(url: url))
         }
     }
 
-    func presentInstructorReview(response: StepQuizReview.InstructorReviewPresentation.Response) {
+    func presentReviewSession(response: StepQuizReview.ReviewSessionPresentation.Response) {
         if let url = self.urlFactory.makeReviewSession(sessionID: response.reviewSession.id) {
-            self.viewController?.displayInstructorReview(viewModel: .init(url: url))
+            self.viewController?.displayReviewSession(viewModel: .init(url: url))
         }
     }
 
@@ -153,6 +153,7 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             cost: step.progress?.cost,
             minReviewsCount: instruction?.instruction.minReviews,
             givenReviewsCount: session?.reviewSession.givenReviews.count,
+            isReviewAvailable: session?.reviewSession.isReviewAvailable,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
     }
@@ -206,6 +207,7 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             cost: nil,
             minReviewsCount: nil,
             givenReviewsCount: nil,
+            isReviewAvailable: nil,
             primaryActionButtonDescription: primaryActionButtonDescription
         )
     }

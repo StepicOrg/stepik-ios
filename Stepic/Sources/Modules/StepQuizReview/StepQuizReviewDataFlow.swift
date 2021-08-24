@@ -43,7 +43,7 @@ enum StepQuizReview {
     /// Load latest review data if needed
     enum QuizReviewRefresh {
         struct Request {
-            var afterTeacherReviewPresentation = false
+            var afterReviewPresentation = false
         }
     }
 
@@ -54,8 +54,8 @@ enum StepQuizReview {
         }
     }
 
-    /// Present teacher review in the web
-    enum TeacherReviewPresentation {
+    /// Present review in the web
+    enum ReviewPresentation {
         struct Response {
             let review: ReviewDataPlainObject
             let unitID: Unit.IdType?
@@ -110,7 +110,7 @@ enum StepQuizReview {
     }
 
     /// Present student review
-    enum InstructorReviewPresentation {
+    enum ReviewSessionPresentation {
         struct Response {
             let reviewSession: ReviewSessionDataPlainObject
         }
@@ -139,6 +139,8 @@ enum StepQuizReview {
         case teacherReviewSubmissions
         case teacherViewSubmissions
         case studentViewInstructorReview
+        case studentWriteReviews
+        case studentViewGivenReviews
 
         var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
     }

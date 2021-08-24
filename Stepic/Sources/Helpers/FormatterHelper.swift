@@ -183,6 +183,20 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format reviews count with localized and pluralized suffix; 1 -> "1 review was sent", 5 -> "5 reviews were sent"
+    static func quizGivenReviewsCount(_ count: Int) -> String {
+        let formattedReviewsCount = Self.quizReviewsCount(count)
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("StepQuizReviewGivenCompleted1", comment: ""),
+                NSLocalizedString("StepQuizReviewGivenCompleted234", comment: ""),
+                NSLocalizedString("StepQuizReviewGivenCompleted567890", comment: "")
+            ]
+        )
+        return String(format: pluralizedCountString, arguments: [formattedReviewsCount])
+    }
+
     /// Format reviews count with localized and pluralized suffix; 1 -> "1 new course for review", 5 -> "5 new courses for review"
     static func userCoursesReviewsPossibleReviewsCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(

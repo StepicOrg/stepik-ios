@@ -53,7 +53,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     }
 
     func doStepQuizReviewRefresh(request: StepQuizReview.QuizReviewRefresh.Request) {
-        if request.afterTeacherReviewPresentation {
+        if request.afterReviewPresentation {
             self.doStepQuizReviewLoad(request: .init())
         }
     }
@@ -64,8 +64,8 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
         }
 
         switch action {
-        case .teacherReviewSubmissions:
-            self.startTeacherReview()
+        case .teacherReviewSubmissions, .studentWriteReviews:
+            self.startReview()
         case .teacherViewSubmissions:
             self.presenter.presentSubmissions(
                 response: .init(
@@ -75,9 +75,9 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
                     filterQuery: .init(filters: [.reviewStatus(.awaiting)])
                 )
             )
-        case .studentViewInstructorReview:
+        case .studentViewInstructorReview, .studentViewGivenReviews:
             if let currentReviewSession = self.currentReviewSession {
-                self.presenter.presentInstructorReview(response: .init(reviewSession: currentReviewSession))
+                self.presenter.presentReviewSession(response: .init(reviewSession: currentReviewSession))
             }
         }
     }
@@ -182,7 +182,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
         }
     }
 
-    private func startTeacherReview() {
+    private func startReview() {
         guard let sessionID = self.step.sessionID else {
             return print("StepQuizReviewInteractor :: failed \(#function) no session")
         }
@@ -191,7 +191,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
 
         self.provider.createReview(sessionID: sessionID).compactMap { $0 }.done { review in
             self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true))
-            self.presenter.presentTeacherReview(response: .init(review: review, unitID: self.step.lesson?.unit?.id))
+            self.presenter.presentReview(response: .init(review: review, unitID: self.step.lesson?.unit?.id))
         }.catch { error in
             print("StepQuizReviewInteractor :: failed \(#function) with error = \(error)")
             self.presenter.presentBlockingLoadingIndicator(response: .init(shouldDismiss: true, showError: true))
@@ -268,8 +268,6 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
     func handleSubmissionEvaluated(submission: Submission) {
         self.moduleOutput?.handleSubmissionEvaluated(submission: submission)
 
-        print("StepQuizReviewInteractor :: \(#function) submission = \(submission)")
-
         guard !self.isTeacher,
               let currentStudentQuizData = self.currentStudentQuizData else {
             return
@@ -311,7 +309,7 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
             source: .init(dataSource: source)
         )
 
-        let isQuizDataChanged: Bool = {
+        let isQuizChanged: Bool = {
             if let currentQuizData = self.currentStudentQuizData {
                 return currentQuizData.value != newQuizData.value || currentQuizData.source != newQuizData.source
             }
@@ -321,12 +319,7 @@ extension StepQuizReviewInteractor: BaseQuizOutputProtocol {
         self.currentStudentQuizData = newQuizData
 
         DispatchQueue.main.async {
-            let shouldReload = !self.isFetchStudentDataInProgress && isQuizDataChanged
-            print(
-                "StepQuizReviewInteractor :: \(#function) newQuizData = \(newQuizData); shouldReload = \(shouldReload)"
-            )
-
-            if shouldReload {
+            if !self.isFetchStudentDataInProgress && isQuizChanged {
                 self.presentStepQuizReviewFromCurrentData()
             }
         }

@@ -3,8 +3,8 @@ import UIKit
 
 protocol StepQuizReviewViewControllerProtocol: AnyObject {
     func displayStepQuizReview(viewModel: StepQuizReview.QuizReviewLoad.ViewModel)
-    func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel)
-    func displayInstructorReview(viewModel: StepQuizReview.InstructorReviewPresentation.ViewModel)
+    func displayReview(viewModel: StepQuizReview.ReviewPresentation.ViewModel)
+    func displayReviewSession(viewModel: StepQuizReview.ReviewSessionPresentation.ViewModel)
     func displaySubmissions(viewModel: StepQuizReview.SubmissionsPresentation.ViewModel)
     func displayChangeCurrentSubmissionResult(viewModel: StepQuizReview.ChangeCurrentSubmission.ViewModel)
     func displaySubmittedForReviewSubmission(
@@ -22,7 +22,7 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
 
     private var childQuizModuleInput: BaseQuizInputProtocol?
 
-    private var didDisplayTeacherReview = false
+    private var didDisplayReviewInTheWeb = false
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
@@ -81,9 +81,9 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if self.didDisplayTeacherReview {
-            self.didDisplayTeacherReview = false
-            self.interactor.doStepQuizReviewRefresh(request: .init(afterTeacherReviewPresentation: true))
+        if self.didDisplayReviewInTheWeb {
+            self.didDisplayReviewInTheWeb = false
+            self.interactor.doStepQuizReviewRefresh(request: .init(afterReviewPresentation: true))
         }
     }
 
@@ -137,7 +137,7 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
         self.updateState(newState: viewModel.state)
     }
 
-    func displayTeacherReview(viewModel: StepQuizReview.TeacherReviewPresentation.ViewModel) {
+    func displayReview(viewModel: StepQuizReview.ReviewPresentation.ViewModel) {
         WebControllerManager.shared.presentWebControllerWithURL(
             viewModel.url,
             inController: self,
@@ -145,10 +145,10 @@ extension StepQuizReviewViewController: StepQuizReviewViewControllerProtocol {
             allowsSafari: true,
             backButtonStyle: .done
         )
-        self.didDisplayTeacherReview = true
+        self.didDisplayReviewInTheWeb = true
     }
 
-    func displayInstructorReview(viewModel: StepQuizReview.InstructorReviewPresentation.ViewModel) {
+    func displayReviewSession(viewModel: StepQuizReview.ReviewSessionPresentation.ViewModel) {
         WebControllerManager.shared.presentWebControllerWithURL(
             viewModel.url,
             inController: self,
