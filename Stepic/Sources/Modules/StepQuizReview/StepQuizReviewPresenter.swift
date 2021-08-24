@@ -124,23 +124,6 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             isMultipleChoice: (quizData?.attempt.dataset as? ChoiceDataset)?.isMultipleChoice ?? false
         )
 
-        let primaryActionButtonDescription: StepQuizReviewViewModel.ButtonDescription = {
-            switch instructionType {
-            case .instructor:
-                if stage == .completed {
-                    return .init(
-                        title: NSLocalizedString("StepQuizReviewInstructorCompletedAction", comment: ""),
-                        isEnabled: true,
-                        uniqueIdentifier: StepQuizReview.ActionType.studentViewInstructorReview.uniqueIdentifier
-                    )
-                }
-            case .peer:
-                break
-            }
-
-            return .init(title: "", isEnabled: false, uniqueIdentifier: "")
-        }()
-
         return StepQuizReviewViewModel(
             isInstructorInstructionType: instructionType == .instructor,
             isPeerInstructionType: instructionType == .peer,
@@ -155,7 +138,7 @@ final class StepQuizReviewPresenter: StepQuizReviewPresenterProtocol {
             givenReviewsCount: session?.reviewSession.givenReviews.count,
             takenReviewsCount: session?.reviewSession.takenReviews.count,
             isReviewAvailable: session?.reviewSession.isReviewAvailable,
-            primaryActionButtonDescription: primaryActionButtonDescription
+            primaryActionButtonDescription: .init(title: "", isEnabled: false, uniqueIdentifier: "")
         )
     }
 

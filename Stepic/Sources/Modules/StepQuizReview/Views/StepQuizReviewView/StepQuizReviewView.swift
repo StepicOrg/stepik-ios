@@ -195,9 +195,14 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                 return messageView
             case .completed:
                 let button = self.makePrimaryActionButton(
-                    description: viewModel.primaryActionButtonDescription,
+                    description: .init(
+                        title: NSLocalizedString("StepQuizReviewInstructorCompletedAction", comment: ""),
+                        isEnabled: true,
+                        uniqueIdentifier: StepQuizReview.ActionType.studentViewInstructorReview.uniqueIdentifier
+                    ),
                     isFilled: false
                 )
+                button.addTarget(self, action: #selector(self.viewInstructorReviewClicked), for: .touchUpInside)
                 primaryActionButton3 = button
                 return button
             }
@@ -669,7 +674,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         button.isEnabled = description.isEnabled
         button.alpha = button.isEnabled ? 1.0 : 0.5
         button.setTitle(description.title, for: .normal)
-        button.addTarget(self, action: #selector(self.primaryActionButtonClicked), for: .touchUpInside)
         return button
     }
 
@@ -700,10 +704,10 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
     }
 
     @objc
-    private func primaryActionButtonClicked() {
+    private func viewInstructorReviewClicked() {
         self.delegate?.stepQuizReviewViewView(
             self,
-            didClickButtonWith: self.storedViewModel?.primaryActionButtonDescription.uniqueIdentifier
+            didClickButtonWith: StepQuizReview.ActionType.studentViewInstructorReview.uniqueIdentifier
         )
     }
 
