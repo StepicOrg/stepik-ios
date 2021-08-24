@@ -12,11 +12,11 @@ final class NewStringQuizPresenter: NewStringQuizPresenterProtocol {
     private lazy var quizTitle: String = {
         switch self.type {
         case .string:
-            return NSLocalizedString("StringQuizTitle", comment: "")
+            return QuizTitleFactory.makeTitle(for: .string)
         case .number:
-            return NSLocalizedString("NumberQuizTitle", comment: "")
+            return QuizTitleFactory.makeTitle(for: .number)
         case .math:
-            return NSLocalizedString("MathQuizTitle", comment: "")
+            return QuizTitleFactory.makeTitle(for: .math)
         }
     }()
 

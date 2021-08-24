@@ -23,12 +23,8 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
             }
         }()
 
-        let title = response.isMultipleChoice
-            ? NSLocalizedString("MultipleChoiceQuizTitle", comment: "")
-            : NSLocalizedString("SingleChoiceQuizTitle", comment: "")
-
         let viewModel = NewChoiceQuizViewModel(
-            title: title,
+            title: QuizTitleFactory.makeTitle(for: .choice, isMultipleChoice: response.isMultipleChoice),
             choices: response.choices.map { choice in
                 let trimmedHint = choice.hint?.trimmed() ?? ""
 

@@ -14,6 +14,10 @@ protocol SubmissionsTableViewDataSourceDelegate: AnyObject {
         _ dataSource: SubmissionsTableViewDataSource,
         didSelectReview viewModel: SubmissionViewModel
     )
+    func submissionsTableViewDataSource(
+        _ dataSource: SubmissionsTableViewDataSource,
+        didSelectSubmission viewModel: SubmissionViewModel
+    )
 }
 
 final class SubmissionsTableViewDataSource: NSObject {
@@ -64,6 +68,13 @@ extension SubmissionsTableViewDataSource: UITableViewDataSource {
             }
 
             strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectReview: viewModel)
+        }
+        cell.onSelectSubmissionClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.submissionsTableViewDataSource(strongSelf, didSelectSubmission: viewModel)
         }
 
         return cell

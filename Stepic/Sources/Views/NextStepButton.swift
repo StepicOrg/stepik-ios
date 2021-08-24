@@ -57,6 +57,7 @@ final class NextStepButton: UIButton {
     enum Style {
         case filled
         case outlineDark
+        case outlineGreen
 
         fileprivate var titleColor: UIColor {
             switch self {
@@ -64,6 +65,8 @@ final class NextStepButton: UIButton {
                 return .dynamic(light: .white, dark: .stepikGreen)
             case .outlineDark:
                 return .stepikPrimaryText
+            case .outlineGreen:
+                return .stepikGreen
             }
         }
 
@@ -71,7 +74,7 @@ final class NextStepButton: UIButton {
             switch self {
             case .filled:
                 return .dynamic(light: .stepikGreen, dark: .stepikBackground)
-            case .outlineDark:
+            case .outlineDark, .outlineGreen:
                 return .stepikBackground
             }
         }
@@ -82,6 +85,8 @@ final class NextStepButton: UIButton {
                 return .dynamic(light: .clear, dark: .stepikGreen)
             case .outlineDark:
                 return .stepikSeparator
+            case .outlineGreen:
+                return .stepikGreen
             }
         }
     }

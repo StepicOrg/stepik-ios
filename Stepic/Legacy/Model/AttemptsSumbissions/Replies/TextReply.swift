@@ -10,6 +10,8 @@ final class TextReply: Reply {
         [JSONKey.text.rawValue: self.text]
     }
 
+    override var isEmpty: Bool { self.text.trimmed().isEmpty }
+    
     override var hash: Int {
         self.text.hashValue
     }

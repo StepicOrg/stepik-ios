@@ -1,3 +1,3 @@
 import Foundation
 
-protocol StepQuizReviewOutputProtocol: AnyObject {}
+protocol StepQuizReviewOutputProtocol: BaseQuizOutputProtocol {}

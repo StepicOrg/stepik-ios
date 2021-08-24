@@ -1,14 +1,29 @@
 import UIKit
 
 final class BaseQuizAssembly: Assembly {
-    private weak var moduleOutput: BaseQuizOutputProtocol?
-    private let step: Step
-    private let hasNextStep: Bool
+    var moduleInput: BaseQuizInputProtocol?
 
-    init(step: Step, hasNextStep: Bool = false, output: BaseQuizOutputProtocol? = nil) {
+    private weak var moduleOutput: BaseQuizOutputProtocol?
+
+    private let step: Step
+    private let config: BaseQuiz.Config
+
+    init(
+        step: Step,
+        config: BaseQuiz.Config = .init(hasNextStep: false),
+        output: BaseQuizOutputProtocol? = nil
+    ) {
         self.moduleOutput = output
         self.step = step
-        self.hasNextStep = hasNextStep
+        self.config = config
+    }
+
+    convenience init(
+        step: Step,
+        hasNextStep: Bool = false,
+        output: BaseQuizOutputProtocol? = nil
+    ) {
+        self.init(step: step, config: .init(hasNextStep: hasNextStep), output: output)
     }
 
     func makeModule() -> UIViewController {
@@ -31,10 +46,10 @@ final class BaseQuizAssembly: Assembly {
             submissionsPersistenceService: SubmissionsPersistenceService(),
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
-        let presenter = BaseQuizPresenter(urlFactory: StepikURLFactory())
+        let presenter = BaseQuizPresenter()
         let interactor = BaseQuizInteractor(
             step: self.step,
-            hasNextStep: self.hasNextStep,
+            config: self.config,
             presenter: presenter,
             provider: provider,
             analytics: StepikAnalytics.shared,
@@ -45,10 +60,12 @@ final class BaseQuizAssembly: Assembly {
         )
         let viewController = BaseQuizViewController(
             interactor: interactor,
-            quizAssembly: QuizAssemblyFactory().make(for: StepDataFlow.QuizType(blockName: self.step.block.name))
+            quizAssembly: QuizAssemblyFactory().make(for: StepDataFlow.QuizType(blockName: self.step.block.name)),
+            withHorizontalInsets: self.config.withHorizontalInsets
         )
 
         presenter.viewController = viewController
+        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController
