@@ -136,7 +136,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         self.statusesView.addArrangedReviewStatus(statusContainerView2)
 
         // 3
-        let statusView3 = StepQuizReviewStatusView()
+        let statusView3 = StepQuizReviewStatusView(shouldShowSeparator: false)
         statusView3.position = 3
         statusView3.isLastPosition = true
         statusView3.status = { () -> StepQuizReviewStatusView.Status in
@@ -208,10 +208,13 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             }
         }()
 
+        var statusContainerView3Appearance = StepQuizReviewStatusContainerView.Appearance()
+        statusContainerView3Appearance.contentViewInsets.top = 0
         let statusContainerView3 = StepQuizReviewStatusContainerView(
             headerView: statusView3,
             contentView: contentView3,
-            shouldShowSeparator: true
+            shouldShowSeparator: true,
+            appearance: statusContainerView3Appearance
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
 
@@ -451,7 +454,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         let statusContainerView3 = StepQuizReviewStatusContainerView(
             headerView: statusView3,
             contentView: contentView3,
-            shouldShowSeparator: contentView3 != nil,
+            shouldShowSeparator: true,
             appearance: statusContainerView3Appearance
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
@@ -559,7 +562,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         let statusContainerView4 = StepQuizReviewStatusContainerView(
             headerView: statusView4,
             contentView: contentView4,
-            shouldShowSeparator: contentView4 != nil,
+            shouldShowSeparator: true,
             appearance: statusContainerView4Appearance
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView4)
