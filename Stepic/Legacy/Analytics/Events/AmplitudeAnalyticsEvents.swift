@@ -263,6 +263,22 @@ extension AnalyticsEvent {
         )
     }
 
+    // MARK: - Review -
+
+    static let reviewSelectDifferentSubmissionClicked = AmplitudeAnalyticsEvent(
+        name: "Review Select Different Submission"
+    )
+
+    static let reviewSendCurrentSubmissionClicked = AmplitudeAnalyticsEvent(name: "Review Send Current Submission")
+
+    static let reviewSolveAgainClicked = AmplitudeAnalyticsEvent(name: "Review Solve Again")
+
+    static let reviewQuizTryAgainClicked = AmplitudeAnalyticsEvent(name: "Review Quiz Try Again")
+
+    static let reviewStartReviewClicked = AmplitudeAnalyticsEvent(name: "Review Start Review")
+
+    static let reviewViewReviewClicked = AmplitudeAnalyticsEvent(name: "Review View Review")
+
     // MARK: - Downloads -
 
     static let downloadsScreenOpened = AmplitudeAnalyticsEvent(name: "Downloads screen opened")

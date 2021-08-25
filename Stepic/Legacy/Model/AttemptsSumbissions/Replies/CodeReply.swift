@@ -18,6 +18,8 @@ final class CodeReply: Reply {
         ]
     }
 
+    override var isEmpty: Bool { self.code.trimmed().isEmpty }
+
     override var hash: Int {
         var result = self.code.hashValue
         result = result &* 31 &+ self.languageName.hashValue

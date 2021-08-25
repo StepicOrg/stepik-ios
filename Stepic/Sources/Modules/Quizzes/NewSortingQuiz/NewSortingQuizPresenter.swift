@@ -24,7 +24,7 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
         }()
 
         let viewModel = NewSortingQuizViewModel(
-            title: NSLocalizedString("SortingQuizTitle", comment: ""),
+            title: QuizTitleFactory.makeTitle(for: .sorting),
             options: response.options.map { .init(id: $0.id, text: $0.text) },
             finalState: state
         )

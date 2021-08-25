@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol InstructionsNetworkServiceProtocol: AnyObject {
     func fetch(id: Int) -> Promise<InstructionDataPlainObject?>
+    func fetch(ids: [Int]) -> Promise<[InstructionDataPlainObject]>
 }
 
 final class InstructionsNetworkService: InstructionsNetworkServiceProtocol {
@@ -17,6 +18,12 @@ final class InstructionsNetworkService: InstructionsNetworkServiceProtocol {
             .getInstruction(id: id)
             .map(self.mapInstructionsResponseToData)
             .map(\.first)
+    }
+
+    func fetch(ids: [Int]) -> Promise<[InstructionDataPlainObject]> {
+        self.instructionsAPI
+            .getInstructions(ids: ids)
+            .map(self.mapInstructionsResponseToData)
     }
 
     private func mapInstructionsResponseToData(_ response: InstructionsResponse) -> [InstructionDataPlainObject] {

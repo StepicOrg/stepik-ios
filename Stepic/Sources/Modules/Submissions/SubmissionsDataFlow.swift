@@ -46,6 +46,13 @@ enum Submissions {
         }
     }
 
+    /// Select submission
+    enum SubmissionSelection {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     enum ReviewPresentation {
         struct Request {
             let uniqueIdentifier: UniqueIdentifierType
@@ -126,6 +133,7 @@ enum Submissions {
         let submissions: [Submission]
         let instruction: InstructionDataPlainObject?
         let isTeacher: Bool
+        let isSelectionAvailable: Bool
         let hasNextPage: Bool
     }
 

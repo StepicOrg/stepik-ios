@@ -5,10 +5,12 @@ struct InstructionPlainObject: Equatable {
     let id: Int
     let step: Int
     let minReviews: Int
-    let strategyType: String
+    let strategyTypeString: String
     let rubrics: [Int]
     let isFrozen: Bool
     let text: String
+
+    var strategyType: InstructionType? { InstructionType(rawValue: self.strategyTypeString) }
 }
 
 extension InstructionPlainObject {
@@ -16,7 +18,7 @@ extension InstructionPlainObject {
         self.id = json[JSONKey.id.rawValue].intValue
         self.step = json[JSONKey.step.rawValue].intValue
         self.minReviews = json[JSONKey.minReviews.rawValue].intValue
-        self.strategyType = json[JSONKey.strategyType.rawValue].stringValue
+        self.strategyTypeString = json[JSONKey.strategyType.rawValue].stringValue
         self.rubrics = json[JSONKey.rubrics.rawValue].arrayValue.compactMap(\.int)
         self.isFrozen = json[JSONKey.isFrozen.rawValue].boolValue
         self.text = json[JSONKey.text.rawValue].stringValue

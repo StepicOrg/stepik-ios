@@ -599,6 +599,8 @@ extension UIColor {
             dark: UIColor.stepikExtraLightVioletFixed.withAlphaComponent(0.5)
         )
     }
+
+    static var quizReviewPendingBorder: UIColor { UIColor(hex6: 0x9E9E9E) }
 }
 
 // MARK: - ColorPalette -

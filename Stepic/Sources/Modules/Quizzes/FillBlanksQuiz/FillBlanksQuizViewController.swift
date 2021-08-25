@@ -43,6 +43,7 @@ extension FillBlanksQuizViewController: FillBlanksQuizViewControllerProtocol {
         self.collectionViewAdapter.components = viewModel.data.components
         self.collectionViewAdapter.finalState = viewModel.data.finalState
 
+        self.fillBlanksQuizView?.title = viewModel.data.title
         self.fillBlanksQuizView?.updateCollectionViewData(
             delegate: self.collectionViewAdapter,
             dataSource: self.collectionViewAdapter

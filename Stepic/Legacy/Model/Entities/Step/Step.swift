@@ -12,6 +12,13 @@ final class Step: NSManagedObject, ManagedObject, IDFetchable {
         return CourseType(rawValue: needsPlanStringValue)
     }
 
+    var instructionType: InstructionType? {
+        if let instructionTypeString = self.instructionTypeString {
+            return InstructionType(rawValue: instructionTypeString)
+        }
+        return nil
+    }
+
     required convenience init(json: JSON) {
         self.init(entity: Step.entity, insertInto: CoreDataHelper.shared.context)
         self.initialize(json)
@@ -27,7 +34,7 @@ final class Step: NSManagedObject, ManagedObject, IDFetchable {
         self.isEnabled = json[JSONKey.isEnabled.rawValue].bool ?? true
         self.sessionID = json[JSONKey.session.rawValue].int
         self.instructionID = json[JSONKey.instruction.rawValue].int
-        self.instructionType = json[JSONKey.instructionType.rawValue].string
+        self.instructionTypeString = json[JSONKey.instructionType.rawValue].string
         self.needsPlan = json[JSONKey.needsPlan.rawValue].string
 
         if let doReview = json[JSONKey.actions.rawValue][JSONKey.doReview.rawValue].string {

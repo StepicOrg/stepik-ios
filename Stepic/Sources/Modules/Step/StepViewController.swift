@@ -209,11 +209,22 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
                 return nil
             }
 
-            let assembly = BaseQuizAssembly(
-                step: stepViewModel.step,
-                hasNextStep: self.canNavigateToNextStep,
-                output: self
-            )
+            let assembly: Assembly
+
+            if stepViewModel.hasReview, let instructionType = stepViewModel.instructionType {
+                assembly = StepQuizReviewAssembly(
+                    step: stepViewModel.step,
+                    instructionType: instructionType,
+                    isTeacher: stepViewModel.isTeacher,
+                    output: nil
+                )
+            } else {
+                assembly = BaseQuizAssembly(
+                    step: stepViewModel.step,
+                    hasNextStep: self.canNavigateToNextStep,
+                    output: self
+                )
+            }
 
             return assembly.makeModule()
         }()
@@ -528,7 +539,7 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepDoneRequest(request: .init())
     }
 
-    func handleSubmissionEvaluated() {
+    func handleSubmissionEvaluated(submission: Submission) {
         self.interactor.doSolutionsButtonUpdate(request: .init())
     }
 
@@ -536,6 +547,10 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepNavigationRequest(request: .init(direction: .next))
     }
 }
+
+// MARK: - StepViewController: StepQuizReviewOutputProtocol -
+
+extension StepViewController: StepQuizReviewOutputProtocol {}
 
 // MARK: - StepViewController: StepikVideoPlayerViewControllerDelegate -
 

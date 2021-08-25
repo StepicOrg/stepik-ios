@@ -89,6 +89,13 @@ final class StepikURLFactory {
         )
     }
 
+    func makeReviewReviews(reviewID: Int, unitID: Unit.IdType? = nil) -> URL? {
+        self.makeURL(
+            path: .reviewReviews(reviewID),
+            queryItems: unitID != nil ? [.unit(unitID.require())] : []
+        )
+    }
+
     // MARK: Stepik Academy
 
     func makeStepikAcademy() -> URL? {
@@ -147,6 +154,7 @@ final class StepikURLFactory {
         case deleteUserAccount
         case catalog(CourseListModel.IdType?)
         case reviewSession(Int)
+        case reviewReviews(Int)
 
         var formattedPath: String {
             switch self {
@@ -177,6 +185,8 @@ final class StepikURLFactory {
                 return "/catalog"
             case .reviewSession(let sessionID):
                 return "/review/sessions/\(sessionID)"
+            case .reviewReviews(let reviewID):
+                return "/review/reviews/\(reviewID)"
             }
         }
     }
