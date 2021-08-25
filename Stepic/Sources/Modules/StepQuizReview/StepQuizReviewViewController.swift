@@ -18,6 +18,7 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
 
     private let step: Step
     private let isTeacher: Bool
+    private let hasNextStep: Bool
     private var state: StepQuizReview.ViewControllerState
 
     private let analytics: Analytics
@@ -34,12 +35,14 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
         interactor: StepQuizReviewInteractorProtocol,
         step: Step,
         isTeacher: Bool,
+        hasNextStep: Bool,
         initialState: StepQuizReview.ViewControllerState = .loading,
         analytics: Analytics
     ) {
         self.interactor = interactor
         self.step = step
         self.isTeacher = isTeacher
+        self.hasNextStep = hasNextStep
         self.state = initialState
         self.analytics = analytics
         super.init(nibName: nil, bundle: nil)
@@ -96,15 +99,18 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     // MARK: Private API
 
     private func setupQuizChildModule() {
-        let assembly = BaseQuizAssembly(
-            step: self.step,
-            config: .init(
+        let config: BaseQuiz.Config = self.isTeacher
+            ? .init(hasNextStep: self.hasNextStep)
+            : .init(
                 hasNextStep: false,
                 isTopSeparatorHidden: true,
                 isTitleHidden: true,
                 isReviewControlsAvailable: true,
                 withHorizontalInsets: false
-            ),
+              )
+        let assembly = BaseQuizAssembly(
+            step: self.step,
+            config: config,
             output: self.interactor as? BaseQuizOutputProtocol
         )
         let quizChildViewController = assembly.makeModule()

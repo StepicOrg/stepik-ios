@@ -4,6 +4,7 @@ final class StepQuizReviewAssembly: Assembly {
     private let step: Step
     private let instructionType: InstructionType
     private let isTeacher: Bool
+    private let hasNextStep: Bool
 
     private weak var moduleOutput: StepQuizReviewOutputProtocol?
 
@@ -11,11 +12,13 @@ final class StepQuizReviewAssembly: Assembly {
         step: Step,
         instructionType: InstructionType,
         isTeacher: Bool,
+        hasNextStep: Bool,
         output: StepQuizReviewOutputProtocol? = nil
     ) {
         self.step = step
         self.instructionType = instructionType
         self.isTeacher = isTeacher
+        self.hasNextStep = hasNextStep
         self.moduleOutput = output
     }
 
@@ -39,6 +42,7 @@ final class StepQuizReviewAssembly: Assembly {
             interactor: interactor,
             step: self.step,
             isTeacher: self.isTeacher,
+            hasNextStep: self.hasNextStep,
             analytics: StepikAnalytics.shared
         )
 
