@@ -8,5 +8,14 @@ struct FetchResult<T> {
     enum Source {
         case cache
         case remote
+
+        init(dataSource: DataSourceType) {
+            switch dataSource {
+            case .cache:
+                self = .cache
+            case .remote:
+                self = .remote
+            }
+        }
     }
 }

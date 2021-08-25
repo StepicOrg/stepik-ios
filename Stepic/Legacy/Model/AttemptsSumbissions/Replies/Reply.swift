@@ -6,6 +6,8 @@ class Reply: NSObject, NSSecureCoding {
 
     var dictValue: [String: Any] { [:] }
 
+    var isEmpty: Bool { false }
+
     override var description: String { "Reply(\(self.dictValue))" }
 
     override init() {

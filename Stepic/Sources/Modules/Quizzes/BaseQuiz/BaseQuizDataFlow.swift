@@ -8,7 +8,7 @@ enum BaseQuiz {
             let attempt: Attempt
             let submission: Submission
             let submissionsCount: Int
-            let hasNextStep: Bool
+            let config: BaseQuiz.Config
         }
 
         struct Request {
@@ -66,6 +66,16 @@ enum BaseQuiz {
         struct Request {}
     }
 
+    /// Send current submission for review
+    enum ReviewCreateSession {
+        struct Request {}
+    }
+
+    /// Select different submission for review
+    enum ReviewSelectDifferentSubmission {
+        struct Request {}
+    }
+
     enum ViewControllerState {
         case loading
         case result(data: BaseQuizViewModel)
@@ -75,5 +85,13 @@ enum BaseQuiz {
             case networkConnection
             case evaluateSubmission
         }
+    }
+
+    struct Config {
+        let hasNextStep: Bool
+        var isTopSeparatorHidden = false
+        var isTitleHidden = false
+        var isReviewControlsAvailable = false
+        var withHorizontalInsets = true
     }
 }

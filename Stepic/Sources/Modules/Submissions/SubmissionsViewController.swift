@@ -26,6 +26,7 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: SubmissionsInteractorProtocol
+    private let isSelectionEnabled: Bool
 
     private lazy var submissionsView = self.view as? SubmissionsView
     private lazy var paginationView = PaginationView()
@@ -48,11 +49,13 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
     init(
         interactor: SubmissionsInteractorProtocol,
+        isSelectionEnabled: Bool,
         initialState: Submissions.ViewControllerState = .loading,
         initialIsSubmissionsFilterAvailable: Bool,
         appearance: Appearance = .init()
     ) {
         self.interactor = interactor
+        self.isSelectionEnabled = isSelectionEnabled
         self.state = initialState
         self.initialIsSubmissionsFilterAvailable = initialIsSubmissionsFilterAvailable
         self.appearance = appearance
@@ -179,7 +182,9 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
             self.navigationItem.rightBarButtonItem = self.filterBarButtonItem
         } else {
             self.navigationItem.titleView = nil
-            self.title = NSLocalizedString("SubmissionsTitle", comment: "")
+            self.title = self.isSelectionEnabled
+                ? NSLocalizedString("SubmissionsTitleSelectSubmission", comment: "")
+                : NSLocalizedString("SubmissionsTitle", comment: "")
 
             self.navigationItem.leftBarButtonItem = nil
 
@@ -353,6 +358,13 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         didSelectReview viewModel: SubmissionViewModel
     ) {
         self.interactor.doReviewPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
+    }
+
+    func submissionsTableViewDataSource(
+        _ dataSource: SubmissionsTableViewDataSource,
+        didSelectSubmission viewModel: SubmissionViewModel
+    ) {
+        self.interactor.doSubmissionSelection(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
     }
 }
 

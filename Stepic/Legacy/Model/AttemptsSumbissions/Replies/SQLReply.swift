@@ -10,6 +10,8 @@ final class SQLReply: Reply {
         [JSONKey.solveSQL.rawValue: self.code]
     }
 
+    override var isEmpty: Bool { self.code.trimmed().isEmpty }
+
     override var hash: Int {
         self.code.hashValue
     }
