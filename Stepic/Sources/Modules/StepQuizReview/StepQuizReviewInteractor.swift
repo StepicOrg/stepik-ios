@@ -135,13 +135,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
         }.done { reviewSession, instruction in
             self.currentReviewSession = reviewSession
             self.currentInstruction = instruction
-
-            if let currentStudentQuizData = self.currentStudentQuizData {
-                print("StepQuizReviewInteractor :: \(#function) currentStudentQuizData = \(currentStudentQuizData)")
-                self.presentStepQuizReviewFromCurrentData()
-            } else {
-                print("StepQuizReviewInteractor :: \(#function) currentStudentQuizData is `nil`")
-            }
+            self.presentStepQuizReviewFromCurrentData()
         }.ensure {
             self.isFetchStudentDataInProgress = false
         }.catch { error in
