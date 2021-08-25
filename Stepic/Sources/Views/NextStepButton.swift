@@ -7,6 +7,8 @@ extension NextStepButton {
 
         var cornerRadius: CGFloat = 6
         var borderWidth: CGFloat = 1
+
+        var height: CGFloat?
     }
 }
 
@@ -23,6 +25,13 @@ final class NextStepButton: UIButton {
         didSet {
             self.alpha = self.isHighlighted ? 0.5 : 1.0
         }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: self.appearance.height ?? UIView.noIntrinsicMetric
+        )
     }
 
     init(

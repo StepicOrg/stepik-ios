@@ -183,8 +183,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             }
         }()
 
-        weak var primaryActionButton3: UIButton?
-
         let contentView3: UIView? = {
             switch statusView3.status {
             case .error, .pending:
@@ -202,8 +200,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                     ),
                     isFilled: false
                 )
-                button.addTarget(self, action: #selector(self.viewInstructorReviewClicked), for: .touchUpInside)
-                primaryActionButton3 = button
                 return button
             }
         }()
@@ -217,13 +213,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             appearance: statusContainerView3Appearance
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
-
-        if let primaryActionButton3 = primaryActionButton3 {
-            primaryActionButton3.translatesAutoresizingMaskIntoConstraints = false
-            primaryActionButton3.snp.makeConstraints { make in
-                make.height.equalTo(self.appearance.actionButtonHeight)
-            }
-        }
     }
 
     private func configurePeerReview(_ viewModel: StepQuizReviewViewModel) {
@@ -297,8 +286,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             }
         }()
 
-        weak var primaryActionButton3: UIButton?
-
         let contentView3: UIView? = {
             switch statusView3.status {
             case .error, .pending:
@@ -326,16 +313,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                             ),
                             isFilled: true
                         )
-                        primaryButton.addTarget(
-                            self,
-                            action: #selector(self.writeReviewsClicked),
-                            for: .touchUpInside
-                        )
-
                         stackView.addArrangedSubview(primaryButton)
-
-                        primaryButton.translatesAutoresizingMaskIntoConstraints = false
-                        primaryButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
                     } else {
                         let primaryButton = self.makePrimaryActionButton(
                             description: .init(
@@ -345,11 +323,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                             ),
                             isFilled: true
                         )
-
                         stackView.addArrangedSubview(primaryButton)
-
-                        primaryButton.translatesAutoresizingMaskIntoConstraints = false
-                        primaryButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
                     }
 
                     if givenReviewsCount > 0 {
@@ -361,16 +335,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                             ),
                             isFilled: false
                         )
-                        secondaryButton.addTarget(
-                            self,
-                            action: #selector(self.viewGivenReviewsClicked),
-                            for: .touchUpInside
-                        )
-
                         stackView.addArrangedSubview(secondaryButton)
-
-                        secondaryButton.translatesAutoresizingMaskIntoConstraints = false
-                        secondaryButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
                     }
 
                     return stackView
@@ -378,7 +343,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                     if isReviewAvailable {
                         let messageView = StepQuizReviewMessageView()
                         messageView.title = NSLocalizedString("StepQuizReviewGivenExtraNote", comment: "")
-                        stackView.addArrangedSubview(messageView)
 
                         let primaryButton = self.makePrimaryActionButton(
                             description: .init(
@@ -388,16 +352,9 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                             ),
                             isFilled: false
                         )
-                        primaryButton.addTarget(
-                            self,
-                            action: #selector(self.writeReviewsClicked),
-                            for: .touchUpInside
-                        )
 
+                        stackView.addArrangedSubview(messageView)
                         stackView.addArrangedSubview(primaryButton)
-
-                        primaryButton.translatesAutoresizingMaskIntoConstraints = false
-                        primaryButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
                     } else {
                         let secondaryButton = self.makePrimaryActionButton(
                             description: .init(
@@ -407,16 +364,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                             ),
                             isFilled: false
                         )
-                        secondaryButton.addTarget(
-                            self,
-                            action: #selector(self.viewGivenReviewsClicked),
-                            for: .touchUpInside
-                        )
-
                         stackView.addArrangedSubview(secondaryButton)
-
-                        secondaryButton.translatesAutoresizingMaskIntoConstraints = false
-                        secondaryButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
                     }
 
                     return stackView
@@ -432,19 +380,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                     ),
                     isFilled: false
                 )
-                secondaryButton.addTarget(
-                    self,
-                    action: #selector(self.viewGivenReviewsClicked),
-                    for: .touchUpInside
-                )
-
-                stackView.addArrangedSubview(secondaryButton)
-
-                secondaryButton.translatesAutoresizingMaskIntoConstraints = false
-                secondaryButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
-
-                primaryActionButton3 = secondaryButton
-
                 return secondaryButton
             }
         }()
@@ -458,13 +393,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
             appearance: statusContainerView3Appearance
         )
         self.statusesView.addArrangedReviewStatus(statusContainerView3)
-
-        if let primaryActionButton3 = primaryActionButton3 {
-            primaryActionButton3.translatesAutoresizingMaskIntoConstraints = false
-            primaryActionButton3.snp.makeConstraints { make in
-                make.height.equalTo(self.appearance.actionButtonHeight)
-            }
-        }
 
         // 4
         let statusView4 = StepQuizReviewStatusView(shouldShowSeparator: false)
@@ -526,16 +454,6 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                 ),
                 isFilled: false
             )
-            primaryActionButton.addTarget(self, action: #selector(self.viewTakenReviewsClicked), for: .touchUpInside)
-
-            let primaryActionButtonContainerView = UIView()
-            primaryActionButtonContainerView.addSubview(primaryActionButton)
-
-            primaryActionButton.translatesAutoresizingMaskIntoConstraints = false
-            primaryActionButton.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-                make.height.equalTo(self.appearance.actionButtonHeight)
-            }
 
             switch statusView3.status {
             case .error, .pending:
@@ -546,7 +464,7 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
                 }
 
                 if takenReviewsCount > 0 {
-                    return primaryActionButtonContainerView
+                    return primaryActionButton
                 } else {
                     let messageView = StepQuizReviewMessageView()
                     messageView.title = NSLocalizedString("StepQuizReviewTakenHint", comment: "")
@@ -673,10 +591,29 @@ final class StepQuizReviewView: UIView, StepQuizReviewViewProtocol {
         description: StepQuizReviewViewModel.ButtonDescription,
         isFilled: Bool
     ) -> UIButton {
-        let button = NextStepButton(style: isFilled ? .filled : .outlineGreen)
+        var appearance = NextStepButton.Appearance()
+        appearance.height = self.appearance.actionButtonHeight
+
+        let button = NextStepButton(appearance: appearance, style: isFilled ? .filled : .outlineGreen)
         button.isEnabled = description.isEnabled
         button.alpha = button.isEnabled ? 1.0 : 0.5
         button.setTitle(description.title, for: .normal)
+
+        if let action = StepQuizReview.ActionType(rawValue: description.uniqueIdentifier) {
+            switch action {
+            case .teacherReviewSubmissions, .teacherViewSubmissions:
+                break
+            case .studentViewInstructorReview:
+                button.addTarget(self, action: #selector(self.viewInstructorReviewClicked), for: .touchUpInside)
+            case .studentWriteReviews:
+                button.addTarget(self, action: #selector(self.writeReviewsClicked), for: .touchUpInside)
+            case .studentViewGivenReviews:
+                button.addTarget(self, action: #selector(self.viewGivenReviewsClicked), for: .touchUpInside)
+            case .studentViewTakenReviews:
+                button.addTarget(self, action: #selector(self.viewTakenReviewsClicked), for: .touchUpInside)
+            }
+        }
+
         return button
     }
 
