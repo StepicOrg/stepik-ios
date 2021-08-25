@@ -105,7 +105,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-_UIConstraintBasedLayoutLogUnsatisfiable NO"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.apple.CoreData.ConcurrencyDebug 1"
