@@ -9,6 +9,8 @@ protocol BaseQuizViewControllerProtocol: AnyObject {
 final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: BaseQuizInteractorProtocol
 
+    private let analytics: Analytics
+
     private let withHorizontalInsets: Bool
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -33,11 +35,13 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
     init(
         interactor: BaseQuizInteractorProtocol,
         quizAssembly: QuizAssembly,
+        analytics: Analytics,
         withHorizontalInsets: Bool,
         initialState: BaseQuiz.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.quizAssembly = quizAssembly
+        self.analytics = analytics
         self.withHorizontalInsets = withHorizontalInsets
         self.state = initialState
 
@@ -184,14 +188,17 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
     }
 
     func baseQuizViewDidRequestReviewCreateSession(_ view: BaseQuizView) {
+        self.analytics.send(.reviewSendCurrentSubmissionClicked)
         self.interactor.doReviewCreateSession(request: .init())
     }
 
     func baseQuizViewDidRequestReviewSolveAgain(_ view: BaseQuizView) {
+        self.analytics.send(.reviewSolveAgainClicked)
         self.submitCurrentReply()
     }
 
     func baseQuizViewDidRequestReviewSelectDifferentSubmission(_ view: BaseQuizView) {
+        self.analytics.send(.reviewSelectDifferentSubmissionClicked)
         self.interactor.doReviewSelectDifferentSubmission(request: .init())
     }
 

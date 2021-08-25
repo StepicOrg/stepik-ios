@@ -14,6 +14,8 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     private let presenter: StepQuizReviewPresenterProtocol
     private let provider: StepQuizReviewProviderProtocol
 
+    private let analytics: Analytics
+
     private let step: Step
     private let instructionType: InstructionType
     private let isTeacher: Bool
@@ -35,13 +37,15 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
         instructionType: InstructionType,
         isTeacher: Bool,
         presenter: StepQuizReviewPresenterProtocol,
-        provider: StepQuizReviewProviderProtocol
+        provider: StepQuizReviewProviderProtocol,
+        analytics: Analytics
     ) {
         self.step = step
         self.instructionType = instructionType
         self.isTeacher = isTeacher
         self.presenter = presenter
         self.provider = provider
+        self.analytics = analytics
     }
 
     func doStepQuizReviewLoad(request: StepQuizReview.QuizReviewLoad.Request) {
@@ -65,6 +69,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
 
         switch action {
         case .teacherReviewSubmissions, .studentWriteReviews:
+            self.analytics.send(.reviewStartReviewClicked)
             self.startReview()
         case .teacherViewSubmissions:
             self.presenter.presentSubmissions(
@@ -76,6 +81,7 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
                 )
             )
         case .studentViewInstructorReview, .studentViewGivenReviews, .studentViewTakenReviews:
+            self.analytics.send(.reviewViewReviewClicked)
             if let currentReviewSession = self.currentReviewSession {
                 self.presenter.presentReviewSession(response: .init(reviewSession: currentReviewSession))
             }

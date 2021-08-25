@@ -61,6 +61,7 @@ final class BaseQuizAssembly: Assembly {
         let viewController = BaseQuizViewController(
             interactor: interactor,
             quizAssembly: QuizAssemblyFactory().make(for: StepDataFlow.QuizType(blockName: self.step.block.name)),
+            analytics: StepikAnalytics.shared,
             withHorizontalInsets: self.config.withHorizontalInsets
         )
 

@@ -34,12 +34,14 @@ final class StepQuizReviewAssembly: Assembly {
             instructionType: self.instructionType,
             isTeacher: self.isTeacher,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            analytics: StepikAnalytics.shared
         )
         let viewController = StepQuizReviewViewController(
             interactor: interactor,
             step: self.step,
-            isTeacher: self.isTeacher
+            isTeacher: self.isTeacher,
+            analytics: StepikAnalytics.shared
         )
 
         presenter.viewController = viewController

@@ -20,6 +20,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
     private let isTeacher: Bool
     private var state: StepQuizReview.ViewControllerState
 
+    private let analytics: Analytics
+
     private var childQuizModuleInput: BaseQuizInputProtocol?
 
     private var didDisplayReviewInTheWeb = false
@@ -32,12 +34,14 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
         interactor: StepQuizReviewInteractorProtocol,
         step: Step,
         isTeacher: Bool,
-        initialState: StepQuizReview.ViewControllerState = .loading
+        initialState: StepQuizReview.ViewControllerState = .loading,
+        analytics: Analytics
     ) {
         self.interactor = interactor
         self.step = step
         self.isTeacher = isTeacher
         self.state = initialState
+        self.analytics = analytics
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -64,6 +68,8 @@ final class StepQuizReviewViewController: UIViewController, ControllerWithStepik
                     guard let strongSelf = self else {
                         return
                     }
+
+                    strongSelf.analytics.send(.reviewQuizTryAgainClicked)
 
                     strongSelf.updateState(newState: .loading)
                     strongSelf.interactor.doStepQuizReviewLoad(request: .init())
