@@ -13,6 +13,8 @@ final class FreeAnswerReply: Reply {
         ]
     }
 
+    override var isEmpty: Bool { self.text.trimmed().isEmpty }
+
     override var hash: Int {
         self.text.hashValue
     }

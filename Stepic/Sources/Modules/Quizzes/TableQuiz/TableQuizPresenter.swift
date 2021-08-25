@@ -13,7 +13,7 @@ final class TableQuizPresenter: TableQuizPresenterProtocol {
         let state = self.mapQuizStatusToTableQuizState(status: response.status)
 
         let viewModel = TableQuizViewModel(
-            title: NSLocalizedString("TableQuizTitle", comment: ""),
+            title: QuizTitleFactory.makeTitle(for: .table),
             rows: response.rows,
             columns: response.columns,
             isMultipleChoice: response.isMultipleChoice,

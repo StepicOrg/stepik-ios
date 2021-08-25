@@ -38,7 +38,8 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 currentUserID: data.currentUserID,
                                 submission: submission,
                                 instruction: data.instruction,
-                                isTeacher: data.isTeacher
+                                isTeacher: data.isTeacher,
+                                isSelectionAvailable: data.isSelectionAvailable
                             )
                         },
                         isSubmissionsFilterAvailable: data.isTeacher,
@@ -68,7 +69,8 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
                                 currentUserID: data.currentUserID,
                                 submission: submission,
                                 instruction: data.instruction,
-                                isTeacher: data.isTeacher
+                                isTeacher: data.isTeacher,
+                                isSelectionAvailable: data.isSelectionAvailable
                             )
                         },
                         isSubmissionsFilterAvailable: data.isTeacher,
@@ -141,18 +143,21 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
         currentUserID: User.IdType?,
         submission: Submission,
         instruction: InstructionDataPlainObject?,
-        isTeacher: Bool
+        isTeacher: Bool,
+        isSelectionAvailable: Bool
     ) -> SubmissionViewModel {
         let username = FormatterHelper.username(user)
         let relativeDateString = FormatterHelper.dateToRelativeString(submission.time)
 
-        let reviewViewModel = self.makeReviewViewModel(
-            currentUserID: currentUserID,
-            submission: submission,
-            instruction: instruction,
-            isTeacher: isTeacher,
-            username: username
-        )
+        let reviewViewModel = isSelectionAvailable
+            ? nil
+            : self.makeReviewViewModel(
+                currentUserID: currentUserID,
+                submission: submission,
+                instruction: instruction,
+                isTeacher: isTeacher,
+                username: username
+              )
 
         let formattedScore: String? = {
             if reviewViewModel != nil {
@@ -186,6 +191,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             score: formattedScore,
             quizStatus: QuizStatus(submission: submission) ?? .wrong,
             isMoreActionAvailable: isTeacher,
+            isSelectionAvailable: isSelectionAvailable,
             review: reviewViewModel
         )
     }

@@ -10,6 +10,8 @@ final class MatchingReply: Reply {
         [JSONKey.ordering.rawValue: self.ordering]
     }
 
+    override var isEmpty: Bool { self.ordering.isEmpty }
+
     override var hash: Int {
         self.ordering.hashValue
     }
