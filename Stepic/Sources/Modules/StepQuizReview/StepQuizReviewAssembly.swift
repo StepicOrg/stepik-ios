@@ -1,8 +1,6 @@
 import UIKit
 
 final class StepQuizReviewAssembly: Assembly {
-    var moduleInput: StepQuizReviewInputProtocol?
-
     private let step: Step
     private let instructionType: InstructionType
     private let isTeacher: Bool
@@ -45,7 +43,6 @@ final class StepQuizReviewAssembly: Assembly {
         )
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

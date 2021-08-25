@@ -262,8 +262,6 @@ final class StepQuizReviewInteractor: StepQuizReviewInteractorProtocol {
     }
 }
 
-extension StepQuizReviewInteractor: StepQuizReviewInputProtocol {}
-
 // MARK: - StepQuizReviewInteractor: BaseQuizOutputProtocol -
 
 extension StepQuizReviewInteractor: BaseQuizOutputProtocol {

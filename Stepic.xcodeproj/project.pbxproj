@@ -1664,7 +1664,6 @@
 		62E98FFD1EEDB775EE381221 /* CourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F968FBB3ED0E6309407 /* CourseListPresenter.swift */; };
 		64AF865C5174A2A525C5FB8A /* NewProfileCreatedCoursesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E1D17883366854D97EDB /* NewProfileCreatedCoursesPresenter.swift */; };
 		64F1FC49DFF47555128FA13C /* NewProfileCertificatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCAF185A5BB14E3BFB36948 /* NewProfileCertificatesPresenter.swift */; };
-		650AED6B28B1467E537B4A3F /* StepQuizReviewInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF9D234DA6CAAC3B2B33CFA /* StepQuizReviewInputProtocol.swift */; };
 		6670CEAE1D677A5EADD37531 /* UserCoursesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC26997F83B299C9E3FCC5D /* UserCoursesAssembly.swift */; };
 		69C6D82E51B19E566B93C25F /* CatalogBlocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED2F7CA17040D19760C2C /* CatalogBlocksView.swift */; };
 		6A10E1CBC8245445C41FB9F8 /* LessonFinishedStepsPanModalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0250C97AA6FB7D60234B25A /* LessonFinishedStepsPanModalProvider.swift */; };
@@ -3769,7 +3768,6 @@
 		FBE5DD451A3D87D0E23671D3 /* NewProfileCreatedCoursesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesViewController.swift; sourceTree = "<group>"; };
 		FC5ECBB626DE50DBB703854D /* UserCoursesReviewsWidgetAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsWidgetAssembly.swift; sourceTree = "<group>"; };
 		FD262F6408255BFC2FE5DD6F /* SimpleCourseListOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SimpleCourseListOutputProtocol.swift; sourceTree = "<group>"; };
-		FEF9D234DA6CAAC3B2B33CFA /* StepQuizReviewInputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StepQuizReviewInputProtocol.swift; sourceTree = "<group>"; };
 		FF7C2E426B3D67D0EB13D312 /* StepQuizReviewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StepQuizReviewPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -9391,7 +9389,6 @@
 		91D32F71B09110FE560C222E /* InputOutput */ = {
 			isa = PBXGroup;
 			children = (
-				FEF9D234DA6CAAC3B2B33CFA /* StepQuizReviewInputProtocol.swift */,
 				6058D78761B6DEBB4A1B3CAB /* StepQuizReviewOutputProtocol.swift */,
 			);
 			path = InputOutput;
@@ -12040,7 +12037,6 @@
 				45E69103B20AF96523AEE3F6 /* StepQuizReviewProvider.swift in Sources */,
 				18290C447B539261A8ED4135 /* StepQuizReviewView.swift in Sources */,
 				314618ACBB0339BB33E8F48E /* StepQuizReviewViewController.swift in Sources */,
-				650AED6B28B1467E537B4A3F /* StepQuizReviewInputProtocol.swift in Sources */,
 				015598254C071835594BB121 /* StepQuizReviewOutputProtocol.swift in Sources */,
 				62E98F13BC8E26F8FBC95D7A /* ManagedObject.swift in Sources */,
 			);
