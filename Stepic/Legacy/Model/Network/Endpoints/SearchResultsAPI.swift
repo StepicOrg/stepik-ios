@@ -24,7 +24,7 @@ final class SearchResultsAPI: APIEndpoint {
         searchQueryParams: Parameters,
         filterQuery: CourseListFilterQuery? = nil,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
-        success: @escaping ([SearchResult], Meta) -> Void,
+        success: @escaping ([SearchResultPlainObject], Meta) -> Void,
         error errorHandler: @escaping (Error) -> Void
     ) -> Request? {
         var params: Parameters = [
@@ -64,7 +64,7 @@ final class SearchResultsAPI: APIEndpoint {
                 let meta = Meta(json: json["meta"])
                 let searchResults = json["search-results"]
                     .arrayValue
-                    .map { SearchResult(json: $0) }
+                    .map { SearchResultPlainObject(json: $0) }
                 success(searchResults, meta)
             case .failure(let error):
                 errorHandler(error)
@@ -79,8 +79,8 @@ final class SearchResultsAPI: APIEndpoint {
         searchQueryParams: Parameters = RemoteConfig.shared.searchResultsQueryParams,
         filterQuery: CourseListFilterQuery? = nil,
         headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
-    ) -> Promise<([SearchResult], Meta)> {
-        Promise<([SearchResult], Meta)> { seal in
+    ) -> Promise<([SearchResultPlainObject], Meta)> {
+        Promise<([SearchResultPlainObject], Meta)> { seal in
             self.search(
                 query: query,
                 type: "course",

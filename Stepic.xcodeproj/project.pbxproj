@@ -43,7 +43,7 @@
 		080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
 		080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
 		080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
-		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
+		080DCF171C4518BC00DE3E2E /* SearchResultPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResultPlainObject.swift */; };
 		080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */; };
 		080E1ACE212583E5006B58A9 /* StoryTemplatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */; };
 		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
@@ -1890,7 +1890,7 @@
 		080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsAPI.swift; sourceTree = "<group>"; };
 		080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptsAPI.swift; sourceTree = "<group>"; };
 		080CE1601E9581960089A27F /* SubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionsAPI.swift; sourceTree = "<group>"; };
-		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		080DCF161C4518BC00DE3E2E /* SearchResultPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultPlainObject.swift; sourceTree = "<group>"; };
 		080E1ACB212571D9006B58A9 /* StoryPartViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartViewFactory.swift; sourceTree = "<group>"; };
 		080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTemplatesAPI.swift; sourceTree = "<group>"; };
 		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
@@ -6280,6 +6280,14 @@
 			path = Concurrency;
 			sourceTree = "<group>";
 		};
+		2CCEB1A326D8CFDF001C83B6 /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				080DCF161C4518BC00DE3E2E /* SearchResultPlainObject.swift */,
+			);
+			path = SearchResult;
+			sourceTree = "<group>";
+		};
 		2CD30B49256D69EF00E5912B /* CatalogBlocksSubmodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -7003,7 +7011,6 @@
 				86624A741FC76682008E7E6C /* NotificationsStatus.swift */,
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
 				082E5E0D1F46379100F41426 /* ReplyCache.swift */,
-				080DCF161C4518BC00DE3E2E /* SearchResult.swift */,
 				088E73F32061BDAA00D458E3 /* StepikModelView.swift */,
 				08E6BB6A1DC8EB45006622EC /* UserActivity.swift */,
 				2CFF900B242A248800FD7311 /* Alerts */,
@@ -7663,6 +7670,7 @@
 				2C97764225D6CBD2008778D6 /* Block */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
 				2CF8DF4525F22F9900F577C2 /* Review */,
+				2CCEB1A326D8CFDF001C83B6 /* SearchResult */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
 				2CA9308F253C86BD007B717A /* Video */,
 			);
@@ -10628,7 +10636,7 @@
 				2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */,
 				2C71BC0926B34D43000AF7B8 /* BasePersistenceService.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */,
-				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
+				080DCF171C4518BC00DE3E2E /* SearchResultPlainObject.swift in Sources */,
 				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,

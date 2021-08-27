@@ -222,7 +222,7 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
                 page: page,
                 filterQuery: self.type.filterQuery
             ).then { result, meta -> Promise<([Course], [Course.IdType], Meta)> in
-                let ids = result.compactMap { $0.courseId }
+                let ids = result.compactMap(\.courseID)
                 return self.coursesAPI
                     .retrieve(ids: ids)
                     .map { ($0, ids, meta) }
