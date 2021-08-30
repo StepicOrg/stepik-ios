@@ -1,18 +1,14 @@
-//
-//  Meta.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 16.09.15.
-//  Copyright (c) 2015 Alex Karpov. All rights reserved.
-//
-
+import Foundation
 import SwiftyJSON
-import UIKit
 
 struct Meta {
-    var hasNext: Bool
-    var hasPrev: Bool
-    var page: Int
+    let hasNext: Bool
+    let hasPrev: Bool
+    let page: Int
+
+    static var oneAndOnlyPage: Meta {
+        Meta(hasNext: false, hasPrev: false, page: 1)
+    }
 
     init(hasNext: Bool, hasPrev: Bool, page: Int) {
         self.hasNext = hasNext
@@ -21,12 +17,15 @@ struct Meta {
     }
 
     init(json: JSON) {
-        hasNext = json["has_next"].boolValue
-        hasPrev = json["has_previous"].boolValue
-        page = json["page"].intValue
+        self.hasNext = json[JSONKey.hasNext.rawValue].boolValue
+        self.hasPrev = json[JSONKey.hasPrevious.rawValue].boolValue
+        self.page = json[JSONKey.page.rawValue].intValue
     }
 
-    static var oneAndOnlyPage: Meta {
-        Meta(hasNext: false, hasPrev: false, page: 1)
+    enum JSONKey: String {
+        case meta
+        case hasNext = "has_next"
+        case hasPrevious = "has_previous"
+        case page
     }
 }

@@ -216,7 +216,7 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
 
     func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
-            self.searchResultsAPI.searchCourse(
+            self.searchResultsAPI.searchCourses(
                 query: self.type.query,
                 language: self.type.language,
                 page: page,
