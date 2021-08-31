@@ -1,7 +1,7 @@
 import CoreData
 import Foundation
 
-final class SearchResultsQuery: NSManagedObject, ManagedObject, Identifiable {
+final class SearchQueryResult: NSManagedObject, ManagedObject, Identifiable {
     typealias IdType = String
 
     static var defaultSortDescriptors: [NSSortDescriptor] {
@@ -13,8 +13,8 @@ final class SearchResultsQuery: NSManagedObject, ManagedObject, Identifiable {
         courseID: Course.IdType,
         query: String,
         searchResults: [SearchResultPlainObject]
-    ) -> SearchResultsQuery {
-        let entity: SearchResultsQuery = context.insertObject()
+    ) -> SearchQueryResult {
+        let entity: SearchQueryResult = context.insertObject()
 
         entity.id = self.makeID(courseID: courseID, query: query)
         entity.query = query

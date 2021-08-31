@@ -343,6 +343,13 @@
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedProgress" inverseEntity="Step" syncable="YES"/>
         <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedProgress" inverseEntity="Unit" syncable="YES"/>
     </entity>
+    <entity name="SearchQueryResult" representedClassName=".SearchQueryResult" syncable="YES">
+        <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedId" attributeType="String" defaultValueString="" syncable="YES"/>
+        <attribute name="managedLastSearchDate" attributeType="Date" defaultDateTimeInterval="-10800" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedQuery" attributeType="String" defaultValueString="" syncable="YES"/>
+        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SearchResult" inverseName="managedSearchQueryResult" inverseEntity="SearchResult" syncable="YES"/>
+    </entity>
     <entity name="SearchResult" representedClassName=".SearchResult" syncable="YES">
         <attribute name="managedCommentId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCommentParentId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
@@ -364,14 +371,7 @@
         <attribute name="managedStepPosition" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTargetId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTargetTypeString" attributeType="String" defaultValueString="" syncable="YES"/>
-        <relationship name="managedSearchResultsQuery" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchResultsQuery" inverseName="managedSearchResults" inverseEntity="SearchResultsQuery" syncable="YES"/>
-    </entity>
-    <entity name="SearchResultsQuery" representedClassName=".SearchResultsQuery" syncable="YES">
-        <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedId" attributeType="String" defaultValueString="" syncable="YES"/>
-        <attribute name="managedLastSearchDate" attributeType="Date" defaultDateTimeInterval="-10800" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedQuery" attributeType="String" defaultValueString="" syncable="YES"/>
-        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SearchResult" inverseName="managedSearchResultsQuery" inverseEntity="SearchResult" syncable="YES"/>
+        <relationship name="managedSearchQueryResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchQueryResult" inverseName="managedSearchResults" inverseEntity="SearchQueryResult" syncable="YES"/>
     </entity>
     <entity name="Section" representedClassName=".Section" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -588,6 +588,6 @@
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
         <element name="SearchResult" positionX="-450" positionY="-234" width="128" height="344"/>
-        <element name="SearchResultsQuery" positionX="-441" positionY="-225" width="128" height="104"/>
+        <element name="SearchQueryResult" positionX="-441" positionY="-225" width="128" height="104"/>
     </elements>
 </model>

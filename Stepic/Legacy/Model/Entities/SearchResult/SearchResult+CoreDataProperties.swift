@@ -28,7 +28,7 @@ extension SearchResult {
     @NSManaged var managedCommentUserId: NSNumber?
     @NSManaged var managedCommentText: String?
 
-    @NSManaged var managedSearchResultsQuery: SearchResultsQuery?
+    @NSManaged var managedSearchQueryResult: SearchQueryResult?
 
     var id: Int {
         get {
@@ -214,12 +214,12 @@ extension SearchResult {
         }
     }
 
-    var searchResultsQuery: SearchResultsQuery? {
+    var searchQueryResult: SearchQueryResult? {
         get {
-            self.managedSearchResultsQuery
+            self.managedSearchQueryResult
         }
         set {
-            self.managedSearchResultsQuery = newValue
+            self.managedSearchQueryResult = newValue
         }
     }
 }

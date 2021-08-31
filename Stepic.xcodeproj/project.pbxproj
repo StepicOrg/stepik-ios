@@ -835,8 +835,8 @@
 		2C98423626DE2AD00098E36B /* SearchResultsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98423526DE2AD00098E36B /* SearchResultsNetworkService.swift */; };
 		2C98423A26DE4C750098E36B /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98423926DE4C750098E36B /* SearchResult.swift */; };
 		2C98423C26DE4CA80098E36B /* SearchResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98423B26DE4CA80098E36B /* SearchResult+CoreDataProperties.swift */; };
-		2C98423F26DE58A80098E36B /* SearchResultsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98423E26DE58A80098E36B /* SearchResultsQuery.swift */; };
-		2C98424126DE59880098E36B /* SearchResultsQuery+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98424026DE59880098E36B /* SearchResultsQuery+CoreDataProperties.swift */; };
+		2C98423F26DE58A80098E36B /* SearchQueryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98423E26DE58A80098E36B /* SearchQueryResult.swift */; };
+		2C98424126DE59880098E36B /* SearchQueryResult+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98424026DE59880098E36B /* SearchQueryResult+CoreDataProperties.swift */; };
 		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
 		2C9959FD25F758EC00459588 /* ReviewSessionDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */; };
 		2C995A0725F765DF00459588 /* ReviewDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */; };
@@ -2757,8 +2757,8 @@
 		2C98423726DE4B9C0098E36B /* Model_search_results_v87.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_search_results_v87.xcdatamodel; sourceTree = "<group>"; };
 		2C98423926DE4C750098E36B /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		2C98423B26DE4CA80098E36B /* SearchResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2C98423E26DE58A80098E36B /* SearchResultsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsQuery.swift; sourceTree = "<group>"; };
-		2C98424026DE59880098E36B /* SearchResultsQuery+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsQuery+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C98423E26DE58A80098E36B /* SearchQueryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQueryResult.swift; sourceTree = "<group>"; };
+		2C98424026DE59880098E36B /* SearchQueryResult+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQueryResult+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionDataPlainObject.swift; sourceTree = "<group>"; };
 		2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataPlainObject.swift; sourceTree = "<group>"; };
@@ -5160,13 +5160,13 @@
 			path = SearchResult;
 			sourceTree = "<group>";
 		};
-		2C98423D26DE58810098E36B /* SearchResultsQuery */ = {
+		2C98423D26DE58810098E36B /* SearchQueryResult */ = {
 			isa = PBXGroup;
 			children = (
-				2C98423E26DE58A80098E36B /* SearchResultsQuery.swift */,
-				2C98424026DE59880098E36B /* SearchResultsQuery+CoreDataProperties.swift */,
+				2C98423E26DE58A80098E36B /* SearchQueryResult.swift */,
+				2C98424026DE59880098E36B /* SearchQueryResult+CoreDataProperties.swift */,
 			);
-			path = SearchResultsQuery;
+			path = SearchQueryResult;
 			sourceTree = "<group>";
 		};
 		2C99D087238967FD00078D2B /* Events */ = {
@@ -7213,7 +7213,7 @@
 				2CFF9026242A265F00FD7311 /* Profile */,
 				2CFF9027242A266A00FD7311 /* Progress */,
 				2C98423826DE4C510098E36B /* SearchResult */,
-				2C98423D26DE58810098E36B /* SearchResultsQuery */,
+				2C98423D26DE58810098E36B /* SearchQueryResult */,
 				2CFF9028242A267700FD7311 /* Section */,
 				2C619A7924CFFB80007D3529 /* SocialProfile */,
 				2CFF9029242A268300FD7311 /* Step */,
@@ -11375,7 +11375,7 @@
 				62E984F67D9ABF29B20E3FE0 /* CourseInfoTabReviewsDataFlow.swift in Sources */,
 				62E985ECF3D5E323FB5BB696 /* CourseInfoTabReviewsInteractor.swift in Sources */,
 				62E981BBBECE92A2FB466928 /* CourseInfoTabReviewsPresenter.swift in Sources */,
-				2C98424126DE59880098E36B /* SearchResultsQuery+CoreDataProperties.swift in Sources */,
+				2C98424126DE59880098E36B /* SearchQueryResult+CoreDataProperties.swift in Sources */,
 				62E989F0993725FEC558BD9F /* CourseInfoTabReviewsProvider.swift in Sources */,
 				62E9892C98A98F4BA0091292 /* CourseInfoTabReviewsViewController.swift in Sources */,
 				62E9821A67345F87FDB1314D /* CourseInfoTabReviewsViewModel.swift in Sources */,
@@ -11817,7 +11817,7 @@
 				62E9845FED4A17B731CD314A /* WriteCommentViewController.swift in Sources */,
 				62E98373328574F3493D6AE0 /* WriteCommentViewModel.swift in Sources */,
 				62E9829D238FEEDA8DC159CA /* WriteCommentOutputProtocol.swift in Sources */,
-				2C98423F26DE58A80098E36B /* SearchResultsQuery.swift in Sources */,
+				2C98423F26DE58A80098E36B /* SearchQueryResult.swift in Sources */,
 				62E980B8758DEF7D06A56FB5 /* WriteCommentSolutionControl.swift in Sources */,
 				62E980D610A476A99FF7CAF4 /* WriteCourseReviewAssembly.swift in Sources */,
 				62E9852E9E2178B0917B73F6 /* WriteCourseReviewDataFlow.swift in Sources */,

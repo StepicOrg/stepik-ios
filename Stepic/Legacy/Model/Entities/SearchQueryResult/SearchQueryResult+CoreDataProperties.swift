@@ -1,7 +1,7 @@
 import CoreData
 import Foundation
 
-extension SearchResultsQuery {
+extension SearchQueryResult {
     @NSManaged var managedId: String
     @NSManaged var managedQuery: String
     @NSManaged var managedCourseId: NSNumber?
