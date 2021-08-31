@@ -64,8 +64,4 @@ final class SearchResultsNetworkService: SearchResultsNetworkServiceProtocol {
     ) -> Promise<([SearchResultPlainObject], Meta)> {
         self.searchResultsAPI.searchByCourse(query: query, course: courseID, page: page)
     }
-
-    enum Error: Swift.Error {
-        case fetchFailed
-    }
 }
