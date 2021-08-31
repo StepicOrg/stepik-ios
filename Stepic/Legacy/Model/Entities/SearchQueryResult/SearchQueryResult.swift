@@ -21,11 +21,12 @@ final class SearchQueryResult: NSManagedObject, ManagedObject, Identifiable {
         entity.courseID = courseID
         entity.lastSearchDate = Date()
         entity.searchResults = searchResults.map { SearchResult.insert(into: context, searchResult: $0) }
+        entity.searchResults.forEach { $0.searchQueryResult = entity }
 
         return entity
     }
 
-    private static func makeID(courseID: Course.IdType, query: String) -> IdType {
+    static func makeID(courseID: Course.IdType, query: String) -> IdType {
         let processedQuery = query.trimmed().lowercased()
         return "\(courseID)-\(processedQuery)"
     }
