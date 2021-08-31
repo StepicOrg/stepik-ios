@@ -832,6 +832,7 @@
 		2C97E00E215E480F005684A1 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
 		2C97E00F215E482B005684A1 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* SearchResultsViewController.swift */; };
 		2C97E010215E5246005684A1 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
+		2C98423626DE2AD00098E36B /* SearchResultsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98423526DE2AD00098E36B /* SearchResultsNetworkService.swift */; };
 		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
 		2C9959FD25F758EC00459588 /* ReviewSessionDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */; };
 		2C995A0725F765DF00459588 /* ReviewDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */; };
@@ -2748,6 +2749,7 @@
 		2C97764325D6CBE6008778D6 /* BlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockType.swift; sourceTree = "<group>"; };
 		2C97765125D6CF0F008778D6 /* CoursePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObject.swift; sourceTree = "<group>"; };
 		2C9776E924222AED0097AEFC /* UIView+TraitCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TraitCollection.swift"; sourceTree = "<group>"; };
+		2C98423526DE2AD00098E36B /* SearchResultsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsNetworkService.swift; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionDataPlainObject.swift; sourceTree = "<group>"; };
 		2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataPlainObject.swift; sourceTree = "<group>"; };
@@ -8263,6 +8265,7 @@
 				2C5D340125C988FA00372C61 /* PromoCodesNetworkService.swift */,
 				2CF8DF7225F2682100F577C2 /* ReviewSessionsNetworkService.swift */,
 				2C96290E26B9856F00C9EA9C /* ReviewsNetworkService.swift */,
+				2C98423526DE2AD00098E36B /* SearchResultsNetworkService.swift */,
 				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
 				2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */,
 				2C6A22F6267A4F1000B1476D /* StepicsNetworkService.swift */,
@@ -10700,6 +10703,7 @@
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */,
 				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
+				2C98423626DE2AD00098E36B /* SearchResultsNetworkService.swift in Sources */,
 				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
 				2CDC9EFA24E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,

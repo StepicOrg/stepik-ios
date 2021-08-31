@@ -10,7 +10,7 @@ final class SearchResultsAPI: APIEndpoint {
         query: String,
         language: ContentLanguage,
         page: Int,
-        searchQueryParams: Parameters = RemoteConfig.shared.searchResultsQueryParams,
+        searchQueryParams: JSONDictionary = RemoteConfig.shared.searchResultsQueryParams,
         filterQuery: CourseListFilterQuery?
     ) -> Promise<([SearchResultPlainObject], Meta)> {
         self.search(
@@ -46,10 +46,10 @@ final class SearchResultsAPI: APIEndpoint {
         language: ContentLanguage?,
         course: Int?,
         page: Int?,
-        searchQueryParams: Parameters?,
+        searchQueryParams: JSONDictionary?,
         filterQuery: CourseListFilterQuery?
     ) -> Promise<([SearchResultPlainObject], Meta)> {
-        var params: Parameters = [
+        var params: JSONDictionary = [
             "query": query.lowercased()
         ]
 
