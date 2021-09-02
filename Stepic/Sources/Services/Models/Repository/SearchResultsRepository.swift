@@ -2,12 +2,23 @@ import Foundation
 import PromiseKit
 
 protocol SearchResultsRepositoryProtocol: AnyObject {
-    func fetchByCourse(
+    func searchInCourse(
+        _ courseID: Course.IdType,
         query: String,
-        courseID: Course.IdType,
         page: Int,
         dataSourceType: DataSourceType
     ) -> Promise<([SearchResultPlainObject], Meta)>
+}
+
+extension SearchResultsRepositoryProtocol {
+    func searchInCourse(
+        _ course: Course,
+        query: String,
+        page: Int,
+        dataSourceType: DataSourceType
+    ) -> Promise<([SearchResultPlainObject], Meta)> {
+        self.searchInCourse(course.id, query: query, page: page, dataSourceType: dataSourceType)
+    }
 }
 
 final class SearchResultsRepository: SearchResultsRepositoryProtocol {
@@ -22,9 +33,9 @@ final class SearchResultsRepository: SearchResultsRepositoryProtocol {
         self.searchQueryResultsPersistenceService = searchQueryResultsPersistenceService
     }
 
-    func fetchByCourse(
+    func searchInCourse(
+        _ courseID: Course.IdType,
         query: String,
-        courseID: Course.IdType,
         page: Int,
         dataSourceType: DataSourceType
     ) -> Promise<([SearchResultPlainObject], Meta)> {
@@ -42,7 +53,7 @@ final class SearchResultsRepository: SearchResultsRepositoryProtocol {
                 }
         case .remote:
             return self.searchResultsNetworkService
-                .fetchByCourse(query: query, courseID: courseID, page: page)
+                .searchInCourse(courseID, query: query, page: page)
                 .then { remoteSearchResults, meta in
                     self.searchQueryResultsPersistenceService
                         .save(query: query, courseID: courseID, page: page, searchResults: remoteSearchResults)

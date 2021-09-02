@@ -66,7 +66,7 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
             case .content:
                 self.showPlaceholder(for: .connectionErrorContentLoad)
             case .search:
-                self.showPlaceholder(for: .connectionErrorSearchByCourse)
+                self.showPlaceholder(for: .connectionErrorSearchInCourse)
             }
         case .result(let data):
             self.isPlaceholderShown = false
@@ -112,7 +112,7 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
                     // retry search
                 }
             ),
-            for: .connectionErrorSearchByCourse
+            for: .connectionErrorSearchInCourse
         )
         self.registerPlaceholder(placeholder: .init(.emptyCourseSearchSuggestions), for: .emptySuggestions)
         self.registerPlaceholder(placeholder: .init(.emptyCourseSearchSuggestions), for: .emptySearchResults)
@@ -135,8 +135,8 @@ private extension StepikPlaceholderControllerContainer.PlaceholderState {
         id: "connectionErrorContentLoad"
     )
 
-    static let connectionErrorSearchByCourse = StepikPlaceholderControllerContainer.PlaceholderState(
-        id: "connectionErrorSearchByCourse"
+    static let connectionErrorSearchInCourse = StepikPlaceholderControllerContainer.PlaceholderState(
+        id: "connectionErrorSearchInCourse"
     )
 
     static let emptySuggestions = StepikPlaceholderControllerContainer.PlaceholderState(id: "emptySuggestions")

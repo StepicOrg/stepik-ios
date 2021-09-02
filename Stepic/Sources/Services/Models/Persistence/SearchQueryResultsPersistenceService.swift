@@ -75,7 +75,7 @@ final class SearchQueryResultsPersistenceService: BasePersistenceService<SearchQ
                 }
             } else {
                 self.managedObjectContext.performChanges {
-                    _ = SearchQueryResult.insertSearchByCourseResults(
+                    _ = SearchQueryResult.insertSearchInCourseResults(
                         into: self.managedObjectContext,
                         courseID: courseID,
                         query: query,
