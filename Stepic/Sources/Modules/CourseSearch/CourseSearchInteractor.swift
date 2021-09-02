@@ -16,6 +16,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     private let courseID: Course.IdType
 
     private var currentCourse: Course?
+    private var currentSearchQueryResults = [SearchQueryResult]()
 
     init(
         presenter: CourseSearchPresenterProtocol,
@@ -28,6 +29,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     }
 
     func doCourseContentLoad(request: CourseSearch.CourseContentLoad.Request) {
+        print("CourseSearchInteractor :: loading content")
         when(
             fulfilled: self.provider.fetchCourse(),
             self.provider.fetchSuggestions(fetchLimit: Self.defaultSuggestionsFetchLimit)
@@ -37,12 +39,17 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             }
             return nil
         }.done { course, suggestions in
-            self.currentCourse = course
             print("CourseSearchInteractor :: content loaded")
-            print(suggestions)
-            print(course.title)
+
+            self.currentCourse = course
+            self.currentSearchQueryResults = suggestions
+
+            self.presenter.presentCourseContent(
+                response: .init(result: .success(.init(course: course, searchQueryResults: suggestions)))
+            )
         }.catch { error in
-            print("CourseSearchInteractor :: failed fetch content with error = \(error)")
+            print("CourseSearchInteractor :: failed load content with error = \(error)")
+            self.presenter.presentCourseContent(response: .init(result: .failure(error)))
         }
     }
 }

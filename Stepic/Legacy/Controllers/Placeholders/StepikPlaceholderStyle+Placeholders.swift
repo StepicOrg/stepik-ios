@@ -162,6 +162,18 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("CourseRevenueEmptyCourseBenefitsTitle", comment: ""),
         buttonTitle: nil
     )
+    static let emptyCourseSearchSuggestions = StepikPlaceholderStyle(
+        id: "emptyCourseSearchSuggestions",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-course-benefits"), scale: 0.99),
+        text: NSLocalizedString("CourseSearchPlaceholderEmptySuggesions", comment: ""),
+        buttonTitle: nil
+    )
+    static let emptyCourseSearchResults = StepikPlaceholderStyle(
+        id: "emptyCourseSearchResults",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-noconnection"), scale: 0.49),
+        text: NSLocalizedString("CourseSearchPlaceholderEmptySearchResults", comment: ""),
+        buttonTitle: nil
+    )
 }
 
 extension StepikPlaceholder.Style {
@@ -181,7 +193,9 @@ extension StepikPlaceholder.Style {
             .emptyProfileLoading,
             .emptySections,
             .emptyUnits,
-            .emptyCourseBenefits
+            .emptyCourseBenefits,
+            .emptyCourseSearchSuggestions,
+            .emptyCourseSearchResults
         ]
     }
 }
