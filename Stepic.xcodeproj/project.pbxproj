@@ -16,6 +16,7 @@
 		062AB834A48F37524A84D976 /* NewProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE4213EB9F9BB5C2C25E78 /* NewProfileInteractor.swift */; };
 		0791DFE4B73F0C765044006C /* FillBlanksQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D07472E32C2DC0EE070CE /* FillBlanksQuizInteractor.swift */; };
 		07D41EBCF7EE589FF01C3457 /* NewProfileCertificatesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009A8D41353D2ECAACAB303D /* NewProfileCertificatesDataFlow.swift */; };
+		07E09A9AA17EC2FDCFA5616C /* CourseSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429497D178104E4DF68B16C /* CourseSearchPresenter.swift */; };
 		07F30A0440E03D9E51762E60 /* SubmissionsFilterOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1335D9DD2A130563C0EA06D6 /* SubmissionsFilterOutputProtocol.swift */; };
 		0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
 		0800B81B1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
@@ -342,6 +343,7 @@
 		097807181FEAD22C2DE65676 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E0D8A3998163442A02FB0 /* NewProfileView.swift */; };
 		09ACDC74180F4250D7E8573D /* NewProfileSocialProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9B962777693E708B98356 /* NewProfileSocialProfilesView.swift */; };
 		09D3CF0B1191F77777422700 /* AuthorsCourseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7EEE6C9EC897044BAEBA7 /* AuthorsCourseListPresenter.swift */; };
+		0A4C9BA0D668107A241C7F21 /* CourseSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D5653D57BD0E3C8E9490F8 /* CourseSearchInteractor.swift */; };
 		0AB9C1D11180119E2B231364 /* CourseRevenueTabPurchasesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66781826E1BFE3888B98D7E7 /* CourseRevenueTabPurchasesAssembly.swift */; };
 		0BCE34E8356EA252F3F2CD34 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE29F0C2017792418DCA3A /* NewProfileViewController.swift */; };
 		0E263F845429D4A13FBB7ED0 /* CourseBenefitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812902FE72DE5F64FCC48841 /* CourseBenefitDetailView.swift */; };
@@ -1169,14 +1171,17 @@
 		2CFFC6262681F1CE005D3082 /* ExpandContentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFFC6252681F1CE005D3082 /* ExpandContentControl.swift */; };
 		314618ACBB0339BB33E8F48E /* StepQuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20EE766983EF4FCEB8DA1C /* StepQuizReviewViewController.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
+		336AE4E02F04637EA6EEB9E2 /* CourseSearchOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77326F6B330193D9D50E47BD /* CourseSearchOutputProtocol.swift */; };
 		3547E584AFEE09996EB90808 /* UserCoursesReviewsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64AF153016C7406F9244FD9 /* UserCoursesReviewsOutputProtocol.swift */; };
 		354FA57C59AEF5BEFCEE2936 /* AuthorsCourseListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02FE3CE59DBF4D12871ED55 /* AuthorsCourseListProvider.swift */; };
+		36F4C9CA87408D6BE195F4DB /* CourseSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A6C330102AA1FB203C0E9D /* CourseSearchProvider.swift */; };
 		375F2EB161DE5DAAED3FEA98 /* NewProfileStreakNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */; };
 		3817EBF30A4CB97036ABA9B7 /* TableQuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5C2A5CDF6CD9FA686E5D06 /* TableQuizAssembly.swift */; };
 		38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BEAD644C47C1E37629DAF /* FillBlanksQuizView.swift */; };
 		39AB2324EB824124A83D7534 /* UserCoursesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AF7B8FAACF8A4D31AF7583 /* UserCoursesInteractor.swift */; };
 		3B56681D248C577ED6D9491F /* UserCoursesReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9EABC3559C7152B7A21484 /* UserCoursesReviewsView.swift */; };
 		3D1926CF24EF88C0E8DD4810 /* LessonFinishedStepsPanModalDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AA980E65D068EB9A20F675 /* LessonFinishedStepsPanModalDataFlow.swift */; };
+		3E4170D55BD05702BCCA1363 /* CourseSearchDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D86030F398CD8790E0CEE4 /* CourseSearchDataFlow.swift */; };
 		3E467D12F5BA4AE24B7BB030 /* FillBlanksQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B41CD0EE056CA3361EEB /* FillBlanksQuizPresenter.swift */; };
 		3F8A824B6CDEA20CEC0DCC4F /* LessonFinishedDemoPanModalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3EA298A00E3C1DF87D33A7 /* LessonFinishedDemoPanModalProvider.swift */; };
 		4411DBAC80EEAF128EE11E61 /* UserCoursesReviewsWidgetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5640965B54B334D3C660E01 /* UserCoursesReviewsWidgetInteractor.swift */; };
@@ -1677,6 +1682,7 @@
 		69C6D82E51B19E566B93C25F /* CatalogBlocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EED2F7CA17040D19760C2C /* CatalogBlocksView.swift */; };
 		6A10E1CBC8245445C41FB9F8 /* LessonFinishedStepsPanModalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0250C97AA6FB7D60234B25A /* LessonFinishedStepsPanModalProvider.swift */; };
 		6ADEFFDE33B06A7049CF8E2F /* NewProfileCertificatesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC925F9685393FA44977549 /* NewProfileCertificatesAssembly.swift */; };
+		6C92601BC04D155B948F85DD /* CourseSearchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AC500A2080A2C5AC312AF /* CourseSearchAssembly.swift */; };
 		6D3288F90505044F2DB76FA8 /* SubmissionsFilterDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8336942AE67DE9A75C7FC37 /* SubmissionsFilterDataFlow.swift */; };
 		6E71905283A952608BEDF67D /* WishlistWidgetInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD706EACE58852DD2B4DAAB5 /* WishlistWidgetInputProtocol.swift */; };
 		6F14B006F6FC72C95763EEA9 /* CourseRevenueTabMonthlyAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F543EF337D0853E38B44C /* CourseRevenueTabMonthlyAssembly.swift */; };
@@ -1769,6 +1775,7 @@
 		CB429BDBAF7772B836FCA675 /* NewProfileStreakNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */; };
 		CC81627A3343CB1F28B98772 /* StepikAcademyCourseListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D664C83C2A5490B7145E /* StepikAcademyCourseListInteractor.swift */; };
 		CCB00B7C98EC98B9B2425301 /* WishlistWidgetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0A9DAE7A8784F97DCD9A3 /* WishlistWidgetInteractor.swift */; };
+		CE2D65E8DE837794C28FCE8F /* CourseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B55F0052BB2F2648649BD17 /* CourseSearchView.swift */; };
 		CE3BDE67E09B4AE682B47898 /* WishlistWidgetAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02DC9C787CD055F92FC14A8 /* WishlistWidgetAssembly.swift */; };
 		D0EC355329C93B41463C75F9 /* NewProfileSocialProfilesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A061513F473CC4D8745A02 /* NewProfileSocialProfilesAssembly.swift */; };
 		D305E595AB176E591584083C /* LessonFinishedDemoPanModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481132AEA7BC453EB69DA98B /* LessonFinishedDemoPanModalView.swift */; };
@@ -1779,6 +1786,7 @@
 		D8CBAA006512D47ABCFC91EE /* SubmissionsFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9B8CBFEB5A7B28629D919 /* SubmissionsFilterInteractor.swift */; };
 		DA1ACE98741C42B9DCBBFB02 /* NewProfileCertificatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F5E8235E0245E5D5CB6BC /* NewProfileCertificatesProvider.swift */; };
 		DA79093AB5627C652A4830CC /* SimpleCourseListOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD262F6408255BFC2FE5DD6F /* SimpleCourseListOutputProtocol.swift */; };
+		DC5FCB70BBA645C8B0FD099E /* CourseSearchInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD940736CD396BA58F15E0E /* CourseSearchInputProtocol.swift */; };
 		DC691DE6A703CA3702B46D6E /* CourseRevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDCD2B0B52258C5DD02078 /* CourseRevenueView.swift */; };
 		DD6ADDCB2B61676CFC5DFABD /* CourseBenefitDetailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A6BCEA9AE3995EBE4D87AC /* CourseBenefitDetailProvider.swift */; };
 		DEB6D4688CFFDA1C5080CA4B /* AuthorsCourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09E6F2AFFE7DFA834D0EA1E /* AuthorsCourseListView.swift */; };
@@ -1793,6 +1801,7 @@
 		E9EA0D1ED18C79E73AAA88EA /* CourseRevenueTabPurchasesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3882976255274D96CB1831 /* CourseRevenueTabPurchasesProvider.swift */; };
 		EC2BD2389537AF3BD14D51EA /* UserCoursesReviewsWidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EFB9BB0FE158509DFEE4CB /* UserCoursesReviewsWidgetViewController.swift */; };
 		ECD21878641B360C12E8C585 /* NewProfileCreatedCoursesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4A385A37C2127557150147 /* NewProfileCreatedCoursesOutputProtocol.swift */; };
+		EDA99A62A014CFFA0B64C09E /* CourseSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33074471A14A38067198824D /* CourseSearchViewController.swift */; };
 		EE315359D4CBD905081C5F10 /* StepQuizReviewDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B0D81FECC529158A0A2819 /* StepQuizReviewDataFlow.swift */; };
 		EF3252195A0C7A3F15319D12 /* CourseRevenueTabMonthlyOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC77B0366A93534ED54B43B3 /* CourseRevenueTabMonthlyOutputProtocol.swift */; };
 		EFAD92E3201AC22530847975 /* UserCoursesReviewsWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E13FD794C7B66976D1C5A2 /* UserCoursesReviewsWidgetProvider.swift */; };
@@ -3122,6 +3131,7 @@
 		2DE7EAB2A2F9CEA6B017FEC1 /* CourseRevenueTabMonthlyProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabMonthlyProvider.swift; sourceTree = "<group>"; };
 		2E59399897BC3C31A430FA2B /* SubmissionsFilterAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SubmissionsFilterAssembly.swift; sourceTree = "<group>"; };
 		2FA5E1D17883366854D97EDB /* NewProfileCreatedCoursesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesPresenter.swift; sourceTree = "<group>"; };
+		33074471A14A38067198824D /* CourseSearchViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchViewController.swift; sourceTree = "<group>"; };
 		342AEC970102A4B3CA9FD0DC /* AuthorsCourseListOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListOutputProtocol.swift; sourceTree = "<group>"; };
 		383E389EDEA545B7F09F70EF /* Pods-StepicTests.production release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.production release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.production release.xcconfig"; sourceTree = "<group>"; };
 		3B343CD0106AAF3E89DE7F23 /* LessonFinishedStepsPanModalOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalOutputProtocol.swift; sourceTree = "<group>"; };
@@ -3135,6 +3145,7 @@
 		3F6D07472E32C2DC0EE070CE /* FillBlanksQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizInteractor.swift; sourceTree = "<group>"; };
 		4026ACBBA0C3F084DA6D5A6E /* NewProfileStreakNotificationsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsView.swift; sourceTree = "<group>"; };
 		40D8B41CD0EE056CA3361EEB /* FillBlanksQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizPresenter.swift; sourceTree = "<group>"; };
+		410AC500A2080A2C5AC312AF /* CourseSearchAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchAssembly.swift; sourceTree = "<group>"; };
 		424840FC832A3CF79ACD98CF /* StepikAcademyCourseListPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListPresenter.swift; sourceTree = "<group>"; };
 		4356ADE389830A4DB65CC0D7 /* CatalogBlocksViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CatalogBlocksViewController.swift; sourceTree = "<group>"; };
 		44CA1414D85B7D7645957E8F /* StepikAcademyCourseListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListViewController.swift; sourceTree = "<group>"; };
@@ -3160,6 +3171,7 @@
 		58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsPresenter.swift; sourceTree = "<group>"; };
 		59E13FD794C7B66976D1C5A2 /* UserCoursesReviewsWidgetProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsWidgetProvider.swift; sourceTree = "<group>"; };
 		5AF3FBAFFE1578394C476293 /* NewProfileAchievementsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsDataFlow.swift; sourceTree = "<group>"; };
+		5B55F0052BB2F2648649BD17 /* CourseSearchView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchView.swift; sourceTree = "<group>"; };
 		5E3F17A80C27FC320C04904E /* UserCoursesReviewsWidgetPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsWidgetPresenter.swift; sourceTree = "<group>"; };
 		5EE4ED6E9648215F1B416059 /* LessonFinishedStepsPanModalView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalView.swift; sourceTree = "<group>"; };
 		5F44F022FE4FF6422DC2CAA9 /* DebugMenuProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DebugMenuProvider.swift; sourceTree = "<group>"; };
@@ -3646,6 +3658,7 @@
 		72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityView.swift; sourceTree = "<group>"; };
 		75A30D817521E42507A608B3 /* NewProfileCertificatesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesInteractor.swift; sourceTree = "<group>"; };
 		75B4327DE945A7D6C60553E1 /* SubmissionsFilterPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SubmissionsFilterPresenter.swift; sourceTree = "<group>"; };
+		77326F6B330193D9D50E47BD /* CourseSearchOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchOutputProtocol.swift; sourceTree = "<group>"; };
 		77A061513F473CC4D8745A02 /* NewProfileSocialProfilesAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesAssembly.swift; sourceTree = "<group>"; };
 		77F668BE1FBD15A64170DAE6 /* AuthorsCourseListDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListDataFlow.swift; sourceTree = "<group>"; };
 		78AA738A584651A3F55AD9DB /* WishlistWidgetViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WishlistWidgetViewController.swift; sourceTree = "<group>"; };
@@ -3715,9 +3728,11 @@
 		AC70D0220ABA60A77FC65411 /* FillBlanksQuizDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizDataFlow.swift; sourceTree = "<group>"; };
 		AD0054F69D610FEA28F620F8 /* Pods-StepicTests.production debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.production debug.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.production debug.xcconfig"; sourceTree = "<group>"; };
 		AFD58CADEE08103A32F03B4D /* NewProfileUserActivityDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityDataFlow.swift; sourceTree = "<group>"; };
+		AFD940736CD396BA58F15E0E /* CourseSearchInputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchInputProtocol.swift; sourceTree = "<group>"; };
 		B1FCF7BCE261D5A901F33E09 /* CourseRevenueTabPurchasesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabPurchasesViewController.swift; sourceTree = "<group>"; };
 		B259C3826C752171E0305872 /* DownloadARQuickLookAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookAssembly.swift; sourceTree = "<group>"; };
 		B26B27DECDA72A6EF6835559 /* UserCoursesReviewsAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsAssembly.swift; sourceTree = "<group>"; };
+		B2D5653D57BD0E3C8E9490F8 /* CourseSearchInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchInteractor.swift; sourceTree = "<group>"; };
 		B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsViewController.swift; sourceTree = "<group>"; };
 		B3FDC926BE23A9131D45DFF0 /* DownloadARQuickLookView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadARQuickLookView.swift; sourceTree = "<group>"; };
 		B7B8028216D0178B5F2E2594 /* LessonFinishedStepsPanModalViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalViewController.swift; sourceTree = "<group>"; };
@@ -3737,6 +3752,7 @@
 		C1A4BED02A9D05CB0787EBE1 /* UserCoursesDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesDataFlow.swift; sourceTree = "<group>"; };
 		C3CD51D524F420F6D7137B45 /* AuthorsCourseListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListViewController.swift; sourceTree = "<group>"; };
 		C3D9EED5EEE97039386A4608 /* Pods-StepicTests.release debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release debug.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release debug.xcconfig"; sourceTree = "<group>"; };
+		C6A6C330102AA1FB203C0E9D /* CourseSearchProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchProvider.swift; sourceTree = "<group>"; };
 		C708AF7697119029D8782B8D /* CourseRevenueDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueDataFlow.swift; sourceTree = "<group>"; };
 		C98827BB61058743B5E75389 /* WishlistWidgetDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WishlistWidgetDataFlow.swift; sourceTree = "<group>"; };
 		CA31F479AD773151414AAAD4 /* Pods-Stepic.release debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.release debug.xcconfig"; sourceTree = "<group>"; };
@@ -3762,9 +3778,11 @@
 		DD4A385A37C2127557150147 /* NewProfileCreatedCoursesOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesOutputProtocol.swift; sourceTree = "<group>"; };
 		E358732932D647EFD60F96E8 /* NewProfileSocialProfilesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesInteractor.swift; sourceTree = "<group>"; };
 		E3ED7422D4B76AAD73F35E6E /* UserCoursesReviewsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsInteractor.swift; sourceTree = "<group>"; };
+		E429497D178104E4DF68B16C /* CourseSearchPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchPresenter.swift; sourceTree = "<group>"; };
 		E4A0BB5098635CCE7F5825B0 /* NewProfileAchievementsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsView.swift; sourceTree = "<group>"; };
 		E5640965B54B334D3C660E01 /* UserCoursesReviewsWidgetInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsWidgetInteractor.swift; sourceTree = "<group>"; };
 		E5937121E75E587D45B6356B /* CourseRevenueTabMonthlyInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabMonthlyInteractor.swift; sourceTree = "<group>"; };
+		E8D86030F398CD8790E0CEE4 /* CourseSearchDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseSearchDataFlow.swift; sourceTree = "<group>"; };
 		E9B98DD75AFD25B4028D8A48 /* NewProfileSocialProfilesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesProvider.swift; sourceTree = "<group>"; };
 		EA3DD53832CC0C786A41D65C /* DebugMenuInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DebugMenuInteractor.swift; sourceTree = "<group>"; };
 		EA6A4070C7AACD5DDD9D7C13 /* CourseRevenueAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueAssembly.swift; sourceTree = "<group>"; };
@@ -8053,6 +8071,7 @@
 				A388C28D8A01FA87F6D7DB7F /* CourseListFilter */,
 				AE8E95AC21DDBC74DB58EC21 /* CourseRevenue */,
 				2CDA533C26823AED00F9D7D8 /* CourseRevenueSubmodules */,
+				C77D5B586F22BD42A24A8279 /* CourseSearch */,
 				29158916AB913ECC71C78A69 /* DebugMenu */,
 				62E98F5D5F63567C4BAD33BA /* Discussions */,
 				65528C371B5396082973517C /* DownloadARQuickLook */,
@@ -9558,6 +9577,21 @@
 			path = UserCourses;
 			sourceTree = "<group>";
 		};
+		C77D5B586F22BD42A24A8279 /* CourseSearch */ = {
+			isa = PBXGroup;
+			children = (
+				410AC500A2080A2C5AC312AF /* CourseSearchAssembly.swift */,
+				E8D86030F398CD8790E0CEE4 /* CourseSearchDataFlow.swift */,
+				B2D5653D57BD0E3C8E9490F8 /* CourseSearchInteractor.swift */,
+				E429497D178104E4DF68B16C /* CourseSearchPresenter.swift */,
+				C6A6C330102AA1FB203C0E9D /* CourseSearchProvider.swift */,
+				5B55F0052BB2F2648649BD17 /* CourseSearchView.swift */,
+				33074471A14A38067198824D /* CourseSearchViewController.swift */,
+				F921371D6AC4B03A7563C53C /* InputOutput */,
+			);
+			path = CourseSearch;
+			sourceTree = "<group>";
+		};
 		C96D693E497DC98E89DAA910 /* InputOutput */ = {
 			isa = PBXGroup;
 			children = (
@@ -9668,6 +9702,15 @@
 				2C6CA82124ABB2F400E2EB2F /* Views */,
 			);
 			path = UserActivity;
+			sourceTree = "<group>";
+		};
+		F921371D6AC4B03A7563C53C /* InputOutput */ = {
+			isa = PBXGroup;
+			children = (
+				AFD940736CD396BA58F15E0E /* CourseSearchInputProtocol.swift */,
+				77326F6B330193D9D50E47BD /* CourseSearchOutputProtocol.swift */,
+			);
+			path = InputOutput;
 			sourceTree = "<group>";
 		};
 		FB7BA3E8E921A2CB7CDF8612 /* CatalogBlocks */ = {
@@ -12100,6 +12143,15 @@
 				314618ACBB0339BB33E8F48E /* StepQuizReviewViewController.swift in Sources */,
 				015598254C071835594BB121 /* StepQuizReviewOutputProtocol.swift in Sources */,
 				62E98F13BC8E26F8FBC95D7A /* ManagedObject.swift in Sources */,
+				6C92601BC04D155B948F85DD /* CourseSearchAssembly.swift in Sources */,
+				3E4170D55BD05702BCCA1363 /* CourseSearchDataFlow.swift in Sources */,
+				0A4C9BA0D668107A241C7F21 /* CourseSearchInteractor.swift in Sources */,
+				07E09A9AA17EC2FDCFA5616C /* CourseSearchPresenter.swift in Sources */,
+				36F4C9CA87408D6BE195F4DB /* CourseSearchProvider.swift in Sources */,
+				CE2D65E8DE837794C28FCE8F /* CourseSearchView.swift in Sources */,
+				EDA99A62A014CFFA0B64C09E /* CourseSearchViewController.swift in Sources */,
+				DC5FCB70BBA645C8B0FD099E /* CourseSearchInputProtocol.swift in Sources */,
+				336AE4E02F04637EA6EEB9E2 /* CourseSearchOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
