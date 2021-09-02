@@ -544,6 +544,9 @@ CourseRevenueTabMonthlyIncomeTitle = "Purchases";
 CourseRevenueTabMonthlyChannelStepikTitle = "Came via Stepik";
 CourseRevenueTabMonthlyChannelZLinkTitle = "Came via Z-Link";
 
+/* CourseSearch */
+CourseSearchBarPlaceholder = "Search by course %@";
+
 /* User Courses */
 UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";

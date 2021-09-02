@@ -7,9 +7,14 @@ protocol CourseSearchViewControllerProtocol: AnyObject {
 final class CourseSearchViewController: UIViewController {
     private let interactor: CourseSearchInteractorProtocol
 
+    private lazy var searchBar = CourseSearchBar()
+
+    private var courseSearchView: CourseSearchView? { self.view as? CourseSearchView }
+
     init(interactor: CourseSearchInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
+        self.searchBar.searchBarDelegate = self
     }
 
     @available(*, unavailable)
@@ -24,10 +29,17 @@ final class CourseSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.styledNavigationController?.removeBackButtonTitleForTopController()
+        self.navigationItem.titleView = self.searchBar
+
         self.interactor.doCourseContentLoad(request: .init())
     }
 }
 
 extension CourseSearchViewController: CourseSearchViewControllerProtocol {
     func displayCourseContent(viewModel: CourseSearch.CourseContentLoad.ViewModel) {}
+}
+
+extension CourseSearchViewController: CourseSearchBarDelegate {
 }

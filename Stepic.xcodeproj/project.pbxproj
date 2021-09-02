@@ -383,6 +383,7 @@
 		2C03F042247690BA00C63FE6 /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03F041247690BA00C63FE6 /* Mutex.swift */; };
 		2C04846224C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */; };
 		2C04846524C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */; };
+		2C048BA926E0C40100235DEC /* CourseSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C048BA826E0C40100235DEC /* CourseSearchBar.swift */; };
 		2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */; };
 		2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */; };
 		2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */; };
@@ -2279,6 +2280,7 @@
 		2C03F041247690BA00C63FE6 /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		2C04846124C663B700B3DAC8 /* NewProfileCertificatesCertificateWidgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCertificateWidgetProgressView.swift; sourceTree = "<group>"; };
 		2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCellSkeletonView.swift; sourceTree = "<group>"; };
+		2C048BA826E0C40100235DEC /* CourseSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchBar.swift; sourceTree = "<group>"; };
 		2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntity.swift; sourceTree = "<group>"; };
 		2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntity.swift; sourceTree = "<group>"; };
 		2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_attempts_caching.xcdatamodel; sourceTree = "<group>"; };
@@ -4098,6 +4100,15 @@
 				2C7EFCF024D08D8E003A4E93 /* SocialProfiles */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		2C048BA726E0C3D100235DEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C048BA826E0C40100235DEC /* CourseSearchBar.swift */,
+				5B55F0052BB2F2648649BD17 /* CourseSearchView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
@@ -9585,9 +9596,9 @@
 				B2D5653D57BD0E3C8E9490F8 /* CourseSearchInteractor.swift */,
 				E429497D178104E4DF68B16C /* CourseSearchPresenter.swift */,
 				C6A6C330102AA1FB203C0E9D /* CourseSearchProvider.swift */,
-				5B55F0052BB2F2648649BD17 /* CourseSearchView.swift */,
 				33074471A14A38067198824D /* CourseSearchViewController.swift */,
 				F921371D6AC4B03A7563C53C /* InputOutput */,
+				2C048BA726E0C3D100235DEC /* Views */,
 			);
 			path = CourseSearch;
 			sourceTree = "<group>";
@@ -10693,6 +10704,7 @@
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				2C69BDCE26C147A3007C51FB /* StepQuizReviewTeacherView.swift in Sources */,
+				2C048BA926E0C40100235DEC /* CourseSearchBar.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
 				082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */,
 				2C0FE8B625F8199200626289 /* RubricPlainObject.swift in Sources */,
