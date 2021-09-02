@@ -125,7 +125,16 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
     }
 }
 
+// MARK: - CourseSearchViewController: CourseSearchBarDelegate -
+
 extension CourseSearchViewController: CourseSearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, !text.isEmpty {
+            self.interactor.doSearch(request: .init(query: text))
+        } else {
+            //self.searchResultsModuleInput?.queryChanged(to: "")
+        }
+    }
 }
 
 // MARK: - StepikPlaceholderControllerContainer.PlaceholderState -

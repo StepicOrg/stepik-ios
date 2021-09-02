@@ -18,6 +18,16 @@ enum CourseSearch {
         }
     }
 
+    enum Search {
+        struct Request {
+            let query: String
+        }
+
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {

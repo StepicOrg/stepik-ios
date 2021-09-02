@@ -4,6 +4,9 @@ import PromiseKit
 protocol CourseSearchProviderProtocol {
     func fetchCourse() -> Promise<Course?>
     func fetchSuggestions(fetchLimit: Int) -> Guarantee<[SearchQueryResult]>
+
+    func searchInCourseRemotely(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)>
+    func searchInCourseCache(query: String) -> Promise<[SearchResultPlainObject]>
 }
 
 final class CourseSearchProvider: CourseSearchProviderProtocol {
@@ -40,5 +43,15 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
 
     func fetchSuggestions(fetchLimit: Int) -> Guarantee<[SearchQueryResult]> {
         self.searchQueryResultsPersistenceService.fetch(courseID: self.courseID, fetchLimit: fetchLimit)
+    }
+
+    func searchInCourseRemotely(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)> {
+        self.searchResultsRepository.searchInCourse(self.courseID, query: query, page: page, dataSourceType: .remote)
+    }
+
+    func searchInCourseCache(query: String) -> Promise<[SearchResultPlainObject]> {
+        self.searchResultsRepository
+            .searchInCourse(self.courseID, query: query, page: 1, dataSourceType: .cache)
+            .map { $0.0 }
     }
 }

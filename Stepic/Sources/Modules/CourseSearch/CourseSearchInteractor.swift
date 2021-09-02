@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CourseSearchInteractorProtocol {
     func doCourseContentLoad(request: CourseSearch.CourseContentLoad.Request)
+    func doSearch(request: CourseSearch.Search.Request)
 }
 
 final class CourseSearchInteractor: CourseSearchInteractorProtocol {
@@ -50,6 +51,15 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         }.catch { error in
             print("CourseSearchInteractor :: failed load content with error = \(error)")
             self.presenter.presentCourseContent(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doSearch(request: CourseSearch.Search.Request) {
+        self.provider.searchInCourseRemotely(query: request.query, page: 1).done { searchResults, meta in
+            print(searchResults)
+            print(meta)
+        }.catch { error in
+            print("CourseSearchInteractor :: failed search with error = \(error)")
         }
     }
 }
