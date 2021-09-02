@@ -20,6 +20,7 @@ protocol CourseInfoPresenterProtocol {
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
     func presentWishlistMainActionResult(response: CourseInfo.CourseWishlistMainAction.Response)
+    func presentCourseContentSearch(response: CourseInfo.CourseContentSearchPresentation.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -206,6 +207,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayWishlistMainActionResult(
             viewModel: .init(isSuccessful: isSuccessful, message: message)
         )
+    }
+
+    func presentCourseContentSearch(response: CourseInfo.CourseContentSearchPresentation.Response) {
+        self.viewController?.displayCourseContentSearch(viewModel: .init(courseID: response.courseID))
     }
 
     // MARK: Private API

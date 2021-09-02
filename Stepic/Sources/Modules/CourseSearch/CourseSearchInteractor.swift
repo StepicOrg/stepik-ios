@@ -40,7 +40,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             self.currentCourse = course
             print("CourseSearchInteractor :: content loaded")
             print(suggestions)
-            print(course)
+            print(course.title)
         }.catch { error in
             print("CourseSearchInteractor :: failed fetch content with error = \(error)")
         }

@@ -24,6 +24,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel)
     func displayWishlistMainActionResult(viewModel: CourseInfo.CourseWishlistMainAction.ViewModel)
+    func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -42,6 +43,12 @@ final class CourseInfoViewController: UIViewController {
 
     lazy var courseInfoView = self.view as? CourseInfoView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
+
+    private lazy var searchBarButton = UIBarButtonItem(
+        barButtonSystemItem: .search,
+        target: self,
+        action: #selector(self.searchButtonClicked)
+    )
 
     private lazy var wishlistBarButton = UIBarButtonItem(
         image: nil,
@@ -165,7 +172,7 @@ final class CourseInfoViewController: UIViewController {
                 let wishlistImageName = data.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
                 self.wishlistBarButton.image = UIImage(named: wishlistImageName)?.withRenderingMode(.alwaysTemplate)
             } else {
-                self.navigationItem.rightBarButtonItems = [self.moreBarButton]
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton, self.searchBarButton]
             }
 
             let isFirstLoadedResult = self.storedViewModel == nil
@@ -257,6 +264,11 @@ final class CourseInfoViewController: UIViewController {
         if let submodule = moduleInput {
             self.interactor.doSubmodulesRegistration(request: .init(submodules: [index: submodule]))
         }
+    }
+
+    @objc
+    private func searchButtonClicked() {
+        self.interactor.doCourseContentSearchPresentation(request: .init())
     }
 
     @objc
@@ -581,6 +593,11 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         } else {
             SVProgressHUD.showError(withStatus: viewModel.message)
         }
+    }
+
+    func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel) {
+        let assembly = CourseSearchAssembly(courseID: viewModel.courseID, output: nil)
+        self.push(module: assembly.makeModule())
     }
 
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel) {
