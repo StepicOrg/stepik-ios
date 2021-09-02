@@ -1,7 +1,7 @@
 import Foundation
 
 enum CourseSearch {
-    enum SomeAction {
+    enum CourseContentLoad {
         struct Request {}
 
         struct Response {}

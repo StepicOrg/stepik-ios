@@ -2,7 +2,9 @@ import SnapKit
 import UIKit
 
 extension CourseSearchView {
-    struct Appearance {}
+    struct Appearance {
+        let backgroundColor = UIColor.stepikBackground
+    }
 }
 
 final class CourseSearchView: UIView {
@@ -27,7 +29,9 @@ final class CourseSearchView: UIView {
 }
 
 extension CourseSearchView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
+    func setupView() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 
     func addSubviews() {}
 

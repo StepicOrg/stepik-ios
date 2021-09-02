@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CourseSearchViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: CourseSearch.SomeAction.ViewModel)
+    func displayCourseContent(viewModel: CourseSearch.CourseContentLoad.ViewModel)
 }
 
 final class CourseSearchViewController: UIViewController {
@@ -21,8 +21,13 @@ final class CourseSearchViewController: UIViewController {
         let view = CourseSearchView(frame: UIScreen.main.bounds)
         self.view = view
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.interactor.doCourseContentLoad(request: .init())
+    }
 }
 
 extension CourseSearchViewController: CourseSearchViewControllerProtocol {
-    func displaySomeActionResult(viewModel: CourseSearch.SomeAction.ViewModel) {}
+    func displayCourseContent(viewModel: CourseSearch.CourseContentLoad.ViewModel) {}
 }

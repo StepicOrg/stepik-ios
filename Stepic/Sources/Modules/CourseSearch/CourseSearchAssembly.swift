@@ -5,14 +5,23 @@ final class CourseSearchAssembly: Assembly {
 
     private weak var moduleOutput: CourseSearchOutputProtocol?
 
-    init(output: CourseSearchOutputProtocol? = nil) {
+    private let courseID: Course.IdType
+
+    init(courseID: Course.IdType, output: CourseSearchOutputProtocol? = nil) {
+        self.courseID = courseID
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = CourseSearchProvider()
+        let provider = CourseSearchProvider(
+            courseID: self.courseID,
+            searchResultsRepository: SearchResultsRepository.default,
+            searchQueryResultsPersistenceService: SearchQueryResultsPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            coursesPersistenceService: CoursesPersistenceService()
+        )
         let presenter = CourseSearchPresenter()
-        let interactor = CourseSearchInteractor(presenter: presenter, provider: provider)
+        let interactor = CourseSearchInteractor(presenter: presenter, provider: provider, courseID: self.courseID)
         let viewController = CourseSearchViewController(interactor: interactor)
 
         presenter.viewController = viewController
