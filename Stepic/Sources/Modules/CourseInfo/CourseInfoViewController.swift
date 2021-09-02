@@ -42,7 +42,6 @@ final class CourseInfoViewController: UIViewController {
     private lazy var pageViewController = PageboyViewController()
 
     lazy var courseInfoView = self.view as? CourseInfoView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var searchBarButton = UIBarButtonItem(
         barButtonSystemItem: .search,

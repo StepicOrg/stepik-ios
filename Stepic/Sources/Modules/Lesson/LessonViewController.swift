@@ -150,10 +150,8 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         self.navigationItem.rightBarButtonItems = [self.moreBarButtonItem, self.infoBarButtonItem]
         self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.removeBackButtonTitleForTopController()
-            styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
-        }
+        self.styledNavigationController?.removeBackButtonTitleForTopController()
+        self.styledNavigationController?.changeShadowViewAlpha(1.0, sender: self)
 
         self.addSubviews()
         self.dataSource = self
@@ -221,9 +219,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
-        }
+        self.styledNavigationController?.changeShadowViewAlpha(0.0, sender: self)
 
         self.reloadData()
 
@@ -308,9 +304,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         self.hasNavigationToPreviousUnit = false
         self.hasNavigationToNextUnit = false
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
-        }
+        self.styledNavigationController?.changeShadowViewAlpha(1.0, sender: self)
     }
 
     private func updateInfoBarButtonItem() {

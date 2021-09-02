@@ -43,9 +43,7 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
             self.showPlaceholder(for: .anonymous)
         }
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(AuthInfo.shared.isAuthorized ? 0.0 : 1.0, sender: self)
-        }
+        self.styledNavigationController?.changeShadowViewAlpha(AuthInfo.shared.isAuthorized ? 0.0 : 1.0, sender: self)
     }
 
     private func setUpTabs() {

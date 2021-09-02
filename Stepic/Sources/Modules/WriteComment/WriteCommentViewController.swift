@@ -93,10 +93,8 @@ final class WriteCommentViewController: UIViewController {
 
         _ = self.writeCommentView?.becomeFirstResponder()
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
-            styledNavigationController.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
-        }
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        self.styledNavigationController?.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

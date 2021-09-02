@@ -89,10 +89,8 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
-            styledNavigationController.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
-        }
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        self.styledNavigationController?.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
     }
 
     // MARK: Private API
@@ -175,8 +173,8 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
             if shouldShowCloseItem {
                 self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
-            } else if let styledNavigationController = self.navigationController as? StyledNavigationController {
-                styledNavigationController.removeBackButtonTitleForTopController()
+            } else {
+                self.styledNavigationController?.removeBackButtonTitleForTopController()
             }
 
             self.navigationItem.rightBarButtonItem = self.filterBarButtonItem

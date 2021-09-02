@@ -27,9 +27,6 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var newProfileView: NewProfileView? { self.view as? NewProfileView }
-    var styledNavigationController: StyledNavigationController? {
-        self.navigationController as? StyledNavigationController
-    }
 
     private let interactor: NewProfileInteractorProtocol
     private var state: NewProfile.ViewControllerState
