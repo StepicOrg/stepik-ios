@@ -2,7 +2,8 @@ import Foundation
 import PromiseKit
 
 protocol CourseSearchInteractorProtocol {
-    func doCourseContentLoad(request: CourseSearch.CourseContentLoad.Request)
+    func doCourseSearchLoad(request: CourseSearch.CourseSearchLoad.Request)
+    func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request)
     func doSearch(request: CourseSearch.Search.Request)
 }
 
@@ -17,7 +18,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     private let courseID: Course.IdType
 
     private var currentCourse: Course?
-    private var currentSearchQueryResults = [SearchQueryResult]()
+    private var currentSearchQueryResults: [SearchQueryResult]?
 
     init(
         presenter: CourseSearchPresenterProtocol,
@@ -29,28 +30,31 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         self.courseID = courseID
     }
 
-    func doCourseContentLoad(request: CourseSearch.CourseContentLoad.Request) {
-        print("CourseSearchInteractor :: loading content")
+    func doCourseSearchLoad(request: CourseSearch.CourseSearchLoad.Request) {
         when(
             fulfilled: self.provider.fetchCourse(),
-            self.provider.fetchSuggestions(fetchLimit: Self.defaultSuggestionsFetchLimit)
-        ).compactMap { course, suggestions -> (Course, [SearchQueryResult])? in
-            if let course = course {
-                return (course, suggestions)
-            }
-            return nil
-        }.done { course, suggestions in
-            print("CourseSearchInteractor :: content loaded")
-
+            self.fetchSuggestions()
+        ).done { course, searchQueryResults in
             self.currentCourse = course
-            self.currentSearchQueryResults = suggestions
+            self.currentSearchQueryResults = searchQueryResults
 
-            self.presenter.presentCourseContent(
-                response: .init(result: .success(.init(course: course, searchQueryResults: suggestions)))
+            let data = CourseSearch.CourseSearchLoad.Response.Data(
+                course: course,
+                searchQueryResults: searchQueryResults
             )
+            self.presenter.presentCourseSearchLoadResult(response: .init(result: .success(data)))
         }.catch { error in
             print("CourseSearchInteractor :: failed load content with error = \(error)")
-            self.presenter.presentCourseContent(response: .init(result: .failure(error)))
+            self.presenter.presentCourseSearchLoadResult(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request) {
+        self.fetchSuggestions().done { searchQueryResults in
+            self.currentSearchQueryResults = searchQueryResults
+            self.presenter.presentCourseSearchSuggestionsLoadResult(
+                response: .init(searchQueryResults: searchQueryResults)
+            )
         }
     }
 
@@ -61,6 +65,12 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         }.catch { error in
             print("CourseSearchInteractor :: failed search with error = \(error)")
         }
+    }
+
+    // MARK: Private API
+
+    private func fetchSuggestions() -> Guarantee<[SearchQueryResult]> {
+        self.provider.fetchSuggestions(fetchLimit: Self.defaultSuggestionsFetchLimit)
     }
 }
 

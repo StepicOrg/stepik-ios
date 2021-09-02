@@ -385,6 +385,8 @@
 		2C04846524C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */; };
 		2C048BA926E0C40100235DEC /* CourseSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C048BA826E0C40100235DEC /* CourseSearchBar.swift */; };
 		2C048BAB26E0CC1200235DEC /* CourseSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C048BAA26E0CC1200235DEC /* CourseSearchViewModel.swift */; };
+		2C048BAD26E1143E00235DEC /* CourseSearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C048BAC26E1143E00235DEC /* CourseSearchSuggestionTableViewCell.swift */; };
+		2C048BB026E1167600235DEC /* CourseSearchSuggestionTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C048BAF26E1167600235DEC /* CourseSearchSuggestionTableViewAdapter.swift */; };
 		2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */; };
 		2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */; };
 		2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */; };
@@ -2283,6 +2285,8 @@
 		2C04846424C6844A00B3DAC8 /* NewProfileCertificatesCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesCellSkeletonView.swift; sourceTree = "<group>"; };
 		2C048BA826E0C40100235DEC /* CourseSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchBar.swift; sourceTree = "<group>"; };
 		2C048BAA26E0CC1200235DEC /* CourseSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchViewModel.swift; sourceTree = "<group>"; };
+		2C048BAC26E1143E00235DEC /* CourseSearchSuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchSuggestionTableViewCell.swift; sourceTree = "<group>"; };
+		2C048BAF26E1167600235DEC /* CourseSearchSuggestionTableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSearchSuggestionTableViewAdapter.swift; sourceTree = "<group>"; };
 		2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntity.swift; sourceTree = "<group>"; };
 		2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntity.swift; sourceTree = "<group>"; };
 		2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_attempts_caching.xcdatamodel; sourceTree = "<group>"; };
@@ -4109,8 +4113,18 @@
 			children = (
 				2C048BA826E0C40100235DEC /* CourseSearchBar.swift */,
 				5B55F0052BB2F2648649BD17 /* CourseSearchView.swift */,
+				2C048BAE26E1163D00235DEC /* Suggestions */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2C048BAE26E1163D00235DEC /* Suggestions */ = {
+			isa = PBXGroup;
+			children = (
+				2C048BAF26E1167600235DEC /* CourseSearchSuggestionTableViewAdapter.swift */,
+				2C048BAC26E1143E00235DEC /* CourseSearchSuggestionTableViewCell.swift */,
+			);
+			path = Suggestions;
 			sourceTree = "<group>";
 		};
 		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
@@ -11289,6 +11303,7 @@
 				62E981DD043FB3AEC3BDB669 /* PaddingLabel.swift in Sources */,
 				2C96290D26B9847600C9EA9C /* ReviewsResponse.swift in Sources */,
 				2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */,
+				2C048BB026E1167600235DEC /* CourseSearchSuggestionTableViewAdapter.swift in Sources */,
 				2C1E42A424991CA3009F4C69 /* IAPPaymentsCache.swift in Sources */,
 				62E989403A2025381E5B308B /* BounceButton.swift in Sources */,
 				62E98382AC35194D9C0CE966 /* UITableViewExtensions.swift in Sources */,
@@ -11365,6 +11380,7 @@
 				2C313E5326AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift in Sources */,
 				2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */,
 				62E985D6A85E24E493C064E9 /* SettingsTableView.swift in Sources */,
+				2C048BAD26E1143E00235DEC /* CourseSearchSuggestionTableViewCell.swift in Sources */,
 				62E98CB2C2F2B7AE44023FEA /* SettingsTableViewModel.swift in Sources */,
 				62E989CCBB953CEF37E17013 /* SettingsTableSectionFooterView.swift in Sources */,
 				2C98424726DE78EA0098E36B /* SearchResultsRepository.swift in Sources */,

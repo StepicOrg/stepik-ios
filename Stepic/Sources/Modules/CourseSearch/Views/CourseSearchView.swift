@@ -10,6 +10,16 @@ extension CourseSearchView {
 final class CourseSearchView: UIView {
     let appearance: Appearance
 
+    private lazy var suggestionsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = self.appearance.backgroundColor
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.register(cellClass: CourseSearchSuggestionTableViewCell.self)
+        tableView.isHidden = true
+        return tableView
+    }()
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -26,6 +36,17 @@ final class CourseSearchView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setSuggestionsTableViewHidden(_ isHidden: Bool) {
+        self.suggestionsTableView.isHidden = isHidden
+        self.suggestionsTableView.alpha = isHidden ? 0 : 1
+    }
+
+    func updateSuggestionsTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
+        self.suggestionsTableView.delegate = delegate
+        self.suggestionsTableView.dataSource = delegate
+        self.suggestionsTableView.reloadData()
+    }
 }
 
 extension CourseSearchView: ProgrammaticallyInitializableViewProtocol {
@@ -33,7 +54,12 @@ extension CourseSearchView: ProgrammaticallyInitializableViewProtocol {
         self.backgroundColor = self.appearance.backgroundColor
     }
 
-    func addSubviews() {}
+    func addSubviews() {
+        self.addSubview(self.suggestionsTableView)
+    }
 
-    func makeConstraints() {}
+    func makeConstraints() {
+        self.suggestionsTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.suggestionsTableView.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
 }

@@ -37,6 +37,7 @@ final class CourseSearchBar: UISearchBar {
         self.delegate = self
         self.placeholder = Appearance.placeholderText
         self.searchBarStyle = .minimal
+        self.autocapitalizationType = .none
 
         self.searchField?.backgroundColor = .clear
         self.searchField?.textColor = Appearance.textColor

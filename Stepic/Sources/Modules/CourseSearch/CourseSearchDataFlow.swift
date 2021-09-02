@@ -1,12 +1,13 @@
 import Foundation
 
 enum CourseSearch {
-    enum CourseContentLoad {
+    /// Load course & initial suggestions
+    enum CourseSearchLoad {
         struct Request {}
 
         struct Response {
             struct Data {
-                let course: Course
+                let course: Course?
                 let searchQueryResults: [SearchQueryResult]
             }
 
@@ -14,7 +15,21 @@ enum CourseSearch {
         }
 
         struct ViewModel {
-            let state: ViewControllerState
+            let placeholderText: String
+            let suggestions: [CourseSearchSuggestionViewModel]
+        }
+    }
+
+    /// Load suggestions
+    enum CourseSearchSuggestionsLoad {
+        struct Request {}
+
+        struct Response {
+            let searchQueryResults: [SearchQueryResult]
+        }
+
+        struct ViewModel {
+            let suggestions: [CourseSearchSuggestionViewModel]
         }
     }
 
@@ -31,14 +46,9 @@ enum CourseSearch {
     // MARK: States
 
     enum ViewControllerState {
+        case idle
         case loading
-        case searching
-        case error(ErrorDomain)
+        case error
         case result(data: CourseSearchViewModel)
-
-        enum ErrorDomain {
-            case content
-            case search
-        }
     }
 }

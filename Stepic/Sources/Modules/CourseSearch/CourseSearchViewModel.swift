@@ -9,3 +9,8 @@ struct CourseSearchViewModel {
         let title: String
     }
 }
+
+struct CourseSearchSuggestionViewModel: UniqueIdentifiable {
+    let uniqueIdentifier: UniqueIdentifierType
+    let title: String
+}

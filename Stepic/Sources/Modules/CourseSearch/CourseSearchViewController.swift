@@ -1,7 +1,8 @@
 import UIKit
 
 protocol CourseSearchViewControllerProtocol: AnyObject {
-    func displayCourseContent(viewModel: CourseSearch.CourseContentLoad.ViewModel)
+    func displayCourseSearchLoadResult(viewModel: CourseSearch.CourseSearchLoad.ViewModel)
+    func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel)
 }
 
 final class CourseSearchViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -11,13 +12,17 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
 
     private lazy var searchBar = CourseSearchBar()
 
+    private lazy var suggestionsTableViewAdapter = CourseSearchSuggestionTableViewAdapter(delegate: self)
+
     private var courseSearchView: CourseSearchView? { self.view as? CourseSearchView }
 
     private var state: CourseSearch.ViewControllerState
 
+    private var isFirstTimeViewDidAppear = true
+
     init(
         interactor: CourseSearchInteractorProtocol,
-        initialState: CourseSearch.ViewControllerState = .loading
+        initialState: CourseSearch.ViewControllerState = .idle
     ) {
         self.interactor = interactor
         self.state = initialState
@@ -46,37 +51,35 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
         self.registerPlaceholders()
 
         self.updateState(newState: self.state)
-        self.interactor.doCourseContentLoad(request: .init())
+        self.interactor.doCourseSearchLoad(request: .init())
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if self.isFirstTimeViewDidAppear {
+            self.isFirstTimeViewDidAppear = false
+            _ = self.searchBar.becomeFirstResponder()
+        }
     }
 
     // MARK: Private API
 
     private func updateState(newState: CourseSearch.ViewControllerState) {
         switch newState {
+        case .idle:
+            self.showPlaceholder(for: .emptySuggestions)
         case .loading:
             self.isPlaceholderShown = false
             //self.userCoursesReviewsView?.showLoading()
-        case .searching:
-            self.isPlaceholderShown = false
-            //self.userCoursesReviewsView?.showLoading()
-        case .error(let domain):
+        case .error:
             //self.userCoursesReviewsView?.hideLoading()
-
-            switch domain {
-            case .content:
-                self.showPlaceholder(for: .connectionErrorContentLoad)
-            case .search:
-                self.showPlaceholder(for: .connectionErrorSearchInCourse)
-            }
+            self.showPlaceholder(for: .connectionError)
         case .result(let data):
             self.isPlaceholderShown = false
             //self.userCoursesReviewsView?.hideLoading()
 
             self.searchBar.placeholder = data.placeholderText
-
-            if data.suggestions.isEmpty {
-                self.showPlaceholder(for: .emptySuggestions)
-            }
 
             //self.reviewsTableDataSource.update(data: data)
             //self.userCoursesReviewsView?.updateTableViewData(delegate: self.reviewsTableDataSource)
@@ -95,39 +98,54 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
                     }
 
                     strongSelf.updateState(newState: .loading)
-                    strongSelf.interactor.doCourseContentLoad(request: .init())
-                }
-            ),
-            for: .connectionErrorContentLoad
-        )
-        self.registerPlaceholder(
-            placeholder: .init(
-                .noConnection,
-                action: { [weak self] in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.updateState(newState: .searching)
                     // retry search
                 }
             ),
-            for: .connectionErrorSearchInCourse
+            for: .connectionError
         )
         self.registerPlaceholder(placeholder: .init(.emptyCourseSearchSuggestions), for: .emptySuggestions)
-        self.registerPlaceholder(placeholder: .init(.emptyCourseSearchSuggestions), for: .emptySearchResults)
+        self.registerPlaceholder(placeholder: .init(.emptyCourseSearchResults), for: .emptySearchResults)
     }
 }
 
+// MARK: - CourseSearchViewController: CourseSearchViewControllerProtocol -
+
 extension CourseSearchViewController: CourseSearchViewControllerProtocol {
-    func displayCourseContent(viewModel: CourseSearch.CourseContentLoad.ViewModel) {
-        self.updateState(newState: viewModel.state)
+    func displayCourseSearchLoadResult(viewModel: CourseSearch.CourseSearchLoad.ViewModel) {
+        self.searchBar.placeholder = viewModel.placeholderText
+        self.updateSuggestionsData(viewModel.suggestions)
+    }
+
+    func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel) {
+        self.updateSuggestionsData(viewModel.suggestions)
+
+        if viewModel.suggestions.isEmpty {
+            self.courseSearchView?.setSuggestionsTableViewHidden(true)
+        } else {
+            self.isPlaceholderShown = false
+            self.courseSearchView?.setSuggestionsTableViewHidden(false)
+        }
+    }
+
+    // MARK: Private Helpers
+
+    private func updateSuggestionsData(_ suggestions: [CourseSearchSuggestionViewModel]) {
+        self.suggestionsTableViewAdapter.viewModels = suggestions
+        self.courseSearchView?.updateSuggestionsTableViewData(delegate: self.suggestionsTableViewAdapter)
     }
 }
 
 // MARK: - CourseSearchViewController: CourseSearchBarDelegate -
 
 extension CourseSearchViewController: CourseSearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.showSuggestions()
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.hideSuggestions()
+    }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, !text.isEmpty {
             self.interactor.doSearch(request: .init(query: text))
@@ -135,19 +153,41 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
             //self.searchResultsModuleInput?.queryChanged(to: "")
         }
     }
+
+    // MARK: Private Helpers
+
+    private func showSuggestions() {
+        if !self.suggestionsTableViewAdapter.viewModels.isEmpty {
+            self.isPlaceholderShown = false
+
+            self.courseSearchView?.updateSuggestionsTableViewData(delegate: self.suggestionsTableViewAdapter)
+            self.courseSearchView?.setSuggestionsTableViewHidden(false)
+        }
+
+        self.interactor.doCourseSearchSuggestionsLoad(request: .init())
+    }
+
+    private func hideSuggestions() {
+        self.courseSearchView?.setSuggestionsTableViewHidden(true)
+        self.showPlaceholder(for: .emptySuggestions)
+    }
+}
+
+// MARK: - CourseSearchViewController: CourseSearchSuggestionTableViewAdapterDelegate -
+
+extension CourseSearchViewController: CourseSearchSuggestionTableViewAdapterDelegate {
+    func courseSearchSuggestionTableViewAdapter(
+        _ adapter: CourseSearchSuggestionTableViewAdapter,
+        didSelectSuggestion: CourseSearchSuggestionViewModel,
+        at indexPath: IndexPath
+    ) {
+        print(#function)
+    }
 }
 
 // MARK: - StepikPlaceholderControllerContainer.PlaceholderState -
 
 private extension StepikPlaceholderControllerContainer.PlaceholderState {
-    static let connectionErrorContentLoad = StepikPlaceholderControllerContainer.PlaceholderState(
-        id: "connectionErrorContentLoad"
-    )
-
-    static let connectionErrorSearchInCourse = StepikPlaceholderControllerContainer.PlaceholderState(
-        id: "connectionErrorSearchInCourse"
-    )
-
     static let emptySuggestions = StepikPlaceholderControllerContainer.PlaceholderState(id: "emptySuggestions")
 
     static let emptySearchResults = StepikPlaceholderControllerContainer.PlaceholderState(id: "emptySearchResults")
