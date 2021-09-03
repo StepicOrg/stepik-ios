@@ -1,15 +1,10 @@
 import UIKit
 
 final class CourseSearchAssembly: Assembly {
-    var moduleInput: CourseSearchInputProtocol?
-
-    private weak var moduleOutput: CourseSearchOutputProtocol?
-
     private let courseID: Course.IdType
 
-    init(courseID: Course.IdType, output: CourseSearchOutputProtocol? = nil) {
+    init(courseID: Course.IdType) {
         self.courseID = courseID
-        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -25,8 +20,6 @@ final class CourseSearchAssembly: Assembly {
         let viewController = CourseSearchViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

@@ -3,7 +3,7 @@ import Foundation
 protocol CourseSearchSuggestionTableViewAdapterDelegate: AnyObject {
     func courseSearchSuggestionTableViewAdapter(
         _ adapter: CourseSearchSuggestionTableViewAdapter,
-        didSelectSuggestion: CourseSearchSuggestionViewModel,
+        didSelectSuggestion suggestion: CourseSearchSuggestionViewModel,
         at indexPath: IndexPath
     )
 }

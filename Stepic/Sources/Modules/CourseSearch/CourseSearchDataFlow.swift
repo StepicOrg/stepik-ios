@@ -8,7 +8,7 @@ enum CourseSearch {
         struct Response {
             struct Data {
                 let course: Course?
-                let searchQueryResults: [SearchQueryResult]
+                let suggestions: [SearchQueryResult]
             }
 
             let result: StepikResult<Data>
@@ -25,7 +25,7 @@ enum CourseSearch {
         struct Request {}
 
         struct Response {
-            let searchQueryResults: [SearchQueryResult]
+            let suggestions: [SearchQueryResult]
         }
 
         struct ViewModel {
@@ -41,7 +41,7 @@ enum CourseSearch {
 
         struct Response {
             let query: String
-            let searchQueryResults: [SearchQueryResult]
+            let suggestions: [SearchQueryResult]
         }
 
         struct ViewModel {
@@ -50,9 +50,15 @@ enum CourseSearch {
         }
     }
 
+    /// Perform search in course
     enum Search {
         struct Request {
-            let query: String
+            let source: Source
+
+            enum Source {
+                case searchQuery
+                case suggestion(UniqueIdentifierType)
+            }
         }
 
         struct Response {}

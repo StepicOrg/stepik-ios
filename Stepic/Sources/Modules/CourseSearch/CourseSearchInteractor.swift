@@ -11,15 +11,14 @@ protocol CourseSearchInteractorProtocol {
 final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     private static let defaultSuggestionsFetchLimit = 10
 
-    weak var moduleOutput: CourseSearchOutputProtocol?
-
     private let presenter: CourseSearchPresenterProtocol
     private let provider: CourseSearchProviderProtocol
 
     private let courseID: Course.IdType
 
     private var currentCourse: Course?
-    private var currentSearchQueryResults: [SearchQueryResult]?
+    private var currentSuggestions: [SearchQueryResult]?
+    @Trimmed
     private var currentQuery = ""
 
     init(
@@ -36,57 +35,65 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         when(
             fulfilled: self.provider.fetchCourse(),
             self.fetchSuggestions()
-        ).done { course, searchQueryResults in
+        ).done { course, suggestions in
             self.currentCourse = course
-            self.currentSearchQueryResults = searchQueryResults
+            self.currentSuggestions = suggestions
 
-            let data = CourseSearch.CourseSearchLoad.Response.Data(
-                course: course,
-                searchQueryResults: searchQueryResults
-            )
+            let data = CourseSearch.CourseSearchLoad.Response.Data(course: course, suggestions: suggestions)
             self.presenter.presentCourseSearchLoadResult(response: .init(result: .success(data)))
         }.catch { error in
-            print("CourseSearchInteractor :: failed load content with error = \(error)")
+            print("CourseSearchInteractor :: failed \(#function) with error = \(error)")
             self.presenter.presentCourseSearchLoadResult(response: .init(result: .failure(error)))
         }
     }
 
     func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request) {
-        self.fetchSuggestions().done { searchQueryResults in
-            self.currentSearchQueryResults = searchQueryResults
-            self.presenter.presentCourseSearchSuggestionsLoadResult(
-                response: .init(searchQueryResults: searchQueryResults)
-            )
+        self.fetchSuggestions().done { suggestions in
+            self.currentSuggestions = suggestions
+            self.presenter.presentCourseSearchSuggestionsLoadResult(response: .init(suggestions: suggestions))
         }
     }
 
     func doSearchQueryUpdate(request: CourseSearch.SearchQueryUpdate.Request) {
         self.currentQuery = request.query
 
-        guard let currentSearchQueryResults = self.currentSearchQueryResults else {
+        guard let currentSuggestions = self.currentSuggestions else {
             return
         }
 
-        let trimmedQuery = request.query.trimmed()
-
-        if trimmedQuery.isEmpty {
+        if self.currentQuery.isEmpty {
             self.presenter.presentSearchQueryUpdateResult(
-                response: .init(query: self.currentQuery, searchQueryResults: currentSearchQueryResults)
+                response: .init(query: self.currentQuery, suggestions: currentSuggestions)
             )
         } else {
-            let results = currentSearchQueryResults.filter { $0.query.localizedCaseInsensitiveContains(trimmedQuery) }
+            let suggestions = currentSuggestions.filter { $0.query.localizedCaseInsensitiveContains(self.currentQuery) }
             self.presenter.presentSearchQueryUpdateResult(
-                response: .init(query: self.currentQuery, searchQueryResults: results)
+                response: .init(query: self.currentQuery, suggestions: suggestions)
             )
         }
     }
 
     func doSearch(request: CourseSearch.Search.Request) {
-        self.provider.searchInCourseRemotely(query: request.query, page: 1).done { searchResults, meta in
-            print(searchResults)
-            print(meta)
-        }.catch { error in
-            print("CourseSearchInteractor :: failed search with error = \(error)")
+        switch request.source {
+        case .searchQuery:
+            guard !self.currentQuery.isEmpty else {
+                return
+            }
+
+            self.provider.searchInCourseRemotely(query: self.currentQuery, page: 1).done { searchResults, meta in
+                print(searchResults)
+                print(meta)
+            }.catch { error in
+                print("CourseSearchInteractor :: failed search with error = \(error)")
+            }
+        case .suggestion(let viewModelUniqueIdentifier):
+            guard let targetSearchQueryResult = self.currentSuggestions?.first(
+                where: { $0.id == viewModelUniqueIdentifier }
+            ) else {
+                return
+            }
+
+            print(targetSearchQueryResult)
         }
     }
 
@@ -96,5 +103,3 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         self.provider.fetchSuggestions(fetchLimit: Self.defaultSuggestionsFetchLimit)
     }
 }
-
-extension CourseSearchInteractor: CourseSearchInputProtocol {}

@@ -595,7 +595,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel) {
-        let assembly = CourseSearchAssembly(courseID: viewModel.courseID, output: nil)
+        let assembly = CourseSearchAssembly(courseID: viewModel.courseID)
         self.push(module: assembly.makeModule())
     }
 

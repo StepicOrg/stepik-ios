@@ -159,11 +159,7 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text, !text.isEmpty {
-            self.interactor.doSearch(request: .init(query: text))
-        } else {
-            //self.searchResultsModuleInput?.queryChanged(to: "")
-        }
+        self.interactor.doSearch(request: .init(source: .searchQuery))
     }
 
     // MARK: Private Helpers
@@ -190,10 +186,13 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
 extension CourseSearchViewController: CourseSearchSuggestionTableViewAdapterDelegate {
     func courseSearchSuggestionTableViewAdapter(
         _ adapter: CourseSearchSuggestionTableViewAdapter,
-        didSelectSuggestion: CourseSearchSuggestionViewModel,
+        didSelectSuggestion suggestion: CourseSearchSuggestionViewModel,
         at indexPath: IndexPath
     ) {
-        print(#function)
+        self.searchBar.text = suggestion.title
+        self.searchBar.endEditing(true)
+
+        self.interactor.doSearch(request: .init(source: .suggestion(suggestion.uniqueIdentifier)))
     }
 }
 
