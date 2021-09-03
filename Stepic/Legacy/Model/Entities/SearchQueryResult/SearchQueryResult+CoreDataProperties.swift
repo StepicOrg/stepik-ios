@@ -23,7 +23,7 @@ extension SearchQueryResult {
             self.managedQuery
         }
         set {
-            self.managedQuery = newValue
+            self.managedQuery = newValue.trimmed()
         }
     }
 

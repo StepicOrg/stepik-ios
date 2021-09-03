@@ -33,6 +33,23 @@ enum CourseSearch {
         }
     }
 
+    /// Filter suggestions
+    enum SearchQueryUpdate {
+        struct Request {
+            let query: String
+        }
+
+        struct Response {
+            let query: String
+            let searchQueryResults: [SearchQueryResult]
+        }
+
+        struct ViewModel {
+            let query: String
+            let suggestions: [CourseSearchSuggestionViewModel]
+        }
+    }
+
     enum Search {
         struct Request {
             let query: String

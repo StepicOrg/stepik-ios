@@ -15,6 +15,8 @@ final class CourseSearchView: UIView {
         tableView.backgroundColor = self.appearance.backgroundColor
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.keyboardDismissMode = .interactive
+        tableView.separatorStyle = .none
         tableView.register(cellClass: CourseSearchSuggestionTableViewCell.self)
         tableView.isHidden = true
         return tableView

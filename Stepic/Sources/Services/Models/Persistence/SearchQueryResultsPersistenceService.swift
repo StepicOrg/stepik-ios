@@ -72,6 +72,7 @@ final class SearchQueryResultsPersistenceService: BasePersistenceService<SearchQ
 
                     existedSearchQueryResult.searchResults.forEach { $0.searchQueryResult = existedSearchQueryResult }
                     existedSearchQueryResult.lastSearchDate = Date()
+                    existedSearchQueryResult.query = query
                 }
             } else {
                 self.managedObjectContext.performChanges {

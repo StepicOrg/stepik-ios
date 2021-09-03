@@ -3,6 +3,7 @@ import UIKit
 protocol CourseSearchPresenterProtocol {
     func presentCourseSearchLoadResult(response: CourseSearch.CourseSearchLoad.Response)
     func presentCourseSearchSuggestionsLoadResult(response: CourseSearch.CourseSearchSuggestionsLoad.Response)
+    func presentSearchQueryUpdateResult(response: CourseSearch.SearchQueryUpdate.Response)
 }
 
 final class CourseSearchPresenter: CourseSearchPresenterProtocol {
@@ -32,6 +33,13 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
     func presentCourseSearchSuggestionsLoadResult(response: CourseSearch.CourseSearchSuggestionsLoad.Response) {
         let suggestions = response.searchQueryResults.map(self.makeSuggestionViewModel(_:))
         self.viewController?.displayCourseSearchSuggestionsLoadResult(viewModel: .init(suggestions: suggestions))
+    }
+
+    func presentSearchQueryUpdateResult(response: CourseSearch.SearchQueryUpdate.Response) {
+        let suggestions = response.searchQueryResults.map(self.makeSuggestionViewModel(_:))
+        self.viewController?.displaySearchQueryUpdateResult(
+            viewModel: .init(query: response.query, suggestions: suggestions)
+        )
     }
 
     // MARK: Private API

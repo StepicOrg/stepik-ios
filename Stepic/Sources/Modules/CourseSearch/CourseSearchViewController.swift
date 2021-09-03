@@ -3,6 +3,7 @@ import UIKit
 protocol CourseSearchViewControllerProtocol: AnyObject {
     func displayCourseSearchLoadResult(viewModel: CourseSearch.CourseSearchLoad.ViewModel)
     func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel)
+    func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel)
 }
 
 final class CourseSearchViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -127,9 +128,16 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
         }
     }
 
+    func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel) {
+        self.updateSuggestionsData(viewModel.suggestions, query: viewModel.query)
+    }
+
     // MARK: Private Helpers
 
-    private func updateSuggestionsData(_ suggestions: [CourseSearchSuggestionViewModel]) {
+    private func updateSuggestionsData(_ suggestions: [CourseSearchSuggestionViewModel], query: String? = nil) {
+        if let query = query {
+            self.suggestionsTableViewAdapter.query = query
+        }
         self.suggestionsTableViewAdapter.viewModels = suggestions
         self.courseSearchView?.updateSuggestionsTableViewData(delegate: self.suggestionsTableViewAdapter)
     }
@@ -144,6 +152,10 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.hideSuggestions()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.interactor.doSearchQueryUpdate(request: .init(query: searchText))
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

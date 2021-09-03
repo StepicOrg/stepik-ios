@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseSearchInteractorProtocol {
     func doCourseSearchLoad(request: CourseSearch.CourseSearchLoad.Request)
     func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request)
+    func doSearchQueryUpdate(request: CourseSearch.SearchQueryUpdate.Request)
     func doSearch(request: CourseSearch.Search.Request)
 }
 
@@ -19,6 +20,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
 
     private var currentCourse: Course?
     private var currentSearchQueryResults: [SearchQueryResult]?
+    private var currentQuery = ""
 
     init(
         presenter: CourseSearchPresenterProtocol,
@@ -54,6 +56,27 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             self.currentSearchQueryResults = searchQueryResults
             self.presenter.presentCourseSearchSuggestionsLoadResult(
                 response: .init(searchQueryResults: searchQueryResults)
+            )
+        }
+    }
+
+    func doSearchQueryUpdate(request: CourseSearch.SearchQueryUpdate.Request) {
+        self.currentQuery = request.query
+
+        guard let currentSearchQueryResults = self.currentSearchQueryResults else {
+            return
+        }
+
+        let trimmedQuery = request.query.trimmed()
+
+        if trimmedQuery.isEmpty {
+            self.presenter.presentSearchQueryUpdateResult(
+                response: .init(query: self.currentQuery, searchQueryResults: currentSearchQueryResults)
+            )
+        } else {
+            let results = currentSearchQueryResults.filter { $0.query.localizedCaseInsensitiveContains(trimmedQuery) }
+            self.presenter.presentSearchQueryUpdateResult(
+                response: .init(query: self.currentQuery, searchQueryResults: results)
             )
         }
     }

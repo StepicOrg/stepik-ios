@@ -31,6 +31,7 @@ extension CourseSearchSuggestionTableViewAdapter: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CourseSearchSuggestionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.updateConstraintsIfNeeded()
 
         let viewModel = self.viewModels[indexPath.row]
         cell.configure(suggestion: viewModel.title, query: self.query)
