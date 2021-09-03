@@ -620,6 +620,8 @@
 		2C51E1E125B8A34000E38DF8 /* AnalyticsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C51E1E025B8A34000E38DF8 /* AnalyticsStorageManager.swift */; };
 		2C52310924C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */; };
 		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
+		2C5308E726E24C1D003D3042 /* Trimmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5308E626E24C1D003D3042 /* Trimmed.swift */; };
+		2C5308EA26E252F7003D3042 /* TrimmedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5308E926E252F7003D3042 /* TrimmedTests.swift */; };
 		2C53B4752588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53B4742588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift */; };
 		2C53B48F2588D80600E53779 /* SimpleCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53B48E2588D80600E53779 /* SimpleCourseListCollectionViewDataSource.swift */; };
 		2C53B4A02588D9CD00E53779 /* SimpleCourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53B49F2588D9CD00E53779 /* SimpleCourseListCollectionViewDelegate.swift */; };
@@ -2549,6 +2551,8 @@
 		2C51E1E025B8A34000E38DF8 /* AnalyticsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsStorageManager.swift; sourceTree = "<group>"; };
 		2C52310824C5806F00DC1474 /* NewProfileCertificatesOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesOutputProtocol.swift; sourceTree = "<group>"; };
 		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
+		2C5308E626E24C1D003D3042 /* Trimmed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trimmed.swift; sourceTree = "<group>"; };
+		2C5308E926E252F7003D3042 /* TrimmedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimmedTests.swift; sourceTree = "<group>"; };
 		2C53B4742588D63000E53779 /* GridSimpleCourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridSimpleCourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2C53B48E2588D80600E53779 /* SimpleCourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2C53B49F2588D9CD00E53779 /* SimpleCourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
@@ -4557,6 +4561,23 @@
 			path = InputOutput;
 			sourceTree = "<group>";
 		};
+		2C5308E526E24BFB003D3042 /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				2C5308E626E24C1D003D3042 /* Trimmed.swift */,
+			);
+			path = PropertyWrappers;
+			sourceTree = "<group>";
+		};
+		2C5308E826E252BA003D3042 /* PropertyWrappersTests */ = {
+			isa = PBXGroup;
+			children = (
+				2CCDD20024DBB61100A48EE0 /* ProtectedTests.swift */,
+				2C5308E926E252F7003D3042 /* TrimmedTests.swift */,
+			);
+			path = PropertyWrappersTests;
+			sourceTree = "<group>";
+		};
 		2C546C1623DA0E6100352F27 /* ExtensionsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -4566,7 +4587,7 @@
 			path = ExtensionsTests;
 			sourceTree = "<group>";
 		};
-		2C5967EC23E7828E00072800 /* Model */ = {
+		2C5967EC23E7828E00072800 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
 				2CA99F17260A38D2000ABCAD /* AttemptEntityTests.swift */,
@@ -4588,7 +4609,7 @@
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
 			);
-			path = Model;
+			path = ModelTests;
 			sourceTree = "<group>";
 		};
 		2C5D963D24C9B259004E9FD1 /* Auth */ = {
@@ -6637,11 +6658,11 @@
 				2C2485482101EE3E006F8858 /* DownloaderTests.swift */,
 				2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */,
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
-				2CCDD20024DBB61100A48EE0 /* ProtectedTests.swift */,
 				62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */,
 				2C546C1623DA0E6100352F27 /* ExtensionsTests */,
-				2C5967EC23E7828E00072800 /* Model */,
+				2C5967EC23E7828E00072800 /* ModelTests */,
 				2CF24F65239004AC002DBD0F /* ModulesTests */,
+				2C5308E826E252BA003D3042 /* PropertyWrappersTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -8250,6 +8271,7 @@
 				62E9869C94289A9B485281FD /* Helpers */,
 				2C8F3ADF23CCBD16004D113A /* Model */,
 				62E9815E0BE9E131426A2701 /* Modules */,
+				2C5308E526E24BFB003D3042 /* PropertyWrappers */,
 				62E982AE7C8995C2C6F1A430 /* Protocols */,
 				62E98E0FB32DB9DAC0362672 /* Services */,
 				62E9859F66798EAC445B916C /* Views */,
@@ -10545,6 +10567,7 @@
 				2CA99F6A260A4467000ABCAD /* SubmissionEntityTests.swift in Sources */,
 				2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
+				2C5308EA26E252F7003D3042 /* TrimmedTests.swift in Sources */,
 				2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */,
 				2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */,
 				2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */,
@@ -11487,6 +11510,7 @@
 				62E984F8DF99824B4D42BAA2 /* CourseInfoTabSyllabusInputProtocol.swift in Sources */,
 				62E98573951C2334AD8C7A63 /* CourseInfoTabSyllabusOutputProtocol.swift in Sources */,
 				62E98FB9AFF029A44C3A1AAE /* CourseInfoTabSyllabusProvider.swift in Sources */,
+				2C5308E726E24C1D003D3042 /* Trimmed.swift in Sources */,
 				62E9845D5434AFA93E756A34 /* SyllabusDownloadsService.swift in Sources */,
 				2C73B0EB25628FE600EA217D /* ExploreCatalogBlockHeaderView.swift in Sources */,
 				2C2CBF08253EFC8800799344 /* TableQuizViewModel.swift in Sources */,
