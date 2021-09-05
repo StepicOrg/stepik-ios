@@ -21,6 +21,9 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     @Trimmed
     private var currentQuery = ""
 
+    private var currentSearchResults: [SearchResultPlainObject]?
+    private var paginationState = PaginationState(page: 1, hasNext: false)
+
     init(
         presenter: CourseSearchPresenterProtocol,
         provider: CourseSearchProviderProtocol,
@@ -80,11 +83,16 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
                 return
             }
 
-            self.provider.searchInCourseRemotely(query: self.currentQuery, page: 1).done { searchResults, meta in
-                print(searchResults)
-                print(meta)
+            self.presenter.presentLoadingState(response: .init())
+
+            self.searchInCourse(query: self.currentQuery, page: 1).done { data in
+                self.currentSearchResults = data.searchResults
+                self.paginationState = PaginationState(page: 1, hasNext: data.hasNextPage)
+
+                self.presenter.presentSearchResults(response: .init(result: .success(data)))
             }.catch { error in
                 print("CourseSearchInteractor :: failed search with error = \(error)")
+                self.presenter.presentSearchResults(response: .init(result: .failure(error)))
             }
         case .suggestion(let viewModelUniqueIdentifier):
             guard let targetSearchQueryResult = self.currentSuggestions?.first(
@@ -94,6 +102,20 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             }
 
             print(targetSearchQueryResult)
+        }
+    }
+
+    private func searchInCourse(query: String, page: Int) -> Promise<CourseSearch.SearchResponseData> {
+        self.provider.searchInCourseRemotely(
+            query: query,
+            page: page
+        ).then { searchResults, meta -> Promise<CourseSearch.SearchResponseData> in
+            let data = CourseSearch.SearchResponseData(
+                course: self.currentCourse,
+                searchResults: searchResults,
+                hasNextPage: meta.hasNext
+            )
+            return .value(data)
         }
     }
 

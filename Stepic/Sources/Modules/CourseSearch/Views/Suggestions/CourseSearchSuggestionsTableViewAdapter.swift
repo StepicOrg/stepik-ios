@@ -1,15 +1,15 @@
-import Foundation
+import UIKit
 
-protocol CourseSearchSuggestionTableViewAdapterDelegate: AnyObject {
+protocol CourseSearchSuggestionsTableViewAdapterDelegate: AnyObject {
     func courseSearchSuggestionTableViewAdapter(
-        _ adapter: CourseSearchSuggestionTableViewAdapter,
+        _ adapter: CourseSearchSuggestionsTableViewAdapter,
         didSelectSuggestion suggestion: CourseSearchSuggestionViewModel,
         at indexPath: IndexPath
     )
 }
 
-final class CourseSearchSuggestionTableViewAdapter: NSObject {
-    weak var delegate: CourseSearchSuggestionTableViewAdapterDelegate?
+final class CourseSearchSuggestionsTableViewAdapter: NSObject {
+    weak var delegate: CourseSearchSuggestionsTableViewAdapterDelegate?
 
     var viewModels: [CourseSearchSuggestionViewModel]
     var query: String
@@ -17,7 +17,7 @@ final class CourseSearchSuggestionTableViewAdapter: NSObject {
     init(
         viewModels: [CourseSearchSuggestionViewModel] = [],
         query: String = "",
-        delegate: CourseSearchSuggestionTableViewAdapterDelegate? = nil
+        delegate: CourseSearchSuggestionsTableViewAdapterDelegate? = nil
     ) {
         self.viewModels = viewModels
         self.query = query
@@ -26,7 +26,7 @@ final class CourseSearchSuggestionTableViewAdapter: NSObject {
     }
 }
 
-extension CourseSearchSuggestionTableViewAdapter: UITableViewDataSource {
+extension CourseSearchSuggestionsTableViewAdapter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.viewModels.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,7 +40,7 @@ extension CourseSearchSuggestionTableViewAdapter: UITableViewDataSource {
     }
 }
 
-extension CourseSearchSuggestionTableViewAdapter: UITableViewDelegate {
+extension CourseSearchSuggestionsTableViewAdapter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.delegate?.courseSearchSuggestionTableViewAdapter(

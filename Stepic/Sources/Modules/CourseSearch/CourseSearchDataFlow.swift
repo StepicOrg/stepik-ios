@@ -1,6 +1,19 @@
 import Foundation
 
 enum CourseSearch {
+    // MARK: Common
+
+    struct SearchResponseData {
+        let course: Course?
+        let searchResults: [SearchResultPlainObject]
+        let hasNextPage: Bool
+    }
+
+    struct SearchResultData {
+        let searchResults: [CourseSearchResultViewModel]
+        let hasNextPage: Bool
+    }
+
     /// Load course & initial suggestions
     enum CourseSearchLoad {
         struct Request {}
@@ -61,6 +74,29 @@ enum CourseSearch {
             }
         }
 
+        struct Response {
+            let result: StepikResult<SearchResponseData>
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    /// Load next page
+    enum NextSearchResultsLoad {
+        struct Request {}
+
+        struct Response {
+            let result: StepikResult<SearchResponseData>
+        }
+
+        struct ViewModel {
+            let state: PaginationState
+        }
+    }
+
+    enum LoadingStatePresentation {
         struct Response {}
 
         struct ViewModel {}
@@ -72,6 +108,11 @@ enum CourseSearch {
         case idle
         case loading
         case error
-        case result(data: CourseSearchViewModel)
+        case result(data: SearchResultData)
+    }
+
+    enum PaginationState {
+        case error
+        case result(data: SearchResultData)
     }
 }

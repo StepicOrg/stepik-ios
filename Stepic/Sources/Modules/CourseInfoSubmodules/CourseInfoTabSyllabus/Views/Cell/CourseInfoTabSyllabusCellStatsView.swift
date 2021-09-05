@@ -109,6 +109,20 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
         }
     }
 
+    var isEmpty: Bool {
+        self.learnersView.isHidden
+            && self.likesView.isHidden
+            && self.progressView.isHidden
+            && self.timeToCompleteView.isHidden
+    }
+
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: self.itemsStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        )
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)

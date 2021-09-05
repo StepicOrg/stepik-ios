@@ -4,6 +4,8 @@ protocol CourseSearchViewControllerProtocol: AnyObject {
     func displayCourseSearchLoadResult(viewModel: CourseSearch.CourseSearchLoad.ViewModel)
     func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel)
     func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel)
+    func displaySearchResults(viewModel: CourseSearch.Search.ViewModel)
+    func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel)
 }
 
 final class CourseSearchViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -11,13 +13,22 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    private lazy var searchBar = CourseSearchBar()
-
-    private lazy var suggestionsTableViewAdapter = CourseSearchSuggestionTableViewAdapter(delegate: self)
-
     private var courseSearchView: CourseSearchView? { self.view as? CourseSearchView }
 
+    private lazy var searchBar = CourseSearchBar()
+
+    private lazy var paginationView = PaginationView()
+
+    private lazy var suggestionsTableViewAdapter = CourseSearchSuggestionsTableViewAdapter(delegate: self)
+    private lazy var searchResultsTableViewAdapter = CourseSearchResultsTableViewAdapter(delegate: self)
+
     private var state: CourseSearch.ViewControllerState
+
+    private var canTriggerPagination = false {
+        didSet {
+            self.searchResultsTableViewAdapter.canTriggerPagination = self.canTriggerPagination
+        }
+    }
 
     private var isFirstTimeViewDidAppear = true
 
@@ -40,6 +51,7 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
 
     override func loadView() {
         let view = CourseSearchView(frame: UIScreen.main.bounds)
+        view.paginationView = self.paginationView
         self.view = view
     }
 
@@ -72,21 +84,37 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
             self.showPlaceholder(for: .emptySuggestions)
         case .loading:
             self.isPlaceholderShown = false
-            //self.userCoursesReviewsView?.showLoading()
+            self.courseSearchView?.showLoading()
         case .error:
-            //self.userCoursesReviewsView?.hideLoading()
+            self.courseSearchView?.hideLoading()
             self.showPlaceholder(for: .connectionError)
         case .result(let data):
             self.isPlaceholderShown = false
-            //self.userCoursesReviewsView?.hideLoading()
+            self.courseSearchView?.hideLoading()
 
-            self.searchBar.placeholder = data.placeholderText
+            self.searchResultsTableViewAdapter.viewModels = data.searchResults
+            self.courseSearchView?.setSearchResultsTableViewHidden(false)
+            self.courseSearchView?.updateSearchResultsTableViewData(delegate: self.searchResultsTableViewAdapter)
 
-            //self.reviewsTableDataSource.update(data: data)
-            //self.userCoursesReviewsView?.updateTableViewData(delegate: self.reviewsTableDataSource)
+            if data.searchResults.isEmpty {
+                self.showPlaceholder(for: .emptySearchResults)
+            }
+
+            self.updatePagination(hasNextPage: data.hasNextPage)
         }
 
         self.state = newState
+    }
+
+    private func updatePagination(hasNextPage: Bool) {
+        self.canTriggerPagination = hasNextPage
+
+        if hasNextPage {
+            self.paginationView.setLoading()
+            self.courseSearchView?.showPaginationView()
+        } else {
+            self.courseSearchView?.hidePaginationView()
+        }
     }
 
     private func registerPlaceholders() {
@@ -120,6 +148,8 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
     func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel) {
         self.updateSuggestionsData(viewModel.suggestions)
 
+        self.courseSearchView?.setSearchResultsTableViewHidden(true)
+
         if viewModel.suggestions.isEmpty {
             self.courseSearchView?.setSuggestionsTableViewHidden(true)
         } else {
@@ -130,6 +160,14 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
 
     func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel) {
         self.updateSuggestionsData(viewModel.suggestions, query: viewModel.query)
+    }
+
+    func displaySearchResults(viewModel: CourseSearch.Search.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
+    func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel) {
+        self.updateState(newState: .loading)
     }
 
     // MARK: Private Helpers
@@ -170,6 +208,7 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
 
             self.courseSearchView?.updateSuggestionsTableViewData(delegate: self.suggestionsTableViewAdapter)
             self.courseSearchView?.setSuggestionsTableViewHidden(false)
+            self.courseSearchView?.setSearchResultsTableViewHidden(true)
         }
 
         self.interactor.doCourseSearchSuggestionsLoad(request: .init())
@@ -177,15 +216,18 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
 
     private func hideSuggestions() {
         self.courseSearchView?.setSuggestionsTableViewHidden(true)
-        self.showPlaceholder(for: .emptySuggestions)
+
+        if case .idle = self.state {
+            self.showPlaceholder(for: .emptySuggestions)
+        }
     }
 }
 
-// MARK: - CourseSearchViewController: CourseSearchSuggestionTableViewAdapterDelegate -
+// MARK: - CourseSearchViewController: CourseSearchSuggestionsTableViewAdapterDelegate -
 
-extension CourseSearchViewController: CourseSearchSuggestionTableViewAdapterDelegate {
+extension CourseSearchViewController: CourseSearchSuggestionsTableViewAdapterDelegate {
     func courseSearchSuggestionTableViewAdapter(
-        _ adapter: CourseSearchSuggestionTableViewAdapter,
+        _ adapter: CourseSearchSuggestionsTableViewAdapter,
         didSelectSuggestion suggestion: CourseSearchSuggestionViewModel,
         at indexPath: IndexPath
     ) {
@@ -193,6 +235,54 @@ extension CourseSearchViewController: CourseSearchSuggestionTableViewAdapterDele
         self.searchBar.endEditing(true)
 
         self.interactor.doSearch(request: .init(source: .suggestion(suggestion.uniqueIdentifier)))
+    }
+}
+
+// MARK: - CourseSearchViewController: CourseSearchResultsTableViewAdapterDelegate -
+
+extension CourseSearchViewController: CourseSearchResultsTableViewAdapterDelegate {
+    func courseSearchResultsTableViewAdapter(
+        _ adapter: CourseSearchResultsTableViewAdapter,
+        didSelectSearchResult searchResult: CourseSearchResultViewModel,
+        at indexPath: IndexPath
+    ) {
+        print(#function)
+        print(searchResult)
+        print(indexPath)
+    }
+
+    func courseSearchResultsTableViewAdapterDidRequestPagination(_ adapter: CourseSearchResultsTableViewAdapter) {
+        print(#function)
+    }
+
+    func courseSearchResultsTableViewAdapter(
+        _ adapter: CourseSearchResultsTableViewAdapter,
+        didSelectCover searchResult: CourseSearchResultViewModel,
+        at indexPath: IndexPath
+    ) {
+        print(#function)
+        print(searchResult)
+        print(indexPath)
+    }
+
+    func courseSearchResultsTableViewAdapter(
+        _ adapter: CourseSearchResultsTableViewAdapter,
+        didSelectComment searchResult: CourseSearchResultViewModel,
+        at indexPath: IndexPath
+    ) {
+        print(#function)
+        print(searchResult)
+        print(indexPath)
+    }
+
+    func courseSearchResultsTableViewAdapter(
+        _ adapter: CourseSearchResultsTableViewAdapter,
+        didSelectCommentUser searchResult: CourseSearchResultViewModel,
+        at indexPath: IndexPath
+    ) {
+        print(#function)
+        print(searchResult)
+        print(indexPath)
     }
 }
 
