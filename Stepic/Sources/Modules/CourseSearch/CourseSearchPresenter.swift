@@ -5,6 +5,7 @@ protocol CourseSearchPresenterProtocol {
     func presentCourseSearchSuggestionsLoadResult(response: CourseSearch.CourseSearchSuggestionsLoad.Response)
     func presentSearchQueryUpdateResult(response: CourseSearch.SearchQueryUpdate.Response)
     func presentSearchResults(response: CourseSearch.Search.Response)
+    func presentCommentUser(response: CourseSearch.CommentUserPresentation.Response)
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response)
 }
 
@@ -106,6 +107,10 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
         case .failure:
             self.viewController?.displaySearchResults(viewModel: .init(state: .error))
         }
+    }
+
+    func presentCommentUser(response: CourseSearch.CommentUserPresentation.Response) {
+        self.viewController?.displayCommentUser(viewModel: .init(userID: response.userID))
     }
 
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response) {

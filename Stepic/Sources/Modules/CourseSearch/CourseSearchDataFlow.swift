@@ -96,6 +96,21 @@ enum CourseSearch {
         }
     }
 
+    /// Show comment user profile
+    enum CommentUserPresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
+        }
+    }
+
     enum LoadingStatePresentation {
         struct Response {}
 

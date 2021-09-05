@@ -6,6 +6,7 @@ protocol CourseSearchInteractorProtocol {
     func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request)
     func doSearchQueryUpdate(request: CourseSearch.SearchQueryUpdate.Request)
     func doSearch(request: CourseSearch.Search.Request)
+    func doCommentUserPresentation(request: CourseSearch.CommentUserPresentation.Request)
 }
 
 final class CourseSearchInteractor: CourseSearchInteractorProtocol {
@@ -105,6 +106,17 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         }
     }
 
+    func doCommentUserPresentation(request: CourseSearch.CommentUserPresentation.Request) {
+        guard let target = self.currentSearchResults?.first(where: { "\($0.id)" == request.viewModelUniqueIdentifier }),
+              let commentUserID = target.commentUserID else {
+            return
+        }
+
+        self.presenter.presentCommentUser(response: .init(userID: commentUserID))
+    }
+
+    // MARK: Private API
+
     private func searchInCourse(query: String, page: Int) -> Promise<CourseSearch.SearchResponseData> {
         self.provider.searchInCourseRemotely(
             query: query,
@@ -118,8 +130,6 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             return .value(data)
         }
     }
-
-    // MARK: Private API
 
     private func fetchSuggestions() -> Guarantee<[SearchQueryResult]> {
         self.provider.fetchSuggestions(fetchLimit: Self.defaultSuggestionsFetchLimit)
