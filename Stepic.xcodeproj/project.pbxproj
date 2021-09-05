@@ -496,6 +496,7 @@
 		2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */; };
 		2C20C86C22F988030052E9BF /* CodeEditorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */; };
 		2C2144CF26CD80F1005A61CE /* QuizTitleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2144CE26CD80F1005A61CE /* QuizTitleFactory.swift */; };
+		2C21959626E57040008D9439 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C21959526E57040008D9439 /* UserInfo.swift */; };
 		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
 		2C22042720E277E50060117A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042620E277E50060117A /* SkeletonView.swift */; };
 		2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
@@ -2410,6 +2411,7 @@
 		2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorThemeService.swift; sourceTree = "<group>"; };
 		2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorTheme.swift; sourceTree = "<group>"; };
 		2C2144CE26CD80F1005A61CE /* QuizTitleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTitleFactory.swift; sourceTree = "<group>"; };
+		2C21959526E57040008D9439 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
 		2C22042620E277E50060117A /* SkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		2C22042820E277F60060117A /* SkeletonViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewAnimation.swift; sourceTree = "<group>"; };
@@ -5074,6 +5076,7 @@
 				2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */,
 				2C1864C824F6350F004AFFD1 /* StepikURLFactory.swift */,
 				2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */,
+				2C21959526E57040008D9439 /* UserInfo.swift */,
 				2CE61D81241295F500DA2CBA /* Spotlight */,
 				2C8F3AE423CCBEB9004D113A /* Video */,
 			);
@@ -10855,6 +10858,7 @@
 				2CDC9EFA24E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				2C4CB60C26810CD900DA6C52 /* CourseRevenueHeaderViewModel.swift in Sources */,
+				2C21959626E57040008D9439 /* UserInfo.swift in Sources */,
 				2CD04084250F67D0004D284F /* ProcessedContent.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */,

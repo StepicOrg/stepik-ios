@@ -13,7 +13,19 @@ final class SearchResult: NSManagedObject, ManagedObject, Identifiable {
 
 extension SearchResult {
     var plainObject: SearchResultPlainObject {
-        SearchResultPlainObject(
+        let commentUserInfo: UserInfo? = {
+            if let commentUser = self.commentUser {
+                return UserInfo(
+                    id: commentUser.id,
+                    avatarURL: commentUser.avatarURL,
+                    firstName: commentUser.firstName,
+                    lastName: commentUser.lastName
+                )
+            }
+            return nil
+        }()
+
+        return SearchResultPlainObject(
             id: self.id,
             position: self.position,
             score: self.score,
@@ -33,7 +45,8 @@ extension SearchResult {
             commentID: self.commentID,
             commentParentID: self.commentParentID,
             commentUserID: self.commentUserID,
-            commentText: self.commentText
+            commentText: self.commentText,
+            commentUserInfo: commentUserInfo
         )
     }
 

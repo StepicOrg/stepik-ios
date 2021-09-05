@@ -67,9 +67,20 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
                         return nil
                     }
 
+                    let avatarImageURL: URL?
+                    let username: String
+
+                    if let commentUserInfo = searchResult.commentUserInfo {
+                        avatarImageURL = URL(string: commentUserInfo.avatarURL)
+                        username = FormatterHelper.username(commentUserInfo)
+                    } else {
+                        avatarImageURL = nil
+                        username = "User \(searchResult.commentUserID ??? "n/a")"
+                    }
+
                     return CourseSearchResultViewModel.Comment(
-                        avatarImageURL: nil,
-                        username: "User \(searchResult.commentUserID ?? 0)",
+                        avatarImageURL: avatarImageURL,
+                        username: username,
                         text: searchResult.commentText ?? ""
                     )
                 }()

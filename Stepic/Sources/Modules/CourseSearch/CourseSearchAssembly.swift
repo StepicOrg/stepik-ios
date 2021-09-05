@@ -13,7 +13,9 @@ final class CourseSearchAssembly: Assembly {
             searchResultsRepository: SearchResultsRepository.default,
             searchQueryResultsPersistenceService: SearchQueryResultsPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
-            coursesPersistenceService: CoursesPersistenceService()
+            coursesPersistenceService: CoursesPersistenceService(),
+            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
+            usersPersistenceService: UsersPersistenceService()
         )
         let presenter = CourseSearchPresenter()
         let interactor = CourseSearchInteractor(presenter: presenter, provider: provider, courseID: self.courseID)
