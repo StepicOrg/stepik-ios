@@ -81,6 +81,8 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
             return
         }
 
+        let isTeacher = response.searchResult.lessonCanEdit ?? false
+
         let presentationContext: Discussions.PresentationContext = {
             if let commentID = response.searchResult.commentID {
                 if let commentParentID = response.searchResult.commentParentID {
@@ -97,7 +99,7 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
             viewModel: .init(
                 discussionProxyID: discussionProxyID,
                 stepID: stepID,
-                isTeacher: false,
+                isTeacher: isTeacher,
                 presentationContext: presentationContext
             )
         )

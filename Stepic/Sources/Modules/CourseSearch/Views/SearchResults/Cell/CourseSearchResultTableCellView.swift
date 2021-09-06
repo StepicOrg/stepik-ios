@@ -13,6 +13,8 @@ extension CourseSearchResultTableCellView {
         let titleTextColor = UIColor.stepikMaterialPrimaryText
         let titleFont = Typography.subheadlineFont
         let titleLabelInsets = LayoutInsets.default
+
+        let statsViewInsets = LayoutInsets(top: 16, left: 48)
     }
 }
 
@@ -55,7 +57,6 @@ final class CourseSearchResultTableCellView: UIView {
     private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
 
@@ -152,10 +153,9 @@ extension CourseSearchResultTableCellView: ProgrammaticallyInitializableViewProt
         self.statsView.translatesAutoresizingMaskIntoConstraints = false
         self.statsView.setContentCompressionResistancePriority(.required, for: .vertical)
         self.statsView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading
-                .equalToSuperview()
-                .offset(self.appearance.coverImageViewSize.width + self.appearance.stackViewSpacing)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.statsViewInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.statsViewInsets.left)
+            make.bottom.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview()
         }
     }

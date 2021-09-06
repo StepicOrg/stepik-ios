@@ -5,7 +5,7 @@ extension CourseSearchResultCommentView {
     struct Appearance {
         let separatorHeight: CGFloat = 0.5
         let separatorBackgroundColor = UIColor.stepikSeparator
-        let separatorInsets = LayoutInsets(right: -16)
+        let separatorInsets = LayoutInsets(top: 16, right: -16)
 
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
         let avatarImageViewSize = CGSize(width: 36, height: 36)

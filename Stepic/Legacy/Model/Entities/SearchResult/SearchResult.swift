@@ -53,6 +53,7 @@ extension SearchResult {
             lessonVoteDelta: self.lesson?.voteDelta,
             lessonTimeToComplete: self.lesson?.timeToComplete,
             lessonPassedBy: self.lesson?.passedBy,
+            lessonCanEdit: self.lesson?.canEdit,
             stepID: self.stepID,
             stepPosition: self.stepPosition,
             stepDiscussionProxyID: self.step?.discussionProxyID,

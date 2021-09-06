@@ -16,6 +16,10 @@ extension CourseInfoTabSyllabusCellStatsView {
         let likesImageColor = UIColor.stepikMaterialSecondaryText
         let likesImageSize = CGSize(width: 10, height: 8.7)
         let likesSpacing: CGFloat = 5.0
+
+        let timeToCompleteImageColor = UIColor.stepikMaterialSecondaryText
+        let timeToCompleteImageSize = CGSize(width: 10.7, height: 8.6)
+        let timeToCompleteSpacing: CGFloat = 5.0
     }
 }
 
@@ -66,12 +70,13 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
 
     private lazy var timeToCompleteView: CourseWidgetStatsItemView = {
         var appearance = CourseWidgetStatsItemView.Appearance()
-        // There is no icon in this view now
-        appearance.iconSpacing = 0
-        appearance.imageViewSize = .zero
+        appearance.iconSpacing = self.appearance.timeToCompleteSpacing
+        appearance.imageViewSize = self.appearance.timeToCompleteImageSize
+        appearance.imageTintColor = self.appearance.timeToCompleteImageColor
         appearance.textColor = self.appearance.itemTextColor
         appearance.font = self.appearance.itemTextFont
         let view = CourseWidgetStatsItemView(appearance: appearance)
+        view.image = UIImage(named: "course-info-lesson-time-to-complete")?.withRenderingMode(.alwaysTemplate)
         return view
     }()
 

@@ -27,6 +27,7 @@ struct SearchResultPlainObject {
     var lessonVoteDelta: Int?
     var lessonTimeToComplete: Double?
     var lessonPassedBy: Int?
+    var lessonCanEdit: Bool?
 
     let stepID: Int?
     let stepPosition: Int?

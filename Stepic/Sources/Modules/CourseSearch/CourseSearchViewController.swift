@@ -259,6 +259,7 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.state = .idle
         self.interactor.doSearchQueryUpdate(request: .init(query: searchText))
     }
 
@@ -283,8 +284,11 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
     private func hideSuggestions() {
         self.courseSearchView?.setSuggestionsTableViewHidden(true)
 
-        if case .idle = self.state {
+        switch self.state {
+        case .idle:
             self.showPlaceholder(for: .emptySuggestions)
+        default:
+            self.updateState(newState: self.state)
         }
     }
 }
