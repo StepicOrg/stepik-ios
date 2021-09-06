@@ -9,6 +9,7 @@ protocol CourseSearchViewControllerProtocol: AnyObject {
     func displayNextSearchResults(viewModel: CourseSearch.NextSearchResultsLoad.ViewModel)
     func displayCommentUser(viewModel: CourseSearch.CommentUserPresentation.ViewModel)
     func displayCommentDiscussion(viewModel: CourseSearch.CommentDiscussionPresentation.ViewModel)
+    func displayLesson(viewModel: CourseSearch.LessonPresentation.ViewModel)
     func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel)
 }
 
@@ -215,6 +216,22 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
         self.push(module: assembly.makeModule())
     }
 
+    func displayLesson(viewModel: CourseSearch.LessonPresentation.ViewModel) {
+        let startStep: LessonDataFlow.StartStep = {
+            if let stepID = viewModel.stepID {
+                return .id(stepID)
+            }
+            return .first
+        }()
+
+        let assembly = LessonAssembly(
+            initialContext: .lesson(id: viewModel.lessonID),
+            startStep: startStep,
+            moduleOutput: nil
+        )
+        self.push(module: assembly.makeModule())
+    }
+
     func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel) {
         self.updateState(newState: .loading)
     }
@@ -295,9 +312,9 @@ extension CourseSearchViewController: CourseSearchResultsTableViewAdapterDelegat
         didSelectSearchResult searchResult: CourseSearchResultViewModel,
         at indexPath: IndexPath
     ) {
-        print(#function)
-        print(searchResult)
-        print(indexPath)
+        self.interactor.doSearchResultPresentation(
+            request: .init(viewModelUniqueIdentifier: searchResult.uniqueIdentifier)
+        )
     }
 
     func courseSearchResultsTableViewAdapterDidRequestPagination(_ adapter: CourseSearchResultsTableViewAdapter) {
@@ -314,9 +331,9 @@ extension CourseSearchViewController: CourseSearchResultsTableViewAdapterDelegat
         didSelectCover searchResult: CourseSearchResultViewModel,
         at indexPath: IndexPath
     ) {
-        print(#function)
-        print(searchResult)
-        print(indexPath)
+        self.interactor.doSearchResultPresentation(
+            request: .init(viewModelUniqueIdentifier: searchResult.uniqueIdentifier)
+        )
     }
 
     func courseSearchResultsTableViewAdapter(

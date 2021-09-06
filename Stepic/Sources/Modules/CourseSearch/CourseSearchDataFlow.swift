@@ -129,6 +129,26 @@ enum CourseSearch {
         }
     }
 
+    /// Resolve SearchResult -> LessonPresentation
+    enum SearchResultPresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
+    /// Show lesson
+    enum LessonPresentation {
+        struct Response {
+            let lessonID: Lesson.IdType
+            let stepID: Step.IdType?
+        }
+
+        struct ViewModel {
+            let lessonID: Lesson.IdType
+            let stepID: Step.IdType?
+        }
+    }
+
     enum LoadingStatePresentation {
         struct Response {}
 

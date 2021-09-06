@@ -9,6 +9,7 @@ protocol CourseSearchInteractorProtocol {
     func doNextSearchResultsLoad(request: CourseSearch.NextSearchResultsLoad.Request)
     func doCommentUserPresentation(request: CourseSearch.CommentUserPresentation.Request)
     func doCommentDiscussionPresentation(request: CourseSearch.CommentDiscussionPresentation.Request)
+    func doSearchResultPresentation(request: CourseSearch.SearchResultPresentation.Request)
 }
 
 final class CourseSearchInteractor: CourseSearchInteractorProtocol {
@@ -153,6 +154,20 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         }
 
         self.presenter.presentCommentDiscussion(response: .init(searchResult: targetSearchResult))
+    }
+
+    func doSearchResultPresentation(request: CourseSearch.SearchResultPresentation.Request) {
+        guard let targetSearchResult = self.currentSearchResults?.first(
+            where: { "\($0.id)" == request.viewModelUniqueIdentifier }
+        ), let lessonID = targetSearchResult.lessonID else {
+            return
+        }
+
+        if targetSearchResult.isLesson {
+            self.presenter.presentLesson(response: .init(lessonID: lessonID, stepID: nil))
+        } else if let stepID = targetSearchResult.stepID {
+            self.presenter.presentLesson(response: .init(lessonID: lessonID, stepID: stepID))
+        }
     }
 
     // MARK: Private API

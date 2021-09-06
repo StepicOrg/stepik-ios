@@ -8,6 +8,7 @@ protocol CourseSearchPresenterProtocol {
     func presentNextSearchResults(response: CourseSearch.NextSearchResultsLoad.Response)
     func presentCommentUser(response: CourseSearch.CommentUserPresentation.Response)
     func presentCommentDiscussion(response: CourseSearch.CommentDiscussionPresentation.Response)
+    func presentLesson(response: CourseSearch.LessonPresentation.Response)
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response)
 }
 
@@ -100,6 +101,10 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
                 presentationContext: presentationContext
             )
         )
+    }
+
+    func presentLesson(response: CourseSearch.LessonPresentation.Response) {
+        self.viewController?.displayLesson(viewModel: .init(lessonID: response.lessonID, stepID: response.stepID))
     }
 
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response) {
