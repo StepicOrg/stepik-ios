@@ -18,6 +18,7 @@ extension Lesson {
     @NSManaged var managedCoursesArray: NSObject?
     @NSManaged var managedUnitsArray: NSObject?
     @NSManaged var managedUnit: Unit?
+    @NSManaged var managedSearchResults: NSSet?
 
     var id: Int {
         get {
@@ -154,5 +155,21 @@ extension Lesson {
         }
     }
 
-    var unit: Unit? { self.managedUnit }
+    var unit: Unit? {
+        get {
+            self.managedUnit
+        }
+        set {
+            self.managedUnit = newValue
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
+        }
+    }
 }

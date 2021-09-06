@@ -16,6 +16,14 @@ final class CourseSearchAssembly: Assembly {
             coursesPersistenceService: CoursesPersistenceService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepsPersistenceService: StepsPersistenceService(),
+            lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
+            lessonsPersistenceService: LessonsPersistenceService(),
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            unitsPersistenceService: UnitsPersistenceService(),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            sectionsPersistenceService: SectionsPersistenceService(),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            progressesPersistenceServiceProtocol: ProgressesPersistenceService(),
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
             usersPersistenceService: UsersPersistenceService()
         )

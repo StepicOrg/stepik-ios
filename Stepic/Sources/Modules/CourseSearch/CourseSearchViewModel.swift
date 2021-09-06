@@ -12,7 +12,7 @@ struct CourseSearchResultViewModel: UniqueIdentifiable {
     let coverImageURL: URL?
 
     let likesCount: Int?
-    let learnersLabelText: String
+    let learnersLabelText: String?
     let progressLabelText: String?
     let timeToCompleteLabelText: String?
 

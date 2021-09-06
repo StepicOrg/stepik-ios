@@ -31,6 +31,7 @@ extension SearchResult {
     // Relationships
     @NSManaged var managedSearchQueryResult: SearchQueryResult?
     @NSManaged var managedCommentUser: User?
+    @NSManaged var managedLesson: Lesson?
     @NSManaged var managedStep: Step?
 
     var id: Int {
@@ -232,6 +233,15 @@ extension SearchResult {
         }
         set {
             self.managedCommentUser = newValue
+        }
+    }
+
+    var lesson: Lesson? {
+        get {
+            self.managedLesson
+        }
+        set {
+            self.managedLesson = newValue
         }
     }
 

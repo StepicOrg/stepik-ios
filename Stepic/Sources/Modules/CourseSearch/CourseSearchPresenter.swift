@@ -46,64 +46,10 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
     func presentSearchResults(response: CourseSearch.Search.Response) {
         switch response.result {
         case .success(let data):
-            let searchResults = data.searchResults.map { searchResult -> CourseSearchResultViewModel in
-                let title: String = {
-                    let lessonTitle = searchResult.lessonTitle ?? ""
-
-                    if searchResult.isStep || searchResult.isComment {
-                        return "\(lessonTitle) - Шаг \(searchResult.stepPosition ?? 0)"
-                    }
-
-                    return lessonTitle
-                }()
-
-                let coverImageURL: URL? = {
-                    if let lessonCoverURL = searchResult.lessonCoverURL {
-                        return URL(string: lessonCoverURL)
-                    }
-                    return nil
-                }()
-
-                let commentViewModel: CourseSearchResultViewModel.Comment? = {
-                    guard searchResult.isComment else {
-                        return nil
-                    }
-
-                    let avatarImageURL: URL?
-                    let username: String
-
-                    if let commentUserInfo = searchResult.commentUserInfo {
-                        avatarImageURL = URL(string: commentUserInfo.avatarURL)
-                        username = FormatterHelper.username(commentUserInfo)
-                    } else {
-                        avatarImageURL = nil
-                        username = "User \(searchResult.commentUserID ??? "n/a")"
-                    }
-
-                    return CourseSearchResultViewModel.Comment(
-                        avatarImageURL: avatarImageURL,
-                        username: username,
-                        text: searchResult.commentText ?? ""
-                    )
-                }()
-
-                return CourseSearchResultViewModel(
-                    uniqueIdentifier: "\(searchResult.id)",
-                    title: title,
-                    coverImageURL: coverImageURL,
-                    likesCount: 771,
-                    learnersLabelText: "270K",
-                    progressLabelText: "7/20 баллов",
-                    timeToCompleteLabelText: "1 ч",
-                    comment: commentViewModel
-                )
-            }
-
             let resultData = CourseSearch.SearchResultData(
-                searchResults: searchResults,
+                searchResults: data.searchResults.map(self.makeSearchResultViewModel(_:)),
                 hasNextPage: data.hasNextPage
             )
-
             self.viewController?.displaySearchResults(viewModel: .init(state: .result(data: resultData)))
         case .failure:
             self.viewController?.displaySearchResults(viewModel: .init(state: .error))
@@ -150,5 +96,111 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
 
     private func makeSuggestionViewModel(_ searchQueryResult: SearchQueryResult) -> CourseSearchSuggestionViewModel {
         .init(uniqueIdentifier: searchQueryResult.id, title: searchQueryResult.query)
+    }
+
+    private func makeSearchResultViewModel(_ searchResult: SearchResultPlainObject) -> CourseSearchResultViewModel {
+        let title: String = {
+            var resultTitle = ""
+
+            let lessonTitle = searchResult.lessonTitle ?? ""
+            let stepPositionTitle = String(
+                format: NSLocalizedString("StepPosition", comment: ""),
+                arguments: ["\(searchResult.stepPosition ?? 0)"]
+            )
+
+            if let sectionPosition = searchResult.sectionPosition,
+               let unitPosition = searchResult.unitPosition {
+                resultTitle = "\(sectionPosition).\(unitPosition) \(lessonTitle)".trimmed()
+            } else {
+                resultTitle = "\(lessonTitle)"
+            }
+
+            if searchResult.isStep || searchResult.isComment {
+                resultTitle = "\(resultTitle) - \(stepPositionTitle)"
+            }
+
+            return resultTitle
+        }()
+
+        let coverImageURL: URL? = {
+            if let lessonCoverURL = searchResult.lessonCoverURL {
+                return URL(string: lessonCoverURL)
+            }
+            return nil
+        }()
+
+        let likesCount: Int? = {
+            if let lessonVoteDelta = searchResult.lessonVoteDelta {
+                return lessonVoteDelta == 0 ? nil : lessonVoteDelta
+            }
+            return nil
+        }()
+
+        let learnersLabelText: String? = {
+            if let lessonPassedBy = searchResult.lessonPassedBy {
+                return FormatterHelper.longNumber(lessonPassedBy)
+            }
+            return nil
+        }()
+
+        let progressLabelText: String? = {
+            guard let progress = searchResult.unitProgress,
+                  progress.cost > 0 else {
+                return nil
+            }
+
+            return String(
+                format: NSLocalizedString("CourseInfoTabSyllabusUnitProgressTitle", comment: ""),
+                arguments: ["\(FormatterHelper.progressScore(progress.score))", "\(progress.cost)"]
+            )
+        }()
+
+        let timeToCompleteLabelText: String? = {
+            guard let timeToComplete = searchResult.lessonTimeToComplete else {
+                return nil
+            }
+
+            if timeToComplete < 60 {
+                return nil
+            } else if case 60..<3600 = timeToComplete {
+                return FormatterHelper.minutesInSeconds(timeToComplete, roundingRule: .down)
+            } else {
+                return FormatterHelper.hoursInSeconds(timeToComplete, roundingRule: .down)
+            }
+        }()
+
+        let commentViewModel: CourseSearchResultViewModel.Comment? = {
+            guard searchResult.isComment else {
+                return nil
+            }
+
+            let avatarImageURL: URL?
+            let username: String
+
+            if let commentUserInfo = searchResult.commentUserInfo {
+                avatarImageURL = URL(string: commentUserInfo.avatarURL)
+                username = FormatterHelper.username(commentUserInfo)
+            } else {
+                avatarImageURL = nil
+                username = "User \(searchResult.commentUserID ??? "n/a")"
+            }
+
+            return CourseSearchResultViewModel.Comment(
+                avatarImageURL: avatarImageURL,
+                username: username,
+                text: searchResult.commentText ?? ""
+            )
+        }()
+
+        return CourseSearchResultViewModel(
+            uniqueIdentifier: "\(searchResult.id)",
+            title: title,
+            coverImageURL: coverImageURL,
+            likesCount: likesCount,
+            learnersLabelText: learnersLabelText,
+            progressLabelText: progressLabelText,
+            timeToCompleteLabelText: timeToCompleteLabelText,
+            comment: commentViewModel
+        )
     }
 }

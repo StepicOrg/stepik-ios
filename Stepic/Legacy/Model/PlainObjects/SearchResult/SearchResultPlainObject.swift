@@ -15,10 +15,18 @@ struct SearchResultPlainObject {
     let courseTitle: String?
     let courseCoverURL: String?
 
+    var sectionPosition: Int?
+
+    var unitPosition: Int?
+    var unitProgress: ProgressPlainObject?
+
     let lessonID: Int?
     let lessonOwnerID: Int?
     let lessonTitle: String?
     let lessonCoverURL: String?
+    var lessonVoteDelta: Int?
+    var lessonTimeToComplete: Double?
+    var lessonPassedBy: Int?
 
     let stepID: Int?
     let stepPosition: Int?

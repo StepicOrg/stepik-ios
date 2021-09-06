@@ -278,6 +278,7 @@
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUnitsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedVoteDelta" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SearchResult" inverseName="managedLesson" inverseEntity="SearchResult" syncable="YES"/>
         <relationship name="managedSteps" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Step" inverseName="managedLesson" inverseEntity="Step" syncable="YES"/>
         <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedLesson" inverseEntity="Unit" syncable="YES"/>
     </entity>
@@ -372,6 +373,7 @@
         <attribute name="managedTargetId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTargetTypeString" attributeType="String" defaultValueString="" syncable="YES"/>
         <relationship name="managedCommentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedSearchResults" inverseEntity="User" syncable="YES"/>
+        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedSearchResults" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="managedSearchQueryResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchQueryResult" inverseName="managedSearchResults" inverseEntity="SearchQueryResult" syncable="YES"/>
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedSearchResults" inverseEntity="Step" syncable="YES"/>
     </entity>
@@ -574,7 +576,7 @@
         <element name="ExamSession" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="LastCodeLanguage" positionX="-450" positionY="-234" width="128" height="75"/>
         <element name="LastStep" positionX="-361.27734375" positionY="646.40625" width="128" height="105"/>
-        <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="269"/>
+        <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="284"/>
         <element name="Notification" positionX="-208.453125" positionY="793.484375" width="128" height="195"/>
         <element name="ProctorSession" positionX="-441" positionY="-216" width="128" height="209"/>
         <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="329"/>

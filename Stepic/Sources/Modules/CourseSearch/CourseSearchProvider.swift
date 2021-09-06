@@ -21,6 +21,18 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
+    private let lessonsNetworkService: LessonsNetworkServiceProtocol
+    private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
+
+    private let unitsNetworkService: UnitsNetworkServiceProtocol
+    private let unitsPersistenceService: UnitsPersistenceServiceProtocol
+
+    private let sectionsNetworkService: SectionsNetworkServiceProtocol
+    private let sectionsPersistenceService: SectionsPersistenceServiceProtocol
+
+    private let progressesNetworkService: ProgressesNetworkServiceProtocol
+    private let progressesPersistenceServiceProtocol: ProgressesPersistenceServiceProtocol
+
     private let usersNetworkService: UsersNetworkServiceProtocol
     private let usersPersistenceService: UsersPersistenceServiceProtocol
 
@@ -32,6 +44,14 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol,
         stepsPersistenceService: StepsPersistenceServiceProtocol,
+        lessonsNetworkService: LessonsNetworkServiceProtocol,
+        lessonsPersistenceService: LessonsPersistenceServiceProtocol,
+        unitsNetworkService: UnitsNetworkServiceProtocol,
+        unitsPersistenceService: UnitsPersistenceServiceProtocol,
+        sectionsNetworkService: SectionsNetworkServiceProtocol,
+        sectionsPersistenceService: SectionsPersistenceServiceProtocol,
+        progressesNetworkService: ProgressesNetworkServiceProtocol,
+        progressesPersistenceServiceProtocol: ProgressesPersistenceServiceProtocol,
         usersNetworkService: UsersNetworkServiceProtocol,
         usersPersistenceService: UsersPersistenceServiceProtocol
     ) {
@@ -42,6 +62,14 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
         self.coursesPersistenceService = coursesPersistenceService
         self.stepsNetworkService = stepsNetworkService
         self.stepsPersistenceService = stepsPersistenceService
+        self.lessonsNetworkService = lessonsNetworkService
+        self.lessonsPersistenceService = lessonsPersistenceService
+        self.unitsNetworkService = unitsNetworkService
+        self.unitsPersistenceService = unitsPersistenceService
+        self.sectionsNetworkService = sectionsNetworkService
+        self.sectionsPersistenceService = sectionsPersistenceService
+        self.progressesNetworkService = progressesNetworkService
+        self.progressesPersistenceServiceProtocol = progressesPersistenceServiceProtocol
         self.usersNetworkService = usersNetworkService
         self.usersPersistenceService = usersPersistenceService
     }
@@ -60,8 +88,6 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
     }
 
     func searchInCourseRemotely(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)> {
-        var resultOrder = [Int]()
-        var resultIDs = Set<Int>()
         var resultMeta = Meta.oneAndOnlyPage
 
         return Promise { seal in
@@ -70,25 +96,30 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
                 query: query,
                 page: page,
                 dataSourceType: .remote
-            ).then { searchResults, meta -> Promise<SearchQueryResult> in
-                resultOrder = searchResults.map(\.id)
-                resultIDs = Set(resultOrder)
+            ).then { searchResults, meta -> Promise<[SearchResult]> in
                 resultMeta = meta
+
+                let targetOrder = searchResults.map(\.id)
+                let targetIDs = Set(targetOrder)
 
                 return self.searchQueryResultsPersistenceService
                     .fetch(query: query, courseID: self.courseID)
                     .compactMap { $0 }
-            }.then { searchQueryResult -> Guarantee<SearchQueryResult> in
-                self.fetchAndMergeSteps(searchQueryResult)
-            }.then { searchQueryResult -> Guarantee<SearchQueryResult> in
-                self.fetchAndMergeUsers(searchQueryResult)
-            }.done { searchQueryResult in
-                let searchResults = searchQueryResult
-                    .searchResults
-                    .filter { resultIDs.contains($0.id) }
-                    .reordered(order: resultOrder, transform: { $0.id })
-                    .map(\.plainObject)
-                seal.fulfill((searchResults, resultMeta))
+                    .map { searchQueryResult -> [SearchResult] in
+                        searchQueryResult
+                            .searchResults
+                            .filter { targetIDs.contains($0.id) }
+                            .reordered(order: targetOrder, transform: { $0.id })
+                    }
+            }.then { searchResults -> Guarantee<[SearchResult]> in
+                self.fetchAndMergeGraphData(searchResults)
+            }.then { searchResults -> Guarantee<[SearchResult]> in
+                self.fetchAndMergeSteps(searchResults)
+            }.then { searchResults -> Guarantee<[SearchResult]> in
+                self.fetchAndMergeUsers(searchResults)
+            }.done { searchResults in
+                let plainObjects = searchResults.map(\.plainObject)
+                seal.fulfill((plainObjects, resultMeta))
             }.catch { error in
                 seal.reject(error)
             }
@@ -103,30 +134,168 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
 
     // MARK: Private API
 
-    private func fetchAndMergeSteps(_ searchQueryResult: SearchQueryResult) -> Guarantee<SearchQueryResult> {
-        let stepsIDs = Set(searchQueryResult.searchResults.compactMap(\.stepID))
+    private func fetchAndMergeGraphData(_ searchResults: [SearchResult]) -> Guarantee<[SearchResult]> {
+        let lessonsIDs = Set(searchResults.compactMap(\.lessonID))
+
+        if lessonsIDs.isEmpty {
+            return .value(searchResults)
+        }
+
+        var resultLessons = [Lesson]()
+        var resultUnits = [Unit]()
+        var resultUnitsProgresses = [Progress]()
+        var resultSections = [Section]()
+
+        return Guarantee { seal in
+            self.fetchLessons(Array(lessonsIDs)).then { lessons -> Guarantee<[Unit]> in
+                resultLessons = lessons
+
+                let unitsIDs = Set(lessons.flatMap(\.unitsArray))
+                return self.fetchUnits(Array(unitsIDs))
+            }.then { units -> Guarantee<[Progress]> in
+                resultUnits = units
+
+                let progressesIDs = units.compactMap(\.progressId)
+                return self.fetchProgresses(Array(progressesIDs))
+            }.then { progresses -> Guarantee<[Section]> in
+                resultUnitsProgresses = progresses
+
+                let sectionsIDs = Set(resultUnits.map(\.sectionId))
+                return self.fetchSections(Array(sectionsIDs))
+            }.then { sections -> Guarantee<Course?> in
+                resultSections = sections
+                return Guarantee { seal in
+                    self.fetchCourse().done { seal($0) }.catch { _ in seal(nil) }
+                }
+            }.done { course in
+                guard let course = course else {
+                    return seal(searchResults)
+                }
+
+                let courseSectionsIDs = Set(course.sectionsArray)
+                resultSections = resultSections.filter { courseSectionsIDs.contains($0.id) }
+
+                let courseUnitsIDs = Set(resultSections.flatMap(\.unitsArray))
+                resultUnits = resultUnits.filter { courseUnitsIDs.contains($0.id) }
+
+                let lessonsMap = Dictionary(uniqueKeysWithValues: resultLessons.map({ ($0.id, $0) }))
+                let unitsMap = Dictionary(uniqueKeysWithValues: resultUnits.map({ ($0.id, $0) }))
+                let unitsProgressesMap = Dictionary(uniqueKeysWithValues: resultUnitsProgresses.map({ ($0.id, $0) }))
+                let sectionsMap = Dictionary(uniqueKeysWithValues: resultSections.map({ ($0.id, $0) }))
+
+                CoreDataHelper.shared.context.performChanges {
+                    for searchResult in searchResults {
+                        guard let lessonID = searchResult.lessonID,
+                              let lesson = lessonsMap[lessonID] else {
+                            continue
+                        }
+
+                        searchResult.lesson = lesson
+
+                        guard let unitID = lesson.unitsArray.first(where: { courseUnitsIDs.contains($0) }),
+                              let unit = unitsMap[unitID] else {
+                            continue
+                        }
+
+                        lesson.unit = unit
+
+                        if let progressID = unit.progressId,
+                           let progress = unitsProgressesMap[progressID] {
+                            unit.progress = progress
+                        }
+
+                        if let section = sectionsMap[unit.sectionId] {
+                            unit.section = section
+                        }
+                    }
+
+                    seal(searchResults)
+                }
+            }
+        }
+    }
+
+    private func fetchLessons(_ ids: [Lesson.IdType]) -> Guarantee<[Lesson]> {
+        firstly { () -> Guarantee<[Lesson]> in
+            Guarantee(self.lessonsPersistenceService.fetch(ids: ids), fallback: nil).map { $0 ?? [] }
+        }.then { cachedLessons -> Guarantee<[Lesson]> in
+            if Set(ids) == Set(cachedLessons.map(\.id)) {
+                return .value(cachedLessons)
+            } else {
+                return Guarantee(self.lessonsNetworkService.fetch(ids: ids), fallback: nil).map { $0 ?? cachedLessons }
+            }
+        }
+    }
+
+    private func fetchUnits(_ ids: [Unit.IdType]) -> Guarantee<[Unit]> {
+        firstly { () -> Guarantee<[Unit]> in
+            Guarantee(self.unitsPersistenceService.fetch(ids: ids), fallback: nil).map { $0 ?? [] }
+        }.then { cachedUnits -> Guarantee<[Unit]> in
+            if Set(ids) == Set(cachedUnits.map(\.id)) {
+                return .value(cachedUnits)
+            } else {
+                return Guarantee(self.unitsNetworkService.fetch(ids: ids), fallback: nil).map { $0 ?? cachedUnits }
+            }
+        }
+    }
+
+    private func fetchSections(_ ids: [Section.IdType]) -> Guarantee<[Section]> {
+        firstly { () -> Guarantee<[Section]> in
+            Guarantee(self.sectionsPersistenceService.fetch(ids: ids), fallback: nil).map { $0 ?? [] }
+        }.then { cachedSections -> Guarantee<[Section]> in
+            if Set(ids) == Set(cachedSections.map(\.id)) {
+                return .value(cachedSections)
+            } else {
+                return Guarantee(
+                    self.sectionsNetworkService.fetch(ids: ids),
+                    fallback: nil
+                ).map { $0 ?? cachedSections }
+            }
+        }
+    }
+
+    private func fetchProgresses(_ ids: [Progress.IdType]) -> Guarantee<[Progress]> {
+        firstly { () -> Guarantee<[Progress]> in
+            Guarantee(
+                self.progressesPersistenceServiceProtocol.fetch(ids: ids, page: 1),
+                fallback: nil
+            ).map { $0?.0 ?? [] }
+        }.then { cachedProgresses -> Guarantee<[Progress]> in
+            if Set(ids) == Set(cachedProgresses.map(\.id)) {
+                return .value(cachedProgresses)
+            } else {
+                return Guarantee(
+                    self.progressesNetworkService.fetch(ids: ids),
+                    fallback: nil
+                ).map { $0 ?? cachedProgresses }
+            }
+        }
+    }
+
+    private func fetchAndMergeSteps(_ searchResults: [SearchResult]) -> Guarantee<[SearchResult]> {
+        let stepsIDs = Set(searchResults.compactMap(\.stepID))
 
         if stepsIDs.isEmpty {
-            return .value(searchQueryResult)
+            return .value(searchResults)
         }
 
         return Guarantee { seal in
             self.fetchSteps(Array(stepsIDs)).done { steps in
                 if steps.isEmpty {
-                    return seal(searchQueryResult)
+                    return seal(searchResults)
                 }
 
                 let stepsMap = Dictionary(uniqueKeysWithValues: steps.map({ ($0.id, $0) }))
 
-                searchQueryResult.managedObjectContext?.performChanges {
-                    for searchResult in searchQueryResult.searchResults {
+                CoreDataHelper.shared.context.performChanges {
+                    for searchResult in searchResults {
                         if let stepID = searchResult.stepID,
                            let step = stepsMap[stepID] {
                             searchResult.step = step
                         }
                     }
 
-                    seal(searchQueryResult)
+                    seal(searchResults)
                 }
             }
         }
@@ -144,35 +313,30 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
         }
     }
 
-    }
-    }
-
-
-                }
-    private func fetchAndMergeUsers(_ searchQueryResult: SearchQueryResult) -> Guarantee<SearchQueryResult> {
-        let usersIDs = Set(searchQueryResult.searchResults.compactMap(\.commentUserID))
+    private func fetchAndMergeUsers(_ searchResults: [SearchResult]) -> Guarantee<[SearchResult]> {
+        let usersIDs = Set(searchResults.compactMap(\.commentUserID))
 
         if usersIDs.isEmpty {
-            return .value(searchQueryResult)
+            return .value(searchResults)
         }
 
         return Guarantee { seal in
             self.fetchUsers(Array(usersIDs)).done { users in
                 if users.isEmpty {
-                    return seal(searchQueryResult)
+                    return seal(searchResults)
                 }
 
                 let usersMap = Dictionary(uniqueKeysWithValues: users.map({ ($0.id, $0) }))
 
-                searchQueryResult.managedObjectContext?.performChanges {
-                    for searchResult in searchQueryResult.searchResults {
+                CoreDataHelper.shared.context.performChanges {
+                    for searchResult in searchResults {
                         if let commentUserID = searchResult.commentUserID,
                            let commentUser = usersMap[commentUserID] {
                             searchResult.commentUser = commentUser
                         }
                     }
 
-                    seal(searchQueryResult)
+                    seal(searchResults)
                 }
             }
         }

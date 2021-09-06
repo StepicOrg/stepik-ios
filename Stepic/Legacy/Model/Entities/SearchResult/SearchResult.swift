@@ -25,6 +25,13 @@ extension SearchResult {
             return nil
         }()
 
+        let unitProgress: ProgressPlainObject? = {
+            if let progress = self.lesson?.unit?.progress {
+                return ProgressPlainObject(progress: progress)
+            }
+            return nil
+        }()
+
         return SearchResultPlainObject(
             id: self.id,
             position: self.position,
@@ -36,10 +43,16 @@ extension SearchResult {
             courseAuthorsIDs: self.courseAuthorsArray,
             courseTitle: self.courseTitle,
             courseCoverURL: self.courseCover,
+            sectionPosition: self.lesson?.unit?.section?.position,
+            unitPosition: self.lesson?.unit?.position,
+            unitProgress: unitProgress,
             lessonID: self.lessonID,
             lessonOwnerID: self.lessonOwnerID,
             lessonTitle: self.lessonTitle,
             lessonCoverURL: self.lessonCover,
+            lessonVoteDelta: self.lesson?.voteDelta,
+            lessonTimeToComplete: self.lesson?.timeToComplete,
+            lessonPassedBy: self.lesson?.passedBy,
             stepID: self.stepID,
             stepPosition: self.stepPosition,
             stepDiscussionProxyID: self.step?.discussionProxyID,
