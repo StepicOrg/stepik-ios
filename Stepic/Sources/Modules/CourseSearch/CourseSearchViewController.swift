@@ -1,3 +1,4 @@
+import IQKeyboardManagerSwift
 import UIKit
 
 protocol CourseSearchViewControllerProtocol: AnyObject {
@@ -31,6 +32,8 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
             self.searchResultsTableViewAdapter.canTriggerPagination = self.canTriggerPagination
         }
     }
+
+    private var savedShouldResignOnTouchOutside = true
 
     private var isFirstTimeViewDidAppear = true
 
@@ -69,6 +72,13 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
         self.interactor.doCourseSearchLoad(request: .init())
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.savedShouldResignOnTouchOutside = IQKeyboardManager.shared.shouldResignOnTouchOutside
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = false
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -76,6 +86,11 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
             self.isFirstTimeViewDidAppear = false
             _ = self.searchBar.becomeFirstResponder()
         }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = self.savedShouldResignOnTouchOutside
     }
 
     // MARK: Private API
