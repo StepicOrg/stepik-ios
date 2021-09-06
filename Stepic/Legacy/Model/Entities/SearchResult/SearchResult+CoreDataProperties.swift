@@ -31,6 +31,7 @@ extension SearchResult {
     // Relationships
     @NSManaged var managedSearchQueryResult: SearchQueryResult?
     @NSManaged var managedCommentUser: User?
+    @NSManaged var managedStep: Step?
 
     var id: Int {
         get {
@@ -231,6 +232,15 @@ extension SearchResult {
         }
         set {
             self.managedCommentUser = newValue
+        }
+    }
+
+    var step: Step? {
+        get {
+            self.managedStep
+        }
+        set {
+            self.managedStep = newValue
         }
     }
 }

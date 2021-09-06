@@ -18,6 +18,9 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
     private let coursesNetworkService: CoursesNetworkServiceProtocol
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
 
+    private let stepsNetworkService: StepsNetworkServiceProtocol
+    private let stepsPersistenceService: StepsPersistenceServiceProtocol
+
     private let usersNetworkService: UsersNetworkServiceProtocol
     private let usersPersistenceService: UsersPersistenceServiceProtocol
 
@@ -27,6 +30,8 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
         searchQueryResultsPersistenceService: SearchQueryResultsPersistenceServiceProtocol,
         coursesNetworkService: CoursesNetworkServiceProtocol,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        stepsPersistenceService: StepsPersistenceServiceProtocol,
         usersNetworkService: UsersNetworkServiceProtocol,
         usersPersistenceService: UsersPersistenceServiceProtocol
     ) {
@@ -35,6 +40,8 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
         self.searchQueryResultsPersistenceService = searchQueryResultsPersistenceService
         self.coursesNetworkService = coursesNetworkService
         self.coursesPersistenceService = coursesPersistenceService
+        self.stepsNetworkService = stepsNetworkService
+        self.stepsPersistenceService = stepsPersistenceService
         self.usersNetworkService = usersNetworkService
         self.usersPersistenceService = usersPersistenceService
     }
@@ -72,6 +79,8 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
                     .fetch(query: query, courseID: self.courseID)
                     .compactMap { $0 }
             }.then { searchQueryResult -> Guarantee<SearchQueryResult> in
+                self.fetchAndMergeSteps(searchQueryResult)
+            }.then { searchQueryResult -> Guarantee<SearchQueryResult> in
                 self.fetchAndMergeUsers(searchQueryResult)
             }.done { searchQueryResult in
                 let searchResults = searchQueryResult
@@ -94,6 +103,52 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
 
     // MARK: Private API
 
+    private func fetchAndMergeSteps(_ searchQueryResult: SearchQueryResult) -> Guarantee<SearchQueryResult> {
+        let stepsIDs = Set(searchQueryResult.searchResults.compactMap(\.stepID))
+
+        if stepsIDs.isEmpty {
+            return .value(searchQueryResult)
+        }
+
+        return Guarantee { seal in
+            self.fetchSteps(Array(stepsIDs)).done { steps in
+                if steps.isEmpty {
+                    return seal(searchQueryResult)
+                }
+
+                let stepsMap = Dictionary(uniqueKeysWithValues: steps.map({ ($0.id, $0) }))
+
+                searchQueryResult.managedObjectContext?.performChanges {
+                    for searchResult in searchQueryResult.searchResults {
+                        if let stepID = searchResult.stepID,
+                           let step = stepsMap[stepID] {
+                            searchResult.step = step
+                        }
+                    }
+
+                    seal(searchQueryResult)
+                }
+            }
+        }
+    }
+
+    private func fetchSteps(_ ids: [Step.IdType]) -> Guarantee<[Step]> {
+        firstly { () -> Guarantee<[Step]> in
+            Guarantee(self.stepsPersistenceService.fetch(ids: ids), fallback: nil).map { $0 ?? [] }
+        }.then { cachedSteps -> Guarantee<[Step]> in
+            if Set(ids) == Set(cachedSteps.map(\.id)) {
+                return .value(cachedSteps)
+            } else {
+                return Guarantee(self.stepsNetworkService.fetch(ids: ids), fallback: nil).map { $0 ?? cachedSteps }
+            }
+        }
+    }
+
+    }
+    }
+
+
+                }
     private func fetchAndMergeUsers(_ searchQueryResult: SearchQueryResult) -> Guarantee<SearchQueryResult> {
         let usersIDs = Set(searchQueryResult.searchResults.compactMap(\.commentUserID))
 
@@ -111,8 +166,9 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
 
                 searchQueryResult.managedObjectContext?.performChanges {
                     for searchResult in searchQueryResult.searchResults {
-                        if let commentUserID = searchResult.commentUserID {
-                            searchResult.commentUser = usersMap[commentUserID]
+                        if let commentUserID = searchResult.commentUserID,
+                           let commentUser = usersMap[commentUserID] {
+                            searchResult.commentUser = commentUser
                         }
                     }
 
@@ -124,17 +180,13 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
 
     private func fetchUsers(_ ids: [User.IdType]) -> Guarantee<[User]> {
         self.usersPersistenceService.fetch(ids: ids).then { cachedUsers -> Guarantee<[User]> in
-            let targetIDs = Set(ids)
-            let cachedIDs = Set(cachedUsers.map(\.id))
-            let cacheMissIDs = targetIDs.subtracting(cachedIDs)
-
-            if cacheMissIDs.isEmpty {
+            if Set(ids) == Set(cachedUsers.map(\.id)) {
                 return .value(cachedUsers)
             } else {
                 return Guarantee(
-                    self.usersNetworkService.fetch(ids: Array(cacheMissIDs)),
+                    self.usersNetworkService.fetch(ids: ids),
                     fallback: nil
-                ).map { cachedUsers + ($0 ?? []) }
+                ).map { $0 ?? cachedUsers }
             }
         }
     }

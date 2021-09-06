@@ -120,8 +120,8 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentDiscussions(response: .init(result: .success(discussionsData)))
 
-                    if case .scrollTo(let discussionID, _) = strongSelf.presentationContext {
-                        strongSelf.presenter.presentSelectComment(response: .init(commentID: discussionID))
+                    if case .scrollTo(let discussionID, let replyID) = strongSelf.presentationContext {
+                        strongSelf.presenter.presentSelectComment(response: .init(commentID: replyID ?? discussionID))
                     }
                 }
             }.catch { error in
@@ -473,9 +473,9 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     }
 
     private func makeDiscussionsData() -> Discussions.ResponseData {
-        let selectedDiscussionID: Comment.IdType? = {
-            if case .scrollTo(let discussionID, _) = self.presentationContext {
-                return discussionID
+        let selectedCommentID: Comment.IdType? = {
+            if case .scrollTo(let discussionID, let replyID) = self.presentationContext {
+                return replyID ?? discussionID
             }
             return nil
         }()
@@ -488,7 +488,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             currentSortType: self.currentSortType,
             discussionsLeftToLoadInLeftHalf: self.getDiscussionsLeftToLoadInLeftHalfCount(),
             discussionsLeftToLoadInRightHalf: self.getDiscussionsLeftToLoadInRightHalfCount(),
-            selectedDiscussionID: selectedDiscussionID
+            selectedCommentID: selectedCommentID
         )
     }
 

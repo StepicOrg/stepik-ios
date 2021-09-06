@@ -111,6 +111,24 @@ enum CourseSearch {
         }
     }
 
+    /// Present discussions thread
+    enum CommentDiscussionPresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let searchResult: SearchResultPlainObject
+        }
+
+        struct ViewModel {
+            let discussionProxyID: DiscussionProxy.IdType
+            let stepID: Step.IdType
+            let isTeacher: Bool
+            let presentationContext: Discussions.PresentationContext
+        }
+    }
+
     enum LoadingStatePresentation {
         struct Response {}
 

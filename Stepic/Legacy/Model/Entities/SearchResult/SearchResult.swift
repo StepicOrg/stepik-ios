@@ -42,6 +42,7 @@ extension SearchResult {
             lessonCoverURL: self.lessonCover,
             stepID: self.stepID,
             stepPosition: self.stepPosition,
+            stepDiscussionProxyID: self.step?.discussionProxyID,
             commentID: self.commentID,
             commentParentID: self.commentParentID,
             commentUserID: self.commentUserID,

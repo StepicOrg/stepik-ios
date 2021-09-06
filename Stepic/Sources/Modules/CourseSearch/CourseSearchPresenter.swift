@@ -6,6 +6,7 @@ protocol CourseSearchPresenterProtocol {
     func presentSearchQueryUpdateResult(response: CourseSearch.SearchQueryUpdate.Response)
     func presentSearchResults(response: CourseSearch.Search.Response)
     func presentCommentUser(response: CourseSearch.CommentUserPresentation.Response)
+    func presentCommentDiscussion(response: CourseSearch.CommentDiscussionPresentation.Response)
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response)
 }
 
@@ -111,6 +112,34 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
 
     func presentCommentUser(response: CourseSearch.CommentUserPresentation.Response) {
         self.viewController?.displayCommentUser(viewModel: .init(userID: response.userID))
+    }
+
+    func presentCommentDiscussion(response: CourseSearch.CommentDiscussionPresentation.Response) {
+        guard let discussionProxyID = response.searchResult.stepDiscussionProxyID,
+              let stepID = response.searchResult.stepID else {
+            return
+        }
+
+        let presentationContext: Discussions.PresentationContext = {
+            if let commentID = response.searchResult.commentID {
+                if let commentParentID = response.searchResult.commentParentID {
+                    return .scrollTo(discussionID: commentParentID, replyID: commentID)
+                } else {
+                    return .scrollTo(discussionID: commentID, replyID: nil)
+                }
+            } else {
+                return .fromBeginning
+            }
+        }()
+
+        self.viewController?.displayCommentDiscussion(
+            viewModel: .init(
+                discussionProxyID: discussionProxyID,
+                stepID: stepID,
+                isTeacher: false,
+                presentationContext: presentationContext
+            )
+        )
     }
 
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response) {

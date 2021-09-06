@@ -22,6 +22,7 @@ struct SearchResultPlainObject {
 
     let stepID: Int?
     let stepPosition: Int?
+    var stepDiscussionProxyID: String?
 
     let commentID: Int?
     let commentParentID: Int?

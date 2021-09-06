@@ -373,6 +373,7 @@
         <attribute name="managedTargetTypeString" attributeType="String" defaultValueString="" syncable="YES"/>
         <relationship name="managedCommentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedSearchResults" inverseEntity="User" syncable="YES"/>
         <relationship name="managedSearchQueryResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchQueryResult" inverseName="managedSearchResults" inverseEntity="SearchQueryResult" syncable="YES"/>
+        <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedSearchResults" inverseEntity="Step" syncable="YES"/>
     </entity>
     <entity name="Section" representedClassName=".Section" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -439,6 +440,7 @@
         <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedSteps" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="managedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StepOptions" inverseName="managedStep" inverseEntity="StepOptions" syncable="YES"/>
         <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedStep" inverseEntity="Progress" syncable="YES"/>
+        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SearchResult" inverseName="managedStep" inverseEntity="SearchResult" syncable="YES"/>
     </entity>
     <entity name="StepOptions" representedClassName=".StepOptions" syncable="YES">
         <attribute name="managedExecutionMemoryLimit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -578,10 +580,10 @@
         <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="329"/>
         <element name="Progress" positionX="210.40234375" positionY="32.89453125" width="128" height="223"/>
         <element name="SearchQueryResult" positionX="-441" positionY="-225" width="128" height="104"/>
-        <element name="SearchResult" positionX="-450" positionY="-234" width="128" height="359"/>
+        <element name="SearchResult" positionX="-450" positionY="-234" width="128" height="389"/>
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="464"/>
         <element name="SocialProfile" positionX="-450" positionY="-234" width="128" height="133"/>
-        <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="404"/>
+        <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="419"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
         <element name="StoryPartReaction" positionX="-450" positionY="-225" width="128" height="74"/>
         <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="179"/>

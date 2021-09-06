@@ -6,6 +6,7 @@ protocol CourseSearchViewControllerProtocol: AnyObject {
     func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel)
     func displaySearchResults(viewModel: CourseSearch.Search.ViewModel)
     func displayCommentUser(viewModel: CourseSearch.CommentUserPresentation.ViewModel)
+    func displayCommentDiscussion(viewModel: CourseSearch.CommentDiscussionPresentation.ViewModel)
     func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel)
 }
 
@@ -172,6 +173,17 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
         self.push(module: assembly.makeModule())
     }
 
+    func displayCommentDiscussion(viewModel: CourseSearch.CommentDiscussionPresentation.ViewModel) {
+        let assembly = DiscussionsAssembly(
+            discussionThreadType: .default,
+            discussionProxyID: viewModel.discussionProxyID,
+            stepID: viewModel.stepID,
+            isTeacher: viewModel.isTeacher,
+            presentationContext: viewModel.presentationContext
+        )
+        self.push(module: assembly.makeModule())
+    }
+
     func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel) {
         self.updateState(newState: .loading)
     }
@@ -276,9 +288,9 @@ extension CourseSearchViewController: CourseSearchResultsTableViewAdapterDelegat
         didSelectComment searchResult: CourseSearchResultViewModel,
         at indexPath: IndexPath
     ) {
-        print(#function)
-        print(searchResult)
-        print(indexPath)
+        self.interactor.doCommentDiscussionPresentation(
+            request: .init(viewModelUniqueIdentifier: searchResult.uniqueIdentifier)
+        )
     }
 
     func courseSearchResultsTableViewAdapter(

@@ -14,6 +14,8 @@ final class CourseSearchAssembly: Assembly {
             searchQueryResultsPersistenceService: SearchQueryResultsPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             coursesPersistenceService: CoursesPersistenceService(),
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+            stepsPersistenceService: StepsPersistenceService(),
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
             usersPersistenceService: UsersPersistenceService()
         )

@@ -29,6 +29,8 @@ extension Step {
     @NSManaged var managedDiscussionThreadsArray: NSObject?
     @NSManaged var managedDiscussionThreads: NSOrderedSet?
 
+    @NSManaged var managedSearchResults: NSSet?
+
     var id: Int {
         get {
             self.managedId?.intValue ?? -1
@@ -259,6 +261,15 @@ extension Step {
         }
         set {
             self.managedNeedsPlan = newValue
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
         }
     }
 }
