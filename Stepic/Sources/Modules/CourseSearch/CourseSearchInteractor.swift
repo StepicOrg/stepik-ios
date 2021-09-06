@@ -28,14 +28,19 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     private var currentSearchResults: [SearchResultPlainObject]?
     private var paginationState = PaginationState(page: 1, hasNext: false)
 
+    private let analytics: Analytics
+    private var shouldOpenedAnalyticsEventSend = true
+
     init(
         presenter: CourseSearchPresenterProtocol,
         provider: CourseSearchProviderProtocol,
-        courseID: Course.IdType
+        courseID: Course.IdType,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
         self.courseID = courseID
+        self.analytics = analytics
     }
 
     func doCourseSearchLoad(request: CourseSearch.CourseSearchLoad.Request) {
@@ -45,6 +50,13 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         ).done { course, suggestions in
             self.currentCourse = course
             self.currentSuggestions = suggestions
+
+            if self.shouldOpenedAnalyticsEventSend {
+                self.shouldOpenedAnalyticsEventSend = false
+                self.analytics.send(
+                    .courseContentSearchScreenOpened(id: self.courseID, title: self.currentCourse?.title ?? "")
+                )
+            }
 
             let data = CourseSearch.CourseSearchLoad.Response.Data(course: course, suggestions: suggestions)
             self.presenter.presentCourseSearchLoadResult(response: .init(result: .success(data)))

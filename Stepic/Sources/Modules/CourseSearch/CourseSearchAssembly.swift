@@ -28,7 +28,12 @@ final class CourseSearchAssembly: Assembly {
             usersPersistenceService: UsersPersistenceService()
         )
         let presenter = CourseSearchPresenter()
-        let interactor = CourseSearchInteractor(presenter: presenter, provider: provider, courseID: self.courseID)
+        let interactor = CourseSearchInteractor(
+            presenter: presenter,
+            provider: provider,
+            courseID: self.courseID,
+            analytics: StepikAnalytics.shared
+        )
         let viewController = CourseSearchViewController(interactor: interactor)
 
         presenter.viewController = viewController
