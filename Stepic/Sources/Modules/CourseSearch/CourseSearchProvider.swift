@@ -5,8 +5,7 @@ protocol CourseSearchProviderProtocol {
     func fetchCourse() -> Promise<Course?>
     func fetchSuggestions(fetchLimit: Int) -> Guarantee<[SearchQueryResult]>
 
-    func searchInCourseRemotely(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)>
-    func searchInCourseCache(query: String) -> Promise<[SearchResultPlainObject]>
+    func searchInCourse(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)>
 }
 
 final class CourseSearchProvider: CourseSearchProviderProtocol {
@@ -87,7 +86,7 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
         self.searchQueryResultsPersistenceService.fetch(courseID: self.courseID, fetchLimit: fetchLimit)
     }
 
-    func searchInCourseRemotely(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)> {
+    func searchInCourse(query: String, page: Int) -> Promise<([SearchResultPlainObject], Meta)> {
         var resultMeta = Meta.oneAndOnlyPage
 
         return Promise { seal in
@@ -124,12 +123,6 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
                 seal.reject(error)
             }
         }
-    }
-
-    func searchInCourseCache(query: String) -> Promise<[SearchResultPlainObject]> {
-        self.searchResultsRepository
-            .searchInCourse(self.courseID, query: query, page: 1, dataSourceType: .cache)
-            .map { $0.0 }
     }
 
     // MARK: Private API

@@ -6,6 +6,7 @@ protocol CourseSearchInteractorProtocol {
     func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request)
     func doSearchQueryUpdate(request: CourseSearch.SearchQueryUpdate.Request)
     func doSearch(request: CourseSearch.Search.Request)
+    func doNextSearchResultsLoad(request: CourseSearch.NextSearchResultsLoad.Request)
     func doCommentUserPresentation(request: CourseSearch.CommentUserPresentation.Request)
     func doCommentDiscussionPresentation(request: CourseSearch.CommentDiscussionPresentation.Request)
 }
@@ -103,7 +104,35 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
                 return
             }
 
-            print(targetSearchQueryResult)
+            let data = CourseSearch.SearchResponseData(
+                course: self.currentCourse,
+                searchResults: targetSearchQueryResult.searchResults.map(\.plainObject),
+                hasNextPage: false
+            )
+
+            self.currentSearchResults = data.searchResults
+            self.paginationState = PaginationState(page: 1, hasNext: false)
+
+            self.presenter.presentSearchResults(response: .init(result: .success(data)))
+        }
+    }
+
+    func doNextSearchResultsLoad(request: CourseSearch.NextSearchResultsLoad.Request) {
+        guard self.paginationState.hasNext && !self.currentQuery.isEmpty else {
+            return
+        }
+
+        let nextPageIndex = self.paginationState.page + 1
+        print("CourseSearchInteractor :: load next page, page = \(nextPageIndex)")
+
+        self.searchInCourse(query: self.currentQuery, page: nextPageIndex).done { data in
+            self.currentSearchResults?.append(contentsOf: data.searchResults)
+            self.paginationState = PaginationState(page: nextPageIndex, hasNext: data.hasNextPage)
+
+            self.presenter.presentNextSearchResults(response: .init(result: .success(data)))
+        }.catch { error in
+            print("CourseSearchInteractor :: failed load next page with error = \(error)")
+            self.presenter.presentNextSearchResults(response: .init(result: .failure(error)))
         }
     }
 
@@ -129,7 +158,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     // MARK: Private API
 
     private func searchInCourse(query: String, page: Int) -> Promise<CourseSearch.SearchResponseData> {
-        self.provider.searchInCourseRemotely(
+        self.provider.searchInCourse(
             query: query,
             page: page
         ).then { searchResults, meta -> Promise<CourseSearch.SearchResponseData> in

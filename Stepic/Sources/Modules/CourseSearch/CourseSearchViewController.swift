@@ -6,6 +6,7 @@ protocol CourseSearchViewControllerProtocol: AnyObject {
     func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel)
     func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel)
     func displaySearchResults(viewModel: CourseSearch.Search.ViewModel)
+    func displayNextSearchResults(viewModel: CourseSearch.NextSearchResultsLoad.ViewModel)
     func displayCommentUser(viewModel: CourseSearch.CommentUserPresentation.ViewModel)
     func displayCommentDiscussion(viewModel: CourseSearch.CommentDiscussionPresentation.ViewModel)
     func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel)
@@ -144,7 +145,7 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
                     }
 
                     strongSelf.updateState(newState: .loading)
-                    // retry search
+                    strongSelf.interactor.doSearch(request: .init(source: .searchQuery))
                 }
             ),
             for: .connectionError
@@ -181,6 +182,21 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
 
     func displaySearchResults(viewModel: CourseSearch.Search.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayNextSearchResults(viewModel: CourseSearch.NextSearchResultsLoad.ViewModel) {
+        switch (self.state, viewModel.state) {
+        case (.result(let currentData), .result(let nextData)):
+            let resultData = CourseSearch.SearchResultData(
+                searchResults: currentData.searchResults + nextData.searchResults,
+                hasNextPage: nextData.hasNextPage
+            )
+            self.updateState(newState: .result(data: resultData))
+        case (_, .error):
+            self.updateState(newState: self.state)
+        default:
+            break
+        }
     }
 
     func displayCommentUser(viewModel: CourseSearch.CommentUserPresentation.ViewModel) {
@@ -285,7 +301,12 @@ extension CourseSearchViewController: CourseSearchResultsTableViewAdapterDelegat
     }
 
     func courseSearchResultsTableViewAdapterDidRequestPagination(_ adapter: CourseSearchResultsTableViewAdapter) {
-        print(#function)
+        guard self.canTriggerPagination else {
+            return
+        }
+
+        self.canTriggerPagination = false
+        self.interactor.doNextSearchResultsLoad(request: .init())
     }
 
     func courseSearchResultsTableViewAdapter(
