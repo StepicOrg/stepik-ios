@@ -4,11 +4,14 @@ import PromiseKit
 protocol CourseSearchInteractorProtocol {
     func doCourseSearchLoad(request: CourseSearch.CourseSearchLoad.Request)
     func doCourseSearchSuggestionsLoad(request: CourseSearch.CourseSearchSuggestionsLoad.Request)
+
     func doSearchQueryUpdate(request: CourseSearch.SearchQueryUpdate.Request)
-    func doSearch(request: CourseSearch.Search.Request)
+    func doSearchResultsLoad(request: CourseSearch.SearchResultsLoad.Request)
     func doNextSearchResultsLoad(request: CourseSearch.NextSearchResultsLoad.Request)
+
     func doCommentUserPresentation(request: CourseSearch.CommentUserPresentation.Request)
     func doCommentDiscussionPresentation(request: CourseSearch.CommentDiscussionPresentation.Request)
+
     func doSearchResultPresentation(request: CourseSearch.SearchResultPresentation.Request)
 }
 
@@ -92,7 +95,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         }
     }
 
-    func doSearch(request: CourseSearch.Search.Request) {
+    func doSearchResultsLoad(request: CourseSearch.SearchResultsLoad.Request) {
         switch request.source {
         case .searchQuery:
             guard !self.currentQuery.isEmpty else {

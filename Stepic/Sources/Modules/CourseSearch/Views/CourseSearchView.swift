@@ -33,7 +33,7 @@ final class CourseSearchView: UIView {
         return tableView
     }()
 
-    var paginationView: UIView?
+    private lazy var paginationView = PaginationView()
 
     init(
         frame: CGRect = .zero,
@@ -53,6 +53,8 @@ final class CourseSearchView: UIView {
     }
 
     func showPaginationView() {
+        self.paginationView.setLoading()
+
         self.searchResultsTableView.tableFooterView = self.paginationView
         self.searchResultsTableView.tableFooterView?.frame = CGRect(
             x: 0,

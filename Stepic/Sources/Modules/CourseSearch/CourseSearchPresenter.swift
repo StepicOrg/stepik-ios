@@ -3,11 +3,14 @@ import UIKit
 protocol CourseSearchPresenterProtocol {
     func presentCourseSearchLoadResult(response: CourseSearch.CourseSearchLoad.Response)
     func presentCourseSearchSuggestionsLoadResult(response: CourseSearch.CourseSearchSuggestionsLoad.Response)
+
     func presentSearchQueryUpdateResult(response: CourseSearch.SearchQueryUpdate.Response)
-    func presentSearchResults(response: CourseSearch.Search.Response)
+    func presentSearchResults(response: CourseSearch.SearchResultsLoad.Response)
     func presentNextSearchResults(response: CourseSearch.NextSearchResultsLoad.Response)
+
     func presentCommentUser(response: CourseSearch.CommentUserPresentation.Response)
     func presentCommentDiscussion(response: CourseSearch.CommentDiscussionPresentation.Response)
+
     func presentLesson(response: CourseSearch.LessonPresentation.Response)
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response)
 }
@@ -45,7 +48,7 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
         )
     }
 
-    func presentSearchResults(response: CourseSearch.Search.Response) {
+    func presentSearchResults(response: CourseSearch.SearchResultsLoad.Response) {
         switch response.result {
         case .success(let data):
             let resultData = CourseSearch.SearchResultData(

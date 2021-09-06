@@ -4,11 +4,14 @@ import UIKit
 protocol CourseSearchViewControllerProtocol: AnyObject {
     func displayCourseSearchLoadResult(viewModel: CourseSearch.CourseSearchLoad.ViewModel)
     func displayCourseSearchSuggestionsLoadResult(viewModel: CourseSearch.CourseSearchSuggestionsLoad.ViewModel)
+
     func displaySearchQueryUpdateResult(viewModel: CourseSearch.SearchQueryUpdate.ViewModel)
-    func displaySearchResults(viewModel: CourseSearch.Search.ViewModel)
+    func displaySearchResults(viewModel: CourseSearch.SearchResultsLoad.ViewModel)
     func displayNextSearchResults(viewModel: CourseSearch.NextSearchResultsLoad.ViewModel)
+
     func displayCommentUser(viewModel: CourseSearch.CommentUserPresentation.ViewModel)
     func displayCommentDiscussion(viewModel: CourseSearch.CommentDiscussionPresentation.ViewModel)
+
     func displayLesson(viewModel: CourseSearch.LessonPresentation.ViewModel)
     func displayLoadingState(viewModel: CourseSearch.LoadingStatePresentation.ViewModel)
 }
@@ -22,8 +25,6 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
 
     private lazy var searchBar = CourseSearchBar()
 
-    private lazy var paginationView = PaginationView()
-
     private lazy var suggestionsTableViewAdapter = CourseSearchSuggestionsTableViewAdapter(delegate: self)
     private lazy var searchResultsTableViewAdapter = CourseSearchResultsTableViewAdapter(delegate: self)
 
@@ -36,7 +37,6 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
     }
 
     private var savedShouldResignOnTouchOutside = true
-
     private var isFirstTimeViewDidAppear = true
 
     init(
@@ -58,7 +58,6 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
 
     override func loadView() {
         let view = CourseSearchView(frame: UIScreen.main.bounds)
-        view.paginationView = self.paginationView
         self.view = view
     }
 
@@ -129,7 +128,6 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
         self.canTriggerPagination = hasNextPage
 
         if hasNextPage {
-            self.paginationView.setLoading()
             self.courseSearchView?.showPaginationView()
         } else {
             self.courseSearchView?.hidePaginationView()
@@ -146,7 +144,7 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
                     }
 
                     strongSelf.updateState(newState: .loading)
-                    strongSelf.interactor.doSearch(request: .init(source: .searchQuery))
+                    strongSelf.interactor.doSearchResultsLoad(request: .init(source: .searchQuery))
                 }
             ),
             for: .connectionError
@@ -181,7 +179,7 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
         self.updateSuggestionsData(viewModel.suggestions, query: viewModel.query)
     }
 
-    func displaySearchResults(viewModel: CourseSearch.Search.ViewModel) {
+    func displaySearchResults(viewModel: CourseSearch.SearchResultsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
 
@@ -264,7 +262,7 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.interactor.doSearch(request: .init(source: .searchQuery))
+        self.interactor.doSearchResultsLoad(request: .init(source: .searchQuery))
     }
 
     // MARK: Private Helpers
@@ -304,7 +302,7 @@ extension CourseSearchViewController: CourseSearchSuggestionsTableViewAdapterDel
         self.searchBar.text = suggestion.title
         self.searchBar.endEditing(true)
 
-        self.interactor.doSearch(request: .init(source: .suggestion(suggestion.uniqueIdentifier)))
+        self.interactor.doSearchResultsLoad(request: .init(source: .suggestion(suggestion.uniqueIdentifier)))
     }
 }
 

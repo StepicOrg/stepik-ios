@@ -46,7 +46,7 @@ enum CourseSearch {
         }
     }
 
-    /// Filter suggestions
+    /// Handle query update and filter suggestions
     enum SearchQueryUpdate {
         struct Request {
             let query: String
@@ -64,7 +64,7 @@ enum CourseSearch {
     }
 
     /// Perform search in course
-    enum Search {
+    enum SearchResultsLoad {
         struct Request {
             let source: Source
 
