@@ -15,7 +15,7 @@ typealias JSONDictionary = [String: Any]
 protocol JSONSerializable: Identifiable {
     associatedtype IdType: Equatable
 
-    var id: IdType { get set }
+    var id: IdType { get }
     var json: JSON { get }
 
     init(json: JSON)

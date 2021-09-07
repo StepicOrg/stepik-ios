@@ -96,9 +96,11 @@ final class RetrieveRequestMaker {
                                 return T(json: objectJSON)
                             }
                         }
+
+                        self.saveManagedObjectContextIfNeeded(objectType: T.self)
+
                         let meta = Meta(json: json["meta"])
                         seal.fulfill((resultArray, meta, json))
-                        CoreDataHelper.shared.save()
                     }
                 }
             }.catch { error in
@@ -206,11 +208,10 @@ final class RetrieveRequestMaker {
                                 }
                             }
 
-                            CoreDataHelper.shared.save()
+                            self.saveManagedObjectContextIfNeeded(objectType: T.self)
 
                             let meta = Meta(json: json["meta"])
                             seal.fulfill((resultArray, meta, json))
-                            CoreDataHelper.shared.save()
                         }.catch { error in
                             seal.reject(error)
                         }
@@ -311,7 +312,8 @@ final class RetrieveRequestMaker {
                             }
                         }
 
-                        CoreDataHelper.shared.save()
+                        self.saveManagedObjectContextIfNeeded(objectType: T.self)
+
                         seal.fulfill((resultArray, json))
                     }
                 }
@@ -340,6 +342,14 @@ final class RetrieveRequestMaker {
             }.catch { error in
                 seal.reject(error)
             }
+        }
+    }
+
+    // MARK: Private API
+
+    private func saveManagedObjectContextIfNeeded<T>(objectType: T.Type) {
+        if objectType is ManagedObject.Type {
+            CoreDataHelper.shared.save()
         }
     }
 }

@@ -34,6 +34,7 @@ extension User {
     @NSManaged var managedCourseBenefitByMonths: NSSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
     @NSManaged var managedSearchResults: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
@@ -335,6 +336,15 @@ extension User {
         }
         set {
             self.managedSearchResults = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
         }
     }
 
