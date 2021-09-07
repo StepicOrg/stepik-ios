@@ -1,7 +1,7 @@
 import CoreData
 import Foundation
 
-final class Announcement: NSManagedObject, ManagedObject {
+final class Announcement: NSManagedObject, ManagedObject, Identifiable {
     typealias IdType = Int
 
     static var defaultSortDescriptors: [NSSortDescriptor] {
