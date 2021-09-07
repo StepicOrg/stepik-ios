@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-struct AnnouncementPlainObject {
+struct AnnouncementPlainObject: JSONSerializable {
     let id: Int
     let courseID: Int
     let userID: Int?
@@ -76,6 +76,8 @@ extension AnnouncementPlainObject {
         self.estimatedFinishDate = Parser.dateFromTimedateJSON(json[JSONKey.estimatedFinishDate.rawValue])
         self.noticeDates = json[JSONKey.noticeDates.rawValue].arrayValue.compactMap(Parser.dateFromTimedateJSON(_:))
     }
+
+    func update(json: JSON) {}
 
     enum JSONKey: String {
         case id

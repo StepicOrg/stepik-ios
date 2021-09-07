@@ -1020,6 +1020,7 @@
 		2CC8678725E1504000762416 /* SubmissionsFilterQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8678625E1504000762416 /* SubmissionsFilterQuery.swift */; };
 		2CCB4B1526E76F220056C44E /* AnnouncementPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB4B1426E76F220056C44E /* AnnouncementPlainObject.swift */; };
 		2CCB4B1826E772810056C44E /* AnnouncementStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB4B1726E772810056C44E /* AnnouncementStatus.swift */; };
+		2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB4B1926E77CED0056C44E /* AnnouncementsAPI.swift */; };
 		2CCBDBE524AF93B8001A5A83 /* NewProfileDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCBDBE424AF93B8001A5A83 /* NewProfileDetailsViewModel.swift */; };
 		2CCBE69426B0659B00A2E922 /* StepQuizReviewSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCBE69326B0659B00A2E922 /* StepQuizReviewSkeletonView.swift */; };
 		2CCC505E21E8EA88004D9FC1 /* PersonalDeadlinesTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */; };
@@ -2979,6 +2980,7 @@
 		2CC925F9685393FA44977549 /* NewProfileCertificatesAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCertificatesAssembly.swift; sourceTree = "<group>"; };
 		2CCB4B1426E76F220056C44E /* AnnouncementPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementPlainObject.swift; sourceTree = "<group>"; };
 		2CCB4B1726E772810056C44E /* AnnouncementStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementStatus.swift; sourceTree = "<group>"; };
+		2CCB4B1926E77CED0056C44E /* AnnouncementsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsAPI.swift; sourceTree = "<group>"; };
 		2CCBDBE424AF93B8001A5A83 /* NewProfileDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileDetailsViewModel.swift; sourceTree = "<group>"; };
 		2CCBE69326B0659B00A2E922 /* StepQuizReviewSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewSkeletonView.swift; sourceTree = "<group>"; };
 		2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_language_code_v27.xcdatamodel; sourceTree = "<group>"; };
@@ -7702,6 +7704,7 @@
 				62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */,
 				2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */,
 				2C964108257000CE0007A3A4 /* AdaptiveRatingsRestoreAPI.swift */,
+				2CCB4B1926E77CED0056C44E /* AnnouncementsAPI.swift */,
 				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
 				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
 				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
@@ -10940,6 +10943,7 @@
 				2CCDD80724F8A7D7006644A8 /* ApplicationShortcutService.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				2C0A10A7268B279A001D4023 /* CourseBenefitByMonthsAPI.swift in Sources */,
+				2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
 				2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */,
