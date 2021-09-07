@@ -5,6 +5,7 @@
         <attribute name="managedCourseId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCreateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedEmailTemplate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedEstimatedFinishDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedEstimatedStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsInfinite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
@@ -627,6 +628,6 @@
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="178"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="Announcement" positionX="-450" positionY="-225" width="128" height="449"/>
+        <element name="Announcement" positionX="-450" positionY="-225" width="128" height="464"/>
     </elements>
 </model>
