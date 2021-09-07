@@ -25,6 +25,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
 
     private var currentCourse: Course?
     private var currentSuggestions: [SearchQueryResult]?
+    private var currentSelectedSuggestion: SearchQueryResult?
     @Trimmed
     private var currentQuery = ""
 
@@ -57,7 +58,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             if self.shouldOpenedAnalyticsEventSend {
                 self.shouldOpenedAnalyticsEventSend = false
                 self.analytics.send(
-                    .courseContentSearchScreenOpened(id: self.courseID, title: self.currentCourse?.title ?? "")
+                    .courseContentSearchScreenOpened(id: self.courseID, title: self.currentCourse?.title)
                 )
             }
 
@@ -96,6 +97,19 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     }
 
     func doSearchResultsLoad(request: CourseSearch.SearchResultsLoad.Request) {
+        defer {
+            self.analytics.send(
+                .сourseContentSearched(
+                    id: self.courseID,
+                    title: self.currentCourse?.title,
+                    query: self.currentQuery,
+                    suggestion: self.currentSelectedSuggestion?.query
+                )
+            )
+        }
+
+        self.currentSelectedSuggestion = nil
+
         switch request.source {
         case .searchQuery:
             guard !self.currentQuery.isEmpty else {
@@ -119,6 +133,8 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             ) else {
                 return
             }
+
+            self.currentSelectedSuggestion = targetSearchQueryResult
 
             let data = CourseSearch.SearchResponseData(
                 course: self.currentCourse,
@@ -158,6 +174,17 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             return
         }
 
+        self.analytics.send(
+            .courseContentSearchResultClicked(
+                id: self.courseID,
+                title: self.currentCourse?.title,
+                query: self.currentQuery,
+                suggestion: self.currentSelectedSuggestion?.query,
+                type: .user,
+                stepID: target.stepID
+            )
+        )
+
         self.presenter.presentCommentUser(response: .init(userID: commentUserID))
     }
 
@@ -168,6 +195,17 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             return
         }
 
+        self.analytics.send(
+            .courseContentSearchResultClicked(
+                id: self.courseID,
+                title: self.currentCourse?.title,
+                query: self.currentQuery,
+                suggestion: self.currentSelectedSuggestion?.query,
+                type: .comment,
+                stepID: targetSearchResult.stepID
+            )
+        )
+
         self.presenter.presentCommentDiscussion(response: .init(searchResult: targetSearchResult))
     }
 
@@ -177,6 +215,17 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
         ), let lessonID = targetSearchResult.lessonID else {
             return
         }
+
+        self.analytics.send(
+            .courseContentSearchResultClicked(
+                id: self.courseID,
+                title: self.currentCourse?.title,
+                query: self.currentQuery,
+                suggestion: self.currentSelectedSuggestion?.query,
+                type: .step,
+                stepID: targetSearchResult.stepID
+            )
+        )
 
         if targetSearchResult.isLesson {
             self.presenter.presentLesson(response: .init(lessonID: lessonID, stepID: nil))

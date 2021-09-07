@@ -160,52 +160,62 @@ extension AnalyticsEvent {
 
     // MARK: - Course Search -
 
-    static func courseContentSearchScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
+    static func courseContentSearchScreenOpened(id: Int, title: String?) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course content search screen opened",
             parameters: [
                 "course": id,
-                "title": title
+                "title": title as Any
             ]
         )
     }
 
     static func сourseContentSearched(
         id: Int,
-        title: String,
+        title: String?,
         query: String,
-        suggestion: String
+        suggestion: String?
     ) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course content searched",
-            parameters: [
-                "course": id,
-                "title": title,
-                "query": query,
-                "suggestion": suggestion
-            ]
-        )
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content searched", parameters: parameters)
     }
 
     static func courseContentSearchResultClicked(
         id: Int,
-        title: String,
+        title: String?,
         query: String,
-        suggestion: String,
-        type: String, // step / comment / user
-        stepID: Int
+        suggestion: String?,
+        type: CourseContentSearchResultClickType,
+        stepID: Int?
     ) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course content search result clicked",
-            parameters: [
-                "course": id,
-                "title": title,
-                "query": query,
-                "suggestion": suggestion,
-                "type": type,
-                "step": stepID
-            ]
-        )
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query,
+            "type": type.rawValue,
+            "step": stepID as Any
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content search result clicked", parameters: parameters)
+    }
+
+    enum CourseContentSearchResultClickType: String {
+        case step
+        case comment
+        case user
     }
 
     // MARK: - Course Benefits -

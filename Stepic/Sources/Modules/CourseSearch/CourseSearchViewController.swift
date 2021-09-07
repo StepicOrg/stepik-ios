@@ -302,6 +302,7 @@ extension CourseSearchViewController: CourseSearchSuggestionsTableViewAdapterDel
         self.searchBar.text = suggestion.title
         self.searchBar.endEditing(true)
 
+        self.interactor.doSearchQueryUpdate(request: .init(query: suggestion.title))
         self.interactor.doSearchResultsLoad(request: .init(source: .suggestion(suggestion.uniqueIdentifier)))
     }
 }
