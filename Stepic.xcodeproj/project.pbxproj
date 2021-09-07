@@ -459,6 +459,8 @@
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
 		2C192CCD2668C994009221F6 /* WishlistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C192CCC2668C994009221F6 /* WishlistService.swift */; };
 		2C1948B626298455007D3486 /* FLEXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1948B526298455007D3486 /* FLEXManager.swift */; };
+		2C1966A926E7981B000D5B06 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1966A826E7981B000D5B06 /* Announcement.swift */; };
+		2C1966AB26E79823000D5B06 /* Announcement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1966AA26E79823000D5B06 /* Announcement+CoreDataProperties.swift */; };
 		2C19C0C126CFE81200FB2D44 /* BaseQuizInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19C0C026CFE81200FB2D44 /* BaseQuizInputProtocol.swift */; };
 		2C19D99F26174C7400181DB0 /* StepikAcademyCourseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D99E26174C7400181DB0 /* StepikAcademyCourseListCollectionViewCell.swift */; };
 		2C19D9A626174EEE00181DB0 /* StepikAcademyCourseListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C19D9A526174EEE00181DB0 /* StepikAcademyCourseListWidgetView.swift */; };
@@ -2376,6 +2378,9 @@
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
 		2C192CCC2668C994009221F6 /* WishlistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistService.swift; sourceTree = "<group>"; };
 		2C1948B526298455007D3486 /* FLEXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLEXManager.swift; sourceTree = "<group>"; };
+		2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_announcements_v88.xcdatamodel; sourceTree = "<group>"; };
+		2C1966A826E7981B000D5B06 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		2C1966AA26E79823000D5B06 /* Announcement+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Announcement+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C19C0C026CFE81200FB2D44 /* BaseQuizInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuizInputProtocol.swift; sourceTree = "<group>"; };
 		2C19D99E26174C7400181DB0 /* StepikAcademyCourseListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C19D9A526174EEE00181DB0 /* StepikAcademyCourseListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListWidgetView.swift; sourceTree = "<group>"; };
@@ -4330,6 +4335,15 @@
 				2C6DECE023D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		2C1966A726E797FC000D5B06 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				2C1966A826E7981B000D5B06 /* Announcement.swift */,
+				2C1966AA26E79823000D5B06 /* Announcement+CoreDataProperties.swift */,
+			);
+			path = Announcement;
 			sourceTree = "<group>";
 		};
 		2C19D99D26174C5800181DB0 /* Cell */ = {
@@ -7300,6 +7314,7 @@
 		2CFF9015242A255000FD7311 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				2C1966A726E797FC000D5B06 /* Announcement */,
 				2CFF9016242A255D00FD7311 /* Assignment */,
 				2C04BA2E24058A4B00D74D4B /* Attempt */,
 				2CFF9017242A257900FD7311 /* Block */,
@@ -7327,8 +7342,8 @@
 				2CDA1B2A2613B80700E36BF7 /* ProctorSession */,
 				2CFF9026242A265F00FD7311 /* Profile */,
 				2CFF9027242A266A00FD7311 /* Progress */,
-				2C98423826DE4C510098E36B /* SearchResult */,
 				2C98423D26DE58810098E36B /* SearchQueryResult */,
+				2C98423826DE4C510098E36B /* SearchResult */,
 				2CFF9028242A267700FD7311 /* Section */,
 				2C619A7924CFFB80007D3529 /* SocialProfile */,
 				2CFF9029242A268300FD7311 /* Step */,
@@ -10960,6 +10975,7 @@
 				2CCB4B1826E772810056C44E /* AnnouncementStatus.swift in Sources */,
 				08E43E98214C279700E3CB50 /* PushRouter.swift in Sources */,
 				2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */,
+				2C1966AB26E79823000D5B06 /* Announcement+CoreDataProperties.swift in Sources */,
 				086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				2C284DB92474418600669736 /* CoursePaymentsAPI.swift in Sources */,
@@ -11379,6 +11395,7 @@
 				2CF10C8B238426B300F8CC95 /* StepSourcesNetworkService.swift in Sources */,
 				2C04BA47240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift in Sources */,
 				2CEA59D626E4F26800A905E3 /* CourseSearchResultsTableViewAdapter.swift in Sources */,
+				2C1966A926E7981B000D5B06 /* Announcement.swift in Sources */,
 				2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */,
 				2C2E44D124FE3FBF006B7303 /* SmallCourseWidgetView.swift in Sources */,
 				62E9862FEEA0320F590E1C3D /* UniqueIdentifiable.swift in Sources */,
@@ -14156,6 +14173,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */,
 				2C98423726DE4B9C0098E36B /* Model_search_results_v87.xcdatamodel */,
 				2C093E0B26BBE4C700E4D575 /* Model_peer_review_step_session_v86.xcdatamodel */,
 				2C29ED57269EF1D000729A97 /* Model_course_beneficiaries_v85.xcdatamodel */,
@@ -14245,7 +14263,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C98423726DE4B9C0098E36B /* Model_search_results_v87.xcdatamodel */;
+			currentVersion = 2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
