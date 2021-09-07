@@ -28,7 +28,11 @@ extension SearchResult {
     @NSManaged var managedCommentUserId: NSNumber?
     @NSManaged var managedCommentText: String?
 
+    // Relationships
     @NSManaged var managedSearchQueryResult: SearchQueryResult?
+    @NSManaged var managedCommentUser: User?
+    @NSManaged var managedLesson: Lesson?
+    @NSManaged var managedStep: Step?
 
     var id: Int {
         get {
@@ -220,6 +224,33 @@ extension SearchResult {
         }
         set {
             self.managedSearchQueryResult = newValue
+        }
+    }
+
+    var commentUser: User? {
+        get {
+            self.managedCommentUser
+        }
+        set {
+            self.managedCommentUser = newValue
+        }
+    }
+
+    var lesson: Lesson? {
+        get {
+            self.managedLesson
+        }
+        set {
+            self.managedLesson = newValue
+        }
+    }
+
+    var step: Step? {
+        get {
+            self.managedStep
+        }
+        set {
+            self.managedStep = newValue
         }
     }
 }

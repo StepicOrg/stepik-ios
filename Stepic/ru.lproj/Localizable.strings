@@ -546,6 +546,11 @@ CourseRevenueTabMonthlyIncomeTitle = "Покупки";
 CourseRevenueTabMonthlyChannelStepikTitle = "Переходы через Stepik";
 CourseRevenueTabMonthlyChannelZLinkTitle = "Переходы через Z-Link";
 
+/* CourseSearch */
+CourseSearchBarPlaceholder = "Поиск по курсу %@";
+CourseSearchPlaceholderEmptySuggesions = "Введите ключевые слова для Поиска по курсу";
+CourseSearchPlaceholderEmptySearchResults = "По данному запросу ничего не найдено";
+
 /* User Courses */
 UserCoursesTitle = "Мои курсы";
 UserCoursesTabAllCoursesTitle = "Все";

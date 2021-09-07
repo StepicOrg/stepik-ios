@@ -5,23 +5,39 @@ struct SearchResultPlainObject {
     let id: Int
     let position: Int
     let score: Float
+
     let targetID: Int
     let targetTypeString: String
+
     let courseID: Int?
     let courseOwnerID: Int?
     let courseAuthorsIDs: [Int]?
     let courseTitle: String?
     let courseCoverURL: String?
+
+    var sectionPosition: Int?
+
+    var unitPosition: Int?
+    var unitProgress: ProgressPlainObject?
+
     let lessonID: Int?
     let lessonOwnerID: Int?
     let lessonTitle: String?
     let lessonCoverURL: String?
+    var lessonVoteDelta: Int?
+    var lessonTimeToComplete: Double?
+    var lessonPassedBy: Int?
+    var lessonCanEdit: Bool?
+
     let stepID: Int?
     let stepPosition: Int?
+    var stepDiscussionProxyID: String?
+
     let commentID: Int?
     let commentParentID: Int?
     let commentUserID: Int?
     let commentText: String?
+    var commentUserInfo: UserInfo?
 
     var targetType: SearchResultTargetType? { SearchResultTargetType(rawValue: self.targetTypeString) }
 

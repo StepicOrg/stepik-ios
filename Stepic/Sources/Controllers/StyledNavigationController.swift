@@ -576,3 +576,11 @@ enum ColorTransitionHelper {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
+
+// MARK: - UIViewController (StyledNavigationController) -
+
+extension UIViewController {
+    var styledNavigationController: StyledNavigationController? {
+        self.navigationController as? StyledNavigationController
+    }
+}

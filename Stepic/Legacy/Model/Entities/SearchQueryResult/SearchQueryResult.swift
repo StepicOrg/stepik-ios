@@ -8,7 +8,7 @@ final class SearchQueryResult: NSManagedObject, ManagedObject, Identifiable {
         [NSSortDescriptor(key: #keyPath(managedLastSearchDate), ascending: false)]
     }
 
-    static func insertSearchByCourseResults(
+    static func insertSearchInCourseResults(
         into context: NSManagedObjectContext,
         courseID: Course.IdType,
         query: String,

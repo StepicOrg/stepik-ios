@@ -24,7 +24,6 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
 
 final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
     lazy var discussionsView = self.view as? DiscussionsView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 

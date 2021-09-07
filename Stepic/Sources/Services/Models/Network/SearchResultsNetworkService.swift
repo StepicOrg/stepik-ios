@@ -2,25 +2,29 @@ import Foundation
 import PromiseKit
 
 protocol SearchResultsNetworkServiceProtocol: AnyObject {
-    func fetchCourses(
+    func searchCourses(
         query: String,
         language: ContentLanguage,
         page: Int,
         searchQuery: JSONDictionary,
         filterQuery: CourseListFilterQuery?
     ) -> Promise<([SearchResultPlainObject], Meta)>
-    func fetchByCourse(query: String, courseID: Course.IdType, page: Int) -> Promise<([SearchResultPlainObject], Meta)>
+    func searchInCourse(
+        _ courseID: Course.IdType,
+        query: String,
+        page: Int
+    ) -> Promise<([SearchResultPlainObject], Meta)>
 }
 
 extension SearchResultsNetworkServiceProtocol {
-    func fetchCourses(
+    func searchCourses(
         query: String,
         language: ContentLanguage,
         page: Int = 1,
         searchQuery: JSONDictionary = RemoteConfig.shared.searchResultsQueryParams,
         filterQuery: CourseListFilterQuery? = nil
     ) -> Promise<([SearchResultPlainObject], Meta)> {
-        self.fetchCourses(
+        self.searchCourses(
             query: query,
             language: language,
             page: page,
@@ -29,8 +33,8 @@ extension SearchResultsNetworkServiceProtocol {
         )
     }
 
-    func fetchByCourse(query: String, courseID: Course.IdType) -> Promise<([SearchResultPlainObject], Meta)> {
-        self.fetchByCourse(query: query, courseID: courseID, page: 1)
+    func searchInCourse(_ courseID: Course.IdType, query: String) -> Promise<([SearchResultPlainObject], Meta)> {
+        self.searchInCourse(courseID, query: query, page: 1)
     }
 }
 
@@ -41,7 +45,7 @@ final class SearchResultsNetworkService: SearchResultsNetworkServiceProtocol {
         self.searchResultsAPI = searchResultsAPI
     }
 
-    func fetchCourses(
+    func searchCourses(
         query: String,
         language: ContentLanguage,
         page: Int,
@@ -57,11 +61,11 @@ final class SearchResultsNetworkService: SearchResultsNetworkServiceProtocol {
         )
     }
 
-    func fetchByCourse(
+    func searchInCourse(
+        _ courseID: Course.IdType,
         query: String,
-        courseID: Course.IdType,
         page: Int
     ) -> Promise<([SearchResultPlainObject], Meta)> {
-        self.searchResultsAPI.searchByCourse(query: query, course: courseID, page: page)
+        self.searchResultsAPI.searchInCourse(query: query, course: courseID, page: page)
     }
 }

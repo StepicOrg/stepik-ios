@@ -24,7 +24,7 @@ final class SearchResultsAPI: APIEndpoint {
         )
     }
 
-    func searchByCourse(
+    func searchInCourse(
         query: String,
         course: Int,
         page: Int

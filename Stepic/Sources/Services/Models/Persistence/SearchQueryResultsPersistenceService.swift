@@ -72,10 +72,11 @@ final class SearchQueryResultsPersistenceService: BasePersistenceService<SearchQ
 
                     existedSearchQueryResult.searchResults.forEach { $0.searchQueryResult = existedSearchQueryResult }
                     existedSearchQueryResult.lastSearchDate = Date()
+                    existedSearchQueryResult.query = query
                 }
             } else {
                 self.managedObjectContext.performChanges {
-                    _ = SearchQueryResult.insertSearchByCourseResults(
+                    _ = SearchQueryResult.insertSearchInCourseResults(
                         into: self.managedObjectContext,
                         courseID: courseID,
                         query: query,

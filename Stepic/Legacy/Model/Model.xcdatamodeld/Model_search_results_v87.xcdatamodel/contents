@@ -278,6 +278,7 @@
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUnitsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedVoteDelta" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SearchResult" inverseName="managedLesson" inverseEntity="SearchResult" syncable="YES"/>
         <relationship name="managedSteps" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Step" inverseName="managedLesson" inverseEntity="Step" syncable="YES"/>
         <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedLesson" inverseEntity="Unit" syncable="YES"/>
     </entity>
@@ -371,7 +372,10 @@
         <attribute name="managedStepPosition" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTargetId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedTargetTypeString" attributeType="String" defaultValueString="" syncable="YES"/>
+        <relationship name="managedCommentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedSearchResults" inverseEntity="User" syncable="YES"/>
+        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedSearchResults" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="managedSearchQueryResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchQueryResult" inverseName="managedSearchResults" inverseEntity="SearchQueryResult" syncable="YES"/>
+        <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedSearchResults" inverseEntity="Step" syncable="YES"/>
     </entity>
     <entity name="Section" representedClassName=".Section" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -438,6 +442,7 @@
         <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedSteps" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="managedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StepOptions" inverseName="managedStep" inverseEntity="StepOptions" syncable="YES"/>
         <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedStep" inverseEntity="Progress" syncable="YES"/>
+        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SearchResult" inverseName="managedStep" inverseEntity="SearchResult" syncable="YES"/>
     </entity>
     <entity name="StepOptions" representedClassName=".StepOptions" syncable="YES">
         <attribute name="managedExecutionMemoryLimit" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -513,6 +518,7 @@
         <relationship name="managedCourseBenefitByMonths" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseBenefitByMonth" inverseName="managedUser" inverseEntity="CourseBenefitByMonth" syncable="YES"/>
         <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
         <relationship name="managedProfileEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="managedUser" inverseEntity="Profile" syncable="YES"/>
+        <relationship name="managedSearchResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SearchResult" inverseName="managedCommentUser" inverseEntity="SearchResult" syncable="YES"/>
         <relationship name="managedSocialProfiles" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SocialProfile" inverseName="managedUser" inverseEntity="SocialProfile" syncable="YES"/>
         <relationship name="managedUserCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCourse" inverseName="managedUser" inverseEntity="UserCourse" syncable="YES"/>
     </entity>
@@ -570,24 +576,24 @@
         <element name="ExamSession" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="LastCodeLanguage" positionX="-450" positionY="-234" width="128" height="75"/>
         <element name="LastStep" positionX="-361.27734375" positionY="646.40625" width="128" height="105"/>
-        <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="269"/>
+        <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="284"/>
         <element name="Notification" positionX="-208.453125" positionY="793.484375" width="128" height="195"/>
         <element name="ProctorSession" positionX="-441" positionY="-216" width="128" height="209"/>
         <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="329"/>
         <element name="Progress" positionX="210.40234375" positionY="32.89453125" width="128" height="223"/>
+        <element name="SearchQueryResult" positionX="-441" positionY="-225" width="128" height="104"/>
+        <element name="SearchResult" positionX="-450" positionY="-234" width="128" height="389"/>
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="464"/>
         <element name="SocialProfile" positionX="-450" positionY="-234" width="128" height="133"/>
-        <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="404"/>
+        <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="419"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
         <element name="StoryPartReaction" positionX="-450" positionY="-225" width="128" height="74"/>
         <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="179"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="239"/>
-        <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="524"/>
+        <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="539"/>
         <element name="UserActivityEntity" positionX="-450" positionY="-234" width="128" height="74"/>
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="178"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="SearchResult" positionX="-450" positionY="-234" width="128" height="344"/>
-        <element name="SearchQueryResult" positionX="-441" positionY="-225" width="128" height="104"/>
     </elements>
 </model>
