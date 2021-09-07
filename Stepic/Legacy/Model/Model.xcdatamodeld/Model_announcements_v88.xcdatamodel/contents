@@ -27,6 +27,8 @@
         <attribute name="managedSubject" attributeType="String" defaultValueString="" syncable="YES"/>
         <attribute name="managedText" attributeType="String" defaultValueString="" syncable="YES"/>
         <attribute name="managedUserId" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedAnnouncements" inverseEntity="Course" syncable="YES"/>
+        <relationship name="managedUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedAnnouncements" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Assignment" representedClassName=".Assignment" syncable="YES">
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -149,6 +151,7 @@
         <attribute name="managedTotalUnits" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedWithCertificate" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedWorkload" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedAnnouncements" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Announcement" inverseName="managedCourse" inverseEntity="Announcement" syncable="YES"/>
         <relationship name="managedAuthors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedAuthoredCourses" inverseEntity="User" syncable="YES"/>
         <relationship name="managedCertificateEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Certificate" inverseName="managedCourse" inverseEntity="Certificate" syncable="YES"/>
         <relationship name="managedCourseBeneficiaries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CourseBeneficiary" inverseName="managedCourse" inverseEntity="CourseBeneficiary" syncable="YES"/>
@@ -539,6 +542,7 @@
         <attribute name="managedReputationRank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedSocialProfilesArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedSolvedStepsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="managedAnnouncements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Announcement" inverseName="managedUser" inverseEntity="Announcement" syncable="YES"/>
         <relationship name="managedAttempts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AttemptEntity" inverseName="managedUser" inverseEntity="AttemptEntity" syncable="YES"/>
         <relationship name="managedAuthoredCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedAuthors" inverseEntity="Course" syncable="YES"/>
         <relationship name="managedBuyerCourseBenefits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseBenefit" inverseName="managedBuyer" inverseEntity="CourseBenefit" syncable="YES"/>
@@ -590,7 +594,7 @@
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
-        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1019"/>
+        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1034"/>
         <element name="CourseBeneficiary" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="CourseBenefit" positionX="-450" positionY="-234" width="128" height="239"/>
         <element name="CourseBenefitByMonth" positionX="-450" positionY="-234" width="128" height="284"/>
@@ -618,11 +622,11 @@
         <element name="StoryPartReaction" positionX="-450" positionY="-225" width="128" height="74"/>
         <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="179"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="239"/>
-        <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="539"/>
+        <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="554"/>
         <element name="UserActivityEntity" positionX="-450" positionY="-234" width="128" height="74"/>
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="178"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="Announcement" positionX="-450" positionY="-225" width="128" height="419"/>
+        <element name="Announcement" positionX="-450" positionY="-225" width="128" height="449"/>
     </elements>
 </model>

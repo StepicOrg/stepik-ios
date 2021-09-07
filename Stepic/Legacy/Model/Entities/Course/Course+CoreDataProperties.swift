@@ -75,6 +75,7 @@ extension Course {
     @NSManaged var managedCourseBenefits: NSOrderedSet?
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
 
     var id: Int {
         set(newId) {
@@ -681,6 +682,15 @@ extension Course {
         }
         set {
             self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
         }
     }
 

@@ -37,6 +37,9 @@ extension Announcement {
     @NSManaged var managedEstimatedFinishDate: Date?
     @NSManaged var managedNoticeDates: NSObject?
 
+    @NSManaged var managedCourse: Course?
+    @NSManaged var managedUser: User?
+
     var id: Int {
         get {
             self.managedId.intValue
@@ -277,6 +280,24 @@ extension Announcement {
         }
         set {
             self.managedNoticeDates = NSArray(array: newValue)
+        }
+    }
+
+    var course: Course? {
+        get {
+            self.managedCourse
+        }
+        set {
+            self.managedCourse = newValue
+        }
+    }
+
+    var user: User? {
+        get {
+            self.managedUser
+        }
+        set {
+            self.managedUser = newValue
         }
     }
 }
