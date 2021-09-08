@@ -2470,6 +2470,7 @@
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F6964263AC8BB0025D80B /* LessonPanModalActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPanModalActionButton.swift; sourceTree = "<group>"; };
 		2C2F6E5F24DD3E69000E8844 /* StepikAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAnalyticsEvents.swift; sourceTree = "<group>"; };
+		2C2FEBCE26E90DBE0002C8F3 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		2C30505A24574B1F005DCD81 /* CourseListDataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListDataBackUpdateService.swift; sourceTree = "<group>"; };
 		2C30A69F24A29B6D0074693D /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		2C313E5226AFE3CB004ECBD2 /* StepQuizReviewStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusView.swift; sourceTree = "<group>"; };
@@ -8707,6 +8708,7 @@
 		62E9869C94289A9B485281FD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C2FEBCE26E90DBE0002C8F3 /* ExceptionCatcher.h */,
 				62E981CAF11255059CB09BF1 /* FormatterHelper.swift */,
 				2C2385AF24E3C38F0049BA42 /* FullscreenImageViewer.swift */,
 				2CB718DB249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift */,
