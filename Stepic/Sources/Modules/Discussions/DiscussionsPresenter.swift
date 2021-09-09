@@ -18,6 +18,7 @@ protocol DiscussionsPresenterProtocol {
     func presentSolution(response: Discussions.SolutionPresentation.Response)
     func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response)
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
+    func presentCommentNotFoundStatus(response: Discussions.CommentNotFoundPresentation.Response)
 }
 
 final class DiscussionsPresenter: DiscussionsPresenterProtocol {
@@ -181,6 +182,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentCommentNotFoundStatus(response: Discussions.CommentNotFoundPresentation.Response) {
+        let status = String(
+            format: NSLocalizedString("DiscussionsCommentNotFoundTitle", comment: ""),
+            arguments: ["\(response.commentID)"]
+        )
+        self.viewController?.displayCommentNotFoundStatus(viewModel: .init(status: status))
     }
 
     // MARK: - Private API -

@@ -1204,6 +1204,7 @@ DiscussionThreadSolutionsTitle = "Решения";
 DiscussionThreadCommentSolutionTitle = "Решение %@";
 DiscussionsPlaceholderEmptySolutionsTitle = "Решений нет. Опубликуйте первое!";
 DiscussionsPlaceholderEmptySolutionsButtonTitle = "Опубликовать решение";
+DiscussionsCommentNotFoundTitle = "Комментарий #%@ удалён или никогда не существовал";
 
 /* Write comment */
 WriteCommentDefaultTitle = "Комментарий";

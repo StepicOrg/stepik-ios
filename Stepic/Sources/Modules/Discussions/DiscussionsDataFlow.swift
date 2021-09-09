@@ -294,6 +294,17 @@ enum Discussions {
         }
     }
 
+    /// Show error HUD
+    enum CommentNotFoundPresentation {
+        struct Response {
+            let commentID: Comment.IdType
+        }
+
+        struct ViewModel {
+            let status: String
+        }
+    }
+
     // MARK: - States -
 
     enum ViewControllerState {

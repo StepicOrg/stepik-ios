@@ -30,7 +30,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
     private let isTeacher: Bool
-    private let presentationContext: Discussions.PresentationContext
+    private var presentationContext: Discussions.PresentationContext
 
     private var currentDiscussionProxy: DiscussionProxy?
     private var currentDiscussions: [Comment] = []
@@ -127,7 +127,14 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }.catch { error in
                 print("discussions interactor: failed fetch discussions, error: \(error)")
                 DispatchQueue.main.async {
-                    strongSelf.presenter.presentDiscussions(response: .init(result: .failure(Error.fetchFailed)))
+                    if case Error.commentNotFound(let commentID) = error {
+                        strongSelf.presenter.presentCommentNotFoundStatus(response: .init(commentID: commentID))
+
+                        strongSelf.presentationContext = .fromBeginning
+                        strongSelf.doDiscussionsLoad(request: .init())
+                    } else {
+                        strongSelf.presenter.presentDiscussions(response: .init(result: .failure(Error.fetchFailed)))
+                    }
                 }
             }.finally {
                 strongSelf.fetchSemaphore.signal()
@@ -143,7 +150,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             strongSelf.fetchSemaphore.wait()
 
-            let idsToLoad = strongSelf.getNextDiscussionsIDsToLoad(direction: request.direction)
+            let idsToLoad = (try? strongSelf.getNextDiscussionsIDsToLoad(direction: request.direction)) ?? []
             print("discussions interactor: start fetching next discussions ids: \(idsToLoad)")
 
             strongSelf.provider.fetchComments(ids: idsToLoad, stepID: strongSelf.stepID).done { fetchedComments in
@@ -436,9 +443,9 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 self.currentDiscussionProxy = discussionProxy
                 switch self.presentationContext {
                 case .fromBeginning:
-                    return .value(self.getNextDiscussionsIDsToLoad(direction: .bottom))
+                    return .value(try self.getNextDiscussionsIDsToLoad(direction: .bottom))
                 case .scrollTo:
-                    return .value(self.getNextDiscussionsIDsToLoad(direction: nil))
+                    return .value(try self.getNextDiscussionsIDsToLoad(direction: nil))
                 }
             }.then { ids -> Promise<[Comment]> in
                 self.provider.fetchComments(ids: ids, stepID: self.stepID)
@@ -573,7 +580,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         }
     }
 
-    private func getNextDiscussionsIDsToLoad(direction: Discussions.PaginationDirection?) -> [Comment.IdType] {
+    private func getNextDiscussionsIDsToLoad(direction: Discussions.PaginationDirection?) throws -> [Comment.IdType] {
         let discussionsWindow = self.getLoadedDiscussionsWindow()
 
         switch direction {
@@ -602,8 +609,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         case .none:
             if case .scrollTo(let discussionID, _) = self.presentationContext {
                 guard let discussionIndex = self.currentDiscussionsIDs.firstIndex(of: discussionID) else {
-                    assertionFailure("Discussion must appear in the collection")
-                    return []
+                    throw Error.commentNotFound(discussionID)
                 }
 
                 let loadingInterval = Self.discussionsLoadingInterval / 2
@@ -731,6 +737,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case commentNotFound(Comment.IdType)
     }
 }
 
