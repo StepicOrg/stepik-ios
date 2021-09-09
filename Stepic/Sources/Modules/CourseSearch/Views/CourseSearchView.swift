@@ -102,9 +102,9 @@ final class CourseSearchView: UIView {
         self.searchResultsTableView.reloadData()
     }
 
-    func resetSearchResultsTableViewScroll(animated: Bool = false) {
+    func resetSearchResultsTableViewScroll() {
         if self.searchResultsTableView.numberOfRows(inSection: 0) > 0 {
-            self.searchResultsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: animated)
+            self.searchResultsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
 }
