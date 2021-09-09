@@ -164,3 +164,10 @@ final class ReplaceModelViewerWithARImageRule: BaseHTMLExtractionRule {
         return content
     }
 }
+
+/// Makes the contents of the <details> element visible and prevents toggle behavior.
+final class AlwaysOpenedDetailsDisclosureBoxRule: BaseHTMLExtractionRule {
+    override func process(content: String) -> String {
+        content.replacingOccurrences(of: "<details>", with: "<details open onclick=\"return false\">")
+    }
+}
