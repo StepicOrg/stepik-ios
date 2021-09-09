@@ -34,7 +34,6 @@ final class SettingsViewController: UIViewController {
     let appearance: Appearance
 
     lazy var settingsView = self.view as? SettingsView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,

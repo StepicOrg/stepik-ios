@@ -33,6 +33,8 @@ extension User {
     @NSManaged var managedBuyerCourseBenefits: NSSet?
     @NSManaged var managedCourseBenefitByMonths: NSSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedSearchResults: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
@@ -325,6 +327,24 @@ extension User {
         }
         set {
             self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
         }
     }
 

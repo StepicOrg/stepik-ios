@@ -181,6 +181,19 @@ enum CourseInfo {
         }
     }
 
+    /// Present course search module
+    enum CourseContentSearchPresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
     /// Add or remove course to/from withlist
     enum CourseWishlistMainAction {
         struct Request {}

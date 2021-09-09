@@ -71,15 +71,24 @@ struct LargeInputCellOptions {
     let placeholderText: String?
     let valueText: String?
     let maxLength: Int?
+    let autocorrectionType: UITextAutocorrectionType?
+    let autocapitalizationType: UITextAutocapitalizationType?
+    let keyboardType: UIKeyboardType?
 
     init(
         valueText: String? = nil,
         placeholderText: String? = nil,
-        maxLength: Int? = nil
+        maxLength: Int? = nil,
+        autocorrectionType: UITextAutocorrectionType? = nil,
+        autocapitalizationType: UITextAutocapitalizationType? = nil,
+        keyboardType: UIKeyboardType? = nil
     ) {
         self.valueText = valueText
         self.placeholderText = placeholderText
         self.maxLength = maxLength
+        self.autocorrectionType = autocorrectionType
+        self.autocapitalizationType = autocapitalizationType
+        self.keyboardType = keyboardType
     }
 }
 

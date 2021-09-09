@@ -65,10 +65,7 @@ final class SubmissionsFilterViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
-        }
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
     }
 
     // MARK: Private API

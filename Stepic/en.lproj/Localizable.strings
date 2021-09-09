@@ -544,6 +544,11 @@ CourseRevenueTabMonthlyIncomeTitle = "Purchases";
 CourseRevenueTabMonthlyChannelStepikTitle = "Came via Stepik";
 CourseRevenueTabMonthlyChannelZLinkTitle = "Came via Z-Link";
 
+/* CourseSearch */
+CourseSearchBarPlaceholder = "Search in the course %@";
+CourseSearchPlaceholderEmptySuggesions = "Enter keywords to search in the course";
+CourseSearchPlaceholderEmptySearchResults = "Nothing was found for this query";
+
 /* User Courses */
 UserCoursesTitle = "My Courses";
 UserCoursesTabAllCoursesTitle = "All";
@@ -1198,6 +1203,7 @@ DiscussionThreadSolutionsTitle = "Solutions";
 DiscussionThreadCommentSolutionTitle = "Solution %@";
 DiscussionsPlaceholderEmptySolutionsTitle = "No solutions. Post the first one!";
 DiscussionsPlaceholderEmptySolutionsButtonTitle = "Post a Solution";
+DiscussionsCommentNotFoundTitle = "Comment #%@ has been deleted or never existed";
 
 /* Write comment */
 WriteCommentDefaultTitle = "Comment";

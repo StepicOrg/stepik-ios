@@ -32,6 +32,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let proctorSessionsPersistenceService: ProctorSessionsPersistenceServiceProtocol
     private let profilesPersistenceService: ProfilesPersistenceServiceProtocol
     private let progressesPersistenceService: ProgressesPersistenceServiceProtocol
+    private let searchQueryResultsPersistenceService: SearchQueryResultsPersistenceServiceProtocol
+    private let searchResultsPersistenceService: SearchResultsPersistenceServiceProtocol
     private let sectionsPersistenceService: SectionsPersistenceServiceProtocol
     private let socialProfilesPersistenceService: SocialProfilesPersistenceServiceProtocol
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
@@ -86,6 +88,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         proctorSessionsPersistenceService: ProctorSessionsPersistenceServiceProtocol = ProctorSessionsPersistenceService(),
         profilesPersistenceService: ProfilesPersistenceServiceProtocol = ProfilesPersistenceService(),
         progressesPersistenceService: ProgressesPersistenceServiceProtocol = ProgressesPersistenceService(),
+        searchQueryResultsPersistenceService: SearchQueryResultsPersistenceServiceProtocol = SearchQueryResultsPersistenceService(),
+        searchResultsPersistenceService: SearchResultsPersistenceServiceProtocol = SearchResultsPersistenceService(),
         sectionsPersistenceService: SectionsPersistenceServiceProtocol = SectionsPersistenceService(),
         socialProfilesPersistenceService: SocialProfilesPersistenceServiceProtocol = SocialProfilesPersistenceService(),
         stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol = StepOptionsPersistenceService(),
@@ -130,6 +134,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.proctorSessionsPersistenceService = proctorSessionsPersistenceService
         self.profilesPersistenceService = profilesPersistenceService
         self.progressesPersistenceService = progressesPersistenceService
+        self.searchQueryResultsPersistenceService = searchQueryResultsPersistenceService
+        self.searchResultsPersistenceService = searchResultsPersistenceService
         self.sectionsPersistenceService = sectionsPersistenceService
         self.socialProfilesPersistenceService = socialProfilesPersistenceService
         self.stepOptionsPersistenceService = stepOptionsPersistenceService
@@ -240,6 +246,10 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
                 Guarantee(self.profilesPersistenceService.deleteAll(), fallback: nil)
             }.then { _ -> Guarantee<Void?> in
                 Guarantee(self.progressesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.searchQueryResultsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.searchResultsPersistenceService.deleteAll(), fallback: nil)
             }.then { _ -> Guarantee<Void?> in
                 Guarantee(self.sectionsPersistenceService.deleteAll(), fallback: nil)
             }.then { _ -> Guarantee<Void?> in

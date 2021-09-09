@@ -96,12 +96,10 @@ final class UserCoursesViewController: TabmanViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(
-                Appearance.navigationBarAppearance.shadowViewAlpha,
-                sender: self
-            )
-        }
+        self.styledNavigationController?.changeShadowViewAlpha(
+            Appearance.navigationBarAppearance.shadowViewAlpha,
+            sender: self
+        )
 
         self.analytics.send(.myCoursesScreenOpened)
     }

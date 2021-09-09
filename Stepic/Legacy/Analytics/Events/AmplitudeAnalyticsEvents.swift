@@ -158,6 +158,66 @@ extension AnalyticsEvent {
         )
     }
 
+    // MARK: - Course Search -
+
+    static func courseContentSearchScreenOpened(id: Int, title: String?) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course content search screen opened",
+            parameters: [
+                "course": id,
+                "title": title as Any
+            ]
+        )
+    }
+
+    static func сourseContentSearched(
+        id: Int,
+        title: String?,
+        query: String,
+        suggestion: String?
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content searched", parameters: parameters)
+    }
+
+    static func courseContentSearchResultClicked(
+        id: Int,
+        title: String?,
+        query: String,
+        suggestion: String?,
+        type: CourseContentSearchResultClickType,
+        stepID: Int?
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query,
+            "type": type.rawValue,
+            "step": stepID as Any
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content search result clicked", parameters: parameters)
+    }
+
+    enum CourseContentSearchResultClickType: String {
+        case step
+        case comment
+        case user
+    }
+
     // MARK: - Course Benefits -
 
     static func courseBenefitsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {

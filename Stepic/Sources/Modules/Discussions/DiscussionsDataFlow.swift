@@ -17,7 +17,7 @@ enum Discussions {
         let currentSortType: SortType
         let discussionsLeftToLoadInLeftHalf: Int
         let discussionsLeftToLoadInRightHalf: Int
-        let selectedDiscussionID: Comment.IdType?
+        let selectedCommentID: Comment.IdType?
     }
 
     /// Presenter -> ViewController
@@ -291,6 +291,17 @@ enum Discussions {
 
         struct ViewModel {
             let shouldDismiss: Bool
+        }
+    }
+
+    /// Show error HUD
+    enum CommentNotFoundPresentation {
+        struct Response {
+            let commentID: Comment.IdType
+        }
+
+        struct ViewModel {
+            let status: String
         }
     }
 
