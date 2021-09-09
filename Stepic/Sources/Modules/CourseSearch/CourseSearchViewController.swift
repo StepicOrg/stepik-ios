@@ -144,7 +144,7 @@ final class CourseSearchViewController: UIViewController, ControllerWithStepikPl
                     }
 
                     strongSelf.updateState(newState: .loading)
-                    strongSelf.interactor.doSearchResultsLoad(request: .init(source: .searchQuery))
+                    strongSelf.searchForResults(source: .searchQuery)
                 }
             ),
             for: .connectionError
@@ -257,12 +257,16 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.state = .idle
-        self.interactor.doSearchQueryUpdate(request: .init(query: searchText))
+        self.handleSearchTextChanged(searchText)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.handleSearchTextChanged(searchBar.text)
+        self.hideSuggestions()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.interactor.doSearchResultsLoad(request: .init(source: .searchQuery))
+        self.searchForResults(source: .searchQuery)
     }
 
     // MARK: Private Helpers
@@ -289,6 +293,16 @@ extension CourseSearchViewController: CourseSearchBarDelegate {
             self.updateState(newState: self.state)
         }
     }
+
+    private func handleSearchTextChanged(_ searchText: String?) {
+        self.state = .idle
+        self.interactor.doSearchQueryUpdate(request: .init(query: searchText ?? ""))
+    }
+
+    private func searchForResults(source: CourseSearch.SearchResultsLoad.Request.Source) {
+        self.courseSearchView?.resetSearchResultsTableViewScroll()
+        self.interactor.doSearchResultsLoad(request: .init(source: source))
+    }
 }
 
 // MARK: - CourseSearchViewController: CourseSearchSuggestionsTableViewAdapterDelegate -
@@ -303,7 +317,7 @@ extension CourseSearchViewController: CourseSearchSuggestionsTableViewAdapterDel
         self.searchBar.endEditing(true)
 
         self.interactor.doSearchQueryUpdate(request: .init(query: suggestion.title))
-        self.interactor.doSearchResultsLoad(request: .init(source: .suggestion(suggestion.uniqueIdentifier)))
+        self.searchForResults(source: .suggestion(suggestion.uniqueIdentifier))
     }
 }
 
