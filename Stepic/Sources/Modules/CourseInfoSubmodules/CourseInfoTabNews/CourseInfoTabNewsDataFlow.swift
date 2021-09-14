@@ -1,10 +1,19 @@
 import Foundation
 
 enum CourseInfoTabNews {
-    enum SomeAction {
+    /// Show news
+    enum NewsLoad {
         struct Request {}
 
-        struct Response {}
+        struct Data {
+            let course: Course
+            let announcements: [AnnouncementPlainObject]
+            let hasNextPage: Bool
+        }
+
+        struct Response {
+            let result: StepikResult<Data>
+        }
 
         struct ViewModel {}
     }

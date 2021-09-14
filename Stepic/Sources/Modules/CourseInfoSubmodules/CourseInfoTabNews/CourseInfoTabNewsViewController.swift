@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CourseInfoTabNewsViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: CourseInfoTabNews.SomeAction.ViewModel)
+    func displayCourseNews(viewModel: CourseInfoTabNews.NewsLoad.ViewModel)
 }
 
 final class CourseInfoTabNewsViewController: UIViewController {
@@ -24,5 +24,5 @@ final class CourseInfoTabNewsViewController: UIViewController {
 }
 
 extension CourseInfoTabNewsViewController: CourseInfoTabNewsViewControllerProtocol {
-    func displaySomeActionResult(viewModel: CourseInfoTabNews.SomeAction.ViewModel) {}
+    func displayCourseNews(viewModel: CourseInfoTabNews.NewsLoad.ViewModel) {}
 }
