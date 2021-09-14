@@ -1714,7 +1714,6 @@
 		7356E585097D33A455C5D212 /* NewProfileAchievementsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B98B071C1C8E3FB13F9717 /* NewProfileAchievementsInteractor.swift */; };
 		76506E9642A593BF3387B2B1 /* CourseRevenueTabMonthlyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2596FA77EC6CA36ADC41F /* CourseRevenueTabMonthlyPresenter.swift */; };
 		79A20D8F6931BCF4BDD7656E /* NewProfileUserActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1EE8518225C9F49BE44EA /* NewProfileUserActivityView.swift */; };
-		7A0751139AD42E1488337149 /* CourseInfoTabNewsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9739EE92D0995FED0A573104 /* CourseInfoTabNewsOutputProtocol.swift */; };
 		7A60902EC11819293528016A /* DebugMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F44F022FE4FF6422DC2CAA9 /* DebugMenuProvider.swift */; };
 		7C948DD5EBB144CE0658E454 /* UserCoursesDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A4BED02A9D05CB0787EBE1 /* UserCoursesDataFlow.swift */; };
 		7D2D216B61E159903EAF1282 /* FillBlanksQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70D0220ABA60A77FC65411 /* FillBlanksQuizDataFlow.swift */; };
@@ -3750,7 +3749,6 @@
 		940645D0A09D0D65D263AEC3 /* LessonFinishedStepsPanModalPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalPresenter.swift; sourceTree = "<group>"; };
 		95B4F28C7AA736A30433FE00 /* AuthorsCourseListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListAssembly.swift; sourceTree = "<group>"; };
 		967064C7E1C6298407D71A40 /* TableQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TableQuizPresenter.swift; sourceTree = "<group>"; };
-		9739EE92D0995FED0A573104 /* CourseInfoTabNewsOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseInfoTabNewsOutputProtocol.swift; sourceTree = "<group>"; };
 		9AA93A7BBE66130A3D60D17A /* CourseListFilterInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseListFilterInteractor.swift; sourceTree = "<group>"; };
 		9B08BEAA8B53D7F35A68C065 /* CourseRevenueProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueProvider.swift; sourceTree = "<group>"; };
 		9CFC3F756271B77E39E1880B /* CourseBenefitDetailAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseBenefitDetailAssembly.swift; sourceTree = "<group>"; };
@@ -9494,7 +9492,6 @@
 			isa = PBXGroup;
 			children = (
 				CD00254F294781F8DE383908 /* CourseInfoTabNewsInputProtocol.swift */,
-				9739EE92D0995FED0A573104 /* CourseInfoTabNewsOutputProtocol.swift */,
 			);
 			path = InputOutput;
 			sourceTree = "<group>";
@@ -12330,7 +12327,6 @@
 				1009EF884D5CAC070717C737 /* CourseInfoTabNewsView.swift in Sources */,
 				D064B6AE4E478249DCE7B7F8 /* CourseInfoTabNewsViewController.swift in Sources */,
 				2BF2D5AC65ACA8B668CF93A6 /* CourseInfoTabNewsInputProtocol.swift in Sources */,
-				7A0751139AD42E1488337149 /* CourseInfoTabNewsOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -510,6 +510,7 @@ CourseInfoTitleTimeToComplete = "Время прохождения курса";
 CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+CourseInfoTabNews = "Новости";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";

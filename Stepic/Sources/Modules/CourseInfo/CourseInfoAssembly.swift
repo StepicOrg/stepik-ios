@@ -97,6 +97,6 @@ final class CourseInfoAssembly: Assembly {
         let adaptiveManager = AdaptiveStorageManager()
         return adaptiveManager.canOpenInAdaptiveMode(courseId: self.courseID)
             ? [.info, .reviews]
-            : [.info, .reviews, .syllabus]
+            : [.info, .reviews, .news, .syllabus]
     }
 }

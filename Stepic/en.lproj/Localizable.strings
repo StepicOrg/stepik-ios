@@ -508,6 +508,7 @@ CourseInfoTitleTimeToComplete = "Expected time to complete";
 CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
+CourseInfoTabNews = "News";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

@@ -1,3 +1,3 @@
 import Foundation
 
-protocol CourseInfoTabNewsInputProtocol: AnyObject {}
+protocol CourseInfoTabNewsInputProtocol: CourseInfoSubmoduleProtocol {}

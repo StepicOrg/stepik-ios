@@ -6,8 +6,6 @@ protocol CourseInfoTabNewsInteractorProtocol {
 }
 
 final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
-    weak var moduleOutput: CourseInfoTabNewsOutputProtocol?
-
     private let presenter: CourseInfoTabNewsPresenterProtocol
     private let provider: CourseInfoTabNewsProviderProtocol
 
@@ -26,4 +24,10 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
     }
 }
 
-extension CourseInfoTabNewsInteractor: CourseInfoTabNewsInputProtocol {}
+// MARK: - CourseInfoTabNewsInteractor: CourseInfoTabNewsInputProtocol -
+
+extension CourseInfoTabNewsInteractor: CourseInfoTabNewsInputProtocol {
+    func handleControllerAppearance() {}
+
+    func update(with course: Course, viewSource: AnalyticsEvent.CourseViewSource, isOnline: Bool) {}
+}
