@@ -10,19 +10,19 @@ import Foundation
 import Regex
 
 enum DeepLinkRoute {
+    case catalog(courseListID: Int?)
+    case certificates(userID: Int)
+    case course(courseID: Int)
+    case coursePay(courseID: Int, promoCodeName: String?)
+    case coursePromo(courseID: Int)
+    case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
+    case home
     case lesson(lessonID: Int, stepID: Int, unitID: Int?)
     case notifications(section: NotificationsSection)
-    case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
-    case solutions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
     case profile(userID: Int)
-    case syllabus(courseID: Int)
-    case catalog(courseListID: Int?)
-    case home
-    case course(courseID: Int)
-    case coursePromo(courseID: Int)
-    case coursePay(courseID: Int, promoCodeName: String?)
-    case certificates(userID: Int)
+    case solutions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
     case story(id: Int)
+    case syllabus(courseID: Int)
 
     var path: String {
         let path: String
