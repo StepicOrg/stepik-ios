@@ -66,11 +66,11 @@ def all_pods
   pod 'FBSDKLoginKit', '8.2.0'
   pod 'GoogleSignIn', '5.0.2'
 
-  pod 'Presentr', '1.9'
+  pod 'Presentr', :git => 'https://github.com/ivan-magda/Presentr.git', :tag => 'v1.9.1'
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
   pod 'Agrume', '5.6.13'
-  pod 'Highlightr', :git => 'https://github.com/ivan-magda/Highlightr.git', :branch => 'master'
+  pod 'Highlightr', :git => 'https://github.com/ivan-magda/Highlightr.git', :tag => 'v2.1.3'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.3'
   pod 'Koloda', '5.0.1'
@@ -96,5 +96,15 @@ target 'Stepic' do
     inherit! :search_paths
     all_pods
     testing_pods
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 9.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
   end
 end

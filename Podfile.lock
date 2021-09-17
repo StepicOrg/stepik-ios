@@ -229,7 +229,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig (= 8.6.0)
   - FLEX (from `https://github.com/ivan-magda/FLEX.git`, branch `master`)
   - GoogleSignIn (= 5.0.2)
-  - Highlightr (from `https://github.com/ivan-magda/Highlightr.git`, branch `master`)
+  - Highlightr (from `https://github.com/ivan-magda/Highlightr.git`, tag `v2.1.3`)
   - IQKeyboardManagerSwift (= 6.5.6)
   - Kanna (= 5.2.7)
   - Koloda (= 5.0.1)
@@ -238,7 +238,7 @@ DEPENDENCIES:
   - Nimble (= 9.2.0)
   - Nuke (= 9.5.0)
   - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
-  - Presentr (= 1.9)
+  - Presentr (from `https://github.com/ivan-magda/Presentr.git`, tag `v1.9.1`)
   - PromiseKit (= 6.15.3)
   - Quick (= 4.0.0)
   - SDWebImage (= 5.11.0)
@@ -297,7 +297,6 @@ SPEC REPOS:
     - Nuke
     - Pageboy
     - pop
-    - Presentr
     - PromiseKit
     - PromisesObjC
     - Quick
@@ -321,11 +320,14 @@ EXTERNAL SOURCES:
     :branch: master
     :git: https://github.com/ivan-magda/FLEX.git
   Highlightr:
-    :branch: master
     :git: https://github.com/ivan-magda/Highlightr.git
+    :tag: v2.1.3
   PanModal:
     :branch: remove-presenting-appearance-transitions
     :git: https://github.com/ivan-magda/PanModal.git
+  Presentr:
+    :git: https://github.com/ivan-magda/Presentr.git
+    :tag: v1.9.1
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -335,11 +337,14 @@ CHECKOUT OPTIONS:
     :commit: 99338e8545f70c143c88e2564e8b604ad4b285ae
     :git: https://github.com/ivan-magda/FLEX.git
   Highlightr:
-    :commit: 0beedfaaa664a6f374e1db7d013c5dfeaa2d7543
     :git: https://github.com/ivan-magda/Highlightr.git
+    :tag: v2.1.3
   PanModal:
     :commit: 32fc8b5868b0254a2025c9c01b24c0e4b3fe537d
     :git: https://github.com/ivan-magda/PanModal.git
+  Presentr:
+    :git: https://github.com/ivan-magda/Presentr.git
+    :tag: v1.9.1
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
@@ -376,7 +381,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 3df19e3c24f7bbc291d8b5809aa6b0d41e642437
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
-  Highlightr: 683f05d5223cade533a78528a35c9f06e4caddf8
+  Highlightr: 9ff3790aef1a6c17a0181fa9f5b04f3f94def75a
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
   Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
@@ -388,7 +393,7 @@ SPEC CHECKSUMS:
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
-  Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
+  Presentr: 931d50e158060ea88fbf8f3dd202b17e0bb53eb0
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
@@ -408,6 +413,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: fb4b3c20a0c0237b03b34cc07b6d575332f43097
 
-PODFILE CHECKSUM: 1d8a1783695f68f0bd8f94780ecf5fc28f8207e8
+PODFILE CHECKSUM: d0de1a76d431a90bc012d23be042bea3c5284d8a
 
 COCOAPODS: 1.11.2
