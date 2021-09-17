@@ -66,7 +66,7 @@ def all_pods
   pod 'FBSDKLoginKit', '8.2.0'
   pod 'GoogleSignIn', '5.0.2'
 
-  pod 'Presentr', '1.9'
+  pod 'Presentr', :git => 'https://github.com/ivan-magda/Presentr.git', :tag => 'v1.9.1'
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
   pod 'Agrume', '5.6.13'

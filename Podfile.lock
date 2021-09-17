@@ -238,7 +238,7 @@ DEPENDENCIES:
   - Nimble (= 9.2.0)
   - Nuke (= 9.5.0)
   - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
-  - Presentr (= 1.9)
+  - Presentr (from `https://github.com/ivan-magda/Presentr.git`, tag `v1.9.1`)
   - PromiseKit (= 6.15.3)
   - Quick (= 4.0.0)
   - SDWebImage (= 5.11.0)
@@ -297,7 +297,6 @@ SPEC REPOS:
     - Nuke
     - Pageboy
     - pop
-    - Presentr
     - PromiseKit
     - PromisesObjC
     - Quick
@@ -326,6 +325,9 @@ EXTERNAL SOURCES:
   PanModal:
     :branch: remove-presenting-appearance-transitions
     :git: https://github.com/ivan-magda/PanModal.git
+  Presentr:
+    :git: https://github.com/ivan-magda/Presentr.git
+    :tag: v1.9.1
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -340,6 +342,9 @@ CHECKOUT OPTIONS:
   PanModal:
     :commit: 32fc8b5868b0254a2025c9c01b24c0e4b3fe537d
     :git: https://github.com/ivan-magda/PanModal.git
+  Presentr:
+    :git: https://github.com/ivan-magda/Presentr.git
+    :tag: v1.9.1
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
@@ -388,7 +393,7 @@ SPEC CHECKSUMS:
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
-  Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
+  Presentr: 931d50e158060ea88fbf8f3dd202b17e0bb53eb0
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
@@ -408,6 +413,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: fb4b3c20a0c0237b03b34cc07b6d575332f43097
 
-PODFILE CHECKSUM: d6fa0f30eaff9930a5da3655e84e39483e8253d5
+PODFILE CHECKSUM: d0de1a76d431a90bc012d23be042bea3c5284d8a
 
 COCOAPODS: 1.11.2
