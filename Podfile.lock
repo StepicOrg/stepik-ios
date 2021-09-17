@@ -147,7 +147,7 @@ PODS:
   - GTMAppAuth (1.2.2):
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Core (1.7.0)
   - Highlightr (2.1.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Kanna (5.2.7)
@@ -380,7 +380,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   Highlightr: 9ff3790aef1a6c17a0181fa9f5b04f3f94def75a
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
