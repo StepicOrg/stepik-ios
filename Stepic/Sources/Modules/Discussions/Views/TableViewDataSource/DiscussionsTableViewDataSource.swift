@@ -173,7 +173,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         let separatorStyle: DiscussionsTableViewCell.ViewModel.SeparatorStyle = {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 if discussionViewModel.repliesLeftToLoadCount > 0 {
-                    return .none
+                    return .empty
                 } else if indexPath.section == tableView.numberOfSections - 1 {
                     return .small
                 }
