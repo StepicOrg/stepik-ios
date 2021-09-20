@@ -24,15 +24,19 @@ final class GradientCoursesPlaceholderView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
         return stackView
     }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.titleFont
-        label.numberOfLines = 0
         label.textAlignment = self.appearance.titleTextAlignment
         label.textColor = self.color.titleTextColor
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
 
@@ -40,8 +44,10 @@ final class GradientCoursesPlaceholderView: UIView {
         let label = UILabel()
         label.font = self.appearance.subtitleFont
         label.textAlignment = self.appearance.subtitleTextAlignment
-        label.numberOfLines = 2
         label.textColor = self.color.subtitleTextColor
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
 
@@ -50,9 +56,12 @@ final class GradientCoursesPlaceholderView: UIView {
         return imageView
     }()
 
+    private var currentIntrinsicContentSize = CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+
     var titleText: NSAttributedString? {
         didSet {
             self.titleLabel.attributedText = self.titleText
+            self.invalidateIntrinsicContentSize()
         }
     }
 
@@ -66,7 +75,30 @@ final class GradientCoursesPlaceholderView: UIView {
                 self.subtitleLabel.isHidden = false
                 self.subtitleLabel.attributedText = self.subtitleText
             }
+
+            self.invalidateIntrinsicContentSize()
         }
+    }
+
+    var onIntrinsicContentSizeChange: ((CGSize) -> Void)?
+
+    override var intrinsicContentSize: CGSize {
+        let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+
+        let newHeight = (
+            self.appearance.labelsInsets.top
+                + stackViewIntrinsicContentSize.height
+                + self.appearance.labelsInsets.bottom
+        ).rounded(.up)
+
+        let newIntrinsicContentSize = CGSize(width: UIView.noIntrinsicMetric, height: newHeight)
+
+        if self.currentIntrinsicContentSize != newIntrinsicContentSize {
+            self.currentIntrinsicContentSize = newIntrinsicContentSize
+            self.onIntrinsicContentSizeChange?(newIntrinsicContentSize)
+        }
+
+        return newIntrinsicContentSize
     }
 
     init(frame: CGRect = .zero, color: Color, appearance: Appearance = Appearance()) {
@@ -81,6 +113,11 @@ final class GradientCoursesPlaceholderView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
     }
 
     enum Color: CaseIterable {

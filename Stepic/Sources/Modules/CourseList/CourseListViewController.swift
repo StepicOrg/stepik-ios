@@ -235,6 +235,13 @@ final class VerticalCourseListViewController: CourseListViewController {
                 subtitle: headerViewPresentationDescription.subtitle,
                 color: headerViewPresentationDescription.color
             )
+            headerView.onIntrinsicContentSizeChange = { [weak self] intrinsicContentSize in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.verticalCourseListView?.headerViewHeight = intrinsicContentSize.height
+            }
             view.headerView = headerView
         }
 
