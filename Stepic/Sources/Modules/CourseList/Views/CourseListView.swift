@@ -273,6 +273,23 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
     }
 
     private let isHeaderViewHidden: Bool
+
+    var headerViewHeight = UIView.noIntrinsicMetric {
+        didSet {
+            self.verticalCourseFlowLayout.headerHeight = self.headerViewHeight
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
+        get {
+            self.collectionView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.collectionView.contentInsetAdjustmentBehavior = newValue
+        }
+    }
+
     var isPaginationViewHidden = true {
         didSet {
             self.updatePagination()

@@ -18,9 +18,9 @@ def shared_pods
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.11.0'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-  pod 'DeviceKit', '4.4.0'
+  pod 'DeviceKit', '4.5.0'
   pod 'PromiseKit', '6.15.3'
-  pod 'SwiftLint', '0.43.1'
+  pod 'SwiftLint', '0.44.0'
 
   if ENV['FASTLANE_BETA_PROFILE'] == 'true'
     pod 'FLEX',
@@ -43,14 +43,14 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '8.6.0'
-  pod 'Firebase/Messaging', '8.6.0'
-  pod 'Firebase/Analytics', '8.6.0'
-  pod 'Firebase/Crashlytics', '8.6.0'
-  pod 'Firebase/RemoteConfig', '8.6.0'
+  pod 'Firebase/Core', '8.7.0'
+  pod 'Firebase/Messaging', '8.7.0'
+  pod 'Firebase/Analytics', '8.7.0'
+  pod 'Firebase/Crashlytics', '8.7.0'
+  pod 'Firebase/RemoteConfig', '8.7.0'
 
-  pod 'YandexMobileMetrica/Dynamic', '3.15.1'
-  pod 'Amplitude', '8.3.0'
+  pod 'YandexMobileMetrica/Dynamic', '3.17.0'
+  pod 'Amplitude', '8.3.1'
   pod 'Branch', '1.39.3'
 
   pod 'BEMCheckBox', '1.4.1'
@@ -66,11 +66,11 @@ def all_pods
   pod 'FBSDKLoginKit', '8.2.0'
   pod 'GoogleSignIn', '5.0.2'
 
-  pod 'Presentr', '1.9'
+  pod 'Presentr', :git => 'https://github.com/ivan-magda/Presentr.git', :tag => 'v1.9.1'
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
 
   pod 'Agrume', '5.6.13'
-  pod 'Highlightr', :git => 'https://github.com/ivan-magda/Highlightr.git', :branch => 'master'
+  pod 'Highlightr', :git => 'https://github.com/ivan-magda/Highlightr.git', :tag => 'v2.1.3'
   pod 'TTTAttributedLabel', '2.0.0'
   pod 'lottie-ios', '3.2.3'
   pod 'Koloda', '5.0.1'
@@ -85,7 +85,7 @@ end
 
 def testing_pods
   pod 'Quick', '4.0.0'
-  pod 'Nimble', '9.2.0'
+  pod 'Nimble', '9.2.1'
   pod 'Mockingjay', '3.0.0-alpha.1'
 end
 
@@ -96,5 +96,15 @@ target 'Stepic' do
     inherit! :search_paths
     all_pods
     testing_pods
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 9.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
   end
 end

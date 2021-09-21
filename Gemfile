@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 ruby "2.6.5"
 
-gem "fastlane", "2.193.1"
-gem "cocoapods", "1.11.0"
+gem "fastlane", "2.194.0"
+gem "cocoapods", "1.11.2"
 gem "generamba", "1.5.0"
 
 eval_gemfile("fastlane/Pluginfile")
