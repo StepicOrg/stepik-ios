@@ -62,7 +62,7 @@ final class CoreDataHelper: NSObject {
                 do {
                     try self?.context.save()
                 } catch {
-                    print("SAVING ERROR")
+                    print("SAVING ERROR = \(error)")
                 }
             })
         }

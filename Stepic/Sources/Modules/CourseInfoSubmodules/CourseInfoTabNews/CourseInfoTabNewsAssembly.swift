@@ -9,6 +9,7 @@ final class CourseInfoTabNewsAssembly: Assembly {
         let interactor = CourseInfoTabNewsInteractor(
             presenter: presenter,
             provider: provider,
+            userAccountService: UserAccountService(),
             analytics: StepikAnalytics.shared
         )
         let viewController = CourseInfoTabNewsViewController(interactor: interactor)

@@ -23,7 +23,7 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     func presentCourseNews(response: CourseInfoTabNews.NewsLoad.Response) {
         switch response.result {
         case .success(let data):
-            self.makeNewsViewModels(data.announcements).done { viewModels in
+            self.makeNewsViewModels(data.announcements, currentUser: data.currentUser).done { viewModels in
                 let data = CourseInfoTabNews.NewsResultData(news: viewModels, hasNextPage: data.hasNextPage)
                 self.viewController?.displayCourseNews(viewModel: .init(state: .result(data: data)))
             }
@@ -35,7 +35,7 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     func presentNextCourseNews(response: CourseInfoTabNews.NextNewsLoad.Response) {
         switch response.result {
         case .success(let data):
-            self.makeNewsViewModels(data.announcements).done { viewModels in
+            self.makeNewsViewModels(data.announcements, currentUser: data.currentUser).done { viewModels in
                 let data = CourseInfoTabNews.NewsResultData(news: viewModels, hasNextPage: data.hasNextPage)
                 self.viewController?.displayNextCourseNews(viewModel: .init(state: .result(data: data)))
             }
@@ -47,11 +47,12 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     // MARK: Private API
 
     private func makeNewsViewModels(
-        _ announcements: [AnnouncementPlainObject]
+        _ announcements: [AnnouncementPlainObject],
+        currentUser: User?
     ) -> Guarantee<[CourseInfoTabNewsViewModel]> {
         Guarantee { seal in
             DispatchQueue.global(qos: .userInitiated).async {
-                let viewModels = announcements.map(self.makeViewModel(_:))
+                let viewModels = announcements.map { self.makeViewModel($0, currentUser: currentUser) }
 
                 DispatchQueue.main.async {
                     seal(viewModels)
@@ -60,10 +61,19 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
         }
     }
 
-    private func makeViewModel(_ announcement: AnnouncementPlainObject) -> CourseInfoTabNewsViewModel {
+    private func makeViewModel(
+        _ announcement: AnnouncementPlainObject,
+        currentUser: User?
+    ) -> CourseInfoTabNewsViewModel {
         let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(announcement.sentDate ?? Date())
 
-        let processedContent = self.contentProcessor.processContent(announcement.text)
+        let processedText: String = {
+            if let currentUser = currentUser {
+                return announcement.text.replacingOccurrences(of: "{{user_name}}", with: currentUser.fullName)
+            }
+            return announcement.text
+        }()
+        let processedContent = self.contentProcessor.processContent(processedText)
 
         return CourseInfoTabNewsViewModel(
             uniqueIdentifier: "\(announcement.id)",

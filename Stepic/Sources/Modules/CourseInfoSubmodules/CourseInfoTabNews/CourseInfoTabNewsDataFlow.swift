@@ -6,6 +6,7 @@ enum CourseInfoTabNews {
     /// Response data
     struct NewsResponseData {
         let course: Course
+        let currentUser: User?
         let announcements: [AnnouncementPlainObject]
         let hasNextPage: Bool
     }

@@ -9,6 +9,8 @@ protocol CourseInfoTabNewsInteractorProtocol {
 final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
     private let presenter: CourseInfoTabNewsPresenterProtocol
     private let provider: CourseInfoTabNewsProviderProtocol
+
+    private let userAccountService: UserAccountServiceProtocol
     private let analytics: Analytics
 
     private var currentCourse: Course?
@@ -27,10 +29,12 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
     init(
         presenter: CourseInfoTabNewsPresenterProtocol,
         provider: CourseInfoTabNewsProviderProtocol,
+        userAccountService: UserAccountServiceProtocol,
         analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
         self.analytics = analytics
     }
 
@@ -103,6 +107,7 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
 
                 let responseData = CourseInfoTabNews.NewsResponseData(
                     course: course,
+                    currentUser: strongSelf.userAccountService.currentUser,
                     announcements: strongSelf.sortedAnnouncements(announcements),
                     hasNextPage: meta.hasNext
                 )
@@ -133,6 +138,7 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
             }.done { announcements, meta in
                 let responseData = CourseInfoTabNews.NewsResponseData(
                     course: course,
+                    currentUser: self.userAccountService.currentUser,
                     announcements: self.sortedAnnouncements(announcements),
                     hasNextPage: meta.hasNext
                 )
