@@ -127,4 +127,18 @@ extension CourseInfoTabNewsViewController: CourseInfoTabNewsTableViewAdapterDele
         self.canTriggerPagination = false
         self.interactor.doNextCourseNewsFetch(request: .init())
     }
+
+    func courseInfoTabNewsTableViewAdapter(_ adapter: CourseInfoTabNewsTableViewAdapter, didRequestOpenURL url: URL) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
+
+    func courseInfoTabNewsTableViewAdapter(_ adapter: CourseInfoTabNewsTableViewAdapter, didRequestOpenImage url: URL) {
+        FullscreenImageViewer.show(url: url, from: self)
+    }
 }

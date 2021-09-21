@@ -8,6 +8,14 @@ protocol CourseInfoTabNewsTableViewAdapterDelegate: AnyObject {
     func courseInfoTabNewsTableViewAdapterDidRequestPagination(
         _ adapter: CourseInfoTabNewsTableViewAdapter
     )
+    func courseInfoTabNewsTableViewAdapter(
+        _ adapter: CourseInfoTabNewsTableViewAdapter,
+        didRequestOpenURL url: URL
+    )
+    func courseInfoTabNewsTableViewAdapter(
+        _ adapter: CourseInfoTabNewsTableViewAdapter,
+        didRequestOpenImage url: URL
+    )
 }
 
 final class CourseInfoTabNewsTableViewAdapter: NSObject {
@@ -83,16 +91,16 @@ extension CourseInfoTabNewsTableViewAdapter: UITableViewDataSource {
                 )
             }
         }
-//        cell.onLinkClick = { [weak self] url in
-//            if let strongSelf = self {
-//                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didRequestOpenURL: url)
-//            }
-//        }
-//        cell.onImageClick = { [weak self] url in
-//            if let strongSelf = self {
-//                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didRequestOpenImage: url)
-//            }
-//        }
+        cell.onLinkClick = { [weak self] url in
+            if let strongSelf = self {
+                strongSelf.delegate?.courseInfoTabNewsTableViewAdapter(strongSelf, didRequestOpenURL: url)
+            }
+        }
+        cell.onImageClick = { [weak self] url in
+            if let strongSelf = self {
+                strongSelf.delegate?.courseInfoTabNewsTableViewAdapter(strongSelf, didRequestOpenImage: url)
+            }
+        }
 
         cell.configure(viewModel: viewModel)
 
