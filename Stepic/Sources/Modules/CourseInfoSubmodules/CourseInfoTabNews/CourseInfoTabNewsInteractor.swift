@@ -153,7 +153,29 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
     }
 
     private func sortedAnnouncements(_ announcements: [AnnouncementPlainObject]) -> [AnnouncementPlainObject] {
-        announcements
+        guard let course = self.currentCourse else {
+            return announcements
+        }
+
+        if course.canCreateAnnouncements {
+            return announcements.sorted { lhs, rhs in
+                let lhsCreateDate = lhs.createDate ?? Date()
+                let rhsCreateDate = rhs.createDate ?? Date()
+
+                if lhsCreateDate == rhsCreateDate {
+                    let lhsStatusRank = lhs.status?.rank ?? 0
+                    let rhsStatusRank = rhs.status?.rank ?? 0
+
+                    return lhsStatusRank < rhsStatusRank
+                }
+
+                return lhsCreateDate > rhsCreateDate
+            }
+        } else {
+            return announcements.sorted { lhs, rhs in
+                (lhs.sentDate ?? Date()) > (rhs.sentDate ?? Date())
+            }
+        }
     }
 
     enum Error: Swift.Error {
