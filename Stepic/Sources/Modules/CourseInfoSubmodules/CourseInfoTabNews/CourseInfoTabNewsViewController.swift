@@ -39,6 +39,11 @@ final class CourseInfoTabNewsViewController: UIViewController {
         view.delegate = self
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.updateState(newState: self.state)
+    }
+
     // MARK: Private API
 
     private func updateState(newState: CourseInfoTabNews.ViewControllerState) {

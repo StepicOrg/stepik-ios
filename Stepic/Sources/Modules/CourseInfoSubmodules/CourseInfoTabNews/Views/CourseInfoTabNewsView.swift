@@ -14,6 +14,8 @@ extension CourseInfoTabNewsView {
 }
 
 final class CourseInfoTabNewsView: UIView {
+    private static let hideLoadingTableViewDelay: TimeInterval = 2
+
     let appearance: Appearance
 
     weak var delegate: CourseInfoTabNewsViewDelegate?
@@ -25,6 +27,15 @@ final class CourseInfoTabNewsView: UIView {
         tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
         tableView.register(cellClass: CourseInfoTabNewsTableViewCell.self)
+        return tableView
+    }()
+
+    private lazy var loadingTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100.0
+        tableView.separatorStyle = .none
         return tableView
     }()
 
@@ -85,12 +96,16 @@ final class CourseInfoTabNewsView: UIView {
     }
 
     func showLoading() {
-        self.tableView.skeleton.viewBuilder = { CourseInfoTabReviewsCellSkeletonView() }
-        self.tableView.skeleton.show()
+        self.loadingTableView.isHidden = false
+        self.loadingTableView.skeleton.viewBuilder = { CourseInfoTabReviewsCellSkeletonView() }
+        self.loadingTableView.skeleton.show()
     }
 
     func hideLoading() {
-        self.tableView.skeleton.hide()
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.hideLoadingTableViewDelay) {
+            self.loadingTableView.skeleton.hide()
+            self.loadingTableView.isHidden = true
+        }
     }
 
     func showErrorPlaceholder() {
@@ -117,12 +132,16 @@ final class CourseInfoTabNewsView: UIView {
 extension CourseInfoTabNewsView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
+        self.addSubview(self.loadingTableView)
         self.addSubview(self.placeholderView)
     }
 
     func makeConstraints() {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
+
+        self.loadingTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingTableView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         self.placeholderView.translatesAutoresizingMaskIntoConstraints = false
         self.placeholderView.snp.makeConstraints { make in
@@ -150,6 +169,7 @@ extension CourseInfoTabNewsView: ScrollablePageViewProtocol {
         }
         set {
             self.tableView.contentInset = newValue
+            self.loadingTableView.contentInset = newValue
 
             self.placeholderViewTopConstraint?.update(offset: newValue.top)
         }
@@ -170,6 +190,7 @@ extension CourseInfoTabNewsView: ScrollablePageViewProtocol {
         }
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue
+            self.loadingTableView.contentInsetAdjustmentBehavior = newValue
         }
     }
 }
