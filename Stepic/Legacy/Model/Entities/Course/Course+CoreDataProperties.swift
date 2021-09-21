@@ -58,6 +58,7 @@ extension Course {
     @NSManaged var managedDefaultPromoCodeExpireDate: Date?
 
     @NSManaged var managedCanViewRevenue: NSNumber?
+    @NSManaged var managedCanCreateAnnouncements: NSNumber
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -522,6 +523,15 @@ extension Course {
         }
         set {
             self.managedCanViewRevenue = NSNumber(value: newValue)
+        }
+    }
+
+    var canCreateAnnouncements: Bool {
+        get {
+            self.managedCanCreateAnnouncements.boolValue
+        }
+        set {
+            self.managedCanCreateAnnouncements = NSNumber(value: newValue)
         }
     }
 

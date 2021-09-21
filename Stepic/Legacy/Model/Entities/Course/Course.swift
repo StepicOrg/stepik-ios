@@ -165,8 +165,10 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         if let actionsDictionary = json[JSONKey.actions.rawValue].dictionary {
             self.canViewRevenue =
                 actionsDictionary[JSONKey.viewRevenue.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
+            self.canCreateAnnouncements = actionsDictionary[JSONKey.createAnnouncements.rawValue]?.string != nil
         } else {
             self.canViewRevenue = false
+            self.canCreateAnnouncements = false
         }
     }
 
@@ -291,5 +293,6 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case actions
         case viewRevenue = "view_revenue"
         case enabled
+        case createAnnouncements = "create_announcements"
     }
 }
