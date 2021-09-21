@@ -2,7 +2,7 @@ import UIKit
 
 extension VerticalCourseListFlowLayout {
     struct Appearance {
-        let headerViewHeight: CGFloat = 104
+        let defaultHeaderViewHeight: CGFloat = 104
         let paginationViewHeight: CGFloat = 52
     }
 }
@@ -33,6 +33,15 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
         }
     }
 
+    lazy var headerHeight = self.appearance.defaultHeaderViewHeight {
+        didSet {
+            if oldValue != self.headerHeight {
+                self.cache.removeAll(keepingCapacity: true)
+                self.invalidateLayout()
+            }
+        }
+    }
+
     let isHeaderHidden: Bool
 
     private var paginationSize: CGSize {
@@ -46,7 +55,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
     private var headerSize: CGSize {
         let viewSize = CGSize(
             width: self.collectionView?.bounds.width ?? 0,
-            height: self.appearance.headerViewHeight
+            height: self.headerHeight
         )
         return self.isHeaderHidden ? .zero : viewSize
     }
