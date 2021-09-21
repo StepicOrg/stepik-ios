@@ -68,6 +68,7 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
         return CourseInfoTabNewsViewModel(
             uniqueIdentifier: "\(announcement.id)",
             formattedDate: formattedDate,
+            subject: announcement.subject.trimmed(),
             processedContent: processedContent
         )
     }
