@@ -101,6 +101,7 @@
         <relationship name="managedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StepOptions" inverseName="managedTemplates" inverseEntity="StepOptions" syncable="YES"/>
     </entity>
     <entity name="Course" representedClassName=".Course" syncable="YES">
+        <attribute name="managedAnnouncementsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedAudience" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedAuthorsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -597,7 +598,7 @@
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
-        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1049"/>
+        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1064"/>
         <element name="CourseBeneficiary" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="CourseBenefit" positionX="-450" positionY="-234" width="128" height="239"/>
         <element name="CourseBenefitByMonth" positionX="-450" positionY="-234" width="128" height="284"/>

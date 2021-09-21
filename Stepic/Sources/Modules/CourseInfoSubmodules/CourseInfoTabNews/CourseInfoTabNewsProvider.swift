@@ -4,6 +4,9 @@ import PromiseKit
 protocol CourseInfoTabNewsProviderProtocol {
     func fetchCached(courseID: Course.IdType) -> Promise<([AnnouncementPlainObject], Meta)>
     func fetchRemote(courseID: Course.IdType, page: Int) -> Promise<([AnnouncementPlainObject], Meta)>
+
+    func fetchCached(ids: [Announcement.IdType], courseID: Course.IdType) -> Promise<([AnnouncementPlainObject], Meta)>
+    func fetchRemote(ids: [Announcement.IdType], courseID: Course.IdType) -> Promise<([AnnouncementPlainObject], Meta)>
 }
 
 final class CourseInfoTabNewsProvider: CourseInfoTabNewsProviderProtocol {
@@ -29,6 +32,32 @@ final class CourseInfoTabNewsProvider: CourseInfoTabNewsProviderProtocol {
                 seal.fulfill($0)
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
+            }
+        }
+    }
+
+    func fetchCached(
+        ids: [Announcement.IdType],
+        courseID: Course.IdType
+    ) -> Promise<([AnnouncementPlainObject], Meta)> {
+        Promise { seal in
+            self.announcementsRepository.fetch(ids: ids, courseID: courseID, dataSourceType: .cache).done {
+                seal.fulfill($0)
+            }.catch { _ in
+                seal.reject(Error.persistenceFetchFailed)
+            }
+        }
+    }
+
+    func fetchRemote(
+        ids: [Announcement.IdType],
+        courseID: Course.IdType
+    ) -> Promise<([AnnouncementPlainObject], Meta)> {
+        Promise { seal in
+            self.announcementsRepository.fetch(ids: ids, courseID: courseID, dataSourceType: .remote).done {
+                seal.fulfill($0)
+            }.catch { _ in
+                seal.reject(Error.persistenceFetchFailed)
             }
         }
     }
