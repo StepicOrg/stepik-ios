@@ -31,12 +31,7 @@ struct DiscussionsCommentViewModel {
     let hasReplies: Bool
     let solution: Solution?
 
-    var isWebViewSupportNeeded: Bool {
-        if case .html = self.processedContent {
-            return true
-        }
-        return false
-    }
+    var isWebViewSupportNeeded: Bool { self.processedContent.isWebViewSupportNeeded }
 
     struct Solution {
         let id: Submission.IdType

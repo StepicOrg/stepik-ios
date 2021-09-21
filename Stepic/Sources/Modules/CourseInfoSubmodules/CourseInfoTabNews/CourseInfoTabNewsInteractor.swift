@@ -89,7 +89,7 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
     private func fetchNewsInAppropriateMode(
         course: Course,
         isOnline: Bool
-    ) -> Promise<CourseInfoTabNews.NewsLoad.Data> {
+    ) -> Promise<CourseInfoTabNews.NewsResponseData> {
         Promise { seal in
             firstly {
                 isOnline && self.didLoadFromCache
@@ -97,7 +97,7 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
                     : self.provider.fetchCached(courseID: course.id)
             }.done { announcements, meta in
                 let sortedAnnouncements = announcements
-                let responseData = CourseInfoTabNews.NewsLoad.Data(
+                let responseData = CourseInfoTabNews.NewsResponseData(
                     course: course,
                     announcements: sortedAnnouncements,
                     hasNextPage: meta.hasNext

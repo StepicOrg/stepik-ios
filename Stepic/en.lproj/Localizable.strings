@@ -508,6 +508,7 @@ CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
 CourseInfoTabNews = "News";
+CourseInfoTabNewsEmptyNews = "No News";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
