@@ -160,7 +160,16 @@ final class GradientCoursesPlaceholderView: UIView {
             }
         }
 
-        var subtitleTextColor: UIColor { .stepikTertiaryText }
+        var subtitleTextColor: UIColor {
+            switch self {
+            case .purple:
+                return .white.withAlphaComponent(0.6)
+            case .blue:
+                return .stepikTertiaryText
+            case .pink:
+                return .stepikTertiaryText
+            }
+        }
     }
 }
 

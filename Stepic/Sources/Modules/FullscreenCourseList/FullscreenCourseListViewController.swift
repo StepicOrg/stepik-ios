@@ -117,18 +117,22 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
     }
 
     private func makeNavigationBarTransparentIfHasGradientHeader() {
-        guard self.presentationDescription?.headerViewDescription != nil else {
+        guard let headerViewPresentationDescription = self.presentationDescription?.headerViewDescription else {
             return
         }
 
         self.styledNavigationController?.removeBackButtonTitleForTopController()
 
+        self.styledNavigationController?.changeShadowViewAlpha(
+            Appearance.transparentNavigationBarAppearance.shadowViewAlpha,
+            sender: self
+        )
         self.styledNavigationController?.changeBackgroundColor(
             Appearance.transparentNavigationBarAppearance.backgroundColor,
             sender: self
         )
-        self.styledNavigationController?.changeShadowViewAlpha(
-            Appearance.transparentNavigationBarAppearance.shadowViewAlpha,
+        self.styledNavigationController?.changeTintColor(
+            headerViewPresentationDescription.color.titleTextColor,
             sender: self
         )
 
