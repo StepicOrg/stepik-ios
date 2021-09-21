@@ -3,6 +3,7 @@ import UIKit
 
 protocol CourseInfoTabNewsPresenterProtocol {
     func presentCourseNews(response: CourseInfoTabNews.NewsLoad.Response)
+    func presentNextCourseNews(response: CourseInfoTabNews.NextNewsLoad.Response)
 }
 
 final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
@@ -28,6 +29,18 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
             }
         case .failure:
             self.viewController?.displayCourseNews(viewModel: .init(state: .error))
+        }
+    }
+
+    func presentNextCourseNews(response: CourseInfoTabNews.NextNewsLoad.Response) {
+        switch response.result {
+        case .success(let data):
+            self.makeNewsViewModels(data.announcements).done { viewModels in
+                let data = CourseInfoTabNews.NewsResultData(news: viewModels, hasNextPage: data.hasNextPage)
+                self.viewController?.displayNextCourseNews(viewModel: .init(state: .result(data: data)))
+            }
+        case .failure:
+            self.viewController?.displayNextCourseNews(viewModel: .init(state: .error))
         }
     }
 

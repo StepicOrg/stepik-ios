@@ -2,6 +2,7 @@ import UIKit
 
 protocol CourseInfoTabNewsViewControllerProtocol: AnyObject {
     func displayCourseNews(viewModel: CourseInfoTabNews.NewsLoad.ViewModel)
+    func displayNextCourseNews(viewModel: CourseInfoTabNews.NextNewsLoad.ViewModel)
 }
 
 final class CourseInfoTabNewsViewController: UIViewController {
@@ -82,14 +83,26 @@ extension CourseInfoTabNewsViewController: CourseInfoTabNewsViewControllerProtoc
     func displayCourseNews(viewModel: CourseInfoTabNews.NewsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
+
+    func displayNextCourseNews(viewModel: CourseInfoTabNews.NextNewsLoad.ViewModel) {
+        switch (self.state, viewModel.state) {
+        case (.result(let currentData), .result(let nextData)):
+            let resultData = CourseInfoTabNews.NewsResultData(
+                news: currentData.news + nextData.news,
+                hasNextPage: nextData.hasNextPage
+            )
+            self.updateState(newState: .result(data: resultData))
+        case (_, .error):
+            self.updateState(newState: self.state)
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - CourseInfoTabNewsViewController: CourseInfoTabNewsViewDelegate -
 
 extension CourseInfoTabNewsViewController: CourseInfoTabNewsViewDelegate {
-    func courseInfoTabNewsViewDidRequestPagination(_ view: CourseInfoTabNewsView) {
-    }
-
     func courseInfoTabNewsViewDidClickErrorPlaceholderActionButton(_ view: CourseInfoTabNewsView) {
         self.updateState(newState: .loading)
         self.interactor.doCourseNewsFetch(request: .init())
@@ -99,12 +112,19 @@ extension CourseInfoTabNewsViewController: CourseInfoTabNewsViewDelegate {
 // MARK: - CourseInfoTabNewsViewController: CourseInfoTabNewsTableViewAdapterDelegate -
 
 extension CourseInfoTabNewsViewController: CourseInfoTabNewsTableViewAdapterDelegate {
-    func courseInfoTabNewsTableViewAdapterDidRequestPagination(_ adapter: CourseInfoTabNewsTableViewAdapter) {}
-
     func courseInfoTabNewsTableViewAdapter(
         _ adapter: CourseInfoTabNewsTableViewAdapter,
         scrollViewDidScroll scrollView: UIScrollView
     ) {
         self.courseInfoTabNewsView?.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+
+    func courseInfoTabNewsTableViewAdapterDidRequestPagination(_ adapter: CourseInfoTabNewsTableViewAdapter) {
+        guard self.canTriggerPagination else {
+            return
+        }
+
+        self.canTriggerPagination = false
+        self.interactor.doNextCourseNewsFetch(request: .init())
     }
 }

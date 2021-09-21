@@ -69,6 +69,7 @@ final class CourseInfoTabNewsView: UIView {
     }
 
     func showPaginationView() {
+        self.paginationView.setLoading()
         self.tableView.tableFooterView = self.paginationView
         self.tableView.tableFooterView?.frame = CGRect(
             x: 0,

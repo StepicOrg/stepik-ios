@@ -31,6 +31,19 @@ enum CourseInfoTabNews {
         }
     }
 
+    /// Load next part reviews
+    enum NextNewsLoad {
+        struct Request {}
+
+        struct Response {
+            let result: StepikResult<NewsResponseData>
+        }
+
+        struct ViewModel {
+            let state: PaginationState
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

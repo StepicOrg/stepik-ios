@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CourseInfoTabNewsInteractorProtocol {
     func doCourseNewsFetch(request: CourseInfoTabNews.NewsLoad.Request)
+    func doNextCourseNewsFetch(request: CourseInfoTabNews.NextNewsLoad.Request)
 }
 
 final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
@@ -68,8 +69,6 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
                     strongSelf.doCourseNewsFetch(request: .init())
                 }
             }.catch { error in
-                assert(Thread.current.isMainThread)
-
                 guard let strongSelf = self else {
                     return
                 }
@@ -78,6 +77,42 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
                    strongSelf.didLoadFromCache && !strongSelf.didPresentCourseNews {
                     strongSelf.presenter.presentCourseNews(response: .init(result: .failure(error)))
                 }
+            }.finally {
+                strongSelf.fetchSemaphore.signal()
+            }
+        }
+    }
+
+    func doNextCourseNewsFetch(request: CourseInfoTabNews.NextNewsLoad.Request) {
+        guard self.isOnline, self.paginationState.hasNext, let course = self.currentCourse else {
+            return
+        }
+
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchSemaphore.wait()
+
+            let nextPageIndex = strongSelf.paginationState.page + 1
+            print("CourseInfoTabNewsInteractor :: load next page, page = \(nextPageIndex)")
+
+            strongSelf.provider.fetchRemote(courseID: course.id, page: nextPageIndex).done { announcements, meta in
+                strongSelf.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
+
+                let responseData = CourseInfoTabNews.NewsResponseData(
+                    course: course,
+                    announcements: strongSelf.sortedAnnouncements(announcements),
+                    hasNextPage: meta.hasNext
+                )
+
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentNextCourseNews(response: .init(result: .success(responseData)))
+                }
+            }.catch { error in
+                print("CourseInfoTabNewsInteractor :: failed load next page with error = \(error)")
+                strongSelf.presenter.presentNextCourseNews(response: .init(result: .failure(error)))
             }.finally {
                 strongSelf.fetchSemaphore.signal()
             }
@@ -96,13 +131,11 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
                     ? self.provider.fetchRemote(courseID: course.id, page: 1)
                     : self.provider.fetchCached(courseID: course.id)
             }.done { announcements, meta in
-                let sortedAnnouncements = announcements
                 let responseData = CourseInfoTabNews.NewsResponseData(
                     course: course,
-                    announcements: sortedAnnouncements,
+                    announcements: self.sortedAnnouncements(announcements),
                     hasNextPage: meta.hasNext
                 )
-
                 seal.fulfill(responseData)
             }.catch { error in
                 if let providerError = error as? CourseInfoTabNewsProvider.Error {
@@ -117,6 +150,10 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
                 }
             }
         }
+    }
+
+    private func sortedAnnouncements(_ announcements: [AnnouncementPlainObject]) -> [AnnouncementPlainObject] {
+        announcements
     }
 
     enum Error: Swift.Error {

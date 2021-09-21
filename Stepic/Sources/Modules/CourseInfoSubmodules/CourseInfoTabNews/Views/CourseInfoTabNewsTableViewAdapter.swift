@@ -1,12 +1,12 @@
 import UIKit
 
 protocol CourseInfoTabNewsTableViewAdapterDelegate: AnyObject {
-    func courseInfoTabNewsTableViewAdapterDidRequestPagination(
-        _ adapter: CourseInfoTabNewsTableViewAdapter
-    )
     func courseInfoTabNewsTableViewAdapter(
         _ adapter: CourseInfoTabNewsTableViewAdapter,
         scrollViewDidScroll scrollView: UIScrollView
+    )
+    func courseInfoTabNewsTableViewAdapterDidRequestPagination(
+        _ adapter: CourseInfoTabNewsTableViewAdapter
     )
 }
 
@@ -61,11 +61,9 @@ extension CourseInfoTabNewsTableViewAdapter: UITableViewDataSource {
         let viewModelUniqueIdentifier = viewModel.uniqueIdentifier
 
         cell.onContentLoaded = { [weak self, weak cell, weak tableView] in
-            guard let strongSelf = self,
-                  let strongCell = cell,
-                  let strongTableView = tableView else {
-                      return
-                  }
+            guard let strongSelf = self, let strongCell = cell, let strongTableView = tableView else {
+                return
+            }
 
             let fittingSize = CGSize(width: strongTableView.bounds.width, height: .infinity)
             let cellSize = strongCell.sizeThatFits(fittingSize)
