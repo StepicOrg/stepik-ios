@@ -191,6 +191,7 @@ final class HorizontalCourseListViewController: CourseListViewController {
 final class VerticalCourseListViewController: CourseListViewController {
     private let presentationDescription: CourseList.PresentationDescription?
     lazy var verticalCourseListView = self.courseListView as? VerticalCourseListView
+    lazy var headerView = self.verticalCourseListView?.headerView as? GradientCoursesPlaceholderView
     lazy var paginationView = self.verticalCourseListView?.paginationView as? PaginationView
 
     init(
@@ -235,6 +236,12 @@ final class VerticalCourseListViewController: CourseListViewController {
                 subtitle: headerViewPresentationDescription.subtitle,
                 color: headerViewPresentationDescription.color
             )
+
+            if !headerViewPresentationDescription.shouldExtendEdgesUnderTopBar {
+                view.contentInsetAdjustmentBehavior = .never
+                headerView.topContentInset = self.getTopNavigationBarHeight()
+            }
+
             headerView.onIntrinsicContentSizeChange = { [weak self] intrinsicContentSize in
                 guard let strongSelf = self else {
                     return
@@ -242,6 +249,7 @@ final class VerticalCourseListViewController: CourseListViewController {
 
                 strongSelf.verticalCourseListView?.headerViewHeight = intrinsicContentSize.height
             }
+
             view.headerView = headerView
         }
 
@@ -250,10 +258,43 @@ final class VerticalCourseListViewController: CourseListViewController {
         self.view = view
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateHeaderViewTopContentInsetIfShouldntExtendEdgesUnderTopBar()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { [weak self] _ in
+                self?.updateHeaderViewTopContentInsetIfShouldntExtendEdgesUnderTopBar()
+            },
+            completion: nil
+        )
+    }
+
     override func updatePagination(hasNextPage: Bool) {
         super.updatePagination(hasNextPage: hasNextPage)
 
         self.verticalCourseListView?.isPaginationViewHidden = !hasNextPage
         self.paginationView?.setLoading()
+    }
+
+    private func updateHeaderViewTopContentInsetIfShouldntExtendEdgesUnderTopBar() {
+        guard let headerViewPresentationDescription = self.presentationDescription?.headerViewDescription,
+              !headerViewPresentationDescription.shouldExtendEdgesUnderTopBar else {
+            return
+        }
+
+        DispatchQueue.main.async {
+            self.headerView?.topContentInset = self.getTopNavigationBarHeight()
+        }
+    }
+
+    private func getTopNavigationBarHeight() -> CGFloat {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        return statusBarHeight + navigationBarHeight
     }
 }

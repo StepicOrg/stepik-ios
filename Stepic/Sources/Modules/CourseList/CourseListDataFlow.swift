@@ -26,6 +26,7 @@ enum CourseList {
             var title: String
             var subtitle: String?
             var color: GradientCoursesPlaceholderView.Color
+            var shouldExtendEdgesUnderTopBar = true
         }
     }
 

@@ -281,6 +281,15 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
         }
     }
 
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
+        get {
+            self.collectionView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.collectionView.contentInsetAdjustmentBehavior = newValue
+        }
+    }
+
     var isPaginationViewHidden = true {
         didSet {
             self.updatePagination()

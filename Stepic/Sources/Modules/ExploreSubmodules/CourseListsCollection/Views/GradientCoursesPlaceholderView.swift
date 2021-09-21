@@ -58,6 +58,19 @@ final class GradientCoursesPlaceholderView: UIView {
 
     private var currentIntrinsicContentSize = CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
 
+    private var stackViewTopConstraint: Constraint?
+
+    var topContentInset: CGFloat = 0 {
+        didSet {
+            guard oldValue != self.topContentInset else {
+                return
+            }
+
+            self.stackViewTopConstraint?.update(offset: self.topContentInset)
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+
     var titleText: NSAttributedString? {
         didSet {
             self.titleLabel.attributedText = self.titleText
@@ -86,9 +99,9 @@ final class GradientCoursesPlaceholderView: UIView {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
         let newHeight = (
-            self.appearance.labelsInsets.top
-                + stackViewIntrinsicContentSize.height
-                + self.appearance.labelsInsets.bottom
+            self.topContentInset.isZero ? self.appearance.labelsInsets.top : self.topContentInset
+            + stackViewIntrinsicContentSize.height
+            + self.appearance.labelsInsets.bottom
         ).rounded(.up)
 
         let newIntrinsicContentSize = CGSize(width: UIView.noIntrinsicMetric, height: newHeight)
@@ -167,11 +180,11 @@ extension GradientCoursesPlaceholderView: ProgrammaticallyInitializableViewProto
 
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(self.appearance.labelsInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.labelsInsets.right)
-            make.top.greaterThanOrEqualToSuperview().offset(self.appearance.labelsInsets.top)
-            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.labelsInsets.bottom)
+            self.stackViewTopConstraint = make.top
+                .equalToSuperview()
+                .offset(self.appearance.labelsInsets.top)
+                .constraint
+            make.leading.bottom.trailing.equalToSuperview().inset(self.appearance.labelsInsets)
         }
     }
 }
