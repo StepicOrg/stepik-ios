@@ -9,17 +9,6 @@ protocol CourseInfoTabNewsPresenterProtocol {
 final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     weak var viewController: CourseInfoTabNewsViewControllerProtocol?
 
-    private lazy var contentProcessor: ContentProcessor = {
-        let cellAppearance = CourseInfoTabNewsCellView.Appearance()
-        return ContentProcessor(
-            rules: ContentProcessor.defaultRules,
-            injections: ContentProcessor.defaultInjections + [
-                FontInjection(font: cellAppearance.processedContentFont),
-                TextColorInjection(dynamicColor: cellAppearance.processedContentTextColor)
-            ]
-        )
-    }()
-
     func presentCourseNews(response: CourseInfoTabNews.NewsLoad.Response) {
         switch response.result {
         case .success(let data):
@@ -52,7 +41,8 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     ) -> Guarantee<[CourseInfoTabNewsViewModel]> {
         Guarantee { seal in
             DispatchQueue.global(qos: .userInitiated).async {
-                let viewModels = announcements.map { self.makeViewModel($0, currentUser: currentUser) }
+                let contentProcessor = self.makeContentProcessor(currentUser: currentUser)
+                let viewModels = announcements.map { self.makeViewModel($0, contentProcessor: contentProcessor) }
 
                 DispatchQueue.main.async {
                     seal(viewModels)
@@ -63,17 +53,11 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
 
     private func makeViewModel(
         _ announcement: AnnouncementPlainObject,
-        currentUser: User?
+        contentProcessor: ContentProcessor
     ) -> CourseInfoTabNewsViewModel {
         let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(announcement.sentDate ?? Date())
 
-        let processedText: String = {
-            if let currentUser = currentUser {
-                return announcement.text.replacingOccurrences(of: "{{user_name}}", with: currentUser.fullName)
-            }
-            return announcement.text
-        }()
-        let processedContent = self.contentProcessor.processContent(processedText)
+        let processedContent = contentProcessor.processContent(announcement.text)
 
         return CourseInfoTabNewsViewModel(
             uniqueIdentifier: "\(announcement.id)",
@@ -81,5 +65,19 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
             subject: announcement.subject.trimmed(),
             processedContent: processedContent
         )
+    }
+
+    private func makeContentProcessor(currentUser: User?) -> ContentProcessor {
+        var rules = ContentProcessor.defaultRules
+        if let currentUser = currentUser, !currentUser.fullName.isEmpty {
+            rules.append(ReplaceTemplateUsernameRule(username: currentUser.fullName))
+        }
+
+        var injections = ContentProcessor.defaultInjections
+        let cellAppearance = CourseInfoTabNewsCellView.Appearance()
+        injections.append(FontInjection(font: cellAppearance.processedContentFont))
+        injections.append(TextColorInjection(dynamicColor: cellAppearance.processedContentTextColor))
+
+        return ContentProcessor(rules: rules, injections: injections)
     }
 }
