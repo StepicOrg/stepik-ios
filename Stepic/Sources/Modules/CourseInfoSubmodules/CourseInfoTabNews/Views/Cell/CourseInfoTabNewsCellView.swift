@@ -104,12 +104,12 @@ final class CourseInfoTabNewsCellView: UIView {
 
         let height = (
             self.appearance.contentStackViewInsets.top
-            + self.dateLabel.intrinsicContentSize.height
-            + (self.subjectLabel.isHidden ? 0 : self.appearance.contentStackViewSpacing)
-            + (self.subjectLabel.isHidden ? 0 : self.subjectLabel.intrinsicContentSize.height)
-            + self.appearance.contentStackViewSpacing
-            + textContentHeight
-            + self.appearance.contentStackViewInsets.bottom
+                + self.dateLabel.intrinsicContentSize.height
+                + (self.subjectLabel.isHidden ? 0 : self.appearance.contentStackViewSpacing)
+                + (self.subjectLabel.isHidden ? 0 : self.subjectLabel.intrinsicContentSize.height)
+                + self.appearance.contentStackViewSpacing
+                + textContentHeight
+                + self.appearance.contentStackViewInsets.bottom
         ).rounded(.up)
 
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
