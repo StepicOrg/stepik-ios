@@ -60,6 +60,12 @@ final class CourseInfoTabNewsCellView: UIView {
         return processedContentView
     }()
 
+    private lazy var statisticsView: CourseInfoTabNewsStatisticsView = {
+        let view = CourseInfoTabNewsStatisticsView()
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -109,6 +115,8 @@ final class CourseInfoTabNewsCellView: UIView {
                 + (self.subjectLabel.isHidden ? 0 : self.subjectLabel.intrinsicContentSize.height)
                 + self.appearance.contentStackViewSpacing
                 + textContentHeight
+                + (self.statisticsView.isHidden ? 0 : self.appearance.contentStackViewSpacing)
+                + (self.statisticsView.isHidden ? 0 : self.statisticsView.intrinsicContentSize.height)
                 + self.appearance.contentStackViewInsets.bottom
         ).rounded(.up)
 
@@ -129,6 +137,13 @@ final class CourseInfoTabNewsCellView: UIView {
         self.subjectLabel.isHidden = viewModel.subject.isEmpty
 
         self.processedContentView.processedContent = viewModel.processedContent
+
+        if let statisticsViewModel = viewModel.statistics {
+            self.statisticsView.isHidden = false
+            self.statisticsView.configure(viewModel: statisticsViewModel)
+        } else {
+            self.statisticsView.isHidden = true
+        }
     }
 }
 
@@ -141,6 +156,7 @@ extension CourseInfoTabNewsCellView: ProgrammaticallyInitializableViewProtocol {
         self.contentStackView.addArrangedSubview(self.dateLabel)
         self.contentStackView.addArrangedSubview(self.subjectLabel)
         self.contentStackView.addArrangedSubview(self.processedContentView)
+        self.contentStackView.addArrangedSubview(self.statisticsView)
     }
 
     func makeConstraints() {

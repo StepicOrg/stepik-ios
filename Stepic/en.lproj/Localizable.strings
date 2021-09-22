@@ -509,6 +509,11 @@ CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
 CourseInfoTabNews = "News";
 CourseInfoTabNewsEmptyNews = "No News";
+CourseInfoTabNewsPublishCountTitle = "Published";
+CourseInfoTabNewsQueueCountTitle = "Queued";
+CourseInfoTabNewsSentCountTitle = "Sent";
+CourseInfoTabNewsOpenCountTitle = "Opened";
+CourseInfoTabNewsClickCountTitle = "Clicked";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

@@ -12,7 +12,11 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     func presentCourseNews(response: CourseInfoTabNews.NewsLoad.Response) {
         switch response.result {
         case .success(let data):
-            self.makeNewsViewModels(data.announcements, currentUser: data.currentUser).done { viewModels in
+            self.makeNewsViewModels(
+                data.announcements,
+                course: data.course,
+                currentUser: data.currentUser
+            ).done { viewModels in
                 let data = CourseInfoTabNews.NewsResultData(news: viewModels, hasNextPage: data.hasNextPage)
                 self.viewController?.displayCourseNews(viewModel: .init(state: .result(data: data)))
             }
@@ -24,7 +28,11 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     func presentNextCourseNews(response: CourseInfoTabNews.NextNewsLoad.Response) {
         switch response.result {
         case .success(let data):
-            self.makeNewsViewModels(data.announcements, currentUser: data.currentUser).done { viewModels in
+            self.makeNewsViewModels(
+                data.announcements,
+                course: data.course,
+                currentUser: data.currentUser
+            ).done { viewModels in
                 let data = CourseInfoTabNews.NewsResultData(news: viewModels, hasNextPage: data.hasNextPage)
                 self.viewController?.displayNextCourseNews(viewModel: .init(state: .result(data: data)))
             }
@@ -37,12 +45,15 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
 
     private func makeNewsViewModels(
         _ announcements: [AnnouncementPlainObject],
+        course: Course,
         currentUser: User?
     ) -> Guarantee<[CourseInfoTabNewsViewModel]> {
         Guarantee { seal in
             DispatchQueue.global(qos: .userInitiated).async {
                 let contentProcessor = self.makeContentProcessor(currentUser: currentUser)
-                let viewModels = announcements.map { self.makeViewModel($0, contentProcessor: contentProcessor) }
+                let viewModels = announcements.map {
+                    self.makeViewModel($0, course: course, contentProcessor: contentProcessor)
+                }
 
                 DispatchQueue.main.async {
                     seal(viewModels)
@@ -53,17 +64,32 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
 
     private func makeViewModel(
         _ announcement: AnnouncementPlainObject,
+        course: Course,
         contentProcessor: ContentProcessor
     ) -> CourseInfoTabNewsViewModel {
         let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(announcement.sentDate ?? Date())
 
         let processedContent = contentProcessor.processContent(announcement.text)
 
+        let statistics: CourseInfoTabNewsStatisticsViewModel? = {
+            if course.canCreateAnnouncements {
+                return CourseInfoTabNewsStatisticsViewModel(
+                    publishCount: announcement.publishCount ?? 0,
+                    queueCount: announcement.queueCount ?? 0,
+                    sentCount: announcement.sentCount ?? 0,
+                    openCount: announcement.openCount ?? 0,
+                    clickCount: announcement.clickCount ?? 0
+                )
+            }
+            return nil
+        }()
+
         return CourseInfoTabNewsViewModel(
             uniqueIdentifier: "\(announcement.id)",
             formattedDate: formattedDate,
             subject: announcement.subject.trimmed(),
-            processedContent: processedContent
+            processedContent: processedContent,
+            statistics: statistics
         )
     }
 

@@ -511,6 +511,11 @@ CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
 CourseInfoTabNews = "Новости";
 CourseInfoTabNewsEmptyNews = "Нет новостей";
+CourseInfoTabNewsPublishCountTitle = "Рассылок сделано";
+CourseInfoTabNewsQueueCountTitle = "Видят на странице";
+CourseInfoTabNewsSentCountTitle = "Получили на почту";
+CourseInfoTabNewsOpenCountTitle = "Открыли письмо";
+CourseInfoTabNewsClickCountTitle = "Кликнули по ссылкам";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
