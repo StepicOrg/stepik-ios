@@ -18,4 +18,14 @@ final class AnnouncementsAPI: APIEndpoint {
             withManager: self.manager
         )
     }
+
+    func retrieve(ids: [Announcement.IdType]) -> Promise<([AnnouncementPlainObject], Meta)> {
+        self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            ids: ids,
+            updating: [],
+            withManager: self.manager
+        ).map { ($0, Meta.oneAndOnlyPage) }
+    }
 }

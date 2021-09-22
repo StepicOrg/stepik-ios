@@ -5,6 +5,7 @@ enum CourseInfo {
         case info
         case syllabus
         case reviews
+        case news
 
         var title: String {
             switch self {
@@ -14,6 +15,8 @@ enum CourseInfo {
                 return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
             case .reviews:
                 return NSLocalizedString("CourseInfoTabReviews", comment: "")
+            case .news:
+                return NSLocalizedString("CourseInfoTabNews", comment: "")
             }
         }
     }

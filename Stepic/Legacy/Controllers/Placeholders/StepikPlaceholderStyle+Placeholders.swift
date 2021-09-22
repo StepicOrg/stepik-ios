@@ -174,6 +174,12 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("CourseSearchPlaceholderEmptySearchResults", comment: ""),
         buttonTitle: nil
     )
+    static let emptyCourseInfoTabNews = StepikPlaceholderStyle(
+        id: "emptyCourseInfoTabNews",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
+        text: NSLocalizedString("CourseInfoTabNewsEmptyNews", comment: ""),
+        buttonTitle: nil
+    )
 }
 
 extension StepikPlaceholder.Style {
@@ -195,7 +201,8 @@ extension StepikPlaceholder.Style {
             .emptyUnits,
             .emptyCourseBenefits,
             .emptyCourseSearchSuggestions,
-            .emptyCourseSearchResults
+            .emptyCourseSearchResults,
+            .emptyCourseInfoTabNews
         ]
     }
 }
