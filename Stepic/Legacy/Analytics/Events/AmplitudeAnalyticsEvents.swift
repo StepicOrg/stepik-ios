@@ -218,6 +218,18 @@ extension AnalyticsEvent {
         case user
     }
 
+    // MARK: - Course News -
+
+    static func courseNewsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course news screen opened",
+            parameters: [
+                "course": id,
+                "title": title
+            ]
+        )
+    }
+
     // MARK: - Course Benefits -
 
     static func courseBenefitsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {

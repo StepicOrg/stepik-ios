@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol AnnouncementsNetworkServiceProtocol: AnyObject {
     func fetch(courseID: Course.IdType, page: Int) -> Promise<([AnnouncementPlainObject], Meta)>
+    func fetch(ids: [Announcement.IdType]) -> Promise<([AnnouncementPlainObject], Meta)>
 }
 
 extension AnnouncementsNetworkServiceProtocol {
@@ -20,5 +21,9 @@ final class AnnouncementsNetworkService: AnnouncementsNetworkServiceProtocol {
 
     func fetch(courseID: Course.IdType, page: Int) -> Promise<([AnnouncementPlainObject], Meta)> {
         self.announcementsAPI.retrieve(courseID: courseID, page: page)
+    }
+
+    func fetch(ids: [Announcement.IdType]) -> Promise<([AnnouncementPlainObject], Meta)> {
+        self.announcementsAPI.retrieve(ids: ids)
     }
 }

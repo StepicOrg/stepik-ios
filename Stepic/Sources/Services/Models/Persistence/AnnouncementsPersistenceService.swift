@@ -2,6 +2,8 @@ import Foundation
 import PromiseKit
 
 protocol AnnouncementsPersistenceServiceProtocol: AnyObject {
+    func fetch(id: Announcement.IdType) -> Guarantee<Announcement?>
+    func fetch(ids: [Announcement.IdType]) -> Guarantee<[Announcement]>
     func fetch(courseID: Course.IdType) -> Guarantee<[Announcement]>
     func save(announcements: [AnnouncementPlainObject], forCourseWithID courseID: Course.IdType) -> Guarantee<Void>
 }

@@ -7,6 +7,11 @@ protocol AnnouncementsRepositoryProtocol: AnyObject {
         page: Int,
         dataSourceType: DataSourceType
     ) -> Promise<([AnnouncementPlainObject], Meta)>
+    func fetch(
+        ids: [Announcement.IdType],
+        courseID: Course.IdType,
+        dataSourceType: DataSourceType
+    ) -> Promise<([AnnouncementPlainObject], Meta)>
 }
 
 extension AnnouncementsRepositoryProtocol {
@@ -40,6 +45,27 @@ final class AnnouncementsRepository: AnnouncementsRepositoryProtocol {
         case .remote:
             return self.announcementsNetworkService
                 .fetch(courseID: courseID, page: page)
+                .then { remoteAnnouncements, meta in
+                    self.announcementsPersistenceService
+                        .save(announcements: remoteAnnouncements, forCourseWithID: courseID)
+                        .map { (remoteAnnouncements, meta) }
+                }
+        }
+    }
+
+    func fetch(
+        ids: [Announcement.IdType],
+        courseID: Course.IdType,
+        dataSourceType: DataSourceType
+    ) -> Promise<([AnnouncementPlainObject], Meta)> {
+        switch dataSourceType {
+        case .cache:
+            return self.announcementsPersistenceService
+                .fetch(ids: ids)
+                .map { ($0.map(\.plainObject), Meta.oneAndOnlyPage) }
+        case .remote:
+            return self.announcementsNetworkService
+                .fetch(ids: ids)
                 .then { remoteAnnouncements, meta in
                     self.announcementsPersistenceService
                         .save(announcements: remoteAnnouncements, forCourseWithID: courseID)
