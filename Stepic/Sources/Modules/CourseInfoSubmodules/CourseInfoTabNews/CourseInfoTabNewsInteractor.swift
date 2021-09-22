@@ -133,8 +133,8 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
         Promise { seal in
             firstly {
                 isOnline && self.didLoadFromCache
-                    ? self.provider.fetchRemote(courseID: course.id, page: 1)
-                    : self.provider.fetchCached(courseID: course.id)
+                    ? self.provider.fetchRemote(ids: course.announcementsArray, courseID: course.id)
+                    : self.provider.fetchCached(ids: course.announcementsArray, courseID: course.id)
             }.done { announcements, meta in
                 let responseData = CourseInfoTabNews.NewsResponseData(
                     course: course,

@@ -23,8 +23,9 @@ final class AnnouncementsAPI: APIEndpoint {
         self.retrieve.request(
             requestEndpoint: self.name,
             paramName: self.name,
-            params: ["ids": ids],
+            ids: ids,
+            updating: [],
             withManager: self.manager
-        )
+        ).map { ($0, Meta.oneAndOnlyPage) }
     }
 }

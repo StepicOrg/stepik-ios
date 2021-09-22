@@ -36,6 +36,7 @@ final class CourseInfoTabNewsView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
+        tableView.alpha = 0.99
         return tableView
     }()
 
