@@ -120,24 +120,3 @@ final class User: NSManagedObject, ManagedObject, IDFetchable {
         case socialProfiles = "social_profiles"
     }
 }
-
-struct UserInfo {
-    var id: Int
-    var avatarURL: String
-    var firstName: String
-    var lastName: String
-
-    init(json: JSON) {
-        self.id = json[JSONKey.id.rawValue].intValue
-        self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
-        self.firstName = json[JSONKey.firstName.rawValue].stringValue
-        self.lastName = json[JSONKey.lastName.rawValue].stringValue
-    }
-
-    enum JSONKey: String {
-        case id
-        case avatar
-        case firstName = "first_name"
-        case lastName = "last_name"
-    }
-}

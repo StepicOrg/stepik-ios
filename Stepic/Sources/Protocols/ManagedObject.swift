@@ -76,6 +76,12 @@ extension ManagedObject where Self: NSManagedObject {
     /// Iterates over the context’s `registeredObjects` set, which contains all managed objects the context currently knows about.
     /// It does this until it finds one that isn’t a fault, is of the correct type, and matches a given predicate.
     static func materializedObject(in context: NSManagedObjectContext, matching predicate: NSPredicate) -> Self? {
+        // Handle runtime exception -[__NSPlaceholderSet initWithObjects:count:]: attempt to insert nil object
+        if let exception = tryBlock({ _ = context.registeredObjects }) {
+            print("ManagedObject :: EXCEPTION occured while accessing registeredObjects, exception = \(exception)")
+            return nil
+        }
+
         for object in context.registeredObjects where !object.isFault {
             guard let result = object as? Self,
                   predicate.evaluate(with: result) else {
@@ -83,6 +89,7 @@ extension ManagedObject where Self: NSManagedObject {
             }
             return result
         }
+
         return nil
     }
 }

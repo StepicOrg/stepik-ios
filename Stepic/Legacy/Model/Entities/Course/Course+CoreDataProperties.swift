@@ -45,6 +45,7 @@ extension Course {
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
     @NSManaged var managedAuthorsArray: NSObject?
+    @NSManaged var managedAnnouncementsArray: NSObject?
 
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
@@ -58,6 +59,7 @@ extension Course {
     @NSManaged var managedDefaultPromoCodeExpireDate: Date?
 
     @NSManaged var managedCanViewRevenue: NSNumber?
+    @NSManaged var managedCanCreateAnnouncements: NSNumber
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -75,6 +77,7 @@ extension Course {
     @NSManaged var managedCourseBenefits: NSOrderedSet?
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
 
     var id: Int {
         set(newId) {
@@ -524,6 +527,15 @@ extension Course {
         }
     }
 
+    var canCreateAnnouncements: Bool {
+        get {
+            self.managedCanCreateAnnouncements.boolValue
+        }
+        set {
+            self.managedCanCreateAnnouncements = NSNumber(value: newValue)
+        }
+    }
+
     var progress: Progress? {
         get {
             managedProgress
@@ -600,6 +612,15 @@ extension Course {
         }
         set {
             self.managedAuthorsArray = NSArray(array: newValue)
+        }
+    }
+
+    var announcementsArray: [Announcement.IdType] {
+        get {
+            self.managedAnnouncementsArray as? [Announcement.IdType] ?? []
+        }
+        set {
+            self.managedAnnouncementsArray = NSArray(array: newValue)
         }
     }
 
@@ -681,6 +702,15 @@ extension Course {
         }
         set {
             self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
         }
     }
 

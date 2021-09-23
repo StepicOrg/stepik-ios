@@ -158,6 +158,78 @@ extension AnalyticsEvent {
         )
     }
 
+    // MARK: - Course Search -
+
+    static func courseContentSearchScreenOpened(id: Int, title: String?) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course content search screen opened",
+            parameters: [
+                "course": id,
+                "title": title as Any
+            ]
+        )
+    }
+
+    static func сourseContentSearched(
+        id: Int,
+        title: String?,
+        query: String,
+        suggestion: String?
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content searched", parameters: parameters)
+    }
+
+    static func courseContentSearchResultClicked(
+        id: Int,
+        title: String?,
+        query: String,
+        suggestion: String?,
+        type: CourseContentSearchResultClickType,
+        stepID: Int?
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query,
+            "type": type.rawValue,
+            "step": stepID as Any
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content search result clicked", parameters: parameters)
+    }
+
+    enum CourseContentSearchResultClickType: String {
+        case step
+        case comment
+        case user
+    }
+
+    // MARK: - Course News -
+
+    static func courseNewsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course news screen opened",
+            parameters: [
+                "course": id,
+                "title": title
+            ]
+        )
+    }
+
     // MARK: - Course Benefits -
 
     static func courseBenefitsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
@@ -262,6 +334,22 @@ extension AnalyticsEvent {
             ]
         )
     }
+
+    // MARK: - Review -
+
+    static let reviewSelectDifferentSubmissionClicked = AmplitudeAnalyticsEvent(
+        name: "Review Select Different Submission"
+    )
+
+    static let reviewSendCurrentSubmissionClicked = AmplitudeAnalyticsEvent(name: "Review Send Current Submission")
+
+    static let reviewSolveAgainClicked = AmplitudeAnalyticsEvent(name: "Review Solve Again")
+
+    static let reviewQuizTryAgainClicked = AmplitudeAnalyticsEvent(name: "Review Quiz Try Again")
+
+    static let reviewStartReviewClicked = AmplitudeAnalyticsEvent(name: "Review Start Review")
+
+    static let reviewViewReviewClicked = AmplitudeAnalyticsEvent(name: "Review View Review")
 
     // MARK: - Downloads -
 

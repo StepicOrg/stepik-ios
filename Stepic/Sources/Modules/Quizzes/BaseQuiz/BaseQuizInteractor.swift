@@ -7,6 +7,8 @@ protocol BaseQuizInteractorProtocol {
     func doRetryPollSubmission(request: BaseQuiz.RetryPollSubmission.Request)
     func doReplyCache(request: BaseQuiz.ReplyCache.Request)
     func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request)
+    func doReviewCreateSession(request: BaseQuiz.ReviewCreateSession.Request)
+    func doReviewSelectDifferentSubmission(request: BaseQuiz.ReviewSelectDifferentSubmission.Request)
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
@@ -24,8 +26,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private let rateAppManager: RateAppManager
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
-    let step: Step
-    private let hasNextStep: Bool
+    private let step: Step
+    private let config: BaseQuiz.Config
 
     private var submissionsCount = 0
     private var currentAttempt: Attempt?
@@ -40,7 +42,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     init(
         step: Step,
-        hasNextStep: Bool,
+        config: BaseQuiz.Config,
         presenter: BaseQuizPresenterProtocol,
         provider: BaseQuizProviderProtocol,
         analytics: Analytics,
@@ -50,7 +52,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.step = step
-        self.hasNextStep = hasNextStep
+        self.config = config
         self.presenter = presenter
         self.provider = provider
         self.userAccountService = userAccountService
@@ -92,11 +94,25 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         if isFirstSubmissionLoad && !request.shouldRefreshAttempt {
             self.fetchSubmissionDataFromCache().done { cachedAttempt, cachedSubmission, cachedSubmissionsCount in
+                self.moduleOutput?.handleQuizLoaded(
+                    attempt: cachedAttempt,
+                    submission: cachedSubmission,
+                    submissionsCount: cachedSubmissionsCount,
+                    source: .cache
+                )
+
                 self.presentSubmission(attempt: cachedAttempt, submission: cachedSubmission)
 
                 self.fetchSubmissionDataFromRemote(
                     forceRefreshAttempt: false
                 ).done { remoteAttempt, remoteSubmission, remoteSubmissionsCount in
+                    self.moduleOutput?.handleQuizLoaded(
+                        attempt: remoteAttempt,
+                        submission: remoteSubmission,
+                        submissionsCount: remoteSubmissionsCount,
+                        source: .remote
+                    )
+
                     let shouldReload = cachedAttempt != remoteAttempt
                         || cachedSubmission != remoteSubmission
                         || cachedSubmissionsCount != remoteSubmissionsCount
@@ -105,7 +121,16 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                     }
                 }.cauterize()
             }.catch { _ in
-                self.fetchSubmissionDataFromRemote(forceRefreshAttempt: false).done { attempt, submission, _ in
+                self.fetchSubmissionDataFromRemote(
+                    forceRefreshAttempt: false
+                ).done { attempt, submission, submissionsCount in
+                    self.moduleOutput?.handleQuizLoaded(
+                        attempt: attempt,
+                        submission: submission,
+                        submissionsCount: submissionsCount,
+                        source: .remote
+                    )
+
                     self.presentSubmission(attempt: attempt, submission: submission)
                 }.catch { error in
                     self.presenter.presentSubmission(response: .init(result: .failure(error)))
@@ -114,7 +139,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         } else {
             self.fetchSubmissionDataFromRemote(
                 forceRefreshAttempt: request.shouldRefreshAttempt
-            ).done { attempt, submission, _ in
+            ).done { attempt, submission, submissionsCount in
+                self.moduleOutput?.handleQuizLoaded(
+                    attempt: attempt,
+                    submission: submission,
+                    submissionsCount: submissionsCount,
+                    source: .remote
+                )
+
                 self.presentSubmission(attempt: attempt, submission: submission)
             }.catch { error in
                 self.presenter.presentSubmission(response: .init(result: .failure(error)))
@@ -200,6 +232,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.moduleOutput?.handleNextStepNavigation()
     }
 
+    func doReviewCreateSession(request: BaseQuiz.ReviewCreateSession.Request) {
+        self.moduleOutput?.handleReviewCreateSession()
+    }
+
+    func doReviewSelectDifferentSubmission(request: BaseQuiz.ReviewSelectDifferentSubmission.Request) {
+        self.moduleOutput?.handleReviewSelectDifferentSubmission()
+    }
+
     // MARK: Private API
 
     private func presentSubmission(attempt: Attempt, submission: Submission) {
@@ -208,7 +248,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             attempt: attempt,
             submission: submission,
             submissionsCount: self.submissionsCount,
-            hasNextStep: self.hasNextStep
+            config: self.config
         )
 
         self.presenter.presentSubmission(response: .init(result: .success(response)))
@@ -390,7 +430,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         self.currentSubmission = submission
         self.presentSubmission(attempt: attempt, submission: submission)
-        self.moduleOutput?.handleSubmissionEvaluated()
+        self.moduleOutput?.handleSubmissionEvaluated(submission: submission)
 
         if submission.isCorrect {
             self.moduleOutput?.handleCorrectSubmission()
@@ -443,5 +483,16 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         case submissionFetchFailed
         case submissionPollFailed
         case unknownUser
+    }
+}
+
+// MARK: - BaseQuizInteractor: BaseQuizInputProtocol -
+
+extension BaseQuizInteractor: BaseQuizInputProtocol {
+    func changeCurrent(attempt: Attempt, submission: Submission) {
+        self.currentAttempt = attempt
+        self.currentSubmission = submission
+
+        self.presentSubmission(attempt: attempt, submission: submission)
     }
 }

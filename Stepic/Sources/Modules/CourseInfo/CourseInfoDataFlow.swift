@@ -5,6 +5,7 @@ enum CourseInfo {
         case info
         case syllabus
         case reviews
+        case news
 
         var title: String {
             switch self {
@@ -14,6 +15,8 @@ enum CourseInfo {
                 return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
             case .reviews:
                 return NSLocalizedString("CourseInfoTabReviews", comment: "")
+            case .news:
+                return NSLocalizedString("CourseInfoTabNews", comment: "")
             }
         }
     }
@@ -178,6 +181,19 @@ enum CourseInfo {
         struct ViewModel {
             let isSuccessful: Bool
             let message: String
+        }
+    }
+
+    /// Present course search module
+    enum CourseContentSearchPresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
         }
     }
 

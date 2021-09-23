@@ -33,7 +33,10 @@ final class StepAssembly: Assembly {
             analytics: StepikAnalytics.shared,
             remoteConfig: RemoteConfig.shared
         )
-        let viewController = StepViewController(interactor: interactor)
+        let viewController = StepViewController(
+            interactor: interactor,
+            networkReachabilityService: NetworkReachabilityService()
+        )
 
         presenter.viewController = viewController
         self.moduleInput = interactor

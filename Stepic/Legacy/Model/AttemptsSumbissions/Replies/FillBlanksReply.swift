@@ -10,6 +10,8 @@ final class FillBlanksReply: Reply {
         [JSONKey.blanks.rawValue: self.blanks]
     }
 
+    override var isEmpty: Bool { self.blanks.isEmpty }
+
     override var hash: Int {
         self.blanks.hashValue
     }

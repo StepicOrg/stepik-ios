@@ -371,9 +371,7 @@ extension ExploreViewController: ExploreViewControllerProtocol {
     }
 
     func displayStatusBarStyle(viewModel: Explore.StatusBarStyleUpdate.ViewModel) {
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
-        }
+        self.styledNavigationController?.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
     }
 
     func displaySearchCourses(viewModel: Explore.SearchCourses.ViewModel) {

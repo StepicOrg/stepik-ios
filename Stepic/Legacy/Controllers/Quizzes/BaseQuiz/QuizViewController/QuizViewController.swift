@@ -361,7 +361,15 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     func showError(message: String) {
         self.doesPresentActivityIndicatorView = false
-        Messages.sharedManager.show(with: message)
+
+        let alert = UIAlertController(
+            title: NSLocalizedString("Error", comment: ""),
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+
+        self.present(alert, animated: true)
     }
 
     func showLoading(visible: Bool) {
@@ -374,9 +382,13 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func showConnectionError() {
-        if let vc = navigationController {
-            Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-        }
+        let alert = UIAlertController(
+            title: NSLocalizedString("ConnectionErrorTitle", comment: ""),
+            message: NSLocalizedString("ConnectionErrorSubtitle", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+        self.present(alert, animated: true)
     }
 
     func suggestStreak(streak: Int) {

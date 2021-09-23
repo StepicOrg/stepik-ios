@@ -160,7 +160,10 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
                 options: .init(
                     valueText: self.formState.deepLink,
                     placeholderText: "Enter deep link text",
-                    maxLength: nil
+                    maxLength: nil,
+                    autocorrectionType: .no,
+                    autocapitalizationType: UITextAutocapitalizationType.none,
+                    keyboardType: .URL
                 )
             )
         )

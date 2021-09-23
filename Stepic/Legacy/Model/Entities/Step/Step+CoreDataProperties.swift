@@ -13,6 +13,7 @@ extension Step {
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
     @NSManaged var managedIsEnabled: NSNumber?
+    @NSManaged var managedSessionId: NSNumber?
     @NSManaged var managedInstructionId: NSNumber?
     @NSManaged var managedInstructionType: String?
     @NSManaged var managedNeedsPlan: String?
@@ -27,6 +28,8 @@ extension Step {
     @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionThreadsArray: NSObject?
     @NSManaged var managedDiscussionThreads: NSOrderedSet?
+
+    @NSManaged var managedSearchResults: NSSet?
 
     var id: Int {
         get {
@@ -225,6 +228,15 @@ extension Step {
         }
     }
 
+    var sessionID: Int? {
+        get {
+            self.managedSessionId?.intValue
+        }
+        set {
+            self.managedSessionId = newValue as NSNumber?
+        }
+    }
+
     var instructionID: Int? {
         get {
             self.managedInstructionId?.intValue
@@ -234,7 +246,7 @@ extension Step {
         }
     }
 
-    var instructionType: String? {
+    var instructionTypeString: String? {
         get {
             self.managedInstructionType
         }
@@ -249,6 +261,15 @@ extension Step {
         }
         set {
             self.managedNeedsPlan = newValue
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
         }
     }
 }

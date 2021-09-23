@@ -8,6 +8,7 @@ protocol CourseInfoInteractorProtocol {
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request)
     func doCourseFavoriteAction(request: CourseInfo.CourseFavoriteAction.Request)
     func doCourseArchiveAction(request: CourseInfo.CourseArchiveAction.Request)
+    func doCourseContentSearchPresentation(request: CourseInfo.CourseContentSearchPresentation.Request)
     func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request)
@@ -235,6 +236,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         if let course = self.currentCourse, course.enrolled {
             self.doUserCourseAction(course: course, action: course.isArchived ? .archiveRemove : .archiveAdd)
         }
+    }
+
+    func doCourseContentSearchPresentation(request: CourseInfo.CourseContentSearchPresentation.Request) {
+        self.presenter.presentCourseContentSearch(response: .init(courseID: self.courseID))
     }
 
     func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request) {
