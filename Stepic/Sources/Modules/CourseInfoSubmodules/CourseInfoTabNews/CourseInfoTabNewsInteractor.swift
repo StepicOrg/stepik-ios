@@ -7,6 +7,8 @@ protocol CourseInfoTabNewsInteractorProtocol {
 }
 
 final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
+    private static let fetchDebounceInterval: TimeInterval = 1
+
     private let presenter: CourseInfoTabNewsPresenterProtocol
     private let provider: CourseInfoTabNewsProviderProtocol
 
@@ -20,6 +22,7 @@ final class CourseInfoTabNewsInteractor: CourseInfoTabNewsInteractorProtocol {
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
 
+    private let fetchDebouncer = Debouncer(delay: CourseInfoTabNewsInteractor.fetchDebounceInterval)
     // Semaphore to prevent concurrent fetching
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     private lazy var fetchBackgroundQueue = DispatchQueue(
@@ -207,7 +210,9 @@ extension CourseInfoTabNewsInteractor: CourseInfoTabNewsInputProtocol {
         self.currentCourse = course
         self.isOnline = isOnline
 
-        self.doCourseNewsFetch(request: .init())
+        self.fetchDebouncer.action = { [weak self] in
+            self?.doCourseNewsFetch(request: .init())
+        }
 
         if self.shouldOpenedAnalyticsEventSend {
             self.analytics.send(.courseNewsScreenOpened(id: course.id, title: course.title))

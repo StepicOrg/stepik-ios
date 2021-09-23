@@ -57,7 +57,7 @@ final class CourseInfoTabNewsProvider: CourseInfoTabNewsProviderProtocol {
             self.announcementsRepository.fetch(ids: ids, courseID: courseID, dataSourceType: .remote).done {
                 seal.fulfill($0)
             }.catch { _ in
-                seal.reject(Error.persistenceFetchFailed)
+                seal.reject(Error.networkFetchFailed)
             }
         }
     }

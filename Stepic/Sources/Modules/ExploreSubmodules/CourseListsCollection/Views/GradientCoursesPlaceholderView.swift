@@ -100,8 +100,8 @@ final class GradientCoursesPlaceholderView: UIView {
 
         let newHeight = (
             self.topContentInset.isZero ? self.appearance.labelsInsets.top : self.topContentInset
-            + stackViewIntrinsicContentSize.height
-            + self.appearance.labelsInsets.bottom
+                + stackViewIntrinsicContentSize.height
+                + self.appearance.labelsInsets.bottom
         ).rounded(.up)
 
         let newIntrinsicContentSize = CGSize(width: UIView.noIntrinsicMetric, height: newHeight)
@@ -164,10 +164,8 @@ final class GradientCoursesPlaceholderView: UIView {
             switch self {
             case .purple:
                 return .white.withAlphaComponent(0.6)
-            case .blue:
-                return .stepikTertiaryText
-            case .pink:
-                return .stepikTertiaryText
+            case .blue, .pink:
+                return .dynamic(light: .black.withAlphaComponent(0.6), dark: .white.withAlphaComponent(0.6))
             }
         }
     }
