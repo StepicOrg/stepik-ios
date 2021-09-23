@@ -238,8 +238,9 @@ final class CourseInfoViewController: UIViewController {
             return
         }
 
-        let moduleInput: CourseInfoSubmoduleProtocol?
         let controller: UIViewController
+        let moduleInput: CourseInfoSubmoduleProtocol?
+
         switch tab {
         case .info:
             let assembly = CourseInfoTabInfoAssembly()
@@ -253,6 +254,10 @@ final class CourseInfoViewController: UIViewController {
             moduleInput = assembly.moduleInput
         case .reviews:
             let assembly = CourseInfoTabReviewsAssembly()
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
+        case .news:
+            let assembly = CourseInfoTabNewsAssembly()
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
         }

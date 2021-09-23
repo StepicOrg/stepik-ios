@@ -23,7 +23,7 @@ final class ContentProcessor: ContentProcessorProtocol {
         FixRelativeProtocolURLsRule(),
         AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self),
         RemoveImageFixedHeightRule(extractorType: HTMLExtractor.self),
-        AlwaysOpenedDetailsDisclosureBoxRule(extractorType: HTMLExtractor.self)
+        AlwaysOpenedDetailsDisclosureBoxRule()
     ]
 
     private let rules: [ContentProcessingRule]

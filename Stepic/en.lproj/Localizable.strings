@@ -313,7 +313,6 @@ Enrolled = "Enrolled";
 Popular = "Popular";
 VisitedCourses = "Visited courses";
 Home = "Home";
-RecommendedCategory = "Recommended courses";
 HomePlaceholderAnonymous = "<b>Sign in</b> and start learning right now";
 HomePlaceholderEmptyEnrolled = "<b>Enroll</b> for free courses and they will be here";
 HomePlaceholderEmptyPopular = "<b>Open courses</b> are on vacation. Please, see later";
@@ -508,6 +507,8 @@ CourseInfoTitleTimeToComplete = "Expected time to complete";
 CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
+CourseInfoTabNews = "News";
+CourseInfoTabNewsEmptyNews = "No News";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

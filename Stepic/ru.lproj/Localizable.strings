@@ -314,7 +314,6 @@ Enrolled = "Мои курсы";
 Popular = "Популярные";
 VisitedCourses = "Посещённые курсы";
 Home = "Обучение";
-RecommendedCategory = "Подборка";
 HomePlaceholderAnonymous = "<b>Войдите</b> и начните учиться прямо сейчас";
 HomePlaceholderEmptyEnrolled = "<b>Запишитесь</b> на курсы и они будут показаны здесь";
 HomePlaceholderEmptyPopular = "<b>Открытые курсы</b> сейчас в отпуске. Пожалуйста, зайдите позже";
@@ -510,6 +509,8 @@ CourseInfoTitleTimeToComplete = "Время прохождения курса";
 CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+CourseInfoTabNews = "Новости";
+CourseInfoTabNewsEmptyNews = "Нет новостей";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
