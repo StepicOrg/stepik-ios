@@ -11,9 +11,9 @@ struct CourseInfoTabNewsViewModel: UniqueIdentifiable {
 }
 
 struct CourseInfoTabNewsStatisticsViewModel {
-    let publishCount: Int // рассылок сделано
-    let queueCount: Int // видят на странице
-    let sentCount: Int // получили на почту
-    let openCount: Int // открыли письмо
-    let clickCount: Int // кликнули по ссылкам
+    let publishCount: Int
+    let queueCount: Int
+    let sentCount: Int
+    let openCount: Int
+    let clickCount: Int
 }
