@@ -111,7 +111,12 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
     private func makeContentProcessor(currentUser: User?) -> ContentProcessor {
         var rules = ContentProcessor.defaultRules
         if let currentUser = currentUser, !currentUser.fullName.isEmpty {
-            rules.append(ReplaceTemplateUsernameRule(username: currentUser.fullName))
+            rules.append(
+                ReplaceTemplateUsernameRule(
+                    shortName: currentUser.shortName,
+                    fullName: FormatterHelper.username(currentUser)
+                )
+            )
         }
 
         var injections = ContentProcessor.defaultInjections

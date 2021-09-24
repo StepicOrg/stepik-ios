@@ -173,15 +173,25 @@ final class AlwaysOpenedDetailsDisclosureBoxRule: ContentProcessingRule {
 }
 
 final class ReplaceTemplateUsernameRule: ContentProcessingRule {
-    private let username: String
+    private let shortName: String
+    private let fullName: String
 
-    init(username: String) {
-        self.username = username
+    init(shortName: String, fullName: String) {
+        self.shortName = shortName
+        self.fullName = fullName
     }
 
     func process(content: String) -> String {
-        content
-            .replacingOccurrences(of: "{{ user_name }}", with: self.username)
-            .replacingOccurrences(of: "{{user_name}}", with: self.username)
+        guard let shortRegex = try? Regex(string: "\\{\\{\\s*user_name\\s*\\}\\}", options: [.ignoreCase]),
+              let fullRegex = try? Regex(string: "\\{\\{\\s*user_full_name\\s*\\}\\}", options: [.ignoreCase]) else {
+            return content
+        }
+
+        var content = content
+
+        content.replaceAll(matching: shortRegex, with: self.shortName)
+        content.replaceAll(matching: fullRegex, with: self.fullName)
+
+        return content
     }
 }
