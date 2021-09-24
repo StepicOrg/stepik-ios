@@ -20,6 +20,12 @@ extension CourseInfoTabNewsCellView {
 final class CourseInfoTabNewsCellView: UIView {
     let appearance: Appearance
 
+    private lazy var badgesView: CourseInfoTabNewsBadgesView = {
+        let view = CourseInfoTabNewsBadgesView()
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.dateLabelFont
@@ -110,6 +116,8 @@ final class CourseInfoTabNewsCellView: UIView {
 
         let height = (
             self.appearance.contentStackViewInsets.top
+                + (self.badgesView.isHidden ? 0 : self.badgesView.intrinsicContentSize.height)
+                + (self.badgesView.isHidden ? 0 : self.appearance.contentStackViewSpacing)
                 + self.dateLabel.intrinsicContentSize.height
                 + (self.subjectLabel.isHidden ? 0 : self.appearance.contentStackViewSpacing)
                 + (self.subjectLabel.isHidden ? 0 : self.subjectLabel.intrinsicContentSize.height)
@@ -125,10 +133,19 @@ final class CourseInfoTabNewsCellView: UIView {
 
     func configure(viewModel: CourseInfoTabNewsViewModel?) {
         guard let viewModel = viewModel else {
+            self.badgesView.isHidden = true
             self.dateLabel.text = nil
             self.subjectLabel.text = nil
             self.processedContentView.setText(nil)
+            self.statisticsView.isHidden = true
             return
+        }
+
+        if let badgeViewModel = viewModel.badge {
+            self.badgesView.isHidden = false
+            self.badgesView.configure(viewModel: badgeViewModel)
+        } else {
+            self.badgesView.isHidden = true
         }
 
         self.dateLabel.text = viewModel.formattedDate
@@ -153,6 +170,7 @@ extension CourseInfoTabNewsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.contentStackView)
 
+        self.contentStackView.addArrangedSubview(self.badgesView)
         self.contentStackView.addArrangedSubview(self.dateLabel)
         self.contentStackView.addArrangedSubview(self.subjectLabel)
         self.contentStackView.addArrangedSubview(self.processedContentView)

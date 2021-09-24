@@ -4,10 +4,7 @@ import UIKit
 final class CourseSearchResultTableViewCell: UITableViewCell, Reusable {
     enum Appearance {
         static let separatorHeight: CGFloat = 4
-        static let separatorBackgroundColor = UIColor.dynamic(
-            light: .onSurface.withAlphaComponent(0.04),
-            dark: .stepikSeparator
-        )
+        static let separatorBackgroundColor = UIColor.stepikOverlayOnSurfaceBackground
     }
 
     private lazy var cellView = CourseSearchResultTableCellView()

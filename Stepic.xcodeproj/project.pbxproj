@@ -755,6 +755,7 @@
 		2C7E293726B05680008581F4 /* StepQuizReviewStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
 		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
+		2C7F13CC26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F13CB26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift */; };
 		2C7F4160269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */; };
 		2C7F416226948CCE00BD5C48 /* CourseInfoTabReviewsSummaryDistributionProgressesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F416126948CCE00BD5C48 /* CourseInfoTabReviewsSummaryDistributionProgressesView.swift */; };
 		2C7F4164269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F4163269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift */; };
@@ -784,6 +785,7 @@
 		2C85EC0925599AD10059EF97 /* CatalogBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC0825599AD10059EF97 /* CatalogBlock.swift */; };
 		2C85EC0E25599E9C0059EF97 /* CatalogBlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */; };
 		2C85EC162559A57D0059EF97 /* CatalogBlockAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */; };
+		2C85FCEE26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85FCED26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift */; };
 		2C87A7A12446502900933CA4 /* UsersPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */; };
 		2C87A7A424465B5900933CA4 /* ProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */; };
 		2C87A7A82446646600933CA4 /* UserActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A72446646600933CA4 /* UserActivityEntity.swift */; };
@@ -2719,6 +2721,7 @@
 		2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusesView.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
+		2C7F13CB26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabNewsBadgesView.swift; sourceTree = "<group>"; };
 		2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryRatingView.swift; sourceTree = "<group>"; };
 		2C7F416126948CCE00BD5C48 /* CourseInfoTabReviewsSummaryDistributionProgressesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryDistributionProgressesView.swift; sourceTree = "<group>"; };
 		2C7F4163269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryDistributionCountsView.swift; sourceTree = "<group>"; };
@@ -2749,6 +2752,7 @@
 		2C85EC0825599AD10059EF97 /* CatalogBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlock.swift; sourceTree = "<group>"; };
 		2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockKind.swift; sourceTree = "<group>"; };
 		2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockAppearance.swift; sourceTree = "<group>"; };
+		2C85FCED26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabNewsBadgeView.swift; sourceTree = "<group>"; };
 		2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPersistenceService.swift; sourceTree = "<group>"; };
 		2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C87A7A52446635E00933CA4 /* Model_user_activity_v50.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_activity_v50.xcdatamodel; sourceTree = "<group>"; };
@@ -4985,6 +4989,15 @@
 			path = SocialProfiles;
 			sourceTree = "<group>";
 		};
+		2C7F13CA26FE19F400866E4C /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				2C7F13CB26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift */,
+				2C85FCED26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		2C7F415E26947F9E00BD5C48 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
@@ -6891,6 +6904,7 @@
 				2CF68CFF26FA022400EBB023 /* CourseInfoTabNewsCellView.swift */,
 				62E98A19D9B85303250354DA /* CourseInfoTabNewsStatisticsView.swift */,
 				2CF68CFC26FA01F900EBB023 /* CourseInfoTabNewsTableViewCell.swift */,
+				2C7F13CA26FE19F400866E4C /* Badge */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -10830,6 +10844,7 @@
 				2CBC5AF52682437C0000F2D1 /* CourseRevenueTabPurchasesViewModel.swift in Sources */,
 				2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */,
 				2CCBDBE524AF93B8001A5A83 /* NewProfileDetailsViewModel.swift in Sources */,
+				2C7F13CC26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				2CA867D225892B050006576E /* GridSimpleCourseListWidgetView.swift in Sources */,
 				2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */,
@@ -11041,6 +11056,7 @@
 				2CE9BF4A248D09FC004F6659 /* BlocksPersistenceService.swift in Sources */,
 				2CCDD80724F8A7D7006644A8 /* ApplicationShortcutService.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
+				2C85FCEE26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift in Sources */,
 				2C0A10A7268B279A001D4023 /* CourseBenefitByMonthsAPI.swift in Sources */,
 				2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,

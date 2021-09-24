@@ -12,10 +12,7 @@ extension CourseInfoTabNewsStatisticsView {
         let countTitleFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
         let countTitleTextColor = UIColor.stepikMaterialPrimaryText
 
-        let backgroundColor = UIColor.dynamic(
-            light: .onSurface.withAlphaComponent(0.04),
-            dark: .stepikSecondaryBackground
-        )
+        let backgroundColor = UIColor.stepikOverlayOnSurfaceBackground
         let cornerRadius: CGFloat = 8
     }
 }
@@ -58,9 +55,7 @@ final class CourseInfoTabNewsStatisticsView: UIView {
     }
 
     func configure(viewModel: CourseInfoTabNewsStatisticsViewModel) {
-        if !self.stackView.arrangedSubviews.isEmpty {
-            self.stackView.removeAllArrangedSubviews()
-        }
+        self.stackView.removeAllArrangedSubviews()
 
         let data = [
             (NSLocalizedString("CourseInfoTabNewsPublishCountTitle", comment: ""), viewModel.publishCount),

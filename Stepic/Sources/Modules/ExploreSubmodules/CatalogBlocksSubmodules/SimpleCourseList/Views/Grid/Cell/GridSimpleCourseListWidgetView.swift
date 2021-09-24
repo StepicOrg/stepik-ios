@@ -7,7 +7,7 @@ extension GridSimpleCourseListWidgetView {
         let titleLabelTextColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikViolet05Fixed)
         let titleLabelInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-        let backgroundColor = UIColor.stepikOverlayViolet
+        let backgroundColor = UIColor.stepikOverlayVioletBackground
     }
 }
 

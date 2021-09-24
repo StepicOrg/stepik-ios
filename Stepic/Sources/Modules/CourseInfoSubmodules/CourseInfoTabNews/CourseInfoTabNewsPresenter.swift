@@ -71,17 +71,31 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
 
         let processedContent = contentProcessor.processContent(announcement.text)
 
-        let statistics: CourseInfoTabNewsStatisticsViewModel? = {
-            if course.canCreateAnnouncements {
-                return CourseInfoTabNewsStatisticsViewModel(
-                    publishCount: announcement.publishCount ?? 0,
-                    queueCount: announcement.queueCount ?? 0,
-                    sentCount: announcement.sentCount ?? 0,
-                    openCount: announcement.openCount ?? 0,
-                    clickCount: announcement.clickCount ?? 0
-                )
+        let badge: CourseInfoTabNewsBadgeViewModel? = {
+            guard course.canCreateAnnouncements,
+                  let status = announcement.status else {
+                return nil
             }
-            return nil
+
+            return CourseInfoTabNewsBadgeViewModel(
+                status: status,
+                isOneTimeEvent: announcement.isOneTimeEvent,
+                isActiveEvent: announcement.isActiveEvent
+            )
+        }()
+
+        let statistics: CourseInfoTabNewsStatisticsViewModel? = {
+            guard course.canCreateAnnouncements else {
+                return nil
+            }
+
+            return CourseInfoTabNewsStatisticsViewModel(
+                publishCount: announcement.publishCount ?? 0,
+                queueCount: announcement.queueCount ?? 0,
+                sentCount: announcement.sentCount ?? 0,
+                openCount: announcement.openCount ?? 0,
+                clickCount: announcement.clickCount ?? 0
+            )
         }()
 
         return CourseInfoTabNewsViewModel(
@@ -89,6 +103,7 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
             formattedDate: formattedDate,
             subject: announcement.subject.trimmed(),
             processedContent: processedContent,
+            badge: badge,
             statistics: statistics
         )
     }

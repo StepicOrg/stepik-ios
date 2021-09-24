@@ -7,7 +7,14 @@ struct CourseInfoTabNewsViewModel: UniqueIdentifiable {
     let subject: String
     let processedContent: ProcessedContent
 
+    var badge: CourseInfoTabNewsBadgeViewModel?
     var statistics: CourseInfoTabNewsStatisticsViewModel?
+}
+
+struct CourseInfoTabNewsBadgeViewModel {
+    let status: AnnouncementStatus
+    let isOneTimeEvent: Bool
+    let isActiveEvent: Bool
 }
 
 struct CourseInfoTabNewsStatisticsViewModel {

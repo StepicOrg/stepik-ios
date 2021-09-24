@@ -4,7 +4,7 @@ import UIKit
 extension StepQuizReviewExpandQuizView {
     struct Appearance {
         let primaryColor = UIColor.stepikPrimaryText
-        let backgroundColor = UIColor.onSurface.withAlphaComponent(0.04)
+        let backgroundColor = UIColor.stepikOverlayOnSurfaceBackground
 
         let titleFont = Typography.bodyFont
         let titleInsets = LayoutInsets.default

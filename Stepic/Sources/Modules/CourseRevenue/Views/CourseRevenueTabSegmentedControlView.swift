@@ -3,10 +3,7 @@ import UIKit
 
 extension CourseRevenueTabSegmentedControlView {
     struct Appearance {
-        let separatorBackgroundColor = UIColor.dynamic(
-            light: .onSurface.withAlphaComponent(0.04),
-            dark: .stepikSeparator
-        )
+        let separatorBackgroundColor = UIColor.stepikOverlayOnSurfaceBackground
         let separatorViewHeight: CGFloat = 1
 
         let insets = LayoutInsets.default

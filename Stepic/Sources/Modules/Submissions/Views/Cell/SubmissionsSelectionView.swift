@@ -4,7 +4,7 @@ import UIKit
 extension SubmissionsSelectionView {
     struct Appearance {
         let separatorHeight: CGFloat = 1
-        let separatorColor = UIColor.onSurface.withAlphaComponent(0.04)
+        let separatorColor = UIColor.stepikOverlayOnSurfaceBackground
 
         let titleFont = Typography.bodyFont
         let titleTextColor = UIColor.stepikVioletFixed
