@@ -57,6 +57,7 @@ final class UserCourse: NSManagedObject, ManagedObject, IDFetchable {
         case isFavorite = "is_favorite"
         case isArchived = "is_archived"
         case lastViewed = "last_viewed"
+        case canBeReviewed = "can_be_reviewed"
     }
 }
 
