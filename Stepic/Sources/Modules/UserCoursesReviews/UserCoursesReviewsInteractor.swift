@@ -235,7 +235,11 @@ final class UserCoursesReviewsInteractor: UserCoursesReviewsInteractorProtocol {
                     ? self.provider.fetchLeavedCourseReviewsFromRemote()
                     : self.provider.fetchLeavedCourseReviewsFromCache()
             }.then { leavedCourseReviews -> Promise<([Course], [CourseReview])> in
-                self.provider.fetchPossibleCoursesFromCache().map { ($0, leavedCourseReviews) }
+                (
+                    self.didLoadFromCache
+                        ? self.provider.fetchPossibleCoursesFromRemote()
+                        : self.provider.fetchPossibleCoursesFromCache()
+                ).map { ($0, leavedCourseReviews) }
             }.done { possibleCourses, leavedCourseReviews in
                 self.currentLeavedCourseReviews = leavedCourseReviews
 
