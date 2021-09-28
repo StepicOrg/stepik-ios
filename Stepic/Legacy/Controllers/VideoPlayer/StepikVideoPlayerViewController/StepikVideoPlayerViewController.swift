@@ -700,11 +700,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                 }
 
                 strongSelf.analytics.send(
-                    .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: url.quality),
-                    .videoPlayerDidChangeQuality(
-                        quality: url.quality,
-                        deviceModel: DeviceInfo.current.deviceModelString
-                    )
+                    .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: url.quality)
                 )
 
                 strongSelf.currentVideoQuality = url.quality
@@ -728,11 +724,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                         }
 
                         strongSelf.analytics.send(
-                            .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: cachedQuality),
-                            .videoPlayerDidChangeQuality(
-                                quality: cachedQuality,
-                                deviceModel: DeviceInfo.current.deviceModelString
-                            )
+                            .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: cachedQuality)
                         )
 
                         strongSelf.currentVideoQuality = cachedQuality

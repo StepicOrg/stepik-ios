@@ -40,6 +40,8 @@ final class EmailAuthViewController: UIViewController {
 
     private let urlFactory = StepikURLFactory()
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
@@ -114,7 +116,7 @@ final class EmailAuthViewController: UIViewController {
     @IBAction func onLogInClick(_ sender: Any) {
         view.endEditing(true)
 
-        StepikAnalytics.shared.send(.signInTapped(interactionType: .button))
+        self.analytics.send(.signInTapped(interactionType: .button))
 
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -129,14 +131,14 @@ final class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithSocialClick(_ sender: Any) {
-        StepikAnalytics.shared.send(.tappedSignInOnEmailAuthScreen)
+        self.analytics.send(.tappedSignInOnEmailAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .email(email: nil), to: .social)
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        StepikAnalytics.shared.send(.tappedSignUpOnEmailAuthScreen)
+        self.analytics.send(.tappedSignUpOnEmailAuthScreen)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .email(email: nil), to: .registration)
         }
@@ -211,7 +213,7 @@ final class EmailAuthViewController: UIViewController {
 
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
-        StepikAnalytics.shared.send(.loginTextFieldDidChange)
+        self.analytics.send(.loginTextFieldDidChange)
 
         state = .normal
 
@@ -279,7 +281,7 @@ final class EmailAuthViewController: UIViewController {
 
 extension EmailAuthViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        StepikAnalytics.shared.send(.loginTextFieldTapped)
+        self.analytics.send(.loginTextFieldTapped)
         // 24 - default value in app (see AppDelegate), 60 - offset with button
         IQKeyboardManager.shared.keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
@@ -293,8 +295,8 @@ extension EmailAuthViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
 
-            StepikAnalytics.shared.send(.tappedSignInReturnKeyOnSignInScreen)
-            StepikAnalytics.shared.send(.signInTapped(interactionType: .ime))
+            self.analytics.send(.tappedSignInReturnKeyOnSignInScreen)
+            self.analytics.send(.signInTapped(interactionType: .ime))
 
             if logInButton.isEnabled {
                 self.onLogInClick(logInButton!)

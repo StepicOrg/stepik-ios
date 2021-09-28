@@ -353,17 +353,26 @@ final class NotificationsPresenter {
     }
 
     func markAllAsRead() {
-        view?.updateMarkAllAsReadButton(with: .loading)
+        self.view?.updateMarkAllAsReadButton(with: .loading)
 
-        notificationsAPI.markAllAsRead().done { _ in
+        self.notificationsAPI.markAllAsRead().done { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
             Notification.markAllAsRead()
-            self.analytics.send(.markAllNotificationsAsReadTapped(badgeUnreadCount: self.badgeUnreadCount))
+            strongSelf.analytics.send(.markAllNotificationsAsReadTapped(badgeUnreadCount: strongSelf.badgeUnreadCount))
 
-            NotificationCenter.default.post(name: .allNotificationsMarkedAsRead, object: self, userInfo: ["section": self.section])
-            self.view?.updateMarkAllAsReadButton(with: .normal)
-        }.catch { error in
+            NotificationCenter.default.post(
+                name: .allNotificationsMarkedAsRead,
+                object: strongSelf,
+                userInfo: ["section": strongSelf.section]
+            )
+
+            strongSelf.view?.updateMarkAllAsReadButton(with: .normal)
+        }.catch { [weak self] error in
             print("notifications: unable to mark all notifications as read, error = \(error)")
-            self.view?.updateMarkAllAsReadButton(with: .error)
+            self?.view?.updateMarkAllAsReadButton(with: .error)
         }
     }
 
