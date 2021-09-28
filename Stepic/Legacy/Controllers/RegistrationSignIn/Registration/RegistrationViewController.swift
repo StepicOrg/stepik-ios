@@ -35,6 +35,8 @@ extension RegistrationViewController: RegistrationView {
 final class RegistrationViewController: UIViewController {
     var presenter: RegistrationPresenter?
 
+    private let analytics: Analytics = StepikAnalytics.shared
+
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
@@ -111,7 +113,7 @@ final class RegistrationViewController: UIViewController {
     @IBAction func onRegisterClick(_ sender: Any) {
         view.endEditing(true)
 
-        StepikAnalytics.shared.send(.signUpTapped(interactionType: .button))
+        self.analytics.send(.signUpTapped(interactionType: .button))
 
         let name = nameTextField.text ?? ""
         let email = emailTextField.text ?? ""
@@ -173,7 +175,7 @@ final class RegistrationViewController: UIViewController {
 
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
-        StepikAnalytics.shared.send(.registrationTextFieldDidChange)
+        self.analytics.send(.registrationTextFieldDidChange)
 
         state = .normal
 
@@ -275,7 +277,7 @@ extension RegistrationViewController: TTTAttributedLabelDelegate {
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        StepikAnalytics.shared.send(.registrationTextFieldTapped)
+        self.analytics.send(.registrationTextFieldTapped)
         // 24 - default value in app (see AppDelegate), 64 - offset with button
         IQKeyboardManager.shared.keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
     }
@@ -294,8 +296,8 @@ extension RegistrationViewController: UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
 
-            StepikAnalytics.shared.send(.tappedRegistrationSendIme)
-            StepikAnalytics.shared.send(.signUpTapped(interactionType: .ime))
+            self.analytics.send(.tappedRegistrationSendIme)
+            self.analytics.send(.signUpTapped(interactionType: .ime))
 
             if registerButton.isEnabled {
                 self.onRegisterClick(registerButton!)

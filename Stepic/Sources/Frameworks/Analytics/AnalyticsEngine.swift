@@ -37,6 +37,10 @@ final class FirebaseAnalyticsEngine: AnalyticsEngine {
     init() {}
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
+        guard name != "Course card seen" else {
+            return
+        }
+
         let processedName = self.processString(name)
         let processedParameters: [String: Any]? = {
             guard let parameters = parameters else {

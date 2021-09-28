@@ -218,16 +218,6 @@ extension AnalyticsEvent {
 
     static let videoPlayerOpened = AnalyticsEvent(name: "video_player_opened")
 
-    static func videoPlayerDidChangeQuality(quality: String, deviceModel: String) -> AnalyticsEvent {
-        AnalyticsEvent(
-            name: "video_quality_changed",
-            parameters: [
-                "quality": quality,
-                "device": deviceModel
-            ]
-        )
-    }
-
     // MARK: - Certificates -
 
     static func certificateOpened(grade: Int, courseName: String) -> AnalyticsEvent {

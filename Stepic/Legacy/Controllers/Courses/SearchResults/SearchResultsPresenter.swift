@@ -25,8 +25,11 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
     var query: String = ""
     private var currentCourseListFilterQuery: CourseListFilterQuery?
 
-    init(view: SearchResultsView) {
+    private let analytics: Analytics
+
+    init(view: SearchResultsView, analytics: Analytics) {
         self.view = view
+        self.analytics = analytics
     }
 
     func queryChanged(to query: String) {
@@ -85,7 +88,7 @@ final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
 
 extension SearchResultsPresenter: SearchQueriesViewControllerDelegate {
     func didSelectSuggestion(suggestion: String, position: Int) {
-        StepikAnalytics.shared.send(
+        self.analytics.send(
             .courseSearched(
                 query: self.query.lowercased(),
                 position: position,
@@ -98,5 +101,7 @@ extension SearchResultsPresenter: SearchQueriesViewControllerDelegate {
 }
 
 enum CoursesSearchResultsState {
-    case waiting, suggestions, courses
+    case waiting
+    case suggestions
+    case courses
 }

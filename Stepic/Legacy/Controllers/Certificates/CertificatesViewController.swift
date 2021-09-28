@@ -33,6 +33,7 @@ final class CertificatesLegacyAssembly: Assembly {
             certificatesPersistenceService: CertificatesPersistenceService(),
             view: certificatesVC
         )
+        certificatesVC.analytics = StepikAnalytics.shared
 
         return certificatesVC
     }
@@ -61,6 +62,8 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
     var presenter: CertificatesPresenter?
     var userID: User.IdType?
+
+    var analytics: Analytics?
 
     private var certificates: [CertificateViewData] = []
     private var showNextPageFooter = false
@@ -120,7 +123,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        StepikAnalytics.shared.send(.certificatesScreenOpened)
+        self.analytics?.send(.certificatesScreenOpened)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -137,7 +140,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
             return
         }
 
-        StepikAnalytics.shared.send(
+        self.analytics?.send(
             .shareCertificateTapped(grade: certificate.grade, courseName: certificate.courseName ?? "")
         )
 
@@ -233,7 +236,7 @@ extension CertificatesViewController: UITableViewDelegate {
             return
         }
 
-        StepikAnalytics.shared.send(
+        self.analytics?.send(
             .certificateOpened(
                 grade: certificates[indexPath.row].grade,
                 courseName: certificates[indexPath.row].courseName ?? ""

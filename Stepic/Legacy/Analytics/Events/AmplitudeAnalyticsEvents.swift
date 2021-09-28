@@ -170,7 +170,7 @@ extension AnalyticsEvent {
         )
     }
 
-    static func сourseContentSearched(
+    static func courseContentSearched(
         id: Int,
         title: String?,
         query: String,
