@@ -67,7 +67,14 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
         course: Course,
         contentProcessor: ContentProcessor
     ) -> CourseInfoTabNewsViewModel {
-        let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(announcement.sentDate ?? Date())
+        let date: Date = { () -> Date? in
+            if announcement.isActiveEvent && !course.canCreateAnnouncements,
+               let noticeDate = announcement.noticeDates.first {
+                return noticeDate
+            }
+            return announcement.sentDate
+        }() ?? Date()
+        let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(date)
 
         let processedContent = contentProcessor.processContent(announcement.text)
 
