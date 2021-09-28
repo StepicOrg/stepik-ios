@@ -139,6 +139,11 @@ extension User {
         }
     }
 
+    var shortName: String {
+        let firstName = self.firstName.trimmed()
+        return firstName.isEmpty ? "User" : firstName
+    }
+
     var fullName: String {
         "\(self.firstName) \(self.lastName)".trimmed()
     }

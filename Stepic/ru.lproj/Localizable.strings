@@ -511,6 +511,17 @@ CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
 CourseInfoTabNews = "Новости";
 CourseInfoTabNewsEmptyNews = "Нет новостей";
+CourseInfoTabNewsPublishCountTitle = "Рассылок сделано";
+CourseInfoTabNewsQueueCountTitle = "Видят на странице";
+CourseInfoTabNewsSentCountTitle = "Получили на почту";
+CourseInfoTabNewsOpenCountTitle = "Открыли письмо";
+CourseInfoTabNewsClickCountTitle = "Кликнули по ссылкам";
+CourseInfoTabNewsBadgeComposing = "Черновик";
+CourseInfoTabNewsBadgeScheduled = "Запланирована";
+CourseInfoTabNewsBadgeSending = "Рассылается";
+CourseInfoTabNewsBadgeSent = "Отправлена";
+CourseInfoTabNewsBadgeOnEvent = "По событию";
+CourseInfoTabNewsBadgeOneTime = "Разовая";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";

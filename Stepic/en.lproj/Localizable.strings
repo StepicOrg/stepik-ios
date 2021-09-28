@@ -509,6 +509,17 @@ CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
 CourseInfoTabNews = "News";
 CourseInfoTabNewsEmptyNews = "No News";
+CourseInfoTabNewsPublishCountTitle = "Published";
+CourseInfoTabNewsQueueCountTitle = "Queued";
+CourseInfoTabNewsSentCountTitle = "Sent";
+CourseInfoTabNewsOpenCountTitle = "Opened";
+CourseInfoTabNewsClickCountTitle = "Clicked";
+CourseInfoTabNewsBadgeComposing = "Draft";
+CourseInfoTabNewsBadgeScheduled = "Scheduled";
+CourseInfoTabNewsBadgeSending = "Active";
+CourseInfoTabNewsBadgeSent = "Sent";
+CourseInfoTabNewsBadgeOnEvent = "By Event";
+CourseInfoTabNewsBadgeOneTime = "One-time";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

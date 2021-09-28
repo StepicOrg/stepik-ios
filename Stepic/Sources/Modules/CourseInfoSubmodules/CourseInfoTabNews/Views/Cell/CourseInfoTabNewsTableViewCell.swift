@@ -3,7 +3,7 @@ import UIKit
 extension CourseInfoTabNewsTableViewCell {
     enum Appearance {
         static let separatorHeight: CGFloat = 4
-        static let separatorColor = UIColor.onSurface.withAlphaComponent(0.04)
+        static let separatorColor = UIColor.stepikOverlayOnSurfaceBackground
     }
 }
 
