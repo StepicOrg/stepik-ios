@@ -14,7 +14,8 @@ final class UserCoursesReviewsAssembly: Assembly {
             courseReviewsPersistenceService: CourseReviewsPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             coursesPersistenceService: CoursesPersistenceService(),
-            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI())
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
+            userCoursesPersistenceService: UserCoursesPersistenceService()
         )
         let presenter = UserCoursesReviewsPresenter()
         let interactor = UserCoursesReviewsInteractor(

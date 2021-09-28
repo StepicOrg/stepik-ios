@@ -2567,6 +2567,7 @@
 		2C4AD01423E301C50049B7B0 /* DiscussionThreadsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadsAPI.swift; sourceTree = "<group>"; };
 		2C4AD01823E304140049B7B0 /* DiscussionThreadsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadsNetworkService.swift; sourceTree = "<group>"; };
 		2C4AD01A23E305FA0049B7B0 /* DiscussionThreadsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadsPersistenceService.swift; sourceTree = "<group>"; };
+		2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_course_can_be_reviewed_v90.xcdatamodel; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4BE7DB221325C000AEAC34 /* Model_course_review_v32.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_review_v32.xcdatamodel; sourceTree = "<group>"; };
@@ -14288,6 +14289,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */,
 				2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */,
 				2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */,
 				2C98423726DE4B9C0098E36B /* Model_search_results_v87.xcdatamodel */,
@@ -14379,7 +14381,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */;
+			currentVersion = 2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -10,7 +10,8 @@ final class UserCoursesReviewsWidgetAssembly: Assembly {
             courseReviewsPersistenceService: CourseReviewsPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             coursesPersistenceService: CoursesPersistenceService(),
-            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI())
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
+            userCoursesPersistenceService: UserCoursesPersistenceService()
         )
 
         let provider = UserCoursesReviewsWidgetProvider(userCoursesReviewsProvider: userCoursesReviewsProvider)
