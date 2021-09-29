@@ -80,15 +80,26 @@ final class UserCoursesReviewsProvider: UserCoursesReviewsProviderProtocol {
     func fetchPossibleCoursesFromCache() -> Promise<[Course]> {
         Promise { seal in
             self.userCoursesPersistenceService.fetchCanBeReviewed().done { userCourses in
-                let relationshipedCourses = userCourses.compactMap(\.course)
-                if userCourses.count == relationshipedCourses.count {
-                    return seal.fulfill(relationshipedCourses)
+                var uniqueUserCourses = [UserCourse]()
+                for userCourse in userCourses {
+                    if !uniqueUserCourses.contains(where: { $0.id == userCourse.id }) {
+                        uniqueUserCourses.append(userCourse)
+                    }
                 }
 
-                self.coursesPersistenceService.fetch(ids: userCourses.map(\.courseID)).done { courses in
+                let relationshipsCourses = uniqueUserCourses.compactMap(\.course)
+                if uniqueUserCourses.count == relationshipsCourses.count {
+                    return seal.fulfill(relationshipsCourses)
+                }
+
+                self.coursesPersistenceService.fetch(ids: uniqueUserCourses.map(\.courseID)).done { courses in
                     CoreDataHelper.shared.context.performChanges {
-                        let resultCourses = userCourses.compactMap { userCourse -> Course? in
-                            if let course = courses.first(where: { $0.id == userCourse.courseID }) {
+                        let coursesMap = Dictionary(
+                            courses.map({ ($0.id, $0) }),
+                            uniquingKeysWith: { first, _ in first }
+                        )
+                        let resultCourses = uniqueUserCourses.compactMap { userCourse -> Course? in
+                            if let course = coursesMap[userCourse.courseID] {
                                 userCourse.course = course
                                 return course
                             }

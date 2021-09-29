@@ -31,6 +31,8 @@ final class HomeViewController: BaseExploreViewController {
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
+    private var isFirstTimeViewDidAppear = true
+
     init(interactor: HomeInteractorProtocol, analytics: Analytics) {
         super.init(interactor: interactor, analytics: analytics)
 
@@ -53,6 +55,12 @@ final class HomeViewController: BaseExploreViewController {
 
         self.analytics.send(.homeScreenOpened)
         self.homeInteractor?.doStreakActivityLoad(request: .init())
+
+        guard !self.isFirstTimeViewDidAppear else {
+            return
+        }
+
+        self.isFirstTimeViewDidAppear = false
 
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
             guard let strongSelf = self else {
@@ -303,6 +311,8 @@ final class HomeViewController: BaseExploreViewController {
                         type: submoduleType
                     )
                 )
+
+                containerViewController.refreshSubmodules()
             }
         case .hidden:
             if let submodule = self.getSubmodule(type: submoduleType) {
