@@ -520,6 +520,11 @@ CourseInfoTabNewsBadgeSending = "Active";
 CourseInfoTabNewsBadgeSent = "Sent";
 CourseInfoTabNewsBadgeOnEvent = "By Event";
 CourseInfoTabNewsBadgeOneTime = "One-time";
+CourseInfoTabNewsDateOnEventComposing = "From %@";
+CourseInfoTabNewsDateOnEventSending = "From %@";
+CourseInfoTabNewsDateOnEventSent = "%@ - %@";
+CourseInfoTabNewsDateOneTimeScheduled = "Scheduled for %@";
+CourseInfoTabNewsDateOneTimeSending = "From %@";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

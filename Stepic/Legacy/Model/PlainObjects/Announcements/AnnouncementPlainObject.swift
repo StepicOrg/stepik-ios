@@ -44,6 +44,10 @@ struct AnnouncementPlainObject: JSONSerializable {
         self.onEnroll
             || (self.isInfinite && (self.startDate == nil || self.startDate.require() < Date()))
     }
+
+    var displayedStartDate: Date? { self.estimatedStartDate ?? self.startDate }
+
+    var displayedFinishDate: Date? { self.estimatedFinishDate ?? self.sentDate }
 }
 
 extension AnnouncementPlainObject {

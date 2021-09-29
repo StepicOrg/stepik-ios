@@ -522,6 +522,11 @@ CourseInfoTabNewsBadgeSending = "Рассылается";
 CourseInfoTabNewsBadgeSent = "Отправлена";
 CourseInfoTabNewsBadgeOnEvent = "По событию";
 CourseInfoTabNewsBadgeOneTime = "Разовая";
+CourseInfoTabNewsDateOnEventComposing = "С %@";
+CourseInfoTabNewsDateOnEventSending = "С %@";
+CourseInfoTabNewsDateOnEventSent = "%@ - %@";
+CourseInfoTabNewsDateOneTimeScheduled = "Запланирована на %@";
+CourseInfoTabNewsDateOneTimeSending = "С %@";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
