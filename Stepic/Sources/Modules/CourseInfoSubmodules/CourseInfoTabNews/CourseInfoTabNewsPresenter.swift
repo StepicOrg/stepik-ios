@@ -92,8 +92,20 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
         }()
 
         let statistics: CourseInfoTabNewsStatisticsViewModel? = {
-            guard course.canCreateAnnouncements else {
+            guard course.canCreateAnnouncements,
+                  let status = announcement.status else {
                 return nil
+            }
+
+            switch status {
+            case .composing:
+                return nil
+            case .scheduled:
+                if !announcement.isActiveEvent {
+                    return nil
+                }
+            case .queueing, .queued, .sending, .sent, .aborted:
+                break
             }
 
             return CourseInfoTabNewsStatisticsViewModel(

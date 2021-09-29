@@ -14,6 +14,8 @@ extension CourseInfoTabNewsCellView {
 
         let contentStackViewInsets = LayoutInsets(top: 20, left: 16, bottom: 16, right: 16)
         let contentStackViewSpacing: CGFloat = 8
+
+        let statisticsViewInsets = LayoutInsets(top: 8)
     }
 }
 
@@ -66,8 +68,10 @@ final class CourseInfoTabNewsCellView: UIView {
         return processedContentView
     }()
 
-    private lazy var statisticsView: CourseInfoTabNewsStatisticsView = {
-        let view = CourseInfoTabNewsStatisticsView()
+    private lazy var statisticsView = CourseInfoTabNewsStatisticsView()
+
+    private lazy var statisticsContainerView: UIView = {
+        let view = UIView()
         view.isHidden = true
         return view
     }()
@@ -92,7 +96,6 @@ final class CourseInfoTabNewsCellView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -123,8 +126,9 @@ final class CourseInfoTabNewsCellView: UIView {
                 + (self.subjectLabel.isHidden ? 0 : self.subjectLabel.intrinsicContentSize.height)
                 + self.appearance.contentStackViewSpacing
                 + textContentHeight
-                + (self.statisticsView.isHidden ? 0 : self.appearance.contentStackViewSpacing)
-                + (self.statisticsView.isHidden ? 0 : self.statisticsView.intrinsicContentSize.height)
+                + (self.statisticsContainerView.isHidden ? 0 : self.appearance.contentStackViewSpacing)
+                + (self.statisticsContainerView.isHidden ? 0 : self.appearance.statisticsViewInsets.top)
+                + (self.statisticsContainerView.isHidden ? 0 : self.statisticsView.intrinsicContentSize.height)
                 + self.appearance.contentStackViewInsets.bottom
         ).rounded(.up)
 
@@ -137,7 +141,7 @@ final class CourseInfoTabNewsCellView: UIView {
             self.dateLabel.text = nil
             self.subjectLabel.text = nil
             self.processedContentView.setText(nil)
-            self.statisticsView.isHidden = true
+            self.statisticsContainerView.isHidden = true
             return
         }
 
@@ -156,17 +160,15 @@ final class CourseInfoTabNewsCellView: UIView {
         self.processedContentView.processedContent = viewModel.processedContent
 
         if let statisticsViewModel = viewModel.statistics {
-            self.statisticsView.isHidden = false
+            self.statisticsContainerView.isHidden = false
             self.statisticsView.configure(viewModel: statisticsViewModel)
         } else {
-            self.statisticsView.isHidden = true
+            self.statisticsContainerView.isHidden = true
         }
     }
 }
 
 extension CourseInfoTabNewsCellView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
-
     func addSubviews() {
         self.addSubview(self.contentStackView)
 
@@ -174,13 +176,20 @@ extension CourseInfoTabNewsCellView: ProgrammaticallyInitializableViewProtocol {
         self.contentStackView.addArrangedSubview(self.dateLabel)
         self.contentStackView.addArrangedSubview(self.subjectLabel)
         self.contentStackView.addArrangedSubview(self.processedContentView)
-        self.contentStackView.addArrangedSubview(self.statisticsView)
+        self.contentStackView.addArrangedSubview(self.statisticsContainerView)
+
+        self.statisticsContainerView.addSubview(self.statisticsView)
     }
 
     func makeConstraints() {
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(self.appearance.contentStackViewInsets.edgeInsets)
+        }
+
+        self.statisticsView.translatesAutoresizingMaskIntoConstraints = false
+        self.statisticsView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.statisticsViewInsets.edgeInsets)
         }
     }
 }
