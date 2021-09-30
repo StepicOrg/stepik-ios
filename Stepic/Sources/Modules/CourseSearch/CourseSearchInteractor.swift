@@ -99,7 +99,7 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
     func doSearchResultsLoad(request: CourseSearch.SearchResultsLoad.Request) {
         defer {
             self.analytics.send(
-                .сourseContentSearched(
+                .courseContentSearched(
                     id: self.courseID,
                     title: self.currentCourse?.title,
                     query: self.currentQuery,

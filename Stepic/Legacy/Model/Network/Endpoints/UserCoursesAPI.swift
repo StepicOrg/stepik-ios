@@ -26,7 +26,9 @@ final class UserCoursesAPI: APIEndpoint {
     func retrieve(
         page: Int = 1,
         isArchived: Bool? = nil,
-        isFavorite: Bool? = nil
+        isFavorite: Bool? = nil,
+        canBeReviewed: Bool? = nil,
+        isDraft: Bool? = nil
     ) -> Promise<([UserCourse], Meta)> {
         Promise { seal in
             var params = Parameters()
@@ -37,6 +39,12 @@ final class UserCoursesAPI: APIEndpoint {
             }
             if let isFavorite = isFavorite {
                 params[UserCourse.JSONKey.isFavorite.rawValue] = String(isFavorite)
+            }
+            if let canBeReviewed = canBeReviewed {
+                params[UserCourse.JSONKey.canBeReviewed.rawValue] = String(canBeReviewed)
+            }
+            if let isDraft = isDraft {
+                params["is_draft"] = String(isDraft)
             }
 
             firstly { () -> Guarantee<[UserCourse]> in

@@ -3,10 +3,7 @@ import UIKit
 final class CourseRevenueTabPurchasesTableViewCell: UITableViewCell, Reusable {
     enum Appearance {
         static let separatorHeight: CGFloat = 1
-        static let separatorColor = UIColor.dynamic(
-            light: .onSurface.withAlphaComponent(0.04),
-            dark: .stepikSeparator
-        )
+        static let separatorColor = UIColor.stepikOverlayOnSurfaceBackground
     }
 
     private lazy var cellView = CourseRevenueTabPurchasesCellView()

@@ -755,6 +755,7 @@
 		2C7E293726B05680008581F4 /* StepQuizReviewStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */; };
 		2C7EFCED24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */; };
 		2C7EFCEF24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */; };
+		2C7F13CC26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F13CB26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift */; };
 		2C7F4160269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */; };
 		2C7F416226948CCE00BD5C48 /* CourseInfoTabReviewsSummaryDistributionProgressesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F416126948CCE00BD5C48 /* CourseInfoTabReviewsSummaryDistributionProgressesView.swift */; };
 		2C7F4164269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F4163269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift */; };
@@ -784,6 +785,7 @@
 		2C85EC0925599AD10059EF97 /* CatalogBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC0825599AD10059EF97 /* CatalogBlock.swift */; };
 		2C85EC0E25599E9C0059EF97 /* CatalogBlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */; };
 		2C85EC162559A57D0059EF97 /* CatalogBlockAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */; };
+		2C85FCEE26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85FCED26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift */; };
 		2C87A7A12446502900933CA4 /* UsersPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */; };
 		2C87A7A424465B5900933CA4 /* ProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */; };
 		2C87A7A82446646600933CA4 /* UserActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7A72446646600933CA4 /* UserActivityEntity.swift */; };
@@ -1484,6 +1486,7 @@
 		62E9888DF0D85074AFE0092C /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98395E3AF46CA25556A98 /* StepViewController.swift */; };
 		62E9889E935597A0ED849B0C /* ContentLanguageSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986932B6744B0958ABE36 /* ContentLanguageSwitchViewController.swift */; };
 		62E988A30D23C70799B8E4C3 /* CourseInfoTabInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CF68C4ED03FB36FA4F3 /* CourseInfoTabInfoInteractor.swift */; };
+		62E988A3F6BFDF9F0A9777BF /* CourseInfoTabNewsStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A19D9B85303250354DA /* CourseInfoTabNewsStatisticsView.swift */; };
 		62E988B311FB626588A8615D /* CodeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F4FA1EEC6CD7841F0D5 /* CodeDetailsView.swift */; };
 		62E988B9C5AE71A1CC86A209 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987AE3DC45621DD9315B4 /* LessonViewController.swift */; };
 		62E988C4572F2A9C97348C83 /* CodeQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9806901565B551EF1942F /* CodeQuizView.swift */; };
@@ -2564,6 +2567,7 @@
 		2C4AD01423E301C50049B7B0 /* DiscussionThreadsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadsAPI.swift; sourceTree = "<group>"; };
 		2C4AD01823E304140049B7B0 /* DiscussionThreadsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadsNetworkService.swift; sourceTree = "<group>"; };
 		2C4AD01A23E305FA0049B7B0 /* DiscussionThreadsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadsPersistenceService.swift; sourceTree = "<group>"; };
+		2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_course_can_be_reviewed_v90.xcdatamodel; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4BE7DB221325C000AEAC34 /* Model_course_review_v32.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_review_v32.xcdatamodel; sourceTree = "<group>"; };
@@ -2718,6 +2722,7 @@
 		2C7E293626B05680008581F4 /* StepQuizReviewStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusesView.swift; sourceTree = "<group>"; };
 		2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonView.swift; sourceTree = "<group>"; };
 		2C7EFCEE24D08D80003A4E93 /* NewProfileSocialProfilesSkeletonProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSocialProfilesSkeletonProfileView.swift; sourceTree = "<group>"; };
+		2C7F13CB26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabNewsBadgesView.swift; sourceTree = "<group>"; };
 		2C7F415F269484DA00BD5C48 /* CourseInfoTabReviewsSummaryRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryRatingView.swift; sourceTree = "<group>"; };
 		2C7F416126948CCE00BD5C48 /* CourseInfoTabReviewsSummaryDistributionProgressesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryDistributionProgressesView.swift; sourceTree = "<group>"; };
 		2C7F4163269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryDistributionCountsView.swift; sourceTree = "<group>"; };
@@ -2748,6 +2753,7 @@
 		2C85EC0825599AD10059EF97 /* CatalogBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlock.swift; sourceTree = "<group>"; };
 		2C85EC0D25599E9C0059EF97 /* CatalogBlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockKind.swift; sourceTree = "<group>"; };
 		2C85EC152559A57D0059EF97 /* CatalogBlockAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockAppearance.swift; sourceTree = "<group>"; };
+		2C85FCED26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabNewsBadgeView.swift; sourceTree = "<group>"; };
 		2C87A7A02446502900933CA4 /* UsersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPersistenceService.swift; sourceTree = "<group>"; };
 		2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesPersistenceService.swift; sourceTree = "<group>"; };
 		2C87A7A52446635E00933CA4 /* Model_user_activity_v50.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_activity_v50.xcdatamodel; sourceTree = "<group>"; };
@@ -3520,6 +3526,7 @@
 		62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressesNetworkService.swift; sourceTree = "<group>"; };
 		62E989FEFDC26A706157D1AB /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		62E98A1234FE9DA8BC81202A /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		62E98A19D9B85303250354DA /* CourseInfoTabNewsStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabNewsStatisticsView.swift; sourceTree = "<group>"; };
 		62E98A1A76183E4780F9343C /* FullscreenCourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCourseListViewController.swift; sourceTree = "<group>"; };
 		62E98A1F1D23C325EB6288F9 /* WriteCommentOutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentOutputProtocol.swift; sourceTree = "<group>"; };
 		62E98A2F0861B457FAABF490 /* CourseListDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListDataFlow.swift; sourceTree = "<group>"; };
@@ -4981,6 +4988,15 @@
 				2C7EFCEC24D08CFF003A4E93 /* NewProfileSocialProfilesSkeletonView.swift */,
 			);
 			path = SocialProfiles;
+			sourceTree = "<group>";
+		};
+		2C7F13CA26FE19F400866E4C /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				2C7F13CB26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift */,
+				2C85FCED26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift */,
+			);
+			path = Badge;
 			sourceTree = "<group>";
 		};
 		2C7F415E26947F9E00BD5C48 /* Summary */ = {
@@ -6887,7 +6903,9 @@
 			isa = PBXGroup;
 			children = (
 				2CF68CFF26FA022400EBB023 /* CourseInfoTabNewsCellView.swift */,
+				62E98A19D9B85303250354DA /* CourseInfoTabNewsStatisticsView.swift */,
 				2CF68CFC26FA01F900EBB023 /* CourseInfoTabNewsTableViewCell.swift */,
+				2C7F13CA26FE19F400866E4C /* Badge */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -10827,6 +10845,7 @@
 				2CBC5AF52682437C0000F2D1 /* CourseRevenueTabPurchasesViewModel.swift in Sources */,
 				2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */,
 				2CCBDBE524AF93B8001A5A83 /* NewProfileDetailsViewModel.swift in Sources */,
+				2C7F13CC26FE1A1400866E4C /* CourseInfoTabNewsBadgesView.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				2CA867D225892B050006576E /* GridSimpleCourseListWidgetView.swift in Sources */,
 				2C3A1F5E24F3B1D300B4070F /* FillBlanksFeedback.swift in Sources */,
@@ -11038,6 +11057,7 @@
 				2CE9BF4A248D09FC004F6659 /* BlocksPersistenceService.swift in Sources */,
 				2CCDD80724F8A7D7006644A8 /* ApplicationShortcutService.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
+				2C85FCEE26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift in Sources */,
 				2C0A10A7268B279A001D4023 /* CourseBenefitByMonthsAPI.swift in Sources */,
 				2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
@@ -12360,6 +12380,7 @@
 				1009EF884D5CAC070717C737 /* CourseInfoTabNewsView.swift in Sources */,
 				D064B6AE4E478249DCE7B7F8 /* CourseInfoTabNewsViewController.swift in Sources */,
 				2BF2D5AC65ACA8B668CF93A6 /* CourseInfoTabNewsInputProtocol.swift in Sources */,
+				62E988A3F6BFDF9F0A9777BF /* CourseInfoTabNewsStatisticsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12620,7 +12641,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -12645,7 +12666,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -12787,7 +12808,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -12817,7 +12838,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -12908,7 +12929,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -12960,7 +12981,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -13041,7 +13062,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -13089,7 +13110,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -13610,7 +13631,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -13664,7 +13685,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -13746,7 +13767,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -13794,7 +13815,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 375;
+				CURRENT_PROJECT_VERSION = 378;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -14268,6 +14289,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */,
 				2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */,
 				2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */,
 				2C98423726DE4B9C0098E36B /* Model_search_results_v87.xcdatamodel */,
@@ -14359,7 +14381,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */;
+			currentVersion = 2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

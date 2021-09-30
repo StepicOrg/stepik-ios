@@ -3,7 +3,7 @@ import UIKit
 
 extension StepQuizReviewMessageView {
     struct Appearance {
-        let backgroundColor = UIColor.stepikOverlayViolet
+        let backgroundColor = UIColor.stepikOverlayVioletBackground
         let cornerRadius: CGFloat = 6
         let tintColor = UIColor.dynamic(light: .stepikVioletFixed, dark: .stepikViolet05Fixed)
         let insets = LayoutInsets.default

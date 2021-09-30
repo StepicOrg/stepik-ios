@@ -37,7 +37,7 @@ final class StepikAnalytics: Analytics {
     }
 
     func send(_ event: AnalyticsEvent, forceSend: Bool) {
-        // Sends Amplitude events to Amplitude backend and also mirrors these events to AppMetrica.
+        // Sends Amplitude events to Amplitude backend and also mirrors these events to AppMetrica & FirebaseAnalytics.
         // Otherwise, sends the current event to AppMetrica and FirebaseAnalytics backends.
         if event is AmplitudeAnalyticsEvent {
             self.amplitudeAnalyticsEngine.sendAnalyticsEvent(
@@ -46,6 +46,11 @@ final class StepikAnalytics: Analytics {
                 forceSend: forceSend
             )
             self.appMetricaAnalyticsEngine.sendAnalyticsEvent(
+                named: event.name,
+                parameters: event.parameters,
+                forceSend: forceSend
+            )
+            self.firebaseAnalyticsEngine.sendAnalyticsEvent(
                 named: event.name,
                 parameters: event.parameters,
                 forceSend: forceSend

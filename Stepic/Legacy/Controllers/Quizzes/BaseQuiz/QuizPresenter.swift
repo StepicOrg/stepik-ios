@@ -23,6 +23,8 @@ final class QuizPresenter {
 
     private let urlFactory: StepikURLFactory
 
+    private let analytics: Analytics
+
     var state: QuizState = .nothing {
         didSet {
             view?.set(state: state)
@@ -37,7 +39,8 @@ final class QuizPresenter {
         submissionsAPI: SubmissionsAPI,
         attemptsAPI: AttemptsAPI,
         userActivitiesAPI: UserActivitiesAPI,
-        urlFactory: StepikURLFactory
+        urlFactory: StepikURLFactory,
+        analytics: Analytics
     ) {
         self.view = view
         self.step = step
@@ -47,6 +50,7 @@ final class QuizPresenter {
         self.userActivitiesAPI = userActivitiesAPI
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
         self.urlFactory = urlFactory
+        self.analytics = analytics
     }
 
     convenience init(
@@ -68,7 +72,8 @@ final class QuizPresenter {
             submissionsAPI: submissionsAPI,
             attemptsAPI: attemptsAPI,
             userActivitiesAPI: userActivitiesAPI,
-            urlFactory: urlFactory
+            urlFactory: urlFactory,
+            analytics: StepikAnalytics.shared
         )
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
@@ -321,7 +326,7 @@ final class QuizPresenter {
     private func submit() {
         //To view!!!!!!!!
 //        submissionPressedBlock?()
-        StepikAnalytics.shared.send(.submitSubmissionTapped(parameters: self.view?.submissionAnalyticsParams))
+        self.analytics.send(.submitSubmissionTapped(parameters: self.view?.submissionAnalyticsParams))
         if let reply = self.dataSource?.getReply() {
             self.view?.showLoading(visible: true)
             submit(reply: reply, completion: { [weak self] in
@@ -348,38 +353,43 @@ final class QuizPresenter {
                 return
             }
 
-            _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: reply, success: {
-                [weak self] submission in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                AnalyticsUserProperties.shared.incrementSubmissionsCount()
-                strongSelf.submissionsCount = (strongSelf.submissionsCount ?? 0) + 1
-
-                let isAdaptive: Bool? = {
-                    if let course = LastStepGlobalContext.context.course {
-                        return AdaptiveStorageManager().supportedInAdaptiveModeCoursesIDs.contains(course.id)
+            _ = s.submissionsAPI.create(
+                stepName: s.step.block.name,
+                attemptId: id,
+                reply: reply,
+                success: { [weak self] submission in
+                    guard let strongSelf = self else {
+                        return
                     }
-                    return nil
-                }()
-                let codeLanguageName = (reply as? CodeReply)?.languageName
-                StepikAnalytics.shared.send(
-                    .submissionMade(
-                        stepID: strongSelf.step.id,
-                        submissionID: submission.id,
-                        blockName: strongSelf.step.block.name,
-                        isAdaptive: isAdaptive,
-                        codeLanguageName: codeLanguageName
-                    )
-                )
 
-                strongSelf.submission = submission
-                strongSelf.checkSubmission(submission.id, time: 0, completion: completion)
-            }, error: { error in
-                errorHandler(error)
-                //TODO: test this
-            })
+                    AnalyticsUserProperties.shared.incrementSubmissionsCount()
+                    strongSelf.submissionsCount = (strongSelf.submissionsCount ?? 0) + 1
+
+                    let isAdaptive: Bool? = {
+                        if let course = LastStepGlobalContext.context.course {
+                            return AdaptiveStorageManager().supportedInAdaptiveModeCoursesIDs.contains(course.id)
+                        }
+                        return nil
+                    }()
+                    let codeLanguageName = (reply as? CodeReply)?.languageName
+                    strongSelf.analytics.send(
+                        .submissionMade(
+                            stepID: strongSelf.step.id,
+                            submissionID: submission.id,
+                            blockName: strongSelf.step.block.name,
+                            isAdaptive: isAdaptive,
+                            codeLanguageName: codeLanguageName
+                        )
+                    )
+
+                    strongSelf.submission = submission
+                    strongSelf.checkSubmission(submission.id, time: 0, completion: completion)
+                },
+                error: { error in
+                    errorHandler(error)
+                    //TODO: test this
+                }
+            )
         }, error: { [weak self] error in
             if error == PerformRequestError.noAccessToRefreshToken {
                 self?.view?.logout {
@@ -393,7 +403,7 @@ final class QuizPresenter {
     private func retrySubmission() {
         view?.showLoading(visible: true)
 
-        StepikAnalytics.shared.send(.generateNewAttemptTapped)
+        self.analytics.send(.generateNewAttemptTapped)
 
         self.delegate?.submissionDidRetry()
 

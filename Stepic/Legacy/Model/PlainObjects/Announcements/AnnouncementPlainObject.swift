@@ -37,6 +37,17 @@ struct AnnouncementPlainObject: JSONSerializable {
     let estimatedStartDate: Date?
     let estimatedFinishDate: Date?
     let noticeDates: [Date]
+
+    var isOneTimeEvent: Bool { !self.isInfinite && !self.onEnroll }
+
+    var isActiveEvent: Bool {
+        self.onEnroll
+            || (self.isInfinite && (self.startDate == nil || self.startDate.require() < Date()))
+    }
+
+    var displayedStartDate: Date? { self.estimatedStartDate ?? self.startDate }
+
+    var displayedFinishDate: Date? { self.estimatedFinishDate ?? self.sentDate }
 }
 
 extension AnnouncementPlainObject {

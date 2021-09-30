@@ -8,6 +8,7 @@ extension UserCourse {
     @NSManaged var managedIsPinned: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedLastViewed: Date?
+    @NSManaged var managedCanBeReviewed: NSNumber
 
     @NSManaged var managedUser: User?
     @NSManaged var managedCourse: Course?
@@ -72,6 +73,15 @@ extension UserCourse {
         }
         set {
             self.managedLastViewed = newValue
+        }
+    }
+
+    var canBeReviewed: Bool {
+        get {
+            self.managedCanBeReviewed.boolValue
+        }
+        set {
+            self.managedCanBeReviewed = NSNumber(value: newValue)
         }
     }
 

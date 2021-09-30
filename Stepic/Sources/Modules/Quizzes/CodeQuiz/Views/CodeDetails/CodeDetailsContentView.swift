@@ -32,9 +32,7 @@ final class CodeDetailsContentView: UIView {
     }
 
     func configure(samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
-        if !self.stackView.arrangedSubviews.isEmpty {
-            self.stackView.removeAllArrangedSubviews()
-        }
+        self.stackView.removeAllArrangedSubviews()
 
         self.makeCodeSampleViews(samples).forEach { self.stackView.addArrangedSubview($0) }
         self.makeCodeLimitViews(limit).forEach { self.stackView.addArrangedSubview($0) }
