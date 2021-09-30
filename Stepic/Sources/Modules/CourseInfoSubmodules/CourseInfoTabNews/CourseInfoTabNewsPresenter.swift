@@ -90,7 +90,7 @@ final class CourseInfoTabNewsPresenter: CourseInfoTabNewsPresenterProtocol {
         }
 
         if !course.canCreateAnnouncements {
-            if announcement.isActiveEvent, let noticeDate = announcement.noticeDates.first {
+            if announcement.isActiveEvent, let noticeDate = announcement.noticeDates.last {
                 return FormatterHelper.dateStringWithFullMonthAndYear(noticeDate)
             }
         } else {
