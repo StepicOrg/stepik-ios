@@ -130,6 +130,7 @@ extension AnalyticsEvent {
         case courseScreen = "course_screen"
         case homeScreenWidget = "ios_home_screen_widget"
         case applicationShortcut = "ios_application_shortcut"
+        case siriShortcut = "ios_siri_shortcut"
     }
 
     static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
@@ -1055,13 +1056,26 @@ extension AnalyticsEvent {
         )
     }
 
-    // MARK: - Home Screen Quick Actions -
+    // MARK: Home Screen Quick Actions
 
-    static func shortcutItemTriggered(type: String) -> AmplitudeAnalyticsEvent {
+    static func applicationShortcutItemTriggered(type: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Home screen quick action triggered",
             parameters: ["type": type]
         )
+    }
+
+    // MARK: Siri Shortcuts
+
+    static func siriShortcutContinued(type: SiriShortcutUserActivityType) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Siri shortcut triggered",
+            parameters: ["type": type.rawValue]
+        )
+    }
+
+    enum SiriShortcutUserActivityType: String {
+        case continueLearning = "continue_learning"
     }
 
     // MARK: - Home Screen Widget -
