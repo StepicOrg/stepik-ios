@@ -24,6 +24,7 @@ final class LastStepRouter {
         skipSyllabus: Bool = false,
         source: AnalyticsEvent.CourseContinueSource,
         viewSource: AnalyticsEvent.CourseViewSource,
+        shouldDonateInteraction: Bool = false,
         lessonModuleOutput: LessonOutputProtocol? = nil
     ) {
         StepikAnalytics.shared.send(
@@ -77,6 +78,7 @@ final class LastStepRouter {
                 using: navigationController,
                 skipSyllabus: skipSyllabus,
                 courseViewSource: viewSource,
+                shouldDonateInteraction: shouldDonateInteraction,
                 lessonModuleOutput: lessonModuleOutput
             )
         }.catch { error in
@@ -91,6 +93,7 @@ final class LastStepRouter {
         using navigationController: UINavigationController,
         skipSyllabus: Bool = false,
         courseViewSource: AnalyticsEvent.CourseViewSource = .unknown,
+        shouldDonateInteraction: Bool,
         lessonModuleOutput: LessonOutputProtocol? = nil
     ) {
         SVProgressHUD.show()
@@ -107,6 +110,10 @@ final class LastStepRouter {
                     courseViewSource: courseViewSource,
                     navigationController: navigationController
                 )
+            }
+
+            if shouldDonateInteraction {
+                self.donateContinueLearningInteraction(for: cardsViewController)
             }
 
             cardsViewController.hidesBottomBarWhenPushed = true
@@ -239,6 +246,10 @@ final class LastStepRouter {
 
                 SVProgressHUD.showSuccess(withStatus: "")
 
+                if shouldDonateInteraction {
+                    self.donateContinueLearningInteraction(for: lessonViewController)
+                }
+
                 if !skipSyllabus {
                     navigationController.pushViewController(courseInfoViewController, animated: false)
                 }
@@ -354,5 +365,17 @@ final class LastStepRouter {
         let viewController = assembly.makeModule()
 
         navigationController.pushViewController(viewController, animated: true)
+    }
+
+    private static func donateContinueLearningInteraction(for viewController: UIViewController) {
+        guard #available(iOS 12.0, *) else {
+            return
+        }
+
+        let siriShortcutsService: SiriShortcutsServiceProtocol = SiriShortcutsService()
+
+        let userActivity = siriShortcutsService.getContinueLearningShortcut()
+        viewController.userActivity = userActivity
+        userActivity.becomeCurrent()
     }
 }

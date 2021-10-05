@@ -683,6 +683,7 @@
 		2C619A7F24D0004B007D3529 /* SocialProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */; };
 		2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */; };
 		2C619A8324D0056F007D3529 /* SocialProfilesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */; };
+		2C6277B8270C42CC00FDAFD9 /* SiriShortcutsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6277B7270C42CC00FDAFD9 /* SiriShortcutsService.swift */; };
 		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
 		2C67E7E326C180D700F4450B /* StepQuizReviewExpandQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67E7E226C180D700F4450B /* StepQuizReviewExpandQuizView.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
@@ -2649,6 +2650,7 @@
 		2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfileProvider.swift; sourceTree = "<group>"; };
 		2C619A8024D004AA007D3529 /* SocialProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C619A8224D0056F007D3529 /* SocialProfilesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProfilesPersistenceService.swift; sourceTree = "<group>"; };
+		2C6277B7270C42CC00FDAFD9 /* SiriShortcutsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriShortcutsService.swift; sourceTree = "<group>"; };
 		2C63C776253EFE2300B20195 /* TableDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataset.swift; sourceTree = "<group>"; };
 		2C67075425FF84BE00B18163 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
 		2C67075525FF84BE00B18163 /* Info-Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
@@ -4754,6 +4756,14 @@
 				2C619A7C24CFFBA2007D3529 /* SocialProfile+CoreDataProperties.swift */,
 			);
 			path = SocialProfile;
+			sourceTree = "<group>";
+		};
+		2C6277B6270C42AF00FDAFD9 /* SiriShortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				2C6277B7270C42CC00FDAFD9 /* SiriShortcutsService.swift */,
+			);
+			path = SiriShortcuts;
 			sourceTree = "<group>";
 		};
 		2C67075125FF844400B18163 /* Resources */ = {
@@ -9300,6 +9310,7 @@
 				2C273263248BB49500BD065F /* CodeEditor */,
 				2C273262248BB46300BD065F /* ContentLanguage */,
 				62E98A358EF538D7F89D10F1 /* Models */,
+				2C6277B6270C42AF00FDAFD9 /* SiriShortcuts */,
 				2CDB95872412C04A00F676A7 /* Spotlight */,
 				62E986D1988A3445F3416404 /* StorageManagers */,
 				2C7AC4AC25B44E6B0024D4D2 /* Widget */,
@@ -11797,6 +11808,7 @@
 				62E98F674E6B10451E7397F9 /* ContentLanguageSwitchPresenter.swift in Sources */,
 				62E98273401D1360B07BAD0A /* ContentLanguageSwitchProvider.swift in Sources */,
 				2CD04082250F669F004D284F /* ProcessedContentView.swift in Sources */,
+				2C6277B8270C42CC00FDAFD9 /* SiriShortcutsService.swift in Sources */,
 				2CB718DC249240FC00AEDF84 /* HTMLToAttributedStringConverter.swift in Sources */,
 				2C2E44D324FE474F006B7303 /* CourseListGridSize.swift in Sources */,
 				62E9889E935597A0ED849B0C /* ContentLanguageSwitchViewController.swift in Sources */,
