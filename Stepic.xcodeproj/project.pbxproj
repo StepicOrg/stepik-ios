@@ -686,6 +686,9 @@
 		2C6277B8270C42CC00FDAFD9 /* SiriShortcutsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6277B7270C42CC00FDAFD9 /* SiriShortcutsService.swift */; };
 		2C6277BA270C5CB300FDAFD9 /* SiriShortcutsContinueUserActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6277B9270C5CB300FDAFD9 /* SiriShortcutsContinueUserActivityService.swift */; };
 		2C6277BD270C666700FDAFD9 /* LastCourseDataShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6277BC270C666700FDAFD9 /* LastCourseDataShortcutService.swift */; };
+		2C6277BF270C7A8000FDAFD9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6277BE270C7A7F00FDAFD9 /* Intents.framework */; };
+		2C6277C1270C805F00FDAFD9 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6277C0270C805F00FDAFD9 /* IntentsUI.framework */; };
+		2C6277C3270C905200FDAFD9 /* SiriShortcutsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6277C2270C905200FDAFD9 /* SiriShortcutsStorageManager.swift */; };
 		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
 		2C67E7E326C180D700F4450B /* StepQuizReviewExpandQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67E7E226C180D700F4450B /* StepQuizReviewExpandQuizView.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
@@ -2655,6 +2658,9 @@
 		2C6277B7270C42CC00FDAFD9 /* SiriShortcutsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriShortcutsService.swift; sourceTree = "<group>"; };
 		2C6277B9270C5CB300FDAFD9 /* SiriShortcutsContinueUserActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriShortcutsContinueUserActivityService.swift; sourceTree = "<group>"; };
 		2C6277BC270C666700FDAFD9 /* LastCourseDataShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastCourseDataShortcutService.swift; sourceTree = "<group>"; };
+		2C6277BE270C7A7F00FDAFD9 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		2C6277C0270C805F00FDAFD9 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		2C6277C2270C905200FDAFD9 /* SiriShortcutsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriShortcutsStorageManager.swift; sourceTree = "<group>"; };
 		2C63C776253EFE2300B20195 /* TableDataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataset.swift; sourceTree = "<group>"; };
 		2C67075425FF84BE00B18163 /* Info-Develop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Develop.plist"; sourceTree = "<group>"; };
 		2C67075525FF84BE00B18163 /* Info-Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
@@ -3895,7 +3901,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6277BF270C7A8000FDAFD9 /* Intents.framework in Frameworks */,
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
+				2C6277C1270C805F00FDAFD9 /* IntentsUI.framework in Frameworks */,
 				E36410A645B2D9008B9FD40B /* Pods_Stepic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4052,6 +4060,8 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C6277C0270C805F00FDAFD9 /* IntentsUI.framework */,
+				2C6277BE270C7A7F00FDAFD9 /* Intents.framework */,
 				2C5BE9DB233C0A100098EB2F /* katex */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				2CB190781F2A17E800BD9508 /* Charts.framework */,
@@ -8809,6 +8819,7 @@
 				2C51E1E025B8A34000E38DF8 /* AnalyticsStorageManager.swift */,
 				2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */,
 				62E981C57D5BCF81714F344C /* DiscussionsSortTypeStorageManager.swift */,
+				2C6277C2270C905200FDAFD9 /* SiriShortcutsStorageManager.swift */,
 				2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */,
 				2C89FF8724AEE90500168F1B /* StreakNotificationsStorageManager.swift */,
 				62E9881CFD7892350EA31213 /* TooltipStorageManager.swift */,
@@ -12386,6 +12397,7 @@
 				EF3252195A0C7A3F15319D12 /* CourseRevenueTabMonthlyOutputProtocol.swift in Sources */,
 				F8189D6BC4B0A57D076B052A /* StepQuizReviewAssembly.swift in Sources */,
 				EE315359D4CBD905081C5F10 /* StepQuizReviewDataFlow.swift in Sources */,
+				2C6277C3270C905200FDAFD9 /* SiriShortcutsStorageManager.swift in Sources */,
 				B7A7B95C8D6C1A2A54487E5B /* StepQuizReviewInteractor.swift in Sources */,
 				A808BD24E34C2299DABB9327 /* StepQuizReviewPresenter.swift in Sources */,
 				45E69103B20AF96523AEE3F6 /* StepQuizReviewProvider.swift in Sources */,

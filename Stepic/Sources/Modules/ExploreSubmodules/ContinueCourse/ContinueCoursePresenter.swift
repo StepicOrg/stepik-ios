@@ -3,6 +3,7 @@ import UIKit
 protocol ContinueCoursePresenterProtocol {
     func presentLastCourse(response: ContinueCourse.LastCourseLoad.Response)
     func presentTooltip(response: ContinueCourse.TooltipAvailabilityCheck.Response)
+    func presentSiriButton(response: ContinueCourse.SiriButtonAvailabilityCheck.Response)
 }
 
 final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
@@ -21,6 +22,12 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
     func presentTooltip(response: ContinueCourse.TooltipAvailabilityCheck.Response) {
         self.viewController?.displayTooltip(
             viewModel: .init(shouldShowTooltip: response.shouldShowTooltip)
+        )
+    }
+
+    func presentSiriButton(response: ContinueCourse.SiriButtonAvailabilityCheck.Response) {
+        self.viewController?.displaySiriButton(
+            viewModel: .init(shouldShowButton: response.shouldShowButton, userActivity: response.userActivity)
         )
     }
 

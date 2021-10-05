@@ -1313,7 +1313,7 @@ QuickActionContinueLearningErrorUnauthorizedMessage = "Войдите, чтоб�
 
 /* SiriShortcuts */
 SiriShortcutContinueLearningTitle = "Продолжить учиться";
-SiriShortcutContinueLearningContentDescription = "Продолжить учиться с того же места, где остановились";
+SiriShortcutContinueLearningContentDescription = "С того же места, где остановились";
 SiriShortcutContinueLearningKeyword1 = "Продолжить";
 SiriShortcutContinueLearningKeyword2 = "Учиться";
 SiriShortcutContinueLearningKeyword3 = "Курс";

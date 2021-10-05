@@ -1312,7 +1312,7 @@ QuickActionContinueLearningErrorUnauthorizedMessage = "Sign in to continue learn
 
 /* SiriShortcuts */
 SiriShortcutContinueLearningTitle = "Continue Learning";
-SiriShortcutContinueLearningContentDescription = "Continue learning where you left off";
+SiriShortcutContinueLearningContentDescription = "Where you left off";
 SiriShortcutContinueLearningKeyword1 = "Continue";
 SiriShortcutContinueLearningKeyword2 = "Learning";
 SiriShortcutContinueLearningKeyword3 = "Course";

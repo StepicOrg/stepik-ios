@@ -1,8 +1,10 @@
+import IntentsUI
 import UIKit
 
 protocol ContinueCourseViewControllerProtocol: AnyObject {
     func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel)
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel)
+    func displaySiriButton(viewModel: ContinueCourse.SiriButtonAvailabilityCheck.ViewModel)
 }
 
 final class ContinueCourseViewController: UIViewController {
@@ -57,11 +59,14 @@ final class ContinueCourseViewController: UIViewController {
     }
 }
 
+// MARK: - ContinueCourseViewController: ContinueCourseViewControllerProtocol -
+
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel) {
         if case .result(let result) = viewModel.state {
             self.continueCourseView?.configure(viewModel: result)
             self.interactor.doTooltipAvailabilityCheck(request: .init())
+            self.interactor.doSiriButtonAvailabilityCheck(request: .init())
         }
 
         self.state = viewModel.state
@@ -85,10 +90,94 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
             }
         }
     }
+
+    func displaySiriButton(viewModel: ContinueCourse.SiriButtonAvailabilityCheck.ViewModel) {
+        if #available(iOS 12.0, *) {
+            if viewModel.shouldShowButton, let userActivity = viewModel.userActivity {
+                let contentConfiguration = SiriButtonContentConfiguration(
+                    shortcut: INShortcut(userActivity: userActivity),
+                    delegate: self
+                )
+                self.continueCourseView?.configureSiriButton(contentConfiguration: contentConfiguration)
+            } else {
+                self.continueCourseView?.configureSiriButton(contentConfiguration: nil)
+            }
+        }
+    }
 }
+
+// MARK: - ContinueCourseViewController: ContinueCourseViewDelegate -
 
 extension ContinueCourseViewController: ContinueCourseViewDelegate {
     func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView) {
         self.interactor.doContinueLastCourseAction(request: .init())
+    }
+
+    func continueCourseSiriButtonDidClick(_ continueCourseView: ContinueCourseView) {
+        self.interactor.doSiriButtonAction(request: .init())
+    }
+}
+
+// MARK: - ContinueCourseViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate -
+
+@available(iOS 12.0, *)
+extension ContinueCourseViewController: INUIAddVoiceShortcutButtonDelegate {
+    func present(
+        _ addVoiceShortcutViewController: INUIAddVoiceShortcutViewController,
+        for addVoiceShortcutButton: INUIAddVoiceShortcutButton
+    ) {
+        addVoiceShortcutViewController.delegate = self
+        self.present(addVoiceShortcutViewController, animated: true)
+    }
+
+    func present(
+        _ editVoiceShortcutViewController: INUIEditVoiceShortcutViewController,
+        for addVoiceShortcutButton: INUIAddVoiceShortcutButton
+    ) {
+        editVoiceShortcutViewController.delegate = self
+        present(editVoiceShortcutViewController, animated: true)
+    }
+}
+
+// MARK: - ContinueCourseViewController: INUIAddVoiceShortcutViewControllerDelegate -
+
+@available(iOS 12.0, *)
+extension ContinueCourseViewController: INUIAddVoiceShortcutViewControllerDelegate {
+    func addVoiceShortcutViewController(
+        _ controller: INUIAddVoiceShortcutViewController,
+        didFinishWith voiceShortcut: INVoiceShortcut?,
+        error: Error?
+    ) {
+        print("ContinueCourseViewController :: error adding voice shortcut \(String(describing: error))")
+        controller.dismiss(animated: true)
+    }
+
+    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+        controller.dismiss(animated: true)
+    }
+}
+
+// MARK: - ContinueCourseViewController: INUIEditVoiceShortcutViewControllerDelegate -
+
+@available(iOS 12.0, *)
+extension ContinueCourseViewController: INUIEditVoiceShortcutViewControllerDelegate {
+    func editVoiceShortcutViewController(
+        _ controller: INUIEditVoiceShortcutViewController,
+        didUpdate voiceShortcut: INVoiceShortcut?,
+        error: Error?
+    ) {
+        print("ContinueCourseViewController :: Error editing voice shortcut \(String(describing: error))")
+        controller.dismiss(animated: true)
+    }
+
+    func editVoiceShortcutViewController(
+        _ controller: INUIEditVoiceShortcutViewController,
+        didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID
+    ) {
+        controller.dismiss(animated: true)
+    }
+
+    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
+        controller.dismiss(animated: true)
     }
 }
