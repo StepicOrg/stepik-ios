@@ -177,5 +177,9 @@
 			</dict>
 		</dict>
 	</array>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER).ContinueLearningUserActivity</string>
+	</array>
 </dict>
 </plist>

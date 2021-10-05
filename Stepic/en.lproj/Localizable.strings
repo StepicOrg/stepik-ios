@@ -1310,6 +1310,13 @@ IAPPurchaseBuyInWeb = "Buy in Web";
 QuickActionContinueLearningErrorMessage = "Failed to continue learning";
 QuickActionContinueLearningErrorUnauthorizedMessage = "Sign in to continue learning";
 
+/* SiriShortcuts */
+SiriShortcutContinueLearningTitle = "Continue Learning";
+SiriShortcutContinueLearningContentDescription = "Where you left off";
+SiriShortcutContinueLearningKeyword1 = "Continue";
+SiriShortcutContinueLearningKeyword2 = "Learning";
+SiriShortcutContinueLearningKeyword3 = "Course";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
