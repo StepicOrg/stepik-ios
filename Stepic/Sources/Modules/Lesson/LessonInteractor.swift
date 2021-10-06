@@ -140,6 +140,8 @@ final class LessonInteractor: LessonInteractorProtocol {
 
                     seal.fulfill(())
                 }.catch { _ in
+                    self.didLoadFromCache = true
+
                     self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
                         seal.fulfill(())
                     }.catch { error in
@@ -239,8 +241,10 @@ final class LessonInteractor: LessonInteractorProtocol {
                 if self.currentData != data {
                     self.presenter.presentLesson(response: .init(state: .success(data)))
                 }
-            } else {
+            } else if lesson.stepsArray.count == steps.count && (0..<steps.count ~= startStepIndex) {
                 self.presenter.presentLesson(response: .init(state: .success(data)))
+            } else {
+                throw Error.cacheMiss
             }
 
             self.currentData = data
@@ -314,6 +318,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case cacheMiss
     }
 }
 
