@@ -23,7 +23,6 @@ final class RemoteConfig {
         Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
         Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
-        Key.newLessonAvailable.rawValue: NSNumber(value: true),
         Key.darkModeAvailable.rawValue: NSNumber(value: true),
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
         Key.isDisabledStepsSupported.rawValue: NSNumber(value: false),
@@ -195,7 +194,6 @@ final class RemoteConfig {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
-        case newLessonAvailable = "new_lesson_available_ios"
         case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
         case isDisabledStepsSupported = "is_disabled_steps_supported"
