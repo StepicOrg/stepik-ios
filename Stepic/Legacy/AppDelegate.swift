@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsStorageManager: AnalyticsStorageManagerProtocol = AnalyticsStorageManager.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
 
+    @available(iOS 12.0, *)
+    private lazy var siriShortcutsContinueUserActivityService: SiriShortcutsContinueUserActivityServiceProtocol = SiriShortcutsContinueUserActivityService()
+
     @available(iOS 14.0, *)
     private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
     @available(iOS 14.0, *)
@@ -267,6 +270,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        if #available(iOS 12.0, *),
+           self.siriShortcutsContinueUserActivityService.continueUserActivity(userActivity) {
+            return true
+        }
         if self.spotlightContinueUserActivityService.continueUserActivity(userActivity) {
             return true
         }

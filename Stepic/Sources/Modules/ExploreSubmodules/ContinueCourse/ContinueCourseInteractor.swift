@@ -5,9 +5,13 @@ protocol ContinueCourseInteractorProtocol {
     func doLastCourseRefresh(request: ContinueCourse.LastCourseLoad.Request)
     func doContinueLastCourseAction(request: ContinueCourse.ContinueCourseAction.Request)
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request)
+    func doSiriButtonAvailabilityCheck(request: ContinueCourse.SiriButtonAvailabilityCheck.Request)
+    func doSiriButtonAction(request: ContinueCourse.SiriButtonAction.Request)
 }
 
 final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
+    private static let siriButtonAvailabilityCheckDelay: TimeInterval = 1
+
     weak var moduleOutput: ContinueCourseOutputProtocol?
 
     private let presenter: ContinueCoursePresenterProtocol
@@ -16,6 +20,11 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let tooltipStorageManager: TooltipStorageManagerProtocol
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
+
+    @available(iOS 12.0, *)
+    private lazy var siriShortcutsService: SiriShortcutsServiceProtocol = SiriShortcutsService()
+    @available(iOS 12.0, *)
+    private lazy var siriShortcutsStorageManager: SiriShortcutsStorageManagerProtocol = SiriShortcutsStorageManager()
 
     private var currentCourse: Course?
 
@@ -63,6 +72,14 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             source: .homeWidget,
             viewSource: .fastContinue
         )
+
+        if #available(iOS 12.0, *) {
+            self.siriShortcutsStorageManager.didClickFastContinueOnHomeWidget = true
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.siriButtonAvailabilityCheckDelay) {
+                self.doSiriButtonAvailabilityCheck(request: .init())
+            }
+        }
     }
 
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request) {
@@ -72,6 +89,22 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             )
         )
         self.tooltipStorageManager.didShowOnHomeContinueLearning = true
+    }
+
+    func doSiriButtonAvailabilityCheck(request: ContinueCourse.SiriButtonAvailabilityCheck.Request) {
+        if #available(iOS 12.0, *),
+           self.siriShortcutsStorageManager.shouldShowSiriButtonOnHomeWidget {
+            let userActivity = self.siriShortcutsService.getContinueLearningShortcut()
+            self.presenter.presentSiriButton(response: .init(shouldShowButton: true, userActivity: userActivity))
+        } else {
+            self.presenter.presentSiriButton(response: .init(shouldShowButton: false))
+        }
+    }
+
+    func doSiriButtonAction(request: ContinueCourse.SiriButtonAction.Request) {
+        if #available(iOS 12.0, *) {
+            self.siriShortcutsStorageManager.didClickAddToSiriOnHomeWidget = true
+        }
     }
 }
 

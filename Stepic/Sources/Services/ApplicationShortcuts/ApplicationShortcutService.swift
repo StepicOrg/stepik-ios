@@ -8,10 +8,8 @@ protocol ApplicationShortcutServiceProtocol: AnyObject {
 }
 
 final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
-    private let userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol
-    private let coursesPersistenceService: CoursesPersistenceServiceProtocol
+    private let lastCourseDataShortcutService: LastCourseDataShortcutServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
-    private let continueCourseProvider: ContinueCourseProviderProtocol
 
     private let userAccountService: UserAccountServiceProtocol
 
@@ -20,22 +18,14 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
     private let analytics: Analytics
 
     init(
-        userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol = UserCoursesPersistenceService(),
-        coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
+        lastCourseDataShortcutService: LastCourseDataShortcutServiceProtocol = LastCourseDataShortcutService(),
         adaptiveStorageManager: AdaptiveStorageManagerProtocol = AdaptiveStorageManager(),
-        continueCourseProvider: ContinueCourseProviderProtocol = ContinueCourseProvider(
-            userCoursesAPI: UserCoursesAPI(),
-            coursesAPI: CoursesAPI(),
-            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
-        ),
         userAccountService: UserAccountServiceProtocol = UserAccountService(),
         sourcelessRouter: SourcelessRouter = SourcelessRouter(),
         analytics: Analytics = StepikAnalytics.shared
     ) {
-        self.userCoursesPersistenceService = userCoursesPersistenceService
-        self.coursesPersistenceService = coursesPersistenceService
+        self.lastCourseDataShortcutService = lastCourseDataShortcutService
         self.adaptiveStorageManager = adaptiveStorageManager
-        self.continueCourseProvider = continueCourseProvider
         self.userAccountService = userAccountService
         self.sourcelessRouter = sourcelessRouter
         self.analytics = analytics
@@ -54,7 +44,7 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         let shortcutType = shortcutItem.type
 
-        self.analytics.send(.shortcutItemTriggered(type: shortcutType))
+        self.analytics.send(.applicationShortcutItemTriggered(type: shortcutType))
 
         guard let shortcutIdentifier = ApplicationShortcutIdentifier(fullIdentifier: shortcutType) else {
             return false
@@ -89,22 +79,7 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
             )
         }
 
-        self.userCoursesPersistenceService.fetchAll().then { userCourses -> Promise<([UserCourse], [Course])> in
-            self.coursesPersistenceService
-                .fetch(ids: userCourses.map(\.courseID))
-                .map { (userCourses, $0.0) }
-        }.then { cachedUserCourses, cachedCourses -> Promise<Course?> in
-            let lastUserCourse = cachedUserCourses.filter { userCourse in
-                cachedCourses.contains(where: { $0.id == userCourse.courseID && $0.enrolled })
-            }.max(by: { $0.lastViewed < $1.lastViewed })
-
-            if let lastUserCourse = lastUserCourse,
-               let lastCourse = cachedCourses.first(where: { $0.id == lastUserCourse.courseID }) {
-                return .value(lastCourse)
-            }
-
-            return self.continueCourseProvider.fetchLastCourse()
-        }.done { lastCourse in
+        self.lastCourseDataShortcutService.fetchLastCourse().done { lastCourse in
             guard let lastCourse = lastCourse,
                   let currentNavigationController = self.sourcelessRouter.currentNavigation else {
                 throw Error.noLastCourse

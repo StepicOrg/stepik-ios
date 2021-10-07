@@ -1311,6 +1311,13 @@ IAPPurchaseBuyInWeb = "Купить в веб-версии";
 QuickActionContinueLearningErrorMessage = "Не удалось продолжить учиться";
 QuickActionContinueLearningErrorUnauthorizedMessage = "Войдите, чтобы продолжить учиться";
 
+/* SiriShortcuts */
+SiriShortcutContinueLearningTitle = "Продолжить учиться";
+SiriShortcutContinueLearningContentDescription = "С того же места, где остановились";
+SiriShortcutContinueLearningKeyword1 = "Продолжить";
+SiriShortcutContinueLearningKeyword2 = "Учиться";
+SiriShortcutContinueLearningKeyword3 = "Курс";
+
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Просмотр видео";
 StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";

@@ -1,3 +1,5 @@
+import Intents
+import IntentsUI
 import SnapKit
 import UIKit
 
@@ -25,9 +27,17 @@ extension ContinueLastStepView {
         let infoSpacing: CGFloat = 10.0
         let contentSpacing: CGFloat = 30.0
 
-        let continueButtonHeight: CGFloat = 42.0
+        let continueButtonHeight: CGFloat = 50
         let continueButtonWidthRatio: CGFloat = 0.65
     }
+}
+
+@available(iOS 12.0, *)
+struct SiriButtonContentConfiguration {
+    var shortcut: INShortcut?
+    weak var delegate: INUIAddVoiceShortcutButtonDelegate?
+
+    var isEmpty: Bool { self.shortcut == nil && self.delegate == nil }
 }
 
 final class ContinueLastStepView: UIView {
@@ -42,6 +52,19 @@ final class ContinueLastStepView: UIView {
 
     // Should use wrapped button cause we have stack view
     private lazy var continueButtonBlock = UIView()
+
+    @available(iOS 12.0, *)
+    private lazy var siriButton: INUIAddVoiceShortcutButton = {
+        let button = INUIAddVoiceShortcutButton(style: .white)
+        button.addTarget(self, action: #selector(self.siriButtonClicked), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var siriButtonContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
 
     // Contains [continue button] and [info]
     private lazy var contentStackView: UIStackView = {
@@ -141,6 +164,8 @@ final class ContinueLastStepView: UIView {
 
     var onContinueButtonClick: (() -> Void)?
 
+    var onSiriButtonClick: (() -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -155,12 +180,33 @@ final class ContinueLastStepView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if #available(iOS 13.0, *) {
+            self.siriButton.cornerRadius = self.siriButton.intrinsicContentSize.height / 2
+        }
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
         self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
             self.updateViewColor()
         }
+    }
+
+    @available(iOS 12.0, *)
+    func configureSiriButton(contentConfiguration: SiriButtonContentConfiguration?) {
+        guard let contentConfiguration = contentConfiguration, !contentConfiguration.isEmpty else {
+            self.siriButtonContainerView.isHidden = true
+            return
+        }
+
+        self.siriButtonContainerView.isHidden = false
+
+        self.siriButton.shortcut = contentConfiguration.shortcut
+        self.siriButton.delegate = contentConfiguration.delegate
     }
 
     private func updateViewColor() {
@@ -173,6 +219,11 @@ final class ContinueLastStepView: UIView {
     @objc
     private func continueButtonClicked() {
         self.onContinueButtonClick?()
+    }
+
+    @objc
+    private func siriButtonClicked() {
+        self.onSiriButtonClick?()
     }
 }
 
@@ -190,6 +241,10 @@ extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
 
         self.continueButtonBlock.addSubview(self.continueButton)
         self.contentStackView.addArrangedSubview(self.continueButtonBlock)
+        if #available(iOS 12.0, *) {
+            self.contentStackView.addArrangedSubview(self.siriButtonContainerView)
+            self.siriButtonContainerView.addSubview(self.siriButton)
+        }
         self.contentStackView.addArrangedSubview(self.infoStackView)
 
         self.addSubview(self.backgroundImageView)
@@ -243,6 +298,16 @@ extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
             make.center.equalToSuperview()
             make.top.bottom.equalToSuperview()
             make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
+        }
+
+        if #available(iOS 12.0, *) {
+            self.siriButton.snp.makeConstraints { make in
+                make.top.bottom.equalToSuperview()
+                make.leading.greaterThanOrEqualToSuperview()
+                make.trailing.lessThanOrEqualToSuperview()
+                make.centerX.equalToSuperview()
+                make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
+            }
         }
     }
 }

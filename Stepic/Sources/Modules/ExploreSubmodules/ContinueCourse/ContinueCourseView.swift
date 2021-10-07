@@ -3,6 +3,7 @@ import UIKit
 
 protocol ContinueCourseViewDelegate: AnyObject {
     func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView)
+    func continueCourseSiriButtonDidClick(_ continueCourseView: ContinueCourseView)
 }
 
 final class ContinueCourseView: UIView {
@@ -36,6 +37,11 @@ final class ContinueCourseView: UIView {
         self.lastStepView.coverImageURL = viewModel.coverImageURL
     }
 
+    @available(iOS 12.0, *)
+    func configureSiriButton(contentConfiguration: SiriButtonContentConfiguration?) {
+        self.lastStepView.configureSiriButton(contentConfiguration: contentConfiguration)
+    }
+
     func showLoading() {
         self.skeleton.viewBuilder = {
             ContinueCourseSkeletonView()
@@ -54,7 +60,15 @@ extension ContinueCourseView: ProgrammaticallyInitializableViewProtocol {
             guard let strongSelf = self else {
                 return
             }
+
             strongSelf.delegate?.continueCourseContinueButtonDidClick(strongSelf)
+        }
+        self.lastStepView.onSiriButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.continueCourseSiriButtonDidClick(strongSelf)
         }
     }
 

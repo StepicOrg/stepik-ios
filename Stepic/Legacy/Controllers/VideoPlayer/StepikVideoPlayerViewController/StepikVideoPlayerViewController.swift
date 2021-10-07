@@ -250,6 +250,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var applicationDidEnterBackground = false
     private var applicationDidComeFromBackground = false
+    private var applicationDidEnterBackgroundWithPausedPlaybackState = false
 
     override var prefersStatusBarHidden: Bool { true }
 
@@ -843,6 +844,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func handleApplicationDidEnterBackground() {
         self.applicationDidComeFromBackground = false
         self.applicationDidEnterBackground = true
+        self.applicationDidEnterBackgroundWithPausedPlaybackState = self.player.playbackState == .paused
     }
 
     @objc
@@ -1064,9 +1066,15 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             self.applicationDidComeFromBackground = false
         }
 
-        let shouldPlayFromCurrentTime = isPlayerFirstTimeReady
+        let isPlayerReadyPlayFromCurrentTime = isPlayerFirstTimeReady
             || isPlayerReadyAfterVideoQualityChanged
             || isPlayerReadyAfterDidComeFromBackgroundAtDoubleFastVideoRate
+        let shouldPlayFromCurrentTime = !self.applicationDidEnterBackgroundWithPausedPlaybackState
+            && isPlayerReadyPlayFromCurrentTime
+
+        if self.applicationDidEnterBackgroundWithPausedPlaybackState {
+            self.applicationDidEnterBackgroundWithPausedPlaybackState = false
+        }
 
         guard shouldPlayFromCurrentTime else {
             return
@@ -1103,6 +1111,10 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             OnlyOneActivePlayerWatcher.shared.setPlayerPlaying(player)
         case .stopped:
             break
+        }
+
+        if self.applicationDidEnterBackground && !self.applicationDidComeFromBackground {
+            self.applicationDidEnterBackgroundWithPausedPlaybackState = player.playbackState == .paused
         }
 
         print("StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)")

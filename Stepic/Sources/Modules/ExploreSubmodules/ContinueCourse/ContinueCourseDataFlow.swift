@@ -34,6 +34,26 @@ enum ContinueCourse {
         }
     }
 
+    /// Check for Siri button
+    enum SiriButtonAvailabilityCheck {
+        struct Request {}
+
+        struct Response {
+            let shouldShowButton: Bool
+            var userActivity: NSUserActivity?
+        }
+
+        struct ViewModel {
+            let shouldShowButton: Bool
+            let userActivity: NSUserActivity?
+        }
+    }
+
+    /// Store did click in user defaults
+    enum SiriButtonAction {
+        struct Request {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {
