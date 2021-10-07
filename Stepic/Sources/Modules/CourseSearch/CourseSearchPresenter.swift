@@ -109,7 +109,9 @@ final class CourseSearchPresenter: CourseSearchPresenterProtocol {
     }
 
     func presentLesson(response: CourseSearch.LessonPresentation.Response) {
-        self.viewController?.displayLesson(viewModel: .init(lessonID: response.lessonID, stepID: response.stepID))
+        self.viewController?.displayLesson(
+            viewModel: .init(unitID: response.unitID, lessonID: response.lessonID, stepID: response.stepID)
+        )
     }
 
     func presentLoadingState(response: CourseSearch.LoadingStatePresentation.Response) {

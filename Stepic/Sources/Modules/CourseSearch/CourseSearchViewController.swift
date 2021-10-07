@@ -215,6 +215,12 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
     }
 
     func displayLesson(viewModel: CourseSearch.LessonPresentation.ViewModel) {
+        let initialContext: LessonDataFlow.Context = {
+            if let unitID = viewModel.unitID {
+                return .unit(id: unitID)
+            }
+            return .lesson(id: viewModel.lessonID)
+        }()
         let startStep: LessonDataFlow.StartStep = {
             if let stepID = viewModel.stepID {
                 return .id(stepID)
@@ -223,7 +229,7 @@ extension CourseSearchViewController: CourseSearchViewControllerProtocol {
         }()
 
         let assembly = LessonAssembly(
-            initialContext: .lesson(id: viewModel.lessonID),
+            initialContext: initialContext,
             startStep: startStep,
             moduleOutput: nil
         )
