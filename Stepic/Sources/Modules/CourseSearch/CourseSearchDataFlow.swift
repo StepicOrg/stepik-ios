@@ -139,11 +139,13 @@ enum CourseSearch {
     /// Show lesson
     enum LessonPresentation {
         struct Response {
+            let unitID: Unit.IdType?
             let lessonID: Lesson.IdType
             let stepID: Step.IdType?
         }
 
         struct ViewModel {
+            let unitID: Unit.IdType?
             let lessonID: Lesson.IdType
             let stepID: Step.IdType?
         }
