@@ -128,7 +128,7 @@ class LoginUITests: XCTestCase {
         if app.collectionViews.children(matching: .cell).element(boundBy: 3).exists {
             app.tap()
         }
-
+        /*
         app.webViews.webViews.webViews.staticTexts["..."].waitForExistence(timeout: 5)
         if app.webViews.webViews.webViews.staticTexts["..."].exists {
             app.webViews.webViews.webViews.staticTexts["..."].tap()
@@ -136,17 +136,18 @@ class LoginUITests: XCTestCase {
             app.webViews.webViews.webViews.staticTexts["Accept All"].tap()
         }
         app.webViews.webViews.webViews.staticTexts["Русский"].tap()
+ */
         let textField = app.webViews.webViews.webViews.textFields.element(boundBy: 0)
         textField.tap()
         textField.typeText("ios_cmvthcs_autotest@tfbnw.net")
         app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0).tap()
         app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0).typeText("Test999Test")
 
-        app.webViews.webViews.webViews.buttons["Войти"].tap()
+        app.webViews.webViews.webViews.buttons.element(boundBy: 0).tap()
         sleep(3)
-        if app.webViews.webViews.webViews.buttons["Продолжить"].exists {
-            app.webViews.webViews.webViews.buttons["Продолжить"].tap()
-        }
+        
+            app.webViews.webViews.webViews.buttons.element(boundBy: 0).tap()
+        
 
         if !Common.isUserLoggedIn(app: app) {
             XCTFail("Login with facebook account failed")
