@@ -206,7 +206,7 @@ PODS:
     - Pageboy (~> 3.6.0)
   - TTTAttributedLabel (2.0.0)
   - TUSafariActivity (1.0.4)
-  - URITemplate (3.0.0)
+  - URITemplate (3.0.1)
   - VK-ios-sdk (1.6.2)
   - YandexMobileMetrica/Dynamic (3.17.0):
     - YandexMobileMetrica/Dynamic/Core (= 3.17.0)
@@ -388,7 +388,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
-  Highlightr: 9ff3790aef1a6c17a0181fa9f5b04f3f94def75a
+  Highlightr: 9fbc57afd1921d274d5df911caabf91eaf25f0f3
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
   Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
@@ -416,7 +416,7 @@ SPEC CHECKSUMS:
   Tabman: d8d6ab0b483c7db375a71ac227d3ef791b56a049
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
-  URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
+  URITemplate: 5f5a79f3e384884102c4e6b3325d159c20a8035a
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
