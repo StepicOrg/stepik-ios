@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoPurchaseModalInteractorProtocol {
-    func doSomeAction(request: CourseInfoPurchaseModal.SomeAction.Request)
+    func doModalLoad(request: CourseInfoPurchaseModal.ModalLoad.Request)
 }
 
 final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractorProtocol {
@@ -19,7 +19,7 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         self.provider = provider
     }
 
-    func doSomeAction(request: CourseInfoPurchaseModal.SomeAction.Request) {}
+    func doModalLoad(request: CourseInfoPurchaseModal.ModalLoad.Request) {}
 
     enum Error: Swift.Error {
         case something

@@ -1,11 +1,18 @@
 import Foundation
 
 enum CourseInfoPurchaseModal {
-    enum SomeAction {
+    enum ModalLoad {
         struct Request {}
 
         struct Response {}
 
-        struct ViewModel {}
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    enum ViewControllerState {
+        case loading
+        case result(data: CourseInfoPurchaseModalViewModel)
     }
 }

@@ -592,6 +592,7 @@
 		2C47914626BBD17400920ED2 /* InstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47914526BBD17400920ED2 /* InstructionType.swift */; };
 		2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
 		2C47E6B72608EB8900732642 /* CatalogBlockItemModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47E6B62608EB8900732642 /* CatalogBlockItemModuleFactory.swift */; };
+		2C4841262715ED760091FE20 /* CourseInfoPurchaseModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4841252715ED760091FE20 /* CourseInfoPurchaseModalViewModel.swift */; };
 		2C48BA0725727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA0625727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift */; };
 		2C48BA0F25727885009103B2 /* AuthorsCourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA0E25727885009103B2 /* AuthorsCourseListCollectionViewDelegate.swift */; };
 		2C48BA1F25727CC4009103B2 /* AuthorsCourseListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48BA1E25727CC4009103B2 /* AuthorsCourseListCollectionViewCell.swift */; };
@@ -2564,6 +2565,7 @@
 		2C47914526BBD17400920ED2 /* InstructionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionType.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
 		2C47E6B62608EB8900732642 /* CatalogBlockItemModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockItemModuleFactory.swift; sourceTree = "<group>"; };
+		2C4841252715ED760091FE20 /* CourseInfoPurchaseModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalViewModel.swift; sourceTree = "<group>"; };
 		2C48BA0625727822009103B2 /* AuthorsCourseListCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		2C48BA0E25727885009103B2 /* AuthorsCourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		2C48BA1E25727CC4009103B2 /* AuthorsCourseListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -10008,6 +10010,7 @@
 				758AD88FFDE3FCD437D26C47 /* CourseInfoPurchaseModalProvider.swift */,
 				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
 				D92F464AFB76FCA89A3B4CE1 /* CourseInfoPurchaseModalViewController.swift */,
+				2C4841252715ED760091FE20 /* CourseInfoPurchaseModalViewModel.swift */,
 				5C571739346FF8C16ABA467D /* InputOutput */,
 			);
 			path = CourseInfoPurchaseModal;
@@ -12064,6 +12067,7 @@
 				2CEBEBF6242F8FB200DBFDF0 /* StepikRequestRetrier.swift in Sources */,
 				62E98D7DEA0DB85F22C353CC /* NewFreeAnswerQuizViewController.swift in Sources */,
 				2C223A1524A0CC91002E4F02 /* IAPServiceDelegate.swift in Sources */,
+				2C4841262715ED760091FE20 /* CourseInfoPurchaseModalViewModel.swift in Sources */,
 				62E98377FC4206342B5DEAD9 /* NewFreeAnswerQuizViewModel.swift in Sources */,
 				62E9867E94A2DD00EEE119E0 /* NewMatchingQuizAssembly.swift in Sources */,
 				62E9894A942372F5B1786756 /* NewMatchingQuizDataFlow.swift in Sources */,
