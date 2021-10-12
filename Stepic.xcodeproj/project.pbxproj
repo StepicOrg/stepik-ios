@@ -1088,6 +1088,8 @@
 		2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */; };
 		2CDC9EFA24E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC9EF924E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift */; };
 		2CDCDD19268B5CDE002A4889 /* CourseInfoTabReviewsSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCDD18268B5CDE002A4889 /* CourseInfoTabReviewsSummaryView.swift */; };
+		2CDD3FDC2715F6D30029AF40 /* CoursesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDD3FDB2715F6D30029AF40 /* CoursesRepository.swift */; };
+		2CDD3FDE2715F86D0029AF40 /* DataFetchPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDD3FDD2715F86D0029AF40 /* DataFetchPolicy.swift */; };
 		2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE82E1221D5CCB00C41887 /* highlight.js */; };
 		2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */; };
 		2CE05969268A1DCB00369E59 /* CourseRevenueTabPurchasesCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE05968268A1DCB00369E59 /* CourseRevenueTabPurchasesCellSkeletonView.swift */; };
@@ -3090,6 +3092,8 @@
 		2CDC9EF924E4FD0D00916BAE /* CourseInfoTryForFreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTryForFreeButton.swift; sourceTree = "<group>"; };
 		2CDC9EFB24E516F800916BAE /* Model_course_preview_lesson_id_v63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_preview_lesson_id_v63.xcdatamodel; sourceTree = "<group>"; };
 		2CDCDD18268B5CDE002A4889 /* CourseInfoTabReviewsSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSummaryView.swift; sourceTree = "<group>"; };
+		2CDD3FDB2715F6D30029AF40 /* CoursesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesRepository.swift; sourceTree = "<group>"; };
+		2CDD3FDD2715F86D0029AF40 /* DataFetchPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchPolicy.swift; sourceTree = "<group>"; };
 		2CDE82E1221D5CCB00C41887 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsCenterDelegate.swift; sourceTree = "<group>"; };
 		2CE05968268A1DCB00369E59 /* CourseRevenueTabPurchasesCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabPurchasesCellSkeletonView.swift; sourceTree = "<group>"; };
@@ -4455,6 +4459,7 @@
 				2C1966B026E7CBDF000D5B06 /* AnnouncementsRepository.swift */,
 				2C26BF09240810A3000EE23C /* AttemptsRepository.swift */,
 				2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */,
+				2CDD3FDB2715F6D30029AF40 /* CoursesRepository.swift */,
 				2C98424626DE78EA0098E36B /* SearchResultsRepository.swift */,
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
@@ -6555,6 +6560,7 @@
 			isa = PBXGroup;
 			children = (
 				08484EE4211AF42E0006266F /* CachedValue.swift */,
+				2CDD3FDD2715F86D0029AF40 /* DataFetchPolicy.swift */,
 				62E98D0214499A3812DE45C3 /* DataSourceType.swift */,
 				2C9BBE422490462C00FFED49 /* Debouncer.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
@@ -11459,6 +11465,7 @@
 				2C313E5526AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift in Sources */,
 				084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */,
 				62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */,
+				2CDD3FDE2715F86D0029AF40 /* DataFetchPolicy.swift in Sources */,
 				62E98DD20F2FC4D7DA37DF9A /* AlamofireDefaultSessionManager.swift in Sources */,
 				2CB11B1526135D8C001E400D /* CourseInfoTabSyllabusSectionExamActionButton.swift in Sources */,
 				08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */,
@@ -12178,6 +12185,7 @@
 				62E98373328574F3493D6AE0 /* WriteCommentViewModel.swift in Sources */,
 				62E9829D238FEEDA8DC159CA /* WriteCommentOutputProtocol.swift in Sources */,
 				2C98423F26DE58A80098E36B /* SearchQueryResult.swift in Sources */,
+				2CDD3FDC2715F6D30029AF40 /* CoursesRepository.swift in Sources */,
 				62E980B8758DEF7D06A56FB5 /* WriteCommentSolutionControl.swift in Sources */,
 				62E980D610A476A99FF7CAF4 /* WriteCourseReviewAssembly.swift in Sources */,
 				62E9852E9E2178B0917B73F6 /* WriteCourseReviewDataFlow.swift in Sources */,

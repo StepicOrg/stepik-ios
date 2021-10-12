@@ -11,10 +11,14 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
     private let presenter: CourseInfoPurchaseModalPresenterProtocol
     private let provider: CourseInfoPurchaseModalProviderProtocol
 
+    private let courseID: Course.IdType
+
     init(
+        courseID: Course.IdType,
         presenter: CourseInfoPurchaseModalPresenterProtocol,
         provider: CourseInfoPurchaseModalProviderProtocol
     ) {
+        self.courseID = courseID
         self.presenter = presenter
         self.provider = provider
     }
