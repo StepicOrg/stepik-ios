@@ -171,10 +171,16 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
                 let courseUnitsIDs = Set(resultSections.flatMap(\.unitsArray))
                 resultUnits = resultUnits.filter { courseUnitsIDs.contains($0.id) }
 
-                let lessonsMap = Dictionary(uniqueKeysWithValues: resultLessons.map({ ($0.id, $0) }))
-                let unitsMap = Dictionary(uniqueKeysWithValues: resultUnits.map({ ($0.id, $0) }))
-                let unitsProgressesMap = Dictionary(uniqueKeysWithValues: resultUnitsProgresses.map({ ($0.id, $0) }))
-                let sectionsMap = Dictionary(uniqueKeysWithValues: resultSections.map({ ($0.id, $0) }))
+                let lessonsMap = Dictionary(resultLessons.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
+                let unitsMap = Dictionary(resultUnits.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
+                let unitsProgressesMap = Dictionary(
+                    resultUnitsProgresses.map({ ($0.id, $0) }),
+                    uniquingKeysWith: { first, _ in first }
+                )
+                let sectionsMap = Dictionary(
+                    resultSections.map({ ($0.id, $0) }),
+                    uniquingKeysWith: { first, _ in first }
+                )
 
                 CoreDataHelper.shared.context.performChanges {
                     for searchResult in searchResults {
@@ -278,7 +284,7 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
                     return seal(searchResults)
                 }
 
-                let stepsMap = Dictionary(uniqueKeysWithValues: steps.map({ ($0.id, $0) }))
+                let stepsMap = Dictionary(steps.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
 
                 CoreDataHelper.shared.context.performChanges {
                     for searchResult in searchResults {
@@ -319,7 +325,7 @@ final class CourseSearchProvider: CourseSearchProviderProtocol {
                     return seal(searchResults)
                 }
 
-                let usersMap = Dictionary(uniqueKeysWithValues: users.map({ ($0.id, $0) }))
+                let usersMap = Dictionary(users.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
 
                 CoreDataHelper.shared.context.performChanges {
                     for searchResult in searchResults {
