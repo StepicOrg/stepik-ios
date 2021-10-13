@@ -145,9 +145,8 @@ class LoginUITests: XCTestCase {
 
         app.webViews.webViews.webViews.buttons.element(boundBy: 0).tap()
         sleep(3)
-        
-            app.webViews.webViews.webViews.buttons.element(boundBy: 0).tap()
-        
+
+        app.webViews.webViews.webViews.buttons.element(boundBy: 0).tap()
 
         if !Common.isUserLoggedIn(app: app) {
             XCTFail("Login with facebook account failed")

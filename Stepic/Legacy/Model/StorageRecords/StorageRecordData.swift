@@ -95,3 +95,27 @@ final class PersonalOfferStorageRecordData: StorageRecordData {
         case promoStories = "promo_stories"
     }
 }
+
+// MARK: Wishlist
+
+final class WishlistStorageRecordData: StorageRecordData {
+    var coursesIDs: [Course.IdType]
+
+    var dictValue: [String: Any] {
+        [
+            JSONKey.courses.rawValue: self.coursesIDs
+        ]
+    }
+
+    init(coursesIDs: [Course.IdType]) {
+        self.coursesIDs = coursesIDs
+    }
+
+    init(json: JSON) {
+        self.coursesIDs = json[JSONKey.courses.rawValue].arrayValue.map(\.intValue)
+    }
+
+    enum JSONKey: String {
+        case courses
+    }
+}

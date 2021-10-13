@@ -9,9 +9,15 @@ protocol BaseQuizViewControllerProtocol: AnyObject {
 final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: BaseQuizInteractorProtocol
 
+    private let analytics: Analytics
+
+    private let withHorizontalInsets: Bool
+
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     lazy var baseQuizView = self.view as? BaseQuizView
+
+    private lazy var streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
 
     private var quizAssembly: QuizAssembly
 
@@ -19,7 +25,6 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
     private var currentReply: Reply?
     private var shouldRetryWithNewAttempt = true
-    private var stepURL: URL?
 
     private var state: BaseQuiz.ViewControllerState {
         didSet {
@@ -30,10 +35,14 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
     init(
         interactor: BaseQuizInteractorProtocol,
         quizAssembly: QuizAssembly,
+        analytics: Analytics,
+        withHorizontalInsets: Bool,
         initialState: BaseQuiz.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.quizAssembly = quizAssembly
+        self.analytics = analytics
+        self.withHorizontalInsets = withHorizontalInsets
         self.state = initialState
 
         super.init(nibName: nil, bundle: nil)
@@ -45,7 +54,10 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
     }
 
     override func loadView() {
-        self.view = BaseQuizView(frame: UIScreen.main.bounds)
+        self.view = BaseQuizView(
+            frame: UIScreen.main.bounds,
+            withHorizontalInsets: self.withHorizontalInsets
+        )
     }
 
     override func viewDidLoad() {
@@ -108,16 +120,17 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
             return
         }
 
-        self.stepURL = data.stepURL
         self.currentReply = data.reply
 
+        self.baseQuizView?.isTopSeparatorHidden = data.isTopSeparatorHidden
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
-        self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
         self.baseQuizView?.isNextStepAvailable = data.canNavigateToNextStep
         self.baseQuizView?.isRetryAvailable = data.canRetry
         self.baseQuizView?.isDiscountPolicyAvailable = data.isDiscountingPolicyVisible
         self.baseQuizView?.discountPolicyTitle = data.discountingPolicyTitle
+        self.baseQuizView?.isReviewAvailable = data.shouldPassReview
+        self.baseQuizView?.isReviewControlsAvailable = data.isReviewControlsAvailable
 
         if let quizStatus = data.quizStatus {
             self.baseQuizView?.showFeedback(
@@ -137,9 +150,16 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.shouldRetryWithNewAttempt = data.retryWithNewAttempt
 
+        if data.isTitleHidden,
+           let titlePresentableView = baseQuizView?.childQuizView as? TitlePresentable {
+            titlePresentableView.title = nil
+        }
+
         self.baseQuizView?.endLoading()
     }
 }
+
+// MARK: - BaseQuizViewController: BaseQuizViewControllerProtocol -
 
 extension BaseQuizViewController: BaseQuizViewControllerProtocol {
     func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel) {
@@ -151,11 +171,12 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
     }
 
     func displayStreakAlert(viewModel: BaseQuiz.StreakAlertPresentation.ViewModel) {
-        let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
-        streaksAlertPresentationManager.controller = self
-        streaksAlertPresentationManager.suggestStreak(streak: viewModel.streak)
+        self.streaksAlertPresentationManager.controller = self
+        self.streaksAlertPresentationManager.suggestStreak(streak: viewModel.streak)
     }
 }
+
+// MARK: - BaseQuizViewController: BaseQuizViewDelegate -
 
 extension BaseQuizViewController: BaseQuizViewDelegate {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView) {
@@ -166,18 +187,19 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
         self.interactor.doNextStepNavigationRequest(request: .init())
     }
 
-    func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {
-        guard let stepURL = self.stepURL else {
-            return
-        }
+    func baseQuizViewDidRequestReviewCreateSession(_ view: BaseQuizView) {
+        self.analytics.send(.reviewSendCurrentSubmissionClicked)
+        self.interactor.doReviewCreateSession(request: .init())
+    }
 
-        WebControllerManager.shared.presentWebControllerWithURL(
-            stepURL,
-            inController: self,
-            withKey: .peerReview,
-            allowsSafari: true,
-            backButtonStyle: .done
-        )
+    func baseQuizViewDidRequestReviewSolveAgain(_ view: BaseQuizView) {
+        self.analytics.send(.reviewSolveAgainClicked)
+        self.submitCurrentReply()
+    }
+
+    func baseQuizViewDidRequestReviewSelectDifferentSubmission(_ view: BaseQuizView) {
+        self.analytics.send(.reviewSelectDifferentSubmissionClicked)
+        self.interactor.doReviewSelectDifferentSubmission(request: .init())
     }
 
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL) {
@@ -225,6 +247,8 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
     }
 }
 
+// MARK: - BaseQuizViewController: QuizOutputProtocol -
+
 extension BaseQuizViewController: QuizOutputProtocol {
     func update(reply: Reply) {
         self.currentReply = reply
@@ -236,6 +260,8 @@ extension BaseQuizViewController: QuizOutputProtocol {
         self.submitCurrentReply()
     }
 }
+
+// MARK: - StepikPlaceholderControllerContainer.PlaceholderState -
 
 private extension StepikPlaceholderControllerContainer.PlaceholderState {
     static let connectionErrorPollQuiz = StepikPlaceholderControllerContainer.PlaceholderState(

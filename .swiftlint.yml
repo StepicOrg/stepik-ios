@@ -9,7 +9,6 @@ analyzer_rules:
 
 only_rules:
   - anyobject_protocol
-  - array_init
   - attributes
   - block_based_kvo
   - class_delegate_protocol
@@ -31,9 +30,11 @@ only_rules:
   - deployment_target
   - discarded_notification_center_observer
   - discouraged_direct_init
+  - discouraged_none_name
   - discouraged_object_literal
   - duplicate_enum_cases
   - duplicate_imports
+  - duplicated_key_in_dictionary_literal
   - dynamic_inline
   - empty_collection_literal
   - empty_count
@@ -157,9 +158,6 @@ only_rules:
 anyobject_protocol:
   severity: error
 
-array_init:
-  severity: error
-
 attributes:
   severity: error
 
@@ -218,6 +216,9 @@ discarded_notification_center_observer:
 discouraged_direct_init:
   severity: error
 
+discouraged_none_name:
+  severity: warning
+
 discouraged_object_literal:
   severity: error
 
@@ -225,6 +226,9 @@ duplicate_enum_cases:
   severity: error
 
 duplicate_imports:
+  severity: error
+
+duplicated_key_in_dictionary_literal:
   severity: error
 
 dynamic_inline:

@@ -1,107 +1,53 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol UserCoursesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [UserCourse.IdType]) -> Guarantee<[UserCourse]>
     func fetch(courseID: Course.IdType) -> Guarantee<[UserCourse]>
+    func fetchCanBeReviewed() -> Guarantee<[UserCourse]>
     func fetchAll() -> Guarantee<[UserCourse]>
 
     func deleteAll() -> Promise<Void>
 }
 
-final class UserCoursesPersistenceService: UserCoursesPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
-
-    init(managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context) {
-        self.managedObjectContext = managedObjectContext
-    }
-
-    func fetch(ids: [UserCourse.IdType]) -> Guarantee<[UserCourse]> {
-        Guarantee { seal in
-            let request: NSFetchRequest<UserCourse> = UserCourse.fetchRequest
-
-            let idSubpredicates = ids.map { id in
-                NSPredicate(format: "%K == %@", #keyPath(UserCourse.managedId), NSNumber(value: id))
-            }
-            let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
-
-            request.predicate = compoundPredicate
-            request.sortDescriptors = UserCourse.defaultSortDescriptors
-
-            self.managedObjectContext.performAndWait {
-                do {
-                    let userCourses = try self.managedObjectContext.fetch(request)
-                    seal(userCourses)
-                } catch {
-                    print("UserCoursesPersistenceService :: failed fetch ids = \(ids)")
-                    seal([])
-                }
-            }
-        }
-    }
-
+final class UserCoursesPersistenceService: BasePersistenceService<UserCourse>, UserCoursesPersistenceServiceProtocol {
     func fetch(courseID: Course.IdType) -> Guarantee<[UserCourse]> {
         Guarantee { seal in
-            let request: NSFetchRequest<UserCourse> = UserCourse.fetchRequest
+            let request = UserCourse.sortedFetchRequest
             request.predicate = NSPredicate(
                 format: "%K == %@",
                 #keyPath(UserCourse.managedCourseId),
                 NSNumber(value: courseID)
             )
-            request.sortDescriptors = UserCourse.defaultSortDescriptors
+            request.returnsObjectsAsFaults = false
 
-            self.managedObjectContext.performAndWait {
-                do {
-                    let userCourses = try self.managedObjectContext.fetch(request)
-                    seal(userCourses)
-                } catch {
-                    print("UserCoursesPersistenceService :: failed fetch by course id = \(courseID)")
-                    seal([])
-                }
+            do {
+                let userCourses = try self.managedObjectContext.fetch(request)
+                seal(userCourses)
+            } catch {
+                print("UserCoursesPersistenceService :: failed fetch by course id = \(courseID)")
+                seal([])
             }
         }
     }
 
-    func fetchAll() -> Guarantee<[UserCourse]> {
+    func fetchCanBeReviewed() -> Guarantee<[UserCourse]> {
         Guarantee { seal in
-            let request: NSFetchRequest<UserCourse> = UserCourse.fetchRequest
-            request.sortDescriptors = UserCourse.defaultSortDescriptors
+            let request = UserCourse.sortedFetchRequest
+            request.predicate = NSPredicate(
+                format: "%K == %@",
+                #keyPath(UserCourse.managedCanBeReviewed),
+                NSNumber(value: true)
+            )
+            request.returnsObjectsAsFaults = false
 
-            self.managedObjectContext.performAndWait {
-                do {
-                    let userCourses = try self.managedObjectContext.fetch(request)
-                    seal(userCourses)
-                } catch {
-                    print("UserCoursesPersistenceService :: failed fetch all")
-                    seal([])
-                }
+            do {
+                let userCourses = try self.managedObjectContext.fetch(request)
+                seal(userCourses)
+            } catch {
+                print("UserCoursesPersistenceService :: failed fetch canBeReviewed with error = \(error)")
+                seal([])
             }
         }
-    }
-
-    func deleteAll() -> Promise<Void> {
-        Promise { seal in
-            let request: NSFetchRequest<UserCourse> = UserCourse.fetchRequest
-            self.managedObjectContext.performAndWait {
-                do {
-                    let userCourses = try self.managedObjectContext.fetch(request)
-                    for userCourse in userCourses {
-                        self.managedObjectContext.delete(userCourse)
-                    }
-
-                    try? self.managedObjectContext.save()
-
-                    seal.fulfill(())
-                } catch {
-                    print("UserCoursesPersistenceService :: failed delete all user courses with error = \(error)")
-                    seal.reject(Error.deleteFailed)
-                }
-            }
-        }
-    }
-
-    enum Error: Swift.Error {
-        case deleteFailed
     }
 }

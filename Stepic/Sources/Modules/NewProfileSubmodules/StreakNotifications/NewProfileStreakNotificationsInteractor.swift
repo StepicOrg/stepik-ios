@@ -47,6 +47,12 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
             name: .notificationsRegistrationServiceDidUpdatePermissionStatus,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.onStreaksAlertPresentationManagerDidChangeStreakNotifications),
+            name: .streaksAlertPresentationManagerDidChangeStreakNotifications,
+            object: nil
+        )
 
         self.checkPermissionStatus()
     }
@@ -86,14 +92,24 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
 
     // MARK: Private API
 
-    private func presentStreakNotifications(isStreakNotificationsEnabled: Bool? = nil) {
-        let isOn = isStreakNotificationsEnabled ?? self.streakNotificationsStorageManager.isStreakNotificationsEnabled
-        self.presenter.presentStreakNotifications(
-            response: .init(
-                isStreakNotificationsEnabled: isOn,
-                streaksNotificationsStartHour: self.streakNotificationsStorageManager.streakNotificationsStartHourUTC
+    private func presentStreakNotifications(permissionStatus: NotificationPermissionStatus? = nil) {
+        firstly { () -> Guarantee<NotificationPermissionStatus> in
+            if let permissionStatus = permissionStatus {
+                return .value(permissionStatus)
+            }
+            return NotificationPermissionStatus.current
+        }.done { permissionStatus in
+            let isOn = permissionStatus.isRegistered
+                && self.streakNotificationsStorageManager.isStreakNotificationsEnabled
+            let startHour = self.streakNotificationsStorageManager.streakNotificationsStartHourUTC
+
+            self.presenter.presentStreakNotifications(
+                response: .init(
+                    isStreakNotificationsEnabled: isOn,
+                    streaksNotificationsStartHour: startHour
+                )
             )
-        )
+        }
     }
 
     private func setStreakNotificationsEnabled(_ enabled: Bool) {
@@ -121,12 +137,14 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
 
     @objc
     private func onPermissionStatusUpdate(_ notification: Foundation.Notification) {
-        guard let permissionStatus = notification.object as? NotificationPermissionStatus else {
-            return
+        if let permissionStatus = notification.object as? NotificationPermissionStatus {
+            self.presentStreakNotifications(permissionStatus: permissionStatus)
         }
+    }
 
-        let isOn = self.streakNotificationsStorageManager.isStreakNotificationsEnabled && permissionStatus.isRegistered
-        self.presentStreakNotifications(isStreakNotificationsEnabled: isOn)
+    @objc
+    private func onStreaksAlertPresentationManagerDidChangeStreakNotifications() {
+        self.doStreakNotificationsLoad(request: .init())
     }
 
     private func checkPermissionStatus() {

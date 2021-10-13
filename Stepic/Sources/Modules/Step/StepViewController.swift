@@ -37,6 +37,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: StepInteractorProtocol
+    private let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     private var state: StepDataFlow.ViewControllerState {
         didSet {
@@ -57,9 +58,14 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
     private var arQuickLookPreviewDataSource: StepARQuickLookPreviewDataSource?
 
-    init(interactor: StepInteractorProtocol) {
+    init(
+        interactor: StepInteractorProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
+        initialState: StepDataFlow.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
-        self.state = .loading
+        self.networkReachabilityService = networkReachabilityService
+        self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -203,11 +209,23 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
                 return nil
             }
 
-            let assembly = BaseQuizAssembly(
-                step: stepViewModel.step,
-                hasNextStep: self.canNavigateToNextStep,
-                output: self
-            )
+            let assembly: Assembly
+
+            if stepViewModel.hasReview, let instructionType = stepViewModel.instructionType {
+                assembly = StepQuizReviewAssembly(
+                    step: stepViewModel.step,
+                    instructionType: instructionType,
+                    isTeacher: stepViewModel.isTeacher,
+                    hasNextStep: self.canNavigateToNextStep,
+                    output: nil
+                )
+            } else {
+                assembly = BaseQuizAssembly(
+                    step: stepViewModel.step,
+                    hasNextStep: self.canNavigateToNextStep,
+                    output: self
+                )
+            }
 
             return assembly.makeModule()
         }()
@@ -497,8 +515,7 @@ extension StepViewController: StepViewDelegate {
             return
         }
 
-        let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
-            || ConnectionHelper.shared.reachability.isReachableViaWWAN()
+        let isVideoPlayingReachable = self.networkReachabilityService.isReachable
         let isVideoCached = video.state == .cached
 
         if !isVideoCached && !isVideoPlayingReachable {
@@ -523,7 +540,7 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepDoneRequest(request: .init())
     }
 
-    func handleSubmissionEvaluated() {
+    func handleSubmissionEvaluated(submission: Submission) {
         self.interactor.doSolutionsButtonUpdate(request: .init())
     }
 
@@ -532,15 +549,30 @@ extension StepViewController: BaseQuizOutputProtocol {
     }
 }
 
+// MARK: - StepViewController: StepQuizReviewOutputProtocol -
+
+extension StepViewController: StepQuizReviewOutputProtocol {}
+
 // MARK: - StepViewController: StepikVideoPlayerViewControllerDelegate -
 
 extension StepViewController: StepikVideoPlayerViewControllerDelegate {
-    func stepikVideoPlayerViewControllerDidRequestAutoplay(_ viewController: StepikVideoPlayerViewController) {
-        viewController.stopPlayback()
+    func stepikVideoPlayerViewControllerDidRequestPlayNext(_ viewController: StepikVideoPlayerViewController) {
+        self.handleVideoPlayerDidRequestAutoplay(viewController, usingDirection: .forward)
+    }
+
+    func stepikVideoPlayerViewControllerDidRequestPlayPrevious(_ viewController: StepikVideoPlayerViewController) {
+        self.handleVideoPlayerDidRequestAutoplay(viewController, usingDirection: .backward)
+    }
+
+    private func handleVideoPlayerDidRequestAutoplay(
+        _ videoPlayerViewController: StepikVideoPlayerViewController,
+        usingDirection direction: AutoplayNavigationDirection
+    ) {
+        videoPlayerViewController.stopPlayback()
         self.dismiss(
             animated: true,
             completion: { [weak self] in
-                self?.interactor.doAutoplayNavigationRequest(request: .init())
+                self?.interactor.doAutoplayNavigationRequest(request: .init(direction: direction))
             }
         )
     }

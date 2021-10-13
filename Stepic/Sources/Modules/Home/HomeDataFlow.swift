@@ -7,6 +7,7 @@ enum Home {
         case streakActivity
         case continueCourse
         case enrolledCourses
+        case reviewsAndWishlist
         case visitedCourses
         case popularCourses
 

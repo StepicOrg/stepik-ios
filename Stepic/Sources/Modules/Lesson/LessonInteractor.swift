@@ -111,7 +111,7 @@ final class LessonInteractor: LessonInteractorProtocol {
                 LastStepGlobalContext.context.unitID = unitID
             }
 
-            let startStep = startStep ?? .index(0)
+            let startStep = startStep ?? .first
             self.lastLoadState = (context, startStep)
 
             if self.didLoadFromCache {
@@ -140,6 +140,8 @@ final class LessonInteractor: LessonInteractorProtocol {
 
                     seal.fulfill(())
                 }.catch { _ in
+                    self.didLoadFromCache = true
+
                     self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
                         seal.fulfill(())
                     }.catch { error in
@@ -212,6 +214,8 @@ final class LessonInteractor: LessonInteractorProtocol {
                     return value
                 case .id(let value):
                     return lesson.stepsArray.firstIndex(of: value) ?? 0
+                case .last:
+                    return max(0, lesson.stepsArray.count - 1)
                 }
             }()
 
@@ -237,8 +241,10 @@ final class LessonInteractor: LessonInteractorProtocol {
                 if self.currentData != data {
                     self.presenter.presentLesson(response: .init(state: .success(data)))
                 }
-            } else {
+            } else if lesson.stepsArray.count == steps.count && (0..<steps.count ~= startStepIndex) {
                 self.presenter.presentLesson(response: .init(state: .success(data)))
+            } else {
+                throw Error.cacheMiss
             }
 
             self.currentData = data
@@ -312,6 +318,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case cacheMiss
     }
 }
 
@@ -352,28 +359,11 @@ extension LessonInteractor: StepOutputProtocol {
     }
 
     func handlePreviousUnitNavigation() {
-        guard let unit = self.previousUnit else {
-            return
-        }
-
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-
-        firstly {
-            after(seconds: Self.unitNavigationDelay)
-        }.then {
-            self.presentUnreachableUnitNavigationState(targetUnit: unit, direction: .previous)
-        }.done { didPresentUnreachableState in
-            if didPresentUnreachableState {
-                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-            } else {
-                self.didLoadFromCache = false
-                self.refreshLesson(context: .unit(id: unit.id)).cauterize()
-            }
-        }
+        self.navigateToPreviousUnit(shouldAutoplayStep: false)
     }
 
     func handleNextUnitNavigation() {
-        self.navigateToNextUnit(autoplayNext: false)
+        self.navigateToNextUnit(shouldAutoplayStep: false)
     }
 
     func handleLessonNavigation(lessonID: Int, stepIndex: Int, unitID: Int?) {
@@ -408,26 +398,60 @@ extension LessonInteractor: StepOutputProtocol {
     }
 
     func handleStepNavigation(to index: Int) {
-        self.navigateToStep(at: index, autoplayNext: false)
+        self.navigateToStep(at: index, shouldAutoplayStep: false)
     }
 
-    func handleAutoplayNavigation(from index: Int) {
+    func handleAutoplayNavigation(from index: Int, direction: AutoplayNavigationDirection) {
         guard let lesson = self.currentLesson else {
             return
         }
 
-        let isCurrentIndexLast = index == max(0, (lesson.stepsArray.count - 1))
+        switch direction {
+        case .forward:
+            let isCurrentIndexLast = index == max(0, (lesson.stepsArray.count - 1))
 
-        if isCurrentIndexLast {
-            self.navigateToNextUnit(autoplayNext: true)
-        } else {
-            self.navigateToStep(at: index + 1, autoplayNext: true)
+            if isCurrentIndexLast {
+                self.navigateToNextUnit(shouldAutoplayStep: true)
+            } else {
+                self.navigateToStep(at: index + 1, shouldAutoplayStep: true)
+            }
+        case .backward:
+            if index == 0 {
+                self.navigateToPreviousUnit(shouldAutoplayStep: true)
+            } else {
+                self.navigateToStep(at: index - 1, shouldAutoplayStep: true)
+            }
         }
     }
 
     // MARK: Private helpers
 
-    private func navigateToNextUnit(autoplayNext: Bool) {
+    private func navigateToPreviousUnit(shouldAutoplayStep: Bool) {
+        guard let unit = self.previousUnit else {
+            return
+        }
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        firstly {
+            after(seconds: Self.unitNavigationDelay)
+        }.then {
+            self.presentUnreachableUnitNavigationState(targetUnit: unit, direction: .previous)
+        }.done { didPresentUnreachableState in
+            if didPresentUnreachableState {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            } else {
+                self.didLoadFromCache = false
+                self.refreshLesson(context: .unit(id: unit.id), startStep: .last).done {
+                    if shouldAutoplayStep {
+                        self.autoplayCurrentStep()
+                    }
+                }.cauterize()
+            }
+        }
+    }
+
+    private func navigateToNextUnit(shouldAutoplayStep: Bool) {
         guard let unit = self.nextUnit else {
             if self.isCurrentUnitLastInCourse {
                 self.presentLessonFinishedSteps()
@@ -446,8 +470,8 @@ extension LessonInteractor: StepOutputProtocol {
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             } else {
                 self.didLoadFromCache = false
-                self.refreshLesson(context: .unit(id: unit.id)).done {
-                    if autoplayNext {
+                self.refreshLesson(context: .unit(id: unit.id), startStep: .first).done {
+                    if shouldAutoplayStep {
                         self.autoplayCurrentStep()
                     }
                 }.cauterize()
@@ -455,7 +479,7 @@ extension LessonInteractor: StepOutputProtocol {
         }
     }
 
-    private func navigateToStep(at index: Int, autoplayNext: Bool) {
+    private func navigateToStep(at index: Int, shouldAutoplayStep: Bool) {
         guard let lesson = self.currentLesson else {
             return
         }
@@ -465,7 +489,7 @@ extension LessonInteractor: StepOutputProtocol {
         if stepsRange.contains(index) {
             self.presenter.presentCurrentStepUpdate(response: .init(index: index))
 
-            if autoplayNext {
+            if shouldAutoplayStep {
                 self.autoplayCurrentStep()
             }
         }

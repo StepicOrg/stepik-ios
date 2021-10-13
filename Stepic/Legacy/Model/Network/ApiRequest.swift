@@ -30,15 +30,15 @@ func performRequest(_ request: @escaping () -> Void, error: ((PerformRequestErro
 }
 
 final class ApiRequestPerformer {
-    static let semaphore = DispatchSemaphore(value: 1)
-    static let queue = DispatchQueue(label: "perform_request_queue", qos: DispatchQoS.userInitiated)
+    private static let semaphore = DispatchSemaphore(value: 1)
+    private static let queue = DispatchQueue(label: "perform_request_queue", qos: .userInitiated)
 
-    static func performAPIRequest(
+    fileprivate static func performAPIRequest(
         _ completion: @escaping () -> Void,
         error errorHandler: ((PerformRequestError) -> Void)? = nil
     ) {
         let completionWithSemaphore: () -> Void = {
-            print("finished performing API Request")
+            self.debugLog("finished performing API Request")
             semaphore.signal()
             DispatchQueue.main.async {
                 completion()
@@ -46,7 +46,7 @@ final class ApiRequestPerformer {
         }
 
         let errorHandlerWithSemaphore: (PerformRequestError) -> Void = { error in
-            print("finished performing API Request")
+            self.debugLog("finished performing API Request")
             semaphore.signal()
             DispatchQueue.main.async {
                 errorHandler?(error)
@@ -55,17 +55,21 @@ final class ApiRequestPerformer {
 
         queue.async {
             semaphore.wait()
-            print("performing API request")
-            if !AuthInfo.shared.hasUser {
-                print("no user in AuthInfo, retrieving")
+            self.debugLog("performing API request")
+
+            if AuthInfo.shared.hasUser {
+                performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
+            } else {
+                self.debugLog("no user in AuthInfo, retrieving")
                 ApiDataDownloader.stepics.retrieveCurrentUser(
                     success: { user in
                         AuthInfo.shared.user = user
                         User.removeAllExcept(user)
-                        print("retrieved current user")
+                        self.debugLog("retrieved current user")
                         performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
                     },
                     error: { error in
+                        self.debugLog("failed retrieve current user")
                         if let typedError = error as? URLError {
                             switch typedError.code {
                             case .notConnectedToInternet:
@@ -78,8 +82,6 @@ final class ApiRequestPerformer {
                         }
                     }
                 )
-            } else {
-                performRequestWithAuthorizationCheck(completionWithSemaphore, error: errorHandlerWithSemaphore)
             }
         }
     }
@@ -101,30 +103,37 @@ final class ApiRequestPerformer {
         }
 
         if AuthInfo.shared.isAuthorized && AuthInfo.shared.needsToRefreshToken {
-            if let refreshToken = AuthInfo.shared.token?.refreshToken {
-                ApiDataDownloader.auth.refreshTokenWith(
-                    refreshToken,
-                    success: { token in
-                        AuthInfo.shared.token = token
-                        completion()
-                    },
-                    failure: { error in
-                        print("error while auto refresh token")
-                        if error == TokenRefreshError.noAccess {
-                            errorHandler?(.noAccessToRefreshToken)
-                        } else {
-                            errorHandler?(.other)
-                        }
-                    }
-                )
-                return
-            } else {
+            guard let refreshToken = AuthInfo.shared.token?.refreshToken else {
                 // No token to refresh with authorized user
                 errorHandler?(.other)
                 return
             }
+
+            ApiDataDownloader.auth.refreshTokenWith(
+                refreshToken,
+                success: { token in
+                    self.debugLog("refresh token auto refreshed")
+                    AuthInfo.shared.token = token
+                    completion()
+                },
+                failure: { error in
+                    self.debugLog("error while auto refresh token")
+                    if error == TokenRefreshError.noAccess {
+                        errorHandler?(.noAccessToRefreshToken)
+                    } else {
+                        errorHandler?(.other)
+                    }
+                }
+            )
+            return
         }
 
         completion()
+    }
+
+    private static func debugLog(_ message: StaticString) {
+        if LaunchArguments.isNetworkDebuggingEnabled {
+            print("ApiRequestPerformer :: \(message)")
+        }
     }
 }

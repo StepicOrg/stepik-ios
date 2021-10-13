@@ -90,6 +90,10 @@ class SkeletonCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         )
         cell.attach(view: skeletonView)
 
+        if let cellBackgroundColor = collectionView.skeleton.cellBackgroundColor {
+            cell.backgroundColor = cellBackgroundColor
+        }
+
         return cell
     }
 }

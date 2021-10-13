@@ -56,7 +56,8 @@ class CourseListAssembly: Assembly {
             reviewSummariesNetworkService: CourseReviewSummariesNetworkService(
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
             ),
-            courseListsPersistenceService: CourseListsPersistenceService()
+            courseListsPersistenceService: CourseListsPersistenceService(),
+            iapService: IAPService.shared
         )
 
         let dataBackUpdateService = DataBackUpdateService(
@@ -77,9 +78,11 @@ class CourseListAssembly: Assembly {
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
             personalDeadlinesService: PersonalDeadlinesService(),
+            wishlistService: WishlistService.default,
             courseListDataBackUpdateService: courseListDataBackUpdateService,
             analytics: StepikAnalytics.shared,
-            courseViewSource: self.courseViewSource
+            courseViewSource: self.courseViewSource,
+            remoteConfig: RemoteConfig.shared
         )
         self.moduleInput = interactor
 

@@ -1,4 +1,3 @@
-import PanModal
 import UIKit
 
 protocol TableQuizViewControllerProtocol: AnyObject {
@@ -64,8 +63,6 @@ extension TableQuizViewController: TableQuizViewDelegate {
         )
         let viewController = assembly.makeModule()
 
-        if let panModalPresentableViewController = viewController as? UIViewController & PanModalPresentable {
-            self.presentPanModalWithCustomModalPresentationStyle(panModalPresentableViewController)
-        }
+        self.presentIfPanModalWithCustomModalPresentationStyle(viewController)
     }
 }

@@ -15,6 +15,10 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let codeLimitsPersistenceService: CodeLimitsPersistenceServiceProtocol
     private let codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol
     private let codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol
+    private let courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol
+    private let courseBenefitByMonthsPersistenceService: CourseBenefitByMonthsPersistenceServiceProtocol
+    private let courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol
+    private let courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol
     private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
@@ -28,6 +32,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let proctorSessionsPersistenceService: ProctorSessionsPersistenceServiceProtocol
     private let profilesPersistenceService: ProfilesPersistenceServiceProtocol
     private let progressesPersistenceService: ProgressesPersistenceServiceProtocol
+    private let searchQueryResultsPersistenceService: SearchQueryResultsPersistenceServiceProtocol
+    private let searchResultsPersistenceService: SearchResultsPersistenceServiceProtocol
     private let sectionsPersistenceService: SectionsPersistenceServiceProtocol
     private let socialProfilesPersistenceService: SocialProfilesPersistenceServiceProtocol
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
@@ -47,6 +53,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let analyticsUserProperties: AnalyticsUserProperties
     private let deviceDefaults: DeviceDefaults
+    private let wishlistService: WishlistServiceProtocol
 
     private let synchronizationQueue = DispatchQueue(
         label: "com.AlexKarpov.Stepic.LogoutDataClearQueue",
@@ -64,6 +71,10 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         codeLimitsPersistenceService: CodeLimitsPersistenceServiceProtocol = CodeLimitsPersistenceService(),
         codeSamplesPersistenceService: CodeSamplesPersistenceServiceProtocol = CodeSamplesPersistenceService(),
         codeTemplatePersistenceService: CodeTemplatesPersistenceServiceProtocol = CodeTemplatesPersistenceService(),
+        courseBeneficiariesPersistenceService: CourseBeneficiariesPersistenceServiceProtocol = CourseBeneficiariesPersistenceService(),
+        courseBenefitByMonthsPersistenceService: CourseBenefitByMonthsPersistenceServiceProtocol = CourseBenefitByMonthsPersistenceService(),
+        courseBenefitsPersistenceService: CourseBenefitsPersistenceServiceProtocol = CourseBenefitsPersistenceService(),
+        courseBenefitSummariesPersistenceService: CourseBenefitSummariesPersistenceServiceProtocol = CourseBenefitSummariesPersistenceService(),
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
         coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol = CoursePurchasesPersistenceService(),
         courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol = CourseReviewsPersistenceService(),
@@ -77,6 +88,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         proctorSessionsPersistenceService: ProctorSessionsPersistenceServiceProtocol = ProctorSessionsPersistenceService(),
         profilesPersistenceService: ProfilesPersistenceServiceProtocol = ProfilesPersistenceService(),
         progressesPersistenceService: ProgressesPersistenceServiceProtocol = ProgressesPersistenceService(),
+        searchQueryResultsPersistenceService: SearchQueryResultsPersistenceServiceProtocol = SearchQueryResultsPersistenceService(),
+        searchResultsPersistenceService: SearchResultsPersistenceServiceProtocol = SearchResultsPersistenceService(),
         sectionsPersistenceService: SectionsPersistenceServiceProtocol = SectionsPersistenceService(),
         socialProfilesPersistenceService: SocialProfilesPersistenceServiceProtocol = SocialProfilesPersistenceService(),
         stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol = StepOptionsPersistenceService(),
@@ -93,7 +106,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         spotlightIndexingService: SpotlightIndexingServiceProtocol = SpotlightIndexingService.shared,
         analyticsUserProperties: AnalyticsUserProperties = .shared,
         notificationsBadgesManager: NotificationsBadgesManager = .shared,
-        deviceDefaults: DeviceDefaults = .sharedDefaults
+        deviceDefaults: DeviceDefaults = .sharedDefaults,
+        wishlistService: WishlistServiceProtocol = WishlistService.default
     ) {
         self.downloadsDeletionService = downloadsDeletionService
         self.assignmentsPersistenceService = assignmentsPersistenceService
@@ -103,6 +117,10 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.codeLimitsPersistenceService = codeLimitsPersistenceService
         self.codeSamplesPersistenceService = codeSamplesPersistenceService
         self.codeTemplatePersistenceService = codeTemplatePersistenceService
+        self.courseBeneficiariesPersistenceService = courseBeneficiariesPersistenceService
+        self.courseBenefitByMonthsPersistenceService = courseBenefitByMonthsPersistenceService
+        self.courseBenefitsPersistenceService = courseBenefitsPersistenceService
+        self.courseBenefitSummariesPersistenceService = courseBenefitSummariesPersistenceService
         self.coursesPersistenceService = coursesPersistenceService
         self.coursePurchasesPersistenceService = coursePurchasesPersistenceService
         self.courseReviewsPersistenceService = courseReviewsPersistenceService
@@ -116,6 +134,8 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.proctorSessionsPersistenceService = proctorSessionsPersistenceService
         self.profilesPersistenceService = profilesPersistenceService
         self.progressesPersistenceService = progressesPersistenceService
+        self.searchQueryResultsPersistenceService = searchQueryResultsPersistenceService
+        self.searchResultsPersistenceService = searchResultsPersistenceService
         self.sectionsPersistenceService = sectionsPersistenceService
         self.socialProfilesPersistenceService = socialProfilesPersistenceService
         self.stepOptionsPersistenceService = stepOptionsPersistenceService
@@ -133,6 +153,7 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
         self.analyticsUserProperties = analyticsUserProperties
         self.notificationsBadgesManager = notificationsBadgesManager
         self.deviceDefaults = deviceDefaults
+        self.wishlistService = wishlistService
     }
 
     func clearCurrentUserData() -> Guarantee<Void> {
@@ -154,68 +175,103 @@ final class LogoutDataClearService: LogoutDataClearServiceProtocol {
     }
 
     private func clearData() -> Guarantee<Void> {
-        firstly { () -> Guarantee<Void> in
-            self.notificationsRegistrationService.unregisterForRemoteNotifications()
-        }.then { () -> Guarantee<Void> in
-            self.downloadsDeletionService.deleteAllDownloads()
-        }.then { () -> Guarantee<Void> in
+        when(
+            guarantees: [
+                self.notificationsRegistrationService.unregisterForRemoteNotifications(),
+                self.downloadsDeletionService.deleteAllDownloads(),
+                self.clearCourseListPersistenceStorages()
+            ]
+        ).then { () -> Guarantee<Void> in
             self.clearDatabase()
-        }.then { () -> Guarantee<Void> in
-            self.clearCourseListPersistenceStorages()
         }.done {
             self.analyticsUserProperties.clearUserDependentProperties()
             self.notificationsBadgesManager.set(number: 0)
 
             self.deviceDefaults.deviceId = nil
+            self.wishlistService.removeAll()
 
             self.notificationsService.removeAllLocalNotifications()
             self.spotlightIndexingService.deleteAllSearchableItems()
         }
     }
 
+    // TODO: Refactor this
     private func clearDatabase() -> Guarantee<Void> {
         Guarantee { seal in
-            firstly { () -> Guarantee<[Course]> in
-                self.coursesPersistenceService.fetchEnrolled()
-            }.then { (enrolledCourses: [Course]) -> Guarantee<[Result<Void>]> in
-                for course in enrolledCourses {
-                    course.enrolled = false
-                }
-
-                return when(
-                    resolved: [
-                        self.assignmentsPersistenceService.deleteAll(),
-                        self.attemptsPersistenceService.deleteAll(),
-                        self.blocksPersistenceService.deleteAll(),
-                        self.certificatesPersistenceService.deleteAll(),
-                        self.codeLimitsPersistenceService.deleteAll(),
-                        self.codeSamplesPersistenceService.deleteAll(),
-                        self.codeTemplatePersistenceService.deleteAll(),
-                        self.coursePurchasesPersistenceService.deleteAll(),
-                        self.courseReviewsPersistenceService.deleteAll(),
-                        self.discussionThreadsPersistenceService.deleteAll(),
-                        self.emailAddressesPersistenceService.deleteAll(),
-                        self.examSessionsPersistenceService.deleteAll(),
-                        self.lastCodeLanguagePersistenceService.deleteAll(),
-                        self.lastStepPersistenceService.deleteAll(),
-                        self.lessonsPersistenceService.deleteAll(),
-                        self.notificationsPersistenceService.deleteAll(),
-                        self.proctorSessionsPersistenceService.deleteAll(),
-                        self.profilesPersistenceService.deleteAll(),
-                        self.progressesPersistenceService.deleteAll(),
-                        self.sectionsPersistenceService.deleteAll(),
-                        self.socialProfilesPersistenceService.deleteAll(),
-                        self.stepsPersistenceService.deleteAll(),
-                        self.stepOptionsPersistenceService.deleteAll(),
-                        self.storyPartsReactionsPersistenceService.deleteAll(),
-                        self.submissionsPersistenceService.deleteAll(),
-                        self.unitsPersistenceService.deleteAll(),
-                        self.userActivitiesPersistenceService.deleteAll(),
-                        self.userCoursesPersistenceService.deleteAll(),
-                        self.videosPersistenceService.deleteAll(),
-                        self.videoURLsPersistenceService.deleteAll()
-                    ]
-                )
+            firstly { () -> Guarantee<Void?> in
+                Guarantee(self.coursesPersistenceService.unenrollAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.assignmentsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.attemptsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.blocksPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.certificatesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.codeLimitsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.codeSamplesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.codeTemplatePersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.courseBeneficiariesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.courseBenefitByMonthsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.courseBenefitsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.courseBenefitSummariesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.coursePurchasesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.courseReviewsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.discussionThreadsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.emailAddressesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.examSessionsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.lastCodeLanguagePersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.lastStepPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.lessonsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.notificationsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.proctorSessionsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.profilesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.progressesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.searchQueryResultsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.searchResultsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.sectionsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.socialProfilesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.stepsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.stepOptionsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.storyPartsReactionsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.submissionsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.unitsPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.userActivitiesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.userCoursesPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.videosPersistenceService.deleteAll(), fallback: nil)
+            }.then { _ -> Guarantee<Void?> in
+                Guarantee(self.videoURLsPersistenceService.deleteAll(), fallback: nil)
             }.done { _ in
                 CoreDataHelper.shared.save()
                 seal(())

@@ -20,6 +20,8 @@ extension CourseListView {
     }
 }
 
+// MARK: - CourseListView: UIView -
+
 class CourseListView: UIView {
     let appearance: Appearance
     let colorMode: CourseListColorMode
@@ -138,7 +140,7 @@ class CourseListView: UIView {
         return (columnsCount, columnWidth)
     }
 
-    // MARK: - ColorMode
+    // MARK: ColorMode
 
     private func getBackgroundColor(for colorMode: CourseListColorMode) -> UIColor {
         switch colorMode {
@@ -151,7 +153,7 @@ class CourseListView: UIView {
         }
     }
 
-    // MARK: - Loading state
+    // MARK: Loading state
 
     func showLoading() {
         self.collectionView.skeleton.viewBuilder = {
@@ -233,7 +235,7 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// Subclasses for two orientations
+// MARK: - VerticalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource -
 
 final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource {
     private var gridSize: CourseListGridSize {
@@ -273,6 +275,23 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
     }
 
     private let isHeaderViewHidden: Bool
+
+    var headerViewHeight = UIView.noIntrinsicMetric {
+        didSet {
+            self.verticalCourseFlowLayout.headerHeight = self.headerViewHeight
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
+        get {
+            self.collectionView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.collectionView.contentInsetAdjustmentBehavior = newValue
+        }
+    }
+
     var isPaginationViewHidden = true {
         didSet {
             self.updatePagination()
@@ -428,6 +447,8 @@ final class VerticalCourseListView: CourseListView, UICollectionViewDelegate, UI
     }
 }
 
+// MARK: - HorizontalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource -
+
 final class HorizontalCourseListView: CourseListView, UICollectionViewDelegate, UICollectionViewDataSource {
     private var gridSize: CourseListGridSize {
         didSet {
@@ -497,6 +518,8 @@ final class HorizontalCourseListView: CourseListView, UICollectionViewDelegate, 
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
 
+        self.collectionView.contentInsetAdjustmentBehavior = .never
+        self.collectionView.showsVerticalScrollIndicator = false
         // Make scroll faster
         self.collectionView.decelerationRate = .fast
     }
@@ -626,6 +649,8 @@ final class HorizontalCourseListView: CourseListView, UICollectionViewDelegate, 
 
 // Wrapper for reusable views
 
+// MARK: - CollectionViewReusableView: UICollectionReusableView, Reusable -
+
 final class CollectionViewReusableView: UICollectionReusableView, Reusable {
     private var subview: UIView?
 
@@ -644,6 +669,8 @@ final class CollectionViewReusableView: UICollectionReusableView, Reusable {
         self.subview?.removeFromSuperview()
     }
 }
+
+// MARK: - CourseListCollectionViewCell subclasses -
 
 // Cause we can't init cell with custom initializer let's use custom classes
 

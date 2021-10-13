@@ -1,9 +1,14 @@
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
+final class UserCourse: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
+
+    static var observableKeys: Set<String> = ["managedIsFavorite", "managedIsArchived", "managedCourse"]
 
     var json: JSON {
         [
@@ -14,7 +19,7 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
         NotificationCenter.default.post(name: .userCourseDidCreateNotification, object: self)
     }
@@ -26,6 +31,7 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
         self.lastViewed = Parser.dateFromTimedateJSON(json[JSONKey.lastViewed.rawValue]) ?? Date()
+        self.canBeReviewed = json[JSONKey.canBeReviewed.rawValue].boolValue
     }
 
     func hasEqualId(json: JSON) -> Bool {
@@ -52,6 +58,7 @@ final class UserCourse: NSManagedObject, JSONSerializable, IDFetchable {
         case isFavorite = "is_favorite"
         case isArchived = "is_archived"
         case lastViewed = "last_viewed"
+        case canBeReviewed = "can_be_reviewed"
     }
 }
 

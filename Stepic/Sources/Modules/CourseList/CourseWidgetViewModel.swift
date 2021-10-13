@@ -10,6 +10,13 @@ struct CourseWidgetUserCourseViewModel {
     let isArchived: Bool
 }
 
+struct CourseWidgetPriceViewModel {
+    let isPaid: Bool
+    let isEnrolled: Bool
+    let priceString: String?
+    let discountPriceString: String?
+}
+
 struct CourseWidgetViewModel: UniqueIdentifiable {
     let title: String
     let summary: String
@@ -19,8 +26,11 @@ struct CourseWidgetViewModel: UniqueIdentifiable {
     let certificateLabelText: String?
     let isAdaptive: Bool
     let isEnrolled: Bool
+    let isWishlisted: Bool
+    let isWishlistAvailable: Bool
     let progress: CourseWidgetProgressViewModel?
     let userCourse: CourseWidgetUserCourseViewModel?
+    let price: CourseWidgetPriceViewModel?
     let uniqueIdentifier: UniqueIdentifierType
     let courseID: Course.IdType
     let viewSource: AnalyticsEvent.CourseViewSource

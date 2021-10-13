@@ -87,6 +87,7 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 
             self.tableDataSource.viewModels = data.reviews
             self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
+            self.courseInfoTabReviewsView?.summaryViewModel = data.summary
             self.courseInfoTabReviewsView?.writeCourseReviewState = data.writeCourseReviewState
 
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
@@ -116,9 +117,16 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel) {
         let modalPresentationStyle = UIModalPresentationStyle.stepikAutomatic
 
+        let presentationContext: WriteCourseReview.PresentationContext = {
+            if let review = viewModel.review {
+                return .update(review)
+            }
+            return .create
+        }()
+
         let assembly = WriteCourseReviewAssembly(
             courseID: viewModel.courseID,
-            courseReview: viewModel.review,
+            presentationContext: presentationContext,
             navigationBarAppearance: modalPresentationStyle.isSheetStyle ? .pageSheetAppearance() : .init(),
             output: self.interactor as? WriteCourseReviewOutputProtocol
         )

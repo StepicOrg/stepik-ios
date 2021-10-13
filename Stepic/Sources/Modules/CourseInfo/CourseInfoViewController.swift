@@ -4,13 +4,6 @@ import SVProgressHUD
 import UIKit
 
 // swiftlint:disable file_length
-protocol CourseInfoScrollablePageViewProtocol: AnyObject {
-    var scrollViewDelegate: UIScrollViewDelegate? { get set }
-    var contentInsets: UIEdgeInsets { get set }
-    var contentOffset: CGPoint { get set }
-    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior { get set }
-}
-
 protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayCourse(viewModel: CourseInfo.CourseLoad.ViewModel)
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel)
@@ -22,6 +15,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayLessonModuleCatalogAction(viewModel: CourseInfo.LessonModuleCatalogPresentation.ViewModel)
     func displayLessonModuleWriteReviewAction(viewModel: CourseInfo.LessonModuleWriteReviewPresentation.ViewModel)
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel)
+    func displayCourseRevenue(viewModel: CourseInfo.CourseRevenuePresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
@@ -29,6 +23,8 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel)
+    func displayWishlistMainActionResult(viewModel: CourseInfo.CourseWishlistMainAction.ViewModel)
+    func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -46,7 +42,19 @@ final class CourseInfoViewController: UIViewController {
     private lazy var pageViewController = PageboyViewController()
 
     lazy var courseInfoView = self.view as? CourseInfoView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
+
+    private lazy var searchBarButton = UIBarButtonItem(
+        barButtonSystemItem: .search,
+        target: self,
+        action: #selector(self.searchButtonClicked)
+    )
+
+    private lazy var wishlistBarButton = UIBarButtonItem(
+        image: nil,
+        style: .plain,
+        target: self,
+        action: #selector(self.wishlistButtonClicked)
+    )
 
     private lazy var moreBarButton = UIBarButtonItem(
         image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
@@ -100,7 +108,7 @@ final class CourseInfoViewController: UIViewController {
 
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
-        self.navigationItem.rightBarButtonItem = self.moreBarButton
+        self.navigationItem.rightBarButtonItems = [self.moreBarButton]
         self.styledNavigationController?.removeBackButtonTitleForTopController()
 
         self.automaticallyAdjustsScrollViewInsets = false
@@ -157,6 +165,14 @@ final class CourseInfoViewController: UIViewController {
             self.moreBarButton.isEnabled = true
             self.courseInfoView?.setErrorPlaceholderVisible(false)
             self.courseInfoView?.setLoading(false)
+
+            if data.isWishlistAvailable {
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton, self.wishlistBarButton]
+                let wishlistImageName = data.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
+                self.wishlistBarButton.image = UIImage(named: wishlistImageName)?.withRenderingMode(.alwaysTemplate)
+            } else {
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton, self.searchBarButton]
+            }
 
             let isFirstLoadedResult = self.storedViewModel == nil
 
@@ -222,8 +238,9 @@ final class CourseInfoViewController: UIViewController {
             return
         }
 
-        let moduleInput: CourseInfoSubmoduleProtocol?
         let controller: UIViewController
+        let moduleInput: CourseInfoSubmoduleProtocol?
+
         switch tab {
         case .info:
             let assembly = CourseInfoTabInfoAssembly()
@@ -239,6 +256,10 @@ final class CourseInfoViewController: UIViewController {
             let assembly = CourseInfoTabReviewsAssembly()
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
+        case .news:
+            let assembly = CourseInfoTabNewsAssembly()
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
         }
 
         self.submodulesControllers[index] = controller
@@ -247,6 +268,16 @@ final class CourseInfoViewController: UIViewController {
         if let submodule = moduleInput {
             self.interactor.doSubmodulesRegistration(request: .init(submodules: [index: submodule]))
         }
+    }
+
+    @objc
+    private func searchButtonClicked() {
+        self.interactor.doCourseContentSearchPresentation(request: .init())
+    }
+
+    @objc
+    private func wishlistButtonClicked() {
+        self.interactor.doWishlistMainAction(request: .init())
     }
 
     @objc
@@ -261,6 +292,18 @@ final class CourseInfoViewController: UIViewController {
                 }
             )
         )
+
+        if self.storedViewModel?.isRevenueAvailable ?? false {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("CourseInfoCourseActionViewRevenueAlertTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCourseRevenuePresentation(request: .init())
+                    }
+                )
+            )
+        }
 
         if let viewModel = self.storedViewModel, viewModel.isEnrolled {
             let favoriteActionTitle = viewModel.isFavorite
@@ -315,7 +358,7 @@ final class CourseInfoViewController: UIViewController {
                 continue
             }
 
-            let view = viewController.view as? CourseInfoScrollablePageViewProtocol
+            let view = viewController.view as? ScrollablePageViewProtocol
 
             if let view = view {
                 view.contentInsets = UIEdgeInsets(
@@ -369,7 +412,7 @@ final class CourseInfoViewController: UIViewController {
 
     private func arrangePagesScrollOffset(topOffsetOfCurrentTab: CGFloat, maxTopOffset: CGFloat) {
         for viewController in self.submodulesControllers {
-            guard let view = viewController?.view as? CourseInfoScrollablePageViewProtocol else {
+            guard let view = viewController?.view as? ScrollablePageViewProtocol else {
                 continue
             }
 
@@ -548,6 +591,19 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         }
     }
 
+    func displayWishlistMainActionResult(viewModel: CourseInfo.CourseWishlistMainAction.ViewModel) {
+        if viewModel.isSuccessful {
+            SVProgressHUD.showSuccess(withStatus: viewModel.message)
+        } else {
+            SVProgressHUD.showError(withStatus: viewModel.message)
+        }
+    }
+
+    func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel) {
+        let assembly = CourseSearchAssembly(courseID: viewModel.courseID)
+        self.push(module: assembly.makeModule())
+    }
+
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel) {
         guard let navigationController = self.navigationController else {
             return
@@ -558,7 +614,8 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
             skipSyllabus: true,
-            courseViewSource: .unknown,
+            source: .courseScreen,
+            viewSource: viewModel.courseViewSource,
             lessonModuleOutput: self.interactor as? LessonOutputProtocol
         )
     }
@@ -601,6 +658,11 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             initialContext: .lesson(id: viewModel.previewLessonID),
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayCourseRevenue(viewModel: CourseInfo.CourseRevenuePresentation.ViewModel) {
+        let assembly = CourseRevenueAssembly(courseID: viewModel.courseID)
         self.push(module: assembly.makeModule())
     }
 

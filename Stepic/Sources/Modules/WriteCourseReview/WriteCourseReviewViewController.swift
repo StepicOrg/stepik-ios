@@ -90,9 +90,7 @@ final class WriteCourseReviewViewController: UIViewController {
 
         _ = self.writeCourseReviewView?.becomeFirstResponder()
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
-        }
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

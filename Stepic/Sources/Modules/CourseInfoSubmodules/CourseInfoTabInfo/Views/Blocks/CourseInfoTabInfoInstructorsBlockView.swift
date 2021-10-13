@@ -45,9 +45,7 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
         self.headerView.icon = CourseInfoTabInfoView.Block.instructors.icon
         self.headerView.title = CourseInfoTabInfoView.Block.instructors.title
 
-        if !self.stackView.arrangedSubviews.isEmpty {
-            self.stackView.removeAllArrangedSubviews()
-        }
+        self.stackView.removeAllArrangedSubviews()
 
         instructors.forEach { instructor in
             let view = CourseInfoTabInfoInstructorView()

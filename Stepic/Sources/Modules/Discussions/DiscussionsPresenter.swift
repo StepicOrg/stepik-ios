@@ -18,6 +18,7 @@ protocol DiscussionsPresenterProtocol {
     func presentSolution(response: Discussions.SolutionPresentation.Response)
     func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response)
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
+    func presentCommentNotFoundStatus(response: Discussions.CommentNotFoundPresentation.Response)
 }
 
 final class DiscussionsPresenter: DiscussionsPresenterProtocol {
@@ -165,7 +166,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     func presentCommentActionSheet(response: Discussions.CommentActionSheetPresentation.Response) {
         let commentViewModel = self.makeCommentViewModel(
             comment: response.comment,
-            isSelected: false,
+            selectedCommentID: nil,
             hasReplies: false
         )
 
@@ -181,6 +182,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentCommentNotFoundStatus(response: Discussions.CommentNotFoundPresentation.Response) {
+        let status = String(
+            format: NSLocalizedString("DiscussionsCommentNotFoundTitle", comment: ""),
+            arguments: ["\(response.commentID)"]
+        )
+        self.viewController?.displayCommentNotFoundStatus(viewModel: .init(status: status))
     }
 
     // MARK: - Private API -
@@ -199,7 +208,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 discussion: discussion,
                 replies: data.replies[discussion.id] ?? [],
                 isFetchingMoreReplies: data.discussionsIDsFetchingMore.contains(discussion.id),
-                isSelected: discussion.id == data.selectedDiscussionID
+                selectedCommentID: data.selectedCommentID
             )
         }
 
@@ -212,7 +221,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     private func makeCommentViewModel(
         comment: Comment,
-        isSelected: Bool,
+        selectedCommentID: Comment.IdType?,
         hasReplies: Bool
     ) -> DiscussionsCommentViewModel {
         let avatarImageURL: URL? = {
@@ -300,7 +309,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             userID: comment.userID,
             userRoleBadgeText: userRoleBadgeText,
             isPinned: comment.isPinned,
-            isSelected: isSelected,
+            isSelected: comment.id == selectedCommentID,
             username: username,
             strippedText: strippedAndTrimmedText,
             processedContent: processedContent,
@@ -320,18 +329,22 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         discussion: Comment,
         replies: [Comment],
         isFetchingMoreReplies: Bool,
-        isSelected: Bool
+        selectedCommentID: Comment.IdType?
     ) -> DiscussionsDiscussionViewModel {
         let repliesViewModels = self.sortedReplies(
             replies,
             parentDiscussion: discussion
-        ).map { self.makeCommentViewModel(comment: $0, isSelected: false, hasReplies: false) }
+        ).map { self.makeCommentViewModel(comment: $0, selectedCommentID: selectedCommentID, hasReplies: false) }
 
         let hasReplies = !discussion.repliesIDs.isEmpty
         let leftToLoadCount = discussion.repliesIDs.count - repliesViewModels.count
 
         return DiscussionsDiscussionViewModel(
-            comment: self.makeCommentViewModel(comment: discussion, isSelected: isSelected, hasReplies: hasReplies),
+            comment: self.makeCommentViewModel(
+                comment: discussion,
+                selectedCommentID: selectedCommentID,
+                hasReplies: hasReplies
+            ),
             replies: repliesViewModels,
             repliesLeftToLoadCount: leftToLoadCount,
             formattedRepliesLeftToLoad: "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(leftToLoadCount))",

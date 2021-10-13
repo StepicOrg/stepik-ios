@@ -15,25 +15,32 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
     private let provider: WriteCourseReviewProviderProtocol
 
     private let courseID: Course.IdType
-    private let context: Context
+    private let presentationContext: WriteCourseReview.PresentationContext
 
-    private var courseReview: CourseReview?
+    private var currentCourseReview: CourseReview?
     private var currentText: String
     private var currentScore: Int
 
     init(
         courseID: Course.IdType,
-        courseReview: CourseReview?,
+        presentationContext: WriteCourseReview.PresentationContext,
         presenter: WriteCourseReviewPresenterProtocol,
         provider: WriteCourseReviewProviderProtocol
     ) {
         self.courseID = courseID
-        self.context = courseReview == nil ? .create : .update
-        self.courseReview = courseReview
-        self.currentText = courseReview?.text ?? ""
-        self.currentScore = courseReview?.score ?? 0
         self.presenter = presenter
         self.provider = provider
+        self.presentationContext = presentationContext
+
+        switch presentationContext {
+        case .create(let courseReviewPlainObject):
+            self.currentText = courseReviewPlainObject?.text ?? ""
+            self.currentScore = courseReviewPlainObject?.score ?? 0
+        case .update(let courseReview):
+            self.currentCourseReview = courseReview
+            self.currentText = courseReview.text
+            self.currentScore = courseReview.score
+        }
     }
 
     func doCourseReviewLoad(request: WriteCourseReview.CourseReviewLoad.Request) {
@@ -78,11 +85,11 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
-        switch self.context {
+        switch self.presentationContext {
         case .create:
             self.createCourseReview(score: self.currentScore, text: trimmedText)
         case .update:
-            self.updateCourseReview(self.courseReview.require(), score: self.currentScore, text: trimmedText)
+            self.updateCourseReview(self.currentCourseReview.require(), score: self.currentScore, text: trimmedText)
         }
     }
 
@@ -90,7 +97,7 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
 
     private func createCourseReview(score: Int, text: String) {
         self.provider.create(courseID: self.courseID, score: score, text: text).done { createdCourseReview in
-            self.courseReview = createdCourseReview
+            self.currentCourseReview = createdCourseReview
 
             self.presenter.presentCourseReviewMainActionResult(
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: true)
@@ -108,7 +115,7 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
         courseReview.text = text
 
         self.provider.update(courseReview: courseReview).done { updatedCourseReview in
-            self.courseReview = updatedCourseReview
+            self.currentCourseReview = updatedCourseReview
 
             self.presenter.presentCourseReviewMainActionResult(
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: true)
@@ -119,12 +126,5 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: false)
             )
         }
-    }
-
-    // MARK: - Inner Types
-
-    private enum Context {
-        case create
-        case update
     }
 }

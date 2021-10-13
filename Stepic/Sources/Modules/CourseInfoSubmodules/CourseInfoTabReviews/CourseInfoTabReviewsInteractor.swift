@@ -9,8 +9,6 @@ protocol CourseInfoTabReviewsInteractorProtocol: AnyObject {
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
-    typealias PaginationState = (page: Int, hasNext: Bool)
-
     private let presenter: CourseInfoTabReviewsPresenterProtocol
     private let provider: CourseInfoTabReviewsProviderProtocol
     private let analytics: Analytics
@@ -138,9 +136,13 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         self.presenter.presentWriteCourseReview(response: .init(course: course, review: self.currentUserReview))
 
         if self.currentUserReview == nil {
-            self.analytics.send(.writeCourseReviewPressed(courseID: course.id, courseTitle: course.title))
+            self.analytics.send(
+                .writeCourseReviewPressed(courseID: course.id, courseTitle: course.title, source: .courseReviews)
+            )
         } else {
-            self.analytics.send(.editCourseReviewPressed(courseID: course.id, courseTitle: course.title))
+            self.analytics.send(
+                .editCourseReviewPressed(courseID: course.id, courseTitle: course.title, source: .courseReviews)
+            )
         }
     }
 
@@ -162,7 +164,9 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             }
 
             if let deletingScore = deletingScore {
-                self.analytics.send(.courseReviewDeleted(courseID: course.id, rating: deletingScore))
+                self.analytics.send(
+                    .courseReviewDeleted(courseID: course.id, rating: deletingScore, source: .courseReviews)
+                )
             }
 
             self.presenter.presentCourseReviewDelete(
@@ -286,7 +290,9 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
 
 extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
     func handleCourseReviewCreated(_ courseReview: CourseReview) {
-        self.analytics.send(.courseReviewCreated(courseID: courseReview.courseID, rating: courseReview.score))
+        self.analytics.send(
+            .courseReviewCreated(courseID: courseReview.courseID, rating: courseReview.score, source: .courseReviews)
+        )
 
         self.currentUserReview = courseReview
         self.presenter.presentReviewCreated(response: .init(review: courseReview))
@@ -298,7 +304,8 @@ extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
                 .courseReviewUpdated(
                     courseID: courseReview.courseID,
                     fromRating: currentUserReviewScore,
-                    toRating: courseReview.score
+                    toRating: courseReview.score,
+                    source: .courseReviews
                 )
             )
         }

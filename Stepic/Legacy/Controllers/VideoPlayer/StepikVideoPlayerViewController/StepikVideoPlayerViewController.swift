@@ -35,6 +35,7 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
         videoPlayerViewController.videoRateStorageManager = VideoRateStorageManager()
         videoPlayerViewController.autoplayStorageManager = AutoplayStorageManager()
         videoPlayerViewController.analytics = StepikAnalytics.shared
+        videoPlayerViewController.analyticsSeekEventDebouncer = Debouncer(delay: 0.1)
         videoPlayerViewController.delegate = self.delegate
 
         return videoPlayerViewController
@@ -44,7 +45,8 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
 // MARK: - StepikVideoPlayerViewControllerDelegate: AnyObject -
 
 protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
-    func stepikVideoPlayerViewControllerDidRequestAutoplay(_ viewController: StepikVideoPlayerViewController)
+    func stepikVideoPlayerViewControllerDidRequestPlayNext(_ viewController: StepikVideoPlayerViewController)
+    func stepikVideoPlayerViewControllerDidRequestPlayPrevious(_ viewController: StepikVideoPlayerViewController)
 }
 
 // MARK: - Appearance & Animation -
@@ -107,6 +109,8 @@ final class StepikVideoPlayerViewController: UIViewController {
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
+    @IBOutlet var playBackwardButton: UIButton!
+    @IBOutlet var playForwardButton: UIButton!
 
     // MARK: Autoplay controls
 
@@ -119,7 +123,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private lazy var autoplayPlayNextCircleControlView: PlayNextCircleControlView = {
         let view = PlayNextCircleControlView()
-        view.addTarget(self, action: #selector(self.didClickPlayNext), for: .touchUpInside)
+        view.addTarget(self, action: #selector(self.didClickAutoplayNext), for: .touchUpInside)
         return view
     }()
 
@@ -167,6 +171,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     fileprivate(set) var videoRateStorageManager: VideoRateStorageManagerProtocol!
     fileprivate(set) var autoplayStorageManager: AutoplayStorageManagerProtocol?
     fileprivate(set) var analytics: Analytics!
+    fileprivate(set) var analyticsSeekEventDebouncer: DebouncerProtocol!
 
     var video: Video!
 
@@ -245,6 +250,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var applicationDidEnterBackground = false
     private var applicationDidComeFromBackground = false
+    private var applicationDidEnterBackgroundWithPausedPlaybackState = false
 
     override var prefersStatusBarHidden: Bool { true }
 
@@ -558,12 +564,24 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @IBAction
     func topTimeSliderValueChanged(_ sender: UISlider) {
-        let time = TimeInterval(sender.value) * self.player.maximumDuration
-        self.seekToTime(time)
+        let targetTime = TimeInterval(sender.value) * self.player.maximumDuration
+
+        let isSeekedForward = self.player.currentTime < targetTime
+        self.analyticsSeekEventDebouncer.action = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.analytics.send(.videoPlayerControlClicked(isSeekedForward ? .seekForward : .seekBack))
+        }
+
+        self.seekToTime(targetTime)
     }
 
     @IBAction
     func seekForwardPressed(_ sender: UIButton) {
+        self.analytics.send(.videoPlayerControlClicked(.forward))
+
         let seekedTime = self.player.currentTime + Self.seekForwardTimeOffset
         let resultTime = min(seekedTime, self.player.maximumDuration)
 
@@ -573,6 +591,8 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @IBAction
     func seekBackPressed(_ sender: UIButton) {
+        self.analytics.send(.videoPlayerControlClicked(.rewind))
+
         let seekedTime = self.player.currentTime - Self.seekBackTimeOffset
         let resultTime = max(seekedTime, 0)
 
@@ -629,8 +649,8 @@ final class StepikVideoPlayerViewController: UIViewController {
 
                     strongSelf.analytics.send(
                         .videoPlayerDidChangeSpeed(
-                            currentSpeed: strongSelf.currentVideoRate.uniqueIdentifier,
-                            targetSpeed: videoRate.uniqueIdentifier
+                            source: strongSelf.currentVideoRate.uniqueIdentifier,
+                            target: videoRate.uniqueIdentifier
                         )
                     )
 
@@ -674,29 +694,24 @@ final class StepikVideoPlayerViewController: UIViewController {
             preferredStyle: .actionSheet
         )
 
-        for url in self.video.urls {
-            if url.quality != self.video.cachedQuality {
-                let action = UIAlertAction(title: url.quality, style: .default, handler: { [weak self] _ in
-                    guard let strongSelf = self else {
-                        return
-                    }
+        for url in self.video.urls where url.quality != self.video.cachedQuality {
+            let action = UIAlertAction(title: url.quality, style: .default, handler: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
 
-                    strongSelf.analytics.send(
-                        .videoPlayerDidChangeQuality(
-                            quality: url.quality,
-                            deviceModel: DeviceInfo.current.deviceModelString
-                        )
-                    )
+                strongSelf.analytics.send(
+                    .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: url.quality)
+                )
 
-                    strongSelf.currentVideoQuality = url.quality
-                    if let quality = StreamVideoQuality(uniqueIdentifier: Video.getNearestDefault(to: url.quality)) {
-                        strongSelf.streamVideoQualityStorageManager.globalStreamVideoQuality = quality
-                    }
-                    strongSelf.currentVideoQualityURL = URL(string: url.url)
-                    strongSelf.scheduleHidePlayerControlsTimer()
-                })
-                alert.addAction(action)
-            }
+                strongSelf.currentVideoQuality = url.quality
+                if let quality = StreamVideoQuality(uniqueIdentifier: Video.getNearestDefault(to: url.quality)) {
+                    strongSelf.streamVideoQualityStorageManager.globalStreamVideoQuality = quality
+                }
+                strongSelf.currentVideoQualityURL = URL(string: url.url)
+                strongSelf.scheduleHidePlayerControlsTimer()
+            })
+            alert.addAction(action)
         }
 
         if self.video.state == .cached, let cachedQuality = self.video.cachedQuality {
@@ -708,6 +723,10 @@ final class StepikVideoPlayerViewController: UIViewController {
                         guard let strongSelf = self else {
                             return
                         }
+
+                        strongSelf.analytics.send(
+                            .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: cachedQuality)
+                        )
 
                         strongSelf.currentVideoQuality = cachedQuality
                         strongSelf.currentVideoQualityURL = VideoStoredFileManager(fileManager: FileManager.default)
@@ -825,6 +844,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func handleApplicationDidEnterBackground() {
         self.applicationDidComeFromBackground = false
         self.applicationDidEnterBackground = true
+        self.applicationDidEnterBackgroundWithPausedPlaybackState = self.player.playbackState == .paused
     }
 
     @objc
@@ -856,12 +876,16 @@ final class StepikVideoPlayerViewController: UIViewController {
         switch self.player.playbackState {
         case .stopped:
             self.player.playFromBeginning()
+            self.analytics.send(.videoPlayerControlClicked(.play))
         case .paused:
             self.player.playFromCurrentTime()
+            self.analytics.send(.videoPlayerControlClicked(.play))
         case .playing:
             self.player.pause()
+            self.analytics.send(.videoPlayerControlClicked(.pause))
         case .failed:
             self.player.pause()
+            self.analytics.send(.videoPlayerControlClicked(.pause))
         }
     }
 
@@ -874,6 +898,14 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @objc
     private func videoLayerDoubleTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        let location = gestureRecognizer.location(in: self.view)
+
+        if location.x < self.view.frame.width / 3 {
+            self.analytics.send(.videoPlayerControlClicked(.doubleClickLeft))
+        } else if location.x > self.view.frame.width / 3 * 2 {
+            self.analytics.send(.videoPlayerControlClicked(.doubleClickRight))
+        }
+
         self.currentVideoFillMode.toggle()
     }
 
@@ -923,6 +955,20 @@ final class StepikVideoPlayerViewController: UIViewController {
         }
     }
 
+    // MARK: Play backward & forward
+
+    @IBAction
+    func playBackwardButtonPressed(_ sender: UIButton) {
+        self.analytics.send(.videoPlayerControlClicked(.previos))
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestPlayPrevious(self)
+    }
+
+    @IBAction
+    func playForwardButtonPressed(_ sender: UIButton) {
+        self.analytics.send(.videoPlayerControlClicked(.next))
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestPlayNext(self)
+    }
+
     // MARK: Autoplay
 
     private func setAutoplayControlsHidden(_ isHidden: Bool) {
@@ -940,7 +986,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                 return
             }
 
-            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(strongSelf)
+            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestPlayNext(strongSelf)
         }
     }
 
@@ -950,8 +996,8 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     @objc
-    private func didClickPlayNext() {
-        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay(self)
+    private func didClickAutoplayNext() {
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestPlayNext(self)
     }
 
     @objc
@@ -1020,9 +1066,15 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             self.applicationDidComeFromBackground = false
         }
 
-        let shouldPlayFromCurrentTime = isPlayerFirstTimeReady
+        let isPlayerReadyPlayFromCurrentTime = isPlayerFirstTimeReady
             || isPlayerReadyAfterVideoQualityChanged
             || isPlayerReadyAfterDidComeFromBackgroundAtDoubleFastVideoRate
+        let shouldPlayFromCurrentTime = !self.applicationDidEnterBackgroundWithPausedPlaybackState
+            && isPlayerReadyPlayFromCurrentTime
+
+        if self.applicationDidEnterBackgroundWithPausedPlaybackState {
+            self.applicationDidEnterBackgroundWithPausedPlaybackState = false
+        }
 
         guard shouldPlayFromCurrentTime else {
             return
@@ -1061,6 +1113,10 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             break
         }
 
+        if self.applicationDidEnterBackground && !self.applicationDidComeFromBackground {
+            self.applicationDidEnterBackgroundWithPausedPlaybackState = player.playbackState == .paused
+        }
+
         print("StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)")
     }
 
@@ -1095,13 +1151,19 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
     // MARK: Private helpers
 
     private func setTimeParametersAfterPlayerIsReady() {
-        self.fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
+        func stringFromTimeInterval(_ ti: TimeInterval) -> String {
+            let formatter = DateComponentsFormatter()
+            let additionalFormat = ti >= 60 ? "" : (ti < 10 ? "0:0" : "0:")
+            return "\(additionalFormat)\(ti >= 60 ? formatter.string(from: ti)! : "\(Int(ti))")"
+        }
+
+        self.fullTimeTopLabel.text = stringFromTimeInterval(self.player.maximumDuration)
         self.player.setPeriodicTimeObserver { [weak self] time, bufferedTime in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
+            strongSelf.currentTimeTopLabel.text = stringFromTimeInterval(time)
             strongSelf.topTimeSlider.value = Float(time / Double(strongSelf.player.maximumDuration))
 
             if let bufferedTime = bufferedTime {

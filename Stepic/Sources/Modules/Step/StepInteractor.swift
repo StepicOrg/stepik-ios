@@ -80,7 +80,7 @@ final class StepInteractor: StepInteractorProtocol {
             return
         }
 
-        self.moduleOutput?.handleAutoplayNavigation(from: currentStepIndex)
+        self.moduleOutput?.handleAutoplayNavigation(from: currentStepIndex, direction: request.direction)
     }
 
     func doStepViewRequest(request: StepDataFlow.StepViewRequest.Request) {

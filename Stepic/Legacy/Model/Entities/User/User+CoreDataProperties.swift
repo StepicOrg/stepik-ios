@@ -1,16 +1,4 @@
-//
-//  User+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 03.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension User {
     @NSManaged var managedId: NSNumber?
@@ -42,25 +30,14 @@ extension User {
     @NSManaged var managedAuthoredCourses: NSSet?
     @NSManaged var managedAttempts: NSSet?
     @NSManaged var managedSocialProfiles: NSOrderedSet?
+    @NSManaged var managedBuyerCourseBenefits: NSSet?
+    @NSManaged var managedCourseBenefitByMonths: NSSet?
+    @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedSearchResults: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<User> {
-        NSFetchRequest<User>(entityName: "User")
-    }
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.shared.context)!
-    }
-
-    convenience init() {
-        self.init(entity: User.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         set(value) {
@@ -160,6 +137,11 @@ extension User {
         get {
             managedLastName ?? "No last name"
         }
+    }
+
+    var shortName: String {
+        let firstName = self.firstName.trimmed()
+        return firstName.isEmpty ? "User" : firstName
     }
 
     var fullName: String {
@@ -323,6 +305,51 @@ extension User {
         }
         set {
             self.managedUserCourse = newValue
+        }
+    }
+
+    var buyerCourseBenefits: [CourseBenefit] {
+        get {
+            self.managedBuyerCourseBenefits?.allObjects as! [CourseBenefit]
+        }
+        set {
+            self.managedBuyerCourseBenefits = NSSet(array: newValue)
+        }
+    }
+
+    var courseBenefitByMonths: [CourseBenefitByMonth] {
+        get {
+            self.managedCourseBenefitByMonths?.allObjects as! [CourseBenefitByMonth]
+        }
+        set {
+            self.managedCourseBenefitByMonths = NSSet(array: newValue)
+        }
+    }
+
+    var courseBeneficiaries: [CourseBeneficiary] {
+        get {
+            self.managedCourseBeneficiaries?.allObjects as! [CourseBeneficiary]
+        }
+        set {
+            self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
         }
     }
 

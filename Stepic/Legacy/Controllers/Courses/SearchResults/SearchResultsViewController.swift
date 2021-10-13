@@ -33,7 +33,7 @@ final class SearchResultsAssembly: Assembly {
             fatalError("Failed to init module from storyboard")
         }
 
-        controller.presenter = SearchResultsPresenter(view: controller)
+        controller.presenter = SearchResultsPresenter(view: controller, analytics: StepikAnalytics.shared)
         controller.presenter?.updateQueryBlock = updateQueryBlock
 
         self.moduleInput = controller.presenter

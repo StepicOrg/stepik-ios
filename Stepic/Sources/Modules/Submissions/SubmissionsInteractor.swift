@@ -5,20 +5,20 @@ protocol SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request)
     func doNextSubmissionsLoad(request: Submissions.NextSubmissionsLoad.Request)
     func doSubmissionPresentation(request: Submissions.SubmissionPresentation.Request)
+    func doSubmissionSelection(request: Submissions.SubmissionSelection.Request)
     func doReviewPresentation(request: Submissions.ReviewPresentation.Request)
     func doFilterPresentation(request: Submissions.FilterPresentation.Request)
     func doSearchSubmissions(request: Submissions.SearchSubmissions.Request)
 }
 
 final class SubmissionsInteractor: SubmissionsInteractorProtocol {
-    typealias PaginationState = (page: Int, hasNext: Bool)
-
     private static let searchDebounceInterval: TimeInterval = 1
 
     weak var moduleOutput: SubmissionsOutputProtocol?
 
     private let stepID: Step.IdType
     private let isTeacher: Bool
+    private let isSelectionEnabled: Bool
 
     private let presenter: SubmissionsPresenterProtocol
     private let provider: SubmissionsProviderProtocol
@@ -36,11 +36,13 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         stepID: Step.IdType,
         isTeacher: Bool,
         submissionsFilterQuery: SubmissionsFilterQuery?,
+        isSelectionEnabled: Bool,
         presenter: SubmissionsPresenterProtocol,
         provider: SubmissionsProviderProtocol
     ) {
         self.stepID = stepID
         self.isTeacher = isTeacher
+        self.isSelectionEnabled = isSelectionEnabled
         self.presenter = presenter
         self.provider = provider
 
@@ -54,6 +56,12 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             )
         } else {
             self.currentFilterQuery = .default
+        }
+
+        if self.currentFilterQuery != .default {
+            DispatchQueue.main.async {
+                self.presenter.presentFilterButtonActiveState(response: .init(isActive: true))
+            }
         }
 
         let searchText = self.currentFilterQuery.search ?? ""
@@ -82,6 +90,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 submissions: fetchResult.submissions,
                 instruction: fetchResult.instruction,
                 isTeacher: self.isTeacher,
+                isSelectionAvailable: self.isSelectionEnabled,
                 hasNextPage: fetchResult.meta.hasNext
             )
             self.presenter.presentSubmissions(response: .init(result: .success(responseData)))
@@ -107,6 +116,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 submissions: fetchResult.submissions,
                 instruction: fetchResult.instruction,
                 isTeacher: self.isTeacher,
+                isSelectionAvailable: self.isSelectionEnabled,
                 hasNextPage: fetchResult.meta.hasNext
             )
             self.presenter.presentNextSubmissions(response: .init(result: .success(responseData)))
@@ -123,15 +133,21 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             return
         }
 
-        if let moduleOutput = self.moduleOutput {
-            DispatchQueue.main.async {
-                moduleOutput.handleSubmissionSelected(submission)
-            }
-        } else {
-            self.getCurrentStep()
-                .compactMap { $0 }
-                .done { self.presenter.presentSubmission(response: .init(step: $0, submission: submission)) }
-                .cauterize()
+        self.getCurrentStep()
+            .compactMap { $0 }
+            .done { self.presenter.presentSubmission(response: .init(step: $0, submission: submission)) }
+            .cauterize()
+    }
+
+    func doSubmissionSelection(request: Submissions.SubmissionSelection.Request) {
+        guard let submission = self.currentSubmissions.first(
+            where: { $0.uniqueIdentifier == request.uniqueIdentifier }
+        ) else {
+            return
+        }
+
+        DispatchQueue.main.async {
+            self.moduleOutput?.handleSubmissionSelected(submission)
         }
     }
 
@@ -287,7 +303,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     private func loadReviewSessions(submissions: [Submission]) -> Promise<[Submission]> {
         Promise { seal in
             self.getCurrentStep().compactMap { $0 }.done { step in
-                guard step.hasReview else {
+                guard step.hasReview && !self.isSelectionEnabled else {
                     return seal.fulfill(submissions)
                 }
 

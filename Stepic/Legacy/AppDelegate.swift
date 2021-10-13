@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsStorageManager: AnalyticsStorageManagerProtocol = AnalyticsStorageManager.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
 
+    @available(iOS 12.0, *)
+    private lazy var siriShortcutsContinueUserActivityService: SiriShortcutsContinueUserActivityServiceProtocol = SiriShortcutsContinueUserActivityService()
+
     @available(iOS 14.0, *)
     private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
     @available(iOS 14.0, *)
@@ -69,8 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
         SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setHapticsEnabled(true)
-
-        ConnectionHelper.shared.instantiate()
 
         if !AudioManager.shared.initAudioSession() {
             print("Could not initialize audio session")
@@ -141,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: - Responding to App State Changes and System Events
+    // MARK: - Responding to App Life-Cycle Events
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.notificationsRegistrationService.renewDeviceToken()
@@ -187,6 +188,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         IAPService.shared.stopObservingPayments()
+    }
+
+    // MARK: - Responding to Environment Changes
+
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        CoreDataHelper.shared.context.refreshAllObjects()
     }
 
     // MARK: - Downloading Data in the Background
@@ -263,6 +270,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        if #available(iOS 12.0, *),
+           self.siriShortcutsContinueUserActivityService.continueUserActivity(userActivity) {
+            return true
+        }
         if self.spotlightContinueUserActivityService.continueUserActivity(userActivity) {
             return true
         }

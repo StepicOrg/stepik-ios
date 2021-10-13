@@ -21,6 +21,10 @@ struct FavoriteCourseListType: CourseListType {
     var analyticName: String { "favorite_course_list" }
 }
 
+struct DownloadedCourseListType: CourseListType {
+    var analyticName: String { "downloaded_course_list" }
+}
+
 struct ArchivedCourseListType: CourseListType {
     var analyticName: String { "archived_course_list" }
 }
@@ -77,6 +81,10 @@ struct RecommendationsCourseListType: CourseListType {
     var analyticName: String { "recommendations_course_list" }
 }
 
+struct WishlistCourseListType: CourseListType {
+    var analyticName: String { "wishlist_course_list" }
+}
+
 // MARK: - Services factory
 
 final class CourseListServicesFactory {
@@ -119,6 +127,8 @@ final class CourseListServicesFactory {
                     cacheID: "MyCoursesInfoFavorite"
                 )
             )
+        } else if self.type is DownloadedCourseListType {
+            return DownloadedCourseListPersistenceService()
         } else if self.type is ArchivedCourseListType {
             return CourseListPersistenceService(
                 storage: DefaultsCourseListPersistenceStorage(
@@ -168,6 +178,8 @@ final class CourseListServicesFactory {
                     cacheID: "RecommendedCourses_\(type.id)_\(type.language.languageString)_\(type.platform.stringValue)"
                 )
             )
+        } else if self.type is WishlistCourseListType {
+            return CourseListPersistenceService(storage: WishlistStorageManager())
         } else {
             fatalError("Unsupported course list type")
         }
@@ -217,6 +229,16 @@ final class CourseListServicesFactory {
                 courseRecommendationsNetworkService: CourseRecommendationsNetworkService(
                     courseRecommendationsAPI: self.courseRecommendationsAPI
                 )
+            )
+        } else if type is WishlistCourseListType {
+            return WishlistCourseListNetworkService(
+                coursesAPI: self.coursesAPI,
+                wishlistStorageManager: WishlistStorageManager()
+            )
+        } else if type is DownloadedCourseListType {
+            return DownloadedCourseListNetworkService(
+                coursesAPI: self.coursesAPI,
+                downloadedCourseListPersistenceService: DownloadedCourseListPersistenceService()
             )
         } else {
             fatalError("Unsupported course list type")

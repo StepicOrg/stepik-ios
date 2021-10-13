@@ -11,6 +11,7 @@ protocol CourseInfoPresenterProtocol {
     func presentLessonModuleCatalogAction(response: CourseInfo.LessonModuleCatalogPresentation.Response)
     func presentLessonModuleWriteReviewAction(response: CourseInfo.LessonModuleWriteReviewPresentation.Response)
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response)
+    func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
@@ -18,6 +19,8 @@ protocol CourseInfoPresenterProtocol {
     func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
+    func presentWishlistMainActionResult(response: CourseInfo.CourseWishlistMainAction.Response)
+    func presentCourseContentSearch(response: CourseInfo.CourseContentSearchPresentation.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -34,7 +37,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         case .success(let data):
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
-                iapLocalizedPrice: data.iapLocalizedPrice,
+                isWishlisted: data.isWishlisted,
+                isWishlistAvailable: data.isWishlistAvailable,
+                isCourseRevenueAvailable: data.isCourseRevenueAvailable,
                 promoCode: data.promoCode
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
@@ -78,7 +83,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayLastStep(
             viewModel: .init(
                 course: response.course,
-                isAdaptive: response.isAdaptive
+                isAdaptive: response.isAdaptive,
+                courseViewSource: response.courseViewSource
             )
         )
     }
@@ -97,6 +103,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
         self.viewController?.displayPreviewLesson(viewModel: .init(previewLessonID: response.previewLessonID))
+    }
+
+    func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response) {
+        self.viewController?.displayCourseRevenue(viewModel: .init(courseID: response.courseID))
     }
 
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response) {
@@ -178,6 +188,33 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
+    func presentWishlistMainActionResult(response: CourseInfo.CourseWishlistMainAction.Response) {
+        let isSuccessful = response.isSuccessful
+
+        let message: String = {
+            switch response.action {
+            case .add:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoAddToWishlistSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoAddToWishlistFailureMessage", comment: "")
+            case .remove:
+                return isSuccessful
+                    ? NSLocalizedString("CourseInfoRemoveFromWishlistSuccessMessage", comment: "")
+                    : NSLocalizedString("CourseInfoRemoveFromWishlistFailureMessage", comment: "")
+            }
+        }()
+
+        self.viewController?.displayWishlistMainActionResult(
+            viewModel: .init(isSuccessful: isSuccessful, message: message)
+        )
+    }
+
+    func presentCourseContentSearch(response: CourseInfo.CourseContentSearchPresentation.Response) {
+        self.viewController?.displayCourseContentSearch(viewModel: .init(courseID: response.courseID))
+    }
+
+    // MARK: Private API
+
     private func makeIAPErrorMessage(course: Course, error: Error) -> String {
         String(
             format: NSLocalizedString("IAPPurchaseFailedMessage", comment: ""),
@@ -216,17 +253,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeHeaderViewModel(
         course: Course,
-        iapLocalizedPrice: String?,
+        isWishlisted: Bool,
+        isWishlistAvailable: Bool,
+        isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel {
-        let rating: Int = {
-            if let reviewsCount = course.reviewSummary?.count,
-               let averageRating = course.reviewSummary?.average,
-               reviewsCount > 0 {
-                return Int(round(averageRating))
-            }
-            return 0
-        }()
+        let rating = course.reviewSummary?.rating ?? 0
 
         let progress: CourseInfoProgressViewModel? = {
             if let progress = course.progress {
@@ -248,10 +280,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
+            isWishlisted: isWishlisted,
+            isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
+            isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             buttonDescription: self.makeButtonDescription(
                 course: course,
-                iapLocalizedPrice: iapLocalizedPrice,
                 promoCode: promoCode
             )
         )
@@ -259,7 +293,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeButtonDescription(
         course: Course,
-        iapLocalizedPrice: String?,
         promoCode: PromoCode?
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
@@ -274,8 +307,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
             if isNotPurchased {
                 let displayPrice: String?
-                if let iapLocalizedPrice = iapLocalizedPrice {
-                    displayPrice = iapLocalizedPrice
+                if let displayPriceIAP = course.displayPriceIAP {
+                    displayPrice = displayPriceIAP
                 } else if let promoCode = promoCode {
                     displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
                     isPromo = true

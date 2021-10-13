@@ -20,7 +20,7 @@ final class ExecutionQueue: DictionarySerializable {
         queue += [task]
     }
 
-    func executeAll(_ completion : @escaping ((ExecutionQueue) -> Void)) {
+    func executeAll(_ completion: @escaping ((ExecutionQueue) -> Void)) {
         print("executing all count -> \(count)")
         let notCompletedExecutionQueue = ExecutionQueue()
         let executedCount = 0
@@ -49,7 +49,7 @@ final class ExecutionQueue: DictionarySerializable {
                 return
             }
             let task = queue[id]
-            task.execute( success: {
+            task.execute(success: {
                 executeTask(id: id + 1, completion: completion)
             }, failure: {
                 executionError in

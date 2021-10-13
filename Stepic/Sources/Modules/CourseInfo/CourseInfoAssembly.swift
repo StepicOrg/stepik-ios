@@ -71,10 +71,12 @@ final class CourseInfoAssembly: Assembly {
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
             visitedCourseListPersistenceService: visitedCourseListPersistenceService.require(),
+            wishlistService: WishlistService.default,
             urlFactory: StepikURLFactory(),
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,
             analytics: StepikAnalytics.shared,
+            remoteConfig: RemoteConfig.shared,
             courseViewSource: self.courseViewSource
         )
         notificationsRegistrationService.delegate = interactor
@@ -95,6 +97,6 @@ final class CourseInfoAssembly: Assembly {
         let adaptiveManager = AdaptiveStorageManager()
         return adaptiveManager.canOpenInAdaptiveMode(courseId: self.courseID)
             ? [.info, .reviews]
-            : [.info, .syllabus, .reviews]
+            : [.info, .reviews, .news, .syllabus]
     }
 }

@@ -65,7 +65,7 @@ final class AdaptiveRatingsPresenter {
             print("adaptive ratings: remote rating updated -> reload rating")
             let downloadedScoreboard = self.scoreboard[days ?? 0] // 0 when 'days' == nil
             if downloadedScoreboard == nil || force {
-                return self.reloadRating(days: days, force: force)
+                return self.reloadRating(days: days)
             } else {
                 return .value(downloadedScoreboard!)
             }
@@ -89,7 +89,7 @@ final class AdaptiveRatingsPresenter {
         self.analytics.send(.adaptiveRatingOpened(courseID: self.ratingManager.courseID))
     }
 
-    private func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
+    private func reloadRating(days: Int? = nil) -> Promise<ScoreboardViewData> {
         Promise { seal in
             let currentUser = AuthInfo.shared.userId
             var usersForDeanonIds = [Int]()

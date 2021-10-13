@@ -4,7 +4,7 @@ import UIKit
 extension SubmissionsReviewView {
     struct Appearance {
         let separatorHeight: CGFloat = 1
-        let separatorColor = UIColor.onSurface.withAlphaComponent(0.04)
+        let separatorColor = UIColor.stepikOverlayOnSurfaceBackground
 
         let titleFont = Typography.caption1Font
         let titleTextColor = UIColor.stepikMaterialSecondaryText

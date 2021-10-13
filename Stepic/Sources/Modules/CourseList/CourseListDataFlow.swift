@@ -13,6 +13,7 @@ enum CourseList {
     struct AvailableCourses {
         var fetchedCourses: ListData<(UniqueIdentifierType, Course)>
         var availableAdaptiveCourses: Set<Course>
+        var wishlistCoursesIDs: Set<Course.IdType>
     }
 
     // Use it for module initializing
@@ -25,6 +26,7 @@ enum CourseList {
             var title: String
             var subtitle: String?
             var color: GradientCoursesPlaceholderView.Color
+            var shouldExtendEdgesUnderTopBar = true
         }
     }
 
@@ -36,6 +38,7 @@ enum CourseList {
 
         struct Response {
             let isAuthorized: Bool
+            let isCoursePricesEnabled: Bool
             let result: AvailableCourses
             let viewSource: AnalyticsEvent.CourseViewSource
         }
@@ -44,12 +47,14 @@ enum CourseList {
             let state: ViewControllerState
         }
     }
+
     /// Load and show next course page for given course list
     enum NextCoursesLoad {
         struct Request {}
 
         struct Response {
             let isAuthorized: Bool
+            let isCoursePricesEnabled: Bool
             let result: StepikResult<AvailableCourses>
             let viewSource: AnalyticsEvent.CourseViewSource
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1240"
+   LastUpgradeVersion = "1250"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -22,10 +22,10 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "085D5CD81D007F2100092060"
@@ -113,6 +113,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.AlexKarpov.Stepic.FLEXShowExplorerOnLaunch"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-com.AlexKarpov.Stepic.IsNetworkDebuggingEnabled"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

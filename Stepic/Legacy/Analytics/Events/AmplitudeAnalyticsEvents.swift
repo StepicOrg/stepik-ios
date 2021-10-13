@@ -78,15 +78,23 @@ extension AnalyticsEvent {
 
     // MARK: - Course -
 
-    static func courseJoined(source: CourseSubscriptionSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Course joined",
-            parameters: [
-                "source": source.rawValue,
-                "course": id,
-                "title": title
-            ]
-        )
+    static func courseJoined(
+        source: CourseSubscriptionSource,
+        id: Int,
+        title: String,
+        isWishlisted: Bool? = nil
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "source": source.rawValue,
+            "course": id,
+            "title": title
+        ]
+
+        if let isWishlisted = isWishlisted {
+            parameters["is_wishlisted"] = isWishlisted
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course joined", parameters: parameters)
     }
 
     static func courseUnsubscribed(id: Int, title: String) -> AmplitudeAnalyticsEvent {
@@ -99,13 +107,19 @@ extension AnalyticsEvent {
         )
     }
 
-    static func courseContinuePressed(source: CourseContinueSource, id: Int, title: String) -> AmplitudeAnalyticsEvent {
+    static func courseContinuePressed(
+        id: Int,
+        title: String,
+        source: CourseContinueSource,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Continue course pressed",
             parameters: [
-                "source": source.rawValue,
                 "course": id,
-                "title": title
+                "title": title,
+                "source": source.rawValue,
+                "view_source": viewSource.name
             ]
         )
     }
@@ -115,14 +129,17 @@ extension AnalyticsEvent {
         case homeWidget = "home_widget"
         case courseScreen = "course_screen"
         case homeScreenWidget = "ios_home_screen_widget"
+        case applicationShortcut = "ios_application_shortcut"
+        case siriShortcut = "ios_siri_shortcut"
     }
 
-    static func courseBuyPressed(source: CourseBuySource, id: Int) -> AmplitudeAnalyticsEvent {
+    static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Buy course pressed",
             parameters: [
                 "source": source.rawValue,
-                "course": id
+                "course": id,
+                "is_wishlisted": isWishlisted
             ]
         )
     }
@@ -138,6 +155,122 @@ extension AnalyticsEvent {
             parameters: [
                 "course": id,
                 "result": successfully ? "success" : "error"
+            ]
+        )
+    }
+
+    // MARK: - Course Search -
+
+    static func courseContentSearchScreenOpened(id: Int, title: String?) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course content search screen opened",
+            parameters: [
+                "course": id,
+                "title": title as Any
+            ]
+        )
+    }
+
+    static func courseContentSearched(
+        id: Int,
+        title: String?,
+        query: String,
+        suggestion: String?
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content searched", parameters: parameters)
+    }
+
+    static func courseContentSearchResultClicked(
+        id: Int,
+        title: String?,
+        query: String,
+        suggestion: String?,
+        type: CourseContentSearchResultClickType,
+        stepID: Int?
+    ) -> AmplitudeAnalyticsEvent {
+        var parameters: [String: Any] = [
+            "course": id,
+            "title": title as Any,
+            "query": query,
+            "type": type.rawValue,
+            "step": stepID as Any
+        ]
+
+        if let suggestion = suggestion {
+            parameters["suggestion"] = suggestion
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Course content search result clicked", parameters: parameters)
+    }
+
+    enum CourseContentSearchResultClickType: String {
+        case step
+        case comment
+        case user
+    }
+
+    // MARK: - Course News -
+
+    static func courseNewsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course news screen opened",
+            parameters: [
+                "course": id,
+                "title": title
+            ]
+        )
+    }
+
+    // MARK: - Course Benefits -
+
+    static func courseBenefitsScreenOpened(id: Int, title: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course benefits screen opened",
+            parameters: [
+                "course": id,
+                "course_title": title
+            ]
+        )
+    }
+
+    static func courseBenefitClicked(
+        benefitID: Int,
+        status: String,
+        courseID: Int,
+        courseTitle: String
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course benefit clicked",
+            parameters: [
+                "benefit": benefitID,
+                "status": status,
+                "course": courseID,
+                "course_title": courseTitle
+            ]
+        )
+    }
+
+    static func courseBenefitsSummaryClicked(
+        id: Int,
+        title: String,
+        expanded: Bool
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course benefits summary clicked",
+            parameters: [
+                "course": id,
+                "course_title": title,
+                "expanded": expanded
             ]
         )
     }
@@ -202,6 +335,22 @@ extension AnalyticsEvent {
             ]
         )
     }
+
+    // MARK: - Review -
+
+    static let reviewSelectDifferentSubmissionClicked = AmplitudeAnalyticsEvent(
+        name: "Review Select Different Submission"
+    )
+
+    static let reviewSendCurrentSubmissionClicked = AmplitudeAnalyticsEvent(name: "Review Send Current Submission")
+
+    static let reviewSolveAgainClicked = AmplitudeAnalyticsEvent(name: "Review Solve Again")
+
+    static let reviewQuizTryAgainClicked = AmplitudeAnalyticsEvent(name: "Review Quiz Try Again")
+
+    static let reviewStartReviewClicked = AmplitudeAnalyticsEvent(name: "Review Start Review")
+
+    static let reviewViewReviewClicked = AmplitudeAnalyticsEvent(name: "Review View Review")
 
     // MARK: - Downloads -
 
@@ -465,6 +614,8 @@ extension AnalyticsEvent {
         return AmplitudeAnalyticsEvent(name: "Font size selected", parameters: ["size": fontSizeStringValue])
     }
 
+    static let deleteAccountClicked = AmplitudeAnalyticsEvent(name: "Delete account clicked")
+
     // MARK: - Content Language -
 
     static func contentLanguageChanged(
@@ -519,6 +670,8 @@ extension AnalyticsEvent {
         case widgetExtension(url: String)
         case notification
         case profile(id: Int)
+        case userCoursesReviews
+        case wishlist
         case unknown
 
         var name: String {
@@ -551,6 +704,10 @@ extension AnalyticsEvent {
                 return "notification"
             case .profile:
                 return "profile"
+            case .userCoursesReviews:
+                return "user_courses_reviews"
+            case .wishlist:
+                return "wishlist"
             case .unknown:
                 return "unknown"
             }
@@ -558,7 +715,15 @@ extension AnalyticsEvent {
 
         var params: [String: Any]? {
             switch self {
-            case .myCourses, .visitedCourses, .downloads, .fastContinue, .notification, .unknown, .recommendation:
+            case .myCourses,
+                 .visitedCourses,
+                 .downloads,
+                 .fastContinue,
+                 .notification,
+                 .recommendation,
+                 .userCoursesReviews,
+                 .wishlist,
+                 .unknown:
                 return nil
             case .search(let query):
                 return ["query": query]
@@ -618,55 +783,97 @@ extension AnalyticsEvent {
         )
     }
 
-    static func writeCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func writeCourseReviewPressed(
+        courseID: Int,
+        courseTitle: String,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Create course review pressed",
             parameters: [
                 "course": courseID,
-                "title": courseTitle
+                "title": courseTitle,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func editCourseReviewPressed(courseID: Int, courseTitle: String) -> AmplitudeAnalyticsEvent {
+    static func editCourseReviewPressed(
+        courseID: Int,
+        courseTitle: String,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Edit course review pressed",
             parameters: [
                 "course": courseID,
-                "title": courseTitle
+                "title": courseTitle,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewCreated(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewCreated(courseID: Int, rating: Int, source: CourseReviewSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review created",
             parameters: [
                 "course": courseID,
-                "rating": rating
+                "rating": rating,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewUpdated(courseID: Int, fromRating: Int, toRating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewUpdated(
+        courseID: Int,
+        fromRating: Int,
+        toRating: Int,
+        source: CourseReviewSource
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review updated",
             parameters: [
                 "course": courseID,
                 "from_rating": fromRating,
-                "to_rating": toRating
+                "to_rating": toRating,
+                "source": source.rawValue
             ]
         )
     }
 
-    static func courseReviewDeleted(courseID: Int, rating: Int) -> AmplitudeAnalyticsEvent {
+    static func courseReviewDeleted(courseID: Int, rating: Int, source: CourseReviewSource) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Course review deleted",
             parameters: [
                 "course": courseID,
-                "rating": rating
+                "rating": rating,
+                "source": source.rawValue
             ]
         )
+    }
+
+    enum CourseReviewSource: String {
+        case courseReviews = "course_reviews"
+        case userReviews = "user_reviews"
+    }
+
+    static func userCourseReviewsScreenOpened(
+        userID: Int,
+        userAccountState: UserCourseReviewsUserAccountState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course reviews screen opened",
+            parameters: [
+                "id": userID,
+                "state": userAccountState.rawValue
+            ]
+        )
+    }
+
+    enum UserCourseReviewsUserAccountState: String {
+        case other
+        case anonymous
+        case authorized = "self"
     }
 
     // MARK: - Discussions -
@@ -771,14 +978,46 @@ extension AnalyticsEvent {
 
     static let videoPlayerDidStartPictureInPicture = AmplitudeAnalyticsEvent(name: "Video played in picture-in-picture")
 
-    static func videoPlayerDidChangeSpeed(currentSpeed: String, targetSpeed: String) -> AmplitudeAnalyticsEvent {
+    static func videoPlayerDidChangeSpeed(source: String, target: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Video rate changed",
             parameters: [
-                "source": currentSpeed,
-                "target": targetSpeed
+                "source": source,
+                "target": target
             ]
         )
+    }
+
+    static func videoPlayerQualityChanged(source: String, target: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Video quality changed",
+            parameters: [
+                "source": source,
+                "target": target
+            ]
+        )
+    }
+
+    static func videoPlayerControlClicked(_ sender: VideoPlayerControlType) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Video player control clicked",
+            parameters: [
+                "action": sender.rawValue
+            ]
+        )
+    }
+
+    enum VideoPlayerControlType: String {
+        case previos
+        case rewind
+        case forward
+        case next
+        case seekBack = "seek_back"
+        case seekForward = "seek_forward"
+        case doubleClickLeft = "double_click_left"
+        case doubleClickRight = "double_click_right"
+        case play
+        case pause
     }
 
     // MARK: - AdaptiveRating -
@@ -817,13 +1056,26 @@ extension AnalyticsEvent {
         )
     }
 
-    // MARK: - Home Screen Quick Actions -
+    // MARK: Home Screen Quick Actions
 
-    static func shortcutItemTriggered(type: String) -> AmplitudeAnalyticsEvent {
+    static func applicationShortcutItemTriggered(type: String) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Home screen quick action triggered",
             parameters: ["type": type]
         )
+    }
+
+    // MARK: Siri Shortcuts
+
+    static func siriShortcutContinued(type: SiriShortcutUserActivityType) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Siri shortcut triggered",
+            parameters: ["type": type.rawValue]
+        )
+    }
+
+    enum SiriShortcutUserActivityType: String {
+        case continueLearning = "continue_learning"
     }
 
     // MARK: - Home Screen Widget -
@@ -835,5 +1087,158 @@ extension AnalyticsEvent {
             name: "Home screen widget added",
             parameters: ["size": size]
         )
+    }
+
+    // MARK: - UserCourses -
+
+    static let myCoursesScreenOpened = AmplitudeAnalyticsEvent(name: "My courses screen opened")
+
+    static func myCoursesScreenTabOpened(tab: UserCourses.Tab) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "My courses screen tab opened",
+            parameters: [
+                "tab": tab.rawValue
+            ]
+        )
+    }
+
+    // MARK: - Wishlist -
+
+    static func wishlistCourseAdded(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist added",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static func wishlistCourseRemoved(
+        id: Int,
+        title: String,
+        isPaid: Bool,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Course wishlist removed",
+            parameters: [
+                "course": id,
+                "title": title,
+                "is_paid": isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+
+    static let wishlistScreenOpened = AmplitudeAnalyticsEvent(name: "Wishlist screen opened")
+
+    // MARK: - Finished Steps -
+
+    static func finishedStepsScreenOpened(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps screen opened",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsSharePressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps share pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsViewCertificatePressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps view certificate pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsBackToAssignmentsPressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps back to assignments pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsFindNewCoursePressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps find new course pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    static func finishedStepsLeaveReviewPressed(course: Course) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Finished steps leave review pressed",
+            parameters: [
+                "course": course.id,
+                "title": course.title,
+                "complete_rate": course.progress?.completeRate ?? 0
+            ]
+        )
+    }
+
+    // MARK: - UserCourse -
+
+    static func userCourseActionMade(
+        _ action: CourseInfo.UserCourseAction,
+        course: Course,
+        viewSource: CourseViewSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "User course action",
+            parameters: [
+                "action": action.analyticName,
+                "course": course.id,
+                "title": course.title,
+                "is_paid": course.isPaid,
+                "source": viewSource.name
+            ]
+        )
+    }
+}
+
+fileprivate extension CourseInfo.UserCourseAction {
+    var analyticName: String {
+        switch self {
+        case .favoriteAdd:
+            return "favorite_add"
+        case .favoriteRemove:
+            return "favorite_remove"
+        case .archiveAdd:
+            return "archive_add"
+        case .archiveRemove:
+            return "archive_remove"
+        }
     }
 }

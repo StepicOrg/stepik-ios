@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension UserCourse {
     @NSManaged var managedId: NSNumber?
@@ -9,27 +8,10 @@ extension UserCourse {
     @NSManaged var managedIsPinned: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedLastViewed: Date?
+    @NSManaged var managedCanBeReviewed: NSNumber
 
     @NSManaged var managedUser: User?
     @NSManaged var managedCourse: Course?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "UserCourse", in: CoreDataHelper.shared.context)!
-    }
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<UserCourse> {
-        NSFetchRequest<UserCourse>(entityName: "UserCourse")
-    }
-
-    static var observableKeys: Set<String> = ["managedIsFavorite", "managedIsArchived", "managedCourse"]
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {
@@ -91,6 +73,15 @@ extension UserCourse {
         }
         set {
             self.managedLastViewed = newValue
+        }
+    }
+
+    var canBeReviewed: Bool {
+        get {
+            self.managedCanBeReviewed.boolValue
+        }
+        set {
+            self.managedCanBeReviewed = NSNumber(value: newValue)
         }
     }
 

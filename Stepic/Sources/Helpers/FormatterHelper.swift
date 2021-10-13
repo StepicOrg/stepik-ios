@@ -52,11 +52,12 @@ enum FormatterHelper {
     }
 
     static func price(_ price: Float, currencyCode: String) -> String {
+        self.price(price, currencySymbol: CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode)
+    }
+
+    static func price(_ price: Float, currencySymbol: String) -> String {
         let hasDecimals = price.truncatingRemainder(dividingBy: 1) != 0
         let priceString = hasDecimals ? String(format: "%.2f", price) : "\(Int(price))"
-
-        let currencySymbol = CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode
-
         return "\(priceString) \(currencySymbol)"
     }
 
@@ -156,6 +157,71 @@ enum FormatterHelper {
         }
     }
 
+    /// Format reviews count with localized and pluralized suffix; 1 -> "1 review", 5 -> "5 reviews"
+    static func reviewsCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("reviews1", comment: ""),
+                NSLocalizedString("reviews234", comment: ""),
+                NSLocalizedString("reviews567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format reviews count with localized and pluralized suffix; 1 -> "1 review", 5 -> "5 reviews"
+    static func quizReviewsCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("quizReviews1", comment: ""),
+                NSLocalizedString("quizReviews234", comment: ""),
+                NSLocalizedString("quizReviews567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format reviews count with localized and pluralized suffix; 1 -> "1 new course for review", 5 -> "5 new courses for review"
+    static func userCoursesReviewsPossibleReviewsCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("UserCoursesReviewsPossibleReviews1", comment: ""),
+                NSLocalizedString("UserCoursesReviewsPossibleReviews234", comment: ""),
+                NSLocalizedString("UserCoursesReviewsPossibleReviews567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format reviews count with localized and pluralized suffix; 1 -> "1 review", 5 -> "5 reviews"
+    static func reviewSummariesCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("reviewSummaries1", comment: ""),
+                NSLocalizedString("reviewSummaries234", comment: ""),
+                NSLocalizedString("reviewSummaries567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
+    /// Format submissions count with localized and pluralized suffix; 1 -> "1 submission", 5 -> "5 submissions"
+    static func submissionsCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("submissions1", comment: ""),
+                NSLocalizedString("submissions234", comment: ""),
+                NSLocalizedString("submissions567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
     // MARK: Date
 
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"
@@ -240,6 +306,11 @@ enum FormatterHelper {
         dateFormatter.dateFormat = "dd MMMM yyyy HH:mm"
 
         return dateFormatter.string(from: date)
+    }
+
+    /// Format date with full month and year; "18 October 2018 00:00"
+    static func dateStringWithFullMonthAndYear(_ dateInRegion: DateInRegion) -> String {
+        dateInRegion.toFormat("dd MMMM yyyy HH:mm")
     }
 
     /// Format a date to a string representation relative to another reference date (default current).

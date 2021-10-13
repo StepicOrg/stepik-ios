@@ -96,9 +96,11 @@ final class RetrieveRequestMaker {
                                 return T(json: objectJSON)
                             }
                         }
+
+                        self.saveManagedObjectContextIfNeeded(objectType: T.self)
+
                         let meta = Meta(json: json["meta"])
                         seal.fulfill((resultArray, meta, json))
-                        CoreDataHelper.shared.save()
                     }
                 }
             }.catch { error in
@@ -133,6 +135,7 @@ final class RetrieveRequestMaker {
         requestEndpoint: String,
         paramName: String,
         params: Parameters,
+        updatingObjects: [T] = [],
         withManager manager: Alamofire.Session
     ) -> Promise<[T]> {
         var allObjects = [T]()
@@ -147,7 +150,7 @@ final class RetrieveRequestMaker {
                         requestEndpoint: requestEndpoint,
                         paramName: paramName,
                         params: currentPageParams,
-                        updatingObjects: [],
+                        updatingObjects: updatingObjects,
                         withManager: manager
                     )
                 }.done { objects, meta in
@@ -205,11 +208,10 @@ final class RetrieveRequestMaker {
                                 }
                             }
 
-                            CoreDataHelper.shared.save()
+                            self.saveManagedObjectContextIfNeeded(objectType: T.self)
 
                             let meta = Meta(json: json["meta"])
                             seal.fulfill((resultArray, meta, json))
-                            CoreDataHelper.shared.save()
                         }.catch { error in
                             seal.reject(error)
                         }
@@ -241,9 +243,9 @@ final class RetrieveRequestMaker {
         }
     }
 
-    func request(
+    func request<IdType: Equatable>(
         requestEndpoint: String,
-        ids: [IDTypeable],
+        ids: [IdType],
         withManager manager: Alamofire.Session
     ) -> Promise<JSON> {
         if ids.isEmpty {
@@ -301,8 +303,7 @@ final class RetrieveRequestMaker {
                         seal.reject(NetworkError(error: error))
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
-                        let resultArray: [T] = jsonArray.map {
-                            objectJSON in
+                        let resultArray: [T] = jsonArray.map { objectJSON in
                             if let recoveredIndex = updating.firstIndex(where: { $0.hasEqualId(json: objectJSON) }) {
                                 updating[recoveredIndex].update(json: objectJSON)
                                 return updating[recoveredIndex]
@@ -311,7 +312,8 @@ final class RetrieveRequestMaker {
                             }
                         }
 
-                        CoreDataHelper.shared.save()
+                        self.saveManagedObjectContextIfNeeded(objectType: T.self)
+
                         seal.fulfill((resultArray, json))
                     }
                 }
@@ -340,6 +342,14 @@ final class RetrieveRequestMaker {
             }.catch { error in
                 seal.reject(error)
             }
+        }
+    }
+
+    // MARK: Private API
+
+    private func saveManagedObjectContextIfNeeded<T>(objectType: T.Type) {
+        if objectType is ManagedObject.Type {
+            CoreDataHelper.shared.save()
         }
     }
 }

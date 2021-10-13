@@ -394,8 +394,8 @@ extension AuthAPI {
     func logInWithUsername(
         _ username: String,
         password: String,
-        success : @escaping (_ token: StepikToken) -> Void,
-        failure : @escaping (_ error: SignInError) -> Void
+        success: @escaping (_ token: StepikToken) -> Void,
+        failure: @escaping (_ error: SignInError) -> Void
     ) -> Request? {
         self.signInWithAccount(email: username, password: password).done { token, authorizationType in
             AuthInfo.shared.authorizationType = authorizationType
@@ -414,8 +414,8 @@ extension AuthAPI {
     @discardableResult
     func refreshTokenWith(
         _ refresh_token: String,
-        success : @escaping (_ token: StepikToken) -> Void,
-        failure : @escaping (_ error: TokenRefreshError) -> Void
+        success: @escaping (_ token: StepikToken) -> Void,
+        failure: @escaping (_ error: TokenRefreshError) -> Void
     ) -> Request? {
         self.refreshToken(with: refresh_token, authorizationType: AuthInfo.shared.authorizationType).done { token in
             success(token)

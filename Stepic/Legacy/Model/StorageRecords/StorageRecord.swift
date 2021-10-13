@@ -45,6 +45,8 @@ final class StorageRecord: JSONSerializable {
             return DeadlineStorageRecordData(json: json)
         case .personalOffers:
             return PersonalOfferStorageRecordData(json: json)
+        case .wishlist:
+            return WishlistStorageRecordData(json: json)
         }
     }
 

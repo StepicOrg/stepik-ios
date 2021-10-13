@@ -8,6 +8,8 @@ enum LaunchArguments {
 
     static var flexShowExplorerOnLaunch = Self.hasArgument("-com.AlexKarpov.Stepic.FLEXShowExplorerOnLaunch")
 
+    static var isNetworkDebuggingEnabled = Self.hasArgument("-com.AlexKarpov.Stepic.IsNetworkDebuggingEnabled")
+
     private static func hasArgument(_ argument: String) -> Bool {
         CommandLine.arguments.contains(argument)
     }

@@ -1,42 +1,9 @@
-//
-//  Notification.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 26.09.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import PromiseKit
 import SwiftyJSON
 
-final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
+final class Notification: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
-
-    required convenience init(json: JSON) {
-        self.init()
-        initialize(json)
-    }
-
-    func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        htmlText = json["html_text"].stringValue
-        time = Parser.dateFromTimedateJSON(json["time"])
-        isMuted = json["is_muted"].boolValue
-        isFavorite = json["is_favorite"].boolValue
-
-        managedStatus = json["is_unread"].boolValue ? NotificationStatus.unread.rawValue : NotificationStatus.read.rawValue
-        managedType = json["type"].stringValue
-        managedAction = json["action"].stringValue
-
-        level = json["level"].stringValue
-        priority = json["priority"].stringValue
-    }
-
-    func update(json: JSON) {
-        initialize(json)
-    }
 
     var json: JSON {
         [
@@ -51,6 +18,28 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
             "priority": priority as AnyObject
         ]
     }
+
+    required convenience init(json: JSON) {
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
+    }
+
+    func update(json: JSON) {
+        self.id = json["id"].intValue
+        self.htmlText = json["html_text"].stringValue
+        self.time = Parser.dateFromTimedateJSON(json["time"])
+        self.isMuted = json["is_muted"].boolValue
+        self.isFavorite = json["is_favorite"].boolValue
+
+        self.managedStatus = json["is_unread"].boolValue
+            ? NotificationStatus.unread.rawValue
+            : NotificationStatus.read.rawValue
+        self.managedType = json["type"].stringValue
+        self.managedAction = json["action"].stringValue
+
+        self.level = json["level"].stringValue
+        self.priority = json["priority"].stringValue
+    }
 }
 
 enum NotificationStatus: String {
@@ -59,21 +48,26 @@ enum NotificationStatus: String {
 }
 
 enum NotificationType: String {
-    var localizedName: String {
-        switch self {
-        case .comments: return NSLocalizedString("NotificationsComments", comment: "")
-        case .review: return NSLocalizedString("NotificationsReviews", comment: "")
-        case .teach: return NSLocalizedString("NotificationsTeaching", comment: "")
-        case .`default`: return NSLocalizedString("NotificationsOther", comment: "")
-        case .learn: return NSLocalizedString("NotificationsLearning", comment: "")
-        }
-    }
-
     case comments = "comments"
     case learn = "learn"
     case `default` = "default"
     case review = "review"
     case teach = "teach"
+
+    var localizedName: String {
+        switch self {
+        case .comments:
+            return NSLocalizedString("NotificationsComments", comment: "")
+        case .review:
+            return NSLocalizedString("NotificationsReviews", comment: "")
+        case .teach:
+            return NSLocalizedString("NotificationsTeaching", comment: "")
+        case .`default`:
+            return NSLocalizedString("NotificationsOther", comment: "")
+        case .learn:
+            return NSLocalizedString("NotificationsLearning", comment: "")
+        }
+    }
 }
 
 enum NotificationAction: String {

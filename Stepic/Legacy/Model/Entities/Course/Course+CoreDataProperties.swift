@@ -1,16 +1,4 @@
-//
-//  Course+CoreDataProperties.swift
-//  
-//
-//  Created by Alexander Karpov on 25.09.15.
-//
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Course {
     @NSManaged var managedId: NSNumber?
@@ -57,9 +45,11 @@ extension Course {
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
     @NSManaged var managedAuthorsArray: NSObject?
+    @NSManaged var managedAnnouncementsArray: NSObject?
 
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
+    @NSManaged var managedDisplayPriceIAP: String?
     @NSManaged var managedPriceTier: NSNumber?
     @NSManaged var managedCurrencyCode: String?
 
@@ -67,6 +57,9 @@ extension Course {
     @NSManaged var managedDefaultPromoCodePrice: NSNumber?
     @NSManaged var managedDefaultPromoCodeDiscount: NSNumber?
     @NSManaged var managedDefaultPromoCodeExpireDate: Date?
+
+    @NSManaged var managedCanViewRevenue: NSNumber?
+    @NSManaged var managedCanCreateAnnouncements: NSNumber
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -80,14 +73,11 @@ extension Course {
     @NSManaged var managedSections: NSOrderedSet?
     @NSManaged var managedUserCourse: UserCourse?
     @NSManaged var managedCoursePurchases: NSOrderedSet?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
-    }
-
-    convenience init() {
-        self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
+    @NSManaged var managedCourseBenefitSummaries: NSSet?
+    @NSManaged var managedCourseBenefits: NSOrderedSet?
+    @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
+    @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
 
     var id: Int {
         set(newId) {
@@ -311,11 +301,20 @@ extension Course {
     }
 
     var displayPrice: String? {
+        get {
+            self.managedDisplayPrice
+        }
         set {
             self.managedDisplayPrice = newValue
         }
+    }
+
+    var displayPriceIAP: String? {
         get {
-            managedDisplayPrice
+            self.managedDisplayPriceIAP
+        }
+        set {
+            self.managedDisplayPriceIAP = newValue
         }
     }
 
@@ -519,6 +518,24 @@ extension Course {
         }
     }
 
+    var canViewRevenue: Bool {
+        get {
+            self.managedCanViewRevenue?.boolValue ?? false
+        }
+        set {
+            self.managedCanViewRevenue = NSNumber(value: newValue)
+        }
+    }
+
+    var canCreateAnnouncements: Bool {
+        get {
+            self.managedCanCreateAnnouncements.boolValue
+        }
+        set {
+            self.managedCanCreateAnnouncements = NSNumber(value: newValue)
+        }
+    }
+
     var progress: Progress? {
         get {
             managedProgress
@@ -598,6 +615,15 @@ extension Course {
         }
     }
 
+    var announcementsArray: [Announcement.IdType] {
+        get {
+            self.managedAnnouncementsArray as? [Announcement.IdType] ?? []
+        }
+        set {
+            self.managedAnnouncementsArray = NSArray(array: newValue)
+        }
+    }
+
     var authors: [User] {
         get {
             (self.managedAuthors?.array as? [User]) ?? []
@@ -634,10 +660,6 @@ extension Course {
         }
     }
 
-    var isPurchased: Bool {
-        self.purchases.contains(where: { $0.isActive })
-    }
-
     var userCourse: UserCourse? {
         get {
             self.managedUserCourse
@@ -647,11 +669,49 @@ extension Course {
         }
     }
 
-    var canWriteReview: Bool {
-        if let progress = self.progress {
-            return (Double(progress.numberOfStepsPassed) * 100.0 / Double(progress.numberOfSteps)) >= 80.0
+    var courseBenefitSummaries: [CourseBenefitSummary] {
+        get {
+            self.managedCourseBenefitSummaries?.allObjects as! [CourseBenefitSummary]
         }
-        return false
+        set {
+            self.managedCourseBenefitSummaries = NSSet(array: newValue)
+        }
+    }
+
+    var courseBenefits: [CourseBenefit] {
+        get {
+            self.managedCourseBenefits?.array as? [CourseBenefit] ?? []
+        }
+        set {
+            self.managedCourseBenefits = NSOrderedSet(array: newValue)
+        }
+    }
+
+    var courseBenefitByMonths: [CourseBenefitByMonth] {
+        get {
+            self.managedCourseBenefitByMonths?.array as? [CourseBenefitByMonth] ?? []
+        }
+        set {
+            self.managedCourseBenefitByMonths = NSOrderedSet(array: newValue)
+        }
+    }
+
+    var courseBeneficiaries: [CourseBeneficiary] {
+        get {
+            self.managedCourseBeneficiaries?.allObjects as! [CourseBeneficiary]
+        }
+        set {
+            self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
+        }
     }
 
     func addSection(_ section: Section) {

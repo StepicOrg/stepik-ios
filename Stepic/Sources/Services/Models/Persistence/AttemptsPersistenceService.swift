@@ -1,9 +1,9 @@
 import CoreData
-import Foundation
 import PromiseKit
 
 protocol AttemptsPersistenceServiceProtocol: AnyObject {
     func fetchStepAttempts(stepID: Step.IdType) -> Guarantee<[AttemptEntity]>
+    func fetch(id: Attempt.IdType) -> Guarantee<AttemptEntity?>
     func fetch(ids: [Attempt.IdType]) -> Guarantee<[AttemptEntity]>
 
     func save(attempts: [Attempt]) -> Guarantee<Void>
@@ -11,39 +11,35 @@ protocol AttemptsPersistenceServiceProtocol: AnyObject {
     func deleteAll() -> Promise<Void>
 }
 
-final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
-    private let managedObjectContext: NSManagedObjectContext
+final class AttemptsPersistenceService: BasePersistenceService<AttemptEntity>, AttemptsPersistenceServiceProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
     init(
         managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context,
         stepsPersistenceService: StepsPersistenceServiceProtocol = StepsPersistenceService()
     ) {
-        self.managedObjectContext = managedObjectContext
         self.stepsPersistenceService = stepsPersistenceService
+        super.init(managedObjectContext: managedObjectContext)
     }
 
     // MARK: Protocol Conforming
 
     func fetchStepAttempts(stepID: Step.IdType) -> Guarantee<[AttemptEntity]> {
         Guarantee { seal in
-            firstly { () -> Guarantee<Step?> in
-                self.fetchStep(id: stepID)
-            }.done { step in
-                let request = NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")
+            self.fetchStep(id: stepID).done { stepOrNil in
+                let request = AttemptEntity.sortedFetchRequest
                 request.predicate = NSPredicate(
                     format: "%K == %@",
                     #keyPath(AttemptEntity.managedStepID),
                     NSNumber(value: stepID)
                 )
-                request.sortDescriptors = AttemptEntity.defaultSortDescriptors
                 request.returnsObjectsAsFaults = false
 
-                self.managedObjectContext.performAndWait {
+                self.managedObjectContext.perform {
                     do {
                         let attempts = try self.managedObjectContext.fetch(request)
 
-                        if let step = step {
+                        if let step = stepOrNil {
                             attempts.forEach { $0.step = step }
                             try? self.managedObjectContext.save()
                         }
@@ -53,30 +49,6 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
                         print("Error while fetching attempts for step = \(stepID), error = \(error)")
                         seal([])
                     }
-                }
-            }
-        }
-    }
-
-    func fetch(ids: [Attempt.IdType]) -> Guarantee<[AttemptEntity]> {
-        Guarantee { seal in
-            let request = NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")
-
-            let idSubpredicates = ids.map { id in
-                NSPredicate(format: "%K == %@", #keyPath(AttemptEntity.managedID), NSNumber(value: id))
-            }
-            let compoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idSubpredicates)
-
-            request.predicate = compoundPredicate
-            request.sortDescriptors = AttemptEntity.defaultSortDescriptors
-
-            self.managedObjectContext.performAndWait {
-                do {
-                    let attempts = try self.managedObjectContext.fetch(request)
-                    seal(attempts)
-                } catch {
-                    print("Error while fetching attempts = \(ids)")
-                    seal([])
                 }
             }
         }
@@ -104,33 +76,12 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
         }
     }
 
-    func deleteAll() -> Promise<Void> {
-        Promise { seal in
-            let request: NSFetchRequest<AttemptEntity> = AttemptEntity.fetchRequest
-            self.managedObjectContext.performAndWait {
-                do {
-                    let attempts = try self.managedObjectContext.fetch(request)
-                    for attempt in attempts {
-                        self.managedObjectContext.delete(attempt)
-                    }
-
-                    try? self.managedObjectContext.save()
-
-                    seal.fulfill(())
-                } catch {
-                    print("AttemptsPersistenceService :: failed delete all attempts with error = \(error)")
-                    seal.reject(Error.deleteFailed)
-                }
-            }
-        }
-    }
-
     // MARK: Private API
 
     private func fetchStep(id: Step.IdType) -> Guarantee<Step?> {
         Guarantee { seal in
-            self.stepsPersistenceService.fetch(ids: [id]).done { steps in
-                seal(steps.first)
+            self.stepsPersistenceService.fetch(id: id).done { stepOrNil in
+                seal(stepOrNil)
             }.catch { _ in
                 seal(nil)
             }
@@ -154,20 +105,13 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
                 self.managedObjectContext.performAndWait {
                     cachedAttempts.forEach { self.managedObjectContext.delete($0) }
 
-                    let newAttempt = AttemptEntity(
-                        attempt: attempt,
-                        managedObjectContext: self.managedObjectContext
-                    )
-
-                    try? self.managedObjectContext.save()
+                    let newAttempt = AttemptEntity.insert(into: self.managedObjectContext, attempt: attempt)
 
                     if let step = cachedStepOrNil {
                         newAttempt.step = step
                     }
 
-                    if self.managedObjectContext.hasChanges {
-                        try? self.managedObjectContext.save()
-                    }
+                    self.managedObjectContext.saveOrRollback()
 
                     seal(())
                 }
@@ -175,9 +119,5 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
                 seal(())
             }
         }
-    }
-
-    enum Error: Swift.Error {
-        case deleteFailed
     }
 }

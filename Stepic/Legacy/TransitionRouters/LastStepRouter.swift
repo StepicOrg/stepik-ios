@@ -22,9 +22,20 @@ final class LastStepRouter {
         didJustSubscribe: Bool = false,
         using navigationController: UINavigationController,
         skipSyllabus: Bool = false,
-        courseViewSource: AnalyticsEvent.CourseViewSource,
+        source: AnalyticsEvent.CourseContinueSource,
+        viewSource: AnalyticsEvent.CourseViewSource,
+        shouldDonateInteraction: Bool = false,
         lessonModuleOutput: LessonOutputProtocol? = nil
     ) {
+        StepikAnalytics.shared.send(
+            .courseContinuePressed(
+                id: course.id,
+                title: course.title,
+                source: source,
+                viewSource: viewSource
+            )
+        )
+
         if skipSyllabus == true && lessonModuleOutput == nil {
             assert(false, "You need to provide LessonOutputProtocol when skipping syllabus!")
         }
@@ -33,7 +44,7 @@ final class LastStepRouter {
             return self.fallbackToCourseInfo(
                 courseID: course.id,
                 initialTab: .info,
-                courseViewSource: courseViewSource,
+                courseViewSource: viewSource,
                 navigationController: navigationController
             )
         }
@@ -42,7 +53,7 @@ final class LastStepRouter {
               let lastStepID = course.lastStepId else {
             return self.fallbackToSyllabus(
                 courseID: course.id,
-                courseViewSource: courseViewSource,
+                courseViewSource: viewSource,
                 navigationController: navigationController
             )
         }
@@ -66,7 +77,8 @@ final class LastStepRouter {
                 didJustSubscribe: didJustSubscribe,
                 using: navigationController,
                 skipSyllabus: skipSyllabus,
-                courseViewSource: courseViewSource,
+                courseViewSource: viewSource,
+                shouldDonateInteraction: shouldDonateInteraction,
                 lessonModuleOutput: lessonModuleOutput
             )
         }.catch { error in
@@ -81,6 +93,7 @@ final class LastStepRouter {
         using navigationController: UINavigationController,
         skipSyllabus: Bool = false,
         courseViewSource: AnalyticsEvent.CourseViewSource = .unknown,
+        shouldDonateInteraction: Bool,
         lessonModuleOutput: LessonOutputProtocol? = nil
     ) {
         SVProgressHUD.show()
@@ -97,6 +110,10 @@ final class LastStepRouter {
                     courseViewSource: courseViewSource,
                     navigationController: navigationController
                 )
+            }
+
+            if shouldDonateInteraction {
+                self.donateContinueLearningInteraction(for: cardsViewController)
             }
 
             cardsViewController.hidesBottomBarWhenPushed = true
@@ -229,6 +246,10 @@ final class LastStepRouter {
 
                 SVProgressHUD.showSuccess(withStatus: "")
 
+                if shouldDonateInteraction {
+                    self.donateContinueLearningInteraction(for: lessonViewController)
+                }
+
                 if !skipSyllabus {
                     navigationController.pushViewController(courseInfoViewController, animated: false)
                 }
@@ -344,5 +365,15 @@ final class LastStepRouter {
         let viewController = assembly.makeModule()
 
         navigationController.pushViewController(viewController, animated: true)
+    }
+
+    private static func donateContinueLearningInteraction(for viewController: UIViewController) {
+        if #available(iOS 12.0, *) {
+            let siriShortcutsService: SiriShortcutsServiceProtocol = SiriShortcutsService()
+
+            let userActivity = siriShortcutsService.getContinueLearningShortcut()
+            viewController.userActivity = userActivity
+            userActivity.becomeCurrent()
+        }
     }
 }

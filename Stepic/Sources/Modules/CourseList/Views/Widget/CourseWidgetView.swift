@@ -13,13 +13,13 @@ extension CourseWidgetView {
         let titleLabelInsets = LayoutInsets(left: 8, right: 8)
 
         let badgeImageViewInsets = LayoutInsets(right: 16)
-        let badgeImageViewTintColor = UIColor.stepikSystemSecondaryText
         let badgeImageViewSize = CGSize(width: 18, height: 18)
 
         let statsViewHeight: CGFloat = 17
         let statsViewInsets = LayoutInsets(top: 8)
 
         let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
+        let priceViewInsets = LayoutInsets(top: 12, bottom: 17)
 
         let continueLearningButtonInsets = LayoutInsets(top: 16)
 
@@ -40,7 +40,7 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
     private lazy var badgeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = self.appearance.badgeImageViewTintColor
+        imageView.tintColor = self.colorMode.courseWidgetBadgeTintColor
         return imageView
     }()
 
@@ -66,7 +66,16 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         return button
     }()
 
+    private lazy var priceView: CourseWidgetPriceView = {
+        let view = CourseWidgetPriceView()
+        view.isHidden = true
+        return view
+    }()
+
     private var badgeImageViewWidthConstraint: Constraint?
+
+    private var summaryLabelLeadingToSuperviewConstraint: Constraint?
+    private var summaryLabelLeadingToTitleConstraint: Constraint?
 
     var onContinueLearningButtonClick: (() -> Void)?
 
@@ -107,16 +116,47 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         self.statsView.isArchived = isArchived
         self.statsView.progress = isArchived ? nil : viewModel.progress
 
-        let isFavorite = viewModel.userCourse?.isFavorite ?? false
-        self.badgeImageView.image = isFavorite
-            ? UIImage(named: "course-widget-favorite")?.withRenderingMode(.alwaysTemplate)
-            : nil
-        self.badgeImageViewWidthConstraint?.update(offset: isFavorite ? self.appearance.badgeImageViewSize.width : 0)
-        self.badgeImageView.isHidden = !isFavorite
+        self.updatePriceView(viewModel: viewModel.price)
+        self.updateBadgeImageView(viewModel: viewModel)
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
         self.statsView.progress = viewModel
+    }
+
+    private func updatePriceView(viewModel: CourseWidgetPriceViewModel?) {
+        if let viewModel = viewModel, !viewModel.isEnrolled {
+            self.summaryLabelLeadingToTitleConstraint?.activate()
+            self.summaryLabelLeadingToSuperviewConstraint?.deactivate()
+
+            self.priceView.isHidden = false
+            self.priceView.configure(viewModel: viewModel)
+        } else {
+            self.summaryLabelLeadingToTitleConstraint?.deactivate()
+            self.summaryLabelLeadingToSuperviewConstraint?.activate()
+            self.priceView.isHidden = true
+        }
+    }
+
+    private func updateBadgeImageView(viewModel: CourseWidgetViewModel) {
+        let badgeImage: UIImage? = {
+            if viewModel.isWishlistAvailable {
+                let imageName = viewModel.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
+                return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+            } else if let userCourse = viewModel.userCourse {
+                return userCourse.isFavorite
+                    ? UIImage(named: "course-widget-favorite")?.withRenderingMode(.alwaysTemplate)
+                    : nil
+            } else {
+                return nil
+            }
+        }()
+
+        self.badgeImageView.image = badgeImage
+        self.badgeImageView.isHidden = badgeImage == nil
+        self.badgeImageViewWidthConstraint?.update(
+            offset: badgeImage != nil ? self.appearance.badgeImageViewSize.width : 0
+        )
     }
 
     // MARK: Private API
@@ -138,6 +178,7 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.badgeImageView)
         self.addSubview(self.statsView)
         self.addSubview(self.summaryLabel)
+        self.addSubview(self.priceView)
         self.addSubview(self.continueLearningButton)
         self.addSubview(self.separatorView)
     }
@@ -202,15 +243,27 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
             make.top
                 .equalTo(self.coverView.snp.bottom)
                 .offset(self.appearance.summaryLabelInsets.top)
-            make.leading
-                .equalToSuperview()
-                .offset(self.appearance.summaryLabelInsets.left)
             make.bottom
                 .equalToSuperview()
                 .offset(-self.appearance.summaryLabelInsets.bottom)
             make.trailing
                 .equalToSuperview()
                 .offset(-self.appearance.summaryLabelInsets.right)
+
+            self.summaryLabelLeadingToSuperviewConstraint = make.leading
+                .equalToSuperview()
+                .offset(self.appearance.summaryLabelInsets.left)
+                .constraint
+            self.summaryLabelLeadingToTitleConstraint = make.leading.equalTo(self.titleLabel.snp.leading).constraint
+            self.summaryLabelLeadingToTitleConstraint?.deactivate()
+        }
+
+        self.priceView.translatesAutoresizingMaskIntoConstraints = false
+        self.priceView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(self.coverView.snp.bottom).offset(self.appearance.priceViewInsets.top)
+            make.leading.equalTo(self.coverView.snp.leading)
+            make.bottom.equalToSuperview().offset(-self.appearance.priceViewInsets.bottom)
+            make.trailing.equalTo(self.coverView.snp.trailing)
         }
 
         self.continueLearningButton.translatesAutoresizingMaskIntoConstraints = false

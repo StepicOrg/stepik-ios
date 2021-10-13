@@ -18,8 +18,12 @@ protocol CardStepDelegate: AnyObject {
 
 extension CardStepDelegate {
     func stepSubmissionDidCorrect() {}
+
     func stepSubmissionDidWrong() {}
+
     func stepSubmissionDidRetry() {}
+
     func contentLoadingDidFail() {}
+
     func contentLoadingDidComplete() {}
 }

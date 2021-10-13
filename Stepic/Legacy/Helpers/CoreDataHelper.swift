@@ -53,12 +53,16 @@ final class CoreDataHelper: NSObject {
     }
 
     func save() {
+        guard self.context.hasChanges else {
+            return
+        }
+
         self.lockQueue.sync { [weak self] in
             self?.context.perform({ [weak self] in
                 do {
                     try self?.context.save()
                 } catch {
-                    print("SAVING ERROR")
+                    print("SAVING ERROR = \(error)")
                 }
             })
         }

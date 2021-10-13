@@ -1,7 +1,14 @@
 import Foundation
 
 enum WriteCourseReview {
-    // MARK: Common structs
+    // MARK: Common data types
+
+    enum PresentationContext {
+        case create(CourseReviewPlainObject?)
+        case update(CourseReview)
+
+        static var create: PresentationContext { .create(nil) }
+    }
 
     struct CourseReviewInfo {
         let text: String

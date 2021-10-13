@@ -33,9 +33,19 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
         self.presenter.presentCourseSyllabus(response: .init(course: course, courseViewSource: viewSource))
     }
 
-    func presentLastStep(course: Course, isAdaptive: Bool, viewSource: AnalyticsEvent.CourseViewSource) {
+    func presentLastStep(
+        course: Course,
+        isAdaptive: Bool,
+        source: AnalyticsEvent.CourseContinueSource,
+        viewSource: AnalyticsEvent.CourseViewSource
+    ) {
         self.presenter.presentLastStep(
-            response: .init(course: course, isAdaptive: isAdaptive, courseViewSource: viewSource)
+            response: .init(
+                course: course,
+                isAdaptive: isAdaptive,
+                courseContinueSource: source,
+                courseViewSource: viewSource
+            )
         )
     }
 

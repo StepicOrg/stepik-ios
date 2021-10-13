@@ -1,16 +1,4 @@
-//
-//  Step+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 12.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Step {
     @NSManaged var managedId: NSNumber?
@@ -25,6 +13,7 @@ extension Step {
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
     @NSManaged var managedIsEnabled: NSNumber?
+    @NSManaged var managedSessionId: NSNumber?
     @NSManaged var managedInstructionId: NSNumber?
     @NSManaged var managedInstructionType: String?
     @NSManaged var managedNeedsPlan: String?
@@ -40,17 +29,7 @@ extension Step {
     @NSManaged var managedDiscussionThreadsArray: NSObject?
     @NSManaged var managedDiscussionThreads: NSOrderedSet?
 
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<Step> {
-        NSFetchRequest<Step>(entityName: "Step")
-    }
-
-    convenience init() {
-        self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
+    @NSManaged var managedSearchResults: NSSet?
 
     var id: Int {
         get {
@@ -249,6 +228,15 @@ extension Step {
         }
     }
 
+    var sessionID: Int? {
+        get {
+            self.managedSessionId?.intValue
+        }
+        set {
+            self.managedSessionId = newValue as NSNumber?
+        }
+    }
+
     var instructionID: Int? {
         get {
             self.managedInstructionId?.intValue
@@ -258,7 +246,7 @@ extension Step {
         }
     }
 
-    var instructionType: String? {
+    var instructionTypeString: String? {
         get {
             self.managedInstructionType
         }
@@ -273,6 +261,15 @@ extension Step {
         }
         set {
             self.managedNeedsPlan = newValue
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
         }
     }
 }

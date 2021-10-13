@@ -1,5 +1,4 @@
 import CoreData
-import Foundation
 
 extension SocialProfile {
     @NSManaged var managedId: NSNumber?
@@ -9,22 +8,6 @@ extension SocialProfile {
     @NSManaged var managedURL: String?
 
     @NSManaged var managedUser: User?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "SocialProfile", in: CoreDataHelper.shared.context)!
-    }
-
-    static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
-    }
-
-    static var fetchRequest: NSFetchRequest<SocialProfile> {
-        NSFetchRequest<SocialProfile>(entityName: "SocialProfile")
-    }
-
-    convenience init() {
-        self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
 
     var id: Int {
         get {

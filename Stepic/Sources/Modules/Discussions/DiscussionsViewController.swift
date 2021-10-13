@@ -18,13 +18,13 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayCommentNotFoundStatus(viewModel: Discussions.CommentNotFoundPresentation.ViewModel)
 }
 
 // MARK: - DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder -
 
 final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
     lazy var discussionsView = self.view as? DiscussionsView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
@@ -372,6 +372,10 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    func displayCommentNotFoundStatus(viewModel: Discussions.CommentNotFoundPresentation.ViewModel) {
+        SVProgressHUD.showError(withStatus: viewModel.status)
     }
 
     // MARK: Private Helpers

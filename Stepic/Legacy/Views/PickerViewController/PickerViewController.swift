@@ -14,8 +14,8 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var titleLabel: StepikLabel!
 
-    var selectedAction : (() -> Void)?
-    var cancelAction : (() -> Void)?
+    var selectedAction: (() -> Void)?
+    var cancelAction: (() -> Void)?
 
     var selectedBlock: (() -> Void)?
     var pickerTitle: String = ""

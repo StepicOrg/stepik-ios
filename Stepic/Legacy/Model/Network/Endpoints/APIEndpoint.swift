@@ -25,7 +25,9 @@ class APIEndpoint {
     init() {
         var eventMonitors = [EventMonitor]()
         #if DEBUG
-        eventMonitors = [AlamofireRequestsLogger()]
+        if LaunchArguments.isNetworkDebuggingEnabled {
+            eventMonitors = [AlamofireRequestsLogger()]
+        }
         #endif
 
         self.manager = Alamofire.Session(
@@ -69,7 +71,7 @@ class APIEndpoint {
         deleteObjects: [T],
         refreshMode: RefreshMode,
         success: (([T]) -> Void)?,
-        failure : @escaping (_ error: NetworkError) -> Void
+        failure: @escaping (_ error: NetworkError) -> Void
     ) -> Request? {
         self.getObjectsByIds(
             ids: ids,

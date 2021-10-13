@@ -25,6 +25,11 @@ protocol CourseListDataBackUpdateServiceDelegate: AnyObject {
     func courseListDataBackUpdateServiceDidUpdateCourseList(
         _ service: CourseListDataBackUpdateServiceProtocol
     )
+    /// Tells the delegate that the wislist is updated.
+    func courseListDataBackUpdateService(
+        _ service: CourseListDataBackUpdateServiceProtocol,
+        didUpdateWishlist wishlistCoursesIDs: Set<Course.IdType>
+    )
 }
 
 protocol CourseListDataBackUpdateServiceProtocol: AnyObject {
@@ -41,6 +46,7 @@ final class CourseListDataBackUpdateService: CourseListDataBackUpdateServiceProt
         self.courseListType is EnrolledCourseListType
             || self.courseListType is FavoriteCourseListType
             || self.courseListType is ArchivedCourseListType
+            || self.courseListType is DownloadedCourseListType
     }
 
     init(
@@ -87,6 +93,16 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
             self.delegate?.courseListDataBackUpdateService(self, didUpdateUserCourse: userCourse)
         case .visitedCourse:
             self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+        case .wishlist(let coursesIDs):
+            self.delegate?.courseListDataBackUpdateService(self, didUpdateWishlist: Set(coursesIDs))
+
+            if self.courseListType is WishlistCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            }
+        case .downloads:
+            if self.courseListType is DownloadedCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            }
         default:
             break
         }
@@ -96,7 +112,9 @@ extension CourseListDataBackUpdateService: DataBackUpdateServiceDelegate {
 
     private func handleCourse(_ course: Course, didUpdateEnrollment update: DataBackUpdateDescription) {
         if self.isUserCoursesCourseListType {
-            if course.enrolled && self.courseListType is EnrolledCourseListType {
+            if self.courseListType is DownloadedCourseListType {
+                self.delegate?.courseListDataBackUpdateServiceDidUpdateCourseList(self)
+            } else if course.enrolled && self.courseListType is EnrolledCourseListType {
                 self.delegate?.courseListDataBackUpdateService(self, didInsertCourse: course)
             } else {
                 self.delegate?.courseListDataBackUpdateService(self, didDeleteCourse: course)

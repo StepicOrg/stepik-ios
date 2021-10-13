@@ -16,6 +16,8 @@ final class CertificatesPresenter {
     private let coursesAPI: CoursesAPI
     private let presentationContainer: CertificatesPresentationContainer
 
+    private let certificatesPersistenceService: CertificatesPersistenceServiceProtocol
+
     private var certificates: [Certificate] = [] {
         didSet {
             self.updatePersistentPresentationData()
@@ -30,29 +32,33 @@ final class CertificatesPresenter {
         certificatesAPI: CertificatesAPI,
         coursesAPI: CoursesAPI,
         presentationContainer: CertificatesPresentationContainer,
+        certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
         view: CertificatesView?
     ) {
         self.userID = userID
         self.certificatesAPI = certificatesAPI
         self.coursesAPI = coursesAPI
         self.presentationContainer = presentationContainer
+        self.certificatesPersistenceService = certificatesPersistenceService
         self.view = view
     }
 
     func getCachedCertificates() {
         let localIds = self.presentationContainer.certificatesIds
 
-        let localCertificates = Certificate.fetch(localIds, user: self.userID).sorted(by: {
-            guard let index1 = localIds.firstIndex(of: $0.id),
-                  let index2 = localIds.firstIndex(of: $1.id) else {
-                return false
+        self.certificatesPersistenceService.fetch(ids: localIds, userID: self.userID).done { cachedCertificates in
+            let localCertificates = cachedCertificates.sorted(by: {
+                guard let index1 = localIds.firstIndex(of: $0.id),
+                      let index2 = localIds.firstIndex(of: $1.id) else {
+                    return false
+                }
+                return index1 < index2
+            }).compactMap { [weak self] in
+                self?.makeViewData(from: $0)
             }
-            return index1 < index2
-        }).compactMap { [weak self] in
-            self?.makeViewData(from: $0)
-        }
 
-        self.view?.setCertificates(certificates: localCertificates, hasNextPage: false)
+            self.view?.setCertificates(certificates: localCertificates, hasNextPage: false)
+        }
     }
 
     private func updatePersistentPresentationData() {

@@ -1,16 +1,7 @@
-//
-//  Progress.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 03.11.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
-final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
+final class Progress: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = String
 
     var json: JSON {
@@ -25,12 +16,22 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         ]
     }
 
-    required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+    var completeRate: Float {
+        self.numberOfSteps != 0
+            ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps)
+            : 1
     }
 
-    func initialize(_ json: JSON) {
+    var percentPassed: Float {
+        self.completeRate * 100
+    }
+
+    required convenience init(json: JSON) {
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
+    }
+
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].stringValue
         self.isPassed = json[JSONKey.isPassed.rawValue].boolValue
         self.score = json[JSONKey.score.rawValue].floatValue
@@ -38,10 +39,6 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         self.numberOfSteps = json[JSONKey.numberOfSteps.rawValue].intValue
         self.numberOfStepsPassed = json[JSONKey.numberOfStepsPassed.rawValue].intValue
         self.lastViewed = json[JSONKey.lastViewed.rawValue].doubleValue
-    }
-
-    func update(json: JSON) {
-        self.initialize(json)
     }
 
     func equals(_ object: Any?) -> Bool {
@@ -61,12 +58,6 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         if self.lastViewed != object.lastViewed { return false }
 
         return true
-    }
-
-    var percentPassed: Float {
-        self.numberOfSteps != 0
-            ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps) * 100
-            : 100.0
     }
 
     enum JSONKey: String {

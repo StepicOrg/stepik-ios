@@ -1,18 +1,13 @@
-//
-//  User.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 03.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import CoreData
-import Foundation
 import SwiftyJSON
 
 @objc
-final class User: NSManagedObject, IDFetchable {
+final class User: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
+    }
 
     /// Returns true if joinDate is less than in 5 minutes from now.
     var didJustRegister: Bool {
@@ -23,11 +18,11 @@ final class User: NSManagedObject, IDFetchable {
     }
 
     required convenience init(json: JSON) {
-        self.init()
-        self.initialize(json)
+        self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
+        self.update(json: json)
     }
 
-    func initialize(_ json: JSON) {
+    func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.profile = json[JSONKey.profile.rawValue].intValue
         self.isPrivate = json[JSONKey.isPrivate.rawValue].boolValue
@@ -53,10 +48,7 @@ final class User: NSManagedObject, IDFetchable {
         self.socialProfilesArray = json[JSONKey.socialProfiles.rawValue].arrayObject as? [Int] ?? []
     }
 
-    func update(json: JSON) {
-        self.initialize(json)
-    }
-
+    @available(*, deprecated, message: "Legacy")
     static func fetchById(_ id: Int) -> [User]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
 
@@ -72,6 +64,7 @@ final class User: NSManagedObject, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func removeAllExcept(_ user: User) {
         if let fetchedUsers = fetchById(user.id) {
             for fetchedUser in fetchedUsers {
@@ -83,6 +76,7 @@ final class User: NSManagedObject, IDFetchable {
         }
     }
 
+    @available(*, deprecated, message: "Legacy")
     static func fetch(_ ids: [Int]) -> [User] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
 
@@ -124,26 +118,5 @@ final class User: NSManagedObject, IDFetchable {
         case issuedCertificatesCount = "issued_certificates_count"
         case followersCount = "followers_count"
         case socialProfiles = "social_profiles"
-    }
-}
-
-struct UserInfo {
-    var id: Int
-    var avatarURL: String
-    var firstName: String
-    var lastName: String
-
-    init(json: JSON) {
-        self.id = json[JSONKey.id.rawValue].intValue
-        self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
-        self.firstName = json[JSONKey.firstName.rawValue].stringValue
-        self.lastName = json[JSONKey.lastName.rawValue].stringValue
-    }
-
-    enum JSONKey: String {
-        case id
-        case avatar
-        case firstName = "first_name"
-        case lastName = "last_name"
     }
 }

@@ -17,6 +17,7 @@ final class HomeViewController: BaseExploreViewController {
         .streakActivity,
         .continueCourse,
         .enrolledCourses,
+        .reviewsAndWishlist,
         .visitedCourses,
         .popularCourses
     ]
@@ -25,9 +26,12 @@ final class HomeViewController: BaseExploreViewController {
     private var lastIsAuthorizedFlag = false
 
     private var currentEnrolledCourseListState: EnrolledCourseListState?
+    private var currentReviewsAndWishlistState: ReviewsAndWishlistState?
 
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
+
+    private var isFirstTimeViewDidAppear = true
 
     init(interactor: HomeInteractorProtocol, analytics: Analytics) {
         super.init(interactor: interactor, analytics: analytics)
@@ -52,16 +56,23 @@ final class HomeViewController: BaseExploreViewController {
         self.analytics.send(.homeScreenOpened)
         self.homeInteractor?.doStreakActivityLoad(request: .init())
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
+        if self.isFirstTimeViewDidAppear {
+            self.isFirstTimeViewDidAppear = false
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
 
-            if strongSelf.currentEnrolledCourseListState == .empty {
-                strongSelf.refreshStateForEnrolledCourses(state: .normal)
-            }
+                if strongSelf.currentEnrolledCourseListState == .empty {
+                    strongSelf.refreshStateForEnrolledCourses(state: .normal)
+                }
+                if strongSelf.currentReviewsAndWishlistState == .shown {
+                    strongSelf.refreshReviewsAndWishlist(state: .shown)
+                }
 
-            strongSelf.refreshStateForVisitedCourses(state: .shown)
+                strongSelf.refreshStateForVisitedCourses(state: .shown)
+            }
         }
     }
 
@@ -244,10 +255,15 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = (placeholderView, nil)
         }
 
+        let contentViewInsets = state == .normal
+            ? .zero
+            : CourseListContainerViewFactory.Appearance.horizontalContentInsets
+
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
-                headerDescription: state.headerDescription
+                headerDescription: state.headerDescription,
+                contentViewInsets: contentViewInsets
             )
 
         containerView.onShowAllButtonClick = { [weak self] in
@@ -265,6 +281,44 @@ final class HomeViewController: BaseExploreViewController {
         )
 
         self.currentEnrolledCourseListState = state
+    }
+
+    // MARK: - Reviews and wishlist submodule
+
+    private enum ReviewsAndWishlistState {
+        case shown
+        case hidden
+    }
+
+    private func refreshReviewsAndWishlist(state: ReviewsAndWishlistState) {
+        let submoduleType = Home.Submodule.reviewsAndWishlist
+
+        switch state {
+        case .shown:
+            if let submodule = self.getSubmodule(type: submoduleType),
+               let containerViewController = submodule.viewController as? ReviewsAndWishlistContainerViewController {
+                containerViewController.refreshSubmodules()
+            } else {
+                let containerViewController = ReviewsAndWishlistContainerViewController()
+
+                self.registerSubmodule(
+                    .init(
+                        viewController: containerViewController,
+                        view: containerViewController.view,
+                        isLanguageDependent: false,
+                        type: submoduleType
+                    )
+                )
+
+                containerViewController.refreshSubmodules()
+            }
+        case .hidden:
+            if let submodule = self.getSubmodule(type: submoduleType) {
+                self.removeSubmodule(submodule)
+            }
+        }
+
+        self.currentReviewsAndWishlistState = state
     }
 
     // MARK: - Visited courses submodule
@@ -484,9 +538,11 @@ extension HomeViewController: HomeViewControllerProtocol {
 
             let shouldDisplayContinueCourse = viewModel.isAuthorized
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
+            let shouldDisplayReviewsAndWishlist = viewModel.isAuthorized
 
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
+            strongSelf.refreshReviewsAndWishlist(state: shouldDisplayReviewsAndWishlist ? .shown : .hidden)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }

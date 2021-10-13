@@ -105,6 +105,14 @@ extension UIColor {
         )
     }
 
+    /// Adaptable color with base hex value #2F80ED (colorOverlayBlue).
+    static var stepikOverlayBlue: UIColor {
+        .dynamic(
+            light: ColorPalette.blueLightColorOverlay,
+            dark: ColorPalette.blueDarkColorOverlay
+        )
+    }
+
     /// A non adaptable color with hex value #4485ED (blue05).
     static let stepikBlueFixed = ColorPalette.blue600
     /// A non adaptable color with hex value #56A4FF (blue03).
@@ -416,6 +424,9 @@ extension UIColor {
         }
     }
 
+    /// The color for texts that contain discount price content.
+    static let stepikDiscountPriceText = UIColor(hex6: 0xFF7A65)
+
     // MARK: Other Text Colors
 
     /// The color for texts that calls to action (join course, sign in...).
@@ -532,12 +543,21 @@ extension UIColor {
     }
 
     /// The color to use for the content overlay with violet.
-    static var stepikOverlayViolet: UIColor {
+    static var stepikOverlayVioletBackground: UIColor {
         .dynamic(
             light: UIColor.stepikVioletFixed.withAlphaComponent(0.12),
             dark: ColorPalette.violet05.withAlphaComponent(0.12)
         )
     }
+
+    /// The color to use for the content overlay with green.
+    static var stepikOverlayGreenBackground: UIColor { .stepikGreen.withAlphaComponent(0.12) }
+
+    /// The color to use for the content overlay with blue.
+    static var stepikOverlayBlueBackground: UIColor { .stepikOverlayBlue.withAlphaComponent(0.12) }
+
+    /// The color to use for the content overlay with onSurface.
+    static var stepikOverlayOnSurfaceBackground: UIColor { .onSurface.withAlphaComponent(0.04) }
 
     // MARK: - Skeleton Gradient -
 
@@ -596,6 +616,8 @@ extension UIColor {
             dark: UIColor.stepikExtraLightVioletFixed.withAlphaComponent(0.5)
         )
     }
+
+    static var quizReviewPendingBorder: UIColor { UIColor(hex6: 0x9E9E9E) }
 }
 
 // MARK: - ColorPalette -
@@ -720,6 +742,9 @@ private enum ColorPalette {
     static let extraLightRed50 = UIColor(hex6: 0xFFEBE8)
 
     // MARK: - Blue -
+
+    static let blueLightColorOverlay = UIColor(hex6: 0x2F80ED)
+    static let blueDarkColorOverlay = UIColor(hex6: 0x91C7FF)
 
     // MARK: Normal
 

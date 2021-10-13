@@ -14,6 +14,14 @@ protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayFullscreenCourseList(viewModel: FullscreenCourseList.FullscreenCourseListModulePresentation.ViewModel)
 }
 
+extension FullscreenCourseListViewController {
+    enum Appearance {
+        static var transparentNavigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
+            .init(shadowViewAlpha: 0, backgroundColor: .clear)
+        }
+    }
+}
+
 final class FullscreenCourseListViewController: UIViewController, ControllerWithStepikPlaceholder {
     let interactor: FullscreenCourseListInteractorProtocol
     private let courseListType: CourseListType
@@ -48,7 +56,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
         if !(self.presentationDescription?.title?.isEmpty ?? true) {
             self.title = self.presentationDescription?.title
         } else if self.presentationDescription?.headerViewDescription != nil {
-            self.title = NSLocalizedString("RecommendedCategory", comment: "")
+            self.title = nil
         } else {
             self.title = NSLocalizedString("AllCourses", comment: "")
         }
@@ -75,6 +83,13 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
 
         self.registerPlaceholders()
         self.refreshCourseListState()
+
+        self.makeNavigationBarTransparentIfHasGradientHeader()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.makeNavigationBarTransparentIfHasGradientHeader()
     }
 
     // MARK: - Private API
@@ -99,6 +114,29 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
             ),
             for: .empty
         )
+    }
+
+    private func makeNavigationBarTransparentIfHasGradientHeader() {
+        guard let headerViewPresentationDescription = self.presentationDescription?.headerViewDescription else {
+            return
+        }
+
+        self.styledNavigationController?.removeBackButtonTitleForTopController()
+
+        self.styledNavigationController?.changeShadowViewAlpha(
+            Appearance.transparentNavigationBarAppearance.shadowViewAlpha,
+            sender: self
+        )
+        self.styledNavigationController?.changeBackgroundColor(
+            Appearance.transparentNavigationBarAppearance.backgroundColor,
+            sender: self
+        )
+        self.styledNavigationController?.changeTintColor(
+            headerViewPresentationDescription.color.titleTextColor,
+            sender: self
+        )
+
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
     }
 
     @objc
@@ -127,11 +165,14 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
             self.removeSubmodule(submodule)
         }
 
+        var resultPresentationDescription = self.presentationDescription
+        resultPresentationDescription?.headerViewDescription?.shouldExtendEdgesUnderTopBar = false
+
         let courseListAssembly = VerticalCourseListAssembly(
             type: self.courseListType,
             colorMode: .light,
             courseViewSource: self.courseViewSource,
-            presentationDescription: self.presentationDescription,
+            presentationDescription: resultPresentationDescription,
             output: self.interactor
         )
         let courseListViewController = courseListAssembly.makeModule()
@@ -149,7 +190,7 @@ final class FullscreenCourseListViewController: UIViewController, ControllerWith
             self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
         }
 
-        self.currentFilters = self.presentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
+        self.currentFilters = resultPresentationDescription?.courseListFilterDescription?.prefilledFilters ?? []
     }
 
     // MARK: SimilarAuthorsCourseList
@@ -360,7 +401,8 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
             for: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
             using: navigationController,
-            courseViewSource: viewModel.courseViewSource
+            source: viewModel.courseContinueSource,
+            viewSource: viewModel.courseViewSource
         )
     }
 

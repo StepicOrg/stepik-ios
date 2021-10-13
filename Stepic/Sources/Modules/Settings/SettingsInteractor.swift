@@ -24,6 +24,7 @@ protocol SettingsInteractorProtocol {
     func doAdaptiveModeSettingUpdate(request: Settings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: Settings.DeleteAllContent.Request)
     func doAccountLogOut(request: Settings.AccountLogOut.Request)
+    func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request)
 }
 
 final class SettingsInteractor: SettingsInteractorProtocol {
@@ -37,6 +38,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     private let remoteConfig: RemoteConfig
 
     private let downloadsDeletionService: DownloadsDeletionServiceProtocol
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var settingsData: Settings.SettingsData {
         .init(
@@ -57,13 +59,16 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         !(self.userAccountService.currentUser?.isGuest ?? true) && self.userAccountService.isAuthorized
     }
 
+    var shouldCheckUserAccountDeletionResult = false
+
     init(
         presenter: SettingsPresenterProtocol,
         provider: SettingsProviderProtocol,
         analytics: Analytics,
         userAccountService: UserAccountServiceProtocol,
         remoteConfig: RemoteConfig,
-        downloadsDeletionService: DownloadsDeletionServiceProtocol
+        downloadsDeletionService: DownloadsDeletionServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -71,9 +76,11 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         self.userAccountService = userAccountService
         self.remoteConfig = remoteConfig
         self.downloadsDeletionService = downloadsDeletionService
+        self.dataBackUpdateService = dataBackUpdateService
     }
 
     func doSettingsLoad(request: Settings.SettingsLoad.Request) {
+        self.checkUserAccountIsDeletedIfNeeded()
         self.presenter.presentSettings(response: .init(data: self.settingsData))
     }
 
@@ -177,6 +184,8 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             self.downloadsDeletionService.deleteAllDownloads()
         }.done {
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: true))
+        }.ensure {
+            self.dataBackUpdateService.triggerDownloadsUpdated()
         }.catch { _ in
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: false))
         }
@@ -188,5 +197,26 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             self.moduleOutput?.handleUserLoggedOut()
             self.presenter.presentDismiss(response: .init())
         }
+    }
+
+    func doDeleteUserAccountPresentation(request: Settings.DeleteUserAccountPresentation.Request) {
+        self.analytics.send(.deleteAccountClicked)
+        self.shouldCheckUserAccountDeletionResult = true
+        self.presenter.presentDeleteUserAccount(response: .init())
+    }
+
+    private func checkUserAccountIsDeletedIfNeeded() {
+        guard self.shouldCheckUserAccountDeletionResult,
+              let currentUserID = self.userAccountService.currentUserID else {
+            return
+        }
+
+        self.shouldCheckUserAccountDeletionResult = false
+
+        self.provider.fetchCurrentUser().done { remoteCurrentUser in
+            if currentUserID != remoteCurrentUser.id {
+                self.doAccountLogOut(request: .init())
+            }
+        }.cauterize()
     }
 }

@@ -5,6 +5,7 @@ enum CourseInfo {
         case info
         case syllabus
         case reviews
+        case news
 
         var title: String {
             switch self {
@@ -14,6 +15,8 @@ enum CourseInfo {
                 return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
             case .reviews:
                 return NSLocalizedString("CourseInfoTabReviews", comment: "")
+            case .news:
+                return NSLocalizedString("CourseInfoTabNews", comment: "")
             }
         }
     }
@@ -25,6 +28,11 @@ enum CourseInfo {
         case archiveRemove
     }
 
+    enum CourseWishlistAction {
+        case add
+        case remove
+    }
+
     // MARK: Use cases
 
     /// Load & show info about course
@@ -34,7 +42,9 @@ enum CourseInfo {
         struct Response {
             struct Data {
                 let course: Course
-                let iapLocalizedPrice: String?
+                let isWishlisted: Bool
+                let isWishlistAvailable: Bool
+                let isCourseRevenueAvailable: Bool
                 let promoCode: PromoCode?
             }
 
@@ -116,6 +126,7 @@ enum CourseInfo {
         struct Response {
             let course: Course
             let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
 
         struct ViewModel {
@@ -123,6 +134,7 @@ enum CourseInfo {
             let course: Course
             @available(*, deprecated, message: "Target modules can't be initialized w/o model")
             let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
         }
     }
 
@@ -172,6 +184,34 @@ enum CourseInfo {
         }
     }
 
+    /// Present course search module
+    enum CourseContentSearchPresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
+    /// Add or remove course to/from withlist
+    enum CourseWishlistMainAction {
+        struct Request {}
+
+        struct Response {
+            let action: CourseWishlistAction
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+            let message: String
+        }
+    }
+
     /// Do main action (continue, enroll, etc)
     enum MainCourseAction {
         struct Request {}
@@ -208,6 +248,19 @@ enum CourseInfo {
 
         struct ViewModel {
             let previewLessonID: Lesson.IdType
+        }
+    }
+
+    /// Present course revenue
+    enum CourseRevenuePresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
         }
     }
 

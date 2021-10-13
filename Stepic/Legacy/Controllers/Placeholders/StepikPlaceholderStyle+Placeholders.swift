@@ -15,6 +15,18 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
         buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: "")
     )
+    static let noConnectionCourseBenefitSummaries = StepikPlaceholderStyle(
+        id: "noConnectionCourseBenefitSummaries",
+        image: PlaceholderImage(image: UIImage(named: "new-error-course-benefit-summaries"), scale: 0.49),
+        text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
+        buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: "")
+    )
+    static let noConnectionCourseBenefits = StepikPlaceholderStyle(
+        id: "noConnectionCourseBenefits",
+        image: nil,
+        text: NSLocalizedString("PlaceholderNoConnectionText", comment: ""),
+        buttonTitle: NSLocalizedString("PlaceholderNoConnectionButton", comment: "")
+    )
     static let login = StepikPlaceholderStyle(
         id: "login",
         image: PlaceholderImage(image: UIImage(named: "new-empty-login"), scale: 0.59),
@@ -78,12 +90,6 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("PlaceholderEmptyNotificationsText", comment: ""),
         buttonTitle: nil
     )
-    static let emptyNotificationsLoading = StepikPlaceholderStyle(
-        id: "emptyNotificationsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-notifications"), scale: 0.48),
-        text: NSLocalizedString("Refreshing", comment: ""),
-        buttonTitle: nil
-    )
     static let emptySearch = StepikPlaceholderStyle(
         id: "emptySearch",
         image: PlaceholderImage(image: UIImage(named: "new-empty-search"), scale: 0.49),
@@ -114,12 +120,6 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("PlaceholderNoDiscussionsTitle", comment: ""),
         buttonTitle: NSLocalizedString("PlaceholderNoDiscussionsButtonTitle", comment: "")
     )
-    static let emptyDiscussionsLoading = StepikPlaceholderStyle(
-        id: "emptyDiscussionsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
-        text: NSLocalizedString("Refreshing", comment: ""),
-        buttonTitle: nil
-    )
     static let emptySolutions = StepikPlaceholderStyle(
         id: "emptySolutions",
         image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
@@ -130,6 +130,12 @@ extension StepikPlaceholder.Style {
         id: "emptySubmissions",
         image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
         text: NSLocalizedString("SubmissionsPlaceholderEmptyTitle", comment: ""),
+        buttonTitle: nil
+    )
+    static let emptyReviews = StepikPlaceholderStyle(
+        id: "emptyReviews",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
+        text: NSLocalizedString("UserCoursesReviewsPlaceholderEmptyTitle", comment: ""),
         buttonTitle: nil
     )
     static let emptyProfileLoading = StepikPlaceholderStyle(
@@ -144,22 +150,34 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("EmptyTitle", comment: ""),
         buttonTitle: nil
     )
-    static let emptySectionsLoading = StepikPlaceholderStyle(
-        id: "emptySectionsLoading",
-        image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
-        text: NSLocalizedString("Refreshing", comment: ""),
-        buttonTitle: nil
-    )
     static let emptyUnits = StepikPlaceholderStyle(
         id: "emptyUnits",
         image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
         text: NSLocalizedString("PullToRefreshUnitsTitle", comment: ""),
         buttonTitle: nil
     )
-    static let emptyUnitsLoading = StepikPlaceholderStyle(
-        id: "emptyUnitsLoading",
+    static let emptyCourseBenefits = StepikPlaceholderStyle(
+        id: "emptyCourseBenefits",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-course-benefits"), scale: 0.99),
+        text: NSLocalizedString("CourseRevenueEmptyCourseBenefitsTitle", comment: ""),
+        buttonTitle: nil
+    )
+    static let emptyCourseSearchSuggestions = StepikPlaceholderStyle(
+        id: "emptyCourseSearchSuggestions",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-course-benefits"), scale: 0.99),
+        text: NSLocalizedString("CourseSearchPlaceholderEmptySuggesions", comment: ""),
+        buttonTitle: nil
+    )
+    static let emptyCourseSearchResults = StepikPlaceholderStyle(
+        id: "emptyCourseSearchResults",
+        image: PlaceholderImage(image: UIImage(named: "new-empty-noconnection"), scale: 0.49),
+        text: NSLocalizedString("CourseSearchPlaceholderEmptySearchResults", comment: ""),
+        buttonTitle: nil
+    )
+    static let emptyCourseInfoTabNews = StepikPlaceholderStyle(
+        id: "emptyCourseInfoTabNews",
         image: PlaceholderImage(image: UIImage(named: "new-empty-empty"), scale: 0.99),
-        text: NSLocalizedString("Refreshing", comment: ""),
+        text: NSLocalizedString("CourseInfoTabNewsEmptyNews", comment: ""),
         buttonTitle: nil
     )
 }
@@ -169,6 +187,8 @@ extension StepikPlaceholder.Style {
         [
             .empty,
             .noConnection,
+            .noConnectionCourseBenefitSummaries,
+            .noConnectionCourseBenefits,
             .login,
             .emptyDownloads,
             .emptyNotifications,
@@ -178,7 +198,11 @@ extension StepikPlaceholder.Style {
             .emptyDiscussions,
             .emptyProfileLoading,
             .emptySections,
-            .emptyUnits
+            .emptyUnits,
+            .emptyCourseBenefits,
+            .emptyCourseSearchSuggestions,
+            .emptyCourseSearchResults,
+            .emptyCourseInfoTabNews
         ]
     }
 }

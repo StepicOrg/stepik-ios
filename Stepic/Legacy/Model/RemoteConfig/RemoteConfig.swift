@@ -23,11 +23,12 @@ final class RemoteConfig {
         Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
         Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
-        Key.newLessonAvailable.rawValue: NSNumber(value: true),
         Key.darkModeAvailable.rawValue: NSNumber(value: true),
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
         Key.isDisabledStepsSupported.rawValue: NSNumber(value: false),
-        Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"])
+        Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
+        Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
+        Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -115,6 +116,28 @@ final class RemoteConfig {
         return params
     }
 
+    var isCoursePricesEnabled: Bool {
+        #if BETA_PROFILE || DEBUG
+        return true
+        #else
+        return FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.isCoursePricesEnabled.rawValue)
+            .boolValue
+        #endif
+    }
+
+    var isCourseRevenueAvailable: Bool {
+        #if BETA_PROFILE || DEBUG
+        return true
+        #else
+        return FirebaseRemoteConfig.RemoteConfig
+            .remoteConfig()
+            .configValue(forKey: Key.isCourseRevenueAvailable.rawValue)
+            .boolValue
+        #endif
+    }
+
     init() {
         self.setConfigDefaults()
         self.fetchRemoteConfigData()
@@ -171,10 +194,11 @@ final class RemoteConfig {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
-        case newLessonAvailable = "new_lesson_available_ios"
         case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
         case isDisabledStepsSupported = "is_disabled_steps_supported"
         case searchResultsQueryParams = "search_query_params_ios"
+        case isCoursePricesEnabled = "is_course_prices_enabled_ios"
+        case isCourseRevenueAvailable = "is_course_revenue_available_ios"
     }
 }

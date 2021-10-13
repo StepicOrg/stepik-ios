@@ -16,7 +16,10 @@ struct CourseInfoHeaderViewModel {
     let isEnrolled: Bool
     let isFavorite: Bool
     let isArchived: Bool
+    let isWishlisted: Bool
+    let isWishlistAvailable: Bool
     let isTryForFreeAvailable: Bool
+    let isRevenueAvailable: Bool
     let buttonDescription: ButtonDescription
 
     struct ButtonDescription {

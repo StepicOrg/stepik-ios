@@ -1,16 +1,4 @@
-//
-//  Lesson+CoreDataProperties.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 09.10.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
-//
-
 import CoreData
-import Foundation
 
 extension Lesson {
     @NSManaged var managedId: NSNumber?
@@ -30,18 +18,7 @@ extension Lesson {
     @NSManaged var managedCoursesArray: NSObject?
     @NSManaged var managedUnitsArray: NSObject?
     @NSManaged var managedUnit: Unit?
-
-    static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.shared.context)!
-    }
-
-    static var fetchRequest: NSFetchRequest<Lesson> {
-        NSFetchRequest<Lesson>(entityName: "Lesson")
-    }
-
-    convenience init() {
-        self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.shared.context)
-    }
+    @NSManaged var managedSearchResults: NSSet?
 
     var id: Int {
         get {
@@ -178,5 +155,21 @@ extension Lesson {
         }
     }
 
-    var unit: Unit? { self.managedUnit }
+    var unit: Unit? {
+        get {
+            self.managedUnit
+        }
+        set {
+            self.managedUnit = newValue
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
+        }
+    }
 }

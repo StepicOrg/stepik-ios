@@ -14,9 +14,13 @@ enum LessonFinishedStepsPanModal {
         }
     }
 
-    enum ShareResultPresentation {
-        struct Request {}
+    enum ModalAction {
+        struct Request {
+            let actionUniqueIdentifier: UniqueIdentifierType
+        }
+    }
 
+    enum ShareResultPresentation {
         struct Response {
             let course: Course
         }
@@ -27,8 +31,6 @@ enum LessonFinishedStepsPanModal {
     }
 
     enum CertificatePresentation {
-        struct Request {}
-
         struct Response {
             let certificate: Certificate
         }
@@ -38,12 +40,10 @@ enum LessonFinishedStepsPanModal {
         }
     }
 
-    enum LeaveReviewPresentation {
-        struct Request {}
-    }
+    enum BackToAssignmentsPresentation {
+        struct Response {}
 
-    enum FindNewCoursePresentation {
-        struct Request {}
+        struct ViewModel {}
     }
 
     // MARK: Enums

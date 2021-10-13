@@ -38,11 +38,19 @@ final class StorageRecordsAPI: APIEndpoint {
         )
     }
 
-    func retrieve(userID: User.IdType, kind: StorageRecordKind?) -> Promise<([StorageRecord], Meta)> {
-        let params: Parameters = [
+    func retrieve(
+        userID: User.IdType,
+        kind: StorageRecordKind?,
+        order: Order? = nil
+    ) -> Promise<([StorageRecord], Meta)> {
+        var params: Parameters = [
             StorageRecord.JSONKey.kind.rawValue: kind?.name ?? "",
             StorageRecord.JSONKey.user.rawValue: userID
         ]
+
+        if let order = order {
+            params["order"] = order.rawValue
+        }
 
         return self.retrieve.request(
             requestEndpoint: self.name,
