@@ -35,7 +35,6 @@ final class SettingsInteractor: SettingsInteractorProtocol {
 
     private let analytics: Analytics
     private let userAccountService: UserAccountServiceProtocol
-    private let remoteConfig: RemoteConfig
 
     private let downloadsDeletionService: DownloadsDeletionServiceProtocol
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
@@ -50,7 +49,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             shouldUseCellularDataForDownloads: self.provider.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: self.provider.isAutoplayEnabled,
             isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled,
-            isDarkModeAvailable: self.remoteConfig.isDarkModeAvailable,
+            isDarkModeAvailable: self.provider.isDarkModeAvailable,
             isAuthorized: self.isAuthorized
         )
     }
@@ -66,7 +65,6 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         provider: SettingsProviderProtocol,
         analytics: Analytics,
         userAccountService: UserAccountServiceProtocol,
-        remoteConfig: RemoteConfig,
         downloadsDeletionService: DownloadsDeletionServiceProtocol,
         dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
@@ -74,7 +72,6 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         self.provider = provider
         self.analytics = analytics
         self.userAccountService = userAccountService
-        self.remoteConfig = remoteConfig
         self.downloadsDeletionService = downloadsDeletionService
         self.dataBackUpdateService = dataBackUpdateService
     }
