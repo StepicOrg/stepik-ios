@@ -1736,8 +1736,9 @@
 		7EBAD8337C302E2147741450 /* CourseBenefitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8744553C2B3C12884F84BFD9 /* CourseBenefitDetailViewController.swift */; };
 		7ED87AD657E488FBD3C0D88E /* StepikAcademyCourseListDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25E416101A848548101C7DA /* StepikAcademyCourseListDataFlow.swift */; };
 		81AADBF0C345BFDB7176221D /* WishlistWidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AA738A584651A3F55AD9DB /* WishlistWidgetViewController.swift */; };
-		8489EE7725FAF13B004A85C5 /* StepicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489EE7625FAF13B004A85C5 /* StepicUITests.swift */; };
+		8489EE7725FAF13B004A85C5 /* UnregisteredUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489EE7625FAF13B004A85C5 /* UnregisteredUITests.swift */; };
 		8489EEE425FFBE8E004A85C5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489EEE325FFBE8E004A85C5 /* Common.swift */; };
+		84FA5057262F204400603346 /* LoginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA5056262F204400603346 /* LoginUITests.swift */; };
 		85CFA575736E6C0570D48065 /* UserCoursesReviewsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7422D4B76AAD73F35E6E /* UserCoursesReviewsInteractor.swift */; };
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
@@ -3747,8 +3748,9 @@
 		81AA980E65D068EB9A20F675 /* LessonFinishedStepsPanModalDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalDataFlow.swift; sourceTree = "<group>"; };
 		83BC8E57E212C4D980F78B79 /* CourseRevenueTabPurchasesDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabPurchasesDataFlow.swift; sourceTree = "<group>"; };
 		8489EE7425FAF13A004A85C5 /* StepicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8489EE7625FAF13B004A85C5 /* StepicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicUITests.swift; sourceTree = "<group>"; };
+		8489EE7625FAF13B004A85C5 /* UnregisteredUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisteredUITests.swift; sourceTree = "<group>"; };
 		8489EEE325FFBE8E004A85C5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		84FA5056262F204400603346 /* LoginUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUITests.swift; sourceTree = "<group>"; };
 		85424A5DCFCD1768BD36AD45 /* CourseBenefitDetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseBenefitDetailInteractor.swift; sourceTree = "<group>"; };
 		858D7264845A798247AE1350 /* UserCoursesReviewsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsDataFlow.swift; sourceTree = "<group>"; };
 		861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Init.swift"; sourceTree = "<group>"; };
@@ -4804,7 +4806,8 @@
 			isa = PBXGroup;
 			children = (
 				8489EEE325FFBE8E004A85C5 /* Common.swift */,
-				8489EE7625FAF13B004A85C5 /* StepicUITests.swift */,
+				84FA5056262F204400603346 /* LoginUITests.swift */,
+				8489EE7625FAF13B004A85C5 /* UnregisteredUITests.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -12460,7 +12463,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8489EEE425FFBE8E004A85C5 /* Common.swift in Sources */,
-				8489EE7725FAF13B004A85C5 /* StepicUITests.swift in Sources */,
+				8489EE7725FAF13B004A85C5 /* UnregisteredUITests.swift in Sources */,
+				84FA5057262F204400603346 /* LoginUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
