@@ -9,7 +9,7 @@ extension LessonFinishedStepsPanModalFeedbackView {
         let cornerRadius: CGFloat = 13
         let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         let backgroundColor = UIColor.dynamic(
-            light: UIColor.stepikVioletFixed.withAlphaComponent(0.12),
+            light: .stepikVioletFixed.withAlphaComponent(0.12),
             dark: .stepikSecondaryBackground
         )
     }
