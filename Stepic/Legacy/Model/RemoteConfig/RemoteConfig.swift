@@ -23,9 +23,7 @@ final class RemoteConfig {
         Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
         Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
-        Key.darkModeAvailable.rawValue: NSNumber(value: true),
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
-        Key.isDisabledStepsSupported.rawValue: NSNumber(value: false),
         Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
         Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
         Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false)
@@ -81,28 +79,10 @@ final class RemoteConfig {
         return supportedCourses.compactMap { Int($0) }
     }
 
-    var isDarkModeAvailable: Bool {
-        if DeviceInfo.current.OSVersion.major < 13 {
-            return false
-        }
-
-        return FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.darkModeAvailable.rawValue)
-            .boolValue
-    }
-
     var isARQuickLookAvailable: Bool {
         FirebaseRemoteConfig.RemoteConfig
             .remoteConfig()
             .configValue(forKey: Key.arQuickLookAvailable.rawValue)
-            .boolValue
-    }
-
-    var isDisabledStepsSupported: Bool {
-        FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.isDisabledStepsSupported.rawValue)
             .boolValue
     }
 
@@ -194,9 +174,7 @@ final class RemoteConfig {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
-        case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
-        case isDisabledStepsSupported = "is_disabled_steps_supported"
         case searchResultsQueryParams = "search_query_params_ios"
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"

@@ -22,8 +22,10 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
         get {
             if let userSelectedApplicationTheme = self.userSelectedApplicationTheme {
                 return userSelectedApplicationTheme
+            } else if #available(iOS 13.0, *) {
+                return .default
             } else {
-                return self.remoteConfig.isDarkModeAvailable ? .default : .light
+                return .light
             }
         }
         set {
@@ -40,10 +42,6 @@ final class ApplicationThemeService: ApplicationThemeServiceProtocol {
 
     func registerDefaultTheme() {
         if #available(iOS 13.0, *) {
-            guard self.remoteConfig.isDarkModeAvailable else {
-                return self.applyTheme(.light)
-            }
-
             if let userSelectedApplicationTheme = self.userSelectedApplicationTheme {
                 self.applyTheme(userSelectedApplicationTheme)
             } else {
