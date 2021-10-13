@@ -151,8 +151,13 @@ final class RemoteConfig {
                 }
             }
 
-            self?.fetchComplete = true
-            self?.loadingDoneCallback?()
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchComplete = true
+            strongSelf.loadingDoneCallback?()
+            strongSelf.updateAnalyticsUserProperties()
         }
     }
 
@@ -163,6 +168,19 @@ final class RemoteConfig {
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
+    private func updateAnalyticsUserProperties() {
+        let userProperties: [String: Any] = [
+            Key.showStreaksNotificationTrigger.rawValue: self.showStreaksNotificationTrigger.rawValue,
+            Key.adaptiveBackendUrl.rawValue: self.adaptiveBackendURL,
+            Key.supportedInAdaptiveModeCourses.rawValue: self.supportedInAdaptiveModeCourses,
+            Key.arQuickLookAvailable.rawValue: self.isARQuickLookAvailable,
+            Key.searchResultsQueryParams.rawValue: self.searchResultsQueryParams,
+            Key.isCoursePricesEnabled.rawValue: self.isCoursePricesEnabled,
+            Key.isCourseRevenueAvailable.rawValue: self.isCourseRevenueAvailable
+        ]
+        AnalyticsUserProperties.shared.setRemoteConfigProperties(userProperties)
+    }
+
     // MARK: Inner Types
 
     enum ShowStreaksNotificationTrigger: String {
@@ -170,7 +188,7 @@ final class RemoteConfig {
         case submission = "submission"
     }
 
-    enum Key: String {
+    private enum Key: String {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"

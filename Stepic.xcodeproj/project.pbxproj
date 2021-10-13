@@ -227,7 +227,7 @@
 		089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */; };
 		089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779E214047640065DFA2 /* SplitTestProtocol.swift */; };
 		089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898779F214047650065DFA2 /* SplitTestingService.swift */; };
-		089877A6214047BC0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
+		089877A6214047BC0065DFA2 /* ABAnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* ABAnalyticsServiceProtocol.swift */; };
 		089877AD214047EE0065DFA2 /* Numbers+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A8214047EC0065DFA2 /* Numbers+Random.swift */; };
 		089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */; };
 		089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */; };
@@ -2155,7 +2155,7 @@
 		0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestGroupProtocol.swift; sourceTree = "<group>"; };
 		0898779E214047640065DFA2 /* SplitTestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestProtocol.swift; sourceTree = "<group>"; };
 		0898779F214047650065DFA2 /* SplitTestingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitTestingService.swift; sourceTree = "<group>"; };
-		089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsUserPropertiesServiceProtocol.swift; sourceTree = "<group>"; };
+		089877A4214047BB0065DFA2 /* ABAnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABAnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
 		089877A8214047EC0065DFA2 /* Numbers+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Numbers+Random.swift"; sourceTree = "<group>"; };
 		089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+StorageServiceProtocol.swift"; sourceTree = "<group>"; };
 		089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStorageServiceProtocol.swift; sourceTree = "<group>"; };
@@ -4136,7 +4136,7 @@
 			isa = PBXGroup;
 			children = (
 				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
-				089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */,
+				089877A4214047BB0065DFA2 /* ABAnalyticsServiceProtocol.swift */,
 				2C99D087238967FD00078D2B /* Events */,
 				62E98F39D7A7B4486E71DF3E /* SplitTests */,
 			);
@@ -10998,7 +10998,7 @@
 				2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */,
 				2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
-				089877A6214047BC0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */,
+				089877A6214047BC0065DFA2 /* ABAnalyticsServiceProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				087585B71FB51D840047A269 /* CourseList+CoreDataProperties.swift in Sources */,
