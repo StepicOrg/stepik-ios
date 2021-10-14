@@ -17,6 +17,7 @@ struct SearchResultPlainObject {
 
     var sectionPosition: Int?
 
+    var unitID: Int?
     var unitPosition: Int?
     var unitProgress: ProgressPlainObject?
 

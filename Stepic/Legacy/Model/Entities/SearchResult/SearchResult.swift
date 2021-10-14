@@ -44,6 +44,7 @@ extension SearchResult {
             courseTitle: self.courseTitle,
             courseCoverURL: self.courseCover,
             sectionPosition: self.lesson?.unit?.section?.position,
+            unitID: self.lesson?.unit?.id,
             unitPosition: self.lesson?.unit?.position,
             unitProgress: unitProgress,
             lessonID: self.lessonID,

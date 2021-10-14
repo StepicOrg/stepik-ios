@@ -227,10 +227,12 @@ final class CourseSearchInteractor: CourseSearchInteractorProtocol {
             )
         )
 
+        let unitID = targetSearchResult.unitID
+
         if targetSearchResult.isLesson {
-            self.presenter.presentLesson(response: .init(lessonID: lessonID, stepID: nil))
+            self.presenter.presentLesson(response: .init(unitID: unitID, lessonID: lessonID, stepID: nil))
         } else if let stepID = targetSearchResult.stepID {
-            self.presenter.presentLesson(response: .init(lessonID: lessonID, stepID: stepID))
+            self.presenter.presentLesson(response: .init(unitID: unitID, lessonID: lessonID, stepID: stepID))
         }
     }
 
