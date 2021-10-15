@@ -11,7 +11,10 @@ import FirebaseRemoteConfig
 import Foundation
 
 final class RemoteConfig {
+    private static let analyticsUserPropertyKeyPrefix = "remote_config_"
+
     private static let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
+
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -151,8 +154,13 @@ final class RemoteConfig {
                 }
             }
 
-            self?.fetchComplete = true
-            self?.loadingDoneCallback?()
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchComplete = true
+            strongSelf.loadingDoneCallback?()
+            strongSelf.updateAnalyticsUserProperties()
         }
     }
 
@@ -163,6 +171,19 @@ final class RemoteConfig {
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
+    private func updateAnalyticsUserProperties() {
+        let userProperties: [String: Any] = [
+            Key.showStreaksNotificationTrigger.analyticsUserPropertyKey: self.showStreaksNotificationTrigger.rawValue,
+            Key.adaptiveBackendUrl.analyticsUserPropertyKey: self.adaptiveBackendURL,
+            Key.supportedInAdaptiveModeCourses.analyticsUserPropertyKey: self.supportedInAdaptiveModeCourses,
+            Key.arQuickLookAvailable.analyticsUserPropertyKey: self.isARQuickLookAvailable,
+            Key.searchResultsQueryParams.analyticsUserPropertyKey: self.searchResultsQueryParams,
+            Key.isCoursePricesEnabled.analyticsUserPropertyKey: self.isCoursePricesEnabled,
+            Key.isCourseRevenueAvailable.analyticsUserPropertyKey: self.isCourseRevenueAvailable
+        ]
+        AnalyticsUserProperties.shared.setRemoteConfigUserProperties(userProperties)
+    }
+
     // MARK: Inner Types
 
     enum ShowStreaksNotificationTrigger: String {
@@ -170,7 +191,7 @@ final class RemoteConfig {
         case submission = "submission"
     }
 
-    enum Key: String {
+    private enum Key: String {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
@@ -178,5 +199,7 @@ final class RemoteConfig {
         case searchResultsQueryParams = "search_query_params_ios"
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
+
+        var analyticsUserPropertyKey: String { "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)" }
     }
 }
