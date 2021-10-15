@@ -1025,6 +1025,8 @@
 		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
 		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		2CC38AB025750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC38AAF25750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift */; };
+		2CC3C7EE2719631900E72F6F /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3C7ED2719631900E72F6F /* DictionaryExtensions.swift */; };
+		2CC3C7F0271963AF00E72F6F /* DictionaryExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3C7EF271963AF00E72F6F /* DictionaryExtensionsTests.swift */; };
 		2CC4FD5C2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */; };
 		2CC4FD5F2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4FD5E2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift */; };
 		2CC5AA6C242A34C500C09F94 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */; };
@@ -3015,6 +3017,8 @@
 		2CC351991F68339A004255B6 /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CC38AAF25750A5700BE3826 /* AuthorsCourseListWidgetRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListWidgetRatingView.swift; sourceTree = "<group>"; };
+		2CC3C7ED2719631900E72F6F /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
+		2CC3C7EF271963AF00E72F6F /* DictionaryExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsTests.swift; sourceTree = "<group>"; };
 		2CC4FD5B2664CBA000A33178 /* UserCoursesReviewsPossibleReviewCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsPossibleReviewCellView.swift; sourceTree = "<group>"; };
 		2CC4FD5E2664EB2D00A33178 /* UserCoursesReviewsTableSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsTableSectionView.swift; sourceTree = "<group>"; };
 		2CC5AA6B242A34C500C09F94 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsAPI.swift; sourceTree = "<group>"; };
@@ -4135,8 +4139,8 @@
 		2C0176C32188A49100DDB9D0 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
 				089877A4214047BB0065DFA2 /* ABAnalyticsServiceProtocol.swift */,
+				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
 				2C99D087238967FD00078D2B /* Events */,
 				62E98F39D7A7B4486E71DF3E /* SplitTests */,
 			);
@@ -4274,6 +4278,7 @@
 				2C3ABA9023D229C200E90439 /* Bundle+Version.swift */,
 				62E98E4C4AECA5B066006DE7 /* CollectionExtensions.swift */,
 				2C0A109C268B1412001D4023 /* Date+Region.swift */,
+				2CC3C7ED2719631900E72F6F /* DictionaryExtensions.swift */,
 				2C7AC49825B37ACA0024D4D2 /* FileManager+SharedContainer.swift */,
 				2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */,
 				62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */,
@@ -4667,6 +4672,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7E293226B03B69008581F4 /* CGSizeExtensionsTests.swift */,
+				2CC3C7EF271963AF00E72F6F /* DictionaryExtensionsTests.swift */,
 				2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */,
 			);
 			path = ExtensionsTests;
@@ -10761,6 +10767,7 @@
 				2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */,
 				2CF8DF9A25F2754C00F577C2 /* ReviewSessionResponseSpec.swift in Sources */,
 				2CEDC67226089DAE00B0B018 /* PlatformTypeTests.swift in Sources */,
+				2CC3C7F0271963AF00E72F6F /* DictionaryExtensionsTests.swift in Sources */,
 				2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */,
 				2CCDD20124DBB61100A48EE0 /* ProtectedTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
@@ -12154,6 +12161,7 @@
 				2C921A41269C839800029A1E /* CourseRevenueTabMonthlyItemView.swift in Sources */,
 				245107514E8F81CF9A8C4C44 /* DownloadARQuickLookView.swift in Sources */,
 				2CA267A526CFB638000668C7 /* SubmissionsSelectionView.swift in Sources */,
+				2CC3C7EE2719631900E72F6F /* DictionaryExtensions.swift in Sources */,
 				2C911B9025C02E430076DC31 /* StorageRecordsNetworkService.swift in Sources */,
 				2C0B771D25480A7500BA474D /* CourseListFilterViewModel.swift in Sources */,
 				008437078C67C7149BE6DE53 /* DownloadARQuickLookViewController.swift in Sources */,
