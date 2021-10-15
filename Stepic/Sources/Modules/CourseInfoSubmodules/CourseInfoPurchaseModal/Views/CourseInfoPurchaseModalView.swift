@@ -26,6 +26,17 @@ final class CourseInfoPurchaseModalView: UIView {
         return scrollableStackView
     }()
 
+    override var intrinsicContentSize: CGSize {
+        if self.loadingIndicator.isAnimating {
+            return CGSize(
+                width: UIView.noIntrinsicMetric,
+                height: self.loadingIndicator.intrinsicContentSize.height
+            )
+        }
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -82,5 +93,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 // MARK: - CourseInfoPurchaseModalView: PanModalScrollable -
 
 extension CourseInfoPurchaseModalView: PanModalScrollable {
-    var panScrollable: UIScrollView? { self.scrollableStackView.panScrollable }
+    var panScrollable: UIScrollView? {
+        self.loadingIndicator.isAnimating ? nil : self.scrollableStackView.panScrollable
+    }
 }

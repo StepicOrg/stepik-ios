@@ -4609,6 +4609,14 @@
 			path = CourseRevenue;
 			sourceTree = "<group>";
 		};
+		2C4391A827198B74000770AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2C48BA02257277DD009103B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -10023,10 +10031,10 @@
 				AAE9652E5F5D70BCE63C65FF /* CourseInfoPurchaseModalInteractor.swift */,
 				3647FD98066BDBD6F93B727F /* CourseInfoPurchaseModalPresenter.swift */,
 				758AD88FFDE3FCD437D26C47 /* CourseInfoPurchaseModalProvider.swift */,
-				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
 				D92F464AFB76FCA89A3B4CE1 /* CourseInfoPurchaseModalViewController.swift */,
 				2C4841252715ED760091FE20 /* CourseInfoPurchaseModalViewModel.swift */,
 				5C571739346FF8C16ABA467D /* InputOutput */,
+				2C4391A827198B74000770AE /* Views */,
 			);
 			path = CourseInfoPurchaseModal;
 			sourceTree = "<group>";
