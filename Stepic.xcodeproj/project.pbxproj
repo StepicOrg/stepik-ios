@@ -948,6 +948,7 @@
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CABB842267B929C0070E5E7 /* CourseWidgetPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABB841267B929C0070E5E7 /* CourseWidgetPriceView.swift */; };
 		2CAC7D5624EF56A600942D14 /* FillBlanksQuizInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */; };
+		2CACFB222719B916006E8FB3 /* CourseInfoPurchaseModalCourseCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CACFB212719B916006E8FB3 /* CourseInfoPurchaseModalCourseCoverView.swift */; };
 		2CAD40412600C305008EFDE5 /* StoryPartFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */; };
 		2CAD405C2600D10D008EFDE5 /* story-template-text.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD405B2600D10D008EFDE5 /* story-template-text.json */; };
 		2CAD40682600D1D7008EFDE5 /* StoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD40672600D1D7008EFDE5 /* StoryTests.swift */; };
@@ -2940,6 +2941,7 @@
 		2CAB3718219EF332007A524A /* Model_course_time_to_complete_v26.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_time_to_complete_v26.xcdatamodel; sourceTree = "<group>"; };
 		2CABB841267B929C0070E5E7 /* CourseWidgetPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetPriceView.swift; sourceTree = "<group>"; };
 		2CAC7D5524EF56A600942D14 /* FillBlanksQuizInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizInputContainerView.swift; sourceTree = "<group>"; };
+		2CACFB212719B916006E8FB3 /* CourseInfoPurchaseModalCourseCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalCourseCoverView.swift; sourceTree = "<group>"; };
 		2CAD40402600C305008EFDE5 /* StoryPartFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartFactory.swift; sourceTree = "<group>"; };
 		2CAD405B2600D10D008EFDE5 /* story-template-text.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "story-template-text.json"; sourceTree = "<group>"; };
 		2CAD40672600D1D7008EFDE5 /* StoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTests.swift; sourceTree = "<group>"; };
@@ -4614,6 +4616,7 @@
 		2C4391A827198B74000770AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CACFB212719B916006E8FB3 /* CourseInfoPurchaseModalCourseCoverView.swift */,
 				2C4391A9271994CB000770AE /* CourseInfoPurchaseModalHeaderView.swift */,
 				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
 			);
@@ -12299,6 +12302,7 @@
 				247608C654D7C9A7C5994A12 /* NewProfileCertificatesViewController.swift in Sources */,
 				224F80151254989529458041 /* NewProfileCreatedCoursesAssembly.swift in Sources */,
 				B2FE12ABF98ED99EAF727405 /* NewProfileCreatedCoursesDataFlow.swift in Sources */,
+				2CACFB222719B916006E8FB3 /* CourseInfoPurchaseModalCourseCoverView.swift in Sources */,
 				5469EC1AD797F38AC790B9E7 /* NewProfileCreatedCoursesInteractor.swift in Sources */,
 				64AF865C5174A2A525C5FB8A /* NewProfileCreatedCoursesPresenter.swift in Sources */,
 				2C19D9B22617586100181DB0 /* StepikAcademyCourseListCollectionViewDataSource.swift in Sources */,

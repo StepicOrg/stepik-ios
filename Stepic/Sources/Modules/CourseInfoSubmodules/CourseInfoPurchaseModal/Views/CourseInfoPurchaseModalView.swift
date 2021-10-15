@@ -21,6 +21,8 @@ final class CourseInfoPurchaseModalView: UIView {
 
     private lazy var headerView = CourseInfoPurchaseModalHeaderView()
 
+    private lazy var coverView = CourseInfoPurchaseModalCourseCoverView()
+
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
         loadingIndicatorView.hidesWhenStopped = true
@@ -78,6 +80,8 @@ final class CourseInfoPurchaseModalView: UIView {
     }
 
     func configure(viewModel: CourseInfoPurchaseModalViewModel) {
+        self.coverView.coverURL = viewModel.courseCoverImageURL
+        self.coverView.titleText = viewModel.courseTitle
     }
 }
 
@@ -99,6 +103,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
         self.addSubview(self.loadingIndicator)
 
         self.scrollableStackView.addArrangedView(self.headerView)
+        self.scrollableStackView.addArrangedView(self.coverView)
     }
 
     func makeConstraints() {
