@@ -585,6 +585,7 @@
 		2C434D3725B6FD8200854D6F /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
 		2C434D4525B7367500854D6F /* WidgetContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C434D4425B7367500854D6F /* WidgetContentProvider.swift */; };
 		2C434D4E25B74D1A00854D6F /* Array+Reordering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BC02EC89CF78E0FC7A6 /* Array+Reordering.swift */; };
+		2C4391AA271994CC000770AE /* CourseInfoPurchaseModalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4391A9271994CB000770AE /* CourseInfoPurchaseModalHeaderView.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
@@ -2563,6 +2564,7 @@
 		2C434D2B25B6F0C400854D6F /* StepikNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikNetworkService.swift; sourceTree = "<group>"; };
 		2C434D3125B6FC7300854D6F /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		2C434D4425B7367500854D6F /* WidgetContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetContentProvider.swift; sourceTree = "<group>"; };
+		2C4391A9271994CB000770AE /* CourseInfoPurchaseModalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalHeaderView.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C45C6EE254160A100AF24BF /* HTMLExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractorTests.swift; sourceTree = "<group>"; };
@@ -4612,6 +4614,7 @@
 		2C4391A827198B74000770AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C4391A9271994CB000770AE /* CourseInfoPurchaseModalHeaderView.swift */,
 				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
 			);
 			path = Views;
@@ -11108,6 +11111,7 @@
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				0846B1071EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
+				2C4391AA271994CC000770AE /* CourseInfoPurchaseModalHeaderView.swift in Sources */,
 				2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */,
 				2C50363E24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift in Sources */,
 				2C22042C20E277F70060117A /* Skeletonable+UIView.swift in Sources */,

@@ -528,6 +528,9 @@ CourseInfoTabNewsDateOnEventSent = "%@ - %@";
 CourseInfoTabNewsDateOneTimeScheduled = "Запланирована на %@";
 CourseInfoTabNewsDateOneTimeSending = "С %@";
 
+/* CourseInfoPurchaseModal */
+CourseInfoPurchaseModalTitle = "Покупка курса";
+
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
 CourseRevenueTabPurchasesAndRefunds = "Покупки и возвраты";

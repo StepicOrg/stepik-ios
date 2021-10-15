@@ -526,6 +526,9 @@ CourseInfoTabNewsDateOnEventSent = "%@ - %@";
 CourseInfoTabNewsDateOneTimeScheduled = "Scheduled for %@";
 CourseInfoTabNewsDateOneTimeSending = "From %@";
 
+/* CourseInfoPurchaseModal */
+CourseInfoPurchaseModalTitle = "Course purchase";
+
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
 CourseRevenueTabPurchasesAndRefunds = "Purchases and Refunds";

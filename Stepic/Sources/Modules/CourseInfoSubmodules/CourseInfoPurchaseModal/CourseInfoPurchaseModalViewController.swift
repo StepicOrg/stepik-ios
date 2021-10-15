@@ -46,6 +46,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     override func loadView() {
         let view = CourseInfoPurchaseModalView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -76,5 +77,13 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
 
         self.panModalSetNeedsLayoutUpdate()
         self.panModalTransition(to: .shortForm)
+    }
+}
+
+// MARK: - CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDelegate -
+
+extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDelegate {
+    func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView) {
+        self.dismiss(animated: true)
     }
 }

@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
+    func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView)
+}
+
 extension CourseInfoPurchaseModalView {
     struct Appearance {
         let backgroundColor = UIColor.stepikBackground
@@ -11,7 +15,11 @@ extension CourseInfoPurchaseModalView {
 }
 
 final class CourseInfoPurchaseModalView: UIView {
+    weak var delegate: CourseInfoPurchaseModalViewDelegate?
+
     let appearance: Appearance
+
+    private lazy var headerView = CourseInfoPurchaseModalHeaderView()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
@@ -34,7 +42,12 @@ final class CourseInfoPurchaseModalView: UIView {
             )
         }
 
-        return CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
+        let stackViewIntrinsicContentSize = self.scrollableStackView
+            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+
+        let height = stackViewIntrinsicContentSize.height + self.appearance.stackViewSpacing
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
     init(
@@ -71,11 +84,21 @@ final class CourseInfoPurchaseModalView: UIView {
 extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
+
+        self.headerView.onCloseClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidClickCloseButton(strongSelf)
+        }
     }
 
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
         self.addSubview(self.loadingIndicator)
+
+        self.scrollableStackView.addArrangedView(self.headerView)
     }
 
     func makeConstraints() {
