@@ -86,7 +86,7 @@ end
 def testing_pods
   pod 'Quick', '4.0.0'
   pod 'Nimble', '9.2.1'
-  pod 'Mockingjay', '3.0.0-alpha.1'
+  pod 'Mockingjay', :git => 'https://github.com/kylef/Mockingjay.git', :branch => 'master'
 end
 
 target 'Stepic' do

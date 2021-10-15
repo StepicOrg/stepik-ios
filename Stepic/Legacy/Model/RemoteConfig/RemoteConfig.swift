@@ -11,7 +11,10 @@ import FirebaseRemoteConfig
 import Foundation
 
 final class RemoteConfig {
+    private static let analyticsUserPropertyKeyPrefix = "remote_config_"
+
     private static let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
+
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -23,9 +26,7 @@ final class RemoteConfig {
         Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
         Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
-        Key.darkModeAvailable.rawValue: NSNumber(value: true),
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
-        Key.isDisabledStepsSupported.rawValue: NSNumber(value: false),
         Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
         Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
         Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false)
@@ -81,28 +82,10 @@ final class RemoteConfig {
         return supportedCourses.compactMap { Int($0) }
     }
 
-    var isDarkModeAvailable: Bool {
-        if DeviceInfo.current.OSVersion.major < 13 {
-            return false
-        }
-
-        return FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.darkModeAvailable.rawValue)
-            .boolValue
-    }
-
     var isARQuickLookAvailable: Bool {
         FirebaseRemoteConfig.RemoteConfig
             .remoteConfig()
             .configValue(forKey: Key.arQuickLookAvailable.rawValue)
-            .boolValue
-    }
-
-    var isDisabledStepsSupported: Bool {
-        FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.isDisabledStepsSupported.rawValue)
             .boolValue
     }
 
@@ -171,8 +154,13 @@ final class RemoteConfig {
                 }
             }
 
-            self?.fetchComplete = true
-            self?.loadingDoneCallback?()
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchComplete = true
+            strongSelf.loadingDoneCallback?()
+            strongSelf.updateAnalyticsUserProperties()
         }
     }
 
@@ -183,6 +171,19 @@ final class RemoteConfig {
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 
+    private func updateAnalyticsUserProperties() {
+        let userProperties: [String: Any] = [
+            Key.showStreaksNotificationTrigger.analyticsUserPropertyKey: self.showStreaksNotificationTrigger.rawValue,
+            Key.adaptiveBackendUrl.analyticsUserPropertyKey: self.adaptiveBackendURL,
+            Key.supportedInAdaptiveModeCourses.analyticsUserPropertyKey: self.supportedInAdaptiveModeCourses,
+            Key.arQuickLookAvailable.analyticsUserPropertyKey: self.isARQuickLookAvailable,
+            Key.searchResultsQueryParams.analyticsUserPropertyKey: self.searchResultsQueryParams,
+            Key.isCoursePricesEnabled.analyticsUserPropertyKey: self.isCoursePricesEnabled,
+            Key.isCourseRevenueAvailable.analyticsUserPropertyKey: self.isCourseRevenueAvailable
+        ]
+        AnalyticsUserProperties.shared.setRemoteConfigUserProperties(userProperties)
+    }
+
     // MARK: Inner Types
 
     enum ShowStreaksNotificationTrigger: String {
@@ -190,15 +191,15 @@ final class RemoteConfig {
         case submission = "submission"
     }
 
-    enum Key: String {
+    private enum Key: String {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
-        case darkModeAvailable = "is_dark_mode_available_ios"
         case arQuickLookAvailable = "is_ar_quick_look_available_ios"
-        case isDisabledStepsSupported = "is_disabled_steps_supported"
         case searchResultsQueryParams = "search_query_params_ios"
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
+
+        var analyticsUserPropertyKey: String { "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)" }
     }
 }

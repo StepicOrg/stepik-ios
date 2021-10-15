@@ -9,7 +9,6 @@ enum StepDataFlow {
             let step: Step
             let stepFontSize: StepFontSize
             let storedImages: [StoredImage]
-            let isDisabledStepsSupported: Bool
         }
 
         struct Response {

@@ -31,7 +31,6 @@ final class SettingsAssembly: Assembly {
             provider: provider,
             analytics: StepikAnalytics.shared,
             userAccountService: UserAccountService(),
-            remoteConfig: .shared,
             downloadsDeletionService: DownloadsDeletionService(),
             dataBackUpdateService: DataBackUpdateService.default
         )
