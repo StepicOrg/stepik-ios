@@ -11,7 +11,10 @@ import FirebaseRemoteConfig
 import Foundation
 
 final class RemoteConfig {
+    private static let analyticsUserPropertyKeyPrefix = "remote_config_"
+
     private static let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
+
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -170,15 +173,15 @@ final class RemoteConfig {
 
     private func updateAnalyticsUserProperties() {
         let userProperties: [String: Any] = [
-            Key.showStreaksNotificationTrigger.rawValue: self.showStreaksNotificationTrigger.rawValue,
-            Key.adaptiveBackendUrl.rawValue: self.adaptiveBackendURL,
-            Key.supportedInAdaptiveModeCourses.rawValue: self.supportedInAdaptiveModeCourses,
-            Key.arQuickLookAvailable.rawValue: self.isARQuickLookAvailable,
-            Key.searchResultsQueryParams.rawValue: self.searchResultsQueryParams,
-            Key.isCoursePricesEnabled.rawValue: self.isCoursePricesEnabled,
-            Key.isCourseRevenueAvailable.rawValue: self.isCourseRevenueAvailable
+            Key.showStreaksNotificationTrigger.analyticsUserPropertyKey: self.showStreaksNotificationTrigger.rawValue,
+            Key.adaptiveBackendUrl.analyticsUserPropertyKey: self.adaptiveBackendURL,
+            Key.supportedInAdaptiveModeCourses.analyticsUserPropertyKey: self.supportedInAdaptiveModeCourses,
+            Key.arQuickLookAvailable.analyticsUserPropertyKey: self.isARQuickLookAvailable,
+            Key.searchResultsQueryParams.analyticsUserPropertyKey: self.searchResultsQueryParams,
+            Key.isCoursePricesEnabled.analyticsUserPropertyKey: self.isCoursePricesEnabled,
+            Key.isCourseRevenueAvailable.analyticsUserPropertyKey: self.isCourseRevenueAvailable
         ]
-        AnalyticsUserProperties.shared.setRemoteConfigProperties(userProperties)
+        AnalyticsUserProperties.shared.setRemoteConfigUserProperties(userProperties)
     }
 
     // MARK: Inner Types
@@ -196,5 +199,7 @@ final class RemoteConfig {
         case searchResultsQueryParams = "search_query_params_ios"
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
+
+        var analyticsUserPropertyKey: String { "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)" }
     }
 }

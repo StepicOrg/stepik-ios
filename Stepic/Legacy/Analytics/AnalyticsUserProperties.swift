@@ -110,7 +110,7 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         self.setAmplitudeProperty(key: UserPropertyKey.isNightModeEnabled.rawValue, value: "\(isEnabled)")
     }
 
-    func setRemoteConfigProperties(_ keysAndValues: [String: Any]) {
+    func setRemoteConfigUserProperties(_ keysAndValues: [String: Any]) {
         Amplitude.instance().setUserProperties(keysAndValues)
         Crashlytics.crashlytics().setCustomKeysAndValues(keysAndValues)
         self.setYandexMetricaProfileAttributes(keysAndValues)
