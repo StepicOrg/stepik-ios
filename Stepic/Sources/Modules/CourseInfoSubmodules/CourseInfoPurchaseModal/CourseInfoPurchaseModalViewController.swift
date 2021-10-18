@@ -1,3 +1,4 @@
+import IQKeyboardManagerSwift
 import PanModal
 import UIKit
 
@@ -17,9 +18,15 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         return false
     }
 
+    private var keyboardIsShowing = false
+    private var keyboardHeight: CGFloat = 0
+
     var courseInfoPurchaseModalView: CourseInfoPurchaseModalView? { self.view as? CourseInfoPurchaseModalView }
 
-    override var panScrollable: UIScrollView? { self.courseInfoPurchaseModalView?.panScrollable }
+    override var panScrollable: UIScrollView? {
+        // Returns nil to prevent PanModal overrides scrollView bottom contentInset.
+        self.keyboardIsShowing ? nil : self.courseInfoPurchaseModalView?.panScrollable
+    }
 
     override var shortFormHeight: PanModalHeight {
         if self.hasLoadedData && self.isShortFormEnabled,
@@ -27,6 +34,19 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             return .contentHeight(intrinsicContentSize.height)
         }
         return super.shortFormHeight
+    }
+
+    override var longFormHeight: PanModalHeight {
+        guard self.hasLoadedData else {
+            return self.shortFormHeight
+        }
+
+        if self.keyboardIsShowing,
+           let intrinsicContentSize = self.courseInfoPurchaseModalView?.intrinsicContentSize {
+            return .contentHeight(intrinsicContentSize.height + self.keyboardHeight)
+        }
+
+        return super.longFormHeight
     }
 
     init(
@@ -52,9 +72,35 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.onKeyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.onKeyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+
         self.updateState(newState: self.state)
         self.interactor.doModalLoad(request: .init())
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
+        IQKeyboardManager.shared.enable = true
+    }
+
+    // MARK: Private API
 
     private func updateState(newState: CourseInfoPurchaseModal.ViewControllerState) {
         switch newState {
@@ -67,6 +113,32 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
         self.state = newState
     }
+
+    private func transition(to state: PanModalPresentationController.PresentationState) {
+        self.panModalSetNeedsLayoutUpdate()
+        self.panModalTransition(to: state)
+    }
+
+    @objc
+    private func onKeyboardWillShow(notification: NSNotification) {
+        self.keyboardIsShowing = true
+
+        let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        self.keyboardHeight = keyboardFrame?.size.height ?? 0
+
+        var newContentInsets = self.courseInfoPurchaseModalView?.contentInsets ?? .zero
+        newContentInsets.bottom = self.keyboardHeight
+        self.courseInfoPurchaseModalView?.contentInsets = newContentInsets
+
+        self.transition(to: .longForm)
+    }
+
+    @objc
+    private func onKeyboardWillHide(notification: NSNotification) {
+        self.keyboardIsShowing = false
+        self.isShortFormEnabled = true
+        self.transition(to: .shortForm)
+    }
 }
 
 // MARK: - CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewControllerProtocol -
@@ -74,9 +146,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewControllerProtocol {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
-
-        self.panModalSetNeedsLayoutUpdate()
-        self.panModalTransition(to: .shortForm)
+        self.transition(to: .shortForm)
     }
 }
 

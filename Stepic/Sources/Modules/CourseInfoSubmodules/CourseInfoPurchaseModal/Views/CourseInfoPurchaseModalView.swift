@@ -23,6 +23,8 @@ final class CourseInfoPurchaseModalView: UIView {
 
     private lazy var coverView = CourseInfoPurchaseModalCourseCoverView()
 
+    private lazy var promoCodeView = CourseInfoPurchaseModalPromoCodeView()
+
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
         loadingIndicatorView.hidesWhenStopped = true
@@ -36,6 +38,15 @@ final class CourseInfoPurchaseModalView: UIView {
         return scrollableStackView
     }()
 
+    var contentInsets: UIEdgeInsets {
+        get {
+            self.scrollableStackView.contentInsets
+        }
+        set {
+            self.scrollableStackView.contentInsets = newValue
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         if self.loadingIndicator.isAnimating {
             return CGSize(
@@ -44,10 +55,8 @@ final class CourseInfoPurchaseModalView: UIView {
             )
         }
 
-        let stackViewIntrinsicContentSize = self.scrollableStackView
-            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-
-        let height = stackViewIntrinsicContentSize.height + self.appearance.stackViewSpacing
+        let contentSize = self.scrollableStackView.contentSize
+        let height = contentSize.height + self.appearance.stackViewSpacing
 
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
@@ -104,6 +113,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
         self.scrollableStackView.addArrangedView(self.headerView)
         self.scrollableStackView.addArrangedView(self.coverView)
+        self.scrollableStackView.addArrangedView(self.promoCodeView)
     }
 
     func makeConstraints() {
@@ -114,14 +124,15 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
         }
 
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollableStackView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        self.scrollableStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+        }
     }
 }
 
 // MARK: - CourseInfoPurchaseModalView: PanModalScrollable -
 
 extension CourseInfoPurchaseModalView: PanModalScrollable {
-    var panScrollable: UIScrollView? {
-        self.loadingIndicator.isAnimating ? nil : self.scrollableStackView.panScrollable
-    }
+    var panScrollable: UIScrollView? { self.scrollableStackView.panScrollable }
 }

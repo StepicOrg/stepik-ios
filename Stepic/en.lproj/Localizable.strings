@@ -528,6 +528,8 @@ CourseInfoTabNewsDateOneTimeSending = "From %@";
 
 /* CourseInfoPurchaseModal */
 CourseInfoPurchaseModalTitle = "Course purchase";
+CourseInfoPurchaseModalRevealPromoCodeInputTitle = "I have a promo code";
+CourseInfoPurchaseModalInputPlaceholder = "Enter a promo code";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

@@ -10,6 +10,15 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
             : self.longFormHeight
     }
 
+    var longFormHeight: PanModalHeight {
+        guard let scrollView = self.panScrollable else {
+            return .maxHeight
+        }
+
+        scrollView.layoutIfNeeded()
+        return .contentHeight(scrollView.contentSize.height)
+    }
+
     var anchorModalToLongForm: Bool { false }
 
     var isShortFormEnabled = true

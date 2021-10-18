@@ -530,6 +530,8 @@ CourseInfoTabNewsDateOneTimeSending = "С %@";
 
 /* CourseInfoPurchaseModal */
 CourseInfoPurchaseModalTitle = "Покупка курса";
+CourseInfoPurchaseModalRevealPromoCodeInputTitle = "У меня есть промокод";
+CourseInfoPurchaseModalInputPlaceholder = "Введите промокод";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";

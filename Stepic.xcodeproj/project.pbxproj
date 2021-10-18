@@ -430,6 +430,7 @@
 		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
 		2C0B771D25480A7500BA474D /* CourseListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B771C25480A7500BA474D /* CourseListFilterViewModel.swift */; };
 		2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */; };
+		2C0D345E271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D345D271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift */; };
 		2C0F80BA25C9B80C006E9233 /* DiscountAppearanceSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80B925C9B80C006E9233 /* DiscountAppearanceSplitTest.swift */; };
 		2C0F80C525C9BB5A006E9233 /* PromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */; };
 		2C0F80D925C9C861006E9233 /* TransparentPromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */; };
@@ -2387,6 +2388,7 @@
 		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C0B771C25480A7500BA474D /* CourseListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterViewModel.swift; sourceTree = "<group>"; };
 		2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPReceiptValidationService.swift; sourceTree = "<group>"; };
+		2C0D345D271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalPromoCodeView.swift; sourceTree = "<group>"; };
 		2C0F80B925C9B80C006E9233 /* DiscountAppearanceSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountAppearanceSplitTest.swift; sourceTree = "<group>"; };
 		2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPriceButton.swift; sourceTree = "<group>"; };
 		2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentPromoPriceButton.swift; sourceTree = "<group>"; };
@@ -4618,6 +4620,7 @@
 			children = (
 				2CACFB212719B916006E8FB3 /* CourseInfoPurchaseModalCourseCoverView.swift */,
 				2C4391A9271994CB000770AE /* CourseInfoPurchaseModalHeaderView.swift */,
+				2C0D345D271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift */,
 				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
 			);
 			path = Views;
@@ -11700,6 +11703,7 @@
 				2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */,
 				62E981A7B87D4281EBBB5184 /* DiscussionProxiesNetworkService.swift in Sources */,
 				2C96410E257001BE0007A3A4 /* AdaptiveRatingsNetworkService.swift in Sources */,
+				2C0D345E271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift in Sources */,
 				2C6DECE123D02DF400E542B9 /* SettingsRightDetailTableViewCell.swift in Sources */,
 				2C8F3AE323CCBEAB004D113A /* StreamVideoQuality.swift in Sources */,
 				2C1E429C2497830F009F4C69 /* CoursePurchasesNetworkService.swift in Sources */,
