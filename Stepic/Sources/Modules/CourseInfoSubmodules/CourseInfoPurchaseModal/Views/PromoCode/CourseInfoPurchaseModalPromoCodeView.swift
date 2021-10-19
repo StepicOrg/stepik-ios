@@ -12,12 +12,14 @@ extension CourseInfoPurchaseModalPromoCodeView {
         let textFieldFont = Typography.bodyFont
         let textFieldPlaceholderColor = UIColor.stepikMaterialDisabledText
         let textFieldTextColor = UIColor.stepikMaterialPrimaryText
-        let textFieldHeight: CGFloat = 44
         let textFieldCornerRadius: CGFloat = 8
         let textFieldBorderWidth: CGFloat = 1
         let textFieldBorderColor = UIColor.stepikSeparator
         let textFieldInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         let textFieldClearButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
+
+        let inputStackViewHeight: CGFloat = 44
+        let rightDetailViewWidth: CGFloat = 52
 
         let stackViewSpacing: CGFloat = 16
         let stackViewInsets = LayoutInsets(horizontal: 16)
@@ -67,6 +69,16 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         return textField
     }()
 
+    private lazy var rightDetailView = CourseInfoPurchaseModalPromoCodeRightDetailView()
+
+    // textField -> rightDetailView
+    private lazy var inputStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = self.appearance.stackViewSpacing
+        return stackView
+    }()
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -114,7 +126,10 @@ extension CourseInfoPurchaseModalPromoCodeView: ProgrammaticallyInitializableVie
         self.addSubview(self.stackView)
 
         self.stackView.addArrangedSubview(self.revealInputButton)
-        self.stackView.addArrangedSubview(self.textField)
+        self.stackView.addArrangedSubview(self.inputStackView)
+
+        self.inputStackView.addArrangedSubview(self.textField)
+        self.inputStackView.addArrangedSubview(self.rightDetailView)
     }
 
     func makeConstraints() {
@@ -124,9 +139,14 @@ extension CourseInfoPurchaseModalPromoCodeView: ProgrammaticallyInitializableVie
             make.leading.trailing.equalToSuperview().inset(self.appearance.stackViewInsets.edgeInsets)
         }
 
-        self.textField.translatesAutoresizingMaskIntoConstraints = false
-        self.textField.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.textFieldHeight)
+        self.inputStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.inputStackView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.inputStackViewHeight)
+        }
+
+        self.rightDetailView.translatesAutoresizingMaskIntoConstraints = false
+        self.rightDetailView.snp.makeConstraints { make in
+            make.width.equalTo(self.appearance.rightDetailViewWidth)
         }
     }
 }
