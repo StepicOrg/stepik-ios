@@ -526,6 +526,15 @@ CourseInfoTabNewsDateOnEventSent = "%@ - %@";
 CourseInfoTabNewsDateOneTimeScheduled = "Scheduled for %@";
 CourseInfoTabNewsDateOneTimeSending = "From %@";
 
+/* CourseInfoPurchaseModal */
+CourseInfoPurchaseModalTitle = "Course purchase";
+CourseInfoPurchaseModalRevealPromoCodeInputTitle = "I have a promo code";
+CourseInfoPurchaseModalInputPlaceholder = "Enter a promo code";
+CourseInfoPurchaseModalPromoCodeStatusLoading = "Checking the promo code";
+CourseInfoPurchaseModalPromoCodeStatusError = "Invalid promo code";
+CourseInfoPurchaseModalPromoCodeStatusSuccess = "Promo code applied";
+CourseInfoPurchaseModalDisclaimer = "В цену включена 30% комиссия App Store. Оплачивая доступ к этому курсу вы соглашаетесь с условиями <a href=\"https://welcome.stepik.org/en/payment-terms\"> пользовательского соглашения</a>.";
+
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
 CourseRevenueTabPurchasesAndRefunds = "Purchases and Refunds";

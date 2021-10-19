@@ -80,7 +80,7 @@ final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorPr
         isOnline: Bool
     ) -> Promise<NewProfileCertificates.CertificatesLoad.Response> {
         Promise { seal in
-            firstly {
+            DispatchQueue.main.promise { () -> Promise<[Certificate]> in
                 isOnline && self.didLoadFromCache
                     ? self.provider.fetchRemote(userID: userID)
                     : self.provider.fetchCached(userID: userID)

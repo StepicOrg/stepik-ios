@@ -15,6 +15,8 @@ final class RemoteConfig {
 
     private static let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
 
+    private static let defaultCoursePurchaseFlowType = CoursePurchaseFlowType.web
+
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
@@ -29,7 +31,8 @@ final class RemoteConfig {
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
         Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
         Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
-        Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false)
+        Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false),
+        Key.purchaseFlow.rawValue: NSString(string: Self.defaultCoursePurchaseFlowType.rawValue)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -121,6 +124,16 @@ final class RemoteConfig {
         #endif
     }
 
+    var coursePurchaseFlow: CoursePurchaseFlowType {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: Key.purchaseFlow.rawValue
+        ).stringValue else {
+            return Self.defaultCoursePurchaseFlowType
+        }
+
+        return CoursePurchaseFlowType(rawValue: configValue) ?? Self.defaultCoursePurchaseFlowType
+    }
+
     init() {
         self.setConfigDefaults()
         self.fetchRemoteConfigData()
@@ -199,6 +212,7 @@ final class RemoteConfig {
         case searchResultsQueryParams = "search_query_params_ios"
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
+        case purchaseFlow = "purchase_flow_ios"
 
         var analyticsUserPropertyKey: String { "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)" }
     }
