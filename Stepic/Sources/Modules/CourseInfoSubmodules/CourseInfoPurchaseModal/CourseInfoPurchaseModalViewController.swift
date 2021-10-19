@@ -156,4 +156,14 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
     func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView) {
         self.dismiss(animated: true)
     }
+
+    func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            link,
+            inController: self,
+            withKey: .externalLink,
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
 }

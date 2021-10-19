@@ -535,6 +535,7 @@ CourseInfoPurchaseModalInputPlaceholder = "Введите промокод";
 CourseInfoPurchaseModalPromoCodeStatusLoading = "Проверка промокода";
 CourseInfoPurchaseModalPromoCodeStatusError = "Неверный промокод";
 CourseInfoPurchaseModalPromoCodeStatusSuccess = "Промокод применен";
+CourseInfoPurchaseModalDisclaimer = "В цену включена 30% комиссия App Store. Оплачивая доступ к этому курсу вы соглашаетесь с условиями <a href=\"https://welcome.stepik.org/ru/payment-terms\"> пользовательского соглашения</a>.";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";

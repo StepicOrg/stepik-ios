@@ -3,6 +3,7 @@ import UIKit
 
 protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
     func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL)
 }
 
 extension CourseInfoPurchaseModalView {
@@ -24,6 +25,8 @@ final class CourseInfoPurchaseModalView: UIView {
     private lazy var coverView = CourseInfoPurchaseModalCourseCoverView()
 
     private lazy var promoCodeView = CourseInfoPurchaseModalPromoCodeView()
+
+    private lazy var disclaimerView = CourseInfoPurchaseModalDisclaimerView()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
@@ -105,6 +108,14 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
             strongSelf.delegate?.courseInfoPurchaseModalViewDidClickCloseButton(strongSelf)
         }
+
+        self.disclaimerView.onLinkClick = { [weak self] link in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalView(strongSelf, didClickLink: link)
+        }
     }
 
     func addSubviews() {
@@ -114,6 +125,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
         self.scrollableStackView.addArrangedView(self.headerView)
         self.scrollableStackView.addArrangedView(self.coverView)
         self.scrollableStackView.addArrangedView(self.promoCodeView)
+        self.scrollableStackView.addArrangedView(self.disclaimerView)
     }
 
     func makeConstraints() {
