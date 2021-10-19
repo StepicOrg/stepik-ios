@@ -21,6 +21,8 @@ extension CourseInfoPurchaseModalPromoCodeView {
         let inputStackViewHeight: CGFloat = 44
         let rightDetailViewWidth: CGFloat = 52
 
+        let statusLabelFont = Typography.caption1Font
+
         let stackViewSpacing: CGFloat = 16
         let stackViewInsets = LayoutInsets(horizontal: 16)
     }
@@ -71,6 +73,14 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
 
     private lazy var rightDetailView = CourseInfoPurchaseModalPromoCodeRightDetailView()
 
+    private lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.statusLabelFont
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }()
+
     // textField -> rightDetailView
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView()
@@ -85,6 +95,14 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
+
+    var state = State.idle {
+        didSet {
+            if oldValue != self.state {
+                self.updateState()
+            }
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -101,6 +119,8 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
+
+        self.updateState()
     }
 
     @available(*, unavailable)
@@ -108,25 +128,117 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private func updateState() {
+        switch self.state {
+        case .idle:
+            self.revealInputButton.isHidden = false
+            self.inputStackView.isHidden = true
+            self.rightDetailView.isHidden = true
+            self.statusLabel.isHidden = true
+        case .typing:
+            self.revealInputButton.isHidden = true
+            self.inputStackView.isHidden = false
+            self.statusLabel.isHidden = true
+
+            self.rightDetailView.isUserInteractionEnabled = true
+            self.rightDetailView.viewState = .idle
+
+            self.isUserInteractionEnabled = true
+        case .loading:
+            self.statusLabel.isHidden = false
+
+            self.rightDetailView.isUserInteractionEnabled = false
+            self.rightDetailView.viewState = .loading
+
+            self.isUserInteractionEnabled = false
+        case .error:
+            self.statusLabel.isHidden = false
+
+            self.rightDetailView.isUserInteractionEnabled = false
+            self.rightDetailView.viewState = .error
+
+            self.isUserInteractionEnabled = true
+        case .success:
+            self.statusLabel.isHidden = false
+
+            self.rightDetailView.isUserInteractionEnabled = false
+            self.rightDetailView.viewState = .success
+
+            self.isUserInteractionEnabled = true
+        }
+
+        self.statusLabel.text = self.state.statusLabelText
+        if let statusLabelTextColor = self.state.statusLabelTextColor {
+            self.statusLabel.textColor = statusLabelTextColor
+        }
+    }
+
     @objc
     private func revealInputButtonClicked() {
+        self.state = .typing
+    }
+
+    @objc
+    private func rightDetailViewClicked() {
+        guard self.state == .typing else {
+            return
+        }
+
+        self.state = .loading
     }
 
     @objc
     private func textFieldTextChanged() {
         let text = self.textField.text ?? ""
-        print(text)
+        self.rightDetailView.isHidden = text.isEmpty
+    }
+
+    enum State {
+        case idle
+        case typing
+        case loading
+        case error
+        case success
+
+        fileprivate var statusLabelText: String? {
+            switch self {
+            case .idle, .typing:
+                return nil
+            case .loading:
+                return NSLocalizedString("CourseInfoPurchaseModalPromoCodeStatusLoading", comment: "")
+            case .error:
+                return NSLocalizedString("CourseInfoPurchaseModalPromoCodeStatusError", comment: "")
+            case .success:
+                return NSLocalizedString("CourseInfoPurchaseModalPromoCodeStatusSuccess", comment: "")
+            }
+        }
+
+        fileprivate var statusLabelTextColor: UIColor? {
+            switch self {
+            case .idle, .typing:
+                return nil
+            case .loading:
+                return .stepikVioletFixed
+            case .error:
+                return .stepikDiscountPriceText
+            case .success:
+                return .stepikGreenFixed
+            }
+        }
     }
 }
 
 extension CourseInfoPurchaseModalPromoCodeView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
+    func setupView() {
+        self.rightDetailView.addTarget(self, action: #selector(self.rightDetailViewClicked), for: .touchUpInside)
+    }
 
     func addSubviews() {
         self.addSubview(self.stackView)
 
         self.stackView.addArrangedSubview(self.revealInputButton)
         self.stackView.addArrangedSubview(self.inputStackView)
+        self.stackView.addArrangedSubview(self.statusLabel)
 
         self.inputStackView.addArrangedSubview(self.textField)
         self.inputStackView.addArrangedSubview(self.rightDetailView)

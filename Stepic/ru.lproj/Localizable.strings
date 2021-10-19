@@ -532,6 +532,9 @@ CourseInfoTabNewsDateOneTimeSending = "С %@";
 CourseInfoPurchaseModalTitle = "Покупка курса";
 CourseInfoPurchaseModalRevealPromoCodeInputTitle = "У меня есть промокод";
 CourseInfoPurchaseModalInputPlaceholder = "Введите промокод";
+CourseInfoPurchaseModalPromoCodeStatusLoading = "Проверка промокода";
+CourseInfoPurchaseModalPromoCodeStatusError = "Неверный промокод";
+CourseInfoPurchaseModalPromoCodeStatusSuccess = "Промокод применен";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";

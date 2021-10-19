@@ -530,6 +530,9 @@ CourseInfoTabNewsDateOneTimeSending = "From %@";
 CourseInfoPurchaseModalTitle = "Course purchase";
 CourseInfoPurchaseModalRevealPromoCodeInputTitle = "I have a promo code";
 CourseInfoPurchaseModalInputPlaceholder = "Enter a promo code";
+CourseInfoPurchaseModalPromoCodeStatusLoading = "Checking the promo code";
+CourseInfoPurchaseModalPromoCodeStatusError = "Invalid promo code";
+CourseInfoPurchaseModalPromoCodeStatusSuccess = "Promo code applied";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
