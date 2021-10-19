@@ -166,4 +166,12 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
             backButtonStyle: .done
         )
     }
+
+    func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView) {
+        print(#function)
+    }
+
+    func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView) {
+        print(#function)
+    }
 }

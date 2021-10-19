@@ -4,6 +4,8 @@ import UIKit
 protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
     func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL)
+    func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView)
 }
 
 extension CourseInfoPurchaseModalView {
@@ -27,6 +29,8 @@ final class CourseInfoPurchaseModalView: UIView {
     private lazy var promoCodeView = CourseInfoPurchaseModalPromoCodeView()
 
     private lazy var disclaimerView = CourseInfoPurchaseModalDisclaimerView()
+
+    private lazy var actionButtonsView = CourseInfoPurchaseModalActionButtonsView()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
@@ -116,6 +120,21 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
             strongSelf.delegate?.courseInfoPurchaseModalView(strongSelf, didClickLink: link)
         }
+
+        self.actionButtonsView.onBuyButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidClickBuyButton(strongSelf)
+        }
+        self.actionButtonsView.onWishlistButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidClickWishlistButton(strongSelf)
+        }
     }
 
     func addSubviews() {
@@ -126,6 +145,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
         self.scrollableStackView.addArrangedView(self.coverView)
         self.scrollableStackView.addArrangedView(self.promoCodeView)
         self.scrollableStackView.addArrangedView(self.disclaimerView)
+        self.scrollableStackView.addArrangedView(self.actionButtonsView)
     }
 
     func makeConstraints() {
