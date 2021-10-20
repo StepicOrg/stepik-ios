@@ -121,6 +121,7 @@ only_rules:
   - redundant_void_return
   # - return_value_from_void_function
   - return_arrow_whitespace
+  - self_in_property_initialization
   - shorthand_operator
   - single_test_class
   - sorted_first_last
@@ -423,6 +424,9 @@ redundant_set_access_control:
   severity: error
 
 redundant_type_annotation:
+  severity: error
+
+self_in_property_initialization:
   severity: error
 
 statement_position:
