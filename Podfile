@@ -51,7 +51,7 @@ def all_pods
 
   pod 'YandexMobileMetrica/Dynamic', '3.17.0'
   pod 'Amplitude', '8.4.0'
-  pod 'Branch', '1.39.3'
+  pod 'Branch', '1.40.1'
 
   pod 'BEMCheckBox', '1.4.1'
 
