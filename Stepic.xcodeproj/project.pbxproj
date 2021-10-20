@@ -487,6 +487,7 @@
 		2C1AC31E255B476A00E6ECA9 /* CatalogBlocksRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */; };
 		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
 		2C1C37DF25938CAF009CC761 /* TitlePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C37DE25938CAF009CC761 /* TitlePresentable.swift */; };
+		2C1E1BA62720588800D64E48 /* ManageSplitTestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E1BA52720588800D64E48 /* ManageSplitTestsTableViewController.swift */; };
 		2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429724977EAC009F4C69 /* CoursePurchase.swift */; };
 		2C1E429A24978114009F4C69 /* CoursePurchasesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */; };
 		2C1E429C2497830F009F4C69 /* CoursePurchasesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */; };
@@ -2455,6 +2456,7 @@
 		2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlocksRepository.swift; sourceTree = "<group>"; };
 		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
 		2C1C37DE25938CAF009CC761 /* TitlePresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePresentable.swift; sourceTree = "<group>"; };
+		2C1E1BA52720588800D64E48 /* ManageSplitTestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSplitTestsTableViewController.swift; sourceTree = "<group>"; };
 		2C1E429724977EAC009F4C69 /* CoursePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchase.swift; sourceTree = "<group>"; };
 		2C1E429924978114009F4C69 /* CoursePurchasesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesAPI.swift; sourceTree = "<group>"; };
 		2C1E429B2497830F009F4C69 /* CoursePurchasesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePurchasesNetworkService.swift; sourceTree = "<group>"; };
@@ -8655,6 +8657,7 @@
 			children = (
 				2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */,
 				62E9811E14B07132959D4987 /* ContactSupportController.swift */,
+				2C1E1BA52720588800D64E48 /* ManageSplitTestsTableViewController.swift */,
 				2C00A4D62632C75200AEE255 /* PanModalPresentableViewController.swift */,
 				2CA6A1E5266624F4000AAA90 /* ReviewsAndWishlistContainerViewController.swift */,
 				2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */,
@@ -11716,6 +11719,7 @@
 				2C048BAD26E1143E00235DEC /* CourseSearchSuggestionTableViewCell.swift in Sources */,
 				62E98CB2C2F2B7AE44023FEA /* SettingsTableViewModel.swift in Sources */,
 				62E989CCBB953CEF37E17013 /* SettingsTableSectionFooterView.swift in Sources */,
+				2C1E1BA62720588800D64E48 /* ManageSplitTestsTableViewController.swift in Sources */,
 				2C98424726DE78EA0098E36B /* SearchResultsRepository.swift in Sources */,
 				2C619A8124D004AA007D3529 /* SocialProfilesNetworkService.swift in Sources */,
 				62E98524AB7850FA81448B4A /* SeparatorView.swift in Sources */,
