@@ -28,7 +28,7 @@ final class StepPresenter: StepPresenterProtocol {
     func presentStep(response: StepDataFlow.StepLoad.Response) {
         switch response.result {
         case .success(let data):
-            if !data.step.isEnabled && data.isDisabledStepsSupported {
+            if !data.step.isEnabled {
                 let viewModel = self.makeDisabledStepViewModel(
                     step: data.step,
                     stepFontSize: data.stepFontSize,
