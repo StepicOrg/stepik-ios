@@ -461,6 +461,7 @@
 		2C1864CB24F63BA9004AFFD1 /* StepikURLFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1864CA24F63BA9004AFFD1 /* StepikURLFactoryTests.swift */; };
 		2C1883A125C44C5E00820DEE /* NextStepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1883A025C44C5E00820DEE /* NextStepButton.swift */; };
 		2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */; };
+		2C191C482721C9F800C42946 /* EditRemoteConfigTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C191C472721C9F800C42946 /* EditRemoteConfigTableViewController.swift */; };
 		2C192CCD2668C994009221F6 /* WishlistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C192CCC2668C994009221F6 /* WishlistService.swift */; };
 		2C1948B626298455007D3486 /* FLEXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1948B526298455007D3486 /* FLEXManager.swift */; };
 		2C1966A926E7981B000D5B06 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1966A826E7981B000D5B06 /* Announcement.swift */; };
@@ -2429,6 +2430,7 @@
 		2C1883A025C44C5E00820DEE /* NextStepButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextStepButton.swift; sourceTree = "<group>"; };
 		2C18AD4C23D5F76E00FD89F3 /* DownloadingServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingServiceFactory.swift; sourceTree = "<group>"; };
 		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
+		2C191C472721C9F800C42946 /* EditRemoteConfigTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRemoteConfigTableViewController.swift; sourceTree = "<group>"; };
 		2C192CCC2668C994009221F6 /* WishlistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistService.swift; sourceTree = "<group>"; };
 		2C1948B526298455007D3486 /* FLEXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLEXManager.swift; sourceTree = "<group>"; };
 		2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_announcements_v88.xcdatamodel; sourceTree = "<group>"; };
@@ -8659,6 +8661,7 @@
 			children = (
 				2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */,
 				62E9811E14B07132959D4987 /* ContactSupportController.swift */,
+				2C191C472721C9F800C42946 /* EditRemoteConfigTableViewController.swift */,
 				2C1E1BA52720588800D64E48 /* ManageSplitTestsTableViewController.swift */,
 				2C00A4D62632C75200AEE255 /* PanModalPresentableViewController.swift */,
 				2CA6A1E5266624F4000AAA90 /* ReviewsAndWishlistContainerViewController.swift */,
@@ -11042,6 +11045,7 @@
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
+				2C191C482721C9F800C42946 /* EditRemoteConfigTableViewController.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				2C69BDCE26C147A3007C51FB /* StepQuizReviewTeacherView.swift in Sources */,
 				2C048BA926E0C40100235DEC /* CourseSearchBar.swift in Sources */,

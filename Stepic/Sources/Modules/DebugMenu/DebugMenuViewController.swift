@@ -89,6 +89,7 @@ final class DebugMenuViewController: UIViewController {
         case flexToggleExplorer
         case flexShowMenu
         case flagsSplitTests
+        case flagsRemoteConfig
         case deepLinkInput
         case deepLinkOpen
 
@@ -102,6 +103,8 @@ final class DebugMenuViewController: UIViewController {
                 return "Show Menu"
             case .flagsSplitTests:
                 return "A/B Groups"
+            case .flagsRemoteConfig:
+                return "Remote Config"
             case .deepLinkOpen:
                 return "Open deep link"
             default:
@@ -169,10 +172,19 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
                 )
             )
         )
+        let flagsRemoteConfigCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.flagsRemoteConfig.uniqueIdentifier,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Row.flagsRemoteConfig.title),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
         sections.append(
             .init(
                 header: .init(title: Section.flags.title),
-                cells: [flagsSplitTestsCell],
+                cells: [flagsSplitTestsCell, flagsRemoteConfigCell],
                 footer: nil
             )
         )
@@ -243,6 +255,9 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
             FLEXManager.toggleExplorer()
         case .flagsSplitTests:
             let viewController = ManageSplitTestsAssembly().makeModule()
+            self.push(module: viewController)
+        case .flagsRemoteConfig:
+            let viewController = EditRemoteConfigAssembly().makeModule()
             self.push(module: viewController)
         case .deepLinkOpen:
             self.handleOpenDeepLink()

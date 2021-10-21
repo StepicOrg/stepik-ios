@@ -20,11 +20,12 @@ final class RemoteConfig {
     static let shared = RemoteConfig()
 
     var loadingDoneCallback: (() -> Void)?
-    var fetchComplete = false
 
-    var fetchDuration: TimeInterval = 43200
+    private var fetchComplete = false
 
-    lazy var appDefaults: [String: NSObject] = [
+    private var fetchDuration: TimeInterval = 43200
+
+    private lazy var appDefaults: [String: NSObject] = [
         Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
         Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
@@ -134,12 +135,16 @@ final class RemoteConfig {
         return CoursePurchaseFlowType(rawValue: configValue) ?? Self.defaultCoursePurchaseFlowType
     }
 
-    init() {
+    private init() {
         self.setConfigDefaults()
         self.fetchRemoteConfigData()
     }
 
     func setup() {}
+
+    func value(for key: Key) -> RemoteConfigValue {
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key.rawValue)
+    }
 
     // MARK: Private API
 
@@ -204,7 +209,7 @@ final class RemoteConfig {
         case submission = "submission"
     }
 
-    private enum Key: String {
+    enum Key: String, CaseIterable {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
@@ -214,6 +219,36 @@ final class RemoteConfig {
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
         case purchaseFlow = "purchase_flow_ios"
 
-        var analyticsUserPropertyKey: String { "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)" }
+        var valueDataType: ValueDataType {
+            switch self {
+            case .showStreaksNotificationTrigger:
+                return .string
+            case .adaptiveBackendUrl:
+                return .string
+            case .supportedInAdaptiveModeCourses:
+                return .string
+            case .arQuickLookAvailable:
+                return .string
+            case .searchResultsQueryParams:
+                return .string
+            case .isCoursePricesEnabled:
+                return .string
+            case .isCourseRevenueAvailable:
+                return .string
+            case .purchaseFlow:
+                return .string
+            }
+        }
+
+        fileprivate var analyticsUserPropertyKey: String {
+            "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)"
+        }
+    }
+
+    enum ValueDataType {
+        case string
+        case number
+        case boolean
+        case json
     }
 }
