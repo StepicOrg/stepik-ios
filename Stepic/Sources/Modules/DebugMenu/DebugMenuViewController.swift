@@ -242,7 +242,7 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
         case .flexToggleExplorer:
             FLEXManager.toggleExplorer()
         case .flagsSplitTests:
-            let viewController = ManageSplitTestsTableViewController()
+            let viewController = ManageSplitTestsAssembly().makeModule()
             self.push(module: viewController)
         case .deepLinkOpen:
             self.handleOpenDeepLink()

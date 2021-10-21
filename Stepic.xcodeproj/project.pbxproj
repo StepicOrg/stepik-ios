@@ -705,6 +705,7 @@
 		2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */; };
 		2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */; };
 		2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */; };
+		2C6C605D2721686C00649FDF /* SplitTestPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C605C2721686C00649FDF /* SplitTestPlainObject.swift */; };
 		2C6C6F5125656DC1003B8CF1 /* SystemCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */; };
 		2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */; };
 		2C6D61AE24D93E4500D019F2 /* String+Whitespaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D61AD24D93E4500D019F2 /* String+Whitespaces.swift */; };
@@ -2704,6 +2705,7 @@
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
 		2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsNetworkService.swift; sourceTree = "<group>"; };
 		2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsNetworkService.swift; sourceTree = "<group>"; };
+		2C6C605C2721686C00649FDF /* SplitTestPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTestPlainObject.swift; sourceTree = "<group>"; };
 		2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemCloseButton.swift; sourceTree = "<group>"; };
 		2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityCurrentStreakView.swift; sourceTree = "<group>"; };
 		2C6D61AD24D93E4500D019F2 /* String+Whitespaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Whitespaces.swift"; sourceTree = "<group>"; };
@@ -9542,6 +9544,7 @@
 			children = (
 				0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */,
 				0898779F214047650065DFA2 /* SplitTestingService.swift */,
+				2C6C605C2721686C00649FDF /* SplitTestPlainObject.swift */,
 				0898779E214047640065DFA2 /* SplitTestProtocol.swift */,
 				2C37968421ABED9500BC7E62 /* ActiveTests */,
 			);
@@ -11726,6 +11729,7 @@
 				62E98E8F09C3C24A98858518 /* SettingsTableSectionHeaderView.swift in Sources */,
 				62E9851D236EC702791E1776 /* TableInputTextField.swift in Sources */,
 				62E9852B2621211F8DEA7CBE /* SettingsTableViewCell.swift in Sources */,
+				2C6C605D2721686C00649FDF /* SplitTestPlainObject.swift in Sources */,
 				2C5D340825C98A6800372C61 /* PromoCode.swift in Sources */,
 				2C3B5D0F266F9134000B211B /* CourseBenefitsAPI.swift in Sources */,
 				62E98AF1D0D810811FAC3CCA /* SettingsInputTableViewCell.swift in Sources */,
