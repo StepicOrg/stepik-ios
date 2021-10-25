@@ -1,7 +1,7 @@
 import Foundation
 
 final class DebugRemoteConfig {
-    private static let userDefaultsKeyPrefix = "remote_config_"
+    private static let userDefaultsKeyPrefix = "debug_remote_config_"
 
     static let shared = DebugRemoteConfig()
 
