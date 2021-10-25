@@ -1,6 +1,6 @@
 import UIKit
 
-final class ManageSplitTestsAssembly: Assembly {
+final class EditSplitTestsAssembly: Assembly {
     private let activeSplitTests: [SplitTestPlainObject]
     private let storage: StringStorageServiceProtocol
 
@@ -13,7 +13,7 @@ final class ManageSplitTestsAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let viewController = ManageSplitTestsTableViewController(
+        let viewController = EditSplitTestsTableViewController(
             activeSplitTests: self.activeSplitTests,
             storage: self.storage
         )
@@ -21,10 +21,10 @@ final class ManageSplitTestsAssembly: Assembly {
     }
 }
 
-// MARK: - ManageSplitTestsTableViewController: UITableViewController -
+// MARK: - EditSplitTestsTableViewController: UITableViewController -
 
-final class ManageSplitTestsTableViewController: UITableViewController {
-    private static let cellReuseIdentifier = "ManageSplitTestsTableViewCell"
+final class EditSplitTestsTableViewController: UITableViewController {
+    private static let cellReuseIdentifier = "EditSplitTestsTableViewCell"
 
     private let activeSplitTests: [SplitTestPlainObject]
     private let storage: StringStorageServiceProtocol
