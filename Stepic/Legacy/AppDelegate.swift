@@ -106,10 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if !DefaultsContainer.launch.didLaunch {
             DefaultsContainer.launch.initStartVersion()
-            ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
             self.analytics.send(.applicationDidLaunchFirstTime)
         }
+        ActiveSplitTestsContainer.setActiveTestsGroups()
 
         self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
