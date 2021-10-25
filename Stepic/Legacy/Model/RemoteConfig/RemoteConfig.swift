@@ -1,6 +1,5 @@
 import FirebaseRemoteConfig
 import Foundation
-import Nuke
 
 protocol RemoteConfigDelegate: AnyObject {
     func remoteConfig(_ remoteConfig: RemoteConfig, configValueForKey key: RemoteConfig.Key) -> Any?
