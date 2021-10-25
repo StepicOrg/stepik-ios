@@ -607,6 +607,8 @@
 		2C48D604228F0EF700739477 /* ContentProcessingRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D603228F0EF700739477 /* ContentProcessingRule.swift */; };
 		2C48D606228F114400739477 /* HTMLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D605228F114400739477 /* HTMLExtractor.swift */; };
 		2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */; };
+		2C49911A2722AF11008D7F15 /* DebugRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4991192722AF11008D7F15 /* DebugRemoteConfig.swift */; };
+		2C49911E2722BD0A008D7F15 /* EditRemoteConfigValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49911D2722BD0A008D7F15 /* EditRemoteConfigValueViewController.swift */; };
 		2C49BA8926331CF20000BB50 /* LessonOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49BA8826331CF20000BB50 /* LessonOutputProtocol.swift */; };
 		2C49BA9626331E060000BB50 /* CourseInfoInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C49BA9526331E060000BB50 /* CourseInfoInputProtocol.swift */; };
 		2C4AD01123E2F3CD0049B7B0 /* DiscussionThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AD01023E2F3CD0049B7B0 /* DiscussionThread.swift */; };
@@ -2596,6 +2598,8 @@
 		2C48D603228F0EF700739477 /* ContentProcessingRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProcessingRule.swift; sourceTree = "<group>"; };
 		2C48D605228F114400739477 /* HTMLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractor.swift; sourceTree = "<group>"; };
 		2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProcessingInjection.swift; sourceTree = "<group>"; };
+		2C4991192722AF11008D7F15 /* DebugRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugRemoteConfig.swift; sourceTree = "<group>"; };
+		2C49911D2722BD0A008D7F15 /* EditRemoteConfigValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRemoteConfigValueViewController.swift; sourceTree = "<group>"; };
 		2C49BA8826331CF20000BB50 /* LessonOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonOutputProtocol.swift; sourceTree = "<group>"; };
 		2C49BA9526331E060000BB50 /* CourseInfoInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoInputProtocol.swift; sourceTree = "<group>"; };
 		2C4AD00E23E2E6550049B7B0 /* Model_ discussion_threads.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_ discussion_threads.xcdatamodel"; sourceTree = "<group>"; };
@@ -4663,6 +4667,23 @@
 				2C084ACA2514A1FA000561F7 /* View */,
 			);
 			path = ContentProcessor;
+			sourceTree = "<group>";
+		};
+		2C49911B2722BBBF008D7F15 /* DebugMenuSubmodules */ = {
+			isa = PBXGroup;
+			children = (
+				2C49911C2722BBE2008D7F15 /* EditRemoteConfig */,
+			);
+			path = DebugMenuSubmodules;
+			sourceTree = "<group>";
+		};
+		2C49911C2722BBE2008D7F15 /* EditRemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				2C191C472721C9F800C42946 /* EditRemoteConfigTableViewController.swift */,
+				2C49911D2722BD0A008D7F15 /* EditRemoteConfigValueViewController.swift */,
+			);
+			path = EditRemoteConfig;
 			sourceTree = "<group>";
 		};
 		2C49BA8726331CC80000BB50 /* InputOutput */ = {
@@ -8039,6 +8060,7 @@
 		2CFF9040242A2AC400FD7311 /* RemoteConfig */ = {
 			isa = PBXGroup;
 			children = (
+				2C4991192722AF11008D7F15 /* DebugRemoteConfig.swift */,
 				084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */,
 			);
 			path = RemoteConfig;
@@ -8383,6 +8405,7 @@
 				2CDA533C26823AED00F9D7D8 /* CourseRevenueSubmodules */,
 				C77D5B586F22BD42A24A8279 /* CourseSearch */,
 				29158916AB913ECC71C78A69 /* DebugMenu */,
+				2C49911B2722BBBF008D7F15 /* DebugMenuSubmodules */,
 				62E98F5D5F63567C4BAD33BA /* Discussions */,
 				65528C371B5396082973517C /* DownloadARQuickLook */,
 				62E98FABFAE3623A80A3764E /* Downloads */,
@@ -8661,7 +8684,6 @@
 			children = (
 				2C3ABA8823D1DA8D00E90439 /* AboutAppViewController.swift */,
 				62E9811E14B07132959D4987 /* ContactSupportController.swift */,
-				2C191C472721C9F800C42946 /* EditRemoteConfigTableViewController.swift */,
 				2C1E1BA52720588800D64E48 /* ManageSplitTestsTableViewController.swift */,
 				2C00A4D62632C75200AEE255 /* PanModalPresentableViewController.swift */,
 				2CA6A1E5266624F4000AAA90 /* ReviewsAndWishlistContainerViewController.swift */,
@@ -11299,6 +11321,7 @@
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
 				2C0A10A3268B19FD001D4023 /* CourseBenefitByMonth+CoreDataProperties.swift in Sources */,
+				2C49911A2722AF11008D7F15 /* DebugRemoteConfig.swift in Sources */,
 				2C1AC2FE255B2C6200E6ECA9 /* CatalogBlockEntity+CoreDataProperties.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
@@ -12097,6 +12120,7 @@
 				62E98E51C5054F3B8F97D510 /* CodeTextView.swift in Sources */,
 				62E98C3F01034400CAABD717 /* CodeTextViewLayoutManager.swift in Sources */,
 				62E98EEB59DAF1D0700A7DB9 /* CodeLanguagePickerView.swift in Sources */,
+				2C49911E2722BD0A008D7F15 /* EditRemoteConfigValueViewController.swift in Sources */,
 				62E98A2B85DD1D883B5BFEC7 /* CodeToolbarLanguagePickerButton.swift in Sources */,
 				2C94C7FA248F86C900E4104E /* UserCourse+CoreDataProperties.swift in Sources */,
 				2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */,
