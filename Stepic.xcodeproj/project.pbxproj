@@ -443,6 +443,10 @@
 		2C0FE8E225F81D9C00626289 /* InstructionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FE8E125F81D9C00626289 /* InstructionsNetworkService.swift */; };
 		2C0FF78D26B2A3E800BF9E32 /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FF78C26B2A3E800BF9E32 /* NSManagedObjectContextExtensions.swift */; };
 		2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10100A239EFAD700440651 /* DiscountingPolicy.swift */; };
+		2C1036C1272826CD00D5E9AE /* MobileTiersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1036C0272826CD00D5E9AE /* MobileTiersAPI.swift */; };
+		2C1036C527282C7700D5E9AE /* MobileTierPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1036C427282C7700D5E9AE /* MobileTierPlainObject.swift */; };
+		2C1036C827282F5D00D5E9AE /* MobileTierCalculateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1036C727282F5D00D5E9AE /* MobileTierCalculateRequest.swift */; };
+		2C1036CA2728304000D5E9AE /* MobileTierCalculateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1036C92728304000D5E9AE /* MobileTierCalculateResponse.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10650825ECE1610094FC39 /* CourseInfoTabInfoSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10650725ECE1610094FC39 /* CourseInfoTabInfoSkeletonView.swift */; };
 		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
@@ -2413,6 +2417,10 @@
 		2C0FF78C26B2A3E800BF9E32 /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_discount_policy.xcdatamodel; sourceTree = "<group>"; };
 		2C10100A239EFAD700440651 /* DiscountingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountingPolicy.swift; sourceTree = "<group>"; };
+		2C1036C0272826CD00D5E9AE /* MobileTiersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersAPI.swift; sourceTree = "<group>"; };
+		2C1036C427282C7700D5E9AE /* MobileTierPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTierPlainObject.swift; sourceTree = "<group>"; };
+		2C1036C727282F5D00D5E9AE /* MobileTierCalculateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTierCalculateRequest.swift; sourceTree = "<group>"; };
+		2C1036C92728304000D5E9AE /* MobileTierCalculateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTierCalculateResponse.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C10650725ECE1610094FC39 /* CourseInfoTabInfoSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoSkeletonView.swift; sourceTree = "<group>"; };
 		2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsAPI.swift; sourceTree = "<group>"; };
@@ -4401,6 +4409,16 @@
 				2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */,
 			);
 			path = PromoPriceButton;
+			sourceTree = "<group>";
+		};
+		2C1036C627282F3D00D5E9AE /* MobileTiers */ = {
+			isa = PBXGroup;
+			children = (
+				2C1036C727282F5D00D5E9AE /* MobileTierCalculateRequest.swift */,
+				2C1036C92728304000D5E9AE /* MobileTierCalculateResponse.swift */,
+				2C1036C427282C7700D5E9AE /* MobileTierPlainObject.swift */,
+			);
+			path = MobileTiers;
 			sourceTree = "<group>";
 		};
 		2C10AFE8217E04780019966D /* Registration */ = {
@@ -7971,6 +7989,7 @@
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
 				2C42EFB52476F28B00423695 /* MagicLinksAPI.swift */,
 				2C5418C924A28ECF00B2DCE2 /* MetricsAPI.swift */,
+				2C1036C0272826CD00D5E9AE /* MobileTiersAPI.swift */,
 				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
 				2CDA1B392613BDEA00E36BF7 /* ProctorSessionsAPI.swift */,
@@ -8058,6 +8077,7 @@
 				2CCB4B1626E7724E0056C44E /* Announcements */,
 				2C97764225D6CBD2008778D6 /* Block */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
+				2C1036C627282F3D00D5E9AE /* MobileTiers */,
 				2CF8DF4525F22F9900F577C2 /* Review */,
 				2CCEB1A326D8CFDF001C83B6 /* SearchResult */,
 				2C1661012358D3290020B7F4 /* StepOptions */,
@@ -11108,6 +11128,7 @@
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */,
 				2C71BC0926B34D43000AF7B8 /* BasePersistenceService.swift in Sources */,
+				2C1036C527282C7700D5E9AE /* MobileTierPlainObject.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResultPlainObject.swift in Sources */,
 				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
@@ -11554,6 +11575,7 @@
 				2CD80A83269C681C0047AE3C /* CourseRevenueTabMonthlyTableViewDataSource.swift in Sources */,
 				2C8E477B258966570084A070 /* GridSimpleCourseListCollectionHeaderContentView.swift in Sources */,
 				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
+				2C1036C827282F5D00D5E9AE /* MobileTierCalculateRequest.swift in Sources */,
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
@@ -11669,6 +11691,7 @@
 				62E9826EBCAB31DA927E56FE /* Reusable.swift in Sources */,
 				62E98E916518CC0446F2DCDF /* ProgrammaticallyInitializableViewProtocol.swift in Sources */,
 				62E9854D204FADAEDD044CAD /* NibLoadable.swift in Sources */,
+				2C1036C1272826CD00D5E9AE /* MobileTiersAPI.swift in Sources */,
 				62E9824265673F973F160C0A /* ProgressCircleImage.swift in Sources */,
 				2CDA1B3A2613BDEA00E36BF7 /* ProctorSessionsAPI.swift in Sources */,
 				62E981DD043FB3AEC3BDB669 /* PaddingLabel.swift in Sources */,
@@ -12324,6 +12347,7 @@
 				2C5D3452268489F4006D1E9C /* CourseRevenueTabSegmentedControlView.swift in Sources */,
 				39AB2324EB824124A83D7534 /* UserCoursesInteractor.swift in Sources */,
 				2CABB842267B929C0070E5E7 /* CourseWidgetPriceView.swift in Sources */,
+				2C1036CA2728304000D5E9AE /* MobileTierCalculateResponse.swift in Sources */,
 				942F44578E193384B1E4DAD9 /* UserCoursesPresenter.swift in Sources */,
 				86356B693AF04C13CE3C856F /* UserCoursesView.swift in Sources */,
 				2A7E1C8409B12A6CB09F0393 /* UserCoursesViewController.swift in Sources */,
