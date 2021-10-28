@@ -1071,6 +1071,8 @@
 		2CD04084250F67D0004D284F /* ProcessedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD04083250F67D0004D284F /* ProcessedContent.swift */; };
 		2CD063E6242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */; };
 		2CD1D9E4272A960D0031C78E /* MobileTiersNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */; };
+		2CD1D9E8272A9D580031C78E /* MobileTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E7272A9D580031C78E /* MobileTier.swift */; };
+		2CD1D9EA272A9D680031C78E /* MobileTier+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */; };
 		2CD3374B268228760073C867 /* CourseRevenueSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD514EA2540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */; };
@@ -3095,6 +3097,9 @@
 		2CD04083250F67D0004D284F /* ProcessedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContent.swift; sourceTree = "<group>"; };
 		2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorViewStyle+Fallback.swift"; sourceTree = "<group>"; };
 		2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersNetworkService.swift; sourceTree = "<group>"; };
+		2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_mobile_tiers_v91.xcdatamodel; sourceTree = "<group>"; };
+		2CD1D9E7272A9D580031C78E /* MobileTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTier.swift; sourceTree = "<group>"; };
+		2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MobileTier+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsOutputProtocol.swift; sourceTree = "<group>"; };
@@ -6651,6 +6656,15 @@
 			path = SearchResult;
 			sourceTree = "<group>";
 		};
+		2CD1D9E6272A9D450031C78E /* MobileTier */ = {
+			isa = PBXGroup;
+			children = (
+				2CD1D9E7272A9D580031C78E /* MobileTier.swift */,
+				2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */,
+			);
+			path = MobileTier;
+			sourceTree = "<group>";
+		};
 		2CD30B49256D69EF00E5912B /* CatalogBlocksSubmodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -7581,6 +7595,7 @@
 				2CFF9022242A262800FD7311 /* LastCodeLanguage */,
 				2CFF9023242A263700FD7311 /* LastStep */,
 				2CFF9024242A264400FD7311 /* Lesson */,
+				2CD1D9E6272A9D450031C78E /* MobileTier */,
 				2CFF9025242A265000FD7311 /* Notification */,
 				2CDA1B2A2613B80700E36BF7 /* ProctorSession */,
 				2CFF9026242A265F00FD7311 /* Profile */,
@@ -11393,6 +11408,7 @@
 				2CE9BF48248D0950004F6659 /* CodeLimitsPersistenceService.swift in Sources */,
 				2C48D604228F0EF700739477 /* ContentProcessingRule.swift in Sources */,
 				2C1864C924F6350F004AFFD1 /* StepikURLFactory.swift in Sources */,
+				2CD1D9EA272A9D680031C78E /* MobileTier+CoreDataProperties.swift in Sources */,
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				2CA0DE64266FC0C60008C0D6 /* CourseBenefitStatus.swift in Sources */,
@@ -11474,6 +11490,7 @@
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
 				2CEBEBF2242F8E9900DBFDF0 /* StepikRequestInterceptor.swift in Sources */,
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
+				2CD1D9E8272A9D580031C78E /* MobileTier.swift in Sources */,
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
 				2C96290F26B9856F00C9EA9C /* ReviewsNetworkService.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
@@ -14533,6 +14550,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */,
 				2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */,
 				2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */,
 				2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */,
@@ -14625,7 +14643,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */;
+			currentVersion = 2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

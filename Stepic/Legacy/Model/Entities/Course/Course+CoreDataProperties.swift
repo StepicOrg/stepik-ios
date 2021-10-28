@@ -78,6 +78,7 @@ extension Course {
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
     @NSManaged var managedAnnouncements: NSSet?
+    @NSManaged var managedMobileTiers: NSSet?
 
     var id: Int {
         set(newId) {
@@ -711,6 +712,15 @@ extension Course {
         }
         set {
             self.managedAnnouncements = NSSet(array: newValue)
+        }
+    }
+
+    var mobileTiers: [MobileTier] {
+        get {
+            self.managedMobileTiers?.allObjects as! [MobileTier]
+        }
+        set {
+            self.managedMobileTiers = NSSet(array: newValue)
         }
     }
 
