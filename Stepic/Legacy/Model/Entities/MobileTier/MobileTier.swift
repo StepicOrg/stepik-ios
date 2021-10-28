@@ -23,12 +23,14 @@ extension MobileTier {
 
     static func insert(into context: NSManagedObjectContext, mobileTier: MobileTierPlainObject) -> MobileTier {
         let entity: MobileTier = context.insertObject()
-
-        entity.id = mobileTier.id
-        entity.courseID = mobileTier.courseID
-        entity.priceTier = mobileTier.priceTier
-        entity.promoTier = mobileTier.promoTier
-
+        entity.update(mobileTier: mobileTier)
         return entity
+    }
+
+    func update(mobileTier: MobileTierPlainObject) {
+        self.id = mobileTier.id
+        self.courseID = mobileTier.courseID
+        self.priceTier = mobileTier.priceTier
+        self.promoTier = mobileTier.promoTier
     }
 }

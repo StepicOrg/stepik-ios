@@ -1074,6 +1074,7 @@
 		2CD1D9E8272A9D580031C78E /* MobileTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E7272A9D580031C78E /* MobileTier.swift */; };
 		2CD1D9EA272A9D680031C78E /* MobileTier+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */; };
 		2CD1D9EC272AA8D80031C78E /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */; };
+		2CD1D9EE272AA9A80031C78E /* MobileTiersPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9ED272AA9A80031C78E /* MobileTiersPersistenceService.swift */; };
 		2CD3374B268228760073C867 /* CourseRevenueSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD514EA2540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */; };
@@ -3102,6 +3103,7 @@
 		2CD1D9E7272A9D580031C78E /* MobileTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTier.swift; sourceTree = "<group>"; };
 		2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MobileTier+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
+		2CD1D9ED272AA9A80031C78E /* MobileTiersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersPersistenceService.swift; sourceTree = "<group>"; };
 		2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsOutputProtocol.swift; sourceTree = "<group>"; };
@@ -8341,6 +8343,7 @@
 				62E989EE577036747B419AAC /* LastCodeLanguagePersistenceService.swift */,
 				62E98AC352F76C23F60E12A6 /* LastStepPersistenceService.swift */,
 				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
+				2CD1D9ED272AA9A80031C78E /* MobileTiersPersistenceService.swift */,
 				62E98D6C6FA9C92ABDECEF12 /* NotificationsPersistenceService.swift */,
 				2CDA1B512613BF1300E36BF7 /* ProctorSessionsPersistenceService.swift */,
 				2C87A7A324465B5800933CA4 /* ProfilesPersistenceService.swift */,
@@ -12096,6 +12099,7 @@
 				62E9888B20E524751AEB87AC /* TagViewModel.swift in Sources */,
 				62E98E17CA922F1D87F6DA96 /* FullscreenCourseListAssembly.swift in Sources */,
 				62E98AF6A9BDB9A4102F56F3 /* FullscreenCourseListDataFlow.swift in Sources */,
+				2CD1D9EE272AA9A80031C78E /* MobileTiersPersistenceService.swift in Sources */,
 				2CF8DF4725F2303300F577C2 /* ReviewSessionPlainObject.swift in Sources */,
 				2C1AC2DF255AD76E00E6ECA9 /* AuthorsCatalogBlockContentItem.swift in Sources */,
 				62E9881A9FF61D408A09160F /* FullscreenCourseListInteractor.swift in Sources */,
