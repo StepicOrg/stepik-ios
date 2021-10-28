@@ -1073,6 +1073,7 @@
 		2CD1D9E4272A960D0031C78E /* MobileTiersNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */; };
 		2CD1D9E8272A9D580031C78E /* MobileTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E7272A9D580031C78E /* MobileTier.swift */; };
 		2CD1D9EA272A9D680031C78E /* MobileTier+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */; };
+		2CD1D9EC272AA8D80031C78E /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */; };
 		2CD3374B268228760073C867 /* CourseRevenueSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD514EA2540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */; };
@@ -3100,6 +3101,7 @@
 		2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_mobile_tiers_v91.xcdatamodel; sourceTree = "<group>"; };
 		2CD1D9E7272A9D580031C78E /* MobileTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTier.swift; sourceTree = "<group>"; };
 		2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MobileTier+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
 		2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsOutputProtocol.swift; sourceTree = "<group>"; };
@@ -5296,6 +5298,7 @@
 				2C47914526BBD17400920ED2 /* InstructionType.swift */,
 				2C130E3B2512402B00389AEB /* LaunchArguments.swift */,
 				2CD80A7D269C47670047AE3C /* PaginationState.swift */,
+				2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */,
 				2CEDC660260898F700B0B018 /* PlatformType.swift */,
 				2C5D340725C98A6800372C61 /* PromoCode.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
@@ -12402,6 +12405,7 @@
 				1403FF0C9A5259CF2D63D98C /* NewProfileUserActivityProvider.swift in Sources */,
 				79A20D8F6931BCF4BDD7656E /* NewProfileUserActivityView.swift in Sources */,
 				12CB070461601452E35A6334 /* NewProfileUserActivityViewController.swift in Sources */,
+				2CD1D9EC272AA8D80031C78E /* PaymentStore.swift in Sources */,
 				E68D5D39475BA651C54FD4C9 /* NewProfileStreakNotificationsAssembly.swift in Sources */,
 				2CDA1AFE2613921000E36BF7 /* ExamSession+CoreDataProperties.swift in Sources */,
 				209E27FAF79E14028BA3E27E /* NewProfileStreakNotificationsDataFlow.swift in Sources */,

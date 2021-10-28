@@ -7,7 +7,7 @@ struct MobileTierCalculateRequest {
         self.params.map { param in
             var dict: JSONDictionary = [
                 JSONKey.course.rawValue: param.courseID,
-                JSONKey.store.rawValue: "app_store"
+                JSONKey.store.rawValue: PaymentStore.appStore.rawValue
             ]
 
             if let promoCodeName = param.promoCodeName {
