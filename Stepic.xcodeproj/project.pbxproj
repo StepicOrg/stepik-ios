@@ -1075,6 +1075,7 @@
 		2CD1D9EA272A9D680031C78E /* MobileTier+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */; };
 		2CD1D9EC272AA8D80031C78E /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */; };
 		2CD1D9EE272AA9A80031C78E /* MobileTiersPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9ED272AA9A80031C78E /* MobileTiersPersistenceService.swift */; };
+		2CD1D9F0272AC0660031C78E /* MobileTiersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9EF272AC0660031C78E /* MobileTiersRepository.swift */; };
 		2CD3374B268228760073C867 /* CourseRevenueSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD514EA2540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */; };
@@ -3104,6 +3105,7 @@
 		2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MobileTier+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
 		2CD1D9ED272AA9A80031C78E /* MobileTiersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersPersistenceService.swift; sourceTree = "<group>"; };
+		2CD1D9EF272AC0660031C78E /* MobileTiersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersRepository.swift; sourceTree = "<group>"; };
 		2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsOutputProtocol.swift; sourceTree = "<group>"; };
@@ -4522,6 +4524,7 @@
 				2C26BF09240810A3000EE23C /* AttemptsRepository.swift */,
 				2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */,
 				2CDD3FDB2715F6D30029AF40 /* CoursesRepository.swift */,
+				2CD1D9EF272AC0660031C78E /* MobileTiersRepository.swift */,
 				2C98424626DE78EA0098E36B /* SearchResultsRepository.swift */,
 				2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */,
 			);
@@ -11169,6 +11172,7 @@
 				2CAD8B9D2170CDB4003F420B /* LocalNotificationProtocol.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				2C4AD01923E304140049B7B0 /* DiscussionThreadsNetworkService.swift in Sources */,
+				2CD1D9F0272AC0660031C78E /* MobileTiersRepository.swift in Sources */,
 				08FA62222121BEF900F00275 /* GrowPresentAnimationController.swift in Sources */,
 				2CF959D926208C3D00D14B62 /* DebugMenuViewModel.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
