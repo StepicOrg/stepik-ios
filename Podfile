@@ -16,11 +16,11 @@ def shared_pods
   pod 'Alamofire', '5.4.4'
   pod 'Atributika', '4.10.1'
   pod 'SwiftyJSON', '5.0.0'
-  pod 'SDWebImage', '5.11.1'
+  pod 'SDWebImage', '5.12.1'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-  pod 'DeviceKit', '4.5.0'
+  pod 'DeviceKit', '4.5.1'
   pod 'PromiseKit', '6.15.3'
-  pod 'SwiftLint', '0.44.0'
+  pod 'SwiftLint', '0.45.0'
 
   if ENV['FASTLANE_BETA_PROFILE'] == 'true'
     pod 'FLEX',
@@ -51,7 +51,7 @@ def all_pods
 
   pod 'YandexMobileMetrica/Dynamic', '3.17.0'
   pod 'Amplitude', '8.4.0'
-  pod 'Branch', '1.39.3'
+  pod 'Branch', '1.40.1'
 
   pod 'BEMCheckBox', '1.4.1'
 

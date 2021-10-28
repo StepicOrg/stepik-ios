@@ -1,14 +1,9 @@
-//
-//  RemoteConfig.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 08.12.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
-import DeviceKit
 import FirebaseRemoteConfig
 import Foundation
+
+protocol RemoteConfigDelegate: AnyObject {
+    func remoteConfig(_ remoteConfig: RemoteConfig, configValueForKey key: RemoteConfig.Key) -> Any?
+}
 
 final class RemoteConfig {
     private static let analyticsUserPropertyKeyPrefix = "remote_config_"
@@ -17,14 +12,17 @@ final class RemoteConfig {
 
     private static let defaultCoursePurchaseFlowType = CoursePurchaseFlowType.web
 
-    static let shared = RemoteConfig()
+    static let shared = RemoteConfig(delegate: DebugRemoteConfig.shared)
+
+    weak var delegate: RemoteConfigDelegate?
 
     var loadingDoneCallback: (() -> Void)?
-    var fetchComplete = false
 
-    var fetchDuration: TimeInterval = 43200
+    private var fetchComplete = false
 
-    lazy var appDefaults: [String: NSObject] = [
+    private var fetchDuration: TimeInterval = 43200
+
+    private lazy var appDefaults: [String: NSObject] = [
         Key.showStreaksNotificationTrigger.rawValue: NSString(string: Self.defaultShowStreaksNotificationTrigger.rawValue),
         Key.adaptiveBackendUrl.rawValue: NSString(string: StepikApplicationsInfo.adaptiveRatingURL),
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
@@ -36,33 +34,23 @@ final class RemoteConfig {
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: Key.showStreaksNotificationTrigger.rawValue
-        ).stringValue else {
-            return Self.defaultShowStreaksNotificationTrigger
+        if let stringValue = self.getStringValueFromDelegateOrRemoteConfigForKey(.showStreaksNotificationTrigger),
+           let showStreaksNotificationTrigger = ShowStreaksNotificationTrigger(rawValue: stringValue) {
+            return showStreaksNotificationTrigger
         }
-
-        return ShowStreaksNotificationTrigger(rawValue: configValue) ?? Self.defaultShowStreaksNotificationTrigger
+        return Self.defaultShowStreaksNotificationTrigger
     }
 
     var adaptiveBackendURL: String {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: Key.adaptiveBackendUrl.rawValue
-        ).stringValue else {
-            return StepikApplicationsInfo.adaptiveRatingURL
-        }
-
-        return configValue
+        self.getStringValueFromDelegateOrRemoteConfigForKey(.adaptiveBackendUrl) ?? StepikApplicationsInfo.adaptiveRatingURL
     }
 
     var supportedInAdaptiveModeCourses: [Course.IdType] {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: Key.supportedInAdaptiveModeCourses.rawValue
-        ).stringValue else {
+        guard let stringValue = self.getStringValueFromDelegateOrRemoteConfigForKey(.supportedInAdaptiveModeCourses) else {
             return StepikApplicationsInfo.adaptiveSupportedCourses
         }
 
-        let courses = configValue.components(separatedBy: ",")
+        let courses = stringValue.components(separatedBy: ",")
         var supportedCourses = [String]()
 
         for course in courses {
@@ -86,60 +74,44 @@ final class RemoteConfig {
     }
 
     var isARQuickLookAvailable: Bool {
-        FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.arQuickLookAvailable.rawValue)
-            .boolValue
+        self.getNSStringValueFromDelegateOrRemoteConfigForKey(.arQuickLookAvailable)?.boolValue ?? false
     }
 
     var searchResultsQueryParams: JSONDictionary {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: Key.searchResultsQueryParams.rawValue
-        ).jsonValue, let params = configValue as? JSONDictionary else {
-            return self.appDefaults[Key.searchResultsQueryParams.rawValue] as? JSONDictionary ?? [:]
+        if let params = self.getJSONDictionaryFromDelegateOrRemoteConfigForKey(.searchResultsQueryParams) {
+            return params
         }
-
-        return params
+        return self.appDefaults[Key.searchResultsQueryParams.rawValue] as? JSONDictionary ?? [:]
     }
 
     var isCoursePricesEnabled: Bool {
-        #if BETA_PROFILE || DEBUG
-        return true
-        #else
-        return FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.isCoursePricesEnabled.rawValue)
-            .boolValue
-        #endif
+        self.getNSStringValueFromDelegateOrRemoteConfigForKey(.isCoursePricesEnabled)?.boolValue ?? false
     }
 
     var isCourseRevenueAvailable: Bool {
-        #if BETA_PROFILE || DEBUG
-        return true
-        #else
-        return FirebaseRemoteConfig.RemoteConfig
-            .remoteConfig()
-            .configValue(forKey: Key.isCourseRevenueAvailable.rawValue)
-            .boolValue
-        #endif
+        self.getNSStringValueFromDelegateOrRemoteConfigForKey(.isCourseRevenueAvailable)?.boolValue ?? false
     }
 
     var coursePurchaseFlow: CoursePurchaseFlowType {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: Key.purchaseFlow.rawValue
-        ).stringValue else {
-            return Self.defaultCoursePurchaseFlowType
+        if let stringValue = self.getStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlow),
+           let coursePurchaseFlowType = CoursePurchaseFlowType(rawValue: stringValue) {
+            return coursePurchaseFlowType
         }
-
-        return CoursePurchaseFlowType(rawValue: configValue) ?? Self.defaultCoursePurchaseFlowType
+        return Self.defaultCoursePurchaseFlowType
     }
 
-    init() {
+    init(delegate: RemoteConfigDelegate? = nil) {
+        self.delegate = delegate
+
         self.setConfigDefaults()
         self.fetchRemoteConfigData()
     }
 
     func setup() {}
+
+    func value(for key: Key) -> RemoteConfigValue {
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key.rawValue)
+    }
 
     // MARK: Private API
 
@@ -197,6 +169,33 @@ final class RemoteConfig {
         AnalyticsUserProperties.shared.setRemoteConfigUserProperties(userProperties)
     }
 
+    private func getRemoteConfigValueForKey(_ key: Key) -> RemoteConfigValue {
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key.rawValue)
+    }
+
+    private func getStringValueFromDelegateOrRemoteConfigForKey(_ key: Key) -> String? {
+        if let delegateValue = self.delegate?.remoteConfig(self, configValueForKey: key) as? String {
+            return delegateValue
+        }
+        return self.getRemoteConfigValueForKey(key).stringValue
+    }
+
+    private func getNSStringValueFromDelegateOrRemoteConfigForKey(_ key: Key) -> NSString? {
+        if let delegateValue = self.delegate?.remoteConfig(self, configValueForKey: key) as? NSString {
+            return delegateValue
+        }
+        return self.getRemoteConfigValueForKey(key).stringValue as NSString?
+    }
+
+    private func getJSONDictionaryFromDelegateOrRemoteConfigForKey(_ key: Key) -> JSONDictionary? {
+        if let delegateStringValue = self.delegate?.remoteConfig(self, configValueForKey: key) as? String,
+           let stringData = delegateStringValue.data(using: .utf8),
+           let jsonObject = try? JSONSerialization.jsonObject(with: stringData, options: []) as? JSONDictionary {
+            return jsonObject
+        }
+        return self.getRemoteConfigValueForKey(key).jsonValue as? JSONDictionary
+    }
+
     // MARK: Inner Types
 
     enum ShowStreaksNotificationTrigger: String {
@@ -204,7 +203,7 @@ final class RemoteConfig {
         case submission = "submission"
     }
 
-    private enum Key: String {
+    enum Key: String, CaseIterable {
         case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
         case adaptiveBackendUrl = "adaptive_backend_url"
         case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
@@ -214,6 +213,36 @@ final class RemoteConfig {
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
         case purchaseFlow = "purchase_flow_ios"
 
-        var analyticsUserPropertyKey: String { "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)" }
+        var valueDataType: ValueDataType {
+            switch self {
+            case .showStreaksNotificationTrigger:
+                return .string
+            case .adaptiveBackendUrl:
+                return .string
+            case .supportedInAdaptiveModeCourses:
+                return .string
+            case .arQuickLookAvailable:
+                return .string
+            case .searchResultsQueryParams:
+                return .string
+            case .isCoursePricesEnabled:
+                return .string
+            case .isCourseRevenueAvailable:
+                return .string
+            case .purchaseFlow:
+                return .string
+            }
+        }
+
+        fileprivate var analyticsUserPropertyKey: String {
+            "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)"
+        }
+    }
+
+    enum ValueDataType {
+        case string
+        case number
+        case boolean
+        case json
     }
 }

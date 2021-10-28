@@ -67,6 +67,7 @@ final class DebugMenuViewController: UIViewController {
     private enum Section {
         case fcmToken
         case flex
+        case flags
         case deepLinking
 
         var title: String {
@@ -75,6 +76,8 @@ final class DebugMenuViewController: UIViewController {
                 return "FCM Token"
             case .flex:
                 return "FLEX"
+            case .flags:
+                return "Remote & Local Flags"
             case .deepLinking:
                 return "Deep Linking"
             }
@@ -85,6 +88,8 @@ final class DebugMenuViewController: UIViewController {
         case fcmRegistrationToken
         case flexToggleExplorer
         case flexShowMenu
+        case flagsSplitTests
+        case flagsRemoteConfig
         case deepLinkInput
         case deepLinkOpen
 
@@ -96,6 +101,10 @@ final class DebugMenuViewController: UIViewController {
                 return "Toggle Explorer"
             case .flexShowMenu:
                 return "Show Menu"
+            case .flagsSplitTests:
+                return "A/B Groups"
+            case .flagsRemoteConfig:
+                return "Remote Config"
             case .deepLinkOpen:
                 return "Open deep link"
             default:
@@ -149,6 +158,33 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
             .init(
                 header: .init(title: Section.flex.title),
                 cells: [flexToggleExplorerCell, flexShowMenuCell],
+                footer: nil
+            )
+        )
+
+        // Remote and Local Flags
+        let flagsSplitTestsCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.flagsSplitTests.uniqueIdentifier,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Row.flagsSplitTests.title),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        let flagsRemoteConfigCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.flagsRemoteConfig.uniqueIdentifier,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Row.flagsRemoteConfig.title),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        sections.append(
+            .init(
+                header: .init(title: Section.flags.title),
+                cells: [flagsSplitTestsCell, flagsRemoteConfigCell],
                 footer: nil
             )
         )
@@ -217,6 +253,12 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
             }
         case .flexToggleExplorer:
             FLEXManager.toggleExplorer()
+        case .flagsSplitTests:
+            let viewController = EditSplitTestsAssembly().makeModule()
+            self.push(module: viewController)
+        case .flagsRemoteConfig:
+            let viewController = EditRemoteConfigAssembly().makeModule()
+            self.push(module: viewController)
         case .deepLinkOpen:
             self.handleOpenDeepLink()
         default:
