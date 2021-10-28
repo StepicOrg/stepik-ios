@@ -15,13 +15,4 @@ final class MobileTiersAPI: APIEndpoint {
             withManager: self.manager
         ).map(MobileTierCalculateResponse.init)
     }
-
-    func checkPromoCode(name: String, courseID: Int) -> Promise<MobileTierCalculateResponse> {
-        let request = MobileTierCalculateRequest(params: [.init(courseID: courseID, promoCodeName: name)])
-        return self.create.request(
-            requestEndpoint: self.calculateRequestEndpoint,
-            bodyJSONObject: request.bodyJSON,
-            withManager: self.manager
-        ).map(MobileTierCalculateResponse.init)
-    }
 }

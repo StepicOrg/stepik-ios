@@ -1070,6 +1070,7 @@
 		2CD04082250F669F004D284F /* ProcessedContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD04081250F669F004D284F /* ProcessedContentView.swift */; };
 		2CD04084250F67D0004D284F /* ProcessedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD04083250F67D0004D284F /* ProcessedContent.swift */; };
 		2CD063E6242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */; };
+		2CD1D9E4272A960D0031C78E /* MobileTiersNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */; };
 		2CD3374B268228760073C867 /* CourseRevenueSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD514EA2540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */; };
@@ -3093,6 +3094,7 @@
 		2CD04081250F669F004D284F /* ProcessedContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContentView.swift; sourceTree = "<group>"; };
 		2CD04083250F67D0004D284F /* ProcessedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContent.swift; sourceTree = "<group>"; };
 		2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorViewStyle+Fallback.swift"; sourceTree = "<group>"; };
+		2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersNetworkService.swift; sourceTree = "<group>"; };
 		2CD3374A268228760073C867 /* CourseRevenueSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRevenueSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD514E92540773F0087115C /* TableQuizSelectColumnsOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableQuizSelectColumnsOutputProtocol.swift; sourceTree = "<group>"; };
@@ -8680,6 +8682,7 @@
 				2C0FE8E125F81D9C00626289 /* InstructionsNetworkService.swift */,
 				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
 				2C42EFB92476FADB00423695 /* MagicLinksNetworkService.swift */,
+				2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */,
 				2CDA1B452613BE8600E36BF7 /* ProctorSessionsNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
@@ -11946,6 +11949,7 @@
 				2C85EC162559A57D0059EF97 /* CatalogBlockAppearance.swift in Sources */,
 				62E989945806203AB464B5EF /* CourseWidgetLabel.swift in Sources */,
 				2CBC5AF82682479F0000F2D1 /* CourseRevenueTabPurchasesTableViewDataSource.swift in Sources */,
+				2CD1D9E4272A960D0031C78E /* MobileTiersNetworkService.swift in Sources */,
 				62E98E6F295E2C4799957DFB /* CourseWidgetStatsItemView.swift in Sources */,
 				2C19D9D1261B46CC00181DB0 /* ExploreStepikAcademyBlockContainerView.swift in Sources */,
 				2C1AC2D7255AD36D00E6ECA9 /* SimpleCourseListsCatalogBlockContentItem.swift in Sources */,
