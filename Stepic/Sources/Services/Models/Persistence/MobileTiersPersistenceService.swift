@@ -7,7 +7,7 @@ protocol MobileTiersPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [MobileTier.IdType]) -> Guarantee<[MobileTier]>
     func fetch(coursesIDsWithPromoCodesNames: [(Course.IdType, String?)]) -> Guarantee<[MobileTier]>
 
-    func save(mobileTiers: [MobileTierPlainObject]) -> Guarantee<Void>
+    func save(mobileTiers: [MobileTierPlainObject]) -> Guarantee<[MobileTier]>
 
     func deleteAll() -> Promise<Void>
 }
@@ -46,19 +46,30 @@ final class MobileTiersPersistenceService: BasePersistenceService<MobileTier>, M
         return self.fetch(ids: ids)
     }
 
-    func save(mobileTiers: [MobileTierPlainObject]) -> Guarantee<Void> {
-        firstly {
-            self.fetch(ids: mobileTiers.map(\.id))
-        }.map { cachedMobileTiers in
-            Dictionary(cachedMobileTiers.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
-        }.done { cachedMobileTiersMap in
-            self.managedObjectContext.performChanges {
-                for mobileTier in mobileTiers {
-                    if let cachedMobileTier = cachedMobileTiersMap[mobileTier.id] {
-                        cachedMobileTier.update(mobileTier: mobileTier)
-                    } else {
-                        _ = MobileTier.insert(into: self.managedObjectContext, mobileTier: mobileTier)
+    func save(mobileTiers: [MobileTierPlainObject]) -> Guarantee<[MobileTier]> {
+        Guarantee { seal in
+            firstly {
+                self.fetch(ids: mobileTiers.map(\.id))
+            }.map { cachedMobileTiers in
+                Dictionary(cachedMobileTiers.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
+            }.done { cachedMobileTiersMap in
+                self.managedObjectContext.performChanges {
+                    var result = [MobileTier]()
+
+                    for mobileTier in mobileTiers {
+                        if let cachedMobileTier = cachedMobileTiersMap[mobileTier.id] {
+                            cachedMobileTier.update(mobileTier: mobileTier)
+                            result.append(cachedMobileTier)
+                        } else {
+                            let insertedMobileTier = MobileTier.insert(
+                                into: self.managedObjectContext,
+                                mobileTier: mobileTier
+                            )
+                            result.append(insertedMobileTier)
+                        }
                     }
+
+                    seal(result)
                 }
             }
         }

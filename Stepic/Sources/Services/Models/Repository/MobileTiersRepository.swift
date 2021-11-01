@@ -20,12 +20,16 @@ final class MobileTiersRepository: MobileTiersRepositoryProtocol {
     private let mobileTiersNetworkService: MobileTiersNetworkServiceProtocol
     private let mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol
 
+    private let coursesPersistenceService: CoursesPersistenceServiceProtocol
+
     init(
         mobileTiersNetworkService: MobileTiersNetworkServiceProtocol,
-        mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol
+        mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol,
+        coursesPersistenceService: CoursesPersistenceServiceProtocol
     ) {
         self.mobileTiersNetworkService = mobileTiersNetworkService
         self.mobileTiersPersistenceService = mobileTiersPersistenceService
+        self.coursesPersistenceService = coursesPersistenceService
     }
 
     func fetch(
@@ -60,7 +64,8 @@ final class MobileTiersRepository: MobileTiersRepositoryProtocol {
                 .then { remoteMobileTiers in
                     self.mobileTiersPersistenceService
                         .save(mobileTiers: remoteMobileTiers)
-                        .map { remoteMobileTiers }
+                        .then(self.establishRelationships(mobileTiers:))
+                        .map { _ in remoteMobileTiers }
                 }
         }
     }
@@ -71,6 +76,8 @@ final class MobileTiersRepository: MobileTiersRepositoryProtocol {
             .then(self.saveMobileTierIfNeeded(_:))
     }
 
+    // MARK: Private API
+
     private func saveMobileTierIfNeeded(
         _ mobileTierOrNil: MobileTierPlainObject?
     ) -> Promise<MobileTierPlainObject?> {
@@ -78,7 +85,28 @@ final class MobileTiersRepository: MobileTiersRepositoryProtocol {
             return .value(mobileTierOrNil)
         }
 
-        return self.mobileTiersPersistenceService.save(mobileTiers: [mobileTier]).map { mobileTierOrNil }
+        return self.mobileTiersPersistenceService
+            .save(mobileTiers: [mobileTier])
+            .then(self.establishRelationships(mobileTiers:))
+            .map { _ in mobileTierOrNil }
+    }
+
+    private func establishRelationships(mobileTiers: [MobileTier]) -> Promise<[MobileTier]> {
+        if mobileTiers.isEmpty {
+            return .value([])
+        }
+
+        let coursesIDs = Set(mobileTiers.map(\.courseID))
+
+        return self.coursesPersistenceService.fetch(ids: Array(coursesIDs)).then { courses -> Promise<[MobileTier]> in
+            let coursesMap = Dictionary(courses.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
+
+            for mobileTier in mobileTiers {
+                mobileTier.course = coursesMap[mobileTier.courseID]
+            }
+
+            return .value(mobileTiers)
+        }
     }
 }
 
@@ -86,7 +114,8 @@ extension MobileTiersRepository {
     static var `default`: MobileTiersRepository {
         MobileTiersRepository(
             mobileTiersNetworkService: MobileTiersNetworkService(mobileTiersAPI: MobileTiersAPI()),
-            mobileTiersPersistenceService: MobileTiersPersistenceService()
+            mobileTiersPersistenceService: MobileTiersPersistenceService(),
+            coursesPersistenceService: CoursesPersistenceService()
         )
     }
 }
