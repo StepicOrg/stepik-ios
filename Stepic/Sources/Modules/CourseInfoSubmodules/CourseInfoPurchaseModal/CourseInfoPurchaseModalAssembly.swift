@@ -4,11 +4,20 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
     var moduleInput: CourseInfoPurchaseModalInputProtocol?
 
     private let courseID: Course.IdType
+    private let promoCodeName: String?
+    private let mobileTierID: MobileTier.IdType?
 
     private weak var moduleOutput: CourseInfoPurchaseModalOutputProtocol?
 
-    init(courseID: Course.IdType, output: CourseInfoPurchaseModalOutputProtocol? = nil) {
+    init(
+        courseID: Course.IdType,
+        promoCodeName: String?,
+        mobileTierID: MobileTier.IdType?,
+        output: CourseInfoPurchaseModalOutputProtocol? = nil
+    ) {
         self.courseID = courseID
+        self.promoCodeName = promoCodeName
+        self.mobileTierID = mobileTierID
         self.moduleOutput = output
     }
 
@@ -20,6 +29,8 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
         let presenter = CourseInfoPurchaseModalPresenter()
         let interactor = CourseInfoPurchaseModalInteractor(
             courseID: self.courseID,
+            initialPromoCodeName: self.promoCodeName,
+            mobileTierID: self.mobileTierID,
             presenter: presenter,
             provider: provider
         )

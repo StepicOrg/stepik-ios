@@ -14,6 +14,7 @@ protocol CourseInfoPresenterProtocol {
     func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
+    func presentPaidCoursePurchaseModal(response: CourseInfo.PaidCoursePurchaseModalPresentation.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
     func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response)
     func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
@@ -127,6 +128,16 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }
 
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
+    }
+
+    func presentPaidCoursePurchaseModal(response: CourseInfo.PaidCoursePurchaseModalPresentation.Response) {
+        self.viewController?.displayPaidCoursePurchaseModal(
+            viewModel: .init(
+                courseID: response.courseID,
+                promoCodeName: response.promoCodeName,
+                mobileTierID: response.mobileTierID
+            )
+        )
     }
 
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {

@@ -299,6 +299,21 @@ enum CourseInfo {
         }
     }
 
+    /// Present CourseInfoPurchaseModal module
+    enum PaidCoursePurchaseModalPresentation {
+        struct Response {
+            let courseID: Course.IdType
+            let promoCodeName: String?
+            let mobileTierID: MobileTier.IdType?
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+            let promoCodeName: String?
+            let mobileTierID: MobileTier.IdType?
+        }
+    }
+
     /// Update remind purchase course notification
     enum PurchaseNotificationUpdate {
         struct Request {}

@@ -322,16 +322,28 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: isWishlisted)
                 )
 
-                if self.iapService.canBuyCourse(course) {
-                    self.iapService.buy(course: course, delegate: self)
-                } else {
+                switch self.remoteConfig.coursePurchaseFlow {
+                case .web:
+                    if self.iapService.canBuyCourse(course) {
+                        self.iapService.buy(course: course, delegate: self)
+                    } else {
+                        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                        self.presenter.presentPaidCourseBuying(
+                            response: .init(course: course, courseViewSource: self.courseViewSource)
+                        )
+                    }
+
+                    return self.coursePurchaseReminder.createPurchaseNotification(for: course)
+                case .iap:
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                    self.presenter.presentPaidCourseBuying(
-                        response: .init(course: course, courseViewSource: self.courseViewSource)
+                    return self.presenter.presentPaidCoursePurchaseModal(
+                        response: .init(
+                            courseID: self.courseID,
+                            promoCodeName: self.promoCodeName,
+                            mobileTierID: self.currentMobileTier?.id
+                        )
                     )
                 }
-
-                return self.coursePurchaseReminder.createPurchaseNotification(for: course)
             }
 
             self.analytics.send(.authorizedUserTappedJoinCourse)

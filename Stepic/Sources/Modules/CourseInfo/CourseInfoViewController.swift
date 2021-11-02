@@ -18,6 +18,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayCourseRevenue(viewModel: CourseInfo.CourseRevenuePresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
+    func displayPaidCoursePurchaseModal(viewModel: CourseInfo.PaidCoursePurchaseModalPresentation.ViewModel)
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
     func displayIAPReceiptValidationFailed(viewModel: CourseInfo.IAPReceiptValidationFailedPresentation.ViewModel)
     func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel)
@@ -692,6 +693,16 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func displayPaidCoursePurchaseModal(viewModel: CourseInfo.PaidCoursePurchaseModalPresentation.ViewModel) {
+        let assembly = CourseInfoPurchaseModalAssembly(
+            courseID: viewModel.courseID,
+            promoCodeName: viewModel.promoCodeName,
+            mobileTierID: viewModel.mobileTierID,
+            output: nil
+        )
+        self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
     }
 
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel) {
