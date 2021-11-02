@@ -46,6 +46,7 @@ enum CourseInfo {
                 let isWishlistAvailable: Bool
                 let isCourseRevenueAvailable: Bool
                 let promoCode: PromoCode?
+                let coursePurchaseFlow: CoursePurchaseFlowType
             }
 
             var result: StepikResult<Data>

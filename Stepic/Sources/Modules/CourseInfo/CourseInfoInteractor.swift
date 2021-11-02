@@ -402,7 +402,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             isWishlisted: self.wishlistService.contains(self.courseID),
             isWishlistAvailable: isWishlistAvailable,
             isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
-            promoCode: self.currentPromoCode
+            promoCode: self.currentPromoCode,
+            coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow
         )
     }
 
@@ -431,18 +432,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     }
                 }
 
-                if let course = course,
-                   course.isPaid && self.iapService.canBuyCourse(course) && course.displayPriceIAP?.isEmpty ?? true {
-                    self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
-                        self.currentCourse?.displayPriceIAP = localizedPrice
-                        DispatchQueue.main.async {
-                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
-                        }
-                    }
-                }
-
                 DispatchQueue.main.async {
-                    self.fetchAndPresentPromoCodeIfNeeded()
+                    self.fetchAndPresentPriceInfoIfNeeded()
                 }
 
                 if !self.didLoadFromCache {
@@ -459,6 +450,41 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     seal.reject(error)
                 }
             }
+        }
+    }
+
+    private func fetchAndPresentPriceInfoIfNeeded() {
+        switch self.remoteConfig.coursePurchaseFlow {
+        case .web:
+            if let course = self.currentCourse,
+               course.isPaid && self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
+                self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
+                    self.currentCourse?.displayPriceIAP = localizedPrice
+                    self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                }
+            }
+
+            self.fetchAndPresentPromoCodeIfNeeded()
+        case .iap:
+            self.provider
+                .calculateMobileTier(promoCodeName: self.promoCodeName)
+                .compactMap { $0 }
+                .compactMap { mobileTier in
+                    self.currentCourse?.mobileTiers.first(where: { $0.id == mobileTier.id })
+                }
+                .then { mobileTier -> Guarantee<(MobileTier, String?, String?)> in
+                    self.iapService.getLocalizedPrices(for: mobileTier).map { (mobileTier, $0.price, $0.promo) }
+                }
+                .done { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice in
+                    mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
+                    mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
+
+                    self.currentCourse?.displayPriceTierPrice = priceTierLocalizedPrice
+                    self.currentCourse?.displayPriceTierPromo = promoTierLocalizedPrice
+
+                    self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                }
+                .cauterize()
         }
     }
 

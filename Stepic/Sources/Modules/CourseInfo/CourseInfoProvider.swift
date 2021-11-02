@@ -9,6 +9,7 @@ protocol CourseInfoProviderProtocol {
     func updateUserCourse(_ userCourse: UserCourse) -> Promise<UserCourse>
 
     func checkPromoCode(name: String) -> Promise<PromoCode>
+    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?>
 }
 
 final class CourseInfoProvider: CourseInfoProviderProtocol {
@@ -30,6 +31,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
     private let promoCodesNetworkService: PromoCodesNetworkServiceProtocol
 
+    private let mobileTiersRepository: MobileTiersRepositoryProtocol
+
     init(
         courseID: Course.IdType,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
@@ -41,7 +44,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol,
         coursePurchasesNetworkService: CoursePurchasesNetworkServiceProtocol,
         userCoursesNetworkService: UserCoursesNetworkServiceProtocol,
-        promoCodesNetworkService: PromoCodesNetworkServiceProtocol
+        promoCodesNetworkService: PromoCodesNetworkServiceProtocol,
+        mobileTiersRepository: MobileTiersRepositoryProtocol
     ) {
         self.courseID = courseID
         self.coursesNetworkService = coursesNetworkService
@@ -54,6 +58,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.coursePurchasesNetworkService = coursePurchasesNetworkService
         self.userCoursesNetworkService = userCoursesNetworkService
         self.promoCodesNetworkService = promoCodesNetworkService
+        self.mobileTiersRepository = mobileTiersRepository
     }
 
     func fetchCached() -> Promise<Course?> {
@@ -109,6 +114,12 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     func checkPromoCode(name: String) -> Promise<PromoCode> {
         self.promoCodesNetworkService.checkPromoCode(courseID: self.courseID, name: name)
     }
+
+    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
+        self.mobileTiersRepository.fetch(courseID: self.courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
+    }
+
+    // MARK: Private API
 
     private func fetchAndMergeCourse(
         courseFetchMethod: @escaping (Course.IdType) -> Promise<Course?>,

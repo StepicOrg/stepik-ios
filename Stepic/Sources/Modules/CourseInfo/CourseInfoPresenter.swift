@@ -40,7 +40,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
                 isCourseRevenueAvailable: data.isCourseRevenueAvailable,
-                promoCode: data.promoCode
+                promoCode: data.promoCode,
+                coursePurchaseFlow: data.coursePurchaseFlow
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         case .failure:
@@ -256,7 +257,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         isWishlisted: Bool,
         isWishlistAvailable: Bool,
         isCourseRevenueAvailable: Bool,
-        promoCode: PromoCode?
+        promoCode: PromoCode?,
+        coursePurchaseFlow: CoursePurchaseFlowType
     ) -> CourseInfoHeaderViewModel {
         let rating = course.reviewSummary?.rating ?? 0
 
@@ -286,14 +288,16 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             buttonDescription: self.makeButtonDescription(
                 course: course,
-                promoCode: promoCode
+                promoCode: promoCode,
+                coursePurchaseFlow: coursePurchaseFlow
             )
         )
     }
 
     private func makeButtonDescription(
         course: Course,
-        promoCode: PromoCode?
+        promoCode: PromoCode?,
+        coursePurchaseFlow: CoursePurchaseFlowType
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
         let isEnabled = isEnrolled ? course.canContinue : true
@@ -307,13 +311,26 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
             if isNotPurchased {
                 let displayPrice: String?
-                if let displayPriceIAP = course.displayPriceIAP {
-                    displayPrice = displayPriceIAP
-                } else if let promoCode = promoCode {
-                    displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
-                    isPromo = true
-                } else {
-                    displayPrice = course.displayPrice
+
+                switch coursePurchaseFlow {
+                case .web:
+                    if let displayPriceIAP = course.displayPriceIAP {
+                        displayPrice = displayPriceIAP
+                    } else if let promoCode = promoCode {
+                        displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
+                        isPromo = true
+                    } else {
+                        displayPrice = course.displayPrice
+                    }
+                case .iap:
+                    if let displayPriceTierPromo = course.displayPriceTierPromo {
+                        displayPrice = displayPriceTierPromo
+                        isPromo = true
+                    } else if let displayPriceTierPrice = course.displayPriceTierPrice {
+                        displayPrice = displayPriceTierPrice
+                    } else {
+                        displayPrice = course.displayPrice
+                    }
                 }
 
                 if let displayPrice = displayPrice {
@@ -325,8 +342,15 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }()
 
         let subtitle: String? = {
-            if isNotPurchased && promoCode != nil {
-                return course.displayPrice
+            switch coursePurchaseFlow {
+            case .web:
+                if isNotPurchased && promoCode != nil {
+                    return course.displayPrice
+                }
+            case .iap:
+                if isNotPurchased && !(course.displayPriceTierPromo?.isEmpty ?? true) {
+                    return course.displayPriceTierPrice ?? course.displayPrice
+                }
             }
             return nil
         }()
