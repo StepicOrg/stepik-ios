@@ -13,6 +13,8 @@ protocol MobileTiersRepositoryProtocol: AnyObject {
         dataSourceType: DataSourceType
     ) -> Promise<[MobileTierPlainObject]>
 
+    func fetch(courseID: Course.IdType) -> Guarantee<[MobileTier]>
+
     func checkPromoCode(name: String, courseID: Course.IdType) -> Promise<MobileTierPlainObject?>
 }
 
@@ -68,6 +70,10 @@ final class MobileTiersRepository: MobileTiersRepositoryProtocol {
                         .map { _ in remoteMobileTiers }
                 }
         }
+    }
+
+    func fetch(courseID: Course.IdType) -> Guarantee<[MobileTier]> {
+        self.mobileTiersPersistenceService.fetch(courseID: courseID)
     }
 
     func checkPromoCode(name: String, courseID: Course.IdType) -> Promise<MobileTierPlainObject?> {

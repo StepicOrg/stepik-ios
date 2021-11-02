@@ -6,6 +6,9 @@ struct MobileTierPlainObject {
     let courseID: Int
     let priceTier: String?
     let promoTier: String?
+    
+    var priceTierDisplayPrice: String?
+    var promoTierDisplayPrice: String?
 }
 
 extension MobileTierPlainObject {

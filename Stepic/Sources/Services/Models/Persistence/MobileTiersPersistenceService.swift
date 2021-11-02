@@ -3,8 +3,10 @@ import Foundation
 import PromiseKit
 
 protocol MobileTiersPersistenceServiceProtocol: AnyObject {
+    func fetchAll() -> Guarantee<[MobileTier]>
     func fetch(id: MobileTier.IdType) -> Guarantee<MobileTier?>
     func fetch(ids: [MobileTier.IdType]) -> Guarantee<[MobileTier]>
+    func fetch(courseID: Course.IdType) -> Guarantee<[MobileTier]>
     func fetch(coursesIDsWithPromoCodesNames: [(Course.IdType, String?)]) -> Guarantee<[MobileTier]>
 
     func save(mobileTiers: [MobileTierPlainObject]) -> Guarantee<[MobileTier]>
@@ -44,6 +46,26 @@ final class MobileTiersPersistenceService: BasePersistenceService<MobileTier>, M
     func fetch(coursesIDsWithPromoCodesNames: [(Course.IdType, String?)]) -> Guarantee<[MobileTier]> {
         let ids = coursesIDsWithPromoCodesNames.map(self.makeMobileTierID(courseID:promoCodeName:))
         return self.fetch(ids: ids)
+    }
+
+    func fetch(courseID: Course.IdType) -> Guarantee<[MobileTier]> {
+        Guarantee { seal in
+            let request = MobileTier.sortedFetchRequest
+            request.predicate = NSPredicate(
+                format: "%K == %@",
+                #keyPath(MobileTier.managedCourseId),
+                NSNumber(value: courseID)
+            )
+            request.returnsObjectsAsFaults = false
+
+            do {
+                let mobileTiers = try self.managedObjectContext.fetch(request)
+                seal(mobileTiers)
+            } catch {
+                print("MobileTiersPersistenceService :: \(#function) failed fetch with error = \(error)")
+                seal([])
+            }
+        }
     }
 
     func save(mobileTiers: [MobileTierPlainObject]) -> Guarantee<[MobileTier]> {

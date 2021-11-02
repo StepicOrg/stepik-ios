@@ -59,6 +59,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let promoCodeName: String?
     private var currentPromoCode: PromoCode?
 
+    private var currentMobileTier: MobileTier?
+
     private var courseWebURL: URL? {
         guard let course = self.currentCourse else {
             return nil
@@ -397,13 +399,31 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
         let isWishlistAvailable = self.userAccountService.isAuthorized
             && self.wishlistService.canAdd(self.currentCourse.require())
+
+        let mobileTier: MobileTier? = {
+            guard self.remoteConfig.coursePurchaseFlow == .iap else {
+                return nil
+            }
+
+            if let currentMobileTier = self.currentMobileTier {
+                return currentMobileTier
+            } else {
+                if let promoCodeName = self.promoCodeName,
+                   let promoTier = self.currentCourse?.mobileTiers.first(where: { $0.id.hasSuffix(promoCodeName) }) {
+                    return promoTier
+                }
+                return self.currentCourse?.mobileTiers.first(where: { $0.id.hasSuffix("None") })
+            }
+        }()
+
         return .init(
             course: self.currentCourse.require(),
             isWishlisted: self.wishlistService.contains(self.courseID),
             isWishlistAvailable: isWishlistAvailable,
             isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
+            coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
             promoCode: self.currentPromoCode,
-            coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow
+            mobileTier: mobileTier?.plainObject
         )
     }
 
@@ -466,6 +486,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
             self.fetchAndPresentPromoCodeIfNeeded()
         case .iap:
+            guard self.currentMobileTier == nil else {
+                return
+            }
+
             self.provider
                 .calculateMobileTier(promoCodeName: self.promoCodeName)
                 .compactMap { $0 }
@@ -478,9 +502,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 .done { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice in
                     mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
                     mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
-
-                    self.currentCourse?.displayPriceTierPrice = priceTierLocalizedPrice
-                    self.currentCourse?.displayPriceTierPromo = promoTierLocalizedPrice
+                    self.currentMobileTier = mobileTier
 
                     self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
                 }

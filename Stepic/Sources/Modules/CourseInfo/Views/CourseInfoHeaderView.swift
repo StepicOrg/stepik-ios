@@ -220,7 +220,9 @@ final class CourseInfoHeaderView: UIView {
                 fullPriceString: viewModel.buttonDescription.subtitle ?? ""
             )
             self.promoPriceButton.isEnabled = viewModel.buttonDescription.isEnabled
-            self.promoPriceButton.isHidden = !shouldShowPromoPriceButton
+            self.promoPriceButton.isHidden = false
+        } else {
+            self.promoPriceButton.isHidden = true
         }
 
         self.tryForFreeButton.isHidden = !viewModel.isTryForFreeAvailable

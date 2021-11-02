@@ -21,7 +21,9 @@ extension MobileTier {
             id: self.id,
             courseID: self.courseID,
             priceTier: self.priceTier,
-            promoTier: self.promoTier
+            promoTier: self.promoTier,
+            priceTierDisplayPrice: self.priceTierDisplayPrice,
+            promoTierDisplayPrice: self.promoTierDisplayPrice
         )
     }
 

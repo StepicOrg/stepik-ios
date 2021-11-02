@@ -37,11 +37,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         case .success(let data):
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
+                coursePurchaseFlow: data.coursePurchaseFlow,
                 isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
                 isCourseRevenueAvailable: data.isCourseRevenueAvailable,
                 promoCode: data.promoCode,
-                coursePurchaseFlow: data.coursePurchaseFlow
+                mobileTier: data.mobileTier
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         case .failure:
@@ -254,11 +255,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeHeaderViewModel(
         course: Course,
+        coursePurchaseFlow: CoursePurchaseFlowType,
         isWishlisted: Bool,
         isWishlistAvailable: Bool,
         isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?,
-        coursePurchaseFlow: CoursePurchaseFlowType
+        mobileTier: MobileTierPlainObject?
     ) -> CourseInfoHeaderViewModel {
         let rating = course.reviewSummary?.rating ?? 0
 
@@ -288,16 +290,18 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             buttonDescription: self.makeButtonDescription(
                 course: course,
+                coursePurchaseFlow: coursePurchaseFlow,
                 promoCode: promoCode,
-                coursePurchaseFlow: coursePurchaseFlow
+                mobileTier: mobileTier
             )
         )
     }
 
     private func makeButtonDescription(
         course: Course,
+        coursePurchaseFlow: CoursePurchaseFlowType,
         promoCode: PromoCode?,
-        coursePurchaseFlow: CoursePurchaseFlowType
+        mobileTier: MobileTierPlainObject?
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
         let isEnabled = isEnrolled ? course.canContinue : true
@@ -323,11 +327,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                         displayPrice = course.displayPrice
                     }
                 case .iap:
-                    if let displayPriceTierPromo = course.displayPriceTierPromo {
-                        displayPrice = displayPriceTierPromo
+                    if let promoTierDisplayPrice = mobileTier?.promoTierDisplayPrice {
+                        displayPrice = promoTierDisplayPrice
                         isPromo = true
-                    } else if let displayPriceTierPrice = course.displayPriceTierPrice {
-                        displayPrice = displayPriceTierPrice
+                    } else if let priceTierDisplayPrice = mobileTier?.priceTierDisplayPrice {
+                        displayPrice = priceTierDisplayPrice
                     } else {
                         displayPrice = course.displayPrice
                     }
@@ -342,17 +346,16 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }()
 
         let subtitle: String? = {
+            guard isNotPurchased && isPromo else {
+                return nil
+            }
+
             switch coursePurchaseFlow {
             case .web:
-                if isNotPurchased && promoCode != nil {
-                    return course.displayPrice
-                }
+                return course.displayPrice
             case .iap:
-                if isNotPurchased && !(course.displayPriceTierPromo?.isEmpty ?? true) {
-                    return course.displayPriceTierPrice ?? course.displayPrice
-                }
+                return mobileTier?.priceTierDisplayPrice ?? course.displayPrice
             }
-            return nil
         }()
 
         return CourseInfoHeaderViewModel.ButtonDescription(

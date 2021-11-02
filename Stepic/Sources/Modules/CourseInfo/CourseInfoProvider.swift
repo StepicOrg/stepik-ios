@@ -167,9 +167,10 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
                 course.reviewSummary = reviewSummary
                 course.purchases = coursePurchases
 
-                CoreDataHelper.shared.save()
-
-                seal.fulfill(course)
+                self.fetchMobileTiers(course: course).done { course in
+                    CoreDataHelper.shared.save()
+                    seal.fulfill(course)
+                }
             }.catch { error in
                 seal.reject(error)
             }
@@ -179,6 +180,15 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     private func fetchCachedPurchases(courseID: Course.IdType) -> Promise<[CoursePurchase]> {
         Promise { seal in
             self.coursePurchasesPersistenceService.fetch(courseID: courseID).done { seal.fulfill($0) }
+        }
+    }
+
+    private func fetchMobileTiers(course: Course) -> Guarantee<Course> {
+        firstly { () -> Guarantee<[MobileTier]> in
+            course.isPaid && !course.enrolled ? self.mobileTiersRepository.fetch(courseID: course.id) : .value([])
+        }.then { mobileTiers -> Guarantee<Course> in
+            course.mobileTiers = mobileTiers
+            return .value(course)
         }
     }
 
