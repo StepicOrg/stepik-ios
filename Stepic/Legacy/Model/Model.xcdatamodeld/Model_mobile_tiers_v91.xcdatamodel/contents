@@ -119,6 +119,8 @@
         <attribute name="managedDefaultPromoCodePrice" optional="YES" attributeType="Float" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDisplayPrice" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedDisplayPriceIAP" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedDisplayPriceTierPrice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedDisplayPriceTierPromo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedEndDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedEndDateSource" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedEnrolled" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -321,7 +323,9 @@
         <attribute name="managedCourseId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" attributeType="String" defaultValueString="" syncable="YES"/>
         <attribute name="managedPriceTier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedPriceTierDisplayPrice" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedPromoTier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedPromoTierDisplayPrice" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedMobileTiers" inverseEntity="Course" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName=".Notification" syncable="YES">
@@ -607,7 +611,7 @@
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
-        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1079"/>
+        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1109"/>
         <element name="CourseBeneficiary" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="CourseBenefit" positionX="-450" positionY="-234" width="128" height="239"/>
         <element name="CourseBenefitByMonth" positionX="-450" positionY="-234" width="128" height="284"/>
@@ -622,6 +626,7 @@
         <element name="LastCodeLanguage" positionX="-450" positionY="-234" width="128" height="75"/>
         <element name="LastStep" positionX="-361.27734375" positionY="646.40625" width="128" height="105"/>
         <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="284"/>
+        <element name="MobileTier" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="Notification" positionX="-208.453125" positionY="793.484375" width="128" height="195"/>
         <element name="ProctorSession" positionX="-441" positionY="-216" width="128" height="209"/>
         <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="329"/>
@@ -640,6 +645,5 @@
         <element name="UserCourse" positionX="-450" positionY="-234" width="128" height="179"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="MobileTier" positionX="-450" positionY="-225" width="128" height="104"/>
     </elements>
 </model>

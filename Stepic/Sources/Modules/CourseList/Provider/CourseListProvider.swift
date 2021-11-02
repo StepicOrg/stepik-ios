@@ -22,8 +22,11 @@ final class CourseListProvider: CourseListProviderProtocol {
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
     private let reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
     private let courseListsPersistenceService: CourseListsPersistenceServiceProtocol
+    private let mobileTiersRepository: MobileTiersRepositoryProtocol
 
     private let iapService: IAPServiceProtocol
+
+    private let remoteConfig: RemoteConfig
 
     init(
         type: CourseListType,
@@ -32,7 +35,9 @@ final class CourseListProvider: CourseListProviderProtocol {
         progressesNetworkService: ProgressesNetworkServiceProtocol,
         reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
         courseListsPersistenceService: CourseListsPersistenceServiceProtocol,
-        iapService: IAPServiceProtocol
+        mobileTiersRepository: MobileTiersRepositoryProtocol,
+        iapService: IAPServiceProtocol,
+        remoteConfig: RemoteConfig
     ) {
         self.type = type
         self.persistenceService = persistenceService
@@ -40,7 +45,9 @@ final class CourseListProvider: CourseListProviderProtocol {
         self.progressesNetworkService = progressesNetworkService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
         self.courseListsPersistenceService = courseListsPersistenceService
+        self.mobileTiersRepository = mobileTiersRepository
         self.iapService = iapService
+        self.remoteConfig = remoteConfig
     }
 
     // MARK: - CourseListProviderProtocol
@@ -67,27 +74,20 @@ final class CourseListProvider: CourseListProviderProtocol {
             self.networkService.fetch(
                 page: page,
                 filterQuery: filterQuery
-            ).then { (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary], [String?])> in
+            ).then { (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
                 let progressesIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }
-
-                let iapPricePromises = courses.map { course -> Promise<String?> in
-                    self.iapService.canBuyCourse(course)
-                        ? Promise(self.iapService.getLocalizedPrice(for: course))
-                        : .value(nil)
-                }
 
                 return when(
                     fulfilled: self.progressesNetworkService.fetch(ids: progressesIDs, page: 1),
                     self.reviewSummariesNetworkService.fetch(ids: summariesIDs, page: 1),
-                    when(fulfilled: iapPricePromises)
-                ).compactMap { (courses, meta, $0.0, $1.0, $2) }
-            }.then { (courses, meta, progresses, reviewSummaries, iapPrices) -> Guarantee<([Course], Meta)> in
+                    self.fetchIAPLocalizedPrices(for: courses)
+                ).compactMap { (courses, meta, $0.0.0, $0.1.0) }
+            }.then { (courses, meta, progresses, reviewSummaries) -> Guarantee<([Course], Meta)> in
                 self.mergeAsync(
                     courses: courses,
                     progresses: progresses,
-                    reviewSummaries: reviewSummaries,
-                    iapPrices: iapPrices
+                    reviewSummaries: reviewSummaries
                 ).map { ($0, meta) }
             }.done { courses, meta in
                 seal.fulfill((courses, meta))
@@ -112,11 +112,79 @@ final class CourseListProvider: CourseListProviderProtocol {
 
     // MARK: - Private API
 
+    private func fetchIAPLocalizedPrices(for courses: [Course]) -> Guarantee<Void> {
+        firstly { () -> Guarantee<[MobileTierPlainObject]?> in
+            switch self.remoteConfig.coursePurchaseFlow {
+            case .web:
+                return .value(nil)
+            case .iap:
+                return Guarantee(
+                    self.mobileTiersRepository.fetch(
+                        coursesIDsWithPromoCodesNames: courses.map { ($0.id, nil) },
+                        dataSourceType: .remote
+                    ),
+                    fallback: nil
+                )
+            }
+        }.then { mobileTiersOrNil -> Guarantee<Void> in
+            let mobileTiers = mobileTiersOrNil ?? []
+            let mobileTierByCourseID = Dictionary(
+                mobileTiers.map({ ($0.courseID, $0) }),
+                uniquingKeysWith: { first, _ in first }
+            )
+
+            return when(
+                guarantees: courses.map {
+                    self.fetchIAPLocalizedPrice(for: $0, mobileTiersMap: mobileTierByCourseID)
+                }
+            )
+        }
+    }
+
+    private func fetchIAPLocalizedPrice(
+        for course: Course,
+        mobileTiersMap: [Course.IdType: MobileTierPlainObject]
+    ) -> Guarantee<Void> {
+        switch self.remoteConfig.coursePurchaseFlow {
+        case .web:
+            return Guarantee { seal in
+                if self.iapService.canBuyCourse(course) {
+                    self.iapService.getLocalizedPrice(for: course).done { price in
+                        course.displayPriceIAP = price
+                        seal(())
+                    }
+                } else {
+                    course.displayPriceIAP = nil
+                    seal(())
+                }
+            }
+        case .iap:
+            return Guarantee { seal in
+                if let mobileTierPlainObject = mobileTiersMap[course.id],
+                   let mobileTierEntity = course.mobileTiers.first(where: { $0.id == mobileTierPlainObject.id }) {
+                    self.iapService.getLocalizedPrices(for: mobileTierEntity).done { result in
+                        mobileTierEntity.priceTierDisplayPrice = result.price
+                        mobileTierEntity.promoTierDisplayPrice = result.promo
+
+                        course.displayPriceTierPrice = result.price
+                        course.displayPriceTierPromo = result.promo
+
+                        seal(())
+                    }
+                } else {
+                    course.displayPriceTierPrice = nil
+                    course.displayPriceTierPromo = nil
+
+                    seal(())
+                }
+            }
+        }
+    }
+
     private func mergeAsync(
         courses: [Course],
         progresses: [Progress],
-        reviewSummaries: [CourseReviewSummary],
-        iapPrices: [String?]
+        reviewSummaries: [CourseReviewSummary]
     ) -> Guarantee<[Course]> {
         Guarantee { seal in
             let progressesMap: [Progress.IdType: Progress] = progresses
@@ -131,7 +199,6 @@ final class CourseListProvider: CourseListProviderProtocol {
                 if let reviewSummaryID = courses[i].reviewSummaryId {
                     courses[i].reviewSummary = reviewSummariesMap[reviewSummaryID]
                 }
-                courses[i].displayPriceIAP = iapPrices[i]
             }
 
             CoreDataHelper.shared.save()

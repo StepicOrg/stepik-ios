@@ -6,6 +6,8 @@ extension MobileTier {
     @NSManaged var managedCourseId: NSNumber
     @NSManaged var managedPriceTier: String?
     @NSManaged var managedPromoTier: String?
+    @NSManaged var managedPriceTierDisplayPrice: String?
+    @NSManaged var managedPromoTierDisplayPrice: String?
 
     @NSManaged var managedCourse: Course?
 
@@ -42,6 +44,24 @@ extension MobileTier {
         }
         set {
             self.managedPromoTier = newValue
+        }
+    }
+
+    var priceTierDisplayPrice: String? {
+        get {
+            self.managedPriceTierDisplayPrice
+        }
+        set {
+            self.managedPriceTierDisplayPrice = newValue
+        }
+    }
+
+    var promoTierDisplayPrice: String? {
+        get {
+            self.managedPromoTierDisplayPrice
+        }
+        set {
+            self.managedPromoTierDisplayPrice = newValue
         }
     }
 

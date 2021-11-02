@@ -50,6 +50,8 @@ extension Course {
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
     @NSManaged var managedDisplayPriceIAP: String?
+    @NSManaged var managedDisplayPriceTierPrice: String?
+    @NSManaged var managedDisplayPriceTierPromo: String?
     @NSManaged var managedPriceTier: NSNumber?
     @NSManaged var managedCurrencyCode: String?
 
@@ -316,6 +318,24 @@ extension Course {
         }
         set {
             self.managedDisplayPriceIAP = newValue
+        }
+    }
+
+    var displayPriceTierPrice: String? {
+        get {
+            self.managedDisplayPriceTierPrice
+        }
+        set {
+            self.managedDisplayPriceTierPrice = newValue
+        }
+    }
+
+    var displayPriceTierPromo: String? {
+        get {
+            self.managedDisplayPriceTierPromo
+        }
+        set {
+            self.managedDisplayPriceTierPromo = newValue
         }
     }
 

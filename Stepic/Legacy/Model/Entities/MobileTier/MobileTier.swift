@@ -7,6 +7,10 @@ final class MobileTier: NSManagedObject, ManagedObject, Identifiable {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: true)]
     }
+
+    var isTiersEmpty: Bool {
+        (self.priceTier?.isEmpty ?? true) && (self.promoTier?.isEmpty ?? true)
+    }
 }
 
 // MARK: - MobileTier (PlainObject Support) -
