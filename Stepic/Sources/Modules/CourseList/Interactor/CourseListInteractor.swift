@@ -131,6 +131,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     let response = CourseList.CoursesLoad.Response(
                         isAuthorized: strongSelf.userAccountService.isAuthorized,
                         isCoursePricesEnabled: strongSelf.remoteConfig.isCoursePricesEnabled,
+                        coursePurchaseFlow: strongSelf.remoteConfig.coursePurchaseFlow,
                         result: courses,
                         viewSource: strongSelf.courseViewSource
                     )
@@ -186,6 +187,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: strongSelf.userAccountService.isAuthorized,
                     isCoursePricesEnabled: strongSelf.remoteConfig.isCoursePricesEnabled,
+                    coursePurchaseFlow: strongSelf.remoteConfig.coursePurchaseFlow,
                     result: .failure(error),
                     viewSource: strongSelf.courseViewSource
                 )
@@ -295,6 +297,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
                     isCoursePricesEnabled: self.remoteConfig.isCoursePricesEnabled,
+                    coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
                     result: .success(result),
                     viewSource: self.courseViewSource
                 )
@@ -328,6 +331,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 let response = CourseList.NextCoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
                     isCoursePricesEnabled: self.remoteConfig.isCoursePricesEnabled,
+                    coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
                     result: .success(courses),
                     viewSource: self.courseViewSource
                 )
@@ -391,6 +395,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         let response = CourseList.CoursesLoad.Response(
             isAuthorized: self.userAccountService.isAuthorized,
             isCoursePricesEnabled: self.remoteConfig.isCoursePricesEnabled,
+            coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
             result: courses,
             viewSource: self.courseViewSource
         )
