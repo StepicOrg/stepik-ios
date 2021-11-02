@@ -52,7 +52,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentLesson(response: CourseInfo.LessonPresentation.Response) {
         self.viewController?.displayLesson(
-            viewModel: CourseInfo.LessonPresentation.ViewModel(unitID: response.unitID)
+            viewModel: .init(unitID: response.unitID, promoCodeName: response.promoCodeName)
         )
     }
 
@@ -104,7 +104,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
-        self.viewController?.displayPreviewLesson(viewModel: .init(previewLessonID: response.previewLessonID))
+        self.viewController?.displayPreviewLesson(
+            viewModel: .init(previewLessonID: response.previewLessonID, promoCodeName: response.promoCodeName)
+        )
     }
 
     func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response) {

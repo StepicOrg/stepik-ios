@@ -538,6 +538,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
         let assembly = LessonAssembly(
             initialContext: .unit(id: viewModel.unitID),
+            promoCodeName: viewModel.promoCodeName,
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
         self.push(module: assembly.makeModule())
@@ -656,6 +657,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel) {
         let assembly = LessonAssembly(
             initialContext: .lesson(id: viewModel.previewLessonID),
+            promoCodeName: viewModel.promoCodeName,
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
         self.push(module: assembly.makeModule())

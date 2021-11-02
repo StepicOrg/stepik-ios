@@ -136,10 +136,12 @@ enum LessonDataFlow {
     enum UnitNavigationFinishedDemoAccessPresentation {
         struct Response {
             let section: Section
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let sectionID: Section.IdType
+            let promoCodeName: String?
         }
     }
 

@@ -34,11 +34,14 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     private var lastLoadState: (context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep?)
 
+    private let promoCodeName: String?
+
     private var didLoadFromCache = false
 
     init(
         initialContext: LessonDataFlow.Context,
         startStep: LessonDataFlow.StartStep?,
+        promoCodeName: String?,
         presenter: LessonPresenterProtocol,
         provider: LessonProviderProtocol,
         unitNavigationService: UnitNavigationServiceProtocol,
@@ -51,6 +54,7 @@ final class LessonInteractor: LessonInteractorProtocol {
         self.persistenceQueuesService = persistenceQueuesService
         self.dataBackUpdateService = dataBackUpdateService
         self.lastLoadState = (initialContext, startStep)
+        self.promoCodeName = promoCodeName
     }
 
     // MARK: Public API
@@ -641,7 +645,7 @@ extension LessonInteractor: StepOutputProtocol {
             }.done { targetLesson in
                 if !targetLesson.canLearnLesson {
                     self.presenter.presentUnitNavigationFinishedDemoAccessState(
-                        response: .init(section: currentSection)
+                        response: .init(section: currentSection, promoCodeName: self.promoCodeName)
                     )
                     seal(true)
                 } else {

@@ -69,10 +69,12 @@ enum CourseInfo {
     enum LessonPresentation {
         struct Response {
             let unitID: Unit.IdType
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let unitID: Unit.IdType
+            let promoCodeName: String?
         }
     }
 
@@ -246,10 +248,12 @@ enum CourseInfo {
 
         struct Response {
             let previewLessonID: Lesson.IdType
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let previewLessonID: Lesson.IdType
+            let promoCodeName: String?
         }
     }
 

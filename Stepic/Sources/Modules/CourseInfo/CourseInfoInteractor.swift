@@ -367,7 +367,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request) {
         if let previewLessonID = self.currentCourse?.previewLessonID {
-            self.presenter.presentPreviewLesson(response: .init(previewLessonID: previewLessonID))
+            self.presenter.presentPreviewLesson(
+                response: .init(previewLessonID: previewLessonID, promoCodeName: self.promoCodeName)
+            )
         }
     }
 
@@ -608,31 +610,21 @@ extension CourseInfoInteractor: LessonOutputProtocol {
 
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     func presentLesson(in unit: Unit) {
-        self.presenter.presentLesson(
-            response: CourseInfo.LessonPresentation.Response(unitID: unit.id)
-        )
+        self.presenter.presentLesson(response: .init(unitID: unit.id, promoCodeName: self.promoCodeName))
     }
 
     func presentPersonalDeadlinesCreation(for course: Course) {
-        self.presenter.presentPersonalDeadlinesSettings(
-            response: .init(action: .create, course: course)
-        )
+        self.presenter.presentPersonalDeadlinesSettings(response: .init(action: .create, course: course))
     }
 
     func presentPersonalDeadlinesSettings(for course: Course) {
-        self.presenter.presentPersonalDeadlinesSettings(
-            response: .init(action: .edit, course: course)
-        )
+        self.presenter.presentPersonalDeadlinesSettings(response: .init(action: .edit, course: course))
     }
 
     func presentExamLesson() {
-        guard let urlPath = self.courseWebSyllabusURLPath else {
-            return
+        if let courseWebSyllabusURLPath = self.courseWebSyllabusURLPath {
+            self.presenter.presentExamLesson(response: .init(urlPath: courseWebSyllabusURLPath))
         }
-
-        self.presenter.presentExamLesson(
-            response: .init(urlPath: urlPath)
-        )
     }
 }
 
