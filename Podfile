@@ -18,7 +18,7 @@ def shared_pods
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.12.1'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-  pod 'DeviceKit', '4.5.1'
+  pod 'DeviceKit', '4.5.2'
   pod 'PromiseKit', '6.15.3'
   pod 'SwiftLint', '0.45.0'
 
