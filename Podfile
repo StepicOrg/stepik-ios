@@ -18,8 +18,8 @@ def shared_pods
   pod 'SwiftyJSON', '5.0.0'
   pod 'SDWebImage', '5.12.1'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-  pod 'DeviceKit', '4.5.1'
-  pod 'PromiseKit', '6.15.3'
+  pod 'DeviceKit', '4.5.2'
+  pod 'PromiseKit', :git => 'https://github.com/mxcl/PromiseKit.git', :tag => '6.16.2'
   pod 'SwiftLint', '0.45.0'
 
   if ENV['FASTLANE_BETA_PROFILE'] == 'true'
@@ -43,15 +43,15 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '8.8.0'
-  pod 'Firebase/Messaging', '8.8.0'
-  pod 'Firebase/Analytics', '8.8.0'
-  pod 'Firebase/Crashlytics', '8.8.0'
-  pod 'Firebase/RemoteConfig', '8.8.0'
+  pod 'Firebase/Core', '8.9.1'
+  pod 'Firebase/Messaging', '8.9.1'
+  pod 'Firebase/Analytics', '8.9.1'
+  pod 'Firebase/Crashlytics', '8.9.1'
+  pod 'Firebase/RemoteConfig', '8.9.1'
 
   pod 'YandexMobileMetrica/Dynamic', '3.17.0'
-  pod 'Amplitude', '8.4.0'
-  pod 'Branch', '1.40.1'
+  pod 'Amplitude', '8.5.0'
+  pod 'Branch', '1.40.2'
 
   pod 'BEMCheckBox', '1.4.1'
 
