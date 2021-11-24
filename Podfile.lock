@@ -179,14 +179,14 @@ PODS:
   - PanModal (1.2.7)
   - pop (1.0.12)
   - Presentr (1.9)
-  - PromiseKit (6.15.3):
-    - PromiseKit/CorePromise (= 6.15.3)
-    - PromiseKit/Foundation (= 6.15.3)
-    - PromiseKit/UIKit (= 6.15.3)
-  - PromiseKit/CorePromise (6.15.3)
-  - PromiseKit/Foundation (6.15.3):
+  - PromiseKit (6.16.1):
+    - PromiseKit/CorePromise (= 6.16.1)
+    - PromiseKit/Foundation (= 6.16.1)
+    - PromiseKit/UIKit (= 6.16.1)
+  - PromiseKit/CorePromise (6.16.1)
+  - PromiseKit/Foundation (6.16.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.15.3):
+  - PromiseKit/UIKit (6.16.1):
     - PromiseKit/CorePromise
   - PromisesObjC (2.0.0)
   - Quick (4.0.0)
@@ -246,7 +246,7 @@ DEPENDENCIES:
   - Nuke (= 9.5.0)
   - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
   - Presentr (from `https://github.com/ivan-magda/Presentr.git`, tag `v1.9.1`)
-  - PromiseKit (= 6.15.3)
+  - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, tag `6.16.2`)
   - Quick (= 4.0.0)
   - SDWebImage (= 5.12.1)
   - SnapKit (= 5.0.1)
@@ -303,7 +303,6 @@ SPEC REPOS:
     - Nuke
     - Pageboy
     - pop
-    - PromiseKit
     - PromisesObjC
     - Quick
     - SDWebImage
@@ -337,6 +336,9 @@ EXTERNAL SOURCES:
   Presentr:
     :git: https://github.com/ivan-magda/Presentr.git
     :tag: v1.9.1
+  PromiseKit:
+    :git: https://github.com/mxcl/PromiseKit.git
+    :tag: 6.16.2
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -357,6 +359,9 @@ CHECKOUT OPTIONS:
   Presentr:
     :git: https://github.com/ivan-magda/Presentr.git
     :tag: v1.9.1
+  PromiseKit:
+    :git: https://github.com/mxcl/PromiseKit.git
+    :tag: 6.16.2
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
@@ -406,7 +411,7 @@ SPEC CHECKSUMS:
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 931d50e158060ea88fbf8f3dd202b17e0bb53eb0
-  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
+  PromiseKit: ad27b174e5d8587cf799888f5e738f88e17055d8
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
@@ -425,6 +430,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: bc5e3608914c1a5fdf846205bf74371b11d56463
+PODFILE CHECKSUM: 4a7940410b99b687e14b15e943d40da565d4d061
 
 COCOAPODS: 1.11.2
