@@ -43,11 +43,11 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '8.8.0'
-  pod 'Firebase/Messaging', '8.8.0'
-  pod 'Firebase/Analytics', '8.8.0'
-  pod 'Firebase/Crashlytics', '8.8.0'
-  pod 'Firebase/RemoteConfig', '8.8.0'
+  pod 'Firebase/Core', '8.9.1'
+  pod 'Firebase/Messaging', '8.9.1'
+  pod 'Firebase/Analytics', '8.9.1'
+  pod 'Firebase/Crashlytics', '8.9.1'
+  pod 'Firebase/RemoteConfig', '8.9.1'
 
   pod 'YandexMobileMetrica/Dynamic', '3.17.0'
   pod 'Amplitude', '8.5.0'
