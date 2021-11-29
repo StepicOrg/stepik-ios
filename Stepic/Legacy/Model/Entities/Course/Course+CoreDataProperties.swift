@@ -15,6 +15,7 @@ extension Course {
     @NSManaged var managedIsProctored: NSNumber?
     @NSManaged var managedIsFavorite: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
+    @NSManaged var managedIsInWishlist: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
     @NSManaged var managedPreviewLessonId: NSNumber?
     @NSManaged var managedPreviewUnitId: NSNumber?
@@ -280,6 +281,15 @@ extension Course {
         }
         set {
             self.managedIsArchived = NSNumber(value: newValue)
+        }
+    }
+
+    var isInWishlist: Bool {
+        get {
+            self.managedIsInWishlist?.boolValue ?? false
+        }
+        set {
+            self.managedIsInWishlist = NSNumber(value: newValue)
         }
     }
 

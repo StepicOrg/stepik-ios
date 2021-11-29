@@ -116,6 +116,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
+        self.isInWishlist = json[JSONKey.isInWishlist.rawValue].boolValue
         self.isProctored = json[JSONKey.isProctored.rawValue].boolValue
         self.readiness = json[JSONKey.readiness.rawValue].float
 
@@ -254,6 +255,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case isPublic = "is_public"
         case isFavorite = "is_favorite"
         case isArchived = "is_archived"
+        case isInWishlist = "is_in_wishlist"
         case readiness
         case summary
         case workload
