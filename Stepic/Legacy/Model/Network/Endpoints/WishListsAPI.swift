@@ -40,4 +40,8 @@ final class WishListsAPI: APIEndpoint {
             return nil
         }
     }
+
+    func deleteFromWishlist(wishlistEntryID: WishlistEntryPlainObject.IdType) -> Promise<Void> {
+        self.delete.request(requestEndpoint: self.name, deletingId: wishlistEntryID, withManager: self.manager)
+    }
 }
