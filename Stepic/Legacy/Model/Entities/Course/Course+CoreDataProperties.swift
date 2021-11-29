@@ -78,6 +78,7 @@ extension Course {
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
     @NSManaged var managedAnnouncements: NSSet?
+    @NSManaged var managedWishlistEntries: NSOrderedSet?
 
     var id: Int {
         set(newId) {
@@ -711,6 +712,15 @@ extension Course {
         }
         set {
             self.managedAnnouncements = NSSet(array: newValue)
+        }
+    }
+
+    var wishlistEntries: [WishlistEntryEntity] {
+        get {
+            self.managedWishlistEntries?.array as? [WishlistEntryEntity] ?? []
+        }
+        set {
+            self.managedWishlistEntries = NSOrderedSet(array: newValue)
         }
     }
 
