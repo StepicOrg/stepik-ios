@@ -2890,6 +2890,7 @@
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9CF0BB2754B79B001089AD /* WishListsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListsAPI.swift; sourceTree = "<group>"; };
 		2C9CF0BD2754B927001089AD /* WishlistEntryPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistEntryPlainObject.swift; sourceTree = "<group>"; };
+		2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_wish_lists_v91.xcdatamodel; sourceTree = "<group>"; };
 		2C9D699A2617303900A0641F /* StepikAcademyCourseListWidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikAcademyCourseListWidgetViewModel.swift; sourceTree = "<group>"; };
 		2C9D69B62617334100A0641F /* CatalogBlockHorizontalCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogBlockHorizontalCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
@@ -14513,6 +14514,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */,
 				2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */,
 				2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */,
 				2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */,
@@ -14605,7 +14607,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */;
+			currentVersion = 2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
