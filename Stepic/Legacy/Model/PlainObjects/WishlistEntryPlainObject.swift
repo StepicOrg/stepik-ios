@@ -12,6 +12,13 @@ struct WishlistEntryPlainObject: JSONSerializable {
 }
 
 extension WishlistEntryPlainObject {
+    var json: JSON {
+        [
+            JSONKey.course.rawValue: self.courseID,
+            JSONKey.platform.rawValue: self.platform
+        ]
+    }
+
     init(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.courseID = json[JSONKey.course.rawValue].intValue
