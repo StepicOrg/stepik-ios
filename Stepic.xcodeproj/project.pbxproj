@@ -3207,6 +3207,7 @@
 		2CECFEE8252F1EDD006BA883 /* VisitedCoursesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesAPI.swift; sourceTree = "<group>"; };
 		2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCourse.swift; sourceTree = "<group>"; };
 		2CECFEF8252F235A006BA883 /* VisitedCoursesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCoursesNetworkService.swift; sourceTree = "<group>"; };
+		2CED149D2756D83E00BB013D /* Model_mobile_tiers_v92.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_mobile_tiers_v92.xcdatamodel; sourceTree = "<group>"; };
 		2CED386226710EFE00854DA3 /* AutoplayNavigationDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoplayNavigationDirection.swift; sourceTree = "<group>"; };
 		2CEDB4042600BD7700CB077F /* StoryPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPart.swift; sourceTree = "<group>"; };
 		2CEDC6412608906F00B0B018 /* CourseRecommendationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseRecommendationsAPI.swift; sourceTree = "<group>"; };
@@ -14590,6 +14591,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CED149D2756D83E00BB013D /* Model_mobile_tiers_v92.xcdatamodel */,
 				2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */,
 				2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */,
 				2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */,
@@ -14683,7 +14685,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */;
+			currentVersion = 2CED149D2756D83E00BB013D /* Model_mobile_tiers_v92.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
