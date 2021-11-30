@@ -10,6 +10,9 @@ protocol CourseInfoProviderProtocol {
 
     func checkPromoCode(name: String) -> Promise<PromoCode>
     func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?>
+
+    func addCourseToWishlist() -> Promise<Void>
+    func deleteCourseFromWishlist() -> Promise<Void>
 }
 
 final class CourseInfoProvider: CourseInfoProviderProtocol {
@@ -31,6 +34,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
     private let promoCodesNetworkService: PromoCodesNetworkServiceProtocol
 
+    private let wishlistRepository: WishlistRepositoryProtocol
+
     private let mobileTiersRepository: MobileTiersRepositoryProtocol
 
     init(
@@ -45,6 +50,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         coursePurchasesNetworkService: CoursePurchasesNetworkServiceProtocol,
         userCoursesNetworkService: UserCoursesNetworkServiceProtocol,
         promoCodesNetworkService: PromoCodesNetworkServiceProtocol,
+        wishlistRepository: WishlistRepositoryProtocol,
         mobileTiersRepository: MobileTiersRepositoryProtocol
     ) {
         self.courseID = courseID
@@ -58,6 +64,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.coursePurchasesNetworkService = coursePurchasesNetworkService
         self.userCoursesNetworkService = userCoursesNetworkService
         self.promoCodesNetworkService = promoCodesNetworkService
+        self.wishlistRepository = wishlistRepository
         self.mobileTiersRepository = mobileTiersRepository
     }
 
@@ -117,6 +124,14 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
     func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
         self.mobileTiersRepository.fetch(courseID: self.courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
+    }
+
+    func addCourseToWishlist() -> Promise<Void> {
+        self.wishlistRepository.addCourseToWishlist(courseID: self.courseID)
+    }
+
+    func deleteCourseFromWishlist() -> Promise<Void> {
+        self.wishlistRepository.deleteCourseFromWishlist(courseID: self.courseID, sourceType: .remote)
     }
 
     // MARK: Private API

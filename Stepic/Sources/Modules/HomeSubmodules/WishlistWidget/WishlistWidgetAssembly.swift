@@ -5,7 +5,7 @@ final class WishlistWidgetAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = WishlistWidgetProvider(
-            wishlistService: WishlistService.default,
+            wishlistRepository: WishlistRepository.default,
             userAccountService: UserAccountService()
         )
         let presenter = WishlistWidgetPresenter()

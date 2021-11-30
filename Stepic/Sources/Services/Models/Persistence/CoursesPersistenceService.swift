@@ -7,6 +7,7 @@ protocol CoursesPersistenceServiceProtocol: AnyObject {
     func fetchEnrolled() -> Guarantee<[Course]>
     func fetchAll() -> Guarantee<[Course]>
     func unenrollAll() -> Promise<Void>
+    func batchUpdateIsInWishlist(id: Course.IdType, isInWishList: Bool) -> Promise<Void>
 }
 
 extension CoursesPersistenceServiceProtocol {
@@ -40,6 +41,28 @@ final class CoursesPersistenceService: BasePersistenceService<Course>, CoursesPe
             let batchUpdateRequest = NSBatchUpdateRequest(entityName: Course.entityName)
             batchUpdateRequest.predicate = NSPredicate(format: "managedEnrolled == %@", NSNumber(value: true))
             batchUpdateRequest.propertiesToUpdate = ["managedEnrolled": NSNumber(value: false)]
+
+            self.managedObjectContext.perform {
+                do {
+                    try self.managedObjectContext.executeAndMergeChanges(using: batchUpdateRequest)
+                    try self.managedObjectContext.save()
+                    seal.fulfill(())
+                } catch {
+                    seal.reject(Error.batchUpdateFailed)
+                }
+            }
+        }
+    }
+
+    func batchUpdateIsInWishlist(id: Course.IdType, isInWishList: Bool) -> Promise<Void> {
+        Promise { seal in
+            let batchUpdateRequest = NSBatchUpdateRequest(entityName: Course.entityName)
+            batchUpdateRequest.predicate = NSPredicate(
+                format: "%K == %@",
+                #keyPath(Course.managedId),
+                NSNumber(value: id)
+            )
+            batchUpdateRequest.propertiesToUpdate = ["managedIsInWishlist": NSNumber(value: isInWishList)]
 
             self.managedObjectContext.perform {
                 do {

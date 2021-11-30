@@ -13,7 +13,6 @@ enum CourseList {
     struct AvailableCourses {
         var fetchedCourses: ListData<(UniqueIdentifierType, Course)>
         var availableAdaptiveCourses: Set<Course>
-        var wishlistCoursesIDs: Set<Course.IdType>
     }
 
     // Use it for module initializing

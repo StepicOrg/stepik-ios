@@ -15,7 +15,6 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         let courses = self.makeWidgetViewModels(
             courses: response.result.fetchedCourses.courses,
             availableInAdaptive: response.result.availableAdaptiveCourses,
-            wishlistCoursesIDs: response.result.wishlistCoursesIDs,
             isAuthorized: response.isAuthorized,
             isCoursePricesEnabled: response.isCoursePricesEnabled,
             coursePurchaseFlow: response.coursePurchaseFlow,
@@ -39,7 +38,6 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             let courses = self.makeWidgetViewModels(
                 courses: data.fetchedCourses.courses,
                 availableInAdaptive: data.availableAdaptiveCourses,
-                wishlistCoursesIDs: data.wishlistCoursesIDs,
                 isAuthorized: response.isAuthorized,
                 isCoursePricesEnabled: response.isCoursePricesEnabled,
                 coursePurchaseFlow: response.coursePurchaseFlow,
@@ -61,7 +59,6 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     private func makeWidgetViewModels(
         courses: [(UniqueIdentifierType, Course)],
         availableInAdaptive: Set<Course>,
-        wishlistCoursesIDs: Set<Course.IdType>,
         isAuthorized: Bool,
         isCoursePricesEnabled: Bool,
         coursePurchaseFlow: CoursePurchaseFlowType,
@@ -74,7 +71,6 @@ final class CourseListPresenter: CourseListPresenterProtocol {
                 uniqueIdentifier: uid,
                 course: course,
                 isAdaptive: isAdaptive,
-                isWishlisted: wishlistCoursesIDs.contains(course.id),
                 isAuthorized: isAuthorized,
                 isCoursePricesEnabled: isCoursePricesEnabled,
                 coursePurchaseFlow: coursePurchaseFlow,
@@ -100,7 +96,6 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         uniqueIdentifier: UniqueIdentifierType,
         course: Course,
         isAdaptive: Bool,
-        isWishlisted: Bool,
         isAuthorized: Bool,
         isCoursePricesEnabled: Bool,
         coursePurchaseFlow: CoursePurchaseFlowType,
@@ -185,7 +180,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             certificateLabelText: certificateLabelText,
             isAdaptive: isAdaptive,
             isEnrolled: isEnrolled,
-            isWishlisted: isWishlisted,
+            isWishlisted: course.isInWishlist,
             isWishlistAvailable: isAuthorized && !course.enrolled,
             progress: progressViewModel,
             userCourse: userCourseViewModel,

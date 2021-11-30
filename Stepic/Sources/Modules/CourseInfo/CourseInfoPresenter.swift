@@ -39,7 +39,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
                 coursePurchaseFlow: data.coursePurchaseFlow,
-                isWishlisted: data.isWishlisted,
                 isWishlistAvailable: data.isWishlistAvailable,
                 isCourseRevenueAvailable: data.isCourseRevenueAvailable,
                 promoCode: data.promoCode,
@@ -269,7 +268,6 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     private func makeHeaderViewModel(
         course: Course,
         coursePurchaseFlow: CoursePurchaseFlowType,
-        isWishlisted: Bool,
         isWishlistAvailable: Bool,
         isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?,
@@ -297,7 +295,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
-            isWishlisted: isWishlisted,
+            isWishlisted: course.isInWishlist,
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,

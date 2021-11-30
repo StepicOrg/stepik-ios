@@ -38,6 +38,7 @@ final class CourseInfoAssembly: Assembly {
             coursePurchasesNetworkService: CoursePurchasesNetworkService(coursePurchasesAPI: CoursePurchasesAPI()),
             userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
             promoCodesNetworkService: PromoCodesNetworkService(promoCodesAPI: PromoCodesAPI()),
+            wishlistRepository: WishlistRepository.default,
             mobileTiersRepository: MobileTiersRepository.default
         )
         let presenter = CourseInfoPresenter(urlFactory: StepikURLFactory())
@@ -72,7 +73,6 @@ final class CourseInfoAssembly: Assembly {
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
             visitedCourseListPersistenceService: visitedCourseListPersistenceService.require(),
-            wishlistService: WishlistService.default,
             urlFactory: StepikURLFactory(),
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,

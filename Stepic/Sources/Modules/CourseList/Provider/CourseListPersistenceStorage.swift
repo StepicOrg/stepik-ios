@@ -54,9 +54,3 @@ final class CreatedCoursesCourseListPersistenceStorage: CourseListPersistenceSto
         self.teacherEntity?.createdCoursesArray ?? []
     }
 }
-
-extension WishlistStorageManager: CourseListPersistenceStorage {
-    func update(newCachedList: [Course.IdType]) {}
-
-    func getCoursesList() -> [Course.IdType] { self.coursesIDs }
-}

@@ -15,14 +15,8 @@ enum CourseSubscriptionSource: String {
 }
 
 protocol CourseSubscriberProtocol {
-    func join(course: Course, source: CourseSubscriptionSource, isWishlisted: Bool?) -> Promise<Course>
+    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course>
     func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course>
-}
-
-extension CourseSubscriberProtocol {
-    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
-        self.join(course: course, source: source, isWishlisted: nil)
-    }
 }
 
 @available(*, deprecated, message: "Legacy code")
@@ -40,23 +34,22 @@ final class CourseSubscriber: CourseSubscriberProtocol {
         self.analytics = analytics
     }
 
-    func join(course: Course, source: CourseSubscriptionSource, isWishlisted: Bool?) -> Promise<Course> {
-        self.performCourseJoinActions(course: course, unsubscribe: false, source: source, isWishlisted: isWishlisted)
+    func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
+        self.performCourseJoinActions(course: course, unsubscribe: false, source: source)
     }
 
     func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
-        self.performCourseJoinActions(course: course, unsubscribe: true, source: source, isWishlisted: nil)
+        self.performCourseJoinActions(course: course, unsubscribe: true, source: source)
     }
 
     private func performCourseJoinActions(
         course: Course,
         unsubscribe: Bool,
-        source: CourseSubscriptionSource,
-        isWishlisted: Bool?
+        source: CourseSubscriptionSource
     ) -> Promise<Course> {
         Promise<Course> { seal in
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: { [weak self] in
-                guard let progressId = course.progressId else {
+                guard let progressID = course.progressId else {
                     seal.reject(CourseSubscriptionError.badResponseFormat)
                     return
                 }
@@ -66,7 +59,12 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                     AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
                     self?.analytics.send(
-                        .courseJoined(source: source, id: course.id, title: course.title, isWishlisted: isWishlisted)
+                        .courseJoined(
+                            source: source,
+                            id: course.id,
+                            title: course.title,
+                            isWishlisted: course.isInWishlist
+                        )
                     )
                     AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
@@ -81,7 +79,7 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                 }
 
                 ApiDataDownloader.progresses.retrieve(
-                    ids: [progressId],
+                    ids: [progressID],
                     existing: course.progress != nil ? [course.progress!] : [],
                     refreshMode: .update,
                     success: { progresses in

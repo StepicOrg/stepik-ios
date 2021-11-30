@@ -57,6 +57,7 @@ class CourseListAssembly: Assembly {
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
             ),
             courseListsPersistenceService: CourseListsPersistenceService(),
+            wishlistEntriesPersistenceService: WishlistEntriesPersistenceService(),
             mobileTiersRepository: MobileTiersRepository.default,
             iapService: IAPService.shared,
             remoteConfig: RemoteConfig.shared
@@ -80,7 +81,6 @@ class CourseListAssembly: Assembly {
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
             personalDeadlinesService: PersonalDeadlinesService(),
-            wishlistService: WishlistService.default,
             courseListDataBackUpdateService: courseListDataBackUpdateService,
             analytics: StepikAnalytics.shared,
             courseViewSource: self.courseViewSource,
