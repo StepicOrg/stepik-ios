@@ -6,15 +6,10 @@ final class WishListsAPI: APIEndpoint {
     override var name: String { "wish-lists" }
 
     func retrieveWishlist(page: Int = 1) -> Promise<([WishlistEntryPlainObject], Meta)> {
-        let params: Parameters = [
-            "platform": PlatformType.mobile.stringValue,
-            "page": page
-        ]
-
-        return self.retrieve.request(
+        self.retrieve.request(
             requestEndpoint: self.name,
             paramName: self.name,
-            params: params,
+            params: ["page": page],
             withManager: self.manager
         )
     }
@@ -23,7 +18,7 @@ final class WishListsAPI: APIEndpoint {
         self.retrieve.requestWithCollectAllPages(
             requestEndpoint: self.name,
             paramName: self.name,
-            params: ["platform": PlatformType.mobile.stringValue],
+            params: [:],
             withManager: self.manager
         )
     }
