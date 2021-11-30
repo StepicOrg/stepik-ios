@@ -15,6 +15,7 @@ extension Course {
     @NSManaged var managedIsProctored: NSNumber?
     @NSManaged var managedIsFavorite: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
+    @NSManaged var managedIsInWishlist: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
     @NSManaged var managedPreviewLessonId: NSNumber?
     @NSManaged var managedPreviewUnitId: NSNumber?
@@ -78,6 +79,7 @@ extension Course {
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
     @NSManaged var managedAnnouncements: NSSet?
+    @NSManaged var managedWishlistEntries: NSOrderedSet?
 
     var id: Int {
         set(newId) {
@@ -279,6 +281,15 @@ extension Course {
         }
         set {
             self.managedIsArchived = NSNumber(value: newValue)
+        }
+    }
+
+    var isInWishlist: Bool {
+        get {
+            self.managedIsInWishlist?.boolValue ?? false
+        }
+        set {
+            self.managedIsInWishlist = NSNumber(value: newValue)
         }
     }
 
@@ -711,6 +722,15 @@ extension Course {
         }
         set {
             self.managedAnnouncements = NSSet(array: newValue)
+        }
+    }
+
+    var wishlistEntries: [WishlistEntryEntity] {
+        get {
+            self.managedWishlistEntries?.array as? [WishlistEntryEntity] ?? []
+        }
+        set {
+            self.managedWishlistEntries = NSOrderedSet(array: newValue)
         }
     }
 

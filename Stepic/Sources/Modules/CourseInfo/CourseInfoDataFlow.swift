@@ -42,7 +42,6 @@ enum CourseInfo {
         struct Response {
             struct Data {
                 let course: Course
-                let isWishlisted: Bool
                 let isWishlistAvailable: Bool
                 let isCourseRevenueAvailable: Bool
                 let promoCode: PromoCode?

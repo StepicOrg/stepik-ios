@@ -4,8 +4,12 @@ import PromiseKit
 protocol CourseListProviderProtocol: AnyObject {
     func fetchCached() -> Promise<([Course], Meta)>
     func fetchRemote(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)>
+
     func cache(courses: [Course])
+
     func fetchCachedCourseList() -> Guarantee<CourseListModel?>
+
+    func fetchWishlist() -> Guarantee<[Course.IdType]>
 }
 
 extension CourseListProviderProtocol {
@@ -22,6 +26,7 @@ final class CourseListProvider: CourseListProviderProtocol {
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
     private let reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol
     private let courseListsPersistenceService: CourseListsPersistenceServiceProtocol
+    private let wishlistEntriesPersistenceService: WishlistEntriesPersistenceServiceProtocol
 
     private let iapService: IAPServiceProtocol
 
@@ -32,6 +37,7 @@ final class CourseListProvider: CourseListProviderProtocol {
         progressesNetworkService: ProgressesNetworkServiceProtocol,
         reviewSummariesNetworkService: CourseReviewSummariesNetworkServiceProtocol,
         courseListsPersistenceService: CourseListsPersistenceServiceProtocol,
+        wishlistEntriesPersistenceService: WishlistEntriesPersistenceServiceProtocol,
         iapService: IAPServiceProtocol
     ) {
         self.type = type
@@ -40,6 +46,7 @@ final class CourseListProvider: CourseListProviderProtocol {
         self.progressesNetworkService = progressesNetworkService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
         self.courseListsPersistenceService = courseListsPersistenceService
+        self.wishlistEntriesPersistenceService = wishlistEntriesPersistenceService
         self.iapService = iapService
     }
 
@@ -108,6 +115,10 @@ final class CourseListProvider: CourseListProviderProtocol {
         }
 
         return self.courseListsPersistenceService.fetch(id: catalogBlockCourseList.courseListID)
+    }
+
+    func fetchWishlist() -> Guarantee<[Course.IdType]> {
+        self.wishlistEntriesPersistenceService.fetchAll().mapValues(\.courseID)
     }
 
     // MARK: - Private API

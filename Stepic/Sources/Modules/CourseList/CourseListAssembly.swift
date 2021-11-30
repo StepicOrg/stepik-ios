@@ -57,6 +57,7 @@ class CourseListAssembly: Assembly {
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
             ),
             courseListsPersistenceService: CourseListsPersistenceService(),
+            wishlistEntriesPersistenceService: WishlistEntriesPersistenceService(),
             iapService: IAPService.shared
         )
 
@@ -78,7 +79,6 @@ class CourseListAssembly: Assembly {
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
             personalDeadlinesService: PersonalDeadlinesService(),
-            wishlistService: WishlistService.default,
             courseListDataBackUpdateService: courseListDataBackUpdateService,
             analytics: StepikAnalytics.shared,
             courseViewSource: self.courseViewSource,

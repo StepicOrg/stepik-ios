@@ -392,18 +392,18 @@ class BaseCacheCoursesIDsSourceCourseListNetworkService: BaseCourseListNetworkSe
 }
 
 final class WishlistCourseListNetworkService: BaseCacheCoursesIDsSourceCourseListNetworkService {
-    private let wishlistStorageManager: WishlistStorageManagerProtocol
+    private let wishlistEntriesPersistenceService: WishlistEntriesPersistenceServiceProtocol
 
     init(
         coursesAPI: CoursesAPI,
-        wishlistStorageManager: WishlistStorageManagerProtocol
+        wishlistEntriesPersistenceService: WishlistEntriesPersistenceServiceProtocol
     ) {
-        self.wishlistStorageManager = wishlistStorageManager
+        self.wishlistEntriesPersistenceService = wishlistEntriesPersistenceService
         super.init(coursesAPI: coursesAPI)
     }
 
     override func getCoursesIDs() -> Promise<[Course.IdType]> {
-        .value(self.wishlistStorageManager.coursesIDs)
+        self.wishlistEntriesPersistenceService.fetchAll().mapValues(\.courseID)
     }
 }
 
