@@ -10,8 +10,6 @@ final class WishlistEntryEntity: NSManagedObject, ManagedObject, Identifiable {
             NSSortDescriptor(key: #keyPath(managedId), ascending: false)
         ]
     }
-
-    var platformType: PlatformType? { PlatformType(self.platform) }
 }
 
 // MARK: - WishlistEntryEntity (PlainObject Support) -

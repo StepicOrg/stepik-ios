@@ -23,25 +23,6 @@ enum PlatformType: Int {
     }
 }
 
-extension PlatformType {
-    init?(_ value: String) {
-        switch value {
-        case "web":
-            self = .web
-        case "mobile":
-            self = .mobile
-        case "sunion_plugin":
-            self = .sunionPlugin
-        case "android":
-            self = .android
-        case "ios":
-            self = .ios
-        default:
-            return nil
-        }
-    }
-}
-
 struct PlatformOptionSet: OptionSet {
     let rawValue: Int
 

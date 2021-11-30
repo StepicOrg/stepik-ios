@@ -7,8 +7,6 @@ struct WishlistEntryPlainObject: JSONSerializable {
     let userID: Int
     let createDate: Date?
     let platform: String
-
-    var platformType: PlatformType? { PlatformType(self.platform) }
 }
 
 extension WishlistEntryPlainObject {
