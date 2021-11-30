@@ -2,6 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol WishListsNetworkServiceProtocol: AnyObject {
+    func fetchWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?>
     func fetchWishlistEntries() -> Promise<[WishlistEntryPlainObject]>
 
     func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject>
@@ -14,6 +15,10 @@ final class WishListsNetworkService: WishListsNetworkServiceProtocol {
 
     init(wishListsAPI: WishListsAPI) {
         self.wishListsAPI = wishListsAPI
+    }
+
+    func fetchWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?> {
+        self.wishListsAPI.retrieveWishlistEntry(courseID: courseID)
     }
 
     func fetchWishlistEntries() -> Promise<[WishlistEntryPlainObject]> {

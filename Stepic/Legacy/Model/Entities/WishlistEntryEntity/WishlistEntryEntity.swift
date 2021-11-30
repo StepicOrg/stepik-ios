@@ -5,7 +5,10 @@ final class WishlistEntryEntity: NSManagedObject, ManagedObject, Identifiable {
     typealias IdType = Int
 
     static var defaultSortDescriptors: [NSSortDescriptor] {
-        [NSSortDescriptor(key: #keyPath(managedCreateDate), ascending: false)]
+        [
+            NSSortDescriptor(key: #keyPath(managedCreateDate), ascending: false),
+            NSSortDescriptor(key: #keyPath(managedId), ascending: false)
+        ]
     }
 
     var platformType: PlatformType? { PlatformType(self.platform) }

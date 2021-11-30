@@ -65,6 +65,12 @@ final class WishlistRepository: WishlistRepositoryProtocol {
             if sourceType == .remote {
                 return self.wishlistEntriesPersistenceService
                     .fetch(courseID: courseID)
+                    .then { cachedWishlistEntry -> Promise<WishlistEntryPlainObject?> in
+                        if let cachedWishlistEntry = cachedWishlistEntry {
+                            return .value(cachedWishlistEntry.plainObject)
+                        }
+                        return self.wishListsNetworkService.fetchWishlistEntry(courseID: courseID)
+                    }
                     .compactMap { $0 }
                     .then { self.wishListsNetworkService.deleteWishlistEntry(wishlistEntryID: $0.id) }
             }

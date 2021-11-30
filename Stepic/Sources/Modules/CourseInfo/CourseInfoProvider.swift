@@ -11,7 +11,7 @@ protocol CourseInfoProviderProtocol {
     func checkPromoCode(name: String) -> Promise<PromoCode>
 
     func addCourseToWishlist() -> Promise<Void>
-    func deleteCourseFromWishlist(sourceType: DataSourceType) -> Promise<Void>
+    func deleteCourseFromWishlist() -> Promise<Void>
 }
 
 final class CourseInfoProvider: CourseInfoProviderProtocol {
@@ -121,8 +121,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.wishlistRepository.addCourseToWishlist(courseID: self.courseID)
     }
 
-    func deleteCourseFromWishlist(sourceType: DataSourceType) -> Promise<Void> {
-        self.wishlistRepository.deleteCourseFromWishlist(courseID: self.courseID, sourceType: sourceType)
+    func deleteCourseFromWishlist() -> Promise<Void> {
+        self.wishlistRepository.deleteCourseFromWishlist(courseID: self.courseID, sourceType: .remote)
     }
 
     // MARK: Private API

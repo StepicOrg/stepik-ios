@@ -57,6 +57,7 @@ class CourseListAssembly: Assembly {
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
             ),
             courseListsPersistenceService: CourseListsPersistenceService(),
+            wishlistEntriesPersistenceService: WishlistEntriesPersistenceService(),
             iapService: IAPService.shared
         )
 

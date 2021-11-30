@@ -5,6 +5,17 @@ import PromiseKit
 final class WishListsAPI: APIEndpoint {
     override var name: String { "wish-lists" }
 
+    func retrieveWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?> {
+        self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: ["course": courseID],
+            withManager: self.manager
+        ).then { wishlistEntries, _ -> Promise<WishlistEntryPlainObject?> in
+            return .value(wishlistEntries.first)
+        }
+    }
+
     func retrieveWishlist(page: Int = 1) -> Promise<([WishlistEntryPlainObject], Meta)> {
         self.retrieve.request(
             requestEndpoint: self.name,
