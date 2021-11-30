@@ -3100,7 +3100,6 @@
 		2CD04083250F67D0004D284F /* ProcessedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContent.swift; sourceTree = "<group>"; };
 		2CD063E5242A8D950052134F /* UIActivityIndicatorViewStyle+Fallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorViewStyle+Fallback.swift"; sourceTree = "<group>"; };
 		2CD1D9E3272A960D0031C78E /* MobileTiersNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTiersNetworkService.swift; sourceTree = "<group>"; };
-		2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_mobile_tiers_v91.xcdatamodel; sourceTree = "<group>"; };
 		2CD1D9E7272A9D580031C78E /* MobileTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTier.swift; sourceTree = "<group>"; };
 		2CD1D9E9272A9D680031C78E /* MobileTier+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MobileTier+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
@@ -14562,7 +14561,6 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */,
 				2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */,
 				2C55B7D326FA66ED0022B822 /* Model_announcements_v89.xcdatamodel */,
 				2C1966A626E797B3000D5B06 /* Model_announcements_v88.xcdatamodel */,
@@ -14655,7 +14653,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CD1D9E5272A9CDC0031C78E /* Model_mobile_tiers_v91.xcdatamodel */;
+			currentVersion = 2C4B971E270362D600B3AA8F /* Model_user_course_can_be_reviewed_v90.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
