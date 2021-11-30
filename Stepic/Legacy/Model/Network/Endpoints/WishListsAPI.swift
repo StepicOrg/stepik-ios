@@ -5,7 +5,7 @@ import PromiseKit
 final class WishListsAPI: APIEndpoint {
     override var name: String { "wish-lists" }
 
-    func getWishlist(page: Int = 1) -> Promise<([WishlistEntryPlainObject], Meta)> {
+    func retrieveWishlist(page: Int = 1) -> Promise<([WishlistEntryPlainObject], Meta)> {
         let params: Parameters = [
             "platform": PlatformType.mobile.stringValue,
             "page": page
@@ -19,7 +19,16 @@ final class WishListsAPI: APIEndpoint {
         )
     }
 
-    func addToWishlist(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject> {
+    func retrieveAllWishlistPages() -> Promise<[WishlistEntryPlainObject]> {
+        self.retrieve.requestWithCollectAllPages(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: ["platform": PlatformType.mobile.stringValue],
+            withManager: self.manager
+        )
+    }
+
+    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject> {
         let wishlistEntryToAdd = WishlistEntryPlainObject(
             id: -1,
             courseID: courseID,
@@ -41,7 +50,7 @@ final class WishListsAPI: APIEndpoint {
         }
     }
 
-    func deleteFromWishlist(wishlistEntryID: WishlistEntryPlainObject.IdType) -> Promise<Void> {
+    func deleteWishlistEntry(wishlistEntryID: WishlistEntryPlainObject.IdType) -> Promise<Void> {
         self.delete.request(requestEndpoint: self.name, deletingId: wishlistEntryID, withManager: self.manager)
     }
 }

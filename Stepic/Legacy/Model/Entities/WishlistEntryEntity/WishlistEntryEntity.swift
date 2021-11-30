@@ -29,13 +29,15 @@ extension WishlistEntryEntity {
         wishlistEntry: WishlistEntryPlainObject
     ) -> WishlistEntryEntity {
         let entity: WishlistEntryEntity = context.insertObject()
-
-        entity.id = wishlistEntry.id
-        entity.courseID = wishlistEntry.courseID
-        entity.userID = wishlistEntry.userID
-        entity.createDate = wishlistEntry.createDate
-        entity.platform = wishlistEntry.platform
-
+        entity.update(wishlistEntry: wishlistEntry)
         return entity
+    }
+
+    func update(wishlistEntry: WishlistEntryPlainObject) {
+        self.id = wishlistEntry.id
+        self.courseID = wishlistEntry.courseID
+        self.userID = wishlistEntry.userID
+        self.createDate = wishlistEntry.createDate
+        self.platform = wishlistEntry.platform
     }
 }

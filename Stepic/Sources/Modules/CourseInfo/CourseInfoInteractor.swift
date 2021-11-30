@@ -33,7 +33,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
-    private let wishlistService: WishlistServiceProtocol
     private let urlFactory: StepikURLFactory
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
@@ -107,7 +106,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
         visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol,
-        wishlistService: WishlistServiceProtocol,
         urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
@@ -126,7 +124,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
-        self.wishlistService = wishlistService
         self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
