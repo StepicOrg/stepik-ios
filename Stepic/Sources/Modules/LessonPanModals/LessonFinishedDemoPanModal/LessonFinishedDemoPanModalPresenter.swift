@@ -8,14 +8,32 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
     weak var viewController: LessonFinishedDemoPanModalViewControllerProtocol?
 
     func presentModal(response: LessonFinishedDemoPanModal.ModalLoad.Response) {
+        let course = response.course
+        let mobileTier = response.mobileTier
+
         let title = String(
             format: NSLocalizedString("LessonFinishedDemoPanModalTitle", comment: ""),
             arguments: [response.section.title]
         )
 
+        let displayPrice: String? = {
+            switch response.coursePurchaseFlow {
+            case .web:
+                return course.displayPriceIAP ?? course.displayPrice
+            case .iap:
+                if let promoTierDisplayPrice = mobileTier?.promoTierDisplayPrice {
+                    return promoTierDisplayPrice
+                } else if let priceTierDisplayPrice = mobileTier?.priceTierDisplayPrice {
+                    return priceTierDisplayPrice
+                } else {
+                    return course.displayPrice
+                }
+            }
+        }()
+
         let actionButtonTitle = String(
             format: NSLocalizedString("WidgetButtonBuy", comment: ""),
-            arguments: [response.course.displayPrice ?? "N/A"]
+            arguments: [displayPrice ?? "N/A"]
         )
 
         self.viewController?.displayModal(

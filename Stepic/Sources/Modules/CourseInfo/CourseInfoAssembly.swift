@@ -38,7 +38,8 @@ final class CourseInfoAssembly: Assembly {
             coursePurchasesNetworkService: CoursePurchasesNetworkService(coursePurchasesAPI: CoursePurchasesAPI()),
             userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
             promoCodesNetworkService: PromoCodesNetworkService(promoCodesAPI: PromoCodesAPI()),
-            wishlistRepository: WishlistRepository.default
+            wishlistRepository: WishlistRepository.default,
+            mobileTiersRepository: MobileTiersRepository.default
         )
         let presenter = CourseInfoPresenter(urlFactory: StepikURLFactory())
 

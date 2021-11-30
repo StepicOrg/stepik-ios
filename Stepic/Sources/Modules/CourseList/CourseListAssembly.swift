@@ -58,7 +58,9 @@ class CourseListAssembly: Assembly {
             ),
             courseListsPersistenceService: CourseListsPersistenceService(),
             wishlistEntriesPersistenceService: WishlistEntriesPersistenceService(),
-            iapService: IAPService.shared
+            mobileTiersRepository: MobileTiersRepository.default,
+            iapService: IAPService.shared,
+            remoteConfig: RemoteConfig.shared
         )
 
         let dataBackUpdateService = DataBackUpdateService(
