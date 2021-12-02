@@ -109,6 +109,8 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
         case .loading:
             self.courseInfoPurchaseModalView?.showLoading()
+        case .error:
+            fatalError("handle this")
         }
 
         self.state = newState

@@ -2,9 +2,10 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoPurchaseModalProviderProtocol {
-    func fetchCourseFromCache() -> Promise<Course?>
-    func fetchCourseFromRemote() -> Promise<Course?>
-    func fetchCourseFromCacheOrRemote() -> Promise<Course?>
+    func fetchCourse() -> Promise<Course?>
+
+    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?>
+    func fetchMobileTierFromCache(mobileTierID: MobileTier.IdType) -> Guarantee<MobileTier?>
 }
 
 final class CourseInfoPurchaseModalProvider: CourseInfoPurchaseModalProviderProtocol {
@@ -12,46 +13,30 @@ final class CourseInfoPurchaseModalProvider: CourseInfoPurchaseModalProviderProt
 
     private let coursesRepository: CoursesRepositoryProtocol
 
+    private let mobileTiersRepository: MobileTiersRepositoryProtocol
+    private let mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol
+
     init(
         courseID: Course.IdType,
-        coursesRepository: CoursesRepositoryProtocol
+        coursesRepository: CoursesRepositoryProtocol,
+        mobileTiersRepository: MobileTiersRepositoryProtocol,
+        mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol
     ) {
         self.courseID = courseID
         self.coursesRepository = coursesRepository
+        self.mobileTiersRepository = mobileTiersRepository
+        self.mobileTiersPersistenceService = mobileTiersPersistenceService
     }
 
-    func fetchCourseFromCache() -> Promise<Course?> {
-        Promise { seal in
-            self.coursesRepository.fetch(id: self.courseID, dataSourceType: .cache).done { course in
-                seal.fulfill(course)
-            }.catch { _ in
-                seal.reject(Error.persistenceFetchFailed)
-            }
-        }
+    func fetchCourse() -> Promise<Course?> {
+        self.coursesRepository.fetch(id: self.courseID, fetchPolicy: .remoteFirst)
     }
 
-    func fetchCourseFromRemote() -> Promise<Course?> {
-        Promise { seal in
-            self.coursesRepository.fetch(id: self.courseID, dataSourceType: .remote).done { course in
-                seal.fulfill(course)
-            }.catch { _ in
-                seal.reject(Error.networkFetchFailed)
-            }
-        }
+    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
+        self.mobileTiersRepository.fetch(courseID: self.courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
     }
 
-    func fetchCourseFromCacheOrRemote() -> Promise<Course?> {
-        Promise { seal in
-            self.coursesRepository.fetch(id: self.courseID, fetchPolicy: .cacheFirst).done { course in
-                seal.fulfill(course)
-            }.catch { _ in
-                seal.reject(Error.networkFetchFailed)
-            }
-        }
-    }
-
-    enum Error: Swift.Error {
-        case persistenceFetchFailed
-        case networkFetchFailed
+    func fetchMobileTierFromCache(mobileTierID: MobileTier.IdType) -> Guarantee<MobileTier?> {
+        self.mobileTiersPersistenceService.fetch(id: mobileTierID)
     }
 }
