@@ -159,6 +159,12 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
         self.dismiss(animated: true)
     }
 
+    func courseInfoPurchaseModalViewDidRevealPromoCodeInput(_ view: CourseInfoPurchaseModalView) {
+        if let currentPresentationState = self.currentPresentationState {
+            self.transition(to: currentPresentationState)
+        }
+    }
+
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL) {
         WebControllerManager.shared.presentWebControllerWithURL(
             link,

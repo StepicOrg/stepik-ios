@@ -3,6 +3,7 @@ import UIKit
 
 protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
     func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidRevealPromoCodeInput(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL)
     func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView)
@@ -111,6 +112,15 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
             }
 
             strongSelf.delegate?.courseInfoPurchaseModalViewDidClickCloseButton(strongSelf)
+        }
+
+        self.promoCodeView.onInputReveal = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.invalidateIntrinsicContentSize()
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidRevealPromoCodeInput(strongSelf)
         }
 
         self.disclaimerView.onLinkClick = { [weak self] link in

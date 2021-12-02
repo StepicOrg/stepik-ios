@@ -104,6 +104,8 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         }
     }
 
+    var onInputReveal: (() -> Void)?
+
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return CGSize(width: UIView.noIntrinsicMetric, height: stackViewIntrinsicContentSize.height)
@@ -176,6 +178,9 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
     @objc
     private func revealInputButtonClicked() {
         self.state = .typing
+
+        self.invalidateIntrinsicContentSize()
+        self.onInputReveal?()
     }
 
     @objc

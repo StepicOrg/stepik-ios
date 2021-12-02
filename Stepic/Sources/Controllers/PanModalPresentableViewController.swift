@@ -23,6 +23,8 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
 
     var isShortFormEnabled = true
 
+    var currentPresentationState: PanModalPresentationController.PresentationState?
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -49,6 +51,9 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
     }
 
     func willTransition(to state: PanModalPresentationController.PresentationState) {
+        self.currentPresentationState = state
+
+        // Transition from shortForm to longForm
         guard self.isShortFormEnabled, case .longForm = state else {
             return
         }
