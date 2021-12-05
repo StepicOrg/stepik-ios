@@ -5,6 +5,7 @@ protocol CourseInfoPurchaseModalInteractorProtocol {
     func doModalLoad(request: CourseInfoPurchaseModal.ModalLoad.Request)
     func doCheckPromoCode(request: CourseInfoPurchaseModal.CheckPromoCode.Request)
     func doPromoCodeDidChange(request: CourseInfoPurchaseModal.PromoCodeDidChange.Request)
+    func doWishlistMainAction(request: CourseInfoPurchaseModal.WishlistMainAction.Request)
 }
 
 final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractorProtocol {
@@ -117,6 +118,25 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
             )
 
             self.presenter.presentModal(response: .init(result: .success(data)))
+        }
+    }
+
+    func doWishlistMainAction(request: CourseInfoPurchaseModal.WishlistMainAction.Request) {
+        guard let currentCourse = self.currentCourse else {
+            return
+        }
+
+        if currentCourse.isInWishlist {
+            self.presenter.presentFullscreenWishlistCourseList(response: .init())
+        } else {
+            self.presenter.presentAddCourseToWishlistResult(response: .init(state: .loading))
+
+            self.provider.addCourseToWishlist().done {
+                self.presenter.presentAddCourseToWishlistResult(response: .init(state: .success))
+                self.moduleOutput?.handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: self.courseID)
+            }.catch { _ in
+                self.presenter.presentAddCourseToWishlistResult(response: .init(state: .error))
+            }
         }
     }
 

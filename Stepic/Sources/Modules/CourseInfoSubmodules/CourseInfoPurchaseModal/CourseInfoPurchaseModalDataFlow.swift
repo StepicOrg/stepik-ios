@@ -41,6 +41,41 @@ enum CourseInfoPurchaseModal {
         }
     }
 
+    /// Add course to withlist or present fullscreen wishlist course list
+    enum WishlistMainAction {
+        struct Request {}
+    }
+
+    /// Add course to withlist result
+    enum AddCourseToWishlist {
+        struct Response {
+            let state: State
+
+            enum State {
+                case loading
+                case error
+                case success
+            }
+        }
+
+        struct ViewModel {
+            let state: State
+
+            enum State {
+                case loading(CourseInfoPurchaseModalWishlistViewModel)
+                case error(message: String)
+                case result(message: String, data: CourseInfoPurchaseModalWishlistViewModel)
+            }
+        }
+    }
+
+    /// Present fullscreen wishlist course list
+    enum FullscreenWishlistCourseListPresentation {
+        struct Response {}
+
+        struct ViewModel {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {

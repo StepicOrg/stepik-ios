@@ -26,7 +26,8 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
             courseID: self.courseID,
             coursesRepository: CoursesRepository.default,
             mobileTiersRepository: MobileTiersRepository.default,
-            mobileTiersPersistenceService: MobileTiersPersistenceService()
+            mobileTiersPersistenceService: MobileTiersPersistenceService(),
+            wishlistRepository: WishlistRepository.default
         )
         let presenter = CourseInfoPurchaseModalPresenter()
         let interactor = CourseInfoPurchaseModalInteractor(

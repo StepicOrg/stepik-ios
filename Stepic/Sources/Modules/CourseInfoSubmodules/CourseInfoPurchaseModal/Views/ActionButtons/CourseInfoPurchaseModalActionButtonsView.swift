@@ -98,6 +98,10 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         }
     }
 
+    func configureWishlistButton(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
+        self.wishlistButton.text = viewModel.title
+    }
+
     // MARK: Private API
 
     @objc

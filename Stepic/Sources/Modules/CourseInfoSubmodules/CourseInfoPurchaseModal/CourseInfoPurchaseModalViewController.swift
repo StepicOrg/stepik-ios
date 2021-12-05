@@ -6,6 +6,10 @@ import UIKit
 protocol CourseInfoPurchaseModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel)
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel)
+    func displayAddCourseToWishlistResult(viewModel: CourseInfoPurchaseModal.AddCourseToWishlist.ViewModel)
+    func displayFullscreenWishlistCourseList(
+        viewModel: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.ViewModel
+    )
 }
 
 final class CourseInfoPurchaseModalViewController: PanModalPresentableViewController {
@@ -166,6 +170,29 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
 
         self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
     }
+
+    func displayAddCourseToWishlistResult(viewModel: CourseInfoPurchaseModal.AddCourseToWishlist.ViewModel) {
+        switch viewModel.state {
+        case .loading(let viewModel):
+            self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+        case .error(let message):
+            SVProgressHUD.showError(withStatus: message)
+        case .result(let message, let viewModel):
+            SVProgressHUD.showSuccess(withStatus: message)
+            self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+        }
+    }
+
+    func displayFullscreenWishlistCourseList(
+        viewModel: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.ViewModel
+    ) {
+        let assembly = FullscreenCourseListAssembly(
+            presentationDescription: .init(title: NSLocalizedString("WishlistWidgetTitle", comment: "")),
+            courseListType: WishlistCourseListType(),
+            courseViewSource: .unknown // TODO: Proper courseViewSource
+        )
+        self.present(module: assembly.makeModule(), embedInNavigation: true)
+    }
 }
 
 // MARK: - CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDelegate -
@@ -209,6 +236,6 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
     }
 
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView) {
-        print(#function)
+        self.interactor.doWishlistMainAction(request: .init())
     }
 }

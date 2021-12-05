@@ -6,6 +6,8 @@ protocol CourseInfoPurchaseModalProviderProtocol {
 
     func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?>
     func fetchMobileTierFromCache(mobileTierID: MobileTier.IdType) -> Guarantee<MobileTier?>
+
+    func addCourseToWishlist() -> Promise<Void>
 }
 
 final class CourseInfoPurchaseModalProvider: CourseInfoPurchaseModalProviderProtocol {
@@ -16,16 +18,20 @@ final class CourseInfoPurchaseModalProvider: CourseInfoPurchaseModalProviderProt
     private let mobileTiersRepository: MobileTiersRepositoryProtocol
     private let mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol
 
+    private let wishlistRepository: WishlistRepositoryProtocol
+
     init(
         courseID: Course.IdType,
         coursesRepository: CoursesRepositoryProtocol,
         mobileTiersRepository: MobileTiersRepositoryProtocol,
-        mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol
+        mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol,
+        wishlistRepository: WishlistRepositoryProtocol
     ) {
         self.courseID = courseID
         self.coursesRepository = coursesRepository
         self.mobileTiersRepository = mobileTiersRepository
         self.mobileTiersPersistenceService = mobileTiersPersistenceService
+        self.wishlistRepository = wishlistRepository
     }
 
     func fetchCourse() -> Promise<Course?> {
@@ -38,5 +44,9 @@ final class CourseInfoPurchaseModalProvider: CourseInfoPurchaseModalProviderProt
 
     func fetchMobileTierFromCache(mobileTierID: MobileTier.IdType) -> Guarantee<MobileTier?> {
         self.mobileTiersPersistenceService.fetch(id: mobileTierID)
+    }
+
+    func addCourseToWishlist() -> Promise<Void> {
+        self.wishlistRepository.addCourseToWishlist(courseID: self.courseID)
     }
 }

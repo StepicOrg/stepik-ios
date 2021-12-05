@@ -690,3 +690,15 @@ extension CourseInfoInteractor: IAPServiceDelegate {
         }
     }
 }
+
+// MARK: - CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol -
+
+extension CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol {
+    func handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: Course.IdType) {
+        guard self.courseID == courseID else {
+            return
+        }
+
+        self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+    }
+}

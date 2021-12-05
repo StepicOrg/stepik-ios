@@ -3,6 +3,10 @@ import UIKit
 protocol CourseInfoPurchaseModalPresenterProtocol {
     func presentModal(response: CourseInfoPurchaseModal.ModalLoad.Response)
     func presentCheckPromoCodeResult(response: CourseInfoPurchaseModal.CheckPromoCode.Response)
+    func presentAddCourseToWishlistResult(response: CourseInfoPurchaseModal.AddCourseToWishlist.Response)
+    func presentFullscreenWishlistCourseList(
+        response: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.Response
+    )
 }
 
 final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterProtocol {
@@ -28,6 +32,29 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
         }
     }
 
+    func presentAddCourseToWishlistResult(response: CourseInfoPurchaseModal.AddCourseToWishlist.Response) {
+        switch response.state {
+        case .loading:
+            let viewModel = self.makeWishlistViewModel(isInWishlist: false, isLoading: true)
+            self.viewController?.displayAddCourseToWishlistResult(viewModel: .init(state: .loading(viewModel)))
+        case .error:
+            let message = NSLocalizedString("CourseInfoAddToWishlistFailureMessage", comment: "")
+            self.viewController?.displayAddCourseToWishlistResult(viewModel: .init(state: .error(message: message)))
+        case .success:
+            let message = NSLocalizedString("CourseInfoAddToWishlistSuccessMessage", comment: "")
+            let viewModel = self.makeWishlistViewModel(isInWishlist: true, isLoading: false)
+            self.viewController?.displayAddCourseToWishlistResult(
+                viewModel: .init(state: .result(message: message, data: viewModel))
+            )
+        }
+    }
+
+    func presentFullscreenWishlistCourseList(
+        response: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.Response
+    ) {
+        self.viewController?.displayFullscreenWishlistCourseList(viewModel: .init())
+    }
+
     // MARK: Private API
 
     private func makeModalViewModel(
@@ -35,12 +62,13 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
         mobileTier: MobileTierPlainObject
     ) -> CourseInfoPurchaseModalViewModel {
         let priceViewModel = self.makePriceViewModel(course: course, mobileTier: mobileTier)
+        let wishlistViewModel = self.makeWishlistViewModel(isInWishlist: course.isInWishlist)
 
         return CourseInfoPurchaseModalViewModel(
             courseTitle: course.title,
             courseCoverImageURL: URL(string: course.coverURLString),
             price: priceViewModel,
-            isInWishList: course.isInWishlist
+            wishlist: wishlistViewModel
         )
     }
 
@@ -55,6 +83,26 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
             displayPrice: displayPrice,
             promoDisplayPrice: promoDisplayPrice,
             promoCodeName: mobileTier.promoCodeName
+        )
+    }
+
+    private func makeWishlistViewModel(
+        isInWishlist: Bool,
+        isLoading: Bool = false
+    ) -> CourseInfoPurchaseModalWishlistViewModel {
+        let title: String = {
+            if isLoading {
+                return NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle", comment: "")
+            }
+            return isInWishlist
+                ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
+                : NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle", comment: "")
+        }()
+
+        return CourseInfoPurchaseModalWishlistViewModel(
+            title: title,
+            isInWishlist: isInWishlist,
+            isLoading: isLoading
         )
     }
 }

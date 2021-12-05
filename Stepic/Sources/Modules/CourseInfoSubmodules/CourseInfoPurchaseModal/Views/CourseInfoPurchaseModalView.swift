@@ -114,6 +114,7 @@ final class CourseInfoPurchaseModalView: UIView {
         }
 
         self.actionButtonsView.configureBuyButton(viewModel: viewModel.price)
+        self.configure(viewModel: viewModel.wishlist)
     }
 
     func configure(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
@@ -131,6 +132,10 @@ final class CourseInfoPurchaseModalView: UIView {
         }
 
         self.actionButtonsView.isUserInteractionEnabled = true
+    }
+
+    func configure(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
+        self.actionButtonsView.configureWishlistButton(viewModel: viewModel)
     }
 
     func showLoading() {

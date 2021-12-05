@@ -534,6 +534,9 @@ CourseInfoPurchaseModalPromoCodeStatusLoading = "Checking the promo code";
 CourseInfoPurchaseModalPromoCodeStatusError = "Invalid promo code";
 CourseInfoPurchaseModalPromoCodeStatusSuccess = "Promo code applied";
 CourseInfoPurchaseModalCheckPromoCodeStateError = "Unable to check the promo code";
+CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle = "Adding";
+CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle = "Add Course to Wishlist";
+CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "See Course in Wishlist";
 CourseInfoPurchaseModalDisclaimer = "В цену включена 15% комиссия App Store. Оплачивая доступ к этому курсу вы соглашаетесь с условиями <a href=\"https://welcome.stepik.org/en/payment-terms\"> пользовательского соглашения</a>.";
 
 /* Course revenue */
