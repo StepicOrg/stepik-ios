@@ -179,7 +179,9 @@ final class CourseListServicesFactory {
                 )
             )
         } else if self.type is WishlistCourseListType {
-            return CourseListPersistenceService(storage: WishlistStorageManager())
+            return WishlistCourseListPersistenceService(
+                wishlistEntriesPersistenceService: WishlistEntriesPersistenceService()
+            )
         } else {
             fatalError("Unsupported course list type")
         }
@@ -233,7 +235,7 @@ final class CourseListServicesFactory {
         } else if type is WishlistCourseListType {
             return WishlistCourseListNetworkService(
                 coursesAPI: self.coursesAPI,
-                wishlistStorageManager: WishlistStorageManager()
+                wishlistEntriesPersistenceService: WishlistEntriesPersistenceService()
             )
         } else if type is DownloadedCourseListType {
             return DownloadedCourseListNetworkService(

@@ -647,6 +647,7 @@ extension LessonViewController: LessonViewControllerProtocol {
     ) {
         let assembly = LessonFinishedDemoPanModalAssembly(
             sectionID: viewModel.sectionID,
+            promoCodeName: viewModel.promoCodeName,
             output: self
         )
         let viewController = assembly.makeModule()

@@ -6,19 +6,19 @@ protocol WishlistWidgetProviderProtocol {
 }
 
 final class WishlistWidgetProvider: WishlistWidgetProviderProtocol {
-    private let wishlistService: WishlistServiceProtocol
+    private let wishlistRepository: WishlistRepositoryProtocol
     private let userAccountService: UserAccountServiceProtocol
 
     init(
-        wishlistService: WishlistServiceProtocol,
+        wishlistRepository: WishlistRepositoryProtocol,
         userAccountService: UserAccountServiceProtocol
     ) {
-        self.wishlistService = wishlistService
+        self.wishlistRepository = wishlistRepository
         self.userAccountService = userAccountService
     }
 
     func fetchWishlistCoursesIDs(from dataSourceType: DataSourceType) -> Promise<[Course.IdType]> {
-        guard let currentUserID = self.userAccountService.currentUserID else {
+        guard self.userAccountService.isAuthorized else {
             switch dataSourceType {
             case .cache:
                 return Promise(error: Error.cacheFetchFailed)
@@ -27,15 +27,15 @@ final class WishlistWidgetProvider: WishlistWidgetProviderProtocol {
             }
         }
 
-        switch dataSourceType {
-        case .cache:
-            return .value(self.wishlistService.getWishlist())
-        case .remote:
-            return Promise { seal in
-                self.wishlistService.fetchWishlist(userID: currentUserID).done {
-                    let coursesIDs = self.wishlistService.getWishlist()
-                    seal.fulfill(coursesIDs)
-                }.catch { _ in
+        return Promise { seal in
+            self.wishlistRepository.fetchWishlistEntries(sourceType: dataSourceType).done { wishlistEntries in
+                let wishlistCoursesIDs = wishlistEntries.map(\.courseID)
+                seal.fulfill(wishlistCoursesIDs)
+            }.catch { _ in
+                switch dataSourceType {
+                case .cache:
+                    seal.reject(Error.cacheFetchFailed)
+                case .remote:
                     seal.reject(Error.remoteFetchFailed)
                 }
             }

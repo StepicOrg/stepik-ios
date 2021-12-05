@@ -33,7 +33,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let spotlightIndexingService: SpotlightIndexingServiceProtocol
     private let visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol
-    private let wishlistService: WishlistServiceProtocol
     private let urlFactory: StepikURLFactory
     private let analytics: Analytics
     private let courseViewSource: AnalyticsEvent.CourseViewSource
@@ -58,6 +57,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private let promoCodeName: String?
     private var currentPromoCode: PromoCode?
+
+    private var currentMobileTier: MobileTier?
 
     private var courseWebURL: URL? {
         guard let course = self.currentCourse else {
@@ -107,7 +108,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         spotlightIndexingService: SpotlightIndexingServiceProtocol,
         visitedCourseListPersistenceService: VisitedCourseListPersistenceServiceProtocol,
-        wishlistService: WishlistServiceProtocol,
         urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
@@ -126,7 +126,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.spotlightIndexingService = spotlightIndexingService
         self.visitedCourseListPersistenceService = visitedCourseListPersistenceService
-        self.wishlistService = wishlistService
         self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
@@ -243,12 +242,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doWishlistMainAction(request: CourseInfo.CourseWishlistMainAction.Request) {
-        guard let course = self.currentCourse,
-              let currentUserID = self.userAccountService.currentUserID else {
+        guard let course = self.currentCourse else {
             return
         }
 
-        let targetAction = self.wishlistService.contains(course)
+        let targetAction = course.isInWishlist
             ? CourseInfo.CourseWishlistAction.remove
             : CourseInfo.CourseWishlistAction.add
 
@@ -265,7 +263,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         viewSource: self.courseViewSource
                     )
                 )
-                return self.wishlistService.add(course, userID: currentUserID)
+                return self.provider.addCourseToWishlist()
             case .remove:
                 self.analytics.send(
                     .wishlistCourseRemoved(
@@ -275,7 +273,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         viewSource: self.courseViewSource
                     )
                 )
-                return self.wishlistService.remove(course, userID: currentUserID)
+                return self.provider.deleteCourseFromWishlist()
             }
         }.done {
             self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
@@ -312,37 +310,47 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
-            let isWishlisted = self.wishlistService.contains(self.courseID)
             // Paid course -> open web page
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(
                     .buyCoursePressed(id: course.id),
-                    .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: isWishlisted)
+                    .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: course.isInWishlist)
                 )
 
-                if self.iapService.canBuyCourse(course) {
-                    self.iapService.buy(course: course, delegate: self)
-                } else {
+                switch self.remoteConfig.coursePurchaseFlow {
+                case .web:
+                    if self.iapService.canBuyCourse(course) {
+                        self.iapService.buy(course: course, delegate: self)
+                    } else {
+                        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                        self.presenter.presentPaidCourseBuying(
+                            response: .init(course: course, courseViewSource: self.courseViewSource)
+                        )
+                    }
+
+                    return self.coursePurchaseReminder.createPurchaseNotification(for: course)
+                case .iap:
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                    self.presenter.presentPaidCourseBuying(
-                        response: .init(course: course, courseViewSource: self.courseViewSource)
+                    return self.presenter.presentPaidCoursePurchaseModal(
+                        response: .init(
+                            courseID: self.courseID,
+                            promoCodeName: self.promoCodeName,
+                            mobileTierID: self.currentMobileTier?.id
+                        )
                     )
                 }
-
-                return self.coursePurchaseReminder.createPurchaseNotification(for: course)
             }
 
             self.analytics.send(.authorizedUserTappedJoinCourse)
             // Unenrolled course -> join, open last step
-            self.courseSubscriber.join(course: course, source: .preview, isWishlisted: isWishlisted).done { course in
+            self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course
                 self.currentCourse = course
                 self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
 
                 // Remove course from wishlist
-                if self.wishlistService.contains(course),
-                   let currentUserID = self.userAccountService.currentUserID {
-                    self.wishlistService.remove(course, userID: currentUserID).cauterize()
+                if course.isInWishlist {
+                    self.provider.deleteCourseFromWishlist().cauterize()
                 }
 
                 // Present step
@@ -365,7 +373,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request) {
         if let previewLessonID = self.currentCourse?.previewLessonID {
-            self.presenter.presentPreviewLesson(response: .init(previewLessonID: previewLessonID))
+            self.presenter.presentPreviewLesson(
+                response: .init(previewLessonID: previewLessonID, promoCodeName: self.promoCodeName)
+            )
         }
     }
 
@@ -395,14 +405,29 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
-        let isWishlistAvailable = self.userAccountService.isAuthorized
-            && self.wishlistService.canAdd(self.currentCourse.require())
+        let mobileTier: MobileTier? = {
+            guard self.remoteConfig.coursePurchaseFlow == .iap else {
+                return nil
+            }
+
+            if let currentMobileTier = self.currentMobileTier {
+                return currentMobileTier
+            } else {
+                if let promoCodeName = self.promoCodeName,
+                   let promoTier = self.currentCourse?.mobileTiers.first(where: { $0.id.hasSuffix(promoCodeName) }) {
+                    return promoTier
+                }
+                return self.currentCourse?.mobileTiers.first(where: { $0.id.hasSuffix("None") })
+            }
+        }()
+
         return .init(
             course: self.currentCourse.require(),
-            isWishlisted: self.wishlistService.contains(self.courseID),
-            isWishlistAvailable: isWishlistAvailable,
+            isWishlistAvailable: self.userAccountService.isAuthorized && !self.currentCourse.require().enrolled,
             isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
-            promoCode: self.currentPromoCode
+            coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
+            promoCode: self.currentPromoCode,
+            mobileTier: mobileTier?.plainObject
         )
     }
 
@@ -431,18 +456,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     }
                 }
 
-                if let course = course,
-                   course.isPaid && self.iapService.canBuyCourse(course) && course.displayPriceIAP?.isEmpty ?? true {
-                    self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
-                        self.currentCourse?.displayPriceIAP = localizedPrice
-                        DispatchQueue.main.async {
-                            self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
-                        }
-                    }
-                }
-
                 DispatchQueue.main.async {
-                    self.fetchAndPresentPromoCodeIfNeeded()
+                    self.fetchAndPresentPriceInfoIfNeeded()
                 }
 
                 if !self.didLoadFromCache {
@@ -459,6 +474,43 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     seal.reject(error)
                 }
             }
+        }
+    }
+
+    private func fetchAndPresentPriceInfoIfNeeded() {
+        switch self.remoteConfig.coursePurchaseFlow {
+        case .web:
+            if let course = self.currentCourse,
+               course.isPaid && self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
+                self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
+                    self.currentCourse?.displayPriceIAP = localizedPrice
+                    self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                }
+            }
+
+            self.fetchAndPresentPromoCodeIfNeeded()
+        case .iap:
+            guard self.currentMobileTier == nil else {
+                return
+            }
+
+            self.provider
+                .calculateMobileTier(promoCodeName: self.promoCodeName)
+                .compactMap { $0 }
+                .compactMap { mobileTier in
+                    self.currentCourse?.mobileTiers.first(where: { $0.id == mobileTier.id })
+                }
+                .then { mobileTier -> Guarantee<(MobileTier, String?, String?)> in
+                    self.iapService.getLocalizedPrices(for: mobileTier).map { (mobileTier, $0.price, $0.promo) }
+                }
+                .done { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice in
+                    mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
+                    mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
+                    self.currentMobileTier = mobileTier
+
+                    self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+                }
+                .cauterize()
         }
     }
 
@@ -560,31 +612,21 @@ extension CourseInfoInteractor: LessonOutputProtocol {
 
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     func presentLesson(in unit: Unit) {
-        self.presenter.presentLesson(
-            response: CourseInfo.LessonPresentation.Response(unitID: unit.id)
-        )
+        self.presenter.presentLesson(response: .init(unitID: unit.id, promoCodeName: self.promoCodeName))
     }
 
     func presentPersonalDeadlinesCreation(for course: Course) {
-        self.presenter.presentPersonalDeadlinesSettings(
-            response: .init(action: .create, course: course)
-        )
+        self.presenter.presentPersonalDeadlinesSettings(response: .init(action: .create, course: course))
     }
 
     func presentPersonalDeadlinesSettings(for course: Course) {
-        self.presenter.presentPersonalDeadlinesSettings(
-            response: .init(action: .edit, course: course)
-        )
+        self.presenter.presentPersonalDeadlinesSettings(response: .init(action: .edit, course: course))
     }
 
     func presentExamLesson() {
-        guard let urlPath = self.courseWebSyllabusURLPath else {
-            return
+        if let courseWebSyllabusURLPath = self.courseWebSyllabusURLPath {
+            self.presenter.presentExamLesson(response: .init(urlPath: courseWebSyllabusURLPath))
         }
-
-        self.presenter.presentExamLesson(
-            response: .init(urlPath: urlPath)
-        )
     }
 }
 

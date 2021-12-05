@@ -8,6 +8,7 @@ protocol IAPServiceProtocol: AnyObject {
 
     func getLocalizedPrice(for product: SKProduct) -> String?
     func getLocalizedPrice(for course: Course) -> Guarantee<String?>
+    func getLocalizedPrices(for mobileTier: MobileTier) -> Guarantee<(price: String?, promo: String?)>
 
     func startObservingPayments()
     func stopObservingPayments()
@@ -56,17 +57,7 @@ final class IAPService: IAPServiceProtocol {
 
         let productIdentifier = self.productsService.makeProductIdentifier(priceTier: priceTier)
 
-        guard self.productsService.canFetchProduct(with: productIdentifier) else {
-            return Promise(error: Error.unsupportedCourse)
-        }
-
-        return Promise { seal in
-            self.productsService.fetchProduct(productIdentifier: productIdentifier).done { product in
-                seal.fulfill(product)
-            }.catch { _ in
-                seal.reject(Error.productsRequestFailed)
-            }
-        }
+        return self.fetchProduct(with: productIdentifier)
     }
 
     func fetchProducts() -> Promise<[SKProduct]> {
@@ -134,6 +125,65 @@ final class IAPService: IAPServiceProtocol {
                 seal(self.getLocalizedPrice(for: product))
             }.catch { _ in
                 seal(nil)
+            }
+        }
+    }
+
+    func getLocalizedPrices(for mobileTier: MobileTier) -> Guarantee<(price: String?, promo: String?)> {
+        if mobileTier.isTiersEmpty {
+            return .value((nil, nil))
+        }
+
+        func getLocalizedPrice(for tier: String?) -> Guarantee<String?> {
+            guard let tier = tier else {
+                return .value(nil)
+            }
+
+            self.mutex.unbalancedLock()
+            defer { self.mutex.unbalancedUnlock() }
+
+            if let product = self.products.first(where: { $0.productIdentifier == tier }) {
+                return .value(self.getLocalizedPrice(for: product))
+            }
+
+            return Guarantee { seal in
+                self.fetchProduct(with: tier).compactMap { $0 }.done { product in
+                    self.mutex.unbalancedLock()
+                    defer { self.mutex.unbalancedUnlock() }
+
+                    if !self.products.contains(where: { $0.productIdentifier == tier }) {
+                        self.products.append(product)
+                    }
+
+                    seal(self.getLocalizedPrice(for: product))
+                }.catch { _ in
+                    seal(nil)
+                }
+            }
+        }
+
+        return Guarantee { seal in
+            when(
+                fulfilled: getLocalizedPrice(for: mobileTier.priceTier),
+                getLocalizedPrice(for: mobileTier.promoTier)
+            ).done { priceTierLocalizedPrice, promoTierLocalizedPrice in
+                seal((priceTierLocalizedPrice, promoTierLocalizedPrice))
+            }.catch { _ in
+                seal((nil, nil))
+            }
+        }
+    }
+
+    private func fetchProduct(with productIdentifier: IAPProductIdentifier) -> Promise<SKProduct?> {
+        guard self.productsService.canFetchProduct(with: productIdentifier) else {
+            return Promise(error: Error.unsupportedCourse)
+        }
+
+        return Promise { seal in
+            self.productsService.fetchProduct(productIdentifier: productIdentifier).done { product in
+                seal.fulfill(product)
+            }.catch { _ in
+                seal.reject(Error.productsRequestFailed)
             }
         }
     }

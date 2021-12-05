@@ -104,6 +104,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-_UIConstraintBasedLayoutLogUnsatisfiable NO"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-com.AlexKarpov.Stepic.AnalyticsDebugEnabled"
             isEnabled = "NO">
          </CommandLineArgument>

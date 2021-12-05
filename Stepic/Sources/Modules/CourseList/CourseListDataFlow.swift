@@ -13,7 +13,6 @@ enum CourseList {
     struct AvailableCourses {
         var fetchedCourses: ListData<(UniqueIdentifierType, Course)>
         var availableAdaptiveCourses: Set<Course>
-        var wishlistCoursesIDs: Set<Course.IdType>
     }
 
     // Use it for module initializing
@@ -39,6 +38,7 @@ enum CourseList {
         struct Response {
             let isAuthorized: Bool
             let isCoursePricesEnabled: Bool
+            let coursePurchaseFlow: CoursePurchaseFlowType
             let result: AvailableCourses
             let viewSource: AnalyticsEvent.CourseViewSource
         }
@@ -55,6 +55,7 @@ enum CourseList {
         struct Response {
             let isAuthorized: Bool
             let isCoursePricesEnabled: Bool
+            let coursePurchaseFlow: CoursePurchaseFlowType
             let result: StepikResult<AvailableCourses>
             let viewSource: AnalyticsEvent.CourseViewSource
         }

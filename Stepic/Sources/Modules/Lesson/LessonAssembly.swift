@@ -4,15 +4,19 @@ final class LessonAssembly: Assembly {
     private var initialContext: LessonDataFlow.Context
     private var startStep: LessonDataFlow.StartStep?
 
+    private let promoCodeName: String?
+
     private weak var moduleOutput: LessonOutputProtocol?
 
     init(
         initialContext: LessonDataFlow.Context,
         startStep: LessonDataFlow.StartStep? = nil,
+        promoCodeName: String? = nil,
         moduleOutput: LessonOutputProtocol?
     ) {
         self.initialContext = initialContext
         self.startStep = startStep
+        self.promoCodeName = promoCodeName
         self.moduleOutput = moduleOutput
     }
 
@@ -54,6 +58,7 @@ final class LessonAssembly: Assembly {
         let interactor = LessonInteractor(
             initialContext: self.initialContext,
             startStep: self.startStep,
+            promoCodeName: self.promoCodeName,
             presenter: presenter,
             provider: provider,
             unitNavigationService: unitNavigationService,

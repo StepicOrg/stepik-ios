@@ -38,7 +38,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
     override var longFormHeight: PanModalHeight {
         guard self.hasLoadedData else {
-            return self.shortFormHeight
+            return super.longFormHeight
         }
 
         if self.keyboardIsShowing,

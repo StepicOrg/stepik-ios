@@ -116,6 +116,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
+        self.isInWishlist = json[JSONKey.isInWishlist.rawValue].boolValue
         self.isProctored = json[JSONKey.isProctored.rawValue].boolValue
         self.readiness = json[JSONKey.readiness.rawValue].float
 
@@ -174,50 +175,6 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
     }
 
     @available(*, deprecated, message: "Legacy")
-    static func fetch(
-        _ ids: [Int],
-        featured: Bool? = nil,
-        enrolled: Bool? = nil,
-        isPublic: Bool? = nil
-    ) -> [Course] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
-        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
-
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        let idCompoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
-
-        var nonIdPredicates = [NSPredicate]()
-        if let f = featured {
-            nonIdPredicates += [NSPredicate(format: "managedFeatured == %@", f as NSNumber)]
-        }
-
-        if let e = enrolled {
-            nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
-        }
-
-        if let p = isPublic {
-            nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
-        }
-
-        let nonIdCompoundPredicate = NSCompoundPredicate(type: .and, subpredicates: nonIdPredicates)
-
-        let predicate = NSCompoundPredicate(type: .and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
-        request.predicate = predicate
-        request.sortDescriptors = [descriptor]
-
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request)
-            let finalResult = results as? [Course] ?? []
-
-            return finalResult
-        } catch {
-            return []
-        }
-    }
-
-    @available(*, deprecated, message: "Legacy")
     static func getAllCourses(enrolled: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
@@ -254,6 +211,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case isPublic = "is_public"
         case isFavorite = "is_favorite"
         case isArchived = "is_archived"
+        case isInWishlist = "is_in_wishlist"
         case readiness
         case summary
         case workload

@@ -35,6 +35,7 @@ extension User {
     @NSManaged var managedCourseBeneficiaries: NSSet?
     @NSManaged var managedSearchResults: NSSet?
     @NSManaged var managedAnnouncements: NSSet?
+    @NSManaged var managedWishlistEntries: NSOrderedSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
@@ -350,6 +351,15 @@ extension User {
         }
         set {
             self.managedAnnouncements = NSSet(array: newValue)
+        }
+    }
+
+    var wishlistEntries: [WishlistEntryEntity] {
+        get {
+            self.managedWishlistEntries?.array as? [WishlistEntryEntity] ?? []
+        }
+        set {
+            self.managedWishlistEntries = NSOrderedSet(array: newValue)
         }
     }
 

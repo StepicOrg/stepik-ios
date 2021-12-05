@@ -9,6 +9,10 @@ protocol CourseInfoProviderProtocol {
     func updateUserCourse(_ userCourse: UserCourse) -> Promise<UserCourse>
 
     func checkPromoCode(name: String) -> Promise<PromoCode>
+    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?>
+
+    func addCourseToWishlist() -> Promise<Void>
+    func deleteCourseFromWishlist() -> Promise<Void>
 }
 
 final class CourseInfoProvider: CourseInfoProviderProtocol {
@@ -30,6 +34,10 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
     private let promoCodesNetworkService: PromoCodesNetworkServiceProtocol
 
+    private let wishlistRepository: WishlistRepositoryProtocol
+
+    private let mobileTiersRepository: MobileTiersRepositoryProtocol
+
     init(
         courseID: Course.IdType,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
@@ -41,7 +49,9 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         coursePurchasesPersistenceService: CoursePurchasesPersistenceServiceProtocol,
         coursePurchasesNetworkService: CoursePurchasesNetworkServiceProtocol,
         userCoursesNetworkService: UserCoursesNetworkServiceProtocol,
-        promoCodesNetworkService: PromoCodesNetworkServiceProtocol
+        promoCodesNetworkService: PromoCodesNetworkServiceProtocol,
+        wishlistRepository: WishlistRepositoryProtocol,
+        mobileTiersRepository: MobileTiersRepositoryProtocol
     ) {
         self.courseID = courseID
         self.coursesNetworkService = coursesNetworkService
@@ -54,6 +64,8 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.coursePurchasesNetworkService = coursePurchasesNetworkService
         self.userCoursesNetworkService = userCoursesNetworkService
         self.promoCodesNetworkService = promoCodesNetworkService
+        self.wishlistRepository = wishlistRepository
+        self.mobileTiersRepository = mobileTiersRepository
     }
 
     func fetchCached() -> Promise<Course?> {
@@ -110,6 +122,20 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.promoCodesNetworkService.checkPromoCode(courseID: self.courseID, name: name)
     }
 
+    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
+        self.mobileTiersRepository.fetch(courseID: self.courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
+    }
+
+    func addCourseToWishlist() -> Promise<Void> {
+        self.wishlistRepository.addCourseToWishlist(courseID: self.courseID)
+    }
+
+    func deleteCourseFromWishlist() -> Promise<Void> {
+        self.wishlistRepository.deleteCourseFromWishlist(courseID: self.courseID, sourceType: .remote)
+    }
+
+    // MARK: Private API
+
     private func fetchAndMergeCourse(
         courseFetchMethod: @escaping (Course.IdType) -> Promise<Course?>,
         progressFetchMethod: @escaping (Progress.IdType) -> Promise<Progress?>,
@@ -156,9 +182,10 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
                 course.reviewSummary = reviewSummary
                 course.purchases = coursePurchases
 
-                CoreDataHelper.shared.save()
-
-                seal.fulfill(course)
+                self.fetchMobileTiers(course: course).done { course in
+                    CoreDataHelper.shared.save()
+                    seal.fulfill(course)
+                }
             }.catch { error in
                 seal.reject(error)
             }
@@ -168,6 +195,15 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     private func fetchCachedPurchases(courseID: Course.IdType) -> Promise<[CoursePurchase]> {
         Promise { seal in
             self.coursePurchasesPersistenceService.fetch(courseID: courseID).done { seal.fulfill($0) }
+        }
+    }
+
+    private func fetchMobileTiers(course: Course) -> Guarantee<Course> {
+        firstly { () -> Guarantee<[MobileTier]> in
+            course.isPaid && !course.enrolled ? self.mobileTiersRepository.fetch(courseID: course.id) : .value([])
+        }.then { mobileTiers -> Guarantee<Course> in
+            course.mobileTiers = mobileTiers
+            return .value(course)
         }
     }
 

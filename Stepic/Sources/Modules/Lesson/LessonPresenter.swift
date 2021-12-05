@@ -233,7 +233,7 @@ final class LessonPresenter: LessonPresenterProtocol {
         response: LessonDataFlow.UnitNavigationFinishedDemoAccessPresentation.Response
     ) {
         self.viewController?.displayUnitNavigationFinishedDemoAccessState(
-            viewModel: .init(sectionID: response.section.id)
+            viewModel: .init(sectionID: response.section.id, promoCodeName: response.promoCodeName)
         )
     }
 

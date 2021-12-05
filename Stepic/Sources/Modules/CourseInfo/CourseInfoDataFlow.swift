@@ -42,10 +42,11 @@ enum CourseInfo {
         struct Response {
             struct Data {
                 let course: Course
-                let isWishlisted: Bool
                 let isWishlistAvailable: Bool
                 let isCourseRevenueAvailable: Bool
+                let coursePurchaseFlow: CoursePurchaseFlowType
                 let promoCode: PromoCode?
+                let mobileTier: MobileTierPlainObject?
             }
 
             var result: StepikResult<Data>
@@ -67,10 +68,12 @@ enum CourseInfo {
     enum LessonPresentation {
         struct Response {
             let unitID: Unit.IdType
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let unitID: Unit.IdType
+            let promoCodeName: String?
         }
     }
 
@@ -244,10 +247,12 @@ enum CourseInfo {
 
         struct Response {
             let previewLessonID: Lesson.IdType
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let previewLessonID: Lesson.IdType
+            let promoCodeName: String?
         }
     }
 
@@ -290,6 +295,21 @@ enum CourseInfo {
 
         struct ViewModel {
             let urlPath: String
+        }
+    }
+
+    /// Present CourseInfoPurchaseModal module
+    enum PaidCoursePurchaseModalPresentation {
+        struct Response {
+            let courseID: Course.IdType
+            let promoCodeName: String?
+            let mobileTierID: MobileTier.IdType?
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+            let promoCodeName: String?
+            let mobileTierID: MobileTier.IdType?
         }
     }
 
