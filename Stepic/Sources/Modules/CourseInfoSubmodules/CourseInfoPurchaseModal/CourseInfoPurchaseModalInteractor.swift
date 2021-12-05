@@ -3,6 +3,8 @@ import PromiseKit
 
 protocol CourseInfoPurchaseModalInteractorProtocol {
     func doModalLoad(request: CourseInfoPurchaseModal.ModalLoad.Request)
+    func doCheckPromoCode(request: CourseInfoPurchaseModal.CheckPromoCode.Request)
+    func doPromoCodeDidChange(request: CourseInfoPurchaseModal.PromoCodeDidChange.Request)
 }
 
 final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractorProtocol {
@@ -16,6 +18,7 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
     private let courseID: Course.IdType
     private let initialPromoCodeName: String?
     private let initialMobileTierID: MobileTier.IdType?
+    private var initialMobileTier: MobileTierPlainObject?
 
     private var currentCourse: Course?
     private var currentPromoCodeName: String?
@@ -48,11 +51,15 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
             }
             .done { course, mobileTier in
                 self.currentCourse = course
-                self.currentMobileTier = mobileTier
 
-                let data = CourseInfoPurchaseModal.ModalLoad.Response.Data(
+                var resultMobileTier = mobileTier
+                resultMobileTier.promoCodeName = self.initialPromoCodeName
+                self.initialMobileTier = resultMobileTier
+                self.currentMobileTier = resultMobileTier
+
+                let data = CourseInfoPurchaseModal.ModalData(
                     course: course,
-                    mobileTier: mobileTier
+                    mobileTier: resultMobileTier
                 )
 
                 self.presenter.presentModal(response: .init(result: .success(data)))
@@ -62,6 +69,57 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
             }
     }
 
+    func doCheckPromoCode(request: CourseInfoPurchaseModal.CheckPromoCode.Request) {
+        self.fetchMobileTier(promoCodeName: request.promoCode).done { mobileTier in
+            self.currentMobileTier = mobileTier
+            self.currentPromoCodeName = request.promoCode
+
+            let data = CourseInfoPurchaseModal.ModalData(
+                course: self.currentCourse.require(),
+                mobileTier: mobileTier
+            )
+
+            self.presenter.presentCheckPromoCodeResult(response: .init(result: .success(data)))
+        }.catch { error in
+            self.presenter.presentCheckPromoCodeResult(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doPromoCodeDidChange(request: CourseInfoPurchaseModal.PromoCodeDidChange.Request) {
+        guard self.currentPromoCodeName != request.promoCode else {
+            return
+        }
+
+        defer {
+            self.currentPromoCodeName = request.promoCode
+        }
+
+        guard let currentMobileTier = self.currentMobileTier,
+              let initialMobileTier = self.initialMobileTier else {
+            return
+        }
+
+        if currentMobileTier.promoTier != nil {
+            let resultMobileTier = MobileTierPlainObject(
+                id: initialMobileTier.id,
+                courseID: initialMobileTier.courseID,
+                priceTier: initialMobileTier.priceTier,
+                promoTier: nil,
+                priceTierDisplayPrice: initialMobileTier.priceTierDisplayPrice,
+                promoTierDisplayPrice: nil,
+                promoCodeName: request.promoCode
+            )
+            self.currentMobileTier = resultMobileTier
+
+            let data = CourseInfoPurchaseModal.ModalData(
+                course: self.currentCourse.require(),
+                mobileTier: resultMobileTier
+            )
+
+            self.presenter.presentModal(response: .init(result: .success(data)))
+        }
+    }
+
     // MARK: Private API
 
     private func fetchInitialMobileTier() -> Promise<MobileTierPlainObject> {
@@ -69,21 +127,20 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
             return self.provider
                 .fetchMobileTierFromCache(mobileTierID: initialMobileTierID)
                 .then { mobileTier -> Promise<MobileTierPlainObject> in
-                    if let mobileTier = mobileTier {
-                        let isLocalizedPricesEmpty = (mobileTier.priceTierDisplayPrice?.isEmpty ?? true)
-                            && (mobileTier.promoTierDisplayPrice?.isEmpty ?? true)
-                        if isLocalizedPricesEmpty {
-                            return self.iapService.getLocalizedPrices(mobileTier: mobileTier).then {
-                                priceTierLocalizedPrice, promoTierLocalizedPrice -> Promise<MobileTierPlainObject> in
-                                mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
-                                mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
-                                return .value(mobileTier.plainObject)
-                            }
-                        } else {
+                    guard let mobileTier = mobileTier,
+                          mobileTier.isIDPromoCodeNameEqual(self.initialPromoCodeName) else {
+                        return self.fetchMobileTier(promoCodeName: self.initialPromoCodeName)
+                    }
+
+                    if mobileTier.isDisplayTiersEmpty {
+                        return self.iapService.getLocalizedPrices(mobileTier: mobileTier).then {
+                            priceTierLocalizedPrice, promoTierLocalizedPrice -> Promise<MobileTierPlainObject> in
+                            mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
+                            mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
                             return .value(mobileTier.plainObject)
                         }
                     } else {
-                        return self.fetchMobileTier(promoCodeName: self.initialPromoCodeName)
+                        return .value(mobileTier.plainObject)
                     }
                 }
         } else {
@@ -104,6 +161,7 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
                 var mutableMobileTier = mobileTier
                 mutableMobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
                 mutableMobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
+                mutableMobileTier.promoCodeName = promoCodeName
 
                 return .value(mutableMobileTier)
             }

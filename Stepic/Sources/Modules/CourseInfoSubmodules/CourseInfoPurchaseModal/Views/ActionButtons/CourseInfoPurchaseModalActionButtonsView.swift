@@ -5,6 +5,8 @@ extension CourseInfoPurchaseModalActionButtonsView {
     struct Appearance {
         let actionButtonHeight: CGFloat = 44
 
+        let buyButtonFullPriceFont = UIFont.systemFont(ofSize: 12)
+
         let wishlistButtonBorderWidth: CGFloat = 1
 
         let stackViewSpacing: CGFloat = 16
@@ -58,6 +60,45 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: Public API
+
+    func configureBuyButton(viewModel: CourseInfoPurchaseModalPriceViewModel) {
+        if let promoDisplayPrice = viewModel.promoDisplayPrice {
+            let buyWithPromoTitle = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), promoDisplayPrice)
+            let formattedTitle = "\(buyWithPromoTitle) \(viewModel.displayPrice)"
+
+            let buyButtonAppearance = CourseInfoPurchaseModalActionButton.Appearance()
+
+            let attributedTitle = NSMutableAttributedString(
+                string: formattedTitle,
+                attributes: [
+                    .font: buyButtonAppearance.textLabelFont,
+                    .foregroundColor: buyButtonAppearance.textLabelTextColor
+                ]
+            )
+
+            if let displayPriceLocation = formattedTitle.indexOf(viewModel.displayPrice) {
+                attributedTitle.addAttributes(
+                    [
+                        .font: self.appearance.buyButtonFullPriceFont,
+                        .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                        .strikethroughColor: buyButtonAppearance.textLabelTextColor
+                    ],
+                    range: NSRange(location: displayPriceLocation, length: viewModel.displayPrice.count)
+                )
+            }
+
+            self.buyButton.attributedText = attributedTitle
+        } else {
+            self.buyButton.text = String(
+                format: NSLocalizedString("WidgetButtonBuy", comment: ""),
+                viewModel.displayPrice
+            )
+        }
+    }
+
+    // MARK: Private API
 
     @objc
     private func buyButtonClicked() {

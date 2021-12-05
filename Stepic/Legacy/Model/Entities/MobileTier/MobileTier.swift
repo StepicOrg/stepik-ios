@@ -11,6 +11,22 @@ final class MobileTier: NSManagedObject, ManagedObject, Identifiable {
     var isTiersEmpty: Bool {
         (self.priceTier?.isEmpty ?? true) && (self.promoTier?.isEmpty ?? true)
     }
+
+    var isDisplayTiersEmpty: Bool {
+        (self.priceTierDisplayPrice?.isEmpty ?? true) && (self.promoTierDisplayPrice?.isEmpty ?? true)
+    }
+
+    var idPromoCodeName: String {
+        let idComponents = self.id.components(separatedBy: "-")
+        let promoCodeComponents = idComponents.dropFirst(2)
+        let promoCode = promoCodeComponents.joined(separator: "-")
+        return promoCode
+    }
+
+    func isIDPromoCodeNameEqual(_ other: String?) -> Bool {
+        let otherIDPromoCodeName = (other ?? "").isEmpty ? "None" : (other ?? "")
+        return self.idPromoCodeName.lowercased() == otherIDPromoCodeName.lowercased()
+    }
 }
 
 // MARK: - MobileTier (PlainObject Support) -

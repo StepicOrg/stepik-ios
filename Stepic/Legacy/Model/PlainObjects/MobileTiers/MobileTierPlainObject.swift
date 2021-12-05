@@ -9,6 +9,8 @@ struct MobileTierPlainObject {
     
     var priceTierDisplayPrice: String?
     var promoTierDisplayPrice: String?
+
+    var promoCodeName: String?
 }
 
 extension MobileTierPlainObject {

@@ -1,9 +1,11 @@
 import IQKeyboardManagerSwift
 import PanModal
+import SVProgressHUD
 import UIKit
 
 protocol CourseInfoPurchaseModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel)
+    func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel)
 }
 
 final class CourseInfoPurchaseModalViewController: PanModalPresentableViewController {
@@ -106,11 +108,15 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         switch newState {
         case .result(let viewModel):
             self.courseInfoPurchaseModalView?.hideLoading()
+            self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
+
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
         case .loading:
             self.courseInfoPurchaseModalView?.showLoading()
+            self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
         case .error:
-            fatalError("handle this")
+            self.courseInfoPurchaseModalView?.hideLoading()
+            self.courseInfoPurchaseModalView?.showErrorPlaceholder()
         }
 
         self.state = newState
@@ -150,6 +156,16 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
         self.updateState(newState: viewModel.state)
         self.transition(to: .shortForm)
     }
+
+    func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
+        if case .error = viewModel.state {
+            SVProgressHUD.showError(
+                withStatus: NSLocalizedString("CourseInfoPurchaseModalCheckPromoCodeStateError", comment: "")
+            )
+        }
+
+        self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+    }
 }
 
 // MARK: - CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDelegate -
@@ -159,10 +175,23 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
         self.dismiss(animated: true)
     }
 
+    func courseInfoPurchaseModalViewDidClickErrorPlaceholderActionButton(_ view: CourseInfoPurchaseModalView) {
+        self.updateState(newState: .loading)
+        self.interactor.doModalLoad(request: .init())
+    }
+
     func courseInfoPurchaseModalViewDidRevealPromoCodeInput(_ view: CourseInfoPurchaseModalView) {
         if let currentPresentationState = self.currentPresentationState {
             self.transition(to: currentPresentationState)
         }
+    }
+
+    func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didChangePromoCode promoCode: String) {
+        self.interactor.doPromoCodeDidChange(request: .init(promoCode: promoCode))
+    }
+
+    func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didRequestCheckPromoCode promoCode: String) {
+        self.interactor.doCheckPromoCode(request: .init(promoCode: promoCode))
     }
 
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL) {
