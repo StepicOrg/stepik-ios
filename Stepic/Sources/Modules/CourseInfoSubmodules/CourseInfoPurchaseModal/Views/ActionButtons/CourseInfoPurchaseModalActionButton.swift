@@ -24,7 +24,7 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
         }
     }
 
-    private lazy var loadingIndicator: UIActivityIndicatorView = {
+    private lazy var loadingActivityIndicator: UIActivityIndicatorView = {
         let activityIndicatorView = UIActivityIndicatorView(style: .stepikGray)
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.stopAnimating()
@@ -38,12 +38,12 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
         return label
     }()
 
-    var isLoadingIndicatorAnimating = false {
+    var isLoadingActivityIndicatorVisible = false {
         didSet {
-            if self.isLoadingIndicatorAnimating {
-                self.loadingIndicator.startAnimating()
+            if self.isLoadingActivityIndicatorVisible {
+                self.loadingActivityIndicator.startAnimating()
             } else {
-                self.loadingIndicator.stopAnimating()
+                self.loadingActivityIndicator.stopAnimating()
             }
         }
     }
@@ -95,7 +95,7 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
 
     private func updateAppearance() {
         if let loadingIndicatorColor = self.appearance.loadingIndicatorColor {
-            self.loadingIndicator.color = loadingIndicatorColor
+            self.loadingActivityIndicator.color = loadingIndicatorColor
         }
 
         self.textLabel.font = self.appearance.textLabelFont
@@ -120,13 +120,13 @@ extension CourseInfoPurchaseModalActionButton: ProgrammaticallyInitializableView
     }
 
     func addSubviews() {
-        self.addSubview(self.loadingIndicator)
+        self.addSubview(self.loadingActivityIndicator)
         self.addSubview(self.textLabel)
     }
 
     func makeConstraints() {
-        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.loadingIndicator.snp.makeConstraints { make in
+        self.loadingActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingActivityIndicator.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.loadingIndicatorInsets.left)
             make.centerY.equalTo(self.textLabel.snp.centerY)
         }

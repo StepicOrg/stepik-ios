@@ -107,7 +107,7 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
             : self.style.wishlistButtonBorderColor
         self.wishlistButton.appearance = newAppearance
 
-        self.wishlistButton.isLoadingIndicatorAnimating = viewModel.isLoading
+        self.wishlistButton.isLoadingActivityIndicatorVisible = viewModel.isLoading
         self.wishlistButton.isUserInteractionEnabled = !viewModel.isInWishlist && !viewModel.isLoading
     }
 
