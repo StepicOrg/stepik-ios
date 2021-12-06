@@ -122,21 +122,18 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
     }
 
     func doWishlistMainAction(request: CourseInfoPurchaseModal.WishlistMainAction.Request) {
-        guard let currentCourse = self.currentCourse else {
+        guard let currentCourse = self.currentCourse,
+              !currentCourse.isInWishlist else {
             return
         }
 
-        if currentCourse.isInWishlist {
-            self.presenter.presentFullscreenWishlistCourseList(response: .init())
-        } else {
-            self.presenter.presentAddCourseToWishlistResult(response: .init(state: .loading))
+        self.presenter.presentAddCourseToWishlistResult(response: .init(state: .loading))
 
-            self.provider.addCourseToWishlist().done {
-                self.presenter.presentAddCourseToWishlistResult(response: .init(state: .success))
-                self.moduleOutput?.handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: self.courseID)
-            }.catch { _ in
-                self.presenter.presentAddCourseToWishlistResult(response: .init(state: .error))
-            }
+        self.provider.addCourseToWishlist().done {
+            self.presenter.presentAddCourseToWishlistResult(response: .init(state: .success))
+            self.moduleOutput?.handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: self.courseID)
+        }.catch { _ in
+            self.presenter.presentAddCourseToWishlistResult(response: .init(state: .error))
         }
     }
 

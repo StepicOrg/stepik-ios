@@ -7,9 +7,6 @@ protocol CourseInfoPurchaseModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel)
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel)
     func displayAddCourseToWishlistResult(viewModel: CourseInfoPurchaseModal.AddCourseToWishlist.ViewModel)
-    func displayFullscreenWishlistCourseList(
-        viewModel: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.ViewModel
-    )
 }
 
 final class CourseInfoPurchaseModalViewController: PanModalPresentableViewController {
@@ -181,17 +178,6 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
             SVProgressHUD.showSuccess(withStatus: message)
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
         }
-    }
-
-    func displayFullscreenWishlistCourseList(
-        viewModel: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.ViewModel
-    ) {
-        let assembly = FullscreenCourseListAssembly(
-            presentationDescription: .init(title: NSLocalizedString("WishlistWidgetTitle", comment: "")),
-            courseListType: WishlistCourseListType(),
-            courseViewSource: .unknown // TODO: Proper courseViewSource
-        )
-        self.present(module: assembly.makeModule(), embedInNavigation: true)
     }
 }
 

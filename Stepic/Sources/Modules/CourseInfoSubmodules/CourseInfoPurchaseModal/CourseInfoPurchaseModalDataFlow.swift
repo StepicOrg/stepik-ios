@@ -41,7 +41,7 @@ enum CourseInfoPurchaseModal {
         }
     }
 
-    /// Add course to withlist or present fullscreen wishlist course list
+    /// Add course to withlist
     enum WishlistMainAction {
         struct Request {}
     }
@@ -67,13 +67,6 @@ enum CourseInfoPurchaseModal {
                 case result(message: String, data: CourseInfoPurchaseModalWishlistViewModel)
             }
         }
-    }
-
-    /// Present fullscreen wishlist course list
-    enum FullscreenWishlistCourseListPresentation {
-        struct Response {}
-
-        struct ViewModel {}
     }
 
     // MARK: States

@@ -100,6 +100,15 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
 
     func configureWishlistButton(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
         self.wishlistButton.text = viewModel.title
+
+        var newAppearance = self.wishlistButton.appearance
+        newAppearance.borderColor = viewModel.isInWishlist
+            ? self.style.wishlistButtonDisabledBorderColor
+            : self.style.wishlistButtonBorderColor
+        self.wishlistButton.appearance = newAppearance
+
+        self.wishlistButton.isLoadingIndicatorAnimating = viewModel.isLoading
+        self.wishlistButton.isUserInteractionEnabled = !viewModel.isInWishlist && !viewModel.isLoading
     }
 
     // MARK: Private API
@@ -120,7 +129,7 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
             backgroundColor: self.style.buyButtonBackgroundColor
         )
         self.wishlistButton.appearance = .init(
-            iconImageViewTintColor: self.style.wishlistButtonTextColor,
+            loadingIndicatorColor: self.style.wishlistButtonTextColor,
             textLabelTextColor: self.style.wishlistButtonTextColor,
             backgroundColor: self.style.wishlistButtonBackgroundColor,
             borderWidth: self.appearance.wishlistButtonBorderWidth,
@@ -161,6 +170,10 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
             case .green:
                 return .stepikGreenFixed
             }
+        }
+
+        fileprivate var wishlistButtonDisabledBorderColor: UIColor {
+            self.wishlistButtonBorderColor.withAlphaComponent(0.12)
         }
     }
 }

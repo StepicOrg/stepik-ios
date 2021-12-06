@@ -4,9 +4,6 @@ protocol CourseInfoPurchaseModalPresenterProtocol {
     func presentModal(response: CourseInfoPurchaseModal.ModalLoad.Response)
     func presentCheckPromoCodeResult(response: CourseInfoPurchaseModal.CheckPromoCode.Response)
     func presentAddCourseToWishlistResult(response: CourseInfoPurchaseModal.AddCourseToWishlist.Response)
-    func presentFullscreenWishlistCourseList(
-        response: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.Response
-    )
 }
 
 final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterProtocol {
@@ -47,12 +44,6 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
                 viewModel: .init(state: .result(message: message, data: viewModel))
             )
         }
-    }
-
-    func presentFullscreenWishlistCourseList(
-        response: CourseInfoPurchaseModal.FullscreenWishlistCourseListPresentation.Response
-    ) {
-        self.viewController?.displayFullscreenWishlistCourseList(viewModel: .init())
     }
 
     // MARK: Private API
