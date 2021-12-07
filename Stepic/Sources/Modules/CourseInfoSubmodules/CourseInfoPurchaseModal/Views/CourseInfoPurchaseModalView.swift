@@ -10,6 +10,8 @@ protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL)
     func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidClickRestorePurchaseButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView)
 }
 
 extension CourseInfoPurchaseModalView {
@@ -44,6 +46,8 @@ final class CourseInfoPurchaseModalView: UIView {
     }()
 
     private lazy var errorPlaceholderView = StepikPlaceholderView()
+
+    private lazy var purchaseErrorView = CourseInfoPurchaseModalPurchaseErrorView()
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
@@ -115,6 +119,9 @@ final class CourseInfoPurchaseModalView: UIView {
 
         self.actionButtonsView.configureBuyButton(viewModel: viewModel.price)
         self.configure(viewModel: viewModel.wishlist)
+
+        self.purchaseErrorView.courseCoverURL = viewModel.courseCoverImageURL
+        self.purchaseErrorView.courseTitle = viewModel.courseTitle
     }
 
     func configure(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
@@ -167,12 +174,31 @@ final class CourseInfoPurchaseModalView: UIView {
         self.isUserInteractionEnabled = true
     }
 
+    func showPurchaseError() {
+        self.setPurchaseErrorStateVisible(true)
+    }
+
+    func hidePurchaseError() {
+        self.setPurchaseErrorStateVisible(false)
+    }
+
     // MARK: Private API
 
     private func updateErrorPlaceholderHeight() {
         self.invalidateIntrinsicContentSize()
         let height = floor(self.intrinsicContentSize.height)
         self.errorPlaceholderViewHeightConstraint?.update(offset: height)
+    }
+
+    private func setPurchaseErrorStateVisible(_ isVisible: Bool) {
+        self.scrollableStackView.arrangedSubviews.forEach { subview in
+            if isVisible {
+                subview.isHidden = !(subview === self.headerView || subview === self.purchaseErrorView)
+            } else {
+                subview.isHidden = subview === self.purchaseErrorView
+            }
+        }
+        self.invalidateIntrinsicContentSize()
     }
 }
 
@@ -214,6 +240,22 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
             strongSelf.delegate?.courseInfoPurchaseModalViewDidClickWishlistButton(strongSelf)
         }
+
+        self.purchaseErrorView.isHidden = true
+        self.purchaseErrorView.onContactSupportClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(strongSelf)
+        }
+        self.purchaseErrorView.onRestorePurchaseClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidClickRestorePurchaseButton(strongSelf)
+        }
     }
 
     func addSubviews() {
@@ -226,6 +268,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
         self.scrollableStackView.addArrangedView(self.promoCodeView)
         self.scrollableStackView.addArrangedView(self.disclaimerView)
         self.scrollableStackView.addArrangedView(self.actionButtonsView)
+        self.scrollableStackView.addArrangedView(self.purchaseErrorView)
     }
 
     func makeConstraints() {

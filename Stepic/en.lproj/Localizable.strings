@@ -528,16 +528,22 @@ CourseInfoTabNewsDateOneTimeSending = "From %@";
 
 /* CourseInfoPurchaseModal */
 CourseInfoPurchaseModalTitle = "Course purchase";
+CourseInfoPurchaseModalDisclaimer = "В цену включена 15% комиссия App Store. Оплачивая доступ к этому курсу вы соглашаетесь с условиями <a href=\"https://welcome.stepik.org/en/payment-terms\"> пользовательского соглашения</a>.";
+
 CourseInfoPurchaseModalRevealPromoCodeInputTitle = "I have a promo code";
 CourseInfoPurchaseModalInputPlaceholder = "Enter a promo code";
 CourseInfoPurchaseModalPromoCodeStatusLoading = "Checking the promo code";
 CourseInfoPurchaseModalPromoCodeStatusError = "Invalid promo code";
 CourseInfoPurchaseModalPromoCodeStatusSuccess = "Promo code applied";
 CourseInfoPurchaseModalCheckPromoCodeStateError = "Unable to check the promo code";
+
 CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle = "Adding";
 CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle = "Add to Wishlist";
 CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "Added to Wishlist";
-CourseInfoPurchaseModalDisclaimer = "В цену включена 15% комиссия App Store. Оплачивая доступ к этому курсу вы соглашаетесь с условиями <a href=\"https://welcome.stepik.org/en/payment-terms\"> пользовательского соглашения</a>.";
+
+CourseInfoPurchaseModalPurchaseErrorStatusTitle = "The payment was successful, but the purchase is not completed";
+CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "An error occurred while processing the payment, try to restore the purchase and <a href=\"https://support.stepik.org/hc/en-us\">contact support</a>, if the error persists. The funds will not be debited again.";
+CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Restore Purchase";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";

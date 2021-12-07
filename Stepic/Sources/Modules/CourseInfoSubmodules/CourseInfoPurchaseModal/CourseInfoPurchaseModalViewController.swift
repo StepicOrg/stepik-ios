@@ -15,10 +15,12 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     private var state: CourseInfoPurchaseModal.ViewControllerState
 
     private var hasLoadedData: Bool {
-        if case .result = self.state {
+        switch self.state {
+        case .loading, .error:
+            return false
+        default:
             return true
         }
-        return false
     }
 
     private var keyboardIsShowing = false
@@ -118,6 +120,8 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         self.isPurchaseInProgress = false
         self.courseInfoPurchaseModalView?.hidePurchaseInProgress()
 
+        self.courseInfoPurchaseModalView?.hidePurchaseError()
+
         switch newState {
         case .loading:
             self.courseInfoPurchaseModalView?.showLoading()
@@ -131,7 +135,8 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         case .purchaseErrorAppStore:
             fatalError("not implemented")
         case .purchaseErrorStepik:
-            fatalError("not implemented")
+            self.courseInfoPurchaseModalView?.showPurchaseError()
+            self.transition(to: .longForm)
         case .purchaseSuccess:
             fatalError("not implemented")
         }
@@ -239,5 +244,13 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
 
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView) {
         self.interactor.doWishlistMainAction(request: .init())
+    }
+
+    func courseInfoPurchaseModalViewDidClickRestorePurchaseButton(_ view: CourseInfoPurchaseModalView) {
+        print(#function)
+    }
+
+    func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView) {
+        print(#function)
     }
 }

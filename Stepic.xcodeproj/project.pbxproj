@@ -711,6 +711,8 @@
 		2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */; };
 		2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */; };
 		2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */; };
+		2C6BE0C7275F74EA004C0751 /* CourseInfoPurchaseModalPurchaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BE0C6275F74EA004C0751 /* CourseInfoPurchaseModalPurchaseErrorView.swift */; };
+		2C6BE0C9275F7C28004C0751 /* CourseInfoPurchaseModalPurchaseErrorFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BE0C8275F7C28004C0751 /* CourseInfoPurchaseModalPurchaseErrorFeedbackView.swift */; };
 		2C6C605D2721686C00649FDF /* SplitTestPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C605C2721686C00649FDF /* SplitTestPlainObject.swift */; };
 		2C6C6F5125656DC1003B8CF1 /* SystemCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */; };
 		2C6CA82024ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */; };
@@ -2729,6 +2731,8 @@
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
 		2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsNetworkService.swift; sourceTree = "<group>"; };
 		2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsNetworkService.swift; sourceTree = "<group>"; };
+		2C6BE0C6275F74EA004C0751 /* CourseInfoPurchaseModalPurchaseErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalPurchaseErrorView.swift; sourceTree = "<group>"; };
+		2C6BE0C8275F7C28004C0751 /* CourseInfoPurchaseModalPurchaseErrorFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalPurchaseErrorFeedbackView.swift; sourceTree = "<group>"; };
 		2C6C605C2721686C00649FDF /* SplitTestPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTestPlainObject.swift; sourceTree = "<group>"; };
 		2C6C6F5025656DC1003B8CF1 /* SystemCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemCloseButton.swift; sourceTree = "<group>"; };
 		2C6CA81F24ABB2EE00E2EB2F /* NewProfileUserActivityCurrentStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileUserActivityCurrentStreakView.swift; sourceTree = "<group>"; };
@@ -4688,6 +4692,7 @@
 				3DA7BE8123937B6574E8544D /* CourseInfoPurchaseModalView.swift */,
 				2CBEAAD1271F0D6500B52D2C /* ActionButtons */,
 				2CBD17E7271EBDF9007B9CDB /* PromoCode */,
+				2C6BE0C5275F74B2004C0751 /* Purchase */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4980,6 +4985,15 @@
 				089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2C6BE0C5275F74B2004C0751 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				2C6BE0C8275F7C28004C0751 /* CourseInfoPurchaseModalPurchaseErrorFeedbackView.swift */,
+				2C6BE0C6275F74EA004C0751 /* CourseInfoPurchaseModalPurchaseErrorView.swift */,
+			);
+			path = Purchase;
 			sourceTree = "<group>";
 		};
 		2C6CA82124ABB2F400E2EB2F /* Views */ = {
@@ -11541,6 +11555,7 @@
 				2CC8678725E1504000762416 /* SubmissionsFilterQuery.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */,
+				2C6BE0C7275F74EA004C0751 /* CourseInfoPurchaseModalPurchaseErrorView.swift in Sources */,
 				08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				2C921A3B269C814200029A1E /* CourseRevenueTabMonthlyCellView.swift in Sources */,
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
@@ -12605,6 +12620,7 @@
 				CE3BDE67E09B4AE682B47898 /* WishlistWidgetAssembly.swift in Sources */,
 				23B455266871E25BA3D122F9 /* WishlistWidgetDataFlow.swift in Sources */,
 				CCB00B7C98EC98B9B2425301 /* WishlistWidgetInteractor.swift in Sources */,
+				2C6BE0C9275F7C28004C0751 /* CourseInfoPurchaseModalPurchaseErrorFeedbackView.swift in Sources */,
 				AA78F59BEB08F6B16E4C42D8 /* WishlistWidgetPresenter.swift in Sources */,
 				F9142D70A6CA02573E78199D /* WishlistWidgetProvider.swift in Sources */,
 				A22E18D8EAA128C1B265F40E /* WishlistWidgetView.swift in Sources */,

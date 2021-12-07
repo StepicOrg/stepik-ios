@@ -5,11 +5,11 @@ extension CourseInfoPurchaseModalCourseCoverView {
     struct Appearance {
         let coverImageViewSize = CGSize(width: 48, height: 48)
         let coverImageViewCornerRadius: CGFloat = 8
-        let coverImageViewInsets = LayoutInsets(left: 16)
+        var coverImageViewInsets = LayoutInsets(left: 16)
 
         let titleFont = UIFont.systemFont(ofSize: 19, weight: .semibold)
         let titleTextColor = UIColor.stepikMaterialPrimaryText
-        let titleInsets = LayoutInsets(horizontal: 16)
+        var titleInsets = LayoutInsets(horizontal: 16)
     }
 }
 
