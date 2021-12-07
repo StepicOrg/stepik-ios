@@ -159,6 +159,14 @@ final class CourseInfoPurchaseModalView: UIView {
         self.errorPlaceholderView.isHidden = true
     }
 
+    func showPurchaseInProgress() {
+        self.isUserInteractionEnabled = false
+    }
+
+    func hidePurchaseInProgress() {
+        self.isUserInteractionEnabled = true
+    }
+
     // MARK: Private API
 
     private func updateErrorPlaceholderHeight() {

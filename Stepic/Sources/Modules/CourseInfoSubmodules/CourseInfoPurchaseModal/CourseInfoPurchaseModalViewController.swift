@@ -24,6 +24,8 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     private var keyboardIsShowing = false
     private var keyboardHeight: CGFloat = 0
 
+    private var isPurchaseInProgress = false
+
     var courseInfoPurchaseModalView: CourseInfoPurchaseModalView? { self.view as? CourseInfoPurchaseModalView }
 
     override var panScrollable: UIScrollView? {
@@ -51,6 +53,10 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
         return super.longFormHeight
     }
+
+    override var allowsDragToDismiss: Bool { !self.isPurchaseInProgress }
+
+    override var allowsTapToDismiss: Bool { !self.isPurchaseInProgress }
 
     init(
         interactor: CourseInfoPurchaseModalInteractorProtocol,
@@ -106,18 +112,28 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     // MARK: Private API
 
     private func updateState(newState: CourseInfoPurchaseModal.ViewControllerState) {
-        switch newState {
-        case .result(let viewModel):
-            self.courseInfoPurchaseModalView?.hideLoading()
-            self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
+        self.courseInfoPurchaseModalView?.hideLoading()
+        self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
 
-            self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+        self.isPurchaseInProgress = false
+        self.courseInfoPurchaseModalView?.hidePurchaseInProgress()
+
+        switch newState {
         case .loading:
             self.courseInfoPurchaseModalView?.showLoading()
-            self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
         case .error:
-            self.courseInfoPurchaseModalView?.hideLoading()
             self.courseInfoPurchaseModalView?.showErrorPlaceholder()
+        case .result(let viewModel):
+            self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+        case .purchaseInProgress:
+            self.isPurchaseInProgress = true
+            self.courseInfoPurchaseModalView?.showPurchaseInProgress()
+        case .purchaseErrorAppStore:
+            fatalError("not implemented")
+        case .purchaseErrorStepik:
+            fatalError("not implemented")
+        case .purchaseSuccess:
+            fatalError("not implemented")
         }
 
         self.state = newState

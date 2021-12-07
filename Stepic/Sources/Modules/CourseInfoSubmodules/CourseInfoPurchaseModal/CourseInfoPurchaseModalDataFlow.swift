@@ -75,6 +75,10 @@ enum CourseInfoPurchaseModal {
         case loading
         case error
         case result(data: CourseInfoPurchaseModalViewModel)
+        case purchaseInProgress
+        case purchaseErrorAppStore
+        case purchaseErrorStepik
+        case purchaseSuccess
     }
 
     enum CheckPromoCodeState {
