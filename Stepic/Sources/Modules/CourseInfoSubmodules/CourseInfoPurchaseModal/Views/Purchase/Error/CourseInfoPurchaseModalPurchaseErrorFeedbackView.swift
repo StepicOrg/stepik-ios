@@ -68,9 +68,19 @@ final class CourseInfoPurchaseModalPurchaseErrorFeedbackView: UIView {
     var onLinkClick: ((URL) -> Void)?
 
     override var intrinsicContentSize: CGSize {
+        let availableWidthForTitleLabel = self.bounds.width
+            - self.appearance.iconImageViewInsets.left
+            - self.appearance.iconImageViewSize.width
+            - self.appearance.titleLabelInsets.left
+            - self.appearance.titleLabelInsets.right
+        let titleLabelHeight = self.titleLabel.sizeThatFits(
+            CGSize(width: availableWidthForTitleLabel, height: .infinity)
+        ).height
+
         let height = self.appearance.titleLabelInsets.top
-            + self.titleLabel.sizeThatFits(CGSize(width: self.bounds.width, height: .infinity)).height
+            + titleLabelHeight
             + self.appearance.titleLabelInsets.bottom
+
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 

@@ -142,7 +142,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             fatalError("not implemented")
         case .purchaseErrorStepik:
             self.courseInfoPurchaseModalView?.showPurchaseError()
-            self.transition(to: .shortForm)
+            self.transition(to: .longForm)
         case .purchaseSuccess:
             self.courseInfoPurchaseModalView?.showPurchaseSuccess()
             self.transition(to: .shortForm)
