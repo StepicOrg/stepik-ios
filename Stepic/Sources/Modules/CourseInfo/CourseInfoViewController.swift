@@ -11,6 +11,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayExamLesson(viewModel: CourseInfo.ExamLessonPresentation.ViewModel)
     func displayCourseSharing(viewModel: CourseInfo.CourseShareAction.ViewModel)
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
+    func displayPurchaseModalStartLearning(viewModel: CourseInfo.PurchaseModalStartLearningPresentation.ViewModel)
     func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel)
     func displayLessonModuleCatalogAction(viewModel: CourseInfo.LessonModuleCatalogPresentation.ViewModel)
     func displayLessonModuleWriteReviewAction(viewModel: CourseInfo.LessonModuleWriteReviewPresentation.ViewModel)
@@ -607,19 +608,23 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel) {
-        guard let navigationController = self.navigationController else {
-            return
+        self.dismiss(animated: true) { [weak self] in
+            self?.continueLearning(
+                course: viewModel.course,
+                isAdaptive: viewModel.isAdaptive,
+                courseViewSource: viewModel.courseViewSource
+            )
         }
+    }
 
-        LastStepRouter.continueLearning(
-            for: viewModel.course,
-            isAdaptive: viewModel.isAdaptive,
-            using: navigationController,
-            skipSyllabus: true,
-            source: .courseScreen,
-            viewSource: viewModel.courseViewSource,
-            lessonModuleOutput: self.interactor as? LessonOutputProtocol
-        )
+    func displayPurchaseModalStartLearning(viewModel: CourseInfo.PurchaseModalStartLearningPresentation.ViewModel) {
+        self.dismiss(animated: true) { [weak self] in
+            self?.continueLearning(
+                course: viewModel.course,
+                isAdaptive: viewModel.isAdaptive,
+                courseViewSource: viewModel.courseViewSource
+            )
+        }
     }
 
     func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel) {
@@ -742,6 +747,26 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     // MARK: Private Helpers
+
+    private func continueLearning(
+        course: Course,
+        isAdaptive: Bool,
+        courseViewSource: AnalyticsEvent.CourseViewSource
+    ) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+
+        LastStepRouter.continueLearning(
+            for: course,
+            isAdaptive: isAdaptive,
+            using: navigationController,
+            skipSyllabus: true,
+            source: .courseScreen,
+            viewSource: courseViewSource,
+            lessonModuleOutput: self.interactor as? LessonOutputProtocol
+        )
+    }
 
     private func popLessonViewController() -> UIViewController? {
         guard let navigationController = self.navigationController,

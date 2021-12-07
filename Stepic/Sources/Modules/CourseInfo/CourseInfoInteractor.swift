@@ -701,4 +701,19 @@ extension CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol {
 
         self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
     }
+
+    func handleCourseInfoPurchaseModalDidRequestStartLearning(courseID: Course.IdType) {
+        guard let course = self.currentCourse,
+              course.id == courseID && course.enrolled else {
+            return
+        }
+
+        self.presenter.presentPurchaseModalStartLearning(
+            response: .init(
+                course: course,
+                isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: course.id),
+                courseViewSource: self.courseViewSource
+            )
+        )
+    }
 }

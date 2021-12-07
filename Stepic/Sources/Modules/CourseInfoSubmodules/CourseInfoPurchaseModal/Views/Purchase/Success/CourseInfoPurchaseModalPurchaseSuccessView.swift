@@ -1,28 +1,28 @@
 import SnapKit
 import UIKit
 
-extension CourseInfoPurchaseModalPurchaseErrorView {
+extension CourseInfoPurchaseModalPurchaseSuccessView {
     struct Appearance {
         let iconImageViewSize = CGSize(width: 56, height: 56)
-        let iconImageViewTintColor = UIColor.stepikDiscountPriceText
+        let iconImageViewTintColor = UIColor.stepikGreenFixed
 
         let statusLabelFont = UIFont.systemFont(ofSize: 15, weight: .medium)
         let statusLabelTextColor = UIColor.stepikMaterialPrimaryText
 
-        let restoreButtonHeight: CGFloat = 44
-        let restoreButtonTextColor = UIColor.white
-        let restoreButtonBackgroundColor = UIColor.stepikGreenFixed
+        let actionButtonHeight: CGFloat = 44
+        let actionButtonTextColor = UIColor.white
+        let actionButtonBackgroundColor = UIColor.stepikGreenFixed
 
         let stackViewSpacing: CGFloat = 16
         let stackViewInsets = LayoutInsets(horizontal: 16)
     }
 }
 
-final class CourseInfoPurchaseModalPurchaseErrorView: UIView {
+final class CourseInfoPurchaseModalPurchaseSuccessView: UIView {
     let appearance: Appearance
 
     private lazy var iconImageView: UIImageView = {
-        let image = UIImage(named: "CourseInfoPurchaseModalPurchaseFail")?.withRenderingMode(.alwaysTemplate)
+        let image = UIImage(named: "CourseInfoPurchaseModalPurchaseSuccess")?.withRenderingMode(.alwaysTemplate)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = self.appearance.iconImageViewTintColor
@@ -34,48 +34,34 @@ final class CourseInfoPurchaseModalPurchaseErrorView: UIView {
         label.font = self.appearance.statusLabelFont
         label.textColor = self.appearance.statusLabelTextColor
         label.numberOfLines = 0
-        label.text = NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorStatusTitle", comment: "")
+        label.text = NSLocalizedString("CourseInfoPurchaseModalPurchaseSuccessStatusTitle", comment: "")
         label.textAlignment = .center
         return label
     }()
 
     private lazy var coverView: CourseInfoPurchaseModalCourseCoverView = {
         var appearance = CourseInfoPurchaseModalCourseCoverView.Appearance()
-        appearance.coverImageViewInsets = LayoutInsets(left: 0)
+        appearance.coverImageViewInsets = LayoutInsets(top: 16, left: 0)
         appearance.titleInsets = LayoutInsets(left: 16, right: 0)
         let view = CourseInfoPurchaseModalCourseCoverView(appearance: appearance)
         return view
     }()
 
-    private lazy var feedbackView: CourseInfoPurchaseModalPurchaseErrorFeedbackView = {
-        let view = CourseInfoPurchaseModalPurchaseErrorFeedbackView()
-        view.onLinkClick = { [weak self] url in
-            guard let strongSelf = self else {
-                return
-            }
-
-            guard url.absoluteString.contains("support.stepik") else {
-                return
-            }
-
-            strongSelf.onContactSupportClick?()
-        }
-        return view
-    }()
-
-    private lazy var restoreButton: CourseInfoPurchaseModalActionButton = {
+    private lazy var actionButton: CourseInfoPurchaseModalActionButton = {
         var appearance = CourseInfoPurchaseModalActionButton.Appearance()
-        appearance.textLabelTextColor = self.appearance.restoreButtonTextColor
-        appearance.backgroundColor = self.appearance.restoreButtonBackgroundColor
+        appearance.textLabelTextColor = self.appearance.actionButtonTextColor
+        appearance.backgroundColor = self.appearance.actionButtonBackgroundColor
         let button = CourseInfoPurchaseModalActionButton(appearance: appearance)
-        button.text = NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorRestoreTitle", comment: "")
-        button.addTarget(self, action: #selector(self.restoreButtonClicked), for: .touchUpInside)
+        button.text = NSLocalizedString("CourseInfoPurchaseModalPurchaseSuccessStartLearningTitle", comment: "")
+        button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         return button
     }()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
@@ -92,8 +78,7 @@ final class CourseInfoPurchaseModalPurchaseErrorView: UIView {
         }
     }
 
-    var onRestorePurchaseClick: (() -> Void)?
-    var onContactSupportClick: (() -> Void)?
+    var onStartLearningClick: (() -> Void)?
 
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -118,12 +103,12 @@ final class CourseInfoPurchaseModalPurchaseErrorView: UIView {
     }
 
     @objc
-    private func restoreButtonClicked() {
-        self.onRestorePurchaseClick?()
+    private func actionButtonClicked() {
+        self.onStartLearningClick?()
     }
 }
 
-extension CourseInfoPurchaseModalPurchaseErrorView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoPurchaseModalPurchaseSuccessView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {}
 
     func addSubviews() {
@@ -132,9 +117,8 @@ extension CourseInfoPurchaseModalPurchaseErrorView: ProgrammaticallyInitializabl
         self.stackView.addArrangedSubview(self.iconImageView)
         self.stackView.addArrangedSubview(self.statusLabel)
         self.stackView.addArrangedSubview(self.coverView)
-        self.stackView.addArrangedSubview(self.feedbackView)
         self.stackView.addArrangedSubview(SeparatorView())
-        self.stackView.addArrangedSubview(self.restoreButton)
+        self.stackView.addArrangedSubview(self.actionButton)
     }
 
     func makeConstraints() {
@@ -150,9 +134,9 @@ extension CourseInfoPurchaseModalPurchaseErrorView: ProgrammaticallyInitializabl
             make.centerX.equalToSuperview()
         }
 
-        self.restoreButton.translatesAutoresizingMaskIntoConstraints = false
-        self.restoreButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.restoreButtonHeight)
+        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.actionButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.actionButtonHeight)
         }
     }
 }

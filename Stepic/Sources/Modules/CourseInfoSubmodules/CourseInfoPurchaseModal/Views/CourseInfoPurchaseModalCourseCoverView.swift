@@ -5,7 +5,7 @@ extension CourseInfoPurchaseModalCourseCoverView {
     struct Appearance {
         let coverImageViewSize = CGSize(width: 48, height: 48)
         let coverImageViewCornerRadius: CGFloat = 8
-        var coverImageViewInsets = LayoutInsets(left: 16)
+        var coverImageViewInsets = LayoutInsets(top: 0, left: 16)
 
         let titleFont = UIFont.systemFont(ofSize: 19, weight: .semibold)
         let titleTextColor = UIColor.stepikMaterialPrimaryText
@@ -44,10 +44,9 @@ final class CourseInfoPurchaseModalCourseCoverView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: max(self.appearance.coverImageViewSize.height, self.titleLabel.intrinsicContentSize.height)
-        )
+        let height = self.appearance.coverImageViewInsets.top
+            + max(self.appearance.coverImageViewSize.height, self.titleLabel.intrinsicContentSize.height)
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
     init(
@@ -76,7 +75,7 @@ extension CourseInfoPurchaseModalCourseCoverView: ProgrammaticallyInitializableV
     func makeConstraints() {
         self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
         self.coverImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(self.appearance.coverImageViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.coverImageViewInsets.left)
             make.size.equalTo(self.appearance.coverImageViewSize)
         }

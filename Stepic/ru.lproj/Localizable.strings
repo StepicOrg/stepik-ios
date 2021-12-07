@@ -547,6 +547,8 @@ CourseInfoPurchaseModalPurchaseErrorStatusTitle = "Оплата прошла, п
 CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "При обработке платежа произошла ошибка, попробуйте восстановить покупку и <a href=\"https://support.stepik.org/hc/ru\">свяжитесь с поддержкой</a>, если ошибка не будет устранена. Повторного списания средств не произойдет.";
 CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Восстановить покупку";
 CourseInfoPurchaseModalPurchaseErrorContactSupportSubject = "Ошибка при покупке курса";
+CourseInfoPurchaseModalPurchaseSuccessStatusTitle = "Оплата прошла успешно";
+CourseInfoPurchaseModalPurchaseSuccessStartLearningTitle = "Начать учиться";
 
 /* Course revenue */
 CourseRevenueTitle = "Доходы";

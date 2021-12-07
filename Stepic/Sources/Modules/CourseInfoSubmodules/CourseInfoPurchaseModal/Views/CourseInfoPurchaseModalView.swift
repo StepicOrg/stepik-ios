@@ -12,6 +12,7 @@ protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalViewDidClickRestorePurchaseButton(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidClickStartLearningButton(_ view: CourseInfoPurchaseModalView)
 }
 
 extension CourseInfoPurchaseModalView {
@@ -49,6 +50,8 @@ final class CourseInfoPurchaseModalView: UIView {
 
     private lazy var purchaseErrorView = CourseInfoPurchaseModalPurchaseErrorView()
 
+    private lazy var purchaseSuccessView = CourseInfoPurchaseModalPurchaseSuccessView()
+
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
         scrollableStackView.spacing = self.appearance.stackViewSpacing
@@ -56,6 +59,10 @@ final class CourseInfoPurchaseModalView: UIView {
     }()
 
     private var errorPlaceholderViewHeightConstraint: Constraint?
+
+    private var resultStateContentViews: [UIView] {
+        [self.coverView, self.promoCodeView, self.disclaimerView, self.actionButtonsView]
+    }
 
     var contentInsets: UIEdgeInsets {
         get {
@@ -122,6 +129,9 @@ final class CourseInfoPurchaseModalView: UIView {
 
         self.purchaseErrorView.courseCoverURL = viewModel.courseCoverImageURL
         self.purchaseErrorView.courseTitle = viewModel.courseTitle
+
+        self.purchaseSuccessView.courseCoverURL = viewModel.courseCoverImageURL
+        self.purchaseSuccessView.courseTitle = viewModel.courseTitle
     }
 
     func configure(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
@@ -182,6 +192,14 @@ final class CourseInfoPurchaseModalView: UIView {
         self.setPurchaseErrorStateVisible(false)
     }
 
+    func showPurchaseSuccess() {
+        self.setPurchaseSuccessStateVisible(true)
+    }
+
+    func hidePurchaseSuccess() {
+        self.setPurchaseSuccessStateVisible(false)
+    }
+
     // MARK: Private API
 
     private func updateErrorPlaceholderHeight() {
@@ -191,13 +209,14 @@ final class CourseInfoPurchaseModalView: UIView {
     }
 
     private func setPurchaseErrorStateVisible(_ isVisible: Bool) {
-        self.scrollableStackView.arrangedSubviews.forEach { subview in
-            if isVisible {
-                subview.isHidden = !(subview === self.headerView || subview === self.purchaseErrorView)
-            } else {
-                subview.isHidden = subview === self.purchaseErrorView
-            }
-        }
+        self.purchaseErrorView.isHidden = !isVisible
+        self.resultStateContentViews.forEach { $0.isHidden = isVisible }
+        self.invalidateIntrinsicContentSize()
+    }
+
+    private func setPurchaseSuccessStateVisible(_ isVisible: Bool) {
+        self.purchaseSuccessView.isHidden = !isVisible
+        self.resultStateContentViews.forEach { $0.isHidden = isVisible }
         self.invalidateIntrinsicContentSize()
     }
 }
@@ -256,6 +275,15 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
             strongSelf.delegate?.courseInfoPurchaseModalViewDidClickRestorePurchaseButton(strongSelf)
         }
+
+        self.purchaseSuccessView.isHidden = true
+        self.purchaseSuccessView.onStartLearningClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoPurchaseModalViewDidClickStartLearningButton(strongSelf)
+        }
     }
 
     func addSubviews() {
@@ -269,6 +297,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
         self.scrollableStackView.addArrangedView(self.disclaimerView)
         self.scrollableStackView.addArrangedView(self.actionButtonsView)
         self.scrollableStackView.addArrangedView(self.purchaseErrorView)
+        self.scrollableStackView.addArrangedView(self.purchaseSuccessView)
     }
 
     func makeConstraints() {

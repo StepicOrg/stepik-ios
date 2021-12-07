@@ -126,6 +126,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         self.courseInfoPurchaseModalView?.hidePurchaseInProgress()
 
         self.courseInfoPurchaseModalView?.hidePurchaseError()
+        self.courseInfoPurchaseModalView?.hidePurchaseSuccess()
 
         switch newState {
         case .loading:
@@ -141,15 +142,20 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             fatalError("not implemented")
         case .purchaseErrorStepik:
             self.courseInfoPurchaseModalView?.showPurchaseError()
-            self.transition(to: .longForm)
+            self.transition(to: .shortForm)
         case .purchaseSuccess:
-            fatalError("not implemented")
+            self.courseInfoPurchaseModalView?.showPurchaseSuccess()
+            self.transition(to: .shortForm)
         }
 
         self.state = newState
     }
 
     private func transition(to state: PanModalPresentationController.PresentationState) {
+        if state == .shortForm {
+            self.isShortFormEnabled = true
+        }
+
         self.panModalSetNeedsLayoutUpdate()
         self.panModalTransition(to: state)
     }
@@ -257,5 +263,9 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
 
     func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView) {
         self.purchaseErrorContactSupportController.contactSupport()
+    }
+
+    func courseInfoPurchaseModalViewDidClickStartLearningButton(_ view: CourseInfoPurchaseModalView) {
+        self.interactor.doStartLearningPresentation(request: .init())
     }
 }

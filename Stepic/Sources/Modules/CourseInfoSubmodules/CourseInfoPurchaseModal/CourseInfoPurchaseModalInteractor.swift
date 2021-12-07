@@ -6,6 +6,7 @@ protocol CourseInfoPurchaseModalInteractorProtocol {
     func doCheckPromoCode(request: CourseInfoPurchaseModal.CheckPromoCode.Request)
     func doPromoCodeDidChange(request: CourseInfoPurchaseModal.PromoCodeDidChange.Request)
     func doWishlistMainAction(request: CourseInfoPurchaseModal.WishlistMainAction.Request)
+    func doStartLearningPresentation(request: CourseInfoPurchaseModal.StartLearningPresentation.Request)
 }
 
 final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractorProtocol {
@@ -135,6 +136,10 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         }.catch { _ in
             self.presenter.presentAddCourseToWishlistResult(response: .init(state: .error))
         }
+    }
+
+    func doStartLearningPresentation(request: CourseInfoPurchaseModal.StartLearningPresentation.Request) {
+        self.moduleOutput?.handleCourseInfoPurchaseModalDidRequestStartLearning(courseID: self.courseID)
     }
 
     // MARK: Private API

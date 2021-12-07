@@ -69,6 +69,11 @@ enum CourseInfoPurchaseModal {
         }
     }
 
+    /// Perform continue learning action after success purchase
+    enum StartLearningPresentation {
+        struct Request {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {
