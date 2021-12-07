@@ -608,13 +608,11 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel) {
-        self.dismiss(animated: true) { [weak self] in
-            self?.continueLearning(
-                course: viewModel.course,
-                isAdaptive: viewModel.isAdaptive,
-                courseViewSource: viewModel.courseViewSource
-            )
-        }
+        self.continueLearning(
+            course: viewModel.course,
+            isAdaptive: viewModel.isAdaptive,
+            courseViewSource: viewModel.courseViewSource
+        )
     }
 
     func displayPurchaseModalStartLearning(viewModel: CourseInfo.PurchaseModalStartLearningPresentation.ViewModel) {
