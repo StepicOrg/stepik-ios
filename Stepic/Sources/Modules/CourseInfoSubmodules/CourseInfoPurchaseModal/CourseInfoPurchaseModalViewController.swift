@@ -28,6 +28,11 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
     private var isPurchaseInProgress = false
 
+    private lazy var purchaseErrorContactSupportController = ContactSupportController(
+        subject: NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorContactSupportSubject", comment: ""),
+        presentationController: self
+    )
+
     var courseInfoPurchaseModalView: CourseInfoPurchaseModalView? { self.view as? CourseInfoPurchaseModalView }
 
     override var panScrollable: UIScrollView? {
@@ -251,6 +256,6 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
     }
 
     func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView) {
-        print(#function)
+        self.purchaseErrorContactSupportController.contactSupport()
     }
 }

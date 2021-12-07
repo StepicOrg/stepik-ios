@@ -544,6 +544,7 @@ CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "Added to Wishlist";
 CourseInfoPurchaseModalPurchaseErrorStatusTitle = "The payment was successful, but the purchase is not completed";
 CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "An error occurred while processing the payment, try to restore the purchase and <a href=\"https://support.stepik.org/hc/en-us\">contact support</a>, if the error persists. The funds will not be debited again.";
 CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Restore Purchase";
+CourseInfoPurchaseModalPurchaseErrorContactSupportSubject = "Error when purchasing course";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
