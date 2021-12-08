@@ -21,7 +21,7 @@ protocol IAPPaymentsServiceProtocol: AnyObject {
 
     func canMakePayments() -> Bool
 
-    func buy(courseID: Course.IdType, product: SKProduct)
+    func buy(courseID: Course.IdType, promoCode: String?, product: SKProduct)
     func retryValidateReceipt(courseID: Course.IdType, productIdentifier: IAPProductIdentifier)
 }
 
@@ -74,9 +74,9 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
         SKPaymentQueue.canMakePayments()
     }
 
-    func buy(courseID: Course.IdType, product: SKProduct) {
+    func buy(courseID: Course.IdType, promoCode: String?, product: SKProduct) {
         if self.canMakePayments() {
-            self.paymentsCache.insertCoursePayment(courseID: courseID, product: product)
+            self.paymentsCache.insertCoursePayment(courseID: courseID, promoCode: promoCode, product: product)
             self.paymentQueue.add(SKPayment(product: product))
         } else {
             self.delegate?.iapPaymentsService(self, didFailPurchaseCourse: courseID, withError: Error.paymentNotAllowed)
@@ -194,6 +194,7 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
             courseID: payload.courseID,
             price: payload.price,
             currencyCode: payload.currencyCode,
+            promoCode: payload.promoCode,
             forceRefreshReceipt: forceRefreshReceipt
         ).done { _ in
             if self.mutableState.isAutoRetryValidateReceiptOngoing(courseID: courseID) {

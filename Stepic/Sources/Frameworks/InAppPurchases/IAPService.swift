@@ -235,7 +235,7 @@ final class IAPService: IAPServiceProtocol {
 
         self.fetchProduct(for: course).done { productOrNil in
             if let product = productOrNil {
-                self.paymentsService.buy(courseID: courseID, product: product)
+                self.paymentsService.buy(courseID: courseID, promoCode: nil, product: product)
             } else {
                 self.handleCoursePaymentFailed(courseID: courseID, error: Error.productsRequestFailed)
             }
