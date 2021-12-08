@@ -5,6 +5,8 @@ extension CourseInfoPurchaseModalActionButtonsView {
     struct Appearance {
         let actionButtonHeight: CGFloat = 44
 
+        let buyButtonFullPriceFont = UIFont.systemFont(ofSize: 12)
+
         let wishlistButtonBorderWidth: CGFloat = 1
 
         let stackViewSpacing: CGFloat = 16
@@ -59,6 +61,58 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Public API
+
+    func configureBuyButton(viewModel: CourseInfoPurchaseModalPriceViewModel) {
+        if let promoDisplayPrice = viewModel.promoDisplayPrice {
+            let buyWithPromoTitle = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), promoDisplayPrice)
+            let formattedTitle = "\(buyWithPromoTitle) \(viewModel.displayPrice)"
+
+            let buyButtonAppearance = CourseInfoPurchaseModalActionButton.Appearance()
+
+            let attributedTitle = NSMutableAttributedString(
+                string: formattedTitle,
+                attributes: [
+                    .font: buyButtonAppearance.textLabelFont,
+                    .foregroundColor: buyButtonAppearance.textLabelTextColor
+                ]
+            )
+
+            if let displayPriceLocation = formattedTitle.indexOf(viewModel.displayPrice) {
+                attributedTitle.addAttributes(
+                    [
+                        .font: self.appearance.buyButtonFullPriceFont,
+                        .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                        .strikethroughColor: buyButtonAppearance.textLabelTextColor
+                    ],
+                    range: NSRange(location: displayPriceLocation, length: viewModel.displayPrice.count)
+                )
+            }
+
+            self.buyButton.attributedText = attributedTitle
+        } else {
+            self.buyButton.text = String(
+                format: NSLocalizedString("WidgetButtonBuy", comment: ""),
+                viewModel.displayPrice
+            )
+        }
+    }
+
+    func configureWishlistButton(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
+        self.wishlistButton.text = viewModel.title
+
+        var newAppearance = self.wishlistButton.appearance
+        newAppearance.borderColor = viewModel.isInWishlist
+            ? self.style.wishlistButtonDisabledBorderColor
+            : self.style.wishlistButtonBorderColor
+        self.wishlistButton.appearance = newAppearance
+
+        self.wishlistButton.isLoadingActivityIndicatorVisible = viewModel.isLoading
+        self.wishlistButton.isUserInteractionEnabled = !viewModel.isInWishlist && !viewModel.isLoading
+    }
+
+    // MARK: Private API
+
     @objc
     private func buyButtonClicked() {
         self.onBuyButtonClick?()
@@ -75,7 +129,7 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
             backgroundColor: self.style.buyButtonBackgroundColor
         )
         self.wishlistButton.appearance = .init(
-            iconImageViewTintColor: self.style.wishlistButtonTextColor,
+            loadingIndicatorColor: self.style.wishlistButtonTextColor,
             textLabelTextColor: self.style.wishlistButtonTextColor,
             backgroundColor: self.style.wishlistButtonBackgroundColor,
             borderWidth: self.appearance.wishlistButtonBorderWidth,
@@ -116,6 +170,10 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
             case .green:
                 return .stepikGreenFixed
             }
+        }
+
+        fileprivate var wishlistButtonDisabledBorderColor: UIColor {
+            self.wishlistButtonBorderColor.withAlphaComponent(0.12)
         }
     }
 }

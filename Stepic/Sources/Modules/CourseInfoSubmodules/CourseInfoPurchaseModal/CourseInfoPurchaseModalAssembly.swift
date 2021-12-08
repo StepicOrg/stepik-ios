@@ -24,15 +24,19 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = CourseInfoPurchaseModalProvider(
             courseID: self.courseID,
-            coursesRepository: CoursesRepository.default
+            coursesRepository: CoursesRepository.default,
+            mobileTiersRepository: MobileTiersRepository.default,
+            mobileTiersPersistenceService: MobileTiersPersistenceService(),
+            wishlistRepository: WishlistRepository.default
         )
         let presenter = CourseInfoPurchaseModalPresenter()
         let interactor = CourseInfoPurchaseModalInteractor(
             courseID: self.courseID,
             initialPromoCodeName: self.promoCodeName,
-            mobileTierID: self.mobileTierID,
+            initialMobileTierID: self.mobileTierID,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            iapService: IAPService.shared
         )
         let viewController = CourseInfoPurchaseModalViewController(interactor: interactor)
 

@@ -1,6 +1,18 @@
 import SnapKit
 import UIKit
 
+protocol CourseInfoPurchaseModalPromoCodeViewDelegate: AnyObject {
+    func courseInfoPurchaseModalPromoCodeViewDidRevealInput(_ view: CourseInfoPurchaseModalPromoCodeView)
+    func courseInfoPurchaseModalPromoCodeView(
+        _ view: CourseInfoPurchaseModalPromoCodeView,
+        didChangePromoCode promoCode: String
+    )
+    func courseInfoPurchaseModalPromoCodeView(
+        _ view: CourseInfoPurchaseModalPromoCodeView,
+        didClickCheckPromoCode promoCode: String
+    )
+}
+
 extension CourseInfoPurchaseModalPromoCodeView {
     struct Appearance {
         let revealInputButtonFont = Typography.bodyFont
@@ -29,6 +41,8 @@ extension CourseInfoPurchaseModalPromoCodeView {
 }
 
 final class CourseInfoPurchaseModalPromoCodeView: UIView {
+    weak var delegate: CourseInfoPurchaseModalPromoCodeViewDelegate?
+
     let appearance: Appearance
 
     private lazy var revealInputButton: ImageButton = {
@@ -104,6 +118,19 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         }
     }
 
+    var textFieldText: String? {
+        get {
+            self.textField.text
+        }
+        set {
+            self.textField.text = newValue
+        }
+    }
+
+    override var isFirstResponder: Bool {
+        self.textField.isFirstResponder
+    }
+
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return CGSize(width: UIView.noIntrinsicMetric, height: stackViewIntrinsicContentSize.height)
@@ -128,6 +155,10 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func resignFirstResponder() -> Bool {
+        self.textField.resignFirstResponder()
+    }
+
     private func updateState() {
         switch self.state {
         case .idle:
@@ -144,27 +175,40 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
             self.rightDetailView.viewState = .idle
 
             self.isUserInteractionEnabled = true
+            self.textField.becomeFirstResponder()
         case .loading:
+            self.revealInputButton.isHidden = true
+            self.inputStackView.isHidden = false
+            self.rightDetailView.isHidden = false
             self.statusLabel.isHidden = false
 
             self.rightDetailView.isUserInteractionEnabled = false
             self.rightDetailView.viewState = .loading
 
             self.isUserInteractionEnabled = false
+            self.textField.resignFirstResponder()
         case .error:
+            self.revealInputButton.isHidden = true
+            self.inputStackView.isHidden = false
+            self.rightDetailView.isHidden = false
             self.statusLabel.isHidden = false
 
             self.rightDetailView.isUserInteractionEnabled = false
             self.rightDetailView.viewState = .error
 
             self.isUserInteractionEnabled = true
+            self.textField.resignFirstResponder()
         case .success:
+            self.revealInputButton.isHidden = true
+            self.inputStackView.isHidden = false
+            self.rightDetailView.isHidden = false
             self.statusLabel.isHidden = false
 
             self.rightDetailView.isUserInteractionEnabled = false
             self.rightDetailView.viewState = .success
 
             self.isUserInteractionEnabled = true
+            self.textField.resignFirstResponder()
         }
 
         self.statusLabel.text = self.state.statusLabelText
@@ -176,21 +220,30 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
     @objc
     private func revealInputButtonClicked() {
         self.state = .typing
+
+        self.invalidateIntrinsicContentSize()
+        self.delegate?.courseInfoPurchaseModalPromoCodeViewDidRevealInput(self)
     }
 
     @objc
     private func rightDetailViewClicked() {
-        guard self.state == .typing else {
+        guard self.state == .typing,
+              let textFieldText = self.textField.text?.trimmed(), !textFieldText.isEmpty else {
             return
         }
 
         self.state = .loading
+        self.delegate?.courseInfoPurchaseModalPromoCodeView(self, didClickCheckPromoCode: textFieldText)
     }
 
     @objc
     private func textFieldTextChanged() {
+        self.state = .typing
+
         let text = self.textField.text ?? ""
         self.rightDetailView.isHidden = text.isEmpty
+
+        self.delegate?.courseInfoPurchaseModalPromoCodeView(self, didChangePromoCode: text)
     }
 
     enum State {

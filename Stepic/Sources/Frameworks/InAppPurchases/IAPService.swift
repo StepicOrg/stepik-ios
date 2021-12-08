@@ -8,7 +8,7 @@ protocol IAPServiceProtocol: AnyObject {
 
     func getLocalizedPrice(for product: SKProduct) -> String?
     func getLocalizedPrice(for course: Course) -> Guarantee<String?>
-    func getLocalizedPrices(for mobileTier: MobileTier) -> Guarantee<(price: String?, promo: String?)>
+    func getLocalizedPrice(for tier: String?) -> Guarantee<String?>
 
     func startObservingPayments()
     func stopObservingPayments()
@@ -25,6 +25,31 @@ extension IAPServiceProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.fetchProducts().cauterize()
         }
+    }
+
+    func getLocalizedPrices(priceTier: String?, promoTier: String?) -> Guarantee<(price: String?, promo: String?)> {
+        if (priceTier?.isEmpty ?? true) && (promoTier?.isEmpty ?? true) {
+            return .value((nil, nil))
+        }
+
+        return Guarantee { seal in
+            when(
+                fulfilled: self.getLocalizedPrice(for: priceTier),
+                getLocalizedPrice(for: promoTier)
+            ).done { priceTierLocalizedPrice, promoTierLocalizedPrice in
+                seal((priceTierLocalizedPrice, promoTierLocalizedPrice))
+            }.catch { _ in
+                seal((nil, nil))
+            }
+        }
+    }
+
+    func getLocalizedPrices(mobileTier: MobileTier) -> Guarantee<(price: String?, promo: String?)> {
+        self.getLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
+    }
+
+    func getLocalizedPrices(mobileTier: MobileTierPlainObject) -> Guarantee<(price: String?, promo: String?)> {
+        self.getLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
     }
 }
 
@@ -129,47 +154,30 @@ final class IAPService: IAPServiceProtocol {
         }
     }
 
-    func getLocalizedPrices(for mobileTier: MobileTier) -> Guarantee<(price: String?, promo: String?)> {
-        if mobileTier.isTiersEmpty {
-            return .value((nil, nil))
+    func getLocalizedPrice(for tier: String?) -> Guarantee<String?> {
+        guard let tier = tier, !tier.isEmpty else {
+            return .value(nil)
         }
 
-        func getLocalizedPrice(for tier: String?) -> Guarantee<String?> {
-            guard let tier = tier else {
-                return .value(nil)
-            }
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
 
-            self.mutex.unbalancedLock()
-            defer { self.mutex.unbalancedUnlock() }
-
-            if let product = self.products.first(where: { $0.productIdentifier == tier }) {
-                return .value(self.getLocalizedPrice(for: product))
-            }
-
-            return Guarantee { seal in
-                self.fetchProduct(with: tier).compactMap { $0 }.done { product in
-                    self.mutex.unbalancedLock()
-                    defer { self.mutex.unbalancedUnlock() }
-
-                    if !self.products.contains(where: { $0.productIdentifier == tier }) {
-                        self.products.append(product)
-                    }
-
-                    seal(self.getLocalizedPrice(for: product))
-                }.catch { _ in
-                    seal(nil)
-                }
-            }
+        if let product = self.products.first(where: { $0.productIdentifier == tier }) {
+            return .value(self.getLocalizedPrice(for: product))
         }
 
         return Guarantee { seal in
-            when(
-                fulfilled: getLocalizedPrice(for: mobileTier.priceTier),
-                getLocalizedPrice(for: mobileTier.promoTier)
-            ).done { priceTierLocalizedPrice, promoTierLocalizedPrice in
-                seal((priceTierLocalizedPrice, promoTierLocalizedPrice))
+            self.fetchProduct(with: tier).compactMap { $0 }.done { product in
+                self.mutex.unbalancedLock()
+                defer { self.mutex.unbalancedUnlock() }
+
+                if !self.products.contains(where: { $0.productIdentifier == tier }) {
+                    self.products.append(product)
+                }
+
+                seal(self.getLocalizedPrice(for: product))
             }.catch { _ in
-                seal((nil, nil))
+                seal(nil)
             }
         }
     }

@@ -173,7 +173,7 @@ final class CourseListProvider: CourseListProviderProtocol {
             return Guarantee { seal in
                 if let mobileTierPlainObject = mobileTiersMap[course.id],
                    let mobileTierEntity = course.mobileTiers.first(where: { $0.id == mobileTierPlainObject.id }) {
-                    self.iapService.getLocalizedPrices(for: mobileTierEntity).done { result in
+                    self.iapService.getLocalizedPrices(mobileTier: mobileTierEntity).done { result in
                         mobileTierEntity.priceTierDisplayPrice = result.price
                         mobileTierEntity.promoTierDisplayPrice = result.promo
 

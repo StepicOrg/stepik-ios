@@ -501,7 +501,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     self.currentCourse?.mobileTiers.first(where: { $0.id == mobileTier.id })
                 }
                 .then { mobileTier -> Guarantee<(MobileTier, String?, String?)> in
-                    self.iapService.getLocalizedPrices(for: mobileTier).map { (mobileTier, $0.price, $0.promo) }
+                    self.iapService.getLocalizedPrices(mobileTier: mobileTier).map { (mobileTier, $0.price, $0.promo) }
                 }
                 .done { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice in
                     mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
@@ -688,5 +688,17 @@ extension CourseInfoInteractor: IAPServiceDelegate {
         } else {
             self.presenter.presentIAPPaymentFailed(response: .init(error: error, course: course))
         }
+    }
+}
+
+// MARK: - CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol -
+
+extension CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol {
+    func handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: Course.IdType) {
+        guard self.courseID == courseID else {
+            return
+        }
+
+        self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
     }
 }

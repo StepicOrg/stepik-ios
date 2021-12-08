@@ -1,3 +1,5 @@
 import Foundation
 
-protocol CourseInfoPurchaseModalOutputProtocol: AnyObject {}
+protocol CourseInfoPurchaseModalOutputProtocol: AnyObject {
+    func handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: Course.IdType)
+}

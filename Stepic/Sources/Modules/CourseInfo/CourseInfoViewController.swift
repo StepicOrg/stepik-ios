@@ -700,7 +700,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             courseID: viewModel.courseID,
             promoCodeName: viewModel.promoCodeName,
             mobileTierID: viewModel.mobileTierID,
-            output: nil
+            output: self.interactor as? CourseInfoPurchaseModalOutputProtocol
         )
         self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
     }

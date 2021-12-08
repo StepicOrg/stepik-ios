@@ -3,6 +3,10 @@ import UIKit
 
 protocol CourseInfoPurchaseModalViewDelegate: AnyObject {
     func courseInfoPurchaseModalViewDidClickCloseButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidClickErrorPlaceholderActionButton(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalViewDidRevealPromoCodeInput(_ view: CourseInfoPurchaseModalView)
+    func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didChangePromoCode promoCode: String)
+    func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didRequestCheckPromoCode promoCode: String)
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didClickLink link: URL)
     func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView)
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView)
@@ -39,11 +43,15 @@ final class CourseInfoPurchaseModalView: UIView {
         return loadingIndicatorView
     }()
 
+    private lazy var errorPlaceholderView = StepikPlaceholderView()
+
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
         scrollableStackView.spacing = self.appearance.stackViewSpacing
         return scrollableStackView
     }()
+
+    private var errorPlaceholderViewHeightConstraint: Constraint?
 
     var contentInsets: UIEdgeInsets {
         get {
@@ -85,6 +93,51 @@ final class CourseInfoPurchaseModalView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.updateErrorPlaceholderHeight()
+    }
+
+    // MARK: Public API
+
+    func configure(viewModel: CourseInfoPurchaseModalViewModel) {
+        self.coverView.coverURL = viewModel.courseCoverImageURL
+        self.coverView.titleText = viewModel.courseTitle
+
+        if let promoCodeName = viewModel.price.promoCodeName {
+            if viewModel.price.promoDisplayPrice != nil {
+                self.promoCodeView.state = .success
+            } else if self.promoCodeView.state == .idle {
+                self.promoCodeView.state = .error
+            }
+            self.promoCodeView.textFieldText = promoCodeName
+        }
+
+        self.actionButtonsView.configureBuyButton(viewModel: viewModel.price)
+        self.configure(viewModel: viewModel.wishlist)
+    }
+
+    func configure(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            if data.promoDisplayPrice != nil {
+                self.promoCodeView.state = .success
+                self.actionButtonsView.configureBuyButton(viewModel: data)
+            } else {
+                self.promoCodeView.state = .error
+            }
+        case .error:
+            self.promoCodeView.state = .typing
+            _ = self.promoCodeView.resignFirstResponder()
+        }
+
+        self.actionButtonsView.isUserInteractionEnabled = true
+    }
+
+    func configure(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
+        self.actionButtonsView.configureWishlistButton(viewModel: viewModel)
+    }
+
     func showLoading() {
         self.scrollableStackView.isHidden = true
         self.loadingIndicator.startAnimating()
@@ -95,11 +148,27 @@ final class CourseInfoPurchaseModalView: UIView {
         self.loadingIndicator.stopAnimating()
     }
 
-    func configure(viewModel: CourseInfoPurchaseModalViewModel) {
-        self.coverView.coverURL = viewModel.courseCoverImageURL
-        self.coverView.titleText = viewModel.courseTitle
+    func showErrorPlaceholder() {
+        self.errorPlaceholderView.set(placeholder: .noConnection)
+        self.errorPlaceholderView.delegate = self
+        self.errorPlaceholderView.isHidden = false
+        self.updateErrorPlaceholderHeight()
+    }
+
+    func hideErrorPlaceholder() {
+        self.errorPlaceholderView.isHidden = true
+    }
+
+    // MARK: Private API
+
+    private func updateErrorPlaceholderHeight() {
+        self.invalidateIntrinsicContentSize()
+        let height = floor(self.intrinsicContentSize.height)
+        self.errorPlaceholderViewHeightConstraint?.update(offset: height)
     }
 }
+
+// MARK: - CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
@@ -112,6 +181,8 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
             strongSelf.delegate?.courseInfoPurchaseModalViewDidClickCloseButton(strongSelf)
         }
+
+        self.promoCodeView.delegate = self
 
         self.disclaimerView.onLinkClick = { [weak self] link in
             guard let strongSelf = self else {
@@ -140,6 +211,7 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
         self.addSubview(self.loadingIndicator)
+        self.addSubview(self.errorPlaceholderView)
 
         self.scrollableStackView.addArrangedView(self.headerView)
         self.scrollableStackView.addArrangedView(self.coverView)
@@ -160,6 +232,12 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
         }
+
+        self.errorPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.errorPlaceholderView.snp.makeConstraints { make in
+            make.centerX.top.leading.trailing.equalToSuperview()
+            self.errorPlaceholderViewHeightConstraint = make.height.equalTo(0).constraint
+        }
     }
 }
 
@@ -167,4 +245,36 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
 extension CourseInfoPurchaseModalView: PanModalScrollable {
     var panScrollable: UIScrollView? { self.scrollableStackView.panScrollable }
+}
+
+// MARK: - CourseInfoPurchaseModalView: CourseInfoPurchaseModalPromoCodeViewDelegate -
+
+extension CourseInfoPurchaseModalView: CourseInfoPurchaseModalPromoCodeViewDelegate {
+    func courseInfoPurchaseModalPromoCodeViewDidRevealInput(_ view: CourseInfoPurchaseModalPromoCodeView) {
+        self.invalidateIntrinsicContentSize()
+        self.delegate?.courseInfoPurchaseModalViewDidRevealPromoCodeInput(self)
+    }
+
+    func courseInfoPurchaseModalPromoCodeView(
+        _ view: CourseInfoPurchaseModalPromoCodeView,
+        didChangePromoCode promoCode: String
+    ) {
+        self.delegate?.courseInfoPurchaseModalView(self, didChangePromoCode: promoCode)
+    }
+
+    func courseInfoPurchaseModalPromoCodeView(
+        _ view: CourseInfoPurchaseModalPromoCodeView,
+        didClickCheckPromoCode promoCode: String
+    ) {
+        self.actionButtonsView.isUserInteractionEnabled = false
+        self.delegate?.courseInfoPurchaseModalView(self, didRequestCheckPromoCode: promoCode)
+    }
+}
+
+// MARK: - CourseInfoPurchaseModalView: StepikPlaceholderViewDelegate -
+
+extension CourseInfoPurchaseModalView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.courseInfoPurchaseModalViewDidClickErrorPlaceholderActionButton(self)
+    }
 }

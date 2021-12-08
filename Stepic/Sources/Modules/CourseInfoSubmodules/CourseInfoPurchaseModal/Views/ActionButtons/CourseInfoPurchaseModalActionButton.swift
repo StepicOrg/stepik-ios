@@ -3,9 +3,8 @@ import UIKit
 
 extension CourseInfoPurchaseModalActionButton {
     struct Appearance {
-        let iconImageViewSize = CGSize(width: 18, height: 22)
-        let iconImageViewInsets = LayoutInsets(left: 16)
-        var iconImageViewTintColor: UIColor?
+        let loadingIndicatorInsets = LayoutInsets(left: 16)
+        var loadingIndicatorColor: UIColor?
 
         let textLabelFont = Typography.bodyFont
         var textLabelTextColor = UIColor.white
@@ -25,11 +24,11 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
         }
     }
 
-    private lazy var iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.isHidden = true
-        return imageView
+    private lazy var loadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(style: .stepikGray)
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.stopAnimating()
+        return activityIndicatorView
     }()
 
     private lazy var textLabel: UILabel = {
@@ -39,10 +38,13 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
         return label
     }()
 
-    var iconImage: UIImage? {
+    var isLoadingActivityIndicatorVisible = false {
         didSet {
-            self.iconImageView.image = self.iconImage
-            self.iconImageView.isHidden = self.iconImage == nil
+            if self.isLoadingActivityIndicatorVisible {
+                self.loadingActivityIndicator.startAnimating()
+            } else {
+                self.loadingActivityIndicator.stopAnimating()
+            }
         }
     }
 
@@ -92,8 +94,8 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
     }
 
     private func updateAppearance() {
-        if let iconImageViewTintColor = self.appearance.iconImageViewTintColor {
-            self.iconImageView.tintColor = iconImageViewTintColor
+        if let loadingIndicatorColor = self.appearance.loadingIndicatorColor {
+            self.loadingActivityIndicator.color = loadingIndicatorColor
         }
 
         self.textLabel.font = self.appearance.textLabelFont
@@ -118,15 +120,14 @@ extension CourseInfoPurchaseModalActionButton: ProgrammaticallyInitializableView
     }
 
     func addSubviews() {
-        self.addSubview(self.iconImageView)
+        self.addSubview(self.loadingActivityIndicator)
         self.addSubview(self.textLabel)
     }
 
     func makeConstraints() {
-        self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.iconImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.iconImageViewInsets.left)
-            make.size.equalTo(self.appearance.iconImageViewSize)
+        self.loadingActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingActivityIndicator.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(self.appearance.loadingIndicatorInsets.left)
             make.centerY.equalTo(self.textLabel.snp.centerY)
         }
 

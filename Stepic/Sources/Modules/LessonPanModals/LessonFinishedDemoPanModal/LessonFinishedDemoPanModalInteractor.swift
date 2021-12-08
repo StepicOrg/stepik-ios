@@ -97,7 +97,9 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
                         course.mobileTiers.first(where: { $0.id == mobileTier.id })
                     }
                     .then { mobileTier -> Guarantee<(MobileTier, String?, String?)> in
-                        self.iapService.getLocalizedPrices(for: mobileTier).map { (mobileTier, $0.price, $0.promo) }
+                        self.iapService
+                            .getLocalizedPrices(mobileTier: mobileTier)
+                            .map { (mobileTier, $0.price, $0.promo) }
                     }
                     .done { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice in
                         mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
