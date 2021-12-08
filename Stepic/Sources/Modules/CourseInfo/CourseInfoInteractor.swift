@@ -310,7 +310,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
-            // Paid course -> open web page
+            // Paid course -> buy course
             if course.isPaid && !course.isPurchased {
                 self.analytics.send(
                     .buyCoursePressed(id: course.id),
@@ -327,11 +327,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                             response: .init(course: course, courseViewSource: self.courseViewSource)
                         )
                     }
-
-                    return self.coursePurchaseReminder.createPurchaseNotification(for: course)
                 case .iap:
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                    return self.presenter.presentPaidCoursePurchaseModal(
+                    self.presenter.presentPaidCoursePurchaseModal(
                         response: .init(
                             courseID: self.courseID,
                             promoCodeName: self.promoCodeName,
@@ -339,6 +337,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         )
                     )
                 }
+
+                return self.coursePurchaseReminder.createPurchaseNotification(for: course)
             }
 
             self.analytics.send(.authorizedUserTappedJoinCourse)
