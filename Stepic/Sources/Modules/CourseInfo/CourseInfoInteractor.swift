@@ -55,7 +55,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
-    private let promoCodeName: String?
+    private var promoCodeName: String?
     private var currentPromoCode: PromoCode?
 
     private var currentMobileTier: MobileTier?
@@ -478,10 +478,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     private func fetchAndPresentPriceInfoIfNeeded() {
+        guard let course = self.currentCourse, course.isPaid else {
+            return
+        }
+
         switch self.remoteConfig.coursePurchaseFlow {
         case .web:
-            if let course = self.currentCourse,
-               course.isPaid && self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
+            if self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
                 self.iapService.fetchLocalizedPrice(for: course).done { localizedPrice in
                     self.currentCourse?.displayPriceIAP = localizedPrice
                     self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
@@ -492,6 +495,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         case .iap:
             guard self.currentMobileTier == nil else {
                 return
+            }
+
+            if self.promoCodeName == nil,
+               let defaultPromoCode = course.defaultPromoCode, defaultPromoCode.isValid {
+                self.promoCodeName = defaultPromoCode.name
             }
 
             self.provider

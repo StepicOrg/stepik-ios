@@ -135,6 +135,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             self.courseInfoPurchaseModalView?.showErrorPlaceholder()
         case .result(let viewModel):
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+            self.transition(to: .shortForm)
         case .purchaseInProgress:
             self.isPurchaseInProgress = true
             self.courseInfoPurchaseModalView?.showPurchaseInProgress()

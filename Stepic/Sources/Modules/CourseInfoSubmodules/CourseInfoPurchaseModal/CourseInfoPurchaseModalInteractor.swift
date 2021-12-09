@@ -154,7 +154,12 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
                         return self.fetchMobileTier(promoCodeName: self.initialPromoCodeName)
                     }
 
-                    if mobileTier.isDisplayTiersEmpty {
+                    let shouldFetchPriceTierDisplayPrice = mobileTier.priceTier != nil
+                        && (mobileTier.priceTierDisplayPrice?.isEmpty ?? true)
+                    let shouldFetchPromoTierDisplayPrice = mobileTier.promoTier != nil
+                        && (mobileTier.promoTierDisplayPrice?.isEmpty ?? true)
+
+                    if shouldFetchPriceTierDisplayPrice || shouldFetchPromoTierDisplayPrice {
                         return self.iapService.fetchAndSetLocalizedPrices(mobileTier: mobileTier).map(\.plainObject)
                     } else {
                         return .value(mobileTier.plainObject)
