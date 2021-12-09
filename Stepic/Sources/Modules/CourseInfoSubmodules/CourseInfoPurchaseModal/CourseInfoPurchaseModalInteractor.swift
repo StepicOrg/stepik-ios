@@ -155,12 +155,7 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
                     }
 
                     if mobileTier.isDisplayTiersEmpty {
-                        return self.iapService.getLocalizedPrices(mobileTier: mobileTier).then {
-                            priceTierLocalizedPrice, promoTierLocalizedPrice -> Promise<MobileTierPlainObject> in
-                            mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
-                            mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
-                            return .value(mobileTier.plainObject)
-                        }
+                        return self.iapService.fetchAndSetLocalizedPrices(mobileTier: mobileTier).map(\.plainObject)
                     } else {
                         return .value(mobileTier.plainObject)
                     }
@@ -174,18 +169,11 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         self.provider
             .calculateMobileTier(promoCodeName: promoCodeName)
             .compactMap { $0 }
-            .then { mobileTier -> Guarantee<(MobileTierPlainObject, String?, String?)> in
-                self.iapService
-                    .getLocalizedPrices(mobileTier: mobileTier)
-                    .map { (mobileTier, $0.price, $0.promo) }
-            }
-            .then { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice -> Promise<MobileTierPlainObject> in
-                var mutableMobileTier = mobileTier
-                mutableMobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
-                mutableMobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
-                mutableMobileTier.promoCodeName = promoCodeName
-
-                return .value(mutableMobileTier)
+            .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
+            .then { mobileTier -> Promise<MobileTierPlainObject> in
+                var result = mobileTier
+                result.promoCodeName = promoCodeName
+                return .value(result)
             }
     }
 }

@@ -17,7 +17,7 @@ protocol CourseInfoInteractorProtocol {
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
     func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request)
-    func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request)
+    func doIAPReceiptValidationRetry(request: CourseInfo.IAPReceiptValidationRetry.Request)
     func doPurchaseCourseNotificationUpdate(request: CourseInfo.PurchaseNotificationUpdate.Request)
 }
 
@@ -383,7 +383,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.presenter.presentCourseRevenue(response: .init(courseID: self.courseID))
     }
 
-    func doIAPReceiptValidation(request: CourseInfo.IAPReceiptValidationRetry.Request) {
+    func doIAPReceiptValidationRetry(request: CourseInfo.IAPReceiptValidationRetry.Request) {
         if let course = self.currentCourse {
             self.iapService.retryValidateReceipt(course: course, delegate: self)
         }
@@ -482,7 +482,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         case .web:
             if let course = self.currentCourse,
                course.isPaid && self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
-                self.iapService.getLocalizedPrice(for: course).done { localizedPrice in
+                self.iapService.fetchLocalizedPrice(for: course).done { localizedPrice in
                     self.currentCourse?.displayPriceIAP = localizedPrice
                     self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
                 }
@@ -500,14 +500,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 .compactMap { mobileTier in
                     self.currentCourse?.mobileTiers.first(where: { $0.id == mobileTier.id })
                 }
-                .then { mobileTier -> Guarantee<(MobileTier, String?, String?)> in
-                    self.iapService.getLocalizedPrices(mobileTier: mobileTier).map { (mobileTier, $0.price, $0.promo) }
-                }
-                .done { mobileTier, priceTierLocalizedPrice, promoTierLocalizedPrice in
-                    mobileTier.priceTierDisplayPrice = priceTierLocalizedPrice
-                    mobileTier.promoTierDisplayPrice = promoTierLocalizedPrice
+                .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
+                .done { mobileTier in
                     self.currentMobileTier = mobileTier
-
                     self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
                 }
                 .cauterize()

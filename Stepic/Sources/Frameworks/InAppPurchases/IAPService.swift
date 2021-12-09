@@ -4,38 +4,81 @@ import StoreKit
 
 protocol IAPServiceProtocol: AnyObject {
     func fetchProducts() -> Promise<[SKProduct]>
+    @available(*, deprecated, message: "Legacy purchase flow")
     func fetchProduct(for course: Course) -> Promise<SKProduct?>
+    func fetchProduct(for mobileTier: String) -> Promise<SKProduct?>
 
-    func getLocalizedPrice(for product: SKProduct) -> String?
-    func getLocalizedPrice(for course: Course) -> Guarantee<String?>
-    func getLocalizedPrice(for tier: String?) -> Guarantee<String?>
+    @available(*, deprecated, message: "Legacy purchase flow")
+    func fetchLocalizedPrice(for course: Course) -> Guarantee<String?>
+    func fetchLocalizedPrice(for mobileTier: String) -> Guarantee<String?>
 
     func startObservingPayments()
     func stopObservingPayments()
 
     func canMakePayments() -> Bool
+    @available(*, deprecated, message: "Legacy purchase flow")
     func canBuyCourse(_ course: Course) -> Bool
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     func buy(course: Course, delegate: IAPServiceDelegate?)
+    @available(*, deprecated, message: "Legacy purchase flow")
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
 }
 
 extension IAPServiceProtocol {
+    typealias IAPMobileTierLocalizedPrices = (priceTierLocalizedPrice: String?, promoTierLocalizedPrice: String?)
+
     func prefetchProducts(delay: DispatchTimeInterval = .seconds(3)) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.fetchProducts().cauterize()
         }
     }
 
-    func getLocalizedPrices(priceTier: String?, promoTier: String?) -> Guarantee<(price: String?, promo: String?)> {
+    func fetchLocalizedPrices(mobileTier: MobileTier) -> Guarantee<IAPMobileTierLocalizedPrices> {
+        self.fetchLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
+    }
+
+    func fetchLocalizedPrices(mobileTier: MobileTierPlainObject) -> Guarantee<IAPMobileTierLocalizedPrices> {
+        self.fetchLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
+    }
+
+    func fetchAndSetLocalizedPrices(mobileTier: MobileTier) -> Guarantee<MobileTier> {
+        self.fetchLocalizedPrices(mobileTier: mobileTier).then { localizedPrices -> Guarantee<MobileTier> in
+            mobileTier.priceTierDisplayPrice = localizedPrices.priceTierLocalizedPrice
+            mobileTier.promoTierDisplayPrice = localizedPrices.promoTierLocalizedPrice
+            return .value(mobileTier)
+        }
+    }
+
+    func fetchAndSetLocalizedPrices(mobileTier: MobileTierPlainObject) -> Guarantee<MobileTierPlainObject> {
+        self.fetchLocalizedPrices(mobileTier: mobileTier).then { localizedPrices -> Guarantee<MobileTierPlainObject> in
+            var result = mobileTier
+            result.priceTierDisplayPrice = localizedPrices.priceTierLocalizedPrice
+            result.promoTierDisplayPrice = localizedPrices.promoTierLocalizedPrice
+            return .value(result)
+        }
+    }
+
+    private func fetchLocalizedPrice(for mobileTierOrNil: String?) -> Guarantee<String?> {
+        guard let mobileTier = mobileTierOrNil else {
+            return .value(nil)
+        }
+
+        return self.fetchLocalizedPrice(for: mobileTier)
+    }
+
+    private func fetchLocalizedPrices(
+        priceTier: String?,
+        promoTier: String?
+    ) -> Guarantee<IAPMobileTierLocalizedPrices> {
         if (priceTier?.isEmpty ?? true) && (promoTier?.isEmpty ?? true) {
             return .value((nil, nil))
         }
 
         return Guarantee { seal in
             when(
-                fulfilled: self.getLocalizedPrice(for: priceTier),
-                getLocalizedPrice(for: promoTier)
+                fulfilled: self.fetchLocalizedPrice(for: priceTier),
+                fetchLocalizedPrice(for: promoTier)
             ).done { priceTierLocalizedPrice, promoTierLocalizedPrice in
                 seal((priceTierLocalizedPrice, promoTierLocalizedPrice))
             }.catch { _ in
@@ -43,15 +86,9 @@ extension IAPServiceProtocol {
             }
         }
     }
-
-    func getLocalizedPrices(mobileTier: MobileTier) -> Guarantee<(price: String?, promo: String?)> {
-        self.getLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
-    }
-
-    func getLocalizedPrices(mobileTier: MobileTierPlainObject) -> Guarantee<(price: String?, promo: String?)> {
-        self.getLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
-    }
 }
+
+// MARK: - IAPService: IAPServiceProtocol -
 
 final class IAPService: IAPServiceProtocol {
     static let shared = IAPService()
@@ -75,6 +112,7 @@ final class IAPService: IAPServiceProtocol {
 
     // MARK: Products
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     func fetchProduct(for course: Course) -> Promise<SKProduct?> {
         guard let priceTier = course.priceTier else {
             return Promise(error: Error.unsupportedCourse)
@@ -83,6 +121,10 @@ final class IAPService: IAPServiceProtocol {
         let productIdentifier = self.productsService.makeProductIdentifier(priceTier: priceTier)
 
         return self.fetchProduct(with: productIdentifier)
+    }
+
+    func fetchProduct(for mobileTier: String) -> Promise<SKProduct?> {
+        self.fetchProduct(with: mobileTier)
     }
 
     func fetchProducts() -> Promise<[SKProduct]> {
@@ -111,20 +153,8 @@ final class IAPService: IAPServiceProtocol {
         }
     }
 
-    func getLocalizedPrice(for product: SKProduct) -> String? {
-        if let currencySymbol = product.priceLocale.currencySymbol {
-            return FormatterHelper.price(product.price.floatValue, currencySymbol: currencySymbol)
-        } else if let currencyCode = product.priceLocale.currencyCode {
-            return FormatterHelper.price(product.price.floatValue, currencyCode: currencyCode)
-        } else {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            formatter.locale = product.priceLocale
-            return formatter.string(from: product.price)
-        }
-    }
-
-    func getLocalizedPrice(for course: Course) -> Guarantee<String?> {
+    @available(*, deprecated, message: "Legacy purchase flow")
+    func fetchLocalizedPrice(for course: Course) -> Guarantee<String?> {
         guard let priceTier = course.priceTier else {
             return Guarantee.value(nil)
         }
@@ -154,24 +184,26 @@ final class IAPService: IAPServiceProtocol {
         }
     }
 
-    func getLocalizedPrice(for tier: String?) -> Guarantee<String?> {
-        guard let tier = tier, !tier.isEmpty else {
+    func fetchLocalizedPrice(for mobileTier: String) -> Guarantee<String?> {
+        let mobileTier = mobileTier.trimmed()
+
+        if mobileTier.isEmpty {
             return .value(nil)
         }
 
         self.mutex.unbalancedLock()
         defer { self.mutex.unbalancedUnlock() }
 
-        if let product = self.products.first(where: { $0.productIdentifier == tier }) {
+        if let product = self.products.first(where: { $0.productIdentifier == mobileTier }) {
             return .value(self.getLocalizedPrice(for: product))
         }
 
         return Guarantee { seal in
-            self.fetchProduct(with: tier).compactMap { $0 }.done { product in
+            self.fetchProduct(with: mobileTier).compactMap { $0 }.done { product in
                 self.mutex.unbalancedLock()
                 defer { self.mutex.unbalancedUnlock() }
 
-                if !self.products.contains(where: { $0.productIdentifier == tier }) {
+                if !self.products.contains(where: { $0.productIdentifier == mobileTier }) {
                     self.products.append(product)
                 }
 
@@ -188,11 +220,24 @@ final class IAPService: IAPServiceProtocol {
         }
 
         return Promise { seal in
-            self.productsService.fetchProduct(productIdentifier: productIdentifier).done { product in
+            self.productsService.fetchProduct(with: productIdentifier).done { product in
                 seal.fulfill(product)
             }.catch { _ in
                 seal.reject(Error.productsRequestFailed)
             }
+        }
+    }
+
+    private func getLocalizedPrice(for product: SKProduct) -> String? {
+        if let currencySymbol = product.priceLocale.currencySymbol {
+            return FormatterHelper.price(product.price.floatValue, currencySymbol: currencySymbol)
+        } else if let currencyCode = product.priceLocale.currencyCode {
+            return FormatterHelper.price(product.price.floatValue, currencyCode: currencyCode)
+        } else {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.locale = product.priceLocale
+            return formatter.string(from: product.price)
         }
     }
 
@@ -210,6 +255,7 @@ final class IAPService: IAPServiceProtocol {
         self.paymentsService.canMakePayments()
     }
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     func canBuyCourse(_ course: Course) -> Bool {
         guard let priceTier = course.priceTier, priceTier > 0 else {
             return false
@@ -220,6 +266,7 @@ final class IAPService: IAPServiceProtocol {
         return course.isPaid && self.productsService.canFetchProduct(with: productIdentifier)
     }
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     func buy(course: Course, delegate: IAPServiceDelegate?) {
         self.mutex.unbalancedLock()
         defer { self.mutex.unbalancedUnlock() }
@@ -244,6 +291,7 @@ final class IAPService: IAPServiceProtocol {
         }
     }
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?) {
         self.mutex.unbalancedLock()
         defer { self.mutex.unbalancedUnlock() }

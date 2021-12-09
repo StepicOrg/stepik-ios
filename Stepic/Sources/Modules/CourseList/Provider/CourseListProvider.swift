@@ -160,7 +160,7 @@ final class CourseListProvider: CourseListProviderProtocol {
         case .web:
             return Guarantee { seal in
                 if self.iapService.canBuyCourse(course) {
-                    self.iapService.getLocalizedPrice(for: course).done { price in
+                    self.iapService.fetchLocalizedPrice(for: course).done { price in
                         course.displayPriceIAP = price
                         seal(())
                     }
@@ -173,12 +173,12 @@ final class CourseListProvider: CourseListProviderProtocol {
             return Guarantee { seal in
                 if let mobileTierPlainObject = mobileTiersMap[course.id],
                    let mobileTierEntity = course.mobileTiers.first(where: { $0.id == mobileTierPlainObject.id }) {
-                    self.iapService.getLocalizedPrices(mobileTier: mobileTierEntity).done { result in
-                        mobileTierEntity.priceTierDisplayPrice = result.price
-                        mobileTierEntity.promoTierDisplayPrice = result.promo
+                    self.iapService.fetchLocalizedPrices(mobileTier: mobileTierEntity).done { result in
+                        mobileTierEntity.priceTierDisplayPrice = result.priceTierLocalizedPrice
+                        mobileTierEntity.promoTierDisplayPrice = result.promoTierLocalizedPrice
 
-                        course.displayPriceTierPrice = result.price
-                        course.displayPriceTierPromo = result.promo
+                        course.displayPriceTierPrice = result.priceTierLocalizedPrice
+                        course.displayPriceTierPromo = result.promoTierLocalizedPrice
 
                         seal(())
                     }

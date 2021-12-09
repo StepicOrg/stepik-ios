@@ -731,7 +731,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                 title: NSLocalizedString("PlaceholderNoConnectionButton", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.interactor.doIAPReceiptValidation(request: .init())
+                    self?.interactor.doIAPReceiptValidationRetry(request: .init())
                 }
             )
         )
