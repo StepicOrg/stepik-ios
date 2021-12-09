@@ -135,7 +135,12 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             self.courseInfoPurchaseModalView?.showErrorPlaceholder()
         case .result(let viewModel):
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
-            self.transition(to: .shortForm)
+
+            if self.keyboardIsShowing {
+                self.transition(to: .longForm)
+            } else {
+                self.transition(to: .shortForm)
+            }
         case .purchaseInProgress:
             self.isPurchaseInProgress = true
             self.courseInfoPurchaseModalView?.showPurchaseInProgress()
@@ -157,8 +162,10 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
             self.isShortFormEnabled = true
         }
 
-        self.panModalSetNeedsLayoutUpdate()
-        self.panModalTransition(to: state)
+        DispatchQueue.main.async {
+            self.panModalSetNeedsLayoutUpdate()
+            self.panModalTransition(to: state)
+        }
     }
 
     @objc
@@ -188,7 +195,6 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewControllerProtocol {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
-        self.transition(to: .shortForm)
     }
 
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {

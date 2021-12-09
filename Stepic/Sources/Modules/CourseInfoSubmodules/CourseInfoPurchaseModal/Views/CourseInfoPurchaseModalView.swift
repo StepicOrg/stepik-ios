@@ -132,6 +132,9 @@ final class CourseInfoPurchaseModalView: UIView {
 
         self.purchaseSuccessView.courseCoverURL = viewModel.courseCoverImageURL
         self.purchaseSuccessView.courseTitle = viewModel.courseTitle
+
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
     }
 
     func configure(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
