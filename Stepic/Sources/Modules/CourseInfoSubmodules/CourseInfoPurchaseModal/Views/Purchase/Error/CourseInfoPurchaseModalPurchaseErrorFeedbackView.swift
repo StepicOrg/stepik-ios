@@ -61,6 +61,7 @@ final class CourseInfoPurchaseModalPurchaseErrorFeedbackView: UIView {
                 .font(.boldSystemFont(ofSize: self.appearance.titleLabelFont.pointSize))
                 .foregroundColor(self.appearance.titleLabelTextColor, .normal)
                 .foregroundColor(self.appearance.titleLabelTextColor.withAlphaComponent(0.5), .highlighted)
+                .underlineStyle(.single)
         ],
         tagTransformers: [.brTransformer]
     )
