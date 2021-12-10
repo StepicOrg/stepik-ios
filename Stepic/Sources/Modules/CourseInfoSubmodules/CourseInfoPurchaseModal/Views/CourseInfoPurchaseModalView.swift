@@ -124,6 +124,9 @@ final class CourseInfoPurchaseModalView: UIView {
             self.promoCodeView.textFieldText = promoCodeName
         }
 
+        self.disclaimerView.disclaimerText = viewModel.disclaimer
+        self.disclaimerView.isHidden = viewModel.disclaimer.isEmpty
+
         self.actionButtonsView.configureBuyButton(viewModel: viewModel.price)
         self.configure(viewModel: viewModel.wishlist)
 

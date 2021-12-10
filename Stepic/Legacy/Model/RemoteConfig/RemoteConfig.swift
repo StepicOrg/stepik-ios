@@ -12,6 +12,15 @@ final class RemoteConfig {
 
     private static let defaultCoursePurchaseFlowType = CoursePurchaseFlowType.web
 
+    private static let defaultPurchaseFlowDisclaimerRussian = """
+В цену включена комиссия App Store и НДС. Оплачивая доступ к этому курсу вы соглашаетесь с условиями \
+<a href=\"https://welcome.stepik.org/ru/payment-terms\">пользовательского соглашения</a>.
+"""
+    private static let defaultPurchaseFlowDisclaimerEnglish = """
+The price includes commission from App Store and VAT. By paying for access to this course you agree to the \
+<a href=\"https://welcome.stepik.org/en/payment-terms\">user agreement</a>.
+"""
+
     static let shared = RemoteConfig(delegate: DebugRemoteConfig.shared)
 
     weak var delegate: RemoteConfigDelegate?
@@ -30,7 +39,9 @@ final class RemoteConfig {
         Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
         Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
         Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false),
-        Key.purchaseFlow.rawValue: NSString(string: Self.defaultCoursePurchaseFlowType.rawValue)
+        Key.purchaseFlow.rawValue: NSString(string: Self.defaultCoursePurchaseFlowType.rawValue),
+        Key.purchaseFlowDisclaimerRussian.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerRussian),
+        Key.purchaseFlowDisclaimerEnglish.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerEnglish)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -98,6 +109,16 @@ final class RemoteConfig {
             return coursePurchaseFlowType
         }
         return Self.defaultCoursePurchaseFlowType
+    }
+
+    var purchaseFlowDisclaimer: String {
+        if Locale.current.languageCode == "ru" {
+            return self.getStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlowDisclaimerRussian)
+                ?? Self.defaultPurchaseFlowDisclaimerRussian
+        } else {
+            return self.getStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlowDisclaimerEnglish)
+                ?? Self.defaultPurchaseFlowDisclaimerEnglish
+        }
     }
 
     init(delegate: RemoteConfigDelegate? = nil) {
@@ -212,6 +233,8 @@ final class RemoteConfig {
         case isCoursePricesEnabled = "is_course_prices_enabled_ios"
         case isCourseRevenueAvailable = "is_course_revenue_available_ios"
         case purchaseFlow = "purchase_flow_ios"
+        case purchaseFlowDisclaimerRussian = "purchase_flow_ios_disclaimer_ru"
+        case purchaseFlowDisclaimerEnglish = "purchase_flow_ios_disclaimer_en"
 
         var valueDataType: ValueDataType {
             switch self {
@@ -230,6 +253,8 @@ final class RemoteConfig {
             case .isCourseRevenueAvailable:
                 return .string
             case .purchaseFlow:
+                return .string
+            case .purchaseFlowDisclaimerRussian, .purchaseFlowDisclaimerEnglish:
                 return .string
             }
         }

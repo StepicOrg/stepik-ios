@@ -528,7 +528,6 @@ CourseInfoTabNewsDateOneTimeSending = "From %@";
 
 /* CourseInfoPurchaseModal */
 CourseInfoPurchaseModalTitle = "Course purchase";
-CourseInfoPurchaseModalDisclaimer = "В цену включена 15% комиссия App Store. Оплачивая доступ к этому курсу вы соглашаетесь с условиями <a href=\"https://welcome.stepik.org/en/payment-terms\"> пользовательского соглашения</a>.";
 
 CourseInfoPurchaseModalRevealPromoCodeInputTitle = "I have a promo code";
 CourseInfoPurchaseModalInputPlaceholder = "Enter a promo code";

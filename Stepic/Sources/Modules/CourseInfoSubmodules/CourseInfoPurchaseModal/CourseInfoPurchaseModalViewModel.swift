@@ -4,6 +4,8 @@ struct CourseInfoPurchaseModalViewModel {
     let courseTitle: String
     let courseCoverImageURL: URL?
 
+    let disclaimer: String
+
     let price: CourseInfoPurchaseModalPriceViewModel
     let wishlist: CourseInfoPurchaseModalWishlistViewModel
 }

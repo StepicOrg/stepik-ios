@@ -7,7 +7,13 @@ protocol CourseInfoPurchaseModalPresenterProtocol {
 }
 
 final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterProtocol {
+    private let remoteConfig: RemoteConfig
+
     weak var viewController: CourseInfoPurchaseModalViewControllerProtocol?
+
+    init(remoteConfig: RemoteConfig) {
+        self.remoteConfig = remoteConfig
+    }
 
     func presentModal(response: CourseInfoPurchaseModal.ModalLoad.Response) {
         switch response.result {
@@ -58,6 +64,7 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
         return CourseInfoPurchaseModalViewModel(
             courseTitle: course.title,
             courseCoverImageURL: URL(string: course.coverURLString),
+            disclaimer: self.remoteConfig.purchaseFlowDisclaimer.trimmed(),
             price: priceViewModel,
             wishlist: wishlistViewModel
         )

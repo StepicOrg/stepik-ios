@@ -29,7 +29,7 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
             mobileTiersPersistenceService: MobileTiersPersistenceService(),
             wishlistRepository: WishlistRepository.default
         )
-        let presenter = CourseInfoPurchaseModalPresenter()
+        let presenter = CourseInfoPurchaseModalPresenter(remoteConfig: .shared)
         let interactor = CourseInfoPurchaseModalInteractor(
             courseID: self.courseID,
             initialPromoCodeName: self.promoCodeName,
