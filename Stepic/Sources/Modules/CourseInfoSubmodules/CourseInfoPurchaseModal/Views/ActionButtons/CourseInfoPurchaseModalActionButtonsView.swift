@@ -5,8 +5,15 @@ extension CourseInfoPurchaseModalActionButtonsView {
     struct Appearance {
         let actionButtonHeight: CGFloat = 44
 
+        let buyButtonTextColor = UIColor.white
+        let buyButtonBackgroundColor = UIColor.stepikGreenFixed
+        let buyButtonPromoPriceBackgroundColor = UIColor.stepikVioletFixed
         let buyButtonFullPriceFont = UIFont.systemFont(ofSize: 12)
 
+        let wishlistButtonTextColor = UIColor.stepikVioletFixed
+        let wishlistButtonBackgroundColor = UIColor.clear
+        let wishlistButtonBorderColor = UIColor.stepikVioletFixed
+        let wishlistButtonDisabledBorderColor = UIColor.stepikVioletFixed.withAlphaComponent(0.12)
         let wishlistButtonBorderWidth: CGFloat = 1
 
         let stackViewSpacing: CGFloat = 16
@@ -28,12 +35,6 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         return stackView
     }()
 
-    var style = Style.violet {
-        didSet {
-            self.updateStyle()
-        }
-    }
-
     var onBuyButtonClick: (() -> Void)?
     var onWishlistButtonClick: (() -> Void)?
 
@@ -52,8 +53,6 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.updateStyle()
     }
 
     @available(*, unavailable)
@@ -64,6 +63,13 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
     // MARK: Public API
 
     func configureBuyButton(viewModel: CourseInfoPurchaseModalPriceViewModel) {
+        self.buyButton.appearance = .init(
+            textLabelTextColor: self.appearance.buyButtonTextColor,
+            backgroundColor: viewModel.promoDisplayPrice != nil
+                ? self.appearance.buyButtonPromoPriceBackgroundColor
+                : self.appearance.buyButtonBackgroundColor
+        )
+
         if let promoDisplayPrice = viewModel.promoDisplayPrice {
             let buyWithPromoTitle = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), promoDisplayPrice)
             let formattedTitle = "\(buyWithPromoTitle) \(viewModel.displayPrice)"
@@ -99,13 +105,17 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
     }
 
     func configureWishlistButton(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
-        self.wishlistButton.text = viewModel.title
+        self.wishlistButton.appearance = .init(
+            loadingIndicatorColor: self.appearance.wishlistButtonTextColor,
+            textLabelTextColor: self.appearance.wishlistButtonTextColor,
+            backgroundColor: self.appearance.wishlistButtonBackgroundColor,
+            borderWidth: self.appearance.wishlistButtonBorderWidth,
+            borderColor: viewModel.isInWishlist
+                ? self.appearance.wishlistButtonDisabledBorderColor
+                : self.appearance.wishlistButtonBorderColor
+        )
 
-        var newAppearance = self.wishlistButton.appearance
-        newAppearance.borderColor = viewModel.isInWishlist
-            ? self.style.wishlistButtonDisabledBorderColor
-            : self.style.wishlistButtonBorderColor
-        self.wishlistButton.appearance = newAppearance
+        self.wishlistButton.text = viewModel.title
 
         self.wishlistButton.isLoadingActivityIndicatorVisible = viewModel.isLoading
         self.wishlistButton.isUserInteractionEnabled = !viewModel.isInWishlist && !viewModel.isLoading
@@ -121,60 +131,6 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
     @objc
     private func wishlistButtonClicked() {
         self.onWishlistButtonClick?()
-    }
-
-    private func updateStyle() {
-        self.buyButton.appearance = .init(
-            textLabelTextColor: self.style.buyButtonTextColor,
-            backgroundColor: self.style.buyButtonBackgroundColor
-        )
-        self.wishlistButton.appearance = .init(
-            loadingIndicatorColor: self.style.wishlistButtonTextColor,
-            textLabelTextColor: self.style.wishlistButtonTextColor,
-            backgroundColor: self.style.wishlistButtonBackgroundColor,
-            borderWidth: self.appearance.wishlistButtonBorderWidth,
-            borderColor: self.style.wishlistButtonBorderColor
-        )
-    }
-
-    enum Style {
-        case violet
-        case green
-
-        fileprivate var buyButtonTextColor: UIColor { .white }
-
-        fileprivate var buyButtonBackgroundColor: UIColor {
-            switch self {
-            case .violet:
-                return .stepikVioletFixed
-            case .green:
-                return .stepikGreenFixed
-            }
-        }
-
-        fileprivate var wishlistButtonTextColor: UIColor {
-            switch self {
-            case .violet:
-                return .stepikVioletFixed
-            case .green:
-                return .stepikGreenFixed
-            }
-        }
-
-        fileprivate var wishlistButtonBackgroundColor: UIColor { .clear }
-
-        fileprivate var wishlistButtonBorderColor: UIColor {
-            switch self {
-            case .violet:
-                return .stepikVioletFixed
-            case .green:
-                return .stepikGreenFixed
-            }
-        }
-
-        fileprivate var wishlistButtonDisabledBorderColor: UIColor {
-            self.wishlistButtonBorderColor.withAlphaComponent(0.12)
-        }
     }
 }
 
