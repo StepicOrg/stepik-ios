@@ -7,6 +7,7 @@ protocol CourseInfoPurchaseModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel)
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel)
     func displayAddCourseToWishlistResult(viewModel: CourseInfoPurchaseModal.AddCourseToWishlist.ViewModel)
+    func displayPurchaseCourseResult(viewModel: CourseInfoPurchaseModal.PurchaseCourse.ViewModel)
 }
 
 final class CourseInfoPurchaseModalViewController: PanModalPresentableViewController {
@@ -144,7 +145,12 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         case .purchaseInProgress:
             self.isPurchaseInProgress = true
             self.courseInfoPurchaseModalView?.showPurchaseInProgress()
-        case .purchaseError:
+        case .purchaseErrorAppStore(let errorDescription, let modalData):
+            if let errorDescription = errorDescription {
+                SVProgressHUD.showError(withStatus: errorDescription)
+            }
+            self.updateState(newState: .result(data: modalData))
+        case .purchaseErrorStepik:
             self.courseInfoPurchaseModalView?.showPurchaseError()
             self.transition(to: .longForm)
         case .purchaseSuccess:
@@ -216,6 +222,10 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
         }
     }
+
+    func displayPurchaseCourseResult(viewModel: CourseInfoPurchaseModal.PurchaseCourse.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
 }
 
 // MARK: - CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDelegate -
@@ -255,7 +265,7 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
     }
 
     func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView) {
-        print(#function)
+        self.interactor.doPurchaseCourse(request: .init())
     }
 
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView) {

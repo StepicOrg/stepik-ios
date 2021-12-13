@@ -2,6 +2,8 @@ import Foundation
 import PromiseKit
 import StoreKit
 
+// MARK: - IAPServiceProtocol: AnyObject -
+
 protocol IAPServiceProtocol: AnyObject {
     func fetchProducts() -> Promise<[SKProduct]>
     @available(*, deprecated, message: "Legacy purchase flow")
@@ -18,12 +20,16 @@ protocol IAPServiceProtocol: AnyObject {
     func canMakePayments() -> Bool
     @available(*, deprecated, message: "Legacy purchase flow")
     func canBuyCourse(_ course: Course) -> Bool
+    func canBuyCourse(_ course: Course, mobileTier: String) -> Bool
 
     @available(*, deprecated, message: "Legacy purchase flow")
     func buy(course: Course, delegate: IAPServiceDelegate?)
+    func buy(courseID: Course.IdType, mobileTier: String, promoCode: String?, delegate: IAPServiceDelegate?)
     @available(*, deprecated, message: "Legacy purchase flow")
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
 }
+
+// MARK: - IAPServiceProtocol (Default Extensions) -
 
 extension IAPServiceProtocol {
     typealias IAPMobileTierLocalizedPrices = (priceTierLocalizedPrice: String?, promoTierLocalizedPrice: String?)
@@ -33,6 +39,8 @@ extension IAPServiceProtocol {
             self.fetchProducts().cauterize()
         }
     }
+
+    // MARK: Fetch Localized Prices
 
     func fetchLocalizedPrices(mobileTier: MobileTier) -> Guarantee<IAPMobileTierLocalizedPrices> {
         self.fetchLocalizedPrices(priceTier: mobileTier.priceTier, promoTier: mobileTier.promoTier)
@@ -266,6 +274,10 @@ final class IAPService: IAPServiceProtocol {
         return course.isPaid && self.productsService.canFetchProduct(with: productIdentifier)
     }
 
+    func canBuyCourse(_ course: Course, mobileTier: String) -> Bool {
+        course.isPaid && self.productsService.canFetchProduct(with: mobileTier)
+    }
+
     @available(*, deprecated, message: "Legacy purchase flow")
     func buy(course: Course, delegate: IAPServiceDelegate?) {
         self.mutex.unbalancedLock()
@@ -283,6 +295,29 @@ final class IAPService: IAPServiceProtocol {
         self.fetchProduct(for: course).done { productOrNil in
             if let product = productOrNil {
                 self.paymentsService.buy(courseID: courseID, promoCode: nil, product: product)
+            } else {
+                self.handleCoursePaymentFailed(courseID: courseID, error: Error.productsRequestFailed)
+            }
+        }.catch { error in
+            self.handleCoursePaymentFailed(courseID: courseID, error: error)
+        }
+    }
+
+    func buy(courseID: Course.IdType, mobileTier: String, promoCode: String?, delegate: IAPServiceDelegate?) {
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
+
+        let request = CoursePaymentRequest(courseID: courseID, delegate: delegate)
+
+        if self.coursePaymentRequests.contains(request) {
+            return
+        }
+
+        self.coursePaymentRequests.insert(request)
+
+        self.fetchProduct(for: mobileTier).done { productOrNil in
+            if let product = productOrNil {
+                self.paymentsService.buy(courseID: courseID, promoCode: promoCode, product: product)
             } else {
                 self.handleCoursePaymentFailed(courseID: courseID, error: Error.productsRequestFailed)
             }

@@ -7,6 +7,7 @@ protocol CourseInfoPurchaseModalInteractorProtocol {
     func doPromoCodeDidChange(request: CourseInfoPurchaseModal.PromoCodeDidChange.Request)
     func doWishlistMainAction(request: CourseInfoPurchaseModal.WishlistMainAction.Request)
     func doStartLearningPresentation(request: CourseInfoPurchaseModal.StartLearningPresentation.Request)
+    func doPurchaseCourse(request: CourseInfoPurchaseModal.PurchaseCourse.Request)
 }
 
 final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractorProtocol {
@@ -94,6 +95,7 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
 
         defer {
             self.currentPromoCodeName = request.promoCode
+            self.currentMobileTier?.promoCodeName = request.promoCode
         }
 
         guard let currentMobileTier = self.currentMobileTier,
@@ -142,6 +144,47 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         self.moduleOutput?.handleCourseInfoPurchaseModalDidRequestStartLearning(courseID: self.courseID)
     }
 
+    func doPurchaseCourse(request: CourseInfoPurchaseModal.PurchaseCourse.Request) {
+        guard let currentCourse = self.currentCourse,
+              let currentMobileTier = self.currentMobileTier else {
+            return print(
+                """
+                CourseInfoPurchaseModalInteractor :: buy course error = some data is `nil`, \
+                currentCourse = \(String(describing: self.currentCourse)), \
+                currentMobileTier = \(String(describing: self.currentMobileTier))
+                """
+            )
+        }
+
+        guard currentMobileTier.priceTier != nil,
+              let purchaseMobileTier = currentMobileTier.promoTier ?? currentMobileTier.priceTier,
+              self.iapService.canBuyCourse(currentCourse, mobileTier: purchaseMobileTier) else {
+            print("CourseInfoPurchaseModalInteractor :: buy course error = can't buy course")
+            return self.presenter.presentPurchaseCourseResult(
+                response: .init(
+                    state: .error(
+                        error: IAPService.Error.unsupportedCourse,
+                        modalData: .init(course: currentCourse, mobileTier: currentMobileTier)
+                    )
+                )
+            )
+        }
+
+        let promoCode = currentMobileTier.promoTier != nil ? currentMobileTier.promoCodeName : nil
+
+        print(
+            """
+            CourseInfoPurchaseModalInteractor :: starting buy course = \(self.courseID), \
+            mobileTier = \(purchaseMobileTier), promoCode = \(String(describing: promoCode))
+            """
+        )
+
+        self.presenter.presentPurchaseCourseResult(response: .init(state: .inProgress))
+
+        self.iapService
+            .buy(courseID: self.courseID, mobileTier: purchaseMobileTier, promoCode: promoCode, delegate: self)
+    }
+
     // MARK: Private API
 
     private func fetchInitialMobileTier() -> Promise<MobileTierPlainObject> {
@@ -180,6 +223,33 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
                 result.promoCodeName = promoCodeName
                 return .value(result)
             }
+    }
+}
+
+// MARK: - CourseInfoPurchaseModalInteractor: IAPServiceDelegate -
+
+extension CourseInfoPurchaseModalInteractor: IAPServiceDelegate {
+    func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
+        print("CourseInfoPurchaseModalInteractor :: \(#function), courseID = \(courseID)")
+        self.presenter.presentPurchaseCourseResult(response: .init(state: .success))
+    }
+
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didFailPurchaseCourse courseID: Course.IdType,
+        withError error: Swift.Error
+    ) {
+        print("CourseInfoPurchaseModalInteractor :: \(#function), courseID = \(courseID), error = \(error)")
+
+        guard let currentCourse = self.currentCourse,
+              let currentMobileTier = self.currentMobileTier,
+              let iapServiceError = error as? IAPService.Error else {
+            return
+        }
+
+        let modalData = CourseInfoPurchaseModal.ModalData(course: currentCourse, mobileTier: currentMobileTier)
+        self.presenter
+            .presentPurchaseCourseResult(response: .init(state: .error(error: iapServiceError, modalData: modalData)))
     }
 }
 

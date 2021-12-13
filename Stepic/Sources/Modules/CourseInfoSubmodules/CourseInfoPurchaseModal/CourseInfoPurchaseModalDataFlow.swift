@@ -41,12 +41,12 @@ enum CourseInfoPurchaseModal {
         }
     }
 
-    /// Add course to withlist
+    /// Add course to wishlist
     enum WishlistMainAction {
         struct Request {}
     }
 
-    /// Add course to withlist result
+    /// Add course to wishlist result
     enum AddCourseToWishlist {
         struct Response {
             let state: State
@@ -74,6 +74,25 @@ enum CourseInfoPurchaseModal {
         struct Request {}
     }
 
+    /// Course purchase flow
+    enum PurchaseCourse {
+        struct Request {}
+
+        struct Response {
+            let state: State
+
+            enum State {
+                case inProgress
+                case error(error: IAPService.Error, modalData: ModalData)
+                case success
+            }
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
@@ -81,7 +100,8 @@ enum CourseInfoPurchaseModal {
         case error
         case result(data: CourseInfoPurchaseModalViewModel)
         case purchaseInProgress
-        case purchaseError
+        case purchaseErrorAppStore(errorDescription: String?, modalData: CourseInfoPurchaseModalViewModel)
+        case purchaseErrorStepik
         case purchaseSuccess
     }
 

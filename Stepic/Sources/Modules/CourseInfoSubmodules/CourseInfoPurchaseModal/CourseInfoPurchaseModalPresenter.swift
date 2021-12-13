@@ -4,6 +4,7 @@ protocol CourseInfoPurchaseModalPresenterProtocol {
     func presentModal(response: CourseInfoPurchaseModal.ModalLoad.Response)
     func presentCheckPromoCodeResult(response: CourseInfoPurchaseModal.CheckPromoCode.Response)
     func presentAddCourseToWishlistResult(response: CourseInfoPurchaseModal.AddCourseToWishlist.Response)
+    func presentPurchaseCourseResult(response: CourseInfoPurchaseModal.PurchaseCourse.Response)
 }
 
 final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterProtocol {
@@ -49,6 +50,62 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
             self.viewController?.displayAddCourseToWishlistResult(
                 viewModel: .init(state: .result(message: message, data: viewModel))
             )
+        }
+    }
+
+    func presentPurchaseCourseResult(response: CourseInfoPurchaseModal.PurchaseCourse.Response) {
+        guard let viewController = self.viewController else {
+            return
+        }
+
+        switch response.state {
+        case .inProgress:
+            viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseInProgress))
+        case .error(let iapError, let modalData):
+            let errorDescription: String? = {
+                switch iapError {
+                case .unsupportedCourse, .noProductIDsFound, .noProductsFound:
+                    return NSLocalizedString(
+                        "CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage",
+                        comment: ""
+                    )
+                case .productsRequestFailed:
+                    return NSLocalizedString(
+                        "CourseInfoPurchaseModalPurchaseErrorProductsRequestFailedMessage",
+                        comment: ""
+                    )
+                case .paymentFailed, .paymentNotAllowed, .paymentUserChanged:
+                    return iapError.errorDescription
+                case .paymentWasCancelled, .paymentReceiptValidationFailed:
+                    return nil
+                }
+            }()
+
+            if iapError == .paymentReceiptValidationFailed {
+                viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseErrorStepik))
+            } else {
+                let modalViewModel = self.makeModalViewModel(
+                    course: modalData.course,
+                    mobileTier: modalData.mobileTier
+                )
+
+                viewController.displayPurchaseCourseResult(
+                    viewModel: .init(
+                        state: .purchaseErrorAppStore(
+                            errorDescription: errorDescription,
+                            modalData: modalViewModel
+                        )
+                    )
+                )
+
+                if iapError == .paymentUserChanged {
+                    DispatchQueue.main.async {
+                        viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseErrorStepik))
+                    }
+                }
+            }
+        case .success:
+            viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseSuccess))
         }
     }
 

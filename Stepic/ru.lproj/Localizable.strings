@@ -551,6 +551,9 @@ CourseInfoPurchaseModalPurchaseErrorContactSupportSubject = "Ошибка при
 CourseInfoPurchaseModalPurchaseSuccessStatusTitle = "Оплата прошла успешно";
 CourseInfoPurchaseModalPurchaseSuccessStartLearningTitle = "Начать учиться";
 
+CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage = "Данный курс недоступен для покупки в мобильном приложении";
+CourseInfoPurchaseModalPurchaseErrorProductsRequestFailedMessage = "Не удалось получить информацию из App Store, повторите позже";
+
 /* Course revenue */
 CourseRevenueTitle = "Доходы";
 CourseRevenueTabPurchasesAndRefunds = "Покупки и возвраты";

@@ -549,6 +549,9 @@ CourseInfoPurchaseModalPurchaseErrorContactSupportSubject = "Error when purchasi
 CourseInfoPurchaseModalPurchaseSuccessStatusTitle = "The payment was successful";
 CourseInfoPurchaseModalPurchaseSuccessStartLearningTitle = "Start Learning";
 
+CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage = "This course is not available for purchase in the mobile app";
+CourseInfoPurchaseModalPurchaseErrorProductsRequestFailedMessage = "Couldn't get information from the App Store, please try again later";
+
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
 CourseRevenueTabPurchasesAndRefunds = "Purchases and Refunds";
