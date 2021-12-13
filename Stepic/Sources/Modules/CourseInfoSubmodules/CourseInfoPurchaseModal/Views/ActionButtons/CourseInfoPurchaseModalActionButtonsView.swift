@@ -38,6 +38,13 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
     var onBuyButtonClick: (() -> Void)?
     var onWishlistButtonClick: (() -> Void)?
 
+    var isEnabled = true {
+        didSet {
+            self.buyButton.isEnabled = self.isEnabled
+            self.wishlistButton.isEnabled = self.isEnabled
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return CGSize(width: UIView.noIntrinsicMetric, height: stackViewIntrinsicContentSize.height)
@@ -62,8 +69,42 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
 
     // MARK: Public API
 
-    func configureBuyButton(viewModel: CourseInfoPurchaseModalPriceViewModel) {
+    func updateBuyButtonState(newState: BuyButtonState) {
+        switch newState {
+        case .loading:
+            self.buyButton.isLoadingActivityIndicatorVisible = true
+            self.buyButton.text = NSLocalizedString(
+                "CourseInfoPurchaseModalBuyButtonPurchaseInProgressTitle",
+                comment: ""
+            )
+        case .result(let viewModel):
+            self.buyButton.isLoadingActivityIndicatorVisible = false
+            self.configureBuyButton(viewModel: viewModel)
+        }
+    }
+
+    func configureWishlistButton(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
+        self.wishlistButton.appearance = .init(
+            loadingIndicatorColor: self.appearance.wishlistButtonTextColor,
+            textLabelTextColor: self.appearance.wishlistButtonTextColor,
+            backgroundColor: self.appearance.wishlistButtonBackgroundColor,
+            borderWidth: self.appearance.wishlistButtonBorderWidth,
+            borderColor: viewModel.isInWishlist
+                ? self.appearance.wishlistButtonDisabledBorderColor
+                : self.appearance.wishlistButtonBorderColor
+        )
+
+        self.wishlistButton.text = viewModel.title
+
+        self.wishlistButton.isLoadingActivityIndicatorVisible = viewModel.isLoading
+        self.wishlistButton.isUserInteractionEnabled = !viewModel.isInWishlist && !viewModel.isLoading
+    }
+
+    // MARK: Private API
+
+    private func configureBuyButton(viewModel: CourseInfoPurchaseModalPriceViewModel) {
         self.buyButton.appearance = .init(
+            loadingIndicatorColor: self.appearance.buyButtonTextColor,
             textLabelTextColor: self.appearance.buyButtonTextColor,
             backgroundColor: viewModel.promoDisplayPrice != nil
                 ? self.appearance.buyButtonPromoPriceBackgroundColor
@@ -104,25 +145,6 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         }
     }
 
-    func configureWishlistButton(viewModel: CourseInfoPurchaseModalWishlistViewModel) {
-        self.wishlistButton.appearance = .init(
-            loadingIndicatorColor: self.appearance.wishlistButtonTextColor,
-            textLabelTextColor: self.appearance.wishlistButtonTextColor,
-            backgroundColor: self.appearance.wishlistButtonBackgroundColor,
-            borderWidth: self.appearance.wishlistButtonBorderWidth,
-            borderColor: viewModel.isInWishlist
-                ? self.appearance.wishlistButtonDisabledBorderColor
-                : self.appearance.wishlistButtonBorderColor
-        )
-
-        self.wishlistButton.text = viewModel.title
-
-        self.wishlistButton.isLoadingActivityIndicatorVisible = viewModel.isLoading
-        self.wishlistButton.isUserInteractionEnabled = !viewModel.isInWishlist && !viewModel.isLoading
-    }
-
-    // MARK: Private API
-
     @objc
     private func buyButtonClicked() {
         self.onBuyButtonClick?()
@@ -131,6 +153,13 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
     @objc
     private func wishlistButtonClicked() {
         self.onWishlistButtonClick?()
+    }
+
+    // MARK: Inner Types
+
+    enum BuyButtonState {
+        case loading
+        case result(CourseInfoPurchaseModalPriceViewModel)
     }
 }
 

@@ -127,7 +127,7 @@ final class CourseInfoPurchaseModalView: UIView {
         self.disclaimerView.disclaimerText = viewModel.disclaimer
         self.disclaimerView.isHidden = viewModel.disclaimer.isEmpty
 
-        self.actionButtonsView.configureBuyButton(viewModel: viewModel.price)
+        self.actionButtonsView.updateBuyButtonState(newState: .result(viewModel.price))
         self.configure(viewModel: viewModel.wishlist)
 
         self.purchaseErrorView.courseCoverURL = viewModel.courseCoverImageURL
@@ -145,7 +145,7 @@ final class CourseInfoPurchaseModalView: UIView {
         case .result(let data):
             if data.promoDisplayPrice != nil {
                 self.promoCodeView.state = .success
-                self.actionButtonsView.configureBuyButton(viewModel: data)
+                self.actionButtonsView.updateBuyButtonState(newState: .result(data))
             } else {
                 self.promoCodeView.state = .error
             }
@@ -184,10 +184,13 @@ final class CourseInfoPurchaseModalView: UIView {
 
     func showPurchaseInProgress() {
         self.isUserInteractionEnabled = false
+        self.actionButtonsView.isEnabled = false
+        self.actionButtonsView.updateBuyButtonState(newState: .loading)
     }
 
     func hidePurchaseInProgress() {
         self.isUserInteractionEnabled = true
+        self.actionButtonsView.isEnabled = true
     }
 
     func showPurchaseError() {

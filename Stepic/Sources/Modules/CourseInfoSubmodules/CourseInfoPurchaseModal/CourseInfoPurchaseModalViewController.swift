@@ -144,9 +144,7 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         case .purchaseInProgress:
             self.isPurchaseInProgress = true
             self.courseInfoPurchaseModalView?.showPurchaseInProgress()
-        case .purchaseErrorAppStore:
-            fatalError("not implemented")
-        case .purchaseErrorStepik:
+        case .purchaseError:
             self.courseInfoPurchaseModalView?.showPurchaseError()
             self.transition(to: .longForm)
         case .purchaseSuccess:

@@ -542,6 +542,8 @@ CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle = "Добавляем
 CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle = "Добавить в Список желаний";
 CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "Добавлен в Список желаний";
 
+CourseInfoPurchaseModalBuyButtonPurchaseInProgressTitle = "Обработка платежа";
+
 CourseInfoPurchaseModalPurchaseErrorStatusTitle = "Оплата прошла, покупка не завершена";
 CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "При обработке платежа произошла ошибка, попробуйте восстановить покупку и <a href=\"https://support.stepik.org/hc/ru\">свяжитесь с поддержкой</a>, если ошибка не будет устранена. Повторного списания средств не произойдет.";
 CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Восстановить покупку";

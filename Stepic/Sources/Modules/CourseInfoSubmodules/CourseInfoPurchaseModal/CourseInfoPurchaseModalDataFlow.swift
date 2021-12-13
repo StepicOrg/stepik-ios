@@ -81,8 +81,7 @@ enum CourseInfoPurchaseModal {
         case error
         case result(data: CourseInfoPurchaseModalViewModel)
         case purchaseInProgress
-        case purchaseErrorAppStore
-        case purchaseErrorStepik
+        case purchaseError
         case purchaseSuccess
     }
 

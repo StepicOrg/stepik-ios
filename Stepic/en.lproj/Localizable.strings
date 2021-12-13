@@ -540,6 +540,8 @@ CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle = "Adding";
 CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle = "Add to Wishlist";
 CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "Added to Wishlist";
 
+CourseInfoPurchaseModalBuyButtonPurchaseInProgressTitle = "Processing the Payment";
+
 CourseInfoPurchaseModalPurchaseErrorStatusTitle = "The payment was successful, but the purchase is not completed";
 CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "An error occurred while processing the payment, try to restore the purchase and <a href=\"https://support.stepik.org/hc/en-us\">contact support</a>, if the error persists. The funds will not be debited again.";
 CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Restore Purchase";
