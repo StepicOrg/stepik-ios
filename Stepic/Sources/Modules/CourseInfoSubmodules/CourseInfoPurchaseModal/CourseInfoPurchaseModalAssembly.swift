@@ -1,8 +1,6 @@
 import UIKit
 
 final class CourseInfoPurchaseModalAssembly: Assembly {
-    var moduleInput: CourseInfoPurchaseModalInputProtocol?
-
     private let courseID: Course.IdType
     private let promoCodeName: String?
     private let mobileTierID: MobileTier.IdType?
@@ -41,7 +39,6 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
         let viewController = CourseInfoPurchaseModalViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

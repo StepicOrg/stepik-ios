@@ -5,6 +5,7 @@ protocol CourseInfoPurchaseModalPresenterProtocol {
     func presentCheckPromoCodeResult(response: CourseInfoPurchaseModal.CheckPromoCode.Response)
     func presentAddCourseToWishlistResult(response: CourseInfoPurchaseModal.AddCourseToWishlist.Response)
     func presentPurchaseCourseResult(response: CourseInfoPurchaseModal.PurchaseCourse.Response)
+    func presentRestorePurchaseResult(response: CourseInfoPurchaseModal.RestorePurchase.Response)
 }
 
 final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterProtocol {
@@ -106,6 +107,20 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
             }
         case .success:
             viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseSuccess))
+        }
+    }
+
+    func presentRestorePurchaseResult(response: CourseInfoPurchaseModal.RestorePurchase.Response) {
+        switch response.state {
+        case .inProgress:
+            self.viewController?.displayRestorePurchaseResult(viewModel: .init(state: .restorePurchaseInProgress))
+        case .error:
+            let errorDescription = IAPService.Error.paymentReceiptValidationFailed.errorDescription
+            self.viewController?.displayRestorePurchaseResult(
+                viewModel: .init(state: .restorePurchaseError(errorDescription: errorDescription))
+            )
+        case .success:
+            self.viewController?.displayRestorePurchaseResult(viewModel: .init(state: .restorePurchaseSuccess))
         }
     }
 

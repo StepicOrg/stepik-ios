@@ -27,6 +27,7 @@ protocol IAPServiceProtocol: AnyObject {
     func buy(courseID: Course.IdType, mobileTier: String, promoCode: String?, delegate: IAPServiceDelegate?)
     @available(*, deprecated, message: "Legacy purchase flow")
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
+    func retryValidateReceipt(courseID: Course.IdType, mobileTier: String, delegate: IAPServiceDelegate?)
 }
 
 // MARK: - IAPServiceProtocol (Default Extensions) -
@@ -337,6 +338,16 @@ final class IAPService: IAPServiceProtocol {
         let productIdentifier = self.productsService.makeProductIdentifier(priceTier: course.priceTier.require())
 
         self.paymentsService.retryValidateReceipt(courseID: course.id, productIdentifier: productIdentifier)
+    }
+
+    func retryValidateReceipt(courseID: Course.IdType, mobileTier: String, delegate: IAPServiceDelegate?) {
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
+
+        let request = CoursePaymentRequest(courseID: courseID, delegate: delegate)
+        self.coursePaymentRequests.insert(request)
+
+        self.paymentsService.retryValidateReceipt(courseID: courseID, productIdentifier: mobileTier)
     }
 
     // MARK: Types

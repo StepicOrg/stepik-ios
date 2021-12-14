@@ -8,6 +8,7 @@ protocol CourseInfoPurchaseModalViewControllerProtocol: AnyObject {
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel)
     func displayAddCourseToWishlistResult(viewModel: CourseInfoPurchaseModal.AddCourseToWishlist.ViewModel)
     func displayPurchaseCourseResult(viewModel: CourseInfoPurchaseModal.PurchaseCourse.ViewModel)
+    func displayRestorePurchaseResult(viewModel: CourseInfoPurchaseModal.RestorePurchase.ViewModel)
 }
 
 final class CourseInfoPurchaseModalViewController: PanModalPresentableViewController {
@@ -156,6 +157,21 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
         case .purchaseSuccess:
             self.courseInfoPurchaseModalView?.showPurchaseSuccess()
             self.transition(to: .shortForm)
+        case .restorePurchaseInProgress:
+            SVProgressHUD.show()
+
+            self.courseInfoPurchaseModalView?.showPurchaseError()
+            self.transition(to: .longForm)
+        case .restorePurchaseError(let errorDescription):
+            SVProgressHUD.showError(withStatus: errorDescription)
+
+            self.courseInfoPurchaseModalView?.showPurchaseError()
+            self.transition(to: .longForm)
+        case .restorePurchaseSuccess:
+            SVProgressHUD.showSuccess(withStatus: nil)
+
+            self.courseInfoPurchaseModalView?.showPurchaseSuccess()
+            self.transition(to: .shortForm)
         }
 
         self.state = newState
@@ -226,6 +242,10 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
     func displayPurchaseCourseResult(viewModel: CourseInfoPurchaseModal.PurchaseCourse.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
+
+    func displayRestorePurchaseResult(viewModel: CourseInfoPurchaseModal.RestorePurchase.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
 }
 
 // MARK: - CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDelegate -
@@ -273,7 +293,7 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
     }
 
     func courseInfoPurchaseModalViewDidClickRestorePurchaseButton(_ view: CourseInfoPurchaseModalView) {
-        print(#function)
+        self.interactor.doRestorePurchase(request: .init())
     }
 
     func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView) {

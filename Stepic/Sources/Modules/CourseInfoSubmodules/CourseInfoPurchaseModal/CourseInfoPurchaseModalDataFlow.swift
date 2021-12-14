@@ -93,6 +93,25 @@ enum CourseInfoPurchaseModal {
         }
     }
 
+    /// Try to restore course purchase
+    enum RestorePurchase {
+        struct Request {}
+
+        struct Response {
+            let state: State
+
+            enum State {
+                case inProgress
+                case error
+                case success
+            }
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
@@ -103,6 +122,9 @@ enum CourseInfoPurchaseModal {
         case purchaseErrorAppStore(errorDescription: String?, modalData: CourseInfoPurchaseModalViewModel)
         case purchaseErrorStepik
         case purchaseSuccess
+        case restorePurchaseInProgress
+        case restorePurchaseError(errorDescription: String?)
+        case restorePurchaseSuccess
     }
 
     enum CheckPromoCodeState {

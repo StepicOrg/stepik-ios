@@ -84,15 +84,23 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
     }
 
     func retryValidateReceipt(courseID: Course.IdType, productIdentifier: IAPProductIdentifier) {
+        func reportRetryValidateReceiptFailed() {
+            self.delegate?.iapPaymentsService(
+                self,
+                didFailPurchaseCourse: courseID,
+                withError: Error.paymentReceiptValidationFailed
+            )
+        }
+
         guard let transaction = self.paymentQueue.transactions.first(
             where: { $0.payment.productIdentifier == productIdentifier }
         ), transaction.transactionState == .purchased else {
-            return
+            return reportRetryValidateReceiptFailed()
         }
 
         guard let payload = self.paymentsCache.getCoursePayment(for: transaction),
               payload.courseID == courseID else {
-            return
+            return reportRetryValidateReceiptFailed()
         }
 
         self.validateReceipt(transaction: transaction, payload: payload, forceRefreshReceipt: true)
