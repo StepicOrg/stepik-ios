@@ -232,6 +232,7 @@ extension CourseInfoPurchaseModalInteractor: IAPServiceDelegate {
     func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
         print("CourseInfoPurchaseModalInteractor :: \(#function), courseID = \(courseID)")
         self.presenter.presentPurchaseCourseResult(response: .init(state: .success))
+        self.moduleOutput?.handleCourseInfoPurchaseModalDidPurchaseCourse(courseID: courseID)
     }
 
     func iapService(

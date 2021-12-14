@@ -593,6 +593,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 }
 
 // MARK: - CourseInfoInteractor: CourseInfoInputProtocol -
+
 extension CourseInfoInteractor: CourseInfoInputProtocol {}
 
 // MARK: - CourseInfoInteractor: LessonOutputProtocol -
@@ -657,9 +658,7 @@ extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
 
 extension CourseInfoInteractor: IAPServiceDelegate {
     func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-        self.doCourseRefresh(request: .init())
-        self.coursePurchaseReminder.removePurchaseNotification(for: courseID)
+        self.handleDidPurchaseCourse(courseID)
     }
 
     func iapService(
@@ -692,6 +691,23 @@ extension CourseInfoInteractor: IAPServiceDelegate {
             self.presenter.presentIAPPaymentFailed(response: .init(error: error, course: course))
         }
     }
+
+    // MARK: Private Helpers
+
+    private func handleDidPurchaseCourse(_ courseID: Course.IdType) {
+        self.coursePurchaseReminder.removePurchaseNotification(for: courseID)
+
+        guard self.courseID == courseID else {
+            return
+        }
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+        self.doCourseRefresh(request: .init())
+
+        if self.currentCourse?.isInWishlist ?? false {
+            self.provider.deleteCourseFromWishlist().cauterize()
+        }
+    }
 }
 
 // MARK: - CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol -
@@ -718,5 +734,9 @@ extension CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol {
                 courseViewSource: self.courseViewSource
             )
         )
+    }
+
+    func handleCourseInfoPurchaseModalDidPurchaseCourse(courseID: Course.IdType) {
+        self.handleDidPurchaseCourse(courseID)
     }
 }
