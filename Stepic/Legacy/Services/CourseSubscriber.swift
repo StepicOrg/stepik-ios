@@ -49,7 +49,7 @@ final class CourseSubscriber: CourseSubscriberProtocol {
     ) -> Promise<Course> {
         Promise<Course> { seal in
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: { [weak self] in
-                guard let progressID = course.progressId else {
+                guard let progressID = course.progressID else {
                     seal.reject(CourseSubscriptionError.badResponseFormat)
                     return
                 }

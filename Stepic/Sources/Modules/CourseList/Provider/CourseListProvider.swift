@@ -82,8 +82,8 @@ final class CourseListProvider: CourseListProviderProtocol {
                 page: page,
                 filterQuery: filterQuery
             ).then { (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
-                let progressesIDs = courses.compactMap { $0.progressId }
-                let summariesIDs = courses.compactMap { $0.reviewSummaryId }
+                let progressesIDs = courses.compactMap { $0.progressID }
+                let summariesIDs = courses.compactMap { $0.reviewSummaryID }
 
                 return when(
                     fulfilled: self.progressesNetworkService.fetch(ids: progressesIDs, page: 1),
@@ -204,10 +204,10 @@ final class CourseListProvider: CourseListProviderProtocol {
                 .reduce(into: [:]) { $0[$1.id] = $1 }
 
             for i in 0..<courses.count {
-                if let progressID = courses[i].progressId {
+                if let progressID = courses[i].progressID {
                     courses[i].progress = progressesMap[progressID]
                 }
-                if let reviewSummaryID = courses[i].reviewSummaryId {
+                if let reviewSummaryID = courses[i].reviewSummaryID {
                     courses[i].reviewSummary = reviewSummariesMap[reviewSummaryID]
                 }
             }

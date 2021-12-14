@@ -50,7 +50,7 @@ final class LastStepRouter {
         }
 
         guard course.canContinue,
-              let lastStepID = course.lastStepId else {
+              let lastStepID = course.lastStepID else {
             return self.fallbackToSyllabus(
                 courseID: course.id,
                 courseViewSource: viewSource,

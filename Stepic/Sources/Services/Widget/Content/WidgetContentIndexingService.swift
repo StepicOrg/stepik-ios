@@ -130,14 +130,14 @@ final class WidgetContentIndexingService: WidgetContentIndexingServiceProtocol {
 
                 return self.coursesNetworkService.fetch(ids: coursesIDs)
             }.then { courses -> Promise<([Course], [Progress])> in
-                let progressIDs = courses.compactMap(\.progressId)
+                let progressIDs = courses.compactMap(\.progressID)
 
                 assert(courses.count == progressIDs.count)
 
                 return self.progressesNetworkService.fetch(ids: progressIDs).map { (courses, $0) }
             }.then { courses, progresses -> Guarantee<([Course], [Progress])> in
                 for (course, progress) in zip(courses, progresses) {
-                    assert(course.progressId == progress.id)
+                    assert(course.progressID == progress.id)
                     course.progress = progress
                 }
                 self.coreDataHelper.save()

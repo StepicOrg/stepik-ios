@@ -127,12 +127,12 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.audience = json[JSONKey.targetAudience.rawValue].stringValue
         self.requirements = json[JSONKey.requirements.rawValue].stringValue
         self.slug = json[JSONKey.slug.rawValue].string
-        self.progressId = json[JSONKey.progress.rawValue].string
-        self.lastStepId = json[JSONKey.lastStep.rawValue].string
+        self.progressID = json[JSONKey.progress.rawValue].string
+        self.lastStepID = json[JSONKey.lastStep.rawValue].string
         self.scheduleType = json[JSONKey.scheduleType.rawValue].string
         self.learnersCount = json[JSONKey.learnersCount.rawValue].int
         self.totalUnits = json[JSONKey.totalUnits.rawValue].intValue
-        self.reviewSummaryId = json[JSONKey.reviewSummary.rawValue].int
+        self.reviewSummaryID = json[JSONKey.reviewSummary.rawValue].int
         self.sectionsArray = json[JSONKey.sections.rawValue].arrayObject as! [Int]
         self.instructorsArray = json[JSONKey.instructors.rawValue].arrayObject as! [Int]
         self.authorsArray = json[JSONKey.authors.rawValue].arrayObject as? [Int] ?? []

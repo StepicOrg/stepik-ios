@@ -165,7 +165,7 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
     func triggerProgressUpdate(course: Course.IdType) {
         self.coursesNetworkService.fetch(id: course).then { course -> Promise<(Course, Progress?)> in
             guard let course = course,
-                  let progressID = course.progressId else {
+                  let progressID = course.progressID else {
                 throw Error.fetchFailed
             }
 

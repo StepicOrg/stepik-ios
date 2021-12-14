@@ -58,7 +58,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private var promoCodeName: String?
     private var currentPromoCode: PromoCode?
 
-    private var currentMobileTier: MobileTier?
+    private var currentMobileTier: MobileTierPlainObject?
 
     private var courseWebURL: URL? {
         guard let course = self.currentCourse else {
@@ -405,42 +405,47 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     private func makeCourseData() -> CourseInfo.CourseLoad.Response.Data {
-        let mobileTier: MobileTier? = {
-            guard self.remoteConfig.coursePurchaseFlow == .iap else {
-                return nil
-            }
-
-            if let currentMobileTier = self.currentMobileTier {
-                return currentMobileTier
-            } else {
-                if let promoCodeName = self.promoCodeName,
-                   let promoTier = self.currentCourse?.mobileTiers.first(where: { $0.id.hasSuffix(promoCodeName) }) {
-                    return promoTier
-                }
-                return self.currentCourse?.mobileTiers.first(where: { $0.id.hasSuffix("None") })
-            }
-        }()
-
-        return .init(
+        .init(
             course: self.currentCourse.require(),
             isWishlistAvailable: self.userAccountService.isAuthorized && !self.currentCourse.require().enrolled,
             isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
             coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
             promoCode: self.currentPromoCode,
-            mobileTier: mobileTier?.plainObject
+            mobileTier: self.currentMobileTier
         )
     }
 
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.CourseLoad.Response> {
-        Promise { seal in
-            firstly {
-                self.isOnline && self.didLoadFromCache
-                    ? self.provider.fetchRemote()
-                    : self.provider.fetchCached()
-            }.done { course in
-                self.currentCourse = course
+        let dataSourceType: DataSourceType = self.isOnline && self.didLoadFromCache ? .remote : .cache
 
-                if let currentCourse = self.currentCourse {
+        return Promise { seal in
+            firstly { () -> Promise<Course?> in
+                switch dataSourceType {
+                case .cache:
+                    return self.provider.fetchCached()
+                case .remote:
+                    return self.provider.fetchRemote()
+                }
+            }.then { course -> Promise<(Course?, MobileTierPlainObject?)> in
+                self.fetchMobileTier(course: course, dataSourceType: dataSourceType)
+                    .map { (course, $0) }
+            }.done { course, mobileTier in
+                self.currentCourse = course
+                self.currentMobileTier = mobileTier
+
+                let isMobileTierFetchSuccessful: Bool = {
+                    switch self.remoteConfig.coursePurchaseFlow {
+                    case .web:
+                        return true
+                    case .iap:
+                        if self.currentCourse?.isPaid ?? false {
+                            return self.currentMobileTier != nil
+                        }
+                        return true
+                    }
+                }()
+
+                if let currentCourse = self.currentCourse, isMobileTierFetchSuccessful {
                     DispatchQueue.main.async {
                         self.visitedCourseListPersistenceService.insert(course: currentCourse)
                         self.dataBackUpdateService.triggerVisitedCourseListUpdate()
@@ -449,9 +454,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     seal.fulfill(.init(result: .success(self.makeCourseData())))
                 } else {
                     // Offline mode: present empty state only if get nil from network
-                    if self.isOnline && self.didLoadFromCache {
+                    switch dataSourceType {
+                    case .remote:
                         seal.reject(Error.networkFetchFailed)
-                    } else {
+                    case .cache:
                         seal.fulfill(.init(result: .failure(Error.cachedFetchFailed)))
                     }
                 }
@@ -477,6 +483,35 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    private func fetchMobileTier(course: Course?, dataSourceType: DataSourceType) -> Guarantee<MobileTierPlainObject?> {
+        guard self.remoteConfig.coursePurchaseFlow == .iap else {
+            return .value(nil)
+        }
+
+        guard let course = course, course.isPaid else {
+            return .value(nil)
+        }
+
+        if self.promoCodeName == nil,
+           let defaultPromoCode = course.defaultPromoCode, defaultPromoCode.isValid {
+            self.promoCodeName = defaultPromoCode.name
+        }
+
+        return Guarantee { seal in
+            self.provider
+                .fetchMobileTier(promoCodeName: self.promoCodeName, dataSourceType: dataSourceType)
+                .compactMap { $0 }
+                .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
+                .done { mobileTier in
+                    seal(mobileTier)
+                }
+                .catch { _ in
+                    seal(nil)
+                }
+        }
+    }
+
+    @available(*, deprecated, message: "Legacy purchase flow")
     private func fetchAndPresentPriceInfoIfNeeded() {
         guard let course = self.currentCourse, course.isPaid else {
             return
@@ -493,30 +528,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
             self.fetchAndPresentPromoCodeIfNeeded()
         case .iap:
-            guard self.currentMobileTier == nil else {
-                return
-            }
-
-            if self.promoCodeName == nil,
-               let defaultPromoCode = course.defaultPromoCode, defaultPromoCode.isValid {
-                self.promoCodeName = defaultPromoCode.name
-            }
-
-            self.provider
-                .calculateMobileTier(promoCodeName: self.promoCodeName)
-                .compactMap { $0 }
-                .compactMap { mobileTier in
-                    self.currentCourse?.mobileTiers.first(where: { $0.id == mobileTier.id })
-                }
-                .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
-                .done { mobileTier in
-                    self.currentMobileTier = mobileTier
-                    self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
-                }
-                .cauterize()
+            break
         }
     }
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     private func fetchAndPresentPromoCodeIfNeeded() {
         guard self.currentPromoCode == nil,
               let course = self.currentCourse, course.isPaid else {
