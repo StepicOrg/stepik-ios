@@ -62,7 +62,13 @@ final class CourseInfoPurchaseModalActionButton: UIControl {
 
     override var isHighlighted: Bool {
         didSet {
-            self.alpha = self.isHighlighted ? 0.5 : 1.0
+            self.alpha = self.isHighlighted ? 0.5 : (self.isEnabled ? 1.0 : 0.5)
+        }
+    }
+
+    override var isEnabled: Bool {
+        didSet {
+            self.alpha = self.isEnabled ? 1.0 : 0.5
         }
     }
 

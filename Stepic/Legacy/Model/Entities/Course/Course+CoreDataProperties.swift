@@ -134,7 +134,7 @@ extension Course {
         }
     }
 
-    var reviewSummaryId: Int? {
+    var reviewSummaryID: Int? {
         get {
             managedReviewSummaryId?.intValue
         }
@@ -215,7 +215,7 @@ extension Course {
         }
     }
 
-    var progressId: String? {
+    var progressID: String? {
         get {
             managedProgressId
         }
@@ -233,7 +233,7 @@ extension Course {
         }
     }
 
-    var lastStepId: String? {
+    var lastStepID: String? {
         set(id) {
             self.managedLastStepId = id
         }

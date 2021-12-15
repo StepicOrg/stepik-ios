@@ -9,7 +9,7 @@ protocol CourseInfoProviderProtocol {
     func updateUserCourse(_ userCourse: UserCourse) -> Promise<UserCourse>
 
     func checkPromoCode(name: String) -> Promise<PromoCode>
-    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?>
+    func fetchMobileTier(promoCodeName: String?, dataSourceType: DataSourceType) -> Promise<MobileTierPlainObject?>
 
     func addCourseToWishlist() -> Promise<Void>
     func deleteCourseFromWishlist() -> Promise<Void>
@@ -122,8 +122,9 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         self.promoCodesNetworkService.checkPromoCode(courseID: self.courseID, name: name)
     }
 
-    func calculateMobileTier(promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
-        self.mobileTiersRepository.fetch(courseID: self.courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
+    func fetchMobileTier(promoCodeName: String?, dataSourceType: DataSourceType) -> Promise<MobileTierPlainObject?> {
+        self.mobileTiersRepository
+            .fetch(courseID: self.courseID, promoCodeName: promoCodeName, dataSourceType: dataSourceType)
     }
 
     func addCourseToWishlist() -> Promise<Void> {
@@ -146,15 +147,15 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
             courseFetchMethod(self.courseID).then {
                 course -> Promise<(Course?, Progress?, CourseReviewSummary?, [CoursePurchase])> in
                 let progressFetch: Promise<Progress?> = {
-                    if let result = course?.progressId {
-                        return progressFetchMethod(result)
+                    if let progressID = course?.progressID {
+                        return progressFetchMethod(progressID)
                     }
                     return .value(nil)
                 }()
 
                 let reviewSummaryFetch: Promise<CourseReviewSummary?> = {
-                    if let result = course?.reviewSummaryId {
-                        return reviewSummaryFetchMethod(result)
+                    if let reviewSummaryID = course?.reviewSummaryID {
+                        return reviewSummaryFetchMethod(reviewSummaryID)
                     }
                     return .value(nil)
                 }()
@@ -200,7 +201,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
 
     private func fetchMobileTiers(course: Course) -> Guarantee<Course> {
         firstly { () -> Guarantee<[MobileTier]> in
-            course.isPaid && !course.enrolled ? self.mobileTiersRepository.fetch(courseID: course.id) : .value([])
+            course.isPaid ? self.mobileTiersRepository.fetch(courseID: course.id) : .value([])
         }.then { mobileTiers -> Guarantee<Course> in
             course.mobileTiers = mobileTiers
             return .value(course)

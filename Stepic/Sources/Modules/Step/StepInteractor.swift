@@ -355,7 +355,7 @@ final class StepInteractor: StepInteractorProtocol {
         if let lastStep = course.lastStep {
             lastStep.update(unitId: unitID, stepId: stepID)
         } else {
-            course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
+            course.lastStep = LastStep(id: course.lastStepID ?? "", unitId: unitID, stepId: stepID)
         }
     }
 

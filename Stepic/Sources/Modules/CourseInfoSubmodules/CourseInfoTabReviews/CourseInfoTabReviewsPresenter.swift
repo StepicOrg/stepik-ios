@@ -155,7 +155,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         course: Course,
         currentUserReview: CourseReview?
     ) -> CourseInfoTabReviews.WriteCourseReviewState {
-        if course.progressId == nil {
+        if course.progressID == nil {
             return .summary
         }
 

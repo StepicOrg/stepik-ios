@@ -27,6 +27,15 @@ final class CourseInfoPurchaseModalDisclaimerView: UIView {
         return label
     }()
 
+    var disclaimerText: String? {
+        didSet {
+            self.attributedLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
+                htmlString: self.disclaimerText ?? ""
+            )
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+
     var onLinkClick: ((URL) -> Void)?
 
     override var intrinsicContentSize: CGSize {
@@ -62,10 +71,6 @@ final class CourseInfoPurchaseModalDisclaimerView: UIView {
 
         self.addSubviews()
         self.makeConstraints()
-
-        self.attributedLabel.attributedText = self.htmlToAttributedStringConverter.convertToAttributedText(
-            htmlString: NSLocalizedString("CourseInfoPurchaseModalDisclaimer", comment: "")
-        )
     }
 
     @available(*, unavailable)
