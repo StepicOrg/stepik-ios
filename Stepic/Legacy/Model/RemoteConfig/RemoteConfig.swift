@@ -13,11 +13,11 @@ final class RemoteConfig {
     private static let defaultCoursePurchaseFlowType = CoursePurchaseFlowType.web
 
     private static let defaultPurchaseFlowDisclaimerRussian = """
-В цену включена комиссия App Store и НДС. Оплачивая доступ к этому курсу вы соглашаетесь с условиями \
+В цену включена комиссия App Store и НДС. Оплачивая доступ к этому курсу, вы соглашаетесь с условиями \
 <a href=\"https://welcome.stepik.org/ru/payment-terms\">пользовательского соглашения</a>.
 """
     private static let defaultPurchaseFlowDisclaimerEnglish = """
-The price includes commission from App Store and VAT. By paying for access to this course you agree to the \
+The price includes commission from App Store and VAT. By paying for access to this course, you agree to the \
 <a href=\"https://welcome.stepik.org/en/payment-terms\">user agreement</a>.
 """
 
