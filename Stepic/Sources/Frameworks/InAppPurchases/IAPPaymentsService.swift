@@ -23,6 +23,8 @@ protocol IAPPaymentsServiceProtocol: AnyObject {
 
     func buy(courseID: Course.IdType, promoCode: String?, product: SKProduct)
     func retryValidateReceipt(courseID: Course.IdType, productIdentifier: IAPProductIdentifier)
+
+    func finishAllTransactions() -> Int
 }
 
 final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
@@ -31,6 +33,8 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
     private let paymentQueue: SKPaymentQueue
     private let paymentsCache: IAPPaymentsCacheProtocol
     private let receiptValidationService: IAPReceiptValidationServiceProtocol
+
+    private let iapSettingsStorageManager: IAPSettingsStorageManagerProtocol
 
     private let userAccountService: UserAccountServiceProtocol
     private let analytics: Analytics
@@ -47,12 +51,14 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
                 coursePaymentsAPI: CoursePaymentsAPI()
             )
         ),
+        iapSettingsStorageManager: IAPSettingsStorageManagerProtocol = IAPSettingsStorageManager(),
         userAccountService: UserAccountServiceProtocol = UserAccountService(),
         analytics: Analytics = StepikAnalytics.shared
     ) {
         self.paymentQueue = paymentQueue
         self.paymentsCache = paymentsCache
         self.receiptValidationService = receiptValidationService
+        self.iapSettingsStorageManager = iapSettingsStorageManager
         self.userAccountService = userAccountService
         self.analytics = analytics
         super.init()
@@ -106,6 +112,17 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
         self.validateReceipt(transaction: transaction, payload: payload, forceRefreshReceipt: true)
     }
 
+    func finishAllTransactions() -> Int {
+        let count = self.paymentQueue.transactions.count
+
+        for transaction in self.paymentQueue.transactions {
+            self.paymentsCache.removeCoursePayment(for: transaction)
+            self.paymentQueue.finishTransaction(transaction)
+        }
+
+        return count
+    }
+
     // MARK: Inner Types
 
     private struct MutableState {
@@ -156,7 +173,17 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
                 return print("IAPPaymentsService :: payment failed invalid user")
             }
 
+            #if BETA_PROFILE || DEBUG
+            if let createCoursePaymentDelay = self.iapSettingsStorageManager.createCoursePaymentDelay {
+                DispatchQueue.main.asyncAfter(deadline: .now() + createCoursePaymentDelay) {
+                    self.validateReceipt(transaction: transaction, payload: payload)
+                }
+            } else {
+                self.validateReceipt(transaction: transaction, payload: payload)
+            }
+            #else
             self.validateReceipt(transaction: transaction, payload: payload)
+            #endif
         case .failed:
             if let skError = transaction.error as? SKError {
                 if skError.code != .paymentCancelled {

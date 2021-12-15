@@ -28,6 +28,8 @@ protocol IAPServiceProtocol: AnyObject {
     @available(*, deprecated, message: "Legacy purchase flow")
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
     func retryValidateReceipt(courseID: Course.IdType, mobileTier: String, delegate: IAPServiceDelegate?)
+
+    func finishAllPaymentTransactions() -> Int
 }
 
 // MARK: - IAPServiceProtocol (Default Extensions) -
@@ -348,6 +350,10 @@ final class IAPService: IAPServiceProtocol {
         self.coursePaymentRequests.insert(request)
 
         self.paymentsService.retryValidateReceipt(courseID: courseID, productIdentifier: mobileTier)
+    }
+
+    func finishAllPaymentTransactions() -> Int {
+        self.paymentsService.finishAllTransactions()
     }
 
     // MARK: Types
