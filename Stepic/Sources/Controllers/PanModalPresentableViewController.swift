@@ -19,7 +19,31 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
         return .contentHeight(scrollView.contentSize.height)
     }
 
+    var cornerRadius: CGFloat { 8.0 }
+
+    var springDamping: CGFloat { 0.8 }
+
+    var transitionAnimationOptions: UIView.AnimationOptions {
+        [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState]
+    }
+
+    var panModalBackgroundColor: UIColor { .black.withAlphaComponent(0.7) }
+
+    var dragIndicatorBackgroundColor: UIColor { .lightGray }
+
     var anchorModalToLongForm: Bool { false }
+
+    var allowsDragToDismiss: Bool { true }
+
+    var allowsTapToDismiss: Bool { true }
+
+    var isUserInteractionEnabled: Bool { true }
+
+    var isHapticFeedbackEnabled: Bool { true }
+
+    var shouldRoundTopCorners: Bool { self.isPanModalPresented }
+
+    var showDragIndicator: Bool { self.shouldRoundTopCorners }
 
     var isShortFormEnabled = true
 
@@ -50,6 +74,14 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
         )
     }
 
+    func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool { true }
+
+    func willRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) {}
+
+    func shouldTransition(to state: PanModalPresentationController.PresentationState) -> Bool { true }
+
+    func shouldPrioritize(panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool { false }
+
     func willTransition(to state: PanModalPresentationController.PresentationState) {
         self.currentPresentationState = state
 
@@ -61,6 +93,10 @@ class PanModalPresentableViewController: UIViewController, PanModalPresentable {
         self.isShortFormEnabled = false
         self.panModalSetNeedsLayoutUpdate()
     }
+
+    func panModalWillDismiss() {}
+
+    func panModalDidDismiss() {}
 
     private func updateAdditionalSafeAreaInsets() {
         self.additionalSafeAreaInsets = UIApplication.shared.delegate?.window??.safeAreaInsets ?? .zero

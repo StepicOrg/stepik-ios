@@ -7,6 +7,8 @@ protocol CourseInfoPurchaseModalViewControllerProtocol: AnyObject {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel)
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel)
     func displayAddCourseToWishlistResult(viewModel: CourseInfoPurchaseModal.AddCourseToWishlist.ViewModel)
+    func displayPurchaseCourseResult(viewModel: CourseInfoPurchaseModal.PurchaseCourse.ViewModel)
+    func displayRestorePurchaseResult(viewModel: CourseInfoPurchaseModal.RestorePurchase.ViewModel)
 }
 
 final class CourseInfoPurchaseModalViewController: PanModalPresentableViewController {
@@ -15,14 +17,23 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     private var state: CourseInfoPurchaseModal.ViewControllerState
 
     private var hasLoadedData: Bool {
-        if case .result = self.state {
+        switch self.state {
+        case .loading, .error:
+            return false
+        default:
             return true
         }
-        return false
     }
 
     private var keyboardIsShowing = false
     private var keyboardHeight: CGFloat = 0
+
+    private var isPurchaseInProgress = false
+
+    private lazy var purchaseErrorContactSupportController = ContactSupportController(
+        subject: NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorContactSupportSubject", comment: ""),
+        presentationController: self
+    )
 
     var courseInfoPurchaseModalView: CourseInfoPurchaseModalView? { self.view as? CourseInfoPurchaseModalView }
 
@@ -51,6 +62,10 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
         return super.longFormHeight
     }
+
+    override var allowsDragToDismiss: Bool { !self.isPurchaseInProgress }
+
+    override var allowsTapToDismiss: Bool { !self.isPurchaseInProgress }
 
     init(
         interactor: CourseInfoPurchaseModalInteractorProtocol,
@@ -106,26 +121,71 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     // MARK: Private API
 
     private func updateState(newState: CourseInfoPurchaseModal.ViewControllerState) {
-        switch newState {
-        case .result(let viewModel):
-            self.courseInfoPurchaseModalView?.hideLoading()
-            self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
+        self.courseInfoPurchaseModalView?.hideLoading()
+        self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
 
-            self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+        self.isPurchaseInProgress = false
+        self.courseInfoPurchaseModalView?.hidePurchaseInProgress()
+
+        self.courseInfoPurchaseModalView?.hidePurchaseError()
+        self.courseInfoPurchaseModalView?.hidePurchaseSuccess()
+
+        switch newState {
         case .loading:
             self.courseInfoPurchaseModalView?.showLoading()
-            self.courseInfoPurchaseModalView?.hideErrorPlaceholder()
         case .error:
-            self.courseInfoPurchaseModalView?.hideLoading()
             self.courseInfoPurchaseModalView?.showErrorPlaceholder()
+        case .result(let viewModel):
+            self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
+
+            if self.keyboardIsShowing {
+                self.transition(to: .longForm)
+            } else {
+                self.transition(to: .shortForm)
+            }
+        case .purchaseInProgress:
+            self.isPurchaseInProgress = true
+            self.courseInfoPurchaseModalView?.showPurchaseInProgress()
+        case .purchaseErrorAppStore(let errorDescription, let modalData):
+            if let errorDescription = errorDescription {
+                SVProgressHUD.showError(withStatus: errorDescription)
+            }
+            self.updateState(newState: .result(data: modalData))
+        case .purchaseErrorStepik:
+            self.courseInfoPurchaseModalView?.showPurchaseError()
+            self.transition(to: .longForm)
+        case .purchaseSuccess:
+            self.courseInfoPurchaseModalView?.showPurchaseSuccess()
+            self.transition(to: .shortForm)
+        case .restorePurchaseInProgress:
+            SVProgressHUD.show()
+
+            self.courseInfoPurchaseModalView?.showPurchaseError()
+            self.transition(to: .longForm)
+        case .restorePurchaseError(let errorDescription):
+            SVProgressHUD.showError(withStatus: errorDescription)
+
+            self.courseInfoPurchaseModalView?.showPurchaseError()
+            self.transition(to: .longForm)
+        case .restorePurchaseSuccess:
+            SVProgressHUD.showSuccess(withStatus: nil)
+
+            self.courseInfoPurchaseModalView?.showPurchaseSuccess()
+            self.transition(to: .shortForm)
         }
 
         self.state = newState
     }
 
     private func transition(to state: PanModalPresentationController.PresentationState) {
-        self.panModalSetNeedsLayoutUpdate()
-        self.panModalTransition(to: state)
+        if state == .shortForm {
+            self.isShortFormEnabled = true
+        }
+
+        DispatchQueue.main.async {
+            self.panModalSetNeedsLayoutUpdate()
+            self.panModalTransition(to: state)
+        }
     }
 
     @objc
@@ -155,7 +215,6 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewControllerProtocol {
     func displayModal(viewModel: CourseInfoPurchaseModal.ModalLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
-        self.transition(to: .shortForm)
     }
 
     func displayCheckPromoCodeResult(viewModel: CourseInfoPurchaseModal.CheckPromoCode.ViewModel) {
@@ -178,6 +237,14 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewCont
             SVProgressHUD.showSuccess(withStatus: message)
             self.courseInfoPurchaseModalView?.configure(viewModel: viewModel)
         }
+    }
+
+    func displayPurchaseCourseResult(viewModel: CourseInfoPurchaseModal.PurchaseCourse.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
+
+    func displayRestorePurchaseResult(viewModel: CourseInfoPurchaseModal.RestorePurchase.ViewModel) {
+        self.updateState(newState: viewModel.state)
     }
 }
 
@@ -218,10 +285,22 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
     }
 
     func courseInfoPurchaseModalViewDidClickBuyButton(_ view: CourseInfoPurchaseModalView) {
-        print(#function)
+        self.interactor.doPurchaseCourse(request: .init())
     }
 
     func courseInfoPurchaseModalViewDidClickWishlistButton(_ view: CourseInfoPurchaseModalView) {
         self.interactor.doWishlistMainAction(request: .init())
+    }
+
+    func courseInfoPurchaseModalViewDidClickRestorePurchaseButton(_ view: CourseInfoPurchaseModalView) {
+        self.interactor.doRestorePurchase(request: .init())
+    }
+
+    func courseInfoPurchaseModalViewDidRequestContactSupportOnPurchaseError(_ view: CourseInfoPurchaseModalView) {
+        self.purchaseErrorContactSupportController.contactSupport()
+    }
+
+    func courseInfoPurchaseModalViewDidClickStartLearningButton(_ view: CourseInfoPurchaseModalView) {
+        self.interactor.doStartLearningPresentation(request: .init())
     }
 }

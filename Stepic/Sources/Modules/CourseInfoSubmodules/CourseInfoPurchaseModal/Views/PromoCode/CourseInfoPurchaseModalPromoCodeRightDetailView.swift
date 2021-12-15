@@ -18,6 +18,13 @@ final class CourseInfoPurchaseModalPromoCodeRightDetailView: UIControl {
         return imageView
     }()
 
+    private lazy var loadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(style: .stepikGray)
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.stopAnimating()
+        return activityIndicatorView
+    }()
+
     var viewState = ViewState.idle {
         didSet {
             self.updateViewState()
@@ -61,8 +68,19 @@ final class CourseInfoPurchaseModalPromoCodeRightDetailView: UIControl {
         self.backgroundColor = self.viewState.backgroundColor
         self.updateBorder()
 
+        let isLoadingActivityIndicatorVisible = self.viewState == .loading
+
         self.iconImageView.image = self.viewState.iconImage
-        self.iconImageView.tintColor = self.viewState.iconTintColor
+        self.iconImageView.tintColor = self.viewState.tintColor
+        self.iconImageView.isHidden = isLoadingActivityIndicatorVisible
+
+        if isLoadingActivityIndicatorVisible {
+            self.loadingActivityIndicator.startAnimating()
+        } else {
+            self.loadingActivityIndicator.stopAnimating()
+        }
+        self.loadingActivityIndicator.isHidden = !isLoadingActivityIndicatorVisible
+        self.loadingActivityIndicator.color = self.viewState.tintColor
     }
 
     private func updateBorder() {
@@ -79,7 +97,7 @@ final class CourseInfoPurchaseModalPromoCodeRightDetailView: UIControl {
         fileprivate var backgroundColor: UIColor {
             switch self {
             case .idle:
-                return .stepikVioletFixed
+                return .stepikGreenFixed
             case .loading:
                 return .clear
             case .error:
@@ -114,7 +132,7 @@ final class CourseInfoPurchaseModalPromoCodeRightDetailView: UIControl {
             case .idle:
                 imageName = "arrow.right"
             case .loading:
-                imageName = "course-info-syllabus-in-progress"
+                return nil
             case .error:
                 imageName = "quiz-mark-wrong"
             case .success:
@@ -124,7 +142,7 @@ final class CourseInfoPurchaseModalPromoCodeRightDetailView: UIControl {
             return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
         }
 
-        fileprivate var iconTintColor: UIColor {
+        fileprivate var tintColor: UIColor {
             switch self {
             case .idle:
                 return .white
@@ -148,6 +166,7 @@ extension CourseInfoPurchaseModalPromoCodeRightDetailView: ProgrammaticallyIniti
 
     func addSubviews() {
         self.addSubview(self.iconImageView)
+        self.addSubview(self.loadingActivityIndicator)
     }
 
     func makeConstraints() {
@@ -155,6 +174,11 @@ extension CourseInfoPurchaseModalPromoCodeRightDetailView: ProgrammaticallyIniti
         self.iconImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(self.appearance.iconImageViewSize)
+        }
+
+        self.loadingActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingActivityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }

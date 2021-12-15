@@ -141,6 +141,23 @@ enum CourseInfo {
         }
     }
 
+    /// Dismiss CourseInfoPurchaseModal module and present last step in course
+    enum PurchaseModalStartLearningPresentation {
+        struct Response {
+            let course: Course
+            let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
+        }
+
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
+        }
+    }
+
     /// Handle submodule controller appearance
     enum SubmoduleAppearanceUpdate {
         struct Request {

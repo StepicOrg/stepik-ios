@@ -31,7 +31,7 @@ final class ContinueCourseProvider: ContinueCourseProviderProtocol {
                 return self.coursesAPI.retrieve(ids: coursesIDs)
             }.then { courses -> Promise<(Course?, Progress?)> in
                 if let course = courses.first,
-                   let progressID = course.progressId {
+                   let progressID = course.progressID {
                     return self.progressesNetworkService
                         .fetch(id: progressID)
                         .map { (course, $0) }
