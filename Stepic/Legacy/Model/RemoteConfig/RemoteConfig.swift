@@ -17,7 +17,7 @@ final class RemoteConfig {
 <a href=\"https://welcome.stepik.org/ru/payment-terms\">пользовательского соглашения</a>.
 """
     private static let defaultPurchaseFlowDisclaimerEnglish = """
-The price includes commission from App Store and VAT. By paying for access to this course, you agree to the \
+The price includes commission from App Store and VAT. By paying for access to this course you agree to the \
 <a href=\"https://welcome.stepik.org/en/payment-terms\">user agreement</a>.
 """
 
