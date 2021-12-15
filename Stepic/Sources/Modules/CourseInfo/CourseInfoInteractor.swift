@@ -60,6 +60,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private var currentMobileTier: MobileTierPlainObject?
 
+    private var shouldCheckIAPPurchaseSupport: Bool {
+        (self.currentCourse?.isPaid ?? false) && self.remoteConfig.coursePurchaseFlow == .iap
+    }
+    private var isSupportedIAPPurchase: Bool {
+        self.shouldCheckIAPPurchaseSupport && self.currentMobileTier?.priceTier != nil
+    }
+
     private var courseWebURL: URL? {
         guard let course = self.currentCourse else {
             return nil
@@ -310,8 +317,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
-            // Paid course -> buy course
+            // Paid course -> buy course or wishlist main action
             if course.isPaid && !course.isPurchased {
+                if self.shouldCheckIAPPurchaseSupport && !self.isSupportedIAPPurchase {
+                    return self.doWishlistMainAction(request: .init())
+                }
+
                 self.analytics.send(
                     .buyCoursePressed(id: course.id),
                     .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: course.isInWishlist)
@@ -411,7 +422,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             isCourseRevenueAvailable: self.remoteConfig.isCourseRevenueAvailable,
             coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
             promoCode: self.currentPromoCode,
-            mobileTier: self.currentMobileTier
+            mobileTier: self.currentMobileTier,
+            shouldCheckIAPPurchaseSupport: self.shouldCheckIAPPurchaseSupport,
+            isSupportedIAPPurchase: self.isSupportedIAPPurchase
         )
     }
 

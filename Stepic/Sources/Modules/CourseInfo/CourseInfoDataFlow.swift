@@ -47,6 +47,8 @@ enum CourseInfo {
                 let coursePurchaseFlow: CoursePurchaseFlowType
                 let promoCode: PromoCode?
                 let mobileTier: MobileTierPlainObject?
+                let shouldCheckIAPPurchaseSupport: Bool
+                let isSupportedIAPPurchase: Bool
             }
 
             var result: StepikResult<Data>
