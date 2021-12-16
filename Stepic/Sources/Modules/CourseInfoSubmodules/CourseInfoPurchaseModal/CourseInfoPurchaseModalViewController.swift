@@ -264,6 +264,7 @@ extension CourseInfoPurchaseModalViewController: CourseInfoPurchaseModalViewDele
         if let currentPresentationState = self.currentPresentationState {
             self.transition(to: currentPresentationState)
         }
+        self.interactor.doRevealPromoCodeInput(request: .init())
     }
 
     func courseInfoPurchaseModalView(_ view: CourseInfoPurchaseModalView, didChangePromoCode promoCode: String) {

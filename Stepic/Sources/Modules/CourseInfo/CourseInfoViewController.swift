@@ -628,7 +628,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel) {
         if self.popLessonViewController() != nil {
             DispatchQueue.main.async {
-                self.interactor.doMainCourseAction(request: .init())
+                self.interactor.doMainCourseAction(request: .init(courseBuySource: .demoLessonDialog))
             }
         }
     }
@@ -703,6 +703,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             courseID: viewModel.courseID,
             promoCodeName: viewModel.promoCodeName,
             mobileTierID: viewModel.mobileTierID,
+            courseBuySource: viewModel.courseBuySource,
             output: self.interactor as? CourseInfoPurchaseModalOutputProtocol
         )
         self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())

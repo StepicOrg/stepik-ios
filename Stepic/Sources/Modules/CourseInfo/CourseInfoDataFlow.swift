@@ -236,7 +236,9 @@ enum CourseInfo {
 
     /// Do main action (continue, enroll, etc)
     enum MainCourseAction {
-        struct Request {}
+        struct Request {
+            var courseBuySource = AnalyticsEvent.CourseBuySource.courseScreen
+        }
     }
 
     /// Pop lesson module and do main course action
@@ -323,12 +325,14 @@ enum CourseInfo {
             let courseID: Course.IdType
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
 
         struct ViewModel {
             let courseID: Course.IdType
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
     }
 

@@ -325,7 +325,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
                 self.analytics.send(
                     .buyCoursePressed(id: course.id),
-                    .courseBuyPressed(source: .courseScreen, id: course.id, isWishlisted: course.isInWishlist)
+                    .courseBuyPressed(
+                        id: course.id,
+                        source: request.courseBuySource,
+                        isWishlisted: course.isInWishlist,
+                        promoCode: self.promoCodeName
+                    )
                 )
 
                 switch self.remoteConfig.coursePurchaseFlow {
@@ -344,7 +349,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                         response: .init(
                             courseID: self.courseID,
                             promoCodeName: self.promoCodeName,
-                            mobileTierID: self.currentMobileTier?.id
+                            mobileTierID: self.currentMobileTier?.id,
+                            courseBuySource: request.courseBuySource
                         )
                     )
                 }

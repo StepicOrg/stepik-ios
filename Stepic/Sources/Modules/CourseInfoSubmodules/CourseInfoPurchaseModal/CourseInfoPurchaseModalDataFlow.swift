@@ -112,6 +112,11 @@ enum CourseInfoPurchaseModal {
         }
     }
 
+    /// Send analytics event
+    enum RevealPromoCodeInput {
+        struct Request {}
+    }
+
     // MARK: States
 
     enum ViewControllerState {

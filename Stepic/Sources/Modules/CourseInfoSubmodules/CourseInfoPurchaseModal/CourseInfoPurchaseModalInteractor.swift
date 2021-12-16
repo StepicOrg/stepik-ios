@@ -9,6 +9,7 @@ protocol CourseInfoPurchaseModalInteractorProtocol {
     func doStartLearningPresentation(request: CourseInfoPurchaseModal.StartLearningPresentation.Request)
     func doPurchaseCourse(request: CourseInfoPurchaseModal.PurchaseCourse.Request)
     func doRestorePurchase(request: CourseInfoPurchaseModal.RestorePurchase.Request)
+    func doRevealPromoCodeInput(request: CourseInfoPurchaseModal.RevealPromoCodeInput.Request)
 }
 
 final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractorProtocol {
@@ -18,11 +19,13 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
     private let provider: CourseInfoPurchaseModalProviderProtocol
 
     private let iapService: IAPServiceProtocol
+    private let analytics: Analytics
 
     private let courseID: Course.IdType
     private let initialPromoCodeName: String?
     private let initialMobileTierID: MobileTier.IdType?
     private var initialMobileTier: MobileTierPlainObject?
+    private let courseBuySource: AnalyticsEvent.CourseBuySource
 
     private var currentCourse: Course?
     private var currentPromoCodeName: String?
@@ -34,16 +37,20 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         courseID: Course.IdType,
         initialPromoCodeName: String?,
         initialMobileTierID: MobileTier.IdType?,
+        courseBuySource: AnalyticsEvent.CourseBuySource,
         presenter: CourseInfoPurchaseModalPresenterProtocol,
         provider: CourseInfoPurchaseModalProviderProtocol,
-        iapService: IAPServiceProtocol
+        iapService: IAPServiceProtocol,
+        analytics: Analytics
     ) {
         self.courseID = courseID
         self.initialPromoCodeName = initialPromoCodeName
         self.initialMobileTierID = initialMobileTierID
+        self.courseBuySource = courseBuySource
         self.presenter = presenter
         self.provider = provider
         self.iapService = iapService
+        self.analytics = analytics
 
         self.currentPromoCodeName = initialPromoCodeName
     }
@@ -79,6 +86,12 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         self.fetchMobileTier(promoCodeName: request.promoCode).done { mobileTier in
             self.currentMobileTier = mobileTier
             self.currentPromoCodeName = request.promoCode
+
+            if mobileTier.promoTier != nil {
+                self.analytics.send(.courseBuyCoursePromoSuccess(id: self.courseID, promoCode: request.promoCode))
+            } else {
+                self.analytics.send(.courseBuyCoursePromoFailure(id: self.courseID, promoCode: request.promoCode))
+            }
 
             let data = CourseInfoPurchaseModal.ModalData(
                 course: self.currentCourse.require(),
@@ -182,6 +195,15 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
             """
         )
 
+        self.analytics.send(
+            .courseBuyCourseIAPFlowStart(
+                id: self.courseID,
+                source: self.courseBuySource,
+                isWishlisted: currentCourse.isInWishlist,
+                promoCode: promoCode
+            )
+        )
+
         self.presenter.presentPurchaseCourseResult(response: .init(state: .inProgress))
 
         self.iapService
@@ -212,10 +234,16 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
             """
         )
 
+        self.analytics.send(.courseRestoreCoursePurchasePressed(id: self.courseID, source: .buyCourseDialog))
+
         self.isRestorePurchaseInProgress = true
         self.presenter.presentRestorePurchaseResult(response: .init(state: .inProgress))
 
         self.iapService.retryValidateReceipt(courseID: self.courseID, mobileTier: purchaseMobileTier, delegate: self)
+    }
+
+    func doRevealPromoCodeInput(request: CourseInfoPurchaseModal.RevealPromoCodeInput.Request) {
+        self.analytics.send(.courseBuyCoursePromoStartPressed(id: self.courseID))
     }
 
     // MARK: Private API
@@ -262,8 +290,41 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
 // MARK: - CourseInfoPurchaseModalInteractor: IAPServiceDelegate -
 
 extension CourseInfoPurchaseModalInteractor: IAPServiceDelegate {
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didReceiveTransactionState transactionState: IAPPaymentTransactionState,
+        forCourse courseID: Course.IdType
+    ) {
+        guard transactionState == .purchased,
+              let currentCourse = self.currentCourse,
+              let currentMobileTier = self.currentMobileTier else {
+            return
+        }
+
+        self.analytics.send(
+            .courseBuyCourseIAPFlowSuccess(
+                id: self.courseID,
+                source: self.courseBuySource,
+                isWishlisted: currentCourse.isInWishlist,
+                promoCode: currentMobileTier.promoTier != nil ? currentMobileTier.promoCodeName : nil
+            )
+        )
+    }
+
     func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
         print("CourseInfoPurchaseModalInteractor :: \(#function), courseID = \(courseID)")
+
+        if let currentCourse = self.currentCourse,
+           let currentMobileTier = self.currentMobileTier {
+            self.analytics.send(
+                .courseBuyCourseVerificationSuccess(
+                    id: self.courseID,
+                    source: self.courseBuySource,
+                    isWishlisted: currentCourse.isInWishlist,
+                    promoCode: currentMobileTier.promoTier != nil ? currentMobileTier.promoCodeName : nil
+                )
+            )
+        }
 
         if self.isRestorePurchaseInProgress {
             self.isRestorePurchaseInProgress = false
@@ -281,6 +342,34 @@ extension CourseInfoPurchaseModalInteractor: IAPServiceDelegate {
         withError error: Swift.Error
     ) {
         print("CourseInfoPurchaseModalInteractor :: \(#function), courseID = \(courseID), error = \(error)")
+
+        if let iapServiceError = error as? IAPService.Error {
+            if iapServiceError == .paymentReceiptValidationFailed {
+                self.analytics.send(
+                    .courseBuyCourseVerificationFailure(
+                        id: self.courseID,
+                        errorType: String(describing: iapServiceError),
+                        errorDescription: iapServiceError.errorDescription
+                    )
+                )
+            } else {
+                self.analytics.send(
+                    .courseBuyCourseIAPFlowFailure(
+                        id: self.courseID,
+                        errorType: String(describing: iapServiceError),
+                        errorDescription: iapServiceError.errorDescription
+                    )
+                )
+            }
+        } else {
+            self.analytics.send(
+                .courseBuyCourseIAPFlowFailure(
+                    id: self.courseID,
+                    errorType: String(describing: error),
+                    errorDescription: error.localizedDescription
+                )
+            )
+        }
 
         if self.isRestorePurchaseInProgress {
             self.isRestorePurchaseInProgress = false

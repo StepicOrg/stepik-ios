@@ -401,6 +401,18 @@ final class IAPService: IAPServiceProtocol {
 // MARK: - IAPService: IAPPaymentsServiceDelegate -
 
 extension IAPService: IAPPaymentsServiceDelegate {
+    func iapPaymentsService(
+        _ service: IAPPaymentsServiceProtocol,
+        didReceiveTransactionState transactionState: IAPPaymentTransactionState,
+        forCourse courseID: Course.IdType
+    ) {
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
+
+        let requestDelegate = self.getCoursePaymentRequestDelegate(courseID: courseID)
+        requestDelegate.iapService(self, didReceiveTransactionState: transactionState, forCourse: courseID)
+    }
+
     func iapPaymentsService(_ service: IAPPaymentsServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
         self.handleCoursePaymentSucceed(courseID: courseID)
     }

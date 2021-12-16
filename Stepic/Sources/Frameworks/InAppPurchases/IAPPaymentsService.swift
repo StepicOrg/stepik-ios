@@ -3,7 +3,15 @@ import PromiseKit
 import StoreKit
 
 protocol IAPPaymentsServiceDelegate: AnyObject {
-    func iapPaymentsService(_ service: IAPPaymentsServiceProtocol, didPurchaseCourse courseID: Course.IdType)
+    func iapPaymentsService(
+        _ service: IAPPaymentsServiceProtocol,
+        didReceiveTransactionState transactionState: IAPPaymentTransactionState,
+        forCourse courseID: Course.IdType
+    )
+    func iapPaymentsService(
+        _ service: IAPPaymentsServiceProtocol,
+        didPurchaseCourse courseID: Course.IdType
+    )
     func iapPaymentsService(
         _ service: IAPPaymentsServiceProtocol,
         didFailPurchaseCourse courseID: Course.IdType,
@@ -161,6 +169,14 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
             return print("IAPPaymentsService :: payment failed missing payload data")
         }
 
+        if let wrappedTransactionState = IAPPaymentTransactionState(transactionState: transaction.transactionState) {
+            self.delegate?.iapPaymentsService(
+                self,
+                didReceiveTransactionState: wrappedTransactionState,
+                forCourse: payload.courseID
+            )
+        }
+
         switch transaction.transactionState {
         case .purchased:
             guard let currentUserID = self.userAccountService.currentUser?.id,
@@ -267,6 +283,35 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
                     withError: Error.paymentReceiptValidationFailed
                 )
             }
+        }
+    }
+}
+
+// MARK: - IAPPaymentTransactionState -
+
+enum IAPPaymentTransactionState {
+    case purchasing
+    case purchased
+    case failed
+    case restored
+    case deferred
+}
+
+extension IAPPaymentTransactionState {
+    init?(transactionState: SKPaymentTransactionState) {
+        switch transactionState {
+        case .purchasing:
+            self = .purchasing
+        case .purchased:
+            self = .purchased
+        case .failed:
+            self = .failed
+        case .restored:
+            self = .restored
+        case .deferred:
+            self = .restored
+        @unknown default:
+            return nil
         }
     }
 }

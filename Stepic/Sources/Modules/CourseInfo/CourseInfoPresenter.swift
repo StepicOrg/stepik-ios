@@ -147,7 +147,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             viewModel: .init(
                 courseID: response.courseID,
                 promoCodeName: response.promoCodeName,
-                mobileTierID: response.mobileTierID
+                mobileTierID: response.mobileTierID,
+                courseBuySource: response.courseBuySource
             )
         )
     }
