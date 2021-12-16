@@ -10,7 +10,7 @@ final class RemoteConfig {
 
     private static let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
 
-    private static let defaultCoursePurchaseFlowType = CoursePurchaseFlowType.web
+    private static let defaultCoursePurchaseFlowType = CoursePurchaseFlowType.iap
 
     private static let defaultPurchaseFlowDisclaimerRussian = """
 В цену включена комиссия App Store и НДС. Оплачивая доступ к этому курсу, вы соглашаетесь с условиями \
@@ -37,7 +37,7 @@ The price includes commission from App Store and VAT. By paying for access to th
         Key.supportedInAdaptiveModeCourses.rawValue: NSArray(array: StepikApplicationsInfo.adaptiveSupportedCourses),
         Key.arQuickLookAvailable.rawValue: NSNumber(value: false),
         Key.searchResultsQueryParams.rawValue: NSDictionary(dictionary: ["is_popular": "true", "is_public": "true"]),
-        Key.isCoursePricesEnabled.rawValue: NSNumber(value: false),
+        Key.isCoursePricesEnabled.rawValue: NSNumber(value: true),
         Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false),
         Key.purchaseFlow.rawValue: NSString(string: Self.defaultCoursePurchaseFlowType.rawValue),
         Key.purchaseFlowDisclaimerRussian.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerRussian),
