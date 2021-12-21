@@ -303,7 +303,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         )
 
         let progressLabelText: String? = {
-            guard let progress = section.progress else {
+            guard section.isReachable,
+                  let progress = section.progress else {
                 return nil
             }
 
