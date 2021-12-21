@@ -5,8 +5,10 @@ import SwiftyJSON
 final class Section: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
-    var isReachable: Bool {
-        (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
+    func isReachable(course: Course? = nil) -> Bool {
+        let isEnrolled = (course ?? self.course)?.enrolled ?? false
+        return (self.isActive && self.isRequirementSatisfied || self.testSectionAction != nil)
+            && (isEnrolled || self.isExam)
     }
 
     var isCached: Bool {
@@ -67,7 +69,7 @@ final class Section: NSManagedObject, ManagedObject, IDFetchable {
             return false
         }
 
-        if !self.isReachable {
+        if !self.isReachable() {
             return false
         }
 

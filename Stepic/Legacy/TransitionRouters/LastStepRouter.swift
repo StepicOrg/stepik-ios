@@ -177,9 +177,9 @@ final class LastStepRouter {
                         CoreDataHelper.shared.save()
 
                         // Check whether unit is in exam section
-                        if section.isExam && section.isReachable {
+                        if section.isExam && section.isReachable(course: course) {
                             self.presentExamAlert(presentationController: navigationController, course: course)
-                        } else if section.isReachable {
+                        } else if section.isReachable(course: course) {
                             navigateToStep(in: unit)
                         } else {
                             openSyllabus()
@@ -199,9 +199,9 @@ final class LastStepRouter {
 
                     print("last step router: using cached section")
                     // Check whether unit is in exam section
-                    if section.isExam && section.isReachable {
+                    if section.isExam && section.isReachable(course: course) {
                         self.presentExamAlert(presentationController: navigationController, course: course)
-                    } else if section.isReachable {
+                    } else if section.isReachable(course: course) {
                         navigateToStep(in: unit)
                     } else {
                         openSyllabus()
