@@ -659,11 +659,19 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel) {
+        let initialContext: LessonDataFlow.Context = {
+            if let previewUnitID = viewModel.previewUnitID {
+                return .unit(id: previewUnitID)
+            }
+            return .lesson(id: viewModel.previewLessonID)
+        }()
+
         let assembly = LessonAssembly(
-            initialContext: .lesson(id: viewModel.previewLessonID),
+            initialContext: initialContext,
             promoCodeName: viewModel.promoCodeName,
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
+
         self.push(module: assembly.makeModule())
     }
 
