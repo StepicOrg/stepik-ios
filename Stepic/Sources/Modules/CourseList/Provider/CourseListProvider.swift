@@ -82,8 +82,8 @@ final class CourseListProvider: CourseListProviderProtocol {
                 page: page,
                 filterQuery: filterQuery
             ).then { (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
-                let progressesIDs = courses.compactMap { $0.progressId }
-                let summariesIDs = courses.compactMap { $0.reviewSummaryId }
+                let progressesIDs = courses.compactMap { $0.progressID }
+                let summariesIDs = courses.compactMap { $0.reviewSummaryID }
 
                 return when(
                     fulfilled: self.progressesNetworkService.fetch(ids: progressesIDs, page: 1),
@@ -124,7 +124,11 @@ final class CourseListProvider: CourseListProviderProtocol {
     // MARK: - Private API
 
     private func fetchIAPLocalizedPrices(for courses: [Course]) -> Guarantee<Void> {
-        firstly { () -> Guarantee<[MobileTierPlainObject]?> in
+        if courses.isEmpty {
+            return .value(())
+        }
+
+        return firstly { () -> Guarantee<[MobileTierPlainObject]?> in
             switch self.remoteConfig.coursePurchaseFlow {
             case .web:
                 return .value(nil)
@@ -160,7 +164,7 @@ final class CourseListProvider: CourseListProviderProtocol {
         case .web:
             return Guarantee { seal in
                 if self.iapService.canBuyCourse(course) {
-                    self.iapService.getLocalizedPrice(for: course).done { price in
+                    self.iapService.fetchLocalizedPrice(for: course).done { price in
                         course.displayPriceIAP = price
                         seal(())
                     }
@@ -173,12 +177,12 @@ final class CourseListProvider: CourseListProviderProtocol {
             return Guarantee { seal in
                 if let mobileTierPlainObject = mobileTiersMap[course.id],
                    let mobileTierEntity = course.mobileTiers.first(where: { $0.id == mobileTierPlainObject.id }) {
-                    self.iapService.getLocalizedPrices(mobileTier: mobileTierEntity).done { result in
-                        mobileTierEntity.priceTierDisplayPrice = result.price
-                        mobileTierEntity.promoTierDisplayPrice = result.promo
+                    self.iapService.fetchLocalizedPrices(mobileTier: mobileTierEntity).done { result in
+                        mobileTierEntity.priceTierDisplayPrice = result.priceTierLocalizedPrice
+                        mobileTierEntity.promoTierDisplayPrice = result.promoTierLocalizedPrice
 
-                        course.displayPriceTierPrice = result.price
-                        course.displayPriceTierPromo = result.promo
+                        course.displayPriceTierPrice = result.priceTierLocalizedPrice
+                        course.displayPriceTierPromo = result.promoTierLocalizedPrice
 
                         seal(())
                     }
@@ -204,10 +208,10 @@ final class CourseListProvider: CourseListProviderProtocol {
                 .reduce(into: [:]) { $0[$1.id] = $1 }
 
             for i in 0..<courses.count {
-                if let progressID = courses[i].progressId {
+                if let progressID = courses[i].progressID {
                     courses[i].progress = progressesMap[progressID]
                 }
-                if let reviewSummaryID = courses[i].reviewSummaryId {
+                if let reviewSummaryID = courses[i].reviewSummaryID {
                     courses[i].reviewSummary = reviewSummariesMap[reviewSummaryID]
                 }
             }

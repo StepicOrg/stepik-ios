@@ -8,8 +8,11 @@ extension ContinueActionButton {
         let defaultBackgroundColor = UIColor.white
         var defaultTitleColor = UIColor.black.withAlphaComponent(0.87)
 
-        let callToActionBackgroundColor = UIColor.stepikGreenFixed
-        let callToActionTitleColor = UIColor.white
+        let callToActionGreenBackgroundColor = UIColor.stepikGreenFixed
+        let callToActionGreenTitleColor = UIColor.white
+
+        let callToActionVioletBackgroundColor = UIColor.stepikVioletFixed
+        let callToActionVioletTitleColor = UIColor.white
     }
 }
 
@@ -63,9 +66,12 @@ final class ContinueActionButton: BounceButton {
         case .default:
             self.backgroundColor = self.appearance.defaultBackgroundColor
             self.setTitleColor(self.appearance.defaultTitleColor, for: .normal)
-        case .callToAction:
-            self.backgroundColor = self.appearance.callToActionBackgroundColor
-            self.setTitleColor(self.appearance.callToActionTitleColor, for: .normal)
+        case .callToActionGreen:
+            self.backgroundColor = self.appearance.callToActionGreenBackgroundColor
+            self.setTitleColor(self.appearance.callToActionGreenTitleColor, for: .normal)
+        case .callToActionViolet:
+            self.backgroundColor = self.appearance.callToActionVioletBackgroundColor
+            self.setTitleColor(self.appearance.callToActionVioletTitleColor, for: .normal)
         }
     }
 
@@ -73,6 +79,8 @@ final class ContinueActionButton: BounceButton {
         /// Classic white button
         case `default`
         /// Green button
-        case callToAction
+        case callToActionGreen
+        /// Violet button
+        case callToActionViolet
     }
 }

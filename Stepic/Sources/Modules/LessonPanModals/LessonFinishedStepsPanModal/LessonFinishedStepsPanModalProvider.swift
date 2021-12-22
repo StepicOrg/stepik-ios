@@ -145,7 +145,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
     ) -> Promise<Course?> {
         Promise { seal in
             courseFetchMethod(self.courseID).then { courseOrNil -> Promise<(Course?, Progress?)> in
-                if let progressID = courseOrNil?.progressId {
+                if let progressID = courseOrNil?.progressID {
                     return progressFetchMethod(progressID).map { (courseOrNil, $0) }
                 }
                 return .value((courseOrNil, nil))

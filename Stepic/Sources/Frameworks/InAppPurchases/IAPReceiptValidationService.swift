@@ -7,6 +7,7 @@ protocol IAPReceiptValidationServiceProtocol: AnyObject {
         courseID: Course.IdType,
         price: Double,
         currencyCode: String?,
+        promoCode: String?,
         forceRefreshReceipt: Bool
     ) -> Promise<CoursePayment>
 }
@@ -15,12 +16,14 @@ extension IAPReceiptValidationServiceProtocol {
     func validateCoursePayment(
         courseID: Course.IdType,
         price: Double,
-        currencyCode: String?
+        currencyCode: String?,
+        promoCode: String?
     ) -> Promise<CoursePayment> {
         self.validateCoursePayment(
             courseID: courseID,
             price: price,
             currencyCode: currencyCode,
+            promoCode: promoCode,
             forceRefreshReceipt: false
         )
     }
@@ -39,6 +42,7 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
         courseID: Course.IdType,
         price: Double,
         currencyCode: String?,
+        promoCode: String?,
         forceRefreshReceipt: Bool
     ) -> Promise<CoursePayment> {
         Promise { seal in
@@ -60,7 +64,7 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
                     amount: price,
                     currency: currencyCode
                 )
-                let payment = CoursePayment(courseID: courseID, data: paymentData)
+                let payment = CoursePayment(courseID: courseID, data: paymentData, promoCode: promoCode)
 
                 return .value(payment)
             }.then { payment in

@@ -14,6 +14,7 @@ final class CoursePayment: JSONSerializable {
     var isPaid = false
     var data: Data?
     var paymentProviderStringValue: String = PaymentProvider.apple.rawValue
+    var promoCode: String?
 
     var status: Status? {
         Status(rawValue: self.statusStringValue)
@@ -35,13 +36,23 @@ final class CoursePayment: JSONSerializable {
             dict[JSONKey.data.rawValue] = JSON(data)
         }
 
+        if let promoCode = self.promoCode {
+            dict[JSONKey.promoCode.rawValue] = JSON(promoCode)
+        }
+
         return dict
     }
 
-    init(courseID: Course.IdType, data: Data, paymentProvider: PaymentProvider = .apple) {
+    init(
+        courseID: Course.IdType,
+        data: Data,
+        paymentProvider: PaymentProvider = .apple,
+        promoCode: String?
+    ) {
         self.courseID = courseID
         self.data = data
         self.paymentProviderStringValue = paymentProvider.rawValue
+        self.promoCode = promoCode
     }
 
     init(json: JSON) {
@@ -58,6 +69,7 @@ final class CoursePayment: JSONSerializable {
         self.isPaid = json[JSONKey.isPaid.rawValue].boolValue
         self.data = json[JSONKey.data.rawValue].dictionaryObject
         self.paymentProviderStringValue = json[JSONKey.paymentProvider.rawValue].stringValue
+        self.promoCode = json[JSONKey.promoCode.rawValue].string
     }
 
     enum Status: String {
@@ -99,6 +111,7 @@ final class CoursePayment: JSONSerializable {
         case isPaid = "is_paid"
         case data = "data"
         case paymentProvider = "payment_provider"
+        case promoCode = "promo_code"
     }
 }
 
@@ -113,7 +126,8 @@ extension CoursePayment: CustomStringConvertible {
         statusStringValue: \(self.statusStringValue), \
         isPaid: \(self.isPaid), \
         data: \(String(describing: self.data)), \
-        paymentProviderStringValue: \(self.paymentProviderStringValue))
+        paymentProviderStringValue: \(self.paymentProviderStringValue), \
+        promoCode: \(String(describing: self.promoCode)))
         """
     }
 }

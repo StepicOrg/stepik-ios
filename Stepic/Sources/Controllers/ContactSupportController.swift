@@ -3,13 +3,17 @@ import SVProgressHUD
 import UIKit
 
 final class ContactSupportController: NSObject {
+    private let subject: String
+
     private weak var presentationController: UIViewController?
     private let userAccountService: UserAccountServiceProtocol
 
     init(
+        subject: String = NSLocalizedString("ContactSupportSubject", comment: ""),
         presentationController: UIViewController,
-        userAccountService: UserAccountServiceProtocol
+        userAccountService: UserAccountServiceProtocol = UserAccountService()
     ) {
+        self.subject = subject
         self.presentationController = presentationController
         self.userAccountService = userAccountService
     }
@@ -23,7 +27,7 @@ final class ContactSupportController: NSObject {
         mailComposeViewController.mailComposeDelegate = self
 
         mailComposeViewController.setToRecipients(["support@stepik.org"])
-        mailComposeViewController.setSubject(NSLocalizedString("ContactSupportSubject", comment: ""))
+        mailComposeViewController.setSubject(self.subject)
         mailComposeViewController.setMessageBody(self.makeMessageBody(), isHTML: false)
 
         self.presentationController?.present(mailComposeViewController, animated: true)

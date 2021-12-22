@@ -1,11 +1,10 @@
 import UIKit
 
 final class CourseInfoPurchaseModalAssembly: Assembly {
-    var moduleInput: CourseInfoPurchaseModalInputProtocol?
-
     private let courseID: Course.IdType
     private let promoCodeName: String?
     private let mobileTierID: MobileTier.IdType?
+    private let courseBuySource: AnalyticsEvent.CourseBuySource
 
     private weak var moduleOutput: CourseInfoPurchaseModalOutputProtocol?
 
@@ -13,11 +12,13 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
         courseID: Course.IdType,
         promoCodeName: String?,
         mobileTierID: MobileTier.IdType?,
+        courseBuySource: AnalyticsEvent.CourseBuySource,
         output: CourseInfoPurchaseModalOutputProtocol? = nil
     ) {
         self.courseID = courseID
         self.promoCodeName = promoCodeName
         self.mobileTierID = mobileTierID
+        self.courseBuySource = courseBuySource
         self.moduleOutput = output
     }
 
@@ -29,19 +30,20 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
             mobileTiersPersistenceService: MobileTiersPersistenceService(),
             wishlistRepository: WishlistRepository.default
         )
-        let presenter = CourseInfoPurchaseModalPresenter()
+        let presenter = CourseInfoPurchaseModalPresenter(remoteConfig: .shared)
         let interactor = CourseInfoPurchaseModalInteractor(
             courseID: self.courseID,
             initialPromoCodeName: self.promoCodeName,
             initialMobileTierID: self.mobileTierID,
+            courseBuySource: self.courseBuySource,
             presenter: presenter,
             provider: provider,
-            iapService: IAPService.shared
+            iapService: IAPService.shared,
+            analytics: StepikAnalytics.shared
         )
         let viewController = CourseInfoPurchaseModalViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

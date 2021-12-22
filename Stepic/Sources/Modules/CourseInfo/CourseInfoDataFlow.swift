@@ -47,6 +47,8 @@ enum CourseInfo {
                 let coursePurchaseFlow: CoursePurchaseFlowType
                 let promoCode: PromoCode?
                 let mobileTier: MobileTierPlainObject?
+                let shouldCheckIAPPurchaseSupport: Bool
+                let isSupportedIAPPurchase: Bool
             }
 
             var result: StepikResult<Data>
@@ -141,6 +143,23 @@ enum CourseInfo {
         }
     }
 
+    /// Dismiss CourseInfoPurchaseModal module and present last step in course
+    enum PurchaseModalStartLearningPresentation {
+        struct Response {
+            let course: Course
+            let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
+        }
+
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
+        }
+    }
+
     /// Handle submodule controller appearance
     enum SubmoduleAppearanceUpdate {
         struct Request {
@@ -217,7 +236,9 @@ enum CourseInfo {
 
     /// Do main action (continue, enroll, etc)
     enum MainCourseAction {
-        struct Request {}
+        struct Request {
+            var courseBuySource = AnalyticsEvent.CourseBuySource.courseScreen
+        }
     }
 
     /// Pop lesson module and do main course action
@@ -304,12 +325,14 @@ enum CourseInfo {
             let courseID: Course.IdType
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
 
         struct ViewModel {
             let courseID: Course.IdType
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
     }
 

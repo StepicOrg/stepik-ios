@@ -31,7 +31,8 @@ final class LessonFinishedDemoPanModalAssembly: Assembly {
             sectionID: self.sectionID,
             promoCodeName: self.promoCodeName,
             iapService: IAPService.shared,
-            remoteConfig: RemoteConfig.shared
+            remoteConfig: RemoteConfig.shared,
+            analytics: StepikAnalytics.shared
         )
         let viewController = LessonFinishedDemoPanModalViewController(interactor: interactor)
 

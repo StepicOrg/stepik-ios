@@ -136,7 +136,8 @@ final class CourseInfoView: UIView {
 
         // Update header height
         self.calculatedHeaderHeight = self.headerView.calculateHeight(
-            hasVerifiedMark: viewModel.isVerified
+            hasVerifiedMark: viewModel.isVerified,
+            hasUnsupportedIAPPurchaseText: viewModel.unsupportedIAPPurchaseText != nil
         )
 
         self.delegate?.courseInfoView(
