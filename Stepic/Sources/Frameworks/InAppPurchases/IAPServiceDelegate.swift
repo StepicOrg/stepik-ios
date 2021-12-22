@@ -2,12 +2,28 @@ import PromiseKit
 import UIKit
 
 protocol IAPServiceDelegate: AnyObject {
-    func iapService(_ service: IAPServiceProtocol, didPurchaseCourse courseID: Course.IdType)
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didReceiveTransactionState transactionState: IAPPaymentTransactionState,
+        forCourse courseID: Course.IdType
+    )
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didPurchaseCourse courseID: Course.IdType
+    )
     func iapService(
         _ service: IAPServiceProtocol,
         didFailPurchaseCourse courseID: Course.IdType,
         withError error: Swift.Error
     )
+}
+
+extension IAPServiceDelegate {
+    func iapService(
+        _ service: IAPServiceProtocol,
+        didReceiveTransactionState transactionState: IAPPaymentTransactionState,
+        forCourse courseID: Course.IdType
+    ) {}
 }
 
 final class DefaultIAPServiceDelegate: IAPServiceDelegate {

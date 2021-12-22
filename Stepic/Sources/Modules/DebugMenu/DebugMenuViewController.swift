@@ -2,6 +2,7 @@ import UIKit
 
 protocol DebugMenuViewControllerProtocol: AnyObject {
     func displayDebugData(viewModel: DebugMenu.DebugDataLoad.ViewModel)
+    func displayIAPFinishAllTransactionsResult(viewModel: DebugMenu.IAPFinishAllTransactions.ViewModel)
 }
 
 final class DebugMenuViewController: UIViewController {
@@ -68,6 +69,7 @@ final class DebugMenuViewController: UIViewController {
         case fcmToken
         case flex
         case flags
+        case iap
         case deepLinking
 
         var title: String {
@@ -78,6 +80,8 @@ final class DebugMenuViewController: UIViewController {
                 return "FLEX"
             case .flags:
                 return "Remote & Local Flags"
+            case .iap:
+                return "IAP"
             case .deepLinking:
                 return "Deep Linking"
             }
@@ -90,6 +94,8 @@ final class DebugMenuViewController: UIViewController {
         case flexShowMenu
         case flagsSplitTests
         case flagsRemoteConfig
+        case iapFinishAllTransactions
+        case iapCreateCoursePaymentDelay
         case deepLinkInput
         case deepLinkOpen
 
@@ -105,6 +111,10 @@ final class DebugMenuViewController: UIViewController {
                 return "A/B Groups"
             case .flagsRemoteConfig:
                 return "Remote Config"
+            case .iapFinishAllTransactions:
+                return "Finish All Transactions"
+            case .iapCreateCoursePaymentDelay:
+                return "Create CoursePayment Delay"
             case .deepLinkOpen:
                 return "Open deep link"
             default:
@@ -121,6 +131,12 @@ final class DebugMenuViewController: UIViewController {
 extension DebugMenuViewController: DebugMenuViewControllerProtocol {
     func displayDebugData(viewModel: DebugMenu.DebugDataLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayIAPFinishAllTransactionsResult(viewModel: DebugMenu.IAPFinishAllTransactions.ViewModel) {
+        let alert = UIAlertController(title: nil, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: Private Helpers
@@ -185,6 +201,33 @@ extension DebugMenuViewController: DebugMenuViewControllerProtocol {
             .init(
                 header: .init(title: Section.flags.title),
                 cells: [flagsSplitTestsCell, flagsRemoteConfigCell],
+                footer: nil
+            )
+        )
+
+        // IAP
+        let iapFinishAllTransactionsCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.iapFinishAllTransactions.uniqueIdentifier,
+            type: .rightDetail(options: .init(title: .init(text: Row.iapFinishAllTransactions.title)))
+        )
+
+        let iapCreateCoursePaymentDelayDetailTitle = viewModel.iapCreateCoursePaymentDelay != nil
+            ? "\(viewModel.iapCreateCoursePaymentDelay.require())"
+            : "nil"
+        let iapCreateCoursePaymentDelayCell = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Row.iapCreateCoursePaymentDelay.uniqueIdentifier,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Row.iapCreateCoursePaymentDelay.title),
+                    detailType: .label(text: iapCreateCoursePaymentDelayDetailTitle),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        sections.append(
+            .init(
+                header: .init(title: Section.iap.title),
+                cells: [iapFinishAllTransactionsCell, iapCreateCoursePaymentDelayCell],
                 footer: nil
             )
         )
@@ -259,6 +302,10 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
         case .flagsRemoteConfig:
             let viewController = EditRemoteConfigAssembly().makeModule()
             self.push(module: viewController)
+        case .iapFinishAllTransactions:
+            self.interactor.doIAPFinishAllTransactions(request: .init())
+        case .iapCreateCoursePaymentDelay:
+            self.promptForCreateCoursePaymentDelayInput()
         case .deepLinkOpen:
             self.handleOpenDeepLink()
         default:
@@ -334,5 +381,49 @@ extension DebugMenuViewController: DebugMenuViewDelegate {
 
             self.present(alert, animated: true)
         }
+    }
+
+    private func promptForCreateCoursePaymentDelayInput() {
+        let alert = UIAlertController(
+            title: "Enter create CoursePayment delay in seconds",
+            message: nil,
+            preferredStyle: .alert
+        )
+        alert.addTextField()
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.interactor.doIAPUpdateCreateCoursePaymentDelay(request: .init(input: nil))
+        }
+        alert.addAction(deleteAction)
+
+        if case .result(let data) = self.state,
+           let iapCreateCoursePaymentDelay = data.iapCreateCoursePaymentDelay {
+            alert.textFields?.first?.text = "\(iapCreateCoursePaymentDelay)"
+        }
+
+        let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self, weak alert] _ in
+            guard let strongSelf = self,
+                  let strongAlert = alert else {
+                return
+            }
+
+            let input = strongAlert.textFields?.first?.text
+            strongSelf.interactor.doIAPUpdateCreateCoursePaymentDelay(request: .init(input: input))
+        }
+        alert.addAction(saveAction)
+
+        self.present(alert, animated: true)
     }
 }

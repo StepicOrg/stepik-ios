@@ -18,6 +18,9 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
     private let iapService: IAPServiceProtocol
     private let remoteConfig: RemoteConfig
 
+    private let analytics: Analytics
+
+    private var currentCourse: Course?
     private var currentMobileTier: MobileTier?
 
     init(
@@ -26,7 +29,8 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
         sectionID: Section.IdType,
         promoCodeName: String?,
         iapService: IAPServiceProtocol,
-        remoteConfig: RemoteConfig
+        remoteConfig: RemoteConfig,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -34,6 +38,7 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
         self.promoCodeName = promoCodeName
         self.iapService = iapService
         self.remoteConfig = remoteConfig
+        self.analytics = analytics
     }
 
     func doModalLoad(request: LessonFinishedDemoPanModal.ModalLoad.Request) {
@@ -59,6 +64,8 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
             .done { section, course in
                 CoreDataHelper.shared.save()
 
+                self.currentCourse = course
+
                 self.presenter.presentModal(
                     response: .init(
                         course: course,
@@ -74,6 +81,17 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
     }
 
     func doModalMainAction(request: LessonFinishedDemoPanModal.MainModalAction.Request) {
+        if let currentCourse = self.currentCourse {
+            self.analytics.send(
+                .courseBuyPressed(
+                    id: currentCourse.id,
+                    source: .demoLessonDialog,
+                    isWishlisted: currentCourse.isInWishlist,
+                    promoCode: self.promoCodeName
+                )
+            )
+        }
+
         self.moduleOutput?.handleLessonFinishedDemoPanModalMainAction()
     }
 

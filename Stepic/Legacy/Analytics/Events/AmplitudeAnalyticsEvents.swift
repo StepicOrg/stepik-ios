@@ -133,13 +133,19 @@ extension AnalyticsEvent {
         case siriShortcut = "ios_siri_shortcut"
     }
 
-    static func courseBuyPressed(source: CourseBuySource, id: Int, isWishlisted: Bool) -> AmplitudeAnalyticsEvent {
+    static func courseBuyPressed(
+        id: Int,
+        source: CourseBuySource,
+        isWishlisted: Bool,
+        promoCode: String?
+    ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
             name: "Buy course pressed",
             parameters: [
                 "source": source.rawValue,
                 "course": id,
-                "is_wishlisted": isWishlisted
+                "is_wishlisted": isWishlisted,
+                "promo": promoCode as Any
             ]
         )
     }
@@ -147,6 +153,7 @@ extension AnalyticsEvent {
     enum CourseBuySource: String {
         case courseWidget = "course_widget"
         case courseScreen = "course_screen"
+        case demoLessonDialog = "demo_lesson_dialog"
     }
 
     static func courseBuyReceiptRefreshed(id: Int, successfully: Bool) -> AmplitudeAnalyticsEvent {
@@ -157,6 +164,132 @@ extension AnalyticsEvent {
                 "result": successfully ? "success" : "error"
             ]
         )
+    }
+
+    static func courseBuyCoursePromoStartPressed(id: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course promo start pressed",
+            parameters: ["course": id]
+        )
+    }
+
+    static func courseBuyCoursePromoSuccess(id: Int, promoCode: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course promo success",
+            parameters: [
+                "course": id,
+                "promo": promoCode
+            ]
+        )
+    }
+
+    static func courseBuyCoursePromoFailure(id: Int, promoCode: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course promo failure",
+            parameters: [
+                "course": id,
+                "promo": promoCode
+            ]
+        )
+    }
+
+    static func courseBuyCourseIAPFlowStart(
+        id: Int,
+        source: CourseBuySource,
+        isWishlisted: Bool,
+        promoCode: String?
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course IAP flow start",
+            parameters: [
+                "course": id,
+                "source": source.rawValue,
+                "is_wishlisted": isWishlisted,
+                "promo": promoCode as Any
+            ]
+        )
+    }
+
+    static func courseBuyCourseIAPFlowSuccess(
+        id: Int,
+        source: CourseBuySource,
+        isWishlisted: Bool,
+        promoCode: String?
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course IAP flow success",
+            parameters: [
+                "course": id,
+                "source": source.rawValue,
+                "is_wishlisted": isWishlisted,
+                "promo": promoCode as Any
+            ]
+        )
+    }
+
+    static func courseBuyCourseIAPFlowFailure(
+        id: Int,
+        errorType: String,
+        errorDescription: String?
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course IAP flow failure",
+            parameters: [
+                "course": id,
+                "type": errorType,
+                "message": errorDescription as Any
+            ]
+        )
+    }
+
+    static func courseBuyCourseVerificationSuccess(
+        id: Int,
+        source: CourseBuySource,
+        isWishlisted: Bool,
+        promoCode: String?
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course verification success",
+            parameters: [
+                "course": id,
+                "source": source.rawValue,
+                "is_wishlisted": isWishlisted,
+                "promo": promoCode as Any
+            ]
+        )
+    }
+
+    static func courseBuyCourseVerificationFailure(
+        id: Int,
+        errorType: String,
+        errorDescription: String?
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Buy course verification failure",
+            parameters: [
+                "course": id,
+                "type": errorType,
+                "message": errorDescription as Any
+            ]
+        )
+    }
+
+    static func courseRestoreCoursePurchasePressed(
+        id: Int,
+        source: CourseRestorePurchaseSource
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Restore course purchase pressed",
+            parameters: [
+                "course": id,
+                "source": source.rawValue
+            ]
+        )
+    }
+
+    enum CourseRestorePurchaseSource: String {
+        case buyCourseDialog = "buy_course_dialog"
+        case courseScreen = "course_screen"
     }
 
     // MARK: - Course Search -

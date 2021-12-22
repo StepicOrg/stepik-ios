@@ -28,6 +28,8 @@ protocol IAPServiceProtocol: AnyObject {
     @available(*, deprecated, message: "Legacy purchase flow")
     func retryValidateReceipt(course: Course, delegate: IAPServiceDelegate?)
     func retryValidateReceipt(courseID: Course.IdType, mobileTier: String, delegate: IAPServiceDelegate?)
+
+    func finishAllPaymentTransactions() -> Int
 }
 
 // MARK: - IAPServiceProtocol (Default Extensions) -
@@ -350,6 +352,10 @@ final class IAPService: IAPServiceProtocol {
         self.paymentsService.retryValidateReceipt(courseID: courseID, productIdentifier: mobileTier)
     }
 
+    func finishAllPaymentTransactions() -> Int {
+        self.paymentsService.finishAllTransactions()
+    }
+
     // MARK: Types
 
     private final class CoursePaymentRequest: Hashable {
@@ -395,6 +401,18 @@ final class IAPService: IAPServiceProtocol {
 // MARK: - IAPService: IAPPaymentsServiceDelegate -
 
 extension IAPService: IAPPaymentsServiceDelegate {
+    func iapPaymentsService(
+        _ service: IAPPaymentsServiceProtocol,
+        didReceiveTransactionState transactionState: IAPPaymentTransactionState,
+        forCourse courseID: Course.IdType
+    ) {
+        self.mutex.unbalancedLock()
+        defer { self.mutex.unbalancedUnlock() }
+
+        let requestDelegate = self.getCoursePaymentRequestDelegate(courseID: courseID)
+        requestDelegate.iapService(self, didReceiveTransactionState: transactionState, forCourse: courseID)
+    }
+
     func iapPaymentsService(_ service: IAPPaymentsServiceProtocol, didPurchaseCourse courseID: Course.IdType) {
         self.handleCoursePaymentSucceed(courseID: courseID)
     }

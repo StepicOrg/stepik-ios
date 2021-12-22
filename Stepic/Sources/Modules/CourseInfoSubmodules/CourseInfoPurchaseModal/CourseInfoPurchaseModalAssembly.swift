@@ -4,6 +4,7 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
     private let courseID: Course.IdType
     private let promoCodeName: String?
     private let mobileTierID: MobileTier.IdType?
+    private let courseBuySource: AnalyticsEvent.CourseBuySource
 
     private weak var moduleOutput: CourseInfoPurchaseModalOutputProtocol?
 
@@ -11,11 +12,13 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
         courseID: Course.IdType,
         promoCodeName: String?,
         mobileTierID: MobileTier.IdType?,
+        courseBuySource: AnalyticsEvent.CourseBuySource,
         output: CourseInfoPurchaseModalOutputProtocol? = nil
     ) {
         self.courseID = courseID
         self.promoCodeName = promoCodeName
         self.mobileTierID = mobileTierID
+        self.courseBuySource = courseBuySource
         self.moduleOutput = output
     }
 
@@ -32,9 +35,11 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
             courseID: self.courseID,
             initialPromoCodeName: self.promoCodeName,
             initialMobileTierID: self.mobileTierID,
+            courseBuySource: self.courseBuySource,
             presenter: presenter,
             provider: provider,
-            iapService: IAPService.shared
+            iapService: IAPService.shared,
+            analytics: StepikAnalytics.shared
         )
         let viewController = CourseInfoPurchaseModalViewController(interactor: interactor)
 

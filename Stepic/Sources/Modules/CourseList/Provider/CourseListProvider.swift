@@ -124,7 +124,11 @@ final class CourseListProvider: CourseListProviderProtocol {
     // MARK: - Private API
 
     private func fetchIAPLocalizedPrices(for courses: [Course]) -> Guarantee<Void> {
-        firstly { () -> Guarantee<[MobileTierPlainObject]?> in
+        if courses.isEmpty {
+            return .value(())
+        }
+
+        return firstly { () -> Guarantee<[MobileTierPlainObject]?> in
             switch self.remoteConfig.coursePurchaseFlow {
             case .web:
                 return .value(nil)

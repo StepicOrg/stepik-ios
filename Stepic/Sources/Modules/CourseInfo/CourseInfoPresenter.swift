@@ -43,7 +43,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 isWishlistAvailable: data.isWishlistAvailable,
                 isCourseRevenueAvailable: data.isCourseRevenueAvailable,
                 promoCode: data.promoCode,
-                mobileTier: data.mobileTier
+                mobileTier: data.mobileTier,
+                shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         case .failure:
@@ -145,7 +147,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             viewModel: .init(
                 courseID: response.courseID,
                 promoCodeName: response.promoCodeName,
-                mobileTierID: response.mobileTierID
+                mobileTierID: response.mobileTierID,
+                courseBuySource: response.courseBuySource
             )
         )
     }
@@ -282,7 +285,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         isWishlistAvailable: Bool,
         isCourseRevenueAvailable: Bool,
         promoCode: PromoCode?,
-        mobileTier: MobileTierPlainObject?
+        mobileTier: MobileTierPlainObject?,
+        shouldCheckIAPPurchaseSupport: Bool,
+        isSupportedIAPPurchase: Bool
     ) -> CourseInfoHeaderViewModel {
         let rating = course.reviewSummary?.rating ?? 0
 
@@ -295,6 +300,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
         let isTryForFreeAvailable = course.previewLessonID != nil && !course.enrolled
             && (course.isPaid && !course.isPurchased)
+
+        let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
+            ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+            : nil
 
         return CourseInfoHeaderViewModel(
             title: course.title,
@@ -310,11 +319,14 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
+            unsupportedIAPPurchaseText: unsupportedIAPPurchaseText,
             buttonDescription: self.makeButtonDescription(
                 course: course,
                 coursePurchaseFlow: coursePurchaseFlow,
                 promoCode: promoCode,
-                mobileTier: mobileTier
+                mobileTier: mobileTier,
+                shouldCheckIAPPurchaseSupport: shouldCheckIAPPurchaseSupport,
+                isSupportedIAPPurchase: isSupportedIAPPurchase
             )
         )
     }
@@ -323,12 +335,15 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         course: Course,
         coursePurchaseFlow: CoursePurchaseFlowType,
         promoCode: PromoCode?,
-        mobileTier: MobileTierPlainObject?
+        mobileTier: MobileTierPlainObject?,
+        shouldCheckIAPPurchaseSupport: Bool,
+        isSupportedIAPPurchase: Bool
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
-        let isEnabled = isEnrolled ? course.canContinue : true
+        var isEnabled = isEnrolled ? course.canContinue : true
         let isNotPurchased = course.isPaid && !course.isPurchased
         var isPromo = false
+        var isWishlist = false
 
         let title: String = {
             if isEnrolled {
@@ -336,6 +351,13 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             }
 
             if isNotPurchased {
+                if shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase {
+                    isWishlist = true
+                    return course.isInWishlist
+                        ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
+                        : NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle", comment: "")
+                }
+
                 let displayPrice: String?
 
                 switch coursePurchaseFlow {
@@ -368,6 +390,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }()
 
         let subtitle: String? = {
+            if shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase {
+                return nil
+            }
+
             guard isNotPurchased && isPromo else {
                 return nil
             }
@@ -380,12 +406,17 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             }
         }()
 
+        if isWishlist {
+            isEnabled = !course.isInWishlist
+        }
+
         return CourseInfoHeaderViewModel.ButtonDescription(
             title: title,
             subtitle: subtitle,
             isCallToAction: !isEnrolled,
             isEnabled: isEnabled,
-            isPromo: isPromo
+            isPromo: isPromo,
+            isWishlist: isWishlist
         )
     }
 }

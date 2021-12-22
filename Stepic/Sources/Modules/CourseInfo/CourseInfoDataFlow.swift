@@ -47,6 +47,8 @@ enum CourseInfo {
                 let coursePurchaseFlow: CoursePurchaseFlowType
                 let promoCode: PromoCode?
                 let mobileTier: MobileTierPlainObject?
+                let shouldCheckIAPPurchaseSupport: Bool
+                let isSupportedIAPPurchase: Bool
             }
 
             var result: StepikResult<Data>
@@ -234,7 +236,9 @@ enum CourseInfo {
 
     /// Do main action (continue, enroll, etc)
     enum MainCourseAction {
-        struct Request {}
+        struct Request {
+            var courseBuySource = AnalyticsEvent.CourseBuySource.courseScreen
+        }
     }
 
     /// Pop lesson module and do main course action
@@ -321,12 +325,14 @@ enum CourseInfo {
             let courseID: Course.IdType
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
 
         struct ViewModel {
             let courseID: Course.IdType
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
     }
 
