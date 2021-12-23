@@ -518,7 +518,7 @@ extension LessonInteractor: StepOutputProtocol {
         if targetSection.testSectionAction != nil {
             return .value(false)
         }
-        if targetSection.isReachable && !targetSection.isExam {
+        if targetSection.isReachable() && !targetSection.isExam {
             return .value(false)
         }
 

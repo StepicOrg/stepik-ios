@@ -39,7 +39,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
 
         let certificateText = self.makeFormattedCertificateText(course: course)
-        let certificateDetailsText = course.hasCertificate
+        let certificateDetailsText = course.isWithCertificate
             ? self.makeFormattedCertificateDetailsText(
                 conditionPoints: course.certificateRegularThreshold,
                 distinctionPoints: course.certificateDistinctionThreshold
@@ -91,12 +91,12 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeFormattedCertificateText(course: Course) -> String {
-        let predefinedText = course.hasCertificate
+        let predefinedText = course.isWithCertificate
             ? NSLocalizedString("CertificateIsIssued", comment: "")
             : NSLocalizedString("CertificateIsNotIssued", comment: "")
         let certificateText = course.certificate.trimmingCharacters(in: .whitespaces)
 
-        return course.hasCertificate && !certificateText.isEmpty
+        return course.isWithCertificate && !certificateText.isEmpty
             ? certificateText
             : predefinedText
     }

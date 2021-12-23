@@ -268,11 +268,13 @@ enum CourseInfo {
 
         struct Response {
             let previewLessonID: Lesson.IdType
+            let previewUnitID: Unit.IdType?
             let promoCodeName: String?
         }
 
         struct ViewModel {
             let previewLessonID: Lesson.IdType
+            let previewUnitID: Unit.IdType?
             let promoCodeName: String?
         }
     }

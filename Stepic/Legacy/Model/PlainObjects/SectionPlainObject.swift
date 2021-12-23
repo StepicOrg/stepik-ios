@@ -82,6 +82,6 @@ extension SectionPlainObject {
         self.isRequirementSatisfied = section.isRequirementSatisfied
         self.requiredSectionID = section.requiredSectionID
         self.requiredPercent = section.requiredPercent
-        self.isReachable = section.isReachable
+        self.isReachable = section.isReachable()
     }
 }

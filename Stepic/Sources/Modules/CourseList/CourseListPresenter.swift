@@ -130,7 +130,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             ratingLabelText = FormatterHelper.averageRating(averageRating)
         }
 
-        let certificateLabelText = course.hasCertificate ? NSLocalizedString("Certificate", comment: "") : nil
+        let certificateLabelText = course.isWithCertificate ? NSLocalizedString("Certificate", comment: "") : nil
 
         var priceViewModel: CourseWidgetPriceViewModel?
         if isCoursePricesEnabled {

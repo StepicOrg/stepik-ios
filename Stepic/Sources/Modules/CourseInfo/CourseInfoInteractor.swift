@@ -389,11 +389,18 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doPreviewLessonPresentation(request: CourseInfo.PreviewLessonPresentation.Request) {
-        if let previewLessonID = self.currentCourse?.previewLessonID {
-            self.presenter.presentPreviewLesson(
-                response: .init(previewLessonID: previewLessonID, promoCodeName: self.promoCodeName)
-            )
+        guard let currentCourse = self.currentCourse,
+              let previewLessonID = currentCourse.previewLessonID else {
+            return
         }
+
+        self.presenter.presentPreviewLesson(
+            response: .init(
+                previewLessonID: previewLessonID,
+                previewUnitID: currentCourse.previewUnitID,
+                promoCodeName: self.promoCodeName
+            )
+        )
     }
 
     func doCourseRevenuePresentation(request: CourseInfo.CourseRevenuePresentation.Request) {

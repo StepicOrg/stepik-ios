@@ -71,14 +71,8 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.purchases.contains(where: { $0.isActive })
     }
 
-    var anyCertificateTreshold: Int? {
+    var anyCertificateThreshold: Int? {
         self.certificateRegularThreshold ?? self.certificateDistinctionThreshold
-    }
-
-    var hasCertificate: Bool {
-        let hasText = !self.certificate.isEmpty
-        let isIssued = self.isCertificatesAutoIssued && self.isCertificateIssued
-        return self.anyCertificateTreshold != nil && (hasText || isIssued)
     }
 
     var defaultPromoCode: PromoCode? {

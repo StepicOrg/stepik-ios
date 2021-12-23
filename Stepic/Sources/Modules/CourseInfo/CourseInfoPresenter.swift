@@ -118,7 +118,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
         self.viewController?.displayPreviewLesson(
-            viewModel: .init(previewLessonID: response.previewLessonID, promoCodeName: response.promoCodeName)
+            viewModel: .init(
+                previewLessonID: response.previewLessonID,
+                previewUnitID: response.previewUnitID,
+                promoCodeName: response.promoCodeName
+            )
         )
     }
 
