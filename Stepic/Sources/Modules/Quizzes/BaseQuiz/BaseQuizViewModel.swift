@@ -10,12 +10,14 @@ struct BaseQuizViewModel {
     let submissionsLeft: Int?
     let feedbackTitle: String
     let retryWithNewAttempt: Bool
-    let shouldPassPeerReview: Bool
-    let stepURL: URL
+    let shouldPassReview: Bool
+    let isReviewControlsAvailable: Bool
     let hintContent: String?
     let codeDetails: CodeDetails?
     let canNavigateToNextStep: Bool
     let canRetry: Bool
     let discountingPolicyTitle: String
     let isDiscountingPolicyVisible: Bool
+    let isTopSeparatorHidden: Bool
+    let isTitleHidden: Bool
 }

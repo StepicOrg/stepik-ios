@@ -4,6 +4,7 @@ import UIKit
 protocol ContinueCourseViewDelegate: AnyObject {
     func continueCourseDidClickContinue(_ continueCourseView: ContinueCourseView)
     func continueCourseDidClickEmpty(_ continueCourseView: ContinueCourseView)
+    func continueCourseSiriButtonDidClick(_ continueCourseView: ContinueCourseView)
 }
 
 extension ContinueCourseView {
@@ -62,6 +63,11 @@ final class ContinueCourseView: UIView {
             self.lastStepView.progress = progressValue
         }
         self.lastStepView.coverImageURL = viewModel.coverImageURL
+    }
+
+    @available(iOS 12.0, *)
+    func configureSiriButton(contentConfiguration: SiriButtonContentConfiguration?) {
+        //self.lastStepView.configureSiriButton(contentConfiguration: contentConfiguration)
     }
 
     func showLoading() {

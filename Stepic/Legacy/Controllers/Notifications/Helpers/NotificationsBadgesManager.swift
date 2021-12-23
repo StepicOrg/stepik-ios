@@ -1,11 +1,3 @@
-//
-//  NotificationsBadgesManager.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 21.11.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 extension NSNotification.Name {
@@ -20,14 +12,33 @@ final class NotificationsBadgesManager {
 
     private(set) var notificationsCount: Int = 0 {
         didSet {
-            NotificationCenter.default.post(name: .badgeUpdated, object: self, userInfo: ["value": notificationsCount])
+            NotificationCenter.default.post(
+                name: .badgeUpdated,
+                object: self,
+                userInfo: ["value": self.notificationsCount]
+            )
         }
     }
 
     private init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didNotificationUpdate(systemNotification:)),
+            name: .notificationUpdated,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didAllNotificationsRead),
+            name: .allNotificationsMarkedAsRead,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didNotificationAdd),
+            name: .notificationAdded,
+            object: nil
+        )
     }
 
     deinit {
@@ -36,33 +47,36 @@ final class NotificationsBadgesManager {
 
     func setup() {}
 
-    @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
+    func set(number: Int) {
+        if !self.badgeValues.contains(number) {
+            self.notificationsCount = number
+        } else {
+            self.badgeValues.remove(number)
+        }
+    }
+
+    @objc
+    private func didNotificationUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let status = userInfo["status"] as? NotificationStatus else {
             return
         }
 
         if status == .read {
-            notificationsCount -= 1
-            badgeValues.insert(notificationsCount)
+            self.notificationsCount -= 1
+            self.badgeValues.insert(self.notificationsCount)
         }
     }
 
-    @objc func didNotificationAdd(systemNotification: Foundation.Notification) {
-        notificationsCount += 1
-        badgeValues.insert(notificationsCount)
+    @objc
+    private func didNotificationAdd() {
+        self.notificationsCount += 1
+        self.badgeValues.insert(self.notificationsCount)
     }
 
-    @objc func didAllNotificationsRead(systemNotification: Foundation.Notification) {
-        notificationsCount = 0
-        badgeValues.insert(notificationsCount)
-    }
-
-    func set(number: Int) {
-        if !badgeValues.contains(number) {
-            notificationsCount = number
-        } else {
-            badgeValues.remove(number)
-        }
+    @objc
+    private func didAllNotificationsRead() {
+        self.notificationsCount = 0
+        self.badgeValues.insert(self.notificationsCount)
     }
 }

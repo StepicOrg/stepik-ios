@@ -46,9 +46,7 @@ final class CourseInfoTabSyllabusSectionBadgesView: UIView {
     }
 
     func configure(viewModel: CourseInfoTabSyllabusSectionViewModel) {
-        if !self.stackView.arrangedSubviews.isEmpty {
-            self.stackView.removeAllArrangedSubviews()
-        }
+        self.stackView.removeAllArrangedSubviews()
 
         guard let examViewModel = viewModel.exam else {
             return
@@ -143,9 +141,9 @@ final class CourseInfoTabSyllabusSectionBadgesView: UIView {
         var backgroundColor: UIColor {
             switch self {
             case .violet:
-                return .stepikOverlayViolet
+                return .stepikOverlayVioletBackground
             case .green:
-                return UIColor.stepikGreen.withAlphaComponent(0.12)
+                return .stepikOverlayGreenBackground
             case .greenWhite:
                 return .stepikGreenFixed
             case .violetWhite:

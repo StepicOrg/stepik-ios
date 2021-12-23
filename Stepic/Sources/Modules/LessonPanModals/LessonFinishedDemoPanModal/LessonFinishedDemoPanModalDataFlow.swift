@@ -7,6 +7,8 @@ enum LessonFinishedDemoPanModal {
         struct Response {
             let course: Course
             let section: Section
+            let coursePurchaseFlow: CoursePurchaseFlowType
+            let mobileTier: MobileTier?
         }
 
         struct ViewModel {

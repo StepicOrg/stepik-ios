@@ -234,7 +234,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     private func updateSeparator(newStyle style: ViewModel.SeparatorStyle) {
         self.separatorStyle = style
         self.separatorHeightConstraint?.update(offset: style.height)
-        self.separatorView.isHidden = style == .none
+        self.separatorView.isHidden = style == .empty
         self.separatorView.backgroundColor = style.color
     }
 
@@ -263,7 +263,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         enum SeparatorStyle {
             case small
             case large
-            case none
+            case empty
 
             var height: CGFloat {
                 switch self {
@@ -271,7 +271,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
                     return 1
                 case .large:
                     return 4
-                case .none:
+                case .empty:
                     return 0
                 }
             }
@@ -288,7 +288,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
                         light: UIColor.black.withAlphaComponent(0.04),
                         dark: .stepikSeparator
                     )
-                case .none:
+                case .empty:
                     return .clear
                 }
             }

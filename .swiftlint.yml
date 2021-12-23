@@ -30,9 +30,11 @@ only_rules:
   - deployment_target
   - discarded_notification_center_observer
   - discouraged_direct_init
+  - discouraged_none_name
   - discouraged_object_literal
   - duplicate_enum_cases
   - duplicate_imports
+  - duplicated_key_in_dictionary_literal
   - dynamic_inline
   - empty_collection_literal
   - empty_count
@@ -119,6 +121,7 @@ only_rules:
   - redundant_void_return
   # - return_value_from_void_function
   - return_arrow_whitespace
+  - self_in_property_initialization
   - shorthand_operator
   - single_test_class
   - sorted_first_last
@@ -214,6 +217,9 @@ discarded_notification_center_observer:
 discouraged_direct_init:
   severity: error
 
+discouraged_none_name:
+  severity: warning
+
 discouraged_object_literal:
   severity: error
 
@@ -221,6 +227,9 @@ duplicate_enum_cases:
   severity: error
 
 duplicate_imports:
+  severity: error
+
+duplicated_key_in_dictionary_literal:
   severity: error
 
 dynamic_inline:
@@ -415,6 +424,9 @@ redundant_set_access_control:
   severity: error
 
 redundant_type_annotation:
+  severity: error
+
+self_in_property_initialization:
   severity: error
 
 statement_position:

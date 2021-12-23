@@ -21,11 +21,6 @@ Copy = "Copy";
 Reload = "Reload";
 ConnectionErrorTitle = "Connection error";
 ConnectionErrorSubtitle = "Enable internet connection and retry";
-DownloadReachabilityErrorTitle = "Only Wi-Fi download enabled";
-SomethingWrongTitle = "Ooops";
-SomethingWrongSubtitle = "Something just got wrong";
-ReloginTitle = "Authorization problems";
-ReloginSubtitle = "Log in, please";
 Studying = "Studying";
 JoinCourse = "Join course";
 FailedToRemoveMessage = "Failed to remove";
@@ -54,8 +49,6 @@ Format = "Format";
 Requirements = "Requirements";
 Video = "Video";
 Videos = "videos";
-ConnectionLost = "Connection lost";
-CancelledDownload = "Cancelled downloading";
 UnenrollAlertTitle = "Stop studying";
 UnenrollAlertMessage = "Don't you want to study on this course?";
 Unenroll = "Stop studying";
@@ -347,6 +340,12 @@ reviews567890 = "reviews";
 reviewSummaries1 = "review";
 reviewSummaries234 = "reviews";
 reviewSummaries567890 = "reviews";
+quizReviews1 = "review";
+quizReviews234 = "reviews";
+quizReviews567890 = "reviews";
+submissions1 = "submission";
+submissions234 = "submissions";
+submissions567890 = "submissions";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 TagPlaceholderError = "Error while loading courses. <b>Press</b> to try again";
@@ -515,6 +514,50 @@ CourseInfoTitleTimeToComplete = "Expected time to complete";
 CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
+CourseInfoTabNews = "News";
+CourseInfoTabNewsEmptyNews = "No News";
+CourseInfoTabNewsPublishCountTitle = "Published";
+CourseInfoTabNewsQueueCountTitle = "Queued";
+CourseInfoTabNewsSentCountTitle = "Sent";
+CourseInfoTabNewsOpenCountTitle = "Opened";
+CourseInfoTabNewsClickCountTitle = "Clicked";
+CourseInfoTabNewsBadgeComposing = "Draft";
+CourseInfoTabNewsBadgeScheduled = "Scheduled";
+CourseInfoTabNewsBadgeSending = "Active";
+CourseInfoTabNewsBadgeSent = "Sent";
+CourseInfoTabNewsBadgeOnEvent = "By Event";
+CourseInfoTabNewsBadgeOneTime = "One-time";
+CourseInfoTabNewsDateOnEventComposing = "From %@";
+CourseInfoTabNewsDateOnEventSending = "From %@";
+CourseInfoTabNewsDateOnEventSent = "%@ - %@";
+CourseInfoTabNewsDateOneTimeScheduled = "Scheduled for %@";
+CourseInfoTabNewsDateOneTimeSending = "From %@";
+
+/* CourseInfoPurchaseModal */
+CourseInfoPurchaseModalTitle = "Course purchase";
+
+CourseInfoPurchaseModalRevealPromoCodeInputTitle = "I have a promo code";
+CourseInfoPurchaseModalInputPlaceholder = "Enter a promo code";
+CourseInfoPurchaseModalPromoCodeStatusLoading = "Checking the promo code";
+CourseInfoPurchaseModalPromoCodeStatusError = "Invalid promo code";
+CourseInfoPurchaseModalPromoCodeStatusSuccess = "Promo code applied";
+CourseInfoPurchaseModalCheckPromoCodeStateError = "Unable to check the promo code";
+
+CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle = "Adding";
+CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle = "Add to Wishlist";
+CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "Added to Wishlist";
+
+CourseInfoPurchaseModalBuyButtonPurchaseInProgressTitle = "Processing the Payment";
+
+CourseInfoPurchaseModalPurchaseErrorStatusTitle = "The payment was successful, but the purchase is not completed";
+CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "An error occurred while processing the payment, try to restore the purchase and <a href=\"https://support.stepik.org/hc/en-us\">contact support</a>, if the error persists. The funds will not be debited again.";
+CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Restore Purchase";
+CourseInfoPurchaseModalPurchaseErrorContactSupportSubject = "Error when purchasing course";
+CourseInfoPurchaseModalPurchaseSuccessStatusTitle = "The payment was successful";
+CourseInfoPurchaseModalPurchaseSuccessStartLearningTitle = "Start Learning";
+
+CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage = "This course is not available for purchase in the mobile app";
+CourseInfoPurchaseModalPurchaseErrorProductsRequestFailedMessage = "Couldn't get information from the App Store, please try again later";
 
 /* Course revenue */
 CourseRevenueTitle = "Revenue";
@@ -550,6 +593,11 @@ CourseRevenueTabMonthlyRefundsTitle = "Refunds";
 CourseRevenueTabMonthlyIncomeTitle = "Purchases";
 CourseRevenueTabMonthlyChannelStepikTitle = "Came via Stepik";
 CourseRevenueTabMonthlyChannelZLinkTitle = "Came via Z-Link";
+
+/* CourseSearch */
+CourseSearchBarPlaceholder = "Search in the course %@";
+CourseSearchPlaceholderEmptySuggesions = "Enter keywords to search in the course";
+CourseSearchPlaceholderEmptySearchResults = "Nothing was found for this query";
 
 /* User Courses */
 UserCoursesTitle = "My Courses";
@@ -997,6 +1045,63 @@ VideoPlayerFailedToStartPictureInPictureMessage = "Failed to start playing this 
 
 StepikSocialNetworksTitle = "Our social networks";
 
+/* Peer review */
+StepQuizReviewSendPending = "Send your best submission to review";
+StepQuizReviewSendInProgress = "Send your best submission to review. You can't change it later.";
+StepQuizReviewSendCompleted = "Submission was sent to review";
+StepQuizReviewSendChoose = "Choose submission";
+StepQuizReviewSendSubmit = "Submit this submission";
+
+StepQuizReviewGivenTitle = "Review";
+StepQuizReviewGivenPendingZero = "Write reviews";
+StepQuizReviewGivenInProgressZero1 = "Write %@ review";
+StepQuizReviewGivenInProgressZero234 = "Write %@ reviews";
+StepQuizReviewGivenInProgressZero567890 = "Write %@ reviews";
+StepQuizReviewGivenInProgress1 = "Write %@ more review. %@.";
+StepQuizReviewGivenInProgress234 = "Write %@ more reviews. %@.";
+StepQuizReviewGivenInProgress567890 = "Write %@ more reviews. %@.";
+StepQuizReviewGivenCompleted1 = "%@ was sent";
+StepQuizReviewGivenCompleted234 = "%@ were sent";
+StepQuizReviewGivenCompleted567890 = "%@ were sent";
+StepQuizReviewGivenCompletedAction = "View given reviews";
+StepQuizReviewGivenInProgressAction = "Review in Web";
+StepQuizReviewGivenInProgressContinueAction = "Continue review in Web";
+StepQuizReviewGivenExtraNote = "Write more reviews to increase your chance to receive review";
+StepQuizReviewGivenStartReview = "Start review";
+StepQuizReviewGivenNoReview = "Nothing to review";
+
+StepQuizReviewTakenPendingZero = "Wait for reviews of your solution";
+StepQuizReviewTakenInProgressZero1 = "Wait for %@ review of your solution";
+StepQuizReviewTakenInProgressZero234 = "Wait for %@ reviews of your solution";
+StepQuizReviewTakenInProgressZero567890 = "Wait for %@ reviews of your solution";
+StepQuizReviewTakenInProgress1 = "Wait for %@ more review of your solution. %@.";
+StepQuizReviewTakenInProgress234 = "Wait for %@ more reviews of your solution. %@.";
+StepQuizReviewTakenInProgress567890 = "Wait for %@ more reviews of your solution. %@.";
+StepQuizReviewTakenCompleted1 = "%@ review received";
+StepQuizReviewTakenCompleted234 = "%@ reviews received";
+StepQuizReviewTakenCompleted567890 = "%@ reviews received";
+StepQuizReviewTakenAction = "View received reviews";
+StepQuizReviewTakenTitle = "Received reviews";
+StepQuizReviewTakenHint = "Average waiting time - 48 hours";
+
+StepQuizReviewInstructorPending = "Instructor will grade your solution with the maximum score of %@.";
+StepQuizReviewInstructorCompleted = "Your solution graded. You got %@ out of %@.";
+StepQuizReviewInstructorCompletedHint = "The instructor’s response will not come immediately, you will receive a notification";
+StepQuizReviewInstructorCompletedAction = "View review";
+
+StepQuizReviewPeerPendingZero = "Get points";
+StepQuizReviewPeerPending = "Get points, max score is %@";
+StepQuizReviewPeerCompleted1 = "Your solution was scored for %@ out of %@ point";
+StepQuizReviewPeerCompleted234 = "Your solution was scored for %@ out of %@ points";
+StepQuizReviewPeerCompleted567890 = "Your solution was scored for %@ out of %@ points";
+
+StepQuizReviewStagesNotice = "Quiz verification by the review method. Follow these steps to get points.";
+
+StepQuizReviewTeacherQuizTitle = "Quiz field";
+StepQuizReviewTeacherNoticePeer = "Learners review each other";
+StepQuizReviewTeacherNoticeInstructorsNoSubmissions = "All reviews have been sent.";
+StepQuizReviewTeacherNoticeInstructorsSubmissions = "Review %@, learners will receive points";
+
 /* Quiz */
 CorrectFeedbackTitle1 = "Correct.";
 CorrectFeedbackTitle2 = "You are right, well done!";
@@ -1024,7 +1129,6 @@ WrongFeedbackTitleNotLastTry2 = "No. Time for the next try.";
 WrongFeedbackTitleNotLastTry3 = "Try again, incorrect answer.";
 WrongFeedbackTitleLastTry = "Incorrect.";
 EvaluationFeedbackTitle = "Evaluation...";
-PeerReviewFeedbackTitle = "This is a task with peer review. <b>Tap here</b> to open in web to get points.";
 NextStepNavigationTitle = "Next";
 DiscountPolicyInverseTitle = "After every wrong submission your maximum points will be reduced";
 DiscountPolicyNoWayTitle = "You will not get points for the next attempts";
@@ -1041,6 +1145,7 @@ MultipleChoiceQuizTitle = "Select one or more options";
 SingleChoiceQuizTitle = "Select one option";
 SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
+CodeQuizTitle = "Write a program";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
 FreeAnswerQuizTitle = "Write an answer";
@@ -1080,6 +1185,7 @@ CodeQuizRunCodeTooltip = "Before sending your solution, you can run your code wi
 
 /* Submissions */
 SubmissionsTitle = "Submissions";
+SubmissionsTitleSelectSubmission = "Select Submission";
 SubmissionsPlaceholderEmptyTitle = "No Submissions";
 SubmissionScoreText = "Score";
 SubmissionStatusWrongText = "Wrong";
@@ -1088,6 +1194,7 @@ SubmissionStatusPartiallyCorrectText = "Partially correct";
 SubmissionStatusEvaluationText = "Processing";
 SubmissionsSearchBarPlaceholderText = "ID, email, name, submission number";
 SubmissionsActionFilterByUser = "Filter by user";
+SubmissionsSelectSubmission = "Select this submission";
 /* Review titles */
 SubmissionsReviewStateCantReviewTitle = "Reviewing is not possible.";
 SubmissionsReviewStateInProgressTitle = "%@ out of %@ reviews.";
@@ -1146,6 +1253,7 @@ DiscussionThreadSolutionsTitle = "Solutions";
 DiscussionThreadCommentSolutionTitle = "Solution %@";
 DiscussionsPlaceholderEmptySolutionsTitle = "No solutions. Post the first one!";
 DiscussionsPlaceholderEmptySolutionsButtonTitle = "Post a Solution";
+DiscussionsCommentNotFoundTitle = "Comment #%@ has been deleted or never existed";
 
 /* Write comment */
 WriteCommentDefaultTitle = "Comment";
@@ -1236,6 +1344,13 @@ IAPPurchaseBuyInWeb = "Buy in Web";
 /* Quick Actions */
 QuickActionContinueLearningErrorMessage = "Failed to continue learning";
 QuickActionContinueLearningErrorUnauthorizedMessage = "Sign in to continue learning";
+
+/* SiriShortcuts */
+SiriShortcutContinueLearningTitle = "Continue Learning";
+SiriShortcutContinueLearningContentDescription = "Where you left off";
+SiriShortcutContinueLearningKeyword1 = "Continue";
+SiriShortcutContinueLearningKeyword2 = "Learning";
+SiriShortcutContinueLearningKeyword3 = "Course";
 
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";

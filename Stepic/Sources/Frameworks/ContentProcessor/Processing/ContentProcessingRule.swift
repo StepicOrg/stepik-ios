@@ -164,3 +164,34 @@ final class ReplaceModelViewerWithARImageRule: BaseHTMLExtractionRule {
         return content
     }
 }
+
+/// Makes the contents of the <details> element visible and prevents toggle behavior.
+final class AlwaysOpenedDetailsDisclosureBoxRule: ContentProcessingRule {
+    func process(content: String) -> String {
+        content.replacingOccurrences(of: "<details>", with: "<details open onclick=\"return false\">")
+    }
+}
+
+final class ReplaceTemplateUsernameRule: ContentProcessingRule {
+    private let shortName: String
+    private let fullName: String
+
+    init(shortName: String, fullName: String) {
+        self.shortName = shortName
+        self.fullName = fullName
+    }
+
+    func process(content: String) -> String {
+        guard let shortRegex = try? Regex(string: "\\{\\{\\s*user_name\\s*\\}\\}", options: [.ignoreCase]),
+              let fullRegex = try? Regex(string: "\\{\\{\\s*user_full_name\\s*\\}\\}", options: [.ignoreCase]) else {
+            return content
+        }
+
+        var content = content
+
+        content.replaceAll(matching: shortRegex, with: self.shortName)
+        content.replaceAll(matching: fullRegex, with: self.fullName)
+
+        return content
+    }
+}

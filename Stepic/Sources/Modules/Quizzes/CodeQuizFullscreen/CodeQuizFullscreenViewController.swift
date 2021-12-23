@@ -31,7 +31,6 @@ extension CodeQuizFullscreenViewController {
 
 final class CodeQuizFullscreenViewController: TabmanViewController {
     lazy var codeQuizFullscreenView = self.view as? CodeQuizFullscreenView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var runCodeTooltip = TooltipFactory.runCode
     private weak var runCodeTooltipAnchorView: UIView?

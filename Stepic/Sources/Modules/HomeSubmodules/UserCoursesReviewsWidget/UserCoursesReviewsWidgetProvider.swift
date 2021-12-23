@@ -22,6 +22,10 @@ final class UserCoursesReviewsWidgetProvider: UserCoursesReviewsWidgetProviderPr
         self.userCoursesReviewsProvider.fetchPossibleCoursesFromCache()
     }
 
+    func fetchPossibleCoursesFromRemote() -> Promise<[Course]> {
+        self.userCoursesReviewsProvider.fetchPossibleCoursesFromRemote()
+    }
+
     func deleteCourseReview(id: CourseReview.IdType) -> Promise<Void> {
         self.userCoursesReviewsProvider.deleteCourseReview(id: id)
     }

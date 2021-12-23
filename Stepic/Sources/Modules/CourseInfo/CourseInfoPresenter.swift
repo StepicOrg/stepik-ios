@@ -7,6 +7,7 @@ protocol CourseInfoPresenterProtocol {
     func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response)
     func presentCourseSharing(response: CourseInfo.CourseShareAction.Response)
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
+    func presentPurchaseModalStartLearning(response: CourseInfo.PurchaseModalStartLearningPresentation.Response)
     func presentLessonModuleBuyCourseAction(response: CourseInfo.LessonModuleBuyCourseActionPresentation.Response)
     func presentLessonModuleCatalogAction(response: CourseInfo.LessonModuleCatalogPresentation.Response)
     func presentLessonModuleWriteReviewAction(response: CourseInfo.LessonModuleWriteReviewPresentation.Response)
@@ -14,12 +15,14 @@ protocol CourseInfoPresenterProtocol {
     func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
+    func presentPaidCoursePurchaseModal(response: CourseInfo.PaidCoursePurchaseModalPresentation.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
     func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response)
     func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response)
     func presentWishlistMainActionResult(response: CourseInfo.CourseWishlistMainAction.Response)
+    func presentCourseContentSearch(response: CourseInfo.CourseContentSearchPresentation.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -36,10 +39,13 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         case .success(let data):
             let headerViewModel = self.makeHeaderViewModel(
                 course: data.course,
-                isWishlisted: data.isWishlisted,
+                coursePurchaseFlow: data.coursePurchaseFlow,
                 isWishlistAvailable: data.isWishlistAvailable,
                 isCourseRevenueAvailable: data.isCourseRevenueAvailable,
-                promoCode: data.promoCode
+                promoCode: data.promoCode,
+                mobileTier: data.mobileTier,
+                shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         case .failure:
@@ -49,7 +55,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentLesson(response: CourseInfo.LessonPresentation.Response) {
         self.viewController?.displayLesson(
-            viewModel: CourseInfo.LessonPresentation.ViewModel(unitID: response.unitID)
+            viewModel: .init(unitID: response.unitID, promoCodeName: response.promoCodeName)
         )
     }
 
@@ -88,6 +94,16 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
+    func presentPurchaseModalStartLearning(response: CourseInfo.PurchaseModalStartLearningPresentation.Response) {
+        self.viewController?.displayPurchaseModalStartLearning(
+            viewModel: .init(
+                course: response.course,
+                isAdaptive: response.isAdaptive,
+                courseViewSource: response.courseViewSource
+            )
+        )
+    }
+
     func presentLessonModuleBuyCourseAction(response: CourseInfo.LessonModuleBuyCourseActionPresentation.Response) {
         self.viewController?.displayLessonModuleBuyCourseAction(viewModel: .init())
     }
@@ -101,7 +117,13 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentPreviewLesson(response: CourseInfo.PreviewLessonPresentation.Response) {
-        self.viewController?.displayPreviewLesson(viewModel: .init(previewLessonID: response.previewLessonID))
+        self.viewController?.displayPreviewLesson(
+            viewModel: .init(
+                previewLessonID: response.previewLessonID,
+                previewUnitID: response.previewUnitID,
+                promoCodeName: response.promoCodeName
+            )
+        )
     }
 
     func presentCourseRevenue(response: CourseInfo.CourseRevenuePresentation.Response) {
@@ -122,6 +144,17 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }
 
         self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: payForCourseURL.absoluteString))
+    }
+
+    func presentPaidCoursePurchaseModal(response: CourseInfo.PaidCoursePurchaseModalPresentation.Response) {
+        self.viewController?.displayPaidCoursePurchaseModal(
+            viewModel: .init(
+                courseID: response.courseID,
+                promoCodeName: response.promoCodeName,
+                mobileTierID: response.mobileTierID,
+                courseBuySource: response.courseBuySource
+            )
+        )
     }
 
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
@@ -208,6 +241,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
+    func presentCourseContentSearch(response: CourseInfo.CourseContentSearchPresentation.Response) {
+        self.viewController?.displayCourseContentSearch(viewModel: .init(courseID: response.courseID))
+    }
+
     // MARK: Private API
 
     private func makeIAPErrorMessage(course: Course, error: Error) -> String {
@@ -248,10 +285,13 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeHeaderViewModel(
         course: Course,
-        isWishlisted: Bool,
+        coursePurchaseFlow: CoursePurchaseFlowType,
         isWishlistAvailable: Bool,
         isCourseRevenueAvailable: Bool,
-        promoCode: PromoCode?
+        promoCode: PromoCode?,
+        mobileTier: MobileTierPlainObject?,
+        shouldCheckIAPPurchaseSupport: Bool,
+        isSupportedIAPPurchase: Bool
     ) -> CourseInfoHeaderViewModel {
         let rating = course.reviewSummary?.rating ?? 0
 
@@ -265,6 +305,10 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         let isTryForFreeAvailable = course.previewLessonID != nil && !course.enrolled
             && (course.isPaid && !course.isPurchased)
 
+        let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
+            ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+            : nil
+
         return CourseInfoHeaderViewModel(
             title: course.title,
             coverImageURL: URL(string: course.coverURLString),
@@ -275,25 +319,35 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isEnrolled: course.enrolled,
             isFavorite: course.isFavorite,
             isArchived: course.isArchived,
-            isWishlisted: isWishlisted,
+            isWishlisted: course.isInWishlist,
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
+            unsupportedIAPPurchaseText: unsupportedIAPPurchaseText,
             buttonDescription: self.makeButtonDescription(
                 course: course,
-                promoCode: promoCode
+                coursePurchaseFlow: coursePurchaseFlow,
+                promoCode: promoCode,
+                mobileTier: mobileTier,
+                shouldCheckIAPPurchaseSupport: shouldCheckIAPPurchaseSupport,
+                isSupportedIAPPurchase: isSupportedIAPPurchase
             )
         )
     }
 
     private func makeButtonDescription(
         course: Course,
-        promoCode: PromoCode?
+        coursePurchaseFlow: CoursePurchaseFlowType,
+        promoCode: PromoCode?,
+        mobileTier: MobileTierPlainObject?,
+        shouldCheckIAPPurchaseSupport: Bool,
+        isSupportedIAPPurchase: Bool
     ) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
-        let isEnabled = isEnrolled ? course.canContinue : true
+        var isEnabled = isEnrolled ? course.canContinue : true
         let isNotPurchased = course.isPaid && !course.isPurchased
         var isPromo = false
+        var isWishlist = false
 
         let title: String = {
             if isEnrolled {
@@ -301,14 +355,34 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             }
 
             if isNotPurchased {
+                if shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase {
+                    isWishlist = true
+                    return course.isInWishlist
+                        ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
+                        : NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle", comment: "")
+                }
+
                 let displayPrice: String?
-                if let displayPriceIAP = course.displayPriceIAP {
-                    displayPrice = displayPriceIAP
-                } else if let promoCode = promoCode {
-                    displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
-                    isPromo = true
-                } else {
-                    displayPrice = course.displayPrice
+
+                switch coursePurchaseFlow {
+                case .web:
+                    if let displayPriceIAP = course.displayPriceIAP {
+                        displayPrice = displayPriceIAP
+                    } else if let promoCode = promoCode {
+                        displayPrice = FormatterHelper.price(promoCode.price, currencyCode: promoCode.currencyCode)
+                        isPromo = true
+                    } else {
+                        displayPrice = course.displayPrice
+                    }
+                case .iap:
+                    if let promoTierDisplayPrice = mobileTier?.promoTierDisplayPrice {
+                        displayPrice = promoTierDisplayPrice
+                        isPromo = true
+                    } else if let priceTierDisplayPrice = mobileTier?.priceTierDisplayPrice {
+                        displayPrice = priceTierDisplayPrice
+                    } else {
+                        displayPrice = course.displayPrice
+                    }
                 }
 
                 if let displayPrice = displayPrice {
@@ -320,18 +394,33 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }()
 
         let subtitle: String? = {
-            if isNotPurchased && promoCode != nil {
-                return course.displayPrice
+            if shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase {
+                return nil
             }
-            return nil
+
+            guard isNotPurchased && isPromo else {
+                return nil
+            }
+
+            switch coursePurchaseFlow {
+            case .web:
+                return course.displayPrice
+            case .iap:
+                return mobileTier?.priceTierDisplayPrice ?? course.displayPrice
+            }
         }()
+
+        if isWishlist {
+            isEnabled = !course.isInWishlist
+        }
 
         return CourseInfoHeaderViewModel.ButtonDescription(
             title: title,
             subtitle: subtitle,
             isCallToAction: !isEnrolled,
             isEnabled: isEnabled,
-            isPromo: isPromo
+            isPromo: isPromo,
+            isWishlist: isWishlist
         )
     }
 }

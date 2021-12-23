@@ -41,6 +41,8 @@ final class HomeViewController: BaseExploreViewController {
     private lazy var streakView = StreakActivityView()
     private lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
+    private var isFirstTimeViewDidAppear = true
+
     init(interactor: HomeInteractorProtocol, analytics: Analytics) {
         super.init(interactor: interactor, analytics: analytics)
 
@@ -64,19 +66,23 @@ final class HomeViewController: BaseExploreViewController {
         self.analytics.send(.homeScreenOpened)
         self.homeInteractor?.doStreakActivityLoad(request: .init())
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
+        if self.isFirstTimeViewDidAppear {
+            self.isFirstTimeViewDidAppear = false
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
 
-            if strongSelf.currentEnrolledCourseListState == .empty {
-                strongSelf.refreshStateForEnrolledCourses(state: .normal)
-            }
-            if strongSelf.currentReviewsAndWishlistState == .shown {
-                strongSelf.refreshReviewsAndWishlist(state: .shown)
-            }
+                if strongSelf.currentEnrolledCourseListState == .empty {
+                    strongSelf.refreshStateForEnrolledCourses(state: .normal)
+                }
+                if strongSelf.currentReviewsAndWishlistState == .shown {
+                    strongSelf.refreshReviewsAndWishlist(state: .shown)
+                }
 
-            strongSelf.refreshStateForVisitedCourses(state: .shown)
+                strongSelf.refreshStateForVisitedCourses(state: .shown)
+            }
         }
     }
 
@@ -384,6 +390,8 @@ final class HomeViewController: BaseExploreViewController {
                         type: submoduleType
                     )
                 )
+
+                containerViewController.refreshSubmodules()
             }
         case .hidden:
             if let submodule = self.getSubmodule(type: submoduleType) {

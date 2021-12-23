@@ -37,7 +37,9 @@ final class CourseInfoAssembly: Assembly {
             coursePurchasesPersistenceService: CoursePurchasesPersistenceService(),
             coursePurchasesNetworkService: CoursePurchasesNetworkService(coursePurchasesAPI: CoursePurchasesAPI()),
             userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
-            promoCodesNetworkService: PromoCodesNetworkService(promoCodesAPI: PromoCodesAPI())
+            promoCodesNetworkService: PromoCodesNetworkService(promoCodesAPI: PromoCodesAPI()),
+            wishlistRepository: WishlistRepository.default,
+            mobileTiersRepository: MobileTiersRepository.default
         )
         let presenter = CourseInfoPresenter(urlFactory: StepikURLFactory())
 
@@ -71,7 +73,6 @@ final class CourseInfoAssembly: Assembly {
             notificationsRegistrationService: notificationsRegistrationService,
             spotlightIndexingService: SpotlightIndexingService.shared,
             visitedCourseListPersistenceService: visitedCourseListPersistenceService.require(),
-            wishlistService: WishlistService.default,
             urlFactory: StepikURLFactory(),
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,
@@ -97,6 +98,6 @@ final class CourseInfoAssembly: Assembly {
         let adaptiveManager = AdaptiveStorageManager()
         return adaptiveManager.canOpenInAdaptiveMode(courseId: self.courseID)
             ? [.info, .reviews]
-            : [.info, .reviews, .syllabus]
+            : [.info, .reviews, .news, .syllabus]
     }
 }

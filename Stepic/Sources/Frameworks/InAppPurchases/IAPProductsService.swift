@@ -5,25 +5,27 @@ import StoreKit
 typealias IAPProductIdentifier = String
 
 protocol IAPProductsServiceProtocol: AnyObject {
+    @available(*, deprecated, message: "Legacy purchase flow")
     func makeProductIdentifier(priceTier: Int) -> IAPProductIdentifier
     func canFetchProduct(with identifier: IAPProductIdentifier) -> Bool
     func getProductIdentifiers() -> Set<IAPProductIdentifier>
-    func fetchProducts(productIdentifiers: Set<IAPProductIdentifier>) -> Promise<[SKProduct]>
+    func fetchProducts(with identifiers: Set<IAPProductIdentifier>) -> Promise<[SKProduct]>
 }
 
 extension IAPProductsServiceProtocol {
     func fetchProducts() -> Promise<[SKProduct]> {
-        self.fetchProducts(productIdentifiers: self.getProductIdentifiers())
+        self.fetchProducts(with: self.getProductIdentifiers())
     }
 
-    func fetchProduct(productIdentifier: IAPProductIdentifier) -> Promise<SKProduct?> {
-        self.fetchProducts(productIdentifiers: [productIdentifier]).map { $0.first }
+    func fetchProduct(with identifier: IAPProductIdentifier) -> Promise<SKProduct?> {
+        self.fetchProducts(with: [identifier]).map(\.first)
     }
 }
 
 // MARK: - IAPProductsService: IAPProductsServiceProtocol -
 
 final class IAPProductsService: IAPProductsServiceProtocol {
+    @available(*, deprecated, message: "Legacy purchase flow")
     private static let productIdentifierPrefix = "course_tier_"
 
     private struct ProductQuery {
@@ -46,6 +48,7 @@ final class IAPProductsService: IAPProductsServiceProtocol {
 
     // MARK: Protocol Conforming
 
+    @available(*, deprecated, message: "Legacy purchase flow")
     func makeProductIdentifier(priceTier: Int) -> IAPProductIdentifier {
         "\(Self.productIdentifierPrefix)\(priceTier)"
     }
@@ -72,13 +75,13 @@ final class IAPProductsService: IAPProductsServiceProtocol {
         }
     }
 
-    func fetchProducts(productIdentifiers: Set<IAPProductIdentifier>) -> Promise<[SKProduct]> {
-        if productIdentifiers.isEmpty {
+    func fetchProducts(with identifiers: Set<IAPProductIdentifier>) -> Promise<[SKProduct]> {
+        if identifiers.isEmpty {
             return Promise(error: Error.noProductIDsFound)
         }
 
         return Promise { seal in
-            self.fetchProducts(productIdentifiers: productIdentifiers) { result in
+            self.fetchProducts(productIdentifiers: identifiers) { result in
                 switch result {
                 case .success(let products):
                     seal.fulfill(products)

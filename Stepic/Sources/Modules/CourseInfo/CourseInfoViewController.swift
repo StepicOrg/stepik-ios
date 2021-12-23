@@ -11,6 +11,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayExamLesson(viewModel: CourseInfo.ExamLessonPresentation.ViewModel)
     func displayCourseSharing(viewModel: CourseInfo.CourseShareAction.ViewModel)
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
+    func displayPurchaseModalStartLearning(viewModel: CourseInfo.PurchaseModalStartLearningPresentation.ViewModel)
     func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel)
     func displayLessonModuleCatalogAction(viewModel: CourseInfo.LessonModuleCatalogPresentation.ViewModel)
     func displayLessonModuleWriteReviewAction(viewModel: CourseInfo.LessonModuleWriteReviewPresentation.ViewModel)
@@ -18,12 +19,14 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayCourseRevenue(viewModel: CourseInfo.CourseRevenuePresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
+    func displayPaidCoursePurchaseModal(viewModel: CourseInfo.PaidCoursePurchaseModalPresentation.ViewModel)
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
     func displayIAPReceiptValidationFailed(viewModel: CourseInfo.IAPReceiptValidationFailedPresentation.ViewModel)
     func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayUserCourseActionResult(viewModel: CourseInfo.UserCourseActionPresentation.ViewModel)
     func displayWishlistMainActionResult(viewModel: CourseInfo.CourseWishlistMainAction.ViewModel)
+    func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -41,7 +44,12 @@ final class CourseInfoViewController: UIViewController {
     private lazy var pageViewController = PageboyViewController()
 
     lazy var courseInfoView = self.view as? CourseInfoView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
+
+    private lazy var searchBarButton = UIBarButtonItem(
+        barButtonSystemItem: .search,
+        target: self,
+        action: #selector(self.searchButtonClicked)
+    )
 
     private lazy var wishlistBarButton = UIBarButtonItem(
         image: nil,
@@ -165,7 +173,7 @@ final class CourseInfoViewController: UIViewController {
                 let wishlistImageName = data.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
                 self.wishlistBarButton.image = UIImage(named: wishlistImageName)?.withRenderingMode(.alwaysTemplate)
             } else {
-                self.navigationItem.rightBarButtonItems = [self.moreBarButton]
+                self.navigationItem.rightBarButtonItems = [self.moreBarButton, self.searchBarButton]
             }
 
             let isFirstLoadedResult = self.storedViewModel == nil
@@ -232,8 +240,9 @@ final class CourseInfoViewController: UIViewController {
             return
         }
 
-        let moduleInput: CourseInfoSubmoduleProtocol?
         let controller: UIViewController
+        let moduleInput: CourseInfoSubmoduleProtocol?
+
         switch tab {
         case .info:
             let assembly = CourseInfoTabInfoAssembly()
@@ -249,6 +258,10 @@ final class CourseInfoViewController: UIViewController {
             let assembly = CourseInfoTabReviewsAssembly()
             controller = assembly.makeModule()
             moduleInput = assembly.moduleInput
+        case .news:
+            let assembly = CourseInfoTabNewsAssembly()
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
         }
 
         self.submodulesControllers[index] = controller
@@ -257,6 +270,11 @@ final class CourseInfoViewController: UIViewController {
         if let submodule = moduleInput {
             self.interactor.doSubmodulesRegistration(request: .init(submodules: [index: submodule]))
         }
+    }
+
+    @objc
+    private func searchButtonClicked() {
+        self.interactor.doCourseContentSearchPresentation(request: .init())
     }
 
     @objc
@@ -522,6 +540,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
         let assembly = LessonAssembly(
             initialContext: .unit(id: viewModel.unitID),
+            promoCodeName: viewModel.promoCodeName,
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
         self.push(module: assembly.makeModule())
@@ -583,26 +602,33 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         }
     }
 
-    func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel) {
-        guard let navigationController = self.navigationController else {
-            return
-        }
+    func displayCourseContentSearch(viewModel: CourseInfo.CourseContentSearchPresentation.ViewModel) {
+        let assembly = CourseSearchAssembly(courseID: viewModel.courseID)
+        self.push(module: assembly.makeModule())
+    }
 
-        LastStepRouter.continueLearning(
-            for: viewModel.course,
+    func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel) {
+        self.continueLearning(
+            course: viewModel.course,
             isAdaptive: viewModel.isAdaptive,
-            using: navigationController,
-            skipSyllabus: true,
-            source: .courseScreen,
-            viewSource: viewModel.courseViewSource,
-            lessonModuleOutput: self.interactor as? LessonOutputProtocol
+            courseViewSource: viewModel.courseViewSource
         )
+    }
+
+    func displayPurchaseModalStartLearning(viewModel: CourseInfo.PurchaseModalStartLearningPresentation.ViewModel) {
+        self.dismiss(animated: true) { [weak self] in
+            self?.continueLearning(
+                course: viewModel.course,
+                isAdaptive: viewModel.isAdaptive,
+                courseViewSource: viewModel.courseViewSource
+            )
+        }
     }
 
     func displayLessonModuleBuyCourseAction(viewModel: CourseInfo.LessonModuleBuyCourseActionPresentation.ViewModel) {
         if self.popLessonViewController() != nil {
             DispatchQueue.main.async {
-                self.interactor.doMainCourseAction(request: .init())
+                self.interactor.doMainCourseAction(request: .init(courseBuySource: .demoLessonDialog))
             }
         }
     }
@@ -633,10 +659,19 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayPreviewLesson(viewModel: CourseInfo.PreviewLessonPresentation.ViewModel) {
+        let initialContext: LessonDataFlow.Context = {
+            if let previewUnitID = viewModel.previewUnitID {
+                return .unit(id: previewUnitID)
+            }
+            return .lesson(id: viewModel.previewLessonID)
+        }()
+
         let assembly = LessonAssembly(
-            initialContext: .lesson(id: viewModel.previewLessonID),
+            initialContext: initialContext,
+            promoCodeName: viewModel.promoCodeName,
             moduleOutput: self.interactor as? LessonOutputProtocol
         )
+
         self.push(module: assembly.makeModule())
     }
 
@@ -671,6 +706,17 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         )
     }
 
+    func displayPaidCoursePurchaseModal(viewModel: CourseInfo.PaidCoursePurchaseModalPresentation.ViewModel) {
+        let assembly = CourseInfoPurchaseModalAssembly(
+            courseID: viewModel.courseID,
+            promoCodeName: viewModel.promoCodeName,
+            mobileTierID: viewModel.mobileTierID,
+            courseBuySource: viewModel.courseBuySource,
+            output: self.interactor as? CourseInfoPurchaseModalOutputProtocol
+        )
+        self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
+    }
+
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
@@ -694,7 +740,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                 title: NSLocalizedString("PlaceholderNoConnectionButton", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.interactor.doIAPReceiptValidation(request: .init())
+                    self?.interactor.doIAPReceiptValidationRetry(request: .init())
                 }
             )
         )
@@ -708,6 +754,26 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     // MARK: Private Helpers
+
+    private func continueLearning(
+        course: Course,
+        isAdaptive: Bool,
+        courseViewSource: AnalyticsEvent.CourseViewSource
+    ) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+
+        LastStepRouter.continueLearning(
+            for: course,
+            isAdaptive: isAdaptive,
+            using: navigationController,
+            skipSyllabus: true,
+            source: .courseScreen,
+            viewSource: courseViewSource,
+            lessonModuleOutput: self.interactor as? LessonOutputProtocol
+        )
+    }
 
     private func popLessonViewController() -> UIViewController? {
         guard let navigationController = self.navigationController,

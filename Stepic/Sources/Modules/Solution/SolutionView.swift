@@ -6,6 +6,13 @@ protocol SolutionViewDelegate: AnyObject {
     func solutionViewDidClickAction(_ view: SolutionView)
 }
 
+protocol SolutionViewProtocol: AnyObject {
+    var delegate: SolutionViewDelegate? { get set }
+
+    func setOnlyQuizVisible()
+    func setContentInsets(_ contentInsets: UIEdgeInsets)
+}
+
 extension SolutionView {
     struct Appearance {
         let insets = LayoutInsets(left: 16, right: 16)
@@ -26,7 +33,7 @@ extension SolutionView {
     }
 }
 
-final class SolutionView: UIView {
+final class SolutionView: UIView, SolutionViewProtocol {
     let appearance: Appearance
     weak var delegate: SolutionViewDelegate?
 
@@ -93,6 +100,17 @@ final class SolutionView: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        if self.loadingIndicatorView.isAnimating {
+            return CGSize(
+                width: UIView.noIntrinsicMetric,
+                height: self.loadingIndicatorView.intrinsicContentSize.height
+            )
+        }
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: self.scrollableStackView.contentSize.height)
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -108,6 +126,11 @@ final class SolutionView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
     }
 
     // MARK: Public API
@@ -139,6 +162,7 @@ final class SolutionView: UIView {
     func endLoading() {
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.appearanceAnimationDelay) {
             self.loadingIndicatorView.stopAnimating()
+            self.invalidateIntrinsicContentSize()
 
             UIView.animate(
                 withDuration: Animation.appearanceAnimationDuration,
@@ -147,6 +171,14 @@ final class SolutionView: UIView {
                 }
             )
         }
+    }
+
+    func setOnlyQuizVisible() {
+        [self.feedbackContainerView, self.actionContainerView].forEach { $0.isHidden = true }
+    }
+
+    func setContentInsets(_ contentInsets: UIEdgeInsets) {
+        self.contentInsets = contentInsets
     }
 
     // MARK: Private API

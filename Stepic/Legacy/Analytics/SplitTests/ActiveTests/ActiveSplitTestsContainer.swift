@@ -1,7 +1,13 @@
 import Foundation
 
 final class ActiveSplitTestsContainer {
-    private static let splitTestingService = SplitTestingService(
+    static var activeSplitTests: [SplitTestPlainObject] {
+        [
+            SplitTestPlainObject(DiscountAppearanceSplitTest.self)
+        ]
+    }
+
+    private static let splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )

@@ -12,4 +12,13 @@ enum ProcessedContent: Equatable {
             return stringValue
         }
     }
+
+    var isWebViewSupportNeeded: Bool {
+        switch self {
+        case .text:
+            return false
+        case .html:
+            return true
+        }
+    }
 }

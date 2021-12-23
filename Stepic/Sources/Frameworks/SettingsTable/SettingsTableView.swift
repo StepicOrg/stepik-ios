@@ -154,6 +154,17 @@ final class SettingsTableView: UIView {
         cell.elementView.placeholder = options.placeholderText
         cell.elementView.text = options.valueText
         cell.elementView.maxTextLength = options.maxLength
+
+        if let autocorrectionType = options.autocorrectionType {
+            cell.elementView.autocorrectionType = autocorrectionType
+        }
+        if let autocapitalizationType = options.autocapitalizationType {
+            cell.elementView.autocapitalizationType = autocapitalizationType
+        }
+        if let keyboardType = options.keyboardType {
+            cell.elementView.keyboardType = keyboardType
+        }
+
         cell.delegate = self.delegate
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.onHeightUpdate = { [weak self] in

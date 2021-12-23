@@ -57,7 +57,10 @@ class CourseListAssembly: Assembly {
                 courseReviewSummariesAPI: CourseReviewSummariesAPI()
             ),
             courseListsPersistenceService: CourseListsPersistenceService(),
-            iapService: IAPService.shared
+            wishlistEntriesPersistenceService: WishlistEntriesPersistenceService(),
+            mobileTiersRepository: MobileTiersRepository.default,
+            iapService: IAPService.shared,
+            remoteConfig: RemoteConfig.shared
         )
 
         let dataBackUpdateService = DataBackUpdateService(
@@ -78,7 +81,6 @@ class CourseListAssembly: Assembly {
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
             personalDeadlinesService: PersonalDeadlinesService(),
-            wishlistService: WishlistService.default,
             courseListDataBackUpdateService: courseListDataBackUpdateService,
             analytics: StepikAnalytics.shared,
             courseViewSource: self.courseViewSource,

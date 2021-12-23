@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsStorageManager: AnalyticsStorageManagerProtocol = AnalyticsStorageManager.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
 
+    @available(iOS 12.0, *)
+    private lazy var siriShortcutsContinueUserActivityService: SiriShortcutsContinueUserActivityServiceProtocol = SiriShortcutsContinueUserActivityService()
+
     @available(iOS 14.0, *)
     private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
     @available(iOS 14.0, *)
@@ -70,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setHapticsEnabled(true)
 
-        ConnectionHelper.shared.instantiate()
-
         if !AudioManager.shared.initAudioSession() {
             print("Could not initialize audio session")
         }
@@ -105,10 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if !DefaultsContainer.launch.didLaunch {
             DefaultsContainer.launch.initStartVersion()
-            ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
             self.analytics.send(.applicationDidLaunchFirstTime)
         }
+        ActiveSplitTestsContainer.setActiveTestsGroups()
 
         self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
@@ -269,6 +270,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        if #available(iOS 12.0, *),
+           self.siriShortcutsContinueUserActivityService.continueUserActivity(userActivity) {
+            return true
+        }
         if self.spotlightContinueUserActivityService.continueUserActivity(userActivity) {
             return true
         }

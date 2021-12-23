@@ -16,8 +16,6 @@ final class NotificationsMarkAsReadButton: StepikButton {
         case error
     }
 
-    var status: Status = .normal
-
     override var isEnabled: Bool {
         didSet {
             self.alpha = self.isEnabled ? 1.0 : 0.5
@@ -38,7 +36,6 @@ final class NotificationsMarkAsReadButton: StepikButton {
         case .error:
             self.activityIndicator.stopAnimating()
             self.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
-            self.status = .normal
         }
     }
 

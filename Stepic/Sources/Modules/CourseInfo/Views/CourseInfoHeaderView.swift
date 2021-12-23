@@ -3,9 +3,10 @@ import UIKit
 
 extension CourseInfoHeaderView {
     struct Appearance {
-        let actionButtondTitleColor = UIColor.black.withAlphaComponent(0.87)
+        let actionButtonTitleColor = UIColor.black.withAlphaComponent(0.87)
         let actionButtonHeight: CGFloat = 42.0
         let actionButtonWidthRatio: CGFloat = DeviceInfo.current.isSmallDiagonal ? 0.75 : 0.55
+        let actionButtonWishlistWidthRatio: CGFloat = DeviceInfo.current.isSmallDiagonal ? 0.9 : 0.75
 
         let actionButtonsStackViewInsets = UIEdgeInsets(top: 10, left: 30, bottom: 15, right: 30)
         let actionButtonsStackViewSpacing: CGFloat = 15.0
@@ -17,7 +18,9 @@ extension CourseInfoHeaderView {
         let titleLabelColor = UIColor.white
 
         let titleStackViewSpacing: CGFloat = 10
-        let titleStackViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 16, right: 30)
+        let titleStackViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 18, right: 30)
+
+        let unsupportedIAPPurchaseViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 16, right: 30)
 
         let marksStackViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 18, right: 0)
         let marksStackViewSpacing: CGFloat = 10.0
@@ -37,7 +40,7 @@ extension CourseInfoHeaderView {
 final class CourseInfoHeaderView: UIView {
     let appearance: Appearance
 
-    private let splitTestingService = SplitTestingService(
+    private let splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )
@@ -55,8 +58,8 @@ final class CourseInfoHeaderView: UIView {
 
     private lazy var actionButton: ContinueActionButton = {
         var appearance = ContinueActionButton.Appearance()
-        appearance.defaultTitleColor = self.appearance.actionButtondTitleColor
-        let button = ContinueActionButton(mode: .callToAction, appearance: appearance)
+        appearance.defaultTitleColor = self.appearance.actionButtonTitleColor
+        let button = ContinueActionButton(mode: .callToActionGreen, appearance: appearance)
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         return button
     }()
@@ -142,6 +145,14 @@ final class CourseInfoHeaderView: UIView {
 
     private lazy var statsView = CourseInfoStatsView()
 
+    private lazy var unsupportedIAPPurchaseView = QuizFeedbackView()
+
+    private var actionButtonWidthConstraint: Constraint?
+    private var actionButtonWishlistWidthConstraint: Constraint?
+
+    private var titleStackViewBottomToSuperviewConstraint: Constraint?
+    private var titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint: Constraint?
+
     var onActionButtonClick: (() -> Void)?
     var onTryForFreeButtonClick: (() -> Void)?
 
@@ -158,12 +169,15 @@ final class CourseInfoHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // All elements have fixed height except verified view
-    func calculateHeight(hasVerifiedMark: Bool) -> CGFloat {
+    // All elements have fixed height except verified & unsupportedIAPPurchase views
+    func calculateHeight(hasVerifiedMark: Bool, hasUnsupportedIAPPurchaseText: Bool) -> CGFloat {
         let actionButtonsStackViewIntrinsicContentSize = self.actionButtonsStackView
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         let verifiedMarkHeight = self.verifiedSignView.appearance.imageViewSize.height
             + self.appearance.marksStackViewSpacing
+        let unsupportedIAPPurchaseViewHeight = self.unsupportedIAPPurchaseView.intrinsicContentSize.height
+            + self.appearance.unsupportedIAPPurchaseViewInsets.top
+            + self.appearance.unsupportedIAPPurchaseViewInsets.bottom
         return self.appearance.titleStackViewInsets.bottom
             + self.appearance.coverImageViewSize.height
             + self.appearance.marksStackViewInsets.bottom
@@ -172,6 +186,7 @@ final class CourseInfoHeaderView: UIView {
             + actionButtonsStackViewIntrinsicContentSize.height
             + self.appearance.actionButtonsStackViewInsets.top
             + (hasVerifiedMark ? verifiedMarkHeight : 0)
+            + (hasUnsupportedIAPPurchaseText ? unsupportedIAPPurchaseViewHeight : 0)
     }
 
     func setLoading(_ isLoading: Bool) {
@@ -207,12 +222,23 @@ final class CourseInfoHeaderView: UIView {
         let shouldShowPromoPriceButton = self.shouldParticipateInPromoPriceSplitTest
             && viewModel.buttonDescription.isCallToAction && viewModel.buttonDescription.isPromo
 
-        self.actionButton.mode = viewModel.buttonDescription.isCallToAction
-            ? .callToAction
-            : .default
+        self.actionButton.mode = {
+            if viewModel.buttonDescription.isWishlist {
+                return .callToActionViolet
+            }
+            return viewModel.buttonDescription.isCallToAction ? .callToActionGreen : .default
+        }()
         self.actionButton.setTitle(viewModel.buttonDescription.title, for: .normal)
         self.actionButton.isEnabled = viewModel.buttonDescription.isEnabled
         self.actionButton.isHidden = shouldShowPromoPriceButton
+
+        if viewModel.buttonDescription.isWishlist {
+            self.actionButtonWidthConstraint?.deactivate()
+            self.actionButtonWishlistWidthConstraint?.activate()
+        } else {
+            self.actionButtonWishlistWidthConstraint?.deactivate()
+            self.actionButtonWidthConstraint?.activate()
+        }
 
         if shouldShowPromoPriceButton {
             self.promoPriceButton.configure(
@@ -220,10 +246,27 @@ final class CourseInfoHeaderView: UIView {
                 fullPriceString: viewModel.buttonDescription.subtitle ?? ""
             )
             self.promoPriceButton.isEnabled = viewModel.buttonDescription.isEnabled
-            self.promoPriceButton.isHidden = !shouldShowPromoPriceButton
+            self.promoPriceButton.isHidden = false
+        } else {
+            self.promoPriceButton.isHidden = true
         }
 
         self.tryForFreeButton.isHidden = !viewModel.isTryForFreeAvailable
+
+        if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
+            self.unsupportedIAPPurchaseView.isHidden = false
+            self.titleStackViewBottomToSuperviewConstraint?.deactivate()
+            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint?.activate()
+
+            self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
+            self.unsupportedIAPPurchaseView.setIconImage(
+                UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
+            )
+        } else {
+            self.unsupportedIAPPurchaseView.isHidden = true
+            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint?.deactivate()
+            self.titleStackViewBottomToSuperviewConstraint?.activate()
+        }
     }
 
     // MARK: Private methods
@@ -261,6 +304,7 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.backgroundView)
         self.addSubview(self.actionButtonsStackView)
         self.addSubview(self.titleStackView)
+        self.addSubview(self.unsupportedIAPPurchaseView)
         self.addSubview(self.marksStackView)
     }
 
@@ -275,7 +319,23 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
             make.centerX.equalToSuperview()
             make.leading.greaterThanOrEqualToSuperview().offset(self.appearance.titleStackViewInsets.left)
             make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.titleStackViewInsets.right)
-            make.bottom.equalToSuperview().offset(-self.appearance.titleStackViewInsets.bottom)
+
+            self.titleStackViewBottomToSuperviewConstraint = make.bottom
+                .equalToSuperview()
+                .offset(-self.appearance.titleStackViewInsets.bottom)
+                .constraint
+
+            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint = make.bottom
+                .equalTo(self.unsupportedIAPPurchaseView.snp.top)
+                .offset(-self.appearance.titleStackViewInsets.bottom)
+                .constraint
+            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint?.deactivate()
+        }
+
+        self.unsupportedIAPPurchaseView.translatesAutoresizingMaskIntoConstraints = false
+        self.unsupportedIAPPurchaseView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.leading.bottom.trailing.equalToSuperview().inset(self.appearance.unsupportedIAPPurchaseViewInsets)
         }
 
         self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -306,7 +366,17 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.actionButton.translatesAutoresizingMaskIntoConstraints = false
         self.actionButton.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.actionButtonHeight)
-            make.width.equalTo(self.snp.width).multipliedBy(self.appearance.actionButtonWidthRatio)
+
+            self.actionButtonWidthConstraint = make.width
+                .equalTo(self.snp.width)
+                .multipliedBy(self.appearance.actionButtonWidthRatio)
+                .constraint
+
+            self.actionButtonWishlistWidthConstraint = make.width
+                .equalTo(self.snp.width)
+                .multipliedBy(self.appearance.actionButtonWishlistWidthRatio)
+                .constraint
+            self.actionButtonWishlistWidthConstraint?.deactivate()
         }
 
         if self.shouldParticipateInPromoPriceSplitTest {

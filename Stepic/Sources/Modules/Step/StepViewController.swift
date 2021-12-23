@@ -37,6 +37,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: StepInteractorProtocol
+    private let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     private var state: StepDataFlow.ViewControllerState {
         didSet {
@@ -57,9 +58,14 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
     private var arQuickLookPreviewDataSource: StepARQuickLookPreviewDataSource?
 
-    init(interactor: StepInteractorProtocol) {
+    init(
+        interactor: StepInteractorProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
+        initialState: StepDataFlow.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
-        self.state = .loading
+        self.networkReachabilityService = networkReachabilityService
+        self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -203,11 +209,23 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
                 return nil
             }
 
-            let assembly = BaseQuizAssembly(
-                step: stepViewModel.step,
-                hasNextStep: self.canNavigateToNextStep,
-                output: self
-            )
+            let assembly: Assembly
+
+            if stepViewModel.hasReview, let instructionType = stepViewModel.instructionType {
+                assembly = StepQuizReviewAssembly(
+                    step: stepViewModel.step,
+                    instructionType: instructionType,
+                    isTeacher: stepViewModel.isTeacher,
+                    hasNextStep: self.canNavigateToNextStep,
+                    output: nil
+                )
+            } else {
+                assembly = BaseQuizAssembly(
+                    step: stepViewModel.step,
+                    hasNextStep: self.canNavigateToNextStep,
+                    output: self
+                )
+            }
 
             return assembly.makeModule()
         }()
@@ -497,8 +515,7 @@ extension StepViewController: StepViewDelegate {
             return
         }
 
-        let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
-            || ConnectionHelper.shared.reachability.isReachableViaWWAN()
+        let isVideoPlayingReachable = self.networkReachabilityService.isReachable
         let isVideoCached = video.state == .cached
 
         if !isVideoCached && !isVideoPlayingReachable {
@@ -523,7 +540,7 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepDoneRequest(request: .init())
     }
 
-    func handleSubmissionEvaluated() {
+    func handleSubmissionEvaluated(submission: Submission) {
         self.interactor.doSolutionsButtonUpdate(request: .init())
     }
 
@@ -531,6 +548,10 @@ extension StepViewController: BaseQuizOutputProtocol {
         self.interactor.doStepNavigationRequest(request: .init(direction: .next))
     }
 }
+
+// MARK: - StepViewController: StepQuizReviewOutputProtocol -
+
+extension StepViewController: StepQuizReviewOutputProtocol {}
 
 // MARK: - StepViewController: StepikVideoPlayerViewControllerDelegate -
 

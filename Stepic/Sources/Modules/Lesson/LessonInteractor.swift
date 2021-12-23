@@ -34,11 +34,14 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     private var lastLoadState: (context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep?)
 
+    private let promoCodeName: String?
+
     private var didLoadFromCache = false
 
     init(
         initialContext: LessonDataFlow.Context,
         startStep: LessonDataFlow.StartStep?,
+        promoCodeName: String?,
         presenter: LessonPresenterProtocol,
         provider: LessonProviderProtocol,
         unitNavigationService: UnitNavigationServiceProtocol,
@@ -51,6 +54,7 @@ final class LessonInteractor: LessonInteractorProtocol {
         self.persistenceQueuesService = persistenceQueuesService
         self.dataBackUpdateService = dataBackUpdateService
         self.lastLoadState = (initialContext, startStep)
+        self.promoCodeName = promoCodeName
     }
 
     // MARK: Public API
@@ -140,6 +144,8 @@ final class LessonInteractor: LessonInteractorProtocol {
 
                     seal.fulfill(())
                 }.catch { _ in
+                    self.didLoadFromCache = true
+
                     self.loadData(context: context, startStep: startStep, dataSourceType: .remote).done {
                         seal.fulfill(())
                     }.catch { error in
@@ -239,8 +245,10 @@ final class LessonInteractor: LessonInteractorProtocol {
                 if self.currentData != data {
                     self.presenter.presentLesson(response: .init(state: .success(data)))
                 }
-            } else {
+            } else if lesson.stepsArray.count == steps.count && (0..<steps.count ~= startStepIndex) {
                 self.presenter.presentLesson(response: .init(state: .success(data)))
+            } else {
+                throw Error.cacheMiss
             }
 
             self.currentData = data
@@ -314,6 +322,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case cacheMiss
     }
 }
 
@@ -509,7 +518,7 @@ extension LessonInteractor: StepOutputProtocol {
         if targetSection.testSectionAction != nil {
             return .value(false)
         }
-        if targetSection.isReachable && !targetSection.isExam {
+        if targetSection.isReachable() && !targetSection.isExam {
             return .value(false)
         }
 
@@ -636,7 +645,7 @@ extension LessonInteractor: StepOutputProtocol {
             }.done { targetLesson in
                 if !targetLesson.canLearnLesson {
                     self.presenter.presentUnitNavigationFinishedDemoAccessState(
-                        response: .init(section: currentSection)
+                        response: .init(section: currentSection, promoCodeName: self.promoCodeName)
                     )
                     seal(true)
                 } else {

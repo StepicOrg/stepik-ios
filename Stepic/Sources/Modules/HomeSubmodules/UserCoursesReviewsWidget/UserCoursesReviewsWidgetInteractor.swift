@@ -56,7 +56,11 @@ final class UserCoursesReviewsWidgetInteractor: UserCoursesReviewsWidgetInteract
                     ? self.provider.fetchLeavedCourseReviewsFromRemote()
                     : self.provider.fetchLeavedCourseReviewsFromCache()
             }.then { leavedCourseReviews -> Promise<([Course], [CourseReview])> in
-                self.provider.fetchPossibleCoursesFromCache().map { ($0, leavedCourseReviews) }
+                (
+                    self.didLoadFromCache
+                        ? self.provider.fetchPossibleCoursesFromRemote()
+                        : self.provider.fetchPossibleCoursesFromCache()
+                ).map { ($0, leavedCourseReviews) }
             }.done { possibleCourses, leavedCourseReviews in
                 let filteredPossibleCourses = possibleCourses.filter { course in
                     !leavedCourseReviews.contains(where: { $0.courseID == course.id })

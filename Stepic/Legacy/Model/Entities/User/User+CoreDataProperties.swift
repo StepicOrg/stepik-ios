@@ -33,6 +33,9 @@ extension User {
     @NSManaged var managedBuyerCourseBenefits: NSSet?
     @NSManaged var managedCourseBenefitByMonths: NSSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedSearchResults: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
+    @NSManaged var managedWishlistEntries: NSOrderedSet?
 
     @NSManaged var managedProfileEntity: Profile?
     @NSManaged var managedUserCourse: UserCourse?
@@ -135,6 +138,11 @@ extension User {
         get {
             managedLastName ?? "No last name"
         }
+    }
+
+    var shortName: String {
+        let firstName = self.firstName.trimmed()
+        return firstName.isEmpty ? "User" : firstName
     }
 
     var fullName: String {
@@ -325,6 +333,33 @@ extension User {
         }
         set {
             self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var searchResults: [SearchResult] {
+        get {
+            self.managedSearchResults?.allObjects as! [SearchResult]
+        }
+        set {
+            self.managedSearchResults = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
+        }
+    }
+
+    var wishlistEntries: [WishlistEntryEntity] {
+        get {
+            self.managedWishlistEntries?.array as? [WishlistEntryEntity] ?? []
+        }
+        set {
+            self.managedWishlistEntries = NSOrderedSet(array: newValue)
         }
     }
 

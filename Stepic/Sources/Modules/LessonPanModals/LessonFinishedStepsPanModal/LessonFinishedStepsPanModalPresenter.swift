@@ -96,8 +96,8 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
                 return didWriteReview ? .successWithoutCertWithReview : .successWithoutCertWithoutReview
             }
         } else {
-            let didReceiveCertificate = course.anyCertificateTreshold != nil
-                ? (progressScore >= Float(course.anyCertificateTreshold.require()))
+            let didReceiveCertificate = course.anyCertificateThreshold != nil
+                ? (progressScore >= Float(course.anyCertificateThreshold.require()))
                 : false
 
             if didReceiveCertificate {
@@ -261,7 +261,7 @@ final class LessonFinishedStepsPanModalPresenter: LessonFinishedStepsPanModalPre
              .successWithCertWithoutReview,
              .successWithCertWithReview:
             let progressScore = course.progress?.score ?? 0
-            let anyCertificateThreshold = Float(course.anyCertificateTreshold ?? 0)
+            let anyCertificateThreshold = Float(course.anyCertificateThreshold ?? 0)
 
             let needScore = anyCertificateThreshold - progressScore
 

@@ -10,8 +10,12 @@ extension ReviewsAndWishlistContainerViewController {
 }
 
 final class ReviewsAndWishlistContainerViewController: UIViewController {
+    private static let refreshDebounceInterval: TimeInterval = 1
+
     private let userCoursesReviewsWidgetAssembly: UserCoursesReviewsWidgetAssembly
     private let wishlistWidgetAssembly: WishlistWidgetAssembly
+
+    private let refreshDebouncer = Debouncer(delay: ReviewsAndWishlistContainerViewController.refreshDebounceInterval)
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -40,8 +44,14 @@ final class ReviewsAndWishlistContainerViewController: UIViewController {
     // MARK: Public API
 
     func refreshSubmodules() {
-        self.userCoursesReviewsWidgetAssembly.moduleInput?.refreshReviews()
-        self.wishlistWidgetAssembly.moduleInput?.refreshWishlist()
+        self.refreshDebouncer.action = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.userCoursesReviewsWidgetAssembly.moduleInput?.refreshReviews()
+            strongSelf.wishlistWidgetAssembly.moduleInput?.refreshWishlist()
+        }
     }
 
     // MARK: Private API

@@ -1,3 +1,5 @@
+import Intents
+import IntentsUI
 import SnapKit
 import UIKit
 
@@ -18,6 +20,14 @@ extension ContinueLastStepView {
 
         let rightDetailImageSize = CGSize(width: 20, height: 30)
     }
+}
+
+@available(iOS 12.0, *)
+struct SiriButtonContentConfiguration {
+    var shortcut: INShortcut?
+    weak var delegate: INUIAddVoiceShortcutButtonDelegate?
+
+    var isEmpty: Bool { self.shortcut == nil && self.delegate == nil }
 }
 
 final class ContinueLastStepView: UIControl {

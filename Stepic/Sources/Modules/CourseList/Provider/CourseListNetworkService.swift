@@ -216,13 +216,13 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
 
     func fetch(page: Int, filterQuery: CourseListFilterQuery?) -> Promise<([Course], Meta)> {
         Promise { seal in
-            self.searchResultsAPI.searchCourse(
+            self.searchResultsAPI.searchCourses(
                 query: self.type.query,
                 language: self.type.language,
                 page: page,
                 filterQuery: self.type.filterQuery
             ).then { result, meta -> Promise<([Course], [Course.IdType], Meta)> in
-                let ids = result.compactMap { $0.courseId }
+                let ids = result.compactMap(\.courseID)
                 return self.coursesAPI
                     .retrieve(ids: ids)
                     .map { ($0, ids, meta) }
@@ -392,18 +392,18 @@ class BaseCacheCoursesIDsSourceCourseListNetworkService: BaseCourseListNetworkSe
 }
 
 final class WishlistCourseListNetworkService: BaseCacheCoursesIDsSourceCourseListNetworkService {
-    private let wishlistStorageManager: WishlistStorageManagerProtocol
+    private let wishlistEntriesPersistenceService: WishlistEntriesPersistenceServiceProtocol
 
     init(
         coursesAPI: CoursesAPI,
-        wishlistStorageManager: WishlistStorageManagerProtocol
+        wishlistEntriesPersistenceService: WishlistEntriesPersistenceServiceProtocol
     ) {
-        self.wishlistStorageManager = wishlistStorageManager
+        self.wishlistEntriesPersistenceService = wishlistEntriesPersistenceService
         super.init(coursesAPI: coursesAPI)
     }
 
     override func getCoursesIDs() -> Promise<[Course.IdType]> {
-        .value(self.wishlistStorageManager.coursesIDs)
+        self.wishlistEntriesPersistenceService.fetchAll().mapValues(\.courseID)
     }
 }
 

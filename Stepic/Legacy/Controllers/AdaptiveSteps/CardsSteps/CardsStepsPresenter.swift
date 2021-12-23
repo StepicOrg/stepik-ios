@@ -66,7 +66,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     private let viewsAPI: ViewsAPI
     private let ratingManager: AdaptiveRatingManager
     private let statsManager: AdaptiveStatsManager
-    private let storageManager: AdaptiveStorageManager
+    private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let adaptiveRatingsNetworkService: AdaptiveRatingsNetworkServiceProtocol
     private let adaptiveRatingsRestoreNetworkService: AdaptiveRatingsRestoreNetworkServiceProtocol
     private let lastViewedUpdater: LocalProgressLastViewedUpdater
@@ -124,7 +124,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         adaptiveRatingsRestoreNetworkService: AdaptiveRatingsRestoreNetworkServiceProtocol,
         ratingManager: AdaptiveRatingManager,
         statsManager: AdaptiveStatsManager,
-        storageManager: AdaptiveStorageManager,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         lastViewedUpdater: LocalProgressLastViewedUpdater,
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
@@ -142,7 +142,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.adaptiveRatingsRestoreNetworkService = adaptiveRatingsRestoreNetworkService
         self.ratingManager = ratingManager
         self.statsManager = statsManager
-        self.storageManager = storageManager
+        self.adaptiveStorageManager = adaptiveStorageManager
         self.lastViewedUpdater = lastViewedUpdater
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
@@ -210,7 +210,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func refreshTopCard() {
-        if !storageManager.isAdaptiveOnboardingPassed {
+        if !adaptiveStorageManager.isAdaptiveOnboardingPassed {
             let stepIndex = lastOnboardingStep ?? onboardingFirstStepIndex
 
             if stepIndex <= onboardingLastStepIndex {
@@ -219,7 +219,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 return
             } else {
                 self.analytics.send(.adaptiveOnboardingFinished)
-                storageManager.isAdaptiveOnboardingPassed = true
+                adaptiveStorageManager.isAdaptiveOnboardingPassed = true
             }
         }
 
@@ -527,7 +527,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
     func onControlButtonClick() {
         // Onboarding -> just skip card
-        if !storageManager.isAdaptiveOnboardingPassed {
+        if !adaptiveStorageManager.isAdaptiveOnboardingPassed {
             view?.swipeCardUp()
             return
         }
@@ -588,14 +588,7 @@ enum CardsStepsError: Error {
     case noStepsInLesson
     case recommendationsNotLoaded
     case stepNotLoaded
-    case unknown
     case reactionNotSent
     case viewNotSent
-    case registrationFailed
-    case notLoggedIn
-    case noProfile
-    case notUnsubscribed
-    case noCourse
-    case notEnrolled
     case coursePassed
 }

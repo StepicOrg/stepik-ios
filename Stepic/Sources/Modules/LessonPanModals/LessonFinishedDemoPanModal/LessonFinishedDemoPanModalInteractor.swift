@@ -9,19 +9,36 @@ protocol LessonFinishedDemoPanModalInteractorProtocol {
 final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInteractorProtocol {
     weak var moduleOutput: LessonFinishedDemoPanModalOutputProtocol?
 
+    private let sectionID: Section.IdType
+    private let promoCodeName: String?
+
     private let presenter: LessonFinishedDemoPanModalPresenterProtocol
     private let provider: LessonFinishedDemoPanModalProviderProtocol
 
-    private let sectionID: Section.IdType
+    private let iapService: IAPServiceProtocol
+    private let remoteConfig: RemoteConfig
+
+    private let analytics: Analytics
+
+    private var currentCourse: Course?
+    private var currentMobileTier: MobileTier?
 
     init(
         presenter: LessonFinishedDemoPanModalPresenterProtocol,
         provider: LessonFinishedDemoPanModalProviderProtocol,
-        sectionID: Section.IdType
+        sectionID: Section.IdType,
+        promoCodeName: String?,
+        iapService: IAPServiceProtocol,
+        remoteConfig: RemoteConfig,
+        analytics: Analytics
     ) {
         self.presenter = presenter
         self.provider = provider
         self.sectionID = sectionID
+        self.promoCodeName = promoCodeName
+        self.iapService = iapService
+        self.remoteConfig = remoteConfig
+        self.analytics = analytics
     }
 
     func doModalLoad(request: LessonFinishedDemoPanModal.ModalLoad.Request) {
@@ -37,14 +54,26 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
                         .compactMap { $0 }
                         .then { course -> Promise<(Section, Course)> in
                             section.course = course
-                            CoreDataHelper.shared.save()
-
                             return .value((section, course))
                         }
                 }
             }
+            .then { section, course -> Guarantee<(Section, Course)> in
+                self.fetchDisplayPrice(course: course).map { (section, $0) }
+            }
             .done { section, course in
-                self.presenter.presentModal(response: .init(course: course, section: section))
+                CoreDataHelper.shared.save()
+
+                self.currentCourse = course
+
+                self.presenter.presentModal(
+                    response: .init(
+                        course: course,
+                        section: section,
+                        coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
+                        mobileTier: self.currentMobileTier
+                    )
+                )
             }
             .catch { error in
                 print("LessonFinishedDemoPanModalInteractor :: failed load data with error = \(error)")
@@ -52,6 +81,49 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
     }
 
     func doModalMainAction(request: LessonFinishedDemoPanModal.MainModalAction.Request) {
+        if let currentCourse = self.currentCourse {
+            self.analytics.send(
+                .courseBuyPressed(
+                    id: currentCourse.id,
+                    source: .demoLessonDialog,
+                    isWishlisted: currentCourse.isInWishlist,
+                    promoCode: self.promoCodeName
+                )
+            )
+        }
+
         self.moduleOutput?.handleLessonFinishedDemoPanModalMainAction()
+    }
+
+    // MARK: Private API
+
+    private func fetchDisplayPrice(course: Course) -> Guarantee<Course> {
+        switch self.remoteConfig.coursePurchaseFlow {
+        case .web:
+            if course.isPaid && self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
+                return self.iapService.fetchLocalizedPrice(for: course).then { localizedPrice in
+                    course.displayPriceIAP = localizedPrice
+                    return .value(course)
+                }
+            }
+        case .iap:
+            return Guarantee { seal in
+                self.provider
+                    .calculateMobileTier(courseID: course.id, promoCodeName: self.promoCodeName)
+                    .compactMap { $0 }
+                    .compactMap { mobileTier in
+                        course.mobileTiers.first(where: { $0.id == mobileTier.id })
+                    }
+                    .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
+                    .done { mobileTier in
+                        self.currentMobileTier = mobileTier
+                        seal(course)
+                    }
+                    .catch { _ in
+                        seal(course)
+                    }
+            }
+        }
+        return .value(course)
     }
 }

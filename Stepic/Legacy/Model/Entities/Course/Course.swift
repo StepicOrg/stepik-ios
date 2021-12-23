@@ -71,14 +71,8 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.purchases.contains(where: { $0.isActive })
     }
 
-    var anyCertificateTreshold: Int? {
+    var anyCertificateThreshold: Int? {
         self.certificateRegularThreshold ?? self.certificateDistinctionThreshold
-    }
-
-    var hasCertificate: Bool {
-        let hasText = !self.certificate.isEmpty
-        let isIssued = self.isCertificatesAutoIssued && self.isCertificateIssued
-        return self.anyCertificateTreshold != nil && (hasText || isIssued)
     }
 
     var defaultPromoCode: PromoCode? {
@@ -116,6 +110,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
         self.isFavorite = json[JSONKey.isFavorite.rawValue].boolValue
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
+        self.isInWishlist = json[JSONKey.isInWishlist.rawValue].boolValue
         self.isProctored = json[JSONKey.isProctored.rawValue].boolValue
         self.readiness = json[JSONKey.readiness.rawValue].float
 
@@ -126,15 +121,16 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.audience = json[JSONKey.targetAudience.rawValue].stringValue
         self.requirements = json[JSONKey.requirements.rawValue].stringValue
         self.slug = json[JSONKey.slug.rawValue].string
-        self.progressId = json[JSONKey.progress.rawValue].string
-        self.lastStepId = json[JSONKey.lastStep.rawValue].string
+        self.progressID = json[JSONKey.progress.rawValue].string
+        self.lastStepID = json[JSONKey.lastStep.rawValue].string
         self.scheduleType = json[JSONKey.scheduleType.rawValue].string
         self.learnersCount = json[JSONKey.learnersCount.rawValue].int
         self.totalUnits = json[JSONKey.totalUnits.rawValue].intValue
-        self.reviewSummaryId = json[JSONKey.reviewSummary.rawValue].int
+        self.reviewSummaryID = json[JSONKey.reviewSummary.rawValue].int
         self.sectionsArray = json[JSONKey.sections.rawValue].arrayObject as! [Int]
         self.instructorsArray = json[JSONKey.instructors.rawValue].arrayObject as! [Int]
         self.authorsArray = json[JSONKey.authors.rawValue].arrayObject as? [Int] ?? []
+        self.announcementsArray = json[JSONKey.announcements.rawValue].arrayObject as? [Int] ?? []
         self.timeToComplete = json[JSONKey.timeToComplete.rawValue].int
         self.languageCode = json[JSONKey.language.rawValue].stringValue
         self.isPaid = json[JSONKey.isPaid.rawValue].boolValue
@@ -165,52 +161,10 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         if let actionsDictionary = json[JSONKey.actions.rawValue].dictionary {
             self.canViewRevenue =
                 actionsDictionary[JSONKey.viewRevenue.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
+            self.canCreateAnnouncements = actionsDictionary[JSONKey.createAnnouncements.rawValue]?.string != nil
         } else {
             self.canViewRevenue = false
-        }
-    }
-
-    @available(*, deprecated, message: "Legacy")
-    static func fetch(
-        _ ids: [Int],
-        featured: Bool? = nil,
-        enrolled: Bool? = nil,
-        isPublic: Bool? = nil
-    ) -> [Course] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
-        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
-
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        let idCompoundPredicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
-
-        var nonIdPredicates = [NSPredicate]()
-        if let f = featured {
-            nonIdPredicates += [NSPredicate(format: "managedFeatured == %@", f as NSNumber)]
-        }
-
-        if let e = enrolled {
-            nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
-        }
-
-        if let p = isPublic {
-            nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
-        }
-
-        let nonIdCompoundPredicate = NSCompoundPredicate(type: .and, subpredicates: nonIdPredicates)
-
-        let predicate = NSCompoundPredicate(type: .and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
-        request.predicate = predicate
-        request.sortDescriptors = [descriptor]
-
-        do {
-            let results = try CoreDataHelper.shared.context.fetch(request)
-            let finalResult = results as? [Course] ?? []
-
-            return finalResult
-        } catch {
-            return []
+            self.canCreateAnnouncements = false
         }
     }
 
@@ -251,6 +205,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case isPublic = "is_public"
         case isFavorite = "is_favorite"
         case isArchived = "is_archived"
+        case isInWishlist = "is_in_wishlist"
         case readiness
         case summary
         case workload
@@ -291,5 +246,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case actions
         case viewRevenue = "view_revenue"
         case enabled
+        case createAnnouncements = "create_announcements"
+        case announcements
     }
 }

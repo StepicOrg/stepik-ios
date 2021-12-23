@@ -100,7 +100,7 @@ final class ProcessedContentView: UIView {
     private var didSetupTextView = false
     private var didSetupWebView = false
 
-    var processedContent: ProcessedContent? = nil {
+    var processedContent: ProcessedContent? {
         didSet {
             if oldValue == self.processedContent {
                 return

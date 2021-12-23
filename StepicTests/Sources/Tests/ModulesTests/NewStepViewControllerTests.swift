@@ -91,8 +91,7 @@ class NewStepViewControllerSpec: QuickSpec {
                             StepDataFlow.StepLoad.Data(
                                 step: step,
                                 stepFontSize: .small,
-                                storedImages: [],
-                                isDisabledStepsSupported: false
+                                storedImages: []
                             )
                         )
                     )
@@ -167,8 +166,7 @@ class NewStepViewControllerSpec: QuickSpec {
                             StepDataFlow.StepLoad.Data(
                                 step: step,
                                 stepFontSize: .small,
-                                storedImages: [],
-                                isDisabledStepsSupported: false
+                                storedImages: []
                             )
                         )
                     )
@@ -246,8 +244,7 @@ class NewStepViewControllerSpec: QuickSpec {
                                 StepDataFlow.StepLoad.Data(
                                     step: step,
                                     stepFontSize: .small,
-                                    storedImages: [],
-                                    isDisabledStepsSupported: false
+                                    storedImages: []
                                 )
                             )
                         )

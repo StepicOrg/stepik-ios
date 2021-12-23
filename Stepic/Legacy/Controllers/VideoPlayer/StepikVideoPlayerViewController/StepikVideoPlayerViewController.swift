@@ -250,6 +250,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var applicationDidEnterBackground = false
     private var applicationDidComeFromBackground = false
+    private var applicationDidEnterBackgroundWithPausedPlaybackState = false
 
     override var prefersStatusBarHidden: Bool { true }
 
@@ -700,11 +701,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                 }
 
                 strongSelf.analytics.send(
-                    .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: url.quality),
-                    .videoPlayerDidChangeQuality(
-                        quality: url.quality,
-                        deviceModel: DeviceInfo.current.deviceModelString
-                    )
+                    .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: url.quality)
                 )
 
                 strongSelf.currentVideoQuality = url.quality
@@ -728,11 +725,7 @@ final class StepikVideoPlayerViewController: UIViewController {
                         }
 
                         strongSelf.analytics.send(
-                            .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: cachedQuality),
-                            .videoPlayerDidChangeQuality(
-                                quality: cachedQuality,
-                                deviceModel: DeviceInfo.current.deviceModelString
-                            )
+                            .videoPlayerQualityChanged(source: strongSelf.currentVideoQuality, target: cachedQuality)
                         )
 
                         strongSelf.currentVideoQuality = cachedQuality
@@ -851,6 +844,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func handleApplicationDidEnterBackground() {
         self.applicationDidComeFromBackground = false
         self.applicationDidEnterBackground = true
+        self.applicationDidEnterBackgroundWithPausedPlaybackState = self.player.playbackState == .paused
     }
 
     @objc
@@ -1072,9 +1066,15 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             self.applicationDidComeFromBackground = false
         }
 
-        let shouldPlayFromCurrentTime = isPlayerFirstTimeReady
+        let isPlayerReadyPlayFromCurrentTime = isPlayerFirstTimeReady
             || isPlayerReadyAfterVideoQualityChanged
             || isPlayerReadyAfterDidComeFromBackgroundAtDoubleFastVideoRate
+        let shouldPlayFromCurrentTime = !self.applicationDidEnterBackgroundWithPausedPlaybackState
+            && isPlayerReadyPlayFromCurrentTime
+
+        if self.applicationDidEnterBackgroundWithPausedPlaybackState {
+            self.applicationDidEnterBackgroundWithPausedPlaybackState = false
+        }
 
         guard shouldPlayFromCurrentTime else {
             return
@@ -1113,6 +1113,10 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             break
         }
 
+        if self.applicationDidEnterBackground && !self.applicationDidComeFromBackground {
+            self.applicationDidEnterBackgroundWithPausedPlaybackState = player.playbackState == .paused
+        }
+
         print("StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)")
     }
 
@@ -1147,13 +1151,19 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
     // MARK: Private helpers
 
     private func setTimeParametersAfterPlayerIsReady() {
-        self.fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
+        func stringFromTimeInterval(_ ti: TimeInterval) -> String {
+            let formatter = DateComponentsFormatter()
+            let additionalFormat = ti >= 60 ? "" : (ti < 10 ? "0:0" : "0:")
+            return "\(additionalFormat)\(ti >= 60 ? formatter.string(from: ti)! : "\(Int(ti))")"
+        }
+
+        self.fullTimeTopLabel.text = stringFromTimeInterval(self.player.maximumDuration)
         self.player.setPeriodicTimeObserver { [weak self] time, bufferedTime in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
+            strongSelf.currentTimeTopLabel.text = stringFromTimeInterval(time)
             strongSelf.topTimeSlider.value = Float(time / Double(strongSelf.player.maximumDuration))
 
             if let bufferedTime = bufferedTime {

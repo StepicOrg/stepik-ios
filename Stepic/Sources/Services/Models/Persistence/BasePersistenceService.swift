@@ -9,10 +9,20 @@ class BasePersistenceService<Entity: NSManagedObject & ManagedObject> {
     }
 
     func fetchAll() -> Guarantee<[Entity]> {
-        let request = Entity.sortedFetchRequest
-        request.returnsObjectsAsFaults = false
-        let objects = try? self.managedObjectContext.fetch(request)
-        return .value(objects ?? [])
+        Guarantee { seal in
+            self.managedObjectContext.perform {
+                let request = Entity.sortedFetchRequest
+                request.returnsObjectsAsFaults = false
+
+                do {
+                    let objects = try self.managedObjectContext.fetch(request)
+                    seal(objects)
+                } catch {
+                    print("BasePersistenceService :: failed fetchAll with error = \(error)")
+                    seal([])
+                }
+            }
+        }
     }
 
     func deleteAll() -> Promise<Void> {
@@ -55,8 +65,12 @@ class BasePersistenceService<Entity: NSManagedObject & ManagedObject> {
 
 extension BasePersistenceService where Entity: Identifiable, Entity.ID: CoreDataRepresentable {
     func fetch(id: Entity.ID) -> Guarantee<Entity?> {
-        let object = Entity.findOrFetch(in: self.managedObjectContext, byID: id)
-        return .value(object)
+        Guarantee { seal in
+            self.managedObjectContext.perform {
+                let object = Entity.findOrFetch(in: self.managedObjectContext, byID: id)
+                seal(object)
+            }
+        }
     }
 
     func fetch(ids: [Entity.ID]) -> Guarantee<[Entity]> {
@@ -73,7 +87,11 @@ extension BasePersistenceService where Entity: Identifiable, Entity.ID: CoreData
             }
         }
 
-        let objects = Entity.fetch(in: self.managedObjectContext, byIDs: ids)
-        return .value(objects)
+        return Guarantee { seal in
+            self.managedObjectContext.perform {
+                let objects = Entity.fetch(in: self.managedObjectContext, byIDs: ids)
+                seal(objects)
+            }
+        }
     }
 }

@@ -16,6 +16,8 @@
 		<string>applinks:stepik.app.link</string>
 		<string>applinks:stepik-alternate.app.link</string>
 	</array>
+	<key>com.apple.developer.siri</key>
+	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.com.AlexKarpov.Stepic.WidgetContent</string>

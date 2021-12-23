@@ -47,6 +47,12 @@ class TableInputTextField: UITextField {
         self.pinnedPlaceholderLabel.frame.width
     }
 
+    var clearButtonInsets = UIEdgeInsets.zero {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+
     override var font: UIFont? {
         didSet {
             self.pinnedPlaceholderLabel.font = self.font
@@ -130,6 +136,17 @@ class TableInputTextField: UITextField {
         } else {
             return rect
         }
+    }
+
+    override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
+        let rect = super.clearButtonRect(forBounds: bounds)
+        return CGRect(
+            origin: CGPoint(
+                x: rect.origin.x + self.clearButtonInsets.left - self.clearButtonInsets.right,
+                y: rect.origin.y + self.clearButtonInsets.top - self.clearButtonInsets.bottom
+            ),
+            size: rect.size
+        )
     }
 
     private func updateLeftViewMode() {

@@ -4,7 +4,7 @@ import UIKit
 final class SubmissionsTableViewCell: UITableViewCell, Reusable {
     enum Appearance {
         static let separatorHeight: CGFloat = 4
-        static let separatorBackgroundColor = UIColor.onSurface.withAlphaComponent(0.04)
+        static let separatorBackgroundColor = UIColor.stepikOverlayOnSurfaceBackground
     }
 
     private lazy var cellView = SubmissionsCellView()
@@ -39,6 +39,15 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
         }
         set {
             self.cellView.onReviewClick = newValue
+        }
+    }
+
+    var onSelectSubmissionClick: (() -> Void)? {
+        get {
+            self.cellView.onSelectSubmissionClick
+        }
+        set {
+            self.cellView.onSelectSubmissionClick = newValue
         }
     }
 

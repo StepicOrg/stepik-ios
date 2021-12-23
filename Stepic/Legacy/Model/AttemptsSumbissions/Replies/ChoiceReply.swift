@@ -10,6 +10,8 @@ final class ChoiceReply: Reply {
         [JSONKey.choices.rawValue: self.choices]
     }
 
+    override var isEmpty: Bool { self.choices.isEmpty }
+
     override var hash: Int {
         self.choices.hashValue
     }

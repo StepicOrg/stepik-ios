@@ -15,6 +15,7 @@ extension Course {
     @NSManaged var managedIsProctored: NSNumber?
     @NSManaged var managedIsFavorite: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
+    @NSManaged var managedIsInWishlist: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
     @NSManaged var managedPreviewLessonId: NSNumber?
     @NSManaged var managedPreviewUnitId: NSNumber?
@@ -45,10 +46,13 @@ extension Course {
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
     @NSManaged var managedAuthorsArray: NSObject?
+    @NSManaged var managedAnnouncementsArray: NSObject?
 
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
     @NSManaged var managedDisplayPriceIAP: String?
+    @NSManaged var managedDisplayPriceTierPrice: String?
+    @NSManaged var managedDisplayPriceTierPromo: String?
     @NSManaged var managedPriceTier: NSNumber?
     @NSManaged var managedCurrencyCode: String?
 
@@ -58,6 +62,7 @@ extension Course {
     @NSManaged var managedDefaultPromoCodeExpireDate: Date?
 
     @NSManaged var managedCanViewRevenue: NSNumber?
+    @NSManaged var managedCanCreateAnnouncements: NSNumber
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -75,6 +80,9 @@ extension Course {
     @NSManaged var managedCourseBenefits: NSOrderedSet?
     @NSManaged var managedCourseBenefitByMonths: NSOrderedSet?
     @NSManaged var managedCourseBeneficiaries: NSSet?
+    @NSManaged var managedAnnouncements: NSSet?
+    @NSManaged var managedMobileTiers: NSSet?
+    @NSManaged var managedWishlistEntries: NSOrderedSet?
 
     var id: Int {
         set(newId) {
@@ -126,7 +134,7 @@ extension Course {
         }
     }
 
-    var reviewSummaryId: Int? {
+    var reviewSummaryID: Int? {
         get {
             managedReviewSummaryId?.intValue
         }
@@ -207,7 +215,7 @@ extension Course {
         }
     }
 
-    var progressId: String? {
+    var progressID: String? {
         get {
             managedProgressId
         }
@@ -225,7 +233,7 @@ extension Course {
         }
     }
 
-    var lastStepId: String? {
+    var lastStepID: String? {
         set(id) {
             self.managedLastStepId = id
         }
@@ -279,6 +287,15 @@ extension Course {
         }
     }
 
+    var isInWishlist: Bool {
+        get {
+            self.managedIsInWishlist?.boolValue ?? false
+        }
+        set {
+            self.managedIsInWishlist = NSNumber(value: newValue)
+        }
+    }
+
     var isPublic: Bool {
         set(isPublic) {
             self.managedPublic = isPublic as NSNumber?
@@ -312,6 +329,24 @@ extension Course {
         }
         set {
             self.managedDisplayPriceIAP = newValue
+        }
+    }
+
+    var displayPriceTierPrice: String? {
+        get {
+            self.managedDisplayPriceTierPrice
+        }
+        set {
+            self.managedDisplayPriceTierPrice = newValue
+        }
+    }
+
+    var displayPriceTierPromo: String? {
+        get {
+            self.managedDisplayPriceTierPromo
+        }
+        set {
+            self.managedDisplayPriceTierPromo = newValue
         }
     }
 
@@ -524,6 +559,15 @@ extension Course {
         }
     }
 
+    var canCreateAnnouncements: Bool {
+        get {
+            self.managedCanCreateAnnouncements.boolValue
+        }
+        set {
+            self.managedCanCreateAnnouncements = NSNumber(value: newValue)
+        }
+    }
+
     var progress: Progress? {
         get {
             managedProgress
@@ -600,6 +644,15 @@ extension Course {
         }
         set {
             self.managedAuthorsArray = NSArray(array: newValue)
+        }
+    }
+
+    var announcementsArray: [Announcement.IdType] {
+        get {
+            self.managedAnnouncementsArray as? [Announcement.IdType] ?? []
+        }
+        set {
+            self.managedAnnouncementsArray = NSArray(array: newValue)
         }
     }
 
@@ -681,6 +734,33 @@ extension Course {
         }
         set {
             self.managedCourseBeneficiaries = NSSet(array: newValue)
+        }
+    }
+
+    var announcements: [Announcement] {
+        get {
+            self.managedAnnouncements?.allObjects as! [Announcement]
+        }
+        set {
+            self.managedAnnouncements = NSSet(array: newValue)
+        }
+    }
+
+    var mobileTiers: [MobileTier] {
+        get {
+            self.managedMobileTiers?.allObjects as! [MobileTier]
+        }
+        set {
+            self.managedMobileTiers = NSSet(array: newValue)
+        }
+    }
+
+    var wishlistEntries: [WishlistEntryEntity] {
+        get {
+            self.managedWishlistEntries?.array as? [WishlistEntryEntity] ?? []
+        }
+        set {
+            self.managedWishlistEntries = NSOrderedSet(array: newValue)
         }
     }
 

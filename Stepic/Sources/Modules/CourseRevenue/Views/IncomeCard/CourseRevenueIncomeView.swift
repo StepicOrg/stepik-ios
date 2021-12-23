@@ -11,10 +11,7 @@ extension CourseRevenueIncomeView {
         let shadowRadius: CGFloat = 4.0
         let shadowOpacity: Float = 0.1
 
-        let separatorBackgroundColor = UIColor.dynamic(
-            light: .onSurface.withAlphaComponent(0.04),
-            dark: .stepikSeparator
-        )
+        let separatorBackgroundColor = UIColor.stepikOverlayOnSurfaceBackground
         let separatorViewHeight: CGFloat = 1
     }
 

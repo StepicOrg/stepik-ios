@@ -36,7 +36,10 @@ struct NotificationAlertsAnalytics {
 
     func reportCustomAlertInteractionResult(_ result: InteractionResult) {
         self.analytics.send(
-            .requestNotificationsAuthorizationCustomAlertInteracted(source: self.source.description, result: result.rawValue)
+            .requestNotificationsAuthorizationCustomAlertInteracted(
+                source: self.source.description,
+                result: result.rawValue
+            )
         )
     }
 

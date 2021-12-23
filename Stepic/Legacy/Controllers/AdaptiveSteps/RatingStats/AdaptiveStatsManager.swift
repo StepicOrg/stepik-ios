@@ -27,12 +27,6 @@ final class AdaptiveStatsManager {
         self.courseId = courseId
     }
 
-    var lastSolvedDayNum: Int {
-        self.getLastDays(count: 1)[0] > 0
-            ? self.dayByDate(Date())
-            : 0
-    }
-
     var stats: [Int: Int]? {
         get {
             guard let savedStats = defaults.value(forKey: statsKey) as? [String: String] else {
@@ -52,22 +46,6 @@ final class AdaptiveStatsManager {
         }
         set(newValue) {
             defaults.set(max(maxStreak, newValue), forKey: maxStreakKey)
-        }
-    }
-
-    var currentDayStreak: Int {
-        get {
-            let _stats = stats
-            var curDay = dayByDate(Date())
-            while curDay > 0 {
-                if let todayXP = _stats?[curDay], todayXP != 0 {
-                    curDay -= 1
-                } else {
-                    break
-                }
-            }
-
-            return dayByDate(Date()) - curDay
         }
     }
 

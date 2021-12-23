@@ -15,6 +15,7 @@ protocol SettingsProviderProtocol: AnyObject {
     var globalStepFontSize: StepFontSize { get set }
     var availableStepFontSizes: [StepFontSize] { get }
     // ApplicationTheme
+    var isDarkModeAvailable: Bool { get }
     var globalApplicationTheme: ApplicationTheme { get set }
     var availableApplicationThemes: [ApplicationTheme] { get }
 
@@ -81,6 +82,13 @@ final class SettingsProvider: SettingsProviderProtocol {
     }
 
     var availableStepFontSizes: [StepFontSize] { StepFontSize.allCases }
+
+    var isDarkModeAvailable: Bool {
+        if #available(iOS 13.0, *) {
+            return true
+        }
+        return false
+    }
 
     var globalApplicationTheme: ApplicationTheme {
         get {

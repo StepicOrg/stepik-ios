@@ -78,23 +78,45 @@ final class NotificationsPresenter {
 
         self.notificationsRegistrationService.delegate = self
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationAdd(systemNotification:)), name: .notificationAdded, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didLogout(systemNotification:)), name: .didLogout, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didNotificationUpdate(systemNotification:)),
+            name: .notificationUpdated, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didAllNotificationsRead),
+            name: .allNotificationsMarkedAsRead, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didNotificationAdd(systemNotification:)),
+            name: .notificationAdded, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didBadgeUpdate(systemNotification:)),
+            name: .badgeUpdated, object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didLogout),
+            name: .didLogout, object: nil
+        )
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    @objc func didLogout(systemNotification: Foundation.Notification) {
+    @objc
+    private func didLogout() {
         displayedNotifications = []
         view?.set(notifications: displayedNotifications, withReload: true)
     }
 
-    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+    @objc
+    private func didBadgeUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let value = userInfo["value"] as? Int else {
             return
@@ -103,7 +125,8 @@ final class NotificationsPresenter {
         self.badgeUnreadCount = value
     }
 
-    @objc func didNotificationUpdate(systemNotification: Foundation.Notification) {
+    @objc
+    private func didNotificationUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let firedSection = userInfo["section"] as? NotificationsSection,
               let id = userInfo["id"] as? Int,
@@ -118,7 +141,8 @@ final class NotificationsPresenter {
         self.view?.set(notifications: self.displayedNotifications, withReload: firedSection != self.section)
     }
 
-    @objc func didNotificationAdd(systemNotification: Foundation.Notification) {
+    @objc
+    private func didNotificationAdd(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
               let id = userInfo["id"] as? Int else {
             return
@@ -134,7 +158,8 @@ final class NotificationsPresenter {
         }
     }
 
-    @objc func didAllNotificationsRead(systemNotification: Foundation.Notification) {
+    @objc
+    private func didAllNotificationsRead() {
         self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
             let (date, notifications) = arg
             return (date: date, notifications: self.updateNotificationsViewData(notifications: notifications, newStatus: .read))
@@ -245,7 +270,7 @@ final class NotificationsPresenter {
         var notificationsWExtractor: [(Notification, NotificationDataExtractor)] = []
         for notification in new {
             let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
-            if let userId = extractor.userId {
+            if let userId = extractor.userID {
                 usersQuery.insert(userId)
             }
             notificationsWExtractor.append((notification, extractor))
@@ -259,7 +284,7 @@ final class NotificationsPresenter {
             // Add avatator URL to view data
             notificationsWExtractor.forEach { notification, extractor in
                 let notificationVD: NotificationViewData!
-                if let userId = extractor.userId, let userAvatar = userAvatars[userId] {
+                if let userId = extractor.userID, let userAvatar = userAvatars[userId] {
                     notificationVD = NotificationViewData(id: notification.id, type: notification.type, status: notification.status, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: userAvatar)
                 } else {
                     notificationVD = NotificationViewData(id: notification.id, type: notification.type, status: notification.status, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: nil)
@@ -328,17 +353,26 @@ final class NotificationsPresenter {
     }
 
     func markAllAsRead() {
-        view?.updateMarkAllAsReadButton(with: .loading)
+        self.view?.updateMarkAllAsReadButton(with: .loading)
 
-        notificationsAPI.markAllAsRead().done { _ in
+        self.notificationsAPI.markAllAsRead().done { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
             Notification.markAllAsRead()
-            self.analytics.send(.markAllNotificationsAsReadTapped(badgeUnreadCount: self.badgeUnreadCount))
+            strongSelf.analytics.send(.markAllNotificationsAsReadTapped(badgeUnreadCount: strongSelf.badgeUnreadCount))
 
-            NotificationCenter.default.post(name: .allNotificationsMarkedAsRead, object: self, userInfo: ["section": self.section])
-            self.view?.updateMarkAllAsReadButton(with: .normal)
-        }.catch { error in
+            NotificationCenter.default.post(
+                name: .allNotificationsMarkedAsRead,
+                object: strongSelf,
+                userInfo: ["section": strongSelf.section]
+            )
+
+            strongSelf.view?.updateMarkAllAsReadButton(with: .normal)
+        }.catch { [weak self] error in
             print("notifications: unable to mark all notifications as read, error = \(error)")
-            self.view?.updateMarkAllAsReadButton(with: .error)
+            self?.view?.updateMarkAllAsReadButton(with: .error)
         }
     }
 

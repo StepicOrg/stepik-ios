@@ -5,6 +5,7 @@ enum CourseInfo {
         case info
         case syllabus
         case reviews
+        case news
 
         var title: String {
             switch self {
@@ -14,6 +15,8 @@ enum CourseInfo {
                 return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
             case .reviews:
                 return NSLocalizedString("CourseInfoTabReviews", comment: "")
+            case .news:
+                return NSLocalizedString("CourseInfoTabNews", comment: "")
             }
         }
     }
@@ -39,10 +42,13 @@ enum CourseInfo {
         struct Response {
             struct Data {
                 let course: Course
-                let isWishlisted: Bool
                 let isWishlistAvailable: Bool
                 let isCourseRevenueAvailable: Bool
+                let coursePurchaseFlow: CoursePurchaseFlowType
                 let promoCode: PromoCode?
+                let mobileTier: MobileTierPlainObject?
+                let shouldCheckIAPPurchaseSupport: Bool
+                let isSupportedIAPPurchase: Bool
             }
 
             var result: StepikResult<Data>
@@ -64,10 +70,12 @@ enum CourseInfo {
     enum LessonPresentation {
         struct Response {
             let unitID: Unit.IdType
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let unitID: Unit.IdType
+            let promoCodeName: String?
         }
     }
 
@@ -135,6 +143,23 @@ enum CourseInfo {
         }
     }
 
+    /// Dismiss CourseInfoPurchaseModal module and present last step in course
+    enum PurchaseModalStartLearningPresentation {
+        struct Response {
+            let course: Course
+            let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
+        }
+
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let isAdaptive: Bool
+            let courseViewSource: AnalyticsEvent.CourseViewSource
+        }
+    }
+
     /// Handle submodule controller appearance
     enum SubmoduleAppearanceUpdate {
         struct Request {
@@ -181,6 +206,19 @@ enum CourseInfo {
         }
     }
 
+    /// Present course search module
+    enum CourseContentSearchPresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+        }
+    }
+
     /// Add or remove course to/from withlist
     enum CourseWishlistMainAction {
         struct Request {}
@@ -198,7 +236,9 @@ enum CourseInfo {
 
     /// Do main action (continue, enroll, etc)
     enum MainCourseAction {
-        struct Request {}
+        struct Request {
+            var courseBuySource = AnalyticsEvent.CourseBuySource.courseScreen
+        }
     }
 
     /// Pop lesson module and do main course action
@@ -228,10 +268,14 @@ enum CourseInfo {
 
         struct Response {
             let previewLessonID: Lesson.IdType
+            let previewUnitID: Unit.IdType?
+            let promoCodeName: String?
         }
 
         struct ViewModel {
             let previewLessonID: Lesson.IdType
+            let previewUnitID: Unit.IdType?
+            let promoCodeName: String?
         }
     }
 
@@ -274,6 +318,23 @@ enum CourseInfo {
 
         struct ViewModel {
             let urlPath: String
+        }
+    }
+
+    /// Present CourseInfoPurchaseModal module
+    enum PaidCoursePurchaseModalPresentation {
+        struct Response {
+            let courseID: Course.IdType
+            let promoCodeName: String?
+            let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+            let promoCodeName: String?
+            let mobileTierID: MobileTier.IdType?
+            let courseBuySource: AnalyticsEvent.CourseBuySource
         }
     }
 
