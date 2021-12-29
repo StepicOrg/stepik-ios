@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.204-develop</string>
+	<string>1.205-develop</string>
 	<key>CFBundleVersion</key>
-	<string>398</string>
+	<string>399</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
