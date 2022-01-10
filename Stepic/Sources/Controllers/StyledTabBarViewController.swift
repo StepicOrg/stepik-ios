@@ -51,7 +51,10 @@ final class StyledTabBarViewController: UITabBarController {
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = Appearance.barTintColor
             self.tabBar.standardAppearance = appearance
-            self.tabBar.scrollEdgeAppearance = self.tabBar.standardAppearance
+
+            if self.tabBar.responds(to: #selector(setter: self.tabBar.scrollEdgeAppearance)) {
+                self.tabBar.scrollEdgeAppearance = self.tabBar.standardAppearance
+            }
         }
 
         let tabBarViewControllers = self.items.map { tabBarItem -> UIViewController in
