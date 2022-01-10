@@ -74,6 +74,13 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             return "\(sign)\(price)"
         }()
 
+        let formattedSeatsCount: String? = {
+            if let seatsCount = courseBenefit.seatsCount {
+                return FormatterHelper.seatsCount(seatsCount)
+            }
+            return nil
+        }()
+
         return CourseRevenueTabPurchasesViewModel(
             uniqueIdentifier: "\(courseBenefit.id)",
             formattedDate: formattedDate,
@@ -81,9 +88,11 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             promoCodeName: courseBenefit.promoCode,
             formattedPaymentAmount: formattedPaymentAmount,
             formattedAmount: formattedAmount,
+            formattedSeatsCount: formattedSeatsCount,
             isDebited: courseBenefit.status == .debited,
             isRefunded: courseBenefit.status == .refunded,
-            isZLinkUsed: courseBenefit.isZLinkUsed
+            isZLinkUsed: courseBenefit.isZLinkUsed,
+            isInvoicePayment: courseBenefit.isInvoicePayment
         )
     }
 }

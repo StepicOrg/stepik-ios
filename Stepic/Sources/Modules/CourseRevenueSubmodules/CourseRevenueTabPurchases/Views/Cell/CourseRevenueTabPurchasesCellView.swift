@@ -4,6 +4,7 @@ import UIKit
 extension CourseRevenueTabPurchasesCellView {
     struct Appearance {
         let logoImageViewSize = CGSize(width: 24, height: 24)
+        let logoImageViewTintColor = UIColor.stepikMaterialPrimaryText
         let logoImageViewInsets = LayoutInsets.default
 
         let dateLabelTextColor = UIColor.stepikMaterialSecondaryText
@@ -109,6 +110,7 @@ final class CourseRevenueTabPurchasesCellView: UIView {
 
     func configure(viewModel: CourseRevenueTabPurchasesViewModel?) {
         let isRefunded = viewModel?.isRefunded ?? false
+        let isInvoicePayment = viewModel?.isInvoicePayment ?? false
 
         let logoImage: UIImage? = {
             if isRefunded {
@@ -118,10 +120,14 @@ final class CourseRevenueTabPurchasesCellView: UIView {
             }
             return UIImage(named: "course-revenue-transaction-logo")
         }()
+        let logoImageRenderingMode: UIImage.RenderingMode = isInvoicePayment ? .alwaysTemplate : .alwaysOriginal
 
-        self.logoImageView.image = logoImage
+        self.logoImageView.image = logoImage?.withRenderingMode(logoImageRenderingMode)
+        self.logoImageView.tintColor = self.appearance.logoImageViewTintColor
         self.dateLabel.text = viewModel?.formattedDate
-        self.titleLabel.text = viewModel?.buyerName
+
+        self.titleLabel.text = isInvoicePayment ? viewModel?.formattedSeatsCount : viewModel?.buyerName
+        self.titleLabel.isUserInteractionEnabled = !isInvoicePayment
 
         self.subtitleLabel.text = viewModel?.promoCodeName
         let subtitleBottomOffset = viewModel?.promoCodeName?.isEmpty ?? true

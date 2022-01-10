@@ -28,11 +28,13 @@ final class CourseBenefit: NSManagedObject, ManagedObject, JSONSerializable {
         self.statusString = json[JSONKey.status.rawValue].stringValue
         self.amount = json[JSONKey.amount.rawValue].floatValue
         self.currencyCode = json[JSONKey.currencyCode.rawValue].stringValue
-        self.totalIncome = json[JSONKey.totalIncome.rawValue].floatValue
         self.paymentAmount = json[JSONKey.paymentAmount.rawValue].floatValue
         self.buyerID = json[JSONKey.buyer.rawValue].intValue
         self.isZLinkUsed = json[JSONKey.isZLinkUsed.rawValue].boolValue
+        self.isInvoicePayment = json[JSONKey.isInvoicePayment.rawValue].boolValue
         self.promoCode = json[JSONKey.promoCode.rawValue].string
+        self.seatsCount = json[JSONKey.seatsCount.rawValue].int
+        self.descriptionString = json[JSONKey.description.rawValue].stringValue
     }
 
     enum JSONKey: String {
@@ -43,10 +45,12 @@ final class CourseBenefit: NSManagedObject, ManagedObject, JSONSerializable {
         case status
         case amount
         case currencyCode = "currency_code"
-        case totalIncome = "total_income"
         case paymentAmount = "payment_amount"
         case buyer
         case isZLinkUsed = "is_z_link_used"
+        case isInvoicePayment = "is_invoice_payment"
         case promoCode = "promo_code"
+        case seatsCount = "seats_count"
+        case description
     }
 }

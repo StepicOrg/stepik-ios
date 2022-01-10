@@ -93,12 +93,17 @@ final class CourseRevenueTabMonthlyCellView: UIView {
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyChannelStepikTitle", comment: ""),
                 subtitle: "\(viewModel?.countNonZPayments ?? 0)",
-                image: UIImage(named: "course-revenue-transaction-logo")
+                image: UIImage(named: "course-revenue-transaction-logo")?.withRenderingMode(.alwaysOriginal)
             ),
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyChannelZLinkTitle", comment: ""),
                 subtitle: "\(viewModel?.countZPayments ?? 0)",
-                image: UIImage(named: "course-revenue-transaction-z-link")
+                image: UIImage(named: "course-revenue-transaction-z-link")?.withRenderingMode(.alwaysOriginal)
+            ),
+            Item(
+                title: NSLocalizedString("CourseRevenueTabMonthlyChannelInvoicePaymentsTitle", comment: ""),
+                subtitle: "\(viewModel?.countInvoicePayments ?? 0)",
+                image: UIImage(named: "course-revenue-transaction-logo")?.withRenderingMode(.alwaysTemplate)
             )
         ]
         items.forEach { item in

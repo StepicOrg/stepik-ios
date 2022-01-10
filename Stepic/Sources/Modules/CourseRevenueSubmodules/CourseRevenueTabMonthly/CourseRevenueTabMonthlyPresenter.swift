@@ -78,6 +78,7 @@ final class CourseRevenueTabMonthlyPresenter: CourseRevenueTabMonthlyPresenterPr
             totalRefunds: courseBenefitByMonth.totalRefunds,
             countPayments: courseBenefitByMonth.countPayments,
             countNonZPayments: courseBenefitByMonth.countNonZPayments,
+            countInvoicePayments: courseBenefitByMonth.countInvoicePayments,
             countZPayments: courseBenefitByMonth.countZPayments
         )
     }

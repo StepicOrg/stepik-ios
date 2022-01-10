@@ -18,6 +18,10 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
     }
 
     private func makeViewModel(courseBenefit: CourseBenefit) -> CourseBenefitDetailViewModel {
+        let title = courseBenefit.status == .refunded
+            ? NSLocalizedString("CourseBenefitDetailTitleRefund", comment: "")
+            : NSLocalizedString("CourseBenefitDetailTitle", comment: "")
+
         let formattedDate: String = {
             if let moscowDateInRegion = courseBenefit.time?.inEuropeMoscow {
                 return FormatterHelper.dateStringWithFullMonthAndYear(moscowDateInRegion)
@@ -39,9 +43,18 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             return "User \(courseBenefit.buyerID)"
         }()
 
+        let formattedSeatsCount: String? = {
+            if let seatsCount = courseBenefit.seatsCount {
+                return FormatterHelper.seatsCount(seatsCount)
+            }
+            return nil
+        }()
+
         let channelName: String = {
             if courseBenefit.isZLinkUsed {
                 return NSLocalizedString("CourseBenefitDetailChannelZLink", comment: "")
+            } else if courseBenefit.isInvoicePayment {
+                return NSLocalizedString("CourseBenefitDetailChannelInvoicePayment", comment: "")
             } else if courseBenefit.status == .refunded {
                 return NSLocalizedString("CourseBenefitDetailChannelRefund", comment: "")
             } else if courseBenefit.status == .debited {
@@ -66,21 +79,28 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             format: NSLocalizedString("CourseBenefitDetailAmountPercent", comment: ""),
             arguments: [formattedUserSharePercent]
         )
-        let formattedAmount = FormatterHelper.priceCourseRevenue(
-            courseBenefit.amount,
-            currencyCode: courseBenefit.currencyCode
-        )
+        let formattedAmount: String = {
+            let sign = courseBenefit.amount > 0 ? "+" : ""
+            let price = FormatterHelper.priceCourseRevenue(
+                courseBenefit.amount,
+                currencyCode: courseBenefit.currencyCode
+            )
+            return "\(sign)\(price)"
+        }()
 
         return CourseBenefitDetailViewModel(
-            title: NSLocalizedString("CourseBenefitDetailTitle", comment: ""),
+            title: title,
             formattedDate: formattedDate,
             courseTitle: courseTitle,
             buyerName: formattedBuyerName,
+            formattedSeatsCount: formattedSeatsCount,
             formattedPaymentAmount: formattedPaymentAmount,
             promoCodeName: courseBenefit.promoCode,
             channelName: channelName,
             formattedAmountPercent: formattedAmountPercent,
-            formattedAmount: formattedAmount
+            formattedAmount: formattedAmount,
+            isRefunded: courseBenefit.status == .refunded,
+            isInvoicePayment: courseBenefit.isInvoicePayment
         )
     }
 }
