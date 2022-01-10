@@ -35,12 +35,8 @@ final class CourseBenefitDetailItemView: UIView {
 
     private lazy var rightDetailLabel: UILabel = {
         let label = UILabel()
-        label.font = self.isLargeTitles
-            ? self.appearance.rightDetailLabelLargeFont
-            : self.appearance.rightDetailLabelFont
-        label.textColor = self.isClickable
-            ? self.appearance.rightDetailLabelClickableTextColor
-            : self.appearance.rightDetailLabelTextColor
+        label.font = self.rightDetailLabelFont
+        label.textColor = self.rightDetailLabelTextColor
         label.textAlignment = .left
         label.numberOfLines = 0
 
@@ -76,7 +72,29 @@ final class CourseBenefitDetailItemView: UIView {
         }
     }
 
+    var detailAttributedTitle: NSAttributedString? {
+        didSet {
+            if let detailAttributedTitle = self.detailAttributedTitle {
+                self.rightDetailLabel.attributedText = detailAttributedTitle
+            } else {
+                self.rightDetailLabel.attributedText = nil
+            }
+        }
+    }
+
     var onRightDetailLabelTapped: (() -> Void)?
+
+    var rightDetailLabelFont: UIFont {
+        self.isLargeTitles
+            ? self.appearance.rightDetailLabelLargeFont
+            : self.appearance.rightDetailLabelFont
+    }
+
+    var rightDetailLabelTextColor: UIColor {
+        self.isClickable
+            ? self.appearance.rightDetailLabelClickableTextColor
+            : self.appearance.rightDetailLabelTextColor
+    }
 
     override var intrinsicContentSize: CGSize {
         let topInset = max(self.appearance.titleLabelInsets.top, self.appearance.rightDetailLabelInsets.top)

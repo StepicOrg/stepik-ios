@@ -569,10 +569,12 @@ CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу пл
 
 /* CourseBenefitDetail */
 CourseBenefitDetailTitle = "Детали покупки";
+CourseBenefitDetailTitleRefund = "Детали возврата";
 CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии Stepik";
-CourseBenefitDetailChannelZLink = "Переход по Z-Link";
-CourseBenefitDetailChannelStepikLink = "Переход по Stepik Link";
+CourseBenefitDetailChannelZLink = "Переход по z-ссылке";
+CourseBenefitDetailChannelStepikLink = "Переход через Stepik";
 CourseBenefitDetailChannelRefund = "Возврат";
+CourseBenefitDetailChannelInvoicePayment = "Оплата по счёту";
 CourseBenefitDetailDateTitle = "Дата";
 CourseBenefitDetailCourseTitle = "Курс";
 CourseBenefitDetailBuyerTitle = "Покупатель";
@@ -587,7 +589,13 @@ CourseRevenueTabMonthlyTurnoverTitle = "Продажи";
 CourseRevenueTabMonthlyRefundsTitle = "Возвраты";
 CourseRevenueTabMonthlyIncomeTitle = "Покупки";
 CourseRevenueTabMonthlyChannelStepikTitle = "Переходы через Stepik";
-CourseRevenueTabMonthlyChannelZLinkTitle = "Переходы через Z-Link";
+CourseRevenueTabMonthlyChannelZLinkTitle = "Переходы по z-ссылке";
+CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Оплаты по счёту";
+
+/* CourseRevenueTabPurchases */
+CourseRevenueTabPurchasesSeatsCount1 = "место в курсе";
+CourseRevenueTabPurchasesSeatsCount234 = "места в курсе";
+CourseRevenueTabPurchasesSeatsCount567890 = "мест в курсе";
 
 /* CourseSearch */
 CourseSearchBarPlaceholder = "Поиск по курсу %@";

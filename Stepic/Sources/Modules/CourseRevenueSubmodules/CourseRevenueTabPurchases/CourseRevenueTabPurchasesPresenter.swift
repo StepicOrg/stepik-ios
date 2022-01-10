@@ -61,11 +61,25 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             return FormatterHelper.dateStringWithFullMonthAndYear(courseBenefit.time ?? Date())
         }()
 
-        let formattedPaymentAmount = FormatterHelper.price(
+        let formattedPaymentAmount = FormatterHelper.priceCourseRevenue(
             courseBenefit.paymentAmount,
             currencyCode: courseBenefit.currencyCode
         )
-        let formattedAmount = FormatterHelper.price(courseBenefit.amount, currencyCode: courseBenefit.currencyCode)
+        let formattedAmount: String = {
+            let sign = courseBenefit.amount > 0 ? "+" : ""
+            let price = FormatterHelper.priceCourseRevenue(
+                courseBenefit.amount,
+                currencyCode: courseBenefit.currencyCode
+            )
+            return "\(sign)\(price)"
+        }()
+
+        let formattedSeatsCount: String? = {
+            if let seatsCount = courseBenefit.seatsCount {
+                return FormatterHelper.seatsCount(seatsCount)
+            }
+            return nil
+        }()
 
         return CourseRevenueTabPurchasesViewModel(
             uniqueIdentifier: "\(courseBenefit.id)",
@@ -74,9 +88,11 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             promoCodeName: courseBenefit.promoCode,
             formattedPaymentAmount: formattedPaymentAmount,
             formattedAmount: formattedAmount,
+            formattedSeatsCount: formattedSeatsCount,
             isDebited: courseBenefit.status == .debited,
             isRefunded: courseBenefit.status == .refunded,
-            isZLinkUsed: courseBenefit.isZLinkUsed
+            isZLinkUsed: courseBenefit.isZLinkUsed,
+            isInvoicePayment: courseBenefit.isInvoicePayment
         )
     }
 }

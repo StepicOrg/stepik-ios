@@ -131,7 +131,15 @@ final class CourseRevenueIncomeItemView: UIView {
 
     var priceText: String? {
         didSet {
-            self.priceLabel.text = self.priceText
+            if let priceText = self.priceText {
+                self.priceLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                    price: priceText,
+                    priceFont: self.appearance.priceLabelFont,
+                    priceColor: self.appearance.priceLabelTextColor
+                )
+            } else {
+                self.priceLabel.attributedText = nil
+            }
         }
     }
 
@@ -143,7 +151,15 @@ final class CourseRevenueIncomeItemView: UIView {
 
     var detailsPriceText: String? {
         didSet {
-            self.detailsPriceLabel.text = self.detailsPriceText
+            if let detailsPriceText = self.detailsPriceText {
+                self.detailsPriceLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                    price: detailsPriceText,
+                    priceFont: self.appearance.detailsPriceLabelFont,
+                    priceColor: self.appearance.detailsPriceLabelTextColor
+                )
+            } else {
+                self.detailsPriceLabel.attributedText = nil
+            }
         }
     }
 

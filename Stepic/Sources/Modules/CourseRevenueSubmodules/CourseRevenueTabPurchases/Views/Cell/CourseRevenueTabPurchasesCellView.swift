@@ -4,6 +4,7 @@ import UIKit
 extension CourseRevenueTabPurchasesCellView {
     struct Appearance {
         let logoImageViewSize = CGSize(width: 24, height: 24)
+        let logoImageViewTintColor = UIColor.stepikMaterialPrimaryText
         let logoImageViewInsets = LayoutInsets.default
 
         let dateLabelTextColor = UIColor.stepikMaterialSecondaryText
@@ -109,6 +110,7 @@ final class CourseRevenueTabPurchasesCellView: UIView {
 
     func configure(viewModel: CourseRevenueTabPurchasesViewModel?) {
         let isRefunded = viewModel?.isRefunded ?? false
+        let isInvoicePayment = viewModel?.isInvoicePayment ?? false
 
         let logoImage: UIImage? = {
             if isRefunded {
@@ -118,10 +120,14 @@ final class CourseRevenueTabPurchasesCellView: UIView {
             }
             return UIImage(named: "course-revenue-transaction-logo")
         }()
+        let logoImageRenderingMode: UIImage.RenderingMode = isInvoicePayment ? .alwaysTemplate : .alwaysOriginal
 
-        self.logoImageView.image = logoImage
+        self.logoImageView.image = logoImage?.withRenderingMode(logoImageRenderingMode)
+        self.logoImageView.tintColor = self.appearance.logoImageViewTintColor
         self.dateLabel.text = viewModel?.formattedDate
-        self.titleLabel.text = viewModel?.buyerName
+
+        self.titleLabel.text = isInvoicePayment ? viewModel?.formattedSeatsCount : viewModel?.buyerName
+        self.titleLabel.isUserInteractionEnabled = !isInvoicePayment
 
         self.subtitleLabel.text = viewModel?.promoCodeName
         let subtitleBottomOffset = viewModel?.promoCodeName?.isEmpty ?? true
@@ -129,14 +135,30 @@ final class CourseRevenueTabPurchasesCellView: UIView {
             : self.appearance.subtitleLabelInsets.bottom
         self.subtitleBottomConstraint?.update(offset: -subtitleBottomOffset)
 
-        self.rightDetailSubtitleLabel.text = isRefunded
-            ? NSLocalizedString("CourseRevenueTransactionRefundedTitle", comment: "")
-            : viewModel?.formattedPaymentAmount
+        if isRefunded {
+            self.rightDetailSubtitleLabel.text = NSLocalizedString("CourseRevenueTransactionRefundedTitle", comment: "")
+        } else if let formattedPaymentAmount = viewModel?.formattedPaymentAmount {
+            self.rightDetailSubtitleLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedPaymentAmount,
+                priceFont: self.appearance.rightDetailSubtitleLabelFont,
+                priceColor: self.appearance.rightDetailSubtitleLabelTextColor
+            )
+        } else {
+            self.rightDetailSubtitleLabel.attributedText = nil
+        }
 
-        self.rightDetailTitleLabel.text = viewModel?.formattedAmount
         self.rightDetailTitleLabel.textColor = isRefunded
             ? self.appearance.rightDetailTitleLabelRefundedTextColor
             : self.appearance.rightDetailTitleLabelTextColor
+        if let formattedAmount = viewModel?.formattedAmount {
+            self.rightDetailTitleLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedAmount,
+                priceFont: self.appearance.rightDetailTitleLabelFont,
+                priceColor: self.rightDetailTitleLabel.textColor
+            )
+        } else {
+            self.rightDetailTitleLabel.attributedText = nil
+        }
     }
 
     @objc

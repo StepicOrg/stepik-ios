@@ -5,6 +5,7 @@ extension CourseRevenueTabMonthlyItemView {
     struct Appearance {
         let imageViewSize = CGSize(width: 24, height: 24)
         let imageViewInsets = LayoutInsets.default
+        let imageViewTintColor = UIColor.stepikMaterialPrimaryText
 
         let titleFont = Typography.bodyFont
         let titleTextColor = UIColor.stepikMaterialPrimaryText
@@ -22,6 +23,7 @@ final class CourseRevenueTabMonthlyItemView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = self.appearance.imageViewTintColor
         return imageView
     }()
 
@@ -58,6 +60,16 @@ final class CourseRevenueTabMonthlyItemView: UIView {
     var rightDetailTitle: String? {
         didSet {
             self.rightDetailTitleLabel.text = self.rightDetailTitle
+        }
+    }
+
+    var rightDetailAttributedTitle: NSAttributedString? {
+        didSet {
+            if let rightDetailAttributedTitle = self.rightDetailAttributedTitle {
+                self.rightDetailTitleLabel.attributedText = rightDetailAttributedTitle
+            } else {
+                self.rightDetailTitleLabel.attributedText = nil
+            }
         }
     }
 

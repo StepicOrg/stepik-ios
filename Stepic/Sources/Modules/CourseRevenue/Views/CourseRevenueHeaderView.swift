@@ -5,9 +5,7 @@ extension CourseRevenueHeaderView {
     struct Appearance {
         let incomeViewInsets = LayoutInsets.default
 
-        let disclaimerLabelFont = Typography.caption1Font
-        let disclaimerLabelTextColor = UIColor.stepikMaterialSecondaryText
-        let disclaimerLabelInsets = LayoutInsets.default
+        let disclaimerViewInsets = LayoutInsets.default
     }
 }
 
@@ -16,13 +14,7 @@ final class CourseRevenueHeaderView: UIView {
 
     private lazy var incomeView = CourseRevenueIncomeView()
 
-    private lazy var disclaimerLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.disclaimerLabelFont
-        label.textColor = self.appearance.disclaimerLabelTextColor
-        label.numberOfLines = 0
-        return label
-    }()
+    private lazy var disclaimerView = CourseRevenueDisclaimerView()
 
     var onSummaryButtonClick: ((Bool) -> Void)? {
         get {
@@ -36,8 +28,9 @@ final class CourseRevenueHeaderView: UIView {
     override var intrinsicContentSize: CGSize {
         let height = self.appearance.incomeViewInsets.top
             + self.incomeView.intrinsicContentSize.height
-            + self.appearance.disclaimerLabelInsets.top
-            + self.disclaimerLabel.intrinsicContentSize.height
+            + self.appearance.disclaimerViewInsets.top
+            + self.disclaimerView.intrinsicContentSize.height
+            + self.appearance.disclaimerViewInsets.bottom
         return CGSize(
             width: UIView.noIntrinsicMetric,
             height: height
@@ -74,16 +67,16 @@ final class CourseRevenueHeaderView: UIView {
 
     func configure(viewModel: CourseRevenueEmptyHeaderViewModel) {
         self.incomeView.configure(viewModel: viewModel)
-        self.disclaimerLabel.text = viewModel.disclaimerText
+        self.disclaimerView.text = viewModel.disclaimerText
     }
 
     func configure(viewModel: CourseRevenueHeaderViewModel) {
         self.incomeView.configure(viewModel: viewModel)
-        self.disclaimerLabel.text = viewModel.disclaimerText
+        self.disclaimerView.text = viewModel.disclaimerText
     }
 
     func setLoading(_ isLoading: Bool) {
-        [self.incomeView, self.disclaimerLabel].forEach { $0.isHidden = isLoading }
+        [self.incomeView, self.disclaimerView].forEach { $0.isHidden = isLoading }
 
         if isLoading {
             self.skeleton.viewBuilder = { CourseRevenueHeaderSkeletonView() }
@@ -97,7 +90,7 @@ final class CourseRevenueHeaderView: UIView {
 extension CourseRevenueHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.incomeView)
-        self.addSubview(self.disclaimerLabel)
+        self.addSubview(self.disclaimerView)
     }
 
     func makeConstraints() {
@@ -108,12 +101,12 @@ extension CourseRevenueHeaderView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.incomeViewInsets.right)
         }
 
-        self.disclaimerLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.disclaimerLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.incomeView.snp.bottom).offset(self.appearance.disclaimerLabelInsets.top)
-            make.leading.equalToSuperview().offset(self.appearance.disclaimerLabelInsets.left)
+        self.disclaimerView.translatesAutoresizingMaskIntoConstraints = false
+        self.disclaimerView.snp.makeConstraints { make in
+            make.top.equalTo(self.incomeView.snp.bottom).offset(self.appearance.disclaimerViewInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.disclaimerViewInsets.left)
             make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-self.appearance.disclaimerLabelInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.disclaimerViewInsets.right)
         }
     }
 }

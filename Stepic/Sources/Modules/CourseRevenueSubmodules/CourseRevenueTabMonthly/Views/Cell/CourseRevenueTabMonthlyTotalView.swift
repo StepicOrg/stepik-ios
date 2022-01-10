@@ -48,6 +48,18 @@ final class CourseRevenueTabMonthlyTotalView: UIView {
         }
     }
 
+    var rightDetailAttributedTitle: NSAttributedString? {
+        didSet {
+            if let rightDetailAttributedTitle = self.rightDetailAttributedTitle {
+                self.rightDetailTitleLabel.attributedText = rightDetailAttributedTitle
+            } else {
+                self.rightDetailTitleLabel.attributedText = nil
+            }
+        }
+    }
+
+    var rightDetailTitleLabelTextColor: UIColor { self.rightDetailTitleLabel.textColor }
+
     var style: Style = .yellowGreen {
         didSet {
             self.updateStyle()
