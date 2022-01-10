@@ -65,10 +65,14 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             courseBenefit.paymentAmount,
             currencyCode: courseBenefit.currencyCode
         )
-        let formattedAmount = FormatterHelper.priceCourseRevenue(
-            courseBenefit.amount,
-            currencyCode: courseBenefit.currencyCode
-        )
+        let formattedAmount: String = {
+            let sign = courseBenefit.amount > 0 ? "+" : ""
+            let price = FormatterHelper.priceCourseRevenue(
+                courseBenefit.amount,
+                currencyCode: courseBenefit.currencyCode
+            )
+            return "\(sign)\(price)"
+        }()
 
         return CourseRevenueTabPurchasesViewModel(
             uniqueIdentifier: "\(courseBenefit.id)",
