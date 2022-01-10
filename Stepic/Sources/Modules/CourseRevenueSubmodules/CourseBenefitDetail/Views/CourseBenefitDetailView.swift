@@ -137,6 +137,11 @@ final class CourseBenefitDetailView: UIView {
             title: NSLocalizedString("CourseBenefitDetailPaymentAmountTitle", comment: ""),
             detailTitle: viewModel.formattedPaymentAmount
         )
+        paymentAmountItem.detailAttributedTitle = FormatterHelper.priceCourseRevenueToAttributedString(
+            price: viewModel.formattedPaymentAmount,
+            priceFont: paymentAmountItem.rightDetailLabelFont,
+            priceColor: paymentAmountItem.rightDetailLabelTextColor
+        )
         self.scrollableStackView.addArrangedView(paymentAmountItem)
         itemViews.append(paymentAmountItem)
 
@@ -169,6 +174,11 @@ final class CourseBenefitDetailView: UIView {
             title: NSLocalizedString("CourseBenefitDetailAmountTitle", comment: ""),
             detailTitle: viewModel.formattedAmount,
             isLargeTitles: true
+        )
+        amountItem.detailAttributedTitle = FormatterHelper.priceCourseRevenueToAttributedString(
+            price: viewModel.formattedAmount,
+            priceFont: amountItem.rightDetailLabelFont,
+            priceColor: amountItem.rightDetailLabelTextColor
         )
         self.scrollableStackView.addArrangedView(amountItem)
         itemViews.append(amountItem)

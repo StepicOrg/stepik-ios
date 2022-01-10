@@ -61,11 +61,14 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             return FormatterHelper.dateStringWithFullMonthAndYear(courseBenefit.time ?? Date())
         }()
 
-        let formattedPaymentAmount = FormatterHelper.price(
+        let formattedPaymentAmount = FormatterHelper.priceCourseRevenue(
             courseBenefit.paymentAmount,
             currencyCode: courseBenefit.currencyCode
         )
-        let formattedAmount = FormatterHelper.price(courseBenefit.amount, currencyCode: courseBenefit.currencyCode)
+        let formattedAmount = FormatterHelper.priceCourseRevenue(
+            courseBenefit.amount,
+            currencyCode: courseBenefit.currencyCode
+        )
 
         return CourseRevenueTabPurchasesViewModel(
             uniqueIdentifier: "\(courseBenefit.id)",

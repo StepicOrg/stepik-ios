@@ -61,6 +61,16 @@ final class CourseRevenueTabMonthlyItemView: UIView {
         }
     }
 
+    var rightDetailAttributedTitle: NSAttributedString? {
+        didSet {
+            if let rightDetailAttributedTitle = self.rightDetailAttributedTitle {
+                self.rightDetailTitleLabel.attributedText = rightDetailAttributedTitle
+            } else {
+                self.rightDetailTitleLabel.attributedText = nil
+            }
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let height = max(
             self.appearance.imageViewSize.height,

@@ -51,7 +51,7 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             }
         }()
 
-        let formattedPaymentAmount = FormatterHelper.price(
+        let formattedPaymentAmount = FormatterHelper.priceCourseRevenue(
             courseBenefit.paymentAmount,
             currencyCode: courseBenefit.currencyCode
         )
@@ -66,7 +66,10 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             format: NSLocalizedString("CourseBenefitDetailAmountPercent", comment: ""),
             arguments: [formattedUserSharePercent]
         )
-        let formattedAmount = FormatterHelper.price(courseBenefit.amount, currencyCode: courseBenefit.currencyCode)
+        let formattedAmount = FormatterHelper.priceCourseRevenue(
+            courseBenefit.amount,
+            currencyCode: courseBenefit.currencyCode
+        )
 
         return CourseBenefitDetailViewModel(
             title: NSLocalizedString("CourseBenefitDetailTitle", comment: ""),

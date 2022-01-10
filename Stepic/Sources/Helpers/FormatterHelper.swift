@@ -1,5 +1,5 @@
-import Foundation
 import SwiftDate
+import UIKit
 
 enum FormatterHelper {
     // MARK: Numbers
@@ -51,6 +51,17 @@ enum FormatterHelper {
         return "\(prefix)\(adjustedMegabytes) \(NSLocalizedString("Mb", comment: ""))"
     }
 
+    // MARK: Price
+
+    private static var priceCourseRevenueNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.decimalSeparator = ","
+        return formatter
+    }()
+
     static func price(_ price: Float, currencyCode: String) -> String {
         self.price(price, currencySymbol: CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode)
     }
@@ -59,6 +70,57 @@ enum FormatterHelper {
         let hasDecimals = price.truncatingRemainder(dividingBy: 1) != 0
         let priceString = hasDecimals ? String(format: "%.2f", price) : "\(Int(price))"
         return "\(priceString) \(currencySymbol)"
+    }
+
+    static func priceCourseRevenue(_ price: Float, currencyCode: String) -> String {
+        self.priceCourseRevenue(
+            price,
+            currencySymbol: CurrencySymbolMap.getSymbolFromCurrency(code: currencyCode) ?? currencyCode
+        )
+    }
+
+    static func priceCourseRevenue(_ price: Float, currencySymbol: String) -> String {
+        let priceString = Self.priceCourseRevenueNumberFormatter.string(from: NSNumber(value: price))
+            ?? String(format: "%.2f", price).replacingOccurrences(of: ".", with: ",")
+        return "\(priceString) \(currencySymbol)"
+    }
+
+    static func priceCourseRevenueToAttributedString(
+        price: String,
+        priceFont: UIFont,
+        priceColor: UIColor,
+        decimalsFont: UIFont? = nil,
+        decimalsColor: UIColor? = nil,
+        decimalsFontDecreaseValue: Int = 3,
+        decimalSeparator: String = ","
+    ) -> NSAttributedString {
+        let attributedPriceString = NSMutableAttributedString(
+            string: price,
+            attributes: [
+                .font: priceFont,
+                .foregroundColor: priceColor
+            ]
+        )
+
+        if let decimalSeparatorLocation = price.indexOf(decimalSeparator) {
+            let font = decimalsFont ?? priceFont.withSize(priceFont.pointSize - CGFloat(decimalsFontDecreaseValue))
+            let foregroundColor = decimalsColor ?? priceColor
+
+            let decimalsRange = NSRange(
+                location: decimalSeparatorLocation + 1,
+                length: price.count - (decimalSeparatorLocation + 1)
+            )
+
+            attributedPriceString.addAttributes(
+                [
+                    .font: font,
+                    .foregroundColor: foregroundColor
+                ],
+                range: decimalsRange
+            )
+        }
+
+        return attributedPriceString
     }
 
     // MARK: Count

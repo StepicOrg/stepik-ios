@@ -129,14 +129,30 @@ final class CourseRevenueTabPurchasesCellView: UIView {
             : self.appearance.subtitleLabelInsets.bottom
         self.subtitleBottomConstraint?.update(offset: -subtitleBottomOffset)
 
-        self.rightDetailSubtitleLabel.text = isRefunded
-            ? NSLocalizedString("CourseRevenueTransactionRefundedTitle", comment: "")
-            : viewModel?.formattedPaymentAmount
+        if isRefunded {
+            self.rightDetailSubtitleLabel.text = NSLocalizedString("CourseRevenueTransactionRefundedTitle", comment: "")
+        } else if let formattedPaymentAmount = viewModel?.formattedPaymentAmount {
+            self.rightDetailSubtitleLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedPaymentAmount,
+                priceFont: self.appearance.rightDetailSubtitleLabelFont,
+                priceColor: self.appearance.rightDetailSubtitleLabelTextColor
+            )
+        } else {
+            self.rightDetailSubtitleLabel.attributedText = nil
+        }
 
-        self.rightDetailTitleLabel.text = viewModel?.formattedAmount
         self.rightDetailTitleLabel.textColor = isRefunded
             ? self.appearance.rightDetailTitleLabelRefundedTextColor
             : self.appearance.rightDetailTitleLabelTextColor
+        if let formattedAmount = viewModel?.formattedAmount {
+            self.rightDetailTitleLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedAmount,
+                priceFont: self.appearance.rightDetailTitleLabelFont,
+                priceColor: self.rightDetailTitleLabel.textColor
+            )
+        } else {
+            self.rightDetailTitleLabel.attributedText = nil
+        }
     }
 
     @objc

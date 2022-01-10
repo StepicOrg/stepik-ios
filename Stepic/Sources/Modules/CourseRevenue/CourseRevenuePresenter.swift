@@ -51,7 +51,7 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
             format: NSLocalizedString("CourseRevenueMonthIncomeDate", comment: ""),
             arguments: [formattedCurrentDate]
         )
-        let monthIncomeValueString = FormatterHelper.price(
+        let monthIncomeValueString = FormatterHelper.priceCourseRevenue(
             benefitSummary.monthUserIncome,
             currencyCode: benefitSummary.currencyCode
         )
@@ -60,7 +60,7 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
             format: NSLocalizedString("CourseRevenueMonthTurnoverDate", comment: ""),
             arguments: [formattedCurrentDate]
         )
-        let monthTurnoverValueString = FormatterHelper.price(
+        let monthTurnoverValueString = FormatterHelper.priceCourseRevenue(
             benefitSummary.monthTurnover,
             currencyCode: benefitSummary.currencyCode
         )
@@ -69,7 +69,7 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
             format: NSLocalizedString("CourseRevenueTotalIncomeDate", comment: ""),
             arguments: [formattedBeginPaymentDate]
         )
-        let totalIncomeValueString = FormatterHelper.price(
+        let totalIncomeValueString = FormatterHelper.priceCourseRevenue(
             benefitSummary.totalUserIncome,
             currencyCode: benefitSummary.currencyCode
         )
@@ -78,7 +78,7 @@ final class CourseRevenuePresenter: CourseRevenuePresenterProtocol {
             format: NSLocalizedString("CourseRevenueTotalTurnoverDate", comment: ""),
             arguments: [formattedBeginPaymentDate]
         )
-        let totalTurnoverValueString = FormatterHelper.price(
+        let totalTurnoverValueString = FormatterHelper.priceCourseRevenue(
             benefitSummary.totalTurnover,
             currencyCode: benefitSummary.currencyCode
         )
