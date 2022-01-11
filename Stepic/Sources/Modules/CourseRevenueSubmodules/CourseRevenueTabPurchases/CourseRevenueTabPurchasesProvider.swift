@@ -65,7 +65,7 @@ final class CourseRevenueTabPurchasesProvider: CourseRevenueTabPurchasesProvider
 
     private func fetchAndMergeBuyers(courseBenefits: [CourseBenefit]) -> Guarantee<Void> {
         Guarantee(
-            self.fetchUsersFromCacheOrNetwork(ids: courseBenefits.map(\.buyerID)),
+            self.fetchUsersFromCacheOrNetwork(ids: courseBenefits.compactMap(\.buyerID)),
             fallback: nil
         ).done { buyersOrNil in
             if let buyers = buyersOrNil {

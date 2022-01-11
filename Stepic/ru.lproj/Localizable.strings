@@ -596,6 +596,7 @@ CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Оплаты по счёт
 CourseRevenueTabPurchasesSeatsCount1 = "место в курсе";
 CourseRevenueTabPurchasesSeatsCount234 = "места в курсе";
 CourseRevenueTabPurchasesSeatsCount567890 = "мест в курсе";
+CourseRevenueTabPurchasesManualBenefitTitle = "Вручную: %@";
 
 /* CourseSearch */
 CourseSearchBarPlaceholder = "Поиск по курсу %@";

@@ -14,6 +14,8 @@ final class CourseBenefit: NSManagedObject, ManagedObject, JSONSerializable {
         self.course?.courseBeneficiaries.first(where: { $0.userID == self.userID })?.percent
     }
 
+    var isManualBenefit: Bool { self.buyerID == nil && !self.isInvoicePayment }
+
     required convenience init(json: JSON) {
         self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
         self.update(json: json)
@@ -29,7 +31,7 @@ final class CourseBenefit: NSManagedObject, ManagedObject, JSONSerializable {
         self.amount = json[JSONKey.amount.rawValue].floatValue
         self.currencyCode = json[JSONKey.currencyCode.rawValue].stringValue
         self.paymentAmount = json[JSONKey.paymentAmount.rawValue].floatValue
-        self.buyerID = json[JSONKey.buyer.rawValue].intValue
+        self.buyerID = json[JSONKey.buyer.rawValue].int
         self.isZLinkUsed = json[JSONKey.isZLinkUsed.rawValue].boolValue
         self.isInvoicePayment = json[JSONKey.isInvoicePayment.rawValue].boolValue
         self.promoCode = json[JSONKey.promoCode.rawValue].string

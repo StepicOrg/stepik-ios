@@ -30,7 +30,6 @@ final class CourseRevenueHeaderView: UIView {
             + self.incomeView.intrinsicContentSize.height
             + self.appearance.disclaimerViewInsets.top
             + self.disclaimerView.intrinsicContentSize.height
-            + self.appearance.disclaimerViewInsets.bottom
         return CGSize(
             width: UIView.noIntrinsicMetric,
             height: height

@@ -36,11 +36,13 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             return "Course \(courseBenefit.courseID)"
         }()
 
-        let formattedBuyerName: String = {
+        let formattedBuyerName: String? = {
             if let buyer = courseBenefit.buyer {
                 return FormatterHelper.username(buyer)
+            } else if let buyerID = courseBenefit.buyerID {
+                return "User \(buyerID)"
             }
-            return "User \(courseBenefit.buyerID)"
+            return nil
         }()
 
         let formattedSeatsCount: String? = {
@@ -55,6 +57,11 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
                 return NSLocalizedString("CourseBenefitDetailChannelZLink", comment: "")
             } else if courseBenefit.isInvoicePayment {
                 return NSLocalizedString("CourseBenefitDetailChannelInvoicePayment", comment: "")
+            } else if courseBenefit.isManualBenefit {
+                return String(
+                    format: NSLocalizedString("CourseRevenueTabPurchasesManualBenefitTitle", comment: ""),
+                    arguments: [courseBenefit.descriptionString]
+                ).trimmed()
             } else if courseBenefit.status == .refunded {
                 return NSLocalizedString("CourseBenefitDetailChannelRefund", comment: "")
             } else if courseBenefit.status == .debited {
@@ -100,7 +107,8 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
             formattedAmountPercent: formattedAmountPercent,
             formattedAmount: formattedAmount,
             isRefunded: courseBenefit.status == .refunded,
-            isInvoicePayment: courseBenefit.isInvoicePayment
+            isInvoicePayment: courseBenefit.isInvoicePayment,
+            isManualBenefit: courseBenefit.isManualBenefit
         )
     }
 }

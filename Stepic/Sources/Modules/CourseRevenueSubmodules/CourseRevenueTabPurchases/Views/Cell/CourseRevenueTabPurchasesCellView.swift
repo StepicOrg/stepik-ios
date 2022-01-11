@@ -4,7 +4,8 @@ import UIKit
 extension CourseRevenueTabPurchasesCellView {
     struct Appearance {
         let logoImageViewSize = CGSize(width: 24, height: 24)
-        let logoImageViewTintColor = UIColor.stepikMaterialPrimaryText
+        let logoImageViewPrimaryTintColor = UIColor.stepikMaterialPrimaryText
+        let logoImageViewSecondaryTintColor = UIColor.stepikMaterialSecondaryText
         let logoImageViewInsets = LayoutInsets.default
 
         let dateLabelTextColor = UIColor.stepikMaterialSecondaryText
@@ -111,23 +112,41 @@ final class CourseRevenueTabPurchasesCellView: UIView {
     func configure(viewModel: CourseRevenueTabPurchasesViewModel?) {
         let isRefunded = viewModel?.isRefunded ?? false
         let isInvoicePayment = viewModel?.isInvoicePayment ?? false
+        let isManualBenefit = viewModel?.isManualBenefit ?? false
 
         let logoImage: UIImage? = {
-            if isRefunded {
+            if isManualBenefit {
+                return UIImage(named: "course-revenue-transaction-logo")
+            } else if isRefunded {
                 return UIImage(named: "course-revenue-transaction-refund")
             } else if viewModel?.isZLinkUsed ?? false {
                 return UIImage(named: "course-revenue-transaction-z-link")
             }
             return UIImage(named: "course-revenue-transaction-logo")
         }()
-        let logoImageRenderingMode: UIImage.RenderingMode = isInvoicePayment ? .alwaysTemplate : .alwaysOriginal
+        let logoImageRenderingMode: UIImage.RenderingMode = (isInvoicePayment || isManualBenefit)
+            ? .alwaysTemplate
+            : .alwaysOriginal
+        let logoImageTintColor = isManualBenefit
+            ? self.appearance.logoImageViewSecondaryTintColor
+            : self.appearance.logoImageViewPrimaryTintColor
 
         self.logoImageView.image = logoImage?.withRenderingMode(logoImageRenderingMode)
-        self.logoImageView.tintColor = self.appearance.logoImageViewTintColor
+        self.logoImageView.tintColor = logoImageTintColor
+
         self.dateLabel.text = viewModel?.formattedDate
 
-        self.titleLabel.text = isInvoicePayment ? viewModel?.formattedSeatsCount : viewModel?.buyerName
-        self.titleLabel.isUserInteractionEnabled = !isInvoicePayment
+        let titleText: String? = {
+            if isInvoicePayment {
+                return viewModel?.formattedSeatsCount
+            } else if isManualBenefit {
+                return viewModel?.formattedManualBenefitDescription
+            } else {
+                return viewModel?.buyerName
+            }
+        }()
+        self.titleLabel.text = titleText
+        self.titleLabel.isUserInteractionEnabled = !isInvoicePayment && !isManualBenefit
 
         self.subtitleLabel.text = viewModel?.promoCodeName
         let subtitleBottomOffset = viewModel?.promoCodeName?.isEmpty ?? true

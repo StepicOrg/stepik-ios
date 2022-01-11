@@ -594,6 +594,7 @@ CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Payment on account";
 CourseRevenueTabPurchasesSeatsCount1 = "seat in the course";
 CourseRevenueTabPurchasesSeatsCount234 = "seats in the course";
 CourseRevenueTabPurchasesSeatsCount567890 = "seats in the course";
+CourseRevenueTabPurchasesManualBenefitTitle = "Manually: %@";
 
 /* CourseSearch */
 CourseSearchBarPlaceholder = "Search in the course %@";

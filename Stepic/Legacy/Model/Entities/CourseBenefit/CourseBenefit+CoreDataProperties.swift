@@ -91,12 +91,12 @@ extension CourseBenefit {
         }
     }
 
-    var buyerID: User.IdType {
+    var buyerID: User.IdType? {
         get {
-            self.managedBuyerId?.intValue ?? -1
+            self.managedBuyerId?.intValue
         }
         set {
-            self.managedBuyerId = NSNumber(value: newValue)
+            self.managedBuyerId = newValue as NSNumber?
         }
     }
 
