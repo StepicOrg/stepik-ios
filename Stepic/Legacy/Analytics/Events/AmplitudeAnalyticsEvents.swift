@@ -672,6 +672,32 @@ extension AnalyticsEvent {
         )
     }
 
+    static func personalDeadlinesAppNotificationShown(
+        courseID: Int,
+        hoursBeforeDeadline: Int
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Personal deadlines app notification shown",
+            parameters: [
+                "course": courseID,
+                "hours": hoursBeforeDeadline
+            ]
+        )
+    }
+
+    static func personalDeadlinesAppNotificationClicked(
+        courseID: Int,
+        hoursBeforeDeadline: Int
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Personal deadlines app notification clicked",
+            parameters: [
+                "course": courseID,
+                "hours": hoursBeforeDeadline
+            ]
+        )
+    }
+
     // MARK: - Home -
 
     static let homeScreenOpened = AmplitudeAnalyticsEvent(name: "Home screen opened")

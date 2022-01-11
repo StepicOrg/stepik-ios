@@ -139,25 +139,51 @@ extension NotificationsService {
             self.analytics.send(.streakNotificationShown(type: streakNotification.streakType.rawValue))
         } else if let retentionNotification = localNotification as? RetentionLocalNotification {
             self.analytics.send(.retentionNotificationShown(day: retentionNotification.retention.notificationDayOffset))
+        } else if let personalDeadlineNotification = localNotification as? PersonalDeadlineLocalNotification {
+            self.analytics.send(
+                .personalDeadlinesAppNotificationShown(
+                    courseID: personalDeadlineNotification.course.id,
+                    hoursBeforeDeadline: personalDeadlineNotification.hoursBeforeDeadline
+                )
+            )
         }
     }
 
     private func reportReceivedLocalNotification(with userInfo: NotificationUserInfo?) {
-        guard let userInfo = userInfo else {
+        guard let userInfo = userInfo,
+              let notificationName = userInfo[
+                LocalNotificationsService.PayloadKey.notificationName.rawValue
+              ] as? String else {
             return
         }
 
-        guard let key = userInfo[LocalNotificationsService.PayloadKey.notificationName.rawValue] as? String else {
-            return
-        }
+        if notificationName.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
+            guard let streakType = userInfo[PayloadKey.streakType.rawValue] as? String else {
+                return
+            }
 
-        if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue),
-           let streakType = userInfo[PayloadKey.streakType.rawValue] as? String {
             self.analytics.send(.streakNotificationClicked(type: streakType))
-        } else if key.localizedCaseInsensitiveContains(NotificationType.retentionNextDay.rawValue)
-                  || key.localizedCaseInsensitiveContains(NotificationType.retentionThirdDay.rawValue),
-                  let notificationDayOffset = userInfo[PayloadKey.retentionDayOffset.rawValue] as? Int {
+        } else if notificationName.localizedCaseInsensitiveContains(NotificationType.retentionNextDay.rawValue)
+                    || notificationName.localizedCaseInsensitiveContains(NotificationType.retentionThirdDay.rawValue) {
+            guard let notificationDayOffset = userInfo[PayloadKey.retentionDayOffset.rawValue] as? Int else {
+                return
+            }
+
             self.analytics.send(.retentionNotificationClicked(day: notificationDayOffset))
+        } else if notificationName.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
+            guard let courseID = userInfo[PersonalDeadlineLocalNotification.UserInfoKey.course.rawValue] as? Int,
+                  let hoursBeforeDeadline = userInfo[
+                    PersonalDeadlineLocalNotification.UserInfoKey.hoursBeforeDeadline.rawValue
+                  ] as? Int else {
+                return
+            }
+
+            self.analytics.send(
+                .personalDeadlinesAppNotificationClicked(
+                    courseID: courseID,
+                    hoursBeforeDeadline: hoursBeforeDeadline
+                )
+            )
         }
     }
 
