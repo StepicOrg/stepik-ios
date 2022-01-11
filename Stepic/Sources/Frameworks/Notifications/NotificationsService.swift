@@ -79,7 +79,9 @@ extension NotificationsService {
             self.removeLocalNotifications(identifiers: [localNotification.identifier])
         }
 
-        self.localNotificationsService.scheduleNotification(localNotification).catch { error in
+        self.localNotificationsService.scheduleNotification(localNotification).done {
+            self.reportScheduledLocalNotification(localNotification)
+        }.catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
@@ -94,9 +96,12 @@ extension NotificationsService {
 
     func handleLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
+        self.reportReceivedLocalNotification(with: userInfo)
         self.reportReceivedNotificationWithType(self.extractNotificationType(from: userInfo))
         self.routeLocalNotification(with: userInfo)
     }
+
+    // MARK: Private Helpers
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
         func route(to route: DeepLinkRoute) {
@@ -129,18 +134,73 @@ extension NotificationsService {
         }
     }
 
-    private func reportReceivedNotificationWithType(_ notificationType: String?) {
-        if let notificationType = notificationType {
-            switch UIApplication.shared.applicationState {
-            case .active:
-                self.analytics.send(.foregroundNotificationReceived(notificationType: notificationType))
-            case .inactive:
-                self.analytics.send(.inactiveNotificationReceived(notificationType: notificationType))
-            case .background:
-                break
-            @unknown default:
-                break
+    private func reportScheduledLocalNotification(_ localNotification: LocalNotificationProtocol) {
+        if let streakNotification = localNotification as? StreakLocalNotification {
+            self.analytics.send(.streakNotificationShown(type: streakNotification.streakType.rawValue))
+        } else if let retentionNotification = localNotification as? RetentionLocalNotification {
+            self.analytics.send(.retentionNotificationShown(day: retentionNotification.retention.notificationDayOffset))
+        } else if let personalDeadlineNotification = localNotification as? PersonalDeadlineLocalNotification {
+            self.analytics.send(
+                .personalDeadlinesAppNotificationShown(
+                    courseID: personalDeadlineNotification.course.id,
+                    hoursBeforeDeadline: personalDeadlineNotification.hoursBeforeDeadline
+                )
+            )
+        }
+    }
+
+    private func reportReceivedLocalNotification(with userInfo: NotificationUserInfo?) {
+        guard let userInfo = userInfo,
+              let notificationName = userInfo[
+                LocalNotificationsService.PayloadKey.notificationName.rawValue
+              ] as? String else {
+            return
+        }
+
+        if notificationName.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
+            guard let streakType = userInfo[PayloadKey.streakType.rawValue] as? String else {
+                return
             }
+
+            self.analytics.send(.streakNotificationClicked(type: streakType))
+        } else if notificationName.localizedCaseInsensitiveContains(NotificationType.retentionNextDay.rawValue)
+                    || notificationName.localizedCaseInsensitiveContains(NotificationType.retentionThirdDay.rawValue) {
+            guard let notificationDayOffset = userInfo[PayloadKey.retentionDayOffset.rawValue] as? Int else {
+                return
+            }
+
+            self.analytics.send(.retentionNotificationClicked(day: notificationDayOffset))
+        } else if notificationName.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
+            guard let courseID = userInfo[PersonalDeadlineLocalNotification.UserInfoKey.course.rawValue] as? Int,
+                  let hoursBeforeDeadline = userInfo[
+                    PersonalDeadlineLocalNotification.UserInfoKey.hoursBeforeDeadline.rawValue
+                  ] as? Int else {
+                return
+            }
+
+            self.analytics.send(
+                .personalDeadlinesAppNotificationClicked(
+                    courseID: courseID,
+                    hoursBeforeDeadline: hoursBeforeDeadline
+                )
+            )
+        }
+    }
+
+    private func reportReceivedNotificationWithType(_ notificationType: String?) {
+        guard let notificationType = notificationType else {
+            return
+        }
+
+        switch UIApplication.shared.applicationState {
+        case .active:
+            self.analytics.send(.foregroundNotificationReceived(notificationType: notificationType))
+        case .inactive:
+            self.analytics.send(.inactiveNotificationReceived(notificationType: notificationType))
+        case .background:
+            break
+        @unknown default:
+            break
         }
     }
 }
@@ -239,6 +299,8 @@ extension NotificationsService {
         case new
         case badge
         case storyURL = "story_url"
+        case streakType
+        case retentionDayOffset
     }
 }
 

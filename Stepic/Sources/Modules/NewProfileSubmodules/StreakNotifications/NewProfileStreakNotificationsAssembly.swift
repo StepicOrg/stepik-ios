@@ -5,8 +5,13 @@ final class NewProfileStreakNotificationsAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let presenter = NewProfileStreakNotificationsPresenter()
+        let provider = NewProfileStreakNotificationsProvider(
+            submissionsPersistenceService: SubmissionsPersistenceService(),
+            userActivitiesPersistenceService: UserActivitiesPersistenceService()
+        )
         let interactor = NewProfileStreakNotificationsInteractor(
             presenter: presenter,
+            provider: provider,
             streakNotificationsStorageManager: StreakNotificationsStorageManager(),
             notificationsService: NotificationsService(),
             tooltipStorageManager: TooltipStorageManager()

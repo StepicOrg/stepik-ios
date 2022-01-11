@@ -13,7 +13,8 @@ struct RetentionLocalNotification: LocalNotificationProtocol {
 
     var userInfo: [AnyHashable: Any] {
         [
-            NotificationsService.PayloadKey.type.rawValue: self.retention.notificationType
+            NotificationsService.PayloadKey.type.rawValue: self.retention.notificationType,
+            NotificationsService.PayloadKey.retentionDayOffset.rawValue: self.retention.notificationDayOffset
         ]
     }
 
@@ -65,6 +66,15 @@ struct RetentionLocalNotification: LocalNotificationProtocol {
         case nextDay
         case thirdDay
 
+        var notificationDayOffset: Int {
+            switch self {
+            case .nextDay:
+                return 1
+            case .thirdDay:
+                return 3
+            }
+        }
+
         fileprivate var notificationType: String {
             switch self {
             case .nextDay:
@@ -101,15 +111,6 @@ struct RetentionLocalNotification: LocalNotificationProtocol {
                     forKey: "RetentionNotificationOnThirdDayText",
                     arguments: nil
                 )
-            }
-        }
-
-        fileprivate var notificationDayOffset: Int {
-            switch self {
-            case .nextDay:
-                return 1
-            case .thirdDay:
-                return 3
             }
         }
     }
