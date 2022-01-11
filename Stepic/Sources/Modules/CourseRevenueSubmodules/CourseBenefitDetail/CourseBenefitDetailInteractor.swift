@@ -47,8 +47,8 @@ final class CourseBenefitDetailInteractor: CourseBenefitDetailInteractorProtocol
     }
 
     func doBuyerProfilePresentation(request: CourseBenefitDetail.BuyerProfilePresentation.Request) {
-        if let currentCourseBenefit = self.currentCourseBenefit {
-            self.moduleOutput?.handleCourseBenefitDetailDidRequestPresentUser(userID: currentCourseBenefit.buyerID)
+        if let buyerID = self.currentCourseBenefit?.buyerID {
+            self.moduleOutput?.handleCourseBenefitDetailDidRequestPresentUser(userID: buyerID)
         }
     }
 

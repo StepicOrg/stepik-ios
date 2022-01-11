@@ -9,9 +9,10 @@ struct CourseBenefitPlainObject {
     let amount: Float
     let currencyCode: String
     let paymentAmount: Float
-    let buyerID: Int
+    let buyerID: Int?
     let isZLinkUsed: Bool
     let isInvoicePayment: Bool
+    let isManualBenefit: Bool
     let promoCode: String?
     let seatsCount: Int?
     let descriptionString: String
@@ -32,6 +33,7 @@ extension CourseBenefitPlainObject {
         self.buyerID = courseBenefit.buyerID
         self.isZLinkUsed = courseBenefit.isZLinkUsed
         self.isInvoicePayment = courseBenefit.isInvoicePayment
+        self.isManualBenefit = courseBenefit.isManualBenefit
         self.promoCode = courseBenefit.promoCode
         self.seatsCount = courseBenefit.seatsCount
         self.descriptionString = courseBenefit.descriptionString

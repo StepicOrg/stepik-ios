@@ -118,29 +118,34 @@ final class CourseBenefitDetailView: UIView {
         self.scrollableStackView.addArrangedView(courseItem)
         itemViews.append(courseItem)
 
-        let buyerItem: CourseBenefitDetailItemView
-        if viewModel.isInvoicePayment,
-           let formattedSeatsCount = viewModel.formattedSeatsCount {
-            buyerItem = self.makeItemView(
-                title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
-                detailTitle: formattedSeatsCount
-            )
-        } else {
-            buyerItem = self.makeItemView(
-                title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
-                detailTitle: viewModel.buyerName,
-                isClickable: true
-            )
-            buyerItem.onRightDetailLabelTapped = { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
+        let buyerItem: CourseBenefitDetailItemView? = {
+            if viewModel.isInvoicePayment,
+               let formattedSeatsCount = viewModel.formattedSeatsCount {
+                return self.makeItemView(
+                    title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
+                    detailTitle: formattedSeatsCount
+                )
+            } else if let buyerName = viewModel.buyerName {
+                let itemView = self.makeItemView(
+                    title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
+                    detailTitle: buyerName,
+                    isClickable: true
+                )
+                itemView.onRightDetailLabelTapped = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-                strongSelf.delegate?.courseBenefitDetailViewDidClickBuyerButton(strongSelf)
+                    strongSelf.delegate?.courseBenefitDetailViewDidClickBuyerButton(strongSelf)
+                }
+                return itemView
             }
+            return nil
+        }()
+        if let buyerItem = buyerItem {
+            self.scrollableStackView.addArrangedView(buyerItem)
+            itemViews.append(buyerItem)
         }
-        self.scrollableStackView.addArrangedView(buyerItem)
-        itemViews.append(buyerItem)
 
         let paymentAmountItem = self.makeItemView(
             title: NSLocalizedString("CourseBenefitDetailPaymentAmountTitle", comment: ""),
@@ -163,7 +168,7 @@ final class CourseBenefitDetailView: UIView {
             itemViews.append(promoCodeItem)
         }
 
-        if !viewModel.isRefunded {
+        if !viewModel.isRefunded || viewModel.isManualBenefit {
             let channelItem = self.makeItemView(
                 title: NSLocalizedString("CourseBenefitDetailChannelTitle", comment: ""),
                 detailTitle: viewModel.channelName

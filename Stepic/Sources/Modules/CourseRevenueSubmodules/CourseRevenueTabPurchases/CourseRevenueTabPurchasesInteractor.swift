@@ -118,11 +118,11 @@ final class CourseRevenueTabPurchasesInteractor: CourseRevenueTabPurchasesIntera
     func doBuyerProfilePresentation(request: CourseRevenueTabPurchases.BuyerProfilePresentation.Request) {
         guard let targetCourseBenefit = self.currentCourseBenefits?.first(
             where: { "\($0.id)" == request.viewModelUniqueIdentifier }
-        ) else {
+        ), let buyerID = targetCourseBenefit.buyerID else {
             return
         }
 
-        self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: targetCourseBenefit.buyerID)
+        self.moduleOutput?.handleCourseRevenueTabPurchasesDidRequestPresentUser(userID: buyerID)
     }
 
     enum Error: Swift.Error {

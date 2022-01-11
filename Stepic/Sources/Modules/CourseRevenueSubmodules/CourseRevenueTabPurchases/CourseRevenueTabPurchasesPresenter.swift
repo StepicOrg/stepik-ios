@@ -51,7 +51,7 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             if let buyer = courseBenefit.buyer {
                 return FormatterHelper.username(buyer)
             }
-            return "User \(courseBenefit.buyerID)"
+            return "User \(courseBenefit.buyerID ??? "n/a")"
         }()
 
         let formattedDate: String = {
@@ -81,6 +81,17 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             return nil
         }()
 
+        let formattedManualBenefitDescription: String? = {
+            guard courseBenefit.isManualBenefit else {
+                return nil
+            }
+
+            return String(
+                format: NSLocalizedString("CourseRevenueTabPurchasesManualBenefitTitle", comment: ""),
+                arguments: [courseBenefit.descriptionString]
+            ).trimmed()
+        }()
+
         return CourseRevenueTabPurchasesViewModel(
             uniqueIdentifier: "\(courseBenefit.id)",
             formattedDate: formattedDate,
@@ -89,10 +100,12 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             formattedPaymentAmount: formattedPaymentAmount,
             formattedAmount: formattedAmount,
             formattedSeatsCount: formattedSeatsCount,
+            formattedManualBenefitDescription: formattedManualBenefitDescription,
             isDebited: courseBenefit.status == .debited,
             isRefunded: courseBenefit.status == .refunded,
             isZLinkUsed: courseBenefit.isZLinkUsed,
-            isInvoicePayment: courseBenefit.isInvoicePayment
+            isInvoicePayment: courseBenefit.isInvoicePayment,
+            isManualBenefit: courseBenefit.isManualBenefit
         )
     }
 }
