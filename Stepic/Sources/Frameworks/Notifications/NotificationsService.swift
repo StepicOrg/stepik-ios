@@ -137,6 +137,8 @@ extension NotificationsService {
     private func reportScheduledLocalNotification(_ localNotification: LocalNotificationProtocol) {
         if let streakNotification = localNotification as? StreakLocalNotification {
             self.analytics.send(.streakNotificationShown(type: streakNotification.streakType.rawValue))
+        } else if let retentionNotification = localNotification as? RetentionLocalNotification {
+            self.analytics.send(.retentionNotificationShown(day: retentionNotification.retention.notificationDayOffset))
         }
     }
 
@@ -152,12 +154,11 @@ extension NotificationsService {
         if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue),
            let streakType = userInfo[PayloadKey.streakType.rawValue] as? String {
             self.analytics.send(.streakNotificationClicked(type: streakType))
-        } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
-        } else if key.localizedCaseInsensitiveContains(NotificationType.remindPurchaseCourse.rawValue) {
-        } else {
+        } else if key.localizedCaseInsensitiveContains(NotificationType.retentionNextDay.rawValue)
+                  || key.localizedCaseInsensitiveContains(NotificationType.retentionThirdDay.rawValue),
+                  let notificationDayOffset = userInfo[PayloadKey.retentionDayOffset.rawValue] as? Int {
+            self.analytics.send(.retentionNotificationClicked(day: notificationDayOffset))
         }
-
-        print(userInfo)
     }
 
     private func reportReceivedNotificationWithType(_ notificationType: String?) {
@@ -273,6 +274,7 @@ extension NotificationsService {
         case badge
         case storyURL = "story_url"
         case streakType
+        case retentionDayOffset
     }
 }
 

@@ -658,6 +658,20 @@ extension AnalyticsEvent {
         )
     }
 
+    static func retentionNotificationShown(day: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Retention notification shown",
+            parameters: ["day": day]
+        )
+    }
+
+    static func retentionNotificationClicked(day: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Retention notification clicked",
+            parameters: ["day": day]
+        )
+    }
+
     // MARK: - Home -
 
     static let homeScreenOpened = AmplitudeAnalyticsEvent(name: "Home screen opened")
