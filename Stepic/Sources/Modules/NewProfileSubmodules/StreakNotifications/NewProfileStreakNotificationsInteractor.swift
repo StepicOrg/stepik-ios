@@ -14,6 +14,8 @@ protocol NewProfileStreakNotificationsInteractorProtocol {
 
 final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificationsInteractorProtocol {
     private let presenter: NewProfileStreakNotificationsPresenterProtocol
+    private let provider: NewProfileStreakNotificationsProviderProtocol
+
     private let streakNotificationsStorageManager: StreakNotificationsStorageManagerProtocol
     private let notificationsService: NotificationsService
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
@@ -21,8 +23,11 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
     private let analyticsUserProperties: AnalyticsUserProperties
     private let analytics: Analytics
 
+    private var currentUserID: User.IdType?
+
     init(
         presenter: NewProfileStreakNotificationsPresenterProtocol,
+        provider: NewProfileStreakNotificationsProviderProtocol,
         streakNotificationsStorageManager: StreakNotificationsStorageManagerProtocol,
         notificationsService: NotificationsService,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
@@ -34,6 +39,8 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
         analytics: Analytics = StepikAnalytics.shared
     ) {
         self.presenter = presenter
+        self.provider = provider
+
         self.streakNotificationsStorageManager = streakNotificationsStorageManager
         self.notificationsService = notificationsService
         self.notificationsRegistrationService = notificationsRegistrationService
@@ -119,11 +126,18 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
             self.streakNotificationsStorageManager.isStreakNotificationsEnabled = true
             self.notificationsRegistrationService.registerForRemoteNotifications()
 
-            self.notificationsService.scheduleStreakLocalNotification(
-                utcStartHour: self.streakNotificationsStorageManager.streakNotificationsStartHourUTC
-            )
-
             self.analytics.send(.streaksPreferenceOn)
+
+            guard let currentUserID = self.currentUserID else {
+                return
+            }
+
+            self.provider.fetchStreakLocalNotificationType(userID: currentUserID).done { streakType in
+                self.notificationsService.scheduleStreakLocalNotification(
+                    utcStartHour: self.streakNotificationsStorageManager.streakNotificationsStartHourUTC,
+                    streakType: streakType
+                )
+            }
         } else {
             self.turnOffStreakNotifications()
         }
@@ -159,6 +173,7 @@ final class NewProfileStreakNotificationsInteractor: NewProfileStreakNotificatio
 
 extension NewProfileStreakNotificationsInteractor: NewProfileSubmoduleProtocol {
     func update(with user: User, isCurrentUserProfile: Bool, isOnline: Bool) {
+        self.currentUserID = user.id
         self.doStreakNotificationsLoad(request: .init())
     }
 }

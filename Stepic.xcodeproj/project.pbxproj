@@ -1216,6 +1216,7 @@
 		2CF6E62C25ADB92A00B5A703 /* StepicWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6E62B25ADB92A00B5A703 /* StepicWidget.swift */; };
 		2CF6E62E25ADB92B00B5A703 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */; };
 		2CF6E63225ADB92B00B5A703 /* StepicWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2CF6E62525ADB92A00B5A703 /* StepicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2CF741D2278DEE3400BDD9B4 /* NewProfileStreakNotificationsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF741D1278DEE3400BDD9B4 /* NewProfileStreakNotificationsProvider.swift */; };
 		2CF7E3342417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */; };
 		2CF8DF4025F2291100F577C2 /* ReviewSessionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF3F25F2291100F577C2 /* ReviewSessionsAPI.swift */; };
 		2CF8DF4725F2303300F577C2 /* ReviewSessionPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */; };
@@ -3265,6 +3266,7 @@
 		2CF6E62B25ADB92A00B5A703 /* StepicWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicWidget.swift; sourceTree = "<group>"; };
 		2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CF6E62F25ADB92B00B5A703 /* Info-Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
+		2CF741D1278DEE3400BDD9B4 /* NewProfileStreakNotificationsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsProvider.swift; sourceTree = "<group>"; };
 		2CF7E3332417C1A700B9188E /* UseCellularDataForDownloadsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCellularDataForDownloadsStorageManager.swift; sourceTree = "<group>"; };
 		2CF8DF3F25F2291100F577C2 /* ReviewSessionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionsAPI.swift; sourceTree = "<group>"; };
 		2CF8DF4625F2303300F577C2 /* ReviewSessionPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionPlainObject.swift; sourceTree = "<group>"; };
@@ -9977,6 +9979,7 @@
 				0135D703CAD3B1C16BC95B63 /* NewProfileStreakNotificationsDataFlow.swift */,
 				7B9DB0A6C0B38CE13676ED50 /* NewProfileStreakNotificationsInteractor.swift */,
 				58C6ED5894DADC5B17310B92 /* NewProfileStreakNotificationsPresenter.swift */,
+				2CF741D1278DEE3400BDD9B4 /* NewProfileStreakNotificationsProvider.swift */,
 				B3846EE2E0A7FD5405D8D1AF /* NewProfileStreakNotificationsViewController.swift */,
 				2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */,
 				2C3A035724AE3DD4007D28F7 /* Views */,
@@ -11492,6 +11495,7 @@
 				2C1E42A02497BE0C009F4C69 /* CoursePurchase+CoreDataProperties.swift in Sources */,
 				2C87A7AB2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
+				2CF741D2278DEE3400BDD9B4 /* NewProfileStreakNotificationsProvider.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,

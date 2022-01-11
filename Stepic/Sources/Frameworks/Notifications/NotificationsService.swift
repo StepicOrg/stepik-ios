@@ -79,7 +79,9 @@ extension NotificationsService {
             self.removeLocalNotifications(identifiers: [localNotification.identifier])
         }
 
-        self.localNotificationsService.scheduleNotification(localNotification).catch { error in
+        self.localNotificationsService.scheduleNotification(localNotification).done {
+            self.reportScheduledLocalNotification(localNotification)
+        }.catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
@@ -94,9 +96,12 @@ extension NotificationsService {
 
     func handleLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
+        self.reportReceivedLocalNotification(with: userInfo)
         self.reportReceivedNotificationWithType(self.extractNotificationType(from: userInfo))
         self.routeLocalNotification(with: userInfo)
     }
+
+    // MARK: Private Helpers
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
         func route(to route: DeepLinkRoute) {
@@ -129,18 +134,46 @@ extension NotificationsService {
         }
     }
 
+    private func reportScheduledLocalNotification(_ localNotification: LocalNotificationProtocol) {
+        if let streakNotification = localNotification as? StreakLocalNotification {
+            self.analytics.send(.streakNotificationShown(type: streakNotification.streakType.rawValue))
+        }
+    }
+
+    private func reportReceivedLocalNotification(with userInfo: NotificationUserInfo?) {
+        guard let userInfo = userInfo else {
+            return
+        }
+
+        guard let key = userInfo[LocalNotificationsService.PayloadKey.notificationName.rawValue] as? String else {
+            return
+        }
+
+        if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue),
+           let streakType = userInfo[PayloadKey.streakType.rawValue] as? String {
+            self.analytics.send(.streakNotificationClicked(type: streakType))
+        } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
+        } else if key.localizedCaseInsensitiveContains(NotificationType.remindPurchaseCourse.rawValue) {
+        } else {
+        }
+
+        print(userInfo)
+    }
+
     private func reportReceivedNotificationWithType(_ notificationType: String?) {
-        if let notificationType = notificationType {
-            switch UIApplication.shared.applicationState {
-            case .active:
-                self.analytics.send(.foregroundNotificationReceived(notificationType: notificationType))
-            case .inactive:
-                self.analytics.send(.inactiveNotificationReceived(notificationType: notificationType))
-            case .background:
-                break
-            @unknown default:
-                break
-            }
+        guard let notificationType = notificationType else {
+            return
+        }
+
+        switch UIApplication.shared.applicationState {
+        case .active:
+            self.analytics.send(.foregroundNotificationReceived(notificationType: notificationType))
+        case .inactive:
+            self.analytics.send(.inactiveNotificationReceived(notificationType: notificationType))
+        case .background:
+            break
+        @unknown default:
+            break
         }
     }
 }
@@ -239,6 +272,7 @@ extension NotificationsService {
         case new
         case badge
         case storyURL = "story_url"
+        case streakType
     }
 }
 

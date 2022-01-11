@@ -644,6 +644,20 @@ extension AnalyticsEvent {
         )
     }
 
+    static func streakNotificationShown(type: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Streak notification shown",
+            parameters: ["type": type]
+        )
+    }
+
+    static func streakNotificationClicked(type: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Streak notification clicked",
+            parameters: ["type": type]
+        )
+    }
+
     // MARK: - Home -
 
     static let homeScreenOpened = AmplitudeAnalyticsEvent(name: "Home screen opened")

@@ -8,6 +8,8 @@ protocol SubmissionsPersistenceServiceProtocol: AnyObject {
     func fetchAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<[SubmissionEntity]>
     func deleteAttemptSubmissions(attemptID: Attempt.IdType) -> Guarantee<Void>
 
+    func hasSubmissions(userID: User.IdType) -> Guarantee<Bool>
+
     func deleteAll() -> Promise<Void>
 }
 
@@ -60,6 +62,23 @@ final class SubmissionsPersistenceService: BasePersistenceService<SubmissionEnti
                         print("Error while fetching submissions for attempt = \(attemptID), error = \(error)")
                         seal([])
                     }
+                }
+            }
+        }
+    }
+
+    func hasSubmissions(userID: User.IdType) -> Guarantee<Bool> {
+        Guarantee { seal in
+            let request = SubmissionEntity.sortedFetchRequest
+            request.predicate = NSPredicate(format: "managedAttempt.managedUserID == %@", NSNumber(value: userID))
+
+            self.managedObjectContext.perform {
+                do {
+                    let submissionsCount = try self.managedObjectContext.count(for: request)
+                    seal(submissionsCount > 0)
+                } catch {
+                    print("Error while fetching submissions for userID = \(userID), error = \(error)")
+                    seal(false)
                 }
             }
         }
