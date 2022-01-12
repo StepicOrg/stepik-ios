@@ -1,21 +1,30 @@
 import PromiseKit
+import SnapKit
 import UIKit
 
+// swiftlint:disable file_length
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
     func displayContent(viewModel: Home.ContentLoad.ViewModel)
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel)
+    func displayStoriesBlock(viewModel: Home.StoriesVisibilityUpdate.ViewModel)
+    func displayStatusBarStyle(viewModel: Home.StatusBarStyleUpdate.ViewModel)
+    func displayCatalog(viewModel: Home.CatalogPresentation.ViewModel)
 }
 
 final class HomeViewController: BaseExploreViewController {
+    enum Appearance {
+        static let continueCourseHeight: CGFloat = 72
+    }
+
     enum Animation {
         static let startRefreshDelay: TimeInterval = 1.0
         static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
     fileprivate static let submodulesOrder: [Home.Submodule] = [
+        .stories,
         .streakActivity,
-        .continueCourse,
         .enrolledCourses,
         .reviewsAndWishlist,
         .visitedCourses,
@@ -25,6 +34,7 @@ final class HomeViewController: BaseExploreViewController {
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag = false
 
+    private var currentStoriesSubmoduleState = StoriesState.shown
     private var currentEnrolledCourseListState: EnrolledCourseListState?
     private var currentReviewsAndWishlistState: ReviewsAndWishlistState?
 
@@ -86,6 +96,44 @@ final class HomeViewController: BaseExploreViewController {
         self.homeInteractor?.doContentLoad(request: .init())
     }
 
+    // MARK: - Stories
+
+    private enum StoriesState {
+        case shown
+        case hidden
+    }
+
+    private func refreshStateForStories(state: StoriesState) {
+        defer {
+            self.currentStoriesSubmoduleState = state
+        }
+
+        if let submodule = self.getSubmodule(type: Home.Submodule.stories) {
+            self.removeSubmodule(submodule)
+        }
+
+        guard case .shown = state else {
+            return
+        }
+
+        let storiesAssembly = StoriesAssembly(
+            storyOpenSource: .home,
+            output: self.homeInteractor as? StoriesOutputProtocol
+        )
+        let storiesViewController = storiesAssembly.makeModule()
+        let storiesContainerView = ExploreStoriesContainerView(
+            contentView: storiesViewController.view
+        )
+        self.registerSubmodule(
+            .init(
+                viewController: storiesViewController,
+                view: storiesContainerView,
+                isLanguageDependent: true,
+                type: Home.Submodule.stories
+            )
+        )
+    }
+
     // MARK: - Streak activity
 
     private enum StreakActivityState {
@@ -124,8 +172,17 @@ final class HomeViewController: BaseExploreViewController {
     }
 
     private func refreshContinueCourse(state: ContinueCourseState) {
+        var contentInsets = self.exploreView?.contentInsets ?? .zero
+
         if let submodule = self.getSubmodule(type: Home.Submodule.continueCourse) {
             self.removeSubmodule(submodule)
+        }
+
+        defer {
+            contentInsets.bottom = state == .shown
+                ? (Appearance.continueCourseHeight + LayoutInsets.default.bottom)
+                : 0
+            self.exploreView?.contentInsets = contentInsets
         }
 
         guard case .shown = state else {
@@ -136,14 +193,22 @@ final class HomeViewController: BaseExploreViewController {
             output: self.interactor as? ContinueCourseOutputProtocol
         )
         let continueCourseViewController = continueCourseAssembly.makeModule()
+
         self.registerSubmodule(
             .init(
                 viewController: continueCourseViewController,
                 view: continueCourseViewController.view,
+                isArrangeable: false,
                 isLanguageDependent: false,
                 type: Home.Submodule.continueCourse
             )
         )
+
+        continueCourseViewController.view.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(Appearance.continueCourseHeight)
+        }
     }
 
     // MARK: - Fullscreen displaying
@@ -185,6 +250,17 @@ final class HomeViewController: BaseExploreViewController {
         case error
         case empty
 
+        var containerDescription: CourseListContainerViewFactory.HorizontalContainerDescription {
+            switch self {
+            case .normal:
+                return .init(background: .image(UIImage(named: "new_courses_gradient")))
+            case .empty:
+                return .init(background: .image(UIImage(named: "new_courses_placeholder_gradient_large")))
+            case .anonymous, .error:
+                return .init(background: .image(UIImage(named: "new_courses_placeholder_gradient_small")))
+            }
+        }
+
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Enrolled", comment: ""),
@@ -193,12 +269,12 @@ final class HomeViewController: BaseExploreViewController {
             )
         }
 
-        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+        var placeholderStyle: NewExploreBlockPlaceholderView.PlaceholderStyle {
             switch self {
             case .anonymous:
-                return .login
+                return .anonymous
             case .error:
-                return .enrolledError
+                return .error
             case .empty:
                 return .enrolledEmpty
             default:
@@ -211,7 +287,7 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = EnrolledCourseListType()
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .light,
+            colorMode: .clearLight,
             courseViewSource: .myCourses,
             output: self.interactor as? CourseListOutputProtocol
         )
@@ -239,15 +315,19 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makeEnrolledCourseListSubmodule()
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
+            let placeholderView = NewExploreBlockPlaceholderView(placeholderStyle: state.placeholderStyle)
             switch state {
             case .anonymous:
-                placeholderView.onPlaceholderClick = { [weak self] in
+                placeholderView.onActionButtonClick = { [weak self] in
                     self?.displayAuthorization(viewModel: .init())
                 }
             case .error:
-                placeholderView.onPlaceholderClick = { [weak self] in
+                placeholderView.onActionButtonClick = { [weak self] in
                     self?.refreshStateForEnrolledCourses(state: .normal)
+                }
+            case .empty:
+                placeholderView.onActionButtonClick = { [weak self] in
+                    self?.displayCatalog(viewModel: .init())
                 }
             default:
                 break
@@ -262,6 +342,7 @@ final class HomeViewController: BaseExploreViewController {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
+                containerDescription: state.containerDescription,
                 headerDescription: state.headerDescription,
                 contentViewInsets: contentViewInsets
             )
@@ -491,10 +572,7 @@ extension HomeViewController: HomeViewControllerProtocol {
     func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
         case .continueCourse:
-            switch viewModel.result {
-            default:
-                self.refreshContinueCourse(state: .hidden)
-            }
+            self.refreshContinueCourse(state: .hidden)
         case .enrolledCourses:
             switch viewModel.result {
             case .empty:
@@ -533,19 +611,36 @@ extension HomeViewController: HomeViewControllerProtocol {
                 return
             }
 
-            strongSelf.lastContentLanguage = viewModel.contentLanguage
-            strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
-
-            let shouldDisplayContinueCourse = viewModel.isAuthorized
+            let shouldDisplayStories = strongSelf.currentStoriesSubmoduleState == .shown
+                || (strongSelf.currentStoriesSubmoduleState == .hidden
+                        && strongSelf.lastContentLanguage != viewModel.contentLanguage)
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
             let shouldDisplayReviewsAndWishlist = viewModel.isAuthorized
 
-            strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
+            strongSelf.lastContentLanguage = viewModel.contentLanguage
+            strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
+
+            strongSelf.refreshStateForStories(state: shouldDisplayStories ? .shown : .hidden)
+            strongSelf.refreshContinueCourse(state: .shown)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshReviewsAndWishlist(state: shouldDisplayReviewsAndWishlist ? .shown : .hidden)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }
+    }
+
+    func displayStoriesBlock(viewModel: Home.StoriesVisibilityUpdate.ViewModel) {
+        self.refreshStateForStories(state: viewModel.isHidden ? .hidden : .shown)
+    }
+
+    func displayStatusBarStyle(viewModel: Home.StatusBarStyleUpdate.ViewModel) {
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarStyle(viewModel.statusBarStyle, sender: self)
+        }
+    }
+
+    func displayCatalog(viewModel: Home.CatalogPresentation.ViewModel) {
+        DeepLinkRouter.routeToCatalog()
     }
 }
 

@@ -82,7 +82,7 @@ final class UserCoursesReviewsWidgetView: UIControl {
         let view = UIView()
         view.backgroundColor = self.appearance.accentIndicatorViewBackgroundColor
         view.isHidden = true
-        view.setRoundedCorners(cornerRadius: self.appearance.accentIndicatorViewCornerRadius)
+        view.roundAllCorners(radius: self.appearance.accentIndicatorViewCornerRadius)
         return view
     }()
 

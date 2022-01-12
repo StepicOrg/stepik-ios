@@ -4,6 +4,7 @@ enum CourseListColorMode {
     case light
     case dark
     case grouped
+    case clearLight
 
     static var `default`: CourseListColorMode { .light }
 }
@@ -11,7 +12,7 @@ enum CourseListColorMode {
 extension CourseListColorMode {
     var exploreBlockHeaderViewAppearance: ExploreBlockHeaderView.Appearance {
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             return .init(
                 titleLabelColor: .stepikSystemPrimaryText,
                 showAllButtonColor: .stepikSystemSecondaryText
@@ -26,7 +27,7 @@ extension CourseListColorMode {
 
     var exploreBlockContainerViewAppearance: ExploreBlockContainerView.Appearance {
         var appearance = ExploreBlockContainerView.Appearance()
-        appearance.backgroundColor = self.exploreBlockContainerViewBackgroundColor
+        appearance.background = .color(self.exploreBlockContainerViewBackgroundColor)
         return appearance
     }
 
@@ -53,6 +54,8 @@ extension CourseListColorMode {
                         return .stepikSecondaryBackground
                     }
                     return .stepikAccentFixed
+                case .clearLight:
+                    return .clear
                 }
             }
         } else {
@@ -61,6 +64,8 @@ extension CourseListColorMode {
                 return .white
             case .dark:
                 return .stepikAccentFixed
+            case .clearLight:
+                return .clear
             }
         }
     }
@@ -71,7 +76,7 @@ extension CourseListColorMode {
 
     var courseWidgetStatsViewAppearance: CourseWidgetStatsView.Appearance {
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             return .init(
                 imagesRenderingBackgroundColor: .stepikSystemSecondaryText,
                 imagesRenderingTintColor: .stepikGreenFixed,
@@ -95,7 +100,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             appearance.textColor = .stepikSystemPrimaryText
         case .dark:
             appearance.textColor = .white
@@ -111,7 +116,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             appearance.textColor = .stepikSystemSecondaryText
         case .dark:
             appearance.textColor = UIColor.dynamic(
@@ -125,7 +130,7 @@ extension CourseListColorMode {
 
     var courseWidgetBadgeTintColor: UIColor {
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             return .stepikSystemSecondaryText
         case .dark:
             return .dynamic(
@@ -137,7 +142,7 @@ extension CourseListColorMode {
 
     var courseWidgetBorderColor: UIColor {
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             return .dynamic(light: .stepikGrey8Fixed, dark: .stepikSeparator)
         case .dark:
             if #available(iOS 13.0, *) {
@@ -150,7 +155,7 @@ extension CourseListColorMode {
 
     var courseWidgetBackgroundColor: UIColor {
         switch self {
-        case .light:
+        case .light, .clearLight:
             return .dynamic(light: .white, dark: .stepikSecondaryBackground)
         case .grouped:
             return .stepikSecondaryGroupedBackground

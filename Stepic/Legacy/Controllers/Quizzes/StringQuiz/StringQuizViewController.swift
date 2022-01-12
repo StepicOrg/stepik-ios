@@ -36,7 +36,7 @@ final class StringQuizViewController: QuizViewController {
             make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
         }
 
-        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
+        textView.roundAllCorners(radius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.snp.makeConstraints { $0.height.equalTo(textViewHeight) }

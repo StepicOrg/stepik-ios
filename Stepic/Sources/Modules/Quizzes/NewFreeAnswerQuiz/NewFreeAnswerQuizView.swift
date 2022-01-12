@@ -39,8 +39,8 @@ final class NewFreeAnswerQuizView: UIView, TitlePresentable {
     private lazy var textView: TableInputTextView = {
         let textView = TableInputTextView()
         textView.textInsets = self.appearance.textFieldInsets
-        textView.setRoundedCorners(
-            cornerRadius: self.appearance.textFieldBorderCornerRadius,
+        textView.roundAllCorners(
+            radius: self.appearance.textFieldBorderCornerRadius,
             borderWidth: self.appearance.textFieldBorderWidth,
             borderColor: self.appearance.textFieldBorderColor
         )

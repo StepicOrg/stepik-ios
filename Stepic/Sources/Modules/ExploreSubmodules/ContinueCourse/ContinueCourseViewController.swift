@@ -9,11 +9,7 @@ protocol ContinueCourseViewControllerProtocol: AnyObject {
 
 final class ContinueCourseViewController: UIViewController {
     private let interactor: ContinueCourseInteractorProtocol
-    private var state: ContinueCourse.ViewControllerState {
-        didSet {
-            self.updateState()
-        }
-    }
+    private var state: ContinueCourse.ViewControllerState
 
     lazy var continueCourseView = self.view as? ContinueCourseView
     private lazy var continueLearningTooltip = TooltipFactory.continueLearningWidget
@@ -36,25 +32,38 @@ final class ContinueCourseViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        let view = ContinueCourseView(
-            frame: UIScreen.main.bounds
-        )
+        let view = ContinueCourseView(frame: UIScreen.main.bounds)
         view.delegate = self
         self.view = view
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.updateState(newState: self.state)
+    }
 
-        self.updateState()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.interactor.doLastCourseRefresh(request: .init())
     }
 
-    private func updateState() {
-        if case .loading = self.state {
+    private func updateState(newState: ContinueCourse.ViewControllerState) {
+        defer {
+            self.state = newState
+        }
+
+        self.continueCourseView?.hideLoading()
+        self.continueCourseView?.hideEmpty()
+
+        switch newState {
+        case .loading:
             self.continueCourseView?.showLoading()
-        } else {
-            self.continueCourseView?.hideLoading()
+        case .empty:
+            self.continueCourseView?.showEmpty()
+        case .result(let viewModel):
+            self.continueCourseView?.configure(viewModel: viewModel)
+            self.interactor.doTooltipAvailabilityCheck(request: .init())
+            self.interactor.doSiriButtonAvailabilityCheck(request: .init())
         }
     }
 }
@@ -63,17 +72,12 @@ final class ContinueCourseViewController: UIViewController {
 
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel) {
-        if case .result(let result) = viewModel.state {
-            self.continueCourseView?.configure(viewModel: result)
-            self.interactor.doTooltipAvailabilityCheck(request: .init())
-            self.interactor.doSiriButtonAvailabilityCheck(request: .init())
-        }
-
-        self.state = viewModel.state
+        self.updateState(newState: viewModel.state)
     }
 
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel) {
-        guard let continueCourseView = self.continueCourseView else {
+        guard let continueCourseView = self.continueCourseView,
+              let parentView = self.parent?.view else {
             return
         }
 
@@ -83,8 +87,8 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
                 continueCourseView.setNeedsLayout()
                 continueCourseView.layoutIfNeeded()
                 self?.continueLearningTooltip.show(
-                    direction: .up,
-                    in: continueCourseView,
+                    direction: .down,
+                    in: parentView,
                     from: continueCourseView.tooltipAnchorView
                 )
             }
@@ -109,8 +113,12 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
 // MARK: - ContinueCourseViewController: ContinueCourseViewDelegate -
 
 extension ContinueCourseViewController: ContinueCourseViewDelegate {
-    func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView) {
+    func continueCourseDidClickContinue(_ continueCourseView: ContinueCourseView) {
         self.interactor.doContinueLastCourseAction(request: .init())
+    }
+
+    func continueCourseDidClickEmpty(_ continueCourseView: ContinueCourseView) {
+        self.interactor.doContinueCourseEmptyAction(request: .init())
     }
 
     func continueCourseSiriButtonDidClick(_ continueCourseView: ContinueCourseView) {

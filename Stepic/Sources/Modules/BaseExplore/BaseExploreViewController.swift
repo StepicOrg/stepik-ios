@@ -47,20 +47,29 @@ class BaseExploreViewController: UIViewController {
     // MARK: Modules
 
     func registerSubmodule(_ submodule: Submodule) {
+        defer {
+            submodule.viewController?.didMove(toParent: self)
+        }
+
         self.submodules.append(submodule)
 
         if let viewController = submodule.viewController {
             self.addChild(viewController)
         }
 
-        // We have contract here:
-        // - subviews in exploreView have same position as in corresponding Submodule object
-        for module in self.submodules where module.type.position >= submodule.type.position {
-            self.exploreView?.insertBlockView(
-                submodule.view,
-                before: module.view
-            )
-            return
+        if submodule.isArrangeable {
+            let arrangeableSubmodules = self.submodules.filter(\.isArrangeable)
+            // We have contract here:
+            // - subviews in exploreView have same position as in corresponding Submodule object
+            for module in arrangeableSubmodules where module.type.position >= submodule.type.position {
+                self.exploreView?.insertBlockView(
+                    submodule.view,
+                    before: module.view
+                )
+                return
+            }
+        } else {
+            self.exploreView?.addSubview(submodule.view)
         }
     }
 
@@ -71,6 +80,7 @@ class BaseExploreViewController: UIViewController {
     }
 
     func removeSubmodule(_ submodule: Submodule) {
+        submodule.viewController?.willMove(toParent: nil)
         self.exploreView?.removeBlockView(submodule.view)
         submodule.viewController?.removeFromParent()
         self.submodules = self.submodules.filter { submodule.view != $0.view }
@@ -124,6 +134,7 @@ class BaseExploreViewController: UIViewController {
     struct Submodule {
         let viewController: UIViewController?
         let view: UIView
+        var isArrangeable = true
         let isLanguageDependent: Bool
         let type: SubmoduleType
     }

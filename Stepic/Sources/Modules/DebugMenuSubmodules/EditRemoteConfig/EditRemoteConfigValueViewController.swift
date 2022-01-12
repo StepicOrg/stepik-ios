@@ -98,8 +98,8 @@ final class EditRemoteConfigValueViewController: UIViewController {
         textView.font = self.appearance.textViewFont
         textView.textColor = self.appearance.textViewTextColor
         textView.textInsets = self.appearance.textViewTextInsets.edgeInsets
-        textView.setRoundedCorners(
-            cornerRadius: self.appearance.textViewBorderCornerRadius,
+        textView.roundAllCorners(
+            radius: self.appearance.textViewBorderCornerRadius,
             borderWidth: self.appearance.textViewBorderWidth,
             borderColor: self.appearance.textViewBorderColor
         )

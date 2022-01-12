@@ -61,7 +61,7 @@ final class CodeEditorPreviewView: NibInitializableView {
 
         self.previewTextView = UITextView(frame: previewContainer.frame, textContainer: textContainer)
         self.previewTextView.translatesAutoresizingMaskIntoConstraints = false
-        self.previewTextView.setRoundedCorners(cornerRadius: 5, borderWidth: 1.0, borderColor: .lightGray)
+        self.previewTextView.roundAllCorners(radius: 5, borderWidth: 1.0, borderColor: .lightGray)
         self.previewTextView.isEditable = false
         self.previewTextView.isSelectable = false
         self.previewContainer.addSubview(previewTextView)

@@ -68,7 +68,7 @@ final class CourseInfoTabReviewsReviewButton: UIControl {
 extension CourseInfoTabReviewsReviewButton: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
-        self.setRoundedCorners(cornerRadius: self.appearance.cornerRadius)
+        self.roundAllCorners(radius: self.appearance.cornerRadius)
     }
 
     func addSubviews() {

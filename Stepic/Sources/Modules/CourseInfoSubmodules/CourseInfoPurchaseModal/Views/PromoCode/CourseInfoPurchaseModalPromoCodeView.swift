@@ -65,8 +65,8 @@ final class CourseInfoPurchaseModalPromoCodeView: UIView {
         textField.textColor = self.appearance.textFieldTextColor
         textField.font = self.appearance.textFieldFont
         textField.textInsets = self.appearance.textFieldInsets
-        textField.setRoundedCorners(
-            cornerRadius: self.appearance.textFieldCornerRadius,
+        textField.roundAllCorners(
+            radius: self.appearance.textFieldCornerRadius,
             borderWidth: self.appearance.textFieldBorderWidth,
             borderColor: self.appearance.textFieldBorderColor
         )

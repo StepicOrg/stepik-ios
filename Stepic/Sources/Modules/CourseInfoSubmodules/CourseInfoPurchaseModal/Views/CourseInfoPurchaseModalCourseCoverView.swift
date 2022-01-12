@@ -18,7 +18,7 @@ final class CourseInfoPurchaseModalCourseCoverView: UIView {
 
     private lazy var coverImageView: CourseCoverImageView = {
         let view = CourseCoverImageView()
-        view.setRoundedCorners(cornerRadius: self.appearance.coverImageViewCornerRadius)
+        view.roundAllCorners(radius: self.appearance.coverImageViewCornerRadius)
         return view
     }()
 

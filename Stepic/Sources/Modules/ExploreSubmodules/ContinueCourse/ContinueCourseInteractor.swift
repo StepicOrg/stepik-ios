@@ -4,6 +4,7 @@ import PromiseKit
 protocol ContinueCourseInteractorProtocol {
     func doLastCourseRefresh(request: ContinueCourse.LastCourseLoad.Request)
     func doContinueLastCourseAction(request: ContinueCourse.ContinueCourseAction.Request)
+    func doContinueCourseEmptyAction(request: ContinueCourse.ContinueCourseEmptyAction.Request)
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request)
     func doSiriButtonAvailabilityCheck(request: ContinueCourse.SiriButtonAvailabilityCheck.Request)
     func doSiriButtonAction(request: ContinueCourse.SiriButtonAction.Request)
@@ -50,12 +51,14 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         self.provider.fetchLastCourse().done { course in
             if let course = course {
                 self.currentCourse = course
-                self.presenter.presentLastCourse(response: .init(result: course))
+                self.presenter.presentLastCourse(response: .init(result: .success(course)))
             } else {
-                self.moduleOutput?.hideContinueCourse()
+                self.presenter.presentLastCourse(response: .init(result: .failure(Error.noLastCourse)))
             }
         }.catch { _ in
-            self.moduleOutput?.hideContinueCourse()
+            if self.currentCourse == nil {
+                self.moduleOutput?.hideContinueCourse()
+            }
         }
     }
 
@@ -82,6 +85,10 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         }
     }
 
+    func doContinueCourseEmptyAction(request: ContinueCourse.ContinueCourseEmptyAction.Request) {
+        self.moduleOutput?.presentCatalog()
+    }
+
     func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request) {
         self.presenter.presentTooltip(
             response: .init(
@@ -106,6 +113,10 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             self.siriShortcutsStorageManager.didClickAddToSiriOnHomeWidget = true
         }
     }
+
+    enum Error: Swift.Error {
+        case noLastCourse
+    }
 }
 
 extension ContinueCourseInteractor: DataBackUpdateServiceDelegate {
@@ -120,7 +131,7 @@ extension ContinueCourseInteractor: DataBackUpdateServiceDelegate {
         }
 
         self.currentCourse = course
-        self.presenter.presentLastCourse(response: .init(result: course))
+        self.presenter.presentLastCourse(response: .init(result: .success(course)))
     }
 
     func dataBackUpdateService(

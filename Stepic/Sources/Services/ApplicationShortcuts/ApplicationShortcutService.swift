@@ -20,6 +20,11 @@ final class ApplicationShortcutService: ApplicationShortcutServiceProtocol {
     init(
         lastCourseDataShortcutService: LastCourseDataShortcutServiceProtocol = LastCourseDataShortcutService(),
         adaptiveStorageManager: AdaptiveStorageManagerProtocol = AdaptiveStorageManager(),
+        continueCourseProvider: ContinueCourseProviderProtocol = ContinueCourseProvider(
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        ),
         userAccountService: UserAccountServiceProtocol = UserAccountService(),
         sourcelessRouter: SourcelessRouter = SourcelessRouter(),
         analytics: Analytics = StepikAnalytics.shared

@@ -29,7 +29,11 @@ final class BaseExploreView: UIView {
     }
 
     func removeBlockView(_ view: UIView) {
-        self.scrollableStackView.removeArrangedView(view)
+        if self.scrollableStackView.arrangedSubviews.contains(view) {
+            self.scrollableStackView.removeArrangedView(view)
+        } else {
+            view.removeFromSuperview()
+        }
     }
 
     func insertBlockView(_ view: UIView, at position: Int) {
@@ -73,6 +77,15 @@ extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
 }
 
 extension BaseExploreView: ScrollableStackViewDelegate {
+    var contentInsets: UIEdgeInsets {
+        get {
+            self.scrollableStackView.contentInsets
+        }
+        set {
+            self.scrollableStackView.contentInsets = newValue
+        }
+    }
+
     func scrollableStackViewRefreshControlDidRefresh(_ scrollableStackView: ScrollableStackView) {
         self.delegate?.refreshControlDidRefresh()
     }

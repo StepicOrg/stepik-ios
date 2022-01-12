@@ -72,7 +72,7 @@ final class CourseInfoTabNewsBadgeView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.setRoundedCorners(cornerRadius: self.intrinsicContentSize.height / 2)
+        self.roundAllCorners(radius: self.intrinsicContentSize.height / 2)
     }
 
     func configure(type: BadgeType) {

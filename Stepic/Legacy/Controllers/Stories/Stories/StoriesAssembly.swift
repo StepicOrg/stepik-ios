@@ -11,7 +11,10 @@ import UIKit
 final class StoriesAssembly: Assembly {
     weak var moduleOutput: StoriesOutputProtocol?
 
-    init(output: StoriesOutputProtocol?) {
+    private let storyOpenSource: StoryOpenSource
+
+    init(storyOpenSource: StoryOpenSource, output: StoriesOutputProtocol? = nil) {
+        self.storyOpenSource = storyOpenSource
         self.moduleOutput = output
     }
 
@@ -28,6 +31,7 @@ final class StoriesAssembly: Assembly {
         )
         presenter.moduleOutput = self.moduleOutput
         viewController.presenter = presenter
+        viewController.storyOpenSource = self.storyOpenSource
 
         return viewController
     }

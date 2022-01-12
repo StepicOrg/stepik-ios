@@ -8,7 +8,7 @@ enum ContinueCourse {
         struct Request {}
 
         struct Response {
-            let result: Course
+            let result: StepikResult<Course>
         }
 
         struct ViewModel {
@@ -18,6 +18,11 @@ enum ContinueCourse {
 
     /// Go to last step
     enum ContinueCourseAction {
+        struct Request {}
+    }
+
+    /// Go to catalog
+    enum ContinueCourseEmptyAction {
         struct Request {}
     }
 
@@ -58,6 +63,7 @@ enum ContinueCourse {
 
     enum ViewControllerState {
         case loading
+        case empty
         case result(data: ContinueCourseViewModel)
     }
 }

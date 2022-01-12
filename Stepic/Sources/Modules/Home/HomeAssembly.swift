@@ -9,7 +9,10 @@ final class HomeAssembly: Assembly {
             provider: provider,
             userAccountService: UserAccountService(),
             networkReachabilityService: NetworkReachabilityService(),
-            contentLanguageService: ContentLanguageService()
+            contentLanguageService: ContentLanguageService(),
+            personalOffersService: PersonalOffersService(
+                storageRecordsNetworkService: StorageRecordsNetworkService(storageRecordsAPI: StorageRecordsAPI())
+            )
         )
         let viewController = HomeViewController(interactor: interactor, analytics: StepikAnalytics.shared)
 

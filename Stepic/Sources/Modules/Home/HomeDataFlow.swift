@@ -4,6 +4,7 @@ enum Home {
     // MARK: Submodules identifiers
 
     enum Submodule: String, UniqueIdentifiable {
+        case stories
         case streakActivity
         case continueCourse
         case enrolledCourses
@@ -72,5 +73,33 @@ enum Home {
             let module: Home.Submodule
             let result: State
         }
+    }
+
+    /// Update stories visibility
+    enum StoriesVisibilityUpdate {
+        struct Response {
+            let isHidden: Bool
+        }
+
+        struct ViewModel {
+            let isHidden: Bool
+        }
+    }
+
+    /// Update status bar style (called by stories module)
+    enum StatusBarStyleUpdate {
+        struct Response {
+            let statusBarStyle: UIStatusBarStyle
+        }
+
+        struct ViewModel {
+            let statusBarStyle: UIStatusBarStyle
+        }
+    }
+
+    enum CatalogPresentation {
+        struct Response {}
+
+        struct ViewModel {}
     }
 }

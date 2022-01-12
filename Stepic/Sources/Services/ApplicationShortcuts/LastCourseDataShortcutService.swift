@@ -16,8 +16,8 @@ final class LastCourseDataShortcutService: LastCourseDataShortcutServiceProtocol
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
         adaptiveStorageManager: AdaptiveStorageManagerProtocol = AdaptiveStorageManager(),
         continueCourseProvider: ContinueCourseProviderProtocol = ContinueCourseProvider(
-            userCoursesAPI: UserCoursesAPI(),
-            coursesAPI: CoursesAPI(),
+            userCoursesNetworkService: UserCoursesNetworkService(userCoursesAPI: UserCoursesAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
         )
     ) {

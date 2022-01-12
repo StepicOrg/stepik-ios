@@ -9,6 +9,7 @@ protocol HomeInteractorProtocol: BaseExploreInteractorProtocol {
 final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     private let provider: HomeProviderProtocol
     private let userAccountService: UserAccountServiceProtocol
+    private let personalOffersService: PersonalOffersServiceProtocol
 
     private lazy var homePresenter = self.presenter as? HomePresenterProtocol
 
@@ -17,10 +18,13 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         provider: HomeProviderProtocol,
         userAccountService: UserAccountServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
-        contentLanguageService: ContentLanguageServiceProtocol
+        contentLanguageService: ContentLanguageServiceProtocol,
+        personalOffersService: PersonalOffersServiceProtocol
     ) {
         self.provider = provider
         self.userAccountService = userAccountService
+        self.personalOffersService = personalOffersService
+
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
@@ -55,6 +59,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
                 contentLanguage: self.contentLanguageService.globalContentLanguage
             )
         )
+        self.syncPersonalOffers()
     }
 
     override func presentEmptyState(sourceModule: CourseListInputProtocol) {
@@ -86,6 +91,29 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
             fatalError("Unrecognized submodule")
         }
     }
+
+    private func syncPersonalOffers() {
+        guard self.networkReachabilityService.isReachable else {
+            return
+        }
+
+        guard let currentUser = self.userAccountService.currentUser,
+              !currentUser.isGuest && self.userAccountService.isAuthorized else {
+            return
+        }
+
+        self.personalOffersService.syncPersonalOffers(userID: currentUser.id).cauterize()
+    }
+}
+
+extension HomeInteractor: StoriesOutputProtocol {
+    func hideStories() {
+        self.homePresenter?.presentStoriesBlock(response: .init(isHidden: true))
+    }
+
+    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
+        self.homePresenter?.presentStatusBarStyle(response: .init(statusBarStyle: statusBarStyle))
+    }
 }
 
 extension HomeInteractor: ContinueCourseOutputProtocol {
@@ -93,8 +121,12 @@ extension HomeInteractor: ContinueCourseOutputProtocol {
         self.homePresenter?.presentCourseListState(
             response: .init(
                 module: Home.Submodule.continueCourse,
-                result: .empty
+                result: .error
             )
         )
+    }
+
+    func presentCatalog() {
+        self.homePresenter?.presentCatalog(response: .init())
     }
 }

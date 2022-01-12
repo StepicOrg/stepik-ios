@@ -12,8 +12,6 @@ protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
 final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol {
     private lazy var explorePresenter = self.presenter as? ExplorePresenterProtocol
 
-    private let userAccountService: UserAccountServiceProtocol
-    private let personalOffersService: PersonalOffersServiceProtocol
     private let contentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
 
     private lazy var currentSearchResultsCourseListFilters = self.getDefaultSearchResultsCourseListFilters()
@@ -22,12 +20,8 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         presenter: ExplorePresenterProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
-        userAccountService: UserAccountServiceProtocol,
-        personalOffersService: PersonalOffersServiceProtocol,
         languageSwitchAvailabilityService: ContentLanguageSwitchAvailabilityServiceProtocol
     ) {
-        self.userAccountService = userAccountService
-        self.personalOffersService = personalOffersService
         self.contentLanguageSwitchAvailabilityService = languageSwitchAvailabilityService
 
         super.init(
@@ -41,7 +35,6 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         self.explorePresenter?.presentContent(
             response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         )
-        self.syncPersonalOffers()
     }
 
     func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request) {
@@ -116,29 +109,6 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
             return .visitedCourses
         }
         return nil
-    }
-
-    private func syncPersonalOffers() {
-        guard self.networkReachabilityService.isReachable else {
-            return
-        }
-
-        guard let currentUser = self.userAccountService.currentUser,
-              !currentUser.isGuest && self.userAccountService.isAuthorized else {
-            return
-        }
-
-        self.personalOffersService.syncPersonalOffers(userID: currentUser.id).cauterize()
-    }
-}
-
-extension ExploreInteractor: StoriesOutputProtocol {
-    func hideStories() {
-        self.explorePresenter?.presentStoriesBlock(response: .init(isHidden: true))
-    }
-
-    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
-        self.explorePresenter?.presentStatusBarStyle(response: .init(statusBarStyle: statusBarStyle))
     }
 }
 

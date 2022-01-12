@@ -27,7 +27,7 @@ final class SubmissionView: UIView {
 
     private lazy var statusView: UIView = {
         let view = UIView()
-        view.setRoundedCorners(cornerRadius: self.appearance.statusViewSize.height / 2)
+        view.roundAllCorners(radius: self.appearance.statusViewSize.height / 2)
         return view
     }()
 

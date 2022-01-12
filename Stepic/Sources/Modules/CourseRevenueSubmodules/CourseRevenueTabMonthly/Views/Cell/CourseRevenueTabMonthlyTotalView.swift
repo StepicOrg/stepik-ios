@@ -152,7 +152,7 @@ extension CourseRevenueTabMonthlyTotalView: ProgrammaticallyInitializableViewPro
         self.layer.addSublayer(self.gradientLayer)
 
         self.updateStyle()
-        self.setRoundedCorners(cornerRadius: self.appearance.cornerRadius)
+        self.roundAllCorners(radius: self.appearance.cornerRadius)
     }
 
     func addSubviews() {

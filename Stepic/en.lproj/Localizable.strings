@@ -313,6 +313,13 @@ Enrolled = "Enrolled";
 Popular = "Popular";
 VisitedCourses = "Visited courses";
 Home = "Home";
+RecommendedCategory = "Recommended courses";
+NewHomePlaceholderAnonymousTitle = "Sign in and start learning right now";
+NewHomePlaceholderAnonymousButtonTitle = "Sign In";
+NewHomePlaceholderErrorTitle = "Connection is lost";
+NewHomePlaceholderErrorButtonTitle = "Try Again";
+NewHomePlaceholderEmptyEnrolledTitle = "Your courses will be here";
+NewHomePlaceholderEmptyEnrolledButtonTitle = "Find Courses in Catalog";
 HomePlaceholderAnonymous = "<b>Sign in</b> and start learning right now";
 HomePlaceholderEmptyEnrolled = "<b>Enroll</b> for free courses and they will be here";
 HomePlaceholderEmptyPopular = "<b>Open courses</b> are on vacation. Please, see later";
@@ -1283,6 +1290,8 @@ CourseWidgetArchived = "Archived";
 CourseWidgetEnrolled = "Enrolled";
 CourseWidgetPriceFree = "Free";
 CourseWidgetSeeAllTitle = "See All";
+
+ContinueCourseEmptyTitle = "Find your first course";
 
 /* Course List Filter */
 CourseListFilterTitle = "Filters";

@@ -8,4 +8,5 @@ protocol ContinueCourseOutputProtocol: AnyObject {
         source: AnalyticsEvent.CourseContinueSource,
         viewSource: AnalyticsEvent.CourseViewSource
     )
+    func presentCatalog()
 }

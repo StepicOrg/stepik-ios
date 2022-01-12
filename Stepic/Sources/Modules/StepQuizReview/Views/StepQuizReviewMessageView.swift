@@ -65,7 +65,7 @@ final class StepQuizReviewMessageView: UIView {
 extension StepQuizReviewMessageView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
-        self.setRoundedCorners(cornerRadius: self.appearance.cornerRadius)
+        self.roundAllCorners(radius: self.appearance.cornerRadius)
     }
 
     func addSubviews() {

@@ -4,7 +4,6 @@ enum Explore {
     // MARK: Submodules identifiers
 
     enum Submodule: String, UniqueIdentifiable {
-        case stories
         case languageSwitch
         case catalogBlocks
         case visitedCourses
@@ -40,19 +39,6 @@ enum Explore {
         }
     }
 
-    /// Update stories visibility
-    enum StoriesVisibilityUpdate {
-        @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
-        struct Response {
-            let isHidden: Bool
-        }
-
-        @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
-        struct ViewModel {
-            let isHidden: Bool
-        }
-    }
-
     // Refresh course block
     enum CourseListStateUpdate {
         enum State {
@@ -68,17 +54,6 @@ enum Explore {
         struct ViewModel {
             let module: Submodule
             let result: State
-        }
-    }
-
-    /// Update status bar style (called by stories module)
-    enum StatusBarStyleUpdate {
-        struct Response {
-            let statusBarStyle: UIStatusBarStyle
-        }
-
-        struct ViewModel {
-            let statusBarStyle: UIStatusBarStyle
         }
     }
 

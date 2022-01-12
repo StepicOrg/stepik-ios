@@ -10,13 +10,15 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
     weak var viewController: ContinueCourseViewControllerProtocol?
 
     func presentLastCourse(response: ContinueCourse.LastCourseLoad.Response) {
-        var viewModel: ContinueCourse.LastCourseLoad.ViewModel
-
-        viewModel = ContinueCourse.LastCourseLoad.ViewModel(
-            state: .result(data: self.makeViewModel(course: response.result))
-        )
-
-        self.viewController?.displayLastCourse(viewModel: viewModel)
+        switch response.result {
+        case .success(let course):
+            let viewModel = self.makeViewModel(course: course)
+            self.viewController?.displayLastCourse(viewModel: .init(state: .result(data: viewModel)))
+        case .failure(let error):
+            if case ContinueCourseInteractor.Error.noLastCourse = error {
+                self.viewController?.displayLastCourse(viewModel: .init(state: .empty))
+            }
+        }
     }
 
     func presentTooltip(response: ContinueCourse.TooltipAvailabilityCheck.Response) {
