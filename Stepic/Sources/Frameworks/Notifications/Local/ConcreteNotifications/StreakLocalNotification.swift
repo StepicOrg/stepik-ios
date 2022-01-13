@@ -4,6 +4,8 @@ import UserNotifications
 struct StreakLocalNotification: LocalNotificationProtocol {
     let utcStartHour: Int
 
+    let streakType: StreakType
+
     var title = ""
 
     var body: String {
@@ -11,7 +13,10 @@ struct StreakLocalNotification: LocalNotificationProtocol {
     }
 
     var userInfo: [AnyHashable: Any] {
-        [NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.streak.rawValue]
+        [
+            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.streak.rawValue,
+            NotificationsService.PayloadKey.streakType.rawValue: self.streakType.rawValue
+        ]
     }
 
     var identifier: String { "\(NotificationsService.NotificationType.streak.rawValue)_local_notification" }
@@ -38,18 +43,24 @@ struct StreakLocalNotification: LocalNotificationProtocol {
 
         return DateComponents(hour: localStartHour)
     }
+
+    enum StreakType: String {
+        case zero
+        case notSolvedToday = "not_solved_today"
+        case solvedToday = "solved_today"
+    }
 }
 
 // MARK: - NotificationsService (StreakLocalNotification) -
 
 extension NotificationsService {
-    func scheduleStreakLocalNotification(utcStartHour: Int) {
-        let notification = StreakLocalNotification(utcStartHour: utcStartHour)
+    func scheduleStreakLocalNotification(utcStartHour: Int, streakType: StreakLocalNotification.StreakType) {
+        let notification = StreakLocalNotification(utcStartHour: utcStartHour, streakType: streakType)
         self.scheduleLocalNotification(notification)
     }
 
     func removeStreakLocalNotifications() {
-        let notification = StreakLocalNotification(utcStartHour: 0)
+        let notification = StreakLocalNotification(utcStartHour: 0, streakType: .zero)
         self.removeLocalNotifications(identifiers: [notification.identifier])
     }
 }

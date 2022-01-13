@@ -53,17 +53,17 @@ final class CourseRevenueTabMonthlyPresenter: CourseRevenueTabMonthlyPresenterPr
             let sign = courseBenefitByMonth.totalUserIncome > 0
                 ? "+"
                 : (courseBenefitByMonth.totalUserIncome < 0 ? "-" : "")
-            let price = FormatterHelper.price(
+            let price = FormatterHelper.priceCourseRevenue(
                 courseBenefitByMonth.totalUserIncome,
                 currencyCode: courseBenefitByMonth.currencyCode
             )
             return "\(sign)\(price)"
         }()
-        let formattedTotalTurnover = FormatterHelper.price(
+        let formattedTotalTurnover = FormatterHelper.priceCourseRevenue(
             courseBenefitByMonth.totalTurnover,
             currencyCode: courseBenefitByMonth.currencyCode
         )
-        let formattedTotalRefunds = FormatterHelper.price(
+        let formattedTotalRefunds = FormatterHelper.priceCourseRevenue(
             courseBenefitByMonth.totalRefunds,
             currencyCode: courseBenefitByMonth.currencyCode
         )
@@ -78,6 +78,7 @@ final class CourseRevenueTabMonthlyPresenter: CourseRevenueTabMonthlyPresenterPr
             totalRefunds: courseBenefitByMonth.totalRefunds,
             countPayments: courseBenefitByMonth.countPayments,
             countNonZPayments: courseBenefitByMonth.countNonZPayments,
+            countInvoicePayments: courseBenefitByMonth.countInvoicePayments,
             countZPayments: courseBenefitByMonth.countZPayments
         )
     }

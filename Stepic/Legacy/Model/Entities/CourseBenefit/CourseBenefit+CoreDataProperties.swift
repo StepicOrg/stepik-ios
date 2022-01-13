@@ -8,11 +8,13 @@ extension CourseBenefit {
     @NSManaged var managedStatusString: String?
     @NSManaged var managedAmount: NSNumber?
     @NSManaged var managedCurrencyCode: String?
-    @NSManaged var managedTotalIncome: NSNumber?
     @NSManaged var managedPaymentAmount: NSNumber?
     @NSManaged var managedBuyerId: NSNumber?
     @NSManaged var managedIsZLinkUsed: NSNumber?
+    @NSManaged var managedIsInvoicePayment: NSNumber?
     @NSManaged var managedPromoCode: String?
+    @NSManaged var managedSeatsCount: NSNumber?
+    @NSManaged var managedDescriptionString: String?
 
     @NSManaged var managedCourse: Course?
     @NSManaged var managedBuyer: User?
@@ -80,16 +82,6 @@ extension CourseBenefit {
         }
     }
 
-    @available(*, deprecated, message: "Removed from API")
-    var totalIncome: Float {
-        get {
-            self.managedTotalIncome?.floatValue ?? 0
-        }
-        set {
-            self.managedTotalIncome = NSNumber(value: newValue)
-        }
-    }
-
     var paymentAmount: Float {
         get {
             self.managedPaymentAmount?.floatValue ?? 0
@@ -99,12 +91,12 @@ extension CourseBenefit {
         }
     }
 
-    var buyerID: User.IdType {
+    var buyerID: User.IdType? {
         get {
-            self.managedBuyerId?.intValue ?? -1
+            self.managedBuyerId?.intValue
         }
         set {
-            self.managedBuyerId = NSNumber(value: newValue)
+            self.managedBuyerId = newValue as NSNumber?
         }
     }
 
@@ -117,12 +109,39 @@ extension CourseBenefit {
         }
     }
 
+    var isInvoicePayment: Bool {
+        get {
+            self.managedIsInvoicePayment?.boolValue ?? false
+        }
+        set {
+            self.managedIsInvoicePayment = NSNumber(value: newValue)
+        }
+    }
+
     var promoCode: String? {
         get {
             self.managedPromoCode
         }
         set {
             self.managedPromoCode = newValue
+        }
+    }
+
+    var seatsCount: Int? {
+        get {
+            self.managedSeatsCount?.intValue
+        }
+        set {
+            self.managedSeatsCount = newValue as NSNumber?
+        }
+    }
+
+    var descriptionString: String {
+        get {
+            self.managedDescriptionString ?? ""
+        }
+        set {
+            self.managedDescriptionString = newValue
         }
     }
 

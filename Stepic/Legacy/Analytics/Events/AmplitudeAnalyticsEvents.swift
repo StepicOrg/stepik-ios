@@ -644,6 +644,60 @@ extension AnalyticsEvent {
         )
     }
 
+    static func streakNotificationShown(type: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Streak notification shown",
+            parameters: ["type": type]
+        )
+    }
+
+    static func streakNotificationClicked(type: String) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Streak notification clicked",
+            parameters: ["type": type]
+        )
+    }
+
+    static func retentionNotificationShown(day: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Retention notification shown",
+            parameters: ["day": day]
+        )
+    }
+
+    static func retentionNotificationClicked(day: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Retention notification clicked",
+            parameters: ["day": day]
+        )
+    }
+
+    static func personalDeadlinesAppNotificationShown(
+        courseID: Int,
+        hoursBeforeDeadline: Int
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Personal deadlines app notification shown",
+            parameters: [
+                "course": courseID,
+                "hours": hoursBeforeDeadline
+            ]
+        )
+    }
+
+    static func personalDeadlinesAppNotificationClicked(
+        courseID: Int,
+        hoursBeforeDeadline: Int
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Personal deadlines app notification clicked",
+            parameters: [
+                "course": courseID,
+                "hours": hoursBeforeDeadline
+            ]
+        )
+    }
+
     // MARK: - Home -
 
     static let homeScreenOpened = AmplitudeAnalyticsEvent(name: "Home screen opened")

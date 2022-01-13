@@ -118,24 +118,43 @@ final class CourseBenefitDetailView: UIView {
         self.scrollableStackView.addArrangedView(courseItem)
         itemViews.append(courseItem)
 
-        let buyerItem = self.makeItemView(
-            title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
-            detailTitle: viewModel.buyerName,
-            isClickable: true
-        )
-        buyerItem.onRightDetailLabelTapped = { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
+        let buyerItem: CourseBenefitDetailItemView? = {
+            if viewModel.isInvoicePayment,
+               let formattedSeatsCount = viewModel.formattedSeatsCount {
+                return self.makeItemView(
+                    title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
+                    detailTitle: formattedSeatsCount
+                )
+            } else if let buyerName = viewModel.buyerName {
+                let itemView = self.makeItemView(
+                    title: NSLocalizedString("CourseBenefitDetailBuyerTitle", comment: ""),
+                    detailTitle: buyerName,
+                    isClickable: true
+                )
+                itemView.onRightDetailLabelTapped = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-            strongSelf.delegate?.courseBenefitDetailViewDidClickBuyerButton(strongSelf)
+                    strongSelf.delegate?.courseBenefitDetailViewDidClickBuyerButton(strongSelf)
+                }
+                return itemView
+            }
+            return nil
+        }()
+        if let buyerItem = buyerItem {
+            self.scrollableStackView.addArrangedView(buyerItem)
+            itemViews.append(buyerItem)
         }
-        self.scrollableStackView.addArrangedView(buyerItem)
-        itemViews.append(buyerItem)
 
         let paymentAmountItem = self.makeItemView(
             title: NSLocalizedString("CourseBenefitDetailPaymentAmountTitle", comment: ""),
             detailTitle: viewModel.formattedPaymentAmount
+        )
+        paymentAmountItem.detailAttributedTitle = FormatterHelper.priceCourseRevenueToAttributedString(
+            price: viewModel.formattedPaymentAmount,
+            priceFont: paymentAmountItem.rightDetailLabelFont,
+            priceColor: paymentAmountItem.rightDetailLabelTextColor
         )
         self.scrollableStackView.addArrangedView(paymentAmountItem)
         itemViews.append(paymentAmountItem)
@@ -149,12 +168,14 @@ final class CourseBenefitDetailView: UIView {
             itemViews.append(promoCodeItem)
         }
 
-        let channelItem = self.makeItemView(
-            title: NSLocalizedString("CourseBenefitDetailChannelTitle", comment: ""),
-            detailTitle: viewModel.channelName
-        )
-        self.scrollableStackView.addArrangedView(channelItem)
-        itemViews.append(channelItem)
+        if !viewModel.isRefunded || viewModel.isManualBenefit {
+            let channelItem = self.makeItemView(
+                title: NSLocalizedString("CourseBenefitDetailChannelTitle", comment: ""),
+                detailTitle: viewModel.channelName
+            )
+            self.scrollableStackView.addArrangedView(channelItem)
+            itemViews.append(channelItem)
+        }
 
         let amountPercentItem = self.makeItemView(
             title: NSLocalizedString("CourseBenefitDetailAmountPercentTitle", comment: ""),
@@ -169,6 +190,11 @@ final class CourseBenefitDetailView: UIView {
             title: NSLocalizedString("CourseBenefitDetailAmountTitle", comment: ""),
             detailTitle: viewModel.formattedAmount,
             isLargeTitles: true
+        )
+        amountItem.detailAttributedTitle = FormatterHelper.priceCourseRevenueToAttributedString(
+            price: viewModel.formattedAmount,
+            priceFont: amountItem.rightDetailLabelFont,
+            priceColor: amountItem.rightDetailLabelTextColor
         )
         self.scrollableStackView.addArrangedView(amountItem)
         itemViews.append(amountItem)

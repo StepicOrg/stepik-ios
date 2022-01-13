@@ -54,18 +54,37 @@ final class CourseRevenueTabMonthlyCellView: UIView {
 
     func configure(viewModel: CourseRevenueTabMonthlyViewModel?) {
         self.totalView.title = viewModel?.formattedDate
-        self.totalView.rightDetailTitle = viewModel?.formattedTotalIncome
         self.totalView.style = (viewModel?.totalIncome ?? 0) < (viewModel?.totalRefunds ?? 0) ? .red : .yellowGreen
+        if let formattedTotalIncome = viewModel?.formattedTotalIncome {
+            self.totalView.rightDetailAttributedTitle = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedTotalIncome,
+                priceFont: self.totalView.appearance.titleFont,
+                priceColor: self.totalView.rightDetailTitleLabelTextColor
+            )
+        } else {
+            self.totalView.rightDetailAttributedTitle = nil
+        }
+
 
         self.itemsStackView.removeAllArrangedSubviews()
+        let itemViewAppearance = CourseRevenueTabMonthlyItemView.Appearance()
+
         let items: [Item] = [
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyTurnoverTitle", comment: ""),
-                subtitle: viewModel?.formattedTotalTurnover
+                attributedSubtitle: FormatterHelper.priceCourseRevenueToAttributedString(
+                    price: viewModel?.formattedTotalTurnover ?? "",
+                    priceFont: itemViewAppearance.titleFont,
+                    priceColor: itemViewAppearance.titleTextColor
+                )
             ),
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyRefundsTitle", comment: ""),
-                subtitle: viewModel?.formattedTotalRefunds
+                attributedSubtitle: FormatterHelper.priceCourseRevenueToAttributedString(
+                    price: viewModel?.formattedTotalRefunds ?? "",
+                    priceFont: itemViewAppearance.titleFont,
+                    priceColor: itemViewAppearance.titleTextColor
+                )
             ),
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyIncomeTitle", comment: ""),
@@ -74,18 +93,28 @@ final class CourseRevenueTabMonthlyCellView: UIView {
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyChannelStepikTitle", comment: ""),
                 subtitle: "\(viewModel?.countNonZPayments ?? 0)",
-                image: UIImage(named: "course-revenue-transaction-logo")
+                image: UIImage(named: "course-revenue-transaction-logo")?.withRenderingMode(.alwaysOriginal)
             ),
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyChannelZLinkTitle", comment: ""),
                 subtitle: "\(viewModel?.countZPayments ?? 0)",
-                image: UIImage(named: "course-revenue-transaction-z-link")
+                image: UIImage(named: "course-revenue-transaction-z-link")?.withRenderingMode(.alwaysOriginal)
+            ),
+            Item(
+                title: NSLocalizedString("CourseRevenueTabMonthlyChannelInvoicePaymentsTitle", comment: ""),
+                subtitle: "\(viewModel?.countInvoicePayments ?? 0)",
+                image: UIImage(named: "course-revenue-transaction-logo")?.withRenderingMode(.alwaysTemplate)
             )
         ]
         items.forEach { item in
             let view = CourseRevenueTabMonthlyItemView(shouldShowImageView: item.image != nil)
             view.title = item.title
-            view.rightDetailTitle = item.subtitle
+
+            if let attributedSubtitle = item.attributedSubtitle {
+                view.rightDetailAttributedTitle = attributedSubtitle
+            } else {
+                view.rightDetailTitle = item.subtitle
+            }
 
             if let image = item.image {
                 view.image = image
@@ -100,6 +129,7 @@ final class CourseRevenueTabMonthlyCellView: UIView {
     private struct Item {
         var title: String?
         var subtitle: String?
+        var attributedSubtitle: NSAttributedString?
         var image: UIImage?
     }
 }

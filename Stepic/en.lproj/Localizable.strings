@@ -567,10 +567,12 @@ CourseRevenueEmptyCourseBenefitsTitle = "No payments found for this request";
 
 /* CourseBenefitDetail */
 CourseBenefitDetailTitle = "Purchase Details";
+CourseBenefitDetailTitleRefund = "Refund Details";
 CourseBenefitDetailAmountPercent = "%@ of sales revenue minus Stepik's fee";
-CourseBenefitDetailChannelZLink = "Came via Z-Link";
-CourseBenefitDetailChannelStepikLink = "Came via Stepik Link";
+CourseBenefitDetailChannelZLink = "Came via z-link";
+CourseBenefitDetailChannelStepikLink = "Came via Stepik";
 CourseBenefitDetailChannelRefund = "Refund";
+CourseBenefitDetailChannelInvoicePayment = "Payment on account";
 CourseBenefitDetailDateTitle = "Date";
 CourseBenefitDetailCourseTitle = "Course";
 CourseBenefitDetailBuyerTitle = "Customer";
@@ -585,7 +587,14 @@ CourseRevenueTabMonthlyTurnoverTitle = "Sales";
 CourseRevenueTabMonthlyRefundsTitle = "Refunds";
 CourseRevenueTabMonthlyIncomeTitle = "Purchases";
 CourseRevenueTabMonthlyChannelStepikTitle = "Came via Stepik";
-CourseRevenueTabMonthlyChannelZLinkTitle = "Came via Z-Link";
+CourseRevenueTabMonthlyChannelZLinkTitle = "Came via z-link";
+CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Payment on account";
+
+/* CourseRevenueTabPurchases */
+CourseRevenueTabPurchasesSeatsCount1 = "seat in the course";
+CourseRevenueTabPurchasesSeatsCount234 = "seats in the course";
+CourseRevenueTabPurchasesSeatsCount567890 = "seats in the course";
+CourseRevenueTabPurchasesManualBenefitTitle = "Manually: %@";
 
 /* CourseSearch */
 CourseSearchBarPlaceholder = "Search in the course %@";

@@ -8,8 +8,12 @@ struct CourseRevenueTabPurchasesViewModel {
     let promoCodeName: String?
     let formattedPaymentAmount: String
     let formattedAmount: String
+    let formattedSeatsCount: String?
+    let formattedManualBenefitDescription: String?
 
     let isDebited: Bool
     let isRefunded: Bool
     let isZLinkUsed: Bool
+    let isInvoicePayment: Bool
+    let isManualBenefit: Bool
 }

@@ -13,5 +13,6 @@ struct CourseRevenueTabMonthlyViewModel {
 
     let countPayments: Int
     let countNonZPayments: Int
+    let countInvoicePayments: Int
     let countZPayments: Int
 }

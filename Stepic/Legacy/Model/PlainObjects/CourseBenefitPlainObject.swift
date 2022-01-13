@@ -8,11 +8,14 @@ struct CourseBenefitPlainObject {
     let statusString: String
     let amount: Float
     let currencyCode: String
-    let totalIncome: Float
     let paymentAmount: Float
-    let buyerID: Int
+    let buyerID: Int?
     let isZLinkUsed: Bool
+    let isInvoicePayment: Bool
+    let isManualBenefit: Bool
     let promoCode: String?
+    let seatsCount: Int?
+    let descriptionString: String
 
     var status: CourseBenefitStatus? { CourseBenefitStatus(rawValue: self.statusString) }
 }
@@ -26,10 +29,13 @@ extension CourseBenefitPlainObject {
         self.statusString = courseBenefit.statusString
         self.amount = courseBenefit.amount
         self.currencyCode = courseBenefit.currencyCode
-        self.totalIncome = courseBenefit.totalIncome
         self.paymentAmount = courseBenefit.paymentAmount
         self.buyerID = courseBenefit.buyerID
         self.isZLinkUsed = courseBenefit.isZLinkUsed
+        self.isInvoicePayment = courseBenefit.isInvoicePayment
+        self.isManualBenefit = courseBenefit.isManualBenefit
         self.promoCode = courseBenefit.promoCode
+        self.seatsCount = courseBenefit.seatsCount
+        self.descriptionString = courseBenefit.descriptionString
     }
 }

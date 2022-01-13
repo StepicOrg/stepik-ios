@@ -11,6 +11,15 @@ import UIKit
 final class NotificationTimePickerViewController: PickerViewController {
     var startHour = 0
 
+    private lazy var userAccountService: UserAccountServiceProtocol = UserAccountService()
+
+    private lazy var profileStreakNotificationsProvider: NewProfileStreakNotificationsProviderProtocol = {
+        NewProfileStreakNotificationsProvider(
+            submissionsPersistenceService: SubmissionsPersistenceService(),
+            userActivitiesPersistenceService: UserActivitiesPersistenceService()
+        )
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -41,7 +50,19 @@ final class NotificationTimePickerViewController: PickerViewController {
             print("selected UTC start hour -> \(selectedUTCStartHour)")
 
             PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
-            NotificationsService().scheduleStreakLocalNotification(utcStartHour: selectedUTCStartHour)
+
+            guard let currentUserID = strongSelf.userAccountService.currentUserID else {
+                return
+            }
+
+            strongSelf.profileStreakNotificationsProvider.fetchStreakLocalNotificationType(
+                userID: currentUserID
+            ).done { streakType in
+                NotificationsService().scheduleStreakLocalNotification(
+                    utcStartHour: selectedUTCStartHour,
+                    streakType: streakType
+                )
+            }
         }
 
         self.picker.reloadAllComponents()

@@ -4,6 +4,8 @@ import UIKit
 extension CourseRevenueTabPurchasesCellView {
     struct Appearance {
         let logoImageViewSize = CGSize(width: 24, height: 24)
+        let logoImageViewPrimaryTintColor = UIColor.stepikMaterialPrimaryText
+        let logoImageViewSecondaryTintColor = UIColor.stepikMaterialSecondaryText
         let logoImageViewInsets = LayoutInsets.default
 
         let dateLabelTextColor = UIColor.stepikMaterialSecondaryText
@@ -109,19 +111,42 @@ final class CourseRevenueTabPurchasesCellView: UIView {
 
     func configure(viewModel: CourseRevenueTabPurchasesViewModel?) {
         let isRefunded = viewModel?.isRefunded ?? false
+        let isInvoicePayment = viewModel?.isInvoicePayment ?? false
+        let isManualBenefit = viewModel?.isManualBenefit ?? false
 
         let logoImage: UIImage? = {
-            if isRefunded {
+            if isManualBenefit {
+                return UIImage(named: "course-revenue-transaction-logo")
+            } else if isRefunded {
                 return UIImage(named: "course-revenue-transaction-refund")
             } else if viewModel?.isZLinkUsed ?? false {
                 return UIImage(named: "course-revenue-transaction-z-link")
             }
             return UIImage(named: "course-revenue-transaction-logo")
         }()
+        let logoImageRenderingMode: UIImage.RenderingMode = (isInvoicePayment || isManualBenefit)
+            ? .alwaysTemplate
+            : .alwaysOriginal
+        let logoImageTintColor = isManualBenefit
+            ? self.appearance.logoImageViewSecondaryTintColor
+            : self.appearance.logoImageViewPrimaryTintColor
 
-        self.logoImageView.image = logoImage
+        self.logoImageView.image = logoImage?.withRenderingMode(logoImageRenderingMode)
+        self.logoImageView.tintColor = logoImageTintColor
+
         self.dateLabel.text = viewModel?.formattedDate
-        self.titleLabel.text = viewModel?.buyerName
+
+        let titleText: String? = {
+            if isInvoicePayment {
+                return viewModel?.formattedSeatsCount
+            } else if isManualBenefit {
+                return viewModel?.formattedManualBenefitDescription
+            } else {
+                return viewModel?.buyerName
+            }
+        }()
+        self.titleLabel.text = titleText
+        self.titleLabel.isUserInteractionEnabled = !isInvoicePayment && !isManualBenefit
 
         self.subtitleLabel.text = viewModel?.promoCodeName
         let subtitleBottomOffset = viewModel?.promoCodeName?.isEmpty ?? true
@@ -129,14 +154,30 @@ final class CourseRevenueTabPurchasesCellView: UIView {
             : self.appearance.subtitleLabelInsets.bottom
         self.subtitleBottomConstraint?.update(offset: -subtitleBottomOffset)
 
-        self.rightDetailSubtitleLabel.text = isRefunded
-            ? NSLocalizedString("CourseRevenueTransactionRefundedTitle", comment: "")
-            : viewModel?.formattedPaymentAmount
+        if isRefunded {
+            self.rightDetailSubtitleLabel.text = NSLocalizedString("CourseRevenueTransactionRefundedTitle", comment: "")
+        } else if let formattedPaymentAmount = viewModel?.formattedPaymentAmount {
+            self.rightDetailSubtitleLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedPaymentAmount,
+                priceFont: self.appearance.rightDetailSubtitleLabelFont,
+                priceColor: self.appearance.rightDetailSubtitleLabelTextColor
+            )
+        } else {
+            self.rightDetailSubtitleLabel.attributedText = nil
+        }
 
-        self.rightDetailTitleLabel.text = viewModel?.formattedAmount
         self.rightDetailTitleLabel.textColor = isRefunded
             ? self.appearance.rightDetailTitleLabelRefundedTextColor
             : self.appearance.rightDetailTitleLabelTextColor
+        if let formattedAmount = viewModel?.formattedAmount {
+            self.rightDetailTitleLabel.attributedText = FormatterHelper.priceCourseRevenueToAttributedString(
+                price: formattedAmount,
+                priceFont: self.appearance.rightDetailTitleLabelFont,
+                priceColor: self.rightDetailTitleLabel.textColor
+            )
+        } else {
+            self.rightDetailTitleLabel.attributedText = nil
+        }
     }
 
     @objc
