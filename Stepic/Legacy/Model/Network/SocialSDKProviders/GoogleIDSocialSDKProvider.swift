@@ -18,7 +18,7 @@ final class GoogleIDSocialSDKProvider: NSObject, SocialSDKProvider {
 
     override private init() {
         self.sdkInstance = GIDSignIn.sharedInstance
-        self.signInConfig = GIDConfiguration.init(clientID: StepikApplicationsInfo.SocialInfo.AppIds.google)
+        self.signInConfig = GIDConfiguration(clientID: StepikApplicationsInfo.SocialInfo.AppIds.google)
         super.init()
     }
 
