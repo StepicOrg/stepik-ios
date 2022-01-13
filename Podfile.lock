@@ -174,7 +174,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - Nimble (9.2.1)
-  - Nuke (9.5.0)
+  - Nuke (10.6.1)
   - Pageboy (3.6.2)
   - PanModal (1.2.7)
   - pop (1.0.12)
@@ -243,7 +243,7 @@ DEPENDENCIES:
   - lottie-ios (= 3.3.0)
   - Mockingjay (from `https://github.com/kylef/Mockingjay.git`, branch `master`)
   - Nimble (= 9.2.1)
-  - Nuke (= 9.5.0)
+  - Nuke (= 10.6.1)
   - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
   - Presentr (from `https://github.com/ivan-magda/Presentr.git`, tag `v1.9.1`)
   - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, tag `6.16.2`)
@@ -406,7 +406,7 @@ SPEC CHECKSUMS:
   Mockingjay: 97656c6f59879923976a0a52ef09da45756cca82
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
-  Nuke: 6f400a4ea957e09149ec335a3c6acdcc814d89e4
+  Nuke: 3ca210aee6d90756605c5125cbe40569fd9c06f7
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
@@ -430,6 +430,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 4d5baf64cfc3f103cc16a51042a60fa1da61c9ee
+PODFILE CHECKSUM: c0a26901d2f12efd4fa7e051662134bf196dd97c
 
 COCOAPODS: 1.11.2
