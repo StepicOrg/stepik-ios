@@ -199,7 +199,7 @@ PODS:
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.3.1)
-  - SwiftLint (0.45.0)
+  - SwiftLint (0.45.1)
   - SwiftyGif (5.4.0)
   - SwiftyJSON (5.0.0)
   - Tabman (2.10.0):
@@ -254,7 +254,7 @@ DEPENDENCIES:
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - SVProgressHUD (= 2.2.5)
   - SwiftDate (= 6.3.1)
-  - SwiftLint (= 0.45.0)
+  - SwiftLint (= 0.45.1)
   - SwiftyJSON (= 5.0.0)
   - Tabman (= 2.10.0)
   - TTTAttributedLabel (= 2.0.0)
@@ -420,7 +420,7 @@ SPEC CHECKSUMS:
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
-  SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
+  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: d8d6ab0b483c7db375a71ac227d3ef791b56a049
@@ -430,6 +430,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: d090778f877db1cd8189486ae6c09540718cd74d
+PODFILE CHECKSUM: d51c5eda751b737dd114fd295ab09fd1b7306085
 
 COCOAPODS: 1.11.2

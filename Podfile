@@ -20,7 +20,7 @@ def shared_pods
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.5.2'
   pod 'PromiseKit', :git => 'https://github.com/mxcl/PromiseKit.git', :tag => '6.16.2'
-  pod 'SwiftLint', '0.45.0'
+  pod 'SwiftLint', '0.45.1'
 
   if ENV['FASTLANE_BETA_PROFILE'] == 'true'
     pod 'FLEX',
