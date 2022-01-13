@@ -15,9 +15,9 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
-  - CocoaLumberjack (3.7.2):
-    - CocoaLumberjack/Core (= 3.7.2)
-  - CocoaLumberjack/Core (3.7.2)
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
   - DeviceKit (4.5.2)
   - DownloadButton (0.1.0)
   - EasyTipView (2.1.0)
@@ -200,7 +200,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.3.1)
   - SwiftLint (0.45.1)
-  - SwiftyGif (5.4.0)
+  - SwiftyGif (5.4.2)
   - SwiftyJSON (5.0.0)
   - Tabman (2.10.0):
     - Pageboy (~> 3.6.0)
@@ -376,7 +376,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: c1b244bf1170b0ea5c5eefa897648de8d14ff0d2
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   DeviceKit: c622fc19f795f3e0b4d75d6d11b26604338cdab3
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
@@ -421,7 +421,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
-  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
+  SwiftyGif: dec758a9dd3d278e5a855dbf279bf062c923c387
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: d8d6ab0b483c7db375a71ac227d3ef791b56a049
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
