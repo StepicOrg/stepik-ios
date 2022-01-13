@@ -128,8 +128,8 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
+  - GoogleSignIn (6.1.0):
+    - AppAuth (~> 1.4)
     - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.6.0):
@@ -235,7 +235,7 @@ DEPENDENCIES:
   - Firebase/Messaging (= 8.9.1)
   - Firebase/RemoteConfig (= 8.9.1)
   - FLEX (from `https://github.com/ivan-magda/FLEX.git`, branch `master`)
-  - GoogleSignIn (= 5.0.2)
+  - GoogleSignIn (= 6.1.0)
   - Highlightr (from `https://github.com/ivan-magda/Highlightr.git`, tag `v2.1.3`)
   - IQKeyboardManagerSwift (= 6.5.6)
   - Kanna (= 5.2.7)
@@ -394,7 +394,7 @@ SPEC CHECKSUMS:
   FLEX: 75ca95cff4bd57592c6e75adee7651ace29f9c25
   GoogleAppMeasurement: 837649ad3987936c232f6717c5680216f6243d24
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
+  GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
@@ -430,6 +430,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: db582784a46b9c0076f6b88e25ff97a287f80b6a
+PODFILE CHECKSUM: 16d32a3617329674b829c1bc88cbd652b87070ac
 
 COCOAPODS: 1.11.2
