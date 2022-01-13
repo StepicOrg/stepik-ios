@@ -160,7 +160,7 @@ PODS:
   - Kanna (5.2.7)
   - Koloda (5.0.1):
     - pop (~> 1.0)
-  - lottie-ios (3.2.3)
+  - lottie-ios (3.3.0)
   - Mockingjay (3.0.0-alpha.1):
     - Mockingjay/Core (= 3.0.0-alpha.1)
     - Mockingjay/XCTest (= 3.0.0-alpha.1)
@@ -240,7 +240,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.5.6)
   - Kanna (= 5.2.7)
   - Koloda (= 5.0.1)
-  - lottie-ios (= 3.2.3)
+  - lottie-ios (= 3.3.0)
   - Mockingjay (from `https://github.com/kylef/Mockingjay.git`, branch `master`)
   - Nimble (= 9.2.1)
   - Nuke (= 9.5.0)
@@ -402,7 +402,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
   Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
-  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   Mockingjay: 97656c6f59879923976a0a52ef09da45756cca82
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
@@ -430,6 +430,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 16d32a3617329674b829c1bc88cbd652b87070ac
+PODFILE CHECKSUM: b7973afbb8d7f7aca0a44f96d586e81eea31e526
 
 COCOAPODS: 1.11.2
