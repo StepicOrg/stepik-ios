@@ -13,14 +13,14 @@ project 'Stepic',
         'Develop Release' => :release
 
 def shared_pods
-  pod 'Alamofire', '5.4.4'
+  pod 'Alamofire', '5.5.0'
   pod 'Atributika', '4.10.1'
   pod 'SwiftyJSON', '5.0.0'
-  pod 'SDWebImage', '5.12.1'
+  pod 'SDWebImage', '5.12.2'
   pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
   pod 'DeviceKit', '4.5.2'
   pod 'PromiseKit', :git => 'https://github.com/mxcl/PromiseKit.git', :tag => '6.16.2'
-  pod 'SwiftLint', '0.45.0'
+  pod 'SwiftLint', '0.45.1'
 
   if ENV['FASTLANE_BETA_PROFILE'] == 'true'
     pod 'FLEX',
@@ -43,14 +43,14 @@ def all_pods
   pod 'SnapKit', '5.0.1'
 
   # Firebase
-  pod 'Firebase/Core', '8.9.1'
-  pod 'Firebase/Messaging', '8.9.1'
-  pod 'Firebase/Analytics', '8.9.1'
-  pod 'Firebase/Crashlytics', '8.9.1'
-  pod 'Firebase/RemoteConfig', '8.9.1'
+  pod 'Firebase/Core', '8.10.0'
+  pod 'Firebase/Messaging', '8.10.0'
+  pod 'Firebase/Analytics', '8.10.0'
+  pod 'Firebase/Crashlytics', '8.10.0'
+  pod 'Firebase/RemoteConfig', '8.10.0'
 
   pod 'YandexMobileMetrica/Dynamic', '3.17.0'
-  pod 'Amplitude', '8.5.0'
+  pod 'Amplitude', '8.7.1'
   pod 'Branch', '1.40.2'
 
   pod 'BEMCheckBox', '1.4.1'
@@ -64,7 +64,7 @@ def all_pods
   pod 'VK-ios-sdk', '1.6.2'
   pod 'FBSDKCoreKit', '8.2.0'
   pod 'FBSDKLoginKit', '8.2.0'
-  pod 'GoogleSignIn', '5.0.2'
+  pod 'GoogleSignIn', '6.1.0'
 
   pod 'Presentr', :git => 'https://github.com/ivan-magda/Presentr.git', :tag => 'v1.9.1'
   pod 'PanModal', :git => 'https://github.com/ivan-magda/PanModal.git', :branch => 'remove-presenting-appearance-transitions'
@@ -72,12 +72,12 @@ def all_pods
   pod 'Agrume', '5.6.13'
   pod 'Highlightr', :git => 'https://github.com/ivan-magda/Highlightr.git', :tag => 'v2.1.3'
   pod 'TTTAttributedLabel', '2.0.0'
-  pod 'lottie-ios', '3.2.3'
+  pod 'lottie-ios', '3.3.0'
   pod 'Koloda', '5.0.1'
   pod 'Charts', '3.6.0'
   pod 'EasyTipView', '2.1.0'
   pod 'ActionSheetPicker-3.0', '2.7.1'
-  pod 'Nuke', '9.5.0'
+  pod 'Nuke', '10.6.1'
   pod 'STRegex', '2.1.1'
   pod 'Tabman', '2.10.0'
   pod 'SwiftDate', '6.3.1'

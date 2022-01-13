@@ -13,16 +13,13 @@ final class GoogleIDSocialSDKProvider: NSObject, SocialSDKProvider {
 
     let name = "google"
 
-    private var sdkInstance: GIDSignIn
-
-    private var successHandler: ((SocialSDKCredential) -> Void)?
-    private var errorHandler: ((SocialSDKError) -> Void)?
+    private let sdkInstance: GIDSignIn
+    private let signInConfig: GIDConfiguration
 
     override private init() {
-        self.sdkInstance = GIDSignIn.sharedInstance()
+        self.sdkInstance = GIDSignIn.sharedInstance
+        self.signInConfig = GIDConfiguration(clientID: StepikApplicationsInfo.SocialInfo.AppIds.google)
         super.init()
-        self.sdkInstance.clientID = StepikApplicationsInfo.SocialInfo.AppIds.google
-        self.sdkInstance.delegate = self
     }
 
     func getAccessInfo() -> Promise<SocialSDKCredential> {
@@ -42,35 +39,35 @@ final class GoogleIDSocialSDKProvider: NSObject, SocialSDKProvider {
         success successHandler: @escaping (SocialSDKCredential) -> Void,
         error errorHandler: @escaping (SocialSDKError) -> Void
     ) {
-        self.successHandler = successHandler
-        self.errorHandler = errorHandler
-
-        self.sdkInstance.presentingViewController = self.delegate?.googleSignInPresentingViewController
+        guard let presentingViewController = self.delegate?.googleSignInPresentingViewController else {
+            return errorHandler(.connectionError)
+        }
 
         if self.sdkInstance.hasPreviousSignIn() {
             self.sdkInstance.signOut()
         }
 
-        self.sdkInstance.signIn()
-    }
-}
-
-extension GoogleIDSocialSDKProvider: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            print("GoogleIDSocialSDKProvider :: error=\(error.localizedDescription)")
-            self.errorHandler?(SocialSDKError.connectionError)
-        } else if let authentication = user.authentication,
-                  let accessToken = authentication.accessToken {
-            var email: String?
-            if let profile = user.profile,
-               let profileEmail = profile.email {
-                email = profileEmail
+        self.sdkInstance.signIn(with: self.signInConfig, presenting: presentingViewController) { user, error in
+            if let error = error {
+                print("GoogleIDSocialSDKProvider :: error = \(error.localizedDescription)")
+                errorHandler(.connectionError)
+            } else if let user = user {
+                let email = user.profile?.email
+                user.authentication.do { authentication, error in
+                    if let error = error {
+                        print("GoogleIDSocialSDKProvider :: error = \(error.localizedDescription)")
+                        errorHandler(.connectionError)
+                    } else if let authentication = authentication {
+                        successHandler(SocialSDKCredential(token: authentication.accessToken, email: email))
+                    } else {
+                        print("GoogleIDSocialSDKProvider :: error missing accessToken")
+                        errorHandler(.accessDenied)
+                    }
+                }
+            } else {
+                print("GoogleIDSocialSDKProvider :: error missing accessToken")
+                errorHandler(.accessDenied)
             }
-            self.successHandler?(SocialSDKCredential(token: accessToken, email: email))
-        } else {
-            print("GoogleIDSocialSDKProvider :: error missing accessToken")
-            self.errorHandler?(SocialSDKError.accessDenied)
         }
     }
 }

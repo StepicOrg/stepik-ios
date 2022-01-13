@@ -112,5 +112,5 @@ final class NukeImageDataProvider: ImageDataProvider {
         return imageContainer.image.jpegData(compressionQuality: self.compressionQuality)
     }
 
-    var contentURL: URL? { self.imageRequest.urlRequest.url }
+    var contentURL: URL? { self.imageRequest.urlRequest?.url }
 }
