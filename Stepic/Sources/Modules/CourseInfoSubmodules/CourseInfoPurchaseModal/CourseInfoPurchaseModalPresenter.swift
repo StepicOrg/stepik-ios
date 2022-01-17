@@ -82,7 +82,8 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
                 }
             }()
 
-            if iapError == .paymentReceiptValidationFailed {
+
+            if case .paymentReceiptValidationFailed = iapError {
                 viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseErrorStepik))
             } else {
                 let modalViewModel = self.makeModalViewModel(
@@ -99,7 +100,7 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
                     )
                 )
 
-                if iapError == .paymentUserChanged {
+                if case .paymentUserChanged = iapError {
                     DispatchQueue.main.async {
                         viewController.displayPurchaseCourseResult(viewModel: .init(state: .purchaseErrorStepik))
                     }
@@ -115,7 +116,9 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
         case .inProgress:
             self.viewController?.displayRestorePurchaseResult(viewModel: .init(state: .restorePurchaseInProgress))
         case .error:
-            let errorDescription = IAPService.Error.paymentReceiptValidationFailed.errorDescription
+            let errorDescription = IAPService.Error
+                    .paymentReceiptValidationFailed(originalError: Error.dummy)
+                    .errorDescription
             self.viewController?.displayRestorePurchaseResult(
                 viewModel: .init(state: .restorePurchaseError(errorDescription: errorDescription))
             )
@@ -174,5 +177,11 @@ final class CourseInfoPurchaseModalPresenter: CourseInfoPurchaseModalPresenterPr
             isInWishlist: isInWishlist,
             isLoading: isLoading
         )
+    }
+
+    // MARK: Inner Types
+
+    private enum Error: Swift.Error {
+        case dummy
     }
 }

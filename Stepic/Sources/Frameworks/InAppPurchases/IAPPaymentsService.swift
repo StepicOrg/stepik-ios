@@ -98,23 +98,25 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
     }
 
     func retryValidateReceipt(courseID: Course.IdType, productIdentifier: IAPProductIdentifier) {
-        func reportRetryValidateReceiptFailed() {
+        func reportRetryValidateReceiptFailed(error: Swift.Error) {
             self.delegate?.iapPaymentsService(
                 self,
                 didFailPurchaseCourse: courseID,
-                withError: Error.paymentReceiptValidationFailed
+                withError: Error.paymentReceiptValidationFailed(originalError: error)
             )
         }
 
         guard let transaction = self.paymentQueue.transactions.first(
             where: { $0.payment.productIdentifier == productIdentifier }
         ), transaction.transactionState == .purchased else {
-            return reportRetryValidateReceiptFailed()
+            return reportRetryValidateReceiptFailed(error: Error.paymentNotFoundTransactionForRetryValidateReceipt)
         }
 
         guard let payload = self.paymentsCache.getCoursePayment(for: transaction),
               payload.courseID == courseID else {
-            return reportRetryValidateReceiptFailed()
+            return reportRetryValidateReceiptFailed(
+                error: Error.paymentNotFoundTransactionPayloadForRetryValidateReceipt
+            )
         }
 
         self.validateReceipt(transaction: transaction, payload: payload, forceRefreshReceipt: true)
@@ -146,10 +148,12 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
 
     enum Error: Swift.Error {
         case paymentNotAllowed
-        case paymentCancelled
-        case paymentFailed
+        case paymentCancelled(originalError: Swift.Error)
+        case paymentFailed(originalError: Swift.Error?)
         case paymentUserChanged
-        case paymentReceiptValidationFailed
+        case paymentReceiptValidationFailed(originalError: Swift.Error)
+        case paymentNotFoundTransactionForRetryValidateReceipt
+        case paymentNotFoundTransactionPayloadForRetryValidateReceipt
     }
 }
 
@@ -206,13 +210,13 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
                     self.delegate?.iapPaymentsService(
                         self,
                         didFailPurchaseCourse: payload.courseID,
-                        withError: Error.paymentFailed
+                        withError: Error.paymentFailed(originalError: skError)
                     )
                 } else {
                     self.delegate?.iapPaymentsService(
                         self,
                         didFailPurchaseCourse: payload.courseID,
-                        withError: Error.paymentCancelled
+                        withError: Error.paymentCancelled(originalError: skError)
                     )
                 }
                 print("IAPPaymentsService :: payment failed with error: \(skError)")
@@ -221,7 +225,7 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
                 self.delegate?.iapPaymentsService(
                     self,
                     didFailPurchaseCourse: payload.courseID,
-                    withError: Error.paymentFailed
+                    withError: Error.paymentFailed(originalError: transaction.error)
                 )
             }
 
@@ -277,10 +281,22 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
             } else {
                 self.$mutableState.write { $0.courseIDByValidateReceiptWithRefresh[courseID] = false }
 
+                let originalError: Swift.Error = {
+                    if let receiptValidationServiceError = error as? IAPReceiptValidationService.Error {
+                        switch receiptValidationServiceError {
+                        case .noAppStoreReceiptPresent, .invalidPaymentData, .invalidFinalStatus:
+                            return receiptValidationServiceError
+                        case .requestFailed(let originalError):
+                            return originalError
+                        }
+                    }
+                    return error
+                }()
+
                 self.delegate?.iapPaymentsService(
                     self,
                     didFailPurchaseCourse: courseID,
-                    withError: Error.paymentReceiptValidationFailed
+                    withError: Error.paymentReceiptValidationFailed(originalError: originalError)
                 )
             }
         }

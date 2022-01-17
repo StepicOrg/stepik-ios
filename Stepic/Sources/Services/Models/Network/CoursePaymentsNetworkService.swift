@@ -25,20 +25,20 @@ final class CoursePaymentsNetworkService: CoursePaymentsNetworkServiceProtocol {
 
     func create(coursePayment: CoursePayment) -> Promise<CoursePayment> {
         if coursePayment.data == nil || coursePayment.courseID == -1 {
-            return Promise(error: Error.createFailed)
+            return Promise(error: Error.createFailed(originalError: nil))
         }
 
         return Promise { seal in
             self.coursePaymentsAPI.create(coursePayment).done { coursePayment in
                 seal.fulfill(coursePayment)
-            }.catch { _ in
-                seal.reject(Error.createFailed)
+            }.catch { error in
+                seal.reject(Error.createFailed(originalError: error))
             }
         }
     }
 
     enum Error: Swift.Error {
         case fetchFailed
-        case createFailed
+        case createFailed(originalError: Swift.Error?)
     }
 }
