@@ -85,18 +85,19 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
             }.catch { error in
                 print("IAPReceiptValidationService :: failed create course payment with error: \(error)")
 
-                if let coursePaymentsNetworkServiceError = error as? CoursePaymentsNetworkService.Error {
-                    switch coursePaymentsNetworkServiceError {
-                    case .fetchFailed:
-                        return seal.reject(Error.requestFailed(originalError: coursePaymentsNetworkServiceError))
-                    case .createFailed(let originalErrorOrNil):
-                        if let originalError = originalErrorOrNil {
-                            return seal.reject(Error.requestFailed(originalError: originalError))
+                let originalError: Swift.Error = {
+                    if let coursePaymentsNetworkServiceError = error as? CoursePaymentsNetworkService.Error {
+                        switch coursePaymentsNetworkServiceError {
+                        case .fetchFailed:
+                            return coursePaymentsNetworkServiceError
+                        case .createFailed(let originalErrorOrNil):
+                            return originalErrorOrNil ?? coursePaymentsNetworkServiceError
                         }
                     }
-                }
+                    return error
+                }()
 
-                seal.reject(Error.requestFailed(originalError: error))
+                seal.reject(Error.requestFailed(originalError: originalError))
             }
         }
     }
