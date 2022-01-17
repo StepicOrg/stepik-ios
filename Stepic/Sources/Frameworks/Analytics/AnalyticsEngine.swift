@@ -74,7 +74,16 @@ final class AppMetricaAnalyticsEngine: AnalyticsEngine {
     init() {}
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
-        YMMYandexMetrica.reportEvent(name, parameters: parameters)
+        YMMYandexMetrica.reportEvent(name, parameters: parameters) { error in
+            if LaunchArguments.analyticsDebugEnabled {
+                print(
+                    """
+                    ERROR Logging AppMetrica event: \(name), parameters: \(String(describing: parameters)), \
+                    error = \(error)
+                    """
+                )
+            }
+        }
 
         if LaunchArguments.analyticsDebugEnabled {
             print("Logging AppMetrica event: \(name), parameters: \(String(describing: parameters))")
