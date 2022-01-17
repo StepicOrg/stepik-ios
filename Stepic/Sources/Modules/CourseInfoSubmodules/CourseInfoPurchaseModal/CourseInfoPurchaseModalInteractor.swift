@@ -348,16 +348,16 @@ extension CourseInfoPurchaseModalInteractor: IAPServiceDelegate {
                 self.analytics.send(
                     .courseBuyCourseVerificationFailure(
                         id: self.courseID,
-                        errorType: String(describing: iapServiceError),
-                        errorDescription: iapServiceError.errorDescription
+                        errorType: iapServiceError.analyticsErrorType,
+                        errorDescription: iapServiceError.analyticsErrorDescription
                     )
                 )
             } else {
                 self.analytics.send(
                     .courseBuyCourseIAPFlowFailure(
                         id: self.courseID,
-                        errorType: String(describing: iapServiceError),
-                        errorDescription: iapServiceError.errorDescription
+                        errorType: iapServiceError.analyticsErrorType,
+                        errorDescription: iapServiceError.analyticsErrorDescription
                     )
                 )
             }

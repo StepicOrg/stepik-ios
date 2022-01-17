@@ -395,6 +395,19 @@ final class IAPService: IAPServiceProtocol {
         case paymentUserChanged
         /// The receipt validation failed
         case paymentReceiptValidationFailed(originalError: Swift.Error)
+
+        var originalError: Swift.Error? {
+            switch self {
+            case .paymentWasCancelled(let originalError):
+                return originalError
+            case .paymentFailed(let originalError):
+                return originalError
+            case .paymentReceiptValidationFailed(let originalError):
+                return originalError
+            default:
+                return nil
+            }
+        }
     }
 }
 
@@ -511,5 +524,34 @@ extension IAPService.Error: LocalizedError {
         case .paymentFailed:
             return NSLocalizedString("IAPPurchaseErrorPaymentFailed", comment: "")
         }
+    }
+}
+
+// MARK: - IAPService.Error (Analytics) -
+
+extension IAPService.Error {
+    var analyticsErrorType: String {
+        switch self {
+        case .paymentWasCancelled:
+            return "paymentWasCancelled"
+        case .paymentFailed:
+            return "paymentFailed"
+        case .paymentReceiptValidationFailed:
+            return "paymentReceiptValidationFailed"
+        default:
+            return String(describing: self)
+        }
+    }
+
+    var analyticsErrorDescription: String? {
+        let result = [
+            self.errorDescription,
+            self.originalError != nil ? "originalError = \(self.originalError?.localizedDescription ?? "")" : nil
+        ]
+        .compactMap { $0 }
+        .joined(separator: ", ")
+        .trimmed()
+
+        return result.isEmpty ? nil : result
     }
 }
