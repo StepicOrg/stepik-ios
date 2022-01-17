@@ -1,5 +1,4 @@
 import Foundation
-import Alamofire
 
 extension AnalyticsEvent {
     // MARK: - Launch -
