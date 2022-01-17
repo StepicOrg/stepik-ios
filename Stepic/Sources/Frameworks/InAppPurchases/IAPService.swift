@@ -386,15 +386,15 @@ final class IAPService: IAPServiceProtocol {
         /// The app cannot request App Store about available IAP products for some reason.
         case productsRequestFailed
         /// The user cancelled an initialized purchase process.
-        case paymentWasCancelled
+        case paymentWasCancelled(originalError: Swift.Error)
         /// Indicates that the course payment failed.
-        case paymentFailed
+        case paymentFailed(originalError: Swift.Error?)
         /// The IAP is not allowed on this device.
         case paymentNotAllowed
         /// Indicates that the current user changed during payment.
         case paymentUserChanged
         /// The receipt validation failed
-        case paymentReceiptValidationFailed
+        case paymentReceiptValidationFailed(originalError: Swift.Error)
     }
 }
 
@@ -445,23 +445,42 @@ extension IAPService: IAPPaymentsServiceDelegate {
 
         if let paymentsServiceError = error as? IAPPaymentsService.Error {
             switch paymentsServiceError {
-            case .paymentFailed:
-                requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentFailed)
+            case .paymentFailed(let originalError):
+                requestDelegate.iapService(
+                    self,
+                    didFailPurchaseCourse: courseID,
+                    withError: Error.paymentFailed(originalError: originalError)
+                )
             case .paymentNotAllowed:
                 requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentNotAllowed)
             case .paymentUserChanged:
                 requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentUserChanged)
-            case .paymentCancelled:
-                requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentWasCancelled)
-            case .paymentReceiptValidationFailed:
+            case .paymentCancelled(let originalError):
                 requestDelegate.iapService(
                     self,
                     didFailPurchaseCourse: courseID,
-                    withError: Error.paymentReceiptValidationFailed
+                    withError: Error.paymentWasCancelled(originalError: originalError)
+                )
+            case .paymentReceiptValidationFailed(let originalError):
+                requestDelegate.iapService(
+                    self,
+                    didFailPurchaseCourse: courseID,
+                    withError: Error.paymentReceiptValidationFailed(originalError: originalError)
+                )
+            case .paymentNotFoundTransactionForRetryValidateReceipt,
+                 .paymentNotFoundTransactionPayloadForRetryValidateReceipt:
+                requestDelegate.iapService(
+                    self,
+                    didFailPurchaseCourse: courseID,
+                    withError: Error.paymentReceiptValidationFailed(originalError: paymentsServiceError)
                 )
             }
         } else {
-            requestDelegate.iapService(self, didFailPurchaseCourse: courseID, withError: Error.paymentFailed)
+            requestDelegate.iapService(
+                self,
+                didFailPurchaseCourse: courseID,
+                withError: Error.paymentFailed(originalError: error)
+            )
         }
 
         self.coursePaymentRequests.remove(CoursePaymentRequest(courseID: courseID, delegate: nil))

@@ -344,7 +344,7 @@ extension CourseInfoPurchaseModalInteractor: IAPServiceDelegate {
         print("CourseInfoPurchaseModalInteractor :: \(#function), courseID = \(courseID), error = \(error)")
 
         if let iapServiceError = error as? IAPService.Error {
-            if iapServiceError == .paymentReceiptValidationFailed {
+            if case .paymentReceiptValidationFailed = iapServiceError {
                 self.analytics.send(
                     .courseBuyCourseVerificationFailure(
                         id: self.courseID,
