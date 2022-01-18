@@ -229,7 +229,6 @@ extension IAPPaymentsService: SKPaymentTransactionObserver {
                 )
             }
 
-            self.paymentsCache.removeCoursePayment(for: transaction)
             self.paymentQueue.finishTransaction(transaction)
         case .purchasing, .deferred, .restored:
             break
