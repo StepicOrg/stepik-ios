@@ -16,6 +16,7 @@ protocol CourseInfoPresenterProtocol {
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentPaidCoursePurchaseModal(response: CourseInfo.PaidCoursePurchaseModalPresentation.Response)
+    func presentPaidCourseRestorePurchaseResult(response: CourseInfo.PaidCourseRestorePurchase.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
     func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response)
     func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
@@ -158,6 +159,28 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
+    func presentPaidCourseRestorePurchaseResult(response: CourseInfo.PaidCourseRestorePurchase.Response) {
+        switch response.state {
+        case .inProgress:
+            self.viewController?.displayPaidCourseRestorePurchaseResult(viewModel: .init(state: .inProgress))
+        case .error(let error):
+            let title = NSLocalizedString("CourseInfoRestorePurchaseErrorTitle", comment: "")
+            let message = String(
+                format: NSLocalizedString("CourseInfoRestorePurchaseErrorMessage", comment: ""),
+                arguments: [error.localizedDescription]
+            )
+
+            self.viewController?.displayPaidCourseRestorePurchaseResult(
+                viewModel: .init(state: .error(title: title, message: message))
+            )
+        case .success:
+            let message = NSLocalizedString("CourseInfoRestorePurchaseSuccessMessage", comment: "")
+            self.viewController?.displayPaidCourseRestorePurchaseResult(
+                viewModel: .init(state: .success(message: message))
+            )
+        }
+    }
+
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
         if let payForCourseURL = self.urlFactory.makePayForCourse(id: response.course.id) {
             self.viewController?.displayIAPNotAllowed(
@@ -189,12 +212,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
-        self.viewController?.displayBlockingLoadingIndicator(
-            viewModel: .init(
-                shouldDismiss: response.shouldDismiss,
-                shouldDismissWithSuccess: response.shouldDismissWithSuccess ?? false
-            )
-        )
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response) {

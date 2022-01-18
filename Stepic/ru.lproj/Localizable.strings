@@ -479,6 +479,11 @@ CourseInfoRemoveFromWishlistSuccessMessage = "Курс успешно убран
 CourseInfoRemoveFromWishlistFailureMessage = "Не удалось убрать курс из списка желаний";
 
 CourseInfoRestorePurchaseTitle = "Восстановить покупку";
+CourseInfoRestorePurchaseSuccessMessage = "Покупка успешно восстановлена";
+CourseInfoRestorePurchaseErrorTitle = "Не удалось восстановить покупку";
+CourseInfoRestorePurchaseErrorMessage = "Попробуйте восстановить покупку позже и свяжитесь с поддержкой, если ошибка не будет устранена.\nОшибка: %@";
+CourseInfoRestorePurchaseAlertCancelTitle = "Отменить";
+CourseInfoRestorePurchaseAlertContactSupportTitle = "Связаться с поддержкой";
 
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";

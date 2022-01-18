@@ -20,6 +20,7 @@ protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
     func displayPaidCoursePurchaseModal(viewModel: CourseInfo.PaidCoursePurchaseModalPresentation.ViewModel)
+    func displayPaidCourseRestorePurchaseResult(viewModel: CourseInfo.PaidCourseRestorePurchase.ViewModel)
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel)
     func displayIAPReceiptValidationFailed(viewModel: CourseInfo.IAPReceiptValidationFailedPresentation.ViewModel)
     func displayIAPPaymentFailed(viewModel: CourseInfo.IAPPaymentFailedPresentation.ViewModel)
@@ -63,6 +64,11 @@ final class CourseInfoViewController: UIViewController {
         style: .plain,
         target: self,
         action: #selector(self.actionButtonClicked)
+    )
+
+    private lazy var restorePurchaseErrorContactSupportController = ContactSupportController(
+        subject: NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorContactSupportSubject", comment: ""),
+        presentationController: self
     )
 
     // Element is nil when view controller was not initialized yet
@@ -592,9 +598,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel) {
-        if viewModel.shouldDismissWithSuccess {
-            SVProgressHUD.showSuccess(withStatus: nil)
-        } else if viewModel.shouldDismiss {
+        if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
             SVProgressHUD.show()
@@ -730,6 +734,33 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             output: self.interactor as? CourseInfoPurchaseModalOutputProtocol
         )
         self.presentIfPanModalWithCustomModalPresentationStyle(assembly.makeModule())
+    }
+
+    func displayPaidCourseRestorePurchaseResult(viewModel: CourseInfo.PaidCourseRestorePurchase.ViewModel) {
+        switch viewModel.state {
+        case .inProgress:
+            SVProgressHUD.show()
+        case .error(let title, let message):
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("CourseInfoRestorePurchaseAlertCancelTitle", comment: ""),
+                    style: .cancel
+                )
+            )
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("CourseInfoRestorePurchaseAlertContactSupportTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.restorePurchaseErrorContactSupportController.contactSupport()
+                    }
+                )
+            )
+            self.present(module: alert)
+        case .success(let message):
+            SVProgressHUD.showSuccess(withStatus: message)
+        }
     }
 
     func displayIAPNotAllowed(viewModel: CourseInfo.IAPNotAllowedPresentation.ViewModel) {

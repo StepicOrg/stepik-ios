@@ -477,6 +477,11 @@ CourseInfoRemoveFromWishlistSuccessMessage = "Course Successfully Removed from W
 CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishlist";
 
 CourseInfoRestorePurchaseTitle = "Restore Purchase";
+CourseInfoRestorePurchaseSuccessMessage = "Purchase Successfully Restored";
+CourseInfoRestorePurchaseErrorTitle = "Failed to Restore Purchase";
+CourseInfoRestorePurchaseErrorMessage = "Try to restore the purchase again later and contact support, if the error persists.\nError: %@";
+CourseInfoRestorePurchaseAlertCancelTitle = "Cancel";
+CourseInfoRestorePurchaseAlertContactSupportTitle = "Contact Support";
 
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";

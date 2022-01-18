@@ -172,12 +172,10 @@ enum CourseInfo {
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
             let shouldDismiss: Bool
-            var shouldDismissWithSuccess: Bool?
         }
 
         struct ViewModel {
             let shouldDismiss: Bool
-            let shouldDismissWithSuccess: Bool
         }
     }
 
@@ -344,6 +342,26 @@ enum CourseInfo {
     /// Try to restore course purchase
     enum PaidCourseRestorePurchase {
         struct Request {}
+
+        struct Response {
+            let state: State
+
+            enum State {
+                case inProgress
+                case error(Error)
+                case success
+            }
+        }
+
+        struct ViewModel {
+            let state: State
+
+            enum State {
+                case inProgress
+                case error(title: String, message: String)
+                case success(message: String)
+            }
+        }
     }
 
     /// Update remind purchase course notification

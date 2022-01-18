@@ -425,7 +425,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
         self.isRestorePurchaseInProgress = true
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.presenter.presentPaidCourseRestorePurchaseResult(response: .init(state: .inProgress))
         self.analytics.send(.courseRestoreCoursePurchasePressed(id: self.courseID, source: .courseScreen))
 
         firstly { () -> Guarantee<MobileTierPlainObject?> in
@@ -803,9 +803,9 @@ extension CourseInfoInteractor: IAPServiceDelegate {
                     )
                 )
             }
-        }
 
-        if let iapServiceError = error as? IAPService.Error {
+            self.presenter.presentPaidCourseRestorePurchaseResult(response: .init(state: .error(error)))
+        } else if let iapServiceError = error as? IAPService.Error {
             switch iapServiceError {
             case .unsupportedCourse, .noProductIDsFound, .noProductsFound, .productsRequestFailed:
                 self.presenter.presentPaidCourseBuying(
@@ -834,7 +834,7 @@ extension CourseInfoInteractor: IAPServiceDelegate {
             return
         }
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: true, shouldDismissWithSuccess: true))
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         self.doCourseRefresh(request: .init())
 
         if self.currentCourse?.isInWishlist ?? false {
@@ -852,6 +852,8 @@ extension CourseInfoInteractor: IAPServiceDelegate {
                     promoCode: self.currentMobileTier?.promoTier != nil ? self.currentMobileTier?.promoCodeName : nil
                 )
             )
+
+            self.presenter.presentPaidCourseRestorePurchaseResult(response: .init(state: .success))
         }
     }
 }
