@@ -1,5 +1,6 @@
 import Foundation
 import PromiseKit
+import StoreKit
 
 // swiftlint:disable file_length
 protocol CourseInfoInteractorProtocol {
@@ -18,6 +19,7 @@ protocol CourseInfoInteractorProtocol {
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
     func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request)
     func doIAPReceiptValidationRetry(request: CourseInfo.IAPReceiptValidationRetry.Request)
+    func doRestorePurchase(request: CourseInfo.PaidCourseRestorePurchase.Request)
     func doPurchaseCourseNotificationUpdate(request: CourseInfo.PurchaseNotificationUpdate.Request)
 }
 
@@ -38,6 +40,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let courseViewSource: AnalyticsEvent.CourseViewSource
 
     private let iapService: IAPServiceProtocol
+    private let iapPaymentsCache: IAPPaymentsCacheProtocol
 
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
@@ -59,6 +62,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private var currentPromoCode: PromoCode?
 
     private var currentMobileTier: MobileTierPlainObject?
+    private var isRestorePurchaseInProgress = false
 
     private var shouldCheckIAPPurchaseSupport: Bool {
         (self.currentCourse?.isPaid ?? false) && self.remoteConfig.coursePurchaseFlow == .iap
@@ -118,6 +122,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         urlFactory: StepikURLFactory,
         dataBackUpdateService: DataBackUpdateServiceProtocol,
         iapService: IAPServiceProtocol,
+        iapPaymentsCache: IAPPaymentsCacheProtocol,
         analytics: Analytics,
         remoteConfig: RemoteConfig,
         courseViewSource: AnalyticsEvent.CourseViewSource
@@ -136,6 +141,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.urlFactory = urlFactory
         self.dataBackUpdateService = dataBackUpdateService
         self.iapService = iapService
+        self.iapPaymentsCache = iapPaymentsCache
         self.analytics = analytics
         self.remoteConfig = remoteConfig
 
@@ -413,6 +419,65 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    func doRestorePurchase(request: CourseInfo.PaidCourseRestorePurchase.Request) {
+        if self.isRestorePurchaseInProgress {
+            return
+        }
+        self.isRestorePurchaseInProgress = true
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.analytics.send(.courseRestoreCoursePurchasePressed(id: self.courseID, source: .courseScreen))
+
+        firstly { () -> Guarantee<MobileTierPlainObject?> in
+            if let currentMobileTier = self.currentMobileTier {
+                return .value(currentMobileTier)
+            } else if let course = self.currentCourse {
+                return self.fetchMobileTier(
+                    course: course,
+                    dataSourceType: .remote
+                ).then { mobileTierOrNil -> Guarantee<MobileTierPlainObject?> in
+                    if let mobileTier = mobileTierOrNil {
+                        self.currentMobileTier = mobileTier
+                    }
+                    return .value(mobileTierOrNil)
+                }
+            }
+            return .value(nil)
+        }
+        .compactMap { $0?.promoTier ?? $0?.priceTier }
+        .done { purchaseMobileTier in
+            if self.iapPaymentsCache.getCoursePayment(for: self.courseID) == nil {
+                self.iapService
+                    .fetchProduct(for: purchaseMobileTier)
+                    .compactMap { $0 }
+                    .done { product in
+                        self.iapPaymentsCache.insertCoursePayment(
+                            courseID: self.courseID,
+                            promoCode: self.currentMobileTier?.promoCodeName,
+                            product: product
+                        )
+                        self.iapService.retryValidateReceipt(
+                            courseID: self.courseID,
+                            mobileTier: purchaseMobileTier,
+                            delegate: self
+                        )
+                    }
+                    .catch { error in
+                        self.iapService(self.iapService, didFailPurchaseCourse: self.courseID, withError: error)
+                    }
+            } else {
+                self.iapService.retryValidateReceipt(
+                    courseID: self.courseID,
+                    mobileTier: purchaseMobileTier,
+                    delegate: self
+                )
+            }
+        }
+        .catch { error in
+            self.iapService(self.iapService, didFailPurchaseCourse: self.courseID, withError: error)
+        }
+    }
+
     func doPurchaseCourseNotificationUpdate(request: CourseInfo.PurchaseNotificationUpdate.Request) {
         self.coursePurchaseReminder.updatePurchaseNotification(for: self.courseID)
     }
@@ -437,7 +502,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             promoCode: self.currentPromoCode,
             mobileTier: self.currentMobileTier,
             shouldCheckIAPPurchaseSupport: self.shouldCheckIAPPurchaseSupport,
-            isSupportedIAPPurchase: self.isSupportedIAPPurchase
+            isSupportedIAPPurchase: self.isSupportedIAPPurchase,
+            isRestorePurchaseAvailable: self.userAccountService.isAuthorized
+                && self.remoteConfig.coursePurchaseFlow == .iap
+                && self.currentCourse.require().isPaid
+                && !self.currentCourse.require().isPurchased
         )
     }
 
@@ -710,8 +779,30 @@ extension CourseInfoInteractor: IAPServiceDelegate {
     ) {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
 
-        guard let course = self.currentCourse else {
+        guard let course = self.currentCourse, course.id == courseID else {
             return
+        }
+
+        if self.isRestorePurchaseInProgress {
+            self.isRestorePurchaseInProgress = false
+
+            if let iapServiceError = error as? IAPService.Error {
+                self.analytics.send(
+                    .courseBuyCourseVerificationFailure(
+                        id: courseID,
+                        errorType: iapServiceError.analyticsErrorType,
+                        errorDescription: iapServiceError.analyticsErrorDescription
+                    )
+                )
+            } else {
+                self.analytics.send(
+                    .courseBuyCourseVerificationFailure(
+                        id: courseID,
+                        errorType: String(describing: error),
+                        errorDescription: error.localizedDescription
+                    )
+                )
+            }
         }
 
         if let iapServiceError = error as? IAPService.Error {
@@ -743,11 +834,24 @@ extension CourseInfoInteractor: IAPServiceDelegate {
             return
         }
 
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: true, shouldDismissWithSuccess: true))
         self.doCourseRefresh(request: .init())
 
         if self.currentCourse?.isInWishlist ?? false {
             self.provider.deleteCourseFromWishlist().cauterize()
+        }
+
+        if self.isRestorePurchaseInProgress {
+            self.isRestorePurchaseInProgress = false
+
+            self.analytics.send(
+                .courseBuyCourseVerificationSuccess(
+                    id: self.courseID,
+                    source: .courseScreen,
+                    isWishlisted: self.currentCourse?.isInWishlist ?? false,
+                    promoCode: self.currentMobileTier?.promoTier != nil ? self.currentMobileTier?.promoCodeName : nil
+                )
+            )
         }
     }
 }

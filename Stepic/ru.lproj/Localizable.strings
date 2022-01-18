@@ -478,6 +478,8 @@ CourseInfoAddToWishlistFailureMessage = "Не удалось добавить к
 CourseInfoRemoveFromWishlistSuccessMessage = "Курс успешно убран из списка желаний";
 CourseInfoRemoveFromWishlistFailureMessage = "Не удалось убрать курс из списка желаний";
 
+CourseInfoRestorePurchaseTitle = "Восстановить покупку";
+
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";

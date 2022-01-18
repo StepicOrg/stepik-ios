@@ -476,6 +476,8 @@ CourseInfoAddToWishlistFailureMessage = "Failed to Add Course to Wishlist";
 CourseInfoRemoveFromWishlistSuccessMessage = "Course Successfully Removed from Wishlist";
 CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishlist";
 
+CourseInfoRestorePurchaseTitle = "Restore Purchase";
+
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";

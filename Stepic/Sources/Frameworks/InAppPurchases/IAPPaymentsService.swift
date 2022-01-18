@@ -119,6 +119,10 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
             )
         }
 
+        guard payload.userID == self.userAccountService.currentUserID else {
+            return reportRetryValidateReceiptFailed(error: Error.paymentUserChanged)
+        }
+
         self.validateReceipt(transaction: transaction, payload: payload, forceRefreshReceipt: true)
     }
 

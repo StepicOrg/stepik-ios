@@ -45,7 +45,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 promoCode: data.promoCode,
                 mobileTier: data.mobileTier,
                 shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
-                isSupportedIAPPurchase: data.isSupportedIAPPurchase
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase,
+                isRestorePurchaseAvailable: data.isRestorePurchaseAvailable
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         case .failure:
@@ -188,7 +189,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
-        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+        self.viewController?.displayBlockingLoadingIndicator(
+            viewModel: .init(
+                shouldDismiss: response.shouldDismiss,
+                shouldDismissWithSuccess: response.shouldDismissWithSuccess ?? false
+            )
+        )
     }
 
     func presentUserCourseActionResult(response: CourseInfo.UserCourseActionPresentation.Response) {
@@ -291,7 +297,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         promoCode: PromoCode?,
         mobileTier: MobileTierPlainObject?,
         shouldCheckIAPPurchaseSupport: Bool,
-        isSupportedIAPPurchase: Bool
+        isSupportedIAPPurchase: Bool,
+        isRestorePurchaseAvailable: Bool
     ) -> CourseInfoHeaderViewModel {
         let rating = course.reviewSummary?.rating ?? 0
 
@@ -323,6 +330,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
+            isRestorePurchaseAvailable: isRestorePurchaseAvailable,
             unsupportedIAPPurchaseText: unsupportedIAPPurchaseText,
             buttonDescription: self.makeButtonDescription(
                 course: course,

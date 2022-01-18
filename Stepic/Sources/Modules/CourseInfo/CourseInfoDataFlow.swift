@@ -49,6 +49,7 @@ enum CourseInfo {
                 let mobileTier: MobileTierPlainObject?
                 let shouldCheckIAPPurchaseSupport: Bool
                 let isSupportedIAPPurchase: Bool
+                let isRestorePurchaseAvailable: Bool
             }
 
             var result: StepikResult<Data>
@@ -171,10 +172,12 @@ enum CourseInfo {
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
             let shouldDismiss: Bool
+            var shouldDismissWithSuccess: Bool?
         }
 
         struct ViewModel {
             let shouldDismiss: Bool
+            let shouldDismissWithSuccess: Bool
         }
     }
 
@@ -336,6 +339,11 @@ enum CourseInfo {
             let mobileTierID: MobileTier.IdType?
             let courseBuySource: AnalyticsEvent.CourseBuySource
         }
+    }
+
+    /// Try to restore course purchase
+    enum PaidCourseRestorePurchase {
+        struct Request {}
     }
 
     /// Update remind purchase course notification

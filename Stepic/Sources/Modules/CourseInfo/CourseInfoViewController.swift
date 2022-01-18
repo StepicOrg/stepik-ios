@@ -285,6 +285,19 @@ final class CourseInfoViewController: UIViewController {
     @objc
     private func actionButtonClicked() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        if self.storedViewModel?.isRestorePurchaseAvailable ?? false {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("CourseInfoRestorePurchaseTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doRestorePurchase(request: .init())
+                    }
+                )
+            )
+        }
+
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Share", comment: ""),
@@ -579,7 +592,9 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel) {
-        if viewModel.shouldDismiss {
+        if viewModel.shouldDismissWithSuccess {
+            SVProgressHUD.showSuccess(withStatus: nil)
+        } else if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
             SVProgressHUD.show()
