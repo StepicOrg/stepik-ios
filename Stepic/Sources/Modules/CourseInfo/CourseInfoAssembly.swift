@@ -76,6 +76,7 @@ final class CourseInfoAssembly: Assembly {
             urlFactory: StepikURLFactory(),
             dataBackUpdateService: dataBackUpdateService,
             iapService: IAPService.shared,
+            iapPaymentsCache: IAPPaymentsCache(userAccountService: UserAccountService()),
             analytics: StepikAnalytics.shared,
             remoteConfig: RemoteConfig.shared,
             courseViewSource: self.courseViewSource

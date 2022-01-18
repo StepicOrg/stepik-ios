@@ -20,6 +20,7 @@ struct CourseInfoHeaderViewModel {
     let isWishlistAvailable: Bool
     let isTryForFreeAvailable: Bool
     let isRevenueAvailable: Bool
+    let isRestorePurchaseAvailable: Bool
     let unsupportedIAPPurchaseText: String?
     let buttonDescription: ButtonDescription
 

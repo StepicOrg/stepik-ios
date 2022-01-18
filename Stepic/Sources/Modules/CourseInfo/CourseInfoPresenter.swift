@@ -16,6 +16,7 @@ protocol CourseInfoPresenterProtocol {
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
     func presentPaidCoursePurchaseModal(response: CourseInfo.PaidCoursePurchaseModalPresentation.Response)
+    func presentPaidCourseRestorePurchaseResult(response: CourseInfo.PaidCourseRestorePurchase.Response)
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response)
     func presentIAPReceiptValidationFailed(response: CourseInfo.IAPReceiptValidationFailedPresentation.Response)
     func presentIAPPaymentFailed(response: CourseInfo.IAPPaymentFailedPresentation.Response)
@@ -45,7 +46,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 promoCode: data.promoCode,
                 mobileTier: data.mobileTier,
                 shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
-                isSupportedIAPPurchase: data.isSupportedIAPPurchase
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase,
+                isRestorePurchaseAvailable: data.isRestorePurchaseAvailable
             )
             self.viewController?.displayCourse(viewModel: .init(state: .result(data: headerViewModel)))
         case .failure:
@@ -155,6 +157,28 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 courseBuySource: response.courseBuySource
             )
         )
+    }
+
+    func presentPaidCourseRestorePurchaseResult(response: CourseInfo.PaidCourseRestorePurchase.Response) {
+        switch response.state {
+        case .inProgress:
+            self.viewController?.displayPaidCourseRestorePurchaseResult(viewModel: .init(state: .inProgress))
+        case .error(let error):
+            let title = NSLocalizedString("CourseInfoRestorePurchaseErrorTitle", comment: "")
+            let message = String(
+                format: NSLocalizedString("CourseInfoRestorePurchaseErrorMessage", comment: ""),
+                arguments: [error.localizedDescription]
+            )
+
+            self.viewController?.displayPaidCourseRestorePurchaseResult(
+                viewModel: .init(state: .error(title: title, message: message))
+            )
+        case .success:
+            let message = NSLocalizedString("CourseInfoRestorePurchaseSuccessMessage", comment: "")
+            self.viewController?.displayPaidCourseRestorePurchaseResult(
+                viewModel: .init(state: .success(message: message))
+            )
+        }
     }
 
     func presentIAPNotAllowed(response: CourseInfo.IAPNotAllowedPresentation.Response) {
@@ -291,7 +315,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         promoCode: PromoCode?,
         mobileTier: MobileTierPlainObject?,
         shouldCheckIAPPurchaseSupport: Bool,
-        isSupportedIAPPurchase: Bool
+        isSupportedIAPPurchase: Bool,
+        isRestorePurchaseAvailable: Bool
     ) -> CourseInfoHeaderViewModel {
         let rating = course.reviewSummary?.rating ?? 0
 
@@ -323,6 +348,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isWishlistAvailable: isWishlistAvailable,
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
+            isRestorePurchaseAvailable: isRestorePurchaseAvailable,
             unsupportedIAPPurchaseText: unsupportedIAPPurchaseText,
             buttonDescription: self.makeButtonDescription(
                 course: course,

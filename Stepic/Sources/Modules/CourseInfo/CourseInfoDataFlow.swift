@@ -49,6 +49,7 @@ enum CourseInfo {
                 let mobileTier: MobileTierPlainObject?
                 let shouldCheckIAPPurchaseSupport: Bool
                 let isSupportedIAPPurchase: Bool
+                let isRestorePurchaseAvailable: Bool
             }
 
             var result: StepikResult<Data>
@@ -335,6 +336,31 @@ enum CourseInfo {
             let promoCodeName: String?
             let mobileTierID: MobileTier.IdType?
             let courseBuySource: AnalyticsEvent.CourseBuySource
+        }
+    }
+
+    /// Try to restore course purchase
+    enum PaidCourseRestorePurchase {
+        struct Request {}
+
+        struct Response {
+            let state: State
+
+            enum State {
+                case inProgress
+                case error(Error)
+                case success
+            }
+        }
+
+        struct ViewModel {
+            let state: State
+
+            enum State {
+                case inProgress
+                case error(title: String, message: String)
+                case success(message: String)
+            }
         }
     }
 
