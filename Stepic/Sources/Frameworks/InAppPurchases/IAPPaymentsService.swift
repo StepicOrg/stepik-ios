@@ -53,7 +53,7 @@ final class IAPPaymentsService: NSObject, IAPPaymentsServiceProtocol {
 
     init(
         paymentQueue: SKPaymentQueue = SKPaymentQueue.default(),
-        paymentsCache: IAPPaymentsCacheProtocol = IAPPaymentsCache(userAccountService: UserAccountService()),
+        paymentsCache: IAPPaymentsCacheProtocol = IAPPaymentsCache.shared,
         receiptValidationService: IAPReceiptValidationServiceProtocol = IAPReceiptValidationService(
             coursePaymentsNetworkService: CoursePaymentsNetworkService(
                 coursePaymentsAPI: CoursePaymentsAPI()
