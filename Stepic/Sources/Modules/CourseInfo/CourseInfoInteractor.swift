@@ -428,6 +428,14 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.presenter.presentPaidCourseRestorePurchaseResult(response: .init(state: .inProgress))
         self.analytics.send(.courseRestoreCoursePurchasePressed(id: self.courseID, source: .courseScreen))
 
+        if let cachedCoursePaymentPayload = self.iapPaymentsCache.getCoursePayment(for: self.courseID) {
+            return self.iapService.retryValidateReceipt(
+                courseID: self.courseID,
+                mobileTier: cachedCoursePaymentPayload.productIdentifier,
+                delegate: self
+            )
+        }
+
         firstly { () -> Guarantee<MobileTierPlainObject?> in
             if let currentMobileTier = self.currentMobileTier {
                 return .value(currentMobileTier)
