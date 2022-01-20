@@ -232,14 +232,16 @@ extension AnalyticsEvent {
         errorType: String,
         errorDescription: String?
     ) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Buy course IAP flow failure",
-            parameters: [
-                "course": id,
-                "type": errorType,
-                "message": errorDescription as Any
-            ]
-        )
+        var parameters: [String : Any] = [
+            "course": id,
+            "type": errorType
+        ]
+
+        if let errorDescription = errorDescription {
+            parameters["message"] = errorDescription
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Buy course IAP flow failure", parameters: parameters)
     }
 
     static func courseBuyCourseVerificationSuccess(
@@ -264,14 +266,16 @@ extension AnalyticsEvent {
         errorType: String,
         errorDescription: String?
     ) -> AmplitudeAnalyticsEvent {
-        AmplitudeAnalyticsEvent(
-            name: "Buy course verification failure",
-            parameters: [
-                "course": id,
-                "type": errorType,
-                "message": errorDescription as Any
-            ]
-        )
+        var parameters: [String : Any] = [
+            "course": id,
+            "type": errorType
+        ]
+
+        if let errorDescription = errorDescription {
+            parameters["message"] = errorDescription
+        }
+
+        return AmplitudeAnalyticsEvent(name: "Buy course verification failure", parameters: parameters)
     }
 
     static func courseRestoreCoursePurchasePressed(

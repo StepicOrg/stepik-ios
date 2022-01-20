@@ -74,12 +74,30 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
                     print("IAPReceiptValidationService :: successfully verified course payment for course: \(courseID)")
                     seal.fulfill(coursePayment)
                 } else {
-                    print("IAPReceiptValidationService :: failed verify course payment with status: \(coursePayment.statusStringValue)")
+                    print(
+                        """
+                        IAPReceiptValidationService :: failed verify course payment with \
+                        status: \(coursePayment.statusStringValue)
+                        """
+                    )
                     seal.reject(Error.invalidFinalStatus)
                 }
             }.catch { error in
                 print("IAPReceiptValidationService :: failed create course payment with error: \(error)")
-                seal.reject(Error.requestFailed)
+
+                let originalError: Swift.Error = {
+                    if let coursePaymentsNetworkServiceError = error as? CoursePaymentsNetworkService.Error {
+                        switch coursePaymentsNetworkServiceError {
+                        case .fetchFailed:
+                            return coursePaymentsNetworkServiceError
+                        case .createFailed(let originalErrorOrNil):
+                            return originalErrorOrNil ?? coursePaymentsNetworkServiceError
+                        }
+                    }
+                    return error
+                }()
+
+                seal.reject(Error.requestFailed(originalError: originalError))
             }
         }
     }
@@ -121,7 +139,7 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
         case noAppStoreReceiptPresent
         case invalidPaymentData
         case invalidFinalStatus
-        case requestFailed
+        case requestFailed(originalError: Swift.Error)
     }
 }
 
