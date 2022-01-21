@@ -11,7 +11,9 @@ import Foundation
 
 enum APIDefaults {
     enum Configuration {
-        static let timeoutIntervalForRequest: TimeInterval = 10
+        static let defaultTimeoutIntervalForRequest: TimeInterval = 10
+
+        static let increasedTimeoutIntervalForRequest: TimeInterval = 30
     }
 
     enum Headers {

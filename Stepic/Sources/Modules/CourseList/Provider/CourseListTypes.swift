@@ -10,7 +10,7 @@ protocol CourseListType {
 }
 
 extension CourseListType {
-    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.timeoutIntervalForRequest }
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.defaultTimeoutIntervalForRequest }
 }
 
 struct PopularCourseListType: CourseListType {
@@ -21,6 +21,8 @@ struct PopularCourseListType: CourseListType {
 
 struct EnrolledCourseListType: CourseListType {
     var analyticName: String { "enrolled_course_list" }
+
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.increasedTimeoutIntervalForRequest }
 }
 
 struct FavoriteCourseListType: CourseListType {
@@ -55,7 +57,7 @@ struct SearchResultCourseListType: CourseListType {
 
     var analyticName: String { "search_result_course_list" }
 
-    var timeoutIntervalForRequests: TimeInterval { 30 }
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.increasedTimeoutIntervalForRequest }
 }
 
 struct TeacherCourseListType: CourseListType {

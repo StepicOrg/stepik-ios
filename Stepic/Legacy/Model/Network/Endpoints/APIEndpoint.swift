@@ -31,7 +31,7 @@ class APIEndpoint {
         }
     }
 
-    init(timeoutIntervalForRequest: TimeInterval = APIDefaults.Configuration.timeoutIntervalForRequest) {
+    init(timeoutIntervalForRequest: TimeInterval = APIDefaults.Configuration.defaultTimeoutIntervalForRequest) {
         var eventMonitors = [EventMonitor]()
         #if DEBUG
         if LaunchArguments.isNetworkDebuggingEnabled {

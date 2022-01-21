@@ -12,7 +12,7 @@ import Foundation
 final class StepikURLSessionConfiguration: URLSessionConfiguration {
     override class var `default`: URLSessionConfiguration {
         let configuration = super.default
-        configuration.timeoutIntervalForRequest = APIDefaults.Configuration.timeoutIntervalForRequest
+        configuration.timeoutIntervalForRequest = APIDefaults.Configuration.defaultTimeoutIntervalForRequest
 
         let headers = HTTPHeaders([.stepikUserAgent])
         configuration.httpAdditionalHeaders = headers.dictionary
