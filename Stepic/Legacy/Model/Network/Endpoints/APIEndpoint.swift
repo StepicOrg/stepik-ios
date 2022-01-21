@@ -22,7 +22,16 @@ class APIEndpoint {
     var create: CreateRequestMaker
     var retrieve: RetrieveRequestMaker
 
-    init() {
+    var timeoutIntervalForRequest: TimeInterval {
+        get {
+            self.manager.sessionConfiguration.timeoutIntervalForRequest
+        }
+        set {
+            self.manager.sessionConfiguration.timeoutIntervalForRequest = newValue
+        }
+    }
+
+    init(timeoutIntervalForRequest: TimeInterval = APIDefaults.Configuration.timeoutIntervalForRequest) {
         var eventMonitors = [EventMonitor]()
         #if DEBUG
         if LaunchArguments.isNetworkDebuggingEnabled {
@@ -30,8 +39,11 @@ class APIEndpoint {
         }
         #endif
 
+        let configuration = StepikURLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
+
         self.manager = Alamofire.Session(
-            configuration: StepikURLSessionConfiguration.default,
+            configuration: configuration,
             interceptor: StepikRequestInterceptor(),
             eventMonitors: eventMonitors
         )
@@ -43,10 +55,9 @@ class APIEndpoint {
     }
 
     func cancelAllTasks() {
-        manager.session.getAllTasks(completionHandler: {
-            tasks in
-            tasks.forEach({ $0.cancel() })
-        })
+        self.manager.session.getAllTasks { tasks in
+            tasks.forEach { $0.cancel() }
+        }
     }
 
     //TODO: Remove this in next refactoring iterations
@@ -79,11 +90,10 @@ class APIEndpoint {
         ).done { objects in
             success?(objects)
         }.catch { error in
-            guard let e = error as? NetworkError else {
-                failure(NetworkError(error: error))
-                return
+            guard let networkError = error as? NetworkError else {
+                return failure(NetworkError(error: error))
             }
-            failure(e)
+            failure(networkError)
         }
         return nil
     }

@@ -39,11 +39,11 @@ enum TokenRefreshError: Error {
 }
 
 final class AuthAPI {
-    let manager: Alamofire.Session
+    private let manager: Alamofire.Session
 
-    init() {
+    init(timeoutIntervalForRequest: TimeInterval = 15) {
         let configuration = StepikURLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
+        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
         self.manager = Alamofire.Session(configuration: configuration)
     }
 
