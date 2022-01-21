@@ -5,6 +5,12 @@ import Foundation
 protocol CourseListType {
     // It's just a marker
     var analyticName: String { get }
+
+    var timeoutIntervalForRequests: TimeInterval { get }
+}
+
+extension CourseListType {
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.timeoutIntervalForRequest }
 }
 
 struct PopularCourseListType: CourseListType {
@@ -112,6 +118,15 @@ final class CourseListServicesFactory {
         self.visitedCoursesAPI = visitedCoursesAPI
         self.courseListsAPI = courseListsAPI
         self.courseRecommendationsAPI = courseRecommendationsAPI
+
+        [
+            self.coursesAPI,
+            self.userCoursesAPI,
+            self.searchResultsAPI,
+            self.visitedCoursesAPI,
+            self.courseListsAPI,
+            self.courseRecommendationsAPI
+        ].forEach { $0.timeoutIntervalForRequest = self.type.timeoutIntervalForRequests }
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
