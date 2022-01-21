@@ -64,6 +64,8 @@ struct TeacherCourseListType: CourseListType {
     let teacherID: User.IdType
 
     var analyticName: String { "teacher_course_list" }
+
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.increasedTimeoutIntervalForRequest }
 }
 
 struct VisitedCourseListType: CourseListType {
