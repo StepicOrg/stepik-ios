@@ -54,6 +54,8 @@ struct SearchResultCourseListType: CourseListType {
     let language: ContentLanguage
 
     var analyticName: String { "search_result_course_list" }
+
+    var timeoutIntervalForRequests: TimeInterval { 30 }
 }
 
 struct TeacherCourseListType: CourseListType {
