@@ -69,7 +69,8 @@ final class Section: NSManagedObject, ManagedObject, IDFetchable {
             return false
         }
 
-        if !self.isReachable() {
+        let isReachable = self.isActive || self.testSectionAction != nil
+        if !isReachable {
             return false
         }
 
