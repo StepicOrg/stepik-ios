@@ -16,9 +16,12 @@ final class CoursesAPI: APIEndpoint {
 
     override var name: String { "courses" }
 
-    init(coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService()) {
+    init(
+        coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
+        timeoutIntervalForRequest: TimeInterval = APIDefaults.Configuration.increasedTimeoutIntervalForRequest
+    ) {
         self.coursesPersistenceService = coursesPersistenceService
-        super.init()
+        super.init(timeoutIntervalForRequest: timeoutIntervalForRequest)
     }
 
     @discardableResult

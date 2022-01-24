@@ -42,7 +42,10 @@ class CourseListAssembly: Assembly {
             type: self.type,
             coursesAPI: CoursesAPI(),
             userCoursesAPI: UserCoursesAPI(),
-            searchResultsAPI: SearchResultsAPI()
+            searchResultsAPI: SearchResultsAPI(),
+            visitedCoursesAPI: VisitedCoursesAPI(),
+            courseListsAPI: CourseListsAPI(),
+            courseRecommendationsAPI: CourseRecommendationsAPI()
         )
 
         let presenter = CourseListPresenter()

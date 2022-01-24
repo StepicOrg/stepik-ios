@@ -10,6 +10,12 @@ import Alamofire
 import Foundation
 
 enum APIDefaults {
+    enum Configuration {
+        static let defaultTimeoutIntervalForRequest: TimeInterval = 10
+
+        static let increasedTimeoutIntervalForRequest: TimeInterval = 30
+    }
+
     enum Headers {
         static var bearer: HTTPHeaders {
             self.bearer(AuthInfo.shared.token?.accessToken)
