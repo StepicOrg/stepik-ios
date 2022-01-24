@@ -27,7 +27,11 @@ final class CourseInfoAssembly: Assembly {
         let provider = CourseInfoProvider(
             courseID: self.courseID,
             coursesPersistenceService: CoursesPersistenceService(),
-            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            coursesNetworkService: CoursesNetworkService(
+                coursesAPI: CoursesAPI(
+                    timeoutIntervalForRequest: APIDefaults.Configuration.increasedTimeoutIntervalForRequest
+                )
+            ),
             progressesPersistenceService: ProgressesPersistenceService(),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
             reviewSummariesPersistenceService: CourseReviewSummariesPersistenceService(),
