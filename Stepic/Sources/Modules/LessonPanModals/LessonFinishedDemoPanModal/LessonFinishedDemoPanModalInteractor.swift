@@ -25,13 +25,6 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
     private var currentSection: Section?
     private var currentMobileTier: MobileTierPlainObject?
 
-    private var shouldCheckIAPPurchaseSupport: Bool {
-        (self.currentCourse?.isPaid ?? false) && self.remoteConfig.coursePurchaseFlow == .iap
-    }
-    private var isSupportedIAPPurchase: Bool {
-        self.shouldCheckIAPPurchaseSupport && self.currentMobileTier?.priceTier != nil
-    }
-
     init(
         presenter: LessonFinishedDemoPanModalPresenterProtocol,
         provider: LessonFinishedDemoPanModalProviderProtocol,
@@ -123,9 +116,7 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
             course: self.currentCourse.require(),
             section: self.currentSection.require(),
             coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
-            mobileTier: self.currentMobileTier,
-            shouldCheckIAPPurchaseSupport: self.shouldCheckIAPPurchaseSupport,
-            isSupportedIAPPurchase: self.isSupportedIAPPurchase
+            mobileTier: self.currentMobileTier
         )
     }
 

@@ -16,8 +16,6 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
                 section: data.section,
                 coursePurchaseFlow: data.coursePurchaseFlow,
                 mobileTier: data.mobileTier,
-                shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
-                isSupportedIAPPurchase: data.isSupportedIAPPurchase,
                 isAddingToWishlist: false
             )
             self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
@@ -40,8 +38,6 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
             section: response.data.section,
             coursePurchaseFlow: response.data.coursePurchaseFlow,
             mobileTier: response.data.mobileTier,
-            shouldCheckIAPPurchaseSupport: response.data.shouldCheckIAPPurchaseSupport,
-            isSupportedIAPPurchase: response.data.isSupportedIAPPurchase,
             isAddingToWishlist: isAddingToWishlist
         )
 
@@ -68,8 +64,6 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
         section: Section,
         coursePurchaseFlow: CoursePurchaseFlowType,
         mobileTier: MobileTierPlainObject?,
-        shouldCheckIAPPurchaseSupport: Bool,
-        isSupportedIAPPurchase: Bool,
         isAddingToWishlist: Bool
     ) -> LessonFinishedDemoPanModalViewModel {
         let title = String(
@@ -103,7 +97,7 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
                 : NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle", comment: "")
         }()
 
-        let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
+        let unsupportedIAPPurchaseText = course.isPaid && coursePurchaseFlow == .iap && mobileTier?.priceTier == nil
             ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
             : nil
 
