@@ -101,6 +101,10 @@ extension LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalVi
         self.interactor.doModalMainAction(request: .init())
     }
 
+    func lessonFinishedDemoPanModalViewDidClickWishlistButton(_ view: LessonFinishedDemoPanModalView) {
+        print("\(#function)")
+    }
+
     func lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(_ view: LessonFinishedDemoPanModalView) {
         self.updateState(newState: .loading)
         self.interactor.doModalLoad(request: .init())

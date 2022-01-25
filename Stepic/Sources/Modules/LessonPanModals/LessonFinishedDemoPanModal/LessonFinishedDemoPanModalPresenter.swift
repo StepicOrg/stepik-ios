@@ -32,7 +32,8 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
         coursePurchaseFlow: CoursePurchaseFlowType,
         mobileTier: MobileTierPlainObject?,
         shouldCheckIAPPurchaseSupport: Bool,
-        isSupportedIAPPurchase: Bool
+        isSupportedIAPPurchase: Bool,
+        isAddingToWishlist: Bool = false
     ) -> LessonFinishedDemoPanModalViewModel {
         let title = String(
             format: NSLocalizedString("LessonFinishedDemoPanModalTitle", comment: ""),
@@ -56,6 +57,15 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
             }
         }()
 
+        let wishlistTitle: String = {
+            if isAddingToWishlist {
+                return NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle", comment: "")
+            }
+            return course.isInWishlist
+                ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
+                : NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle", comment: "")
+        }()
+
         let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
             ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
             : nil
@@ -65,6 +75,9 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
             subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
             displayPrice: displayPrice,
             promoDisplayPrice: promoDisplayPrice,
+            wishlistTitle: wishlistTitle,
+            isInWishlist: course.isInWishlist,
+            isAddingToWishlist: isAddingToWishlist,
             unsupportedIAPPurchaseText: unsupportedIAPPurchaseText
         )
     }

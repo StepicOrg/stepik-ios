@@ -17,7 +17,7 @@ extension CourseInfoPurchaseModalActionButtonsView {
         let wishlistButtonBorderWidth: CGFloat = 1
 
         let stackViewSpacing: CGFloat = 16
-        let stackViewInsets = LayoutInsets(horizontal: 16)
+        var stackViewInsets = LayoutInsets(horizontal: 16)
     }
 }
 
