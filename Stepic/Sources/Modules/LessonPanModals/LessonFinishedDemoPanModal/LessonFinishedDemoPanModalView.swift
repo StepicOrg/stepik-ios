@@ -3,7 +3,7 @@ import UIKit
 
 protocol LessonFinishedDemoPanModalViewDelegate: AnyObject {
     func lessonFinishedDemoPanModalViewDidClickCloseButton(_ view: LessonFinishedDemoPanModalView)
-    func lessonFinishedDemoPanModalViewDidClickActionButton(_ view: LessonFinishedDemoPanModalView)
+    func lessonFinishedDemoPanModalViewDidClickBuyButton(_ view: LessonFinishedDemoPanModalView)
     func lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(_ view: LessonFinishedDemoPanModalView)
 }
 
@@ -24,6 +24,11 @@ extension LessonFinishedDemoPanModalView {
         let subtitleLabelTextColor = UIColor.stepikMaterialPrimaryText
 
         let actionButtonHeight: CGFloat = 44
+
+        let buyButtonTextColor = UIColor.white
+        let buyButtonBackgroundColor = UIColor.stepikGreenFixed
+        let buyButtonPromoPriceBackgroundColor = UIColor.stepikVioletFixed
+        let buyButtonFullPriceFont = UIFont.systemFont(ofSize: 12)
 
         let stackViewSpacing: CGFloat = 16
         let stackViewInsets = LayoutInsets(inset: 16)
@@ -64,9 +69,9 @@ final class LessonFinishedDemoPanModalView: UIView {
         return label
     }()
 
-    private lazy var actionButton: UIButton = {
-        let button = LessonPanModalActionButton()
-        button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
+    private lazy var buyButton: CourseInfoPurchaseModalActionButton = {
+        let button = CourseInfoPurchaseModalActionButton()
+        button.addTarget(self, action: #selector(self.buyButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -135,10 +140,11 @@ final class LessonFinishedDemoPanModalView: UIView {
     func configure(viewModel: LessonFinishedDemoPanModalViewModel) {
         self.titleLabel.text = viewModel.title
         self.subtitleLabel.text = viewModel.subtitle
-        self.actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+
+        self.setBuyButtonText(displayPrice: viewModel.displayPrice, promoDisplayPrice: viewModel.promoDisplayPrice)
 
         if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
-            self.actionButton.isHidden = true
+            self.buyButton.isHidden = true
 
             self.unsupportedIAPPurchaseView.isHidden = false
             self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
@@ -146,7 +152,7 @@ final class LessonFinishedDemoPanModalView: UIView {
                 UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
             )
         } else {
-            self.actionButton.isHidden = false
+            self.buyButton.isHidden = false
             self.unsupportedIAPPurchaseView.isHidden = true
         }
 
@@ -183,14 +189,54 @@ final class LessonFinishedDemoPanModalView: UIView {
         self.errorPlaceholderViewHeightConstraint?.update(offset: height)
     }
 
+    private func setBuyButtonText(displayPrice: String, promoDisplayPrice: String?) {
+        self.buyButton.appearance = .init(
+            loadingIndicatorColor: self.appearance.buyButtonTextColor,
+            textLabelTextColor: self.appearance.buyButtonTextColor,
+            backgroundColor: promoDisplayPrice != nil
+                ? self.appearance.buyButtonPromoPriceBackgroundColor
+                : self.appearance.buyButtonBackgroundColor
+        )
+
+        if let promoDisplayPrice = promoDisplayPrice {
+            let buyWithPromoTitle = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), promoDisplayPrice)
+            let formattedTitle = "\(buyWithPromoTitle) \(displayPrice)"
+
+            let buyButtonAppearance = CourseInfoPurchaseModalActionButton.Appearance()
+
+            let attributedTitle = NSMutableAttributedString(
+                string: formattedTitle,
+                attributes: [
+                    .font: buyButtonAppearance.textLabelFont,
+                    .foregroundColor: buyButtonAppearance.textLabelTextColor
+                ]
+            )
+
+            if let displayPriceLocation = formattedTitle.indexOf(displayPrice) {
+                attributedTitle.addAttributes(
+                    [
+                        .font: self.appearance.buyButtonFullPriceFont,
+                        .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                        .strikethroughColor: buyButtonAppearance.textLabelTextColor
+                    ],
+                    range: NSRange(location: displayPriceLocation, length: displayPrice.count)
+                )
+            }
+
+            self.buyButton.attributedText = attributedTitle
+        } else {
+            self.buyButton.text = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+        }
+    }
+
     @objc
     private func closeButtonClicked() {
         self.delegate?.lessonFinishedDemoPanModalViewDidClickCloseButton(self)
     }
 
     @objc
-    private func actionButtonClicked() {
-        self.delegate?.lessonFinishedDemoPanModalViewDidClickActionButton(self)
+    private func buyButtonClicked() {
+        self.delegate?.lessonFinishedDemoPanModalViewDidClickBuyButton(self)
     }
 }
 
@@ -215,7 +261,7 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
         self.contentStackView.addArrangedSubview(self.titleLabel)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
         self.contentStackView.addArrangedSubview(SeparatorView())
-        self.contentStackView.addArrangedSubview(self.actionButton)
+        self.contentStackView.addArrangedSubview(self.buyButton)
         self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
     }
 
@@ -233,8 +279,8 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-self.appearance.closeButtonInsets.right)
         }
 
-        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
-        self.actionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
+        self.buyButton.translatesAutoresizingMaskIntoConstraints = false
+        self.buyButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
 
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.snp.makeConstraints { make in

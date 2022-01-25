@@ -39,25 +39,22 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
             arguments: [section.title]
         )
 
-        let displayPrice: String? = {
+        let displayPrice: String = { () -> String? in
             switch coursePurchaseFlow {
             case .web:
                 return course.displayPriceIAP ?? course.displayPrice
             case .iap:
-                if let promoTierDisplayPrice = mobileTier?.promoTierDisplayPrice {
-                    return promoTierDisplayPrice
-                } else if let priceTierDisplayPrice = mobileTier?.priceTierDisplayPrice {
-                    return priceTierDisplayPrice
-                } else {
-                    return course.displayPrice
-                }
+                return mobileTier?.priceTierDisplayPrice ?? course.displayPrice
+            }
+        }() ?? "N/A"
+        let promoDisplayPrice: String? = {
+            switch coursePurchaseFlow {
+            case .web:
+                return nil
+            case .iap:
+                return mobileTier?.promoTierDisplayPrice
             }
         }()
-
-        let actionButtonTitle = String(
-            format: NSLocalizedString("WidgetButtonBuy", comment: ""),
-            arguments: [displayPrice ?? "N/A"]
-        )
 
         let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
             ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
@@ -66,7 +63,8 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
         return LessonFinishedDemoPanModalViewModel(
             title: title,
             subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
-            actionButtonTitle: actionButtonTitle,
+            displayPrice: displayPrice,
+            promoDisplayPrice: promoDisplayPrice,
             unsupportedIAPPurchaseText: unsupportedIAPPurchaseText
         )
     }

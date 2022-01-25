@@ -97,7 +97,7 @@ extension LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalVi
         self.dismiss(animated: true)
     }
 
-    func lessonFinishedDemoPanModalViewDidClickActionButton(_ view: LessonFinishedDemoPanModalView) {
+    func lessonFinishedDemoPanModalViewDidClickBuyButton(_ view: LessonFinishedDemoPanModalView) {
         self.interactor.doModalMainAction(request: .init())
     }
 
