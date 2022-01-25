@@ -1,24 +1,34 @@
 import Foundation
 
 enum LessonFinishedDemoPanModal {
+    struct ModalData {
+        let course: Course
+        let section: Section
+        let coursePurchaseFlow: CoursePurchaseFlowType
+        let mobileTier: MobileTierPlainObject?
+    }
+
     enum ModalLoad {
         struct Request {}
 
         struct Response {
-            let course: Course
-            let section: Section
-            let coursePurchaseFlow: CoursePurchaseFlowType
-            let mobileTier: MobileTier?
+            let result: StepikResult<ModalData>
         }
 
         struct ViewModel {
-            let title: String
-            let subtitle: String
-            let actionButtonTitle: String
+            let state: ViewControllerState
         }
     }
 
     enum MainModalAction {
         struct Request {}
+    }
+
+    // MARK: States
+
+    enum ViewControllerState {
+        case loading
+        case error
+        case result(data: LessonFinishedDemoPanModalViewModel)
     }
 }

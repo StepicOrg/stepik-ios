@@ -8,16 +8,35 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
     weak var viewController: LessonFinishedDemoPanModalViewControllerProtocol?
 
     func presentModal(response: LessonFinishedDemoPanModal.ModalLoad.Response) {
-        let course = response.course
-        let mobileTier = response.mobileTier
+        switch response.result {
+        case .success(let data):
+            let viewModel = self.makeViewModel(
+                course: data.course,
+                section: data.section,
+                coursePurchaseFlow: data.coursePurchaseFlow,
+                mobileTier: data.mobileTier
+            )
+            self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
+        case .failure:
+            self.viewController?.displayModal(viewModel: .init(state: .error))
+        }
+    }
 
+    // MARK: Private API
+
+    private func makeViewModel(
+        course: Course,
+        section: Section,
+        coursePurchaseFlow: CoursePurchaseFlowType,
+        mobileTier: MobileTierPlainObject?
+    ) -> LessonFinishedDemoPanModalViewModel {
         let title = String(
             format: NSLocalizedString("LessonFinishedDemoPanModalTitle", comment: ""),
-            arguments: [response.section.title]
+            arguments: [section.title]
         )
 
         let displayPrice: String? = {
-            switch response.coursePurchaseFlow {
+            switch coursePurchaseFlow {
             case .web:
                 return course.displayPriceIAP ?? course.displayPrice
             case .iap:
@@ -36,12 +55,10 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
             arguments: [displayPrice ?? "N/A"]
         )
 
-        self.viewController?.displayModal(
-            viewModel: .init(
-                title: title,
-                subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
-                actionButtonTitle: actionButtonTitle
-            )
+        return LessonFinishedDemoPanModalViewModel(
+            title: title,
+            subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
+            actionButtonTitle: actionButtonTitle
         )
     }
 }

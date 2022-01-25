@@ -4,6 +4,7 @@ import UIKit
 protocol LessonFinishedDemoPanModalViewDelegate: AnyObject {
     func lessonFinishedDemoPanModalViewDidClickCloseButton(_ view: LessonFinishedDemoPanModalView)
     func lessonFinishedDemoPanModalViewDidClickActionButton(_ view: LessonFinishedDemoPanModalView)
+    func lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(_ view: LessonFinishedDemoPanModalView)
 }
 
 extension LessonFinishedDemoPanModalView {
@@ -83,39 +84,29 @@ final class LessonFinishedDemoPanModalView: UIView {
         return scrollableStackView
     }()
 
-    var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
-        }
-    }
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
+    }()
 
-    var subtitle: String? {
-        didSet {
-            self.subtitleLabel.text = self.subtitle
-        }
-    }
+    private lazy var errorPlaceholderView = StepikPlaceholderView()
 
-    var actionButtonTitle: String? {
-        didSet {
-            self.actionButton.setTitle(self.actionButtonTitle, for: .normal)
-        }
-    }
+    private var errorPlaceholderViewHeightConstraint: Constraint?
 
     override var intrinsicContentSize: CGSize {
-        let height = self.appearance.headerImageViewHeight
-            + self.appearance.stackViewSpacing
-            + self.titleLabel.intrinsicContentSize.height
-            + self.appearance.stackViewSpacing
-            + self.subtitleLabel.intrinsicContentSize.height
-            + self.appearance.stackViewSpacing
-            + SeparatorView.Appearance().height
-            + self.appearance.stackViewSpacing
-            + self.appearance.actionButtonHeight
-            + self.appearance.stackViewSpacing
-        return CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: height
-        )
+        if self.loadingIndicator.isAnimating {
+            return CGSize(
+                width: UIView.noIntrinsicMetric,
+                height: self.loadingIndicator.intrinsicContentSize.height
+            )
+        }
+
+        let contentSize = self.scrollableStackView.contentSize
+        let height = contentSize.height + self.appearance.stackViewSpacing
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
     init(
@@ -135,6 +126,44 @@ final class LessonFinishedDemoPanModalView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configure(viewModel: LessonFinishedDemoPanModalViewModel) {
+        self.titleLabel.text = viewModel.title
+        self.subtitleLabel.text = viewModel.subtitle
+        self.actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
+    }
+
+    func showLoading() {
+        self.scrollableStackView.isHidden = true
+        self.loadingIndicator.startAnimating()
+    }
+
+    func hideLoading() {
+        self.scrollableStackView.isHidden = false
+        self.loadingIndicator.stopAnimating()
+    }
+
+    func showErrorPlaceholder() {
+        self.errorPlaceholderView.set(placeholder: .noConnection)
+        self.errorPlaceholderView.delegate = self
+        self.errorPlaceholderView.isHidden = false
+        self.updateErrorPlaceholderHeight()
+    }
+
+    func hideErrorPlaceholder() {
+        self.errorPlaceholderView.isHidden = true
+    }
+
+    // MARK: Private API
+
+    private func updateErrorPlaceholderHeight() {
+        self.invalidateIntrinsicContentSize()
+        let height = floor(self.intrinsicContentSize.height)
+        self.errorPlaceholderViewHeightConstraint?.update(offset: height)
+    }
+
     @objc
     private func closeButtonClicked() {
         self.delegate?.lessonFinishedDemoPanModalViewDidClickCloseButton(self)
@@ -146,6 +175,8 @@ final class LessonFinishedDemoPanModalView: UIView {
     }
 }
 
+// MARK: - LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProtocol -
+
 extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
@@ -153,6 +184,8 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
 
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
+        self.addSubview(self.loadingIndicator)
+        self.addSubview(self.errorPlaceholderView)
         self.addSubview(self.closeButton)
 
         self.scrollableStackView.addArrangedView(self.headerImageView)
@@ -194,9 +227,32 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
                 .offset(-self.appearance.stackViewInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.stackViewInsets.bottom)
         }
+
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(0.4)
+        }
+
+        self.errorPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.errorPlaceholderView.snp.makeConstraints { make in
+            make.centerX.top.leading.trailing.equalToSuperview()
+            self.errorPlaceholderViewHeightConstraint = make.height.equalTo(0).constraint
+        }
     }
 }
 
+// MARK: - LessonFinishedDemoPanModalView: PanModalScrollable -
+
 extension LessonFinishedDemoPanModalView: PanModalScrollable {
     var panScrollable: UIScrollView? { self.scrollableStackView.panScrollable }
+}
+
+
+// MARK: - LessonFinishedDemoPanModalView: StepikPlaceholderViewDelegate -
+
+extension LessonFinishedDemoPanModalView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(self)
+    }
 }
