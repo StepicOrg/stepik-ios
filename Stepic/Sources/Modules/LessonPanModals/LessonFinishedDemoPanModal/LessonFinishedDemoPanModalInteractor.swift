@@ -116,7 +116,7 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
             return .value(course)
         case .iap:
             return self.provider
-                .calculateMobileTier(courseID: course.id, promoCodeName: self.promoCodeName)
+                .fetchMobileTier(courseID: course.id, promoCodeName: self.promoCodeName)
                 .compactMap { $0 }
                 .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
                 .then { mobileTier -> Promise<Course> in

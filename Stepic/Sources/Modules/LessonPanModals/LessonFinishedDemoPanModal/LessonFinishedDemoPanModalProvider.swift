@@ -5,7 +5,7 @@ protocol LessonFinishedDemoPanModalProviderProtocol {
     func fetchCourse(id: Course.IdType) -> Promise<Course?>
     func fetchSection(id: Section.IdType) -> Promise<Section?>
 
-    func calculateMobileTier(courseID: Course.IdType, promoCodeName: String?) -> Promise<MobileTierPlainObject?>
+    func fetchMobileTier(courseID: Course.IdType, promoCodeName: String?) -> Promise<MobileTierPlainObject?>
 }
 
 final class LessonFinishedDemoPanModalProvider: LessonFinishedDemoPanModalProviderProtocol {
@@ -51,7 +51,7 @@ final class LessonFinishedDemoPanModalProvider: LessonFinishedDemoPanModalProvid
         }
     }
 
-    func calculateMobileTier(courseID: Course.IdType, promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
-        self.mobileTiersRepository.fetch(courseID: courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
+    func fetchMobileTier(courseID: Course.IdType, promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
+        self.mobileTiersRepository.fetch(courseID: courseID, promoCodeName: promoCodeName, fetchPolicy: .cacheFirst)
     }
 }
