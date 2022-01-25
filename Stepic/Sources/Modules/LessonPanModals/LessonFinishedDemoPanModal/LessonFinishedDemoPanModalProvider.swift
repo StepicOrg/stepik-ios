@@ -6,6 +6,8 @@ protocol LessonFinishedDemoPanModalProviderProtocol {
     func fetchSection(id: Section.IdType) -> Promise<Section?>
 
     func fetchMobileTier(courseID: Course.IdType, promoCodeName: String?) -> Promise<MobileTierPlainObject?>
+
+    func addCourseToWishlist(courseID: Course.IdType) -> Promise<Void>
 }
 
 final class LessonFinishedDemoPanModalProvider: LessonFinishedDemoPanModalProviderProtocol {
@@ -17,18 +19,22 @@ final class LessonFinishedDemoPanModalProvider: LessonFinishedDemoPanModalProvid
 
     private let mobileTiersRepository: MobileTiersRepositoryProtocol
 
+    private let wishlistRepository: WishlistRepositoryProtocol
+
     init(
         sectionsPersistenceService: SectionsPersistenceServiceProtocol,
         sectionsNetworkService: SectionsNetworkServiceProtocol,
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
         coursesNetworkService: CoursesNetworkServiceProtocol,
-        mobileTiersRepository: MobileTiersRepositoryProtocol
+        mobileTiersRepository: MobileTiersRepositoryProtocol,
+        wishlistRepository: WishlistRepositoryProtocol
     ) {
         self.sectionsPersistenceService = sectionsPersistenceService
         self.sectionsNetworkService = sectionsNetworkService
         self.coursesPersistenceService = coursesPersistenceService
         self.coursesNetworkService = coursesNetworkService
         self.mobileTiersRepository = mobileTiersRepository
+        self.wishlistRepository = wishlistRepository
     }
 
     func fetchSection(id: Section.IdType) -> Promise<Section?> {
@@ -53,5 +59,9 @@ final class LessonFinishedDemoPanModalProvider: LessonFinishedDemoPanModalProvid
 
     func fetchMobileTier(courseID: Course.IdType, promoCodeName: String?) -> Promise<MobileTierPlainObject?> {
         self.mobileTiersRepository.fetch(courseID: courseID, promoCodeName: promoCodeName, fetchPolicy: .cacheFirst)
+    }
+
+    func addCourseToWishlist(courseID: Course.IdType) -> Promise<Void> {
+        self.wishlistRepository.addCourseToWishlist(courseID: courseID)
     }
 }

@@ -17,7 +17,7 @@ extension CourseInfoPurchaseModalActionButtonsView {
         let wishlistButtonBorderWidth: CGFloat = 1
 
         let stackViewSpacing: CGFloat = 16
-        let stackViewInsets = LayoutInsets(horizontal: 16)
+        var stackViewInsets = LayoutInsets(horizontal: 16)
     }
 }
 
@@ -42,6 +42,15 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         didSet {
             self.buyButton.isEnabled = self.isEnabled
             self.wishlistButton.isEnabled = self.isEnabled
+        }
+    }
+
+    var buyButtonIsEnabled: Bool {
+        get {
+            self.buyButton.isEnabled
+        }
+        set {
+            self.buyButton.isEnabled = newValue
         }
     }
 

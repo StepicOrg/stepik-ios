@@ -7,5 +7,9 @@ struct LessonFinishedDemoPanModalViewModel {
     let displayPrice: String
     let promoDisplayPrice: String?
 
+    let wishlistTitle: String
+    let isInWishlist: Bool
+    let isAddingToWishlist: Bool
+
     let unsupportedIAPPurchaseText: String?
 }

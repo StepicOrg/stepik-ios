@@ -4,6 +4,7 @@ import UIKit
 protocol LessonFinishedDemoPanModalViewDelegate: AnyObject {
     func lessonFinishedDemoPanModalViewDidClickCloseButton(_ view: LessonFinishedDemoPanModalView)
     func lessonFinishedDemoPanModalViewDidClickBuyButton(_ view: LessonFinishedDemoPanModalView)
+    func lessonFinishedDemoPanModalViewDidClickWishlistButton(_ view: LessonFinishedDemoPanModalView)
     func lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(_ view: LessonFinishedDemoPanModalView)
 }
 
@@ -22,13 +23,6 @@ extension LessonFinishedDemoPanModalView {
 
         let subtitleLabelFont = Typography.bodyFont
         let subtitleLabelTextColor = UIColor.stepikMaterialPrimaryText
-
-        let actionButtonHeight: CGFloat = 44
-
-        let buyButtonTextColor = UIColor.white
-        let buyButtonBackgroundColor = UIColor.stepikGreenFixed
-        let buyButtonPromoPriceBackgroundColor = UIColor.stepikVioletFixed
-        let buyButtonFullPriceFont = UIFont.systemFont(ofSize: 12)
 
         let stackViewSpacing: CGFloat = 16
         let stackViewInsets = LayoutInsets(inset: 16)
@@ -69,10 +63,11 @@ final class LessonFinishedDemoPanModalView: UIView {
         return label
     }()
 
-    private lazy var buyButton: CourseInfoPurchaseModalActionButton = {
-        let button = CourseInfoPurchaseModalActionButton()
-        button.addTarget(self, action: #selector(self.buyButtonClicked), for: .touchUpInside)
-        return button
+    private lazy var actionButtonsView: CourseInfoPurchaseModalActionButtonsView = {
+        var appearance = CourseInfoPurchaseModalActionButtonsView.Appearance()
+        appearance.stackViewInsets = .init(inset: 0)
+        let view = CourseInfoPurchaseModalActionButtonsView(appearance: appearance)
+        return view
     }()
 
     private lazy var unsupportedIAPPurchaseView: QuizFeedbackView = {
@@ -141,10 +136,22 @@ final class LessonFinishedDemoPanModalView: UIView {
         self.titleLabel.text = viewModel.title
         self.subtitleLabel.text = viewModel.subtitle
 
-        self.setBuyButtonText(displayPrice: viewModel.displayPrice, promoDisplayPrice: viewModel.promoDisplayPrice)
+        let buyButtonViewModel = CourseInfoPurchaseModalPriceViewModel(
+            displayPrice: viewModel.displayPrice,
+            promoDisplayPrice: viewModel.promoDisplayPrice,
+            promoCodeName: nil
+        )
+        self.actionButtonsView.updateBuyButtonState(newState: .result(buyButtonViewModel))
+
+        let wishlistButtonViewModel = CourseInfoPurchaseModalWishlistViewModel(
+            title: viewModel.wishlistTitle,
+            isInWishlist: viewModel.isInWishlist,
+            isLoading: viewModel.isAddingToWishlist
+        )
+        self.actionButtonsView.configureWishlistButton(viewModel: wishlistButtonViewModel)
 
         if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
-            self.buyButton.isHidden = true
+            self.actionButtonsView.buyButtonIsEnabled = false
 
             self.unsupportedIAPPurchaseView.isHidden = false
             self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
@@ -152,7 +159,7 @@ final class LessonFinishedDemoPanModalView: UIView {
                 UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
             )
         } else {
-            self.buyButton.isHidden = false
+            self.actionButtonsView.buyButtonIsEnabled = true
             self.unsupportedIAPPurchaseView.isHidden = true
         }
 
@@ -189,54 +196,9 @@ final class LessonFinishedDemoPanModalView: UIView {
         self.errorPlaceholderViewHeightConstraint?.update(offset: height)
     }
 
-    private func setBuyButtonText(displayPrice: String, promoDisplayPrice: String?) {
-        self.buyButton.appearance = .init(
-            loadingIndicatorColor: self.appearance.buyButtonTextColor,
-            textLabelTextColor: self.appearance.buyButtonTextColor,
-            backgroundColor: promoDisplayPrice != nil
-                ? self.appearance.buyButtonPromoPriceBackgroundColor
-                : self.appearance.buyButtonBackgroundColor
-        )
-
-        if let promoDisplayPrice = promoDisplayPrice {
-            let buyWithPromoTitle = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), promoDisplayPrice)
-            let formattedTitle = "\(buyWithPromoTitle) \(displayPrice)"
-
-            let buyButtonAppearance = CourseInfoPurchaseModalActionButton.Appearance()
-
-            let attributedTitle = NSMutableAttributedString(
-                string: formattedTitle,
-                attributes: [
-                    .font: buyButtonAppearance.textLabelFont,
-                    .foregroundColor: buyButtonAppearance.textLabelTextColor
-                ]
-            )
-
-            if let displayPriceLocation = formattedTitle.indexOf(displayPrice) {
-                attributedTitle.addAttributes(
-                    [
-                        .font: self.appearance.buyButtonFullPriceFont,
-                        .strikethroughStyle: NSUnderlineStyle.single.rawValue,
-                        .strikethroughColor: buyButtonAppearance.textLabelTextColor
-                    ],
-                    range: NSRange(location: displayPriceLocation, length: displayPrice.count)
-                )
-            }
-
-            self.buyButton.attributedText = attributedTitle
-        } else {
-            self.buyButton.text = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
-        }
-    }
-
     @objc
     private func closeButtonClicked() {
         self.delegate?.lessonFinishedDemoPanModalViewDidClickCloseButton(self)
-    }
-
-    @objc
-    private func buyButtonClicked() {
-        self.delegate?.lessonFinishedDemoPanModalViewDidClickBuyButton(self)
     }
 }
 
@@ -245,6 +207,21 @@ final class LessonFinishedDemoPanModalView: UIView {
 extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
+
+        self.actionButtonsView.onBuyButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.lessonFinishedDemoPanModalViewDidClickBuyButton(strongSelf)
+        }
+        self.actionButtonsView.onWishlistButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.lessonFinishedDemoPanModalViewDidClickWishlistButton(strongSelf)
+        }
     }
 
     func addSubviews() {
@@ -260,9 +237,9 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
 
         self.contentStackView.addArrangedSubview(self.titleLabel)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
-        self.contentStackView.addArrangedSubview(SeparatorView())
-        self.contentStackView.addArrangedSubview(self.buyButton)
         self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
+        self.contentStackView.addArrangedSubview(SeparatorView())
+        self.contentStackView.addArrangedSubview(self.actionButtonsView)
     }
 
     func makeConstraints() {
@@ -278,9 +255,6 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
             make.top.equalToSuperview().offset(self.appearance.closeButtonInsets.top)
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-self.appearance.closeButtonInsets.right)
         }
-
-        self.buyButton.translatesAutoresizingMaskIntoConstraints = false
-        self.buyButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
 
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.snp.makeConstraints { make in
