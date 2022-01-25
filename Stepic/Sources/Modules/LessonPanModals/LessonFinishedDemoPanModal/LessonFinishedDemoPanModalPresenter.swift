@@ -2,6 +2,7 @@ import UIKit
 
 protocol LessonFinishedDemoPanModalPresenterProtocol {
     func presentModal(response: LessonFinishedDemoPanModal.ModalLoad.Response)
+    func presentAddCourseToWishlistResult(response: LessonFinishedDemoPanModal.AddCourseToWishlist.Response)
 }
 
 final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPresenterProtocol {
@@ -16,11 +17,47 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
                 coursePurchaseFlow: data.coursePurchaseFlow,
                 mobileTier: data.mobileTier,
                 shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
-                isSupportedIAPPurchase: data.isSupportedIAPPurchase
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase,
+                isAddingToWishlist: false
             )
             self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
         case .failure:
             self.viewController?.displayModal(viewModel: .init(state: .error))
+        }
+    }
+
+    func presentAddCourseToWishlistResult(response: LessonFinishedDemoPanModal.AddCourseToWishlist.Response) {
+        let isAddingToWishlist: Bool = {
+            switch response.state {
+            case .loading:
+                return true
+            case .error, .success:
+                return false
+            }
+        }()
+        let viewModel = self.makeViewModel(
+            course: response.data.course,
+            section: response.data.section,
+            coursePurchaseFlow: response.data.coursePurchaseFlow,
+            mobileTier: response.data.mobileTier,
+            shouldCheckIAPPurchaseSupport: response.data.shouldCheckIAPPurchaseSupport,
+            isSupportedIAPPurchase: response.data.isSupportedIAPPurchase,
+            isAddingToWishlist: isAddingToWishlist
+        )
+
+        switch response.state {
+        case .loading:
+            self.viewController?.displayAddCourseToWishlistResult(viewModel: .init(state: .loading(viewModel)))
+        case .error:
+            let message = NSLocalizedString("CourseInfoAddToWishlistFailureMessage", comment: "")
+            self.viewController?.displayAddCourseToWishlistResult(
+                viewModel: .init(state: .error(message: message, data: viewModel))
+            )
+        case .success:
+            let message = NSLocalizedString("CourseInfoAddToWishlistSuccessMessage", comment: "")
+            self.viewController?.displayAddCourseToWishlistResult(
+                viewModel: .init(state: .success(message: message, data: viewModel))
+            )
         }
     }
 
@@ -33,7 +70,7 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
         mobileTier: MobileTierPlainObject?,
         shouldCheckIAPPurchaseSupport: Bool,
         isSupportedIAPPurchase: Bool,
-        isAddingToWishlist: Bool = false
+        isAddingToWishlist: Bool
     ) -> LessonFinishedDemoPanModalViewModel {
         let title = String(
             format: NSLocalizedString("LessonFinishedDemoPanModalTitle", comment: ""),

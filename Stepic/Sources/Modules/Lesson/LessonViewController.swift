@@ -683,6 +683,10 @@ extension LessonViewController: LessonFinishedDemoPanModalOutputProtocol {
             self?.interactor.doBuyCourse(request: .init())
         }
     }
+
+    func handleLessonFinishedDemoPanModalDidAddCourseToWishlist(courseID: Course.IdType) {
+        self.interactor.doLessonFinishedDemoModuleAddedCourseToWishlist(request: .init(courseID: courseID))
+    }
 }
 
 // MARK: - LessonViewController: LessonFinishedStepsPanModalOutputProtocol -

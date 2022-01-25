@@ -45,6 +45,15 @@ final class CourseInfoPurchaseModalActionButtonsView: UIView {
         }
     }
 
+    var buyButtonIsEnabled: Bool {
+        get {
+            self.buyButton.isEnabled
+        }
+        set {
+            self.buyButton.isEnabled = newValue
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let stackViewIntrinsicContentSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return CGSize(width: UIView.noIntrinsicMetric, height: stackViewIntrinsicContentSize.height)

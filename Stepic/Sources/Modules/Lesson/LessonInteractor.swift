@@ -9,6 +9,9 @@ protocol LessonInteractorProtocol {
     func doBuyCourse(request: LessonDataFlow.BuyCourseAction.Request)
     func doLeaveReviewPresentation(request: LessonDataFlow.LeaveReviewPresentation.Request)
     func doCatalogPresentation(request: LessonDataFlow.CatalogPresentation.Request)
+    func doLessonFinishedDemoModuleAddedCourseToWishlist(
+        request: LessonDataFlow.LessonFinishedDemoModuleAddedCourseToWishlist.Request
+    )
 }
 
 final class LessonInteractor: LessonInteractorProtocol {
@@ -94,6 +97,12 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     func doCatalogPresentation(request: LessonDataFlow.CatalogPresentation.Request) {
         self.moduleOutput?.handleLessonDidRequestPresentCatalog()
+    }
+
+    func doLessonFinishedDemoModuleAddedCourseToWishlist(
+        request: LessonDataFlow.LessonFinishedDemoModuleAddedCourseToWishlist.Request
+    ) {
+        self.moduleOutput?.handleLessonDidAddCourseToWishlist(courseID: request.courseID)
     }
 
     // MARK: Private API

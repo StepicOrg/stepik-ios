@@ -151,7 +151,7 @@ final class LessonFinishedDemoPanModalView: UIView {
         self.actionButtonsView.configureWishlistButton(viewModel: wishlistButtonViewModel)
 
         if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
-            self.buyButton.isHidden = true
+            self.actionButtonsView.buyButtonIsEnabled = false
 
             self.unsupportedIAPPurchaseView.isHidden = false
             self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
@@ -159,7 +159,7 @@ final class LessonFinishedDemoPanModalView: UIView {
                 UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
             )
         } else {
-            self.buyButton.isHidden = false
+            self.actionButtonsView.buyButtonIsEnabled = true
             self.unsupportedIAPPurchaseView.isHidden = true
         }
 
@@ -237,8 +237,8 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
 
         self.contentStackView.addArrangedSubview(self.titleLabel)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
-        self.contentStackView.addArrangedSubview(SeparatorView())
         self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
+        self.contentStackView.addArrangedSubview(SeparatorView())
         self.contentStackView.addArrangedSubview(self.actionButtonsView)
     }
 

@@ -4,6 +4,7 @@ import PromiseKit
 protocol LessonFinishedDemoPanModalInteractorProtocol {
     func doModalLoad(request: LessonFinishedDemoPanModal.ModalLoad.Request)
     func doModalMainAction(request: LessonFinishedDemoPanModal.MainModalAction.Request)
+    func doWishlistMainAction(request: LessonFinishedDemoPanModal.WishlistMainAction.Request)
 }
 
 final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInteractorProtocol {
@@ -21,6 +22,7 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
     private let analytics: Analytics
 
     private var currentCourse: Course?
+    private var currentSection: Section?
     private var currentMobileTier: MobileTierPlainObject?
 
     private var shouldCheckIAPPurchaseSupport: Bool {
@@ -70,15 +72,9 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
             }
             .done { section, course in
                 self.currentCourse = course
+                self.currentSection = section
 
-                let data = LessonFinishedDemoPanModal.ModalData(
-                    course: course,
-                    section: section,
-                    coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
-                    mobileTier: self.currentMobileTier,
-                    shouldCheckIAPPurchaseSupport: self.shouldCheckIAPPurchaseSupport,
-                    isSupportedIAPPurchase: self.isSupportedIAPPurchase
-                )
+                let data = self.makeModalData()
                 self.presenter.presentModal(response: .init(result: .success(data)))
             }
             .catch { error in
@@ -102,7 +98,36 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
         self.moduleOutput?.handleLessonFinishedDemoPanModalMainAction()
     }
 
+    func doWishlistMainAction(request: LessonFinishedDemoPanModal.WishlistMainAction.Request) {
+        guard let currentCourse = self.currentCourse,
+              !currentCourse.isInWishlist else {
+            return
+        }
+
+        self.presenter.presentAddCourseToWishlistResult(response: .init(state: .loading, data: self.makeModalData()))
+
+        self.provider.addCourseToWishlist(courseID: currentCourse.id).done {
+            self.presenter.presentAddCourseToWishlistResult(
+                response: .init(state: .success, data: self.makeModalData())
+            )
+            self.moduleOutput?.handleLessonFinishedDemoPanModalDidAddCourseToWishlist(courseID: currentCourse.id)
+        }.catch { _ in
+            self.presenter.presentAddCourseToWishlistResult(response: .init(state: .error, data: self.makeModalData()))
+        }
+    }
+
     // MARK: Private API
+
+    private func makeModalData() -> LessonFinishedDemoPanModal.ModalData {
+        .init(
+            course: self.currentCourse.require(),
+            section: self.currentSection.require(),
+            coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
+            mobileTier: self.currentMobileTier,
+            shouldCheckIAPPurchaseSupport: self.shouldCheckIAPPurchaseSupport,
+            isSupportedIAPPurchase: self.isSupportedIAPPurchase
+        )
+    }
 
     private func fetchDisplayPrice(course: Course) -> Promise<Course> {
         switch self.remoteConfig.coursePurchaseFlow {
