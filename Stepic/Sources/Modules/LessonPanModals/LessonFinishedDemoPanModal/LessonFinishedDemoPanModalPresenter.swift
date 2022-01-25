@@ -14,7 +14,9 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
                 course: data.course,
                 section: data.section,
                 coursePurchaseFlow: data.coursePurchaseFlow,
-                mobileTier: data.mobileTier
+                mobileTier: data.mobileTier,
+                shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase
             )
             self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
         case .failure:
@@ -28,7 +30,9 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
         course: Course,
         section: Section,
         coursePurchaseFlow: CoursePurchaseFlowType,
-        mobileTier: MobileTierPlainObject?
+        mobileTier: MobileTierPlainObject?,
+        shouldCheckIAPPurchaseSupport: Bool,
+        isSupportedIAPPurchase: Bool
     ) -> LessonFinishedDemoPanModalViewModel {
         let title = String(
             format: NSLocalizedString("LessonFinishedDemoPanModalTitle", comment: ""),
@@ -55,10 +59,15 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
             arguments: [displayPrice ?? "N/A"]
         )
 
+        let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
+            ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+            : nil
+
         return LessonFinishedDemoPanModalViewModel(
             title: title,
             subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
-            actionButtonTitle: actionButtonTitle
+            actionButtonTitle: actionButtonTitle,
+            unsupportedIAPPurchaseText: unsupportedIAPPurchaseText
         )
     }
 }

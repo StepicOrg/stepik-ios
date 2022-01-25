@@ -70,6 +70,12 @@ final class LessonFinishedDemoPanModalView: UIView {
         return button
     }()
 
+    private lazy var unsupportedIAPPurchaseView: QuizFeedbackView = {
+        let view = QuizFeedbackView()
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -130,6 +136,19 @@ final class LessonFinishedDemoPanModalView: UIView {
         self.titleLabel.text = viewModel.title
         self.subtitleLabel.text = viewModel.subtitle
         self.actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+
+        if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
+            self.actionButton.isHidden = true
+
+            self.unsupportedIAPPurchaseView.isHidden = false
+            self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
+            self.unsupportedIAPPurchaseView.setIconImage(
+                UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
+            )
+        } else {
+            self.actionButton.isHidden = false
+            self.unsupportedIAPPurchaseView.isHidden = true
+        }
 
         self.layoutIfNeeded()
         self.invalidateIntrinsicContentSize()
@@ -197,6 +216,7 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
         self.contentStackView.addArrangedSubview(SeparatorView())
         self.contentStackView.addArrangedSubview(self.actionButton)
+        self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
     }
 
     func makeConstraints() {

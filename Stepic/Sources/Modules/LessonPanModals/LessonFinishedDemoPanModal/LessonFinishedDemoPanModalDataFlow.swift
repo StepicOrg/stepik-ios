@@ -6,6 +6,8 @@ enum LessonFinishedDemoPanModal {
         let section: Section
         let coursePurchaseFlow: CoursePurchaseFlowType
         let mobileTier: MobileTierPlainObject?
+        let shouldCheckIAPPurchaseSupport: Bool
+        let isSupportedIAPPurchase: Bool
     }
 
     enum ModalLoad {
