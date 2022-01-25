@@ -8,40 +8,64 @@ final class LessonFinishedDemoPanModalPresenter: LessonFinishedDemoPanModalPrese
     weak var viewController: LessonFinishedDemoPanModalViewControllerProtocol?
 
     func presentModal(response: LessonFinishedDemoPanModal.ModalLoad.Response) {
-        let course = response.course
-        let mobileTier = response.mobileTier
+        switch response.result {
+        case .success(let data):
+            let viewModel = self.makeViewModel(
+                course: data.course,
+                section: data.section,
+                coursePurchaseFlow: data.coursePurchaseFlow,
+                mobileTier: data.mobileTier,
+                shouldCheckIAPPurchaseSupport: data.shouldCheckIAPPurchaseSupport,
+                isSupportedIAPPurchase: data.isSupportedIAPPurchase
+            )
+            self.viewController?.displayModal(viewModel: .init(state: .result(data: viewModel)))
+        case .failure:
+            self.viewController?.displayModal(viewModel: .init(state: .error))
+        }
+    }
 
+    // MARK: Private API
+
+    private func makeViewModel(
+        course: Course,
+        section: Section,
+        coursePurchaseFlow: CoursePurchaseFlowType,
+        mobileTier: MobileTierPlainObject?,
+        shouldCheckIAPPurchaseSupport: Bool,
+        isSupportedIAPPurchase: Bool
+    ) -> LessonFinishedDemoPanModalViewModel {
         let title = String(
             format: NSLocalizedString("LessonFinishedDemoPanModalTitle", comment: ""),
-            arguments: [response.section.title]
+            arguments: [section.title]
         )
 
-        let displayPrice: String? = {
-            switch response.coursePurchaseFlow {
+        let displayPrice: String = { () -> String? in
+            switch coursePurchaseFlow {
             case .web:
                 return course.displayPriceIAP ?? course.displayPrice
             case .iap:
-                if let promoTierDisplayPrice = mobileTier?.promoTierDisplayPrice {
-                    return promoTierDisplayPrice
-                } else if let priceTierDisplayPrice = mobileTier?.priceTierDisplayPrice {
-                    return priceTierDisplayPrice
-                } else {
-                    return course.displayPrice
-                }
+                return mobileTier?.priceTierDisplayPrice ?? course.displayPrice
+            }
+        }() ?? "N/A"
+        let promoDisplayPrice: String? = {
+            switch coursePurchaseFlow {
+            case .web:
+                return nil
+            case .iap:
+                return mobileTier?.promoTierDisplayPrice
             }
         }()
 
-        let actionButtonTitle = String(
-            format: NSLocalizedString("WidgetButtonBuy", comment: ""),
-            arguments: [displayPrice ?? "N/A"]
-        )
+        let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
+            ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+            : nil
 
-        self.viewController?.displayModal(
-            viewModel: .init(
-                title: title,
-                subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
-                actionButtonTitle: actionButtonTitle
-            )
+        return LessonFinishedDemoPanModalViewModel(
+            title: title,
+            subtitle: NSLocalizedString("LessonFinishedDemoPanModalSubtitle", comment: ""),
+            displayPrice: displayPrice,
+            promoDisplayPrice: promoDisplayPrice,
+            unsupportedIAPPurchaseText: unsupportedIAPPurchaseText
         )
     }
 }

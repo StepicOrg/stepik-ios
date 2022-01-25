@@ -18,6 +18,39 @@ protocol MobileTiersRepositoryProtocol: AnyObject {
     func checkPromoCode(name: String, courseID: Course.IdType) -> Promise<MobileTierPlainObject?>
 }
 
+extension MobileTiersRepositoryProtocol {
+    func fetch(
+        courseID: Course.IdType,
+        promoCodeName: String?,
+        fetchPolicy: DataFetchPolicy
+    ) -> Promise<MobileTierPlainObject?> {
+        switch fetchPolicy {
+        case .cacheFirst:
+            return Guarantee(
+                self.fetch(courseID: courseID, promoCodeName: promoCodeName, dataSourceType: .cache),
+                fallback: nil
+            ).then { cachedMobileTierOrNil -> Promise<MobileTierPlainObject?> in
+                if let cachedMobileTier = cachedMobileTierOrNil?.flatMap({ $0 }) {
+                    return .value(cachedMobileTier)
+                } else {
+                    return self.fetch(courseID: courseID, promoCodeName: promoCodeName, dataSourceType: .remote)
+                }
+            }
+        case .remoteFirst:
+            return Guarantee(
+                self.fetch(courseID: courseID, promoCodeName: promoCodeName, dataSourceType: .remote),
+                fallback: nil
+            ).then { remoteMobileTierOrNil -> Promise<MobileTierPlainObject?> in
+                if let remoteMobileTier = remoteMobileTierOrNil?.flatMap({ $0 }) {
+                    return .value(remoteMobileTier)
+                } else {
+                    return self.fetch(courseID: courseID, promoCodeName: promoCodeName, dataSourceType: .cache)
+                }
+            }
+        }
+    }
+}
+
 final class MobileTiersRepository: MobileTiersRepositoryProtocol {
     private let mobileTiersNetworkService: MobileTiersNetworkServiceProtocol
     private let mobileTiersPersistenceService: MobileTiersPersistenceServiceProtocol

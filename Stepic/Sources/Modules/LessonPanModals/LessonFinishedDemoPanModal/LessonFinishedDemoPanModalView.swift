@@ -3,7 +3,8 @@ import UIKit
 
 protocol LessonFinishedDemoPanModalViewDelegate: AnyObject {
     func lessonFinishedDemoPanModalViewDidClickCloseButton(_ view: LessonFinishedDemoPanModalView)
-    func lessonFinishedDemoPanModalViewDidClickActionButton(_ view: LessonFinishedDemoPanModalView)
+    func lessonFinishedDemoPanModalViewDidClickBuyButton(_ view: LessonFinishedDemoPanModalView)
+    func lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(_ view: LessonFinishedDemoPanModalView)
 }
 
 extension LessonFinishedDemoPanModalView {
@@ -23,6 +24,11 @@ extension LessonFinishedDemoPanModalView {
         let subtitleLabelTextColor = UIColor.stepikMaterialPrimaryText
 
         let actionButtonHeight: CGFloat = 44
+
+        let buyButtonTextColor = UIColor.white
+        let buyButtonBackgroundColor = UIColor.stepikGreenFixed
+        let buyButtonPromoPriceBackgroundColor = UIColor.stepikVioletFixed
+        let buyButtonFullPriceFont = UIFont.systemFont(ofSize: 12)
 
         let stackViewSpacing: CGFloat = 16
         let stackViewInsets = LayoutInsets(inset: 16)
@@ -63,10 +69,16 @@ final class LessonFinishedDemoPanModalView: UIView {
         return label
     }()
 
-    private lazy var actionButton: UIButton = {
-        let button = LessonPanModalActionButton()
-        button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
+    private lazy var buyButton: CourseInfoPurchaseModalActionButton = {
+        let button = CourseInfoPurchaseModalActionButton()
+        button.addTarget(self, action: #selector(self.buyButtonClicked), for: .touchUpInside)
         return button
+    }()
+
+    private lazy var unsupportedIAPPurchaseView: QuizFeedbackView = {
+        let view = QuizFeedbackView()
+        view.isHidden = true
+        return view
     }()
 
     private lazy var contentStackView: UIStackView = {
@@ -83,39 +95,29 @@ final class LessonFinishedDemoPanModalView: UIView {
         return scrollableStackView
     }()
 
-    var title: String? {
-        didSet {
-            self.titleLabel.text = self.title
-        }
-    }
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikGray)
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
+    }()
 
-    var subtitle: String? {
-        didSet {
-            self.subtitleLabel.text = self.subtitle
-        }
-    }
+    private lazy var errorPlaceholderView = StepikPlaceholderView()
 
-    var actionButtonTitle: String? {
-        didSet {
-            self.actionButton.setTitle(self.actionButtonTitle, for: .normal)
-        }
-    }
+    private var errorPlaceholderViewHeightConstraint: Constraint?
 
     override var intrinsicContentSize: CGSize {
-        let height = self.appearance.headerImageViewHeight
-            + self.appearance.stackViewSpacing
-            + self.titleLabel.intrinsicContentSize.height
-            + self.appearance.stackViewSpacing
-            + self.subtitleLabel.intrinsicContentSize.height
-            + self.appearance.stackViewSpacing
-            + SeparatorView.Appearance().height
-            + self.appearance.stackViewSpacing
-            + self.appearance.actionButtonHeight
-            + self.appearance.stackViewSpacing
-        return CGSize(
-            width: UIView.noIntrinsicMetric,
-            height: height
-        )
+        if self.loadingIndicator.isAnimating {
+            return CGSize(
+                width: UIView.noIntrinsicMetric,
+                height: self.loadingIndicator.intrinsicContentSize.height
+            )
+        }
+
+        let contentSize = self.scrollableStackView.contentSize
+        let height = contentSize.height + self.appearance.stackViewSpacing
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
 
     init(
@@ -135,16 +137,110 @@ final class LessonFinishedDemoPanModalView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configure(viewModel: LessonFinishedDemoPanModalViewModel) {
+        self.titleLabel.text = viewModel.title
+        self.subtitleLabel.text = viewModel.subtitle
+
+        self.setBuyButtonText(displayPrice: viewModel.displayPrice, promoDisplayPrice: viewModel.promoDisplayPrice)
+
+        if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
+            self.buyButton.isHidden = true
+
+            self.unsupportedIAPPurchaseView.isHidden = false
+            self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
+            self.unsupportedIAPPurchaseView.setIconImage(
+                UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
+            )
+        } else {
+            self.buyButton.isHidden = false
+            self.unsupportedIAPPurchaseView.isHidden = true
+        }
+
+        self.layoutIfNeeded()
+        self.invalidateIntrinsicContentSize()
+    }
+
+    func showLoading() {
+        self.scrollableStackView.isHidden = true
+        self.loadingIndicator.startAnimating()
+    }
+
+    func hideLoading() {
+        self.scrollableStackView.isHidden = false
+        self.loadingIndicator.stopAnimating()
+    }
+
+    func showErrorPlaceholder() {
+        self.errorPlaceholderView.set(placeholder: .noConnection)
+        self.errorPlaceholderView.delegate = self
+        self.errorPlaceholderView.isHidden = false
+        self.updateErrorPlaceholderHeight()
+    }
+
+    func hideErrorPlaceholder() {
+        self.errorPlaceholderView.isHidden = true
+    }
+
+    // MARK: Private API
+
+    private func updateErrorPlaceholderHeight() {
+        self.invalidateIntrinsicContentSize()
+        let height = floor(self.intrinsicContentSize.height)
+        self.errorPlaceholderViewHeightConstraint?.update(offset: height)
+    }
+
+    private func setBuyButtonText(displayPrice: String, promoDisplayPrice: String?) {
+        self.buyButton.appearance = .init(
+            loadingIndicatorColor: self.appearance.buyButtonTextColor,
+            textLabelTextColor: self.appearance.buyButtonTextColor,
+            backgroundColor: promoDisplayPrice != nil
+                ? self.appearance.buyButtonPromoPriceBackgroundColor
+                : self.appearance.buyButtonBackgroundColor
+        )
+
+        if let promoDisplayPrice = promoDisplayPrice {
+            let buyWithPromoTitle = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), promoDisplayPrice)
+            let formattedTitle = "\(buyWithPromoTitle) \(displayPrice)"
+
+            let buyButtonAppearance = CourseInfoPurchaseModalActionButton.Appearance()
+
+            let attributedTitle = NSMutableAttributedString(
+                string: formattedTitle,
+                attributes: [
+                    .font: buyButtonAppearance.textLabelFont,
+                    .foregroundColor: buyButtonAppearance.textLabelTextColor
+                ]
+            )
+
+            if let displayPriceLocation = formattedTitle.indexOf(displayPrice) {
+                attributedTitle.addAttributes(
+                    [
+                        .font: self.appearance.buyButtonFullPriceFont,
+                        .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                        .strikethroughColor: buyButtonAppearance.textLabelTextColor
+                    ],
+                    range: NSRange(location: displayPriceLocation, length: displayPrice.count)
+                )
+            }
+
+            self.buyButton.attributedText = attributedTitle
+        } else {
+            self.buyButton.text = String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+        }
+    }
+
     @objc
     private func closeButtonClicked() {
         self.delegate?.lessonFinishedDemoPanModalViewDidClickCloseButton(self)
     }
 
     @objc
-    private func actionButtonClicked() {
-        self.delegate?.lessonFinishedDemoPanModalViewDidClickActionButton(self)
+    private func buyButtonClicked() {
+        self.delegate?.lessonFinishedDemoPanModalViewDidClickBuyButton(self)
     }
 }
+
+// MARK: - LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProtocol -
 
 extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
@@ -153,6 +249,8 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
 
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
+        self.addSubview(self.loadingIndicator)
+        self.addSubview(self.errorPlaceholderView)
         self.addSubview(self.closeButton)
 
         self.scrollableStackView.addArrangedView(self.headerImageView)
@@ -163,7 +261,8 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
         self.contentStackView.addArrangedSubview(self.titleLabel)
         self.contentStackView.addArrangedSubview(self.subtitleLabel)
         self.contentStackView.addArrangedSubview(SeparatorView())
-        self.contentStackView.addArrangedSubview(self.actionButton)
+        self.contentStackView.addArrangedSubview(self.buyButton)
+        self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
     }
 
     func makeConstraints() {
@@ -180,8 +279,8 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-self.appearance.closeButtonInsets.right)
         }
 
-        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
-        self.actionButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
+        self.buyButton.translatesAutoresizingMaskIntoConstraints = false
+        self.buyButton.snp.makeConstraints { $0.height.equalTo(self.appearance.actionButtonHeight) }
 
         self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
         self.contentStackView.snp.makeConstraints { make in
@@ -194,9 +293,32 @@ extension LessonFinishedDemoPanModalView: ProgrammaticallyInitializableViewProto
                 .offset(-self.appearance.stackViewInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.stackViewInsets.bottom)
         }
+
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(0.4)
+        }
+
+        self.errorPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
+        self.errorPlaceholderView.snp.makeConstraints { make in
+            make.centerX.top.leading.trailing.equalToSuperview()
+            self.errorPlaceholderViewHeightConstraint = make.height.equalTo(0).constraint
+        }
     }
 }
 
+// MARK: - LessonFinishedDemoPanModalView: PanModalScrollable -
+
 extension LessonFinishedDemoPanModalView: PanModalScrollable {
     var panScrollable: UIScrollView? { self.scrollableStackView.panScrollable }
+}
+
+
+// MARK: - LessonFinishedDemoPanModalView: StepikPlaceholderViewDelegate -
+
+extension LessonFinishedDemoPanModalView: StepikPlaceholderViewDelegate {
+    func buttonDidClick(_ button: UIButton) {
+        self.delegate?.lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(self)
+    }
 }

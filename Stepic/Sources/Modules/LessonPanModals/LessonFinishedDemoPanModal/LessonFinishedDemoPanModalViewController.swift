@@ -8,7 +8,16 @@ protocol LessonFinishedDemoPanModalViewControllerProtocol: AnyObject {
 final class LessonFinishedDemoPanModalViewController: PanModalPresentableViewController {
     private let interactor: LessonFinishedDemoPanModalInteractorProtocol
 
-    private var hasLoadedData = false
+    private var state: LessonFinishedDemoPanModal.ViewControllerState
+
+    private var hasLoadedData: Bool {
+        switch self.state {
+        case .loading, .error:
+            return false
+        default:
+            return true
+        }
+    }
 
     var lessonFinishedDemoPanModalView: LessonFinishedDemoPanModalView? { self.view as? LessonFinishedDemoPanModalView }
 
@@ -22,8 +31,12 @@ final class LessonFinishedDemoPanModalViewController: PanModalPresentableViewCon
         return super.shortFormHeight
     }
 
-    init(interactor: LessonFinishedDemoPanModalInteractorProtocol) {
+    init(
+        interactor: LessonFinishedDemoPanModalInteractorProtocol,
+        initialState: LessonFinishedDemoPanModal.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
+        self.state = initialState
         super.init()
     }
 
@@ -35,29 +48,61 @@ final class LessonFinishedDemoPanModalViewController: PanModalPresentableViewCon
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.updateState(newState: self.state)
         self.interactor.doModalLoad(request: .init())
+    }
+
+    // MARK: Private API
+
+    private func updateState(newState: LessonFinishedDemoPanModal.ViewControllerState) {
+        self.lessonFinishedDemoPanModalView?.hideLoading()
+        self.lessonFinishedDemoPanModalView?.hideErrorPlaceholder()
+
+        switch newState {
+        case .loading:
+            self.lessonFinishedDemoPanModalView?.showLoading()
+        case .error:
+            self.lessonFinishedDemoPanModalView?.showErrorPlaceholder()
+        case .result(let viewModel):
+            self.lessonFinishedDemoPanModalView?.configure(viewModel: viewModel)
+        }
+
+        self.state = newState
+        self.transition(to: .shortForm)
+    }
+
+    private func transition(to state: PanModalPresentationController.PresentationState) {
+        if state == .shortForm {
+            self.isShortFormEnabled = true
+        }
+
+        DispatchQueue.main.async {
+            self.panModalSetNeedsLayoutUpdate()
+            self.panModalTransition(to: state)
+        }
     }
 }
 
 extension LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalViewControllerProtocol {
     func displayModal(viewModel: LessonFinishedDemoPanModal.ModalLoad.ViewModel) {
-        self.lessonFinishedDemoPanModalView?.title = viewModel.title
-        self.lessonFinishedDemoPanModalView?.subtitle = viewModel.subtitle
-        self.lessonFinishedDemoPanModalView?.actionButtonTitle = viewModel.actionButtonTitle
-
-        self.hasLoadedData = true
-
-        self.panModalSetNeedsLayoutUpdate()
-        self.panModalTransition(to: .shortForm)
+        self.updateState(newState: viewModel.state)
     }
 }
+
+// MARK: - LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalViewDelegate -
 
 extension LessonFinishedDemoPanModalViewController: LessonFinishedDemoPanModalViewDelegate {
     func lessonFinishedDemoPanModalViewDidClickCloseButton(_ view: LessonFinishedDemoPanModalView) {
         self.dismiss(animated: true)
     }
 
-    func lessonFinishedDemoPanModalViewDidClickActionButton(_ view: LessonFinishedDemoPanModalView) {
+    func lessonFinishedDemoPanModalViewDidClickBuyButton(_ view: LessonFinishedDemoPanModalView) {
         self.interactor.doModalMainAction(request: .init())
+    }
+
+    func lessonFinishedDemoPanModalViewDidClickErrorPlaceholderActionButton(_ view: LessonFinishedDemoPanModalView) {
+        self.updateState(newState: .loading)
+        self.interactor.doModalLoad(request: .init())
     }
 }

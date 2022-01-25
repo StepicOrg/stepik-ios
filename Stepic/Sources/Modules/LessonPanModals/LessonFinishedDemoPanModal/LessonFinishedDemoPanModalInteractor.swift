@@ -21,7 +21,14 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
     private let analytics: Analytics
 
     private var currentCourse: Course?
-    private var currentMobileTier: MobileTier?
+    private var currentMobileTier: MobileTierPlainObject?
+
+    private var shouldCheckIAPPurchaseSupport: Bool {
+        (self.currentCourse?.isPaid ?? false) && self.remoteConfig.coursePurchaseFlow == .iap
+    }
+    private var isSupportedIAPPurchase: Bool {
+        self.shouldCheckIAPPurchaseSupport && self.currentMobileTier?.priceTier != nil
+    }
 
     init(
         presenter: LessonFinishedDemoPanModalPresenterProtocol,
@@ -58,25 +65,25 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
                         }
                 }
             }
-            .then { section, course -> Guarantee<(Section, Course)> in
+            .then { section, course -> Promise<(Section, Course)> in
                 self.fetchDisplayPrice(course: course).map { (section, $0) }
             }
             .done { section, course in
-                CoreDataHelper.shared.save()
-
                 self.currentCourse = course
 
-                self.presenter.presentModal(
-                    response: .init(
-                        course: course,
-                        section: section,
-                        coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
-                        mobileTier: self.currentMobileTier
-                    )
+                let data = LessonFinishedDemoPanModal.ModalData(
+                    course: course,
+                    section: section,
+                    coursePurchaseFlow: self.remoteConfig.coursePurchaseFlow,
+                    mobileTier: self.currentMobileTier,
+                    shouldCheckIAPPurchaseSupport: self.shouldCheckIAPPurchaseSupport,
+                    isSupportedIAPPurchase: self.isSupportedIAPPurchase
                 )
+                self.presenter.presentModal(response: .init(result: .success(data)))
             }
             .catch { error in
                 print("LessonFinishedDemoPanModalInteractor :: failed load data with error = \(error)")
+                self.presenter.presentModal(response: .init(result: .failure(error)))
             }
     }
 
@@ -97,33 +104,26 @@ final class LessonFinishedDemoPanModalInteractor: LessonFinishedDemoPanModalInte
 
     // MARK: Private API
 
-    private func fetchDisplayPrice(course: Course) -> Guarantee<Course> {
+    private func fetchDisplayPrice(course: Course) -> Promise<Course> {
         switch self.remoteConfig.coursePurchaseFlow {
         case .web:
             if course.isPaid && self.iapService.canBuyCourse(course) && (course.displayPriceIAP?.isEmpty ?? true) {
-                return self.iapService.fetchLocalizedPrice(for: course).then { localizedPrice in
+                return self.iapService.fetchLocalizedPrice(for: course).then { localizedPrice -> Promise<Course> in
                     course.displayPriceIAP = localizedPrice
                     return .value(course)
                 }
             }
+            return .value(course)
         case .iap:
-            return Guarantee { seal in
-                self.provider
-                    .calculateMobileTier(courseID: course.id, promoCodeName: self.promoCodeName)
-                    .compactMap { $0 }
-                    .compactMap { mobileTier in
-                        course.mobileTiers.first(where: { $0.id == mobileTier.id })
-                    }
-                    .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
-                    .done { mobileTier in
-                        self.currentMobileTier = mobileTier
-                        seal(course)
-                    }
-                    .catch { _ in
-                        seal(course)
-                    }
-            }
+            return self.provider
+                .fetchMobileTier(courseID: course.id, promoCodeName: self.promoCodeName)
+                .compactMap { $0 }
+                .then { self.iapService.fetchAndSetLocalizedPrices(mobileTier: $0) }
+                .then { mobileTier -> Promise<Course> in
+                    self.currentMobileTier = mobileTier
+                    self.currentMobileTier?.promoCodeName = self.promoCodeName
+                    return .value(course)
+                }
         }
-        return .value(course)
     }
 }
