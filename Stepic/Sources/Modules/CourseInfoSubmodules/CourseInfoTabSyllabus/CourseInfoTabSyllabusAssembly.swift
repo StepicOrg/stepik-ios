@@ -12,18 +12,31 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
+        let increasedTimeoutIntervalForRequest = APIDefaults.Configuration.increasedTimeoutIntervalForRequest
+
         let provider = CourseInfoTabSyllabusProvider(
             sectionsPersistenceService: SectionsPersistenceService(),
-            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            sectionsNetworkService: SectionsNetworkService(
+                sectionsAPI: SectionsAPI(timeoutIntervalForRequest: increasedTimeoutIntervalForRequest)
+            ),
             progressesPersistenceService: ProgressesPersistenceService(),
-            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            progressesNetworkService: ProgressesNetworkService(
+                progressesAPI: ProgressesAPI(timeoutIntervalForRequest: increasedTimeoutIntervalForRequest)
+            ),
             unitsPersistenceService: UnitsPersistenceService(),
-            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            unitsNetworkService: UnitsNetworkService(
+                unitsAPI: UnitsAPI(timeoutIntervalForRequest: increasedTimeoutIntervalForRequest)
+            ),
             lessonsPersistenceService: LessonsPersistenceService(),
-            lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
-            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
-            examSessionsNetworkService: ExamSessionsNetworkService(examSessionsAPI: ExamSessionsAPI()),
-            proctorSessionsNetworkService: ProctorSessionsNetworkService(proctorSessionsAPI: ProctorSessionsAPI())
+            lessonsNetworkService: LessonsNetworkService(
+                lessonsAPI: LessonsAPI(timeoutIntervalForRequest: increasedTimeoutIntervalForRequest)
+            ),
+            examSessionsNetworkService: ExamSessionsNetworkService(
+                examSessionsAPI: ExamSessionsAPI(timeoutIntervalForRequest: increasedTimeoutIntervalForRequest)
+            ),
+            proctorSessionsNetworkService: ProctorSessionsNetworkService(
+                proctorSessionsAPI: ProctorSessionsAPI(timeoutIntervalForRequest: increasedTimeoutIntervalForRequest)
+            )
         )
         let presenter = CourseInfoTabSyllabusPresenter()
         let interactor = CourseInfoTabSyllabusInteractor(

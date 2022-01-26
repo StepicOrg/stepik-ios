@@ -494,10 +494,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     ) -> Promise<CourseInfoTabSyllabus.SyllabusLoad.Response> {
         Promise { seal in
             self.provider.fetchExamData(for: section).then { section in
-                self.provider.fetchUnitsWithLessons(
-                    for: section,
-                    shouldUseNetwork: true
-                )
+                self.provider.fetchUnitsWithLessons(for: section, shouldUseNetwork: true)
             }.then { units -> Guarantee<CourseInfoTabSyllabus.SyllabusData> in
                 self.mergeWithCurrentData(sections: [], units: units, dataSourceType: .remote)
                 return self.makeSyllabusDataFromCurrentData()

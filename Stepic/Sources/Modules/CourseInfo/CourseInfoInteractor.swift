@@ -729,6 +729,10 @@ extension CourseInfoInteractor: LessonOutputProtocol {
     func handleLessonDidRequestPresentCatalog() {
         self.presenter.presentLessonModuleCatalogAction(response: .init())
     }
+
+    func handleLessonDidAddCourseToWishlist(courseID: Course.IdType) {
+        self.handleCourseAddedToWishlist(courseID: courseID)
+    }
 }
 
 // MARK: - CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol -
@@ -870,11 +874,7 @@ extension CourseInfoInteractor: IAPServiceDelegate {
 
 extension CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol {
     func handleCourseInfoPurchaseModalDidAddCourseToWishlist(courseID: Course.IdType) {
-        guard self.courseID == courseID else {
-            return
-        }
-
-        self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
+        self.handleCourseAddedToWishlist(courseID: courseID)
     }
 
     func handleCourseInfoPurchaseModalDidRequestStartLearning(courseID: Course.IdType) {
@@ -894,5 +894,15 @@ extension CourseInfoInteractor: CourseInfoPurchaseModalOutputProtocol {
 
     func handleCourseInfoPurchaseModalDidPurchaseCourse(courseID: Course.IdType) {
         self.handleDidPurchaseCourse(courseID)
+    }
+
+    // MARK: Private Helpers
+
+    private func handleCourseAddedToWishlist(courseID: Course.IdType) {
+        guard self.courseID == courseID else {
+            return
+        }
+
+        self.presenter.presentCourse(response: .init(result: .success(self.makeCourseData())))
     }
 }

@@ -282,6 +282,13 @@ enum LessonDataFlow {
         }
     }
 
+    /// Handle `func handleLessonDidAddCourseToWishlist(courseID:)`, see `LessonOutputProtocol`.
+    enum LessonFinishedDemoModuleAddedCourseToWishlist {
+        struct Request {
+            let courseID: Course.IdType
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

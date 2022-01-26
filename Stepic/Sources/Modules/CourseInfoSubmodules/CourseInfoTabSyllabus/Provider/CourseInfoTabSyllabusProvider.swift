@@ -4,7 +4,6 @@ import PromiseKit
 protocol CourseInfoTabSyllabusProviderProtocol {
     func fetchSections(for course: Course, shouldUseNetwork: Bool) -> Promise<[Section]>
     func fetchUnitsWithLessons(for section: Section, shouldUseNetwork: Bool) -> Promise<[Unit]>
-    func fetchSteps(for lesson: Lesson) -> Promise<[Step]>
     func fetchExamData(for section: Section) -> Promise<Section>
 }
 
@@ -23,8 +22,6 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
     private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
     private let lessonsNetworkService: LessonsNetworkServiceProtocol
 
-    private let stepsNetworkService: StepsNetworkServiceProtocol
-
     private let examSessionsNetworkService: ExamSessionsNetworkServiceProtocol
     private let proctorSessionsNetworkService: ProctorSessionsNetworkServiceProtocol
 
@@ -37,7 +34,6 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         unitsNetworkService: UnitsNetworkServiceProtocol,
         lessonsPersistenceService: LessonsPersistenceServiceProtocol,
         lessonsNetworkService: LessonsNetworkServiceProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol,
         examSessionsNetworkService: ExamSessionsNetworkServiceProtocol,
         proctorSessionsNetworkService: ProctorSessionsNetworkServiceProtocol
     ) {
@@ -49,7 +45,6 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         self.unitsNetworkService = unitsNetworkService
         self.lessonsPersistenceService = lessonsPersistenceService
         self.lessonsNetworkService = lessonsNetworkService
-        self.stepsNetworkService = stepsNetworkService
         self.examSessionsNetworkService = examSessionsNetworkService
         self.proctorSessionsNetworkService = proctorSessionsNetworkService
     }
@@ -100,19 +95,6 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
                 CoreDataHelper.shared.save()
             }.catch { error in
                 seal.reject(error)
-            }
-        }
-    }
-
-    func fetchSteps(for lesson: Lesson) -> Promise<[Step]> {
-        Promise { seal in
-            self.stepsNetworkService.fetch(ids: lesson.stepsArray).done { steps in
-                lesson.steps = steps
-                seal.fulfill(steps)
-
-                CoreDataHelper.shared.save()
-            }.catch { _ in
-                seal.reject(Error.stepsNetworkFetchFailed)
             }
         }
     }

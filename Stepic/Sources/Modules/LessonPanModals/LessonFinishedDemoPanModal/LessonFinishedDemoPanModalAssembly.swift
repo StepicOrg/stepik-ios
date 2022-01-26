@@ -22,7 +22,8 @@ final class LessonFinishedDemoPanModalAssembly: Assembly {
             sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
             coursesPersistenceService: CoursesPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
-            mobileTiersRepository: MobileTiersRepository.default
+            mobileTiersRepository: MobileTiersRepository.default,
+            wishlistRepository: WishlistRepository.default
         )
         let presenter = LessonFinishedDemoPanModalPresenter()
         let interactor = LessonFinishedDemoPanModalInteractor(

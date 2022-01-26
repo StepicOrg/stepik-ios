@@ -5,6 +5,12 @@ import Foundation
 protocol CourseListType {
     // It's just a marker
     var analyticName: String { get }
+
+    var timeoutIntervalForRequests: TimeInterval { get }
+}
+
+extension CourseListType {
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.defaultTimeoutIntervalForRequest }
 }
 
 struct PopularCourseListType: CourseListType {
@@ -15,6 +21,8 @@ struct PopularCourseListType: CourseListType {
 
 struct EnrolledCourseListType: CourseListType {
     var analyticName: String { "enrolled_course_list" }
+
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.increasedTimeoutIntervalForRequest }
 }
 
 struct FavoriteCourseListType: CourseListType {
@@ -48,12 +56,16 @@ struct SearchResultCourseListType: CourseListType {
     let language: ContentLanguage
 
     var analyticName: String { "search_result_course_list" }
+
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.increasedTimeoutIntervalForRequest }
 }
 
 struct TeacherCourseListType: CourseListType {
     let teacherID: User.IdType
 
     var analyticName: String { "teacher_course_list" }
+
+    var timeoutIntervalForRequests: TimeInterval { APIDefaults.Configuration.increasedTimeoutIntervalForRequest }
 }
 
 struct VisitedCourseListType: CourseListType {
@@ -112,6 +124,15 @@ final class CourseListServicesFactory {
         self.visitedCoursesAPI = visitedCoursesAPI
         self.courseListsAPI = courseListsAPI
         self.courseRecommendationsAPI = courseRecommendationsAPI
+
+        [
+            self.coursesAPI,
+            self.userCoursesAPI,
+            self.searchResultsAPI,
+            self.visitedCoursesAPI,
+            self.courseListsAPI,
+            self.courseRecommendationsAPI
+        ].forEach { $0.timeoutIntervalForRequest = self.type.timeoutIntervalForRequests }
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {

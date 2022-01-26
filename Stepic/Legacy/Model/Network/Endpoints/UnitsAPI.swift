@@ -16,9 +16,12 @@ final class UnitsAPI: APIEndpoint {
 
     override var name: String { "units" }
 
-    init(unitsPersistenceService: UnitsPersistenceServiceProtocol = UnitsPersistenceService()) {
+    init(
+        unitsPersistenceService: UnitsPersistenceServiceProtocol = UnitsPersistenceService(),
+        timeoutIntervalForRequest: TimeInterval = APIDefaults.Configuration.defaultTimeoutIntervalForRequest
+    ) {
         self.unitsPersistenceService = unitsPersistenceService
-        super.init()
+        super.init(timeoutIntervalForRequest: timeoutIntervalForRequest)
     }
 
     //TODO: Seems like a bug. Fix this when fixing CoreData duplicates
