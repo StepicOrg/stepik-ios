@@ -41,7 +41,8 @@ The price includes commission from App Store and VAT. By paying for access to th
         Key.isCourseRevenueAvailable.rawValue: NSNumber(value: false),
         Key.purchaseFlow.rawValue: NSString(string: Self.defaultCoursePurchaseFlowType.rawValue),
         Key.purchaseFlowDisclaimerRussian.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerRussian),
-        Key.purchaseFlowDisclaimerEnglish.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerEnglish)
+        Key.purchaseFlowDisclaimerEnglish.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerEnglish),
+        Key.purchaseFlowPromoCodeEnabled.rawValue: NSNumber(value: false)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -119,6 +120,10 @@ The price includes commission from App Store and VAT. By paying for access to th
             return self.getStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlowDisclaimerEnglish)
                 ?? Self.defaultPurchaseFlowDisclaimerEnglish
         }
+    }
+
+    var isPurchaseFlowPromoCodeEnabled: Bool {
+        self.getNSStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlowPromoCodeEnabled)?.boolValue ?? false
     }
 
     init(delegate: RemoteConfigDelegate? = nil) {
@@ -235,6 +240,7 @@ The price includes commission from App Store and VAT. By paying for access to th
         case purchaseFlow = "purchase_flow_ios"
         case purchaseFlowDisclaimerRussian = "purchase_flow_ios_disclaimer_ru"
         case purchaseFlowDisclaimerEnglish = "purchase_flow_ios_disclaimer_en"
+        case purchaseFlowPromoCodeEnabled = "purchase_flow_ios_promocode_enabled"
 
         var valueDataType: ValueDataType {
             switch self {
@@ -255,6 +261,8 @@ The price includes commission from App Store and VAT. By paying for access to th
             case .purchaseFlow:
                 return .string
             case .purchaseFlowDisclaimerRussian, .purchaseFlowDisclaimerEnglish:
+                return .string
+            case .purchaseFlowPromoCodeEnabled:
                 return .string
             }
         }

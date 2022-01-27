@@ -12958,7 +12958,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -12983,7 +12983,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -13125,7 +13125,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -13155,7 +13155,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -13246,7 +13246,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -13298,7 +13298,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -13379,7 +13379,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -13427,7 +13427,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -13947,7 +13947,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -14001,7 +14001,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -14083,7 +14083,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -14131,7 +14131,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
