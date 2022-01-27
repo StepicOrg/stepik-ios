@@ -29,6 +29,8 @@ final class CourseInfoPurchaseModalView: UIView {
 
     let appearance: Appearance
 
+    private let isPromoCodeAvailable: Bool
+
     private lazy var headerView = CourseInfoPurchaseModalHeaderView()
 
     private lazy var coverView = CourseInfoPurchaseModalCourseCoverView()
@@ -89,9 +91,12 @@ final class CourseInfoPurchaseModalView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
+        appearance: Appearance = Appearance(),
+        isPromoCodeAvailable: Bool
     ) {
         self.appearance = appearance
+        self.isPromoCodeAvailable = isPromoCodeAvailable
+
         super.init(frame: frame)
 
         self.setupView()
@@ -244,7 +249,9 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
             strongSelf.delegate?.courseInfoPurchaseModalViewDidClickCloseButton(strongSelf)
         }
 
-        self.promoCodeView.delegate = self
+        if self.isPromoCodeAvailable {
+            self.promoCodeView.delegate = self
+        }
 
         self.disclaimerView.onLinkClick = { [weak self] link in
             guard let strongSelf = self else {
@@ -302,7 +309,9 @@ extension CourseInfoPurchaseModalView: ProgrammaticallyInitializableViewProtocol
 
         self.scrollableStackView.addArrangedView(self.headerView)
         self.scrollableStackView.addArrangedView(self.coverView)
-        self.scrollableStackView.addArrangedView(self.promoCodeView)
+        if self.isPromoCodeAvailable {
+            self.scrollableStackView.addArrangedView(self.promoCodeView)
+        }
         self.scrollableStackView.addArrangedView(self.disclaimerView)
         self.scrollableStackView.addArrangedView(self.actionButtonsView)
         self.scrollableStackView.addArrangedView(self.purchaseErrorView)

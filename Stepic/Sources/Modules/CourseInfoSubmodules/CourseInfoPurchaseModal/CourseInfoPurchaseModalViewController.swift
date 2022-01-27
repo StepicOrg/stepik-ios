@@ -16,6 +16,8 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
     private var state: CourseInfoPurchaseModal.ViewControllerState
 
+    private let isPromoCodeAvailable: Bool
+
     private var hasLoadedData: Bool {
         switch self.state {
         case .loading, .error:
@@ -69,10 +71,12 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
 
     init(
         interactor: CourseInfoPurchaseModalInteractorProtocol,
-        initialState: CourseInfoPurchaseModal.ViewControllerState = .loading
+        initialState: CourseInfoPurchaseModal.ViewControllerState = .loading,
+        isPromoCodeAvailable: Bool
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.isPromoCodeAvailable = isPromoCodeAvailable
         super.init()
     }
 
@@ -82,7 +86,10 @@ final class CourseInfoPurchaseModalViewController: PanModalPresentableViewContro
     }
 
     override func loadView() {
-        let view = CourseInfoPurchaseModalView(frame: UIScreen.main.bounds)
+        let view = CourseInfoPurchaseModalView(
+            frame: UIScreen.main.bounds,
+            isPromoCodeAvailable: self.isPromoCodeAvailable
+        )
         self.view = view
         view.delegate = self
     }

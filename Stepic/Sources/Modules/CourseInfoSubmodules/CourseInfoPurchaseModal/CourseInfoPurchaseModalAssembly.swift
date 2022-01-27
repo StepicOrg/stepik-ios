@@ -41,7 +41,10 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
             iapService: IAPService.shared,
             analytics: StepikAnalytics.shared
         )
-        let viewController = CourseInfoPurchaseModalViewController(interactor: interactor)
+        let viewController = CourseInfoPurchaseModalViewController(
+            interactor: interactor,
+            isPromoCodeAvailable: RemoteConfig.shared.isPurchaseFlowPromoCodeEnabled
+        )
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput
