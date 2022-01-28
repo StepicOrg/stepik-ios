@@ -188,7 +188,7 @@ extension UIColor {
 
     // MARK: Orange
 
-    /// Adaptable color with base hex value #FFA861.
+    /// Adaptable color with base hex value #FFA961.
     static var stepikOrange: UIColor {
         .dynamic(
             light: ColorPalette.orange800,
@@ -197,6 +197,9 @@ extension UIColor {
             darkAccessibility: ColorPalette.orange400
         )
     }
+
+    /// A non adaptable color with hex value #FFA961 (orange01).
+    static let stepikOrangeFixed = ColorPalette.orange800
 
     // MARK: Accent (grey06)
 

@@ -82,14 +82,17 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         return viewModels
     }
 
-    private func makeProgressViewModel(progress: Progress) -> CourseWidgetProgressViewModel {
+    private func makeProgressViewModel(progress: Progress, course: Course) -> CourseWidgetProgressViewModel {
         let progressValue = progress.cost != 0
             ? progress.score / Float(progress.cost)
             : 1
 
         return CourseWidgetProgressViewModel(
             progress: progressValue,
-            progressLabelText: "\(FormatterHelper.progressScore(progress.score))/\(progress.cost)"
+            progressLabelText: "\(FormatterHelper.progressScore(progress.score))/\(progress.cost)",
+            isWithCertificate: course.isWithCertificate,
+            certificateRegularThreshold: course.certificateRegularThreshold,
+            certificateDistinctionThreshold: course.certificateDistinctionThreshold
         )
     }
 
@@ -113,7 +116,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
 
         var progressViewModel: CourseWidgetProgressViewModel?
         if let progress = course.progress {
-            progressViewModel = self.makeProgressViewModel(progress: progress)
+            progressViewModel = self.makeProgressViewModel(progress: progress, course: course)
         }
 
         var userCourseViewModel: CourseWidgetUserCourseViewModel?

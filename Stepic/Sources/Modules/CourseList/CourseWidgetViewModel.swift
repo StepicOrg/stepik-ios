@@ -3,6 +3,10 @@ import UIKit
 struct CourseWidgetProgressViewModel {
     let progress: Float
     let progressLabelText: String
+
+    let isWithCertificate: Bool
+    let certificateRegularThreshold: Int?
+    let certificateDistinctionThreshold: Int?
 }
 
 struct CourseWidgetUserCourseViewModel {

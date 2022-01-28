@@ -1061,6 +1061,7 @@
 		2CC5AA71242A34FA00C09F94 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6E242A34F900C09F94 /* AdaptiveStatsManager.swift */; };
 		2CC5AA72242A34FA00C09F94 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6F242A34FA00C09F94 /* AdaptiveRatingHelper.swift */; };
 		2CC5AA74242A351100C09F94 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA73242A351100C09F94 /* TapProxyView.swift */; };
+		2CC6ED3727A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */; };
 		2CC8322B27561A4C00F525F6 /* WishlistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8322A27561A4C00F525F6 /* WishlistRepository.swift */; };
 		2CC8678725E1504000762416 /* SubmissionsFilterQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8678625E1504000762416 /* SubmissionsFilterQuery.swift */; };
 		2CCB4B1526E76F220056C44E /* AnnouncementPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB4B1426E76F220056C44E /* AnnouncementPlainObject.swift */; };
@@ -3102,6 +3103,7 @@
 		2CC5AA6E242A34F900C09F94 /* AdaptiveStatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsManager.swift; sourceTree = "<group>"; };
 		2CC5AA6F242A34FA00C09F94 /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingHelper.swift; sourceTree = "<group>"; };
 		2CC5AA73242A351100C09F94 /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
+		2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetProgressCertificateThresholdPointView.swift; sourceTree = "<group>"; };
 		2CC8322A27561A4C00F525F6 /* WishlistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistRepository.swift; sourceTree = "<group>"; };
 		2CC8678625E1504000762416 /* SubmissionsFilterQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsFilterQuery.swift; sourceTree = "<group>"; };
 		2CC8683624CAD452004845AB /* Model_new_profile_organization_v57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_organization_v57.xcdatamodel; sourceTree = "<group>"; };
@@ -6709,6 +6711,15 @@
 			path = Section;
 			sourceTree = "<group>";
 		};
+		2CC6ED3527A428BA00E01068 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */,
+				2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
 		2CCB4B1626E7724E0056C44E /* Announcements */ = {
 			isa = PBXGroup;
 			children = (
@@ -9420,10 +9431,10 @@
 				62E98A35E88BBE09B6D20E70 /* CourseWidgetCoverView.swift */,
 				62E986B68558033E8B3DDF6A /* CourseWidgetLabel.swift */,
 				2CABB841267B929C0070E5E7 /* CourseWidgetPriceView.swift */,
-				2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */,
 				62E981558CAEBFB426F04DD2 /* CourseWidgetView.swift */,
 				2CB9EE8025CD68E70042AAD7 /* SeeAllCourseWidgetView.swift */,
 				2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */,
+				2CC6ED3527A428BA00E01068 /* Progress */,
 				2C99BC7627A3D9C300DAC033 /* Stats */,
 			);
 			path = Widget;
@@ -11984,6 +11995,7 @@
 				62E98212665FE6C08C3736DA /* CourseInfoTabSyllabusHeaderView.swift in Sources */,
 				62E988C6B635993C63C66666 /* CourseInfoTabSyllabusSectionDeadlinesView.swift in Sources */,
 				2C9A2DB525501B3C003AAD2E /* CourseListFilterQuery.swift in Sources */,
+				2CC6ED3727A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift in Sources */,
 				62E9871420FDD64DCD4E4311 /* CourseInfoTabSyllabusSectionView.swift in Sources */,
 				62E981A7F5DDECC573671FDE /* CourseListAssembly.swift in Sources */,
 				2CB113B0259205D60093B572 /* StoryPartsReactionsPersistenceService.swift in Sources */,
