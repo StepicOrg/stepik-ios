@@ -884,6 +884,7 @@
 		2C9959FD25F758EC00459588 /* ReviewSessionDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9959FC25F758EC00459588 /* ReviewSessionDataPlainObject.swift */; };
 		2C995A0725F765DF00459588 /* ReviewDataPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */; };
 		2C998AD0246EC83800AAFDE4 /* NotificationAlertsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C998ACF246EC83800AAFDE4 /* NotificationAlertsAnalytics.swift */; };
+		2C99BC7827A3DA1100DAC033 /* CourseWidgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */; };
 		2C9A2DB525501B3C003AAD2E /* CourseListFilterQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A2DB425501B3B003AAD2E /* CourseListFilterQuery.swift */; };
 		2C9A8D2E22D348A5009434DB /* String+HTMLEscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */; };
 		2C9BBE4124903AB500FFED49 /* UserCoursesObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BBE4024903AB500FFED49 /* UserCoursesObserver.swift */; };
@@ -2910,6 +2911,7 @@
 		2C995A0625F765DF00459588 /* ReviewDataPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDataPlainObject.swift; sourceTree = "<group>"; };
 		2C995A1D25F7968B00459588 /* Model_submissions_review_v72.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_submissions_review_v72.xcdatamodel; sourceTree = "<group>"; };
 		2C998ACF246EC83800AAFDE4 /* NotificationAlertsAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertsAnalytics.swift; sourceTree = "<group>"; };
+		2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetProgressView.swift; sourceTree = "<group>"; };
 		2C9A2DB425501B3B003AAD2E /* CourseListFilterQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterQuery.swift; sourceTree = "<group>"; };
 		2C9A3C2525E7A85F005A04F8 /* Model_lesson_courses_units_array_v71.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_lesson_courses_units_array_v71.xcdatamodel; sourceTree = "<group>"; };
 		2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLEscape.swift"; sourceTree = "<group>"; };
@@ -5536,6 +5538,15 @@
 				2C98424026DE59880098E36B /* SearchQueryResult+CoreDataProperties.swift */,
 			);
 			path = SearchQueryResult;
+			sourceTree = "<group>";
+		};
+		2C99BC7627A3D9C300DAC033 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				62E98E718321FFBD61C5A671 /* CourseWidgetStatsItemView.swift */,
+				62E98C0BB290D5BFB0F69A2E /* CourseWidgetStatsView.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		2C99D087238967FD00078D2B /* Events */ = {
@@ -9409,11 +9420,11 @@
 				62E98A35E88BBE09B6D20E70 /* CourseWidgetCoverView.swift */,
 				62E986B68558033E8B3DDF6A /* CourseWidgetLabel.swift */,
 				2CABB841267B929C0070E5E7 /* CourseWidgetPriceView.swift */,
-				62E98E718321FFBD61C5A671 /* CourseWidgetStatsItemView.swift */,
-				62E98C0BB290D5BFB0F69A2E /* CourseWidgetStatsView.swift */,
+				2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */,
 				62E981558CAEBFB426F04DD2 /* CourseWidgetView.swift */,
 				2CB9EE8025CD68E70042AAD7 /* SeeAllCourseWidgetView.swift */,
 				2C2E44D024FE3FBF006B7303 /* SmallCourseWidgetView.swift */,
+				2C99BC7627A3D9C300DAC033 /* Stats */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -12002,6 +12013,7 @@
 				62E98B5E1705E2F3274D19EC /* CourseListCollectionViewDataSource.swift in Sources */,
 				62E98A68DC04104ACC599EDD /* CourseListCollectionViewDelegate.swift in Sources */,
 				62E987E3FA0C01DA74F90B91 /* CourseListColorMode.swift in Sources */,
+				2C99BC7827A3DA1100DAC033 /* CourseWidgetProgressView.swift in Sources */,
 				2CCDD1FE24DBB35700A48EE0 /* Protected.swift in Sources */,
 				62E98BB34B2B0C1B988F2A24 /* CourseListView.swift in Sources */,
 				62E98CF698823997CBF8E919 /* CourseListViewDelegate.swift in Sources */,
