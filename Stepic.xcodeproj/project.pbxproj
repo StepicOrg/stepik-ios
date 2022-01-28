@@ -1062,6 +1062,7 @@
 		2CC5AA72242A34FA00C09F94 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA6F242A34FA00C09F94 /* AdaptiveRatingHelper.swift */; };
 		2CC5AA74242A351100C09F94 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5AA73242A351100C09F94 /* TapProxyView.swift */; };
 		2CC6ED3727A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */; };
+		2CC6ED3927A4557100E01068 /* CourseWidgetProgressCertificateThresholdValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6ED3827A4557100E01068 /* CourseWidgetProgressCertificateThresholdValueView.swift */; };
 		2CC8322B27561A4C00F525F6 /* WishlistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8322A27561A4C00F525F6 /* WishlistRepository.swift */; };
 		2CC8678725E1504000762416 /* SubmissionsFilterQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8678625E1504000762416 /* SubmissionsFilterQuery.swift */; };
 		2CCB4B1526E76F220056C44E /* AnnouncementPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB4B1426E76F220056C44E /* AnnouncementPlainObject.swift */; };
@@ -3104,6 +3105,7 @@
 		2CC5AA6F242A34FA00C09F94 /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingHelper.swift; sourceTree = "<group>"; };
 		2CC5AA73242A351100C09F94 /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
 		2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetProgressCertificateThresholdPointView.swift; sourceTree = "<group>"; };
+		2CC6ED3827A4557100E01068 /* CourseWidgetProgressCertificateThresholdValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetProgressCertificateThresholdValueView.swift; sourceTree = "<group>"; };
 		2CC8322A27561A4C00F525F6 /* WishlistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistRepository.swift; sourceTree = "<group>"; };
 		2CC8678625E1504000762416 /* SubmissionsFilterQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsFilterQuery.swift; sourceTree = "<group>"; };
 		2CC8683624CAD452004845AB /* Model_new_profile_organization_v57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_new_profile_organization_v57.xcdatamodel; sourceTree = "<group>"; };
@@ -6715,6 +6717,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */,
+				2CC6ED3827A4557100E01068 /* CourseWidgetProgressCertificateThresholdValueView.swift */,
 				2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */,
 			);
 			path = Progress;
@@ -11194,6 +11197,7 @@
 				2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */,
 				2C8BCC2624869A3400DFB009 /* NewProfileDetailsView.swift in Sources */,
 				2C42EFB62476F28B00423695 /* MagicLinksAPI.swift in Sources */,
+				2CC6ED3927A4557100E01068 /* CourseWidgetProgressCertificateThresholdValueView.swift in Sources */,
 				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				2C20C86222F8E1DE0052E9BF /* CodeTemplatePlainObject.swift in Sources */,
 				2C1948B626298455007D3486 /* FLEXManager.swift in Sources */,

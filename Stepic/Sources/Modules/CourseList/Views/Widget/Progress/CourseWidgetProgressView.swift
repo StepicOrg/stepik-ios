@@ -11,9 +11,24 @@ extension CourseWidgetProgressView {
         var progressBarTrackTintColor = UIColor.onSurface.withAlphaComponent(0.12)
         let progressBarCornerRadius: CGFloat = 1.3
 
-        let certificateRegularThresholdPointViewBackgroundColor = UIColor.stepikGreenFixed
-        let certificateDistinctionThresholdPointViewBackgroundColor = UIColor.stepikOrangeFixed
+        let certificateRegularThresholdPrimaryColor = UIColor.stepikGreenFixed
+        let certificateRegularThresholdSecondaryColor = UIColor.stepikGreenFixed.withAlphaComponent(0.12)
+        let certificateRegularThresholdValueViewTextLabelAppearance = CourseWidgetLabel.Appearance(
+            maxLinesCount: 1,
+            font: Typography.caption1Font,
+            textColor: .stepikGreenFixed
+        )
+
+        let certificateDistinctionThresholdPrimaryColor = UIColor.stepikOrangeFixed
+        let certificateDistinctionThresholdSecondaryColor = UIColor.stepikOrangeFixed.withAlphaComponent(0.12)
+        let certificateDistinctionThresholdValueViewTextLabelAppearance = CourseWidgetLabel.Appearance(
+            maxLinesCount: 1,
+            font: Typography.caption1Font,
+            textColor: .stepikOrangeFixed
+        )
+
         let certificateThresholdPointViewCenterYOffset: CGFloat = 0.5
+        let certificateThresholdValueViewBottomOffset: CGFloat = 2
     }
 }
 
@@ -33,11 +48,27 @@ final class CourseWidgetProgressView: UIView {
     }()
 
     private lazy var certificateRegularThresholdPointView = CourseWidgetProgressCertificateThresholdPointView(
-        appearance: .init(backgroundColor: self.appearance.certificateRegularThresholdPointViewBackgroundColor)
+        appearance: .init(backgroundColor: self.appearance.certificateRegularThresholdPrimaryColor)
+    )
+
+    private lazy var certificateRegularThresholdValueView = CourseWidgetProgressCertificateThresholdValueView(
+        appearance: .init(
+            iconImageViewTintColor: self.appearance.certificateRegularThresholdPrimaryColor,
+            textLabelAppearance: self.appearance.certificateRegularThresholdValueViewTextLabelAppearance,
+            backgroundColor: self.appearance.certificateRegularThresholdSecondaryColor
+        )
     )
 
     private lazy var certificateDistinctionThresholdPointView = CourseWidgetProgressCertificateThresholdPointView(
-        appearance: .init(backgroundColor: self.appearance.certificateDistinctionThresholdPointViewBackgroundColor)
+        appearance: .init(backgroundColor: self.appearance.certificateDistinctionThresholdPrimaryColor)
+    )
+
+    private lazy var certificateDistinctionThresholdValueView = CourseWidgetProgressCertificateThresholdValueView(
+        appearance: .init(
+            iconImageViewTintColor: self.appearance.certificateDistinctionThresholdPrimaryColor,
+            textLabelAppearance: self.appearance.certificateDistinctionThresholdValueViewTextLabelAppearance,
+            backgroundColor: self.appearance.certificateDistinctionThresholdSecondaryColor
+        )
     )
 
     override var intrinsicContentSize: CGSize {
@@ -73,6 +104,9 @@ final class CourseWidgetProgressView: UIView {
 
         self.certificateRegularThresholdPointView.isDone = true
 
+        self.certificateRegularThresholdValueView.text = "160"
+        self.certificateDistinctionThresholdValueView.text = "185"
+
 //        guard viewModel.isWithCertificate else {
 //            self.certificateRegularThresholdPointView.isHidden = true
 //            self.certificateDistinctionThresholdPointView.isHidden = true
@@ -104,6 +138,8 @@ extension CourseWidgetProgressView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.progressBarView)
         self.addSubview(self.certificateRegularThresholdPointView)
         self.addSubview(self.certificateDistinctionThresholdPointView)
+        self.addSubview(self.certificateRegularThresholdValueView)
+        self.addSubview(self.certificateDistinctionThresholdValueView)
     }
 
     func makeConstraints() {
@@ -133,6 +169,22 @@ extension CourseWidgetProgressView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.progressBarView.snp.centerY)
                 .offset(self.appearance.certificateThresholdPointViewCenterYOffset)
             make.leading.equalToSuperview().offset(100)
+        }
+
+        self.certificateRegularThresholdValueView.translatesAutoresizingMaskIntoConstraints = false
+        self.certificateRegularThresholdValueView.snp.makeConstraints { make in
+            make.bottom
+                .equalTo(self.progressBarView.snp.top)
+                .offset(-self.appearance.certificateThresholdValueViewBottomOffset)
+            make.centerX.equalTo(self.certificateRegularThresholdPointView)
+        }
+
+        self.certificateDistinctionThresholdValueView.translatesAutoresizingMaskIntoConstraints = false
+        self.certificateDistinctionThresholdValueView.snp.makeConstraints { make in
+            make.bottom
+                .equalTo(self.progressBarView.snp.top)
+                .offset(-self.appearance.certificateThresholdValueViewBottomOffset)
+            make.centerX.equalTo(self.certificateDistinctionThresholdPointView)
         }
     }
 }

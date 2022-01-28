@@ -95,7 +95,7 @@ extension CourseListColorMode {
         var appearance = CourseWidgetProgressView.Appearance(
             progressTextLabelAppearance: .init(
                 maxLinesCount: 1,
-                font: .systemFont(ofSize: 12, weight: .regular),
+                font: Typography.caption1Font,
                 textColor: progressTextLabelTextColor
             ),
             progressBarTrackTintColor: progressBarTrackTintColor
