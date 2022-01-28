@@ -83,11 +83,12 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     }
 
     private func makeProgressViewModel(progress: Progress) -> CourseWidgetProgressViewModel {
-        var normalizedPercent = progress.percentPassed
-        normalizedPercent.round(.up)
+        let progressValue = progress.cost != 0
+            ? progress.score / Float(progress.cost)
+            : 1
 
         return CourseWidgetProgressViewModel(
-            progress: normalizedPercent / 100.0,
+            progress: progressValue,
             progressLabelText: "\(FormatterHelper.progressScore(progress.score))/\(progress.cost)"
         )
     }

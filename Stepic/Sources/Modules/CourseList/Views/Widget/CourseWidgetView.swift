@@ -48,6 +48,12 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         appearance: self.colorMode.courseWidgetStatsViewAppearance
     )
 
+    private lazy var progressView: CourseWidgetProgressView = {
+        let view = CourseWidgetProgressView(appearance: self.colorMode.courseWidgetProgressViewAppearance)
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = self.colorMode.courseWidgetBorderColor
@@ -114,14 +120,23 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
 
         let isArchived = viewModel.userCourse?.isArchived ?? false
         self.statsView.isArchived = isArchived
-        self.statsView.progress = isArchived ? nil : viewModel.progress
 
+        self.updateProgressView(viewModel: isArchived ? nil : viewModel.progress)
         self.updatePriceView(viewModel: viewModel.price)
         self.updateBadgeImageView(viewModel: viewModel)
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
-        self.statsView.progress = viewModel
+        self.updateProgressView(viewModel: viewModel)
+    }
+
+    // MARK: Private API
+
+    private func updateProgressView(viewModel: CourseWidgetProgressViewModel?) {
+        if let viewModel = viewModel {
+            self.progressView.configure(viewModel: viewModel)
+        }
+        self.progressView.isHidden = viewModel == nil
     }
 
     private func updatePriceView(viewModel: CourseWidgetPriceViewModel?) {
@@ -159,8 +174,6 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         )
     }
 
-    // MARK: Private API
-
     @objc
     private func continueLearningButtonClicked() {
         self.onContinueLearningButtonClick?()
@@ -177,6 +190,7 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.titleLabel)
         self.addSubview(self.badgeImageView)
         self.addSubview(self.statsView)
+        self.addSubview(self.progressView)
         self.addSubview(self.summaryLabel)
         self.addSubview(self.priceView)
         self.addSubview(self.continueLearningButton)
@@ -236,6 +250,20 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.titleLabel.snp.trailing)
             make.height
                 .equalTo(self.appearance.statsViewHeight)
+        }
+
+        self.progressView.translatesAutoresizingMaskIntoConstraints = false
+        self.progressView.snp.makeConstraints { make in
+            make.top
+                .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
+                .offset(self.appearance.statsViewInsets.top)
+                .priority(.low)
+            make.leading
+                .equalTo(self.titleLabel.snp.leading)
+            make.bottom
+                .equalTo(self.coverView.snp.bottom)
+            make.trailing
+                .equalTo(self.titleLabel.snp.trailing)
         }
 
         self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
