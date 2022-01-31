@@ -18,6 +18,8 @@ extension CourseWidgetView {
         let statsViewHeight: CGFloat = 17
         let statsViewInsets = LayoutInsets(top: 8)
 
+        let progressViewInsets = LayoutInsets(top: 8, right: 16)
+
         let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
         let priceViewInsets = LayoutInsets(top: 12, bottom: 17)
 
@@ -47,6 +49,12 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
     private lazy var statsView = CourseWidgetStatsView(
         appearance: self.colorMode.courseWidgetStatsViewAppearance
     )
+
+    private lazy var progressView: CourseWidgetProgressView = {
+        let view = CourseWidgetProgressView(appearance: self.colorMode.courseWidgetProgressViewAppearance)
+        view.isHidden = true
+        return view
+    }()
 
     private lazy var separatorView: UIView = {
         let view = UIView()
@@ -114,14 +122,23 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
 
         let isArchived = viewModel.userCourse?.isArchived ?? false
         self.statsView.isArchived = isArchived
-        self.statsView.progress = isArchived ? nil : viewModel.progress
 
+        self.updateProgressView(viewModel: isArchived ? nil : viewModel.progress)
         self.updatePriceView(viewModel: viewModel.price)
         self.updateBadgeImageView(viewModel: viewModel)
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
-        self.statsView.progress = viewModel
+        self.updateProgressView(viewModel: viewModel)
+    }
+
+    // MARK: Private API
+
+    private func updateProgressView(viewModel: CourseWidgetProgressViewModel?) {
+        if let viewModel = viewModel {
+            self.progressView.configure(viewModel: viewModel)
+        }
+        self.progressView.isHidden = viewModel == nil
     }
 
     private func updatePriceView(viewModel: CourseWidgetPriceViewModel?) {
@@ -159,8 +176,6 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         )
     }
 
-    // MARK: Private API
-
     @objc
     private func continueLearningButtonClicked() {
         self.onContinueLearningButtonClick?()
@@ -177,6 +192,7 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.titleLabel)
         self.addSubview(self.badgeImageView)
         self.addSubview(self.statsView)
+        self.addSubview(self.progressView)
         self.addSubview(self.summaryLabel)
         self.addSubview(self.priceView)
         self.addSubview(self.continueLearningButton)
@@ -236,6 +252,21 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.titleLabel.snp.trailing)
             make.height
                 .equalTo(self.appearance.statsViewHeight)
+        }
+
+        self.progressView.translatesAutoresizingMaskIntoConstraints = false
+        self.progressView.snp.makeConstraints { make in
+            make.top
+                .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
+                .offset(self.appearance.progressViewInsets.top)
+                .priority(.low)
+            make.leading
+                .equalTo(self.titleLabel.snp.leading)
+            make.bottom
+                .equalTo(self.coverView.snp.bottom)
+            make.trailing
+                .equalToSuperview()
+                .offset(-self.appearance.progressViewInsets.right)
         }
 
         self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false

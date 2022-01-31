@@ -29,7 +29,11 @@ enum FormatterHelper {
     /// Format Progress's score value with 2 decimal points if has decimals; 0.123456 -> "0.12", 1.0 -> "1"
     static func progressScore(_ score: Float) -> String {
         let hasDecimals = score.truncatingRemainder(dividingBy: 1) != 0
-        return hasDecimals ? String(format: "%.2f", score) : "\(Int(score))"
+        if hasDecimals {
+            let result = String(format: "%.2f", score)
+            return result.last == "0" ? String(result.dropLast()) : result
+        }
+        return "\(Int(score))"
     }
 
     /// Format Submission's score with 2 decimal points if has decimals; 0.75 -> "0.75", 1.0 -> "1"
