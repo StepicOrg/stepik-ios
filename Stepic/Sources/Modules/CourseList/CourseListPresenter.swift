@@ -83,11 +83,13 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     }
 
     private func makeProgressViewModel(progress: Progress, course: Course) -> CourseWidgetProgressViewModel {
-        let progressValue = progress.cost != 0
+        let progressValue = progress.cost > 0
             ? progress.score / Float(progress.cost)
             : 1
 
         return CourseWidgetProgressViewModel(
+            score: progress.score,
+            cost: progress.cost,
             progress: progressValue,
             progressLabelText: "\(FormatterHelper.progressScore(progress.score))/\(progress.cost)",
             isWithCertificate: course.isWithCertificate,

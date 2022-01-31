@@ -18,6 +18,8 @@ extension CourseWidgetView {
         let statsViewHeight: CGFloat = 17
         let statsViewInsets = LayoutInsets(top: 8)
 
+        let progressViewInsets = LayoutInsets(top: 8, right: 16)
+
         let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
         let priceViewInsets = LayoutInsets(top: 12, bottom: 17)
 
@@ -256,14 +258,15 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
         self.progressView.snp.makeConstraints { make in
             make.top
                 .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
-                .offset(self.appearance.statsViewInsets.top)
+                .offset(self.appearance.progressViewInsets.top)
                 .priority(.low)
             make.leading
                 .equalTo(self.titleLabel.snp.leading)
             make.bottom
                 .equalTo(self.coverView.snp.bottom)
             make.trailing
-                .equalTo(self.titleLabel.snp.trailing)
+                .equalToSuperview()
+                .offset(-self.appearance.progressViewInsets.right)
         }
 
         self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false

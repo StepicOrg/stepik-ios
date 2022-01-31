@@ -1,6 +1,9 @@
 import UIKit
 
 struct CourseWidgetProgressViewModel {
+    let score: Float
+    let cost: Int
+
     let progress: Float
     let progressLabelText: String
 
