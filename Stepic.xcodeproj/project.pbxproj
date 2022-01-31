@@ -687,6 +687,7 @@
 		2C5E90842333DF2100288BE3 /* CodeLanguageSuggestionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */; };
 		2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
+		2C5FF4A927A852D600A68CA1 /* CourseWidgetProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FF4A827A852D600A68CA1 /* CourseWidgetProgressBarView.swift */; };
 		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
 		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
 		2C60CCEE26CE81F30015C6A8 /* QuizReviewControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */; };
@@ -2710,6 +2711,7 @@
 		2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguageSuggestionsService.swift; sourceTree = "<group>"; };
 		2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+FetchMethods.swift"; sourceTree = "<group>"; };
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
+		2C5FF4A827A852D600A68CA1 /* CourseWidgetProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetProgressBarView.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
 		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
 		2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewControlsView.swift; sourceTree = "<group>"; };
@@ -6716,6 +6718,7 @@
 		2CC6ED3527A428BA00E01068 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
+				2C5FF4A827A852D600A68CA1 /* CourseWidgetProgressBarView.swift */,
 				2CC6ED3627A428E800E01068 /* CourseWidgetProgressCertificateThresholdPointView.swift */,
 				2CC6ED3827A4557100E01068 /* CourseWidgetProgressCertificateThresholdValueView.swift */,
 				2C99BC7727A3DA1100DAC033 /* CourseWidgetProgressView.swift */,
@@ -12107,6 +12110,7 @@
 				62E98AB7FD3F651A807644CA /* CourseListContainerViewFactory.swift in Sources */,
 				62E98CE4B58258211CADF340 /* ExploreBlockHeaderView.swift in Sources */,
 				62E984151A1A446B03221E1C /* ExploreBlockPlaceholderView.swift in Sources */,
+				2C5FF4A927A852D600A68CA1 /* CourseWidgetProgressBarView.swift in Sources */,
 				62E983D5BF98329DEA0B902E /* ExploreStoriesContainerView.swift in Sources */,
 				62E986489D7AC8CBDB0C34B8 /* ExploreSearchBar.swift in Sources */,
 				62E98AB1B83449721AB3461D /* ContentLanguageSwitchAssembly.swift in Sources */,

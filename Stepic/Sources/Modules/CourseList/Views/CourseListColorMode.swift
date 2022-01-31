@@ -98,7 +98,7 @@ extension CourseListColorMode {
                 font: Typography.caption1Font,
                 textColor: progressTextLabelTextColor
             ),
-            progressBarTrackTintColor: progressBarTrackTintColor
+            progressBarViewAppearance: .init(trackTintColor: progressBarTrackTintColor)
         )
 
         switch self {
@@ -109,7 +109,7 @@ extension CourseListColorMode {
                 light: .white.withAlphaComponent(0.6),
                 dark: progressTextLabelTextColor
             )
-            appearance.progressBarTrackTintColor = .dynamic(
+            appearance.progressBarViewAppearance.trackTintColor = .dynamic(
                 light: .white.withAlphaComponent(0.12),
                 dark: progressBarTrackTintColor
             )

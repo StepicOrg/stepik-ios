@@ -7,9 +7,8 @@ extension CourseWidgetProgressView {
         let progressTextLabelInsets = LayoutInsets(bottom: 4)
 
         let progressBarHeight: CGFloat = 2
-        let progressBarProgressTintColor = UIColor.stepikGreenFixed
-        var progressBarTrackTintColor = UIColor.onSurface.withAlphaComponent(0.12)
         let progressBarCornerRadius: CGFloat = 1.3
+        var progressBarViewAppearance = CourseWidgetProgressBarView.Appearance()
 
         let certificateRegularThresholdPrimaryColor = UIColor.stepikGreenFixed
         let certificateRegularThresholdSecondaryColor = UIColor.stepikGreenFixed.withAlphaComponent(0.12)
@@ -38,11 +37,8 @@ final class CourseWidgetProgressView: UIView {
 
     private lazy var progressTextLabel = CourseWidgetLabel(appearance: self.appearance.progressTextLabelAppearance)
 
-    private lazy var progressBarView: UIProgressView = {
-        let view = UIProgressView()
-        view.progressViewStyle = .bar
-        view.trackTintColor = self.appearance.progressBarTrackTintColor
-        view.progressTintColor = self.appearance.progressBarProgressTintColor
+    private lazy var progressBarView: CourseWidgetProgressBarView = {
+        let view = CourseWidgetProgressBarView(appearance: self.appearance.progressBarViewAppearance)
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.progressBarCornerRadius
         return view
@@ -120,7 +116,16 @@ final class CourseWidgetProgressView: UIView {
         self.configurationViewModel = viewModel
 
         self.progressTextLabel.text = viewModel.progressLabelText
+
         self.progressBarView.progress = viewModel.progress
+        if let certificateDistinctionThreshold = viewModel.certificateDistinctionThreshold {
+            let distinctionThresholdProgress = viewModel.cost > 0
+                ? Float(certificateDistinctionThreshold) / Float(viewModel.cost)
+                : nil
+            self.progressBarView.distinctionThresholdProgress = distinctionThresholdProgress
+        } else {
+            self.progressBarView.distinctionThresholdProgress = nil
+        }
 
         self.configureCertificateViews(viewModel: viewModel)
         self.updateCertificateViewsConstraints()
