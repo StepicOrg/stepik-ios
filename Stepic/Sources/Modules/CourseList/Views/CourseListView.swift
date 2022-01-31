@@ -12,7 +12,7 @@ extension CourseListView {
         let horizontalLayoutMinimumItemWidth: CGFloat = 276
 
         let smallVerticalLayoutMinimumItemWidth: CGFloat = 168
-        let smallHorizontalLayoutMinimumItemWidth: CGFloat = 156
+        let smallHorizontalLayoutMinimumItemWidth: CGFloat = 154
 
         let lightModeBackgroundColor = UIColor.stepikBackground
         let darkModeBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikSecondaryBackground)
