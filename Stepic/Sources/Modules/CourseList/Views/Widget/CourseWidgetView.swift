@@ -2,6 +2,7 @@ import SnapKit
 import UIKit
 
 protocol CourseWidgetViewProtocol: UIView {
+    func prepareForReuse()
     func configure(viewModel: CourseWidgetViewModel)
 }
 
@@ -106,6 +107,30 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Public API
+
+    func prepareForReuse() {
+        self.titleLabel.text = nil
+
+        self.coverView.coverImageURL = nil
+        self.coverView.shouldShowAdaptiveMark = false
+
+        self.summaryLabel.attributedText = nil
+        self.summaryLabel.isHidden = false
+
+        self.separatorView.isHidden = true
+        self.continueLearningButton.isHidden = true
+
+        self.statsView.learnersLabelText = nil
+        self.statsView.certificatesLabelText = nil
+        self.statsView.ratingLabelText = nil
+        self.statsView.isArchived = false
+
+        self.updateProgressView(viewModel: nil)
+        self.updatePriceView(viewModel: nil)
+        self.updateBadgeImageView(viewModel: nil)
+    }
+
     func configure(viewModel: CourseWidgetViewModel) {
         self.titleLabel.text = viewModel.title
         self.coverView.coverImageURL = viewModel.coverImageURL
@@ -155,8 +180,12 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         }
     }
 
-    private func updateBadgeImageView(viewModel: CourseWidgetViewModel) {
+    private func updateBadgeImageView(viewModel: CourseWidgetViewModel?) {
         let badgeImage: UIImage? = {
+            guard let viewModel = viewModel else {
+                return nil
+            }
+
             if viewModel.isWishlistAvailable {
                 let imageName = viewModel.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
                 return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)

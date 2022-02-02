@@ -71,6 +71,12 @@ final class CourseWidgetProgressView: UIView {
     private var certificateRegularThresholdPointViewLeadingConstraint: Constraint?
     private var certificateDistinctionThresholdPointViewLeadingConstraint: Constraint?
 
+    private var certificateRegularThresholdValueViewCenterXMediumConstraint: Constraint?
+    private var certificateRegularThresholdValueViewCenterXHighConstraint: Constraint?
+
+    private var certificateDistinctionThresholdValueViewCenterXMediumConstraint: Constraint?
+    private var certificateDistinctionThresholdValueViewCenterXHighConstraint: Constraint?
+
     private var configurationViewModel: CourseWidgetProgressViewModel?
 
     private var certificateRegularViews: [UIView] {
@@ -140,8 +146,6 @@ final class CourseWidgetProgressView: UIView {
         }
 
         if let certificateRegularThreshold = viewModel.certificateRegularThreshold {
-            self.certificateRegularViews.forEach { $0.isHidden = false }
-
             self.certificateRegularThresholdPointView.isDone = viewModel.score >= Float(certificateRegularThreshold)
             self.certificateRegularThresholdValueView.text = "\(certificateRegularThreshold)"
         } else {
@@ -149,8 +153,6 @@ final class CourseWidgetProgressView: UIView {
         }
 
         if let certificateDistinctionThreshold = viewModel.certificateDistinctionThreshold {
-            self.certificateDistinctionViews.forEach { $0.isHidden = false }
-
             self.certificateDistinctionThresholdPointView.isDone =
                 viewModel.score >= Float(certificateDistinctionThreshold)
             self.certificateDistinctionThresholdValueView.text = "\(certificateDistinctionThreshold)"
@@ -160,27 +162,52 @@ final class CourseWidgetProgressView: UIView {
     }
 
     private func updateCertificateViewsConstraints() {
-        guard let viewModel = self.configurationViewModel,
+        let progressBarWidth = self.progressBarView.bounds.width
+
+        guard progressBarWidth > 0,
+              let viewModel = self.configurationViewModel,
               viewModel.isWithCertificate,
               viewModel.cost > 0 else {
+            self.certificateViews.forEach { $0.isHidden = true }
             return
         }
 
-        let progressBarWidth = self.progressBarView.bounds.width
-        guard progressBarWidth > 0 else {
-            return
-        }
+        var visibleThresholdValueViewsCount = 0
 
         if let certificateRegularThreshold = viewModel.certificateRegularThreshold {
+            self.certificateRegularViews.forEach { $0.isHidden = false }
+            visibleThresholdValueViewsCount += 1
+
             let thresholdInProgress = Float(certificateRegularThreshold) / Float(viewModel.cost)
             let offset = progressBarWidth * CGFloat(thresholdInProgress)
             self.certificateRegularThresholdPointViewLeadingConstraint?.update(offset: offset)
+        } else {
+            self.certificateRegularThresholdPointViewLeadingConstraint?.update(offset: 0)
         }
 
         if let certificateDistinctionThreshold = viewModel.certificateDistinctionThreshold {
+            self.certificateDistinctionViews.forEach { $0.isHidden = false }
+            visibleThresholdValueViewsCount += 1
+
             let thresholdInProgress = Float(certificateDistinctionThreshold) / Float(viewModel.cost)
             let offset = progressBarWidth * CGFloat(thresholdInProgress)
             self.certificateDistinctionThresholdPointViewLeadingConstraint?.update(offset: offset)
+        } else {
+            self.certificateDistinctionThresholdPointViewLeadingConstraint?.update(offset: progressBarWidth)
+        }
+
+        if visibleThresholdValueViewsCount == 1 {
+            self.certificateRegularThresholdValueViewCenterXMediumConstraint?.deactivate()
+            self.certificateRegularThresholdValueViewCenterXHighConstraint?.activate()
+
+            self.certificateDistinctionThresholdValueViewCenterXMediumConstraint?.deactivate()
+            self.certificateDistinctionThresholdValueViewCenterXHighConstraint?.activate()
+        } else {
+            self.certificateRegularThresholdValueViewCenterXMediumConstraint?.activate()
+            self.certificateRegularThresholdValueViewCenterXHighConstraint?.deactivate()
+
+            self.certificateDistinctionThresholdValueViewCenterXMediumConstraint?.activate()
+            self.certificateDistinctionThresholdValueViewCenterXHighConstraint?.deactivate()
         }
     }
 }
@@ -235,14 +262,23 @@ extension CourseWidgetProgressView: ProgrammaticallyInitializableViewProtocol {
             make.bottom
                 .equalTo(self.progressBarView.snp.top)
                 .offset(-self.appearance.certificateThresholdValueViewBottomOffset)
-            make.centerX
-                .equalTo(self.certificateRegularThresholdPointView)
-                .priority(.medium)
-
             make.leading
                 .greaterThanOrEqualTo(self.progressTextLabel.snp.trailing)
                 .offset(self.appearance.certificateThresholdValueViewHorizontalSpacing)
                 .priority(.high)
+
+            self.certificateRegularThresholdValueViewCenterXMediumConstraint = make
+                .centerX
+                .equalTo(self.certificateRegularThresholdPointView)
+                .priority(.medium)
+                .constraint
+
+            self.certificateRegularThresholdValueViewCenterXHighConstraint = make
+                .centerX
+                .equalTo(self.certificateRegularThresholdPointView)
+                .priority(.high)
+                .constraint
+            self.certificateRegularThresholdValueViewCenterXHighConstraint?.deactivate()
         }
 
         self.certificateDistinctionThresholdValueView.translatesAutoresizingMaskIntoConstraints = false
@@ -250,10 +286,6 @@ extension CourseWidgetProgressView: ProgrammaticallyInitializableViewProtocol {
             make.bottom
                 .equalTo(self.progressBarView.snp.top)
                 .offset(-self.appearance.certificateThresholdValueViewBottomOffset)
-            make.centerX
-                .equalTo(self.certificateDistinctionThresholdPointView)
-                .priority(.medium)
-
             make.leading
                 .greaterThanOrEqualTo(self.certificateRegularThresholdValueView.snp.trailing)
                 .offset(self.appearance.certificateThresholdValueViewHorizontalSpacing)
@@ -261,6 +293,19 @@ extension CourseWidgetProgressView: ProgrammaticallyInitializableViewProtocol {
             make.trailing
                 .lessThanOrEqualToSuperview()
                 .priority(.high)
+
+            self.certificateDistinctionThresholdValueViewCenterXMediumConstraint = make
+                .centerX
+                .equalTo(self.certificateDistinctionThresholdPointView)
+                .priority(.medium)
+                .constraint
+
+            self.certificateDistinctionThresholdValueViewCenterXHighConstraint = make
+                .centerX
+                .equalTo(self.certificateDistinctionThresholdPointView)
+                .priority(.high)
+                .constraint
+            self.certificateDistinctionThresholdValueViewCenterXHighConstraint?.deactivate()
         }
     }
 }

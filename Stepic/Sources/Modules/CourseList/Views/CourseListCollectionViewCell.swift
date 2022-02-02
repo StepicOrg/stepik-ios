@@ -78,6 +78,11 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
         ).cgPath
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.widgetView.prepareForReuse()
+    }
+
     func configure(viewModel: CourseWidgetViewModel) {
         self.widgetView.configure(viewModel: viewModel)
         self.configurationViewModel = viewModel
