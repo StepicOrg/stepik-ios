@@ -86,6 +86,12 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         let progressValue = progress.cost > 0
             ? progress.score / Float(progress.cost)
             : 1
+        let certificateRegularThreshold = (course.certificateRegularThreshold ?? 0) > 0
+            ? course.certificateRegularThreshold
+            : nil
+        let certificateDistinctionThreshold = (course.certificateDistinctionThreshold ?? 0) > 0
+            ? course.certificateDistinctionThreshold
+            : nil
 
         return CourseWidgetProgressViewModel(
             score: progress.score,
@@ -93,8 +99,8 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             progress: progressValue,
             progressLabelText: "\(FormatterHelper.progressScore(progress.score))/\(progress.cost)",
             isWithCertificate: course.isWithCertificate,
-            certificateRegularThreshold: course.certificateRegularThreshold,
-            certificateDistinctionThreshold: course.certificateDistinctionThreshold
+            certificateRegularThreshold: certificateRegularThreshold,
+            certificateDistinctionThreshold: certificateDistinctionThreshold
         )
     }
 
