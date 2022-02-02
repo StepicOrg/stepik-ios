@@ -116,7 +116,7 @@ GEM
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
     fastimage (2.2.6)
-    fastlane (2.203.0)
+    fastlane (2.204.0)
       CFPropertyList (>= 2.3, < 4.0.0)
       addressable (>= 2.8, < 3.0.0)
       artifactory (~> 3.0)
@@ -287,7 +287,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods (= 1.11.2)
-  fastlane (= 2.203.0)
+  fastlane (= 2.204.0)
   fastlane-plugin-firebase_app_distribution
   generamba (= 1.5.0)
 
