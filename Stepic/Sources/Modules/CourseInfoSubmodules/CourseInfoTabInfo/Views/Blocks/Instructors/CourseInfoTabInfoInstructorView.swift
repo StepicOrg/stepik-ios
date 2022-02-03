@@ -3,7 +3,6 @@ import UIKit
 
 extension CourseInfoTabInfoInstructorView {
     struct Appearance {
-        let imageFadeInDuration: TimeInterval = 0.15
         let imageViewSize = CGSize(width: 32, height: 32)
         let imageViewCornerRadius: CGFloat = 6
 

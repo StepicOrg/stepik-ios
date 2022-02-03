@@ -32,11 +32,18 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
-        let authorsViewModel = course.authors.map { author in
-            CourseInfoTabInfoAuthorViewModel(id: author.id, name: FormatterHelper.username(author))
-        }
+        let authorsIDs = Set(course.authorsArray).subtracting(Set(course.instructorsArray))
+        let authorsViewModel = course.authors.compactMap { author -> CourseInfoTabInfoAuthorViewModel? in
+            guard authorsIDs.contains(author.id) else {
+                return nil
+            }
 
-        let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
+            return CourseInfoTabInfoAuthorViewModel(
+                id: author.id,
+                name: FormatterHelper.username(author),
+                avatarImageURL: URL(string: author.avatarURL)
+            )
+        }
 
         let certificateText = self.makeFormattedCertificateText(course: course)
         let certificateDetailsText = course.isWithCertificate

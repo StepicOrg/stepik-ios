@@ -3,6 +3,7 @@ import UIKit
 struct CourseInfoTabInfoAuthorViewModel {
     let id: User.IdType
     let name: String
+    let avatarImageURL: URL?
 }
 
 struct CourseInfoTabInfoInstructorViewModel {
