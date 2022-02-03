@@ -104,6 +104,9 @@ final class CourseInfoTabInfoView: UIView {
             self.addTextBlockView(block: .certificateDetails, message: certificateDetailsText)
         }
 
+        // Spacer
+        self.scrollableStackView.addArrangedView(UIView())
+
         if viewModel.aboutText.isEmpty {
             self.delegate?.courseInfoTabInfoViewDidLoadContent(self)
         }
@@ -172,8 +175,7 @@ final class CourseInfoTabInfoView: UIView {
             return
         }
 
-        let appearance = CourseInfoTabInfoIntroVideoBlockView.Appearance(insets: .zero)
-        let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(appearance: appearance, delegate: self.delegate)
+        let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(delegate: self.delegate)
         introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
         introVideoBlockView.videoURL = introVideoURL
 
