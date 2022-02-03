@@ -58,6 +58,20 @@ final class SmallCourseWidgetView: UIView, CourseWidgetViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Public API
+
+    func prepareForReuse() {
+        self.coverView.coverImageURL = nil
+        self.coverView.shouldShowAdaptiveMark = false
+
+        self.titleLabel.text = nil
+
+        self.updatePriceView(viewModel: nil)
+
+        self.badgeImageView.image = nil
+        self.badgeImageView.isHidden = true
+    }
+
     func configure(viewModel: CourseWidgetViewModel) {
         self.coverView.coverImageURL = viewModel.coverImageURL
         self.coverView.shouldShowAdaptiveMark = viewModel.isAdaptive
@@ -67,6 +81,8 @@ final class SmallCourseWidgetView: UIView, CourseWidgetViewProtocol {
         self.updatePriceView(viewModel: viewModel.price)
         self.updateBadgeImageView(viewModel: viewModel)
     }
+
+    // MARK: Private API
 
     private func updatePriceView(viewModel: CourseWidgetPriceViewModel?) {
         if let viewModel = viewModel {

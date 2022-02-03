@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 enum CourseListColorMode {
     case light
@@ -85,6 +85,35 @@ extension CourseListColorMode {
                 itemTextColor: .white,
                 itemImageTintColor: .white
             )
+        }
+    }
+
+    var courseWidgetProgressViewAppearance: CourseWidgetProgressView.Appearance {
+        let progressTextLabelTextColor = UIColor.stepikMaterialSecondaryText
+        let progressBarTrackTintColor = UIColor.onSurface.withAlphaComponent(0.12)
+
+        var appearance = CourseWidgetProgressView.Appearance(
+            progressTextLabelAppearance: .init(
+                maxLinesCount: 1,
+                font: Typography.caption1Font,
+                textColor: progressTextLabelTextColor
+            ),
+            progressBarViewAppearance: .init(trackTintColor: progressBarTrackTintColor)
+        )
+
+        switch self {
+        case .light, .grouped:
+            return appearance
+        case .dark:
+            appearance.progressTextLabelAppearance.textColor = .dynamic(
+                light: .white.withAlphaComponent(0.6),
+                dark: progressTextLabelTextColor
+            )
+            appearance.progressBarViewAppearance.trackTintColor = .dynamic(
+                light: .white.withAlphaComponent(0.12),
+                dark: progressBarTrackTintColor
+            )
+            return appearance
         }
     }
 

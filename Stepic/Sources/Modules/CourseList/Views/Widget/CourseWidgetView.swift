@@ -2,6 +2,7 @@ import SnapKit
 import UIKit
 
 protocol CourseWidgetViewProtocol: UIView {
+    func prepareForReuse()
     func configure(viewModel: CourseWidgetViewModel)
 }
 
@@ -17,6 +18,8 @@ extension CourseWidgetView {
 
         let statsViewHeight: CGFloat = 17
         let statsViewInsets = LayoutInsets(top: 8)
+
+        let progressViewInsets = LayoutInsets(top: 8, right: 16)
 
         let summaryLabelInsets = LayoutInsets(top: 12, left: 16, bottom: 16, right: 16)
         let priceViewInsets = LayoutInsets(top: 12, bottom: 17)
@@ -47,6 +50,12 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
     private lazy var statsView = CourseWidgetStatsView(
         appearance: self.colorMode.courseWidgetStatsViewAppearance
     )
+
+    private lazy var progressView: CourseWidgetProgressView = {
+        let view = CourseWidgetProgressView(appearance: self.colorMode.courseWidgetProgressViewAppearance)
+        view.isHidden = true
+        return view
+    }()
 
     private lazy var separatorView: UIView = {
         let view = UIView()
@@ -98,6 +107,30 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Public API
+
+    func prepareForReuse() {
+        self.titleLabel.text = nil
+
+        self.coverView.coverImageURL = nil
+        self.coverView.shouldShowAdaptiveMark = false
+
+        self.summaryLabel.attributedText = nil
+        self.summaryLabel.isHidden = false
+
+        self.separatorView.isHidden = true
+        self.continueLearningButton.isHidden = true
+
+        self.statsView.learnersLabelText = nil
+        self.statsView.certificatesLabelText = nil
+        self.statsView.ratingLabelText = nil
+        self.statsView.isArchived = false
+
+        self.updateProgressView(viewModel: nil)
+        self.updatePriceView(viewModel: nil)
+        self.updateBadgeImageView(viewModel: nil)
+    }
+
     func configure(viewModel: CourseWidgetViewModel) {
         self.titleLabel.text = viewModel.title
         self.coverView.coverImageURL = viewModel.coverImageURL
@@ -114,14 +147,23 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
 
         let isArchived = viewModel.userCourse?.isArchived ?? false
         self.statsView.isArchived = isArchived
-        self.statsView.progress = isArchived ? nil : viewModel.progress
 
+        self.updateProgressView(viewModel: isArchived ? nil : viewModel.progress)
         self.updatePriceView(viewModel: viewModel.price)
         self.updateBadgeImageView(viewModel: viewModel)
     }
 
     func updateProgress(viewModel: CourseWidgetProgressViewModel) {
-        self.statsView.progress = viewModel
+        self.updateProgressView(viewModel: viewModel)
+    }
+
+    // MARK: Private API
+
+    private func updateProgressView(viewModel: CourseWidgetProgressViewModel?) {
+        if let viewModel = viewModel {
+            self.progressView.configure(viewModel: viewModel)
+        }
+        self.progressView.isHidden = viewModel == nil
     }
 
     private func updatePriceView(viewModel: CourseWidgetPriceViewModel?) {
@@ -138,8 +180,12 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         }
     }
 
-    private func updateBadgeImageView(viewModel: CourseWidgetViewModel) {
+    private func updateBadgeImageView(viewModel: CourseWidgetViewModel?) {
         let badgeImage: UIImage? = {
+            guard let viewModel = viewModel else {
+                return nil
+            }
+
             if viewModel.isWishlistAvailable {
                 let imageName = viewModel.isWishlisted ? "wishlist-like-filled" : "wishlist-like"
                 return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
@@ -159,8 +205,6 @@ final class CourseWidgetView: UIView, CourseWidgetViewProtocol {
         )
     }
 
-    // MARK: Private API
-
     @objc
     private func continueLearningButtonClicked() {
         self.onContinueLearningButtonClick?()
@@ -177,6 +221,7 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.titleLabel)
         self.addSubview(self.badgeImageView)
         self.addSubview(self.statsView)
+        self.addSubview(self.progressView)
         self.addSubview(self.summaryLabel)
         self.addSubview(self.priceView)
         self.addSubview(self.continueLearningButton)
@@ -236,6 +281,21 @@ extension CourseWidgetView: ProgrammaticallyInitializableViewProtocol {
                 .equalTo(self.titleLabel.snp.trailing)
             make.height
                 .equalTo(self.appearance.statsViewHeight)
+        }
+
+        self.progressView.translatesAutoresizingMaskIntoConstraints = false
+        self.progressView.snp.makeConstraints { make in
+            make.top
+                .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
+                .offset(self.appearance.progressViewInsets.top)
+                .priority(.low)
+            make.leading
+                .equalTo(self.titleLabel.snp.leading)
+            make.bottom
+                .equalTo(self.coverView.snp.bottom)
+            make.trailing
+                .equalToSuperview()
+                .offset(-self.appearance.progressViewInsets.right)
         }
 
         self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
