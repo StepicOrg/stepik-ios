@@ -168,12 +168,16 @@ final class CourseInfoTabInfoView: UIView {
     }
 
     private func addIntroVideoView(introVideoURL: URL?, introVideoThumbnailURL: URL?) {
-        if let introVideoURL = introVideoURL {
-            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(delegate: self.delegate)
-            introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
-            introVideoBlockView.videoURL = introVideoURL
-            self.scrollableStackView.addArrangedView(introVideoBlockView)
+        guard let introVideoURL = introVideoURL else {
+            return
         }
+
+        let appearance = CourseInfoTabInfoIntroVideoBlockView.Appearance(insets: .zero)
+        let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(appearance: appearance, delegate: self.delegate)
+        introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
+        introVideoBlockView.videoURL = introVideoURL
+
+        self.scrollableStackView.addArrangedView(introVideoBlockView)
     }
 
     private func addAboutBlockView(aboutText: String) {
@@ -184,6 +188,7 @@ final class CourseInfoTabInfoView: UIView {
         let aboutBlockView = CourseInfoTabInfoAboutBlockView()
         aboutBlockView.delegate = self
         self.scrollableStackView.addArrangedView(aboutBlockView)
+        aboutBlockView.title = Block.about.title
         aboutBlockView.text = aboutText
     }
 
@@ -326,10 +331,8 @@ extension CourseInfoTabInfoView {
 
         var icon: UIImage? {
             switch self {
-            case .acquiredSkills, .introVideo:
+            case .acquiredSkills, .introVideo, .about:
                 return nil
-            case .about:
-                return UIImage(named: "course-info-about")
             case .requirements:
                 return UIImage(named: "course-info-requirements")
             case .targetAudience:
@@ -349,10 +352,10 @@ extension CourseInfoTabInfoView {
 
         var title: String {
             switch self {
-            case .acquiredSkills:
-                return NSLocalizedString("CourseInfoTitleAcquiredSkills", comment: "")
             case .introVideo:
                 return ""
+            case .acquiredSkills:
+                return NSLocalizedString("CourseInfoTitleAcquiredSkills", comment: "")
             case .about:
                 return NSLocalizedString("CourseInfoTitleAbout", comment: "")
             case .requirements:
