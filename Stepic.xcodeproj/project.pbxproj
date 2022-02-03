@@ -899,6 +899,11 @@
 		2C9D69B72617334100A0641F /* CatalogBlockHorizontalCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D69B62617334100A0641F /* CatalogBlockHorizontalCollectionViewFlowLayout.swift */; };
 		2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
 		2C9E3F3E1F7A930100DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
+		2C9E698A27ABCC490090FC83 /* CourseInfoTabInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E698927ABCC490090FC83 /* CourseInfoTabInfoLabel.swift */; };
+		2C9E698C27ABDC7A0090FC83 /* CourseInfoTabInfoAuthorsBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E698B27ABDC7A0090FC83 /* CourseInfoTabInfoAuthorsBlockView.swift */; };
+		2C9E698F27ABE0CE0090FC83 /* CourseInfoTabInfoAuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E698E27ABE0CE0090FC83 /* CourseInfoTabInfoAuthorView.swift */; };
+		2C9E699327AC02DE0090FC83 /* CourseInfoTabInfoAcquiredSkillsBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E699227AC02DE0090FC83 /* CourseInfoTabInfoAcquiredSkillsBlockView.swift */; };
+		2C9E699627AC03660090FC83 /* CourseInfoTabInfoAcquiredSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E699527AC03660090FC83 /* CourseInfoTabInfoAcquiredSkillView.swift */; };
 		2CA0DE60266FC0060008C0D6 /* CourseBenefitPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA0DE5F266FC0060008C0D6 /* CourseBenefitPlainObject.swift */; };
 		2CA0DE62266FC01B0008C0D6 /* CourseBenefitSummaryPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA0DE61266FC01B0008C0D6 /* CourseBenefitSummaryPlainObject.swift */; };
 		2CA0DE64266FC0C60008C0D6 /* CourseBenefitStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA0DE63266FC0C60008C0D6 /* CourseBenefitStatus.swift */; };
@@ -2932,6 +2937,12 @@
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
 		2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAPI.swift; sourceTree = "<group>"; };
+		2C9E698927ABCC490090FC83 /* CourseInfoTabInfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoLabel.swift; sourceTree = "<group>"; };
+		2C9E698B27ABDC7A0090FC83 /* CourseInfoTabInfoAuthorsBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAuthorsBlockView.swift; sourceTree = "<group>"; };
+		2C9E698E27ABE0CE0090FC83 /* CourseInfoTabInfoAuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAuthorView.swift; sourceTree = "<group>"; };
+		2C9E699127ABFFB40090FC83 /* Model_course_acquired_skills_v94.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_acquired_skills_v94.xcdatamodel; sourceTree = "<group>"; };
+		2C9E699227AC02DE0090FC83 /* CourseInfoTabInfoAcquiredSkillsBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAcquiredSkillsBlockView.swift; sourceTree = "<group>"; };
+		2C9E699527AC03660090FC83 /* CourseInfoTabInfoAcquiredSkillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAcquiredSkillView.swift; sourceTree = "<group>"; };
 		2CA0DE5F266FC0060008C0D6 /* CourseBenefitPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitPlainObject.swift; sourceTree = "<group>"; };
 		2CA0DE61266FC01B0008C0D6 /* CourseBenefitSummaryPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummaryPlainObject.swift; sourceTree = "<group>"; };
 		2CA0DE63266FC0C60008C0D6 /* CourseBenefitStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitStatus.swift; sourceTree = "<group>"; };
@@ -5584,6 +5595,33 @@
 				2C19D99D26174C5800181DB0 /* Cell */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2C9E698D27ABE0AC0090FC83 /* Authors */ = {
+			isa = PBXGroup;
+			children = (
+				2C9E698B27ABDC7A0090FC83 /* CourseInfoTabInfoAuthorsBlockView.swift */,
+				2C9E698E27ABE0CE0090FC83 /* CourseInfoTabInfoAuthorView.swift */,
+			);
+			path = Authors;
+			sourceTree = "<group>";
+		};
+		2C9E699027ABE5F20090FC83 /* Instructors */ = {
+			isa = PBXGroup;
+			children = (
+				62E986D03D06D1DE96F5B16B /* CourseInfoTabInfoInstructorsBlockView.swift */,
+				62E987BF2C51E1DD4C703310 /* CourseInfoTabInfoInstructorView.swift */,
+			);
+			path = Instructors;
+			sourceTree = "<group>";
+		};
+		2C9E699427AC034A0090FC83 /* AcquiredSkills */ = {
+			isa = PBXGroup;
+			children = (
+				2C9E699227AC02DE0090FC83 /* CourseInfoTabInfoAcquiredSkillsBlockView.swift */,
+				2C9E699527AC03660090FC83 /* CourseInfoTabInfoAcquiredSkillView.swift */,
+			);
+			path = AcquiredSkills;
 			sourceTree = "<group>";
 		};
 		2CA3DAA62179DF7300F43888 /* Discussions */ = {
@@ -9407,6 +9445,7 @@
 		62E98B759EC8D0AF964591C2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C9E698927ABCC490090FC83 /* CourseInfoTabInfoLabel.swift */,
 				62E98EA222D02BADF18F50C6 /* CourseInfoTabInfoView.swift */,
 				62E98C30B424CE1DA0475B81 /* Blocks */,
 			);
@@ -9481,10 +9520,11 @@
 			children = (
 				2CA3E8AE24C173C600FA3059 /* CourseInfoTabInfoAboutBlockView.swift */,
 				62E98A9C4517D3C76CA66D49 /* CourseInfoTabInfoHeaderBlockView.swift */,
-				62E986D03D06D1DE96F5B16B /* CourseInfoTabInfoInstructorsBlockView.swift */,
-				62E987BF2C51E1DD4C703310 /* CourseInfoTabInfoInstructorView.swift */,
 				62E98763BD8F9DC59C3A901B /* CourseInfoTabInfoIntroVideoBlockView.swift */,
 				62E984E8B7FB6D9A6BD2318E /* CourseInfoTabInfoTextBlockView.swift */,
+				2C9E699427AC034A0090FC83 /* AcquiredSkills */,
+				2C9E698D27ABE0AC0090FC83 /* Authors */,
+				2C9E699027ABE5F20090FC83 /* Instructors */,
 			);
 			path = Blocks;
 			sourceTree = "<group>";
@@ -11299,6 +11339,7 @@
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
+				2C9E699327AC02DE0090FC83 /* CourseInfoTabInfoAcquiredSkillsBlockView.swift in Sources */,
 				0846B1071EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C4391AA271994CC000770AE /* CourseInfoPurchaseModalHeaderView.swift in Sources */,
 				2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */,
@@ -11418,6 +11459,7 @@
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
 				2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */,
 				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,
+				2C9E698F27ABE0CE0090FC83 /* CourseInfoTabInfoAuthorView.swift in Sources */,
 				2C89FF8424AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				2CC8322B27561A4C00F525F6 /* WishlistRepository.swift in Sources */,
@@ -11428,6 +11470,7 @@
 				2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				2C5418CA24A28ECF00B2DCE2 /* MetricsAPI.swift in Sources */,
+				2C9E698C27ABDC7A0090FC83 /* CourseInfoTabInfoAuthorsBlockView.swift in Sources */,
 				089200742199E01D00083627 /* DeepLinkRoute.swift in Sources */,
 				0863B9672069A41A0023A182 /* RetrieveRequestMaker.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
@@ -11620,6 +11663,7 @@
 				08E43EA7214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
 				2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */,
+				2C9E699627AC03660090FC83 /* CourseInfoTabInfoAcquiredSkillView.swift in Sources */,
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C8BCC1D248647B400DFB009 /* NewProfileBlockHeaderView.swift in Sources */,
@@ -12675,6 +12719,7 @@
 				F76BB6781CF813DDCD8F6C5C /* CourseRevenueTabPurchasesView.swift in Sources */,
 				2C6277BA270C5CB300FDAFD9 /* SiriShortcutsContinueUserActivityService.swift in Sources */,
 				0901F2E70A0CA50D44C96729 /* CourseRevenueTabPurchasesViewController.swift in Sources */,
+				2C9E698A27ABCC490090FC83 /* CourseInfoTabInfoLabel.swift in Sources */,
 				C6BC3AA52225E047D18CBB8C /* CourseRevenueTabPurchasesInputProtocol.swift in Sources */,
 				2C1966AD26E7C553000D5B06 /* AnnouncementsNetworkService.swift in Sources */,
 				C6CF7E954A942E8ADC3FE8A2 /* CourseBenefitDetailAssembly.swift in Sources */,
@@ -14636,6 +14681,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C9E699127ABFFB40090FC83 /* Model_course_acquired_skills_v94.xcdatamodel */,
 				2C97FFF9278CB90600EC7E74 /* Model_course_revenue_fixes_v93.xcdatamodel */,
 				2CED149D2756D83E00BB013D /* Model_mobile_tiers_v92.xcdatamodel */,
 				2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */,
@@ -14731,7 +14777,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C97FFF9278CB90600EC7E74 /* Model_course_revenue_fixes_v93.xcdatamodel */;
+			currentVersion = 2C9E699127ABFFB40090FC83 /* Model_course_acquired_skills_v94.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -3,9 +3,9 @@ import UIKit
 
 extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
-        let stackViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 30, right: 47)
+        let stackViewInsets = UIEdgeInsets(top: 20, left: 43, bottom: 0, right: 16)
         let stackViewSpacing: CGFloat = 20
     }
 }

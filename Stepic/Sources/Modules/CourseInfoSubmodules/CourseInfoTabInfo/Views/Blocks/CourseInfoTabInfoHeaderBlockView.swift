@@ -4,7 +4,7 @@ import UIKit
 
 extension CourseInfoTabInfoHeaderBlockView {
     struct Appearance {
-        let imageViewSize = CGSize(width: 15, height: 15)
+        let imageViewSize = CGSize(width: 16, height: 16)
         let imageViewTintColor = UIColor.stepikMaterialPrimaryText
         var imageViewLeadingSpace: CGFloat = 0
 

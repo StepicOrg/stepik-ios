@@ -1,4 +1,3 @@
-import Atributika
 import SnapKit
 import UIKit
 
@@ -12,13 +11,10 @@ protocol CourseInfoTabInfoViewDelegate: AnyObject {
 
 extension CourseInfoTabInfoView {
     struct Appearance {
-        let stackViewSpacing: CGFloat = 0
-        let stackViewInsets = LayoutInsets(top: 20)
+        let defaultHorizontalInsets = LayoutInsets(horizontal: 16)
 
-        let authorTitleLabelFont = Typography.subheadlineFont
-        let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
-        let authorTitleLabelNumberOfLines = 0
-        let authorIconLeadingSpace: CGFloat = 20
+        let stackViewSpacing: CGFloat = 20
+        let stackViewInsets = LayoutInsets(top: 20)
 
         let skeletonTopInset: CGFloat = 20
     }
@@ -85,7 +81,9 @@ final class CourseInfoTabInfoView: UIView {
             self.scrollableStackView.removeAllArrangedViews()
         }
 
-        self.addAuthorView(authors: viewModel.authors)
+        self.addSummaryBlockView(summaryText: viewModel.summaryText)
+        self.addAuthorsView(authors: viewModel.authors)
+        self.addAcquiredSkillsView(acquiredSkills: viewModel.acquiredSkills)
         self.addIntroVideoView(
             introVideoURL: viewModel.introVideoURL,
             introVideoThumbnailURL: viewModel.introVideoThumbnailURL
@@ -106,6 +104,9 @@ final class CourseInfoTabInfoView: UIView {
             self.addTextBlockView(block: .certificateDetails, message: certificateDetailsText)
         }
 
+        // Spacer
+        self.scrollableStackView.addArrangedView(UIView())
+
         if viewModel.aboutText.isEmpty {
             self.delegate?.courseInfoTabInfoViewDidLoadContent(self)
         }
@@ -117,48 +118,68 @@ final class CourseInfoTabInfoView: UIView {
 
     // MARK: Private API
 
-    private func addAuthorView(authors: [CourseInfoTabInfoAuthorViewModel]) {
+    private func addSummaryBlockView(summaryText: String) {
+        if summaryText.isEmpty {
+            return
+        }
+
+        let label = CourseInfoTabInfoLabel()
+        label.text = summaryText
+
+        let containerView = UIView()
+        containerView.addSubview(label)
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(self.appearance.defaultHorizontalInsets.edgeInsets)
+        }
+
+        self.scrollableStackView.addArrangedView(containerView)
+        self.scrollableStackView.addArrangedView(SeparatorView())
+    }
+
+    private func addAuthorsView(authors: [CourseInfoTabInfoAuthorViewModel]) {
         if authors.isEmpty {
             return
         }
 
-        var formattedAuthorsString = authors.reduce(into: "") { result, author in
-            result += "<a href=\"\(author.id)\">\(author.name)</a>, "
-        }.trimmingCharacters(in: .whitespaces)
-        formattedAuthorsString.removeLast()
-
-        let attributedText = "\(Block.author.title) \(formattedAuthorsString)"
-            .style(tags: [HTMLToAttributedStringConverter.defaultLinkStyle])
-
-        let authorView = CourseInfoTabInfoHeaderBlockView(
-            appearance: .init(
-                imageViewLeadingSpace: self.appearance.authorIconLeadingSpace,
-                titleLabelFont: self.appearance.authorTitleLabelFont,
-                titleLabelInsets: self.appearance.authorTitleLabelInsets,
-                titleLabelNumberOfLines: self.appearance.authorTitleLabelNumberOfLines
-            )
-        )
-        authorView.icon = Block.author.icon
-        authorView.attributedText = attributedText
-        authorView.onTagClick = { [weak self] href in
-            guard let strongSelf = self,
-                  let userID = Int(href) else {
+        let authorsView = CourseInfoTabInfoAuthorsBlockView()
+        authorsView.configure(authors: authors)
+        authorsView.onAuthorClick = { [weak self] authorID in
+            guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didOpenUserProfileWithID: userID)
+            strongSelf.delegate?.courseInfoTabInfoView(strongSelf, didOpenUserProfileWithID: authorID)
         }
 
-        self.scrollableStackView.addArrangedView(authorView)
+        self.scrollableStackView.addArrangedView(authorsView)
+        self.scrollableStackView.addArrangedView(SeparatorView())
+    }
+
+    private func addAcquiredSkillsView(acquiredSkills: [String]) {
+        if acquiredSkills.isEmpty {
+            return
+        }
+
+        let acquiredSkillsView = CourseInfoTabInfoAcquiredSkillsBlockView()
+        acquiredSkillsView.title = Block.acquiredSkills.title
+        acquiredSkillsView.configure(acquiredSkills: acquiredSkills)
+
+        self.scrollableStackView.addArrangedView(acquiredSkillsView)
+        self.scrollableStackView.addArrangedView(SeparatorView())
     }
 
     private func addIntroVideoView(introVideoURL: URL?, introVideoThumbnailURL: URL?) {
-        if let introVideoURL = introVideoURL {
-            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(delegate: self.delegate)
-            introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
-            introVideoBlockView.videoURL = introVideoURL
-            self.scrollableStackView.addArrangedView(introVideoBlockView)
+        guard let introVideoURL = introVideoURL else {
+            return
         }
+
+        let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(delegate: self.delegate)
+        introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
+        introVideoBlockView.videoURL = introVideoURL
+
+        self.scrollableStackView.addArrangedView(introVideoBlockView)
     }
 
     private func addAboutBlockView(aboutText: String) {
@@ -169,6 +190,7 @@ final class CourseInfoTabInfoView: UIView {
         let aboutBlockView = CourseInfoTabInfoAboutBlockView()
         aboutBlockView.delegate = self
         self.scrollableStackView.addArrangedView(aboutBlockView)
+        aboutBlockView.title = Block.about.title
         aboutBlockView.text = aboutText
     }
 
@@ -298,7 +320,7 @@ extension CourseInfoTabInfoView: CourseInfoTabInfoAboutBlockViewDelegate {
 
 extension CourseInfoTabInfoView {
     enum Block {
-        case author
+        case acquiredSkills
         case introVideo
         case about
         case requirements
@@ -311,12 +333,8 @@ extension CourseInfoTabInfoView {
 
         var icon: UIImage? {
             switch self {
-            case .author:
-                return UIImage(named: "course-info-instructor")
-            case .introVideo:
+            case .acquiredSkills, .introVideo, .about:
                 return nil
-            case .about:
-                return UIImage(named: "course-info-about")
             case .requirements:
                 return UIImage(named: "course-info-requirements")
             case .targetAudience:
@@ -336,10 +354,10 @@ extension CourseInfoTabInfoView {
 
         var title: String {
             switch self {
-            case .author:
-                return NSLocalizedString("CourseInfoTitleAuthor", comment: "")
             case .introVideo:
                 return ""
+            case .acquiredSkills:
+                return NSLocalizedString("CourseInfoTitleAcquiredSkills", comment: "")
             case .about:
                 return NSLocalizedString("CourseInfoTitleAbout", comment: "")
             case .requirements:

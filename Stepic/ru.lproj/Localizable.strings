@@ -507,6 +507,7 @@ CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage = "Вы не подкл�
 CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction = "Всегда";
 CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction = "Только в этот раз";
 CourseInfoTabReviews = "Отзывы";
+CourseInfoTitleAcquiredSkills = "Чему вы научитесь";
 CourseInfoTitleAuthor = "от";
 CourseInfoTitleAbout = "О курсе";
 CourseInfoTitleRequirements = "Требования";
