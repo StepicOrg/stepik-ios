@@ -505,6 +505,7 @@ CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage = "You're not connected 
 CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction = "Use Always";
 CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction = "Just this Once";
 CourseInfoTabReviews = "Reviews";
+CourseInfoTitleAcquiredSkills = "What you will learn";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
 CourseInfoTitleRequirements = "Requirements";

@@ -45,6 +45,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
         }
 
+        let acquiredSkills = course.acquiredSkillsArray.map { $0.trimmed() }.filter { !$0.isEmpty }
+
         let certificateText = self.makeFormattedCertificateText(course: course)
         let certificateDetailsText = course.isWithCertificate
             ? self.makeFormattedCertificateDetailsText(
@@ -64,6 +66,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
         return CourseInfoTabInfoViewModel(
             authors: authorsViewModel,
+            acquiredSkills: acquiredSkills,
             introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
             summaryText: course.summary.trimmed(),

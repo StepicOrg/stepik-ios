@@ -13,6 +13,7 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let defaultHorizontalInsets = LayoutInsets(horizontal: 16)
 
+        let stackViewSpacing: CGFloat = 20
         let stackViewInsets = LayoutInsets(top: 20)
 
         let skeletonTopInset: CGFloat = 20
@@ -82,6 +83,7 @@ final class CourseInfoTabInfoView: UIView {
 
         self.addSummaryBlockView(summaryText: viewModel.summaryText)
         self.addAuthorsView(authors: viewModel.authors)
+        self.addAcquiredSkillsView(acquiredSkills: viewModel.acquiredSkills)
         self.addIntroVideoView(
             introVideoURL: viewModel.introVideoURL,
             introVideoThumbnailURL: viewModel.introVideoThumbnailURL
@@ -149,6 +151,19 @@ final class CourseInfoTabInfoView: UIView {
         }
 
         self.scrollableStackView.addArrangedView(authorsView)
+        self.scrollableStackView.addArrangedView(SeparatorView())
+    }
+
+    private func addAcquiredSkillsView(acquiredSkills: [String]) {
+        if acquiredSkills.isEmpty {
+            return
+        }
+
+        let acquiredSkillsView = CourseInfoTabInfoAcquiredSkillsBlockView()
+        acquiredSkillsView.title = Block.acquiredSkills.title
+        acquiredSkillsView.configure(acquiredSkills: acquiredSkills)
+
+        self.scrollableStackView.addArrangedView(acquiredSkillsView)
         self.scrollableStackView.addArrangedView(SeparatorView())
     }
 
@@ -298,6 +313,7 @@ extension CourseInfoTabInfoView: CourseInfoTabInfoAboutBlockViewDelegate {
 
 extension CourseInfoTabInfoView {
     enum Block {
+        case acquiredSkills
         case introVideo
         case about
         case requirements
@@ -310,7 +326,7 @@ extension CourseInfoTabInfoView {
 
         var icon: UIImage? {
             switch self {
-            case .introVideo:
+            case .acquiredSkills, .introVideo:
                 return nil
             case .about:
                 return UIImage(named: "course-info-about")
@@ -333,6 +349,8 @@ extension CourseInfoTabInfoView {
 
         var title: String {
             switch self {
+            case .acquiredSkills:
+                return NSLocalizedString("CourseInfoTitleAcquiredSkills", comment: "")
             case .introVideo:
                 return ""
             case .about:

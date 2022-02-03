@@ -16,6 +16,8 @@ struct CourseInfoTabInfoInstructorViewModel {
 struct CourseInfoTabInfoViewModel {
     let authors: [CourseInfoTabInfoAuthorViewModel]
 
+    let acquiredSkills: [String]
+
     let introVideoURL: URL?
     let introVideoThumbnailURL: URL?
 

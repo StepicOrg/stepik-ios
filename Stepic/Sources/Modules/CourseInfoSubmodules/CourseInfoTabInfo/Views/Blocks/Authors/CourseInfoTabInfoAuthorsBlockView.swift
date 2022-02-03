@@ -3,8 +3,8 @@ import UIKit
 
 extension CourseInfoTabInfoAuthorsBlockView {
     struct Appearance {
-        let stackViewSpacing: CGFloat = 16
-        var stackViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let stackViewSpacing: CGFloat = 20
+        var stackViewInsets = LayoutInsets(left: 16, right: 16)
     }
 }
 
@@ -84,7 +84,7 @@ extension CourseInfoTabInfoAuthorsBlockView: ProgrammaticallyInitializableViewPr
     func makeConstraints() {
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(self.appearance.stackViewInsets)
+            make.edges.equalToSuperview().inset(self.appearance.stackViewInsets.edgeInsets)
         }
     }
 }

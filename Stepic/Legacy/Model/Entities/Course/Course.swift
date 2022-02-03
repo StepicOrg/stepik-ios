@@ -131,6 +131,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.instructorsArray = json[JSONKey.instructors.rawValue].arrayObject as! [Int]
         self.authorsArray = json[JSONKey.authors.rawValue].arrayObject as? [Int] ?? []
         self.announcementsArray = json[JSONKey.announcements.rawValue].arrayObject as? [Int] ?? []
+        self.acquiredSkillsArray = json[JSONKey.acquiredSkills.rawValue].arrayObject as? [String] ?? []
         self.timeToComplete = json[JSONKey.timeToComplete.rawValue].int
         self.languageCode = json[JSONKey.language.rawValue].stringValue
         self.isPaid = json[JSONKey.isPaid.rawValue].boolValue
@@ -248,5 +249,6 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case enabled
         case createAnnouncements = "create_announcements"
         case announcements
+        case acquiredSkills = "acquired_skills"
     }
 }
