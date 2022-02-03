@@ -12,7 +12,8 @@ protocol CourseInfoTabInfoViewDelegate: AnyObject {
 
 extension CourseInfoTabInfoView {
     struct Appearance {
-        let stackViewSpacing: CGFloat = 0
+        let defaultHorizontalInsets = LayoutInsets(horizontal: 16)
+
         let stackViewInsets = LayoutInsets(top: 20)
 
         let authorTitleLabelFont = Typography.subheadlineFont
@@ -83,6 +84,21 @@ final class CourseInfoTabInfoView: UIView {
     func configure(viewModel: CourseInfoTabInfoViewModel) {
         if !self.scrollableStackView.arrangedSubviews.isEmpty {
             self.scrollableStackView.removeAllArrangedViews()
+        }
+
+        if !viewModel.summaryText.isEmpty {
+            let label = CourseInfoTabInfoLabel()
+            label.text = viewModel.summaryText
+
+            let containerView = UIView()
+            containerView.addSubview(label)
+
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.snp.makeConstraints { make in
+                make.edges.equalToSuperview().inset(self.appearance.defaultHorizontalInsets.edgeInsets)
+            }
+
+            self.scrollableStackView.addArrangedView(containerView)
         }
 
         self.addAuthorView(authors: viewModel.authors)
@@ -300,6 +316,7 @@ extension CourseInfoTabInfoView {
     enum Block {
         case author
         case introVideo
+        case summary
         case about
         case requirements
         case targetAudience
@@ -314,6 +331,8 @@ extension CourseInfoTabInfoView {
             case .author:
                 return UIImage(named: "course-info-instructor")
             case .introVideo:
+                return nil
+            case .summary:
                 return nil
             case .about:
                 return UIImage(named: "course-info-about")
@@ -339,6 +358,8 @@ extension CourseInfoTabInfoView {
             case .author:
                 return NSLocalizedString("CourseInfoTitleAuthor", comment: "")
             case .introVideo:
+                return ""
+            case .summary:
                 return ""
             case .about:
                 return NSLocalizedString("CourseInfoTitleAbout", comment: "")

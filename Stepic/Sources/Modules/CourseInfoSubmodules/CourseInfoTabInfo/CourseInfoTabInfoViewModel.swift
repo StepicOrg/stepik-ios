@@ -18,6 +18,7 @@ struct CourseInfoTabInfoViewModel {
     let introVideoURL: URL?
     let introVideoThumbnailURL: URL?
 
+    let summaryText: String
     let aboutText: String
     let requirementsText: String
     let targetAudienceText: String
