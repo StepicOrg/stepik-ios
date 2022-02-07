@@ -16,8 +16,8 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
 
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
-        self.userId = json[JSONKey.user.rawValue].intValue
-        self.courseId = json[JSONKey.course.rawValue].intValue
+        self.userID = json[JSONKey.user.rawValue].intValue
+        self.courseID = json[JSONKey.course.rawValue].intValue
         self.issueDate = Parser.dateFromTimedateJSON(json[JSONKey.issueDate.rawValue])
         self.updateDate = Parser.dateFromTimedateJSON(json[JSONKey.updateDate.rawValue])
         self.grade = json[JSONKey.grade.rawValue].intValue

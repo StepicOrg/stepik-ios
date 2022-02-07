@@ -23,7 +23,7 @@ extension Certificate {
         }
     }
 
-    var courseId: Int {
+    var courseID: Int {
         get {
             self.managedCourseId?.intValue ?? -1
         }
@@ -32,7 +32,7 @@ extension Certificate {
         }
     }
 
-    var userId: Int {
+    var userID: Int {
         get {
             self.managedUserId?.intValue ?? -1
         }

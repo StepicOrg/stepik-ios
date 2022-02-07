@@ -91,15 +91,15 @@ final class CertificatesPresenter {
     // MARK: Private API
 
     private func loadCoursesForCertificates(_ certificates: [Certificate]) -> Promise<Void> {
-        self.coursesNetworkService.fetch(ids: certificates.map(\.courseId)).done { courses in
-            if courses.isEmpty {
+        self.coursesNetworkService.fetch(ids: certificates.map(\.courseID)).done { courses in
+            if certificates.isEmpty || courses.isEmpty {
                 return
             }
 
             let coursesMap = Dictionary(courses.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
 
             for certificate in certificates {
-                certificate.course = coursesMap[certificate.courseId]
+                certificate.course = coursesMap[certificate.courseID]
             }
         }
     }
