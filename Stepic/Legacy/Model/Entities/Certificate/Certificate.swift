@@ -5,9 +5,8 @@ import SwiftyJSON
 final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
-    enum CertificateType: String {
-        case distinction = "distinction"
-        case regular = "regular"
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
 
     required convenience init(json: JSON) {
@@ -26,6 +25,11 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         self.urlString = json[JSONKey.url.rawValue].string
         self.isPublic = json[JSONKey.isPublic.rawValue].bool
         self.isWithScore = json[JSONKey.isWithScore.rawValue].boolValue
+    }
+
+    enum CertificateType: String {
+        case regular
+        case distinction
     }
 
     enum JSONKey: String {

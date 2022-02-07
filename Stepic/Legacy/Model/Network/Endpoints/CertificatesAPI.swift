@@ -41,24 +41,6 @@ final class CertificatesAPI: APIEndpoint {
         )
     }
 
-    //Cannot move it to extension cause it is used in tests
-    @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult
-    func retrieve(
-        userId: Int,
-        page: Int = 1,
-        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
-        success: @escaping (Meta, [Certificate]) -> Void,
-        error errorHandler: @escaping (NetworkError) -> Void
-    ) -> Request? {
-        self.retrieve(userID: userId, page: page).done { certificates, meta in
-            success(meta, certificates)
-        }.catch { error in
-            errorHandler(NetworkError(error: error))
-        }
-        return nil
-    }
-
     enum Order: String {
         case idDesc = "-id"
     }

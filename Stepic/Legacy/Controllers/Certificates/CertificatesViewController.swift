@@ -1,12 +1,4 @@
-//
-//  CertificatesViewController.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 12.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
-import Foundation
+import UIKit
 
 @available(*, deprecated, message: "Class to initialize certificates w/o storyboards logic")
 final class CertificatesLegacyAssembly: Assembly {
@@ -27,10 +19,9 @@ final class CertificatesLegacyAssembly: Assembly {
         certificatesVC.userID = self.userID
         certificatesVC.presenter = CertificatesPresenter(
             userID: self.userID,
-            certificatesAPI: ApiDataDownloader.certificates,
-            coursesAPI: ApiDataDownloader.courses,
-            presentationContainer: PresentationContainer.certificates,
+            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
             certificatesPersistenceService: CertificatesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             view: certificatesVC
         )
         certificatesVC.analytics = StepikAnalytics.shared
@@ -38,6 +29,8 @@ final class CertificatesLegacyAssembly: Assembly {
         return certificatesVC
     }
 }
+
+// MARK: - CertificatesViewController -
 
 final class CertificatesViewController: UIViewController, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -182,6 +175,8 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
     }
 }
 
+// MARK: - CertificatesViewController: CertificatesView -
+
 extension CertificatesViewController: CertificatesView {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool) {
         self.hasLoadedData = true
@@ -218,6 +213,8 @@ extension CertificatesViewController: CertificatesView {
         self.paginationView.setError()
     }
 }
+
+// MARK: - CertificatesViewController: UITableViewDelegate -
 
 extension CertificatesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -263,6 +260,8 @@ extension CertificatesViewController: UITableViewDelegate {
         )
     }
 }
+
+// MARK: - CertificatesViewController: UITableViewDataSource -
 
 extension CertificatesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
