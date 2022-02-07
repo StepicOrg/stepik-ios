@@ -44,12 +44,16 @@ final class CertificatesPresenter {
     }
 
     func getCachedCertificates() {
-        let localIds = self.presentationContainer.certificatesIds
+        let localIDs = self.presentationContainer.certificatesIds
 
-        self.certificatesPersistenceService.fetch(ids: localIds, userID: self.userID).done { cachedCertificates in
+        self.certificatesPersistenceService.fetch(ids: localIDs, userID: self.userID).done { cachedCertificates in
+            if cachedCertificates.isEmpty {
+                return
+            }
+
             let localCertificates = cachedCertificates.sorted(by: {
-                guard let index1 = localIds.firstIndex(of: $0.id),
-                      let index2 = localIds.firstIndex(of: $1.id) else {
+                guard let index1 = localIDs.firstIndex(of: $0.id),
+                      let index2 = localIDs.firstIndex(of: $1.id) else {
                     return false
                 }
                 return index1 < index2

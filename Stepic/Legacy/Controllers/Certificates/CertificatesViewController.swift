@@ -68,6 +68,12 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
     private var certificates: [CertificateViewData] = []
     private var showNextPageFooter = false
 
+    private var hasLoadedData = false {
+        didSet {
+            self.updateEmptySetPlaceholder()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -77,14 +83,6 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
             tableView.sectionHeaderTopPadding = 0
         }
 
-        let isMe = AuthInfo.shared.userId != nil && self.userID == AuthInfo.shared.userId
-        if isMe {
-            self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesMe) { [weak self] in
-                self?.tabBarController?.selectedIndex = 1
-            }
-        } else {
-            self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesOther)
-        }
         self.tableView.loadingPlaceholder = StepikPlaceholder(.emptyCertificatesLoading)
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
@@ -135,6 +133,21 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         }
     }
 
+    private func updateEmptySetPlaceholder() {
+        if self.hasLoadedData {
+            let isMe = AuthInfo.shared.userId != nil && self.userID == AuthInfo.shared.userId
+            if isMe {
+                self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesMe) {
+                    TabBarRouter(tab: .catalog()).route()
+                }
+            } else {
+                self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesOther)
+            }
+        } else {
+            self.tableView.emptySetPlaceholder = nil
+        }
+    }
+
     private func shareCertificate(certificate: CertificateViewData, button: UIButton) {
         guard let url = certificate.certificateURL else {
             return
@@ -171,6 +184,8 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
 extension CertificatesViewController: CertificatesView {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool) {
+        self.hasLoadedData = true
+
         self.certificates = certificates
         self.showNextPageFooter = hasNextPage
 
@@ -201,10 +216,6 @@ extension CertificatesViewController: CertificatesView {
 
     func displayLoadNextPageError() {
         self.paginationView.setError()
-    }
-
-    func updateData() {
-        tableView.reloadData()
     }
 }
 

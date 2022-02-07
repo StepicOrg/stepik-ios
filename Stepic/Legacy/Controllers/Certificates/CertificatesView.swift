@@ -15,5 +15,4 @@ protocol CertificatesView: AnyObject {
     func displayEmpty()
     func displayRefreshing()
     func displayLoadNextPageError()
-    func updateData()
 }
