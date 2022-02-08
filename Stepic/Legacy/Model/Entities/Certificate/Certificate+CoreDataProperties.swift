@@ -9,8 +9,10 @@ extension Certificate {
     @NSManaged var managedUpdateDate: Date?
     @NSManaged var managedGrade: NSNumber?
     @NSManaged var managedURL: String?
-    @NSManaged var managedisPublic: NSNumber?
+    @NSManaged var managedIsPublic: NSNumber?
     @NSManaged var managedIsWithScore: NSNumber?
+    @NSManaged var managedEditsCount: NSNumber
+    @NSManaged var managedAllowedEditsCount: NSNumber
 
     @NSManaged var managedCourse: Course?
 
@@ -91,10 +93,10 @@ extension Certificate {
 
     var isPublic: Bool? {
         get {
-            self.managedisPublic?.boolValue ?? false
+            self.managedIsPublic?.boolValue ?? false
         }
         set {
-            self.managedisPublic = newValue as NSNumber?
+            self.managedIsPublic = newValue as NSNumber?
         }
     }
 
@@ -104,6 +106,24 @@ extension Certificate {
         }
         set {
             self.managedIsWithScore = NSNumber(value: newValue)
+        }
+    }
+
+    var editsCount: Int {
+        get {
+            self.managedEditsCount.intValue
+        }
+        set {
+            self.managedEditsCount = NSNumber(value: newValue)
+        }
+    }
+
+    var allowedEditsCount: Int {
+        get {
+            self.managedAllowedEditsCount.intValue
+        }
+        set {
+            self.managedAllowedEditsCount = NSNumber(value: newValue)
         }
     }
 

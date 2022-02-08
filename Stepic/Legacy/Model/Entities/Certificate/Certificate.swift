@@ -1,13 +1,14 @@
 import CoreData
 import SwiftyJSON
 
-@objc
 final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
     static var defaultSortDescriptors: [NSSortDescriptor] {
         [NSSortDescriptor(key: #keyPath(managedId), ascending: false)]
     }
+
+    var isEditAllowed: Bool { self.editsCount < self.allowedEditsCount }
 
     required convenience init(json: JSON) {
         self.init(entity: Self.entity, insertInto: CoreDataHelper.shared.context)
@@ -25,6 +26,8 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         self.urlString = json[JSONKey.url.rawValue].string
         self.isPublic = json[JSONKey.isPublic.rawValue].bool
         self.isWithScore = json[JSONKey.isWithScore.rawValue].boolValue
+        self.editsCount = json[JSONKey.editsCount.rawValue].intValue
+        self.allowedEditsCount = json[JSONKey.allowedEditsCount.rawValue].intValue
     }
 
     enum CertificateType: String {
@@ -43,5 +46,7 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         case url
         case isPublic = "is_public"
         case isWithScore = "is_with_score"
+        case editsCount = "edits_count"
+        case allowedEditsCount = "allowed_edits_count"
     }
 }

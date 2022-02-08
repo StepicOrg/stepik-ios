@@ -11,6 +11,8 @@ final class CertificatesPresenter {
 
     private let coursesNetworkService: CoursesNetworkServiceProtocol
 
+    private let userAccountService: UserAccountServiceProtocol
+
     private var currentCertificates = [Certificate]()
     private var currentPage = 1
     private var isFetchingNextPage = false
@@ -20,12 +22,14 @@ final class CertificatesPresenter {
         certificatesNetworkService: CertificatesNetworkServiceProtocol,
         certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
         coursesNetworkService: CoursesNetworkServiceProtocol,
+        userAccountService: UserAccountServiceProtocol,
         view: CertificatesView?
     ) {
         self.userID = userID
         self.certificatesNetworkService = certificatesNetworkService
         self.certificatesPersistenceService = certificatesPersistenceService
         self.coursesNetworkService = coursesNetworkService
+        self.userAccountService = userAccountService
         self.view = view
     }
 
@@ -121,12 +125,15 @@ final class CertificatesPresenter {
 
         let certificateDescriptionString = "\(certificateDescriptionBeginning) \(NSLocalizedString("CertificateDescriptionBody", comment: "")) \(certificate.course?.title ?? "")"
 
+        let isEditAvailable = certificate.isEditAllowed && self.userID == self.userAccountService.currentUserID
+
         return CertificateViewData(
             courseName: certificate.course?.title,
             courseImageURL: courseImageURL,
             grade: certificate.grade,
             certificateURL: certificateURL,
-            certificateDescription: certificateDescriptionString
+            certificateDescription: certificateDescriptionString,
+            isEditAvailable: isEditAvailable
         )
     }
 }

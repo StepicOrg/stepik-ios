@@ -22,6 +22,7 @@ final class CertificatesLegacyAssembly: Assembly {
             certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
             certificatesPersistenceService: CertificatesPersistenceService(),
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            userAccountService: UserAccountService(),
             view: certificatesVC
         )
         certificatesVC.analytics = StepikAnalytics.shared
@@ -104,8 +105,9 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         presenter?.getCachedCertificates()
         presenter?.refreshCertificates()
 
-        tableView.backgroundColor = .stepikGroupedBackground
-        tableView.contentInsetAdjustmentBehavior = .never
+        self.view.backgroundColor = .stepikGroupedBackground
+        self.tableView.backgroundColor = .stepikGroupedBackground
+        self.tableView.contentInsetAdjustmentBehavior = .never
 
         DispatchQueue.main.async {
             self.displayRefreshing()

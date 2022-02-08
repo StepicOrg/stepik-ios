@@ -1335,6 +1335,9 @@ NewProfileUserActivityLongestStreak = "Max streak %@";
 NewProfileStreakNotificationsNotifyPreference = "Notify About Streaks";
 NewProfileStreakNotificationsTimeSelection = "Notification Time";
 
+/* Certificate name change */
+CertificateNameChangeAction = "Change recipient name";
+
 /* In-App Purchases */
 IAPPurchaseSucceededTitle = "Purchase Succeeded";
 IAPPurchaseFailedTitle = "Purchase Failed";

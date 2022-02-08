@@ -1336,6 +1336,9 @@ NewProfileUserActivityLongestStreak = "Максимальная серия %@";
 NewProfileStreakNotificationsNotifyPreference = "Уведомления о занятиях";
 NewProfileStreakNotificationsTimeSelection = "Время напоминания";
 
+/* Certificate name change */
+CertificateNameChangeAction = "Изменить имя получателя";
+
 /* In-App Purchases */
 IAPPurchaseSucceededTitle = "Покупка удалась";
 IAPPurchaseFailedTitle = "Покупка не удалась";

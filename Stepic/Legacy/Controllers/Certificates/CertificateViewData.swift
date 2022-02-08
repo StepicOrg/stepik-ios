@@ -6,4 +6,5 @@ struct CertificateViewData {
     let grade: Int
     let certificateURL: URL?
     let certificateDescription: String?
+    let isEditAvailable: Bool
 }
