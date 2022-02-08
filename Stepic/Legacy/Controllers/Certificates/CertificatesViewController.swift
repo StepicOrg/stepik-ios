@@ -1,3 +1,4 @@
+import SVProgressHUD
 import UIKit
 
 @available(*, deprecated, message: "Class to initialize certificates w/o storyboards logic")
@@ -289,11 +290,72 @@ extension CertificatesViewController: UITableViewDataSource {
         cell.shareBlock = { [weak self] viewData, button in
             self?.shareCertificate(certificate: viewData, button: button)
         }
+        cell.editBlock = { [weak self] viewData, _ in
+            self?.promptForChangeCertificateNameInput(certificate: viewData)
+        }
 
         if certificates.count == indexPath.row + 1 && showNextPageFooter {
             loadNextPage()
         }
 
         return cell
+    }
+}
+
+// MARK: - CertificatesViewController (Certificate Change Name) -
+
+extension CertificatesViewController {
+    private func promptForChangeCertificateNameInput(certificate: CertificateViewData) {
+        let message = String(
+            format: NSLocalizedString("CertificateNameChangeAlertMessageWarning", comment: ""),
+            arguments: [FormatterHelper.timesCount(certificate.allowedEditsCount)]
+        )
+
+        let alert = UIAlertController(
+            title: NSLocalizedString("CertificateNameChangeAlertTitle", comment: ""),
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alert.addTextField()
+        alert.textFields?.first?.placeholder = NSLocalizedString(
+            "CertificateNameChangeAlertTextFieldPlaceholder",
+            comment: ""
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: ""),
+                style: .default,
+                handler: { [weak self, weak alert] _ in
+                    guard let strongSelf = self,
+                          let strongAlert = alert else {
+                        return
+                    }
+
+                    guard let text = strongAlert.textFields?.first?.text?.trimmed(),
+                          !text.isEmpty else {
+                        return SVProgressHUD.showError(
+                            withStatus: NSLocalizedString(
+                                "CertificateNameChangeEmptyTextFieldErrorMessage",
+                                comment: ""
+                            )
+                        )
+                    }
+
+                    print(text)
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
     }
 }

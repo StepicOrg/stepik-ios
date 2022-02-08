@@ -7,4 +7,5 @@ struct CertificateViewData {
     let certificateURL: URL?
     let certificateDescription: String?
     let isEditAvailable: Bool
+    let allowedEditsCount: Int
 }

@@ -133,7 +133,8 @@ final class CertificatesPresenter {
             grade: certificate.grade,
             certificateURL: certificateURL,
             certificateDescription: certificateDescriptionString,
-            isEditAvailable: isEditAvailable
+            isEditAvailable: isEditAvailable,
+            allowedEditsCount: certificate.allowedEditsCount
         )
     }
 }

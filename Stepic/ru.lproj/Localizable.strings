@@ -340,6 +340,9 @@ quizReviews567890 = "рецензий";
 submissions1 = "решение";
 submissions234 = "решения";
 submissions567890 = "решений";
+times1 = "раз";
+times234 = "раза";
+times567890 = "раз";
 SearchPlaceholderEmpty = "<b>Упс</b>, мы не нашли ни одного курса по запросу";
 SearchPlaceholderError = "Ошибка при поиске курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
 TagPlaceholderError = "Ошибка при загрузке курсов. <b>Нажмите</b>, чтобы попробовать еще раз";
@@ -1338,6 +1341,10 @@ NewProfileStreakNotificationsTimeSelection = "Время напоминания"
 
 /* Certificate name change */
 CertificateNameChangeAction = "Изменить имя получателя";
+CertificateNameChangeAlertTitle = "Изменить имя получателя";
+CertificateNameChangeAlertMessageWarning = "Внимание! Изменить имя получателя сертификата можно только %@.\nВведите имя:";
+CertificateNameChangeAlertTextFieldPlaceholder = "Имя получателя";
+CertificateNameChangeEmptyTextFieldErrorMessage = "Имя получателя не может быть пустым";
 
 /* In-App Purchases */
 IAPPurchaseSucceededTitle = "Покупка удалась";
