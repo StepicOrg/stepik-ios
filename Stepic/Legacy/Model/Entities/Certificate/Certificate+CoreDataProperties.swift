@@ -9,7 +9,17 @@ extension Certificate {
     @NSManaged var managedUpdateDate: Date?
     @NSManaged var managedGrade: NSNumber?
     @NSManaged var managedURL: String?
-    @NSManaged var managedisPublic: NSNumber?
+    @NSManaged var managedPreviewURL: String?
+    @NSManaged var managedIsPublic: NSNumber?
+    @NSManaged var managedUserRank: NSNumber?
+    @NSManaged var managedUserRankMax: NSNumber?
+    @NSManaged var managedLeaderboardSize: NSNumber?
+    @NSManaged var managedSavedFullName: String
+    @NSManaged var managedEditsCount: NSNumber
+    @NSManaged var managedAllowedEditsCount: NSNumber
+    @NSManaged var managedCourseTitle: String
+    @NSManaged var managedCourseIsPublic: NSNumber
+    @NSManaged var managedCourseLanguage: String
     @NSManaged var managedIsWithScore: NSNumber?
 
     @NSManaged var managedCourse: Course?
@@ -23,7 +33,7 @@ extension Certificate {
         }
     }
 
-    var courseId: Int {
+    var courseID: Int {
         get {
             self.managedCourseId?.intValue ?? -1
         }
@@ -32,7 +42,7 @@ extension Certificate {
         }
     }
 
-    var userId: Int {
+    var userID: Int {
         get {
             self.managedUserId?.intValue ?? -1
         }
@@ -89,12 +99,102 @@ extension Certificate {
         }
     }
 
-    var isPublic: Bool? {
+    var previewURLString: String? {
         get {
-            self.managedisPublic?.boolValue ?? false
+            self.managedPreviewURL
         }
         set {
-            self.managedisPublic = newValue as NSNumber?
+            self.managedPreviewURL = newValue
+        }
+    }
+
+    var isPublic: Bool? {
+        get {
+            self.managedIsPublic?.boolValue ?? false
+        }
+        set {
+            self.managedIsPublic = newValue as NSNumber?
+        }
+    }
+
+    var userRank: Int? {
+        get {
+            self.managedUserRank?.intValue
+        }
+        set {
+            self.managedUserRank = newValue as NSNumber?
+        }
+    }
+
+    var userRankMax: Int? {
+        get {
+            self.managedUserRankMax?.intValue
+        }
+        set {
+            self.managedUserRankMax = newValue as NSNumber?
+        }
+    }
+
+    var leaderboardSize: Int? {
+        get {
+            self.managedLeaderboardSize?.intValue
+        }
+        set {
+            self.managedLeaderboardSize = newValue as NSNumber?
+        }
+    }
+
+    var savedFullName: String {
+        get {
+            self.managedSavedFullName
+        }
+        set {
+            self.managedSavedFullName = newValue
+        }
+    }
+
+    var editsCount: Int {
+        get {
+            self.managedEditsCount.intValue
+        }
+        set {
+            self.managedEditsCount = NSNumber(value: newValue)
+        }
+    }
+
+    var allowedEditsCount: Int {
+        get {
+            self.managedAllowedEditsCount.intValue
+        }
+        set {
+            self.managedAllowedEditsCount = NSNumber(value: newValue)
+        }
+    }
+
+    var courseTitle: String {
+        get {
+            self.managedCourseTitle
+        }
+        set {
+            self.managedCourseTitle = newValue
+        }
+    }
+
+    var courseIsPublic: Bool {
+        get {
+            self.managedCourseIsPublic.boolValue
+        }
+        set {
+            self.managedCourseIsPublic = NSNumber(value: newValue)
+        }
+    }
+
+    var courseLanguage: String {
+        get {
+            self.managedCourseLanguage
+        }
+        set {
+            self.managedCourseLanguage = newValue
         }
     }
 

@@ -4,6 +4,8 @@ import PromiseKit
 protocol CertificatesNetworkServiceProtocol: AnyObject {
     func fetch(userID: User.IdType, page: Int) -> Promise<([Certificate], Meta)>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<[Certificate]>
+
+    func update(certificate: Certificate) -> Promise<Certificate>
 }
 
 extension CertificatesNetworkServiceProtocol {
@@ -39,7 +41,18 @@ final class CertificatesNetworkService: CertificatesNetworkServiceProtocol {
         }
     }
 
+    func update(certificate: Certificate) -> Promise<Certificate> {
+        Promise { seal in
+            self.certificatesAPI.update(certificate).done { certificate in
+                seal.fulfill(certificate)
+            }.catch { _ in
+                seal.reject(Error.updateFailed)
+            }
+        }
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
+        case updateFailed
     }
 }

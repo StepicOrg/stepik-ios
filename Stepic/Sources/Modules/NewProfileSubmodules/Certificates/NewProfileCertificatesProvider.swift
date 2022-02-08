@@ -54,16 +54,16 @@ final class NewProfileCertificatesProvider: NewProfileCertificatesProviderProtoc
                 return
             }
 
+            let coursesMap = Dictionary(courses.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
+
             for certificate in certificates {
-                if let course = courses.first(where: { $0.id == certificate.courseId }) {
-                    certificate.course = course
-                }
+                certificate.course = coursesMap[certificate.courseID]
             }
 
             CoreDataHelper.shared.save()
         }
 
-        let courseIDs = certificates.map(\.courseId)
+        let courseIDs = certificates.map(\.courseID)
 
         return firstly { () -> Promise<([Course], Meta)> in
             self.coursesPersistenceService.fetch(ids: courseIDs)

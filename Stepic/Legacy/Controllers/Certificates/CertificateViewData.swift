@@ -1,17 +1,16 @@
-//
-//  CertificateViewData.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 12.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
-struct CertificateViewData {
+struct CertificateViewData: UniqueIdentifiable {
+    let uniqueIdentifier: UniqueIdentifierType
+
     let courseName: String?
     let courseImageURL: URL?
     let grade: Int
     let certificateURL: URL?
     let certificateDescription: String?
+
+    let isEditAvailable: Bool
+    let editsCount: Int
+    let allowedEditsCount: Int
+    let savedFullName: String
 }

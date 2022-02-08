@@ -1,12 +1,5 @@
-//
-//  CertificatesViewController.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 12.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
-import Foundation
+import SVProgressHUD
+import UIKit
 
 @available(*, deprecated, message: "Class to initialize certificates w/o storyboards logic")
 final class CertificatesLegacyAssembly: Assembly {
@@ -27,10 +20,10 @@ final class CertificatesLegacyAssembly: Assembly {
         certificatesVC.userID = self.userID
         certificatesVC.presenter = CertificatesPresenter(
             userID: self.userID,
-            certificatesAPI: ApiDataDownloader.certificates,
-            coursesAPI: ApiDataDownloader.courses,
-            presentationContainer: PresentationContainer.certificates,
+            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
             certificatesPersistenceService: CertificatesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            userAccountService: UserAccountService(),
             view: certificatesVC
         )
         certificatesVC.analytics = StepikAnalytics.shared
@@ -38,6 +31,8 @@ final class CertificatesLegacyAssembly: Assembly {
         return certificatesVC
     }
 }
+
+// MARK: - CertificatesViewController -
 
 final class CertificatesViewController: UIViewController, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -60,6 +55,9 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         return paginationView
     }()
 
+    private weak var changeCertificateNameTextField: UITextField?
+    private weak var changeCertificateNameOKAction: UIAlertAction?
+
     var presenter: CertificatesPresenter?
     var userID: User.IdType?
 
@@ -67,6 +65,12 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
     private var certificates: [CertificateViewData] = []
     private var showNextPageFooter = false
+
+    private var hasLoadedData = false {
+        didSet {
+            self.updateEmptySetPlaceholder()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,14 +81,6 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
             tableView.sectionHeaderTopPadding = 0
         }
 
-        let isMe = AuthInfo.shared.userId != nil && self.userID == AuthInfo.shared.userId
-        if isMe {
-            self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesMe) { [weak self] in
-                self?.tabBarController?.selectedIndex = 1
-            }
-        } else {
-            self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesOther)
-        }
         self.tableView.loadingPlaceholder = StepikPlaceholder(.emptyCertificatesLoading)
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
@@ -113,8 +109,9 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         presenter?.getCachedCertificates()
         presenter?.refreshCertificates()
 
-        tableView.backgroundColor = .stepikGroupedBackground
-        tableView.contentInsetAdjustmentBehavior = .never
+        self.view.backgroundColor = .stepikGroupedBackground
+        self.tableView.backgroundColor = .stepikGroupedBackground
+        self.tableView.contentInsetAdjustmentBehavior = .never
 
         DispatchQueue.main.async {
             self.displayRefreshing()
@@ -132,6 +129,21 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         if segue.identifier == "showProfile" {
             let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
+        }
+    }
+
+    private func updateEmptySetPlaceholder() {
+        if self.hasLoadedData {
+            let isMe = AuthInfo.shared.userId != nil && self.userID == AuthInfo.shared.userId
+            if isMe {
+                self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesMe) {
+                    TabBarRouter(tab: .catalog()).route()
+                }
+            } else {
+                self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesOther)
+            }
+        } else {
+            self.tableView.emptySetPlaceholder = nil
         }
     }
 
@@ -169,8 +181,12 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
     }
 }
 
+// MARK: - CertificatesViewController: CertificatesView -
+
 extension CertificatesViewController: CertificatesView {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool) {
+        self.hasLoadedData = true
+
         self.certificates = certificates
         self.showNextPageFooter = hasNextPage
 
@@ -202,11 +218,9 @@ extension CertificatesViewController: CertificatesView {
     func displayLoadNextPageError() {
         self.paginationView.setError()
     }
-
-    func updateData() {
-        tableView.reloadData()
-    }
 }
+
+// MARK: - CertificatesViewController: UITableViewDelegate -
 
 extension CertificatesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -253,6 +267,8 @@ extension CertificatesViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - CertificatesViewController: UITableViewDataSource -
+
 extension CertificatesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         self.certificates.isEmpty ? 0 : 1
@@ -277,11 +293,154 @@ extension CertificatesViewController: UITableViewDataSource {
         cell.shareBlock = { [weak self] viewData, button in
             self?.shareCertificate(certificate: viewData, button: button)
         }
+        cell.editBlock = { [weak self] viewData, _ in
+            self?.promptForChangeCertificateNameInput(certificate: viewData)
+        }
 
         if certificates.count == indexPath.row + 1 && showNextPageFooter {
             loadNextPage()
         }
 
         return cell
+    }
+}
+
+// MARK: - CertificatesViewController (Certificate Change Name) -
+
+extension CertificatesViewController {
+    private func promptForChangeCertificateNameInput(
+        certificate: CertificateViewData,
+        predefinedNewFullName: String? = nil
+    ) {
+        let message = String(
+            format: NSLocalizedString("CertificateNameChangeAlertMessageWarning", comment: ""),
+            arguments: [FormatterHelper.timesCount(certificate.allowedEditsCount)]
+        )
+
+        let alert = UIAlertController(
+            title: NSLocalizedString("CertificateNameChangeAlertTitle", comment: ""),
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alert.addTextField()
+        self.changeCertificateNameTextField = alert.textFields?.first
+        self.changeCertificateNameTextField?.placeholder = NSLocalizedString(
+            "CertificateNameChangeAlertTextFieldPlaceholder",
+            comment: ""
+        )
+        self.changeCertificateNameTextField?.delegate = self
+        if let predefinedNewFullName = predefinedNewFullName {
+            self.changeCertificateNameTextField?.text = predefinedNewFullName
+        }
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        let okAction = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default,
+            handler: { [weak self, weak alert] _ in
+                guard let strongSelf = self,
+                      let strongAlert = alert else {
+                    return
+                }
+
+                guard let text = strongAlert.textFields?.first?.text?.trimmed(),
+                      !text.isEmpty else {
+                    return SVProgressHUD.showError(
+                        withStatus: NSLocalizedString("CertificateNameChangeEmptyTextFieldErrorMessage", comment: "")
+                    )
+                }
+
+                strongSelf.promptForChangeCertificateName(certificate: certificate, newFullName: text)
+            }
+        )
+        okAction.isEnabled = !(predefinedNewFullName ?? "").trimmed().isEmpty
+        alert.addAction(okAction)
+        self.changeCertificateNameOKAction = okAction
+
+        self.present(alert, animated: true)
+    }
+
+    private func promptForChangeCertificateName(certificate: CertificateViewData, newFullName: String) {
+        var message = String(
+            format: NSLocalizedString("CertificateNameChangeAlertMessageConfirmation", comment: ""),
+            arguments: [certificate.savedFullName, newFullName]
+        )
+
+        let isLastEdit = (certificate.editsCount + 1) == certificate.allowedEditsCount
+        if isLastEdit {
+            message += "\n\(NSLocalizedString("CertificateNameChangeAlertMessageLastEditWarning", comment: ""))"
+        }
+
+        let alert = UIAlertController(
+            title: NSLocalizedString("CertificateNameChangeAlertTitle", comment: ""),
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    SVProgressHUD.show()
+
+                    strongSelf.presenter?.updateCertificateName(
+                        viewDataUniqueIdentifier: certificate.uniqueIdentifier,
+                        newFullName: newFullName
+                    ).done { updatedCertificate in
+                        SVProgressHUD.showSuccess(
+                            withStatus: NSLocalizedString("CertificateNameChangeSuccessStatusMessage", comment: "")
+                        )
+
+                        let certificateIndexOrNil = strongSelf.certificates.firstIndex(
+                            where: { $0.uniqueIdentifier == updatedCertificate.uniqueIdentifier }
+                        )
+
+                        if let certificateIndex = certificateIndexOrNil {
+                            strongSelf.certificates[certificateIndex] = updatedCertificate
+                            strongSelf.tableView.reloadData()
+                        }
+                    }.catch { _ in
+                        SVProgressHUD.showError(
+                            withStatus: NSLocalizedString("CertificateNameChangeErrorStatusMessage", comment: "")
+                        )
+                        strongSelf.promptForChangeCertificateNameInput(
+                            certificate: certificate,
+                            predefinedNewFullName: newFullName
+                        )
+                    }
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+}
+
+// MARK: - CertificatesViewController: UITextFieldDelegate -
+
+extension CertificatesViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard self.changeCertificateNameTextField === textField else {
+            return true
+        }
+
+        let stringFromTextField = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+
+        self.changeCertificateNameOKAction?.isEnabled = !stringFromTextField.trimmed().isEmpty
+
+        return true
     }
 }
