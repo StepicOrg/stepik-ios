@@ -55,6 +55,13 @@ enum Parser {
         return UIColor(hex6: hexUIntValue)
     }
 
+    static func timedateStringFromDate(dateOrNil: Date?) -> String? {
+        if let date = dateOrNil {
+            return self.timedateStringFromDate(date: date)
+        }
+        return nil
+    }
+
     static func timedateStringFromDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"

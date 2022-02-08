@@ -1343,6 +1343,10 @@ CertificateNameChangeAction = "Change Recipient Name";
 CertificateNameChangeAlertTitle = "Change Recipient Name";
 CertificateNameChangeAlertMessageWarning = "Warning! You can change the certificate recipient name only %@.\nEnter name:";
 CertificateNameChangeAlertTextFieldPlaceholder = "Recipient name";
+CertificateNameChangeAlertMessageConfirmation = "Are you sure that you want to change the certificate recipient name from \"%@\" to \"%@\"?";
+CertificateNameChangeAlertMessageLastEditWarning = "Warning! After this confirmation you will not be able to change the certificate recipient name.";
+CertificateNameChangeSuccessStatusMessage = "Certificate recipient name changed";
+CertificateNameChangeErrorStatusMessage = "Failed to change certificate recipient name";
 CertificateNameChangeEmptyTextFieldErrorMessage = "Recipient name must not be empty";
 
 /* In-App Purchases */

@@ -92,6 +92,32 @@ final class CertificatesPresenter {
         return true
     }
 
+    func updateCertificateName(
+        viewDataUniqueIdentifier: UniqueIdentifierType,
+        newFullName: String
+    ) -> Promise<CertificateViewData> {
+        guard let certificateEntity = self.currentCertificates.first(
+            where: { "\($0.id)" == viewDataUniqueIdentifier }
+        ) else {
+            return Promise(error: Error.updateCertificateNameFailed)
+        }
+
+        let oldFullName = certificateEntity.savedFullName
+        certificateEntity.savedFullName = newFullName
+
+        return Promise { seal in
+            self.certificatesNetworkService.update(certificate: certificateEntity).done { updatedCertificate in
+                let viewData = self.makeViewData(from: updatedCertificate)
+                seal.fulfill(viewData)
+            }.catch { _ in
+                certificateEntity.savedFullName = oldFullName
+                seal.reject(Error.updateCertificateNameFailed)
+            }.finally {
+                CoreDataHelper.shared.save()
+            }
+        }
+    }
+
     // MARK: Private API
 
     private func loadCoursesForCertificates(_ certificates: [Certificate]) -> Promise<Void> {
@@ -128,13 +154,20 @@ final class CertificatesPresenter {
         let isEditAvailable = certificate.isEditAllowed && self.userID == self.userAccountService.currentUserID
 
         return CertificateViewData(
+            uniqueIdentifier: "\(certificate.id)",
             courseName: certificate.course?.title,
             courseImageURL: courseImageURL,
             grade: certificate.grade,
             certificateURL: certificateURL,
             certificateDescription: certificateDescriptionString,
             isEditAvailable: isEditAvailable,
-            allowedEditsCount: certificate.allowedEditsCount
+            editsCount: certificate.editsCount,
+            allowedEditsCount: certificate.allowedEditsCount,
+            savedFullName: certificate.savedFullName
         )
+    }
+
+    enum Error: Swift.Error {
+        case updateCertificateNameFailed
     }
 }

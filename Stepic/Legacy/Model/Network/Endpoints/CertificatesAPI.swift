@@ -41,6 +41,15 @@ final class CertificatesAPI: APIEndpoint {
         )
     }
 
+    func update(_ certificate: Certificate) -> Promise<Certificate> {
+        self.update.request(
+            requestEndpoint: self.name,
+            paramName: "certificate",
+            updatingObject: certificate,
+            withManager: self.manager
+        )
+    }
+
     enum Order: String {
         case idDesc = "-id"
     }

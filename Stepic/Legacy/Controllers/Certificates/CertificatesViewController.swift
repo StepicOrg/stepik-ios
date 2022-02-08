@@ -55,6 +55,9 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         return paginationView
     }()
 
+    private weak var changeCertificateNameTextField: UITextField?
+    private weak var changeCertificateNameOKAction: UIAlertAction?
+
     var presenter: CertificatesPresenter?
     var userID: User.IdType?
 
@@ -305,7 +308,10 @@ extension CertificatesViewController: UITableViewDataSource {
 // MARK: - CertificatesViewController (Certificate Change Name) -
 
 extension CertificatesViewController {
-    private func promptForChangeCertificateNameInput(certificate: CertificateViewData) {
+    private func promptForChangeCertificateNameInput(
+        certificate: CertificateViewData,
+        predefinedNewFullName: String? = nil
+    ) {
         let message = String(
             format: NSLocalizedString("CertificateNameChangeAlertMessageWarning", comment: ""),
             arguments: [FormatterHelper.timesCount(certificate.allowedEditsCount)]
@@ -318,44 +324,123 @@ extension CertificatesViewController {
         )
 
         alert.addTextField()
-        alert.textFields?.first?.placeholder = NSLocalizedString(
+        self.changeCertificateNameTextField = alert.textFields?.first
+        self.changeCertificateNameTextField?.placeholder = NSLocalizedString(
             "CertificateNameChangeAlertTextFieldPlaceholder",
             comment: ""
         )
+        self.changeCertificateNameTextField?.delegate = self
+        if let predefinedNewFullName = predefinedNewFullName {
+            self.changeCertificateNameTextField?.text = predefinedNewFullName
+        }
 
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Cancel", comment: ""),
-                style: .cancel,
-                handler: nil
-            )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        let okAction = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default,
+            handler: { [weak self, weak alert] _ in
+                guard let strongSelf = self,
+                      let strongAlert = alert else {
+                    return
+                }
+
+                guard let text = strongAlert.textFields?.first?.text?.trimmed(),
+                      !text.isEmpty else {
+                    return SVProgressHUD.showError(
+                        withStatus: NSLocalizedString("CertificateNameChangeEmptyTextFieldErrorMessage", comment: "")
+                    )
+                }
+
+                strongSelf.promptForChangeCertificateName(certificate: certificate, newFullName: text)
+            }
         )
+        okAction.isEnabled = !(predefinedNewFullName ?? "").trimmed().isEmpty
+        alert.addAction(okAction)
+        self.changeCertificateNameOKAction = okAction
+
+        self.present(alert, animated: true)
+    }
+
+    private func promptForChangeCertificateName(certificate: CertificateViewData, newFullName: String) {
+        var message = String(
+            format: NSLocalizedString("CertificateNameChangeAlertMessageConfirmation", comment: ""),
+            arguments: [certificate.savedFullName, newFullName]
+        )
+
+        let isLastEdit = (certificate.editsCount + 1) == certificate.allowedEditsCount
+        if isLastEdit {
+            message += "\n\(NSLocalizedString("CertificateNameChangeAlertMessageLastEditWarning", comment: ""))"
+        }
+
+        let alert = UIAlertController(
+            title: NSLocalizedString("CertificateNameChangeAlertTitle", comment: ""),
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
 
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("OK", comment: ""),
                 style: .default,
-                handler: { [weak self, weak alert] _ in
-                    guard let strongSelf = self,
-                          let strongAlert = alert else {
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
                         return
                     }
 
-                    guard let text = strongAlert.textFields?.first?.text?.trimmed(),
-                          !text.isEmpty else {
-                        return SVProgressHUD.showError(
-                            withStatus: NSLocalizedString(
-                                "CertificateNameChangeEmptyTextFieldErrorMessage",
-                                comment: ""
-                            )
+                    SVProgressHUD.show()
+
+                    strongSelf.presenter?.updateCertificateName(
+                        viewDataUniqueIdentifier: certificate.uniqueIdentifier,
+                        newFullName: newFullName
+                    ).done { updatedCertificate in
+                        SVProgressHUD.showSuccess(
+                            withStatus: NSLocalizedString("CertificateNameChangeSuccessStatusMessage", comment: "")
+                        )
+
+                        let certificateIndexOrNil = strongSelf.certificates.firstIndex(
+                            where: { $0.uniqueIdentifier == updatedCertificate.uniqueIdentifier }
+                        )
+
+                        if let certificateIndex = certificateIndexOrNil {
+                            strongSelf.certificates[certificateIndex] = updatedCertificate
+                            strongSelf.tableView.reloadData()
+                        }
+                    }.catch { _ in
+                        SVProgressHUD.showError(
+                            withStatus: NSLocalizedString("CertificateNameChangeErrorStatusMessage", comment: "")
+                        )
+                        strongSelf.promptForChangeCertificateNameInput(
+                            certificate: certificate,
+                            predefinedNewFullName: newFullName
                         )
                     }
-
-                    print(text)
                 }
             )
         )
 
         self.present(alert, animated: true)
+    }
+}
+
+// MARK: - CertificatesViewController: UITextFieldDelegate -
+
+extension CertificatesViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard self.changeCertificateNameTextField === textField else {
+            return true
+        }
+
+        let stringFromTextField = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+
+        self.changeCertificateNameOKAction?.isEnabled = !stringFromTextField.trimmed().isEmpty
+
+        return true
     }
 }

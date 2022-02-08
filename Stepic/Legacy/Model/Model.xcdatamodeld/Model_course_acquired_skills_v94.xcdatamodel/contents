@@ -73,16 +73,24 @@
     <entity name="Certificate" representedClassName=".Certificate" syncable="YES">
         <attribute name="managedAllowedEditsCount" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCourseId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedCourseIsPublic" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedCourseLanguage" attributeType="String" defaultValueString="ru" syncable="YES"/>
+        <attribute name="managedCourseTitle" attributeType="String" defaultValueString="" syncable="YES"/>
         <attribute name="managedEditsCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedGrade" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsPublic" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIssueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsWithScore" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedLeaderboardSize" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedPreviewURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSavedFullName" attributeType="String" defaultValueString="" syncable="YES"/>
         <attribute name="managedType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedUserRank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedUserRankMax" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedCertificateEntity" inverseEntity="Course" syncable="YES"/>
     </entity>
     <entity name="CodeLimit" representedClassName=".CodeLimit" syncable="YES">
@@ -624,7 +632,7 @@
         <element name="AttemptEntity" positionX="-450" positionY="-234" width="128" height="194"/>
         <element name="Block" positionX="-85.77734375" positionY="236.91796875" width="128" height="105"/>
         <element name="CatalogBlockEntity" positionX="-450" positionY="-234" width="128" height="179"/>
-        <element name="Certificate" positionX="-372.0390625" positionY="364.015625" width="128" height="224"/>
+        <element name="Certificate" positionX="-372.0390625" positionY="364.015625" width="128" height="344"/>
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
