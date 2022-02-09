@@ -10,9 +10,14 @@ protocol CourseInfoTabInfoAboutBlockViewDelegate: AnyObject {
 
 extension CourseInfoTabInfoAboutBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
+        var titleLabelAppearance = CourseInfoTabInfoLabel.Appearance(
+            maxLinesCount: 1,
+            font: Typography.headlineFont,
+            textColor: UIColor.stepikMaterialPrimaryText
+        )
+        var titleLabelInsets = LayoutInsets(left: 16, right: 16)
 
-        let contentTextViewInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
+        let contentTextViewInsets = LayoutInsets(top: 20, left: 16, right: 16)
         let contentTextViewFont = Typography.subheadlineFont
         let contentTextViewTextColor = UIColor.stepikMaterialSecondaryText
 
@@ -25,12 +30,7 @@ final class CourseInfoTabInfoAboutBlockView: UIView {
 
     weak var delegate: CourseInfoTabInfoAboutBlockViewDelegate?
 
-    private lazy var headerView: CourseInfoTabInfoHeaderBlockView = {
-        let view = CourseInfoTabInfoHeaderBlockView()
-        view.icon = CourseInfoTabInfoView.Block.about.icon
-        view.title = CourseInfoTabInfoView.Block.about.title
-        return view
-    }()
+    private lazy var titleLabel = CourseInfoTabInfoLabel(appearance: self.appearance.titleLabelAppearance)
 
     private lazy var processedContentView: ProcessedContentView = {
         let appearance = ProcessedContentView.Appearance(
@@ -60,6 +60,12 @@ final class CourseInfoTabInfoAboutBlockView: UIView {
 
         return processedContentView
     }()
+
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
 
     var text: String? {
         didSet {
@@ -91,24 +97,20 @@ extension CourseInfoTabInfoAboutBlockView: ProgrammaticallyInitializableViewProt
     }
 
     func addSubviews() {
-        self.addSubview(self.headerView)
+        self.addSubview(self.titleLabel)
         self.addSubview(self.processedContentView)
     }
 
     func makeConstraints() {
-        self.headerView.translatesAutoresizingMaskIntoConstraints = false
-        self.headerView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.headerViewInsets.left)
-            make.top.equalToSuperview().offset(self.appearance.headerViewInsets.top)
-            make.trailing.equalToSuperview().offset(-self.appearance.headerViewInsets.right).priority(999)
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview().inset(self.appearance.titleLabelInsets.edgeInsets)
         }
 
         self.processedContentView.translatesAutoresizingMaskIntoConstraints = false
         self.processedContentView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.contentTextViewInsets.left)
-            make.bottom.equalToSuperview().offset(-self.appearance.contentTextViewInsets.bottom)
-            make.trailing.equalTo(self.headerView).priority(999)
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.contentTextViewInsets.top)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.contentTextViewInsets.top)
+            make.leading.bottom.trailing.equalToSuperview().inset(self.appearance.contentTextViewInsets.edgeInsets)
         }
     }
 }

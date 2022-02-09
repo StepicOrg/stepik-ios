@@ -47,6 +47,7 @@ extension Course {
     @NSManaged var managedInstructorsArray: NSObject?
     @NSManaged var managedAuthorsArray: NSObject?
     @NSManaged var managedAnnouncementsArray: NSObject?
+    @NSManaged var managedAcquiredSkillsArray: NSObject?
 
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
@@ -653,6 +654,15 @@ extension Course {
         }
         set {
             self.managedAnnouncementsArray = NSArray(array: newValue)
+        }
+    }
+
+    var acquiredSkillsArray: [String] {
+        get {
+            self.managedAcquiredSkillsArray as? [String] ?? []
+        }
+        set {
+            self.managedAcquiredSkillsArray = NSArray(array: newValue)
         }
     }
 

@@ -6,7 +6,6 @@ import SwiftyJSON
 final class ApiDataDownloader {
     static let attempts = AttemptsAPI()
     static let auth = AuthAPI()
-    static let certificates = CertificatesAPI()
     static let courses = CoursesAPI()
     static let discussionThreads = DiscussionThreadsAPI()
     static let enrollments = EnrollmentsAPI()

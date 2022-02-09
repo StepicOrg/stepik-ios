@@ -32,11 +32,20 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
-        let authorsViewModel = course.authors.map { author in
-            CourseInfoTabInfoAuthorViewModel(id: author.id, name: FormatterHelper.username(author))
+        let authorsIDs = Set(course.authorsArray).subtracting(Set(course.instructorsArray))
+        let authorsViewModel = course.authors.compactMap { author -> CourseInfoTabInfoAuthorViewModel? in
+            guard authorsIDs.contains(author.id) else {
+                return nil
+            }
+
+            return CourseInfoTabInfoAuthorViewModel(
+                id: author.id,
+                name: FormatterHelper.username(author),
+                avatarImageURL: URL(string: author.avatarURL)
+            )
         }
 
-        let aboutText = course.courseDescription.isEmpty ? course.summary : course.courseDescription
+        let acquiredSkills = course.acquiredSkillsArray.map { $0.trimmed() }.filter { !$0.isEmpty }
 
         let certificateText = self.makeFormattedCertificateText(course: course)
         let certificateDetailsText = course.isWithCertificate
@@ -57,11 +66,13 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
         return CourseInfoTabInfoViewModel(
             authors: authorsViewModel,
+            acquiredSkills: acquiredSkills,
             introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
-            aboutText: aboutText,
-            requirementsText: course.requirements.trimmingCharacters(in: .whitespacesAndNewlines),
-            targetAudienceText: course.audience.trimmingCharacters(in: .whitespacesAndNewlines),
+            summaryText: course.summary.trimmed(),
+            aboutText: course.courseDescription.trimmed(),
+            requirementsText: course.requirements.trimmed(),
+            targetAudienceText: course.audience.trimmed(),
             timeToCompleteText: self.makeFormattedTimeToCompleteText(timeToComplete: course.timeToComplete),
             languageText: self.makeLocalizedLanguageText(code: course.languageCode),
             certificateText: certificateText,

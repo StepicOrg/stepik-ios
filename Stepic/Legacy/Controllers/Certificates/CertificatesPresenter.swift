@@ -1,113 +1,137 @@
-//
-//  CertificatesPresenter.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 12.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import Foundation
+import PromiseKit
 
 final class CertificatesPresenter {
     weak var view: CertificatesView?
 
     private let userID: User.IdType
-    private let certificatesAPI: CertificatesAPI
-    private let coursesAPI: CoursesAPI
-    private let presentationContainer: CertificatesPresentationContainer
 
+    private let certificatesNetworkService: CertificatesNetworkServiceProtocol
     private let certificatesPersistenceService: CertificatesPersistenceServiceProtocol
 
-    private var certificates: [Certificate] = [] {
-        didSet {
-            self.updatePersistentPresentationData()
-        }
-    }
+    private let coursesNetworkService: CoursesNetworkServiceProtocol
 
-    private var page = 1
-    private var isGettingNextPage = false
+    private let userAccountService: UserAccountServiceProtocol
+
+    private var currentCertificates = [Certificate]()
+    private var currentPage = 1
+    private var isFetchingNextPage = false
 
     init(
         userID: User.IdType,
-        certificatesAPI: CertificatesAPI,
-        coursesAPI: CoursesAPI,
-        presentationContainer: CertificatesPresentationContainer,
+        certificatesNetworkService: CertificatesNetworkServiceProtocol,
         certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
+        coursesNetworkService: CoursesNetworkServiceProtocol,
+        userAccountService: UserAccountServiceProtocol,
         view: CertificatesView?
     ) {
         self.userID = userID
-        self.certificatesAPI = certificatesAPI
-        self.coursesAPI = coursesAPI
-        self.presentationContainer = presentationContainer
+        self.certificatesNetworkService = certificatesNetworkService
         self.certificatesPersistenceService = certificatesPersistenceService
+        self.coursesNetworkService = coursesNetworkService
+        self.userAccountService = userAccountService
         self.view = view
     }
 
-    func getCachedCertificates() {
-        let localIds = self.presentationContainer.certificatesIds
+    // MARK: Public API
 
-        self.certificatesPersistenceService.fetch(ids: localIds, userID: self.userID).done { cachedCertificates in
-            let localCertificates = cachedCertificates.sorted(by: {
-                guard let index1 = localIds.firstIndex(of: $0.id),
-                      let index2 = localIds.firstIndex(of: $1.id) else {
-                    return false
-                }
-                return index1 < index2
-            }).compactMap { [weak self] in
-                self?.makeViewData(from: $0)
+    func getCachedCertificates() {
+        self.certificatesPersistenceService.fetch(userID: self.userID).done { cachedCertificates in
+            if cachedCertificates.isEmpty {
+                return
             }
 
-            self.view?.setCertificates(certificates: localCertificates, hasNextPage: false)
+            let viewData = cachedCertificates.map(self.makeViewData(from:))
+            self.view?.setCertificates(certificates: viewData, hasNextPage: false)
         }
-    }
-
-    private func updatePersistentPresentationData() {
-        self.presentationContainer.certificatesIds = certificates.map { $0.id }
     }
 
     func refreshCertificates() {
-        view?.displayRefreshing()
+        self.view?.displayRefreshing()
 
-        self.certificatesAPI.retrieve(userId: self.userID, success: { [weak self] meta, newCertificates in
-            self?.certificates = newCertificates
-            self?.page = 1
+        self.certificatesNetworkService.fetch(
+            userID: self.userID
+        ).then { fetchResult -> Promise<([Certificate], Meta)> in
+            self.loadCoursesForCertificates(fetchResult.0).map { fetchResult }
+        }.done { certificates, meta in
+            self.currentCertificates = certificates
+            self.currentPage = 1
 
-            self?.loadCoursesForCertificates(certificates: newCertificates, completion: { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.view?.setCertificates(certificates: strongSelf.certificates.compactMap({ [weak self] in
-                    self?.makeViewData(from: $0)
-                }), hasNextPage: meta.hasNext)
-                strongSelf.view?.displayEmpty()
-                CoreDataHelper.shared.save()
-            })
-        }, error: { [weak self] _ in
-            self?.view?.displayError()
-        })
+            let viewData = self.currentCertificates.map(self.makeViewData(from:))
+            self.view?.setCertificates(certificates: viewData, hasNextPage: meta.hasNext)
+        }.catch { _ in
+            self.view?.displayError()
+        }
     }
 
-    private func loadCoursesForCertificates(certificates: [Certificate], completion: @escaping () -> Void) {
-        func matchCoursesToCertificates(courses: [Course]) {
-            for certificate in certificates {
-                if let filtered = courses.filter({ $0.id == certificate.courseId }).first {
-                    certificate.course = filtered
-                }
-            }
+    func getNextPage() -> Bool {
+        if self.isFetchingNextPage {
+            return false
         }
 
-        let courseIds = certificates.map { $0.courseId }
+        self.isFetchingNextPage = true
+        let nextPageIndex = self.currentPage + 1
 
-        let localCourses = [Course]()
-        matchCoursesToCertificates(courses: localCourses)
+        self.certificatesNetworkService.fetch(
+            userID: self.userID,
+            page: nextPageIndex
+        ).then { fetchResult -> Promise<([Certificate], Meta)> in
+            self.loadCoursesForCertificates(fetchResult.0).map { fetchResult }
+        }.done { certificates, meta in
+            self.currentPage = nextPageIndex
+            self.currentCertificates += certificates
 
-        self.coursesAPI.retrieve(ids: courseIds, existing: localCourses, refreshMode: .update, success: { courses in
-            matchCoursesToCertificates(courses: courses)
-            completion()
-        }, error: { _ in
-            completion()
-        })
+            let viewData = self.currentCertificates.map(self.makeViewData(from:))
+            self.view?.setCertificates(certificates: viewData, hasNextPage: meta.hasNext)
+        }.ensure {
+            self.isFetchingNextPage = false
+        }.catch { _ in
+            self.view?.displayLoadNextPageError()
+        }
+
+        return true
+    }
+
+    func updateCertificateName(
+        viewDataUniqueIdentifier: UniqueIdentifierType,
+        newFullName: String
+    ) -> Promise<CertificateViewData> {
+        guard let certificateEntity = self.currentCertificates.first(
+            where: { "\($0.id)" == viewDataUniqueIdentifier }
+        ) else {
+            return Promise(error: Error.updateCertificateNameFailed)
+        }
+
+        let oldFullName = certificateEntity.savedFullName
+        certificateEntity.savedFullName = newFullName
+
+        return Promise { seal in
+            self.certificatesNetworkService.update(certificate: certificateEntity).done { updatedCertificate in
+                let viewData = self.makeViewData(from: updatedCertificate)
+                seal.fulfill(viewData)
+            }.catch { _ in
+                certificateEntity.savedFullName = oldFullName
+                seal.reject(Error.updateCertificateNameFailed)
+            }.finally {
+                CoreDataHelper.shared.save()
+            }
+        }
+    }
+
+    // MARK: Private API
+
+    private func loadCoursesForCertificates(_ certificates: [Certificate]) -> Promise<Void> {
+        self.coursesNetworkService.fetch(ids: certificates.map(\.courseID)).done { courses in
+            if certificates.isEmpty || courses.isEmpty {
+                return
+            }
+
+            let coursesMap = Dictionary(courses.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
+
+            for certificate in certificates {
+                certificate.course = coursesMap[certificate.courseID]
+            }
+        }
     }
 
     private func makeViewData(from certificate: Certificate) -> CertificateViewData {
@@ -127,44 +151,23 @@ final class CertificatesPresenter {
 
         let certificateDescriptionString = "\(certificateDescriptionBeginning) \(NSLocalizedString("CertificateDescriptionBody", comment: "")) \(certificate.course?.title ?? "")"
 
+        let isEditAvailable = certificate.isEditAllowed && self.userID == self.userAccountService.currentUserID
+
         return CertificateViewData(
+            uniqueIdentifier: "\(certificate.id)",
             courseName: certificate.course?.title,
             courseImageURL: courseImageURL,
             grade: certificate.grade,
             certificateURL: certificateURL,
-            certificateDescription: certificateDescriptionString
+            certificateDescription: certificateDescriptionString,
+            isEditAvailable: isEditAvailable,
+            editsCount: certificate.editsCount,
+            allowedEditsCount: certificate.allowedEditsCount,
+            savedFullName: certificate.savedFullName
         )
     }
 
-    func getNextPage() -> Bool {
-        if isGettingNextPage {
-            return false
-        }
-
-        isGettingNextPage = true
-
-        self.certificatesAPI.retrieve(userId: self.userID, page: page + 1, success: {
-            [weak self] meta, newCertificates in
-            self?.page += 1
-            self?.certificates += newCertificates
-
-            self?.loadCoursesForCertificates(certificates: newCertificates, completion: { [weak self] in
-                guard let strongSelf = self else {
-                    self?.isGettingNextPage = false
-                    return
-                }
-
-                strongSelf.view?.setCertificates(certificates: strongSelf.certificates.compactMap({ [weak self] in
-                    self?.makeViewData(from: $0)
-                }), hasNextPage: meta.hasNext)
-                CoreDataHelper.shared.save()
-                self?.isGettingNextPage = false
-            })
-        }, error: { [weak self] _ in
-            self?.view?.displayLoadNextPageError()
-            self?.isGettingNextPage = false
-        })
-
-        return true
+    enum Error: Swift.Error {
+        case updateCertificateNameFailed
     }
 }

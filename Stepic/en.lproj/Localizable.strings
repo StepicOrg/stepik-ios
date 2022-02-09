@@ -339,6 +339,9 @@ quizReviews567890 = "reviews";
 submissions1 = "submission";
 submissions234 = "submissions";
 submissions567890 = "submissions";
+times1 = "time";
+times234 = "times";
+times567890 = "times";
 SearchPlaceholderEmpty = "<b>Sorry</b>, we didn't find any courses matching your request";
 SearchPlaceholderError = "Error while searching courses. <b>Press</b> to try again";
 TagPlaceholderError = "Error while loading courses. <b>Press</b> to try again";
@@ -505,6 +508,7 @@ CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage = "You're not connected 
 CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction = "Use Always";
 CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction = "Just this Once";
 CourseInfoTabReviews = "Reviews";
+CourseInfoTitleAcquiredSkills = "What you will learn";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
 CourseInfoTitleRequirements = "Requirements";
@@ -1333,6 +1337,17 @@ NewProfileUserActivityLongestStreak = "Max streak %@";
 
 NewProfileStreakNotificationsNotifyPreference = "Notify About Streaks";
 NewProfileStreakNotificationsTimeSelection = "Notification Time";
+
+/* Certificate name change */
+CertificateNameChangeAction = "Change Recipient Name";
+CertificateNameChangeAlertTitle = "Change Recipient Name";
+CertificateNameChangeAlertMessageWarning = "Warning! You can change the certificate recipient name only %@.\nEnter name:";
+CertificateNameChangeAlertTextFieldPlaceholder = "Recipient name";
+CertificateNameChangeAlertMessageConfirmation = "Are you sure that you want to change the certificate recipient name from \"%@\" to \"%@\"?";
+CertificateNameChangeAlertMessageLastEditWarning = "Warning! After this confirmation you will not be able to change the certificate recipient name.";
+CertificateNameChangeSuccessStatusMessage = "Certificate recipient name changed";
+CertificateNameChangeErrorStatusMessage = "Failed to change certificate recipient name";
+CertificateNameChangeEmptyTextFieldErrorMessage = "Recipient name must not be empty";
 
 /* In-App Purchases */
 IAPPurchaseSucceededTitle = "Purchase Succeeded";

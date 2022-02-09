@@ -4,9 +4,9 @@ import UIKit
 
 extension CourseInfoTabInfoTextBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
-        let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
+        let messageLabelInsets = UIEdgeInsets(top: 16, left: 43, bottom: 0, right: 16)
         let messageLabelFont = Typography.subheadlineFont
         let messageLabelTextColor = UIColor.stepikMaterialSecondaryText
     }

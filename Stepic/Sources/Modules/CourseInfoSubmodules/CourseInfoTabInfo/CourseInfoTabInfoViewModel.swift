@@ -3,6 +3,7 @@ import UIKit
 struct CourseInfoTabInfoAuthorViewModel {
     let id: User.IdType
     let name: String
+    let avatarImageURL: URL?
 }
 
 struct CourseInfoTabInfoInstructorViewModel {
@@ -15,9 +16,12 @@ struct CourseInfoTabInfoInstructorViewModel {
 struct CourseInfoTabInfoViewModel {
     let authors: [CourseInfoTabInfoAuthorViewModel]
 
+    let acquiredSkills: [String]
+
     let introVideoURL: URL?
     let introVideoThumbnailURL: URL?
 
+    let summaryText: String
     let aboutText: String
     let requirementsText: String
     let targetAudienceText: String

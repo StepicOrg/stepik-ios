@@ -301,6 +301,19 @@ enum FormatterHelper {
         return "\(count) \(pluralizedCountString)"
     }
 
+    /// Format submissions count with localized and pluralized suffix; 1 -> "1 time", 5 -> "5 times"
+    static func timesCount(_ count: Int) -> String {
+        let pluralizedCountString = StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("times1", comment: ""),
+                NSLocalizedString("times234", comment: ""),
+                NSLocalizedString("times567890", comment: "")
+            ]
+        )
+        return "\(count) \(pluralizedCountString)"
+    }
+
     // MARK: Date
 
     /// Format days count with localized and pluralized suffix; 1 -> "1 day", 5 -> "5 days"

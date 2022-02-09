@@ -3,15 +3,14 @@ import UIKit
 
 extension CourseInfoTabInfoInstructorView {
     struct Appearance {
-        let imageFadeInDuration: TimeInterval = 0.15
         let imageViewSize = CGSize(width: 32, height: 32)
-        let imageViewCornerRadius: CGFloat = 6
+        let imageViewCornerRadius: CGFloat = 8
 
-        let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         let titleLabelFont = Typography.subheadlineFont
         let titleLabelTextColor = UIColor.stepikMaterialPrimaryText
 
-        let descriptionLabelInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+        let descriptionLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = Typography.caption1Font
         let descriptionLabelTextColor = UIColor.stepikMaterialSecondaryText
     }
