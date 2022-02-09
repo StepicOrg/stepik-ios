@@ -7,7 +7,7 @@ let package = Package(
     name: "StepikModel",
     platforms: [
         .macOS(.v10_10),
-        .iOS(.v8),
+        .iOS(.v9),
         .tvOS(.v9),
         .watchOS(.v2)
     ],
@@ -20,7 +20,7 @@ let package = Package(
     targets: [
         .target(
             name: "StepikModel",
-            dependencies: []
+            path: "Sources"
         ),
         .testTarget(
             name: "StepikModelTests",
