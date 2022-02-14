@@ -12,6 +12,8 @@ import PromiseKit
 import SwiftyJSON
 
 final class RetrieveRequestMaker {
+    // MARK: SwiftyJSON
+
     func request(
         requestEndpoint: String,
         params: Parameters? = nil,
@@ -350,6 +352,60 @@ final class RetrieveRequestMaker {
     private func saveManagedObjectContextIfNeeded<T>(objectType: T.Type) {
         if objectType is ManagedObject.Type {
             CoreDataHelper.shared.save()
+        }
+    }
+}
+
+// MARK: - Response Decodable -
+
+extension RetrieveRequestMaker {
+    func requestDecodableObjects<T: Decodable>(
+        requestEndpoint: String,
+        params: Parameters? = nil,
+        withManager manager: Alamofire.Session
+    ) -> Promise<DecodedObjectsResponse<T>> {
+        Promise { seal in
+            checkToken().done {
+                manager.request(
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    parameters: params,
+                    encoding: URLEncoding.default
+                ).validate().responseDecodable { (response: AFDataResponse<DecodedObjectsResponse<T>>) in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let decodable):
+                        seal.fulfill(decodable)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
+    func requestDecodable<T: Decodable>(
+        requestEndpoint: String,
+        params: Parameters? = nil,
+        withManager manager: Alamofire.Session
+    ) -> Promise<T> {
+        Promise { seal in
+            checkToken().done {
+                manager.request(
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    parameters: params,
+                    encoding: URLEncoding.default
+                ).validate().responseDecodable { (response: AFDataResponse<T>) in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let decodable):
+                        seal.fulfill(decodable)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
         }
     }
 }
