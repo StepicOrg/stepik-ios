@@ -11,22 +11,22 @@ struct DecodedObjectsResponse<T: Decodable>: Decodable {
         for key in container.allKeys where key.stringValue != CodingKeys.meta.stringValue {
             var decodedObjectsContainer = try container.nestedUnkeyedContainer(forKey: key)
 
-            var failedDecode = false
-            var lastDecodingError: Swift.Error?
+            var isFailedDecode = false
+            var lastDecodingError: Error?
             var tempDecodedObjects = [T]()
 
-            while !decodedObjectsContainer.isAtEnd && !failedDecode {
+            while !decodedObjectsContainer.isAtEnd && !isFailedDecode {
                 do {
                     let decodedObject = try decodedObjectsContainer.decode(T.self)
                     tempDecodedObjects.append(decodedObject)
                 } catch {
-                    failedDecode = true
+                    isFailedDecode = true
                     lastDecodingError = error
                     break
                 }
             }
 
-            if !failedDecode {
+            if !isFailedDecode {
                 self.decodedObjects = tempDecodedObjects
                 return
             } else if !tempDecodedObjects.isEmpty {
