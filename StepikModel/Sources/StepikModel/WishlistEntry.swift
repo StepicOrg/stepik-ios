@@ -6,6 +6,14 @@ public struct WishlistEntry {
     public let userID: Int
     public let createDate: Date?
     public let platform: String
+
+    public init(id: Int, courseID: Int, userID: Int, createDate: Date?, platform: String) {
+        self.id = id
+        self.courseID = courseID
+        self.userID = userID
+        self.createDate = createDate
+        self.platform = platform
+    }
 }
 
 extension WishlistEntry: Decodable {

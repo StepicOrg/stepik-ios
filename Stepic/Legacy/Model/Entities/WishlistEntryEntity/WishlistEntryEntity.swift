@@ -1,5 +1,6 @@
 import CoreData
 import Foundation
+import StepikModel
 
 final class WishlistEntryEntity: NSManagedObject, ManagedObject, Identifiable {
     typealias IdType = Int
@@ -15,8 +16,8 @@ final class WishlistEntryEntity: NSManagedObject, ManagedObject, Identifiable {
 // MARK: - WishlistEntryEntity (PlainObject Support) -
 
 extension WishlistEntryEntity {
-    var plainObject: WishlistEntryPlainObject {
-        WishlistEntryPlainObject(
+    var plainObject: WishlistEntry {
+        WishlistEntry(
             id: self.id,
             courseID: self.courseID,
             userID: self.userID,
@@ -27,14 +28,14 @@ extension WishlistEntryEntity {
 
     static func insert(
         into context: NSManagedObjectContext,
-        wishlistEntry: WishlistEntryPlainObject
+        wishlistEntry: WishlistEntry
     ) -> WishlistEntryEntity {
         let entity: WishlistEntryEntity = context.insertObject()
         entity.update(wishlistEntry: wishlistEntry)
         return entity
     }
 
-    func update(wishlistEntry: WishlistEntryPlainObject) {
+    func update(wishlistEntry: WishlistEntry) {
         self.id = wishlistEntry.id
         self.courseID = wishlistEntry.courseID
         self.userID = wishlistEntry.userID

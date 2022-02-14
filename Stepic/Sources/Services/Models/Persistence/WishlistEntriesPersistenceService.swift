@@ -1,12 +1,13 @@
 import Foundation
 import PromiseKit
+import StepikModel
 
 protocol WishlistEntriesPersistenceServiceProtocol: AnyObject {
     func fetchAll() -> Guarantee<[WishlistEntryEntity]>
     func fetch(courseID: Course.IdType) -> Guarantee<WishlistEntryEntity?>
 
-    func save(wishlistEntries: [WishlistEntryPlainObject]) -> Guarantee<Void>
-    func saveNewWishlistEntries(_ wishlistEntries: [WishlistEntryPlainObject]) -> Guarantee<Void>
+    func save(wishlistEntries: [WishlistEntry]) -> Guarantee<Void>
+    func saveNewWishlistEntries(_ wishlistEntries: [WishlistEntry]) -> Guarantee<Void>
 
     func deleteAll() -> Promise<Void>
     func deleteWishlistEntry(courseID: Course.IdType) -> Guarantee<Void>
@@ -18,7 +19,7 @@ final class WishlistEntriesPersistenceService: BasePersistenceService<WishlistEn
         self.fetch(courseID: courseID).map(\.first)
     }
 
-    func save(wishlistEntries: [WishlistEntryPlainObject]) -> Guarantee<Void> {
+    func save(wishlistEntries: [WishlistEntry]) -> Guarantee<Void> {
         if wishlistEntries.isEmpty {
             return .value(())
         }
@@ -47,7 +48,7 @@ final class WishlistEntriesPersistenceService: BasePersistenceService<WishlistEn
         }
     }
 
-    func saveNewWishlistEntries(_ wishlistEntries: [WishlistEntryPlainObject]) -> Guarantee<Void> {
+    func saveNewWishlistEntries(_ wishlistEntries: [WishlistEntry]) -> Guarantee<Void> {
         Guarantee { seal in
             firstly { () -> Guarantee<Void?> in
                 Guarantee(self.deleteAll(), fallback: nil)

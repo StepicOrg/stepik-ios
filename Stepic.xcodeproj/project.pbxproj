@@ -891,7 +891,6 @@
 		2C9BBE432490462C00FFED49 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BBE422490462C00FFED49 /* Debouncer.swift */; };
 		2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */; };
 		2C9CF0BC2754B79B001089AD /* WishListsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CF0BB2754B79B001089AD /* WishListsAPI.swift */; };
-		2C9CF0BE2754B927001089AD /* WishlistEntryPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CF0BD2754B927001089AD /* WishlistEntryPlainObject.swift */; };
 		2C9CF0C22754DA9E001089AD /* WishlistEntryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CF0C12754DA9E001089AD /* WishlistEntryEntity.swift */; };
 		2C9CF0C42754DAAE001089AD /* WishlistEntryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CF0C32754DAAE001089AD /* WishlistEntryEntity+CoreDataProperties.swift */; };
 		2C9D699B2617303900A0641F /* StepikAcademyCourseListWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9D699A2617303900A0641F /* StepikAcademyCourseListWidgetViewModel.swift */; };
@@ -2926,7 +2925,6 @@
 		2C9BBE422490462C00FFED49 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9CF0BB2754B79B001089AD /* WishListsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListsAPI.swift; sourceTree = "<group>"; };
-		2C9CF0BD2754B927001089AD /* WishlistEntryPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistEntryPlainObject.swift; sourceTree = "<group>"; };
 		2C9CF0BF2754D9C8001089AD /* Model_wish_lists_v91.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_wish_lists_v91.xcdatamodel; sourceTree = "<group>"; };
 		2C9CF0C12754DA9E001089AD /* WishlistEntryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistEntryEntity.swift; sourceTree = "<group>"; };
 		2C9CF0C32754DAAE001089AD /* WishlistEntryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WishlistEntryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -8225,7 +8223,6 @@
 				2C97761C25D6C20F008778D6 /* UnitPlainObject.swift */,
 				2CB1C3AC240050F9001DA83E /* UserCodeRun.swift */,
 				2CECFEF0252F1F4C006BA883 /* VisitedCourse.swift */,
-				2C9CF0BD2754B927001089AD /* WishlistEntryPlainObject.swift */,
 				2CCB4B1626E7724E0056C44E /* Announcements */,
 				2C97764225D6CBD2008778D6 /* Block */,
 				2CA3DAA62179DF7300F43888 /* Discussions */,
@@ -11735,7 +11732,6 @@
 				62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */,
 				62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */,
 				62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */,
-				2C9CF0BE2754B927001089AD /* WishlistEntryPlainObject.swift in Sources */,
 				2C4AD01B23E305FA0049B7B0 /* DiscussionThreadsPersistenceService.swift in Sources */,
 				2CADFEF424C1325F00008C65 /* AchievementProgressData.swift in Sources */,
 				62E983397736699787D8DD35 /* UIView+FromNib.swift in Sources */,

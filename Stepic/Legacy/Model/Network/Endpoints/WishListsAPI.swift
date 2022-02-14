@@ -1,62 +1,45 @@
 import Alamofire
 import Foundation
 import PromiseKit
+import StepikModel
 
 final class WishListsAPI: APIEndpoint {
     override class var name: String { "wish-lists" }
 
-    func retrieveWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?> {
-        self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
-            params: ["course": courseID],
-            withManager: self.manager
-        ).then { wishlistEntries, _ -> Promise<WishlistEntryPlainObject?> in
-            return .value(wishlistEntries.first)
-        }
+    func retrieveWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntry?> {
+        self.retrieve
+            .requestDecodableObjects(
+                requestEndpoint: Self.name,
+                params: [JSONKey.course.rawValue: courseID],
+                withManager: self.manager
+            )
+            .map { $0.decodedObjects.first }
     }
 
-    func retrieveWishlist(page: Int = 1) -> Promise<([WishlistEntryPlainObject], Meta)> {
-        self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
-            params: ["page": page],
-            withManager: self.manager
-        )
+    func retrieveAllWishlistPages() -> Promise<[WishlistEntry]> {
+        self.retrieve.requestDecodableObjectsWithCollectAllPages(requestEndpoint: Self.name, withManager: self.manager)
     }
 
-    func retrieveAllWishlistPages() -> Promise<[WishlistEntryPlainObject]> {
-        self.retrieve.requestWithCollectAllPages(
-            requestEndpoint: self.name,
-            paramName: self.name,
-            params: [:],
-            withManager: self.manager
-        )
+    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntry> {
+        let body = [
+            JSONKey.wishList.rawValue: [
+                JSONKey.course.rawValue: courseID,
+                JSONKey.platform.rawValue: PlatformType.mobile.stringValue
+            ]
+        ]
+
+        return self.create
+            .requestDecodableObjects(requestEndpoint: Self.name, bodyJSONObject: body, withManager: self.manager)
+            .compactMap { $0.decodedObjects.first }
     }
 
-    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject> {
-        let wishlistEntryToAdd = WishlistEntryPlainObject(
-            id: -1,
-            courseID: courseID,
-            userID: -1,
-            createDate: nil,
-            platform: PlatformType.mobile.stringValue
-        )
-
-        return self.create.request(
-            requestEndpoint: self.name,
-            paramName: "wish-list",
-            creatingObject: wishlistEntryToAdd,
-            withManager: self.manager
-        ).compactMap { _, json -> WishlistEntryPlainObject? in
-            if let createdObjectJSON = json[self.name].arrayValue.first {
-                return WishlistEntryPlainObject(json: createdObjectJSON)
-            }
-            return nil
-        }
+    func deleteWishlistEntry(wishlistEntryID: Int) -> Promise<Void> {
+        self.delete.request(requestEndpoint: Self.name, deletingId: wishlistEntryID, withManager: self.manager)
     }
 
-    func deleteWishlistEntry(wishlistEntryID: WishlistEntryPlainObject.IdType) -> Promise<Void> {
-        self.delete.request(requestEndpoint: self.name, deletingId: wishlistEntryID, withManager: self.manager)
+    private enum JSONKey: String {
+        case course
+        case platform
+        case wishList = "wish-list"
     }
 }
