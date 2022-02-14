@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CatalogBlocksAPI: APIEndpoint {
-    override var name: String { "catalog-blocks" }
+    override class var name: String { "catalog-blocks" }
 
     /// Get catalog blocks by ids.
     func retrieve(ids: [CatalogBlock.IdType], page: Int = 1) -> Promise<([CatalogBlock], Meta)> {
@@ -14,8 +14,8 @@ final class CatalogBlocksAPI: APIEndpoint {
         ]
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )
@@ -33,8 +33,8 @@ final class CatalogBlocksAPI: APIEndpoint {
         ]
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )

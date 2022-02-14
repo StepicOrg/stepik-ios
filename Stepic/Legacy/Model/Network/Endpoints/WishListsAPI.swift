@@ -3,7 +3,7 @@ import Foundation
 import PromiseKit
 
 final class WishListsAPI: APIEndpoint {
-    override var name: String { "wish-lists" }
+    override class var name: String { "wish-lists" }
 
     func retrieveWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?> {
         self.retrieve.request(

@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class LessonsAPI: APIEndpoint {
-    override var name: String { "lessons" }
+    override class var name: String { "lessons" }
 
     func retrieve(
         ids: [Int],

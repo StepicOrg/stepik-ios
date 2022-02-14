@@ -11,13 +11,13 @@ import Foundation
 import PromiseKit
 
 final class NotificationStatusesAPI: APIEndpoint {
-    override var name: String { "notification-statuses" }
+    override class var name: String { "notification-statuses" }
 
     func retrieve() -> Promise<NotificationsStatus> {
         Promise { seal in
             self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: Parameters(),
                 updatingObjects: [NotificationsStatus](),
                 withManager: self.manager

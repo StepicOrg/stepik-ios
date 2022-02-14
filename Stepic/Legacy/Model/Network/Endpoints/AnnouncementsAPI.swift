@@ -3,7 +3,7 @@ import Foundation
 import PromiseKit
 
 final class AnnouncementsAPI: APIEndpoint {
-    override var name: String { "announcements" }
+    override class var name: String { "announcements" }
 
     func retrieve(courseID: Course.IdType, page: Int = 1) -> Promise<([AnnouncementPlainObject], Meta)> {
         let params: Parameters = [
@@ -12,8 +12,8 @@ final class AnnouncementsAPI: APIEndpoint {
         ]
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )
@@ -21,8 +21,8 @@ final class AnnouncementsAPI: APIEndpoint {
 
     func retrieve(ids: [Announcement.IdType]) -> Promise<([AnnouncementPlainObject], Meta)> {
         self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             ids: ids,
             updating: [],
             withManager: self.manager

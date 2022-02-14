@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class ReviewsAPI: APIEndpoint {
-    override var name: String { "reviews" }
+    override class var name: String { "reviews" }
 
     func createReview(sessionID: Int, blockName: String?) -> Promise<ReviewsResponse> {
         let body = [
@@ -15,13 +15,13 @@ final class ReviewsAPI: APIEndpoint {
         ]
 
         return self.create
-            .request(requestEndpoint: self.name, bodyJSONObject: body, withManager: self.manager)
+            .request(requestEndpoint: Self.name, bodyJSONObject: body, withManager: self.manager)
             .map { ReviewsResponse(json: $0, blockName: blockName ?? "") }
     }
 
     func getReviews(ids: [Int], blockName: String?) -> Promise<ReviewsResponse> {
         self.retrieve
-            .request(requestEndpoint: self.name, ids: ids, withManager: self.manager)
+            .request(requestEndpoint: Self.name, ids: ids, withManager: self.manager)
             .map { ReviewsResponse(json: $0, blockName: blockName ?? "") }
     }
 
@@ -36,7 +36,7 @@ final class ReviewsAPI: APIEndpoint {
         ]
 
         return self.retrieve
-            .request(requestEndpoint: self.name, params: params, withManager: self.manager)
+            .request(requestEndpoint: Self.name, params: params, withManager: self.manager)
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
 

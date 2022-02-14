@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class ProfilesAPI: APIEndpoint {
-    override var name: String { "profiles" }
+    override class var name: String { "profiles" }
 
     func retrieve(
         ids: [Int],
@@ -32,7 +32,7 @@ final class ProfilesAPI: APIEndpoint {
 
     func update(_ profile: Profile) -> Promise<Profile> {
         self.update.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "profile",
             updatingObject: profile,
             withManager: self.manager

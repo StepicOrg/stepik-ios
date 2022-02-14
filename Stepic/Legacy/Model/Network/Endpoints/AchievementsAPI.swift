@@ -11,7 +11,7 @@ import Foundation
 import PromiseKit
 
 final class AchievementsAPI: APIEndpoint {
-    override var name: String { "achievements" }
+    override class var name: String { "achievements" }
 
     func retrieve(kind: String? = nil, page: Int = 1) -> Promise<([Achievement], Meta)> {
         Promise { seal in
@@ -22,8 +22,8 @@ final class AchievementsAPI: APIEndpoint {
             params["page"] = page
 
             self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: params,
                 updatingObjects: [],
                 withManager: self.manager

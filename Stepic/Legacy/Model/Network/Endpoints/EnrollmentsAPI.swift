@@ -12,10 +12,10 @@ import PromiseKit
 import SwiftyJSON
 
 final class EnrollmentsAPI: APIEndpoint {
-    override var name: String { "enrollments" }
+    override class var name: String { "enrollments" }
 
     func delete(courseId: Int) -> Promise<Void> {
-        self.delete.request(requestEndpoint: self.name, deletingId: courseId, withManager: manager)
+        self.delete.request(requestEndpoint: Self.name, deletingId: courseId, withManager: manager)
     }
 }
 
@@ -48,7 +48,7 @@ extension EnrollmentsAPI {
 
         if !delete {
             return self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)",
                 method: .post,
                 parameters: params,
                 encoding: JSONEncoding.default,

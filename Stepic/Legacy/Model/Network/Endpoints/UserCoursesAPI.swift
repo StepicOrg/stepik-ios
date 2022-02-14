@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class UserCoursesAPI: APIEndpoint {
-    override var name: String { "user-courses" }
+    override class var name: String { "user-courses" }
 
     private let userCoursesPersistenceService: UserCoursesPersistenceServiceProtocol
 
@@ -51,8 +51,8 @@ final class UserCoursesAPI: APIEndpoint {
                 self.userCoursesPersistenceService.fetchAll()
             }.then { cachedUserCourses -> Promise<([UserCourse], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: params,
                     updatingObjects: cachedUserCourses,
                     withManager: self.manager
@@ -74,8 +74,8 @@ final class UserCoursesAPI: APIEndpoint {
                 self.userCoursesPersistenceService.fetch(courseID: courseID)
             }.then { cachedUserCourses -> Promise<([UserCourse], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: params,
                     updatingObjects: cachedUserCourses,
                     withManager: self.manager
@@ -90,7 +90,7 @@ final class UserCoursesAPI: APIEndpoint {
 
     func update(_ userCourse: UserCourse) -> Promise<UserCourse> {
         self.update.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "userCourse",
             updatingObject: userCourse,
             withManager: self.manager

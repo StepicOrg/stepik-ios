@@ -3,7 +3,7 @@ import Foundation
 import PromiseKit
 
 final class StoryTemplatesAPI: APIEndpoint {
-    override var name: String { "story-templates" }
+    override class var name: String { "story-templates" }
 
     func retrieve(
         isPublished: Bool?,
@@ -22,8 +22,8 @@ final class StoryTemplatesAPI: APIEndpoint {
             }
 
             self.retrieve.requestWithCollectAllPages(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: params,
                 withManager: self.manager
             ).done { stories in
@@ -36,8 +36,8 @@ final class StoryTemplatesAPI: APIEndpoint {
 
     func retrieve(ids: [Int]) -> Promise<[Story]> {
         self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             ids: ids,
             updating: [],
             withManager: self.manager

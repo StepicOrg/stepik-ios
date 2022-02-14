@@ -12,11 +12,11 @@ import PromiseKit
 import SwiftyJSON
 
 final class ViewsAPI: APIEndpoint {
-    override var name: String { "views" }
+    override class var name: String { "views" }
 
     func create(view: StepikModelView) -> Promise<Void> {
         self.create.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "view",
             creatingObject: view,
             withManager: self.manager

@@ -12,16 +12,16 @@ import PromiseKit
 import SwiftyJSON
 
 final class AttemptsAPI: APIEndpoint {
-    override var name: String { "attempts" }
+    override class var name: String { "attempts" }
 
     /// Get attempts by ids.
     func retrieve(ids: [Attempt.IdType], stepName: String) -> Promise<[Attempt]> {
         self.retrieve.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             ids: ids,
             withManager: self.manager
         ).then { json -> Promise<[Attempt]> in
-            let attempts = json[self.name].arrayValue.map { Attempt(json: $0, stepBlockName: stepName) }
+            let attempts = json[Self.name].arrayValue.map { Attempt(json: $0, stepBlockName: stepName) }
             return .value(attempts)
         }
     }

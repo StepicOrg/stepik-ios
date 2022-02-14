@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class SubmissionsAPI: APIEndpoint {
-    override var name: String { "submissions" }
+    override class var name: String { "submissions" }
 
     @discardableResult
     private func retrieve(
@@ -78,7 +78,7 @@ final class SubmissionsAPI: APIEndpoint {
             }
 
             self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)",
                 method: .get,
                 parameters: parameters,
                 encoding: URLEncoding.default,

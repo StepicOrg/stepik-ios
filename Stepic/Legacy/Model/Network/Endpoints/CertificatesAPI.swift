@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CertificatesAPI: APIEndpoint {
-    override var name: String { "certificates" }
+    override class var name: String { "certificates" }
 
     func retrieve(
         userID: User.IdType,
@@ -34,8 +34,8 @@ final class CertificatesAPI: APIEndpoint {
         }
 
         return self.retrieve.requestWithFetching(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: manager
         )
@@ -43,7 +43,7 @@ final class CertificatesAPI: APIEndpoint {
 
     func update(_ certificate: Certificate) -> Promise<Certificate> {
         self.update.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "certificate",
             updatingObject: certificate,
             withManager: self.manager

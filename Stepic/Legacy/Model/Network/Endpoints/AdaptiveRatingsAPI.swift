@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class AdaptiveRatingsAPI: APIEndpoint {
-    override var name: String { "rating" }
+    override class var name: String { "rating" }
 
     typealias RatingRecord = (userId: Int, exp: Int, rank: Int, isFake: Bool)
     typealias Scoreboard = (allCount: Int, leaders: [RatingRecord])
@@ -29,7 +29,7 @@ final class AdaptiveRatingsAPI: APIEndpoint {
 
         return Promise { seal in
             self.manager.request(
-                "\(RemoteConfig.shared.adaptiveBackendURL)/\(name)",
+                "\(RemoteConfig.shared.adaptiveBackendURL)/\(Self.name)",
                 method: .put,
                 parameters: params,
                 encoding: JSONEncoding.default,
@@ -65,7 +65,7 @@ final class AdaptiveRatingsAPI: APIEndpoint {
 
         return Promise { seal in
             self.manager.request(
-                "\(RemoteConfig.shared.adaptiveBackendURL)/\(self.name)",
+                "\(RemoteConfig.shared.adaptiveBackendURL)/\(Self.name)",
                 method: .get,
                 parameters: params,
                 encoding: URLEncoding.default,

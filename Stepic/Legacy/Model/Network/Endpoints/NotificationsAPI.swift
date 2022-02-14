@@ -14,7 +14,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class NotificationsAPI: APIEndpoint {
-    override var name: String { "notifications" }
+    override class var name: String { "notifications" }
 
     func retrieve(page: Int = 1, notificationType: NotificationType? = nil) -> Promise<([Notification], Meta)> {
         var parameters = [
@@ -26,8 +26,8 @@ final class NotificationsAPI: APIEndpoint {
         }
 
         return self.retrieve.requestWithFetching(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: parameters,
             withManager: self.manager
         )
@@ -35,7 +35,7 @@ final class NotificationsAPI: APIEndpoint {
 
     func update(_ notification: Notification) -> Promise<Notification> {
         self.update.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "notification",
             updatingObject: notification,
             withManager: self.manager
@@ -46,7 +46,7 @@ final class NotificationsAPI: APIEndpoint {
         Promise { seal in
             checkToken().done {
                 self.manager.request(
-                    "\(StepikApplicationsInfo.apiURL)/\(self.name)/mark-as-read",
+                    "\(StepikApplicationsInfo.apiURL)/\(Self.name)/mark-as-read",
                     method: .post,
                     parameters: nil,
                     encoding: JSONEncoding.default,
