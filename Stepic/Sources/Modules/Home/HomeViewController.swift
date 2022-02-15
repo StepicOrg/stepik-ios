@@ -515,12 +515,14 @@ final class HomeViewController: BaseExploreViewController {
             return
         }
 
+        self.analytics.send(.promoBannerSeen(promoBanner))
+
         let view = PromoBannerView()
         view.title = promoBanner.title
         view.subtitle = promoBanner.description
         view.style = .init(colorType: colorType)
-        view.onClick = {
-            print("HomeViewController :: click promo = \(promoBanner)")
+        view.onClick = { [weak self] in
+            self?.analytics.send(.promoBannerClicked(promoBanner))
         }
 
         let headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
