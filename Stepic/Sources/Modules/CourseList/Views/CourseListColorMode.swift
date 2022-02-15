@@ -107,7 +107,7 @@ extension CourseListColorMode {
         )
 
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             return appearance
         case .dark:
             appearance.progressTextLabelAppearance.textColor = .dynamic(
@@ -159,7 +159,7 @@ extension CourseListColorMode {
 
     var courseWidgetBadgeTintColor: UIColor {
         switch self {
-        case .light, .grouped:
+        case .light, .grouped, .clearLight:
             return .stepikSystemSecondaryText
         case .dark:
             return .dynamic(

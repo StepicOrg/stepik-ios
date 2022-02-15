@@ -254,7 +254,7 @@ final class HomeViewController: BaseExploreViewController {
             switch state {
             case .anonymous:
                 placeholderView.onActionButtonClick = { [weak self] in
-                    self?.displayAuthorization(viewModel: .init())
+                    self?.displayCatalog()
                 }
             case .error:
                 placeholderView.onActionButtonClick = { [weak self] in
@@ -262,7 +262,7 @@ final class HomeViewController: BaseExploreViewController {
                 }
             case .empty:
                 placeholderView.onActionButtonClick = { [weak self] in
-                    self?.displayCatalog(viewModel: .init())
+                    self?.displayCatalog()
                 }
             default:
                 break
@@ -562,6 +562,10 @@ extension HomeViewController: HomeViewControllerProtocol {
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
         }
+    }
+
+    func displayCatalog() {
+        DeepLinkRouter.routeToCatalog()
     }
 }
 

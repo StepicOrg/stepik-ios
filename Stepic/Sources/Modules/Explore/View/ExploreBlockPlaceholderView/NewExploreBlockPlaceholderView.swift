@@ -70,7 +70,7 @@ final class NewExploreBlockPlaceholderView: UIView {
             case .error:
                 return NSLocalizedString("NewHomePlaceholderErrorTitle", comment: "")
             case .anonymous:
-                return NSLocalizedString("NewHomePlaceholderAnonymousTitle", comment: "")
+                return ""
             }
         }
 

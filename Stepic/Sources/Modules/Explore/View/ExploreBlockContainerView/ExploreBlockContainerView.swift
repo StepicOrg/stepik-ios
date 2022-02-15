@@ -43,6 +43,9 @@ final class ExploreBlockContainerView: UIView {
         return view
     }()
 
+    private var backgroundImageViewBottomToSuperviewConstraint: Constraint?
+    private var backgroundImageViewBottomToContentViewConstraint: Constraint?
+
     var onShowAllButtonClick: (() -> Void)? {
         didSet {
             self.headerView.onShowAllButtonClick = self.onShowAllButtonClick
@@ -88,6 +91,24 @@ final class ExploreBlockContainerView: UIView {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateBackgroundImageViewBottomConstraint()
+        }
+    }
+
+    private func updateBackgroundImageViewBottomConstraint() {
+        if self.isDarkInterfaceStyle {
+            self.backgroundImageViewBottomToSuperviewConstraint?.deactivate()
+            self.backgroundImageViewBottomToContentViewConstraint?.activate()
+        } else {
+            self.backgroundImageViewBottomToSuperviewConstraint?.activate()
+            self.backgroundImageViewBottomToContentViewConstraint?.deactivate()
+        }
+    }
 }
 
 extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
@@ -114,7 +135,12 @@ extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
             self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
             self.backgroundImageView.snp.makeConstraints { make in
                 make.top.leading.trailing.equalToSuperview()
-                make.bottom.equalToSuperview().priority(.low)
+
+                self.backgroundImageViewBottomToSuperviewConstraint = make
+                    .bottom.equalToSuperview().priority(.low).constraint
+                self.backgroundImageViewBottomToContentViewConstraint = make
+                    .bottom.equalTo(self.contentView.snp.bottom).constraint
+                self.updateBackgroundImageViewBottomConstraint()
             }
         }
 

@@ -5012,16 +5012,6 @@
 			path = EditSplitTests;
 			sourceTree = "<group>";
 		};
-		2C69BDCF26C147B0007C51FB /* StepQuizReviewView */ = {
-			isa = PBXGroup;
-			children = (
-				2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */,
-				58B2A82D76D2BD2EC85171E0 /* StepQuizReviewView.swift */,
-				2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */,
-			);
-			path = StepQuizReviewView;
-			sourceTree = "<group>";
-		};
 		2C6917CF25EE484300BAE0F5 /* ExploreBlockPlaceholderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5031,6 +5021,16 @@
 				2C6917C525EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift */,
 			);
 			path = ExploreBlockPlaceholderView;
+			sourceTree = "<group>";
+		};
+		2C69BDCF26C147B0007C51FB /* StepQuizReviewView */ = {
+			isa = PBXGroup;
+			children = (
+				2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */,
+				58B2A82D76D2BD2EC85171E0 /* StepQuizReviewView.swift */,
+				2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */,
+			);
+			path = StepQuizReviewView;
 			sourceTree = "<group>";
 		};
 		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
@@ -11398,8 +11398,7 @@
 				2C98423C26DE4CA80098E36B /* SearchResult+CoreDataProperties.swift in Sources */,
 				2C12E4722565668000DC52CB /* UIViewController+PresentPanModal.swift in Sources */,
 				2CBEAACE271EFA9A00B52D2C /* CourseInfoPurchaseModalDisclaimerView.swift in Sources */,
-				2C12E4722565668000DC52CB /* UIViewController+PresentPadPanModal.swift in Sources */,
-				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
+				2C12E4722565668000DC52CB /* UIViewController+PresentPanModal.swift in Sources */,
 				2C6917C625EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift in Sources */,
 				2CA867C12588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift in Sources */,
 				2C0FE8C425F81A4900626289 /* InstructionPlainObject.swift in Sources */,
