@@ -418,7 +418,7 @@ final class HomeViewController: BaseExploreViewController {
 
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
-                title: NSLocalizedString("Popular", comment: ""),
+                title: NSLocalizedString("Recommended", comment: ""),
                 summary: nil,
                 shouldShowAllButton: self == .normal
             )
@@ -440,7 +440,7 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = PopularCourseListType(language: contentLanguage)
         let popularAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .dark,
+            colorMode: .light,
             courseViewSource: .query(courseListType: courseListType),
             output: self.interactor as? CourseListOutputProtocol
         )
@@ -479,7 +479,7 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = (placeholderView, nil)
         }
 
-        let containerView = CourseListContainerViewFactory(colorMode: .dark)
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
                 headerDescription: state.headerDescription

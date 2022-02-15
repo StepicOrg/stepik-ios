@@ -312,6 +312,7 @@ ShowAllTestText = "Смотреть все";
 ShowAllTestTextDetailIndicator = "Смотреть все ›";
 Enrolled = "Мои курсы";
 Popular = "Популярные";
+Recommended = "Рекомендуемые";
 VisitedCourses = "Посещённые курсы";
 Home = "Обучение";
 RecommendedCategory = "Подборка";

@@ -311,6 +311,7 @@ ShowAllTestText = "See All";
 ShowAllTestTextDetailIndicator = "See All ›";
 Enrolled = "Enrolled";
 Popular = "Popular";
+Recommended = "Recommended";
 VisitedCourses = "Visited courses";
 Home = "Home";
 RecommendedCategory = "Recommended courses";
