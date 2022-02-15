@@ -1,6 +1,7 @@
 import PromiseKit
 import UIKit
 
+// swiftlint:disable file_length
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
     func displayContent(viewModel: Home.ContentLoad.ViewModel)
@@ -515,17 +516,31 @@ final class HomeViewController: BaseExploreViewController {
             return
         }
 
-        self.analytics.send(.promoBannerSeen(promoBanner))
-
         let view = PromoBannerView()
         view.title = promoBanner.title
         view.subtitle = promoBanner.description
         view.style = .init(colorType: colorType)
         view.onClick = { [weak self] in
-            self?.analytics.send(.promoBannerClicked(promoBanner))
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.analytics.send(.promoBannerClicked(promoBanner))
+
+            WebControllerManager.shared.presentWebControllerWithURLString(
+                promoBanner.url,
+                inController: strongSelf,
+                withKey: .externalLink,
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
         }
 
-        let headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
+        var headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
+        if promoBanner.position > 0 {
+            headerViewInsets.top = 0
+        }
+
         var contentViewInsets = CourseListContainerViewFactory.Appearance.horizontalContentInsets
         contentViewInsets.left = headerViewInsets.left
         contentViewInsets.right = headerViewInsets.right
@@ -534,6 +549,7 @@ final class HomeViewController: BaseExploreViewController {
             .makeHorizontalContainerView(
                 for: view,
                 headerDescription: .init(title: nil, summary: nil, shouldShowAllButton: false),
+                headerViewInsets: headerViewInsets,
                 contentViewInsets: contentViewInsets
             )
 
@@ -545,6 +561,8 @@ final class HomeViewController: BaseExploreViewController {
                 type: promoBanner
             )
         )
+
+        self.analytics.send(.promoBannerSeen(promoBanner))
     }
 }
 
