@@ -11,7 +11,7 @@ import UIKit
 
 extension ContinueCourseSkeletonView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         let cornerRadius: CGFloat = 8.0
     }
 }
@@ -50,10 +50,7 @@ extension ContinueCourseSkeletonView: ProgrammaticallyInitializableViewProtocol 
     func makeConstraints() {
         self.largeView.translatesAutoresizingMaskIntoConstraints = false
         self.largeView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.mainInsets.top)
-            make.leading.equalToSuperview().offset(self.appearance.mainInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.mainInsets.right)
-            make.bottom.equalToSuperview().offset(self.appearance.mainInsets.bottom)
+            make.edges.equalToSuperview().inset(self.appearance.mainInsets)
         }
     }
 }

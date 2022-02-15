@@ -5,7 +5,7 @@ import UIKit
 
 extension ContinueLastStepView {
     struct Appearance {
-        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+        let mainInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         let contentInsets = UIEdgeInsets(top: 35, left: 19, bottom: 17, right: 19)
         let cornerRadius: CGFloat = 8.0
 
