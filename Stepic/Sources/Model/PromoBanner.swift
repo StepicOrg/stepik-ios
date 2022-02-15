@@ -7,7 +7,7 @@ struct PromoBanner: Decodable {
     let description: String
     let url: String
     let screen: String
-    let position: Int
+    var position: Int
 
     var colorType: ColorType? { ColorType(rawValue: self.type) }
 

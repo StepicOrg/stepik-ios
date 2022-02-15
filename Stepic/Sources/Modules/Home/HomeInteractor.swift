@@ -50,16 +50,14 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     }
 
     func doContentLoad(request: Home.ContentLoad.Request) {
-        let promoBanners = self.promoBannersService.getPromoBanners(
-            language: Locale.current.languageCode == ContentLanguage.russian.languageString ? .russian : .english,
-            screen: .home
-        )
-
         self.homePresenter?.presentContent(
             response: .init(
                 isAuthorized: self.userAccountService.isAuthorized,
                 contentLanguage: self.contentLanguageService.globalContentLanguage,
-                promoBanners: promoBanners
+                promoBanners: self.promoBannersService.getPromoBanners(
+                    language: self.contentLanguageService.globalContentLanguage,
+                    screen: .home
+                )
             )
         )
     }

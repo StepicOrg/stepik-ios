@@ -20,6 +20,7 @@ enum Explore {
 
         struct Response {
             let contentLanguage: ContentLanguage
+            let promoBanners: [PromoBanner]
         }
 
         struct ViewModel {
@@ -134,6 +135,6 @@ enum Explore {
 
     enum ViewControllerState {
         case loading
-        case normal(contentLanguage: ContentLanguage)
+        case normal(contentLanguage: ContentLanguage, promoBanners: [PromoBanner])
     }
 }

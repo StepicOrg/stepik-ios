@@ -122,7 +122,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     private func updateState(newState: Explore.ViewControllerState) {
         switch newState {
-        case .normal(let language):
+        case .normal(let language, let promoBanners):
             self.exploreView?.endRefreshing()
             DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
                 guard let strongSelf = self else {
@@ -133,6 +133,7 @@ final class ExploreViewController: BaseExploreViewController {
                 strongSelf.initLanguageDependentSubmodules(contentLanguage: language)
 
                 strongSelf.refreshStateForVisitedCourses(state: .shown)
+                strongSelf.refreshStateForPromoBanners(promoBanners)
             }
         case .loading:
             break
@@ -317,6 +318,73 @@ final class ExploreViewController: BaseExploreViewController {
     @objc
     private func ipadCancelSearchButtonClicked() {
         self.searchBarCancelButtonClicked(self.searchBar)
+    }
+
+    // MARK: Promo Banners
+
+    private func refreshStateForPromoBanners(_ promoBanners: [PromoBanner]) {
+        promoBanners.forEach(self.registerPromoBanner(_:))
+    }
+
+    private func registerPromoBanner(_ promoBanner: PromoBanner) {
+        var updatedPromoBanner = promoBanner
+        updatedPromoBanner.position += 2
+
+        if let module = self.getSubmodule(type: updatedPromoBanner) {
+            self.removeSubmodule(module)
+        }
+
+        guard let colorType = updatedPromoBanner.colorType else {
+            return
+        }
+
+        let view = PromoBannerView()
+        view.title = updatedPromoBanner.title
+        view.subtitle = updatedPromoBanner.description
+        view.style = .init(colorType: colorType)
+        view.onClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.analytics.send(.promoBannerClicked(promoBanner))
+
+            WebControllerManager.shared.presentWebControllerWithURLString(
+                promoBanner.url,
+                inController: strongSelf,
+                withKey: .externalLink,
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
+        }
+
+        var headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
+        if promoBanner.position > 0 {
+            headerViewInsets.top = 0
+        }
+
+        var contentViewInsets = CourseListContainerViewFactory.Appearance.horizontalContentInsets
+        contentViewInsets.left = headerViewInsets.left
+        contentViewInsets.right = headerViewInsets.right
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: .init(title: nil, summary: nil, shouldShowAllButton: false),
+                headerViewInsets: headerViewInsets,
+                contentViewInsets: contentViewInsets
+            )
+
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: true,
+                type: updatedPromoBanner
+            )
+        )
+
+        self.analytics.send(.promoBannerSeen(promoBanner))
     }
 }
 

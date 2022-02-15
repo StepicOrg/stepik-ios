@@ -40,7 +40,13 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
 
     func doContentLoad(request: Explore.ContentLoad.Request) {
         self.explorePresenter?.presentContent(
-            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
+            response: .init(
+                contentLanguage: self.contentLanguageService.globalContentLanguage,
+                promoBanners: self.promoBannersService.getPromoBanners(
+                    language: self.contentLanguageService.globalContentLanguage,
+                    screen: .catalog
+                )
+            )
         )
         self.syncPersonalOffers()
     }

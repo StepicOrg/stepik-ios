@@ -18,7 +18,9 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
 
     func presentContent(response: Explore.ContentLoad.Response) {
         self.exploreViewController?.displayContent(
-            viewModel: .init(state: .normal(contentLanguage: response.contentLanguage))
+            viewModel: .init(
+                state: .normal(contentLanguage: response.contentLanguage, promoBanners: response.promoBanners)
+            )
         )
     }
 

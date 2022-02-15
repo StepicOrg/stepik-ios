@@ -557,7 +557,7 @@ final class HomeViewController: BaseExploreViewController {
             .init(
                 viewController: nil,
                 view: containerView,
-                isLanguageDependent: false,
+                isLanguageDependent: true,
                 type: promoBanner
             )
         )
