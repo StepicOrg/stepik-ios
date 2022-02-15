@@ -38,7 +38,8 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         self.homeViewController?.displayContent(
             viewModel: .init(
                 isAuthorized: response.isAuthorized,
-                contentLanguage: response.contentLanguage
+                contentLanguage: response.contentLanguage,
+                promoBanners: response.promoBanners
             )
         )
     }

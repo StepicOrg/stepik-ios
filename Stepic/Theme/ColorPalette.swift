@@ -117,6 +117,8 @@ extension UIColor {
     static let stepikBlueFixed = ColorPalette.blue600
     /// A non adaptable color with hex value #56A4FF (blue03).
     static let stepikLightBlueFixed = ColorPalette.lightBlue400
+    /// A non adaptable color with hex value #91C7FF.
+    static let stepikOverlayDarkBlueFixed = ColorPalette.blueDarkColorOverlay
 
     // MARK: Yellow
 

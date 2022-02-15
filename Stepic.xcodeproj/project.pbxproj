@@ -558,6 +558,9 @@
 		2C313E5526AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C313E5426AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C381BEF25505EC90084AD90 /* CourseListFilterBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */; };
+		2C38D49E27BBCAC6002865B7 /* PromoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38D49D27BBCAC6002865B7 /* PromoBanner.swift */; };
+		2C38D4A027BBD074002865B7 /* PromoBannersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38D49F27BBD074002865B7 /* PromoBannersService.swift */; };
+		2C38D4A227BBD69E002865B7 /* PromoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38D4A127BBD69E002865B7 /* PromoBannerView.swift */; };
 		2C3A035624AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035524AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift */; };
 		2C3A035924AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */; };
 		2C3A052025B763370007FBCA /* WidgetURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A051F25B763370007FBCA /* WidgetURL.swift */; };
@@ -2575,6 +2578,9 @@
 		2C35C4D41F4DA471002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_m.plist; sourceTree = "<group>"; };
 		2C36E4772501F28E00D63C41 /* Model_user_remove_level_v65.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_user_remove_level_v65.xcdatamodel; sourceTree = "<group>"; };
 		2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterBarButtonItem.swift; sourceTree = "<group>"; };
+		2C38D49D27BBCAC6002865B7 /* PromoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanner.swift; sourceTree = "<group>"; };
+		2C38D49F27BBD074002865B7 /* PromoBannersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBannersService.swift; sourceTree = "<group>"; };
+		2C38D4A127BBD69E002865B7 /* PromoBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBannerView.swift; sourceTree = "<group>"; };
 		2C3A035524AE3DCB007D28F7 /* NewProfileStreakNotificationsSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsSwitchView.swift; sourceTree = "<group>"; };
 		2C3A035824AE3E1C007D28F7 /* NewProfileStreakNotificationsTimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsTimeSelectionView.swift; sourceTree = "<group>"; };
 		2C3A051F25B763370007FBCA /* WidgetURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetURL.swift; sourceTree = "<group>"; };
@@ -5397,6 +5403,7 @@
 				2CD80A7D269C47670047AE3C /* PaginationState.swift */,
 				2CD1D9EB272AA8D80031C78E /* PaymentStore.swift */,
 				2CEDC660260898F700B0B018 /* PlatformType.swift */,
+				2C38D49D27BBCAC6002865B7 /* PromoBanner.swift */,
 				2C5D340725C98A6800372C61 /* PromoCode.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
 				2C619A7E24D0004B007D3529 /* SocialProfileProvider.swift */,
@@ -9061,6 +9068,7 @@
 				62E98CA36176671DDF744499 /* PaddingLabel.swift */,
 				2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */,
 				62E984651165CED551545B5C /* ProgressCircleImage.swift */,
+				2C38D4A127BBD69E002865B7 /* PromoBannerView.swift */,
 				2CB2740322C515050078CA2F /* QuizElementView.swift */,
 				62E988152D37F6F6884F2977 /* ScrollableStackView.swift */,
 				62E98315DDA05307C326E27C /* SeparatorView.swift */,
@@ -9647,6 +9655,7 @@
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
 				2C911B9925C037EB0076DC31 /* PersonalOffersService.swift */,
+				2C38D49F27BBD074002865B7 /* PromoBannersService.swift */,
 				2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
@@ -11531,6 +11540,7 @@
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
 				2C7F41672694938700BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountItemView.swift in Sources */,
+				2C38D4A227BBD69E002865B7 /* PromoBannerView.swift in Sources */,
 				2C1AC31E255B476A00E6ECA9 /* CatalogBlocksRepository.swift in Sources */,
 				2C2972052147F5FD001502BD /* CourseTag.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepikVideoPlayerViewController.swift in Sources */,
@@ -12310,6 +12320,7 @@
 				62E9804624D413C3F8D71AC7 /* CodeDetailsContentView.swift in Sources */,
 				2C87A7A82446646600933CA4 /* UserActivityEntity.swift in Sources */,
 				62E98E54D4E57B4371493032 /* CodeDetailsLimitItemView.swift in Sources */,
+				2C38D4A027BBD074002865B7 /* PromoBannersService.swift in Sources */,
 				62E98C379F06E77CC850DE57 /* CodeDetailsSampleItemView.swift in Sources */,
 				62E988B311FB626588A8615D /* CodeDetailsView.swift in Sources */,
 				62E9819CB6D1AAFEECBF7732 /* CodeEditorView.swift in Sources */,
@@ -12757,6 +12768,7 @@
 				733EA9B5B70C811D7A144DF3 /* CourseRevenueTabMonthlyInputProtocol.swift in Sources */,
 				EF3252195A0C7A3F15319D12 /* CourseRevenueTabMonthlyOutputProtocol.swift in Sources */,
 				F8189D6BC4B0A57D076B052A /* StepQuizReviewAssembly.swift in Sources */,
+				2C38D49E27BBCAC6002865B7 /* PromoBanner.swift in Sources */,
 				EE315359D4CBD905081C5F10 /* StepQuizReviewDataFlow.swift in Sources */,
 				2C6277C3270C905200FDAFD9 /* SiriShortcutsStorageManager.swift in Sources */,
 				B7A7B95C8D6C1A2A54487E5B /* StepQuizReviewInteractor.swift in Sources */,

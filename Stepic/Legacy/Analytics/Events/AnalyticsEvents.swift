@@ -108,6 +108,38 @@ extension AnalyticsEvent {
     static let profileOpenSettingsTapped = AnalyticsEvent(name: "main_choice_settings")
     static let profilePinsMapInteracted = AnalyticsEvent(name: "pins_map_interaction")
 
+    // MARK: - Promo Banners -
+
+    static func promoBannerSeen(_ promoBanner: PromoBanner) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "Promo banner seen",
+            parameters: [
+                "type": promoBanner.type,
+                "lang": promoBanner.lang,
+                "title": promoBanner.title,
+                "description": promoBanner.description,
+                "url": promoBanner.url,
+                "screen": promoBanner.screen,
+                "position": promoBanner.position
+            ]
+        )
+    }
+
+    static func promoBannerClicked(_ promoBanner: PromoBanner) -> AnalyticsEvent {
+        AnalyticsEvent(
+            name: "Promo banner clicked",
+            parameters: [
+                "type": promoBanner.type,
+                "lang": promoBanner.lang,
+                "title": promoBanner.title,
+                "description": promoBanner.description,
+                "url": promoBanner.url,
+                "screen": promoBanner.screen,
+                "position": promoBanner.position
+            ]
+        )
+    }
+
     // MARK: - Step -
 
     static let generateNewAttemptTapped = AnalyticsEvent(name: "clicked_generate_new_attempt")

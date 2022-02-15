@@ -33,13 +33,20 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
+            promoBannersService: PromoBannersService(remoteConfig: .shared),
             networkReachabilityService: networkReachabilityService
         )
     }
 
     func doContentLoad(request: Explore.ContentLoad.Request) {
         self.explorePresenter?.presentContent(
-            response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
+            response: .init(
+                contentLanguage: self.contentLanguageService.globalContentLanguage,
+                promoBanners: self.promoBannersService.getPromoBanners(
+                    language: self.contentLanguageService.globalContentLanguage,
+                    screen: .catalog
+                )
+            )
         )
         self.syncPersonalOffers()
     }

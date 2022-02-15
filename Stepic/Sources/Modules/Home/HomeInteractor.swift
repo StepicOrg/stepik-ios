@@ -24,6 +24,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
+            promoBannersService: PromoBannersService(remoteConfig: .shared),
             networkReachabilityService: networkReachabilityService
         )
     }
@@ -52,7 +53,11 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         self.homePresenter?.presentContent(
             response: .init(
                 isAuthorized: self.userAccountService.isAuthorized,
-                contentLanguage: self.contentLanguageService.globalContentLanguage
+                contentLanguage: self.contentLanguageService.globalContentLanguage,
+                promoBanners: self.promoBannersService.getPromoBanners(
+                    language: self.contentLanguageService.globalContentLanguage,
+                    screen: .home
+                )
             )
         )
     }
