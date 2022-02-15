@@ -5,9 +5,9 @@ protocol PromoBannersServiceProtocol: AnyObject {
 }
 
 extension PromoBannersServiceProtocol {
-    func getRussianPromoBanners() -> [PromoBanner] { self.getPromoBanners().russianPromoBanners() }
-
-    func getEnglishPromoBanners() -> [PromoBanner] { self.getPromoBanners().englishPromoBanners() }
+    func getPromoBanners(language: ContentLanguage, screen: PromoBanner.ScreenType) -> [PromoBanner] {
+        self.getPromoBanners().filter { $0.lang == language.languageString && $0.screenType == screen }
+    }
 }
 
 final class PromoBannersService: PromoBannersServiceProtocol {
@@ -26,23 +26,16 @@ final class PromoBannersService: PromoBannersServiceProtocol {
 
         do {
             let decoder = JSONDecoder()
+
             let promoBanners = try decoder.decode([PromoBanner].self, from: data)
-            return promoBanners
+            let supportedPromoBanners = promoBanners.filter {
+                $0.colorType != nil && $0.screenType != nil && $0.position >= 0
+            }
+
+            return supportedPromoBanners
         } catch {
             print("PromoBannersService :: failed decode with error = \(error)")
             return []
         }
-    }
-}
-
-// MARK: - Sequence where Element == PromoBanner -
-
-extension Sequence where Element == PromoBanner {
-    func russianPromoBanners() -> [PromoBanner] { self.promoBanners(for: .russian) }
-
-    func englishPromoBanners() -> [PromoBanner] { self.promoBanners(for: .english) }
-
-    private func promoBanners(for contentLanguage: ContentLanguage) -> [PromoBanner] {
-        self.filter { $0.lang == contentLanguage.languageString }
     }
 }

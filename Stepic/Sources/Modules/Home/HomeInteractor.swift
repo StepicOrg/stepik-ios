@@ -24,6 +24,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
+            promoBannersService: PromoBannersService(remoteConfig: .shared),
             networkReachabilityService: networkReachabilityService
         )
     }
@@ -49,10 +50,16 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
     }
 
     func doContentLoad(request: Home.ContentLoad.Request) {
+        let promoBanners = self.promoBannersService.getPromoBanners(
+            language: Locale.current.languageCode == ContentLanguage.russian.languageString ? .russian : .english,
+            screen: .home
+        )
+
         self.homePresenter?.presentContent(
             response: .init(
                 isAuthorized: self.userAccountService.isAuthorized,
-                contentLanguage: self.contentLanguageService.globalContentLanguage
+                contentLanguage: self.contentLanguageService.globalContentLanguage,
+                promoBanners: promoBanners
             )
         )
     }

@@ -23,11 +23,13 @@ enum Home {
         struct Response {
             let isAuthorized: Bool
             let contentLanguage: ContentLanguage
+            let promoBanners: [PromoBanner]
         }
 
         struct ViewModel {
             let isAuthorized: Bool
             let contentLanguage: ContentLanguage
+            let promoBanners: [PromoBanner]
         }
     }
 

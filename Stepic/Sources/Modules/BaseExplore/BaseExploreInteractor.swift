@@ -9,15 +9,18 @@ protocol BaseExploreInteractorProtocol {
 class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProtocol {
     let presenter: BaseExplorePresenterProtocol
     let contentLanguageService: ContentLanguageServiceProtocol
+    let promoBannersService: PromoBannersServiceProtocol
     let networkReachabilityService: NetworkReachabilityServiceProtocol
 
     init(
         presenter: BaseExplorePresenterProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
+        promoBannersService: PromoBannersServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol
     ) {
         self.presenter = presenter
         self.contentLanguageService = contentLanguageService
+        self.promoBannersService = promoBannersService
         self.networkReachabilityService = networkReachabilityService
     }
 

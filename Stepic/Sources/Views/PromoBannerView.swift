@@ -8,7 +8,7 @@ extension PromoBannerView {
         let shadowColor = UIColor.black
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4.0
-        let shadowOpacity: Float = 0.1
+        let shadowOpacity: Float = 0.05
 
         let titleLabelFont = UIFont.systemFont(ofSize: 18, weight: .bold)
         let titleLabelInsets = LayoutInsets(top: 16, left: 16)
@@ -41,11 +41,25 @@ final class PromoBannerView: UIControl {
         return imageView
     }()
 
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
+
+    var subtitle: String? {
+        didSet {
+            self.subtitleLabel.text = self.subtitle
+        }
+    }
+
     var style = Style.green {
         didSet {
             self.updateStyle()
         }
     }
+
+    var onClick: (() -> Void)?
 
     override var isHighlighted: Bool {
         didSet {
@@ -110,6 +124,11 @@ final class PromoBannerView: UIControl {
         self.subtitleLabel.textColor = self.style.subtitleLabelTextColor
     }
 
+    @objc
+    private func handleTouchUpInside() {
+        self.onClick?()
+    }
+
     // MARK: Inner Types
 
     enum Style {
@@ -161,7 +180,9 @@ final class PromoBannerView: UIControl {
 // MARK: - PromoBannerView: ProgrammaticallyInitializableViewProtocol -
 
 extension PromoBannerView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
+    func setupView() {
+        self.addTarget(self, action: #selector(self.handleTouchUpInside), for: .touchUpInside)
+    }
 
     func addSubviews() {
         self.addSubview(self.illustrationImageView)
@@ -173,7 +194,7 @@ extension PromoBannerView: ProgrammaticallyInitializableViewProtocol {
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(self.appearance.titleLabelInsets.edgeInsets)
-            make.width.equalToSuperview().multipliedBy(0.4)
+            make.width.equalToSuperview().multipliedBy(0.5)
         }
 
         self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -181,7 +202,7 @@ extension PromoBannerView: ProgrammaticallyInitializableViewProtocol {
             make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.subtitleLabelInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.subtitleLabelInsets.left)
             make.bottom.equalToSuperview().offset(-self.appearance.subtitleLabelInsets.bottom)
-            make.width.equalToSuperview().multipliedBy(0.5)
+            make.width.equalToSuperview().multipliedBy(0.6)
         }
 
         self.illustrationImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -189,6 +210,19 @@ extension PromoBannerView: ProgrammaticallyInitializableViewProtocol {
             make.top.bottom.trailing.equalToSuperview()
             make.height.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.4)
+        }
+    }
+}
+
+extension PromoBannerView.Style {
+    init(colorType: PromoBanner.ColorType) {
+        switch colorType {
+        case .blue:
+            self = .blue
+        case .green:
+            self = .green
+        case .violet:
+            self = .violet
         }
     }
 }

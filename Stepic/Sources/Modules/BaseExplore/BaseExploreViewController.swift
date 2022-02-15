@@ -48,6 +48,7 @@ class BaseExploreViewController: UIViewController {
 
     func registerSubmodule(_ submodule: Submodule) {
         self.submodules.append(submodule)
+        self.submodules.sort { $0.type.position < $1.type.position }
 
         if let viewController = submodule.viewController {
             self.addChild(viewController)

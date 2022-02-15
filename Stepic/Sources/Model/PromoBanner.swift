@@ -9,7 +9,15 @@ struct PromoBanner: Decodable {
     let screen: String
     let position: Int
 
+    var colorType: ColorType? { ColorType(rawValue: self.type) }
+
     var screenType: ScreenType? { ScreenType(rawValue: self.screen) }
+
+    enum ColorType: String {
+        case blue
+        case green
+        case violet
+    }
 
     enum ScreenType: String {
         case home

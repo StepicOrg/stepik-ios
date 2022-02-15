@@ -33,6 +33,7 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         super.init(
             presenter: presenter,
             contentLanguageService: contentLanguageService,
+            promoBannersService: PromoBannersService(remoteConfig: .shared),
             networkReachabilityService: networkReachabilityService
         )
     }

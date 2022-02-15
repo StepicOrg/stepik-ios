@@ -499,6 +499,51 @@ final class HomeViewController: BaseExploreViewController {
             )
         )
     }
+
+    // MARK: Promo Banners
+
+    private func refreshStateForPromoBanners(_ promoBanners: [PromoBanner]) {
+        promoBanners.forEach(self.registerPromoBanner(_:))
+    }
+
+    private func registerPromoBanner(_ promoBanner: PromoBanner) {
+        if let module = self.getSubmodule(type: promoBanner) {
+            self.removeSubmodule(module)
+        }
+
+        guard let colorType = promoBanner.colorType else {
+            return
+        }
+
+        let view = PromoBannerView()
+        view.title = promoBanner.title
+        view.subtitle = promoBanner.description
+        view.style = .init(colorType: colorType)
+        view.onClick = {
+            print("HomeViewController :: click promo = \(promoBanner)")
+        }
+
+        let headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
+        var contentViewInsets = CourseListContainerViewFactory.Appearance.horizontalContentInsets
+        contentViewInsets.left = headerViewInsets.left
+        contentViewInsets.right = headerViewInsets.right
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: .init(title: nil, summary: nil, shouldShowAllButton: false),
+                contentViewInsets: contentViewInsets
+            )
+
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: false,
+                type: promoBanner
+            )
+        )
+    }
 }
 
 // MARK: - HomeViewController: HomeViewControllerProtocol -
@@ -561,6 +606,7 @@ extension HomeViewController: HomeViewControllerProtocol {
             strongSelf.refreshReviewsAndWishlist(state: shouldDisplayReviewsAndWishlist ? .shown : .hidden)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
+            strongSelf.refreshStateForPromoBanners(viewModel.promoBanners)
         }
     }
 
@@ -585,4 +631,8 @@ extension Home.Submodule: SubmoduleType {
         }
         return position
     }
+}
+
+extension PromoBanner: SubmoduleType {
+    var uniqueIdentifier: UniqueIdentifierType { "promoBanner\(self.position)" }
 }
