@@ -705,6 +705,9 @@
 		2C63C777253EFE2300B20195 /* TableDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63C776253EFE2300B20195 /* TableDataset.swift */; };
 		2C67E7E326C180D700F4450B /* StepQuizReviewExpandQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67E7E226C180D700F4450B /* StepQuizReviewExpandQuizView.swift */; };
 		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
+		2C6917C625EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6917C525EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift */; };
+		2C6917D525EE489900BAE0F5 /* ExplorePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6917D425EE489900BAE0F5 /* ExplorePlaceholderView.swift */; };
+		2C6917E325EE650200BAE0F5 /* ExplorePlaceholderActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6917E225EE650200BAE0F5 /* ExplorePlaceholderActionButton.swift */; };
 		2C698C9524CEA90100979661 /* NewProfileCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C698C9424CEA90100979661 /* NewProfileCoverView.swift */; };
 		2C69BDCE26C147A3007C51FB /* StepQuizReviewTeacherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */; };
 		2C69BDD126C1482B007C51FB /* StepQuizReviewViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */; };
@@ -2737,6 +2740,9 @@
 		2C67CA5124E3F9D0002634EB /* Model_profile_personal_preferences_v62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_personal_preferences_v62.xcdatamodel; sourceTree = "<group>"; };
 		2C67E7E226C180D700F4450B /* StepQuizReviewExpandQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewExpandQuizView.swift; sourceTree = "<group>"; };
 		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
+		2C6917C525EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExploreBlockPlaceholderView.swift; sourceTree = "<group>"; };
+		2C6917D425EE489900BAE0F5 /* ExplorePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePlaceholderView.swift; sourceTree = "<group>"; };
+		2C6917E225EE650200BAE0F5 /* ExplorePlaceholderActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePlaceholderActionButton.swift; sourceTree = "<group>"; };
 		2C698C9424CEA90100979661 /* NewProfileCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileCoverView.swift; sourceTree = "<group>"; };
 		2C69BDCD26C147A3007C51FB /* StepQuizReviewTeacherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewTeacherView.swift; sourceTree = "<group>"; };
 		2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewViewProtocols.swift; sourceTree = "<group>"; };
@@ -5014,6 +5020,17 @@
 				2C69BDD026C1482B007C51FB /* StepQuizReviewViewProtocols.swift */,
 			);
 			path = StepQuizReviewView;
+			sourceTree = "<group>";
+		};
+		2C6917CF25EE484300BAE0F5 /* ExploreBlockPlaceholderView */ = {
+			isa = PBXGroup;
+			children = (
+				62E9892AAAD4FAA927DCFC57 /* ExploreBlockPlaceholderView.swift */,
+				2C6917E225EE650200BAE0F5 /* ExplorePlaceholderActionButton.swift */,
+				2C6917D425EE489900BAE0F5 /* ExplorePlaceholderView.swift */,
+				2C6917C525EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift */,
+			);
+			path = ExploreBlockPlaceholderView;
 			sourceTree = "<group>";
 		};
 		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
@@ -9803,11 +9820,11 @@
 			isa = PBXGroup;
 			children = (
 				62E984A1DC4A18EBC5E68559 /* CourseListContainerViewFactory.swift */,
-				62E9892AAAD4FAA927DCFC57 /* ExploreBlockPlaceholderView.swift */,
 				62E98101487588BB70A5C1A7 /* ExploreSearchBar.swift */,
 				62E98664A22248D073D6BAE2 /* ExploreStoriesContainerView.swift */,
 				2C73B0D725628ECD00EA217D /* ExploreBlockContainerView */,
 				2C73B0E625628FD300EA217D /* ExploreBlockHeaderView */,
+				2C6917CF25EE484300BAE0F5 /* ExploreBlockPlaceholderView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -11266,6 +11283,7 @@
 				2CF9BD3C2538508800C2AFD2 /* PromiseKit+Retry.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsCellSkeletonView.swift in Sources */,
+				2C6917E325EE650200BAE0F5 /* ExplorePlaceholderActionButton.swift in Sources */,
 				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
 				2C5D341625C997DF00372C61 /* CurrencySymbolMap.swift in Sources */,
 				2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */,
@@ -11380,6 +11398,9 @@
 				2C98423C26DE4CA80098E36B /* SearchResult+CoreDataProperties.swift in Sources */,
 				2C12E4722565668000DC52CB /* UIViewController+PresentPanModal.swift in Sources */,
 				2CBEAACE271EFA9A00B52D2C /* CourseInfoPurchaseModalDisclaimerView.swift in Sources */,
+				2C12E4722565668000DC52CB /* UIViewController+PresentPadPanModal.swift in Sources */,
+				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
+				2C6917C625EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift in Sources */,
 				2CA867C12588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift in Sources */,
 				2C0FE8C425F81A4900626289 /* InstructionPlainObject.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
@@ -11401,6 +11422,7 @@
 				2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
+				2C6917D525EE489900BAE0F5 /* ExplorePlaceholderView.swift in Sources */,
 				2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */,
 				2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */,
 				083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
