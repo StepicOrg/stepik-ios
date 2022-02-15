@@ -4,7 +4,7 @@ import UIKit
 extension ExploreStoriesContainerView {
     struct Appearance {
         let storiesViewHeight: CGFloat = 98
-        let storiesViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        let storiesViewInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -50,7 +50,7 @@ extension ExploreStoriesContainerView: ProgrammaticallyInitializableViewProtocol
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.storiesViewInsets.top)
-            make.bottom.equalToSuperview().offset(-self.appearance.storiesViewInsets.bottom)
+            make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.storiesViewHeight)
         }
