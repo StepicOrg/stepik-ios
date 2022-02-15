@@ -1,6 +1,10 @@
 import UIKit
 
 final class CourseListContainerViewFactory {
+    struct HorizontalContainerDescription {
+        let background: ExploreBlockContainerView.Appearance.Background
+    }
+
     struct HorizontalHeaderDescription {
         var title: String?
         var summary: String?
@@ -80,6 +84,7 @@ final class CourseListContainerViewFactory {
 
     func makeHorizontalContainerView(
         for contentView: UIView,
+        containerDescription: HorizontalContainerDescription? = nil,
         headerDescription: HorizontalHeaderDescription,
         headerViewInsets: UIEdgeInsets? = nil,
         contentViewInsets: UIEdgeInsets? = Appearance.horizontalContentInsets
@@ -94,6 +99,7 @@ final class CourseListContainerViewFactory {
         return self.makeHorizontalContainerView(
             headerView: headerView,
             contentView: contentView,
+            containerDescription: containerDescription,
             headerViewInsets: headerViewInsets,
             contentViewInsets: contentViewInsets
         )
@@ -101,6 +107,7 @@ final class CourseListContainerViewFactory {
 
     func makeHorizontalCoursesCollectionContainerView(
         for contentView: UIView,
+        containerDescription: HorizontalContainerDescription? = nil,
         headerDescription: HorizontalCoursesCollectionHeaderDescription,
         headerViewInsets: UIEdgeInsets? = nil,
         contentViewInsets: UIEdgeInsets? = Appearance.horizontalContentInsets
@@ -115,6 +122,7 @@ final class CourseListContainerViewFactory {
         return self.makeHorizontalContainerView(
             headerView: headerView,
             contentView: contentView,
+            containerDescription: containerDescription,
             headerViewInsets: headerViewInsets,
             contentViewInsets: contentViewInsets
         )
@@ -157,10 +165,15 @@ final class CourseListContainerViewFactory {
     private func makeHorizontalContainerView(
         headerView: UIView & ExploreBlockHeaderViewProtocol,
         contentView: UIView,
+        containerDescription: HorizontalContainerDescription?,
         headerViewInsets: UIEdgeInsets?,
         contentViewInsets: UIEdgeInsets?
     ) -> ExploreBlockContainerView {
         var appearance = self.colorMode.exploreBlockContainerViewAppearance
+
+        if let containerDescription = containerDescription {
+            appearance.background = containerDescription.background
+        }
 
         if let headerViewInsets = headerViewInsets {
             appearance.headerViewInsets = headerViewInsets
