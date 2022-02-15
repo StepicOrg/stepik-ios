@@ -1,8 +1,9 @@
 import Foundation
 import PromiseKit
+import StepikModel
 
 protocol WishlistRepositoryProtocol: AnyObject {
-    func fetchWishlistEntries(sourceType: DataSourceType) -> Promise<[WishlistEntryPlainObject]>
+    func fetchWishlistEntries(sourceType: DataSourceType) -> Promise<[WishlistEntry]>
 
     func addCourseToWishlist(courseID: Course.IdType) -> Promise<Void>
     func deleteCourseFromWishlist(courseID: Course.IdType, sourceType: DataSourceType) -> Promise<Void>
@@ -30,7 +31,7 @@ final class WishlistRepository: WishlistRepositoryProtocol {
         self.dataBackUpdateService = dataBackUpdateService
     }
 
-    func fetchWishlistEntries(sourceType: DataSourceType) -> Promise<[WishlistEntryPlainObject]> {
+    func fetchWishlistEntries(sourceType: DataSourceType) -> Promise<[WishlistEntry]> {
         switch sourceType {
         case .cache:
             return self.wishlistEntriesPersistenceService
@@ -65,7 +66,7 @@ final class WishlistRepository: WishlistRepositoryProtocol {
             if sourceType == .remote {
                 return self.wishlistEntriesPersistenceService
                     .fetch(courseID: courseID)
-                    .then { cachedWishlistEntry -> Promise<WishlistEntryPlainObject?> in
+                    .then { cachedWishlistEntry -> Promise<WishlistEntry?> in
                         if let cachedWishlistEntry = cachedWishlistEntry {
                             return .value(cachedWishlistEntry.plainObject)
                         }

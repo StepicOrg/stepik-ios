@@ -11,7 +11,7 @@ import Foundation
 import PromiseKit
 
 final class AchievementProgressesAPI: APIEndpoint {
-    override var name: String { "achievement-progresses" }
+    override class var name: String { "achievement-progresses" }
 
     func retrieve(
         userID: Int,
@@ -34,8 +34,8 @@ final class AchievementProgressesAPI: APIEndpoint {
             }
 
             self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: params,
                 updatingObjects: [],
                 withManager: self.manager

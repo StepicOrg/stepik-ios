@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class VisitedCoursesAPI: APIEndpoint {
-    override var name: String { "visited-courses" }
+    override class var name: String { "visited-courses" }
 
     func retrieve(page: Int = 1) -> Promise<([VisitedCourse], Meta)> {
         let params: Parameters = [
@@ -12,8 +12,8 @@ final class VisitedCoursesAPI: APIEndpoint {
         ]
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )

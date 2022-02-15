@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class UsersAPI: APIEndpoint {
-    override var name: String { "users" }
+    override class var name: String { "users" }
 
     func retrieve(
         ids: [Int],
@@ -48,7 +48,7 @@ extension UsersAPI {
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,

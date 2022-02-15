@@ -13,7 +13,7 @@ import UIKit
 
 //TODO: Refactor this after DeviceError refactoring
 final class DevicesAPI: APIEndpoint {
-    override var name: String { "devices" }
+    override class var name: String { "devices" }
 
     func retrieve(registrationId: String) -> Promise<Device?> {
         Promise { seal in
@@ -32,7 +32,7 @@ final class DevicesAPI: APIEndpoint {
     func retrieve(deviceId: Int, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         Promise { seal in
             self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)/\(deviceId)",
                 parameters: [:],
                 headers: headers
             ).responseSwiftyJSON { response in
@@ -70,7 +70,7 @@ final class DevicesAPI: APIEndpoint {
             ]
 
             self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)/\(deviceId)",
                 method: .put,
                 parameters: params,
                 encoding: JSONEncoding.default,
@@ -169,7 +169,7 @@ final class DevicesAPI: APIEndpoint {
     ) -> Promise<(Meta, [Device])> {
         Promise { seal in
             self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)",
                 parameters: params,
                 headers: headers
             ).responseSwiftyJSON { response in

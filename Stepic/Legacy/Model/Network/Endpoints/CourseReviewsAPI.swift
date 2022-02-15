@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CourseReviewsAPI: APIEndpoint {
-    override var name: String { "course-reviews" }
+    override class var name: String { "course-reviews" }
 
     /// Get course reviews by course id.
     func retrieve(courseID: Course.IdType, page: Int = 1) -> Promise<([CourseReview], Meta)> {
@@ -25,8 +25,8 @@ final class CourseReviewsAPI: APIEndpoint {
             CourseReview.fetch(courseID: courseID).then {
                 cachedReviews -> Promise<([CourseReview], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: parameters,
                     updatingObjects: cachedReviews,
                     withManager: self.manager
@@ -50,8 +50,8 @@ final class CourseReviewsAPI: APIEndpoint {
             CourseReview.fetch(courseID: courseID, userID: userID).then {
                 cachedReviews -> Promise<([CourseReview], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: parameters,
                     updatingObjects: cachedReviews,
                     withManager: self.manager
@@ -75,8 +75,8 @@ final class CourseReviewsAPI: APIEndpoint {
             CourseReview.fetch(userID: userID).then {
                 cachedReviews -> Promise<([CourseReview], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: parameters,
                     updatingObjects: cachedReviews,
                     withManager: self.manager
@@ -93,8 +93,8 @@ final class CourseReviewsAPI: APIEndpoint {
     func retrieveAll(userID: User.IdType) -> Promise<[CourseReview]> {
         CourseReview.fetch(userID: userID).then {
             self.retrieve.requestWithCollectAllPages(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: ["user": userID],
                 updatingObjects: $0,
                 withManager: self.manager
@@ -111,8 +111,8 @@ final class CourseReviewsAPI: APIEndpoint {
         let courseReview = CourseReview(courseID: courseID, userID: userID, score: score, text: text)
         return Promise { seal in
             self.create.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 creatingObject: courseReview,
                 withManager: self.manager
             ).done { courseReview, _ in
@@ -125,8 +125,8 @@ final class CourseReviewsAPI: APIEndpoint {
 
     func update(_ courseReview: CourseReview) -> Promise<CourseReview> {
         self.update.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             updatingObject: courseReview,
             withManager: self.manager
         )
@@ -134,7 +134,7 @@ final class CourseReviewsAPI: APIEndpoint {
 
     func delete(id: CourseReview.IdType) -> Promise<Void> {
         self.delete.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             deletingId: id,
             withManager: self.manager
         ).then {

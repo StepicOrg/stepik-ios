@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class DiscussionProxiesAPI: APIEndpoint {
-    override var name: String { "discussion-proxies" }
+    override class var name: String { "discussion-proxies" }
 
     func retrieve(id: String) -> Promise<DiscussionProxy> {
         self.retrieve.request(

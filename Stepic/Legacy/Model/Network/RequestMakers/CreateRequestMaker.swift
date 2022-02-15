@@ -123,3 +123,50 @@ final class CreateRequestMaker {
         case badRequest
     }
 }
+
+// MARK: - Response Decodable -
+
+extension CreateRequestMaker {
+    func requestDecodable<T: Decodable>(
+        requestEndpoint: String,
+        bodyJSONObject body: Any,
+        withManager manager: Alamofire.Session
+    ) -> Promise<T> {
+        guard let url = URL(string: "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)") else {
+            return Promise(error: Error.badRequest)
+        }
+
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            return Promise(error: Error.badRequest)
+        }
+
+        return Promise { seal in
+            checkToken().done {
+                manager.request(request).validate().responseDecodable { (response: AFDataResponse<T>) in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let decodable):
+                        seal.fulfill(decodable)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
+    func requestDecodableObjects<T: Decodable>(
+        requestEndpoint: String,
+        bodyJSONObject body: Any,
+        withManager manager: Alamofire.Session
+    ) -> Promise<DecodedObjectsResponse<T>> {
+        self.requestDecodable(requestEndpoint: requestEndpoint, bodyJSONObject: body, withManager: manager)
+    }
+}

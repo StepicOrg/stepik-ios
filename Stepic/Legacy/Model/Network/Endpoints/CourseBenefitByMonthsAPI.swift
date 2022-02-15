@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CourseBenefitByMonthsAPI: APIEndpoint {
-    override var name: String { "course-benefit-by-months" }
+    override class var name: String { "course-benefit-by-months" }
 
     private let courseBenefitByMonthsPersistenceService: CourseBenefitByMonthsPersistenceServiceProtocol
 
@@ -24,8 +24,8 @@ final class CourseBenefitByMonthsAPI: APIEndpoint {
         return self.courseBenefitByMonthsPersistenceService.fetch(courseID: courseID).then {
             cachedCourseBenefitByMonths -> Promise<([CourseBenefitByMonth], Meta)> in
             self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: params,
                 updatingObjects: cachedCourseBenefitByMonths,
                 withManager: self.manager

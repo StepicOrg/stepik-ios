@@ -12,12 +12,12 @@ import PromiseKit
 import SwiftyJSON
 
 final class StepicsAPI: APIEndpoint {
-    override var name: String { "stepics" }
+    override class var name: String { "stepics" }
 
     func retrieveCurrentUser() -> Promise<User> {
         Promise { seal in
             self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(name)/1",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)/1",
                 parameters: nil,
                 encoding: URLEncoding.default,
                 headers: AuthInfo.shared.initialHTTPHeaders

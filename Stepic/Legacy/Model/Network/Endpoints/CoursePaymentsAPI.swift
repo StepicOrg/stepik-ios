@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CoursePaymentsAPI: APIEndpoint {
-    override var name: String { "course-payments" }
+    override class var name: String { "course-payments" }
 
     func retrieve(courseID: Course.IdType) -> Promise<([CoursePayment], Meta)> {
         let params: Parameters = [
@@ -13,8 +13,8 @@ final class CoursePaymentsAPI: APIEndpoint {
         ]
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )
@@ -22,7 +22,7 @@ final class CoursePaymentsAPI: APIEndpoint {
 
     func create(_ coursePayment: CoursePayment) -> Promise<CoursePayment> {
         self.create.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "course-payment",
             creatingObject: coursePayment,
             withManager: self.manager

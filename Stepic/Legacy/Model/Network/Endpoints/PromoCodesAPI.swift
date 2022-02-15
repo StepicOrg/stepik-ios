@@ -6,11 +6,11 @@ import SwiftyJSON
 final class PromoCodesAPI: APIEndpoint {
     typealias CheckPromoCodeResponse = (price: Float, currencyCode: String)
 
-    override var name: String { "promo-codes" }
+    override class var name: String { "promo-codes" }
 
     func check(courseID: Course.IdType, name: String) -> Promise<CheckPromoCodeResponse> {
         Promise { seal in
-            let urlPath = "\(StepikApplicationsInfo.apiURL)/\(self.name)/check"
+            let urlPath = "\(StepikApplicationsInfo.apiURL)/\(Self.name)/check"
 
             let params: Parameters = [
                 JSONKey.course.rawValue: courseID,

@@ -12,6 +12,8 @@ import PromiseKit
 import SwiftyJSON
 
 final class RetrieveRequestMaker {
+    // MARK: SwiftyJSON
+
     func request(
         requestEndpoint: String,
         params: Parameters? = nil,
@@ -134,7 +136,7 @@ final class RetrieveRequestMaker {
     func requestWithCollectAllPages<T: JSONSerializable>(
         requestEndpoint: String,
         paramName: String,
-        params: Parameters,
+        params: Parameters = [:],
         updatingObjects: [T] = [],
         withManager manager: Alamofire.Session
     ) -> Promise<[T]> {
@@ -144,7 +146,7 @@ final class RetrieveRequestMaker {
             Promise { seal in
                 firstly { () -> Promise<([T], Meta)> in
                     var currentPageParams = params
-                    currentPageParams["page"] = page
+                    currentPageParams[Meta.CodingKeys.page.rawValue] = page
 
                     return self.request(
                         requestEndpoint: requestEndpoint,
@@ -351,5 +353,82 @@ final class RetrieveRequestMaker {
         if objectType is ManagedObject.Type {
             CoreDataHelper.shared.save()
         }
+    }
+}
+
+// MARK: - Response Decodable -
+
+extension RetrieveRequestMaker {
+    func requestDecodable<T: Decodable>(
+        requestEndpoint: String,
+        params: Parameters? = nil,
+        withManager manager: Alamofire.Session
+    ) -> Promise<T> {
+        Promise { seal in
+            checkToken().done {
+                manager.request(
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    parameters: params,
+                    encoding: URLEncoding.default
+                ).validate().responseDecodable { (response: AFDataResponse<T>) in
+                    switch response.result {
+                    case .failure(let error):
+                        seal.reject(NetworkError(error: error))
+                    case .success(let decodable):
+                        seal.fulfill(decodable)
+                    }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
+    func requestDecodableObjects<T: Decodable>(
+        requestEndpoint: String,
+        params: Parameters? = nil,
+        withManager manager: Alamofire.Session
+    ) -> Promise<DecodedObjectsResponse<T>> {
+        self.requestDecodable(requestEndpoint: requestEndpoint, params: params, withManager: manager)
+    }
+
+    func requestDecodableObjectsWithCollectAllPages<T: Decodable>(
+        requestEndpoint: String,
+        params: Parameters = [:],
+        withManager manager: Alamofire.Session
+    ) -> Promise<[T]> {
+        var allDecodedObjects = [T]()
+
+        func load(page: Int) -> Promise<Bool> {
+            Promise { seal in
+                firstly { () -> Promise<DecodedObjectsResponse<T>> in
+                    var currentPageParams = params
+                    currentPageParams[Meta.CodingKeys.page.rawValue] = page
+
+                    return self.requestDecodableObjects(
+                        requestEndpoint: requestEndpoint,
+                        params: currentPageParams,
+                        withManager: manager
+                    )
+                }.done { response in
+                    allDecodedObjects.append(contentsOf: response.decodedObjects)
+                    seal.fulfill(response.meta.hasNext)
+                }.catch { error in
+                    seal.reject(error)
+                }
+            }
+        }
+
+        func collect(page: Int) -> Promise<[T]> {
+            load(page: page).then { hasNext -> Promise<[T]> in
+                if hasNext {
+                    return collect(page: page + 1)
+                } else {
+                    return .value(allDecodedObjects)
+                }
+            }
+        }
+
+        return collect(page: 1)
     }
 }

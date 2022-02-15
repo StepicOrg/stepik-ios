@@ -1,31 +1,26 @@
 import Foundation
 import SwiftyJSON
 
-struct Meta {
-    let hasNext: Bool
-    let hasPrev: Bool
+struct Meta: Codable {
     let page: Int
+    let hasNext: Bool
+    let hasPrevious: Bool
 
     static var oneAndOnlyPage: Meta {
-        Meta(hasNext: false, hasPrev: false, page: 1)
+        Meta(page: 1, hasNext: false, hasPrevious: false)
     }
 
-    init(hasNext: Bool, hasPrev: Bool, page: Int) {
-        self.hasNext = hasNext
-        self.hasPrev = hasPrev
-        self.page = page
-    }
-
-    init(json: JSON) {
-        self.hasNext = json[JSONKey.hasNext.rawValue].boolValue
-        self.hasPrev = json[JSONKey.hasPrevious.rawValue].boolValue
-        self.page = json[JSONKey.page.rawValue].intValue
-    }
-
-    enum JSONKey: String {
-        case meta
+    enum CodingKeys: String, CodingKey {
+        case page
         case hasNext = "has_next"
         case hasPrevious = "has_previous"
-        case page
+    }
+}
+
+extension Meta {
+    init(json: JSON) {
+        self.page = json[CodingKeys.page.rawValue].intValue
+        self.hasNext = json[CodingKeys.hasNext.rawValue].boolValue
+        self.hasPrevious = json[CodingKeys.hasPrevious.rawValue].boolValue
     }
 }

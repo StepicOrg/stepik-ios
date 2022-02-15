@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CourseReviewSummariesAPI: APIEndpoint {
-    override var name: String { "course-review-summaries" }
+    override class var name: String { "course-review-summaries" }
 
     @discardableResult
     func retrieve(
@@ -24,7 +24,7 @@ final class CourseReviewSummariesAPI: APIEndpoint {
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,

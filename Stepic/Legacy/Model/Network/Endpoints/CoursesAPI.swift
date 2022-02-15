@@ -14,7 +14,7 @@ import SwiftyJSON
 final class CoursesAPI: APIEndpoint {
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
 
-    override var name: String { "courses" }
+    override class var name: String { "courses" }
 
     init(
         coursesPersistenceService: CoursesPersistenceServiceProtocol = CoursesPersistenceService(),
@@ -142,7 +142,7 @@ final class CoursesAPI: APIEndpoint {
         error errorHandler: @escaping (NetworkError) -> Void
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,

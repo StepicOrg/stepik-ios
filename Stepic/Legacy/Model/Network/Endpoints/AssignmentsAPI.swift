@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class AssignmentsAPI: APIEndpoint {
-    override var name: String { "assignments" }
+    override class var name: String { "assignments" }
 
     @discardableResult
     func retrieve(
@@ -24,7 +24,7 @@ final class AssignmentsAPI: APIEndpoint {
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,

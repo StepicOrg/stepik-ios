@@ -12,12 +12,12 @@ import PromiseKit
 import SwiftyJSON
 
 final class UserActivitiesAPI: APIEndpoint {
-    override var name: String { "user-activities" }
+    override class var name: String { "user-activities" }
 
     func retrieve(user userId: Int) -> Promise<UserActivity> {
         self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             id: userId,
             withManager: self.manager
         )
