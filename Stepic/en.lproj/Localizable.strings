@@ -315,7 +315,6 @@ Recommended = "Recommended";
 VisitedCourses = "Visited courses";
 Home = "Home";
 RecommendedCategory = "Recommended courses";
-NewHomePlaceholderAnonymousButtonTitle = "Find your first course";
 NewHomePlaceholderErrorTitle = "Connection is lost";
 NewHomePlaceholderErrorButtonTitle = "Try Again";
 NewHomePlaceholderEmptyEnrolledTitle = "Your courses will be here";

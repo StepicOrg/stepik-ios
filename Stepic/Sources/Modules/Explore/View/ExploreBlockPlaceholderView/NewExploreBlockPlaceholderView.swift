@@ -65,44 +65,40 @@ final class NewExploreBlockPlaceholderView: UIView {
 
         fileprivate var title: String {
             switch self {
-            case .enrolledEmpty:
+            case .enrolledEmpty, .anonymous:
                 return NSLocalizedString("NewHomePlaceholderEmptyEnrolledTitle", comment: "")
             case .error:
                 return NSLocalizedString("NewHomePlaceholderErrorTitle", comment: "")
-            case .anonymous:
-                return ""
             }
         }
 
         fileprivate var actionButtonTitle: String {
             switch self {
-            case .enrolledEmpty:
+            case .enrolledEmpty, .anonymous:
                 return NSLocalizedString("NewHomePlaceholderEmptyEnrolledButtonTitle", comment: "")
             case .error:
                 return NSLocalizedString("NewHomePlaceholderErrorButtonTitle", comment: "")
-            case .anonymous:
-                return NSLocalizedString("NewHomePlaceholderAnonymousButtonTitle", comment: "")
             }
         }
 
         fileprivate var actionButtonImage: UIImage? {
             switch self {
-            case .enrolledEmpty:
+            case .enrolledEmpty, .anonymous:
                 return UIImage(named: "plus")?.withRenderingMode(.alwaysTemplate)
-            case .error, .anonymous:
+            case .error:
                 return nil
             }
         }
 
         fileprivate var appearance: ExplorePlaceholderView.Appearance {
             switch self {
-            case .enrolledEmpty:
+            case .enrolledEmpty, .anonymous:
                 return .init(
                     titleFont: Typography.title1Font,
                     titleTextColor: UIColor.stepikVioletFixed.withAlphaComponent(0.38),
                     titleTextAlignment: .left
                 )
-            case .error, .anonymous:
+            case .error:
                 return .init(
                     titleFont: Typography.bodyFont,
                     titleTextColor: UIColor.stepikMaterialSecondaryText,

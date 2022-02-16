@@ -316,7 +316,6 @@ Recommended = "Рекомендуемые";
 VisitedCourses = "Посещённые курсы";
 Home = "Обучение";
 RecommendedCategory = "Подборка";
-NewHomePlaceholderAnonymousButtonTitle = "Найдите свой первый курс";
 NewHomePlaceholderErrorTitle = "Соединение потеряно";
 NewHomePlaceholderErrorButtonTitle = "Повторить";
 NewHomePlaceholderEmptyEnrolledTitle = "Здесь появятся ваши Курсы";

@@ -157,7 +157,7 @@ final class HomeViewController: BaseExploreViewController {
     private func displayFullscreenVisitedCourseList() {
         self.interactor.doFullscreenCourseListPresentation(
             request: .init(
-                presentationDescription: nil,
+                presentationDescription: .init(title: NSLocalizedString("VisitedCourses", comment: "")),
                 courseListType: VisitedCourseListType()
             )
         )
@@ -167,6 +167,7 @@ final class HomeViewController: BaseExploreViewController {
         self.interactor.doFullscreenCourseListPresentation(
             request: .init(
                 presentationDescription: .init(
+                    title: NSLocalizedString("Recommended", comment: ""),
                     courseListFilterDescription: .init(
                         availableFilters: .all,
                         prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
@@ -253,7 +254,7 @@ final class HomeViewController: BaseExploreViewController {
             // Build placeholder
             let placeholderView = NewExploreBlockPlaceholderView(placeholderStyle: state.placeholderStyle)
             switch state {
-            case .anonymous:
+            case .anonymous, .empty:
                 placeholderView.onActionButtonClick = { [weak self] in
                     self?.displayCatalog()
                 }
@@ -261,11 +262,7 @@ final class HomeViewController: BaseExploreViewController {
                 placeholderView.onActionButtonClick = { [weak self] in
                     self?.refreshStateForEnrolledCourses(state: .normal)
                 }
-            case .empty:
-                placeholderView.onActionButtonClick = { [weak self] in
-                    self?.displayCatalog()
-                }
-            default:
+            case .normal:
                 break
             }
             (view, viewController) = (placeholderView, nil)
