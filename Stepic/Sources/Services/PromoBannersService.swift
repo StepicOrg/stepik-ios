@@ -6,7 +6,13 @@ protocol PromoBannersServiceProtocol: AnyObject {
 
 extension PromoBannersServiceProtocol {
     func getPromoBanners(language: ContentLanguage, screen: PromoBanner.ScreenType) -> [PromoBanner] {
-        self.getPromoBanners().filter { $0.lang == language.languageString && $0.screenType == screen }
+        var seen: Set<Int> = []
+        return self.getPromoBanners()
+            .filter { banner in
+                banner.lang == language.languageString &&
+                banner.screenType == screen &&
+                seen.insert(banner.position).inserted
+            }
     }
 }
 
