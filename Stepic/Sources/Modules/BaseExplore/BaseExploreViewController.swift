@@ -10,9 +10,7 @@ protocol BaseExploreViewControllerProtocol: AnyObject {
     func displayProfile(viewModel: BaseExplore.ProfilePresentation.ViewModel)
 }
 
-protocol SubmoduleType: UniqueIdentifiable {
-    var position: Int { get }
-}
+protocol ExploreSubmoduleType: UniqueIdentifiable {}
 
 class BaseExploreViewController: UIViewController {
     let interactor: BaseExploreInteractorProtocol
@@ -47,22 +45,24 @@ class BaseExploreViewController: UIViewController {
     // MARK: Modules
 
     func registerSubmodule(_ submodule: Submodule) {
-        self.submodules.append(submodule)
-        self.submodules.sort { $0.type.position < $1.type.position }
+        defer {
+            self.submodules.append(submodule)
+            self.submodules.sort { self.getSubmodulePosition(type: $0.type) < self.getSubmodulePosition(type: $1.type) }
+        }
 
         if let viewController = submodule.viewController {
             self.addChild(viewController)
         }
 
-        // We have contract here:
-        // - subviews in exploreView have same position as in corresponding Submodule object
-        for module in self.submodules where module.type.position >= submodule.type.position {
-            self.exploreView?.insertBlockView(
-                submodule.view,
-                before: module.view
-            )
-            return
-        }
+        let insertionIndex: Int = {
+            for (idx, sub) in self.submodules.enumerated()
+                where self.getSubmodulePosition(type: sub.type) >= self.getSubmodulePosition(type: submodule.type) {
+                return idx
+            }
+            return self.submodules.endIndex
+        }()
+
+        self.exploreView?.insertBlockView(submodule.view, at: insertionIndex)
     }
 
     func removeLanguageDependentSubmodules() {
@@ -77,9 +77,11 @@ class BaseExploreViewController: UIViewController {
         self.submodules = self.submodules.filter { submodule.view != $0.view }
     }
 
-    func getSubmodule(type: SubmoduleType) -> Submodule? {
+    func getSubmodule(type: ExploreSubmoduleType) -> Submodule? {
         self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
+
+    func getSubmodulePosition(type: ExploreSubmoduleType) -> Int { 0 }
 
     final func tryToSetOnlineState(moduleInput: CourseListInputProtocol) {
         self.interactor.doOnlineModeReset(request: .init(modules: [moduleInput]))
@@ -126,7 +128,7 @@ class BaseExploreViewController: UIViewController {
         let viewController: UIViewController?
         let view: UIView
         let isLanguageDependent: Bool
-        let type: SubmoduleType
+        let type: ExploreSubmoduleType
     }
 }
 

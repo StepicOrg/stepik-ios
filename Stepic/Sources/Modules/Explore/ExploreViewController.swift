@@ -21,17 +21,20 @@ final class ExploreViewController: BaseExploreViewController {
         static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
-    static let submodulesOrder: [Explore.Submodule] = [
+    fileprivate static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
         .catalogBlocks,
         .visitedCourses
     ]
+    private static let promoBannersSubmodulesOrderOffset = 2
+    private var submodulesOrderMap: [UniqueIdentifierType: Int] = [:]
 
     private var state: Explore.ViewControllerState
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var currentContentLanguage: ContentLanguage?
+    private var currentPromoBanners = [PromoBanner]()
     private var currentStoriesSubmoduleState = StoriesState.shown
     // SearchResults
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
@@ -69,8 +72,11 @@ final class ExploreViewController: BaseExploreViewController {
         initialState: Explore.ViewControllerState = .loading
     ) {
         self.state = initialState
+
         super.init(interactor: interactor, analytics: analytics)
+
         self.searchBar.searchBarDelegate = self
+        self.buildSubmodulesOrderMap()
     }
 
     @available(*, unavailable)
@@ -129,6 +135,9 @@ final class ExploreViewController: BaseExploreViewController {
                     return
                 }
 
+                strongSelf.currentPromoBanners = promoBanners
+                strongSelf.buildSubmodulesOrderMap()
+
                 strongSelf.removeLanguageDependentSubmodules()
                 strongSelf.initLanguageDependentSubmodules(contentLanguage: language)
 
@@ -141,12 +150,36 @@ final class ExploreViewController: BaseExploreViewController {
         self.state = newState
     }
 
+    // MARK: - Display submodules
+
     override func refreshContentAfterLanguageChange() {
         self.exploreInteractor?.doContentLoad(request: .init())
     }
 
     override func refreshContentAfterLoginAndLogout() {
         self.exploreInteractor?.doContentLoad(request: .init())
+    }
+
+    override func getSubmodulePosition(type: ExploreSubmoduleType) -> Int {
+        self.submodulesOrderMap[type.uniqueIdentifier] ?? 0
+    }
+
+    private func buildSubmodulesOrderMap() {
+        var orderMap = Dictionary(
+            uniqueKeysWithValues: Self.submodulesOrder.enumerated().map { ($0.element.uniqueIdentifier, $0.offset) }
+        )
+
+        for (idx, banner) in self.currentPromoBanners.enumerated() {
+            let position = banner.position + Self.promoBannersSubmodulesOrderOffset
+            orderMap[banner.uniqueIdentifier] = position + idx
+
+            let submodulesToShift = Set(Self.submodulesOrder.suffix(from: position).map(\.uniqueIdentifier))
+            for (key, value) in orderMap where submodulesToShift.contains(key) {
+                orderMap[key] = value + 1
+            }
+        }
+
+        self.submodulesOrderMap = orderMap
     }
 
     private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
@@ -327,20 +360,17 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     private func registerPromoBanner(_ promoBanner: PromoBanner) {
-        var updatedPromoBanner = promoBanner
-        updatedPromoBanner.position += 2
-
-        if let module = self.getSubmodule(type: updatedPromoBanner) {
+        if let module = self.getSubmodule(type: promoBanner) {
             self.removeSubmodule(module)
         }
 
-        guard let colorType = updatedPromoBanner.colorType else {
+        guard let colorType = promoBanner.colorType else {
             return
         }
 
         let view = PromoBannerView()
-        view.title = updatedPromoBanner.title
-        view.subtitle = updatedPromoBanner.description
+        view.title = promoBanner.title
+        view.subtitle = promoBanner.description
         view.style = .init(colorType: colorType)
         view.onClick = { [weak self] in
             guard let strongSelf = self else {
@@ -380,7 +410,7 @@ final class ExploreViewController: BaseExploreViewController {
                 viewController: nil,
                 view: containerView,
                 isLanguageDependent: true,
-                type: updatedPromoBanner
+                type: promoBanner
             )
         )
 
@@ -388,14 +418,7 @@ final class ExploreViewController: BaseExploreViewController {
     }
 }
 
-extension Explore.Submodule: SubmoduleType {
-    var position: Int {
-        guard let position = ExploreViewController.submodulesOrder.firstIndex(of: self) else {
-            fatalError("Given submodule type has unknown position")
-        }
-        return position
-    }
-}
+extension Explore.Submodule: ExploreSubmoduleType {}
 
 // MARK: - ExploreViewController: ExploreViewControllerProtocol -
 

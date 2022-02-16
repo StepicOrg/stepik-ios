@@ -8,7 +8,7 @@ extension PromoBannerView {
         let shadowColor = UIColor.black
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4.0
-        let shadowOpacity: Float = 0.05
+        let shadowOpacity: Float = 0.1
 
         let titleLabelFont = UIFont.systemFont(ofSize: 18, weight: .bold)
         let titleLabelInsets = LayoutInsets(top: 16, left: 16)
@@ -40,6 +40,8 @@ final class PromoBannerView: UIControl {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+
+    private lazy var backgroundColorView = UIView()
 
     var title: String? {
         didSet {
@@ -103,6 +105,9 @@ final class PromoBannerView: UIControl {
         self.layer.cornerRadius = self.appearance.cornerRadius
         self.layer.masksToBounds = true
 
+        self.backgroundColorView.layer.cornerRadius = self.appearance.cornerRadius
+        self.backgroundColorView.clipsToBounds = true
+
         self.layer.shadowColor = self.appearance.shadowColor.cgColor
         self.layer.shadowOffset = self.appearance.shadowOffset
         self.layer.shadowRadius = self.appearance.shadowRadius
@@ -117,7 +122,9 @@ final class PromoBannerView: UIControl {
     // MARK: Private API
 
     private func updateStyle() {
-        self.backgroundColor = self.style.backgroundColor
+        self.backgroundColor = self.style == .green ? .white : .clear
+        self.backgroundColorView.backgroundColor = self.style.backgroundColor
+
         self.illustrationImageView.image = self.style.illustrationImage
 
         self.titleLabel.textColor = self.style.titleLabelTextColor
@@ -139,24 +146,22 @@ final class PromoBannerView: UIControl {
         fileprivate var backgroundColor: UIColor {
             switch self {
             case .blue:
-                return .dynamic(light: .stepikOverlayDarkBlueFixed, dark: .stepikOverlayBlueBackground)
+                return .stepikOverlayDarkBlueFixed
             case .green:
                 return .stepikOverlayGreenBackground
             case .violet:
-                return .dynamic(light: .stepikViolet05Fixed, dark: .stepikViolet05Fixed.withAlphaComponent(0.12))
+                return .stepikViolet05Fixed
             }
         }
 
-        fileprivate var titleLabelTextColor: UIColor {
-            .dynamic(light: .black, dark: .stepikMaterialPrimaryText)
-        }
+        fileprivate var titleLabelTextColor: UIColor { .black }
 
         fileprivate var subtitleLabelTextColor: UIColor {
             switch self {
             case .blue, .violet:
-                return .dynamic(light: .white, dark: .stepikMaterialSecondaryText)
+                return .white
             case .green:
-                return .stepikMaterialSecondaryText
+                return .black.withAlphaComponent(0.6)
             }
         }
 
@@ -185,12 +190,16 @@ extension PromoBannerView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
+        self.addSubview(self.backgroundColorView)
         self.addSubview(self.illustrationImageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.subtitleLabel)
     }
 
     func makeConstraints() {
+        self.backgroundColorView.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColorView.snp.makeConstraints { $0.edges.equalToSuperview() }
+
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(self.appearance.titleLabelInsets.edgeInsets)

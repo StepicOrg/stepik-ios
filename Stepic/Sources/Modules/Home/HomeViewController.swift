@@ -22,9 +22,12 @@ final class HomeViewController: BaseExploreViewController {
         .visitedCourses,
         .popularCourses
     ]
+    private static let promoBannersSubmodulesOrderOffset = 1
+    private var submodulesOrderMap: [UniqueIdentifierType: Int] = [:]
 
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag = false
+    private var lastPromoBanners = [PromoBanner]()
 
     private var currentEnrolledCourseListState: EnrolledCourseListState?
     private var currentReviewsAndWishlistState: ReviewsAndWishlistState?
@@ -38,6 +41,7 @@ final class HomeViewController: BaseExploreViewController {
         super.init(interactor: interactor, analytics: analytics)
 
         self.title = NSLocalizedString("Home", comment: "")
+        self.buildSubmodulesOrderMap()
     }
 
     @available(*, unavailable)
@@ -85,6 +89,28 @@ final class HomeViewController: BaseExploreViewController {
 
     override func refreshContentAfterLoginAndLogout() {
         self.homeInteractor?.doContentLoad(request: .init())
+    }
+
+    override func getSubmodulePosition(type: ExploreSubmoduleType) -> Int {
+        self.submodulesOrderMap[type.uniqueIdentifier] ?? 0
+    }
+
+    private func buildSubmodulesOrderMap() {
+        var orderMap = Dictionary(
+            uniqueKeysWithValues: Self.submodulesOrder.enumerated().map { ($0.element.uniqueIdentifier, $0.offset) }
+        )
+
+        for banner in self.lastPromoBanners {
+            let position = banner.position + Self.promoBannersSubmodulesOrderOffset
+            orderMap[banner.uniqueIdentifier] = position
+
+            let submodulesToShift = Set(Self.submodulesOrder.suffix(from: position).map(\.uniqueIdentifier))
+            for (key, value) in orderMap where submodulesToShift.contains(key) {
+                orderMap[key] = value + 1
+            }
+        }
+
+        self.submodulesOrderMap = orderMap
     }
 
     // MARK: - Streak activity
@@ -534,13 +560,12 @@ final class HomeViewController: BaseExploreViewController {
         }
 
         var headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
-        if promoBanner.position > 0 {
-            headerViewInsets.top = 0
-        }
 
         var contentViewInsets = CourseListContainerViewFactory.Appearance.horizontalContentInsets
         contentViewInsets.left = headerViewInsets.left
         contentViewInsets.right = headerViewInsets.right
+
+        headerViewInsets.top = contentViewInsets.bottom
 
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
@@ -613,11 +638,15 @@ extension HomeViewController: HomeViewControllerProtocol {
 
             strongSelf.lastContentLanguage = viewModel.contentLanguage
             strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
+            strongSelf.lastPromoBanners = viewModel.promoBanners
+
+            strongSelf.buildSubmodulesOrderMap()
 
             let shouldDisplayContinueCourse = viewModel.isAuthorized
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
             let shouldDisplayReviewsAndWishlist = viewModel.isAuthorized
 
+            strongSelf.removeLanguageDependentSubmodules()
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshReviewsAndWishlist(state: shouldDisplayReviewsAndWishlist ? .shown : .hidden)
@@ -641,15 +670,8 @@ extension HomeViewController: BaseExploreViewDelegate {
     }
 }
 
-extension Home.Submodule: SubmoduleType {
-    var position: Int {
-        guard let position = HomeViewController.submodulesOrder.firstIndex(of: self) else {
-            fatalError("Given submodule type has unknown position")
-        }
-        return position
-    }
-}
+extension Home.Submodule: ExploreSubmoduleType {}
 
-extension PromoBanner: SubmoduleType {
+extension PromoBanner: ExploreSubmoduleType {
     var uniqueIdentifier: UniqueIdentifierType { "promoBanner\(self.position)" }
 }
