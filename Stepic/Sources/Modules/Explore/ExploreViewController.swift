@@ -173,6 +173,10 @@ final class ExploreViewController: BaseExploreViewController {
             let position = banner.position + Self.promoBannersSubmodulesOrderOffset
             orderMap[banner.uniqueIdentifier] = position + idx
 
+            guard 0..<Self.submodulesOrder.count ~= position else {
+                continue
+            }
+
             let submodulesToShift = Set(Self.submodulesOrder.suffix(from: position).map(\.uniqueIdentifier))
             for (key, value) in orderMap where submodulesToShift.contains(key) {
                 orderMap[key] = value + 1
