@@ -11,7 +11,7 @@ import Foundation
 import SwiftyJSON
 
 final class LastStepsAPI: APIEndpoint {
-    override var name: String { "last-steps" }
+    override class var name: String { "last-steps" }
 
     @discardableResult
     func retrieve(
@@ -22,7 +22,7 @@ final class LastStepsAPI: APIEndpoint {
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: updatingLastSteps,

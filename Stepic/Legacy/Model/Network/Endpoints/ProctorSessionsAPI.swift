@@ -4,13 +4,13 @@ import PromiseKit
 import SwiftyJSON
 
 final class ProctorSessionsAPI: APIEndpoint {
-    override var name: String { "proctor-sessions" }
+    override class var name: String { "proctor-sessions" }
 
     func get(ids: [ProctorSession.IdType]) -> Promise<[ProctorSession]> {
         ProctorSession.fetchAsync(ids: ids).then { cachedProctorSessions in
             self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 ids: ids,
                 updating: cachedProctorSessions,
                 withManager: self.manager

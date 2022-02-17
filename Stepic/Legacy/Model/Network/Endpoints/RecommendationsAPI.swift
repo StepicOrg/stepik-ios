@@ -13,7 +13,7 @@ import SwiftyJSON
 
 //TODO: Refactor this class into two separate API classes
 final class RecommendationsAPI: APIEndpoint {
-    override var name: String { "recommendations" }
+    override class var name: String { "recommendations" }
 
     var reactionName: String { "recommendation-reactions" }
 
@@ -24,7 +24,7 @@ final class RecommendationsAPI: APIEndpoint {
     ) -> Promise<[Int]> {
         Promise { seal in
             self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(Self.name)",
                 parameters: [
                     "course": courseId,
                     "count": count

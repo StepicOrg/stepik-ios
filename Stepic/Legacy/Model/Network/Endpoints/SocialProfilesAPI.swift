@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class SocialProfilesAPI: APIEndpoint {
-    override var name: String { "social-profiles" }
+    override class var name: String { "social-profiles" }
 
     /// Get social profiles by ids.
     func retrieve(ids: [Int], page: Int = 1) -> Promise<([SocialProfile], Meta)> {
@@ -15,8 +15,8 @@ final class SocialProfilesAPI: APIEndpoint {
             ]
 
             self.retrieve.requestWithFetching(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: parameters,
                 withManager: self.manager
             ).done { socialProfiles, meta, _ in

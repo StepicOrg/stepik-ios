@@ -150,6 +150,8 @@ class CourseListView: UIView {
             return self.appearance.darkModeBackgroundColor
         case .grouped:
             return self.appearance.groupedModeBackgroundColor
+        case .clearLight:
+            return .clear
         }
     }
 
@@ -187,7 +189,7 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         switch (self.colorMode, self.cardStyle) {
-        case (.light, .normal):
+        case (.light, .normal), (.clearLight, .normal):
             self.collectionView.register(
                 LightCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: LightCourseListCollectionViewCell.defaultReuseIdentifier
@@ -202,7 +204,7 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
                 GroupedCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: GroupedCourseListCollectionViewCell.defaultReuseIdentifier
             )
-        case (.light, .small):
+        case (.light, .small), (.clearLight, .small):
             self.collectionView.register(
                 SmallLightCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: SmallLightCourseListCollectionViewCell.defaultReuseIdentifier

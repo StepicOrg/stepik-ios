@@ -1,13 +1,14 @@
 import Foundation
 import PromiseKit
+import StepikModel
 
 protocol WishListsNetworkServiceProtocol: AnyObject {
-    func fetchWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?>
-    func fetchWishlistEntries() -> Promise<[WishlistEntryPlainObject]>
+    func fetchWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntry?>
+    func fetchWishlistEntries() -> Promise<[WishlistEntry]>
 
-    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject>
+    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntry>
 
-    func deleteWishlistEntry(wishlistEntryID: WishlistEntryPlainObject.IdType) -> Promise<Void>
+    func deleteWishlistEntry(wishlistEntryID: Int) -> Promise<Void>
 }
 
 final class WishListsNetworkService: WishListsNetworkServiceProtocol {
@@ -17,19 +18,19 @@ final class WishListsNetworkService: WishListsNetworkServiceProtocol {
         self.wishListsAPI = wishListsAPI
     }
 
-    func fetchWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject?> {
+    func fetchWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntry?> {
         self.wishListsAPI.retrieveWishlistEntry(courseID: courseID)
     }
 
-    func fetchWishlistEntries() -> Promise<[WishlistEntryPlainObject]> {
+    func fetchWishlistEntries() -> Promise<[WishlistEntry]> {
         self.wishListsAPI.retrieveAllWishlistPages()
     }
 
-    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntryPlainObject> {
+    func createWishlistEntry(courseID: Course.IdType) -> Promise<WishlistEntry> {
         self.wishListsAPI.createWishlistEntry(courseID: courseID)
     }
 
-    func deleteWishlistEntry(wishlistEntryID: WishlistEntryPlainObject.IdType) -> Promise<Void> {
+    func deleteWishlistEntry(wishlistEntryID: Int) -> Promise<Void> {
         self.wishListsAPI.deleteWishlistEntry(wishlistEntryID: wishlistEntryID)
     }
 }

@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class DiscussionThreadsAPI: APIEndpoint {
-    override var name: String { "discussion-threads" }
+    override class var name: String { "discussion-threads" }
 
     /// Get discussion threads by ids.
     func retrieve(ids: [DiscussionThread.IdType], page: Int = 1) -> Promise<([DiscussionThread], Meta)> {
@@ -18,8 +18,8 @@ final class DiscussionThreadsAPI: APIEndpoint {
                 DiscussionThread.fetchAsync(ids: ids)
             }.then { cachedDiscussionThreads -> Promise<([DiscussionThread], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: params,
                     updatingObjects: cachedDiscussionThreads,
                     withManager: self.manager

@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class SectionsAPI: APIEndpoint {
-    override var name: String { "sections" }
+    override class var name: String { "sections" }
 
     func retrieve(ids: [Int], existing: [Section]) -> Promise<[Section]> {
         self.getObjectsByIds(ids: ids, updating: existing, printOutput: false)
@@ -38,7 +38,7 @@ final class SectionsAPI: APIEndpoint {
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,

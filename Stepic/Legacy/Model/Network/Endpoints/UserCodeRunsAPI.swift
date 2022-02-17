@@ -4,10 +4,10 @@ import PromiseKit
 import SwiftyJSON
 
 final class UserCodeRunsAPI: APIEndpoint {
-    override var name: String { "user-code-runs" }
+    override class var name: String { "user-code-runs" }
 
     func retrieve(id: UserCodeRun.IdType) -> Promise<UserCodeRun> {
-        self.retrieve.request(requestEndpoint: self.name, paramName: self.name, id: id, withManager: self.manager)
+        self.retrieve.request(requestEndpoint: Self.name, paramName: Self.name, id: id, withManager: self.manager)
     }
 
     func create(
@@ -26,8 +26,8 @@ final class UserCodeRunsAPI: APIEndpoint {
         )
 
         return self.create.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             creatingObject: userCodeRun,
             withManager: self.manager
         )

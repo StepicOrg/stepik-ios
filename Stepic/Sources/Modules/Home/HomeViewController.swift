@@ -1,6 +1,7 @@
 import PromiseKit
 import UIKit
 
+// swiftlint:disable file_length
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
     func displayContent(viewModel: Home.ContentLoad.ViewModel)
@@ -21,9 +22,12 @@ final class HomeViewController: BaseExploreViewController {
         .visitedCourses,
         .popularCourses
     ]
+    private static let promoBannersSubmodulesOrderOffset = 1
+    private var submodulesOrderMap: [UniqueIdentifierType: Int] = [:]
 
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag = false
+    private var lastPromoBanners = [PromoBanner]()
 
     private var currentEnrolledCourseListState: EnrolledCourseListState?
     private var currentReviewsAndWishlistState: ReviewsAndWishlistState?
@@ -37,6 +41,7 @@ final class HomeViewController: BaseExploreViewController {
         super.init(interactor: interactor, analytics: analytics)
 
         self.title = NSLocalizedString("Home", comment: "")
+        self.buildSubmodulesOrderMap()
     }
 
     @available(*, unavailable)
@@ -84,6 +89,32 @@ final class HomeViewController: BaseExploreViewController {
 
     override func refreshContentAfterLoginAndLogout() {
         self.homeInteractor?.doContentLoad(request: .init())
+    }
+
+    override func getSubmodulePosition(type: ExploreSubmoduleType) -> Int {
+        self.submodulesOrderMap[type.uniqueIdentifier] ?? 0
+    }
+
+    private func buildSubmodulesOrderMap() {
+        var orderMap = Dictionary(
+            uniqueKeysWithValues: Self.submodulesOrder.enumerated().map { ($0.element.uniqueIdentifier, $0.offset) }
+        )
+
+        for banner in self.lastPromoBanners {
+            let position = banner.position + Self.promoBannersSubmodulesOrderOffset
+            orderMap[banner.uniqueIdentifier] = position
+
+            guard 0..<Self.submodulesOrder.count ~= position else {
+                continue
+            }
+
+            let submodulesToShift = Set(Self.submodulesOrder.suffix(from: position).map(\.uniqueIdentifier))
+            for (key, value) in orderMap where submodulesToShift.contains(key) {
+                orderMap[key] = value + 1
+            }
+        }
+
+        self.submodulesOrderMap = orderMap
     }
 
     // MARK: - Streak activity
@@ -156,7 +187,7 @@ final class HomeViewController: BaseExploreViewController {
     private func displayFullscreenVisitedCourseList() {
         self.interactor.doFullscreenCourseListPresentation(
             request: .init(
-                presentationDescription: nil,
+                presentationDescription: .init(title: NSLocalizedString("VisitedCourses", comment: "")),
                 courseListType: VisitedCourseListType()
             )
         )
@@ -166,6 +197,7 @@ final class HomeViewController: BaseExploreViewController {
         self.interactor.doFullscreenCourseListPresentation(
             request: .init(
                 presentationDescription: .init(
+                    title: NSLocalizedString("Recommended", comment: ""),
                     courseListFilterDescription: .init(
                         availableFilters: .all,
                         prefilledFilters: [.courseLanguage(.init(contentLanguage: contentLanguage))],
@@ -185,6 +217,17 @@ final class HomeViewController: BaseExploreViewController {
         case error
         case empty
 
+        var containerDescription: CourseListContainerViewFactory.HorizontalContainerDescription {
+            switch self {
+            case .normal:
+                return .init(background: .image(UIImage(named: "new_courses_gradient")))
+            case .empty:
+                return .init(background: .image(UIImage(named: "new_courses_placeholder_gradient_large")))
+            case .anonymous, .error:
+                return .init(background: .image(UIImage(named: "new_courses_placeholder_gradient_small")))
+            }
+        }
+
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Enrolled", comment: ""),
@@ -193,12 +236,12 @@ final class HomeViewController: BaseExploreViewController {
             )
         }
 
-        var message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage {
+        var placeholderStyle: NewExploreBlockPlaceholderView.PlaceholderStyle {
             switch self {
             case .anonymous:
-                return .login
+                return .anonymous
             case .error:
-                return .enrolledError
+                return .error
             case .empty:
                 return .enrolledEmpty
             default:
@@ -211,7 +254,7 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = EnrolledCourseListType()
         let enrolledCourseListAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .light,
+            colorMode: .clearLight,
             courseViewSource: .myCourses,
             output: self.interactor as? CourseListOutputProtocol
         )
@@ -239,17 +282,17 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makeEnrolledCourseListSubmodule()
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
+            let placeholderView = NewExploreBlockPlaceholderView(placeholderStyle: state.placeholderStyle)
             switch state {
-            case .anonymous:
-                placeholderView.onPlaceholderClick = { [weak self] in
-                    self?.displayAuthorization(viewModel: .init())
+            case .anonymous, .empty:
+                placeholderView.onActionButtonClick = { [weak self] in
+                    self?.displayCatalog()
                 }
             case .error:
-                placeholderView.onPlaceholderClick = { [weak self] in
+                placeholderView.onActionButtonClick = { [weak self] in
                     self?.refreshStateForEnrolledCourses(state: .normal)
                 }
-            default:
+            case .normal:
                 break
             }
             (view, viewController) = (placeholderView, nil)
@@ -262,6 +305,7 @@ final class HomeViewController: BaseExploreViewController {
         let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
+                containerDescription: state.containerDescription,
                 headerDescription: state.headerDescription,
                 contentViewInsets: contentViewInsets
             )
@@ -402,7 +446,7 @@ final class HomeViewController: BaseExploreViewController {
 
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
-                title: NSLocalizedString("Popular", comment: ""),
+                title: NSLocalizedString("Recommended", comment: ""),
                 summary: nil,
                 shouldShowAllButton: self == .normal
             )
@@ -424,7 +468,7 @@ final class HomeViewController: BaseExploreViewController {
         let courseListType = PopularCourseListType(language: contentLanguage)
         let popularAssembly = HorizontalCourseListAssembly(
             type: courseListType,
-            colorMode: .dark,
+            colorMode: .light,
             courseViewSource: .query(courseListType: courseListType),
             output: self.interactor as? CourseListOutputProtocol
         )
@@ -463,7 +507,7 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = (placeholderView, nil)
         }
 
-        let containerView = CourseListContainerViewFactory(colorMode: .dark)
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
             .makeHorizontalContainerView(
                 for: view,
                 headerDescription: state.headerDescription
@@ -482,6 +526,69 @@ final class HomeViewController: BaseExploreViewController {
                 type: Home.Submodule.popularCourses
             )
         )
+    }
+
+    // MARK: Promo Banners
+
+    private func refreshStateForPromoBanners(_ promoBanners: [PromoBanner]) {
+        promoBanners.forEach(self.registerPromoBanner(_:))
+    }
+
+    private func registerPromoBanner(_ promoBanner: PromoBanner) {
+        if let module = self.getSubmodule(type: promoBanner) {
+            self.removeSubmodule(module)
+        }
+
+        guard let colorType = promoBanner.colorType else {
+            return
+        }
+
+        let view = PromoBannerView()
+        view.title = promoBanner.title
+        view.subtitle = promoBanner.description
+        view.style = .init(colorType: colorType)
+        view.onClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.analytics.send(.promoBannerClicked(promoBanner))
+
+            WebControllerManager.shared.presentWebControllerWithURLString(
+                promoBanner.url,
+                inController: strongSelf,
+                withKey: .externalLink,
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
+        }
+
+        var headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
+
+        var contentViewInsets = CourseListContainerViewFactory.Appearance.horizontalContentInsets
+        contentViewInsets.left = headerViewInsets.left
+        contentViewInsets.right = headerViewInsets.right
+
+        headerViewInsets.top = contentViewInsets.bottom
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: .init(title: nil, summary: nil, shouldShowAllButton: false),
+                headerViewInsets: headerViewInsets,
+                contentViewInsets: contentViewInsets
+            )
+
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: true,
+                type: promoBanner
+            )
+        )
+
+        self.analytics.send(.promoBannerSeen(promoBanner))
     }
 }
 
@@ -535,17 +642,26 @@ extension HomeViewController: HomeViewControllerProtocol {
 
             strongSelf.lastContentLanguage = viewModel.contentLanguage
             strongSelf.lastIsAuthorizedFlag = viewModel.isAuthorized
+            strongSelf.lastPromoBanners = viewModel.promoBanners
+
+            strongSelf.buildSubmodulesOrderMap()
 
             let shouldDisplayContinueCourse = viewModel.isAuthorized
             let shouldDisplayAnonymousPlaceholder = !viewModel.isAuthorized
             let shouldDisplayReviewsAndWishlist = viewModel.isAuthorized
 
+            strongSelf.removeLanguageDependentSubmodules()
             strongSelf.refreshContinueCourse(state: shouldDisplayContinueCourse ? .shown : .hidden)
             strongSelf.refreshStateForEnrolledCourses(state: shouldDisplayAnonymousPlaceholder ? .anonymous : .normal)
             strongSelf.refreshReviewsAndWishlist(state: shouldDisplayReviewsAndWishlist ? .shown : .hidden)
             strongSelf.refreshStateForVisitedCourses(state: .shown)
             strongSelf.refreshStateForPopularCourses(state: .normal)
+            strongSelf.refreshStateForPromoBanners(viewModel.promoBanners)
         }
+    }
+
+    func displayCatalog() {
+        DeepLinkRouter.routeToCatalog()
     }
 }
 
@@ -558,11 +674,8 @@ extension HomeViewController: BaseExploreViewDelegate {
     }
 }
 
-extension Home.Submodule: SubmoduleType {
-    var position: Int {
-        guard let position = HomeViewController.submodulesOrder.firstIndex(of: self) else {
-            fatalError("Given submodule type has unknown position")
-        }
-        return position
-    }
+extension Home.Submodule: ExploreSubmoduleType {}
+
+extension PromoBanner: ExploreSubmoduleType {
+    var uniqueIdentifier: UniqueIdentifierType { "promoBanner\(self.position)" }
 }

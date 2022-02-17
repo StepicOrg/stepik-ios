@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class ReviewSessionsAPI: APIEndpoint {
-    override var name: String { "review-sessions" }
+    override class var name: String { "review-sessions" }
 
     func createReviewSession(submissionID: Submission.IdType, blockName: String?) -> Promise<ReviewSessionResponse> {
         let body = [
@@ -14,7 +14,7 @@ final class ReviewSessionsAPI: APIEndpoint {
         ]
 
         return self.create
-            .request(requestEndpoint: self.name, bodyJSONObject: body, withManager: self.manager)
+            .request(requestEndpoint: Self.name, bodyJSONObject: body, withManager: self.manager)
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
 
@@ -26,7 +26,7 @@ final class ReviewSessionsAPI: APIEndpoint {
         ]
 
         return self.create
-            .request(requestEndpoint: self.name, bodyJSONObject: body, withManager: self.manager)
+            .request(requestEndpoint: Self.name, bodyJSONObject: body, withManager: self.manager)
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
 
@@ -37,7 +37,7 @@ final class ReviewSessionsAPI: APIEndpoint {
     /// - Returns: A promise with an `ReviewSessionResponse`.
     func getReviewSessions(ids: [Int], blockName: String?) -> Promise<ReviewSessionResponse> {
         self.retrieve
-            .request(requestEndpoint: self.name, ids: ids, withManager: self.manager)
+            .request(requestEndpoint: Self.name, ids: ids, withManager: self.manager)
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
 
@@ -52,7 +52,7 @@ final class ReviewSessionsAPI: APIEndpoint {
         ]
 
         return self.retrieve
-            .request(requestEndpoint: self.name, params: params, withManager: self.manager)
+            .request(requestEndpoint: Self.name, params: params, withManager: self.manager)
             .map { ReviewSessionResponse(json: $0, blockName: blockName ?? "") }
     }
 

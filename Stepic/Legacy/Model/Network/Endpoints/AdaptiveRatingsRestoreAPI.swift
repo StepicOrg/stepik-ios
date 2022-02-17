@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class AdaptiveRatingsRestoreAPI: APIEndpoint {
-    override var name: String { "rating-restore" }
+    override class var name: String { "rating-restore" }
 
     func restore(courseID: Int) -> Promise<(exp: Int, streak: Int)> {
         var params: Parameters = [
@@ -17,7 +17,7 @@ final class AdaptiveRatingsRestoreAPI: APIEndpoint {
 
         return Promise { seal in
             self.manager.request(
-                "\(RemoteConfig.shared.adaptiveBackendURL)/\(self.name)",
+                "\(RemoteConfig.shared.adaptiveBackendURL)/\(Self.name)",
                 method: .get,
                 parameters: params,
                 encoding: URLEncoding.default,

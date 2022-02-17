@@ -14,7 +14,7 @@ import SwiftyJSON
 final class StorageRecordsAPI: APIEndpoint {
     private static let createUpdateParamName = "storage-record"
 
-    override var name: String { "storage-records" }
+    override class var name: String { "storage-records" }
 
     func retrieve(
         userID: User.IdType,
@@ -31,8 +31,8 @@ final class StorageRecordsAPI: APIEndpoint {
         }
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )
@@ -53,20 +53,20 @@ final class StorageRecordsAPI: APIEndpoint {
         }
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )
     }
 
     func delete(id: Int) -> Promise<Void> {
-        self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager)
+        self.delete.request(requestEndpoint: Self.name, deletingId: id, withManager: self.manager)
     }
 
     func create(record: StorageRecord) -> Promise<StorageRecord> {
         self.create.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: Self.createUpdateParamName,
             creatingObject: record,
             withManager: self.manager
@@ -75,7 +75,7 @@ final class StorageRecordsAPI: APIEndpoint {
 
     func update(record: StorageRecord) -> Promise<StorageRecord> {
         self.update.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: Self.createUpdateParamName,
             updatingObject: record,
             withManager: self.manager

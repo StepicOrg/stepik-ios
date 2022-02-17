@@ -13,7 +13,7 @@ import PromiseKit
 import SwiftyJSON
 
 class APIEndpoint {
-    var name: String { "" }
+    class var name: String { "" }
 
     let manager: Alamofire.Session
 
@@ -67,8 +67,8 @@ class APIEndpoint {
         printOutput: Bool = false
     ) -> Promise<([T])> {
         self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             ids: ids,
             updating: updating,
             withManager: self.manager

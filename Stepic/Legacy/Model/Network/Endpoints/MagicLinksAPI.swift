@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class MagicLinksAPI: APIEndpoint {
-    override var name: String { "magic-links" }
+    override class var name: String { "magic-links" }
 
     func create(magicLink: MagicLink) -> Promise<MagicLink> {
         guard let nextURLPath = magicLink.nextURLPath else {
@@ -16,7 +16,7 @@ final class MagicLinksAPI: APIEndpoint {
         }
 
         return self.create.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "magic-link",
             creatingObject: magicLink,
             withManager: self.manager

@@ -126,6 +126,10 @@ The price includes commission from App Store and VAT. By paying for access to th
         self.getNSStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlowPromoCodeEnabled)?.boolValue ?? false
     }
 
+    var promoBannersStringValue: String? {
+        self.getStringValueFromDelegateOrRemoteConfigForKey(.promoBanners)
+    }
+
     init(delegate: RemoteConfigDelegate? = nil) {
         self.delegate = delegate
 
@@ -241,31 +245,9 @@ The price includes commission from App Store and VAT. By paying for access to th
         case purchaseFlowDisclaimerRussian = "purchase_flow_ios_disclaimer_ru"
         case purchaseFlowDisclaimerEnglish = "purchase_flow_ios_disclaimer_en"
         case purchaseFlowPromoCodeEnabled = "purchase_flow_ios_promocode_enabled"
+        case promoBanners = "promo_banners_ios"
 
-        var valueDataType: ValueDataType {
-            switch self {
-            case .showStreaksNotificationTrigger:
-                return .string
-            case .adaptiveBackendUrl:
-                return .string
-            case .supportedInAdaptiveModeCourses:
-                return .string
-            case .arQuickLookAvailable:
-                return .string
-            case .searchResultsQueryParams:
-                return .string
-            case .isCoursePricesEnabled:
-                return .string
-            case .isCourseRevenueAvailable:
-                return .string
-            case .purchaseFlow:
-                return .string
-            case .purchaseFlowDisclaimerRussian, .purchaseFlowDisclaimerEnglish:
-                return .string
-            case .purchaseFlowPromoCodeEnabled:
-                return .string
-            }
-        }
+        var valueDataType: ValueDataType { .string }
 
         fileprivate var analyticsUserPropertyKey: String {
             "\(RemoteConfig.analyticsUserPropertyKeyPrefix)\(self.rawValue)"

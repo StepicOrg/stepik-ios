@@ -14,7 +14,7 @@ import SwiftyJSON
 final class UnitsAPI: APIEndpoint {
     private let unitsPersistenceService: UnitsPersistenceServiceProtocol
 
-    override var name: String { "units" }
+    override class var name: String { "units" }
 
     init(
         unitsPersistenceService: UnitsPersistenceServiceProtocol = UnitsPersistenceService(),
@@ -30,8 +30,8 @@ final class UnitsAPI: APIEndpoint {
 
         return Promise { seal in
             self.retrieve.request(
-                requestEndpoint: self.name,
-                paramName: self.name,
+                requestEndpoint: Self.name,
+                paramName: Self.name,
                 params: params,
                 updatingObjects: [Unit](),
                 withManager: self.manager
@@ -69,7 +69,7 @@ final class UnitsAPI: APIEndpoint {
         error errorHandler: @escaping (NetworkError) -> Void
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: self.name,
+            requestString: Self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,

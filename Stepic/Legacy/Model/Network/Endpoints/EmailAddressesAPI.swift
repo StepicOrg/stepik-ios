@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class EmailAddressesAPI: APIEndpoint {
-    override var name: String { "email-addresses" }
+    override class var name: String { "email-addresses" }
 
     /// Get email addresses by ids.
     func retrieve(ids: [EmailAddress.IdType], page: Int = 1) -> Promise<([EmailAddress], Meta)> {
@@ -25,8 +25,8 @@ final class EmailAddressesAPI: APIEndpoint {
             EmailAddress.fetchAsync(ids: ids).then {
                 cachedEmailAddresses -> Promise<([EmailAddress], Meta, JSON)> in
                 self.retrieve.request(
-                    requestEndpoint: self.name,
-                    paramName: self.name,
+                    requestEndpoint: Self.name,
+                    paramName: Self.name,
                     params: parameters,
                     updatingObjects: cachedEmailAddresses,
                     withManager: self.manager

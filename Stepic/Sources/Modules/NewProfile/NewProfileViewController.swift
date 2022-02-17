@@ -13,6 +13,10 @@ protocol NewProfileViewControllerProtocol: AnyObject {
     func displayRefreshControl(response: NewProfile.RefreshControlUpdate.ViewModel)
 }
 
+protocol NewProfileSubmoduleType: UniqueIdentifiable {
+    var position: Int { get }
+}
+
 final class NewProfileViewController: UIViewController, ControllerWithStepikPlaceholder {
     enum Animation {
         static let startRefreshDelay: TimeInterval = 1.0
@@ -342,7 +346,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         self.submodules = self.submodules.filter { submodule.view != $0.view }
     }
 
-    private func getSubmodule(type: SubmoduleType) -> Submodule? {
+    private func getSubmodule(type: NewProfileSubmoduleType) -> Submodule? {
         self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
 
@@ -697,9 +701,9 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         weak var viewController: UIViewController?
         weak var view: UIView?
 
-        let type: SubmoduleType
+        let type: NewProfileSubmoduleType
 
-        init(viewController: UIViewController?, view: UIView?, type: SubmoduleType) {
+        init(viewController: UIViewController?, view: UIView?, type: NewProfileSubmoduleType) {
             self.viewController = viewController
             self.view = view
             self.type = type
@@ -806,7 +810,7 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
 
 // MARK: - NewProfile.Submodule: SubmoduleType -
 
-extension NewProfile.Submodule: SubmoduleType {
+extension NewProfile.Submodule: NewProfileSubmoduleType {
     var position: Int {
         guard let position = NewProfileViewController.submodulesOrder.firstIndex(of: self) else {
             fatalError("Given submodule type has unknown position")

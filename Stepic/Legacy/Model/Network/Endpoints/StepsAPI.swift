@@ -14,7 +14,7 @@ import SwiftyJSON
 final class StepsAPI: APIEndpoint {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
-    override var name: String { "steps" }
+    override class var name: String { "steps" }
 
     init(stepsPersistenceService: StepsPersistenceServiceProtocol = StepsPersistenceService()) {
         self.stepsPersistenceService = stepsPersistenceService

@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class SearchResultsAPI: APIEndpoint {
-    override var name: String { "search-results" }
+    override class var name: String { "search-results" }
 
     func searchCourses(
         query: String,
@@ -81,12 +81,12 @@ final class SearchResultsAPI: APIEndpoint {
         }
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             params: params,
             withManager: self.manager
         ).map { json -> ([SearchResultPlainObject], Meta) in
-            let searchResults = json[self.name].arrayValue.map(SearchResultPlainObject.init(json:))
-            let meta = Meta(json: json[Meta.JSONKey.meta.rawValue])
+            let searchResults = json[Self.name].arrayValue.map(SearchResultPlainObject.init(json:))
+            let meta = Meta(json: json["meta"])
             return (searchResults, meta)
         }
     }

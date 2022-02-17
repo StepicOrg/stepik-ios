@@ -33,9 +33,9 @@ class BaseCourseListNetworkService {
 
         let pageIndex = max(0, page - 1)
         let hasNext = slices.indices.contains(pageIndex + 1)
-        let hasPrev = slices.indices.contains(pageIndex - 1)
+        let hasPrevious = slices.indices.contains(pageIndex - 1)
 
-        return (slices[pageIndex], Meta(hasNext: hasNext, hasPrev: hasPrev, page: page))
+        return (slices[pageIndex], Meta(page: page, hasNext: hasNext, hasPrevious: hasPrevious))
     }
 
     enum Error: Swift.Error {

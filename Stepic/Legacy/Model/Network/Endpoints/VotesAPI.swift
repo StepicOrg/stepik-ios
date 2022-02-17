@@ -12,11 +12,11 @@ import PromiseKit
 import SwiftyJSON
 
 final class VotesAPI: APIEndpoint {
-    override var name: String { "votes" }
+    override class var name: String { "votes" }
 
     func update(_ vote: Vote) -> Promise<Vote> {
         self.update.request(
-            requestEndpoint: self.name,
+            requestEndpoint: Self.name,
             paramName: "vote",
             updatingObject: vote,
             withManager: self.manager

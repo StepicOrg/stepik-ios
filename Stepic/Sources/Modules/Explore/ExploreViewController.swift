@@ -21,17 +21,20 @@ final class ExploreViewController: BaseExploreViewController {
         static let modulesRefreshDelay: TimeInterval = 0.3
     }
 
-    static let submodulesOrder: [Explore.Submodule] = [
+    fileprivate static let submodulesOrder: [Explore.Submodule] = [
         .stories,
         .languageSwitch,
         .catalogBlocks,
         .visitedCourses
     ]
+    private static let promoBannersSubmodulesOrderOffset = 2
+    private var submodulesOrderMap: [UniqueIdentifierType: Int] = [:]
 
     private var state: Explore.ViewControllerState
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
     private var currentContentLanguage: ContentLanguage?
+    private var currentPromoBanners = [PromoBanner]()
     private var currentStoriesSubmoduleState = StoriesState.shown
     // SearchResults
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
@@ -69,8 +72,11 @@ final class ExploreViewController: BaseExploreViewController {
         initialState: Explore.ViewControllerState = .loading
     ) {
         self.state = initialState
+
         super.init(interactor: interactor, analytics: analytics)
+
         self.searchBar.searchBarDelegate = self
+        self.buildSubmodulesOrderMap()
     }
 
     @available(*, unavailable)
@@ -122,17 +128,21 @@ final class ExploreViewController: BaseExploreViewController {
 
     private func updateState(newState: Explore.ViewControllerState) {
         switch newState {
-        case .normal(let language):
+        case .normal(let language, let promoBanners):
             self.exploreView?.endRefreshing()
             DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
                 guard let strongSelf = self else {
                     return
                 }
 
+                strongSelf.currentPromoBanners = promoBanners
+                strongSelf.buildSubmodulesOrderMap()
+
                 strongSelf.removeLanguageDependentSubmodules()
                 strongSelf.initLanguageDependentSubmodules(contentLanguage: language)
 
                 strongSelf.refreshStateForVisitedCourses(state: .shown)
+                strongSelf.refreshStateForPromoBanners(promoBanners)
             }
         case .loading:
             break
@@ -140,12 +150,40 @@ final class ExploreViewController: BaseExploreViewController {
         self.state = newState
     }
 
+    // MARK: - Display submodules
+
     override func refreshContentAfterLanguageChange() {
         self.exploreInteractor?.doContentLoad(request: .init())
     }
 
     override func refreshContentAfterLoginAndLogout() {
         self.exploreInteractor?.doContentLoad(request: .init())
+    }
+
+    override func getSubmodulePosition(type: ExploreSubmoduleType) -> Int {
+        self.submodulesOrderMap[type.uniqueIdentifier] ?? 0
+    }
+
+    private func buildSubmodulesOrderMap() {
+        var orderMap = Dictionary(
+            uniqueKeysWithValues: Self.submodulesOrder.enumerated().map { ($0.element.uniqueIdentifier, $0.offset) }
+        )
+
+        for (idx, banner) in self.currentPromoBanners.enumerated() {
+            let position = banner.position + Self.promoBannersSubmodulesOrderOffset
+            orderMap[banner.uniqueIdentifier] = position + idx
+
+            guard 0..<Self.submodulesOrder.count ~= position else {
+                continue
+            }
+
+            let submodulesToShift = Set(Self.submodulesOrder.suffix(from: position).map(\.uniqueIdentifier))
+            for (key, value) in orderMap where submodulesToShift.contains(key) {
+                orderMap[key] = value + 1
+            }
+        }
+
+        self.submodulesOrderMap = orderMap
     }
 
     private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
@@ -318,16 +356,73 @@ final class ExploreViewController: BaseExploreViewController {
     private func ipadCancelSearchButtonClicked() {
         self.searchBarCancelButtonClicked(self.searchBar)
     }
-}
 
-extension Explore.Submodule: SubmoduleType {
-    var position: Int {
-        guard let position = ExploreViewController.submodulesOrder.firstIndex(of: self) else {
-            fatalError("Given submodule type has unknown position")
+    // MARK: Promo Banners
+
+    private func refreshStateForPromoBanners(_ promoBanners: [PromoBanner]) {
+        promoBanners.forEach(self.registerPromoBanner(_:))
+    }
+
+    private func registerPromoBanner(_ promoBanner: PromoBanner) {
+        if let module = self.getSubmodule(type: promoBanner) {
+            self.removeSubmodule(module)
         }
-        return position
+
+        guard let colorType = promoBanner.colorType else {
+            return
+        }
+
+        let view = PromoBannerView()
+        view.title = promoBanner.title
+        view.subtitle = promoBanner.description
+        view.style = .init(colorType: colorType)
+        view.onClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.analytics.send(.promoBannerClicked(promoBanner))
+
+            WebControllerManager.shared.presentWebControllerWithURLString(
+                promoBanner.url,
+                inController: strongSelf,
+                withKey: .externalLink,
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
+        }
+
+        var headerViewInsets = ExploreBlockContainerView.Appearance().headerViewInsets
+        if promoBanner.position > 0 {
+            headerViewInsets.top = 0
+        }
+
+        var contentViewInsets = CourseListContainerViewFactory.Appearance.horizontalContentInsets
+        contentViewInsets.left = headerViewInsets.left
+        contentViewInsets.right = headerViewInsets.right
+
+        let containerView = CourseListContainerViewFactory(colorMode: .light)
+            .makeHorizontalContainerView(
+                for: view,
+                headerDescription: .init(title: nil, summary: nil, shouldShowAllButton: false),
+                headerViewInsets: headerViewInsets,
+                contentViewInsets: contentViewInsets
+            )
+
+        self.registerSubmodule(
+            .init(
+                viewController: nil,
+                view: containerView,
+                isLanguageDependent: true,
+                type: promoBanner
+            )
+        )
+
+        self.analytics.send(.promoBannerSeen(promoBanner))
     }
 }
+
+extension Explore.Submodule: ExploreSubmoduleType {}
 
 // MARK: - ExploreViewController: ExploreViewControllerProtocol -
 

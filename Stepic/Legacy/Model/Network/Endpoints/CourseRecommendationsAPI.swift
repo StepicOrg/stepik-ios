@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CourseRecommendationsAPI: APIEndpoint {
-    override var name: String { "course-recommendations" }
+    override class var name: String { "course-recommendations" }
 
     func getCourseRecommendations(
         languageString: String,
@@ -18,8 +18,8 @@ final class CourseRecommendationsAPI: APIEndpoint {
         ]
 
         return self.retrieve.request(
-            requestEndpoint: self.name,
-            paramName: self.name,
+            requestEndpoint: Self.name,
+            paramName: Self.name,
             params: params,
             withManager: self.manager
         )
