@@ -75,11 +75,7 @@ final class NewProfileView: UIView {
     }
 
     func updateVerticalScrollIndicatorInsets(_ insets: UIEdgeInsets) {
-        if #available(iOS 11.1, *) {
-            self.scrollableStackView.verticalScrollIndicatorInsets = insets
-        } else {
-            self.scrollableStackView.scrollIndicatorInsets = insets
-        }
+        self.scrollableStackView.verticalScrollIndicatorInsets = insets
     }
 
     // MARK: Blocks
