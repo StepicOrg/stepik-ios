@@ -10,14 +10,6 @@ extension CourseInfoHeaderView {
 
         let actionButtonsStackViewSpacing: CGFloat = 16
 
-        let coverImageViewSize = CGSize(width: 32, height: 32)
-        let coverImageViewCornerRadius: CGFloat = 6
-
-        let titleLabelFont = Typography.subheadlineFont
-        let titleLabelColor = UIColor.white
-
-        let titleStackViewSpacing: CGFloat = 8
-
         let marksStackViewSpacing: CGFloat = 8
 
         let statsViewHeight: CGFloat = 17
@@ -96,22 +88,6 @@ final class CourseInfoHeaderView: UIView {
         return stackView
     }()
 
-    private lazy var coverImageView: CourseCoverImageView = {
-        let view = CourseCoverImageView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = self.appearance.coverImageViewCornerRadius
-        return view
-    }()
-
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.titleLabelFont
-        label.numberOfLines = 2
-        label.lineBreakMode = .byTruncatingTail
-        label.textColor = self.appearance.titleLabelColor
-        return label
-    }()
-
     private lazy var verifiedSignView: CourseWidgetStatsItemView = {
         var appearance = CourseWidgetStatsItemView.Appearance()
         appearance.iconSpacing = self.appearance.verifiedSpacing
@@ -133,15 +109,9 @@ final class CourseInfoHeaderView: UIView {
         return stackView
     }()
 
-    // Stack view for title and cover
-    private lazy var titleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = self.appearance.titleStackViewSpacing
-        stackView.axis = .horizontal
-        return stackView
-    }()
-
     private lazy var statsView = CourseInfoStatsView()
+
+    private lazy var titleView = CourseInfoHeaderTitleView()
 
     private lazy var unsupportedIAPPurchaseView = QuizFeedbackView()
 
@@ -188,7 +158,7 @@ final class CourseInfoHeaderView: UIView {
     func setLoading(_ isLoading: Bool) {
         [
             self.actionButtonsStackView,
-            self.titleStackView,
+            self.titleView,
             self.marksStackView
         ].forEach { $0.isHidden = isLoading }
 
@@ -202,12 +172,9 @@ final class CourseInfoHeaderView: UIView {
         }
     }
 
-    // MARK: Public API
-
     func configure(viewModel: CourseInfoHeaderViewModel) {
         self.loadImage(url: viewModel.coverImageURL)
-
-        self.titleLabel.text = viewModel.title
+        self.titleView.title = viewModel.title
 
         self.statsView.learnersLabelText = viewModel.learnersLabelText
         self.statsView.rating = viewModel.rating
@@ -266,7 +233,7 @@ final class CourseInfoHeaderView: UIView {
 
     private func loadImage(url: URL?) {
         self.backgroundView.loadImage(url: url)
-        self.coverImageView.loadImage(url: url)
+        self.titleView.coverImageURL = url
     }
 
     @objc
@@ -293,12 +260,9 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.marksStackView.addArrangedSubview(self.statsView)
         self.marksStackView.addArrangedSubview(self.verifiedSignView)
 
-        self.titleStackView.addArrangedSubview(self.coverImageView)
-        self.titleStackView.addArrangedSubview(self.titleLabel)
-
         self.contentStackView.addArrangedSubview(self.actionButtonsStackView)
         self.contentStackView.addArrangedSubview(self.marksStackView)
-        self.contentStackView.addArrangedSubview(self.titleStackView)
+        self.contentStackView.addArrangedSubview(self.titleView)
         self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
 
         self.addSubview(self.backgroundView)
@@ -347,17 +311,10 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.statsViewHeight)
         }
 
-        self.titleStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.titleStackView.snp.makeConstraints { make in
-            make.width.greaterThanOrEqualToSuperview()
+        self.titleView.translatesAutoresizingMaskIntoConstraints = false
+        self.titleView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
         }
-
-        self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.coverImageView.snp.makeConstraints { make in
-            make.size.equalTo(self.appearance.coverImageViewSize)
-        }
-
-        self.titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         self.unsupportedIAPPurchaseView.translatesAutoresizingMaskIntoConstraints = false
         self.unsupportedIAPPurchaseView.snp.makeConstraints { make in
