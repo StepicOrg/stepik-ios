@@ -76,10 +76,7 @@ final class CourseInfoView: UIView {
 
     /// Real height for header
     var headerHeight: CGFloat {
-        max(
-            0,
-            min(self.appearance.minimalHeaderHeight, self.calculatedHeaderHeight) + self.appearance.headerTopOffset
-        )
+        max(0, self.calculatedHeaderHeight + self.appearance.headerTopOffset)
     }
 
     weak var delegate: CourseInfoViewDelegate?
@@ -133,12 +130,8 @@ final class CourseInfoView: UIView {
     func configure(viewModel: CourseInfoHeaderViewModel) {
         // Update data in header
         self.headerView.configure(viewModel: viewModel)
-
         // Update header height
-        self.calculatedHeaderHeight = self.headerView.calculateHeight(
-            hasVerifiedMark: viewModel.isVerified,
-            hasUnsupportedIAPPurchaseText: viewModel.unsupportedIAPPurchaseText != nil
-        )
+        self.calculatedHeaderHeight = self.headerView.intrinsicContentSize.height
 
         self.delegate?.courseInfoView(
             self,
