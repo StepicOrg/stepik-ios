@@ -42,7 +42,8 @@ The price includes commission from App Store and VAT. By paying for access to th
         Key.purchaseFlow.rawValue: NSString(string: Self.defaultCoursePurchaseFlowType.rawValue),
         Key.purchaseFlowDisclaimerRussian.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerRussian),
         Key.purchaseFlowDisclaimerEnglish.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerEnglish),
-        Key.purchaseFlowPromoCodeEnabled.rawValue: NSNumber(value: false)
+        Key.purchaseFlowPromoCodeEnabled.rawValue: NSNumber(value: false),
+        Key.purchaseFlowStartFlowFromCourseScreenEnabled.rawValue: NSNumber(value: false)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -124,6 +125,12 @@ The price includes commission from App Store and VAT. By paying for access to th
 
     var isPurchaseFlowPromoCodeEnabled: Bool {
         self.getNSStringValueFromDelegateOrRemoteConfigForKey(.purchaseFlowPromoCodeEnabled)?.boolValue ?? false
+    }
+
+    var isPurchaseFlowStartFlowFromCourseScreenEnabled: Bool {
+        self.getNSStringValueFromDelegateOrRemoteConfigForKey(
+            .purchaseFlowStartFlowFromCourseScreenEnabled
+        )?.boolValue ?? false
     }
 
     var promoBannersStringValue: String? {
@@ -245,6 +252,7 @@ The price includes commission from App Store and VAT. By paying for access to th
         case purchaseFlowDisclaimerRussian = "purchase_flow_ios_disclaimer_ru"
         case purchaseFlowDisclaimerEnglish = "purchase_flow_ios_disclaimer_en"
         case purchaseFlowPromoCodeEnabled = "purchase_flow_ios_promocode_enabled"
+        case purchaseFlowStartFlowFromCourseScreenEnabled = "purchase_flow_ios_start_flow_from_course_screen_enabled"
         case promoBanners = "promo_banners_ios"
 
         var valueDataType: ValueDataType { .string }
