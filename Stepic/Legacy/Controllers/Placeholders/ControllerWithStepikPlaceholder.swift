@@ -1,13 +1,7 @@
-//
-//  ControllerWithStepikPlaceholder.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 20.03.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import SnapKit
 import UIKit
+
+// MARK: - StepikPlaceholderControllerContainer -
 
 typealias StepikPlaceholderControllerState = StepikPlaceholderControllerContainer.PlaceholderState
 
@@ -18,6 +12,32 @@ extension StepikPlaceholderControllerContainer {
 }
 
 final class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
+    let appearance: Appearance
+
+    fileprivate let shouldPinPlaceholderToSafeAreaLayoutGuide: Bool
+
+    lazy var placeholderView: StepikPlaceholderView = {
+        let view = StepikPlaceholderView()
+        view.appearance = self.appearance.placeholderAppearance
+        return view
+    }()
+
+    fileprivate var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
+    fileprivate var currentPlaceholderButtonAction: (() -> Void)?
+    fileprivate var isPlaceholderShown = false
+
+    init(
+        appearance: Appearance = Appearance(),
+        shouldPinPlaceholderToSafeAreaLayoutGuide: Bool = false
+    ) {
+        self.appearance = appearance
+        self.shouldPinPlaceholderToSafeAreaLayoutGuide = shouldPinPlaceholderToSafeAreaLayoutGuide
+    }
+
+    func buttonDidClick(_ button: UIButton) {
+        self.currentPlaceholderButtonAction?()
+    }
+
     final class PlaceholderState: Hashable {
         static let anonymous = PlaceholderState(id: "anonymous")
         static let connectionError = PlaceholderState(id: "connectionError")
@@ -42,27 +62,9 @@ final class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate 
             return true
         }
     }
-
-    let appearance: Appearance
-
-    lazy var placeholderView: StepikPlaceholderView = {
-        let view = StepikPlaceholderView()
-        view.appearance = self.appearance.placeholderAppearance
-        return view
-    }()
-
-    fileprivate var registeredPlaceholders: [PlaceholderState: StepikPlaceholder] = [:]
-    fileprivate var currentPlaceholderButtonAction: (() -> Void)?
-    fileprivate var isPlaceholderShown = false
-
-    func buttonDidClick(_ button: UIButton) {
-        currentPlaceholderButtonAction?()
-    }
-
-    init(appearance: Appearance = Appearance()) {
-        self.appearance = appearance
-    }
 }
+
+// MARK: - ControllerWithStepikPlaceholder: AnyObject -
 
 protocol ControllerWithStepikPlaceholder: AnyObject {
     var isPlaceholderShown: Bool { get set }
@@ -75,29 +77,29 @@ protocol ControllerWithStepikPlaceholder: AnyObject {
 extension ControllerWithStepikPlaceholder where Self: UIViewController {
     var isPlaceholderShown: Bool {
         set {
-            placeholderContainer.placeholderView.isHidden = !newValue
-            placeholderContainer.isPlaceholderShown = newValue
+            self.placeholderContainer.placeholderView.isHidden = !newValue
+            self.placeholderContainer.isPlaceholderShown = newValue
         }
         get {
-            placeholderContainer.isPlaceholderShown
+            self.placeholderContainer.isPlaceholderShown
         }
     }
 
     func registerPlaceholder(placeholder: StepikPlaceholder, for state: StepikPlaceholderControllerState) {
-        placeholderContainer.registeredPlaceholders[state] = placeholder
+        self.placeholderContainer.registeredPlaceholders[state] = placeholder
     }
 
     func showPlaceholder(for state: StepikPlaceholderControllerState) {
-        guard let placeholder = placeholderContainer.registeredPlaceholders[state] else {
+        guard let placeholder = self.placeholderContainer.registeredPlaceholders[state] else {
             return
         }
 
-        updatePlaceholderLayout()
-        placeholderContainer.placeholderView.set(placeholder: placeholder.style)
-        placeholderContainer.placeholderView.delegate = placeholderContainer
-        placeholderContainer.currentPlaceholderButtonAction = placeholder.buttonAction
+        self.updatePlaceholderLayout()
+        self.placeholderContainer.placeholderView.set(placeholder: placeholder.style)
+        self.placeholderContainer.placeholderView.delegate = self.placeholderContainer
+        self.placeholderContainer.currentPlaceholderButtonAction = placeholder.buttonAction
 
-        isPlaceholderShown = true
+        self.isPlaceholderShown = true
     }
 
     private func updatePlaceholderLayout() {
@@ -105,16 +107,23 @@ extension ControllerWithStepikPlaceholder where Self: UIViewController {
             return
         }
 
-        if placeholderContainer.placeholderView.superview == nil {
-            placeholderContainer.placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        if self.placeholderContainer.placeholderView.superview == nil {
+            self.placeholderContainer.placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
-            view.addSubview(placeholderContainer.placeholderView)
+            view.addSubview(self.placeholderContainer.placeholderView)
 
-            placeholderContainer.placeholderView.snp.makeConstraints { $0.center.edges.equalTo(view) }
+            if self.placeholderContainer.shouldPinPlaceholderToSafeAreaLayoutGuide {
+                self.placeholderContainer.placeholderView.snp.makeConstraints { make in
+                    make.center.equalTo(view)
+                    make.edges.equalTo(view.safeAreaLayoutGuide)
+                }
+            }  else {
+                self.placeholderContainer.placeholderView.snp.makeConstraints { $0.center.edges.equalTo(view) }
+            }
 
-            placeholderContainer.placeholderView.setNeedsLayout()
-            placeholderContainer.placeholderView.layoutIfNeeded()
+            self.placeholderContainer.placeholderView.setNeedsLayout()
+            self.placeholderContainer.placeholderView.layoutIfNeeded()
         }
-        view.bringSubviewToFront(placeholderContainer.placeholderView)
+        view.bringSubviewToFront(self.placeholderContainer.placeholderView)
     }
 }
