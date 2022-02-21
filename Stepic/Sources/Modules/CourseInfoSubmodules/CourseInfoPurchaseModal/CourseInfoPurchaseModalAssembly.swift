@@ -39,7 +39,8 @@ final class CourseInfoPurchaseModalAssembly: Assembly {
             presenter: presenter,
             provider: provider,
             iapService: IAPService.shared,
-            analytics: StepikAnalytics.shared
+            analytics: StepikAnalytics.shared,
+            remoteConfig: .shared
         )
         let viewController = CourseInfoPurchaseModalViewController(
             interactor: interactor,

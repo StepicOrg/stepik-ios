@@ -21,6 +21,8 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
     private let iapService: IAPServiceProtocol
     private let analytics: Analytics
 
+    private let remoteConfig: RemoteConfig
+
     private let courseID: Course.IdType
     private let initialPromoCodeName: String?
     private let initialMobileTierID: MobileTier.IdType?
@@ -33,6 +35,8 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
 
     private var isRestorePurchaseInProgress = false
 
+    private var isFirstTimeDoModalLoad = true
+
     init(
         courseID: Course.IdType,
         initialPromoCodeName: String?,
@@ -41,7 +45,8 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         presenter: CourseInfoPurchaseModalPresenterProtocol,
         provider: CourseInfoPurchaseModalProviderProtocol,
         iapService: IAPServiceProtocol,
-        analytics: Analytics
+        analytics: Analytics,
+        remoteConfig: RemoteConfig
     ) {
         self.courseID = courseID
         self.initialPromoCodeName = initialPromoCodeName
@@ -51,11 +56,19 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
         self.provider = provider
         self.iapService = iapService
         self.analytics = analytics
+        self.remoteConfig = remoteConfig
 
         self.currentPromoCodeName = initialPromoCodeName
     }
 
     func doModalLoad(request: CourseInfoPurchaseModal.ModalLoad.Request) {
+        // APPS-3600
+        let shouldAutoStartPurchaseFlowAfterModalLoaded = self.isFirstTimeDoModalLoad
+            && !self.remoteConfig.isPurchaseFlowPromoCodeEnabled
+            && self.remoteConfig.isPurchaseFlowStartFlowFromCourseScreenEnabled
+
+        self.isFirstTimeDoModalLoad = false
+
         self.provider
             .fetchCourse()
             .compactMap { $0 }
@@ -76,6 +89,12 @@ final class CourseInfoPurchaseModalInteractor: CourseInfoPurchaseModalInteractor
                 )
 
                 self.presenter.presentModal(response: .init(result: .success(data)))
+
+                DispatchQueue.main.async {
+                    if shouldAutoStartPurchaseFlowAfterModalLoaded {
+                        self.doPurchaseCourse(request: .init())
+                    }
+                }
             }
             .catch { error in
                 self.presenter.presentModal(response: .init(result: .failure(error)))
