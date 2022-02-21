@@ -103,6 +103,18 @@ final class CourseInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.headerView)
+
+        if self.headerView.bounds.contains(convertedPoint) {
+            if let targetView = self.headerView.hitTest(convertedPoint, with: event) {
+                return targetView
+            }
+        }
+
+        return super.hitTest(point, with: event)
+    }
+
     func setErrorPlaceholderVisible(_ isVisible: Bool) {
         if isVisible {
             self.errorPlaceholderView.set(placeholder: .noConnection)
@@ -153,36 +165,6 @@ final class CourseInfoView: UIView {
     func updateCurrentPageIndex(_ index: Int) {
         self.currentPageIndex = index
         self.segmentedControl.selectTab(index: index)
-    }
-
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        // Dispatch hits to correct views
-        func hitView(_ view: UIView, in point: CGPoint) -> UIView? {
-            let convertedPoint = self.convert(point, to: view)
-            for subview in view.subviews.reversed() {
-                // Skip subview-receiver if it has isUserInteractionEnabled == false
-                // to pass some hits to scrollview (e.g. swipes in header area)
-                let shouldSubviewInteract = subview.isUserInteractionEnabled
-                if subview.frame.contains(convertedPoint) && shouldSubviewInteract {
-                    if subview is UIStackView {
-                        return hitView(subview, in: convertedPoint)
-                    }
-                    return subview
-                }
-            }
-            return nil
-        }
-
-        let convertedPoint = self.convert(point, to: self.headerView)
-        if self.headerView.bounds.contains(convertedPoint) {
-            // Pass hits to header subviews
-            let hittedHeaderSubview = hitView(self.headerView, in: point)
-            if let hittedHeaderSubview = hittedHeaderSubview {
-                return hittedHeaderSubview
-            }
-        }
-
-        return super.hitTest(point, with: event)
     }
 }
 

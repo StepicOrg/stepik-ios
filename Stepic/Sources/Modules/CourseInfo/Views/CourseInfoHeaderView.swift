@@ -121,6 +121,7 @@ final class CourseInfoHeaderView: UIView {
         stackView.spacing = self.appearance.contentStackViewSpacing
         stackView.alignment = .center
         stackView.distribution = .fill
+        stackView.isUserInteractionEnabled = true
         return stackView
     }()
 
@@ -137,7 +138,6 @@ final class CourseInfoHeaderView: UIView {
         let height = self.appearance.contentStackViewInsets.top
             + contentStackViewIntrinsicContentSize.height
             + self.appearance.contentStackViewInsets.bottom
-        print("CourseInfoHeaderView :: height = \(height)")
 
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
@@ -154,6 +154,20 @@ final class CourseInfoHeaderView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.actionButtonsStackView)
+
+        if self.actionButtonsStackView.bounds.contains(convertedPoint) {
+            if let targetView = self.actionButtonsStackView.hitTest(convertedPoint, with: event) {
+                return targetView
+            }
+        }
+
+        return nil
+    }
+
+    // MARK: Public API
 
     func setLoading(_ isLoading: Bool) {
         [
