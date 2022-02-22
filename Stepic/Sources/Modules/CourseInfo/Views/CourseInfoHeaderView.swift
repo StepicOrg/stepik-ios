@@ -51,6 +51,7 @@ final class CourseInfoHeaderView: UIView {
         appearance.defaultTitleColor = self.appearance.actionButtonTitleColor
         let button = ContinueActionButton(mode: .callToActionGreen, appearance: appearance)
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
+        button.accessibilityIdentifier = "actionButton"
         return button
     }()
 
@@ -69,6 +70,7 @@ final class CourseInfoHeaderView: UIView {
 
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         button.isHidden = true
+        button.accessibilityIdentifier = "promoPriceButton"
 
         return button
     }()
@@ -77,6 +79,7 @@ final class CourseInfoHeaderView: UIView {
         let button = CourseInfoTryForFreeButton()
         button.isHidden = true
         button.addTarget(self, action: #selector(self.tryForFreeButtonClicked), for: .touchUpInside)
+        button.accessibilityIdentifier = "tryForFreeButton"
         return button
     }()
 
@@ -166,8 +169,11 @@ final class CourseInfoHeaderView: UIView {
         let convertedPoint = self.convert(point, to: self.actionButtonsStackView)
 
         if self.actionButtonsStackView.bounds.contains(convertedPoint) {
-            if let targetView = self.actionButtonsStackView.hitTest(convertedPoint, with: event) {
-                return targetView
+            for subview in self.actionButtonsStackView.arrangedSubviews {
+                let shouldSubviewInteract = !subview.isHidden && subview.isUserInteractionEnabled
+                if shouldSubviewInteract && subview.frame.contains(convertedPoint) {
+                    return subview
+                }
             }
         }
 
