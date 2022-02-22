@@ -132,6 +132,8 @@ final class CourseInfoHeaderView: UIView {
     var onTryForFreeButtonClick: (() -> Void)?
 
     override var intrinsicContentSize: CGSize {
+        self.titleView.invalidateIntrinsicContentSize()
+
         let contentStackViewIntrinsicContentSize = self.contentStackView
             .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
@@ -153,6 +155,11 @@ final class CourseInfoHeaderView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -323,11 +330,6 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
 
         self.statsView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.statsViewHeight)
-        }
-
-        self.titleView.translatesAutoresizingMaskIntoConstraints = false
-        self.titleView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
         }
 
         self.unsupportedIAPPurchaseView.translatesAutoresizingMaskIntoConstraints = false

@@ -34,6 +34,8 @@ final class CourseInfoHeaderTitleView: UIView {
 
     private lazy var containerView = UIView()
 
+    private var containerViewWidthConstraint: Constraint?
+
     var coverImageURL: URL? {
         didSet {
             self.coverImageView.loadImage(url: self.coverImageURL)
@@ -48,8 +50,22 @@ final class CourseInfoHeaderTitleView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        let height = max(self.appearance.coverImageViewSize.height, self.titleLabel.intrinsicContentSize.height)
-        return CGSize(width: UIView.noIntrinsicMetric, height: height)
+        let coverImageViewWidthWithSpacing = self.appearance.coverImageViewSize.width + self.appearance.spacing
+
+        let superviewSize = self.superview?.bounds.size ?? .zero
+        let specifiedSize = CGSize(
+            width: max(0, superviewSize.width - coverImageViewWidthWithSpacing),
+            height: CGFloat.greatestFiniteMagnitude
+        )
+
+        let titleBestFitsSize = self.titleLabel.sizeThatFits(specifiedSize)
+
+        let width = ceil(coverImageViewWidthWithSpacing + titleBestFitsSize.width)
+        let height = ceil(max(self.appearance.coverImageViewSize.height, titleBestFitsSize.height))
+
+        self.containerViewWidthConstraint?.update(offset: width)
+
+        return CGSize(width: width, height: height)
     }
 
     init(
@@ -82,26 +98,21 @@ extension CourseInfoHeaderTitleView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview()
-            make.trailing.lessThanOrEqualToSuperview()
-            make.centerX.equalToSuperview()
+            make.top.bottom.centerX.equalToSuperview()
+            self.containerViewWidthConstraint = make.width.equalTo(0).constraint
         }
 
         self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
         self.coverImageView.snp.makeConstraints { make in
-            make.leading.greaterThanOrEqualToSuperview()
-            make.centerY.equalToSuperview()
+            make.leading.centerY.equalToSuperview()
             make.size.equalTo(self.appearance.coverImageViewSize)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.titleLabel.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualToSuperview()
             make.leading.equalTo(self.coverImageView.snp.trailing).offset(self.appearance.spacing)
-            make.bottom.trailing.lessThanOrEqualToSuperview()
-            make.centerY.equalToSuperview()
+            make.trailing.centerY.equalToSuperview()
         }
     }
 }
