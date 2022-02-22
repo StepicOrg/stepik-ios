@@ -35,7 +35,11 @@ final class NewProfileAssembly: Assembly {
             networkReachabilityService: NetworkReachabilityService(),
             dataBackUpdateService: dataBackUpdateService
         )
-        let viewController = NewProfileViewController(interactor: interactor, analytics: StepikAnalytics.shared)
+        let viewController = NewProfileViewController(
+            interactor: interactor,
+            isCurrentUserProfile: self.presentationDescription.profileType.isCurrentUser,
+            analytics: StepikAnalytics.shared
+        )
 
         presenter.viewController = viewController
 

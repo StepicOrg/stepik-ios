@@ -8,29 +8,19 @@ extension CourseInfoHeaderView {
         let actionButtonWidthRatio: CGFloat = DeviceInfo.current.isSmallDiagonal ? 0.75 : 0.55
         let actionButtonWishlistWidthRatio: CGFloat = DeviceInfo.current.isSmallDiagonal ? 0.9 : 0.75
 
-        let actionButtonsStackViewInsets = UIEdgeInsets(top: 10, left: 30, bottom: 15, right: 30)
-        let actionButtonsStackViewSpacing: CGFloat = 15.0
+        let actionButtonsStackViewSpacing: CGFloat = 16
 
-        let coverImageViewSize = CGSize(width: 32, height: 32)
-        let coverImageViewCornerRadius: CGFloat = 6
+        let marksStackViewSpacing: CGFloat = 8
 
-        let titleLabelFont = Typography.subheadlineFont
-        let titleLabelColor = UIColor.white
-
-        let titleStackViewSpacing: CGFloat = 10
-        let titleStackViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 18, right: 30)
-
-        let unsupportedIAPPurchaseViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 16, right: 30)
-
-        let marksStackViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 18, right: 0)
-        let marksStackViewSpacing: CGFloat = 10.0
-
-        let statsViewHeight: CGFloat = 17.0
+        let statsViewHeight: CGFloat = 17
 
         let verifiedTextColor = UIColor.white
         let verifiedImageSize = CGSize(width: 12, height: 12)
-        let verifiedSpacing: CGFloat = 4.0
+        let verifiedSpacing: CGFloat = 4
         let verifiedTextFont = Typography.caption1Font
+
+        let contentStackViewSpacing: CGFloat = 16
+        let contentStackViewInsets = UIEdgeInsets(top: 16, left: 30, bottom: 16, right: 30)
 
         let skeletonFirstColor = UIColor.dynamic(light: UIColor(white: 0.99, alpha: 0.95), dark: .skeletonGradientFirst)
         let skeletonSecondColor = UIColor.dynamic(light: UIColor(white: 0.75, alpha: 1), dark: .skeletonGradientSecond)
@@ -61,6 +51,7 @@ final class CourseInfoHeaderView: UIView {
         appearance.defaultTitleColor = self.appearance.actionButtonTitleColor
         let button = ContinueActionButton(mode: .callToActionGreen, appearance: appearance)
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
+        button.accessibilityIdentifier = "actionButton"
         return button
     }()
 
@@ -79,6 +70,7 @@ final class CourseInfoHeaderView: UIView {
 
         button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
         button.isHidden = true
+        button.accessibilityIdentifier = "promoPriceButton"
 
         return button
     }()
@@ -87,6 +79,7 @@ final class CourseInfoHeaderView: UIView {
         let button = CourseInfoTryForFreeButton()
         button.isHidden = true
         button.addTarget(self, action: #selector(self.tryForFreeButtonClicked), for: .touchUpInside)
+        button.accessibilityIdentifier = "tryForFreeButton"
         return button
     }()
 
@@ -96,22 +89,6 @@ final class CourseInfoHeaderView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         return stackView
-    }()
-
-    private lazy var coverImageView: CourseCoverImageView = {
-        let view = CourseCoverImageView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = self.appearance.coverImageViewCornerRadius
-        return view
-    }()
-
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.titleLabelFont
-        label.numberOfLines = 2
-        label.lineBreakMode = .byTruncatingTail
-        label.textColor = self.appearance.titleLabelColor
-        return label
     }()
 
     private lazy var verifiedSignView: CourseWidgetStatsItemView = {
@@ -135,26 +112,40 @@ final class CourseInfoHeaderView: UIView {
         return stackView
     }()
 
-    // Stack view for title and cover
-    private lazy var titleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = self.appearance.titleStackViewSpacing
-        stackView.axis = .horizontal
-        return stackView
-    }()
-
     private lazy var statsView = CourseInfoStatsView()
 
+    private lazy var titleView = CourseInfoHeaderTitleView()
+
     private lazy var unsupportedIAPPurchaseView = QuizFeedbackView()
+
+    private lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.contentStackViewSpacing
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.isUserInteractionEnabled = true
+        return stackView
+    }()
 
     private var actionButtonWidthConstraint: Constraint?
     private var actionButtonWishlistWidthConstraint: Constraint?
 
-    private var titleStackViewBottomToSuperviewConstraint: Constraint?
-    private var titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint: Constraint?
-
     var onActionButtonClick: (() -> Void)?
     var onTryForFreeButtonClick: (() -> Void)?
+
+    override var intrinsicContentSize: CGSize {
+        self.titleView.invalidateIntrinsicContentSize()
+
+        let contentStackViewIntrinsicContentSize = self.contentStackView
+            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+
+        let height = self.appearance.contentStackViewInsets.top
+            + contentStackViewIntrinsicContentSize.height
+            + self.appearance.contentStackViewInsets.bottom
+
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
+    }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -169,30 +160,32 @@ final class CourseInfoHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // All elements have fixed height except verified & unsupportedIAPPurchase views
-    func calculateHeight(hasVerifiedMark: Bool, hasUnsupportedIAPPurchaseText: Bool) -> CGFloat {
-        let actionButtonsStackViewIntrinsicContentSize = self.actionButtonsStackView
-            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        let verifiedMarkHeight = self.verifiedSignView.appearance.imageViewSize.height
-            + self.appearance.marksStackViewSpacing
-        let unsupportedIAPPurchaseViewHeight = self.unsupportedIAPPurchaseView.intrinsicContentSize.height
-            + self.appearance.unsupportedIAPPurchaseViewInsets.top
-            + self.appearance.unsupportedIAPPurchaseViewInsets.bottom
-        return self.appearance.titleStackViewInsets.bottom
-            + self.appearance.coverImageViewSize.height
-            + self.appearance.marksStackViewInsets.bottom
-            + self.appearance.statsViewHeight
-            + self.appearance.actionButtonsStackViewInsets.bottom
-            + actionButtonsStackViewIntrinsicContentSize.height
-            + self.appearance.actionButtonsStackViewInsets.top
-            + (hasVerifiedMark ? verifiedMarkHeight : 0)
-            + (hasUnsupportedIAPPurchaseText ? unsupportedIAPPurchaseViewHeight : 0)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
     }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let convertedPoint = self.convert(point, to: self.actionButtonsStackView)
+
+        if self.actionButtonsStackView.bounds.contains(convertedPoint) {
+            for subview in self.actionButtonsStackView.arrangedSubviews {
+                let shouldSubviewInteract = !subview.isHidden && subview.isUserInteractionEnabled
+                if shouldSubviewInteract && subview.frame.contains(convertedPoint) {
+                    return subview
+                }
+            }
+        }
+
+        return nil
+    }
+
+    // MARK: Public API
 
     func setLoading(_ isLoading: Bool) {
         [
             self.actionButtonsStackView,
-            self.titleStackView,
+            self.titleView,
             self.marksStackView
         ].forEach { $0.isHidden = isLoading }
 
@@ -206,12 +199,9 @@ final class CourseInfoHeaderView: UIView {
         }
     }
 
-    // MARK: View model
-
     func configure(viewModel: CourseInfoHeaderViewModel) {
         self.loadImage(url: viewModel.coverImageURL)
-
-        self.titleLabel.text = viewModel.title
+        self.titleView.title = viewModel.title
 
         self.statsView.learnersLabelText = viewModel.learnersLabelText
         self.statsView.rating = viewModel.rating
@@ -255,25 +245,22 @@ final class CourseInfoHeaderView: UIView {
 
         if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
             self.unsupportedIAPPurchaseView.isHidden = false
-            self.titleStackViewBottomToSuperviewConstraint?.deactivate()
-            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint?.activate()
-
             self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
             self.unsupportedIAPPurchaseView.setIconImage(
                 UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
             )
         } else {
             self.unsupportedIAPPurchaseView.isHidden = true
-            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint?.deactivate()
-            self.titleStackViewBottomToSuperviewConstraint?.activate()
         }
+
+        self.invalidateIntrinsicContentSize()
     }
 
-    // MARK: Private methods
+    // MARK: Private API
 
     private func loadImage(url: URL?) {
         self.backgroundView.loadImage(url: url)
-        self.coverImageView.loadImage(url: url)
+        self.titleView.coverImageURL = url
     }
 
     @objc
@@ -287,80 +274,37 @@ final class CourseInfoHeaderView: UIView {
     }
 }
 
+// MARK: - CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol -
+
 extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.titleStackView.addArrangedSubview(self.coverImageView)
-        self.titleStackView.addArrangedSubview(self.titleLabel)
-
-        self.marksStackView.addArrangedSubview(self.statsView)
-        self.marksStackView.addArrangedSubview(self.verifiedSignView)
-
         self.actionButtonsStackView.addArrangedSubview(self.actionButton)
         if self.shouldParticipateInPromoPriceSplitTest {
             self.actionButtonsStackView.addArrangedSubview(self.promoPriceButton)
         }
         self.actionButtonsStackView.addArrangedSubview(self.tryForFreeButton)
 
+        self.marksStackView.addArrangedSubview(self.statsView)
+        self.marksStackView.addArrangedSubview(self.verifiedSignView)
+
+        self.contentStackView.addArrangedSubview(self.actionButtonsStackView)
+        self.contentStackView.addArrangedSubview(self.marksStackView)
+        self.contentStackView.addArrangedSubview(self.titleView)
+        self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
+
         self.addSubview(self.backgroundView)
-        self.addSubview(self.actionButtonsStackView)
-        self.addSubview(self.titleStackView)
-        self.addSubview(self.unsupportedIAPPurchaseView)
-        self.addSubview(self.marksStackView)
+        self.addSubview(self.contentStackView)
     }
 
     func makeConstraints() {
         self.backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        self.backgroundView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
-        self.titleStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.titleStackView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().offset(self.appearance.titleStackViewInsets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.titleStackViewInsets.right)
-
-            self.titleStackViewBottomToSuperviewConstraint = make.bottom
-                .equalToSuperview()
-                .offset(-self.appearance.titleStackViewInsets.bottom)
-                .constraint
-
-            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint = make.bottom
-                .equalTo(self.unsupportedIAPPurchaseView.snp.top)
-                .offset(-self.appearance.titleStackViewInsets.bottom)
-                .constraint
-            self.titleStackViewBottomToUnsupportedIAPPurchaseViewConstraint?.deactivate()
-        }
-
-        self.unsupportedIAPPurchaseView.translatesAutoresizingMaskIntoConstraints = false
-        self.unsupportedIAPPurchaseView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.leading.bottom.trailing.equalToSuperview().inset(self.appearance.unsupportedIAPPurchaseViewInsets)
-        }
-
-        self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.coverImageView.snp.makeConstraints { make in
-            make.size.equalTo(self.appearance.coverImageViewSize)
-        }
-
-        self.titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-
-        self.statsView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.statsViewHeight)
-        }
-
-        self.marksStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.marksStackView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.titleStackView.snp.top).offset(-self.appearance.marksStackViewInsets.bottom)
-        }
-
-        self.actionButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.actionButtonsStackView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.statsView.snp.top).offset(-self.appearance.actionButtonsStackViewInsets.bottom)
-            make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().offset(self.appearance.actionButtonsStackViewInsets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.actionButtonsStackViewInsets.right)
+        self.contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentStackView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualToSuperview().offset(self.appearance.contentStackViewInsets.top)
+            make.bottom.equalToSuperview().offset(-self.appearance.contentStackViewInsets.bottom)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(self.appearance.contentStackViewInsets)
         }
 
         self.actionButton.translatesAutoresizingMaskIntoConstraints = false
@@ -388,6 +332,15 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
                     .multipliedBy(self.appearance.actionButtonWidthRatio)
                     .priority(.low)
             }
+        }
+
+        self.statsView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.statsViewHeight)
+        }
+
+        self.unsupportedIAPPurchaseView.translatesAutoresizingMaskIntoConstraints = false
+        self.unsupportedIAPPurchaseView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
         }
     }
 }

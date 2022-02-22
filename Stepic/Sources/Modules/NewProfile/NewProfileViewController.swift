@@ -29,7 +29,7 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         .streakNotifications, .createdCourses, .userActivity, .achievements, .certificates, .socialProfiles, .details
     ]
 
-    var placeholderContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer(shouldPinPlaceholderToSafeAreaLayoutGuide: true)
     var newProfileView: NewProfileView? { self.view as? NewProfileView }
 
     private let interactor: NewProfileInteractorProtocol
@@ -59,13 +59,19 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
     init(
         interactor: NewProfileInteractorProtocol,
+        isCurrentUserProfile: Bool,
         initialState: NewProfile.ViewControllerState = .loading,
         analytics: Analytics
     ) {
         self.interactor = interactor
         self.state = initialState
         self.analytics = analytics
+
         super.init(nibName: nil, bundle: nil)
+
+        if isCurrentUserProfile {
+            self.title = NSLocalizedString("Profile", comment: "")
+        }
     }
 
     @available(*, unavailable)

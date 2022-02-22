@@ -22,6 +22,13 @@ enum NewProfile {
         enum ProfileType {
             case currentUser
             case otherUser(profileUserID: User.IdType)
+
+            var isCurrentUser: Bool {
+                if case .currentUser = self {
+                    return true
+                }
+                return false
+            }
         }
     }
 
