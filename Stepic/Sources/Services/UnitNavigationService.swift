@@ -48,7 +48,6 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             }
 
             unit.section = section
-            CoreDataHelper.shared.save()
 
             // Cause unit & section have 1-indexed position in API
             let unitPosition = unit.position - 1
@@ -71,6 +70,8 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
                     direction: direction
                 )
             }
+        }.ensure {
+            CoreDataHelper.shared.save()
         }
     }
 
@@ -92,7 +93,10 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             return .value(nil)
         }
 
-        return self.getUnitFromCacheOrNetwork(id: targetUnitID)
+        return self.getUnitFromCacheOrNetwork(id: targetUnitID).then { targetUnit -> Promise<Unit?> in
+            targetUnit?.section = section
+            return .value(targetUnit)
+        }
     }
 
     private func findUnitInAnotherSections(
@@ -128,7 +132,6 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
                         .first { $0.id == targetUnitID }
 
                     targetUnit?.section = section
-                    CoreDataHelper.shared.save()
 
                     seal.fulfill(targetUnit)
                 }.catch { error in
