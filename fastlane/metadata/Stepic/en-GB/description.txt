@@ -1,16 +1,13 @@
-Stepik is a platform with free online courses. Now also mobile!
+Stepik is a online courses marketplace. Now also mobile!
 Courses contain video lectures and practical assignments, which you can learn at any time.
 With this app, you can also download all the content to watch offline or on the road.
 
 There are many popular online courses from leading IT companies and universities on Stepik:
-• Computer Science Center
-• Yandex Academy
-• Mail.Ru Group
-• Academic University of RAS
-• European University in St. Petersburg
-• Bioinformatics Institute
-• Higher School of Economics
-• MIPT, MISiS
+• JetBrains
+• Launch code
+• Universitat Autonoma de Barcelona
+• TU Delft
+• UC San Diego
 ... and other educational organizations, companies and instructors.
 
 On Stepik you will find courses on:
@@ -19,6 +16,7 @@ On Stepik you will find courses on:
 • Biology and Bioinformatics
 • Economics
 • Psychology
+• Languages 
 ... and other disciplines.
 
-Learn the new! For free.
+Learn the new!
