@@ -56,8 +56,9 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
 
     var canContinue: Bool {
         self.totalUnits > 0
-            && self.scheduleType != "ended"
             && self.scheduleType != "upcoming"
+            && self.scheduleType != "ended"
+            && (self.isEnabled || !self.canEditCourse)
     }
 
     var canWriteReview: Bool {
@@ -112,6 +113,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.isArchived = json[JSONKey.isArchived.rawValue].boolValue
         self.isInWishlist = json[JSONKey.isInWishlist.rawValue].boolValue
         self.isProctored = json[JSONKey.isProctored.rawValue].boolValue
+        self.isEnabled = json[JSONKey.isEnabled.rawValue].bool ?? true
         self.readiness = json[JSONKey.readiness.rawValue].float
 
         self.summary = json[JSONKey.summary.rawValue].stringValue
@@ -163,9 +165,14 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
             self.canViewRevenue =
                 actionsDictionary[JSONKey.viewRevenue.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
             self.canCreateAnnouncements = actionsDictionary[JSONKey.createAnnouncements.rawValue]?.string != nil
+            self.canEditCourse = actionsDictionary[JSONKey.editCourse.rawValue]?.string != nil
+            self.canBeBought =
+                actionsDictionary[JSONKey.canBeBought.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
         } else {
             self.canViewRevenue = false
             self.canCreateAnnouncements = false
+            self.canEditCourse = false
+            self.canBeBought = false
         }
     }
 
@@ -240,6 +247,8 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case previewLesson = "preview_lesson"
         case previewUnit = "preview_unit"
         case isProctored = "is_proctored"
+        case isEnabled = "is_enabled"
+        case canBeBought = "can_be_bought"
         case defaultPromoCodeName = "default_promo_code_name"
         case defaultPromoCodePrice = "default_promo_code_price"
         case defaultPromoCodeDiscount = "default_promo_code_discount"
@@ -247,6 +256,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case actions
         case viewRevenue = "view_revenue"
         case enabled
+        case editCourse = "edit_course"
         case createAnnouncements = "create_announcements"
         case announcements
         case acquiredSkills = "acquired_skills"

@@ -330,9 +330,30 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         let isTryForFreeAvailable = course.previewLessonID != nil && !course.enrolled
             && (course.isPaid && !course.isPurchased)
 
-        let unsupportedIAPPurchaseText = shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
-            ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
-            : nil
+        let purchaseFeedbackText: String? = {
+            if course.enrolled {
+                return nil
+            }
+
+            if course.scheduleType == "ended" {
+                if let endDate = course.endDate {
+                    let formattedDate = FormatterHelper.dateStringWithDayMonthAndYear(endDate)
+                    return String(
+                        format: NSLocalizedString("CourseInfoPaymentsNotAvailableEnded", comment: ""),
+                        arguments: [formattedDate]
+                    )
+                }
+                return NSLocalizedString("CourseInfoPaymentsNotAvailableEndedOther", comment: "")
+            }
+
+            if course.isPaid && !course.isPurchased && !course.canBeBought {
+                return NSLocalizedString("CourseIntoPaymentsCantBeBought", comment: "")
+            }
+
+            return shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
+                ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+                : nil
+        }()
 
         return CourseInfoHeaderViewModel(
             title: course.title,
@@ -349,7 +370,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             isRestorePurchaseAvailable: isRestorePurchaseAvailable,
-            unsupportedIAPPurchaseText: unsupportedIAPPurchaseText,
+            purchaseFeedbackText: purchaseFeedbackText,
             buttonDescription: self.makeButtonDescription(
                 course: course,
                 coursePurchaseFlow: coursePurchaseFlow,
@@ -380,8 +401,15 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
             }
 
+            if course.scheduleType == "ended" {
+                isWishlist = true
+                return course.isInWishlist
+                    ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
+                    : NSLocalizedString("CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle", comment: "")
+            }
+
             if isNotPurchased {
-                if shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase {
+                if !course.canBeBought || (shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase) {
                     isWishlist = true
                     return course.isInWishlist
                         ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
