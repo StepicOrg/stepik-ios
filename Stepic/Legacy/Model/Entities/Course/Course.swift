@@ -56,8 +56,9 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
 
     var canContinue: Bool {
         self.totalUnits > 0
-            && self.scheduleType != "ended"
             && self.scheduleType != "upcoming"
+            && self.scheduleType != "ended"
+            && (self.isEnabled || !self.canEditCourse)
     }
 
     var canWriteReview: Bool {
@@ -164,9 +165,11 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
             self.canViewRevenue =
                 actionsDictionary[JSONKey.viewRevenue.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
             self.canCreateAnnouncements = actionsDictionary[JSONKey.createAnnouncements.rawValue]?.string != nil
+            self.canEditCourse = actionsDictionary[JSONKey.editCourse.rawValue]?.string != nil
         } else {
             self.canViewRevenue = false
             self.canCreateAnnouncements = false
+            self.canEditCourse = false
         }
     }
 
@@ -249,6 +252,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case actions
         case viewRevenue = "view_revenue"
         case enabled
+        case editCourse = "edit_course"
         case createAnnouncements = "create_announcements"
         case announcements
         case acquiredSkills = "acquired_skills"

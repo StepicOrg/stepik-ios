@@ -65,6 +65,7 @@ extension Course {
 
     @NSManaged var managedCanViewRevenue: NSNumber?
     @NSManaged var managedCanCreateAnnouncements: NSNumber
+    @NSManaged var managedCanEditCourse: NSNumber
 
     // MARK: Relationships
     @NSManaged var managedAuthors: NSOrderedSet?
@@ -576,6 +577,15 @@ extension Course {
         }
         set {
             self.managedCanCreateAnnouncements = NSNumber(value: newValue)
+        }
+    }
+
+    var canEditCourse: Bool {
+        get {
+            self.managedCanEditCourse.boolValue
+        }
+        set {
+            self.managedCanEditCourse = NSNumber(value: newValue)
         }
     }
 
