@@ -485,6 +485,10 @@ CourseInfoAddToWishlistFailureMessage = "Failed to Add Course to Wishlist";
 CourseInfoRemoveFromWishlistSuccessMessage = "Course Successfully Removed from Wishlist";
 CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishlist";
 
+CourseInfoPaymentsNotAvailableEnded = "Course ended on %@";
+CourseInfoPaymentsNotAvailableEndedOther = "Currently unavailable";
+CourseIntoPaymentsCantBeBought = "You cannot buy this course yet";
+
 CourseInfoRestorePurchaseTitle = "Restore Purchase";
 CourseInfoRestorePurchaseSuccessMessage = "Purchase Successfully Restored";
 CourseInfoRestorePurchaseErrorTitle = "Failed to Restore Purchase";

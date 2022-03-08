@@ -14,6 +14,7 @@ extension Course {
     @NSManaged var managedPublic: NSNumber?
     @NSManaged var managedIsProctored: NSNumber?
     @NSManaged var managedIsEnabled: NSNumber
+    @NSManaged var managedCanBeBought: NSNumber
     @NSManaged var managedIsFavorite: NSNumber?
     @NSManaged var managedIsArchived: NSNumber?
     @NSManaged var managedIsInWishlist: NSNumber?
@@ -278,6 +279,15 @@ extension Course {
         }
         set {
             self.managedIsEnabled = NSNumber(value: newValue)
+        }
+    }
+
+    var canBeBought: Bool {
+        get {
+            self.managedCanBeBought.boolValue
+        }
+        set {
+            self.managedCanBeBought = NSNumber(value: newValue)
         }
     }
 

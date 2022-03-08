@@ -166,10 +166,13 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
                 actionsDictionary[JSONKey.viewRevenue.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
             self.canCreateAnnouncements = actionsDictionary[JSONKey.createAnnouncements.rawValue]?.string != nil
             self.canEditCourse = actionsDictionary[JSONKey.editCourse.rawValue]?.string != nil
+            self.canBeBought =
+                actionsDictionary[JSONKey.canBeBought.rawValue]?.dictionary?[JSONKey.enabled.rawValue]?.bool ?? false
         } else {
             self.canViewRevenue = false
             self.canCreateAnnouncements = false
             self.canEditCourse = false
+            self.canBeBought = false
         }
     }
 
@@ -245,6 +248,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         case previewUnit = "preview_unit"
         case isProctored = "is_proctored"
         case isEnabled = "is_enabled"
+        case canBeBought = "can_be_bought"
         case defaultPromoCodeName = "default_promo_code_name"
         case defaultPromoCodePrice = "default_promo_code_price"
         case defaultPromoCodeDiscount = "default_promo_code_discount"

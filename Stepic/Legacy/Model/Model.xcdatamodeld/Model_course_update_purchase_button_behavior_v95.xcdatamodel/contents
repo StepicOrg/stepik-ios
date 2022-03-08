@@ -117,6 +117,7 @@
         <attribute name="managedAuthorsArray" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedBeginDateSource" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedCanBeBought" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCanCreateAnnouncements" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCanEditCourse" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCanViewRevenue" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -638,7 +639,7 @@
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
         <element name="CodeSample" positionX="-651.484375" positionY="-311.640625" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
-        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1184"/>
+        <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="1199"/>
         <element name="CourseBeneficiary" positionX="-450" positionY="-225" width="128" height="134"/>
         <element name="CourseBenefit" positionX="-450" positionY="-234" width="128" height="269"/>
         <element name="CourseBenefitByMonth" positionX="-450" positionY="-234" width="128" height="284"/>
