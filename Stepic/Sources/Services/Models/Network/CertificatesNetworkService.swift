@@ -2,6 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol CertificatesNetworkServiceProtocol: AnyObject {
+    func fetch(id: Certificate.IdType) -> Promise<([Certificate], Meta)>
     func fetch(userID: User.IdType, page: Int) -> Promise<([Certificate], Meta)>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<[Certificate]>
 
@@ -9,6 +10,10 @@ protocol CertificatesNetworkServiceProtocol: AnyObject {
 }
 
 extension CertificatesNetworkServiceProtocol {
+    func fetch(id: Certificate.IdType) -> Promise<Certificate?> {
+        self.fetch(id: id).map { $0.0.first }
+    }
+
     func fetch(userID: User.IdType) -> Promise<([Certificate], Meta)> {
         self.fetch(userID: userID, page: 1)
     }
@@ -19,6 +24,16 @@ final class CertificatesNetworkService: CertificatesNetworkServiceProtocol {
 
     init(certificatesAPI: CertificatesAPI = CertificatesAPI()) {
         self.certificatesAPI = certificatesAPI
+    }
+
+    func fetch(id: Certificate.IdType) -> Promise<([Certificate], Meta)> {
+        Promise { seal in
+            self.certificatesAPI.retrieve(id: id).done { certificates, meta in
+                seal.fulfill((certificates, meta))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
     }
 
     func fetch(userID: User.IdType, page: Int) -> Promise<([Certificate], Meta)> {

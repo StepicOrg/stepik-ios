@@ -14,6 +14,15 @@ import SwiftyJSON
 final class CertificatesAPI: APIEndpoint {
     override class var name: String { "certificates" }
 
+    func retrieve(id: Certificate.IdType) -> Promise<([Certificate], Meta)> {
+        self.retrieve.requestWithFetching(
+            requestEndpoint: "\(Self.name)/\(id)",
+            paramName: Self.name,
+            params: [:],
+            withManager: self.manager
+        )
+    }
+
     func retrieve(
         userID: User.IdType,
         courseID: Course.IdType? = nil,
@@ -37,7 +46,7 @@ final class CertificatesAPI: APIEndpoint {
             requestEndpoint: Self.name,
             paramName: Self.name,
             params: params,
-            withManager: manager
+            withManager: self.manager
         )
     }
 
