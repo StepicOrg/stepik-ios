@@ -243,9 +243,9 @@ final class CourseInfoHeaderView: UIView {
 
         self.tryForFreeButton.isHidden = !viewModel.isTryForFreeAvailable
 
-        if let errorPurchaseFeedbackText = viewModel.errorPurchaseFeedbackText {
+        if let purchaseFeedbackText = viewModel.purchaseFeedbackText {
             self.purchaseFeedbackView.isHidden = false
-            self.purchaseFeedbackView.update(state: .wrong, title: errorPurchaseFeedbackText)
+            self.purchaseFeedbackView.update(state: .wrong, title: purchaseFeedbackText)
             self.purchaseFeedbackView.setIconImage(
                 UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
             )

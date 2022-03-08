@@ -21,7 +21,7 @@ struct CourseInfoHeaderViewModel {
     let isTryForFreeAvailable: Bool
     let isRevenueAvailable: Bool
     let isRestorePurchaseAvailable: Bool
-    let errorPurchaseFeedbackText: String?
+    let purchaseFeedbackText: String?
     let buttonDescription: ButtonDescription
 
     struct ButtonDescription {
