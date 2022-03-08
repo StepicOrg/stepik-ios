@@ -111,7 +111,16 @@ final class DeepLinkRoutingService {
                 )
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
-        case .course, .coursePromo, .coursePay, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
+        case .course,
+             .coursePromo,
+             .coursePay,
+             .discussions,
+             .solutions,
+             .lesson,
+             .profile,
+             .syllabus,
+             .certificates,
+             .certificate:
             return ModalOrPushStackRouter(
                 source: source,
                 destinationStack: moduleStack,
@@ -217,6 +226,8 @@ final class DeepLinkRoutingService {
                         seal.fulfill(moduleStack)
                     }
                 )
+            case .certificate(_):
+                fatalError("not implemented")
             case .certificates(let userID):
                 seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
             case .story(let id):

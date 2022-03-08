@@ -11,6 +11,7 @@ import Regex
 
 enum DeepLinkRoute {
     case catalog(courseListID: Int?)
+    case certificate(id: Int)
     case certificates(userID: Int)
     case course(courseID: Int)
     case coursePay(courseID: Int, promoCodeName: String?)
@@ -71,6 +72,8 @@ enum DeepLinkRoute {
             } else {
                 path = "course/\(courseID)/pay"
             }
+        case .certificate(let id):
+            path = "cert/\(id)"
         case .certificates(let userID):
             path = "users/\(userID)/certificates"
         case .story(let id):
@@ -188,6 +191,14 @@ enum DeepLinkRoute {
             return
         }
 
+        if let match = Pattern.certificate.regex.firstMatch(in: path),
+           let certificateIDStringValue = match.captures[0],
+           let certificateID = Int(certificateIDStringValue),
+           match.matchedString == path {
+            self = .certificate(id: certificateID)
+            return
+        }
+
         if let match = Pattern.certificates.regex.firstMatch(in: path),
            let userIDStringValue = match.captures[0],
            let userID = Int(userIDStringValue),
@@ -220,6 +231,7 @@ enum DeepLinkRoute {
         case solutions
         case certificates
         case story
+        case certificate
 
         var regex: Regex {
             try! Regex(string: self.pattern, options: [.ignoreCase])
@@ -256,6 +268,8 @@ enum DeepLinkRoute {
                 return #"\#(stepik)users\/(\d+)\/certificates\/?\#(queryComponents)"#
             case .story:
                 return #"\#(stepik)story-template\/(\d+)\/?\#(queryComponents)"#
+            case .certificate:
+                return #"\#(stepik)cert\/(\d+)\/?\#(queryComponents)"#
             }
         }
     }
