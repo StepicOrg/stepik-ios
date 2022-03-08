@@ -330,7 +330,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         let isTryForFreeAvailable = course.previewLessonID != nil && !course.enrolled
             && (course.isPaid && !course.isPurchased)
 
-        let unsupportedIAPPurchaseText: String? = {
+        let errorPurchaseFeedbackText: String? = {
             if course.enrolled {
                 return nil
             }
@@ -370,7 +370,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             isTryForFreeAvailable: isTryForFreeAvailable,
             isRevenueAvailable: isCourseRevenueAvailable && course.canViewRevenue,
             isRestorePurchaseAvailable: isRestorePurchaseAvailable,
-            unsupportedIAPPurchaseText: unsupportedIAPPurchaseText,
+            errorPurchaseFeedbackText: errorPurchaseFeedbackText,
             buttonDescription: self.makeButtonDescription(
                 course: course,
                 coursePurchaseFlow: coursePurchaseFlow,
