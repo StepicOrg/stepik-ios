@@ -820,6 +820,7 @@
 		2C87A7AB2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7AA2446648100933CA4 /* UserActivityEntity+CoreDataProperties.swift */; };
 		2C87A7AD2446696D00933CA4 /* UserActivitiesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
+		2C8972AF27D8AF3D00C71430 /* CertificatesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8972AE27D8AF3D00C71430 /* CertificatesRepository.swift */; };
 		2C89BED325DFCC48003EE967 /* SubmissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89BED225DFCC48003EE967 /* SubmissionView.swift */; };
 		2C89FF8424AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8324AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift */; };
 		2C89FF8624AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */; };
@@ -2860,6 +2861,7 @@
 		2C87A7AC2446696D00933CA4 /* UserActivitiesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesPersistenceService.swift; sourceTree = "<group>"; };
 		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
+		2C8972AE27D8AF3D00C71430 /* CertificatesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesRepository.swift; sourceTree = "<group>"; };
 		2C89BED225DFCC48003EE967 /* SubmissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionView.swift; sourceTree = "<group>"; };
 		2C89FF8324AED52900168F1B /* NewProfileStreakNotificationsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsFooterView.swift; sourceTree = "<group>"; };
 		2C89FF8524AEDEAE00168F1B /* NewProfileStreakNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileStreakNotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -4602,6 +4604,7 @@
 				2C1966B026E7CBDF000D5B06 /* AnnouncementsRepository.swift */,
 				2C26BF09240810A3000EE23C /* AttemptsRepository.swift */,
 				2C1AC31D255B476A00E6ECA9 /* CatalogBlocksRepository.swift */,
+				2C8972AE27D8AF3D00C71430 /* CertificatesRepository.swift */,
 				2CDD3FDB2715F6D30029AF40 /* CoursesRepository.swift */,
 				2CD1D9EF272AC0660031C78E /* MobileTiersRepository.swift */,
 				2C98424626DE78EA0098E36B /* SearchResultsRepository.swift */,
@@ -12045,6 +12048,7 @@
 				62E98D482238B33F4B4B0B24 /* CourseInfoTabReviewsTableViewDataSource.swift in Sources */,
 				62E9849DCCBF7E25989CB1B3 /* CourseInfoTabReviewsView.swift in Sources */,
 				2C1E429824977EAC009F4C69 /* CoursePurchase.swift in Sources */,
+				2C8972AF27D8AF3D00C71430 /* CertificatesRepository.swift in Sources */,
 				2C47914626BBD17400920ED2 /* InstructionType.swift in Sources */,
 				62E98995ECE79D901A170481 /* CourseInfoTabReviewsCellView.swift in Sources */,
 				62E987BAA1982DF27CBC2203 /* CourseInfoTabReviewsTableViewCell.swift in Sources */,

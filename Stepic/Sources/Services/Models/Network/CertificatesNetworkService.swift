@@ -1,20 +1,17 @@
 import Foundation
 import PromiseKit
+import StepikModel
 
 protocol CertificatesNetworkServiceProtocol: AnyObject {
-    func fetch(id: Certificate.IdType) -> Promise<([Certificate], Meta)>
-    func fetch(userID: User.IdType, page: Int) -> Promise<([Certificate], Meta)>
-    func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<[Certificate]>
+    func fetch(id: Int) -> Promise<StepikModel.Certificate?>
+    func fetch(userID: Int, page: Int) -> Promise<([StepikModel.Certificate], Meta)>
+    func fetch(courseID: Int, userID: Int) -> Promise<[StepikModel.Certificate]>
 
-    func update(certificate: Certificate) -> Promise<Certificate>
+    func update(certificate: StepikModel.Certificate) -> Promise<StepikModel.Certificate>
 }
 
 extension CertificatesNetworkServiceProtocol {
-    func fetch(id: Certificate.IdType) -> Promise<Certificate?> {
-        self.fetch(id: id).map { $0.0.first }
-    }
-
-    func fetch(userID: User.IdType) -> Promise<([Certificate], Meta)> {
+    func fetch(userID: User.IdType) -> Promise<([StepikModel.Certificate], Meta)> {
         self.fetch(userID: userID, page: 1)
     }
 }
@@ -26,48 +23,19 @@ final class CertificatesNetworkService: CertificatesNetworkServiceProtocol {
         self.certificatesAPI = certificatesAPI
     }
 
-    func fetch(id: Certificate.IdType) -> Promise<([Certificate], Meta)> {
-        Promise { seal in
-            self.certificatesAPI.retrieve(id: id).done { certificates, meta in
-                seal.fulfill((certificates, meta))
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
-        }
+    func fetch(id: Int) -> Promise<StepikModel.Certificate?> {
+        self.certificatesAPI.retrieve(id: id)
     }
 
-    func fetch(userID: User.IdType, page: Int) -> Promise<([Certificate], Meta)> {
-        Promise { seal in
-            self.certificatesAPI.retrieve(userID: userID, page: page, order: .idDesc).done { certificates, meta in
-                seal.fulfill((certificates, meta))
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
-        }
+    func fetch(userID: Int, page: Int) -> Promise<([StepikModel.Certificate], Meta)> {
+        self.certificatesAPI.retrieve(userID: userID, page: page, order: .idDesc)
     }
 
-    func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<[Certificate]> {
-        Promise { seal in
-            self.certificatesAPI.retrieve(userID: userID, courseID: courseID, order: .idDesc).done { certificates, _ in
-                seal.fulfill(certificates)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
-            }
-        }
+    func fetch(courseID: Int, userID: Int) -> Promise<[StepikModel.Certificate]> {
+        self.certificatesAPI.retrieve(userID: userID, courseID: courseID, order: .idDesc).map { $0.0 }
     }
 
-    func update(certificate: Certificate) -> Promise<Certificate> {
-        Promise { seal in
-            self.certificatesAPI.update(certificate).done { certificate in
-                seal.fulfill(certificate)
-            }.catch { _ in
-                seal.reject(Error.updateFailed)
-            }
-        }
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
-        case updateFailed
+    func update(certificate: StepikModel.Certificate) -> Promise<StepikModel.Certificate> {
+        self.certificatesAPI.update(certificate)
     }
 }
