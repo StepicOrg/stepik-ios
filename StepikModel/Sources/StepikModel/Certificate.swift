@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Certificate {
+public struct Certificate: Codable, Equatable {
     public let id: Int
     public let userID: Int
     public let courseID: Int
@@ -27,6 +27,8 @@ public struct Certificate {
     public let courseLanguage: String
 
     public let isWithScore: Bool
+
+    public var type: CertificateType? { CertificateType(rawValue: self.typeString) }
 
     public init(
         id: Int,
@@ -71,9 +73,7 @@ public struct Certificate {
         self.courseLanguage = courseLanguage
         self.isWithScore = isWithScore
     }
-}
 
-extension Certificate: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -103,6 +103,42 @@ extension Certificate: Decodable {
         self.courseLanguage = try container.decode(forKey: .courseLanguage, default: "ru")
 
         self.isWithScore = try container.decode(forKey: .isWithScore, default: false)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.userID, forKey: .user)
+        try container.encode(self.courseID, forKey: .course)
+
+        try container.encode(DateFormatter.stepikISO8601MediumString(from: self.issueDate), forKey: .issueDate)
+        try container.encode(DateFormatter.stepikISO8601MediumString(from: self.updateDate), forKey: .updateDate)
+
+        try container.encode(self.grade, forKey: .grade)
+        try container.encode(self.typeString, forKey: .type)
+        try container.encode(self.urlString, forKey: .url)
+        try container.encode(self.previewURLString, forKey: .previewURL)
+
+        try container.encode(self.isPublic, forKey: .isPublic)
+        try container.encode(self.userRank, forKey: .userRank)
+        try container.encode(self.userRankMax, forKey: .userRankMax)
+        try container.encode(self.leaderboardSize, forKey: .leaderboardSize)
+
+        try container.encode(self.savedFullName, forKey: .savedFullName)
+        try container.encode(self.editsCount, forKey: .editsCount)
+        try container.encode(self.allowedEditsCount, forKey: .allowedEditsCount)
+
+        try container.encode(self.courseTitle, forKey: .courseTitle)
+        try container.encode(self.courseIsPublic, forKey: .courseIsPublic)
+        try container.encode(self.courseLanguage, forKey: .courseLanguage)
+
+        try container.encode(self.isWithScore, forKey: .isWithScore)
+    }
+
+    public enum CertificateType: String {
+        case regular
+        case distinction
     }
 
     enum CodingKeys: String, CodingKey {

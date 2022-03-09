@@ -44,6 +44,7 @@ final class CertificateTests: XCTestCase {
         XCTAssertNil(certificate.updateDate)
         XCTAssertEqual(certificate.grade, 100)
         XCTAssertEqual(certificate.typeString, "distinction")
+        XCTAssertEqual(certificate.type, .distinction)
         XCTAssertEqual(
             certificate.urlString,
             "https://stepik.org/certificate/dadf42174f0da11a271053a4354932f09ae9dea8.pdf"
@@ -63,5 +64,41 @@ final class CertificateTests: XCTestCase {
         XCTAssertTrue(certificate.courseIsPublic)
         XCTAssertEqual(certificate.courseLanguage, "ru")
         XCTAssertTrue(certificate.isWithScore)
+    }
+
+    func testSerializeToJSON() throws {
+        // Given
+        let certificate = Certificate(
+            id: 135341,
+            userID: 21612976,
+            courseID: 191,
+            issueDate: DateFormatter.parsedStepikISO8601Date(from: "2018-10-18T13:17:28Z"),
+            updateDate: nil,
+            grade: 100,
+            typeString: "distinction",
+            urlString: "https://stepik.org/certificate/dadf42174f0da11a271053a4354932f09ae9dea8.pdf",
+            previewURLString: "https://stepik.org/certificate/dadf42174f0da11a271053a4354932f09ae9dea8.png",
+            isPublic: true,
+            userRank: 1,
+            userRankMax: 48317,
+            leaderboardSize: 112599,
+            savedFullName: "Ivan Magda",
+            editsCount: 0,
+            allowedEditsCount: 1,
+            courseTitle: "Безопасность в интернете",
+            courseIsPublic: true,
+            courseLanguage: "ru",
+            isWithScore: true
+        )
+
+        // When
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+
+        let data = try encoder.encode(certificate)
+        let sameCertificate = try decoder.decode(Certificate.self, from: data)
+
+        // Then
+        XCTAssertEqual(certificate, sameCertificate)
     }
 }
