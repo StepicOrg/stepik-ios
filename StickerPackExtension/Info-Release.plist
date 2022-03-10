@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.213-release</string>
 	<key>CFBundleVersion</key>
-	<string>422</string>
+	<string>423</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
