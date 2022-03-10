@@ -4,8 +4,11 @@ import StepikModel
 
 protocol CertificatesRepositoryProtocol: AnyObject {
     func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<StepikModel.Certificate?>
+
     func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([Certificate], Meta)>
     func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)>
+
+    func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[Certificate]>
     func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[StepikModel.Certificate]>
 
     func update(certificate: StepikModel.Certificate) -> Promise<Certificate>
@@ -78,12 +81,10 @@ final class CertificatesRepository: CertificatesRepositoryProtocol {
         self.fetch(userID: userID, page: page, dataSourceType: dataSourceType).map { ($0.0.map(\.plainObject), $0.1) }
     }
 
-    func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[StepikModel.Certificate]> {
+    func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[Certificate]> {
         switch dataSourceType {
         case .cache:
-            return self.certificatesPersistenceService
-                .fetch(courseID: courseID, userID: userID)
-                .mapValues(\.plainObject)
+            return Promise(self.certificatesPersistenceService.fetch(courseID: courseID, userID: userID))
         case .remote:
             return self.certificatesNetworkService.fetch(
                 courseID: courseID,
@@ -92,9 +93,12 @@ final class CertificatesRepository: CertificatesRepositoryProtocol {
                 self.certificatesPersistenceService
                     .save(certificates: remoteCertificates)
                     .then { self.establishRelationships(certificates: $0, courseID: courseID) }
-                    .map { _ in remoteCertificates }
             }
         }
+    }
+
+    func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[StepikModel.Certificate]> {
+        self.fetch(courseID: courseID, userID: userID, dataSourceType: dataSourceType).mapValues(\.plainObject)
     }
 
     func update(certificate: StepikModel.Certificate) -> Promise<Certificate> {
