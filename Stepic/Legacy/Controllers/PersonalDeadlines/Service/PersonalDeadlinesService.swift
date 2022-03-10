@@ -38,7 +38,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
     }
 
     func canAddDeadlines(in course: Course) -> Bool {
-        course.sectionDeadlines == nil && course.scheduleType == "self_paced"
+        course.sectionDeadlines == nil && course.scheduleType == .selfPaced
     }
 
     func hasDeadlines(in course: Course) -> Bool {

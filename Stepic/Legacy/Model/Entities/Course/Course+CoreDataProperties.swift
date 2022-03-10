@@ -156,12 +156,12 @@ extension Course {
         }
     }
 
-    var scheduleType: String? {
-        set(value) {
-            self.managedScheduleType = value
-        }
+    var scheduleTypeString: String? {
         get {
-            managedScheduleType
+            self.managedScheduleType
+        }
+        set {
+            self.managedScheduleType = newValue
         }
     }
 

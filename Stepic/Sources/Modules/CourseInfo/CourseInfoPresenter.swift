@@ -335,7 +335,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 return nil
             }
 
-            if course.scheduleType == "ended" {
+            if course.scheduleType == .ended {
                 if let endDate = course.endDate {
                     let formattedDate = FormatterHelper.dateStringWithDayMonthAndYear(endDate)
                     return String(
@@ -401,7 +401,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
             }
 
-            if course.scheduleType == "ended" {
+            if course.scheduleType == .ended {
                 isWishlist = true
                 return course.isInWishlist
                     ? NSLocalizedString("CourseInfoPurchaseModalWishlistButtonInWishlistTitle", comment: "")
