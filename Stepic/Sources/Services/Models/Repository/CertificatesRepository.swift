@@ -4,6 +4,7 @@ import StepikModel
 
 protocol CertificatesRepositoryProtocol: AnyObject {
     func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<StepikModel.Certificate?>
+    func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([Certificate], Meta)>
     func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)>
     func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[StepikModel.Certificate]>
 
@@ -11,6 +12,10 @@ protocol CertificatesRepositoryProtocol: AnyObject {
 }
 
 extension CertificatesRepositoryProtocol {
+    func fetch(userID: Int, dataSourceType: DataSourceType) -> Promise<([Certificate], Meta)> {
+        self.fetch(userID: userID, page: 1, dataSourceType: dataSourceType)
+    }
+
     func fetch(userID: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)> {
         self.fetch(userID: userID, page: 1, dataSourceType: dataSourceType)
     }
@@ -49,19 +54,27 @@ final class CertificatesRepository: CertificatesRepositoryProtocol {
         }
     }
 
-    func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)> {
+    func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([Certificate], Meta)> {
         switch dataSourceType {
         case .cache:
-            return self.certificatesPersistenceService
-                .fetch(userID: userID)
-                .map { ($0.map(\.plainObject), Meta.oneAndOnlyPage) }
+            return self.certificatesPersistenceService.fetch(userID: userID).map { ($0, Meta.oneAndOnlyPage) }
         case .remote:
             return self.certificatesNetworkService.fetch(userID: userID, page: page).then { remoteCertificates, meta in
                 self.certificatesPersistenceService
                     .save(certificates: remoteCertificates)
-                    .map { _ in (remoteCertificates, meta) }
+                    .map { certificatesEntities in
+                        let orderedCertificates = certificatesEntities.reordered(
+                            order: remoteCertificates.map(\.id),
+                            transform: { $0.id }
+                        )
+                        return (orderedCertificates, meta)
+                    }
             }
         }
+    }
+
+    func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)> {
+        self.fetch(userID: userID, page: page, dataSourceType: dataSourceType).map { ($0.0.map(\.plainObject), $0.1) }
     }
 
     func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[StepikModel.Certificate]> {
