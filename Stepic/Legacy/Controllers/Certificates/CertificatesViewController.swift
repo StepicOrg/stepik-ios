@@ -20,8 +20,7 @@ final class CertificatesLegacyAssembly: Assembly {
         certificatesVC.userID = self.userID
         certificatesVC.presenter = CertificatesPresenter(
             userID: self.userID,
-            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
-            certificatesPersistenceService: CertificatesPersistenceService(),
+            certificatesRepository: CertificatesRepository.default,
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             userAccountService: UserAccountService(),
             view: certificatesVC

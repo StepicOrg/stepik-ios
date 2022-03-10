@@ -8,6 +8,7 @@ protocol CertificatesRepositoryProtocol: AnyObject {
     func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)>
     func fetch(courseID: Int, userID: Int, dataSourceType: DataSourceType) -> Promise<[StepikModel.Certificate]>
 
+    func update(certificate: StepikModel.Certificate) -> Promise<Certificate>
     func update(certificate: StepikModel.Certificate) -> Promise<StepikModel.Certificate>
 }
 
@@ -96,12 +97,16 @@ final class CertificatesRepository: CertificatesRepositoryProtocol {
         }
     }
 
-    func update(certificate: StepikModel.Certificate) -> Promise<StepikModel.Certificate> {
+    func update(certificate: StepikModel.Certificate) -> Promise<Certificate> {
         self.certificatesNetworkService.update(certificate: certificate).then { certificate in
             self.certificatesPersistenceService
                 .save(certificates: [certificate])
-                .map { _ in certificate }
+                .compactMap { $0.first }
         }
+    }
+
+    func update(certificate: StepikModel.Certificate) -> Promise<StepikModel.Certificate> {
+        self.update(certificate: certificate).map(\.plainObject)
     }
 
     // MARK: Private API
