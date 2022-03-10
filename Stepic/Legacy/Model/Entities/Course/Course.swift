@@ -6,6 +6,13 @@ import SwiftyJSON
 final class Course: NSManagedObject, ManagedObject, IDFetchable {
     typealias IdType = Int
 
+    var scheduleType: ScheduleType? {
+        if let scheduleTypeString = self.scheduleTypeString {
+            return ScheduleType(rawValue: scheduleTypeString)
+        }
+        return nil
+    }
+
     var sectionDeadlines: [SectionDeadline]? {
         (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageRecordData)?.deadlines
     }
@@ -56,8 +63,8 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
 
     var canContinue: Bool {
         self.totalUnits > 0
-            && self.scheduleType != "upcoming"
-            && self.scheduleType != "ended"
+            && self.scheduleType != .upcoming
+            && self.scheduleType != .ended
             && (self.isEnabled || !self.canEditCourse)
     }
 
@@ -125,7 +132,7 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.slug = json[JSONKey.slug.rawValue].string
         self.progressID = json[JSONKey.progress.rawValue].string
         self.lastStepID = json[JSONKey.lastStep.rawValue].string
-        self.scheduleType = json[JSONKey.scheduleType.rawValue].string
+        self.scheduleTypeString = json[JSONKey.scheduleType.rawValue].string
         self.learnersCount = json[JSONKey.learnersCount.rawValue].int
         self.totalUnits = json[JSONKey.totalUnits.rawValue].intValue
         self.reviewSummaryID = json[JSONKey.reviewSummary.rawValue].int
@@ -198,6 +205,12 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
     }
 
     // MARK: Inner Types
+
+    enum ScheduleType: String {
+        case ended
+        case upcoming
+        case selfPaced = "self_paced"
+    }
 
     enum JSONKey: String {
         case id

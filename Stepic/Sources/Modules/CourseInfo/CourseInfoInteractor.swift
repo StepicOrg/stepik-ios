@@ -323,9 +323,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
+            if course.scheduleType == .ended {
+                return self.doWishlistMainAction(request: .init())
+            }
+
             // Paid course -> buy course or wishlist main action
             if course.isPaid && !course.isPurchased {
-                if self.shouldCheckIAPPurchaseSupport && !self.isSupportedIAPPurchase {
+                if !course.canBeBought || (self.shouldCheckIAPPurchaseSupport && !self.isSupportedIAPPurchase) {
                     return self.doWishlistMainAction(request: .init())
                 }
 
