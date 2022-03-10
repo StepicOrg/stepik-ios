@@ -486,7 +486,7 @@ CourseInfoRemoveFromWishlistSuccessMessage = "Course Successfully Removed from W
 CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishlist";
 
 CourseInfoPaymentsNotAvailableEnded = "Course ended on %@";
-CourseInfoPaymentsNotAvailableEndedOther = "Currently unavailable";
+CourseInfoPaymentsNotAvailableEndedOther = "Course currently unavailable";
 CourseIntoPaymentsCantBeBought = "You cannot buy this course yet";
 
 CourseInfoRestorePurchaseTitle = "Restore Purchase";
