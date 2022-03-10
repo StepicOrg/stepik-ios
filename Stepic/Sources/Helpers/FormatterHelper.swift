@@ -405,6 +405,14 @@ enum FormatterHelper {
         dateInRegion.toFormat("dd MMMM yyyy HH:mm")
     }
 
+    /// Format date with full month and year; "18 October 2018"
+    static func dateStringWithDayMonthAndYear(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+
+        return dateFormatter.string(from: date)
+    }
+
     /// Format a date to a string representation relative to another reference date (default current).
     static func dateToRelativeString(_ date: Date, referenceDate: Date = Date()) -> String {
         date.in(region: .UTC).toRelative(

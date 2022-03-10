@@ -487,6 +487,10 @@ CourseInfoAddToWishlistFailureMessage = "Не удалось добавить к
 CourseInfoRemoveFromWishlistSuccessMessage = "Курс успешно убран из списка желаний";
 CourseInfoRemoveFromWishlistFailureMessage = "Не удалось убрать курс из списка желаний";
 
+CourseInfoPaymentsNotAvailableEnded = "Курс закончился %@";
+CourseInfoPaymentsNotAvailableEndedOther = "Курс сейчас недоступен";
+CourseIntoPaymentsCantBeBought = "Пока нельзя купить этот курс";
+
 CourseInfoRestorePurchaseTitle = "Восстановить покупку";
 CourseInfoRestorePurchaseSuccessMessage = "Покупка успешно восстановлена";
 CourseInfoRestorePurchaseErrorTitle = "Не удалось восстановить покупку";

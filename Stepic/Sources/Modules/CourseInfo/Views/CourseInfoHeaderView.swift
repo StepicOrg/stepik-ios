@@ -116,7 +116,7 @@ final class CourseInfoHeaderView: UIView {
 
     private lazy var titleView = CourseInfoHeaderTitleView()
 
-    private lazy var unsupportedIAPPurchaseView = QuizFeedbackView()
+    private lazy var purchaseFeedbackView = QuizFeedbackView()
 
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -243,14 +243,14 @@ final class CourseInfoHeaderView: UIView {
 
         self.tryForFreeButton.isHidden = !viewModel.isTryForFreeAvailable
 
-        if let unsupportedIAPPurchaseText = viewModel.unsupportedIAPPurchaseText {
-            self.unsupportedIAPPurchaseView.isHidden = false
-            self.unsupportedIAPPurchaseView.update(state: .wrong, title: unsupportedIAPPurchaseText)
-            self.unsupportedIAPPurchaseView.setIconImage(
+        if let purchaseFeedbackText = viewModel.purchaseFeedbackText {
+            self.purchaseFeedbackView.isHidden = false
+            self.purchaseFeedbackView.update(state: .wrong, title: purchaseFeedbackText)
+            self.purchaseFeedbackView.setIconImage(
                 UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
             )
         } else {
-            self.unsupportedIAPPurchaseView.isHidden = true
+            self.purchaseFeedbackView.isHidden = true
         }
 
         self.invalidateIntrinsicContentSize()
@@ -290,7 +290,7 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.contentStackView.addArrangedSubview(self.actionButtonsStackView)
         self.contentStackView.addArrangedSubview(self.marksStackView)
         self.contentStackView.addArrangedSubview(self.titleView)
-        self.contentStackView.addArrangedSubview(self.unsupportedIAPPurchaseView)
+        self.contentStackView.addArrangedSubview(self.purchaseFeedbackView)
 
         self.addSubview(self.backgroundView)
         self.addSubview(self.contentStackView)
@@ -338,8 +338,8 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.statsViewHeight)
         }
 
-        self.unsupportedIAPPurchaseView.translatesAutoresizingMaskIntoConstraints = false
-        self.unsupportedIAPPurchaseView.snp.makeConstraints { make in
+        self.purchaseFeedbackView.translatesAutoresizingMaskIntoConstraints = false
+        self.purchaseFeedbackView.snp.makeConstraints { make in
             make.width.equalToSuperview()
         }
     }
