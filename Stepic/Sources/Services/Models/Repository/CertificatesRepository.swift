@@ -3,6 +3,7 @@ import PromiseKit
 import StepikModel
 
 protocol CertificatesRepositoryProtocol: AnyObject {
+    func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<Certificate?>
     func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<StepikModel.Certificate?>
 
     func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([Certificate], Meta)>
@@ -23,6 +24,35 @@ extension CertificatesRepositoryProtocol {
     func fetch(userID: Int, dataSourceType: DataSourceType) -> Promise<([StepikModel.Certificate], Meta)> {
         self.fetch(userID: userID, page: 1, dataSourceType: dataSourceType)
     }
+
+    func fetch(id: Int, fetchPolicy: DataFetchPolicy) -> Promise<Certificate?> {
+        switch fetchPolicy {
+        case .cacheFirst:
+            return Guarantee(
+                self.fetch(id: id, dataSourceType: .cache),
+                fallback: nil
+            ).then { (cachedCertificateOrNil: Certificate??) -> Promise<Certificate?> in
+                if let cachedCertificate = cachedCertificateOrNil?.flatMap({ $0 }) {
+                    return .value(cachedCertificate)
+                }
+                return self.fetch(id: id, dataSourceType: .remote)
+            }
+        case .remoteFirst:
+            return Guarantee(
+                self.fetch(id: id, dataSourceType: .remote),
+                fallback: nil
+            ).then { (remoteCertificateOrNil: Certificate??) -> Promise<Certificate?> in
+                if let remoteCertificate = remoteCertificateOrNil?.flatMap({ $0 }) {
+                    return .value(remoteCertificate)
+                }
+                return self.fetch(id: id, dataSourceType: .cache)
+            }
+        }
+    }
+
+    func fetch(id: Int, fetchPolicy: DataFetchPolicy) -> Promise<StepikModel.Certificate?> {
+        self.fetch(id: id, fetchPolicy: fetchPolicy).map(\.?.plainObject)
+    }
 }
 
 final class CertificatesRepository: CertificatesRepositoryProtocol {
@@ -41,21 +71,25 @@ final class CertificatesRepository: CertificatesRepositoryProtocol {
         self.coursesPersistenceService = coursesPersistenceService
     }
 
-    func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<StepikModel.Certificate?> {
+    func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<Certificate?> {
         switch dataSourceType {
         case .cache:
-            return self.certificatesPersistenceService.fetch(id: id).map(\.?.plainObject)
+            return Promise(self.certificatesPersistenceService.fetch(id: id))
         case .remote:
-            return self.certificatesNetworkService.fetch(id: id).then {
-                remoteCertificateOrNil -> Promise<StepikModel.Certificate?> in
-                if let remoteCertificate = remoteCertificateOrNil {
-                    return self.certificatesPersistenceService
-                        .save(certificates: [remoteCertificate])
-                        .map { _ in remoteCertificate }
+            return self.certificatesNetworkService.fetch(id: id).then { remoteCertificate -> Promise<Certificate?> in
+                guard let remoteCertificate = remoteCertificate else {
+                    return .value(nil)
                 }
-                return .value(remoteCertificateOrNil)
+
+                return self.certificatesPersistenceService
+                    .save(certificates: [remoteCertificate])
+                    .map(\.first)
             }
         }
+    }
+
+    func fetch(id: Int, dataSourceType: DataSourceType) -> Promise<StepikModel.Certificate?> {
+        self.fetch(id: id, dataSourceType: dataSourceType).map(\.?.plainObject)
     }
 
     func fetch(userID: Int, page: Int, dataSourceType: DataSourceType) -> Promise<([Certificate], Meta)> {

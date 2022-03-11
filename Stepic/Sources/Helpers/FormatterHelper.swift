@@ -55,6 +55,18 @@ enum FormatterHelper {
         return "\(prefix)\(adjustedMegabytes) \(NSLocalizedString("Mb", comment: ""))"
     }
 
+    /// Format number; 6806 -> "6 806", 900 -> "900"
+    static func numberWithThousandSeparator(_ number: Int) -> String? {
+        Self.decimalNumberFormatterWithSpaceGroupingSeparator.string(for: number)
+    }
+
+    private static var decimalNumberFormatterWithSpaceGroupingSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        return formatter
+    }()
+
     // MARK: Price
 
     private static var priceCourseRevenueNumberFormatter: NumberFormatter = {
