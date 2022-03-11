@@ -10,16 +10,19 @@ import Foundation
 
 enum CodeLanguage: String, CaseIterable {
     case python = "python3"
+    case python31 = "python3.10"
     case cpp11 = "c++11"
     case cpp = "c++"
     case c = "c"
     case haskell = "haskell"
     case haskell7 = "haskell 7.10"
     case haskell8 = "haskell 8.0"
+    case haskell88 = "haskell 8.8"
     case java = "java"
     case java8 = "java8"
     case java9 = "java9"
     case java11 = "java11"
+    case java17 = "java17"
     case octave = "octave"
     case asm32 = "asm32"
     case asm64 = "asm64"
@@ -31,6 +34,7 @@ enum CodeLanguage: String, CaseIterable {
     case cs = "mono c#"
     case javascript = "javascript"
     case scala = "scala"
+    case scala3 = "scala3"
     case kotlin = "kotlin"
     case go = "go"
     case pascal = "pascalabc"
@@ -39,16 +43,17 @@ enum CodeLanguage: String, CaseIterable {
     case swift = "swift"
     case php = "php"
     case julia = "julia"
+    case dart = "dart"
 
     var highlightr: String {
         switch self {
-        case .python:
+        case .python, .python31:
             return "python"
         case .cpp, .cpp11, .c:
             return "cpp"
-        case .haskell, .haskell7, .haskell8:
+        case .haskell, .haskell7, .haskell8, .haskell88:
             return "haskell"
-        case .java, .java8, .java9, .java11:
+        case .java, .java8, .java9, .java11, .java17:
             return "java"
         case .octave:
             return "octave"
@@ -68,7 +73,7 @@ enum CodeLanguage: String, CaseIterable {
             return "cs"
         case .javascript:
             return "javascript"
-        case .scala:
+        case .scala, .scala3:
             return "scala"
         case .kotlin:
             return "kotlin"
@@ -86,18 +91,20 @@ enum CodeLanguage: String, CaseIterable {
             return "php"
         case .julia:
             return "julia"
+        case .dart:
+            return "dart"
         }
     }
 
     var humanReadableName: String {
         switch self {
-        case .python:
+        case .python, .python31:
             return "Python"
         case .cpp, .cpp11, .c:
             return "C++"
-        case .haskell, .haskell7, .haskell8:
+        case .haskell, .haskell7, .haskell8, .haskell88:
             return "Haskell"
-        case .java, .java8, .java9, .java11:
+        case .java, .java8, .java9, .java11, .java17:
             return "Java"
         case .octave:
             return "Octave"
@@ -117,7 +124,7 @@ enum CodeLanguage: String, CaseIterable {
             return "C#"
         case .javascript:
             return "Javascript"
-        case .scala:
+        case .scala, .scala3:
             return "Scala"
         case .kotlin:
             return "Kotlin"
@@ -135,6 +142,8 @@ enum CodeLanguage: String, CaseIterable {
             return "PHP"
         case .julia:
             return "Julia"
+        case .dart:
+            return "Dart"
         }
     }
 
@@ -142,13 +151,13 @@ enum CodeLanguage: String, CaseIterable {
 
     var highlightrSample: String {
         switch self {
-        case .python:
+        case .python, .python31:
             return "# comment\nprint(\"Hello World\")"
         case .cpp, .cpp11, .c:
             return "// comment\n\n#include <iostream>\n\nint main()\n{\n\tstd::cout << \"Hello World!\" << std::endl;\n}"
-        case .haskell, .haskell7, .haskell8:
+        case .haskell, .haskell7, .haskell8, .haskell88:
             return "-- comment\n\nmain = putStrLn \"Hello World\""
-        case .java, .java8, .java9, .java11:
+        case .java, .java8, .java9, .java11, .java17:
             return "// comment\n\nclass HelloWorld {\n\tstatic public void main(String args[]) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}"
         case .octave:
             return "# comment\nprintf(\"Hello World\\n\");"
@@ -168,7 +177,7 @@ enum CodeLanguage: String, CaseIterable {
             return "// comment\nclass HelloWorld\n{\n\tstatic void Main()\n\t{\n\t\tSystem.Console.WriteLine(\"Hello, World!\");\n\t}\n}"
         case .javascript:
             return "// comment\n\nconsole.log(\"Hello World\");"
-        case .scala:
+        case .scala, .scala3:
             return "// comment\n\nobject HelloWorld extends App {\n  println(\"Hello world!\")\n}"
         case .kotlin:
             return "// comment\n\nfun main(args: Array<String>) {\n\tprintln(\"Hello, world!\")\n}"
@@ -186,6 +195,8 @@ enum CodeLanguage: String, CaseIterable {
             return "// comment\n\n<?php\n\necho 'Hello World';"
         case .julia:
             return "# comment\n\nprintln(\"Hello World\")"
+        case .dart:
+            return "void main() {\n\tprint('Hello, World!');\n}"
         }
     }
 
