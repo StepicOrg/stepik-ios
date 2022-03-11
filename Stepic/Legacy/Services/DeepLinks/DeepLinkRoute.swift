@@ -15,6 +15,7 @@ enum DeepLinkRoute {
     case course(courseID: Int)
     case coursePay(courseID: Int, promoCodeName: String?)
     case coursePromo(courseID: Int)
+    case courseInfo(courseID: Int)
     case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
     case home
     case lesson(lessonID: Int, stepID: Int, unitID: Int?)
@@ -71,6 +72,8 @@ enum DeepLinkRoute {
             } else {
                 path = "course/\(courseID)/pay"
             }
+        case .courseInfo(let courseID):
+            path = "course/\(courseID)/info"
         case .certificates(let userID):
             path = "users/\(userID)/certificates"
         case .story(let id):
@@ -122,6 +125,14 @@ enum DeepLinkRoute {
             }()
 
             self = .coursePay(courseID: courseID, promoCodeName: promoCodeName)
+            return
+        }
+
+        if let match = Pattern.courseInfo.regex.firstMatch(in: path),
+           let courseIDStringValue = match.captures[0],
+           let courseID = Int(courseIDStringValue),
+           match.matchedString == path {
+            self = .courseInfo(courseID: courseID)
             return
         }
 
@@ -212,6 +223,7 @@ enum DeepLinkRoute {
         case course
         case coursePromo
         case coursePay
+        case courseInfo
         case profile
         case notifications
         case syllabus
@@ -240,6 +252,8 @@ enum DeepLinkRoute {
                 return #"\#(stepik)\#(course)(?:promo\/?)\#(queryComponents)"#
             case .coursePay:
                 return #"\#(stepik)\#(course)(?:pay\/?)\#(queryComponents)"#
+            case .courseInfo:
+                return #"\#(stepik)\#(course)(?:info\/?)\#(queryComponents)"#
             case .profile:
                 return #"\#(stepik)users\/(\d+)\/?\#(queryComponents)"#
             case .notifications:
