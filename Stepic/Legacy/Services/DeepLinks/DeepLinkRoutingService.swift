@@ -111,7 +111,16 @@ final class DeepLinkRoutingService {
                 )
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
-        case .course, .coursePromo, .coursePay, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
+        case .course,
+             .coursePromo,
+             .coursePay,
+             .courseInfo,
+             .discussions,
+             .solutions,
+             .lesson,
+             .profile,
+             .syllabus,
+             .certificates:
             return ModalOrPushStackRouter(
                 source: source,
                 destinationStack: moduleStack,
@@ -159,7 +168,9 @@ final class DeepLinkRoutingService {
                 seal.fulfill([])
             case .profile(let userID):
                 seal.fulfill([NewProfileAssembly(otherUserID: userID).makeModule()])
-            case .course(let courseID), .coursePromo(let courseID):
+            case .course(let courseID),
+                 .coursePromo(let courseID),
+                 .courseInfo(let courseID):
                 let assembly = CourseInfoAssembly(
                     courseID: courseID,
                     initialTab: .info,
