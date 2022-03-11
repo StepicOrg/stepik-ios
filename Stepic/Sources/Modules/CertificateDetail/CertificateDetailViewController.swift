@@ -7,6 +7,16 @@ protocol CertificateDetailViewControllerProtocol: AnyObject {
 final class CertificateDetailViewController: UIViewController {
     private let interactor: CertificateDetailInteractorProtocol
 
+    private lazy var shareBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(self.shareButtonClicked)
+        )
+        item.isEnabled = false
+        return item
+    }()
+
     private var state: CertificateDetail.ViewControllerState {
         didSet {
             self.updateState()
@@ -44,14 +54,30 @@ final class CertificateDetailViewController: UIViewController {
         case .result:
             //self.isPlaceholderShown = false
             //self.showContent()
-            break
+            self.shareBarButtonItem.isEnabled = true
         case .loading:
             //self.isPlaceholderShown = false
             //self.solutionView?.startLoading()
-            break
+            self.shareBarButtonItem.isEnabled = false
         case .error:
             //self.showPlaceholder(for: .connectionError)
-            break
+            self.shareBarButtonItem.isEnabled = false
+        }
+    }
+
+    @objc
+    private func shareButtonClicked() {
+        guard case .result(let data) = self.state,
+              let shareURL = data.shareURL else {
+            return
+        }
+
+        DispatchQueue.global().async {
+            let sharingViewController = SharingHelper.getSharingController(shareURL.absoluteString)
+            DispatchQueue.main.async {
+                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
+                self.present(sharingViewController, animated: true)
+            }
         }
     }
 }

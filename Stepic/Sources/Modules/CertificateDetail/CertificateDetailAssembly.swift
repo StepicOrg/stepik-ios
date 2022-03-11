@@ -14,7 +14,7 @@ final class CertificateDetailAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = CertificateDetailProvider(certificatesRepository: CertificatesRepository.default)
-        let presenter = CertificateDetailPresenter()
+        let presenter = CertificateDetailPresenter(stepikURLFactory: StepikURLFactory())
         let interactor = CertificateDetailInteractor(
             certificateID: self.certificateID,
             presenter: presenter,

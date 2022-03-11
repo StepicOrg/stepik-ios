@@ -10,6 +10,7 @@ struct CertificateDetailViewModel {
     let formattedUserRank: String?
 
     let previewURL: URL?
+    let shareURL: URL?
 
     let isEditAvailable: Bool
     let isWithDistinction: Bool

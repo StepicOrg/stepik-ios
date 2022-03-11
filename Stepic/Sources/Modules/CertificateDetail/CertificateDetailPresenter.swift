@@ -7,6 +7,12 @@ protocol CertificateDetailPresenterProtocol {
 final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
     weak var viewController: CertificateDetailViewControllerProtocol?
 
+    private let stepikURLFactory: StepikURLFactory
+
+    init(stepikURLFactory: StepikURLFactory) {
+        self.stepikURLFactory = stepikURLFactory
+    }
+
     func presentCertificate(response: CertificateDetail.CertificateLoad.Response) {
         switch response.result {
         case .success(let data):
@@ -53,6 +59,8 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
             return nil
         }()
 
+        let shareURL = self.stepikURLFactory.makeCertificate(id: certificate.id)
+
         let isEditAvailable = certificate.isEditAllowed && certificate.userID == currentUserID
 
         return CertificateDetailViewModel(
@@ -62,6 +70,7 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
             userFullName: certificate.savedFullName,
             formattedUserRank: formattedUserRank,
             previewURL: previewURL,
+            shareURL: shareURL,
             isEditAvailable: isEditAvailable,
             isWithDistinction: certificate.type == .distinction
         )
