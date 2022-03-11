@@ -16,6 +16,7 @@ enum DeepLinkRoute {
     case course(courseID: Int)
     case coursePay(courseID: Int, promoCodeName: String?)
     case coursePromo(courseID: Int)
+    case courseInfo(courseID: Int)
     case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
     case home
     case lesson(lessonID: Int, stepID: Int, unitID: Int?)
@@ -72,6 +73,8 @@ enum DeepLinkRoute {
             } else {
                 path = "course/\(courseID)/pay"
             }
+        case .courseInfo(let courseID):
+            path = "course/\(courseID)/info"
         case .certificate(let id):
             path = "cert/\(id)"
         case .certificates(let userID):
@@ -125,6 +128,14 @@ enum DeepLinkRoute {
             }()
 
             self = .coursePay(courseID: courseID, promoCodeName: promoCodeName)
+            return
+        }
+
+        if let match = Pattern.courseInfo.regex.firstMatch(in: path),
+           let courseIDStringValue = match.captures[0],
+           let courseID = Int(courseIDStringValue),
+           match.matchedString == path {
+            self = .courseInfo(courseID: courseID)
             return
         }
 
@@ -223,15 +234,16 @@ enum DeepLinkRoute {
         case course
         case coursePromo
         case coursePay
+        case courseInfo
         case profile
         case notifications
         case syllabus
         case lesson
         case discussions
         case solutions
+        case certificate
         case certificates
         case story
-        case certificate
 
         var regex: Regex {
             try! Regex(string: self.pattern, options: [.ignoreCase])
@@ -252,6 +264,8 @@ enum DeepLinkRoute {
                 return #"\#(stepik)\#(course)(?:promo\/?)\#(queryComponents)"#
             case .coursePay:
                 return #"\#(stepik)\#(course)(?:pay\/?)\#(queryComponents)"#
+            case .courseInfo:
+                return #"\#(stepik)\#(course)(?:info\/?)\#(queryComponents)"#
             case .profile:
                 return #"\#(stepik)users\/(\d+)\/?\#(queryComponents)"#
             case .notifications:
@@ -264,12 +278,12 @@ enum DeepLinkRoute {
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?\/?\#(queryComponents)"#
             case .solutions:
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?&thread=solutions.*"#
+            case .certificate:
+                return #"\#(stepik)cert\/(\d+)\/?\#(queryComponents)"#
             case .certificates:
                 return #"\#(stepik)users\/(\d+)\/certificates\/?\#(queryComponents)"#
             case .story:
                 return #"\#(stepik)story-template\/(\d+)\/?\#(queryComponents)"#
-            case .certificate:
-                return #"\#(stepik)cert\/(\d+)\/?\#(queryComponents)"#
             }
         }
     }
