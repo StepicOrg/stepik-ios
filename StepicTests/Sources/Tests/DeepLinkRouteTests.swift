@@ -130,6 +130,24 @@ class DeepLinkRouteSpec: QuickSpec {
                 }
             }
 
+            context("courseInfo") {
+                it("matches course info deep link with given paths") {
+                    let paths = [
+                        "http://stepik.org/course/8092/info",
+                        "https://stepik.org/course/8092/info",
+                        "https://stepik.org/course/8092/info/",
+                        "https://stepik.org/course/8092/info/?",
+                        "https://stepik.org/course/8092/info/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .courseInfo(id) = route else {
+                            return .failed(reason: "wrong enum case, expected `course`, got \(route)")
+                        }
+                        return id == 8092 ? .succeeded : .failed(reason: "wrong course id")
+                    }
+                }
+            }
+
             context("profile") {
                 it("matches profile deep link with given paths") {
                     let paths = [
