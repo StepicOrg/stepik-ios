@@ -5,6 +5,7 @@ protocol CertificateDetailViewDelegate: AnyObject {
     func certificateDetailViewDidClickPreview(_ view: CertificateDetailView)
     func certificateDetailViewDidClickCourse(_ view: CertificateDetailView)
     func certificateDetailViewDidClickRecipient(_ view: CertificateDetailView)
+    func certificateDetailViewDidClickEdit(_ view: CertificateDetailView)
 }
 
 extension CertificateDetailView {
@@ -141,6 +142,7 @@ final class CertificateDetailView: UIView {
         self.previewView.loadImage(url: viewModel.previewURL)
 
         self.editButton.isHidden = !viewModel.isEditAvailable
+        self.editButton.isEnabled = viewModel.isEditAllowed
     }
 
     // MARK: Private API
@@ -162,7 +164,7 @@ final class CertificateDetailView: UIView {
 
     @objc
     private func editButtonClicked() {
-        print(#function)
+        self.delegate?.certificateDetailViewDidClickEdit(self)
     }
 }
 

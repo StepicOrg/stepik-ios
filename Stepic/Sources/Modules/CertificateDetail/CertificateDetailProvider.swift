@@ -1,8 +1,11 @@
 import Foundation
 import PromiseKit
+import StepikModel
 
 protocol CertificateDetailProviderProtocol {
     func fetchCertificate(id: Certificate.IdType) -> Promise<Certificate?>
+
+    func update(certificate: StepikModel.Certificate) -> Promise<Certificate>
 }
 
 final class CertificateDetailProvider: CertificateDetailProviderProtocol {
@@ -14,5 +17,9 @@ final class CertificateDetailProvider: CertificateDetailProviderProtocol {
 
     func fetchCertificate(id: Certificate.IdType) -> Promise<Certificate?> {
         self.certificatesRepository.fetch(id: id, fetchPolicy: .cacheFirst)
+    }
+
+    func update(certificate: StepikModel.Certificate) -> Promise<Certificate> {
+        self.certificatesRepository.update(certificate: certificate)
     }
 }

@@ -6,6 +6,12 @@ protocol CertificateDetailPresenterProtocol {
     func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response)
     func presentCourse(response: CertificateDetail.CoursePresentation.Response)
     func presentRecipient(response: CertificateDetail.RecipientPresentation.Response)
+    func presentPromptForChangeCertificateNameInput(
+        response: CertificateDetail.PromptForChangeCertificateNameInput.Response
+    )
+    func presentUpdateCertificateRecipientNameResult(
+        response: CertificateDetail.UpdateCertificateRecipientName.Response
+    )
 }
 
 final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
@@ -49,6 +55,35 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
         self.viewController?.displayRecipient(viewModel: .init(userID: response.userID))
     }
 
+    func presentPromptForChangeCertificateNameInput(
+        response: CertificateDetail.PromptForChangeCertificateNameInput.Response
+    ) {
+        self.viewController?.displayPromptForChangeCertificateNameInput(
+            viewModel: .init(
+                editsCount: response.certificate.editsCount,
+                allowedEditsCount: response.certificate.allowedEditsCount,
+                savedFullName: response.certificate.savedFullName,
+                predefinedNewFullName: response.predefinedNewFullName
+            )
+        )
+    }
+
+    func presentUpdateCertificateRecipientNameResult(
+        response: CertificateDetail.UpdateCertificateRecipientName.Response
+    ) {
+        switch response.result {
+        case .success(let data):
+            let viewModel = self.makeViewModel(certificate: data.certificate, currentUserID: data.currentUserID)
+            self.viewController?.displayUpdateCertificateRecipientNameResult(
+                viewModel: .init(state: .success(data: viewModel))
+            )
+        case .failure:
+            self.viewController?.displayUpdateCertificateRecipientNameResult(
+                viewModel: .init(state: .failure(predefinedNewFullName: response.predefinedNewFullName))
+            )
+        }
+    }
+
     // MARK: Private API
 
     private func makeViewModel(certificate: Certificate, currentUserID: User.IdType?) -> CertificateDetailViewModel {
@@ -89,8 +124,6 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
 
         let shareURL = self.stepikURLFactory.makeCertificate(id: certificate.id)
 
-        let isEditAvailable = certificate.isEditAllowed && certificate.userID == currentUserID
-
         return CertificateDetailViewModel(
             formattedIssueDate: formattedIssueDate,
             formattedGrade: "\(certificate.grade)%",
@@ -99,7 +132,8 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
             formattedUserRank: formattedUserRank,
             previewURL: previewURL,
             shareURL: shareURL,
-            isEditAvailable: isEditAvailable,
+            isEditAvailable: certificate.userID == currentUserID,
+            isEditAllowed: certificate.isEditAllowed,
             isWithDistinction: certificate.type == .distinction
         )
     }

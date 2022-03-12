@@ -13,5 +13,7 @@ struct CertificateDetailViewModel {
     let shareURL: URL?
 
     let isEditAvailable: Bool
+    let isEditAllowed: Bool
+
     let isWithDistinction: Bool
 }

@@ -749,16 +749,27 @@ extension AnalyticsEvent {
 
     // MARK: - Certificates -
 
-    static let certificatesScreenOpened = AmplitudeAnalyticsEvent(name: "Certificates screen opened")
+    static func certificatesScreenOpened(
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificates screen opened",
+            parameters: [
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
 
-    static func certificatePDFClicked(
+    static func certificateScreenOpened(
         certificateID: Int,
         courseID: Int,
         userID: Int,
         certificateUserState: CertificateUserState
     ) -> AmplitudeAnalyticsEvent {
         AmplitudeAnalyticsEvent(
-            name: "Certificate pdf clicked",
+            name: "Certificate screen opened",
             parameters: [
                 "certificate": certificateID,
                 "course": courseID,
@@ -788,6 +799,33 @@ extension AnalyticsEvent {
     enum CertificateUserState: String {
         case `self` = "self"
         case other
+    }
+
+    static func certificateChangeNameClicked(certificateID: Int, courseID: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate change name clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID
+            ]
+        )
+    }
+
+    static func certificatePDFClicked(
+        certificateID: Int,
+        courseID: Int,
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate pdf clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID,
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
     }
 
     // MARK: - Achievements -

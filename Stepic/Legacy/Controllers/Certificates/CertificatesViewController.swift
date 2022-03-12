@@ -119,7 +119,13 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.analytics?.send(.certificatesScreenOpened)
+
+        if let userID = self.userID {
+            let isMe = AuthInfo.shared.userId != nil && userID == AuthInfo.shared.userId
+            self.analytics?.send(
+                .certificatesScreenOpened(userID: userID, certificateUserState: isMe ? .`self` : .other)
+            )
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

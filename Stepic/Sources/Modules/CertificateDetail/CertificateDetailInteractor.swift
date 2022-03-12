@@ -1,5 +1,6 @@
 import Foundation
 import PromiseKit
+import StepikModel
 
 protocol CertificateDetailInteractorProtocol {
     func doCertificateLoad(request: CertificateDetail.CertificateLoad.Request)
@@ -7,6 +8,8 @@ protocol CertificateDetailInteractorProtocol {
     func doCertificatePDFPresentation(request: CertificateDetail.CertificatePDFPresentation.Request)
     func doCoursePresentation(request: CertificateDetail.CoursePresentation.Request)
     func doRecipientPresentation(request: CertificateDetail.RecipientPresentation.Request)
+    func doPromptForChangeCertificateNameInput(request: CertificateDetail.PromptForChangeCertificateNameInput.Request)
+    func doUpdateCertificateRecipientName(request: CertificateDetail.UpdateCertificateRecipientName.Request)
 }
 
 final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
@@ -22,6 +25,8 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
     private let certificateID: Certificate.IdType
 
     private var currentCertificate: Certificate?
+
+    private var shouldSendOpenedAnalyticsEvent = true
 
     init(
         certificateID: Certificate.IdType,
@@ -41,12 +46,13 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         self.provider.fetchCertificate(id: self.certificateID).compactMap { $0 }.done { certificate in
             self.currentCertificate = certificate
 
-            let data = CertificateDetail.CertificateLoad.Data(
+            let data = CertificateDetail.CertificateData(
                 certificate: certificate,
                 currentUserID: self.userAccountService.currentUserID
             )
-
             self.presenter.presentCertificate(response: .init(result: .success(data)))
+
+            self.sendOpenedAnalyticsEventIfNeeded()
         }.catch { error in
             self.presenter.presentCertificate(response: .init(result: .failure(error)))
         }
@@ -103,6 +109,95 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         }
 
         self.presenter.presentRecipient(response: .init(userID: certificate.userID))
+    }
+
+    func doPromptForChangeCertificateNameInput(request: CertificateDetail.PromptForChangeCertificateNameInput.Request) {
+        guard let certificate = self.currentCertificate,
+              certificate.isEditAllowed else {
+            return
+        }
+
+        self.analytics.send(
+            .certificateChangeNameClicked(certificateID: certificate.id, courseID: certificate.courseID)
+        )
+
+        self.presenter.presentPromptForChangeCertificateNameInput(
+            response: .init(
+                certificate: certificate,
+                predefinedNewFullName: request.predefinedNewFullName
+            )
+        )
+    }
+
+    func doUpdateCertificateRecipientName(request: CertificateDetail.UpdateCertificateRecipientName.Request) {
+        guard let certificate = self.currentCertificate,
+              certificate.isEditAllowed,
+              !request.newFullName.isEmpty else {
+            return self.presenter.presentUpdateCertificateRecipientNameResult(
+                response: .init(
+                    predefinedNewFullName: request.newFullName,
+                    result: .failure(Error.updateCertificateNameFailed)
+                )
+            )
+        }
+
+        let oldFullName = certificate.savedFullName
+        certificate.savedFullName = request.newFullName
+
+        self.provider.update(certificate: certificate.plainObject).done { [weak self] updatedCertificate in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.currentCertificate = updatedCertificate
+
+            let data = CertificateDetail.CertificateData(
+                certificate: updatedCertificate,
+                currentUserID: strongSelf.userAccountService.currentUserID
+            )
+            strongSelf.presenter.presentUpdateCertificateRecipientNameResult(response: .init(result: .success(data)))
+
+            strongSelf.moduleOutput?.handleCertificateDetailDidChangeRecipientName(
+                certificate: updatedCertificate.plainObject
+            )
+        }.catch { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            certificate.savedFullName = oldFullName
+
+            strongSelf.presenter.presentUpdateCertificateRecipientNameResult(
+                response: .init(
+                    predefinedNewFullName: request.newFullName,
+                    result: .failure(Error.updateCertificateNameFailed)
+                )
+            )
+        }.finally {
+            CoreDataHelper.shared.save()
+        }
+    }
+
+    private func sendOpenedAnalyticsEventIfNeeded() {
+        guard self.shouldSendOpenedAnalyticsEvent,
+              let certificate = self.currentCertificate else {
+            return
+        }
+
+        self.shouldSendOpenedAnalyticsEvent = false
+
+        self.analytics.send(
+            .certificateScreenOpened(
+                certificateID: certificate.id,
+                courseID: certificate.courseID,
+                userID: certificate.userID,
+                certificateUserState: self.userAccountService.currentUserID == certificate.userID ? .`self` : .other
+            )
+        )
+    }
+
+    enum Error: Swift.Error {
+        case updateCertificateNameFailed
     }
 }
 
