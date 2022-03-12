@@ -229,8 +229,9 @@ final class DeepLinkRoutingService {
                         seal.fulfill(moduleStack)
                     }
                 )
-            case .certificate(_):
-                fatalError("not implemented")
+            case .certificate(let id):
+                let assembly = CertificateDetailAssembly(certificateID: id)
+                seal.fulfill([assembly.makeModule()])
             case .certificates(let userID):
                 seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
             case .story(let id):
