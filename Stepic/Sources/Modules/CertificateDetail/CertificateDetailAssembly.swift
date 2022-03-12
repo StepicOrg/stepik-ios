@@ -19,7 +19,8 @@ final class CertificateDetailAssembly: Assembly {
             certificateID: self.certificateID,
             presenter: presenter,
             provider: provider,
-            userAccountService: UserAccountService()
+            userAccountService: UserAccountService(),
+            analytics: StepikAnalytics.shared
         )
         let viewController = CertificateDetailViewController(interactor: interactor)
 

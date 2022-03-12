@@ -751,6 +751,28 @@ extension AnalyticsEvent {
 
     static let certificatesScreenOpened = AmplitudeAnalyticsEvent(name: "Certificates screen opened")
 
+    static func certificatePDFClicked(
+        certificateID: Int,
+        courseID: Int,
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate pdf clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID,
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
+
+    enum CertificateUserState: String {
+        case `self` = "self"
+        case other
+    }
+
     // MARK: - Achievements -
 
     static func achievementsScreenOpened(isPersonal: Bool) -> AmplitudeAnalyticsEvent {

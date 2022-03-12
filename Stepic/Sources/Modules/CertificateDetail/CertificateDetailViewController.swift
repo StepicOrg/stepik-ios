@@ -2,6 +2,7 @@ import UIKit
 
 protocol CertificateDetailViewControllerProtocol: AnyObject {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel)
+    func displayCertificatePDF(viewModel: CertificateDetail.CertificatePDFPresentation.ViewModel)
 }
 
 final class CertificateDetailViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -43,6 +44,7 @@ final class CertificateDetailViewController: UIViewController, ControllerWithSte
     override func loadView() {
         let view = CertificateDetailView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -116,5 +118,23 @@ final class CertificateDetailViewController: UIViewController, ControllerWithSte
 extension CertificateDetailViewController: CertificateDetailViewControllerProtocol {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel) {
         self.state = viewModel.state
+    }
+
+    func displayCertificatePDF(viewModel: CertificateDetail.CertificatePDFPresentation.ViewModel) {
+        WebControllerManager.shared.presentWebControllerWithURL(
+            viewModel.url,
+            inController: self,
+            withKey: .certificate,
+            allowsSafari: true,
+            backButtonStyle: .close
+        )
+    }
+}
+
+// MARK: - CertificateDetailViewController: CertificateDetailViewDelegate -
+
+extension CertificateDetailViewController: CertificateDetailViewDelegate {
+    func certificateDetailViewDidClickPreview(_ view: CertificateDetailView) {
+        self.interactor.doCertificatePDFPresentation(request: .init())
     }
 }

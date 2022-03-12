@@ -1,6 +1,7 @@
 import Foundation
 
 enum CertificateDetail {
+    /// Show certificate
     enum CertificateLoad {
         struct Data {
             let certificate: Certificate
@@ -15,6 +16,19 @@ enum CertificateDetail {
 
         struct ViewModel {
             let state: ViewControllerState
+        }
+    }
+
+    /// Show certificate PDF in the web
+    enum CertificatePDFPresentation {
+        struct Request {}
+
+        struct Response {
+            let url: URL
+        }
+
+        struct ViewModel {
+            let url: URL
         }
     }
 

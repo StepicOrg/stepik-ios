@@ -2,6 +2,7 @@ import UIKit
 
 protocol CertificateDetailPresenterProtocol {
     func presentCertificate(response: CertificateDetail.CertificateLoad.Response)
+    func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response)
 }
 
 final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
@@ -22,6 +23,12 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
             self.viewController?.displayCertificate(viewModel: .init(state: .error))
         }
     }
+
+    func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response) {
+        self.viewController?.displayCertificatePDF(viewModel: .init(url: response.url))
+    }
+
+    // MARK: Private API
 
     private func makeViewModel(certificate: Certificate, currentUserID: User.IdType?) -> CertificateDetailViewModel {
         let formattedIssueDate: String? = {

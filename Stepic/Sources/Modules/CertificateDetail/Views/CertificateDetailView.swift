@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol CertificateDetailViewDelegate: AnyObject {
+    func certificateDetailViewDidClickPreview(_ view: CertificateDetailView)
+}
+
 extension CertificateDetailView {
     struct Appearance {
         let issueDateLabelFont = Typography.caption1Font
@@ -20,6 +24,8 @@ extension CertificateDetailView {
 }
 
 final class CertificateDetailView: UIView {
+    weak var delegate: CertificateDetailViewDelegate?
+
     let appearance: Appearance
 
     private lazy var issueDateLabel: UILabel = {
@@ -45,7 +51,16 @@ final class CertificateDetailView: UIView {
         return label
     }()
 
-    private lazy var previewView = CertificateDetailPreviewView()
+    private lazy var previewView: CertificateDetailPreviewView = {
+        let view = CertificateDetailPreviewView()
+        view.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(self.previewViewClicked)
+            )
+        )
+        return view
+    }()
 
     private lazy var editButton: CertificateDetailEditButton = {
         let button = CertificateDetailEditButton()
@@ -61,6 +76,8 @@ final class CertificateDetailView: UIView {
         scrollableStackView.showsHorizontalScrollIndicator = false
         return scrollableStackView
     }()
+
+    var onCertificatePreviewClick: (() -> Void)?
 
     init(
         frame: CGRect = .zero,
@@ -117,6 +134,11 @@ final class CertificateDetailView: UIView {
     }
 
     // MARK: Private API
+
+    @objc
+    private func previewViewClicked() {
+        self.delegate?.certificateDetailViewDidClickPreview(self)
+    }
 
     @objc
     private func editButtonClicked() {

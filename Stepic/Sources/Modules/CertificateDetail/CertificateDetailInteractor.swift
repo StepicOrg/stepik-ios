@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CertificateDetailInteractorProtocol {
     func doCertificateLoad(request: CertificateDetail.CertificateLoad.Request)
+    func doCertificatePDFPresentation(request: CertificateDetail.CertificatePDFPresentation.Request)
 }
 
 final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
@@ -13,6 +14,8 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
 
     private let userAccountService: UserAccountServiceProtocol
 
+    private let analytics: Analytics
+
     private let certificateID: Certificate.IdType
 
     private var currentCertificate: Certificate?
@@ -21,12 +24,14 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         certificateID: Certificate.IdType,
         presenter: CertificateDetailPresenterProtocol,
         provider: CertificateDetailProviderProtocol,
-        userAccountService: UserAccountServiceProtocol
+        userAccountService: UserAccountServiceProtocol,
+        analytics: Analytics
     ) {
         self.certificateID = certificateID
         self.presenter = presenter
-        self.userAccountService = userAccountService
         self.provider = provider
+        self.userAccountService = userAccountService
+        self.analytics = analytics
     }
 
     func doCertificateLoad(request: CertificateDetail.CertificateLoad.Request) {
@@ -44,8 +49,24 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         }
     }
 
-    enum Error: Swift.Error {
-        case something
+    func doCertificatePDFPresentation(request: CertificateDetail.CertificatePDFPresentation.Request) {
+        guard let certificate = self.currentCertificate,
+              let urlString = certificate.urlString,
+              let url = URL(string: urlString) else {
+            return
+        }
+
+        self.analytics.send(.certificateOpened(grade: certificate.grade, courseName: certificate.courseTitle))
+        self.analytics.send(
+            .certificatePDFClicked(
+                certificateID: certificate.id,
+                courseID: certificate.courseID,
+                userID: certificate.userID,
+                certificateUserState: self.userAccountService.currentUserID == certificate.userID ? .`self` : .other
+            )
+        )
+
+        self.presenter.presentCertificatePDF(response: .init(url: url))
     }
 }
 
