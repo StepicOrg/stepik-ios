@@ -6,6 +6,9 @@ extension CertificateDetailView {
         let issueDateLabelFont = Typography.caption1Font
         let issueDateLabelTextColor = UIColor.stepikMaterialSecondaryText
 
+        let userRankLabelFont = Typography.caption1Font
+        let userRankLabelTextColor = UIColor.stepikVioletFixed
+
         let scrollableStackViewSpacing: CGFloat = 16
         let scrollableStackViewContentInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         let scrollableStackViewLayoutInsets = LayoutInsets.default
@@ -31,6 +34,14 @@ final class CertificateDetailView: UIView {
     private lazy var courseDetailTitleView = CertificateDetailVerticalTitleView()
 
     private lazy var recipientDetailTitleView = CertificateDetailVerticalTitleView()
+
+    private lazy var userRankLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.userRankLabelFont
+        label.textColor = self.appearance.userRankLabelTextColor
+        label.numberOfLines = 0
+        return label
+    }()
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
@@ -70,6 +81,9 @@ final class CertificateDetailView: UIView {
             comment: ""
         )
         self.recipientDetailTitleView.bodyText = viewModel.userFullName
+
+        self.userRankLabel.text = viewModel.formattedUserRank
+        self.userRankLabel.isHidden = self.userRankLabel.text?.isEmpty ?? true
     }
 }
 
@@ -91,6 +105,7 @@ extension CertificateDetailView: ProgrammaticallyInitializableViewProtocol {
 
         self.scrollableStackView.addArrangedView(self.courseDetailTitleView)
         self.scrollableStackView.addArrangedView(self.recipientDetailTitleView)
+        self.scrollableStackView.addArrangedView(self.userRankLabel)
     }
 
     func makeConstraints() {
