@@ -3,6 +3,8 @@ import UIKit
 
 protocol CertificateDetailViewDelegate: AnyObject {
     func certificateDetailViewDidClickPreview(_ view: CertificateDetailView)
+    func certificateDetailViewDidClickCourse(_ view: CertificateDetailView)
+    func certificateDetailViewDidClickRecipient(_ view: CertificateDetailView)
 }
 
 extension CertificateDetailView {
@@ -39,9 +41,17 @@ final class CertificateDetailView: UIView {
 
     private lazy var gradeView = CertificateDetailGradeView()
 
-    private lazy var courseDetailTitleView = CertificateDetailVerticalTitleView()
+    private lazy var courseDetailTitleView: CertificateDetailVerticalTitleView = {
+        let view = CertificateDetailVerticalTitleView()
+        view.addTarget(self, action: #selector(self.courseDetailTitleViewClicked), for: .touchUpInside)
+        return view
+    }()
 
-    private lazy var recipientDetailTitleView = CertificateDetailVerticalTitleView()
+    private lazy var recipientDetailTitleView: CertificateDetailVerticalTitleView = {
+        let view = CertificateDetailVerticalTitleView()
+        view.addTarget(self, action: #selector(self.recipientDetailTitleViewClicked), for: .touchUpInside)
+        return view
+    }()
 
     private lazy var userRankLabel: UILabel = {
         let label = UILabel()
@@ -134,6 +144,16 @@ final class CertificateDetailView: UIView {
     }
 
     // MARK: Private API
+
+    @objc
+    private func courseDetailTitleViewClicked() {
+        self.delegate?.certificateDetailViewDidClickCourse(self)
+    }
+
+    @objc
+    private func recipientDetailTitleViewClicked() {
+        self.delegate?.certificateDetailViewDidClickRecipient(self)
+    }
 
     @objc
     private func previewViewClicked() {

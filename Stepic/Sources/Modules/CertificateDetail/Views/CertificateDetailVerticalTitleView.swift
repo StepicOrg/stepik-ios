@@ -12,7 +12,7 @@ extension CertificateDetailVerticalTitleView {
     }
 }
 
-final class CertificateDetailVerticalTitleView: UIView {
+final class CertificateDetailVerticalTitleView: UIControl {
     let appearance: Appearance
 
     private lazy var headlineLabel: UILabel = {
@@ -42,6 +42,12 @@ final class CertificateDetailVerticalTitleView: UIView {
         didSet {
             self.bodyLabel.text = self.bodyText
             self.invalidateIntrinsicContentSize()
+        }
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.alpha = self.isHighlighted ? 0.5 : 1.0
         }
     }
 

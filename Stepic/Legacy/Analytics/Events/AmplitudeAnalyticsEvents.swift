@@ -885,6 +885,7 @@ extension AnalyticsEvent {
         case profile(id: Int)
         case userCoursesReviews
         case wishlist
+        case certificate(id: Int)
         case unknown
 
         var name: String {
@@ -921,6 +922,8 @@ extension AnalyticsEvent {
                 return "user_courses_reviews"
             case .wishlist:
                 return "wishlist"
+            case .certificate:
+                return "certificate"
             case .unknown:
                 return "unknown"
             }
@@ -968,6 +971,8 @@ extension AnalyticsEvent {
                 return ["story": id]
             case .deepLink(let url), .widgetExtension(let url):
                 return ["url": url]
+            case .certificate(let id):
+                return ["id": id]
             }
         }
     }

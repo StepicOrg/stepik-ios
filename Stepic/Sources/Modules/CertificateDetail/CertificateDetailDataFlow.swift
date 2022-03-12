@@ -32,6 +32,34 @@ enum CertificateDetail {
         }
     }
 
+    /// Show course info module
+    enum CoursePresentation {
+        struct Request {}
+
+        struct Response {
+            let courseID: Course.IdType
+            let certificateID: Certificate.IdType
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+            let certificateID: Certificate.IdType
+        }
+    }
+
+    /// Show user profile module
+    enum RecipientPresentation {
+        struct Request {}
+
+        struct Response {
+            let userID: User.IdType
+        }
+
+        struct ViewModel {
+            let userID: User.IdType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

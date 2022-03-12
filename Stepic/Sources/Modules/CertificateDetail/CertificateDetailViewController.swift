@@ -3,6 +3,8 @@ import UIKit
 protocol CertificateDetailViewControllerProtocol: AnyObject {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel)
     func displayCertificatePDF(viewModel: CertificateDetail.CertificatePDFPresentation.ViewModel)
+    func displayCourse(viewModel: CertificateDetail.CoursePresentation.ViewModel)
+    func displayRecipient(viewModel: CertificateDetail.RecipientPresentation.ViewModel)
 }
 
 final class CertificateDetailViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -129,6 +131,19 @@ extension CertificateDetailViewController: CertificateDetailViewControllerProtoc
             backButtonStyle: .close
         )
     }
+
+    func displayCourse(viewModel: CertificateDetail.CoursePresentation.ViewModel) {
+        let assembly = CourseInfoAssembly(
+            courseID: viewModel.courseID,
+            courseViewSource: .certificate(id: viewModel.certificateID)
+        )
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayRecipient(viewModel: CertificateDetail.RecipientPresentation.ViewModel) {
+        let assembly = NewProfileAssembly(otherUserID: viewModel.userID)
+        self.push(module: assembly.makeModule())
+    }
 }
 
 // MARK: - CertificateDetailViewController: CertificateDetailViewDelegate -
@@ -136,5 +151,13 @@ extension CertificateDetailViewController: CertificateDetailViewControllerProtoc
 extension CertificateDetailViewController: CertificateDetailViewDelegate {
     func certificateDetailViewDidClickPreview(_ view: CertificateDetailView) {
         self.interactor.doCertificatePDFPresentation(request: .init())
+    }
+
+    func certificateDetailViewDidClickCourse(_ view: CertificateDetailView) {
+        self.interactor.doCoursePresentation(request: .init())
+    }
+
+    func certificateDetailViewDidClickRecipient(_ view: CertificateDetailView) {
+        self.interactor.doRecipientPresentation(request: .init())
     }
 }

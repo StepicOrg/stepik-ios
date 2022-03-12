@@ -3,6 +3,8 @@ import UIKit
 protocol CertificateDetailPresenterProtocol {
     func presentCertificate(response: CertificateDetail.CertificateLoad.Response)
     func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response)
+    func presentCourse(response: CertificateDetail.CoursePresentation.Response)
+    func presentRecipient(response: CertificateDetail.RecipientPresentation.Response)
 }
 
 final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
@@ -26,6 +28,16 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
 
     func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response) {
         self.viewController?.displayCertificatePDF(viewModel: .init(url: response.url))
+    }
+
+    func presentCourse(response: CertificateDetail.CoursePresentation.Response) {
+        self.viewController?.displayCourse(
+            viewModel: .init(courseID: response.courseID, certificateID: response.certificateID)
+        )
+    }
+
+    func presentRecipient(response: CertificateDetail.RecipientPresentation.Response) {
+        self.viewController?.displayRecipient(viewModel: .init(userID: response.userID))
     }
 
     // MARK: Private API
