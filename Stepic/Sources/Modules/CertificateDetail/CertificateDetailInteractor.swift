@@ -19,13 +19,11 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
     private let provider: CertificateDetailProviderProtocol
 
     private let userAccountService: UserAccountServiceProtocol
-
     private let analytics: Analytics
 
     private let certificateID: Certificate.IdType
 
     private var currentCertificate: Certificate?
-
     private var shouldSendOpenedAnalyticsEvent = true
 
     init(
