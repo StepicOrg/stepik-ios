@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewProfileCertificatesViewControllerProtocol: AnyObject {
     func displayCertificates(viewModel: NewProfileCertificates.CertificatesLoad.ViewModel)
+    func displayCertificateDetail(viewModel: NewProfileCertificates.CertificateDetailPresentation.ViewModel)
 }
 
 protocol NewProfileCertificatesViewControllerDelegate: AnyObject {
@@ -103,24 +104,17 @@ extension NewProfileCertificatesViewController: NewProfileCertificatesViewContro
     func displayCertificates(viewModel: NewProfileCertificates.CertificatesLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
+
+    func displayCertificateDetail(viewModel: NewProfileCertificates.CertificateDetailPresentation.ViewModel) {
+        let assembly = CertificateDetailAssembly(certificateID: viewModel.certificateID)
+        self.push(module: assembly.makeModule())
+    }
 }
 
 extension NewProfileCertificatesViewController: NewProfileCertificatesViewControllerDelegate {
     func itemDidSelected(viewModel: NewProfileCertificatesCertificateViewModel) {
-        guard let certificateURL = viewModel.certificateURL else {
-            return
-        }
-
-        self.analytics.send(
-            .certificateOpened(grade: viewModel.certificateGrade ?? 0, courseName: viewModel.courseTitle)
-        )
-
-        WebControllerManager.shared.presentWebControllerWithURL(
-            certificateURL,
-            inController: self,
-            withKey: .certificate,
-            allowsSafari: true,
-            backButtonStyle: .close
+        self.interactor.doCertificateDetailPresentation(
+            request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
         )
     }
 }

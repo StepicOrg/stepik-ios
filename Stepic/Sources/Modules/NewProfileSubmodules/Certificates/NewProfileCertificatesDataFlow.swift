@@ -14,6 +14,21 @@ enum NewProfileCertificates {
         }
     }
 
+    /// Show CertificateDetail module
+    enum CertificateDetailPresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let certificateID: Certificate.IdType
+        }
+
+        struct ViewModel {
+            let certificateID: Certificate.IdType
+        }
+    }
+
     // MARK: - States
 
     enum ViewControllerState {

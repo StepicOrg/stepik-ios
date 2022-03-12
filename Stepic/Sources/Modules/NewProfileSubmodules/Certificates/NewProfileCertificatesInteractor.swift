@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewProfileCertificatesInteractorProtocol {
     func doCertificatesLoad(request: NewProfileCertificates.CertificatesLoad.Request)
+    func doCertificateDetailPresentation(request: NewProfileCertificates.CertificateDetailPresentation.Request)
 }
 
 final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorProtocol {
@@ -73,6 +74,15 @@ final class NewProfileCertificatesInteractor: NewProfileCertificatesInteractorPr
                 }
             }
         }
+    }
+
+    func doCertificateDetailPresentation(request: NewProfileCertificates.CertificateDetailPresentation.Request) {
+        guard let certificateID = Int(request.viewModelUniqueIdentifier),
+              self.currentCertificatesIDs.contains(certificateID) else {
+            return
+        }
+
+        self.presenter.presentCertificateDetail(response: .init(certificateID: certificateID))
     }
 
     private func fetchCertificatesInAppropriateMode(
