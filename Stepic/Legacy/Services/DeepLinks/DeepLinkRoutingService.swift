@@ -120,6 +120,7 @@ final class DeepLinkRoutingService {
              .lesson,
              .profile,
              .syllabus,
+             .certificate,
              .certificates:
             return ModalOrPushStackRouter(
                 source: source,
@@ -228,6 +229,9 @@ final class DeepLinkRoutingService {
                         seal.fulfill(moduleStack)
                     }
                 )
+            case .certificate(let id):
+                let assembly = CertificateDetailAssembly(certificateID: id)
+                seal.fulfill([assembly.makeModule()])
             case .certificates(let userID):
                 seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
             case .story(let id):

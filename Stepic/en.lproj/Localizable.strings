@@ -650,6 +650,16 @@ RetentionNotificationOnThirdDayText = "You haven't been here for a while. Come b
 PurchaseCourseNotificationTitle = "One step to new knowledge";
 PurchaseCourseNotificationText = "Were you planning to obtain %@? Finish your purchase and start studying right away!";
 
+/* CertificateDetail */
+CertificateDetailTitle = "Certificate";
+CertificateDetailWithDistinctionTitle = "Certificate with Distinction";
+CertificateDetailUserRankText1 = "The result is better than %@ course learner";
+CertificateDetailUserRankText234 = "The result is better than %@ course learners";
+CertificateDetailUserRankText567890 = "The result is better than %@ course learners";
+CertificateDetailHeadlineCourseTitle = "Course";
+CertificateDetailHeadlineRecipientTitle = "Recipient";
+CertificateDetailEditNameTitle = "Change Recipient Name";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 

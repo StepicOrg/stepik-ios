@@ -6,8 +6,7 @@ final class CertificatesPresenter {
 
     private let userID: User.IdType
 
-    private let certificatesNetworkService: CertificatesNetworkServiceProtocol
-    private let certificatesPersistenceService: CertificatesPersistenceServiceProtocol
+    private let certificatesRepository: CertificatesRepositoryProtocol
 
     private let coursesNetworkService: CoursesNetworkServiceProtocol
 
@@ -19,15 +18,13 @@ final class CertificatesPresenter {
 
     init(
         userID: User.IdType,
-        certificatesNetworkService: CertificatesNetworkServiceProtocol,
-        certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
+        certificatesRepository: CertificatesRepositoryProtocol,
         coursesNetworkService: CoursesNetworkServiceProtocol,
         userAccountService: UserAccountServiceProtocol,
         view: CertificatesView?
     ) {
         self.userID = userID
-        self.certificatesNetworkService = certificatesNetworkService
-        self.certificatesPersistenceService = certificatesPersistenceService
+        self.certificatesRepository = certificatesRepository
         self.coursesNetworkService = coursesNetworkService
         self.userAccountService = userAccountService
         self.view = view
@@ -36,21 +33,25 @@ final class CertificatesPresenter {
     // MARK: Public API
 
     func getCachedCertificates() {
-        self.certificatesPersistenceService.fetch(userID: self.userID).done { cachedCertificates in
+        self.certificatesRepository.fetch(
+            userID: self.userID,
+            dataSourceType: .cache
+        ).done { (cachedCertificates: [Certificate], _) in
             if cachedCertificates.isEmpty {
                 return
             }
 
             let viewData = cachedCertificates.map(self.makeViewData(from:))
             self.view?.setCertificates(certificates: viewData, hasNextPage: false)
-        }
+        }.cauterize()
     }
 
     func refreshCertificates() {
         self.view?.displayRefreshing()
 
-        self.certificatesNetworkService.fetch(
-            userID: self.userID
+        self.certificatesRepository.fetch(
+            userID: self.userID,
+            dataSourceType: .remote
         ).then { fetchResult -> Promise<([Certificate], Meta)> in
             self.loadCoursesForCertificates(fetchResult.0).map { fetchResult }
         }.done { certificates, meta in
@@ -72,9 +73,10 @@ final class CertificatesPresenter {
         self.isFetchingNextPage = true
         let nextPageIndex = self.currentPage + 1
 
-        self.certificatesNetworkService.fetch(
+        self.certificatesRepository.fetch(
             userID: self.userID,
-            page: nextPageIndex
+            page: nextPageIndex,
+            dataSourceType: .remote
         ).then { fetchResult -> Promise<([Certificate], Meta)> in
             self.loadCoursesForCertificates(fetchResult.0).map { fetchResult }
         }.done { certificates, meta in
@@ -106,7 +108,9 @@ final class CertificatesPresenter {
         certificateEntity.savedFullName = newFullName
 
         return Promise { seal in
-            self.certificatesNetworkService.update(certificate: certificateEntity).done { updatedCertificate in
+            self.certificatesRepository.update(
+                certificate: certificateEntity.plainObject
+            ).done { (updatedCertificate: Certificate) in
                 let viewData = self.makeViewData(from: updatedCertificate)
                 seal.fulfill(viewData)
             }.catch { _ in
@@ -169,5 +173,16 @@ final class CertificatesPresenter {
 
     enum Error: Swift.Error {
         case updateCertificateNameFailed
+    }
+}
+
+extension CertificatesPresenter: CertificateDetailOutputProtocol {
+    func handleCertificateDetailDidChangeRecipientName(certificate: Certificate) {
+        guard let index = self.currentCertificates.firstIndex(where: { $0.id == certificate.id }) else {
+            return
+        }
+
+        let viewData = self.makeViewData(from: certificate)
+        self.view?.updateCertificate(certificate: viewData, at: index)
     }
 }

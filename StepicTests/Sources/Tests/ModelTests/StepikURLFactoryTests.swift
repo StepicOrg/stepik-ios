@@ -39,6 +39,20 @@ class StepikURLFactorySpec: QuickSpec {
                 }
             }
 
+            context("certificate") {
+                it("returns correct URL for certificate with id") {
+                    // Given
+                    let certificateID = 101
+                    let staticURLString = "\(stepikURL)/cert/\(certificateID)"
+
+                    // When
+                    let constructedURL = stepikURLFactory.makeCertificate(id: certificateID)!
+
+                    // Then
+                    expect(constructedURL.absoluteString) == staticURLString
+                }
+            }
+
             context("course") {
                 it("returns correct URL for course with id") {
                     // Given

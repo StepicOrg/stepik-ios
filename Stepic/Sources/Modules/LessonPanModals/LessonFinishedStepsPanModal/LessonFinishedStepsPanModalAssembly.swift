@@ -20,8 +20,7 @@ final class LessonFinishedStepsPanModalAssembly: Assembly {
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             progressesPersistenceService: ProgressesPersistenceService(),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
-            certificatesPersistenceService: CertificatesPersistenceService(),
-            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
+            certificatesRepository: CertificatesRepository.default,
             courseReviewsPersistenceService: CourseReviewsPersistenceService(),
             courseReviewsNetworkService: CourseReviewsNetworkService(courseReviewsAPI: CourseReviewsAPI()),
             userAccountService: UserAccountService()

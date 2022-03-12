@@ -1,56 +1,59 @@
-//
-//  CertificatesAPI.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 11.04.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
-import Alamofire
 import Foundation
 import PromiseKit
-import SwiftyJSON
+import StepikModel
 
 final class CertificatesAPI: APIEndpoint {
     override class var name: String { "certificates" }
 
+    func retrieve(id: Int) -> Promise<StepikModel.Certificate?> {
+        self.retrieve
+            .requestDecodableObjects(requestEndpoint: "\(Self.name)/\(id)", params: [:], withManager: self.manager)
+            .map { $0.decodedObjects.first }
+    }
+
     func retrieve(
-        userID: User.IdType,
-        courseID: Course.IdType? = nil,
+        userID: Int,
+        courseID: Int? = nil,
         page: Int = 1,
         order: Order? = nil
-    ) -> Promise<([Certificate], Meta)> {
-        var params: Parameters = [
-            "user": userID,
-            "page": page
+    ) -> Promise<([StepikModel.Certificate], Meta)> {
+        var params: [String: Any] = [
+            JSONKey.user.rawValue: userID,
+            JSONKey.page.rawValue: page
         ]
 
         if let courseID = courseID {
-            params["course"] = courseID
+            params[JSONKey.course.rawValue] = courseID
         }
 
         if let order = order {
-            params["order"] = order.rawValue
+            params[JSONKey.order.rawValue] = order.rawValue
         }
 
-        return self.retrieve.requestWithFetching(
-            requestEndpoint: Self.name,
-            paramName: Self.name,
-            params: params,
-            withManager: manager
-        )
+        return self.retrieve
+            .requestDecodableObjects(requestEndpoint: Self.name, params: params, withManager: self.manager)
+            .map { ($0.decodedObjects, $0.meta) }
     }
 
-    func update(_ certificate: Certificate) -> Promise<Certificate> {
-        self.update.request(
-            requestEndpoint: Self.name,
-            paramName: "certificate",
-            updatingObject: certificate,
-            withManager: self.manager
-        )
+    func update(_ certificate: StepikModel.Certificate) -> Promise<StepikModel.Certificate> {
+        self.update
+            .requestCodableResponseDecodedObjects(
+                requestEndpoint: "\(Self.name)/\(certificate.id)",
+                paramName: "certificate",
+                updatingObject: certificate,
+                withManager: self.manager
+            )
+            .compactMap { $0.decodedObjects.first }
     }
 
     enum Order: String {
         case idDesc = "-id"
+    }
+
+    private enum JSONKey: String {
+        case user
+        case page
+        case order
+        case course
     }
 }

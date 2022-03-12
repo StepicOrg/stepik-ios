@@ -331,6 +331,23 @@ class DeepLinkRouteSpec: QuickSpec {
                 }
             }
 
+            context("certificate") {
+                it("matches certificate deep link with given paths") {
+                    let paths = [
+                        "https://stepik.org/cert/135341",
+                        "http://stepik.org/cert/135341",
+                        "https://stepik.org/cert/135341/",
+                        "https://stepik.org/cert/135341?from_mobile_app=true",
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .certificate(id) = route else {
+                            return .failed(reason: "wrong enum case, expected `certificate`, got \(route)")
+                        }
+                        return id == 135341 ? .succeeded : .failed(reason: "wrong certificate id")
+                    }
+                }
+            }
+
             context("certificates") {
                 it("matches certificates deep link with given paths") {
                     let paths = [

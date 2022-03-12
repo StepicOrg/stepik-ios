@@ -37,4 +37,18 @@ extension DateFormatter {
         }
         return nil
     }
+
+    static func stepikISO8601MediumString(from date: Date) -> String {
+        Self.stepikISO8601Medium.string(from: date)
+    }
+
+    static func stepikISO8601MediumString(from date: Date?) -> String? {
+        guard let date = date else {
+            return nil
+        }
+
+        let string: String = Self.stepikISO8601MediumString(from: date)
+
+        return string
+    }
 }

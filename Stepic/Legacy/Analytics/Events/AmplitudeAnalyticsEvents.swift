@@ -749,7 +749,84 @@ extension AnalyticsEvent {
 
     // MARK: - Certificates -
 
-    static let certificatesScreenOpened = AmplitudeAnalyticsEvent(name: "Certificates screen opened")
+    static func certificatesScreenOpened(
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificates screen opened",
+            parameters: [
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
+
+    static func certificateScreenOpened(
+        certificateID: Int,
+        courseID: Int,
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate screen opened",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID,
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
+
+    static func certificateShareClicked(
+        certificateID: Int,
+        courseID: Int,
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate share clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID,
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
+
+    enum CertificateUserState: String {
+        case `self` = "self"
+        case other
+    }
+
+    static func certificateChangeNameClicked(certificateID: Int, courseID: Int) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate change name clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID
+            ]
+        )
+    }
+
+    static func certificatePDFClicked(
+        certificateID: Int,
+        courseID: Int,
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate pdf clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID,
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
 
     // MARK: - Achievements -
 
@@ -863,6 +940,7 @@ extension AnalyticsEvent {
         case profile(id: Int)
         case userCoursesReviews
         case wishlist
+        case certificate(id: Int)
         case unknown
 
         var name: String {
@@ -899,6 +977,8 @@ extension AnalyticsEvent {
                 return "user_courses_reviews"
             case .wishlist:
                 return "wishlist"
+            case .certificate:
+                return "certificate"
             case .unknown:
                 return "unknown"
             }
@@ -946,6 +1026,8 @@ extension AnalyticsEvent {
                 return ["story": id]
             case .deepLink(let url), .widgetExtension(let url):
                 return ["url": url]
+            case .certificate(let id):
+                return ["id": id]
             }
         }
     }

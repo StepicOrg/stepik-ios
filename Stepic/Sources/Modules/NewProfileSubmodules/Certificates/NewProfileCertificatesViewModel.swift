@@ -1,6 +1,7 @@
 import Foundation
 
-struct NewProfileCertificatesCertificateViewModel {
+struct NewProfileCertificatesCertificateViewModel: UniqueIdentifiable {
+    let uniqueIdentifier: UniqueIdentifierType
     let courseTitle: String
     let courseImageURL: URL?
     let certificateGrade: Int?

@@ -20,8 +20,7 @@ final class CertificatesLegacyAssembly: Assembly {
         certificatesVC.userID = self.userID
         certificatesVC.presenter = CertificatesPresenter(
             userID: self.userID,
-            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
-            certificatesPersistenceService: CertificatesPersistenceService(),
+            certificatesRepository: CertificatesRepository.default,
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             userAccountService: UserAccountService(),
             view: certificatesVC
@@ -120,7 +119,13 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.analytics?.send(.certificatesScreenOpened)
+
+        if let userID = self.userID {
+            let isMe = AuthInfo.shared.userId != nil && userID == AuthInfo.shared.userId
+            self.analytics?.send(
+                .certificatesScreenOpened(userID: userID, certificateUserState: isMe ? .`self` : .other)
+            )
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -199,6 +204,17 @@ extension CertificatesViewController: CertificatesView {
         CATransaction.commit()
     }
 
+    func updateCertificate(certificate: CertificateViewData, at index: Int) {
+        self.certificates[index] = certificate
+
+        guard let indexPathsForVisibleRows = self.tableView.indexPathsForVisibleRows,
+              let indexPath = indexPathsForVisibleRows.first(where: { $0.row == index }) else {
+            return
+        }
+
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+
     func displayError() {
         refreshControl.endRefreshing()
         showPlaceholder(for: .connectionError)
@@ -242,11 +258,8 @@ extension CertificatesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard certificates.count > indexPath.row else {
-            return
-        }
-
-        guard let url = certificates[indexPath.row].certificateURL else {
+        guard let certificate = self.certificates[safe: indexPath.row],
+              let id = Int(certificate.uniqueIdentifier) else {
             return
         }
 
@@ -257,13 +270,11 @@ extension CertificatesViewController: UITableViewDelegate {
             )
         )
 
-        WebControllerManager.shared.presentWebControllerWithURL(
-            url,
-            inController: self,
-            withKey: .certificate,
-            allowsSafari: true,
-            backButtonStyle: .close
+        let assembly = CertificateDetailAssembly(
+            certificateID: id,
+            output: self.presenter as? CertificateDetailOutputProtocol
         )
+        self.push(module: assembly.makeModule())
     }
 }
 

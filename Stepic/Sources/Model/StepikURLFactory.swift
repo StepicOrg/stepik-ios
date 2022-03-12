@@ -11,6 +11,12 @@ final class StepikURLFactory {
         self.makeURL(path: .deleteUserAccount)
     }
 
+    // MARK: Certificate
+
+    func makeCertificate(id: Certificate.IdType) -> URL? {
+        self.makeURL(path: .certificate(id))
+    }
+
     // MARK: Course
 
     func makeCourse(id: Course.IdType) -> URL? {
@@ -143,6 +149,7 @@ final class StepikURLFactory {
 
     private enum Path {
         case users(User.IdType)
+        case certificate(Certificate.IdType)
         case courseID(Course.IdType)
         case courseSlug(String)
         case courseIDSyllabus(Course.IdType)
@@ -160,6 +167,8 @@ final class StepikURLFactory {
             switch self {
             case .users(let id):
                 return "/users/\(id)"
+            case .certificate(let id):
+                return "/cert/\(id)"
             case .courseID(let id):
                 return "/course/\(id)"
             case .courseSlug(let slug):

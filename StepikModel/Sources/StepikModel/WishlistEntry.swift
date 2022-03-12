@@ -17,14 +17,6 @@ public struct WishlistEntry {
 }
 
 extension WishlistEntry: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case course
-        case user
-        case createDate = "create_date"
-        case platform
-    }
-
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(forKey: .id)
@@ -32,5 +24,13 @@ extension WishlistEntry: Decodable {
         self.userID = try container.decode(forKey: .user)
         self.createDate = try container.decodeStepikDate(key: .createDate)
         self.platform = try container.decode(forKey: .platform)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case course
+        case user
+        case createDate = "create_date"
+        case platform
     }
 }
