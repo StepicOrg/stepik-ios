@@ -656,6 +656,8 @@ CertificateDetailWithDistinctionTitle = "Certificate with Distinction";
 CertificateDetailUserRankText1 = "The result is better than %@ course learner";
 CertificateDetailUserRankText234 = "The result is better than %@ course learners";
 CertificateDetailUserRankText567890 = "The result is better than %@ course learners";
+CertificateDetailHeadlineCourseTitle = "Course";
+CertificateDetailHeadlineRecipientTitle = "Recipient";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

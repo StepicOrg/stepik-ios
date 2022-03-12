@@ -28,6 +28,10 @@ final class CertificateDetailView: UIView {
 
     private lazy var gradeView = CertificateDetailGradeView()
 
+    private lazy var courseDetailTitleView = CertificateDetailVerticalTitleView()
+
+    private lazy var recipientDetailTitleView = CertificateDetailVerticalTitleView()
+
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
         scrollableStackView.contentInsets = self.appearance.scrollableStackViewContentInsets
@@ -54,8 +58,18 @@ final class CertificateDetailView: UIView {
 
     func configure(viewModel: CertificateDetailViewModel) {
         self.issueDateLabel.text = viewModel.formattedIssueDate
+
         self.gradeView.badgeStyle = viewModel.isWithDistinction ? .distinction : .regular
         self.gradeView.text = viewModel.formattedGrade
+
+        self.courseDetailTitleView.headlineText = NSLocalizedString("CertificateDetailHeadlineCourseTitle", comment: "")
+        self.courseDetailTitleView.bodyText = viewModel.courseTitle
+
+        self.recipientDetailTitleView.headlineText = NSLocalizedString(
+            "CertificateDetailHeadlineRecipientTitle",
+            comment: ""
+        )
+        self.recipientDetailTitleView.bodyText = viewModel.userFullName
     }
 }
 
@@ -74,6 +88,9 @@ extension CertificateDetailView: ProgrammaticallyInitializableViewProtocol {
         issueDateAndGradeStackView.addArrangedSubview(self.issueDateLabel)
         issueDateAndGradeStackView.addArrangedSubview(self.gradeView)
         self.scrollableStackView.addArrangedView(issueDateAndGradeStackView)
+
+        self.scrollableStackView.addArrangedView(self.courseDetailTitleView)
+        self.scrollableStackView.addArrangedView(self.recipientDetailTitleView)
     }
 
     func makeConstraints() {

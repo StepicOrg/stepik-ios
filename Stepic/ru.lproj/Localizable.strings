@@ -658,6 +658,8 @@ CertificateDetailWithDistinctionTitle = "Сертификат с отличие�
 CertificateDetailUserRankText1 = "Ваш результат лучше, чем у %@ учащегося курса";
 CertificateDetailUserRankText234 = "Ваш результат лучше, чем у %@ учащихся курса";
 CertificateDetailUserRankText567890 = "Ваш результат лучше, чем у %@ учащихся курса";
+CertificateDetailHeadlineCourseTitle = "Курс";
+CertificateDetailHeadlineRecipientTitle = "Выдан";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

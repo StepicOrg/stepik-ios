@@ -1213,6 +1213,7 @@
 		2CF10C8B238426B300F8CC95 /* StepSourcesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */; };
 		2CF10C8D238426DC00F8CC95 /* StepSourcesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */; };
 		2CF1910D27DC91C300D5DEB2 /* CertificateDetailGradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1910C27DC91C300D5DEB2 /* CertificateDetailGradeView.swift */; };
+		2CF1910F27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1910E27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift */; };
 		2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEC211AF4300006266F /* StoriesAssembly.swift */; };
 		2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
 		2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
@@ -3289,6 +3290,7 @@
 		2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesNetworkService.swift; sourceTree = "<group>"; };
 		2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesAPI.swift; sourceTree = "<group>"; };
 		2CF1910C27DC91C300D5DEB2 /* CertificateDetailGradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailGradeView.swift; sourceTree = "<group>"; };
+		2CF1910E27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailVerticalTitleView.swift; sourceTree = "<group>"; };
 		2CF20A4226012B5300BF050B /* StoryPartTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartTitleLabel.swift; sourceTree = "<group>"; };
 		2CF20A54260140A800BF050B /* FeedbackStoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackStoryFormView.swift; sourceTree = "<group>"; };
 		2CF24F632390040E002DBD0F /* BlockTypeSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTypeSpec.swift; sourceTree = "<group>"; };
@@ -7233,6 +7235,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF1910C27DC91C300D5DEB2 /* CertificateDetailGradeView.swift */,
+				2CF1910E27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift */,
 				48AA820F58CD700C68D397D9 /* CertificateDetailView.swift */,
 			);
 			path = Views;
@@ -11631,6 +11634,7 @@
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				2CF741D2278DEE3400BDD9B4 /* NewProfileStreakNotificationsProvider.swift in Sources */,
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
+				2CF1910F27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				2C5E90842333DF2100288BE3 /* CodeLanguageSuggestionsService.swift in Sources */,
