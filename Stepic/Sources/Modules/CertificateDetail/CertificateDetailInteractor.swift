@@ -200,5 +200,3 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         case updateCertificateNameFailed
     }
 }
-
-extension CertificateDetailInteractor: CertificateDetailInputProtocol {}

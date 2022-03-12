@@ -1,8 +1,6 @@
 import UIKit
 
 final class CertificateDetailAssembly: Assembly {
-    var moduleInput: CertificateDetailInputProtocol?
-
     private let certificateID: Certificate.IdType
 
     private weak var moduleOutput: CertificateDetailOutputProtocol?
@@ -25,7 +23,6 @@ final class CertificateDetailAssembly: Assembly {
         let viewController = CertificateDetailViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController
