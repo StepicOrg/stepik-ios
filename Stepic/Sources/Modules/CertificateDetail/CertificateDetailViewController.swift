@@ -4,9 +4,10 @@ protocol CertificateDetailViewControllerProtocol: AnyObject {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel)
 }
 
-final class CertificateDetailViewController: UIViewController {
+final class CertificateDetailViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: CertificateDetailInteractorProtocol
 
+    var placeholderContainer = StepikPlaceholderControllerContainer()
     var certificateDetailView: CertificateDetailView? { self.view as? CertificateDetailView }
 
     private lazy var shareBarButtonItem: UIBarButtonItem = {
@@ -49,6 +50,21 @@ final class CertificateDetailViewController: UIViewController {
 
         self.navigationItem.rightBarButtonItem = self.shareBarButtonItem
 
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.state = .loading
+                    strongSelf.interactor.doCertificateLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
+
         self.updateState()
         self.interactor.doCertificateLoad(request: .init())
     }
@@ -58,22 +74,23 @@ final class CertificateDetailViewController: UIViewController {
     private func updateState() {
         switch self.state {
         case .result(let viewModel):
+            self.isPlaceholderShown = false
+            self.shareBarButtonItem.isEnabled = true
+            self.certificateDetailView?.hideLoading()
+
             self.title = viewModel.isWithDistinction
                 ? NSLocalizedString("CertificateDetailWithDistinctionTitle", comment: "")
                 : NSLocalizedString("CertificateDetailTitle", comment: "")
 
             self.certificateDetailView?.configure(viewModel: viewModel)
-
-            //self.isPlaceholderShown = false
-            //self.showContent()
-            self.shareBarButtonItem.isEnabled = true
         case .loading:
-            //self.isPlaceholderShown = false
-            //self.solutionView?.startLoading()
+            self.isPlaceholderShown = false
             self.shareBarButtonItem.isEnabled = false
+            self.certificateDetailView?.showLoading()
         case .error:
-            //self.showPlaceholder(for: .connectionError)
             self.shareBarButtonItem.isEnabled = false
+            self.certificateDetailView?.hideLoading()
+            self.showPlaceholder(for: .connectionError)
         }
     }
 
@@ -93,6 +110,8 @@ final class CertificateDetailViewController: UIViewController {
         }
     }
 }
+
+// MARK: - CertificateDetailViewController: CertificateDetailViewControllerProtocol -
 
 extension CertificateDetailViewController: CertificateDetailViewControllerProtocol {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel) {

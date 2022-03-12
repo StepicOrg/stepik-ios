@@ -79,6 +79,20 @@ final class CertificateDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Public API
+
+    func showLoading() {
+        self.scrollableStackView.isHidden = true
+
+        self.skeleton.viewBuilder = { CertificateDetailSkeletonView() }
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.scrollableStackView.isHidden = false
+        self.skeleton.hide()
+    }
+
     func configure(viewModel: CertificateDetailViewModel) {
         self.issueDateLabel.text = viewModel.formattedIssueDate
 
@@ -101,6 +115,8 @@ final class CertificateDetailView: UIView {
 
         self.editButton.isHidden = !viewModel.isEditAvailable
     }
+
+    // MARK: Private API
 
     @objc
     private func editButtonClicked() {

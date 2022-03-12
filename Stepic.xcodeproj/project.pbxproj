@@ -430,6 +430,7 @@
 		2C0B771D25480A7500BA474D /* CourseListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B771C25480A7500BA474D /* CourseListFilterViewModel.swift */; };
 		2C0C68FC247DBA6200B950F6 /* IAPReceiptValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */; };
 		2C0D345E271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D345D271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift */; };
+		2C0D9CAF27DD0FFD00FAF777 /* CertificateDetailSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D9CAE27DD0FFD00FAF777 /* CertificateDetailSkeletonView.swift */; };
 		2C0F80BA25C9B80C006E9233 /* DiscountAppearanceSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80B925C9B80C006E9233 /* DiscountAppearanceSplitTest.swift */; };
 		2C0F80C525C9BB5A006E9233 /* PromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */; };
 		2C0F80D925C9C861006E9233 /* TransparentPromoPriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */; };
@@ -2450,6 +2451,7 @@
 		2C0B771C25480A7500BA474D /* CourseListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListFilterViewModel.swift; sourceTree = "<group>"; };
 		2C0C68FB247DBA6200B950F6 /* IAPReceiptValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPReceiptValidationService.swift; sourceTree = "<group>"; };
 		2C0D345D271D687C00C51EEB /* CourseInfoPurchaseModalPromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalPromoCodeView.swift; sourceTree = "<group>"; };
+		2C0D9CAE27DD0FFD00FAF777 /* CertificateDetailSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailSkeletonView.swift; sourceTree = "<group>"; };
 		2C0F80B925C9B80C006E9233 /* DiscountAppearanceSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountAppearanceSplitTest.swift; sourceTree = "<group>"; };
 		2C0F80C425C9BB5A006E9233 /* PromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPriceButton.swift; sourceTree = "<group>"; };
 		2C0F80D825C9C861006E9233 /* TransparentPromoPriceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentPromoPriceButton.swift; sourceTree = "<group>"; };
@@ -7555,6 +7557,7 @@
 		2CFF9004242A235900FD7311 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C0D9CAE27DD0FFD00FAF777 /* CertificateDetailSkeletonView.swift */,
 				2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */,
 				2CCBE69326B0659B00A2E922 /* StepQuizReviewSkeletonView.swift */,
 				2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */,
@@ -12689,6 +12692,7 @@
 				101D4F9FA505413E820316A3 /* FillBlanksQuizAssembly.swift in Sources */,
 				7D2D216B61E159903EAF1282 /* FillBlanksQuizDataFlow.swift in Sources */,
 				2CD3374B268228760073C867 /* CourseRevenueSubmoduleProtocol.swift in Sources */,
+				2C0D9CAF27DD0FFD00FAF777 /* CertificateDetailSkeletonView.swift in Sources */,
 				0791DFE4B73F0C765044006C /* FillBlanksQuizInteractor.swift in Sources */,
 				3E467D12F5BA4AE24B7BB030 /* FillBlanksQuizPresenter.swift in Sources */,
 				38C0348C761EF7B1032835EE /* FillBlanksQuizView.swift in Sources */,
