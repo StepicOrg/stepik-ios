@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CertificateDetailInteractorProtocol {
     func doCertificateLoad(request: CertificateDetail.CertificateLoad.Request)
+    func doCertificateSharePresentation(request: CertificateDetail.CertificateSharePresentation.Request)
     func doCertificatePDFPresentation(request: CertificateDetail.CertificatePDFPresentation.Request)
     func doCoursePresentation(request: CertificateDetail.CoursePresentation.Request)
     func doRecipientPresentation(request: CertificateDetail.RecipientPresentation.Request)
@@ -49,6 +50,23 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         }.catch { error in
             self.presenter.presentCertificate(response: .init(result: .failure(error)))
         }
+    }
+
+    func doCertificateSharePresentation(request: CertificateDetail.CertificateSharePresentation.Request) {
+        guard let certificate = self.currentCertificate else {
+            return
+        }
+
+        self.analytics.send(
+            .certificateShareClicked(
+                certificateID: certificate.id,
+                courseID: certificate.courseID,
+                userID: certificate.userID,
+                certificateUserState: self.userAccountService.currentUserID == certificate.userID ? .`self` : .other
+            )
+        )
+
+        self.presenter.presentCertificateShare(response: .init(certificateID: certificate.id))
     }
 
     func doCertificatePDFPresentation(request: CertificateDetail.CertificatePDFPresentation.Request) {

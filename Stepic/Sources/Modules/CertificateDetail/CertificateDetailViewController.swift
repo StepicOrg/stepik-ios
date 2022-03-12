@@ -2,6 +2,7 @@ import UIKit
 
 protocol CertificateDetailViewControllerProtocol: AnyObject {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel)
+    func displayCertificateShare(viewModel: CertificateDetail.CertificateSharePresentation.ViewModel)
     func displayCertificatePDF(viewModel: CertificateDetail.CertificatePDFPresentation.ViewModel)
     func displayCourse(viewModel: CertificateDetail.CoursePresentation.ViewModel)
     func displayRecipient(viewModel: CertificateDetail.RecipientPresentation.ViewModel)
@@ -100,18 +101,7 @@ final class CertificateDetailViewController: UIViewController, ControllerWithSte
 
     @objc
     private func shareButtonClicked() {
-        guard case .result(let data) = self.state,
-              let shareURL = data.shareURL else {
-            return
-        }
-
-        DispatchQueue.global().async {
-            let sharingViewController = SharingHelper.getSharingController(shareURL.absoluteString)
-            DispatchQueue.main.async {
-                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
-                self.present(sharingViewController, animated: true)
-            }
-        }
+        self.interactor.doCertificateSharePresentation(request: .init())
     }
 }
 
@@ -120,6 +110,16 @@ final class CertificateDetailViewController: UIViewController, ControllerWithSte
 extension CertificateDetailViewController: CertificateDetailViewControllerProtocol {
     func displayCertificate(viewModel: CertificateDetail.CertificateLoad.ViewModel) {
         self.state = viewModel.state
+    }
+
+    func displayCertificateShare(viewModel: CertificateDetail.CertificateSharePresentation.ViewModel) {
+        DispatchQueue.global().async {
+            let sharingViewController = SharingHelper.getSharingController(viewModel.url.absoluteString)
+            DispatchQueue.main.async {
+                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
+                self.present(sharingViewController, animated: true)
+            }
+        }
     }
 
     func displayCertificatePDF(viewModel: CertificateDetail.CertificatePDFPresentation.ViewModel) {

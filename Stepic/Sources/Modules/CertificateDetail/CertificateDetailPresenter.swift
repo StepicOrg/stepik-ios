@@ -2,6 +2,7 @@ import UIKit
 
 protocol CertificateDetailPresenterProtocol {
     func presentCertificate(response: CertificateDetail.CertificateLoad.Response)
+    func presentCertificateShare(response: CertificateDetail.CertificateSharePresentation.Response)
     func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response)
     func presentCourse(response: CertificateDetail.CoursePresentation.Response)
     func presentRecipient(response: CertificateDetail.RecipientPresentation.Response)
@@ -24,6 +25,14 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
         case .failure:
             self.viewController?.displayCertificate(viewModel: .init(state: .error))
         }
+    }
+
+    func presentCertificateShare(response: CertificateDetail.CertificateSharePresentation.Response) {
+        guard let shareURL = self.stepikURLFactory.makeCertificate(id: response.certificateID) else {
+            return
+        }
+
+        self.viewController?.displayCertificateShare(viewModel: .init(url: shareURL))
     }
 
     func presentCertificatePDF(response: CertificateDetail.CertificatePDFPresentation.Response) {

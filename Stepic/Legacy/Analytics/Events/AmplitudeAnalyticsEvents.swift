@@ -768,6 +768,23 @@ extension AnalyticsEvent {
         )
     }
 
+    static func certificateShareClicked(
+        certificateID: Int,
+        courseID: Int,
+        userID: Int,
+        certificateUserState: CertificateUserState
+    ) -> AmplitudeAnalyticsEvent {
+        AmplitudeAnalyticsEvent(
+            name: "Certificate share clicked",
+            parameters: [
+                "certificate": certificateID,
+                "course": courseID,
+                "user": userID,
+                "state": certificateUserState.rawValue
+            ]
+        )
+    }
+
     enum CertificateUserState: String {
         case `self` = "self"
         case other

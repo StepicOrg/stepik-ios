@@ -19,6 +19,19 @@ enum CertificateDetail {
         }
     }
 
+    /// Share certificate
+    enum CertificateSharePresentation {
+        struct Request {}
+
+        struct Response {
+            let certificateID: Certificate.IdType
+        }
+
+        struct ViewModel {
+            let url: URL
+        }
+    }
+
     /// Show certificate PDF in the web
     enum CertificatePDFPresentation {
         struct Request {}
