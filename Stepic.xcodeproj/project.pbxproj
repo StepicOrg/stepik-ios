@@ -1214,6 +1214,7 @@
 		2CF10C8D238426DC00F8CC95 /* StepSourcesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */; };
 		2CF1910D27DC91C300D5DEB2 /* CertificateDetailGradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1910C27DC91C300D5DEB2 /* CertificateDetailGradeView.swift */; };
 		2CF1910F27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1910E27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift */; };
+		2CF1911127DCBAC400D5DEB2 /* CertificateDetailPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF1911027DCBAC400D5DEB2 /* CertificateDetailPreviewView.swift */; };
 		2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEC211AF4300006266F /* StoriesAssembly.swift */; };
 		2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
 		2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
@@ -3291,6 +3292,7 @@
 		2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesAPI.swift; sourceTree = "<group>"; };
 		2CF1910C27DC91C300D5DEB2 /* CertificateDetailGradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailGradeView.swift; sourceTree = "<group>"; };
 		2CF1910E27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailVerticalTitleView.swift; sourceTree = "<group>"; };
+		2CF1911027DCBAC400D5DEB2 /* CertificateDetailPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailPreviewView.swift; sourceTree = "<group>"; };
 		2CF20A4226012B5300BF050B /* StoryPartTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPartTitleLabel.swift; sourceTree = "<group>"; };
 		2CF20A54260140A800BF050B /* FeedbackStoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackStoryFormView.swift; sourceTree = "<group>"; };
 		2CF24F632390040E002DBD0F /* BlockTypeSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTypeSpec.swift; sourceTree = "<group>"; };
@@ -7235,6 +7237,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF1910C27DC91C300D5DEB2 /* CertificateDetailGradeView.swift */,
+				2CF1911027DCBAC400D5DEB2 /* CertificateDetailPreviewView.swift */,
 				2CF1910E27DCB28E00D5DEB2 /* CertificateDetailVerticalTitleView.swift */,
 				48AA820F58CD700C68D397D9 /* CertificateDetailView.swift */,
 			);
@@ -11691,6 +11694,7 @@
 				2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */,
 				2C7F4164269492DF00BD5C48 /* CourseInfoTabReviewsSummaryDistributionCountsView.swift in Sources */,
 				2C29ED5C269EF3E700729A97 /* CourseBeneficiary+CoreDataProperties.swift in Sources */,
+				2CF1911127DCBAC400D5DEB2 /* CertificateDetailPreviewView.swift in Sources */,
 				2C80C829201A504700ABB312 /* StepCardView.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08D2F72D2122E4B5009BA052 /* StoryNavigationDelegate.swift in Sources */,

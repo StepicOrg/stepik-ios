@@ -43,10 +43,14 @@ final class CertificateDetailView: UIView {
         return label
     }()
 
+    private lazy var previewView = CertificateDetailPreviewView()
+
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
         scrollableStackView.contentInsets = self.appearance.scrollableStackViewContentInsets
         scrollableStackView.spacing = self.appearance.scrollableStackViewSpacing
+        scrollableStackView.showsVerticalScrollIndicator = false
+        scrollableStackView.showsHorizontalScrollIndicator = false
         return scrollableStackView
     }()
 
@@ -84,6 +88,8 @@ final class CertificateDetailView: UIView {
 
         self.userRankLabel.text = viewModel.formattedUserRank
         self.userRankLabel.isHidden = self.userRankLabel.text?.isEmpty ?? true
+
+        self.previewView.loadImage(url: viewModel.previewURL)
     }
 }
 
@@ -106,6 +112,7 @@ extension CertificateDetailView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.addArrangedView(self.courseDetailTitleView)
         self.scrollableStackView.addArrangedView(self.recipientDetailTitleView)
         self.scrollableStackView.addArrangedView(self.userRankLabel)
+        self.scrollableStackView.addArrangedView(self.previewView)
     }
 
     func makeConstraints() {
