@@ -241,11 +241,8 @@ extension CertificatesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard certificates.count > indexPath.row else {
-            return
-        }
-
-        guard let url = certificates[indexPath.row].certificateURL else {
+        guard let certificate = self.certificates[safe: indexPath.row],
+              let id = Int(certificate.uniqueIdentifier) else {
             return
         }
 
@@ -256,13 +253,11 @@ extension CertificatesViewController: UITableViewDelegate {
             )
         )
 
-        WebControllerManager.shared.presentWebControllerWithURL(
-            url,
-            inController: self,
-            withKey: .certificate,
-            allowsSafari: true,
-            backButtonStyle: .close
+        let assembly = CertificateDetailAssembly(
+            certificateID: id,
+            output: nil
         )
+        self.push(module: assembly.makeModule())
     }
 }
 

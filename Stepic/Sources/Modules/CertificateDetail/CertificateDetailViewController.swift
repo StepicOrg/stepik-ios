@@ -7,6 +7,8 @@ protocol CertificateDetailViewControllerProtocol: AnyObject {
 final class CertificateDetailViewController: UIViewController {
     private let interactor: CertificateDetailInteractorProtocol
 
+    var certificateDetailView: CertificateDetailView? { self.view as? CertificateDetailView }
+
     private lazy var shareBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(
             barButtonSystemItem: .action,
@@ -44,14 +46,24 @@ final class CertificateDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationItem.rightBarButtonItem = self.shareBarButtonItem
+
         self.updateState()
+        self.interactor.doCertificateLoad(request: .init())
     }
 
     // MARK: Private API
 
     private func updateState() {
         switch self.state {
-        case .result:
+        case .result(let viewModel):
+            self.title = viewModel.isWithDistinction
+                ? NSLocalizedString("CertificateDetailWithDistinctionTitle", comment: "")
+                : NSLocalizedString("CertificateDetailTitle", comment: "")
+
+            self.certificateDetailView?.configure(viewModel: viewModel)
+
             //self.isPlaceholderShown = false
             //self.showContent()
             self.shareBarButtonItem.isEnabled = true

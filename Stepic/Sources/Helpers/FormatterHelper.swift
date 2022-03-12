@@ -412,6 +412,14 @@ enum FormatterHelper {
         return dateFormatter.string(from: date)
     }
 
+    /// Format date with full month, year and comma separator for time; "18 October 2018, 00:00"
+    static func dateStringWithFullMonthAndYearCommaTime(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy, HH:mm"
+
+        return dateFormatter.string(from: date)
+    }
+
     /// Format date with full month and year; "18 October 2018 00:00"
     static func dateStringWithFullMonthAndYear(_ dateInRegion: DateInRegion) -> String {
         dateInRegion.toFormat("dd MMMM yyyy HH:mm")

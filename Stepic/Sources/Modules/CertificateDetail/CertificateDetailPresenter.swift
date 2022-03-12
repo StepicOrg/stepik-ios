@@ -26,7 +26,7 @@ final class CertificateDetailPresenter: CertificateDetailPresenterProtocol {
     private func makeViewModel(certificate: Certificate, currentUserID: User.IdType?) -> CertificateDetailViewModel {
         let formattedIssueDate: String? = {
             if let issueDate = certificate.issueDate {
-                return FormatterHelper.dateStringWithFullMonthAndYear(issueDate)
+                return FormatterHelper.dateStringWithFullMonthAndYearCommaTime(issueDate)
             }
             return nil
         }()
