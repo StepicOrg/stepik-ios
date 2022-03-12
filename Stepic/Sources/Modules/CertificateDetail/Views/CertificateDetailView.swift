@@ -9,6 +9,8 @@ extension CertificateDetailView {
         let userRankLabelFont = Typography.caption1Font
         let userRankLabelTextColor = UIColor.stepikVioletFixed
 
+        let editButtonHeight = 44
+
         let scrollableStackViewSpacing: CGFloat = 16
         let scrollableStackViewContentInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         let scrollableStackViewLayoutInsets = LayoutInsets.default
@@ -44,6 +46,12 @@ final class CertificateDetailView: UIView {
     }()
 
     private lazy var previewView = CertificateDetailPreviewView()
+
+    private lazy var editButton: CertificateDetailEditButton = {
+        let button = CertificateDetailEditButton()
+        button.addTarget(self, action: #selector(self.editButtonClicked), for: .touchUpInside)
+        return button
+    }()
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let scrollableStackView = ScrollableStackView(orientation: .vertical)
@@ -90,6 +98,13 @@ final class CertificateDetailView: UIView {
         self.userRankLabel.isHidden = self.userRankLabel.text?.isEmpty ?? true
 
         self.previewView.loadImage(url: viewModel.previewURL)
+
+        self.editButton.isHidden = !viewModel.isEditAvailable
+    }
+
+    @objc
+    private func editButtonClicked() {
+        print(#function)
     }
 }
 
@@ -113,6 +128,7 @@ extension CertificateDetailView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.addArrangedView(self.recipientDetailTitleView)
         self.scrollableStackView.addArrangedView(self.userRankLabel)
         self.scrollableStackView.addArrangedView(self.previewView)
+        self.scrollableStackView.addArrangedView(self.editButton)
     }
 
     func makeConstraints() {
@@ -123,6 +139,11 @@ extension CertificateDetailView: ProgrammaticallyInitializableViewProtocol {
                 .trailing
                 .equalTo(self.safeAreaLayoutGuide)
                 .inset(self.appearance.scrollableStackViewLayoutInsets.edgeInsets)
+        }
+
+        self.editButton.translatesAutoresizingMaskIntoConstraints = false
+        self.editButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.editButtonHeight)
         }
     }
 }

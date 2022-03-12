@@ -658,6 +658,7 @@ CertificateDetailUserRankText234 = "The result is better than %@ course learners
 CertificateDetailUserRankText567890 = "The result is better than %@ course learners";
 CertificateDetailHeadlineCourseTitle = "Course";
 CertificateDetailHeadlineRecipientTitle = "Recipient";
+CertificateDetailEditNameTitle = "Change Recipient Name";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
