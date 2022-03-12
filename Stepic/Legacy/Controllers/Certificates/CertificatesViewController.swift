@@ -204,6 +204,17 @@ extension CertificatesViewController: CertificatesView {
         CATransaction.commit()
     }
 
+    func updateCertificate(certificate: CertificateViewData, at index: Int) {
+        self.certificates[index] = certificate
+
+        guard let indexPathsForVisibleRows = self.tableView.indexPathsForVisibleRows,
+              let indexPath = indexPathsForVisibleRows.first(where: { $0.row == index }) else {
+            return
+        }
+
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+
     func displayError() {
         refreshControl.endRefreshing()
         showPlaceholder(for: .connectionError)
@@ -261,7 +272,7 @@ extension CertificatesViewController: UITableViewDelegate {
 
         let assembly = CertificateDetailAssembly(
             certificateID: id,
-            output: nil
+            output: self.presenter as? CertificateDetailOutputProtocol
         )
         self.push(module: assembly.makeModule())
     }

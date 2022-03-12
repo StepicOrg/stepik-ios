@@ -175,3 +175,14 @@ final class CertificatesPresenter {
         case updateCertificateNameFailed
     }
 }
+
+extension CertificatesPresenter: CertificateDetailOutputProtocol {
+    func handleCertificateDetailDidChangeRecipientName(certificate: Certificate) {
+        guard let index = self.currentCertificates.firstIndex(where: { $0.id == certificate.id }) else {
+            return
+        }
+
+        let viewData = self.makeViewData(from: certificate)
+        self.view?.updateCertificate(certificate: viewData, at: index)
+    }
+}

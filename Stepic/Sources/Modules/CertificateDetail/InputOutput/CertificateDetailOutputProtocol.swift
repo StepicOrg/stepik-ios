@@ -1,6 +1,5 @@
 import Foundation
-import StepikModel
 
 protocol CertificateDetailOutputProtocol: AnyObject {
-    func handleCertificateDetailDidChangeRecipientName(certificate: StepikModel.Certificate)
+    func handleCertificateDetailDidChangeRecipientName(certificate: Certificate)
 }

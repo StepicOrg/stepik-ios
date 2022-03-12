@@ -157,9 +157,7 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
             )
             strongSelf.presenter.presentUpdateCertificateRecipientNameResult(response: .init(result: .success(data)))
 
-            strongSelf.moduleOutput?.handleCertificateDetailDidChangeRecipientName(
-                certificate: updatedCertificate.plainObject
-            )
+            strongSelf.moduleOutput?.handleCertificateDetailDidChangeRecipientName(certificate: updatedCertificate)
         }.catch { [weak self] _ in
             guard let strongSelf = self else {
                 return
