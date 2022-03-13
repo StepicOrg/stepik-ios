@@ -64,11 +64,6 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         self.isWithScore = json[JSONKey.isWithScore.rawValue].boolValue
     }
 
-    enum CertificateType: String {
-        case regular
-        case distinction
-    }
-
     enum JSONKey: String {
         case id
         case user

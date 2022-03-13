@@ -26,8 +26,32 @@ final class CertificatesListPresenter: CertificatesListPresenterProtocol {
     // MARK: Private API
 
     private func makeViewModel(certificate: Certificate) -> CertificatesListItemViewModel {
-        CertificatesListItemViewModel(
-            uniqueIdentifier: "\(certificate.id)"
+        let courseCoverURL: URL? = {
+            if let coverURLString = certificate.course?.coverURLString {
+                return URL(string: coverURLString)
+            }
+            return nil
+        }()
+
+        let formattedIssueDate: String? = {
+            if let issueDate = certificate.issueDate {
+                return FormatterHelper.dateToRelativeString(issueDate)
+            }
+            return nil
+        }()
+
+        let formattedGrade = String(
+            format: NSLocalizedString("CertificatesListGradeText", comment: ""),
+            arguments: ["\(certificate.grade)"]
+        )
+
+        return CertificatesListItemViewModel(
+            uniqueIdentifier: "\(certificate.id)",
+            courseTitle: certificate.courseTitle,
+            courseCoverURL: courseCoverURL,
+            formattedIssueDate: formattedIssueDate,
+            formattedGrade: formattedGrade,
+            certificateType: certificate.type
         )
     }
 }

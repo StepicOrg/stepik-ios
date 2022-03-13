@@ -6,7 +6,7 @@ struct NewProfileCertificatesCertificateViewModel: UniqueIdentifiable {
     let courseImageURL: URL?
     let certificateGrade: Int?
     let certificateURL: URL?
-    let certificateType: Certificate.CertificateType
+    let certificateType: CertificateType
 }
 
 struct NewProfileCertificatesViewModel {

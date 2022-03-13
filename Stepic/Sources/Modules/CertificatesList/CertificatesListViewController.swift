@@ -11,9 +11,17 @@ final class CertificatesListViewController: UIViewController, ControllerWithStep
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var certificatesListView: CertificatesListView? { self.view as? CertificatesListView }
 
+    private lazy var tableViewAdapter = CertificatesListTableViewAdapter(delegate: self)
+
     private var state: CertificatesList.ViewControllerState {
         didSet {
             self.updateState()
+        }
+    }
+
+    private var canTriggerPagination = false {
+        didSet {
+            self.tableViewAdapter.canTriggerPagination = self.canTriggerPagination
         }
     }
 
@@ -64,17 +72,30 @@ final class CertificatesListViewController: UIViewController, ControllerWithStep
 
     private func updateState() {
         switch self.state {
-        case .result(let viewModel):
-            self.isPlaceholderShown = false
-            //self.certificateDetailView?.hideLoading()
-            //self.certificateDetailView?.configure(viewModel: viewModel)
-            print(viewModel)
         case .loading:
             self.isPlaceholderShown = false
-            //self.certificateDetailView?.showLoading()
+            self.certificatesListView?.showLoading()
         case .error:
-            //self.certificateDetailView?.hideLoading()
+            self.certificatesListView?.hideLoading()
             self.showPlaceholder(for: .connectionError)
+        case .result(let viewModel):
+            self.isPlaceholderShown = false
+            self.certificatesListView?.hideLoading()
+
+            self.tableViewAdapter.viewModels = viewModel.certificates
+            self.certificatesListView?.updateTableViewData(delegate: self.tableViewAdapter)
+
+            self.updatePagination(hasNextPage: viewModel.hasNextPage)
+        }
+    }
+
+    private func updatePagination(hasNextPage: Bool) {
+        self.canTriggerPagination = hasNextPage
+
+        if hasNextPage {
+            self.certificatesListView?.showPaginationView()
+        } else {
+            self.certificatesListView?.hidePaginationView()
         }
     }
 }
@@ -86,5 +107,23 @@ extension CertificatesListViewController: CertificatesListViewControllerProtocol
         self.state = viewModel.state
     }
 
-    func displayNextCertificates(viewModel: CertificatesList.NextCertificatesLoad.ViewModel) {}
+    func displayNextCertificates(viewModel: CertificatesList.NextCertificatesLoad.ViewModel) {
+        switch (self.state, viewModel.state) {
+        case (.result(let currentData), .result(let nextData)):
+            let resultData = CertificatesList.CertificatesResult(
+                certificates: currentData.certificates + nextData.certificates,
+                hasNextPage: nextData.hasNextPage
+            )
+            self.state = .result(data: resultData)
+        case (_, .error):
+            self.updateState()
+        default:
+            break
+        }
+    }
+}
+
+// MARK: - CertificatesListViewController: CertificatesListTableViewAdapterDelegate -
+
+extension CertificatesListViewController: CertificatesListTableViewAdapterDelegate {
 }

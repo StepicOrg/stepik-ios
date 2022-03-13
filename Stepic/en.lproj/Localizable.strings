@@ -660,6 +660,11 @@ CertificateDetailHeadlineCourseTitle = "Course";
 CertificateDetailHeadlineRecipientTitle = "Recipient";
 CertificateDetailEditNameTitle = "Change Recipient Name";
 
+/* CertificatesList */
+CertificatesListGradeText = "Result: %@%";
+CertificatesListCertificateRegularTitle = "Certificate";
+CertificatesListCertificateDistinctionTitle = "Certificate with distinction";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 
