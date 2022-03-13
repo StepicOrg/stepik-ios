@@ -758,6 +758,7 @@
 		2C7545AA24C01F06004F9074 /* AchievementsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545A924C01F06004F9074 /* AchievementsRepository.swift */; };
 		2C7545AC24C034CB004F9074 /* NewProfileAchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */; };
 		2C762B402653C93A00E0AB59 /* SwiftyJSON+DecimalNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C762B3F2653C93A00E0AB59 /* SwiftyJSON+DecimalNumber.swift */; };
+		2C78F0E427DE358F00F0BB51 /* CertificatesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C78F0E327DE358F00F0BB51 /* CertificatesListViewModel.swift */; };
 		2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */; };
 		2C7AC3DC25B0AFF30024D4D2 /* WidgetUserCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC3DB25B0AFF30024D4D2 /* WidgetUserCourse.swift */; };
 		2C7AC3DD25B0AFF30024D4D2 /* WidgetUserCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC3DB25B0AFF30024D4D2 /* WidgetUserCourse.swift */; };
@@ -2825,6 +2826,7 @@
 		2C7545AB24C034CB004F9074 /* NewProfileAchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileAchievementsViewModel.swift; sourceTree = "<group>"; };
 		2C762B3F2653C93A00E0AB59 /* SwiftyJSON+DecimalNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftyJSON+DecimalNumber.swift"; sourceTree = "<group>"; };
 		2C78573B24DE1EC40042AD2C /* Model_is_vote_notifications_enabled_v60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_is_vote_notifications_enabled_v60.xcdatamodel; sourceTree = "<group>"; };
+		2C78F0E327DE358F00F0BB51 /* CertificatesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesListViewModel.swift; sourceTree = "<group>"; };
 		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
 		2C7AC3DB25B0AFF30024D4D2 /* WidgetUserCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUserCourse.swift; sourceTree = "<group>"; };
 		2C7AC3E725B0B60F0024D4D2 /* ContinueLearningEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueLearningEntryView.swift; sourceTree = "<group>"; };
@@ -10052,6 +10054,7 @@
 				D7F523D32CDF0A6634E29016 /* CertificatesListProvider.swift */,
 				B0FF8AB1AAD89490E2DA777D /* CertificatesListView.swift */,
 				5820B37863C3DDF3BF432F92 /* CertificatesListViewController.swift */,
+				2C78F0E327DE358F00F0BB51 /* CertificatesListViewModel.swift */,
 				C4D398799F4C9900584D7F3E /* InputOutput */,
 			);
 			path = CertificatesList;
@@ -12357,6 +12360,7 @@
 				62E98C3CA2749DA6E0C98BC9 /* TagsAssembly.swift in Sources */,
 				62E98351301E9DA3680C2C26 /* TagsDataFlow.swift in Sources */,
 				62E98E31EA5F2A44904790CB /* TagsInteractor.swift in Sources */,
+				2C78F0E427DE358F00F0BB51 /* CertificatesListViewModel.swift in Sources */,
 				2C89FF8824AEE90500168F1B /* StreakNotificationsStorageManager.swift in Sources */,
 				62E9842946672C411A25649A /* TagsOutputProtocol.swift in Sources */,
 				62E9866A0079204B9AD0AFEA /* TagsPresenter.swift in Sources */,

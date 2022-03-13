@@ -1,7 +1,8 @@
 import UIKit
 
 protocol CertificatesListViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: CertificatesList.SomeAction.ViewModel)
+    func displayCertificates(viewModel: CertificatesList.CertificatesLoad.ViewModel)
+    func displayNextCertificates(viewModel: CertificatesList.NextCertificatesLoad.ViewModel)
 }
 
 final class CertificatesListViewController: UIViewController {
@@ -24,5 +25,7 @@ final class CertificatesListViewController: UIViewController {
 }
 
 extension CertificatesListViewController: CertificatesListViewControllerProtocol {
-    func displaySomeActionResult(viewModel: CertificatesList.SomeAction.ViewModel) {}
+    func displayCertificates(viewModel: CertificatesList.CertificatesLoad.ViewModel) {}
+
+    func displayNextCertificates(viewModel: CertificatesList.NextCertificatesLoad.ViewModel) {}
 }
