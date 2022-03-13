@@ -2,7 +2,9 @@ import SnapKit
 import UIKit
 
 extension CertificatesListView {
-    struct Appearance {}
+    struct Appearance {
+        let backgroundColor = UIColor.stepikBackground
+    }
 }
 
 final class CertificatesListView: UIView {
@@ -27,7 +29,9 @@ final class CertificatesListView: UIView {
 }
 
 extension CertificatesListView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
+    func setupView() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 
     func addSubviews() {}
 

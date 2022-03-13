@@ -24,31 +24,43 @@ final class CertificatesListProvider: CertificatesListProviderProtocol {
             page: page,
             dataSourceType: dataSourceType
         ).then { certificates, meta -> Promise<([Certificate], Meta)> in
-            self.fetchCoursesForCertificates(certificates).map { (certificates, meta) }
+            self.fetchCoursesForCertificates(certificates, dataSourceType: dataSourceType).map { (certificates, meta) }
         }
     }
 
-    private func fetchCoursesForCertificates(_ certificates: [Certificate]) -> Promise<Void> {
+    private func fetchCoursesForCertificates(
+        _ certificates: [Certificate],
+        dataSourceType: DataSourceType
+    ) -> Promise<Void> {
         let coursesIDs = certificates.map(\.courseID)
 
         if coursesIDs.isEmpty {
             return .value(())
         }
 
-        return self.coursesRepository.fetch(
-            ids: coursesIDs,
-            dataSourceType: .cache
-        ).then { cachedCourses -> Promise<[Course]> in
-            if Set(coursesIDs) == Set(cachedCourses.map(\.id)) {
-                return .value(cachedCourses)
+        return firstly { () -> Promise<[Course]> in
+            switch dataSourceType {
+            case .remote:
+                return self.coursesRepository.fetch(
+                    ids: coursesIDs,
+                    dataSourceType: .cache
+                ).then { cachedCourses -> Promise<[Course]> in
+                    if Set(coursesIDs) == Set(cachedCourses.map(\.id)) {
+                        return .value(cachedCourses)
+                    }
+                    return self.coursesRepository.fetch(ids: coursesIDs, dataSourceType: .remote)
+                }
+            case .cache:
+                return self.coursesRepository.fetch(ids: coursesIDs, dataSourceType: .cache)
             }
-            return self.coursesRepository.fetch(ids: coursesIDs, dataSourceType: .remote)
         }.done { courses in
             let coursesMap = Dictionary(courses.map({ ($0.id, $0) }), uniquingKeysWith: { first, _ in first })
 
             for certificate in certificates {
                 certificate.course = coursesMap[certificate.courseID]
             }
+
+            CoreDataHelper.shared.save()
         }
     }
 }
