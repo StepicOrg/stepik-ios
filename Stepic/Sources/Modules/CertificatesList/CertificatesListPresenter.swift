@@ -12,11 +12,18 @@ final class CertificatesListPresenter: CertificatesListPresenterProtocol {
     func presentCertificates(response: CertificatesList.CertificatesLoad.Response) {
         switch response.result {
         case .success(let data):
-            let data = CertificatesList.CertificatesResult(
+            let resultData = CertificatesList.CertificatesResult(
                 certificates: data.certificates.map(self.makeViewModel(certificate:)),
                 hasNextPage: data.hasNextPage
             )
-            self.viewController?.displayCertificates(viewModel: .init(state: .result(data: data)))
+
+            if resultData.certificates.isEmpty {
+                self.viewController?.displayCertificates(
+                    viewModel: .init(state: .empty(isCurrentUser: data.isCurrentUser))
+                )
+            } else {
+                self.viewController?.displayCertificates(viewModel: .init(state: .result(data: resultData)))
+            }
         case .failure:
             self.viewController?.displayCertificates(viewModel: .init(state: .error))
         }

@@ -95,7 +95,8 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
 
             let data = CertificatesList.CertificatesData(
                 certificates: certificates,
-                hasNextPage: meta.hasNext
+                hasNextPage: meta.hasNext,
+                isCurrentUser: strongSelf.userID == strongSelf.userAccountService.currentUserID
             )
 
             strongSelf.presenter.presentNextCertificates(response: .init(result: .success(data)))
@@ -131,7 +132,8 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
             ).done { response in
                 let data = CertificatesList.CertificatesData(
                     certificates: response.0,
-                    hasNextPage: response.1.hasNext
+                    hasNextPage: response.1.hasNext,
+                    isCurrentUser: self.userID == self.userAccountService.currentUserID
                 )
                 seal.fulfill(data)
             }.catch { _ in

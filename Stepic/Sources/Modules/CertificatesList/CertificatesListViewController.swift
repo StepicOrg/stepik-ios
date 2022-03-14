@@ -88,6 +88,23 @@ final class CertificatesListViewController: UIViewController, ControllerWithStep
             self.certificatesListView?.updateTableViewData(delegate: self.tableViewAdapter)
 
             self.updatePagination(hasNextPage: viewModel.hasNextPage)
+        case .empty(let isCurrentUser):
+            if isCurrentUser {
+                self.registerPlaceholder(
+                    placeholder: StepikPlaceholder(
+                        .emptyCertificatesMe,
+                        action: {
+                            TabBarRouter(tab: .catalog()).route()
+                        }
+                    ),
+                    for: .empty
+                )
+            } else {
+                self.registerPlaceholder(placeholder: StepikPlaceholder(.emptyCertificatesOther), for: .empty)
+            }
+
+            self.certificatesListView?.hideLoading()
+            self.showPlaceholder(for: .empty)
         }
     }
 

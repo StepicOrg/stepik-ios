@@ -47,6 +47,7 @@ enum CertificatesList {
     struct CertificatesData {
         let certificates: [Certificate]
         let hasNextPage: Bool
+        let isCurrentUser: Bool
     }
 
     struct CertificatesResult {
@@ -60,6 +61,7 @@ enum CertificatesList {
         case loading
         case error
         case result(data: CertificatesResult)
+        case empty(isCurrentUser: Bool)
     }
 
     enum PaginationState {
