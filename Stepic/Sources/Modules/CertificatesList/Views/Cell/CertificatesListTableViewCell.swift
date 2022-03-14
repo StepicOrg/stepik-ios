@@ -4,11 +4,6 @@ extension CertificatesListTableViewCell {
     enum Appearance {
         static let cornerRadius: CGFloat = 16
 
-        static let shadowColor = UIColor.black
-        static let shadowOffset = CGSize(width: 0, height: 0)
-        static let shadowRadius: CGFloat = 4
-        static let shadowOpacity: Float = 0.1
-
         static let cellViewInsets = LayoutInsets.default
     }
 }
@@ -26,26 +21,6 @@ final class CertificatesListTableViewCell: UITableViewCell, Reusable {
         }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.cellView.layer.cornerRadius = Appearance.cornerRadius
-
-        self.cellView.layer.shadowColor = Appearance.shadowColor.cgColor
-        self.cellView.layer.shadowOffset = Appearance.shadowOffset
-        self.cellView.layer.shadowRadius = Appearance.shadowRadius
-        self.cellView.layer.shadowOpacity = Appearance.shadowOpacity
-
-        self.cellView.layer.masksToBounds = false
-        self.cellView.layer.shadowPath = UIBezierPath(
-            roundedRect: self.cellView.bounds,
-            cornerRadius: Appearance.cornerRadius
-        ).cgPath
-
-        self.cellView.layer.shouldRasterize = true
-        self.cellView.layer.rasterizationScale = UIScreen.main.scale
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
         self.cellView.configure(viewModel: nil)
@@ -56,6 +31,9 @@ final class CertificatesListTableViewCell: UITableViewCell, Reusable {
     }
 
     private func setupSubview() {
+        self.cellView.layer.cornerRadius = Appearance.cornerRadius
+        self.cellView.layer.masksToBounds = true
+
         self.selectionStyle = .none
         self.cellView.addTarget(self, action: #selector(self.cellViewClicked), for: .touchUpInside)
 

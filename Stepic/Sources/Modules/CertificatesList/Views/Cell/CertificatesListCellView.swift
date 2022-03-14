@@ -23,6 +23,16 @@ extension CertificatesListCellView {
         let gradeLabelFont = Typography.caption1Font
         let gradeLabelInsets = LayoutInsets(top: 8, left: 8, bottom: 16, right: 16)
 
+        let cornerRadius: CGFloat = 16
+
+        let borderColor = UIColor.black.withAlphaComponent(0.1)
+        let borderWidth: CGFloat = 0.5
+
+        let shadowColor = UIColor.black
+        let shadowOffset = CGSize(width: 0, height: 0)
+        let shadowRadius: CGFloat = 4
+        let shadowOpacity: Float = 0.1
+
         let backgroundColor = UIColor.dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
     }
 }
@@ -101,6 +111,27 @@ final class CertificatesListCellView: UIControl {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.layer.cornerRadius = self.appearance.cornerRadius
+        self.layer.borderColor = self.appearance.borderColor.cgColor
+        self.layer.borderWidth = self.appearance.borderWidth
+
+        self.layer.shadowColor = self.appearance.shadowColor.cgColor
+        self.layer.shadowOffset = self.appearance.shadowOffset
+        self.layer.shadowRadius = self.appearance.shadowRadius
+        self.layer.shadowOpacity = self.appearance.shadowOpacity
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(
+            roundedRect: self.bounds,
+            cornerRadius: self.layer.cornerRadius
+        ).cgPath
+
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
 
     func configure(viewModel: CertificatesListItemViewModel?) {
