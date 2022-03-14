@@ -74,7 +74,7 @@ final class CertificatesListView: UIView {
     }
 
     func showLoading() {
-        self.tableView.skeleton.viewBuilder = { CourseInfoTabSyllabusCellSkeletonView() }
+        self.tableView.skeleton.viewBuilder = { CertificatesListCellSkeletonView() }
         self.tableView.skeleton.show()
     }
 
