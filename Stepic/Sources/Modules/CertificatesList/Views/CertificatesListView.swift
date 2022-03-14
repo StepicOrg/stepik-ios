@@ -3,7 +3,8 @@ import UIKit
 
 extension CertificatesListView {
     struct Appearance {
-        let tableViewRowHeight: CGFloat = 142
+        let estimatedRowHeight: CGFloat = 142
+        let tableViewContentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
 
         let paginationViewHeight: CGFloat = 52
 
@@ -17,7 +18,9 @@ final class CertificatesListView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = self.appearance.backgroundColor
-        tableView.rowHeight = self.appearance.tableViewRowHeight
+        tableView.contentInset = self.appearance.tableViewContentInset
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = self.appearance.estimatedRowHeight
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.register(cellClass: CertificatesListTableViewCell.self)

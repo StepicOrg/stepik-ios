@@ -145,5 +145,12 @@ extension CertificatesListViewController: CertificatesListTableViewAdapterDelega
         )
     }
 
-    func certificatesListTableViewAdapterDidRequestPagination(_ adapter: CertificatesListTableViewAdapter) {}
+    func certificatesListTableViewAdapterDidRequestPagination(_ adapter: CertificatesListTableViewAdapter) {
+        guard self.canTriggerPagination else {
+            return
+        }
+
+        self.canTriggerPagination = false
+        self.interactor.doNextCertificatesLoad(request: .init())
+    }
 }

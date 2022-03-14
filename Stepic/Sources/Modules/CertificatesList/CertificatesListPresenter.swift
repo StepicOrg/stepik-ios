@@ -22,7 +22,18 @@ final class CertificatesListPresenter: CertificatesListPresenterProtocol {
         }
     }
 
-    func presentNextCertificates(response: CertificatesList.NextCertificatesLoad.Response) {}
+    func presentNextCertificates(response: CertificatesList.NextCertificatesLoad.Response) {
+        switch response.result {
+        case .success(let data):
+            let data = CertificatesList.CertificatesResult(
+                certificates: data.certificates.map(self.makeViewModel(certificate:)),
+                hasNextPage: data.hasNextPage
+            )
+            self.viewController?.displayNextCertificates(viewModel: .init(state: .result(data: data)))
+        case .failure:
+            self.viewController?.displayNextCertificates(viewModel: .init(state: .error))
+        }
+    }
 
     func presentCertificateDetail(response: CertificatesList.CertificateDetailPresentation.Response) {
         self.viewController?.displayCertificateDetail(viewModel: .init(certificateID: response.certificateID))

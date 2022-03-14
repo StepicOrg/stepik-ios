@@ -65,7 +65,39 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
         }
     }
 
-    func doNextCertificatesLoad(request: CertificatesList.NextCertificatesLoad.Request) {}
+    func doNextCertificatesLoad(request: CertificatesList.NextCertificatesLoad.Request) {
+        guard self.paginationState.hasNext else {
+            return
+        }
+
+        let nextPageIndex = self.paginationState.page + 1
+
+        self.provider.fetch(
+            userID: self.userID,
+            page: nextPageIndex,
+            dataSourceType: .remote
+        ).done { [weak self] certificates, meta in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.currentCertificates.append(contentsOf: certificates)
+            strongSelf.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
+
+            let data = CertificatesList.CertificatesData(
+                certificates: certificates,
+                hasNextPage: meta.hasNext
+            )
+
+            strongSelf.presenter.presentNextCertificates(response: .init(result: .success(data)))
+        }.catch { [weak self] error in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.presenter.presentNextCertificates(response: .init(result: .failure(error)))
+        }
+    }
 
     func doCertificateDetailPresentation(request: CertificatesList.CertificateDetailPresentation.Request) {
         guard let certificate = self.currentCertificates.first(

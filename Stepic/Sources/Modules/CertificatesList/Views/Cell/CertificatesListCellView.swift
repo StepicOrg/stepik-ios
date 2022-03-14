@@ -3,6 +3,8 @@ import UIKit
 
 extension CertificatesListCellView {
     struct Appearance {
+        let minCellHeight: CGFloat = 142
+
         let certificateTypeViewInsets = LayoutInsets.default
 
         let courseCoverViewCornerRadius: CGFloat = 8
@@ -66,6 +68,22 @@ final class CertificatesListCellView: UIControl {
         didSet {
             self.animateBounce()
         }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let titleHeightWithInsets = self.appearance.titleLabelInsets.top + self.titleLabel.intrinsicContentSize.height
+
+        let height = self.appearance.certificateTypeViewInsets.top
+            + self.certificateTypeView.intrinsicContentSize.height
+            + max(titleHeightWithInsets, self.appearance.courseCoverViewSize.height)
+            + self.appearance.dateLabelInsets.top
+            + self.dateLabel.intrinsicContentSize.height
+            + self.appearance.dateLabelInsets.bottom
+
+        return CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: max(self.appearance.minCellHeight, height)
+        )
     }
 
     init(
