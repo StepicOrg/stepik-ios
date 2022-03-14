@@ -11,6 +11,8 @@ extension CertificatesListCellView {
         let courseCoverViewInsets = LayoutInsets.default
         let courseCoverViewSize = CGSize(width: 60, height: 60)
 
+        let certificateBadgeImageViewSize = CGSize(width: 18, height: 18)
+
         let titleLabelTextColor = UIColor.stepikMaterialPrimaryText
         let titleLabelFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
         let titleLabelInsets = LayoutInsets(top: 8, left: 16, bottom: 8, right: 8)
@@ -46,6 +48,12 @@ final class CertificatesListCellView: UIControl {
         let appearance = CourseWidgetCoverView.Appearance(cornerRadius: self.appearance.courseCoverViewCornerRadius)
         let view = CourseWidgetCoverView(appearance: appearance)
         return view
+    }()
+
+    private lazy var certificateBadgeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
     private lazy var titleLabel: UILabel = {
@@ -135,9 +143,22 @@ final class CertificatesListCellView: UIControl {
     }
 
     func configure(viewModel: CertificatesListItemViewModel?) {
-        self.certificateTypeView.type = viewModel?.certificateType ?? .regular
+        let certificateType = viewModel?.certificateType ?? .regular
+        self.certificateTypeView.type = certificateType
 
         self.courseCoverView.coverImageURL = viewModel?.courseCoverURL
+        self.certificateBadgeImageView.image = { () -> UIImage? in
+            let imageName: String
+
+            switch certificateType {
+            case .regular:
+                imageName = "certificate-detail-badge-regular"
+            case .distinction:
+                imageName = "certificate-detail-badge-distinction"
+            }
+
+            return UIImage(named: imageName)
+        }()
 
         self.titleLabel.text = viewModel?.courseTitle
         self.dateLabel.text = viewModel?.formattedIssueDate
@@ -153,6 +174,7 @@ extension CertificatesListCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.certificateTypeView)
         self.addSubview(self.courseCoverView)
+        self.addSubview(self.certificateBadgeImageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.dateLabel)
         self.addSubview(self.gradeLabel)
@@ -168,6 +190,15 @@ extension CertificatesListCellView: ProgrammaticallyInitializableViewProtocol {
         self.courseCoverView.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(self.appearance.courseCoverViewInsets.edgeInsets)
             make.size.equalTo(self.appearance.courseCoverViewSize)
+        }
+
+        self.certificateBadgeImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.certificateBadgeImageView.snp.makeConstraints { make in
+            make.size.equalTo(self.appearance.certificateBadgeImageViewSize)
+
+            let offset = self.appearance.certificateBadgeImageViewSize.height / 3
+            make.top.equalTo(self.courseCoverView.snp.top).offset(-offset)
+            make.trailing.equalTo(self.courseCoverView.snp.trailing).offset(offset)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
