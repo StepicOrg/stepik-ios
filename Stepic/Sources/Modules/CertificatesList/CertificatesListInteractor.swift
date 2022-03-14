@@ -173,5 +173,11 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
 // MARK: - CertificatesListInteractor: CertificateDetailOutputProtocol -
 
 extension CertificatesListInteractor: CertificateDetailOutputProtocol {
-    func handleCertificateDetailDidChangeRecipientName(certificate: Certificate) {}
+    func handleCertificateDetailDidChangeRecipientName(certificate: Certificate) {
+        guard let index = self.currentCertificates.firstIndex(where: { $0.id == certificate.id }) else {
+            return
+        }
+
+        self.currentCertificates[index] = certificate
+    }
 }
