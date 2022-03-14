@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol CertificatesListViewDelegate: AnyObject {
+    func certificatesListViewDidRequestRefresh(_ view: CertificatesListView)
+}
+
 extension CertificatesListView {
     struct Appearance {
         let estimatedRowHeight: CGFloat = 142
@@ -13,7 +17,11 @@ extension CertificatesListView {
 }
 
 final class CertificatesListView: UIView {
+    weak var delegate: CertificatesListViewDelegate?
+
     let appearance: Appearance
+
+    private lazy var refreshControl = UIRefreshControl()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -24,6 +32,8 @@ final class CertificatesListView: UIView {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.register(cellClass: CertificatesListTableViewCell.self)
+        tableView.refreshControl = self.refreshControl
+        self.refreshControl.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: .valueChanged)
         return tableView
     }()
 
@@ -73,9 +83,16 @@ final class CertificatesListView: UIView {
     }
 
     func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
+        self.refreshControl.endRefreshing()
+
         self.tableView.delegate = delegate
         self.tableView.dataSource = delegate
         self.tableView.reloadData()
+    }
+
+    @objc
+    private func refreshControlDidChangeValue() {
+        self.delegate?.certificatesListViewDidRequestRefresh(self)
     }
 }
 

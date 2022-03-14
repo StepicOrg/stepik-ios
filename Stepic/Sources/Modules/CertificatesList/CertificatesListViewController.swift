@@ -43,6 +43,7 @@ final class CertificatesListViewController: UIViewController, ControllerWithStep
     override func loadView() {
         let view = CertificatesListView(frame: UIScreen.main.bounds)
         self.view = view
+        view.delegate = self
     }
 
     override func viewDidLoad() {
@@ -152,5 +153,13 @@ extension CertificatesListViewController: CertificatesListTableViewAdapterDelega
 
         self.canTriggerPagination = false
         self.interactor.doNextCertificatesLoad(request: .init())
+    }
+}
+
+// MARK: - CertificatesListViewController: CertificatesListViewDelegate -
+
+extension CertificatesListViewController: CertificatesListViewDelegate {
+    func certificatesListViewDidRequestRefresh(_ view: CertificatesListView) {
+        self.interactor.doCertificatesLoad(request: .init())
     }
 }
