@@ -31,7 +31,8 @@ enum CodeLanguage: String, CaseIterable {
     case r = "r"
     case ruby = "ruby"
     case clojure = "clojure"
-    case cs = "mono c#"
+    case cs = "c#"
+    case csMono = "mono c#"
     case javascript = "javascript"
     case scala = "scala"
     case scala3 = "scala3"
@@ -69,7 +70,7 @@ enum CodeLanguage: String, CaseIterable {
             return "ruby"
         case .clojure:
             return "clojure"
-        case .cs:
+        case .cs, .csMono:
             return "cs"
         case .javascript:
             return "javascript"
@@ -120,7 +121,7 @@ enum CodeLanguage: String, CaseIterable {
             return "Ruby"
         case .clojure:
             return "Clojure"
-        case .cs:
+        case .cs, .csMono:
             return "C#"
         case .javascript:
             return "Javascript"
@@ -173,7 +174,7 @@ enum CodeLanguage: String, CaseIterable {
             return "# comment\nputs \"Hello World!\""
         case .clojure:
             return "; comment\n\n(defn hello []\n  (println \"Hello world!\"))\n\n(hello)"
-        case .cs:
+        case .cs, .csMono:
             return "// comment\nclass HelloWorld\n{\n\tstatic void Main()\n\t{\n\t\tSystem.Console.WriteLine(\"Hello, World!\");\n\t}\n}"
         case .javascript:
             return "// comment\n\nconsole.log(\"Hello World\");"
@@ -204,31 +205,36 @@ enum CodeLanguage: String, CaseIterable {
     static var priorityOrder: [CodeLanguage] {
         [
             .python,
+            .java17,
+            .kotlin,
             .cpp11,
-            .java11,
-            .cs,
             .cpp,
             .java8,
-            .c,
+            .java11,
             .javascript,
-            .kotlin,
-            .r,
-            .haskell,
-            .scala,
-            .pascal,
-            .shell,
-            .haskell8,
             .go,
-            .asm64,
+            .c,
             .java,
+            .cs,
+            .python31,
+            .r,
+            .php,
+            .shell,
+            .pascal,
+            .haskell,
+            .csMono,
+            .ruby,
+            .scala,
+            .haskell8,
+            .asm64,
+            .swift,
+            .haskell88,
             .asm32,
             .java9,
-            .octave,
-            .perl,
             .rust,
-            .php,
-            .ruby,
-            .swift,
+            .octave,
+            .dart,
+            .perl,
             .haskell7,
             .clojure,
             .julia
