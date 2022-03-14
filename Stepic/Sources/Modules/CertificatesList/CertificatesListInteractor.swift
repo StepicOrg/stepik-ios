@@ -8,10 +8,11 @@ protocol CertificatesListInteractorProtocol {
 }
 
 final class CertificatesListInteractor: CertificatesListInteractorProtocol {
-    weak var moduleOutput: CertificatesListOutputProtocol?
-
     private let presenter: CertificatesListPresenterProtocol
     private let provider: CertificatesListProviderProtocol
+
+    private let userAccountService: UserAccountServiceProtocol
+    private let analytics: Analytics
 
     private let userID: User.IdType
 
@@ -21,17 +22,25 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
     private var didLoadFromCache = false
     private var didPresentCertificates = false
 
+    private var shouldSendOpenedAnalyticsEvent = true
+
     init(
         userID: User.IdType,
         presenter: CertificatesListPresenterProtocol,
-        provider: CertificatesListProviderProtocol
+        provider: CertificatesListProviderProtocol,
+        userAccountService: UserAccountServiceProtocol,
+        analytics: Analytics
     ) {
         self.userID = userID
         self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
+        self.analytics = analytics
     }
 
     func doCertificatesLoad(request: CertificatesList.CertificatesLoad.Request) {
+        self.sendOpenedAnalyticsEventIfNeeded()
+
         self.fetchCertificatesInAppropriateMode().done { [weak self] data in
             guard let strongSelf = self else {
                 return
@@ -136,6 +145,21 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
         }
     }
 
+    private func sendOpenedAnalyticsEventIfNeeded() {
+        guard self.shouldSendOpenedAnalyticsEvent else {
+            return
+        }
+
+        self.shouldSendOpenedAnalyticsEvent = false
+
+        self.analytics.send(
+            .certificatesScreenOpened(
+                userID: self.userID,
+                certificateUserState: self.userID == self.userAccountService.currentUserID ? .`self` : .other
+            )
+        )
+    }
+
     // MARK: Inner Types
 
     enum Error: Swift.Error {
@@ -144,7 +168,7 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
     }
 }
 
-extension CertificatesListInteractor: CertificatesListInputProtocol {}
+// MARK: - CertificatesListInteractor: CertificateDetailOutputProtocol -
 
 extension CertificatesListInteractor: CertificateDetailOutputProtocol {
     func handleCertificateDetailDidChangeRecipientName(certificate: Certificate) {}

@@ -1,15 +1,10 @@
 import UIKit
 
 final class CertificatesListAssembly: Assembly {
-    var moduleInput: CertificatesListInputProtocol?
-
     private let userID: User.IdType
 
-    private weak var moduleOutput: CertificatesListOutputProtocol?
-
-    init(userID: User.IdType, output: CertificatesListOutputProtocol? = nil) {
+    init(userID: User.IdType) {
         self.userID = userID
-        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -21,13 +16,13 @@ final class CertificatesListAssembly: Assembly {
         let interactor = CertificatesListInteractor(
             userID: self.userID,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            userAccountService: UserAccountService(),
+            analytics: StepikAnalytics.shared
         )
         let viewController = CertificatesListViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }
