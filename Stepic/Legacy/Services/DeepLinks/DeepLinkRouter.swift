@@ -412,7 +412,8 @@ final class DeepLinkRouter {
     }
 
     static func routeToCertificates(userID: User.IdType, completion: @escaping ([UIViewController]) -> Void) {
-        completion([CertificatesLegacyAssembly(userID: userID).makeModule()])
+        let assembly = CertificatesListAssembly(userID: userID)
+        completion([assembly.makeModule()])
     }
 
     static func routeToCourseWithID(

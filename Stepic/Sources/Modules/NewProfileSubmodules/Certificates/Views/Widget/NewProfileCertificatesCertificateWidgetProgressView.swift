@@ -31,7 +31,7 @@ final class NewProfileCertificatesCertificateWidgetProgressView: UIView {
         return view
     }()
 
-    var certificateType: Certificate.CertificateType = .regular {
+    var certificateType: CertificateType = .regular {
         didSet {
             self.updateViewColor()
         }

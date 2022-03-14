@@ -803,7 +803,7 @@ extension NewProfileViewController: NewProfileViewControllerProtocol {
     }
 
     func displayCertificatesList(viewModel: NewProfile.CertificatesListPresentation.ViewModel) {
-        let assembly = CertificatesLegacyAssembly(userID: viewModel.userID)
+        let assembly = CertificatesListAssembly(userID: viewModel.userID)
         self.push(module: assembly.makeModule())
     }
 

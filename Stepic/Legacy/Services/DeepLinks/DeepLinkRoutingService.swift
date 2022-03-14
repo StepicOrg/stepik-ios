@@ -233,7 +233,8 @@ final class DeepLinkRoutingService {
                 let assembly = CertificateDetailAssembly(certificateID: id)
                 seal.fulfill([assembly.makeModule()])
             case .certificates(let userID):
-                seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
+                let assembly = CertificatesListAssembly(userID: userID)
+                seal.fulfill([assembly.makeModule()])
             case .story(let id):
                 SVProgressHUD.show()
                 DeepLinkRouter.routeToStoryWithID(id, urlPath: urlPath) { moduleStack in

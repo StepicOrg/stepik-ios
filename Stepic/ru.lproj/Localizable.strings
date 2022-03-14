@@ -662,6 +662,11 @@ CertificateDetailHeadlineCourseTitle = "Курс";
 CertificateDetailHeadlineRecipientTitle = "Выдан";
 CertificateDetailEditNameTitle = "Изменить имя в сертификате";
 
+/* CertificatesList */
+CertificatesListGradeText = "Результат: %@%%";
+CertificatesListCertificateRegularTitle = "Сертификат";
+CertificatesListCertificateDistinctionTitle = "Сертификат с отличием";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
 
