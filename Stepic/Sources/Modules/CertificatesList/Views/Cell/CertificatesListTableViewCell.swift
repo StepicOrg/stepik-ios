@@ -16,6 +16,8 @@ extension CertificatesListTableViewCell {
 final class CertificatesListTableViewCell: UITableViewCell, Reusable {
     private lazy var cellView = CertificatesListCellView()
 
+    var onCellViewClick: (() -> Void)?
+
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
 
@@ -54,6 +56,9 @@ final class CertificatesListTableViewCell: UITableViewCell, Reusable {
     }
 
     private func setupSubview() {
+        self.selectionStyle = .none
+        self.cellView.addTarget(self, action: #selector(self.cellViewClicked), for: .touchUpInside)
+
         self.contentView.addSubview(self.cellView)
 
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,5 +66,10 @@ final class CertificatesListTableViewCell: UITableViewCell, Reusable {
             make.top.leading.trailing.equalToSuperview().inset(Appearance.cellViewInsets.edgeInsets)
             make.bottom.equalToSuperview()
         }
+    }
+
+    @objc
+    private func cellViewClicked() {
+        self.onCellViewClick?()
     }
 }

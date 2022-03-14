@@ -661,7 +661,7 @@ CertificateDetailHeadlineRecipientTitle = "Recipient";
 CertificateDetailEditNameTitle = "Change Recipient Name";
 
 /* CertificatesList */
-CertificatesListGradeText = "Result: %@%";
+CertificatesListGradeText = "Result: %@%%";
 CertificatesListCertificateRegularTitle = "Certificate";
 CertificatesListCertificateDistinctionTitle = "Certificate with distinction";
 

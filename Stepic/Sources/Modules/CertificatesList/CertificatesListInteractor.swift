@@ -4,6 +4,7 @@ import PromiseKit
 protocol CertificatesListInteractorProtocol {
     func doCertificatesLoad(request: CertificatesList.CertificatesLoad.Request)
     func doNextCertificatesLoad(request: CertificatesList.NextCertificatesLoad.Request)
+    func doCertificateDetailPresentation(request: CertificatesList.CertificateDetailPresentation.Request)
 }
 
 final class CertificatesListInteractor: CertificatesListInteractorProtocol {
@@ -66,6 +67,16 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
 
     func doNextCertificatesLoad(request: CertificatesList.NextCertificatesLoad.Request) {}
 
+    func doCertificateDetailPresentation(request: CertificatesList.CertificateDetailPresentation.Request) {
+        guard let certificate = self.currentCertificates.first(
+            where: { "\($0.id)" == request.viewModelUniqueIdentifier }
+        ) else {
+            return
+        }
+
+        self.presenter.presentCertificateDetail(response: .init(certificateID: certificate.id))
+    }
+
     // MARK: Private API
 
     private func fetchCertificatesInAppropriateMode() -> Promise<CertificatesList.CertificatesData> {
@@ -102,3 +113,7 @@ final class CertificatesListInteractor: CertificatesListInteractorProtocol {
 }
 
 extension CertificatesListInteractor: CertificatesListInputProtocol {}
+
+extension CertificatesListInteractor: CertificateDetailOutputProtocol {
+    func handleCertificateDetailDidChangeRecipientName(certificate: Certificate) {}
+}

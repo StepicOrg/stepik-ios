@@ -27,6 +27,21 @@ enum CertificatesList {
         }
     }
 
+    /// Show certificate detail module
+    enum CertificateDetailPresentation {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let certificateID: Certificate.IdType
+        }
+
+        struct ViewModel {
+            let certificateID: Certificate.IdType
+        }
+    }
+
     // MARK: Types
 
     struct CertificatesData {

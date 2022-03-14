@@ -1,29 +1,12 @@
 import UIKit
 
 protocol CertificatesListTableViewAdapterDelegate: AnyObject {
-//    func courseSearchResultsTableViewAdapter(
-//        _ adapter: CourseSearchResultsTableViewAdapter,
-//        didSelectSearchResult searchResult: CourseSearchResultViewModel,
-//        at indexPath: IndexPath
-//    )
-//    func courseSearchResultsTableViewAdapterDidRequestPagination(
-//        _ adapter: CourseSearchResultsTableViewAdapter
-//    )
-//    func courseSearchResultsTableViewAdapter(
-//        _ adapter: CourseSearchResultsTableViewAdapter,
-//        didSelectCover searchResult: CourseSearchResultViewModel,
-//        at indexPath: IndexPath
-//    )
-//    func courseSearchResultsTableViewAdapter(
-//        _ adapter: CourseSearchResultsTableViewAdapter,
-//        didSelectComment searchResult: CourseSearchResultViewModel,
-//        at indexPath: IndexPath
-//    )
-//    func courseSearchResultsTableViewAdapter(
-//        _ adapter: CourseSearchResultsTableViewAdapter,
-//        didSelectCommentUser searchResult: CourseSearchResultViewModel,
-//        at indexPath: IndexPath
-//    )
+    func certificatesListTableViewAdapter(
+        _ adapter: CertificatesListTableViewAdapter,
+        didSelectCertificate certificate: CertificatesListItemViewModel,
+        at indexPath: IndexPath
+    )
+    func certificatesListTableViewAdapterDidRequestPagination(_ adapter: CertificatesListTableViewAdapter)
 }
 
 final class CertificatesListTableViewAdapter: NSObject {
@@ -53,25 +36,28 @@ extension CertificatesListTableViewAdapter: UITableViewDataSource {
         let viewModel = self.viewModels[indexPath.row]
         cell.configure(viewModel: viewModel)
 
+        cell.onCellViewClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.certificatesListTableViewAdapter(
+                strongSelf,
+                didSelectCertificate: viewModel,
+                at: indexPath
+            )
+        }
+
         return cell
     }
 }
 
 extension CertificatesListTableViewAdapter: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-//        self.delegate?.courseSearchResultsTableViewAdapter(
-//            self,
-//            didSelectSearchResult: self.viewModels[indexPath.row],
-//            at: indexPath
-//        )
-    }
-
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard self.canTriggerPagination && (indexPath.row == self.viewModels.count - 1) else {
             return
         }
 
-        //self.delegate?.courseSearchResultsTableViewAdapterDidRequestPagination(self)
+        self.delegate?.certificatesListTableViewAdapterDidRequestPagination(self)
     }
 }

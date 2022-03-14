@@ -19,6 +19,7 @@ final class CertificatesListView: UIView {
         tableView.backgroundColor = self.appearance.backgroundColor
         tableView.rowHeight = self.appearance.tableViewRowHeight
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         tableView.register(cellClass: CertificatesListTableViewCell.self)
         return tableView
     }()

@@ -25,7 +25,7 @@ extension CertificatesListCellView {
     }
 }
 
-final class CertificatesListCellView: UIView {
+final class CertificatesListCellView: UIControl {
     let appearance: Appearance
 
     private lazy var certificateTypeView = CertificatesListCertificateTypeView()
@@ -61,6 +61,12 @@ final class CertificatesListCellView: UIView {
         label.textAlignment = .right
         return label
     }()
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.animateBounce()
+        }
+    }
 
     init(
         frame: CGRect = .zero,

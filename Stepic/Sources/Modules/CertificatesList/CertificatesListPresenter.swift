@@ -3,6 +3,7 @@ import UIKit
 protocol CertificatesListPresenterProtocol {
     func presentCertificates(response: CertificatesList.CertificatesLoad.Response)
     func presentNextCertificates(response: CertificatesList.NextCertificatesLoad.Response)
+    func presentCertificateDetail(response: CertificatesList.CertificateDetailPresentation.Response)
 }
 
 final class CertificatesListPresenter: CertificatesListPresenterProtocol {
@@ -22,6 +23,10 @@ final class CertificatesListPresenter: CertificatesListPresenterProtocol {
     }
 
     func presentNextCertificates(response: CertificatesList.NextCertificatesLoad.Response) {}
+
+    func presentCertificateDetail(response: CertificatesList.CertificateDetailPresentation.Response) {
+        self.viewController?.displayCertificateDetail(viewModel: .init(certificateID: response.certificateID))
+    }
 
     // MARK: Private API
 

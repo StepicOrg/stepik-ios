@@ -663,7 +663,7 @@ CertificateDetailHeadlineRecipientTitle = "Выдан";
 CertificateDetailEditNameTitle = "Изменить имя в сертификате";
 
 /* CertificatesList */
-CertificatesListGradeText = "Результат: %@%";
+CertificatesListGradeText = "Результат: %@%%";
 CertificatesListCertificateRegularTitle = "Сертификат";
 CertificatesListCertificateDistinctionTitle = "Сертификат с отличием";
 

@@ -3,6 +3,7 @@ import UIKit
 protocol CertificatesListViewControllerProtocol: AnyObject {
     func displayCertificates(viewModel: CertificatesList.CertificatesLoad.ViewModel)
     func displayNextCertificates(viewModel: CertificatesList.NextCertificatesLoad.ViewModel)
+    func displayCertificateDetail(viewModel: CertificatesList.CertificateDetailPresentation.ViewModel)
 }
 
 final class CertificatesListViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -121,9 +122,28 @@ extension CertificatesListViewController: CertificatesListViewControllerProtocol
             break
         }
     }
+
+    func displayCertificateDetail(viewModel: CertificatesList.CertificateDetailPresentation.ViewModel) {
+        let assembly = CertificateDetailAssembly(
+            certificateID: viewModel.certificateID,
+            output: self.interactor as? CertificateDetailOutputProtocol
+        )
+        self.push(module: assembly.makeModule())
+    }
 }
 
 // MARK: - CertificatesListViewController: CertificatesListTableViewAdapterDelegate -
 
 extension CertificatesListViewController: CertificatesListTableViewAdapterDelegate {
+    func certificatesListTableViewAdapter(
+        _ adapter: CertificatesListTableViewAdapter,
+        didSelectCertificate certificate: CertificatesListItemViewModel,
+        at indexPath: IndexPath
+    ) {
+        self.interactor.doCertificateDetailPresentation(
+            request: .init(viewModelUniqueIdentifier: certificate.uniqueIdentifier)
+        )
+    }
+
+    func certificatesListTableViewAdapterDidRequestPagination(_ adapter: CertificatesListTableViewAdapter) {}
 }
