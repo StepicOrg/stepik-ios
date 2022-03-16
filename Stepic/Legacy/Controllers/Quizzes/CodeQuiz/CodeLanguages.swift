@@ -14,6 +14,7 @@ enum CodeLanguage: String, CaseIterable {
     case cpp11 = "c++11"
     case cpp = "c++"
     case c = "c"
+    case cValgrind = "c_valgrind"
     case haskell = "haskell"
     case haskell7 = "haskell 7.10"
     case haskell8 = "haskell 8.0"
@@ -50,7 +51,7 @@ enum CodeLanguage: String, CaseIterable {
         switch self {
         case .python, .python31:
             return "python"
-        case .cpp, .cpp11, .c:
+        case .cpp, .cpp11, .c, .cValgrind:
             return "cpp"
         case .haskell, .haskell7, .haskell8, .haskell88:
             return "haskell"
@@ -103,6 +104,8 @@ enum CodeLanguage: String, CaseIterable {
             return "Python"
         case .cpp, .cpp11, .c:
             return "C++"
+        case .cValgrind:
+            return "C (Valgrind)"
         case .haskell, .haskell7, .haskell8, .haskell88:
             return "Haskell"
         case .java, .java8, .java9, .java11, .java17:
@@ -154,7 +157,7 @@ enum CodeLanguage: String, CaseIterable {
         switch self {
         case .python, .python31:
             return "# comment\nprint(\"Hello World\")"
-        case .cpp, .cpp11, .c:
+        case .cpp, .cpp11, .c, .cValgrind:
             return "// comment\n\n#include <iostream>\n\nint main()\n{\n\tstd::cout << \"Hello World!\" << std::endl;\n}"
         case .haskell, .haskell7, .haskell8, .haskell88:
             return "-- comment\n\nmain = putStrLn \"Hello World\""
@@ -230,6 +233,7 @@ enum CodeLanguage: String, CaseIterable {
             .swift,
             .haskell88,
             .asm32,
+            .cValgrind,
             .java9,
             .rust,
             .octave,
