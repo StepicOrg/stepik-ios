@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewProfileCertificatesPresenterProtocol {
     func presentCertificates(response: NewProfileCertificates.CertificatesLoad.Response)
+    func presentCertificateDetail(response: NewProfileCertificates.CertificateDetailPresentation.Response)
 }
 
 final class NewProfileCertificatesPresenter: NewProfileCertificatesPresenterProtocol {
@@ -15,6 +16,10 @@ final class NewProfileCertificatesPresenter: NewProfileCertificatesPresenterProt
         case .failure:
             self.viewController?.displayCertificates(viewModel: .init(state: .error))
         }
+    }
+
+    func presentCertificateDetail(response: NewProfileCertificates.CertificateDetailPresentation.Response) {
+        self.viewController?.displayCertificateDetail(viewModel: .init(certificateID: response.certificateID))
     }
 
     private func makeViewModel(certificates: [Certificate]) -> NewProfileCertificatesViewModel {
@@ -36,6 +41,7 @@ final class NewProfileCertificatesPresenter: NewProfileCertificatesPresenterProt
             }
 
             return .init(
+                uniqueIdentifier: "\(certificate.id)",
                 courseTitle: course.title,
                 courseImageURL: courseImageURL,
                 certificateGrade: certificateGrade,

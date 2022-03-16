@@ -7,28 +7,22 @@ protocol NewProfileCertificatesProviderProtocol {
 }
 
 final class NewProfileCertificatesProvider: NewProfileCertificatesProviderProtocol {
-    private let certificatesNetworkService: CertificatesNetworkServiceProtocol
-    private let certificatesPersistenceService: CertificatesPersistenceServiceProtocol
+    private let certificatesRepository: CertificatesRepositoryProtocol
 
-    private let coursesNetworkService: CoursesNetworkServiceProtocol
-    private let coursesPersistenceService: CoursesPersistenceServiceProtocol
+    private let coursesRepository: CoursesRepositoryProtocol
 
     init(
-        certificatesNetworkService: CertificatesNetworkServiceProtocol,
-        certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
-        coursesNetworkService: CoursesNetworkServiceProtocol,
-        coursesPersistenceService: CoursesPersistenceServiceProtocol
+        certificatesRepository: CertificatesRepositoryProtocol,
+        coursesRepository: CoursesRepositoryProtocol
     ) {
-        self.certificatesNetworkService = certificatesNetworkService
-        self.certificatesPersistenceService = certificatesPersistenceService
-        self.coursesNetworkService = coursesNetworkService
-        self.coursesPersistenceService = coursesPersistenceService
+        self.certificatesRepository = certificatesRepository
+        self.coursesRepository = coursesRepository
     }
 
     func fetchRemote(userID: User.IdType) -> Promise<[Certificate]> {
         Promise { seal in
             firstly { () -> Promise<([Certificate], Meta)> in
-                self.certificatesNetworkService.fetch(userID: userID)
+                self.certificatesRepository.fetch(userID: userID, dataSourceType: .remote)
             }.then { certificates, _ in
                 self.fetchCourses(for: certificates)
                     .map { certificates }
@@ -41,11 +35,7 @@ final class NewProfileCertificatesProvider: NewProfileCertificatesProviderProtoc
     }
 
     func fetchCached(userID: User.IdType) -> Promise<[Certificate]> {
-        Promise { seal in
-            self.certificatesPersistenceService.fetch(userID: userID).done { certificates in
-                seal.fulfill(certificates)
-            }
-        }
+        self.certificatesRepository.fetch(userID: userID, dataSourceType: .cache).map { $0.0 }
     }
 
     private func fetchCourses(for certificates: [Certificate]) -> Promise<Void> {
@@ -63,17 +53,17 @@ final class NewProfileCertificatesProvider: NewProfileCertificatesProviderProtoc
             CoreDataHelper.shared.save()
         }
 
-        let courseIDs = certificates.map(\.courseID)
+        let coursesIDs = certificates.map(\.courseID)
 
-        return firstly { () -> Promise<([Course], Meta)> in
-            self.coursesPersistenceService.fetch(ids: courseIDs)
-        }.then { cachedCourses, _ -> Promise<[Course]> in
-            let hasCachedCourses = Set(courseIDs).isSubset(of: Set(cachedCourses.map(\.id)))
+        return firstly { () -> Promise<[Course]> in
+            self.coursesRepository.fetch(ids: coursesIDs, dataSourceType: .cache)
+        }.then { cachedCourses -> Promise<[Course]> in
+            let hasCachedCourses = Set(coursesIDs).isSubset(of: Set(cachedCourses.map(\.id)))
             if hasCachedCourses {
                 return .value(cachedCourses)
             } else {
                 mergeCertificates(certificates, withCourses: cachedCourses)
-                return self.coursesNetworkService.fetch(ids: courseIDs)
+                return self.coursesRepository.fetch(ids: coursesIDs, dataSourceType: .remote)
             }
         }.then { remoteCourses -> Promise<Void> in
             mergeCertificates(certificates, withCourses: remoteCourses)

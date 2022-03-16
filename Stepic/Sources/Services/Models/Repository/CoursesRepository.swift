@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol CoursesRepositoryProtocol: AnyObject {
     func fetch(id: Course.IdType, dataSourceType: DataSourceType) -> Promise<Course?>
+    func fetch(ids: [Course.IdType], dataSourceType: DataSourceType) -> Promise<[Course]>
 }
 
 extension CoursesRepositoryProtocol {
@@ -52,6 +53,15 @@ final class CoursesRepository: CoursesRepositoryProtocol {
             return self.coursesNetworkService.fetch(id: id)
         case .cache:
             return self.coursesPersistenceService.fetch(id: id)
+        }
+    }
+
+    func fetch(ids: [Course.IdType], dataSourceType: DataSourceType) -> Promise<[Course]> {
+        switch dataSourceType {
+        case .cache:
+            return self.coursesPersistenceService.fetch(ids: ids)
+        case .remote:
+            return self.coursesNetworkService.fetch(ids: ids)
         }
     }
 }

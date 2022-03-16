@@ -10,7 +10,7 @@ extension NewProfileCertificatesCertificateCollectionViewCell {
 final class NewProfileCertificatesCertificateCollectionViewCell: UICollectionViewCell, Reusable {
     private lazy var widgetView = NewProfileCertificatesCertificateWidgetView()
 
-    private var certificateType = Certificate.CertificateType.regular
+    private var certificateType = CertificateType.regular
 
     override init(frame: CGRect) {
         super.init(frame: frame)

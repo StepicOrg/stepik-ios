@@ -111,7 +111,17 @@ final class DeepLinkRoutingService {
                 )
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
-        case .course, .coursePromo, .coursePay, .discussions, .solutions, .lesson, .profile, .syllabus, .certificates:
+        case .course,
+             .coursePromo,
+             .coursePay,
+             .courseInfo,
+             .discussions,
+             .solutions,
+             .lesson,
+             .profile,
+             .syllabus,
+             .certificate,
+             .certificates:
             return ModalOrPushStackRouter(
                 source: source,
                 destinationStack: moduleStack,
@@ -159,7 +169,9 @@ final class DeepLinkRoutingService {
                 seal.fulfill([])
             case .profile(let userID):
                 seal.fulfill([NewProfileAssembly(otherUserID: userID).makeModule()])
-            case .course(let courseID), .coursePromo(let courseID):
+            case .course(let courseID),
+                 .coursePromo(let courseID),
+                 .courseInfo(let courseID):
                 let assembly = CourseInfoAssembly(
                     courseID: courseID,
                     initialTab: .info,
@@ -217,8 +229,12 @@ final class DeepLinkRoutingService {
                         seal.fulfill(moduleStack)
                     }
                 )
+            case .certificate(let id):
+                let assembly = CertificateDetailAssembly(certificateID: id)
+                seal.fulfill([assembly.makeModule()])
             case .certificates(let userID):
-                seal.fulfill([CertificatesLegacyAssembly(userID: userID).makeModule()])
+                let assembly = CertificatesListAssembly(userID: userID)
+                seal.fulfill([assembly.makeModule()])
             case .story(let id):
                 SVProgressHUD.show()
                 DeepLinkRouter.routeToStoryWithID(id, urlPath: urlPath) { moduleStack in

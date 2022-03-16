@@ -43,8 +43,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
     private let progressesPersistenceService: ProgressesPersistenceServiceProtocol
     private let progressesNetworkService: ProgressesNetworkServiceProtocol
 
-    private let certificatesPersistenceService: CertificatesPersistenceServiceProtocol
-    private let certificatesNetworkService: CertificatesNetworkServiceProtocol
+    private let certificatesRepository: CertificatesRepositoryProtocol
 
     private let courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol
     private let courseReviewsNetworkService: CourseReviewsNetworkServiceProtocol
@@ -57,8 +56,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         coursesNetworkService: CoursesNetworkServiceProtocol,
         progressesPersistenceService: ProgressesPersistenceServiceProtocol,
         progressesNetworkService: ProgressesNetworkServiceProtocol,
-        certificatesPersistenceService: CertificatesPersistenceServiceProtocol,
-        certificatesNetworkService: CertificatesNetworkServiceProtocol,
+        certificatesRepository: CertificatesRepositoryProtocol,
         courseReviewsPersistenceService: CourseReviewsPersistenceServiceProtocol,
         courseReviewsNetworkService: CourseReviewsNetworkServiceProtocol,
         userAccountService: UserAccountServiceProtocol
@@ -68,8 +66,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         self.coursesPersistenceService = coursesPersistenceService
         self.progressesNetworkService = progressesNetworkService
         self.progressesPersistenceService = progressesPersistenceService
-        self.certificatesPersistenceService = certificatesPersistenceService
-        self.certificatesNetworkService = certificatesNetworkService
+        self.certificatesRepository = certificatesRepository
         self.courseReviewsPersistenceService = courseReviewsPersistenceService
         self.courseReviewsNetworkService = courseReviewsNetworkService
         self.userAccountService = userAccountService
@@ -94,7 +91,7 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesNetworkService.fetch(id:),
                 progressFetchMethod: self.progressesNetworkService.fetch(id:),
-                certificatesFetchMethod: self.certificatesNetworkService.fetch(courseID:userID:)
+                certificatesFetchMethod: self.fetchRemoteCertificates(courseID:userID:)
             ).done { course in
                 seal.fulfill(course)
             }.catch { _ in
@@ -173,8 +170,12 @@ final class LessonFinishedStepsPanModalProvider: LessonFinishedStepsPanModalProv
         }
     }
 
+    private func fetchRemoteCertificates(courseID: Course.IdType, userID: User.IdType) -> Promise<[Certificate]> {
+        self.certificatesRepository.fetch(courseID: courseID, userID: userID, dataSourceType: .remote)
+    }
+
     private func fetchCachedCertificates(courseID: Course.IdType, userID: User.IdType) -> Promise<[Certificate]> {
-        self.certificatesPersistenceService.fetch(courseID: courseID, userID: userID).then { Promise.value($0) }
+        self.certificatesRepository.fetch(courseID: courseID, userID: userID, dataSourceType: .cache)
     }
 
     enum Error: Swift.Error {

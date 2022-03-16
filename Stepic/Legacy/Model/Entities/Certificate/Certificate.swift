@@ -1,4 +1,5 @@
 import CoreData
+import StepikModel
 import SwiftyJSON
 
 final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
@@ -63,11 +64,6 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         self.isWithScore = json[JSONKey.isWithScore.rawValue].boolValue
     }
 
-    enum CertificateType: String {
-        case regular
-        case distinction
-    }
-
     enum JSONKey: String {
         case id
         case user
@@ -89,5 +85,69 @@ final class Certificate: NSManagedObject, ManagedObject, IDFetchable {
         case courseIsPublic = "course_is_public"
         case courseLanguage = "course_language"
         case isWithScore = "is_with_score"
+    }
+}
+
+// MARK: - Certificate (PlainObject Support) -
+
+extension Certificate {
+    var plainObject: StepikModel.Certificate {
+        StepikModel.Certificate(
+            id: self.id,
+            userID: self.userID,
+            courseID: self.courseID,
+            issueDate: self.issueDate,
+            updateDate: self.updateDate,
+            grade: self.grade,
+            typeString: self.type.rawValue,
+            urlString: self.urlString,
+            previewURLString: self.previewURLString,
+            isPublic: self.isPublic,
+            userRank: self.userRank,
+            userRankMax: self.userRankMax,
+            leaderboardSize: self.leaderboardSize,
+            savedFullName: self.savedFullName,
+            editsCount: self.editsCount,
+            allowedEditsCount: self.allowedEditsCount,
+            courseTitle: self.courseTitle,
+            courseIsPublic: self.courseIsPublic,
+            courseLanguage: self.courseLanguage,
+            isWithScore: self.isWithScore
+        )
+    }
+
+    static func insert(into context: NSManagedObjectContext, certificate: StepikModel.Certificate) -> Certificate {
+        let entity: Certificate = context.insertObject()
+        entity.update(certificate: certificate)
+        return entity
+    }
+
+    func update(certificate: StepikModel.Certificate) {
+        self.id = certificate.id
+        self.userID = certificate.userID
+        self.courseID = certificate.courseID
+
+        self.issueDate = certificate.issueDate
+        self.updateDate = certificate.updateDate
+
+        self.grade = certificate.grade
+        self.type = CertificateType(rawValue: certificate.typeString) ?? .regular
+        self.urlString = certificate.urlString
+        self.previewURLString = certificate.previewURLString
+
+        self.isPublic = certificate.isPublic
+        self.userRank = certificate.userRank
+        self.userRankMax = certificate.userRankMax
+        self.leaderboardSize = certificate.leaderboardSize
+
+        self.savedFullName = certificate.savedFullName
+        self.editsCount = certificate.editsCount
+        self.allowedEditsCount = certificate.allowedEditsCount
+
+        self.courseTitle = certificate.courseTitle
+        self.courseIsPublic = certificate.courseIsPublic
+        self.courseLanguage = certificate.courseLanguage
+
+        self.isWithScore = certificate.isWithScore
     }
 }

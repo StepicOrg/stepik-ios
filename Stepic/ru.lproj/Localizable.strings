@@ -652,6 +652,21 @@ RetentionNotificationOnThirdDayText = "Вас давно не было. Захо
 PurchaseCourseNotificationTitle = "Один шаг до новых знаний";
 PurchaseCourseNotificationText = "Вы собирались приобрести курс %@? Завершите покупку и начните учиться прямо сейчас!";
 
+/* CertificateDetail */
+CertificateDetailTitle = "Сертификат";
+CertificateDetailWithDistinctionTitle = "Сертификат с отличием";
+CertificateDetailUserRankText1 = "Ваш результат лучше, чем у %@ учащегося курса";
+CertificateDetailUserRankText234 = "Ваш результат лучше, чем у %@ учащихся курса";
+CertificateDetailUserRankText567890 = "Ваш результат лучше, чем у %@ учащихся курса";
+CertificateDetailHeadlineCourseTitle = "Курс";
+CertificateDetailHeadlineRecipientTitle = "Выдан";
+CertificateDetailEditNameTitle = "Изменить имя в сертификате";
+
+/* CertificatesList */
+CertificatesListGradeText = "Результат: %@%%";
+CertificatesListCertificateRegularTitle = "Сертификат";
+CertificatesListCertificateDistinctionTitle = "Сертификат с отличием";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
 

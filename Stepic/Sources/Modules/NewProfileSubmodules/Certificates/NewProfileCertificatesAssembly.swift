@@ -11,10 +11,8 @@ final class NewProfileCertificatesAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = NewProfileCertificatesProvider(
-            certificatesNetworkService: CertificatesNetworkService(certificatesAPI: CertificatesAPI()),
-            certificatesPersistenceService: CertificatesPersistenceService(),
-            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
-            coursesPersistenceService: CoursesPersistenceService()
+            certificatesRepository: CertificatesRepository.default,
+            coursesRepository: CoursesRepository.default
         )
         let presenter = NewProfileCertificatesPresenter()
         let interactor = NewProfileCertificatesInteractor(presenter: presenter, provider: provider)
