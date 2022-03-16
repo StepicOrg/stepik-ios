@@ -1,4 +1,5 @@
 import Foundation
+import Nuke
 import PromiseKit
 import StepikModel
 
@@ -148,6 +149,7 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
             }
 
             strongSelf.currentCertificate = updatedCertificate
+            strongSelf.removePreviewURLFromImageCache(previewURLString: updatedCertificate.previewURLString)
 
             let data = CertificateDetail.CertificateData(
                 certificate: updatedCertificate,
@@ -174,6 +176,20 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
         }
     }
 
+    // MARK: Private API
+
+    private func removePreviewURLFromImageCache(previewURLString: String?) {
+        guard let previewURLString = previewURLString,
+              let previewURL = URL(string: previewURLString) else {
+            return
+        }
+
+        let imageCache = ImageCache.shared
+        let imageRequest = ImageRequest(url: previewURL)
+
+        imageCache[imageRequest] = nil
+    }
+
     private func sendOpenedAnalyticsEventIfNeeded() {
         guard self.shouldSendOpenedAnalyticsEvent,
               let certificate = self.currentCertificate else {
@@ -191,6 +207,8 @@ final class CertificateDetailInteractor: CertificateDetailInteractorProtocol {
             )
         )
     }
+
+    // MARK: Inner Types
 
     enum Error: Swift.Error {
         case updateCertificateNameFailed
