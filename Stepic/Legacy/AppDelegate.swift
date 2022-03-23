@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import FBSDKCoreKit
+//import FBSDKCoreKit
 import FirebaseCore
 import FirebaseMessaging
 import GoogleSignIn
@@ -77,10 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not initialize audio session")
         }
 
-        ApplicationDelegate.shared.application(
-            application,
-            didFinishLaunchingWithOptions: launchOptions
-        )
+//        ApplicationDelegate.shared.application(
+//            application,
+//            didFinishLaunchingWithOptions: launchOptions
+//        )
 
         NotificationCenter.default.addObserver(
             self,
@@ -303,9 +303,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if VKSdk.processOpen(url, fromApplication: sourceApplicationOrNil) {
             return true
         }
-        if ApplicationDelegate.shared.application(app, open: url, options: options) {
-            return true
-        }
+//        if ApplicationDelegate.shared.application(app, open: url, options: options) {
+//            return true
+//        }
         if GIDSignIn.sharedInstance.handle(url) {
             return true
         }

@@ -12,7 +12,7 @@ enum SocialProvider: Int, CaseIterable {
     case apple
     case vk
     case google
-    case facebook
+    //case facebook
     case twitter
     case gitHub
 
@@ -50,14 +50,14 @@ enum SocialProvider: Int, CaseIterable {
                 registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                 socialSDKProvider: GoogleIDSocialSDKProvider.instance
             )
-        case .facebook:
-            return SocialProviderInfo(
-                name: self.name,
-                amplitudeName: self.amplitudeName,
-                image: UIImage(named: "fb"),
-                registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
-                socialSDKProvider: FBSocialSDKProvider.instance
-            )
+//        case .facebook:
+//            return SocialProviderInfo(
+//                name: self.name,
+//                amplitudeName: self.amplitudeName,
+//                image: UIImage(named: "fb"),
+//                registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
+//                socialSDKProvider: FBSocialSDKProvider.instance
+//            )
         case .twitter:
             return SocialProviderInfo(
                 name: self.name,
@@ -83,8 +83,8 @@ enum SocialProvider: Int, CaseIterable {
             return "VK"
         case .google:
             return "Google"
-        case .facebook:
-            return "Facebook"
+//        case .facebook:
+//            return "Facebook"
         case .twitter:
             return "Twitter"
         case .gitHub:
@@ -100,8 +100,8 @@ enum SocialProvider: Int, CaseIterable {
             return "vk"
         case .google:
             return "google"
-        case .facebook:
-            return "facebook"
+//        case .facebook:
+//            return "facebook"
         case .twitter:
             return "twitter"
         case .gitHub:
