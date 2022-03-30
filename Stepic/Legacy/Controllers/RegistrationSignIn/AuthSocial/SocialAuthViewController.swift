@@ -208,9 +208,9 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if StepikApplicationsInfo.SocialInfo.isSignInWithAppleAvailable {
-            return self.numberOfColumns
-        } else {
             return section == 0 ? self.numberOfColumns : self.numberOfColumns - 1
+        } else {
+            return section == 0 ? self.numberOfColumns : self.numberOfColumns - 2
         }
     }
 

@@ -194,6 +194,8 @@ extension PromoBannerView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.illustrationImageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.subtitleLabel)
+
+        self.subviews.forEach { $0.isUserInteractionEnabled = false }
     }
 
     func makeConstraints() {

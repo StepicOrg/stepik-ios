@@ -21,16 +21,6 @@ PODS:
   - DeviceKit (4.5.2)
   - DownloadButton (0.1.0)
   - EasyTipView (2.1.0)
-  - FBSDKCoreKit (8.2.0):
-    - FBSDKCoreKit/Basics (= 8.2.0)
-    - FBSDKCoreKit/Core (= 8.2.0)
-  - FBSDKCoreKit/Basics (8.2.0)
-  - FBSDKCoreKit/Core (8.2.0):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (8.2.0):
-    - FBSDKLoginKit/Login (= 8.2.0)
-  - FBSDKLoginKit/Login (8.2.0):
-    - FBSDKCoreKit (~> 8.2.0)
   - Firebase/Analytics (8.9.1):
     - Firebase/Core
   - Firebase/Core (8.9.1):
@@ -228,8 +218,6 @@ DEPENDENCIES:
   - DeviceKit (= 4.5.2)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.1.0)
-  - FBSDKCoreKit (= 8.2.0)
-  - FBSDKLoginKit (= 8.2.0)
   - Firebase/Analytics (= 8.9.1)
   - Firebase/Core (= 8.9.1)
   - Firebase/Crashlytics (= 8.9.1)
@@ -279,8 +267,6 @@ SPEC REPOS:
     - DeviceKit
     - DownloadButton
     - EasyTipView
-    - FBSDKCoreKit
-    - FBSDKLoginKit
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -384,8 +370,6 @@ SPEC CHECKSUMS:
   DeviceKit: c622fc19f795f3e0b4d75d6d11b26604338cdab3
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
-  FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
-  FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   Firebase: fb5114cd2bf96e2ff7bcb01d0d9a156cf5fd2f07
   FirebaseABTesting: 9de50b34bf9eb4a07d4edb7af82c14152fd905aa
   FirebaseAnalytics: 4ab446ce08a3fe52e8a4303dd997cf26276bf968
@@ -435,6 +419,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: b8f908c9c935ae5217890d35e787e8985e3bb989
+PODFILE CHECKSUM: e65961cf42aa90c48b6c5358358f1b9e4abc8fd3
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
