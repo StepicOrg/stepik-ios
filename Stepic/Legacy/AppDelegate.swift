@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsUserProperties.shared.updateUserID()
         AnalyticsUserProperties.shared.updateIsDarkModeEnabled()
         AnalyticsUserProperties.shared.updateIsVoiceOverRunning()
+        AnalyticsUserProperties.shared.updateAccessibilityFontScale()
 
         NotificationsBadgesManager.shared.setup()
 

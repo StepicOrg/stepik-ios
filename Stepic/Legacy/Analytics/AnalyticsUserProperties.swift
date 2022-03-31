@@ -109,6 +109,26 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         )
     }
 
+    func updateAccessibilityFontScale() {
+        guard #available(iOS 13.0, *) else {
+            return
+        }
+
+        let defaultBodyFont = UIFont.preferredFont(
+            forTextStyle: .body,
+            compatibleWith: UITraitCollection(preferredContentSizeCategory: .large)
+        )
+
+        let currentBodyFont = UIFont.preferredFont(
+            forTextStyle: .body,
+            compatibleWith: UITraitCollection.current
+        )
+
+        let fontScale = currentBodyFont.pointSize / defaultBodyFont.pointSize
+
+        self.setAmplitudeProperty(key: UserPropertyKey.accessibilityFontScale.rawValue, value: fontScale)
+    }
+
     func setRemoteConfigUserProperties(_ keysAndValues: [String: Any]) {
         Amplitude.instance().setUserProperties(keysAndValues)
         Crashlytics.crashlytics().setCustomKeysAndValues(keysAndValues)
@@ -167,5 +187,6 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         case applicationID = "application_id"
         case isNightModeEnabled = "is_night_mode_enabled"
         case isAccessibilityScreenReaderEnabled = "accessibility_screen_reader_enabled"
+        case accessibilityFontScale = "accessibility_font_scale"
     }
 }
