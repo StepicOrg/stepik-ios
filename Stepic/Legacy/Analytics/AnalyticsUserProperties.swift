@@ -102,7 +102,7 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         self.setAmplitudeProperty(key: UserPropertyKey.isNightModeEnabled.rawValue, value: "\(isEnabled)")
     }
 
-    func updateIsVoiceOverRunning() {
+    func updateAccessibilityIsVoiceOverRunning() {
         self.setAmplitudeProperty(
             key: UserPropertyKey.isAccessibilityScreenReaderEnabled.rawValue,
             value: UIAccessibility.isVoiceOverRunning
