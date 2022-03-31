@@ -1,15 +1,7 @@
-//
-//  AnalyticsUserProperties.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 20.06.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Amplitude
 import FirebaseAnalytics
 import FirebaseCrashlytics
-import Foundation
+import UIKit
 import YandexMobileMetrica
 
 final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
@@ -110,6 +102,13 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         self.setAmplitudeProperty(key: UserPropertyKey.isNightModeEnabled.rawValue, value: "\(isEnabled)")
     }
 
+    func updateIsVoiceOverRunning() {
+        self.setAmplitudeProperty(
+            key: UserPropertyKey.isAccessibilityScreenReaderEnabled.rawValue,
+            value: UIAccessibility.isVoiceOverRunning
+        )
+    }
+
     func setRemoteConfigUserProperties(_ keysAndValues: [String: Any]) {
         Amplitude.instance().setUserProperties(keysAndValues)
         Crashlytics.crashlytics().setCustomKeysAndValues(keysAndValues)
@@ -167,5 +166,6 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         case screenOrientation = "screen_orientation"
         case applicationID = "application_id"
         case isNightModeEnabled = "is_night_mode_enabled"
+        case isAccessibilityScreenReaderEnabled = "accessibility_screen_reader_enabled"
     }
 }

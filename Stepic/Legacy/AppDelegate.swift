@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
         AnalyticsUserProperties.shared.updateIsDarkModeEnabled()
+        AnalyticsUserProperties.shared.updateIsVoiceOverRunning()
 
         NotificationsBadgesManager.shared.setup()
 
