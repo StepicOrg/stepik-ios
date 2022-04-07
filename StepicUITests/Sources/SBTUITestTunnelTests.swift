@@ -1,42 +1,42 @@
-//
-//  SBTUITestTunnelTests.swift
-//  StepicUITests
-//
-//  Created by Ivan Magda on 4/7/22.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
+import SBTUITestTunnelClient
 import XCTest
 
 class SBTUITestTunnelTests: XCTestCase {
+    override func setUp() {
+        super.setUp()
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        self.continueAfterFailure = false
+        self.app.launchTunnel()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func testCustomCodeBlockWorks() throws {
+        sleep(2)
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+        let objectToInject = "test"
+        let objectReturnedByBlock = self.app.performCustomCommandNamed("myCustomCommandKey", object: objectToInject)
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        guard let number = objectReturnedByBlock as? NSNumber else {
+            fatalError("invalid return type")
         }
+
+        XCTAssertTrue(number.boolValue)
+    }
+
+    func testOpenCourseDeepLinkViaCustomCodeBlock() throws {
+        sleep(2)
+
+        let objectReturnedByBlock = self.app.performCustomCommandNamed(
+            "openDeepLink",
+            object: "https://stepik.org/course/58852"
+        )
+
+        XCTAssertNotNil(objectReturnedByBlock)
+
+        guard let number = objectReturnedByBlock as? NSNumber else {
+            fatalError("invalid return type")
+        }
+
+        XCTAssertTrue(number.boolValue)
+        XCTAssertTrue(self.app.navigationBars.matching(identifier: "About course").element.waitForExistence(timeout: 5))
     }
 }

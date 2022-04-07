@@ -19,6 +19,10 @@ import UIKit
 import VK_ios_sdk
 import YandexMobileMetrica
 
+#if DEBUG
+import SBTUITestTunnelServer
+#endif
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -54,6 +58,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        #if DEBUG
+        SBTUITestTunnelServer.takeOff()
+
+        SBTUITestTunnelServer.registerCustomCommandNamed("myCustomCommandKey") { injectedObject in
+            guard let injectedObject = injectedObject else {
+                return nil
+            }
+
+            print(injectedObject)
+
+            return NSNumber(value: true)
+        }
+
+        SBTUITestTunnelServer.registerCustomCommandNamed("openDeepLink") { injectedObject in
+            guard let injectedObject = injectedObject else {
+                return nil
+            }
+
+            print(injectedObject)
+            guard let urlString = injectedObject as? String,
+                  let deepLinkRoute = DeepLinkRoute(path: urlString) else {
+                return nil
+            }
+
+            let deepLinkRoutingService = DeepLinkRoutingService()
+
+            DispatchQueue.main.async {
+                deepLinkRoutingService.route(deepLinkRoute)
+            }
+
+            return NSNumber(value: true)
+        }
+        #endif
+
         FLEXManager.setup()
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
