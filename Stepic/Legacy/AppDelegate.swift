@@ -54,6 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        #if DEBUG
+        if CommandLine.arguments.contains("-com.AlexKarpov.StepicUITests.SkipOnboarding") {
+           DefaultsContainer.launch.didLaunch = true
+        }
+        #endif
+
         FLEXManager.setup()
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
@@ -140,6 +146,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if self.applicationShortcutService.handleLaunchOptions(launchOptions) {
             return false
         }
+
+        #if DEBUG
+        if CommandLine.arguments.contains("-com.AlexKarpov.StepicUITests.DeepLink"),
+           let urlString = UserDefaults.standard.string(forKey: "com.AlexKarpov.StepicUITests.DeepLink"),
+           let deepLinkRoute = DeepLinkRoute(path: urlString) {
+            let deepLinkRoutingService = DeepLinkRoutingService()
+
+            DispatchQueue.main.async {
+                deepLinkRoutingService.route(deepLinkRoute)
+            }
+        }
+        #endif
 
         return true
     }

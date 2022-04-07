@@ -85,7 +85,16 @@ final class AuthInfo: NSObject {
                let refreshToken = defaults.value(forKey: "refresh_token") as? String,
                let tokenType = defaults.value(forKey: "token_type") as? String {
                 //print("AuthInfo :: got accessToken \(accessToken)")
-                let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
+                let expireDate: Date = {
+                    let anyExpireDateValue = self.defaults.value(forKey: "expire_date")
+                    if let timeIntervalValue = anyExpireDateValue as? TimeInterval {
+                        return Date(timeIntervalSince1970: timeIntervalValue)
+                    } else if let stringValue = anyExpireDateValue as? String,
+                              let timeIntervalValue = TimeInterval(stringValue) {
+                        return Date(timeIntervalSince1970: timeIntervalValue)
+                    }
+                    return Date(timeIntervalSince1970: 0)
+                }()
                 return StepikToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
                 return nil
@@ -145,12 +154,24 @@ final class AuthInfo: NSObject {
                     print("AuthInfo :: returning anonymous user id \(String(describing: anonymousUserId))")
                     return anonymousUserId
                 } else {
-                    print("AuthInfo :: returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
-                    return defaults.value(forKey: "user_id") as? Int
+                    let anyUserIDValue = self.defaults.value(forKey: "user_id")
+                    print("AuthInfo :: returning normal user id \(String(describing: anyUserIDValue))")
+                    if let intValue = anyUserIDValue as? Int {
+                        return intValue
+                    } else if let stringValue = anyUserIDValue as? String {
+                        return Int(stringValue)
+                    }
+                    return nil
                 }
             } else {
-                print("AuthInfo :: returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
-                return defaults.value(forKey: "user_id") as? Int
+                let anyUserIDValue = self.defaults.value(forKey: "user_id")
+                print("AuthInfo :: returning normal user id \(String(describing: anyUserIDValue))")
+                if let intValue = anyUserIDValue as? Int {
+                    return intValue
+                } else if let stringValue = anyUserIDValue as? String {
+                    return Int(stringValue)
+                }
+                return nil
             }
         }
     }
