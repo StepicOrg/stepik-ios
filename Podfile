@@ -94,11 +94,19 @@ end
 target 'Stepic' do
   platform :ios, '12.0'
   all_pods
+
+  pod 'SBTUITestTunnelServer', '8.2.0', :configurations => ['Production Debug', 'Release Debug', 'Develop Debug']
+
   target 'StepicTests' do
     inherit! :search_paths
     all_pods
     testing_pods
   end
+end
+
+target 'StepicUITests' do
+    inherit! :search_paths
+    pod 'SBTUITestTunnelClient', '8.2.0'
 end
 
 post_install do |installer|

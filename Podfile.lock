@@ -94,6 +94,9 @@ PODS:
     - GoogleUtilities/Environment (~> 7.6)
     - "GoogleUtilities/NSData+zlib (~> 7.6)"
   - FLEX (4.4.1)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
   - GoogleAppMeasurement (8.9.1):
     - GoogleAppMeasurement/AdIdSupport (= 8.9.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
@@ -180,6 +183,12 @@ PODS:
     - PromiseKit/CorePromise
   - PromisesObjC (2.0.0)
   - Quick (4.0.0)
+  - SBTUITestTunnelClient (8.2.0):
+    - SBTUITestTunnelCommon
+  - SBTUITestTunnelCommon (8.2.0)
+  - SBTUITestTunnelServer (8.2.0):
+    - GCDWebServer
+    - SBTUITestTunnelCommon
   - SDWebImage (5.12.1):
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
@@ -237,6 +246,8 @@ DEPENDENCIES:
   - Presentr (from `https://github.com/ivan-magda/Presentr.git`, tag `v1.9.1`)
   - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, tag `6.16.2`)
   - Quick (= 4.0.0)
+  - SBTUITestTunnelClient (= 8.2.0)
+  - SBTUITestTunnelServer (= 8.2.0)
   - SDWebImage (= 5.12.1)
   - SnapKit (= 5.0.1)
   - StepikModel (from `./StepikModel`)
@@ -276,6 +287,7 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseRemoteConfig
+    - GCDWebServer
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
@@ -293,6 +305,9 @@ SPEC REPOS:
     - pop
     - PromisesObjC
     - Quick
+    - SBTUITestTunnelClient
+    - SBTUITestTunnelCommon
+    - SBTUITestTunnelServer
     - SDWebImage
     - SnapKit
     - STRegex
@@ -380,6 +395,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 82c4a48638f53f7b184f3cc9f6cd2cbe533ab316
   FirebaseRemoteConfig: a75c1bd44ebd3ed4ad3fa1ff09414a8b133be405
   FLEX: 75ca95cff4bd57592c6e75adee7651ace29f9c25
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   GoogleAppMeasurement: 837649ad3987936c232f6717c5680216f6243d24
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
@@ -402,6 +418,9 @@ SPEC CHECKSUMS:
   PromiseKit: ad27b174e5d8587cf799888f5e738f88e17055d8
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+  SBTUITestTunnelClient: 92e0762194e39d677745ed5e59792c6eb6d3b181
+  SBTUITestTunnelCommon: 6c310b521b617dc7e0c799ce26720fea9f133356
+  SBTUITestTunnelServer: 272e21d58948497213b2c6ea7c0f81777450a94d
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   StepikModel: 7bf35e3dcd1687b5b7cf4f49838e1e74776a593c
@@ -419,6 +438,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: e65961cf42aa90c48b6c5358358f1b9e4abc8fd3
+PODFILE CHECKSUM: 82edce72fd86b412db99b8fa1b9038b2141939fa
 
 COCOAPODS: 1.11.3
