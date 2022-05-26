@@ -142,7 +142,12 @@ final class RegistrationViewController: UIViewController {
         self.nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-
+        
+        self.nameTextField.accessibilityIdentifier = "nameTextField"
+        self.emailTextField.accessibilityIdentifier = "emailTextField"
+        self.passwordTextField.accessibilityIdentifier = "passwordTextField"
+        self.registerButton.accessibilityIdentifier = "registerButton"
+        
         self.setup()
     }
 

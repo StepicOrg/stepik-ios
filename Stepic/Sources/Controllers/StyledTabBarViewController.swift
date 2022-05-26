@@ -166,10 +166,12 @@ private struct TabBarItemInfo {
     var image: UIImage?
     var selectedImage: UIImage?
     var tag: Int
+    var accessibilityIdentifier: String
 
     func makeTabBarItem() -> UITabBarItem {
         let item = UITabBarItem(title: self.title, image: self.image, selectedImage: self.selectedImage)
         item.tag = self.tag
+        item.accessibilityIdentifier = self.accessibilityIdentifier
         return item
     }
 }
@@ -228,7 +230,8 @@ private enum TabController: String {
                 controller: navigationViewController,
                 image: personImage,
                 selectedImage: personFillImage,
-                tag: self.tag
+                tag: self.tag,
+                accessibilityIdentifier: "Profile"
             )
         case .home:
             let viewController = HomeAssembly().makeModule()
@@ -257,7 +260,8 @@ private enum TabController: String {
                 controller: navigationViewController,
                 image: homeImage,
                 selectedImage: homeFillImage,
-                tag: self.tag
+                tag: self.tag,
+                accessibilityIdentifier: "Home"
             )
         case .notifications:
             let viewController = ControllerHelper.instantiateViewController(
@@ -286,7 +290,8 @@ private enum TabController: String {
                 controller: viewController,
                 image: notificationsImage,
                 selectedImage: notificationsFillImage,
-                tag: self.tag
+                tag: self.tag,
+                accessibilityIdentifier: "Notifications"
             )
         case .explore:
             let viewController = ExploreAssembly().makeModule()
@@ -307,7 +312,8 @@ private enum TabController: String {
                 controller: navigationViewController,
                 image: exploreImage,
                 selectedImage: exploreImage,
-                tag: self.tag
+                tag: self.tag,
+                accessibilityIdentifier: "Catalog"
             )
         case .debug:
             let viewController = DebugMenuAssembly().makeModule()
@@ -334,7 +340,8 @@ private enum TabController: String {
                 controller: navigationViewController,
                 image: infoImage,
                 selectedImage: infoFillImage,
-                tag: self.tag
+                tag: self.tag,
+                accessibilityIdentifier: "Debug"
             )
         }
     }

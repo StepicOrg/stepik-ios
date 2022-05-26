@@ -84,6 +84,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="o1s-iX-7hl">
                         <barButtonItem key="leftBarButtonItem" image="onboarding-close" style="plain" id="rgL-TT-6ic">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="closeOnbordingButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="onCloseButtonClick:" destination="EHs-hl-3fE" id="VMx-ep-cVa"/>
                             </connections>

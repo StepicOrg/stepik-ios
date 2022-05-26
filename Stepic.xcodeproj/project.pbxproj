@@ -1811,9 +1811,21 @@
 		7EBAD8337C302E2147741450 /* CourseBenefitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8744553C2B3C12884F84BFD9 /* CourseBenefitDetailViewController.swift */; };
 		7ED87AD657E488FBD3C0D88E /* StepikAcademyCourseListDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25E416101A848548101C7DA /* StepikAcademyCourseListDataFlow.swift */; };
 		81AADBF0C345BFDB7176221D /* WishlistWidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AA738A584651A3F55AD9DB /* WishlistWidgetViewController.swift */; };
-		8489EE7725FAF13B004A85C5 /* UnregisteredUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489EE7625FAF13B004A85C5 /* UnregisteredUITests.swift */; };
-		8489EEE425FFBE8E004A85C5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489EEE325FFBE8E004A85C5 /* Common.swift */; };
-		84FA5057262F204400603346 /* LoginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA5056262F204400603346 /* LoginUITests.swift */; };
+		8430ABA328362AF00071DD46 /* MainNavigationTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABA228362AF00071DD46 /* MainNavigationTabs.swift */; };
+		8430ABA52836324E0071DD46 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABA42836324E0071DD46 /* ProfileScreen.swift */; };
+		8430ABA728364DAA0071DD46 /* LogInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABA628364DAA0071DD46 /* LogInScreen.swift */; };
+		8430ABA9283B983C0071DD46 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABA8283B983C0071DD46 /* LoginTests.swift */; };
+		8430ABAB283BA2380071DD46 /* RegisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABAA283BA2380071DD46 /* RegisterTests.swift */; };
+		8430ABAD283BA9A10071DD46 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABAC283BA9A10071DD46 /* RegisterScreen.swift */; };
+		8430ABAF283E31540071DD46 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABAE283E31540071DD46 /* AuthScreen.swift */; };
+		8430ABB1283E40920071DD46 /* GoogleAuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABB0283E40920071DD46 /* GoogleAuthScreen.swift */; };
+		8430ABB3283E57880071DD46 /* CatalogScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABB2283E57880071DD46 /* CatalogScreen.swift */; };
+		8430ABB5283E57A00071DD46 /* CatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABB4283E57A00071DD46 /* CatalogTests.swift */; };
+		8430ABBB283E84870071DD46 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430ABBA283E84870071DD46 /* General.swift */; };
+		8446E2D52810120D00981577 /* BaseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446E2D42810120D00981577 /* BaseScreen.swift */; };
+		8446E2D92817DA4A00981577 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446E2D82817DA4A00981577 /* OnboardingScreen.swift */; };
+		8446E2DC2818012100981577 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446E2DB2818012100981577 /* BaseTest.swift */; };
+		8446E2DE2818020F00981577 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446E2DD2818020F00981577 /* OnboardingTests.swift */; };
 		85CFA575736E6C0570D48065 /* UserCoursesReviewsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7422D4B76AAD73F35E6E /* UserCoursesReviewsInteractor.swift */; };
 		861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */; };
 		8622056B2055561F00F14255 /* PinsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8622056A2055561F00F14255 /* PinsMapView.swift */; };
@@ -3910,10 +3922,22 @@
 		812902FE72DE5F64FCC48841 /* CourseBenefitDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseBenefitDetailView.swift; sourceTree = "<group>"; };
 		81AA980E65D068EB9A20F675 /* LessonFinishedStepsPanModalDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalDataFlow.swift; sourceTree = "<group>"; };
 		83BC8E57E212C4D980F78B79 /* CourseRevenueTabPurchasesDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabPurchasesDataFlow.swift; sourceTree = "<group>"; };
+		8430ABA228362AF00071DD46 /* MainNavigationTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationTabs.swift; sourceTree = "<group>"; };
+		8430ABA42836324E0071DD46 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		8430ABA628364DAA0071DD46 /* LogInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreen.swift; sourceTree = "<group>"; };
+		8430ABA8283B983C0071DD46 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
+		8430ABAA283BA2380071DD46 /* RegisterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTests.swift; sourceTree = "<group>"; };
+		8430ABAC283BA9A10071DD46 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		8430ABAE283E31540071DD46 /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
+		8430ABB0283E40920071DD46 /* GoogleAuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthScreen.swift; sourceTree = "<group>"; };
+		8430ABB2283E57880071DD46 /* CatalogScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogScreen.swift; sourceTree = "<group>"; };
+		8430ABB4283E57A00071DD46 /* CatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTests.swift; sourceTree = "<group>"; };
+		8430ABBA283E84870071DD46 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		8446E2D42810120D00981577 /* BaseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreen.swift; sourceTree = "<group>"; };
+		8446E2D82817DA4A00981577 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		8446E2DB2818012100981577 /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
+		8446E2DD2818020F00981577 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		8489EE7425FAF13A004A85C5 /* StepicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8489EE7625FAF13B004A85C5 /* UnregisteredUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnregisteredUITests.swift; sourceTree = "<group>"; };
-		8489EEE325FFBE8E004A85C5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		84FA5056262F204400603346 /* LoginUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUITests.swift; sourceTree = "<group>"; };
 		85424A5DCFCD1768BD36AD45 /* CourseBenefitDetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseBenefitDetailInteractor.swift; sourceTree = "<group>"; };
 		858D7264845A798247AE1350 /* UserCoursesReviewsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsDataFlow.swift; sourceTree = "<group>"; };
 		861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Init.swift"; sourceTree = "<group>"; };
@@ -5046,16 +5070,6 @@
 				2C67075625FF84BE00B18163 /* Info-Release.plist */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		2C67075325FF845B00B18163 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				8489EEE325FFBE8E004A85C5 /* Common.swift */,
-				84FA5056262F204400603346 /* LoginUITests.swift */,
-				8489EE7625FAF13B004A85C5 /* UnregisteredUITests.swift */,
-			);
-			path = Sources;
 			sourceTree = "<group>";
 		};
 		2C67B5A027270A5700AC4E07 /* EditSplitTests */ = {
@@ -10045,6 +10059,42 @@
 			path = CourseRevenueTabPurchases;
 			sourceTree = "<group>";
 		};
+		8430ABB9283E7CAA0071DD46 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8430ABBA283E84870071DD46 /* General.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		8446E2D32810119800981577 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				8446E2D42810120D00981577 /* BaseScreen.swift */,
+				8446E2D82817DA4A00981577 /* OnboardingScreen.swift */,
+				8430ABA228362AF00071DD46 /* MainNavigationTabs.swift */,
+				8430ABA42836324E0071DD46 /* ProfileScreen.swift */,
+				8430ABA628364DAA0071DD46 /* LogInScreen.swift */,
+				8430ABAC283BA9A10071DD46 /* RegisterScreen.swift */,
+				8430ABAE283E31540071DD46 /* AuthScreen.swift */,
+				8430ABB0283E40920071DD46 /* GoogleAuthScreen.swift */,
+				8430ABB2283E57880071DD46 /* CatalogScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		8446E2DA2817FD0500981577 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8446E2DB2818012100981577 /* BaseTest.swift */,
+				8446E2DD2818020F00981577 /* OnboardingTests.swift */,
+				8430ABA8283B983C0071DD46 /* LoginTests.swift */,
+				8430ABAA283BA2380071DD46 /* RegisterTests.swift */,
+				8430ABB4283E57A00071DD46 /* CatalogTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		847D7A7EAF0F60522A77C408 /* CertificatesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -10063,8 +10113,10 @@
 		8489EE7525FAF13B004A85C5 /* StepicUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8430ABB9283E7CAA0071DD46 /* Sources */,
+				8446E2DA2817FD0500981577 /* Tests */,
+				8446E2D32810119800981577 /* Pages */,
 				2C67075125FF844400B18163 /* Resources */,
-				2C67075325FF845B00B18163 /* Sources */,
 			);
 			path = StepicUITests;
 			sourceTree = "<group>";
@@ -12966,9 +13018,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8489EEE425FFBE8E004A85C5 /* Common.swift in Sources */,
-				8489EE7725FAF13B004A85C5 /* UnregisteredUITests.swift in Sources */,
-				84FA5057262F204400603346 /* LoginUITests.swift in Sources */,
+				8446E2D92817DA4A00981577 /* OnboardingScreen.swift in Sources */,
+				8430ABAB283BA2380071DD46 /* RegisterTests.swift in Sources */,
+				8446E2DE2818020F00981577 /* OnboardingTests.swift in Sources */,
+				8430ABA52836324E0071DD46 /* ProfileScreen.swift in Sources */,
+				8430ABA9283B983C0071DD46 /* LoginTests.swift in Sources */,
+				8430ABAF283E31540071DD46 /* AuthScreen.swift in Sources */,
+				8430ABBB283E84870071DD46 /* General.swift in Sources */,
+				8430ABA328362AF00071DD46 /* MainNavigationTabs.swift in Sources */,
+				8430ABAD283BA9A10071DD46 /* RegisterScreen.swift in Sources */,
+				8430ABB1283E40920071DD46 /* GoogleAuthScreen.swift in Sources */,
+				8430ABB5283E57A00071DD46 /* CatalogTests.swift in Sources */,
+				8430ABB3283E57880071DD46 /* CatalogScreen.swift in Sources */,
+				8446E2D52810120D00981577 /* BaseScreen.swift in Sources */,
+				8446E2DC2818012100981577 /* BaseTest.swift in Sources */,
+				8430ABA728364DAA0071DD46 /* LogInScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
