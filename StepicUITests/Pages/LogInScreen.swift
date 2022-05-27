@@ -11,9 +11,9 @@ import XCTest
 
 class LogInScreen: BaseScreen {
 
-    private lazy var fieldEmail = app.textFields["emailTextField"]
-    private lazy var fieldPassword = app.secureTextFields["passwordTextField"]
-    private lazy var btnLogIn = app.buttons["logInButton"]
+    private lazy var fieldEmail = app.textFields[AccessibilityIdentifiers.AuthEmail.emailTextField]
+    private lazy var fieldPassword = app.secureTextFields[AccessibilityIdentifiers.AuthEmail.passwordTextField]
+    private lazy var btnLogIn = app.buttons[AccessibilityIdentifiers.AuthEmail.logInButton]
     
     func fillUserInfo(email: String, password: String) -> LogInScreen {
         typeText(element: fieldEmail, value: email)

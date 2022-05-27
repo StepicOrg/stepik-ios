@@ -11,8 +11,8 @@ import XCTest
 
 class MainNavigationTabs: BaseScreen {
 
-    private lazy var btnProfile = app.tabBars.buttons["Profile"]
-    private lazy var btnCatalog = app.tabBars.buttons["Catalog"]
+    private lazy var btnProfile = app.tabBars.buttons[AccessibilityIdentifiers.TabBar.profile]
+    private lazy var btnCatalog = app.tabBars.buttons[AccessibilityIdentifiers.TabBar.catalog]
     
     func openProfile() {
         XCTAssertTrue(btnProfile.waitForExistence(timeout: 10), "No 'Profile' tab")

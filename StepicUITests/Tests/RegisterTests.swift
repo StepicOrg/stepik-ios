@@ -21,7 +21,9 @@ class RegisterTests: BaseTest {
         deleteApplication()
         super.setUp()
         
-        addUIInterruptionMonitor(withDescription: "“Stepik Release” Would Like to Send You Notifications") { alert -> Bool in
+        addUIInterruptionMonitor(
+            withDescription: "“\(AppName.name)” Would Like to Send You Notifications"
+        ) { alert -> Bool in
             let alertButton = alert.buttons["Allow"]
             if alert.elementType == .alert && alertButton.exists {
                 alertButton.tap()

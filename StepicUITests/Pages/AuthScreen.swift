@@ -11,8 +11,8 @@ import XCTest
 
 class AuthScreen: BaseScreen {
 
-    private lazy var btnLoginWithEmail = app.buttons["signInButton"]
-    private lazy var btnRegister = app.buttons["signUpButton"]
+    private lazy var btnLoginWithEmail = app.buttons[AccessibilityIdentifiers.AuthSocial.signInButton]
+    private lazy var btnRegister = app.buttons[AccessibilityIdentifiers.AuthSocial.signUpButton]
     private lazy var btnGoogle = app.collectionViews.children(matching: .cell).element(boundBy: 2)
     
     func shouldBeAuthScreen() {

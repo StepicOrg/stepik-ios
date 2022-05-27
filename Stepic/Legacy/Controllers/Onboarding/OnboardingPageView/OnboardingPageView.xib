@@ -39,7 +39,6 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="nextButton"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="onNextButtonClick:" destination="-1" eventType="touchUpInside" id="Mbo-7G-EPG"/>

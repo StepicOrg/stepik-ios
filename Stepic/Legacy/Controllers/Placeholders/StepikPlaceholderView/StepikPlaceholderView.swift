@@ -75,7 +75,7 @@ final class StepikPlaceholderView: NibInitializableView {
         self.actionButton.clipsToBounds = true
         self.actionButton.layer.cornerRadius = 8
         self.actionButton.layer.borderWidth = 0.5
-        self.actionButton.accessibilityIdentifier = "loginButton"
+        self.actionButton.accessibilityIdentifier = AccessibilityIdentifiers.Placeholders.loginButton
         
         self.actionButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
 

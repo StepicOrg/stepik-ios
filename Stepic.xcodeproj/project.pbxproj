@@ -1169,6 +1169,9 @@
 		2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */; };
 		2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E120F520790082F3FE /* DownloaderTask.swift */; };
 		2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */; };
+		2CE6C1072840712800631636 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6C1062840712800631636 /* AccessibilityIdentifiers.swift */; };
+		2CE6C1082840713700631636 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6C1062840712800631636 /* AccessibilityIdentifiers.swift */; };
+		2CE6C10A284076E300631636 /* AppName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6C109284076E300631636 /* AppName.swift */; };
 		2CE770062625AAED00D5DD1F /* PurchaseCourseLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE770052625AAED00D5DD1F /* PurchaseCourseLocalNotification.swift */; };
 		2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */; };
 		2CE8390920C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */; };
@@ -3265,6 +3268,8 @@
 		2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderTaskProtocol.swift; sourceTree = "<group>"; };
 		2CE664E120F520790082F3FE /* DownloaderTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderTask.swift; sourceTree = "<group>"; };
 		2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderProtocol.swift; sourceTree = "<group>"; };
+		2CE6C1062840712800631636 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
+		2CE6C109284076E300631636 /* AppName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppName.swift; sourceTree = "<group>"; };
 		2CE770052625AAED00D5DD1F /* PurchaseCourseLocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseCourseLocalNotification.swift; sourceTree = "<group>"; };
 		2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
@@ -10062,6 +10067,8 @@
 		8430ABB9283E7CAA0071DD46 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2CE6C1062840712800631636 /* AccessibilityIdentifiers.swift */,
+				2CE6C109284076E300631636 /* AppName.swift */,
 				8430ABBA283E84870071DD46 /* General.swift */,
 			);
 			path = Sources;
@@ -11523,6 +11530,7 @@
 				2C4391AA271994CC000770AE /* CourseInfoPurchaseModalHeaderView.swift in Sources */,
 				2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */,
 				2C50363E24C59374001FAE04 /* NewProfileCertificatesHorizontalFlowLayout.swift in Sources */,
+				2CE6C1082840713700631636 /* AccessibilityIdentifiers.swift in Sources */,
 				2C22042C20E277F70060117A /* Skeletonable+UIView.swift in Sources */,
 				082B54D820AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift in Sources */,
 				2C5D340225C988FA00372C61 /* PromoCodesNetworkService.swift in Sources */,
@@ -13025,9 +13033,11 @@
 				8430ABA9283B983C0071DD46 /* LoginTests.swift in Sources */,
 				8430ABAF283E31540071DD46 /* AuthScreen.swift in Sources */,
 				8430ABBB283E84870071DD46 /* General.swift in Sources */,
+				2CE6C1072840712800631636 /* AccessibilityIdentifiers.swift in Sources */,
 				8430ABA328362AF00071DD46 /* MainNavigationTabs.swift in Sources */,
 				8430ABAD283BA9A10071DD46 /* RegisterScreen.swift in Sources */,
 				8430ABB1283E40920071DD46 /* GoogleAuthScreen.swift in Sources */,
+				2CE6C10A284076E300631636 /* AppName.swift in Sources */,
 				8430ABB5283E57A00071DD46 /* CatalogTests.swift in Sources */,
 				8430ABB3283E57880071DD46 /* CatalogScreen.swift in Sources */,
 				8446E2D52810120D00981577 /* BaseScreen.swift in Sources */,
@@ -14499,7 +14509,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG PRODUCTION";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Stepic;
@@ -14560,7 +14570,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG RELEASE";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -14623,7 +14633,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -14685,6 +14695,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Stepic;
@@ -14745,6 +14756,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Stepic;
@@ -14805,6 +14817,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOP;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Stepic;

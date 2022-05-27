@@ -231,7 +231,7 @@ private enum TabController: String {
                 image: personImage,
                 selectedImage: personFillImage,
                 tag: self.tag,
-                accessibilityIdentifier: "Profile"
+                accessibilityIdentifier: self.accessibilityIdentifier
             )
         case .home:
             let viewController = HomeAssembly().makeModule()
@@ -261,7 +261,7 @@ private enum TabController: String {
                 image: homeImage,
                 selectedImage: homeFillImage,
                 tag: self.tag,
-                accessibilityIdentifier: "Home"
+                accessibilityIdentifier: self.accessibilityIdentifier
             )
         case .notifications:
             let viewController = ControllerHelper.instantiateViewController(
@@ -291,7 +291,7 @@ private enum TabController: String {
                 image: notificationsImage,
                 selectedImage: notificationsFillImage,
                 tag: self.tag,
-                accessibilityIdentifier: "Notifications"
+                accessibilityIdentifier: self.accessibilityIdentifier
             )
         case .explore:
             let viewController = ExploreAssembly().makeModule()
@@ -313,7 +313,7 @@ private enum TabController: String {
                 image: exploreImage,
                 selectedImage: exploreImage,
                 tag: self.tag,
-                accessibilityIdentifier: "Catalog"
+                accessibilityIdentifier: self.accessibilityIdentifier
             )
         case .debug:
             let viewController = DebugMenuAssembly().makeModule()
@@ -341,8 +341,23 @@ private enum TabController: String {
                 image: infoImage,
                 selectedImage: infoFillImage,
                 tag: self.tag,
-                accessibilityIdentifier: "Debug"
+                accessibilityIdentifier: self.accessibilityIdentifier
             )
+        }
+    }
+
+    private var accessibilityIdentifier: String {
+        switch self {
+        case .profile:
+            return AccessibilityIdentifiers.TabBar.profile
+        case .home:
+            return AccessibilityIdentifiers.TabBar.home
+        case .notifications:
+            return AccessibilityIdentifiers.TabBar.notifications
+        case .explore:
+            return AccessibilityIdentifiers.TabBar.catalog
+        case .debug:
+            return AccessibilityIdentifiers.TabBar.debug
         }
     }
 }

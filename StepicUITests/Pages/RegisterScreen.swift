@@ -11,10 +11,10 @@ import XCTest
 
 class RegisterScreen: BaseScreen {
 
-    private lazy var fieldName = app.textFields["nameTextField"]
-    private lazy var fieldEmail = app.textFields["emailTextField"]
-    private lazy var fieldPassword = app.secureTextFields["passwordTextField"]
-    private lazy var btnRegister = app.buttons["registerButton"]
+    private lazy var fieldName = app.textFields[AccessibilityIdentifiers.Registration.nameTextField]
+    private lazy var fieldEmail = app.textFields[AccessibilityIdentifiers.Registration.emailTextField]
+    private lazy var fieldPassword = app.secureTextFields[AccessibilityIdentifiers.Registration.passwordTextField]
+    private lazy var btnRegister = app.buttons[AccessibilityIdentifiers.Registration.registerButton]
     
     func fillUserInfo(name: String, email: String, password: String) -> RegisterScreen {
         typeText(element: fieldName, value: name)

@@ -10,9 +10,8 @@ import Foundation
 import XCTest
 
 class OnboardingScreen: BaseScreen {
-
-    private lazy var btnCloseOnbording = app.navigationBars.buttons["closeOnbordingButton"]
-    private lazy var btnNext = app.buttons["nextButton"]
+    private lazy var btnCloseOnbording = app.navigationBars.buttons[AccessibilityIdentifiers.Onboarding.closeButton]
+    private lazy var btnNext = app.buttons[AccessibilityIdentifiers.Onboarding.nextButton]
     
 
     func closeOnbording() {
@@ -25,5 +24,5 @@ class OnboardingScreen: BaseScreen {
         btnNext.tap()
         return self
     }
-    
+
 }

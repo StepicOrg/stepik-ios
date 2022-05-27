@@ -11,9 +11,9 @@ import XCTest
 
 class ProfileScreen: BaseScreen {
 
-    public lazy var btnSingIn = app.buttons["loginButton"]
-    private lazy var btnSettings = app.buttons["settingsButton"]
-    private lazy var btnLogOut = app.tables.cells["logOut"]
+    public lazy var btnSingIn = app.buttons[AccessibilityIdentifiers.Placeholders.loginButton]
+    private lazy var btnSettings = app.buttons[AccessibilityIdentifiers.Profile.settingsButton]
+    private lazy var btnLogOut = app.tables.cells[AccessibilityIdentifiers.Settings.logOut]
     
     func clickSingIn() {
         XCTAssertTrue(btnSingIn.waitForExistence(timeout: 10), "No Login button")

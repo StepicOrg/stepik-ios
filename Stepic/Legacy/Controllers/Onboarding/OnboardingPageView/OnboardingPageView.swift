@@ -97,6 +97,8 @@ final class OnboardingPageView: NibInitializableView {
             pageTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
             pageDescriptionLabel.font = UIFont.systemFont(ofSize: 15)
         }
+
+        nextButton.accessibilityIdentifier = AccessibilityIdentifiers.Onboarding.nextButton
     }
 
     func updateHeight(_ delta: CGFloat) {

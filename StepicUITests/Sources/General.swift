@@ -11,9 +11,15 @@ import XCTest
 
 
 func deleteApplication() {
-    let appName = "Stepik Release"
+    let appName = AppName.name
+
     let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-    springboard.icons[appName].press(forDuration: 1.5)
+    if springboard.icons[appName].waitForExistence(timeout: 5) {
+        springboard.icons[appName].press(forDuration: 1.5)
+    } else {
+        return
+    }
+
     springboard.collectionViews.buttons["Удалить приложение"].tap()
     springboard.alerts.scrollViews.otherElements.buttons["Удалить приложение"].tap()
     springboard.alerts.scrollViews.otherElements.buttons["Удалить"].tap()

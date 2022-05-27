@@ -92,7 +92,6 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
 
         self.updateState(newState: self.state)
         self.interactor.doProfileRefresh(request: .init())
-        self.settingsButton.accessibilityIdentifier = "settingsButton"
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -136,6 +135,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         self.styledNavigationController?.removeBackButtonTitleForTopController()
         self.updateContentInsets()
         self.registerPlaceholders()
+
+        self.settingsButton.accessibilityIdentifier = AccessibilityIdentifiers.Profile.settingsButton
     }
 
     private func registerPlaceholders() {
