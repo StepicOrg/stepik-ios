@@ -1906,6 +1906,8 @@
 		D8CBAA006512D47ABCFC91EE /* SubmissionsFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9B8CBFEB5A7B28629D919 /* SubmissionsFilterInteractor.swift */; };
 		DA1ACE98741C42B9DCBBFB02 /* NewProfileCertificatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F5E8235E0245E5D5CB6BC /* NewProfileCertificatesProvider.swift */; };
 		DA79093AB5627C652A4830CC /* SimpleCourseListOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD262F6408255BFC2FE5DD6F /* SimpleCourseListOutputProtocol.swift */; };
+		DB2E994728483525000DC159 /* Info-Production-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB2E994528483525000DC159 /* Info-Production-InfoPlist.strings */; };
+		DB2E994B28483525000DC159 /* Sticker Pack.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB2E994928483525000DC159 /* Sticker Pack.strings */; };
 		DC691DE6A703CA3702B46D6E /* CourseRevenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDCD2B0B52258C5DD02078 /* CourseRevenueView.swift */; };
 		DD6ADDCB2B61676CFC5DFABD /* CourseBenefitDetailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A6BCEA9AE3995EBE4D87AC /* CourseBenefitDetailProvider.swift */; };
 		DE53B13C4116B992DB90B7CD /* CertificatesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BF5E4BD412C84196333F7A /* CertificatesListPresenter.swift */; };
@@ -4026,6 +4028,12 @@
 		D967D8F1F73BA94F1C5565C3 /* CourseRevenueTabMonthlyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseRevenueTabMonthlyView.swift; sourceTree = "<group>"; };
 		D9B5E3A57F5CDE395E9306E0 /* UserCoursesReviewsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesReviewsViewController.swift; sourceTree = "<group>"; };
 		DB041A813271DC2DB7168CD4 /* LessonFinishedStepsPanModalAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonFinishedStepsPanModalAssembly.swift; sourceTree = "<group>"; };
+		DB2E994228483525000DC159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DB2E994328483525000DC159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DB2E994428483525000DC159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Auth.strings; sourceTree = "<group>"; };
+		DB2E994628483525000DC159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Info-Production-InfoPlist.strings"; sourceTree = "<group>"; };
+		DB2E994828483525000DC159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DB2E994A28483525000DC159 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Sticker Pack.strings"; sourceTree = "<group>"; };
 		DB60763DF30E81A85EF73B62 /* StepQuizReviewProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StepQuizReviewProvider.swift; sourceTree = "<group>"; };
 		DD4A385A37C2127557150147 /* NewProfileCreatedCoursesOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewProfileCreatedCoursesOutputProtocol.swift; sourceTree = "<group>"; };
 		E27011EEBCB800A7B6ED6736 /* CourseInfoPurchaseModalDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CourseInfoPurchaseModalDataFlow.swift; sourceTree = "<group>"; };
@@ -4123,6 +4131,7 @@
 			children = (
 				2C3D00C024C8080F00441053 /* Info-Develop.plist */,
 				086538391EB02716003A8415 /* Info-Production.plist */,
+				DB2E994928483525000DC159 /* Sticker Pack.strings */,
 				2C3D00C124C8080F00441053 /* Info-Release.plist */,
 				086538371EB02716003A8415 /* Stickers.xcassets */,
 			);
@@ -5229,6 +5238,7 @@
 				2CB1C02B25B851E700582327 /* StepicWidgetExtension.entitlements */,
 				2CB1C01825B84FCD00582327 /* Info-Develop.plist */,
 				2CF6E62F25ADB92B00B5A703 /* Info-Production.plist */,
+				DB2E994528483525000DC159 /* Info-Production-InfoPlist.strings */,
 				2CB1C01725B84FCD00582327 /* Info-Release.plist */,
 				2C7AC3F825B0C9670024D4D2 /* Color+Extensions.swift */,
 				2CF6E62D25ADB92B00B5A703 /* Assets.xcassets */,
@@ -10601,6 +10611,7 @@
 				en,
 				Base,
 				ru,
+				fr,
 			);
 			mainGroup = 08DE94081B8C58AC00D278AB;
 			productRefGroup = 08DE94121B8C58AC00D278AB /* Products */;
@@ -10660,6 +10671,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB2E994B28483525000DC159 /* Sticker Pack.strings in Resources */,
 				086538381EB02716003A8415 /* Stickers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -10770,6 +10782,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CF6E62E25ADB92B00B5A703 /* Assets.xcassets in Resources */,
+				DB2E994728483525000DC159 /* Info-Production-InfoPlist.strings in Resources */,
 				2C3A056225B780A80007FBCA /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -13003,6 +13016,7 @@
 			children = (
 				08A1257A1BDEBCC90066B2B2 /* ru */,
 				08A1257D1BDEBCD60066B2B2 /* en */,
+				DB2E994328483525000DC159 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -13066,6 +13080,7 @@
 			children = (
 				2C3A056325B780A80007FBCA /* en */,
 				2C3A056925B780B00007FBCA /* ru */,
+				DB2E994828483525000DC159 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -13101,6 +13116,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2CC351851F6827BE004255B6 /* Base */,
+				DB2E994428483525000DC159 /* fr */,
 			);
 			name = Auth.storyboard;
 			sourceTree = "<group>";
@@ -13110,6 +13126,7 @@
 			children = (
 				2CCDD80124F8A59B006644A8 /* en */,
 				2CCDD80324F8A604006644A8 /* ru */,
+				DB2E994228483525000DC159 /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -13130,6 +13147,22 @@
 				2CF425302024C114002D7305 /* en */,
 			);
 			name = overlay_simple.png;
+			sourceTree = "<group>";
+		};
+		DB2E994528483525000DC159 /* Info-Production-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB2E994628483525000DC159 /* fr */,
+			);
+			name = "Info-Production-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		DB2E994928483525000DC159 /* Sticker Pack.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB2E994A28483525000DC159 /* fr */,
+			);
+			name = "Sticker Pack.strings";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
