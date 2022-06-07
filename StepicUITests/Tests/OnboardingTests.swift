@@ -1,25 +1,16 @@
-//
-//  UnregisteredUserTests.swift
-//  StepicUITests
-//
-//  Created by admin on 26.04.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class OnboardingTests: BaseTest {
-    
     let onbordingScreen = OnboardingScreen()
     let navigation = MainNavigationTabs()
     let authScreen = AuthScreen()
     let profileScreen = ProfileScreen()
-    
+
     override func setUp() {
         deleteApplication()
         super.setUp()
-        
+
         addUIInterruptionMonitor(
             withDescription: "“\(AppName.name)” Would Like to Send You Notifications"
         ) { alert -> Bool in
@@ -32,25 +23,19 @@ class OnboardingTests: BaseTest {
         }
     }
 
-    override func tearDown() {
-        super.tearDown()
-    }
-    
     func testUserCanFollowOnboarding() throws {
-        onbordingScreen
-            .next()
-            .next()
-            .next()
-            .next()
+        onbordingScreen.next()
+        onbordingScreen.next()
+        onbordingScreen.next()
+        onbordingScreen.next()
         app.tap()
         authScreen.shouldBeAuthScreen()
     }
-    
+
     func testUserCanCloseOnboarding() throws {
         onbordingScreen.closeOnbording()
         app.tap()
         navigation.openProfile()
         profileScreen.shouldBeSingInButton()
     }
-
 }

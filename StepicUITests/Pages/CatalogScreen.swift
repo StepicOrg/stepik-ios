@@ -1,32 +1,23 @@
-//
-//  CatalogScreen.swift
-//  StepicUITests
-//
-//  Created by admin on 25.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class CatalogScreen: BaseScreen {
+    private lazy var ruButton = app.buttons["Ru"]
+    private lazy var enButton = app.buttons["En"]
 
-    private lazy var btnRu = app.buttons["Ru"]
-    private lazy var btnEn = app.buttons["En"]
 
-    
     func selectRuLanguage() {
-        XCTAssertTrue(btnRu.waitForExistence(timeout: 10), "No 'Ru' button")
-        btnRu.tap()
+        XCTAssertTrue(self.ruButton.waitForExistence(timeout: 10), "No 'Ru' button")
+        self.ruButton.tap()
     }
 
     func selectEnLanguage() {
-        XCTAssertTrue(btnEn.waitForExistence(timeout: 10), "No 'En' button")
-        btnEn.tap()
+        XCTAssertTrue(self.enButton.waitForExistence(timeout: 10), "No 'En' button")
+        self.enButton.tap()
     }
-    
+
     func shouldNotBeLanguageButtons() {
-        XCTAssertFalse(btnRu.waitForExistence(timeout: 5), "'En' button exists")
-        XCTAssertFalse(btnEn.waitForExistence(timeout: 5), "'Ru' button exists")
+        XCTAssertFalse(self.ruButton.waitForExistence(timeout: 5), "'En' button exists")
+        XCTAssertFalse(self.enButton.waitForExistence(timeout: 5), "'Ru' button exists")
     }
 }

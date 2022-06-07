@@ -1,33 +1,24 @@
-//
-//  GoogleAuthScreen.swift
-//  StepicUITests
-//
-//  Created by admin on 25.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class GoogleAuthScreen: BaseScreen {
-    
-    private lazy var textChangeAccount = app.webViews.webViews.webViews.staticTexts["Сменить аккаунт"]
-    private lazy var fieldEmail = app.webViews.webViews.webViews.textFields.element(boundBy: 0)
-    private lazy var fieldPassword = app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0)
-    private lazy var btnNext = app.webViews.webViews.webViews.buttons["Далее"]
+    private lazy var changeAccountText = app.webViews.webViews.webViews.staticTexts["Сменить аккаунт"]
+    private lazy var emailTextField = app.webViews.webViews.webViews.textFields.element(boundBy: 0)
+    private lazy var passwordTextField = app.webViews.webViews.webViews.secureTextFields.element(boundBy: 0)
+    private lazy var nextButton = app.webViews.webViews.webViews.buttons["Далее"]
 
-    
+
     func singIn(email: String, password: String) {
-        if textChangeAccount.waitForExistence(timeout: 1) {
-            textChangeAccount.tap()
+        if self.changeAccountText.waitForExistence(timeout: 1) {
+            self.changeAccountText.tap()
         }
         app.tap()
-        typeText(element: fieldEmail, value: email)
+        typeText(element: self.emailTextField, value: email)
         app.tap()
-        btnNext.tap()
-        typeText(element: fieldPassword, value: password)
+        self.nextButton.tap()
+        typeText(element: self.passwordTextField, value: password)
         app.tap()
-        btnNext.tap()
+        self.nextButton.tap()
         // next step is to verify account, need to reseach how work with it
     }
 }

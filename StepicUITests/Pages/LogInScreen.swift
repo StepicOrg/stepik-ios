@@ -1,29 +1,18 @@
-//
-//  LogInScreen.swift
-//  StepicUITests
-//
-//  Created by admin on 19.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class LogInScreen: BaseScreen {
+    private lazy var emailTextField = app.textFields[AccessibilityIdentifiers.AuthEmail.emailTextField]
+    private lazy var passwordTextField = app.secureTextFields[AccessibilityIdentifiers.AuthEmail.passwordTextField]
+    private lazy var logInButton = app.buttons[AccessibilityIdentifiers.AuthEmail.logInButton]
 
-    private lazy var fieldEmail = app.textFields[AccessibilityIdentifiers.AuthEmail.emailTextField]
-    private lazy var fieldPassword = app.secureTextFields[AccessibilityIdentifiers.AuthEmail.passwordTextField]
-    private lazy var btnLogIn = app.buttons[AccessibilityIdentifiers.AuthEmail.logInButton]
-    
-    func fillUserInfo(email: String, password: String) -> LogInScreen {
-        typeText(element: fieldEmail, value: email)
-        typeText(element: fieldPassword, value: password)
-        return self
+    func fillUserInfo(email: String, password: String) {
+        typeText(element: self.emailTextField, value: email)
+        typeText(element: self.passwordTextField, value: password)
     }
-    
+
     func clickLogIn() {
-        XCTAssertTrue(btnLogIn.waitForExistence(timeout: 10), "No 'Log in' button")
-        btnLogIn.tap()
+        XCTAssertTrue(self.logInButton.waitForExistence(timeout: 10), "No 'Log in' button")
+        self.logInButton.tap()
     }
-    
 }

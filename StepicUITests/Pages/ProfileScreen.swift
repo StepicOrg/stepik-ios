@@ -1,43 +1,39 @@
-//
-//  ProfileScreen.swift
-//  StepicUITests
-//
-//  Created by admin on 19.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class ProfileScreen: BaseScreen {
+    private lazy var singInButton = app.buttons[AccessibilityIdentifiers.Placeholders.loginButton]
+    private lazy var settingsButton = app.buttons[AccessibilityIdentifiers.Profile.settingsButton]
+    private lazy var logOutButton = app.tables.cells[AccessibilityIdentifiers.Settings.logOut]
 
-    public lazy var btnSingIn = app.buttons[AccessibilityIdentifiers.Placeholders.loginButton]
-    private lazy var btnSettings = app.buttons[AccessibilityIdentifiers.Profile.settingsButton]
-    private lazy var btnLogOut = app.tables.cells[AccessibilityIdentifiers.Settings.logOut]
-    
     func clickSingIn() {
-        XCTAssertTrue(btnSingIn.waitForExistence(timeout: 10), "No Login button")
-        btnSingIn.tap()
+        XCTAssertTrue(self.singInButton.waitForExistence(timeout: 10), "No 'Login' button")
+        self.singInButton.tap()
     }
-    
-    func openSettings() -> ProfileScreen {
-        XCTAssertTrue(btnSettings.waitForExistence(timeout: 10), "No Settings button")
-        btnSettings.tap()
-        return self
+
+    func openSettings() {
+        XCTAssertTrue(self.settingsButton.waitForExistence(timeout: 10), "No 'Settings' button")
+        self.settingsButton.tap()
     }
-    
+
     func logOut() {
         app.swipeUp()
-        btnLogOut.tap()
+        self.logOutButton.tap()
         confirmAlert(text: "Выйти", button: "Выйти")
     }
-    
+
     func shouldBeUserProfile(name: String) {
         shouldBeText(text: name)
     }
-    
+
     func shouldBeSingInButton() {
-        XCTAssertTrue(btnSingIn.waitForExistence(timeout: 10), "No Login button")
+        XCTAssertTrue(self.singInButton.waitForExistence(timeout: 10), "No 'Login' button")
     }
-    
+
+    func isAuthorized() -> Bool {
+        if self.singInButton.waitForExistence(timeout: 5) {
+            return false
+        }
+        return true
+    }
 }

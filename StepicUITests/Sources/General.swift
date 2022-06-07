@@ -1,11 +1,3 @@
-//
-//  General.swift
-//  StepicUITests
-//
-//  Created by admin on 25.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
@@ -33,9 +25,8 @@ func registerNewUser(name: String, email: String, password: String) {
     navigation.openProfile()
     profileScreen.clickSingIn()
     authScreen.clickRegister()
-    registerScreen
-        .fillUserInfo(name: name, email: email, password: password)
-        .clickRegister()
+    registerScreen.fillUserInfo(name: name, email: email, password: password)
+    registerScreen.clickRegister()
     logOut()
 }
 
@@ -43,17 +34,13 @@ func logOut() {
     let navigation = MainNavigationTabs()
     let profileScreen = ProfileScreen()
     navigation.openProfile()
-    profileScreen
-        .openSettings()
-        .logOut()
+    profileScreen.openSettings()
+    profileScreen.logOut()
 }
 
 func isUserAuthorized() -> Bool {
     let navigation = MainNavigationTabs()
     let profileScreen = ProfileScreen()
     navigation.openProfile()
-    if profileScreen.btnSingIn.waitForExistence(timeout: 5) {
-        return false
-    }
-    return true
+    return profileScreen.isAuthorized()
 }

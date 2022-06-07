@@ -1,28 +1,18 @@
-//
-//  OnboardingScreen.swift
-//  StepicUITests
-//
-//  Created by admin on 26.04.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class OnboardingScreen: BaseScreen {
-    private lazy var btnCloseOnbording = app.navigationBars.buttons[AccessibilityIdentifiers.Onboarding.closeButton]
-    private lazy var btnNext = app.buttons[AccessibilityIdentifiers.Onboarding.nextButton]
-    
+    private lazy var closeButton = app.navigationBars.buttons[AccessibilityIdentifiers.Onboarding.closeButton]
+    private lazy var nextButton = app.buttons[AccessibilityIdentifiers.Onboarding.nextButton]
+
 
     func closeOnbording() {
-        XCTAssertTrue(btnCloseOnbording.waitForExistence(timeout: 10), "No Close button")
-        btnCloseOnbording.tap()
-    }
-    
-    func next() -> OnboardingScreen {
-        XCTAssertTrue(btnNext.waitForExistence(timeout: 10), "No Next button")
-        btnNext.tap()
-        return self
+        XCTAssertTrue(self.closeButton.waitForExistence(timeout: 10), "No 'Close' button")
+        self.closeButton.tap()
     }
 
+    func next() {
+        XCTAssertTrue(self.nextButton.waitForExistence(timeout: 10), "No 'Next' button")
+        self.nextButton.tap()
+    }
 }

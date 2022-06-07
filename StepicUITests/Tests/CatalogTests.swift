@@ -1,16 +1,7 @@
-//
-//  CatalogTests.swift
-//  StepicUITests
-//
-//  Created by admin on 25.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class CatalogTests: BaseTest {
-    
     let onbordingScreen = OnboardingScreen()
     let navigation = MainNavigationTabs()
     let catalogScreen = CatalogScreen()
@@ -19,7 +10,7 @@ class CatalogTests: BaseTest {
     override func setUp() {
         deleteApplication()
         super.setUp()
-        
+
         addUIInterruptionMonitor(
             withDescription: "“\(AppName.name)” Would Like to Send You Notifications"
         ) { alert -> Bool in
@@ -32,10 +23,6 @@ class CatalogTests: BaseTest {
         }
     }
 
-    override func tearDown() {
-        super.tearDown()
-    }
-    
     func testUserCanChangeLanguageOnce() throws {
         onbordingScreen.closeOnbording()
         app.tap()

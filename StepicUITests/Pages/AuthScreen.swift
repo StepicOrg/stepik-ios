@@ -1,39 +1,28 @@
-//
-//  AuthScreen.swift
-//  StepicUITests
-//
-//  Created by admin on 25.05.2022.
-//  Copyright © 2022 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import XCTest
 
 class AuthScreen: BaseScreen {
+    private lazy var loginWithEmailButton = app.buttons[AccessibilityIdentifiers.AuthSocial.signInButton]
+    private lazy var registerButton = app.buttons[AccessibilityIdentifiers.AuthSocial.signUpButton]
+    private lazy var googleButton = app.collectionViews.children(matching: .cell).element(boundBy: 2)
 
-    private lazy var btnLoginWithEmail = app.buttons[AccessibilityIdentifiers.AuthSocial.signInButton]
-    private lazy var btnRegister = app.buttons[AccessibilityIdentifiers.AuthSocial.signUpButton]
-    private lazy var btnGoogle = app.collectionViews.children(matching: .cell).element(boundBy: 2)
-    
     func shouldBeAuthScreen() {
-        XCTAssertTrue(btnLoginWithEmail.waitForExistence(timeout: 10), "No 'Log in with email' button")
-        XCTAssertTrue(btnRegister.waitForExistence(timeout: 10), "No 'Register' button")
+        XCTAssertTrue(self.loginWithEmailButton.waitForExistence(timeout: 10), "No 'Log in with email' button")
+        XCTAssertTrue(self.registerButton.waitForExistence(timeout: 10), "No 'Register' button")
     }
-    
+
     func clickRegister() {
-        XCTAssertTrue(btnRegister.waitForExistence(timeout: 10), "No 'Register' button")
-        btnRegister.tap()
+        XCTAssertTrue(self.registerButton.waitForExistence(timeout: 10), "No 'Register' button")
+        self.registerButton.tap()
     }
-    
+
     func clickLoginWithEmail() {
-        XCTAssertTrue(btnLoginWithEmail.waitForExistence(timeout: 10), "No 'Log in with email' button")
-        btnLoginWithEmail.tap()
+        XCTAssertTrue(self.loginWithEmailButton.waitForExistence(timeout: 10), "No 'Log in with email' button")
+        self.loginWithEmailButton.tap()
     }
-    
+
     func clickLogInWithGoogle() {
-        XCTAssertTrue(btnGoogle.waitForExistence(timeout: 10), "No 'Google' button")
-        btnGoogle.tap()
-        
+        XCTAssertTrue(self.googleButton.waitForExistence(timeout: 10), "No 'Google' button")
+        self.googleButton.tap()
     }
-    
 }
