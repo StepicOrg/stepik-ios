@@ -9,6 +9,7 @@
 import UIKit
 
 final class OnboardingViewController: UIViewController {
+    @IBOutlet var closeButton: UIBarButtonItem!
     @IBOutlet weak var animatedView: OnboardingAnimatedView!
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var secondStackView: UIStackView!
@@ -69,6 +70,8 @@ final class OnboardingViewController: UIViewController {
 
         backgroundGradient.frame = view.bounds
         view.layer.insertSublayer(self.backgroundGradient, at: 0)
+
+        closeButton.accessibilityIdentifier = AccessibilityIdentifiers.Onboarding.closeButton
     }
 
     override func viewDidAppear(_ animated: Bool) {
