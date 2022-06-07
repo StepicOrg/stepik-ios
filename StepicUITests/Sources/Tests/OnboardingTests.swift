@@ -1,17 +1,17 @@
 import Foundation
 import XCTest
 
-class OnboardingTests: BaseTest {
+final class OnboardingTests: BaseTest {
     let onbordingScreen = OnboardingScreen()
-    let navigation = MainNavigationTabs()
+    let navigationTabs = MainNavigationTabs()
     let authScreen = AuthScreen()
     let profileScreen = ProfileScreen()
 
     override func setUp() {
-        deleteApplication()
+        CommonActions.App.delete()
         super.setUp()
 
-        addUIInterruptionMonitor(
+        self.addUIInterruptionMonitor(
             withDescription: "“\(AppName.name)” Would Like to Send You Notifications"
         ) { alert -> Bool in
             let alertButton = alert.buttons["Allow"]
@@ -24,18 +24,22 @@ class OnboardingTests: BaseTest {
     }
 
     func testUserCanFollowOnboarding() throws {
-        onbordingScreen.next()
-        onbordingScreen.next()
-        onbordingScreen.next()
-        onbordingScreen.next()
-        app.tap()
-        authScreen.shouldBeAuthScreen()
+        self.onbordingScreen.next()
+        self.onbordingScreen.next()
+        self.onbordingScreen.next()
+        self.onbordingScreen.next()
+
+        self.app.tap()
+
+        self.authScreen.shouldBeAuthScreen()
     }
 
     func testUserCanCloseOnboarding() throws {
-        onbordingScreen.closeOnbording()
-        app.tap()
-        navigation.openProfile()
-        profileScreen.shouldBeSingInButton()
+        self.onbordingScreen.closeOnbording()
+
+        self.app.tap()
+
+        self.navigationTabs.openProfile()
+        self.profileScreen.shouldBeSingInButton()
     }
 }

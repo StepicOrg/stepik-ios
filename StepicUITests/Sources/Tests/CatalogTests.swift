@@ -1,17 +1,16 @@
 import Foundation
 import XCTest
 
-class CatalogTests: BaseTest {
+final class CatalogTests: BaseTest {
     let onbordingScreen = OnboardingScreen()
-    let navigation = MainNavigationTabs()
+    let navigationTabs = MainNavigationTabs()
     let catalogScreen = CatalogScreen()
 
-
     override func setUp() {
-        deleteApplication()
+        CommonActions.App.delete()
         super.setUp()
 
-        addUIInterruptionMonitor(
+        self.addUIInterruptionMonitor(
             withDescription: "“\(AppName.name)” Would Like to Send You Notifications"
         ) { alert -> Bool in
             let alertButton = alert.buttons["Allow"]
@@ -24,13 +23,16 @@ class CatalogTests: BaseTest {
     }
 
     func testUserCanChangeLanguageOnce() throws {
-        onbordingScreen.closeOnbording()
-        app.tap()
-        navigation.openCatalog()
-        catalogScreen.selectRuLanguage()
-        app.terminate()
-        app.launch()
-        navigation.openCatalog()
-        catalogScreen.shouldNotBeLanguageButtons()
+        self.onbordingScreen.closeOnbording()
+        self.app.tap()
+
+        self.navigationTabs.openCatalog()
+        self.catalogScreen.selectRuLanguage()
+
+        self.app.terminate()
+        self.app.launch()
+
+        self.navigationTabs.openCatalog()
+        self.catalogScreen.shouldNotBeLanguageButtons()
     }
 }

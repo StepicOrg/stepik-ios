@@ -1,8 +1,8 @@
 import Foundation
 import XCTest
 
-class LoginTests: BaseTest {
-    let navigation = MainNavigationTabs()
+final class LoginTests: BaseTest {
+    let navigationTabs = MainNavigationTabs()
     let profileScreen = ProfileScreen()
     let authScreen = AuthScreen()
     let registerScreen = RegisterScreen()
@@ -11,8 +11,9 @@ class LoginTests: BaseTest {
 
     override func setUp() {
         super.setUp()
-        if isUserAuthorized() {
-            logOut()
+
+        if CommonActions.User.isAuthorized() {
+            CommonActions.User.logOut()
         }
     }
 
@@ -21,13 +22,16 @@ class LoginTests: BaseTest {
         let name = "Bot_\(cts)"
         let email = "ios_autotest_\(cts)@stepik.org"
 
-        registerNewUser(name: name, email: email, password: cts)
-        navigation.openProfile()
-        profileScreen.clickSingIn()
-        authScreen.clickLoginWithEmail()
-        logInScreen.fillUserInfo(email: email, password: cts)
-        logInScreen.clickLogIn()
-        profileScreen.shouldBeUserProfile(name: name)
+        CommonActions.User.registerNewUser(name: name, email: email, password: cts)
+        self.navigationTabs.openProfile()
+        self.profileScreen.clickSingIn()
+
+        self.authScreen.clickLoginWithEmail()
+
+        self.logInScreen.fillUserInfo(email: email, password: cts)
+        self.logInScreen.clickLogIn()
+
+        self.profileScreen.shouldBeUserProfile(name: name)
     }
 
     //    func testUserCanLogInWithGoogle() throws {

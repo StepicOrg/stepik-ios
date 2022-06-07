@@ -1,18 +1,18 @@
 import Foundation
 import XCTest
 
-class RegisterTests: BaseTest {
+final class RegisterTests: BaseTest {
     let onbordingScreen = OnboardingScreen()
-    let navigation = MainNavigationTabs()
+    let navigationTabs = MainNavigationTabs()
     let profileScreen = ProfileScreen()
     let authScreen = AuthScreen()
     let registerScreen = RegisterScreen()
 
     override func setUp() {
-        deleteApplication()
+        CommonActions.App.delete()
         super.setUp()
 
-        addUIInterruptionMonitor(
+        self.addUIInterruptionMonitor(
             withDescription: "“\(AppName.name)” Would Like to Send You Notifications"
         ) { alert -> Bool in
             let alertButton = alert.buttons["Allow"]
@@ -29,13 +29,18 @@ class RegisterTests: BaseTest {
         let name = "Bot_\(cts)"
         let email = "ios_autotest_\(cts)@stepik.org"
 
-        onbordingScreen.closeOnbording()
-        app.tap()
-        navigation.openProfile()
-        profileScreen.clickSingIn()
-        authScreen.clickRegister()
-        registerScreen.fillUserInfo(name: name, email: email, password: cts)
-        registerScreen.clickRegister()
-        profileScreen.shouldBeUserProfile(name: name)
+        self.onbordingScreen.closeOnbording()
+
+        self.app.tap()
+
+        self.navigationTabs.openProfile()
+        self.profileScreen.clickSingIn()
+
+        self.authScreen.clickRegister()
+
+        self.registerScreen.fillUserInfo(name: name, email: email, password: cts)
+        self.registerScreen.clickRegister()
+
+        self.profileScreen.shouldBeUserProfile(name: name)
     }
 }
